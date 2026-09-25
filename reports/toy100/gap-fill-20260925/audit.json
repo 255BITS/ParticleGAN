@@ -1,0 +1,15 @@
+{
+  "jobs": 53,
+  "unique_jobs": 53,
+  "execution_errors": 0,
+  "nonzero_exit_codes": 0,
+  "result_snapshots_verified": 53,
+  "source_files_verified": 55,
+  "fixtures_verified": 19,
+  "peak_concurrent_jobs": 12,
+  "started_utc": "2026-09-25T14:43:14.854146+00:00",
+  "completed_utc": "2026-09-25T14:52:30.595966+00:00",
+  "elapsed_seconds": 555.74182,
+  "active_jobs_remaining": 0,
+  "all_five_new_native_runs_full_7000_coverage_and_accuracy_pass": true
+}

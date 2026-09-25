@@ -1,0 +1,2579 @@
+{
+  "reviewed_utc": "2026-09-25T14:32:31.170584+00:00",
+  "method": "Saved-result consistency checks, no retraining or sample-tensor regrading. Source raw files preserved with SHA256. RG5 raw ring UNCONFIRMED status retained despite ledger PASS.",
+  "attempts": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_combination/20260925T062531Z-2727864",
+      "lane": "bcap_combination",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 34,
+      "row_statuses": {
+        "FAIL": 12,
+        "PASS": 22
+      },
+      "ledger_sha256": "627a4fa8d8d1c7de8c3da384ec1a578eb1ac50c4c65b29dd42b1c3d36d151eba"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_combination/20260925T074354Z-2869281",
+      "lane": "bcap_combination",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 47,
+      "row_statuses": {
+        "FAIL": 13,
+        "PASS": 22,
+        "SKIPPED": 12
+      },
+      "ledger_sha256": "0a4282a1bf9ff00eb958bb8897c62d268dec0108cef16a297c8af8a0f27ee7fb"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_combination/20260925T090000Z-2997034",
+      "lane": "bcap_combination",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 38,
+      "row_statuses": {
+        "PASS": 28,
+        "FAIL": 10
+      },
+      "ledger_sha256": "903642a5872ca316a6b6ba2421c9c1bac2efc654d2581dc224c7c434b0cf5872"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_combination/20260925T102118Z-3125949",
+      "lane": "bcap_combination",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 37,
+      "row_statuses": {
+        "FAIL": 15,
+        "PASS": 22
+      },
+      "ledger_sha256": "750e50b7c22d61380a612267a90207ac3b9b57047d128de1f6806f2f96387da5"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_combination/20260925T113519Z-3244100",
+      "lane": "bcap_combination",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 43,
+      "row_statuses": {
+        "FAIL": 15,
+        "PASS": 23,
+        "NOT_CONVERGED": 1,
+        "SKIPPED": 4
+      },
+      "ledger_sha256": "aea164c296b285f1078905d208b75b8d922f36dda353bce77906c9bebf84a059"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_combination/20260925T124734Z-3370154",
+      "lane": "bcap_combination",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 39,
+      "row_statuses": {
+        "FAIL": 17,
+        "PASS": 22
+      },
+      "ledger_sha256": "abbab7e3462da61ced063101dbb49e776c79f90b039f5c6407498838b754b9d8"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_toy_recovery/20260925T062531Z-2727869",
+      "lane": "bcap_toy_recovery",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 45,
+      "row_statuses": {
+        "PASS": 28,
+        "FAIL": 17
+      },
+      "ledger_sha256": "07eebb234431f92037f5a902e36db5c2d8647ebca7745971f5ad03ae0609d046"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_toy_recovery/20260925T072528Z-2835424",
+      "lane": "bcap_toy_recovery",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 52,
+      "row_statuses": {
+        "FAIL": 12,
+        "PASS": 40
+      },
+      "ledger_sha256": "e0e212677f2a891e3707f3e47bb248054843233fe864cb28bffd51dcadd28d87"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_toy_recovery/20260925T084752Z-2976934",
+      "lane": "bcap_toy_recovery",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 39,
+      "row_statuses": {
+        "PASS": 31,
+        "FAIL": 6,
+        "ERROR": 2
+      },
+      "ledger_sha256": "062c3918e123fe6211ad64ba840188dcaeeb7a6c539c532810fc3889a7a0e943"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_toy_recovery/20260925T100257Z-3095943",
+      "lane": "bcap_toy_recovery",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 51,
+      "row_statuses": {
+        "ERROR": 3,
+        "PASS": 42,
+        "FAIL": 6
+      },
+      "ledger_sha256": "5f4c1207d431838978e009a9fa89f9e6e51ef332f97814376478564aa8b550d2"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_toy_recovery/20260925T111904Z-3218861",
+      "lane": "bcap_toy_recovery",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 40,
+      "row_statuses": {
+        "ERROR": 3,
+        "PASS": 28,
+        "FAIL": 9
+      },
+      "ledger_sha256": "4e1a6c1c26f319a9e842e9ce1f34f65e4b796db9eeea0e4d85013397e5c315f1"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/bcap_toy_recovery/20260925T123325Z-3349126",
+      "lane": "bcap_toy_recovery",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 49,
+      "row_statuses": {
+        "PASS": 39,
+        "FAIL": 10
+      },
+      "ledger_sha256": "f89ae78940e2d29a394da0317d6e08b84d9bd5c11af863f654416bb7c18a7bea"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/floor_frontier_seeds/20260925T062531Z-2727863",
+      "lane": "floor_frontier_seeds",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 45,
+      "row_statuses": {
+        "PASS": 6,
+        "FAIL": 39
+      },
+      "ledger_sha256": "630d3be417515766f5b8e8d0af3c48b36d8e438e8f8acfde44d4420141d1561f"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/floor_frontier_seeds/20260925T074559Z-2873521",
+      "lane": "floor_frontier_seeds",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 74,
+      "row_statuses": {
+        "PASS": 27,
+        "FAIL": 46,
+        "ERROR": 1
+      },
+      "ledger_sha256": "b9d912dd7005ea5a97ac560db5b341b039e07105ca5091b1a8f4dea5ffd940a5"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/floor_frontier_seeds/20260925T090923Z-3012083",
+      "lane": "floor_frontier_seeds",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 44,
+      "row_statuses": {
+        "PASS": 15,
+        "FAIL": 27,
+        "SKIPPED": 2
+      },
+      "ledger_sha256": "06699ff1a47f0952f520f9c6112d27645fef9349e61a90329ead02b84c4213f9"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/floor_frontier_seeds/20260925T103326Z-3146053",
+      "lane": "floor_frontier_seeds",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 28,
+      "row_statuses": {
+        "PASS": 2,
+        "FAIL": 26
+      },
+      "ledger_sha256": "c6967b8c950d02496e48e10e4d33f36158662a68365129f53ab69e719efbb5f7"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/floor_frontier_seeds/20260925T115028Z-3267812",
+      "lane": "floor_frontier_seeds",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 29,
+      "row_statuses": {
+        "PASS": 4,
+        "FAIL": 25
+      },
+      "ledger_sha256": "fb30551f7449cef270e2c6e82fc311ac72a4d124c03a8bc0d3fe13256f186ce5"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/floor_frontier_seeds/20260925T131336Z-3409676",
+      "lane": "floor_frontier_seeds",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 48,
+      "row_statuses": {
+        "ERROR": 4,
+        "PASS": 11,
+        "FAIL": 33
+      },
+      "ledger_sha256": "bcb8fe59ab055746ad55dd9933c183f76c33d9b510fd4fd7716daccc71d3f9df"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T062531Z-2727866",
+      "lane": "native_acquisition",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 67,
+      "row_statuses": {
+        "PASS": 54,
+        "FAIL": 13
+      },
+      "ledger_sha256": "c9e00885624ff2f0c64d7e9120ddbad1fe71c208e7b0c973062348d6cbdc1d6f"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T075131Z-2884105",
+      "lane": "native_acquisition",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 47,
+      "row_statuses": {
+        "PASS": 39,
+        "FAIL": 8
+      },
+      "ledger_sha256": "625f0eba27f162f917608058909354b016cccbe239d80d063eb2fd2d28e25a67"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T091429Z-3020455",
+      "lane": "native_acquisition",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 53,
+      "row_statuses": {
+        "FAIL": 5,
+        "PASS": 48
+      },
+      "ledger_sha256": "921c932db4a7b7f3aace3e05d3270b531ee5ba8272bff999d39ab0928c12af9a"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T103156Z-3143344",
+      "lane": "native_acquisition",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 53,
+      "row_statuses": {
+        "FAIL": 7,
+        "PASS": 46
+      },
+      "ledger_sha256": "3cfdbf2777f08749f0ead83d5cf049af82e40470ab4c3ea1bf8e633bbea49368"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T115359Z-3288250",
+      "lane": "native_acquisition",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 65,
+      "row_statuses": {
+        "ERROR": 1,
+        "PASS": 53,
+        "FAIL": 11
+      },
+      "ledger_sha256": "3aad012c78117ae40321502a91eded881e13098a68ff7d4beefd08a11d68c9d2"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013",
+      "lane": "native_acquisition",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 80,
+      "row_statuses": {
+        "PASS": 56,
+        "FAIL": 7,
+        "ERROR": 17
+      },
+      "ledger_sha256": "7bb1ccc3397bce1a8d0d99d1825888b6bef6575eb3f62cc78259d003ba11da3b"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T062912Z-2734805",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 44,
+      "row_statuses": {
+        "FAIL": 20,
+        "PASS": 24
+      },
+      "ledger_sha256": "141da15eaf8023d9271c14ed971b889013fbab3cae9254011280514411ae9272"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T072714Z-2838802",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 65,
+      "row_statuses": {
+        "FAIL": 24,
+        "PASS": 22,
+        "ERROR": 19
+      },
+      "ledger_sha256": "77d9d7780faa9c9ca5a4f8f4fe65834b3ce70aabdc2c19dea7e68f572248ee32"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T083247Z-2951718",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 59,
+      "row_statuses": {
+        "PASS": 24,
+        "FAIL": 32,
+        "ERROR": 3
+      },
+      "ledger_sha256": "05f4eea26fc6df163060d72f57b6d32310df76947c8cd68698397f33e42f94d1"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T093525Z-3053479",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 61,
+      "row_statuses": {
+        "FAIL": 28,
+        "PASS": 33
+      },
+      "ledger_sha256": "bf2644ec9e557ad3c49b955eeae83fc98bcaf132fe124bb8f6c261583aa8647c"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T104811Z-3170906",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 64,
+      "row_statuses": {
+        "FAIL": 22,
+        "ERROR": 7,
+        "PASS": 35
+      },
+      "ledger_sha256": "56a83a852034d73c222afecc4e8b6c93fecdca087676d3d39ba93495bbed56c9"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T115309Z-3272298",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 54,
+      "row_statuses": {
+        "FAIL": 31,
+        "PASS": 23
+      },
+      "ledger_sha256": "32c802f16559ab5266fe712a7dddc0ace1ef3f1d82e43e4a795802775f214d6d"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062912Z/restart_cycles/20260925T131156Z-3406467",
+      "lane": "restart_cycles",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 54,
+      "row_statuses": {
+        "FAIL": 19,
+        "PASS": 35
+      },
+      "ledger_sha256": "8a007a7da368839fbd83532858d711c37f2b23e82da30b4f56daad26fa46462c"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/asymmetric_floors/20260925T063704Z-2747399",
+      "lane": "asymmetric_floors",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 37,
+      "row_statuses": {
+        "FAIL": 17,
+        "PASS": 20
+      },
+      "ledger_sha256": "d4a38f17dd9162609c91e4768395ec324aa6656fc2d144b68ea80d03269d5e19"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/asymmetric_floors/20260925T075637Z-2893810",
+      "lane": "asymmetric_floors",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 36,
+      "row_statuses": {
+        "FAIL": 16,
+        "PASS": 20
+      },
+      "ledger_sha256": "8b02bc65247300d253589f540e97f56d03655b0abf067faff11e65b02abb57ff"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/asymmetric_floors/20260925T091359Z-3019460",
+      "lane": "asymmetric_floors",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 38,
+      "row_statuses": {
+        "FAIL": 20,
+        "PASS": 18
+      },
+      "ledger_sha256": "cd1b964635dd9a37dd4fea0f7f32712ed9eae23bedef3f346a8951e1dc0d9934"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/asymmetric_floors/20260925T103517Z-3149666",
+      "lane": "asymmetric_floors",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 38,
+      "row_statuses": {
+        "FAIL": 20,
+        "PASS": 18
+      },
+      "ledger_sha256": "1d77223ab5c6e7a36cc491e4a9abb006b7be4365700d926e4a47fc9607638fec"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/asymmetric_floors/20260925T115509Z-3290248",
+      "lane": "asymmetric_floors",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 37,
+      "row_statuses": {
+        "FAIL": 17,
+        "PASS": 20
+      },
+      "ledger_sha256": "eb4f2e89ae2a1c2f174a3006196c4a2d687d1caa118ef60cef0a4b527b0b7b9b"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/asymmetric_floors/20260925T131331Z-3409514",
+      "lane": "asymmetric_floors",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 46,
+      "row_statuses": {
+        "FAIL": 24,
+        "PASS": 22
+      },
+      "ledger_sha256": "e05c3bc9a141ea216ae1c7d77533adc5f0140d1564059dbb465c62737325db6a"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T063704Z-2747400",
+      "lane": "critic_both_arms",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 40,
+      "row_statuses": {
+        "PASS": 26,
+        "FAIL": 13,
+        "SKIPPED": 1
+      },
+      "ledger_sha256": "1ee9fe365ee5a783a9e49bd2267fd744c9c6ce927bea15f45a3e015d714f423c"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T073551Z-2854592",
+      "lane": "critic_both_arms",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 34,
+      "row_statuses": {
+        "PASS": 24,
+        "FAIL": 10
+      },
+      "ledger_sha256": "34492e8454f8b99fd6c353d1d40346a68047770e8f409dcaef61fa2a71e88aea"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T084526Z-2972490",
+      "lane": "critic_both_arms",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 43,
+      "row_statuses": {
+        "PASS": 34,
+        "FAIL": 5,
+        "SKIPPED": 2,
+        "ERROR": 2
+      },
+      "ledger_sha256": "cd3ca75f58887986fb363c1a723cbb5290c729f0020710034ad0881b58b3350e"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "lane": "critic_both_arms",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 46,
+      "row_statuses": {
+        "PASS": 44,
+        "FAIL": 2
+      },
+      "ledger_sha256": "5765fe1769c3457f388efd8065bdefa90ffaff14249a97a0a47f52f74a0f17f6"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "lane": "critic_both_arms",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 34,
+      "row_statuses": {
+        "ERROR": 2,
+        "PASS": 27,
+        "FAIL": 5
+      },
+      "ledger_sha256": "676025a2789b6a13065bcd7b8486994bdd4ec7661ab318631145f6725332ac4d"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271",
+      "lane": "critic_both_arms",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 41,
+      "row_statuses": {
+        "PASS": 38,
+        "FAIL": 3
+      },
+      "ledger_sha256": "4b63140f785ee1e40ad72462e07fd360912d09a8b444cab2c407f362b087b358"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/noise_acquisition_cliff/20260925T063704Z-2747398",
+      "lane": "noise_acquisition_cliff",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 40,
+      "row_statuses": {
+        "FAIL": 26,
+        "PASS": 14
+      },
+      "ledger_sha256": "7d96f1c6ecb4522f59d86e2de1ded20dccb72f97cf1d454b3e087f2c9a8c04dd"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/noise_acquisition_cliff/20260925T080154Z-2902289",
+      "lane": "noise_acquisition_cliff",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 60,
+      "row_statuses": {
+        "PASS": 41,
+        "FAIL": 19
+      },
+      "ledger_sha256": "e35fc7ff4b7ecfc2dbf33bae8ea2c272caf51b6907bd7a4b987c489258885c9f"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/noise_acquisition_cliff/20260925T091750Z-3025939",
+      "lane": "noise_acquisition_cliff",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 94,
+      "row_statuses": {
+        "PASS": 80,
+        "FAIL": 14
+      },
+      "ledger_sha256": "a6f7046cfe0a357872203f3512bf59629417943d2339c5b389c52ec288f14269"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/noise_acquisition_cliff/20260925T103502Z-3149075",
+      "lane": "noise_acquisition_cliff",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 64,
+      "row_statuses": {
+        "FAIL": 16,
+        "PASS": 48
+      },
+      "ledger_sha256": "1941c70fb52b260eeb4356bcd793ade3bda8b4ec99a498845fae80deafb6b124"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/noise_acquisition_cliff/20260925T115133Z-3269620",
+      "lane": "noise_acquisition_cliff",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 85,
+      "row_statuses": {
+        "PASS": 63,
+        "FAIL": 22
+      },
+      "ledger_sha256": "18468be0d15b5d685ab6f9bb0fa17481f0d8787e8f4a755c0d5027f019a5c99f"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/noise_acquisition_cliff/20260925T131221Z-3407460",
+      "lane": "noise_acquisition_cliff",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "ledger_rows": 74,
+      "row_statuses": {
+        "PASS": 61,
+        "FAIL": 13
+      },
+      "ledger_sha256": "e4f21aa1bcc8dc6810e1a404d59e3584a90bf83dbd51fdad6ecce69bb3fc6370"
+    }
+  ],
+  "records": [
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "vector_unequal_mass",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-vector_unequal_mass/result.json",
+      "artifact_sha256": "8323c121e1564432c01d923c6fac2c5908a057388a1ac58bf2d1e35d3956f34d",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "snapshot": "results/8323c121e1564432c01d923c6fac2c5908a057388a1ac58bf2d1e35d3956f34d.json.gz",
+      "snapshot_sha256": "fd8ff8df32f75952c7137e53925d197dec9dbe3f3938cad3fd3e6dc04cc8f324"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "mode_hold",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-mode_hold/result.json",
+      "artifact_sha256": "c858f9f4bcaad976b5976fc2be1e9268fe121dee721d5ce96c6e7e9b2b2d7e0d",
+      "kind": "focused_toy",
+      "passing_suffix": 15,
+      "required_suffix": 5,
+      "snapshot": "results/c858f9f4bcaad976b5976fc2be1e9268fe121dee721d5ce96c6e7e9b2b2d7e0d.json.gz",
+      "snapshot_sha256": "c6811e8561c5b334bf3f3aca33d5227bc561bfb1c5bd39e8fde6f35a615a4871"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "img_stripes2",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-img_stripes2/result.json",
+      "artifact_sha256": "e938ad09f29188fe3ff2a8bb3618f71d631457c792a9388457d1a334dc0229d8",
+      "kind": "focused_toy",
+      "passing_suffix": 9,
+      "required_suffix": 5,
+      "snapshot": "results/e938ad09f29188fe3ff2a8bb3618f71d631457c792a9388457d1a334dc0229d8.json.gz",
+      "snapshot_sha256": "299158e9baedd751f1ae210c2ad384f8c872f919f291267d3b351433176118ab"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "grid100",
+      "seed": 1234,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-grid100-1234/result.json",
+      "artifact_sha256": "628636a5168d364071fa5b8e7f5a2518cb8d83b6be03fc27f87a6d34b853189f",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/628636a5168d364071fa5b8e7f5a2518cb8d83b6be03fc27f87a6d34b853189f.json.gz",
+      "snapshot_sha256": "c6d2d811e0df6ace95b1e4f1dfa555b5490be1d4f4bf839e9e158b156da0e022"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "grid100",
+      "seed": 1235,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-grid100-1235/result.json",
+      "artifact_sha256": "fac9ca525fd31048ca1edaca767797273b377a885607b4f2d7f4b7b63eb68956",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "adb14d46e9f184bee16bfa12b5a80f8007acf73518415d920434c9e5a79be1d8",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/fac9ca525fd31048ca1edaca767797273b377a885607b4f2d7f4b7b63eb68956.json.gz",
+      "snapshot_sha256": "89f86a828a6d5e9918f7f75d589b9af6787ac2f272a568a73c0bf5d93ca29ffe"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "grid100",
+      "seed": 1236,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-grid100-1236/result.json",
+      "artifact_sha256": "9bc3117d9fdd137c2ed8b927008a970b1b05764cdccfb264a6e387ff7866acdb",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "2c716027a01f66568ff302ee0fdab8468edb8609917051bfa2a6ed9f331f50a8",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/9bc3117d9fdd137c2ed8b927008a970b1b05764cdccfb264a6e387ff7866acdb.json.gz",
+      "snapshot_sha256": "df88c29ac6a9958abf355d38df342d41d1a5dd3a79ae9688d232bdd6cd954d3f"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "grid100",
+      "seed": 1237,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-grid100-1237/result.json",
+      "artifact_sha256": "a8be42c03f18f2b9d7ce79ae90f71488d47b3fa532b0898bcaa9627c799a5278",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "c01050d8d036f18c8314546049876c145634a66fde4334abf555ac3dce6347bb",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/a8be42c03f18f2b9d7ce79ae90f71488d47b3fa532b0898bcaa9627c799a5278.json.gz",
+      "snapshot_sha256": "c93ced02d403dee7713692cc1ac86d84aaf50ffd95b0209a5d54698950751705"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "ae_gan_hold",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-ae_gan_hold/result.json",
+      "artifact_sha256": "869530e53e0299aa8f4b6fdc7a32f36d934d7bc536989a975be170557734788e",
+      "kind": "focused_toy",
+      "passing_suffix": 22,
+      "required_suffix": 5,
+      "snapshot": "results/869530e53e0299aa8f4b6fdc7a32f36d934d7bc536989a975be170557734788e.json.gz",
+      "snapshot_sha256": "921a4a02e77f0356c73c03b76305bc87b465b8b2622af8d1ec6ffe98391d675b"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "cover_leftover",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-cover_leftover/result.json",
+      "artifact_sha256": "cc3b00077e8b0e0b82c93c0a245aa47de9eb025961eb5a748574868be7aa250c",
+      "kind": "focused_toy",
+      "passing_suffix": 13,
+      "required_suffix": 5,
+      "snapshot": "results/cc3b00077e8b0e0b82c93c0a245aa47de9eb025961eb5a748574868be7aa250c.json.gz",
+      "snapshot_sha256": "2a0ee6bd0be488c6d613b9b47d925432b86fd8028c5179bd55d89af5f4db5747"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "img_bars4",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-img_bars4/result.json",
+      "artifact_sha256": "19fb61aab716bd6ea6fd0e8bbe8b9caa02bcfff5ef1f96172df0ed22d5a7d0db",
+      "kind": "focused_toy",
+      "passing_suffix": 20,
+      "required_suffix": 5,
+      "snapshot": "results/19fb61aab716bd6ea6fd0e8bbe8b9caa02bcfff5ef1f96172df0ed22d5a7d0db.json.gz",
+      "snapshot_sha256": "02000106ce931770f5b3bb8dd001877c671967e05f279cd1bd83901685d92e59"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "img_blobs4",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-img_blobs4/result.json",
+      "artifact_sha256": "6633d14002cdc1126f1d68b3250fda7616e8a4620c8e4063c55c0943d1917759",
+      "kind": "focused_toy",
+      "passing_suffix": 17,
+      "required_suffix": 5,
+      "snapshot": "results/6633d14002cdc1126f1d68b3250fda7616e8a4620c8e4063c55c0943d1917759.json.gz",
+      "snapshot_sha256": "8292313aec924b181738d6a7a6af719e8f936dce4962170b01d229da1f34f988"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "img_intensity2",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-img_intensity2/result.json",
+      "artifact_sha256": "40f33e1d6a46c221a0aa8d1f13af54ffa9841ab92ef1fc17bf31f86890d8d873",
+      "kind": "focused_toy",
+      "passing_suffix": 7,
+      "required_suffix": 5,
+      "snapshot": "results/40f33e1d6a46c221a0aa8d1f13af54ffa9841ab92ef1fc17bf31f86890d8d873.json.gz",
+      "snapshot_sha256": "203a3585d3680c8fd40ff24b3defa083a01729c1f583c23137d52af05b70ceb0"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "mid_scale_identity",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-mid_scale_identity/result.json",
+      "artifact_sha256": "66ce1fad77c96d9b87f175f4e8229354edfe2714235b62b52170ed0fd8763874",
+      "kind": "focused_toy",
+      "passing_suffix": 17,
+      "required_suffix": 5,
+      "snapshot": "results/66ce1fad77c96d9b87f175f4e8229354edfe2714235b62b52170ed0fd8763874.json.gz",
+      "snapshot_sha256": "d70aa7316095ff398f31ac44058bf9d8a2dfb73cf5c3e8247f1c7e98ede52096"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "residual_student",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-residual_student/result.json",
+      "artifact_sha256": "c58cbc9456da1f203f099517af6b17c8290043744a7647b9858fa7fcef330c5e",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "snapshot": "results/c58cbc9456da1f203f099517af6b17c8290043744a7647b9858fa7fcef330c5e.json.gz",
+      "snapshot_sha256": "352c3abd148846cf038429f5ed56f463a4b2dd0e9935f5b6097b6ce37319d7aa"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "trajectory",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-trajectory/result.json",
+      "artifact_sha256": "cce0d1e10a8641fb6d3826fc6b7492ab3e40610527dfa52afcfbeb420cf3de6b",
+      "kind": "focused_toy",
+      "passing_suffix": 22,
+      "required_suffix": 5,
+      "snapshot": "results/cce0d1e10a8641fb6d3826fc6b7492ab3e40610527dfa52afcfbeb420cf3de6b.json.gz",
+      "snapshot_sha256": "d500b9caae0e229ed332236e9c57138cc8fd946729f248d30f7a563be8cf6735"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "two_pole",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-two_pole/result.json",
+      "artifact_sha256": "291077610e2ffb97bda15c3f1e1e1569703ad1715db00082c5fc2e3dac603b3a",
+      "kind": "focused_toy",
+      "passing_suffix": 10,
+      "required_suffix": 5,
+      "snapshot": "results/291077610e2ffb97bda15c3f1e1e1569703ad1715db00082c5fc2e3dac603b3a.json.gz",
+      "snapshot_sha256": "caeef628babec18ceed200d8182c2278fbd8f038ee1772d33f772299700fc44c"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "unipolar",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-unipolar/result.json",
+      "artifact_sha256": "d4829747358dda128a78b6109902c68c46003ce235f4dd45d0b2a398430cf425",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "snapshot": "results/d4829747358dda128a78b6109902c68c46003ce235f4dd45d0b2a398430cf425.json.gz",
+      "snapshot_sha256": "01c616b8bdadd4fa58353a3a2ddecee32e3501b3cc78026debde3bb239482957"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "unused_token_hold",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-unused_token_hold/result.json",
+      "artifact_sha256": "583956c2a8d733dee5a1b3575216887d2f32f7f441f3eba55b2390cb07698e23",
+      "kind": "focused_toy",
+      "passing_suffix": 11,
+      "required_suffix": 5,
+      "snapshot": "results/583956c2a8d733dee5a1b3575216887d2f32f7f441f3eba55b2390cb07698e23.json.gz",
+      "snapshot_sha256": "7f5777442f2c08a66e7eb3eff30b3844277134f6393b332ea4659d34586e0487"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "vector_two_broad",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-vector_two_broad/result.json",
+      "artifact_sha256": "23e09059c146ac198c9864ebb819e50c720518d860b1bc00565a8b2edd3e6bf6",
+      "kind": "focused_toy",
+      "passing_suffix": 23,
+      "required_suffix": 5,
+      "snapshot": "results/23e09059c146ac198c9864ebb819e50c720518d860b1bc00565a8b2edd3e6bf6.json.gz",
+      "snapshot_sha256": "fc360354fb1f7da4b946a06030070a552a85e954f363db985a88da28735446ad"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "vector_unequal_width",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-vector_unequal_width/result.json",
+      "artifact_sha256": "486597340a6656466b3e4aae0d401e3bdf7a68fa6e30fec673b2fa85551d44c1",
+      "kind": "focused_toy",
+      "passing_suffix": 7,
+      "required_suffix": 5,
+      "snapshot": "results/486597340a6656466b3e4aae0d401e3bdf7a68fa6e30fec673b2fa85551d44c1.json.gz",
+      "snapshot_sha256": "985e0c75218e9997252bdc0e5bbf2d16125800a3c06252a57108acde25e81120"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "staggered100",
+      "seed": 1234,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-staggered100-1234/result.json",
+      "artifact_sha256": "ac33096fedf24f26c0f6ea6fd112c32321e5bc0f3c3b9e6b760e52e124a80b9e",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/ac33096fedf24f26c0f6ea6fd112c32321e5bc0f3c3b9e6b760e52e124a80b9e.json.gz",
+      "snapshot_sha256": "bceda47ebc5b5f73826583bbae4cb1303b6127e8be6007ca088e864b03058887"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "staggered100",
+      "seed": 1235,
+      "status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-staggered100-1235/result.json",
+      "artifact_sha256": "fe26167fb6b21cf344a5e9f6356fb8b179cf67ac229df66a223746c89928cf37",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "FAIL",
+      "accuracy": "FAIL",
+      "candidate_hashes": {
+        "config.json": "adb14d46e9f184bee16bfa12b5a80f8007acf73518415d920434c9e5a79be1d8",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/fe26167fb6b21cf344a5e9f6356fb8b179cf67ac229df66a223746c89928cf37.json.gz",
+      "snapshot_sha256": "38cabb127dfd423b7f467783d9f94aa912560a84948d73b5df29fd3b44941e78"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "staggered100",
+      "seed": 1236,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-staggered100-1236/result.json",
+      "artifact_sha256": "a255615f377ae2d007eb2deaf13ed28fd847a5057c0f4d5ad29b968d08bee957",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "2c716027a01f66568ff302ee0fdab8468edb8609917051bfa2a6ed9f331f50a8",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/a255615f377ae2d007eb2deaf13ed28fd847a5057c0f4d5ad29b968d08bee957.json.gz",
+      "snapshot_sha256": "0f041b6d0cf3cabcc8fecfb8b6bab707360d9a03c5d2590ad4237097a342d706"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "staggered100",
+      "seed": 1237,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-staggered100-1237/result.json",
+      "artifact_sha256": "8e77a13236eea6cb42ff5a7ca9c6aa4eea27ca43efa1e2b6e888db1ad815c059",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "c01050d8d036f18c8314546049876c145634a66fde4334abf555ac3dce6347bb",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/8e77a13236eea6cb42ff5a7ca9c6aa4eea27ca43efa1e2b6e888db1ad815c059.json.gz",
+      "snapshot_sha256": "94c7e4a22fd3e5fed89790673d85feabf874e637d167217717c2607574a38a56"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "rotated100",
+      "seed": 1234,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-rotated100-1234/result.json",
+      "artifact_sha256": "14f75f363b795bb7cdb9026317b4ba4cbd7605c6f0d566dc085d87f16991f57f",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/14f75f363b795bb7cdb9026317b4ba4cbd7605c6f0d566dc085d87f16991f57f.json.gz",
+      "snapshot_sha256": "05cdbf6967d4cd682244311335d5b49075ce993ec1947c3af26f9576feabde26"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "rotated100",
+      "seed": 1235,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-rotated100-1235/result.json",
+      "artifact_sha256": "c32abbe64978a30d2a4bab50dd35ea2a987e0c3b94cc404b1b420bd9671e8454",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "adb14d46e9f184bee16bfa12b5a80f8007acf73518415d920434c9e5a79be1d8",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/c32abbe64978a30d2a4bab50dd35ea2a987e0c3b94cc404b1b420bd9671e8454.json.gz",
+      "snapshot_sha256": "3e9b609f3cc7a08d8cebfcf9f0a4b097491342f7f4ee0f9fa24acc4fb40eb029"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "rotated100",
+      "seed": 1236,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-rotated100-1236/result.json",
+      "artifact_sha256": "7b3b0e0545ee218daa2fdb35dad897664f92b334adc1eeb22956cf0ee46a465c",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "2c716027a01f66568ff302ee0fdab8468edb8609917051bfa2a6ed9f331f50a8",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/7b3b0e0545ee218daa2fdb35dad897664f92b334adc1eeb22956cf0ee46a465c.json.gz",
+      "snapshot_sha256": "e3c96cdd807496f4ad288043af7c878d6ea206ac10d9cf604cf479533b0b8afe"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837",
+      "candidate": "p1",
+      "gate": "rotated100",
+      "seed": 1237,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/runs/out-p1-rotated100-1237/result.json",
+      "artifact_sha256": "a812f837611b077598a0e03852c0c8c0dde72ede061d719c1a74236271a5bb3d",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "c01050d8d036f18c8314546049876c145634a66fde4334abf555ac3dce6347bb",
+        "mechanism.py": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/a812f837611b077598a0e03852c0c8c0dde72ede061d719c1a74236271a5bb3d.json.gz",
+      "snapshot_sha256": "807ca024b2a48ca9215946da785e772cd8b49be15b9ba4417c7e8b51143324ae"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "native:staggered100:seed1235",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/staggered100-1235/result.json",
+      "artifact_sha256": "dde5b1a45386f2777408c3887a46bf8fe67b207fc71522c19ee5c055fe5d6169",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "adb14d46e9f184bee16bfa12b5a80f8007acf73518415d920434c9e5a79be1d8",
+        "mechanism.py": "c0f96b8e9ea6b146fc708498356add598ea8847300a2a02c9c0c926f291b4fd4",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/dde5b1a45386f2777408c3887a46bf8fe67b207fc71522c19ee5c055fe5d6169.json.gz",
+      "snapshot_sha256": "e51edf6d04001230719bc01d331e61ce55aee2c6a7cb90103feef02e42b81459"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:mode_hold",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-mode_hold/result.json",
+      "artifact_sha256": "756e8a8c9f75b3d83759752f9a43ff25c77eaaeba2697b218769223d2d69468b",
+      "kind": "focused_toy",
+      "passing_suffix": 15,
+      "required_suffix": 5,
+      "snapshot": "results/756e8a8c9f75b3d83759752f9a43ff25c77eaaeba2697b218769223d2d69468b.json.gz",
+      "snapshot_sha256": "cbac25669e6c1fd88881639ccb881db8a712b7afc7edca849deeaaebfd9c7395"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:img_stripes2",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-img_stripes2/result.json",
+      "artifact_sha256": "d80b62bac3098279714224860c973a8bc1b0d18c6608c9a5afebfaace23cf846",
+      "kind": "focused_toy",
+      "passing_suffix": 5,
+      "required_suffix": 5,
+      "snapshot": "results/d80b62bac3098279714224860c973a8bc1b0d18c6608c9a5afebfaace23cf846.json.gz",
+      "snapshot_sha256": "36ff9a2229d9f39c9ee9dccf6d7bf6739bafd4687e14a8b548d1fea0173adfdd"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:vector_unequal_mass",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-vector_unequal_mass/result.json",
+      "artifact_sha256": "3beec7acea67c38a1b6fdc2f565ace01f0857bf85c4d74c125b9657abd868e53",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "snapshot": "results/3beec7acea67c38a1b6fdc2f565ace01f0857bf85c4d74c125b9657abd868e53.json.gz",
+      "snapshot_sha256": "cfa3d0510555e224fc623a8a01fa83927e34dd33e3ad0b05bd83611ef6e5fb94"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "native:staggered100:seed1234",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/staggered100-1234/result.json",
+      "artifact_sha256": "f01f77c7bc65319b44aa57948ba09d3b566880f99ec91c5b7ad45127af1011b1",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "mechanism.py": "c0f96b8e9ea6b146fc708498356add598ea8847300a2a02c9c0c926f291b4fd4",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/f01f77c7bc65319b44aa57948ba09d3b566880f99ec91c5b7ad45127af1011b1.json.gz",
+      "snapshot_sha256": "5bd2c122f101b976170ec0e05a51d571cf80d459bb656bd36219155bccc01e88"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "native:staggered100:seed1236",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/staggered100-1236/result.json",
+      "artifact_sha256": "c92e9410f621366ccf6d5db4f59dd677aca636dffe8ff91706483cc59369f4f0",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "2c716027a01f66568ff302ee0fdab8468edb8609917051bfa2a6ed9f331f50a8",
+        "mechanism.py": "c0f96b8e9ea6b146fc708498356add598ea8847300a2a02c9c0c926f291b4fd4",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/c92e9410f621366ccf6d5db4f59dd677aca636dffe8ff91706483cc59369f4f0.json.gz",
+      "snapshot_sha256": "6208a56163305f8552273cbb15da839f9df3d06698caeada37ed86d6ff78fee1"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "native:staggered100:seed1237",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/staggered100-1237/result.json",
+      "artifact_sha256": "d58501aa5cdd1784ee221d329bbf953c014c4af6cbf9ae98ba82962604f99e61",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "c01050d8d036f18c8314546049876c145634a66fde4334abf555ac3dce6347bb",
+        "mechanism.py": "c0f96b8e9ea6b146fc708498356add598ea8847300a2a02c9c0c926f291b4fd4",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/d58501aa5cdd1784ee221d329bbf953c014c4af6cbf9ae98ba82962604f99e61.json.gz",
+      "snapshot_sha256": "fac7f5241ad33d44006c6e7e2e49417e6338f5c6df41332945b192099d713209"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:vector_unequal_width",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-vector_unequal_width/result.json",
+      "artifact_sha256": "7d7c1f4e16bea7024c7f3ad254c6e385ccf05a2d56701112f4542a6ebd40ac15",
+      "kind": "focused_toy",
+      "passing_suffix": 7,
+      "required_suffix": 5,
+      "snapshot": "results/7d7c1f4e16bea7024c7f3ad254c6e385ccf05a2d56701112f4542a6ebd40ac15.json.gz",
+      "snapshot_sha256": "757c1fbe2ad7a5a51d1185e72828bc53d8a13f708ca8d52a47f2f87db96c75d8"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:vector_two_broad",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-vector_two_broad/result.json",
+      "artifact_sha256": "cdef2c55b6d23c8ac1db228943b579108811894cd9b5ae3c6fd43fffcad1bfe2",
+      "kind": "focused_toy",
+      "passing_suffix": 23,
+      "required_suffix": 5,
+      "snapshot": "results/cdef2c55b6d23c8ac1db228943b579108811894cd9b5ae3c6fd43fffcad1bfe2.json.gz",
+      "snapshot_sha256": "4130659ebec511802978e537563d13b4dc98db5a08f8dad1103e9a96651b7de4"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:two_pole",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-two_pole/result.json",
+      "artifact_sha256": "41b41bb330a46b89d70e77adeb4a0e2dbc4f13654ffa8cfa9747c431cfa4ca58",
+      "kind": "focused_toy",
+      "passing_suffix": 10,
+      "required_suffix": 5,
+      "snapshot": "results/41b41bb330a46b89d70e77adeb4a0e2dbc4f13654ffa8cfa9747c431cfa4ca58.json.gz",
+      "snapshot_sha256": "990554cae9a7759ede4a6306b7cd4f370d1c663d96bbd7d1f11ba62059063057"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:trajectory",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-trajectory/result.json",
+      "artifact_sha256": "f7765c0e21dc760a7c8e257fb058ece047daee6dd6494262fd5840564dea5a82",
+      "kind": "focused_toy",
+      "passing_suffix": 22,
+      "required_suffix": 5,
+      "snapshot": "results/f7765c0e21dc760a7c8e257fb058ece047daee6dd6494262fd5840564dea5a82.json.gz",
+      "snapshot_sha256": "68bdd331c8ab0697eece0019f63fa24316a7778ab53cbddd99d5d53fe8ce7921"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:img_intensity2",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-img_intensity2/result.json",
+      "artifact_sha256": "766950f0d2b01e770fb3d6848c4af033785b8ea7ef47be8c3793dcfb4bffb3a2",
+      "kind": "focused_toy",
+      "passing_suffix": 10,
+      "required_suffix": 5,
+      "snapshot": "results/766950f0d2b01e770fb3d6848c4af033785b8ea7ef47be8c3793dcfb4bffb3a2.json.gz",
+      "snapshot_sha256": "f15a69ee23ebd8ba3ed428062e2aa95e2e364c05e417502481a259ab7f799368"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:img_bars4",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-img_bars4/result.json",
+      "artifact_sha256": "5e5bdb2b3913d54a8341e32998e0e7316002598f0d7d3a49ba3b21a98868f190",
+      "kind": "focused_toy",
+      "passing_suffix": 20,
+      "required_suffix": 5,
+      "snapshot": "results/5e5bdb2b3913d54a8341e32998e0e7316002598f0d7d3a49ba3b21a98868f190.json.gz",
+      "snapshot_sha256": "a1df2b1e7702a492866634d5911964ffbb2b7424cd1a3892f41e162a94bb603b"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:img_blobs4",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-img_blobs4/result.json",
+      "artifact_sha256": "bced129963a6b33d185495367b036016780ef4260968953b1ea979a17d4e946f",
+      "kind": "focused_toy",
+      "passing_suffix": 17,
+      "required_suffix": 5,
+      "snapshot": "results/bced129963a6b33d185495367b036016780ef4260968953b1ea979a17d4e946f.json.gz",
+      "snapshot_sha256": "26ea4464e18374e7cc31979c2d2064ae6cf3114d1df70327a31b4155af9ae0b8"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:residual_student",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-residual_student/result.json",
+      "artifact_sha256": "79368a4b008652fa1e775c69e16360ebd66963763f83ad06160b4e73c1ea846e",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "snapshot": "results/79368a4b008652fa1e775c69e16360ebd66963763f83ad06160b4e73c1ea846e.json.gz",
+      "snapshot_sha256": "ce3d96a6513bea3a196a890ee18e1084e0d3fd9eb35e977393941380e032e7cf"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:unipolar",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-unipolar/result.json",
+      "artifact_sha256": "69a6099b4f5b7db7fe56046a1e0bdd016c891efd14bf0d95f7b3a240bf6c3640",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "snapshot": "results/69a6099b4f5b7db7fe56046a1e0bdd016c891efd14bf0d95f7b3a240bf6c3640.json.gz",
+      "snapshot_sha256": "32e199a17e4c6bc8ab8b6fcf393c946d0edf305c24ea011ff1cdf5e8c5b4684e"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:ae_gan_hold",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-ae_gan_hold/result.json",
+      "artifact_sha256": "bc304172d858b5e9d41ffd3643580e166f5ad5c511b46e0e4e618a73ffd3aa5b",
+      "kind": "focused_toy",
+      "passing_suffix": 22,
+      "required_suffix": 5,
+      "snapshot": "results/bc304172d858b5e9d41ffd3643580e166f5ad5c511b46e0e4e618a73ffd3aa5b.json.gz",
+      "snapshot_sha256": "1893d4bb48c9d34996c17de6e8552209e26f81f02973e0cb7ff69a8294c3cd99"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:cover_leftover",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-cover_leftover/result.json",
+      "artifact_sha256": "a41b789fef084ac2575f47e4b38532a6066c6c49a2a95949ea090abdfb04d3c0",
+      "kind": "focused_toy",
+      "passing_suffix": 13,
+      "required_suffix": 5,
+      "snapshot": "results/a41b789fef084ac2575f47e4b38532a6066c6c49a2a95949ea090abdfb04d3c0.json.gz",
+      "snapshot_sha256": "e3a58858a450567370c540c0a18a459785cb8927c30348d2628fd3443ea51443"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:unused_token_hold",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-unused_token_hold/result.json",
+      "artifact_sha256": "daf0afa6b067d7a226d8cc2ee6095b87e8d36d3dc35fcbf0540b8fb356bbbf17",
+      "kind": "focused_toy",
+      "passing_suffix": 11,
+      "required_suffix": 5,
+      "snapshot": "results/daf0afa6b067d7a226d8cc2ee6095b87e8d36d3dc35fcbf0540b8fb356bbbf17.json.gz",
+      "snapshot_sha256": "c27e2763eaccf23847de1bc3cca6272152b78e1008ab3febbce08ffa2b89e210"
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873",
+      "candidate": "k3g",
+      "gate": "toy:mid_scale_identity",
+      "seed": null,
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/runs/k3g/toy-mid_scale_identity/result.json",
+      "artifact_sha256": "b5a396c4ff83871a3f5405def5481c9fb141c670f8a840af429bd625e4115d04",
+      "kind": "focused_toy",
+      "passing_suffix": 17,
+      "required_suffix": 5,
+      "snapshot": "results/b5a396c4ff83871a3f5405def5481c9fb141c670f8a840af429bd625e4115d04.json.gz",
+      "snapshot_sha256": "215fe3906a4125a0e9a746e627b9f6327a0996baedcefc14d673291cf3759610"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": {
+        "name": "first_convergence_then_hold_v1",
+        "confirmation_checks": 200,
+        "settling_budget": 4800,
+        "hold_budget": 1200,
+        "start_step": 1200,
+        "modes": 8,
+        "min_hq": 0.9,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "training_feedback": false,
+        "frozen_toy_verdicts_unchanged": true,
+        "status": "PASS",
+        "converged_step": 1400,
+        "settling_checks": 200,
+        "settling_failures": 0,
+        "longest_settling_streak": 200,
+        "hold_checks": 1200,
+        "first_hold_failure": null,
+        "hold_budget_complete": true
+      },
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-ring-hold-0.01-0.05/result.json",
+      "artifact_sha256": "91967db9143781a2d3f59f4940ea1b4a074f78d8048b368d46607743d9e22f8c",
+      "kind": "ring_hold",
+      "post_checks": 300,
+      "post_failing_checks": 0,
+      "post_min_hq": 0.98779296875,
+      "snapshot": "results/91967db9143781a2d3f59f4940ea1b4a074f78d8048b368d46607743d9e22f8c.json.gz",
+      "snapshot_sha256": "3202eb45ce96f6db53162c4579df85e7c2e45656ba45d50ed1a8ca43dfd7d8af"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "mode_hold",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-mode_hold/result.json",
+      "artifact_sha256": "5413b6bfe86cbcaa1b533a0767e278b56ba68a5c8ea93bf033f3b871ceda902f",
+      "kind": "focused_toy",
+      "passing_suffix": 15,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/5413b6bfe86cbcaa1b533a0767e278b56ba68a5c8ea93bf033f3b871ceda902f.json.gz",
+      "snapshot_sha256": "5ee84323cbacde835f6059a6e83de4c4325732c249afb5a8dda57923c646f24d"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "vector_unequal_mass",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-vector_unequal_mass/result.json",
+      "artifact_sha256": "d9bfc8b2d7d107832c8460955ef4095c0d8e5296ee52f19291b5be59fbf1ef5b",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/d9bfc8b2d7d107832c8460955ef4095c0d8e5296ee52f19291b5be59fbf1ef5b.json.gz",
+      "snapshot_sha256": "bad9bdb2f3069b076ed33e7148d898587383bb6c3f6dff1f24508d6e8465d9b3"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "img_stripes2",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-img_stripes2/result.json",
+      "artifact_sha256": "fa8c03203f67832818b9d972544b771b0ec7a5fd812776bcf48044a38cb9906a",
+      "kind": "focused_toy",
+      "passing_suffix": 9,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/fa8c03203f67832818b9d972544b771b0ec7a5fd812776bcf48044a38cb9906a.json.gz",
+      "snapshot_sha256": "0763183e837089c290a699ab731b687b7eac9141c88efdba29b4817a6533f141"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "grid100:1234",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/result.json",
+      "artifact_sha256": "8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "mechanism.py": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d.json.gz",
+      "snapshot_sha256": "a6e47493e136c912d201f9f8a50e6531a51a37892d45e34aea06351c47af818c"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "grid100:1235",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1235/result.json",
+      "artifact_sha256": "6e193f9a7d6dd3555ba77f373c0441df3587db77ae6b26bc6487cea31c2d2ea0",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "adb14d46e9f184bee16bfa12b5a80f8007acf73518415d920434c9e5a79be1d8",
+        "mechanism.py": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/6e193f9a7d6dd3555ba77f373c0441df3587db77ae6b26bc6487cea31c2d2ea0.json.gz",
+      "snapshot_sha256": "e8e7f4ac9c170aa5622701360809dd8c808a98b6a908b66f2725fd50dd319cef"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "grid100:1236",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1236/result.json",
+      "artifact_sha256": "ad8c1703dd13a84a561745fd1e5eccd398155b95d4b75dd363bdcdabe916e080",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "2c716027a01f66568ff302ee0fdab8468edb8609917051bfa2a6ed9f331f50a8",
+        "mechanism.py": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/ad8c1703dd13a84a561745fd1e5eccd398155b95d4b75dd363bdcdabe916e080.json.gz",
+      "snapshot_sha256": "04ca1038157906694bfd62e8eec36b72ddfece0bf2b2d2f8e1dc091ada7bd989"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "grid100:1237",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1237/result.json",
+      "artifact_sha256": "8aee30dcec83070a6062ccf07ae2e7cd5d7031d9a8804f4561e8ba7f62dd2fd7",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "c01050d8d036f18c8314546049876c145634a66fde4334abf555ac3dce6347bb",
+        "mechanism.py": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+      },
+      "snapshot": "results/8aee30dcec83070a6062ccf07ae2e7cd5d7031d9a8804f4561e8ba7f62dd2fd7.json.gz",
+      "snapshot_sha256": "1f13aeda373f815abfcf29a41bbad662b1ef0ea1e03b48ba07baf2c196329f00"
+    },
+    {
+      "candidate": "k3p",
+      "arm": null,
+      "gate": "shift_recovery_plasticity",
+      "ledger_status": "FAIL",
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-ring-shift-0.01-0.05/result.json",
+      "artifact_sha256": "46f597483494cb7d1c9e1f1ac3c39a40dfe9a0dbe5a011288e6a82190b774bee",
+      "kind": "ring_shift",
+      "continued_hold": {
+        "checks": 120,
+        "passing_checks": 120,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.90869140625,
+        "passing_suffix": 120,
+        "stable_from_step": 1210,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 28,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2540,
+          2550,
+          2560,
+          2570,
+          2580,
+          2590,
+          2600,
+          2610,
+          2620,
+          2630,
+          2640,
+          2650,
+          2660,
+          2670,
+          2680,
+          2690,
+          2700,
+          2710,
+          2720,
+          2730,
+          2740,
+          2750,
+          2760,
+          2770,
+          2780,
+          2790,
+          2800,
+          2810,
+          2820,
+          2830,
+          2840,
+          2850,
+          2860,
+          2870,
+          2880,
+          2890,
+          2900,
+          2910,
+          2920,
+          2930,
+          2940,
+          2950,
+          2960,
+          2970,
+          2980,
+          2990,
+          3000,
+          3010,
+          3020,
+          3030,
+          3040,
+          3050,
+          3060,
+          3070,
+          3080,
+          3090,
+          3100,
+          3110,
+          3120,
+          3130,
+          3290,
+          3300,
+          3310,
+          3320,
+          3330,
+          3340,
+          3350,
+          3360,
+          3370,
+          3380,
+          3390,
+          3450,
+          3460,
+          3470,
+          3480,
+          3490,
+          3500,
+          3510,
+          3520
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 8,
+        "stable_from_step": 3530,
+        "pass_all": false,
+        "pass_suffix": true,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 28,
+          "failing_steps": [
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3060,
+            3070,
+            3080,
+            3090,
+            3100,
+            3110,
+            3120,
+            3130,
+            3290,
+            3300,
+            3310,
+            3320,
+            3330,
+            3340,
+            3350,
+            3360,
+            3370,
+            3380,
+            3390,
+            3450,
+            3460,
+            3470,
+            3480,
+            3490,
+            3500,
+            3510,
+            3520
+          ],
+          "min_modes": 6,
+          "min_hq": 0.66845703125,
+          "passing_suffix": 8,
+          "stable_from_step": 3530,
+          "pass_all": false,
+          "pass_suffix": true
+        },
+        "deadline_assessable": true,
+        "deadline_pass": false,
+        "delay_updates": 1130
+      },
+      "schedule": {
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01,
+        "prior_lr_floor": 0.05,
+        "lr_anneal_start": 0.6,
+        "frozen_budget": 1200
+      },
+      "ledger_metrics": {
+        "schedule": {
+          "network_lr_horizon_cap": 1600,
+          "network_lr_floor": 0.01,
+          "prior_lr_floor": 0.05,
+          "lr_anneal_start": 0.6,
+          "frozen_budget": 1200
+        },
+        "probe_status": "FAIL",
+        "stationary_pass": true,
+        "continued_hold": {
+          "checks": 120,
+          "passing_checks": 120,
+          "pass_all": true,
+          "min_modes": 8,
+          "min_hq": 0.90869140625
+        },
+        "recovery_delay_updates": 1130,
+        "recovery_deadline_pass": false,
+        "recovery": {
+          "checks": 120,
+          "passing_checks": 28,
+          "passing_suffix": 8,
+          "min_modes": 0,
+          "min_hq": 0.0
+        },
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 28,
+          "pass_all": false,
+          "min_hq": 0.66845703125
+        },
+        "live_hq": 0.917236328125,
+        "live_modes": 8,
+        "ema_hq": 0.9189453125,
+        "ema_modes": 8,
+        "mech": {
+          "calls": 3600,
+          "pure_a_calls": 963,
+          "blend_calls": 238,
+          "pure_b_calls": 2399,
+          "first_blend_call": 964,
+          "first_pure_b_call": 1202,
+          "final_s": 0.0,
+          "guard_clip_step_count": 1
+        },
+        "mechanism_sha256": "d2eb08ee932b288c"
+      },
+      "snapshot": "results/46f597483494cb7d1c9e1f1ac3c39a40dfe9a0dbe5a011288e6a82190b774bee.json.gz",
+      "snapshot_sha256": "ad15836e39aa40f167a9afce93e97cd3a0c0580ae1f3f495497a1826bca54850"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2",
+      "gate": "shift_recovery_plasticity_floor_0.1_0.1",
+      "ledger_status": "PASS",
+      "raw_status": "UNCONFIRMED",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/shift-rg5-a2-0.1-0.1/result.json",
+      "artifact_sha256": "41b70f006e921d4c20fdf685680afab89f82c84bd78d7c5956487801a90c3987",
+      "kind": "ring_shift",
+      "continued_hold": {
+        "checks": 120,
+        "passing_checks": 120,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.9833984375,
+        "passing_suffix": 120,
+        "stable_from_step": 1210,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 110,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 110,
+        "stable_from_step": 2510,
+        "pass_all": false,
+        "pass_suffix": true,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 81,
+          "failing_steps": [],
+          "min_modes": 8,
+          "min_hq": 0.914794921875,
+          "passing_suffix": 81,
+          "stable_from_step": 2800,
+          "pass_all": true,
+          "pass_suffix": true
+        },
+        "deadline_assessable": true,
+        "deadline_pass": true,
+        "delay_updates": 110
+      },
+      "schedule": {
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.1,
+        "prior_lr_floor": 0.1,
+        "lr_anneal_start": 0.6,
+        "frozen_budget": 1200
+      },
+      "ledger_metrics": {
+        "hold_pass": true,
+        "hold_checks": 120,
+        "hold_passing": 120,
+        "hold_min_hq": 0.9833984375,
+        "recovery_delay": 110,
+        "recovery_deadline_pass": true,
+        "recovery_checks": 81,
+        "recovery_passing": 81,
+        "recovery_min_hq": 0.914794921875,
+        "live_modes": 8,
+        "live_hq": 0.999755859375,
+        "ema_modes": 8,
+        "ema_hq": 1.0,
+        "clips": {
+          "g": 0,
+          "d": 1
+        },
+        "clip_steps": {
+          "g": [],
+          "d": [
+            2466
+          ]
+        }
+      },
+      "snapshot": "results/41b70f006e921d4c20fdf685680afab89f82c84bd78d7c5956487801a90c3987.json.gz",
+      "snapshot_sha256": "3d667ff79a440db5a4b82ca01a4b3263da74b91e5800fde799f518371cc90940"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_grid100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-grid100-1234-0/result.json",
+      "artifact_sha256": "900395afca5198e9ad2805006bcbef36c9194c63cf87f163f53f7ca68ff91536",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/900395afca5198e9ad2805006bcbef36c9194c63cf87f163f53f7ca68ff91536.json.gz",
+      "snapshot_sha256": "b54a4857a72b8382dd591da0821efc4ef69135a9dc4762f2baa48abbfe217b66"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_grid100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-grid100-1235-0/result.json",
+      "artifact_sha256": "b9309a26ce2865c143eaf52a95ad75453bdab43f2d9e60f03bd5b16b30348ff5",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/b9309a26ce2865c143eaf52a95ad75453bdab43f2d9e60f03bd5b16b30348ff5.json.gz",
+      "snapshot_sha256": "a55c9ca58ac98c2d7c2264022cea66e84e4f3704a249cc0e9ad116ef8c153247"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_grid100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-grid100-1236-0/result.json",
+      "artifact_sha256": "a8d57f451c3a7147b004c1578e46d58c25b8f0c8b34962fce58debde51772258",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/a8d57f451c3a7147b004c1578e46d58c25b8f0c8b34962fce58debde51772258.json.gz",
+      "snapshot_sha256": "1d8caf6e9b810818581a25dddec8eb4d59f58b6af00e9209e9a1c0b9673c50d2"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_grid100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-grid100-1237-0/result.json",
+      "artifact_sha256": "e144b29d4c70cb4df03bc4ed249be993b180741d27d392e6b69157c0eb99a70a",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/e144b29d4c70cb4df03bc4ed249be993b180741d27d392e6b69157c0eb99a70a.json.gz",
+      "snapshot_sha256": "64bb73decd57dfb4c853855580601dc2b62d13ee2d512743d64021eee6393bf2"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_ae_gan_hold",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-ae_gan_hold/result.json",
+      "artifact_sha256": "984e0d678ba4397ed66c7686188fb2c87bd9102346a8ee7b21857840a4e51073",
+      "kind": "focused_toy",
+      "passing_suffix": 22,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/984e0d678ba4397ed66c7686188fb2c87bd9102346a8ee7b21857840a4e51073.json.gz",
+      "snapshot_sha256": "24a624e8ffa551b12f05eec67b76686dd133a23e049a70de15c7fdcefe749588"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_cover_leftover",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-cover_leftover/result.json",
+      "artifact_sha256": "7affe9c4e537318e53397ea540a3d4494a0096e9b1220ca17eed9303d23f5a3e",
+      "kind": "focused_toy",
+      "passing_suffix": 13,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/7affe9c4e537318e53397ea540a3d4494a0096e9b1220ca17eed9303d23f5a3e.json.gz",
+      "snapshot_sha256": "bb06536a80afba21d67c33d8d1101e49b11d65503d1d74f518b9808d6f69bb9f"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_img_bars4",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-img_bars4/result.json",
+      "artifact_sha256": "bf21c7b22e9727c81a6c40974f3d215dff5eea7c729cc7547f0f1d842a3c702d",
+      "kind": "focused_toy",
+      "passing_suffix": 20,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/bf21c7b22e9727c81a6c40974f3d215dff5eea7c729cc7547f0f1d842a3c702d.json.gz",
+      "snapshot_sha256": "5ec49ba2c8bfefdc07e8cb5f910f4f136c025ddce4e5c9ede0e419cedd64f541"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_img_blobs4",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-img_blobs4/result.json",
+      "artifact_sha256": "2740d2ec26408a2fdf1564f5584bdcacf6ec9fab47c94f839a290cfc069020ab",
+      "kind": "focused_toy",
+      "passing_suffix": 17,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/2740d2ec26408a2fdf1564f5584bdcacf6ec9fab47c94f839a290cfc069020ab.json.gz",
+      "snapshot_sha256": "5eced19e82fee2ed492f29f6a4918ce40f18fe3036ca4e157f2a094b206cbbff"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_img_intensity2",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-img_intensity2/result.json",
+      "artifact_sha256": "edb5adb62c68f86223056caf06aad5fa056ec662a019142826cdc64efb67139b",
+      "kind": "focused_toy",
+      "passing_suffix": 8,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/edb5adb62c68f86223056caf06aad5fa056ec662a019142826cdc64efb67139b.json.gz",
+      "snapshot_sha256": "b947ae3690bf6629cd7d3b372b064bed0dcd1e7e9ba60fa75e1a1c02c9d114be"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_img_stripes2",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-img_stripes2/result.json",
+      "artifact_sha256": "055e7074434aa3e6bce41380c830e5f61cef8d2e0655e282f51a9fe0e7a816cb",
+      "kind": "focused_toy",
+      "passing_suffix": 5,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/055e7074434aa3e6bce41380c830e5f61cef8d2e0655e282f51a9fe0e7a816cb.json.gz",
+      "snapshot_sha256": "083922c3856ca446f0762991518bb35ab0fb5b9cb93c5e3c7956ff276a357a67"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_mid_scale_identity",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-mid_scale_identity/result.json",
+      "artifact_sha256": "807fa1df0c3b70bfe40202e955717d8139c4c53e1085b0e9aa4c02b2de9a3d1e",
+      "kind": "focused_toy",
+      "passing_suffix": 17,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/807fa1df0c3b70bfe40202e955717d8139c4c53e1085b0e9aa4c02b2de9a3d1e.json.gz",
+      "snapshot_sha256": "d0a01f4c9fa11af49365e795bcb1ba6f80f6c5569f66c9a9916cf8e0810530b3"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_residual_student",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-residual_student/result.json",
+      "artifact_sha256": "c8748ec44c34736c7e8c1589706fb59aa3d0fe57ad90ddfefb76c892ce3263fd",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/c8748ec44c34736c7e8c1589706fb59aa3d0fe57ad90ddfefb76c892ce3263fd.json.gz",
+      "snapshot_sha256": "26dd9e926a428cc31a25b099b64ce1c4db9e2a2d7a94dc063870e2a36d3c0918"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_trajectory",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-trajectory/result.json",
+      "artifact_sha256": "72884917972487da89fa08d758d53b08e1d182e3f5c38d70439dc375bc2b44e9",
+      "kind": "focused_toy",
+      "passing_suffix": 22,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/72884917972487da89fa08d758d53b08e1d182e3f5c38d70439dc375bc2b44e9.json.gz",
+      "snapshot_sha256": "28ab636fbd0ad1bb3cc7426c0878907f86caf75d8b8e050dddf5fb4f86589b08"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_two_pole",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-two_pole/result.json",
+      "artifact_sha256": "f90d8fca6349ebef68f36c24586596501178406fbc380c13cc4a10dd72cfa3ce",
+      "kind": "focused_toy",
+      "passing_suffix": 10,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/f90d8fca6349ebef68f36c24586596501178406fbc380c13cc4a10dd72cfa3ce.json.gz",
+      "snapshot_sha256": "6c3ce522fdc8e6a0dc0f48f87496d8d09a529f64600edeb6bcc78e0ee9e6971e"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_unipolar",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-unipolar/result.json",
+      "artifact_sha256": "0c20e4b5ee174f857a13cd4ea2fb7c4df060918d7888f0cdb648e3ac9316f552",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/0c20e4b5ee174f857a13cd4ea2fb7c4df060918d7888f0cdb648e3ac9316f552.json.gz",
+      "snapshot_sha256": "ac53a7a7240b4ea05304fe90fbc6e2383b443653733c6463222cd24c8616af6c"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_unused_token_hold",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-unused_token_hold/result.json",
+      "artifact_sha256": "eb3fb791f012ee72c79b9e4e98e288b38beacfe248f9cf1a410e1f1544269935",
+      "kind": "focused_toy",
+      "passing_suffix": 11,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/eb3fb791f012ee72c79b9e4e98e288b38beacfe248f9cf1a410e1f1544269935.json.gz",
+      "snapshot_sha256": "5284d1042a44aec54aafb4db0d621c97a4790e872e611540572e9fea5b525e01"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_vector_two_broad",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-vector_two_broad/result.json",
+      "artifact_sha256": "832d5f2f3b186a6c4d1286b0f9c1cdcb0cd0da9c59061a43eb3601ae624c0a6b",
+      "kind": "focused_toy",
+      "passing_suffix": 23,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/832d5f2f3b186a6c4d1286b0f9c1cdcb0cd0da9c59061a43eb3601ae624c0a6b.json.gz",
+      "snapshot_sha256": "4875cbfb37f0cacbba4e6f095de3bb7abf83fee703b313bd62c89955db64dfdf"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_vector_unequal_mass",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-vector_unequal_mass/result.json",
+      "artifact_sha256": "73ddfe4b71f497f6291d7507926d775e5cc00ac0e256f1b9d059c8893022da0d",
+      "kind": "focused_toy",
+      "passing_suffix": 19,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/73ddfe4b71f497f6291d7507926d775e5cc00ac0e256f1b9d059c8893022da0d.json.gz",
+      "snapshot_sha256": "27631ce9734be337fae4599105719bfdfdd0859114ebdb5ca9690a0858e15fd7"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_vector_unequal_width",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-vector_unequal_width/result.json",
+      "artifact_sha256": "a3fbdfb173a9122fd68cfc54f9b6ed7e00c141e9282d2cf13b1bffce44daa8ac",
+      "kind": "focused_toy",
+      "passing_suffix": 7,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/a3fbdfb173a9122fd68cfc54f9b6ed7e00c141e9282d2cf13b1bffce44daa8ac.json.gz",
+      "snapshot_sha256": "60214875f57aabeb0b487cf3b883fb64bfbe3f5e026de27281cf93df74f1d84e"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-a2+toy_a_r1r2_config",
+      "gate": "toy_mode_hold",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/toy-rg5-a2-mode_hold/result.json",
+      "artifact_sha256": "6d2a2b640476b638156c7f102d15f51ef658bc3bd7e575da39cbe56d0e37a037",
+      "kind": "focused_toy",
+      "passing_suffix": 15,
+      "required_suffix": 5,
+      "config": {
+        "reg_arm": "a_r1r2",
+        "network_lr_floor": 0.01,
+        "lr_floor": 0.05
+      },
+      "snapshot": "results/6d2a2b640476b638156c7f102d15f51ef658bc3bd7e575da39cbe56d0e37a037.json.gz",
+      "snapshot_sha256": "beebdbe3371a07880e7538fc1751ab20ed725d0d94e42fb37425b5630912652a"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_staggered100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-staggered100-1234-0/result.json",
+      "artifact_sha256": "05ddd2c9e8bcbb5b02a1d06d6118bf628737931d93acd7e877182ede5ccc7e74",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/05ddd2c9e8bcbb5b02a1d06d6118bf628737931d93acd7e877182ede5ccc7e74.json.gz",
+      "snapshot_sha256": "6bb4c05fe951e36aa3b9f59731eea1d2a983fc4f77f77a31583f57af69f4aab5"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_staggered100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-staggered100-1235-0/result.json",
+      "artifact_sha256": "721616c5e543e38b0faab9ffee456f40b4308e9ad65fa042872db624291b34c8",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/721616c5e543e38b0faab9ffee456f40b4308e9ad65fa042872db624291b34c8.json.gz",
+      "snapshot_sha256": "cd97ada3782ce623e0db0f37cf3ee9d9ed16e02ab47957e8569e798a74459df7"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_staggered100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-staggered100-1236-0/result.json",
+      "artifact_sha256": "64962b09d13a0b1a79ecf5626f6671df807d72e5cf7b1b28925b0bba1eaa9065",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/64962b09d13a0b1a79ecf5626f6671df807d72e5cf7b1b28925b0bba1eaa9065.json.gz",
+      "snapshot_sha256": "4ed1ba521f92f1a93925e640cd9556f542953f5d241d4c848f80e5927a0d9766"
+    },
+    {
+      "candidate": "rg5_reversal_gated_guard",
+      "arm": "rg5-bcap",
+      "gate": "native_staggered100_full",
+      "ledger_status": "PASS",
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/out/rg5-bcap-staggered100-1237-0/result.json",
+      "artifact_sha256": "58d6eaaa6120cef4491c86f0401d5dbec4157610a67a5f106ec92489190857de",
+      "kind": "full_native",
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "candidate_hashes": {
+        "config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+        "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+        "latent.py": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+      },
+      "snapshot": "results/58d6eaaa6120cef4491c86f0401d5dbec4157610a67a5f106ec92489190857de.json.gz",
+      "snapshot_sha256": "cdfd674022fb0e60615ee88efe6dcb6732c0bb4c822bcaaded9e3714cb85217a"
+    }
+  ],
+  "extended_hold_checks": [
+    {
+      "candidate": "k3",
+      "status": "PASS",
+      "hold_checks": 1200,
+      "passing_hold_checks": 1200,
+      "hold_end": 2600,
+      "post_checks": 300,
+      "post_failing_checks": 237,
+      "first_post_failure": {
+        "step": 2644,
+        "modes": 8,
+        "hq": 0.89794921875
+      },
+      "min_post_hq": 0.718994140625,
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3-ring-hold-0.01-0.05/result.json",
+      "artifact_sha256": "8a2a372695c170eff829b7519cc31c15b0afdac1aa65d8425d7375c9e42b8f3b",
+      "snapshot": "results/8a2a372695c170eff829b7519cc31c15b0afdac1aa65d8425d7375c9e42b8f3b.json.gz",
+      "snapshot_sha256": "261994f4692a899e13c959e8edcab1a5561b86560feec27293bb4c5c92f3078c"
+    },
+    {
+      "candidate": "k3p",
+      "status": "PASS",
+      "hold_checks": 1200,
+      "passing_hold_checks": 1200,
+      "hold_end": 2600,
+      "post_checks": 300,
+      "post_failing_checks": 0,
+      "first_post_failure": null,
+      "min_post_hq": 0.98779296875,
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-ring-hold-0.01-0.05/result.json",
+      "artifact_sha256": "91967db9143781a2d3f59f4940ea1b4a074f78d8048b368d46607743d9e22f8c",
+      "snapshot": "results/91967db9143781a2d3f59f4940ea1b4a074f78d8048b368d46607743d9e22f8c.json.gz",
+      "snapshot_sha256": "3202eb45ce96f6db53162c4579df85e7c2e45656ba45d50ed1a8ca43dfd7d8af"
+    }
+  ],
+  "supporting_records": [
+    {
+      "candidate": "k3",
+      "kind": "ring_shift",
+      "artifact": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3-ring-shift-0.01-0.05/result.json",
+      "artifact_sha256": "a317837bf4b46a5c22609999d7c343e6be02d64d803bf9dbd6a063c32bf8633f",
+      "snapshot": "results/a317837bf4b46a5c22609999d7c343e6be02d64d803bf9dbd6a063c32bf8633f.json.gz",
+      "snapshot_sha256": "878ebee54e99fa016a64ba87516022ef520b8b6d007641d3f1ff00e076653d38",
+      "raw_status": "FAIL",
+      "schedule": {
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01,
+        "prior_lr_floor": 0.05,
+        "lr_anneal_start": 0.6,
+        "frozen_budget": 1200
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 22,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2540,
+          2550,
+          2560,
+          2570,
+          2580,
+          2590,
+          2600,
+          2610,
+          2620,
+          2630,
+          2640,
+          2650,
+          2660,
+          2670,
+          2680,
+          2690,
+          2700,
+          2710,
+          2720,
+          2730,
+          2740,
+          2750,
+          2760,
+          2770,
+          2780,
+          2790,
+          2800,
+          2810,
+          2820,
+          2830,
+          2840,
+          2850,
+          2860,
+          2870,
+          2880,
+          2890,
+          2900,
+          2910,
+          2920,
+          2930,
+          2940,
+          2950,
+          2960,
+          2970,
+          2980,
+          2990,
+          3000,
+          3010,
+          3020,
+          3030,
+          3040,
+          3050,
+          3060,
+          3070,
+          3080,
+          3090,
+          3100,
+          3110,
+          3120,
+          3130,
+          3140,
+          3150,
+          3160,
+          3170,
+          3180,
+          3190,
+          3200,
+          3210,
+          3220,
+          3230,
+          3240,
+          3250,
+          3260,
+          3270,
+          3280,
+          3290,
+          3300,
+          3310,
+          3320,
+          3330,
+          3340,
+          3350,
+          3360,
+          3370,
+          3600
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 0,
+        "stable_from_step": null,
+        "pass_all": false,
+        "pass_suffix": false,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 22,
+          "failing_steps": [
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3060,
+            3070,
+            3080,
+            3090,
+            3100,
+            3110,
+            3120,
+            3130,
+            3140,
+            3150,
+            3160,
+            3170,
+            3180,
+            3190,
+            3200,
+            3210,
+            3220,
+            3230,
+            3240,
+            3250,
+            3260,
+            3270,
+            3280,
+            3290,
+            3300,
+            3310,
+            3320,
+            3330,
+            3340,
+            3350,
+            3360,
+            3370,
+            3600
+          ],
+          "min_modes": 6,
+          "min_hq": 0.44091796875,
+          "passing_suffix": 0,
+          "stable_from_step": null,
+          "pass_all": false,
+          "pass_suffix": false
+        },
+        "deadline_assessable": true,
+        "deadline_pass": false,
+        "delay_updates": null
+      }
+    }
+  ]
+}

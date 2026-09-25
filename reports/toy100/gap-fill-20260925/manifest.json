@@ -1,0 +1,1825 @@
+{
+  "protocol": "Gap filling only; no seed sweeps. Native seed1234, full7000; transfer declared seeds and original CPU initialization fixtures; CUDA training only. Fixed candidate bundles, base floors except existing RG5+A2 .1/.1 matched frozen control.",
+  "sources": [
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/config.json",
+      "saved": "sources/k3p/config.json",
+      "sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/mechanism.py",
+      "saved": "sources/k3p/mechanism.py",
+      "sha256": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/latent.py",
+      "saved": "sources/k3p/latent.py",
+      "sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/response.py",
+      "saved": "sources/k3p/response.py",
+      "sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/probe.py",
+      "saved": "sources/k3p/probe.py",
+      "sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/checkpoint.py",
+      "saved": "sources/k3p/checkpoint.py",
+      "sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/hold.py",
+      "saved": "sources/k3p/hold.py",
+      "sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/shift.py",
+      "saved": "sources/k3p/shift.py",
+      "sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/shift_frozen.py",
+      "saved": "sources/k3p/shift_frozen.py",
+      "sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/convergence_gate.py",
+      "saved": "sources/k3p/convergence_gate.py",
+      "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/session-findings/native100.py",
+      "saved": "sources/k3p/native100.py",
+      "sha256": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/k3g/config.json",
+      "saved": "sources/k3g/config.json",
+      "sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/k3g/mechanism.py",
+      "saved": "sources/k3g/mechanism.py",
+      "sha256": "c0f96b8e9ea6b146fc708498356add598ea8847300a2a02c9c0c926f291b4fd4"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/k3g/latent.py",
+      "saved": "sources/k3g/latent.py",
+      "sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/k3g/response.py",
+      "saved": "sources/k3g/response.py",
+      "sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/probe.py",
+      "saved": "sources/k3g/probe.py",
+      "sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/checkpoint.py",
+      "saved": "sources/k3g/checkpoint.py",
+      "sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/harness/ring/hold.py",
+      "saved": "sources/k3g/hold.py",
+      "sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/harness/ring/shift.py",
+      "saved": "sources/k3g/shift.py",
+      "sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/harness/ring/shift_frozen.py",
+      "saved": "sources/k3g/shift_frozen.py",
+      "sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/harness/ring/convergence_gate.py",
+      "saved": "sources/k3g/convergence_gate.py",
+      "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T101301Z-3111873/repo/reports/toy100/critic-both-arms-3111873/harness/native100.py",
+      "saved": "sources/k3g/native100.py",
+      "sha256": "ab9b4c62dd9a099280cc98544250c8faeac9727816e6cf620fb255a1d30199bc"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/repo/reports/toy100/critic-both-arms-3248837/p1/config.json",
+      "saved": "sources/k3/config.json",
+      "sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/repo/reports/toy100/critic-both-arms-3248837/p1/mechanism.py",
+      "saved": "sources/k3/mechanism.py",
+      "sha256": "ed8870f299c4310116fde426661b5e75ea7b40d84e5f25b44b64461639ec3a68"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/repo/reports/toy100/critic-both-arms-3248837/p1/latent.py",
+      "saved": "sources/k3/latent.py",
+      "sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T113805Z-3248837/repo/reports/toy100/critic-both-arms-3248837/p1/response.py",
+      "saved": "sources/k3/response.py",
+      "sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/probe.py",
+      "saved": "sources/k3/probe.py",
+      "sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/checkpoint.py",
+      "saved": "sources/k3/checkpoint.py",
+      "sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/hold.py",
+      "saved": "sources/k3/hold.py",
+      "sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/shift.py",
+      "saved": "sources/k3/shift.py",
+      "sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/shift_frozen.py",
+      "saved": "sources/k3/shift_frozen.py",
+      "sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/convergence_gate.py",
+      "saved": "sources/k3/convergence_gate.py",
+      "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/session-findings/native100.py",
+      "saved": "sources/k3/native100.py",
+      "sha256": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-bcap/config.json",
+      "saved": "sources/rg5-bcap/config.json",
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-bcap/mechanism.py",
+      "saved": "sources/rg5-bcap/mechanism.py",
+      "sha256": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-bcap/latent.py",
+      "saved": "sources/rg5-bcap/latent.py",
+      "sha256": "d550c70fc8cc61566248ea94c2630202778b6413e7e997af17aa3bd2c6574866"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-bcap/response.py",
+      "saved": "sources/rg5-bcap/response.py",
+      "sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/probe_g.py",
+      "saved": "sources/rg5-bcap/probe.py",
+      "sha256": "6f727479d5f42c9c03d94b22bd40923707f1d36983b1ce7f92b824309eea32a2"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/checkpoint.py",
+      "saved": "sources/rg5-bcap/checkpoint.py",
+      "sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/hold.py",
+      "saved": "sources/rg5-bcap/hold.py",
+      "sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/shiftsrc/shift.py",
+      "saved": "sources/rg5-bcap/shift.py",
+      "sha256": "4510b6898916403570679afd73688c56f6b0e0082a32c2a33ae70b11f97d415d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/shift_frozen.py",
+      "saved": "sources/rg5-bcap/shift_frozen.py",
+      "sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/convergence_gate.py",
+      "saved": "sources/rg5-bcap/convergence_gate.py",
+      "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/native100s.py",
+      "saved": "sources/rg5-bcap/native100.py",
+      "sha256": "61ecb9583a3dd2398ed24ccce05cf37d27c5f5cdf54afa4bc639b819b2d18091"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-a2/config.json",
+      "saved": "sources/rg5-a2/config.json",
+      "sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-a2/mechanism.py",
+      "saved": "sources/rg5-a2/mechanism.py",
+      "sha256": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-a2/latent.py",
+      "saved": "sources/rg5-a2/latent.py",
+      "sha256": "1ef8d7728a5648ee0ca5bb868a184407e20c9c756a77cba6b2fbc6304ce47c0b"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cands/rg5-a2/response.py",
+      "saved": "sources/rg5-a2/response.py",
+      "sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/probe_g.py",
+      "saved": "sources/rg5-a2/probe.py",
+      "sha256": "6f727479d5f42c9c03d94b22bd40923707f1d36983b1ce7f92b824309eea32a2"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/k3p/checkpoint.py",
+      "saved": "sources/rg5-a2/checkpoint.py",
+      "sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/hold.py",
+      "saved": "sources/rg5-a2/hold.py",
+      "sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/shiftsrc/shift.py",
+      "saved": "sources/rg5-a2/shift.py",
+      "sha256": "4510b6898916403570679afd73688c56f6b0e0082a32c2a33ae70b11f97d415d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/shift_frozen.py",
+      "saved": "sources/rg5-a2/shift_frozen.py",
+      "sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/repo/reports/toy100/critic-both-arms-3385271/ringsrc/convergence_gate.py",
+      "saved": "sources/rg5-a2/convergence_gate.py",
+      "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/native100s.py",
+      "saved": "sources/rg5-a2/native100.py",
+      "sha256": "61ecb9583a3dd2398ed24ccce05cf37d27c5f5cdf54afa4bc639b819b2d18091"
+    }
+  ],
+  "fixtures": {
+    "ae_gan_hold": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/ae_gan_hold/initial-values.pt",
+      "sha256": "1e4d4f04d8ce7ea51fe56eeddac21b22a7db5c04dabc7b1d8e7e9d5a221eb78e"
+    },
+    "cover_leftover": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/cover_leftover/initial-values.pt",
+      "sha256": "9774b2ab0c42a81933c42dd5d218c6c0c065691bb2a45a1b502fb6f1060ad4b5"
+    },
+    "img_bars4": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_bars4/initial-values.pt",
+      "sha256": "2a559722f8b3120a218759118327c4da3122fe8bd7fb9b1901c10e356096d1f2"
+    },
+    "img_blobs4": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_blobs4/initial-values.pt",
+      "sha256": "2a559722f8b3120a218759118327c4da3122fe8bd7fb9b1901c10e356096d1f2"
+    },
+    "img_intensity2": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_intensity2/initial-values.pt",
+      "sha256": "2a559722f8b3120a218759118327c4da3122fe8bd7fb9b1901c10e356096d1f2"
+    },
+    "img_stripes2": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_stripes2/initial-values.pt",
+      "sha256": "2a559722f8b3120a218759118327c4da3122fe8bd7fb9b1901c10e356096d1f2"
+    },
+    "mid_scale_identity": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt",
+      "sha256": "8c65dc2ddf59c3852c393b7a40197aef12d8143022a5647095f9cf399ebfcd16"
+    },
+    "mode_hold": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+      "sha256": "cb5ddaeb89cd32209466ae3bb0cd1c19eb4d16652128df9bfc825e618200dd08"
+    },
+    "residual_student": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/residual_student/initial-values.pt",
+      "sha256": "69d31d054b25b0342189754886bb141212a751e71ccba03122a74726335f691b"
+    },
+    "trajectory": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/trajectory/initial-values.pt",
+      "sha256": "69d31d054b25b0342189754886bb141212a751e71ccba03122a74726335f691b"
+    },
+    "two_pole": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/two_pole/initial-values.pt",
+      "sha256": "7772e5392926ce4684bd263d3b03f02ccf866dc327746ff663e7dc01eceab230"
+    },
+    "unipolar": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/unipolar/initial-values.pt",
+      "sha256": "8f86375afc6dc10da22fdd8025501b24eba591ec6678d1c2b2715a7d280aa3b1"
+    },
+    "unused_token_hold": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/unused_token_hold/initial-values.pt",
+      "sha256": "5950b6f4b0edda5cb4230d348b04fe118045b4d7da74f95f74f4745d3ef0ba04"
+    },
+    "vector_two_broad": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_two_broad/initial-values.pt",
+      "sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2"
+    },
+    "vector_unequal_mass": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_mass/initial-values.pt",
+      "sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a"
+    },
+    "vector_unequal_width": {
+      "path": "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_width/initial-values.pt",
+      "sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a"
+    },
+    "vector_anisotropic": {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_anisotropic/initial-values.pt",
+      "sha256": "25032a4a825b8de3bbbed38e552a47058f257be0849a53bf71dc3afbbbb7db6f"
+    },
+    "vector_overlap": {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_overlap/initial-values.pt",
+      "sha256": "4677a19b6a67bee5ad07513985d08d2caa08fb01f33018b88f087b59e5eda905"
+    },
+    "vector_spiral": {
+      "path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt",
+      "sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2"
+    }
+  },
+  "jobs": [
+    {
+      "id": "k3p-native-rotated100",
+      "candidate": "k3p",
+      "kind": "native",
+      "task": "rotated100",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/native100.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "rotated100",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100",
+        "--candidate",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-native-rotated100.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-native-staggered100",
+      "candidate": "k3p",
+      "kind": "native",
+      "task": "staggered100",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/native100.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "staggered100",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100",
+        "--candidate",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-native-staggered100.log",
+      "floors": null
+    },
+    {
+      "id": "k3g-native-grid100",
+      "candidate": "k3g",
+      "kind": "native",
+      "task": "grid100",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/native100.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "grid100",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-native-grid100",
+        "--candidate",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-native-grid100",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-native-grid100.log",
+      "floors": null
+    },
+    {
+      "id": "k3g-native-rotated100",
+      "candidate": "k3g",
+      "kind": "native",
+      "task": "rotated100",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/native100.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "rotated100",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-native-rotated100",
+        "--candidate",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-native-rotated100",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-native-rotated100.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-native-rotated100",
+      "candidate": "rg5-bcap",
+      "kind": "native",
+      "task": "rotated100",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/native100.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "rotated100",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-native-rotated100",
+        "--candidate",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap",
+        "--stop",
+        "0"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-native-rotated100",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-native-rotated100.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-mode_hold",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-mode_hold",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-mode_hold",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-mode_hold.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-vector_unequal_mass",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_unequal_mass",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "vector_unequal_mass",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_mass",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_mass/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_mass",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-vector_unequal_mass.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-img_stripes2",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_stripes2",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "img_stripes2",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_stripes2",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_stripes2/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_stripes2",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-img_stripes2.log",
+      "floors": null
+    },
+    {
+      "id": "k3g-hold-mode_hold-0.01-0.05",
+      "candidate": "k3g",
+      "kind": "hold",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/hold.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-hold-mode_hold-0.01-0.05",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.01",
+        "--prior-floor",
+        "0.05"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-hold-mode_hold-0.01-0.05",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-hold-mode_hold-0.01-0.05.log",
+      "floors": [
+        0.01,
+        0.05
+      ]
+    },
+    {
+      "id": "k3g-shift-mode_hold-0.01-0.05",
+      "candidate": "k3g",
+      "kind": "shift",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/shift.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-shift-mode_hold-0.01-0.05",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.01",
+        "--prior-floor",
+        "0.05"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-shift-mode_hold-0.01-0.05",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-shift-mode_hold-0.01-0.05.log",
+      "floors": [
+        0.01,
+        0.05
+      ]
+    },
+    {
+      "id": "rg5-bcap-hold-mode_hold-0.01-0.05",
+      "candidate": "rg5-bcap",
+      "kind": "hold",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/hold.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-hold-mode_hold-0.01-0.05",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.01",
+        "--prior-floor",
+        "0.05"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-hold-mode_hold-0.01-0.05",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-hold-mode_hold-0.01-0.05.log",
+      "floors": [
+        0.01,
+        0.05
+      ]
+    },
+    {
+      "id": "rg5-bcap-shift-mode_hold-0.01-0.05",
+      "candidate": "rg5-bcap",
+      "kind": "shift",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/shift.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-shift-mode_hold-0.01-0.05",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.01",
+        "--prior-floor",
+        "0.05"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-shift-mode_hold-0.01-0.05",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-shift-mode_hold-0.01-0.05.log",
+      "floors": [
+        0.01,
+        0.05
+      ]
+    },
+    {
+      "id": "rg5-a2-shift_frozen-mode_hold-0.1-0.1",
+      "candidate": "rg5-a2",
+      "kind": "shift_frozen",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-a2/shift_frozen.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-a2-shift_frozen-mode_hold-0.1-0.1",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-a2/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.1",
+        "--prior-floor",
+        "0.1"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-a2-shift_frozen-mode_hold-0.1-0.1",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-a2-shift_frozen-mode_hold-0.1-0.1.log",
+      "floors": [
+        0.1,
+        0.1
+      ]
+    },
+    {
+      "id": "k3p-toy-ae_gan_hold",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "ae_gan_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "ae_gan_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-ae_gan_hold",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/ae_gan_hold/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-ae_gan_hold",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-ae_gan_hold.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-cover_leftover",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "cover_leftover",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "cover_leftover",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-cover_leftover",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/cover_leftover/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-cover_leftover",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-cover_leftover.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-img_bars4",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "img_bars4",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "img_bars4",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_bars4",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_bars4/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_bars4",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-img_bars4.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-img_blobs4",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "img_blobs4",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "img_blobs4",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_blobs4",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_blobs4/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_blobs4",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-img_blobs4.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-img_intensity2",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "img_intensity2",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "img_intensity2",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_intensity2",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_intensity2/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_intensity2",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-img_intensity2.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-mid_scale_identity",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "mid_scale_identity",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "mid_scale_identity",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-mid_scale_identity",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-mid_scale_identity",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-mid_scale_identity.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-residual_student",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "residual_student",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "residual_student",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-residual_student",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/residual_student/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-residual_student",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-residual_student.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-trajectory",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "trajectory",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "trajectory",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-trajectory",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/trajectory/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-trajectory",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-trajectory.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-two_pole",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "two_pole",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "two_pole",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-two_pole",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/two_pole/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-two_pole",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-two_pole.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-unipolar",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "unipolar",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "unipolar",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unipolar",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/unipolar/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unipolar",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-unipolar.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-unused_token_hold",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "unused_token_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "unused_token_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unused_token_hold",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/unused_token_hold/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unused_token_hold",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-unused_token_hold.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-vector_two_broad",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_two_broad",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_two_broad",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_two_broad",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_two_broad/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_two_broad",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-vector_two_broad.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-vector_unequal_width",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_unequal_width",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_unequal_width",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_unequal_width",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_width/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_unequal_width",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-vector_unequal_width.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-vector_anisotropic",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_anisotropic",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_anisotropic",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_anisotropic/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_anisotropic",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-vector_anisotropic.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-vector_overlap",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_overlap",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_overlap",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_overlap/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_overlap",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-vector_overlap.log",
+      "floors": null
+    },
+    {
+      "id": "k3p-toy-vector_spiral",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_spiral",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_spiral",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_spiral",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3p-toy-vector_spiral.log",
+      "floors": null
+    },
+    {
+      "id": "k3g-toy-vector_anisotropic",
+      "candidate": "k3g",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_anisotropic",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_anisotropic",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_anisotropic/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_anisotropic",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-toy-vector_anisotropic.log",
+      "floors": null
+    },
+    {
+      "id": "k3g-toy-vector_overlap",
+      "candidate": "k3g",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_overlap",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_overlap",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_overlap/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_overlap",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-toy-vector_overlap.log",
+      "floors": null
+    },
+    {
+      "id": "k3g-toy-vector_spiral",
+      "candidate": "k3g",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_spiral",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_spiral",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3g/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_spiral",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3g-toy-vector_spiral.log",
+      "floors": null
+    },
+    {
+      "id": "k3-toy-vector_anisotropic",
+      "candidate": "k3",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_anisotropic",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_anisotropic",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_anisotropic/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_anisotropic",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3-toy-vector_anisotropic.log",
+      "floors": null
+    },
+    {
+      "id": "k3-toy-vector_overlap",
+      "candidate": "k3",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_overlap",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_overlap",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_overlap/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_overlap",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3-toy-vector_overlap.log",
+      "floors": null
+    },
+    {
+      "id": "k3-toy-vector_spiral",
+      "candidate": "k3",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "vector_spiral",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_spiral",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_spiral",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3-toy-vector_spiral.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-ae_gan_hold",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "ae_gan_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "ae_gan_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-ae_gan_hold",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/ae_gan_hold/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-ae_gan_hold",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-ae_gan_hold.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-cover_leftover",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "cover_leftover",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "cover_leftover",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-cover_leftover",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/cover_leftover/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-cover_leftover",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-cover_leftover.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-img_bars4",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_bars4",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "img_bars4",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_bars4",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_bars4/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_bars4",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-img_bars4.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-img_blobs4",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_blobs4",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "img_blobs4",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_blobs4",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_blobs4/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_blobs4",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-img_blobs4.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-img_intensity2",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_intensity2",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "img_intensity2",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_intensity2",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/img_intensity2/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_intensity2",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-img_intensity2.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-mid_scale_identity",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "mid_scale_identity",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "mid_scale_identity",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-mid_scale_identity",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-mid_scale_identity",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-mid_scale_identity.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-residual_student",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "residual_student",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "residual_student",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-residual_student",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/residual_student/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-residual_student",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-residual_student.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-trajectory",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "trajectory",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "trajectory",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-trajectory",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/trajectory/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-trajectory",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-trajectory.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-two_pole",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "two_pole",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "two_pole",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-two_pole",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/two_pole/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-two_pole",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-two_pole.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-unipolar",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "unipolar",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "unipolar",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-unipolar",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/unipolar/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-unipolar",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-unipolar.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-unused_token_hold",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "unused_token_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "unused_token_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-unused_token_hold",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/unused_token_hold/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-unused_token_hold",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-unused_token_hold.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-vector_two_broad",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_two_broad",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "vector_two_broad",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_two_broad",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_two_broad/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_two_broad",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-vector_two_broad.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-vector_unequal_width",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_unequal_width",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "vector_unequal_width",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_width",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_width/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_width",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-vector_unequal_width.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-vector_anisotropic",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "vector_anisotropic",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_anisotropic",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_anisotropic/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_anisotropic",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-vector_anisotropic.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-vector_overlap",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "vector_overlap",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_overlap",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_overlap/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_overlap",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-vector_overlap.log",
+      "floors": null
+    },
+    {
+      "id": "rg5-bcap-toy-vector_spiral",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/probe.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+        "--task",
+        "vector_spiral",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_spiral",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/rg5-bcap/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T062531Z/native_acquisition/20260925T131236Z-3408013/repo/reports/toy100/native-acquisition-3408013/cudarepo",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_spiral",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/rg5-bcap-toy-vector_spiral.log",
+      "floors": null
+    },
+    {
+      "id": "k3-hold-mode_hold-0.01-0.05",
+      "candidate": "k3",
+      "kind": "hold",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/hold.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-hold-mode_hold-0.01-0.05",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.01",
+        "--prior-floor",
+        "0.05"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-hold-mode_hold-0.01-0.05",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3-hold-mode_hold-0.01-0.05.log",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "supplement": "P1 exact-implementation ring qualification after source audit"
+    },
+    {
+      "id": "k3-shift-mode_hold-0.01-0.05",
+      "candidate": "k3",
+      "kind": "shift",
+      "task": "mode_hold",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/shift.py",
+        "--repo",
+        "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "--task",
+        "mode_hold",
+        "--output",
+        "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-shift-mode_hold-0.01-0.05",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/gap-fill-20260925/sources/k3/config.json",
+        "--backend",
+        "cuda",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+        "--network-floor",
+        "0.01",
+        "--prior-floor",
+        "0.05"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "output": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-shift-mode_hold-0.01-0.05",
+      "log": "/ml2/hypergan/gan-attempts/gap-fill-20260925/logs/k3-shift-mode_hold-0.01-0.05.log",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "supplement": "P1 exact-implementation ring qualification after source audit"
+    }
+  ],
+  "supplement_reason": "The old K3 ring control and the broadly tested P1 use different implementations. Add P1 hold/shift; do not inherit K3 ring outcomes."
+}
