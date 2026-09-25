@@ -6,6 +6,12 @@ extension 300/300, but target-shift recovery only 28/81 deadline checks. Every
 modified formulation earns its own scores. This brief configures a search;
 the invocation of the launcher supplies its time/proposal/worker budgets.
 
+Research loop: solve the failing problem, verify promising candidates against
+their own frozen gates, then promote only a fully verified winner before using
+it as the next shared search base. Partial recovery scores or successful hold
+alone do not authorize changing the base. Keep independent search lanes on the
+last verified formulation; unverified leads can receive separate qualification.
+
 ## The question
 
 Can K3P retain precision and stability while remaining responsive to new data,

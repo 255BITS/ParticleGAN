@@ -243,7 +243,7 @@ def render(batches, ledgers, interval):
         excluded += len(records) - len(attempts)
     lines = [
         f"ParticleGAN | {running} running | {total_gates} gate executions"
-        + (f" | claude ${spend:.2f} billed" if spend else "")
+        + (f" | agent-reported ${spend:.2f} billed" if spend else "")
         + f" | {datetime.now():%H:%M:%S}",
         f"Refresh {interval:g}s. Ctrl-C closes this display; experiments keep running.",
     ]

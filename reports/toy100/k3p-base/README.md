@@ -141,6 +141,12 @@ hold/extension and all 22 toy passes. No new training is launched by selection.
 
 ## Continuous-learning search
 
+[Round 1 results](../continuous-round-1/README.md): 24 candidates, no qualified
+winner. A3 passed hold and extension and reached 71/81 recovery checks; all 22
+toy gates are still unverified for it. K3P stays selected. The [next round](../continuous-round-2/SEARCH.md)
+verifies A3 separately while independent searches continue from K3P. The loop is
+solve, verify all gates, then promote a verified winner as the next search base.
+
 The [focused search brief](continuous-search.md) targets a formulation that does
 not need the training horizon to define a one-way late phase. K3P's current
 positive floors do not freeze optimization, but its critic handover still
