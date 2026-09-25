@@ -1,6 +1,19 @@
 # Changelog
 
-## Unreleased
+## 0.8.0 — 2026-09-25
+
+- **K3P is the default and only formulation.** The critic penalty blends R1 +
+  fake-gradient cap into one-sided gradient caps plus an EMA-critic gradient
+  anchor as the critic LR decays; the recipe optimizers add the critic spike
+  guard, sparse latent-row damping and direct-particle response. It replaces
+  GAN v3, which lost quality over longer training runs.
+- **Plain PyTorch loop.** Build everything through the recipe:
+  `recipe.make_optimizers(G, D, prior, ema_critic=...)`,
+  `recipe.make_critic_optimizer(D2, ema_critic=...)` for extra critics, and
+  `penalty = recipe.make_critic_penalty(opt_d)`; then
+  `d_loss = adv + penalty(D, real, fake, *cond)` and the usual
+  `zero_grad()/backward()/step()`. All regularization state lives in the
+  optimizers' `state_dict()`s, so standard checkpoints resume exactly.
 
 - **One formulation, no technique menu.** Removed from `particlegan`: the
   `Recipe` fields `loss_type`, `gan_mode`, `reg_arm` and `reg_method`; the
