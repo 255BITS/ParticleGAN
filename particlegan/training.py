@@ -1,5 +1,5 @@
 """A small, checkpointable training loop for unconditional particle GANs."""
-from copy import deepcopy
+from copy import copy, deepcopy
 import math
 
 import torch
@@ -61,6 +61,13 @@ class GANTrainer:
         self.ema_G, self.ema_prior = deepcopy(self.G).eval(), deepcopy(self.prior).eval()
         for module in (self.ema_G, self.ema_prior):
             module.requires_grad_(False)
+        # K3P anchors the critic to its parameter EMA; the trainer owns that
+        # copy (the base GradRegularizer never allocates networks).
+        self.ema_D = None
+        if self.penalty.arm == "k3p" and self.penalty.anchor is None:
+            from .k3p import CriticAnchor
+            self.ema_D = deepcopy(self.D).eval().requires_grad_(False)
+            self.penalty.anchor = CriticAnchor(self.D, self.ema_D)
         self.latent_generator = self._stream(latent_generator, seed + 2)
         self.penalty_generator = self._stream(penalty_generator, seed + 3)
         self.eval_generator = self._stream(None, seed + 4)
@@ -117,6 +124,11 @@ class GANTrainer:
         self.opt_d.zero_grad()
         loss_d.backward()
         self.opt_d.step()
+        self.penalty.after_critic_step(self.opt_d)
+        if self.ema_D is not None:
+            with torch.no_grad():
+                for averaged, current in zip(self.ema_D.buffers(), self.D.buffers()):
+                    averaged.copy_(current)
 
         self.D.eval()
         self.G.train()
@@ -182,6 +194,10 @@ class GANTrainer:
             for module, flag in modes:
                 module.training = flag
 
+    def _model_names(self):
+        names = ("G", "D", "prior", "ema_G", "ema_prior")
+        return names + (("ema_D",) if self.ema_D is not None else ())
+
     def state_dict(self):
         """Return an independent checkpoint; save the caller's data cursor too."""
         return deepcopy({
@@ -189,9 +205,10 @@ class GANTrainer:
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
             "models": {name: getattr(self, name).state_dict()
-                       for name in ("G", "D", "prior", "ema_G", "ema_prior")},
+                       for name in self._model_names()},
             "requires_grad": {name: {key: p.requires_grad for key, p in getattr(self, name).named_parameters()}
-                              for name in ("G", "D", "prior", "ema_G", "ema_prior")},
+                              for name in self._model_names()},
+            "penalty_state": self.penalty.state_dict(),
             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
             "streams": {name: getattr(self, name).get_state() for name in
@@ -230,6 +247,10 @@ class GANTrainer:
                     not isinstance(tensors[k], torch.Tensor) or tensors[k].shape != v.shape
                     or tensors[k].dtype != v.dtype for k, v in current.items()):
                 raise ValueError(f"checkpoint model {name} has incompatible tensors")
+        try:
+            copy(self.penalty).load_state_dict(deepcopy(state["penalty_state"]))
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError("invalid checkpoint penalty state") from error
         if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != 2:
             raise ValueError("invalid checkpoint optimizer schema")
         try:
@@ -251,6 +272,7 @@ class GANTrainer:
             getattr(self, name).load_state_dict(values)
         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
             optimizer.load_state_dict(deepcopy(values))
+        self.penalty.load_state_dict(deepcopy(state["penalty_state"]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

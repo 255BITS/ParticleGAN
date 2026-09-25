@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+- Add K3P as package components: `GradRegularizer(arm="k3p")` with
+  `blend_weight()`, `after_critic_step()` and `state_dict()`, plus
+  `CriticAnchor`, `CriticSpikeGuard`, `LatentRowDamping` and
+  `DirectParticleResponse` in `particlegan.k3p`. One instance per critic, with
+  no optimizer hooks or module globals. The caller allocates the EMA critic
+  and the history buffers. With one critic, the result matches the frozen K3P
+  mechanism bit for bit (`tests/test_k3p.py`). The recipe default does not
+  change yet.
+- `GANTrainer` and `examples/100gaussians.py` support `reg_arm="k3p"`: they
+  call `after_critic_step` after each critic step and allocate the EMA critic.
+  The trainer also averages the critic's buffers and saves both `ema_D` and
+  the penalty state in its checkpoint.
+- A k3p regularizer now raises if it is used on a second critic without an
+  explicit `ema_critic=`, and `after_critic_step` accepts a tensor LR.
+
 ## 0.7.0 — 2026-09-24
 
 - Add the strict 100-mode toy gate (`python -m benchmarks.toy100 run`); its
