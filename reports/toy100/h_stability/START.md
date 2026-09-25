@@ -1,11 +1,12 @@
-# Active research base: direct_particle_response
+# Active research base: K3P
 
-Use [the complete selected formulation](../direct-particle-base/README.md): config,
-critic mechanism, response and probe. It has 15 PASS, 1 FAIL, 6 NOT_RUN on GPU.
-Gate on unequal-width covariance first. Full22 and own-state stability remain
-unqualified; public package defaults are unchanged.
+Use [the selected formulation](../k3p-base/README.md), including its pinned
+config, critic mechanism, latent damping, direct response and executed drivers.
+It passes 22/22 declared GPU toys and the 1,200-update ring hold plus 300-update
+extension. The remaining blocker is target-shift recovery: 28/81 deadline checks.
 
-[Declaration](../current-research-base.json) · [Search brief](SEARCH.md)
+[Selection declaration](../current-research-base.json) · [Search brief](SEARCH.md) ·
+[Leaderboard](../continuous-practical-leaderboard.md).
 
-Older dimension-RMS, CPU, native GPU16/22 and H/epsilon bases are historical.
-Their scores cannot be added to this candidate's measurements.
+Native seed coverage is grid 4/4, rotated 1/1 and staggered 1/1. Public-package
+defaults remain separate from the selected research/launcher base.

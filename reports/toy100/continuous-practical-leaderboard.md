@@ -2,7 +2,7 @@
 
 ## Gap-filled leaderboard — September 25, 2026
 
-**K3P is the strongest measured candidate: 22/22 declared toy passes, plus a
+**Selected research/launcher base: [K3P](k3p-base/README.md), with 22/22 declared toy passes, plus a
 1,200-update ring hold and all 300 extension checks.** Its base-floor target-shift
 recovery still fails. K3G and P1 also reach 22/22, but both lose quality just after
 their standard hold. No candidate has yet passed the full toy suite, extended
@@ -53,7 +53,7 @@ This is one declared ring run. The raw live `UNCONFIRMED` and negative-control
 `FAIL` are preserved; the [paired verdict](gap-fill-20260925/rg5-recovery-pair.json)
 records why their combination qualifies the recovery claim.
 
-**Recommendation:** use K3P as the next formulation to develop. Its outstanding
+**Next priority for selected K3P:** target-shift recovery. Its outstanding
 problem is a measured recovery failure, not missing toy coverage. A K3P .1/.1-floor
 experiment would be a new configuration and needs its own hold and matched
 recovery control; RG5's successful recovery cannot be borrowed. K3P + RG5 is also
@@ -64,7 +64,8 @@ untested. These changes have not been launched by this gap-filling batch.
 [22-toy gate-by-gate evidence](gap-fill-20260925/qualification-summary.json) ·
 [Completed overnight review](overnight-20260925/README.md).
 Candidate sources, commands, fixture/runtime hashes, and lossless result snapshots
-are saved with the report. Research/launcher and public defaults are not promoted.
+are saved with the report. The [selection declaration](current-research-base.json)
+now pins K3P for research and launchers; public training-package defaults are separate.
 
 The earlier plain .1/.1-floor claim remains limited by its completed replication:
 full cold hold-and-relearning succeeds on **1/4** seeds; given an acquired warm
@@ -73,16 +74,16 @@ Restart schedules and asymmetric floors did not produce a stronger overall
 candidate. Those are historical runs, separate from this gap-filling batch.
 
 
-## Selected launcher base — unchanged
+## Previous research base: direct_particle_response
 
-**Selected research base: [direct_particle_response](direct-particle-base/README.md).**
+**Previous research base: [direct_particle_response](direct-particle-base/README.md), superseded by K3P.**
 **15 PASS / 1 FAIL / 6 NOT_RUN** on its own GPU suite. Unequal-width covariance
 fails (.981321 > .85, zero terminal passing checks). All seven initial gates
 and eight further toys pass. Full22 and own-state retention are unqualified.
 
 | Current research candidate | GPU measured | GPU unmeasured | Blocker | Own-state hold |
 |---|---|---:|---|---|
-| direct_particle_response (selected) | **15 PASS / 1 FAIL** | 6 | unequal width | NOT_RUN |
+| direct_particle_response (previous base) | **15 PASS / 1 FAIL** | 6 | unequal width | NOT_RUN |
 | dimension_rms_hybrid (parent) | 6 PASS / 1 FAIL | 15 | two_pole | NOT_RUN |
 
 [Sixteen raw results and independent audit](direct-particle-base/audit.json) ·

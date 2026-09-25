@@ -112,4 +112,5 @@ overall formulation success rate.
 
 The [leaderboard](../continuous-practical-leaderboard.md) is updated. K3P's next
 research question is recovery; no new floor schedule or combined mechanism was
-introduced by this batch. No defaults were promoted.
+introduced by this batch. K3P has since been
+[selected as the research/launcher base](../k3p-base/README.md), using these exact sources.

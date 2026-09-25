@@ -1,6 +1,8 @@
-# Selected research base: direct_particle_response
+# Previous research base: direct_particle_response
 
-The user selected this formulation as the default research/launcher base.
+This historical research/launcher base has been superseded by
+[K3P](../k3p-base/README.md). The measurements and sources below describe this
+earlier formulation.
 It remains an Rp logistic GAN with the parent dimension-RMS critic penalty.
 Public training-package defaults are unchanged; release qualification is pending.
 

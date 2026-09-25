@@ -1,62 +1,62 @@
-# Current task: improve the selected direct-particle-response GAN
+# Current task: improve the selected K3P GAN
 
-Read AGENTS.md, reports/toy100/current-research-base.json and
-reports/toy100/direct-particle-base/README.md. The user selected
-direct_particle_response as the default research base. Start from its exact
-config.json + mechanism.py + response.py + probe.py. Config alone is NOT this
-formulation. Use the checksum-verified archived source preparer and retained
-CPU initialization fixtures. Do not revert to an older recipe or harness.
+Read AGENTS.md, reports/toy100/current-research-base.json,
+reports/toy100/k3p-base/README.md, and the current leaderboard. K3P is the
+user-selected research and launcher base. Use the exact pinned files under
+reports/toy100/gap-fill-20260925/sources/k3p: config, mechanism, latent, response,
+and the corresponding gate driver. Config alone is not this formulation.
 
-The parent has 15 PASS / 1 FAIL / 6 NOT_RUN on GPU. Two_pole now passes movement
-.64416 with ten terminal checks, and all six original GPU regressions still
-pass. The first measured failure is vector_unequal_width: component covariance
-error .98132 > .85, zero terminal passing suffix; the first component's error
-2.72220 dominates. HQ, mass, SW1 and minimum eigen ratio pass. Direct response
-is inactive on this host, so strengthening that boost alone cannot fix it.
+K3P passes all 22 declared GPU toys, plus its 1,200-update ring hold and all 300
+extension checks. The measured blocker is target-shift recovery at the selected
+.01/.05 floors: 28/81 deadline checks pass, against the 81/81 requirement. Start
+with that failure and the matched hold/extension. Do not rerun the unchanged
+parent merely to rediscover known results. Preserve all 22 passes in a proposal
+that improves recovery; early screens do not qualify the full suite.
 
-Keep the successful direct-particle response intact unless its change is an
-explicit, evidence-driven proposal. The baseline is Rp logistic GAN, normalized
-real R1 + fake RMS b-cap, with original schedules and auxiliary host losses.
-No target fitting, task-name switches, mode labels/centers/statistics, or metric
-feedback in training. Architecture, data, fixed seeds, evaluation, thresholds
-and training-step budgets stay frozen. Original LR/noise schedules are starting
-defaults; the assigned lane may explicitly declare a formulation change.
-All training, gradients and optimizer/history state stay CUDA. Preserve original
-noncapturable Adam arithmetic; CPU initialization is pinned and has zero updates.
+The formulation remains Rp logistic GAN. A critic-LR-driven handover moves from
+normalized real R1/fake RMS cap toward real/fake L2 caps plus an EMA-critic
+input-gradient anchor (parameter EMA decay .999). A mature critic-gradient
+spike guard caps the ratio to Adam's RMS history at 5. Inherited A2 sparse-latent
+damping and direct-particle response remain part of the complete formulation.
+The anchor adds critic forward/input-gradient work; no extra optimizer steps.
 
-Gate order: vector_unequal_width FIRST, then two_pole, trajectory, mode_hold,
-vector_unequal_mass, vector_two_broad, img_intensity2, img_bars4, img_blobs4,
-residual_student, unipolar, ae_gan_hold, cover_leftover, unused_token_hold,
-mid_scale_identity, img_stripes2. Stop a failing proposal and adapt within the
-lane; do not spend on the rest after a measured failure. Every candidate must
-earn its own passes. If all sixteen pass, keep testing the six unmeasured toys:
-vector_anisotropic, vector_overlap, vector_spiral, grid100, rotated100,
-staggered100. Use canonical native coverage AND accuracy for the last three.
-Do not stop a promising candidate just because it passes the early blockers.
+Use the frozen runtime, fixtures and commands in
+reports/toy100/gap-fill-20260925/manifest.json. Source/runtime hashes and raw
+results are retained with that report. Use probe.py for transfer tasks,
+native100.py for full native coverage AND accuracy, and hold.py/shift.py plus
+shift_frozen.py for ring stability and the matched frozen recovery control.
+Fresh output directories, separate tail-able logs, and a declared source hash
+are required. Keep every FAIL/ERROR and explicit NOT_RUN in the ledger.
 
-After all22 pass, run own-state post-convergence continuation under the declared
-schedule. Preserve model, optimizer, RNG AND response history across checkpoint
-resume: response.py's module-global previous-gradient map is not automatically
-part of Adam state_dict. No continuation has been validated yet. Prioritize
-quality after convergence; acquisition and retention are separate claims.
+Keep architecture, data, existing declared seeds, evaluation thresholds and step
+budgets fixed. No seed sweeps, coefficient grids, task-name switches, target
+centers/statistics, mode labels or metric feedback in training. Any proposed
+loss, optimizer, regularizer or schedule change must be declared as a new
+formulation and earn its own results. A .1/.1-floor variant and K3P+RG5 are
+untested candidates; another formulation's recovery cannot be inherited.
+Keep the original auxiliary AE/token host losses and selected schedules as
+starting defaults. All training, gradients, Adam and mechanism-history tensors
+stay CUDA FP32, deterministic and TF32-off, with one CPU thread per worker.
+Transfer initialization uses the retained zero-update CPU fixtures; native
+problems use CUDA initialization. Preserve the qualified Adam arithmetic.
 
-Three fresh Astra/max attempts, one GPU worker each, maximum three proposals and
-45minutes per attempt. Caps, not quotas. Start real training within five minutes.
-No nested agents, detached training, seed sweeps, coefficient grids, extra
-undeclared updates, pushes or comments. A generally applicable measured change
-beats theory or new benchmark infrastructure. Do not repeat unchanged failures,
-version upgrades or completed controls. In particular, applying recent-memory
-coherent response to all latent priors already loses ring. The original small
-real dead zones, sextic release and real-penalty warmups also failed this round.
-R1-containing variants remain eligible when measured tests pass.
+A useful recovery proposal must also protect mode_hold, unequal mass, stripes,
+unequal width, all three native gates, and then the full 22. Native runs require
+all 7,000 updates and canonical coverage AND accuracy. Frozen transfer verdicts
+require sustained terminal checks. No pooling of scores from different variants.
+The selected parent has grid 4/4 historical seed passes but only one run each
+on rotated/staggered; neither that nor 22/22 is a broad robustness estimate.
 
-Prepare source once. Snapshot/hash candidate code and declare the formula before
-each execution. Use the exact probe as a template; preserve frozen hosts, native
-random draws, CUDA-state proof and all metric observations. Rebuild expected
-specs from the candidate recipe; image penalty/kappa fields are aliases. Audit
-counts from actual frozen hosts: unipolar uses two regularizer calls per step,
-mid_scale_identity four. Receipt repairs are not new training. New CPU fixtures
-may only capture initial constructors with zero updates and no CPU autograd.
-Use focused mechanism checks, append tests.jsonl, preserve every FAIL/ERROR and
-explicit NOT_RUN, keep tail-able logs, and finish with a measured leaderboard
-and exact replay commands. Avoid dumping full source manifests or raw curves.
+Hold and recovery were measured continuously. Do not claim fresh-process
+checkpoint continuation without preserving critic EMA and hook/LR history,
+latent observation counts, response history, model, optimizer and RNG state;
+the current checkpoint helper does not serialize all module-global history.
+Prefer the existing uninterrupted hold/recovery drivers for qualification.
+
+Work within the invoking launcher's time, proposal and worker caps; no extra
+agent sessions, pushes or comments. Selection itself does not authorize a new
+experiment batch. For an explicitly launched attempt, start real training
+promptly, adapt from measured failures, summarize the leaderboard and recommend
+next experiments. Avoid new benchmark infrastructure or completed controls.
+
+[Previous selected-base brief](../formulation-search-before-k3p.md).

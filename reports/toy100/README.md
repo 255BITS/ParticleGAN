@@ -1,5 +1,13 @@
 # 100-mode convergence: failures and shared-recipe search
 
+**Current GPU research/launcher selection: [K3P](k3p-base/README.md).**
+It passes 22/22 declared toy gates and its 1,200-update ring hold plus
+300-update extension. Target-shift recovery remains a measured failure.
+[Current leaderboard](continuous-practical-leaderboard.md) ·
+[Exact selection declaration](current-research-base.json).
+
+## Earlier shared-recipe and CPU results
+
 The current [winning shared recipe](simpler22/README.md) passes **22/22** in a fresh production-runner replay and independent regrades. Compared with the previous 22/22 winner, it uses a unit discriminator cap and coefficient and removes the particle penalty. All three native problems first cover 100 modes at update 750 and pass all terminal accuracy checks plus independent 100k holdouts. The detailed report includes the exact settings, [new convergence GIF](simpler22/toy100/toy100-progress.gif), and [per-case combined gate](simpler22/compatibility.md). The [constraint-removal audit](constraint-removal.md) records successful simplifications and failed alternatives; constant-rate continuous learning remains unresolved. The [hosted workflow](https://github.com/255BITS/ParticleGAN/actions/workflows/toy100.yml) runs the same full gate on pull-request updates. The [previous winner](shared22/README.md) and its separate **19/19** installed-wheel control remain historical evidence.
 
 The [fine κ search](shared-kappa-fine-v1.md), [failed 64-candidate search](shared-halton64-v1.md), [optimizer/formulation comparisons](optimizer-formulation-research.md), and [screening-cost audit](fail-fast-stage-order.md) retain both successes and failures. Follow the [combined gate commands](../../docs/toy100.md#one-shared-recipe-across-all-22-toys) to run all 22 together or one problem.
