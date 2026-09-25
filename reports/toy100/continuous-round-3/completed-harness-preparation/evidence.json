@@ -1,0 +1,350 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z",
+  "observed_utc": "2026-09-25T18:40:42.314772+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "735aeef931d8c0d2bdc50ab8af7887902880a506324501241ebfec052127c295",
+        "final.md": "6d95a5b62614d0bc1e99ea50f408c96a96569da102170d729813bcca03ce9c40",
+        "tests.jsonl": "61c0ba0cd3a4344463716df510ba4ca0a2a35506df0de7911b72515719006309",
+        "run.txt": "86ba2cccb76462429d649f575ae5690df6e11ad8f5ea665c80898cff13037100",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "PASS": 10,
+    "NOT_RUN": 3
+  },
+  "records": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "protocol_windows",
+      "metrics": {
+        "deadlines": [
+          81,
+          81
+        ],
+        "extension": [
+          1800,
+          180
+        ],
+        "extension_checks": 2061,
+        "stable": [
+          5,
+          480,
+          60
+        ],
+        "stress_checks": 707,
+        "third_deadline": 81
+      },
+      "seconds": 0.000344,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "absolute_versus_incremental",
+      "metrics": {
+        "incremental_final": [
+          2.0,
+          2.0
+        ],
+        "long_term_at_27001": [
+          0.0,
+          1.0
+        ],
+        "stress_deltas": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "stress_final": [
+          1.0,
+          1.0
+        ]
+      },
+      "seconds": 0.006145,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "event_ordering",
+      "metrics": {
+        "actions": 8
+      },
+      "seconds": 0.000224,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "rng_preservation",
+      "metrics": {
+        "fork_preserves_cpu": true,
+        "fork_preserves_host_stream": true
+      },
+      "seconds": 0.000913,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "update_accounting",
+      "metrics": {
+        "advanced": true,
+        "stalled_rejected": true
+      },
+      "seconds": 8e-06,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "witness_identity",
+      "metrics": {
+        "complete_sha256": "6d31c1f8eb60b38d865cd8eb86fa738a0276fe7261ee8e0a3bd4826da696a907",
+        "cpu_rejected_for_cuda": true,
+        "partial_labeled": true
+      },
+      "seconds": 0.938654,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "fail_closed_provenance",
+      "metrics": {
+        "hash_mismatch_rejected": true,
+        "missing_manifest_rejected": true
+      },
+      "seconds": 0.002765,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "schedule_horizon",
+      "metrics": {
+        "controller_total_steps": 1200,
+        "episode_lengths_recorded": [
+          9000,
+          30000
+        ],
+        "network_lr_horizon_cap": 1600,
+        "noise_horizon": 1200
+      },
+      "seconds": 1.4e-05,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "candidate": "regression",
+      "gate": "prefix_scoring",
+      "metrics": {
+        "extension_failure_step": 27400,
+        "partial_witness_status": "ERROR",
+        "prefix_failure_step": 6400
+      },
+      "seconds": 0.004787,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 9,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/self-test.json",
+      "snapshot": "evidence/2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf.json.gz",
+      "artifact_sha256": "2a7a652158b533f37925b037a6b4b9b2ec9af2ad47e69114b0563c50ceb684bf"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/host-result.json",
+      "candidate": "regression",
+      "gate": "smoke_host_mechanics",
+      "metrics": {
+        "absolute_offsets": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0
+          ]
+        ],
+        "advanced_after_changes": [
+          true,
+          true
+        ],
+        "controller_total_steps": 1200,
+        "deltas": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "displacement_after_changes": [
+          true,
+          true
+        ],
+        "missing_sections": [
+          "controller",
+          "latent_stats",
+          "response"
+        ],
+        "noise_horizon": 1200,
+        "optimizer_final": [
+          {
+            "calls": 3,
+            "delegate_calls": 3,
+            "role": "d",
+            "updates": 3
+          },
+          {
+            "calls": 3,
+            "delegate_calls": 3,
+            "role": "g",
+            "updates": 3
+          }
+        ],
+        "qualification": false,
+        "quality_pass_all": false,
+        "rng_preserved": true,
+        "schedule": {
+          "config_total_steps": 7000,
+          "controller_total_steps": 1200,
+          "episode_length": 3,
+          "episode_length_is_schedule_input": false,
+          "network_lr_horizon_cap": 1600,
+          "noise_horizon": 1200,
+          "retained_schedule": "Noise and the ring controller stay on the canonical 1200-update horizon. The stress length and a candidate total_steps field are not substituted for that horizon."
+        },
+        "witness_complete": false
+      },
+      "seconds": 1.492531,
+      "status": "PASS",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 10,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/smoke/host-result.json",
+      "snapshot": "evidence/031f85d873e8a4c902582fc55d3d8967912d2dd4d31b5837bb8a61fd87320f58.json.gz",
+      "artifact_sha256": "031f85d873e8a4c902582fc55d3d8967912d2dd4d31b5837bb8a61fd87320f58"
+    },
+    {
+      "artifact": "reports/toy100/continuous-round-3/stress-protocol.json",
+      "candidate": "regression",
+      "gate": "stress_protocol_9000",
+      "metrics": {
+        "qualification": false,
+        "reason": "declared protocol is pinned and its windows were counted; the 9000-update host run was not started"
+      },
+      "seconds": 0,
+      "status": "NOT_RUN",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 11,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/reports/toy100/continuous-round-3/stress-protocol.json",
+      "snapshot": "evidence/e5cb3e7cbb48943ab33fcf1cba0d3943f7f65ef40b5843d7d6734d91b76cd798.json.gz",
+      "artifact_sha256": "e5cb3e7cbb48943ab33fcf1cba0d3943f7f65ef40b5843d7d6734d91b76cd798"
+    },
+    {
+      "artifact": "reports/toy100/continuous-round-3/long-term-stability-protocol.json",
+      "candidate": "regression",
+      "gate": "long_term_30000",
+      "metrics": {
+        "qualification": false,
+        "reason": "declared protocol is pinned and its prefix/extension windows were counted; the 30000-update host run was not started"
+      },
+      "seconds": 0,
+      "status": "NOT_RUN",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 12,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/reports/toy100/continuous-round-3/long-term-stability-protocol.json",
+      "snapshot": "evidence/8c5f2e27c0e0f9b93b7a1f1a36ff09f1c5fb0d7bc398f6fc520d0a7e8d9dc9fe.json.gz",
+      "artifact_sha256": "8c5f2e27c0e0f9b93b7a1f1a36ff09f1c5fb0d7bc398f6fc520d0a7e8d9dc9fe"
+    },
+    {
+      "artifact": "reports/toy100/continuous-round-3/rp1-rejection.md",
+      "candidate": "regression",
+      "gate": "rp1_qualification",
+      "metrics": {
+        "qualification": false,
+        "reason": "rejected RP1 was not retrained"
+      },
+      "seconds": 0,
+      "status": "NOT_RUN",
+      "lane": "prepare_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 13,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/reports/toy100/continuous-round-3/rp1-rejection.md"
+    }
+  ]
+}

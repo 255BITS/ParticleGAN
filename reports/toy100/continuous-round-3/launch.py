@@ -16,6 +16,25 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'repair_continuous_qualification': ('grok', GPU1, '''Repair the long-run evaluator
+integration, not research or candidate qualification. Read qualification-harness-review.md.
+The original preparation is COMPLETE but NOT_READY: its synthetic checks passed,
+yet its candidate entry point skips canonical latent/response begin/end hooks,
+CUDA FP32 Adam bootstrap and the pinned initialization fixture, and does not
+explicitly select/verify the frozen runtime. Original read-only implementation:
+/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/benchmarks/toy100/continuous_qualification.py
+Copy into your isolated worktree and fix these actual gaps. Prefer reuse of the
+canonical candidate driver bootstrap/ordering; do not redesign the GAN or tests.
+Also make scalar-tensor hashing robust. Exact stress/30000 documents are immutable.
+Prove a SHORT real-host identity comparison against the canonical bootstrap:
+same fixture/source/RNG, parameters and Adam/EMA/controller/latent/response state,
+with evaluator instrumentation enabled/disabled before target change. Assert
+hook invocation/accounting too, since early numerical identity can hide missing
+hooks when their first-step effect is zero. Add a negative check that missing
+hooks/fixture are rejected. Only short harness tests are authorized here: no
+full RP1, native seeds or30000 training. Retain original failed/incomplete evidence.
+Do not label candidate qualification ready until installation and provenance
+are demonstrated. Keep changes focused and reviewable; no nested agents.'''),
     'k3p_training_discrepancy': ('codex', GPU1, '''Own a critic-independent training
 discrepancy signal from selected K3P. Read the training-discrepancy research note,
 RP1 native-drift analysis, and

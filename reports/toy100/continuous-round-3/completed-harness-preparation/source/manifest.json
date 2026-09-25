@@ -1,0 +1,20 @@
+{
+  "status": "NOT_READY_FOR_CANDIDATE_QUALIFICATION",
+  "files": [
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/benchmarks/toy100/continuous_qualification.py",
+      "sha256": "01c7306aa8f717fcc29047804a81c0bcd931eed81a6daf1d8f524d7a48ccd119",
+      "snapshot": "01c7306aa8f717fcc29047804a81c0bcd931eed81a6daf1d8f524d7a48ccd119.py.gz"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/tests/test_continuous_qualification.py",
+      "sha256": "9b4e7b72ef4f4ed22dbcec13d92bb008e08f7338bf86b2755eb477c8a85e4902",
+      "snapshot": "9b4e7b72ef4f4ed22dbcec13d92bb008e08f7338bf86b2755eb477c8a85e4902.py.gz"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z/prepare_continuous_qualification/20260925T181158Z-3771196/repo/reports/toy100/continuous-round-3/qualification-harness/README.md",
+      "sha256": "d9aaa4ab4909775a58a492323f43bef8a07680031b491975ba92e459444716d8",
+      "snapshot": "d9aaa4ab4909775a58a492323f43bef8a07680031b491975ba92e459444716d8.md.gz"
+    }
+  ]
+}

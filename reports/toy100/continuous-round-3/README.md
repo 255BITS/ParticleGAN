@@ -101,3 +101,8 @@ are three additional rejected formulations, excluded from the initial17 count.
 The next Codex direction uses ordinary real/generated training discrepancy,
 with a sampling-noise reference, as a hypothesis for separating model error from
 critic fluctuations. It remains K3P-derived research, not a new selected base.
+
+The first long-run harness preparation passed its synthetic checks but failed
+[root integration review](qualification-harness-review.md): it omitted canonical
+candidate hooks and initialization. It is marked NOT_READY and assigned for
+repair. No candidate long-run score is claimed from those harness checks.
