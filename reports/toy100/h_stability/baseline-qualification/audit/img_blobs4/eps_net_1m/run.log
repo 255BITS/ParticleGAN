@@ -1,4 +1,0 @@
-{"event": "START", "candidate": "eps_net_1m", "gate": "img_blobs4"}
-START img_blobs4 route=GANTrainer + generic noise wrappers steps=600
-{"event": "DONE", "task": "img_blobs4", "status": "FAIL", "suffix": 0, "live": {"modes": 3, "hq": 0.84375, "mean_rmse": 0.06595023721456528, "quality_mode_fractions": [0.09375, 0.25, 0.3125, 0.1875], "mode_fractions": [0.09375, 0.3125, 0.34375, 0.25], "distribution_tv": 0.15625}, "error": null}
-{"event": "DONE", "candidate": "eps_net_1m", "gate": "img_blobs4", "status": "FAIL", "seconds": 7.530419497052208, "live": {"distribution_tv": 0.15625, "hq": 0.84375, "mean_rmse": 0.06595023721456528, "mode_fractions": [0.09375, 0.3125, 0.34375, 0.25], "modes": 3, "quality_mode_fractions": [0.09375, 0.25, 0.3125, 0.1875]}}

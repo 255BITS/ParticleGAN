@@ -1,9 +1,0 @@
-{"event": "START", "candidate": "eps_net_1m", "gate": "unused_token_hold"}
-START unused_token_hold route=public primitives custom host + shared noise policy steps=200
-unused-token arm=eps_net_1m step=1 hold=0.9984 concept=0.0000 unused_dist=0.0016
-unused-token arm=eps_net_1m step=50 hold=0.9508 concept=0.0559 unused_dist=0.0492
-unused-token arm=eps_net_1m step=100 hold=0.8947 concept=0.2084 unused_dist=0.1053
-unused-token arm=eps_net_1m step=150 hold=0.8381 concept=0.3238 unused_dist=0.1619
-unused-token arm=eps_net_1m step=200 hold=0.7882 concept=0.4236 unused_dist=0.2118
-{"event": "DONE", "task": "unused_token_hold", "status": "FAIL", "suffix": 0, "live": {"unused_hold": 0.7882094532251358, "concept_move": 0.42357983117969766}, "error": null}
-{"event": "DONE", "candidate": "eps_net_1m", "gate": "unused_token_hold", "status": "FAIL", "seconds": 1.3932142390403897, "live": {"concept_move": 0.42357983117969766, "unused_hold": 0.7882094532251358}}

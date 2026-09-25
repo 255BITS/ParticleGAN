@@ -2,15 +2,18 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
-[**22-toy results: CPU winner and GPU audit**](reports/toy100/continuous-practical-leaderboard.md):
-the original recipe is **22/22 PASS on its recorded CPU run** and **16/22 on
-CUDA**, including all three native 100-mode passes. Continuous-learning variants
-are reported separately with their post-convergence stability results.
+**[K3P is the selected GPU research formulation](reports/toy100/k3p-base/README.md):**
+**22/22 declared toy gates PASS**, with a **1,200-update ring hold and all 300
+extension checks passing**. Target-shift recovery remains a measured failure
+(28/81 deadline checks). [Leaderboard](reports/toy100/continuous-practical-leaderboard.md) ·
+[Exact selected bundle](reports/toy100/current-research-base.json).
 
-Current work: [port the passing CPU recipe to GPU](reports/toy100/cpu-recipe-gpu-port/README.md).
-CPU initialization recovers four of its six GPU failures; full GPU qualification is pending.
+Research launchers select K3P's config, critic mechanism, latent damping, response,
+and gate drivers together; loading its config alone does not activate K3P.
+See the [execution guide](reports/toy100/k3p-base/README.md#exact-selected-bundle-and-execution).
+The standard toy CLI and CPU CI gate still exercise the historical shared recipe.
 
-**GAN v3 is the default:** one shared recipe passes **19/19 live behavioral toys**
+**GAN v3 is the public API default** (`get_recipe("gan")`): one shared recipe passes **19/19 live behavioral toys**
 with declared discriminator choices (15/19 with the reference D profile).
 
 | Recipe version | Live toys passed | Status |

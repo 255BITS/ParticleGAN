@@ -1,2 +1,0 @@
-{"event": "PREDECLARED", "rows": 1, "output": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/cover_leftover"}
-{"event": "CANDIDATE_DONE", "tag": "eps_net_1m", "status": "FAIL", "seconds": 4.927252572961152, "stages": [{"gate": "cover_leftover", "status": "FAIL"}]}

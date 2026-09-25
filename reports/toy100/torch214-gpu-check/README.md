@@ -23,7 +23,7 @@ venv. The original 2.13 benchmark environment is unchanged. The compatible
 2.14 CUDA12.6 build uses the existing CUDA libraries; torch, triton and the
 matching torchvision are installed in the new environment. These toy runs do
 not use torchvision or torch.compile. [Environment](environment.json) and
-[install plan](install-plan.log) bind the tested stack.
+[install plan](https://github.com/255BITS/ParticleGAN/blob/b979d3c90bdbf8f58c62d759bc3c5fa94cdf18c8/reports/toy100/torch214-gpu-check/install-plan.log) bind the tested stack.
 
 The successful CPU recipe is sensitive to backend-dependent initialization,
 random draws and arithmetic. CPU initialization alone already recovers four

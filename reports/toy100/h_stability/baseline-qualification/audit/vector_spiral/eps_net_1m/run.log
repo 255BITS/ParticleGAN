@@ -1,4 +1,0 @@
-{"event": "START", "candidate": "eps_net_1m", "gate": "vector_spiral"}
-START vector_spiral route=GANTrainer + generic noise wrappers steps=1600
-{"event": "DONE", "task": "vector_spiral", "status": "PASS", "suffix": 22, "live": {"sw1_normalized": 0.029275098808051646, "mean_error": 0.032899852842092514, "covariance_error": 0.041911449283361435, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
-{"event": "DONE", "candidate": "eps_net_1m", "gate": "vector_spiral", "status": "PASS", "seconds": 9.38453787821345, "live": {"covariance_error": 0.041911449283361435, "mean_error": 0.032899852842092514, "sample_count": 4096, "sw1_normalized": 0.029275098808051646, "target_scale": 1.224178433418274}}
