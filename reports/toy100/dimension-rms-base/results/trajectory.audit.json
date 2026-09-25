@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "checks": [
+    "declared expected spec",
+    "frozen thresholds/data/evaluation/budget",
+    "unchanged initialization/RNG/schedule/actions",
+    "frozen sustained verdict",
+    "all CUDA Adam state/parameters/gradients",
+    "FP32",
+    "candidate hashes",
+    "1614 frozen source files"
+  ],
+  "row": {
+    "candidate": "dimension_rms_hybrid",
+    "gate": "trajectory",
+    "status": "PASS",
+    "seconds": 7.085100529016927,
+    "metrics": {
+      "identity_mse": 0.000738293572794646
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/candidates/dimension_rms_hybrid/trajectory/result.json",
+    "updates": {
+      "adam_calls": 800,
+      "optimizers": {
+        "128263655686704": {
+          "calls": 400,
+          "device": "cuda:0",
+          "state_devices": [
+            "cuda:0"
+          ],
+          "parameter_dtypes": [
+            "torch.float32"
+          ]
+        },
+        "128263655698608": {
+          "calls": 400,
+          "device": "cuda:0",
+          "state_devices": [
+            "cuda:0"
+          ],
+          "parameter_dtypes": [
+            "torch.float32"
+          ]
+        }
+      }
+    },
+    "regularizer_receipt": {
+      "calls": 400,
+      "dimensions": {
+        "16": 400
+      },
+      "extra_critic_forwards": 0
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 22,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 22,
+      "first_pass_step": 50,
+      "stable_from_step": 50,
+      "stable_from_seconds": 1.1097791199572384,
+      "confirmed_step": 117,
+      "confirmed_seconds": 2.202839968027547
+    },
+    "audit": "PASS",
+    "code_hashes": {
+      "probe.py": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+      "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+      "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    "declaration_sha256": "e7ee88ba27449816f86b13a1de4ce64a62b782441c94b40cc6e9cd177889044d"
+  }
+}

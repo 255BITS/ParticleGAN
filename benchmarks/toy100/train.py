@@ -28,7 +28,8 @@ import torch
 from torch import nn
 
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
-from particlegan import GANTrainer, Recipe, get_recipe
+from particlegan import GANTrainer
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
 from .models import (
@@ -37,6 +38,7 @@ from .models import (
 )
 from .problems import PROBLEM_NAMES, sample_real
 from .schedule import policy_rate_action, step_with_policy
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -91,7 +93,7 @@ POLICY_PUBLIC_SOURCE_FILES = (
     "particlegan/__init__.py", "particlegan/autoencoder.py",
     "particlegan/conditioning.py", "particlegan/diffusion.py",
     "particlegan/discriminators.py", "particlegan/gan_loss.py",
-    "particlegan/grad_regularizers.py", "particlegan/locked_shared.py",
+    "particlegan/grad_regularizers.py",
     "particlegan/particle_prior.py", "particlegan/recipes.py",
     "particlegan/training.py", "particlegan/vicreg_loss.py",
 )
@@ -234,9 +236,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         if (isinstance(value, bool) or not isinstance(value, (int, float))
                 or not math.isfinite(value) or not 0 <= value <= 1):
             raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
-    recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
+    # Noise and network-horizon keys are benchmark-run fields: the benchmark
+    # applies them through its own wrappers and hooks, so the trainer recipe
+    # keeps their pre-K3P neutral values (see benchmarks.gan_v3).
+    recipe_kwargs = {key: user[key] for key in user
+                     if key in RECIPE_FIELDS and key not in RUN_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
-    recipe = get_recipe(**recipe_kwargs)
+    recipe = gan_v3_recipe(**recipe_kwargs)
     if "name" in user:
         recipe = recipe.replace(name=user["name"])
     if (recipe.model != "gan" or recipe.conditioning != "scalar"
@@ -246,7 +252,7 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("affine toy100_model requires z_dim=2")
     run["device"] = str(device)
     # Store all resolved inputs, including the public recipe's inherited values.
-    return {**recipe.to_dict(), **run}, recipe
+    return {**legacy_dict(recipe), **run}, recipe
 
 
 def _init_linear(module: nn.Module) -> None:
@@ -402,9 +408,17 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
             wrapper = StatefulInputNoise if isolated else InputNoise
             discriminator = wrapper(discriminator, seed=seed + 901, device=device)
         trainer_class = IsolatedNoiseGANTrainer if isolated else GANTrainer
+        penalty_options = None
+        if recipe.reg_arm == "k3p" and config.get("network_lr_floor") is not None:
+            # The capped-horizon hooks lower D to network_lr_floor, while the
+            # neutral trainer recipe resolves its floor to lr_floor; K3P's
+            # blend floor f must be the critic floor actually applied.
+            floor = float(config["network_lr_floor"])
+            penalty_options = {"lr_floor": floor if floor < 0.5 else 0.0}
         return trainer_class(
             recipe, generator, discriminator, prior=prior, seed=seed,
             optimizer_options={"fused": config["fused_adam"]},
+            penalty_options=penalty_options,
         )
 
 
@@ -641,6 +655,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     An existing empty output directory is accepted. Any earlier run evidence
     causes an error, so a failed or partial run cannot silently be overwritten.
     """
+    from .device import configure_cuda_determinism, prepare_cublas_workspace
+
+    # Set before resolve_config, which calls torch.cuda.is_available().
+    if isinstance(config, Mapping):
+        prepare_cublas_workspace(None if config.get("device") is None else str(config.get("device")))
     resolved, recipe = resolve_config(config)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -649,7 +668,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     (out_dir / "snapshots").mkdir(exist_ok=True)
     torch.set_num_threads(resolved["threads"])
     if torch.device(resolved["device"]).type == "cuda":
-        torch.backends.cuda.matmul.allow_tf32 = False
+        configure_cuda_determinism(torch.device(resolved["device"]))
     _write_json(out_dir / "config.json", resolved)
     policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved
                       or "network_lr_floor" in resolved or "output_noise_rng" in resolved)

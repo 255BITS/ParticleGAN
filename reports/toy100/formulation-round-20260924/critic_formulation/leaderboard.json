@@ -1,0 +1,464 @@
+[
+  {
+    "candidate": "c05_ra_r1r2",
+    "gates": {
+      "mode_hold": "PASS",
+      "vector_unequal_mass": "FAIL",
+      "trajectory": "NOT_RUN",
+      "img_intensity2": "NOT_RUN",
+      "img_bars4": "NOT_RUN",
+      "img_blobs4": "NOT_RUN",
+      "two_pole": "NOT_RUN",
+      "unipolar": "NOT_RUN",
+      "mid_scale_identity": "NOT_RUN",
+      "cover_leftover": "NOT_RUN",
+      "residual_student": "NOT_RUN",
+      "img_stripes2": "NOT_RUN",
+      "vector_overlap": "NOT_RUN",
+      "vector_unequal_width": "NOT_RUN",
+      "vector_two_broad": "NOT_RUN",
+      "vector_anisotropic": "NOT_RUN",
+      "vector_spiral": "NOT_RUN",
+      "ae_gan_hold": "NOT_RUN",
+      "unused_token_hold": "NOT_RUN",
+      "grid100": "NOT_RUN",
+      "rotated100": "NOT_RUN",
+      "staggered100": "NOT_RUN"
+    },
+    "full22": "NOT_RUN",
+    "own_state_stability": "NOT_RUN",
+    "executed": 2,
+    "passes": 1,
+    "primary_passes": 1,
+    "mean_final_shortfall": 0.04814690358790697,
+    "ring": {
+      "modes": 8,
+      "hq": 1.0,
+      "passing_suffix": 5,
+      "passing_observations": 7
+    },
+    "mass": {
+      "sw1_normalized": 0.029418513336069756,
+      "mean_error": 0.03214534372091293,
+      "covariance_error": 0.051055628806352615,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.009130844846367836,
+      "min_mass_ratio": 0.72021484375,
+      "hq": 0.964111328125,
+      "component_covariance_error": 1.341098416596651,
+      "component_covariance_errors": [
+        0.2411404699087143,
+        0.37325409054756165,
+        0.49662119150161743,
+        4.253377914428711
+      ],
+      "component_min_eigen_ratio": 0.38228726387023926,
+      "component_mass": [
+        0.555419921875,
+        0.3037109375,
+        0.12646484375,
+        0.014404296875
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2275,
+        1244,
+        518,
+        59
+      ],
+      "passing_suffix": 0,
+      "passing_observations": 2
+    }
+  },
+  {
+    "candidate": "c06_ra_r1_only",
+    "gates": {
+      "mode_hold": "FAIL",
+      "vector_unequal_mass": "PASS",
+      "trajectory": "NOT_RUN",
+      "img_intensity2": "NOT_RUN",
+      "img_bars4": "NOT_RUN",
+      "img_blobs4": "NOT_RUN",
+      "two_pole": "NOT_RUN",
+      "unipolar": "NOT_RUN",
+      "mid_scale_identity": "NOT_RUN",
+      "cover_leftover": "NOT_RUN",
+      "residual_student": "NOT_RUN",
+      "img_stripes2": "NOT_RUN",
+      "vector_overlap": "NOT_RUN",
+      "vector_unequal_width": "NOT_RUN",
+      "vector_two_broad": "NOT_RUN",
+      "vector_anisotropic": "NOT_RUN",
+      "vector_spiral": "NOT_RUN",
+      "ae_gan_hold": "NOT_RUN",
+      "unused_token_hold": "NOT_RUN",
+      "grid100": "NOT_RUN",
+      "rotated100": "NOT_RUN",
+      "staggered100": "NOT_RUN"
+    },
+    "full22": "NOT_RUN",
+    "own_state_stability": "NOT_RUN",
+    "executed": 2,
+    "passes": 1,
+    "primary_passes": 1,
+    "mean_final_shortfall": 0.09375,
+    "ring": {
+      "modes": 5,
+      "hq": 1.0,
+      "passing_suffix": 0,
+      "passing_observations": 0
+    },
+    "mass": {
+      "sw1_normalized": 0.030466234418337745,
+      "mean_error": 0.031829047948122025,
+      "covariance_error": 0.04895405098795891,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.015185544267296791,
+      "min_mass_ratio": 0.89111328125,
+      "hq": 0.980712890625,
+      "component_covariance_error": 0.2512904698960483,
+      "component_covariance_errors": [
+        0.24933582544326782,
+        0.02891935221850872,
+        0.23643119633197784,
+        0.49047550559043884
+      ],
+      "component_min_eigen_ratio": 0.3353448510169983,
+      "component_mass": [
+        0.5400390625,
+        0.315185546875,
+        0.126953125,
+        0.017822265625
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2212,
+        1291,
+        520,
+        73
+      ],
+      "passing_suffix": 6,
+      "passing_observations": 17
+    }
+  },
+  {
+    "candidate": "c02_ra_cap",
+    "gates": {
+      "mode_hold": "FAIL",
+      "vector_unequal_mass": "FAIL",
+      "trajectory": "NOT_RUN",
+      "img_intensity2": "NOT_RUN",
+      "img_bars4": "NOT_RUN",
+      "img_blobs4": "NOT_RUN",
+      "two_pole": "NOT_RUN",
+      "unipolar": "NOT_RUN",
+      "mid_scale_identity": "NOT_RUN",
+      "cover_leftover": "NOT_RUN",
+      "residual_student": "NOT_RUN",
+      "img_stripes2": "NOT_RUN",
+      "vector_overlap": "NOT_RUN",
+      "vector_unequal_width": "NOT_RUN",
+      "vector_two_broad": "NOT_RUN",
+      "vector_anisotropic": "NOT_RUN",
+      "vector_spiral": "NOT_RUN",
+      "ae_gan_hold": "NOT_RUN",
+      "unused_token_hold": "NOT_RUN",
+      "grid100": "NOT_RUN",
+      "rotated100": "NOT_RUN",
+      "staggered100": "NOT_RUN"
+    },
+    "full22": "NOT_RUN",
+    "own_state_stability": "NOT_RUN",
+    "executed": 2,
+    "passes": 0,
+    "primary_passes": 0,
+    "mean_final_shortfall": 0.03497076823430903,
+    "ring": {
+      "modes": 7,
+      "hq": 0.99560546875,
+      "passing_suffix": 0,
+      "passing_observations": 0
+    },
+    "mass": {
+      "sw1_normalized": 0.034267141322887114,
+      "mean_error": 0.04239441454410553,
+      "covariance_error": 0.04746819660067558,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.03486328572034836,
+      "min_mass_ratio": 0.8837890028953552,
+      "hq": 0.971923828125,
+      "component_covariance_error": 0.8879518359899521,
+      "component_covariance_errors": [
+        0.23009029030799866,
+        0.2953683137893677,
+        0.2981807291507721,
+        2.72816801071167
+      ],
+      "component_min_eigen_ratio": 0.5784634947776794,
+      "component_mass": [
+        0.574462890625,
+        0.26513671875,
+        0.131591796875,
+        0.02880859375
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2353,
+        1086,
+        539,
+        118
+      ],
+      "passing_suffix": 0,
+      "passing_observations": 7
+    }
+  },
+  {
+    "candidate": "c01_r1r2",
+    "gates": {
+      "mode_hold": "FAIL",
+      "vector_unequal_mass": "FAIL",
+      "trajectory": "NOT_RUN",
+      "img_intensity2": "NOT_RUN",
+      "img_bars4": "NOT_RUN",
+      "img_blobs4": "NOT_RUN",
+      "two_pole": "NOT_RUN",
+      "unipolar": "NOT_RUN",
+      "mid_scale_identity": "NOT_RUN",
+      "cover_leftover": "NOT_RUN",
+      "residual_student": "NOT_RUN",
+      "img_stripes2": "NOT_RUN",
+      "vector_overlap": "NOT_RUN",
+      "vector_unequal_width": "NOT_RUN",
+      "vector_two_broad": "NOT_RUN",
+      "vector_anisotropic": "NOT_RUN",
+      "vector_spiral": "NOT_RUN",
+      "ae_gan_hold": "NOT_RUN",
+      "unused_token_hold": "NOT_RUN",
+      "grid100": "NOT_RUN",
+      "rotated100": "NOT_RUN",
+      "staggered100": "NOT_RUN"
+    },
+    "full22": "NOT_RUN",
+    "own_state_stability": "NOT_RUN",
+    "executed": 2,
+    "passes": 0,
+    "primary_passes": 0,
+    "mean_final_shortfall": 0.07092431373894215,
+    "ring": {
+      "modes": 8,
+      "hq": 0.9013671875,
+      "passing_suffix": 1,
+      "passing_observations": 4
+    },
+    "mass": {
+      "sw1_normalized": 0.09557324045440538,
+      "mean_error": 0.1384180784225464,
+      "covariance_error": 0.1524653136730194,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.08708984404802322,
+      "min_mass_ratio": 0.439453125,
+      "hq": 0.952880859375,
+      "component_covariance_error": 0.7946576997637749,
+      "component_covariance_errors": [
+        0.4250602424144745,
+        1.2043851613998413,
+        0.8476272821426392,
+        0.7015581130981445
+      ],
+      "component_min_eigen_ratio": 0.022336235269904137,
+      "component_mass": [
+        0.624755859375,
+        0.22412109375,
+        0.142333984375,
+        0.0087890625
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2559,
+        918,
+        583,
+        36
+      ],
+      "passing_suffix": 0,
+      "passing_observations": 6
+    }
+  },
+  {
+    "candidate": "c03_smooth_cap",
+    "gates": {
+      "mode_hold": "FAIL",
+      "vector_unequal_mass": "FAIL",
+      "trajectory": "NOT_RUN",
+      "img_intensity2": "NOT_RUN",
+      "img_bars4": "NOT_RUN",
+      "img_blobs4": "NOT_RUN",
+      "two_pole": "NOT_RUN",
+      "unipolar": "NOT_RUN",
+      "mid_scale_identity": "NOT_RUN",
+      "cover_leftover": "NOT_RUN",
+      "residual_student": "NOT_RUN",
+      "img_stripes2": "NOT_RUN",
+      "vector_overlap": "NOT_RUN",
+      "vector_unequal_width": "NOT_RUN",
+      "vector_two_broad": "NOT_RUN",
+      "vector_anisotropic": "NOT_RUN",
+      "vector_spiral": "NOT_RUN",
+      "ae_gan_hold": "NOT_RUN",
+      "unused_token_hold": "NOT_RUN",
+      "grid100": "NOT_RUN",
+      "rotated100": "NOT_RUN",
+      "staggered100": "NOT_RUN"
+    },
+    "full22": "NOT_RUN",
+    "own_state_stability": "NOT_RUN",
+    "executed": 2,
+    "passes": 0,
+    "primary_passes": 0,
+    "mean_final_shortfall": 0.5320773654513888,
+    "ring": {
+      "modes": 2,
+      "hq": 0.259521484375,
+      "passing_suffix": 0,
+      "passing_observations": 0
+    },
+    "mass": {
+      "sw1_normalized": 0.14886827052847473,
+      "mean_error": 0.21647842228412628,
+      "covariance_error": 0.23665522038936615,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.12749022245407104,
+      "min_mass_ratio": 0.0,
+      "hq": 0.99658203125,
+      "component_covariance_error": 0.4850052762776613,
+      "component_covariance_errors": [
+        0.10967863351106644,
+        0.3887971043586731,
+        0.44154536724090576,
+        1.0
+      ],
+      "component_min_eigen_ratio": 0.0,
+      "component_mass": [
+        0.677490234375,
+        0.196044921875,
+        0.12646484375,
+        0.0
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2775,
+        803,
+        518,
+        0
+      ],
+      "passing_suffix": 0,
+      "passing_observations": 2
+    }
+  },
+  {
+    "candidate": "c04_hinge_cap",
+    "gates": {
+      "mode_hold": "FAIL",
+      "vector_unequal_mass": "FAIL",
+      "trajectory": "NOT_RUN",
+      "img_intensity2": "NOT_RUN",
+      "img_bars4": "NOT_RUN",
+      "img_blobs4": "NOT_RUN",
+      "two_pole": "NOT_RUN",
+      "unipolar": "NOT_RUN",
+      "mid_scale_identity": "NOT_RUN",
+      "cover_leftover": "NOT_RUN",
+      "residual_student": "NOT_RUN",
+      "img_stripes2": "NOT_RUN",
+      "vector_overlap": "NOT_RUN",
+      "vector_unequal_width": "NOT_RUN",
+      "vector_two_broad": "NOT_RUN",
+      "vector_anisotropic": "NOT_RUN",
+      "vector_spiral": "NOT_RUN",
+      "ae_gan_hold": "NOT_RUN",
+      "unused_token_hold": "NOT_RUN",
+      "grid100": "NOT_RUN",
+      "rotated100": "NOT_RUN",
+      "staggered100": "NOT_RUN"
+    },
+    "full22": "NOT_RUN",
+    "own_state_stability": "NOT_RUN",
+    "executed": 2,
+    "passes": 0,
+    "primary_passes": 0,
+    "mean_final_shortfall": 0.5542799090204462,
+    "ring": {
+      "modes": 5,
+      "hq": 1.0,
+      "passing_suffix": 0,
+      "passing_observations": 0
+    },
+    "mass": {
+      "sw1_normalized": 0.36216595068065166,
+      "mean_error": 0.5104594826698303,
+      "covariance_error": 0.7772179245948792,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.32646483182907104,
+      "min_mass_ratio": 0.0838216096162796,
+      "hq": 0.9287109375,
+      "component_covariance_error": 2.3112442642450333,
+      "component_covariance_errors": [
+        0.7891998291015625,
+        6.510189533233643,
+        0.9566206932067871,
+        0.9889670014381409
+      ],
+      "component_min_eigen_ratio": 0.006889623589813709,
+      "component_mass": [
+        0.87646484375,
+        0.025146484375,
+        0.09326171875,
+        0.005126953125
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        3590,
+        103,
+        382,
+        21
+      ],
+      "passing_suffix": 0,
+      "passing_observations": 0
+    }
+  }
+]

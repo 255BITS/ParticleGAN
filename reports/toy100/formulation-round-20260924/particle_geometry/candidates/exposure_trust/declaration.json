@@ -1,0 +1,27 @@
+{
+  "candidate": "exposure_trust",
+  "mechanism": "Keep ordinary Adam gradients and moments. Postcondition particle displacements with row cap lr*sqrt(latent_dim)/q, where q is beta2 EMA of fraction of rows sampled in the actual G backward; initialize EMA from first batch. All other updates unchanged.",
+  "rationale": "Prior fixed cap passes ring but eliminates rare mass; account for missing visits to preserve expected per-global-step travel in sparse tables. Shared_coordinate recovered rare shape but ring collapsed to six.",
+  "extra_forward_backward": 0,
+  "optimizer_updates": "One D plus one G/particle update per frozen iteration; particle custom update substitutes original Adam table update.",
+  "extra_work": "One particle clone, index bincount, exposure EMA, and row norm/broadcast after ordinary Adam. No extra network work; equal-step, not exact equal-compute.",
+  "unchanged": [
+    "critic/objective",
+    "network Adam",
+    "architecture",
+    "data",
+    "seeds",
+    "RNG",
+    "evaluation",
+    "thresholds",
+    "budgets",
+    "decay/noise schedules",
+    "AE/token auxiliary terms"
+  ],
+  "code_sha256": {
+    "probe.py": "025ad6a9b319be5893e871d2541b0fbb4f9f495d09f7b8b7fd91661c0c63eead",
+    "particle_update.py": "d93b714c6d33cdb28e6b9736806476bbd843db2630b5d66d8e00a528e2045e86"
+  },
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+}

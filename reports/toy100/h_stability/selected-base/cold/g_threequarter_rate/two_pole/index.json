@@ -1,0 +1,383 @@
+{
+  "records": [
+    {
+      "applied": [
+        {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "host_lr": 0.005,
+          "lr": 0.0015,
+          "parameters": 97,
+          "role": "d"
+        },
+        {
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "host_lr": 0.005,
+          "lr": 0.0022500000000000003,
+          "parameters": 12,
+          "role": "prior"
+        }
+      ],
+      "architecture": "original host",
+      "artifact": "episodes/g_threequarter_rate__two_pole.json.gz",
+      "discriminator_variant": null,
+      "ema": null,
+      "ema_verdict": {
+        "reason": "Host does not record a complete EMA curve",
+        "status": "N/A"
+      },
+      "host_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "conditioning": "scalar",
+        "d_lr_mult": 1.3333333333333333,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "gan_mode": "rp",
+        "loss_type": "logistic",
+        "lr": 0.0011250000000000001,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "g_threequarter_rate",
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.6,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reg_method": "autograd",
+        "routing_temperature": 0.25,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "live": {
+        "grad_med": 0.019364088773727417,
+        "mean_abs": 0.028546154499053955
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1"
+      },
+      "name": "two_pole",
+      "noise": {
+        "input_noise_anneal_end": 1.0,
+        "input_noise_std": 0.5,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2
+      },
+      "noise_applied": true,
+      "noise_receipt": {
+        "d_noise_seed": 901,
+        "eval_output_applied": false,
+        "eval_scope": "learned_particles_and_critic_gradient",
+        "generator_base_parameters": 12,
+        "generator_total_parameters": 12,
+        "input_anneal_end": 1.0,
+        "input_eval_calls": 0,
+        "input_eval_elements": 0,
+        "input_nonzero_steps": 80,
+        "input_sigma_first": 0.5,
+        "input_sigma_last": 0.006249999999999978,
+        "input_std": 0.5,
+        "input_train_calls": 720,
+        "input_train_elements": 8640,
+        "output_eval_calls": 0,
+        "output_eval_elements": 0,
+        "output_noise_learnable": false,
+        "output_noise_warmup": 0.2,
+        "output_nonzero_steps": 79,
+        "output_scale_ema_final": null,
+        "output_scale_final": 0.029,
+        "output_scale_initial": 0.029,
+        "output_scale_optimizer_owned": false,
+        "output_scale_parameter_count": 0,
+        "output_sigma_effective_ema_final_evaluation": null,
+        "output_sigma_effective_final_evaluation": 0.029,
+        "output_sigma_effective_first": 0.0,
+        "output_sigma_effective_last": 0.029,
+        "output_sigma_effective_step_trace": [
+          0.0,
+          0.0018125,
+          0.003625,
+          0.0054375000000000005,
+          0.00725,
+          0.009062500000000001,
+          0.010875000000000001,
+          0.0126875,
+          0.0145,
+          0.0163125,
+          0.018125000000000002,
+          0.0199375,
+          0.021750000000000002,
+          0.0235625,
+          0.025375,
+          0.0271875,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029,
+          0.029
+        ],
+        "output_sigma_final_evaluation": 0.029,
+        "output_sigma_first": 0.0,
+        "output_sigma_last": 0.029,
+        "output_std": 0.029,
+        "output_train_calls": 160,
+        "output_train_elements": 1896,
+        "seed": 0,
+        "step_calls": 80,
+        "total_steps": 80,
+        "train_input_applied": true,
+        "train_output_applied": true,
+        "training_mechanism_verified": true
+      },
+      "observations": 24,
+      "original_spec": {
+        "family": "existing_behavior",
+        "importance_reason": "Basic adversarial movement remains bounded.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "name": "two_pole",
+        "phase": "fit",
+        "runner": "legacy",
+        "split": "development",
+        "steps": 80,
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ],
+        "tier": "required"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "conditioning": "scalar",
+        "d_lr_mult": 1.3333333333333333,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "gan_mode": "rp",
+        "loss_type": "logistic",
+        "lr": 0.0011250000000000001,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "g_threequarter_rate",
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.6,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reg_method": "autograd",
+        "routing_temperature": 0.25,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "reference": "study/episodes/cosine__two_pole.json.gz",
+      "reference_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56",
+      "route": "public primitives custom host + shared noise policy",
+      "scratch_optimizer_policy": {
+        "name": "fixed_adam_denominator_floor_v1",
+        "options": {
+          "consistency": "mixup",
+          "consistency_coeff": 0.01,
+          "consistency_sigma": 0.1,
+          "noise": "fixed",
+          "sigma": 0.05,
+          "smooth": 0.0
+        }
+      },
+      "seconds": 0.16929201898165047,
+      "shapes": {
+        "host": "legacy auxiliary custom loop"
+      },
+      "shared_gate_eligible": false,
+      "spec": {
+        "family": "existing_behavior",
+        "importance_reason": "Basic adversarial movement remains bounded.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "name": "two_pole",
+        "phase": "fit",
+        "runner": "legacy",
+        "split": "development",
+        "steps": 80,
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ],
+        "tier": "required"
+      },
+      "uncompressed_sha256": "2b2ddb3d92e3e8dbd835428ac0cdfbef0381a46e554f0fd9d668fb61aaad5db5",
+      "verdict": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.27145384550094603,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.028546154499053955
+          },
+          {
+            "margin": 0.9806359112262726,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.019364088773727417
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4524230758349101,
+        "status": "FAIL"
+      }
+    }
+  ],
+  "scratch_optimizer_policy": {
+    "name": "fixed_adam_denominator_floor_v1",
+    "options": {
+      "consistency": "mixup",
+      "consistency_coeff": 0.01,
+      "consistency_sigma": 0.1,
+      "noise": "fixed",
+      "sigma": 0.05,
+      "smooth": 0.0
+    }
+  },
+  "shared_gate_eligible": false
+}

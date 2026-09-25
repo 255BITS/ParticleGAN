@@ -1,0 +1,1109 @@
+[
+ {
+  "lab": "baseline-baseline",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": null,
+   "sec": 22.9,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.4236924913194444,
+   "modes": 5,
+   "hq": 0.6103515625,
+   "missing": [
+    3,
+    5,
+    6
+   ],
+   "live_modes": 5,
+   "live_hq": 0.474853515625
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr107-reachstall",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 2,
+   "first": 650,
+   "sec": 165.6,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.995361328125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr117-trans",
+  "ring": {
+   "status": "FAIL",
+   "sec": 191.6,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 7,
+   "hq": 1.0,
+   "missing": "n/r",
+   "suffix": "0",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 7,
+     "hq": 0.999755859375
+    },
+    {
+     "step": 1050,
+     "modes": 7,
+     "hq": 0.960693359375
+    },
+    {
+     "step": 1100,
+     "modes": 1,
+     "hq": 0.151123046875
+    },
+    {
+     "step": 1150,
+     "modes": 7,
+     "hq": 1.0
+    },
+    {
+     "step": 1200,
+     "modes": 7,
+     "hq": 1.0
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr119-reachstall_ddexit",
+  "ring": {
+   "status": "FAIL",
+   "sec": 186.9,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 1,
+   "hq": 0.020751953125,
+   "missing": "n/r",
+   "suffix": "0",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 5,
+     "hq": 0.514404296875
+    },
+    {
+     "step": 1050,
+     "modes": 7,
+     "hq": 0.75341796875
+    },
+    {
+     "step": 1100,
+     "modes": 2,
+     "hq": 0.118408203125
+    },
+    {
+     "step": 1150,
+     "modes": 4,
+     "hq": 0.478515625
+    },
+    {
+     "step": 1200,
+     "modes": 1,
+     "hq": 0.020751953125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr120-reachrecover",
+  "ring": {
+   "status": "PASS",
+   "sec": 170.7,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 0.99658203125,
+   "missing": "n/r",
+   "suffix": "5+",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 8,
+     "hq": 0.98974609375
+    },
+    {
+     "step": 1050,
+     "modes": 8,
+     "hq": 0.98095703125
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.998291015625
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 0.99658203125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr121-reachstall_sgame",
+  "ring": {
+   "status": "FAIL",
+   "sec": 183.5,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2741, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 1.0,
+   "missing": "n/r",
+   "suffix": "3",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 6,
+     "hq": 0.603759765625
+    },
+    {
+     "step": 1050,
+     "modes": 7,
+     "hq": 0.920166015625
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.99560546875
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 1.0
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": [
+    [
+     "cpu",
+     "AVX2"
+    ],
+    [
+     "aten",
+     "avx2"
+    ]
+   ]
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr122-reachstall_trustfall",
+  "ring": {
+   "status": "FAIL",
+   "sec": 159.3,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 6,
+   "hq": 0.543212890625,
+   "missing": "n/r",
+   "suffix": "0",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 4,
+     "hq": 0.243896484375
+    },
+    {
+     "step": 1050,
+     "modes": 4,
+     "hq": 0.29736328125
+    },
+    {
+     "step": 1100,
+     "modes": 7,
+     "hq": 0.71337890625
+    },
+    {
+     "step": 1150,
+     "modes": 4,
+     "hq": 0.253662109375
+    },
+    {
+     "step": 1200,
+     "modes": 6,
+     "hq": 0.543212890625
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr123-reachstall_extrad",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": null,
+   "sec": 162.8,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2489, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0625,
+   "modes": 7,
+   "hq": 0.826904296875,
+   "missing": [
+    7
+   ],
+   "live_modes": 7,
+   "live_hq": 1.0
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr124-zeromean",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": null,
+   "sec": 163.5,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 1.0,
+   "modes": 0,
+   "hq": 0.0,
+   "missing": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "live_modes": 0,
+   "live_hq": 0.0
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr125-reachstall_ghalf",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": 650,
+   "sec": 160.2,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.17271592881944445,
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.589111328125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr126-meanrestore",
+  "ring": {
+   "status": "FAIL",
+   "sec": 189.7,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 0,
+   "hq": 0.0,
+   "missing": "n/r",
+   "suffix": "0",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 4,
+     "hq": 0.2666015625
+    },
+    {
+     "step": 1050,
+     "modes": 2,
+     "hq": 0.19580078125
+    },
+    {
+     "step": 1100,
+     "modes": 0,
+     "hq": 0.0
+    },
+    {
+     "step": 1150,
+     "modes": 0,
+     "hq": 0.0
+    },
+    {
+     "step": 1200,
+     "modes": 0,
+     "hq": 0.0
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr128-ema",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": 650,
+   "sec": 178.2,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.7378743489583333,
+   "modes": 0,
+   "hq": 0.0,
+   "missing": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "live_modes": 2,
+   "live_hq": 0.246826171875
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr129-reachstall_drop",
+  "ring": {
+   "status": "ERROR rc=1",
+   "err": "RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'",
+   "sec": 3.4
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr130-reachstall_rollback",
+  "ring": {
+   "status": "FAIL",
+   "sec": 162.1,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 0.995361328125,
+   "missing": "n/r",
+   "suffix": "2",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1050,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 0.733642578125
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.978271484375
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 0.995361328125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr132-reachstall_gsustain",
+  "ring": {
+   "status": "ERROR rc=1",
+   "err": "RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'",
+   "sec": 3.6
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr133-reachstall_trustopen",
+  "ring": {
+   "status": "FAIL",
+   "sec": 161.5,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 0.995361328125,
+   "missing": "n/r",
+   "suffix": "2",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1050,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 0.733642578125
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.978271484375
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 0.995361328125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": [
+    [
+     "cpu",
+     "AVX2"
+    ],
+    [
+     "cpu_env",
+     {
+      "ATEN_CPU_CAPABILITY": null,
+      "MKL_ENABLE_INSTRUCTIONS": null,
+      "ONEDNN_MAX_CPU_ISA": null,
+      "DNNL_MAX_CPU_ISA": null
+     }
+    ]
+   ]
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr134-reachstall_adv",
+  "ring": {
+   "status": "FAIL",
+   "sec": 164.2,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 0.995361328125,
+   "missing": "n/r",
+   "suffix": "2",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1050,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 0.733642578125
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.978271484375
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 0.995361328125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": []
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr135-reachstall_modettur",
+  "ring": {
+   "status": "ERROR rc=1",
+   "err": "RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'",
+   "sec": 3.7
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr136-reachstall_gbeta0",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 2,
+   "first": 650,
+   "sec": 163.4,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.995361328125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr137-cmnull",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": 650,
+   "sec": 174.5,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0030381944444444566,
+   "modes": 8,
+   "hq": 0.998779296875,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.89453125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr138-reachstall_post_g125",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 2,
+   "first": 650,
+   "sec": 124.0,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 0.999267578125,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 1.0
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr140-delayg05",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 2,
+   "first": 650,
+   "sec": 125.1,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.995361328125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr141-delayed_g125",
+  "ring": {
+   "status": "FAIL",
+   "sec": 120.7,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 0.99658203125,
+   "missing": "n/r",
+   "suffix": "2",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1050,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 0.733642578125
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.978271484375
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 0.99658203125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": [
+    [
+     "cpu",
+     "AVX2"
+    ],
+    [
+     "aten_cpu_capability",
+     "avx2"
+    ]
+   ]
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr142-delayextrad",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 2,
+   "first": 650,
+   "sec": 119.3,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.995361328125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr143-holdw15",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 2,
+   "first": 650,
+   "sec": 116.6,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.995361328125
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr144-stall_cf25",
+  "ring": {
+   "status": "FAIL",
+   "sec": 116.4,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 8,
+   "hq": 0.99658203125,
+   "missing": "n/r",
+   "suffix": "2",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1050,
+     "modes": 8,
+     "hq": 1.0
+    },
+    {
+     "step": 1100,
+     "modes": 8,
+     "hq": 0.733642578125
+    },
+    {
+     "step": 1150,
+     "modes": 8,
+     "hq": 0.978271484375
+    },
+    {
+     "step": 1200,
+     "modes": 8,
+     "hq": 0.99658203125
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": [
+    [
+     "cpu",
+     "AVX2"
+    ],
+    [
+     "aten_cpu_capability",
+     "avx2"
+    ]
+   ]
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr82-pr82",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 0,
+   "first": null,
+   "sec": 149.7,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.6079644097222222,
+   "modes": 0,
+   "hq": 0.0,
+   "missing": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "live_modes": 3,
+   "live_hq": 0.3681640625
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr84-pr84",
+  "ring": {
+   "status": "FAIL",
+   "suffix": 4,
+   "first": 550,
+   "sec": 168.4,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "shortfall": 0.0,
+   "modes": 8,
+   "hq": 0.9287109375,
+   "missing": [],
+   "live_modes": 8,
+   "live_hq": 0.999755859375
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ },
+ {
+  "lab": "pr93-pr93",
+  "ring": {
+   "status": "FAIL",
+   "sec": 343.1,
+   "proof": "GPU_PROOF\", \"adam_steps\": 2400, \"cpu_param_steps\": 0}",
+   "modes": 5,
+   "hq": 0.8037109375,
+   "missing": "n/r",
+   "suffix": "0",
+   "tail": [
+    {
+     "step": 1000,
+     "modes": 5,
+     "hq": 0.678466796875
+    },
+    {
+     "step": 1050,
+     "modes": 5,
+     "hq": 0.596435546875
+    },
+    {
+     "step": 1100,
+     "modes": 5,
+     "hq": 0.5517578125
+    },
+    {
+     "step": 1150,
+     "modes": 5,
+     "hq": 0.856201171875
+    },
+    {
+     "step": 1200,
+     "modes": 5,
+     "hq": 0.8037109375
+    }
+   ],
+   "src": "log COLD event (old probe: last checks only)",
+   "metrics": [
+    [
+     "suffix",
+     {
+      "passing_observations": 0,
+      "observations": 24,
+      "confirmed_step": null
+     }
+    ],
+    [
+     "curve",
+     [
+      {
+       "step": 50,
+       "modes": 4,
+       "hq": 0.654052734375
+      },
+      {
+       "step": 100,
+       "modes": 3,
+       "hq": 0.415283203125
+      },
+      {
+       "step": 150,
+       "modes": 3,
+       "hq": 0.775146484375
+      },
+      {
+       "step": 200,
+       "modes": 5,
+       "hq": 0.816650390625
+      },
+      {
+       "step": 250,
+       "modes": 4,
+       "hq": 0.552490234375
+      },
+      {
+       "step": 300,
+       "modes": 7,
+       "hq": 0.814453125
+      },
+      {
+       "step": 350,
+       "modes": 5,
+       "hq": 0.908935546875
+      },
+      {
+       "step": 400,
+       "modes": 4,
+       "hq": 0.584716796875
+      },
+      {
+       "step": 450,
+       "modes": 5,
+       "hq": 0.601806640625
+      },
+      {
+       "step": 500,
+       "modes": 4,
+       "hq": 0.64794921875
+      },
+      {
+       "step": 550,
+       "modes": 4,
+       "hq": 0.762451171875
+      },
+      {
+       "step": 600,
+       "modes": 5,
+       "hq": 0.38525390625
+      },
+      {
+       "step": 650,
+       "modes": 7,
+       "hq": 0.410888671875
+      },
+      {
+       "step": 700,
+       "modes": 5,
+       "hq": 0.836669921875
+      },
+      {
+       "step": 750,
+       "modes": 5,
+       "hq": 0.93115234375
+      },
+      {
+       "step": 800,
+       "modes": 4,
+       "hq": 0.33154296875
+      },
+      {
+       "step": 850,
+       "modes": 5,
+       "hq": 0.883544921875
+      },
+      {
+       "step": 900,
+       "modes": 5,
+       "hq": 0.728515625
+      },
+      {
+       "step": 950,
+       "modes": 5,
+       "hq": 0.781005859375
+      },
+      {
+       "step": 1000,
+       "modes": 5,
+       "hq": 0.678466796875
+      },
+      {
+       "step": 1050,
+       "modes": 5,
+       "hq": 0.596435546875
+      },
+      {
+       "step": 1100,
+       "modes": 5,
+       "hq": 0.5517578125
+      },
+      {
+       "step": 1150,
+       "modes": 5,
+       "hq": 0.856201171875
+      },
+      {
+       "step": 1200,
+       "modes": 5,
+       "hq": 0.8037109375
+      }
+     ]
+    ],
+    [
+     "mode_loss",
+     {
+      "step": 100,
+      "modes": 3,
+      "peak": 4,
+      "peak_step": 50,
+      "hq": 0.415283203125
+     }
+    ],
+    [
+     "cpu",
+     "AVX2"
+    ]
+   ]
+  },
+  "traj": {
+   "status": "ERROR rc=None",
+   "err": "",
+   "sec": null
+  }
+ }
+]

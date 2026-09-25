@@ -1,0 +1,695 @@
+{
+ "H": {
+  "ae_gan_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "convergence": {
+   "status": "NOT_CONVERGED",
+   "converged_step": null,
+   "hold_checks": 0,
+   "first_hold_failure": null,
+   "settling_failures": 4182,
+   "longest_settling_streak": 136,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "cover_leftover": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "grid100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_bars4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.9375,
+   "suffix": 16,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_blobs4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 1.0,
+   "suffix": 17,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_intensity2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 0.9375,
+   "suffix": 6,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_stripes2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 22,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mid_scale_identity": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "PASS",
+   "modes": 8,
+   "hq": 1.0,
+   "missing": [],
+   "suffix": 6,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.003004056168720126,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "rotated100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "staggered100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "PASS",
+   "identity_mse": 0.0029014339670538902,
+   "suffix": 22,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "two_pole": {
+   "status": "FAIL",
+   "mean_abs": 0.029111897572875023,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unipolar": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unused_token_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.963134765625,
+   "min_mass_ratio": 0.9521484375,
+   "mass_tv": 0.015950515866279602,
+   "covariance_error": 0.06836500018835068,
+   "component_covariance_error": 0.1508509616057078,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_overlap": {
+   "status": "PASS",
+   "covariance_error": 0.2041020393371582,
+   "suffix": 11,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.050329484045505524,
+   "suffix": 23,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.977783203125,
+   "min_mass_ratio": 0.98876953125,
+   "mass_tv": 0.005615234375,
+   "covariance_error": 0.11310938745737076,
+   "component_covariance_error": 0.38665761053562164,
+   "suffix": 21,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_mass": {
+   "status": "FAIL",
+   "hq": 0.975341796875,
+   "min_mass_ratio": 0.7080078125,
+   "mass_tv": 0.027197251096367836,
+   "covariance_error": 0.10321018099784851,
+   "component_covariance_error": 1.2601899094879627,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_width": {
+   "status": "PASS",
+   "hq": 0.985107421875,
+   "min_mass_ratio": 0.8935546875,
+   "mass_tv": 0.04736328125,
+   "covariance_error": 0.028733322396874428,
+   "component_covariance_error": 0.3966468572616577,
+   "suffix": 19,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ },
+ "PR107": {
+  "convergence": {
+   "status": "NOT_CONVERGED",
+   "converged_step": null,
+   "hold_checks": 0,
+   "first_hold_failure": null,
+   "settling_failures": 1348,
+   "longest_settling_streak": 178,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 8,
+   "hq": 0.9794921875,
+   "missing": [],
+   "suffix": 2,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "FAIL",
+   "identity_mse": 0.2566015422344208,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ },
+ "PR140": {
+  "convergence": {
+   "status": "POST_CONVERGENCE_FAIL",
+   "converged_step": 2291,
+   "hold_checks": 6,
+   "first_hold_failure": 2297,
+   "settling_failures": 38,
+   "longest_settling_streak": 200,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 8,
+   "hq": 0.9794921875,
+   "missing": [],
+   "suffix": 2,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "FAIL",
+   "identity_mse": 0.2566015422344208,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ },
+ "PR143": {
+  "convergence": {
+   "status": "POST_CONVERGENCE_FAIL",
+   "converged_step": 3032,
+   "hold_checks": 39,
+   "first_hold_failure": 3071,
+   "settling_failures": 162,
+   "longest_settling_streak": 200,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 8,
+   "hq": 0.9794921875,
+   "missing": [],
+   "suffix": 2,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "FAIL",
+   "identity_mse": 0.2566015422344208,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ },
+ "eps_net_1m": {
+  "ae_gan_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "convergence": {
+   "status": "POST_CONVERGENCE_FAIL",
+   "converged_step": 1770,
+   "hold_checks": 233,
+   "first_hold_failure": 2003,
+   "settling_failures": 330,
+   "longest_settling_streak": 200,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "cover_leftover": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "grid100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_bars4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.9375,
+   "suffix": 9,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_blobs4": {
+   "status": "FAIL",
+   "modes": 2,
+   "hq": 0.75,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_intensity2": {
+   "status": "FAIL",
+   "modes": 2,
+   "hq": 0.59375,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_stripes2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 0.96875,
+   "suffix": 9,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mid_scale_identity": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 7,
+   "hq": 0.807373046875,
+   "missing": [
+    6
+   ],
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.0014238696312531829,
+   "suffix": 14,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "rotated100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "staggered100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "PASS",
+   "identity_mse": 0.0014575498644262552,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "two_pole": {
+   "status": "FAIL",
+   "mean_abs": 0.026958223432302475,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unipolar": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unused_token_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.9482421875,
+   "min_mass_ratio": 0.878173828125,
+   "mass_tv": 0.0748697966337204,
+   "covariance_error": 0.0593879371881485,
+   "component_covariance_error": 0.09841712812582652,
+   "suffix": 16,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_overlap": {
+   "status": "PASS",
+   "covariance_error": 0.12641696631908417,
+   "suffix": 23,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.025898972526192665,
+   "suffix": 22,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.97998046875,
+   "min_mass_ratio": 0.9921875,
+   "mass_tv": 0.00390625,
+   "covariance_error": 0.06931784003973007,
+   "component_covariance_error": 0.47664453089237213,
+   "suffix": 21,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_mass": {
+   "status": "FAIL",
+   "hq": 0.975341796875,
+   "min_mass_ratio": 0.6103515625,
+   "mass_tv": 0.04155272990465164,
+   "covariance_error": 0.051841385662555695,
+   "component_covariance_error": 0.659389540553093,
+   "suffix": 2,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_width": {
+   "status": "PASS",
+   "hq": 0.9521484375,
+   "min_mass_ratio": 0.9228515625,
+   "mass_tv": 0.019287109375,
+   "covariance_error": 0.051213108003139496,
+   "component_covariance_error": 0.629130806773901,
+   "suffix": 16,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ },
+ "shared_column_rms": {
+  "ae_gan_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "convergence": {
+   "status": "POST_CONVERGENCE_FAIL",
+   "converged_step": 1433,
+   "hold_checks": 43,
+   "first_hold_failure": 1476,
+   "settling_failures": 4,
+   "longest_settling_streak": 200,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "cover_leftover": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "grid100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_bars4": {
+   "status": "FAIL",
+   "modes": 4,
+   "hq": 0.84375,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_blobs4": {
+   "status": "FAIL",
+   "modes": 4,
+   "hq": 0.875,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_intensity2": {
+   "status": "FAIL",
+   "modes": 1,
+   "hq": 0.4375,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_stripes2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 0.96875,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mid_scale_identity": {
+   "status": "PASS",
+   "suffix": 6,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 8,
+   "hq": 0.975341796875,
+   "missing": [],
+   "suffix": 2,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.0018332318868488073,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "rotated100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "staggered100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "PASS",
+   "identity_mse": 0.0017237103311344981,
+   "suffix": 21,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "two_pole": {
+   "status": "PASS",
+   "mean_abs": 0.9586283564567566,
+   "suffix": 21,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unipolar": {
+   "status": "PASS",
+   "suffix": 7,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unused_token_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.979248046875,
+   "min_mass_ratio": 0.94482421875,
+   "mass_tv": 0.018391922116279602,
+   "covariance_error": 0.04098131135106087,
+   "component_covariance_error": 0.13961915920178095,
+   "suffix": 17,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_overlap": {
+   "status": "PASS",
+   "covariance_error": 0.0942835658788681,
+   "suffix": 23,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.01201922632753849,
+   "suffix": 22,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.975341796875,
+   "min_mass_ratio": 0.98974609375,
+   "mass_tv": 0.005126953125,
+   "covariance_error": 0.013951264321804047,
+   "component_covariance_error": 0.2716286815702915,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_mass": {
+   "status": "FAIL",
+   "hq": 0.97021484375,
+   "min_mass_ratio": 0.732421875,
+   "mass_tv": 0.03276366740465164,
+   "covariance_error": 0.08269492536783218,
+   "component_covariance_error": 0.896242406219244,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_width": {
+   "status": "FAIL",
+   "hq": 0.974365234375,
+   "min_mass_ratio": 0.9384765625,
+   "mass_tv": 0.0166015625,
+   "covariance_error": 0.032312314957380295,
+   "component_covariance_error": 0.3441632427275181,
+   "suffix": 2,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ },
+ "shared_rms": {
+  "ae_gan_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "convergence": {
+   "status": "POST_CONVERGENCE_FAIL",
+   "converged_step": 2061,
+   "hold_checks": 10,
+   "first_hold_failure": 2071,
+   "settling_failures": 96,
+   "longest_settling_streak": 200,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "cover_leftover": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "grid100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_bars4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.90625,
+   "suffix": 6,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_blobs4": {
+   "status": "FAIL",
+   "modes": 2,
+   "hq": 0.375,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_intensity2": {
+   "status": "FAIL",
+   "modes": 1,
+   "hq": 0.5,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "img_stripes2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 0.96875,
+   "suffix": 17,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mid_scale_identity": {
+   "status": "PASS",
+   "suffix": 6,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "mode_hold": {
+   "status": "PASS",
+   "modes": 8,
+   "hq": 0.986572265625,
+   "missing": [],
+   "suffix": 11,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.001714951591566205,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "rotated100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "staggered100": {
+   "status": "FAIL",
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "trajectory": {
+   "status": "PASS",
+   "identity_mse": 0.0016380101442337036,
+   "suffix": 21,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "two_pole": {
+   "status": "PASS",
+   "mean_abs": 0.9586283564567566,
+   "suffix": 21,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unipolar": {
+   "status": "PASS",
+   "suffix": 7,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "unused_token_hold": {
+   "status": "FAIL",
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.96728515625,
+   "min_mass_ratio": 0.97265625,
+   "mass_tv": 0.010172531008720398,
+   "covariance_error": 0.03888121247291565,
+   "component_covariance_error": 0.11065463970104854,
+   "suffix": 16,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_overlap": {
+   "status": "PASS",
+   "covariance_error": 0.10218489915132523,
+   "suffix": 23,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.045635972172021866,
+   "suffix": 22,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.985595703125,
+   "min_mass_ratio": 0.99951171875,
+   "mass_tv": 0.000244140625,
+   "covariance_error": 0.006499407812952995,
+   "component_covariance_error": 0.3509194888174534,
+   "suffix": 20,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_mass": {
+   "status": "FAIL",
+   "hq": 0.972900390625,
+   "min_mass_ratio": 0.24789664149284363,
+   "mass_tv": 0.11264646798372269,
+   "covariance_error": 0.3670768141746521,
+   "component_covariance_error": 1.7509761340916157,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "vector_unequal_width": {
+   "status": "FAIL",
+   "hq": 0.957275390625,
+   "min_mass_ratio": 0.9345703125,
+   "mass_tv": 0.030029296875,
+   "covariance_error": 0.026876838877797127,
+   "component_covariance_error": 0.8646308928728104,
+   "suffix": 0,
+   "gpu": "NVIDIA GeForce RTX 4090"
+  }
+ }
+}

@@ -1,0 +1,34 @@
+{
+  "candidate": "optimistic_adam",
+  "declared_utc": "2026-09-24T23:36:57.946003+00:00",
+  "description": "On every D/G Adam call, compute the ordinary Adam direction u_t=(theta_adam-theta)/lr_t; apply theta += lr_t*(2*u_t-u_previous). First call uses ordinary Adam. Previous direction is uncorrected and scaled with the CURRENT group learning rate, preserving original decay. Both players and all original optimizer groups participate, including auxiliary-loss gradients; no target information.",
+  "source": "prepared/repos/cuda",
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/configs/toy100/constraints_simple_regularization.json",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "file_hashes": {
+    "probe.py": "411d9e5c784579c7aed6d7c3fe772c4426c3936f2ba7700886a1fef3f1591b86",
+    "mechanism.py": "7254983414d5d248a097a234ad853a816045c0140f6010217e15a57ef5e37628"
+  },
+  "initialization": "retained audited CPU fixtures; native CUDA training and random draws",
+  "invariants": [
+    "architectures",
+    "data",
+    "fixed seeds",
+    "loss and critic regularizer",
+    "all auxiliary AE/token losses",
+    "noise schedules",
+    "learning-rate schedules",
+    "evaluation",
+    "thresholds",
+    "outer step budgets"
+  ],
+  "compute": {
+    "extra_forward_evaluations_per_outer_step": 0,
+    "extra_backward_evaluations_per_outer_step": 0,
+    "extra_optimizer_updates": 0,
+    "base_updates": "one D and one G per host outer step; no added critic steps",
+    "comparison": "equal outer steps and equal model/gradient evaluations; added tensor arithmetic/memory, wall time measured"
+  },
+  "checkpoint": "memory stored in optimizer state; qualification continuation required after all 22"
+}

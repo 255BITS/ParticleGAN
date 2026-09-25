@@ -1,0 +1,27 @@
+{
+  "candidate": "density_mobility",
+  "mechanism": "Multiplicity-averaged sampled gradients and ordinary particle Adam. Before its update, compute active-row latent Gaussian-kernel densities using bandwidth median(pairwise squared distances)/log(active_rows+1), bounded below by optimizer epsilon. Postcondition each row displacement with inverse sqrt density, normalized to RMS multiplier one over active rows. No clipping and no direct repulsive force; all movement remains derived from GAN/unchanged auxiliary gradients.",
+  "rationale": "Moment clocks and shared-coordinate/covariance changes all preserve unequal mass but cannot recover ring coverage. Test spatially differentiated mobility: isolated latent particles should not receive the same movement suppression as crowded ones. Particle positions and gradients only; no targets, mode labels, centers, real statistics or metrics.",
+  "extra_forward_backward": 0,
+  "optimizer_updates": "One D plus one G/particle update per frozen iteration; particle custom update substitutes original Adam table update.",
+  "extra_work": "O(A^2*d) pairwise latent distances, O(A^2) kernel/median/reduction, plus table clone and row displacement scaling; A is active rows, never an added sampled batch. No network forwards/backwards or optimizer steps added. Equal-step, not equal-compute. Own-state serialization is observation-only.",
+  "unchanged": [
+    "critic/objective",
+    "network Adam",
+    "architecture",
+    "data",
+    "seeds",
+    "RNG",
+    "evaluation",
+    "thresholds",
+    "budgets",
+    "decay/noise schedules",
+    "AE/token auxiliary terms"
+  ],
+  "code_sha256": {
+    "probe.py": "a02621b463291790785096bf27c6e9d3bb0ad655aff5410d775e4797216f2b3e",
+    "particle_update.py": "ca01891064b75d3f5f87010541d9dfbe8e1fa3674eb64e050f65fe9c1112a374"
+  },
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+}

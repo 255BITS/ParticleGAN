@@ -1,0 +1,173 @@
+{
+  "seconds": 2.4015810599084944,
+  "shared_gate_eligible": false,
+  "stages": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/trajectory/eps_net_1m/trajectory/episodes/eps_net_1m__trajectory.json.gz",
+      "candidate": "eps_net_1m",
+      "checkpoint_sha256": "b7a4865ab0d6098a732521c092fbb3eff740d894152c727e56dcd612f37a3457",
+      "gate": "trajectory",
+      "metrics": {
+        "frozen_evidence_audit": "PASS",
+        "live": {
+          "identity_mse": 0.0017528926255181432
+        },
+        "observations": [
+          {
+            "identity_mse": 0.23902440071105957,
+            "seconds": 0.9524800931103528,
+            "step": 17
+          },
+          {
+            "identity_mse": 0.08329449594020844,
+            "seconds": 1.008719181176275,
+            "step": 34
+          },
+          {
+            "identity_mse": 0.04220271483063698,
+            "seconds": 1.0611354631837457,
+            "step": 50
+          },
+          {
+            "identity_mse": 0.018327880650758743,
+            "seconds": 1.1199309821240604,
+            "step": 67
+          },
+          {
+            "identity_mse": 0.013094891794025898,
+            "seconds": 1.1785956812091172,
+            "step": 84
+          },
+          {
+            "identity_mse": 0.01055154949426651,
+            "seconds": 1.2309013220947236,
+            "step": 100
+          },
+          {
+            "identity_mse": 0.008222063072025776,
+            "seconds": 1.2863936971407384,
+            "step": 117
+          },
+          {
+            "identity_mse": 0.004881211090832949,
+            "seconds": 1.3419324420392513,
+            "step": 134
+          },
+          {
+            "identity_mse": 0.0042722406797111034,
+            "seconds": 1.3947611961048096,
+            "step": 150
+          },
+          {
+            "identity_mse": 0.003358701942488551,
+            "seconds": 1.4505160821136087,
+            "step": 167
+          },
+          {
+            "identity_mse": 0.0031354324892163277,
+            "seconds": 1.5093739910516888,
+            "step": 184
+          },
+          {
+            "identity_mse": 0.003102033631876111,
+            "seconds": 1.5694578860420734,
+            "step": 200
+          },
+          {
+            "identity_mse": 0.0034518418833613396,
+            "seconds": 1.626941179158166,
+            "step": 217
+          },
+          {
+            "identity_mse": 0.0028939200565218925,
+            "seconds": 1.686833213083446,
+            "step": 234
+          },
+          {
+            "identity_mse": 0.0024578061420470476,
+            "seconds": 1.738871003035456,
+            "step": 250
+          },
+          {
+            "identity_mse": 0.0022809274960309267,
+            "seconds": 1.79377238615416,
+            "step": 267
+          },
+          {
+            "identity_mse": 0.002482048235833645,
+            "seconds": 1.8486446482129395,
+            "step": 284
+          },
+          {
+            "identity_mse": 0.002153502544388175,
+            "seconds": 1.9007644590456039,
+            "step": 300
+          },
+          {
+            "identity_mse": 0.0020553225185722113,
+            "seconds": 1.9569834270514548,
+            "step": 317
+          },
+          {
+            "identity_mse": 0.0018859109841287136,
+            "seconds": 2.0118763190694153,
+            "step": 334
+          },
+          {
+            "identity_mse": 0.001718251034617424,
+            "seconds": 2.0644928622059524,
+            "step": 350
+          },
+          {
+            "identity_mse": 0.001640197355300188,
+            "seconds": 2.1200286271050572,
+            "step": 367
+          },
+          {
+            "identity_mse": 0.0019186899298802018,
+            "seconds": 2.1754700320307165,
+            "step": 384
+          },
+          {
+            "identity_mse": 0.0017528926255181432,
+            "seconds": 2.2286846470087767,
+            "step": 400
+          }
+        ],
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.335,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 1.3419324420392513,
+            "confirmed_step": 134,
+            "first_pass_step": 67,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 21,
+            "passing_suffix": 21,
+            "stable_from_seconds": 1.1199309821240604,
+            "stable_from_step": 67
+          },
+          "metrics": [
+            {
+              "margin": 0.018247107374481857,
+              "metric": "identity_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.02,
+              "value": 0.0017528926255181432
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "seconds": 2.4007714258041233,
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "tag": "eps_net_1m"
+}

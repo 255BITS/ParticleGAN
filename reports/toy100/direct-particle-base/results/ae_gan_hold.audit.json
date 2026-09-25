@@ -1,0 +1,148 @@
+{
+  "candidate": "direct_particle_response",
+  "gate": "ae_gan_hold",
+  "status": "PASS",
+  "seconds": 5.652417114004493,
+  "metrics": {
+    "recon_mse": 0.01729346066713333,
+    "hold": 0.004051064141094685
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/ae_gan_hold/result.json",
+  "updates": {
+    "adam_calls": 500,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            32,
+            2
+          ],
+          "sha256": "e44532ce45e766d0eb0bfa92722746a06a43af486f52378de032b947f371cac1"
+        },
+        {
+          "shape": [
+            32
+          ],
+          "sha256": "021a7b9200941e66c498cda405279f3d8e0b8f9078e49ab762308466f9ae98a7"
+        },
+        {
+          "shape": [
+            2,
+            32
+          ],
+          "sha256": "2263c153cb98afaddf13b791ce34f69fa590a6b31fb1184869f6685099b50961"
+        },
+        {
+          "shape": [
+            2
+          ],
+          "sha256": "95da357b0637893fe9e9415c976536f87d9fcd002fe979a7b00f857d5b7f34f7"
+        },
+        {
+          "shape": [
+            32,
+            2
+          ],
+          "sha256": "74bade6e88c4eccd54972c0985f3f485595dd18e40554627e8abd1e6a62b1441"
+        },
+        {
+          "shape": [
+            32
+          ],
+          "sha256": "2691c8a87f34dd995233e7039ee51fefcb80783769c0b51eebaf8bf30b43c840"
+        },
+        {
+          "shape": [
+            4,
+            32
+          ],
+          "sha256": "a943de72bbed3b64ded4485a4bd928c2130f8359119bd38ac144a419c89cb22b"
+        },
+        {
+          "shape": [
+            4
+          ],
+          "sha256": "fc6ed12e1c2ce91f4327546d68bd949a7a176d956365972b932c14b6ac13429e"
+        },
+        {
+          "shape": [
+            12,
+            2
+          ],
+          "sha256": "46e82db66fbd8858a214e26cf7f8be3ab5639ef7cedd23f405c7c149f05b1539"
+        }
+      ],
+      [
+        {
+          "shape": [
+            32,
+            2
+          ],
+          "sha256": "539ff5dad17ce8441e11c1db7e37d5cc141050c5015490dd867bc1d454440cbe"
+        },
+        {
+          "shape": [
+            32
+          ],
+          "sha256": "1aec59aa4600039f4d8293643d5792e55b5a6d0b3a78a1c6dfe273e14f1fbba9"
+        },
+        {
+          "shape": [
+            1,
+            32
+          ],
+          "sha256": "044bb17336bbf6a66755a1d89e92c1fc68aa9415d60c5a68fe360245df026805"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "bc420078b36c57f6abce8ab0675fb994b9d231f8f4d5bddea4f69f478380a324"
+        }
+      ]
+    ],
+    "optimizers": {
+      "133470664616576": {
+        "calls": 250,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "133470607461792": {
+        "calls": 250,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 22,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 22,
+    "first_pass_step": 32,
+    "stable_from_step": 32,
+    "stable_from_seconds": 1.2538148709572852,
+    "confirmed_step": 73,
+    "confirmed_seconds": 2.1559758640360087
+  },
+  "code_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "fixture_sha256": "1e4d4f04d8ce7ea51fe56eeddac21b22a7db5c04dabc7b1d8e7e9d5a221eb78e",
+  "declaration_sha256": "2b71d3414c66ddebf59e3dbaf8893e6e4a4f310ad58fa506a16c5246be5e7b03",
+  "audit": "PASS"
+}

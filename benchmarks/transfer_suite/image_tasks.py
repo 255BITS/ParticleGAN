@@ -16,9 +16,13 @@ import traceback
 
 import torch
 from torch import nn
+
+from benchmarks.toy100.device import host_device, rng_fork_devices
 import torch.nn.functional as F
 
-from particlegan import GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer
+from particlegan import ParticlePrior, ParticleRegularizer
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from benchmarks.locked_shared.observation import sustained
 from benchmarks.smart_descent.controller import GradientFeedback
 from benchmarks.smart_descent.evaluate import FixedControl
@@ -156,7 +160,7 @@ def fingerprint():
     names = [Path(__file__), root / "benchmarks/smart_descent/controller.py",
              root / "benchmarks/smart_descent/evaluate.py", root / "benchmarks/learned_lr_evaluation.py",
              root / "benchmarks/locked_shared/observation.py", *sorted((root / "particlegan").glob("*.py"))]
-    return dict(version="transfer-images-v1", seed=0, device="cpu", torch_threads=1,
+    return dict(version="transfer-images-v1", seed=0, device=str(host_device()), torch_threads=1,
                 python=platform.python_version(), torch=torch.__version__,
                 torch_git_revision=torch.version.git_version, machine=platform.machine(),
                 torch_build=torch.__config__.show(),
@@ -167,7 +171,7 @@ def fingerprint():
 def measure(generator, prior, centers, thresholds):
     # Enumerate the exact finite prior: no evaluation RNG, no sampled coverage.
     # fork_rng additionally protects training if measurement later gains RNG.
-    with torch.random.fork_rng(devices=[]):
+    with torch.random.fork_rng(devices=rng_fork_devices()):
         return image_metrics(generator(prior.z), centers, thresholds)
 
 
@@ -256,7 +260,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--tasks", nargs="*", choices=[spec["name"] for spec in TASKS])
     parser.add_argument("--schedule", choices=("cosine", "constant"), default="cosine")
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     args.output.mkdir(parents=True, exist_ok=True)
     selected = [spec for spec in TASKS if not args.tasks or spec["name"] in args.tasks]
     policy = dict(weights=torch.zeros(2, 2, 5).tolist(), schedule=args.schedule)

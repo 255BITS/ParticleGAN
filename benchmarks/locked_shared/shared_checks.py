@@ -39,6 +39,7 @@ def orbit():
 def erase_keep():
     from conceptmod.backends import load_backend
     from conceptmod.toys import erase_keep_backend as host
+    # Named CPU reference backend for the conceptmod parity check, not the experiment device.
     raw = host.score_backend(load_backend("cpu", device="cpu", lora_rank=4, seed=0), "locked", name="cpu", seed=0)
     result = numeric(raw, [("teacher_leak", "<=", host.LEAK_RATIO_MAX), ("u_kept", ">=", host.U_KEPT_MIN),
                            ("pole_rel_err", "<=", host.POLE_REL_ERR_MAX), ("same_dir", "<=", host.SAME_DIR_MAX)])

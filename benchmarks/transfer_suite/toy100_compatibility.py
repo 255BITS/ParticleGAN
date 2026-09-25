@@ -6,7 +6,7 @@ settings and the two target-agnostic noise wrappers come from the supplied
 100-mode configuration. This is a transfer screen, not part of the canonical
 19-case public-default verification or a search over host settings.
 
-python -u -m benchmarks.transfer_suite.toy100_compatibility \
+python -u -m benchmarks.transfer_suite.toy100_compatibility --device auto \
     --config configs/toy100/shared_candidate.json --output /tmp/toy100-vector-screen
 """
 from __future__ import annotations
@@ -25,6 +25,10 @@ import traceback
 
 import torch
 
+from benchmarks.toy100.device import (
+    add_device_argument, apply_device_policy, experiment_generator, host_device,
+    rng_fork_devices,
+)
 from benchmarks.toy100.models import (
     InputNoise, IsolatedOutputNoise, OutputNoise, OUTPUT_NOISE_SEED_OFFSET,
     StatefulInputNoise,
@@ -33,7 +37,8 @@ from benchmarks.toy100.models import (
 )
 from benchmarks.toy100.train import AFFINE_MODEL_POLICIES, load_config, resolve_config
 from lib.toy_models import SimpleMLPGenerator
-from particlegan import GANTrainer, get_recipe
+from particlegan import GANTrainer
+from benchmarks.legacy.recipe import get_recipe
 
 from . import image_tasks, suite, vector_tasks
 from .compare_defaults import ema_verdict
@@ -44,6 +49,7 @@ from .public_default_verification import (
     optimizer_receipts, public_module_manifest, rate_action,
     shape_receipt, vector_discriminator, write,
 )
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -111,7 +117,7 @@ def declared_recipe(config: dict):
         raise ValueError("output_noise_rng must be 'isolated' when declared")
     resolved, _ = resolve_config(candidate)
     globals_only = {name: resolved[name] for name in GLOBAL_RECIPE_FIELDS}
-    recipe = get_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
+    recipe = gan_v3_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)
@@ -219,7 +225,7 @@ def setup_vector(spec, card, base, noise):
         if noise.get("output_noise_rng") == "isolated":
             generator = IsolatedOutputNoise(
                 generator, noise["output_noise_std"], seed=0,
-                device=torch.device("cpu"),
+                device=host_device(),
                 learnable=noise.get("output_noise_learnable", False),
             )
         else:
@@ -232,14 +238,14 @@ def setup_vector(spec, card, base, noise):
     if noise["input_noise_std"]:
         input_wrapper = (StatefulInputNoise if noise.get("output_noise_rng") == "isolated"
                          else InputNoise)
-        discriminator = input_wrapper(discriminator, seed=901, device=torch.device("cpu"))
+        discriminator = input_wrapper(discriminator, seed=901, device=host_device())
     trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                          latent_generator=latent_rng, penalty_generator=penalty_rng)
     # Shape probing must not consume the generator's training-noise stream.
     isolated = noise.get("output_noise_rng") == "isolated"
     shape_noise = (paired_output_noise((trainer.G, trainer.ema_G), seed=402)
                    if isolated else nullcontext())
-    with torch.random.fork_rng(devices=[]), shape_noise:
+    with torch.random.fork_rng(devices=rng_fork_devices()), shape_noise:
         shapes = shape_receipt(trainer, cfg["batch"], (2,))
     # Match the noise wrapper's declared fixed-seed stream after construction.
     if noise["output_noise_std"] and not isolated:
@@ -316,7 +322,7 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
             if noise.get("output_noise_rng") == "isolated":
                 before_live = _output_stream_sha256(trainer.G)
                 before_ema = _output_stream_sha256(trainer.ema_G)
-            with torch.no_grad(), torch.random.fork_rng(devices=[]), paired:
+            with torch.no_grad(), torch.random.fork_rng(devices=rng_fork_devices()), paired:
                 if noise.get("output_noise_rng") == "isolated":
                     before_draws = (
                         int(trainer.G.noise_draw_calls),
@@ -381,7 +387,7 @@ def setup_image(spec, base, noise):
         if noise.get("output_noise_rng") == "isolated":
             generator = IsolatedOutputNoise(
                 generator, noise["output_noise_std"], seed=0,
-                device=torch.device("cpu"),
+                device=host_device(),
                 learnable=noise.get("output_noise_learnable", False),
             )
         else:
@@ -394,14 +400,14 @@ def setup_image(spec, base, noise):
     if noise["input_noise_std"]:
         input_wrapper = (StatefulInputNoise if noise.get("output_noise_rng") == "isolated"
                          else InputNoise)
-        discriminator = input_wrapper(discriminator, seed=901, device=torch.device("cpu"))
-    global_stream = torch.default_generator
+        discriminator = input_wrapper(discriminator, seed=901, device=host_device())
+    global_stream = experiment_generator()
     trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                          latent_generator=global_stream, penalty_generator=global_stream)
     isolated = noise.get("output_noise_rng") == "isolated"
     shape_noise = (paired_output_noise((trainer.G, trainer.ema_G), seed=402)
                    if isolated else nullcontext())
-    with torch.random.fork_rng(devices=[]), shape_noise:
+    with torch.random.fork_rng(devices=rng_fork_devices()), shape_noise:
         shapes = shape_receipt(trainer, spec["batch_size"], (1, 8, 8))
     if noise["output_noise_std"] and not isolated:
         torch.manual_seed(0)
@@ -554,9 +560,9 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
     protocol["source_sha256"][str(NOISE_SOURCE.relative_to(ROOT))] = noise_hash
     shutil.copyfile(NOISE_SOURCE, output / "noise_source.py")
     (output / config_path.name).write_bytes(config_bytes)
-    protocol.update(version="toy100-compatibility-screen-v1", seed=0, device="cpu",
+    protocol.update(version="toy100-compatibility-screen-v1", seed=0, device=str(host_device()),
                     threads=1, fixed_tasks=list(tasks), jobs=selected_jobs,
-                    global_recipe=base.to_dict(), noise=noise,
+                    global_recipe=legacy_dict(base), noise=noise,
                     ignored_toy100_resource_overrides=resource_overrides,
                     frozen_discriminators=profile["discriminators"],
                     config_file=config_path.name,
@@ -648,7 +654,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
         record = dict(name=spec["name"], route=route,
                       noise_applied=noise_applied,
                       noise_receipt=receipt,
-                      recipe=base.to_dict(), host_recipe=context["host_recipe"].to_dict(),
+                      recipe=legacy_dict(base), host_recipe=legacy_dict(context["host_recipe"]),
                       noise=noise, original_spec=deepcopy(job["spec"]), spec=spec,
                       discriminator_variant=variant,
                       architecture=variant["name"] if variant else job["architecture"],
@@ -689,7 +695,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
          full_mechanism=full_mechanism,
          tasks=list(tasks),
          config_sha256=protocol["config_sha256"],
-         global_recipe=base.to_dict(), noise=noise,
+         global_recipe=legacy_dict(base), noise=noise,
          cases=[dict(name=row["name"], live=row["verdict"]["status"],
                      ema=row["ema_verdict"]["status"],
                      observations=row["observations"], live_final=row["live"],
@@ -711,7 +717,9 @@ if __name__ == "__main__":
     parser.add_argument("--all", action="store_true",
                         help="screen all 19 with shared noise on every host")
     parser.add_argument("--tasks", nargs="+", help="bounded named-task screen (always INCOMPLETE)")
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     if sum(bool(x) for x in (args.remaining, args.all, args.tasks)) > 1:
         parser.error("--remaining, --all and --tasks are mutually exclusive")
     all_names = tuple(job["spec"]["name"] for job in load_declaration()[0])

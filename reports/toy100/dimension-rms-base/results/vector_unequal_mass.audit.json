@@ -1,0 +1,107 @@
+{
+  "status": "PASS",
+  "checks": [
+    "declared expected spec",
+    "frozen thresholds/data/evaluation/budget",
+    "unchanged initialization/RNG/schedule/actions",
+    "frozen sustained verdict",
+    "all CUDA Adam state/parameters/gradients",
+    "FP32",
+    "candidate hashes",
+    "1614 frozen source files"
+  ],
+  "row": {
+    "candidate": "dimension_rms_hybrid",
+    "gate": "vector_unequal_mass",
+    "status": "PASS",
+    "seconds": 47.22445163386874,
+    "metrics": {
+      "sw1_normalized": 0.07385804215683149,
+      "mean_error": 0.10102489590644836,
+      "covariance_error": 0.0987020879983902,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.04936522990465164,
+      "min_mass_ratio": 0.880784273147583,
+      "hq": 0.977294921875,
+      "component_covariance_error": 0.30979160219430923,
+      "component_covariance_errors": [
+        0.26191380620002747,
+        0.1706746220588684,
+        0.3224935829639435,
+        0.4840843975543976
+      ],
+      "component_min_eigen_ratio": 0.3885263204574585,
+      "component_mass": [
+        0.517333984375,
+        0.349365234375,
+        0.114501953125,
+        0.018798828125
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2119,
+        1431,
+        469,
+        77
+      ]
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/candidates/dimension_rms_hybrid/vector_unequal_mass/result.json",
+    "updates": {
+      "adam_calls": 2400,
+      "optimizers": {
+        "135025788368128": {
+          "calls": 1200,
+          "device": "cuda:0",
+          "state_devices": [
+            "cuda:0"
+          ],
+          "parameter_dtypes": [
+            "torch.float32"
+          ]
+        },
+        "135025788362848": {
+          "calls": 1200,
+          "device": "cuda:0",
+          "state_devices": [
+            "cuda:0"
+          ],
+          "parameter_dtypes": [
+            "torch.float32"
+          ]
+        }
+      }
+    },
+    "regularizer_receipt": {
+      "calls": 1200,
+      "dimensions": {
+        "2": 1200
+      },
+      "extra_critic_forwards": 0
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 17,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 10,
+      "first_pass_step": 300,
+      "stable_from_step": 750,
+      "stable_from_seconds": 29.80971128004603,
+      "confirmed_step": 950,
+      "confirmed_seconds": 37.43485454306938
+    },
+    "audit": "PASS",
+    "code_hashes": {
+      "probe.py": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+      "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+      "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    "declaration_sha256": "e7ee88ba27449816f86b13a1de4ce64a62b782441c94b40cc6e9cd177889044d"
+  }
+}

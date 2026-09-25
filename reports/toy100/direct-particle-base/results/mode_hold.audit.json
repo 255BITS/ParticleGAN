@@ -1,0 +1,174 @@
+{
+  "candidate": "direct_particle_response",
+  "gate": "mode_hold",
+  "status": "PASS",
+  "seconds": 30.47453643893823,
+  "metrics": {
+    "modes": 8,
+    "hq": 1.0
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/mode_hold/result.json",
+  "updates": {
+    "adam_calls": 2400,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            96,
+            4
+          ],
+          "sha256": "757302169c372e342337576671574f37c9f89264aa0c26a3fe65f5d76fe1dd69"
+        },
+        {
+          "shape": [
+            96
+          ],
+          "sha256": "4f29cc350bfef0135307e22c14d9fc490131bf5815b3565f4efd08536fdbb96e"
+        },
+        {
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "21bc24741572f983ab6a875173b06d3e767af1d028c8750f4569bcc8a5efe197"
+        },
+        {
+          "shape": [
+            96
+          ],
+          "sha256": "b8445bdc77ce9236965c492c361376411339a3d64e9b6c1bc9ed41988da3cdb7"
+        },
+        {
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "676e714043ef70b616b5adb71bca986bd95a6a4f803890c52611237c879df393"
+        },
+        {
+          "shape": [
+            96
+          ],
+          "sha256": "b80f840c59507997918e1befe49284e7aff6e890992d61c9cf3784c5b1302e32"
+        },
+        {
+          "shape": [
+            2,
+            96
+          ],
+          "sha256": "d180f4c10e47e5165d13691f57504266fbf50dc60bfa652474121ef426d3227a"
+        },
+        {
+          "shape": [
+            2
+          ],
+          "sha256": "0073c4578b9d369d5a62aafa8a4b86c59f2e53980216aa7d7a19a1411dfb27ee"
+        },
+        {
+          "shape": [
+            12,
+            4
+          ],
+          "sha256": "939cd5882941e96326c50f0ffb2bb21ac5940dabe3c4b1bbc5bf9143f3d69037"
+        }
+      ],
+      [
+        {
+          "shape": [
+            96,
+            14
+          ],
+          "sha256": "81012b1953266fd0febc6fda84c60ed72ba1764e962e9ee656d351d6f0ed3413"
+        },
+        {
+          "shape": [
+            96
+          ],
+          "sha256": "28b36e9cb15785feafe429769c4903b555164486797e37074dd32dce915eb514"
+        },
+        {
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "25dd4395711b08fd1b693ea0f1ecaaa67c5918275127e4fc222f8cb10ef4984b"
+        },
+        {
+          "shape": [
+            96
+          ],
+          "sha256": "6e2c962ac01946c1f1cb8fdd04baed11910f33d3f256d4e2634adaea20c48b85"
+        },
+        {
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "b981b8f47bd81f54a450cddbdc9caf323709cb408219e6eb7a16f25cc1b5f0d6"
+        },
+        {
+          "shape": [
+            96
+          ],
+          "sha256": "ccfd3969538fdff8c6d0f0d36f2215746e991dd53881284471ff9d55cf029e47"
+        },
+        {
+          "shape": [
+            1,
+            96
+          ],
+          "sha256": "f4be2620809f60b112ee19a1d5bec033151530137b8a037e19fbb7a102a77b22"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "2ead5fdda2f1283ab5a25ea07417ce6524f37c807c5f2f00f2e2115fc8a8aa5e"
+        }
+      ]
+    ],
+    "optimizers": {
+      "139165073110272": {
+        "calls": 1200,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "139165015803616": {
+        "calls": 1200,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 15,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 15,
+    "first_pass_step": 500,
+    "stable_from_step": 500,
+    "stable_from_seconds": 12.987169560976326,
+    "confirmed_step": 700,
+    "confirmed_seconds": 17.843812797917053
+  },
+  "code_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "fixture_sha256": "cb5ddaeb89cd32209466ae3bb0cd1c19eb4d16652128df9bfc825e618200dd08",
+  "declaration_sha256": "2b71d3414c66ddebf59e3dbaf8893e6e4a4f310ad58fa506a16c5246be5e7b03",
+  "audit": "PASS"
+}

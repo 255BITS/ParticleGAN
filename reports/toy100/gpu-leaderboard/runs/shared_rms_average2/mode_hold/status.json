@@ -1,0 +1,86 @@
+{
+  "candidate": "shared_rms_average2",
+  "task": "mode_hold",
+  "status": "PASS",
+  "seconds": 33.73333098995499,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 2400,
+    "optimizers": {
+      "125028607373440": {
+        "calls": 1200,
+        "parameters": 20161,
+        "device": "cuda:0"
+      },
+      "125028628509760": {
+        "calls": 1200,
+        "parameters": 19346,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/shared_rms_average2/mode_hold/result.json",
+  "metrics": {
+    "modes": 8,
+    "hq": 1.0
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "modes",
+        "value": 8,
+        "op": ">=",
+        "threshold": 8,
+        "status": "PASS",
+        "margin": 0
+      },
+      {
+        "metric": "hq",
+        "value": 1.0,
+        "op": ">=",
+        "threshold": 0.9,
+        "status": "PASS",
+        "margin": 0.09999999999999998
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 5,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 5,
+      "first_pass_step": 1000,
+      "stable_from_step": 1000,
+      "stable_from_seconds": 28.16705109202303,
+      "confirmed_step": 1200,
+      "confirmed_seconds": 33.50732175097801
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 1.0
+  }
+}

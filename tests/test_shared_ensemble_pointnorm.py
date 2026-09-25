@@ -3,7 +3,7 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import GradientPenalty
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from benchmarks.transfer_suite.shared_ensemble_research import (
     ARCHITECTURES as ENSEMBLES, constructor as ensemble_constructor,
 )

@@ -1,0 +1,21 @@
+{
+  "candidate": "regression",
+  "gate": "final_frozen_receipt_audit",
+  "status": "PASS",
+  "seconds": 0.19464941881597042,
+  "metrics": {
+    "gpu_gates": 13,
+    "passes": 10,
+    "failures": 3,
+    "verified_source_files": 1614,
+    "verified_native_cuda_rng_matches": 12,
+    "actual_cuda_adam_updates": 20560,
+    "expected_specs_from_declared_candidate": true,
+    "frozen_thresholds_and_actions": true,
+    "all_cpu_fixtures_verified": true,
+    "all_cuda_fp32_and_state": true,
+    "code_config_hashes_verified": true
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/final-audit.json",
+  "code_sha256": "5276217f25974b4372482b63275bd76aeaf889e6a02ff9a0d6f88c0b969b8836"
+}

@@ -1,0 +1,46 @@
+{
+  "candidate": "extragradient",
+  "declared_utc": "2026-09-24T23:50:14.029589+00:00",
+  "description": "Explicit simultaneous stochastic ExtraAdam after all four one-evaluation rules failed. Each frozen outer step uses a joint predictor at current D/G, discards predictor Adam moments, replays the same data/latent/noise RNG states, differentiates both players at the joint prediction, and accepts each corrector update from original weights/moments. D is temporarily restored while G differentiates so fields are simultaneous in each stage. EMA/evaluation and outer clock advance only for accepted correction. Extra work: one full D/G forward/backward block and two Adam preview calls per outer step (2x model/gradient work); original accepted D/G counts, schedules, losses, seed streams, architecture and thresholds remain. Full source snapshots include all nine transformed legacy host functions and native GANTrainer wrapper.",
+  "source": "prepared/repos/cuda",
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/configs/toy100/constraints_simple_regularization.json",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "file_hashes": {
+    "mechanism.py": "c119213afedb049b1f30fc31c6b85e30806a7026ae3d35b0a5aaa13df492d97d",
+    "probe.py": "cff86fa476e2b28416d714e46eb4fee7ce871ae0d741e15b8cac7787386eb7e1",
+    "sources/benchmarks/locked_shared/hosts/ae_gan_hold.py": "b569e7b7e2f72e73b7ea72ba929a87e78d4ec314eb72804f0d70814befeec666",
+    "sources/benchmarks/locked_shared/hosts/cover_leftover.py": "ce56ae99d744ff70076eb43ba091e0bab771cce2a4f961fe56398c08d5a848be",
+    "sources/benchmarks/locked_shared/hosts/mid_scale_identity.py": "b85b164642b0f6102dbe5a1a57ba4b724083382539820f64531a917ae31f7626",
+    "sources/benchmarks/locked_shared/hosts/residual_student.py": "25bac5d25688f46ef1854367d95db94b9851b8bd0e57b96e72142d80540e68e7",
+    "sources/benchmarks/locked_shared/hosts/unipolar.py": "29f862c71279c9f9fa2a716634721fc3c82729ab018b30b02fb029edea21c8cf",
+    "sources/benchmarks/locked_shared/hosts/unused_token_hold.py": "3e1e872d80401c737fd168b09b2e5c33f4d460cbe2c10dae654e3894f8846262",
+    "sources/benchmarks/locked_shared/mode_hold.py": "e3910e261483c266807bc36486586dde330a70fc2f845e413f4c8c0c719d7e4e",
+    "sources/benchmarks/locked_shared/trajectory.py": "40c140d8b4a7a2edae8d61bb8dc938e55dfcf4e3f6a461eeb3fd26299fc5f027",
+    "sources/benchmarks/locked_shared/two_pole.py": "f754836103ff3268ed4e0e5fee93cd358398fa585400427bf6940a1987fa21ff",
+    "transforms.json": "f0805825994db28d60bca60e9e4a60526f215932490470d7e0b09f90ab01c1ff"
+  },
+  "initialization": "retained audited CPU fixtures; native CUDA training and random draws",
+  "invariants": [
+    "architectures",
+    "data",
+    "fixed seeds",
+    "loss and critic regularizer",
+    "all auxiliary AE/token losses",
+    "noise schedules",
+    "learning-rate schedules",
+    "evaluation",
+    "thresholds",
+    "outer step budgets"
+  ],
+  "compute": {
+    "extra_forward_backward_DG_blocks_per_outer_step": 1,
+    "model_gradient_work_multiplier": 2,
+    "extra_optimizer_preview_calls_per_outer_step": 2,
+    "accepted_updates": "one accepted D and G per frozen outer step; predictor Adam moments discarded",
+    "randomness": "same minibatch/noise oracle replayed; no extra stream advancement",
+    "comparison": "equal outer/accepted steps only; NOT equal compute; wall time measured",
+    "extra_tensor_work": "parameter/moment snapshots, RNG snapshots/restoration, joint prediction/correction"
+  },
+  "checkpoint": "memory stored in optimizer state; qualification continuation required after all 22"
+}

@@ -18,6 +18,7 @@ from particlegan import ParticlePrior
 from . import shared_pointnorm_search as runner, suite, vector_tasks
 from .compare_defaults import plan, write
 from .replay_shared_architecture import REPLAY_KEYS, numerical
+from benchmarks.gan_v3 import legacy_dict
 
 
 def inspect_samples(fake, sample_ids, spec):
@@ -58,7 +59,7 @@ def run(reference, output):
     job = next(job for job in plan() if job['spec']['name'] == expected['spec']['name'])
     assert job['spec']['name'] == 'vector_unequal_mass'
     assert expected['original_spec'] == job['spec']
-    assert expected['recipe'] == json.loads(json.dumps(runner.recipe().to_dict()))
+    assert expected['recipe'] == json.loads(json.dumps(legacy_dict(runner.recipe())))
     assert runner.variant(card) == expected['discriminator_variant']
     output.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(1)
@@ -104,5 +105,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(args.reference, args.output)

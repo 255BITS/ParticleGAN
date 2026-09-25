@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "subject": "probe-fast.py",
+  "claim": "identical measurements to probe.py at lower instrumentation cost",
+  "changes": [
+    "cache torch.Tag.nondeterministic_seeded per overload in __torch_dispatch__",
+    "clone parameters/gradients only for recorded mobility steps (plus the preceding step, which gradient_cosine_previous reads)",
+    "stop recomputing the invariant state_devices/parameter_dtypes receipts every step"
+  ],
+  "unchanged": [
+    "audited random operation set",
+    "per-draw sha256 stream digest",
+    "deterministic algorithms, TF32 off, FP32 CUDA training",
+    "optimizer patching, response/mechanism hooks, frozen specs, seeds and budgets"
+  ],
+  "comparison": "replay.py without_timing over status, config, spec, result, verdict, mobility, regularizer_receipt, randomness, response_receipt, plus initial_optimizers, adam_calls and per-optimizer proof",
+  "gates": [
+    {
+      "gate": "ae_gan_hold",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "img_intensity2",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "mode_hold",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "residual_student",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "trajectory",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "two_pole",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "unipolar",
+      "status": "PASS",
+      "identical": true
+    },
+    {
+      "gate": "vector_unequal_width",
+      "status": "FAIL",
+      "identical": true
+    }
+  ],
+  "gates_identical": 8,
+  "measured_seconds": {
+    "note": "interleaved A/B on a loaded host (five concurrent attempts); reference timings in results/*.json.gz were recorded on an idle host and are not comparable",
+    "trajectory": {
+      "probe": [
+        8.83,
+        9.29,
+        8.99,
+        10.1
+      ],
+      "probe_fast": [
+        8.26,
+        8.3,
+        9.23,
+        8.08
+      ]
+    },
+    "mode_hold": {
+      "probe": [
+        41.53,
+        45.21
+      ],
+      "probe_fast": [
+        38.4,
+        42.33
+      ]
+    }
+  },
+  "adoption": "a candidate copying probe-fast.py as its probe.py declares that hash in its own declaration.json; probe.py and the committed bundle hashes are unchanged",
+  "file_hashes": {
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "probe-fast.py": "ded7159292cc0783cdc9ddc10415aa616e114b016663c97ba7332db3281fb808"
+  }
+}

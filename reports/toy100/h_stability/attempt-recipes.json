@@ -1,0 +1,40 @@
+{
+  "selected": "h_n05r06_mixup_c0p01_lr15",
+  "control": "control",
+  "hold_start_step": 1200,
+  "short_budget": 200,
+  "full_hold_budget": 1200,
+  "stop_first_failure": true,
+  "metric": "modes == 8 and HQ >= 0.90 on every update",
+  "fixed_rates": {
+    "g": 0.0015,
+    "d": 0.0015,
+    "prior": 0.003
+  },
+  "attempts": [
+    {
+      "variant": "critic_refresh2",
+      "family": "critic tracking",
+      "change": "Two fresh D updates then one G/prior update at unchanged H rates; no convergence inner loop.",
+      "work": "D2:G1",
+      "hypothesis": "Does a freshly updated critic prevent the early HQ excursions?",
+      "command": "bash run-probe.sh critic_refresh2 outputs/critic_refresh2-screen 200"
+    },
+    {
+      "variant": "average2",
+      "family": "gradient variance",
+      "change": "Average two independent H minibatch gradients for each player, then apply one unchanged Adam step.",
+      "work": "D2:G2 backward work, D1:G1 committed updates",
+      "hypothesis": "Are high-variance game gradients causing the HQ excursions?",
+      "command": "bash run-probe.sh average2 outputs/average2-screen 200"
+    },
+    {
+      "variant": "extra_adam",
+      "family": "game prediction/correction",
+      "change": "Predict one alternating H round, calculate fresh gradients at the lookahead state, restore original model and Adam states, and apply corrected gradients once.",
+      "work": "D2:G2 backward work, D1:G1 provisional and D1:G1 committed updates",
+      "hypothesis": "Does a bounded predictive update reduce rotational instability?",
+      "command": "bash run-probe.sh extra_adam outputs/extra_adam-screen 200"
+    }
+  ]
+}

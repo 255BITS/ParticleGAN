@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "tensor_leaves_equal": 73,
+  "scope": "20 CUDA updates; evaluation every step versus every 10 steps leaves model, Adam, CPU/CUDA/data/input-noise RNG unchanged",
+  "curvature_replay": "PR143 runtime verifies all within-update RNG replays"
+}

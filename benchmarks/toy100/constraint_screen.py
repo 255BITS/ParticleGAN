@@ -105,8 +105,13 @@ def grade(directory, tasks, manifest, row):
 
 
 def worker(root_string, row):
+    import os
     import torch
+    from benchmarks.toy100.device import apply_device_policy
     from benchmarks.transfer_suite.toy100_compatibility import run
+    requested = os.environ.get("TOY100_DEVICE")
+    if requested:
+        apply_device_policy(requested, log=True)
     root = Path(root_string)
     manifest = json.loads((root / "manifest.json").read_text())
     if digest(root / "manifest.json") != (root / "manifest.sha256").read_text().strip():
@@ -186,10 +191,14 @@ def main():
     run = sub.add_parser("run")
     run.add_argument("--output", type=Path, required=True)
     run.add_argument("--workers", type=int, default=2)
+    run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
+                     help="auto uses cuda when available, else cpu")
     args = parser.parse_args()
     if args.command == "prepare":
         prepare(args.base, args.variants, args.output)
     else:
+        from benchmarks.toy100.device import apply_device_policy
+        apply_device_policy(args.device, log=True)
         run_screen(args.output, args.workers)
 
 

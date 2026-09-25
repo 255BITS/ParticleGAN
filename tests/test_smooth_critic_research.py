@@ -5,7 +5,7 @@ import torch
 
 from benchmarks.transfer_suite.smooth_critic_research import ARCHITECTURES, constructor
 from lib.toy_models import SimpleMLPDiscriminator
-from particlegan import GradientPenalty
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 
 
 @pytest.mark.parametrize('card', ARCHITECTURES, ids=lambda c: c['name'])

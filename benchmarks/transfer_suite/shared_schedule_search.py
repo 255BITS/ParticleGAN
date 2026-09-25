@@ -16,11 +16,13 @@ from pathlib import Path
 from unittest.mock import patch
 
 import torch
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import learning_rate_scale
+from benchmarks.legacy.recipe import get_recipe
 from benchmarks import learned_lr_evaluation as bridge
 
 from . import compare_defaults, shared_default_search as reference, shared_profile_search as profile, suite
 from .compare_defaults import write
+from benchmarks.gan_v3 import gan_v3_recipe
 
 
 SCHEDULE_FIELDS = {'lr_anneal_start', 'lr_floor'}
@@ -29,7 +31,7 @@ SCHEDULE_FIELDS = {'lr_anneal_start', 'lr_floor'}
 def prepare(declaration):
     with patch.object(reference, 'OPTIONS', reference.OPTIONS | SCHEDULE_FIELDS):
         jobs, recipes, discriminators = profile.prepare(declaration)
-    base = get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
+    base = gan_v3_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
                                 betas=(0., .99), prior_betas=None, reg_coeff=6.,
                                 reg_kappa=1.25, prior_reg=.05).replace(name='shared_c6')
     for _, recipe in recipes:
@@ -134,5 +136,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--plan', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(json.loads(args.plan.read_text()), args.output)

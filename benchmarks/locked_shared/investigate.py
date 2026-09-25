@@ -12,7 +12,8 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import GANLoss, GradientPenalty
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from . import mode_hold, trajectory, two_pole
 
 
@@ -42,7 +43,10 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("reports/locked_shared/investigation.json"))
     parser.add_argument("--only", nargs="*", help="run only the named candidate(s)")
     parser.add_argument("--resume", action="store_true", help="reuse completed ring rows; fill missing diagnostics")
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     torch.set_num_threads(1)
     report = {"torch": torch.__version__, "seed": 0, "base_recipe": asdict(GAN_V1.replace(name="gan")),
               "budget": {"trajectory": 400, "ring": 1200}, "rows": []}

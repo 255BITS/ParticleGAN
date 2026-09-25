@@ -1,0 +1,18 @@
+{
+  "candidate": "ra_r1r2_shared_coordinate",
+  "description": "C05 Ra R1+R2 combined with shared_coordinate particle update; jointly measured new candidate",
+  "declared_utc": "2026-09-25T00:04:25.928253+00:00",
+  "file_hashes": {
+    "probe.py": "13729130c240a5b8747dbb8812fa1f6dbbf31ccaf3584702e7961cd4253eb2b6",
+    "config.json": "3211ea08a169058dce5f30fed987826f07bc3c3c9a1f08ca8b2d5a69ce2d99c7",
+    "particle_update.py": "30978ca6ecb6a171669aa8ada1941a57034f164882057744990a6d12095d20e2"
+  },
+  "source": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/critic_formulation/20260924T233426Z-2040500/repo/reports/toy100/critic-formulation-attempt/prepared/repos/cuda",
+  "source_manifest": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/critic_formulation/20260924T233426Z-2040500/repo/reports/toy100/critic-formulation-attempt/prepared/prepared-sources.json",
+  "source_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "compute": "One D and one G/prior update per step; no added forward/backward evaluations; original 1200-step primary budgets",
+  "initialization": "Original CPU fixture; native CUDA training and random draws",
+  "schedules": "Original unchanged",
+  "full22": "NOT_RUN",
+  "continuation": "NOT_RUN"
+}

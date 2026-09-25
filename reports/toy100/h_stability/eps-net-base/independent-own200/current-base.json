@@ -1,0 +1,42 @@
+{
+  "candidate": "eps_net_1m",
+  "role": "experimental search base; not release-qualified",
+  "previous_base": "g_threequarter_rate",
+  "declaration": "reports/toy100/h_stability/eps-net-base/declaration.json",
+  "cold_candidate": "reports/toy100/h_stability/eps-net-base/cold/eps_net_1m",
+  "cold_checkpoint_sha256": "112b407dfb58baf9c3b1ce015f3024051524c642163cb5ca07ad71aa86de6b42",
+  "fixed_rates": {
+    "g": 0.0011250000000000001,
+    "d": 0.0015,
+    "prior": 0.0022500000000000003
+  },
+  "options": {
+    "consistency": "mixup",
+    "consistency_coeff": 0.01,
+    "consistency_sigma": 0.1,
+    "noise": "fixed",
+    "sigma": 0.05,
+    "smooth": 0.0,
+    "adam_response": "eps_net_1m"
+  },
+  "epsilon": {
+    "g": 0.001,
+    "d": 0.001,
+    "prior": 1e-08
+  },
+  "acquisition": "cold ring PASS:8 modes, terminal suffix14; two_pole FAIL",
+  "own_state_short_probe": {
+    "status": "PASS",
+    "passing_checks": 200,
+    "checks": 200,
+    "min_hq": 0.9189453125,
+    "final_hq": 0.999755859375,
+    "state_origin": "same-policy own cold acquisition"
+  },
+  "blockers": [
+    "two_pole FAIL:mean_abs0.029888831079006195 <0.30",
+    "full own1200 UNRUN",
+    "other17 older hosts UNRUN",
+    "native100 gates SKIPPED"
+  ]
+}

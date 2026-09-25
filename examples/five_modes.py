@@ -14,14 +14,15 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - One-sided cap gradient penalty on D (`b_cap`, relu(||grad D|| - 1)^2 on the
-    real and fake pairs, coeff 1.0, lib.grad_regularizers). Replaces the inline
-    R1 penalty. Because D here is a *joint* critic D(x, z), the penalty is taken
+  - K3P gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
+    reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
+    plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
     the 100gaussians recipe's penalty on grad_x D(x).
-  - Adam beta1=0 (the particle table is an embedding-like parameter: momentum
-    drifts rows that were not sampled), base LR 6e-4, D at 1.5x, particles at
-    10x.
+  - recipe.make_optimizers(G, D, prior, encoder=E, ...): Adam beta1=0 (the
+    particle table is an embedding-like parameter: momentum drifts rows that
+    were not sampled), base LR 6e-4, D at 1.5x, particles at the recipe's
+    prior multiplier.
   - EMA (0.995) copies of E, G and the prior, used for every dashboard frame:
     the live weights orbit the equilibrium, the averaged copy sits on it.
   - Delayed cosine LR anneal: full LR for the first 60% of the run, then cosine
@@ -55,7 +56,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan import get_recipe, learning_rate_scale  # noqa: E402
+from particlegan import get_recipe, scale_learning_rates  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -175,13 +176,10 @@ def train(
     d_lr_mult: float = 1.5,
     beta1: float = 0.0,
     lambda_ep: float = 1.0,
-    reg_arm: str = "b_cap",
     reg_coeff: float = 1.0,
     ema_decay: float = 0.995,
     lr_floor: float = 0.05,
     lr_anneal_start: float = 0.6,
-    loss_type: str = "logistic",
-    gan_mode: str = "rp",
     viz_interval: int = 50,
     frame_interval: int = 200,
     log_interval: int = 500,
@@ -211,9 +209,12 @@ def train(
     recipe = get_recipe(
         num_particles=NUM_PARTICLES, z_dim=Z_DIM, batch_size=batch_size,
         total_steps=total_steps, lr=lr, d_lr_mult=d_lr_mult, betas=(beta1, 0.999),
-        loss_type=loss_type, gan_mode=gan_mode, reg_arm=reg_arm, reg_coeff=reg_coeff,
+        reg_coeff=reg_coeff,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
+        # This example anneals G/D over the whole run (not the 1,600-update
+        # toy horizon); K3P's blend follows the critic LR either way.
+        network_lr_horizon_cap=None,
     )
     prior = recipe.make_prior().to(device)
 
@@ -227,19 +228,16 @@ def train(
 
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
     gan_loss = recipe.make_loss()
-    regularizer = recipe.make_gradient_penalty()
 
-    # Optimizers
-    # The particles get their own optimizer at 10x LR: they are an
-    # embedding-like table and want far more mobility than the dense nets.
-    opt_GE, opt_D = recipe.make_optimizers(nn.ModuleList([E, G]), D)
-    opt_prior = torch.optim.Adam(prior.parameters(),
-                                 lr=recipe.lr * recipe.prior_lr_mult, betas=recipe.betas)
+    # Optimizers: [E+G, particle table] groups (the table at the recipe's
+    # prior LR multiplier) and the critic. Their step() does the recipe's
+    # step-time work; the critic's also updates the EMA critic we allocate here.
+    opt_GE, opt_D = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
 
-    base_lrs = {
-        id(opt): [g["lr"] for g in opt.param_groups]
-        for opt in (opt_GE, opt_prior, opt_D)
-    }
+    optimizers = (opt_GE, opt_D)
+    base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
+    # K3P gradient penalty (the default), paired with opt_D (EMA critic, LR record).
+    penalty = recipe.make_critic_penalty(opt_D)
 
     loss_D_hist = deque(maxlen=200)
     loss_GE_hist = deque(maxlen=200)
@@ -257,14 +255,9 @@ def train(
     plt.ion()
 
     for step in range(total_steps + 1):
-        # Full LR until lr_anneal_start, then cosine down to lr_floor.
-        # Retain the historical minimum one-update decay duration.
-        anneal_from = lr_anneal_start * total_steps
-        scale = learning_rate_scale(step - anneal_from,
-                                    max(1.0, total_steps - anneal_from), 0.0, lr_floor)
-        for opt in (opt_GE, opt_prior, opt_D):
-            for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
-                group["lr"] = base * scale
+        # Full LR until lr_anneal_start, then cosine down: G/E/D to the
+        # network floor (K3P's blend floor), particles to lr_floor.
+        scale_learning_rates(step, recipe, optimizers, base_lrs, prior)
 
         # --- TRAIN D ---
         opt_D.zero_grad()
@@ -282,21 +275,14 @@ def train(
 
         loss_d = gan_loss.d_loss(pred_real, pred_fake)
 
-        # Gradient penalty on the joint (text, latent) pairs. Caps how steep D
-        # gets where the data is, without forcing it flat the way R1 did.
-        pen, _ = regularizer.penalty(
-            D_joint,
-            join_pair(x_real, z_enc),
-            join_pair(x_gen_soft, z_prior),
-            step,
-        )
-        loss_d = loss_d + pen
+        # K3P gradient penalty on the joint (text, latent) pairs.
+        # D_joint wraps D, so the penalty evaluates the EMA critic the same way.
+        loss_d = loss_d + penalty(D_joint, join_pair(x_real, z_enc), join_pair(x_gen_soft, z_prior))
         loss_d.backward()
         opt_D.step()
 
         # --- TRAIN GE (and Prior) ---
         opt_GE.zero_grad()
-        opt_prior.zero_grad()
 
         # Encoder side of the pair: E wants the real pair to score *low*.
         z_enc = E(x_real)
@@ -317,7 +303,6 @@ def train(
         loss_ge = loss_ge_gan + lambda_ep * loss_vic
         loss_ge.backward()
         opt_GE.step()
-        opt_prior.step()
 
         # EMA update
         with torch.no_grad():

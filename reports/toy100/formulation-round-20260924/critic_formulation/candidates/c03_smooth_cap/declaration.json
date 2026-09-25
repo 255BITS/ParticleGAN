@@ -1,0 +1,11 @@
+{
+  "candidate": "c03_smooth_cap",
+  "declared_at": "2026-09-24T23:39:47.612478+00:00",
+  "mechanism": "Smooth zero-centered radial cap phi(n)=(sqrt(n^2+kappa^2)-kappa)^2, original kappa=1 and coefficient=1. C01 gained ring diversity but strongly suppressed rare-component shape; this weaker quartic pressure below kappa removes the original dead zone while retaining strong-slope control. Rp logistic unchanged.",
+  "changed_fields": {},
+  "preserved": "Adam, architecture, frozen data/seeds/evaluation/budgets, original decay/noise schedules, auxiliary AE/token losses, native CUDA RNG, retained CPU initialization",
+  "compute": "One D and one G/prior Adam update per frozen step; same two sample-point critic input-gradient forwards/backwards and two optimization backwards as b_cap. No added model forwards, backwards, updates, or random draws. Equal-step and equal nominal network compute; scalar loss arithmetic may differ.",
+  "probe_sha256": "6008a4b0baa69ab21500d6f71bc3b3cfd852860f186f85a7b1123d6db4b8ed3b",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "prepared_sources_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2"
+}

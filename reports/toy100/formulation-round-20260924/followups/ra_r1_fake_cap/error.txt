@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/advance.py", line 62, in worker
+    assert r['spec']==expected_spec
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

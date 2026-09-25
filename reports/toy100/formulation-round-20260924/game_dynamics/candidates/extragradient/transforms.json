@@ -1,0 +1,74 @@
+[
+  {
+    "module": "benchmarks.locked_shared.mode_hold",
+    "source": "benchmarks/locked_shared/mode_hold.py",
+    "functions": [
+      "train_mode_hold"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.trajectory",
+    "source": "benchmarks/locked_shared/trajectory.py",
+    "functions": [
+      "train"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.two_pole",
+    "source": "benchmarks/locked_shared/two_pole.py",
+    "functions": [
+      "train"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.hosts.unipolar",
+    "source": "benchmarks/locked_shared/hosts/unipolar.py",
+    "functions": [
+      "_fit_rpgan"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.hosts.ae_gan_hold",
+    "source": "benchmarks/locked_shared/hosts/ae_gan_hold.py",
+    "functions": [
+      "train"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.hosts.cover_leftover",
+    "source": "benchmarks/locked_shared/hosts/cover_leftover.py",
+    "functions": [
+      "fit_cover_leftover"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.hosts.unused_token_hold",
+    "source": "benchmarks/locked_shared/hosts/unused_token_hold.py",
+    "functions": [
+      "train"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.hosts.mid_scale_identity",
+    "source": "benchmarks/locked_shared/hosts/mid_scale_identity.py",
+    "functions": [
+      "_fit"
+    ],
+    "expanded_loops": 1
+  },
+  {
+    "module": "benchmarks.locked_shared.hosts.residual_student",
+    "source": "benchmarks/locked_shared/hosts/residual_student.py",
+    "functions": [
+      "train"
+    ],
+    "expanded_loops": 1
+  }
+]

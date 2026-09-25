@@ -44,7 +44,9 @@ from benchmarks.transfer_suite.public_default_verification import (
 from benchmarks.transfer_suite.toy100_compatibility import (
     VECTOR_NAMES, declared_model_policy, declared_recipe, output_noise_at,
 )
-from particlegan import Recipe, learning_rate_scale
+from particlegan import learning_rate_scale
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe
+from benchmarks.gan_v3 import legacy_dict, legacy_recipe
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -269,7 +271,8 @@ def _check_learned_transfer_noise(record: dict, receipt: dict, noise: dict):
         from lib.toy_models import SimpleMLPGenerator
         import torch
 
-        with torch.random.fork_rng(devices=[]):
+        from benchmarks.toy100.device import rng_fork_devices
+        with torch.random.fork_rng(devices=rng_fork_devices()):
             if record["spec"]["runner"] == "vector":
                 cfg = vector_tasks.resolve(record["spec"])
                 bare = SimpleMLPGenerator(cfg["z_dim"], cfg["hidden"], cfg["layers"], 2)
@@ -746,6 +749,8 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                     <= card["prior_initial_max"] <= max(upper)):
                 raise ValueError(f"100-mode data-box receipt differs: {name}")
             import torch
+            # CPU on purpose: the recorded init-data hash is this sampler's CPU
+            # sequence. A CUDA generator would not be the same draws.
             calibration_stream = torch.Generator(device="cpu").manual_seed(
                 config["seed"] + EMPIRICAL_INIT_SEED_OFFSET,
             )
@@ -858,7 +863,7 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
         saved_config = json.loads(config_bytes)
         base, noise, overrides = declared_recipe(saved_config)
         model_policy = declared_model_policy(saved_config)
-        if (_json_value(base.to_dict()) != protocol["global_recipe"]
+        if (_json_value(legacy_dict(base)) != protocol["global_recipe"]
                 or _noise_identity(noise) != _noise_identity(protocol["noise"])
                 or overrides != protocol["ignored_toy100_resource_overrides"]
                 or model_policy != protocol.get("model_policy", {})):
@@ -926,8 +931,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             if protocol["frozen_profile"] != profile:
                 raise ValueError("public control profile differs from frozen card")
             recipe_fields = protocol["base_get_recipe"]
-        base = Recipe(**recipe_fields)
-        if _json_value(base.to_dict()) != recipe_fields:
+        base = legacy_recipe(recipe_fields)
+        if _json_value(legacy_dict(base)) != recipe_fields:
             raise ValueError("archived recipe does not resolve to declared fields")
         cases = {}
         for row in rows:
@@ -952,7 +957,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 raise ValueError(f"executed spec, budget, threshold, or discriminator differs: {name}")
             expected_host_recipe = (base if expected_spec["runner"] == "legacy"
                                     else host_recipe(base, expected_spec))
-            if record.get("host_recipe") != _json_value(expected_host_recipe.to_dict()):
+            if record.get("host_recipe") != _json_value(legacy_dict(expected_host_recipe)):
                 raise ValueError(f"host resource recipe differs from declaration: {name}")
             if record["source_sha256"] != protocol["source_sha256"]:
                 raise ValueError(f"episode source differs: {name}")
@@ -1149,7 +1154,7 @@ def _toy100_rows(directory: Path):
         passed = sum(row["passed"] for row in cases.values())
         return dict(status=_status(passed, len(PROBLEM_NAMES), complete=True),
                     passed=passed, required=len(PROBLEM_NAMES), cases=cases,
-                    recipe=recipe.to_dict(), noise=noise,
+                    recipe=legacy_dict(recipe), noise=noise,
                     model_policy=model_policy, policy_source_sha256=policy_sources,
                     policy_source_scope=policy_scope,
                     config_sha256=manifest["config_sha256"],
@@ -1281,22 +1286,30 @@ def _run_command(command: list[str], *, cwd: Path, log: Path, env: dict[str, str
     return process.returncode
 
 
-def run(config: Path, output: Path, *, with_default_control: bool = False):
+def run(config: Path, output: Path, *, with_default_control: bool = False,
+        device: str = "auto"):
     config = config.resolve()
     output = output.resolve()
     if output.exists():
         raise FileExistsError("use a new suite output directory")
     output.mkdir(parents=True)
+    from benchmarks.toy100.device import apply_device_policy, host_device
+    apply_device_policy(device, log=True)
+    device_flag = "cuda" if host_device().type == "cuda" else "cpu"
     python = sys.executable
     env = os.environ.copy()
-    env.update(OMP_NUM_THREADS="1", MKL_NUM_THREADS="1", CUDA_VISIBLE_DEVICES="",
-               PYTHONPATH=str(ROOT))
+    env.update(OMP_NUM_THREADS="1", MKL_NUM_THREADS="1", PYTHONPATH=str(ROOT))
+    # CPU runs keep the historical mask so a visible GPU cannot change them.
+    if device_flag == "cpu":
+        env["CUDA_VISIBLE_DEVICES"] = ""
     commands = [
-        ([python, "-u", "-m", "benchmarks.toy100", "run", "--config", str(config),
+        ([python, "-u", "-m", "benchmarks.toy100", "run", "--device", device_flag,
+          "--config", str(config),
           "--output", str(output / "toy100"), "--no-render"], ROOT, output / "toy100.log"),
         ([python, "-u", "-m", "benchmarks.toy100.accuracy_gate", "--output",
           str(output / "toy100")], ROOT, output / "accuracy.log"),
         ([python, "-u", "-m", "benchmarks.transfer_suite.toy100_compatibility",
+          "--device", device_flag,
           "--config", str(config), "--all", "--output", str(output / "candidate19")],
          ROOT, output / "candidate19.log"),
     ]
@@ -1320,6 +1333,7 @@ def run(config: Path, output: Path, *, with_default_control: bool = False):
             if returns["install"] == 0:
                 returns["public19"] = _run_command(
                     [python, "-u", "-m", "benchmarks.transfer_suite.public_default_verification",
+                     "--device", device_flag,
                      "--require-installed-root", str(site), "--output", str(output / "public19")],
                     cwd=Path("/tmp"), log=output / "public19.log", env=installed_env)
     _write(output / "command_returns.json", returns)
@@ -1335,12 +1349,15 @@ def main(argv=None):
                             help="candidate recipe (default: the verified shared 22-toy candidate)")
     run_parser.add_argument("--output", type=Path, required=True)
     run_parser.add_argument("--with-default-control", action="store_true")
+    run_parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
+                            help="auto uses cuda when available, else cpu")
     regrade_parser = commands.add_parser("regrade", help="independently grade saved evidence")
     regrade_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "run":
         result = run(args.config, args.output,
-                     with_default_control=args.with_default_control)
+                     with_default_control=args.with_default_control,
+                     device=args.device)
     else:
         result = regrade(args.output)
     print(json.dumps(dict(status=result["status"], observed_passes=result["observed_passes"],

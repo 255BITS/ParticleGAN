@@ -7,9 +7,16 @@ from pathlib import Path
 import torch
 
 from .mode_hold import train_mode_hold
+from benchmarks.gan_v3 import legacy_dict
 
 
 def main():
+    import argparse
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    parser = argparse.ArgumentParser(description=__doc__)
+    add_device_argument(parser)
+    args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     torch.set_num_threads(1)
     path = Path("reports/locked_shared/base_recipe.json")
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -20,7 +27,7 @@ def main():
         recipe = GAN_V1.replace(total_steps=steps).replace(name="gan")
         print(f"START stock ring recipe steps={steps} particles={recipe.num_particles}", flush=True)
         row = train_mode_hold(training_recipe=recipe, diagnostics=True)
-        report["rows"].append({"recipe": recipe.to_dict(), "ring": row})
+        report["rows"].append({"recipe": legacy_dict(recipe), "ring": row})
         path.write_text(json.dumps(report, indent=2) + "\n")
         print(json.dumps({k: v for k, v in row.items() if k != "curve"}), flush=True)
 

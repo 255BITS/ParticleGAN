@@ -1,0 +1,195 @@
+{
+  "candidate": "direct_particle_response",
+  "gate": "vector_unequal_width",
+  "status": "FAIL",
+  "seconds": 26.683170995907858,
+  "metrics": {
+    "sw1_normalized": 0.03584855854272822,
+    "mean_error": 0.03806459903717041,
+    "covariance_error": 0.012210595421493053,
+    "target_scale": 2.138371229171753,
+    "sample_count": 4096,
+    "mass_tv": 0.0244140625,
+    "min_mass_ratio": 0.9453125,
+    "hq": 0.955810546875,
+    "component_covariance_error": 0.9813211932778358,
+    "component_covariance_errors": [
+      2.7222044467926025,
+      0.5383800864219666,
+      0.3940190076828003,
+      0.270681232213974
+    ],
+    "component_min_eigen_ratio": 0.28422221541404724,
+    "component_mass": [
+      0.2392578125,
+      0.2646484375,
+      0.236328125,
+      0.259765625
+    ],
+    "target_mass": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "component_counts": [
+      980,
+      1084,
+      968,
+      1064
+    ]
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/vector_unequal_width/result.json",
+  "updates": {
+    "adam_calls": 2400,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            64,
+            4
+          ],
+          "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+        },
+        {
+          "shape": [
+            64,
+            64
+          ],
+          "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+        },
+        {
+          "shape": [
+            2,
+            64
+          ],
+          "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+        },
+        {
+          "shape": [
+            2
+          ],
+          "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+        },
+        {
+          "shape": [
+            256,
+            4
+          ],
+          "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+        }
+      ],
+      [
+        {
+          "shape": [
+            128,
+            2
+          ],
+          "sha256": "0cb4ccc8411b14e20a51ab533ea749d222bc96dbe796f0dd2ee68cd66813c9b8"
+        },
+        {
+          "shape": [
+            128
+          ],
+          "sha256": "9cb4be7229a9e8dfcf85540769dc6cc22b4c0b0bde37c011c0e036a8b2f98cdb"
+        },
+        {
+          "shape": [
+            128,
+            128
+          ],
+          "sha256": "dba94662073a2281ded27798f634d4ee9a8d7c317ac409d8e433911e7c8d8c8c"
+        },
+        {
+          "shape": [
+            128
+          ],
+          "sha256": "5e712b8f287f908d1ce1e1395fc79c5a8a23ffc6741aa3e403a044703542fafe"
+        },
+        {
+          "shape": [
+            128,
+            128
+          ],
+          "sha256": "debe983d53a99006dc6bc6cc6eb2b7eb78300e450d1963c263664fa3d91c2786"
+        },
+        {
+          "shape": [
+            128
+          ],
+          "sha256": "39575bbe8e7b4a253c3d3317b4376aee74e7998360dac7c8bfd0ccf767262173"
+        },
+        {
+          "shape": [
+            1,
+            128
+          ],
+          "sha256": "75e11176dd4556ead03c4cf0bc64b0b1b92e8bcde8350af902e9533925036aa8"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "65b702563a3846ed803e4349336201ed36fb3d17c66c7ff53167bb5bcd3a54cf"
+        }
+      ]
+    ],
+    "optimizers": {
+      "127068265946080": {
+        "calls": 1200,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "127068222752144": {
+        "calls": 1200,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 11,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 0,
+    "first_pass_step": 200,
+    "stable_from_step": null,
+    "stable_from_seconds": null,
+    "confirmed_step": null,
+    "confirmed_seconds": null
+  },
+  "code_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "fixture_sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a",
+  "declaration_sha256": "2b71d3414c66ddebf59e3dbaf8893e6e4a4f310ad58fa506a16c5246be5e7b03",
+  "regularizer_calls": 1200,
+  "worker_sha256": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+  "audit": "PASS"
+}

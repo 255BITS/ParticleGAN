@@ -1,0 +1,100 @@
+{
+  "candidate": "eps_net_1m",
+  "role": "historical epsilon replay selection; not active research base",
+  "previous_base": "g_threequarter_rate",
+  "declaration": "reports/toy100/h_stability/eps-net-base/declaration.json",
+  "cold_candidate": "reports/toy100/h_stability/eps-net-base/cold/eps_net_1m",
+  "cold_checkpoint_sha256": "112b407dfb58baf9c3b1ce015f3024051524c642163cb5ca07ad71aa86de6b42",
+  "fixed_rates": {
+    "g": 0.0011250000000000001,
+    "d": 0.0015,
+    "prior": 0.0022500000000000003
+  },
+  "options": {
+    "consistency": "mixup",
+    "consistency_coeff": 0.01,
+    "consistency_sigma": 0.1,
+    "noise": "fixed",
+    "sigma": 0.05,
+    "smooth": 0.0,
+    "adam_response": "eps_net_1m"
+  },
+  "epsilon": {
+    "g": 0.001,
+    "d": 0.001,
+    "prior": 1e-08
+  },
+  "acquisition": "cold ring PASS:8 modes, terminal suffix14; two_pole FAIL",
+  "own_state_short_probe": {
+    "status": "PASS",
+    "passing_checks": 200,
+    "checks": 200,
+    "min_hq": 0.9189453125,
+    "final_hq": 0.999755859375,
+    "state_origin": "same-policy own cold acquisition"
+  },
+  "blockers": [
+    "two_pole FAIL: mean_abs=0.0298888311 requires >=0.3",
+    "unipolar FAIL: neu_hold=0.810458109 requires >=0.85",
+    "mid_scale_identity FAIL: identity_at_0=0.718450265 requires >=0.85",
+    "cover_leftover FAIL: u_kept=0.441448624 requires >=0.85; content_kept=0.444301657 requires >=0.75; pole_rel_err_plus=0.419609755 requires <=0.2; pole_rel_err_minus=0.460157573 requires <=0.2",
+    "img_blobs4 FAIL: modes=3 requires >=4; hq=0.84375 requires >=0.9",
+    "img_intensity2 FAIL: hq=0.875 requires >=0.9",
+    "vector_unequal_mass FAIL: component_covariance_error=1.60670958 requires <=0.85; component_min_eigen_ratio=0.0183518231 requires >=0.15; min_mass_ratio=0.131460339 requires >=0.25",
+    "ae_gan_hold FAIL: recon_mse=3.05687213 requires <=0.05",
+    "unused_token_hold FAIL: unused_hold=0.788209453 requires >=0.85; concept_move=0.423579831 requires >=0.85",
+    "own-state1200 FAIL at1692: HQ .86474609375 < .90 after491 passing checks; stopped",
+    "native100 SKIPPED; older hosts and stability unresolved"
+  ],
+  "older_host_audit": {
+    "status": "FAIL",
+    "passed": 10,
+    "failed": 9,
+    "total": 19,
+    "new_host_executions": 17,
+    "retained_independent_hosts": [
+      "two_pole",
+      "mode_hold"
+    ],
+    "artifact": "reports/toy100/h_stability/baseline-qualification/audit/audit-results.json",
+    "diagnostic_only": true
+  },
+  "own_state_long_probe": {
+    "status": "FAIL",
+    "budget": 1200,
+    "checks": 492,
+    "passing_checks": 491,
+    "first_failed_step": 1692,
+    "final_modes": 8,
+    "final_hq": 0.86474609375,
+    "minimum_hq_among_passing_checks": 0.905517578125,
+    "full_budget": false,
+    "stopped_on_first_failure": true,
+    "state_origin": "same-policy own cold acquisition",
+    "artifact": "reports/toy100/h_stability/baseline-qualification/audit/own_state_diagnostic_1200/summary.json"
+  },
+  "post_convergence_diagnostic": {
+    "name": "first_convergence_then_hold_v1",
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "start_step": 1200,
+    "modes": 8,
+    "min_hq": 0.9,
+    "convergence": "first consecutive qualifying window; operational quality criterion",
+    "hold": "the next updates, disjoint from confirmation; no restart after failure",
+    "training_feedback": false,
+    "frozen_toy_verdicts_unchanged": true,
+    "status": "POST_CONVERGENCE_FAIL",
+    "converged_step": 1400,
+    "settling_checks": 200,
+    "settling_failures": 0,
+    "longest_settling_streak": 200,
+    "hold_checks": 292,
+    "first_hold_failure": 1692,
+    "hold_budget_complete": false,
+    "artifact": "reports/toy100/h_stability/convergence-baseline/summary.json"
+  },
+  "active": false,
+  "active_research_base": "reports/toy100/current-research-base.json"
+}

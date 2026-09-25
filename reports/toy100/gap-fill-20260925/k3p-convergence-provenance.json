@@ -1,0 +1,2393 @@
+{
+  "description": "Original live-generator snapshots from three independently trained K3P layouts, seed1234. No sample interpolation or retraining; all34 saved checkpoints shown. Fixed equal axes across frames/panels. Metrics use the20000-sample live evaluation, plot uses4096-sample snapshots.",
+  "renderer_sha256": "1b6c9f9a66b00a1458224efe1a531b3cee797b38b8761dccb1b6fdb993d75b1b",
+  "gif_sha256": "fe2fd5ce01681ca4864988f9c2c33e0829d723ffb244bcb2f537310a3cd46208",
+  "size_bytes": 2186568,
+  "dimensions": [
+    1280,
+    590
+  ],
+  "duration_ms": 14600,
+  "frame_durations_ms": [
+    900,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    350,
+    2500
+  ],
+  "candidate_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+    "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139"
+  },
+  "source_results": [
+    {
+      "task": "grid100",
+      "result": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/result.json",
+      "sha256": "8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d",
+      "events": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/events.jsonl",
+      "events_sha256": "4e5255cea58f096f5aadc65f69fd98e8dd9f9e5d4b9c8d160b1a354587806e91",
+      "full_gate": "PASS"
+    },
+    {
+      "task": "rotated100",
+      "result": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/result.json",
+      "sha256": "a24e8e0e5e54e73cbb49b5356624b2c849d6b30491ab961f869423f2745c73b0",
+      "events": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/events.jsonl",
+      "events_sha256": "591cc141f77411b90d09a74896ec27e220a4aa18ee2d78e4d593c5572421a01f",
+      "full_gate": "PASS"
+    },
+    {
+      "task": "staggered100",
+      "result": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/result.json",
+      "sha256": "b6779b8adee79c8da4ecc684b932506c689946800394bd4e2010e93587fab0b7",
+      "events": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/events.jsonl",
+      "events_sha256": "2cec95a8831c4b41d379b79776e288ee23eb1ac6b31e062336fa5a5d79a099b3",
+      "full_gate": "PASS"
+    }
+  ],
+  "frames": [
+    {
+      "step": 0,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000000.npz",
+          "sha256": "17e9eca7e9956311284256287f5dcd95d3865128cc0cabe331aa2f57447f687b",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0268,
+            "precision": 0.0268,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0122,
+            "mass_tv": 0.0419,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.186996596875334,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.564126366885959,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000000.npz",
+          "sha256": "43b0c5a6e706bf4fb81527a5a615c1b934c9c884086a2b4d5f5e10ad9d496970",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0201,
+            "precision": 0.0201,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.02315,
+            "mass_tv": 0.15500000000000003,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.269039133943742,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.531507552648996,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000000.npz",
+          "sha256": "b8b2c9615a1f0ee54a70e6a3478dda8d8e20708808621cf1fe14bfc55822d462",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0256,
+            "precision": 0.0256,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0198,
+            "mass_tv": 0.12485000000000002,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.170749793975774,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.532170634182297,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 1,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000001.npz",
+          "sha256": "fb5d19a4bc1bde416fb97755888aec906bd3b12e0647644abf0c58781ee61eef",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0269,
+            "precision": 0.0269,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0122,
+            "mass_tv": 0.04189999999999999,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.26564592302412,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.485649765821601,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000001.npz",
+          "sha256": "e3df3d9dc7d9def55a532ea73aec5d1a18cc0d06856f4adcae9cad212b9b732e",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0202,
+            "precision": 0.0202,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0233,
+            "mass_tv": 0.15365,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 7.947042450291678,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5452904033286794,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000001.npz",
+          "sha256": "8820abac44a17a1813419aa07572af5b41aa2c856e1766fb686001641a6857f4",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02385,
+            "precision": 0.02385,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.02015,
+            "mass_tv": 0.1273,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.792723081729517,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5161396214573033,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 10,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000010.npz",
+          "sha256": "3f42b45631e2a0a97ba4555e3f7e17b0a1b2bf86994afb3f001e5151f6698e71",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0279,
+            "precision": 0.0279,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0127,
+            "mass_tv": 0.049350000000000005,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.218177646706144,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5534125992962657,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000010.npz",
+          "sha256": "962550cc9bbdde938892097a8df4ea52bf307c5d073229dab4c10962603402b3",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0207,
+            "precision": 0.0207,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0228,
+            "mass_tv": 0.15630000000000002,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.413494501507125,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.4902849073611293,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000010.npz",
+          "sha256": "8cedd2c070036c1a3f5f6276326078ef1cf9305c8a425e7595a2bb5ffed898ec",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02625,
+            "precision": 0.02625,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.01845,
+            "mass_tv": 0.106,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.062033095426904,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5356785327977778,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 25,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000025.npz",
+          "sha256": "e7c36f06faba5d79120704bcce560b8a2bf72b495aac7acc8ad51bed60d19527",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0265,
+            "precision": 0.0265,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0123,
+            "mass_tv": 0.04190000000000001,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 5.958723660567994,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.545710995463648,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000025.npz",
+          "sha256": "acc1f2635fe61a4acf9f54d114afc6ac4c2888918fd205fe764ca667b358838e",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0213,
+            "precision": 0.0213,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0232,
+            "mass_tv": 0.13520000000000001,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 7.328311700905925,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.557626228008473,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000025.npz",
+          "sha256": "00da900ca5d87378a438179b2b244d6ea761b7a8751cbba48820228fec30713d",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02995,
+            "precision": 0.02995,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.01435,
+            "mass_tv": 0.057550000000000004,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.487711990489307,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5541830853159775,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 50,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000050.npz",
+          "sha256": "a457a21852e39961c4c1b0aca0c556c51eb803923906cf8b2efee21e54d7d7fa",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02695,
+            "precision": 0.02695,
+            "min_hq_count": 1,
+            "min_hq_mode_mass": 5e-05,
+            "max_mode_mass": 0.01225,
+            "mass_tv": 0.04175,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 4.932832153233197,
+            "min_radial_median_ratio": 0.16116258205552458,
+            "max_radial_median_ratio": 2.4088969357916565,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000050.npz",
+          "sha256": "e75f98c936813784daaa84c91ad47499fefaa4f1c169f6304ba19d5cc8a2778a",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02305,
+            "precision": 0.02305,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0182,
+            "mass_tv": 0.09975,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 7.36038754860724,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.563118573081789,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000050.npz",
+          "sha256": "0ca88d84b9bb0be8745c21699977d8f59202e4768a7adfd92021b22f55a593a1",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0303,
+            "precision": 0.0303,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0133,
+            "mass_tv": 0.042800000000000005,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 5.48299931160454,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.514578911816978,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 100,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000100.npz",
+          "sha256": "79494d8a7d00434d7ad9e106e10150457e135465807111b044ebaf54b2383583",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0272,
+            "precision": 0.0272,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.01215,
+            "mass_tv": 0.0393,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.432872068731941,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.521485836913197,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000100.npz",
+          "sha256": "6866bf630e8532db997e3643ace89197c5082b314cb243c64fbc18b82456b1a3",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0259,
+            "precision": 0.0259,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0125,
+            "mass_tv": 0.0402,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.770533643971375,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5619427824080274,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000100.npz",
+          "sha256": "c12bce2031925222422e69321ce60344b9ddb4f6528d7013ae0e6369b4e98d38",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02895,
+            "precision": 0.02895,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0133,
+            "mass_tv": 0.0398,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 5.938783476481135,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.506742376554788,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000250.npz",
+          "sha256": "e3f296fd6f310e56c53029173a7062f15b8b57e4a2a3b56603e80dff3d689bf7",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.0282,
+            "precision": 0.0282,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.01285,
+            "mass_tv": 0.04190000000000001,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 5.713442507892119,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.421945628683202,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000250.npz",
+          "sha256": "6902e07486bb1ff5eac69d391b183ed11fcae05f885c87203d4557543d04494a",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.02605,
+            "precision": 0.02605,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.0121,
+            "mass_tv": 0.03665,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.908121153680171,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.5048492648283682,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000250.npz",
+          "sha256": "d19a53ada26e5e38dffcc06b497ae70b7232be4f6dc06ce19166a33c6feeb8b7",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.03215,
+            "precision": 0.03215,
+            "min_hq_count": 0,
+            "min_hq_mode_mass": 0.0,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.03995,
+            "min_cov_eig_ratio": 0.0,
+            "max_cov_eig_ratio": 6.38276485429065,
+            "min_radial_median_ratio": 0.0,
+            "max_radial_median_ratio": 2.435225453494696,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000500.npz",
+          "sha256": "f42ceda8a5b7b57c4069bc2c0bca53c77216733c0ae00db65a2ab551481fc7a5",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.1947,
+            "precision": 0.1947,
+            "min_hq_count": 19,
+            "min_hq_mode_mass": 0.00095,
+            "max_mode_mass": 0.0127,
+            "mass_tv": 0.0412,
+            "min_cov_eig_ratio": 1.013377594278814,
+            "max_cov_eig_ratio": 3.5104556089262813,
+            "min_radial_median_ratio": 1.2875507747199286,
+            "max_radial_median_ratio": 2.099001726467119,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000500.npz",
+          "sha256": "e2e908c77c625ee413eb5a56c88337103d5ef4f7dfebac9b2383b5e34e6d14e7",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.08625,
+            "precision": 0.08625,
+            "min_hq_count": 4,
+            "min_hq_mode_mass": 0.0002,
+            "max_mode_mass": 0.0122,
+            "mass_tv": 0.039900000000000005,
+            "min_cov_eig_ratio": 0.10168256130875036,
+            "max_cov_eig_ratio": 4.118705563408301,
+            "min_radial_median_ratio": 0.4144720743858326,
+            "max_radial_median_ratio": 2.186828655870004,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000500.npz",
+          "sha256": "f77f8b4eeea885b6643ea739cd32ad64b9e4ff5eb8ff03d89c9427cf6c6d8a70",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 0,
+            "hq": 0.14255,
+            "precision": 0.14255,
+            "min_hq_count": 8,
+            "min_hq_mode_mass": 0.0004,
+            "max_mode_mass": 0.01355,
+            "mass_tv": 0.0431,
+            "min_cov_eig_ratio": 0.6248425942191852,
+            "max_cov_eig_ratio": 3.8576544846986685,
+            "min_radial_median_ratio": 1.0856544562721409,
+            "max_radial_median_ratio": 2.214890233625089,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_000750.npz",
+          "sha256": "5415df8a42663e95c2ec6d437e96ff01ce9580209db9ca8ab1a019bce9471d22",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.83765,
+            "precision": 0.83765,
+            "min_hq_count": 117,
+            "min_hq_mode_mass": 0.00585,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.46409930397203736,
+            "max_cov_eig_ratio": 2.0218684957418,
+            "min_radial_median_ratio": 0.7396757382658532,
+            "max_radial_median_ratio": 1.1558516996847177,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_000750.npz",
+          "sha256": "409c4985ad88e8ee9f61d66a63d693d4a49238fb20d7d75da9512fc2a8a253ec",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.8278,
+            "precision": 0.8278,
+            "min_hq_count": 123,
+            "min_hq_mode_mass": 0.00615,
+            "max_mode_mass": 0.0123,
+            "mass_tv": 0.04475,
+            "min_cov_eig_ratio": 0.3973559702750483,
+            "max_cov_eig_ratio": 1.3087895594319552,
+            "min_radial_median_ratio": 0.7318612895561234,
+            "max_radial_median_ratio": 1.2115075655738128,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_000750.npz",
+          "sha256": "a8a92f5099e220b07ca19cc284897aa6489b5534c6b9b7199140afe7cbf8201f",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9192,
+            "precision": 0.9192,
+            "min_hq_count": 143,
+            "min_hq_mode_mass": 0.00715,
+            "max_mode_mass": 0.01335,
+            "mass_tv": 0.0448,
+            "min_cov_eig_ratio": 0.454600304375996,
+            "max_cov_eig_ratio": 1.4645848300800028,
+            "min_radial_median_ratio": 0.7630107868307414,
+            "max_radial_median_ratio": 1.202336630977028,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 1000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_001000.npz",
+          "sha256": "9a6149bf725cde20829fee5d99c9d4504172f35a524c991f494e89308ccf5ef6",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9294,
+            "precision": 0.9294,
+            "min_hq_count": 138,
+            "min_hq_mode_mass": 0.0069,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.4406522611441473,
+            "max_cov_eig_ratio": 1.6407664402364666,
+            "min_radial_median_ratio": 0.7740419991414214,
+            "max_radial_median_ratio": 1.266216912315921,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_001000.npz",
+          "sha256": "828e19e6649d58e648f5453d9b9faaa4749c010bbb6bc90c86f7835d63e3dcbe",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.906,
+            "precision": 0.906,
+            "min_hq_count": 132,
+            "min_hq_mode_mass": 0.0066,
+            "max_mode_mass": 0.0124,
+            "mass_tv": 0.044000000000000004,
+            "min_cov_eig_ratio": 0.479052748600298,
+            "max_cov_eig_ratio": 1.5748518291676765,
+            "min_radial_median_ratio": 0.7918431316488214,
+            "max_radial_median_ratio": 1.2329446795610943,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_001000.npz",
+          "sha256": "04ff53b9f980310d5735953cc2e97ca69ae341fc5cc930e16f7a2b146bf6d599",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94155,
+            "precision": 0.94155,
+            "min_hq_count": 145,
+            "min_hq_mode_mass": 0.00725,
+            "max_mode_mass": 0.0134,
+            "mass_tv": 0.04530000000000001,
+            "min_cov_eig_ratio": 0.5103551813447655,
+            "max_cov_eig_ratio": 1.9777319867328742,
+            "min_radial_median_ratio": 0.7873753231874723,
+            "max_radial_median_ratio": 1.3412324728570897,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 1250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_001250.npz",
+          "sha256": "fec99b3ae1fc604f4a154a7cd625490c2786e62203bb9ab6af7e23a9e44e7de0",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94,
+            "precision": 0.94,
+            "min_hq_count": 139,
+            "min_hq_mode_mass": 0.00695,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6430679496234158,
+            "max_cov_eig_ratio": 1.7953695863051429,
+            "min_radial_median_ratio": 0.9008837301890482,
+            "max_radial_median_ratio": 1.3092443587226577,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_001250.npz",
+          "sha256": "1e2babecd47a27b3751ef55afe9248f2ac787d6ad765a1fd2b21bba5e9eddb14",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.92665,
+            "precision": 0.92665,
+            "min_hq_count": 138,
+            "min_hq_mode_mass": 0.0069,
+            "max_mode_mass": 0.0124,
+            "mass_tv": 0.04035,
+            "min_cov_eig_ratio": 0.6602950684874017,
+            "max_cov_eig_ratio": 1.570446112605572,
+            "min_radial_median_ratio": 0.875892198491332,
+            "max_radial_median_ratio": 1.285872085739517,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_001250.npz",
+          "sha256": "1d9c99c378833d2345f0222f33392ec05253e70841f61b45e755ce8708d48a95",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.93885,
+            "precision": 0.93885,
+            "min_hq_count": 146,
+            "min_hq_mode_mass": 0.0073,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04415,
+            "min_cov_eig_ratio": 0.6846134674576362,
+            "max_cov_eig_ratio": 2.1045566380807315,
+            "min_radial_median_ratio": 0.8514290528303906,
+            "max_radial_median_ratio": 1.3615524083069954,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 1500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_001500.npz",
+          "sha256": "a981839c83dbe52a6fc2278d7b46f8bd67c2348f447019e546d1ffba0b66940b",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9492,
+            "precision": 0.9492,
+            "min_hq_count": 140,
+            "min_hq_mode_mass": 0.007,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6930365828599778,
+            "max_cov_eig_ratio": 1.562130399973399,
+            "min_radial_median_ratio": 0.90604081520772,
+            "max_radial_median_ratio": 1.3151527960203064,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_001500.npz",
+          "sha256": "cea35888a0f26b7a5808e6b18be169874b23ebea2c6f74b44ea659bbfc076e78",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.93845,
+            "precision": 0.93845,
+            "min_hq_count": 136,
+            "min_hq_mode_mass": 0.0068,
+            "max_mode_mass": 0.01225,
+            "mass_tv": 0.0378,
+            "min_cov_eig_ratio": 0.7260432225870525,
+            "max_cov_eig_ratio": 1.4749696604762312,
+            "min_radial_median_ratio": 0.9352137421235921,
+            "max_radial_median_ratio": 1.262023064130478,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_001500.npz",
+          "sha256": "b23e2ebd328ac48abe739ea54e309eab819037372f7438989136764411652613",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95005,
+            "precision": 0.95005,
+            "min_hq_count": 152,
+            "min_hq_mode_mass": 0.0076,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0432,
+            "min_cov_eig_ratio": 0.7337928565005682,
+            "max_cov_eig_ratio": 1.596565223895354,
+            "min_radial_median_ratio": 0.9064274218583791,
+            "max_radial_median_ratio": 1.3310509622930686,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 1750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_001750.npz",
+          "sha256": "324657fc7df36dfbce3e252823b9acc718bc08eaff3f7b2ad59d9455c6416135",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9608,
+            "precision": 0.9608,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7632411550755366,
+            "max_cov_eig_ratio": 1.722939060491711,
+            "min_radial_median_ratio": 0.9114991504954509,
+            "max_radial_median_ratio": 1.342624431954149,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_001750.npz",
+          "sha256": "8976a32fca67012aa6c157f85605a7e9b10795711d07c42cebe1b8055abe9c0f",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94645,
+            "precision": 0.94645,
+            "min_hq_count": 139,
+            "min_hq_mode_mass": 0.00695,
+            "max_mode_mass": 0.01205,
+            "mass_tv": 0.03695,
+            "min_cov_eig_ratio": 0.7557113738353383,
+            "max_cov_eig_ratio": 1.5732428896841948,
+            "min_radial_median_ratio": 0.9547838354709697,
+            "max_radial_median_ratio": 1.3140343816622821,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_001750.npz",
+          "sha256": "fcd820164f4af2549c7e41b73bd83b0adeca400b0c2e8f185b9c9773baf76d64",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95855,
+            "precision": 0.95855,
+            "min_hq_count": 153,
+            "min_hq_mode_mass": 0.00765,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.042,
+            "min_cov_eig_ratio": 0.7531101827001271,
+            "max_cov_eig_ratio": 1.656431202356733,
+            "min_radial_median_ratio": 0.8458041855217271,
+            "max_radial_median_ratio": 1.4812414860376122,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 2000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_002000.npz",
+          "sha256": "0d7d9cd7fa722a7a5dea976ad23eca3c6fd14d6cb59dd42a1a0bb00606b134c9",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.96685,
+            "precision": 0.96685,
+            "min_hq_count": 146,
+            "min_hq_mode_mass": 0.0073,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7151579431599224,
+            "max_cov_eig_ratio": 1.831136652625565,
+            "min_radial_median_ratio": 0.9099853787581058,
+            "max_radial_median_ratio": 1.3435779365527314,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_002000.npz",
+          "sha256": "0619819bf7836b79fd3e55f2f4ac23f6b96989bd0528e0de25ee78e6916debd4",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9462,
+            "precision": 0.9462,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01195,
+            "mass_tv": 0.036500000000000005,
+            "min_cov_eig_ratio": 0.7372494919997757,
+            "max_cov_eig_ratio": 1.7269176746712562,
+            "min_radial_median_ratio": 0.8839395964613469,
+            "max_radial_median_ratio": 1.4119044676272297,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_002000.npz",
+          "sha256": "16e3971f6d492469514eac499a24d4f327b88729c54a57203c0cdc2e9959cbce",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95905,
+            "precision": 0.95905,
+            "min_hq_count": 152,
+            "min_hq_mode_mass": 0.0076,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04185,
+            "min_cov_eig_ratio": 0.7162771262002505,
+            "max_cov_eig_ratio": 1.747080410831946,
+            "min_radial_median_ratio": 0.9337102103616469,
+            "max_radial_median_ratio": 1.4464739933588506,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 2250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_002250.npz",
+          "sha256": "79d4d00a2b974c996ff80163281bf1514687b75abf3f4f6b46ed5c205ab9fee1",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97185,
+            "precision": 0.97185,
+            "min_hq_count": 147,
+            "min_hq_mode_mass": 0.00735,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6726224263143088,
+            "max_cov_eig_ratio": 1.7137788895447663,
+            "min_radial_median_ratio": 0.8760693743982505,
+            "max_radial_median_ratio": 1.2816594682684703,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_002250.npz",
+          "sha256": "c70170f879b735b47fa320d13992e8b36eab9adbb9c095ee016bbf94fb28f0cc",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94325,
+            "precision": 0.94325,
+            "min_hq_count": 145,
+            "min_hq_mode_mass": 0.00725,
+            "max_mode_mass": 0.01195,
+            "mass_tv": 0.03715,
+            "min_cov_eig_ratio": 0.7962711887261783,
+            "max_cov_eig_ratio": 1.5590837268339675,
+            "min_radial_median_ratio": 0.9714033992487412,
+            "max_radial_median_ratio": 1.384721150237326,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_002250.npz",
+          "sha256": "2588b3eccbe7a6591b5a3dcc7fe837ae82678bbb79bb60076a66e7ee9384c546",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9611,
+            "precision": 0.9611,
+            "min_hq_count": 152,
+            "min_hq_mode_mass": 0.0076,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04175,
+            "min_cov_eig_ratio": 0.7380464981641844,
+            "max_cov_eig_ratio": 1.6498674918604572,
+            "min_radial_median_ratio": 0.8871685161134999,
+            "max_radial_median_ratio": 1.2818621436420436,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 2500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_002500.npz",
+          "sha256": "b3863804af5f1af33bdd30df87df9c3e469f6c81be026cdc946ede294c2f2ecc",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9741,
+            "precision": 0.9741,
+            "min_hq_count": 148,
+            "min_hq_mode_mass": 0.0074,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6336008542029907,
+            "max_cov_eig_ratio": 1.7660960823813052,
+            "min_radial_median_ratio": 0.9219561740464252,
+            "max_radial_median_ratio": 1.2466800226202237,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_002500.npz",
+          "sha256": "55dc15da35fe687e3b3ee51890e70e8d69719a158242114258559d1d7ee28e77",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94625,
+            "precision": 0.94625,
+            "min_hq_count": 149,
+            "min_hq_mode_mass": 0.00745,
+            "max_mode_mass": 0.01195,
+            "mass_tv": 0.0375,
+            "min_cov_eig_ratio": 0.7643712048835999,
+            "max_cov_eig_ratio": 1.4722256646372707,
+            "min_radial_median_ratio": 0.9422127155824979,
+            "max_radial_median_ratio": 1.2993353723241718,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_002500.npz",
+          "sha256": "98202c2748b56fefd29a47cae26c4c851aeff748b0c830fd68e55c3791c0f43e",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9614,
+            "precision": 0.9614,
+            "min_hq_count": 150,
+            "min_hq_mode_mass": 0.0075,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04175,
+            "min_cov_eig_ratio": 0.7258883565988927,
+            "max_cov_eig_ratio": 1.7730166556860991,
+            "min_radial_median_ratio": 0.9603387771218712,
+            "max_radial_median_ratio": 1.234976431809153,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 2750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_002750.npz",
+          "sha256": "986ce7aec360b789cad6f561cef9af4d249fabf6dd42b6ddedf9775148fb61be",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97585,
+            "precision": 0.97585,
+            "min_hq_count": 147,
+            "min_hq_mode_mass": 0.00735,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6744909031806048,
+            "max_cov_eig_ratio": 1.599488171039223,
+            "min_radial_median_ratio": 0.9323181096933234,
+            "max_radial_median_ratio": 1.230145889808924,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_002750.npz",
+          "sha256": "f9b6983595e7b1a60f56eb3ee676b7bf13f26ec0fc053bbef3ea232bd0b26509",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.945,
+            "precision": 0.945,
+            "min_hq_count": 146,
+            "min_hq_mode_mass": 0.0073,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.0377,
+            "min_cov_eig_ratio": 0.799473055273968,
+            "max_cov_eig_ratio": 1.5207575285905153,
+            "min_radial_median_ratio": 0.9716090516115281,
+            "max_radial_median_ratio": 1.302782898205819,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_002750.npz",
+          "sha256": "c3433f997159faa7de9290f49c8dd42c1ea90f727e622fd069971e457fa7f3c6",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.96155,
+            "precision": 0.96155,
+            "min_hq_count": 156,
+            "min_hq_mode_mass": 0.0078,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.041800000000000004,
+            "min_cov_eig_ratio": 0.7333054759869744,
+            "max_cov_eig_ratio": 1.5738492965124633,
+            "min_radial_median_ratio": 0.9520043560006999,
+            "max_radial_median_ratio": 1.2759568467995193,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 3000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_003000.npz",
+          "sha256": "d09bddbe71052c0de609ba4676328abf2934252ba1b22e5950227aae88c3eaa8",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97655,
+            "precision": 0.97655,
+            "min_hq_count": 145,
+            "min_hq_mode_mass": 0.00725,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7519911288397921,
+            "max_cov_eig_ratio": 1.3692126930072153,
+            "min_radial_median_ratio": 0.9223168474965582,
+            "max_radial_median_ratio": 1.2158841939662706,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_003000.npz",
+          "sha256": "956e675decafddf7acaef18070ce1388d6de4c90105b37204ae3e80170e8ef44",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94265,
+            "precision": 0.94265,
+            "min_hq_count": 146,
+            "min_hq_mode_mass": 0.0073,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.037950000000000005,
+            "min_cov_eig_ratio": 0.8038809570624771,
+            "max_cov_eig_ratio": 1.7063919000071277,
+            "min_radial_median_ratio": 1.0063221046428263,
+            "max_radial_median_ratio": 1.2986123278525845,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_003000.npz",
+          "sha256": "938f0a49a33c9335d8a22d3dea578242f5979c7fab4241f49421e97a60c8d1a7",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9619,
+            "precision": 0.9619,
+            "min_hq_count": 154,
+            "min_hq_mode_mass": 0.0077,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0422,
+            "min_cov_eig_ratio": 0.7280791061613795,
+            "max_cov_eig_ratio": 1.765775369837327,
+            "min_radial_median_ratio": 0.9645230246055256,
+            "max_radial_median_ratio": 1.292474110820985,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 3250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_003250.npz",
+          "sha256": "bacb0fba781760c3d532b0594628cbdb1385bee38d9b7d907782f9b109c6ef7a",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9763,
+            "precision": 0.9763,
+            "min_hq_count": 148,
+            "min_hq_mode_mass": 0.0074,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6723801520900472,
+            "max_cov_eig_ratio": 1.456544683250528,
+            "min_radial_median_ratio": 0.9126993748649233,
+            "max_radial_median_ratio": 1.1894687183795916,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_003250.npz",
+          "sha256": "60999ce3ffb8051c3f38c5825ceae9c2a6cad581cdb33f759a1a7926f64bd597",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94175,
+            "precision": 0.94175,
+            "min_hq_count": 152,
+            "min_hq_mode_mass": 0.0076,
+            "max_mode_mass": 0.01195,
+            "mass_tv": 0.0379,
+            "min_cov_eig_ratio": 0.8529131295868718,
+            "max_cov_eig_ratio": 1.5929032729430026,
+            "min_radial_median_ratio": 0.9948182651906814,
+            "max_radial_median_ratio": 1.3691494436977942,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_003250.npz",
+          "sha256": "97657478a2c34aaf46a46ef6071362ad18fe8156f9613ba7b65764afe1aaf1b9",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95955,
+            "precision": 0.95955,
+            "min_hq_count": 153,
+            "min_hq_mode_mass": 0.00765,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04245,
+            "min_cov_eig_ratio": 0.786373055313919,
+            "max_cov_eig_ratio": 1.6781274401452464,
+            "min_radial_median_ratio": 0.9749346598465736,
+            "max_radial_median_ratio": 1.2923849624773516,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 3500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_003500.npz",
+          "sha256": "dececde4f5fd17735da75118794a940b3528048dabc055858ecc6f7d99d5d1e3",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97505,
+            "precision": 0.97505,
+            "min_hq_count": 145,
+            "min_hq_mode_mass": 0.00725,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7169748330874914,
+            "max_cov_eig_ratio": 1.4239578200571958,
+            "min_radial_median_ratio": 0.9028140145275846,
+            "max_radial_median_ratio": 1.196110372937035,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_003500.npz",
+          "sha256": "77f7cc0b02d773f8dedd5cf2615729644912a0944d15c7b9dd0bfa734dccdf55",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.94105,
+            "precision": 0.94105,
+            "min_hq_count": 149,
+            "min_hq_mode_mass": 0.00745,
+            "max_mode_mass": 0.01195,
+            "mass_tv": 0.03755,
+            "min_cov_eig_ratio": 0.8399871863793679,
+            "max_cov_eig_ratio": 1.6586094692262705,
+            "min_radial_median_ratio": 0.9767426009388368,
+            "max_radial_median_ratio": 1.3748886456062603,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_003500.npz",
+          "sha256": "5618a2dc14e9eecbf47c99a57f044b9f2075b23d23bbf2fd00db3bb7ec516385",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9565,
+            "precision": 0.9565,
+            "min_hq_count": 151,
+            "min_hq_mode_mass": 0.00755,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04240000000000001,
+            "min_cov_eig_ratio": 0.7407424920864426,
+            "max_cov_eig_ratio": 1.5482559149033737,
+            "min_radial_median_ratio": 0.9724517018887762,
+            "max_radial_median_ratio": 1.25784515817588,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 3750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_003750.npz",
+          "sha256": "44c3c67c58e805226bd39802fed152675e29a4959f824b53d340cdc017d723c5",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97255,
+            "precision": 0.97255,
+            "min_hq_count": 147,
+            "min_hq_mode_mass": 0.00735,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6992829724735623,
+            "max_cov_eig_ratio": 1.4438351759630481,
+            "min_radial_median_ratio": 0.8903748933915346,
+            "max_radial_median_ratio": 1.3136733459435959,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_003750.npz",
+          "sha256": "5e3715fdb160fa18d7f027a9ca7274e5260f5f6e0bd0475e7b03fd10e77d717c",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9372,
+            "precision": 0.9372,
+            "min_hq_count": 151,
+            "min_hq_mode_mass": 0.00755,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.037450000000000004,
+            "min_cov_eig_ratio": 0.8732496047122432,
+            "max_cov_eig_ratio": 1.5962960349587085,
+            "min_radial_median_ratio": 0.9911630801909971,
+            "max_radial_median_ratio": 1.302240173754143,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_003750.npz",
+          "sha256": "25e510bf439de5885cd0f67fd0db08d1591509b6b7c05c2aa702bf15c6631400",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95375,
+            "precision": 0.95375,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04245,
+            "min_cov_eig_ratio": 0.838557353329632,
+            "max_cov_eig_ratio": 1.6067735035893562,
+            "min_radial_median_ratio": 0.991721742348767,
+            "max_radial_median_ratio": 1.2892018860174221,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 4000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_004000.npz",
+          "sha256": "bdb489fa402ec7498f6cff6c1279abec04d888833b656edc3342d25eb00cadb8",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97085,
+            "precision": 0.97085,
+            "min_hq_count": 147,
+            "min_hq_mode_mass": 0.00735,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7675169371678398,
+            "max_cov_eig_ratio": 1.5033476089656321,
+            "min_radial_median_ratio": 0.9502706376009967,
+            "max_radial_median_ratio": 1.2615737704093317,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_004000.npz",
+          "sha256": "331b5f525a8577e82ed71acf8c832c1f5a67c4f00938a8da60599b60c9068aa9",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.93655,
+            "precision": 0.93655,
+            "min_hq_count": 151,
+            "min_hq_mode_mass": 0.00755,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.03685000000000001,
+            "min_cov_eig_ratio": 0.8435692295269654,
+            "max_cov_eig_ratio": 1.5642792011503184,
+            "min_radial_median_ratio": 1.0288579966223976,
+            "max_radial_median_ratio": 1.366167897400037,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_004000.npz",
+          "sha256": "ffe49345322f6a6d302eb876ff81c5251f6b40eb691d7ef0ef59ffc43d5ee2c8",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95305,
+            "precision": 0.95305,
+            "min_hq_count": 150,
+            "min_hq_mode_mass": 0.0075,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.042300000000000004,
+            "min_cov_eig_ratio": 0.8032378631255769,
+            "max_cov_eig_ratio": 1.5605611488006412,
+            "min_radial_median_ratio": 1.0162683561289714,
+            "max_radial_median_ratio": 1.2767348018223186,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 4250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_004250.npz",
+          "sha256": "ccab05026b89395dbf6a65f60c2d36428c5068d5658f6f55c5010a9833bcc73f",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9698,
+            "precision": 0.9698,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7187781355529694,
+            "max_cov_eig_ratio": 1.4824977864216695,
+            "min_radial_median_ratio": 0.91971837245681,
+            "max_radial_median_ratio": 1.2668110921528604,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_004250.npz",
+          "sha256": "608635ed3fa5ff35e424cb916953e7eda258836e777b636ee0ccf4089f075be3",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.93935,
+            "precision": 0.93935,
+            "min_hq_count": 152,
+            "min_hq_mode_mass": 0.0076,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.035800000000000005,
+            "min_cov_eig_ratio": 0.8700564277175381,
+            "max_cov_eig_ratio": 1.7675242935613595,
+            "min_radial_median_ratio": 0.9683921334849845,
+            "max_radial_median_ratio": 1.364037642176866,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_004250.npz",
+          "sha256": "060d5a4771156b2df699f929b1754f82937689cc10e6f886c795251c55b4fd53",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95585,
+            "precision": 0.95585,
+            "min_hq_count": 150,
+            "min_hq_mode_mass": 0.0075,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0422,
+            "min_cov_eig_ratio": 0.8699999011744785,
+            "max_cov_eig_ratio": 1.4897874609560895,
+            "min_radial_median_ratio": 0.9666159890425919,
+            "max_radial_median_ratio": 1.319437687693493,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 4500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_004500.npz",
+          "sha256": "44f018874b6d357a0481ff7e0d6a913f01e31de24cbab7953f22edc3e4341872",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9664,
+            "precision": 0.9664,
+            "min_hq_count": 145,
+            "min_hq_mode_mass": 0.00725,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7694040503464161,
+            "max_cov_eig_ratio": 1.5417681070420066,
+            "min_radial_median_ratio": 0.9831067374057766,
+            "max_radial_median_ratio": 1.265471592388148,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_004500.npz",
+          "sha256": "667ee65f50d932cdc170caf2c22022b4b19296941ba86ed864a86345ee2ed22d",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9433,
+            "precision": 0.9433,
+            "min_hq_count": 153,
+            "min_hq_mode_mass": 0.00765,
+            "max_mode_mass": 0.01195,
+            "mass_tv": 0.03585000000000001,
+            "min_cov_eig_ratio": 0.725907413393267,
+            "max_cov_eig_ratio": 1.5750467025739465,
+            "min_radial_median_ratio": 0.9968425538437373,
+            "max_radial_median_ratio": 1.3376925480596362,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_004500.npz",
+          "sha256": "8058a7de03a7c58781f01047145887c469b5947e2dd93156aca24a7dd6341432",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95555,
+            "precision": 0.95555,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04215000000000001,
+            "min_cov_eig_ratio": 0.8291729458827218,
+            "max_cov_eig_ratio": 1.5659324774801766,
+            "min_radial_median_ratio": 1.0094595619790998,
+            "max_radial_median_ratio": 1.2855568820084438,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 4750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_004750.npz",
+          "sha256": "faf694b68b428a789470cb42baa948f00a838fae110343b696fb09debab7bcc2",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.968,
+            "precision": 0.968,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7579535920610846,
+            "max_cov_eig_ratio": 1.4271144275784713,
+            "min_radial_median_ratio": 0.9799132871196918,
+            "max_radial_median_ratio": 1.2539041834893552,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_004750.npz",
+          "sha256": "1c84f297af397dddd1f392f9a136bc246efbb71df1dca7e6074d5824654fb5a4",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.949,
+            "precision": 0.949,
+            "min_hq_count": 154,
+            "min_hq_mode_mass": 0.0077,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.0357,
+            "min_cov_eig_ratio": 0.8856437089406467,
+            "max_cov_eig_ratio": 1.6300771210534952,
+            "min_radial_median_ratio": 1.0144062651630785,
+            "max_radial_median_ratio": 1.308581711877686,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_004750.npz",
+          "sha256": "cde78773b1225c47ff8c7841f491ae35940f0347954341ea2627cb91472fc1a5",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9583,
+            "precision": 0.9583,
+            "min_hq_count": 150,
+            "min_hq_mode_mass": 0.0075,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0422,
+            "min_cov_eig_ratio": 0.8050157675454952,
+            "max_cov_eig_ratio": 1.4996136666313116,
+            "min_radial_median_ratio": 0.9917522378543623,
+            "max_radial_median_ratio": 1.2754564744745343,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 5000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_005000.npz",
+          "sha256": "063388f9548199489d7b870b14d823d1204c75fe0feca4cbde0e7c1ea73731be",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9692,
+            "precision": 0.9692,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7161477956561058,
+            "max_cov_eig_ratio": 1.5474053754227575,
+            "min_radial_median_ratio": 0.9817858545447533,
+            "max_radial_median_ratio": 1.29032648732291,
+            "passed": false
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_005000.npz",
+          "sha256": "d811a8a701bb310f2e8b5c0407574d7025a19564de777741b012533857d1eb38",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95255,
+            "precision": 0.95255,
+            "min_hq_count": 155,
+            "min_hq_mode_mass": 0.00775,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.0359,
+            "min_cov_eig_ratio": 0.8296378266795121,
+            "max_cov_eig_ratio": 1.6381618849916437,
+            "min_radial_median_ratio": 0.9359794674543838,
+            "max_radial_median_ratio": 1.2811513144460926,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_005000.npz",
+          "sha256": "09e78a83b3a518cf6605e728e1e7e70223852232c62090f22d8fd633492b3ab0",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.96265,
+            "precision": 0.96265,
+            "min_hq_count": 153,
+            "min_hq_mode_mass": 0.00765,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0422,
+            "min_cov_eig_ratio": 0.6970621955607039,
+            "max_cov_eig_ratio": 1.5415556957954732,
+            "min_radial_median_ratio": 0.9679783946844215,
+            "max_radial_median_ratio": 1.2840363312373864,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 5250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_005250.npz",
+          "sha256": "36d149b0d307f58089aa4bc8940a1472a881f9f91f5d774e1c15d9a6503a9295",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97175,
+            "precision": 0.97175,
+            "min_hq_count": 144,
+            "min_hq_mode_mass": 0.0072,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.80650810501234,
+            "max_cov_eig_ratio": 1.3861164504092158,
+            "min_radial_median_ratio": 0.9651956611691214,
+            "max_radial_median_ratio": 1.2306403026941566,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_005250.npz",
+          "sha256": "794ac1cf5f78dc35c3a274b0cd7ad90c3f2df3af7affa952a75180847964f761",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.95805,
+            "precision": 0.95805,
+            "min_hq_count": 156,
+            "min_hq_mode_mass": 0.0078,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.0359,
+            "min_cov_eig_ratio": 0.780347492748496,
+            "max_cov_eig_ratio": 1.5333332930941181,
+            "min_radial_median_ratio": 0.9919859519923019,
+            "max_radial_median_ratio": 1.2660063433352282,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_005250.npz",
+          "sha256": "bb411f480306eb40cb35aebd8cd6923d9411f6800db6a772f142e3128631fed7",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9661,
+            "precision": 0.9661,
+            "min_hq_count": 149,
+            "min_hq_mode_mass": 0.00745,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0422,
+            "min_cov_eig_ratio": 0.7175114431459408,
+            "max_cov_eig_ratio": 1.5086010710344528,
+            "min_radial_median_ratio": 0.980756035555192,
+            "max_radial_median_ratio": 1.2380733118861178,
+            "passed": false
+          }
+        }
+      ]
+    },
+    {
+      "step": 5500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_005500.npz",
+          "sha256": "3824e0044437d6b7fc2f0c1e667c42e3be5debe2bf819e552d34d727789298be",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9756,
+            "precision": 0.9756,
+            "min_hq_count": 146,
+            "min_hq_mode_mass": 0.0073,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.7226616896168311,
+            "max_cov_eig_ratio": 1.4795788888602126,
+            "min_radial_median_ratio": 0.9535256498474642,
+            "max_radial_median_ratio": 1.203465453613861,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_005500.npz",
+          "sha256": "183d504453cc9497484fbdf58d83a15c85407f7eadbc0706c2ef2bf684be53c0",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.96635,
+            "precision": 0.96635,
+            "min_hq_count": 158,
+            "min_hq_mode_mass": 0.0079,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.036000000000000004,
+            "min_cov_eig_ratio": 0.794828041555849,
+            "max_cov_eig_ratio": 1.4564156846929746,
+            "min_radial_median_ratio": 0.9427991628838339,
+            "max_radial_median_ratio": 1.2286316897979268,
+            "passed": false
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_005500.npz",
+          "sha256": "56cbcfdaf2c855fc016be82256d89a129786d8314542ee2ac7ddf0de2dfa9bae",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97345,
+            "precision": 0.97345,
+            "min_hq_count": 156,
+            "min_hq_mode_mass": 0.0078,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04190000000000001,
+            "min_cov_eig_ratio": 0.7237034575018497,
+            "max_cov_eig_ratio": 1.4025942844660744,
+            "min_radial_median_ratio": 0.9259817388913267,
+            "max_radial_median_ratio": 1.2099892304671869,
+            "passed": true
+          }
+        }
+      ]
+    },
+    {
+      "step": 5750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_005750.npz",
+          "sha256": "37a822032a97cac0b3bfdaebf1791149affb63d6ef51aa1113ba34cf1106a003",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9799,
+            "precision": 0.9799,
+            "min_hq_count": 146,
+            "min_hq_mode_mass": 0.0073,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6496334375703653,
+            "max_cov_eig_ratio": 1.3690630107766262,
+            "min_radial_median_ratio": 0.9004118528206958,
+            "max_radial_median_ratio": 1.1975058271360741,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_005750.npz",
+          "sha256": "d5de43a89cad37339b04b9a816a5827205dfe30a382aa1f1b6a0dc24f38fc1a4",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9719,
+            "precision": 0.9719,
+            "min_hq_count": 158,
+            "min_hq_mode_mass": 0.0079,
+            "max_mode_mass": 0.01205,
+            "mass_tv": 0.036050000000000006,
+            "min_cov_eig_ratio": 0.7558771406366571,
+            "max_cov_eig_ratio": 1.3085182745513657,
+            "min_radial_median_ratio": 0.938947351738896,
+            "max_radial_median_ratio": 1.2396282152897034,
+            "passed": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_005750.npz",
+          "sha256": "6be952d7aeffdabad40e2ad4710a4f187834c17a632f96acb98be34147d30f14",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97725,
+            "precision": 0.97725,
+            "min_hq_count": 157,
+            "min_hq_mode_mass": 0.00785,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0419,
+            "min_cov_eig_ratio": 0.6814794823647491,
+            "max_cov_eig_ratio": 1.405178515998443,
+            "min_radial_median_ratio": 0.9584823358419197,
+            "max_radial_median_ratio": 1.1984867673303519,
+            "passed": true
+          }
+        }
+      ]
+    },
+    {
+      "step": 6000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_006000.npz",
+          "sha256": "fcff50f100970fa3798e9fbacb74116d222f01017e7cf3d4ee246b11455a2263",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.98155,
+            "precision": 0.98155,
+            "min_hq_count": 148,
+            "min_hq_mode_mass": 0.0074,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6593774632381747,
+            "max_cov_eig_ratio": 1.2829647538723135,
+            "min_radial_median_ratio": 0.93735490717097,
+            "max_radial_median_ratio": 1.1509843532889985,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_006000.npz",
+          "sha256": "0a99beac270733e6c36cdeb244bb8a264f07c643c2d3ad32dcbb01d838c4ebb1",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97455,
+            "precision": 0.97455,
+            "min_hq_count": 157,
+            "min_hq_mode_mass": 0.00785,
+            "max_mode_mass": 0.01205,
+            "mass_tv": 0.03585000000000001,
+            "min_cov_eig_ratio": 0.6906406180804734,
+            "max_cov_eig_ratio": 1.3730644141712274,
+            "min_radial_median_ratio": 0.9141443830450808,
+            "max_radial_median_ratio": 1.1560899222943133,
+            "passed": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_006000.npz",
+          "sha256": "08931be833496c34ef2e0d9dd6cec087c820f78818784ae36a47bba1b1f2afe8",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.98035,
+            "precision": 0.98035,
+            "min_hq_count": 157,
+            "min_hq_mode_mass": 0.00785,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04190000000000001,
+            "min_cov_eig_ratio": 0.6627688831367341,
+            "max_cov_eig_ratio": 1.2997672710653256,
+            "min_radial_median_ratio": 0.9327791584908252,
+            "max_radial_median_ratio": 1.166155526261633,
+            "passed": true
+          }
+        }
+      ]
+    },
+    {
+      "step": 6250,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_006250.npz",
+          "sha256": "3bb42584fe28ba916bf84da827716f8493ec5ba9e6e8859d9197e2dfcfb4a425",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9843,
+            "precision": 0.9843,
+            "min_hq_count": 147,
+            "min_hq_mode_mass": 0.00735,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6523299715753177,
+            "max_cov_eig_ratio": 1.2454749621263312,
+            "min_radial_median_ratio": 0.875188054136215,
+            "max_radial_median_ratio": 1.1823145798793724,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_006250.npz",
+          "sha256": "071dd6020c058a873c8db3cd810da656b852fead8c59be180cde51c6faf36147",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.97945,
+            "precision": 0.97945,
+            "min_hq_count": 155,
+            "min_hq_mode_mass": 0.00775,
+            "max_mode_mass": 0.012,
+            "mass_tv": 0.03585000000000001,
+            "min_cov_eig_ratio": 0.6863925622833372,
+            "max_cov_eig_ratio": 1.2505035894156058,
+            "min_radial_median_ratio": 0.903410545097926,
+            "max_radial_median_ratio": 1.1946721283659674,
+            "passed": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_006250.npz",
+          "sha256": "3aebcef9cd21a2c20aa2b90d608f1e1b3b3e86811f9e4d0aee90c436c9b4daff",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9839,
+            "precision": 0.9839,
+            "min_hq_count": 158,
+            "min_hq_mode_mass": 0.0079,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0419,
+            "min_cov_eig_ratio": 0.6253226492053309,
+            "max_cov_eig_ratio": 1.2547239123686544,
+            "min_radial_median_ratio": 0.8911331760605046,
+            "max_radial_median_ratio": 1.1257296349307147,
+            "passed": true
+          }
+        }
+      ]
+    },
+    {
+      "step": 6500,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_006500.npz",
+          "sha256": "39d16bab62f5dcf1e70b6fb86941699c7158e0fdd5ed978295d87c557fa9c894",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.985,
+            "precision": 0.985,
+            "min_hq_count": 148,
+            "min_hq_mode_mass": 0.0074,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6402443921846029,
+            "max_cov_eig_ratio": 1.2303534946510113,
+            "min_radial_median_ratio": 0.8677480315586757,
+            "max_radial_median_ratio": 1.1375684814255451,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_006500.npz",
+          "sha256": "a17c62aba5387a67bbab060b52f76bf1144341cd1e8ff5709a54448e97045660",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9797,
+            "precision": 0.9797,
+            "min_hq_count": 157,
+            "min_hq_mode_mass": 0.00785,
+            "max_mode_mass": 0.01205,
+            "mass_tv": 0.03585000000000001,
+            "min_cov_eig_ratio": 0.6637537024124758,
+            "max_cov_eig_ratio": 1.2974182397854674,
+            "min_radial_median_ratio": 0.864147106054839,
+            "max_radial_median_ratio": 1.1501395831448875,
+            "passed": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_006500.npz",
+          "sha256": "de0031838c2a4aad8f7a0fb583ed1de5da05d93caed21b3347b4565332b85303",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9845,
+            "precision": 0.9845,
+            "min_hq_count": 157,
+            "min_hq_mode_mass": 0.00785,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04190000000000001,
+            "min_cov_eig_ratio": 0.6042955990535035,
+            "max_cov_eig_ratio": 1.2557811159738808,
+            "min_radial_median_ratio": 0.8527705978533935,
+            "max_radial_median_ratio": 1.1316226813194497,
+            "passed": true
+          }
+        }
+      ]
+    },
+    {
+      "step": 6750,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_006750.npz",
+          "sha256": "a9eee919eb9c5f0dab1f6c7728c5177836704b24f53a0f1501c51ca81a3c1100",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.98725,
+            "precision": 0.98725,
+            "min_hq_count": 148,
+            "min_hq_mode_mass": 0.0074,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6412651787252622,
+            "max_cov_eig_ratio": 1.2291593066228677,
+            "min_radial_median_ratio": 0.882139846031198,
+            "max_radial_median_ratio": 1.1507049360558415,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_006750.npz",
+          "sha256": "2af1e3d8004e3b1a90c4d973ea3768f64384bb571a6f67e5fae9234bdfb55583",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9812,
+            "precision": 0.9812,
+            "min_hq_count": 159,
+            "min_hq_mode_mass": 0.00795,
+            "max_mode_mass": 0.01205,
+            "mass_tv": 0.03595,
+            "min_cov_eig_ratio": 0.6776510803883008,
+            "max_cov_eig_ratio": 1.2307750050504713,
+            "min_radial_median_ratio": 0.8830856904383199,
+            "max_radial_median_ratio": 1.1709711772950622,
+            "passed": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_006750.npz",
+          "sha256": "bcd0227761c8bd54f903f35859cf30e59236e5103fcb77bfb2082fbe9163fd05",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.9856,
+            "precision": 0.9856,
+            "min_hq_count": 158,
+            "min_hq_mode_mass": 0.0079,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.0419,
+            "min_cov_eig_ratio": 0.5878819557316347,
+            "max_cov_eig_ratio": 1.3115943403449126,
+            "min_radial_median_ratio": 0.8548422716216931,
+            "max_radial_median_ratio": 1.1083539622018002,
+            "passed": true
+          }
+        }
+      ]
+    },
+    {
+      "step": 7000,
+      "panels": [
+        {
+          "task": "grid100",
+          "snapshot": "/ml2/hypergan/gan-attempts/claude-pool-20260925T063704Z/critic_both_arms/20260925T125747Z-3385271/runs/out-k3p-grid100-1234/native/grid100/snapshots/step_007000.npz",
+          "sha256": "1d26e78716b8c4a00383f4c95bf0d8d846a4ac1752222fecbbec35b0a49b2d45",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.98745,
+            "precision": 0.98745,
+            "min_hq_count": 148,
+            "min_hq_mode_mass": 0.0074,
+            "max_mode_mass": 0.01255,
+            "mass_tv": 0.04135,
+            "min_cov_eig_ratio": 0.6112008248884075,
+            "max_cov_eig_ratio": 1.2778357078575018,
+            "min_radial_median_ratio": 0.8741840585116393,
+            "max_radial_median_ratio": 1.1415556009704149,
+            "passed": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/native/rotated100/snapshots/step_007000.npz",
+          "sha256": "d2edb3dfaf73b3d90902973df35e3c16fb66ead423cc1311e1a6bf86725f12ff",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.98175,
+            "precision": 0.98175,
+            "min_hq_count": 159,
+            "min_hq_mode_mass": 0.00795,
+            "max_mode_mass": 0.01205,
+            "mass_tv": 0.036000000000000004,
+            "min_cov_eig_ratio": 0.6469656433592816,
+            "max_cov_eig_ratio": 1.2020188983392444,
+            "min_radial_median_ratio": 0.8650544249946668,
+            "max_radial_median_ratio": 1.161296187351078,
+            "passed": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "snapshot": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/native/staggered100/snapshots/step_007000.npz",
+          "sha256": "f2853386ff3e242ca35008015ac2335b888ca18d34ce64526b779f9a5b574af9",
+          "live_metrics": {
+            "n": 20000,
+            "valid_n": 20000,
+            "modes": 100,
+            "hq": 0.98675,
+            "precision": 0.98675,
+            "min_hq_count": 158,
+            "min_hq_mode_mass": 0.0079,
+            "max_mode_mass": 0.01345,
+            "mass_tv": 0.04190000000000001,
+            "min_cov_eig_ratio": 0.5698534918895649,
+            "max_cov_eig_ratio": 1.2144191168513594,
+            "min_radial_median_ratio": 0.854711615873557,
+            "max_radial_median_ratio": 1.1336666465689091,
+            "passed": true
+          }
+        }
+      ]
+    }
+  ]
+}

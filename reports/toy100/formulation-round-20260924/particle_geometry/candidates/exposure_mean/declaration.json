@@ -1,0 +1,27 @@
+{
+  "candidate": "exposure_mean",
+  "mechanism": "Exposure-amortized trust from exposure_trust plus multiplicity-averaged sampled-latent gradients: multiply each sample backward by (batch/particles)/number of occurrences of that index. This keeps the expected table-gradient scale while removing duplicate-index weighting.",
+  "rationale": "Exposure trust restores rare shape (eigen .664; sustained suffix 6) but ring remains seven. Ring uses a tiny table with repeated indices; remove batch multiplicity fluctuations before Adam while retaining sparse-table travel budgets. Prior multiplicity alone also left ring at seven; this is a declared coupled update refinement, not its replay.",
+  "extra_forward_backward": 0,
+  "optimizer_updates": "One D plus one G/particle update per frozen iteration; particle custom update substitutes original Adam table update.",
+  "extra_work": "Exposure-trust reductions plus sampled-index counting and one backward elementwise rescaling. No extra forwards/backwards/optimizer updates; equal-step only.",
+  "unchanged": [
+    "critic/objective",
+    "network Adam",
+    "architecture",
+    "data",
+    "seeds",
+    "RNG",
+    "evaluation",
+    "thresholds",
+    "budgets",
+    "decay/noise schedules",
+    "AE/token auxiliary terms"
+  ],
+  "code_sha256": {
+    "probe.py": "025ad6a9b319be5893e871d2541b0fbb4f9f495d09f7b8b7fd91661c0c63eead",
+    "particle_update.py": "75209fbcd1866a1463558fdd8abedbbefd15e5167232e4ce2561425b59b5c0f4"
+  },
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+}

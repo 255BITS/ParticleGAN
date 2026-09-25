@@ -1,0 +1,7 @@
+{
+  "checks": 3,
+  "real_gradient_correct": true,
+  "fake_samples_have_zero_penalty_effect": true,
+  "critic_forwards_per_penalty": 2,
+  "mechanism_sha256": "43eb1e535983d62612166a5d8643d4ccbfbe97f1ea94c6bf71ce7a36a7afe969"
+}

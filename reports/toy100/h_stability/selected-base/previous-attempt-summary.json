@@ -1,0 +1,176 @@
+{
+  "proposals_used": 10,
+  "proposal_cap": 16,
+  "first_run_training_gates": {
+    "PASS": 4,
+    "FAIL": 10
+  },
+  "warm_updates": 774,
+  "cold_updates": 3680,
+  "validation_replay_updates": 480,
+  "total_outer_updates": 4934,
+  "total_player_commits": 9868,
+  "warm_measured_seconds": 16.01870433613658,
+  "cold_measured_seconds": 25.737900261068717,
+  "unit_distinct_latest": {
+    "PASS": 63,
+    "SKIPPED": 1
+  },
+  "unit_case_executions": {
+    "PASS": 99,
+    "SKIPPED": 1,
+    "ERROR": 2
+  },
+  "ledger_status_counts": {
+    "FAIL": 11,
+    "PASS": 24,
+    "SKIPPED": 227,
+    "ERROR": 2
+  },
+  "release_qualified": false,
+  "best_ring_candidate": "g_threequarter_rate",
+  "own_state_1200": "SKIPPED: earlier frozen cold gate failure",
+  "leaderboard": [
+    {
+      "candidate": "g_threequarter_rate",
+      "warm": "PASS",
+      "checks": 200,
+      "passing_checks": 200,
+      "first_failure": null,
+      "min_hq": 0.92236328125,
+      "rates": {
+        "g": 0.0011250000000000001,
+        "d": 0.0015,
+        "prior": 0.0022500000000000003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-04/g_threequarter_rate"
+    },
+    {
+      "candidate": "g_half_rate",
+      "warm": "PASS",
+      "checks": 200,
+      "passing_checks": 200,
+      "first_failure": null,
+      "min_hq": 0.9814453125,
+      "rates": {
+        "g": 0.00075,
+        "d": 0.0015,
+        "prior": 0.0015
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-02/g_half_rate"
+    },
+    {
+      "candidate": "network_half_rate",
+      "warm": "PASS",
+      "checks": 200,
+      "passing_checks": 200,
+      "first_failure": null,
+      "min_hq": 0.963623046875,
+      "rates": {
+        "g": 0.00075,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-04/network_half_rate"
+    },
+    {
+      "candidate": "g_temporal025",
+      "warm": "FAIL",
+      "checks": 55,
+      "passing_checks": 54,
+      "first_failure": 1255,
+      "min_hq": 0.87060546875,
+      "rates": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-02/g_temporal025"
+    },
+    {
+      "candidate": "paired_alt",
+      "warm": "FAIL",
+      "checks": 55,
+      "passing_checks": 54,
+      "first_failure": 1255,
+      "min_hq": 0.788818359375,
+      "rates": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-01/paired_alt"
+    },
+    {
+      "candidate": "optimistic025",
+      "warm": "FAIL",
+      "checks": 49,
+      "passing_checks": 48,
+      "first_failure": 1249,
+      "min_hq": 0.88232421875,
+      "rates": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-08/optimistic025"
+    },
+    {
+      "candidate": "paired_crn",
+      "warm": "FAIL",
+      "checks": 12,
+      "passing_checks": 11,
+      "first_failure": 1212,
+      "min_hq": 0.755615234375,
+      "rates": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-06/paired_crn"
+    },
+    {
+      "candidate": "paired_sim",
+      "warm": "FAIL",
+      "checks": 1,
+      "passing_checks": 0,
+      "first_failure": 1201,
+      "min_hq": 0.85205078125,
+      "rates": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-01/paired_sim"
+    },
+    {
+      "candidate": "independent_sim",
+      "warm": "FAIL",
+      "checks": 1,
+      "passing_checks": 0,
+      "first_failure": 1201,
+      "min_hq": 0.808349609375,
+      "rates": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-01/independent_sim"
+    },
+    {
+      "candidate": "optimistic025_fast",
+      "warm": "FAIL",
+      "checks": 1,
+      "passing_checks": 0,
+      "first_failure": 1201,
+      "min_hq": 0.075439453125,
+      "rates": {
+        "g": 0.02,
+        "d": 0.005,
+        "prior": 0.01
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-08/optimistic025_fast"
+    }
+  ],
+  "finished_utc": "2026-09-24T17:55:40.102812+00:00"
+}

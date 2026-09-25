@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "replay_verdict": "FAIL",
+  "task": "two_pole",
+  "all_non_timing_metrics_equal": true,
+  "initial_parameters_equal": true,
+  "random_draws_equal": true,
+  "cuda_updates_verified": true,
+  "probe_sha256": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+  "mechanism_sha256": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628"
+}

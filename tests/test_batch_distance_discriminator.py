@@ -3,7 +3,8 @@ import pytest
 import torch
 
 from benchmarks.transfer_suite.shared_batch_feature_research import ARCHITECTURES, constructor
-from particlegan import BatchDistanceDiscriminator, GradientPenalty
+from particlegan import BatchDistanceDiscriminator
+from particlegan.grad_regularizers import GradientPenalty
 
 
 def paired_critics():
@@ -47,7 +48,8 @@ def test_native_active_bcap_value_and_parameter_gradients_are_identical():
             critic.head.weight[0, -4:] = torch.tensor([5., 2., 1., .5])
     real = torch.tensor([[0., 0.], [.12, .03], [-.07, .10], [.15, -.11]])
     fake = torch.tensor([[.02, -.03], [-.10, .08], [.09, .10], [.20, -.02]])
-    penalty = GradientPenalty('b_cap', coeff=6., kappa=1.25)
+    def penalty(critic, real, fake, step):
+        return GradientPenalty(coeff=6., kappa=1.25)(critic, real, fake, step=step)
     old, new = penalty(research, real, fake, step=1), penalty(public, real, fake, step=1)
     assert old > 0 and torch.equal(old, new)
     old.backward()

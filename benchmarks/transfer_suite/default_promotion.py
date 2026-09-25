@@ -15,12 +15,16 @@ from particlegan import GANTrainer, LinearSkipDiscriminator, learning_rate_scale
 from lib.toy_models import SimpleMLPGenerator
 from . import suite, vector_tasks
 from .protocol import test_verdict
+from benchmarks.gan_v3 import legacy_dict
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     args.output.mkdir(parents=True, exist_ok=False)
     root = Path(__file__).resolve().parents[2]
     reference_path = root/'reports/transfer_suite/rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz'
@@ -44,7 +48,7 @@ def main():
     trainer = GANTrainer(recipe, g, d, prior=prior,
                                  latent_generator=torch.Generator().manual_seed(1),
                                  penalty_generator=torch.Generator().manual_seed(2))
-    write('recipe.json', recipe.to_dict())
+    write('recipe.json', legacy_dict(recipe))
     original_groups = [[dict(lr=group['lr'], betas=group['betas']) for group in opt.param_groups]
                        for opt in (trainer.opt_g, trainer.opt_d)]
     write('optimizer_groups.json', original_groups)

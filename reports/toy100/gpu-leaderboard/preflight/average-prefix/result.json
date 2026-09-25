@@ -1,0 +1,61 @@
+{
+  "status": "PREFIX_COMPLETE",
+  "convergence": {
+    "name": "first_convergence_then_hold_v1",
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "start_step": 1200,
+    "modes": 8,
+    "min_hq": 0.9,
+    "convergence": "first consecutive qualifying window; operational quality criterion",
+    "hold": "the next updates, disjoint from confirmation; no restart after failure",
+    "training_feedback": false,
+    "frozen_toy_verdicts_unchanged": true,
+    "status": "SETTLING",
+    "converged_step": null,
+    "settling_checks": 0,
+    "settling_failures": 0,
+    "longest_settling_streak": 0,
+    "hold_checks": 0,
+    "first_hold_failure": null,
+    "hold_budget_complete": false
+  },
+  "diagnostic": [
+    {
+      "event": "checkpoint",
+      "step": 10,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 20,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "model_sha256": "9352f17aeb4481732de6ff381727cf9d10b05e055d336dee884fde6dd78caf64"
+}

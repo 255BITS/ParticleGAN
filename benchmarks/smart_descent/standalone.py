@@ -86,7 +86,10 @@ def main():
     parser.add_argument("--warm-start", type=Path, required=True)
     parser.add_argument("--generations", type=int, default=3)
     parser.add_argument("--population", type=int, default=8)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(args.output, args.warm_start, args.generations, args.population)
 
 

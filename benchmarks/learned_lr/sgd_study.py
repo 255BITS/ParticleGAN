@@ -288,7 +288,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("sweep", "fit"))
     parser.add_argument("--output", type=Path, required=True)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     (sweep if args.command == "sweep" else fit)(args.output)
 
 

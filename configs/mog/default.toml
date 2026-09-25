@@ -15,7 +15,6 @@ prior_lr_mult = 10.0
 # Keep the separately selected MoG formulation and Adam settings pinned.
 beta2 = 0.999
 lambda_ep = 1.0
-reg_arm = "b_cap"
 reg_coeff = 1.0
 reg_kappa = 1.0
 # Experiment multiplier is relative to this config's explicit prior LR (0.006).

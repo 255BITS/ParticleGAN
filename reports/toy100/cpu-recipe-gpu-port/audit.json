@@ -1,0 +1,94 @@
+{
+  "status": "PASS",
+  "scored_runs": 24,
+  "fixed_seed": 0,
+  "initializations_captured_without_updates": 6,
+  "preserved_setup_errors": 16,
+  "counts": {
+    "cpu": 6,
+    "cuda": 0,
+    "cuda_cpu_random": 4,
+    "cuda_cpu_init": 4
+  },
+  "comparisons": [
+    {
+      "task": "trajectory",
+      "verdicts": {
+        "cpu": "PASS",
+        "cuda": "FAIL",
+        "cuda_cpu_random": "PASS",
+        "cuda_cpu_init": "PASS"
+      },
+      "initial_parameters_match": true,
+      "all_cpu_random_draws_match": true,
+      "initialization_only_preserves_cuda_draws": true,
+      "cpu_random_calls": 1076
+    },
+    {
+      "task": "img_intensity2",
+      "verdicts": {
+        "cpu": "PASS",
+        "cuda": "FAIL",
+        "cuda_cpu_random": "PASS",
+        "cuda_cpu_init": "PASS"
+      },
+      "initial_parameters_match": true,
+      "all_cpu_random_draws_match": true,
+      "initialization_only_preserves_cuda_draws": true,
+      "cpu_random_calls": 4022
+    },
+    {
+      "task": "img_bars4",
+      "verdicts": {
+        "cpu": "PASS",
+        "cuda": "FAIL",
+        "cuda_cpu_random": "FAIL",
+        "cuda_cpu_init": "PASS"
+      },
+      "initial_parameters_match": true,
+      "all_cpu_random_draws_match": true,
+      "initialization_only_preserves_cuda_draws": true,
+      "cpu_random_calls": 4022
+    },
+    {
+      "task": "img_blobs4",
+      "verdicts": {
+        "cpu": "PASS",
+        "cuda": "FAIL",
+        "cuda_cpu_random": "PASS",
+        "cuda_cpu_init": "PASS"
+      },
+      "initial_parameters_match": true,
+      "all_cpu_random_draws_match": true,
+      "initialization_only_preserves_cuda_draws": true,
+      "cpu_random_calls": 4022
+    },
+    {
+      "task": "mode_hold",
+      "verdicts": {
+        "cpu": "PASS",
+        "cuda": "FAIL",
+        "cuda_cpu_random": "FAIL",
+        "cuda_cpu_init": "FAIL"
+      },
+      "initial_parameters_match": true,
+      "all_cpu_random_draws_match": true,
+      "initialization_only_preserves_cuda_draws": true,
+      "cpu_random_calls": 10458
+    },
+    {
+      "task": "vector_unequal_mass",
+      "verdicts": {
+        "cpu": "PASS",
+        "cuda": "FAIL",
+        "cuda_cpu_random": "PASS",
+        "cuda_cpu_init": "FAIL"
+      },
+      "initial_parameters_match": true,
+      "all_cpu_random_draws_match": true,
+      "initialization_only_preserves_cuda_draws": true,
+      "cpu_random_calls": 10574
+    }
+  ],
+  "scope": "Six failing transfer hosts only; no combined 22-toy score for either diagnostic variant"
+}

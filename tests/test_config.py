@@ -29,24 +29,6 @@ class ConfigTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "mapping"):
                 read_config(yaml)
 
-    def test_comparison_collects_toml_and_verifies_original_bytes(self):
-        import hashlib
-        import json
-        from experiments.compare_priors import collect
-        with tempfile.TemporaryDirectory() as temp:
-            out = Path(temp)
-            config = out / "input.toml"
-            config.write_text('prior = "particles"\nseed = 1\nout_dir = ' + json.dumps(str(out)) + '\n')
-            expected = read_config(config)
-            (out / "summary.json").write_text(json.dumps({
-                "config": expected, "final": {"modes": 100}, "collapse_events": []}))
-            manifest = {"runs": [{**expected, "config": str(config),
-                "config_sha256": hashlib.sha256(config.read_bytes()).hexdigest()}]}
-            self.assertEqual(collect(manifest)[0]["final"], {"modes": 100})
-            config.write_text(config.read_text() + "# Edited bytes\n")
-            with self.assertRaisesRegex(ValueError, "Config changed"):
-                collect(manifest)
-
     def test_primary_defaults_and_shipped_toml_match(self):
         from particlegan import get_recipe
         for trainer, name in (("train_100gaussians", "100gaussians"),

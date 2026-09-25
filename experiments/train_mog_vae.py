@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Queued particle VAEs: exact categorical KL and unbiased two-draw routing gradient."""
 import argparse
+import copy
 import hashlib
 import json
 import math
@@ -21,7 +22,7 @@ from experiments.run_grid import code_provenance
 from lib.mog_metrics import evaluate as generation_metrics, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
-from particlegan import calibrate_mog_sigma, GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
+from particlegan import calibrate_mog_sigma, get_recipe, MoGParticlePrior, ParticleRegularizer, scale_learning_rates
 
 DEFAULTS = {
     'posterior': 'categorical', 'gan_weight': 1., 'kl_weight': 1.,
@@ -205,6 +206,13 @@ def validate(cfg):
             raise ValueError(f'invalid {key}')
 
 
+def training_recipe(cfg):
+    """The default recipe with this experiment's learning rates and horizon."""
+    return get_recipe('vae_gan', num_particles=cfg['num_particles'], sigma_rel=cfg['sigma_rel'],
+                      batch_size=cfg['batch_size'], total_steps=cfg['steps'], lr=cfg['lr'],
+                      d_lr_mult=cfg['d_lr'] / cfg['lr'], prior_lr_mult=cfg['prior_lr'] / cfg['lr'])
+
+
 def train(cfg):
     validate(cfg)
     started_all = time.perf_counter()
@@ -236,17 +244,17 @@ def train(cfg):
                     evaluation_weights='final online weights; no checkpoint selection',
                     parameters={k: sum(p.numel() for p in m.parameters()) for k, m in [('G', g), ('D', d), ('E', e), ('prior', prior)]})
     write_json(out / 'metadata.json', metadata)
-    og = torch.optim.Adam([{'params': g.parameters(), 'lr': cfg['lr']},
-                          {'params': e.parameters(), 'lr': cfg['lr']},
-                          {'params': prior.parameters(), 'lr': cfg['prior_lr'], 'betas': (.5, .999)}], betas=(0., .999))
-    od = torch.optim.Adam(d.parameters(), lr=cfg['d_lr'], betas=(0., .999))
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=4), ParticleRegularizer()
+    recipe = training_recipe(cfg)
+    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
+    base_lrs = [[group['lr'] for group in o.param_groups] for o in (og, od)]
+    adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(od), ParticleRegularizer()
     streams = {k: rng(cfg['seed'] + v) for k, v in [('data', 2), ('prior', 3), ('posterior', 4)]}
     print(f"START posterior={cfg['posterior']} steps={cfg['steps']} sigma={float(prior.sigma):.8g} init={metadata['initialization_sha256']}", flush=True)
     train_seconds = 0.
     torch.cuda.synchronize(); block_start = time.perf_counter()
     with (out / 'metrics.jsonl').open('w', buffering=1) as history:
         for step in range(1, cfg['steps'] + 1):
+            scale_learning_rates(step - 1, recipe, (og, od), base_lrs, prior)
             x = sample_100gaussians(cfg['batch_size'], torch.device('cuda'), generator=streams['data'])
             # Always consume the same two prior draws, including VAE without GAN.
             z_d, _ = prior.sample(len(x), generator=streams['prior'])
@@ -255,7 +263,7 @@ def train(cfg):
             if cfg['gan_weight']:
                 d.requires_grad_(True); od.zero_grad(set_to_none=True)
                 fake = g(z_d.detach()).detach()
-                dl = adversarial.d_loss(d(x), d(fake)) + penalty(d, x, fake, step)
+                dl = adversarial.d_loss(d(x), d(fake)) + penalty(d, x, fake)
                 dl.backward(); od.step()
             d.requires_grad_(False); og.zero_grad(set_to_none=True)
             gl = adversarial.g_loss(d(g(z_g)), d(x).detach()) if cfg['gan_weight'] else x.new_zeros(())

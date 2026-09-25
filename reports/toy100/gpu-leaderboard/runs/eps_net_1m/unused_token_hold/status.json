@@ -1,0 +1,86 @@
+{
+  "candidate": "eps_net_1m",
+  "task": "unused_token_hold",
+  "status": "FAIL",
+  "seconds": 1.6021283420268446,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 400,
+    "optimizers": {
+      "134207130305216": {
+        "calls": 200,
+        "parameters": 257,
+        "device": "cuda:0"
+      },
+      "134207143518688": {
+        "calls": 200,
+        "parameters": 6,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/eps_net_1m/unused_token_hold/result.json",
+  "metrics": {
+    "unused_hold": 0.7754411995410919,
+    "concept_move": 0.44905442490946257
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "unused_hold",
+        "value": 0.7754411995410919,
+        "op": ">=",
+        "threshold": 0.85,
+        "status": "FAIL",
+        "margin": -0.07455880045890806
+      },
+      {
+        "metric": "concept_move",
+        "value": 0.44905442490946257,
+        "op": ">=",
+        "threshold": 0.85,
+        "status": "FAIL",
+        "margin": -0.4009455750905374
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 0.2797084562055562,
+    "confirmation_fraction": 2.0
+  }
+}
