@@ -44,7 +44,7 @@
     "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
     "p3_floor_reopen": "Sensitive4 PASS after observation-hook repair; remaining18 NOT_RUN. Hold1200+300, FAIL77/81 recovery, scheduled noise. Not promoted.",
     "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted.",
-    "rp1_signal_close": "PROVISIONAL: own hold1200/1200+extension300/300; live shiftUNCONFIRMED with stationary5/5, prehold120/120 and deadline81/81. Matched full-state frozen control, own22, horizon audit and delayed/repeated stress pending. Not promoted."
+    "rp1_signal_close": "REJECTED: own hold1200+300 and live shift81/81, but img_intensity2 FAIL (3/24 observations, no sustained confirmation) and native grid100 accuracy FAIL (coverage PASS). Transfer8 PASS/1 FAIL/10 NOT_RUN. No more qualification or promotion."
   },
   "previous_round": {
     "round": 2,
@@ -56,40 +56,24 @@
     "report": "reports/toy100/continuous-round-2/README.md"
   },
   "verification_progress": {
-    "observed_utc": "2026-09-25T17:26:12.330092+00:00",
-    "candidate": "a3_reversal_strength",
+    "observed_utc": "2026-09-25T18:08:10.246458+00:00",
+    "candidate": "rp1_signal_close",
     "eligible_for_promotion": false,
-    "reason": "Fails original frozen toy gates; later successful hold is insufficient",
-    "counts_so_far": {
-      "PASS": 4,
-      "FAIL": 18
+    "reason": "Real img_intensity2 and native grid100 accuracy failures",
+    "transfer_counts": {
+      "PASS": 8,
+      "FAIL": 1,
+      "NOT_RUN": 10
     },
-    "gates": {
-      "mode_hold": "FAIL",
-      "vector_unequal_mass": "FAIL",
-      "vector_unequal_width": "FAIL",
-      "img_stripes2": "PASS",
-      "grid100": "FAIL",
-      "rotated100": "FAIL",
-      "staggered100": "FAIL",
-      "ae_gan_hold": "FAIL",
-      "cover_leftover": "FAIL",
-      "img_bars4": "FAIL",
-      "img_blobs4": "FAIL",
-      "img_intensity2": "FAIL",
-      "mid_scale_identity": "FAIL",
-      "residual_student": "FAIL",
-      "trajectory": "FAIL",
-      "two_pole": "FAIL",
-      "unipolar": "FAIL",
-      "unused_token_hold": "FAIL",
-      "vector_anisotropic": "PASS",
-      "vector_overlap": "PASS",
-      "vector_spiral": "PASS",
-      "vector_two_broad": "FAIL"
+    "native_counts": {
+      "PASS": 0,
+      "FAIL": 1,
+      "INCOMPLETE": 1,
+      "NOT_RUN": 1
     },
-    "ledger": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/tests.jsonl",
-    "complete": true
+    "report": "reports/toy100/continuous-round-3/rp1-rejection.md",
+    "complete": false,
+    "stopped_after_failure": true
   },
   "execution_policy": {
     "codex": 1,

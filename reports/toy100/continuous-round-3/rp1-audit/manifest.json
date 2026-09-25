@@ -1,0 +1,15 @@
+{
+  "source": "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit",
+  "scope": "Independent observation-only adapter and meaningful CUDA regression; not toy qualification",
+  "files_sha256": {
+    "observation_adapter.py": "3b60a1d9e5ab679376ccfd9efe6559c80e5eef23e4813f776349c709577cdf81",
+    "run_with_adapter.py": "f49720316080578dad000045c621276859f40b25261256c735cad71d42ba7d21",
+    "test_observation_adapter.py": "5310cda613bf965448c5f485aac4df8910b522a5d3181137e046a02bc0eaa1e8",
+    "ADAPTER.md": "ee8b9c7653a637aab6d34a6b3a3304f4b11032fa47290f54eaebfeb395beff4a",
+    "observation-adapter-hashes.json": "0c30a3f6e6cda246a413924097a271acf33091de4c83e3c31bf3ddedbe6378a7",
+    "observation-adapter-regression.json": "9345890a54b661f89c151d5c026a8e4f6e96bc91d9d6155a52c167177681dffc",
+    "rp1-horizon-audit.json": "6662015a16683f83733079db2e0f0fbfed49c623520d27440b4669afeb13e193",
+    "rp1-source-audit.json": "0ffb7fa93338a82c2c4e01b45ab0c73d7c237586f133cc850cc87a91deb8d193",
+    "rp1-horizon-training-state-audit.json": "d0baf7c59549d8915408023a2eb80a9ea33558747c87e7b57d142c61dea35ca5"
+  }
+}

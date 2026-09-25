@@ -16,6 +16,44 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_transfer_acquisition': ('codex', GPU1, '''Own acquisition/precision transfer
+after RP1's measured rejection. Read rp1-rejection.md and completed-transfer's
+result.md first. K3P remains selected; RP1 is a diagnostic branch, not a new base.
+RP1 passed the ring conjunction but img_intensity2 never closes (full-rate early
+penalty for all600 updates) and native grid100 closes early, then misses center
+accuracy. Design a general training-signal controller that addresses BOTH rather
+than changing fixed quiet counts or tuning a task duration. Inspect the original
+K3P acquisition/anchor/noise interaction and actual traces before deciding.
+Up to3 coherent proposals, no coefficient grid. Early img_intensity2 screening is
+authorized, then BOTH own canonical hold+extension and shift for each meaningful
+proposal; record failed screens too. Only a survivor gets original native grid100
+screen before deeper qualification. Preserve source and use the proven observer
+adapter if needed, checking its assumptions for each new controller. Scarce Codex:
+focused reads, no rebuilding harness, no deep audits on rejected candidates.
+Do not duplicate RP1 unchanged, and do not inherit any of its scores.'''),
+    'k3p_prox_release': ('grok', GPU0, '''Own the distinct reference-gap release
+hypothesis. Read completed-reference/attempts/k3p_reference_response/result.md and
+rp1-rejection.md. RR2's gap signal opened mobility and reacquired by2500, but slow
+reference movement pinned the gap/high rate and failed52/81; RR3 baseline leakage
+closed before reacquisition and failed0/81. From selected K3P, declare a general
+signal-based precision recovery with no fixed dwell, oracle or budget. Investigate
+gap contraction/innovation rather than another reference-decay coefficient grid.
+Remove inherited horizon noise for a final candidate. BOTH canonical protocols
+for every meaningful proposal. A ring survivor must first clear RP1's known
+img_intensity2 and full7000 grid100 coverage AND accuracy failures before opening
+expensive remaining qualification. All scores are own, no promotion here.'''),
+    'k3p_critic_confidence': ('grok', GPU0, '''Own scale-aware acquisition evidence.
+Read rp1-rejection.md: raw critic RMS/old peak never quiets for the image task yet
+closes grid100 before accurate centers. Starting from selected K3P, investigate
+whether minibatch uncertainty or gradient consistency provides a general closing
+signal that separates coherent learning from stochastic oscillation. Declare
+normalization across batch/dimension and all extra evaluations; no evaluation
+scores, task IDs, target centers, final horizon or known shifts in the learner.
+This is distinct from the existing local-curvature and raw signal/noise lanes;
+read their measured failures before committing a mechanism. No coefficient grid.
+Run BOTH canonical protocols per proposal. Screen img_intensity2 for ring
+survivors, then full7000 grid100 coverage AND accuracy before deep qualification.
+Use own evidence, not RP1's scores, and preserve learned sparse prior behavior.'''),
     'verify_p3_gates': ('grok', GPU0, '''Verification ONLY, no new mechanisms.
 Use UNCHANGED reports/toy100/continuous-round-2/sources/p3_floor_reopen/;
 verify hashes in sources/source-hashes.json and policy installation. This explicitly

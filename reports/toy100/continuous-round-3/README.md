@@ -7,7 +7,7 @@ three-Codex/five-Grok allocation. Both Codex and Grok over-cap launches have bee
 checked and rejected.
 
 K3P stays selected. [Round2](../continuous-round-2/README.md) finished21 new
-proposals with no winner. P3 is the best new partial lead: hold1200/1200,
+proposals with no winner. P3 was the strongest round-2 partial lead: hold1200/1200,
 extension300/300, stationary5/5, pre-hold120/120 and failed recovery77/81.
 Its remaining horizon-based noise and four deadline misses are binding failures.
 
@@ -36,32 +36,24 @@ contains only the first three replacements. Watch all live batches with:
 python3 /ml2/hypergan/monitor-gan.py --once
 ```
 
-**RP1 is a provisional lead, not promoted.** Its own hold passes1200/1200
-(minimum HQ .96850586), followed by300/300 extension checks (minimum HQ .96801758).
-The live shift passes stationary5/5, pre-hold120/120, and deadline81/81
-(minimum deadline HQ .91381836). The frozen driver status is UNCONFIRMED pending
-matched frozen control. [Exact source and first raw artifacts](sources/rp1-provisional-manifest.json)
-are preserved before further verification.
+**RP1 passed the live ring requirements, then failed transfer verification.**
+Own hold was 1200/1200, extension 300/300, stationary 5/5, pre-hold 120/120 and
+recovery 81/81. However, `img_intensity2` failed sustained confirmation (3/24
+passing observations), and native grid100 passed coverage but failed center
+accuracy. Eight transfer gates pass; ten remain unrun. RP1 is rejected and further
+native, seed and stress qualification is stopped. K3P stays selected.
 
-RP1 retains K3P's acquisition penalty, then holds the gradient cap/EMA anchor on
-while rates can increase again. Critic gradient RMS relative to a decaying peak
-controls that increase and later decay; it removes AP3's forced800-update high-rate
-dwell and peak reset. Input/output noise warmups last fixed120/240 updates and
-do not require knowing the final training duration. That formula description
-still requires a substantial paired horizon audit and actual installation in
-all adapters. See [exact declaration](sources/rp1_signal_close/DECLARATION.md).
+See the [failure diagnosis and evidence](rp1-rejection.md). The substantial
+horizon-prefix audit passes for training state; its separate raw whole-capture
+comparison fails on evaluation counters. The tested observer adapter preserves
+updates while fixing checks that previously compared rates from different steps.
+No audit pass overrides a quality failure.
 
-The Grok lane owns full matched-control evidence and toy gates. The single Codex
-slot was redirected to independent source, adapter and horizon-prefix auditing;
-its original experiment remains separate. Missing provenance cannot be treated
-as matching because both records omit a field. Observer/adapter execution errors
-are distinct from candidate gate failures and must be repaired without changing
-the learner or weakening a check.
-
-Only after canonical gates qualify does the separately frozen
-[delayed/repeated-change protocol](stress-protocol.json) run. No indefinite-learning
-claim follows from one successful target shift. All22 toys, horizon equivalence,
-matched control and stress results are still pending for RP1.
+[Reference-response results](completed-reference/attempts/k3p_reference_response/result.md)
+add three passing own holds/extensions, but every shift fails (29/81, 52/81,
+0/81). These are diagnostic leads only. Fresh searches focus on acquisition and
+precision across tasks, uncertainty in the closing signal, and reference-gap
+release. Every new formulation must earn its own scores.
 
 The user clarified the final native matrix: **all three layouts each4/4 seeds**,
 grid100/rotated100/staggered100 at1234–1237. This is12 full7000-update native runs,

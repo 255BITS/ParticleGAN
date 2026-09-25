@@ -1,0 +1,67 @@
+{
+  "candidate": "regression",
+  "gate": "rp1_lineage_oracle_and_budget_source_audit",
+  "status": "PASS",
+  "seconds": 0,
+  "metrics": {
+    "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+    "unchanged_parent_files": {
+      "config.json": true,
+      "latent.py": true,
+      "response.py": true,
+      "hold.py": true,
+      "shift.py": true,
+      "shift_frozen.py": true,
+      "probe.py": true,
+      "native100.py": true,
+      "checkpoint.py": true,
+      "convergence_gate.py": true
+    },
+    "sensitive_name_references": {
+      "target": [],
+      "center": [],
+      "converge": [],
+      "shift": [],
+      "quality": [],
+      "deadline": [],
+      "hq": [],
+      "horizon": [
+        {
+          "line": 136,
+          "name": "horizon"
+        },
+        {
+          "line": 137,
+          "name": "horizon"
+        },
+        {
+          "line": 138,
+          "name": "horizon"
+        }
+      ],
+      "total_steps": [
+        {
+          "line": 82,
+          "name": "total_steps"
+        },
+        {
+          "line": 99,
+          "name": "total_steps"
+        },
+        {
+          "line": 82,
+          "name": "total_steps"
+        },
+        {
+          "line": 99,
+          "name": "total_steps"
+        }
+      ]
+    },
+    "source_review": "No target identity/centers/change times/evaluation quality or convergence signals enter learner decisions. Norm history drives rates and mixing; WARMUP/QUIET_DWELL are absolute estimator/controller memory lengths. Fixed input/output ramps120/240 use elapsed updates and ignore horizon values except validation. No final-horizon dependency found in numeric learner rule.",
+    "limitation": "ever_anchored is an irreversible critic-constraint latch, disclosed as design limitation per supervisor; rate reopen remains reversible and is the ongoing mobility mechanism. No indefinite learning claim.",
+    "adapters": "Original dense-adapter observation timing error retained; observation-only wrapper published separately. Legacy ring uses original unchanged adapters.",
+    "continuity": "No learner reset on target shift exists. Saved canonical counts and log samples prove active updates; full identical active/frozen pre-shift checkpoint bytes were not saved in original wrappers."
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-source-audit.json"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "REJECTED",
+  "candidate": "rp1_signal_close",
+  "native": [
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-native-grid100/result.json",
+      "snapshot": "provisional-evidence/5756928ed93ae811fffef00614aa59c615c55a2f8ce14f274161c9503553d20f.json.gz",
+      "sha256": "5756928ed93ae811fffef00614aa59c615c55a2f8ce14f274161c9503553d20f"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-native-grid100/mechanism-receipt.json",
+      "snapshot": "provisional-evidence/16903d9f66005cdf32b0e7b59f09e6f403ec52ad1768effa7da50391b84bc85a.json.gz",
+      "sha256": "16903d9f66005cdf32b0e7b59f09e6f403ec52ad1768effa7da50391b84bc85a"
+    }
+  ],
+  "transfer_archive": "completed-transfer/evidence.json"
+}
