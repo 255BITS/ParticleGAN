@@ -112,3 +112,25 @@ and generator learning rate 0.0006. Its final frame explicitly displays
 the same budget and EMA readout. It did not use a longer training budget.
 Different hyperparameters and seeds make this an uncontrolled comparison,
 and the old GIF has no equivalently audited shape-metric protocol here.
+
+## README hero GIF
+
+The root `100gaussians.gif` now shows the default toy100 recipe
+(`configs/toy100/constraints_simple_regularization.json`) on `grid100`, live
+weights, seed 1234. [`hero-config.json`](hero-config.json) is that config with
+only `early_eval_steps` densified (every 10 updates through 1,200) so the
+fast early convergence gets smooth frames; checkpoint sampling is RNG-isolated,
+and the run reproduces the archived default's live HQ at updates 1,000, 3,000,
+and 7,000 (98.46% final). The dense schedule omits the gate's mandatory
+step-25 checkpoint, so that run's own gate reports INVALID; use the default
+command for gate evidence. The earlier `get_recipe("gan")` animation above is
+historical.
+
+```bash
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=''
+export ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2
+python -u -m benchmarks.toy100 run --config reports/readme-100gaussians/hero-config.json \
+  --problem grid100 --no-render --output artifacts/readme-hero > /tmp/readme-hero.log 2>&1
+tail -f /tmp/readme-hero.log
+python reports/readme-100gaussians/render_hero.py artifacts/readme-hero/grid100 100gaussians.gif
+```
