@@ -36,7 +36,8 @@ own hold+extension protocols pass, but all20 shifts fail. This brings these two
 completed groups to37 formulations and73/74 completed canonical protocols, with
 EG1's earlier shift still NOT_RUN. PB0's unchanged-parent instrumentation and
 qualification harnesses are excluded from formulation counts. The later kernel
-discrepancy and newly launched mechanisms are excluded while still running.
+discrepancy attempt is reported separately below; newly launched mechanisms are
+excluded while still running.
 
 | New search | Engine | Question |
 |---|---|---|
@@ -158,3 +159,13 @@ hold and each recovers0/81. PN1 ends input noise at update15; PN2 ends it at391
 but never reaches full output noise; PN3 freezes a raw-gradient peak and also
 fails acquisition. Complete measurements are preserved separately from the
 interrupted report. No descendant benchmark process remained at collection.
+
+The [kernel-discrepancy Codex attempt](completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md)
+has now finished another three rejected formulations: three image PASS and six
+canonical FAIL. All holds have zero qualifying settling checks; TD1/TD2 recover
+0/81, while TD3 recovers53/81 but fails stationary0/5 and pre-hold0/120. TD3 keeps
+near-full mobility and the early critic penalty throughout, never activating the
+anchor. More sensitivity to model error did not solve acquisition. Follow-ups
+separate error detection from update size and critic damping. These sources use
+absolute120/240 startup noise ramps, but no horizon audit or broad qualification
+is claimed after their quality failures.

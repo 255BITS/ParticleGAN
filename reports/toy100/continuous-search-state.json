@@ -87,13 +87,12 @@
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
     "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T19:00:42.554716+00:00",
+    "verified_live_utc": "2026-09-25T19:03:34.934960+00:00",
     "verified_live_counts": {
-      "codex": 1,
       "grok": 7
     },
     "verified_gpu_reservations": {
-      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 4,
+      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 3,
       "GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 4
     }
   },
@@ -168,5 +167,14 @@
       "PASS": 11
     },
     "report": "reports/toy100/continuous-round-3/first-replacement-wave-summary.json"
+  },
+  "latest_completed_codex": {
+    "lane": "k3p_training_discrepancy",
+    "proposals": 3,
+    "image_passes": 3,
+    "canonical_protocols_complete": 6,
+    "canonical_failures": 6,
+    "qualified_winners": 0,
+    "report": "reports/toy100/continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
   }
 }
