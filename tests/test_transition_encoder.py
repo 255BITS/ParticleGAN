@@ -5,6 +5,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from particlegan import K3PCritic
+
 from experiments.train_transition import DEFAULTS, train, training_recipe, generator_loss, discriminator_loss
 from lib.transition import (TransitionEncoder, TransitionGenerator, TransitionCritics, TransitionScaler,
                             encoded_transition, composed_transition, Transitions)
@@ -60,7 +62,7 @@ class EncoderTests(unittest.TestCase):
         self.assertGreater(float(fake.grad[:, 4:].norm()), 0)
         rngs = {name: torch.Generator().manual_seed(20+i) for i, name in enumerate(d.roles())}
         loss, _ = discriminator_loss(d, x, fake.detach(), self.c, self.context, self.recipe.make_loss(),
-                                     self.recipe.make_gradient_penalty(kappa=0), 1, rngs, 1.)
+                                     K3PCritic(self.recipe, d, None, kappa=0), 1, rngs, 1.)
         d.zero_grad(); loss.backward()
         self.assertTrue(all(p.grad is not None and torch.isfinite(p.grad).all() for p in d.parameters()))
 

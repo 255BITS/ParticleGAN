@@ -37,6 +37,7 @@ from .models import (
 )
 from .problems import PROBLEM_NAMES, sample_real
 from .schedule import policy_rate_action, step_with_policy
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -234,9 +235,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         if (isinstance(value, bool) or not isinstance(value, (int, float))
                 or not math.isfinite(value) or not 0 <= value <= 1):
             raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
-    recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
+    # Noise and network-horizon keys are benchmark-run fields: the benchmark
+    # applies them through its own wrappers and hooks, so the trainer recipe
+    # keeps their pre-K3P neutral values (see benchmarks.gan_v3).
+    recipe_kwargs = {key: user[key] for key in user
+                     if key in RECIPE_FIELDS and key not in RUN_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
-    recipe = get_recipe(**recipe_kwargs)
+    recipe = gan_v3_recipe(**recipe_kwargs)
     if "name" in user:
         recipe = recipe.replace(name=user["name"])
     if (recipe.model != "gan" or recipe.conditioning != "scalar"
@@ -246,7 +251,7 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("affine toy100_model requires z_dim=2")
     run["device"] = str(device)
     # Store all resolved inputs, including the public recipe's inherited values.
-    return {**recipe.to_dict(), **run}, recipe
+    return {**legacy_dict(recipe), **run}, recipe
 
 
 def _init_linear(module: nn.Module) -> None:

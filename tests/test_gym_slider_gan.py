@@ -45,7 +45,7 @@ class SliderGanTests(unittest.TestCase):
             zero_logits[:, [6,7,16,17]] = 0.
             loss, _ = error_loss(critic, zero_logits, zero_targets, 1, torch.Generator().manual_seed(9))
             self.assertAlmostEqual(float(loss.detach()), math.log(2), places=6)
-            cap = training_recipe(self.cfg).make_gradient_penalty(lazy_k=4, coeff=1., kappa=1.)
+            cap = training_recipe(self.cfg).make_gradient_penalty(arm='b_cap', lazy_k=4, coeff=1., kappa=1.)
             x = torch.randn(4,18)
             f = lambda a: 2*a[:,0]
             off,_ = cap.penalty(f,x,x,step=3)
@@ -53,7 +53,7 @@ class SliderGanTests(unittest.TestCase):
             self.assertEqual(float(off),0.)
             self.assertAlmostEqual(float(on),4.,places=5)
             # Actual attention critic supports second derivatives for the exact cap.
-            tight = training_recipe(self.cfg).make_gradient_penalty(lazy_k=4,kappa=0.)
+            tight = training_recipe(self.cfg).make_gradient_penalty(arm='b_cap', lazy_k=4,kappa=0.)
             penalty,_=tight.penalty(critic,x,x,step=4)
             penalty.backward()
             self.assertTrue(all(p.grad is None or torch.isfinite(p.grad).all() for p in critic.parameters()))

@@ -5,7 +5,8 @@ import torch
 
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
-from particlegan import GANTrainer, get_recipe
+from benchmarks.gan_v3 import gan_v3_recipe
+from particlegan import GANTrainer
 from particlegan.particle_prior import ParticlePrior
 from reports.toy100.continuous_candidates import candidate_update
 
@@ -14,7 +15,7 @@ OPTIONS = {"network_eps": 1e-3, "prior_eps": 1e-8}
 
 
 def _recipe():
-    return get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
+    return gan_v3_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
                       total_steps=2, lr=0.002, d_lr_mult=1,
                       prior_lr_mult=2, lr_anneal_start=0, lr_floor=1,
                       reg_arm="f_none", reg_coeff=0, prior_reg=0)

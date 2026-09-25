@@ -14,10 +14,10 @@ from particlegan import calibrate_mog_sigma, MoGParticlePrior, ParticlePrior, Pa
 def test_mog_components_use_common_training_defaults_and_explicit_resources():
     recipe = get_recipe(prior_kind='mog', sigma_rel=.025, num_particles=400, total_steps=28000)
     prior = recipe.make_prior()
-    assert prior.z.shape == (400, 4) and prior.sigma_rel == 1/40 and prior.standardize
+    assert prior.z.shape == (400, 2) and prior.sigma_rel == 1/40 and prior.standardize
     assert prior.sigma > 0 and prior.sigma == prior.d0 * prior.sigma_rel
     assert recipe.num_particles == 400 and recipe.total_steps == 28000
-    assert recipe.prior_lr_mult == 2 and recipe.betas == (0., .99) and recipe.prior_betas is None
+    assert recipe.prior_lr_mult == 2 and recipe.betas == (0., .999) and recipe.prior_betas is None
     assert isinstance(recipe.make_prior(), MoGParticlePrior)
     assert type(get_recipe().make_prior()) is ParticlePrior
     assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
@@ -163,8 +163,8 @@ def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers(mode
     generator, critic = nn.Linear(2, 2), nn.Linear(2, 1)
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, foreach=False)
     assert [group['lr'] for group in opt_g.param_groups] == [.00425, .0085]
-    assert [group['betas'] for group in opt_g.param_groups] == [(0., .99), (.5, .999)]
-    assert opt_d.param_groups[0]['betas'] == (0., .99)
+    assert [group['betas'] for group in opt_g.param_groups] == [(0., .999), (.5, .999)]
+    assert opt_d.param_groups[0]['betas'] == (0., .999)
     before, sigma = prior.z.detach().clone(), prior.sigma.clone()
     eps = torch.ones(6, 2)
     z, _ = prior.sample(6, fixed_first_n=True, eps=eps)

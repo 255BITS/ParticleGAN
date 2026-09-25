@@ -367,14 +367,14 @@ def test_trainer_runs_k3p_through_blend_and_resumes_exactly():
         phases.append(out["penalty_stats"]["phase"])
         penalties.append(out["penalty"])
     assert phases[0] == "a" and "blend" in phases
-    assert full.state_dict()["penalty_state"]["anchor_started"]
-    assert torch.equal(full.ema_D[1].running_mean, full.D[1].running_mean)
+    assert full.state_dict()["k3p"]["critic"]["penalty"]["anchor_started"]
+    assert "1.running_mean" in full.state_dict()["k3p"]["critic"]["ema"]
 
     first = _k3p_trainer()
     for real in reals[:5]:
         first.step(real)
     checkpoint = first.state_dict()
-    assert "ema_D" in checkpoint["models"]
+    assert "ema_D" not in checkpoint["models"] and checkpoint["k3p"]["critic"]["ema"] is not None
     resumed = _k3p_trainer()
     resumed.load_state_dict(checkpoint)
     for i, real in enumerate(reals[5:], start=5):

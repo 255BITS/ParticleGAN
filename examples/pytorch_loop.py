@@ -3,7 +3,19 @@
 CPU smoke: python -u examples/pytorch_loop.py --steps 5 --batch-size 16
 TOML:     python -u examples/pytorch_loop.py --config examples/api.toml
 
-This small MLP demonstrates integration using the recommended defaults.
+This small MLP demonstrates integration using the recommended (K3P) defaults,
+wiring every K3P component explicitly -- the same update GANTrainer performs:
+
+* role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
+* critic input noise / generator output noise (annealed, from one stream),
+* K3P gradient penalty with an EMA-critic ``CriticAnchor`` you allocate,
+* ``CriticSpikeGuard`` before each critic Adam step,
+* ``after_critic_step`` after it (anchor EMA + the LR that drives the blend),
+* A2 ``LatentRowDamping`` around the prior's Adam step (history you allocate).
+
+To checkpoint, save the modules, both optimizers, ``ema_critic``,
+``latent_history`` and each component's ``state_dict()``. With several
+critics, build one penalty/anchor/guard set per critic optimizer.
 Replace its networks and synthetic batches with your own pipeline.
 """
 
@@ -15,7 +27,8 @@ import time
 import torch
 from torch import nn
 
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe, learning_rate_scales
+from particlegan.training import input_noise_std, output_noise_std
 
 
 @torch.no_grad()
@@ -69,11 +82,24 @@ def main():
     ).to(device)
     prior = recipe.make_prior().to(device)
     gan = recipe.make_loss()
-    penalty = recipe.make_gradient_penalty()
+    # K3P: the caller allocates the EMA critic; the anchor only averages it.
+    ema_critic = copy.deepcopy(critic).requires_grad_(False)
+    anchor = recipe.make_critic_anchor(critic, ema_critic)
+    penalty = recipe.make_gradient_penalty(anchor=anchor if recipe.reg_arm == "k3p" else None)
+    guard = recipe.make_critic_guard()  # None when d_guard_ratio == 0
     spread = recipe.make_prior_regularizer()
-    # Ordinary Adam optimizers; replace these with your own if desired.
+    # Ordinary Adam optimizers ([generator, prior] groups, and the critic).
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+    # A2 needs the prior table alone in its Adam group with beta1 == 0.
+    latent_history = torch.zeros_like(prior.z.detach())
+    damping = recipe.make_latent_damping(prior.z, latent_history)  # None when disabled
+    noise = torch.Generator(device=device).manual_seed(43)
+
+    def with_noise(x, sigma):
+        if sigma == 0:
+            return x
+        return x + sigma * torch.randn(x.shape, generator=noise, device=x.device, dtype=x.dtype)
     ema_g = copy.deepcopy(generator).eval().requires_grad_(False)
     ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
@@ -82,35 +108,45 @@ def main():
     print(json.dumps({"event": "config", **recipe.to_dict(), "device": str(device)}), flush=True)
     started = time.monotonic()
     for step in range(1, recipe.total_steps + 1):
-        scale = learning_rate_scale(
-            step - 1, recipe.total_steps, start=recipe.lr_anneal_start, floor=recipe.lr_floor,
-        )
-        for opt, rates in zip((opt_g, opt_d), base_lrs):
-            for group, rate in zip(opt.param_groups, rates):
-                group["lr"] = rate * scale
+        network, prior_scale = learning_rate_scales(step - 1, recipe)
+        opt_g.param_groups[0]["lr"] = base_lrs[0][0] * network
+        opt_g.param_groups[1]["lr"] = base_lrs[0][1] * prior_scale
+        opt_d.param_groups[0]["lr"] = base_lrs[1][0] * network
+        sigma_in = input_noise_std(recipe, step - 1)
+        sigma_out = output_noise_std(recipe, step - 1)
+
+        def noisy(fn):  # fresh critic input noise per evaluation
+            return lambda x: fn(with_noise(x, sigma_in))
 
         # Replace this synthetic batch with a batch from your DataLoader.
         ids = torch.randint(len(centers), (recipe.batch_size,), device=device)
         real = centers[ids] + 0.015 * torch.randn(recipe.batch_size, 2, device=device)
         z, particle_ids = prior.sample(recipe.batch_size)
-        fake = generator(z)
+        fake = with_noise(generator(z), sigma_out)
 
         opt_d.zero_grad(set_to_none=True)
-        d_loss = gan.d_loss(critic(real), critic(fake.detach()))
-        d_loss = d_loss + penalty(critic, real, fake.detach(), step=step)
+        d_loss = gan.d_loss(noisy(critic)(real), noisy(critic)(fake.detach()))
+        d_loss = d_loss + penalty(noisy(critic), real, fake.detach(), step, ema_critic=noisy(anchor))
         d_loss.backward()
+        if guard is not None:
+            guard.apply_(opt_d)
         opt_d.step()
+        penalty.after_critic_step(opt_d)  # anchor EMA, then the LR that drives s
 
         # Freeze critic weights while preserving gradients through critic(fake).
         flags = [parameter.requires_grad for parameter in critic.parameters()]
         critic.requires_grad_(False)
         try:
             opt_g.zero_grad(set_to_none=True)
-            g_loss = gan.g_loss(critic(fake), critic(real).detach())
+            g_loss = gan.g_loss(noisy(critic)(fake), noisy(critic)(real).detach())
             prior_loss = spread(prior.z[particle_ids.unique()])
-            total_g = g_loss + prior_loss
+            total_g = g_loss + prior_loss  # spread already carries recipe.prior_reg
             total_g.backward()
-            opt_g.step()
+            if damping is None:
+                opt_g.step()
+            else:
+                with damping.around(opt_g):
+                    opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
@@ -121,7 +157,8 @@ def main():
             print(json.dumps({
                 "event": "train", "step": step,
                 "d_loss": d_loss.detach().item(), "g_loss": g_loss.detach().item(),
-                "prior_loss": prior_loss.detach().item(), "lr_scale": scale,
+                "prior_loss": prior_loss.detach().item(), "lr_scale": network,
+                "k3p_s": penalty.blend_weight(),
                 "seconds": round(time.monotonic() - started, 3),
             }), flush=True)
 

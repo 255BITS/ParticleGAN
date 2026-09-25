@@ -9,6 +9,7 @@ from particlegan import GANTrainer, Recipe, get_recipe
 
 
 ARCHIVED = json.loads((Path(__file__).with_name('fixtures') / 'gan_recipe_versions.json').read_text())
+K3P_CONFIG = json.loads((Path(__file__).parents[1] / 'reports/toy100/gap-fill-20260925/sources/k3p/config.json').read_text())
 
 
 def without_name(values):
@@ -16,8 +17,13 @@ def without_name(values):
 
 
 def test_default_matches_every_recorded_winning_field():
+    # The frozen K3P config ran arm a_r1r2 under the K3P patch; the package names it k3p.
     actual = json.loads(json.dumps(get_recipe().to_dict()))
-    assert without_name(actual) == without_name(ARCHIVED['recipes']['gan_v3'])
+    shared = (set(actual) & set(K3P_CONFIG)) - {'name', 'reg_arm'}
+    assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
+    assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
+            'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared
+    assert actual['reg_arm'] == 'k3p' and actual['name'] == 'k3p'
     assert get_recipe() == Recipe()
 
 
@@ -90,7 +96,7 @@ def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():
     opt_g, opt_d = recipe.make_optimizers(generator, discriminator, recipe.make_prior())
     assert [group['lr'] for group in opt_g.param_groups] == [.00425, .0085]
     assert [group['lr'] for group in opt_d.param_groups] == [.00425]
-    assert all(group['betas'] == (0., .99) for opt in (opt_g, opt_d) for group in opt.param_groups)
+    assert all(group['betas'] == (0., .999) for opt in (opt_g, opt_d) for group in opt.param_groups)
 
 
 def test_json_integer_zero_moments_construct_real_adam_optimizers():
@@ -107,7 +113,7 @@ def test_complete_old_receipts_still_restore_without_preset_dispatch(version):
     recipe = Recipe(**ARCHIVED['recipes'][version]).replace(num_particles=8, z_dim=2, batch_size=4, total_steps=2)
     trainer = GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1))
     checkpoint = trainer.state_dict()
-    assert checkpoint['schema'] == 1 and checkpoint['recipe'] == recipe.to_dict()
+    assert checkpoint['schema'] == 2 and checkpoint['recipe'] == recipe.to_dict()
     assert Recipe(**checkpoint['recipe']) == recipe
     restored = GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1))
     restored.load_state_dict(checkpoint)

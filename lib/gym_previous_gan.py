@@ -73,8 +73,12 @@ def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, step=1, rngs=Non
             xf, _ = d.inputs(role, fake.detach() if reg is not None else fake, terrain.detach())
             if reg is not None:
                 losses.append(gan.d_loss(critic(xr, context)[0], critic(xf, context)[0]))
+                # A K3PCritic gets this role's EMA view as its anchor; a
+                # plain stateless penalty (e.g. a pinned b_cap) needs none.
+                anchor = ({"ema_critic": reg.ema_critic(lambda m, x: m.critic_for(role)(x, context)[0])}
+                          if hasattr(reg, "ema_critic") else {})
                 penalty, _ = reg.penalty(lambda x: critic(x, context)[0], xr, xf, step,
-                                          rngs[role], collect_stats=False)
+                                         generator=rngs[role], collect_stats=False, **anchor)
                 penalties.append(penalty)
             else:
                 with torch.no_grad():

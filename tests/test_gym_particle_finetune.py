@@ -149,7 +149,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             columns = [torch.from_numpy(records[key][:4]) for key in
                        ("states", "previous_actions", "actions", "next_states", "terrain")]
             recipe = training_recipe({**bundle["world_config"], "steps": 2, "batch_size": 4})
-            gan, reg = recipe.make_loss(), recipe.make_gradient_penalty(coeff=1., kappa=1.)
+            gan, reg = recipe.make_loss(), recipe.make_gradient_penalty(arm="b_cap", coeff=1., kappa=1.)
             require_classic_particle_gan(gan, reg)
             expectations = dict(control=("E_control",), prior=(), encoded=("E",), composed=("E",))
             seen = set()

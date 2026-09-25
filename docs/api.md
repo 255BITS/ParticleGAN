@@ -89,10 +89,24 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe()` constructs the shared **GAN v3** winner: Rp logistic,
-b_cap coefficient 6, κ1.25, spread .05, Adam (0,.99), G/D LR .00425 and particle
-LR .0085. Rates hold for 60% of the budget, then cosine toward 5%. There is no
-particle L2 term. Live sampling is the default; EMA is explicit.
+`get_recipe()` constructs **K3P** ([details](k3p.md)): Rp logistic, the K3P
+critic penalty (coefficient 1, κ 1, EMA-critic anchor .999), critic spike guard
+(ratio 5 after 200 steps), A2 latent-row damping, Adam (0,.999), G/D LR .00425
+and particle LR .0085. G/D rates hold for 60% of a 1,600-update horizon, then
+cosine to 1% (`network_lr_horizon_cap`, `network_lr_floor`); particle rates hold
+for 60% of the budget, then cosine toward 5%. The critic sees annealed input
+noise and the generator output carries warmed-up noise (also in `sample`). There
+is no particle spread or L2 term. Live sampling is the default; EMA is explicit.
+
+`GANTrainer` owns K3P state: `trainer.critic` is its `K3PCritic` (penalty,
+`ema_D`, guard), `trainer.latent_damping` wraps the prior's Adam step and
+checkpoints use schema 2 (`"k3p"` entry plus a noise stream). Schema-1 (GAN v3)
+checkpoints raise `ValueError`. For caller-owned loops, use one
+`K3PCritic(recipe, D, opt_d)` per critic optimizer: `k3p.penalty(...)` in the
+critic loss and `k3p.step()` in place of `opt_d.step()`; pass
+`ema_critic=k3p.ema_critic(lambda m, x: ...)` per role when one module serves
+several critic roles. `learning_rate_scales(step, recipe)` returns the
+`(network, prior)` LR multipliers.
 
 | Version | Live behavioral toys passed | Meaning |
 | --- | ---: | --- |
@@ -682,16 +696,23 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | Shared field | Default |
 | --- | --- |
 | `model`, `conditioning`, `num_classes` | `gan`, `scalar`, `None` |
-| `z_dim`, `num_particles` | `4`, `20_000` |
+| `z_dim`, `num_particles` | `2`, `20_000` |
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
 | `loss_type`, `gan_mode` | `logistic`, `rp` |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
-| `betas`, `prior_betas` | `(0, .99)`, `None` (inherit betas) |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `6`, `1.25` |
-| `reg_every`, `reg_method` | `1`, `autograd` |
-| `prior_reg`, `ema_decay` | `.05`, `.995` |
-| `lr_anneal_start`, `lr_floor` | `.6`, `.05` |
-| `batch_size`, `total_steps` | `256`, `7_000` |
+| `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `reg_arm`, `reg_coeff`, `reg_kappa` | `k3p`, `1`, `1` |
+| `reg_every`, `reg_method` | `1` (K3P every k-th step at k× coefficient), `autograd` |
+| `prior_reg`, `ema_decay` | `0`, `.995` |
+| `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
+| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule and K3P blend floor; `None` = full budget / `lr_floor`) |
+| `reg_anchor_decay` | `.999` |
+| `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
+| `latent_damping_max_rate` | `.5` (0 disables) |
+| `direct_particle_betas` | `(0, .9)` (`make_direct_response`, custom loops) |
+| `input_noise_std`, `input_noise_anneal_end` | `.5`, `.1` |
+| `output_noise_std`, `output_noise_warmup` | `.029`, `.2` |
+| `batch_size`, `total_steps` | `2048`, `7_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
 

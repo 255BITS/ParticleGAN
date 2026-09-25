@@ -22,7 +22,7 @@ from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, spars
 from lib.gym_state_control import training_recipe
 from lib.gym_gan_control import (MODULE_KEYS, build_gan_models, initial_hashes, real_views,
     fake_views, discriminator_loss, generator_loss)
-from particlegan import learning_rate_scale
+from particlegan import K3PCritic, learning_rate_scale
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24003, device="cuda:1", z_dim=32, num_particles=1024,
@@ -113,7 +113,7 @@ def train(cfg):
     optimizers = (optimizer, optimizer_d)
     base_rates = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     prior_regularizer = recipe.make_prior_regularizer()
-    gan, reg = recipe.make_loss(), recipe.make_gradient_penalty()
+    gan, reg = recipe.make_loss(), K3PCritic(recipe, bundle["D"], optimizer_d)
     ema = {**bundle, **{key: copy.deepcopy(bundle[key]).eval().requires_grad_(False) for key in ("G", "E", "prior")}}
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(labeled=11, auxiliary=21, d_labeled=31, d_auxiliary=41,
@@ -182,7 +182,7 @@ def train(cfg):
                 raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
             optimizer_d.zero_grad(set_to_none=True)
             d_loss.backward()
-            optimizer_d.step()
+            reg.step()  # spike guard, Adam step, K3P anchor/LR record
             optimizer_d.zero_grad(set_to_none=True)
             bundle["D"].requires_grad_(False)
             g_batch = batch()

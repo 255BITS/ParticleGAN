@@ -8,6 +8,8 @@ import unittest
 import numpy as np
 import torch
 
+from particlegan import K3PCritic
+
 from experiments.train_gym_gan_control import DEFAULTS, train
 from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, sparse_task_losses
 from lib.gym_state_control import training_recipe, state_control_action
@@ -75,7 +77,7 @@ class GanControlTrainingTests(unittest.TestCase):
                 changed = raw.detach().clone()
                 changed[:, 8:10] = float("nan")
                 torch.testing.assert_close(score, critic(changed, context)[0], atol=0, rtol=0)
-                penalty = training_recipe(bundle["config"]).make_gradient_penalty(kappa=0.)
+                penalty = training_recipe(bundle["config"]).make_gradient_penalty(arm="b_cap", kappa=0.)
                 original_penalty, _ = penalty.penalty(lambda x: critic(x, context)[0], raw, raw, 1)
                 changed_penalty, _ = penalty.penalty(lambda x: critic(x, context)[0], changed, changed, 1)
                 self.assertGreater(float(original_penalty.detach()), 0.)
@@ -106,7 +108,7 @@ class GanControlTrainingTests(unittest.TestCase):
             for arm in ("joint", "marginals"):
                 bundle = build_gan_models({**self.cfg, "arm": arm}, fit_sparse_scaler(records))
                 recipe = training_recipe(bundle["config"])
-                gan, reg = recipe.make_loss(), recipe.make_gradient_penalty()
+                gan, reg = recipe.make_loss(), K3PCritic(recipe, bundle["D"], None)
                 views = real_views(bundle, batch)
                 for path in ("prior", "encoded"):
                     for key in ("E", "G", "prior", "D"):

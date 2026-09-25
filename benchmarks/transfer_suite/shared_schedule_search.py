@@ -21,6 +21,7 @@ from benchmarks import learned_lr_evaluation as bridge
 
 from . import compare_defaults, shared_default_search as reference, shared_profile_search as profile, suite
 from .compare_defaults import write
+from benchmarks.gan_v3 import gan_v3_recipe
 
 
 SCHEDULE_FIELDS = {'lr_anneal_start', 'lr_floor'}
@@ -29,7 +30,7 @@ SCHEDULE_FIELDS = {'lr_anneal_start', 'lr_floor'}
 def prepare(declaration):
     with patch.object(reference, 'OPTIONS', reference.OPTIONS | SCHEDULE_FIELDS):
         jobs, recipes, discriminators = profile.prepare(declaration)
-    base = get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
+    base = gan_v3_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
                                 betas=(0., .99), prior_betas=None, reg_coeff=6.,
                                 reg_kappa=1.25, prior_reg=.05).replace(name='shared_c6')
     for _, recipe in recipes:

@@ -69,8 +69,9 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GANTrainer, GradientPenalty, ParticlePrior, get_recipe, learning_rate_scale,
+    GANTrainer, GradientPenalty, K3PCritic, ParticlePrior, get_recipe, learning_rate_scales,
 )
+from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
 
 from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
@@ -183,7 +184,7 @@ def train(
     save_plots: bool = True,
     use_training_api: bool = False,
     beta2: float = _RECIPE.betas[1],
-
+    recipe_overrides: dict = None,
 ):
     if type(metric_interval) is not int or metric_interval <= 0:
         raise ValueError("metric_interval must be a positive integer")
@@ -223,7 +224,7 @@ def train(
         betas=(beta1, beta2), loss_type=loss_type, gan_mode=gan_mode,
         reg_arm=reg_arm, reg_coeff=reg_coeff, reg_kappa=reg_kappa, reg_every=reg_every, reg_method=reg_method,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
-        lr_floor=lr_floor,
+        lr_floor=lr_floor, **(recipe_overrides or {}),
     )
     # The fresh-Gaussian research control retains a fixed visualization table
     # and its historical initialization RNG consumption.
@@ -263,20 +264,21 @@ def train(
         # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
-        regularizer = recipe.make_gradient_penalty(fd_eps=reg_fd_eps)
-        if regularizer.arm == "k3p":
-            # K3P anchors D's input gradient to D's parameter EMA; the caller
-            # owns that copy.
-            from particlegan.k3p import CriticAnchor
-            regularizer.anchor = CriticAnchor(D, copy.deepcopy(D).eval().requires_grad_(False))
-
         opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
+        # K3P critic bundle: EMA-critic anchor, gradient penalty, spike guard
+        # (the same object GANTrainer uses; see examples/pytorch_loop.py for
+        # the individual components).
+        critic = K3PCritic(recipe, D, opt_D, fd_eps=reg_fd_eps)
         # Keep a separate prior optimizer for the existing update/checkpoint layout.
         opt_prior = (
             torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
                              betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
             if learnable_prior else None
         )
+        # A2 sparse latent-row damping on the prior table (caller-owned history).
+        latent_damping = (recipe.make_latent_damping(prior.z, torch.zeros_like(prior.z.detach()))
+                          if opt_prior is not None else None)
+        noise_gen = torch.Generator(device=device).manual_seed(seed + 5)
 
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
@@ -337,14 +339,29 @@ def train(
                 loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
                 ep_z = stats["prior_regularization"]
             else:
-                # Full LR until lr_anneal_start, then cosine down to lr_floor.
-                # Retain the historical minimum one-update decay duration.
-                anneal_from = lr_anneal_start * total_steps
-                scale = learning_rate_scale(global_step - anneal_from,
-                                            max(1.0, total_steps - anneal_from), 0.0, lr_floor)
+                # K3P schedule: G/D anneal over the network horizon to the
+                # network floor; the prior anneals over the full budget.
+                network, prior_scale = learning_rate_scales(global_step, recipe)
                 for opt in all_opts:
+                    scale = prior_scale if opt is opt_prior else network
                     for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                         group["lr"] = base * scale
+                sigma_in = input_noise_std(recipe, global_step)
+                sigma_out = output_noise_std(recipe, global_step)
+
+                def noisy(critic_fn):  # annealed critic input noise, fresh per call
+                    if sigma_in == 0:
+                        return critic_fn
+                    return lambda x: critic_fn(x + sigma_in * torch.randn(
+                        x.shape, generator=noise_gen, device=x.device, dtype=x.dtype))
+
+                noisy_D = noisy(D)
+
+                def generate(z):  # warmed-up generator output noise
+                    x = G(z)
+                    if sigma_out == 0:
+                        return x
+                    return x + sigma_out * torch.randn(x.shape, generator=noise_gen, device=x.device, dtype=x.dtype)
 
                 # -------------------------
                 # 1) Discriminator step
@@ -359,10 +376,10 @@ def train(
                 )
                 with torch.no_grad():
                     z_fake, _ = prior.sample(batch_size, generator=latent_gen)
-                    x_fake = G(z_fake)
+                    x_fake = generate(z_fake)
 
-                real_logits = D(x_real)
-                fake_logits = D(x_fake)
+                real_logits = noisy_D(x_real)
+                fake_logits = noisy_D(x_fake)
 
                 if mog_metrics:
                     last_d_gap = (real_logits.detach().mean() - fake_logits.detach().mean())
@@ -372,16 +389,17 @@ def train(
                 # Fourier D coexist with full mode coverage: it caps D's
                 # steepness where the data is. The regularizer recomputes its own
                 # graph internally, so neither batch needs requires_grad here.
-                pen, _ = regularizer.penalty(
-                    D, x_real, x_fake, global_step + 1, generator=penalty_gen,
+                ema_D = critic.ema_critic()
+                pen, _ = critic.penalty(
+                    noisy_D, x_real, x_fake, global_step + 1, generator=penalty_gen,
                     collect_stats=reg_sync_stats,
+                    ema_critic=None if ema_D is None else noisy(ema_D),
                 )
                 loss_d = loss_d + pen
 
                 opt_D.zero_grad()
                 loss_d.backward()
-                opt_D.step()
-                regularizer.after_critic_step(opt_D)
+                critic.step()  # spike guard, Adam step, K3P anchor EMA + LR record
 
                 # -------------------------
                 # 2) Generator + prior step
@@ -390,8 +408,8 @@ def train(
                 G.train()
 
                 z_fake, idx = prior.sample(batch_size, generator=latent_gen)
-                x_fake = G(z_fake)
-                fake_logits = D(x_fake)
+                x_fake = generate(z_fake)
+                fake_logits = noisy_D(x_fake)
 
                 if gan_mode in ("rp", "ra"):
                     with torch.no_grad():
@@ -400,7 +418,7 @@ def train(
                             device=device,
                             generator=train_gen,
                         )
-                    real_logits_g = D(x_real_g)
+                    real_logits_g = noisy_D(x_real_g)
                     loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
                 else:
                     loss_gan = gan_loss.g_loss(fake_logits)
@@ -419,7 +437,11 @@ def train(
 
                 opt_G.step()
                 if opt_prior is not None:
-                    opt_prior.step()
+                    if latent_damping is None:
+                        opt_prior.step()
+                    else:
+                        with latent_damping.around(opt_prior):
+                            opt_prior.step()
 
                 # EMA update
                 with torch.no_grad():
@@ -533,8 +555,8 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         default=_RECIPE.reg_arm,
         choices=list(GradientPenalty.ARMS),
         help="Discriminator gradient penalty (particlegan.grad_regularizers). Default "
-        "'b_cap' is the one-sided cap that won the regularizer study; "
-        "'a_r1r2' is the older zero-centered R1+R2 penalty.",
+        "'k3p' hands over from RMS R1 (+ fake cap) to one-sided caps plus an EMA-critic "
+        "anchor as the critic LR falls; 'b_cap' was the GAN v3 default.",
     )
     parser.add_argument(
         "--reg_coeff",

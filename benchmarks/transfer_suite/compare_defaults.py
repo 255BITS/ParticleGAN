@@ -29,6 +29,7 @@ from .formulations import axes
 from .linear_skip_refinement_research import constructor as skip_constructor
 from .smooth_critic_research import constructor as smooth_constructor
 from .protocol import test_verdict
+from benchmarks.gan_v3 import legacy_dict
 
 ROOT = Path(__file__).resolve().parents[2]
 REPORTS = ROOT / 'reports/transfer_suite'
@@ -211,7 +212,7 @@ def run(arm, output, tasks=None):
     assert recipe.lr_anneal_start == .6 and recipe.lr_floor == .05
     policy = vector_tasks.fixed_policy('cosine')
     protocol = suite.snapshot(output)
-    protocol.update(comparison='public-gan-defaults-v1', arm=arm, recipe=recipe.to_dict(),
+    protocol.update(comparison='public-gan-defaults-v1', arm=arm, recipe=legacy_dict(recipe),
                     seed=0, jobs=jobs, adaptation='Apply absolute G/D/prior LRs, betas and core loss weights. '
                     'Retain each host architecture, particle support, batch, steps, initialization, auxiliary losses and data. '
                     'Preserve legacy host EMA settings; native vector/image EMA uses the recipe decay.')
@@ -243,7 +244,7 @@ def run(arm, output, tasks=None):
             result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - start)
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
-        record = dict(arm=arm, recipe=recipe.to_dict(), original_spec=job['spec'], spec=spec,
+        record = dict(arm=arm, recipe=legacy_dict(recipe), original_spec=job['spec'], spec=spec,
                       architecture=job['architecture'], reference=job['reference'],
                       reference_sha256=job['reference_sha256'], candidate=asdict(candidate(recipe)),
                       applied=applied, verdict=verdict, ema_verdict=ema, result=result,

@@ -22,7 +22,7 @@ from experiments.train_gym_transition import (discriminator_loss, generator_loss
 from lib.gym_control import build_expert_records, initialize_control, predict_control
 from lib.gym_transition import (contact_record, composed_transition, encoded_transition,
     real_reconstruction, synthetic_reconstruction)
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import K3PCritic, get_recipe, learning_rate_scale
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", imitation_weight=1.,
@@ -115,7 +115,8 @@ def train(cfg):
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    reg = K3PCritic(recipe, d, opt_d) if opt_d is not None else None
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
@@ -178,7 +179,7 @@ def train(cfg):
                     raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
-                opt_d.step()
+                reg.step()  # spike guard, Adam step, K3P anchor/LR record
                 d.requires_grad_(False)
             ids = batch("data")
             real, ctx = normalized[ids], terrain[ids]
