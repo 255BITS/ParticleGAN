@@ -23,7 +23,7 @@ from lib.gym_state_control import training_recipe
 from lib.gym_transition import GymTransitionScaler
 from lib.gym_previous_gan import fake_paths, real_record, adversarial_loss
 from lib.gym_slider_gan import MODULE_KEYS, build_models, hashes, paired_loss, error_loss
-from particlegan import K3PCritic, learning_rate_scale
+from particlegan import K3PCritic, scale_learning_rates
 
 DEFAULTS = dict(arm='sliders', steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500], log_interval=250, seed=24003, device='cuda:1',
@@ -150,10 +150,7 @@ def train(cfg):
         started = segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg['steps'] + 1):
-            scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, base in zip(optimizers, rates):
-                for group, rate in zip(opt.param_groups, base):
-                    group['lr'] = rate * scale
+            scale, _ = scale_learning_rates(step - 1, recipe, optimizers, rates, bundle['prior'])
             opt_g.zero_grad(set_to_none=True)
             bundle['D'].requires_grad_(True)
             bundle['R'].requires_grad_(True)

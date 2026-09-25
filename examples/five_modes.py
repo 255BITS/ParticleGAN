@@ -14,9 +14,9 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - One-sided cap gradient penalty on D (`b_cap`, relu(||grad D|| - 1)^2 on the
-    real and fake pairs, coeff 1.0, lib.grad_regularizers). Replaces the inline
-    R1 penalty. Because D here is a *joint* critic D(x, z), the penalty is taken
+  - K3P gradient penalty on D (package default, particlegan.K3PCritic): R1 on
+    reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
+    plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
     the 100gaussians recipe's penalty on grad_x D(x).
   - Adam beta1=0 (the particle table is an embedding-like parameter: momentum
@@ -55,7 +55,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan import get_recipe, learning_rate_scale  # noqa: E402
+from particlegan import K3PCritic, get_recipe, scale_learning_rates  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -175,7 +175,7 @@ def train(
     d_lr_mult: float = 1.5,
     beta1: float = 0.0,
     lambda_ep: float = 1.0,
-    reg_arm: str = "b_cap",
+    reg_arm: str = "k3p",
     reg_coeff: float = 1.0,
     ema_decay: float = 0.995,
     lr_floor: float = 0.05,
@@ -214,6 +214,9 @@ def train(
         loss_type=loss_type, gan_mode=gan_mode, reg_arm=reg_arm, reg_coeff=reg_coeff,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
+        # This example anneals G/D over the whole run (not the 1,600-update
+        # toy horizon); K3P's blend follows the critic LR either way.
+        network_lr_horizon_cap=None,
     )
     prior = recipe.make_prior().to(device)
 
@@ -227,7 +230,6 @@ def train(
 
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
     gan_loss = recipe.make_loss()
-    regularizer = recipe.make_gradient_penalty()
 
     # Optimizers
     # The particles get their own optimizer at 10x LR: they are an
@@ -236,10 +238,12 @@ def train(
     opt_prior = torch.optim.Adam(prior.parameters(),
                                  lr=recipe.lr * recipe.prior_lr_mult, betas=recipe.betas)
 
-    base_lrs = {
-        id(opt): [g["lr"] for g in opt.param_groups]
-        for opt in (opt_GE, opt_prior, opt_D)
-    }
+    optimizers = (opt_GE, opt_prior, opt_D)
+    base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
+    # K3P gradient penalty (the default) with its EMA critic and spike guard.
+    k3p = K3PCritic(recipe, D, opt_D)
+    ema_joint = k3p.ema_critic(
+        lambda m, joint: m(joint[:, :X_DIM].view(-1, len(CHARS), SEQ_LEN), joint[:, X_DIM:]))
 
     loss_D_hist = deque(maxlen=200)
     loss_GE_hist = deque(maxlen=200)
@@ -257,14 +261,9 @@ def train(
     plt.ion()
 
     for step in range(total_steps + 1):
-        # Full LR until lr_anneal_start, then cosine down to lr_floor.
-        # Retain the historical minimum one-update decay duration.
-        anneal_from = lr_anneal_start * total_steps
-        scale = learning_rate_scale(step - anneal_from,
-                                    max(1.0, total_steps - anneal_from), 0.0, lr_floor)
-        for opt in (opt_GE, opt_prior, opt_D):
-            for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
-                group["lr"] = base * scale
+        # Full LR until lr_anneal_start, then cosine down: G/E/D to the
+        # network floor (K3P's blend floor), particles to lr_floor.
+        scale_learning_rates(step, recipe, optimizers, base_lrs, prior)
 
         # --- TRAIN D ---
         opt_D.zero_grad()
@@ -282,17 +281,17 @@ def train(
 
         loss_d = gan_loss.d_loss(pred_real, pred_fake)
 
-        # Gradient penalty on the joint (text, latent) pairs. Caps how steep D
-        # gets where the data is, without forcing it flat the way R1 did.
-        pen, _ = regularizer.penalty(
+        # K3P gradient penalty on the joint (text, latent) pairs.
+        pen, _ = k3p.penalty(
             D_joint,
             join_pair(x_real, z_enc),
             join_pair(x_gen_soft, z_prior),
-            step,
+            step + 1,
+            ema_critic=ema_joint,
         )
         loss_d = loss_d + pen
         loss_d.backward()
-        opt_D.step()
+        k3p.step()  # spike guard, opt_D.step(), K3P anchor EMA + LR record
 
         # --- TRAIN GE (and Prior) ---
         opt_GE.zero_grad()

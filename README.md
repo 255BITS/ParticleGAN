@@ -358,15 +358,17 @@ for the G update while retaining gradients through `D(fake)`.
 ### Selected defaults, with easy overrides
 
 ```python
-from particlegan import get_recipe
+from particlegan import K3PCritic, get_recipe, scale_learning_rates
 
 recipe = get_recipe()  # Recommended GAN defaults.
 recipe = recipe.replace(z_dim=16, num_particles=4096, lr=3e-4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
 spread = recipe.make_prior_regularizer()
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)  # after moving modules to device
+base_lrs = [[g["lr"] for g in opt.param_groups] for opt in (opt_g, opt_d)]
+k3p = K3PCritic(recipe, D, opt_d)  # K3P penalty + EMA critic + spike guard, per critic
+# Each update: scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
 print(recipe.to_dict())  # inspect every resolved value
 ```
 
@@ -500,14 +502,15 @@ labels, and device:
 
 ```python
 import torch
-from particlegan import DDGAN, UCD, ucd_loss
+from particlegan import DDGAN, UCD, K3PCritic, get_recipe, ucd_loss
 
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
 process = DDGAN(alpha_bar=recipe.alpha_bar).to(device)
 critic = UCD(logit_network, num_classes=recipe.num_classes).to(device)
+opt_d = torch.optim.Adam(critic.parameters(), lr=recipe.lr, betas=recipe.betas)
+k3p = K3PCritic(recipe, critic, opt_d)  # built once, before the loop
 
 t = torch.randint(1, process.steps + 1, (len(real),), device=device)
 rng = torch.Generator(device=device).manual_seed(123)
@@ -520,8 +523,12 @@ fake_score, fake_logits = critic(fake_prev.detach(), labels, xt=xt, t=t)
 d_loss = adversarial.d_loss(real_score, fake_score)
 d_loss += ucd_loss(real_logits, fake_logits, critic.ucd_labels(labels, t),
                    weight=recipe.ucd_weight)
-d_loss += penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
-                  x_prev, fake_prev.detach())
+d_loss += k3p.penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
+                      x_prev, fake_prev.detach(), step,
+                      ema_critic=k3p.ema_critic(lambda m, x: m(x, labels, xt=xt, t=t)[0]))[0]
+opt_d.zero_grad(set_to_none=True)
+d_loss.backward()
+k3p.step()  # spike guard, opt_d.step(), K3P anchor EMA + LR record
 ```
 
 For class-only UCD, the network receives `network(x, xt=xt, t=t)` and returns
@@ -700,7 +707,7 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 ## Notes
 
-- The text experiments (`five_modes.py`) use the same recipe (RpGAN + one-sided cap penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
+- The text experiments (`five_modes.py`) use the same recipe (RpGAN + K3P penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
 - The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
 - GAN v3 particles use 2× the G learning rate; explicit experiment configurations can override that ratio.
 

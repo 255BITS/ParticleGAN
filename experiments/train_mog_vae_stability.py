@@ -262,7 +262,7 @@ def train(cfg):
                           {'params': e.parameters(), 'lr': cfg['lr']},
                           {'params': prior.parameters(), 'lr': cfg['prior_lr'], 'betas': (.5, .999)}], betas=(0., .999))
     od = torch.optim.Adam(d.parameters(), lr=cfg['d_lr'], betas=(0., .999))
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=4), ParticleRegularizer()
+    adversarial, penalty, spread = GANLoss(), GradientPenalty(arm="b_cap", lazy_k=4), ParticleRegularizer()
     streams = {k: rng(cfg['seed'] + v) for k, v in [('data', 2), ('prior', 3), ('posterior', 4)]}
     print(f"START posterior={cfg['posterior']} steps={cfg['steps']} sigma={float(prior.sigma):.8g} init={metadata['initialization_sha256']}", flush=True)
     train_seconds = 0.

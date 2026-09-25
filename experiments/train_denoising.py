@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, GradientPenalty, K3PCritic, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import DDGAN, GradientPenalty, K3PCritic, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -260,11 +260,7 @@ def train(cfg):
             if step == 1 or (step - 1) % cfg["eval_interval"] == 0:
                 torch.cuda.synchronize()
                 block_start = time.perf_counter()
-            scale = learning_rate_scale(step - 1, recipe.total_steps,
-                                        recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, base in zip((opt_g, opt_d), bases):
-                for group, lr in zip(opt.param_groups, base):
-                    group["lr"] = lr * scale
+            scale_learning_rates(step - 1, recipe, (opt_g, opt_d), bases, prior)
             d.requires_grad_(True)
             c, real, xt, t = batch()
             with torch.no_grad():

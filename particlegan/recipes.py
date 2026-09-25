@@ -348,3 +348,21 @@ def learning_rate_scales(step, recipe):
     network = learning_rate_scale(step, horizon, recipe.lr_anneal_start, recipe.resolved_network_lr_floor)
     prior = learning_rate_scale(step, total, recipe.lr_anneal_start, recipe.lr_floor)
     return network, prior
+
+
+def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None):
+    """Set every group's LR from ``learning_rate_scales(step, recipe)``.
+
+    ``base_rates`` holds each optimizer's unscaled group LRs (read them once
+    after construction). Groups whose parameters all belong to ``prior`` get
+    the prior multiplier; every other group gets the network one, so a custom
+    loop's critic LR follows the same floor K3P's blend weight assumes.
+    Returns ``(network, prior)`` multipliers.
+    """
+    network, prior_scale = learning_rate_scales(step, recipe)
+    prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
+    for optimizer, rates in zip(optimizers, base_rates):
+        for group, rate in zip(optimizer.param_groups, rates):
+            is_prior = bool(prior_ids) and all(id(p) in prior_ids for p in group["params"])
+            group["lr"] = rate * (prior_scale if is_prior else network)
+    return network, prior_scale

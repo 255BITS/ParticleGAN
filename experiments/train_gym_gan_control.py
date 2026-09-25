@@ -22,7 +22,7 @@ from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, spars
 from lib.gym_state_control import training_recipe
 from lib.gym_gan_control import (MODULE_KEYS, build_gan_models, initial_hashes, real_views,
     fake_views, discriminator_loss, generator_loss)
-from particlegan import K3PCritic, learning_rate_scale
+from particlegan import K3PCritic, scale_learning_rates
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24003, device="cuda:1", z_dim=32, num_particles=1024,
@@ -166,10 +166,7 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, bundle["prior"])
             # No generator graph or stale gradients during discriminator optimization.
             optimizer.zero_grad(set_to_none=True)
             bundle["D"].requires_grad_(True)

@@ -22,7 +22,7 @@ from experiments.train_gym_transition import (discriminator_loss, generator_loss
 from lib.gym_control import build_expert_records, initialize_control, predict_control
 from lib.gym_transition import (contact_record, composed_transition, encoded_transition,
     real_reconstruction, synthetic_reconstruction)
-from particlegan import K3PCritic, get_recipe, learning_rate_scale
+from particlegan import K3PCritic, get_recipe, scale_learning_rates
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", imitation_weight=1.,
@@ -160,10 +160,7 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, prior)
             ld = lg = lp = le = physical.new_zeros(())
             if opt_d is not None:
                 d.requires_grad_(True)

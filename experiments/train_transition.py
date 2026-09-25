@@ -23,7 +23,7 @@ from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionCritics, TransitionEncoder, encoded_transition, composed_transition,
                             metrics, shuffle_blocks, residual)
 from lib.transition_visuals import render
-from particlegan import K3PCritic, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import K3PCritic, get_recipe, scale_learning_rates, ucd_loss
 
 
 DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
@@ -313,10 +313,7 @@ def train(cfg):
         started = time.perf_counter()
         with (out / "metrics.jsonl").open("w", buffering=1) as metric_log:
             for step in range(1, cfg["steps"]+1):
-                lr_scale = learning_rate_scale(step-1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-                for opt, rates in zip((opt_g, opt_d), base_lrs):
-                    for group, rate in zip(opt.param_groups, rates):
-                        group["lr"] = rate*lr_scale
+                lr_scale, _ = scale_learning_rates(step-1, recipe, (opt_g, opt_d), base_lrs, prior)
                 d.requires_grad_(True)
                 c, context, real = batch()
                 with torch.no_grad():

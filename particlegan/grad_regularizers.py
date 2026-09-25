@@ -76,6 +76,9 @@ class GradRegularizer:
 
     Args:
         arm (str): one of ARMS.
+            - 'k3p' (default): a_r1r2-style R1 + fake cap blended by the critic
+              LR ratio into b_cap + EMA-critic gradient proximity; stateful, see
+              after_critic_step() and particlegan.K3PCritic.
             - 'a_r1r2':    phi(n) = n^2          (baseline R1+R2, zero-centered)
             - 'b_cap':     phi(n) = relu(n - kappa)^2   (one-sided cap, free below kappa)
             - 'c_eikonal': phi(n) = (n - 1)^2    (two-sided, slope pinned at 1)
@@ -155,7 +158,7 @@ class GradRegularizer:
 
     def __init__(
         self,
-        arm: str = "b_cap",
+        arm: str = "k3p",
         coeff: float = 1.0,
         kappa: float = 1.0,
         lazy_k: int = 1,

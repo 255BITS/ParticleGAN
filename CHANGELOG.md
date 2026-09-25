@@ -23,6 +23,12 @@
   protocol requires `b_cap` pin it explicitly. Historical benchmarks resolve
   archived recipes through `benchmarks.gan_v3` (`GAN_V3_FIELDS`,
   `legacy_recipe`, `legacy_dict`), so their receipts are unchanged.
+- `GradientPenalty()` now defaults to `arm="k3p"`; legacy direct callers pin
+  `arm="b_cap"`. New `scale_learning_rates(step, recipe, optimizers,
+  base_rates, prior)` sets G/D groups to the network schedule and prior groups
+  to the prior one, so a custom loop's critic LR reaches the same floor K3P's
+  blend weight uses. The K3PCritic loops, `examples/five_modes.py` and the
+  README/API examples use it.
 - Docs: new `docs/k3p.md`; GAN v3 docs marked superseded. The shipped
   `configs/100gaussians` and `configs/denoising` defaults follow the recipe.
 - Add K3P as package components: `GradRegularizer(arm="k3p")` with

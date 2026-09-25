@@ -407,9 +407,17 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
             wrapper = StatefulInputNoise if isolated else InputNoise
             discriminator = wrapper(discriminator, seed=seed + 901, device=device)
         trainer_class = IsolatedNoiseGANTrainer if isolated else GANTrainer
+        penalty_options = None
+        if recipe.reg_arm == "k3p" and config.get("network_lr_floor") is not None:
+            # The capped-horizon hooks lower D to network_lr_floor, while the
+            # neutral trainer recipe resolves its floor to lr_floor; K3P's
+            # blend floor f must be the critic floor actually applied.
+            floor = float(config["network_lr_floor"])
+            penalty_options = {"lr_floor": floor if floor < 0.5 else 0.0}
         return trainer_class(
             recipe, generator, discriminator, prior=prior, seed=seed,
             optimizer_options={"fused": config["fused_adam"]},
+            penalty_options=penalty_options,
         )
 
 

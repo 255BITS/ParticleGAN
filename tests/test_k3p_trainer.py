@@ -6,7 +6,8 @@ import torch
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
 
-from particlegan import GANTrainer, K3PCritic, Recipe, get_recipe, learning_rate_scale, learning_rate_scales
+from particlegan import (GANTrainer, GradientPenalty, K3PCritic, Recipe, get_recipe, learning_rate_scale,
+                         learning_rate_scales, scale_learning_rates)
 
 
 def _recipe(**overrides):
@@ -208,3 +209,31 @@ def test_shared_module_multi_role_k3p_critic():
         assert not torch.equal(live, ema)
     with pytest.raises(RuntimeError, match="without an optimizer"):
         K3PCritic(recipe, d, None).step()
+
+
+def test_gradient_penalty_constructor_defaults_to_k3p():
+    assert GradientPenalty().arm == "k3p"
+    assert GradientPenalty(arm="b_cap").arm == "b_cap"
+
+
+def test_scale_learning_rates_drives_k3p_to_its_floor():
+    # A custom loop using scale_learning_rates gives D the network schedule, so
+    # the critic LR reaches the same floor f K3P blends against (s == 0).
+    recipe = _recipe()
+    torch.manual_seed(0)
+    g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
+    prior = recipe.make_prior()
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior)
+    base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+    k3p = K3PCritic(recipe, d, opt_d)
+    for step, real in enumerate(_reals(recipe.total_steps), start=1):
+        network, prior_scale = scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior)
+        assert (network, prior_scale) == learning_rate_scales(step - 1, recipe)
+        assert opt_g.param_groups[0]["lr"] == base[0][0] * network
+        assert opt_g.param_groups[1]["lr"] == base[0][1] * prior_scale
+        assert opt_d.param_groups[0]["lr"] == base[1][0] * network
+        loss = d(real).mean() - d(real + 1).mean() + k3p.penalty(d, real, real + 1, step)[0]
+        opt_d.zero_grad()
+        loss.backward()
+        k3p.step()
+    assert k3p.regularizer.blend_weight() == 0.0
