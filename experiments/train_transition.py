@@ -90,11 +90,12 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, allow_nan=False)+"\n")
 
 
-def discriminator_loss(d, real, fake, c, context, gan, reg, step, rngs, ucd_weight):
+def discriminator_loss(d, real, fake, c, context, gan, penalties, ucd_weight):
     """Each D has its own Rp, UCD and gradient-penalty objective, in its own input space.
 
-    ``reg`` is the shared module's critic regularizer: one penalty call per role,
-    each with that role's view of the EMA critic as its K3P anchor.
+    ``penalties`` maps role -> ``recipe.make_critic_penalty(opt_d, ...)`` (or is
+    one penalty for every role); each role's EMA critic is the same-named
+    submodule of the optimizer's EMA module.
     """
     terms = {}
     for name in d.roles():
@@ -103,9 +104,7 @@ def discriminator_loss(d, real, fake, c, context, gan, reg, step, rngs, ucd_weig
         xf, _ = d.inputs(name, fake, context)
         dr, cr = critic(xr, c, role_context)
         df, cf = critic(xf, c, role_context)
-        penalty, _ = reg.penalty(
-            lambda x: critic(x, c, role_context)[0], xr, xf, step, generator=rngs[name],
-            ema_critic=reg.ema_critic(lambda m, x: m.critic_for(name)(x, c, role_context)[0]))
+        penalty = (penalties[name] if isinstance(penalties, dict) else penalties)(critic, xr, xf, c, role_context)
         classification = ucd_loss(cr, cf, c, weight=ucd_weight) if critic.conditioning == "ucd" else dr.new_zeros(())
         terms[name] = gan.d_loss(dr, df) + classification + penalty
     return sum(terms.values()), terms
@@ -276,13 +275,15 @@ def train(cfg):
     ema_g, ema_prior = copy.deepcopy(g), copy.deepcopy(prior)
     for module in (ema_g, ema_prior):
         module.eval().requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, fused=device.type == "cuda")
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+                                          fused=device.type == "cuda")
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    # One K3P bundle per critic optimizer; the shared module's roles share it.
-    gan, reg, spread = recipe.make_loss(), recipe.make_critic_regularizer(d, opt_d), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"]+i) for i in (11, 12)]
-    reg_rngs = {name: torch.Generator(device=device).manual_seed(cfg["seed"]+13+i)
-                for i, name in enumerate(d.roles())}
+    # One penalty per role (own interpolation stream), all paired with opt_d.
+    penalties = {name: recipe.make_critic_penalty(
+                     opt_d, generator=torch.Generator(device=device).manual_seed(cfg["seed"]+13+i))
+                 for i, name in enumerate(d.roles())}
 
     def batch():
         c, geom, tick, real = toy.batch(cfg["batch_size"], rngs[0])
@@ -322,11 +323,10 @@ def train(cfg):
                         composed = composed_transition(e, g, prior, fake, c, context)[0]
                         # Same D batch size, half prior joint / half composed joint.
                         fake = torch.cat([fake[:len(c)//2], composed[len(c)//2:]], 0)
-                ld, d_terms = discriminator_loss(d, real, fake, c, context, gan, reg, step,
-                                                 reg_rngs, recipe.ucd_weight)
+                ld, d_terms = discriminator_loss(d, real, fake, c, context, gan, penalties, recipe.ucd_weight)
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
-                reg.step()  # spike guard, Adam step, K3P anchor/LR record
+                opt_d.step()
                 d.requires_grad_(False)
                 c, context, real = batch()
                 z, ids = prior.sample(len(c), rngs[1])

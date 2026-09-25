@@ -1,3 +1,4 @@
+import copy
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +14,12 @@ from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionDiscriminator, TransitionCritics, shuffle_blocks, residual, metrics)
 from particlegan import get_recipe
 
+
+
+def _penalties(recipe, d, rngs):
+    """One recipe penalty per role, all paired with one critic optimizer."""
+    opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
+    return {name: recipe.make_critic_penalty(opt, kappa=0, generator=rng) for name, rng in rngs.items()}
 
 class TransitionTests(unittest.TestCase):
     def setUp(self):
@@ -171,7 +178,7 @@ class TransitionTests(unittest.TestCase):
         rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
         # Positive UCD weight must not invoke CE on a one-logit concat critic.
         loss, _ = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                      recipe.make_critic_regularizer(d, kappa=0), 1, rngs, recipe.ucd_weight)
+                                      _penalties(recipe, d, rngs), recipe.ucd_weight)
         loss.backward()
         for critic in d.critics.values():
             self.assertGreater(float(critic.net[0].weight.grad[:, -2:].norm()), 0)
@@ -198,7 +205,7 @@ class TransitionTests(unittest.TestCase):
         d.requires_grad_(True)
         rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
         loss, terms = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                         recipe.make_critic_regularizer(d, kappa=0), 1, rngs, recipe.ucd_weight)
+                                         _penalties(recipe, d, rngs), recipe.ucd_weight)
         loss.backward()
         for critic in d.critics.values():
             self.assertTrue(torch.isfinite(critic.net[0].weight.grad).all())

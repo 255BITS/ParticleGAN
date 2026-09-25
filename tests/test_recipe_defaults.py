@@ -113,7 +113,7 @@ def test_complete_old_receipts_still_restore_without_preset_dispatch(version):
     recipe = Recipe(**ARCHIVED['recipes'][version]).replace(num_particles=8, z_dim=2, batch_size=4, total_steps=2)
     trainer = GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1))
     checkpoint = trainer.state_dict()
-    assert checkpoint['schema'] == 2 and checkpoint['recipe'] == recipe.to_dict()
+    assert checkpoint['schema'] == 3 and checkpoint['recipe'] == recipe.to_dict()
     assert Recipe(**checkpoint['recipe']) == recipe
     restored = GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1))
     restored.load_state_dict(checkpoint)

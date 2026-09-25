@@ -54,10 +54,13 @@ multipliers. `network_lr_horizon_cap=None` uses the full budget and
 
 ## GANTrainer
 
-`GANTrainer(recipe, G, D)` wires everything: it allocates the EMA critic, the
-A2 history buffer and a noise stream, and saves and restores all of them.
-Checkpoints use schema 2 (`"k3p": {"critic", "latent"}` plus the noise
-stream). Schema-1 (GAN v3) checkpoints are rejected with a clear error.
+`GANTrainer(recipe, G, D)` wires everything: it allocates the EMA critic
+(`trainer.ema_D`, a frozen deep copy), builds the recipe's optimizers (which
+allocate the A2 history buffer) and a noise stream, and saves and restores all
+of them. Checkpoints use schema 3: the K3P state lives in the optimizer
+states (`"regularizer"` entry) plus the noise stream. Schema-2 checkpoints
+(separate `"k3p"` entry) are upgraded on load; schema-1 (GAN v3) checkpoints
+are rejected with a clear error.
 
 The trainer's EMA critic is robust: floating-point buffers are averaged,
 integer buffers copied, and every anchor forward runs in the live critic's
@@ -68,51 +71,65 @@ that forward, and no `.data` is swapped.
 ## Your own loop, and several critics
 
 Do not instantiate K3P classes yourself. The recipe builds the current best
-formulation behind a formulation-agnostic interface, one call per optimizer;
-the same objects the trainer uses:
+formulation into ordinary-looking PyTorch objects, the same ones the trainer
+uses. Its step-time work runs inside the optimizers' `step()`, and all its
+state is in their `state_dict()`:
 
 ```python
+import copy
 from particlegan import get_recipe, learning_rate_scales
 
 recipe = get_recipe(total_steps=steps)
-opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-critic_reg = recipe.make_critic_regularizer(D, opt_d)   # EMA critic, penalty, spike guard
-gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)  # A2 damping
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+penalty = recipe.make_critic_penalty(opt_d)   # reads EMA, LR record and step from opt_d
 ...
-loss_d = adv + critic_reg.penalty(D, real, fake, step)[0]
-opt_d.zero_grad(); loss_d.backward()
-critic_reg.step()                      # guard, opt_d.step(), anchor EMA + LR record
+loss_d = adv + penalty(D, real, fake)
+opt_d.zero_grad(); loss_d.backward(); opt_d.step()   # guard, Adam, anchor EMA + LR record
 ...
-opt_g.zero_grad(); loss_g.backward()
-gen_reg.step()                         # opt_g.step() with A2 latent damping
-torch.save({"critic_reg": critic_reg.state_dict(), "gen_reg": gen_reg.state_dict(), ...}, path)
+opt_g.zero_grad(); loss_g.backward(); opt_g.step()   # Adam with A2 latent damping
+torch.save({"G": G.state_dict(), "D": D.state_dict(), "prior": prior.state_dict(),
+            "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict()}, path)
 ```
 
-If you need to own `optimizer.step()` (e.g. under a `GradScaler`), call
-`before_step()` and `after_step()` around it instead of `step()`.
-`critic_reg.diagnostics()` returns host scalars such as the blend weight.
+`penalty.diagnostics()` returns host scalars such as the blend weight;
+`make_critic_penalty(opt_d, collect_stats=True)` fills `penalty.last_stats`.
+The penalty's step (for lazy application) is the critic optimizer's completed
+step count + 1, so several calls per critic step share one step.
 
-With one module that has several critic roles, keep one critic regularizer for
-its optimizer and give each role its own view of the EMA critic:
+Extra arguments are conditioning, forwarded to the critic and its EMA; a
+tuple/list output uses its first element (`output=` at construction selects
+another layout):
+
+```python
+d_loss = d_loss + penalty(D, x_prev, fake.detach(), labels, xt=xt, t=t)
+```
+
+With one module that has several critic roles, pass the role's submodule; the
+penalty evaluates the same-named EMA submodule. A module wrapping the critic
+(e.g. `InputNoise(D, std, generator)`) works the same way:
 
 ```python
 for role in D.roles():
-    critic = D.critic_for(role)
-    pen, _ = critic_reg.penalty(lambda x: critic(x, ctx), xr, xf, step,
-                                ema_critic=critic_reg.ema_critic(lambda m, x: m.critic_for(role)(x, ctx)))
+    d_loss = d_loss + penalty(D.critic_for(role), xr, xf, ctx)
 ```
 
-Critics with separate optimizers get separate regularizers (one
-`recipe.make_critic_regularizer(D_k, opt_k)` call each); their blend weights
-and EMAs are independent. Nothing registers optimizer hooks or keeps
-module-level state.
+Critics with separate optimizers get separate pairs; their blend weights and
+EMAs are independent. Nothing registers optimizer hooks or keeps module-level
+state:
 
-The concrete classes (`K3PCritic`, `K3PGeneratorRegularizer` and the
-primitives `CriticAnchor`, `RobustCriticAnchor`, `CriticSpikeGuard`,
+```python
+opt_d2 = recipe.make_critic_optimizer(D2, ema_critic=copy.deepcopy(D2))
+penalty2 = recipe.make_critic_penalty(opt_d2)
+d2_loss = adv2 + penalty2(D2, real, fake)
+opt_d2.zero_grad(); d2_loss.backward(); opt_d2.step()
+```
+
+The concrete classes (`K3PCriticAdam`, `K3PGeneratorAdam`, `CriticPenalty` and
+the primitives `CriticAnchor`, `RobustCriticAnchor`, `CriticSpikeGuard`,
 `LatentRowDamping`, `DirectParticleResponse`) stay importable from
 `particlegan.k3p` for low-level tests and research, but they are not the public
 API. Direct sample-particle groups use
-`recipe.make_generator_regularizer(opt, direct_particles=[...])`.
+`recipe.make_generator_optimizer(params, direct_particles=[...])`.
 
 ## Historical recipes
 

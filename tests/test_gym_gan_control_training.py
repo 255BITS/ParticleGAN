@@ -107,7 +107,8 @@ class GanControlTrainingTests(unittest.TestCase):
             for arm in ("joint", "marginals"):
                 bundle = build_gan_models({**self.cfg, "arm": arm}, fit_sparse_scaler(records))
                 recipe = training_recipe(bundle["config"])
-                gan, reg = recipe.make_loss(), recipe.make_critic_regularizer(bundle["D"])
+                gan = recipe.make_loss()
+                opt_d = recipe.make_critic_optimizer(bundle["D"], ema_critic=copy.deepcopy(bundle["D"]))
                 views = real_views(bundle, batch)
                 for path in ("prior", "encoded"):
                     for key in ("E", "G", "prior", "D"):
@@ -129,7 +130,8 @@ class GanControlTrainingTests(unittest.TestCase):
                 fakes = fake_views(bundle, views, torch.Generator().manual_seed(7),
                                    torch.Generator().manual_seed(8), straight_through=True)
                 rngs = {role: torch.Generator().manual_seed(50+i) for i,role in enumerate(bundle["D"].roles())}
-                loss, terms = discriminator_loss(bundle["D"], views, fakes, gan, reg, 1, rngs)
+                penalties = {role: recipe.make_critic_penalty(opt_d, generator=rng) for role, rng in rngs.items()}
+                loss, terms = discriminator_loss(bundle["D"], views, fakes, gan, penalties)
                 loss.backward()
                 self.assertTrue(has_grad(bundle["D"]))
                 self.assertTrue(all(not has_grad(bundle[key]) for key in ("E", "G", "prior")))

@@ -209,14 +209,15 @@ def train(cfg):
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for model in (ema_g, ema_prior, ema_noise):
         model.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, fused=cfg["fused_adam"])
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     if cfg["noise"] == "learned":
         # A research-only source with its own rate; ordinary optimizers stay extensible.
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = recipe.make_loss()
-    critic = recipe.make_critic_regularizer(d, opt_d, fd_eps=cfg["reg_fd_eps"])
+    penalty = recipe.make_critic_penalty(opt_d, generator=rngs["penalty"], fd_eps=cfg["reg_fd_eps"],
+                                         collect_stats=cfg.get("reg_sync_stats", True))
     spread = recipe.make_prior_regularizer()
 
     def batch():
@@ -271,13 +272,10 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 targets = d.ucd_labels(c, t)
                 loss_d = loss_d + ucd_loss(cr, cf, targets, weight=cfg["ucd_lambda"])
-            penalty, _ = critic.penalty(lambda x: d(x, c, xt, t)[0], real, xf, step, generator=rngs["penalty"],
-                                        collect_stats=cfg.get("reg_sync_stats", True),
-                                        ema_critic=critic.ema_critic(lambda m, x: m(x, c, xt, t)[0]))
-            loss_d = loss_d + penalty
+            loss_d = loss_d + penalty(d, real, xf, c, xt=xt, t=t)
             opt_d.zero_grad(set_to_none=True)
             loss_d.backward()
-            critic.step()  # spike guard, Adam step, K3P anchor/LR record
+            opt_d.step()
 
             d.requires_grad_(False)
             c, real, xt, t = batch()

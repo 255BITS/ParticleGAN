@@ -5,6 +5,8 @@ from pathlib import Path
 import torch
 from torch.nn import functional as F
 
+from particlegan import GradientPenalty
+
 from lib.gym_state_control import build_state_models, parameter_hashes
 from lib.gym_transition import (GymTransitionEncoder, GymTransitionCritics,
     GymTransitionScaler, contact_record, state_reconstruction)
@@ -63,7 +65,12 @@ def task_loss(decoded, real, cfg):
 
 
 def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, step=1, rngs=None, marginal_weight=1.):
-    """Average prior/encoded paths per role; detach all fake graphs for D updates."""
+    """Average prior/encoded paths per role; detach all fake graphs for D updates.
+
+    ``reg`` (D update) is the recipe's critic penalty (``recipe.make_critic_penalty``),
+    a role -> penalty dict, or a plain stateless ``GradientPenalty`` (e.g. a pinned
+    b_cap), which alone uses ``step`` and ``rngs``.
+    """
     terms, roles = {}, {}
     for role in d.roles():
         critic = d.critic_for(role)
@@ -73,12 +80,11 @@ def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, step=1, rngs=Non
             xf, _ = d.inputs(role, fake.detach() if reg is not None else fake, terrain.detach())
             if reg is not None:
                 losses.append(gan.d_loss(critic(xr, context)[0], critic(xf, context)[0]))
-                # A critic regularizer gets this role's EMA view as its anchor; a
-                # plain stateless penalty (e.g. a pinned b_cap) needs none.
-                anchor = ({"ema_critic": reg.ema_critic(lambda m, x: m.critic_for(role)(x, context)[0])}
-                          if hasattr(reg, "ema_critic") else {})
-                penalty, _ = reg.penalty(lambda x: critic(x, context)[0], xr, xf, step,
-                                         generator=rngs[role], collect_stats=False, **anchor)
+                if isinstance(reg, GradientPenalty):
+                    penalty, _ = reg.penalty(lambda x: critic(x, context)[0], xr, xf, step,
+                                             generator=rngs[role], collect_stats=False)
+                else:  # the recipe's penalty: this role's EMA submodule is its anchor
+                    penalty = (reg[role] if isinstance(reg, dict) else reg)(critic, xr, xf, context)
                 penalties.append(penalty)
             else:
                 with torch.no_grad():

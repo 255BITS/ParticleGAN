@@ -203,14 +203,14 @@ paired-error critic. G1, G3, the paired encoder, the prior, and the transition
 discriminators stay frozen.
 
 ```python
+import copy
 from particlegan import GANLoss, ParticlePrior, get_recipe
 
 recipe = get_recipe()
 prior = recipe.make_prior().to(device)  # 20,000 particles, z_dim=2
 adversarial = recipe.make_loss()       # relativistic-paired logistic
-opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-critic_reg = recipe.make_critic_regularizer(D, opt_d)  # penalty + its state (K3P today)
-gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))  # Adam
+penalty = recipe.make_critic_penalty(opt_d)  # K3P today; reads its state from opt_d
 spread = recipe.make_prior_regularizer()  # weight 0 in K3P (prior_reg)
 
 # Customize with ordinary keyword arguments:
@@ -341,22 +341,27 @@ Components are independent. For example, add a critic penalty or a particle
 spread term to losses your pipeline already computes:
 
 ```python
-critic_reg = recipe.make_critic_regularizer(D, opt_d)  # one per critic optimizer
-gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+penalty = recipe.make_critic_penalty(opt_d)  # one per critic optimizer
 # In your discriminator update:
-d_loss = existing_d_loss + critic_reg.penalty(D, real, fake.detach(), step)[0]
-# ... d_loss.backward(); critic_reg.step()  (replaces opt_d.step())
+d_loss = existing_d_loss + penalty(D, real, fake.detach())
+opt_d.zero_grad(); d_loss.backward(); opt_d.step()
 
 # In your generator/prior update, when sampled particle indices are available:
 g_loss = existing_g_loss + spread(prior.z[indices.unique()])
-# ... g_loss.backward(); gen_reg.step()  (replaces opt_g.step())
+opt_g.zero_grad(); g_loss.backward(); opt_g.step()
+
+# Checkpoint: the optimizers' state_dicts carry the EMA critic and all counters.
+torch.save({"G": G.state_dict(), "D": D.state_dict(), "prior": prior.state_dict(),
+            "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict()}, path)
 ```
 
 The recipe chooses the concrete formulation (K3P today: gradient penalty,
-EMA-critic anchor, spike guard, A2 latent damping) behind a stable interface:
-`penalty(...)`, `before_step()`/`after_step()` around your own
-`optimizer.step()` (or `step()`), `diagnostics()`, `state_dict()`. Future
-formulations slot in without changing your loop.
+EMA-critic anchor, spike guard, A2 latent damping). Its step-time work runs
+inside the optimizers' ordinary `step()`; the penalty is just a loss term.
+Future formulations slot in without changing your loop. A second critic gets
+its own `recipe.make_critic_optimizer(D2, ema_critic=copy.deepcopy(D2))` and
+`recipe.make_critic_penalty(opt_d2)`.
 
 To use the adversarial objective itself, call
 `adversarial.d_loss(D(real), D(fake.detach()))` for D and
@@ -373,15 +378,17 @@ recipe = recipe.replace(z_dim=16, num_particles=4096, lr=3e-4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
 spread = recipe.make_prior_regularizer()
-opt_g, opt_d = recipe.make_optimizers(G, D, prior)  # after moving modules to device
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))  # after .to(device)
 base_lrs = [[g["lr"] for g in opt.param_groups] for opt in (opt_g, opt_d)]
-critic_reg = recipe.make_critic_regularizer(D, opt_d)  # one per critic optimizer
+penalty = recipe.make_critic_penalty(opt_d)  # one per critic optimizer
 # Each update: scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
 print(recipe.to_dict())  # inspect every resolved value
 ```
 
-The optional optimizer helper returns ordinary Adam optimizers. The G optimizer
-has separate generator and particle groups. You can build your own optimizers
+The optional optimizer helper returns Adam optimizers (subclasses whose
+`step()` also runs the recipe's spike guard, EMA-critic update and A2 latent
+damping; `state_dict()`, param groups and LR schedulers work as usual). The G
+optimizer has separate generator and particle groups. You can build your own optimizers
 using the recipe's fields instead. Recipes are immutable; `.replace(...)`
 returns a new one. Unknown options raise errors.
 
@@ -509,6 +516,7 @@ conditional denoising pipeline, with caller-defined `G`, `logit_network`, data,
 labels, and device:
 
 ```python
+import copy
 import torch
 from particlegan import DDGAN, UCD, get_recipe, ucd_loss
 
@@ -517,8 +525,8 @@ prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
 process = DDGAN(alpha_bar=recipe.alpha_bar).to(device)
 critic = UCD(logit_network, num_classes=recipe.num_classes).to(device)
-opt_d = torch.optim.Adam(critic.parameters(), lr=recipe.lr, betas=recipe.betas)
-critic_reg = recipe.make_critic_regularizer(critic, opt_d)  # once, before the loop
+opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+penalty = recipe.make_critic_penalty(opt_d)  # once, before the loop
 
 t = torch.randint(1, process.steps + 1, (len(real),), device=device)
 rng = torch.Generator(device=device).manual_seed(123)
@@ -531,13 +539,14 @@ fake_score, fake_logits = critic(fake_prev.detach(), labels, xt=xt, t=t)
 d_loss = adversarial.d_loss(real_score, fake_score)
 d_loss += ucd_loss(real_logits, fake_logits, critic.ucd_labels(labels, t),
                    weight=recipe.ucd_weight)
-d_loss += critic_reg.penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
-                             x_prev, fake_prev.detach(), step,
-                             ema_critic=critic_reg.ema_critic(lambda m, x: m(x, labels, xt=xt, t=t)[0]))[0]
+d_loss = d_loss + penalty(critic, x_prev, fake_prev.detach(), labels, xt=xt, t=t)
 opt_d.zero_grad(set_to_none=True)
 d_loss.backward()
-critic_reg.step()  # replaces opt_d.step()
+opt_d.step()
 ```
+
+The conditioning after the two batches goes to the critic and its EMA; a
+tuple output uses its first element (the score).
 
 For class-only UCD, the network receives `network(x, xt=xt, t=t)` and returns
 `[B, C]` logits. Labels and times are `[B]` long tensors; times run from 1 to T.

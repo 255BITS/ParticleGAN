@@ -47,7 +47,7 @@ class Recipe:
     d_guard_min_steps: int = 200
     # A2 sparse latent-row damping (0 disables it).
     latent_damping_max_rate: float = 0.5
-    # Direct sample-particle response betas (make_generator_regularizer).
+    # Direct sample-particle response betas (make_generator_optimizer).
     direct_particle_betas: tuple[float, float] = (0.0, 0.9)
     # Critic input noise: peak std at the first update, linear to 0 by
     # input_noise_anneal_end * total_steps. Generator output noise: linear
@@ -207,47 +207,63 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(**{"loss_type": self.loss_type, "mode": self.gan_mode, **overrides})
 
-    def make_critic_regularizer(self, critic, optimizer=None, **penalty_overrides):
-        """Everything one critic optimizer needs, built with this recipe's settings.
+    def make_critic_penalty(self, optimizer, *, output=None, generator=None, collect_stats=False,
+                            **penalty_overrides):
+        """The critic gradient penalty paired with one critic optimizer.
 
-        Call once per critic optimizer (a module with several critic roles
-        shares one object and passes a per-role ``ema_critic``). The recipe
-        chooses the concrete formulation (currently ``particlegan.k3p.K3PCritic``:
-        gradient penalty, EMA-critic anchor it allocates, spike guard). The
-        returned object provides ``penalty(D, real, fake, step, *, generator=None,
-        collect_stats=False, ema_critic=None) -> (penalty, stats)``,
-        ``ema_critic(fn=None)``, ``before_step()``/``after_step()`` around
-        ``optimizer.step()`` (or ``step()`` for all three), ``diagnostics()`` and
-        ``state_dict()``/``load_state_dict()``. ``penalty_overrides`` go to
-        ``make_gradient_penalty``. ``optimizer=None`` builds a penalty-only object.
+        ``optimizer`` comes from ``make_optimizers`` or ``make_critic_optimizer``;
+        the penalty reads the state it needs (EMA critic, LR record, step count)
+        from it. Call it like a loss: ``penalty(D, real, fake, *condition,
+        **condition_kwargs)`` returns a scalar tensor; the conditioning goes to
+        the critic and its EMA. ``output`` selects the logits from the critic's
+        output (default: first element of a tuple/list). ``generator`` feeds
+        interpolation arms; ``collect_stats`` fills ``penalty.last_stats``.
+        ``penalty_overrides`` go to ``make_gradient_penalty``. The recipe picks
+        the formulation (currently ``particlegan.k3p.CriticPenalty``, K3P).
         """
-        from .k3p import K3PCritic
-        return K3PCritic(self, critic, optimizer, **penalty_overrides)
+        from .k3p import CriticPenalty
+        return CriticPenalty(self, optimizer, output=output, generator=generator,
+                             collect_stats=collect_stats, **penalty_overrides)
 
-    def make_generator_regularizer(self, optimizer, *, latent_table=None, direct_particles=None):
-        """Generator/prior-side update modifications for one generator optimizer.
+    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+        """Adam over ``critic``'s trainable parameters whose ``step()`` does the
+        recipe's critic-side work (currently K3P: spike guard, EMA-critic update,
+        LR record).
 
-        Pass the learnable latent table (e.g. ``prior.z``) and/or a param group
-        of direct sample particles held by ``optimizer``. The recipe chooses the
-        concrete formulation (currently ``particlegan.k3p.K3PGeneratorRegularizer``:
-        A2 latent-row damping, direct-particle response) and allocates its
-        history buffers. The returned object provides ``before_step()``/
-        ``after_step()`` around ``optimizer.step()`` (or ``step()``, or
-        ``with reg.around(): optimizer.step()``) and ``state_dict()``/
-        ``load_state_dict()``. With nothing to modify, ``step()`` is exactly
-        ``optimizer.step()``.
+        ``ema_critic`` is a caller-allocated copy of ``critic`` (e.g.
+        ``copy.deepcopy(critic)``) that becomes the EMA; it is required by the
+        K3P penalty. Checkpoint with ``optimizer.state_dict()``: it holds the
+        EMA critic and all counters. ``adam_kwargs`` override the recipe's
+        ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
         """
-        from .k3p import K3PGeneratorRegularizer
-        return K3PGeneratorRegularizer(self, optimizer, latent_table=latent_table,
-                                       direct_particles=direct_particles)
+        from .k3p import K3PCriticAdam
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
+        return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                             ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
+                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
+
+    def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
+        """Adam over ``params`` (tensors or param groups) whose ``step()`` does the
+        recipe's generator-side work (currently K3P: A2 damping of the sparse
+        ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
+        and the direct-particle response for the param group ``direct_particles``).
+
+        With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
+        override the recipe's ``lr`` and ``betas`` or add Adam options.
+        """
+        from .k3p import K3PGeneratorAdam
+        options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
+        return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
+                                latent_max_rate=self.latent_damping_max_rate,
+                                direct_betas=self.direct_particle_betas, **options)
 
     def make_gradient_penalty(self, **overrides):
         """The bare critic gradient penalty with this recipe's settings.
 
-        Prefer ``make_critic_regularizer``, which also builds whatever state
-        the penalty needs (for K3P: the EMA-critic anchor and the per-step LR
-        record via ``after_critic_step``). Use this directly for stateless arms
-        such as ``arm="b_cap"``.
+        Prefer ``make_critic_penalty(opt_d)``, which pairs the penalty with the
+        state its critic optimizer keeps (for K3P: the EMA-critic anchor and
+        the per-step LR record). Use this directly for stateless arms such as
+        ``arm="b_cap"``.
         """
         from .grad_regularizers import GradientPenalty
         options = {"arm": self.reg_arm, "coeff": self.reg_coeff,
@@ -270,18 +286,25 @@ class Recipe:
         from .vicreg_loss import ParticleRegularizer
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
-    def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, **adam_kwargs):
-        """Return ordinary ``(Adam(G + optional E + prior), Adam(D))`` optimizers.
+    def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
+                        **adam_kwargs):
+        """Return ``(opt_g, opt_d)``: Adam optimizers whose ``step()`` does the recipe's work.
 
-        Move modules to their desired device before calling. Frozen parameters
-        are excluded, and a Gaussian/frozen prior adds no optimizer group.
-        Additional Adam options, such as ``fused`` or ``eps``, apply to both
-        optimizers. Set learning rates and betas on the recipe. The generator
-        optimizer's groups are ``[generator/encoder, prior]`` (either may be
-        absent); scale the prior group by the prior multiplier of
-        ``learning_rate_scales`` and everything else by the network one.
+        ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
+        a learnable ``ParticlePrior`` table gets A2 damping) and ``opt_d`` the
+        critic (``make_critic_optimizer``, with the caller-allocated
+        ``ema_critic``). Use them like any Adam: ``zero_grad``/``step``,
+        ``state_dict``/``load_state_dict`` (which carry all regularization
+        state), LR schedulers. Move modules to their desired device before
+        calling. Frozen parameters are excluded, and a Gaussian/frozen prior
+        adds no optimizer group. Additional Adam options, such as ``fused`` or
+        ``eps``, apply to both optimizers. Set learning rates and betas on the
+        recipe. The generator optimizer's groups are ``[generator/encoder,
+        prior]`` (either may be absent); scale the prior group by the prior
+        multiplier of ``learning_rate_scales`` and everything else by the
+        network one.
         """
-        from torch.optim import Adam
+        from .particle_prior import ParticlePrior
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
         g_params = []
@@ -292,15 +315,16 @@ class Recipe:
                     if p.requires_grad and id(p) not in seen:
                         g_params.append(p)
                         seen.add(id(p))
-        d_params = [p for p in discriminator.parameters() if p.requires_grad]
         groups = []
         if g_params:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas})
-        return (Adam(groups, lr=self.lr, betas=self.betas, **adam_kwargs),
-                Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
+        # A2 acts on a plain particle table (not MoG means or Gaussian priors).
+        latent_table = prior.z if type(prior) is ParticlePrior and prior.z.requires_grad else None
+        return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
+                self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
 
 
 def get_recipe(name="gan", **overrides):

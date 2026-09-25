@@ -69,7 +69,7 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GANTrainer, GradientPenalty, ParticlePrior, get_recipe, learning_rate_scales,
+    GANTrainer, GradientPenalty, InputNoise, ParticlePrior, get_recipe, learning_rate_scales,
 )
 from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
 
@@ -264,20 +264,23 @@ def train(
         # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
-        opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
-        # The recipe's critic regularizer (currently K3P: EMA-critic anchor,
-        # gradient penalty, spike guard) -- the same object GANTrainer uses.
-        critic = recipe.make_critic_regularizer(D, opt_D, fd_eps=reg_fd_eps)
-        # Keep a separate prior optimizer for the existing update/checkpoint layout.
+        # The recipe's optimizers do its step-time work in step() (currently
+        # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
+        opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
+        # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
+        penalty = recipe.make_critic_penalty(opt_D, generator=penalty_gen, collect_stats=reg_sync_stats,
+                                             fd_eps=reg_fd_eps)
+        # A separate prior optimizer (own LR/betas); its step() applies the
+        # recipe's latent-table update (currently A2 latent-row damping).
         opt_prior = (
-            torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
-                             betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
+            recipe.make_generator_optimizer(
+                prior.parameters(), latent_table=prior.z,
+                lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
+                betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
             if learnable_prior else None
         )
-        # Generator-side update of the prior table (currently A2 latent-row damping).
-        prior_step = (recipe.make_generator_regularizer(opt_prior, latent_table=prior.z)
-                      if opt_prior is not None else None)
         noise_gen = torch.Generator(device=device).manual_seed(seed + 5)
+        noisy_D = InputNoise(D, generator=noise_gen)  # annealed critic input noise, fresh per call
 
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
@@ -345,16 +348,8 @@ def train(
                     scale = prior_scale if opt is opt_prior else network
                     for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                         group["lr"] = base * scale
-                sigma_in = input_noise_std(recipe, global_step)
+                noisy_D.std = input_noise_std(recipe, global_step)
                 sigma_out = output_noise_std(recipe, global_step)
-
-                def noisy(critic_fn):  # annealed critic input noise, fresh per call
-                    if sigma_in == 0:
-                        return critic_fn
-                    return lambda x: critic_fn(x + sigma_in * torch.randn(
-                        x.shape, generator=noise_gen, device=x.device, dtype=x.dtype))
-
-                noisy_D = noisy(D)
 
                 def generate(z):  # warmed-up generator output noise
                     x = G(z)
@@ -388,17 +383,11 @@ def train(
                 # Fourier D coexist with full mode coverage: it caps D's
                 # steepness where the data is. The regularizer recomputes its own
                 # graph internally, so neither batch needs requires_grad here.
-                ema_D = critic.ema_critic()
-                pen, _ = critic.penalty(
-                    noisy_D, x_real, x_fake, global_step + 1, generator=penalty_gen,
-                    collect_stats=reg_sync_stats,
-                    ema_critic=None if ema_D is None else noisy(ema_D),
-                )
-                loss_d = loss_d + pen
+                loss_d = loss_d + penalty(noisy_D, x_real, x_fake)
 
                 opt_D.zero_grad()
                 loss_d.backward()
-                critic.step()  # spike guard, Adam step, K3P anchor EMA + LR record
+                opt_D.step()
 
                 # -------------------------
                 # 2) Generator + prior step
@@ -436,7 +425,7 @@ def train(
 
                 opt_G.step()
                 if opt_prior is not None:
-                    prior_step.step()
+                    opt_prior.step()
 
                 # EMA update
                 with torch.no_grad():

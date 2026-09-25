@@ -165,16 +165,16 @@ def load_checkpoint(path, device="cpu"):
     return bundle
 
 
-def discriminator_loss(d, real, fake, terrain, gan, reg, step, rngs):
+def discriminator_loss(d, real, fake, terrain, gan, penalties):
+    """Rp + recipe penalty per critic role; ``penalties`` maps role -> critic penalty
+    (or is one penalty for all roles)."""
     terms = {}
     for role in d.roles():
         critic = d.critic_for(role)
         xr, context = d.inputs(role, real, terrain)
         xf, _ = d.inputs(role, fake, terrain)
         dr, df = critic(xr, context)[0], critic(xf, context)[0]
-        penalty, _ = reg.penalty(
-            lambda x: critic(x, context)[0], xr, xf, step, generator=rngs[role],
-            ema_critic=reg.ema_critic(lambda m, x: m.critic_for(role)(x, context)[0]))
+        penalty = (penalties[role] if isinstance(penalties, dict) else penalties)(critic, xr, xf, context)
         terms[role] = gan.d_loss(dr, df) + penalty
     return sum(terms.values()), terms
 
@@ -246,7 +246,8 @@ def train(cfg):
         if models[key] is not None:
             ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     if d is not None:
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, fused=device.type == "cuda")
+        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+                                              fused=device.type == "cuda")
     else:
         params = list(direct.parameters()) if direct is not None else list(g.parameters()) + list(e.parameters())
         groups = [dict(params=params, lr=recipe.lr)]
@@ -257,8 +258,6 @@ def train(cfg):
         opt_d = None
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    # One K3P bundle per critic optimizer (none when D is absent).
-    reg = recipe.make_critic_regularizer(d, opt_d) if opt_d is not None else None
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     d_data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 21)
@@ -268,6 +267,9 @@ def train(cfg):
     d_contact_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 32)
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
                 for i, role in enumerate(d.roles())} if d is not None else {}
+    # One recipe penalty per critic role (own interpolation stream), paired with opt_d.
+    penalties = ({role: recipe.make_critic_penalty(opt_d, generator=rng) for role, rng in reg_rngs.items()}
+                 if opt_d is not None else None)
     weights = dict(continuous_weight=cfg["continuous_weight"], contact_weight=cfg["contact_weight"])
     provenance = source_provenance(out, cfg["data_dir"])
     write_json(out / "provenance.json", provenance)
@@ -331,10 +333,10 @@ def train(cfg):
                     composed_d = composed_transition(e, g, prior, fake_d, context_d, rng=d_contact_rng)[0]
                     half = len(real_d) // 2
                     fake_d = torch.cat([fake_d[:half], composed_d[half:]])
-                ld, d_terms = discriminator_loss(d, real_d, fake_d, context_d, gan, reg, step, reg_rngs)
+                ld, d_terms = discriminator_loss(d, real_d, fake_d, context_d, gan, penalties)
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
-                reg.step()  # spike guard, Adam step, K3P anchor/LR record
+                opt_d.step()
                 d.requires_grad_(False)
             real, context = batch(data_rng)
             lg = lp = real.new_zeros(())

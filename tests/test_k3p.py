@@ -137,6 +137,99 @@ def test_direct_particle_response_matches_frozen(frozen):
         assert torch.equal(a["params"], b["params"]), a["t"]
 
 
+def _recipe_critic(lazy_k=1, split=None):
+    """The same critic scenario through the recipe's optimizer + penalty (plain opt.step()).
+
+    With ``split``, checkpoint with the usual ``D``/``opt_d`` state_dicts after
+    ``split`` steps and resume into freshly built objects.
+    """
+    from particlegan import get_recipe
+    recipe = get_recipe(reg_kappa=0.5, reg_coeff=1.0, reg_every=lazy_k, network_lr_floor=0.01,
+                        reg_anchor_decay=0.999, d_guard_ratio=5.0, d_guard_min_steps=3, lr=sc.LR0)
+
+    def build(D):
+        opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D), foreach=False)
+        return opt, recipe.make_critic_penalty(opt, collect_stats=True)
+    D = sc.make_critic()
+    opt, penalty = build(D)
+    started, prox = [], []
+
+    class Adapter:  # run_critic's reg.penalty(D, xr, xf, t) -> (pen, stats)
+        def penalty(self, critic, xr, xf, t):
+            assert t == opt.record.observed_steps + 1  # the step comes from the optimizer
+            pen = penalty(critic, xr, xf)
+            if penalty.last_stats.get("phase") in ("blend", "b"):
+                prox.append(penalty.last_stats["prox"])
+            return pen, penalty.last_stats
+
+    def after(o):
+        started.append([e.clone() for e in o.ema_critic.parameters()] if o.record.anchor_started else None)
+    if split is None:
+        trace = sc.run_critic(Adapter(), D, opt, range(1, sc.STEPS + 1), after=after)
+    else:
+        trace = sc.run_critic(Adapter(), D, opt, range(1, split + 1), after=after)
+        saved = copy.deepcopy({"D": D.state_dict(), "opt_d": opt.state_dict()})
+        D = sc.make_critic(seed=9)
+        opt, penalty = build(D)
+        D.load_state_dict(saved["D"])
+        opt.load_state_dict(saved["opt_d"])
+        trace += sc.run_critic(Adapter(), D, opt, range(split + 1, sc.STEPS + 1), after=after)
+    for row, ema in zip(trace, started):
+        row["ema"] = ema
+    return opt, dict(trace=trace, prox=prox)
+
+
+@pytest.mark.parametrize("lazy_k", [1, 2])
+def test_recipe_optimizer_and_penalty_match_frozen_mechanism(frozen, lazy_k):
+    ref = frozen["critic" if lazy_k == 1 else "lazy"]
+    opt, new = _recipe_critic(lazy_k)
+    _assert_critic_equal(ref, new)
+    assert opt.guard.clipped_tensors == ref["clipped"] >= (1 if lazy_k == 1 else 0)
+    if lazy_k == 1:
+        assert opt.record.calls == ref["calls"] == sc.STEPS
+    # Resuming from the usual D / opt_d state_dicts inside the blend is bit-exact.
+    _, resumed = _recipe_critic(lazy_k, split=11)
+    _assert_critic_equal(ref, resumed)
+
+
+def _optimizer_latent(split=None):
+    from particlegan.k3p import K3PGeneratorAdam
+
+    def build(seed=2):
+        prior, G, _ = sc.make_latent(seed)
+        opt = K3PGeneratorAdam([{"params": list(G.parameters())}, {"params": list(prior.parameters())}],
+                               latent_table=prior.z, lr=0.02, betas=(0.0, 0.999), foreach=False)
+        return prior, G, opt
+    prior, G, opt = build()
+    if split is None:
+        return sc.run_latent(prior, G, opt, range(1, 15), lambda o: o.step()), opt
+    trace = sc.run_latent(prior, G, opt, range(1, split + 1), lambda o: o.step())
+    saved = copy.deepcopy(dict(prior=prior.state_dict(), G=G.state_dict(), opt=opt.state_dict()))
+    prior, G, opt = build(seed=99)
+    prior.load_state_dict(saved["prior"]); G.load_state_dict(saved["G"]); opt.load_state_dict(saved["opt"])
+    return trace + sc.run_latent(prior, G, opt, range(split + 1, 15), lambda o: o.step()), opt
+
+
+def test_generator_optimizer_matches_frozen_a2_and_direct(frozen):
+    from particlegan.k3p import K3PGeneratorAdam
+    for new, opt in (_optimizer_latent(), _optimizer_latent(split=7)):
+        for a, b in zip(frozen["latent"]["trace"], new):
+            assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
+            assert torch.equal(a["exp_avg"], b["exp_avg"]), a["t"]
+        assert opt.latent_damping.started
+    particles, _ = sc.make_direct()
+    opt = K3PGeneratorAdam([{"params": [particles], "_comparison_prior": True}], direct_particles=[particles],
+                           lr=0.03, betas=(0.0, 0.999), foreach=False)
+
+    def step(o):
+        o.step()
+        return o.direct_response.last_gain
+    new = sc.run_direct(particles, opt, range(1, 11), step)
+    for a, b in zip(frozen["direct"]["trace"], new):
+        assert a["gain"] == b["gain"] and a["lr"] == b["lr"] and a["betas"] == b["betas"], a["t"]
+        assert torch.equal(a["params"], b["params"]), a["t"]
+
+
 def test_constant_lr_s_is_one_without_anchor():
     D = sc.make_critic()
     opt = sc.critic_optimizer(D)
@@ -368,14 +461,15 @@ def test_trainer_runs_k3p_through_blend_and_resumes_exactly():
         phases.append(out["penalty_stats"]["phase"])
         penalties.append(out["penalty"])
     assert phases[0] == "a" and "blend" in phases
-    assert full.state_dict()["k3p"]["critic"]["penalty"]["anchor_started"]
-    assert "1.running_mean" in full.state_dict()["k3p"]["critic"]["ema"]
+    critic_state = full.state_dict()["optimizers"][1]["regularizer"]
+    assert critic_state["record"]["anchor_started"]
+    assert "1.running_mean" in critic_state["ema"]
 
     first = _k3p_trainer()
     for real in reals[:5]:
         first.step(real)
     checkpoint = first.state_dict()
-    assert "ema_D" not in checkpoint["models"] and checkpoint["k3p"]["critic"]["ema"] is not None
+    assert "ema_D" not in checkpoint["models"] and checkpoint["optimizers"][1]["regularizer"]["ema"] is not None
     resumed = _k3p_trainer()
     resumed.load_state_dict(checkpoint)
     for i, real in enumerate(reals[5:], start=5):
