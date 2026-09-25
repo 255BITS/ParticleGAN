@@ -10,8 +10,10 @@ the invocation of the launcher supplies its time/proposal/worker budgets.
 
 Can K3P retain precision and stability while remaining responsive to new data,
 without knowing the training horizon or defining a one-way "late training"
-phase? Constant-rate learning is one candidate; a reversible controller driven
-by training signals is also eligible. Neither is established by the parent.
+phase? The desired direction is a reversible controller driven by training
+signals. Constant-rate learning is a useful control, not a requirement. Neither
+is established by the parent. Search time limits bound research compute; they
+must not become inputs to the learned formulation's schedule.
 
 K3P never deliberately freezes on convergence. Its selected floors leave G/D
 rates at 1% of their initial rates and the prior at 5%. The EMA critic and Adam
@@ -41,6 +43,8 @@ different from a rule that must know the final training step to become stable.
   known target centers. No timed restart/reset at the test's target change.
   Rates or damping may respond reversibly to ordinary training/optimizer
   signals. Audit actual applied rates and critic mixing weights.
+  Check that changing the declared training horizon leaves an otherwise
+  identical training prefix unchanged; report every remaining budget dependency.
 - Declare every LR, penalty, anchor, guard and noise rule. Horizon-dependent
   noise left from K3P is still a scheduled component: retain it only as a
   labeled intermediate ablation, not as a horizon-independent final result.
@@ -81,6 +85,8 @@ rate/mixing traces and added critic evaluations. Keep FAIL/ERROR/NOT_RUN visible
 and distinguish diagnostic screens from qualification. A higher LR alone is not
 a successful formulation if it trades stability or precision for faster motion.
 
+First round: three Codex and five Grok attempts, no Claude. Each owns a distinct
+lane and isolated checkout, with four benchmark workers assigned to each GPU.
 First-round defaults: at most three mechanism proposals per lane, 45 minutes
 and one benchmark worker per lane; explicit invocation budgets override the
 time/proposal defaults. No nested agents, seed repeats,

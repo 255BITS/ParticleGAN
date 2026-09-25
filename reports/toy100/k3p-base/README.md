@@ -137,16 +137,24 @@ depends on LR decay. Merely making LR constant would leave that handover at
 the early penalty and keep the EMA anchor inactive.
 
 The [launcher](launch-gan-k3p-continuous.py) reuses the existing search script
-with three lanes: continuous critic constraint, reversible optimizer-based
-plasticity, and adaptive critic-anchor memory. Default caps are three proposals,
-45 minutes and one benchmark worker per lane. Preview without starting agents
-or training:
+with **three Codex and five Grok lanes**, no Claude: continuous critic constraint,
+reversible plasticity, adaptive anchor memory, relative update control, reversible
+critic mixing, anchor innovation, particle/network balance, and stationary noise.
+Default caps are three proposals, 45 minutes and one benchmark worker per lane,
+four workers on each GPU. Preview without starting agents or training:
 
 ```sh
 python /ml2/hypergan/launch-gan-k3p-continuous.py --dry-run
 ```
 
-An actual invocation without `--dry-run` starts the three bounded attempts.
+An actual invocation without `--dry-run` starts the eight bounded attempts.
 The first gates are the candidate's own extended hold and matched target-shift
 recovery, followed by all 22 toys and separately declared delayed/repeated-change
 stress checks for survivors. The published K3P source and scores remain fixed.
+
+This work is a separate follow-up to PR #139, based on its final selected K3P
+commit `b979d3c9`. Search outcomes belong to this follow-up; they do not change
+the completed selection in #139. Executable launcher snapshots are in
+[`launcher/`](launcher/); install them alongside the focused entrypoint in the
+workspace root to reproduce this local workflow. They require the existing
+research checkout, retained runtime/fixtures and authenticated agent CLIs.
