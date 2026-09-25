@@ -1,0 +1,113 @@
+{
+  "status": "PASS",
+  "scope": "CPU configuration checks only: no model training or seed experiments.",
+  "matrix": [
+    {
+      "task": "grid100",
+      "seed": 1234,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "grid100",
+      "seed": 1235,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "grid100",
+      "seed": 1236,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "grid100",
+      "seed": 1237,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "rotated100",
+      "seed": 1234,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "rotated100",
+      "seed": 1235,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "rotated100",
+      "seed": 1236,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "rotated100",
+      "seed": 1237,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "staggered100",
+      "seed": 1234,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "staggered100",
+      "seed": 1235,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "staggered100",
+      "seed": 1236,
+      "only_seed_changed": true,
+      "steps": 7000
+    },
+    {
+      "task": "staggered100",
+      "seed": 1237,
+      "only_seed_changed": true,
+      "steps": 7000
+    }
+  ],
+  "invalid_seed_rejected": true,
+  "ambiguous_driver_rejected": true,
+  "shortened_budget_rejected": true,
+  "source_change_detected": true,
+  "observer_and_plain_driver_compile": true,
+  "cpu_rng_unchanged": true,
+  "candidate_source_unchanged": true,
+  "candidate_source": {
+    "files": {
+      "checkpoint.py": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+      "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+      "convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+      "hold.py": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+      "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+      "mechanism.py": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "native100.py": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997",
+      "probe.py": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+      "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+      "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+      "shift_frozen.py": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    },
+    "sha256": "2560b43f99b4f747341403e140338020541e48a3f3932d9ff97c98b3f55a8563"
+  },
+  "wrapper_sha256": "7f62cc8dcd312eb4172cf906f744ee3b8c4ec259140f6f10822356c4c70eb4ff",
+  "argv": [
+    "reports/toy100/continuous-search-tools/validate_native_seed_wrapper.py",
+    "--runtime",
+    "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+    "--candidate",
+    "reports/toy100/continuous-round-3/sources/rp1_signal_close",
+    "--output",
+    "reports/toy100/continuous-round-3/native-seed-wrapper-validation.json"
+  ],
+  "training_updates": 0,
+  "remaining": "A qualifying candidate still needs actual runs and installation auditing; this is not a gate pass."
+}

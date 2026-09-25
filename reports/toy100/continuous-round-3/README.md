@@ -87,3 +87,8 @@ The separately declared [30000-update long-term continuation](long-term-stabilit
 preserves the9000 stress windows and adds another change at27000. After the same
 formulation clears every requirement, the supervisor will stop remaining searches
 and promote it in PR155. Until then the search and verification continue.
+
+The [fixed native qualification wrapper](../continuous-search-tools/NATIVE_QUALIFICATION.md)
+is prepared for surviving candidates. Its twelve configuration checks pass with
+zero training updates; it pins candidate source and preserves full7000 budgets.
+No additional RP1 seed qualification was run.
