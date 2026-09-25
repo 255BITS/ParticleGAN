@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- Add K3P as package components: `GradRegularizer(arm="k3p")` with
+  `blend_weight()`, `after_critic_step()` and `state_dict()`, plus
+  `CriticAnchor`, `CriticSpikeGuard`, `LatentRowDamping` and
+  `DirectParticleResponse` in `particlegan.k3p`. One instance per critic, with
+  no optimizer hooks or module globals. The caller allocates the EMA critic
+  and the history buffers. With one critic, the result matches the frozen K3P
+  mechanism bit for bit (`tests/test_k3p.py`). The recipe default does not
+  change yet.
+
 ## 0.7.0 — 2026-09-24
 
 - Add the strict 100-mode toy gate (`python -m benchmarks.toy100 run`); its
