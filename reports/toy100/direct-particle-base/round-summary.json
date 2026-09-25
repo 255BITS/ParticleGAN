@@ -1,0 +1,558 @@
+{
+  "proposals": 9,
+  "executed_training_gates": 34,
+  "counts": {
+    "FAIL": 9,
+    "PASS": 25
+  },
+  "rows": [
+    {
+      "lane": "real_dead_zone",
+      "candidate": "real_deadzone_010",
+      "gate": "two_pole",
+      "status": "FAIL",
+      "metrics": {
+        "mean_abs": 0.16235309839248657,
+        "grad_med": 0.12011326849460602
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_dead_zone/20260925T005324Z-2154601/repo/reports/toy100/real-dead-zone-attempt/candidates/real_deadzone_010/two_pole/result.json"
+    },
+    {
+      "lane": "real_dead_zone",
+      "candidate": "real_smooth_quartic",
+      "gate": "two_pole",
+      "status": "FAIL",
+      "metrics": {
+        "mean_abs": 0.31485477089881897,
+        "grad_med": 0.285942941904068
+      },
+      "passing_suffix": 3,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_dead_zone/20260925T005324Z-2154601/repo/reports/toy100/real-dead-zone-attempt/candidates/real_smooth_quartic/two_pole/result.json"
+    },
+    {
+      "lane": "real_dead_zone",
+      "candidate": "real_smooth_sextic",
+      "gate": "two_pole",
+      "status": "PASS",
+      "metrics": {
+        "mean_abs": 0.35168060660362244,
+        "grad_med": 0.3209403157234192
+      },
+      "passing_suffix": 6,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_dead_zone/20260925T005324Z-2154601/repo/reports/toy100/real-dead-zone-attempt/candidates/real_smooth_sextic/two_pole/result.json"
+    },
+    {
+      "lane": "real_dead_zone",
+      "candidate": "real_smooth_sextic",
+      "gate": "trajectory",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0007636509253643453
+      },
+      "passing_suffix": 23,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_dead_zone/20260925T005324Z-2154601/repo/reports/toy100/real-dead-zone-attempt/candidates/real_smooth_sextic/trajectory/result.json"
+    },
+    {
+      "lane": "real_dead_zone",
+      "candidate": "real_smooth_sextic",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "metrics": {
+        "modes": 7,
+        "hq": 0.99951171875
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_dead_zone/20260925T005324Z-2154601/repo/reports/toy100/real-dead-zone-attempt/candidates/real_smooth_sextic/mode_hold/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_smoothstep256",
+      "gate": "two_pole",
+      "status": "PASS",
+      "metrics": {
+        "mean_abs": 0.6188125014305115,
+        "grad_med": 0.8580939769744873
+      },
+      "passing_suffix": 9,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_smoothstep256/two_pole/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_smoothstep256",
+      "gate": "trajectory",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0007396770524792373
+      },
+      "passing_suffix": 23,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_smoothstep256/trajectory/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_smoothstep256",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "metrics": {
+        "modes": 5,
+        "hq": 0.9130859375
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_smoothstep256/mode_hold/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_smoothstep128",
+      "gate": "two_pole",
+      "status": "PASS",
+      "metrics": {
+        "mean_abs": 0.39667126536369324,
+        "grad_med": 0.2997095584869385
+      },
+      "passing_suffix": 6,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_smoothstep128/two_pole/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_smoothstep128",
+      "gate": "trajectory",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0007423616480082273
+      },
+      "passing_suffix": 23,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_smoothstep128/trajectory/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_smoothstep128",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "metrics": {
+        "modes": 6,
+        "hq": 0.75390625
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_smoothstep128/mode_hold/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_floor01_smoothstep128",
+      "gate": "two_pole",
+      "status": "PASS",
+      "metrics": {
+        "mean_abs": 0.45668551325798035,
+        "grad_med": 0.33795592188835144
+      },
+      "passing_suffix": 8,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_floor01_smoothstep128/two_pole/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_floor01_smoothstep128",
+      "gate": "trajectory",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0007382053881883621
+      },
+      "passing_suffix": 23,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_floor01_smoothstep128/trajectory/result.json"
+    },
+    {
+      "lane": "real_penalty_warmup",
+      "candidate": "r1_floor01_smoothstep128",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "metrics": {
+        "modes": 5,
+        "hq": 0.99853515625
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/real_penalty_warmup/20260925T005324Z-2154602/repo/reports/toy100/real-penalty-warmup-attempt/candidates/r1_floor01_smoothstep128/mode_hold/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "prior_recent_rms",
+      "gate": "two_pole",
+      "status": "FAIL",
+      "metrics": {
+        "mean_abs": 0.264528751373291,
+        "grad_med": 0.09102581441402435
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/prior_recent_rms/two_pole/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "coherent_particle_response",
+      "gate": "two_pole",
+      "status": "PASS",
+      "metrics": {
+        "mean_abs": 0.6441625356674194,
+        "grad_med": 0.1303979456424713
+      },
+      "passing_suffix": 10,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/coherent_particle_response/two_pole/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "coherent_particle_response",
+      "gate": "trajectory",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0007417064043693244
+      },
+      "passing_suffix": 23,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/coherent_particle_response/trajectory/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "coherent_particle_response",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "metrics": {
+        "modes": 6,
+        "hq": 0.9228515625
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/coherent_particle_response/mode_hold/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "two_pole",
+      "status": "PASS",
+      "metrics": {
+        "mean_abs": 0.6441625356674194,
+        "grad_med": 0.1303979456424713
+      },
+      "passing_suffix": 10,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/two_pole/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "trajectory",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.000738293572794646
+      },
+      "passing_suffix": 22,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/trajectory/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "mode_hold",
+      "status": "PASS",
+      "metrics": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "passing_suffix": 15,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/mode_hold/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "metrics": {
+        "sw1_normalized": 0.07385804215683149,
+        "mean_error": 0.10102489590644836,
+        "covariance_error": 0.0987020879983902,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.04936522990465164,
+        "min_mass_ratio": 0.880784273147583,
+        "hq": 0.977294921875,
+        "component_covariance_error": 0.30979160219430923,
+        "component_covariance_errors": [
+          0.26191380620002747,
+          0.1706746220588684,
+          0.3224935829639435,
+          0.4840843975543976
+        ],
+        "component_min_eigen_ratio": 0.3885263204574585,
+        "component_mass": [
+          0.517333984375,
+          0.349365234375,
+          0.114501953125,
+          0.018798828125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2119,
+          1431,
+          469,
+          77
+        ]
+      },
+      "passing_suffix": 10,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/vector_unequal_mass/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "img_intensity2",
+      "status": "PASS",
+      "metrics": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.0316164493560791,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625
+      },
+      "passing_suffix": 7,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/img_intensity2/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "img_bars4",
+      "status": "PASS",
+      "metrics": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.032630883157253265,
+        "quality_mode_fractions": [
+          0.25,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "distribution_tv": 0.03125
+      },
+      "passing_suffix": 20,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/img_bars4/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "img_blobs4",
+      "status": "PASS",
+      "metrics": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.03583057224750519,
+        "quality_mode_fractions": [
+          0.375,
+          0.21875,
+          0.25,
+          0.125
+        ],
+        "mode_fractions": [
+          0.375,
+          0.21875,
+          0.25,
+          0.15625
+        ],
+        "distribution_tv": 0.125
+      },
+      "passing_suffix": 17,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/img_blobs4/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "residual_student",
+      "status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0007401591865345836,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "passing_suffix": 19,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/residual_student/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "unipolar",
+      "status": "PASS",
+      "metrics": {
+        "cover": 0.9985144194861277,
+        "off_caption": 6.054717878312551e-06,
+        "neu_hold": 0.995764993596822
+      },
+      "passing_suffix": 19,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/unipolar/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "ae_gan_hold",
+      "status": "PASS",
+      "metrics": {
+        "recon_mse": 0.01729346066713333,
+        "hold": 0.004051064141094685
+      },
+      "passing_suffix": 22,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/ae_gan_hold/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "cover_leftover",
+      "status": "PASS",
+      "metrics": {
+        "u_kept": 0.9754436514584847,
+        "content_kept": 1.0002220578833692,
+        "leak_ratio": 0.0003576600374218474,
+        "pole_rel_err_plus": 0.016192937269806862,
+        "pole_rel_err_minus": 0.015297498553991318,
+        "same_dir": 0.0009316233703895833
+      },
+      "passing_suffix": 13,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/cover_leftover/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "unused_token_hold",
+      "status": "PASS",
+      "metrics": {
+        "unused_hold": 0.9990830434253439,
+        "concept_move": 0.9429475835121082
+      },
+      "passing_suffix": 11,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/unused_token_hold/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "mid_scale_identity",
+      "status": "PASS",
+      "metrics": {
+        "concept_cos_plus": 0.9999866485595703,
+        "concept_cos_minus": 0.9999944567680359,
+        "concept_mag_plus": 1.0015003681182861,
+        "concept_mag_minus": 0.9967294931411743,
+        "identity_at_0": 0.997389425034967,
+        "identity_at_mid": 0.9974604087454613
+      },
+      "passing_suffix": 17,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/mid_scale_identity/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "img_stripes2",
+      "status": "PASS",
+      "metrics": {
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04402358829975128,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "distribution_tv": 0.03125
+      },
+      "passing_suffix": 9,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/img_stripes2/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "vector_two_broad",
+      "status": "PASS",
+      "metrics": {
+        "sw1_normalized": 0.020748190800533167,
+        "mean_error": 0.022147754207253456,
+        "covariance_error": 0.03911169618368149,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.007568359375,
+        "min_mass_ratio": 0.98486328125,
+        "hq": 0.990478515625,
+        "component_covariance_error": 0.07546041533350945,
+        "component_covariance_errors": [
+          0.07691428810358047,
+          0.07400654256343842
+        ],
+        "component_min_eigen_ratio": 0.9067223072052002,
+        "component_mass": [
+          0.492431640625,
+          0.507568359375
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2017,
+          2079
+        ]
+      },
+      "passing_suffix": 23,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/vector_two_broad/result.json"
+    },
+    {
+      "lane": "adversarial_mobility",
+      "candidate": "direct_particle_response",
+      "gate": "vector_unequal_width",
+      "status": "FAIL",
+      "metrics": {
+        "sw1_normalized": 0.03584855854272822,
+        "mean_error": 0.03806459903717041,
+        "covariance_error": 0.012210595421493053,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.0244140625,
+        "min_mass_ratio": 0.9453125,
+        "hq": 0.955810546875,
+        "component_covariance_error": 0.9813211932778358,
+        "component_covariance_errors": [
+          2.7222044467926025,
+          0.5383800864219666,
+          0.3940190076828003,
+          0.270681232213974
+        ],
+        "component_min_eigen_ratio": 0.28422221541404724,
+        "component_mass": [
+          0.2392578125,
+          0.2646484375,
+          0.236328125,
+          0.259765625
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          980,
+          1084,
+          968,
+          1064
+        ]
+      },
+      "passing_suffix": 0,
+      "original_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/vector_unequal_width/result.json"
+    }
+  ]
+}

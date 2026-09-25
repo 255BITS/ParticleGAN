@@ -1,0 +1,530 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-25T01:17:32.983903+00:00",
+  "meaning": "Provenance and scoring audit passes; candidate qualification remains failed.",
+  "proposals": 3,
+  "training_gates": 20,
+  "training_counts": {
+    "FAIL": 3,
+    "PASS": 17
+  },
+  "cuda_adam_updates": 24580,
+  "source_files_verified": 1614,
+  "regression_counts": {
+    "PASS": 3,
+    "ERROR": 1
+  },
+  "skipped_entries": 49,
+  "receipt_audit_repairs": 1,
+  "repair_training_updates": 0,
+  "leaderboard": [
+    {
+      "candidate": "direct_particle_response",
+      "passes": 15,
+      "failures": 1,
+      "measured": 16,
+      "not_run": 6,
+      "cuda_adam_updates": 21060,
+      "training_seconds": 269.9582913951017,
+      "failed_gates": [
+        "vector_unequal_width"
+      ]
+    },
+    {
+      "candidate": "coherent_particle_response",
+      "passes": 2,
+      "failures": 1,
+      "measured": 3,
+      "not_run": 19,
+      "cuda_adam_updates": 3360,
+      "training_seconds": 46.17763153696433,
+      "failed_gates": [
+        "mode_hold"
+      ]
+    },
+    {
+      "candidate": "prior_recent_rms",
+      "passes": 0,
+      "failures": 1,
+      "measured": 1,
+      "not_run": 21,
+      "cuda_adam_updates": 160,
+      "training_seconds": 1.4481059599202126,
+      "failed_gates": [
+        "two_pole"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "candidate": "prior_recent_rms",
+      "gate": "two_pole",
+      "status": "FAIL",
+      "seconds": 1.4481059599202126,
+      "metrics": {
+        "mean_abs": 0.264528751373291,
+        "grad_med": 0.09102581441402435
+      },
+      "passing_suffix": 0,
+      "adam_calls": 160,
+      "response_calls": null,
+      "regularizer_calls": 80,
+      "artifact": "candidates/prior_recent_rms/two_pole/result.json",
+      "sha256": "f9e8a94a095f1c40484efeb8c2156c6e0c6daf3b5da2674be63bb6eb09617b1e"
+    },
+    {
+      "candidate": "coherent_particle_response",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "seconds": 36.62753121415153,
+      "metrics": {
+        "modes": 6,
+        "hq": 0.9228515625
+      },
+      "passing_suffix": 0,
+      "adam_calls": 2400,
+      "response_calls": 1200,
+      "regularizer_calls": 1200,
+      "artifact": "candidates/coherent_particle_response/mode_hold/result.json",
+      "sha256": "08d67a76e84727ac8c2c1b99d323b4786ed7dd912b20cd60dc947a617190c237"
+    },
+    {
+      "candidate": "coherent_particle_response",
+      "gate": "trajectory",
+      "status": "PASS",
+      "seconds": 8.008763430872932,
+      "metrics": {
+        "identity_mse": 0.0007417064043693244
+      },
+      "passing_suffix": 23,
+      "adam_calls": 800,
+      "response_calls": 400,
+      "regularizer_calls": 400,
+      "artifact": "candidates/coherent_particle_response/trajectory/result.json",
+      "sha256": "27e5192d25673cb5bdae6a36c712dd1636fda8445db8bad1fa31cb871eca3e9a"
+    },
+    {
+      "candidate": "coherent_particle_response",
+      "gate": "two_pole",
+      "status": "PASS",
+      "seconds": 1.5413368919398636,
+      "metrics": {
+        "mean_abs": 0.6441625356674194,
+        "grad_med": 0.1303979456424713
+      },
+      "passing_suffix": 10,
+      "adam_calls": 160,
+      "response_calls": 80,
+      "regularizer_calls": 80,
+      "artifact": "candidates/coherent_particle_response/two_pole/result.json",
+      "sha256": "aabf49ed598fa2a92f152df6c9ebbfc80d9ff0dc36fae9157ad072e7227f8b09"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "ae_gan_hold",
+      "status": "PASS",
+      "seconds": 5.652417114004493,
+      "metrics": {
+        "recon_mse": 0.01729346066713333,
+        "hold": 0.004051064141094685
+      },
+      "passing_suffix": 22,
+      "adam_calls": 500,
+      "response_calls": 0,
+      "regularizer_calls": 250,
+      "artifact": "candidates/direct_particle_response/ae_gan_hold/result.json",
+      "sha256": "67e531d6d54fe39f44c283618a43e92f70c58a97d61b827ab588947c326b2402"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "cover_leftover",
+      "status": "PASS",
+      "seconds": 21.348165336064994,
+      "metrics": {
+        "u_kept": 0.9754436514584847,
+        "content_kept": 1.0002220578833692,
+        "leak_ratio": 0.0003576600374218474,
+        "pole_rel_err_plus": 0.016192937269806862,
+        "pole_rel_err_minus": 0.015297498553991318,
+        "same_dir": 0.0009316233703895833
+      },
+      "passing_suffix": 13,
+      "adam_calls": 1600,
+      "response_calls": 0,
+      "regularizer_calls": 800,
+      "artifact": "candidates/direct_particle_response/cover_leftover/result.json",
+      "sha256": "1153a7c00dc7675ca58598a0eaaa1e43537c4ed74487b48d3bc3c2d403454719"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "img_bars4",
+      "status": "PASS",
+      "seconds": 12.264297852991149,
+      "metrics": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.032630883157253265,
+        "quality_mode_fractions": [
+          0.25,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "distribution_tv": 0.03125
+      },
+      "passing_suffix": 20,
+      "adam_calls": 1200,
+      "response_calls": 0,
+      "regularizer_calls": 600,
+      "artifact": "candidates/direct_particle_response/img_bars4/result.json",
+      "sha256": "3b18425b736a1da747939978ee00d78d262adac61925d4086289bd96ab8d98d7"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "img_blobs4",
+      "status": "PASS",
+      "seconds": 13.126773903844878,
+      "metrics": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.03583057224750519,
+        "quality_mode_fractions": [
+          0.375,
+          0.21875,
+          0.25,
+          0.125
+        ],
+        "mode_fractions": [
+          0.375,
+          0.21875,
+          0.25,
+          0.15625
+        ],
+        "distribution_tv": 0.125
+      },
+      "passing_suffix": 17,
+      "adam_calls": 1200,
+      "response_calls": 0,
+      "regularizer_calls": 600,
+      "artifact": "candidates/direct_particle_response/img_blobs4/result.json",
+      "sha256": "80f40cb2646140fd518a021867c2020ecf5c8ba354c9a945367cbfd5f586b813"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "img_intensity2",
+      "status": "PASS",
+      "seconds": 12.458802877925336,
+      "metrics": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.0316164493560791,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625
+      },
+      "passing_suffix": 7,
+      "adam_calls": 1200,
+      "response_calls": 0,
+      "regularizer_calls": 600,
+      "artifact": "candidates/direct_particle_response/img_intensity2/result.json",
+      "sha256": "4b261b01873609bf8867714e35516fb2a94aa57799ca873972a4b732e7959d47"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "img_stripes2",
+      "status": "PASS",
+      "seconds": 12.726210611872375,
+      "metrics": {
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04402358829975128,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "distribution_tv": 0.03125
+      },
+      "passing_suffix": 9,
+      "adam_calls": 1200,
+      "response_calls": 0,
+      "regularizer_calls": 600,
+      "artifact": "candidates/direct_particle_response/img_stripes2/result.json",
+      "sha256": "d080f1813206d805a9ecbc92dcbd4bdb8ff2b57d4dacb0b7bcad0867fcbde621"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "mid_scale_identity",
+      "status": "PASS",
+      "seconds": 34.950431963894516,
+      "metrics": {
+        "concept_cos_plus": 0.9999866485595703,
+        "concept_cos_minus": 0.9999944567680359,
+        "concept_mag_plus": 1.0015003681182861,
+        "concept_mag_minus": 0.9967294931411743,
+        "identity_at_0": 0.997389425034967,
+        "identity_at_mid": 0.9974604087454613
+      },
+      "passing_suffix": 17,
+      "adam_calls": 1600,
+      "response_calls": 0,
+      "regularizer_calls": 3200,
+      "artifact": "candidates/direct_particle_response/mid_scale_identity/result.json",
+      "sha256": "cd8e1a070a1106f0e58cfc2e29ff2e81fdef9cd22dd2fa5471d83934204eb51a"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "mode_hold",
+      "status": "PASS",
+      "seconds": 30.47453643893823,
+      "metrics": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "passing_suffix": 15,
+      "adam_calls": 2400,
+      "response_calls": 0,
+      "regularizer_calls": 1200,
+      "artifact": "candidates/direct_particle_response/mode_hold/result.json",
+      "sha256": "75074bc0dbbdbc45166f07b5d42e8574e1b6ab6cf0203dddbe5fa6063a0afc2a"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "residual_student",
+      "status": "PASS",
+      "seconds": 7.947640942875296,
+      "metrics": {
+        "identity_mse": 0.0007401591865345836,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "passing_suffix": 19,
+      "adam_calls": 800,
+      "response_calls": 0,
+      "regularizer_calls": 400,
+      "artifact": "candidates/direct_particle_response/residual_student/result.json",
+      "sha256": "a0accc7ee5d2c167bf59e705bdf17b6bb990b69c44125d7652875db3695a785d"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "trajectory",
+      "status": "PASS",
+      "seconds": 8.756308496929705,
+      "metrics": {
+        "identity_mse": 0.000738293572794646
+      },
+      "passing_suffix": 22,
+      "adam_calls": 800,
+      "response_calls": 0,
+      "regularizer_calls": 400,
+      "artifact": "candidates/direct_particle_response/trajectory/result.json",
+      "sha256": "ea1bd413a2ab9954b5657ae324b5eebbdeadc7ad70567b3c7648949325d6af82"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "two_pole",
+      "status": "PASS",
+      "seconds": 1.5027436658274382,
+      "metrics": {
+        "mean_abs": 0.6441625356674194,
+        "grad_med": 0.1303979456424713
+      },
+      "passing_suffix": 10,
+      "adam_calls": 160,
+      "response_calls": 80,
+      "regularizer_calls": 80,
+      "artifact": "candidates/direct_particle_response/two_pole/result.json",
+      "sha256": "cca1825f8b39c24776b887b0343d70bab8505c1b1b27063c09796b0dc66b648a"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "unipolar",
+      "status": "PASS",
+      "seconds": 9.449757935013622,
+      "metrics": {
+        "cover": 0.9985144194861277,
+        "off_caption": 6.054717878312551e-06,
+        "neu_hold": 0.995764993596822
+      },
+      "passing_suffix": 19,
+      "adam_calls": 800,
+      "response_calls": 0,
+      "regularizer_calls": 800,
+      "artifact": "candidates/direct_particle_response/unipolar/result.json",
+      "sha256": "fefbb330d88986bd645b0fc22ada7be98b91cd34e0af946993604e3bb691cd81"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "unused_token_hold",
+      "status": "PASS",
+      "seconds": 2.7188227800652385,
+      "metrics": {
+        "unused_hold": 0.9990830434253439,
+        "concept_move": 0.9429475835121082
+      },
+      "passing_suffix": 11,
+      "adam_calls": 400,
+      "response_calls": 0,
+      "regularizer_calls": 200,
+      "artifact": "candidates/direct_particle_response/unused_token_hold/result.json",
+      "sha256": "a12390eb7a12614ef1c8694addde2705e50312728bea8bced6a3fb0b7a2438fc"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "vector_two_broad",
+      "status": "PASS",
+      "seconds": 26.868677395861596,
+      "metrics": {
+        "sw1_normalized": 0.020748190800533167,
+        "mean_error": 0.022147754207253456,
+        "covariance_error": 0.03911169618368149,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.007568359375,
+        "min_mass_ratio": 0.98486328125,
+        "hq": 0.990478515625,
+        "component_covariance_error": 0.07546041533350945,
+        "component_covariance_errors": [
+          0.07691428810358047,
+          0.07400654256343842
+        ],
+        "component_min_eigen_ratio": 0.9067223072052002,
+        "component_mass": [
+          0.492431640625,
+          0.507568359375
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2017,
+          2079
+        ]
+      },
+      "passing_suffix": 23,
+      "adam_calls": 2400,
+      "response_calls": 0,
+      "regularizer_calls": 1200,
+      "artifact": "candidates/direct_particle_response/vector_two_broad/result.json",
+      "sha256": "9593f29eafe85aa30f436c0b478c345ffc4ecab1625ea9f4d22444da5a3625eb"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "seconds": 43.02953308308497,
+      "metrics": {
+        "sw1_normalized": 0.07385804215683149,
+        "mean_error": 0.10102489590644836,
+        "covariance_error": 0.0987020879983902,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.04936522990465164,
+        "min_mass_ratio": 0.880784273147583,
+        "hq": 0.977294921875,
+        "component_covariance_error": 0.30979160219430923,
+        "component_covariance_errors": [
+          0.26191380620002747,
+          0.1706746220588684,
+          0.3224935829639435,
+          0.4840843975543976
+        ],
+        "component_min_eigen_ratio": 0.3885263204574585,
+        "component_mass": [
+          0.517333984375,
+          0.349365234375,
+          0.114501953125,
+          0.018798828125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2119,
+          1431,
+          469,
+          77
+        ]
+      },
+      "passing_suffix": 10,
+      "adam_calls": 2400,
+      "response_calls": 0,
+      "regularizer_calls": 1200,
+      "artifact": "candidates/direct_particle_response/vector_unequal_mass/result.json",
+      "sha256": "8f135654eb475a8c9669140b3c84c539f035591e2ee31abf7ead942f8030236a"
+    },
+    {
+      "candidate": "direct_particle_response",
+      "gate": "vector_unequal_width",
+      "status": "FAIL",
+      "seconds": 26.683170995907858,
+      "metrics": {
+        "sw1_normalized": 0.03584855854272822,
+        "mean_error": 0.03806459903717041,
+        "covariance_error": 0.012210595421493053,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.0244140625,
+        "min_mass_ratio": 0.9453125,
+        "hq": 0.955810546875,
+        "component_covariance_error": 0.9813211932778358,
+        "component_covariance_errors": [
+          2.7222044467926025,
+          0.5383800864219666,
+          0.3940190076828003,
+          0.270681232213974
+        ],
+        "component_min_eigen_ratio": 0.28422221541404724,
+        "component_mass": [
+          0.2392578125,
+          0.2646484375,
+          0.236328125,
+          0.259765625
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          980,
+          1084,
+          968,
+          1064
+        ]
+      },
+      "passing_suffix": 0,
+      "adam_calls": 2400,
+      "response_calls": 0,
+      "regularizer_calls": 1200,
+      "artifact": "candidates/direct_particle_response/vector_unequal_width/result.json",
+      "sha256": "b56358b67a912153682bf2e767c1bab501bd4f8da442d217f2567d4b7712e14b"
+    }
+  ],
+  "full22": "FAIL_PARTIAL",
+  "own_state": "NOT_RUN",
+  "prepared_but_unexecuted": [
+    "native_probe.py",
+    "own_state_probe.py"
+  ]
+}

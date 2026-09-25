@@ -1,0 +1,15 @@
+{
+  "candidate": "regression",
+  "gate": "dimension_rms_and_coherent_response",
+  "status": "PASS",
+  "seconds": 0.42137006018310785,
+  "metrics": {
+    "cases": 17,
+    "optimizer_updates": 0,
+    "critic_formula": true,
+    "gradient_and_parameters_unchanged_by_gain": true,
+    "scheduled_lr_restored": true,
+    "response_history_cuda": true
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/mechanism-check.json"
+}

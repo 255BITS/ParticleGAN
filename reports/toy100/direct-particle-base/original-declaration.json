@@ -1,0 +1,22 @@
+{
+  "candidate": "direct_particle_response",
+  "parent": "dimension_rms_hybrid",
+  "declared_utc": "2026-09-25T01:01:53.383784+00:00",
+  "change": "Exact base config; override direct sample-particle Adam betas to (0,.9) during its one update and multiply its scheduled LR by 1+relu(cos(center(g_t),center(g_previous))). Exclude registered ParticlePrior latent parameters. Restore scheduled LR and group betas after each call; no target/task identity lookup.",
+  "rationale": "coherent_particle_response passes two_pole (.64416) and trajectory (.000742), but fails ring with six modes. Limit the successful direct sample response to its structural parameter role, preserving selected-base network and latent-prior dynamics; the two optimizer changes are not causally isolated.",
+  "unchanged": "Exact dimension-RMS real R1 + fake b-cap, Rp logistic, original schedules, host terms, model shapes, data, seeds, budgets, evaluation, noncapturable Adam arithmetic; no added model evaluations or optimizer steps.",
+  "full22": "NOT_RUN",
+  "own_state": "NOT_RUN",
+  "file_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "source_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "parent_hashes": {
+    "probe.py": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+  }
+}

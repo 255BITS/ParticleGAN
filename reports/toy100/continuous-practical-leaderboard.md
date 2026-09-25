@@ -1,9 +1,19 @@
 # 22-toy results and continuous stability
 
-**Selected research base: [dimension_rms_hybrid](dimension-rms-base/README.md).**
-User-selected after **6 PASS / 7 measured GPU toys**, with two_pole FAIL and fifteen
-unmeasured. Full22 and own-state stability are NOT_RUN. This is a partial candidate
-result; the historical16/22 native GPU control below is a different formulation.
+**Selected research base: [direct_particle_response](direct-particle-base/README.md).**
+**15 PASS / 1 FAIL / 6 NOT_RUN** on its own GPU suite. Unequal-width covariance
+fails (.981321 > .85, zero terminal passing checks). All seven initial gates
+and eight further toys pass. Full22 and own-state retention are unqualified.
+
+| Current research candidate | GPU measured | GPU unmeasured | Blocker | Own-state hold |
+|---|---|---:|---|---|
+| direct_particle_response (selected) | **15 PASS / 1 FAIL** | 6 | unequal width | NOT_RUN |
+| dimension_rms_hybrid (parent) | 6 PASS / 1 FAIL | 15 | two_pole | NOT_RUN |
+
+[Sixteen raw results and independent audit](direct-particle-base/audit.json) ·
+[Latest completed round: 9 proposals, 34 gates, 25 PASS / 9 FAIL](direct-particle-base/round-summary.json).
+These are partial candidate results, not directly ranked full22 scores. Do not
+combine them with the historical native GPU16/22 control below.
 
 **Yes, there is a recorded 22/22 PASS.** The original
 `constraints_simple_regularization` recipe still passes when its saved CPU
@@ -41,7 +51,7 @@ including native coverage and accuracy on all three 100-mode problems. All 22
 GPU control verdicts and all 105 earlier GPU variant results were regraded.
 
 The earlier porting work started from the **original scheduled CPU recipe**.
-The selected dimension-RMS formulation above now replaces it as the research base. [Twenty-four porting controls](cpu-recipe-gpu-port/README.md)
+The selected direct-particle formulation above now replaces it as the research base. [Twenty-four porting controls](cpu-recipe-gpu-port/README.md)
 confirm 6/6 fresh CPU passes on the failed hosts. CPU initialization alone
 recovers four on CUDA; ring and unequal mass remain failing. This partial
 diagnostic is not a new 22-toy score.

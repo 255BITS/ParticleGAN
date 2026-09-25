@@ -1,0 +1,174 @@
+{
+  "candidate": "direct_particle_response",
+  "gate": "vector_two_broad",
+  "status": "PASS",
+  "seconds": 26.868677395861596,
+  "metrics": {
+    "sw1_normalized": 0.020748190800533167,
+    "mean_error": 0.022147754207253456,
+    "covariance_error": 0.03911169618368149,
+    "target_scale": 1.0601637363433838,
+    "sample_count": 4096,
+    "mass_tv": 0.007568359375,
+    "min_mass_ratio": 0.98486328125,
+    "hq": 0.990478515625,
+    "component_covariance_error": 0.07546041533350945,
+    "component_covariance_errors": [
+      0.07691428810358047,
+      0.07400654256343842
+    ],
+    "component_min_eigen_ratio": 0.9067223072052002,
+    "component_mass": [
+      0.492431640625,
+      0.507568359375
+    ],
+    "target_mass": [
+      0.5,
+      0.5
+    ],
+    "component_counts": [
+      2017,
+      2079
+    ]
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/vector_two_broad/result.json",
+  "updates": {
+    "adam_calls": 2400,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            64,
+            4
+          ],
+          "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+        },
+        {
+          "shape": [
+            64,
+            64
+          ],
+          "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+        },
+        {
+          "shape": [
+            2,
+            64
+          ],
+          "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+        },
+        {
+          "shape": [
+            2
+          ],
+          "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+        },
+        {
+          "shape": [
+            256,
+            4
+          ],
+          "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+        }
+      ],
+      [
+        {
+          "shape": [
+            64,
+            10
+          ],
+          "sha256": "24562546cfa64edb4fed54efeccfb445aebf69a16831ad22f477d5d7320482a5"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "28408481bbd153aa1de4db94848ecfbb3749aee6ca43f9a440036386c779aa3a"
+        },
+        {
+          "shape": [
+            64,
+            64
+          ],
+          "sha256": "b953ce297fe4eaffe0fe11224bd715c6821e0e8bd6687d31c3bae88b05c661e1"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "cc0bc7ee6b8088e9be662d7b7889cfa79c8f400027b0990b39cf284e7f25fff6"
+        },
+        {
+          "shape": [
+            1,
+            64
+          ],
+          "sha256": "d433e146f23d225a7c577d1b392db8658a51e05daa2ab3c415333606c23fe7f1"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "8dd8efc3155c46f1e02a60324b64216bb77fd6d3ef997905ad3447a755dc059c"
+        }
+      ]
+    ],
+    "optimizers": {
+      "133600277511968": {
+        "calls": 1200,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "133600290167440": {
+        "calls": 1200,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 23,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 23,
+    "first_pass_step": 100,
+    "stable_from_step": 100,
+    "stable_from_seconds": 3.0850770198740065,
+    "confirmed_step": 300,
+    "confirmed_seconds": 7.223324561025947
+  },
+  "code_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "fixture_sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2",
+  "declaration_sha256": "2b71d3414c66ddebf59e3dbaf8893e6e4a4f310ad58fa506a16c5246be5e7b03",
+  "regularizer_calls": 1200,
+  "worker_sha256": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+  "audit": "PASS"
+}
