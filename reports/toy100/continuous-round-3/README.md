@@ -28,8 +28,15 @@ report-writing is separate from those completed measurements.
 | Predictor/corrector | 1 | 0 | Not run | Failed hold; slot redirected to auditing |
 
 [Exact accounting](first-wave-summary.json) separates raw UNCONFIRMED live shift
-from matched-control qualification. No row borrows parent passes. Later search
-launches below are ongoing and excluded from this completed-wave count.
+from matched-control qualification. No row borrows parent passes.
+
+The [first replacement wave](first-replacement-wave-summary.json) also finished:
+**20 new formulations, no winner; all40 canonical protocols complete**. Eleven
+own hold+extension protocols pass, but all20 shifts fail. This brings these two
+completed groups to37 formulations and73/74 completed canonical protocols, with
+EG1's earlier shift still NOT_RUN. PB0's unchanged-parent instrumentation and
+qualification harnesses are excluded from formulation counts. The later kernel
+discrepancy and newly launched mechanisms are excluded while still running.
 
 | New search | Engine | Question |
 |---|---|---|
