@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, GradientPenalty, K3PCritic, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, GradientPenalty, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -216,7 +216,7 @@ def train(cfg):
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = recipe.make_loss()
-    critic = K3PCritic(recipe, d, opt_d, fd_eps=cfg["reg_fd_eps"])
+    critic = recipe.make_critic_regularizer(d, opt_d, fd_eps=cfg["reg_fd_eps"])
     spread = recipe.make_prior_regularizer()
 
     def batch():

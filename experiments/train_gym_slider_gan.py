@@ -23,7 +23,7 @@ from lib.gym_state_control import training_recipe
 from lib.gym_transition import GymTransitionScaler
 from lib.gym_previous_gan import fake_paths, real_record, adversarial_loss
 from lib.gym_slider_gan import MODULE_KEYS, build_models, hashes, paired_loss, error_loss
-from particlegan import K3PCritic, scale_learning_rates
+from particlegan import scale_learning_rates
 
 DEFAULTS = dict(arm='sliders', steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500], log_interval=250, seed=24003, device='cuda:1',
@@ -109,7 +109,7 @@ def train(cfg):
     opt_r = torch.optim.Adam(bundle['R'].parameters(), lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas, fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d, opt_r)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
-    gan, reg, spread = recipe.make_loss(), K3PCritic(recipe, bundle['D'], opt_d), recipe.make_prior_regularizer()
+    gan, reg, spread = recipe.make_loss(), recipe.make_critic_regularizer(bundle['D'], opt_d), recipe.make_prior_regularizer()
     capper = recipe.make_gradient_penalty(arm='b_cap', lazy_k=4, coeff=1., kappa=1., norm='l2', method='autograd')
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)

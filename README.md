@@ -203,13 +203,14 @@ paired-error critic. G1, G3, the paired encoder, the prior, and the transition
 discriminators stay frozen.
 
 ```python
-from particlegan import GANLoss, K3PCritic, ParticlePrior, get_recipe
+from particlegan import GANLoss, ParticlePrior, get_recipe
 
 recipe = get_recipe()
 prior = recipe.make_prior().to(device)  # 20,000 particles, z_dim=2
 adversarial = recipe.make_loss()       # relativistic-paired logistic
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-k3p = K3PCritic(recipe, D, opt_d)      # K3P penalty + EMA critic + spike guard
+critic_reg = recipe.make_critic_regularizer(D, opt_d)  # penalty + its state (K3P today)
+gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)
 spread = recipe.make_prior_regularizer()  # weight 0 in K3P (prior_reg)
 
 # Customize with ordinary keyword arguments:
@@ -340,15 +341,22 @@ Components are independent. For example, add a critic penalty or a particle
 spread term to losses your pipeline already computes:
 
 ```python
-k3p = K3PCritic(recipe, D, opt_d)  # one per critic optimizer
+critic_reg = recipe.make_critic_regularizer(D, opt_d)  # one per critic optimizer
+gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)
 # In your discriminator update:
-d_loss = existing_d_loss + k3p.penalty(D, real, fake.detach(), step)[0]
-# ... d_loss.backward(); k3p.step()  (spike guard, opt_d.step(), K3P bookkeeping)
+d_loss = existing_d_loss + critic_reg.penalty(D, real, fake.detach(), step)[0]
+# ... d_loss.backward(); critic_reg.step()  (replaces opt_d.step())
 
 # In your generator/prior update, when sampled particle indices are available:
 g_loss = existing_g_loss + spread(prior.z[indices.unique()])
-# Your code calls backward() and optimizer.step().
+# ... g_loss.backward(); gen_reg.step()  (replaces opt_g.step())
 ```
+
+The recipe chooses the concrete formulation (K3P today: gradient penalty,
+EMA-critic anchor, spike guard, A2 latent damping) behind a stable interface:
+`penalty(...)`, `before_step()`/`after_step()` around your own
+`optimizer.step()` (or `step()`), `diagnostics()`, `state_dict()`. Future
+formulations slot in without changing your loop.
 
 To use the adversarial objective itself, call
 `adversarial.d_loss(D(real), D(fake.detach()))` for D and
@@ -358,7 +366,7 @@ for the G update while retaining gradients through `D(fake)`.
 ### Selected defaults, with easy overrides
 
 ```python
-from particlegan import K3PCritic, get_recipe, scale_learning_rates
+from particlegan import get_recipe, scale_learning_rates
 
 recipe = get_recipe()  # Recommended GAN defaults.
 recipe = recipe.replace(z_dim=16, num_particles=4096, lr=3e-4)
@@ -367,7 +375,7 @@ adversarial = recipe.make_loss()
 spread = recipe.make_prior_regularizer()
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)  # after moving modules to device
 base_lrs = [[g["lr"] for g in opt.param_groups] for opt in (opt_g, opt_d)]
-k3p = K3PCritic(recipe, D, opt_d)  # K3P penalty + EMA critic + spike guard, per critic
+critic_reg = recipe.make_critic_regularizer(D, opt_d)  # one per critic optimizer
 # Each update: scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
 print(recipe.to_dict())  # inspect every resolved value
 ```
@@ -502,7 +510,7 @@ labels, and device:
 
 ```python
 import torch
-from particlegan import DDGAN, UCD, K3PCritic, get_recipe, ucd_loss
+from particlegan import DDGAN, UCD, get_recipe, ucd_loss
 
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=4)
 prior = recipe.make_prior().to(device)
@@ -510,7 +518,7 @@ adversarial = recipe.make_loss()
 process = DDGAN(alpha_bar=recipe.alpha_bar).to(device)
 critic = UCD(logit_network, num_classes=recipe.num_classes).to(device)
 opt_d = torch.optim.Adam(critic.parameters(), lr=recipe.lr, betas=recipe.betas)
-k3p = K3PCritic(recipe, critic, opt_d)  # built once, before the loop
+critic_reg = recipe.make_critic_regularizer(critic, opt_d)  # once, before the loop
 
 t = torch.randint(1, process.steps + 1, (len(real),), device=device)
 rng = torch.Generator(device=device).manual_seed(123)
@@ -523,12 +531,12 @@ fake_score, fake_logits = critic(fake_prev.detach(), labels, xt=xt, t=t)
 d_loss = adversarial.d_loss(real_score, fake_score)
 d_loss += ucd_loss(real_logits, fake_logits, critic.ucd_labels(labels, t),
                    weight=recipe.ucd_weight)
-d_loss += k3p.penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
-                      x_prev, fake_prev.detach(), step,
-                      ema_critic=k3p.ema_critic(lambda m, x: m(x, labels, xt=xt, t=t)[0]))[0]
+d_loss += critic_reg.penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
+                             x_prev, fake_prev.detach(), step,
+                             ema_critic=critic_reg.ema_critic(lambda m, x: m(x, labels, xt=xt, t=t)[0]))[0]
 opt_d.zero_grad(set_to_none=True)
 d_loss.backward()
-k3p.step()  # spike guard, opt_d.step(), K3P anchor EMA + LR record
+critic_reg.step()  # replaces opt_d.step()
 ```
 
 For class-only UCD, the network receives `network(x, xt=xt, t=t)` and returns

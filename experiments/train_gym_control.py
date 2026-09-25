@@ -22,7 +22,7 @@ from experiments.train_gym_transition import (discriminator_loss, generator_loss
 from lib.gym_control import build_expert_records, initialize_control, predict_control
 from lib.gym_transition import (contact_record, composed_transition, encoded_transition,
     real_reconstruction, synthetic_reconstruction)
-from particlegan import K3PCritic, get_recipe, scale_learning_rates
+from particlegan import get_recipe, scale_learning_rates
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", imitation_weight=1.,
@@ -115,7 +115,7 @@ def train(cfg):
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
-    reg = K3PCritic(recipe, d, opt_d) if opt_d is not None else None
+    reg = recipe.make_critic_regularizer(d, opt_d) if opt_d is not None else None
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}

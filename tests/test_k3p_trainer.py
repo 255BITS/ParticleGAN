@@ -1,4 +1,4 @@
-"""GANTrainer / K3PCritic: K3P as the default, trainer-owned EMA critic and checkpoints."""
+"""GANTrainer / recipe.make_critic_regularizer: K3P as the default, trainer-owned EMA critic and checkpoints."""
 import copy
 
 import pytest
@@ -6,7 +6,7 @@ import torch
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
 
-from particlegan import (GANTrainer, GradientPenalty, K3PCritic, Recipe, get_recipe, learning_rate_scale,
+from particlegan import (GANTrainer, GradientPenalty, Recipe, get_recipe, learning_rate_scale,
                          learning_rate_scales, scale_learning_rates)
 
 
@@ -158,7 +158,7 @@ def test_multiple_critics_each_own_k3p_critic_no_global_hooks():
     torch.manual_seed(0)
     critics = [nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1)) for _ in range(2)]
     optimizers = [torch.optim.Adam(c.parameters(), lr=1e-2, betas=recipe.betas) for c in critics]
-    bundles = [K3PCritic(recipe, c, o) for c, o in zip(critics, optimizers)]
+    bundles = [recipe.make_critic_regularizer(c, o) for c, o in zip(critics, optimizers)]
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
         for k, (critic, opt, bundle) in enumerate(zip(critics, optimizers, bundles)):
@@ -168,7 +168,7 @@ def test_multiple_critics_each_own_k3p_critic_no_global_hooks():
             opt.zero_grad()
             loss.backward()
             bundle.step()
-    assert bundles[0].regularizer.blend_weight() == 0.0 and bundles[1].regularizer.blend_weight() == 1.0
+    assert bundles[0].diagnostics()["blend_weight"] == 0.0 and bundles[1].diagnostics()["blend_weight"] == 1.0
     assert bundles[0].regularizer.state_dict()["anchor_started"]
     assert not bundles[1].regularizer.state_dict()["anchor_started"]
     assert (len(optim_module._global_optimizer_pre_hooks), len(optim_module._global_optimizer_post_hooks)) == hooks
@@ -189,7 +189,7 @@ def test_shared_module_multi_role_k3p_critic():
     torch.manual_seed(0)
     d = _TwoRoles()
     opt = torch.optim.Adam(d.parameters(), lr=1e-2, betas=recipe.betas)
-    k3p = K3PCritic(recipe, d, opt)
+    k3p = recipe.make_critic_regularizer(d, opt)
     for step, real in enumerate(_reals(12), start=1):
         opt.param_groups[0]["lr"] = 1e-2 * learning_rate_scale(step - 1, 8, .5, .01)
         fake, loss, phases = real + 1.0, 0.0, []
@@ -208,7 +208,7 @@ def test_shared_module_multi_role_k3p_critic():
         live, ema = d.critic_for(role)[0].weight, k3p.ema.critic_for(role)[0].weight
         assert not torch.equal(live, ema)
     with pytest.raises(RuntimeError, match="without an optimizer"):
-        K3PCritic(recipe, d, None).step()
+        recipe.make_critic_regularizer(d).step()
 
 
 def test_gradient_penalty_constructor_defaults_to_k3p():
@@ -225,7 +225,7 @@ def test_scale_learning_rates_drives_k3p_to_its_floor():
     prior = recipe.make_prior()
     opt_g, opt_d = recipe.make_optimizers(g, d, prior)
     base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    k3p = K3PCritic(recipe, d, opt_d)
+    k3p = recipe.make_critic_regularizer(d, opt_d)
     for step, real in enumerate(_reals(recipe.total_steps), start=1):
         network, prior_scale = scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior)
         assert (network, prior_scale) == learning_rate_scales(step - 1, recipe)
@@ -236,4 +236,88 @@ def test_scale_learning_rates_drives_k3p_to_its_floor():
         opt_d.zero_grad()
         loss.backward()
         k3p.step()
-    assert k3p.regularizer.blend_weight() == 0.0
+    assert k3p.diagnostics()["blend_weight"] == 0.0
+
+
+def _sparse_prior_run(recipe, use_factory, steps=6):
+    from particlegan.k3p import LatentRowDamping
+    torch.manual_seed(0)
+    g = nn.Linear(2, 2)
+    prior = recipe.make_prior()
+    opt_g, _ = recipe.make_optimizers(g, nn.Linear(2, 1), prior)
+    reg = None
+    if use_factory:
+        reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)
+    elif recipe.latent_damping_max_rate > 0:
+        reg = LatentRowDamping(prior.z, torch.zeros_like(prior.z.detach()),
+                               max_rate=recipe.latent_damping_max_rate)
+    for step in range(steps):
+        z, _ = prior.sample(8, generator=torch.Generator().manual_seed(step))
+        opt_g.zero_grad()
+        g(z).square().sum().backward()
+        if use_factory:
+            reg.step()
+        elif recipe.latent_damping_max_rate > 0:
+            with reg.around(opt_g):
+                opt_g.step()
+        else:
+            opt_g.step()
+    return prior.z.detach().clone(), reg
+
+
+def test_generator_regularizer_matches_latent_damping_and_resumes():
+    recipe = _recipe()
+    via_recipe, reg = _sparse_prior_run(recipe, True)
+    direct, damping = _sparse_prior_run(recipe, False)
+    assert torch.equal(via_recipe, direct)
+    assert damping.started and reg.state_dict()["latent"]["state"] == damping.state_dict()
+    assert reg.state_dict()["direct"] is None
+    state = copy.deepcopy(reg.state_dict())
+    reg.load_state_dict(state)
+    assert torch.equal(reg.latent_history, state["latent"]["history"])
+    with pytest.raises(ValueError):
+        reg.load_state_dict({"latent": None, "direct": None})
+    # Disabled damping: step() is exactly optimizer.step().
+    off = recipe.replace(latent_damping_max_rate=0.0)
+    plain, plain_reg = _sparse_prior_run(off, True)
+    assert torch.equal(plain, _sparse_prior_run(off, False)[0])
+    assert plain_reg.state_dict() == {"latent": None, "direct": None}
+
+
+def test_generator_regularizer_direct_particles():
+    from particlegan.k3p import DirectParticleResponse
+    recipe = _recipe()
+    results = []
+    for use_factory in (True, False):
+        torch.manual_seed(0)
+        particles = nn.Parameter(torch.randn(16, 2))
+        opt = torch.optim.Adam([particles], lr=1e-2, betas=(0.0, 0.999))
+        if use_factory:
+            reg = recipe.make_generator_regularizer(opt, direct_particles=[particles])
+        else:
+            resp = DirectParticleResponse([particles], torch.zeros(particles.numel()),
+                                          betas=recipe.direct_particle_betas)
+        for step in range(5):
+            opt.zero_grad()
+            (particles - torch.tensor([1.0, -1.0]) * step).square().sum().backward()
+            if use_factory:
+                reg.before_step()
+                opt.step()
+                reg.after_step()
+            else:
+                with resp.around(opt):
+                    opt.step()
+        results.append(particles.detach().clone())
+    assert torch.equal(*results)
+    assert reg.state_dict()["direct"]["state"] == {"started": True}
+
+
+def test_api_doc_example_runs():
+    import pathlib
+    import re
+    text = (pathlib.Path(__file__).resolve().parents[1] / "docs/api.md").read_text()
+    block = next(b for b in re.findall(r"```python\n(.*?)```", text, re.S)
+                 if "make_critic_regularizer(D, opt_d)" in b and "for step in range" in b)
+    code = block.replace("num_classes=2)", "num_classes=2, total_steps=3, batch_size=32)", 1)
+    assert code != block
+    exec(compile(code, "docs/api.md", "exec"), {"__name__": "__api_example__"})

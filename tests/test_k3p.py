@@ -12,8 +12,9 @@ import torch.nn.functional as F
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import k3p_scenarios as sc  # noqa: E402
 
-from particlegan import (CriticAnchor, CriticSpikeGuard, DirectParticleResponse,  # noqa: E402
-                         GradientPenalty, LatentRowDamping)
+from particlegan import GradientPenalty  # noqa: E402
+from particlegan.k3p import (CriticAnchor, CriticSpikeGuard, DirectParticleResponse,  # noqa: E402
+                             LatentRowDamping)
 from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]

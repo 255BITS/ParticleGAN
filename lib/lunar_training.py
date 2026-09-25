@@ -12,7 +12,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import K3PCritic, get_recipe
+from particlegan import get_recipe
 
 
 STATE_DIM = 8
@@ -273,7 +273,7 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
     recipe = get_recipe(total_steps=steps, batch_size=batch_size, reg_coeff=1., reg_every=4,
                         ema_decay=0.)
     gan = recipe.make_loss()
-    critic_k3p = K3PCritic(recipe, critic, optimizer_d)  # penalty, EMA anchor, spike guard
+    critic_reg = recipe.make_critic_regularizer(critic, optimizer_d)  # penalty, EMA anchor, spike guard
     rng = torch.Generator(device=device).manual_seed(seed + 29)
     for step in range(1, warmup_steps + 1):
         batch = _sample(train_values, batch_size, rng)
@@ -293,11 +293,11 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
             fake_actions = policy(states)
         fake = _critic_input(policy, states, fake_actions)
         d_loss = gan.d_loss(critic(real), critic(fake))
-        d_loss = d_loss + critic_k3p.penalty(critic, real, fake, step)[0]
+        d_loss = d_loss + critic_reg.penalty(critic, real, fake, step)[0]
         optimizer_d.zero_grad(set_to_none=True)
         d_loss.backward()
         nn.utils.clip_grad_norm_(critic.parameters(), 5.)
-        critic_k3p.step()
+        critic_reg.step()
 
         critic.requires_grad_(False)
         generated = policy(states)

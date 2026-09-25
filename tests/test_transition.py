@@ -4,7 +4,6 @@ from pathlib import Path
 
 import torch
 
-from particlegan import K3PCritic
 import yaml
 
 from experiments.train_transition import (DEFAULTS, training_recipe, validate, train,
@@ -172,7 +171,7 @@ class TransitionTests(unittest.TestCase):
         rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
         # Positive UCD weight must not invoke CE on a one-logit concat critic.
         loss, _ = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                      K3PCritic(recipe, d, None, kappa=0), 1, rngs, recipe.ucd_weight)
+                                      recipe.make_critic_regularizer(d, kappa=0), 1, rngs, recipe.ucd_weight)
         loss.backward()
         for critic in d.critics.values():
             self.assertGreater(float(critic.net[0].weight.grad[:, -2:].norm()), 0)
@@ -199,7 +198,7 @@ class TransitionTests(unittest.TestCase):
         d.requires_grad_(True)
         rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
         loss, terms = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                         K3PCritic(recipe, d, None, kappa=0), 1, rngs, recipe.ucd_weight)
+                                         recipe.make_critic_regularizer(d, kappa=0), 1, rngs, recipe.ucd_weight)
         loss.backward()
         for critic in d.critics.values():
             self.assertTrue(torch.isfinite(critic.net[0].weight.grad).all())

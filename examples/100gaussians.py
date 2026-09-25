@@ -69,7 +69,7 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GANTrainer, GradientPenalty, K3PCritic, ParticlePrior, get_recipe, learning_rate_scales,
+    GANTrainer, GradientPenalty, ParticlePrior, get_recipe, learning_rate_scales,
 )
 from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
 
@@ -265,19 +265,18 @@ def train(
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
         opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
-        # K3P critic bundle: EMA-critic anchor, gradient penalty, spike guard
-        # (the same object GANTrainer uses; see examples/pytorch_loop.py for
-        # the individual components).
-        critic = K3PCritic(recipe, D, opt_D, fd_eps=reg_fd_eps)
+        # The recipe's critic regularizer (currently K3P: EMA-critic anchor,
+        # gradient penalty, spike guard) -- the same object GANTrainer uses.
+        critic = recipe.make_critic_regularizer(D, opt_D, fd_eps=reg_fd_eps)
         # Keep a separate prior optimizer for the existing update/checkpoint layout.
         opt_prior = (
             torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
                              betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
             if learnable_prior else None
         )
-        # A2 sparse latent-row damping on the prior table (caller-owned history).
-        latent_damping = (recipe.make_latent_damping(prior.z, torch.zeros_like(prior.z.detach()))
-                          if opt_prior is not None else None)
+        # Generator-side update of the prior table (currently A2 latent-row damping).
+        prior_step = (recipe.make_generator_regularizer(opt_prior, latent_table=prior.z)
+                      if opt_prior is not None else None)
         noise_gen = torch.Generator(device=device).manual_seed(seed + 5)
 
     out_path = Path(out_dir)
@@ -437,11 +436,7 @@ def train(
 
                 opt_G.step()
                 if opt_prior is not None:
-                    if latent_damping is None:
-                        opt_prior.step()
-                    else:
-                        with latent_damping.around(opt_prior):
-                            opt_prior.step()
+                    prior_step.step()
 
                 # EMA update
                 with torch.no_grad():

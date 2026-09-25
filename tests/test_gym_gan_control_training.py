@@ -8,7 +8,6 @@ import unittest
 import numpy as np
 import torch
 
-from particlegan import K3PCritic
 
 from experiments.train_gym_gan_control import DEFAULTS, train
 from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, sparse_task_losses
@@ -108,7 +107,7 @@ class GanControlTrainingTests(unittest.TestCase):
             for arm in ("joint", "marginals"):
                 bundle = build_gan_models({**self.cfg, "arm": arm}, fit_sparse_scaler(records))
                 recipe = training_recipe(bundle["config"])
-                gan, reg = recipe.make_loss(), K3PCritic(recipe, bundle["D"], None)
+                gan, reg = recipe.make_loss(), recipe.make_critic_regularizer(bundle["D"])
                 views = real_views(bundle, batch)
                 for path in ("prior", "encoded"):
                     for key in ("E", "G", "prior", "D"):

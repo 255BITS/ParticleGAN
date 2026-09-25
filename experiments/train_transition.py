@@ -23,7 +23,7 @@ from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionCritics, TransitionEncoder, encoded_transition, composed_transition,
                             metrics, shuffle_blocks, residual)
 from lib.transition_visuals import render
-from particlegan import K3PCritic, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import get_recipe, scale_learning_rates, ucd_loss
 
 
 DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
@@ -93,7 +93,7 @@ def write_json(path, data):
 def discriminator_loss(d, real, fake, c, context, gan, reg, step, rngs, ucd_weight):
     """Each D has its own Rp, UCD and gradient-penalty objective, in its own input space.
 
-    ``reg`` is the shared module's ``K3PCritic``: one penalty call per role,
+    ``reg`` is the shared module's critic regularizer: one penalty call per role,
     each with that role's view of the EMA critic as its K3P anchor.
     """
     terms = {}
@@ -279,7 +279,7 @@ def train(cfg):
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, fused=device.type == "cuda")
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     # One K3P bundle per critic optimizer; the shared module's roles share it.
-    gan, reg, spread = recipe.make_loss(), K3PCritic(recipe, d, opt_d), recipe.make_prior_regularizer()
+    gan, reg, spread = recipe.make_loss(), recipe.make_critic_regularizer(d, opt_d), recipe.make_prior_regularizer()
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"]+i) for i in (11, 12)]
     reg_rngs = {name: torch.Generator(device=device).manual_seed(cfg["seed"]+13+i)
                 for i, name in enumerate(d.roles())}

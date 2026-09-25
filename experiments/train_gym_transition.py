@@ -22,7 +22,7 @@ from lib.gym_transition import (GymTransitionScaler, GymTransitionGenerator,
     GymTransitionEncoder, GymTransitionCritics, DirectPredictor, contact_record,
     encoded_transition, composed_transition, real_reconstruction,
     synthetic_reconstruction, state_reconstruction)
-from particlegan import K3PCritic, get_recipe, scale_learning_rates
+from particlegan import get_recipe, scale_learning_rates
 
 
 DEFAULTS = dict(arm="adversarial", width=128, encoder_width=128, d_width=256,
@@ -258,7 +258,7 @@ def train(cfg):
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     # One K3P bundle per critic optimizer (none when D is absent).
-    reg = K3PCritic(recipe, d, opt_d) if opt_d is not None else None
+    reg = recipe.make_critic_regularizer(d, opt_d) if opt_d is not None else None
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     d_data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 21)
