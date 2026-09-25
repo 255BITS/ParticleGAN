@@ -142,17 +142,13 @@ def train(
     ema_decay: float = _RECIPE.ema_decay,
     lr_floor: float = _RECIPE.lr_floor,
     lr_anneal_start: float = _RECIPE.lr_anneal_start,
-    loss_type: str = _RECIPE.loss_type,
-    gan_mode: str = _RECIPE.gan_mode,
     out_dir: str = "100gaussians_samples",
     log_interval: int = 100,
     snapshot_interval: int = 500,
     seed: int = 1234,
     device_str: str = None,
     prior_kind: str = "particles",
-    reg_method: str = _RECIPE.reg_method,
     reg_every: int = _RECIPE.reg_every,
-    reg_fd_eps: float = 0.05,
     reg_sync_stats: bool = True,
     fused_adam: bool = False,
     return_details: bool = False,
@@ -206,8 +202,8 @@ def train(
     recipe = get_recipe(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult, prior_lr_mult=prior_lr_mult,
-        betas=(beta1, beta2), loss_type=loss_type, gan_mode=gan_mode,
-        reg_coeff=reg_coeff, reg_kappa=reg_kappa, reg_every=reg_every, reg_method=reg_method,
+        betas=(beta1, beta2),
+        reg_coeff=reg_coeff, reg_kappa=reg_kappa, reg_every=reg_every,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor, **(recipe_overrides or {}),
     )
@@ -234,7 +230,6 @@ def train(
             recipe, G, D, prior=prior, seed=seed,
             latent_generator=latent_gen, penalty_generator=penalty_gen,
             optimizer_options={"fused": fused_adam},
-            penalty_options={"fd_eps": reg_fd_eps},
         )
         ema_G, ema_prior = trainer.ema_G, trainer.ema_prior
         opt_G, opt_D, opt_prior = trainer.opt_g, trainer.opt_d, None
@@ -253,8 +248,7 @@ def train(
         # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
         opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
-        penalty = recipe.make_critic_penalty(opt_D, generator=penalty_gen, collect_stats=reg_sync_stats,
-                                             fd_eps=reg_fd_eps)
+        penalty = recipe.make_critic_penalty(opt_D, generator=penalty_gen, collect_stats=reg_sync_stats)
         # A separate prior optimizer (own LR/betas); its step() applies the
         # recipe's latent-table update (currently A2 latent-row damping).
         opt_prior = (
@@ -384,7 +378,7 @@ def train(
                 x_fake = generate(z_fake)
                 fake_logits = noisy_D(x_fake)
 
-                if gan_mode in ("rp", "ra"):
+                if recipe.gan_mode in ("rp", "ra"):
                     with torch.no_grad():
                         x_real_g = sample_100gaussians(
                             batch_size=batch_size,

@@ -31,7 +31,6 @@ DEFAULTS = {
     'particle_beta1': None,
     'mog_metrics': False,
     'mog_pass_criteria': None,
-    'reg_fd_eps': 0.05,
     'reg_sync_stats': True,
     'fused_adam': False,
     'final_samples': 20000,
@@ -46,8 +45,9 @@ def train(cfg):
     for key in ('epochs','steps_per_epoch','batch_size','num_particles','log_interval','snapshot_interval','final_samples'):
         if type(cfg[key]) is not int or cfg[key] < 1:
             raise ValueError(f'{key} must be a positive integer')
-    if 'reg_arm' in cfg:
-        raise ValueError('reg_arm was removed: the critic penalty is the recipe default')
+    removed=[k for k in ('reg_arm','loss_type','gan_mode','reg_method','reg_fd_eps') if k in cfg]
+    if removed:
+        raise ValueError(f'{removed} were removed: the objective and critic penalty are the recipe default')
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32=False
     out=ROOT/cfg['out_dir'];out.mkdir(parents=True,exist_ok=True)

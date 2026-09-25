@@ -192,7 +192,7 @@ supervision with an Anima-style critic on noisy prediction errors, while keeping
 joint and marginal GAN training active.
 The [ParticleGAN fine-tune](docs/gym-particle-finetune.md) keeps L2 weights at
 0 and updates `E_control` and G2 with YuE2 paired-error RpGAN at `adv_weight=1`
-plus sample-point b_cap on the edit critic. G1, G3, the paired encoder, the
+plus the recipe's default critic penalty on the edit critic (`edit_game`). G1, G3, the paired encoder, the
 prior, and the transition discriminators stay frozen. `particle.yaml` is that
 default. The [safe-fast term](docs/gym-safe-fast.md) is a separate config,
 `particle_safe_fast.yaml`, and does not replace it.
