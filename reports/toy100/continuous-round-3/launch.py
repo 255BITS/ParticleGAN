@@ -16,6 +16,28 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_acquire_then_maintain': ('grok', GPU0, '''Test a two-signal controller
+from selected K3P, not promotion of an unverified partial. Completed mobility
+PM1/PM3 acquire and hold1200+300 but miss two late recovery checks after raw
+gradients cool. New training-discrepancy TD1/TD2/TD3 each pass img_intensity2 but
+all three own holds fail NOT_CONVERGED; TD3 stays at seven modes even with a
+large training discrepancy. Its canonical shift is still finishing. Raw sources:
+/ml2/hypergan/gan-attempts/formulations-20260925T183536Z/k3p_training_discrepancy/20260925T183536Z-3798526/repo/reports/toy100/discrepancy-attempt
+Read exact controller and rate traces, not just the image-pass labels. Hypothesis:
+separate acquisition evidence from later distribution-error maintenance. A
+declared gradient-contraction acquisition latch can preserve full initial
+mobility; ordinary real/generated TRAINING batch discrepancy can then detect
+generator-side error that a quiet gradient misses. Review the first divergence
+from K3P's acquisition prefix; do not mistake statistical mismatch for evidence
+that an early critic penalty must stay on indefinitely. No inherited PM or TD
+scores. Do not simply tune the79/81 misses: no known steps, task ids, mode counts,
+centers, held-out metrics or coefficient grid. Keep every learner component
+independent of final training duration, including noise; fixed initial estimator
+warmup may be declared. Preserve K3P architecture, learned prior, direct response
+and ordinary gradient training. Both canonical protocols per proposal, short
+image screen, then native coverage AND accuracy only for a ring survivor. Up
+to3 proposals, one worker, no nested agents. This lane targets its own mechanism;
+do not edit or rerun the active Codex attempt.'''),
     'k3p_anchor_force_balance': ('grok', GPU0, '''Own horizon-free balancing of
 critic anchor force from selected K3P. Read completed-penalty-balance report.
 PB0's extra penalty backward reproduced the parent shift. PB1/PB2 hold1200+300,

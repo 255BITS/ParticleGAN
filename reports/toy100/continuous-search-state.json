@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185807Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -112,7 +112,8 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185807Z"
   ],
   "completed_rounds": [
     {
