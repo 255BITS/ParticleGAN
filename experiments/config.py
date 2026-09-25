@@ -40,6 +40,10 @@ def recipe_defaults(name):
     defaults = {key: getattr(recipe, key) for key in keys}
     defaults["beta1"] = recipe.betas[0]
     if name == "100gaussians":
+        # The example trains the recipe's objective and penalty; it takes no
+        # loss/mode/penalty-method options.
+        for key in ("loss_type", "gan_mode", "reg_method"):
+            defaults.pop(key)
         defaults.update(beta2=recipe.betas[1], prior_lr_mult=recipe.prior_lr_mult, epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
                         lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay, reg_kappa=recipe.reg_kappa)
     elif name == "denoising":

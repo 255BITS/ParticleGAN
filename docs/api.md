@@ -496,8 +496,7 @@ other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
 pairing, and a thinned κ are not this stamp. The selected `get_recipe()`
 uses coefficient 6, κ=1.25 and prior regularization .05; this frozen stamp retains
 its original values.
-The full field table is in [locked shared](locked-shared.md). Lunar Lander's
-import of it is [the gym arm](gym-particle-finetune.md#locked-shared-arm).
+The full field table is in [locked shared](locked-shared.md). No repository trainer uses it.
 
 ### `ParticleRegularizer`
 

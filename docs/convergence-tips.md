@@ -202,11 +202,11 @@ anneal for a stable endpoint.
 | Ingredient | Value | Why |
 |---|---|---|
 | Objective | RpGAN (relativistic pairing, logistic) | LR headroom, mode balance (§6) |
-| Gradient penalty | one-sided cap `b_cap`, coeff 1.0, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
+| Gradient penalty | recipe default critic penalty (K3P), coeff 1, κ 1, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
 | D input | Fourier features, K = 2 | resolve σ=0.03 structure from step 1 (§3) |
-| z_dim | 4 (data is 2-D) | transport room (§5) |
-| Optimizers | Adam, β1 = 0 everywhere | sparse particle table (§4) |
-| LRs | G/prior-base 6e-4, prior ×10, D ×1.5 | mild TTUR only (§7) |
+| z_dim | 2 (recipe default; data is 2-D) | transport room (§5) |
+| Optimizers | recipe optimizers (`make_optimizers`), betas (0, 0.999) | sparse particle table (§4) |
+| LRs | G/D 4.25e-3, prior ×2, D ×1 (`get_recipe("gan")`) | mild TTUR only (§7) |
 | EMA | 0.995 on G *and* prior, eval-only | sits on the equilibrium (§2) |
 | LR schedule | full LR for 60% of run, cosine to 5% floor | stable endpoint (§2) |
 | Particles | 20,000 for 100 modes | fewer decisively hurts (§7) |
