@@ -49,6 +49,7 @@ from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 from benchmarks.transfer_suite.protocol import required_tasks, test_verdict
 from benchmarks.toy100.device import add_device_argument, apply_device_policy, host_device, rng_fork_devices
 from benchmarks.transfer_suite.toy100_compatibility import declared_recipe
+from benchmarks.gan_v3 import legacy_dict
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -451,7 +452,7 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     return dict(
         mode=mode, config_sha256=hashlib.sha256(json.dumps(
             effective, sort_keys=True).encode()).hexdigest(),
-        effective_config=effective, source_recipe=recipe.to_dict(),
+        effective_config=effective, source_recipe=legacy_dict(recipe),
         **provenance, steps=steps, noise_horizon=noise_horizon,
         diagnostic_every=diagnostic_every, dense_after=dense_after,
         dense_until=dense_until,

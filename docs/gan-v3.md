@@ -1,7 +1,11 @@
-# GAN v3: the default, explained
+# GAN v3 (superseded), explained
+
+> **Superseded by [K3P](k3p.md).** `get_recipe()` now returns K3P. This page
+> documents the previous default; benchmarks reproduce it with
+> `benchmarks.gan_v3.GAN_V3_FIELDS`.
 
 **GAN v3 passes 19/19 live behavioral toys with one shared training recipe and
-explicit discriminator choices.** It is now the single default returned by `get_recipe()`. The final improvement gives the discriminator information
+explicit discriminator choices.** It was the single default returned by `get_recipe()`. The final improvement gives the discriminator information
 about nearby samples, providing local spread information.
 
 ![GAN v3 alternates discriminator updates with generator and particle updates.](figures/gan-v3-pipeline.svg)

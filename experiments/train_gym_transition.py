@@ -22,7 +22,7 @@ from lib.gym_transition import (GymTransitionScaler, GymTransitionGenerator,
     GymTransitionEncoder, GymTransitionCritics, DirectPredictor, contact_record,
     encoded_transition, composed_transition, real_reconstruction,
     synthetic_reconstruction, state_reconstruction)
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import K3PCritic, get_recipe, scale_learning_rates
 
 
 DEFAULTS = dict(arm="adversarial", width=128, encoder_width=128, d_width=256,
@@ -172,8 +172,9 @@ def discriminator_loss(d, real, fake, terrain, gan, reg, step, rngs):
         xr, context = d.inputs(role, real, terrain)
         xf, _ = d.inputs(role, fake, terrain)
         dr, df = critic(xr, context)[0], critic(xf, context)[0]
-        penalty, _ = reg.penalty(lambda x: critic(x, context)[0], xr, xf, step,
-                                 rngs[role], collect_stats=False)
+        penalty, _ = reg.penalty(
+            lambda x: critic(x, context)[0], xr, xf, step, generator=rngs[role],
+            ema_critic=reg.ema_critic(lambda m, x: m.critic_for(role)(x, context)[0]))
         terms[role] = gan.d_loss(dr, df) + penalty
     return sum(terms.values()), terms
 
@@ -256,7 +257,9 @@ def train(cfg):
         opt_d = None
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    # One K3P bundle per critic optimizer (none when D is absent).
+    reg = K3PCritic(recipe, d, opt_d) if opt_d is not None else None
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     d_data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 21)
     latent_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 12)
@@ -317,10 +320,7 @@ def train(cfg):
         sync()
         segment_started = time.perf_counter()
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, prior)
             ld = train_real.new_zeros(())
             d_terms = {}
             if d is not None:
@@ -334,7 +334,7 @@ def train(cfg):
                 ld, d_terms = discriminator_loss(d, real_d, fake_d, context_d, gan, reg, step, reg_rngs)
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
-                opt_d.step()
+                reg.step()  # spike guard, Adam step, K3P anchor/LR record
                 d.requires_grad_(False)
             real, context = batch(data_rng)
             lg = lp = real.new_zeros(())

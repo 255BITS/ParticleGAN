@@ -3,6 +3,8 @@ import unittest
 from pathlib import Path
 
 import torch
+
+from particlegan import K3PCritic
 import yaml
 
 from experiments.train_transition import (DEFAULTS, training_recipe, validate, train,
@@ -88,11 +90,11 @@ class TransitionTests(unittest.TestCase):
     def test_default_recipe_and_parameter_budgets(self):
         r = training_recipe(DEFAULTS).to_dict()
         expected = get_recipe(prior_kind='mog', sigma_rel=0.025).to_dict()
-        for key in ("z_dim", "num_particles", "num_classes", "conditioning", "total_steps"):
+        for key in ("z_dim", "num_particles", "num_classes", "conditioning", "total_steps", "batch_size"):
             expected[key] = r[key]
         self.assertEqual(r, expected)
         self.assertEqual(r["num_particles"], 1024)
-        self.assertEqual(r["reg_arm"], "b_cap")
+        self.assertEqual(r["reg_arm"], "k3p")
         sizes = [sum(p.numel() for p in g.parameters()) for g in
                  (TransitionGenerator(), TransitionGenerator(32, "monolithic", 234))]
         self.assertLess(abs(sizes[0]/sizes[1]-1), .01)
@@ -170,7 +172,7 @@ class TransitionTests(unittest.TestCase):
         rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
         # Positive UCD weight must not invoke CE on a one-logit concat critic.
         loss, _ = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                      recipe.make_gradient_penalty(kappa=0), 1, rngs, recipe.ucd_weight)
+                                      K3PCritic(recipe, d, None, kappa=0), 1, rngs, recipe.ucd_weight)
         loss.backward()
         for critic in d.critics.values():
             self.assertGreater(float(critic.net[0].weight.grad[:, -2:].norm()), 0)
@@ -197,7 +199,7 @@ class TransitionTests(unittest.TestCase):
         d.requires_grad_(True)
         rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
         loss, terms = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                         recipe.make_gradient_penalty(kappa=0), 1, rngs, recipe.ucd_weight)
+                                         K3PCritic(recipe, d, None, kappa=0), 1, rngs, recipe.ucd_weight)
         loss.backward()
         for critic in d.critics.values():
             self.assertTrue(torch.isfinite(critic.net[0].weight.grad).all())

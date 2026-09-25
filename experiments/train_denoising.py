@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, GradientPenalty, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import DDGAN, GradientPenalty, K3PCritic, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -216,7 +216,7 @@ def train(cfg):
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = recipe.make_loss()
-    reg = recipe.make_gradient_penalty(fd_eps=cfg["reg_fd_eps"])
+    critic = K3PCritic(recipe, d, opt_d, fd_eps=cfg["reg_fd_eps"])
     spread = recipe.make_prior_regularizer()
 
     def batch():
@@ -260,11 +260,7 @@ def train(cfg):
             if step == 1 or (step - 1) % cfg["eval_interval"] == 0:
                 torch.cuda.synchronize()
                 block_start = time.perf_counter()
-            scale = learning_rate_scale(step - 1, recipe.total_steps,
-                                        recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, base in zip((opt_g, opt_d), bases):
-                for group, lr in zip(opt.param_groups, base):
-                    group["lr"] = lr * scale
+            scale_learning_rates(step - 1, recipe, (opt_g, opt_d), bases, prior)
             d.requires_grad_(True)
             c, real, xt, t = batch()
             with torch.no_grad():
@@ -275,11 +271,13 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 targets = d.ucd_labels(c, t)
                 loss_d = loss_d + ucd_loss(cr, cf, targets, weight=cfg["ucd_lambda"])
-            penalty, _ = reg.penalty(lambda x: d(x, c, xt, t)[0], real, xf, step, rngs["penalty"], collect_stats=cfg.get("reg_sync_stats", True))
+            penalty, _ = critic.penalty(lambda x: d(x, c, xt, t)[0], real, xf, step, generator=rngs["penalty"],
+                                        collect_stats=cfg.get("reg_sync_stats", True),
+                                        ema_critic=critic.ema_critic(lambda m, x: m(x, c, xt, t)[0]))
             loss_d = loss_d + penalty
             opt_d.zero_grad(set_to_none=True)
             loss_d.backward()
-            opt_d.step()
+            critic.step()  # spike guard, Adam step, K3P anchor/LR record
 
             d.requires_grad_(False)
             c, real, xt, t = batch()

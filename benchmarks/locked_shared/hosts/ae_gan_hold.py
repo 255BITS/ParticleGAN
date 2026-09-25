@@ -24,6 +24,7 @@ from particlegan import get_recipe
 
 
 from particlegan.grad_regularizers import GradRegularizer
+from benchmarks.gan_v3 import gan_v3_recipe
 
 
 DEMO_COVER = 1.5
@@ -138,7 +139,7 @@ def _log(arm: str, step: int, metrics: dict, extra: str = "") -> None:
 
 def make_recipe(cfg: HoldConfig):
     """Frozen AE host resources with this candidate's numerical settings."""
-    return get_recipe(
+    return gan_v3_recipe(
         prior_kind='mog', sigma_rel=0.025, z_dim=2, total_steps=6000,
         betas=(0., .999), d_lr_mult=1.5, prior_lr_mult=10., prior_betas=(.5, .999),
         prior_reg=1., lr_floor=1.,

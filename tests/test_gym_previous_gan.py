@@ -7,6 +7,8 @@ import unittest
 import numpy as np
 import torch
 
+from particlegan import K3PCritic
+
 from experiments.train_gym_previous_gan import DEFAULTS, train
 from lib.gym_control import build_expert_records
 from lib.gym_state_control import training_recipe
@@ -84,7 +86,7 @@ class PreviousGanTests(unittest.TestCase):
             bundle['D'].requires_grad_(True)
             fakes, _ = fake_paths(bundle, batch, torch.Generator().manual_seed(8), torch.Generator().manual_seed(9), True)
             loss, _ = adversarial_loss(bundle['D'], real_record(bundle, batch), fakes, batch['terrain'], recipe.make_loss(),
-                reg=recipe.make_gradient_penalty(), rngs={r: torch.Generator().manual_seed(7) for r in bundle['D'].roles()})
+                reg=K3PCritic(recipe, bundle['D'], None), rngs={r: torch.Generator().manual_seed(7) for r in bundle['D'].roles()})
             loss.backward()
             self.assertTrue(all(has_grad(d) for d in bundle['D'].critics.values()))
             self.assertTrue(all(not has_grad(bundle[k]) for k in ('G', 'E', 'prior')))

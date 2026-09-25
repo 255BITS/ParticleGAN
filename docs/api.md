@@ -89,10 +89,24 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe()` constructs the shared **GAN v3** winner: Rp logistic,
-b_cap coefficient 6, κ1.25, spread .05, Adam (0,.99), G/D LR .00425 and particle
-LR .0085. Rates hold for 60% of the budget, then cosine toward 5%. There is no
-particle L2 term. Live sampling is the default; EMA is explicit.
+`get_recipe()` constructs **K3P** ([details](k3p.md)): Rp logistic, the K3P
+critic penalty (coefficient 1, κ 1, EMA-critic anchor .999), critic spike guard
+(ratio 5 after 200 steps), A2 latent-row damping, Adam (0,.999), G/D LR .00425
+and particle LR .0085. G/D rates hold for 60% of a 1,600-update horizon, then
+cosine to 1% (`network_lr_horizon_cap`, `network_lr_floor`); particle rates hold
+for 60% of the budget, then cosine toward 5%. The critic sees annealed input
+noise and the generator output carries warmed-up noise (also in `sample`). There
+is no particle spread or L2 term. Live sampling is the default; EMA is explicit.
+
+`GANTrainer` owns K3P state: `trainer.critic` is its `K3PCritic` (penalty,
+`ema_D`, guard), `trainer.latent_damping` wraps the prior's Adam step and
+checkpoints use schema 2 (`"k3p"` entry plus a noise stream). Schema-1 (GAN v3)
+checkpoints raise `ValueError`. For caller-owned loops, use one
+`K3PCritic(recipe, D, opt_d)` per critic optimizer: `k3p.penalty(...)` in the
+critic loss and `k3p.step()` in place of `opt_d.step()`; pass
+`ema_critic=k3p.ema_critic(lambda m, x: ...)` per role when one module serves
+several critic roles. `learning_rate_scales(step, recipe)` returns the
+`(network, prior)` LR multipliers.
 
 | Version | Live behavioral toys passed | Meaning |
 | --- | ---: | --- |
@@ -143,7 +157,7 @@ import copy
 import torch
 from torch import nn
 from torch.nn import functional as F
-from particlegan import DDGAN, UCD, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import DDGAN, UCD, K3PCritic, get_recipe, scale_learning_rates, ucd_loss
 
 device = torch.device("cpu")
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
@@ -175,19 +189,17 @@ G = Generator(recipe.z_dim, recipe.num_classes, process.steps).to(device)
 D = UCD(LogitNetwork(recipe.num_classes, process.steps), recipe.num_classes).to(device)
 prior = recipe.make_prior().to(device)
 gan = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
 spread = recipe.make_prior_regularizer()
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+# K3P (default penalty): EMA critic, anchor, penalty and spike guard for D.
+k3p = K3PCritic(recipe, D, opt_d)
 ema_g = copy.deepcopy(G).eval().requires_grad_(False)
 ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
 for step in range(recipe.total_steps):
-    scale = learning_rate_scale(step, recipe.total_steps,
-                               recipe.lr_anneal_start, recipe.lr_floor)
-    for opt, rates in zip((opt_g, opt_d), base_lrs):
-        for group, rate in zip(opt.param_groups, rates):
-            group["lr"] = rate * scale
+    # G/D follow the network schedule (K3P's blend floor), the prior its own.
+    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
 
     labels = torch.randint(recipe.num_classes, (recipe.batch_size,), device=device)
     real = 0.2 * torch.randn(len(labels), 2, device=device) + (2 * labels[:, None] - 1)
@@ -202,10 +214,11 @@ for step in range(recipe.total_steps):
     fake_score, fake_logits = D(fake.detach(), labels, xt=xt, t=t)
     d_loss = gan.d_loss(real_score, fake_score)
     d_loss += ucd_loss(real_logits, fake_logits, labels, weight=recipe.ucd_weight)
-    d_loss += penalty(lambda x: D(x, labels, xt=xt, t=t)[0],
-                      x_prev, fake.detach(), step=step + 1)
+    d_loss += k3p.penalty(lambda x: D(x, labels, xt=xt, t=t)[0],
+                          x_prev, fake.detach(), step + 1,
+                          ema_critic=k3p.ema_critic(lambda m, x: m(x, labels, xt=xt, t=t)[0]))[0]
     d_loss.backward()
-    opt_d.step()
+    k3p.step()  # spike guard, opt_d.step(), then K3P's anchor EMA + LR record
 
     D.requires_grad_(False)
     opt_g.zero_grad(set_to_none=True)
@@ -430,18 +443,21 @@ the gradient path through the fake input.
 ### `GradientPenalty`
 
 ```python
-GradientPenalty(arm="b_cap", coeff=1.0, kappa=1.0, lazy_k=1, norm="l2",
+GradientPenalty(arm="k3p", coeff=1.0, kappa=1.0, lazy_k=1, norm="l2",
                 target_anneal="none", total_steps=0,
-                method="autograd", fd_eps=0.05)
+                method="autograd", fd_eps=0.05, lr_floor=0.01, anchor=None)
 ```
 
 Call `penalty(D, real, fake, step=1, generator=None)` to get a scalar loss.
 `D` may be a module or callable returning one scalar score per example. The
-default is the mean squared excess of the input-gradient norm above `kappa`,
-averaged over real and fake samples and scaled by `coeff`.
+default arm is K3P, which is stateful: call `penalty.after_critic_step(opt_d)`
+after every critic `opt_d.step()` and give it an EMA critic (`anchor=` or
+`ema_critic=`). `K3PCritic(recipe, D, opt_d)` does this wiring for you; see
+[K3P](k3p.md). Other arms are stateless and ignore `after_critic_step`.
 
 | `arm` | Penalty |
 | --- | --- |
+| `k3p` | Zero-centered real R1 + fake cap, blended by the critic LR ratio into a real/fake cap plus an EMA-critic gradient proximity term |
 | `b_cap` | One-sided gradient cap on reals and fakes |
 | `a_r1r2` | Zero-centered squared L2 gradients on reals and fakes |
 | `c_eikonal` | Two-sided penalty around norm 1 |
@@ -682,16 +698,23 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | Shared field | Default |
 | --- | --- |
 | `model`, `conditioning`, `num_classes` | `gan`, `scalar`, `None` |
-| `z_dim`, `num_particles` | `4`, `20_000` |
+| `z_dim`, `num_particles` | `2`, `20_000` |
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
 | `loss_type`, `gan_mode` | `logistic`, `rp` |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
-| `betas`, `prior_betas` | `(0, .99)`, `None` (inherit betas) |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `6`, `1.25` |
-| `reg_every`, `reg_method` | `1`, `autograd` |
-| `prior_reg`, `ema_decay` | `.05`, `.995` |
-| `lr_anneal_start`, `lr_floor` | `.6`, `.05` |
-| `batch_size`, `total_steps` | `256`, `7_000` |
+| `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `reg_arm`, `reg_coeff`, `reg_kappa` | `k3p`, `1`, `1` |
+| `reg_every`, `reg_method` | `1` (K3P every k-th step at k× coefficient), `autograd` |
+| `prior_reg`, `ema_decay` | `0`, `.995` |
+| `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
+| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule and K3P blend floor; `None` = full budget / `lr_floor`) |
+| `reg_anchor_decay` | `.999` |
+| `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
+| `latent_damping_max_rate` | `.5` (0 disables) |
+| `direct_particle_betas` | `(0, .9)` (`make_direct_response`, custom loops) |
+| `input_noise_std`, `input_noise_anneal_end` | `.5`, `.1` |
+| `output_noise_std`, `output_noise_warmup` | `.029`, `.2` |
+| `batch_size`, `total_steps` | `2048`, `7_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
 

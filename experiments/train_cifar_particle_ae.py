@@ -206,7 +206,7 @@ def train(cfg):
         {'params': prior.parameters(), 'lr': cfg['prior_lr'], 'betas': (.5, .999)},
     ], betas=(0., .999), fused=True)
     od = torch.optim.Adam([p for p in d.parameters() if p.requires_grad], lr=cfg['d_lr'], betas=(0., .999), fused=True)
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=4), ParticleRegularizer()
+    adversarial, penalty, spread = GANLoss(), GradientPenalty(arm="b_cap", lazy_k=4), ParticleRegularizer()
     streams = {name: rng(cfg['seed'] + offset) for name, offset in [('data', 2), ('prior', 3)]}
     metadata = {'initialization_sha256': initial_hash, 'sigma': float(prior.sigma),
                 'initial_nearest_neighbor_median': float(prior.d0), 'torch': torch.__version__,

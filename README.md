@@ -8,19 +8,22 @@ extension checks passing**. Target-shift recovery remains a measured failure
 (28/81 deadline checks). [Leaderboard](reports/toy100/continuous-practical-leaderboard.md) ·
 [Exact selected bundle](reports/toy100/current-research-base.json).
 
-Research launchers select K3P's config, critic mechanism, latent damping, response,
-and gate drivers together; loading its config alone does not activate K3P.
-See the [execution guide](reports/toy100/k3p-base/README.md#exact-selected-bundle-and-execution).
-The standard toy CLI and CPU CI gate still exercise the historical shared recipe.
+**K3P is the public API default** (`get_recipe()`, `GANTrainer`): the penalty,
+EMA-critic anchor, critic spike guard, latent damping, LR schedule and noise are
+package components with explicit hyperparameters.
+[How K3P works and how to wire it into your own loop](docs/k3p.md).
+The frozen research drivers remain for exact reproduction
+([execution guide](reports/toy100/k3p-base/README.md#exact-selected-bundle-and-execution)).
+The standard toy CLI and CPU CI gate still exercise the historical GAN v3 recipe.
 
-**GAN v3 is the public API default** (`get_recipe("gan")`): one shared recipe passes **19/19 live behavioral toys**
+**GAN v3 (previous default, history):** one shared recipe passed **19/19 live behavioral toys**
 with declared discriminator choices (15/19 with the reference D profile).
 
 | Recipe version | Live toys passed | Status |
 | --- | ---: | --- |
 | v1 (archived) | 5/19 | Original preset |
 | v2 (archived) | 8/19 | Previous default |
-| **v3 (current)** | **19/19** | **Current default, with documented D choices** |
+| v3 (archived) | 19/19 | Previous default, with documented D choices; superseded by K3P |
 
 [Illustrated guide and equations](docs/gan-v3.md) ·
 [Full leaderboard](reports/transfer_suite/unadjusted/README.md) ·
@@ -114,13 +117,22 @@ example with flushed logs and resumable checkpoints. See
 The optional helper supports scalar, unconditional GANs with particle priors;
 the independent primitives remain available for other training loops.
 
-`get_recipe()` supplies the **GAN v3** winning defaults: Rp logistic, b_cap6,
-κ1.25, particle spread .05, Adam (0,.99), G/D LR .00425 and particle LR .0085.
-The optional `BatchDistanceDiscriminator` exposes local within-batch spread to D.
-The 19/19 result uses an explicit D profile; architecture remains an application
-choice. [See the illustrated explanation and measured limits](docs/gan-v3.md).
+`get_recipe()` supplies the **K3P** defaults: Rp logistic, the K3P penalty
+(coefficient 1, κ 1, EMA-critic anchor), critic spike guard, A2 latent damping,
+Adam (0,.999), G/D LR .00425 with a 1,600-update horizon down to 1%, particle
+LR .0085 over the full budget, annealed critic input noise and generator output
+noise, batch 2048 and z_dim 2. With a single critic, the trainer's penalty
+blend is
 
-![How GAN v3 trains particles, generator and discriminator.](docs/figures/gan-v3-pipeline.svg)
+```text
+penalty = ½ (s·A + (1 − s)·(B + P)),  s = max(0, min(1, 2r) − 2f) / (1 − 2f)
+```
+
+where A is RMS R1 plus a fake-gradient cap, B the one-sided caps, P the gap to
+the EMA critic's input gradient, and r the critic's LR relative to its peak.
+[Formula, defaults and multi-critic API](docs/k3p.md). The optional
+`BatchDistanceDiscriminator` exposes local within-batch spread to D.
+GAN v3 is documented as history in [the GAN v3 guide](docs/gan-v3.md).
 
 Use `get_recipe("gan")`, `get_recipe("ae_gan")`, `get_recipe("vae_gan")`, or
 another [model-family recipe](docs/api.md#recipes-and-defaults), with explicit
@@ -191,13 +203,14 @@ paired-error critic. G1, G3, the paired encoder, the prior, and the transition
 discriminators stay frozen.
 
 ```python
-from particlegan import ParticlePrior, GANLoss, get_recipe
+from particlegan import GANLoss, K3PCritic, ParticlePrior, get_recipe
 
 recipe = get_recipe()
-prior = recipe.make_prior().to(device)  # 20,000 particles, z_dim=4
+prior = recipe.make_prior().to(device)  # 20,000 particles, z_dim=2
 adversarial = recipe.make_loss()       # relativistic-paired logistic
-penalty = recipe.make_gradient_penalty()  # b_cap, coefficient 6, cap 1.25
-spread = recipe.make_prior_regularizer()  # variance/covariance weight .05
+opt_g, opt_d = recipe.make_optimizers(G, D, prior)
+k3p = K3PCritic(recipe, D, opt_d)      # K3P penalty + EMA critic + spike guard
+spread = recipe.make_prior_regularizer()  # weight 0 in K3P (prior_reg)
 
 # Customize with ordinary keyword arguments:
 prior = ParticlePrior(num_particles=4096, z_dim=16).to(device)
@@ -327,8 +340,10 @@ Components are independent. For example, add a critic penalty or a particle
 spread term to losses your pipeline already computes:
 
 ```python
+k3p = K3PCritic(recipe, D, opt_d)  # one per critic optimizer
 # In your discriminator update:
-d_loss = existing_d_loss + penalty(D, real, fake.detach(), step=step)
+d_loss = existing_d_loss + k3p.penalty(D, real, fake.detach(), step)[0]
+# ... d_loss.backward(); k3p.step()  (spike guard, opt_d.step(), K3P bookkeeping)
 
 # In your generator/prior update, when sampled particle indices are available:
 g_loss = existing_g_loss + spread(prior.z[indices.unique()])
@@ -343,15 +358,17 @@ for the G update while retaining gradients through `D(fake)`.
 ### Selected defaults, with easy overrides
 
 ```python
-from particlegan import get_recipe
+from particlegan import K3PCritic, get_recipe, scale_learning_rates
 
 recipe = get_recipe()  # Recommended GAN defaults.
 recipe = recipe.replace(z_dim=16, num_particles=4096, lr=3e-4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
 spread = recipe.make_prior_regularizer()
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)  # after moving modules to device
+base_lrs = [[g["lr"] for g in opt.param_groups] for opt in (opt_g, opt_d)]
+k3p = K3PCritic(recipe, D, opt_d)  # K3P penalty + EMA critic + spike guard, per critic
+# Each update: scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
 print(recipe.to_dict())  # inspect every resolved value
 ```
 
@@ -363,13 +380,14 @@ returns a new one. Unknown options raise errors.
 | Shared default | Value |
 | --- | --- |
 | Model / conditioning | GAN / scalar |
-| Prior | 20,000 learned particles, dimension 4 |
-| Loss / cap | Rp logistic / b_cap6, κ1.25 |
-| Particle regularizer | Spread .05; no particle L2 |
+| Prior | 20,000 learned particles, dimension 2, A2 row damping |
+| Loss / penalty | Rp logistic / K3P (c 1, κ 1, EMA anchor .999) + critic spike guard |
+| Particle regularizer | None (weight 0); no particle L2 |
 | Adam G / D / particle LR | .00425 / .00425 / .0085 |
-| Adam betas / EMA | (0, .99) / .995 |
-| Schedule | Hold 60%, cosine toward 5% |
-| Batch / updates | 256 / 7,000 |
+| Adam betas / EMA | (0, .999) / .995 |
+| Schedule | G/D: hold 60% of 1,600 updates, cosine to 1%; particles: hold 60%, cosine to 5% |
+| Noise | Critic input .5 → 0 by 10%; generator output 0 → .029 by 20% |
+| Batch / updates | 2048 / 7,000 |
 
 `model="ddgan"`, `prior_kind="mog"` and encoder options change components;
 they do not silently select different learning rates or regularizers.
@@ -484,14 +502,15 @@ labels, and device:
 
 ```python
 import torch
-from particlegan import DDGAN, UCD, ucd_loss
+from particlegan import DDGAN, UCD, K3PCritic, get_recipe, ucd_loss
 
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
 process = DDGAN(alpha_bar=recipe.alpha_bar).to(device)
 critic = UCD(logit_network, num_classes=recipe.num_classes).to(device)
+opt_d = torch.optim.Adam(critic.parameters(), lr=recipe.lr, betas=recipe.betas)
+k3p = K3PCritic(recipe, critic, opt_d)  # built once, before the loop
 
 t = torch.randint(1, process.steps + 1, (len(real),), device=device)
 rng = torch.Generator(device=device).manual_seed(123)
@@ -504,8 +523,12 @@ fake_score, fake_logits = critic(fake_prev.detach(), labels, xt=xt, t=t)
 d_loss = adversarial.d_loss(real_score, fake_score)
 d_loss += ucd_loss(real_logits, fake_logits, critic.ucd_labels(labels, t),
                    weight=recipe.ucd_weight)
-d_loss += penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
-                  x_prev, fake_prev.detach())
+d_loss += k3p.penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
+                      x_prev, fake_prev.detach(), step,
+                      ema_critic=k3p.ema_critic(lambda m, x: m(x, labels, xt=xt, t=t)[0]))[0]
+opt_d.zero_grad(set_to_none=True)
+d_loss.backward()
+k3p.step()  # spike guard, opt_d.step(), K3P anchor EMA + LR record
 ```
 
 For class-only UCD, the network receives `network(x, xt=xt, t=t)` and returns
@@ -684,7 +707,7 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 ## Notes
 
-- The text experiments (`five_modes.py`) use the same recipe (RpGAN + one-sided cap penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
+- The text experiments (`five_modes.py`) use the same recipe (RpGAN + K3P penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
 - The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
 - GAN v3 particles use 2× the G learning rate; explicit experiment configurations can override that ratio.
 

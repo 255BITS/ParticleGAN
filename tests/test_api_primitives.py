@@ -46,7 +46,7 @@ def test_bcap_value_derivative_and_callable_match():
         discriminator.weight.copy_(torch.tensor([[3., 4.]]))
     real = torch.zeros(3, 2, dtype=torch.float64)
     fake = torch.ones_like(real, requires_grad=True)
-    regularizer = GradientPenalty()
+    regularizer = GradientPenalty(arm="b_cap")
     penalty, stats = regularizer.penalty(discriminator, real, fake)
     torch.testing.assert_close(penalty, penalty.new_tensor(16.))
     torch.testing.assert_close(regularizer(discriminator, real, fake), penalty)
@@ -54,7 +54,7 @@ def test_bcap_value_derivative_and_callable_match():
     penalty.backward()
     torch.testing.assert_close(discriminator.weight.grad, torch.tensor([[4.8, 6.4]], dtype=torch.float64))
     assert fake.grad is None
-    lazy = GradientPenalty(lazy_k=2)
+    lazy = GradientPenalty(arm="b_cap", lazy_k=2)
     assert lazy(discriminator, real, fake, step=1).item() == 0
     torch.testing.assert_close(lazy(discriminator, real, fake, step=2), 2 * penalty)
 

@@ -4,7 +4,7 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import GANTrainer, Recipe, get_recipe, learning_rate_scale
+from particlegan import GANTrainer, Recipe, get_recipe, learning_rate_scale, learning_rate_scales
 
 
 def make_trainer(*, particles=12, steps=8, buffers=False, dropout=False, **overrides):
@@ -42,9 +42,9 @@ def assert_checkpoint_equal(left, right):
 def test_winning_recipe_is_the_common_default():
     assert get_recipe() == Recipe()
     winner = get_recipe()
-    assert winner.name == 'gan_v3'
-    assert (winner.reg_arm, winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == ('b_cap', 1.25, 6., .05)
-    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .99), 2., 1.)
+    assert winner.name == 'k3p'
+    assert (winner.reg_arm, winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == ('k3p', 1., 1., 0.)
+    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)
     assert isinstance(make_trainer(), GANTrainer)
 
 
@@ -162,8 +162,9 @@ def test_schedule_budget_and_rejected_checkpoint_do_not_change_models():
     initial = deepcopy(trainer.initial_lrs)
     for step in range(3):
         trainer.step(torch.randn(6, 2))
-        scale = learning_rate_scale(step, 3, .6, .05)
-        assert [g["lr"] for g in trainer.opt_g.param_groups] == [lr * scale for lr in initial[0]]
+        network, prior = learning_rate_scales(step, trainer.recipe)
+        assert [g["lr"] for g in trainer.opt_g.param_groups] == [initial[0][0] * network, initial[0][1] * prior]
+        assert trainer.opt_d.param_groups[0]["lr"] == initial[1][0] * network
     with pytest.raises(RuntimeError, match="budget"):
         trainer.step(torch.randn(6, 2))
     checkpoint = trainer.state_dict()

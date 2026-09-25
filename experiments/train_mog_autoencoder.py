@@ -204,7 +204,7 @@ def train(arm, cfg):
         {"params": prior.parameters(), "lr": .006, "betas": (.5, .999)},
     ], betas=(0., .999))
     opt_d = torch.optim.Adam(d.parameters(), lr=.0009, betas=(0., .999))
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=4), ParticleRegularizer()
+    adversarial, penalty, spread = GANLoss(), GradientPenalty(arm="b_cap", lazy_k=4), ParticleRegularizer()
     data_rng = draw_rng(device, cfg.seed + 2)
     prior_rng = draw_rng(device, cfg.seed + 3)
     offset_rng = draw_rng(device, cfg.seed + 4)

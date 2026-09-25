@@ -4,7 +4,8 @@
 `direct_particle_response` as the starting formulation for future research.
 It passes all 22 declared GPU toy gates and the measured ring hold plus
 300-update extension. Target-shift recovery remains the next problem to solve.
-This is a research selection; the public training-package defaults are separate.
+K3P is also the package default: `get_recipe()` and `GANTrainer` train with it
+([package guide](../../../docs/k3p.md)).
 
 ![K3P convergence on three 100-Gaussian layouts](../gap-fill-20260925/k3p-100gaussians-convergence.gif)
 

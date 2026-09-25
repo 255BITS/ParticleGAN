@@ -32,6 +32,7 @@ from benchmarks.transfer_suite.toy100_compatibility import (
 from benchmarks.transfer_suite import vector_tasks
 from lib.toy_models import SimpleMLPGenerator
 from particlegan import get_recipe, learning_rate_scale
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 def test_legacy_runner_preserves_original_error_in_failed_evidence(tmp_path, monkeypatch):
@@ -58,10 +59,10 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
                              isolated=False, cap=None, network_floor=None):
     jobs, profile = load_declaration()
     job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
-    base = get_recipe()
+    base = gan_v3_recipe()
     spec, _, variant = declared_spec(job, profile, base)
     steps = spec["steps"]
-    recipe = base.to_dict()
+    recipe = legacy_dict(base)
     noise = dict(output_noise_std=0.029, input_noise_std=0.5,
                  input_noise_anneal_end=0.1, output_noise_warmup=0.2)
     if learned:
@@ -117,7 +118,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
     record = dict(
         name=spec["name"], original_spec=deepcopy(job["spec"]), spec=spec,
         discriminator_variant=variant,
-        host_recipe=host_recipe(base, spec).to_dict(),
+        host_recipe=legacy_dict(host_recipe(base, spec)),
         source_sha256=source_hashes, recipe=deepcopy(recipe), noise=deepcopy(noise),
         applied=[dict(role=role, lr=base.lr * multiplier, betas=list(base.betas),
                       parameters=1, optimizer="Adam")
@@ -644,7 +645,7 @@ def test_native_policy_with_learned_noise_regrades_from_archive_after_relocation
 def test_common_gate_requires_full_public_package_match_for_policy_pass(
     tmp_path, monkeypatch,
 ):
-    recipe = get_recipe().to_dict()
+    recipe = legacy_dict(gan_v3_recipe())
     noise = dict(output_noise_std=.029, input_noise_std=.5,
                  input_noise_anneal_end=.1, output_noise_warmup=.2)
     sources = _source_provenance(include_policy=True)["source_sha256"]
@@ -1147,7 +1148,7 @@ def test_common_22_identity_normalizes_real_recipe_tuple_after_json(tmp_path, mo
         toy_suite.ROOT / "configs/toy100/shared_candidate.json"
     ).read_text())
     recipe, noise, _ = declared_recipe(candidate_config)
-    live_recipe = recipe.to_dict()
+    live_recipe = legacy_dict(recipe)
     protocol_recipe = json.loads(json.dumps(live_recipe))
     assert isinstance(live_recipe["betas"], tuple)
     assert isinstance(protocol_recipe["betas"], list)

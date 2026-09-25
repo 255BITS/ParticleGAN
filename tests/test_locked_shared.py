@@ -116,7 +116,7 @@ def test_study_recipe_and_yue2_lazy_cap_are_not_the_stamp():
     recipe = get_recipe()
     assert recipe.num_particles == 20_000
     assert recipe.num_particles != LOCKED_SHARED.n_particles
-    assert recipe.prior_reg == 0.05
+    assert recipe.prior_reg == 0.0
     assert recipe.prior_reg != LOCKED_SHARED.particle_l2
     # YuE2 gym controller: b_cap every fourth step. Documented, not this stamp.
     assert LOCKED_SHARED.lazy_k == 1

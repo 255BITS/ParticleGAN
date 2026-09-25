@@ -5,9 +5,9 @@ import math
 
 @dataclass(frozen=True)
 class Recipe:
-    name: str = "gan_v3"
+    name: str = "k3p"
     model: str = "gan"
-    z_dim: int = 4
+    z_dim: int = 2
     num_particles: int = 20_000
     prior_kind: str = "particles"
     sigma_rel: float = 0.0
@@ -17,24 +17,45 @@ class Recipe:
     ucd_target: str = "class"
     ucd_weight: float = 0.02
     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
-    batch_size: int = 256
+    batch_size: int = 2048
     total_steps: int = 7_000
     lr: float = 0.00425
     d_lr_mult: float = 1.0
     prior_lr_mult: float = 2.0
-    betas: tuple[float, float] = (0.0, 0.99)
+    betas: tuple[float, float] = (0.0, 0.999)
     prior_betas: tuple[float, float] | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
-    reg_arm: str = "b_cap"
-    reg_coeff: float = 6.0
-    reg_kappa: float = 1.25
+    reg_arm: str = "k3p"
+    reg_coeff: float = 1.0
+    reg_kappa: float = 1.0
     reg_every: int = 1
     reg_method: str = "autograd"
-    prior_reg: float = 0.05
+    prior_reg: float = 0.0
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
+    # K3P schedule: G/D follow their own cosine over min(total, horizon cap)
+    # down to network_lr_floor; the prior keeps the full-budget cosine above.
+    # network_lr_floor is also K3P's blend floor f (s == 0 at the floor).
+    # None means "same as lr_floor"; a None horizon cap means the full budget.
+    network_lr_floor: float | None = 0.01
+    network_lr_horizon_cap: int | None = 1600
+    reg_anchor_decay: float = 0.999
+    # Critic spike guard (d_guard_ratio=0 disables it).
+    d_guard_ratio: float = 5.0
+    d_guard_min_steps: int = 200
+    # A2 sparse latent-row damping (0 disables it).
+    latent_damping_max_rate: float = 0.5
+    # DirectParticleResponse betas (custom loops with direct sample particles).
+    direct_particle_betas: tuple[float, float] = (0.0, 0.9)
+    # Critic input noise: peak std at the first update, linear to 0 by
+    # input_noise_anneal_end * total_steps. Generator output noise: linear
+    # warmup from 0 to output_noise_std over output_noise_warmup * total_steps.
+    input_noise_std: float = 0.5
+    input_noise_anneal_end: float = 0.1
+    output_noise_std: float = 0.029
+    output_noise_warmup: float = 0.2
     encoder_mode: str = "none"
     routing_temperature: float = 0.25
     distance_reduction: str = "sum"
@@ -46,6 +67,29 @@ class Recipe:
         if self.prior_betas is not None:
             object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
         object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap <= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps < 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 <= floor <= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_decay, bool) or not 0 <= self.reg_anchor_decay < 1:
+            raise ValueError("reg_anchor_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value < 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 <= value <= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 < self.input_noise_anneal_end <= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 <= b < 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
         for key in ("z_dim", "num_particles", "batch_size", "total_steps", "reg_every"):
             value = getattr(self, key)
             if type(value) is not int or value <= 0:
@@ -163,11 +207,55 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(**{"loss_type": self.loss_type, "mode": self.gan_mode, **overrides})
 
-    def make_gradient_penalty(self, **overrides):
+    def make_gradient_penalty(self, *, anchor=None, **overrides):
+        """The critic gradient penalty (K3P by default).
+
+        K3P needs ``after_critic_step(critic_optimizer)`` after every critic
+        step and, once its blend weight drops below 1, an anchor: pass
+        ``anchor=recipe.make_critic_anchor(D, ema_D)`` here or ``ema_critic=``
+        per penalty call. ``particlegan.K3PCritic`` wires all of this.
+        """
         from .grad_regularizers import GradientPenalty
-        return GradientPenalty(**{"arm": self.reg_arm, "coeff": self.reg_coeff,
-                                  "kappa": self.reg_kappa, "lazy_k": self.reg_every,
-                                  "method": self.reg_method, **overrides})
+        options = {"arm": self.reg_arm, "coeff": self.reg_coeff,
+                   "kappa": self.reg_kappa, "lazy_k": self.reg_every,
+                   "method": self.reg_method, **overrides}
+        if options["arm"] == "k3p":
+            # K3P's blend floor f is the network LR floor. A floor >= 1/2
+            # (e.g. 1.0, a constant LR) keeps r >= 1/2 and hence s == 1 for
+            # every f, so the same formulation needs no separate path.
+            floor = self.resolved_network_lr_floor
+            options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
+        if anchor is not None:
+            options["anchor"] = anchor
+        return GradientPenalty(**options)
+
+    @property
+    def resolved_network_lr_floor(self):
+        """G/D LR floor (and K3P blend floor f): ``network_lr_floor`` or ``lr_floor``."""
+        return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
+
+    def make_critic_anchor(self, critic, ema_critic):
+        """K3P anchor over a caller-allocated EMA copy of ``critic``."""
+        from .k3p import CriticAnchor
+        return CriticAnchor(critic, ema_critic, decay=self.reg_anchor_decay)
+
+    def make_critic_guard(self):
+        """Critic spike guard, or None when ``d_guard_ratio == 0``."""
+        from .k3p import CriticSpikeGuard
+        if self.d_guard_ratio == 0:
+            return None
+        return CriticSpikeGuard(ratio=self.d_guard_ratio, min_steps=self.d_guard_min_steps)
+
+    def make_latent_damping(self, table, history):
+        """A2 damping for a latent table, or None when ``latent_damping_max_rate == 0``."""
+        from .k3p import LatentRowDamping
+        if self.latent_damping_max_rate == 0:
+            return None
+        return LatentRowDamping(table, history, max_rate=self.latent_damping_max_rate)
+
+    def make_direct_response(self, params, history):
+        from .k3p import DirectParticleResponse
+        return DirectParticleResponse(params, history, betas=self.direct_particle_betas)
 
     def make_prior_regularizer(self, **overrides):
         from .vicreg_loss import ParticleRegularizer
@@ -179,7 +267,10 @@ class Recipe:
         Move modules to their desired device before calling. Frozen parameters
         are excluded, and a Gaussian/frozen prior adds no optimizer group.
         Additional Adam options, such as ``fused`` or ``eps``, apply to both
-        optimizers. Set learning rates and betas on the recipe.
+        optimizers. Set learning rates and betas on the recipe. The generator
+        optimizer's groups are ``[generator/encoder, prior]`` (either may be
+        absent); scale the prior group by the prior multiplier of
+        ``learning_rate_scales`` and everything else by the network one.
         """
         from torch.optim import Adam
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
@@ -242,3 +333,36 @@ def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):
         raise ValueError("invalid learning-rate schedule")
     fraction = min(1.0, max(0.0, (step - start * total_steps) / ((1 - start) * total_steps)))
     return floor + (1 - floor) * 0.5 * (1 + math.cos(math.pi * fraction))
+
+
+def learning_rate_scales(step, recipe):
+    """Return ``(network, prior)`` LR multipliers after ``step`` completed updates.
+
+    Generator and critic ("network") follow ``learning_rate_scale`` over
+    ``min(total_steps, network_lr_horizon_cap)`` down to ``network_lr_floor``
+    and then hold; the particle prior follows it over the full budget down to
+    ``lr_floor``. K3P's blend weight is driven by the resulting critic LR.
+    """
+    total = recipe.total_steps
+    horizon = min(total, recipe.network_lr_horizon_cap or total)
+    network = learning_rate_scale(step, horizon, recipe.lr_anneal_start, recipe.resolved_network_lr_floor)
+    prior = learning_rate_scale(step, total, recipe.lr_anneal_start, recipe.lr_floor)
+    return network, prior
+
+
+def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None):
+    """Set every group's LR from ``learning_rate_scales(step, recipe)``.
+
+    ``base_rates`` holds each optimizer's unscaled group LRs (read them once
+    after construction). Groups whose parameters all belong to ``prior`` get
+    the prior multiplier; every other group gets the network one, so a custom
+    loop's critic LR follows the same floor K3P's blend weight assumes.
+    Returns ``(network, prior)`` multipliers.
+    """
+    network, prior_scale = learning_rate_scales(step, recipe)
+    prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
+    for optimizer, rates in zip(optimizers, base_rates):
+        for group, rate in zip(optimizer.param_groups, rates):
+            is_prior = bool(prior_ids) and all(id(p) in prior_ids for p in group["params"])
+            group["lr"] = rate * (prior_scale if is_prior else network)
+    return network, prior_scale

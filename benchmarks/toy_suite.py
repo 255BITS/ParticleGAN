@@ -45,6 +45,7 @@ from benchmarks.transfer_suite.toy100_compatibility import (
     VECTOR_NAMES, declared_model_policy, declared_recipe, output_noise_at,
 )
 from particlegan import Recipe, learning_rate_scale
+from benchmarks.gan_v3 import legacy_dict, legacy_recipe
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -861,7 +862,7 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
         saved_config = json.loads(config_bytes)
         base, noise, overrides = declared_recipe(saved_config)
         model_policy = declared_model_policy(saved_config)
-        if (_json_value(base.to_dict()) != protocol["global_recipe"]
+        if (_json_value(legacy_dict(base)) != protocol["global_recipe"]
                 or _noise_identity(noise) != _noise_identity(protocol["noise"])
                 or overrides != protocol["ignored_toy100_resource_overrides"]
                 or model_policy != protocol.get("model_policy", {})):
@@ -929,8 +930,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             if protocol["frozen_profile"] != profile:
                 raise ValueError("public control profile differs from frozen card")
             recipe_fields = protocol["base_get_recipe"]
-        base = Recipe(**recipe_fields)
-        if _json_value(base.to_dict()) != recipe_fields:
+        base = legacy_recipe(recipe_fields)
+        if _json_value(legacy_dict(base)) != recipe_fields:
             raise ValueError("archived recipe does not resolve to declared fields")
         cases = {}
         for row in rows:
@@ -955,7 +956,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 raise ValueError(f"executed spec, budget, threshold, or discriminator differs: {name}")
             expected_host_recipe = (base if expected_spec["runner"] == "legacy"
                                     else host_recipe(base, expected_spec))
-            if record.get("host_recipe") != _json_value(expected_host_recipe.to_dict()):
+            if record.get("host_recipe") != _json_value(legacy_dict(expected_host_recipe)):
                 raise ValueError(f"host resource recipe differs from declaration: {name}")
             if record["source_sha256"] != protocol["source_sha256"]:
                 raise ValueError(f"episode source differs: {name}")
@@ -1152,7 +1153,7 @@ def _toy100_rows(directory: Path):
         passed = sum(row["passed"] for row in cases.values())
         return dict(status=_status(passed, len(PROBLEM_NAMES), complete=True),
                     passed=passed, required=len(PROBLEM_NAMES), cases=cases,
-                    recipe=recipe.to_dict(), noise=noise,
+                    recipe=legacy_dict(recipe), noise=noise,
                     model_policy=model_policy, policy_source_sha256=policy_sources,
                     policy_source_scope=policy_scope,
                     config_sha256=manifest["config_sha256"],
