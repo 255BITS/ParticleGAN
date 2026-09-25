@@ -1,0 +1,117 @@
+[
+  {
+    "lane": "ra_r1_fake_cap",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1_fake_cap",
+    "starting_candidate": "ra_r1_fake_cap",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct evidence-driven composition; no model session",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2094439
+  },
+  {
+    "lane": "ra_r1r2_exposure_mean",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1r2_exposure_mean",
+    "starting_candidate": "ra_r1r2_exposure_mean",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct evidence-driven composition; no model session",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2084836
+  },
+  {
+    "lane": "ra_r1r2_shared_coordinate",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1r2_shared_coordinate",
+    "starting_candidate": "ra_r1r2_shared_coordinate",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct evidence-driven composition; no model session",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2084836
+  },
+  {
+    "lane": "bcap_symmetric_half",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/bcap_symmetric_half",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct b-cap comparison; no model session",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2101665
+  },
+  {
+    "lane": "bcap_real_half_fake_one",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/bcap_real_half_fake_one",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct b-cap comparison; no model session",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2098289
+  },
+  {
+    "lane": "rp_bcap_half",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/rp_bcap_half",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct objective ablation after measured trajectory regressions",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2103207
+  },
+  {
+    "lane": "rp_r1_fake_cap",
+    "directory": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/rp_r1_fake_cap",
+    "workers": 1,
+    "gpu": 1,
+    "execution": "Direct objective ablation after measured trajectory regressions",
+    "gate_order": [
+      "mode_hold",
+      "vector_unequal_mass",
+      "trajectory",
+      "img_intensity2",
+      "img_bars4",
+      "img_blobs4"
+    ],
+    "pid": 2106170
+  }
+]

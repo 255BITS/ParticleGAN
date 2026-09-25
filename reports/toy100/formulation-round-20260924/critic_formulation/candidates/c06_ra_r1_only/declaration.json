@@ -1,0 +1,14 @@
+{
+  "candidate": "c06_ra_r1_only",
+  "declared_at": "2026-09-24T23:45:54.031149+00:00",
+  "mechanism": "Evidence-driven C05 refinement: keep Ra logistic and R1 real-point coefficient gamma/2 with gamma=1, remove fake-point R2 pressure. C05 passed ring and matched mixture mass but its rare-component covariance was too broad. Permit stronger corrective critic slopes on generated points. Retain a zero-weight fake penalty graph solely to preserve equal network forward/backward compute and native draw order; no extra work or updates.",
+  "changed_fields": {
+    "gan_mode": "ra",
+    "reg_arm": "a_r1r2"
+  },
+  "preserved": "Adam, architecture, frozen data/seeds/evaluation/budgets, original decay/noise schedules, auxiliary AE/token losses, native CUDA RNG, retained CPU initialization",
+  "compute": "One D and one G/prior Adam update per frozen step; same two sample-point critic input-gradient forwards/backwards and two optimization backwards as b_cap. No added model forwards, backwards, updates, or random draws. Equal-step and equal nominal network compute; scalar loss arithmetic may differ.",
+  "probe_sha256": "459b03b1b062ae5debb391512f2bde0bfbcd521950caaedadead18ab98108d9f",
+  "config_sha256": "3211ea08a169058dce5f30fed987826f07bc3c3c9a1f08ca8b2d5a69ce2d99c7",
+  "prepared_sources_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2"
+}

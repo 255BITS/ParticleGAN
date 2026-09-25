@@ -1,0 +1,13 @@
+{
+  "candidate": "c01_r1r2",
+  "declared_at": "2026-09-24T23:36:17.778274+00:00",
+  "mechanism": "Replace b_cap with existing zero-centered R1+R2, coefficient 1.0; retain Rp logistic.",
+  "changed_fields": {
+    "reg_arm": "a_r1r2"
+  },
+  "preserved": "Adam, architecture, frozen data/seeds/evaluation/budgets, decay/noise schedules, auxiliary AE/token losses, native CUDA RNG, retained CPU initialization",
+  "compute": "One D and one G/prior Adam update per frozen step; same two sample-point critic input-gradient forwards/backwards and two optimization backwards as b_cap. No added forwards, backwards, updates, or random draws. Equal-step and nominal equal-compute.",
+  "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+  "config_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+  "prepared_sources_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2"
+}

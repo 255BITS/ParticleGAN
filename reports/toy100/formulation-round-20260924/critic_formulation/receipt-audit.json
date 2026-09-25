@@ -1,0 +1,140 @@
+{
+  "status": "PASS",
+  "audited_at": "2026-09-24T23:47:38.646018+00:00",
+  "source_files_verified": 1614,
+  "runs": 12,
+  "receipts": [
+    {
+      "candidate": "c01_r1r2",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c01_r1r2",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c02_ra_cap",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c02_ra_cap",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c03_smooth_cap",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c03_smooth_cap",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c04_hinge_cap",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c04_hinge_cap",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c05_ra_r1r2",
+      "gate": "mode_hold",
+      "status": "PASS",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c05_ra_r1r2",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c06_ra_r1_only",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    },
+    {
+      "candidate": "c06_ra_r1_only",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "source_bound": true,
+      "frozen_verdict_recomputed": true,
+      "cpu_fixture_matched": true,
+      "native_random_stream_matched": true,
+      "adam_calls": 2400,
+      "cuda": true
+    }
+  ]
+}

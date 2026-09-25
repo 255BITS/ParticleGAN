@@ -1,0 +1,1575 @@
+{
+  "candidates": 18,
+  "training_gates": 36,
+  "counts": {
+    "FAIL": 29,
+    "PASS": 7
+  },
+  "per_lane": {
+    "critic_formulation": {
+      "FAIL": 10,
+      "PASS": 2
+    },
+    "particle_geometry": {
+      "FAIL": 7,
+      "PASS": 5
+    },
+    "game_dynamics": {
+      "FAIL": 12
+    }
+  },
+  "qualified_candidates": [],
+  "full22": "NOT_RUN for every candidate",
+  "own_state_stability": "NOT_RUN for every candidate",
+  "audit": "PASS",
+  "rows": [
+    {
+      "lane": "critic_formulation",
+      "candidate": "c01_r1r2",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 8,
+        "hq": 0.9013671875
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 4,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 1,
+        "first_pass_step": 900,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "seconds": 29.773947537876666,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c01_r1r2/mode_hold.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c01_r1r2",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.09557324045440538,
+        "mean_error": 0.1384180784225464,
+        "covariance_error": 0.1524653136730194,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.08708984404802322,
+        "min_mass_ratio": 0.439453125,
+        "hq": 0.952880859375,
+        "component_covariance_error": 0.7946576997637749,
+        "component_covariance_errors": [
+          0.4250602424144745,
+          1.2043851613998413,
+          0.8476272821426392,
+          0.7015581130981445
+        ],
+        "component_min_eigen_ratio": 0.022336235269904137,
+        "component_mass": [
+          0.624755859375,
+          0.22412109375,
+          0.142333984375,
+          0.0087890625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2559,
+          918,
+          583,
+          36
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 6,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 300,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.1418486274778843,
+      "seconds": 45.142094200942665,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c01_r1r2/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c02_ra_cap",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 7,
+        "hq": 0.99560546875
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "seconds": 32.988663468975574,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c02_ra_cap/mode_hold.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c02_ra_cap",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.034267141322887114,
+        "mean_error": 0.04239441454410553,
+        "covariance_error": 0.04746819660067558,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.03486328572034836,
+        "min_mass_ratio": 0.8837890028953552,
+        "hq": 0.971923828125,
+        "component_covariance_error": 0.8879518359899521,
+        "component_covariance_errors": [
+          0.23009029030799866,
+          0.2953683137893677,
+          0.2981807291507721,
+          2.72816801071167
+        ],
+        "component_min_eigen_ratio": 0.5784634947776794,
+        "component_mass": [
+          0.574462890625,
+          0.26513671875,
+          0.131591796875,
+          0.02880859375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2353,
+          1086,
+          539,
+          118
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 7,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 400,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0074415364686180605,
+      "seconds": 46.19158876105212,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c02_ra_cap/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c03_smooth_cap",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 2,
+        "hq": 0.259521484375
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.7308213975694444,
+      "seconds": 32.15109446900897,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c03_smooth_cap/mode_hold.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c03_smooth_cap",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.14886827052847473,
+        "mean_error": 0.21647842228412628,
+        "covariance_error": 0.23665522038936615,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.12749022245407104,
+        "min_mass_ratio": 0.0,
+        "hq": 0.99658203125,
+        "component_covariance_error": 0.4850052762776613,
+        "component_covariance_errors": [
+          0.10967863351106644,
+          0.3887971043586731,
+          0.44154536724090576,
+          1.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_mass": [
+          0.677490234375,
+          0.196044921875,
+          0.12646484375,
+          0.0
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2775,
+          803,
+          518,
+          0
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 2,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 350,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.3333333333333333,
+      "seconds": 48.9993659700267,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c03_smooth_cap/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c04_hinge_cap",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 5,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.1875,
+      "seconds": 31.009658376919106,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c04_hinge_cap/mode_hold.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c04_hinge_cap",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.36216595068065166,
+        "mean_error": 0.5104594826698303,
+        "covariance_error": 0.7772179245948792,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.32646483182907104,
+        "min_mass_ratio": 0.0838216096162796,
+        "hq": 0.9287109375,
+        "component_covariance_error": 2.3112442642450333,
+        "component_covariance_errors": [
+          0.7891998291015625,
+          6.510189533233643,
+          0.9566206932067871,
+          0.9889670014381409
+        ],
+        "component_min_eigen_ratio": 0.006889623589813709,
+        "component_mass": [
+          0.87646484375,
+          0.025146484375,
+          0.09326171875,
+          0.005126953125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          3590,
+          103,
+          382,
+          21
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.9210598180408924,
+      "seconds": 46.50126993190497,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c04_hinge_cap/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c05_ra_r1r2",
+      "gate": "mode_hold",
+      "status": "PASS",
+      "live": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 7,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 5,
+        "first_pass_step": 850,
+        "stable_from_step": 1000,
+        "stable_from_seconds": 27.971691253827885,
+        "confirmed_step": 1200,
+        "confirmed_seconds": 33.5838148877956
+      },
+      "shortfall": 0.0,
+      "seconds": 33.870737673016265,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c05_ra_r1r2/mode_hold.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c05_ra_r1r2",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.029418513336069756,
+        "mean_error": 0.03214534372091293,
+        "covariance_error": 0.051055628806352615,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.009130844846367836,
+        "min_mass_ratio": 0.72021484375,
+        "hq": 0.964111328125,
+        "component_covariance_error": 1.341098416596651,
+        "component_covariance_errors": [
+          0.2411404699087143,
+          0.37325409054756165,
+          0.49662119150161743,
+          4.253377914428711
+        ],
+        "component_min_eigen_ratio": 0.38228726387023926,
+        "component_mass": [
+          0.555419921875,
+          0.3037109375,
+          0.12646484375,
+          0.014404296875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2275,
+          1244,
+          518,
+          59
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 2,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 400,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.09629380717581394,
+      "seconds": 44.76795833394863,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c05_ra_r1r2/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c06_ra_r1_only",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 5,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.1875,
+      "seconds": 30.130341863026842,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c06_ra_r1_only/mode_hold.json.gz"
+    },
+    {
+      "lane": "critic_formulation",
+      "candidate": "c06_ra_r1_only",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "live": {
+        "sw1_normalized": 0.030466234418337745,
+        "mean_error": 0.031829047948122025,
+        "covariance_error": 0.04895405098795891,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.015185544267296791,
+        "min_mass_ratio": 0.89111328125,
+        "hq": 0.980712890625,
+        "component_covariance_error": 0.2512904698960483,
+        "component_covariance_errors": [
+          0.24933582544326782,
+          0.02891935221850872,
+          0.23643119633197784,
+          0.49047550559043884
+        ],
+        "component_min_eigen_ratio": 0.3353448510169983,
+        "component_mass": [
+          0.5400390625,
+          0.315185546875,
+          0.126953125,
+          0.017822265625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2212,
+          1291,
+          520,
+          73
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 17,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 6,
+        "first_pass_step": 200,
+        "stable_from_step": 950,
+        "stable_from_seconds": 33.629917149897665,
+        "confirmed_step": 1150,
+        "confirmed_seconds": 40.80034837895073
+      },
+      "shortfall": 0.0,
+      "seconds": 42.79412787198089,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "critic_formulation/results/c06_ra_r1_only/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "shared_coordinate",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 6,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.125,
+      "seconds": 32.42790290387347,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/shared_coordinate/mode_hold.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "shared_coordinate",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "live": {
+        "sw1_normalized": 0.07008780791383726,
+        "mean_error": 0.09691628813743591,
+        "covariance_error": 0.11360975354909897,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.044501952826976776,
+        "min_mass_ratio": 0.8150541186332703,
+        "hq": 0.97802734375,
+        "component_covariance_error": 0.41896307840943336,
+        "component_covariance_errors": [
+          0.1179298534989357,
+          0.11265451461076736,
+          0.28818586468696594,
+          1.1570820808410645
+        ],
+        "component_min_eigen_ratio": 0.6228277087211609,
+        "component_mass": [
+          0.529541015625,
+          0.341796875,
+          0.10595703125,
+          0.022705078125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2169,
+          1400,
+          434,
+          93
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 15,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 11,
+        "first_pass_step": 300,
+        "stable_from_step": 700,
+        "stable_from_seconds": 27.860417898977175,
+        "confirmed_step": 900,
+        "confirmed_seconds": 35.2193841941189
+      },
+      "shortfall": 0.0,
+      "seconds": 46.42673943587579,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/shared_coordinate/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "exposure_trust",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 7,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "seconds": 33.02722891489975,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/exposure_trust/mode_hold.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "exposure_trust",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "live": {
+        "sw1_normalized": 0.0794048997221071,
+        "mean_error": 0.11219897121191025,
+        "covariance_error": 0.15305601060390472,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.05034179240465164,
+        "min_mass_ratio": 0.537109375,
+        "hq": 0.986328125,
+        "component_covariance_error": 0.1548483120277524,
+        "component_covariance_errors": [
+          0.09432446956634521,
+          0.04507758095860481,
+          0.23939381539821625,
+          0.24059738218784332
+        ],
+        "component_min_eigen_ratio": 0.6636044979095459,
+        "component_mass": [
+          0.54150390625,
+          0.350341796875,
+          0.097412109375,
+          0.0107421875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2218,
+          1435,
+          399,
+          44
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 12,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 6,
+        "first_pass_step": 450,
+        "stable_from_step": 950,
+        "stable_from_seconds": 39.224451856920496,
+        "confirmed_step": 1150,
+        "confirmed_seconds": 46.89334208308719
+      },
+      "shortfall": 0.0,
+      "seconds": 49.151974434033036,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/exposure_trust/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "exposure_mean",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 6,
+        "hq": 0.980224609375
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.125,
+      "seconds": 33.100063383812085,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/exposure_mean/mode_hold.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "exposure_mean",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "live": {
+        "sw1_normalized": 0.035147088467444555,
+        "mean_error": 0.03985908254981041,
+        "covariance_error": 0.06127933785319328,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.023125002160668373,
+        "min_mass_ratio": 0.5859375,
+        "hq": 0.968505859375,
+        "component_covariance_error": 0.09802780486643314,
+        "component_covariance_errors": [
+          0.035800524055957794,
+          0.07780113816261292,
+          0.14123260974884033,
+          0.13727694749832153
+        ],
+        "component_min_eigen_ratio": 0.8217165470123291,
+        "component_mass": [
+          0.53515625,
+          0.317626953125,
+          0.135498046875,
+          0.01171875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2192,
+          1301,
+          555,
+          48
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 9,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 7,
+        "first_pass_step": 750,
+        "stable_from_step": 900,
+        "stable_from_seconds": 38.30210624099709,
+        "confirmed_step": 1100,
+        "confirmed_seconds": 47.11554674315266
+      },
+      "shortfall": 0.0,
+      "seconds": 51.70087121403776,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/exposure_mean/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "shared_geometry",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 6,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.125,
+      "seconds": 32.15214485814795,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/shared_geometry/mode_hold.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "shared_geometry",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "live": {
+        "sw1_normalized": 0.03443989038373663,
+        "mean_error": 0.04463893175125122,
+        "covariance_error": 0.05799353867769241,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.014453122392296791,
+        "min_mass_ratio": 0.7568359375,
+        "hq": 0.9755859375,
+        "component_covariance_error": 0.17500173952430487,
+        "component_covariance_errors": [
+          0.04497358575463295,
+          0.11462827771902084,
+          0.2857668101787567,
+          0.25463828444480896
+        ],
+        "component_min_eigen_ratio": 0.6292000412940979,
+        "component_mass": [
+          0.548583984375,
+          0.314453125,
+          0.121826171875,
+          0.01513671875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2247,
+          1288,
+          499,
+          62
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 12,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 5,
+        "first_pass_step": 350,
+        "stable_from_step": 1000,
+        "stable_from_seconds": 36.650067741051316,
+        "confirmed_step": 1200,
+        "confirmed_seconds": 44.22293949802406
+      },
+      "shortfall": 0.0,
+      "seconds": 44.42551712715067,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/shared_geometry/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "visit_isotropic",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 5,
+        "hq": 0.833251953125
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.2245822482638889,
+      "seconds": 31.96997973904945,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/visit_isotropic/mode_hold.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "visit_isotropic",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "live": {
+        "sw1_normalized": 0.049586307199179606,
+        "mean_error": 0.06763564050197601,
+        "covariance_error": 0.11521271616220474,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.029638657346367836,
+        "min_mass_ratio": 0.7981520891189575,
+        "hq": 0.97119140625,
+        "component_covariance_error": 0.1777300201356411,
+        "component_covariance_errors": [
+          0.1050654947757721,
+          0.15326650440692902,
+          0.26630035042762756,
+          0.18628773093223572
+        ],
+        "component_min_eigen_ratio": 0.6251886487007141,
+        "component_mass": [
+          0.5693359375,
+          0.310302734375,
+          0.103759765625,
+          0.0166015625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2332,
+          1271,
+          425,
+          68
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 14,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 9,
+        "first_pass_step": 350,
+        "stable_from_step": 800,
+        "stable_from_seconds": 29.11323567200452,
+        "confirmed_step": 1000,
+        "confirmed_seconds": 36.360467865131795
+      },
+      "shortfall": 0.0,
+      "seconds": 44.04991393396631,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/visit_isotropic/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "density_mobility",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 5,
+        "hq": 0.99658203125
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.1875,
+      "seconds": 33.856056557036936,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/density_mobility/mode_hold.json.gz"
+    },
+    {
+      "lane": "particle_geometry",
+      "candidate": "density_mobility",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.06502215704402717,
+        "mean_error": 0.08893851190805435,
+        "covariance_error": 0.11388976126909256,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.03789062052965164,
+        "min_mass_ratio": 0.8019080758094788,
+        "hq": 0.96337890625,
+        "component_covariance_error": 0.31170992739498615,
+        "component_covariance_errors": [
+          0.0929839015007019,
+          0.11777303367853165,
+          0.26938149333000183,
+          0.7667012810707092
+        ],
+        "component_min_eigen_ratio": 0.16979655623435974,
+        "component_mass": [
+          0.541015625,
+          0.337890625,
+          0.104248046875,
+          0.016845703125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2216,
+          1384,
+          427,
+          69
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 10,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 3,
+        "first_pass_step": 550,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "seconds": 47.06914430693723,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "particle_geometry/results/density_mobility/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "optimistic_adam",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 3,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 3,
+        "first_pass_step": 1100,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "seconds": 34.570677034789696,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/optimistic_adam/mode_hold.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "optimistic_adam",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.12267578519356861,
+        "mean_error": 0.1720963716506958,
+        "covariance_error": 0.2795429825782776,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.07797849923372269,
+        "min_mass_ratio": 0.1953125,
+        "hq": 0.99658203125,
+        "component_covariance_error": 0.39851608127355576,
+        "component_covariance_errors": [
+          0.1306925117969513,
+          0.19073650240898132,
+          0.3036362826824188,
+          0.9689990282058716
+        ],
+        "component_min_eigen_ratio": 0.02351110428571701,
+        "component_mass": [
+          0.568359375,
+          0.359619140625,
+          0.068115234375,
+          0.00390625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2328,
+          1473,
+          279,
+          16
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.17700155079364777,
+      "seconds": 48.53959881910123,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/optimistic_adam/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "optimistic_gradient",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 7,
+        "hq": 1.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "seconds": 32.71926217991859,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/optimistic_gradient/mode_hold.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "optimistic_gradient",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.11035385184535765,
+        "mean_error": 0.15057170391082764,
+        "covariance_error": 0.15441592037677765,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.08574218302965164,
+        "min_mass_ratio": 0.5859375,
+        "hq": 0.962158203125,
+        "component_covariance_error": 0.491627711802721,
+        "component_covariance_errors": [
+          0.1640268862247467,
+          0.21544669568538666,
+          0.5631445050239563,
+          1.0238927602767944
+        ],
+        "component_min_eigen_ratio": 0.033979203552007675,
+        "component_mass": [
+          0.499755859375,
+          0.3857421875,
+          0.102783203125,
+          0.01171875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2047,
+          1580,
+          421,
+          48
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 3,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 550,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.1289119960533248,
+      "seconds": 46.7909302408807,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/optimistic_gradient/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "predictive_critic",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 0,
+        "hq": 0.0
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 1.0,
+      "seconds": 34.34764693095349,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/predictive_critic/mode_hold.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "predictive_critic",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.10406519657070594,
+        "mean_error": 0.13975192606449127,
+        "covariance_error": 0.21172329783439636,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.08427733927965164,
+        "min_mass_ratio": 0.45166015625,
+        "hq": 0.9990234375,
+        "component_covariance_error": 0.2108361553400755,
+        "component_covariance_errors": [
+          0.10761270672082901,
+          0.1886468082666397,
+          0.40957480669021606,
+          0.1375102996826172
+        ],
+        "component_min_eigen_ratio": 0.5187562108039856,
+        "component_mass": [
+          0.63427734375,
+          0.2783203125,
+          0.078369140625,
+          0.009033203125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2598,
+          1140,
+          321,
+          37
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 4,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 4,
+        "first_pass_step": 1050,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "seconds": 47.42553998390213,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/predictive_critic/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "joint_lookahead",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 4,
+        "hq": 0.996826171875
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.25,
+      "seconds": 33.38812536583282,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/joint_lookahead/mode_hold.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "joint_lookahead",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.11287650702436744,
+        "mean_error": 0.1657627373933792,
+        "covariance_error": 0.28168606758117676,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.08769530802965164,
+        "min_mass_ratio": 0.3662109375,
+        "hq": 1.0,
+        "component_covariance_error": 0.3659513369202614,
+        "component_covariance_errors": [
+          0.12288159132003784,
+          0.20810624957084656,
+          0.4277920126914978,
+          0.7050254940986633
+        ],
+        "component_min_eigen_ratio": 0.02156289480626583,
+        "component_mass": [
+          0.6376953125,
+          0.29443359375,
+          0.060546875,
+          0.00732421875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2612,
+          1206,
+          248,
+          30
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.14270789465970463,
+      "seconds": 48.16095748101361,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/joint_lookahead/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "extragradient",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 1,
+        "hq": 0.0849609375
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.8902994791666667,
+      "seconds": 82.18336624884978,
+      "adam_calls": 4800,
+      "equal_compute": false,
+      "artifact": "game_dynamics/results/extragradient/mode_hold.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "extragradient",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.09006857492215811,
+        "mean_error": 0.12314682453870773,
+        "covariance_error": 0.20249684154987335,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.05014646798372269,
+        "min_mass_ratio": 0.341796875,
+        "hq": 0.98193359375,
+        "component_covariance_error": 0.6769922748208046,
+        "component_covariance_errors": [
+          0.3424082398414612,
+          0.3348935544490814,
+          0.6511331796646118,
+          1.379534125328064
+        ],
+        "component_min_eigen_ratio": 0.029012631624937057,
+        "component_mass": [
+          0.594970703125,
+          0.30517578125,
+          0.093017578125,
+          0.0068359375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2437,
+          1250,
+          381,
+          28
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.1344304093056255,
+      "seconds": 102.81376499403268,
+      "adam_calls": 4800,
+      "equal_compute": false,
+      "artifact": "game_dynamics/results/extragradient/vector_unequal_mass.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "optimistic_critic",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "live": {
+        "modes": 1,
+        "hq": 0.060791015625
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.9037272135416667,
+      "seconds": 31.47466385201551,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/optimistic_critic/mode_hold.json.gz"
+    },
+    {
+      "lane": "game_dynamics",
+      "candidate": "optimistic_critic",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "live": {
+        "sw1_normalized": 0.046268686703648206,
+        "mean_error": 0.06375707685947418,
+        "covariance_error": 0.10276588797569275,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.024023422971367836,
+        "min_mass_ratio": 0.54931640625,
+        "hq": 0.979248046875,
+        "component_covariance_error": 0.28130024671554565,
+        "component_covariance_errors": [
+          0.09864188730716705,
+          0.13385924696922302,
+          0.1982065588235855,
+          0.694493293762207
+        ],
+        "component_min_eigen_ratio": 0.0469680093228817,
+        "component_mass": [
+          0.55517578125,
+          0.31884765625,
+          0.114990234375,
+          0.010986328125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2274,
+          1306,
+          471,
+          45
+        ]
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 8,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 500,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.11447998964124256,
+      "seconds": 43.729018253972754,
+      "adam_calls": 2400,
+      "equal_compute": true,
+      "artifact": "game_dynamics/results/optimistic_critic/vector_unequal_mass.json.gz"
+    }
+  ]
+}

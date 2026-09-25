@@ -1,0 +1,140 @@
+[
+  {
+    "candidate": "regression",
+    "gate": "critic_scope_and_resume",
+    "status": "PASS",
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/attempt-audit.json",
+    "metrics": {
+      "generator_bitwise_original": true,
+      "critic_memory_roundtrip_exact": true,
+      "CUDA_memory": true
+    },
+    "seconds": 1.1379280460532755
+  },
+  {
+    "candidate": "regression",
+    "gate": "executed_gate_receipts",
+    "status": "PASS",
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/attempt-audit.json",
+    "metrics": {
+      "executed_gates": 12,
+      "candidates": 6,
+      "counts": {
+        "FAIL": 12
+      },
+      "one_evaluation_streams_equal": true,
+      "prepared_files_verified": 1614,
+      "checks": [
+        {
+          "candidate": "extragradient",
+          "gate": "mode_hold",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "extragradient",
+          "gate": "vector_unequal_mass",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "joint_lookahead",
+          "gate": "mode_hold",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "joint_lookahead",
+          "gate": "vector_unequal_mass",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "optimistic_adam",
+          "gate": "mode_hold",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "optimistic_adam",
+          "gate": "vector_unequal_mass",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "optimistic_critic",
+          "gate": "mode_hold",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "optimistic_critic",
+          "gate": "vector_unequal_mass",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "optimistic_gradient",
+          "gate": "mode_hold",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "optimistic_gradient",
+          "gate": "vector_unequal_mass",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "predictive_critic",
+          "gate": "mode_hold",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        },
+        {
+          "candidate": "predictive_critic",
+          "gate": "vector_unequal_mass",
+          "status": "FAIL",
+          "source_and_declaration_verified": true,
+          "CPU_fixture_verified": true,
+          "frozen_regrade_verified": true,
+          "updates_verified": true
+        }
+      ]
+    },
+    "seconds": 0.20712121413089335
+  }
+]

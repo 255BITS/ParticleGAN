@@ -44,3 +44,23 @@ Reuse `cpu-recipe-gpu-port/probe.py` and its verified prepared sources. Snapshot
 candidate code and declarations before execution. Retain every FAIL/ERROR with
 raw metrics, source hashes, exact commands, CUDA proof and actual update counts.
 No target-derived corrections or non-adversarial substitute for the GAN.
+
+## Completed formulation round and current steering
+
+The initial three lanes finished all 18 proposals and 36 primary gates: 7 PASS,
+29 FAIL, no joint winner. See [retained code and independent audit](formulation-round-20260924/README.md).
+Direct follow-ups then found Ra + R1(real)/cap(fake), and Ra + symmetric b-cap .5,
+pass both initial blockers but fail trajectory. The hybrid also fails intensity.
+They are not promoted. Further objective ablations restore original Rp while
+retaining each regularizer. Keep trajectory as an early transfer regression.
+
+The user explicitly wants promising candidates to keep advancing unless they
+fail. R1-containing mechanisms remain eligible; avoid rerunning unchanged failed
+R1/R2 proposals. Decide by the measured frozen gates. Do not infer a candidate's
+success or failure from the regularizer's name or history alone.
+
+The direct follow-ups are now complete: seven proposals, 18 gates (9 PASS, 9 FAIL).
+The original-Rp hybrid also fails trajectory, so restoring Rp alone is insufficient.
+The next round uses trajectory as the first cheap gate, then ring/unequal mass.
+Keep promising regularizers eligible; fix measured transfer failures rather than
+repeating already-failed variants or discarding mechanisms based on their names.

@@ -1,0 +1,459 @@
+{
+  "qualified": false,
+  "stop_reason": "Six distinct proposals exhausted",
+  "proposals": 6,
+  "primary_totals": {
+    "FAIL": 7,
+    "PASS": 5
+  },
+  "regression_totals": {
+    "PASS": 2
+  },
+  "ledger_totals": {
+    "FAIL": 7,
+    "PASS": 7,
+    "SKIPPED": 36
+  },
+  "full_22": "NOT_RUN",
+  "stable_convergence": "NOT_RUN",
+  "candidates": [
+    {
+      "candidate": "exposure_trust",
+      "proposal": 2,
+      "primary_passes": 1,
+      "mean_shortfall": 0.03125,
+      "mean_confirmation_fraction": 1.4791666666666667,
+      "seconds": 82.17920334893279,
+      "gates": {
+        "mode_hold": {
+          "status": "FAIL",
+          "metrics": {
+            "modes": 7,
+            "hq": 1.0
+          },
+          "passing_suffix": 0,
+          "seconds": 33.02722891489975,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/exposure_trust/mode_hold/result.json"
+        },
+        "vector_unequal_mass": {
+          "status": "PASS",
+          "metrics": {
+            "sw1_normalized": 0.0794048997221071,
+            "mean_error": 0.11219897121191025,
+            "covariance_error": 0.15305601060390472,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.05034179240465164,
+            "min_mass_ratio": 0.537109375,
+            "hq": 0.986328125,
+            "component_covariance_error": 0.1548483120277524,
+            "component_covariance_errors": [
+              0.09432446956634521,
+              0.04507758095860481,
+              0.23939381539821625,
+              0.24059738218784332
+            ],
+            "component_min_eigen_ratio": 0.6636044979095459,
+            "component_mass": [
+              0.54150390625,
+              0.350341796875,
+              0.097412109375,
+              0.0107421875
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2218,
+              1435,
+              399,
+              44
+            ]
+          },
+          "passing_suffix": 6,
+          "seconds": 49.151974434033036,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/exposure_trust/vector_unequal_mass/result.json"
+        }
+      },
+      "later": {
+        "trajectory": "NOT_RUN",
+        "img_intensity2": "NOT_RUN",
+        "img_bars4": "NOT_RUN",
+        "img_blobs4": "NOT_RUN",
+        "own_full_22": "NOT_RUN",
+        "own_state_continuation": "NOT_RUN"
+      },
+      "code": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/exposure_trust",
+      "declaration": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/exposure_trust/declaration.json",
+      "rank": 1
+    },
+    {
+      "candidate": "shared_coordinate",
+      "proposal": 1,
+      "primary_passes": 1,
+      "mean_shortfall": 0.0625,
+      "mean_confirmation_fraction": 1.375,
+      "seconds": 78.85464233974926,
+      "gates": {
+        "mode_hold": {
+          "status": "FAIL",
+          "metrics": {
+            "modes": 6,
+            "hq": 1.0
+          },
+          "passing_suffix": 0,
+          "seconds": 32.42790290387347,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/shared_coordinate/mode_hold/result.json"
+        },
+        "vector_unequal_mass": {
+          "status": "PASS",
+          "metrics": {
+            "sw1_normalized": 0.07008780791383726,
+            "mean_error": 0.09691628813743591,
+            "covariance_error": 0.11360975354909897,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.044501952826976776,
+            "min_mass_ratio": 0.8150541186332703,
+            "hq": 0.97802734375,
+            "component_covariance_error": 0.41896307840943336,
+            "component_covariance_errors": [
+              0.1179298534989357,
+              0.11265451461076736,
+              0.28818586468696594,
+              1.1570820808410645
+            ],
+            "component_min_eigen_ratio": 0.6228277087211609,
+            "component_mass": [
+              0.529541015625,
+              0.341796875,
+              0.10595703125,
+              0.022705078125
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2169,
+              1400,
+              434,
+              93
+            ]
+          },
+          "passing_suffix": 11,
+          "seconds": 46.42673943587579,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/shared_coordinate/vector_unequal_mass/result.json"
+        }
+      },
+      "later": {
+        "trajectory": "NOT_RUN",
+        "img_intensity2": "NOT_RUN",
+        "img_bars4": "NOT_RUN",
+        "img_blobs4": "NOT_RUN",
+        "own_full_22": "NOT_RUN",
+        "own_state_continuation": "NOT_RUN"
+      },
+      "code": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/shared_coordinate",
+      "declaration": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/shared_coordinate/declaration.json",
+      "rank": 2
+    },
+    {
+      "candidate": "exposure_mean",
+      "proposal": 3,
+      "primary_passes": 1,
+      "mean_shortfall": 0.0625,
+      "mean_confirmation_fraction": 1.4583333333333333,
+      "seconds": 84.80093459784985,
+      "gates": {
+        "mode_hold": {
+          "status": "FAIL",
+          "metrics": {
+            "modes": 6,
+            "hq": 0.980224609375
+          },
+          "passing_suffix": 0,
+          "seconds": 33.100063383812085,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/exposure_mean/mode_hold/result.json"
+        },
+        "vector_unequal_mass": {
+          "status": "PASS",
+          "metrics": {
+            "sw1_normalized": 0.035147088467444555,
+            "mean_error": 0.03985908254981041,
+            "covariance_error": 0.06127933785319328,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.023125002160668373,
+            "min_mass_ratio": 0.5859375,
+            "hq": 0.968505859375,
+            "component_covariance_error": 0.09802780486643314,
+            "component_covariance_errors": [
+              0.035800524055957794,
+              0.07780113816261292,
+              0.14123260974884033,
+              0.13727694749832153
+            ],
+            "component_min_eigen_ratio": 0.8217165470123291,
+            "component_mass": [
+              0.53515625,
+              0.317626953125,
+              0.135498046875,
+              0.01171875
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2192,
+              1301,
+              555,
+              48
+            ]
+          },
+          "passing_suffix": 7,
+          "seconds": 51.70087121403776,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/exposure_mean/vector_unequal_mass/result.json"
+        }
+      },
+      "later": {
+        "trajectory": "NOT_RUN",
+        "img_intensity2": "NOT_RUN",
+        "img_bars4": "NOT_RUN",
+        "img_blobs4": "NOT_RUN",
+        "own_full_22": "NOT_RUN",
+        "own_state_continuation": "NOT_RUN"
+      },
+      "code": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/exposure_mean",
+      "declaration": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/exposure_mean/declaration.json",
+      "rank": 3
+    },
+    {
+      "candidate": "shared_geometry",
+      "proposal": 4,
+      "primary_passes": 1,
+      "mean_shortfall": 0.0625,
+      "mean_confirmation_fraction": 1.5,
+      "seconds": 76.57766198529862,
+      "gates": {
+        "mode_hold": {
+          "status": "FAIL",
+          "metrics": {
+            "modes": 6,
+            "hq": 1.0
+          },
+          "passing_suffix": 0,
+          "seconds": 32.15214485814795,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/shared_geometry/mode_hold/result.json"
+        },
+        "vector_unequal_mass": {
+          "status": "PASS",
+          "metrics": {
+            "sw1_normalized": 0.03443989038373663,
+            "mean_error": 0.04463893175125122,
+            "covariance_error": 0.05799353867769241,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.014453122392296791,
+            "min_mass_ratio": 0.7568359375,
+            "hq": 0.9755859375,
+            "component_covariance_error": 0.17500173952430487,
+            "component_covariance_errors": [
+              0.04497358575463295,
+              0.11462827771902084,
+              0.2857668101787567,
+              0.25463828444480896
+            ],
+            "component_min_eigen_ratio": 0.6292000412940979,
+            "component_mass": [
+              0.548583984375,
+              0.314453125,
+              0.121826171875,
+              0.01513671875
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2247,
+              1288,
+              499,
+              62
+            ]
+          },
+          "passing_suffix": 5,
+          "seconds": 44.42551712715067,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/shared_geometry/vector_unequal_mass/result.json"
+        }
+      },
+      "later": {
+        "trajectory": "NOT_RUN",
+        "img_intensity2": "NOT_RUN",
+        "img_bars4": "NOT_RUN",
+        "img_blobs4": "NOT_RUN",
+        "own_full_22": "NOT_RUN",
+        "own_state_continuation": "NOT_RUN"
+      },
+      "code": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/shared_geometry",
+      "declaration": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/shared_geometry/declaration.json",
+      "rank": 4
+    },
+    {
+      "candidate": "visit_isotropic",
+      "proposal": 5,
+      "primary_passes": 1,
+      "mean_shortfall": 0.11229112413194445,
+      "mean_confirmation_fraction": 1.4166666666666667,
+      "seconds": 76.01989367301576,
+      "gates": {
+        "mode_hold": {
+          "status": "FAIL",
+          "metrics": {
+            "modes": 5,
+            "hq": 0.833251953125
+          },
+          "passing_suffix": 0,
+          "seconds": 31.96997973904945,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/visit_isotropic/mode_hold/result.json"
+        },
+        "vector_unequal_mass": {
+          "status": "PASS",
+          "metrics": {
+            "sw1_normalized": 0.049586307199179606,
+            "mean_error": 0.06763564050197601,
+            "covariance_error": 0.11521271616220474,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.029638657346367836,
+            "min_mass_ratio": 0.7981520891189575,
+            "hq": 0.97119140625,
+            "component_covariance_error": 0.1777300201356411,
+            "component_covariance_errors": [
+              0.1050654947757721,
+              0.15326650440692902,
+              0.26630035042762756,
+              0.18628773093223572
+            ],
+            "component_min_eigen_ratio": 0.6251886487007141,
+            "component_mass": [
+              0.5693359375,
+              0.310302734375,
+              0.103759765625,
+              0.0166015625
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2332,
+              1271,
+              425,
+              68
+            ]
+          },
+          "passing_suffix": 9,
+          "seconds": 44.04991393396631,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/visit_isotropic/vector_unequal_mass/result.json"
+        }
+      },
+      "later": {
+        "trajectory": "NOT_RUN",
+        "img_intensity2": "NOT_RUN",
+        "img_bars4": "NOT_RUN",
+        "img_blobs4": "NOT_RUN",
+        "own_full_22": "NOT_RUN",
+        "own_state_continuation": "NOT_RUN"
+      },
+      "code": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/visit_isotropic",
+      "declaration": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/visit_isotropic/declaration.json",
+      "rank": 5
+    },
+    {
+      "candidate": "density_mobility",
+      "proposal": 6,
+      "primary_passes": 0,
+      "mean_shortfall": 0.09375,
+      "mean_confirmation_fraction": 2.0,
+      "seconds": 80.92520086397417,
+      "gates": {
+        "mode_hold": {
+          "status": "FAIL",
+          "metrics": {
+            "modes": 5,
+            "hq": 0.99658203125
+          },
+          "passing_suffix": 0,
+          "seconds": 33.856056557036936,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/density_mobility/mode_hold/result.json"
+        },
+        "vector_unequal_mass": {
+          "status": "FAIL",
+          "metrics": {
+            "sw1_normalized": 0.06502215704402717,
+            "mean_error": 0.08893851190805435,
+            "covariance_error": 0.11388976126909256,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.03789062052965164,
+            "min_mass_ratio": 0.8019080758094788,
+            "hq": 0.96337890625,
+            "component_covariance_error": 0.31170992739498615,
+            "component_covariance_errors": [
+              0.0929839015007019,
+              0.11777303367853165,
+              0.26938149333000183,
+              0.7667012810707092
+            ],
+            "component_min_eigen_ratio": 0.16979655623435974,
+            "component_mass": [
+              0.541015625,
+              0.337890625,
+              0.104248046875,
+              0.016845703125
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2216,
+              1384,
+              427,
+              69
+            ]
+          },
+          "passing_suffix": 3,
+          "seconds": 47.06914430693723,
+          "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/runs/density_mobility/vector_unequal_mass/result.json"
+        }
+      },
+      "later": {
+        "trajectory": "NOT_RUN",
+        "img_intensity2": "NOT_RUN",
+        "img_bars4": "NOT_RUN",
+        "img_blobs4": "NOT_RUN",
+        "own_full_22": "NOT_RUN",
+        "own_state_continuation": "NOT_RUN"
+      },
+      "code": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/density_mobility",
+      "declaration": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/particle_geometry/20260924T233426Z-2040501/repo/reports/toy100/particle-geometry/candidates/density_mobility/declaration.json",
+      "rank": 6
+    }
+  ]
+}
