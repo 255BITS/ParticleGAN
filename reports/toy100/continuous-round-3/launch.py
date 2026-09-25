@@ -16,6 +16,22 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_data_innovation': ('grok', GPU1, '''Own a distinct training-data innovation
+detector for reversible mobility from selected K3P. Previous gradient-only
+signals confuse stationary optimizer noise with a changed target. Inspect actual
+old failures, then consider online estimates from ordinary REAL minibatches
+(with uncertainty/batch-size normalization) to modulate learning rates and
+precision. The detector must discover changes itself; no shift times, evaluation
+metrics, target centers, task IDs or final budget. Do not directly translate
+outputs, align samples to ground-truth centers, or update hidden output transforms
+outside the optimizer. Keep learning through ordinary model/particle updates;
+the frozen comparator must remain a true no-adaptation control. Preserve K3P
+acquisition and explain a horizon-independent cold transition too. No seed or
+threshold grids. BOTH own canonical hold+extension and shift per proposal.
+Only ring survivors open img_intensity2 and full7000 grid100 accuracy/coverage,
+then remaining gates. Do not inherit RP1 scores or adopt it as a shared base.
+State limits: real-data innovation alone cannot detect generator-side forgetting;
+do not conceal that or infer long-term stability without the declared tests.'''),
     'prepare_continuous_qualification': ('grok', GPU1, '''Harness preparation ONLY;
 no new candidates or expensive qualification of rejected RP1. Prepare reusable
 evaluation support for the declared stress-protocol.json and 30000-update
