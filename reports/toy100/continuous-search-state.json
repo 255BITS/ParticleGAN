@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -93,7 +93,8 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z"
   ],
   "completed_rounds": [
     {
@@ -116,7 +117,8 @@
     "rp1_canonical_and_natives": "k3p_responsive_precision Grok lane",
     "rp1_transfer19": "verify_p3_gates Grok lane after completing P3 sensitive4",
     "rp1_horizon_and_adapter_audit": "k3p_extragradient Codex slot redirected by supervisor",
-    "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only"
+    "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only",
+    "rp1_status": "Qualification stopped after real image and native accuracy failures; partial state witness limitations preserved."
   },
   "on_verified_completion": [
     "Stop all remaining search agents and benchmark jobs, preserving their partial evidence",

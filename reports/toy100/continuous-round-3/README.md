@@ -11,16 +11,17 @@ proposals with no winner. P3 was the strongest round-2 partial lead: hold1200/12
 extension300/300, stationary5/5, pre-hold120/120 and failed recovery77/81.
 Its remaining horizon-based noise and four deadline misses are binding failures.
 
-| Role | Engine | Work |
+| New search | Engine | Question |
 |---|---|---|
-| Unchanged P3 verification | Grok | Sensitive4 first; stop on failure, otherwise own remaining18 |
-| Local curvature | Grok | Reversible secant-based step control |
-| Negative momentum | Grok | Recursive memory of actual game displacement |
-| Responsive precision | Grok | Signal-based closing after an adaptive rate increase |
-| Reference response | Grok | Critic reference tracking that preserves acquisition |
-| Signal and noise | Grok | Remove horizon-dependent noise without losing acquisition |
-| Joint trust | Grok | Bound coupled game displacement from training signals |
-| RP1 independent audit (original predictor/corrector slot) | Codex | Verify horizon independence, source and adapter behavior |
+| Acquisition across tasks | Codex | Which training signal preserves both short-image convergence and native precision? |
+| Reference-gap release | Grok | Can contraction of the reference gap end adaptation without premature closing? |
+| Critic confidence | Grok | Does minibatch uncertainty distinguish learning from stochastic oscillation? |
+| Prior mobility | Grok | Can relative prior/network motion retain precision without preventing adaptation? |
+| Acquisition noise | Grok | Can achieved optimizer motion govern noise without a final training duration? |
+
+Earlier local-curvature, negative-momentum, responsive-precision, reference,
+signal/noise, joint-trust and predictor/corrector attempts retain their own
+records. Live lanes are listed by the monitor; this table describes new work.
 
 Every new proposal earns both canonical protocols. A prospective live winner
 then gets its matched frozen control and all22 toys. Only full evidence can

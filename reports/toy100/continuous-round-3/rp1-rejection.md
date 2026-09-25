@@ -41,6 +41,7 @@ scoped training-state pass are both preserved. Seven CUDA observer regressions
 pass, including identical learner state/RNG and rejection of deliberately wrong
 rates. These audits do not cancel the real quality failures.
 
+[Ring/control report with witness limits](completed-curvature-rp1/attempts/k3p_responsive_precision/result.md),
 [Transfer report](completed-transfer/attempts/verify_p3_gates/result.md),
 [native raw evidence](rp1-rejection-evidence.json),
 [independent audit](completed-codex/attempts/k3p_extragradient/result.md),

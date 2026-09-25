@@ -16,6 +16,20 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_progress_noise': ('grok', GPU0, '''Own the coupling of acquisition noise
+and achieved optimizer motion. K3P remains selected. Read round-2 noise-and-signal,
+round-3 signal/noise measured failures, and rp1-rejection.md before proposing.
+RP1 replaced horizon noise by absolute120/240 warmups; it passes ring adaptation
+but loses short-image stability and grid center accuracy. Investigate a general
+noise/regularization transition driven by cumulative normalized training motion
+or another declared acquisition statistic, rather than the final duration or a
+task-specific clock. Keep reactivation possible after new data; distinguish a
+noise warmup from the reversible mobility controller. Existing gap-only/noise-only
+rules failed acquisition; do not repeat them or merely vary warmup constants.
+Declare extra state/work, preserve sparse-row hooks, no quality feedback. BOTH
+own canonical protocols per proposal. A survivor must clear img_intensity2 and
+full7000 grid100 coverage AND accuracy before deeper qualification. No borrowed
+RP1/P3 gates or new shared base, no coefficient or exploratory seed grid.'''),
     'k3p_transfer_acquisition': ('codex', GPU1, '''Own acquisition/precision transfer
 after RP1's measured rejection. Read rp1-rejection.md and completed-transfer's
 result.md first. K3P remains selected; RP1 is a diagnostic branch, not a new base.
