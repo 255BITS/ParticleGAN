@@ -23,7 +23,8 @@
   "unverified_candidates": {
     "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
     "p3_floor_reopen": "Own sensitive gate verification running; hold1200+300, stationary5/5, prehold120/120, FAIL77/81 recovery, scheduled noise. Not promoted.",
-    "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted."
+    "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted.",
+    "rp1_signal_close": "PROVISIONAL: own hold1200/1200+extension300/300; live shiftUNCONFIRMED with stationary5/5, prehold120/120 and deadline81/81. Matched full-state frozen control, own22, horizon audit and delayed/repeated stress pending. Not promoted."
   },
   "previous_round": {
     "round": 2,
@@ -106,5 +107,10 @@
       "canonical_protocols_not_run": 4,
       "report": "reports/toy100/continuous-round-2/README.md"
     }
-  ]
+  ],
+  "verification_ownership": {
+    "rp1_canonical_and_toys": "k3p_responsive_precision Grok lane",
+    "rp1_horizon_and_adapter_audit": "k3p_extragradient Codex slot redirected by supervisor",
+    "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only"
+  }
 }

@@ -20,7 +20,7 @@ Its remaining horizon-based noise and four deadline misses are binding failures.
 | Reference response | Grok | Critic reference tracking that preserves acquisition |
 | Signal and noise | Grok | Remove horizon-dependent noise without losing acquisition |
 | Joint trust | Grok | Bound coupled game displacement from training signals |
-| Shared-sample predictor/corrector | Codex | Restore temporary state and commit one update per role |
+| RP1 independent audit (original predictor/corrector slot) | Codex | Verify horizon independence, source and adapter behavior |
 
 Every new proposal earns both canonical protocols. A prospective live winner
 then gets its matched frozen control and all22 toys. Only full evidence can
@@ -36,4 +36,29 @@ contains only the first three replacements. Watch all live batches with:
 python3 /ml2/hypergan/monitor-gan.py --once
 ```
 
-New results are pending. No candidate has been promoted.
+**RP1 is a provisional lead, not promoted.** Its own hold passes1200/1200
+(minimum HQ .96850586), followed by300/300 extension checks (minimum HQ .96801758).
+The live shift passes stationary5/5, pre-hold120/120, and deadline81/81
+(minimum deadline HQ .91381836). The frozen driver status is UNCONFIRMED pending
+matched frozen control. [Exact source and first raw artifacts](sources/rp1-provisional-manifest.json)
+are preserved before further verification.
+
+RP1 retains K3P's acquisition penalty, then holds the gradient cap/EMA anchor on
+while rates can increase again. Critic gradient RMS relative to a decaying peak
+controls that increase and later decay; it removes AP3's forced800-update high-rate
+dwell and peak reset. Input/output noise warmups last fixed120/240 updates and
+do not require knowing the final training duration. That formula description
+still requires a substantial paired horizon audit and actual installation in
+all adapters. See [exact declaration](sources/rp1_signal_close/DECLARATION.md).
+
+The Grok lane owns full matched-control evidence and toy gates. The single Codex
+slot was redirected to independent source, adapter and horizon-prefix auditing;
+its original experiment remains separate. Missing provenance cannot be treated
+as matching because both records omit a field. Observer/adapter execution errors
+are distinct from candidate gate failures and must be repaired without changing
+the learner or weakening a check.
+
+Only after canonical gates qualify does the separately frozen
+[delayed/repeated-change protocol](stress-protocol.json) run. No indefinite-learning
+claim follows from one successful target shift. All22 toys, horizon equivalence,
+matched control and stress results are still pending for RP1.

@@ -1,0 +1,33 @@
+{
+  "candidate": "rp1_signal_close",
+  "status": "PROVISIONAL: not promoted",
+  "observed_utc": "2026-09-25T17:42:17.665071+00:00",
+  "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/candidates/rp1",
+  "files_sha256": {
+    "DECLARATION.md": "04f1c198bbf2dbbb2a6276a4da49fb53ac3e12d32dd46cacac17b836c3e089b3",
+    "SHA256SUMS": "f637a84597ab008859231ed3cde316b6fe52c2df56026d1e056aac3f3a69a9c9",
+    "checkpoint.py": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+    "hold.py": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+    "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+    "mechanism.py": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+    "native100.py": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997",
+    "probe.py": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+    "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+    "shift_frozen.py": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+  },
+  "raw_results": {
+    "rp1-shift": {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift/result.json",
+      "sha256": "3d1a4913ca503b59a1c16685bf2b8ea79a9cc3574de0b21f0a3a5f09ff087d7d",
+      "snapshot": "provisional-evidence/3d1a4913ca503b59a1c16685bf2b8ea79a9cc3574de0b21f0a3a5f09ff087d7d.json.gz"
+    },
+    "rp1-hold": {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-hold/result.json",
+      "sha256": "41f7b935a3e71249cd95b0973fa977ba0a63e9fb8fdbd2d58dbc75021e7cfcdb",
+      "snapshot": "provisional-evidence/41f7b935a3e71249cd95b0973fa977ba0a63e9fb8fdbd2d58dbc75021e7cfcdb.json.gz"
+    }
+  }
+}
