@@ -841,6 +841,6 @@ Inference needs no discriminator or optimizer. Resuming training additionally
 requires your D, optimizer, scheduler, EMA, update-counter, and RNG state.
 
 The [implementation report](../reports/api.md) records the design, migration,
-and validation. Legacy research names such as `GradRegularizer`,
-`VICRegLikeLoss`, `DiffusionSchedule`, and `DrawSource` remain in package
-submodules for repository compatibility; the APIs above are the public entry points.
+and validation. Lower-level names such as `VICRegLikeLoss`,
+`DiffusionSchedule`, and `DrawSource` live in package submodules; the APIs
+above are the public entry points.

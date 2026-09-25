@@ -21,7 +21,7 @@ checkout does not remeasure them.
 The formulation is taken from the
 [YuE2 concept-slider card](https://huggingface.co/ntc-ai/yue2-concept-sliders)
 (`FORMULATION.md`, paired-error game, edit normalization, AR-only training).
-The card's lazy `b_cap` critic penalty is replaced by the package default.
+The card's earlier lazy sample-point gradient cap is replaced by the package default.
 Audio code does not run inside ParticleGAN. The 2D gate is
 `python -u examples/yue2_particle_2d.py`.
 
@@ -60,9 +60,9 @@ and it is not in the loss.
 
 | YuE2 card | 2D toy | Gym knob |
 | --- | --- | --- |
-| Paired-error RpGAN. A marginal critic is unchanged if rows exchange targets. `FORMULATION.md`, paired-error game. | Joint RpGAN + `b_cap` from a flipped sign stays flipped. Paired RpGAN + `b_cap` recovers the sign. | `controller_objective`, `adv_weight` 1 |
+| Paired-error RpGAN. A marginal critic is unchanged if rows exchange targets. `FORMULATION.md`, paired-error game. | Joint RpGAN + the gradient cap from a flipped sign stays flipped. Paired RpGAN + the gradient cap recovers the sign. | `controller_objective`, `adv_weight` 1 |
 | Edit scale `std(target-neutral)`, median row RMS pinned to 1. | Neutral thrust is 0. | Neutral is the frozen init action. Absolute-target whitening is refused. |
-| Lazy sample-point `b_cap` every 4th update, coeff 1, times 4. | Accepted arm requires applications > 0. | Replaced by the recipe critic penalty (`edit_game`), logged `penalty` |
+| Lazy sample-point gradient cap every 4th update, coeff 1, times 4. | Accepted arm requires applications > 0. | Replaced by the recipe critic penalty (`edit_game`), logged `penalty` |
 | Train AR QKVO only. Freeze NAR, MLP, embeddings, VAE. | Accepted arm trains the action sign only. | `train_scope: control` |
 | Distillation rel-L2. The v2 teacher has no output MSE. `DISTILLATION.md`. | Supervised-only can land and is rejected because `adv_weight` is 0. | Not a knob. L2 weights stay 0. |
 | Late-layer weighting is not in the card. | Not implemented. | Not a knob. |

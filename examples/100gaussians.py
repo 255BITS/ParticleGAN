@@ -16,7 +16,8 @@ This is deliberately nastier than the 25-Gaussian grid:
 
 The recipe defaults (``particlegan.get_recipe()``) are the one supported
 configuration; this example only exposes sizes, rates and schedule fields:
-  - z_dim 4 (overcomplete latent eases transport; 2 is much worse)
+  - z_dim 2 (the data dimension; the particle prior and critic penalty
+    supply the transport an overcomplete latent once did)
   - Fourier features on D's input so it can resolve the sigma=0.03 modes
     from step 1 (a plain MLP D learns low frequencies first and plateaus)
   - Adam beta1=0: each particle only gets a real gradient every ~78 steps,
