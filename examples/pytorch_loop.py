@@ -3,20 +3,21 @@
 CPU smoke: python -u examples/pytorch_loop.py --steps 5 --batch-size 16
 TOML:     python -u examples/pytorch_loop.py --config examples/api.toml
 
-This small MLP demonstrates integration using the recommended (K3P) defaults,
-wiring every K3P component explicitly -- the same update GANTrainer performs:
+This small MLP demonstrates integration using the recommended defaults --
+the same update GANTrainer performs, with the control flow in your hands:
 
 * role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
 * critic input noise / generator output noise (annealed, from one stream),
-* K3P gradient penalty with an EMA-critic ``CriticAnchor`` you allocate,
-* ``CriticSpikeGuard`` before each critic Adam step,
-* ``after_critic_step`` after it (anchor EMA + the LR that drives the blend),
-* A2 ``LatentRowDamping`` around the prior's Adam step (history you allocate).
+* ``recipe.make_critic_regularizer(critic, opt_d)``: the critic's penalty
+  plus whatever state it needs (currently K3P: EMA-critic anchor, spike guard),
+  stepped with ``critic_reg.step()`` in place of ``opt_d.step()``,
+* ``recipe.make_generator_regularizer(opt_g, latent_table=prior.z)``: the
+  generator-side update (currently A2 latent damping), ``gen_reg.step()`` in
+  place of ``opt_g.step()``.
 
-To checkpoint, save the modules, both optimizers, ``ema_critic``,
-``latent_history`` and each component's ``state_dict()``. With several
-critics, build one penalty/anchor/guard set per critic optimizer.
-Replace its networks and synthetic batches with your own pipeline.
+To checkpoint, save the modules, both optimizers and both regularizers'
+``state_dict()``. With several critics, make one critic regularizer per
+critic optimizer. Replace the networks and synthetic batches with your own.
 """
 
 import argparse
@@ -82,18 +83,14 @@ def main():
     ).to(device)
     prior = recipe.make_prior().to(device)
     gan = recipe.make_loss()
-    # K3P: the caller allocates the EMA critic; the anchor only averages it.
-    ema_critic = copy.deepcopy(critic).requires_grad_(False)
-    anchor = recipe.make_critic_anchor(critic, ema_critic)
-    penalty = recipe.make_gradient_penalty(anchor=anchor if recipe.reg_arm == "k3p" else None)
-    guard = recipe.make_critic_guard()  # None when d_guard_ratio == 0
     spread = recipe.make_prior_regularizer()
     # Ordinary Adam optimizers ([generator, prior] groups, and the critic).
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    # A2 needs the prior table alone in its Adam group with beta1 == 0.
-    latent_history = torch.zeros_like(prior.z.detach())
-    damping = recipe.make_latent_damping(prior.z, latent_history)  # None when disabled
+    # The recipe picks the regularization formulation; one call per optimizer.
+    critic_reg = recipe.make_critic_regularizer(critic, opt_d)
+    gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)
+    ema_critic = critic_reg.ema_critic()  # None when the formulation has no EMA critic
     noise = torch.Generator(device=device).manual_seed(43)
 
     def with_noise(x, sigma):
@@ -126,12 +123,11 @@ def main():
 
         opt_d.zero_grad(set_to_none=True)
         d_loss = gan.d_loss(noisy(critic)(real), noisy(critic)(fake.detach()))
-        d_loss = d_loss + penalty(noisy(critic), real, fake.detach(), step, ema_critic=noisy(anchor))
+        penalty, _ = critic_reg.penalty(noisy(critic), real, fake.detach(), step,
+                                        ema_critic=None if ema_critic is None else noisy(ema_critic))
+        d_loss = d_loss + penalty
         d_loss.backward()
-        if guard is not None:
-            guard.apply_(opt_d)
-        opt_d.step()
-        penalty.after_critic_step(opt_d)  # anchor EMA, then the LR that drives s
+        critic_reg.step()  # before_step(), opt_d.step(), after_step()
 
         # Freeze critic weights while preserving gradients through critic(fake).
         flags = [parameter.requires_grad for parameter in critic.parameters()]
@@ -142,11 +138,7 @@ def main():
             prior_loss = spread(prior.z[particle_ids.unique()])
             total_g = g_loss + prior_loss  # spread already carries recipe.prior_reg
             total_g.backward()
-            if damping is None:
-                opt_g.step()
-            else:
-                with damping.around(opt_g):
-                    opt_g.step()
+            gen_reg.step()  # opt_g.step() with the generator-side modifications
         finally:
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
@@ -158,7 +150,7 @@ def main():
                 "event": "train", "step": step,
                 "d_loss": d_loss.detach().item(), "g_loss": g_loss.detach().item(),
                 "prior_loss": prior_loss.detach().item(), "lr_scale": network,
-                "k3p_s": penalty.blend_weight(),
+                **critic_reg.diagnostics(),
                 "seconds": round(time.monotonic() - started, 3),
             }), flush=True)
 

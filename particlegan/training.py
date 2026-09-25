@@ -4,150 +4,8 @@ import math
 
 import torch
 
-from .k3p import CriticAnchor
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
-
-
-def _buffer_pairs(ema, live):
-    live_b, ema_b = dict(live.named_buffers()), dict(ema.named_buffers())
-    if live_b.keys() != ema_b.keys():
-        raise ValueError("ema_critic buffer names differ from critic's")
-    for name, b in live_b.items():
-        if ema_b[name].shape != b.shape or ema_b[name].dtype != b.dtype:
-            raise ValueError(f"ema_critic buffer {name} differs in shape or dtype")
-    return [(ema_b[name], b) for name, b in live_b.items()]
-
-
-class RobustCriticAnchor(CriticAnchor):
-    """``CriticAnchor`` that also averages buffers and never mutates state on forward.
-
-    Floating-point buffers (e.g. BatchNorm running statistics) are averaged
-    with the parameters; integer buffers are copied. Every EMA forward runs
-    in the live critic's per-module train/eval mode and restores any EMA
-    buffer it changed (BatchNorm statistics, spectral-norm ``u``/``v``), so
-    evaluating the anchor never changes the EMA or the live critic. No
-    ``.data`` swapping is involved.
-    """
-
-    def __init__(self, critic, ema_critic, decay=0.999):
-        super().__init__(critic, ema_critic, decay)
-        self._buffer_pairs = _buffer_pairs(ema_critic, critic)
-        ema_modules, live_modules = list(ema_critic.modules()), list(critic.modules())
-        if len(ema_modules) != len(live_modules):
-            raise ValueError("ema_critic module structure differs from critic's")
-        self._module_pairs = list(zip(ema_modules, live_modules))
-        # (owning module, buffer name) for every EMA buffer.
-        self._owned = [(module, name) for module in ema_modules
-                       for name, buffer in module._buffers.items() if buffer is not None]
-
-    @torch.no_grad()
-    def start_(self):
-        super().start_()
-        for e, b in self._buffer_pairs:
-            e.copy_(b)
-
-    @torch.no_grad()
-    def update_(self):
-        super().update_()
-        for e, b in self._buffer_pairs:
-            if e.is_floating_point():
-                e.mul_(self.decay).add_(b, alpha=1.0 - self.decay)
-            else:
-                e.copy_(b)
-
-    def forward(self, fn, x):
-        """Evaluate ``fn(ema_critic, x)`` without side effects on any module state."""
-        modes = [(e, e.training) for e, _ in self._module_pairs]
-        for e, live in self._module_pairs:
-            e.training = live.training
-        # The forward runs on private copies of every EMA buffer: a train-mode
-        # BatchNorm or spectral norm updates (and may save for backward) the
-        # copies, and the EMA's own buffers are put back untouched afterwards.
-        # No in-place restore, so the caller's later input-gradient is valid.
-        originals = [(module, name, module._buffers[name]) for module, name in self._owned]
-        try:
-            for module, name, buffer in originals:
-                module._buffers[name] = buffer.clone()
-            return fn(self.ema_critic, x)
-        finally:
-            for module, name, buffer in originals:
-                module._buffers[name] = buffer
-            for e, flag in modes:
-                e.training = flag
-
-    def __call__(self, x):
-        return self.forward(lambda module, inputs: module(inputs), x)
-
-
-class K3PCritic:
-    """Best-practice K3P bundle for one critic optimizer.
-
-    Allocates the EMA critic (``deepcopy(critic)``, frozen), a
-    ``RobustCriticAnchor`` over it, the recipe's gradient penalty and critic
-    spike guard. Use one per critic optimizer; one module used in several
-    roles shares one bundle and passes an ``ema_critic`` per role::
-
-        k3p = K3PCritic(recipe, D, opt_d)
-        loss = adv + k3p.penalty(D, real, fake, step)
-        # shared module: k3p.penalty(lambda x: D.role(x), xr, xf, step,
-        #                            ema_critic=k3p.ema_critic(lambda m, x: m.role(x)))
-        opt_d.zero_grad(); loss.backward(); k3p.step()
-
-    ``step()`` applies the guard, steps the optimizer and records the step
-    for K3P. ``state_dict()`` holds the penalty scalars, EMA critic and guard.
-    ``optimizer`` may be None for penalty-only use (``step()`` then raises).
-    """
-
-    def __init__(self, recipe, critic, optimizer, **penalty_overrides):
-        if not isinstance(recipe, Recipe):
-            raise TypeError("recipe must be a Recipe")
-        self.critic, self.optimizer = critic, optimizer
-        arm = penalty_overrides.get("arm", recipe.reg_arm)
-        self.ema = self.anchor = None
-        if arm == "k3p":
-            self.ema = deepcopy(critic).requires_grad_(False)
-            self.anchor = RobustCriticAnchor(critic, self.ema, decay=recipe.reg_anchor_decay)
-        self.regularizer = recipe.make_gradient_penalty(anchor=self.anchor, **penalty_overrides)
-        self.guard = recipe.make_critic_guard()
-
-    def ema_critic(self, fn=None):
-        """Callable ``x -> fn(ema_module, x)`` (default ``ema_module(x)``), side-effect free."""
-        if self.anchor is None:
-            return None
-        if fn is None:
-            return self.anchor
-        return lambda x: self.anchor.forward(fn, x)
-
-    def penalty(self, D, x_real, x_fake, step, *, generator=None, collect_stats=False, ema_critic=None):
-        """``(penalty, stats)`` for one critic (or one role of it)."""
-        options = {} if ema_critic is None else {"ema_critic": ema_critic}
-        return self.regularizer.penalty(D, x_real, x_fake, step, generator, collect_stats, **options)
-
-    def step(self):
-        """Guard, ``optimizer.step()``, then ``after_critic_step`` (anchor EMA + LR record)."""
-        if self.optimizer is None:
-            raise RuntimeError("K3PCritic was built without an optimizer")
-        if self.guard is not None:
-            self.guard.apply_(self.optimizer)
-        self.optimizer.step()
-        self.regularizer.after_critic_step(self.optimizer)
-
-    def state_dict(self):
-        return {"penalty": self.regularizer.state_dict(),
-                "ema": None if self.ema is None else self.ema.state_dict(),
-                "guard": None if self.guard is None else self.guard.state_dict()}
-
-    def load_state_dict(self, state):
-        if not isinstance(state, dict) or set(state) != {"penalty", "ema", "guard"}:
-            raise ValueError("invalid K3PCritic state")
-        if (state["ema"] is None) != (self.ema is None) or (state["guard"] is None) != (self.guard is None):
-            raise ValueError("K3PCritic state does not match this recipe")
-        self.regularizer.load_state_dict(state["penalty"])
-        if self.ema is not None:
-            self.ema.load_state_dict(state["ema"])
-        if self.guard is not None:
-            self.guard.load_state_dict(state["guard"])
 
 
 def input_noise_std(recipe, completed_steps):
@@ -176,8 +34,9 @@ class GANTrainer:
 
     Per update: role-wise LR schedule (``learning_rate_scales``), critic step
     with input noise, K3P penalty, spike guard and anchor EMA
-    (``K3PCritic``), then a generator/prior step with output noise and A2
-    latent damping. Noise is applied functionally from a trainer stream; the
+    (``recipe.make_critic_regularizer``), then a generator/prior step with
+    output noise and A2 latent damping (``recipe.make_generator_regularizer``).
+    Noise is applied functionally from a trainer stream; the
     caller's modules are never wrapped. ``sample`` includes the output noise.
     """
 
@@ -221,17 +80,11 @@ class GANTrainer:
         self.roles = [["prior" if any(id(p) in prior_ids for p in group["params"]) else "generator"
                        for group in self.opt_g.param_groups], ["critic"] * len(self.opt_d.param_groups)]
         self.loss = recipe.make_loss()
-        self.critic = K3PCritic(recipe, self.D, self.opt_d, **self.penalty_options)
+        # The recipe picks the regularization formulation (currently K3P).
+        self.critic = recipe.make_critic_regularizer(self.D, self.opt_d, **self.penalty_options)
         self.penalty = self.critic.regularizer
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
-        self.latent_history = self.latent_damping = None
-        if self.prior.z.requires_grad and recipe.latent_damping_max_rate > 0:
-            group = self.opt_g.param_groups[self.roles[0].index("prior")]
-            if len(group["params"]) != 1 or group["betas"][0] != 0.0:
-                raise ValueError("A2 latent damping needs the prior table alone with beta1 == 0; "
-                                 "set latent_damping_max_rate=0 to train without it")
-            self.latent_history = torch.zeros_like(self.prior.z, requires_grad=False)
-            self.latent_damping = recipe.make_latent_damping(self.prior.z, self.latent_history)
+        self.generator_regularizer = recipe.make_generator_regularizer(self.opt_g, latent_table=self.prior.z)
         self.ema_G, self.ema_prior = deepcopy(self.G).eval(), deepcopy(self.prior).eval()
         for module in (self.ema_G, self.ema_prior):
             module.requires_grad_(False)
@@ -240,6 +93,14 @@ class GANTrainer:
         self.eval_generator = self._stream(None, seed + 4)
         self.noise_generator = self._stream(None, seed + 5)
         self.completed_steps = 0
+
+    @property
+    def latent_damping(self):
+        return self.generator_regularizer.latent_damping
+
+    @property
+    def latent_history(self):
+        return self.generator_regularizer.latent_history
 
     @property
     def ema_D(self):
@@ -343,11 +204,7 @@ class GANTrainer:
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             self.opt_g.zero_grad()
             loss_g.backward()
-            if self.latent_damping is None:
-                self.opt_g.step()
-            else:
-                with self.latent_damping.around(self.opt_g):
-                    self.opt_g.step()
+            self.generator_regularizer.step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
@@ -391,10 +248,8 @@ class GANTrainer:
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
 
     def _k3p_state(self):
-        latent = None
-        if self.latent_damping is not None:
-            latent = {"state": self.latent_damping.state_dict(), "history": self.latent_history}
-        return {"critic": self.critic.state_dict(), "latent": latent}
+        return {"critic": self.critic.state_dict(),
+                "latent": self.generator_regularizer.state_dict()["latent"]}
 
     def state_dict(self):
         """Return an independent checkpoint; save the caller's data cursor too."""
@@ -488,10 +343,7 @@ class GANTrainer:
         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
             optimizer.load_state_dict(deepcopy(values))
         self.critic.load_state_dict(deepcopy(k3p["critic"]))
-        if self.latent_damping is not None:
-            self.latent_damping.load_state_dict(dict(k3p["latent"]["state"]))
-            with torch.no_grad():
-                self.latent_history.copy_(k3p["latent"]["history"])
+        self.generator_regularizer.load_state_dict({"latent": k3p["latent"], "direct": None})
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())

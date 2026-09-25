@@ -47,7 +47,7 @@ class Recipe:
     d_guard_min_steps: int = 200
     # A2 sparse latent-row damping (0 disables it).
     latent_damping_max_rate: float = 0.5
-    # DirectParticleResponse betas (custom loops with direct sample particles).
+    # Direct sample-particle response betas (make_generator_regularizer).
     direct_particle_betas: tuple[float, float] = (0.0, 0.9)
     # Critic input noise: peak std at the first update, linear to 0 by
     # input_noise_anneal_end * total_steps. Generator output noise: linear
@@ -207,13 +207,47 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(**{"loss_type": self.loss_type, "mode": self.gan_mode, **overrides})
 
-    def make_gradient_penalty(self, *, anchor=None, **overrides):
-        """The critic gradient penalty (K3P by default).
+    def make_critic_regularizer(self, critic, optimizer=None, **penalty_overrides):
+        """Everything one critic optimizer needs, built with this recipe's settings.
 
-        K3P needs ``after_critic_step(critic_optimizer)`` after every critic
-        step and, once its blend weight drops below 1, an anchor: pass
-        ``anchor=recipe.make_critic_anchor(D, ema_D)`` here or ``ema_critic=``
-        per penalty call. ``particlegan.K3PCritic`` wires all of this.
+        Call once per critic optimizer (a module with several critic roles
+        shares one object and passes a per-role ``ema_critic``). The recipe
+        chooses the concrete formulation (currently ``particlegan.k3p.K3PCritic``:
+        gradient penalty, EMA-critic anchor it allocates, spike guard). The
+        returned object provides ``penalty(D, real, fake, step, *, generator=None,
+        collect_stats=False, ema_critic=None) -> (penalty, stats)``,
+        ``ema_critic(fn=None)``, ``before_step()``/``after_step()`` around
+        ``optimizer.step()`` (or ``step()`` for all three), ``diagnostics()`` and
+        ``state_dict()``/``load_state_dict()``. ``penalty_overrides`` go to
+        ``make_gradient_penalty``. ``optimizer=None`` builds a penalty-only object.
+        """
+        from .k3p import K3PCritic
+        return K3PCritic(self, critic, optimizer, **penalty_overrides)
+
+    def make_generator_regularizer(self, optimizer, *, latent_table=None, direct_particles=None):
+        """Generator/prior-side update modifications for one generator optimizer.
+
+        Pass the learnable latent table (e.g. ``prior.z``) and/or a param group
+        of direct sample particles held by ``optimizer``. The recipe chooses the
+        concrete formulation (currently ``particlegan.k3p.K3PGeneratorRegularizer``:
+        A2 latent-row damping, direct-particle response) and allocates its
+        history buffers. The returned object provides ``before_step()``/
+        ``after_step()`` around ``optimizer.step()`` (or ``step()``, or
+        ``with reg.around(): optimizer.step()``) and ``state_dict()``/
+        ``load_state_dict()``. With nothing to modify, ``step()`` is exactly
+        ``optimizer.step()``.
+        """
+        from .k3p import K3PGeneratorRegularizer
+        return K3PGeneratorRegularizer(self, optimizer, latent_table=latent_table,
+                                       direct_particles=direct_particles)
+
+    def make_gradient_penalty(self, **overrides):
+        """The bare critic gradient penalty with this recipe's settings.
+
+        Prefer ``make_critic_regularizer``, which also builds whatever state
+        the penalty needs (for K3P: the EMA-critic anchor and the per-step LR
+        record via ``after_critic_step``). Use this directly for stateless arms
+        such as ``arm="b_cap"``.
         """
         from .grad_regularizers import GradientPenalty
         options = {"arm": self.reg_arm, "coeff": self.reg_coeff,
@@ -225,37 +259,12 @@ class Recipe:
             # every f, so the same formulation needs no separate path.
             floor = self.resolved_network_lr_floor
             options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        if anchor is not None:
-            options["anchor"] = anchor
         return GradientPenalty(**options)
 
     @property
     def resolved_network_lr_floor(self):
         """G/D LR floor (and K3P blend floor f): ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
-
-    def make_critic_anchor(self, critic, ema_critic):
-        """K3P anchor over a caller-allocated EMA copy of ``critic``."""
-        from .k3p import CriticAnchor
-        return CriticAnchor(critic, ema_critic, decay=self.reg_anchor_decay)
-
-    def make_critic_guard(self):
-        """Critic spike guard, or None when ``d_guard_ratio == 0``."""
-        from .k3p import CriticSpikeGuard
-        if self.d_guard_ratio == 0:
-            return None
-        return CriticSpikeGuard(ratio=self.d_guard_ratio, min_steps=self.d_guard_min_steps)
-
-    def make_latent_damping(self, table, history):
-        """A2 damping for a latent table, or None when ``latent_damping_max_rate == 0``."""
-        from .k3p import LatentRowDamping
-        if self.latent_damping_max_rate == 0:
-            return None
-        return LatentRowDamping(table, history, max_rate=self.latent_damping_max_rate)
-
-    def make_direct_response(self, params, history):
-        from .k3p import DirectParticleResponse
-        return DirectParticleResponse(params, history, betas=self.direct_particle_betas)
 
     def make_prior_regularizer(self, **overrides):
         from .vicreg_loss import ParticleRegularizer

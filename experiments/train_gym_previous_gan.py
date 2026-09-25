@@ -23,7 +23,7 @@ from lib.gym_state_control import training_recipe
 from lib.gym_transition import GymTransitionScaler
 from lib.gym_previous_gan import (MODULE_KEYS, build_models, hashes, fake_paths,
     real_record, task_loss, adversarial_loss)
-from particlegan import K3PCritic, scale_learning_rates
+from particlegan import scale_learning_rates
 
 DEFAULTS = dict(arm='previous_marginals', steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500], log_interval=250, seed=24003, device='cuda:1',
@@ -100,7 +100,7 @@ def train(cfg):
         encoder=bundle['E'], fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
-    gan, reg, spread = recipe.make_loss(), K3PCritic(recipe, bundle['D'], opt_d), recipe.make_prior_regularizer()
+    gan, reg, spread = recipe.make_loss(), recipe.make_critic_regularizer(bundle['D'], opt_d), recipe.make_prior_regularizer()
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)
            for k,offset in dict(data=11, d_data=31, latent=51, contact=61, d_latent=71, d_contact=81).items()}

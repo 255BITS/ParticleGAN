@@ -67,46 +67,52 @@ that forward, and no `.data` is swapped.
 
 ## Your own loop, and several critics
 
-Build one set of K3P objects per critic optimizer. `K3PCritic` is the bundle
-the trainer uses:
+Do not instantiate K3P classes yourself. The recipe builds the current best
+formulation behind a formulation-agnostic interface, one call per optimizer;
+the same objects the trainer uses:
 
 ```python
-from particlegan import K3PCritic, get_recipe, learning_rate_scales
+from particlegan import get_recipe, learning_rate_scales
 
 recipe = get_recipe(total_steps=steps)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-k3p = K3PCritic(recipe, D, opt_d)      # EMA critic, penalty, spike guard
+critic_reg = recipe.make_critic_regularizer(D, opt_d)   # EMA critic, penalty, spike guard
+gen_reg = recipe.make_generator_regularizer(opt_g, latent_table=prior.z)  # A2 damping
 ...
-loss_d = adv + k3p.penalty(D, real, fake, step)[0]
+loss_d = adv + critic_reg.penalty(D, real, fake, step)[0]
 opt_d.zero_grad(); loss_d.backward()
-k3p.step()                             # guard, opt_d.step(), anchor EMA + LR record
-torch.save({"k3p": k3p.state_dict(), ...}, path)
+critic_reg.step()                      # guard, opt_d.step(), anchor EMA + LR record
+...
+opt_g.zero_grad(); loss_g.backward()
+gen_reg.step()                         # opt_g.step() with A2 latent damping
+torch.save({"critic_reg": critic_reg.state_dict(), "gen_reg": gen_reg.state_dict(), ...}, path)
 ```
 
-With one module that has several critic roles, keep one `K3PCritic` for its
-optimizer and give each role its own view of the EMA critic:
+If you need to own `optimizer.step()` (e.g. under a `GradScaler`), call
+`before_step()` and `after_step()` around it instead of `step()`.
+`critic_reg.diagnostics()` returns host scalars such as the blend weight.
+
+With one module that has several critic roles, keep one critic regularizer for
+its optimizer and give each role its own view of the EMA critic:
 
 ```python
 for role in D.roles():
     critic = D.critic_for(role)
-    pen, _ = k3p.penalty(lambda x: critic(x, ctx), xr, xf, step,
-                         ema_critic=k3p.ema_critic(lambda m, x: m.critic_for(role)(x, ctx)))
+    pen, _ = critic_reg.penalty(lambda x: critic(x, ctx), xr, xf, step,
+                                ema_critic=critic_reg.ema_critic(lambda m, x: m.critic_for(role)(x, ctx)))
 ```
 
-Critics with separate optimizers get separate `K3PCritic` objects; their
-blend weights and EMAs are independent. Nothing registers optimizer hooks or
-keeps module-level state.
+Critics with separate optimizers get separate regularizers (one
+`recipe.make_critic_regularizer(D_k, opt_k)` call each); their blend weights
+and EMAs are independent. Nothing registers optimizer hooks or keeps
+module-level state.
 
-The primitives are public too (see `examples/pytorch_loop.py` for a loop that
-wires each one): `recipe.make_critic_anchor(D, ema_D)` (`CriticAnchor`; you
-allocate `ema_D`), `recipe.make_gradient_penalty(anchor=...)`,
-`recipe.make_critic_guard()` (`CriticSpikeGuard.apply_(opt_d)` before the
-step), `penalty.after_critic_step(opt_d)` after it,
-`recipe.make_latent_damping(prior.z, history)` (`LatentRowDamping`, around the
-prior's Adam step; the table must be alone in its group with beta1 = 0) and
-`recipe.make_direct_response(params, history)` for direct sample-particle
-groups (not used by `GANTrainer`). Save each object's `state_dict()` together
-with the EMA critic and history tensors you allocated.
+The concrete classes (`K3PCritic`, `K3PGeneratorRegularizer` and the
+primitives `CriticAnchor`, `RobustCriticAnchor`, `CriticSpikeGuard`,
+`LatentRowDamping`, `DirectParticleResponse`) stay importable from
+`particlegan.k3p` for low-level tests and research, but they are not the public
+API. Direct sample-particle groups use
+`recipe.make_generator_regularizer(opt, direct_particles=[...])`.
 
 ## Historical recipes
 

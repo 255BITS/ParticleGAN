@@ -2,16 +2,26 @@
 
 ## Unreleased
 
+- **Regularizers come from the recipe.** `recipe.make_critic_regularizer(D,
+  opt_d, **penalty_kwargs)` (one call per critic optimizer) and
+  `recipe.make_generator_regularizer(opt_g, latent_table=prior.z,
+  direct_particles=None)` build whatever the current best formulation needs
+  (K3P today) behind a formulation-agnostic interface: `penalty`,
+  `ema_critic`, `before_step`/`after_step`/`step`, `diagnostics`,
+  `state_dict`/`load_state_dict`. They replace `K3PCritic(recipe, ...)` and the
+  `make_critic_anchor`, `make_critic_guard`, `make_latent_damping` and
+  `make_direct_response` factories (removed). `K3PCritic`, the new
+  `K3PGeneratorRegularizer` and the K3P primitives move to / stay in
+  `particlegan.k3p` and are no longer exported from `particlegan`.
+  `GANTrainer`, examples, experiments, `lib/` and docs use the factories;
+  `trainer.generator_regularizer` is new. Math and checkpoints are unchanged.
 - **K3P is the default.** `Recipe()`/`get_recipe()` now resolve to the qualified
   K3P config: `reg_arm="k3p"`, coefficient 1, κ 1, betas (0, .999), no particle
   spread, batch 2048, z_dim 2, plus new fields `network_lr_floor` (.01),
   `network_lr_horizon_cap` (1600), `reg_anchor_decay`, `d_guard_ratio`,
   `d_guard_min_steps`, `latent_damping_max_rate`, `direct_particle_betas` and
-  the input/output noise schedules. New `learning_rate_scales(step, recipe)`
-  and recipe factories `make_critic_anchor`, `make_critic_guard`,
-  `make_latent_damping`, `make_direct_response`; `make_gradient_penalty`
-  takes `anchor=`.
-- New `K3PCritic(recipe, critic, optimizer)`: the per-critic-optimizer bundle
+  the input/output noise schedules. New `learning_rate_scales(step, recipe)`.
+- A per-critic-optimizer K3P bundle (now `recipe.make_critic_regularizer`)
   (trainer-allocated EMA critic with buffer averaging and side-effect-free
   forwards, penalty, spike guard, `state_dict`). Several critics use several
   bundles; one module with several roles passes a per-role `ema_critic`.
@@ -19,7 +29,7 @@
   generator output noise from its own stream, spike guard, A2 latent damping)
   and checkpoints it (schema 2). Schema-1 GAN v3 checkpoints are rejected.
   `trainer.ema_D` is now a property of `trainer.critic`.
-- Custom loops in `experiments/` and `lib/` use `K3PCritic`; hosts whose
+- Custom loops in `experiments/` and `lib/` use the critic bundle; hosts whose
   protocol requires `b_cap` pin it explicitly. Historical benchmarks resolve
   archived recipes through `benchmarks.gan_v3` (`GAN_V3_FIELDS`,
   `legacy_recipe`, `legacy_dict`), so their receipts are unchanged.
@@ -27,7 +37,7 @@
   `arm="b_cap"`. New `scale_learning_rates(step, recipe, optimizers,
   base_rates, prior)` sets G/D groups to the network schedule and prior groups
   to the prior one, so a custom loop's critic LR reaches the same floor K3P's
-  blend weight uses. The K3PCritic loops, `examples/five_modes.py` and the
+  blend weight uses. The custom loops, `examples/five_modes.py` and the
   README/API examples use it.
 - Docs: new `docs/k3p.md`; GAN v3 docs marked superseded. The shipped
   `configs/100gaussians` and `configs/denoising` defaults follow the recipe.

@@ -14,7 +14,7 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - K3P gradient penalty on D (package default, particlegan.K3PCritic): R1 on
+  - K3P gradient penalty on D (package default, recipe.make_critic_regularizer): R1 on
     reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
     plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
@@ -55,7 +55,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan import K3PCritic, get_recipe, scale_learning_rates  # noqa: E402
+from particlegan import get_recipe, scale_learning_rates  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -241,8 +241,8 @@ def train(
     optimizers = (opt_GE, opt_prior, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     # K3P gradient penalty (the default) with its EMA critic and spike guard.
-    k3p = K3PCritic(recipe, D, opt_D)
-    ema_joint = k3p.ema_critic(
+    critic_reg = recipe.make_critic_regularizer(D, opt_D)
+    ema_joint = critic_reg.ema_critic(
         lambda m, joint: m(joint[:, :X_DIM].view(-1, len(CHARS), SEQ_LEN), joint[:, X_DIM:]))
 
     loss_D_hist = deque(maxlen=200)
@@ -282,7 +282,7 @@ def train(
         loss_d = gan_loss.d_loss(pred_real, pred_fake)
 
         # K3P gradient penalty on the joint (text, latent) pairs.
-        pen, _ = k3p.penalty(
+        pen, _ = critic_reg.penalty(
             D_joint,
             join_pair(x_real, z_enc),
             join_pair(x_gen_soft, z_prior),
@@ -291,7 +291,7 @@ def train(
         )
         loss_d = loss_d + pen
         loss_d.backward()
-        k3p.step()  # spike guard, opt_D.step(), K3P anchor EMA + LR record
+        critic_reg.step()  # spike guard, opt_D.step(), K3P anchor EMA + LR record
 
         # --- TRAIN GE (and Prior) ---
         opt_GE.zero_grad()

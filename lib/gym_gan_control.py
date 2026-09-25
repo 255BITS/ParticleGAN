@@ -109,7 +109,7 @@ def _comparisons(d, role, views, fakes):
 def discriminator_loss(d, views, fakes, gan, reg, step, rngs):
     """Mean views/paths per role, sum critic roles; generated records detached here.
 
-    ``reg`` is the shared critic module's ``particlegan.K3PCritic``.
+    ``reg`` is the shared critic module's ``recipe.make_critic_regularizer(...)``.
     """
     terms, role_losses = {}, []
     for role in d.roles():
