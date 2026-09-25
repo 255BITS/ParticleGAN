@@ -1,0 +1,108 @@
+[
+  {
+    "arm": "winner_published_absolute",
+    "status": "FAIL",
+    "suffix": 0,
+    "shortfall": 1.0,
+    "live": {
+      "sw1_normalized": 0.6156714117915649,
+      "mean_error": 0.9672786593437195,
+      "covariance_error": 0.9922288060188293,
+      "target_scale": 12.222654342651367,
+      "sample_count": 4096,
+      "mass_tv": 0.5,
+      "min_mass_ratio": 0.0,
+      "hq": 0.96337890625,
+      "component_covariance_error": 0.5624307096004486,
+      "component_covariance_errors": [
+        0.09775006771087646,
+        0.15197277069091797,
+        1.0,
+        1.0
+      ],
+      "component_min_eigen_ratio": 0.0,
+      "component_mass": [
+        0.5087890625,
+        0.4912109375,
+        0.0,
+        0.0
+      ],
+      "target_mass": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "component_counts": [
+        2084,
+        2012,
+        0,
+        0
+      ]
+    },
+    "error": null,
+    "seconds": 22.74482258199714,
+    "sha256": "28f3cfefff2d505fd39afea55b1ae5c4480192b7b9758b10e18fed661ee60229",
+    "kind": "batchfeat",
+    "init_std": 0.5,
+    "half_sep": 12.0,
+    "half_pair": 2.0,
+    "local_width": 1.0,
+    "reach": 12.165525060596439,
+    "inter_cluster": 24.0,
+    "intra_gap": 4.0
+  },
+  {
+    "arm": "control_mlp_matched_init",
+    "status": "PASS",
+    "suffix": 9,
+    "shortfall": 0.0,
+    "live": {
+      "sw1_normalized": 0.049691271101313925,
+      "mean_error": 0.056179363280534744,
+      "covariance_error": 0.01987621746957302,
+      "target_scale": 12.222654342651367,
+      "sample_count": 4096,
+      "mass_tv": 0.046875,
+      "min_mass_ratio": 0.8642578125,
+      "hq": 1.0,
+      "component_covariance_error": 0.3702622763812542,
+      "component_covariance_errors": [
+        0.3784116804599762,
+        0.4460442364215851,
+        0.4142264723777771,
+        0.2423667162656784
+      ],
+      "component_min_eigen_ratio": 0.438914954662323,
+      "component_mass": [
+        0.24853515625,
+        0.216064453125,
+        0.296875,
+        0.238525390625
+      ],
+      "target_mass": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "component_counts": [
+        1018,
+        885,
+        1216,
+        977
+      ]
+    },
+    "error": null,
+    "seconds": 5.848235955927521,
+    "sha256": "ab125f3065cd445f7d13e60748a6463cf2f687210bc21a7fc291bd4e443400ab",
+    "kind": "mlp",
+    "init_std": 6.0,
+    "half_sep": 12.0,
+    "half_pair": 2.0,
+    "local_width": 1.0,
+    "reach": 12.165525060596439,
+    "inter_cluster": 24.0,
+    "intra_gap": 4.0
+  }
+]
