@@ -1,5 +1,10 @@
 # 22-toy results and continuous stability
 
+**Selected research base: [dimension_rms_hybrid](dimension-rms-base/README.md).**
+User-selected after **6 PASS / 7 measured GPU toys**, with two_pole FAIL and fifteen
+unmeasured. Full22 and own-state stability are NOT_RUN. This is a partial candidate
+result; the historical16/22 native GPU control below is a different formulation.
+
 **Yes, there is a recorded 22/22 PASS.** The original
 `constraints_simple_regularization` recipe still passes when its saved CPU
 evidence is independently regraded. Its preserved-recipe CUDA control scores
@@ -35,8 +40,8 @@ The preserved-recipe GPU failures are `mode_hold`, `trajectory`, `img_bars4`,
 including native coverage and accuracy on all three 100-mode problems. All 22
 GPU control verdicts and all 105 earlier GPU variant results were regraded.
 
-The active work now starts from the **original scheduled CPU recipe**, resolving
-its GPU failures first. [Twenty-four porting controls](cpu-recipe-gpu-port/README.md)
+The earlier porting work started from the **original scheduled CPU recipe**.
+The selected dimension-RMS formulation above now replaces it as the research base. [Twenty-four porting controls](cpu-recipe-gpu-port/README.md)
 confirm 6/6 fresh CPU passes on the failed hosts. CPU initialization alone
 recovers four on CUDA; ring and unequal mass remain failing. This partial
 diagnostic is not a new 22-toy score.

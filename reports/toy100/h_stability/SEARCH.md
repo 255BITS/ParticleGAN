@@ -1,60 +1,47 @@
-Current scope update: the user now authorizes broader GAN formulation changes.
-Read [formulation-search.md](../formulation-search.md) first; its explicit objective/
-regularizer/optimizer permissions supersede older restrictions below. The known
-CPU recipe remains the starting reference, with GPU gates and budgets unchanged.
+# Current task: improve the selected dimension RMS GAN base
 
-# Current task: make the known 22/22 CPU GAN recipe work on GPU
+Read AGENTS.md, ../current-research-base.json and ../dimension-rms-base/README.md.
+The user explicitly selected dimension_rms_hybrid as the new research base.
+Start from its exact config.json + mechanism.py + probe.py. The config by itself
+is NOT the selected formulation; it requires the regularizer installed by the
+probe. Use the archived checksum-verified source preparer and retained fixtures.
+Do not drift back to the original CPU recipe as the starting candidate.
 
-Start a fresh attempt from `configs/toy100/constraints_simple_regularization.json`.
-Read AGENTS.md, START.md, ../current-research-base.json, and
-../cpu-recipe-gpu-port/README.md. Implement and run small, measurable experiments.
+The selected base independently passes six GPU regression toys and fails two_pole
+(movement .1044 < .30). Full22 and own-state stability are NOT_RUN. It remains
+Rp logistic GAN training with a real dimension-normalized R1 term and a fake
+RMS b-cap. No target-fitter substitution. Preserve model shapes, fixed seeds,
+data, budgets, thresholds and evaluation. Keep original decay/noise schedules
+and auxiliary host terms as defaults; declare any assigned formulation change.
+All model training, gradients and Adam state are CUDA; CPU initialization is
+allowed and pinned. Retain original Adam arithmetic (capturable changes it).
 
-The user has changed the immediate priority: preserve the original passing CPU
-recipe and resolve GPU failures first. Its learning-rate decay, noise schedules,
-ordinary Adam, and original auxiliary AE/token host terms belong to this base.
-Earlier instructions forbidding decay or those host terms apply to the separate
-continuous-rate research track, not this porting task. Keep GAN adversarial
-training central; do not substitute a target fitter or introduce target labels,
-centers, or evaluation feedback into training.
+Use two_pole as the first cheap gate. If it fails, stop that proposal and adapt.
+If it passes, run trajectory, then ring and unequal mass, followed by intensity,
+bars and blobs. Passing candidates continue; measured failures stop qualification.
+Only a candidate clearing all seven advances to its own remaining full22 gates.
+Full22 must precede an own-state post-convergence continuation under its declared
+schedule. Acquisition and retention are separate results. No borrowed passes.
 
-The original recipe scores 16/22 in the full native-CUDA audit, including all
-three native 100-mode gates. All six failing hosts pass fresh CPU runs. Copying
-CPU initial parameters before GPU training recovers trajectory and all three
-image gates with identical native-CUDA random draws. Ring and unequal mass
-remain failing. Moving all random draws to CPU recovers a different four; it
-still fails ring and bars. All 24 runs are audited and retained. Do not rerun
-these completed controls or treat any partial diagnostic as 20/22.
+Three fresh Astra/max attempts, one CUDA worker each, at most three distinct
+proposals per attempt and 45minutes. These are caps, not quotas. No nested agents,
+seed sweeps, coefficient grids or uncontrolled extra model/optimizer updates.
+Start a real candidate within five minutes. Small evidence-driven formulations
+and actual frozen tests take priority over theory or new harness infrastructure.
+Do not rerun completed unchanged controls, failed caps/optimism variants, or the
+PyTorch upgrade. R1-containing candidates remain eligible when their tests pass.
 
-The [PyTorch 2.14 check](../torch214-gpu-check/README.md) is complete: both
-blockers reproduce 2.13 exactly under native and CPU initialization. Do not
-repeat that upgrade check unchanged.
+Use local candidate snapshots and fixtures. Prepare source once, verify hashes,
+and save exact declarations before execution. Rebuild expected specs from the
+candidate recipe: image gradient_penalty/penalty_coeff/kappa are aliases for the
+regularizer fields. Keep frozen data/budgets/scoring unchanged. Retain actual
+CUDA update counts, state devices, source/config hashes, raw metrics and all
+FAIL/ERROR/SKIPPED entries. Do not count a repaired receipt audit as new training.
+Run focused mechanism checks; keep tests.jsonl and concise logs easy to inspect.
 
-Use CPU initialization with CUDA training as the practical porting reference.
-First gate on `mode_hold` (seven modes) and `vector_unequal_mass` (rare component
-minimum covariance eigenvalue ratio below .15), then trajectory, intensity,
-bars, and blobs. Test the complete 22 only after a promising proposal clears
-that regression screen. Every scored run must use CUDA parameters, gradients,
-and Adam moments. CPU initialization is allowed and must be declared; CPU model
-training cannot be credited as a GPU pass.
-
-Try at most three meaningful proposals at a time. Favor small changes motivated
-by the measured initialization/random-stream/arithmetic sensitivity, not broad
-coefficient grids. No seed sweeps. Keep architecture, data distribution, fixed
-budgets, targets, scoring, and thresholds unchanged. Do not select a separate
-randomness policy per toy or borrow passes from another candidate. Retain all
-FAIL/ERROR results and repair harness errors before scoring them as failures.
-
-We care most about stability after convergence. A finite-budget 22/22 pass is
-not proof of indefinite stability. After complete GPU qualification, explicitly
-measure a continuation from that candidate's own converged state, preserving
-its declared schedule and RNG. Do not quietly force constant rates onto this
-scheduled recipe or let convergence metrics control training.
-
-Use the source-verified replay/prepare scripts in ../cpu-recipe-gpu-port for the
-controls. Keep source/config hashes, backend environment, raw metrics, actual
-optimizer rates, and device proofs. Write concise logs and a result table with
-PASS/FAIL/ERROR/NOT_RUN separately. Run relevant regression checks after code
-changes. Report the strongest measured candidate, remaining failures, and exact
-replay commands. Do not claim release qualification before all required checks.
-
-[Earlier continuous-rate brief](SEARCH-continuous-history.md) is historical.
+Prior scale alternatives: dimension_rms_bcap and detached_fake_scale_cap both
+lose ring coverage. Two_pole uses d=1, where the selected real term has its
+original R1 strength. Low movement suggests suppressed early learning, but that
+cause has not been isolated. The new lanes own dead-zone geometry, real-penalty
+warmup, and adversarial particle-update response. No toy-name special cases or
+target/metric inputs to training. Summarize measured results and exact replay.

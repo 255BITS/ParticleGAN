@@ -1,66 +1,49 @@
-# GPU formulation search
+# Current task: improve the selected dimension RMS GAN base
 
-The user authorizes a faster search for a better GAN formulation, starting from
-`constraints_simple_regularization` with CPU initialization and CUDA training.
-The full native GPU reference remains 16/22; no new formulation is qualified.
+Read AGENTS.md, ../current-research-base.json and ../dimension-rms-base/README.md.
+The user explicitly selected dimension_rms_hybrid as the new research base.
+Start from its exact config.json + mechanism.py + probe.py. The config by itself
+is NOT the selected formulation; it requires the regularizer installed by the
+probe. Use the archived checksum-verified source preparer and retained fixtures.
+Do not drift back to the original CPU recipe as the starting candidate.
 
-Three independent fresh Astra/max attempts cover critic regularization/objective,
-particle preconditioning, and adversarial game updates. Each has one GPU worker,
-a 60-minute ceiling and at most six meaningful proposals. Adapt after measured
-failures; coefficient grids and seed sweeps remain excluded. Declared changes to
-the adversarial objective, regularizer or optimizer are allowed. Preserve the
-original decay/noise schedules and auxiliary host losses as the starting defaults.
-This formulation scope supersedes earlier instructions freezing the exact loss
-and optimizer. Keep architectures, data, evaluation and training budgets fixed.
+The selected base independently passes six GPU regression toys and fails two_pole
+(movement .1044 < .30). Full22 and own-state stability are NOT_RUN. It remains
+Rp logistic GAN training with a real dimension-normalized R1 term and a fake
+RMS b-cap. No target-fitter substitution. Preserve model shapes, fixed seeds,
+data, budgets, thresholds and evaluation. Keep original decay/noise schedules
+and auxiliary host terms as defaults; declare any assigned formulation change.
+All model training, gradients and Adam state are CUDA; CPU initialization is
+allowed and pinned. Retain original Adam arithmetic (capturable changes it).
 
-Run both ring and unequal-mass gates on each proposal. A candidate passing both
-advances to trajectory, intensity, bars and blobs, then its own full 22-toy GPU
-suite. Qualify stability from its own converged state with its declared schedule.
-Report any extra gradient evaluations separately; never silently spend additional
-optimizer updates. Never combine passes from different candidates or weaken gates.
+Use two_pole as the first cheap gate. If it fails, stop that proposal and adapt.
+If it passes, run trajectory, then ring and unequal mass, followed by intensity,
+bars and blobs. Passing candidates continue; measured failures stop qualification.
+Only a candidate clearing all seven advances to its own remaining full22 gates.
+Full22 must precede an own-state post-convergence continuation under its declared
+schedule. Acquisition and retention are separate results. No borrowed passes.
 
-## Completed work to avoid repeating
+Three fresh Astra/max attempts, one CUDA worker each, at most three distinct
+proposals per attempt and 45minutes. These are caps, not quotas. No nested agents,
+seed sweeps, coefficient grids or uncontrolled extra model/optimizer updates.
+Start a real candidate within five minutes. Small evidence-driven formulations
+and actual frozen tests take priority over theory or new harness infrastructure.
+Do not rerun completed unchanged controls, failed caps/optimism variants, or the
+PyTorch upgrade. R1-containing candidates remain eligible when their tests pass.
 
-- CPU initialization alone passes 4/6 previously failing hosts; ring and rare
-  component remain failing. This is not a measured 20/22 result.
-- Full CPU random streams with CUDA training also pass only 4/6.
-- PyTorch 2.14 reproduces all four 2.13 blocker controls exactly. Precision changes
-  (FP64 linear accumulation, split FP32 linear, FP64 Fourier) did not fix ring.
-- Multiplicity-averaged particle gradients pass unequal mass (eigen ratio .48714),
-  but fail ring (7 modes/HQ .9165).
-- Post-Adam displacement cap passes ring (8 modes/HQ 1), but loses rare mass.
-- Gaussian stream isolation passes ring but fails unequal mass. Composing it with
-  multiplicity averaging was measured separately and still fails ring.
-- Dedicated CPU streams pass unequal mass but fail ring; prior-index isolation
-  adds no success. Gradient row clipping fails both sustained gates.
+Use local candidate snapshots and fixtures. Prepare source once, verify hashes,
+and save exact declarations before execution. Rebuild expected specs from the
+candidate recipe: image gradient_penalty/penalty_coeff/kappa are aliases for the
+regularizer fields. Keep frozen data/budgets/scoring unchanged. Retain actual
+CUDA update counts, state devices, source/config hashes, raw metrics and all
+FAIL/ERROR/SKIPPED entries. Do not count a repaired receipt audit as new training.
+Run focused mechanism checks; keep tests.jsonl and concise logs easy to inspect.
 
-The prior round has nine agent proposals (15 primary gates) plus one direct
-combination (one failed ring gate): no joint winner. Two instrumentation replays
-are not independent proposals. Full receipts remain in the local prior batch
-`/ml2/hypergan/gan-attempts/cpu-recipe-gpu-port-20260924T225604Z`.
-Use those implementation references read-only; do not repeat unchanged proposals.
+Prior scale alternatives: dimension_rms_bcap and detached_fake_scale_cap both
+lose ring coverage. Two_pole uses d=1, where the selected real term has its
+original R1 strength. Low movement suggests suppressed early learning, but that
+cause has not been isolated. The new lanes own dead-zone geometry, real-penalty
+warmup, and adversarial particle-update response. No toy-name special cases or
+target/metric inputs to training. Summarize measured results and exact replay.
 
-Reuse `cpu-recipe-gpu-port/probe.py` and its verified prepared sources. Snapshot
-candidate code and declarations before execution. Retain every FAIL/ERROR with
-raw metrics, source hashes, exact commands, CUDA proof and actual update counts.
-No target-derived corrections or non-adversarial substitute for the GAN.
-
-## Completed formulation round and current steering
-
-The initial three lanes finished all 18 proposals and 36 primary gates: 7 PASS,
-29 FAIL, no joint winner. See [retained code and independent audit](formulation-round-20260924/README.md).
-Direct follow-ups then found Ra + R1(real)/cap(fake), and Ra + symmetric b-cap .5,
-pass both initial blockers but fail trajectory. The hybrid also fails intensity.
-They are not promoted. Further objective ablations restore original Rp while
-retaining each regularizer. Keep trajectory as an early transfer regression.
-
-The user explicitly wants promising candidates to keep advancing unless they
-fail. R1-containing mechanisms remain eligible; avoid rerunning unchanged failed
-R1/R2 proposals. Decide by the measured frozen gates. Do not infer a candidate's
-success or failure from the regularizer's name or history alone.
-
-The direct follow-ups are now complete: seven proposals, 18 gates (9 PASS, 9 FAIL).
-The original-Rp hybrid also fails trajectory, so restoring Rp alone is insufficient.
-The next round uses trajectory as the first cheap gate, then ring/unequal mass.
-Keep promising regularizers eligible; fix measured transfer failures rather than
-repeating already-failed variants or discarding mechanisms based on their names.
+[Previous formulation history](formulation-search-before-dimension-rms.md).
