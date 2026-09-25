@@ -1,0 +1,17 @@
+{
+  "candidate": "bcap_symmetric_half",
+  "description": "Ra + b_cap with kappa .5 at both real and fake; tests stronger bounded slopes after Ra kappa1 missed both gates",
+  "declared_utc": "2026-09-25T00:11:47.625051+00:00",
+  "file_hashes": {
+    "probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+    "config.json": "833b3f0011ba4c8aabfd2f682f96bddcad1576b5a72b6a132c785b51a250d11f"
+  },
+  "source": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/critic_formulation/20260924T233426Z-2040500/repo/reports/toy100/critic-formulation-attempt/prepared/repos/cuda",
+  "source_manifest": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/critic_formulation/20260924T233426Z-2040500/repo/reports/toy100/critic-formulation-attempt/prepared/prepared-sources.json",
+  "source_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "compute": "One D and one G/prior update per step; no added forward/backward evaluations; original 1200-step primary budgets",
+  "initialization": "Original CPU fixture; native CUDA training and random draws",
+  "schedules": "Original unchanged",
+  "full22": "NOT_RUN",
+  "continuation": "NOT_RUN"
+}

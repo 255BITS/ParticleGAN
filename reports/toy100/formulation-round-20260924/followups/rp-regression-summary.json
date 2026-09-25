@@ -1,0 +1,25 @@
+[
+  {
+    "candidate": "rp_r1_fake_cap",
+    "gate": "trajectory",
+    "status": "FAIL",
+    "seconds": 7.172377408016473,
+    "metrics": {
+      "identity_mse": 0.4808841943740845
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/rp_r1_fake_cap/20260925T001513Z/trajectory/result.json",
+    "audit": "PASS"
+  }
+]

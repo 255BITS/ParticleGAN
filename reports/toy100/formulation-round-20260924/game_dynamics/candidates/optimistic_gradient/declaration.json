@@ -1,0 +1,34 @@
+{
+  "candidate": "optimistic_gradient",
+  "declared_utc": "2026-09-24T23:39:10.551037+00:00",
+  "description": "Evidence-driven refinement of late/unstable optimistic_adam: store each players previous RAW gradient, feed 2*g_t-g_previous into ordinary Adam before both first/second-moment updates, then restore raw .grad. First call uses ordinary gradient. All original D/G/prior groups, losses and scheduled rates remain; prediction magnitude now contributes to its own Adam second moment. No extra evaluations or updates.",
+  "source": "prepared/repos/cuda",
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/configs/toy100/constraints_simple_regularization.json",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "file_hashes": {
+    "probe.py": "411d9e5c784579c7aed6d7c3fe772c4426c3936f2ba7700886a1fef3f1591b86",
+    "mechanism.py": "5c95a2476278c0c06a130c7cdfc9d019afd4013ab2a1bb0462086263e35a055a"
+  },
+  "initialization": "retained audited CPU fixtures; native CUDA training and random draws",
+  "invariants": [
+    "architectures",
+    "data",
+    "fixed seeds",
+    "loss and critic regularizer",
+    "all auxiliary AE/token losses",
+    "noise schedules",
+    "learning-rate schedules",
+    "evaluation",
+    "thresholds",
+    "outer step budgets"
+  ],
+  "compute": {
+    "extra_forward_evaluations_per_outer_step": 0,
+    "extra_backward_evaluations_per_outer_step": 0,
+    "extra_optimizer_updates": 0,
+    "base_updates": "one D and one G per host outer step; no added critic steps",
+    "comparison": "equal outer steps and equal model/gradient evaluations; added tensor arithmetic/memory, wall time measured"
+  },
+  "checkpoint": "memory stored in optimizer state; qualification continuation required after all 22"
+}

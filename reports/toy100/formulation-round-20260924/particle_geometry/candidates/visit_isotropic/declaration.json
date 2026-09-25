@@ -1,0 +1,27 @@
+{
+  "candidate": "visit_isotropic",
+  "mechanism": "Multiplicity-averaged sampled gradients; replace particle Adam diagonal moment by one isotropic scalar second moment per row. Update each row moments and their bias-correction clock only when its gradient is nonzero, including direct auxiliary gradients. Scale by inverse sqrt of beta2-EMA active-row fraction to retain dense-clock sparse-Adam conditional energy. Inactive rows do not move. Original betas/epsilon/LR schedule; no clipping.",
+  "rationale": "Shared covariance preserved rare mass (eigen .629) but still collapsed ring to six. Test independent row mobility with direction-preserving isotropic normalization, separating a row visit clock from the global iteration clock; do not distort each row direction coordinate by coordinate.",
+  "extra_forward_backward": 0,
+  "optimizer_updates": "One D plus one G/particle update per frozen iteration; particle custom update substitutes original Adam table update.",
+  "extra_work": "Multiplicity bincount/rescaling, O(N*d) row reductions, CUDA per-row moment/visit updates and bias corrections. No extra forward/backward/update calls; equal-step only.",
+  "unchanged": [
+    "critic/objective",
+    "network Adam",
+    "architecture",
+    "data",
+    "seeds",
+    "RNG",
+    "evaluation",
+    "thresholds",
+    "budgets",
+    "decay/noise schedules",
+    "AE/token auxiliary terms"
+  ],
+  "code_sha256": {
+    "probe.py": "025ad6a9b319be5893e871d2541b0fbb4f9f495d09f7b8b7fd91661c0c63eead",
+    "particle_update.py": "936c9d8ef162920fa597d17798ea768d6bb4d6dff29a0e36eb1a43c01b836858"
+  },
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+}

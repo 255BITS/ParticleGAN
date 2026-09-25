@@ -1,0 +1,7 @@
+{
+  "checks": 3,
+  "analytic_gradient": true,
+  "finite_difference_max_error": 2.3255147807432763e-11,
+  "zero_slope_finite": true,
+  "mechanism_sha256": "ed563b3febb75c324cc78c01e4f708e7c99094451aff801a121c3df1b5c17db2"
+}

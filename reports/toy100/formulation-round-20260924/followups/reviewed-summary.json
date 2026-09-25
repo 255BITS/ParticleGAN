@@ -1,0 +1,299 @@
+[
+  {
+    "candidate": "ra_r1_fake_cap",
+    "gate": "mode_hold",
+    "status": "PASS",
+    "seconds": 41.894261047942564,
+    "metrics": {
+      "modes": 8,
+      "hq": 0.99169921875
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 6,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 6,
+      "first_pass_step": 950,
+      "stable_from_step": 950,
+      "stable_from_seconds": 32.19171519507654,
+      "confirmed_step": 1150,
+      "confirmed_seconds": 39.70761730801314
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1_fake_cap/20260925T000425Z/mode_hold/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1_fake_cap",
+    "gate": "vector_unequal_mass",
+    "status": "PASS",
+    "seconds": 67.60115657304414,
+    "metrics": {
+      "sw1_normalized": 0.030209840191655773,
+      "mean_error": 0.033253904432058334,
+      "covariance_error": 0.037205327302217484,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.013476559892296791,
+      "min_mass_ratio": 0.86669921875,
+      "hq": 0.98779296875,
+      "component_covariance_error": 0.22739442065358162,
+      "component_covariance_errors": [
+        0.20698368549346924,
+        0.16902664303779602,
+        0.14009921252727509,
+        0.39346814155578613
+      ],
+      "component_min_eigen_ratio": 0.4455098807811737,
+      "component_mass": [
+        0.5400390625,
+        0.3134765625,
+        0.129150390625,
+        0.017333984375
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2212,
+        1284,
+        529,
+        71
+      ]
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 16,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 8,
+      "first_pass_step": 300,
+      "stable_from_step": 850,
+      "stable_from_seconds": 50.7410162021406,
+      "confirmed_step": 1050,
+      "confirmed_seconds": 60.33808114519343
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1_fake_cap/20260925T000425Z/vector_unequal_mass/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1_fake_cap",
+    "gate": "trajectory",
+    "status": "FAIL",
+    "seconds": 8.411276346072555,
+    "metrics": {
+      "identity_mse": 0.48009395599365234
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1_fake_cap/20260925T000425Z/trajectory/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1_fake_cap",
+    "gate": "img_intensity2",
+    "status": "FAIL",
+    "seconds": 13.453777994029224,
+    "metrics": {
+      "modes": 2,
+      "hq": 0.84375,
+      "mean_rmse": 0.048208773136138916,
+      "quality_mode_fractions": [
+        0.46875,
+        0.375
+      ],
+      "mode_fractions": [
+        0.5,
+        0.5
+      ],
+      "distribution_tv": 0.0
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1_fake_cap/20260925T000425Z/img_intensity2/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1r2_exposure_mean",
+    "gate": "mode_hold",
+    "status": "FAIL",
+    "seconds": 42.75306391878985,
+    "metrics": {
+      "modes": 7,
+      "hq": 0.91796875
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1r2_exposure_mean/20260925T000425Z/mode_hold/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1r2_exposure_mean",
+    "gate": "vector_unequal_mass",
+    "status": "PASS",
+    "seconds": 68.69527928996831,
+    "metrics": {
+      "sw1_normalized": 0.029045223433465106,
+      "mean_error": 0.041124019771814346,
+      "covariance_error": 0.04840770736336708,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.011035153642296791,
+      "min_mass_ratio": 0.830078125,
+      "hq": 0.977783203125,
+      "component_covariance_error": 0.19238543137907982,
+      "component_covariance_errors": [
+        0.13647697865962982,
+        0.12506915628910065,
+        0.18161971867084503,
+        0.3263758718967438
+      ],
+      "component_min_eigen_ratio": 0.5541149377822876,
+      "component_mass": [
+        0.56103515625,
+        0.295654296875,
+        0.126708984375,
+        0.0166015625
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2298,
+        1211,
+        519,
+        68
+      ]
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 14,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 5,
+      "first_pass_step": 350,
+      "stable_from_step": 1000,
+      "stable_from_seconds": 58.94232974597253,
+      "confirmed_step": 1200,
+      "confirmed_seconds": 68.38930467097089
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1r2_exposure_mean/20260925T000425Z/vector_unequal_mass/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1r2_shared_coordinate",
+    "gate": "mode_hold",
+    "status": "FAIL",
+    "seconds": 40.96925018308684,
+    "metrics": {
+      "modes": 8,
+      "hq": 0.904052734375
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 3,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 1,
+      "first_pass_step": 1050,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1r2_shared_coordinate/20260925T000425Z/mode_hold/result.json",
+    "audit": "PASS"
+  },
+  {
+    "candidate": "ra_r1r2_shared_coordinate",
+    "gate": "vector_unequal_mass",
+    "status": "FAIL",
+    "seconds": 68.25028554117307,
+    "metrics": {
+      "sw1_normalized": 0.025778306852477655,
+      "mean_error": 0.03355845436453819,
+      "covariance_error": 0.0404498316347599,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.003271469846367836,
+      "min_mass_ratio": 0.91552734375,
+      "hq": 0.972900390625,
+      "component_covariance_error": 0.5742740519344807,
+      "component_covariance_errors": [
+        0.2876759469509125,
+        0.20686458051204681,
+        0.9879882335662842,
+        0.8145674467086792
+      ],
+      "component_min_eigen_ratio": 0.022554771974682808,
+      "component_mass": [
+        0.552490234375,
+        0.30078125,
+        0.12841796875,
+        0.018310546875
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2263,
+        1232,
+        526,
+        75
+      ]
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 8,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": 400,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/ra_r1r2_shared_coordinate/20260925T000425Z/vector_unequal_mass/result.json",
+    "audit": "PASS"
+  }
+]

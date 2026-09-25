@@ -1,0 +1,18 @@
+{
+  "candidate": "rp_r1_fake_cap",
+  "description": "Restore original Rp objective to ra_r1_fake_cap after that Ra formulation passed both blockers but failed trajectory. All other candidate settings unchanged; this tests whether the shared objective change causes transfer regression.",
+  "declared_utc": "2026-09-25T00:15:13.977496+00:00",
+  "file_hashes": {
+    "probe.py": "b68488e3901c78c63c8275b335c75ecc0c59a69c93380417023d416baab25419",
+    "hybrid_install.py": "0ebb0d552b0dfa884c8c85b84816357809cdde59d1ab1b9fe8dd6d2eb81c6498",
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+  },
+  "source": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/critic_formulation/20260924T233426Z-2040500/repo/reports/toy100/critic-formulation-attempt/prepared/repos/cuda",
+  "source_manifest": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/critic_formulation/20260924T233426Z-2040500/repo/reports/toy100/critic-formulation-attempt/prepared/prepared-sources.json",
+  "source_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "compute": "One D and one G/prior update per step; no added forward/backward evaluations; original 1200-step primary budgets",
+  "initialization": "Original CPU fixture; native CUDA training and random draws",
+  "schedules": "Original unchanged",
+  "full22": "NOT_RUN",
+  "continuation": "NOT_RUN"
+}

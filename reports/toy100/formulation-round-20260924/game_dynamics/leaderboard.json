@@ -1,0 +1,576 @@
+[
+  {
+    "candidate": "optimistic_adam",
+    "blocker_passes": 0,
+    "blocker_completed": 2,
+    "mean_final_shortfall": 0.08850077539682388,
+    "gates": {
+      "mode_hold": {
+        "status": "FAIL",
+        "seconds": 34.570677034789696,
+        "metrics": {
+          "modes": 8,
+          "hq": 1.0
+        },
+        "suffix": 3,
+        "shortfall": 0.0,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "optimistic_adam",
+          "calls": 2400,
+          "corrected_tensors": 20383,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/optimistic_adam/mode_hold/result.json"
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "seconds": 48.53959881910123,
+        "metrics": {
+          "sw1_normalized": 0.12267578519356861,
+          "mean_error": 0.1720963716506958,
+          "covariance_error": 0.2795429825782776,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.07797849923372269,
+          "min_mass_ratio": 0.1953125,
+          "hq": 0.99658203125,
+          "component_covariance_error": 0.39851608127355576,
+          "component_min_eigen_ratio": 0.02351110428571701
+        },
+        "suffix": 0,
+        "shortfall": 0.17700155079364777,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "optimistic_adam",
+          "calls": 2400,
+          "corrected_tensors": 17985,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/optimistic_adam/vector_unequal_mass/result.json"
+      },
+      "trajectory": {
+        "status": "NOT_RUN"
+      },
+      "img_intensity2": {
+        "status": "NOT_RUN"
+      },
+      "img_bars4": {
+        "status": "NOT_RUN"
+      },
+      "img_blobs4": {
+        "status": "NOT_RUN"
+      }
+    },
+    "full22": "NOT_RUN",
+    "own_state_continuation": "NOT_RUN"
+  },
+  {
+    "candidate": "optimistic_gradient",
+    "blocker_passes": 0,
+    "blocker_completed": 2,
+    "mean_final_shortfall": 0.0957059980266624,
+    "gates": {
+      "mode_hold": {
+        "status": "FAIL",
+        "seconds": 32.71926217991859,
+        "metrics": {
+          "modes": 7,
+          "hq": 1.0
+        },
+        "suffix": 0,
+        "shortfall": 0.0625,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "optimistic_gradient",
+          "calls": 2400,
+          "corrected_tensors": 20383,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/optimistic_gradient/mode_hold/result.json"
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "seconds": 46.7909302408807,
+        "metrics": {
+          "sw1_normalized": 0.11035385184535765,
+          "mean_error": 0.15057170391082764,
+          "covariance_error": 0.15441592037677765,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.08574218302965164,
+          "min_mass_ratio": 0.5859375,
+          "hq": 0.962158203125,
+          "component_covariance_error": 0.491627711802721,
+          "component_min_eigen_ratio": 0.033979203552007675
+        },
+        "suffix": 0,
+        "shortfall": 0.1289119960533248,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "optimistic_gradient",
+          "calls": 2400,
+          "corrected_tensors": 17985,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/optimistic_gradient/vector_unequal_mass/result.json"
+      },
+      "trajectory": {
+        "status": "NOT_RUN"
+      },
+      "img_intensity2": {
+        "status": "NOT_RUN"
+      },
+      "img_bars4": {
+        "status": "NOT_RUN"
+      },
+      "img_blobs4": {
+        "status": "NOT_RUN"
+      }
+    },
+    "full22": "NOT_RUN",
+    "own_state_continuation": "NOT_RUN"
+  },
+  {
+    "candidate": "joint_lookahead",
+    "blocker_passes": 0,
+    "blocker_completed": 2,
+    "mean_final_shortfall": 0.1963539473298523,
+    "gates": {
+      "mode_hold": {
+        "status": "FAIL",
+        "seconds": 33.38812536583282,
+        "metrics": {
+          "modes": 4,
+          "hq": 0.996826171875
+        },
+        "suffix": 0,
+        "shortfall": 0.25,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "joint_lookahead",
+          "calls": 2400,
+          "roles": {
+            "d": 1200,
+            "g": 1200
+          },
+          "synchronizations": 240,
+          "period": 5,
+          "slow_fraction": 0.5,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/joint_lookahead/mode_hold/result.json"
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "seconds": 48.16095748101361,
+        "metrics": {
+          "sw1_normalized": 0.11287650702436744,
+          "mean_error": 0.1657627373933792,
+          "covariance_error": 0.28168606758117676,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.08769530802965164,
+          "min_mass_ratio": 0.3662109375,
+          "hq": 1.0,
+          "component_covariance_error": 0.3659513369202614,
+          "component_min_eigen_ratio": 0.02156289480626583
+        },
+        "suffix": 0,
+        "shortfall": 0.14270789465970463,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "joint_lookahead",
+          "calls": 2400,
+          "roles": {
+            "d": 1200,
+            "g": 1200
+          },
+          "synchronizations": 240,
+          "period": 5,
+          "slow_fraction": 0.5,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/joint_lookahead/vector_unequal_mass/result.json"
+      },
+      "trajectory": {
+        "status": "NOT_RUN"
+      },
+      "img_intensity2": {
+        "status": "NOT_RUN"
+      },
+      "img_bars4": {
+        "status": "NOT_RUN"
+      },
+      "img_blobs4": {
+        "status": "NOT_RUN"
+      }
+    },
+    "full22": "NOT_RUN",
+    "own_state_continuation": "NOT_RUN"
+  },
+  {
+    "candidate": "predictive_critic",
+    "blocker_passes": 0,
+    "blocker_completed": 2,
+    "mean_final_shortfall": 0.5,
+    "gates": {
+      "mode_hold": {
+        "status": "FAIL",
+        "seconds": 34.34764693095349,
+        "metrics": {
+          "modes": 0,
+          "hq": 0.0
+        },
+        "suffix": 0,
+        "shortfall": 1.0,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "predictive_critic",
+          "calls": 2400,
+          "roles": {
+            "d": 1200,
+            "g": 1200
+          },
+          "predictions": 1200,
+          "restores": 1200,
+          "pending": 0,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "virtual_critic_displacements": 1200,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/predictive_critic/mode_hold/result.json"
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "seconds": 47.42553998390213,
+        "metrics": {
+          "sw1_normalized": 0.10406519657070594,
+          "mean_error": 0.13975192606449127,
+          "covariance_error": 0.21172329783439636,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.08427733927965164,
+          "min_mass_ratio": 0.45166015625,
+          "hq": 0.9990234375,
+          "component_covariance_error": 0.2108361553400755,
+          "component_min_eigen_ratio": 0.5187562108039856
+        },
+        "suffix": 4,
+        "shortfall": 0.0,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "predictive_critic",
+          "calls": 2400,
+          "roles": {
+            "d": 1200,
+            "g": 1200
+          },
+          "predictions": 1200,
+          "restores": 1200,
+          "pending": 0,
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "virtual_critic_displacements": 1200,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/predictive_critic/vector_unequal_mass/result.json"
+      },
+      "trajectory": {
+        "status": "NOT_RUN"
+      },
+      "img_intensity2": {
+        "status": "NOT_RUN"
+      },
+      "img_bars4": {
+        "status": "NOT_RUN"
+      },
+      "img_blobs4": {
+        "status": "NOT_RUN"
+      }
+    },
+    "full22": "NOT_RUN",
+    "own_state_continuation": "NOT_RUN"
+  },
+  {
+    "candidate": "optimistic_critic",
+    "blocker_passes": 0,
+    "blocker_completed": 2,
+    "mean_final_shortfall": 0.5091036015914546,
+    "gates": {
+      "mode_hold": {
+        "status": "FAIL",
+        "seconds": 31.47466385201551,
+        "metrics": {
+          "modes": 1,
+          "hq": 0.060791015625
+        },
+        "suffix": 0,
+        "shortfall": 0.9037272135416667,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "optimistic_critic",
+          "calls": 2400,
+          "roles": {
+            "d": 1200,
+            "g": 1200
+          },
+          "corrected_tensors": 9592,
+          "adam_state_clocks": [
+            {
+              "role": "d",
+              "minimum": 1200,
+              "maximum": 1200
+            },
+            {
+              "role": "g",
+              "minimum": 1200,
+              "maximum": 1200
+            }
+          ],
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/optimistic_critic/mode_hold/result.json"
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "seconds": 43.729018253972754,
+        "metrics": {
+          "sw1_normalized": 0.046268686703648206,
+          "mean_error": 0.06375707685947418,
+          "covariance_error": 0.10276588797569275,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.024023422971367836,
+          "min_mass_ratio": 0.54931640625,
+          "hq": 0.979248046875,
+          "component_covariance_error": 0.28130024671554565,
+          "component_min_eigen_ratio": 0.0469680093228817
+        },
+        "suffix": 0,
+        "shortfall": 0.11447998964124256,
+        "adam_calls": 2400,
+        "optimizer_calls": [
+          1200,
+          1200
+        ],
+        "correction": {
+          "mechanism": "optimistic_critic",
+          "calls": 2400,
+          "roles": {
+            "d": 1200,
+            "g": 1200
+          },
+          "corrected_tensors": 9592,
+          "adam_state_clocks": [
+            {
+              "role": "d",
+              "minimum": 1200,
+              "maximum": 1200
+            },
+            {
+              "role": "g",
+              "minimum": 1200,
+              "maximum": 1200
+            }
+          ],
+          "extra_forward_evaluations": 0,
+          "extra_backward_evaluations": 0,
+          "extra_optimizer_updates": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/optimistic_critic/vector_unequal_mass/result.json"
+      },
+      "trajectory": {
+        "status": "NOT_RUN"
+      },
+      "img_intensity2": {
+        "status": "NOT_RUN"
+      },
+      "img_bars4": {
+        "status": "NOT_RUN"
+      },
+      "img_blobs4": {
+        "status": "NOT_RUN"
+      }
+    },
+    "full22": "NOT_RUN",
+    "own_state_continuation": "NOT_RUN"
+  },
+  {
+    "candidate": "extragradient",
+    "blocker_passes": 0,
+    "blocker_completed": 2,
+    "mean_final_shortfall": 0.5123649442361461,
+    "gates": {
+      "mode_hold": {
+        "status": "FAIL",
+        "seconds": 82.18336624884978,
+        "metrics": {
+          "modes": 1,
+          "hq": 0.0849609375
+        },
+        "suffix": 0,
+        "shortfall": 0.8902994791666667,
+        "adam_calls": 4800,
+        "optimizer_calls": [
+          2400,
+          2400
+        ],
+        "correction": {
+          "mechanism": "extragradient",
+          "calls": 4800,
+          "roles": {
+            "predictor": {
+              "d": 1200,
+              "g": 1200
+            },
+            "corrector": {
+              "d": 1200,
+              "g": 1200
+            },
+            "ordinary": {
+              "d": 0,
+              "g": 0
+            }
+          },
+          "outer_steps": 1200,
+          "rng_replays": 1200,
+          "extra_random_evaluations": 10318,
+          "extra_forward_backward_blocks": 1200,
+          "extra_optimizer_preview_calls": 2400,
+          "accepted_optimizer_updates": 2400,
+          "model_gradient_work_multiplier": 2,
+          "pending": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/extragradient/mode_hold/result.json"
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "seconds": 102.81376499403268,
+        "metrics": {
+          "sw1_normalized": 0.09006857492215811,
+          "mean_error": 0.12314682453870773,
+          "covariance_error": 0.20249684154987335,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.05014646798372269,
+          "min_mass_ratio": 0.341796875,
+          "hq": 0.98193359375,
+          "component_covariance_error": 0.6769922748208046,
+          "component_min_eigen_ratio": 0.029012631624937057
+        },
+        "suffix": 0,
+        "shortfall": 0.1344304093056255,
+        "adam_calls": 4800,
+        "optimizer_calls": [
+          2400,
+          2400
+        ],
+        "correction": {
+          "mechanism": "extragradient",
+          "calls": 4800,
+          "roles": {
+            "predictor": {
+              "d": 1200,
+              "g": 1200
+            },
+            "corrector": {
+              "d": 1200,
+              "g": 1200
+            },
+            "ordinary": {
+              "d": 0,
+              "g": 0
+            }
+          },
+          "outer_steps": 1200,
+          "rng_replays": 1200,
+          "extra_random_evaluations": 7918,
+          "extra_forward_backward_blocks": 1200,
+          "extra_optimizer_preview_calls": 2400,
+          "accepted_optimizer_updates": 2400,
+          "model_gradient_work_multiplier": 2,
+          "pending": 0,
+          "memory_device": "cuda"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/runs/extragradient/vector_unequal_mass/result.json"
+      },
+      "trajectory": {
+        "status": "NOT_RUN"
+      },
+      "img_intensity2": {
+        "status": "NOT_RUN"
+      },
+      "img_bars4": {
+        "status": "NOT_RUN"
+      },
+      "img_blobs4": {
+        "status": "NOT_RUN"
+      }
+    },
+    "full22": "NOT_RUN",
+    "own_state_continuation": "NOT_RUN"
+  }
+]

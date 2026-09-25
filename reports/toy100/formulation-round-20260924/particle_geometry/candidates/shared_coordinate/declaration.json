@@ -1,0 +1,27 @@
+{
+  "candidate": "shared_coordinate",
+  "mechanism": "Replace only particle Adam second moment by EMA of squared gradients averaged across particle rows, retaining row gradients and original beta1/beta2, bias correction, epsilon and LR schedule. No clipping. Global coordinate-wise scale transports low-gradient particles without permanently private denominators.",
+  "rationale": "Prior displacement clipping loses rare mass; shared moments retain gradient magnitude and relative mobility without isolated row accumulators.",
+  "extra_forward_backward": 0,
+  "optimizer_updates": "One D plus one G/particle update per frozen iteration; particle custom update substitutes original Adam table update.",
+  "extra_work": "O(N*d) square and reduction and broadcast; equal-step only, not exact equal-compute.",
+  "unchanged": [
+    "critic/objective",
+    "network Adam",
+    "architecture",
+    "data",
+    "seeds",
+    "RNG",
+    "evaluation",
+    "thresholds",
+    "budgets",
+    "decay/noise schedules",
+    "AE/token auxiliary terms"
+  ],
+  "code_sha256": {
+    "probe.py": "13729130c240a5b8747dbb8812fa1f6dbbf31ccaf3584702e7961cd4253eb2b6",
+    "particle_update.py": "30978ca6ecb6a171669aa8ada1941a57034f164882057744990a6d12095d20e2"
+  },
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+}

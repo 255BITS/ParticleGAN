@@ -1,0 +1,13 @@
+{
+  "candidate": "c04_hinge_cap",
+  "declared_at": "2026-09-24T23:41:49.133589+00:00",
+  "mechanism": "Existing relativistic-pair hinge discriminator and linear non-saturating generator objective, with original b_cap. C02 averaging improved rare mass but ring remained stuck; test removal of sigmoid weighting so each fake score receives a constant generator loss derivative. No extra evaluations or updates.",
+  "changed_fields": {
+    "loss_type": "hinge"
+  },
+  "preserved": "Adam, architecture, frozen data/seeds/evaluation/budgets, original decay/noise schedules, auxiliary AE/token losses, native CUDA RNG, retained CPU initialization",
+  "compute": "One D and one G/prior Adam update per frozen step; same two sample-point critic input-gradient forwards/backwards and two optimization backwards as b_cap. No added model forwards, backwards, updates, or random draws. Equal-step and equal nominal network compute; scalar loss arithmetic may differ.",
+  "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+  "config_sha256": "31fc848e6511937477095b7c5a3377ab4c3e6e6e3e61d8a372f3aefc65ad0f6d",
+  "prepared_sources_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2"
+}

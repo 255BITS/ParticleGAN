@@ -1,0 +1,1 @@
+{"status": "PASS", "cases": 3, "checks": ["penalty value", "parameter gradient", "two critic forwards", "zero slope finite"]}

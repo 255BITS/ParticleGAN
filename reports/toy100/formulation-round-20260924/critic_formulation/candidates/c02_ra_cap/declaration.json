@@ -1,0 +1,13 @@
+{
+  "candidate": "c02_ra_cap",
+  "declared_at": "2026-09-24T23:38:06.750303+00:00",
+  "mechanism": "Existing relativistic-average logistic with original b_cap. Replace arbitrary real/fake pair scores by opposing batch-average scores to reduce variable adversarial weighting; same discriminator and generator evaluations.",
+  "changed_fields": {
+    "gan_mode": "ra"
+  },
+  "preserved": "Adam, architecture, frozen data/seeds/evaluation/budgets, original decay/noise schedules, auxiliary AE/token losses, native CUDA RNG, retained CPU initialization",
+  "compute": "One D and one G/prior Adam update per frozen step; same two sample-point critic input-gradient forwards/backwards and two optimization backwards as b_cap. No added model forwards, backwards, updates, or random draws. Equal-step and equal nominal network compute; scalar loss arithmetic may differ.",
+  "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+  "config_sha256": "c04129bdd0ffdd7e89fd3be94008007fd8631838ea6820a08e8c39fd281e7260",
+  "prepared_sources_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2"
+}

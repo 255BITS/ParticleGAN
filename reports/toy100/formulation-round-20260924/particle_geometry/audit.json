@@ -1,0 +1,164 @@
+{
+  "status": "PASS",
+  "gates": 12,
+  "prepared_files": 1614,
+  "checks": [
+    {
+      "candidate": "density_mobility",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "sustained_suffix": 0,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "density_mobility",
+      "gate": "vector_unequal_mass",
+      "status": "FAIL",
+      "sustained_suffix": 3,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "exposure_mean",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "sustained_suffix": 0,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "exposure_mean",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "sustained_suffix": 7,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "exposure_trust",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "sustained_suffix": 0,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "exposure_trust",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "sustained_suffix": 6,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "shared_coordinate",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "sustained_suffix": 0,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "shared_coordinate",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "sustained_suffix": 11,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "shared_geometry",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "sustained_suffix": 0,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "shared_geometry",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "sustained_suffix": 5,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "visit_isotropic",
+      "gate": "mode_hold",
+      "status": "FAIL",
+      "sustained_suffix": 0,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    },
+    {
+      "candidate": "visit_isotropic",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "sustained_suffix": 9,
+      "frozen_steps": 1200,
+      "actual_adam_calls": 2400,
+      "particle_updates": [
+        1200
+      ],
+      "identical_native_random_receipt": true,
+      "identical_cpu_initialization": true
+    }
+  ],
+  "seconds": 1.1742918130476028
+}

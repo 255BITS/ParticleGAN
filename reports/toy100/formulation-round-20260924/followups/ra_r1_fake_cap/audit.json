@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "gates": 4,
+  "source_code": true,
+  "frozen_gates": true,
+  "declared_recipe_fields": true,
+  "cuda_updates": true,
+  "init_rng_schedules": true,
+  "audit_repair": "Original assertion compared permitted recipe fields inside spec to baseline recipe. Corrected to declared objective/regularizer; all data/budgets/thresholds/evaluation unchanged. Original error.txt retained. No training rerun."
+}

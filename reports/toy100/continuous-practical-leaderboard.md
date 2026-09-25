@@ -54,3 +54,10 @@ hold checks. Their published adapters cover only two toys.
 [PyTorch 2.14 upgrade check](torch214-gpu-check/README.md): both remaining
 blockers fail identically to 2.13 under native and CPU initialization. Four
 full-budget CUDA runs; no change to the 16/22 full-suite result.
+
+[Completed formulation round](formulation-round-20260924/README.md): 18 proposals,
+36 primary GPU gates, 7 PASS / 29 FAIL. None passes both blockers. The full-suite
+reference stays 16/22. [Measured follow-ups](formulation-round-20260924/FOLLOWUPS.md)
+include two formulations that pass both blockers but fail trajectory; neither is
+promoted. R1/R2 history is a reason to avoid unchanged repeats, not to reject a
+candidate that passes its measured gates.
