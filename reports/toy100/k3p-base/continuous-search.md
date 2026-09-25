@@ -105,3 +105,14 @@ training promptly, adapt from measured failures, and preserve a final leaderboar
 The selected parent has already been measured; do not spend the round rerunning
 unchanged baselines. A useful negative result should identify the failed gate
 and narrow the next mechanism choice.
+
+Latest user completion rule: a winner must also earn **4/4 seeds on each of
+three 100-Gaussian layouts**: grid100, rotated100 and staggered100, seeds1234–1237.
+That is12 full7000-update runs, coverage AND accuracy. The22-toy matrix contains
+seed1234 for each layout; the other9 runs are additional winner qualification.
+This is an explicitly requested fixed matrix, not permission for seed search or
+tuning. Require the declared30000-update long-term continuation in addition to
+canonical and delayed/repeated tests. Once the same exact formulation passes
+everything, stop the remaining search jobs and promote it in PR155. Until then
+keep searching and verifying; do not promote a partial lead or merge the PR
+automatically.

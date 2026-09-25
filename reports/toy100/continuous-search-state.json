@@ -18,11 +18,31 @@
     "matched_frozen_control_required": true,
     "own_toy_passes": 22,
     "horizon_independence_required": true,
-    "delayed_and_repeated_change_checks_required": true
+    "delayed_and_repeated_change_checks_required": true,
+    "long_term_updates": 30000,
+    "long_term_protocol": "reports/toy100/continuous-round-3/long-term-stability-protocol.json",
+    "native100_matrix": {
+      "problems": [
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "seeds": [
+        1234,
+        1235,
+        1236,
+        1237
+      ],
+      "required_passes": 12,
+      "required_passes_per_problem": 4,
+      "updates_each": 7000,
+      "coverage_and_accuracy_required": true,
+      "explicit_user_qualification_matrix": true
+    }
   },
   "unverified_candidates": {
     "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
-    "p3_floor_reopen": "Own sensitive gate verification running; hold1200+300, stationary5/5, prehold120/120, FAIL77/81 recovery, scheduled noise. Not promoted.",
+    "p3_floor_reopen": "Sensitive4 PASS after observation-hook repair; remaining18 NOT_RUN. Hold1200+300, FAIL77/81 recovery, scheduled noise. Not promoted.",
     "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted.",
     "rp1_signal_close": "PROVISIONAL: own hold1200/1200+extension300/300; live shiftUNCONFIRMED with stationary5/5, prehold120/120 and deadline81/81. Matched full-state frozen control, own22, horizon audit and delayed/repeated stress pending. Not promoted."
   },
@@ -109,8 +129,14 @@
     }
   ],
   "verification_ownership": {
-    "rp1_canonical_and_toys": "k3p_responsive_precision Grok lane",
+    "rp1_canonical_and_natives": "k3p_responsive_precision Grok lane",
+    "rp1_transfer19": "verify_p3_gates Grok lane after completing P3 sensitive4",
     "rp1_horizon_and_adapter_audit": "k3p_extragradient Codex slot redirected by supervisor",
     "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only"
-  }
+  },
+  "on_verified_completion": [
+    "Stop all remaining search agents and benchmark jobs, preserving their partial evidence",
+    "Promote the same verified formulation in PR155 and update selected base, leaderboard and explanation",
+    "Do not merge PR automatically"
+  ]
 }

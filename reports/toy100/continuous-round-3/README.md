@@ -62,3 +62,12 @@ Only after canonical gates qualify does the separately frozen
 [delayed/repeated-change protocol](stress-protocol.json) run. No indefinite-learning
 claim follows from one successful target shift. All22 toys, horizon equivalence,
 matched control and stress results are still pending for RP1.
+
+The user clarified the final native matrix: **all three layouts each4/4 seeds**,
+grid100/rotated100/staggered100 at1234–1237. This is12 full7000-update native runs,
+each requiring coverage AND accuracy; it adds9 runs beyond the22-toy matrix.
+This fixed winner qualification is explicitly authorized, with no seed search.
+The separately declared [30000-update long-term continuation](long-term-stability-protocol.json)
+preserves the9000 stress windows and adds another change at27000. After the same
+formulation clears every requirement, the supervisor will stop remaining searches
+and promote it in PR155. Until then the search and verification continue.

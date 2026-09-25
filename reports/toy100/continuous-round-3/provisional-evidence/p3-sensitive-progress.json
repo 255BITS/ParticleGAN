@@ -1,0 +1,31 @@
+{
+  "scope": "Four sensitive toy gates only, not full22 or continuous-learning qualification",
+  "run": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470",
+  "gates": [
+    {
+      "candidate": "p3_floor_reopen",
+      "gate": "mode_hold",
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470/repo/reports/toy100/verify-p3-attempt/runs/mode_hold/result.json"
+    },
+    {
+      "candidate": "p3_floor_reopen",
+      "gate": "vector_unequal_mass",
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470/repo/reports/toy100/verify-p3-attempt/runs/vector_unequal_mass/result.json"
+    },
+    {
+      "candidate": "p3_floor_reopen",
+      "gate": "vector_unequal_width",
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470/repo/reports/toy100/verify-p3-attempt/runs/vector_unequal_width/result.json"
+    },
+    {
+      "candidate": "p3_floor_reopen",
+      "gate": "img_stripes2",
+      "status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470/repo/reports/toy100/verify-p3-attempt/runs/img_stripes2/result.json"
+    }
+  ],
+  "original_observer_error_retained_in_ledger": true
+}

@@ -41,3 +41,13 @@ also needs separately declared late and repeated shifts on uninterrupted state.
 Do not weaken canonical gates, borrow another candidate's scores, repeat seeds,
 or run coefficient grids. Leave exact frozen sources and commands for unfinished
 verification. Supervisor alone can promote after auditing all evidence.
+
+The user's latest promotion bar additionally requires **4/4 seeds for each of
+all three native layouts** (grid100, rotated100, staggered100), seeds1234–1237.
+All12 runs must pass full7000-update coverage AND accuracy. Three seed1234 runs
+are already in the22; the remaining9 are additional winner qualification explicitly
+requested by the user, not exploratory seed experiments. Long-term qualification
+uses long-term-stability-protocol.json: same uninterrupted state through30000,
+including the original9000 stress windows and another late target change. Stop
+all remaining searches and promote in PR155 only after the complete conjunction
+passes. Do not stop or promote merely on81/81 recovery or partial toy gates.
