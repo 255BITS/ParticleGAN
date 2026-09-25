@@ -67,6 +67,11 @@
       "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/logs/rp1-native-rotated100.log",
       "snapshot": "ed31263275db2513594800d00b002b9a2f9c73dda7778c8c09fc2a7f982872db.log.gz",
       "sha256": "ed31263275db2513594800d00b002b9a2f9c73dda7778c8c09fc2a7f982872db"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-native-grid100/native/grid100/events.jsonl",
+      "snapshot": "007e4b5ddb10d8ed5f2b5b395faba10217d4f3e801730490dbdba21371dac62f.jsonl.gz",
+      "sha256": "007e4b5ddb10d8ed5f2b5b395faba10217d4f3e801730490dbdba21371dac62f"
     }
   ]
 }

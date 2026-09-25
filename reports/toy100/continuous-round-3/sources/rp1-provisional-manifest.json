@@ -29,5 +29,14 @@
       "sha256": "41f7b935a3e71249cd95b0973fa977ba0a63e9fb8fdbd2d58dbc75021e7cfcdb",
       "snapshot": "provisional-evidence/41f7b935a3e71249cd95b0973fa977ba0a63e9fb8fdbd2d58dbc75021e7cfcdb.json.gz"
     }
-  }
+  },
+  "declaration_errata": [
+    {
+      "file": "DECLARATION.md",
+      "claim": "250 consecutive steps below a quarter of the peak",
+      "actual": "_update_phase increments quiet below .25, leaves it unchanged between .25 and .5 absent another reopen trigger, and resets on reopen. These are cumulative quiet observations since reopen, not a consecutive streak.",
+      "source_unchanged": true,
+      "score_effect": "None; report describes the frozen executed algorithm."
+    }
+  ]
 }

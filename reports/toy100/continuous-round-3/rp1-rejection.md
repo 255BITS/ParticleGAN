@@ -29,10 +29,26 @@ The late rate is near its floor. This result alone cannot establish whether the
 cause is early closing, insufficient subsequent motion, or another interaction.
 A new mechanism must measure that distinction instead of tuning to the gate.
 
-The two failures point in opposite timing directions: the short image never
-closes, while the native closes early and retains biased centers. A general
-training signal must preserve acquisition and later precision across both. Do
-not replace one duration constant with another or branch on task identity.
+A closer [offline trace inspection](rp1-native-drift-analysis.json) narrows the
+native diagnosis. Live center RMS improves from .33112 at step 1000 to .24078 at
+4000, .22061 at 5000 and .20631 at 5500. It has not yet passed .20. The controller
+is still at the .01 network floor at the 5650 sample, but by 5700 it raises that
+multiplier to .208 on the unchanged task, holds it through 5900, then closes.
+Center error rises to .25022 at 5750 and .28688 at 7000. The guard clips at 5672;
+these sampled traces do not prove the exact causal trigger or that suppressing
+the restart would have passed. They support investigating false restarts instead
+of assuming that slow floor updates alone caused the failure.
+
+The short image never closes; the native continues improving at its floor, then
+reopens on a stationary target and loses precision. A general training signal
+must distinguish acquisition, ordinary fluctuation and real target change. No
+new proposal may read these evaluation scores or hard-code these event times.
+
+Source review also corrects a wording error in the frozen RP1 declaration:
+its quiet counter is **not consecutive**. A low level increments it, an intermediate
+level leaves it unchanged, and a reopen resets it. The original declaration said
+“consecutive”; the source and raw results remain preserved unchanged. This is a
+documentation correction, not a new formulation or repaired score.
 
 The independent 1800-update horizon audit matches training tensors, optimizer,
 controller, EMA, RNG, rates and noise. The raw whole-capture comparison fails only
