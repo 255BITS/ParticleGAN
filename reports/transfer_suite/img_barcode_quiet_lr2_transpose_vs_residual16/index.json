@@ -1,0 +1,24 @@
+{
+  "tip_sha": "ac83ce32b99bd488c2dd700786c0c93f0bb1f27b",
+  "hit": true,
+  "arms": {
+    "baseline_transpose12": {
+      "arm": "baseline_transpose12",
+      "verdict": "FAIL",
+      "modes": 0,
+      "hq": 0.34375,
+      "mean_rmse": 0.05558907240629196,
+      "confirmed_step": null,
+      "seconds": 5.653631188208237
+    },
+    "residual16": {
+      "arm": "residual16",
+      "verdict": "PASS",
+      "modes": 2,
+      "hq": 1.0,
+      "mean_rmse": 0.02815309539437294,
+      "confirmed_step": 525,
+      "seconds": 4.9579001979436725
+    }
+  }
+}
