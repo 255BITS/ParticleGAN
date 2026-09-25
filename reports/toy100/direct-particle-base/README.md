@@ -41,6 +41,16 @@ FP32. Retained CPU initialization performs zero optimizer updates. Keep the
 PyTorch2.13.0+cu126 deterministic, TF32-off, one-thread environment and original
 noncapturable Adam arithmetic.
 
+**probe-fast.py measures the same numbers for less instrumentation cost.** It
+caches the per-overload tag lookup in the random-op dispatch hook, clones
+parameters and gradients only for recorded mobility steps, and stops recomputing
+invariant optimizer receipts every step. The audited random-operation set, the
+per-draw stream digest and every frozen spec are unchanged. Eight gates,
+including the two_pole PASS and the unequal-width FAIL, reproduce the committed
+results exactly under replay.py's non-timing comparison; probe-fast-check.json
+holds the receipt and the measured times. A candidate adopting it declares that
+hash in its own declaration.json; probe.py and the bundle hashes are unchanged.
+
 | Measured toy | Verdict | Terminal passing checks |
 |---|---|---:|
 | ae_gan_hold | PASS | 22 |
