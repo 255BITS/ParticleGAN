@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T181418Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -82,10 +82,14 @@
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
     "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T17:38:22.157392+00:00",
+    "verified_live_utc": "2026-09-25T18:17:39.269904+00:00",
     "verified_live_counts": {
       "codex": 1,
       "grok": 7
+    },
+    "verified_gpu_reservations": {
+      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 4,
+      "GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 4
     }
   },
   "active_batches": [
@@ -97,7 +101,8 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T181418Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181418Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z"
   ],
   "completed_rounds": [
     {
@@ -127,5 +132,12 @@
     "Stop all remaining search agents and benchmark jobs, preserving their partial evidence",
     "Promote the same verified formulation in PR155 and update selected base, leaderboard and explanation",
     "Do not merge PR automatically"
-  ]
+  ],
+  "round3_first_wave": {
+    "proposals": 17,
+    "qualified_winners": 0,
+    "canonical_protocols_complete": 33,
+    "canonical_protocols_not_run": 1,
+    "report": "reports/toy100/continuous-round-3/first-wave-summary.json"
+  }
 }

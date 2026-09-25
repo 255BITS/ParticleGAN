@@ -11,6 +11,26 @@ proposals with no winner. P3 was the strongest round-2 partial lead: hold1200/12
 extension300/300, stationary5/5, pre-hold120/120 and failed recovery77/81.
 Its remaining horizon-based noise and four deadline misses are binding failures.
 
+The initial wave of round 3 has finished **17 formulations, no qualified winner**.
+Of 34 expected canonical hold/shift protocols, 33 completed; EG1's shift was not
+run after its slot moved to independent RP1 auditing. Negative momentum reached
+its agent time cap after saving all six failed canonical runs. Its interrupted
+report-writing is separate from those completed measurements.
+
+| Initial lane | Proposals | Hold + extension passes | Complete live shift passes | Outcome |
+|---|---:|---:|---:|---|
+| Responsive precision | 1 | 1 | 1 | RP1 rejected by image stability and native accuracy |
+| Reference response | 3 | 3 | 0 | Best deadline count 52/81; no transfer qualification |
+| Local curvature | 3 | 0 | 0 | Acquisition/hold failures |
+| Negative momentum | 3 | 0 | 0 | Acquisition/hold failures |
+| Signal and noise | 3 | 0 | 0 | Acquisition/hold failures |
+| Joint trust | 3 | 0 | 0 | Acquisition/hold failures |
+| Predictor/corrector | 1 | 0 | Not run | Failed hold; slot redirected to auditing |
+
+[Exact accounting](first-wave-summary.json) separates raw UNCONFIRMED live shift
+from matched-control qualification. No row borrows parent passes. Later search
+launches below are ongoing and excluded from this completed-wave count.
+
 | New search | Engine | Question |
 |---|---|---|
 | Acquisition across tasks | Codex | Which training signal preserves both short-image convergence and native precision? |
@@ -18,6 +38,9 @@ Its remaining horizon-based noise and four deadline misses are binding failures.
 | Critic confidence | Grok | Does minibatch uncertainty distinguish learning from stochastic oscillation? |
 | Prior mobility | Grok | Can relative prior/network motion retain precision without preventing adaptation? |
 | Acquisition noise | Grok | Can achieved optimizer motion govern noise without a final training duration? |
+| Data innovation | Grok | Can minibatch changes reopen learning without stationary false alarms? |
+| Penalty balance | Grok | Does separating adversarial and regularizer forces improve control? |
+| Qualification harness | Grok | Prepare exact long-run evaluation; no candidate qualification runs |
 
 Earlier local-curvature, negative-momentum, responsive-precision, reference,
 signal/noise, joint-trust and predictor/corrector attempts retain their own
