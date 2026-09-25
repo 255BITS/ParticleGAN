@@ -146,6 +146,11 @@ See the [toy demo](reports/transition/demo/index.html),
 [architecture and losses](docs/transition-gan-encoder.md), and
 [leaderboard](reports/transition/leaderboard/README.md).
 
+The [animation world model](docs/animation-world-model.md) dreams a bouncing sprite
+with z -> (G1 st, G2 st+1, G3 frame) and an E(st) -> z loop, scored against the
+exact simulator in distribution and on an unseen ceiling-bounce split
+([leaderboard](reports/animation/leaderboard/README.md)).
+
 The [Lunar Lander world-model example](docs/gym-world-model.md) extends the three
 generators to individual simulator transitions, with MoG1024, encoder routing,
 terrain context, and joint/marginal critics. It includes replayed counterfactual
