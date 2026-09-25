@@ -28,12 +28,16 @@ the rest NOT_RUN. Only if all4pass, complete own remaining18 within the cap,
 including native7000 coverage AND accuracy; no coefficient or seed experiments.
 Record actual applied rates and source hashes. This is prospective-lead screening,
 not promotion; its existing failed shift is binding. Leave complete evidence.'''),
-    'k3p_extragradient': ('codex', GPU0, '''Own a clean shared-sample game
+    'k3p_extragradient': ('codex', GPU1, '''Own a clean shared-sample game
 predictor/corrector from selected K3P. Read research-notes.md. Preserve and restore
 temporary optimizer/EMA/particle/RNG state, one committed update per role, declare
 added work. Compare to failed predictive raw-delta GD1, not an unchanged rerun.
 Do not spend the attempt building a new benchmark. If this cannot be made sound,
-report the exact implementation limitation and preserve measured evidence.'''),
+report the exact implementation limitation and preserve measured evidence.
+Codex usage is scarce: concise targeted reads, no repeated full source dumps;
+save expensive horizon/adapter/full-toy audits for a candidate that passes the
+ring conjunction. Minimal correctness checks for a new update are still needed.
+Do not spend the remaining cap proving invariants of already rejected variants.'''),
     'k3p_local_curvature': ('grok', GPU0, '''Own reversible local-curvature step
 control from selected K3P. Read research-notes.md and its secant/growth rule.
 Sampling noise and opponent motion require an explicit treatment; avoid an
