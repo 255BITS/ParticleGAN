@@ -1,0 +1,122 @@
+{
+  "candidate": "direct_particle_response",
+  "gate": "unipolar",
+  "status": "PASS",
+  "seconds": 9.449757935013622,
+  "metrics": {
+    "cover": 0.9985144194861277,
+    "off_caption": 6.054717878312551e-06,
+    "neu_hold": 0.995764993596822
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/unipolar/result.json",
+  "updates": {
+    "adam_calls": 800,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            4
+          ],
+          "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+        },
+        {
+          "shape": [
+            4
+          ],
+          "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+        },
+        {
+          "shape": [
+            4
+          ],
+          "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+        }
+      ],
+      [
+        {
+          "shape": [
+            64,
+            5
+          ],
+          "sha256": "9cf09b1a3477c3d4393f5f152c2ef0e650efc3fbeba076091e7880d12886e1b9"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "1070e49b5d2381fa998682e871a43854cf712fa78d33e9cc7607edd5e8c06ab1"
+        },
+        {
+          "shape": [
+            64,
+            64
+          ],
+          "sha256": "072773f66253c65a334bdd2abd0ab39ee43b351a78ae5f64d9f86b28665efce2"
+        },
+        {
+          "shape": [
+            64
+          ],
+          "sha256": "7fec2ae456bb3fc6b498fe189a38fe396daee7018c736b2e30a4e008d136f2f0"
+        },
+        {
+          "shape": [
+            1,
+            64
+          ],
+          "sha256": "a3af2720e3d3340193ddc379150a138b40dfd90aad034a625787cb3647913df1"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "29651d23280108557e8404522356770893560e0d975f00bd4ecd6b6eba1bd1dd"
+        }
+      ]
+    ],
+    "optimizers": {
+      "130896917772240": {
+        "calls": 400,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "130896512728336": {
+        "calls": 400,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 19,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 19,
+    "first_pass_step": 100,
+    "stable_from_step": 100,
+    "stable_from_seconds": 2.700496513862163,
+    "confirmed_step": 167,
+    "confirmed_seconds": 4.221850507892668
+  },
+  "code_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "fixture_sha256": "8f86375afc6dc10da22fdd8025501b24eba591ec6678d1c2b2715a7d280aa3b1",
+  "declaration_sha256": "2b71d3414c66ddebf59e3dbaf8893e6e4a4f310ad58fa506a16c5246be5e7b03",
+  "regularizer_calls": 800,
+  "audit": "PASS"
+}

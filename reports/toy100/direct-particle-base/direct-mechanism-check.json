@@ -1,0 +1,13 @@
+{
+  "candidate": "regression",
+  "gate": "direct_particle_structural_scope",
+  "status": "PASS",
+  "seconds": 0.3173818679060787,
+  "metrics": {
+    "direct_particle_response": true,
+    "latent_prior_excluded": true,
+    "scheduled_lr_and_betas_restored": true,
+    "optimizer_updates": 0
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/direct-mechanism-check.json"
+}

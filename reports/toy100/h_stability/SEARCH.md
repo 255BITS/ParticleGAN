@@ -1,47 +1,62 @@
-# Current task: improve the selected dimension RMS GAN base
+# Current task: improve the selected direct-particle-response GAN
 
-Read AGENTS.md, ../current-research-base.json and ../dimension-rms-base/README.md.
-The user explicitly selected dimension_rms_hybrid as the new research base.
-Start from its exact config.json + mechanism.py + probe.py. The config by itself
-is NOT the selected formulation; it requires the regularizer installed by the
-probe. Use the archived checksum-verified source preparer and retained fixtures.
-Do not drift back to the original CPU recipe as the starting candidate.
+Read AGENTS.md, reports/toy100/current-research-base.json and
+reports/toy100/direct-particle-base/README.md. The user selected
+direct_particle_response as the default research base. Start from its exact
+config.json + mechanism.py + response.py + probe.py. Config alone is NOT this
+formulation. Use the checksum-verified archived source preparer and retained
+CPU initialization fixtures. Do not revert to an older recipe or harness.
 
-The selected base independently passes six GPU regression toys and fails two_pole
-(movement .1044 < .30). Full22 and own-state stability are NOT_RUN. It remains
-Rp logistic GAN training with a real dimension-normalized R1 term and a fake
-RMS b-cap. No target-fitter substitution. Preserve model shapes, fixed seeds,
-data, budgets, thresholds and evaluation. Keep original decay/noise schedules
-and auxiliary host terms as defaults; declare any assigned formulation change.
-All model training, gradients and Adam state are CUDA; CPU initialization is
-allowed and pinned. Retain original Adam arithmetic (capturable changes it).
+The parent has 15 PASS / 1 FAIL / 6 NOT_RUN on GPU. Two_pole now passes movement
+.64416 with ten terminal checks, and all six original GPU regressions still
+pass. The first measured failure is vector_unequal_width: component covariance
+error .98132 > .85, zero terminal passing suffix; the first component's error
+2.72220 dominates. HQ, mass, SW1 and minimum eigen ratio pass. Direct response
+is inactive on this host, so strengthening that boost alone cannot fix it.
 
-Use two_pole as the first cheap gate. If it fails, stop that proposal and adapt.
-If it passes, run trajectory, then ring and unequal mass, followed by intensity,
-bars and blobs. Passing candidates continue; measured failures stop qualification.
-Only a candidate clearing all seven advances to its own remaining full22 gates.
-Full22 must precede an own-state post-convergence continuation under its declared
-schedule. Acquisition and retention are separate results. No borrowed passes.
+Keep the successful direct-particle response intact unless its change is an
+explicit, evidence-driven proposal. The baseline is Rp logistic GAN, normalized
+real R1 + fake RMS b-cap, with original schedules and auxiliary host losses.
+No target fitting, task-name switches, mode labels/centers/statistics, or metric
+feedback in training. Architecture, data, fixed seeds, evaluation, thresholds
+and training-step budgets stay frozen. Original LR/noise schedules are starting
+defaults; the assigned lane may explicitly declare a formulation change.
+All training, gradients and optimizer/history state stay CUDA. Preserve original
+noncapturable Adam arithmetic; CPU initialization is pinned and has zero updates.
 
-Three fresh Astra/max attempts, one CUDA worker each, at most three distinct
-proposals per attempt and 45minutes. These are caps, not quotas. No nested agents,
-seed sweeps, coefficient grids or uncontrolled extra model/optimizer updates.
-Start a real candidate within five minutes. Small evidence-driven formulations
-and actual frozen tests take priority over theory or new harness infrastructure.
-Do not rerun completed unchanged controls, failed caps/optimism variants, or the
-PyTorch upgrade. R1-containing candidates remain eligible when their tests pass.
+Gate order: vector_unequal_width FIRST, then two_pole, trajectory, mode_hold,
+vector_unequal_mass, vector_two_broad, img_intensity2, img_bars4, img_blobs4,
+residual_student, unipolar, ae_gan_hold, cover_leftover, unused_token_hold,
+mid_scale_identity, img_stripes2. Stop a failing proposal and adapt within the
+lane; do not spend on the rest after a measured failure. Every candidate must
+earn its own passes. If all sixteen pass, keep testing the six unmeasured toys:
+vector_anisotropic, vector_overlap, vector_spiral, grid100, rotated100,
+staggered100. Use canonical native coverage AND accuracy for the last three.
+Do not stop a promising candidate just because it passes the early blockers.
 
-Use local candidate snapshots and fixtures. Prepare source once, verify hashes,
-and save exact declarations before execution. Rebuild expected specs from the
-candidate recipe: image gradient_penalty/penalty_coeff/kappa are aliases for the
-regularizer fields. Keep frozen data/budgets/scoring unchanged. Retain actual
-CUDA update counts, state devices, source/config hashes, raw metrics and all
-FAIL/ERROR/SKIPPED entries. Do not count a repaired receipt audit as new training.
-Run focused mechanism checks; keep tests.jsonl and concise logs easy to inspect.
+After all22 pass, run own-state post-convergence continuation under the declared
+schedule. Preserve model, optimizer, RNG AND response history across checkpoint
+resume: response.py's module-global previous-gradient map is not automatically
+part of Adam state_dict. No continuation has been validated yet. Prioritize
+quality after convergence; acquisition and retention are separate claims.
 
-Prior scale alternatives: dimension_rms_bcap and detached_fake_scale_cap both
-lose ring coverage. Two_pole uses d=1, where the selected real term has its
-original R1 strength. Low movement suggests suppressed early learning, but that
-cause has not been isolated. The new lanes own dead-zone geometry, real-penalty
-warmup, and adversarial particle-update response. No toy-name special cases or
-target/metric inputs to training. Summarize measured results and exact replay.
+Three fresh Astra/max attempts, one GPU worker each, maximum three proposals and
+45minutes per attempt. Caps, not quotas. Start real training within five minutes.
+No nested agents, detached training, seed sweeps, coefficient grids, extra
+undeclared updates, pushes or comments. A generally applicable measured change
+beats theory or new benchmark infrastructure. Do not repeat unchanged failures,
+version upgrades or completed controls. In particular, applying recent-memory
+coherent response to all latent priors already loses ring. The original small
+real dead zones, sextic release and real-penalty warmups also failed this round.
+R1-containing variants remain eligible when measured tests pass.
+
+Prepare source once. Snapshot/hash candidate code and declare the formula before
+each execution. Use the exact probe as a template; preserve frozen hosts, native
+random draws, CUDA-state proof and all metric observations. Rebuild expected
+specs from the candidate recipe; image penalty/kappa fields are aliases. Audit
+counts from actual frozen hosts: unipolar uses two regularizer calls per step,
+mid_scale_identity four. Receipt repairs are not new training. New CPU fixtures
+may only capture initial constructors with zero updates and no CPU autograd.
+Use focused mechanism checks, append tests.jsonl, preserve every FAIL/ERROR and
+explicit NOT_RUN, keep tail-able logs, and finish with a measured leaderboard
+and exact replay commands. Avoid dumping full source manifests or raw curves.

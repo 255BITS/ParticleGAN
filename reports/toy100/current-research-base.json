@@ -1,36 +1,49 @@
 {
-  "candidate": "dimension_rms_hybrid",
-  "role": "user-selected GPU GAN research base",
-  "config": "reports/toy100/dimension-rms-base/config.json",
-  "config_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
-  "mechanism": "reports/toy100/dimension-rms-base/mechanism.py",
-  "mechanism_sha256": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
-  "probe": "reports/toy100/dimension-rms-base/probe.py",
-  "probe_sha256": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+  "candidate": "direct_particle_response",
+  "parent": "dimension_rms_hybrid",
+  "role": "user-selected GPU GAN research and launcher default",
   "requires_mechanism": true,
-  "report": "reports/toy100/dimension-rms-base/README.md",
-  "measured_gpu_passes": 6,
+  "requires_response": true,
+  "report": "reports/toy100/direct-particle-base/README.md",
+  "measured_gpu_passes": 15,
   "measured_gpu_failures": 1,
-  "measured_gpu_total": 7,
+  "measured_gpu_total": 16,
   "toy_total": 22,
-  "unmeasured_toys": 15,
-  "full_toy_status": "NOT_RUN",
+  "unmeasured_toys": 6,
+  "full_toy_status": "INCOMPLETE",
   "own_state_stability": "NOT_RUN",
   "gpu_release_qualified": false,
   "initialization": "retained CPU initial parameters; native CUDA random draws and training",
   "first_gates": [
+    "vector_unequal_width",
     "two_pole",
     "trajectory",
     "mode_hold",
     "vector_unequal_mass"
   ],
   "remaining_regression_gates": [
+    "vector_two_broad",
     "img_intensity2",
     "img_bars4",
-    "img_blobs4"
+    "img_blobs4",
+    "residual_student",
+    "unipolar",
+    "ae_gan_hold",
+    "cover_leftover",
+    "unused_token_hold",
+    "mid_scale_identity",
+    "img_stripes2"
+  ],
+  "remaining_unmeasured_gates": [
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "grid100",
+    "rotated100",
+    "staggered100"
   ],
   "known_failures": [
-    "two_pole"
+    "vector_unequal_width"
   ],
   "schedules": "retain original decay/noise as starting defaults",
   "auxiliary_host_terms": "retain original AE and unused-token terms",
@@ -42,5 +55,13 @@
     "native_gpu_passes": 16,
     "native_100_mode_passes": 3,
     "report": "reports/toy100/gpu-known-winner-control/README.md"
-  }
+  },
+  "config": "reports/toy100/direct-particle-base/config.json",
+  "config_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+  "mechanism": "reports/toy100/direct-particle-base/mechanism.py",
+  "mechanism_sha256": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+  "response": "reports/toy100/direct-particle-base/response.py",
+  "response_sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+  "probe": "reports/toy100/direct-particle-base/probe.py",
+  "probe_sha256": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e"
 }
