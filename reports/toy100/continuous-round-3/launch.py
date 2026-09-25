@@ -16,6 +16,27 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_training_discrepancy': ('codex', GPU1, '''Own a critic-independent training
+discrepancy signal from selected K3P. Read the training-discrepancy research note,
+RP1 native-drift analysis, and
+completed-acquisition/attempts/k3p_transfer_acquisition/result.md first. Raw
+gradient magnitude can create stationary false restarts; gradient persistence
+and adversarial-score persistence lost ring modes. Investigate a small, declared
+kernel comparison of current REAL and GENERATED TRAINING minibatches, calibrated
+against real/real sampling variation, to govern reversible mobility/constraint.
+Use no evaluation calls, held-out samples, true centers, task IDs, shift times or
+final duration. This is a training statistic, not benchmark quality feedback.
+No direct output translation, assignment to targets, or replacement of K3P by a
+different standalone generator. Preserve K3P's architecture, learned sparse prior,
+direct response and ordinary gradient updates. Explain noise and acquisition.
+Bound and declare added kernel work; prefer deterministic existing-batch subsets
+without extra training RNG. Kernel scales are one declared mixture, not a grid.
+Do not claim sequential p-value guarantees from an adaptive reused-batch signal.
+Up to3 evidence-driven proposals, both canonical protocols each; optional early
+img_intensity2 screen, no deep audits of failures. Ring survivors must clear the
+image gate and full7000 grid100 coverage AND accuracy before full qualification.
+One scarce Codex slot: concise reads, reuse the existing audited harness, no
+unmodified reruns or secondary agents. K3P remains selected until all gates pass.'''),
     'k3p_penalty_balance': ('grok', GPU0, '''Own the distinction between adversarial
 learning force and regularization force in the critic. Start from selected K3P;
 read RP1's image/native rejection and earlier anchor-tracking failures. Existing

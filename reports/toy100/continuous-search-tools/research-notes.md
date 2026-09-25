@@ -68,3 +68,29 @@ Every promising live result still needs hold+extension, stationary and pre-shift
 checks, 81/81 deadline recovery, a matching frozen control, all 22 toy gates,
 horizon-independence evidence and delayed/repeated changes. Paper references
 explain hypotheses; only the executed frozen protocols establish qualification.
+
+## Training discrepancy independent of critic optimization noise
+
+RP1's grid center error improved to .20631 sigma by update 5500, then worsened
+following a rate increase on a stationary target. Its raw-gradient signal is
+therefore a questionable proxy for remaining distribution error. AC1 and AC2
+instead used gradient or adversarial-score persistence; both passed the short
+image screen. AC1 never converged on the ring, and AC2 lost a mode after 187 good
+hold checks. Those are separate failed mechanisms,
+not qualified bases.
+
+Gretton et al. define maximum mean discrepancy for comparing two distributions
+through kernel expectations and give statistical tests and computational
+estimators. [Primary paper](https://www.jmlr.org/papers/v13/gretton12a.html).
+This motivates an untested K3P controller: compare current real/generated
+training minibatches, and compare real/real splits to estimate sampling variation.
+Use a declared kernel mixture and bounded deterministic batch subsets. A mismatch
+signal could retain acquisition or reopen mobility while avoiding reactions to
+critic optimizer noise. It must earn every original gate.
+
+This proposed adaptive, temporally dependent control is not the paper's test or
+its guarantee. Do not treat a nominal one-shot significance threshold as a valid
+sequential error guarantee. No benchmark evaluator, held-out score, true mode
+center, task identity, known change time or training horizon enters the learner.
+Do not replace GAN training with assignments to known targets. Preserve the
+selected K3P learning mechanism and account for every extra computation.

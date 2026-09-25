@@ -92,3 +92,12 @@ The [fixed native qualification wrapper](../continuous-search-tools/NATIVE_QUALI
 is prepared for surviving candidates. Its twelve configuration checks pass with
 zero training updates; it pins candidate source and preserves full7000 budgets.
 No additional RP1 seed qualification was run.
+
+The first replacement Codex attempt also finished: [AC1–AC3 results](completed-acquisition/attempts/k3p_transfer_acquisition/result.md).
+All six canonical protocols fail. AC1/AC2 pass the short image screen, but AC1
+never acquires eight ring modes and AC2 loses a mode after 187 good hold checks.
+AC3 holds for 1027 checks before failure and also fails the image screen. These
+are three additional rejected formulations, excluded from the initial17 count.
+The next Codex direction uses ordinary real/generated training discrepancy,
+with a sampling-noise reference, as a hypothesis for separating model error from
+critic fluctuations. It remains K3P-derived research, not a new selected base.
