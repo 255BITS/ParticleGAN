@@ -16,6 +16,35 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'audit_canonical_control': ('codex', GPU1, '''Verification-tool work only;
+do not propose a new learner or run full rejected-candidate qualification. The
+ordinary match_frozen_control helper compares quality curves but accepts missing
+matching fields and does not establish complete pre-shift learner identity.
+RP1's original companion omitted some latent/response/controller state. Prepare
+a strict canonical matched-control companion around the ACTUAL unchanged
+candidate driver, retaining its hooks, fixture, frozen runtime, sampling and
+update order. Reuse the existing short-prefix capture machinery where helpful:
+/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/audit_prefix.py
+and main rp1-additional-evidence contains the flawed earlier frozen captures.
+Require actual canonical windows (5 stationary,120 prehold,81 deadline), matching
+nonmissing source/config/runtime/fixture metadata, live quality and frozen0/81.
+Capture model parameters AND buffers, all optimizer state (including anchor_prev,
+scalar step representation) and group settings, all EMAs, controller/helper
+learner state, latent.stats, response membership/history, and CPU/CUDA/host RNG.
+Normalize identities structurally; missing==missing is never complete proof.
+Use an explicitly audited candidate-state contract; mark unknown helper state
+unsupported rather than claiming generic completeness from a shallow _state dict.
+Source-pin every imported local policy file. Preserve raw legacy results; a
+strict companion may remain INCOMPLETE while the legacy helper says PASS.
+Prove only SHORT deterministic actual-driver identity with instrumentation on/off,
+plus negative checks for missing state/source metadata, changed latent history,
+optimizer groups, and truncated canonical windows. No full RP1 replay, native
+seed run,9000 or30000 episode. This is harness validation, never candidate PASS.
+A Grok independently repairs the long-run evaluator in another worktree; do not
+edit its files or duplicate its bootstrap rewrite. Own this separate canonical
+companion and concise tests/report. Publish exact limitations and replay commands
+for supervisor review. One benchmark worker, one scarce Codex slot, no nested
+agents. Work in your isolated checkout; do not push or edit PR155.'''),
     'k3p_acquire_then_maintain': ('grok', GPU0, '''Test a two-signal controller
 from selected K3P, not promotion of an unverified partial. Completed mobility
 PM1/PM3 acquire and hold1200+300 but miss two late recovery checks after raw
