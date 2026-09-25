@@ -23,13 +23,17 @@ at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.m
 
 ## Install
 
-Requires Python 3.10+ and PyTorch. Install from source (the 0.7.0 release on
-PyPI predates this API):
+Requires Python 3.10+ and PyTorch.
+
+```bash
+python -m pip install particlegan           # the library (0.8.0)
+```
+
+For the examples, experiments and tests, install from source:
 
 ```bash
 git clone https://github.com/255BITS/ParticleGAN.git
 cd ParticleGAN
-python -m pip install -e .                  # the library
 python -m pip install -e '.[experiments,dev]'  # plus examples, experiments and tests
 ```
 
