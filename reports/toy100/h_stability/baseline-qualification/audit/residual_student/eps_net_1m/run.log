@@ -1,4 +1,0 @@
-{"event": "START", "candidate": "eps_net_1m", "gate": "residual_student"}
-START residual_student route=public primitives custom host + shared noise policy steps=400
-{"event": "DONE", "task": "residual_student", "status": "PASS", "suffix": 18, "live": {"identity_mse": 0.0022454001009464264, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
-{"event": "DONE", "candidate": "eps_net_1m", "gate": "residual_student", "status": "PASS", "seconds": 2.4963590411935, "live": {"identity_mse": 0.0022454001009464264, "success_rate": 1.0, "wrong_pad_rate": 0.0}}

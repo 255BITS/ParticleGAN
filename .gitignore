@@ -48,3 +48,8 @@ dist/
 !/reports/**/reference_profile.json
 !/reports/**/plan.json
 !/reports/**/*_plan.json
+
+# Console output and duplicate metric streams stay in local research runs.
+/reports/toy100/**/*.log
+/reports/toy100/**/*.log.gz
+/reports/toy100/**/metrics.jsonl

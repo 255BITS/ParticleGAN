@@ -1,5 +1,0 @@
-SUPERVISOR Continue the assigned focused attempt. Preserve failures and read this file before each new batch.
-START c03_smooth_cap mode_hold
-{"candidate": "c03_smooth_cap", "gate": "mode_hold", "status": "FAIL", "seconds": 32.15109446900897, "metrics": {"modes": 2, "hq": 0.259521484375}, "adam_calls": 2400, "error": null}
-START c03_smooth_cap vector_unequal_mass
-{"candidate": "c03_smooth_cap", "gate": "vector_unequal_mass", "status": "FAIL", "seconds": 48.9993659700267, "metrics": {"sw1_normalized": 0.14886827052847473, "mean_error": 0.21647842228412628, "covariance_error": 0.23665522038936615, "target_scale": 1.7948341369628906, "sample_count": 4096, "mass_tv": 0.12749022245407104, "min_mass_ratio": 0.0, "hq": 0.99658203125, "component_covariance_error": 0.4850052762776613, "component_covariance_errors": [0.10967863351106644, 0.3887971043586731, 0.44154536724090576, 1.0], "component_min_eigen_ratio": 0.0, "component_mass": [0.677490234375, 0.196044921875, 0.12646484375, 0.0], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2775, 803, 518, 0]}, "adam_calls": 2400, "error": null}

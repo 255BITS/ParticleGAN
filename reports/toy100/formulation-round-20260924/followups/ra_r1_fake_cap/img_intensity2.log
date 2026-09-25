@@ -1,1 +1,0 @@
-{"task": "img_intensity2", "backend": "cuda", "cpu_random": false, "status": "FAIL", "seconds": 13.453777994029224, "live": {"modes": 2, "hq": 0.84375, "mean_rmse": 0.048208773136138916, "quality_mode_fractions": [0.46875, 0.375], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "error": null}

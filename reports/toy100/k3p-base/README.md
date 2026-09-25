@@ -107,6 +107,17 @@ against the executed bundle and checks the 22 passes, hold/extension, and recove
 failure against saved raw evidence. The live launcher's default focus is recorded
 in [launcher-focus.patch](launcher-focus.patch).
 
+Verify the declaration against the committed source hashes and raw result
+snapshots without launching training:
+
+```bash
+python -m pytest -q tests/test_k3p_selection.py
+```
+
+The standard `benchmarks.toy100` / `benchmarks.toy_suite` commands and CPU CI
+gate still use the historical shared recipe. The public `get_recipe("gan")`
+API still selects GAN v3. Neither entry point installs K3P's research hooks.
+
 Use `probe.py` for the 19 transfer tasks, `native100.py` for the three native
 problems, and `hold.py`, `shift.py`, `shift_frozen.py` for the ring protocols.
 The [job manifest](../gap-fill-20260925/manifest.json) contains the executed
