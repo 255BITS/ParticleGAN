@@ -1,0 +1,162 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
+  "observed_utc": "2026-09-25T19:16:23.458874+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_projected_discrepancy",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_projected_discrepancy/20260925T184728Z-3812315",
+      "status": "failed or interrupted (exit 1; artifacts retained)",
+      "files_sha256": {
+        "final.md": "2a90a1b668ca274a498162e1b10f6f1db2517579ee93320c56b4ac35ffcdbf8f",
+        "run.txt": "960fa7f6501309d99903b0f9e45901982dbf0f2d27093509e68cd31f013e083f",
+        "status.txt": "4538e69893a1f9214c89345e92c7914d85be4511616f6088f68530f6840ece4e",
+        "exit-code.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    },
+    {
+      "lane": "k3p_excursion_phase",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_excursion_phase/20260925T184728Z-3812316",
+      "status": "failed or interrupted (exit 1; artifacts retained)",
+      "files_sha256": {
+        "final.md": "4782947946ee816ad5722d93e5993af6d9f3b08928b361a3af272f36d6ff1b11",
+        "tests.jsonl": "e2de8e15cbdcbd34c26af967b11388a78ddda052c150d190ac6c2eaee21a3503",
+        "run.txt": "67952d2526aa8abb87e1b3b927f1af924153c4a948270cabc9331f616c0384e9",
+        "status.txt": "4538e69893a1f9214c89345e92c7914d85be4511616f6088f68530f6840ece4e",
+        "exit-code.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "PASS": 1,
+    "FAIL": 1
+  },
+  "records": [
+    {
+      "candidate": "ep1_growth_contraction",
+      "gate": "ring_hold_extension",
+      "status": "PASS",
+      "seconds": 113.0,
+      "metrics": {
+        "raw_status": "PASS",
+        "gate_status": "PASS",
+        "converged_step": 1400,
+        "settling_failures": 0,
+        "hold_checks": 1200,
+        "hold_budget": 1200,
+        "hold_passing": 1200,
+        "hold_min_hq": 0.9169921875,
+        "hold_min_modes": 8,
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "extension_min_hq": 0.98291015625,
+        "extension_min_modes": 8,
+        "last_live": {
+          "step": 2900,
+          "modes": 8,
+          "hq": 0.99951171875
+        },
+        "extra_critic_forwards": 2095,
+        "final_rate_gain": null,
+        "final_phase": null,
+        "final_alpha": null
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_excursion_phase/20260925T184728Z-3812316/repo/reports/toy100/k3p-excursion-phase/runs/ep1-hold/result.json",
+      "lane": "k3p_excursion_phase",
+      "engine": "grok",
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_excursion_phase/20260925T184728Z-3812316/repo/reports/toy100/k3p-excursion-phase/runs/ep1-hold/result.json",
+      "snapshot": "evidence/9539d6d1fcc8b1768fdd6e0da1d0f77c021c66d2797fa34d454969aae1cc11c7.json.gz",
+      "artifact_sha256": "9539d6d1fcc8b1768fdd6e0da1d0f77c021c66d2797fa34d454969aae1cc11c7"
+    },
+    {
+      "candidate": "ep1_growth_contraction",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 129.0,
+      "metrics": {
+        "raw_status": "FAIL",
+        "note": "Live shift missed stationary, continued hold, or the deadline window.",
+        "stationary_passing": 5,
+        "stationary_checks": 5,
+        "stationary_min_hq": 0.985595703125,
+        "stationary_pass": true,
+        "continued_hold_passing": 120,
+        "continued_hold_checks": 120,
+        "continued_hold_min_hq": 0.91748046875,
+        "continued_hold_pass": true,
+        "deadline_passing": 16,
+        "deadline_checks": 81,
+        "deadline_pass": false,
+        "deadline_min_modes": 5,
+        "deadline_min_hq": 0.5673828125,
+        "delay_updates": null,
+        "stable_from_step": null,
+        "final": {
+          "modes": 8,
+          "hq": 0.853515625
+        },
+        "ema": {
+          "modes": 8,
+          "hq": 0.837646484375
+        },
+        "optimizer_final": [
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              4.25e-05
+            ]
+          },
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              4.25e-05,
+              0.00042500000000000003
+            ]
+          }
+        ],
+        "final_rate_gain": null,
+        "final_phase": null,
+        "final_released": null,
+        "final_alpha": null,
+        "final_mobility": null,
+        "final_prox_ratio": null,
+        "extra_critic_forwards": 2795,
+        "rate_ranges": {
+          "d": {
+            "min": 4.25e-05,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "g": {
+            "min": 4.25e-05,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "prior": {
+            "min": 0.00042500000000000003,
+            "max": 0.0085,
+            "observations": 3600
+          }
+        }
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_excursion_phase/20260925T184728Z-3812316/repo/reports/toy100/k3p-excursion-phase/runs/ep1-shift/result.json",
+      "lane": "k3p_excursion_phase",
+      "engine": "grok",
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_excursion_phase/20260925T184728Z-3812316/repo/reports/toy100/k3p-excursion-phase/runs/ep1-shift/result.json",
+      "snapshot": "evidence/7f05fc6db13d1499e8d8173f2f32c9d5b346aebd884606de7f8dc04f5a7f61cb.json.gz",
+      "artifact_sha256": "7f05fc6db13d1499e8d8173f2f32c9d5b346aebd884606de7f8dc04f5a7f61cb"
+    }
+  ]
+}

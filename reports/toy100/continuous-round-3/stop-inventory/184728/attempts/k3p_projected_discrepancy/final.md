@@ -1,0 +1,1 @@
+The shift run stayed at full rate: the smoothed residual never entered the precise band, and it also did not jump when the target moved. I'll check whether batch standardization is hiding that translation while the hold finishes.

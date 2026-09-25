@@ -398,6 +398,9 @@ def main():
     (ROOT / 'gan-attempts').mkdir(exist_ok=True)
     with (ROOT / 'gan-attempts/continuous-launch.lock').open('w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
+        stop_file = REPO / 'reports/toy100/continuous-round-3/search-stop.json'
+        if stop_file.exists():
+            parser.error('User stopped the rolling search; current attempts may finish, but new launches are disabled. See ' + str(stop_file))
         live = live_attempts()
         engines = Counter(r['engine'] for r in live)
         gpus = Counter(r['gpu'] for r in live)

@@ -1,6 +1,17 @@
-# Rolling continuous-learning search
+# Continuous-learning search — paused
 
-Current policy: **at most one Codex and seven Grok attempts**, one benchmark worker
+**Stopped at the user's request on 2026-09-25. New launches are disabled.**
+All tracked workers had already exited; partial work is preserved. No new winner
+was qualified and K3P remains selected. See the consolidated
+[inventory and comparison table](INVENTORY.md), including the last recovered
+PD1/EP1 failures, EP2's interrupted hold, and unfinished evaluator work.
+
+## Historical search record
+
+The following records the search before the stop request; proposed follow-ups
+and automatic refill instructions below are suspended by that request.
+
+Last active policy: **at most one Codex and seven Grok attempts**, one benchmark worker
 each, at most four workers per GPU. The launcher checks registered live processes
 before reserving new capacity. Earlier round receipts preserve their original
 three-Codex/five-Grok allocation. Both Codex and Grok over-cap launches have been
@@ -94,7 +105,8 @@ This fixed winner qualification is explicitly authorized, with no seed search.
 The separately declared [30000-update long-term continuation](long-term-stability-protocol.json)
 preserves the9000 stress windows and adds another change at27000. After the same
 formulation clears every requirement, the supervisor will stop remaining searches
-and promote it in PR155. Until then the search and verification continue.
+and promote it in PR155. The later user stop request suspends further search and
+verification; no candidate reached that bar.
 
 The [fixed native qualification wrapper](../continuous-search-tools/NATIVE_QUALIFICATION.md)
 is prepared for surviving candidates. Its twelve configuration checks pass with

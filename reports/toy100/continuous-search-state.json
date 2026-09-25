@@ -1,9 +1,9 @@
 {
-  "status": "searching",
+  "status": "paused_user_requested",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z",
+  "active_batch": null,
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -49,7 +49,10 @@
     "pm3_prior_match": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Not promoted.",
     "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted.",
     "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification.",
-    "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion."
+    "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion.",
+    "ep1_excursion_phase": "Own hold1200+300, stationary5/5, prehold120/120 PASS; recovery16/81 FAIL. Scheduled noise remains. Not promoted.",
+    "pd1_projected_discrepancy": "Recovered unledgered results: hold NOT_CONVERGED, prehold33/120, recovery0/81 FAIL. Not promoted.",
+    "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop."
   },
   "previous_round": {
     "round": 2,
@@ -87,36 +90,12 @@
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
     "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T19:05:57.824093+00:00",
-    "verified_live_counts": {
-      "grok": 7,
-      "codex": 1
-    },
-    "verified_gpu_reservations": {
-      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 4,
-      "GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 4
-    }
+    "verified_live_utc": "2026-09-25T19:19:05.551652+00:00",
+    "verified_live_counts": {},
+    "verified_gpu_reservations": {},
+    "new_launches_allowed": false,
+    "pause_reason": "User requested stopping search and taking inventory while allowing existing work to finish."
   },
-  "active_batches": [
-    "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T181418Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T183536Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185807Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z"
-  ],
   "completed_rounds": [
     {
       "round": 1,
@@ -155,9 +134,9 @@
   },
   "qualification_tooling": {
     "native_seed_wrapper": "Prepared; twelve configuration checks pass with zero training updates; candidate installation review still required.",
-    "long_run_evaluator": "NOT_READY: first preparation omitted canonical candidate hooks/fixture/bootstrap/runtime selection. Dedicated repair with short identity checks required.",
+    "long_run_evaluator": "NOT_READY: partial repair archived. Two-update instrumentation identity PASS within rewritten evaluator; independent canonical-driver equivalence and complete review unfinished. No 9000/30000 candidate runs.",
     "review": "reports/toy100/continuous-round-3/qualification-harness-review.md",
-    "canonical_control_companion": "IN_PREPARATION: single Codex lane audits complete pre-shift state and strict canonical windows around unchanged candidate drivers; short validation only, no candidate qualification claim."
+    "canonical_control_companion": "NOT_DELIVERED: Codex exited 0 without source changes, ledger, or result report. Full-state strict companion remains unfinished."
   },
   "round3_first_replacement_wave": {
     "scope": "First seven replacement mechanism lanes. PB0 is unchanged-parent instrumentation and excluded. Excludes later TD kernel proposals and qualification tooling.",
@@ -179,5 +158,133 @@
     "canonical_failures": 6,
     "qualified_winners": 0,
     "report": "reports/toy100/continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
+  },
+  "stop_request": {
+    "status": "STOPPED_USER_REQUEST",
+    "requested_by": "user",
+    "requested_utc": "2026-09-25T19:08:29.443504+00:00",
+    "instruction": "Stop the search, let current work finish, take inventory. No new attempts or extensions; current attempts retain existing limits.",
+    "running_at_request": [],
+    "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
+    "new_attempts_allowed": false,
+    "existing_work_policy": "Allow pre-existing work to finish; do not launch replacements or extensions.",
+    "tracked_search_processes": [],
+    "last_eight_attempts": {
+      "terminal": 8,
+      "exit_1": 7,
+      "exit_0_without_audit_deliverable": 1,
+      "result_reports": 0,
+      "note": "Already exited before stop handling. Saved final.md files are last progress messages, not completed reports. Exit cause not established."
+    },
+    "unrelated_baseline_audit": {
+      "root": "/tmp/k3p-audit-20260925",
+      "observed_utc": "2026-09-25T19:19:05.551652+00:00",
+      "processes": [
+        {
+          "pid": 3832970,
+          "argv": [
+            "bash",
+            "run_cell.sh",
+            "cell-a6000-t213",
+            "/tmp/k3p-audit-20260925/venv/bin/python",
+            "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69"
+          ]
+        },
+        {
+          "pid": 3832978,
+          "argv": [
+            "/tmp/k3p-audit-20260925/venv/bin/python",
+            "-"
+          ]
+        },
+        {
+          "pid": 3849934,
+          "argv": [
+            "/tmp/k3p-audit-20260925/venv/bin/python",
+            "-u",
+            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+            "--repo",
+            "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+            "--task",
+            "mid_scale_identity",
+            "--config",
+            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+            "--backend",
+            "cuda",
+            "--initial-state",
+            "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt",
+            "--output",
+            "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mid_scale_identity"
+          ]
+        },
+        {
+          "pid": 3850081,
+          "argv": [
+            "/tmp/k3p-audit-20260925/venv/bin/python",
+            "-u",
+            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+            "--repo",
+            "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+            "--task",
+            "mode_hold",
+            "--config",
+            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+            "--backend",
+            "cuda",
+            "--initial-state",
+            "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+            "--output",
+            "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mode_hold"
+          ]
+        }
+      ],
+      "action": "Left untouched to finish; not a registered formulation search. Results not included in this inventory."
+    },
+    "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+    "evidence": "reports/toy100/continuous-round-3/stop-inventory/manifest.json",
+    "qualified_winners": 0,
+    "selected_candidate": "k3p"
+  },
+  "historical_batches": [
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181418Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T183536Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185807Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z"
+  ],
+  "active_batches": [],
+  "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+  "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
+  "round3_inventory": {
+    "formulations_in_reported_groups": 42,
+    "canonical_protocols_complete_in_reported_groups": 83,
+    "canonical_protocols_expected_in_reported_groups": 84,
+    "additional_partial_formulation": "EP2",
+    "including_ep2": {
+      "formulations": 43,
+      "canonical_protocols_complete": 83,
+      "canonical_protocols_interrupted": 1,
+      "canonical_protocols_not_run": 2
+    },
+    "qualified_winners": 0,
+    "unmeasured_drafts_excluded": [
+      "PD2",
+      "generator_restoring",
+      "anchor_force_balance"
+    ],
+    "final_attempt_archive": "reports/toy100/continuous-round-3/stop-inventory/manifest.json"
   }
 }

@@ -1,0 +1,20 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z",
+  "observed_utc": "2026-09-25T19:16:23.572717+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "audit_canonical_control",
+      "engine": "codex",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z/audit_canonical_control/20260925T190502Z-3834938",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "run.txt": "a81b0df62f2fd2e3a56d6624ba346b541a9c28288caf60c867017c1c579c24e6",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {},
+  "records": []
+}

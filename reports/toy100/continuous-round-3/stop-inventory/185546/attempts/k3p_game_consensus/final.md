@@ -1,0 +1,1 @@
+I'll start from the pinned K3P parent and the game-update note, then run a tiny bilinear check before any GPU candidate. First I'm reading the attempt rules, supervisor steering, and the measured reports.

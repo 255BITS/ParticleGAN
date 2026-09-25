@@ -1,5 +1,17 @@
 # Long-run evaluator: integration not yet ready
 
+**Stop inventory update:** the repair attempt exited before delivering a final
+report. Its archived source installs the fixture, canonical Adam bootstrap and
+latent/response hooks, and records a passing two-update identity check between
+instrumented and uninstrumented arms. This is not yet an independent comparison
+against the canonical driver, and complete review remains unfinished. Status
+stays **NOT_READY**; no long-run candidate result is claimed. The strict
+canonical-control companion attempt delivered no implementation. See the
+[inventory](INVENTORY.md) and [repair archive](stop-inventory/184042/evidence.json).
+
+The observations below describe the original implementation before that partial
+repair; they are retained as review history.
+
 The first preparation attempt reports ten passing harness checks, including a
 three-update bare-host CUDA smoke. Those checks do not establish that its
 candidate entry point runs the same frozen formulation and initialization.

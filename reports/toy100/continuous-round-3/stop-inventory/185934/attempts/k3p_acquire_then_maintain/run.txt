@@ -1,0 +1,11 @@
+engine=grok
+base=612ff8a155b12e65c3061052d77264e3e4989ffa
+branch=codex/gan-attempt-20260925T185934Z-3828016
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=k3p_acquire_then_maintain
+gpu=GPU-72c1b506-891d-b8bc-b353-e020585e1c47
+log=/ml2/hypergan/gan-attempts/formulations-20260925T185934Z/k3p_acquire_then_maintain/20260925T185934Z-3828016/grok.log
