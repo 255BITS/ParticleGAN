@@ -36,12 +36,11 @@ EMA is separate; a PASS requires every metric at five consecutive final checks.
 
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
-![100 Gaussians: default toy100 recipe converging with live weights](100gaussians.gif)
+![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
 
-The default `python -m benchmarks.toy100 run --problem grid100` recipe
-([simpler shared 22-toy winner](reports/toy100/simpler22/README.md)), live weights, seed 1234:
-**100/100 modes, 98.5% within 3σ after 7,000 updates**, with all 100 modes first covered
-at update 600. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
+The package default, `GANTrainer(get_recipe("gan"), G, D)` with no overrides, live weights, seed 1234:
+**100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
+at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
 The [100-mode convergence gate](docs/toy100.md) tests square, rotated, and
 staggered Gaussian grids together, with step-zero snapshots, live/EMA traces,

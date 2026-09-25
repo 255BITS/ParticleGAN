@@ -1,6 +1,6 @@
 # README 100-Gaussian visualization
 
-The root `100gaussians.gif` shows one run of
+An earlier root `100gaussians.gif` showed one run of
 `get_recipe("gan", total_steps=20000)` through the explicitly imported
 `GANTrainer`, using the existing `examples/100gaussians.py` generator and
 Fourier-feature discriminator. Only the training budget changes; all other
@@ -68,7 +68,7 @@ EMA previews from one 7,000-update training run:
 
 ```bash
 python -u reports/readme-100gaussians/generate.py \
-  --steps 7000 --views live ema --frame-every 25 --fps 25 \
+  --steps 7000 --views live ema --frames 280 --frame-power 1 --fps 25 --hold-seconds 1 \
   --output-dir artifacts/100gaussians-7k > /tmp/readme-image-7k.log 2>&1
 tail -f /tmp/readme-image-7k.log
 ```
@@ -77,13 +77,13 @@ These are the default training/rendering options; the default output directory
 is `artifacts/100gaussians`. Select `--views live` or `--views ema` for one GIF.
 The seed stays 1234. Supported frame rates are 1, 2, 4, 5, 10, 20, 25, 50,
 and 100 fps, which GIF timing can represent exactly. Each GIF holds its final
-frame for one second.
+frame for `--hold-seconds` (default 2.5).
 
 To reproduce the 20k EMA configuration shown in the README:
 
 ```bash
 python -u reports/readme-100gaussians/generate.py \
-  --steps 20000 --views ema --frame-every 100 --fps 25 \
+  --steps 20000 --views ema --frames 200 --frame-power 1 --fps 25 --hold-seconds 1 \
   --output-dir artifacts/100gaussians-20k > /tmp/readme-image-20k.log 2>&1
 tail -f /tmp/readme-image-20k.log
 ```
@@ -115,22 +115,31 @@ and the old GIF has no equivalently audited shape-metric protocol here.
 
 ## README hero GIF
 
-The root `100gaussians.gif` now shows the default toy100 recipe
-(`configs/toy100/constraints_simple_regularization.json`) on `grid100`, live
-weights, seed 1234. [`hero-config.json`](hero-config.json) is that config with
-only `early_eval_steps` densified (every 10 updates through 1,200) so the
-fast early convergence gets smooth frames; checkpoint sampling is RNG-isolated,
-and the run reproduces the archived default's live HQ at updates 1,000, 3,000,
-and 7,000 (98.46% final). The dense schedule omits the gate's mandatory
-step-25 checkpoint, so that run's own gate reports INVALID; use the default
-command for gate evidence. The earlier `get_recipe("gan")` animation above is
-historical.
+The root `100gaussians.gif` shows the package default formulation exactly:
+`GANTrainer(get_recipe("gan"), G, D, seed=1234)` (K3P, 7,000 updates) with the
+small MLP generator and Fourier-feature discriminator from `examples/100gaussians.py`.
+No recipe, optimizer, penalty or schedule field is overridden; only visualization
+settings are chosen here. The animation shows live weights. Full provenance and
+metrics are in [summary-hero.json](summary-hero.json).
+
+Frames follow a smooth time warp, step = 7000·(i/250)², so early training
+(where the motion is) is dense and the cadence never jumps: 250 frames at
+25 fps (10 s) plus a 2.5 s hold on the final frame. The displayed 4,096 points
+are the same particle indices every frame, drawn as noise-free generator
+outputs; the overlay metrics use 20,000 fixed evaluation draws per frame.
+
+Final live metrics: 100/100 modes, 98.9% within 3σ, mode TV 0.162, sliced W1
+0.155, 1.0% beyond 10σ. The per-mode core width ratio is 0.19 (target 1): the
+noise-free generator places modes as tight points, narrower than σ = 0.03
+(the recipe's 0.029 output noise, not shown, supplies most of the width).
 
 ```bash
-export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=''
-export ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2
-python -u -m benchmarks.toy100 run --config reports/readme-100gaussians/hero-config.json \
-  --problem grid100 --no-render --output artifacts/readme-hero > /tmp/readme-hero.log 2>&1
+python -u reports/readme-100gaussians/generate.py --views live ema \
+  --frames 250 --frame-power 2 --fps 25 --hold-seconds 2.5 \
+  --output-dir artifacts/100gaussians-hero > /tmp/readme-hero.log 2>&1
 tail -f /tmp/readme-hero.log
-python reports/readme-100gaussians/render_hero.py artifacts/readme-hero/grid100 100gaussians.gif
+cp artifacts/100gaussians-hero/100gaussians-live.gif 100gaussians.gif
 ```
+
+Those are the script defaults. The earlier toy100-config animation
+(`render_hero.py`, `hero-config.json`) is available in the repository history.
