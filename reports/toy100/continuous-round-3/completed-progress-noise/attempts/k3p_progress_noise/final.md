@@ -1,0 +1,1 @@
+K3P’s noise still follows a horizon fraction, and RP1’s fixed 120/240 window matched the ring but missed the short image and grid centers. I’ll keep the learning-rate handover and drive noise from cumulative parameter motion, with a separate reopen when motion jumps.

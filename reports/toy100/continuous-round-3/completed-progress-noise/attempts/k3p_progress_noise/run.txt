@@ -1,0 +1,11 @@
+engine=grok
+base=c674aa07c96ffa1e4bd1c0128939791012ae35fb
+branch=codex/gan-attempt-20260925T181045Z-3769157
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=k3p_progress_noise
+gpu=GPU-72c1b506-891d-b8bc-b353-e020585e1c47
+log=/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_progress_noise/20260925T181045Z-3769157/grok.log

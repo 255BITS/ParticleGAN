@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -48,7 +48,8 @@
     "pm1_relative_mobility": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Transfer and deeper qualification NOT_RUN. Not promoted.",
     "pm3_prior_match": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Not promoted.",
     "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted.",
-    "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification."
+    "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification.",
+    "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion."
   },
   "previous_round": {
     "round": 2,
@@ -110,7 +111,8 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T183536Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z"
   ],
   "completed_rounds": [
     {

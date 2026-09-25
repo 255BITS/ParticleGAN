@@ -135,3 +135,19 @@ closed acquisition prematurely. A frozen quiet-baseline proposal never closed.
 The next distinct hypothesis corrects the joint game-update direction rather
 than using another scalar confidence threshold; the research note records its
 primary reference and required cross-player derivative checks.
+
+[Penalty balance](completed-penalty-balance/attempts/k3p_penalty_balance/result.md)
+finished **two new controllers**, both rejected. PB1 holds1200+300 and recovers
+79/81 but also fails pre-hold112/120. PB2 holds, keeps pre-hold120/120 and recovers
+77/81; four checks lose a mode. PB0 is an unchanged-parent instrumentation
+diagnostic, not a third new formulation. Both controllers retain scheduled rates
+and noise. The measured penalty/adversarial-force split motivates balancing the
+anchor force directly; it does not establish the cause of RP1's native drift.
+
+[Motion-based noise evidence](completed-progress-noise/evidence.json) contains
+three proposals and six completed canonical failures. The agent timed out after
+saving the last result, before writing its report. PN1/PN2/PN3 never qualified a
+hold and each recovers0/81. PN1 ends input noise at update15; PN2 ends it at391
+but never reaches full output noise; PN3 freezes a raw-gradient peak and also
+fails acquisition. Complete measurements are preserved separately from the
+interrupted report. No descendant benchmark process remained at collection.

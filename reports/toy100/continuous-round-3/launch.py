@@ -16,6 +16,24 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_anchor_force_balance': ('grok', GPU0, '''Own horizon-free balancing of
+critic anchor force from selected K3P. Read completed-penalty-balance report.
+PB0's extra penalty backward reproduced the parent shift. PB1/PB2 hold1200+300,
+but PB1 breaks prehold112/120 and recovery79/81; PB2 restores prehold120/120 and
+recovers77/81, with four missed checks. Both retain horizon-based rates/noise,
+so neither is a winner or new shared base. Their decomposition showed penalty
+force rising relative to adversarial force during the ring change. It did NOT
+measure RP1 native force composition; do not claim that causal explanation.
+Investigate balancing the restoring EMA-gradient force itself, rather than
+simply adding a scalar LR boost to the old cosine. Preserve K3P caps and learned
+prior/direct response. Declare which gradient components are differentiated,
+normalization and cross-role effects, and bound extra work. The same rule must
+retain acquisition, stationary precision and reversible adaptation without the
+final training duration in rates, mixing OR noise. Use training quantities only,
+no target centers, quality scores, task ids or known change. No coefficient grid
+or hard anchor replacement: DI3 already worsened77/81 to45/81. Every meaningful
+proposal earns both canonical protocols; short image screen useful; deeper gates
+only on a survivor. At most3 proposals, one benchmark worker, no nested agents.'''),
     'k3p_game_consensus': ('grok', GPU0, '''Investigate an update-direction
 correction from selected K3P, distinct from failed scalar-rate and displacement
 caps. Read the new game-update research note and completed-confidence and

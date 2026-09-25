@@ -1,0 +1,11 @@
+engine=grok
+base=3d7e3972962bd8ca8e3a9dd109d8e66c2a8ccd3f
+branch=codex/gan-attempt-20260925T181625Z-3777313
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=k3p_penalty_balance
+gpu=GPU-72c1b506-891d-b8bc-b353-e020585e1c47
+log=/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/grok.log
