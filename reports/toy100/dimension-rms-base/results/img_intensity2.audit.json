@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "checks": [
+    "declared expected spec",
+    "frozen thresholds/data/evaluation/budget",
+    "unchanged initialization/RNG/schedule/actions",
+    "frozen sustained verdict",
+    "all CUDA Adam state/parameters/gradients",
+    "FP32",
+    "candidate hashes",
+    "1614 frozen source files"
+  ],
+  "row": {
+    "candidate": "dimension_rms_hybrid",
+    "gate": "img_intensity2",
+    "status": "PASS",
+    "seconds": 12.258660665946081,
+    "metrics": {
+      "modes": 2,
+      "hq": 1.0,
+      "mean_rmse": 0.0316164493560791,
+      "quality_mode_fractions": [
+        0.5625,
+        0.4375
+      ],
+      "mode_fractions": [
+        0.5625,
+        0.4375
+      ],
+      "distribution_tv": 0.0625
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/candidates/dimension_rms_hybrid/img_intensity2/result.json",
+    "updates": {
+      "adam_calls": 1200,
+      "optimizers": {
+        "128096086508224": {
+          "calls": 600,
+          "device": "cuda:0",
+          "state_devices": [
+            "cuda:0"
+          ],
+          "parameter_dtypes": [
+            "torch.float32"
+          ]
+        },
+        "128096074351056": {
+          "calls": 600,
+          "device": "cuda:0",
+          "state_devices": [
+            "cuda:0"
+          ],
+          "parameter_dtypes": [
+            "torch.float32"
+          ]
+        }
+      }
+    },
+    "regularizer_receipt": {
+      "calls": 600,
+      "dimensions": {
+        "64": 600
+      },
+      "extra_critic_forwards": 0
+    },
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 8,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 7,
+      "first_pass_step": 400,
+      "stable_from_step": 450,
+      "stable_from_seconds": 9.104646265041083,
+      "confirmed_step": 550,
+      "confirmed_seconds": 11.01247698510997
+    },
+    "audit": "PASS",
+    "code_hashes": {
+      "probe.py": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+      "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+      "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+    },
+    "declaration_sha256": "e7ee88ba27449816f86b13a1de4ce64a62b782441c94b40cc6e9cd177889044d",
+    "audit_only": true,
+    "training_rerun": false,
+    "repair": "Image spec aliases gradient_penalty/penalty_coeff/kappa are permitted regularizer fields; exact declared spec and frozen thresholds/data/budgets also checked. Original ERROR retained."
+  }
+}

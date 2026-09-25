@@ -1,19 +1,25 @@
 {
-  "candidate": "constraints_simple_regularization",
-  "role": "active CPU-to-GPU porting base",
-  "config": "configs/toy100/constraints_simple_regularization.json",
-  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
-  "original_cpu_passes": 22,
-  "gpu_native_passes": 16,
+  "candidate": "dimension_rms_hybrid",
+  "role": "user-selected GPU GAN research base",
+  "config": "reports/toy100/dimension-rms-base/config.json",
+  "config_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+  "mechanism": "reports/toy100/dimension-rms-base/mechanism.py",
+  "mechanism_sha256": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+  "probe": "reports/toy100/dimension-rms-base/probe.py",
+  "probe_sha256": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+  "requires_mechanism": true,
+  "report": "reports/toy100/dimension-rms-base/README.md",
+  "measured_gpu_passes": 6,
+  "measured_gpu_failures": 1,
+  "measured_gpu_total": 7,
   "toy_total": 22,
-  "native_gpu_passes": 3,
+  "unmeasured_toys": 15,
+  "full_toy_status": "NOT_RUN",
+  "own_state_stability": "NOT_RUN",
   "gpu_release_qualified": false,
-  "priority": "GPU GAN formulation search from the scheduled CPU recipe; clear both blockers, all 22 toys, then own-state stability",
-  "porting_reference": "cuda_cpu_init: CPU initial parameters, native CUDA random draws and CUDA updates",
-  "diagnostic_passes": 4,
-  "diagnostic_total": 6,
-  "diagnostic_full_toy_status": "NOT_RUN",
+  "initialization": "retained CPU initial parameters; native CUDA random draws and training",
   "first_gates": [
+    "two_pole",
     "trajectory",
     "mode_hold",
     "vector_unequal_mass"
@@ -23,18 +29,18 @@
     "img_bars4",
     "img_blobs4"
   ],
-  "report": "reports/toy100/cpu-recipe-gpu-port/README.md",
-  "schedules": "preserve original decay",
-  "auxiliary_host_terms": "preserve original AE and unused-token terms",
+  "known_failures": [
+    "two_pole"
+  ],
+  "schedules": "retain original decay/noise as starting defaults",
+  "auxiliary_host_terms": "retain original AE and unused-token terms",
   "seed_sweeps": false,
   "stability_priority": "quality after convergence",
-  "formulation_search": "reports/toy100/formulation-search.md",
-  "allowed_declared_changes": [
-    "adversarial objective",
-    "critic regularization",
-    "particle preconditioning",
-    "adversarial update rule"
-  ],
-  "latest_formulation_round": "reports/toy100/formulation-round-20260924/README.md",
-  "latest_followups": "reports/toy100/formulation-round-20260924/FOLLOWUPS.md"
+  "historical_reference": {
+    "candidate": "constraints_simple_regularization",
+    "recorded_cpu_passes": 22,
+    "native_gpu_passes": 16,
+    "native_100_mode_passes": 3,
+    "report": "reports/toy100/gpu-known-winner-control/README.md"
+  }
 }
