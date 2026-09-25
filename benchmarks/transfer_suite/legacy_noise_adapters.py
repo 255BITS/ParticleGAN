@@ -17,6 +17,7 @@ import time
 import torch
 from torch import nn
 
+from benchmarks.toy100.device import experiment_generator, host_device, rng_fork_devices
 from benchmarks.toy100.models import (
     LearnableOutputScale, OUTPUT_NOISE_SEED_OFFSET, linear_input_noise,
     linear_output_noise,
@@ -87,10 +88,10 @@ class NoisePolicy:
         self.input_anneal_end = float(input_anneal_end)
         self.total_steps = total_steps
         self.seed = seed
-        self.input_stream = torch.Generator(device="cpu").manual_seed(seed + 901)
+        self.input_stream = torch.Generator(device=host_device()).manual_seed(seed + 901)
         self.output_noise_rng = output_noise_rng
         self.output_stream = (
-            torch.Generator(device="cpu").manual_seed(seed + OUTPUT_NOISE_SEED_OFFSET)
+            torch.Generator(device=host_device()).manual_seed(seed + OUTPUT_NOISE_SEED_OFFSET)
             if output_noise_rng == "isolated" else None
         )
         self._output_stream_initial_sha256 = (
@@ -252,8 +253,10 @@ class NoisePolicy:
         previous_detach = self._detach_output_scale
         previous_output_sigma = self.output_sigma
         try:
-            with torch.random.fork_rng(devices=[]):
+            with torch.random.fork_rng(devices=rng_fork_devices()):
                 torch.random.default_generator.manual_seed(self.seed + 402 + step)
+                if host_device().type == "cuda":
+                    experiment_generator().manual_seed(self.seed + 402 + step)
                 self.input_stream.manual_seed(self.seed + 1402 + step)
                 if self.output_stream is not None:
                     self.output_stream.manual_seed(

@@ -1,0 +1,504 @@
+{
+ "direct_particle": {
+  "two_pole": {
+   "status": "PASS",
+   "mean_abs": 0.6441625356674194,
+   "suffix": 10,
+   "fixture": true
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 4,
+   "hq": 0.99951171875,
+   "missing": [
+    1,
+    3,
+    4,
+    7
+   ],
+   "suffix": 0,
+   "fixture": true
+  },
+  "unipolar": {
+   "status": "PASS",
+   "suffix": 19,
+   "fixture": true
+  },
+  "mid_scale_identity": {
+   "status": "PASS",
+   "suffix": 17,
+   "fixture": true
+  },
+  "cover_leftover": {
+   "status": "PASS",
+   "suffix": 13,
+   "fixture": true
+  },
+  "trajectory": {
+   "status": "PASS",
+   "identity_mse": 0.0007454195874743164,
+   "suffix": 22,
+   "fixture": true
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.0007401591865345836,
+   "suffix": 19,
+   "fixture": true
+  },
+  "img_stripes2": {
+   "status": "FAIL",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 2,
+   "fixture": true
+  },
+  "img_bars4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.9375,
+   "suffix": 6,
+   "fixture": true
+  },
+  "vector_overlap": {
+   "status": "PASS",
+   "covariance_error": 0.16486752033233643,
+   "suffix": 7,
+   "fixture": false
+  },
+  "img_blobs4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.96875,
+   "suffix": 15,
+   "fixture": true
+  },
+  "img_intensity2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 7,
+   "fixture": true
+  },
+  "vector_unequal_mass": {
+   "status": "PASS",
+   "hq": 0.97216796875,
+   "min_mass_ratio": 0.8375901579856873,
+   "mass_tv": 0.052070312201976776,
+   "covariance_error": 0.1076301857829094,
+   "component_covariance_error": 0.3480808213353157,
+   "suffix": 16,
+   "fixture": true
+  },
+  "vector_unequal_width": {
+   "status": "PASS",
+   "hq": 0.98388671875,
+   "min_mass_ratio": 0.927734375,
+   "mass_tv": 0.02880859375,
+   "covariance_error": 0.021196439862251282,
+   "component_covariance_error": 0.34781439229846,
+   "suffix": 21,
+   "fixture": true
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.995361328125,
+   "min_mass_ratio": 0.98291015625,
+   "mass_tv": 0.008544921875,
+   "covariance_error": 0.09024040400981903,
+   "component_covariance_error": 0.16911619901657104,
+   "suffix": 23,
+   "fixture": true
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.9912109375,
+   "min_mass_ratio": 0.961669921875,
+   "mass_tv": 0.012858077883720398,
+   "covariance_error": 0.08626166731119156,
+   "component_covariance_error": 0.1548410306374232,
+   "suffix": 6,
+   "fixture": false
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.08814471960067749,
+   "suffix": 11,
+   "fixture": false
+  },
+  "ae_gan_hold": {
+   "status": "PASS",
+   "suffix": 21,
+   "fixture": true
+  },
+  "unused_token_hold": {
+   "status": "PASS",
+   "suffix": 11,
+   "fixture": true
+  },
+  "grid100": {
+   "status": "ERROR",
+   "error": "Traceback (most recent call last):\n  File \"/tmp/toy-c8pas3vu/repo/reports/toy100/direct-particle-base/probe-fast.py\", line 222, in <module>\n    job = next(j for j in jobs if j['spec']['name'] == a.task)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+   "fixture": false
+  },
+  "rotated100": {
+   "status": "ERROR",
+   "error": "Traceback (most recent call last):\n  File \"/tmp/toy-c8pas3vu/repo/reports/toy100/direct-particle-base/probe-fast.py\", line 222, in <module>\n    job = next(j for j in jobs if j['spec']['name'] == a.task)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+   "fixture": false
+  },
+  "staggered100": {
+   "status": "ERROR",
+   "error": "Traceback (most recent call last):\n  File \"/tmp/toy-c8pas3vu/repo/reports/toy100/direct-particle-base/probe-fast.py\", line 222, in <module>\n    job = next(j for j in jobs if j['spec']['name'] == a.task)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+   "fixture": false
+  }
+ },
+ "dimension_rms": {
+  "two_pole": {
+   "status": "FAIL",
+   "mean_abs": 0.10439490526914597,
+   "suffix": 0,
+   "fixture": true
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 4,
+   "hq": 0.99951171875,
+   "missing": [
+    1,
+    3,
+    4,
+    7
+   ],
+   "suffix": 0,
+   "fixture": true
+  },
+  "unipolar": {
+   "status": "PASS",
+   "suffix": 19,
+   "fixture": false
+  },
+  "mid_scale_identity": {
+   "status": "PASS",
+   "suffix": 16,
+   "fixture": false
+  },
+  "cover_leftover": {
+   "status": "PASS",
+   "suffix": 13,
+   "fixture": false
+  },
+  "trajectory": {
+   "status": "PASS",
+   "identity_mse": 0.0007454195874743164,
+   "suffix": 22,
+   "fixture": true
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.0007226124289445579,
+   "suffix": 22,
+   "fixture": false
+  },
+  "img_stripes2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 22,
+   "fixture": false
+  },
+  "img_bars4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.9375,
+   "suffix": 6,
+   "fixture": true
+  },
+  "vector_overlap": {
+   "status": "PASS",
+   "covariance_error": 0.16486752033233643,
+   "suffix": 7,
+   "fixture": false
+  },
+  "img_blobs4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 0.96875,
+   "suffix": 15,
+   "fixture": true
+  },
+  "img_intensity2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 7,
+   "fixture": true
+  },
+  "vector_unequal_mass": {
+   "status": "PASS",
+   "hq": 0.97216796875,
+   "min_mass_ratio": 0.8375901579856873,
+   "mass_tv": 0.052070312201976776,
+   "covariance_error": 0.1076301857829094,
+   "component_covariance_error": 0.3480808213353157,
+   "suffix": 16,
+   "fixture": true
+  },
+  "vector_unequal_width": {
+   "status": "PASS",
+   "hq": 0.958251953125,
+   "min_mass_ratio": 0.916015625,
+   "mass_tv": 0.0419921875,
+   "covariance_error": 0.05106746032834053,
+   "component_covariance_error": 0.48523782193660736,
+   "suffix": 21,
+   "fixture": false
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.992919921875,
+   "min_mass_ratio": 0.951171875,
+   "mass_tv": 0.0244140625,
+   "covariance_error": 0.012268398888409138,
+   "component_covariance_error": 0.08383651822805405,
+   "suffix": 9,
+   "fixture": false
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.9912109375,
+   "min_mass_ratio": 0.961669921875,
+   "mass_tv": 0.012858077883720398,
+   "covariance_error": 0.08626166731119156,
+   "component_covariance_error": 0.1548410306374232,
+   "suffix": 6,
+   "fixture": false
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.08814471960067749,
+   "suffix": 11,
+   "fixture": false
+  },
+  "ae_gan_hold": {
+   "status": "PASS",
+   "suffix": 23,
+   "fixture": false
+  },
+  "unused_token_hold": {
+   "status": "PASS",
+   "suffix": 9,
+   "fixture": false
+  },
+  "grid100": {
+   "status": "ERROR",
+   "error": "Traceback (most recent call last):\n  File \"/tmp/toy-c8pas3vu/repo/reports/toy100/dimension-rms-base/probe.py\", line 177, in <module>\n    job = next(j for j in jobs if j['spec']['name'] == a.task)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+   "fixture": false
+  },
+  "rotated100": {
+   "status": "ERROR",
+   "error": "Traceback (most recent call last):\n  File \"/tmp/toy-c8pas3vu/repo/reports/toy100/dimension-rms-base/probe.py\", line 177, in <module>\n    job = next(j for j in jobs if j['spec']['name'] == a.task)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+   "fixture": false
+  },
+  "staggered100": {
+   "status": "ERROR",
+   "error": "Traceback (most recent call last):\n  File \"/tmp/toy-c8pas3vu/repo/reports/toy100/dimension-rms-base/probe.py\", line 177, in <module>\n    job = next(j for j in jobs if j['spec']['name'] == a.task)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+   "fixture": false
+  }
+ },
+ "simpler22": {
+  "two_pole": {
+   "status": "PASS",
+   "mean_abs": 0.7325619459152222,
+   "suffix": 12,
+   "fixture": null
+  },
+  "mode_hold": {
+   "status": "FAIL",
+   "modes": 5,
+   "hq": 0.753173828125,
+   "missing": [
+    5,
+    6,
+    7
+   ],
+   "suffix": 0,
+   "fixture": null
+  },
+  "unipolar": {
+   "status": "PASS",
+   "suffix": 18,
+   "fixture": null
+  },
+  "mid_scale_identity": {
+   "status": "PASS",
+   "suffix": 18,
+   "fixture": null
+  },
+  "cover_leftover": {
+   "status": "PASS",
+   "suffix": 14,
+   "fixture": null
+  },
+  "trajectory": {
+   "status": "FAIL",
+   "identity_mse": 0.27544981241226196,
+   "suffix": 0,
+   "fixture": null
+  },
+  "residual_student": {
+   "status": "PASS",
+   "identity_mse": 0.0007252918439917266,
+   "suffix": 14,
+   "fixture": null
+  },
+  "img_stripes2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 22,
+   "fixture": null
+  },
+  "img_bars4": {
+   "status": "FAIL",
+   "modes": 4,
+   "hq": 0.9375,
+   "suffix": 3,
+   "fixture": null
+  },
+  "vector_overlap": {
+   "status": "FAIL",
+   "covariance_error": 0.13201528787612915,
+   "suffix": 4,
+   "fixture": null
+  },
+  "img_blobs4": {
+   "status": "FAIL",
+   "modes": 2,
+   "hq": 0.875,
+   "suffix": 0,
+   "fixture": null
+  },
+  "img_intensity2": {
+   "status": "FAIL",
+   "modes": 0,
+   "hq": 0.0625,
+   "suffix": 0,
+   "fixture": null
+  },
+  "vector_unequal_mass": {
+   "status": "FAIL",
+   "hq": 0.999267578125,
+   "min_mass_ratio": 0.3079927861690521,
+   "mass_tv": 0.14677734673023224,
+   "covariance_error": 0.37463250756263733,
+   "component_covariance_error": 0.3825387880206108,
+   "suffix": 0,
+   "fixture": null
+  },
+  "vector_unequal_width": {
+   "status": "PASS",
+   "hq": 0.971435546875,
+   "min_mass_ratio": 0.9462890625,
+   "mass_tv": 0.017578125,
+   "covariance_error": 0.05736516788601875,
+   "component_covariance_error": 0.6914946287870407,
+   "suffix": 17,
+   "fixture": null
+  },
+  "vector_two_broad": {
+   "status": "PASS",
+   "hq": 0.98681640625,
+   "min_mass_ratio": 0.9853515625,
+   "mass_tv": 0.00732421875,
+   "covariance_error": 0.22746586799621582,
+   "component_covariance_error": 0.38109922409057617,
+   "suffix": 23,
+   "fixture": null
+  },
+  "vector_anisotropic": {
+   "status": "PASS",
+   "hq": 0.963134765625,
+   "min_mass_ratio": 0.66943359375,
+   "mass_tv": 0.1101887971162796,
+   "covariance_error": 0.22624489665031433,
+   "component_covariance_error": 0.24007074783245722,
+   "suffix": 16,
+   "fixture": null
+  },
+  "vector_spiral": {
+   "status": "PASS",
+   "covariance_error": 0.08447383344173431,
+   "suffix": 22,
+   "fixture": null
+  },
+  "ae_gan_hold": {
+   "status": "PASS",
+   "suffix": 23,
+   "fixture": null
+  },
+  "unused_token_hold": {
+   "status": "PASS",
+   "suffix": 14,
+   "fixture": null
+  },
+  "grid100": {
+   "status": "FAIL",
+   "fixture": null
+  },
+  "rotated100": {
+   "status": "PASS",
+   "fixture": null
+  },
+  "staggered100": {
+   "status": "PASS",
+   "fixture": null
+  }
+ },
+ "cpu_init": {
+  "mode_hold": {
+   "status": "PASS",
+   "modes": 8,
+   "hq": 0.99951171875,
+   "missing": [],
+   "suffix": 5,
+   "fixture": null
+  },
+  "trajectory": {
+   "status": "FAIL",
+   "identity_mse": 0.24618767201900482,
+   "suffix": 0,
+   "fixture": null
+  },
+  "img_bars4": {
+   "status": "FAIL",
+   "modes": 3,
+   "hq": 1.0,
+   "suffix": 0,
+   "fixture": null
+  },
+  "img_blobs4": {
+   "status": "PASS",
+   "modes": 4,
+   "hq": 1.0,
+   "suffix": 17,
+   "fixture": null
+  },
+  "img_intensity2": {
+   "status": "PASS",
+   "modes": 2,
+   "hq": 1.0,
+   "suffix": 9,
+   "fixture": null
+  },
+  "vector_unequal_mass": {
+   "status": "FAIL",
+   "hq": 0.97314453125,
+   "min_mass_ratio": 0.0,
+   "mass_tv": 0.17119139432907104,
+   "covariance_error": 0.3218136429786682,
+   "component_covariance_error": 0.5041635520756245,
+   "suffix": 0,
+   "fixture": null
+  }
+ }
+}

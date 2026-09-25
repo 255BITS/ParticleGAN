@@ -1,0 +1,20 @@
+{
+  "torch": "2.14.0+cu126",
+  "torch_file": "/tmp/particlegan-torch214-cu126/lib/python3.12/site-packages/torch/__init__.py",
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:38:16) [GCC 14.3.0]",
+  "cuda": "12.6",
+  "cudnn": 91002,
+  "gpu": "NVIDIA RTX A6000",
+  "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+  "dependencies": {
+    "triton": "3.8.0",
+    "torchvision": "0.29.0+cu126",
+    "nvidia-cublas-cu12": "12.6.4.1",
+    "nvidia-cudnn-cu12": "9.10.2.21",
+    "nvidia-cuda-runtime-cu12": "12.6.77",
+    "numpy": "2.5.2"
+  },
+  "worker_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "source_manifest_sha256": "681b1f1113c305a8603c2083dd3bf843ca8f21a464e756943235b0c721c07c2d"
+}

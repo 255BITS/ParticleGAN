@@ -191,7 +191,10 @@ def main():
     parser.add_argument("--candidate", type=Path, default=Path("reports/behavioral_baseline/convergence/leading_config.json"))
     parser.add_argument("--reference", type=Path)
     parser.add_argument("--output", type=Path, required=True)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     result = run(args.policy, args.candidate, args.reference, args.output)
     return 0 if all(len(r["toys"]) == 9 and all("error" not in t for t in r["toys"].values()) for r in result["rows"]) else 1
 

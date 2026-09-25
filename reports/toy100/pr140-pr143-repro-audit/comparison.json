@@ -1,0 +1,142 @@
+{
+  "status": "MATCH",
+  "prs": {
+    "140": {
+      "update_records_equal": 2400,
+      "quality_checks_equal": 240,
+      "passing_stay_checks": 114,
+      "stay_checks": 120,
+      "min_modes": 5,
+      "min_hq": 0.362548828125,
+      "failing_steps": [
+        1820,
+        1850,
+        2180,
+        2190,
+        2200,
+        2260
+      ],
+      "final": {
+        "step": 2400,
+        "modes": 8,
+        "hq": 1.0,
+        "effective_modes": 7.526482582092285,
+        "hq_counts": [
+          695,
+          698,
+          341,
+          657,
+          314,
+          321,
+          701,
+          369
+        ]
+      },
+      "step2190": {
+        "step": 2190,
+        "modes": 5,
+        "hq": 0.362548828125,
+        "effective_modes": 3.7461352348327637,
+        "hq_counts": [
+          573,
+          421,
+          281,
+          209,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "source_hashes_match": 10
+    },
+    "143": {
+      "update_records_equal": 2400,
+      "quality_checks_equal": 240,
+      "passing_stay_checks": 115,
+      "stay_checks": 120,
+      "min_modes": 7,
+      "min_hq": 0.622314453125,
+      "failing_steps": [
+        1560,
+        1810,
+        2110,
+        2210,
+        2380
+      ],
+      "final": {
+        "step": 2400,
+        "modes": 8,
+        "hq": 1.0,
+        "effective_modes": 7.526482582092285,
+        "hq_counts": [
+          695,
+          698,
+          341,
+          657,
+          314,
+          321,
+          701,
+          369
+        ]
+      },
+      "step2190": {
+        "step": 2190,
+        "modes": 8,
+        "hq": 0.933349609375,
+        "effective_modes": 7.5836944580078125,
+        "hq_counts": [
+          695,
+          698,
+          341,
+          623,
+          314,
+          321,
+          462,
+          369
+        ]
+      },
+      "source_hashes_match": 11
+    }
+  },
+  "prefix_controls": {
+    "cbwr-AVX2": {
+      "sharpness": 0.3852119743824005,
+      "g_factor": 0.10636890604491699
+    },
+    "cbwr-COMPATIBLE": {
+      "sharpness": 0.3852139115333557,
+      "g_factor": 0.10635994516595056
+    },
+    "cbwr-SSE4_2": {
+      "sharpness": 0.3852119743824005,
+      "g_factor": 0.10636890604491699
+    },
+    "default": {
+      "sharpness": 0.3852115273475647,
+      "g_factor": 0.10636833119977061
+    },
+    "deterministic": {
+      "sharpness": 0.3852115273475647,
+      "g_factor": 0.10636833119977061
+    },
+    "intel-dispatch": {
+      "sharpness": 0.38521575927734375,
+      "g_factor": 0.10629096826749508
+    },
+    "interop1": {
+      "sharpness": 0.3852115273475647,
+      "g_factor": 0.10636833119977061
+    },
+    "mkl-verbose": {
+      "sharpness": 0.3852115273475647,
+      "g_factor": 0.10636833119977061
+    }
+  },
+  "warm_summary_and_state_hashes_equal": true,
+  "cold_results_equal_excluding_timing": [
+    "trajectory",
+    "mode_hold"
+  ],
+  "initial_model_prior_rng_tensors_equal": 20
+}

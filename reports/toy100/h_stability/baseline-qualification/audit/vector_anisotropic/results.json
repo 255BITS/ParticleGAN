@@ -1,0 +1,1700 @@
+[
+  {
+    "seconds": 10.964645710075274,
+    "shared_gate_eligible": false,
+    "stages": [
+      {
+        "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/vector_anisotropic/eps_net_1m/vector_anisotropic/episodes/eps_net_1m__vector_anisotropic.json.gz",
+        "candidate": "eps_net_1m",
+        "checkpoint_sha256": "747ef25330db8132202b7de62dba83d68ccfae9818f03d4607f981af87c0040d",
+        "gate": "vector_anisotropic",
+        "metrics": {
+          "frozen_evidence_audit": "PASS",
+          "live": {
+            "component_counts": [
+              1547,
+              1344,
+              1205
+            ],
+            "component_covariance_error": 0.11518727988004684,
+            "component_covariance_errors": [
+              0.049350306391716,
+              0.17427323758602142,
+              0.1219382956624031
+            ],
+            "component_mass": [
+              0.377685546875,
+              0.328125,
+              0.294189453125
+            ],
+            "component_min_eigen_ratio": 0.2500842809677124,
+            "covariance_error": 0.0385771319270134,
+            "hq": 0.97607421875,
+            "mass_tv": 0.0443522185087204,
+            "mean_error": 0.04319654405117035,
+            "min_mass_ratio": 0.882568359375,
+            "sample_count": 4096,
+            "sw1_normalized": 0.04217459749644065,
+            "target_mass": [
+              0.3333333432674408,
+              0.3333333432674408,
+              0.3333333432674408
+            ],
+            "target_scale": 2.032285690307617
+          },
+          "observations": [
+            {
+              "component_counts": [
+                1850,
+                2246,
+                0
+              ],
+              "component_covariance_error": 2.5060195128122964,
+              "component_covariance_errors": [
+                2.4953291416168213,
+                4.022729396820068,
+                1.0
+              ],
+              "component_mass": [
+                0.45166015625,
+                0.54833984375,
+                0.0
+              ],
+              "component_min_eigen_ratio": 0.0,
+              "covariance_error": 0.8305644989013672,
+              "ema": {
+                "component_counts": [
+                  0,
+                  4096,
+                  0
+                ],
+                "component_covariance_error": 0.9867357015609741,
+                "component_covariance_errors": [
+                  1.0,
+                  0.9602071046829224,
+                  1.0
+                ],
+                "component_mass": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "component_min_eigen_ratio": 0.0,
+                "covariance_error": 0.9980963468551636,
+                "hq": 0.0,
+                "mass_tv": 0.6666666865348816,
+                "mean_error": 0.11613279581069946,
+                "min_mass_ratio": 0.0,
+                "sample_count": 4096,
+                "sw1_normalized": 0.5907320298488132,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.007080078125,
+              "mass_tv": 0.3333333134651184,
+              "mean_error": 0.06448011845350266,
+              "min_mass_ratio": 0.0,
+              "sample_count": 4096,
+              "seconds": 1.332170340931043,
+              "step": 50,
+              "sw1_normalized": 0.3321933396714979,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1999,
+                2097,
+                0
+              ],
+              "component_covariance_error": 2.2278948624928794,
+              "component_covariance_errors": [
+                4.056484699249268,
+                1.6271998882293701,
+                1.0
+              ],
+              "component_mass": [
+                0.488037109375,
+                0.511962890625,
+                0.0
+              ],
+              "component_min_eigen_ratio": 0.0,
+              "covariance_error": 0.7314229011535645,
+              "ema": {
+                "component_counts": [
+                  151,
+                  3945,
+                  0
+                ],
+                "component_covariance_error": 0.9311839540799459,
+                "component_covariance_errors": [
+                  0.9482819437980652,
+                  0.8452699184417725,
+                  1.0
+                ],
+                "component_mass": [
+                  0.036865234375,
+                  0.963134765625,
+                  0.0
+                ],
+                "component_min_eigen_ratio": 0.0,
+                "covariance_error": 0.9855353236198425,
+                "hq": 0.0,
+                "mass_tv": 0.6298014521598816,
+                "mean_error": 0.10058622807264328,
+                "min_mass_ratio": 0.0,
+                "sample_count": 4096,
+                "sw1_normalized": 0.5459688991959666,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.388916015625,
+              "mass_tv": 0.3333333134651184,
+              "mean_error": 0.42282965779304504,
+              "min_mass_ratio": 0.0,
+              "sample_count": 4096,
+              "seconds": 1.7587411478161812,
+              "step": 100,
+              "sw1_normalized": 0.305460660364166,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1563,
+                1345,
+                1188
+              ],
+              "component_covariance_error": 4.8648918469746905,
+              "component_covariance_errors": [
+                3.2117486000061035,
+                2.585822105407715,
+                8.797104835510254
+              ],
+              "component_mass": [
+                0.381591796875,
+                0.328369140625,
+                0.2900390625
+              ],
+              "component_min_eigen_ratio": 2.456392288208008,
+              "covariance_error": 0.0689542293548584,
+              "ema": {
+                "component_counts": [
+                  911,
+                  3183,
+                  2
+                ],
+                "component_covariance_error": 0.9166317184766134,
+                "component_covariance_errors": [
+                  0.7453146576881409,
+                  1.0045804977416992,
+                  1.0
+                ],
+                "component_mass": [
+                  0.222412109375,
+                  0.777099609375,
+                  0.00048828125
+                ],
+                "component_min_eigen_ratio": 0.0,
+                "covariance_error": 0.9538320302963257,
+                "hq": 0.010986328125,
+                "mass_tv": 0.4437662959098816,
+                "mean_error": 0.09661827981472015,
+                "min_mass_ratio": 0.00146484375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.4917229820094359,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.37060546875,
+              "mass_tv": 0.0482584685087204,
+              "mean_error": 0.0667952224612236,
+              "min_mass_ratio": 0.8701171875,
+              "sample_count": 4096,
+              "seconds": 2.1855623449664563,
+              "step": 150,
+              "sw1_normalized": 0.11866373205894305,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 2.3475235303243003,
+              "component_covariance_errors": [
+                1.6722893714904785,
+                1.327897071838379,
+                4.042384147644043
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 1.9111709594726562,
+              "covariance_error": 0.047206681221723557,
+              "ema": {
+                "component_counts": [
+                  1392,
+                  2431,
+                  273
+                ],
+                "component_covariance_error": 0.7928125063578287,
+                "component_covariance_errors": [
+                  0.49095213413238525,
+                  1.0698219537734985,
+                  0.8176634311676025
+                ],
+                "component_mass": [
+                  0.33984375,
+                  0.593505859375,
+                  0.066650390625
+                ],
+                "component_min_eigen_ratio": 0.5978996157646179,
+                "covariance_error": 0.8979634046554565,
+                "hq": 0.062744140625,
+                "mass_tv": 0.2666829228401184,
+                "mean_error": 0.08884347230195999,
+                "min_mass_ratio": 0.199951171875,
+                "sample_count": 4096,
+                "sw1_normalized": 0.43118273716732847,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.572509765625,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.04523670673370361,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 2.6023561300244182,
+              "step": 200,
+              "sw1_normalized": 0.08243429834312996,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 1.4260647694269817,
+              "component_covariance_errors": [
+                1.1880946159362793,
+                1.019736409187317,
+                2.0703632831573486
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 1.2417736053466797,
+              "covariance_error": 0.05235067009925842,
+              "ema": {
+                "component_counts": [
+                  1525,
+                  1835,
+                  736
+                ],
+                "component_covariance_error": 0.9416726032892863,
+                "component_covariance_errors": [
+                  0.4436377286911011,
+                  1.140815258026123,
+                  1.2405648231506348
+                ],
+                "component_mass": [
+                  0.372314453125,
+                  0.447998046875,
+                  0.1796875
+                ],
+                "component_min_eigen_ratio": 0.8909056186676025,
+                "covariance_error": 0.8211237192153931,
+                "hq": 0.10498046875,
+                "mass_tv": 0.1536458283662796,
+                "mean_error": 0.07812268286943436,
+                "min_mass_ratio": 0.5390625,
+                "sample_count": 4096,
+                "sw1_normalized": 0.369859470128193,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.656982421875,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.08782374113798141,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 3.010582498041913,
+              "step": 250,
+              "sw1_normalized": 0.0775645546047266,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.884239395459493,
+              "component_covariance_errors": [
+                0.6683725714683533,
+                0.7424268126487732,
+                1.2419188022613525
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.982822060585022,
+              "covariance_error": 0.04432188719511032,
+              "ema": {
+                "component_counts": [
+                  1535,
+                  1450,
+                  1111
+                ],
+                "component_covariance_error": 0.8885465264320374,
+                "component_covariance_errors": [
+                  0.4768565893173218,
+                  0.8727729916572571,
+                  1.3160099983215332
+                ],
+                "component_mass": [
+                  0.374755859375,
+                  0.35400390625,
+                  0.271240234375
+                ],
+                "component_min_eigen_ratio": 1.0776060819625854,
+                "covariance_error": 0.730292022228241,
+                "hq": 0.159912109375,
+                "mass_tv": 0.0620930939912796,
+                "mean_error": 0.0676337257027626,
+                "min_mass_ratio": 0.813720703125,
+                "sample_count": 4096,
+                "sw1_normalized": 0.31146571736541334,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.76123046875,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.020713279023766518,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 3.4144914590287954,
+              "step": 300,
+              "sw1_normalized": 0.06530206566757672,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.5541004141171774,
+              "component_covariance_errors": [
+                0.28667014837265015,
+                0.5815866589546204,
+                0.7940444350242615
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.8853006958961487,
+              "covariance_error": 0.04602724313735962,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1347,
+                  1202
+                ],
+                "component_covariance_error": 0.7745274404684702,
+                "component_covariance_errors": [
+                  0.4966416656970978,
+                  0.4482992887496948,
+                  1.3786413669586182
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328857421875,
+                  0.29345703125
+                ],
+                "component_min_eigen_ratio": 1.1390299797058105,
+                "covariance_error": 0.6356629729270935,
+                "hq": 0.228759765625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.059892408549785614,
+                "min_mass_ratio": 0.88037109375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.25964591371399237,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.82666015625,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.04056832939386368,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 3.8266102739144117,
+              "step": 350,
+              "sw1_normalized": 0.057975479069509894,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.40444467465082806,
+              "component_covariance_errors": [
+                0.2802162170410156,
+                0.41418737173080444,
+                0.5189304351806641
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.7968791723251343,
+              "covariance_error": 0.06099437549710274,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.6993683179219564,
+                "component_covariance_errors": [
+                  0.43633148074150085,
+                  0.4109133780002594,
+                  1.2508600950241089
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 1.1241748332977295,
+                "covariance_error": 0.5432446002960205,
+                "hq": 0.3388671875,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.0542575865983963,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.2156350392725314,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.8662109375,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.05935417860746384,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 4.231406867969781,
+              "step": 400,
+              "sw1_normalized": 0.05618143203257053,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.29958785076936084,
+              "component_covariance_errors": [
+                0.24576948583126068,
+                0.31354713439941406,
+                0.33944693207740784
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.7946305871009827,
+              "covariance_error": 0.0362611822783947,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.6062908271948496,
+                "component_covariance_errors": [
+                  0.3694784641265869,
+                  0.3833453953266144,
+                  1.0660486221313477
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 1.0535746812820435,
+                "covariance_error": 0.45737770199775696,
+                "hq": 0.44140625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.04989490285515785,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.1795976876648869,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.8798828125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.06751884520053864,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 4.643303161952645,
+              "step": 450,
+              "sw1_normalized": 0.05718181049232147,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.24789019425710043,
+              "component_covariance_errors": [
+                0.2321721315383911,
+                0.20384666323661804,
+                0.3076517879962921
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.8273414373397827,
+              "covariance_error": 0.08750002086162567,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.5139024357000986,
+                "component_covariance_errors": [
+                  0.31636419892311096,
+                  0.3508462905883789,
+                  0.8744968175888062
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.9825618267059326,
+                "covariance_error": 0.3802354037761688,
+                "hq": 0.500244140625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.04818498715758324,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.14985664341160934,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.89892578125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.10879562050104141,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 5.053981750970706,
+              "step": 500,
+              "sw1_normalized": 0.07774330674104156,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.18478899200757345,
+              "component_covariance_errors": [
+                0.21590106189250946,
+                0.13506805896759033,
+                0.20339785516262054
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.7953727841377258,
+              "covariance_error": 0.039246708154678345,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.4275454084078471,
+                "component_covariance_errors": [
+                  0.2831577956676483,
+                  0.3049810826778412,
+                  0.6944973468780518
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.924649715423584,
+                "covariance_error": 0.3129449188709259,
+                "hq": 0.5673828125,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.049445293843746185,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.1255036060433429,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.920654296875,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.045990604907274246,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 5.467812843853608,
+              "step": 550,
+              "sw1_normalized": 0.04827536926808278,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.15097273886203766,
+              "component_covariance_errors": [
+                0.24702320992946625,
+                0.04714573919773102,
+                0.1587492674589157
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.7310872673988342,
+              "covariance_error": 0.06798256933689117,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.35047659774621326,
+                "component_covariance_errors": [
+                  0.2617533504962921,
+                  0.24636228382587433,
+                  0.5433141589164734
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.8635043501853943,
+                "covariance_error": 0.2568747401237488,
+                "hq": 0.650634765625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05026859790086746,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.10596696319719419,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.91259765625,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.0885276347398758,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 5.870606918819249,
+              "step": 600,
+              "sw1_normalized": 0.06264486995813245,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.1826890471080939,
+              "component_covariance_errors": [
+                0.32918399572372437,
+                0.05834322050213814,
+                0.1605399250984192
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.6643301844596863,
+              "covariance_error": 0.04660692438483238,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.28398678700129193,
+                "component_covariance_errors": [
+                  0.2592000663280487,
+                  0.17274823784828186,
+                  0.42001205682754517
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.8019194602966309,
+                "covariance_error": 0.2124217450618744,
+                "hq": 0.705322265625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.04972343146800995,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.09088186371835649,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.8798828125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.021510744467377663,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 6.2852378350216895,
+              "step": 650,
+              "sw1_normalized": 0.06927038655686563,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.210123082002004,
+              "component_covariance_errors": [
+                0.3263157308101654,
+                0.1551164835691452,
+                0.14893703162670135
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.6489041447639465,
+              "covariance_error": 0.059711333364248276,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.23262218137582144,
+                "component_covariance_errors": [
+                  0.2738969624042511,
+                  0.10106368362903595,
+                  0.32290589809417725
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.7442107796669006,
+                "covariance_error": 0.17541801929473877,
+                "hq": 0.766357421875,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.052340466529130936,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.07891315474944698,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.94482421875,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.05252177640795708,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 6.696572735905647,
+              "step": 700,
+              "sw1_normalized": 0.04681021619014682,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.19826511045296988,
+              "component_covariance_errors": [
+                0.23741985857486725,
+                0.19160078465938568,
+                0.16577468812465668
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.6707349419593811,
+              "covariance_error": 0.03859560564160347,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.19394399846593538,
+                "component_covariance_errors": [
+                  0.2856203019618988,
+                  0.042769644409418106,
+                  0.25344204902648926
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.7139403223991394,
+                "covariance_error": 0.14505913853645325,
+                "hq": 0.838623046875,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05042601004242897,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.06945839195197011,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.9501953125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.06702560186386108,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 7.105981649830937,
+              "step": 750,
+              "sw1_normalized": 0.04707639402470007,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.19087972243626913,
+              "component_covariance_errors": [
+                0.1795877367258072,
+                0.19570843875408173,
+                0.19734299182891846
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.5591419339179993,
+              "covariance_error": 0.06962577253580093,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.1743806873758634,
+                "component_covariance_errors": [
+                  0.2804688513278961,
+                  0.03693368285894394,
+                  0.20573952794075012
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.7108449339866638,
+                "covariance_error": 0.1204642653465271,
+                "hq": 0.89453125,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.0527266301214695,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.06199503749637495,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.96240234375,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.06612859666347504,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 7.519850421929732,
+              "step": 800,
+              "sw1_normalized": 0.05044924351456542,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.15973211328188577,
+              "component_covariance_errors": [
+                0.1490921527147293,
+                0.19246187806129456,
+                0.13764230906963348
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.4339428246021271,
+              "covariance_error": 0.05690551921725273,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.16973246882359186,
+                "component_covariance_errors": [
+                  0.2689226567745209,
+                  0.06830089539289474,
+                  0.17197385430335999
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.7193882465362549,
+                "covariance_error": 0.10151953995227814,
+                "hq": 0.922119140625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05258901044726372,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.05633624814406905,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.965087890625,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.06275013834238052,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 7.92318700090982,
+              "step": 850,
+              "sw1_normalized": 0.046759785196522206,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.1474889268477758,
+              "component_covariance_errors": [
+                0.1550121158361435,
+                0.14659322798252106,
+                0.14086143672466278
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.3660677373409271,
+              "covariance_error": 0.061978574842214584,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.16463206460078558,
+                "component_covariance_errors": [
+                  0.25456029176712036,
+                  0.08755030483007431,
+                  0.15178559720516205
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.7336287498474121,
+                "covariance_error": 0.08778577297925949,
+                "hq": 0.934814453125,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05197513848543167,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.05206914304793135,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.960693359375,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.05094608664512634,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 8.325077891815454,
+              "step": 900,
+              "sw1_normalized": 0.043739043467029184,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.10897835840781529,
+              "component_covariance_errors": [
+                0.09842047840356827,
+                0.1435990333557129,
+                0.08491556346416473
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.31335610151290894,
+              "covariance_error": 0.037909574806690216,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.15631461391846338,
+                "component_covariance_errors": [
+                  0.22904996573925018,
+                  0.10413921624422073,
+                  0.13575465977191925
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.7164934277534485,
+                "covariance_error": 0.07677927613258362,
+                "hq": 0.942626953125,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05253979191184044,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.04886638267911963,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.9609375,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.02334681898355484,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 8.731517022941262,
+              "step": 950,
+              "sw1_normalized": 0.044522443273270935,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.11080643783013026,
+              "component_covariance_errors": [
+                0.07086030393838882,
+                0.1368710696697235,
+                0.12468793988227844
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.3025611937046051,
+              "covariance_error": 0.0364106222987175,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.1459722543756167,
+                "component_covariance_errors": [
+                  0.1964600831270218,
+                  0.11951086670160294,
+                  0.1219458132982254
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.5901347398757935,
+                "covariance_error": 0.06822355836629868,
+                "hq": 0.94921875,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05299324542284012,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.046556187840390874,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.95703125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.030093196779489517,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 9.143306016921997,
+              "step": 1000,
+              "sw1_normalized": 0.04496875536718339,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.1120608498652776,
+              "component_covariance_errors": [
+                0.06884396076202393,
+                0.12495091557502747,
+                0.14238767325878143
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.3054419159889221,
+              "covariance_error": 0.05851456895470619,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.13783127317825952,
+                "component_covariance_errors": [
+                  0.16868607699871063,
+                  0.1312168538570404,
+                  0.11359088867902756
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.5024225115776062,
+                "covariance_error": 0.06263265758752823,
+                "hq": 0.9541015625,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.052035748958587646,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.044767856267180856,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.9619140625,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.021260036155581474,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 9.546710744965822,
+              "step": 1050,
+              "sw1_normalized": 0.045538648325016445,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.10637377202510834,
+              "component_covariance_errors": [
+                0.07128624618053436,
+                0.16276052594184875,
+                0.0850745439529419
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.2416992336511612,
+              "covariance_error": 0.04096151515841484,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.12839492410421371,
+                "component_covariance_errors": [
+                  0.1453903317451477,
+                  0.13572190701961517,
+                  0.10407253354787827
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.4294942021369934,
+                "covariance_error": 0.05430668964982033,
+                "hq": 0.9599609375,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.051889222115278244,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.04309079476430381,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.968017578125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.07397577166557312,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 9.960484117036685,
+              "step": 1100,
+              "sw1_normalized": 0.052522890010633476,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.13126650949319205,
+              "component_covariance_errors": [
+                0.059484079480171204,
+                0.19455407559871674,
+                0.13976137340068817
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.21700818836688995,
+              "covariance_error": 0.06094181910157204,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.12683290243148804,
+                "component_covariance_errors": [
+                  0.134738951921463,
+                  0.14005804061889648,
+                  0.10570171475410461
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.3716811537742615,
+                "covariance_error": 0.054152946919202805,
+                "hq": 0.963623046875,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.053383518010377884,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.04296152043330709,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.96923828125,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.05155526474118233,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 10.359950348967686,
+              "step": 1150,
+              "sw1_normalized": 0.05651517991971867,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            },
+            {
+              "component_counts": [
+                1547,
+                1344,
+                1205
+              ],
+              "component_covariance_error": 0.11518727988004684,
+              "component_covariance_errors": [
+                0.049350306391716,
+                0.17427323758602142,
+                0.1219382956624031
+              ],
+              "component_mass": [
+                0.377685546875,
+                0.328125,
+                0.294189453125
+              ],
+              "component_min_eigen_ratio": 0.2500842809677124,
+              "covariance_error": 0.0385771319270134,
+              "ema": {
+                "component_counts": [
+                  1547,
+                  1344,
+                  1205
+                ],
+                "component_covariance_error": 0.12270201245943706,
+                "component_covariance_errors": [
+                  0.1131293922662735,
+                  0.15027396380901337,
+                  0.10470268130302429
+                ],
+                "component_mass": [
+                  0.377685546875,
+                  0.328125,
+                  0.294189453125
+                ],
+                "component_min_eigen_ratio": 0.3306070566177368,
+                "covariance_error": 0.04908617585897446,
+                "hq": 0.966796875,
+                "mass_tv": 0.0443522185087204,
+                "mean_error": 0.05236055701971054,
+                "min_mass_ratio": 0.882568359375,
+                "sample_count": 4096,
+                "sw1_normalized": 0.04208339937217446,
+                "target_mass": [
+                  0.3333333432674408,
+                  0.3333333432674408,
+                  0.3333333432674408
+                ],
+                "target_scale": 2.032285690307617
+              },
+              "hq": 0.97607421875,
+              "mass_tv": 0.0443522185087204,
+              "mean_error": 0.04319654405117035,
+              "min_mass_ratio": 0.882568359375,
+              "sample_count": 4096,
+              "seconds": 10.774793064920232,
+              "step": 1200,
+              "sw1_normalized": 0.04217459749644065,
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "target_scale": 2.032285690307617
+            }
+          ],
+          "verdict": {
+            "attempted": true,
+            "confirmation_fraction": 0.5,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": 5.870606918819249,
+              "confirmed_step": 600,
+              "first_pass_step": 400,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 17,
+              "passing_suffix": 17,
+              "stable_from_seconds": 4.231406867969781,
+              "stable_from_step": 400
+            },
+            "metrics": [
+              {
+                "margin": 0.13782540250355935,
+                "metric": "sw1_normalized",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.18,
+                "value": 0.04217459749644065
+              },
+              {
+                "margin": 0.1056477814912796,
+                "metric": "mass_tv",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.15,
+                "value": 0.0443522185087204
+              },
+              {
+                "margin": 0.12607421875000002,
+                "metric": "hq",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.97607421875
+              },
+              {
+                "margin": 0.7348127201199531,
+                "metric": "component_covariance_error",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.11518727988004684
+              },
+              {
+                "margin": 0.10008428096771241,
+                "metric": "component_min_eigen_ratio",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.15,
+                "value": 0.2500842809677124
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          }
+        },
+        "seconds": 10.962573479861021,
+        "status": "PASS"
+      }
+    ],
+    "status": "PASS",
+    "tag": "eps_net_1m"
+  }
+]

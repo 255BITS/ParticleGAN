@@ -17,7 +17,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True, help='New result directory; never overwrite an existing run.')
     parser.add_argument('--tasks', nargs='+', choices=tasks, default=list(tasks))
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     if len(set(args.tasks)) != len(args.tasks):
         parser.error('Each task may appear only once.')
     args.output.mkdir(parents=True, exist_ok=False)

@@ -1,0 +1,42 @@
+[
+  {
+    "candidate": "regression",
+    "gate": "optimistic_direction_decay_resume",
+    "status": "PASS",
+    "metrics": {},
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/mechanism-checks.json",
+    "seconds": 0.3236498620826751
+  },
+  {
+    "candidate": "regression",
+    "gate": "optimistic_gradient_preconditioning",
+    "status": "PASS",
+    "metrics": {},
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/mechanism-checks.json",
+    "seconds": 0.003923523938283324
+  },
+  {
+    "candidate": "regression",
+    "gate": "predictive_critic_restoration",
+    "status": "PASS",
+    "metrics": {},
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/mechanism-checks.json",
+    "seconds": 0.008814109023660421
+  },
+  {
+    "candidate": "regression",
+    "gate": "joint_lookahead_sync",
+    "status": "PASS",
+    "metrics": {},
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/mechanism-checks.json",
+    "seconds": 0.003308083163574338
+  },
+  {
+    "candidate": "regression",
+    "gate": "extragradient_math_rng_update_counts",
+    "status": "PASS",
+    "metrics": {},
+    "artifact": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/reports/toy100/game-dynamics/mechanism-checks.json",
+    "seconds": 0.011401241179555655
+  }
+]

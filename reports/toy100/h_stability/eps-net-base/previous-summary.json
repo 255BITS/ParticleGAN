@@ -1,0 +1,61 @@
+{
+  "status": "FAIL: no promotion",
+  "candidates_executed": 9,
+  "candidate_cap": 12,
+  "experiment_gates": {
+    "FAIL": 12,
+    "PASS": 8
+  },
+  "ledger_statuses": {
+    "FAIL": 12,
+    "PASS": 11,
+    "SKIPPED": 145
+  },
+  "best_candidate": "eps_net_1m",
+  "best_qualification": "cold ring and same-policy own200 PASS; two_pole FAIL",
+  "own_state_checks": 200,
+  "own_state_min_hq": 0.9189453125,
+  "two_pole_mean_abs": 0.029888831079006195,
+  "unit_tests": {
+    "executions": 58,
+    "unique_cases": 34,
+    "passed": 58,
+    "runs": [
+      {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 40.268,
+        "artifact": "reports/toy100/h_stability/adam-response/regression1.xml"
+      },
+      {
+        "tests": 16,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 1.867,
+        "artifact": "reports/toy100/h_stability/adam-response/regression2.xml"
+      },
+      {
+        "tests": 20,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 1.848,
+        "artifact": "reports/toy100/h_stability/adam-response/regression3.xml"
+      }
+    ],
+    "full_suite": "SKIPPED: no candidate passed cold gates"
+  },
+  "fixed_rates": {
+    "g": 0.001125,
+    "d": 0.0015,
+    "prior": 0.00225
+  },
+  "full_own_state_1200": "SKIPPED",
+  "native100": "SKIPPED",
+  "selected_base_changed": false,
+  "reason_stopped": "Epsilon retention improvement does not repair mobility; tensor and split geometry fail their required gates. No further coefficient sweep justified.",
+  "checkpoints_retained": 20
+}

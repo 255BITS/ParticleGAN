@@ -10,6 +10,7 @@ import traceback
 
 import torch
 
+from benchmarks.toy100.device import host_device, rng_fork_devices
 from particlegan import GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
@@ -265,7 +266,7 @@ def run_episode(spec, policy, *, ablation="none", fixed=False, allow_reserved=Fa
                         for averaged, current in zip(target.parameters(), source.parameters()):
                             averaged.mul_(cfg["ema_decay"]).add_(current, alpha=1-cfg["ema_decay"])
             if completed in expected:
-                with torch.random.fork_rng(devices=[]):
+                with torch.random.fork_rng(devices=rng_fork_devices()):
                     live, ema = measure(generator, prior, completed), measure(ema_g, ema_prior, completed)
                 result["observations"].append(dict(**live, ema=ema, step=completed, seconds=time.perf_counter()-started))
         result.update(live=live, ema=ema, update_counts=updates,
@@ -286,7 +287,7 @@ def fingerprint():
              root/"benchmarks/locked_shared/observation.py",
              root/"benchmarks/learned_lr_evaluation.py",
              *root.joinpath("benchmarks/smart_descent").glob("*.py"), Path(__file__)]
-    return dict(version="transfer-vectors-v2", seed=0, device="cpu", threads=1,
+    return dict(version="transfer-vectors-v2", seed=0, device=str(host_device()), threads=1,
                 python=platform.python_version(), torch=str(torch.__version__), torch_git_revision=torch.version.git_version,
                 torch_build=torch.__config__.show(), cpu_capability=torch.backends.cpu.get_cpu_capability(),
                 evaluation_samples=EVAL_SAMPLES, observations=OBSERVATIONS,

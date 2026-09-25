@@ -9,6 +9,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from benchmarks.toy100.device import rng_fork_devices
+
 
 def _card(name, *, features, site, activation_basis='none'):
     return dict(name=name, implementation='shared_geometry_residual_v1',
@@ -61,7 +63,7 @@ class SharedGeometryResidualCritic(nn.Module):
                  'head': [], 'activation': []}[card['site']]
         # nn.Linear's temporary default initialization consumes global random
         # numbers even when immediately zeroed; isolate that consumption.
-        with torch.random.fork_rng(devices=[]):
+        with torch.random.fork_rng(devices=rng_fork_devices()):
             for index in sites:
                 self.injections[str(index)] = nn.Linear(width, card['width'], bias=False)
                 nn.init.zeros_(self.injections[str(index)].weight)

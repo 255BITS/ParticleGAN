@@ -1,0 +1,19 @@
+{
+  "adam_calls": 2400,
+  "optimizers": {
+    "137082883341680": {
+      "calls": 1200,
+      "parameters": 19009,
+      "device": "cuda:0"
+    },
+    "137082883341584": {
+      "calls": 1200,
+      "parameters": 5634,
+      "device": "cuda:0"
+    }
+  },
+  "cpu_parameter_calls": 0,
+  "gradient_devices": [
+    "cuda:0"
+  ]
+}

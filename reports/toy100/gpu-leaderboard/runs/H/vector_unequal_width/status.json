@@ -1,0 +1,142 @@
+{
+  "candidate": "H",
+  "task": "vector_unequal_width",
+  "status": "PASS",
+  "seconds": 19.672527679940686,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 2400,
+    "optimizers": {
+      "137645472547376": {
+        "calls": 1200,
+        "parameters": 33537,
+        "device": "cuda:0"
+      },
+      "137645472547232": {
+        "calls": 1200,
+        "parameters": 5634,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/H/vector_unequal_width/result.json",
+  "metrics": {
+    "sw1_normalized": 0.06291940392546354,
+    "mean_error": 0.08506803214550018,
+    "covariance_error": 0.028884487226605415,
+    "target_scale": 2.138371229171753,
+    "sample_count": 4096,
+    "mass_tv": 0.04736328125,
+    "min_mass_ratio": 0.8935546875,
+    "hq": 0.98486328125,
+    "component_covariance_error": 0.3964254818856716,
+    "component_covariance_errors": [
+      0.6353635191917419,
+      0.379560261964798,
+      0.389244019985199,
+      0.18153412640094757
+    ],
+    "component_min_eigen_ratio": 0.2449035942554474,
+    "component_mass": [
+      0.229248046875,
+      0.223388671875,
+      0.282958984375,
+      0.264404296875
+    ],
+    "target_mass": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "component_counts": [
+      939,
+      915,
+      1159,
+      1083
+    ]
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "sw1_normalized",
+        "value": 0.06291940392546354,
+        "op": "<=",
+        "threshold": 0.18,
+        "status": "PASS",
+        "margin": 0.11708059607453646
+      },
+      {
+        "metric": "mass_tv",
+        "value": 0.04736328125,
+        "op": "<=",
+        "threshold": 0.15,
+        "status": "PASS",
+        "margin": 0.10263671875
+      },
+      {
+        "metric": "hq",
+        "value": 0.98486328125,
+        "op": ">=",
+        "threshold": 0.85,
+        "status": "PASS",
+        "margin": 0.13486328125000002
+      },
+      {
+        "metric": "component_covariance_error",
+        "value": 0.3964254818856716,
+        "op": "<=",
+        "threshold": 0.85,
+        "status": "PASS",
+        "margin": 0.45357451811432836
+      },
+      {
+        "metric": "component_min_eigen_ratio",
+        "value": 0.2449035942554474,
+        "op": ">=",
+        "threshold": 0.15,
+        "status": "PASS",
+        "margin": 0.0949035942554474
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 19,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 19,
+      "first_pass_step": 300,
+      "stable_from_step": 300,
+      "stable_from_seconds": 5.43229869985953,
+      "confirmed_step": 500,
+      "confirmed_seconds": 8.659925868036225
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 0.4166666666666667
+  }
+}

@@ -1,0 +1,402 @@
+{
+  "spec": {
+    "name": "trajectory",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Preserves the shared trajectory's identity constraint.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 400,
+    "thresholds": [
+      [
+        "identity_mse",
+        "<=",
+        0.02
+      ]
+    ]
+  },
+  "result": {
+    "live": {
+      "identity_mse": 0.25984930992126465
+    },
+    "raw": {
+      "identity_mse": 0.25984930992126465,
+      "paired_target_mse": 0.25984930992126465,
+      "verdict": "FAIL",
+      "set_cover": 0.1210886687040329,
+      "own_nearest_fraction": 0.5833333730697632,
+      "particle_mean_square": 0.07189954817295074,
+      "particle_std_mean": 0.27650344371795654,
+      "critic_gradient_median": 0.5028948783874512,
+      "critic_gradient_max": 1.1942322254180908
+    },
+    "observations": [
+      {
+        "identity_mse": 0.37084662914276123,
+        "step": 17,
+        "seconds": 0.9464449090883136
+      },
+      {
+        "identity_mse": 0.36768239736557007,
+        "step": 34,
+        "seconds": 1.4248932681512088
+      },
+      {
+        "identity_mse": 0.35894715785980225,
+        "step": 50,
+        "seconds": 1.8602251370903105
+      },
+      {
+        "identity_mse": 0.35289937257766724,
+        "step": 67,
+        "seconds": 2.3604461401700974
+      },
+      {
+        "identity_mse": 0.3479870557785034,
+        "step": 84,
+        "seconds": 2.8657827330753207
+      },
+      {
+        "identity_mse": 0.34463852643966675,
+        "step": 100,
+        "seconds": 3.3387569540645927
+      },
+      {
+        "identity_mse": 0.34295088052749634,
+        "step": 117,
+        "seconds": 3.7817510191816837
+      },
+      {
+        "identity_mse": 0.33603495359420776,
+        "step": 134,
+        "seconds": 4.2556680040434
+      },
+      {
+        "identity_mse": 0.3361526131629944,
+        "step": 150,
+        "seconds": 4.722729498986155
+      },
+      {
+        "identity_mse": 0.3262634575366974,
+        "step": 167,
+        "seconds": 5.256067450158298
+      },
+      {
+        "identity_mse": 0.293693482875824,
+        "step": 184,
+        "seconds": 5.7913763909600675
+      },
+      {
+        "identity_mse": 0.26260027289390564,
+        "step": 200,
+        "seconds": 6.251855934038758
+      },
+      {
+        "identity_mse": 0.27113521099090576,
+        "step": 217,
+        "seconds": 6.767839715117589
+      },
+      {
+        "identity_mse": 0.2683003842830658,
+        "step": 234,
+        "seconds": 7.294601675122976
+      },
+      {
+        "identity_mse": 0.2667773962020874,
+        "step": 250,
+        "seconds": 7.794650189112872
+      },
+      {
+        "identity_mse": 0.2668829560279846,
+        "step": 267,
+        "seconds": 8.311771704116836
+      },
+      {
+        "identity_mse": 0.2622050642967224,
+        "step": 284,
+        "seconds": 8.810263107065111
+      },
+      {
+        "identity_mse": 0.2659817039966583,
+        "step": 300,
+        "seconds": 9.332498023053631
+      },
+      {
+        "identity_mse": 0.2600482702255249,
+        "step": 317,
+        "seconds": 9.863180479966104
+      },
+      {
+        "identity_mse": 0.2601608633995056,
+        "step": 334,
+        "seconds": 10.410106792114675
+      },
+      {
+        "identity_mse": 0.25879019498825073,
+        "step": 350,
+        "seconds": 10.933572410140187
+      },
+      {
+        "identity_mse": 0.2640754282474518,
+        "step": 367,
+        "seconds": 11.452468535164371
+      },
+      {
+        "identity_mse": 0.259874165058136,
+        "step": 384,
+        "seconds": 11.96202583401464
+      },
+      {
+        "identity_mse": 0.25984930992126465,
+        "step": 400,
+        "seconds": 12.41205888800323
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "actions": [
+      {
+        "step": 0,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 0,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 260,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 260,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 280,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 280,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 300,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 300,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 320,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 320,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 340,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 340,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 360,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 360,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 380,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 380,
+        "role": "g",
+        "multiplier": 1.0
+      }
+    ],
+    "seconds": 12.47351732198149
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "identity_mse",
+        "value": 0.25984930992126465,
+        "op": "<=",
+        "threshold": 0.02,
+        "status": "FAIL",
+        "margin": -0.23984930992126466
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 2.0,
+    "confirmation_fraction": 2.0
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "candidate": "g_threequarter_rate",
+  "variant": "control",
+  "gate": "own_state_diagnostic_200",
+  "status": "FAIL",
+  "initial": {
+    "step": 1200,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.999755859375,
+    "cover": 1.0,
+    "effective_modes": 7.596153736114502,
+    "sample_count": 4096,
+    "hq_counts": [
+      695,
+      369,
+      701,
+      634,
+      332,
+      666,
+      353,
+      345
+    ],
+    "nearest_counts": [
+      695,
+      369,
+      701,
+      635,
+      332,
+      666,
+      353,
+      345
+    ],
+    "closest_distance_per_mode": [
+      0.005167482886463404,
+      0.0033829116728156805,
+      0.00560992443934083,
+      0.0009765625,
+      0.005167482886463404,
+      0.008343753404915333,
+      0.004683429375290871,
+      0.0029296875
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "window": {
+    "checks": 84,
+    "passing_checks": 83,
+    "failing_steps": [
+      1284
+    ],
+    "min_modes": 8,
+    "min_hq": 0.76123046875,
+    "passing_suffix": 0,
+    "stable_from_step": null,
+    "pass_all": false,
+    "pass_suffix": false
+  },
+  "final": {
+    "step": 1284,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.76123046875,
+    "cover": 1.0,
+    "effective_modes": 6.3038249015808105,
+    "sample_count": 4096,
+    "hq_counts": [
+      694,
+      369,
+      701,
+      635,
+      16,
+      131,
+      227,
+      345
+    ],
+    "nearest_counts": [
+      695,
+      369,
+      701,
+      635,
+      332,
+      666,
+      353,
+      345
+    ],
+    "closest_distance_per_mode": [
+      0.0013810679083690047,
+      0.00856930110603571,
+      0.008734640665352345,
+      0.0,
+      0.17684142291545868,
+      0.13006624579429626,
+      0.11527988314628601,
+      0.05167482793331146
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "work": {
+    "d_backwards": 84,
+    "g_backwards": 84,
+    "d_commits": 84,
+    "g_commits": 84,
+    "d_provisional": 0,
+    "g_provisional": 0
+  },
+  "optimizer_steps": {
+    "opt_g": [
+      1284
+    ],
+    "opt_d": [
+      1284
+    ]
+  },
+  "elapsed_seconds": 1.6282320090103894,
+  "full_budget": false,
+  "hold_budget_complete": false,
+  "shared_gate_eligible": false,
+  "qualification": "UNQUALIFIED: older toys still fail",
+  "borrowed_H_state": false,
+  "rates_changed_on_restore": false
+}

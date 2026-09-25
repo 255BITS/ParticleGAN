@@ -94,7 +94,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--generations", type=int, default=2)
     parser.add_argument("--population", type=int, default=12)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(args.source, args.output, args.generations, args.population)
 
 

@@ -1,0 +1,208 @@
+[
+  {
+    "seconds": 2.039179283892736,
+    "shared_gate_eligible": false,
+    "stages": [
+      {
+        "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/ae_gan_hold/eps_net_1m/ae_gan_hold/episodes/eps_net_1m__ae_gan_hold.json.gz",
+        "candidate": "eps_net_1m",
+        "checkpoint_sha256": "3c88a49585ab5a7df727fe096733a2d7aa93e75a48f58d9c5bbc5264d6827c7f",
+        "gate": "ae_gan_hold",
+        "metrics": {
+          "frozen_evidence_audit": "FAIL",
+          "live": {
+            "hold": 0.006833471357822418,
+            "recon_mse": 3.0568721294403076
+          },
+          "observations": [
+            {
+              "hold": 1.405290126800537,
+              "recon_mse": 1.1956970691680908,
+              "seconds": 1.0211506539490074,
+              "step": 11
+            },
+            {
+              "hold": 1.3997859954833984,
+              "recon_mse": 1.162773609161377,
+              "seconds": 1.05596753093414,
+              "step": 21
+            },
+            {
+              "hold": 1.3283698558807373,
+              "recon_mse": 1.146782636642456,
+              "seconds": 1.094079271890223,
+              "step": 32
+            },
+            {
+              "hold": 1.2212657928466797,
+              "recon_mse": 1.1449614763259888,
+              "seconds": 1.129122510785237,
+              "step": 42
+            },
+            {
+              "hold": 1.0214715003967285,
+              "recon_mse": 1.1796975135803223,
+              "seconds": 1.1685343878343701,
+              "step": 53
+            },
+            {
+              "hold": 0.8053387403488159,
+              "recon_mse": 1.1928017139434814,
+              "seconds": 1.2031764949206263,
+              "step": 63
+            },
+            {
+              "hold": 0.5944690108299255,
+              "recon_mse": 1.14580237865448,
+              "seconds": 1.2380670018028468,
+              "step": 73
+            },
+            {
+              "hold": 0.3144470751285553,
+              "recon_mse": 1.1652029752731323,
+              "seconds": 1.2765446349512786,
+              "step": 84
+            },
+            {
+              "hold": 0.06042411923408508,
+              "recon_mse": 1.1449905633926392,
+              "seconds": 1.3113376128021628,
+              "step": 94
+            },
+            {
+              "hold": 0.07478560507297516,
+              "recon_mse": 1.355394721031189,
+              "seconds": 1.3511371109634638,
+              "step": 105
+            },
+            {
+              "hold": 0.1624096781015396,
+              "recon_mse": 1.9522336721420288,
+              "seconds": 1.3860423888545483,
+              "step": 115
+            },
+            {
+              "hold": 0.07734176516532898,
+              "recon_mse": 1.8986124992370605,
+              "seconds": 1.4215362588874996,
+              "step": 125
+            },
+            {
+              "hold": 0.06508317589759827,
+              "recon_mse": 2.1618499755859375,
+              "seconds": 1.4599875819403678,
+              "step": 136
+            },
+            {
+              "hold": 0.0900101289153099,
+              "recon_mse": 2.472622871398926,
+              "seconds": 1.4948101888876408,
+              "step": 146
+            },
+            {
+              "hold": 0.0657077357172966,
+              "recon_mse": 2.667612314224243,
+              "seconds": 1.5341858759056777,
+              "step": 157
+            },
+            {
+              "hold": 0.07974405586719513,
+              "recon_mse": 2.8145716190338135,
+              "seconds": 1.5711870728991926,
+              "step": 167
+            },
+            {
+              "hold": 0.042884234338998795,
+              "recon_mse": 2.9135966300964355,
+              "seconds": 1.61175567493774,
+              "step": 178
+            },
+            {
+              "hold": 0.012221896089613438,
+              "recon_mse": 2.9583611488342285,
+              "seconds": 1.6495789149776101,
+              "step": 188
+            },
+            {
+              "hold": 0.04078110307455063,
+              "recon_mse": 2.9159839153289795,
+              "seconds": 1.6870312138926238,
+              "step": 198
+            },
+            {
+              "hold": 0.05120523273944855,
+              "recon_mse": 2.9471282958984375,
+              "seconds": 1.726369519950822,
+              "step": 209
+            },
+            {
+              "hold": 0.031137272715568542,
+              "recon_mse": 2.952608585357666,
+              "seconds": 1.7611247869208455,
+              "step": 219
+            },
+            {
+              "hold": 0.023403149098157883,
+              "recon_mse": 2.955596685409546,
+              "seconds": 1.800056281965226,
+              "step": 230
+            },
+            {
+              "hold": 0.01710769720375538,
+              "recon_mse": 2.878779649734497,
+              "seconds": 1.8360237539745867,
+              "step": 240
+            },
+            {
+              "hold": 0.006833471357822418,
+              "recon_mse": 3.0568721294403076,
+              "seconds": 1.8709181118756533,
+              "step": 250
+            }
+          ],
+          "verdict": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -3.006872129440308,
+                "metric": "recon_mse",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.05,
+                "value": 3.0568721294403076
+              },
+              {
+                "margin": 0.34316652864217756,
+                "metric": "hold",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.35,
+                "value": 0.006833471357822418
+              }
+            ],
+            "passed": false,
+            "shortfall": 1.0,
+            "status": "FAIL"
+          }
+        },
+        "seconds": 2.038630912080407,
+        "status": "FAIL"
+      }
+    ],
+    "status": "FAIL",
+    "tag": "eps_net_1m"
+  }
+]

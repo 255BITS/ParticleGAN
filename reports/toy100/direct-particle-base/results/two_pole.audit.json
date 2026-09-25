@@ -1,0 +1,96 @@
+{
+  "candidate": "direct_particle_response",
+  "gate": "two_pole",
+  "status": "PASS",
+  "seconds": 1.5027436658274382,
+  "metrics": {
+    "mean_abs": 0.6441625356674194,
+    "grad_med": 0.1303979456424713
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T005324Z/adversarial_mobility/20260925T005324Z-2154605/repo/reports/toy100/adversarial-mobility-attempt/candidates/direct_particle_response/two_pole/result.json",
+  "updates": {
+    "adam_calls": 160,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            32,
+            1
+          ],
+          "sha256": "3f8efadb91ab2a017c4b82d7ad3ffc79146b84a0197b967c50ad92b0b4a43443"
+        },
+        {
+          "shape": [
+            32
+          ],
+          "sha256": "95ea086869511e58dd763ec6471623c827b32850057e75c2ae47846bdbc1c81d"
+        },
+        {
+          "shape": [
+            1,
+            32
+          ],
+          "sha256": "bf4650fe56c7b46986a78adb5493908620f5310b926d96298668cc5b7bbd2e47"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "e9b5f5d59f9221b2b142f749fa3ec719139c8243481e7b72bdbc0acc55dd1ee3"
+        }
+      ],
+      [
+        {
+          "shape": [
+            12,
+            1
+          ],
+          "sha256": "17b0761f87b081d5cf10757ccc89f12be355c70e2e29df288b65b30710dcbcd1"
+        }
+      ]
+    ],
+    "optimizers": {
+      "127772932463872": {
+        "calls": 80,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      },
+      "127772932309600": {
+        "calls": 80,
+        "device": "cuda:0",
+        "state_devices": [
+          "cuda:0"
+        ],
+        "parameter_dtypes": [
+          "torch.float32"
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 10,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 10,
+    "first_pass_step": 50,
+    "stable_from_step": 50,
+    "stable_from_seconds": 0.8612516380380839,
+    "confirmed_step": 64,
+    "confirmed_seconds": 1.034126278012991
+  },
+  "code_hashes": {
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "probe.py": "e5b3a7f924d6bcfacfc38404fd8ab07cb54743187c180a8a1d2887a433443c7e",
+    "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d"
+  },
+  "fixture_sha256": "7772e5392926ce4684bd263d3b03f02ccf866dc327746ff663e7dc01eceab230",
+  "declaration_sha256": "2b71d3414c66ddebf59e3dbaf8893e6e4a4f310ad58fa506a16c5246be5e7b03",
+  "audit": "PASS"
+}

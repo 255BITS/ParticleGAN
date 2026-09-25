@@ -1,0 +1,28 @@
+{
+  "focused_tests_passed": 38,
+  "original_short200_bitwise_unchanged": true,
+  "convergence_run_matches_original_full_diagnostic": true,
+  "compared_tensor_leaves": 162,
+  "metrics_and_losses_identical": true,
+  "convergence": {
+    "name": "first_convergence_then_hold_v1",
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "start_step": 1200,
+    "modes": 8,
+    "min_hq": 0.9,
+    "convergence": "first consecutive qualifying window; operational quality criterion",
+    "hold": "the next updates, disjoint from confirmation; no restart after failure",
+    "training_feedback": false,
+    "frozen_toy_verdicts_unchanged": true,
+    "status": "POST_CONVERGENCE_FAIL",
+    "converged_step": 1400,
+    "settling_checks": 200,
+    "settling_failures": 0,
+    "longest_settling_streak": 200,
+    "hold_checks": 292,
+    "first_hold_failure": 1692,
+    "hold_budget_complete": false
+  }
+}

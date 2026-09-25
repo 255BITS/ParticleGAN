@@ -1,0 +1,122 @@
+{
+  "candidate": "H",
+  "task": "cover_leftover",
+  "status": "FAIL",
+  "seconds": 11.49053535494022,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 1600,
+    "optimizers": {
+      "129664719507568": {
+        "calls": 800,
+        "parameters": 7361,
+        "device": "cuda:0"
+      },
+      "129664709058800": {
+        "calls": 800,
+        "parameters": 104,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/H/cover_leftover/result.json",
+  "metrics": {
+    "u_kept": -0.3944275637761376,
+    "content_kept": -0.41859214195033545,
+    "leak_ratio": 0.013225969179276258,
+    "pole_rel_err_plus": 1.0530363321304321,
+    "pole_rel_err_minus": 1.064666986465454,
+    "same_dir": 0.024489706489170458
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "u_kept",
+        "value": -0.3944275637761376,
+        "op": ">=",
+        "threshold": 0.85,
+        "status": "FAIL",
+        "margin": -1.2444275637761375
+      },
+      {
+        "metric": "content_kept",
+        "value": -0.41859214195033545,
+        "op": ">=",
+        "threshold": 0.75,
+        "status": "FAIL",
+        "margin": -1.1685921419503353
+      },
+      {
+        "metric": "leak_ratio",
+        "value": 0.013225969179276258,
+        "op": "<=",
+        "threshold": 0.2,
+        "status": "PASS",
+        "margin": 0.18677403082072375
+      },
+      {
+        "metric": "pole_rel_err_plus",
+        "value": 1.0530363321304321,
+        "op": "<=",
+        "threshold": 0.2,
+        "status": "FAIL",
+        "margin": -0.8530363321304322
+      },
+      {
+        "metric": "pole_rel_err_minus",
+        "value": 1.064666986465454,
+        "op": "<=",
+        "threshold": 0.2,
+        "status": "FAIL",
+        "margin": -0.8646669864654541
+      },
+      {
+        "metric": "same_dir",
+        "value": 0.024489706489170458,
+        "op": "<=",
+        "threshold": 0.25,
+        "status": "PASS",
+        "margin": 0.22551029351082955
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 1.1703592139842847,
+    "confirmation_fraction": 2.0
+  }
+}

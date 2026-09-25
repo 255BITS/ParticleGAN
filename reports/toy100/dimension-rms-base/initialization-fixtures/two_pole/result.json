@@ -1,0 +1,207 @@
+{
+  "task": "two_pole",
+  "backend": "cpu",
+  "cpu_random": false,
+  "init_only": true,
+  "initialization_fixture_sha256": null,
+  "torch": "2.13.0+cu126",
+  "config": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 2048,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "d_hidden": 128,
+    "d_lr_mult": 1.0,
+    "device": "cpu",
+    "distance_reduction": "sum",
+    "early_eval_steps": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100
+    ],
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eval_interval": 250,
+    "eval_samples": 20000,
+    "fourier": 3,
+    "fused_adam": false,
+    "g_hidden": 128,
+    "gan_mode": "rp",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "log_interval": 250,
+    "loss_type": "logistic",
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "n_hidden": 3,
+    "name": "roundcap_k1p0_c1p0_p0p0_b0p999",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reg_method": "autograd",
+    "routing_temperature": 0.25,
+    "seed": 1234,
+    "sigma_rel": 0.0,
+    "snapshot_interval": 250,
+    "snapshot_samples": 4096,
+    "stable_evals": 5,
+    "standardize": true,
+    "steps": 7000,
+    "threads": 1,
+    "total_steps": 7000,
+    "toy100_model": "affine_square_v1",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "cpu": "AMD Ryzen 9 5900X 12-Core Processor",
+  "environment": {
+    "ATEN_CPU_CAPABILITY": "avx2",
+    "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+    "LD_PRELOAD": null,
+    "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+  },
+  "worker_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+  "status": "INITIALIZATION_CAPTURED",
+  "seconds": 0.16845621610991657,
+  "proof": {
+    "adam_calls": 0,
+    "initial_optimizers": [
+      [
+        {
+          "shape": [
+            32,
+            1
+          ],
+          "sha256": "3f8efadb91ab2a017c4b82d7ad3ffc79146b84a0197b967c50ad92b0b4a43443"
+        },
+        {
+          "shape": [
+            32
+          ],
+          "sha256": "95ea086869511e58dd763ec6471623c827b32850057e75c2ae47846bdbc1c81d"
+        },
+        {
+          "shape": [
+            1,
+            32
+          ],
+          "sha256": "bf4650fe56c7b46986a78adb5493908620f5310b926d96298668cc5b7bbd2e47"
+        },
+        {
+          "shape": [
+            1
+          ],
+          "sha256": "e9b5f5d59f9221b2b142f749fa3ec719139c8243481e7b72bdbc0acc55dd1ee3"
+        }
+      ],
+      [
+        {
+          "shape": [
+            12,
+            1
+          ],
+          "sha256": "17b0761f87b081d5cf10757ccc89f12be355c70e2e29df288b65b30710dcbcd1"
+        }
+      ]
+    ],
+    "optimizers": {}
+  },
+  "randomness": {
+    "calls": 8,
+    "elements": 145,
+    "sha256": "e390579eb0597e66b2dcccb3241a0589732e4d17aad37d09d3ba94ee8d56ab0e",
+    "prefix": [
+      {
+        "op": "aten.uniform_.default",
+        "shape": [
+          32,
+          1
+        ],
+        "sha256": "c0e22aadde689c502ceb4d550f63f677990e369aa4a4aef5df4bd98bd1bd5850"
+      },
+      {
+        "op": "aten.uniform_.default",
+        "shape": [
+          32
+        ],
+        "sha256": "3e7ab602bd38a51dbab03a1ef3e4a68bed87388afc724fa9a19c4fae382f9099"
+      },
+      {
+        "op": "aten.uniform_.default",
+        "shape": [
+          1,
+          32
+        ],
+        "sha256": "a54d7b5db941e6892a352c024da73eedfe30a00b98226e5efce77fcec241849e"
+      },
+      {
+        "op": "aten.uniform_.default",
+        "shape": [
+          1
+        ],
+        "sha256": "e4f080364d6841659b564663d911fcfca55f45433c42cdba81e26e891c10b469"
+      },
+      {
+        "op": "aten.randn.generator",
+        "shape": [
+          12,
+          1
+        ],
+        "sha256": "eac5b1322aaca2e38a3cc296e33736376015fdd4b87e4834321d2b49c197f352"
+      },
+      {
+        "op": "aten.randn.generator",
+        "shape": [
+          12,
+          1
+        ],
+        "sha256": "0ff07d867f77f3222e06856af2ae3d1e80615ce378ac826dad17736a4e8e1e0a"
+      },
+      {
+        "op": "aten.randn.generator",
+        "shape": [
+          12,
+          1
+        ],
+        "sha256": "496ad0a8530261b77e28871406c0c1bb5e49a8b463d24c123e4e4181854f3fdc"
+      },
+      {
+        "op": "aten.randn.generator",
+        "shape": [
+          12,
+          1
+        ],
+        "sha256": "83e6dcdc16f995ba86245718a8e26f7afd4c34dbd8d3867365f4d7618f85ca01"
+      }
+    ]
+  }
+}

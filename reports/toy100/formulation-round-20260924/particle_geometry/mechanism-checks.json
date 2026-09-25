@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "cases": 8,
+  "checks": [
+    {
+      "candidate": "density_mobility",
+      "check": "network_identity_rng_unused_rows_cuda_finite_counts",
+      "status": "PASS"
+    },
+    {
+      "candidate": "exposure_mean",
+      "check": "network_identity_rng_unused_rows_cuda_finite_counts",
+      "status": "PASS"
+    },
+    {
+      "candidate": "exposure_trust",
+      "check": "network_identity_rng_unused_rows_cuda_finite_counts",
+      "status": "PASS"
+    },
+    {
+      "candidate": "shared_coordinate",
+      "check": "network_identity_rng_unused_rows_cuda_finite_counts",
+      "status": "PASS"
+    },
+    {
+      "candidate": "shared_geometry",
+      "check": "network_identity_rng_unused_rows_cuda_finite_counts",
+      "status": "PASS"
+    },
+    {
+      "candidate": "shared_geometry",
+      "check": "rotation_equivariance",
+      "status": "PASS"
+    },
+    {
+      "candidate": "visit_isotropic",
+      "check": "network_identity_rng_unused_rows_cuda_finite_counts",
+      "status": "PASS"
+    },
+    {
+      "candidate": "visit_isotropic",
+      "check": "rotation_equivariance",
+      "status": "PASS"
+    }
+  ],
+  "seconds": 1.3890025899745524,
+  "error": null
+}

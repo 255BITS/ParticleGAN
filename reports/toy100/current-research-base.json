@@ -1,0 +1,137 @@
+{
+  "candidate": "k3p",
+  "display_name": "K3P",
+  "parent": "k3_with_a2_bounded_damp",
+  "previous_selected_candidate": "direct_particle_response",
+  "role": "user-selected GPU GAN research and launcher default",
+  "requires_mechanism": true,
+  "requires_response": true,
+  "requires_latent": true,
+  "report": "reports/toy100/k3p-base/README.md",
+  "measured_gpu_passes": 22,
+  "measured_gpu_failures": 0,
+  "measured_gpu_total": 22,
+  "toy_total": 22,
+  "unmeasured_toys": 0,
+  "full_toy_status": "PASS",
+  "full_toy_scope": "19 transfer tasks at declared seeds plus three full7000-update native coverage+accuracy gates at seed1234; historical additional grid seeds reported separately",
+  "own_state_stability": "RING_HOLD_AND_300_UPDATE_EXTENSION_PASS",
+  "own_state_stability_scope": "One declared ring run, continuous execution; not a continuation claim for every host or checkpoint restart",
+  "gpu_release_qualified": false,
+  "initialization": "Transfer: retained zero-update CPU parameters; native: CUDA initialization. All training and random draws CUDA.",
+  "first_gates": [
+    "mode_hold",
+    "vector_unequal_mass",
+    "img_stripes2",
+    "vector_unequal_width",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "remaining_regression_gates": [
+    "ae_gan_hold",
+    "cover_leftover",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "mid_scale_identity",
+    "residual_student",
+    "trajectory",
+    "two_pole",
+    "unipolar",
+    "unused_token_hold",
+    "vector_two_broad",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral"
+  ],
+  "remaining_unmeasured_gates": [],
+  "priority_gates": [
+    "mode_hold_shift_recovery",
+    "extended_ring_hold"
+  ],
+  "known_failures": [
+    "mode_hold_shift_recovery"
+  ],
+  "schedules": "Retain selected .01/.05 network/prior floors, network horizon cap1600 and original LR/noise schedules",
+  "auxiliary_host_terms": "retain original AE and unused-token terms",
+  "seed_sweeps": false,
+  "stability_priority": "Target-shift recovery while preserving22/22 and measured post-convergence hold",
+  "native_measurements": {
+    "grid100": {
+      "passing": 4,
+      "measured": 4,
+      "seeds": [
+        1234,
+        1235,
+        1236,
+        1237
+      ]
+    },
+    "rotated100": {
+      "passing": 1,
+      "measured": 1,
+      "seeds": [
+        1234
+      ]
+    },
+    "staggered100": {
+      "passing": 1,
+      "measured": 1,
+      "seeds": [
+        1234
+      ]
+    }
+  },
+  "ring_hold": {
+    "passing_checks": 1200,
+    "checks": 1200,
+    "min_hq": 0.9072265625,
+    "status": "PASS"
+  },
+  "ring_extension": {
+    "passing_checks": 300,
+    "checks": 300,
+    "min_hq": 0.98779296875,
+    "status": "PASS"
+  },
+  "shift_recovery": {
+    "status": "FAIL",
+    "deadline_passing_checks": 28,
+    "deadline_checks": 81,
+    "sustained_recovery_delay_updates": 1130,
+    "network_floor": 0.01,
+    "prior_floor": 0.05
+  },
+  "qualification": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+  "validation": "reports/toy100/k3p-base/selection-audit.json",
+  "historical_reference": {
+    "candidate": "constraints_simple_regularization",
+    "recorded_cpu_passes": 22,
+    "native_gpu_passes": 16,
+    "native_100_mode_passes": 3,
+    "report": "reports/toy100/gpu-known-winner-control/README.md"
+  },
+  "config": "reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+  "config_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+  "mechanism": "reports/toy100/gap-fill-20260925/sources/k3p/mechanism.py",
+  "mechanism_sha256": "d2eb08ee932b288cbba25cd1e7be3a9572b129bd1baf0b79718be1eb37ba9391",
+  "latent": "reports/toy100/gap-fill-20260925/sources/k3p/latent.py",
+  "latent_sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+  "response": "reports/toy100/gap-fill-20260925/sources/k3p/response.py",
+  "response_sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+  "probe": "reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+  "probe_sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+  "native_probe": "reports/toy100/gap-fill-20260925/sources/k3p/native100.py",
+  "native_probe_sha256": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997",
+  "hold_probe": "reports/toy100/gap-fill-20260925/sources/k3p/hold.py",
+  "hold_probe_sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+  "shift_probe": "reports/toy100/gap-fill-20260925/sources/k3p/shift.py",
+  "shift_probe_sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+  "frozen_shift_probe": "reports/toy100/gap-fill-20260925/sources/k3p/shift_frozen.py",
+  "frozen_shift_probe_sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6",
+  "checkpoint": "reports/toy100/gap-fill-20260925/sources/k3p/checkpoint.py",
+  "checkpoint_sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+  "convergence_gate": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py",
+  "convergence_gate_sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+}

@@ -1,0 +1,20 @@
+{
+  "candidate": "dimension_rms_hybrid",
+  "declared_utc": "2026-09-25T00:23:11.401898+00:00",
+  "parent": "retained rp_r1_fake_cap",
+  "formula": "lambda/2 * (E[||grad D(real)||^2/d] + E[relu(||grad D(fake)||/sqrt(d)-kappa)^2]); d = per-example input element count",
+  "rationale": "Test whether dimension-normalized critic penalty preserves trajectory while transferring hybrid coverage. No target statistics.",
+  "schedules": "Unchanged original decay/noise; regularizer constant",
+  "optimizer": "Original Adam, original hyperparameters and arithmetic; initialize all Adam state tensors including step on CUDA",
+  "source": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/prepared/repos/cuda",
+  "source_manifest": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/prepared/prepared-sources.json",
+  "source_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "file_hashes": {
+    "probe.py": "d4375bab9e711028efcda8232d5debc3029fcada1d2197df9cfa20e5cc9d7ffe",
+    "mechanism.py": "e21d7ea1b107ca3e7d5f7a92a259d9d5d0343f071288da158a23b04dbbfad628",
+    "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2"
+  },
+  "compute": "One D and one G/prior update; same two regularizer critic forwards; no extra evaluations",
+  "full22": "NOT_RUN",
+  "continuation": "NOT_RUN"
+}

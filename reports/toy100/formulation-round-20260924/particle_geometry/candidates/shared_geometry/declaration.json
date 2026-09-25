@@ -1,0 +1,27 @@
+{
+  "candidate": "shared_geometry",
+  "mechanism": "Replace the particle diagonal second moment by the EMA of full gradient Gram matrices G^T G/N. Bias correct, then use H=(V + trace(V)/d I)/2, a fixed trace-preserving isotropic shrinkage, and multiply row first moments by H^(-1/2) with original epsilon. Original betas/LR and network Adam retained. No displacement clipping.",
+  "rationale": "Three diagonal/trust variants preserve rare shape but fail ring. Shared_coordinate pools rows yet ignores correlations; a rotation-equivariant matrix preconditioner changes directions coherently and regularizes low-rank gradient geometry without target information.",
+  "extra_forward_backward": 0,
+  "optimizer_updates": "One D plus one G/particle update per frozen iteration; particle custom update substitutes original Adam table update.",
+  "extra_work": "One O(N*d^2) gradient Gram, one O(d^3) symmetric eigendecomposition, one O(N*d^2) matrix product each particle update. No extra network forward/backward or optimizer updates; equal-step only, not equal-compute.",
+  "unchanged": [
+    "critic/objective",
+    "network Adam",
+    "architecture",
+    "data",
+    "seeds",
+    "RNG",
+    "evaluation",
+    "thresholds",
+    "budgets",
+    "decay/noise schedules",
+    "AE/token auxiliary terms"
+  ],
+  "code_sha256": {
+    "probe.py": "13729130c240a5b8747dbb8812fa1f6dbbf31ccaf3584702e7961cd4253eb2b6",
+    "particle_update.py": "e40e211d169135fe56662fc296be8143678c9ff721bc0bd70224689c96856475"
+  },
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+}

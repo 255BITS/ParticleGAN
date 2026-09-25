@@ -10,6 +10,8 @@ import torch
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
 
+from benchmarks.toy100.device import rng_fork_devices
+
 
 def _card(name, *, norm='none', spectral='none', score_bound=None):
     return dict(name=name, implementation='shared_rare_gradient_v1', width=96,
@@ -55,7 +57,7 @@ class SharedRareGradientCritic(nn.Module):
         self.head = nn.Linear(hidden_dim, 1)
         self.activation = nn.Softplus(beta=card['softplus_beta'])
         # Draw power-iteration vectors without shifting the host's random stream.
-        with torch.random.fork_rng(devices=[]):
+        with torch.random.fork_rng(devices=rng_fork_devices()):
             for i in range(n_hidden):
                 if card['spectral_scope'] == 'all' or (i == 0 and card['spectral_scope'] == 'first') or (
                         i > 0 and card['spectral_scope'] == 'hidden'):

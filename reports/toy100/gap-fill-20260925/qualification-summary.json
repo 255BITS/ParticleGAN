@@ -1,0 +1,1031 @@
+{
+  "scope": "22 declared problems; native canonical seed1234. Historical additional native seeds reported separately. No averaging across configurations or early screens.",
+  "candidates": {
+    "k3p": {
+      "statuses": {
+        "PASS": 22
+      },
+      "transfer_pass": 19,
+      "native": {
+        "grid100": {
+          "passing": 4,
+          "measured": 4,
+          "seeds": [
+            1234,
+            1235,
+            1236,
+            1237
+          ]
+        },
+        "rotated100": {
+          "passing": 1,
+          "measured": 1,
+          "seeds": [
+            1234
+          ]
+        },
+        "staggered100": {
+          "passing": 1,
+          "measured": 1,
+          "seeds": [
+            1234
+          ]
+        }
+      },
+      "gates": [
+        {
+          "candidate": "k3p",
+          "task": "ae_gan_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-ae_gan_hold.json.gz",
+          "artifact_sha256": "cd00115114d78efdd44b0db17cfe5064e6086fe6932b266c28739e55d72fac70"
+        },
+        {
+          "candidate": "k3p",
+          "task": "cover_leftover",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-cover_leftover.json.gz",
+          "artifact_sha256": "64a8b7443919ea5df6a6e388dc583edb76f55f2b5a11aad5a6710d68baa25959"
+        },
+        {
+          "candidate": "k3p",
+          "task": "img_bars4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-img_bars4.json.gz",
+          "artifact_sha256": "576e6783e46f9eab6187748babc23b35a53b0b37758334ee53a34371c70837fb"
+        },
+        {
+          "candidate": "k3p",
+          "task": "img_blobs4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-img_blobs4.json.gz",
+          "artifact_sha256": "510c90c09adca2f26e7bfdd9b6d6a4400408b360c88237ba53daa7506b0b7ec8"
+        },
+        {
+          "candidate": "k3p",
+          "task": "img_intensity2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-img_intensity2.json.gz",
+          "artifact_sha256": "b8956714ff6082879989c939947452281f6d9ddab4ed0d7296261f4a44f52792"
+        },
+        {
+          "candidate": "k3p",
+          "task": "img_stripes2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/fa8c03203f67832818b9d972544b771b0ec7a5fd812776bcf48044a38cb9906a.json.gz",
+          "artifact_sha256": "fa8c03203f67832818b9d972544b771b0ec7a5fd812776bcf48044a38cb9906a"
+        },
+        {
+          "candidate": "k3p",
+          "task": "mid_scale_identity",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-mid_scale_identity.json.gz",
+          "artifact_sha256": "d81f3556c54fa82275e48eb3bce0d6672cca1c9432639d05f68c4cb5d3be5b37"
+        },
+        {
+          "candidate": "k3p",
+          "task": "mode_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/5413b6bfe86cbcaa1b533a0767e278b56ba68a5c8ea93bf033f3b871ceda902f.json.gz",
+          "artifact_sha256": "5413b6bfe86cbcaa1b533a0767e278b56ba68a5c8ea93bf033f3b871ceda902f"
+        },
+        {
+          "candidate": "k3p",
+          "task": "residual_student",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-residual_student.json.gz",
+          "artifact_sha256": "7b9f6965a53dab20323aded20c913984cf2fd986d90a80c8b08260675049bf2b"
+        },
+        {
+          "candidate": "k3p",
+          "task": "trajectory",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-trajectory.json.gz",
+          "artifact_sha256": "f71d406aac11729bf5e27fc7871608f3259c499ae16d741b54a135961ae83cf9"
+        },
+        {
+          "candidate": "k3p",
+          "task": "two_pole",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-two_pole.json.gz",
+          "artifact_sha256": "56ade2c803de69aea9242bd2e8717410414ec58935a58a9ef7ee689df11fe340"
+        },
+        {
+          "candidate": "k3p",
+          "task": "unipolar",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-unipolar.json.gz",
+          "artifact_sha256": "667357ca56252464a3bf76ff7cd5e8bca091ebe99996552f1a9f3cfcc888455d"
+        },
+        {
+          "candidate": "k3p",
+          "task": "unused_token_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-unused_token_hold.json.gz",
+          "artifact_sha256": "eefcc28c68b43e93d173cad625ddaa312a05e1e42fb99be7c6097afee4cd16f2"
+        },
+        {
+          "candidate": "k3p",
+          "task": "vector_two_broad",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-vector_two_broad.json.gz",
+          "artifact_sha256": "cc738fec64bddcc8f9a67dfa84c13c6504f9ee8fc49803851df8ad230855e391"
+        },
+        {
+          "candidate": "k3p",
+          "task": "vector_unequal_mass",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/d9bfc8b2d7d107832c8460955ef4095c0d8e5296ee52f19291b5be59fbf1ef5b.json.gz",
+          "artifact_sha256": "d9bfc8b2d7d107832c8460955ef4095c0d8e5296ee52f19291b5be59fbf1ef5b"
+        },
+        {
+          "candidate": "k3p",
+          "task": "vector_unequal_width",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-vector_unequal_width.json.gz",
+          "artifact_sha256": "f866fc3320494f9f8570b43d8f15ff15a1652da3181fc09ad32daa7c8c2bb6a8"
+        },
+        {
+          "candidate": "k3p",
+          "task": "vector_anisotropic",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-vector_anisotropic.json.gz",
+          "artifact_sha256": "6d0ed42565a5224c227ddac7c0903ae0ba0036832eb3e753e007fa6feaa424a9"
+        },
+        {
+          "candidate": "k3p",
+          "task": "vector_overlap",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-vector_overlap.json.gz",
+          "artifact_sha256": "a8721c97cda3ea49d4d8ed8d8a505fd5f6749ecb1075c5d997cad3e8dbd4bf2b"
+        },
+        {
+          "candidate": "k3p",
+          "task": "vector_spiral",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-toy-vector_spiral.json.gz",
+          "artifact_sha256": "572c6094538d5bdf10b60b883b4e5f490bbbe225a9faf60c96877d92abfc0a16"
+        },
+        {
+          "candidate": "k3p",
+          "task": "grid100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d.json.gz",
+          "artifact_sha256": "8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d"
+        },
+        {
+          "candidate": "k3p",
+          "task": "rotated100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-native-rotated100.json.gz",
+          "artifact_sha256": "a24e8e0e5e54e73cbb49b5356624b2c849d6b30491ab961f869423f2745c73b0"
+        },
+        {
+          "candidate": "k3p",
+          "task": "staggered100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3p-native-staggered100.json.gz",
+          "artifact_sha256": "b6779b8adee79c8da4ecc684b932506c689946800394bd4e2010e93587fab0b7"
+        }
+      ]
+    },
+    "k3g": {
+      "statuses": {
+        "PASS": 22
+      },
+      "transfer_pass": 19,
+      "native": {
+        "grid100": {
+          "passing": 1,
+          "measured": 1,
+          "seeds": [
+            1234
+          ]
+        },
+        "rotated100": {
+          "passing": 1,
+          "measured": 1,
+          "seeds": [
+            1234
+          ]
+        },
+        "staggered100": {
+          "passing": 4,
+          "measured": 4,
+          "seeds": [
+            1235,
+            1234,
+            1236,
+            1237
+          ]
+        }
+      },
+      "gates": [
+        {
+          "candidate": "k3g",
+          "task": "ae_gan_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/bc304172d858b5e9d41ffd3643580e166f5ad5c511b46e0e4e618a73ffd3aa5b.json.gz",
+          "artifact_sha256": "bc304172d858b5e9d41ffd3643580e166f5ad5c511b46e0e4e618a73ffd3aa5b"
+        },
+        {
+          "candidate": "k3g",
+          "task": "cover_leftover",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/a41b789fef084ac2575f47e4b38532a6066c6c49a2a95949ea090abdfb04d3c0.json.gz",
+          "artifact_sha256": "a41b789fef084ac2575f47e4b38532a6066c6c49a2a95949ea090abdfb04d3c0"
+        },
+        {
+          "candidate": "k3g",
+          "task": "img_bars4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/5e5bdb2b3913d54a8341e32998e0e7316002598f0d7d3a49ba3b21a98868f190.json.gz",
+          "artifact_sha256": "5e5bdb2b3913d54a8341e32998e0e7316002598f0d7d3a49ba3b21a98868f190"
+        },
+        {
+          "candidate": "k3g",
+          "task": "img_blobs4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/bced129963a6b33d185495367b036016780ef4260968953b1ea979a17d4e946f.json.gz",
+          "artifact_sha256": "bced129963a6b33d185495367b036016780ef4260968953b1ea979a17d4e946f"
+        },
+        {
+          "candidate": "k3g",
+          "task": "img_intensity2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/766950f0d2b01e770fb3d6848c4af033785b8ea7ef47be8c3793dcfb4bffb3a2.json.gz",
+          "artifact_sha256": "766950f0d2b01e770fb3d6848c4af033785b8ea7ef47be8c3793dcfb4bffb3a2"
+        },
+        {
+          "candidate": "k3g",
+          "task": "img_stripes2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/d80b62bac3098279714224860c973a8bc1b0d18c6608c9a5afebfaace23cf846.json.gz",
+          "artifact_sha256": "d80b62bac3098279714224860c973a8bc1b0d18c6608c9a5afebfaace23cf846"
+        },
+        {
+          "candidate": "k3g",
+          "task": "mid_scale_identity",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/b5a396c4ff83871a3f5405def5481c9fb141c670f8a840af429bd625e4115d04.json.gz",
+          "artifact_sha256": "b5a396c4ff83871a3f5405def5481c9fb141c670f8a840af429bd625e4115d04"
+        },
+        {
+          "candidate": "k3g",
+          "task": "mode_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/756e8a8c9f75b3d83759752f9a43ff25c77eaaeba2697b218769223d2d69468b.json.gz",
+          "artifact_sha256": "756e8a8c9f75b3d83759752f9a43ff25c77eaaeba2697b218769223d2d69468b"
+        },
+        {
+          "candidate": "k3g",
+          "task": "residual_student",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/79368a4b008652fa1e775c69e16360ebd66963763f83ad06160b4e73c1ea846e.json.gz",
+          "artifact_sha256": "79368a4b008652fa1e775c69e16360ebd66963763f83ad06160b4e73c1ea846e"
+        },
+        {
+          "candidate": "k3g",
+          "task": "trajectory",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/f7765c0e21dc760a7c8e257fb058ece047daee6dd6494262fd5840564dea5a82.json.gz",
+          "artifact_sha256": "f7765c0e21dc760a7c8e257fb058ece047daee6dd6494262fd5840564dea5a82"
+        },
+        {
+          "candidate": "k3g",
+          "task": "two_pole",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/41b41bb330a46b89d70e77adeb4a0e2dbc4f13654ffa8cfa9747c431cfa4ca58.json.gz",
+          "artifact_sha256": "41b41bb330a46b89d70e77adeb4a0e2dbc4f13654ffa8cfa9747c431cfa4ca58"
+        },
+        {
+          "candidate": "k3g",
+          "task": "unipolar",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/69a6099b4f5b7db7fe56046a1e0bdd016c891efd14bf0d95f7b3a240bf6c3640.json.gz",
+          "artifact_sha256": "69a6099b4f5b7db7fe56046a1e0bdd016c891efd14bf0d95f7b3a240bf6c3640"
+        },
+        {
+          "candidate": "k3g",
+          "task": "unused_token_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/daf0afa6b067d7a226d8cc2ee6095b87e8d36d3dc35fcbf0540b8fb356bbbf17.json.gz",
+          "artifact_sha256": "daf0afa6b067d7a226d8cc2ee6095b87e8d36d3dc35fcbf0540b8fb356bbbf17"
+        },
+        {
+          "candidate": "k3g",
+          "task": "vector_two_broad",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/cdef2c55b6d23c8ac1db228943b579108811894cd9b5ae3c6fd43fffcad1bfe2.json.gz",
+          "artifact_sha256": "cdef2c55b6d23c8ac1db228943b579108811894cd9b5ae3c6fd43fffcad1bfe2"
+        },
+        {
+          "candidate": "k3g",
+          "task": "vector_unequal_mass",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/3beec7acea67c38a1b6fdc2f565ace01f0857bf85c4d74c125b9657abd868e53.json.gz",
+          "artifact_sha256": "3beec7acea67c38a1b6fdc2f565ace01f0857bf85c4d74c125b9657abd868e53"
+        },
+        {
+          "candidate": "k3g",
+          "task": "vector_unequal_width",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/7d7c1f4e16bea7024c7f3ad254c6e385ccf05a2d56701112f4542a6ebd40ac15.json.gz",
+          "artifact_sha256": "7d7c1f4e16bea7024c7f3ad254c6e385ccf05a2d56701112f4542a6ebd40ac15"
+        },
+        {
+          "candidate": "k3g",
+          "task": "vector_anisotropic",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3g-toy-vector_anisotropic.json.gz",
+          "artifact_sha256": "492ca4a3d5dad223418014fa69cae67f7f1b48b8aa814edbbcf35b7806c3b340"
+        },
+        {
+          "candidate": "k3g",
+          "task": "vector_overlap",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3g-toy-vector_overlap.json.gz",
+          "artifact_sha256": "e36854ab1667325ac905e05d0a0f3b2545180df0802cf40da7e689fd60cddb0e"
+        },
+        {
+          "candidate": "k3g",
+          "task": "vector_spiral",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3g-toy-vector_spiral.json.gz",
+          "artifact_sha256": "f93674036a87e0554394432d2b363175ffb4e5f66aa91ffc9cf60fef53be7d47"
+        },
+        {
+          "candidate": "k3g",
+          "task": "grid100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3g-native-grid100.json.gz",
+          "artifact_sha256": "7c8005ff94b33718db568053c9a6dd27016981a0c9fc8180dba1bf39e3bc8eeb"
+        },
+        {
+          "candidate": "k3g",
+          "task": "rotated100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3g-native-rotated100.json.gz",
+          "artifact_sha256": "9539cfc8462114e905d0e3b1ec0ac2371a3ec5e1afce61ff14080738c5649041"
+        },
+        {
+          "candidate": "k3g",
+          "task": "staggered100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/f01f77c7bc65319b44aa57948ba09d3b566880f99ec91c5b7ad45127af1011b1.json.gz",
+          "artifact_sha256": "f01f77c7bc65319b44aa57948ba09d3b566880f99ec91c5b7ad45127af1011b1"
+        }
+      ]
+    },
+    "k3": {
+      "statuses": {
+        "PASS": 22
+      },
+      "transfer_pass": 19,
+      "native": {
+        "grid100": {
+          "passing": 4,
+          "measured": 4,
+          "seeds": [
+            1234,
+            1235,
+            1236,
+            1237
+          ]
+        },
+        "rotated100": {
+          "passing": 4,
+          "measured": 4,
+          "seeds": [
+            1234,
+            1235,
+            1236,
+            1237
+          ]
+        },
+        "staggered100": {
+          "passing": 3,
+          "measured": 4,
+          "seeds": [
+            1234,
+            1235,
+            1236,
+            1237
+          ]
+        }
+      },
+      "gates": [
+        {
+          "candidate": "k3",
+          "task": "ae_gan_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/869530e53e0299aa8f4b6fdc7a32f36d934d7bc536989a975be170557734788e.json.gz",
+          "artifact_sha256": "869530e53e0299aa8f4b6fdc7a32f36d934d7bc536989a975be170557734788e"
+        },
+        {
+          "candidate": "k3",
+          "task": "cover_leftover",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/cc3b00077e8b0e0b82c93c0a245aa47de9eb025961eb5a748574868be7aa250c.json.gz",
+          "artifact_sha256": "cc3b00077e8b0e0b82c93c0a245aa47de9eb025961eb5a748574868be7aa250c"
+        },
+        {
+          "candidate": "k3",
+          "task": "img_bars4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/19fb61aab716bd6ea6fd0e8bbe8b9caa02bcfff5ef1f96172df0ed22d5a7d0db.json.gz",
+          "artifact_sha256": "19fb61aab716bd6ea6fd0e8bbe8b9caa02bcfff5ef1f96172df0ed22d5a7d0db"
+        },
+        {
+          "candidate": "k3",
+          "task": "img_blobs4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/6633d14002cdc1126f1d68b3250fda7616e8a4620c8e4063c55c0943d1917759.json.gz",
+          "artifact_sha256": "6633d14002cdc1126f1d68b3250fda7616e8a4620c8e4063c55c0943d1917759"
+        },
+        {
+          "candidate": "k3",
+          "task": "img_intensity2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/40f33e1d6a46c221a0aa8d1f13af54ffa9841ab92ef1fc17bf31f86890d8d873.json.gz",
+          "artifact_sha256": "40f33e1d6a46c221a0aa8d1f13af54ffa9841ab92ef1fc17bf31f86890d8d873"
+        },
+        {
+          "candidate": "k3",
+          "task": "img_stripes2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/e938ad09f29188fe3ff2a8bb3618f71d631457c792a9388457d1a334dc0229d8.json.gz",
+          "artifact_sha256": "e938ad09f29188fe3ff2a8bb3618f71d631457c792a9388457d1a334dc0229d8"
+        },
+        {
+          "candidate": "k3",
+          "task": "mid_scale_identity",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/66ce1fad77c96d9b87f175f4e8229354edfe2714235b62b52170ed0fd8763874.json.gz",
+          "artifact_sha256": "66ce1fad77c96d9b87f175f4e8229354edfe2714235b62b52170ed0fd8763874"
+        },
+        {
+          "candidate": "k3",
+          "task": "mode_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/c858f9f4bcaad976b5976fc2be1e9268fe121dee721d5ce96c6e7e9b2b2d7e0d.json.gz",
+          "artifact_sha256": "c858f9f4bcaad976b5976fc2be1e9268fe121dee721d5ce96c6e7e9b2b2d7e0d"
+        },
+        {
+          "candidate": "k3",
+          "task": "residual_student",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/c58cbc9456da1f203f099517af6b17c8290043744a7647b9858fa7fcef330c5e.json.gz",
+          "artifact_sha256": "c58cbc9456da1f203f099517af6b17c8290043744a7647b9858fa7fcef330c5e"
+        },
+        {
+          "candidate": "k3",
+          "task": "trajectory",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/cce0d1e10a8641fb6d3826fc6b7492ab3e40610527dfa52afcfbeb420cf3de6b.json.gz",
+          "artifact_sha256": "cce0d1e10a8641fb6d3826fc6b7492ab3e40610527dfa52afcfbeb420cf3de6b"
+        },
+        {
+          "candidate": "k3",
+          "task": "two_pole",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/291077610e2ffb97bda15c3f1e1e1569703ad1715db00082c5fc2e3dac603b3a.json.gz",
+          "artifact_sha256": "291077610e2ffb97bda15c3f1e1e1569703ad1715db00082c5fc2e3dac603b3a"
+        },
+        {
+          "candidate": "k3",
+          "task": "unipolar",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/d4829747358dda128a78b6109902c68c46003ce235f4dd45d0b2a398430cf425.json.gz",
+          "artifact_sha256": "d4829747358dda128a78b6109902c68c46003ce235f4dd45d0b2a398430cf425"
+        },
+        {
+          "candidate": "k3",
+          "task": "unused_token_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/583956c2a8d733dee5a1b3575216887d2f32f7f441f3eba55b2390cb07698e23.json.gz",
+          "artifact_sha256": "583956c2a8d733dee5a1b3575216887d2f32f7f441f3eba55b2390cb07698e23"
+        },
+        {
+          "candidate": "k3",
+          "task": "vector_two_broad",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/23e09059c146ac198c9864ebb819e50c720518d860b1bc00565a8b2edd3e6bf6.json.gz",
+          "artifact_sha256": "23e09059c146ac198c9864ebb819e50c720518d860b1bc00565a8b2edd3e6bf6"
+        },
+        {
+          "candidate": "k3",
+          "task": "vector_unequal_mass",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/8323c121e1564432c01d923c6fac2c5908a057388a1ac58bf2d1e35d3956f34d.json.gz",
+          "artifact_sha256": "8323c121e1564432c01d923c6fac2c5908a057388a1ac58bf2d1e35d3956f34d"
+        },
+        {
+          "candidate": "k3",
+          "task": "vector_unequal_width",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/486597340a6656466b3e4aae0d401e3bdf7a68fa6e30fec673b2fa85551d44c1.json.gz",
+          "artifact_sha256": "486597340a6656466b3e4aae0d401e3bdf7a68fa6e30fec673b2fa85551d44c1"
+        },
+        {
+          "candidate": "k3",
+          "task": "vector_anisotropic",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3-toy-vector_anisotropic.json.gz",
+          "artifact_sha256": "7ced772b760f42ae2cd14f6f32da633795ffdd5a022698b42e805d0f128961df"
+        },
+        {
+          "candidate": "k3",
+          "task": "vector_overlap",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3-toy-vector_overlap.json.gz",
+          "artifact_sha256": "b1dcc5334928b47a026643fcb24daf8ddaffdc9e3f4ab0e8529662e8318b5038"
+        },
+        {
+          "candidate": "k3",
+          "task": "vector_spiral",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/k3-toy-vector_spiral.json.gz",
+          "artifact_sha256": "a92da74db473bc325ea2a4df2249d70649ca5f8e84cc9f9f4af60e66d4d2170b"
+        },
+        {
+          "candidate": "k3",
+          "task": "grid100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/628636a5168d364071fa5b8e7f5a2518cb8d83b6be03fc27f87a6d34b853189f.json.gz",
+          "artifact_sha256": "628636a5168d364071fa5b8e7f5a2518cb8d83b6be03fc27f87a6d34b853189f"
+        },
+        {
+          "candidate": "k3",
+          "task": "rotated100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/14f75f363b795bb7cdb9026317b4ba4cbd7605c6f0d566dc085d87f16991f57f.json.gz",
+          "artifact_sha256": "14f75f363b795bb7cdb9026317b4ba4cbd7605c6f0d566dc085d87f16991f57f"
+        },
+        {
+          "candidate": "k3",
+          "task": "staggered100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/ac33096fedf24f26c0f6ea6fd112c32321e5bc0f3c3b9e6b760e52e124a80b9e.json.gz",
+          "artifact_sha256": "ac33096fedf24f26c0f6ea6fd112c32321e5bc0f3c3b9e6b760e52e124a80b9e"
+        }
+      ]
+    },
+    "rg5-bcap": {
+      "statuses": {
+        "PASS": 18,
+        "FAIL": 4
+      },
+      "transfer_pass": 15,
+      "native": {
+        "grid100": {
+          "passing": 4,
+          "measured": 4,
+          "seeds": [
+            1234,
+            1235,
+            1236,
+            1237
+          ]
+        },
+        "rotated100": {
+          "passing": 1,
+          "measured": 1,
+          "seeds": [
+            1234
+          ]
+        },
+        "staggered100": {
+          "passing": 4,
+          "measured": 4,
+          "seeds": [
+            1234,
+            1235,
+            1236,
+            1237
+          ]
+        }
+      },
+      "gates": [
+        {
+          "candidate": "rg5-bcap",
+          "task": "ae_gan_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-ae_gan_hold.json.gz",
+          "artifact_sha256": "75a539fe67b3667015b0ce84b22dc43ac6195ec01303ef558bf893139da46c37"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "cover_leftover",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-cover_leftover.json.gz",
+          "artifact_sha256": "1b9d22710d77c615ef5dd2c1e23d06e4f700308445bff67b6cc926af209f07c8"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "img_bars4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-img_bars4.json.gz",
+          "artifact_sha256": "47626ab3f2895b38d84e35127cead567d4bc3a608da2e61dc5033eddd42bbffd"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "img_blobs4",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-img_blobs4.json.gz",
+          "artifact_sha256": "e0f6ac09ec11c15dac3cdcb33a2a3174c01ade2e8d2a909e0f408349633ade71"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "img_intensity2",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-img_intensity2.json.gz",
+          "artifact_sha256": "8bd61a5fd0c47d49b9e87c998a70c348a6784f54c0ef608987fd17282848bb64"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "img_stripes2",
+          "kind": "toy",
+          "seed": null,
+          "status": "FAIL",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-img_stripes2.json.gz",
+          "artifact_sha256": "9f6bbb998cbebf9a479cc705206c7c371aa6eb2ecf3f0e51680c7aa0fccba74d"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "mid_scale_identity",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-mid_scale_identity.json.gz",
+          "artifact_sha256": "851aa477dad51efb751c6852566a061e8d975a595a49bdc268d4fbe0a2d6ebfb"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "mode_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "FAIL",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-mode_hold.json.gz",
+          "artifact_sha256": "8d7b0a2a774cc84ac604c7ba4ce584402f92ed1cba6ed6de8963f74bae2f2360"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "residual_student",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-residual_student.json.gz",
+          "artifact_sha256": "57b94e7e27cd535e9ea792daebda0832e2901fdfff34f7f1cc9cbf57273235be"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "trajectory",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-trajectory.json.gz",
+          "artifact_sha256": "3f9fde921c6824fecdde3a257a71ba986c91b3bc969640fa0fbeee049f7584bf"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "two_pole",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-two_pole.json.gz",
+          "artifact_sha256": "5105a9c8eea0e11cc0b7ad8329be482ebd75cd62c15891d22011e56b61ed1b47"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "unipolar",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-unipolar.json.gz",
+          "artifact_sha256": "a01a4bcea4490b313aadb64caa82046d6e1b12020562806ef6a20bf71f89fc88"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "unused_token_hold",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-unused_token_hold.json.gz",
+          "artifact_sha256": "418d7da5886145af888061d2901ce13c658e7647068f7e6df593c23b41e7c331"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "vector_two_broad",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-vector_two_broad.json.gz",
+          "artifact_sha256": "3f84b326eb2c7bcff079d5ec5d9321614786dc805cb802ed647e46718a23727c"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "vector_unequal_mass",
+          "kind": "toy",
+          "seed": null,
+          "status": "FAIL",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-vector_unequal_mass.json.gz",
+          "artifact_sha256": "f16c2972d7055e8c8f35fb0fbb8ecec564b621bd4940032a55b0a9b37a381121"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "vector_unequal_width",
+          "kind": "toy",
+          "seed": null,
+          "status": "FAIL",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-vector_unequal_width.json.gz",
+          "artifact_sha256": "539c06c3bae0f5278bd4544371e4098f736ae9c091cfb68d513adc579e736999"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "vector_anisotropic",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-vector_anisotropic.json.gz",
+          "artifact_sha256": "9bd6cd19e93fc77977d37c6bd151257f88c4e7f484bb25cf632d908897d1aa42"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "vector_overlap",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-vector_overlap.json.gz",
+          "artifact_sha256": "e424a3b53f3f9d699b0caabf34e5c6a56c21aec456a8815f18252ddc846d803b"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "vector_spiral",
+          "kind": "toy",
+          "seed": null,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-toy-vector_spiral.json.gz",
+          "artifact_sha256": "f25dc4fb7afed4a917d5b2f1eb6c356ae3f2d782cea940ef1d6cfe02808428e4"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "grid100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/900395afca5198e9ad2805006bcbef36c9194c63cf87f163f53f7ca68ff91536.json.gz",
+          "artifact_sha256": "900395afca5198e9ad2805006bcbef36c9194c63cf87f163f53f7ca68ff91536"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "rotated100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "gap-fill",
+          "snapshot": "results/rg5-bcap-native-rotated100.json.gz",
+          "artifact_sha256": "49eaf1a34aec68c7df607c2aa6e4102f35d4697d16c93ec385167d442306e655"
+        },
+        {
+          "candidate": "rg5-bcap",
+          "task": "staggered100",
+          "kind": "native",
+          "seed": 1234,
+          "status": "PASS",
+          "source": "overnight",
+          "snapshot": "../overnight-20260925/results/05ddd2c9e8bcbb5b02a1d06d6118bf628737931d93acd7e877182ede5ccc7e74.json.gz",
+          "artifact_sha256": "05ddd2c9e8bcbb5b02a1d06d6118bf628737931d93acd7e877182ede5ccc7e74"
+        }
+      ]
+    }
+  }
+}

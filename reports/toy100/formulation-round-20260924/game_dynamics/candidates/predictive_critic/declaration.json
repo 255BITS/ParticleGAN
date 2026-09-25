@@ -1,0 +1,34 @@
+{
+  "candidate": "predictive_critic",
+  "declared_utc": "2026-09-24T23:40:52.956730+00:00",
+  "description": "Different game correction after both memory-optimism ring failures: accept one ordinary D Adam update Dplus; expose Dhat=Dplus+(Dplus-Dold) only during the existing G forward/backward, then restore Dplus before accepting ordinary G Adam update. On the bilinear alternating game this introduces contraction through the opponent lookahead. Exactly original losses, rates, draw count, D/G accepted update counts; adds a virtual parameter displacement/restore, no model/gradient evaluations. Existing host role bridge and native trainer hook identify players; no task/metric information.",
+  "source": "prepared/repos/cuda",
+  "prepared_manifest_sha256": "9e1dc3e78047c6098b647069f37bc04e0814873f13368fbc35eadb9e21f3d7d2",
+  "config": "/ml2/hypergan/gan-attempts/formulations-20260924T233426Z/game_dynamics/20260924T233426Z-2040502/repo/configs/toy100/constraints_simple_regularization.json",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "file_hashes": {
+    "probe.py": "cff86fa476e2b28416d714e46eb4fee7ce871ae0d741e15b8cac7787386eb7e1",
+    "mechanism.py": "005d44ce89d7aa82137b0ce9476ca4b3eff8e1038df6d62731c1750a93f6c031"
+  },
+  "initialization": "retained audited CPU fixtures; native CUDA training and random draws",
+  "invariants": [
+    "architectures",
+    "data",
+    "fixed seeds",
+    "loss and critic regularizer",
+    "all auxiliary AE/token losses",
+    "noise schedules",
+    "learning-rate schedules",
+    "evaluation",
+    "thresholds",
+    "outer step budgets"
+  ],
+  "compute": {
+    "extra_forward_evaluations_per_outer_step": 0,
+    "extra_backward_evaluations_per_outer_step": 0,
+    "extra_optimizer_updates": 0,
+    "base_updates": "one D and one G per host outer step; no added critic steps",
+    "comparison": "equal outer steps and equal model/gradient evaluations; added tensor arithmetic/memory, wall time measured"
+  },
+  "checkpoint": "memory stored in optimizer state; qualification continuation required after all 22"
+}

@@ -1,0 +1,67 @@
+{
+  "candidate": "shared_column_rms",
+  "task": "prefix",
+  "status": "PREFIX_COMPLETE",
+  "seconds": 0.7978284021373838,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 40,
+    "optimizers": {
+      "130615976999776": {
+        "calls": 20,
+        "parameters": 20161,
+        "device": "cuda:0"
+      },
+      "130615990941552": {
+        "calls": 20,
+        "parameters": 19346,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/preflight/column-prefix/result.json",
+  "convergence": {
+    "name": "first_convergence_then_hold_v1",
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "start_step": 1200,
+    "modes": 8,
+    "min_hq": 0.9,
+    "convergence": "first consecutive qualifying window; operational quality criterion",
+    "hold": "the next updates, disjoint from confirmation; no restart after failure",
+    "training_feedback": false,
+    "frozen_toy_verdicts_unchanged": true,
+    "status": "SETTLING",
+    "converged_step": null,
+    "settling_checks": 0,
+    "settling_failures": 0,
+    "longest_settling_streak": 0,
+    "hold_checks": 0,
+    "first_hold_failure": null,
+    "hold_budget_complete": false
+  },
+  "model_sha256": "4c064b967948fa8edd81a5d1d35e38856f7499a76e83229e4e082c65872aad0f"
+}

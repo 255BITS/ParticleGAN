@@ -1,0 +1,179 @@
+{
+  "status": "COMPLETE",
+  "evidence_audit": "PASS",
+  "results": [
+    {
+      "profile": "native",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "seconds": 33.427155643934384,
+      "live": {
+        "modes": 7,
+        "hq": 0.997802734375
+      },
+      "command": [
+        "/tmp/particlegan-torch214-cu126/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/cpu-recipe-gpu-port/probe.py",
+        "--repo",
+        "/ml2/hypergan/cpu-recipe-port-prepare-check/repos/cuda",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/configs/toy100/constraints_simple_regularization.json",
+        "--task",
+        "mode_hold",
+        "--backend",
+        "cuda",
+        "--output",
+        "/ml2/hypergan/torch214-gpu-check-20260924/runs/native/mode_hold"
+      ],
+      "artifact": "/ml2/hypergan/torch214-gpu-check-20260924/runs/native/mode_hold/result.json"
+    },
+    {
+      "profile": "cpu_init",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "seconds": 33.913701540092006,
+      "live": {
+        "modes": 7,
+        "hq": 0.9970703125
+      },
+      "command": [
+        "/tmp/particlegan-torch214-cu126/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/cpu-recipe-gpu-port/probe.py",
+        "--repo",
+        "/ml2/hypergan/cpu-recipe-port-prepare-check/repos/cuda",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/configs/toy100/constraints_simple_regularization.json",
+        "--task",
+        "mode_hold",
+        "--backend",
+        "cuda",
+        "--output",
+        "/ml2/hypergan/torch214-gpu-check-20260924/runs/cpu_init/mode_hold",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/cpu-recipe-gpu-port/initialization-fixtures/mode_hold/initial-values.pt"
+      ],
+      "artifact": "/ml2/hypergan/torch214-gpu-check-20260924/runs/cpu_init/mode_hold/result.json"
+    },
+    {
+      "profile": "native",
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "seconds": 48.89485593093559,
+      "live": {
+        "sw1_normalized": 0.15432191873625148,
+        "mean_error": 0.20884117484092712,
+        "covariance_error": 0.3752923011779785,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.11992187052965164,
+        "min_mass_ratio": 0.244140625,
+        "hq": 0.984619140625,
+        "component_covariance_error": 0.4971362203359604,
+        "component_covariance_errors": [
+          0.17704278230667114,
+          0.33550071716308594,
+          0.5070977807044983,
+          0.9689036011695862
+        ],
+        "component_min_eigen_ratio": 0.029095584526658058,
+        "component_mass": [
+          0.669921875,
+          0.28173828125,
+          0.04345703125,
+          0.0048828125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2744,
+          1154,
+          178,
+          20
+        ]
+      },
+      "command": [
+        "/tmp/particlegan-torch214-cu126/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/cpu-recipe-gpu-port/probe.py",
+        "--repo",
+        "/ml2/hypergan/cpu-recipe-port-prepare-check/repos/cuda",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/configs/toy100/constraints_simple_regularization.json",
+        "--task",
+        "vector_unequal_mass",
+        "--backend",
+        "cuda",
+        "--output",
+        "/ml2/hypergan/torch214-gpu-check-20260924/runs/native/vector_unequal_mass"
+      ],
+      "artifact": "/ml2/hypergan/torch214-gpu-check-20260924/runs/native/vector_unequal_mass/result.json"
+    },
+    {
+      "profile": "cpu_init",
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "seconds": 42.74672589986585,
+      "live": {
+        "sw1_normalized": 0.09567643741830587,
+        "mean_error": 0.1349870264530182,
+        "covariance_error": 0.20370247960090637,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.05791015177965164,
+        "min_mass_ratio": 0.2685546875,
+        "hq": 0.996337890625,
+        "component_covariance_error": 0.28307452518492937,
+        "component_covariance_errors": [
+          0.060819242149591446,
+          0.16026003658771515,
+          0.19479632377624512,
+          0.7164224982261658
+        ],
+        "component_min_eigen_ratio": 0.030950482934713364,
+        "component_mass": [
+          0.546142578125,
+          0.35791015625,
+          0.090576171875,
+          0.00537109375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2237,
+          1466,
+          371,
+          22
+        ]
+      },
+      "command": [
+        "/tmp/particlegan-torch214-cu126/bin/python",
+        "-u",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/cpu-recipe-gpu-port/probe.py",
+        "--repo",
+        "/ml2/hypergan/cpu-recipe-port-prepare-check/repos/cuda",
+        "--config",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/configs/toy100/constraints_simple_regularization.json",
+        "--task",
+        "vector_unequal_mass",
+        "--backend",
+        "cuda",
+        "--output",
+        "/ml2/hypergan/torch214-gpu-check-20260924/runs/cpu_init/vector_unequal_mass",
+        "--initial-state",
+        "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/cpu-recipe-gpu-port/initialization-fixtures/vector_unequal_mass/initial-values.pt"
+      ],
+      "artifact": "/ml2/hypergan/torch214-gpu-check-20260924/runs/cpu_init/vector_unequal_mass/result.json"
+    }
+  ],
+  "scope": "Two blockers, two initialization profiles; no 22-toy score"
+}

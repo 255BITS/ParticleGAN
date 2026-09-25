@@ -1,0 +1,6347 @@
+{
+  "declared_jobs": 53,
+  "completed": 53,
+  "statuses": {
+    "PASS": 44,
+    "FAIL": 8,
+    "NOT_CONVERGED": 1
+  },
+  "records": [
+    {
+      "id": "k3p-native-rotated100",
+      "candidate": "k3p",
+      "kind": "native",
+      "task": "rotated100",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-rotated100/result.json",
+      "artifact_sha256": "a24e8e0e5e54e73cbb49b5356624b2c849d6b30491ab961f869423f2745c73b0",
+      "snapshot": "results/k3p-native-rotated100.json.gz",
+      "snapshot_sha256": "ebcea152be44d38ec84ae1d9fd1ec5f612f73f2d98157a3275cb569320403a1b",
+      "seconds": 160.5664204270579,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "final": {
+        "n": 20000,
+        "valid_n": 20000,
+        "modes": 100,
+        "hq": 0.98175,
+        "precision": 0.98175,
+        "min_hq_count": 159,
+        "min_hq_mode_mass": 0.00795,
+        "max_mode_mass": 0.01205,
+        "mass_tv": 0.036000000000000004,
+        "min_cov_eig_ratio": 0.6469656433592816,
+        "max_cov_eig_ratio": 1.2020188983392444,
+        "min_radial_median_ratio": 0.8650544249946668,
+        "max_radial_median_ratio": 1.161296187351078,
+        "passed": true
+      },
+      "terminal_checks": [
+        {
+          "step": 6000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19491,
+            "precision": 0.97455,
+            "precision_gap": 0.014341003461757706,
+            "mass_tv": 0.03584999999999999,
+            "center_rms_sigma": 0.1481203467811806,
+            "center_max_sigma": 0.3748093993636169,
+            "cov_trace_bias": 0.04728012670213366,
+            "abs_cov_trace_bias": 0.04728012670213366,
+            "cov_frob_rms": 0.1382052085553168,
+            "radial_ks": 0.026513542903929932,
+            "accuracy_score": 0.618435393381372,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19631,
+            "precision": 0.98155,
+            "precision_gap": 0.0073410034617577,
+            "mass_tv": 0.03599999999999999,
+            "center_rms_sigma": 0.12315232912648882,
+            "center_max_sigma": 0.25183060295797954,
+            "cov_trace_bias": -0.029282196909415026,
+            "abs_cov_trace_bias": 0.029282196909415026,
+            "cov_frob_rms": 0.12369583755725294,
+            "radial_ks": 0.0125715669547114,
+            "accuracy_score": 0.4557181971485948,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6250,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19589,
+            "precision": 0.97945,
+            "precision_gap": 0.009441003461757691,
+            "mass_tv": 0.03584999999999999,
+            "center_rms_sigma": 0.15560279954613077,
+            "center_max_sigma": 0.36620655569856464,
+            "cov_trace_bias": 0.022712217155794523,
+            "abs_cov_trace_bias": 0.022712217155794523,
+            "cov_frob_rms": 0.12346522457517074,
+            "radial_ks": 0.015152692897353548,
+            "accuracy_score": 0.4953633729306094,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19650,
+            "precision": 0.9825,
+            "precision_gap": 0.006391003461757694,
+            "mass_tv": 0.03584999999999999,
+            "center_rms_sigma": 0.11597553503822584,
+            "center_max_sigma": 0.2671144027587631,
+            "cov_trace_bias": -0.030044241801390204,
+            "abs_cov_trace_bias": 0.030044241801390204,
+            "cov_frob_rms": 0.12480652568985642,
+            "radial_ks": 0.01429039760302997,
+            "accuracy_score": 0.4587700083201951,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6500,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19594,
+            "precision": 0.9797,
+            "precision_gap": 0.009191003461757719,
+            "mass_tv": 0.03584999999999999,
+            "center_rms_sigma": 0.14751685425918373,
+            "center_max_sigma": 0.3765324254329075,
+            "cov_trace_bias": -0.00826452620324336,
+            "abs_cov_trace_bias": 0.00826452620324336,
+            "cov_frob_rms": 0.11997737928709769,
+            "radial_ks": 0.004235755643353101,
+            "accuracy_score": 0.38090585610304495,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19639,
+            "precision": 0.98195,
+            "precision_gap": 0.006941003461757744,
+            "mass_tv": 0.0358,
+            "center_rms_sigma": 0.1184324231074631,
+            "center_max_sigma": 0.25073245143654355,
+            "cov_trace_bias": -0.03294103234347101,
+            "abs_cov_trace_bias": 0.03294103234347101,
+            "cov_frob_rms": 0.12342923609621269,
+            "radial_ks": 0.015094444275191243,
+            "accuracy_score": 0.47390005312961836,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6750,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19624,
+            "precision": 0.9812,
+            "precision_gap": 0.007691003461757773,
+            "mass_tv": 0.035949999999999996,
+            "center_rms_sigma": 0.135237571027705,
+            "center_max_sigma": 0.2797783913781015,
+            "cov_trace_bias": -0.019112225181896036,
+            "abs_cov_trace_bias": 0.019112225181896036,
+            "cov_frob_rms": 0.12646493104554168,
+            "radial_ks": 0.00792418427164776,
+            "accuracy_score": 0.4161453451038365,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19635,
+            "precision": 0.98175,
+            "precision_gap": 0.007141003461757722,
+            "mass_tv": 0.03584999999999999,
+            "center_rms_sigma": 0.1167052523814725,
+            "center_max_sigma": 0.25998651912248066,
+            "cov_trace_bias": -0.03313695212969625,
+            "abs_cov_trace_bias": 0.03313695212969625,
+            "cov_frob_rms": 0.12418208926358025,
+            "radial_ks": 0.01699856445321335,
+            "accuracy_score": 0.48433997363366466,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 7000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19635,
+            "precision": 0.98175,
+            "precision_gap": 0.007141003461757722,
+            "mass_tv": 0.036000000000000004,
+            "center_rms_sigma": 0.12232157927046786,
+            "center_max_sigma": 0.2940976069347975,
+            "cov_trace_bias": -0.029875308189459604,
+            "abs_cov_trace_bias": 0.029875308189459604,
+            "cov_frob_rms": 0.12408453977650635,
+            "radial_ks": 0.013401884935010822,
+            "accuracy_score": 0.4613520254055515,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19651,
+            "precision": 0.98255,
+            "precision_gap": 0.006341003461757699,
+            "mass_tv": 0.035949999999999996,
+            "center_rms_sigma": 0.11561399857733705,
+            "center_max_sigma": 0.25382497396395054,
+            "cov_trace_bias": -0.032621442734997896,
+            "abs_cov_trace_bias": 0.032621442734997896,
+            "cov_frob_rms": 0.1226293660814027,
+            "radial_ks": 0.01638339021534274,
+            "accuracy_score": 0.47825896057172484,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        }
+      ],
+      "seed": 1234
+    },
+    {
+      "id": "k3p-native-staggered100",
+      "candidate": "k3p",
+      "kind": "native",
+      "task": "staggered100",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-native-staggered100/result.json",
+      "artifact_sha256": "b6779b8adee79c8da4ecc684b932506c689946800394bd4e2010e93587fab0b7",
+      "snapshot": "results/k3p-native-staggered100.json.gz",
+      "snapshot_sha256": "dbb098c6442d63314f1d0c7192fbcb49a7ec7e8f10292edba737f29cac8a9ca0",
+      "seconds": 209.73143176082522,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "final": {
+        "n": 20000,
+        "valid_n": 20000,
+        "modes": 100,
+        "hq": 0.98675,
+        "precision": 0.98675,
+        "min_hq_count": 158,
+        "min_hq_mode_mass": 0.0079,
+        "max_mode_mass": 0.01345,
+        "mass_tv": 0.04190000000000001,
+        "min_cov_eig_ratio": 0.5698534918895649,
+        "max_cov_eig_ratio": 1.2144191168513594,
+        "min_radial_median_ratio": 0.854711615873557,
+        "max_radial_median_ratio": 1.1336666465689091,
+        "passed": true
+      },
+      "terminal_checks": [
+        {
+          "step": 6000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19607,
+            "precision": 0.98035,
+            "precision_gap": 0.008541003461757679,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.16165700766470228,
+            "center_max_sigma": 0.3972553140682605,
+            "cov_trace_bias": 0.042255873277397216,
+            "abs_cov_trace_bias": 0.042255873277397216,
+            "cov_frob_rms": 0.127599598684673,
+            "radial_ks": 0.023589758901248703,
+            "accuracy_score": 0.6297302692405087,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19731,
+            "precision": 0.98655,
+            "precision_gap": 0.002341003461757696,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.13521692715655317,
+            "center_max_sigma": 0.3402822661631381,
+            "cov_trace_bias": -0.02959898086436208,
+            "abs_cov_trace_bias": 0.02959898086436208,
+            "cov_frob_rms": 0.12307764199710795,
+            "radial_ks": 0.01332004682452792,
+            "accuracy_score": 0.5008522370932296,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6250,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19678,
+            "precision": 0.9839,
+            "precision_gap": 0.004991003461757737,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.16044119366450146,
+            "center_max_sigma": 0.4698041310383875,
+            "cov_trace_bias": 0.019582398653788857,
+            "abs_cov_trace_bias": 0.019582398653788857,
+            "cov_frob_rms": 0.12682088189468993,
+            "radial_ks": 0.015863270203443303,
+            "accuracy_score": 0.523236260819953,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19742,
+            "precision": 0.9871,
+            "precision_gap": 0.0017910034617577564,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.12920835889318602,
+            "center_max_sigma": 0.23440401115409976,
+            "cov_trace_bias": -0.03105965308392622,
+            "abs_cov_trace_bias": 0.03105965308392622,
+            "cov_frob_rms": 0.11916903577040182,
+            "radial_ks": 0.014243468078857457,
+            "accuracy_score": 0.5027645901524905,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6500,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19690,
+            "precision": 0.9845,
+            "precision_gap": 0.004391003461757692,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.14013583577010186,
+            "center_max_sigma": 0.30227819963194674,
+            "cov_trace_bias": -0.009028011552302928,
+            "abs_cov_trace_bias": 0.009028011552302928,
+            "cov_frob_rms": 0.12320245928172234,
+            "radial_ks": 0.00414140442965083,
+            "accuracy_score": 0.3982069346120357,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19744,
+            "precision": 0.9872,
+            "precision_gap": 0.0016910034617577674,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.12966010212100212,
+            "center_max_sigma": 0.2984101470065411,
+            "cov_trace_bias": -0.0302318835405867,
+            "abs_cov_trace_bias": 0.0302318835405867,
+            "cov_frob_rms": 0.1237942769599037,
+            "radial_ks": 0.013139255481149137,
+            "accuracy_score": 0.4943585165932349,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6750,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19713,
+            "precision": 0.98565,
+            "precision_gap": 0.0032410034617577077,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.1464360641680744,
+            "center_max_sigma": 0.37476793975014994,
+            "cov_trace_bias": -0.02286564965508442,
+            "abs_cov_trace_bias": 0.02286564965508442,
+            "cov_frob_rms": 0.12330620081681466,
+            "radial_ks": 0.008545740120195155,
+            "accuracy_score": 0.4682034134323571,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19742,
+            "precision": 0.9871,
+            "precision_gap": 0.0017910034617577564,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.1295104531326916,
+            "center_max_sigma": 0.2888106607511028,
+            "cov_trace_bias": -0.03070611269290069,
+            "abs_cov_trace_bias": 0.03070611269290069,
+            "cov_frob_rms": 0.12316961256740021,
+            "radial_ks": 0.01408208308423231,
+            "accuracy_score": 0.5012497007579015,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 7000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19735,
+            "precision": 0.98675,
+            "precision_gap": 0.002141003461757718,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.1398275885636074,
+            "center_max_sigma": 0.36460342800186374,
+            "cov_trace_bias": -0.028444940406653574,
+            "abs_cov_trace_bias": 0.028444940406653574,
+            "cov_frob_rms": 0.1221093166976026,
+            "radial_ks": 0.010335020501098524,
+            "accuracy_score": 0.4850740481863423,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "staggered100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19739,
+            "precision": 0.98695,
+            "precision_gap": 0.0019410034617577399,
+            "mass_tv": 0.04190000000000001,
+            "center_rms_sigma": 0.12899716513612236,
+            "center_max_sigma": 0.31013408891930794,
+            "cov_trace_bias": -0.033980250105728804,
+            "abs_cov_trace_bias": 0.033980250105728804,
+            "cov_frob_rms": 0.12218374031188174,
+            "radial_ks": 0.015018021059487241,
+            "accuracy_score": 0.5146430466396036,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        }
+      ],
+      "seed": 1234
+    },
+    {
+      "id": "k3g-native-grid100",
+      "candidate": "k3g",
+      "kind": "native",
+      "task": "grid100",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-native-grid100/result.json",
+      "artifact_sha256": "7c8005ff94b33718db568053c9a6dd27016981a0c9fc8180dba1bf39e3bc8eeb",
+      "snapshot": "results/k3g-native-grid100.json.gz",
+      "snapshot_sha256": "b0237053e2459c909efefd04c0c7c0e340bb93b2478d82d477ebdf38cbd81bd6",
+      "seconds": 160.4816088541411,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "final": {
+        "n": 20000,
+        "valid_n": 20000,
+        "modes": 100,
+        "hq": 0.98905,
+        "precision": 0.98905,
+        "min_hq_count": 150,
+        "min_hq_mode_mass": 0.0075,
+        "max_mode_mass": 0.01255,
+        "mass_tv": 0.0412,
+        "min_cov_eig_ratio": 0.5941367848923452,
+        "max_cov_eig_ratio": 1.2030325834097666,
+        "min_radial_median_ratio": 0.8576661387275648,
+        "max_radial_median_ratio": 1.0984783475652777,
+        "passed": true
+      },
+      "terminal_checks": [
+        {
+          "step": 6000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19633,
+            "precision": 0.98165,
+            "precision_gap": 0.007241003461757711,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.1254410338353176,
+            "center_max_sigma": 0.267867869996839,
+            "cov_trace_bias": 0.05190854323433025,
+            "abs_cov_trace_bias": 0.05190854323433025,
+            "cov_frob_rms": 0.14432816974634316,
+            "radial_ks": 0.028126744930464742,
+            "accuracy_score": 0.634031472862044,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19774,
+            "precision": 0.9887,
+            "precision_gap": 0.00019100346175771055,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.11140085964230402,
+            "center_max_sigma": 0.2590288580822568,
+            "cov_trace_bias": -0.02927688147291907,
+            "abs_cov_trace_bias": 0.02927688147291907,
+            "cov_frob_rms": 0.12720942559980306,
+            "radial_ks": 0.014317973983407395,
+            "accuracy_score": 0.4735972822981406,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6250,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19718,
+            "precision": 0.9859,
+            "precision_gap": 0.0029910034617577352,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.12009822406647701,
+            "center_max_sigma": 0.24876285371799456,
+            "cov_trace_bias": 0.019857287820459923,
+            "abs_cov_trace_bias": 0.019857287820459923,
+            "cov_frob_rms": 0.12957186416033,
+            "radial_ks": 0.013220972036705025,
+            "accuracy_score": 0.45406374153031914,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19774,
+            "precision": 0.9887,
+            "precision_gap": 0.00019100346175771055,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.10916267114573566,
+            "center_max_sigma": 0.257768884747458,
+            "cov_trace_bias": -0.0321917369271677,
+            "abs_cov_trace_bias": 0.0321917369271677,
+            "cov_frob_rms": 0.12679092829803204,
+            "radial_ks": 0.016977778787386266,
+            "accuracy_score": 0.4947104653379196,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6500,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19724,
+            "precision": 0.9862,
+            "precision_gap": 0.0026910034617577683,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.11242291740564336,
+            "center_max_sigma": 0.2242076002485283,
+            "cov_trace_bias": -0.012870885323432057,
+            "abs_cov_trace_bias": 0.012870885323432057,
+            "cov_frob_rms": 0.12258330969850745,
+            "radial_ks": 0.0065036580034334435,
+            "accuracy_score": 0.38502038925376003,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19764,
+            "precision": 0.9882,
+            "precision_gap": 0.0006910034617577665,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.10997248339089584,
+            "center_max_sigma": 0.22663756939301483,
+            "cov_trace_bias": -0.035831730588410604,
+            "abs_cov_trace_bias": 0.035831730588410604,
+            "cov_frob_rms": 0.12697498645511768,
+            "radial_ks": 0.016186796661345704,
+            "accuracy_score": 0.49987907650972363,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6750,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19764,
+            "precision": 0.9882,
+            "precision_gap": 0.0006910034617577665,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.11080773332675425,
+            "center_max_sigma": 0.22230895053388183,
+            "cov_trace_bias": -0.0276253003346284,
+            "abs_cov_trace_bias": 0.0276253003346284,
+            "cov_frob_rms": 0.12437978322395685,
+            "radial_ks": 0.013230683548136501,
+            "accuracy_score": 0.46193135633753357,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19778,
+            "precision": 0.9889,
+            "precision_gap": 8.996538242267427e-06,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.11074971876729703,
+            "center_max_sigma": 0.20830748256524592,
+            "cov_trace_bias": -0.03538557370761164,
+            "abs_cov_trace_bias": 0.03538557370761164,
+            "cov_frob_rms": 0.1259017988789617,
+            "radial_ks": 0.017902526849431555,
+            "accuracy_score": 0.5104585422037643,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 7000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19781,
+            "precision": 0.98905,
+            "precision_gap": 0.0001589965382422509,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.12269825851456546,
+            "center_max_sigma": 0.24763574614247058,
+            "cov_trace_bias": -0.03428800013335587,
+            "abs_cov_trace_bias": 0.03428800013335587,
+            "cov_frob_rms": 0.12877909490000083,
+            "radial_ks": 0.016380565735270247,
+            "accuracy_score": 0.5131380259887022,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "grid100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19772,
+            "precision": 0.9886,
+            "precision_gap": 0.00029100346175769953,
+            "mass_tv": 0.0412,
+            "center_rms_sigma": 0.11382907658693836,
+            "center_max_sigma": 0.22465339623389413,
+            "cov_trace_bias": -0.03939496251998009,
+            "abs_cov_trace_bias": 0.03939496251998009,
+            "cov_frob_rms": 0.12801362804155264,
+            "radial_ks": 0.017850283420134505,
+            "accuracy_score": 0.5240046900761305,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        }
+      ],
+      "seed": 1234
+    },
+    {
+      "id": "k3g-native-rotated100",
+      "candidate": "k3g",
+      "kind": "native",
+      "task": "rotated100",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-native-rotated100/result.json",
+      "artifact_sha256": "9539cfc8462114e905d0e3b1ec0ac2371a3ec5e1afce61ff14080738c5649041",
+      "snapshot": "results/k3g-native-rotated100.json.gz",
+      "snapshot_sha256": "4c0e8f9ea8c85c390a4cec80ade1d5ede9c1c525c605a989552a233398327d83",
+      "seconds": 223.513489224948,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "final": {
+        "n": 20000,
+        "valid_n": 20000,
+        "modes": 100,
+        "hq": 0.98345,
+        "precision": 0.98345,
+        "min_hq_count": 158,
+        "min_hq_mode_mass": 0.0079,
+        "max_mode_mass": 0.01185,
+        "mass_tv": 0.0353,
+        "min_cov_eig_ratio": 0.6460138965474761,
+        "max_cov_eig_ratio": 1.2006737032821637,
+        "min_radial_median_ratio": 0.8693183693437792,
+        "max_radial_median_ratio": 1.1494924640205486,
+        "passed": true
+      },
+      "terminal_checks": [
+        {
+          "step": 6000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19515,
+            "precision": 0.97575,
+            "precision_gap": 0.013141003461757728,
+            "mass_tv": 0.0355,
+            "center_rms_sigma": 0.14735160868004368,
+            "center_max_sigma": 0.31623159619745306,
+            "cov_trace_bias": 0.05095420937630313,
+            "abs_cov_trace_bias": 0.05095420937630313,
+            "cov_frob_rms": 0.14161433916459631,
+            "radial_ks": 0.029403812529746776,
+            "accuracy_score": 0.6432655292683964,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19682,
+            "precision": 0.9841,
+            "precision_gap": 0.004791003461757759,
+            "mass_tv": 0.035550000000000005,
+            "center_rms_sigma": 0.1153707793849285,
+            "center_max_sigma": 0.2262338446371657,
+            "cov_trace_bias": -0.02821256254173876,
+            "abs_cov_trace_bias": 0.02821256254173876,
+            "cov_frob_rms": 0.12063269661609617,
+            "radial_ks": 0.014621741482867212,
+            "accuracy_score": 0.45425576485342767,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6250,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19612,
+            "precision": 0.9806,
+            "precision_gap": 0.008291003461757707,
+            "mass_tv": 0.03525,
+            "center_rms_sigma": 0.15897308363475643,
+            "center_max_sigma": 0.45872859694054646,
+            "cov_trace_bias": 0.02449432892235759,
+            "abs_cov_trace_bias": 0.02449432892235759,
+            "cov_frob_rms": 0.13129352292170626,
+            "radial_ks": 0.01861057722938808,
+            "accuracy_score": 0.523143284533015,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19696,
+            "precision": 0.9848,
+            "precision_gap": 0.004091003461757725,
+            "mass_tv": 0.0355,
+            "center_rms_sigma": 0.11270952819579065,
+            "center_max_sigma": 0.23548533786302206,
+            "cov_trace_bias": -0.029160181385686545,
+            "abs_cov_trace_bias": 0.029160181385686545,
+            "cov_frob_rms": 0.12069523457262174,
+            "radial_ks": 0.013948901942369862,
+            "accuracy_score": 0.448884667515433,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6500,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19604,
+            "precision": 0.9802,
+            "precision_gap": 0.008691003461757774,
+            "mass_tv": 0.0353,
+            "center_rms_sigma": 0.16192511785470942,
+            "center_max_sigma": 0.38408281548448653,
+            "cov_trace_bias": -0.011513462036004118,
+            "abs_cov_trace_bias": 0.011513462036004118,
+            "cov_frob_rms": 0.11674854570071125,
+            "radial_ks": 0.004204339479558006,
+            "accuracy_score": 0.4045505074889679,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19669,
+            "precision": 0.98345,
+            "precision_gap": 0.0054410034617576875,
+            "mass_tv": 0.035449999999999995,
+            "center_rms_sigma": 0.11138141450563661,
+            "center_max_sigma": 0.2670897613350871,
+            "cov_trace_bias": -0.03188140104696169,
+            "abs_cov_trace_bias": 0.03188140104696169,
+            "cov_frob_rms": 0.12150165142627041,
+            "radial_ks": 0.013540666637094634,
+            "accuracy_score": 0.45126777056462475,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6750,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19656,
+            "precision": 0.9828,
+            "precision_gap": 0.006091003461757727,
+            "mass_tv": 0.0353,
+            "center_rms_sigma": 0.14312674968926103,
+            "center_max_sigma": 0.27770987828213806,
+            "cov_trace_bias": -0.02111291954503114,
+            "abs_cov_trace_bias": 0.02111291954503114,
+            "cov_frob_rms": 0.11858622473799511,
+            "radial_ks": 0.007232899063031817,
+            "accuracy_score": 0.4239796884514363,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19669,
+            "precision": 0.98345,
+            "precision_gap": 0.0054410034617576875,
+            "mass_tv": 0.0353,
+            "center_rms_sigma": 0.11231864482257728,
+            "center_max_sigma": 0.24502069573812923,
+            "cov_trace_bias": -0.03379892782776639,
+            "abs_cov_trace_bias": 0.03379892782776639,
+            "cov_frob_rms": 0.12087385514839702,
+            "radial_ks": 0.015581972285150236,
+            "accuracy_score": 0.46936628571315986,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 7000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19669,
+            "precision": 0.98345,
+            "precision_gap": 0.0054410034617576875,
+            "mass_tv": 0.0353,
+            "center_rms_sigma": 0.1456875385752371,
+            "center_max_sigma": 0.3150851827453967,
+            "cov_trace_bias": -0.030833231647032777,
+            "abs_cov_trace_bias": 0.030833231647032777,
+            "cov_frob_rms": 0.11779451535779371,
+            "radial_ks": 0.01096566229415985,
+            "accuracy_score": 0.47481122500846074,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19678,
+            "precision": 0.9839,
+            "precision_gap": 0.004991003461757737,
+            "mass_tv": 0.0353,
+            "center_rms_sigma": 0.11646122685889021,
+            "center_max_sigma": 0.2518396876612898,
+            "cov_trace_bias": -0.03482569425277593,
+            "abs_cov_trace_bias": 0.03482569425277593,
+            "cov_frob_rms": 0.11914303529886663,
+            "radial_ks": 0.015170562312327718,
+            "accuracy_score": 0.4745401169909341,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        }
+      ],
+      "seed": 1234
+    },
+    {
+      "id": "rg5-bcap-native-rotated100",
+      "candidate": "rg5-bcap",
+      "kind": "native",
+      "task": "rotated100",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-native-rotated100/result.json",
+      "artifact_sha256": "49eaf1a34aec68c7df607c2aa6e4102f35d4697d16c93ec385167d442306e655",
+      "snapshot": "results/rg5-bcap-native-rotated100.json.gz",
+      "snapshot_sha256": "6c81ccd624953755f5d545f6c219cb5fe6c0e4f7321fb085bb0a52f489f8b2a7",
+      "seconds": 158.2157783191651,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "steps": 7000,
+      "coverage": "PASS",
+      "accuracy": "PASS",
+      "final": {
+        "n": 20000,
+        "valid_n": 20000,
+        "modes": 100,
+        "hq": 0.98585,
+        "precision": 0.98585,
+        "min_hq_count": 149,
+        "min_hq_mode_mass": 0.00745,
+        "max_mode_mass": 0.0127,
+        "mass_tv": 0.04325,
+        "min_cov_eig_ratio": 0.6899740393685564,
+        "max_cov_eig_ratio": 1.2023082706719699,
+        "min_radial_median_ratio": 0.8769444247600665,
+        "max_radial_median_ratio": 1.108533639851577,
+        "passed": true
+      },
+      "terminal_checks": [
+        {
+          "step": 6000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19543,
+            "precision": 0.97715,
+            "precision_gap": 0.01174100346175777,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.11488117182377622,
+            "center_max_sigma": 0.27914059468808755,
+            "cov_trace_bias": 0.06521300276496267,
+            "abs_cov_trace_bias": 0.06521300276496267,
+            "cov_frob_rms": 0.14831256104341284,
+            "radial_ks": 0.032709942316370366,
+            "accuracy_score": 0.6914877778361084,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19711,
+            "precision": 0.98555,
+            "precision_gap": 0.0033410034617576967,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.09690654638119466,
+            "center_max_sigma": 0.24030691174503635,
+            "cov_trace_bias": -0.02910523884503069,
+            "abs_cov_trace_bias": 0.02910523884503069,
+            "cov_frob_rms": 0.12641018831171824,
+            "radial_ks": 0.015410347196000429,
+            "accuracy_score": 0.4706276167307394,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6250,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19645,
+            "precision": 0.98225,
+            "precision_gap": 0.006641003461757777,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.12256651932539377,
+            "center_max_sigma": 0.23857358810572213,
+            "cov_trace_bias": 0.0338855271684253,
+            "abs_cov_trace_bias": 0.0338855271684253,
+            "cov_frob_rms": 0.1297890961244137,
+            "radial_ks": 0.019732118671411336,
+            "accuracy_score": 0.541664375440793,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19723,
+            "precision": 0.98615,
+            "precision_gap": 0.0027410034617577628,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.09745508755260428,
+            "center_max_sigma": 0.2189514634304461,
+            "cov_trace_bias": -0.029995262924481403,
+            "abs_cov_trace_bias": 0.029995262924481403,
+            "cov_frob_rms": 0.12603958220066555,
+            "radial_ks": 0.015756297291960486,
+            "accuracy_score": 0.4757005414933786,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6500,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19658,
+            "precision": 0.9829,
+            "precision_gap": 0.005991003461757738,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.11625624557464896,
+            "center_max_sigma": 0.2635057731140655,
+            "cov_trace_bias": -0.008824304388700632,
+            "abs_cov_trace_bias": 0.008824304388700632,
+            "cov_frob_rms": 0.12248378029839883,
+            "radial_ks": 0.0052178800917283,
+            "accuracy_score": 0.38040948518003137,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19706,
+            "precision": 0.9853,
+            "precision_gap": 0.00359100346175778,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.09934341555042382,
+            "center_max_sigma": 0.22158531377765747,
+            "cov_trace_bias": -0.03609334230587424,
+            "abs_cov_trace_bias": 0.03609334230587424,
+            "cov_frob_rms": 0.1251629727307357,
+            "radial_ks": 0.017380662102843614,
+            "accuracy_score": 0.5034584300121546,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 6750,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19709,
+            "precision": 0.98545,
+            "precision_gap": 0.0034410034617576857,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.10860786551364517,
+            "center_max_sigma": 0.280405586941092,
+            "cov_trace_bias": -0.02115613141194861,
+            "abs_cov_trace_bias": 0.02115613141194861,
+            "cov_frob_rms": 0.12409561939802506,
+            "radial_ks": 0.00995735717525803,
+            "accuracy_score": 0.43130030943395736,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19724,
+            "precision": 0.9862,
+            "precision_gap": 0.0026910034617577683,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.09735584846711275,
+            "center_max_sigma": 0.23675657453084226,
+            "cov_trace_bias": -0.034537080337042836,
+            "abs_cov_trace_bias": 0.034537080337042836,
+            "cov_frob_rms": 0.12433693763690112,
+            "radial_ks": 0.017538896038345464,
+            "accuracy_score": 0.49807227833282386,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        },
+        {
+          "step": 7000,
+          "passed": true,
+          "metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19717,
+            "precision": 0.98585,
+            "precision_gap": 0.0030410034617577297,
+            "mass_tv": 0.04325,
+            "center_rms_sigma": 0.11394201725212418,
+            "center_max_sigma": 0.2586029599592457,
+            "cov_trace_bias": -0.03149527824300957,
+            "abs_cov_trace_bias": 0.03149527824300957,
+            "cov_frob_rms": 0.1241800854632325,
+            "radial_ks": 0.014898165878307057,
+            "accuracy_score": 0.49448758724543157,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          },
+          "ema_metrics": {
+            "protocol": "toy100-accuracy-v1",
+            "problem": "rotated100",
+            "n": 20000,
+            "valid_n": 20000,
+            "all_finite": true,
+            "within_radius_n": 19728,
+            "precision": 0.9864,
+            "precision_gap": 0.0024910034617576793,
+            "mass_tv": 0.043300000000000005,
+            "center_rms_sigma": 0.10588040403362811,
+            "center_max_sigma": 0.24288869935340912,
+            "cov_trace_bias": -0.03624420033893283,
+            "abs_cov_trace_bias": 0.03624420033893283,
+            "cov_frob_rms": 0.12488739135266944,
+            "radial_ks": 0.017771457700596294,
+            "accuracy_score": 0.5144492831847607,
+            "accuracy_pass": true,
+            "frozen_pass": true,
+            "passed": true
+          }
+        }
+      ],
+      "seed": 1234
+    },
+    {
+      "id": "rg5-bcap-toy-mode_hold",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "mode_hold",
+      "floors": null,
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-mode_hold/result.json",
+      "artifact_sha256": "8d7b0a2a774cc84ac604c7ba4ce584402f92ed1cba6ed6de8963f74bae2f2360",
+      "snapshot": "results/rg5-bcap-toy-mode_hold.json.gz",
+      "snapshot_sha256": "ba8885b48f49e3c8dab6694ab486bc1a6f2916d4ed982a4f56a67abd0f148911",
+      "seconds": 63.32716838689521,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 6,
+            "op": ">=",
+            "threshold": 8,
+            "status": "FAIL",
+            "margin": -2
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.125,
+        "confirmation_fraction": 2.0
+      },
+      "live": {
+        "modes": 6,
+        "hq": 1.0
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-vector_unequal_mass",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_unequal_mass",
+      "floors": null,
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_mass/result.json",
+      "artifact_sha256": "f16c2972d7055e8c8f35fb0fbb8ecec564b621bd4940032a55b0a9b37a381121",
+      "snapshot": "results/rg5-bcap-toy-vector_unequal_mass.json.gz",
+      "snapshot_sha256": "c5dd8eb02ed2dd7f7ea243f6cdb15617e37054884af60f30fe22198600ac3035",
+      "seconds": 79.686700015096,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09567643741830587,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08432356258169413
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.05791015177965164,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.09208984822034835
+          },
+          {
+            "metric": "hq",
+            "value": 0.996337890625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14633789062500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.28307452518492937,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.5669254748150706
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.030950482934713364,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.11904951706528663
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.2685546875,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.0185546875
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.13227724118365183,
+        "confirmation_fraction": 2.0
+      },
+      "live": {
+        "sw1_normalized": 0.09567643741830587,
+        "mean_error": 0.1349870264530182,
+        "covariance_error": 0.20370247960090637,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.05791015177965164,
+        "min_mass_ratio": 0.2685546875,
+        "hq": 0.996337890625,
+        "component_covariance_error": 0.28307452518492937,
+        "component_covariance_errors": [
+          0.060819242149591446,
+          0.16026003658771515,
+          0.19479632377624512,
+          0.7164224982261658
+        ],
+        "component_min_eigen_ratio": 0.030950482934713364,
+        "component_mass": [
+          0.546142578125,
+          0.35791015625,
+          0.090576171875,
+          0.00537109375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2237,
+          1466,
+          371,
+          22
+        ]
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-img_stripes2",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_stripes2",
+      "floors": null,
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_stripes2/result.json",
+      "artifact_sha256": "9f6bbb998cbebf9a479cc705206c7c371aa6eb2ecf3f0e51680c7aa0fccba74d",
+      "snapshot": "results/rg5-bcap-toy-img_stripes2.json.gz",
+      "snapshot_sha256": "8a10491feece43762e5d95a08f56051ed77ccf1498c7e1ce2fffe1499f040b1d",
+      "seconds": 29.69130358705297,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.96875,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.06874999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 3,
+          "first_pass_step": 50,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "live": {
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.03817836195230484,
+        "quality_mode_fractions": [
+          0.40625,
+          0.5625
+        ],
+        "mode_fractions": [
+          0.40625,
+          0.59375
+        ],
+        "distribution_tv": 0.09375
+      }
+    },
+    {
+      "id": "k3g-hold-mode_hold-0.01-0.05",
+      "candidate": "k3g",
+      "kind": "hold",
+      "task": "mode_hold",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-hold-mode_hold-0.01-0.05/result.json",
+      "artifact_sha256": "2496b1cc9f0ff04e804d11f39325590b6f942f968a7bc359dd47c62b6dff2bd3",
+      "snapshot": "results/k3g-hold-mode_hold-0.01-0.05.json.gz",
+      "snapshot_sha256": "621c50909201b198df855ccfb8858339d316992cf2409093a39b56718d2aec5a",
+      "seconds": 204.64871292887256,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "gate": {
+        "name": "first_convergence_then_hold_v1",
+        "confirmation_checks": 200,
+        "settling_budget": 4800,
+        "hold_budget": 1200,
+        "start_step": 1200,
+        "modes": 8,
+        "min_hq": 0.9,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "training_feedback": false,
+        "frozen_toy_verdicts_unchanged": true,
+        "status": "PASS",
+        "converged_step": 1400,
+        "settling_checks": 200,
+        "settling_failures": 0,
+        "longest_settling_streak": 200,
+        "hold_checks": 1200,
+        "first_hold_failure": null,
+        "hold_budget_complete": true
+      },
+      "hold_window": {
+        "min_hq": 0.920654296875,
+        "min_modes": 8
+      },
+      "extension": {
+        "checks": 300,
+        "passing": 63,
+        "first_failure": {
+          "step": 2644,
+          "modes": 8,
+          "hq": 0.89794921875
+        },
+        "min_hq": 0.718994140625,
+        "passed": false
+      }
+    },
+    {
+      "id": "k3g-shift-mode_hold-0.01-0.05",
+      "candidate": "k3g",
+      "kind": "shift",
+      "task": "mode_hold",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-shift-mode_hold-0.01-0.05/result.json",
+      "artifact_sha256": "a2db0c2c56a13af64625771ca946e86c9d314cb4bfa6c15adccb9877edc16d8b",
+      "snapshot": "results/k3g-shift-mode_hold-0.01-0.05.json.gz",
+      "snapshot_sha256": "1c52d3d8372cf17bf9b3293869ff20ddf3bd003a58ecc545c313489a778a794d",
+      "seconds": 215.75095024192706,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "continued_hold": {
+        "checks": 120,
+        "passing_checks": 120,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.926025390625,
+        "passing_suffix": 120,
+        "stable_from_step": 1210,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 22,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2540,
+          2550,
+          2560,
+          2570,
+          2580,
+          2590,
+          2600,
+          2610,
+          2620,
+          2630,
+          2640,
+          2650,
+          2660,
+          2670,
+          2680,
+          2690,
+          2700,
+          2710,
+          2720,
+          2730,
+          2740,
+          2750,
+          2760,
+          2770,
+          2780,
+          2790,
+          2800,
+          2810,
+          2820,
+          2830,
+          2840,
+          2850,
+          2860,
+          2870,
+          2880,
+          2890,
+          2900,
+          2910,
+          2920,
+          2930,
+          2940,
+          2950,
+          2960,
+          2970,
+          2980,
+          2990,
+          3000,
+          3010,
+          3020,
+          3030,
+          3040,
+          3050,
+          3060,
+          3070,
+          3080,
+          3090,
+          3100,
+          3110,
+          3120,
+          3130,
+          3140,
+          3150,
+          3160,
+          3170,
+          3180,
+          3190,
+          3200,
+          3210,
+          3220,
+          3230,
+          3240,
+          3250,
+          3260,
+          3270,
+          3280,
+          3290,
+          3300,
+          3310,
+          3320,
+          3330,
+          3340,
+          3350,
+          3360,
+          3370,
+          3600
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 0,
+        "stable_from_step": null,
+        "pass_all": false,
+        "pass_suffix": false,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 22,
+          "failing_steps": [
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3060,
+            3070,
+            3080,
+            3090,
+            3100,
+            3110,
+            3120,
+            3130,
+            3140,
+            3150,
+            3160,
+            3170,
+            3180,
+            3190,
+            3200,
+            3210,
+            3220,
+            3230,
+            3240,
+            3250,
+            3260,
+            3270,
+            3280,
+            3290,
+            3300,
+            3310,
+            3320,
+            3330,
+            3340,
+            3350,
+            3360,
+            3370,
+            3600
+          ],
+          "min_modes": 6,
+          "min_hq": 0.44091796875,
+          "passing_suffix": 0,
+          "stable_from_step": null,
+          "pass_all": false,
+          "pass_suffix": false
+        },
+        "deadline_assessable": true,
+        "deadline_pass": false,
+        "delay_updates": null
+      },
+      "shift_pair": {
+        "before": {
+          "step": 2400,
+          "modes": 8,
+          "hq": 0.999755859375,
+          "effective_modes": 7.190613269805908,
+          "hq_counts": [
+            683,
+            341,
+            339,
+            333,
+            344,
+            696,
+            1038,
+            321
+          ]
+        },
+        "after": {
+          "step": 2400,
+          "modes": 0,
+          "hq": 0.0,
+          "effective_modes": 0.0,
+          "hq_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "optimizer_at_shift": [
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              4.25e-05
+            ]
+          },
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              4.25e-05,
+              0.00042500000000000003
+            ]
+          }
+        ]
+      },
+      "final": {
+        "modes": 8,
+        "hq": 0.895263671875
+      },
+      "optimizer_final": [
+        {
+          "calls": 3600,
+          "delegate_calls": 3600,
+          "updates": 3600,
+          "moment_steps_min": 3600,
+          "moment_steps_max": 3600,
+          "rates": [
+            4.25e-05
+          ]
+        },
+        {
+          "calls": 3600,
+          "delegate_calls": 3600,
+          "updates": 3600,
+          "moment_steps_min": 3600,
+          "moment_steps_max": 3600,
+          "rates": [
+            4.25e-05,
+            0.00042500000000000003
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rg5-bcap-hold-mode_hold-0.01-0.05",
+      "candidate": "rg5-bcap",
+      "kind": "hold",
+      "task": "mode_hold",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "raw_status": "NOT_CONVERGED",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-hold-mode_hold-0.01-0.05/result.json",
+      "artifact_sha256": "df639d4d498e281b33d6e92a5e7afc62cd514a826045054bad497e17fa0a20dc",
+      "snapshot": "results/rg5-bcap-hold-mode_hold-0.01-0.05.json.gz",
+      "snapshot_sha256": "4107e63cbe126d7b8b9f28347cd6ea7485c222839a28cbd5ab28c08d913af97d",
+      "seconds": 344.9934447889682,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "gate": {
+        "name": "first_convergence_then_hold_v1",
+        "confirmation_checks": 200,
+        "settling_budget": 4800,
+        "hold_budget": 1200,
+        "start_step": 1200,
+        "modes": 8,
+        "min_hq": 0.9,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "training_feedback": false,
+        "frozen_toy_verdicts_unchanged": true,
+        "status": "NOT_CONVERGED",
+        "converged_step": null,
+        "settling_checks": 4800,
+        "settling_failures": 4800,
+        "longest_settling_streak": 0,
+        "hold_checks": 0,
+        "first_hold_failure": null,
+        "hold_budget_complete": false
+      },
+      "hold_window": {
+        "min_hq": null,
+        "min_modes": null
+      },
+      "extension": {
+        "checks": 5100,
+        "passing": 0,
+        "first_failure": {
+          "step": 1201,
+          "modes": 6,
+          "hq": 1.0
+        },
+        "min_hq": 0.164306640625,
+        "passed": false
+      }
+    },
+    {
+      "id": "rg5-bcap-shift-mode_hold-0.01-0.05",
+      "candidate": "rg5-bcap",
+      "kind": "shift",
+      "task": "mode_hold",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-shift-mode_hold-0.01-0.05/result.json",
+      "artifact_sha256": "3c4e2e618002eb86248b5e52341ccc5b996521b13ca02a1dddfd543105ba6625",
+      "snapshot": "results/rg5-bcap-shift-mode_hold-0.01-0.05.json.gz",
+      "snapshot_sha256": "48158df9c85a1679cbc20121e8fbf95d743f4c2eeb57f5f0644bf3ce3457f3a4",
+      "seconds": 209.24700551503338,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "continued_hold": {
+        "checks": 120,
+        "passing_checks": 0,
+        "failing_steps": [
+          1210,
+          1220,
+          1230,
+          1240,
+          1250,
+          1260,
+          1270,
+          1280,
+          1290,
+          1300,
+          1310,
+          1320,
+          1330,
+          1340,
+          1350,
+          1360,
+          1370,
+          1380,
+          1390,
+          1400,
+          1410,
+          1420,
+          1430,
+          1440,
+          1450,
+          1460,
+          1470,
+          1480,
+          1490,
+          1500,
+          1510,
+          1520,
+          1530,
+          1540,
+          1550,
+          1560,
+          1570,
+          1580,
+          1590,
+          1600,
+          1610,
+          1620,
+          1630,
+          1640,
+          1650,
+          1660,
+          1670,
+          1680,
+          1690,
+          1700,
+          1710,
+          1720,
+          1730,
+          1740,
+          1750,
+          1760,
+          1770,
+          1780,
+          1790,
+          1800,
+          1810,
+          1820,
+          1830,
+          1840,
+          1850,
+          1860,
+          1870,
+          1880,
+          1890,
+          1900,
+          1910,
+          1920,
+          1930,
+          1940,
+          1950,
+          1960,
+          1970,
+          1980,
+          1990,
+          2000,
+          2010,
+          2020,
+          2030,
+          2040,
+          2050,
+          2060,
+          2070,
+          2080,
+          2090,
+          2100,
+          2110,
+          2120,
+          2130,
+          2140,
+          2150,
+          2160,
+          2170,
+          2180,
+          2190,
+          2200,
+          2210,
+          2220,
+          2230,
+          2240,
+          2250,
+          2260,
+          2270,
+          2280,
+          2290,
+          2300,
+          2310,
+          2320,
+          2330,
+          2340,
+          2350,
+          2360,
+          2370,
+          2380,
+          2390,
+          2400
+        ],
+        "min_modes": 5,
+        "min_hq": 0.81787109375,
+        "passing_suffix": 0,
+        "stable_from_step": null,
+        "pass_all": false,
+        "pass_suffix": false
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 0,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2540,
+          2550,
+          2560,
+          2570,
+          2580,
+          2590,
+          2600,
+          2610,
+          2620,
+          2630,
+          2640,
+          2650,
+          2660,
+          2670,
+          2680,
+          2690,
+          2700,
+          2710,
+          2720,
+          2730,
+          2740,
+          2750,
+          2760,
+          2770,
+          2780,
+          2790,
+          2800,
+          2810,
+          2820,
+          2830,
+          2840,
+          2850,
+          2860,
+          2870,
+          2880,
+          2890,
+          2900,
+          2910,
+          2920,
+          2930,
+          2940,
+          2950,
+          2960,
+          2970,
+          2980,
+          2990,
+          3000,
+          3010,
+          3020,
+          3030,
+          3040,
+          3050,
+          3060,
+          3070,
+          3080,
+          3090,
+          3100,
+          3110,
+          3120,
+          3130,
+          3140,
+          3150,
+          3160,
+          3170,
+          3180,
+          3190,
+          3200,
+          3210,
+          3220,
+          3230,
+          3240,
+          3250,
+          3260,
+          3270,
+          3280,
+          3290,
+          3300,
+          3310,
+          3320,
+          3330,
+          3340,
+          3350,
+          3360,
+          3370,
+          3380,
+          3390,
+          3400,
+          3410,
+          3420,
+          3430,
+          3440,
+          3450,
+          3460,
+          3470,
+          3480,
+          3490,
+          3500,
+          3510,
+          3520,
+          3530,
+          3540,
+          3550,
+          3560,
+          3570,
+          3580,
+          3590,
+          3600
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 0,
+        "stable_from_step": null,
+        "pass_all": false,
+        "pass_suffix": false,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 0,
+          "failing_steps": [
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3060,
+            3070,
+            3080,
+            3090,
+            3100,
+            3110,
+            3120,
+            3130,
+            3140,
+            3150,
+            3160,
+            3170,
+            3180,
+            3190,
+            3200,
+            3210,
+            3220,
+            3230,
+            3240,
+            3250,
+            3260,
+            3270,
+            3280,
+            3290,
+            3300,
+            3310,
+            3320,
+            3330,
+            3340,
+            3350,
+            3360,
+            3370,
+            3380,
+            3390,
+            3400,
+            3410,
+            3420,
+            3430,
+            3440,
+            3450,
+            3460,
+            3470,
+            3480,
+            3490,
+            3500,
+            3510,
+            3520,
+            3530,
+            3540,
+            3550,
+            3560,
+            3570,
+            3580,
+            3590,
+            3600
+          ],
+          "min_modes": 1,
+          "min_hq": 0.148681640625,
+          "passing_suffix": 0,
+          "stable_from_step": null,
+          "pass_all": false,
+          "pass_suffix": false
+        },
+        "deadline_assessable": true,
+        "deadline_pass": false,
+        "delay_updates": null
+      },
+      "shift_pair": {
+        "before": {
+          "step": 2400,
+          "modes": 5,
+          "hq": 0.833251953125,
+          "effective_modes": 4.296626567840576,
+          "hq_counts": [
+            1415,
+            330,
+            672,
+            655,
+            0,
+            0,
+            341,
+            0
+          ]
+        },
+        "after": {
+          "step": 2400,
+          "modes": 0,
+          "hq": 0.0,
+          "effective_modes": 0.0,
+          "hq_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "optimizer_at_shift": [
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              4.25e-05
+            ]
+          },
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              4.25e-05,
+              0.00042500000000000003
+            ]
+          }
+        ]
+      },
+      "final": {
+        "modes": 6,
+        "hq": 0.8232421875
+      },
+      "optimizer_final": [
+        {
+          "calls": 3600,
+          "delegate_calls": 3600,
+          "updates": 3600,
+          "moment_steps_min": 3600,
+          "moment_steps_max": 3600,
+          "rates": [
+            4.25e-05
+          ]
+        },
+        {
+          "calls": 3600,
+          "delegate_calls": 3600,
+          "updates": 3600,
+          "moment_steps_min": 3600,
+          "moment_steps_max": 3600,
+          "rates": [
+            4.25e-05,
+            0.00042500000000000003
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rg5-a2-shift_frozen-mode_hold-0.1-0.1",
+      "candidate": "rg5-a2",
+      "kind": "shift_frozen",
+      "task": "mode_hold",
+      "floors": [
+        0.1,
+        0.1
+      ],
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-a2-shift_frozen-mode_hold-0.1-0.1/result.json",
+      "artifact_sha256": "0cb0ed9517bbcaa170859bac5e7c4bd19f933cabcaa67bd5194afa6690febea6",
+      "snapshot": "results/rg5-a2-shift_frozen-mode_hold-0.1-0.1.json.gz",
+      "snapshot_sha256": "56644c1171316a32644b91d1529421be0aad8763b6060a79b88c409864a12e20",
+      "seconds": 146.3006586781703,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "continued_hold": {
+        "checks": 120,
+        "passing_checks": 120,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.9833984375,
+        "passing_suffix": 120,
+        "stable_from_step": 1210,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 0,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2540,
+          2550,
+          2560,
+          2570,
+          2580,
+          2590,
+          2600,
+          2610,
+          2620,
+          2630,
+          2640,
+          2650,
+          2660,
+          2670,
+          2680,
+          2690,
+          2700,
+          2710,
+          2720,
+          2730,
+          2740,
+          2750,
+          2760,
+          2770,
+          2780,
+          2790,
+          2800,
+          2810,
+          2820,
+          2830,
+          2840,
+          2850,
+          2860,
+          2870,
+          2880,
+          2890,
+          2900,
+          2910,
+          2920,
+          2930,
+          2940,
+          2950,
+          2960,
+          2970,
+          2980,
+          2990,
+          3000,
+          3010,
+          3020,
+          3030,
+          3040,
+          3050,
+          3060,
+          3070,
+          3080,
+          3090,
+          3100,
+          3110,
+          3120,
+          3130,
+          3140,
+          3150,
+          3160,
+          3170,
+          3180,
+          3190,
+          3200,
+          3210,
+          3220,
+          3230,
+          3240,
+          3250,
+          3260,
+          3270,
+          3280,
+          3290,
+          3300,
+          3310,
+          3320,
+          3330,
+          3340,
+          3350,
+          3360,
+          3370,
+          3380,
+          3390,
+          3400,
+          3410,
+          3420,
+          3430,
+          3440,
+          3450,
+          3460,
+          3470,
+          3480,
+          3490,
+          3500,
+          3510,
+          3520,
+          3530,
+          3540,
+          3550,
+          3560,
+          3570,
+          3580,
+          3590,
+          3600
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 0,
+        "stable_from_step": null,
+        "pass_all": false,
+        "pass_suffix": false,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 0,
+          "failing_steps": [
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3060,
+            3070,
+            3080,
+            3090,
+            3100,
+            3110,
+            3120,
+            3130,
+            3140,
+            3150,
+            3160,
+            3170,
+            3180,
+            3190,
+            3200,
+            3210,
+            3220,
+            3230,
+            3240,
+            3250,
+            3260,
+            3270,
+            3280,
+            3290,
+            3300,
+            3310,
+            3320,
+            3330,
+            3340,
+            3350,
+            3360,
+            3370,
+            3380,
+            3390,
+            3400,
+            3410,
+            3420,
+            3430,
+            3440,
+            3450,
+            3460,
+            3470,
+            3480,
+            3490,
+            3500,
+            3510,
+            3520,
+            3530,
+            3540,
+            3550,
+            3560,
+            3570,
+            3580,
+            3590,
+            3600
+          ],
+          "min_modes": 0,
+          "min_hq": 0.0,
+          "passing_suffix": 0,
+          "stable_from_step": null,
+          "pass_all": false,
+          "pass_suffix": false
+        },
+        "deadline_assessable": true,
+        "deadline_pass": false,
+        "delay_updates": null
+      },
+      "shift_pair": {
+        "before": {
+          "step": 2400,
+          "modes": 8,
+          "hq": 0.997314453125,
+          "effective_modes": 7.179408550262451,
+          "hq_counts": [
+            683,
+            331,
+            339,
+            333,
+            343,
+            696,
+            1039,
+            321
+          ]
+        },
+        "after": {
+          "step": 2400,
+          "modes": 0,
+          "hq": 0.0,
+          "effective_modes": 0.0,
+          "hq_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "optimizer_at_shift": [
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              0.00042500000000000003
+            ]
+          },
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              0.00042500000000000003,
+              0.0008500000000000001
+            ]
+          }
+        ]
+      },
+      "final": {
+        "modes": 0,
+        "hq": 0.0
+      },
+      "optimizer_final": [
+        {
+          "calls": 3600,
+          "delegate_calls": 2400,
+          "updates": 2400,
+          "moment_steps_min": 2400,
+          "moment_steps_max": 2400,
+          "rates": [
+            0.00042500000000000003
+          ]
+        },
+        {
+          "calls": 3600,
+          "delegate_calls": 2400,
+          "updates": 2400,
+          "moment_steps_min": 2400,
+          "moment_steps_max": 2400,
+          "rates": [
+            0.00042500000000000003,
+            0.0008500000000000001
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k3p-toy-ae_gan_hold",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "ae_gan_hold",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-ae_gan_hold/result.json",
+      "artifact_sha256": "cd00115114d78efdd44b0db17cfe5064e6086fe6932b266c28739e55d72fac70",
+      "snapshot": "results/k3p-toy-ae_gan_hold.json.gz",
+      "snapshot_sha256": "19d01b53059191d131bfe8fb01fc873bdbb1cc504b67e4d477e157b783271626",
+      "seconds": 10.089281641179696,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "recon_mse",
+            "value": 0.017188385128974915,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.03281161487102509
+          },
+          {
+            "metric": "hold",
+            "value": 0.004028096795082092,
+            "op": "<=",
+            "threshold": 0.35,
+            "status": "PASS",
+            "margin": 0.3459719032049179
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 22,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 22,
+          "first_pass_step": 32,
+          "stable_from_step": 32,
+          "stable_from_seconds": 2.08327466994524,
+          "confirmed_step": 73,
+          "confirmed_seconds": 3.6567100959364325
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.292
+      },
+      "live": {
+        "recon_mse": 0.017188385128974915,
+        "hold": 0.004028096795082092
+      }
+    },
+    {
+      "id": "k3p-toy-cover_leftover",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "cover_leftover",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-cover_leftover/result.json",
+      "artifact_sha256": "64a8b7443919ea5df6a6e388dc583edb76f55f2b5a11aad5a6710d68baa25959",
+      "snapshot": "results/k3p-toy-cover_leftover.json.gz",
+      "snapshot_sha256": "2ed3d1de319e18c0f181a500885e2e978bca6b251a2d260fca4f24ac4a00def6",
+      "seconds": 47.0096651900094,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "u_kept",
+            "value": 0.9738695524103523,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12386955241035236
+          },
+          {
+            "metric": "content_kept",
+            "value": 0.9995759435457515,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24957594354575152
+          },
+          {
+            "metric": "leak_ratio",
+            "value": 0.00031488142734889437,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.19968511857265112
+          },
+          {
+            "metric": "pole_rel_err_plus",
+            "value": 0.01722557842731476,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.18277442157268525
+          },
+          {
+            "metric": "pole_rel_err_minus",
+            "value": 0.015281282365322113,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.1847187176346779
+          },
+          {
+            "metric": "same_dir",
+            "value": 0.0015512721888402137,
+            "op": "<=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.2484487278111598
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 13,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": 24.30042111198418,
+          "confirmed_step": 534,
+          "confirmed_seconds": 31.476300350157544
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.6675
+      },
+      "live": {
+        "u_kept": 0.9738695524103523,
+        "content_kept": 0.9995759435457515,
+        "leak_ratio": 0.00031488142734889437,
+        "pole_rel_err_plus": 0.01722557842731476,
+        "pole_rel_err_minus": 0.015281282365322113,
+        "same_dir": 0.0015512721888402137
+      }
+    },
+    {
+      "id": "k3p-toy-img_bars4",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "img_bars4",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_bars4/result.json",
+      "artifact_sha256": "576e6783e46f9eab6187748babc23b35a53b0b37758334ee53a34371c70837fb",
+      "snapshot": "results/k3p-toy-img_bars4.json.gz",
+      "snapshot_sha256": "d6bea16378567ff7d64a0e8c64f253012914425bda9dd077e432b5ae440ce65e",
+      "seconds": 24.135661353124306,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.96875,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.06874999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 20,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 20,
+          "first_pass_step": 125,
+          "stable_from_step": 125,
+          "stable_from_seconds": 5.803472938016057,
+          "confirmed_step": 225,
+          "confirmed_seconds": 9.422012627823278
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.375
+      },
+      "live": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.032672218978405,
+        "quality_mode_fractions": [
+          0.25,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "distribution_tv": 0.03125
+      }
+    },
+    {
+      "id": "k3p-toy-img_blobs4",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "img_blobs4",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_blobs4/result.json",
+      "artifact_sha256": "510c90c09adca2f26e7bfdd9b6d6a4400408b360c88237ba53daa7506b0b7ec8",
+      "snapshot": "results/k3p-toy-img_blobs4.json.gz",
+      "snapshot_sha256": "48f555f87e00eff6be00d180eac6c003d3eea5f403e760e45ce89bbc2ebc438c",
+      "seconds": 24.307421477977186,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.96875,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.06874999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 200,
+          "stable_from_step": 200,
+          "stable_from_seconds": 8.92301659611985,
+          "confirmed_step": 300,
+          "confirmed_seconds": 12.605489811161533
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "live": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.03581351786851883,
+        "quality_mode_fractions": [
+          0.375,
+          0.21875,
+          0.25,
+          0.125
+        ],
+        "mode_fractions": [
+          0.375,
+          0.21875,
+          0.25,
+          0.15625
+        ],
+        "distribution_tv": 0.125
+      }
+    },
+    {
+      "id": "k3p-toy-img_intensity2",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "img_intensity2",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_intensity2/result.json",
+      "artifact_sha256": "b8956714ff6082879989c939947452281f6d9ddab4ed0d7296261f4a44f52792",
+      "snapshot": "results/k3p-toy-img_intensity2.json.gz",
+      "snapshot_sha256": "3e62e45d26ab06ba753ea874e713523cfdfb058f8c2deb2e23ac79c7e7ebdbae",
+      "seconds": 24.510229282081127,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 9,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 375,
+          "stable_from_step": 450,
+          "stable_from_seconds": 18.155728393932804,
+          "confirmed_step": 550,
+          "confirmed_seconds": 22.125435212859884
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9166666666666666
+      },
+      "live": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.03273952752351761,
+        "quality_mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "distribution_tv": 0.0
+      }
+    },
+    {
+      "id": "k3p-toy-mid_scale_identity",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "mid_scale_identity",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-mid_scale_identity/result.json",
+      "artifact_sha256": "d81f3556c54fa82275e48eb3bce0d6672cca1c9432639d05f68c4cb5d3be5b37",
+      "snapshot": "results/k3p-toy-mid_scale_identity.json.gz",
+      "snapshot_sha256": "24b671a6e00f76009f0ac4f9a5ddd6e6718fdc64e05c5230304f645f6d583c8d",
+      "seconds": 55.66584592894651,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "concept_cos_plus",
+            "value": 0.999912440776825,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14991244077682497
+          },
+          {
+            "metric": "concept_cos_minus",
+            "value": 0.9999856948852539,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14998569488525393
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 0.9975622892379761,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24756228923797607
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 0.9975622892379761,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.2524377107620239
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 0.9949060678482056,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24490606784820557
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 0.9949060678482056,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.25509393215179443
+          },
+          {
+            "metric": "identity_at_0",
+            "value": 0.9966030772435983,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14660307724359833
+          },
+          {
+            "metric": "identity_at_mid",
+            "value": 0.9900592461126427,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14005924611264275
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 267,
+          "stable_from_step": 267,
+          "stable_from_seconds": 19.00332416384481,
+          "confirmed_step": 400,
+          "confirmed_seconds": 27.239992985036224
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "live": {
+        "concept_cos_plus": 0.999912440776825,
+        "concept_cos_minus": 0.9999856948852539,
+        "concept_mag_plus": 0.9975622892379761,
+        "concept_mag_minus": 0.9949060678482056,
+        "identity_at_0": 0.9966030772435983,
+        "identity_at_mid": 0.9900592461126427
+      }
+    },
+    {
+      "id": "k3p-toy-residual_student",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "residual_student",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-residual_student/result.json",
+      "artifact_sha256": "7b9f6965a53dab20323aded20c913984cf2fd986d90a80c8b08260675049bf2b",
+      "snapshot": "results/k3p-toy-residual_student.json.gz",
+      "snapshot_sha256": "3a9bf77306978c2eaacc6d2dc9b3b75df735a5f0cb02ae0c11726e1927a76cbe",
+      "seconds": 17.632827911060303,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0007406723452731967,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019259327654726804
+          },
+          {
+            "metric": "success_rate",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.0
+          },
+          {
+            "metric": "wrong_pad_rate",
+            "value": 0.0,
+            "op": "<=",
+            "threshold": 0.0,
+            "status": "PASS",
+            "margin": 0.0
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 34,
+          "stable_from_step": 100,
+          "stable_from_seconds": 6.160225237021223,
+          "confirmed_step": 167,
+          "confirmed_seconds": 8.617747453041375
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4175
+      },
+      "live": {
+        "identity_mse": 0.0007406723452731967,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      }
+    },
+    {
+      "id": "k3p-toy-trajectory",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "trajectory",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-trajectory/result.json",
+      "artifact_sha256": "f71d406aac11729bf5e27fc7871608f3259c499ae16d741b54a135961ae83cf9",
+      "snapshot": "results/k3p-toy-trajectory.json.gz",
+      "snapshot_sha256": "52e22c505f6b1898b79ba9821e8326ce5b965bbb9a10987c7878e248ca3cab79",
+      "seconds": 13.326459119096398,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0007388826925307512,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.01926111730746925
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 22,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 22,
+          "first_pass_step": 50,
+          "stable_from_step": 50,
+          "stable_from_seconds": 2.5309337759390473,
+          "confirmed_step": 117,
+          "confirmed_seconds": 4.686635900987312
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.2925
+      },
+      "live": {
+        "identity_mse": 0.0007388826925307512
+      }
+    },
+    {
+      "id": "k3p-toy-two_pole",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "two_pole",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-two_pole/result.json",
+      "artifact_sha256": "56ade2c803de69aea9242bd2e8717410414ec58935a58a9ef7ee689df11fe340",
+      "snapshot": "results/k3p-toy-two_pole.json.gz",
+      "snapshot_sha256": "ad4b11bec9fe37566b50b2159930981e478001a2f66dc2bc4790da41ee136e53",
+      "seconds": 3.491859447909519,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "mean_abs",
+            "value": 0.645207405090332,
+            "op": ">=",
+            "threshold": 0.3,
+            "status": "PASS",
+            "margin": 0.34520740509033204
+          },
+          {
+            "metric": "grad_med",
+            "value": 0.14719460904598236,
+            "op": "<=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.8528053909540176
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 10,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 10,
+          "first_pass_step": 50,
+          "stable_from_step": 50,
+          "stable_from_seconds": 1.9531447538174689,
+          "confirmed_step": 64,
+          "confirmed_seconds": 2.4777868429664522
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.8
+      },
+      "live": {
+        "mean_abs": 0.645207405090332,
+        "grad_med": 0.14719460904598236
+      }
+    },
+    {
+      "id": "k3p-toy-unipolar",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "unipolar",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unipolar/result.json",
+      "artifact_sha256": "667357ca56252464a3bf76ff7cd5e8bca091ebe99996552f1a9f3cfcc888455d",
+      "snapshot": "results/k3p-toy-unipolar.json.gz",
+      "snapshot_sha256": "a37fc1e37508572e97c8a1b93f3643469628d901ab3e6fcfe472a7f800033381",
+      "seconds": 16.067189374007285,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "cover",
+            "value": 0.9951040695792983,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14510406957929833
+          },
+          {
+            "metric": "off_caption",
+            "value": 0.00011780016025137185,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.049882199839748634
+          },
+          {
+            "metric": "neu_hold",
+            "value": 0.9889994636178017,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1389994636178017
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": 4.664062775904313,
+          "confirmed_step": 167,
+          "confirmed_seconds": 6.89764690794982
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4175
+      },
+      "live": {
+        "cover": 0.9951040695792983,
+        "off_caption": 0.00011780016025137185,
+        "neu_hold": 0.9889994636178017
+      }
+    },
+    {
+      "id": "k3p-toy-unused_token_hold",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "unused_token_hold",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unused_token_hold/result.json",
+      "artifact_sha256": "eefcc28c68b43e93d173cad625ddaa312a05e1e42fb99be7c6097afee4cd16f2",
+      "snapshot": "results/k3p-toy-unused_token_hold.json.gz",
+      "snapshot_sha256": "4651e482941cc46877de8914b439574529f525a937375132be235c7006e394f2",
+      "seconds": 5.753563608042896,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "unused_hold",
+            "value": 0.9986878948984668,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1486878948984668
+          },
+          {
+            "metric": "concept_move",
+            "value": 0.9450302124023438,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.09503021240234377
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 11,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 117,
+          "stable_from_step": 117,
+          "stable_from_seconds": 3.5621334451716393,
+          "confirmed_step": 150,
+          "confirmed_seconds": 4.22072677500546
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "live": {
+        "unused_hold": 0.9986878948984668,
+        "concept_move": 0.9450302124023438
+      }
+    },
+    {
+      "id": "k3p-toy-vector_two_broad",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_two_broad",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_two_broad/result.json",
+      "artifact_sha256": "cc738fec64bddcc8f9a67dfa84c13c6504f9ee8fc49803851df8ad230855e391",
+      "snapshot": "results/k3p-toy-vector_two_broad.json.gz",
+      "snapshot_sha256": "d2d58b0ad7c4704980386ddfc4983c4c6aa3c84c4436723a561da435f8ab6e18",
+      "seconds": 62.38879210082814,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04649969983014175,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13350030016985825
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.004150390625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.145849609375
+          },
+          {
+            "metric": "hq",
+            "value": 0.996826171875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14682617187500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.1019132174551487,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.7480867825448513
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.8212609887123108,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.6712609887123108
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": 5.963079635985196,
+          "confirmed_step": 300,
+          "confirmed_seconds": 14.917144451057538
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "live": {
+        "sw1_normalized": 0.04649969983014175,
+        "mean_error": 0.06709441542625427,
+        "covariance_error": 0.029737722128629684,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.004150390625,
+        "min_mass_ratio": 0.99169921875,
+        "hq": 0.996826171875,
+        "component_covariance_error": 0.1019132174551487,
+        "component_covariance_errors": [
+          0.12639296054840088,
+          0.07743347436189651
+        ],
+        "component_min_eigen_ratio": 0.8212609887123108,
+        "component_mass": [
+          0.495849609375,
+          0.504150390625
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2031,
+          2065
+        ]
+      }
+    },
+    {
+      "id": "k3p-toy-vector_unequal_width",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_unequal_width",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_unequal_width/result.json",
+      "artifact_sha256": "f866fc3320494f9f8570b43d8f15ff15a1652da3181fc09ad32daa7c8c2bb6a8",
+      "snapshot": "results/k3p-toy-vector_unequal_width.json.gz",
+      "snapshot_sha256": "054501068ba530522f85518791fb5b3bb20382dd6f03b84d93dc538fb8bb8798",
+      "seconds": 79.03423630795442,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04066150533968248,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1393384946603175
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.02880859375,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12119140625
+          },
+          {
+            "metric": "hq",
+            "value": 0.979736328125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12973632812500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.4118782728910446,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.43812172710895536
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.20727907121181488,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.057279071211814886
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 20,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 200,
+          "stable_from_step": 900,
+          "stable_from_seconds": 58.530821298016235,
+          "confirmed_step": 1100,
+          "confirmed_seconds": 72.1681596019771
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9166666666666666
+      },
+      "live": {
+        "sw1_normalized": 0.04066150533968248,
+        "mean_error": 0.03579946979880333,
+        "covariance_error": 0.05884285643696785,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.02880859375,
+        "min_mass_ratio": 0.927734375,
+        "hq": 0.979736328125,
+        "component_covariance_error": 0.4118782728910446,
+        "component_covariance_errors": [
+          0.5043409466743469,
+          0.5898901224136353,
+          0.2721608579158783,
+          0.281121164560318
+        ],
+        "component_min_eigen_ratio": 0.20727907121181488,
+        "component_mass": [
+          0.2392578125,
+          0.26904296875,
+          0.23193359375,
+          0.259765625
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          980,
+          1102,
+          950,
+          1064
+        ]
+      }
+    },
+    {
+      "id": "k3p-toy-vector_anisotropic",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_anisotropic/result.json",
+      "artifact_sha256": "6d0ed42565a5224c227ddac7c0903ae0ba0036832eb3e753e007fa6feaa424a9",
+      "snapshot": "results/k3p-toy-vector_anisotropic.json.gz",
+      "snapshot_sha256": "11ab2594fc8557dc20890ace275bea7519d5bcc9e7f7245ebb82a4ee91343f7f",
+      "seconds": 84.47461107186973,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05291578076109902,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12708421923890098
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.009114578366279602,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1408854216337204
+          },
+          {
+            "metric": "hq",
+            "value": 0.981689453125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13168945312500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.17823812241355577,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6717618775864442
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.38240739703178406,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.23240739703178406
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 16,
+          "first_pass_step": 150,
+          "stable_from_step": 450,
+          "stable_from_seconds": 32.02715994999744,
+          "confirmed_step": 650,
+          "confirmed_seconds": 46.15031552501023
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5416666666666666
+      },
+      "live": {
+        "sw1_normalized": 0.05291578076109902,
+        "mean_error": 0.047765571624040604,
+        "covariance_error": 0.15525811910629272,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.009114578366279602,
+        "min_mass_ratio": 0.97265625,
+        "hq": 0.981689453125,
+        "component_covariance_error": 0.17823812241355577,
+        "component_covariance_errors": [
+          0.30351415276527405,
+          0.055450569838285446,
+          0.17574964463710785
+        ],
+        "component_min_eigen_ratio": 0.38240739703178406,
+        "component_mass": [
+          0.32421875,
+          0.337890625,
+          0.337890625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1328,
+          1384,
+          1384
+        ]
+      }
+    },
+    {
+      "id": "k3p-toy-vector_overlap",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_overlap/result.json",
+      "artifact_sha256": "a8721c97cda3ea49d4d8ed8d8a505fd5f6749ecb1075c5d997cad3e8dbd4bf2b",
+      "snapshot": "results/k3p-toy-vector_overlap.json.gz",
+      "snapshot_sha256": "b541b0924915fa584d9ce59d381521ce6460373b92fff8c1ac01a5057d289d38",
+      "seconds": 78.76605590595864,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03302034102956933,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14697965897043067
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.013500864617526531,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.13649913538247346
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.07493229955434799,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.375067700445652
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 50,
+          "stable_from_step": 700,
+          "stable_from_seconds": 46.82608890905976,
+          "confirmed_step": 900,
+          "confirmed_seconds": 59.82628829497844
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "live": {
+        "sw1_normalized": 0.03302034102956933,
+        "mean_error": 0.013500864617526531,
+        "covariance_error": 0.07493229955434799,
+        "target_scale": 0.8509407043457031,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "k3p-toy-vector_spiral",
+      "candidate": "k3p",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_spiral/result.json",
+      "artifact_sha256": "572c6094538d5bdf10b60b883b4e5f490bbbe225a9faf60c96877d92abfc0a16",
+      "snapshot": "results/k3p-toy-vector_spiral.json.gz",
+      "snapshot_sha256": "9ccab6696b6ad8e4ef02b8ee8c8e317ee77fbf2426d7193f99358bf89201fd28",
+      "seconds": 75.40356746106409,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03890603697974065,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14109396302025934
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.042784955352544785,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10721504464745521
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.08937041461467743,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.3606295853853226
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 134,
+          "stable_from_step": 134,
+          "stable_from_seconds": 7.713495556963608,
+          "confirmed_step": 400,
+          "confirmed_seconds": 19.955818164162338
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "live": {
+        "sw1_normalized": 0.03890603697974065,
+        "mean_error": 0.042784955352544785,
+        "covariance_error": 0.08937041461467743,
+        "target_scale": 1.240945816040039,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "k3g-toy-vector_anisotropic",
+      "candidate": "k3g",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_anisotropic/result.json",
+      "artifact_sha256": "492ca4a3d5dad223418014fa69cae67f7f1b48b8aa814edbbcf35b7806c3b340",
+      "snapshot": "results/k3g-toy-vector_anisotropic.json.gz",
+      "snapshot_sha256": "3bcc2c30f15b9608e1747273b89a7d1be2a64dafcc43c2cd2760a7d81bd485ae",
+      "seconds": 104.18927899701521,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.058376175553259614,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12162382444674039
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.009114578366279602,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1408854216337204
+          },
+          {
+            "metric": "hq",
+            "value": 0.979248046875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12924804687500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.1847371185819308,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6652628814180692
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.3883257210254669,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.23832572102546692
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 16,
+          "first_pass_step": 150,
+          "stable_from_step": 450,
+          "stable_from_seconds": 41.341726088896394,
+          "confirmed_step": 650,
+          "confirmed_seconds": 59.20464391587302
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5416666666666666
+      },
+      "live": {
+        "sw1_normalized": 0.058376175553259614,
+        "mean_error": 0.05098628252744675,
+        "covariance_error": 0.17173995077610016,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.009114578366279602,
+        "min_mass_ratio": 0.97265625,
+        "hq": 0.979248046875,
+        "component_covariance_error": 0.1847371185819308,
+        "component_covariance_errors": [
+          0.3244398832321167,
+          0.07042039185762405,
+          0.15935108065605164
+        ],
+        "component_min_eigen_ratio": 0.3883257210254669,
+        "component_mass": [
+          0.32421875,
+          0.337890625,
+          0.337890625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1328,
+          1384,
+          1384
+        ]
+      }
+    },
+    {
+      "id": "k3g-toy-vector_overlap",
+      "candidate": "k3g",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_overlap/result.json",
+      "artifact_sha256": "e36854ab1667325ac905e05d0a0f3b2545180df0802cf40da7e689fd60cddb0e",
+      "snapshot": "results/k3g-toy-vector_overlap.json.gz",
+      "snapshot_sha256": "75a79b8878a31dea5f84e6d52e4e3511824329ea7f480561f9cb0bf702c2a5cd",
+      "seconds": 66.42750799306668,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.033064719289491146,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14693528071050885
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.013494445011019707,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1365055549889803
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.07532279193401337,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.37467720806598664
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 50,
+          "stable_from_step": 700,
+          "stable_from_seconds": 38.427378421183676,
+          "confirmed_step": 900,
+          "confirmed_seconds": 48.11139621702023
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "live": {
+        "sw1_normalized": 0.033064719289491146,
+        "mean_error": 0.013494445011019707,
+        "covariance_error": 0.07532279193401337,
+        "target_scale": 0.8509407043457031,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "k3g-toy-vector_spiral",
+      "candidate": "k3g",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_spiral/result.json",
+      "artifact_sha256": "f93674036a87e0554394432d2b363175ffb4e5f66aa91ffc9cf60fef53be7d47",
+      "snapshot": "results/k3g-toy-vector_spiral.json.gz",
+      "snapshot_sha256": "da64f97d34b593c5b32d1d56bfe2dc5ed28001f49312e74c401a055fb12b1e62",
+      "seconds": 73.54476851783693,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03512130699240562,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14487869300759437
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.03604443743824959,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1139555625617504
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.06836308538913727,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.38163691461086274
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 134,
+          "stable_from_step": 134,
+          "stable_from_seconds": 6.659237499115989,
+          "confirmed_step": 400,
+          "confirmed_seconds": 19.094323611119762
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "live": {
+        "sw1_normalized": 0.03512130699240562,
+        "mean_error": 0.03604443743824959,
+        "covariance_error": 0.06836308538913727,
+        "target_scale": 1.240945816040039,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "k3-toy-vector_anisotropic",
+      "candidate": "k3",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_anisotropic/result.json",
+      "artifact_sha256": "7ced772b760f42ae2cd14f6f32da633795ffdd5a022698b42e805d0f128961df",
+      "snapshot": "results/k3-toy-vector_anisotropic.json.gz",
+      "snapshot_sha256": "2458ded6fa5f308f5caba1fd1def64db90d13efa2a1db9af880564e889aaa433",
+      "seconds": 73.14449321315624,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.058376175553259614,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12162382444674039
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.009114578366279602,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1408854216337204
+          },
+          {
+            "metric": "hq",
+            "value": 0.979248046875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12924804687500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.1847371185819308,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6652628814180692
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.3883257210254669,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.23832572102546692
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 16,
+          "first_pass_step": 150,
+          "stable_from_step": 450,
+          "stable_from_seconds": 27.60599381895736,
+          "confirmed_step": 650,
+          "confirmed_seconds": 38.86771476897411
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5416666666666666
+      },
+      "live": {
+        "sw1_normalized": 0.058376175553259614,
+        "mean_error": 0.05098628252744675,
+        "covariance_error": 0.17173995077610016,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.009114578366279602,
+        "min_mass_ratio": 0.97265625,
+        "hq": 0.979248046875,
+        "component_covariance_error": 0.1847371185819308,
+        "component_covariance_errors": [
+          0.3244398832321167,
+          0.07042039185762405,
+          0.15935108065605164
+        ],
+        "component_min_eigen_ratio": 0.3883257210254669,
+        "component_mass": [
+          0.32421875,
+          0.337890625,
+          0.337890625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1328,
+          1384,
+          1384
+        ]
+      }
+    },
+    {
+      "id": "k3-toy-vector_overlap",
+      "candidate": "k3",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_overlap/result.json",
+      "artifact_sha256": "b1dcc5334928b47a026643fcb24daf8ddaffdc9e3f4ab0e8529662e8318b5038",
+      "snapshot": "results/k3-toy-vector_overlap.json.gz",
+      "snapshot_sha256": "6878d27742004865a311f36cd4ae68d0b46a504f334ae227a93f9f44199fdeb9",
+      "seconds": 70.2202997871209,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.033064719289491146,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14693528071050885
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.013494445011019707,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1365055549889803
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.07532279193401337,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.37467720806598664
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 50,
+          "stable_from_step": 700,
+          "stable_from_seconds": 38.641215176088735,
+          "confirmed_step": 900,
+          "confirmed_seconds": 50.99515337799676
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "live": {
+        "sw1_normalized": 0.033064719289491146,
+        "mean_error": 0.013494445011019707,
+        "covariance_error": 0.07532279193401337,
+        "target_scale": 0.8509407043457031,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "k3-toy-vector_spiral",
+      "candidate": "k3",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-toy-vector_spiral/result.json",
+      "artifact_sha256": "a92da74db473bc325ea2a4df2249d70649ca5f8e84cc9f9f4af60e66d4d2170b",
+      "snapshot": "results/k3-toy-vector_spiral.json.gz",
+      "snapshot_sha256": "ab64367cd94267dd194ea3c8d327878b62309d59ba3b5aeaa8b1a8b614c495be",
+      "seconds": 75.62303545884788,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03512130699240562,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14487869300759437
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.03604443743824959,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1139555625617504
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.06836308538913727,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.38163691461086274
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 134,
+          "stable_from_step": 134,
+          "stable_from_seconds": 7.442889865022153,
+          "confirmed_step": 400,
+          "confirmed_seconds": 18.546623673057184
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "live": {
+        "sw1_normalized": 0.03512130699240562,
+        "mean_error": 0.03604443743824959,
+        "covariance_error": 0.06836308538913727,
+        "target_scale": 1.240945816040039,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-ae_gan_hold",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "ae_gan_hold",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-ae_gan_hold/result.json",
+      "artifact_sha256": "75a539fe67b3667015b0ce84b22dc43ac6195ec01303ef558bf893139da46c37",
+      "snapshot": "results/rg5-bcap-toy-ae_gan_hold.json.gz",
+      "snapshot_sha256": "ae3fae01bd251fbb5b25d428c8ba7eafc3fe620a41d8573078befc445e6509d8",
+      "seconds": 10.676302849082276,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "recon_mse",
+            "value": 0.006131417118012905,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.0438685828819871
+          },
+          {
+            "metric": "hold",
+            "value": 0.001990848919376731,
+            "op": "<=",
+            "threshold": 0.35,
+            "status": "PASS",
+            "margin": 0.34800915108062325
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 32,
+          "stable_from_step": 115,
+          "stable_from_seconds": 5.295882193837315,
+          "confirmed_step": 157,
+          "confirmed_seconds": 6.771652397932485
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.628
+      },
+      "live": {
+        "recon_mse": 0.006131417118012905,
+        "hold": 0.001990848919376731
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-cover_leftover",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "cover_leftover",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-cover_leftover/result.json",
+      "artifact_sha256": "1b9d22710d77c615ef5dd2c1e23d06e4f700308445bff67b6cc926af209f07c8",
+      "snapshot": "results/rg5-bcap-toy-cover_leftover.json.gz",
+      "snapshot_sha256": "a75b1b3b3053b5ce27068fd5176b599df21a289097171d4df4509936233206ce",
+      "seconds": 45.5109979279805,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "u_kept",
+            "value": 0.9840860864459129,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1340860864459129
+          },
+          {
+            "metric": "content_kept",
+            "value": 0.9960899388664243,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24608993886642427
+          },
+          {
+            "metric": "leak_ratio",
+            "value": 6.189618321316298e-05,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.19993810381678684
+          },
+          {
+            "metric": "pole_rel_err_plus",
+            "value": 0.0107084596529603,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.1892915403470397
+          },
+          {
+            "metric": "pole_rel_err_minus",
+            "value": 0.012244781479239464,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.18775521852076055
+          },
+          {
+            "metric": "same_dir",
+            "value": 0.0017796575023046402,
+            "op": "<=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.24822034249769537
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 367,
+          "stable_from_step": 367,
+          "stable_from_seconds": 20.203833428910002,
+          "confirmed_step": 500,
+          "confirmed_seconds": 27.48049683100544
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.625
+      },
+      "live": {
+        "u_kept": 0.9840860864459129,
+        "content_kept": 0.9960899388664243,
+        "leak_ratio": 6.189618321316298e-05,
+        "pole_rel_err_plus": 0.0107084596529603,
+        "pole_rel_err_minus": 0.012244781479239464,
+        "same_dir": 0.0017796575023046402
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-img_bars4",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_bars4",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_bars4/result.json",
+      "artifact_sha256": "47626ab3f2895b38d84e35127cead567d4bc3a608da2e61dc5033eddd42bbffd",
+      "snapshot": "results/rg5-bcap-toy-img_bars4.json.gz",
+      "snapshot_sha256": "eba6f12a420f531a981f2f7421470933d4d9455dcdab862c372a8a286233f2d9",
+      "seconds": 27.05232912907377,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 175,
+          "stable_from_step": 175,
+          "stable_from_seconds": 8.0560182929039,
+          "confirmed_step": 275,
+          "confirmed_seconds": 12.148067308124155
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4583333333333333
+      },
+      "live": {
+        "modes": 4,
+        "hq": 1.0,
+        "mean_rmse": 0.028881575912237167,
+        "quality_mode_fractions": [
+          0.25,
+          0.1875,
+          0.25,
+          0.3125
+        ],
+        "mode_fractions": [
+          0.25,
+          0.1875,
+          0.25,
+          0.3125
+        ],
+        "distribution_tv": 0.0625
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-img_blobs4",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_blobs4",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_blobs4/result.json",
+      "artifact_sha256": "e0f6ac09ec11c15dac3cdcb33a2a3174c01ade2e8d2a909e0f408349633ade71",
+      "snapshot": "results/rg5-bcap-toy-img_blobs4.json.gz",
+      "snapshot_sha256": "506db336630b56267d72bbe4645181850c24f2915b8d80a0dd3546b542952d15",
+      "seconds": 33.31638993299566,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.96875,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.06874999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 16,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 16,
+          "first_pass_step": 225,
+          "stable_from_step": 225,
+          "stable_from_seconds": 12.907511541852728,
+          "confirmed_step": 325,
+          "confirmed_seconds": 17.83211967977695
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5416666666666666
+      },
+      "live": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.035672377794981,
+        "quality_mode_fractions": [
+          0.21875,
+          0.21875,
+          0.25,
+          0.28125
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.21875,
+          0.28125,
+          0.28125
+        ],
+        "distribution_tv": 0.0625
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-img_intensity2",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "img_intensity2",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_intensity2/result.json",
+      "artifact_sha256": "8bd61a5fd0c47d49b9e87c998a70c348a6784f54c0ef608987fd17282848bb64",
+      "snapshot": "results/rg5-bcap-toy-img_intensity2.json.gz",
+      "snapshot_sha256": "32acd062258bfa4a31496318e12189ee5a3441a3bcac5f5666fa8c7f715bcf41",
+      "seconds": 27.757353116059676,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 11,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 9,
+          "first_pass_step": 325,
+          "stable_from_step": 400,
+          "stable_from_seconds": 19.06777822994627,
+          "confirmed_step": 500,
+          "confirmed_seconds": 23.546610848978162
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.8333333333333334
+      },
+      "live": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.030347652733325958,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-mid_scale_identity",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "mid_scale_identity",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-mid_scale_identity/result.json",
+      "artifact_sha256": "851aa477dad51efb751c6852566a061e8d975a595a49bdc268d4fbe0a2d6ebfb",
+      "snapshot": "results/rg5-bcap-toy-mid_scale_identity.json.gz",
+      "snapshot_sha256": "7e46877e21ea3c3c2157e7ba8109e4eed4199231f4a6984256788c845c1a0562",
+      "seconds": 59.705141343176365,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "concept_cos_plus",
+            "value": 0.999995231628418,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.149995231628418
+          },
+          {
+            "metric": "concept_cos_minus",
+            "value": 0.9999946355819702,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14999463558197024
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 1.0022462606430054,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.25224626064300537
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 1.0022462606430054,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.24775373935699463
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 0.9934449791908264,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24344497919082642
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 0.9934449791908264,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.2565550208091736
+          },
+          {
+            "metric": "identity_at_0",
+            "value": 0.9987790801794985,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14877908017949848
+          },
+          {
+            "metric": "identity_at_mid",
+            "value": 0.9995407191372905,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1495407191372905
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 267,
+          "stable_from_step": 267,
+          "stable_from_seconds": 24.192007078090683,
+          "confirmed_step": 400,
+          "confirmed_seconds": 33.14716398809105
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "live": {
+        "concept_cos_plus": 0.999995231628418,
+        "concept_cos_minus": 0.9999946355819702,
+        "concept_mag_plus": 1.0022462606430054,
+        "concept_mag_minus": 0.9934449791908264,
+        "identity_at_0": 0.9987790801794985,
+        "identity_at_mid": 0.9995407191372905
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-residual_student",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "residual_student",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-residual_student/result.json",
+      "artifact_sha256": "57b94e7e27cd535e9ea792daebda0832e2901fdfff34f7f1cc9cbf57273235be",
+      "snapshot": "results/rg5-bcap-toy-residual_student.json.gz",
+      "snapshot_sha256": "4e86149152368a4546c84db36232fe11a4f628cc63e183176e4a6371b767d0b5",
+      "seconds": 16.906087211100385,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0007461536442860961,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019253846355713904
+          },
+          {
+            "metric": "success_rate",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.0
+          },
+          {
+            "metric": "wrong_pad_rate",
+            "value": 0.0,
+            "op": "<=",
+            "threshold": 0.0,
+            "status": "PASS",
+            "margin": 0.0
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": 5.383372307056561,
+          "confirmed_step": 167,
+          "confirmed_seconds": 7.929417649982497
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4175
+      },
+      "live": {
+        "identity_mse": 0.0007461536442860961,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-trajectory",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "trajectory",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-trajectory/result.json",
+      "artifact_sha256": "3f9fde921c6824fecdde3a257a71ba986c91b3bc969640fa0fbeee049f7584bf",
+      "snapshot": "results/rg5-bcap-toy-trajectory.json.gz",
+      "snapshot_sha256": "59ff6cf3009b064b52c0005c2ef95ec4f2cf53c51efffc123bb1cbb6a0c274be",
+      "seconds": 18.524748079944402,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0007362960604950786,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019263703939504922
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 11,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 234,
+          "stable_from_step": 234,
+          "stable_from_seconds": 11.767753907945007,
+          "confirmed_step": 300,
+          "confirmed_seconds": 14.41858092090115
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "live": {
+        "identity_mse": 0.0007362960604950786
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-two_pole",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "two_pole",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-two_pole/result.json",
+      "artifact_sha256": "5105a9c8eea0e11cc0b7ad8329be482ebd75cd62c15891d22011e56b61ed1b47",
+      "snapshot": "results/rg5-bcap-toy-two_pole.json.gz",
+      "snapshot_sha256": "1d0832ccd72c669c36d15cef9b434834358caa994fe21b2d7b73e3582604ca07",
+      "seconds": 2.9275261969305575,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "mean_abs",
+            "value": 0.8972024321556091,
+            "op": ">=",
+            "threshold": 0.3,
+            "status": "PASS",
+            "margin": 0.5972024321556091
+          },
+          {
+            "metric": "grad_med",
+            "value": 0.9707928895950317,
+            "op": "<=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.02920711040496826
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 13,
+          "first_pass_step": 40,
+          "stable_from_step": 40,
+          "stable_from_seconds": 1.4562727098818868,
+          "confirmed_step": 54,
+          "confirmed_seconds": 1.8345827020239085
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.675
+      },
+      "live": {
+        "mean_abs": 0.8972024321556091,
+        "grad_med": 0.9707928895950317
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-unipolar",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "unipolar",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-unipolar/result.json",
+      "artifact_sha256": "a01a4bcea4490b313aadb64caa82046d6e1b12020562806ef6a20bf71f89fc88",
+      "snapshot": "results/rg5-bcap-toy-unipolar.json.gz",
+      "snapshot_sha256": "abc0dd42a0b584a89888e051e96b8940b9ae23d2e7fd83dee5015a10c3c43a52",
+      "seconds": 14.745335426181555,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "cover",
+            "value": 0.9952684532128586,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14526845321285864
+          },
+          {
+            "metric": "off_caption",
+            "value": 6.368205775089056e-06,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.04999363179422491
+          },
+          {
+            "metric": "neu_hold",
+            "value": 0.9917024988681078,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14170249886810782
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 117,
+          "stable_from_step": 117,
+          "stable_from_seconds": 4.735141065903008,
+          "confirmed_step": 184,
+          "confirmed_seconds": 6.908906040014699
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.46
+      },
+      "live": {
+        "cover": 0.9952684532128586,
+        "off_caption": 6.368205775089056e-06,
+        "neu_hold": 0.9917024988681078
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-unused_token_hold",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "unused_token_hold",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-unused_token_hold/result.json",
+      "artifact_sha256": "418d7da5886145af888061d2901ce13c658e7647068f7e6df593c23b41e7c331",
+      "snapshot": "results/rg5-bcap-toy-unused_token_hold.json.gz",
+      "snapshot_sha256": "f57813c6de1769f3f52156f1dcd3542652789a90f71facab50a93158745660db",
+      "seconds": 5.505274070892483,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "unused_hold",
+            "value": 0.9912094632163644,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1412094632163644
+          },
+          {
+            "metric": "concept_move",
+            "value": 0.9849972481587201,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13499724815872016
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 15,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 15,
+          "first_pass_step": 84,
+          "stable_from_step": 84,
+          "stable_from_seconds": 2.7336973778437823,
+          "confirmed_step": 117,
+          "confirmed_seconds": 3.400283087976277
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.585
+      },
+      "live": {
+        "unused_hold": 0.9912094632163644,
+        "concept_move": 0.9849972481587201
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-vector_two_broad",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_two_broad",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_two_broad/result.json",
+      "artifact_sha256": "3f84b326eb2c7bcff079d5ec5d9321614786dc805cb802ed647e46718a23727c",
+      "snapshot": "results/rg5-bcap-toy-vector_two_broad.json.gz",
+      "snapshot_sha256": "a23cb48a16a558ab27ee568d02b9ea59c2fbdbbc0ef85d6072e5a24669900cbd",
+      "seconds": 52.70489411102608,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.056900762518022,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12309923748197799
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.01025390625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.13974609375
+          },
+          {
+            "metric": "hq",
+            "value": 0.99267578125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14267578125000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.15799236297607422,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6920076370239258
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.6909142136573792,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.5409142136573791
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": 4.731123221106827,
+          "confirmed_step": 300,
+          "confirmed_seconds": 12.119931650115177
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "live": {
+        "sw1_normalized": 0.056900762518022,
+        "mean_error": 0.06635551899671555,
+        "covariance_error": 0.08487849682569504,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.01025390625,
+        "min_mass_ratio": 0.9794921875,
+        "hq": 0.99267578125,
+        "component_covariance_error": 0.15799236297607422,
+        "component_covariance_errors": [
+          0.08940581977367401,
+          0.22657890617847443
+        ],
+        "component_min_eigen_ratio": 0.6909142136573792,
+        "component_mass": [
+          0.48974609375,
+          0.51025390625
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2006,
+          2090
+        ]
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-vector_unequal_width",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_unequal_width",
+      "floors": null,
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_width/result.json",
+      "artifact_sha256": "539c06c3bae0f5278bd4544371e4098f736ae9c091cfb68d513adc579e736999",
+      "snapshot": "results/rg5-bcap-toy-vector_unequal_width.json.gz",
+      "snapshot_sha256": "9ec1d41435c88897b1a4d0749902cb72ae3d2646c3a6ba4a81f32c1336f15823",
+      "seconds": 57.936947636073455,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.0415736492972054,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13842635070279458
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.044189453125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.105810546875
+          },
+          {
+            "metric": "hq",
+            "value": 0.975830078125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12583007812500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.4872245229780674,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.3627754770219326
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0901743620634079,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.059825637936592096
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.07976751724878947,
+        "confirmation_fraction": 2.0
+      },
+      "live": {
+        "sw1_normalized": 0.0415736492972054,
+        "mean_error": 0.03968469426035881,
+        "covariance_error": 0.025457678362727165,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.044189453125,
+        "min_mass_ratio": 0.8916015625,
+        "hq": 0.975830078125,
+        "component_covariance_error": 0.4872245229780674,
+        "component_covariance_errors": [
+          0.5885316133499146,
+          0.8456589579582214,
+          0.265826016664505,
+          0.2488815039396286
+        ],
+        "component_min_eigen_ratio": 0.0901743620634079,
+        "component_mass": [
+          0.23291015625,
+          0.268798828125,
+          0.222900390625,
+          0.275390625
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          954,
+          1101,
+          913,
+          1128
+        ]
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-vector_anisotropic",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_anisotropic/result.json",
+      "artifact_sha256": "9bd6cd19e93fc77977d37c6bd151257f88c4e7f484bb25cf632d908897d1aa42",
+      "snapshot": "results/rg5-bcap-toy-vector_anisotropic.json.gz",
+      "snapshot_sha256": "8afed43f8a781f6d53965e2a7ab1563412517627b647f2e52cbab9f3db1c8c82",
+      "seconds": 70.72709662094712,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.031332743268422496,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1486672567315775
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.015218093991279602,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1347819060087204
+          },
+          {
+            "metric": "hq",
+            "value": 0.99853515625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14853515625000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.18801967054605484,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6619803294539451
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.23539522290229797,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.08539522290229798
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 150,
+          "stable_from_step": 400,
+          "stable_from_seconds": 24.373089864850044,
+          "confirmed_step": 600,
+          "confirmed_seconds": 36.96642359299585
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "live": {
+        "sw1_normalized": 0.031332743268422496,
+        "mean_error": 0.028315918520092964,
+        "covariance_error": 0.06594174355268478,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.015218093991279602,
+        "min_mass_ratio": 0.954345703125,
+        "hq": 0.99853515625,
+        "component_covariance_error": 0.18801967054605484,
+        "component_covariance_errors": [
+          0.093159519135952,
+          0.29791060090065,
+          0.1729888916015625
+        ],
+        "component_min_eigen_ratio": 0.23539522290229797,
+        "component_mass": [
+          0.318115234375,
+          0.348388671875,
+          0.33349609375
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1303,
+          1427,
+          1366
+        ]
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-vector_overlap",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_overlap/result.json",
+      "artifact_sha256": "e424a3b53f3f9d699b0caabf34e5c6a56c21aec456a8815f18252ddc846d803b",
+      "snapshot": "results/rg5-bcap-toy-vector_overlap.json.gz",
+      "snapshot_sha256": "7ec172e02d5f4ff3c4539c279e0fdf8da081ce28b47de2007505db0ad9763bb7",
+      "seconds": 56.36425980110653,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09755007839502576,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08244992160497423
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.13780443370342255,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.012195566296577448
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.1564364731311798,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.2935635268688202
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 9,
+          "first_pass_step": 50,
+          "stable_from_step": 800,
+          "stable_from_seconds": 38.62800235301256,
+          "confirmed_step": 1000,
+          "confirmed_seconds": 47.72143767704256
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.8333333333333334
+      },
+      "live": {
+        "sw1_normalized": 0.09755007839502576,
+        "mean_error": 0.13780443370342255,
+        "covariance_error": 0.1564364731311798,
+        "target_scale": 0.8509407043457031,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "rg5-bcap-toy-vector_spiral",
+      "candidate": "rg5-bcap",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "floors": null,
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_spiral/result.json",
+      "artifact_sha256": "f25dc4fb7afed4a917d5b2f1eb6c356ae3f2d782cea940ef1d6cfe02808428e4",
+      "snapshot": "results/rg5-bcap-toy-vector_spiral.json.gz",
+      "snapshot_sha256": "b8428938dcfd5881e736f0ba833d9b0a6777d42b53587315e19c5872831acc8c",
+      "seconds": 63.611864041071385,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "LD_PRELOAD": null,
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+      },
+      "error": null,
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03875247987282763,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14124752012717237
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.04179245978593826,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10820754021406173
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.052788157016038895,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.3972118429839611
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 22,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 22,
+          "first_pass_step": 200,
+          "stable_from_step": 200,
+          "stable_from_seconds": 9.627609092043713,
+          "confirmed_step": 467,
+          "confirmed_seconds": 20.82859081099741
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.291875
+      },
+      "live": {
+        "sw1_normalized": 0.03875247987282763,
+        "mean_error": 0.04179245978593826,
+        "covariance_error": 0.052788157016038895,
+        "target_scale": 1.240945816040039,
+        "sample_count": 4096
+      }
+    },
+    {
+      "id": "k3-hold-mode_hold-0.01-0.05",
+      "candidate": "k3",
+      "kind": "hold",
+      "task": "mode_hold",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "raw_status": "PASS",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-hold-mode_hold-0.01-0.05/result.json",
+      "artifact_sha256": "76a7f9fa62514f7ff0d44c39d6bb88886efa65236d9825d1d775bcb4dfbf8ba8",
+      "snapshot": "results/k3-hold-mode_hold-0.01-0.05.json.gz",
+      "snapshot_sha256": "29e95fce6d42b3714bca2ef37fbcecef31865a3699b77a0b5a00a7781503a66a",
+      "seconds": 107.62004453898408,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "gate": {
+        "name": "first_convergence_then_hold_v1",
+        "confirmation_checks": 200,
+        "settling_budget": 4800,
+        "hold_budget": 1200,
+        "start_step": 1200,
+        "modes": 8,
+        "min_hq": 0.9,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "training_feedback": false,
+        "frozen_toy_verdicts_unchanged": true,
+        "status": "PASS",
+        "converged_step": 1400,
+        "settling_checks": 200,
+        "settling_failures": 0,
+        "longest_settling_streak": 200,
+        "hold_checks": 1200,
+        "first_hold_failure": null,
+        "hold_budget_complete": true
+      },
+      "hold_window": {
+        "min_hq": 0.920654296875,
+        "min_modes": 8
+      },
+      "extension": {
+        "checks": 300,
+        "passing": 63,
+        "first_failure": {
+          "step": 2644,
+          "modes": 8,
+          "hq": 0.89794921875
+        },
+        "min_hq": 0.718994140625,
+        "passed": false
+      }
+    },
+    {
+      "id": "k3-shift-mode_hold-0.01-0.05",
+      "candidate": "k3",
+      "kind": "shift",
+      "task": "mode_hold",
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "raw_status": "FAIL",
+      "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3-shift-mode_hold-0.01-0.05/result.json",
+      "artifact_sha256": "aecac75fe58ffbda0b7e7a9ace581b0d3110b784478821186185a2e493fa7d30",
+      "snapshot": "results/k3-shift-mode_hold-0.01-0.05.json.gz",
+      "snapshot_sha256": "6b9232d8b252b9ed35a305d370f623711e282957c8217b50890ab9e565d5430f",
+      "seconds": 112.65422422485426,
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "OMP_NUM_THREADS": "1"
+      },
+      "error": null,
+      "continued_hold": {
+        "checks": 120,
+        "passing_checks": 120,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.926025390625,
+        "passing_suffix": 120,
+        "stable_from_step": 1210,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "shift_recovery": {
+        "checks": 120,
+        "passing_checks": 22,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2540,
+          2550,
+          2560,
+          2570,
+          2580,
+          2590,
+          2600,
+          2610,
+          2620,
+          2630,
+          2640,
+          2650,
+          2660,
+          2670,
+          2680,
+          2690,
+          2700,
+          2710,
+          2720,
+          2730,
+          2740,
+          2750,
+          2760,
+          2770,
+          2780,
+          2790,
+          2800,
+          2810,
+          2820,
+          2830,
+          2840,
+          2850,
+          2860,
+          2870,
+          2880,
+          2890,
+          2900,
+          2910,
+          2920,
+          2930,
+          2940,
+          2950,
+          2960,
+          2970,
+          2980,
+          2990,
+          3000,
+          3010,
+          3020,
+          3030,
+          3040,
+          3050,
+          3060,
+          3070,
+          3080,
+          3090,
+          3100,
+          3110,
+          3120,
+          3130,
+          3140,
+          3150,
+          3160,
+          3170,
+          3180,
+          3190,
+          3200,
+          3210,
+          3220,
+          3230,
+          3240,
+          3250,
+          3260,
+          3270,
+          3280,
+          3290,
+          3300,
+          3310,
+          3320,
+          3330,
+          3340,
+          3350,
+          3360,
+          3370,
+          3600
+        ],
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "passing_suffix": 0,
+        "stable_from_step": null,
+        "pass_all": false,
+        "pass_suffix": false,
+        "deadline_step": 2800,
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 22,
+          "failing_steps": [
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3060,
+            3070,
+            3080,
+            3090,
+            3100,
+            3110,
+            3120,
+            3130,
+            3140,
+            3150,
+            3160,
+            3170,
+            3180,
+            3190,
+            3200,
+            3210,
+            3220,
+            3230,
+            3240,
+            3250,
+            3260,
+            3270,
+            3280,
+            3290,
+            3300,
+            3310,
+            3320,
+            3330,
+            3340,
+            3350,
+            3360,
+            3370,
+            3600
+          ],
+          "min_modes": 6,
+          "min_hq": 0.44091796875,
+          "passing_suffix": 0,
+          "stable_from_step": null,
+          "pass_all": false,
+          "pass_suffix": false
+        },
+        "deadline_assessable": true,
+        "deadline_pass": false,
+        "delay_updates": null
+      },
+      "shift_pair": {
+        "before": {
+          "step": 2400,
+          "modes": 8,
+          "hq": 0.999755859375,
+          "effective_modes": 7.190613269805908,
+          "hq_counts": [
+            683,
+            341,
+            339,
+            333,
+            344,
+            696,
+            1038,
+            321
+          ]
+        },
+        "after": {
+          "step": 2400,
+          "modes": 0,
+          "hq": 0.0,
+          "effective_modes": 0.0,
+          "hq_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "optimizer_at_shift": [
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              4.25e-05
+            ]
+          },
+          {
+            "calls": 2400,
+            "delegate_calls": 2400,
+            "updates": 2400,
+            "moment_steps_min": 2400,
+            "moment_steps_max": 2400,
+            "rates": [
+              4.25e-05,
+              0.00042500000000000003
+            ]
+          }
+        ]
+      },
+      "final": {
+        "modes": 8,
+        "hq": 0.895263671875
+      },
+      "optimizer_final": [
+        {
+          "calls": 3600,
+          "delegate_calls": 3600,
+          "updates": 3600,
+          "moment_steps_min": 3600,
+          "moment_steps_max": 3600,
+          "rates": [
+            4.25e-05
+          ]
+        },
+        {
+          "calls": 3600,
+          "delegate_calls": 3600,
+          "updates": 3600,
+          "moment_steps_min": 3600,
+          "moment_steps_max": 3600,
+          "rates": [
+            4.25e-05,
+            0.00042500000000000003
+          ]
+        }
+      ]
+    }
+  ]
+}

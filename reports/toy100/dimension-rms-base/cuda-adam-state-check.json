@@ -1,0 +1,15 @@
+{
+  "candidate": "regression",
+  "gate": "cuda_adam_state_equivalence",
+  "status": "PASS",
+  "seconds": 0.3345811788458377,
+  "metrics": {
+    "steps": 25,
+    "parameter_and_moment_bitwise_parity": true,
+    "all_candidate_state_cuda": true,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69"
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T002058Z/critic_scale/20260925T002058Z-2110671/repo/reports/toy100/critic-scale-attempt/cuda-adam-state-check.json",
+  "code_sha256": "49505ea086eeb5fb0281cec459a0622689f524a04d9f93af89da73583a641bb4"
+}

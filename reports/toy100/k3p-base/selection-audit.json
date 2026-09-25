@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "selected": "k3p",
+  "pinned_files_verified": [
+    "reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+    "reports/toy100/gap-fill-20260925/sources/k3p/mechanism.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/latent.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/response.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/native100.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/hold.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/shift.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/shift_frozen.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/checkpoint.py",
+    "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py"
+  ],
+  "qualified_sources_changed": false,
+  "declared_passes": 22,
+  "transfer_passes": 19,
+  "native_canonical_passes": 3,
+  "native_steps": 7000,
+  "native_measurements": {
+    "grid100": {
+      "passing": 4,
+      "measured": 4,
+      "seeds": [
+        1234,
+        1235,
+        1236,
+        1237
+      ]
+    },
+    "rotated100": {
+      "passing": 1,
+      "measured": 1,
+      "seeds": [
+        1234
+      ]
+    },
+    "staggered100": {
+      "passing": 1,
+      "measured": 1,
+      "seeds": [
+        1234
+      ]
+    }
+  },
+  "ring_hold": 1200,
+  "ring_extension_passes": 300,
+  "ring_extension_min_hq": 0.98779296875,
+  "recovery_status": "FAIL",
+  "recovery_deadline_passing_checks": 28,
+  "recovery_deadline_checks": 81,
+  "all_regression_gates_present_once": true,
+  "new_training_runs": 0,
+  "selection_declaration_sha256": "0d01d942cfa60088e37708b6d596f8554ab704bca3b8f3d1d33539ec5460beed",
+  "live_launcher_default": "K3P recovery with22/22 and extended hold protected",
+  "public_training_package_defaults_changed": false
+}

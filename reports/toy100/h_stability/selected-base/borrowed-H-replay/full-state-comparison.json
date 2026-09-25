@@ -1,0 +1,13 @@
+{
+  "candidate": "regression",
+  "gate": "archived_warm_full_state_replay_fixed",
+  "status": "PASS",
+  "seconds": 0.012857458088546991,
+  "metrics": {
+    "bitwise_models_optimizers_samples_rng_and_update_state": true,
+    "identical_all_metrics_and_losses": true,
+    "tensor_leaves": 81,
+    "generator_rng_objects": 1
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-10/archived-replay/full-state-comparison.json"
+}

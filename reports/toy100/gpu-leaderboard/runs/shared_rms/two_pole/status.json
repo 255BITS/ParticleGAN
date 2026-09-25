@@ -1,0 +1,86 @@
+{
+  "candidate": "shared_rms",
+  "task": "two_pole",
+  "status": "PASS",
+  "seconds": 0.8887966368347406,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 160,
+    "optimizers": {
+      "133905593652272": {
+        "calls": 80,
+        "parameters": 97,
+        "device": "cuda:0"
+      },
+      "133905613906256": {
+        "calls": 80,
+        "parameters": 12,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/shared_rms/two_pole/result.json",
+  "metrics": {
+    "mean_abs": 0.9586283564567566,
+    "grad_med": 0.010742396116256714
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "mean_abs",
+        "value": 0.9586283564567566,
+        "op": ">=",
+        "threshold": 0.3,
+        "status": "PASS",
+        "margin": 0.6586283564567565
+      },
+      {
+        "metric": "grad_med",
+        "value": 0.010742396116256714,
+        "op": "<=",
+        "threshold": 1.0,
+        "status": "PASS",
+        "margin": 0.9892576038837433
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 21,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 21,
+      "first_pass_step": 14,
+      "stable_from_step": 14,
+      "stable_from_seconds": 0.34544228995218873,
+      "confirmed_step": 27,
+      "confirmed_seconds": 0.42861077608540654
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 0.3375
+  }
+}

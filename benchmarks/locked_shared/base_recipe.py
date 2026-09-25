@@ -10,6 +10,12 @@ from .mode_hold import train_mode_hold
 
 
 def main():
+    import argparse
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    parser = argparse.ArgumentParser(description=__doc__)
+    add_device_argument(parser)
+    args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     torch.set_num_threads(1)
     path = Path("reports/locked_shared/base_recipe.json")
     path.parent.mkdir(parents=True, exist_ok=True)

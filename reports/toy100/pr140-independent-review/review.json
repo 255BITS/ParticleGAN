@@ -1,0 +1,557 @@
+{
+  "pr": 140,
+  "head": "ef4084a46d999af33c8c484ef36dfdafbe3fc517",
+  "claim": "global #1 not established",
+  "declared_training_sources_match": true,
+  "reported_stay": {
+    "checks": 120,
+    "passing": 114,
+    "minimum_modes": 5,
+    "minimum_hq": 0.362548828125,
+    "failed_steps": [
+      1820,
+      1850,
+      2180,
+      2190,
+      2200,
+      2260
+    ],
+    "final_modes": 8,
+    "final_hq": 1.0
+  },
+  "independent_replays": {
+    "torch213-full-avx2-cold": {
+      "mode_hold.json": {
+        "verdict": {
+          "status": "FAIL",
+          "attempted": true,
+          "passed": false,
+          "metrics": [
+            {
+              "metric": "modes",
+              "value": 7,
+              "op": ">=",
+              "threshold": 8,
+              "status": "FAIL",
+              "margin": -1
+            },
+            {
+              "metric": "hq",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.9,
+              "status": "PASS",
+              "margin": 0.09999999999999998
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0625,
+          "confirmation_fraction": 2.0
+        },
+        "live": {
+          "modes": 7,
+          "hq": 1.0
+        }
+      },
+      "trajectory.json": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "identity_mse",
+              "value": 0.0009426623582839966,
+              "op": "<=",
+              "threshold": 0.02,
+              "status": "PASS",
+              "margin": 0.019057337641716004
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 18,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 18,
+            "first_pass_step": 117,
+            "stable_from_step": 117,
+            "stable_from_seconds": 2.097841185051948,
+            "confirmed_step": 184,
+            "confirmed_seconds": 2.6790513799060136
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.46
+        },
+        "live": {
+          "identity_mse": 0.0009426623582839966
+        }
+      }
+    },
+    "torch213-full-avx2-stay": {
+      "stay.json": {
+        "event": "STAY",
+        "steps": 2400,
+        "seconds": 70.3,
+        "terminal_1000_1200": [
+          [
+            1000,
+            7,
+            0.7571
+          ],
+          [
+            1050,
+            7,
+            0.9187
+          ],
+          [
+            1100,
+            7,
+            0.9595
+          ],
+          [
+            1150,
+            7,
+            0.9998
+          ],
+          [
+            1200,
+            7,
+            1.0
+          ]
+        ],
+        "checks": 120,
+        "passing": 0,
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "failing_steps": [
+          1210,
+          1220,
+          1230,
+          1240,
+          1250,
+          1260,
+          1270,
+          1280,
+          1290,
+          1300,
+          1310,
+          1320,
+          1330,
+          1340,
+          1350,
+          1360,
+          1370,
+          1380,
+          1390,
+          1400,
+          1410,
+          1420,
+          1430,
+          1440,
+          1450,
+          1460,
+          1470,
+          1480,
+          1490,
+          1500,
+          1510,
+          1520,
+          1530,
+          1540,
+          1550,
+          1560,
+          1570,
+          1580,
+          1590,
+          1600
+        ],
+        "final": [
+          2400,
+          5,
+          0.3826
+        ],
+        "dynamics": {
+          "method": "stall_reach_delayed_arm_g_adam_lr_half",
+          "scratch_optimizer_policy": "pr84_slope_utilisation_reach",
+          "shared_gate_eligible": false,
+          "curvature_bound": 0.25,
+          "d_curvature_bound": 3.0,
+          "advantage_gate": null,
+          "outer_steps": 2400,
+          "gate_open": 0,
+          "bound_evaluated": 2400,
+          "bound_active": 2400,
+          "d_bound_active": 76,
+          "gradient_evaluations_per_outer_step": 3.0,
+          "moment_updates_per_outer_step": 1,
+          "rng_replay_verified": 4800,
+          "update_order": "alternating: D Adam step, then G+prior Adam step against the new D",
+          "smooth_critic": true,
+          "smooth_width_cap": 0.15,
+          "reach": 0.5,
+          "ramp": "stall",
+          "game_bound": false,
+          "game_steps": 1,
+          "b_cap_slope": 1.0,
+          "widened_updates": 2287,
+          "max_width": 0.5,
+          "parent_method": "pr84_slope_utilisation_reach",
+          "mechanism": "delayed_arm_g_adam_lr_half",
+          "arm_update_index_min": 1200,
+          "arm_modes": 8,
+          "arm_hq": 0.9,
+          "g_lr_scale": 0.5,
+          "armed": false,
+          "arm_update_index": null,
+          "arm_g_lr": null,
+          "g_lr_fires": 0,
+          "cpu_capability": "AVX2"
+        }
+      }
+    },
+    "torch214-full-avx2-cold": {
+      "mode_hold.json": {
+        "verdict": {
+          "status": "FAIL",
+          "attempted": true,
+          "passed": false,
+          "metrics": [
+            {
+              "metric": "modes",
+              "value": 7,
+              "op": ">=",
+              "threshold": 8,
+              "status": "FAIL",
+              "margin": -1
+            },
+            {
+              "metric": "hq",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.9,
+              "status": "PASS",
+              "margin": 0.09999999999999998
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0625,
+          "confirmation_fraction": 2.0
+        },
+        "live": {
+          "modes": 7,
+          "hq": 1.0
+        }
+      },
+      "trajectory.json": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "identity_mse",
+              "value": 0.0009426623582839966,
+              "op": "<=",
+              "threshold": 0.02,
+              "status": "PASS",
+              "margin": 0.019057337641716004
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 18,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 18,
+            "first_pass_step": 117,
+            "stable_from_step": 117,
+            "stable_from_seconds": 1.9195163419935852,
+            "confirmed_step": 184,
+            "confirmed_seconds": 2.453930627088994
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.46
+        },
+        "live": {
+          "identity_mse": 0.0009426623582839966
+        }
+      }
+    },
+    "torch214-full-avx2-stay": {
+      "stay.json": {
+        "event": "STAY",
+        "steps": 2400,
+        "seconds": 63.8,
+        "terminal_1000_1200": [
+          [
+            1000,
+            7,
+            0.7571
+          ],
+          [
+            1050,
+            7,
+            0.9187
+          ],
+          [
+            1100,
+            7,
+            0.9595
+          ],
+          [
+            1150,
+            7,
+            0.9998
+          ],
+          [
+            1200,
+            7,
+            1.0
+          ]
+        ],
+        "checks": 120,
+        "passing": 0,
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "failing_steps": [
+          1210,
+          1220,
+          1230,
+          1240,
+          1250,
+          1260,
+          1270,
+          1280,
+          1290,
+          1300,
+          1310,
+          1320,
+          1330,
+          1340,
+          1350,
+          1360,
+          1370,
+          1380,
+          1390,
+          1400,
+          1410,
+          1420,
+          1430,
+          1440,
+          1450,
+          1460,
+          1470,
+          1480,
+          1490,
+          1500,
+          1510,
+          1520,
+          1530,
+          1540,
+          1550,
+          1560,
+          1570,
+          1580,
+          1590,
+          1600
+        ],
+        "final": [
+          2400,
+          5,
+          0.3826
+        ],
+        "dynamics": {
+          "method": "stall_reach_delayed_arm_g_adam_lr_half",
+          "scratch_optimizer_policy": "pr84_slope_utilisation_reach",
+          "shared_gate_eligible": false,
+          "curvature_bound": 0.25,
+          "d_curvature_bound": 3.0,
+          "advantage_gate": null,
+          "outer_steps": 2400,
+          "gate_open": 0,
+          "bound_evaluated": 2400,
+          "bound_active": 2400,
+          "d_bound_active": 76,
+          "gradient_evaluations_per_outer_step": 3.0,
+          "moment_updates_per_outer_step": 1,
+          "rng_replay_verified": 4800,
+          "update_order": "alternating: D Adam step, then G+prior Adam step against the new D",
+          "smooth_critic": true,
+          "smooth_width_cap": 0.15,
+          "reach": 0.5,
+          "ramp": "stall",
+          "game_bound": false,
+          "game_steps": 1,
+          "b_cap_slope": 1.0,
+          "widened_updates": 2287,
+          "max_width": 0.5,
+          "parent_method": "pr84_slope_utilisation_reach",
+          "mechanism": "delayed_arm_g_adam_lr_half",
+          "arm_update_index_min": 1200,
+          "arm_modes": 8,
+          "arm_hq": 0.9,
+          "g_lr_scale": 0.5,
+          "armed": false,
+          "arm_update_index": null,
+          "arm_g_lr": null,
+          "g_lr_fires": 0,
+          "cpu_capability": "AVX2"
+        }
+      }
+    },
+    "torch214-aten-avx2-stay": {
+      "stay.json": {
+        "event": "STAY",
+        "steps": 2400,
+        "seconds": 65.8,
+        "terminal_1000_1200": [
+          [
+            1000,
+            7,
+            0.7571
+          ],
+          [
+            1050,
+            7,
+            0.9187
+          ],
+          [
+            1100,
+            7,
+            0.9595
+          ],
+          [
+            1150,
+            7,
+            0.9998
+          ],
+          [
+            1200,
+            7,
+            1.0
+          ]
+        ],
+        "checks": 120,
+        "passing": 0,
+        "min_modes": 0,
+        "min_hq": 0.0,
+        "failing_steps": [
+          1210,
+          1220,
+          1230,
+          1240,
+          1250,
+          1260,
+          1270,
+          1280,
+          1290,
+          1300,
+          1310,
+          1320,
+          1330,
+          1340,
+          1350,
+          1360,
+          1370,
+          1380,
+          1390,
+          1400,
+          1410,
+          1420,
+          1430,
+          1440,
+          1450,
+          1460,
+          1470,
+          1480,
+          1490,
+          1500,
+          1510,
+          1520,
+          1530,
+          1540,
+          1550,
+          1560,
+          1570,
+          1580,
+          1590,
+          1600
+        ],
+        "final": [
+          2400,
+          5,
+          0.3826
+        ],
+        "dynamics": {
+          "method": "stall_reach_delayed_arm_g_adam_lr_half",
+          "scratch_optimizer_policy": "pr84_slope_utilisation_reach",
+          "shared_gate_eligible": false,
+          "curvature_bound": 0.25,
+          "d_curvature_bound": 3.0,
+          "advantage_gate": null,
+          "outer_steps": 2400,
+          "gate_open": 0,
+          "bound_evaluated": 2400,
+          "bound_active": 2400,
+          "d_bound_active": 76,
+          "gradient_evaluations_per_outer_step": 3.0,
+          "moment_updates_per_outer_step": 1,
+          "rng_replay_verified": 4800,
+          "update_order": "alternating: D Adam step, then G+prior Adam step against the new D",
+          "smooth_critic": true,
+          "smooth_width_cap": 0.15,
+          "reach": 0.5,
+          "ramp": "stall",
+          "game_bound": false,
+          "game_steps": 1,
+          "b_cap_slope": 1.0,
+          "widened_updates": 2287,
+          "max_width": 0.5,
+          "parent_method": "pr84_slope_utilisation_reach",
+          "mechanism": "delayed_arm_g_adam_lr_half",
+          "arm_update_index_min": 1200,
+          "arm_modes": 8,
+          "arm_hq": 0.9,
+          "g_lr_scale": 0.5,
+          "armed": false,
+          "arm_update_index": null,
+          "arm_g_lr": null,
+          "g_lr_fires": 0,
+          "cpu_capability": "AVX2"
+        }
+      }
+    }
+  },
+  "unit_tests": {
+    "torch213": 13,
+    "torch214": 13,
+    "distinct_cases": 13
+  },
+  "remaining_environment_difference": "Resolved in follow-up: diagnostic MKL CPU-vendor dispatch override reproduces all 2400 records and 240 quality checks for both PR140 and PR143; ordinary AMD dispatch still fails.",
+  "policy_difference": "quality-triggered G/prior LR halving; evaluation metrics enter training control",
+  "publication_head_unchanged": true,
+  "followup_reproduction_audit": "../pr140-pr143-repro-audit/comparison.json"
+}

@@ -376,7 +376,10 @@ def main():
     parser.add_argument("--stock-reference", type=Path, default=DEFAULT_OUTPUT / "stock_ring.json",
                         help="optional recorded stock-recipe ring comparison; displayed separately from candidate ranks")
     parser.add_argument("--resume", action="store_true")
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     configs = [Candidate(**c) for c in json.loads(args.configs.read_text())] if args.configs else list(DEFAULT_CANDIDATES)
     if not configs or len({c.name for c in configs}) != len(configs):
         parser.error("provide at least one candidate, with unique names")

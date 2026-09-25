@@ -1,0 +1,86 @@
+{
+  "candidate": "simpler22_reference",
+  "task": "mode_hold",
+  "status": "FAIL",
+  "seconds": 14.055065719876438,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 2400,
+    "optimizers": {
+      "129280258109712": {
+        "calls": 1200,
+        "parameters": 20161,
+        "device": "cuda:0"
+      },
+      "129280277746496": {
+        "calls": 1200,
+        "parameters": 19346,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-known-winner-20260924/runs/simpler22_reference/mode_hold/result.json",
+  "metrics": {
+    "modes": 7,
+    "hq": 0.997802734375
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "modes",
+        "value": 7,
+        "op": ">=",
+        "threshold": 8,
+        "status": "FAIL",
+        "margin": -1
+      },
+      {
+        "metric": "hq",
+        "value": 0.997802734375,
+        "op": ">=",
+        "threshold": 0.9,
+        "status": "PASS",
+        "margin": 0.09780273437499998
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 0.0625,
+    "confirmation_fraction": 2.0
+  }
+}

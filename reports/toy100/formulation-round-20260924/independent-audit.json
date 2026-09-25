@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "training_gates": 36,
+  "checks": [
+    {
+      "lane": "critic_formulation",
+      "gates": 12,
+      "prepared_files": 1614,
+      "status": "PASS",
+      "checks": [
+        "frozen specification and complete sustained verdict",
+        "candidate source hashes",
+        "original initialization",
+        "CUDA optimizer device and updates",
+        "native RNG except declared extragradient replay",
+        "original schedules",
+        "declared configuration"
+      ]
+    },
+    {
+      "lane": "particle_geometry",
+      "gates": 12,
+      "prepared_files": 1614,
+      "status": "PASS",
+      "checks": [
+        "frozen specification and complete sustained verdict",
+        "candidate source hashes",
+        "original initialization",
+        "CUDA optimizer device and updates",
+        "native RNG except declared extragradient replay",
+        "original schedules",
+        "declared configuration"
+      ]
+    },
+    {
+      "lane": "game_dynamics",
+      "gates": 12,
+      "prepared_files": 1614,
+      "status": "PASS",
+      "checks": [
+        "frozen specification and complete sustained verdict",
+        "candidate source hashes",
+        "original initialization",
+        "CUDA optimizer device and updates",
+        "native RNG except declared extragradient replay",
+        "original schedules",
+        "declared configuration"
+      ]
+    }
+  ]
+}

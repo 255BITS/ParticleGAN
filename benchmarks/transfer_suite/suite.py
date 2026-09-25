@@ -18,6 +18,8 @@ import traceback
 
 import torch
 
+from benchmarks.toy100.device import host_device
+
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import study, evaluate
 from .protocol import (SELECTION, digest, reference_evidence, required_tasks, requirements, selection_key,
@@ -74,7 +76,7 @@ def snapshot(output):
             archive.addfile(info, io.BytesIO(data))
     return dict(source_sha256=hashes, python=platform.python_version(), torch=str(torch.__version__),
                 torch_git_revision=torch.version.git_version, torch_build=torch.__config__.show(),
-                cpu_capability=torch.backends.cpu.get_cpu_capability(), device="cpu", threads=1)
+                cpu_capability=torch.backends.cpu.get_cpu_capability(), device=str(host_device()), threads=1)
 
 
 def verify_source(protocol):
@@ -305,7 +307,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--generations", type=int, default=2)
     parser.add_argument("--population", type=int, default=6)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(args.output, generations=args.generations, population=args.population)
 
 

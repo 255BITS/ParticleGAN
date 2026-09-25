@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/formulation-followup-20260925T000425Z/run.py", line 59, in worker
+    assert r['spec']==baseline['spec']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

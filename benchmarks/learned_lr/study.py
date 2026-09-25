@@ -194,7 +194,10 @@ def main():
     parser.add_argument("--generations", type=int, default=4)
     parser.add_argument("--population", type=int, default=8)
     parser.add_argument("--train-only", action="store_true")
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     learned = train(args.output, args.generations, args.population)
     if not args.train_only:
         evaluate(args.output, learned)
