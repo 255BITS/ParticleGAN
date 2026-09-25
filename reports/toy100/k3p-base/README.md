@@ -127,3 +127,26 @@ of those module-global states; restart equivalence is unqualified.
 
 The next research gate is K3P's own target-shift recovery while protecting its
 hold/extension and all 22 toy passes. No new training is launched by selection.
+
+## Continuous-learning search
+
+The [focused search brief](continuous-search.md) targets a formulation that does
+not need the training horizon to define a one-way late phase. K3P's current
+positive floors do not freeze optimization, but its critic handover still
+depends on LR decay. Merely making LR constant would leave that handover at
+the early penalty and keep the EMA anchor inactive.
+
+The [launcher](launch-gan-k3p-continuous.py) reuses the existing search script
+with three lanes: continuous critic constraint, reversible optimizer-based
+plasticity, and adaptive critic-anchor memory. Default caps are three proposals,
+45 minutes and one benchmark worker per lane. Preview without starting agents
+or training:
+
+```sh
+python /ml2/hypergan/launch-gan-k3p-continuous.py --dry-run
+```
+
+An actual invocation without `--dry-run` starts the three bounded attempts.
+The first gates are the candidate's own extended hold and matched target-shift
+recovery, followed by all 22 toys and separately declared delayed/repeated-change
+stress checks for survivors. The published K3P source and scores remain fixed.
