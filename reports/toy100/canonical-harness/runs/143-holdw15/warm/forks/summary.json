@@ -1,0 +1,85 @@
+{
+  "cold_final_state_sha256": "4d5ee4a9118e3504b61284ad30dfab907567dfc8f8e70eff65069c636eb949a2",
+  "continuation_updates": 200,
+  "identity_cold_parity": true,
+  "scope": "passing_state_local_stability_only",
+  "steps": 1200,
+  "variants": {
+    "holdw15": {
+      "final": {
+        "hq": 1.0,
+        "modes": 8
+      },
+      "final_state_sha256": "979becf0919cc6e5b615b09bb0ebb9c45c2b5a4e4bfbc281f74830ef6f06d225",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [
+          1054,
+          1055,
+          1104,
+          1105,
+          1106,
+          1107,
+          1108,
+          1109,
+          1110,
+          1111,
+          1112
+        ],
+        "min_hq": 0.83984375,
+        "min_modes": 8,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 189,
+        "passing_suffix": 88,
+        "stable_from_step": 1113
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.985595703125,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "FAIL"
+    },
+    "identity": {
+      "final": {
+        "hq": 1.0,
+        "modes": 8
+      },
+      "final_state_sha256": "4d5ee4a9118e3504b61284ad30dfab907567dfc8f8e70eff65069c636eb949a2",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.998291015625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.999755859375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "PASS"
+    }
+  },
+  "warm_state_sha256": "f39570bf46525a11207e75abfc4d09ac6cf963cad6d6a71b366fc1a8941db63d",
+  "warm_step": 1000
+}
