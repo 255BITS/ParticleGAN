@@ -105,17 +105,18 @@ def train(cfg):
     values = {k: torch.as_tensor(v, device=device) for k,v in records.items() if k not in ('episode_ids', 'steps')}
     recipe = training_recipe(cfg)
     opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
-        encoder=bundle['E'], fused=device.type == 'cuda')
+        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
     opt_r = torch.optim.Adam(bundle['R'].parameters(), lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas, fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d, opt_r)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
-    gan, reg, spread = recipe.make_loss(), recipe.make_critic_regularizer(bundle['D'], opt_d), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     capper = recipe.make_gradient_penalty(arm='b_cap', lazy_k=4, coeff=1., kappa=1., norm='l2', method='autograd')
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)
            for k,offset in dict(data=11, d_data=31, latent=51, contact=61, d_latent=71, d_contact=81, error_noise=151, d_error_noise=161).items()}
     reg_rng = {role: torch.Generator(device=device).manual_seed(cfg['seed'] + 100 + i)
                for i,role in enumerate(bundle['D'].roles())}
+    penalties = {role: recipe.make_critic_penalty(opt_d, generator=generator) for role, generator in reg_rng.items()}
     digests = {k: hashlib.sha256() for k in ('data', 'd_data')}
     def batch(name):
         ids = torch.randint(len(triples), (cfg['batch_size'],), device=device, generator=rng[name])
@@ -158,7 +159,7 @@ def train(cfg):
             with torch.no_grad():
                 df, d_decoded = fake_paths(bundle, db, rng['d_latent'], rng['d_contact'])
             dl, dt = adversarial_loss(bundle['D'], real_record(bundle, db), df, db['terrain'], gan,
-                reg=reg, step=step, rngs=reg_rng)
+                reg=penalties)
             if not torch.isfinite(dl):
                 raise FloatingPointError(f'Nonfinite D loss at {step}')
             rl, rt = error_loss(bundle['R'], d_decoded, real_record(bundle, db), step, rng['d_error_noise'], capper=capper)
@@ -171,7 +172,7 @@ def train(cfg):
             bundle['R'].requires_grad_(False)
             opt_d.zero_grad(set_to_none=True)
             dl.backward()
-            reg.step()  # spike guard, Adam step, K3P anchor/LR record
+            opt_d.step()
             opt_d.zero_grad(set_to_none=True)
             bundle['D'].requires_grad_(False)
             gb = batch('data')

@@ -70,6 +70,48 @@ def finite_difference_norm(critic, x, eps):
     return (critic(center + eps * direction) - critic(center - eps * direction)) / (2 * eps)
 
 
+class CriticStepRecord:
+    """Per-critic step state that K3P's penalty reads: LR record, anchor start, counters.
+
+    One record belongs to one critic optimizer. ``record_step`` (after every
+    critic optimizer step) advances the anchor EMA once started, then records
+    the applied LR. The penalty starts the anchor and counts its calls.
+    """
+
+    KEYS = ("lr_max", "lr_last", "anchor_started", "calls", "observed_steps")
+
+    def __init__(self, anchor: Optional[Any] = None) -> None:
+        self.anchor = anchor
+        self.lr_max = 0.0
+        self.lr_last: Optional[float] = None
+        self.anchor_started = False
+        self.calls = 0
+        self.observed_steps = 0
+
+    def record_step(self, optimizer_or_lr) -> None:
+        if self.anchor_started and self.anchor is not None:
+            self.anchor.update_()
+        if isinstance(optimizer_or_lr, (int, float, torch.Tensor)):
+            lr = float(optimizer_or_lr)
+        else:
+            lr = max(float(g["lr"]) for g in optimizer_or_lr.param_groups)
+        self.lr_last = lr
+        self.lr_max = max(self.lr_max, lr)
+        self.observed_steps += 1
+
+    def state_dict(self) -> Dict[str, Any]:
+        return {"lr_max": self.lr_max, "lr_last": self.lr_last, "anchor_started": self.anchor_started,
+                "calls": self.calls, "observed_steps": self.observed_steps}
+
+    def load_state_dict(self, state: Dict[str, Any]) -> None:
+        if not isinstance(state, dict) or set(state) != set(self.KEYS):
+            keys = sorted(state) if isinstance(state, dict) else state
+            raise ValueError(f"k3p state keys {keys} != expected {sorted(self.KEYS)}")
+        values = (float(state["lr_max"]), None if state["lr_last"] is None else float(state["lr_last"]),
+                  bool(state["anchor_started"]), int(state["calls"]), int(state["observed_steps"]))
+        self.lr_max, self.lr_last, self.anchor_started, self.calls, self.observed_steps = values
+
+
 class GradRegularizer:
     """
     Discriminator gradient penalty with a selectable centering scheme.
@@ -78,7 +120,7 @@ class GradRegularizer:
         arm (str): one of ARMS.
             - 'k3p' (default): a_r1r2-style R1 + fake cap blended by the critic
               LR ratio into b_cap + EMA-critic gradient proximity; stateful, see
-              after_critic_step() and recipe.make_critic_regularizer().
+              after_critic_step() and recipe.make_critic_penalty().
             - 'a_r1r2':    phi(n) = n^2          (baseline R1+R2, zero-centered)
             - 'b_cap':     phi(n) = relu(n - kappa)^2   (one-sided cap, free below kappa)
             - 'c_eikonal': phi(n) = (n - 1)^2    (two-sided, slope pinned at 1)
@@ -146,10 +188,12 @@ class GradRegularizer:
         anchor: k3p only; a particlegan.k3p.CriticAnchor (or anything with
             start_(), update_() and __call__). Started at the first blended
             call and updated by `after_critic_step`.
+        record: k3p only; a CriticStepRecord shared with a critic optimizer
+            that records its own steps (the recipe's critic optimizer does).
+            Its anchor is used. Default: a private record.
     """
 
     ARMS = ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "e_interp", "f_none", "g_interp_cap", "k3p")
-    _K3P_STATE_KEYS = ("lr_max", "lr_last", "anchor_started", "calls", "observed_steps")
     NORMS = ("l2", "l1", "linf")
     ANNEALS = ("none", "linear", "delayed")
 
@@ -169,6 +213,7 @@ class GradRegularizer:
         fd_eps: float = 0.05,
         lr_floor: float = 0.01,
         anchor: Optional[Any] = None,
+        record: Optional["CriticStepRecord"] = None,
     ) -> None:
         if arm not in self.ARMS:
             raise ValueError(f"Unknown grad regularizer arm: {arm} (expected one of {self.ARMS})")
@@ -220,15 +265,16 @@ class GradRegularizer:
                 raise ValueError("arm 'k3p' supports only norm='l2' and method='autograd'")
             if self.target_anneal != "none":
                 raise ValueError("arm 'k3p' has no penalty center to anneal; use target_anneal='none'")
-        elif anchor is not None:
-            raise ValueError(f"anchor is only used by arm 'k3p', got arm={arm!r}")
-        self.anchor = anchor
-        # K3P scalar state (plain Python values; see state_dict()).
-        self._lr_max = 0.0
-        self._lr_last: Optional[float] = None
-        self._anchor_started = False
-        self._calls = 0
-        self._observed_steps = 0
+        elif anchor is not None or record is not None:
+            raise ValueError(f"anchor/record are only used by arm 'k3p', got arm={arm!r}")
+        if record is None:
+            record = CriticStepRecord(anchor)
+        elif anchor is not None and anchor is not record.anchor:
+            raise ValueError("pass either anchor= or a record= holding that anchor, not both")
+        # K3P step state (LR record, anchor start, counters); shared with the
+        # critic optimizer when the recipe builds the pair.
+        self.record = record
+        self.anchor = record.anchor
         # Identity of the critic served through the constructor anchor
         # (id only; not checkpointed). Guards against one k3p instance
         # silently anchoring a second critic to the first critic's EMA.
@@ -240,9 +286,9 @@ class GradRegularizer:
 
     def blend_weight(self) -> float:
         """K3P handover weight s in [0, 1]; 1.0 before any step and for other arms."""
-        if self.arm != "k3p" or self._lr_last is None or self._lr_max <= 0.0:
+        if self.arm != "k3p" or self.record.lr_last is None or self.record.lr_max <= 0.0:
             return 1.0
-        r = self._lr_last / self._lr_max
+        r = self.record.lr_last / self.record.lr_max
         f = self.lr_floor
         return max(0.0, min(1.0, 2.0 * r) - 2.0 * f) / (1.0 - 2.0 * f)
 
@@ -256,36 +302,19 @@ class GradRegularizer:
         """
         if self.arm != "k3p":
             return
-        if self._anchor_started and self.anchor is not None:
-            self.anchor.update_()
-        if isinstance(optimizer_or_lr, (int, float, torch.Tensor)):
-            lr = float(optimizer_or_lr)
-        else:
-            lr = max(float(g["lr"]) for g in optimizer_or_lr.param_groups)
-        self._lr_last = lr
-        self._lr_max = max(self._lr_max, lr)
-        self._observed_steps += 1
+        self.record.record_step(optimizer_or_lr)
 
     def state_dict(self) -> Dict[str, Any]:
         """Scalar K3P state (empty for stateless arms). The anchor's EMA
         critic is the caller's module: save ``ema_critic.state_dict()`` too."""
-        if self.arm != "k3p":
-            return {}
-        return {"lr_max": self._lr_max, "lr_last": self._lr_last,
-                "anchor_started": self._anchor_started, "calls": self._calls,
-                "observed_steps": self._observed_steps}
+        return self.record.state_dict() if self.arm == "k3p" else {}
 
     def load_state_dict(self, state: Dict[str, Any]) -> None:
-        expected = set(self._K3P_STATE_KEYS) if self.arm == "k3p" else set()
-        if set(state) != expected:
-            raise ValueError(f"{self.arm} state keys {sorted(state)} != expected {sorted(expected)}")
         if self.arm != "k3p":
+            if state:
+                raise ValueError(f"{self.arm} state keys {sorted(state)} != expected []")
             return
-        self._lr_max = float(state["lr_max"])
-        self._lr_last = None if state["lr_last"] is None else float(state["lr_last"])
-        self._anchor_started = bool(state["anchor_started"])
-        self._calls = int(state["calls"])
-        self._observed_steps = int(state["observed_steps"])
+        self.record.load_state_dict(state)
 
     def penalty(
         self,
@@ -379,7 +408,7 @@ class GradRegularizer:
         dimension = x_real[0].numel()
         if dimension != x_fake[0].numel():
             raise ValueError("k3p needs reals and fakes of the same per-sample size")
-        if step > self.lazy_k and self._observed_steps == 0:
+        if step > self.lazy_k and self.record.observed_steps == 0:
             raise RuntimeError(
                 "k3p: after_critic_step(critic_optimizer) was never called; "
                 "without it s stays 1 (pure a_r1r2) forever"
@@ -399,7 +428,7 @@ class GradRegularizer:
                     "use one GradRegularizer per critic or pass ema_critic= explicitly"
                 )
         s = self.blend_weight()
-        self._calls += 1
+        self.record.calls += 1
         if s >= 1.0:
             real_squared = self._grad_norm(D, x_real, squared=True) / dimension
             fake_norm = self._grad_norm(D, x_fake, squared=False) / dimension ** 0.5
@@ -415,10 +444,10 @@ class GradRegularizer:
             sq_r = g.pow(2).flatten(1).sum(dim=1)
             n_r = torch.sqrt(sq_r + 1e-12)
             n_f = self._grad_norm(D, x_fake, squared=False)
-            if not self._anchor_started:
+            if not self.record.anchor_started:
                 if self.anchor is not None:
                     self.anchor.start_()
-                self._anchor_started = True
+                self.record.anchor_started = True
                 prox = g.new_zeros(())
             else:
                 xb = x_real.detach().clone().requires_grad_(True)

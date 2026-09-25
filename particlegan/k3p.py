@@ -1,21 +1,26 @@
 """K3P: the current best critic/generator regularization formulation.
 
-Users do not instantiate these classes: ``recipe.make_critic_regularizer(D,
-opt_d)`` and ``recipe.make_generator_regularizer(opt_g, latent_table=prior.z)``
-return the recipe's current formulation behind a formulation-agnostic
-interface (``penalty``/``before_step``/``after_step``/``step``/``state_dict``).
-The classes stay importable from this module for low-level tests and research.
+Users do not instantiate these classes. The recipe builds them behind
+formulation-agnostic factories and a plain PyTorch loop::
 
-The K3P penalty itself is ``GradRegularizer(arm="k3p")``. Nothing here
-registers optimizer hooks or keeps module-level state.
+    opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+    penalty = recipe.make_critic_penalty(opt_d)
+    d_loss = adv_d + penalty(D, real, fake)
+    opt_d.zero_grad(); d_loss.backward(); opt_d.step()
+    opt_g.zero_grad(); g_loss.backward(); opt_g.step()
+
+The optimizers' ``step()`` does all step-time work and their ``state_dict()``
+holds all state. The classes stay importable here for tests and research.
+Nothing registers optimizer hooks or keeps module-level state.
 
 * ``CriticAnchor``      -- parameter EMA Dbar of one critic (K3P's prox anchor);
   ``RobustCriticAnchor`` also averages buffers with side-effect-free forwards.
 * ``CriticSpikeGuard``  -- per-tensor gradient-spike clip before a critic Adam step.
 * ``LatentRowDamping``  -- A2: bounded coherence damping of sparse latent-table rows.
 * ``DirectParticleResponse`` -- LR gain for direct sample-particle groups.
-* ``K3PCritic`` / ``K3PGeneratorRegularizer`` -- the per-optimizer bundles the
-  recipe factories return.
+* ``K3PCriticAdam`` / ``K3PGeneratorAdam`` -- the Adam subclasses the recipe's
+  optimizer factories return; ``CriticPenalty`` -- the penalty paired with a
+  ``K3PCriticAdam`` (``recipe.make_critic_penalty``).
 """
 from contextlib import contextmanager
 from copy import copy, deepcopy
@@ -24,9 +29,15 @@ from typing import Any, Dict, Optional, Sequence, Tuple
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.optim import Adam
+
+from .grad_regularizers import CriticStepRecord
 
 __all__ = ["CriticAnchor", "RobustCriticAnchor", "CriticSpikeGuard", "LatentRowDamping",
-           "DirectParticleResponse", "K3PCritic", "K3PGeneratorRegularizer"]
+           "DirectParticleResponse", "K3PCriticAdam", "K3PGeneratorAdam", "CriticPenalty"]
+
+# Extra optimizer.state_dict() key holding the regularization state.
+_STATE_KEY = "regularizer"
 
 
 def _group_of(optimizer, param) -> Dict[str, Any]:
@@ -145,7 +156,8 @@ class LatentRowDamping:
 
     ``history`` is caller-allocated (same shape/dtype/device as ``table``) and
     checkpointed by the caller alongside ``state_dict()``. Wrap the generator
-    optimizer step: ``with damping.around(opt_g): opt_g.step()``.
+    optimizer step: ``with damping.around(opt_g): opt_g.step()``
+    (``K3PGeneratorAdam.step`` does this).
     """
 
     BETA1 = 0.5
@@ -234,7 +246,8 @@ class DirectParticleResponse:
     ``center`` subtracts the per-column mean over particles and ``g_prev`` is
     the previous step's centered gradient kept in the caller-allocated flat
     ``history`` (numel = total numel of ``params``). ``params`` must be exactly
-    one optimizer param group. Wrap the step: ``with resp.around(opt): opt.step()``.
+    one optimizer param group. Wrap the step: ``with resp.around(opt): opt.step()``
+    (``K3PGeneratorAdam.step`` does this).
     """
 
     def __init__(self, params: Sequence[nn.Parameter], history: torch.Tensor,
@@ -373,203 +386,273 @@ class RobustCriticAnchor(CriticAnchor):
         return self.forward(lambda module, inputs: module(inputs), x)
 
 
-class K3PCritic:
-    """K3P implementation of the critic regularizer for one critic optimizer.
+def _adam_step(optimizer):
+    """Adam's own update for ``optimizer`` without re-running optimizer step hooks.
 
-    Build it with ``recipe.make_critic_regularizer(critic, optimizer)``; the
-    recipe picks this class while K3P is the current best formulation.
-    Allocates the EMA critic (``deepcopy(critic)``, frozen), a
-    ``RobustCriticAnchor`` over it, the recipe's gradient penalty and critic
-    spike guard. One module used in several roles shares one object and passes
-    an ``ema_critic`` per role::
+    ``torch.optim`` wraps each class's ``step`` once to run step hooks; our
+    subclasses' ``step`` is wrapped too, so call the unwrapped Adam update.
+    """
+    step = Adam.step
+    if getattr(step, "hooked", False):
+        step = step.__wrapped__
+    return step(optimizer)
 
-        reg = recipe.make_critic_regularizer(D, opt_d)
-        loss = adv + reg.penalty(D, real, fake, step)[0]
-        # shared module: reg.penalty(lambda x: D.role(x), xr, xf, step,
-        #                            ema_critic=reg.ema_critic(lambda m, x: m.role(x)))
-        opt_d.zero_grad(); loss.backward(); reg.step()
 
-    Formulation-agnostic interface: ``penalty``, ``ema_critic``,
-    ``before_step``/``after_step`` (or ``step()`` = before, ``optimizer.step()``,
-    after), ``diagnostics``, ``state_dict``/``load_state_dict``. ``optimizer``
-    may be None for penalty-only use (the step methods then raise).
+def _closure_loss(closure):
+    if closure is None:
+        return None
+    with torch.enable_grad():
+        return closure()
+
+
+class K3PCriticAdam(Adam):
+    """Adam for one critic whose ``step()`` also does K3P's critic-side work.
+
+    Built by ``recipe.make_critic_optimizer(critic, ema_critic=...)`` (and by
+    ``recipe.make_optimizers``). ``step()`` = spike guard on the gradients,
+    the Adam update, then the anchor EMA update and the LR record that the
+    paired penalty (``recipe.make_critic_penalty(optimizer)``) reads.
+    ``ema_critic`` is the caller-allocated EMA module (e.g.
+    ``copy.deepcopy(critic)``); None keeps no anchor. ``state_dict()`` holds
+    everything (Adam state, EMA critic, LR record, counters) under the extra
+    ``"regularizer"`` key, so the usual optimizer checkpoint resumes exactly.
     """
 
-    def __init__(self, recipe, critic, optimizer, **penalty_overrides):
-        from .recipes import Recipe
-        if not isinstance(recipe, Recipe):
-            raise TypeError("recipe must be a Recipe")
-        self.critic, self.optimizer = critic, optimizer
-        arm = penalty_overrides.get("arm", recipe.reg_arm)
-        self.ema = self.anchor = None
-        if arm == "k3p":
-            self.ema = deepcopy(critic).requires_grad_(False)
-            self.anchor = RobustCriticAnchor(critic, self.ema, decay=recipe.reg_anchor_decay)
-        self.regularizer = recipe.make_gradient_penalty(anchor=self.anchor, **penalty_overrides)
-        self.guard = (None if recipe.d_guard_ratio == 0
-                      else CriticSpikeGuard(ratio=recipe.d_guard_ratio, min_steps=recipe.d_guard_min_steps))
+    _OWN_ATTRS = ("critic", "ema_critic", "anchor", "record", "guard")
 
-    def ema_critic(self, fn=None):
-        """Callable ``x -> fn(ema_module, x)`` (default ``ema_module(x)``), side-effect free.
+    def __init__(self, params, *, critic, ema_critic=None, anchor_decay=0.999,
+                 guard_ratio=5.0, guard_min_steps=200, **adam_kwargs):
+        super().__init__(params, **adam_kwargs)
+        if not isinstance(critic, nn.Module):
+            raise TypeError("critic must be an nn.Module")
+        self.critic, self.ema_critic = critic, ema_critic
+        self.anchor = None
+        if ema_critic is not None:
+            ema_critic.requires_grad_(False)
+            self.anchor = RobustCriticAnchor(critic, ema_critic, decay=anchor_decay)
+        self.record = CriticStepRecord(self.anchor)
+        self.guard = None if guard_ratio == 0 else CriticSpikeGuard(ratio=guard_ratio, min_steps=guard_min_steps)
 
-        None when the formulation keeps no EMA critic.
-        """
-        if self.anchor is None:
-            return None
-        if fn is None:
-            return self.anchor
-        return lambda x: self.anchor.forward(fn, x)
+    def __getstate__(self):
+        # Optimizer pickles/deep-copies only defaults/state/param_groups; keep ours.
+        state = super().__getstate__()
+        state.update({key: self.__dict__[key] for key in self._OWN_ATTRS})
+        return state
 
-    def penalty(self, D, x_real, x_fake, step, *, generator=None, collect_stats=False, ema_critic=None):
-        """``(penalty, stats)`` for one critic (or one role of it)."""
-        options = {} if ema_critic is None else {"ema_critic": ema_critic}
-        return self.regularizer.penalty(D, x_real, x_fake, step, generator, collect_stats, **options)
-
-    def _require_optimizer(self):
-        if self.optimizer is None:
-            raise RuntimeError("critic regularizer was built without an optimizer")
-        return self.optimizer
-
-    def before_step(self):
-        """Call between ``backward()`` and ``optimizer.step()`` (spike guard)."""
-        optimizer = self._require_optimizer()
+    def step(self, closure=None):
+        loss = _closure_loss(closure)
         if self.guard is not None:
-            self.guard.apply_(optimizer)
+            self.guard.apply_(self)
+        _adam_step(self)
+        self.record.record_step(self)
+        return loss
 
-    def after_step(self):
-        """Call right after ``optimizer.step()`` (anchor EMA, then the LR record)."""
-        self.regularizer.after_critic_step(self._require_optimizer())
+    def state_dict(self):
+        state = super().state_dict()
+        state[_STATE_KEY] = {
+            "record": self.record.state_dict(),
+            "ema": None if self.ema_critic is None else self.ema_critic.state_dict(),
+            "guard": None if self.guard is None else self.guard.state_dict(),
+        }
+        return state
 
-    def step(self):
-        """``before_step()``, ``optimizer.step()``, ``after_step()``."""
-        self.before_step()
-        self.optimizer.step()
-        self.after_step()
+    def load_state_dict(self, state_dict):
+        state_dict = dict(state_dict)
+        extra = state_dict.pop(_STATE_KEY, None)
+        if not isinstance(extra, dict) or set(extra) != {"record", "ema", "guard"}:
+            raise ValueError("critic optimizer state has no valid 'regularizer' entry")
+        if (extra["ema"] is None) != (self.ema_critic is None) or (extra["guard"] is None) != (self.guard is None):
+            raise ValueError("critic optimizer state does not match this recipe/EMA critic")
+        # Validate every part before mutating anything.
+        copy(self.record).load_state_dict(extra["record"])
+        if self.guard is not None:
+            copy(self.guard).load_state_dict(dict(extra["guard"]))
+        if self.ema_critic is not None:
+            deepcopy(self.ema_critic).load_state_dict(extra["ema"])
+        super().load_state_dict(state_dict)
+        self.record.load_state_dict(extra["record"])
+        if self.guard is not None:
+            self.guard.load_state_dict(dict(extra["guard"]))
+        if self.ema_critic is not None:
+            self.ema_critic.load_state_dict(extra["ema"])
+
+
+class K3PGeneratorAdam(Adam):
+    """Adam for the generator side whose ``step()`` applies K3P's update modifications.
+
+    Built by ``recipe.make_generator_optimizer(params, latent_table=...,
+    direct_particles=...)`` (and by ``recipe.make_optimizers``, which passes a
+    particle prior's table). A2 ``LatentRowDamping`` acts on a sparse latent
+    table (alone in its param group with beta1 == 0) and
+    ``DirectParticleResponse`` on one param group of direct sample particles;
+    their history buffers are allocated here. With neither, ``step()`` is
+    exactly ``Adam.step()``. ``state_dict()`` carries the histories and
+    counters under the extra ``"regularizer"`` key.
+    """
+
+    _OWN_ATTRS = ("latent_damping", "latent_history", "direct_response", "direct_history")
+
+    def __init__(self, params, *, latent_table=None, direct_particles=None, latent_max_rate=0.5,
+                 direct_betas=(0.0, 0.9), **adam_kwargs):
+        super().__init__(params, **adam_kwargs)
+        self.latent_damping = self.latent_history = None
+        self.direct_response = self.direct_history = None
+        if latent_table is not None and latent_table.requires_grad and latent_max_rate > 0:
+            group = _group_of(self, latent_table)
+            if len(group["params"]) != 1 or group["betas"][0] != 0.0:
+                raise ValueError("A2 latent damping needs the prior table alone with beta1 == 0; "
+                                 "set latent_damping_max_rate=0 to train without it")
+            self.latent_history = torch.zeros_like(latent_table, requires_grad=False)
+            self.latent_damping = LatentRowDamping(latent_table, self.latent_history, max_rate=latent_max_rate)
+        if direct_particles is not None:
+            particles = list(direct_particles)
+            if not particles:
+                raise ValueError("direct_particles must contain at least one parameter")
+            self.direct_history = torch.zeros(sum(p.numel() for p in particles),
+                                              dtype=particles[0].dtype, device=particles[0].device)
+            self.direct_response = DirectParticleResponse(particles, self.direct_history, betas=direct_betas)
+            self.direct_response._group(self)  # validate: exactly one param group
+
+    def __getstate__(self):
+        # Optimizer pickles/deep-copies only defaults/state/param_groups; keep ours.
+        state = super().__getstate__()
+        state.update({key: self.__dict__[key] for key in self._OWN_ATTRS})
+        return state
+
+    def step(self, closure=None):
+        loss = _closure_loss(closure)
+        latent = None if self.latent_damping is None else self.latent_damping.begin(self)
+        try:
+            direct = None if self.direct_response is None else self.direct_response.begin(self)
+            try:
+                _adam_step(self)
+            finally:
+                if self.direct_response is not None:
+                    self.direct_response.end(direct)
+        finally:
+            if self.latent_damping is not None:
+                self.latent_damping.end(latent)
+        return loss
+
+    def state_dict(self):
+        state = super().state_dict()
+        state[_STATE_KEY] = {
+            "latent": None if self.latent_damping is None else
+            {"state": self.latent_damping.state_dict(), "history": self.latent_history},
+            "direct": None if self.direct_response is None else
+            {"state": self.direct_response.state_dict(), "history": self.direct_history},
+        }
+        return state
+
+    def load_state_dict(self, state_dict):
+        state_dict = dict(state_dict)
+        extra = state_dict.pop(_STATE_KEY, None)
+        if not isinstance(extra, dict) or set(extra) != {"latent", "direct"}:
+            raise ValueError("generator optimizer state has no valid 'regularizer' entry")
+        parts = ((extra["latent"], self.latent_damping, self.latent_history),
+                 (extra["direct"], self.direct_response, self.direct_history))
+        for part, owner, history in parts:
+            if (part is None) != (owner is None):
+                raise ValueError("generator optimizer state does not match this recipe")
+            if part is not None:
+                if (not isinstance(part, dict) or set(part) != {"state", "history"}
+                        or not isinstance(part["history"], torch.Tensor)
+                        or part["history"].shape != history.shape or part["history"].dtype != history.dtype):
+                    raise ValueError("generator optimizer history does not match")
+                copy(owner).load_state_dict(dict(part["state"]))  # validate before mutating
+        super().load_state_dict(state_dict)
+        for part, owner, history in parts:
+            if part is not None:
+                owner.load_state_dict(dict(part["state"]))
+                with torch.no_grad():
+                    history.copy_(part["history"])
+
+
+def _first_output(output):
+    return output[0] if isinstance(output, (tuple, list)) else output
+
+
+class CriticPenalty:
+    """The recipe's critic penalty, paired with one critic optimizer.
+
+    Built by ``recipe.make_critic_penalty(opt_d)``; call it like a loss::
+
+        d_loss = adv + penalty(D, real, fake)                      # plain critic
+        d_loss = adv + penalty(D, x, fake, labels, xt=xt, t=t)     # conditional critic
+
+    Extra positional/keyword arguments are forwarded as conditioning to the
+    critic and to the paired EMA critic. ``D`` is the optimizer's critic, one of
+    its submodules (a role of a shared module; the same-named EMA submodule is
+    used), or a module wrapping one of those (e.g. ``InputNoise(D)``; the EMA
+    is evaluated through a shallow copy of the wrapper). A tuple/list output
+    uses its first element unless ``output=`` selects the logits. The step
+    used for lazy application is the optimizer's completed step count + 1, so
+    several calls per critic step (roles, views) share one step. Returns the
+    scalar penalty; ``last_stats`` holds the stats of the last call when
+    ``collect_stats`` is set, ``diagnostics()`` host scalars.
+    """
+
+    def __init__(self, recipe, optimizer, *, output=None, generator=None, collect_stats=False,
+                 **penalty_overrides):
+        if not isinstance(optimizer, K3PCriticAdam):
+            raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
+        self.optimizer, self.critic = optimizer, optimizer.critic
+        k3p = penalty_overrides.get("arm", recipe.reg_arm) == "k3p"
+        if k3p and optimizer.anchor is None:
+            raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
+                             "to recipe.make_optimizers / recipe.make_critic_optimizer")
+        options = {"record": optimizer.record} if k3p else {}
+        self.regularizer = recipe.make_gradient_penalty(**options, **penalty_overrides)
+        self.output = _first_output if output is None else output
+        self.generator, self.collect_stats = generator, bool(collect_stats)
+        self.last_stats = {}
+        self._names = {id(module): name for name, module in self.critic.named_modules()}
+
+    @property
+    def ema_critic(self):
+        """The paired optimizer's EMA critic module (None without one)."""
+        return self.optimizer.ema_critic
+
+    def _ema_view(self, critic):
+        """``m -> module`` mapping the EMA root to the EMA counterpart of ``critic``."""
+        if isinstance(critic, nn.Module):
+            name = self._names.get(id(critic))
+            if name is not None:
+                return lambda m: m.get_submodule(name)
+            for key, child in critic._modules.items():
+                inner = None if child is None else self._names.get(id(child))
+                if inner is not None:
+                    def view(m, key=key, inner=inner):
+                        clone = copy(critic)
+                        clone._modules = dict(critic._modules)
+                        clone._modules[key] = m.get_submodule(inner)
+                        return clone
+                    return view
+        raise TypeError("pass the critic paired with this penalty's optimizer, one of its submodules, "
+                        "or a module wrapping one of those")
+
+    def __call__(self, critic, x_real, x_fake, *condition, **condition_kwargs):
+        output = self.output
+
+        def live(x):
+            return output(critic(x, *condition, **condition_kwargs))
+        options = {}
+        anchor = self.optimizer.anchor
+        if anchor is not None and self.regularizer.arm == "k3p":
+            view = self._ema_view(critic)
+            options["ema_critic"] = lambda x: anchor.forward(
+                lambda m, inputs: output(view(m)(inputs, *condition, **condition_kwargs)), x)
+        step = self.optimizer.record.observed_steps + 1
+        penalty, stats = self.regularizer.penalty(live, x_real, x_fake, step, self.generator,
+                                                  self.collect_stats, **options)
+        self.last_stats = stats
+        return penalty
 
     def diagnostics(self):
         """Host-side scalars for logging (K3P: blend weight; guard clip count)."""
         out = {}
         if self.regularizer.arm == "k3p":
             out["blend_weight"] = float(self.regularizer.blend_weight())
-        if self.guard is not None:
-            out["clipped_tensors"] = self.guard.clipped_tensors
+        if self.optimizer.guard is not None:
+            out["clipped_tensors"] = self.optimizer.guard.clipped_tensors
         return out
-
-    def state_dict(self):
-        return {"penalty": self.regularizer.state_dict(),
-                "ema": None if self.ema is None else self.ema.state_dict(),
-                "guard": None if self.guard is None else self.guard.state_dict()}
-
-    def load_state_dict(self, state):
-        if not isinstance(state, dict) or set(state) != {"penalty", "ema", "guard"}:
-            raise ValueError("invalid critic regularizer state")
-        if (state["ema"] is None) != (self.ema is None) or (state["guard"] is None) != (self.guard is None):
-            raise ValueError("critic regularizer state does not match this recipe")
-        self.regularizer.load_state_dict(state["penalty"])
-        if self.ema is not None:
-            self.ema.load_state_dict(state["ema"])
-        if self.guard is not None:
-            self.guard.load_state_dict(state["guard"])
-
-
-class K3PGeneratorRegularizer:
-    """K3P implementation of the generator-side update for one generator optimizer.
-
-    Build it with ``recipe.make_generator_regularizer(optimizer, latent_table=...,
-    direct_particles=...)``. It allocates its own history buffers and applies
-    A2 ``LatentRowDamping`` to a sparse latent table (e.g. ``prior.z``, alone in
-    its Adam group with beta1 == 0) and/or ``DirectParticleResponse`` to one
-    param group of direct sample particles. When neither applies (or damping
-    is disabled by the recipe), ``step()`` is exactly ``optimizer.step()``.
-
-    Formulation-agnostic interface: ``before_step()``/``after_step()`` around
-    ``optimizer.step()`` (or ``step()``, or ``with reg.around(): opt.step()``),
-    ``state_dict``/``load_state_dict`` (history buffers included).
-    """
-
-    def __init__(self, recipe, optimizer, *, latent_table=None, direct_particles=None):
-        self.optimizer = optimizer
-        self.latent_damping = self.latent_history = None
-        self.direct_response = self.direct_history = None
-        if latent_table is not None and latent_table.requires_grad and recipe.latent_damping_max_rate > 0:
-            group = _group_of(optimizer, latent_table)
-            if len(group["params"]) != 1 or group["betas"][0] != 0.0:
-                raise ValueError("A2 latent damping needs the prior table alone with beta1 == 0; "
-                                 "set latent_damping_max_rate=0 to train without it")
-            self.latent_history = torch.zeros_like(latent_table, requires_grad=False)
-            self.latent_damping = LatentRowDamping(latent_table, self.latent_history,
-                                                   max_rate=recipe.latent_damping_max_rate)
-        if direct_particles is not None:
-            params = list(direct_particles)
-            if not params:
-                raise ValueError("direct_particles must contain at least one parameter")
-            self.direct_history = torch.zeros(sum(p.numel() for p in params),
-                                              dtype=params[0].dtype, device=params[0].device)
-            self.direct_response = DirectParticleResponse(params, self.direct_history,
-                                                          betas=recipe.direct_particle_betas)
-        self._tokens = None
-
-    def before_step(self):
-        """Call between ``backward()`` and ``optimizer.step()``."""
-        if self._tokens is not None:
-            raise RuntimeError("before_step() called twice without after_step()")
-        latent = None if self.latent_damping is None else self.latent_damping.begin(self.optimizer)
-        try:
-            direct = None if self.direct_response is None else self.direct_response.begin(self.optimizer)
-        except BaseException:
-            if self.latent_damping is not None:
-                self.latent_damping.end(latent)
-            raise
-        self._tokens = (latent, direct)
-
-    def after_step(self):
-        """Call right after ``optimizer.step()``."""
-        if self._tokens is None:
-            raise RuntimeError("after_step() without before_step()")
-        latent, direct = self._tokens
-        self._tokens = None
-        if self.direct_response is not None:
-            self.direct_response.end(direct)
-        if self.latent_damping is not None:
-            self.latent_damping.end(latent)
-
-    @contextmanager
-    def around(self):
-        self.before_step()
-        try:
-            yield
-        finally:
-            self.after_step()
-
-    def step(self):
-        """``optimizer.step()`` with the generator-side modifications."""
-        with self.around():
-            self.optimizer.step()
-
-    def state_dict(self):
-        return {
-            "latent": None if self.latent_damping is None else
-            {"state": self.latent_damping.state_dict(), "history": self.latent_history},
-            "direct": None if self.direct_response is None else
-            {"state": self.direct_response.state_dict(), "history": self.direct_history},
-        }
-
-    def load_state_dict(self, state):
-        if not isinstance(state, dict) or set(state) != {"latent", "direct"}:
-            raise ValueError("invalid generator regularizer state")
-        parts = ((state["latent"], self.latent_damping, self.latent_history),
-                 (state["direct"], self.direct_response, self.direct_history))
-        for part, owner, history in parts:
-            if (part is None) != (owner is None):
-                raise ValueError("generator regularizer state does not match this recipe")
-            if part is not None:
-                if (not isinstance(part, dict) or set(part) != {"state", "history"}
-                        or not isinstance(part["history"], torch.Tensor)
-                        or part["history"].shape != history.shape or part["history"].dtype != history.dtype):
-                    raise ValueError("generator regularizer history does not match")
-                copy(owner).load_state_dict(dict(part["state"]))  # validate before mutating
-        for part, owner, history in parts:
-            if part is not None:
-                owner.load_state_dict(dict(part["state"]))
-                with torch.no_grad():
-                    history.copy_(part["history"])

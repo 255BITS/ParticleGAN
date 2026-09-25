@@ -14,7 +14,7 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - K3P gradient penalty on D (package default, recipe.make_critic_regularizer): R1 on
+  - K3P gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
     reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
     plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
@@ -234,16 +234,15 @@ def train(
     # Optimizers
     # The particles get their own optimizer at 10x LR: they are an
     # embedding-like table and want far more mobility than the dense nets.
-    opt_GE, opt_D = recipe.make_optimizers(nn.ModuleList([E, G]), D)
+    # The critic optimizer's step() also updates the EMA critic we allocate here.
+    opt_GE, opt_D = recipe.make_optimizers(nn.ModuleList([E, G]), D, ema_critic=copy.deepcopy(D))
     opt_prior = torch.optim.Adam(prior.parameters(),
                                  lr=recipe.lr * recipe.prior_lr_mult, betas=recipe.betas)
 
     optimizers = (opt_GE, opt_prior, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
-    # K3P gradient penalty (the default) with its EMA critic and spike guard.
-    critic_reg = recipe.make_critic_regularizer(D, opt_D)
-    ema_joint = critic_reg.ema_critic(
-        lambda m, joint: m(joint[:, :X_DIM].view(-1, len(CHARS), SEQ_LEN), joint[:, X_DIM:]))
+    # K3P gradient penalty (the default), paired with opt_D (EMA critic, LR record).
+    penalty = recipe.make_critic_penalty(opt_D)
 
     loss_D_hist = deque(maxlen=200)
     loss_GE_hist = deque(maxlen=200)
@@ -282,16 +281,10 @@ def train(
         loss_d = gan_loss.d_loss(pred_real, pred_fake)
 
         # K3P gradient penalty on the joint (text, latent) pairs.
-        pen, _ = critic_reg.penalty(
-            D_joint,
-            join_pair(x_real, z_enc),
-            join_pair(x_gen_soft, z_prior),
-            step + 1,
-            ema_critic=ema_joint,
-        )
-        loss_d = loss_d + pen
+        # D_joint wraps D, so the penalty evaluates the EMA critic the same way.
+        loss_d = loss_d + penalty(D_joint, join_pair(x_real, z_enc), join_pair(x_gen_soft, z_prior))
         loss_d.backward()
-        critic_reg.step()  # spike guard, opt_D.step(), K3P anchor EMA + LR record
+        opt_D.step()
 
         # --- TRAIN GE (and Prior) ---
         opt_GE.zero_grad()

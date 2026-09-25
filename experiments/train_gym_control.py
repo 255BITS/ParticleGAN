@@ -104,8 +104,8 @@ def train(cfg):
     recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     if cfg["arm"] == "joint":
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior,
-            encoder=torch.nn.ModuleList([e, ec]), fused=device.type == "cuda")
+        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=torch.nn.ModuleList([e, ec]),
+            ema_critic=copy.deepcopy(d), fused=device.type == "cuda")
     else:
         opt_g = torch.optim.Adam(list(ec.parameters()) + list(g.branches[1].parameters()),
             lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
@@ -115,12 +115,13 @@ def train(cfg):
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
-    reg = recipe.make_critic_regularizer(d, opt_d) if opt_d is not None else None
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
                 for i, role in enumerate(d.roles())}
+    penalties = ({role: recipe.make_critic_penalty(opt_d, generator=rng) for role, rng in reg_rngs.items()}
+                 if opt_d is not None else None)
     weights = dict(continuous_weight=world["continuous_weight"], contact_weight=world["contact_weight"])
     parameter_counts = {key: parameter_count(bundle[key]) for key in MODULE_KEYS}
     trainable_counts = {key: sum(p.numel() for p in bundle[key].parameters() if p.requires_grad) for key in MODULE_KEYS}
@@ -171,12 +172,12 @@ def train(cfg):
                     composed_d = composed_transition(e, g, prior, fake_d, ctx_d, rng=rng["d_contact"])[0]
                     half = len(ids) // 2
                     fake_d = torch.cat([fake_d[:half], composed_d[half:]])
-                ld, _ = discriminator_loss(d, real_d, fake_d, ctx_d, gan, reg, step, reg_rngs)
+                ld, _ = discriminator_loss(d, real_d, fake_d, ctx_d, gan, penalties)
                 if not torch.isfinite(ld):
                     raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
-                reg.step()  # spike guard, Adam step, K3P anchor/LR record
+                opt_d.step()
                 d.requires_grad_(False)
             ids = batch("data")
             real, ctx = normalized[ids], terrain[ids]

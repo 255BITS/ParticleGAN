@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+- **Familiar GAN loop: the recipe's optimizers do the step-time work.** The
+  loop is plain PyTorch — `d_loss = adv + penalty(D, real, fake)`, then
+  `opt_d.zero_grad(); d_loss.backward(); opt_d.step()` and the same for
+  `opt_g`. `recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))`
+  returns `torch.optim.Adam` subclasses whose `step()` runs the spike guard,
+  EMA-critic update and LR record (critic) and A2 latent damping /
+  direct-particle response (generator). New role-named factories
+  `recipe.make_critic_optimizer(D, ema_critic=...)` (additional critics) and
+  `recipe.make_generator_optimizer(params, latent_table=None,
+  direct_particles=None)`. `recipe.make_critic_penalty(opt_d, output=None,
+  generator=None, collect_stats=False)` returns a callable penalty paired with
+  that optimizer: `penalty(D, real, fake, *cond, **cond_kw)` returns a scalar,
+  forwards conditioning to the critic and its EMA (roles of a shared module
+  and wrappers such as the new `InputNoise` resolve to the matching EMA),
+  takes the logits from a tuple's first element unless `output=` says
+  otherwise, reads its step from the optimizer (no `step` argument) and
+  exposes `last_stats`/`diagnostics()`. All regularization state (EMA critic,
+  LR record, counters, histories) is in `optimizer.state_dict()` under
+  `"regularizer"`, so the usual `torch.save({... "opt_g": opt_g.state_dict(),
+  "opt_d": opt_d.state_dict()})` resumes exactly. `GANTrainer` checkpoints
+  are schema 3 (schema 2 is upgraded on load); `trainer.penalty` is the recipe
+  penalty and `trainer.critic` / `trainer.generator_regularizer` are gone.
+  Removed: `make_critic_regularizer`, `make_generator_regularizer` and their
+  `step`/`before_step`/`after_step`/`around` surface. Behavior note:
+  `make_optimizers` now applies the recipe's spike guard (`d_guard_ratio`) and,
+  for a learnable `ParticlePrior`, A2 damping (`latent_damping_max_rate`) even
+  without a penalty; set both to 0 for plain Adam steps. GANTrainer,
+  `examples/pytorch_loop.py` and the frozen-K3P parity tests are bit-identical.
 - **Regularizers come from the recipe.** `recipe.make_critic_regularizer(D,
   opt_d, **penalty_kwargs)` (one call per critic optimizer) and
   `recipe.make_generator_regularizer(opt_g, latent_table=prior.z,

@@ -106,21 +106,21 @@ def _comparisons(d, role, views, fakes):
             yield f"{name}/{path}", xr, xf, context
 
 
-def discriminator_loss(d, views, fakes, gan, reg, step, rngs):
+def discriminator_loss(d, views, fakes, gan, critic_penalties):
     """Mean views/paths per role, sum critic roles; generated records detached here.
 
-    ``reg`` is the shared critic module's ``recipe.make_critic_regularizer(...)``.
+    ``critic_penalties`` maps role -> ``recipe.make_critic_penalty(opt_d, ...)``
+    (or is one penalty for every role) for the shared critic module.
     """
     terms, role_losses = {}, []
     for role in d.roles():
         critic = d.critic_for(role)
+        penalty_fn = critic_penalties[role] if isinstance(critic_penalties, dict) else critic_penalties
         adversarial_losses, penalties = [], []
         for _, xr, xf, context in _comparisons(d, role, views, fakes):
             xr, xf, context = xr.detach(), xf.detach(), context.detach()
             dr, df = critic(xr, context)[0], critic(xf, context)[0]
-            penalty, _ = reg.penalty(
-                lambda x: critic(x, context)[0], xr, xf, step, generator=rngs[role],
-                ema_critic=reg.ema_critic(lambda m, x: m.critic_for(role)(x, context)[0]))
+            penalty = penalty_fn(critic, xr, xf, context)
             adversarial_losses.append(gan.d_loss(dr, df))
             penalties.append(penalty)
         terms[f"{role}_gan"] = torch.stack(adversarial_losses).mean()

@@ -36,7 +36,7 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     assert [group['lr'] for group in trainer.opt_g.param_groups] == [.00425, .0085]
     assert [group['lr'] for group in trainer.opt_d.param_groups] == [.00425]
     assert all(group['betas'] == (0., .999) for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
-    assert trainer.penalty.arm == 'k3p' and trainer.ema_D is not None and trainer.latent_damping is not None
+    assert trainer.penalty.regularizer.arm == 'k3p' and trainer.ema_D is not None and trainer.latent_damping is not None
     assert trainer.loss.mode == 'rp' and trainer.loss.loss_type == 'logistic'
     result = trainer.step(torch.randn(8, 2))
     assert torch.equal(result['loss_g'], result['loss_gan'] + 0. * result['prior_regularization'])

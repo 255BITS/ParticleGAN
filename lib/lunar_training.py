@@ -5,6 +5,7 @@ The policy's adversarial phase has no action-cloning term. Its frozen learned
 world model supplies a differentiable successor target from expert transitions.
 Rollout success and speed must be measured separately in the actual simulator.
 """
+import copy
 from pathlib import Path
 
 import numpy as np
@@ -267,13 +268,14 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
     train_values = _tensor_records(records, device)
     val_values = _tensor_records(validation, device) if validation is not None else None
     optimizer_g = torch.optim.Adam(policy.parameters(), lr=3e-4, betas=(.5, .99))
-    optimizer_d = torch.optim.Adam(critic.parameters(), lr=2e-4, betas=(.5, .99))
     # Only loss/cap factories are used, but also disable the unused recipe EMA
     # setting explicitly so checkpoint metadata cannot suggest averaged weights.
     recipe = get_recipe(total_steps=steps, batch_size=batch_size, reg_coeff=1., reg_every=4,
                         ema_decay=0.)
     gan = recipe.make_loss()
-    critic_reg = recipe.make_critic_regularizer(critic, optimizer_d)  # penalty, EMA anchor, spike guard
+    # Critic Adam whose step() also runs the recipe's spike guard and EMA-critic update.
+    optimizer_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic), lr=2e-4, betas=(.5, .99))
+    penalty = recipe.make_critic_penalty(optimizer_d)
     rng = torch.Generator(device=device).manual_seed(seed + 29)
     for step in range(1, warmup_steps + 1):
         batch = _sample(train_values, batch_size, rng)
@@ -293,11 +295,11 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
             fake_actions = policy(states)
         fake = _critic_input(policy, states, fake_actions)
         d_loss = gan.d_loss(critic(real), critic(fake))
-        d_loss = d_loss + critic_reg.penalty(critic, real, fake, step)[0]
+        d_loss = d_loss + penalty(critic, real, fake)
         optimizer_d.zero_grad(set_to_none=True)
         d_loss.backward()
         nn.utils.clip_grad_norm_(critic.parameters(), 5.)
-        critic_reg.step()
+        optimizer_d.step()
 
         critic.requires_grad_(False)
         generated = policy(states)

@@ -109,17 +109,19 @@ def train(cfg):
     labeled_actions = torch.as_tensor(records["labeled_actions"], device=device)
     recipe = training_recipe(cfg)
     optimizer, optimizer_d = recipe.make_optimizers(bundle["G"], bundle["D"], bundle["prior"],
-        encoder=bundle["E"], fused=device.type == "cuda")
+        encoder=bundle["E"], ema_critic=copy.deepcopy(bundle["D"]), fused=device.type == "cuda")
     optimizers = (optimizer, optimizer_d)
     base_rates = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     prior_regularizer = recipe.make_prior_regularizer()
-    gan, reg = recipe.make_loss(), recipe.make_critic_regularizer(bundle["D"], optimizer_d)
+    gan = recipe.make_loss()
     ema = {**bundle, **{key: copy.deepcopy(bundle[key]).eval().requires_grad_(False) for key in ("G", "E", "prior")}}
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(labeled=11, auxiliary=21, d_labeled=31, d_auxiliary=41,
                                    latent=51, contact=61, d_latent=71, d_contact=81).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 100 + i)
                 for i, role in enumerate(("joint", "action", "state", "next_state"))}
+    critic_penalties = {role: recipe.make_critic_penalty(optimizer_d, generator=generator)
+                        for role, generator in reg_rngs.items()}
     draws_digest = {name: hashlib.sha256() for name in ("labeled", "auxiliary", "d_labeled", "d_auxiliary")}
     def batch(prefix=""):
         label_name, all_name = prefix + "labeled", prefix + "auxiliary"
@@ -174,12 +176,12 @@ def train(cfg):
             d_views = real_views(bundle, d_batch)
             with torch.no_grad():
                 d_fakes = fake_views(bundle, d_views, rng["d_latent"], rng["d_contact"], straight_through=False)
-            d_loss, d_terms = discriminator_loss(bundle["D"], d_views, d_fakes, gan, reg, step, reg_rngs)
+            d_loss, d_terms = discriminator_loss(bundle["D"], d_views, d_fakes, gan, critic_penalties)
             if not torch.isfinite(d_loss):
                 raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
             optimizer_d.zero_grad(set_to_none=True)
             d_loss.backward()
-            reg.step()  # spike guard, Adam step, K3P anchor/LR record
+            optimizer_d.step()
             optimizer_d.zero_grad(set_to_none=True)
             bundle["D"].requires_grad_(False)
             g_batch = batch()
