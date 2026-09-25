@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -47,7 +47,8 @@
     "rp1_signal_close": "REJECTED: own hold1200+300 and live shift81/81, but img_intensity2 FAIL (3/24 observations, no sustained confirmation) and native grid100 accuracy FAIL (coverage PASS). Transfer8 PASS/1 FAIL/10 NOT_RUN. No more qualification or promotion.",
     "pm1_relative_mobility": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Transfer and deeper qualification NOT_RUN. Not promoted.",
     "pm3_prior_match": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Not promoted.",
-    "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted."
+    "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted.",
+    "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification."
   },
   "previous_round": {
     "round": 2,
@@ -85,14 +86,14 @@
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
     "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T18:48:25.129064+00:00",
+    "verified_live_utc": "2026-09-25T18:52:56.586203+00:00",
     "verified_live_counts": {
       "grok": 6,
       "codex": 1
     },
     "verified_gpu_reservations": {
-      "GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 4,
-      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 3
+      "GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 3,
+      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 4
     }
   },
   "active_batches": [
@@ -108,7 +109,8 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T183536Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z"
   ],
   "completed_rounds": [
     {

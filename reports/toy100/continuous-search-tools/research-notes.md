@@ -94,3 +94,26 @@ sequential error guarantee. No benchmark evaluator, held-out score, true mode
 center, task identity, known change time or training horizon enters the learner.
 Do not replace GAN training with assignments to known targets. Preserve the
 selected K3P learning mechanism and account for every extra computation.
+
+## Correcting the game update direction
+
+The completed confidence lane found that half-batch gradient agreement can stay
+high while the ring fails, and a margin-variance controller can close before
+acquisition. The joint-trust lane also failed by constraining displacement.
+These results motivate testing an update-direction correction, not another
+threshold on gradient size.
+
+Mescheder et al. add a gradient of the squared joint game vector field to their
+GAN updates. Their ascent notation is `v - gamma * grad(||v||^2 / 2)`; for a
+descent field `F`, the corresponding step is along
+`-(F + gamma * grad(||F||^2 / 2))`. The gradient includes cross-player terms.
+Their analysis is local and conditional; the paper also discusses minibatch
+bias. [Primary paper, Section 4 and Algorithm 2](https://www.nowozin.net/sebastian/papers/mescheder2017gannumerics.pdf).
+
+A K3P-derived test must declare its field, sign, role ordering, preconditioning,
+and treatment of critic regularization and sparse prior history. The paper does
+not establish convergence for this Adam/EMA learner or changing distributions.
+Computing only a critic's own gradient norm is not the full joint correction.
+Use a small analytic game to catch missing cross terms before ring training.
+Bound and report extra evaluations; no extra optimizer updates or altered gate
+budgets. This is a hypothesis, with no transferred gate passes.

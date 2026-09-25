@@ -127,3 +127,11 @@ add three further rejected formulations. All hold1200+300; DI1/DI2/DI3 recover
 the real-data novelty signal has returned to its stationary range. DI3's hard
 critic-anchor reset worsens recovery. All retain horizon-based rates and noise;
 none earns transfer or long-term qualification.
+
+[Critic-confidence results](completed-confidence/attempts/k3p_critic_confidence/result.md)
+add three rejected formulations; all six canonical protocols fail. Half-batch
+gradient agreement stayed high without stable coverage, while margin uncertainty
+closed acquisition prematurely. A frozen quiet-baseline proposal never closed.
+The next distinct hypothesis corrects the joint game-update direction rather
+than using another scalar confidence threshold; the research note records its
+primary reference and required cross-player derivative checks.

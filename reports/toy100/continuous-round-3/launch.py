@@ -16,6 +16,27 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_game_consensus': ('grok', GPU0, '''Investigate an update-direction
+correction from selected K3P, distinct from failed scalar-rate and displacement
+caps. Read the new game-update research note and completed-confidence and
+completed-trust reports. Primary source: Mescheder et al., The Numerics of GANs,
+Section4/Algorithm2, https://www.nowozin.net/sebastian/papers/mescheder2017gannumerics.pdf.
+Test a declared consensus-style correction using the squared JOINT game field.
+In descent notation the correction is F + gamma*grad(||F||^2/2). Explain both
+role signs, cross-player derivatives, parameter point, original K3P penalties,
+Adam preconditioning and sparse learned prior. A critic-only block norm is NOT
+the full method; label any approximation explicitly. Do not silently detach
+the cross-player paths. Use a tiny analytic bilinear-game check first. If exact
+integration is infeasible, report that limit instead of claiming implementation.
+Preserve architecture, data sampling, fixtures, auxiliary host losses and full
+gate budgets. Keep K3P prior/direct-response hooks and one committed update per
+role; account for every extra forward/backward, RNG/state handling, and any
+declared change from alternating to simultaneous ordering. No hidden optimizer
+updates, per-task exceptions, coefficient grid or target knowledge. Learning
+rates, mixing and noise must not require the final training duration. Initial
+declared estimator warmup is allowed. At most3 evidence-driven proposals, both
+canonical protocols each; short image screen; expensive qualification only for
+survivors. One benchmark worker, no nested agents. No paper theorem is a gate.'''),
     'k3p_generator_restoring': ('grok', GPU1, '''Investigate a continuously moving
 generator/prior restoring reference from selected K3P. Read completed-data-innovation
 and completed-mobility reports: DI2/PM1 lose a late mode after the reopen signal
