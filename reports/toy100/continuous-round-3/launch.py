@@ -16,6 +16,18 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'verify_p3_gates': ('grok', GPU0, '''Verification ONLY, no new mechanisms.
+Use UNCHANGED reports/toy100/continuous-round-2/sources/p3_floor_reopen/;
+verify hashes in sources/source-hashes.json and policy installation. This explicitly
+overrides the normal search hold/shift-first order: P3 already has hold1200+300,
+stationary5/5, prehold120/120, shiftFAIL77/81. Do not repeat those protocols or
+baseline runs. Its noise remains scheduled; preserve that limitation. Test own
+mode_hold, vector_unequal_mass, vector_unequal_width, img_stripes2 in that order,
+original fixtures/runtime/budgets. Stop on first failed sensitive gate, reporting
+the rest NOT_RUN. Only if all4pass, complete own remaining18 within the cap,
+including native7000 coverage AND accuracy; no coefficient or seed experiments.
+Record actual applied rates and source hashes. This is prospective-lead screening,
+not promotion; its existing failed shift is binding. Leave complete evidence.'''),
     'k3p_extragradient': ('codex', GPU0, '''Own a clean shared-sample game
 predictor/corrector from selected K3P. Read research-notes.md. Preserve and restore
 temporary optimizer/EMA/particle/RNG state, one committed update per role, declare

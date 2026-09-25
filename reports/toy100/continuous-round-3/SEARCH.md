@@ -30,6 +30,11 @@ fields in a result wrapper. Require identical pre-shift state and frozen0/81.
 Then verify sensitive gates and all22, including original native budgets,
 coverage AND accuracy. The same frozen formulation must earn every pass.
 
+An explicitly assigned verification-only lane may screen an unchanged promising
+partial lead before full shift success, to avoid spending further search on a
+formulation that loses transfer gates. That diagnostic exception does not weaken
+qualification, authorize promotion, or inherit any missing passes.
+
 Audit substantial identical prefixes under differing declared horizons, including
 model, optimizer, controller, EMA, RNG, applied rates/noise. A successful survivor
 also needs separately declared late and repeated shifts on uninterrupted state.

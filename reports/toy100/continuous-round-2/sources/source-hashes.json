@@ -1,0 +1,38 @@
+{
+  "p3_floor_reopen": {
+    "source": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/p3",
+    "qualification": "UNQUALIFIED; failed canonical shift, toy gates not run",
+    "files_sha256": {
+      "checkpoint.py": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+      "config.json": "408ac45184d81dd0a1c4b5f7bdea788f4d7a5ba42d666e508dfabadb277c0dc0",
+      "convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+      "declaration.json": "99ec7499c688c23e7d2d04dfd007ae712a7e7f148525ebca03452f7ec04f40dd",
+      "hold.py": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+      "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+      "mechanism.py": "607cdac6e1ccd4e2c080ac1083c5836ef1df2b617a4f2fde13013b0cb1799471",
+      "native100.py": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997",
+      "precision_policy.py": "57fca1ac270e3372a647918863d8d3fb3ac30475363d265d34849f71f26b0132",
+      "probe.py": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+      "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+      "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+      "shift_frozen.py": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    }
+  },
+  "ap3_partial_reopen": {
+    "source": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_adversarial_progress/20260925T165310Z-3675713/repo/reports/toy100/k3p-adversarial-progress/candidates/ap3",
+    "qualification": "UNQUALIFIED; failed canonical shift, toy gates not run",
+    "files_sha256": {
+      "checkpoint.py": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+      "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+      "convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+      "hold.py": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+      "latent.py": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+      "mechanism.py": "8d65d1d690c1a1ccfe4e2cc82a2f6982fb31c50f67cba4e8665623a7f3f627de",
+      "native100.py": "d550b6ed701273381450a3c66f6b264767550921e89ba9690ceafb3bc1c0e997",
+      "probe.py": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+      "response.py": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+      "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+      "shift_frozen.py": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6"
+    }
+  }
+}

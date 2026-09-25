@@ -21,7 +21,9 @@
     "delayed_and_repeated_change_checks_required": true
   },
   "unverified_candidates": {
-    "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120."
+    "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
+    "p3_floor_reopen": "Prospective diagnostic screen: hold1200+300, stationary5/5, prehold120/120, FAIL77/81 recovery; noise still scheduled. Not promoted.",
+    "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted."
   },
   "previous_round": {
     "proposals": 24,
@@ -79,6 +81,7 @@
   },
   "active_batches": [
     "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z"
   ]
 }
