@@ -45,10 +45,10 @@ it does not reserve the name beforehand. See
 1. Merge the reviewed API and release workflows into `master` and wait for CI.
 2. Set the version in `pyproject.toml` and make the README's installation section
    current for the release, and update both `CHANGELOG.md` and the README changelog.
-   The prepared version is `0.6.0`; replace any `Unreleased` labels with the
+   The prepared version is `0.7.0`; replace any `Unreleased` labels with the
    release date when publishing.
 3. Create a GitHub release from that commit with a matching tag, for example
-   `v0.6.0`. Publishing the GitHub release triggers `release.yml`; creating a
+   `v0.7.0`. Publishing the GitHub release triggers `release.yml`; creating a
    draft or pushing a tag alone does not publish to PyPI.
 4. The workflow verifies the tag, reruns the same test matrix, builds and checks
    the distributions, then publishes those artifacts. A failed check prevents

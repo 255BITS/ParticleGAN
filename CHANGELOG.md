@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.7.0 — 2026-09-24
+
+- Add the strict 100-mode toy gate (`python -m benchmarks.toy100 run`); its
+  default is the simpler shared recipe that passes all 22 toys. The README
+  animation now shows that default converging on the 10×10 grid.
 
 - Keep training control flow separate from recipes: construct
   `GANTrainer(recipe, G, D, ...)` explicitly. Remove `Recipe.make_trainer`;

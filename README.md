@@ -49,12 +49,11 @@ explicit noise settings and staggered batch override.
 Requires Python 3.10+ and PyTorch. Install from PyPI:
 
 ```bash
-python -m pip install particlegan==0.6.0
+python -m pip install particlegan==0.7.0
 ```
 
-Version 0.6.0 includes the explicit-sigma API. GAN v3 and the other changes
-under Unreleased remain on `develop`; install this checkout with
-`python -m pip install .` to use them.
+Version 0.7.0 includes GAN v3, named model-family recipes, the explicit
+`GANTrainer`, and the 100-mode toy gate.
 
 For development and the repository's research experiments:
 
@@ -682,7 +681,10 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 
-### Unreleased
+### 0.7.0 — 2026-09-24
+
+- Add the strict 100-mode toy gate (`python -m benchmarks.toy100 run`) with the
+  simpler shared 22-toy recipe as its default; refresh the README animation.
 
 - Promote the shared 19/19 recipe to GAN v3 as the single common default.
 - Offer named model-family configurations with current shared hyperparameters
