@@ -7,7 +7,6 @@ lr: 0.0006
 d_lr_mult: 1.5
 beta1: 0.0
 lambda_ep: 1.0
-reg_arm: b_cap
 reg_coeff: 1.0
 fourier: 2
 ema_decay: 0.995

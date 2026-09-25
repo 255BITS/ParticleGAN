@@ -8,8 +8,9 @@ sees the previous command where E_pair saw the current action.
 
 `current` is the collapsed recipe: observation critics, detached reals, every
 module trained, no paired L2. `fixed` is Rp logistic on the live pair
-(record, z), sample-point b_cap on that pair, and only E_control plus the
-action head trained. This file is that CPU example. The Lunar Lander particle
+(record, z), the recipe's critic penalty on that pair, and only E_control plus
+the action head trained. Every critic trains with the recipe's critic
+optimizer and penalty; the generator side with its generator optimizer. This file is that CPU example. The Lunar Lander particle
 trainer uses YuE2 paired-error RpGAN (`controller_objective`).
 
 python -u experiments/toy_particle_native_2d.py
@@ -30,7 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from particlegan import get_recipe, learning_rate_scale, particle_ae
+from particlegan import get_recipe, particle_ae, scale_learning_rates
 
 Z, K, H, B = 2, 32, 64, 128
 PRE, FINE = 250, 400
@@ -125,16 +126,17 @@ class Logger:
 
 
 def pretrain(log):
-    # This frozen regression compares its original arms, not changing API defaults.
+    # The recipe default (critic penalty, optimizers, LR schedule) at this toy's rates.
     recipe = get_recipe(prior_kind='mog', sigma_rel=.025, z_dim=Z, num_particles=K,
                         total_steps=FINE, batch_size=B, lr=.0006, d_lr_mult=1.5,
-                        prior_lr_mult=100., betas=(0., .999), prior_betas=(.5, .999),
-                        reg_arm="b_cap", reg_coeff=1., reg_kappa=1., prior_reg=1.)
+                        prior_lr_mult=100., prior_reg=1.)
     spread = recipe.make_prior_regularizer()
     generator = torch.Generator().manual_seed(11)
     prior = recipe.make_prior(generator=torch.Generator().manual_seed(3))
     encoder, decoder = Enc(), Gen()
-    opt = torch.optim.Adam(list(encoder.parameters()) + list(decoder.parameters()) + list(prior.parameters()), lr=1e-3)
+    # Supervised reconstruction pretraining at its own step size.
+    opt = recipe.make_generator_optimizer(
+        list(encoder.parameters()) + list(decoder.parameters()) + list(prior.parameters()), lr=1e-3)
     for step in range(1, PRE + 1):
         state, _, action, record = batch(B, generator)
         loss = F.mse_loss(decoder(encoder(torch.cat([state, action], 1), prior).codes[:, 0]), record)
@@ -156,7 +158,6 @@ def run_arm(name, kind, recipe, init, log):
     modules = restore(init)
     encoder, control, decoder, prior = (modules[key] for key in ("ep", "ec", "g", "prior"))
     gan = recipe.make_loss()
-    reg = recipe.make_gradient_penalty()
     spread = recipe.make_prior_regularizer()
     d_obs, d_act, d_joint = Critic(2), Critic(1), Critic(2 + Z)
     critics = [d_obs, d_act] if kind == "current" else [d_joint]
@@ -170,20 +171,19 @@ def run_arm(name, kind, recipe, init, log):
     for module in (encoder, control, decoder, prior):
         for param in module.parameters():
             param.requires_grad_(id(param) in seen)
-    opt_g = torch.optim.Adam(chosen, lr=recipe.lr, betas=recipe.betas)
-    opt_d = torch.optim.Adam([p for critic in critics for p in critic.parameters()],
-                             lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas)
+    opt_g = recipe.make_generator_optimizer(chosen)
+    # One recipe critic optimizer (with its EMA) and one penalty per critic.
+    opt_ds = [recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic)) for critic in critics]
+    reg = {critic: recipe.make_critic_penalty(opt) for critic, opt in zip(critics, opt_ds)}
+    optimizers = [opt_g, *opt_ds]
+    base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     ema_c, ema_g = copy.deepcopy(control).eval(), copy.deepcopy(decoder).eval()
     for param in list(ema_c.parameters()) + list(ema_g.parameters()):
         param.requires_grad_(False)
     rng = torch.Generator().manual_seed(21)
     series = []
     for step in range(1, FINE + 1):
-        scale = learning_rate_scale(step - 1, FINE, recipe.lr_anneal_start, recipe.lr_floor)
-        for group in opt_g.param_groups:
-            group["lr"] = recipe.lr * scale
-        for group in opt_d.param_groups:
-            group["lr"] = recipe.lr * recipe.d_lr_mult * scale
+        scale_learning_rates(step - 1, recipe, optimizers, base_rates)
         state, previous, action, record = batch(B, rng)
         context = torch.cat([state, previous], 1)
         with torch.no_grad():
@@ -193,16 +193,18 @@ def run_arm(name, kind, recipe, init, log):
         if kind == "current":
             ld = gan.d_loss(d_obs(record), d_obs(fake_c)) + gan.d_loss(d_obs(record), d_obs(fake_p))
             ld = ld + gan.d_loss(d_act(action), d_act(fake_c[:, 1:])) + gan.d_loss(d_act(action), d_act(fake_p[:, 1:]))
-            ld = ld + reg(d_obs, record, fake_c, step) + reg(d_act, action, fake_c[:, 1:], step)
+            ld = ld + reg[d_obs](d_obs, record, fake_c) + reg[d_act](d_act, action, fake_c[:, 1:])
         else:
             real_in = torch.cat([record, code], 1)
             fake_in = torch.cat([fake_c, code], 1)
             prior_in = torch.cat([fake_p, z_prior], 1)
             ld = gan.d_loss(d_joint(real_in), d_joint(fake_in)) + gan.d_loss(d_joint(real_in), d_joint(prior_in))
-            ld = ld + reg(d_joint, real_in, fake_in, step)
-        opt_d.zero_grad(set_to_none=True)
+            ld = ld + reg[d_joint](d_joint, real_in, fake_in)
+        for opt in opt_ds:
+            opt.zero_grad(set_to_none=True)
         ld.backward()
-        opt_d.step()
+        for opt in opt_ds:
+            opt.step()
         for critic in critics:
             critic.requires_grad_(False)
         code = control(context, prior).codes[:, 0]
@@ -258,20 +260,20 @@ def run_gate(log_path=None):
     log(f"ENV torch={torch.__version__} dtype={torch.get_default_dtype()} threads={torch.get_num_threads()}")
     started = time.perf_counter()
     recipe, init, init_mse = pretrain(log)
-    if recipe.reg_arm != "b_cap" or recipe.reg_coeff != 1. or recipe.gan_mode != "rp" or recipe.loss_type != "logistic":
-        raise RuntimeError("Fixed arm requires nonzero Rp logistic GANLoss and sample-point b_cap")
+    if recipe.reg_coeff <= 0 or recipe.gan_mode != "rp" or recipe.loss_type != "logistic":
+        raise RuntimeError("Fixed arm requires nonzero Rp logistic GANLoss and the recipe critic penalty")
     current = run_arm("current", "current", recipe, init, log)
     fixed = run_arm("fixed", "fixed", recipe, init, log)
     collapse, passed = gate_status(current["ema"], fixed["ema"])
     log("LEADERBOARD ema_action_mse lower is better")
     log(f"  {fixed['ema']:.4f}  fixed latent-joint  threshold<={FIXED_MAX:.2f}  {'PASS' if passed else 'FAIL'}")
     log(f"  {current['ema']:.4f}  current observation  threshold>={COLLAPSE_MIN:.2f}  {'COLLAPSE' if collapse else 'FAIL'}")
-    log("FIXED adv_weight=1 l2_weight=0 b_cap_coeff=1 b_cap_arm=b_cap supervised_only=false")
+    log(f"FIXED adv_weight=1 l2_weight=0 penalty={recipe.reg_arm} coeff={recipe.reg_coeff:g} supervised_only=false")
     log(f"GATE init={init_mse:.4f} collapse={collapse} fixed_pass={passed} elapsed_s={time.perf_counter()-started:.1f}")
     log.close()
     return dict(ok=bool(collapse and passed), init=init_mse, current=current, fixed=fixed,
                 collapse=collapse, fixed_pass=passed, adversarial_weight=1., l2_weight=0.,
-                b_cap_coeff=1., supervised_only=False)
+                penalty_arm=recipe.reg_arm, penalty_coeff=recipe.reg_coeff, supervised_only=False)
 
 
 def main():

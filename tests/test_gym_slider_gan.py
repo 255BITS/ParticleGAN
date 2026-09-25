@@ -1,4 +1,5 @@
-"""Paired noise, exact cap, removal of reconstruction gradients, and configuration."""
+"""Paired noise, recipe critic penalty on R, removal of reconstruction gradients, and configuration."""
+import copy
 import math
 from pathlib import Path
 import tempfile
@@ -23,7 +24,7 @@ class SliderGanTests(unittest.TestCase):
             'z_dim': 4, 'num_particles': 8, 'width': 8, 'encoder_width': 8, 'd_width': 8,
             'marginal_width': 8, 'error_tokens': 2, 'error_width': 8, 'error_heads': 2}
 
-    def test_normalization_noise_and_exact_cap(self):
+    def test_normalization_noise_and_recipe_penalty(self):
         with tempfile.TemporaryDirectory() as td:
             _, records = fixtures.PreviousGanTests().fixture(Path(td))
             triples = torch.from_numpy(np.concatenate([records[k] for k in ('states', 'actions', 'next_states')], 1))
@@ -45,16 +46,13 @@ class SliderGanTests(unittest.TestCase):
             zero_logits[:, [6,7,16,17]] = 0.
             loss, _ = error_loss(critic, zero_logits, zero_targets, 1, torch.Generator().manual_seed(9))
             self.assertAlmostEqual(float(loss.detach()), math.log(2), places=6)
-            cap = training_recipe(self.cfg).make_gradient_penalty(arm='b_cap', lazy_k=4, coeff=1., kappa=1.)
+            # R trains with the recipe's critic optimizer and penalty; the
+            # attention critic supports the penalty's second derivatives.
+            recipe = training_recipe(self.cfg)
+            opt_r = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
             x = torch.randn(4,18)
-            f = lambda a: 2*a[:,0]
-            off,_ = cap.penalty(f,x,x,step=3)
-            on,_ = cap.penalty(f,x,x,step=4)
-            self.assertEqual(float(off),0.)
-            self.assertAlmostEqual(float(on),4.,places=5)
-            # Actual attention critic supports second derivatives for the exact cap.
-            tight = training_recipe(self.cfg).make_gradient_penalty(arm='b_cap', lazy_k=4,kappa=0.)
-            penalty,_=tight.penalty(critic,x,x,step=4)
+            penalty = recipe.make_critic_penalty(opt_r)(critic, x, x + .1)
+            self.assertGreater(float(penalty.detach()), 0.)
             penalty.backward()
             self.assertTrue(all(p.grad is None or torch.isfinite(p.grad).all() for p in critic.parameters()))
 

@@ -1,13 +1,15 @@
 """CPU 2D lander gate for the particle controller collapse.
 
 The state law is symmetric and the expert thrust is odd, so negating a pair
-keeps the joint law of (state, action). Marginal RpGAN plus sample-point b_cap
-has no restoring force on that sign. Playback still applies the action on the
+keeps the joint law of (state, action). Marginal RpGAN plus the recipe critic
+penalty has no restoring force on that sign. Playback still applies the action on the
 true state, so the flipped controller misses the pad.
 
 The accepted arm is the YuE2 paired-error game: relativistic logistic loss on
-noise versus noise plus the normalized action error, with the same sample-point
-b_cap, and with adversarial weight 1. A soft L2 anchor at adv_weight 0 can also
+noise versus noise plus the normalized action error, with the same recipe
+critic penalty, and with adversarial weight 1. Both arms train through the
+recipe's optimizers (``recipe.make_generator_optimizer`` /
+``recipe.make_critic_optimizer``) on its LR schedule. A soft L2 anchor at adv_weight 0 can also
 land and is rejected. That is the failure mode of the closed model-glue PR.
 
 This file does not run YuE2. Late-layer weighting is not in FORMULATION.md
@@ -15,13 +17,15 @@ This file does not run YuE2. Late-layer weighting is not in FORMULATION.md
 MSE are not in the v2 teacher. Distillation rel-L2 is the rejected supervised
 arm, not the shipped update.
 """
+import copy
+
 import torch
 from torch import nn
 import torch.nn.functional as F
 
 from lib.vendor.concept_slider_core.reference import (noise_std, register_paired_error_norm,
     rp_d_loss, rp_g_loss)
-from particlegan.grad_regularizers import GradientPenalty
+from particlegan import get_recipe, scale_learning_rates
 
 # One gate seed. Not a sweep.
 SEED = 0
@@ -33,6 +37,7 @@ COLLAPSED_LAND_MAX = 0.05
 COLLAPSED_REL_MIN = 2.0
 FIXED_LAND_MIN = 0.95
 FIXED_REL_MAX = 0.05
+SCALAR_GAIN_LR = 0.05
 
 MAPPING = (
     dict(yue2="Paired-error critic. real = noise, fake = noise + (g - t) / s. "
@@ -48,9 +53,9 @@ MAPPING = (
              "build_edit_critic refuses absolute-target whitening."),
     dict(yue2="Lazy sample-point b_cap every fourth update, coefficient 1, "
               "compensated by 4. FORMULATION.md, Objectives, gradient cap and moving average.",
-         toy="GradientPenalty arm b_cap, lazy_k 4, on the critic coordinates. "
-             "The accepted arm counts applications and requires at least one.",
-         gym="edit_cap() on the global-mix critic. Logged as b_cap_applied."),
+         toy="Replaced by the recipe critic penalty (recipe.make_critic_penalty) on the "
+             "critic coordinates. The accepted arm counts applications and requires at least one.",
+         gym="edit_game(recipe, critic) on the global-mix critic. Logged as penalty."),
     dict(yue2="AR QKVO only. NAR, MLP, embeddings, and VAE stay frozen. "
               "FORMULATION.md, Inference: a nonlinear correction in AR attention.",
          toy="Accepted arm trains the action sign only. The collapsed arm also "
@@ -115,9 +120,15 @@ def _edit_scale():
     return module
 
 
-def _cap():
-    return GradientPenalty(arm="b_cap", coeff=1., kappa=1., lazy_k=4, norm="l2",
-                           method="autograd", target_anneal="none")
+def _game(params, critic, steps):
+    """The recipe's optimizers, critic penalty and LR schedule for one toy arm."""
+    recipe = get_recipe(total_steps=steps, batch_size=64)
+    # The toy "generator" is one or two scalar gains, not a network: its Adam
+    # step size is sized so a sign can flip within the 200-update gate.
+    opt = recipe.make_generator_optimizer(params, lr=SCALAR_GAIN_LR)
+    opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+    rates = [[group["lr"] for group in o.param_groups] for o in (opt, opt_d)]
+    return recipe, opt, opt_d, recipe.make_critic_penalty(opt_d), rates
 
 
 def _states(generator, rows):
@@ -131,27 +142,26 @@ def _policy_metrics(alpha):
 
 
 def train_collapsed(steps=200):
-    """Joint RpGAN + b_cap. The flipped sign matches the joint law."""
+    """Joint RpGAN + recipe penalty. The flipped sign matches the joint law."""
     torch.manual_seed(SEED)
     alpha = nn.Parameter(torch.tensor(-1.0))
     beta = nn.Parameter(torch.tensor(-1.0))
     critic = _Critic(6)
-    cap = _cap()
-    opt = torch.optim.SGD((alpha, beta), lr=0.05)
-    opt_d = torch.optim.Adam(critic.parameters(), lr=1e-3, betas=(0.0, 0.999))
+    recipe, opt, opt_d, cap, rates = _game((alpha, beta), critic, steps)
     generator = torch.Generator().manual_seed(SEED + 2)
     applications = 0
     for step in range(1, steps + 1):
+        scale_learning_rates(step - 1, recipe, (opt, opt_d), rates)
         state = _states(generator, 64)
         target = expert_action(state)
         fake = torch.cat([beta * state, (alpha * target).clamp(-1, 1)], 1)
         real = torch.cat([state, target], 1)
-        penalty = cap(critic, real.detach(), fake.detach(), step=step)
+        penalty = cap(critic, real.detach(), fake.detach())
         loss_d = rp_d_loss(critic(real), critic(fake.detach())) + penalty
         opt_d.zero_grad()
         loss_d.backward()
         opt_d.step()
-        applications += int(step % cap.lazy_k == 0)
+        applications += int(penalty.requires_grad)
         fake = torch.cat([beta * state, (alpha * target).clamp(-1, 1)], 1)
         loss_g = rp_g_loss(critic(real).detach(), critic(fake))
         opt.zero_grad()
@@ -159,7 +169,7 @@ def train_collapsed(steps=200):
         opt.step()
     result = _policy_metrics(alpha)
     result.update(arm="collapsed_joint_rpgan", adv_weight=1., accepted=False,
-                  b_cap_applications=applications, beta=float(beta.detach()),
+                  penalty_applications=applications, beta=float(beta.detach()),
                   reason="control_fail")
     return result
 
@@ -181,25 +191,24 @@ def train_supervised(steps=200):
         opt.step()
     result = _policy_metrics(alpha)
     result.update(arm="supervised_only", adv_weight=0., accepted=False,
-                  b_cap_applications=0, gan_grad_abs=0.,
-                  reason="adv_weight=0 leaves RpGAN and b_cap unapplied")
+                  penalty_applications=0, gan_grad_abs=0.,
+                  reason="adv_weight=0 leaves RpGAN and its critic penalty unapplied")
     return result
 
 
 def train_paired(steps=200):
-    """Paired-error RpGAN + b_cap. No action MSE in the controller step."""
+    """Paired-error RpGAN + recipe penalty. No action MSE in the controller step."""
     torch.manual_seed(SEED)
     alpha = nn.Parameter(torch.tensor(-1.0))
     norm = _edit_scale()
     critic = _Critic(2)
-    cap = _cap()
-    opt = torch.optim.SGD((alpha,), lr=0.08)
-    opt_d = torch.optim.Adam(critic.parameters(), lr=1e-3, betas=(0.0, 0.999))
+    recipe, opt, opt_d, cap, rates = _game((alpha,), critic, steps)
     generator = torch.Generator().manual_seed(SEED + 2)
     hold = 1.3 * float(norm.edit_rms)
     applications = 0
     gan_grad_abs = 0.
     for step in range(1, steps + 1):
+        scale_learning_rates(step - 1, recipe, (opt, opt_d), rates)
         state = _states(generator, 64)
         target = expert_action(state)
         pred = (alpha * target).clamp(-1, 1)
@@ -207,12 +216,12 @@ def train_paired(steps=200):
         sigma = noise_std(step - 1, start=norm.noise_start, decay_steps=steps, hold=hold)
         noise = torch.randn(residual.shape, generator=generator) * sigma
         fake = noise + residual
-        penalty = cap(critic, noise.detach(), fake.detach(), step=step)
+        penalty = cap(critic, noise.detach(), fake.detach())
         loss_d = rp_d_loss(critic(noise), critic(fake)) + penalty
         opt_d.zero_grad()
         loss_d.backward()
         opt_d.step()
-        applications += int(step % cap.lazy_k == 0)
+        applications += int(penalty.requires_grad)
         pred = (alpha * target).clamp(-1, 1)
         residual = (pred - target) / norm.target_std
         noise = torch.randn(residual.shape, generator=generator) * sigma
@@ -222,9 +231,9 @@ def train_paired(steps=200):
         gan_grad_abs += abs(float(alpha.grad.detach()))
         opt.step()
     result = _policy_metrics(alpha)
-    result.update(arm="paired_rpgan_bcap", adv_weight=1., accepted=True,
-                  b_cap_applications=applications, gan_grad_abs=gan_grad_abs,
-                  reason="controller step is RpGAN weight 1 plus sample-point b_cap")
+    result.update(arm="paired_rpgan_penalty", adv_weight=1., accepted=True,
+                  penalty_applications=applications, gan_grad_abs=gan_grad_abs,
+                  reason="controller step is RpGAN weight 1 plus the recipe critic penalty")
     return result
 
 
@@ -237,11 +246,11 @@ def run_gate():
     collapsed_fail = (collapsed["landings"] <= COLLAPSED_LAND_MAX
                       and collapsed["rel_l2"] >= COLLAPSED_REL_MIN
                       and collapsed["alpha"] < 0
-                      and collapsed["b_cap_applications"] > 0)
+                      and collapsed["penalty_applications"] > 0)
     supervised_rejected = supervised["adv_weight"] == 0 and supervised["accepted"] is False
     paired_pass = (paired["landings"] >= FIXED_LAND_MIN and paired["rel_l2"] <= FIXED_REL_MAX
                    and paired["alpha"] > 0.5 and paired["adv_weight"] == 1.
-                   and paired["gan_grad_abs"] > 0. and paired["b_cap_applications"] > 0
+                   and paired["gan_grad_abs"] > 0. and paired["penalty_applications"] > 0
                    and paired["accepted"] is True)
     return dict(passed=bool(collapsed_fail and supervised_rejected and paired_pass),
                 collapsed=collapsed, supervised=supervised, paired=paired, mapping=MAPPING,
@@ -256,7 +265,7 @@ def format_report(result):
         lines.append(
             f"[yue2-2d] {arm['arm']} landings={arm['landings']:.3f} rel_l2={arm['rel_l2']:.3f} "
             f"alpha={arm['alpha']:.3f} adv_weight={arm['adv_weight']} "
-            f"b_cap_applications={arm['b_cap_applications']} accepted={arm['accepted']} "
+            f"penalty_applications={arm['penalty_applications']} accepted={arm['accepted']} "
             f"reason={arm['reason']}")
     lines.append("[yue2-2d] mapping")
     for row in result["mapping"]:

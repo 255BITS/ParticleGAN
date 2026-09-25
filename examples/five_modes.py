@@ -19,9 +19,10 @@ the problem they are pointed at:
     plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
     the 100gaussians recipe's penalty on grad_x D(x).
-  - Adam beta1=0 (the particle table is an embedding-like parameter: momentum
-    drifts rows that were not sampled), base LR 6e-4, D at 1.5x, particles at
-    10x.
+  - recipe.make_optimizers(G, D, prior, encoder=E, ...): Adam beta1=0 (the
+    particle table is an embedding-like parameter: momentum drifts rows that
+    were not sampled), base LR 6e-4, D at 1.5x, particles at the recipe's
+    prior multiplier.
   - EMA (0.995) copies of E, G and the prior, used for every dashboard frame:
     the live weights orbit the equilibrium, the averaged copy sits on it.
   - Delayed cosine LR anneal: full LR for the first 60% of the run, then cosine
@@ -175,13 +176,10 @@ def train(
     d_lr_mult: float = 1.5,
     beta1: float = 0.0,
     lambda_ep: float = 1.0,
-    reg_arm: str = "k3p",
     reg_coeff: float = 1.0,
     ema_decay: float = 0.995,
     lr_floor: float = 0.05,
     lr_anneal_start: float = 0.6,
-    loss_type: str = "logistic",
-    gan_mode: str = "rp",
     viz_interval: int = 50,
     frame_interval: int = 200,
     log_interval: int = 500,
@@ -211,7 +209,7 @@ def train(
     recipe = get_recipe(
         num_particles=NUM_PARTICLES, z_dim=Z_DIM, batch_size=batch_size,
         total_steps=total_steps, lr=lr, d_lr_mult=d_lr_mult, betas=(beta1, 0.999),
-        loss_type=loss_type, gan_mode=gan_mode, reg_arm=reg_arm, reg_coeff=reg_coeff,
+        reg_coeff=reg_coeff,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
         # This example anneals G/D over the whole run (not the 1,600-update
@@ -231,15 +229,12 @@ def train(
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
     gan_loss = recipe.make_loss()
 
-    # Optimizers
-    # The particles get their own optimizer at 10x LR: they are an
-    # embedding-like table and want far more mobility than the dense nets.
-    # The critic optimizer's step() also updates the EMA critic we allocate here.
-    opt_GE, opt_D = recipe.make_optimizers(nn.ModuleList([E, G]), D, ema_critic=copy.deepcopy(D))
-    opt_prior = torch.optim.Adam(prior.parameters(),
-                                 lr=recipe.lr * recipe.prior_lr_mult, betas=recipe.betas)
+    # Optimizers: [E+G, particle table] groups (the table at the recipe's
+    # prior LR multiplier) and the critic. Their step() does the recipe's
+    # step-time work; the critic's also updates the EMA critic we allocate here.
+    opt_GE, opt_D = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
 
-    optimizers = (opt_GE, opt_prior, opt_D)
+    optimizers = (opt_GE, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     # K3P gradient penalty (the default), paired with opt_D (EMA critic, LR record).
     penalty = recipe.make_critic_penalty(opt_D)
@@ -288,7 +283,6 @@ def train(
 
         # --- TRAIN GE (and Prior) ---
         opt_GE.zero_grad()
-        opt_prior.zero_grad()
 
         # Encoder side of the pair: E wants the real pair to score *low*.
         z_enc = E(x_real)
@@ -309,7 +303,6 @@ def train(
         loss_ge = loss_ge_gan + lambda_ep * loss_vic
         loss_ge.backward()
         opt_GE.step()
-        opt_prior.step()
 
         # EMA update
         with torch.no_grad():

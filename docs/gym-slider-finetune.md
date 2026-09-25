@@ -20,7 +20,7 @@ error = (scaler.action(at_hat) - y_action) / S
 real_R = sigma * epsilon
 fake_R = same sigma * epsilon + error
 
-L_R = mean softplus(R(fake_R) - R(real_R)) + lazy cap on those noise coordinates
+L_R = mean softplus(R(fake_R) - R(real_R)) + recipe critic penalty on those noise coordinates
 L_GE = mean softplus(R(real_R) - R(fake_R))
 ```
 
@@ -34,9 +34,10 @@ follows the slider geometric schedule with absolute hold 1.0 on this run's
 update budget. Real and fake inside a pair share noise. The critic update and
 the control update draw independent noise and independent minibatches.
 
-The cap is the slider game's one-sided `b_cap` (threshold 1, coefficient 1)
-applied to `R`'s 2-d noise coordinates every fourth update, with lazy multiplier
-4. It is not a penalty on lander states, actions, or transition samples.
+`R` trains with the recipe's critic optimizer and critic penalty
+(`recipe.make_critic_optimizer`, `recipe.make_critic_penalty`) on its 2-d noise
+coordinates; `E_control` and `G2` use `recipe.make_generator_optimizer`. The
+penalty is not applied to lander states, actions, or transition samples.
 
 Action MSE is computed under `no_grad` and written to the log as `action_mse`.
 It is not added to `L_GE`. State coordinates of the decoded view receive no

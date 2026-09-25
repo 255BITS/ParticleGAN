@@ -254,7 +254,7 @@ def train(cfg):
         if prior is not None:
             groups.append(dict(params=list(prior.parameters()), lr=recipe.lr * recipe.prior_lr_mult,
                                betas=recipe.prior_betas or recipe.betas))
-        opt_g = torch.optim.Adam(groups, lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
+        opt_g = recipe.make_generator_optimizer(groups, **(dict(fused=True) if device.type == "cuda" else {}))
         opt_d = None
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]

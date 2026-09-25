@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+- **Every repository trainer uses the default formulation.** Examples,
+  experiments and `lib/` trainers build their optimizers and critic penalties
+  only through `recipe.make_optimizers` / `make_critic_optimizer` /
+  `make_generator_optimizer` / `make_critic_penalty`, on the recipe's LR
+  schedule (`scale_learning_rates`). Removed the pinned
+  `GradientPenalty(arm="b_cap", lazy_k=4)` critics (MoG AE/VAE, CIFAR particle
+  AE/DDGAN, gym slider/particle fine-tunes, YuE2 and safe-fast 2D gates), the
+  gym fine-tune `adv_posture` (`yue2` / `locked_shared`) and its
+  `locked_shared.yaml`, the `--reg_arm`/`--r1_gamma`/`--loss_type`/`--gan_mode`
+  menu of `examples/100gaussians.py`, the `reg_arm` key of the config-driven
+  trainers (CIFAR DDGAN, denoising, 100-Gaussian runner, sparse; stripped from
+  their launch configs; the finite-difference speed configs are deleted), and
+  the hand-built Adam optimizers for G/E/prior/critics. Image-scale trainers
+  keep a lazy penalty (`reg_every=4`; laziness changes only frequency and
+  coefficient) and a full-budget network LR horizon as recipe fields. Frozen
+  bundles under `reports/` and the `benchmarks/` research harnesses are
+  unchanged.
 - **Familiar GAN loop: the recipe's optimizers do the step-time work.** The
   loop is plain PyTorch — `d_loss = adv + penalty(D, real, fake)`, then
   `opt_d.zero_grad(); d_loss.backward(); opt_d.step()` and the same for

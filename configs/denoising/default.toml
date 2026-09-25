@@ -27,7 +27,6 @@ beta1 = 0.0
 beta2 = 0.999
 prior_reg = 0.0
 noise_reg = 0.0
-reg_arm = "k3p"
 reg_coeff = 1.0
 reg_kappa = 1.0
 reg_method = "autograd"

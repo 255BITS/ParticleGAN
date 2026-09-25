@@ -106,11 +106,11 @@ def train(cfg):
     recipe = training_recipe(cfg)
     opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
         encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
-    opt_r = torch.optim.Adam(bundle['R'].parameters(), lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas, fused=device.type == 'cuda')
+    opt_r = recipe.make_critic_optimizer(bundle['R'], ema_critic=copy.deepcopy(bundle['R']), fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d, opt_r)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
-    capper = recipe.make_gradient_penalty(arm='b_cap', lazy_k=4, coeff=1., kappa=1., norm='l2', method='autograd')
+    r_penalty = recipe.make_critic_penalty(opt_r)
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)
            for k,offset in dict(data=11, d_data=31, latent=51, contact=61, d_latent=71, d_contact=81, error_noise=151, d_error_noise=161).items()}
@@ -162,7 +162,7 @@ def train(cfg):
                 reg=penalties)
             if not torch.isfinite(dl):
                 raise FloatingPointError(f'Nonfinite D loss at {step}')
-            rl, rt = error_loss(bundle['R'], d_decoded, real_record(bundle, db), step, rng['d_error_noise'], capper=capper)
+            rl, rt = error_loss(bundle['R'], d_decoded, real_record(bundle, db), step, rng['d_error_noise'], penalty=r_penalty)
             if not torch.isfinite(rl):
                 raise FloatingPointError(f'Nonfinite paired-error D loss at {step}')
             opt_r.zero_grad(set_to_none=True)

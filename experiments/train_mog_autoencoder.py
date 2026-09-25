@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Fixed-sigma particle routing scout; one seed, mechanism ablations only."""
 import argparse
+import copy
 import hashlib
 import json
 import math
@@ -15,7 +16,7 @@ from torch import nn
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from particlegan import calibrate_mog_sigma, GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
+from particlegan import calibrate_mog_sigma, get_recipe, MoGParticlePrior, ParticleRegularizer, scale_learning_rates
 from lib.mog_metrics import component_metrics, geometry, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
@@ -198,20 +199,19 @@ def train(arm, cfg):
     prior = prior.to(device)
     e = RoutingEncoder(cfg.width).to(device)
     initial_sigma = prior.sigma.detach().clone()
-    opt_g = torch.optim.Adam([
-        {"params": g.parameters(), "lr": .0006},
-        {"params": e.parameters(), "lr": .0006},
-        {"params": prior.parameters(), "lr": .006, "betas": (.5, .999)},
-    ], betas=(0., .999))
-    opt_d = torch.optim.Adam(d.parameters(), lr=.0009, betas=(0., .999))
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(arm="b_cap", lazy_k=4), ParticleRegularizer()
+    # The default recipe at this scout's small-batch learning rates.
+    recipe = get_recipe("ae_gan", batch_size=cfg.batch_size, total_steps=cfg.steps,
+                        lr=.0006, d_lr_mult=1.5, prior_lr_mult=10.)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
+    base_lrs = [[group["lr"] for group in o.param_groups] for o in (opt_g, opt_d)]
+    adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(opt_d), ParticleRegularizer()
     data_rng = draw_rng(device, cfg.seed + 2)
     prior_rng = draw_rng(device, cfg.seed + 3)
     offset_rng = draw_rng(device, cfg.seed + 4)
     metadata = {k: str(v) if isinstance(v, Path) else v for k, v in vars(cfg).items()}
     metadata.update(arm=arm, sigma=float(prior.sigma), num_particles=400, z_dim=2,
                     lr_g=.0006, lr_e=.0006, lr_d=.0009, lr_prior=.006,
-                    gradient_penalty_every=4, sigma_rel=.025, torch=torch.__version__,
+                    recipe=recipe.to_dict(), sigma_rel=.025, torch=torch.__version__,
                     git_head=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
                     source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     initialization_sha256=hashlib.sha256(b"".join(t.detach().cpu().numpy().tobytes() for m in (g,d,prior,e) for t in m.parameters())).hexdigest())
@@ -227,13 +227,14 @@ def train(arm, cfg):
             torch.cuda.synchronize(device)
         started = time.perf_counter()
         for step in range(1, cfg.steps + 1):
+            scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
             real = sample_100gaussians(cfg.batch_size, device, generator=data_rng)
             d.requires_grad_(True)
             opt_d.zero_grad(set_to_none=True)
             with torch.no_grad():
                 z, _ = prior.sample(cfg.batch_size, generator=prior_rng)
                 fake = g(z)
-            dl = adversarial.d_loss(d(real), d(fake)) + penalty(d, real, fake, step)
+            dl = adversarial.d_loss(d(real), d(fake)) + penalty(d, real, fake)
             dl.backward()
             opt_d.step()
             d.requires_grad_(False)

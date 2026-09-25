@@ -22,7 +22,7 @@ from lib.gym_control import build_expert_records
 from lib.gym_state_control import (MODULE_KEYS, build_state_models, parameter_hashes,
     task_losses, training_recipe)
 from lib.gym_transition import GymTransitionScaler
-from particlegan import learning_rate_scale
+from particlegan import scale_learning_rates
 
 DEFAULTS = dict(arm="probes", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24003, device="cuda:1", z_dim=32, num_particles=1024,
@@ -109,8 +109,8 @@ def train(cfg):
     groups = [dict(params=list(bundle["G"].parameters()) + list(bundle["E"].parameters()), lr=recipe.lr),
               dict(params=list(bundle["prior"].parameters()), lr=recipe.lr * recipe.prior_lr_mult,
                    betas=recipe.prior_betas or recipe.betas)]
-    optimizer = torch.optim.Adam(groups, lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
-    base_rates = [g["lr"] for g in optimizer.param_groups]
+    optimizer = recipe.make_generator_optimizer(groups, **(dict(fused=True) if device.type == "cuda" else {}))
+    base_rates = [[g["lr"] for g in optimizer.param_groups]]
     prior_regularizer = recipe.make_prior_regularizer()
     ema = {**bundle, **{key: copy.deepcopy(bundle[key]).eval().requires_grad_(False) for key in MODULE_KEYS}}
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
@@ -150,9 +150,7 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for group, rate in zip(optimizer.param_groups, base_rates):
-                group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, [optimizer], base_rates, bundle["prior"])
             ids = torch.randint(len(records["states"]), (cfg["batch_size"],), device=device, generator=data_rng)
             draws_digest.update(ids.cpu().numpy().tobytes())
             task, terms, _ = task_losses(bundle, **{k: v[ids] for k, v in values.items()})

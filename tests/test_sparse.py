@@ -20,6 +20,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from experiments import analyze_sparse
 from experiments.train_sparse import DEFAULTS, train
 from lib.grad_regularizers import GradRegularizer
+from particlegan import get_recipe
+from particlegan.k3p import CriticPenalty
 from lib.sparse_metrics import particle_class_purity
 from lib.sparse_models import JointCritic, SparseCondGenerator, XOnlyCritic
 from lib.sparse_toy import SparseMixedToy
@@ -151,21 +153,21 @@ class SparseRegressionTests(unittest.TestCase):
                "d": 6, "k": 2, "n_modes": 8, "n_classes": 2, "n_symbols": 2,
                "hidden": 16, "n_hidden": 2, "z_dim": 4, "num_particles": 16,
                "emb_dim": 4, "prior_partition": "none", "real_head": "gated",
-               "gate_start_frac": 0.4, "fourier": 1,
-               "arm": "g_interp_cap", "gp_on_y": False}
-        original_penalty = GradRegularizer.penalty
+               "gate_start_frac": 0.4, "fourier": 1, "gp_on_y": False}
+        original_penalty = CriticPenalty.__call__
         penalty_calls = []
 
-        def check_penalty(reg, critic, real, fake, step):
+        def check_penalty(penalty, critic, real, fake):
             self.assertFalse(critic.grad_on_y)
+            self.assertEqual(penalty.regularizer.arm, get_recipe().reg_arm)
             self.assertEqual(real.shape, (cfg["batch_size"], cfg["d"] + cfg["n_symbols"]))
             self.assertFalse(torch.equal(real, fake))
-            penalty_calls.append(step)
-            return original_penalty(reg, critic, real, fake, step)
+            penalty_calls.append(penalty.optimizer.record.observed_steps)
+            return original_penalty(penalty, critic, real, fake)
 
         with tempfile.TemporaryDirectory() as directory:
             cfg["out_dir"] = directory
-            with patch.object(GradRegularizer, "penalty", check_penalty), redirect_stdout(io.StringIO()):
+            with patch.object(CriticPenalty, "__call__", check_penalty), redirect_stdout(io.StringIO()):
                 summary = train(cfg, torch.device("cpu"))
             self.assertEqual(penalty_calls, list(range(cfg["total_steps"])))
             self.assertEqual(summary["implementation_versions"], {"x_only_gp": 2, "particle_class_purity": 2})

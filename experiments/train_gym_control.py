@@ -107,8 +107,8 @@ def train(cfg):
         opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=torch.nn.ModuleList([e, ec]),
             ema_critic=copy.deepcopy(d), fused=device.type == "cuda")
     else:
-        opt_g = torch.optim.Adam(list(ec.parameters()) + list(g.branches[1].parameters()),
-            lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
+        opt_g = recipe.make_generator_optimizer(list(ec.parameters()) + list(g.branches[1].parameters()),
+            **(dict(fused=True) if device.type == "cuda" else {}))
         opt_d = None
     optimizers = [opt_g] + ([] if opt_d is None else [opt_d])
     base_rates = [[p["lr"] for p in opt.param_groups] for opt in optimizers]

@@ -1,4 +1,6 @@
 """Installed-package smoke example; one caller-owned step for AE and VAE."""
+import copy
+
 import torch
 from torch import nn
 from particlegan import get_recipe
@@ -9,7 +11,8 @@ def main():
         recipe = get_recipe(name, num_particles=16, z_dim=2)
         prior = recipe.make_prior()
         encoder, decoder, critic = nn.Linear(2, 4), nn.Linear(2, 2), nn.Linear(2, 1)
-        opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
+        opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder,
+                                              ema_critic=copy.deepcopy(critic))
         x = torch.randn(8, 2)
         query, offset = encoder(x).chunk(2, dim=1)
         encoded = recipe.encode(query, prior, offset=offset if recipe.encoder_mode == 'ae' else None)
