@@ -293,6 +293,8 @@ def main():
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--training-api", action="store_true", help="Benchmark the public GANTrainer on the same reference task.")
     args = parser.parse_args()
+    from benchmarks.toy100.device import apply_device_policy
+    apply_device_policy(args.device, log=True)
     report = run(args.output, torch.device(args.device), training_api=args.training_api)
     return 0 if all(row.get("finished") for row in report["rows"]) else 1
 

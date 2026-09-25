@@ -8,6 +8,8 @@ import time
 import torch
 from particlegan import learning_rate_scale
 
+from benchmarks.toy100.device import rng_fork_devices
+
 _active = ContextVar("behavior_observer", default=None)
 OBSERVATIONS = 24
 MIN_STABLE_CHECKS = 5
@@ -63,7 +65,7 @@ class Recorder:
         if step not in self.steps:
             return
         # Some host evaluators consume the global RNG. Preserve its exact state.
-        with torch.random.fork_rng(devices=[]):
+        with torch.random.fork_rng(devices=rng_fork_devices()):
             values = measure()
         self.curve.append({**values, "step": step, "seconds": time.monotonic() - self.started})
 

@@ -641,6 +641,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     An existing empty output directory is accepted. Any earlier run evidence
     causes an error, so a failed or partial run cannot silently be overwritten.
     """
+    from .device import configure_cuda_determinism, prepare_cublas_workspace
+
+    # Set before resolve_config, which calls torch.cuda.is_available().
+    if isinstance(config, Mapping):
+        prepare_cublas_workspace(None if config.get("device") is None else str(config.get("device")))
     resolved, recipe = resolve_config(config)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -649,7 +654,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     (out_dir / "snapshots").mkdir(exist_ok=True)
     torch.set_num_threads(resolved["threads"])
     if torch.device(resolved["device"]).type == "cuda":
-        torch.backends.cuda.matmul.allow_tf32 = False
+        configure_cuda_determinism(torch.device(resolved["device"]))
     _write_json(out_dir / "config.json", resolved)
     policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved
                       or "network_lr_floor" in resolved or "output_noise_rng" in resolved)

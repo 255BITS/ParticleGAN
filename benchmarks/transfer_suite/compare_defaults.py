@@ -266,5 +266,8 @@ if __name__ == '__main__':
     parser.add_argument('--arm', required=True, choices=RECIPES)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--tasks', nargs='+')
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(args.arm, args.output, args.tasks)

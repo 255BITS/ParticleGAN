@@ -14,7 +14,7 @@ Adam moments, EMA, and random streams continue without reconstruction.
 
 Example::
 
-    python -u -m benchmarks.toy100.continuous_probe --mode constant \
+    python -u -m benchmarks.toy100.continuous_probe --device auto --mode constant \
         --steps 2400 --diagnostic-every 10 --output /tmp/hold.json
     python -u -m benchmarks.toy100.continuous_probe --mode constant \
         --steps 3600 --shift-step 2400 --output /tmp/frozen.json \
@@ -47,6 +47,7 @@ from benchmarks.transfer_suite import suite, vector_tasks
 from benchmarks.transfer_suite.compare_defaults import candidate, optimizer_defaults
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 from benchmarks.transfer_suite.protocol import required_tasks, test_verdict
+from benchmarks.toy100.device import add_device_argument, apply_device_policy, host_device, rng_fork_devices
 from benchmarks.transfer_suite.toy100_compatibility import declared_recipe
 
 
@@ -85,7 +86,7 @@ def _provenance() -> dict:
                      machine=platform.machine(),
                      processor=platform.processor(),
                      threads=torch.get_num_threads(),
-                     device="cpu"),
+                     device=str(host_device())),
     )
 
 
@@ -240,7 +241,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
         if (step % diagnostic_every == 0 or step == shift_step
                 or (dense_after is not None and step > dense_after
                     and (dense_until is None or step <= dense_until))):
-            with torch.random.fork_rng(devices=[]):
+            with torch.random.fork_rng(devices=rng_fork_devices()):
                 measured = measure()
                 point = {"step": step, **{key: measured[key] for key in
                          ("modes", "hq", "effective_modes", "hq_counts")}}
@@ -253,7 +254,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
             before = diagnostic[-1]
             with torch.no_grad():
                 ring.add_(torch.tensor(shift, dtype=ring.dtype, device=ring.device))
-            with torch.random.fork_rng(devices=[]):
+            with torch.random.fork_rng(devices=rng_fork_devices()):
                 measured = measure()
                 after = {"step": step, **{key: measured[key] for key in
                          ("modes", "hq", "effective_modes", "hq_counts")}}
@@ -533,8 +534,10 @@ def main() -> None:
                         help="matched frozen evidence required to confirm adaptation")
     parser.add_argument("--archive-sources", type=Path,
                         help="directory for the standard transfer-suite source archive")
+    add_device_argument(parser)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
     def log(row):

@@ -26,6 +26,8 @@ import traceback
 
 import torch
 
+from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator, rng_fork_devices
+
 
 ROOT = Path(__file__).resolve().parents[2]
 PROFILE_PATH = ROOT / 'reports/transfer_suite/unadjusted/leading_profile.json'
@@ -277,7 +279,7 @@ def run_vector(spec, card, base, *, max_steps=None):
             raise FloatingPointError('nonfinite public trainer loss')
         actions.append(rate_action(trainer, completed))
         if completed in expected:
-            with torch.no_grad(), torch.random.fork_rng(devices=[]):
+            with torch.no_grad(), torch.random.fork_rng(devices=rng_fork_devices()):
                 def measure(model, prior):
                     latent = prior.sample(vector_tasks.EVAL_SAMPLES,
                                           generator=torch.Generator().manual_seed(990))[0]
@@ -311,7 +313,7 @@ def setup_image(spec, base):
     # Frozen image host constructs G and D before a global-RNG prior draw.
     generator, discriminator = image_tasks.Generator(spec), image_tasks.Discriminator(spec)
     prior = recipe.make_prior()
-    global_stream = torch.default_generator
+    global_stream = experiment_generator()
     trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                                   latent_generator=global_stream,
                                   penalty_generator=global_stream)
@@ -479,5 +481,7 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--tasks', nargs='+')
     parser.add_argument('--require-installed-root', type=Path)
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run(args.output, tasks=args.tasks, require_installed_root=args.require_installed_root)

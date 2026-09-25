@@ -238,7 +238,10 @@ def main():
     parser.add_argument("--generations", type=int, default=3)
     parser.add_argument("--population", type=int, default=12)
     parser.add_argument("--evaluate", action="store_true")
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     evaluate(args.output) if args.evaluate else search(args.output, args.generations, args.population)
 
 

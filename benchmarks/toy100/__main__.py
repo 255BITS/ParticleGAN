@@ -34,7 +34,8 @@ def _parser():
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
-    run.add_argument("--device", help="override device from the config")
+    run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
+                     help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
@@ -49,11 +50,17 @@ def _parser():
 
 
 def _run(args):
+    from .device import apply_device_policy, host_device
+
+    device_override = args.device
+    if device_override is not None:
+        apply_device_policy(device_override, log=True)
+        device_override = str(host_device())
     config_bytes = args.config.read_bytes()
     manifest = load_config(args.config)
     # Preflight every declared problem, even for an individual deep dive. An
     # invalid hidden override cannot be ignored just because it was unselected.
-    configs = {name: resolve_problem_config(manifest, name, steps=args.steps, device=args.device)
+    configs = {name: resolve_problem_config(manifest, name, steps=args.steps, device=device_override)
                for name in PROBLEM_NAMES}
     policy_source_hashes = None
     policy_source_receipt = None
@@ -72,7 +79,7 @@ def _run(args):
                    "config_sha256": hashlib.sha256(config_bytes).hexdigest(),
                    "config_contents": config_bytes.decode("utf-8"),
                    "declared_manifest": manifest, "resolved_problem_configs": configs,
-                   "command_overrides": {"steps": args.steps, "device": args.device},
+                   "command_overrides": {"steps": args.steps, "device": device_override},
                    "selected_problems": names}
     if policy_source_hashes is not None:
         declaration["policy_source_sha256"] = policy_source_hashes

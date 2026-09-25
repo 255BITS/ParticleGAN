@@ -234,7 +234,10 @@ def main():
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--cards',type=Path)
     parser.add_argument('--controls',action='store_true')
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args=parser.parse_args()
+    apply_device_policy(args.device, log=True)
     cards=json.loads(args.cards.read_text()) if args.cards else CARDS
     run(args.output,cards,controls=args.controls)
 

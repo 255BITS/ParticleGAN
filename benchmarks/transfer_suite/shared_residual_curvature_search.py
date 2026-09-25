@@ -21,4 +21,8 @@ def run(declaration,output):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--plan',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args();run(json.loads(a.plan.read_text()),a.output)
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(p)
+    a=p.parse_args()
+    apply_device_policy(a.device, log=True)
+    run(json.loads(a.plan.read_text()),a.output)

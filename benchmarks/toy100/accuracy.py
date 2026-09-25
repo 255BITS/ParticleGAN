@@ -213,6 +213,8 @@ def oracle_reference(
     """Calibrate finite-sample errors using independent target-sampler draws."""
     if repetitions < 1 or n < 1:
         raise ValueError("n and repetitions must be positive")
+    # CPU on purpose: the published target-sampler calibration. CUDA would draw
+    # a different sequence, not the same samples on another device.
     rng = torch.Generator(device="cpu").manual_seed(seed)
     rows = [
         fidelity_metrics(sample_real(problem_name, n, generator=rng), problem_name)

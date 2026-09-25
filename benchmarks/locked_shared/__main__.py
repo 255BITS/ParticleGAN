@@ -19,7 +19,10 @@ def main():
     parser.add_argument("--reference", type=Path, help=f"conceptmod checkout at {COMMIT}")
     parser.add_argument("--output", type=Path, default=Path("reports/locked_shared"))
     parser.add_argument("--reference-wheel", type=Path, help="optional PyPI particlegan 0.5.0 wheel to compare primitive sources")
+    from benchmarks.toy100.device import add_device_argument, apply_device_policy
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     report = {"python": platform.python_version(), "torch": torch.__version__,
               "conceptmod_commit": COMMIT,
               "pr36_commit": "eb18bc9ea69b9eb0a42f293c54491e6e06cf627d",

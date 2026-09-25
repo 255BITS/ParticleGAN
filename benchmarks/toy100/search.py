@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from .config import resolve_problem_config
+from .device import add_device_argument, apply_device_policy, host_device
 from .gate import evaluate_suite
 from .problems import PROBLEM_NAMES
 from .train import train
@@ -78,10 +79,11 @@ def main():
     parser.add_argument("--candidates", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--problem", choices=PROBLEM_NAMES, action="append")
-    parser.add_argument("--device")
+    add_device_argument(parser)
     args = parser.parse_args()
+    apply_device_policy(args.device, log=True)
     run_search(json.loads(args.base.read_text()), json.loads(args.candidates.read_text()),
-               args.output, problems=tuple(args.problem or PROBLEM_NAMES), device=args.device)
+               args.output, problems=tuple(args.problem or PROBLEM_NAMES), device=str(host_device()))
 
 
 if __name__ == "__main__":
