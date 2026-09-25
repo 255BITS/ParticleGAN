@@ -25,23 +25,76 @@ The change is `latent.py` only; `config.json`, `mechanism.py` and `response.py` 
 byte-identical to direct-particle-base. A sparse registered ParticlePrior row scales its
 update by agreement with that row's last observed gradient, u = (.75 + .25*cos(g,h)) * g
 bounded in [g/2, g], inactive rows motionless, scoped to tables with a missing row and a
-cumulative observation rate below one half.
-
-| Evidence | Measured, CUDA, single seed |
-|---|---|
-| 22-toy suite | 19 PASS; grid100 FAIL; rotated100 and staggered100 not run in the marked lineage |
-| Replication | 19/22 independently re-earned in six attempt lineages across three lanes |
-| Own-state continuation | 7/8 PASS; `vector_unequal_mass` FAIL, and 2 PASS / 1 FAIL across lineages |
-| unequal width | covariance .0590 against a .85 maximum |
-| grid100 distance to pass | center_rms_sigma .2814 against .20; precision .9668 against .97 |
-
-Two unresolved items keep it a mark rather than a promotion. A qualification attempt ran a
-no-op latent control with the same driver and fixed draws: the control reached 100/100
-modes on grid100 where a2 reached 17/100, attributing that collapse to the latent rule,
-while a different lineage of the same candidate reached 100/100 at .9674 precision. The
-same attempt found rotated100 and staggered100 fail for the base control too, so those are
-inherited rather than caused. Marked lineage:
+cumulative observation rate below one half. Marked lineage:
 `gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991`.
+
+| Evidence | Measured, CUDA |
+|---|---|
+| 22-toy suite | 19 PASS, three native problems failing or unrun |
+| Replication | 19/22 independently re-earned in six attempt lineages across three lanes |
+| Own-state continuation | 7/8 PASS; `vector_unequal_mass` FAIL, 2 PASS / 1 FAIL across lineages |
+| unequal width | covariance .0590 against a .85 maximum |
+
+An earlier version of this entry gave a grid100 collapse, and a no-op latent control that
+reached 100/100 modes where a2 reached 17/100, as reasons against promotion. **That
+attribution is withdrawn.** See the next section: both were single runs of a bistable gate.
+
+## Native results are bistable: single-run attributions are void
+
+Four seeds per arm on grid100, identical code, driver and device, only the config seed
+differing. Full gate needs coverage and accuracy, both sustained over five terminal checks.
+
+| Arm | final modes by seed | acquired 100 | full gate PASS |
+|---|---|---:|---:|
+| a2_bounded_damp, `reg_arm: a_r1r2` | 17, 100, 33, 100 | 2/4 | 0/4 |
+| no-op latent control, `a_r1r2` | 100, 17, 17, 28 | 1/4 | 0/4 |
+| no-op latent control, `b_cap` | 100, 100, 61, 70 | 2/4 | **2/4** |
+| a2_bounded_damp, `b_cap` | — | — | 1/4 |
+
+Acquisition is decided in one window near steps 500 to 750: a run either reaches 100 modes
+there or stalls near 17 for the remaining 6250 steps. Seed 1234, the seed every earlier
+single-run conclusion used, is the one where the `a_r1r2` control acquires and a2 does not;
+seed 1235 reverses it. **Any native claim from one run, for or against a mechanism, is not
+evidence.** Native results now require an acquisition rate over at least four declared seeds.
+
+## `reg_arm` decides native precision; the latent rule does not
+
+Of the runs that acquired all 100 modes, terminal live precision against the .97 floor:
+
+| Arm | precision when acquired | center_rms_sigma vs .20 |
+|---|---|---|
+| `a_r1r2` | .9587, .9607, .9629 — never reaches .97 | .19 to .23 |
+| `b_cap` | **.9865, .9851** — passes outright | **.1416, .1377** |
+
+a2 against a no-op latent moved precision by .4 points. `reg_arm` moved it by 2.4. Measured
+one config field apart with the same latent rule on the sixteen focused toys, `a_r1r2` scores
+16/16 and `b_cap` 12/15, losing `vector_unequal_mass`, `mode_hold` and `img_stripes2`. Each
+arm wins what the other loses, and `configs/100gaussians/default.toml`, the real target's
+production recipe, uses `b_cap`.
+
+## Learning-rate floors buy plasticity without losing stability
+
+Ring hold to update 2400, then a target shift, with a matched frozen control. One run per
+setting, so this needs seeds before it is load-bearing.
+
+| floors network/prior | post-convergence hold | re-acquires after the shift | 16 focused toys |
+|---|---|---|---:|
+| .01/.05 (current base) | 1200/1200 | **never, 0/81 checks** | — |
+| **.1/.1** | **1200/1200** | **yes, 110 updates, 81/81** | **16/16** |
+| .3/.3 | 1200/1200 | partial, 68/81 | 16/16 |
+| 1/1 (fully constant) | NOT_CONVERGED | — | — |
+
+The current base holds perfectly and can never learn again; fully constant never converges.
+The frozen control passes 0/81 after the shift, so the .1/.1 re-acquisition is real.
+
+## The sparse-latent family is inert where tables are fully observed
+
+On the 12-row `mode_hold` ring, a2 records zero scoped calls and runs bitwise as the parent.
+Ring and hold results therefore cannot credit or blame it, and a latent rule cannot recover
+`mode_hold`. It engages on the natives and the sparse vector hosts, which is where its
+unequal-width result comes from.
+
+Raw results, configs and drivers for every table above: `gan-attempts/session-findings/`.
 
 **Yes, there is a recorded 22/22 PASS.** The original
 `constraints_simple_regularization` recipe still passes when its saved CPU
