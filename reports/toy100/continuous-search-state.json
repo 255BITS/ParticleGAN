@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -22,13 +22,17 @@
   },
   "unverified_candidates": {
     "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
-    "p3_floor_reopen": "Prospective diagnostic screen: hold1200+300, stationary5/5, prehold120/120, FAIL77/81 recovery; noise still scheduled. Not promoted.",
+    "p3_floor_reopen": "Own sensitive gate verification running; hold1200+300, stationary5/5, prehold120/120, FAIL77/81 recovery, scheduled noise. Not promoted.",
     "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted."
   },
   "previous_round": {
-    "proposals": 24,
+    "round": 2,
+    "proposals": 21,
     "qualified_winners": 0,
-    "report": "reports/toy100/continuous-round-1/README.md"
+    "canonical_protocols_complete": 35,
+    "canonical_protocols_incomplete": 3,
+    "canonical_protocols_not_run": 4,
+    "report": "reports/toy100/continuous-round-2/README.md"
   },
   "verification_progress": {
     "observed_utc": "2026-09-25T17:26:12.330092+00:00",
@@ -73,15 +77,34 @@
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
     "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T17:27:58.050716+00:00",
+    "verified_live_utc": "2026-09-25T17:38:22.157392+00:00",
     "verified_live_counts": {
       "codex": 1,
       "grok": 7
     }
   },
   "active_batches": [
-    "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z"
+  ],
+  "completed_rounds": [
+    {
+      "round": 1,
+      "proposals": 24,
+      "qualified_winners": 0,
+      "report": "reports/toy100/continuous-round-1/README.md"
+    },
+    {
+      "round": 2,
+      "proposals": 21,
+      "qualified_winners": 0,
+      "canonical_protocols_complete": 35,
+      "canonical_protocols_incomplete": 3,
+      "canonical_protocols_not_run": 4,
+      "report": "reports/toy100/continuous-round-2/README.md"
+    }
   ]
 }

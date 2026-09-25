@@ -1,9 +1,15 @@
-# Continuous-search round 2: results so far
+# Continuous-search round 2: completed
 
 K3P remains selected; **no new winner qualifies**. A3 verification is complete:
 **4/22 PASS, 18 FAIL, 0 ERROR, 0 NOT_RUN**. Its better partial ring recovery lost
 most original toy gates. All three natives fail coverage AND accuracy at 7000
 updates. The four passes are stripes, anisotropic, overlap and spiral.
+
+Seven search lanes tested **21 new formulations, zero qualified winners**.
+Of42 expected hold/shift protocols,35 completed,3 holds stopped early, and4 were
+not run (AP1/AP2 holds and AT1/AT2 shifts). The three completed passing protocol
+rows are AP3/P2/P3 hold+extension; all19 completed shifts fail. The unchanged A3
+22-toy verification is separate from those new proposals.
 
 | Candidate | Own hold | Extension | Shift pre-hold | Recovery deadline | Own toys |
 |---|---|---|---|---|---|
@@ -46,11 +52,12 @@ NOT_RUN and do not inherit another variant's scores.
 The user reduced concurrent search to **one Codex plus seven Grok**. The extra
 reversible-schedule Codex attempt was stopped after all three candidates failed
 both canonical protocols; its remaining prefix audit was interrupted. Completed
-results are retained. Other round-2 attempts continue, with freed slots used by
+results are retained. All eight round-2 attempts are now terminal; freed slots use
 the [rolling launcher](../continuous-round-3/launch.py). Historical launch receipts
 retain the actual original3+5 allocation.
 
 [Evidence index](evidence.json) preserves completed attempt ledgers and hashed
 compressed raw JSON. Ledger PASS also includes integrity audits; it is not a count
-of qualified formulations. Live attempts are not yet archived. Selected K3P source
-and its original22/22 evidence are unchanged.
+of qualified formulations. Both interrupted deep game-damping prefix audits are
+ERROR/incomplete; those failed candidates receive no horizon qualification from
+them. Selected K3P source and its original22/22 evidence are unchanged.
