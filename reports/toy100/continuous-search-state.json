@@ -2,8 +2,8 @@
   "status": "searching",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
-  "active_round": 2,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z",
+  "active_round": 3,
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -70,6 +70,15 @@
     "max_workers_per_gpu": 4,
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
-    "reason": "User reduced Codex budget; replace two Codex slots with Grok"
-  }
+    "reason": "User reduced Codex budget; replace two Codex slots with Grok",
+    "verified_live_utc": "2026-09-25T17:27:58.050716+00:00",
+    "verified_live_counts": {
+      "codex": 1,
+      "grok": 7
+    }
+  },
+  "active_batches": [
+    "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z"
+  ]
 }
