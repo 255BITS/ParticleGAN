@@ -66,7 +66,9 @@ different from a rule that must know the final training step to become stable.
 1. Run the candidate's own standard hold with its 300-update extension **and**
    the target-shift recovery test. Use the existing drivers and fixed verdicts;
    record both outcomes even if one fails. A passing recovery needs its own
-   matched frozen control. Audit optimizer updates and actual rates after the
+   matched frozen control. The driver returns UNCONFIRMED when all live quality
+   windows pass; immediately run the control to confirm it, rather than waiting
+   for a raw PASS that the live driver cannot produce on its own. Audit optimizer updates and actual rates after the
    shift so stationary output cannot masquerade as active adaptation.
 2. Screen the sensitive transfer problems: mode_hold, unequal mass, unequal
    width and stripes. Only survivors advance through their own full 22 gates,

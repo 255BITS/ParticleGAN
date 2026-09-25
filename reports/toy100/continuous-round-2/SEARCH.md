@@ -24,13 +24,17 @@ For search lanes (the A3 verification exception is assigned explicitly):
    driver, even if one fails. Do not terminate a plateau and call it a complete
    benchmark. Hard time limits and execution failures remain explicit incomplete
    evidence. Retain failures, applied-rate traces and exact source hashes.
-3. A winner must pass the whole raw shift verdict, including acquisition and
-   pre-shift prerequisites, as well as own hold/extension. An 81/81 deadline with
-   failed pre-shift hold does not pass. Rank the conjunction, not a last metric.
-4. Immediately verify a promising winner: matched frozen recovery control,
+3. A provisional winner must pass own hold/extension and every live shift quality
+   flag: stationary.pass_all, continued_hold.pass_all and recovery.deadline_pass
+   with all 81 deadline checks. The frozen driver then returns UNCONFIRMED pending
+   its matched control. This is a trigger for verification, not a failed search.
+   An 81/81 deadline with failed pre-shift hold is still a failure.
+4. Immediately verify that provisional winner: matched frozen recovery control,
    sensitive four gates, then ALL 22 frozen toys at original seeds, budgets and
    thresholds. Native runs are 7000 updates, coverage AND accuracy. The exact same
-   frozen formulation must earn every pass. A failed gate means no promotion.
+   frozen formulation must earn every pass. Confirmed shift status must be PASS;
+   compare exact pre-shift state/RNG/optimizer history and require the no-update
+   control to fail all 81 deadline checks. A failed gate means no promotion.
 5. Audit a substantial identical prefix under two declared horizons, including
    model/optimizer/controller/EMA/RNG state and actual rates/noise. A short prefix
    before either schedule changes is insufficient. Confirm native and transfer
