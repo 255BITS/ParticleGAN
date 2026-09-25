@@ -24,7 +24,7 @@ def test_existing_cifar_configs_resolve_into_recipe(path):
     assert recipe.ema_decay == cfg['ema']
     assert recipe.betas == (cfg['beta1'], .999)
     for key in ('lr', 'd_lr_mult', 'prior_lr_mult', 'prior_reg', 'z_dim', 'num_particles',
-                'loss_type', 'gan_mode', 'reg_arm', 'reg_coeff', 'reg_kappa',
+                'loss_type', 'gan_mode', 'reg_coeff', 'reg_kappa',
                 'reg_every', 'reg_method', 'lr_anneal_start', 'lr_floor'):
         assert getattr(recipe, key) == cfg[key]
     assert isinstance(recipe.make_loss(), GANLoss)

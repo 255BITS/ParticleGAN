@@ -13,7 +13,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import get_recipe
+from particlegan import get_recipe, scale_learning_rates
 
 
 STATE_DIM = 8
@@ -267,15 +267,16 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
         critic = ConditionalCritic(width).to(device)
     train_values = _tensor_records(records, device)
     val_values = _tensor_records(validation, device) if validation is not None else None
-    optimizer_g = torch.optim.Adam(policy.parameters(), lr=3e-4, betas=(.5, .99))
-    # Only loss/cap factories are used, but also disable the unused recipe EMA
-    # setting explicitly so checkpoint metadata cannot suggest averaged weights.
-    recipe = get_recipe(total_steps=steps, batch_size=batch_size, reg_coeff=1., reg_every=4,
-                        ema_decay=0.)
+    # The policy family's rates live on the recipe; ema_decay=0 because this
+    # trainer saves live weights, so checkpoint metadata cannot suggest averaging.
+    recipe = get_recipe(total_steps=steps, batch_size=batch_size, lr=3e-4, d_lr_mult=2 / 3,
+                        betas=(.5, .99), ema_decay=0.)
     gan = recipe.make_loss()
+    optimizer_g = recipe.make_generator_optimizer(policy.parameters())
     # Critic Adam whose step() also runs the recipe's spike guard and EMA-critic update.
-    optimizer_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic), lr=2e-4, betas=(.5, .99))
+    optimizer_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
     penalty = recipe.make_critic_penalty(optimizer_d)
+    base_rates = [[group["lr"] for group in opt.param_groups] for opt in (optimizer_g, optimizer_d)]
     rng = torch.Generator(device=device).manual_seed(seed + 29)
     for step in range(1, warmup_steps + 1):
         batch = _sample(train_values, batch_size, rng)
@@ -288,6 +289,7 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
             _emit(log, f"policy BC step={step}/{warmup_steps} action_mse={loss.item():.5f}")
     before_adversarial = _policy_metrics(policy, world, val_values or train_values)
     for step in range(1, steps + 1):
+        scale_learning_rates(step - 1, recipe, (optimizer_g, optimizer_d), base_rates)
         batch = _sample(train_values, batch_size, rng)
         states, actions, successor = (batch[key] for key in ("states", "actions", "next_states"))
         real = _critic_input(policy, states, actions)
@@ -329,8 +331,10 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
                "warmup_updates": warmup_steps, "rpgan_updates": steps,
                "world_weight": world_weight, "adversarial_weight": adversarial_weight,
                "records": len(records["states"]), "recipe": recipe.to_dict(), "weight_kind": "live",
-               "optimizers": {"generator": {"name": "Adam", "lr": 3e-4, "betas": (.5, .99)},
-                              "discriminator": {"name": "Adam", "lr": 2e-4, "betas": (.5, .99)}},
+               "optimizers": {"generator": {"name": "recipe.make_generator_optimizer", "lr": recipe.lr,
+                                            "betas": recipe.betas},
+                              "discriminator": {"name": "recipe.make_critic_optimizer",
+                                                "lr": recipe.lr * recipe.d_lr_mult, "betas": recipe.betas}},
                "main_deadband": policy.main_deadband,
                "initial_policy": str(initial_policy) if initial_policy is not None else None,
                "world_checkpoint": str(world_checkpoint)}

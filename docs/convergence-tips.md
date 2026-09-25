@@ -193,10 +193,10 @@ LR: the cap damps the game just as well (any sample-point penalty does) but
 leaves D usable slope below the cap, which buys sharper modes at an honest
 core width — 100/100 modes and hq 0.986 at 7k steps, core σ ratio 0.866,
 zero collapses over 5 seeds, bar (100 modes & hq ≥ 0.9) crossed by ~5.5k.
-The R1/R2 penalty of the original campaign is still one flag away
-(`--reg_arm a_r1r2 --reg_coeff 0.02`) and remains the choice when you want
-standing curvature at the endpoint (see the provenance caveat in
-`FINDINGS.md`). The shipped example trains 7k steps with a delayed cosine
+The example now trains the recipe's default critic penalty (K3P, which
+starts as RMS R1 plus a fake-side cap and hands over to one-sided caps with an
+EMA-critic anchor); the per-arm flags were removed with the legacy arms (see
+the provenance caveat in `FINDINGS.md` and git history for the arm study). The shipped example trains 7k steps with a delayed cosine
 anneal for a stable endpoint.
 
 | Ingredient | Value | Why |

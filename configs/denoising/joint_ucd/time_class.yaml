@@ -27,7 +27,6 @@ noise_lr_mult: 1.0
 beta1: 0.0
 prior_reg: 1.0
 noise_reg: 0.0
-reg_arm: b_cap
 reg_coeff: 1.0
 reg_kappa: 1.0
 gan_mode: rp

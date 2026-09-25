@@ -19,10 +19,10 @@ sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
 from experiments.train_gym_transition import parameter_count, sha256, write_json
 from lib.gym_control import build_expert_records
-from lib.gym_slider_finetune import (ERROR_CAP, MODULE_KEYS, action_decoded, assert_finetune_scope,
+from lib.gym_slider_finetune import (MODULE_KEYS, action_decoded, assert_finetune_scope,
     build_error_critic, generator_objective, initialize_finetune)
 from lib.gym_slider_gan import error_loss
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe, scale_learning_rates
 
 DEFAULTS = dict(arm="slider_finetune", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", paired_error_weight=1.,
@@ -105,29 +105,29 @@ def train(cfg):
         absent_losses=["joint GAN", "marginal GAN", "transition-sample gradient penalty",
                        "state MSE", "contact BCE", "prior regularizer", "synthetic cycle"],
         objective="Paired-error critic on the two normalized action coordinates; G/E remove that error",
-        error_cap="b_cap on R noise coordinates only, lazy every 4 updates; not applied to transitions",
+        error_cap="recipe critic penalty (recipe.make_critic_penalty) on R noise coordinates only; not applied to transitions",
         minibatch="Generator draws use seed+11, the imitation fine-tune stream; critic draws use seed+21",
         control_input="Expert previous command in shuffled records; learner previous command at rollout")
     recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
-    opt_g = torch.optim.Adam(list(bundle["E_control"].parameters()) + list(bundle["G"].branches[1].parameters()),
-                             lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
-    opt_r = torch.optim.Adam(bundle["R"].parameters(), lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas,
-                             fused=device.type == "cuda")
+    fused = dict(fused=True) if device.type == "cuda" else {}
+    opt_g = recipe.make_generator_optimizer(
+        list(bundle["E_control"].parameters()) + list(bundle["G"].branches[1].parameters()), **fused)
+    opt_r = recipe.make_critic_optimizer(bundle["R"], ema_critic=copy.deepcopy(bundle["R"]), **fused)
     optimizers = (opt_g, opt_r)
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    capper = recipe.make_gradient_penalty(**ERROR_CAP)
+    penalty = recipe.make_critic_penalty(opt_r)
     ema = {key: copy.deepcopy(bundle[key]).eval().requires_grad_(False) for key in ("G", "E", "prior", "E_control")}
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, error_noise=151, d_error_noise=161).items()}
     write_json(out / "provenance.json", provenance)
     write_json(out / "recipe.json", {**recipe.to_dict(),
-        "penalty_scope": "Stock MoG Adam, EMA, and LR only. b_cap is built as the slider cap on R's noise coordinates with lazy_k 4. Transition D is not optimized."})
+        "penalty_scope": "Recipe optimizers, EMA, and LR schedule. The recipe critic penalty acts on R's noise coordinates. Transition D is not optimized."})
     write_json(out / "error_normalization.json", dict(scope="action", coordinates=2,
         target_mean=bundle["R"].target_mean.cpu().tolist(), scale=bundle["R"].target_std.cpu().tolist(),
         edit_rms=float(bundle["R"].edit_rms), noise_start=bundle["R"].sigma(1), noise_hold=1.,
         noise_floor=0.03, noise_horizon=cfg["steps"], normalization=bundle["R"].normalization,
-        cap=ERROR_CAP))
+        cap=dict(arm=recipe.reg_arm, every=recipe.reg_every)))
     write_json(out / "normalization.json", {key: value.cpu().tolist() for key, value in scaler.state_dict().items()})
     write_json(out / "environment.json", dict(python=sys.version, torch=str(torch.__version__),
         cuda=torch.version.cuda, device=str(device),
@@ -170,17 +170,14 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates)
             critic_ids = batch("d_data")
             bundle["R"].requires_grad_(True)
             with torch.no_grad():
                 decoded_r = action_decoded(bundle, physical[critic_ids, :8], previous[critic_ids],
                                            terrain[critic_ids], normalized[critic_ids])
             critic_loss, critic_terms = error_loss(bundle["R"], decoded_r, normalized[critic_ids], step,
-                                                   rng["d_error_noise"], capper=capper)
+                                                   rng["d_error_noise"], penalty=penalty)
             if not torch.isfinite(critic_loss):
                 raise FloatingPointError(f"Nonfinite error-critic loss at step {step}")
             opt_r.zero_grad(set_to_none=True)
@@ -222,7 +219,7 @@ def train(cfg):
                 sync()
                 segment = time.perf_counter()
         shutil.copyfile(out / f"checkpoint_{cfg['steps']}.pt", out / "final.pt")
-        summary = dict(config=cfg, recipe=recipe.to_dict(), error_cap=ERROR_CAP, provenance=provenance,
+        summary = dict(config=cfg, recipe=recipe.to_dict(), error_cap=dict(arm=recipe.reg_arm, every=recipe.reg_every), provenance=provenance,
             parameters=counts, trainable_parameters=trainable,
             total_trainable_parameters=sum(trainable.values()),
             inference_parameters=parameter_count(bundle["E_control"]) + parameter_count(bundle["G"].branches[1])

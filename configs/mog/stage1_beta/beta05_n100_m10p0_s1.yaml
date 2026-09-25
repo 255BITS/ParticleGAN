@@ -5,7 +5,6 @@ lr: 0.0006
 d_lr_mult: 1.5
 loss_type: logistic
 gan_mode: rp
-reg_arm: b_cap
 reg_coeff: 1.0
 reg_every: 1
 reg_method: autograd

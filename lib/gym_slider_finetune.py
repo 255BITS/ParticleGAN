@@ -16,8 +16,6 @@ from lib.gym_transition import GymTransitionEncoder, GymTransitionScaler
 from experiments.train_gym_transition import build_models
 
 MODULE_KEYS = ("G", "E", "prior", "D", "E_control", "R")
-# Slider game cap: one-sided, on the critic's noise coordinates, every 4th update.
-ERROR_CAP = dict(arm="b_cap", lazy_k=4, coeff=1.0, kappa=1.0, norm="l2", method="autograd")
 
 
 def critic_config(cfg):

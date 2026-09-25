@@ -35,7 +35,7 @@ with `safe_fast_weight=1`, `time_weight=0.15`, `crash_weight=4`,
 the horizon as the step count, so a hover scores `-0.5`.
 
 `adv_weight=0` is trained as an ablation. It lands, and the gate rejects it.
-The combined sink (`0.413`) sits between the slow GAN (`0.107`) and that
+The combined sink (`0.430`) sits between the slow GAN (`0.101`) and that
 rejected ablation (`0.527`), which is the GAN still pulling toward the expert.
 `late_gan_grad` is the mean absolute GAN gradient on the sink parameter over
 the last 40% of the 250 steps. It has to stay above `0.2` on the combined arm.
@@ -49,15 +49,18 @@ One seed (`0`), 200 fixed starts. Not a seed sweep. Not Lunar Lander.
 | Hover (sink 0) | — | — | 0.000 | 48.00 | — | loses to a quick landing |
 | Crash sink 0.90 | — | — | 0.000 | 48.00 | — | loses to a quick landing |
 | Quick soft sink 0.55 | — | — | 1.000 | 19.30 | — | reference, score 0.799 |
-| Baseline RpGAN | 1 | 0 | 0.040 | 45.88 | 0.023 | slow expert match |
-| Combined | 1 | 1 | 1.000 | 23.67 | 1.220 | pass |
-| Supervised safe-fast | 0 | 1 | 1.000 | 19.91 | 0 | rejected |
+| Baseline RpGAN | 1 | 0 | 0.015 | 45.67 | 0.00002 | slow expert match |
+| Combined | 1 | 1 | 1.000 | 22.97 | 1.026 | pass |
+| Supervised safe-fast | 0 | 1 | 1.000 | 19.89 | 0 | rejected |
 
 Thresholds the combined arm has to clear: landing rate at least `0.95` and
 at least `0.50` above the baseline; mean steps at most `28` and at least `12`
 below the baseline. The baseline must land at most `0.25` of starts and take
-at least `40` steps when it does. Both GAN arms need a nonzero late GAN
-gradient and at least one `b_cap` application.
+at least `40` steps when it does. The sink gain trains with the recipe's
+generator optimizer and the critic with the recipe's critic optimizer and
+penalty, on the recipe's LR schedule. GAN-only must reach the slow expert's
+sink (within `0.02`; nothing else acts on the gain), the combined arm needs a
+late GAN gradient above `0.2`, and both GAN arms apply the critic penalty.
 
 ```bash
 python -u examples/safe_fast_2d.py

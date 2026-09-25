@@ -724,7 +724,7 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 ## Notes
 
 - The text experiments (`five_modes.py`) use the same recipe (RpGAN + K3P penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
-- The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
+- Every example, experiment and lib trainer builds its optimizers and critic penalty with the recipe factories (`recipe.make_optimizers` / `make_critic_optimizer` / `make_generator_optimizer` / `make_critic_penalty`), so they all train the default (K3P) formulation; a critic gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
 - GAN v3 particles use 2× the G learning rate; explicit experiment configurations can override that ratio.
 
 ## Changelog

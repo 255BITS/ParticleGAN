@@ -1,4 +1,5 @@
-"""Arm A finetune: paired-error RpGAN and sample b_cap, with adv_weight locked at 1."""
+"""Arm A finetune: paired-error GAN with the recipe critic penalty, adv_weight locked at 1."""
+import copy
 import json
 from pathlib import Path
 import tempfile
@@ -11,7 +12,7 @@ from experiments.train_gym_transition import DEFAULTS as WORLD_DEFAULTS, build_m
 from experiments.train_gym_particle_finetune import DEFAULTS, train
 from lib.gym_control import build_expert_records, control_action
 from lib.gym_particle_finetune import (FAKE_PATHS, control_decode, diagnostic_l2,
-    load_particle_checkpoint, particle_game, require_classic_particle_gan, transition_batch)
+    load_particle_checkpoint, particle_game, transition_batch)
 from lib.gym_state_control import training_recipe
 
 
@@ -53,14 +54,14 @@ class ParticleFinetuneTests(unittest.TestCase):
         inactive = {**DEFAULTS, "adv_weight": 0.}
         with self.assertRaises(ValueError) as caught:
             train(inactive)
-        self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+        self.assertIn("adv_weight=0 leaves RpGAN and its critic penalty configured but not applied",
                       str(caught.exception))
         partial = {**DEFAULTS, "adv_weight": 0.1}
         with self.assertRaises(ValueError) as caught:
             train(partial)
         self.assertIn("adv_weight stays 1", str(caught.exception))
 
-    def test_controller_step_is_live_rpgan_and_b_cap_hits_the_edit_critic(self):
+    def test_controller_step_is_live_gan_and_recipe_penalty_hits_the_edit_critic(self):
         def has_grad(module):
             return any(p.grad is not None and float(p.grad.abs().sum()) > 0 for p in module.parameters())
 
@@ -68,7 +69,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             root = Path(td)
             self.fixture(root)
             from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope,
-                controller_objective, discriminator_objective, edit_cap,
+                controller_objective, discriminator_objective, edit_game,
                 initialize_particle_finetune, normalized_g2_action)
             bundle = configure_control_scope(initialize_particle_finetune(root / "initial.pt", "cpu"))
             records = build_expert_records(root / "episodes.json")
@@ -84,20 +85,22 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(critic.normalization, "paired_edit_per_coordinate_std_median_rms_gain")
             predicted = normalized_g2_action(bundle, states[:4], previous[:4], terrain[:4])
             target = targets[:4]
-            reg = edit_cap()
+            recipe = training_recipe({**bundle["world_config"], "steps": 8, "batch_size": 4})
+            gan, opt_r, penalty = edit_game(recipe, critic)
+            self.assertEqual(penalty.regularizer.arm, recipe.reg_arm)
+            self.assertIs(penalty.critic, critic)
             loss_d, terms = discriminator_objective(
-                critic, predicted, target, 4, torch.Generator().manual_seed(7), reg, 8)
-            self.assertEqual(terms["b_cap_applied"], 1.)
+                critic, predicted, target, 4, torch.Generator().manual_seed(7), penalty, 8, gan)
+            self.assertGreater(float(terms["penalty"]), 0.)
             loss_d.backward()
             self.assertTrue(has_grad(critic))
             self.assertTrue(all(not has_grad(bundle[key]) for key in ("G", "E", "prior", "D", "E_control")))
-            _, skipped = discriminator_objective(
-                critic, predicted.detach(), target, 2, torch.Generator().manual_seed(8), reg, 8)
-            self.assertEqual(skipped["b_cap_applied"], 0.)
+            opt_r.step()
+            self.assertEqual(opt_r.record.observed_steps, 1)
             for module in (bundle["G"], bundle["E"], bundle["prior"], bundle["D"], bundle["E_control"], critic):
                 module.zero_grad(set_to_none=True)
             loss_g, g_terms = controller_objective(
-                critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 1.)
+                critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 1., gan=gan)
             self.assertEqual(g_terms["adv_weight"], 1.)
             loss_g.backward()
             self.assertTrue(has_grad(bundle["E_control"]))
@@ -108,8 +111,8 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertFalse(has_grad(bundle["prior"]))
             self.assertFalse(has_grad(bundle["D"]))
             with self.assertRaises(ValueError) as caught:
-                controller_objective(critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 0.)
-            self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+                controller_objective(critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 0., gan=gan)
+            self.assertIn("adv_weight=0 leaves RpGAN and its critic penalty configured but not applied",
                           str(caught.exception))
 
     def test_control_path_ignores_current_action_and_diagnostics_have_no_grad(self):
@@ -136,7 +139,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             diag = diagnostic_l2(control, real)
             self.assertFalse(any(value.requires_grad for value in diag.values()))
 
-    def test_rpgan_bcap_reaches_encoders_generators_and_critics(self):
+    def test_gan_and_penalty_reach_encoders_generators_and_critics(self):
         def has_grad(module):
             return any(p.grad is not None and float(p.grad.abs().sum()) > 0 for p in module.parameters())
 
@@ -149,8 +152,9 @@ class ParticleFinetuneTests(unittest.TestCase):
             columns = [torch.from_numpy(records[key][:4]) for key in
                        ("states", "previous_actions", "actions", "next_states", "terrain")]
             recipe = training_recipe({**bundle["world_config"], "steps": 2, "batch_size": 4})
-            gan, reg = recipe.make_loss(), recipe.make_gradient_penalty(arm="b_cap", coeff=1., kappa=1.)
-            require_classic_particle_gan(gan, reg)
+            gan = recipe.make_loss()
+            reg = recipe.make_critic_penalty(recipe.make_critic_optimizer(
+                bundle["D"], ema_critic=copy.deepcopy(bundle["D"])))
             expectations = dict(control=("E_control",), prior=(), encoded=("E",), composed=("E",))
             seen = set()
             for path, encoders in expectations.items():
@@ -173,8 +177,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             bundle["D"].requires_grad_(True)
             real, fakes, _ = transition_batch(bundle, *columns, torch.Generator().manual_seed(3),
                                               torch.Generator().manual_seed(4), True)
-            loss, terms = particle_game(bundle["D"], real, fakes, columns[-1], gan, reg=reg, step=1,
-                                        rngs={role: torch.Generator().manual_seed(5) for role in bundle["D"].roles()})
+            loss, terms = particle_game(bundle["D"], real, fakes, columns[-1], gan, reg=reg)
             loss.backward()
             self.assertTrue(all(has_grad(critic) for critic in bundle["D"].critics.values()))
             self.assertTrue(all(name + "_penalty" in terms for name in ("joint", "action", "state", "next_state")))
@@ -194,7 +197,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(summary["real_draws"], 16)
             text = (root / "live.log").read_text()
             self.assertIn("REMOVED L2", text)
-            self.assertIn("sample-point b_cap", text)
+            self.assertIn("Recipe critic penalty", text)
             self.assertIn("l2_aux=0", text)
             self.assertIn("adv_weight=1", text)
             self.assertIn("Not supervised_only", text)
@@ -207,7 +210,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             recipe = json.loads((root / "particle" / "recipe.json").read_text())
             self.assertEqual(recipe["gan_mode"], "rp")
             self.assertEqual(recipe["loss_type"], "logistic")
-            self.assertEqual(recipe["reg_arm"], "b_cap")
+            self.assertEqual(recipe["reg_arm"], "k3p")
             self.assertEqual(recipe["reg_method"], "autograd")
             self.assertEqual(recipe["adv_weight"], 1.)
             self.assertEqual(recipe["l2_aux_weight"], 0.)
@@ -218,7 +221,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(recipe["safe_fast_horizon"], 0)
             self.assertIn("paired-error", summary["initialization"])
             self.assertEqual(summary["adv_weight"], 1.)
-            self.assertEqual(summary["b_cap_applications"], 0)
+            self.assertEqual(summary["penalty_every"], 1)
             row = json.loads((root / "particle" / "metrics.jsonl").read_text().splitlines()[-1])
             self.assertEqual(row["l2_aux_weight"], 0.)
             self.assertEqual(row["safe_fast_weight"], 0.)
@@ -261,7 +264,7 @@ class ParticleFinetuneTests(unittest.TestCase):
         inactive = {**armed, "adv_weight": 0.}
         with self.assertRaises(ValueError) as caught:
             validate(inactive)
-        self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+        self.assertIn("adv_weight=0 leaves RpGAN and its critic penalty configured but not applied",
                       str(caught.exception))
         missing_horizon = {**armed, "safe_fast_horizon": 0}
         with self.assertRaises(ValueError) as caught:
@@ -292,7 +295,8 @@ class ParticleFinetuneTests(unittest.TestCase):
             sentinel = torch.zeros((), requires_grad=True)
             loss, terms = controller_objective(
                 critic, predicted, bundle["scaler"].action(actions[:4]), 1,
-                torch.Generator().manual_seed(9), 8, 1., sentinel, 0.)
+                torch.Generator().manual_seed(9), 8, 1., sentinel, 0., gan=training_recipe(
+                    {**bundle["world_config"], "steps": 8, "batch_size": 4}).make_loss())
             self.assertEqual(terms["safe_fast_weight"], 0.)
             loss.backward()
             self.assertIsNone(sentinel.grad)
@@ -331,78 +335,12 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(row["safe_fast_weight"], 1.)
             self.assertTrue(torch.isfinite(torch.tensor(row["safe_fast"])))
 
-    def test_locked_shared_config_uses_stamp_builders(self):
-        from unittest.mock import patch
-
-        from experiments.config import read_config
-        from experiments.train_gym_particle_finetune import validate
-        from lib.gym_particle_finetune import EDIT_CAP_EVERY, adversarial_game
-        from lib.vendor.concept_slider_core.reference import rp_d_loss, rp_g_loss
-        from particlegan.locked_shared import LOCKED_SHARED, make_b_cap, make_gan_loss
-
-        root = Path(__file__).resolve().parents[1]
-        raw = read_config(root / "configs/gym/lunar_lander_particle_finetune/locked_shared.yaml")
-        for pin in ("lazy_k", "loss_type", "gan_mode", "reg_coeff", "reg_kappa", "reg_arm"):
-            self.assertNotIn(pin, raw)
-        cfg = {**DEFAULTS, **raw}
-        validate(cfg)
-        self.assertEqual(cfg["adv_posture"], "locked_shared")
-        self.assertEqual(cfg["safe_fast_weight"], 0.)
-        self.assertEqual(cfg["adv_weight"], 1.)
-        self.assertNotEqual(cfg["out_dir"], DEFAULTS["out_dir"])
-        self.assertNotEqual(cfg["live_log"], DEFAULTS["live_log"])
-        yue = {**DEFAULTS, **read_config(
-            root / "configs/gym/lunar_lander_particle_finetune/particle.yaml")}
-        validate(yue)
-        self.assertEqual(yue["adv_posture"], "yue2")
-        self.assertNotIn("adv_posture", read_config(
-            root / "configs/gym/lunar_lander_particle_finetune/particle.yaml"))
-
-        with patch("lib.gym_particle_finetune.make_gan_loss", wraps=make_gan_loss) as loss, \
-             patch("lib.gym_particle_finetune.make_b_cap", wraps=make_b_cap) as cap:
-            gan, reg = adversarial_game("locked_shared")
-        self.assertEqual(loss.call_count, 1)
-        self.assertEqual(cap.call_count, 1)
-        self.assertIs(loss.call_args.args[0], LOCKED_SHARED)
-        self.assertIs(cap.call_args.args[0], LOCKED_SHARED)
-        self.assertEqual(gan.loss_type, LOCKED_SHARED.loss_type)
-        self.assertEqual(gan.mode, LOCKED_SHARED.gan_mode)
-        self.assertEqual(reg.lazy_k, LOCKED_SHARED.lazy_k)
-        self.assertEqual(reg.lazy_k, 1)
-        self.assertNotEqual(reg.lazy_k, EDIT_CAP_EVERY)
-        self.assertEqual((reg.arm, reg.coeff, reg.kappa, reg.norm, reg.method, reg.target_anneal),
-                         ("b_cap", 1.0, 1.0, "l2", "autograd", "none"))
-        real = torch.tensor([0.2, -0.4])
-        fake = torch.tensor([0.5, 0.1])
-        torch.testing.assert_close(gan.d_loss(real, fake), rp_d_loss(real, fake))
-        torch.testing.assert_close(gan.g_loss(fake, real), rp_g_loss(real, fake))
-
-        with patch("lib.gym_particle_finetune.make_gan_loss", wraps=make_gan_loss) as loss, \
-             patch("lib.gym_particle_finetune.make_b_cap", wraps=make_b_cap) as cap:
-            yue_gan, yue_reg = adversarial_game("yue2")
-        self.assertEqual(loss.call_count, 0)
-        self.assertEqual(cap.call_count, 0)
-        self.assertIsNone(yue_gan)
-        self.assertEqual(yue_reg.lazy_k, EDIT_CAP_EVERY)
-        with self.assertRaises(ValueError):
-            adversarial_game("music")
-        with self.assertRaises(ValueError) as caught:
-            validate({**cfg, "adv_posture": "music"})
-        self.assertIn("adv_posture", str(caught.exception))
-        armed = {**cfg, "safe_fast_weight": 1., "safe_fast_time_weight": 0.15,
-                 "safe_fast_crash_weight": 4., "safe_fast_success_bonus": 2.,
-                 "safe_fast_speed_limit": 0.62, "safe_fast_pad_half": 0.35,
-                 "safe_fast_horizon": 48}
-        with self.assertRaises(ValueError) as caught:
-            validate(armed)
-        self.assertIn("locked_shared does not add safe-fast", str(caught.exception))
-
-    def test_locked_shared_objective_calls_the_gan_object(self):
+    def test_objectives_call_the_gan_object(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             self.fixture(root)
-            from lib.gym_particle_finetune import (adversarial_game, build_edit_critic,
-                configure_control_scope, controller_objective, discriminator_objective,
+            from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope,
+                controller_objective, discriminator_objective, edit_game,
                 initialize_particle_finetune, normalized_g2_action)
             bundle = configure_control_scope(initialize_particle_finetune(root / "initial.pt", "cpu"))
             records = build_expert_records(root / "episodes.json")
@@ -416,7 +354,8 @@ class ParticleFinetuneTests(unittest.TestCase):
                                        {**DEFAULTS, "error_tokens": 4, "error_width": 8, "error_heads": 2})
             predicted = normalized_g2_action(bundle, states[:4], previous[:4], terrain[:4])
             target = bundle["scaler"].action(actions[:4])
-            _, reg = adversarial_game("locked_shared")
+            recipe = training_recipe({**bundle["world_config"], "steps": 8, "batch_size": 4})
+            _, _, reg = edit_game(recipe, critic)
 
             class Mark:
                 def __init__(self):
@@ -436,77 +375,10 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(mark.d, 1)
             self.assertEqual(mark.g, 0)
             self.assertAlmostEqual(float(terms["error_d"]), 1.25)
-            self.assertEqual(terms["b_cap_applied"], 1.)
             _, g_terms = controller_objective(
                 critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 1., gan=mark)
             self.assertEqual(mark.g, 1)
             self.assertAlmostEqual(float(g_terms["error_g"]), 0.5)
-            _, skipped = discriminator_objective(
-                critic, predicted.detach(), target, 2, torch.Generator().manual_seed(8), reg, 8, mark)
-            self.assertEqual(skipped["b_cap_applied"], 1.)
-
-    def test_locked_shared_cpu_smoke_applies_stamp_every_step(self):
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            self.fixture(root)
-            from unittest.mock import patch
-
-            import experiments.train_gym_particle_finetune as trainer
-            from particlegan.gan_loss import GANLoss
-            from particlegan.locked_shared import LOCKED_SHARED
-            seen = {}
-            real_d, real_g = trainer.discriminator_objective, trainer.controller_objective
-
-            def watch_d(*args, **kwargs):
-                seen["d_gan"] = kwargs.get("gan", args[-1] if args else None)
-                return real_d(*args, **kwargs)
-
-            def watch_g(*args, **kwargs):
-                seen["g_gan"] = kwargs.get("gan", args[-1] if args else None)
-                return real_g(*args, **kwargs)
-
-            cfg = {**DEFAULTS, "adv_posture": "locked_shared", "steps": 2, "checkpoints": [1, 2],
-                   "batch_size": 4, "log_interval": 1, "device": "cpu",
-                   "error_tokens": 4, "error_width": 8, "error_heads": 2,
-                   "checkpoint": str(root / "initial.pt"), "episodes": str(root / "episodes.json"),
-                   "out_dir": str(root / "locked"), "live_log": str(root / "locked_live.log")}
-            with patch.object(trainer, "discriminator_objective", watch_d), \
-                 patch.object(trainer, "controller_objective", watch_g):
-                summary = train(cfg)
-            self.assertIsInstance(seen["d_gan"], GANLoss)
-            self.assertIs(seen["d_gan"], seen["g_gan"])
-            self.assertEqual(seen["d_gan"].loss_type, LOCKED_SHARED.loss_type)
-            self.assertEqual(seen["d_gan"].mode, LOCKED_SHARED.gan_mode)
-            self.assertEqual(summary["b_cap_applications"], 2)
-            self.assertEqual(summary["l2_aux_weight"], 0.)
-            self.assertEqual(summary["adv_weight"], 1.)
-            self.assertEqual(summary["simulator_calls"], 0)
-            self.assertIn("no landing", summary["selection"])
-            text = (root / "locked_live.log").read_text()
-            self.assertIn("STAMP particlegan.locked_shared", text)
-            self.assertIn("lazy_k=1", text)
-            self.assertIn("make_gan_loss+make_b_cap", text)
-            self.assertIn(f"Not YuE2 EDIT_CAP_EVERY=4", text)
-            self.assertNotIn("POSTURE yue2", text)
-            recipe = json.loads((root / "locked" / "recipe.json").read_text())
-            self.assertEqual(recipe["adv_posture"], "locked_shared")
-            self.assertEqual(recipe["stamp"], "particlegan.locked_shared.LOCKED_SHARED")
-            self.assertEqual(recipe["loss_type"], LOCKED_SHARED.loss_type)
-            self.assertEqual(recipe["gan_mode"], LOCKED_SHARED.gan_mode)
-            self.assertEqual(recipe["reg_every"], LOCKED_SHARED.lazy_k)
-            self.assertEqual(recipe["reg_arm"], LOCKED_SHARED.reg_arm)
-            self.assertEqual(recipe["reg_coeff"], LOCKED_SHARED.reg_coeff)
-            self.assertEqual(recipe["reg_kappa"], LOCKED_SHARED.reg_kappa)
-            self.assertEqual(recipe["fm_weight"], 0.)
-            self.assertFalse(recipe["cover_applied"])
-            self.assertFalse(recipe["particles_applied"])
-            self.assertEqual(recipe["critic_pin"], "host")
-            self.assertEqual(recipe["pairing"], "live")
-            provenance = json.loads((root / "locked" / "provenance.json").read_text())
-            self.assertIn("particlegan.locked_shared.make_b_cap", provenance["gradient_penalty"])
-            self.assertIn("every 1 steps", provenance["gradient_penalty"])
-            rows = [json.loads(line) for line in (root / "locked" / "metrics.jsonl").read_text().splitlines()]
-            self.assertEqual([row["b_cap_applied"] for row in rows], [1., 1.])
 
 
 def records_actions(records):

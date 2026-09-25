@@ -7,7 +7,7 @@ import torch
 
 from experiments.config import read_config
 from experiments import train_denoising, train_trajectory
-from particlegan import ParticleRegularizer, learning_rate_scale
+from particlegan import ParticleRegularizer, get_recipe, learning_rate_scale
 from particlegan.diffusion import DrawSource
 
 
@@ -106,6 +106,8 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
     torch.testing.assert_close(actual, expected, rtol=0, atol=0)
     torch.testing.assert_close(torch.autograd.grad(actual, rows)[0],
                                torch.autograd.grad(expected, rows)[0], rtol=0, atol=0)
+    # Every trainer follows the recipe's default penalty and LR schedule.
+    assert recipe.reg_arm == get_recipe().reg_arm
     if trainer is train_trajectory:
-        assert all(learning_rate_scale(step, recipe.total_steps, recipe.lr_anneal_start,
-                                       recipe.lr_floor) == 1 for step in (0, 6000, 10000))
+        assert (recipe.lr_floor, recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (
+            get_recipe().lr_floor, get_recipe().network_lr_floor, get_recipe().network_lr_horizon_cap)

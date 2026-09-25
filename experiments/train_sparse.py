@@ -7,10 +7,12 @@ Config-driven single run of the sparse conditional mixed-output toy
 100-Gaussians champion recipe, with a UCD-style (arXiv:2510.00624)
 unconditional discriminator as the default conditioning mechanism.
 
-Held fixed unless a config says otherwise: RpGAN logistic, one-sided cap
-penalty (b_cap, coeff 1.0) on the joint critic input [x | y], Fourier-2 D,
-Adam beta1=0, base LR 6e-4 (prior x10, D x1.5), delayed cosine anneal to a 5%
-floor, EMA(0.995) read-out on G and the prior, VICReg on the particle table.
+Held fixed unless a config says otherwise: RpGAN logistic, the recipe's
+critic penalty (``recipe.make_critic_penalty``) on the joint critic input
+[x | y], the recipe's optimizers (``recipe.make_optimizers``) and role-wise LR
+schedule (``scale_learning_rates``), Fourier-2 D, Adam beta1=0, base LR 6e-4
+(prior x10, D x1.5), EMA(0.995) read-out on G and the prior, VICReg on the
+particle table.
 
 Every key in DEFAULTS is a config key; unknown keys are an error, so configs
 stay honest as knobs are added. Every default reproduces the trajectory a
@@ -54,7 +56,7 @@ if str(_REPO_ROOT) not in sys.path:
 
 from experiments.config import read_config
 from particlegan import (  # noqa: E402
-    GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer, learning_rate_scale, ucd_loss,
+    ParticlePrior, ParticleRegularizer, get_recipe, scale_learning_rates, ucd_loss,
 )
 from lib.sparse_toy import SparseMixedToy  # noqa: E402
 from lib.sparse_models import (  # noqa: E402
@@ -107,10 +109,8 @@ DEFAULTS: Dict = {
     "ucd_lambda": 0.1,            # lambda_1: CE(d(x), c) on reals + fakes (ucd only)
     "gp_on_y": True,              # penalize grad w.r.t. [x | y] (True) or x only (False)
     # recipe
-    "arm": "b_cap",
-    "coeff": 1.0,
-    "kappa": 1.0,
-    "norm": "l2",
+    "coeff": 1.0,                 # recipe reg_coeff
+    "kappa": 1.0,                 # recipe reg_kappa
     "loss_type": "logistic",
     "lr": 6e-4,
     "d_lr_mult": 1.5,
@@ -273,16 +273,19 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         return pr(idx), idx
 
     # ---- losses / optimizers ----
-    gan_loss = GANLoss(loss_type=str(cfg["loss_type"]), mode="rp")
-    regularizer = GradientPenalty(arm=str(cfg["arm"]), coeff=float(cfg["coeff"]), kappa=float(cfg["kappa"]), norm=str(cfg["norm"]))
+    recipe = get_recipe(
+        z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
+        lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
+        betas=(float(cfg["beta1"]), 0.999), loss_type=str(cfg["loss_type"]),
+        reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
+        lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
+    gan_loss = recipe.make_loss()
     vic = ParticleRegularizer()
-    lr = float(cfg["lr"])
-    beta1 = float(cfg["beta1"])
-    opt_G = torch.optim.Adam(G.parameters(), lr=lr, betas=(beta1, 0.999))
-    opt_D = torch.optim.Adam(D.parameters(), lr=lr * float(cfg["d_lr_mult"]), betas=(beta1, 0.999))
-    opt_P = torch.optim.Adam(prior.parameters(), lr=lr * float(cfg["prior_lr_mult"]), betas=(beta1, 0.999)) if learnable else None
-    opts = [o for o in (opt_G, opt_D, opt_P) if o is not None]
-    base_lrs = {id(o): [g["lr"] for g in o.param_groups] for o in opts}
+    # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
+    opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+    penalty_fn = recipe.make_critic_penalty(opt_D)
+    opts = [opt_G, opt_D]
+    base_lrs = [[g["lr"] for g in o.param_groups] for o in opts]
 
     ucd = D.d_mode == "ucd"
     ucd_lambda = float(cfg["ucd_lambda"])
@@ -360,14 +363,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         tau = tau0 + (tau1 - tau0) * frac
         D.fourier.scale = fourier_scale(frac)
         G.gate_on = ema_G.gate_on = frac >= float(cfg["gate_start_frac"])
-        # Retain the historical minimum one-update decay duration.
-        anneal_from = float(cfg["lr_anneal_start"]) * total_steps
-        scale = learning_rate_scale(step - anneal_from,
-                                    max(1.0, total_steps - anneal_from),
-                                    0.0, float(cfg["lr_floor"]))
-        for o in opts:
-            for g, b in zip(o.param_groups, base_lrs[id(o)]):
-                g["lr"] = b * scale
+        scale_learning_rates(step, recipe, opts, base_lrs, prior)
 
         # ---- D step ----
         # G stays in train mode here: the D step must see the same relaxed
@@ -390,7 +386,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         # Keep joint interpolation locations identical in both ablations; the
         # critic can exclude the y derivative without changing the sampled y.
         critic = JointCritic(D, c_r, grad_on_y=gp_on_y)
-        pen, pst = regularizer.penalty(critic, torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1), step)
+        pen = penalty_fn(critic, torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1))
         loss_d = loss_d + pen
         opt_D.zero_grad()
         loss_d.backward()
@@ -415,12 +411,8 @@ def train(cfg: Dict, device: torch.device) -> Dict:
                 uniq = torch.unique(idx)
             loss_g = loss_g + lambda_ep * vic(prior(uniq))
         opt_G.zero_grad()
-        if opt_P is not None:
-            opt_P.zero_grad()
         loss_g.backward()
         opt_G.step()
-        if opt_P is not None:
-            opt_P.step()
 
         with torch.no_grad():
             for pe, p in zip(ema_G.parameters(), G.parameters()):
@@ -428,7 +420,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             for pe, p in zip(ema_prior.parameters(), prior.parameters()):
                 pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
 
-        last = {"d_loss": float(loss_d_gan.detach()), "g_loss": float(loss_gan.detach()), "pen": float(pst["pen"]),
+        last = {"d_loss": float(loss_d_gan.detach()), "g_loss": float(loss_gan.detach()), "pen": float(pen.detach()),
                 "ucd_ce": float(ucd_ce.detach()), "tau": float(tau), "ff_scale": D.fourier.scale}
         done = step + 1
         if done % eval_interval == 0 or done == total_steps:

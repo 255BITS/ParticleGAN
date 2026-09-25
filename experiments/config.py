@@ -35,7 +35,7 @@ def recipe_defaults(name):
 
     recipe = get_recipe()
     keys = ("batch_size", "z_dim", "num_particles", "lr", "d_lr_mult",
-            "loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_every",
+            "loss_type", "gan_mode", "reg_coeff", "reg_every",
             "reg_method", "lr_anneal_start", "lr_floor")
     defaults = {key: getattr(recipe, key) for key in keys}
     defaults["beta1"] = recipe.betas[0]

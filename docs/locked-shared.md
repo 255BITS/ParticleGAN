@@ -1,10 +1,9 @@
 # Locked shared
 
 Importable demo adversarial stamp. Other code can depend on it. This page is
-the contract. Lunar Lander imports it from
-`configs/gym/lunar_lander_particle_finetune/locked_shared.yaml`
-([gym note](gym-particle-finetune.md#locked-shared-arm)).
-`particle.yaml` is still the YuE2 cap (`lazy_k=4`), not this stamp.
+the contract. No repository trainer uses it: the Lunar Lander particle
+fine-tune (`particle.yaml`) trains with the recipe's default critic optimizer
+and penalty ([gym note](gym-particle-finetune.md)).
 
 ```python
 from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_gan_loss, make_b_cap
@@ -52,7 +51,7 @@ this object.
 | stranger | `pairing="stranger"` |
 | thinned κ | stored kappa, penalty center hardcoded (1 in one probe, 100 in another) |
 | `Recipe("gan")` | 20_000 particles, b_cap3/κ1.25, VICReg `prior_reg=.05`, no cover and no FM field |
-| YuE2 gym controller | same cap, `lazy_k=4` (`EDIT_CAP_EVERY` in `lib/gym_particle_finetune.py`; still `particle.yaml`) |
+| YuE2 gym controller | no longer uses this cap: `particle.yaml` trains the recipe default critic penalty (`edit_game` in `lib/gym_particle_finetune.py`) |
 
 `drift(name)` returns the first five rows as `LockedShared` copies.
 `NAMED_DRIFTS` is that table.

@@ -20,14 +20,13 @@ sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
 from experiments.train_gym_transition import parameter_count, sha256, training_recipe, write_json
 from lib.gym_control import build_expert_records
-from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, REMOVED_L2,
-    adversarial_game, build_edit_critic, configure_control_scope, controller_objective,
-    discriminator_objective, initialize_particle_finetune, locked_shared_recipe_fields,
-    normalized_g2_action, require_live_adversary)
+from lib.gym_particle_finetune import (MODULE_KEYS, REMOVED_L2, build_edit_critic,
+    configure_control_scope, controller_objective, discriminator_objective, edit_game,
+    initialize_particle_finetune, normalized_g2_action, require_live_adversary)
 from lib.safe_fast_landing import gym_shaping_cost
-from particlegan import learning_rate_scale
+from particlegan import scale_learning_rates
 
-DEFAULTS = dict(arm="particle", adv_posture="yue2", steps=2500, batch_size=256,
+DEFAULTS = dict(arm="particle", steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", marginal_weight=1.,
     imitation_weight=0., real_encoding_weight=0., synthetic_reconstruction_weight=0.,
@@ -82,11 +81,6 @@ def validate(cfg):
             raise ValueError(f"{key} is removed; Arm A does not keep an auxiliary L2 term")
     require_live_adversary(cfg["adv_weight"])
     validate_safe_fast(cfg)
-    if cfg["adv_posture"] not in ("yue2", "locked_shared"):
-        raise ValueError("adv_posture must be yue2 or locked_shared")
-    if cfg["adv_posture"] == "locked_shared" and cfg["safe_fast_weight"] != 0:
-        raise ValueError("locked_shared does not add safe-fast; "
-                         "particle_safe_fast.yaml stays on the yue2 posture")
     if cfg["train_scope"] != "control":
         raise ValueError("train_scope stays control: E_control and G2, not the world")
     for key in ("error_tokens", "error_width", "error_heads"):
@@ -105,7 +99,7 @@ def validate(cfg):
         raise ValueError("Experiments must use cuda:1; GPU 0 belongs to the user")
 
 
-def capture_provenance(out, cfg, records, bundle, reg):
+def capture_provenance(out, cfg, records, bundle, recipe):
     paths = [Path(__file__), ROOT / "lib/gym_particle_finetune.py", ROOT / "lib/safe_fast_landing.py",
              ROOT / "lib/gym_control.py",
              ROOT / "lib/gym_previous_gan.py", ROOT / "lib/gym_transition.py",
@@ -132,13 +126,13 @@ def capture_provenance(out, cfg, records, bundle, reg):
         normalization="Unchanged scaler from initialization; fit originally on old training split",
         removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
         safe_fast_weight=float(cfg["safe_fast_weight"]),
-        controller_objective=("Rp logistic on the edit-normalized G2 residual; no action MSE; "
-                              "safe_fast_weight=0" if cfg["safe_fast_weight"] == 0 else
-                              "Rp logistic adv_weight=1 plus safe-fast kinematic shaping"),
-        gradient_penalty=("sample-point b_cap on the edit critic, "
-                          f"{reg.method} {reg.norm}, coeff {reg.coeff:g}, kappa {reg.kappa:g}, "
-                          f"every {reg.lazy_k} steps "
-                          f"({'particlegan.locked_shared.make_b_cap' if cfg['adv_posture'] == 'locked_shared' else 'YuE2 edit_cap / EDIT_CAP_EVERY'})"),
+        controller_objective=(f"recipe {recipe.loss_type}/{recipe.gan_mode} GAN on the edit-normalized G2 "
+                              "residual; no action MSE; safe_fast_weight=0" if cfg["safe_fast_weight"] == 0 else
+                              f"recipe {recipe.loss_type}/{recipe.gan_mode} GAN adv_weight=1 plus "
+                              "safe-fast kinematic shaping"),
+        gradient_penalty=(f"recipe critic penalty ({recipe.reg_arm}) on the edit critic via "
+                          f"recipe.make_critic_penalty, coeff {recipe.reg_coeff:g}, kappa {recipe.reg_kappa:g}, "
+                          f"every {recipe.reg_every} steps"),
         train_scope="E_control and G2; G1, G3, E_pair, prior, and transition D frozen",
         control_input="Expert previous command in shuffled records; learner previous command at playback")
 
@@ -164,9 +158,6 @@ def link_live_log(out, live):
 
 def train(cfg):
     validate(cfg)
-    gan, reg = adversarial_game(cfg["adv_posture"])
-    if cfg["adv_posture"] == "locked_shared":
-        locked_shared_recipe_fields(gan, reg)
     device = torch.device(cfg["device"])
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -184,21 +175,20 @@ def train(cfg):
         raise ValueError("Expert episode source differs from initialization provenance")
     records = build_expert_records(cfg["episodes"])
     np.savez_compressed(out / "expert_records.npz", **records)
-    provenance = capture_provenance(out, cfg, records, bundle, reg)
     columns = [torch.as_tensor(records[key], device=device) for key in
                ("states", "previous_actions", "actions", "next_states", "terrain")]
     configure_control_scope(bundle)
     g, ec = bundle["G"], bundle["E_control"]
     recipe = training_recipe({**world, "steps": cfg["steps"], "batch_size": cfg["batch_size"]})
+    provenance = capture_provenance(out, cfg, records, bundle, recipe)
     with torch.no_grad():
         neutrals = _batched_actions(bundle, columns)
         targets = bundle["scaler"].action(columns[2])
     critic = build_edit_critic(targets, neutrals, cfg).to(device)
     adam_kwargs = dict(fused=True) if device.type == "cuda" else {}
-    opt_g = torch.optim.Adam([p for p in list(ec.parameters()) + list(g.branches[1].parameters())
-                              if p.requires_grad], lr=recipe.lr, betas=recipe.betas, **adam_kwargs)
-    opt_r = torch.optim.Adam([p for p in critic.parameters() if p.requires_grad],
-                             lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas, **adam_kwargs)
+    opt_g = recipe.make_generator_optimizer(
+        [p for p in list(ec.parameters()) + list(g.branches[1].parameters()) if p.requires_grad], **adam_kwargs)
+    gan, opt_r, penalty = edit_game(recipe, critic, **adam_kwargs)
     optimizers = (opt_g, opt_r)
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     ema = {**bundle}
@@ -215,10 +205,10 @@ def train(cfg):
     groups = dict(controller=dict(lr=recipe.lr, betas=list(recipe.betas), modules=["E_control", "G2"]),
         edit_critic=dict(lr=recipe.lr * recipe.d_lr_mult, betas=list(recipe.betas), modules=["R"]),
         frozen=["G1", "G3", "E", "prior", "D"])
-    objective = dict(adv_posture=cfg["adv_posture"], loss_type="logistic", gan_mode="rp",
-        reg_arm=reg.arm, reg_method=reg.method, reg_norm=reg.norm,
-        reg_coeff=float(reg.coeff), reg_kappa=float(reg.kappa), reg_every=reg.lazy_k,
-        target_anneal=reg.target_anneal, adv_weight=1., train_scope="control", l2_aux_weight=0.,
+    objective = dict(loss_type=recipe.loss_type, gan_mode=recipe.gan_mode,
+        reg_arm=recipe.reg_arm, reg_method=recipe.reg_method,
+        reg_coeff=float(recipe.reg_coeff), reg_kappa=float(recipe.reg_kappa), reg_every=recipe.reg_every,
+        adv_weight=1., train_scope="control", l2_aux_weight=0.,
         safe_fast_weight=float(cfg["safe_fast_weight"]),
         safe_fast_time_weight=float(cfg["safe_fast_time_weight"]),
         safe_fast_crash_weight=float(cfg["safe_fast_crash_weight"]),
@@ -228,8 +218,6 @@ def train(cfg):
         safe_fast_horizon=int(cfg["safe_fast_horizon"]),
         critic="gmix_t8_w48_l1", normalization=critic.normalization,
         initialization_recipe=recipe.to_dict())
-    if cfg["adv_posture"] == "locked_shared":
-        objective.update(locked_shared_recipe_fields(gan, reg))
     write_json(out / "provenance.json", provenance)
     write_json(out / "recipe.json", objective)
     write_json(out / "optimizers.json", groups)
@@ -263,25 +251,16 @@ def train(cfg):
             logfile.write(text + "\n")
             livefile.write(text + "\n")
 
-        log(f"START arm=particle posture={cfg['adv_posture']} steps={cfg['steps']} expert_records={len(columns[0])} "
+        log(f"START arm=particle recipe={recipe.name} steps={cfg['steps']} expert_records={len(columns[0])} "
             f"episodes={len(np.unique(records['episode_ids']))} device={device} adv_weight=1 "
             f"safe_fast_weight={cfg['safe_fast_weight']} safe_fast_horizon={cfg['safe_fast_horizon']}")
         log("PLAYBACK E_control(st, previous at) -> z -> G2. TRAIN E_control and G2 only. "
             "FROZEN G1, G3, E_pair, prior, transition D.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
             "AUX L2 weight=0.")
-        step_word = "update" if reg.lazy_k == 1 else "updates"
-        log("CONTROLLER STEP: Rp logistic on noise versus noise plus the edit-normalized G2 residual. "
-            f"sample-point b_cap on that critic every {reg.lazy_k} {step_word}. adv_weight=1. Not supervised_only.")
-        if cfg["adv_posture"] == "locked_shared":
-            log("STAMP particlegan.locked_shared make_gan_loss+make_b_cap "
-                f"lazy_k={reg.lazy_k} loss={gan.loss_type} mode={gan.mode} "
-                f"b_cap arm={reg.arm} coeff={reg.coeff:g} kappa={reg.kappa:g} norm={reg.norm}. "
-                f"Not YuE2 EDIT_CAP_EVERY={EDIT_CAP_EVERY}. "
-                "Host prior stays frozen. No cover term. No demo particle cloud.")
-        else:
-            log(f"POSTURE yue2 edit_cap lazy_k={reg.lazy_k} EDIT_CAP_EVERY={EDIT_CAP_EVERY}. "
-                "Not particlegan.locked_shared.")
+        log(f"CONTROLLER STEP: recipe {recipe.loss_type}/{recipe.gan_mode} GAN on noise versus noise plus the "
+            f"edit-normalized G2 residual. Recipe critic penalty ({recipe.reg_arm}) on that critic every "
+            f"{recipe.reg_every} update(s). adv_weight=1. Not supervised_only.")
         if cfg["safe_fast_weight"] == 0:
             log("SAFE-FAST off safe_fast_weight=0. Paired-error RpGAN only. "
                 "The safe-fast arm is configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml.")
@@ -292,31 +271,25 @@ def train(cfg):
                 f"speed_limit={cfg['safe_fast_speed_limit']} pad_half={cfg['safe_fast_pad_half']} "
                 f"horizon={cfg['safe_fast_horizon']}. adv_weight=1. Not adv_weight=0.")
         log(f"LR controller={groups['controller']['lr']} edit_critic={groups['edit_critic']['lr']} "
-            f"b_cap coeff={reg.coeff} kappa={reg.kappa} lazy_k={reg.lazy_k}")
+            f"penalty={recipe.reg_arm} coeff={recipe.reg_coeff} kappa={recipe.reg_kappa} every={recipe.reg_every}")
         log(f"Trainable parameters={trainable_counts}; inference={inference_count}")
         started = time.perf_counter()
         sync()
         segment = time.perf_counter()
         optimization_seconds = 0.
-        b_cap_applications = 0
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates)
             d_rows = rows("d_data")
             with torch.no_grad():
                 predicted_d = normalized_g2_action(bundle, d_rows[0], d_rows[1], d_rows[4])
             target_d = bundle["scaler"].action(d_rows[2])
-            ld, d_terms = discriminator_objective(critic, predicted_d, target_d, step, rng["edit_d"], reg,
+            ld, d_terms = discriminator_objective(critic, predicted_d, target_d, step, rng["edit_d"], penalty,
                                                   cfg["steps"], gan)
             if not torch.isfinite(ld):
                 raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
             opt_r.zero_grad(set_to_none=True)
             ld.backward()
             opt_r.step()
-            if d_terms["b_cap_applied"]:
-                b_cap_applications += 1
             g_rows = rows("data")
             predicted = normalized_g2_action(bundle, g_rows[0], g_rows[1], g_rows[4])
             target = bundle["scaler"].action(g_rows[2])
@@ -330,7 +303,7 @@ def train(cfg):
                     cfg["safe_fast_success_bonus"], cfg["safe_fast_speed_limit"], cfg["safe_fast_pad_half"])
             lg, g_terms = controller_objective(
                 critic, predicted, target, step, rng["edit_g"], cfg["steps"], cfg["adv_weight"],
-                safe_cost, cfg["safe_fast_weight"], gan)
+                safe_cost, cfg["safe_fast_weight"], gan=gan)
             if not torch.isfinite(lg):
                 raise FloatingPointError(f"Nonfinite controller loss at step {step}")
             opt_g.zero_grad(set_to_none=True)
@@ -345,14 +318,14 @@ def train(cfg):
                 sync()
                 row = dict(step=step, loss=float(lg.detach()), d_loss=float(ld.detach()),
                     g_loss=float(lg.detach()), prior_loss=0., l2_aux_weight=0., adv_weight=1.,
-                    b_cap_applied=d_terms["b_cap_applied"], lr_scale=lr_scale,
+                    lr_scale=lr_scale,
                     elapsed_seconds=time.perf_counter() - started, action_mse=float(action_mse),
                     **{key: float(value) for key, value in {**d_terms, **g_terms}.items()
-                       if key not in ("b_cap_applied", "adv_weight")})
+                       if key != "adv_weight"})
                 metrics.write(json.dumps(row, allow_nan=False) + "\n")
                 log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} D={row['d_loss']:.5f} "
                     f"G={row['g_loss']:.5f} adv_weight=1 safe_fast_weight={row['safe_fast_weight']} "
-                    f"safe_fast={row['safe_fast']:.5f} b_cap_applied={int(row['b_cap_applied'])} "
+                    f"safe_fast={row['safe_fast']:.5f} penalty={row['penalty']:.5f} "
                     f"diag_action_mse={row['action_mse']:.5f} l2_aux=0 elapsed_s={row['elapsed_seconds']:.1f}")
             if step in checkpoints:
                 sync()
@@ -377,10 +350,10 @@ def train(cfg):
             checkpoints={path.name: sha256(path) for path in sorted(out.glob("*.pt"))},
             removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
             safe_fast_weight=float(cfg["safe_fast_weight"]),
-            b_cap_applications=b_cap_applications,
+            penalty_every=recipe.reg_every,
             selection="Deferred: no landing evaluation has been run for this arm",
             initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained. "
-                           "Controller step is paired-error RpGAN plus sample-point b_cap. "
+                           "Controller step is paired-error recipe GAN plus the recipe critic penalty. "
                            f"safe_fast_weight={cfg['safe_fast_weight']}.")
         write_json(out / "summary.json", summary)
         log(f"COMPLETE train_seconds={optimization_seconds:.1f}; awaiting rollout selection")

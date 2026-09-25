@@ -33,7 +33,6 @@ prior: fixed
 prior_lr_mult: 10.0
 prior_reg: 1.0
 probe_samples: 256
-reg_arm: b_cap
 reg_coeff: 1.0
 reg_kappa: 1.0
 save_checkpoint: true

@@ -4,9 +4,8 @@ This is the slider-lock / #94 posture other code can import. It is a frozen
 definition plus two builders. It is not a trainer, a toy gate, or a gym config.
 
 ``lazy_k`` is 1, the ``GradientPenalty`` and ``Recipe`` default and the #94
-``grad_lazy``. The YuE2 gym controller applies the same cap every fourth
-update (``EDIT_CAP_EVERY`` in ``lib/gym_particle_finetune.py``). That card
-compensation is a different posture.
+``grad_lazy``. No repository trainer uses this stamp; the YuE2 gym controller
+trains with the recipe's default critic penalty.
 
 ``get_recipe("gan")`` uses the shared GAN defaults (20_000 particles,
 VICReg ``prior_reg`` .05). This stamp's 12-particle cloud and ``particle_l2``

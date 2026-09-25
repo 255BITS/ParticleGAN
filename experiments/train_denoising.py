@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, GradientPenalty, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -77,7 +77,7 @@ def training_recipe(cfg):
         alpha_bar=cfg["alpha_bar"], batch_size=cfg["batch_size"], total_steps=cfg["steps"],
         lr=cfg["lr"], d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
         betas=(cfg["beta1"], cfg.get("beta2", .999)), loss_type=cfg["loss_type"], gan_mode=cfg["gan_mode"],
-        reg_arm=cfg["reg_arm"], reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
+        reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
         reg_every=cfg["reg_every"], reg_method=cfg["reg_method"], prior_reg=cfg["prior_reg"],
         ema_decay=cfg["ema"], lr_anneal_start=cfg["lr_anneal_start"], lr_floor=cfg["lr_floor"],
     )
@@ -92,9 +92,9 @@ def make_prior(cfg, device):
 
 
 def validate(cfg):
-    GradientPenalty(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
-                    lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
-                    fd_eps=cfg.get("reg_fd_eps", .05))
+    if "reg_arm" in cfg:
+        raise ValueError("reg_arm was removed: the critic penalty is the recipe default")
+    training_recipe(cfg)  # validates every recipe field, including the penalty settings
     target = cfg.get("ucd_target", "class")
     if target not in ("class", "time_class") or (target == "time_class" and (cfg["model"] != "ddgan" or cfg["d_mode"] != "ucd")):
         raise ValueError("time_class UCD requires DDGAN with a UCD discriminator")

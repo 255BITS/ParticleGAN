@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""CPU gate: marginal RpGAN misses the pad; paired-error RpGAN plus b_cap recovers it."""
+"""CPU gate: marginal RpGAN misses the pad; paired-error RpGAN plus the recipe critic penalty recovers it."""
 import sys
 from pathlib import Path
 

@@ -17,7 +17,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
-from particlegan import DDGAN, get_recipe, ucd_loss
+from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, generate, metrics
 from lib.trajectory_visuals import render
@@ -37,7 +37,7 @@ DEFAULTS = {
 
 
 def training_recipe(cfg):
-    """Use the public primitives with this study's explicit numerical choices."""
+    """The recipe default (critic penalty, optimizers, LR schedule) at this study's rates."""
     return get_recipe(
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
         conditioning="conditional" if cfg["d_mode"] == "concat" else "ucd",
@@ -46,9 +46,8 @@ def training_recipe(cfg):
         batch_size=cfg["batch_size"], total_steps=cfg["steps"], lr=cfg["lr"],
         d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
         betas=(cfg["beta1"], .999), loss_type="logistic", gan_mode="rp",
-        reg_arm="b_cap", reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
+        reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
         reg_every=cfg["reg_every"], prior_reg=cfg["prior_reg"], ema_decay=cfg["ema"],
-        lr_floor=1.0,  # This experiment intentionally keeps a constant learning rate.
     )
 
 
@@ -119,13 +118,14 @@ def train(cfg):
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for m in (ema_g, ema_prior, ema_noise):
         m.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, fused=True)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
     if noise.kind == "learned":
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()
-    reg = recipe.make_gradient_penalty()
+    penalty_fn = recipe.make_critic_penalty(opt_d, generator=rngs[5])
+    base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
 
     def batch():
         c, geom, x0 = toy.batch(cfg["batch_size"], rngs[0])
@@ -146,11 +146,12 @@ def train(cfg):
 
     print(f"START device={env['gpu']} visible={env['visible_devices']} model={cfg['model']} prior={cfg['prior']} noise={cfg['noise']} steps={cfg['steps']}", flush=True)
     print(f"D={cfg['d_architecture']} geometry={cfg['geometry_mode']}", flush=True)
-    print("Constant LR; shared DDGAN posterior, Rp logistic, joint time/class UCD, exact lazy bcap; endpoint evaluation only", flush=True)
+    print("Recipe LR schedule and critic penalty; shared DDGAN posterior, Rp logistic, joint time/class UCD; endpoint evaluation only", flush=True)
     torch.cuda.synchronize()
     total_start = time.perf_counter()
     with (out / "metrics.jsonl").open("w") as log:
         for step in range(1, cfg["steps"]+1):
+            scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
             d.requires_grad_(True)
             c, context, real, xt, t = batch()
             with torch.no_grad():
@@ -161,7 +162,7 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 target = d.ucd_labels(c, t)
                 ld = ld + ucd_loss(cr, cf, target, weight=cfg["ucd_lambda"])
-            penalty, _ = reg.penalty(lambda x: d(x, c, context, xt, t)[0], real, xf, step, rngs[5], collect_stats=False)
+            penalty = penalty_fn(d, real, xf, c, context, xt, t)
             ld = ld + penalty
             opt_d.zero_grad(set_to_none=True)
             ld.backward()
