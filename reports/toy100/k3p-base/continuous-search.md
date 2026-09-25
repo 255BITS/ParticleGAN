@@ -93,9 +93,11 @@ rate/mixing traces and added critic evaluations. Keep FAIL/ERROR/NOT_RUN visible
 and distinguish diagnostic screens from qualification. A higher LR alone is not
 a successful formulation if it trades stability or precision for faster motion.
 
-First round: three Codex and five Grok attempts, no Claude. Each owns a distinct
-lane and isolated checkout, with four benchmark workers assigned to each GPU.
-First-round defaults: at most three mechanism proposals per lane, 45 minutes
+Current allocation: one Codex and seven Grok attempts, no Claude. This supersedes
+the historical first and second rounds' three Codex/five Grok launch mix. Each owns
+a distinct lane and isolated checkout, with at most four workers per GPU. Use
+reports/toy100/continuous-round-3/launch.py, which enforces live capacity.
+Attempt defaults: at most three mechanism proposals per lane, 45 minutes
 and one benchmark worker per lane; explicit invocation budgets override the
 time/proposal defaults. No nested agents, seed repeats,
 pushes or comments from attempts. Those are caps, not quotas. Start candidate

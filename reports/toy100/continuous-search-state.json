@@ -21,7 +21,7 @@
     "delayed_and_repeated_change_checks_required": true
   },
   "unverified_candidates": {
-    "a3_reversal_strength": "Rejected by frozen-gate verification; complete regression map still running. Earlier shift also failed 71/81, pre-hold 89/120."
+    "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120."
   },
   "previous_round": {
     "proposals": 24,
@@ -29,13 +29,13 @@
     "report": "reports/toy100/continuous-round-1/README.md"
   },
   "verification_progress": {
-    "observed_utc": "2026-09-25T17:06:46.939235+00:00",
+    "observed_utc": "2026-09-25T17:26:12.330092+00:00",
     "candidate": "a3_reversal_strength",
     "eligible_for_promotion": false,
     "reason": "Fails original frozen toy gates; later successful hold is insufficient",
     "counts_so_far": {
-      "FAIL": 5,
-      "PASS": 1
+      "PASS": 4,
+      "FAIL": 18
     },
     "gates": {
       "mode_hold": "FAIL",
@@ -43,9 +43,33 @@
       "vector_unequal_width": "FAIL",
       "img_stripes2": "PASS",
       "grid100": "FAIL",
-      "rotated100": "FAIL"
+      "rotated100": "FAIL",
+      "staggered100": "FAIL",
+      "ae_gan_hold": "FAIL",
+      "cover_leftover": "FAIL",
+      "img_bars4": "FAIL",
+      "img_blobs4": "FAIL",
+      "img_intensity2": "FAIL",
+      "mid_scale_identity": "FAIL",
+      "residual_student": "FAIL",
+      "trajectory": "FAIL",
+      "two_pole": "FAIL",
+      "unipolar": "FAIL",
+      "unused_token_hold": "FAIL",
+      "vector_anisotropic": "PASS",
+      "vector_overlap": "PASS",
+      "vector_spiral": "PASS",
+      "vector_two_broad": "FAIL"
     },
     "ledger": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/tests.jsonl",
-    "complete": false
+    "complete": true
+  },
+  "execution_policy": {
+    "codex": 1,
+    "grok": 7,
+    "max_workers_per_gpu": 4,
+    "max_workers_per_attempt": 1,
+    "launcher": "reports/toy100/continuous-round-3/launch.py",
+    "reason": "User reduced Codex budget; replace two Codex slots with Grok"
   }
 }

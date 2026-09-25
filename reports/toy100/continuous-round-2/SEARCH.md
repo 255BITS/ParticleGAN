@@ -4,11 +4,13 @@ The user explicitly defines the research algorithm:
 **Try to solve the failing problem -> identify a promising winner -> verify its
 frozen gates -> only then use a verified winner as the next shared search base.**
 
-K3P remains the selected base. A3 has never run the 22 toy gates and still fails
-the full shift protocol. Its 1200+300 hold and 71/81 recovery make it a candidate,
-not permission to base every lane on it. One Codex lane verifies unchanged A3.
-The other two Codex and five Grok lanes search independently from selected K3P.
-No Claude. Do not change current-research-base.json or promote a partial result.
+K3P remains the selected base. This round launched three Codex and five Grok
+attempts, with one Codex lane verifying unchanged A3. That verification is now
+complete: A3 passes only 4/22 toys and is rejected. The user subsequently reduced
+the live allocation to one Codex plus seven Grok; one finished-proposal Codex
+attempt was stopped with results retained. Use the round-3 rolling launcher for
+future launches. No Claude. Do not change current-research-base.json or promote
+a partial result.
 
 Read reports/toy100/continuous-round-1/README.md and relevant prior lane reports.
 Do not repeat unchanged baselines or failed mechanisms. Every proposal must address
