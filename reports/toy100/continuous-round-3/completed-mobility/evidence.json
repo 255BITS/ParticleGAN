@@ -1,0 +1,268 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z",
+  "observed_utc": "2026-09-25T18:45:46.672382+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "1e5b4651a179b6d44535594731777380f33ffe23bf18794280f7a9a1dcef2e5b",
+        "final.md": "e632295f7552749c09c482beb2b2749284c292ed68fd01eb26cacb17562b36c7",
+        "tests.jsonl": "d532edfa7c601d76bbd623ff15143d12bc2f6a16d53ce90358e62c0155839980",
+        "run.txt": "2a0256eb4ea7d901be9a8164bffb2608d11b2c8810044bae0e07af90b36df087",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "PASS": 6,
+    "FAIL": 3
+  },
+  "records": [
+    {
+      "candidate": "pm1_relative_mobility",
+      "gate": "ring_hold",
+      "status": "PASS",
+      "seconds": 114.494,
+      "metrics": {
+        "hold_checks": 1200,
+        "passing_checks": 1200,
+        "min_hq": 0.938232421875,
+        "min_modes": 8,
+        "converged_step": 1400,
+        "settling_failures": 0,
+        "final_step": 2900
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm1-hold/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm1-hold/result.json",
+      "snapshot": "evidence/1212057f68917789728e877a76d3538348dc459785b58165004e61f4aed270b1.json.gz",
+      "artifact_sha256": "1212057f68917789728e877a76d3538348dc459785b58165004e61f4aed270b1"
+    },
+    {
+      "candidate": "pm1_relative_mobility",
+      "gate": "ring_extension",
+      "status": "PASS",
+      "seconds": 114.494,
+      "metrics": {
+        "checks": 300,
+        "passing_checks": 300,
+        "min_hq": 0.989990234375,
+        "min_modes": 8,
+        "steps": "2601-2900",
+        "shared_run_seconds_with": "ring_hold"
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm1-hold/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm1-hold/result.json",
+      "snapshot": "evidence/1212057f68917789728e877a76d3538348dc459785b58165004e61f4aed270b1.json.gz",
+      "artifact_sha256": "1212057f68917789728e877a76d3538348dc459785b58165004e61f4aed270b1"
+    },
+    {
+      "candidate": "pm1_relative_mobility",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 122.433,
+      "metrics": {
+        "stationary": "5/5",
+        "continued_hold": "120/120",
+        "deadline": "79/81",
+        "deadline_step": 2800,
+        "delay_updates": 610,
+        "worst_hq": 0.88037109375,
+        "worst_step": 2990,
+        "worst_modes": 7,
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2990,
+          3000
+        ],
+        "optimizer_updates": 3600,
+        "extra_critic_forwards": 3074,
+        "final_s": 0.1836734693877552,
+        "network_m": 0.1,
+        "prior_m": 0.1
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm1-shift/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm1-shift/result.json",
+      "snapshot": "evidence/cad224f084cb371ae771e9f723d5790b0b866e7301a3f19bbca631aeb9acd462.json.gz",
+      "artifact_sha256": "cad224f084cb371ae771e9f723d5790b0b866e7301a3f19bbca631aeb9acd462"
+    },
+    {
+      "candidate": "pm2_dwell_anchor",
+      "gate": "ring_hold",
+      "status": "PASS",
+      "seconds": 102.668,
+      "metrics": {
+        "hold_checks": 1200,
+        "passing_checks": 1200,
+        "min_hq": 0.93603515625,
+        "min_modes": 8,
+        "converged_step": 1400,
+        "settling_failures": 0
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm2-hold/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm2-hold/result.json",
+      "snapshot": "evidence/5eef224eded3a01129a9e30b9ff64f6fae1b79dfe448486434bc59af9d56de41.json.gz",
+      "artifact_sha256": "5eef224eded3a01129a9e30b9ff64f6fae1b79dfe448486434bc59af9d56de41"
+    },
+    {
+      "candidate": "pm2_dwell_anchor",
+      "gate": "ring_extension",
+      "status": "PASS",
+      "seconds": 102.668,
+      "metrics": {
+        "checks": 300,
+        "passing_checks": 300,
+        "min_hq": 0.974365234375,
+        "min_modes": 8,
+        "steps": "2601-2900"
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm2-hold/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm2-hold/result.json",
+      "snapshot": "evidence/5eef224eded3a01129a9e30b9ff64f6fae1b79dfe448486434bc59af9d56de41.json.gz",
+      "artifact_sha256": "5eef224eded3a01129a9e30b9ff64f6fae1b79dfe448486434bc59af9d56de41"
+    },
+    {
+      "candidate": "pm2_dwell_anchor",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 127.022,
+      "metrics": {
+        "stationary": "5/5",
+        "continued_hold": "120/120",
+        "deadline": "78/81",
+        "delay_updates": 1040,
+        "worst_hq": 0.880615234375,
+        "worst_step": 3420,
+        "deadline_failing_steps": [
+          2810,
+          3420,
+          3430
+        ],
+        "failing_check_count": 28,
+        "optimizer_updates": 3600,
+        "extra_critic_forwards": 3074,
+        "final_s": 0.0
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm2-shift/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm2-shift/result.json",
+      "snapshot": "evidence/ed6c288079b6bd33b4a8c747deedd3bd5a817c41fdf46efadc19e61801ca62b8.json.gz",
+      "artifact_sha256": "ed6c288079b6bd33b4a8c747deedd3bd5a817c41fdf46efadc19e61801ca62b8"
+    },
+    {
+      "candidate": "pm3_prior_match",
+      "gate": "ring_hold",
+      "status": "PASS",
+      "seconds": 122.751,
+      "metrics": {
+        "hold_checks": 1200,
+        "passing_checks": 1200,
+        "min_hq": 0.925048828125,
+        "min_modes": 8,
+        "converged_step": 1400,
+        "settling_failures": 0
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm3-hold/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm3-hold/result.json",
+      "snapshot": "evidence/f762ef3b48ce64b4a2b482155d8995393d42a152b11cfe9e9bc40e525f07f7d6.json.gz",
+      "artifact_sha256": "f762ef3b48ce64b4a2b482155d8995393d42a152b11cfe9e9bc40e525f07f7d6"
+    },
+    {
+      "candidate": "pm3_prior_match",
+      "gate": "ring_extension",
+      "status": "PASS",
+      "seconds": 122.751,
+      "metrics": {
+        "checks": 300,
+        "passing_checks": 300,
+        "min_hq": 0.946533203125,
+        "min_modes": 8,
+        "steps": "2601-2900"
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm3-hold/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm3-hold/result.json",
+      "snapshot": "evidence/f762ef3b48ce64b4a2b482155d8995393d42a152b11cfe9e9bc40e525f07f7d6.json.gz",
+      "artifact_sha256": "f762ef3b48ce64b4a2b482155d8995393d42a152b11cfe9e9bc40e525f07f7d6"
+    },
+    {
+      "candidate": "pm3_prior_match",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 123.807,
+      "metrics": {
+        "stationary": "5/5",
+        "continued_hold": "120/120",
+        "deadline": "79/81",
+        "delay_updates": 810,
+        "worst_hq": 0.89990234375,
+        "worst_step": 3190,
+        "deadline_failing_steps": [
+          3190,
+          3200
+        ],
+        "failing_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2490,
+          2500,
+          2510,
+          2520,
+          2530,
+          2550,
+          3190,
+          3200
+        ],
+        "optimizer_updates": 3600,
+        "extra_critic_forwards": 3074,
+        "final_s": 0.1836734693877552,
+        "network_m": 0.1,
+        "prior_m": 0.05
+      },
+      "artifact": "repo/reports/toy100/k3p-particle-mobility/runs/pm3-shift/result.json",
+      "lane": "k3p_particle_mobility",
+      "engine": "grok",
+      "ledger_row": 9,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/repo/reports/toy100/k3p-particle-mobility/runs/pm3-shift/result.json",
+      "snapshot": "evidence/d98286742ea14337a945bb9c84ce6f0447d1dfd7c2b33d1dea9c701f3fd66ded.json.gz",
+      "artifact_sha256": "d98286742ea14337a945bb9c84ce6f0447d1dfd7c2b33d1dea9c701f3fd66ded"
+    }
+  ]
+}

@@ -106,3 +106,17 @@ The first long-run harness preparation passed its synthetic checks but failed
 [root integration review](qualification-harness-review.md): it omitted canonical
 candidate hooks and initialization. It is marked NOT_READY and assigned for
 repair. No candidate long-run score is claimed from those harness checks.
+
+Two more replacement lanes finished, adding six rejected formulations:
+
+| Completed lane | Hold + extension | Recovery checks | Remaining limitation |
+|---|---|---|---|
+| [Prior mobility](completed-mobility/attempts/k3p_particle_mobility/result.md), PM1/PM2/PM3 | All three pass | 79/81, 78/81, 79/81 | Late mode loss; inherited scheduled noise |
+| [Reference-gap release](completed-prox/attempts/k3p_prox_release/result.md), PX1/PX2/PX3 | All three pass | 16/81, 0/81, 71/81 | Mobility closes too early or persists without precision; scheduled noise |
+
+No transfer gate or full qualification is claimed for these six. PM1 detects the
+shift, but its gradient signal has already cooled when a late mode disappears.
+PX3 closes during a lull while the smoothed reference gap is still rising.
+Follow-up hypotheses test a training-minibatch distribution residual and an
+explicit growth/contraction phase. They remain independent proposals from K3P,
+not promotions of these failed candidates.

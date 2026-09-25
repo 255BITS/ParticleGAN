@@ -16,6 +16,40 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_projected_discrepancy': ('grok', GPU1, '''Investigate a training-only
+distribution residual as a horizon-free K3P controller. Read the completed-mobility
+report: PM1/PM3 hold1200+300 but recover79/81; their late missing-mode dips occur
+after raw gradients have already cooled. Scheduled noise also remains. RP1's
+raw-gradient reopen damaged stationary native precision. Start from selected
+K3P; these failed variants are diagnostic evidence, not verified shared bases.
+Hypothesis: compare sorted real/generated TRAINING minibatch projections, with
+real/real splits as a sampling-variation reference. Use a small fixed, declared
+projection set derived without training RNG, and account for added work. The
+signal may govern reversible rates/constraint; do not add target assignments or
+replace GAN gradient updates. No evaluator, held-out samples, known mode centers,
+task identifiers, shift time or final horizon. Contrast the kernel-discrepancy
+Codex lane: this is a quantile residual, not another kernel bandwidth sweep.
+Declare acquisition, sustained error and return to precision without assuming a
+quiet gradient means solved. Avoid population-density assumptions specific to
+the ring. Every proposal needs its own canonical hold and shift; short image
+screen is useful. No deep qualification of failures. Explain all remaining
+noise timing; a final candidate must not require final training duration.
+At most3 evidence-driven proposals, one benchmark worker, no nested agents.'''),
+    'k3p_excursion_phase': ('grok', GPU0, '''Own reference-excursion phase control
+from selected K3P. Read completed-prox/attempts/k3p_prox_release/result.md.
+PX1/PX2/PX3 all hold1200+300 but recover16/81,0/81,71/81. PX3 closes while its
+smoothed reference gap is still rising; a lull in velocity is not convergence.
+Investigate one declared reversible phase rule distinguishing growth from
+contraction before reducing mobility. No numerical choice from benchmark
+deadline/shift times, no required dwell duration tailored to recovery, no rate
+grid, no task-specific controller. This is an unverified hypothesis; no parent
+or partial score is inherited. RP1's stationary false restart damaged native
+accuracy: guard against making every fluctuation a new adaptation episode.
+Explain how acquisition, mixing and noise become independent of final horizon.
+Retain K3P learned sparse prior, direct response and architecture. Both canonical
+protocols for every proposal; image and full7000 grid coverage AND accuracy only
+for a ring survivor. No expensive audits of rejected variants. At most3 proposals,
+one benchmark worker, no nested agents.'''),
     'repair_continuous_qualification': ('grok', GPU1, '''Repair the long-run evaluator
 integration, not research or candidate qualification. Read qualification-harness-review.md.
 The original preparation is COMPLETE but NOT_READY: its synthetic checks passed,
