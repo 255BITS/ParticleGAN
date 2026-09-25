@@ -10,6 +10,12 @@
   and the history buffers. With one critic, the result matches the frozen K3P
   mechanism bit for bit (`tests/test_k3p.py`). The recipe default does not
   change yet.
+- `GANTrainer` and `examples/100gaussians.py` support `reg_arm="k3p"`: they
+  call `after_critic_step` after each critic step and allocate the EMA critic.
+  The trainer also averages the critic's buffers and saves both `ema_D` and
+  the penalty state in its checkpoint.
+- A k3p regularizer now raises if it is used on a second critic without an
+  explicit `ema_critic=`, and `after_critic_step` accepts a tensor LR.
 
 ## 0.7.0 — 2026-09-24
 

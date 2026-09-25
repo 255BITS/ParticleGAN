@@ -226,6 +226,10 @@ class GradRegularizer:
         self._anchor_started = False
         self._calls = 0
         self._observed_steps = 0
+        # Identity of the critic served through the constructor anchor
+        # (id only; not checkpointed). Guards against one k3p instance
+        # silently anchoring a second critic to the first critic's EMA.
+        self._critic_id: Optional[int] = None
 
     # -------------------------
     #  Public API
@@ -251,7 +255,7 @@ class GradRegularizer:
             return
         if self._anchor_started and self.anchor is not None:
             self.anchor.update_()
-        if isinstance(optimizer_or_lr, (int, float)):
+        if isinstance(optimizer_or_lr, (int, float, torch.Tensor)):
             lr = float(optimizer_or_lr)
         else:
             lr = max(float(g["lr"]) for g in optimizer_or_lr.param_groups)
@@ -377,6 +381,20 @@ class GradRegularizer:
                 "k3p: after_critic_step(critic_optimizer) was never called; "
                 "without it s stays 1 (pure a_r1r2) forever"
             )
+        if ema_critic is None:
+            owner = getattr(self.anchor, "critic", None)
+            if owner is not None and D is not owner:
+                raise ValueError(
+                    "k3p: D is not the critic this regularizer's anchor tracks; "
+                    "use one GradRegularizer per critic or pass ema_critic= explicitly"
+                )
+            if self._critic_id is None:
+                self._critic_id = id(D)
+            elif self._critic_id != id(D):
+                raise ValueError(
+                    "k3p: this regularizer already serves a different critic; "
+                    "use one GradRegularizer per critic or pass ema_critic= explicitly"
+                )
         s = self.blend_weight()
         self._calls += 1
         if s >= 1.0:

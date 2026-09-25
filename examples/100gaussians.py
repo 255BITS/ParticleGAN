@@ -264,6 +264,11 @@ def train(
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
         regularizer = recipe.make_gradient_penalty(fd_eps=reg_fd_eps)
+        if regularizer.arm == "k3p":
+            # K3P anchors D's input gradient to D's parameter EMA; the caller
+            # owns that copy.
+            from particlegan.k3p import CriticAnchor
+            regularizer.anchor = CriticAnchor(D, copy.deepcopy(D).eval().requires_grad_(False))
 
         opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
         # Keep a separate prior optimizer for the existing update/checkpoint layout.
@@ -376,6 +381,7 @@ def train(
                 opt_D.zero_grad()
                 loss_d.backward()
                 opt_D.step()
+                regularizer.after_critic_step(opt_D)
 
                 # -------------------------
                 # 2) Generator + prior step

@@ -322,3 +322,64 @@ def test_stateless_arms_uniform_api():
         assert reg.blend_weight() == 1.0 and reg.state_dict() == {}
         reg.load_state_dict({})
         assert torch.equal(reg.penalty(D, xr, xf, 5, torch.Generator().manual_seed(0))[0], before)
+
+
+def test_after_critic_step_accepts_tensor_lr():
+    reg = GradRegularizer(arm="k3p")
+    reg.after_critic_step(torch.tensor(0.5))
+    reg.after_critic_step(torch.tensor(0.25, dtype=torch.float64))
+    assert reg.state_dict()["lr_max"] == 0.5 and reg.state_dict()["lr_last"] == 0.25
+
+
+def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
+    torch.manual_seed(0)
+    A, B = nn.Linear(2, 1).double(), nn.Linear(2, 1).double()
+    x_r, x_f = torch.randn(4, 2, dtype=torch.float64), torch.randn(4, 2, dtype=torch.float64)
+    anchored = GradRegularizer(arm="k3p", anchor=CriticAnchor(A, copy.deepcopy(A).requires_grad_(False)))
+    anchored.penalty(A, x_r, x_f)
+    with pytest.raises(ValueError, match="anchor tracks"):
+        anchored.penalty(B, x_r, x_f)
+    plain = GradRegularizer(arm="k3p")
+    plain.penalty(A, x_r, x_f)
+    with pytest.raises(ValueError, match="different critic"):
+        plain.penalty(B, x_r, x_f)
+    # An explicit per-call EMA critic remains the multi-role path.
+    emaB = copy.deepcopy(B).requires_grad_(False)
+    anchored.penalty(B, x_r, x_f, ema_critic=emaB)
+
+
+def _k3p_trainer():
+    from particlegan import GANTrainer, get_recipe
+    torch.manual_seed(0)
+    recipe = get_recipe("gan", reg_arm="k3p", num_particles=8, z_dim=2, batch_size=4,
+                        total_steps=10, lr_anneal_start=0.1)
+    G = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 2)).double()
+    D = nn.Sequential(nn.Linear(2, 8), nn.BatchNorm1d(8), nn.ReLU(), nn.Linear(8, 1)).double()
+    return GANTrainer(recipe, G, D)
+
+
+def test_trainer_runs_k3p_through_blend_and_resumes_exactly():
+    reals = [torch.randn(4, 2, dtype=torch.float64, generator=torch.Generator().manual_seed(i)) for i in range(10)]
+    full = _k3p_trainer()
+    phases, penalties = [], []
+    for real in reals:
+        out = full.step(real, collect_stats=True)
+        phases.append(out["penalty_stats"]["phase"])
+        penalties.append(out["penalty"])
+    assert phases[0] == "a" and "blend" in phases
+    assert full.state_dict()["penalty_state"]["anchor_started"]
+    assert torch.equal(full.ema_D[1].running_mean, full.D[1].running_mean)
+
+    first = _k3p_trainer()
+    for real in reals[:5]:
+        first.step(real)
+    checkpoint = first.state_dict()
+    assert "ema_D" in checkpoint["models"]
+    resumed = _k3p_trainer()
+    resumed.load_state_dict(checkpoint)
+    for i, real in enumerate(reals[5:], start=5):
+        assert torch.equal(resumed.step(real)["penalty"], penalties[i])
+    for a, b in zip(resumed.D.parameters(), full.D.parameters()):
+        assert torch.equal(a, b)
+    for a, b in zip(resumed.ema_D.parameters(), full.ema_D.parameters()):
+        assert torch.equal(a, b)
