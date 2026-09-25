@@ -1,6 +1,6 @@
 {
   "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z",
-  "observed_utc": "2026-09-25T17:36:22.457632+00:00",
+  "observed_utc": "2026-09-25T18:15:19.318079+00:00",
   "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
   "attempts": [
     {
@@ -48434,6 +48434,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/mode_hold/result.json",
       "snapshot": "evidence/73a125c2013b198924e9a3464d8144547a854c3666565c1e453657cc0cb9cb42.json.gz",
       "artifact_sha256": "73a125c2013b198924e9a3464d8144547a854c3666565c1e453657cc0cb9cb42"
     },
@@ -66159,6 +66160,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/vector_unequal_mass/result.json",
       "snapshot": "evidence/5a1eaf54b5c5acdf7303fb3743a7cbe14d2b4ea493d3f10eba1e1b2681222ac4.json.gz",
       "artifact_sha256": "5a1eaf54b5c5acdf7303fb3743a7cbe14d2b4ea493d3f10eba1e1b2681222ac4"
     },
@@ -83876,6 +83878,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/vector_unequal_width/result.json",
       "snapshot": "evidence/359dee4bd11718c2b0fa8615e159a10934dd3465b9bbaaa9571cf81274ff2aea.json.gz",
       "artifact_sha256": "359dee4bd11718c2b0fa8615e159a10934dd3465b9bbaaa9571cf81274ff2aea"
     },
@@ -92669,6 +92672,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/img_stripes2/result.json",
       "snapshot": "evidence/1114b3c8767a864a571ab936ae8ba9efa3bea9d1142bdef6a076933facd3506c.json.gz",
       "artifact_sha256": "1114b3c8767a864a571ab936ae8ba9efa3bea9d1142bdef6a076933facd3506c"
     },
@@ -93102,6 +93106,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/grid100/result.json",
       "snapshot": "evidence/748bb3bf5dd78c77784f31e584e51d2effa049b3040687aa8da4d1db6eee3557.json.gz",
       "artifact_sha256": "748bb3bf5dd78c77784f31e584e51d2effa049b3040687aa8da4d1db6eee3557"
     },
@@ -93535,6 +93540,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/rotated100/result.json",
       "snapshot": "evidence/928965137bd9484229059fec2b54b8cc9db15a9f4b3459aac1b169becd18fa9c.json.gz",
       "artifact_sha256": "928965137bd9484229059fec2b54b8cc9db15a9f4b3459aac1b169becd18fa9c"
     },
@@ -93968,6 +93974,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/staggered100/result.json",
       "snapshot": "evidence/aa664ea78d5325061e54e7e808969e12d707b1448b349f5cdb036fdd2aafaf60.json.gz",
       "artifact_sha256": "aa664ea78d5325061e54e7e808969e12d707b1448b349f5cdb036fdd2aafaf60"
     },
@@ -102696,6 +102703,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/ae_gan_hold/result.json",
       "snapshot": "evidence/67c6f0f627a4c4351dd3c684d75a708dace3b84004086b860ca8301fe9d5c59d.json.gz",
       "artifact_sha256": "67c6f0f627a4c4351dd3c684d75a708dace3b84004086b860ca8301fe9d5c59d"
     },
@@ -130520,6 +130528,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 9,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/cover_leftover/result.json",
       "snapshot": "evidence/205381a27d496e5a0d0c1142c65821002c19be1a233d1ca64dc00e247bed90f3.json.gz",
       "artifact_sha256": "205381a27d496e5a0d0c1142c65821002c19be1a233d1ca64dc00e247bed90f3"
     },
@@ -139513,6 +139522,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 10,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/img_bars4/result.json",
       "snapshot": "evidence/950e0babe5aa6b0d4a57d9b1e11a5a5ebce3394aaaab98281f49c973d0ee5814.json.gz",
       "artifact_sha256": "950e0babe5aa6b0d4a57d9b1e11a5a5ebce3394aaaab98281f49c973d0ee5814"
     },
@@ -148506,6 +148516,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 11,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/img_blobs4/result.json",
       "snapshot": "evidence/cc0c228d79ae1c9ba1ba30e4300bc64285af38f69d4a875b2c6b80ddf88bdd51.json.gz",
       "artifact_sha256": "cc0c228d79ae1c9ba1ba30e4300bc64285af38f69d4a875b2c6b80ddf88bdd51"
     },
@@ -157299,6 +157310,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 12,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/img_intensity2/result.json",
       "snapshot": "evidence/8576273dc5ca6d741e1fb7ee71ce315433650a20c54345eeb40b9976ae80480e.json.gz",
       "artifact_sha256": "8576273dc5ca6d741e1fb7ee71ce315433650a20c54345eeb40b9976ae80480e"
     },
@@ -182545,6 +182557,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 13,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/mid_scale_identity/result.json",
       "snapshot": "evidence/780c8ba0d21d62e32d4c6da906d809d6b4fdd85ba9c353f48af3d2dcffc2fb67.json.gz",
       "artifact_sha256": "780c8ba0d21d62e32d4c6da906d809d6b4fdd85ba9c353f48af3d2dcffc2fb67"
     },
@@ -196449,6 +196462,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 14,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/residual_student/result.json",
       "snapshot": "evidence/6973d4561cc5843d395cf7a89f2ec43b65af822d9cd38533774541d72e17e46e.json.gz",
       "artifact_sha256": "6973d4561cc5843d395cf7a89f2ec43b65af822d9cd38533774541d72e17e46e"
     },
@@ -210246,6 +210260,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 15,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/trajectory/result.json",
       "snapshot": "evidence/95eeddf2936dc18ab32a50638f1763d0163943edcce6c4753b4bb25986011139.json.gz",
       "artifact_sha256": "95eeddf2936dc18ab32a50638f1763d0163943edcce6c4753b4bb25986011139"
     },
@@ -212872,6 +212887,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 16,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/two_pole/result.json",
       "snapshot": "evidence/771419213c5dad7420d78663ddb01ff3be8f5efe276f80d36612652f00338ff6.json.gz",
       "artifact_sha256": "771419213c5dad7420d78663ddb01ff3be8f5efe276f80d36612652f00338ff6"
     },
@@ -225629,6 +225645,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 17,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/unipolar/result.json",
       "snapshot": "evidence/06073bdc28c5c39e9f2f307e7dd74fc4a24a289c68589f25c788d5e4cf3bfd1a.json.gz",
       "artifact_sha256": "06073bdc28c5c39e9f2f307e7dd74fc4a24a289c68589f25c788d5e4cf3bfd1a"
     },
@@ -231952,6 +231969,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 18,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/unused_token_hold/result.json",
       "snapshot": "evidence/d53ab764dd2b940c3ac613ed85d878d0a9c30819ec74cefaa51a246cdcfd5165.json.gz",
       "artifact_sha256": "d53ab764dd2b940c3ac613ed85d878d0a9c30819ec74cefaa51a246cdcfd5165"
     },
@@ -249469,6 +249487,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 19,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/vector_anisotropic/result.json",
       "snapshot": "evidence/b857e250378fe8644e259db69fc2e421e1db268e8de922a1af106947946a3b8d.json.gz",
       "artifact_sha256": "b857e250378fe8644e259db69fc2e421e1db268e8de922a1af106947946a3b8d"
     },
@@ -265720,6 +265739,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 20,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/vector_overlap/result.json",
       "snapshot": "evidence/4221cce7a344e435ca8c03e270df71ccbb61ef438488d9a4432556b5a4636db7.json.gz",
       "artifact_sha256": "4221cce7a344e435ca8c03e270df71ccbb61ef438488d9a4432556b5a4636db7"
     },
@@ -287171,6 +287191,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 21,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/vector_spiral/result.json",
       "snapshot": "evidence/3b90e03d8b638a035eddd8d0a98127f0afc8a8e62698737a938906d766097f4c.json.gz",
       "artifact_sha256": "3b90e03d8b638a035eddd8d0a98127f0afc8a8e62698737a938906d766097f4c"
     },
@@ -304488,6 +304509,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 22,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/runs/vector_two_broad/result.json",
       "snapshot": "evidence/1603bbac4c6d8a080d9958a860fff0c6b9e031edbd1279da3397fc5f920a62ad.json.gz",
       "artifact_sha256": "1603bbac4c6d8a080d9958a860fff0c6b9e031edbd1279da3397fc5f920a62ad"
     },
@@ -304504,6 +304526,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 23,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/qualification-audit.json",
       "snapshot": "evidence/dca8334c5e1b8e255aedeb74ddfee9b1129e9829d4f4a2a1919b9cf6e267b205.json.gz",
       "artifact_sha256": "dca8334c5e1b8e255aedeb74ddfee9b1129e9829d4f4a2a1919b9cf6e267b205"
     },
@@ -304520,6 +304543,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 24,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/qualification-audit.json",
       "snapshot": "evidence/dca8334c5e1b8e255aedeb74ddfee9b1129e9829d4f4a2a1919b9cf6e267b205.json.gz",
       "artifact_sha256": "dca8334c5e1b8e255aedeb74ddfee9b1129e9829d4f4a2a1919b9cf6e267b205"
     },
@@ -304536,6 +304560,7 @@
       "lane": "verify_a3_gates",
       "engine": "codex",
       "ledger_row": 25,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/verify_a3_gates/20260925T165310Z-3675706/repo/reports/toy100/verify-a3-attempt/qualification-audit.json",
       "snapshot": "evidence/dca8334c5e1b8e255aedeb74ddfee9b1129e9829d4f4a2a1919b9cf6e267b205.json.gz",
       "artifact_sha256": "dca8334c5e1b8e255aedeb74ddfee9b1129e9829d4f4a2a1919b9cf6e267b205"
     },
@@ -304970,6 +304995,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c1_loss_envelope/shift_mode_hold/result.json",
       "snapshot": "evidence/f27e0018147a27ec7070f6815a2f8febd86f4d3cb97a8f7e5acd6bbe3dd20ab8.json.gz",
       "artifact_sha256": "f27e0018147a27ec7070f6815a2f8febd86f4d3cb97a8f7e5acd6bbe3dd20ab8"
     },
@@ -305015,6 +305041,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c1_loss_envelope/hold_mode_hold/result.json",
       "snapshot": "evidence/7058e4b39fd5e7776a50d7bcb4d09e5ee006dd388f2e3d987e84655e74749332.json.gz",
       "artifact_sha256": "7058e4b39fd5e7776a50d7bcb4d09e5ee006dd388f2e3d987e84655e74749332"
     },
@@ -305449,6 +305476,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c2_motion_hysteresis/shift_mode_hold/result.json",
       "snapshot": "evidence/b3f58d4cb5f49a2d42925653244e5a0d8132651d145bb0ee97ce4fac1b480a9c.json.gz",
       "artifact_sha256": "b3f58d4cb5f49a2d42925653244e5a0d8132651d145bb0ee97ce4fac1b480a9c"
     },
@@ -305494,6 +305522,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c2_motion_hysteresis/hold_mode_hold/result.json",
       "snapshot": "evidence/7bbc92c452ffa2dc54d4b09042b59c03c50f7f0122a9260ce7eb6f61146fd8b2.json.gz",
       "artifact_sha256": "7bbc92c452ffa2dc54d4b09042b59c03c50f7f0122a9260ce7eb6f61146fd8b2"
     },
@@ -305584,6 +305613,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/source-audit.json",
       "snapshot": "evidence/c72c75bad54b6b07f03fc31c7ece670d0f5d271575f5e5094e2ba9f48c9e0b06.json.gz",
       "artifact_sha256": "c72c75bad54b6b07f03fc31c7ece670d0f5d271575f5e5094e2ba9f48c9e0b06"
     },
@@ -305851,6 +305881,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c3_directed_motion/shift_mode_hold/result.json",
       "snapshot": "evidence/84ee77282721c9959b55a2f4fd3d9498231ee8f10eec2bb512c78bba16e0bbe0.json.gz",
       "artifact_sha256": "84ee77282721c9959b55a2f4fd3d9498231ee8f10eec2bb512c78bba16e0bbe0"
     },
@@ -305896,6 +305927,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c3_directed_motion/hold_mode_hold/result.json",
       "snapshot": "evidence/e81a66d22bd3f24c99064c05b4d622a5664252b088733e5b5412d3a8286adac8.json.gz",
       "artifact_sha256": "e81a66d22bd3f24c99064c05b4d622a5664252b088733e5b5412d3a8286adac8"
     },
@@ -306332,6 +306364,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c3_directed_motion/frozen_mode_hold/result.json",
       "snapshot": "evidence/d591c91f0df7e03e630f99c4da0e7cccc614e40f59ca00a46020c3a8778804fa.json.gz",
       "artifact_sha256": "d591c91f0df7e03e630f99c4da0e7cccc614e40f59ca00a46020c3a8778804fa"
     },
@@ -306401,6 +306434,7 @@
       "lane": "k3p_reversible_schedule",
       "engine": "codex",
       "ledger_row": 9,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_reversible_schedule/20260925T165310Z-3675707/repo/runs/c3_directed_motion/matched-frozen-diagnostic.json",
       "snapshot": "evidence/643c21cb2a3c0bd18709caf4eeff17ec02ab85f4f840873def7bfde1d018508d.json.gz",
       "artifact_sha256": "643c21cb2a3c0bd18709caf4eeff17ec02ab85f4f840873def7bfde1d018508d"
     },
@@ -306447,6 +306481,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd1_predictive_scheduled-hold/result.json",
       "snapshot": "evidence/69126d76fb0fdae3620f4a321329e78e019402cde16895e43df56664c14f8ac1.json.gz",
       "artifact_sha256": "69126d76fb0fdae3620f4a321329e78e019402cde16895e43df56664c14f8ac1"
     },
@@ -306542,6 +306577,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd1_predictive_scheduled-shift/result.json",
       "snapshot": "evidence/646732b999224f3ffc3c09a50064e23fd5471353e6dce2341b6e33a37627d23e.json.gz",
       "artifact_sha256": "646732b999224f3ffc3c09a50064e23fd5471353e6dce2341b6e33a37627d23e"
     },
@@ -306588,6 +306624,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd2_predictive_stationary-hold/result.json",
       "snapshot": "evidence/bf96cac57839177274b2456a5045d9cbaff3ea3e4a2d1140303f19cb4f07cb4a.json.gz",
       "artifact_sha256": "bf96cac57839177274b2456a5045d9cbaff3ea3e4a2d1140303f19cb4f07cb4a"
     },
@@ -307062,6 +307099,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd2_predictive_stationary-shift/result.json",
       "snapshot": "evidence/5c547e7a624b05c81ddaa480f887f77e9a6358f3317ccd188d4952e3786a4b15.json.gz",
       "artifact_sha256": "5c547e7a624b05c81ddaa480f887f77e9a6358f3317ccd188d4952e3786a4b15"
     },
@@ -307082,6 +307120,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd3-update-invariants.json",
       "snapshot": "evidence/c0ab95f116b4150da3a3442a1866eb736fec2c63fbff37c9f9c6bca3781970d5.json.gz",
       "artifact_sha256": "c0ab95f116b4150da3a3442a1866eb736fec2c63fbff37c9f9c6bca3781970d5"
     },
@@ -307128,6 +307167,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd3_bounded_reversal-hold/result.json",
       "snapshot": "evidence/9bb9647874d41c83fd8026d6d8800e90189850f0ee23bdb3583be618334ff95e.json.gz",
       "artifact_sha256": "9bb9647874d41c83fd8026d6d8800e90189850f0ee23bdb3583be618334ff95e"
     },
@@ -307602,6 +307642,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd3_bounded_reversal-shift/result.json",
       "snapshot": "evidence/7db6fe170c4725aa91d710c688a21e201df6eb92e75dee2a9ad1337118b9df5e.json.gz",
       "artifact_sha256": "7db6fe170c4725aa91d710c688a21e201df6eb92e75dee2a9ad1337118b9df5e"
     },
@@ -307665,6 +307706,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/canonical-integrity.json",
       "snapshot": "evidence/e61632892596e83b0671cd60ba45152aaeb07d2adca7bdadc51ed1d97a0509be.json.gz",
       "artifact_sha256": "e61632892596e83b0671cd60ba45152aaeb07d2adca7bdadc51ed1d97a0509be"
     },
@@ -307718,6 +307760,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 9,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd2_predictive_stationary-horizon-audit.json",
       "snapshot": "evidence/b6333ffc8ff2e9deee0194e56bdb54d8c7f5ebd124a0d59a7de9a98ddc7c4d54.json.gz",
       "artifact_sha256": "b6333ffc8ff2e9deee0194e56bdb54d8c7f5ebd124a0d59a7de9a98ddc7c4d54"
     },
@@ -307809,6 +307852,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 10,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd2_predictive_stationary-adapter-audit.json",
       "snapshot": "evidence/c340637b8eb2ca04ecc1cf1b8351cad0f816e7e19df4d103bf1801bba545bfb6.json.gz",
       "artifact_sha256": "c340637b8eb2ca04ecc1cf1b8351cad0f816e7e19df4d103bf1801bba545bfb6"
     },
@@ -307864,6 +307908,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 11,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd2_predictive_stationary-horizon-training-state-audit.json",
       "snapshot": "evidence/be34a1b882dbdafd3aedaa81e23aa4a220b1a85092d5ca835afd7bc2f448a150.json.gz",
       "artifact_sha256": "be34a1b882dbdafd3aedaa81e23aa4a220b1a85092d5ca835afd7bc2f448a150"
     },
@@ -307955,6 +308000,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 12,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd3_bounded_reversal-adapter-audit.json",
       "snapshot": "evidence/c340637b8eb2ca04ecc1cf1b8351cad0f816e7e19df4d103bf1801bba545bfb6.json.gz",
       "artifact_sha256": "c340637b8eb2ca04ecc1cf1b8351cad0f816e7e19df4d103bf1801bba545bfb6"
     },
@@ -307978,6 +308024,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 13,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd3_bounded_reversal-horizon-audit.json",
       "snapshot": "evidence/c582c2dfb92e9771d0844e50c2dc6f899309384a13a3a310eec3f92404fc5235.json.gz",
       "artifact_sha256": "c582c2dfb92e9771d0844e50c2dc6f899309384a13a3a310eec3f92404fc5235"
     },
@@ -307998,6 +308045,7 @@
       "lane": "k3p_game_damping",
       "engine": "codex",
       "ledger_row": 14,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_game_damping/20260925T165310Z-3675710/repo/reports/toy100/game-damping-attempt/runs/gd1_predictive_scheduled-horizon-audit.json",
       "snapshot": "evidence/907f9b0546ab2b3ba1615296d58d098823e319e0d57bb87350dbb5feb6f137ff.json.gz",
       "artifact_sha256": "907f9b0546ab2b3ba1615296d58d098823e319e0d57bb87350dbb5feb6f137ff"
     },
@@ -308030,7 +308078,10 @@
       "mechanism_sha256": "694a40d6cb11c110abf36f7e9852c7ef88c44b244c66843101e4c3af1eb8b667",
       "lane": "k3p_adversarial_progress",
       "engine": "grok",
-      "ledger_row": 1
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_adversarial_progress/20260925T165310Z-3675713/repo/reports/toy100/k3p-adversarial-progress/runs/ap1-shift/result.json",
+      "snapshot": "evidence/c0c6f329c6bd6b6aa9312831f5e32553e66741887927f58753183d2dacc6a289.json.gz",
+      "artifact_sha256": "c0c6f329c6bd6b6aa9312831f5e32553e66741887927f58753183d2dacc6a289"
     },
     {
       "candidate": "ap2_anchored_reopen",
@@ -308058,7 +308109,10 @@
       "mechanism_sha256": "ede2c615fc9d0170562fa983577dc9ebac5b155370787989bdcebd66ae42c86f",
       "lane": "k3p_adversarial_progress",
       "engine": "grok",
-      "ledger_row": 2
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_adversarial_progress/20260925T165310Z-3675713/repo/reports/toy100/k3p-adversarial-progress/runs/ap2-shift/result.json",
+      "snapshot": "evidence/88f9907571b65e2f273d3113d34bd3a0952a6a3c35e51a590b207504f7e8d6a7.json.gz",
+      "artifact_sha256": "88f9907571b65e2f273d3113d34bd3a0952a6a3c35e51a590b207504f7e8d6a7"
     },
     {
       "candidate": "ap3_partial_reopen",
@@ -308108,7 +308162,10 @@
       "mechanism_sha256": "8d65d1d690c1a1ccfe4e2cc82a2f6982fb31c50f67cba4e8665623a7f3f627de",
       "lane": "k3p_adversarial_progress",
       "engine": "grok",
-      "ledger_row": 3
+      "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_adversarial_progress/20260925T165310Z-3675713/repo/reports/toy100/k3p-adversarial-progress/runs/ap3-shift/result.json",
+      "snapshot": "evidence/c3612528c508fb0cda9bed3ecc98983da1a9e09e7c70a533cca1daab0157db8c.json.gz",
+      "artifact_sha256": "c3612528c508fb0cda9bed3ecc98983da1a9e09e7c70a533cca1daab0157db8c"
     },
     {
       "candidate": "ap3_partial_reopen",
@@ -308137,7 +308194,10 @@
       "mechanism_sha256": "8d65d1d690c1a1ccfe4e2cc82a2f6982fb31c50f67cba4e8665623a7f3f627de",
       "lane": "k3p_adversarial_progress",
       "engine": "grok",
-      "ledger_row": 4
+      "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_adversarial_progress/20260925T165310Z-3675713/repo/reports/toy100/k3p-adversarial-progress/runs/ap3-hold/result.json",
+      "snapshot": "evidence/7bb4cc5291643813d680d0716685115559d62dc47e44f7ac541a05c8f8fa001a.json.gz",
+      "artifact_sha256": "7bb4cc5291643813d680d0716685115559d62dc47e44f7ac541a05c8f8fa001a"
     },
     {
       "candidate": "at1_persist_reference",
@@ -308163,7 +308223,8 @@
       "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_anchor_tracking/20260925T165310Z-3675716/repo/reports/toy100/k3p-anchor-tracking-3675716/runs/at1-hold.log",
       "lane": "k3p_anchor_tracking",
       "engine": "grok",
-      "ledger_row": 1
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_anchor_tracking/20260925T165310Z-3675716/repo/reports/toy100/k3p-anchor-tracking-3675716/runs/at1-hold.log"
     },
     {
       "candidate": "at2_generator_energy",
@@ -308188,7 +308249,8 @@
       "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_anchor_tracking/20260925T165310Z-3675716/repo/reports/toy100/k3p-anchor-tracking-3675716/runs/at2-hold.log",
       "lane": "k3p_anchor_tracking",
       "engine": "grok",
-      "ledger_row": 2
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_anchor_tracking/20260925T165310Z-3675716/repo/reports/toy100/k3p-anchor-tracking-3675716/runs/at2-hold.log"
     },
     {
       "candidate": "at3_peak_rate_slow_reference",
@@ -308225,6 +308287,7 @@
       "lane": "k3p_anchor_tracking",
       "engine": "grok",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_anchor_tracking/20260925T165310Z-3675716/repo/reports/toy100/k3p-anchor-tracking-3675716/runs/at3-hold/result.json",
       "snapshot": "evidence/7585e1e0989451dc186ea4ff433570b9790615ce252c0d9e4a33f7d8ade55a45.json.gz",
       "artifact_sha256": "7585e1e0989451dc186ea4ff433570b9790615ce252c0d9e4a33f7d8ade55a45"
     },
@@ -308271,6 +308334,7 @@
       "lane": "k3p_anchor_tracking",
       "engine": "grok",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_anchor_tracking/20260925T165310Z-3675716/repo/reports/toy100/k3p-anchor-tracking-3675716/runs/at3-shift/result.json",
       "snapshot": "evidence/591e96a26a4a1d5f64dec71159740b0e95e84813715a8057bcc824df87dc3cd3.json.gz",
       "artifact_sha256": "591e96a26a4a1d5f64dec71159740b0e95e84813715a8057bcc824df87dc3cd3"
     },
@@ -308412,6 +308476,7 @@
       "lane": "k3p_balanced_updates",
       "engine": "grok",
       "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_balanced_updates/20260925T165310Z-3675726/repo/reports/toy100/k3p-balanced-updates/runs/kbu1-shift/result.json",
       "snapshot": "evidence/d30b1768226b944f293c7aad67d12978ebc1e51912a418dd61a833ee63a4f8f8.json.gz",
       "artifact_sha256": "d30b1768226b944f293c7aad67d12978ebc1e51912a418dd61a833ee63a4f8f8"
     },
@@ -308446,6 +308511,7 @@
       "lane": "k3p_balanced_updates",
       "engine": "grok",
       "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_balanced_updates/20260925T165310Z-3675726/repo/reports/toy100/k3p-balanced-updates/runs/kbu1-hold/result.json",
       "snapshot": "evidence/bac609bb7fe3cd3a9c07492bbb79d2209a4689940c0bd8410abe9516d6d55bc8.json.gz",
       "artifact_sha256": "bac609bb7fe3cd3a9c07492bbb79d2209a4689940c0bd8410abe9516d6d55bc8"
     },
@@ -308490,6 +308556,7 @@
       "lane": "k3p_balanced_updates",
       "engine": "grok",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_balanced_updates/20260925T165310Z-3675726/repo/reports/toy100/k3p-balanced-updates/runs/kbu2-shift/result.json",
       "snapshot": "evidence/2d7b993b6c79297bd71fd1965f8979e073d80b8a52f5df30a1f861054ab15f81.json.gz",
       "artifact_sha256": "2d7b993b6c79297bd71fd1965f8979e073d80b8a52f5df30a1f861054ab15f81"
     },
@@ -308541,6 +308608,7 @@
       "lane": "k3p_balanced_updates",
       "engine": "grok",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_balanced_updates/20260925T165310Z-3675726/repo/reports/toy100/k3p-balanced-updates/runs/kbu3-shift/result.json",
       "snapshot": "evidence/96c43f03fb63af803500e9f24dccaab0a52c9a3f80906c1f04e029b39a8fa598.json.gz",
       "artifact_sha256": "96c43f03fb63af803500e9f24dccaab0a52c9a3f80906c1f04e029b39a8fa598"
     },
@@ -308571,6 +308639,7 @@
       "lane": "k3p_balanced_updates",
       "engine": "grok",
       "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_balanced_updates/20260925T165310Z-3675726/repo/reports/toy100/k3p-balanced-updates/runs/kbu3-hold/result.json",
       "snapshot": "evidence/269fd98d68abe9fda179658f747ae636476da18810aed0a371c369ec0609aa6f.json.gz",
       "artifact_sha256": "269fd98d68abe9fda179658f747ae636476da18810aed0a371c369ec0609aa6f"
     },
@@ -308600,6 +308669,7 @@
       "lane": "k3p_balanced_updates",
       "engine": "grok",
       "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_balanced_updates/20260925T165310Z-3675726/repo/reports/toy100/k3p-balanced-updates/runs/kbu2-hold/result.json",
       "snapshot": "evidence/53e50826269677831af50ebe4a6fc3f7b5f556a9f35acb930f40f3b41c4ec068.json.gz",
       "artifact_sha256": "53e50826269677831af50ebe4a6fc3f7b5f556a9f35acb930f40f3b41c4ec068"
     },
@@ -308624,7 +308694,8 @@
       "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/logs/p1-hold.log",
       "lane": "k3p_precision_recovery",
       "engine": "grok",
-      "ledger_row": 1
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/logs/p1-hold.log"
     },
     {
       "candidate": "p1_hysteresis_dwell",
@@ -308793,6 +308864,7 @@
       "lane": "k3p_precision_recovery",
       "engine": "grok",
       "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/runs/p1-shift/result.json",
       "snapshot": "evidence/08ae225e36a60bff2836d9b035c7731a7415aae874792fd648abb9ec443298d9.json.gz",
       "artifact_sha256": "08ae225e36a60bff2836d9b035c7731a7415aae874792fd648abb9ec443298d9"
     },
@@ -308830,6 +308902,7 @@
       "lane": "k3p_precision_recovery",
       "engine": "grok",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/runs/p2-hold/result.json",
       "snapshot": "evidence/f8b02cf513b7c018c2c145679bb42a3bfa51e86968ba970d8ae0ce0dddd3c594.json.gz",
       "artifact_sha256": "f8b02cf513b7c018c2c145679bb42a3bfa51e86968ba970d8ae0ce0dddd3c594"
     },
@@ -308875,6 +308948,7 @@
       "lane": "k3p_precision_recovery",
       "engine": "grok",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/runs/p2-shift/result.json",
       "snapshot": "evidence/a2fe729f0e339289b9b4e445e90583c9d4c9d709f9eb5708aeeea62341106c99.json.gz",
       "artifact_sha256": "a2fe729f0e339289b9b4e445e90583c9d4c9d709f9eb5708aeeea62341106c99"
     },
@@ -308903,6 +308977,7 @@
       "lane": "k3p_precision_recovery",
       "engine": "grok",
       "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/runs/p3-hold/result.json",
       "snapshot": "evidence/5d254fa9837a873ec80d28df2f5039d9e8a5c0fbcb256e167b61526866e43b95.json.gz",
       "artifact_sha256": "5d254fa9837a873ec80d28df2f5039d9e8a5c0fbcb256e167b61526866e43b95"
     },
@@ -308953,6 +309028,7 @@
       "lane": "k3p_precision_recovery",
       "engine": "grok",
       "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_precision_recovery/20260925T165310Z-3675734/repo/reports/toy100/k3p-precision-recovery/runs/p3-shift/result.json",
       "snapshot": "evidence/5b84130feb33cfc1afcaeb85f7a3e9869d26bd483119dce3f063c6a1384082b5.json.gz",
       "artifact_sha256": "5b84130feb33cfc1afcaeb85f7a3e9869d26bd483119dce3f063c6a1384082b5"
     },
@@ -308994,6 +309070,7 @@
       "lane": "k3p_noise_and_signal",
       "engine": "grok",
       "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_noise_and_signal/20260925T165310Z-3675742/repo/reports/toy100/k3p-noise-signal-3675742/runs/ns1-hold/result.json",
       "snapshot": "evidence/c807ea61a6acf64bddd22f4ffc0d72b096312ff36e52cae3c9b358cefd3b9bf4.json.gz",
       "artifact_sha256": "c807ea61a6acf64bddd22f4ffc0d72b096312ff36e52cae3c9b358cefd3b9bf4"
     },
@@ -309204,6 +309281,7 @@
       "lane": "k3p_noise_and_signal",
       "engine": "grok",
       "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_noise_and_signal/20260925T165310Z-3675742/repo/reports/toy100/k3p-noise-signal-3675742/runs/ns1-shift/result.json",
       "snapshot": "evidence/a9cb00beaa43b943aa2c650fec202c9c5fe544cdf836f84f50e5958be2755628.json.gz",
       "artifact_sha256": "a9cb00beaa43b943aa2c650fec202c9c5fe544cdf836f84f50e5958be2755628"
     },
@@ -309238,6 +309316,7 @@
       "lane": "k3p_noise_and_signal",
       "engine": "grok",
       "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_noise_and_signal/20260925T165310Z-3675742/repo/reports/toy100/k3p-noise-signal-3675742/runs/ns2-hold/result.json",
       "snapshot": "evidence/69c235438eff0ddb865c9743e01ad856658a95718d9d693f5ab8220aba2816c8.json.gz",
       "artifact_sha256": "69c235438eff0ddb865c9743e01ad856658a95718d9d693f5ab8220aba2816c8"
     },
@@ -309306,6 +309385,7 @@
       "lane": "k3p_noise_and_signal",
       "engine": "grok",
       "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_noise_and_signal/20260925T165310Z-3675742/repo/reports/toy100/k3p-noise-signal-3675742/runs/ns2-shift/result.json",
       "snapshot": "evidence/c8a20c9070a12a8170557b15919bf2d42ae22c730230ff0605cacdfa69e3b152.json.gz",
       "artifact_sha256": "c8a20c9070a12a8170557b15919bf2d42ae22c730230ff0605cacdfa69e3b152"
     },
@@ -309339,6 +309419,7 @@
       "lane": "k3p_noise_and_signal",
       "engine": "grok",
       "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_noise_and_signal/20260925T165310Z-3675742/repo/reports/toy100/k3p-noise-signal-3675742/runs/ns3-hold/result.json",
       "snapshot": "evidence/de14c44f7d63f8db194eed103b2f9d57fee4f401a87a7a05afec8fc7f5696c24.json.gz",
       "artifact_sha256": "de14c44f7d63f8db194eed103b2f9d57fee4f401a87a7a05afec8fc7f5696c24"
     },
@@ -309406,6 +309487,7 @@
       "lane": "k3p_noise_and_signal",
       "engine": "grok",
       "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T165310Z/k3p_noise_and_signal/20260925T165310Z-3675742/repo/reports/toy100/k3p-noise-signal-3675742/runs/ns3-shift/result.json",
       "snapshot": "evidence/1709b09e05bc1e61cc535dbab2f65079f840da369923bb773c8481ec5aa19552.json.gz",
       "artifact_sha256": "1709b09e05bc1e61cc535dbab2f65079f840da369923bb773c8481ec5aa19552"
     }

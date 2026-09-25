@@ -64,8 +64,11 @@ def collect(batch, output, lanes=None):
                 if not source.is_absolute():
                     # Ledgers use both attempt-relative and checkout-relative paths.
                     candidates = [run / source, run / 'repo' / source]
-                    source = next((p for p in candidates if p.is_file()), candidates[0])
+                    source = next((p for p in candidates if p.exists()), candidates[0])
                 source = source.resolve()
+                if source.is_dir() and (source / 'result.json').is_file():
+                    source = (source / 'result.json').resolve()
+                record['resolved_artifact'] = str(source)
                 if not source.is_relative_to(run):
                     record['snapshot_note'] = 'External reference; not copied as this attempt evidence'
                 elif source.is_file() and source.suffix == '.json':
@@ -78,7 +81,7 @@ def collect(batch, output, lanes=None):
                     assert sha256(gzip.decompress(target.read_bytes())) == digest
                     record.update(snapshot=str(target.relative_to(output)), artifact_sha256=digest)
                 elif not source.is_file():
-                    record['snapshot_note'] = 'Referenced artifact is missing; no snapshot claimed'
+                    record['snapshot_note'] = 'Referenced artifact has no result file; no snapshot claimed'
             records.append(record)
     result = dict(batch=str(batch), observed_utc=datetime.now(timezone.utc).isoformat(),
                   scope='Completed attempt archive; ledger PASS is not formulation qualification',

@@ -1,0 +1,72 @@
+{
+  "candidate": "rp1_signal_close",
+  "status": "REJECTED",
+  "scope": "Original observation companions; state witness is incomplete as documented, interrupted rotated100 log is not a gate verdict.",
+  "files": [
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/qualify/capture_shift.py",
+      "snapshot": "691768abaa162ade5b1a2e01f5dc5b36bf91afb68745fa53eba49a4282ff392d.py.gz",
+      "sha256": "691768abaa162ade5b1a2e01f5dc5b36bf91afb68745fa53eba49a4282ff392d"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/qualify/capture_shift_frozen.py",
+      "snapshot": "f0d26756b9248145bad33e227d44d0244fee2905ac89f46deba436daa53d4754.py.gz",
+      "sha256": "f0d26756b9248145bad33e227d44d0244fee2905ac89f46deba436daa53d4754"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-capture3/result.json",
+      "snapshot": "640a5e13b471ad0ef177b3ebc1c6be09a71677f705ac170ffb77290d25ba157b.json.gz",
+      "sha256": "640a5e13b471ad0ef177b3ebc1c6be09a71677f705ac170ffb77290d25ba157b"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-capture3/mechanism-receipt.json",
+      "snapshot": "1fbad3d741d76f9f9ebd3ce2f79a9d46c44aaabb2b83e30830ee8771628a68e6.json.gz",
+      "sha256": "1fbad3d741d76f9f9ebd3ce2f79a9d46c44aaabb2b83e30830ee8771628a68e6"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-capture3/preshift-hashes.json",
+      "snapshot": "1d3744331ed66a236c577c9bdc23c5b59b73ce7ab46917faf0ba3b6bfe730066.json.gz",
+      "sha256": "1d3744331ed66a236c577c9bdc23c5b59b73ce7ab46917faf0ba3b6bfe730066"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-capture3/probe-full.json",
+      "snapshot": "798c1204f1fd1eae7c62005efa86d97159adbe6deb8ff46f81bfbc0dc7982de1.json.gz",
+      "sha256": "798c1204f1fd1eae7c62005efa86d97159adbe6deb8ff46f81bfbc0dc7982de1"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-frozen-capture3/result.json",
+      "snapshot": "4fe940d1b4c5c780e45d24818b7c4eb969fc7124cfbe65b5d00c49e17ad14528.json.gz",
+      "sha256": "4fe940d1b4c5c780e45d24818b7c4eb969fc7124cfbe65b5d00c49e17ad14528"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-frozen-capture3/mechanism-receipt.json",
+      "snapshot": "3a3b0273a641d45fb54a41965ec453bf33f9518e51d6abf07729eb7b04280ee8.json.gz",
+      "sha256": "3a3b0273a641d45fb54a41965ec453bf33f9518e51d6abf07729eb7b04280ee8"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-frozen-capture3/preshift-hashes.json",
+      "snapshot": "1d3744331ed66a236c577c9bdc23c5b59b73ce7ab46917faf0ba3b6bfe730066.json.gz",
+      "sha256": "1d3744331ed66a236c577c9bdc23c5b59b73ce7ab46917faf0ba3b6bfe730066"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/runs/rp1-shift-frozen-capture3/probe-full.json",
+      "snapshot": "8e4604626a884faa90dbc256cce7c29f85a137e1335d270660ae33da14e1a1cb.json.gz",
+      "sha256": "8e4604626a884faa90dbc256cce7c29f85a137e1335d270660ae33da14e1a1cb"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470/repo/reports/toy100/verify-rp1-attempt/runs/img_intensity2/mechanism-receipt.json",
+      "snapshot": "85b23f08e63b036b5076e3d02390e2600580619b769fe74a2e28f96d132d81c5.json.gz",
+      "sha256": "85b23f08e63b036b5076e3d02390e2600580619b769fe74a2e28f96d132d81c5"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z/verify_p3_gates/20260925T173407Z-3725470/repo/reports/toy100/verify-rp1-attempt/traces/img_intensity2-observations.csv",
+      "snapshot": "b8d835af086611a382f3db6b193454beac8ab225ec46ebb07eddbd474d3a916e.csv.gz",
+      "sha256": "b8d835af086611a382f3db6b193454beac8ab225ec46ebb07eddbd474d3a916e"
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977/repo/reports/toy100/k3p-responsive-precision/logs/rp1-native-rotated100.log",
+      "snapshot": "ed31263275db2513594800d00b002b9a2f9c73dda7778c8c09fc2a7f982872db.log.gz",
+      "sha256": "ed31263275db2513594800d00b002b9a2f9c73dda7778c8c09fc2a7f982872db"
+    }
+  ]
+}

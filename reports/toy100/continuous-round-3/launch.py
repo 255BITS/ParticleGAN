@@ -16,6 +16,22 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_penalty_balance': ('grok', GPU0, '''Own the distinction between adversarial
+learning force and regularization force in the critic. Start from selected K3P;
+read RP1's image/native rejection and earlier anchor-tracking failures. Existing
+controllers mostly observe the TOTAL critic gradient, which may confound target
+fit, penalty balance, stochastic noise and anchor stiffness. Measure a meaningful
+decomposition using ordinary training batches, then declare a general reversible
+controller if the evidence supports it. This is distinct from a raw cosine or
+RMS threshold sweep: explain the observed failure your proposal addresses.
+Preserve K3P acquisition, sparse prior and response; remove final-horizon inputs.
+No task IDs, target centers, quality feedback, known changes or hidden updates.
+Account for every extra gradient/forward; one committed optimizer update per role.
+Up to3 coherent proposals; BOTH canonical protocols per meaningful proposal.
+Ring survivors must clear img_intensity2 and native grid100 full7000 accuracy AND
+coverage before deeper qualification. Failed image/native candidates cannot be
+new shared bases. If decomposition cannot be installed faithfully, report the
+limitation rather than silently substituting an unrelated controller.'''),
     'k3p_data_innovation': ('grok', GPU1, '''Own a distinct training-data innovation
 detector for reversible mobility from selected K3P. Previous gradient-only
 signals confuse stationary optimizer noise with a changed target. Inspect actual
