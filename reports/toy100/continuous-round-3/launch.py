@@ -16,6 +16,25 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'k3p_generator_restoring': ('grok', GPU1, '''Investigate a continuously moving
+generator/prior restoring reference from selected K3P. Read completed-data-innovation
+and completed-mobility reports: DI2/PM1 lose a late mode after the reopen signal
+has cooled, and DI3's hard critic-anchor snap worsens recovery. RP1 also lost native
+precision after a stationary rate reopen. Most prior lanes changed only rate and
+critic control. Test a distinct generator-side stabilization hypothesis using
+its own moving parameter reference, with ordinary training updates remaining live.
+Declare a modest proximal/restoring rule and finite memory, not a coefficient
+grid. Account for sparse prior rows and actual displacement. Preserve learned
+prior/direct response, auxiliary host losses and architecture. No output EMA
+substitution, evaluation changes, resetting optimizer counters, replay to a good
+checkpoint, target assignment, known centers or benchmark feedback. No step or
+horizon chosen from the test deadline. Explain how acquisition can finish before
+stabilization dominates, and how a genuine distribution change can still move
+the reference. The new rule, its rates, mixing and noise must not require a final
+training duration; fixed declared initial estimator warmup is allowed. No claim
+that a parent gate transfers. Up to3 evidence-driven proposals with BOTH canonical
+protocols each; use the short image screen to catch acquisition damage. Deep
+qualification only after ring+image survival. One worker, no nested agents.'''),
     'k3p_projected_discrepancy': ('grok', GPU1, '''Investigate a training-only
 distribution residual as a horizon-free K3P controller. Read the completed-mobility
 report: PM1/PM3 hold1200+300 but recover79/81; their late missing-mode dips occur

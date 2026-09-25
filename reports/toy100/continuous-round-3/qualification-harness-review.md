@@ -17,6 +17,13 @@ Concrete gaps in the inspected implementation:
   the pinned frozen runtime explicitly.
 - Tensor hashing uses a dtype view directly; scalar optimizer-state tensors
   require a scalar-safe flattening step.
+- The optimizer witness hashes only Adam's standard moments and step. Canonical
+  sparse-prior updates also store `anchor_prev` in optimizer state; that history
+  is omitted. All optimizer state and group settings need identity-preserving
+  comparison, including tensor step representation and model buffers.
+- A `mechanism._state` snapshot and four required source filenames do not cover
+  arbitrary candidate helper modules. Each supported candidate needs an audited
+  complete state contract and hashes for every imported local policy file.
 
 The declared protocol compiler, absolute offsets, window scoring and RNG
 instrumentation may be reusable. Their passing synthetic tests cannot compensate

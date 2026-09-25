@@ -120,3 +120,10 @@ PX3 closes during a lull while the smoothed reference gap is still rising.
 Follow-up hypotheses test a training-minibatch distribution residual and an
 explicit growth/contraction phase. They remain independent proposals from K3P,
 not promotions of these failed candidates.
+
+[Data-innovation results](completed-data-innovation/attempts/k3p_data_innovation/result.md)
+add three further rejected formulations. All hold1200+300; DI1/DI2/DI3 recover
+33/81, 77/81 and45/81. DI2 loses a mode in the last four deadline checks after
+the real-data novelty signal has returned to its stationary range. DI3's hard
+critic-anchor reset worsens recovery. All retain horizon-based rates and noise;
+none earns transfer or long-term qualification.
