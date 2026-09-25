@@ -110,12 +110,13 @@ class GANTrainer:
         for module in (self.ema_G, self.ema_prior):
             module.requires_grad_(False)
         self.latent_generator = self._stream(latent_generator, seed + 2)
+        # Reserved stream (the penalty draws no randomness); kept so the
+        # checkpoint schema and the other streams' seeds stay unchanged.
         self.penalty_generator = self._stream(penalty_generator, seed + 3)
         self.eval_generator = self._stream(None, seed + 4)
         self.noise_generator = self._stream(None, seed + 5)
         self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
-        self.penalty = recipe.make_critic_penalty(self.opt_d, generator=self.penalty_generator,
-                                                  **self.penalty_options)
+        self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         self.completed_steps = 0
 
     @property
@@ -159,8 +160,9 @@ class GANTrainer:
     def step(self, real, *, generator_real=None, collect_stats=False):
         """Perform one D update and one G/prior update; return detached losses.
 
-        ``step`` in the result is the completed update count. Only ``rp`` and
-        ``ra`` invoke a generator-real callback. ``collect_stats`` additionally
+        ``step`` in the result is the completed update count. The generator
+        loss pairs fakes with ``generator_real`` (a tensor or a callable;
+        default: ``real``). ``collect_stats`` additionally
         returns the gradient penalty's synchronized diagnostic dictionary
         (including K3P's blend weight ``s``).
         """
@@ -168,11 +170,11 @@ class GANTrainer:
         if self.completed_steps >= recipe.total_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
-        if recipe.gan_mode in ("rp", "ra") and generator_real is not None and not callable(generator_real):
+        if generator_real is not None and not callable(generator_real):
             generator_real = self._batch(generator_real, "generator_real")
             if generator_real.shape[1:] != real.shape[1:]:
                 raise ValueError("generator_real must match the real sample shape")
-            if recipe.gan_mode == "rp" and len(generator_real) != len(real):
+            if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
         network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
         for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
@@ -204,15 +206,13 @@ class GANTrainer:
             self.D.requires_grad_(False)
             latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
             fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
-            real_logits = None
-            if recipe.gan_mode in ("rp", "ra"):
-                real_g = generator_real() if callable(generator_real) else generator_real
-                real_g = real if real_g is None else self._batch(real_g, "generator_real")
-                if real_g.shape[1:] != real.shape[1:]:
-                    raise ValueError("generator_real must match the real sample shape")
-                if recipe.gan_mode == "rp" and len(real_g) != len(real):
-                    raise ValueError("RpGAN generator_real must match the real batch size")
-                real_logits = critic(real_g)
+            real_g = generator_real() if callable(generator_real) else generator_real
+            real_g = real if real_g is None else self._batch(real_g, "generator_real")
+            if real_g.shape[1:] != real.shape[1:]:
+                raise ValueError("generator_real must match the real sample shape")
+            if len(real_g) != len(real):
+                raise ValueError("RpGAN generator_real must match the real batch size")
+            real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
@@ -287,13 +287,15 @@ class GANTrainer:
         Recreate the same parameter freezing before loading. Validation of both
         optimizers (which carry the K3P state) and all RNG states precedes any
         mutation of the live trainer. Schema-2 checkpoints (separate K3P state)
-        are upgraded; schema-1 (GAN v3) checkpoints are rejected.
+        are upgraded; schema-1 checkpoints (an older formulation) are rejected.
         """
         if isinstance(state, dict) and state.get("schema") == 1:
-            raise ValueError("schema-1 GANTrainer checkpoints use the GAN v3 formulation and cannot "
+            raise ValueError("schema-1 GANTrainer checkpoints come from an older formulation and cannot "
                              "resume under K3P; retrain, or pin the old release to continue them")
         if isinstance(state, dict) and state.get("schema") == 2:
             state = _upgrade_schema_2(state)
+        if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
+            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
         expected = self.state_dict()
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
             raise ValueError("invalid GANTrainer checkpoint schema")
@@ -345,6 +347,21 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
+
+
+# Recipe fields that once named a fixed choice (with the value that choice
+# had), and fields added since (with their defaults).
+_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
+                          "reg_method": "autograd"}
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+
+
+def _upgrade_recipe_fields(recipe):
+    """Drop removed recipe fields that held the only supported value; add new defaults."""
+    if any(key in recipe and recipe[key] != value for key, value in _REMOVED_RECIPE_FIELDS.items()):
+        return recipe  # another formulation: left as is, so the recipe check rejects it
+    recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
+    return {**_ADDED_RECIPE_FIELDS, **recipe}
 
 
 def _upgrade_schema_2(state):

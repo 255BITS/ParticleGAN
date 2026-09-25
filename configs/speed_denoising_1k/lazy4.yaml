@@ -29,13 +29,9 @@ prior_reg: 1.0
 noise_reg: 0.0
 reg_coeff: 1.0
 reg_kappa: 1.0
-reg_method: autograd
 reg_every: 4
-reg_fd_eps: 0.05
 reg_sync_stats: false
 fused_adam: true
-gan_mode: rp
-loss_type: logistic
 ucd_lambda: 0.02
 drop_xt: false
 ema: 0.995

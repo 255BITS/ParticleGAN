@@ -268,7 +268,7 @@ def train(cfg):
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
                 for i, role in enumerate(d.roles())} if d is not None else {}
     # One recipe penalty per critic role (own interpolation stream), paired with opt_d.
-    penalties = ({role: recipe.make_critic_penalty(opt_d, generator=rng) for role, rng in reg_rngs.items()}
+    penalties = ({role: recipe.make_critic_penalty(opt_d) for role, rng in reg_rngs.items()}
                  if opt_d is not None else None)
     weights = dict(continuous_weight=cfg["continuous_weight"], contact_weight=cfg["contact_weight"])
     provenance = source_provenance(out, cfg["data_dir"])

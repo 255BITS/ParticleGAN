@@ -20,10 +20,10 @@ import torch
 from torch import nn
 
 
-from particlegan import get_recipe
+from benchmarks.legacy.recipe import get_recipe
 
 
-from particlegan.grad_regularizers import GradRegularizer
+from benchmarks.legacy.grad_regularizers import GradRegularizer
 from benchmarks.gan_v3 import gan_v3_recipe
 
 

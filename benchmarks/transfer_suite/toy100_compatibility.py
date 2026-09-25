@@ -37,7 +37,8 @@ from benchmarks.toy100.models import (
 )
 from benchmarks.toy100.train import AFFINE_MODEL_POLICIES, load_config, resolve_config
 from lib.toy_models import SimpleMLPGenerator
-from particlegan import GANTrainer, get_recipe
+from particlegan import GANTrainer
+from benchmarks.legacy.recipe import get_recipe
 
 from . import image_tasks, suite, vector_tasks
 from .compare_defaults import ema_verdict

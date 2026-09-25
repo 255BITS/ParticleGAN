@@ -128,7 +128,7 @@ def run_direct(particles, opt, steps, step_fn, trace=None):
 
 def frozen_all(mechanism, latent, response):
     """Run every scenario through the frozen hook-based mechanism (subprocess only)."""
-    from particlegan.grad_regularizers import GradRegularizer
+    from benchmarks.legacy.grad_regularizers import GradRegularizer
     keep = []
     prox_log = []
     original_gap = mechanism.anchored_gradient_gap
@@ -194,13 +194,13 @@ def frozen_all(mechanism, latent, response):
 
 def package_critic(lazy_k=1, steps=range(1, STEPS + 1), setup=None):
     """Build the package K3P critic stack; returns (objects, trace)."""
-    from particlegan.grad_regularizers import GradRegularizer
+    from particlegan.grad_regularizers import GradientPenalty
     from particlegan.k3p import CriticAnchor, CriticSpikeGuard
     D = make_critic()
     ema = copy.deepcopy(D).requires_grad_(False)
     opt = critic_optimizer(D)
     anchor = CriticAnchor(D, ema, decay=0.999)
-    reg = GradRegularizer(arm="k3p", coeff=1.0, kappa=0.5, lazy_k=lazy_k, lr_floor=0.01, anchor=anchor)
+    reg = GradientPenalty(coeff=1.0, kappa=0.5, lazy_k=lazy_k, lr_floor=0.01, anchor=anchor)
     guard = CriticSpikeGuard(ratio=5.0, min_steps=3)
     objs = dict(D=D, ema=ema, opt=opt, anchor=anchor, reg=reg, guard=guard)
     if setup is not None:

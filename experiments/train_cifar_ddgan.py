@@ -34,14 +34,14 @@ DEFAULTS = {
     'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
     'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
     'cache_condition': True, 'channels_last': False, 'fused_adam': True,
-    'reg_method': 'autograd', 'reg_every': 4, 'reg_fd_eps': 0.05, 'reg_sync_stats': False,
+    'reg_every': 4, 'reg_sync_stats': False,
     'profile_start': 100, 'profile_steps': 0,
     'seed': 24002, 'classes': 10, 'alpha_bar': [1.0, 0.9, 0.5, 0.05, 0.0001],
     'g_width': 32, 'd_width': 32, 'd_norm': 'group', 'z_dim': 128, 'num_particles': 20000,
     'steps': 10000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
     'prior_lr_mult': 10.0, 'beta1': 0.0, 'prior_reg': 1.0,
     'reg_coeff': 1.0, 'reg_kappa': 1.0,
-    'gan_mode': 'rp', 'loss_type': 'logistic', 'ucd_lambda': 0.02,
+    'ucd_lambda': 0.02,
     'ema': 0.995, 'lr_anneal_start': 0.6, 'lr_floor': 1.0,
     'horizontal_flip': True, 'tf32': True, 'log_interval': 100,
     'eval_interval': 10000, 'eval_samples': 5000, 'final_samples': 50000,
@@ -68,12 +68,11 @@ def validate(cfg):
     if resolutions and (cfg['architecture'] != 'unet' or type(cfg['g_heads']) is not int or
                         cfg['g_heads'] < 1 or cfg['g_width'] % cfg['g_heads']):
         raise ValueError('U-Net attention requires compatible width and head count')
-    if cfg.get('reg_method', 'autograd') not in ('autograd', 'finite_difference'):
-        raise ValueError('invalid regularizer method')
-    if type(cfg.get('reg_every', 1)) is not int or cfg.get('reg_every', 1) < 1 or cfg.get('reg_fd_eps', .05) <= 0:
-        raise ValueError('invalid regularizer interval/epsilon')
-    if 'reg_arm' in cfg:
-        raise ValueError('reg_arm was removed: the critic penalty is the recipe default')
+    if type(cfg.get('reg_every', 1)) is not int or cfg.get('reg_every', 1) < 1:
+        raise ValueError('invalid regularizer interval')
+    removed = [k for k in ('reg_arm', 'loss_type', 'gan_mode', 'reg_method', 'reg_fd_eps') if k in cfg]
+    if removed:
+        raise ValueError(f'{removed} were removed: the objective and critic penalty are the recipe default')
     if cfg.get('profile_steps', 0) < 0 or cfg.get('profile_start', 100) < 0:
         raise ValueError('invalid profiling window')
     if cfg.get('cache_condition', False) and cfg.get('d_backbone') not in ('pretrained_resnet18', 'pretrained_resnet34'):
@@ -132,9 +131,9 @@ def training_recipe(cfg):
         ucd_target=cfg.get('ucd_target', 'class'), ucd_weight=cfg['ucd_lambda'],
         alpha_bar=cfg['alpha_bar'], batch_size=cfg['batch_size'], total_steps=cfg['steps'],
         lr=cfg['lr'], d_lr_mult=cfg['d_lr_mult'], prior_lr_mult=cfg['prior_lr_mult'],
-        betas=(cfg['beta1'], .999), loss_type=cfg['loss_type'], gan_mode=cfg['gan_mode'],
+        betas=(cfg['beta1'], .999),
         reg_coeff=cfg['reg_coeff'], reg_kappa=cfg['reg_kappa'],
-        reg_every=cfg.get('reg_every', 1), reg_method=cfg.get('reg_method', 'autograd'),
+        reg_every=cfg.get('reg_every', 1),
         prior_reg=cfg['prior_reg'], ema_decay=cfg['ema'],
         lr_anneal_start=cfg['lr_anneal_start'], lr_floor=cfg['lr_floor'],
         network_lr_floor=cfg['lr_floor'], network_lr_horizon_cap=None,
@@ -211,8 +210,7 @@ def train(cfg, resume=None):
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()
-    penalty_fn = recipe.make_critic_penalty(od, generator=rngs['penalty'],
-                                            collect_stats=cfg.get('reg_sync_stats', True))
+    penalty_fn = recipe.make_critic_penalty(od, collect_stats=cfg.get('reg_sync_stats', True))
     start_step, train_seconds = 0, 0.
     if resume:
         for name, obj in [('G', g), ('D', d), ('prior', prior), ('ema_G', eg), ('ema_prior', ep), ('opt_G', og), ('opt_D', od)]:

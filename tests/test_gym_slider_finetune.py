@@ -51,7 +51,6 @@ class SliderFinetuneTests(unittest.TestCase):
             bundle["R"].requires_grad_(True)
             opt_r = recipe.make_critic_optimizer(bundle["R"], ema_critic=copy.deepcopy(bundle["R"]))
             penalty = recipe.make_critic_penalty(opt_r)
-            self.assertEqual(penalty.regularizer.arm, recipe.reg_arm)
             critic_loss, critic_terms = error_loss(bundle["R"], decoded.detach(), real, 1,
                                                    torch.Generator().manual_seed(9), penalty=penalty)
             self.assertGreater(float(critic_terms["error_cap"].detach()), 0.)

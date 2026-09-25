@@ -10,7 +10,7 @@ from .observation import checkpoint, schedule_optimizer
 
 import torch
 from torch import nn
-from particlegan.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
+from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
 
 TOY_STEPS = 80
 TOY_SEED = 0

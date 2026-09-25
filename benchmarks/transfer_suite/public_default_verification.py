@@ -112,7 +112,7 @@ def load_declaration():
 
 
 def public_default(profile):
-    from particlegan import get_recipe
+    from benchmarks.legacy.recipe import get_recipe
     base = gan_v3_recipe()
     if base.name != 'gan_v3':
         raise ValueError('gan_v3_recipe() does not resolve to the public gan_v3 default')

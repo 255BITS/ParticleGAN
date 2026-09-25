@@ -24,7 +24,8 @@ import torch.nn.functional as F
 from torch import nn
 
 
-from particlegan import GANLoss, GradientPenalty
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 
 
 from .cover_leftover import (

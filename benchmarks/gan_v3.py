@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 from typing import Any, Mapping
 
-from particlegan import Recipe, get_recipe
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe, get_recipe
 
 PRE_K3P_FIELDS: dict[str, Any] = {
     "network_lr_floor": None,

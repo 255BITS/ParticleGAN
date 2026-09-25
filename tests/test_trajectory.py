@@ -4,7 +4,7 @@ import torch
 
 from experiments.train_trajectory import DEFAULTS, validate
 from lib.denoising_toy import DiffusionSchedule, DrawSource
-from lib.grad_regularizers import GradRegularizer
+from particlegan.grad_regularizers import GradientPenalty
 from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, TrajectoryCritic, generate, metrics
 
 
@@ -70,9 +70,9 @@ class TrajectoryTests(unittest.TestCase):
         grad = torch.autograd.grad(d(candidate, c, context, xt, t)[0].sum(), candidate)[0]
         self.assertTrue(bool(torch.isfinite(grad).all()))
         self.assertGreater(float(grad.norm()), 0)
-        reg = GradRegularizer("b_cap", 1., kappa=0., lazy_k=4)
+        reg = GradientPenalty(kappa=0., lazy_k=4)
         penalty, _ = reg.penalty(TrajectoryCritic(d, c, context, xt, t), real, real+.1,
-                                 4, self.rng, collect_stats=False)
+                                 4, collect_stats=False)
         penalty.backward()
         self.assertTrue(all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in d.parameters()))
         self.assertGreater(float(d.stages[0][0].weight.grad.norm()), 0)
@@ -115,8 +115,8 @@ class TrajectoryTests(unittest.TestCase):
         l1 = d(real, 1-c, ctx, xt.detach(), 5-t)[1]
         torch.testing.assert_close(l0, l1)
         d.zero_grad()
-        reg = GradRegularizer("b_cap", 1., kappa=0., lazy_k=4)
-        penalty, _ = reg.penalty(TrajectoryCritic(d, c, ctx, xt.detach(), t), real, fake.detach(), 4, self.rng, collect_stats=False)
+        reg = GradientPenalty(kappa=0., lazy_k=4)
+        penalty, _ = reg.penalty(TrajectoryCritic(d, c, ctx, xt.detach(), t), real, fake.detach(), 4, collect_stats=False)
         penalty.backward()
         self.assertTrue(any(p.grad is not None and bool((p.grad != 0).any()) for p in d.parameters()))
 

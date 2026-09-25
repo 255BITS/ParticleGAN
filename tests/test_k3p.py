@@ -12,10 +12,9 @@ import torch.nn.functional as F
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import k3p_scenarios as sc  # noqa: E402
 
-from particlegan import GradientPenalty  # noqa: E402
 from particlegan.k3p import (CriticAnchor, CriticSpikeGuard, DirectParticleResponse,  # noqa: E402
                              LatentRowDamping)
-from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
+from particlegan.grad_regularizers import CriticStepRecord, GradientPenalty  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -25,6 +24,10 @@ from pathlib import Path
 repo, out = Path(sys.argv[1]), sys.argv[2]
 src = repo / {sources!r}
 sys.path[:0] = [str(repo), str(repo / "tests"), str(src)]
+# The frozen mechanism patches the multi-arm penalty it was recorded against;
+# that penalty now lives only in the benchmarks' pinned copy.
+import benchmarks.legacy.grad_regularizers as legacy_penalty
+sys.modules["particlegan.grad_regularizers"] = legacy_penalty
 import torch
 torch.set_num_threads(1)
 text = "\n".join(l for l in (src / "response.py").read_text().splitlines() if "device.type=='cuda'" not in l)
@@ -84,8 +87,8 @@ def test_k3p_lazy_k_matches_frozen(frozen):
     # applied steps carry 2x the coefficient
     D = sc.make_critic()
     xr, xf = sc.critic_batch(2)
-    one = GradRegularizer(arm="k3p", kappa=0.5).penalty(D, xr, xf, 1)[0]
-    two = GradRegularizer(arm="k3p", kappa=0.5, lazy_k=2).penalty(D, xr, xf, 2)[0]
+    one = GradientPenalty(kappa=0.5).penalty(D, xr, xf, 1)[0]
+    two = GradientPenalty(kappa=0.5, lazy_k=2).penalty(D, xr, xf, 2)[0]
     assert torch.allclose(two, 2 * one, rtol=1e-14, atol=0)
 
 
@@ -233,13 +236,13 @@ def test_generator_optimizer_matches_frozen_a2_and_direct(frozen):
 def test_constant_lr_s_is_one_without_anchor():
     D = sc.make_critic()
     opt = sc.critic_optimizer(D)
-    reg = GradRegularizer(arm="k3p", kappa=0.5)
+    reg = GradientPenalty(kappa=0.5)
     trace = sc.run_critic(reg, D, opt, range(1, 9), after=reg.after_critic_step, lr_fn=lambda t: 1.0)
     assert all(r["s"] == 1.0 for r in trace)
     xr, xf = sc.critic_batch(3)
     pen, st = reg.penalty(D, xr, xf, 9)
     assert st["phase"] == "a" and st["prox"] == 0.0
-    ref = GradRegularizer(arm="a_r1r2")
+    ref = GradientPenalty
     real = ref._grad_norm(D, xr, squared=True) / 2
     fake = (ref._grad_norm(D, xf) / 2 ** 0.5 - 0.5).relu().square()
     assert torch.equal(pen, 0.5 * (real.mean() + fake.mean()))
@@ -247,7 +250,7 @@ def test_constant_lr_s_is_one_without_anchor():
 
 def test_blend_without_anchor_raises():
     D = sc.make_critic()
-    reg = GradRegularizer(arm="k3p")
+    reg = GradientPenalty()
     xr, xf = sc.critic_batch(1)
     reg.after_critic_step(1.0)
     reg.after_critic_step(0.1)
@@ -260,11 +263,11 @@ def test_blend_without_anchor_raises():
 def test_missing_after_critic_step_raises():
     D = sc.make_critic()
     xr, xf = sc.critic_batch(1)
-    reg = GradRegularizer(arm="k3p")
+    reg = GradientPenalty()
     reg.penalty(D, xr, xf, 1)
     with pytest.raises(RuntimeError, match="after_critic_step"):
         reg.penalty(D, xr, xf, 2)
-    lazy = GradRegularizer(arm="k3p", lazy_k=4)
+    lazy = GradientPenalty(lazy_k=4)
     lazy.penalty(D, xr, xf, 4)
     with pytest.raises(RuntimeError):
         lazy.penalty(D, xr, xf, 8)
@@ -273,7 +276,7 @@ def test_missing_after_critic_step_raises():
 def test_two_critics_independent():
     from torch.optim import optimizer as optim_mod
     hooks = (len(optim_mod._global_optimizer_pre_hooks), len(optim_mod._global_optimizer_post_hooks))
-    original_penalty = GradRegularizer.penalty
+    original_penalty = GradientPenalty.penalty
     a, trace_a = sc.package_critic()
     b_objs = {}
 
@@ -298,7 +301,7 @@ def test_two_critics_independent():
     assert A["reg"].blend_weight() == 0.0 and B["reg"].blend_weight() == 1.0
     assert all(torch.equal(x, y) for x, y in zip(A["ema"].parameters(), a["ema"].parameters()))
     assert not B["reg"].state_dict()["anchor_started"]
-    assert GradRegularizer.penalty is original_penalty and GradientPenalty is GradRegularizer
+    assert GradientPenalty.penalty is original_penalty
     assert (len(optim_mod._global_optimizer_pre_hooks), len(optim_mod._global_optimizer_post_hooks)) == hooks
 
 
@@ -316,7 +319,7 @@ def test_shared_module_multi_role():
     d = _TwoRole()
     ema = copy.deepcopy(d).requires_grad_(False)
     opt = torch.optim.Adam(d.parameters(), lr=0.05, betas=(0.0, 0.999))
-    reg = GradRegularizer(arm="k3p", anchor=CriticAnchor(d, ema))
+    reg = GradientPenalty(anchor=CriticAnchor(d, ema))
     phases = []
     for t in range(1, 9):
         for group in opt.param_groups:
@@ -376,18 +379,18 @@ def test_guard_threshold_and_min_steps():
 
 
 def test_k3p_validation():
-    for kwargs in (dict(norm="l1"), dict(method="finite_difference"), dict(lr_floor=0.5), dict(lr_floor=-0.1),
-                   dict(target_anneal="linear", total_steps=10)):
+    for kwargs in (dict(lr_floor=0.5), dict(lr_floor=-0.1), dict(coeff=-1.0), dict(kappa=float("nan")),
+                   dict(anchor_weight=-1.0), dict(lazy_k=0)):
         with pytest.raises(ValueError):
-            GradRegularizer(arm="k3p", **kwargs)
+            GradientPenalty(**kwargs)
     D = sc.make_critic()
-    with pytest.raises(ValueError):
-        GradRegularizer(arm="b_cap", anchor=CriticAnchor(D, copy.deepcopy(D)))
+    with pytest.raises(ValueError, match="either anchor"):
+        GradientPenalty(anchor=CriticAnchor(D, copy.deepcopy(D)), record=CriticStepRecord())
     with pytest.raises(ValueError):
         CriticAnchor(D, D)
     with pytest.raises(ValueError):
         CriticAnchor(D, nn.Linear(2, 1, dtype=sc.DT))
-    reg = GradRegularizer(arm="k3p")
+    reg = GradientPenalty()
     with pytest.raises(ValueError):
         reg.load_state_dict({"lr_max": 1.0})
     xr = torch.zeros(4, 2, dtype=sc.DT)
@@ -403,23 +406,8 @@ def test_k3p_validation():
         damp.begin(opt)
 
 
-def test_stateless_arms_uniform_api():
-    D = sc.make_critic()
-    opt = sc.critic_optimizer(D)
-    xr, xf = sc.critic_batch(1)
-    for arm in GradRegularizer.ARMS:
-        if arm == "k3p":
-            continue
-        reg = GradRegularizer(arm=arm)
-        before = reg.penalty(D, xr, xf, 5, torch.Generator().manual_seed(0))[0]
-        reg.after_critic_step(opt)
-        assert reg.blend_weight() == 1.0 and reg.state_dict() == {}
-        reg.load_state_dict({})
-        assert torch.equal(reg.penalty(D, xr, xf, 5, torch.Generator().manual_seed(0))[0], before)
-
-
 def test_after_critic_step_accepts_tensor_lr():
-    reg = GradRegularizer(arm="k3p")
+    reg = GradientPenalty()
     reg.after_critic_step(torch.tensor(0.5))
     reg.after_critic_step(torch.tensor(0.25, dtype=torch.float64))
     assert reg.state_dict()["lr_max"] == 0.5 and reg.state_dict()["lr_last"] == 0.25
@@ -429,11 +417,11 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
     torch.manual_seed(0)
     A, B = nn.Linear(2, 1).double(), nn.Linear(2, 1).double()
     x_r, x_f = torch.randn(4, 2, dtype=torch.float64), torch.randn(4, 2, dtype=torch.float64)
-    anchored = GradRegularizer(arm="k3p", anchor=CriticAnchor(A, copy.deepcopy(A).requires_grad_(False)))
+    anchored = GradientPenalty(anchor=CriticAnchor(A, copy.deepcopy(A).requires_grad_(False)))
     anchored.penalty(A, x_r, x_f)
     with pytest.raises(ValueError, match="anchor tracks"):
         anchored.penalty(B, x_r, x_f)
-    plain = GradRegularizer(arm="k3p")
+    plain = GradientPenalty()
     plain.penalty(A, x_r, x_f)
     with pytest.raises(ValueError, match="different critic"):
         plain.penalty(B, x_r, x_f)
@@ -445,7 +433,7 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
 def _k3p_trainer():
     from particlegan import GANTrainer, get_recipe
     torch.manual_seed(0)
-    recipe = get_recipe("gan", reg_arm="k3p", num_particles=8, z_dim=2, batch_size=4,
+    recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
                         total_steps=10, lr_anneal_start=0.1)
     G = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 2)).double()
     D = nn.Sequential(nn.Linear(2, 8), nn.BatchNorm1d(8), nn.ReLU(), nn.Linear(8, 1)).double()

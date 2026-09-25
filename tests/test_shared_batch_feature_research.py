@@ -1,7 +1,7 @@
 """Behavioral safety checks for the archived batch-distance discriminator."""
 import torch
 
-from particlegan import GradientPenalty
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from benchmarks.transfer_suite.shared_batch_feature_research import ARCHITECTURES, constructor
 
 

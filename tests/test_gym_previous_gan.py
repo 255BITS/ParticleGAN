@@ -87,7 +87,7 @@ class PreviousGanTests(unittest.TestCase):
             fakes, _ = fake_paths(bundle, batch, torch.Generator().manual_seed(8), torch.Generator().manual_seed(9), True)
             loss, _ = adversarial_loss(bundle['D'], real_record(bundle, batch), fakes, batch['terrain'], recipe.make_loss(),
                 reg=recipe.make_critic_penalty(recipe.make_critic_optimizer(
-                    bundle['D'], ema_critic=copy.deepcopy(bundle['D'])), generator=torch.Generator().manual_seed(7)))
+                    bundle['D'], ema_critic=copy.deepcopy(bundle['D']))))
             loss.backward()
             self.assertTrue(all(has_grad(d) for d in bundle['D'].critics.values()))
             self.assertTrue(all(not has_grad(bundle[k]) for k in ('G', 'E', 'prior')))

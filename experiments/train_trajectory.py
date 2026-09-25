@@ -45,7 +45,7 @@ def training_recipe(cfg):
         ucd_weight=cfg["ucd_lambda"], alpha_bar=cfg["alpha_bar"],
         batch_size=cfg["batch_size"], total_steps=cfg["steps"], lr=cfg["lr"],
         d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
-        betas=(cfg["beta1"], .999), loss_type="logistic", gan_mode="rp",
+        betas=(cfg["beta1"], .999),
         reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
         reg_every=cfg["reg_every"], prior_reg=cfg["prior_reg"], ema_decay=cfg["ema"],
     )
@@ -124,7 +124,7 @@ def train(cfg):
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()
-    penalty_fn = recipe.make_critic_penalty(opt_d, generator=rngs[5])
+    penalty_fn = recipe.make_critic_penalty(opt_d)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
 
     def batch():

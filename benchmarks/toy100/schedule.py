@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import math
 
-from particlegan.recipes import learning_rate_scale
+from particlegan import learning_rate_scale
 
 
 def policy_multipliers(

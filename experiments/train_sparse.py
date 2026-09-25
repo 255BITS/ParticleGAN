@@ -111,7 +111,6 @@ DEFAULTS: Dict = {
     # recipe
     "coeff": 1.0,                 # recipe reg_coeff
     "kappa": 1.0,                 # recipe reg_kappa
-    "loss_type": "logistic",
     "lr": 6e-4,
     "d_lr_mult": 1.5,
     "beta1": 0.0,
@@ -276,7 +275,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     recipe = get_recipe(
         z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
         lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
-        betas=(float(cfg["beta1"]), 0.999), loss_type=str(cfg["loss_type"]),
+        betas=(float(cfg["beta1"]), 0.999),
         reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
         lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
     gan_loss = recipe.make_loss()

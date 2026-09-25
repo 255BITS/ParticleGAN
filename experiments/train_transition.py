@@ -280,10 +280,8 @@ def train(cfg):
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"]+i) for i in (11, 12)]
-    # One penalty per role (own interpolation stream), all paired with opt_d.
-    penalties = {name: recipe.make_critic_penalty(
-                     opt_d, generator=torch.Generator(device=device).manual_seed(cfg["seed"]+13+i))
-                 for i, name in enumerate(d.roles())}
+    # One penalty per role, all paired with opt_d.
+    penalties = {name: recipe.make_critic_penalty(opt_d) for name in d.roles()}
 
     def batch():
         c, geom, tick, real = toy.batch(cfg["batch_size"], rngs[0])

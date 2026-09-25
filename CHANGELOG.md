@@ -2,6 +2,30 @@
 
 ## Unreleased
 
+- **One formulation, no technique menu.** Removed from `particlegan`: the
+  `Recipe` fields `loss_type`, `gan_mode`, `reg_arm` and `reg_method`; the
+  non-K3P penalty arms, norms, center annealing and finite differences of the
+  critic gradient penalty; the hinge/Wasserstein/LSGAN/vanilla/RaGAN modes of
+  `GANLoss` (now RpGAN logistic only); `recipe.make_gradient_penalty`; the
+  unused `generator=` of `make_critic_penalty`; the `particlegan.locked_shared`
+  stamp; and the `GradientPenalty` top-level export. Training with the default
+  recipe is bit-identical. `GANTrainer` still loads checkpoints whose recipe
+  recorded the removed fields at their only supported values.
+- Benchmarks that replay archived GAN v3 / locked_shared / arm-study
+  configurations now resolve them through frozen copies in `benchmarks/legacy/`
+  (`LegacyRecipe`, the multi-arm penalty, the multi-mode loss, the stamp).
+- Removed the arm-study drivers and configs (`experiments/train_arm.py`,
+  `gen_configs.py`, `compare_priors.py`, `make_video.py`, `provenance.py`,
+  `probe_cifar_fd.py`, top-level `configs/*.yaml`, `configs/audit/`), the
+  `lib/gan_loss.py` / `lib/grad_regularizers.py` shims, the docs for GAN v3,
+  locked_shared, prior controls and the develop API review, and tests that
+  only asserted removed behaviour.
+- Added ablation switches `Recipe.reg_anchor_weight` (1.0; 0 removes the
+  critic penalty's EMA-anchor term) and `Recipe.direct_particle_gain` (True;
+  False keeps the direct-particle LR unscaled).
+- Rewrote the README for newcomers around a runnable plain-PyTorch loop
+  (executed by `tests/test_readme.py`).
+
 - **Every repository trainer uses the default formulation.** Examples,
   experiments and `lib/` trainers build their optimizers and critic penalties
   only through `recipe.make_optimizers` / `make_critic_optimizer` /

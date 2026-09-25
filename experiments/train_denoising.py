@@ -49,7 +49,6 @@ DEFAULTS = {
     'fourier': 2,
     'noise_lr_mult': 1.0,
     'noise_reg': 0.0,
-    'reg_fd_eps': 0.05,
     'reg_sync_stats': True,
     'fused_adam': False,
     'drop_xt': False,
@@ -65,7 +64,7 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 
 
 def training_recipe(cfg):
-    """Resolve legacy experiment fields into the public, caller-owned recipe."""
+    """Resolve experiment fields into the public, caller-owned recipe."""
     return get_recipe(
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
         num_classes=cfg["classes"],
@@ -76,9 +75,9 @@ def training_recipe(cfg):
         ucd_target=cfg["ucd_target"], ucd_weight=cfg["ucd_lambda"],
         alpha_bar=cfg["alpha_bar"], batch_size=cfg["batch_size"], total_steps=cfg["steps"],
         lr=cfg["lr"], d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
-        betas=(cfg["beta1"], cfg.get("beta2", .999)), loss_type=cfg["loss_type"], gan_mode=cfg["gan_mode"],
+        betas=(cfg["beta1"], cfg.get("beta2", .999)),
         reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
-        reg_every=cfg["reg_every"], reg_method=cfg["reg_method"], prior_reg=cfg["prior_reg"],
+        reg_every=cfg["reg_every"], prior_reg=cfg["prior_reg"],
         ema_decay=cfg["ema"], lr_anneal_start=cfg["lr_anneal_start"], lr_floor=cfg["lr_floor"],
     )
 
@@ -92,8 +91,9 @@ def make_prior(cfg, device):
 
 
 def validate(cfg):
-    if "reg_arm" in cfg:
-        raise ValueError("reg_arm was removed: the critic penalty is the recipe default")
+    removed = [k for k in ("reg_arm", "loss_type", "gan_mode", "reg_method", "reg_fd_eps") if k in cfg]
+    if removed:
+        raise ValueError(f"{removed} were removed: the objective and critic penalty are the recipe default")
     training_recipe(cfg)  # validates every recipe field, including the penalty settings
     target = cfg.get("ucd_target", "class")
     if target not in ("class", "time_class") or (target == "time_class" and (cfg["model"] != "ddgan" or cfg["d_mode"] != "ucd")):
@@ -216,8 +216,7 @@ def train(cfg):
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = recipe.make_loss()
-    penalty = recipe.make_critic_penalty(opt_d, generator=rngs["penalty"], fd_eps=cfg["reg_fd_eps"],
-                                         collect_stats=cfg.get("reg_sync_stats", True))
+    penalty = recipe.make_critic_penalty(opt_d, collect_stats=cfg.get("reg_sync_stats", True))
     spread = recipe.make_prior_regularizer()
 
     def batch():

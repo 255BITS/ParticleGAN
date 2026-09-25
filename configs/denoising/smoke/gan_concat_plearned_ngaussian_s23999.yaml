@@ -16,9 +16,7 @@ eval_interval: 100
 eval_samples: 2048
 final_samples: 4096
 fourier: 2
-gan_mode: rp
 hidden: 128
-loss_type: logistic
 lr: 0.0006
 lr_anneal_start: 0.6
 lr_floor: 0.05

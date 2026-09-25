@@ -7,7 +7,7 @@ from pathlib import Path
 
 import torch
 
-from particlegan import get_recipe
+from benchmarks.legacy.recipe import get_recipe
 from . import shared_default_search as shared, suite
 from .compare_defaults import plan, read, write
 from .relative_step_adapter import adapted_steps, mechanism

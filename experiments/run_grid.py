@@ -38,7 +38,7 @@ if str(ROOT) not in sys.path:
 from experiments.config import merge_config, read_config, recipe_defaults
 
 DEFAULT_PYTHON = ".venv/bin/python"
-DEFAULT_TRAINER = "experiments/train_arm.py"
+DEFAULT_TRAINER = "experiments/train_100gaussians.py"
 FAILURES_PATH = Path("results/failures.txt")
 COMPLETION_FILE = "run_grid_complete.json"
 MANIFEST_VERSION = 1

@@ -17,10 +17,8 @@ eval_samples: 8192
 final_samples: 20000
 fourier: 2
 fused_adam: false
-gan_mode: rp
 generator_hidden: 32
 hidden: 128
-loss_type: logistic
 lr: 0.0006
 lr_anneal_start: 0.6
 lr_floor: 1.0
@@ -40,9 +38,7 @@ prior_reg: 1.0
 probe_samples: 64
 reg_coeff: 1.0
 reg_every: 1
-reg_fd_eps: 0.05
 reg_kappa: 1.0
-reg_method: autograd
 reg_sync_stats: true
 save_checkpoint: true
 seed: 24002
