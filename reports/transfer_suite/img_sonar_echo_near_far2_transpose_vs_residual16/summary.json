@@ -1,0 +1,59 @@
+{
+  "task": "img_sonar_echo_near_far2",
+  "tip_sha": "ac83ce32b99bd488c2dd700786c0c93f0bb1f27b",
+  "principal": "sonar_echo_near_far2 near vs far A-scope echo: published transpose12 vs residual16",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles)",
+  "arms": {
+    "baseline_transpose12": {
+      "card": {
+        "name": "baseline_transpose12",
+        "scope": "published image path (transpose width 12)",
+        "changes": {}
+      },
+      "verdict": "FAIL",
+      "quality": {
+        "sustained": false,
+        "confirmed_step": null,
+        "modes": 0,
+        "hq": 0.125,
+        "mean_rmse": 0.06762399524450302,
+        "error": null,
+        "seconds": 6.485764545854181,
+        "last_obs": {
+          "hq": 0.125,
+          "mean_rmse": 0.06762399524450302,
+          "modes": 0
+        }
+      },
+      "seconds": 6.486106605036184
+    },
+    "residual16": {
+      "card": {
+        "name": "residual16",
+        "scope": "in-formulation architecture control",
+        "changes": {
+          "architecture": "residual_upsample",
+          "width": 16
+        }
+      },
+      "verdict": "PASS",
+      "quality": {
+        "sustained": true,
+        "confirmed_step": 575,
+        "modes": 2,
+        "hq": 0.9375,
+        "mean_rmse": 0.03238435834646225,
+        "error": null,
+        "seconds": 5.703098139027134,
+        "last_obs": {
+          "hq": 0.9375,
+          "mean_rmse": 0.03238435834646225,
+          "modes": 2
+        }
+      },
+      "seconds": 5.703453517053276
+    }
+  },
+  "hit": true,
+  "soft_miss": false
+}
