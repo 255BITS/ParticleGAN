@@ -64,6 +64,8 @@ def make_prompt(config, lane, previous, review):
         HERE / config['lanes'][lane]['brief']).read_text()
     prompt += '\n\nRead-only research evidence checkout: ' + str(evidence) + '\n'
     prompt += ('Current eligibility audit: ' + str(HERE.parent) + '\n'
+               'Shared evaluator declaration (not a learner input): ' +
+               str(HERE / 'evaluation-protocols.json') + '\n'
                'API source base: ' + config['api_commit'] + '\n'
                'Historical research outcomes must not override this brief.\n')
     if previous:
@@ -184,6 +186,8 @@ def main(argv=None):
             (directory / 'brief.md').write_text(plan['prompt'])
             (directory / 'config.json').write_text(json.dumps(config, indent=2) + '\n')
             (directory / 'launcher.py').write_bytes(Path(__file__).read_bytes())
+            (directory / 'evaluation-protocols.json').write_bytes(
+                (HERE / 'evaluation-protocols.json').read_bytes())
             with (directory / 'launcher.log').open('wb') as log:
                 process = subprocess.Popen(plan['command'], cwd=config['workspace'],
                                            stdin=subprocess.DEVNULL, stdout=log,
@@ -193,6 +197,7 @@ def main(argv=None):
                           model='gpt-6-astra', workers=1, reasoning_effort='max', minutes=0,
                           source_sha256=sha256(Path(__file__)),
                           brief_sha256=sha256(directory / 'brief.md'),
+                          evaluation_protocols_sha256=sha256(directory / 'evaluation-protocols.json'),
                           review_note_sha256=sha256(args.review_note) if args.review_note else None)
             records.append(record)
             atomic_json(record_file, records)

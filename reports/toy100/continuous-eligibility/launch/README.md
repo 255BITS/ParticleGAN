@@ -22,6 +22,12 @@ behavior matter, not just the critic controller. Fixed initialization and
 smoothing counts alone do not disqualify a policy. Research-host scores alone
 cannot qualify an API default. Neither PR155 nor PR195 should be merged here.
 
+[Current evaluation declarations](evaluation-protocols.json) specify the shared
+4600-update single shift, 7500-update stationary run, and 9000/30000-update
+delayed/repeated-change evaluations. Budgets belong only to the evaluator.
+These declarations supersede the old stress protocol's 81/81 and extra-seed
+instructions for new work, while preserving that historical evidence unchanged.
+
 ## Preview and offline verification
 
 ```bash

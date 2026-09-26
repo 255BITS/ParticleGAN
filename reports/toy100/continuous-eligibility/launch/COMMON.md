@@ -67,6 +67,12 @@ Keep a frozen no-update comparator when establishing adaptation. Test an
 identical training prefix under differing evaluator budgets and exact checkpoint
 continuation including policy, optimizer, EMA and RNG state.
 
+Use the current `evaluation-protocols.json` beside this brief as the shared
+declaration. It preserves the historical delayed/repeated target-change times
+while replacing the obsolete 81/81 deadline and extra-seed instructions. Keep
+the historical declarations untouched. Record deviations before execution;
+never move target changes or choose an endpoint after seeing a candidate's trace.
+
 Before proposing a release winner, compare K3P on the same runtime/protocol and
 complete the candidate's own broader 22-task quality checks. Historical K3P
 numbers on a different runtime are context only. Coordinate any expensive

@@ -41,6 +41,7 @@ class LaunchChecks(unittest.TestCase):
                 self.assertIn('at most 3 candidates; 1 workers', result.stdout)
                 self.assertNotIn('timeout --signal', result.stdout)
                 self.assertIn('NO fixed 81/81', plan['prompt'])
+                self.assertIn(str(HERE / 'evaluation-protocols.json'), plan['prompt'])
             self.assertEqual(list(Path(temporary).iterdir()), [])
 
     def test_global_worker_capacity(self):
