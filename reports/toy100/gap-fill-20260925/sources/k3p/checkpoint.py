@@ -27,6 +27,7 @@ def save(path,response):
     payload=dict(modules=modules,trainers=trainers,streams=streams,scalars=scalars,
         optimizers=[copy.deepcopy(o.state_dict()) for o in optimizers],
         parameters=[[p.detach().clone() for g in o.param_groups for p in g['params']] for o in optimizers],
-        response_history=history,cpu_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state_all())
+        response_history=history,cpu_rng=torch.get_rng_state(),
+        cuda_rng=(torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []))
     torch.save(payload,path)
     return dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),modules=len(modules),trainers=len(trainers),streams=len(streams),optimizers=len(optimizers),response_history=len(history),response_devices=sorted({str(h['value'].device) for h in history}))
