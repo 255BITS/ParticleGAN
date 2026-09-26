@@ -81,6 +81,13 @@ D_i use Fourier input features; D_m uses none.
 | `misgan_gauss` | mcar_p50 | as `misgan`, with frozen-Gaussian priors for all three generators (`make_prior(learnable=False)`) | G_x |
 | `misgan_hard` | mcar_p50 | as `misgan`, with G_m masks binarized by a straight-through estimator (tests the soft-mask critic shortcut) | G_x |
 
+Two follow-ups were added after the first grid. They are in the same pipeline:
+
+| run | where | change |
+| --- | --- | --- |
+| `misgan_detach` | mcar_p50, mcar_p80 | as `misgan`, but G_m's masks are detached inside L_x, so G_m trains on L_m alone |
+| `misgan_long` | mcar_p50 | `misgan` with 3x the budget (21,000 updates). The G/D LR horizon cap stays at 1,600, while the prior LR and the noise schedules stretch with the budget |
+
 G_m and D_m train in every arm. G_m gets L_x gradient only where its masks
 enter D_x (`misgan`, `misgan_gauss`, `misgan_hard`). The seed is fixed, and
 arms differ only in substance.
