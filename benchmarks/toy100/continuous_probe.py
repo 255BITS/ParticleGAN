@@ -536,9 +536,13 @@ def main() -> None:
     parser.add_argument("--archive-sources", type=Path,
                         help="directory for the standard transfer-suite source archive")
     add_device_argument(parser)
+    parser.add_argument("--init", default=None,
+                        help="deterministic weight and particle init name; omit to keep the PyTorch init")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     apply_device_policy(args.device, log=True)
+    from particlegan.init_registry import use_init
+    use_init(args.init)
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
     def log(row):

@@ -24,10 +24,15 @@ p.add_argument('--prior-floor', type=float, required=True)
 p.add_argument('--anneal-start', type=float, default=.6)
 p.add_argument('--steps', type=int, default=7500)
 p.add_argument('--post-window', type=int, default=300)
+p.add_argument('--init', default=None,
+               help='deterministic weight and particle init name; omit to keep the PyTorch init')
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))
 import torch
+if a.init:
+    from particlegan.init_registry import install
+    install(a.init)
 from torch.utils._python_dispatch import TorchDispatchMode
 from torch.utils._pytree import tree_map
 
