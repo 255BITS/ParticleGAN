@@ -1,0 +1,499 @@
+{
+  "created_utc": "2026-09-26T23:35:12.244990+00:00",
+  "status": "COMPLETED_LONG_AND_MEASURED_VECTOR_AUDIT",
+  "scope": "Stdlib-only source/metadata/raw-byte numerical gate audit. No training, tests, models or GPU execution; no shared manifests edited.",
+  "long_source": {
+    "source_zip_sha256": "3a3d0e4cdd705c53016222072e22a349b5aefb9248cc7af8bef89d143e54b50d",
+    "declared_source_entries": 34,
+    "declared_source_exact": true,
+    "package_matches_single": true,
+    "artifact_hashes_all_verified": true
+  },
+  "package_sha256": {
+    "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/game_update.py": "9f88b8ed3de9217ba8655b7194a35f78795d6a30fdecaa5f87543b71e31c1292",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+    "particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+    "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "particlegan/precision.py": "07443f3c6ab9e5f4afae492ea0a718f3be8698c0423ac2adbb63c2eae7a7e50d",
+    "particlegan/recipes.py": "34800edbae09e69c9051bdf1d29e7564dd202df902035f5092accc10de60e3b5",
+    "particlegan/training.py": "cf5549ccfb01aa7a6456b7d4584bbc1b5108b46e87ba8be6d66a203b12641d52",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "learner_contract": "Same public RP5 package as single/stationary/images, continuous_precision=rp5, secant_resolvent, public factory eager Adam state, total_steps=None. No budget/target/quality/oracle inputs. Fixed360/720 noise initialization and nonzero reversible rate states are distinct from horizon-based decay.",
+  "uninterrupted": "One30000-update main loop; target changes at6000/7800/27000 are caller-only. At each change only a separate frozen trainer loads a snapshot and restores construction-changed global RNG. Main learner is never reloaded.",
+  "segments": [
+    {
+      "start": 0,
+      "end": 6000,
+      "first_arrival": 570,
+      "arrival_delay": 570,
+      "passing_since_arrival": 544,
+      "observations_since_arrival": 544,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.934326171875,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.005859375,
+      "final_suffix_start": 570,
+      "final_suffix_observations": 544
+    },
+    {
+      "start": 6000,
+      "end": 7800,
+      "first_arrival": 6350,
+      "arrival_delay": 350,
+      "passing_since_arrival": 146,
+      "observations_since_arrival": 146,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.93115234375,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final_suffix_start": 6350,
+      "final_suffix_observations": 146
+    },
+    {
+      "start": 7800,
+      "end": 27000,
+      "first_arrival": 8250,
+      "arrival_delay": 450,
+      "passing_since_arrival": 1876,
+      "observations_since_arrival": 1876,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.9013671875,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final_suffix_start": 8250,
+      "final_suffix_observations": 1876
+    },
+    {
+      "start": 27000,
+      "end": 30000,
+      "first_arrival": 27250,
+      "arrival_delay": 250,
+      "passing_since_arrival": 276,
+      "observations_since_arrival": 276,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.909912109375,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final_suffix_start": 27250,
+      "final_suffix_observations": 276
+    }
+  ],
+  "prefix9000": [
+    {
+      "start": 0,
+      "end": 6000,
+      "first_arrival": 570,
+      "arrival_delay": 570,
+      "passing_since_arrival": 544,
+      "observations_since_arrival": 544,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.934326171875,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.005859375,
+      "final_suffix_start": 570,
+      "final_suffix_observations": 544
+    },
+    {
+      "start": 6000,
+      "end": 7800,
+      "first_arrival": 6350,
+      "arrival_delay": 350,
+      "passing_since_arrival": 146,
+      "observations_since_arrival": 146,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.93115234375,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final_suffix_start": 6350,
+      "final_suffix_observations": 146
+    },
+    {
+      "start": 7800,
+      "end": 9000,
+      "first_arrival": 8250,
+      "arrival_delay": 450,
+      "passing_since_arrival": 76,
+      "observations_since_arrival": 76,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.9013671875,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final_suffix_start": 8250,
+      "final_suffix_observations": 76
+    }
+  ],
+  "all3000_observations_present": true,
+  "all30000_rates_and_update_clocks_verified": true,
+  "controller_events": [
+    {
+      "step": 834,
+      "event": "close",
+      "open": false,
+      "gap": 0.008396157994866371,
+      "gap_s": 0.010817107962928934,
+      "activity": 0.022846375391917993,
+      "openings": 1,
+      "closings": 1
+    },
+    {
+      "step": 6012,
+      "event": "reopen",
+      "open": true,
+      "gap": 0.0280831940472126,
+      "gap_s": 0.0017274050594723817,
+      "activity": 0.5231004546191722,
+      "openings": 2,
+      "closings": 1
+    },
+    {
+      "step": 6733,
+      "event": "close",
+      "open": false,
+      "gap": 0.022196762263774872,
+      "gap_s": 0.03310629756101357,
+      "activity": 0.01675159402094639,
+      "openings": 2,
+      "closings": 2
+    }
+  ],
+  "applied_rate_switches": [
+    {
+      "applied_from_step": 835,
+      "network": 4.25e-05,
+      "prior": 0.00042500000000000003
+    },
+    {
+      "applied_from_step": 6013,
+      "network": 0.00425,
+      "prior": 0.0085
+    },
+    {
+      "applied_from_step": 6734,
+      "network": 4.25e-05,
+      "prior": 0.00042500000000000003
+    }
+  ],
+  "prechange_last120": [
+    {
+      "change": 6000,
+      "passing": 120,
+      "total": 120
+    },
+    {
+      "change": 7800,
+      "passing": 120,
+      "total": 120
+    },
+    {
+      "change": 27000,
+      "passing": 120,
+      "total": 120
+    }
+  ],
+  "frozen_controls": [
+    {
+      "change": 6000,
+      "end": 7800,
+      "passing": 0,
+      "total": 180,
+      "maximum_hq": 0.0
+    },
+    {
+      "change": 7800,
+      "end": 27000,
+      "passing": 0,
+      "total": 1920,
+      "maximum_hq": 0.0
+    },
+    {
+      "change": 27000,
+      "end": 30000,
+      "passing": 0,
+      "total": 300,
+      "maximum_hq": 0.0
+    }
+  ],
+  "raw_saved_states": [
+    {
+      "file": "initial-state.pt",
+      "sha256": "a6f463f2468bca369774e00718e40cbdc589ce57b7a1ba8428ace44a215785f1",
+      "step": 0,
+      "complete_raw_receipt_matches": true,
+      "trainer_sha256": "0e49ebb2642a453dd762b9566b424232746ebf5eb1992560bc21f212f1144770",
+      "optimizer_step_devices": {
+        "cuda:0": 17
+      },
+      "precision_state": {
+        "variant": "rp5",
+        "open": true,
+        "gap": null,
+        "gap_s": null,
+        "velocity": 0.0,
+        "contraction_peak": 0.0,
+        "contracting": 0,
+        "activity": null,
+        "activity_peak": 0.0,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 0,
+        "openings": 1,
+        "closings": 0,
+        "event": "initial_open",
+        "velocity_s": 0.0
+      }
+    },
+    {
+      "file": "change-6000-state.pt",
+      "sha256": "4755ae6ceb5c1493b45695785bd7610b86da91a75b927644894871630344467a",
+      "step": 6000,
+      "complete_raw_receipt_matches": true,
+      "trainer_sha256": "fe4dcbd6e7fbe89657f8e15fdf97643f2945e597d62490e2743e3f75947eef99",
+      "optimizer_step_devices": {
+        "cuda:0": 17
+      },
+      "precision_state": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.00022286581224761903,
+        "gap_s": 0.0001819966002168505,
+        "velocity": 4.1282032354312496e-07,
+        "contraction_peak": 0.00014257716841309173,
+        "contracting": 387,
+        "activity": 0.15561994207942134,
+        "activity_peak": 0.6057107491693455,
+        "quiet_gap": 0.00018595932168883816,
+        "quiet_activity": 0.15526119294025806,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 6000,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": -2.1465178520348762e-08
+      }
+    },
+    {
+      "file": "change-7800-state.pt",
+      "sha256": "1a7c0d1e0a082414e2f14d6fdeb7ff6f4d9e3ea6f58fbe43ef964ddf050ac2a1",
+      "step": 7800,
+      "complete_raw_receipt_matches": true,
+      "trainer_sha256": "964420fa0c0d0d1e07294a0df8ff13ddcfa0b3ddc2c7af8af1c68add25cd0b09",
+      "optimizer_step_devices": {
+        "cuda:0": 17
+      },
+      "precision_state": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.002354054246097803,
+        "gap_s": 0.0027994005025899957,
+        "velocity": -4.498447035275032e-06,
+        "contraction_peak": 0.0005243293247196773,
+        "contracting": 503,
+        "activity": 0.07087222764658022,
+        "activity_peak": 1.6203840513022156,
+        "quiet_gap": 0.03310515385662816,
+        "quiet_activity": 0.016852927498369957,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 7800,
+        "openings": 2,
+        "closings": 2,
+        "event": null,
+        "velocity_s": -3.5281986238343462e-06
+      }
+    },
+    {
+      "file": "prefix-9000-state.pt",
+      "sha256": "2f9b02df6a128726f88251ead630bedfcd5a95917ec6572d97c3acc4ecb6aff2",
+      "step": 9000,
+      "complete_raw_receipt_matches": true,
+      "trainer_sha256": "22b66a9404319824cf26e8f6cf476d7666fa2c9e85b78b1d33f625663955fb1d",
+      "optimizer_step_devices": {
+        "cuda:0": 17
+      },
+      "precision_state": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.010789142921566963,
+        "gap_s": 0.013355663449091115,
+        "velocity": -2.5924449772972424e-05,
+        "contraction_peak": 0.0005243293247196773,
+        "contracting": 503,
+        "activity": 0.11407417026607414,
+        "activity_peak": 1.6203840513022156,
+        "quiet_gap": 0.03310515385662816,
+        "quiet_activity": 0.016852927498369957,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 9000,
+        "openings": 2,
+        "closings": 2,
+        "event": null,
+        "velocity_s": -2.6347336561550636e-05
+      }
+    },
+    {
+      "file": "change-27000-state.pt",
+      "sha256": "ee1687dcbb2b79611f7354dfb1034f43abd436eac400ce83c7b564ef40c42579",
+      "step": 27000,
+      "complete_raw_receipt_matches": true,
+      "trainer_sha256": "4de03013bc86e119bb4b02551540f6e5247d92f6d1c92f07dd0e72238a93edbb",
+      "optimizer_step_devices": {
+        "cuda:0": 17
+      },
+      "precision_state": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.00010056183236883953,
+        "gap_s": 8.45998605713382e-05,
+        "velocity": 1.6123203835860728e-07,
+        "contraction_peak": 0.0005243293247196773,
+        "contracting": 503,
+        "activity": 0.5905189181610043,
+        "activity_peak": 1.6203840513022156,
+        "quiet_gap": 0.03310515385662816,
+        "quiet_activity": 0.016852927498369957,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 27000,
+        "openings": 2,
+        "closings": 2,
+        "event": null,
+        "velocity_s": 7.189582508250242e-08
+      }
+    },
+    {
+      "file": "final-state.pt",
+      "sha256": "dbc66fb47b1dd164abf64d08f30c5132802e4e46f2fd35d27cfc98973aa611d6",
+      "step": 30000,
+      "complete_raw_receipt_matches": true,
+      "trainer_sha256": "9ab0c5c71031fb2a8dacb84980635e94abae1ae8d6a81a19afeb1c28b1a61b07",
+      "optimizer_step_devices": {
+        "cuda:0": 17
+      },
+      "precision_state": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.0005167131894268095,
+        "gap_s": 0.00062150229408744,
+        "velocity": -1.0584758046528007e-06,
+        "contraction_peak": 0.0005243293247196773,
+        "contracting": 503,
+        "activity": 0.3232664325498048,
+        "activity_peak": 1.6203840513022156,
+        "quiet_gap": 0.03310515385662816,
+        "quiet_activity": 0.016852927498369957,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 30000,
+        "openings": 2,
+        "closings": 2,
+        "event": null,
+        "velocity_s": -9.270865295419852e-07
+      }
+    }
+  ],
+  "horizon_prefix": {
+    "rp5-single/metrics.jsonl": {
+      "through": 2400,
+      "matching_rows": 240
+    },
+    "rp5-single/learning-rates.jsonl": {
+      "through": 2400,
+      "matching_rows": 2400
+    },
+    "rp5-single/state-hashes.jsonl": {
+      "through": 2400,
+      "matching_rows": 24
+    },
+    "rp5-stationary/metrics.jsonl": {
+      "through": 6000,
+      "matching_rows": 600
+    },
+    "rp5-stationary/learning-rates.jsonl": {
+      "through": 6000,
+      "matching_rows": 6000
+    },
+    "rp5-stationary/state-hashes.jsonl": {
+      "through": 6000,
+      "matching_rows": 60
+    }
+  },
+  "replay_scope": "Existing separate-process2400->2500 and2450 interior split evidence remains. Declared new long-change6000/7800/27000 continuations are not present in the audited long directory. Raw checkpoint/receipt identity verifies saved contents, not new execution.27000 recovery happened while precision stayed closed; no forced reopening criterion added.",
+  "required_replay_plan": [
+    {
+      "checkpoint": 6000,
+      "end": 6100,
+      "new_absolute_offset": [
+        1,
+        0
+      ],
+      "delta": [
+        1,
+        0
+      ]
+    },
+    {
+      "checkpoint": 7800,
+      "end": 7900,
+      "new_absolute_offset": [
+        1,
+        1
+      ],
+      "delta": [
+        0,
+        1
+      ]
+    },
+    {
+      "checkpoint": 27000,
+      "end": 27100,
+      "new_absolute_offset": [
+        0,
+        1
+      ],
+      "delta": [
+        -1,
+        0
+      ]
+    }
+  ],
+  "vector_archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/rp5-vector-wave2-audit.json",
+  "vectors": [
+    {
+      "task": "frozen22_vector_anisotropic",
+      "status": "PASS",
+      "passing": 20,
+      "suffix": 20
+    },
+    {
+      "task": "frozen22_vector_overlap",
+      "status": "PASS",
+      "passing": 24,
+      "suffix": 24
+    },
+    {
+      "task": "frozen22_vector_spiral",
+      "status": "PASS",
+      "passing": 23,
+      "suffix": 23
+    }
+  ],
+  "remaining_vectors": [],
+  "corrections_preserved": [
+    "Prior false D.freqs-buffer initialization mismatch is not a changed parameter fixture or rerun.",
+    "Prior false segment-import9000 warning was retracted: earlier import precedes loop. Original run is valid uninterrupted evidence.",
+    "Old single_shift convenience fields in long result are not interpreted as long transitions; independently grouped actual segments/frozen controls used."
+  ],
+  "limits": "Finite long evidence supports observed stability, not infinite stability. This audit alone does not complete own22, late checkpoint replays or matched publicK3P comparison."
+}

@@ -1,0 +1,380 @@
+{
+  "broader_entry": {
+    "id": "api-rp5-vector_spiral",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral",
+    "recorded_utc": "2026-09-26T23:35:15.182182+00:00",
+    "candidate": "API-RP5",
+    "protocol": "frozen22_vector_spiral",
+    "scope": "PUBLIC_API",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-RP5",
+      "gate": "broader_vector_spiral",
+      "status": "PASS",
+      "seconds": 89.24115637107752,
+      "metrics": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "sw1_normalized",
+              "value": 0.023970365855931253,
+              "op": "<=",
+              "threshold": 0.18,
+              "status": "PASS",
+              "margin": 0.15602963414406873
+            },
+            {
+              "metric": "mean_error",
+              "value": 0.004572391975671053,
+              "op": "<=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.14542760802432894
+            },
+            {
+              "metric": "covariance_error",
+              "value": 0.03336593508720398,
+              "op": "<=",
+              "threshold": 0.45,
+              "status": "PASS",
+              "margin": 0.41663406491279603
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 23,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 23,
+            "first_pass_step": 134,
+            "stable_from_step": 134,
+            "stable_from_seconds": null,
+            "confirmed_step": 400,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.25
+        },
+        "final": {
+          "step": 1600,
+          "sw1_normalized": 0.023970365855931253,
+          "mean_error": 0.004572391975671053,
+          "covariance_error": 0.03336593508720398,
+          "target_scale": 1.240945816040039,
+          "sample_count": 4096,
+          "ema": {
+            "sw1_normalized": 0.02351155125771772,
+            "mean_error": 0.01716189831495285,
+            "covariance_error": 0.026715535670518875,
+            "target_scale": 1.240945816040039,
+            "sample_count": 4096
+          }
+        },
+        "policy": {
+          "variant": "rp5",
+          "open": false,
+          "gap": 0.0011304602958261967,
+          "gap_s": 0.0012562387933552138,
+          "velocity": -1.2704898740304935e-06,
+          "contraction_peak": 5.029809264680088e-05,
+          "contracting": 903,
+          "activity": 0.2824138562961724,
+          "activity_peak": 0.6051855755152181,
+          "quiet_gap": 0.00156201956294843,
+          "quiet_activity": 0.3066260388414032,
+          "quiet": 0,
+          "shock": 0,
+          "updates": 1600,
+          "openings": 1,
+          "closings": 1,
+          "event": null,
+          "velocity_s": -1.7462619606834535e-06
+        },
+        "updates": 1600
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral"
+    },
+    "derived": {
+      "status": "PASS",
+      "observations": 24,
+      "complete": true,
+      "passing_observations": 23,
+      "passing_suffix": 23,
+      "first_pass_step": 134,
+      "stable_from_step": 134,
+      "failing_steps": [
+        67
+      ],
+      "final_live": {
+        "step": 1600,
+        "sw1_normalized": 0.023970365855931253,
+        "mean_error": 0.004572391975671053,
+        "covariance_error": 0.03336593508720398,
+        "target_scale": 1.240945816040039,
+        "sample_count": 4096
+      }
+    },
+    "source_and_initialization_audit": {
+      "source_zip_sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6",
+      "source_declaration_hash_mismatches": [],
+      "package_differences": [],
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "host_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "fixture_path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt",
+      "fixture_sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2",
+      "embedded_fixture_verified": true,
+      "canonical_parameter_match": true,
+      "named_parameter_hashes": {
+        "G": [
+          {
+            "name": "net.0.weight",
+            "shape": [
+              64,
+              4
+            ],
+            "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+          },
+          {
+            "name": "net.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+          },
+          {
+            "name": "net.2.weight",
+            "shape": [
+              64,
+              64
+            ],
+            "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+          },
+          {
+            "name": "net.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+          },
+          {
+            "name": "net.4.weight",
+            "shape": [
+              2,
+              64
+            ],
+            "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+          },
+          {
+            "name": "net.4.bias",
+            "shape": [
+              2
+            ],
+            "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+          }
+        ],
+        "prior": [
+          {
+            "name": "z",
+            "shape": [
+              256,
+              4
+            ],
+            "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+          }
+        ],
+        "D": [
+          {
+            "name": "net.0.weight",
+            "shape": [
+              64,
+              10
+            ],
+            "sha256": "24562546cfa64edb4fed54efeccfb445aebf69a16831ad22f477d5d7320482a5"
+          },
+          {
+            "name": "net.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "28408481bbd153aa1de4db94848ecfbb3749aee6ca43f9a440036386c779aa3a"
+          },
+          {
+            "name": "net.2.weight",
+            "shape": [
+              64,
+              64
+            ],
+            "sha256": "b953ce297fe4eaffe0fe11224bd715c6821e0e8bd6687d31c3bae88b05c661e1"
+          },
+          {
+            "name": "net.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "cc0bc7ee6b8088e9be662d7b7889cfa79c8f400027b0990b39cf284e7f25fff6"
+          },
+          {
+            "name": "net.4.weight",
+            "shape": [
+              1,
+              64
+            ],
+            "sha256": "d433e146f23d225a7c577d1b392db8658a51e05daa2ab3c415333606c23fe7f1"
+          },
+          {
+            "name": "net.4.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "8dd8efc3155c46f1e02a60324b64216bb77fd6d3ef997905ad3447a755dc059c"
+          }
+        ]
+      },
+      "buffers": {
+        "G": {},
+        "prior": {},
+        "D": {
+          "freqs": {
+            "shape": [
+              2
+            ],
+            "sha256": "a4025dcc1a0a0fee0d523f9e5b2d533ab37877cf6eee61215488bcfeaa91b1ed"
+          }
+        }
+      },
+      "initial_ema_matches": {
+        "G": true,
+        "prior": true
+      },
+      "initial_state_sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+      "harness_sha256": "b0ea88e064520e75cb683a56ada72e5a736d7834a2a611dcaa97e58f1cd60890",
+      "original_artifact_manifest_mismatches": []
+    },
+    "artifacts": {
+      "evidence/api-rp5-vector_spiral/artifact-sha256.json": {
+        "sha256": "c873128b5e3d7f2c41ca6bf52944c70cc0a437cf94c2f1f6fde41ac83749d7e1",
+        "original_sha256": "c873128b5e3d7f2c41ca6bf52944c70cc0a437cf94c2f1f6fde41ac83749d7e1",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/artifact-sha256.json",
+        "bytes": 995,
+        "original_bytes": 995,
+        "listed_in_original_manifest": false
+      },
+      "evidence/api-rp5-vector_spiral/canonical-initialization.json": {
+        "sha256": "7b0459206c5de1f7b20bfa4c4bd1276af458023f42e96e814f280f4807e1db1b",
+        "original_sha256": "7b0459206c5de1f7b20bfa4c4bd1276af458023f42e96e814f280f4807e1db1b",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/canonical-initialization.json",
+        "bytes": 2149,
+        "original_bytes": 2149,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/declaration.json": {
+        "sha256": "2fe46ed0fc1cb104953a8d75601543cca47ed2f2158a7bbb75f6318733801b94",
+        "original_sha256": "2fe46ed0fc1cb104953a8d75601543cca47ed2f2158a7bbb75f6318733801b94",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/declaration.json",
+        "bytes": 18458,
+        "original_bytes": 18458,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/final-state.pt": {
+        "sha256": "e631f98e84d1dc2c9c41f7e53080752383a15c89dc881ebf79680cd3687ba621",
+        "original_sha256": "e631f98e84d1dc2c9c41f7e53080752383a15c89dc881ebf79680cd3687ba621",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/final-state.pt",
+        "bytes": 231437,
+        "original_bytes": 231437,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/initial-state.pt": {
+        "sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+        "original_sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/initial-state.pt",
+        "bytes": 227965,
+        "original_bytes": 227965,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/initial.json": {
+        "sha256": "2d97a91b4272ec75572d5f4a44335058fad925b9d924c2c75e34c720b2d5b08f",
+        "original_sha256": "2d97a91b4272ec75572d5f4a44335058fad925b9d924c2c75e34c720b2d5b08f",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/initial.json",
+        "bytes": 766,
+        "original_bytes": 766,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/learning-rates.jsonl.gz": {
+        "sha256": "380dede5cfa731fc4f4d1490d98f1609cda1fbe37d6f96eb4bd60d137da77ea5",
+        "original_sha256": "1af7731ef83dc6d9e23582f202c658d8a9477ee119c09ccc1123ad024e6db0d4",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/learning-rates.jsonl",
+        "bytes": 310838,
+        "original_bytes": 1816359,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/metrics.jsonl.gz": {
+        "sha256": "a75bf1d3eb52e31f2abc29c589ef5ae4254ca4cfede991a568379f929b046b93",
+        "original_sha256": "fe6a436f917028857d3cd81277f5f1ed1115e929e52d0a0b12f2ae995983651a",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/metrics.jsonl",
+        "bytes": 1830,
+        "original_bytes": 8840,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/result.json": {
+        "sha256": "78c20e24071a84358a900adb62a80a710db3d89cfe327a402e2d8dd02c0f7444",
+        "original_sha256": "78c20e24071a84358a900adb62a80a710db3d89cfe327a402e2d8dd02c0f7444",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/result.json",
+        "bytes": 2615,
+        "original_bytes": 2615,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/retention-assessment.json": {
+        "sha256": "d90112da62faa3ef40c0f9725d627597eb4624edcb5cde89705690cfde659a70",
+        "original_sha256": "d90112da62faa3ef40c0f9725d627597eb4624edcb5cde89705690cfde659a70",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/retention-assessment.json",
+        "bytes": 1013,
+        "original_bytes": 1013,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/runtime.json": {
+        "sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+        "original_sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/runtime.json",
+        "bytes": 604,
+        "original_bytes": 604,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_spiral/source.zip": {
+        "sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6",
+        "original_sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/source.zip",
+        "bytes": 278030,
+        "original_bytes": 278030,
+        "listed_in_original_manifest": true
+      }
+    },
+    "supplementary_files": [],
+    "scope_note": "Own RP5 public API with canonical initial parameters, frozen CUDA host and explicitly isolated evaluation output seed2303; historical K3P global402 score is not a matched comparator."
+  },
+  "archive_lossless": true,
+  "all_source_files_copied": true,
+  "checkpoint_bytes_retained": true
+}

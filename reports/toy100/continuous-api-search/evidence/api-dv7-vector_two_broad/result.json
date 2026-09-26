@@ -1,0 +1,142 @@
+{
+  "candidate": "API-DV7",
+  "gate": "broader_vector_two_broad",
+  "status": "PASS",
+  "seconds": 19.15779842599295,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.05084810072708685,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.12915189927291315
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.029052734375,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.120947265625
+        },
+        {
+          "metric": "hq",
+          "value": 0.992919921875,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.14291992187500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.16005214676260948,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.6899478532373905
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.9688177704811096,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.8188177704811096
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 18,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 18,
+        "first_pass_step": 350,
+        "stable_from_step": 350,
+        "stable_from_seconds": null,
+        "confirmed_step": 550,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.4583333333333333
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.05084810072708685,
+      "mean_error": 0.07010998576879501,
+      "covariance_error": 0.006463172845542431,
+      "target_scale": 1.0601637363433838,
+      "sample_count": 4096,
+      "mass_tv": 0.029052734375,
+      "min_mass_ratio": 0.94189453125,
+      "hq": 0.992919921875,
+      "component_covariance_error": 0.16005214676260948,
+      "component_covariance_errors": [
+        0.08978872746229172,
+        0.23031556606292725
+      ],
+      "component_min_eigen_ratio": 0.9688177704811096,
+      "component_mass": [
+        0.529052734375,
+        0.470947265625
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2167,
+        1929
+      ],
+      "ema": {
+        "sw1_normalized": 0.04725102402955574,
+        "mean_error": 0.06388222426176071,
+        "covariance_error": 0.0032744910567998886,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.029052734375,
+        "min_mass_ratio": 0.94189453125,
+        "hq": 0.990234375,
+        "component_covariance_error": 0.1635850016027689,
+        "component_covariance_errors": [
+          0.04800163581967354,
+          0.27916836738586426
+        ],
+        "component_min_eigen_ratio": 0.9542602896690369,
+        "component_mass": [
+          0.529052734375,
+          0.470947265625
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2167,
+          1929
+        ]
+      }
+    },
+    "policy": {
+      "data_memory": 0.0,
+      "payoff_error": 0.004572402272875344,
+      "game_trust": 1.0,
+      "game_ratio": 0.8987380817660097,
+      "variant": "dv7",
+      "mobility": 0.0026782379617114474,
+      "alignment": 0.4058461969482349,
+      "data_score": 1.0688060522079468,
+      "data_drive": 0.0,
+      "last_cosine": 0.6722038388252258,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad"
+}

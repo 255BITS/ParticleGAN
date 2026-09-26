@@ -1,0 +1,7 @@
+for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
+            for group, rate, role in zip(optimizer.param_groups, rates, roles):
+                group["lr"] = rate * (prior_scale if role == "prior" else network)
+
+if self.controller is not None:
+            for group in self.opt_d.param_groups:
+                group["lr"] *= self.controller.critic_scale()

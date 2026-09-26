@@ -1,0 +1,465 @@
+{
+  "broader_entry": {
+    "id": "api-dv7-vector_unequal_width",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width",
+    "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+    "recorded_utc": "2026-09-26T23:14:56.995564+00:00",
+    "candidate": "API-DV7",
+    "protocol": "frozen22_vector_unequal_width",
+    "scope": "PUBLIC_API",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-DV7",
+      "gate": "broader_vector_unequal_width",
+      "status": "PASS",
+      "seconds": 20.745914513012394,
+      "metrics": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "sw1_normalized",
+              "value": 0.02536299700333784,
+              "op": "<=",
+              "threshold": 0.18,
+              "status": "PASS",
+              "margin": 0.15463700299666217
+            },
+            {
+              "metric": "mass_tv",
+              "value": 0.0244140625,
+              "op": "<=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.1255859375
+            },
+            {
+              "metric": "hq",
+              "value": 0.974853515625,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.12485351562500002
+            },
+            {
+              "metric": "component_covariance_error",
+              "value": 0.421040877699852,
+              "op": "<=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.428959122300148
+            },
+            {
+              "metric": "component_min_eigen_ratio",
+              "value": 0.2816525399684906,
+              "op": ">=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.1316525399684906
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 20,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 20,
+            "first_pass_step": 250,
+            "stable_from_step": 250,
+            "stable_from_seconds": null,
+            "confirmed_step": 450,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.375
+        },
+        "final": {
+          "step": 1200,
+          "sw1_normalized": 0.02536299700333784,
+          "mean_error": 0.014361071400344372,
+          "covariance_error": 0.05326126888394356,
+          "target_scale": 2.138371229171753,
+          "sample_count": 4096,
+          "mass_tv": 0.0244140625,
+          "min_mass_ratio": 0.9423828125,
+          "hq": 0.974853515625,
+          "component_covariance_error": 0.421040877699852,
+          "component_covariance_errors": [
+            0.5711685419082642,
+            0.4509749710559845,
+            0.28712108731269836,
+            0.37489891052246094
+          ],
+          "component_min_eigen_ratio": 0.2816525399684906,
+          "component_mass": [
+            0.251708984375,
+            0.239990234375,
+            0.235595703125,
+            0.272705078125
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            1031,
+            983,
+            965,
+            1117
+          ],
+          "ema": {
+            "sw1_normalized": 0.023550506696470134,
+            "mean_error": 0.011509171687066555,
+            "covariance_error": 0.05219708010554314,
+            "target_scale": 2.138371229171753,
+            "sample_count": 4096,
+            "mass_tv": 0.0244140625,
+            "min_mass_ratio": 0.9423828125,
+            "hq": 0.9814453125,
+            "component_covariance_error": 0.3256300054490566,
+            "component_covariance_errors": [
+              0.5186822414398193,
+              0.4079737663269043,
+              0.2470538318157196,
+              0.12881018221378326
+            ],
+            "component_min_eigen_ratio": 0.3049964904785156,
+            "component_mass": [
+              0.251708984375,
+              0.239990234375,
+              0.235595703125,
+              0.272705078125
+            ],
+            "target_mass": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "component_counts": [
+              1031,
+              983,
+              965,
+              1117
+            ]
+          }
+        },
+        "policy": {
+          "data_memory": 0.0,
+          "payoff_error": 0.009969010833054072,
+          "game_trust": 1.0,
+          "game_ratio": 0.5709958944436807,
+          "variant": "dv7",
+          "mobility": 0.0027148235106950933,
+          "alignment": 0.747129287312756,
+          "data_score": 0.6143721342086792,
+          "data_drive": 0.0,
+          "last_cosine": 0.7235022187232971,
+          "updates": 1200,
+          "reopens": 0,
+          "closed": true
+        }
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width"
+    },
+    "derived": {
+      "status": "PASS",
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 20,
+      "passing_suffix": 20,
+      "first_pass_step": 250,
+      "stable_from_step": 250,
+      "failing_steps": [
+        50,
+        100,
+        150,
+        200
+      ],
+      "final_live": {
+        "step": 1200,
+        "sw1_normalized": 0.02536299700333784,
+        "mean_error": 0.014361071400344372,
+        "covariance_error": 0.05326126888394356,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.0244140625,
+        "min_mass_ratio": 0.9423828125,
+        "hq": 0.974853515625,
+        "component_covariance_error": 0.421040877699852,
+        "component_covariance_errors": [
+          0.5711685419082642,
+          0.4509749710559845,
+          0.28712108731269836,
+          0.37489891052246094
+        ],
+        "component_min_eigen_ratio": 0.2816525399684906,
+        "component_mass": [
+          0.251708984375,
+          0.239990234375,
+          0.235595703125,
+          0.272705078125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1031,
+          983,
+          965,
+          1117
+        ]
+      },
+      "final_failed_bounds": []
+    },
+    "source_audit": {
+      "source_zip_sha256": "e75260aa76b71d370e49c4c05b1d0d96470f127999f6964111836ba502d8ec52",
+      "source_hash_mismatches": [],
+      "package_differences": [],
+      "artifact_hash_mismatches": []
+    },
+    "initialization": {
+      "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_width/initial-values.pt",
+      "fixture_sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a",
+      "all_parameter_hashes_match": true,
+      "named_parameter_hashes": {
+        "G": [
+          {
+            "name": "net.0.weight",
+            "shape": [
+              64,
+              4
+            ],
+            "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+          },
+          {
+            "name": "net.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+          },
+          {
+            "name": "net.2.weight",
+            "shape": [
+              64,
+              64
+            ],
+            "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+          },
+          {
+            "name": "net.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+          },
+          {
+            "name": "net.4.weight",
+            "shape": [
+              2,
+              64
+            ],
+            "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+          },
+          {
+            "name": "net.4.bias",
+            "shape": [
+              2
+            ],
+            "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+          }
+        ],
+        "prior": [
+          {
+            "name": "z",
+            "shape": [
+              256,
+              4
+            ],
+            "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+          }
+        ],
+        "D": [
+          {
+            "name": "main.layers.0.weight",
+            "shape": [
+              128,
+              2
+            ],
+            "sha256": "0cb4ccc8411b14e20a51ab533ea749d222bc96dbe796f0dd2ee68cd66813c9b8"
+          },
+          {
+            "name": "main.layers.0.bias",
+            "shape": [
+              128
+            ],
+            "sha256": "9cb4be7229a9e8dfcf85540769dc6cc22b4c0b0bde37c011c0e036a8b2f98cdb"
+          },
+          {
+            "name": "main.layers.1.weight",
+            "shape": [
+              128,
+              128
+            ],
+            "sha256": "dba94662073a2281ded27798f634d4ee9a8d7c317ac409d8e433911e7c8d8c8c"
+          },
+          {
+            "name": "main.layers.1.bias",
+            "shape": [
+              128
+            ],
+            "sha256": "5e712b8f287f908d1ce1e1395fc79c5a8a23ffc6741aa3e403a044703542fafe"
+          },
+          {
+            "name": "main.layers.2.weight",
+            "shape": [
+              128,
+              128
+            ],
+            "sha256": "debe983d53a99006dc6bc6cc6eb2b7eb78300e450d1963c263664fa3d91c2786"
+          },
+          {
+            "name": "main.layers.2.bias",
+            "shape": [
+              128
+            ],
+            "sha256": "39575bbe8e7b4a253c3d3317b4376aee74e7998360dac7c8bfd0ccf767262173"
+          },
+          {
+            "name": "main.head.weight",
+            "shape": [
+              1,
+              128
+            ],
+            "sha256": "75e11176dd4556ead03c4cf0bc64b0b1b92e8bcde8350af902e9533925036aa8"
+          },
+          {
+            "name": "main.head.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "65b702563a3846ed803e4349336201ed36fb3d17c66c7ff53167bb5bcd3a54cf"
+          }
+        ]
+      },
+      "ema_matches": {
+        "G": true,
+        "prior": true
+      }
+    },
+    "host_function_matches": {
+      "resolve": true,
+      "target_scale": true,
+      "sample_target": true,
+      "score_samples": true,
+      "passes": true
+    },
+    "harness_sha256": "03204e986c5d5ec9d280498f106ae9c5fcafdc6c36b0680d7198d0d53584a871",
+    "resource_recipe_differences": {
+      "z_dim": [
+        2,
+        4
+      ],
+      "num_particles": [
+        20000,
+        256
+      ],
+      "batch_size": [
+        2048,
+        128
+      ]
+    },
+    "artifacts": {
+      "evidence/api-dv7-vector_unequal_width/artifact-sha256.json": {
+        "sha256": "31478d67b894dd69a50ce1ebc9f18063a439444e0be2b3a577a91052ef6d731d",
+        "original_sha256": "31478d67b894dd69a50ce1ebc9f18063a439444e0be2b3a577a91052ef6d731d",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/artifact-sha256.json",
+        "bytes": 810,
+        "original_bytes": 810,
+        "listed_in_original_manifest": false
+      },
+      "evidence/api-dv7-vector_unequal_width/canonical-initialization.json": {
+        "sha256": "2766257b98391bfbfd1027a28ce73c19eb09edfeab860dd8b6f165013de63341",
+        "original_sha256": "2766257b98391bfbfd1027a28ce73c19eb09edfeab860dd8b6f165013de63341",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/canonical-initialization.json",
+        "bytes": 2377,
+        "original_bytes": 2377,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-vector_unequal_width/declaration.json": {
+        "sha256": "20981e070ac29c1672e244029d1d4264f15706513553fd6aadcfc5e7a66a5439",
+        "original_sha256": "20981e070ac29c1672e244029d1d4264f15706513553fd6aadcfc5e7a66a5439",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/declaration.json",
+        "bytes": 21741,
+        "original_bytes": 21741,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-vector_unequal_width/initial.json": {
+        "sha256": "5bc5f78040ff3e2190696521418c66e0effe5bb6fdb9b8737f344178a54241da",
+        "original_sha256": "5bc5f78040ff3e2190696521418c66e0effe5bb6fdb9b8737f344178a54241da",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/initial.json",
+        "bytes": 847,
+        "original_bytes": 847,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-vector_unequal_width/learning-rates.jsonl.gz": {
+        "sha256": "bae4d2d33744da93dc0caf71d52a57c1651b543cdda4e3c8e2d45b818677705c",
+        "original_sha256": "5afd45fbb67671e754a6bd2612dfd4acab4369a9f23af306db73b84466490ee0",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/learning-rates.jsonl",
+        "bytes": 124928,
+        "original_bytes": 818373,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-vector_unequal_width/metrics.jsonl.gz": {
+        "sha256": "bd7c819687a541ace360ca352ae0abd2903a6de9ead4c27c7cce73d5cb3ab940",
+        "original_sha256": "41fee931c26b0b4a70983acfe5705dbb4bec8e650bd0f86e55cdc3b1d2fdfee0",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/metrics.jsonl",
+        "bytes": 5730,
+        "original_bytes": 30916,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-vector_unequal_width/result.json": {
+        "sha256": "a51844a77477ae792389b0eb2e5380cdc176e28434a35ddffa678eda756a6c4c",
+        "original_sha256": "a51844a77477ae792389b0eb2e5380cdc176e28434a35ddffa678eda756a6c4c",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/result.json",
+        "bytes": 4264,
+        "original_bytes": 4264,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-vector_unequal_width/source.zip": {
+        "sha256": "e75260aa76b71d370e49c4c05b1d0d96470f127999f6964111836ba502d8ec52",
+        "original_sha256": "e75260aa76b71d370e49c4c05b1d0d96470f127999f6964111836ba502d8ec52",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/source.zip",
+        "bytes": 447459,
+        "original_bytes": 447459,
+        "listed_in_original_manifest": true
+      }
+    },
+    "external_checkpoints": {
+      "final-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/final-state.pt",
+        "sha256": "48d520c9583785061a06da5e3caaa0c867668fe9d4baa311b6fcc5974e39b4a3",
+        "bytes": 695129,
+        "verified_against_original_manifest": true
+      },
+      "initial-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/initial-state.pt",
+        "sha256": "c3a27decefddd613effd8aaf98456a48551e5af83146804ee76fbaa2dc045e6d",
+        "bytes": 340284,
+        "verified_against_original_manifest": true
+      }
+    },
+    "scope_note": "Canonical CUDA host,original gates,independent CUDA data0/latent1/penalty2; explicitly isolated output2303. No legacy training path. Vector final trainer checkpoint omits caller-owned data-generator state; this does not invalidate quality but cannot alone resume this vector host exactly."
+  },
+  "jsonl_lossless": true,
+  "checkpoints_retained_externally_with_hashes": true
+}

@@ -1,0 +1,71 @@
+{
+  "created_utc": "2026-09-26T23:33:32.966928+00:00",
+  "status": "SOURCE_PREFLIGHT_PASS",
+  "scope": "Independent full source review plus stdlib/source/raw-storage checks. No Torch import, model execution, GPU, backward, optimizer step or training.",
+  "bundle": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/supervisor-support/k3p-vector-reference",
+  "bundle_manifest_sha256": "4495314edb77e5ac37e612169324d4d7d05e8df73df760fe2213aaf12dade417",
+  "reviewed_file_sha256": {
+    "worker.py": "79c6f9f2a29f9dfa536b1706fc6ff6d36d1c3f85580f19b54ccedd18d04604e9",
+    "execution_contract.py": "23a5796236eae1f794931da3de53c0f5ba62fe6afef39124b83a51efcca78795",
+    "preflight.py": "08fb5f38df834eeba7843c8679d01a44138803b04fe19e0e91756f5601b7867e",
+    "declaration.json": "0e45b2b87ba4c583fb7ca46cb6c133b1f5fb7266775e6f5cb7284d577f1d6631",
+    "source/frozen_host.py": "13f59ac8a67ff4f1cef2dbcd4d007f31e2b6ed5b2ebcfe78384fafa49f896f46",
+    "public-k3p-v0.8.0.zip": "475e2108bd0e6928bf7f40069c73062bacf80039285f157d767f872408f80331",
+    "initial-values.pt": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a"
+  },
+  "release_commit": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+  "release_file_count": 12,
+  "release_git_object_hash_mismatches": [],
+  "bundle_file_hash_mismatches": [],
+  "host_source_spans_exact": 16,
+  "raw_fixture_parameter_hashes_match": true,
+  "raw_fixture_parameter_group_sizes": [
+    7,
+    8
+  ],
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "issue": "Optimizer device proof at final step overwrote the first-step proof.",
+      "resolution": "Receipt-only filename now includes completed step, preserving0001 and1200 separately.",
+      "source": "worker.py:162"
+    }
+  ],
+  "checks": {
+    "import_isolation": "Fresh process rejects already loaded particlegan; standalone source path first; runtime imported paths checked; all12 source files pinned before import. No current research package imported.",
+    "host": "Exact promoted batchfeat_center6_distance_head and canonical15-parameter fixture; complete model state hashes checked at runtime against retained RP5 fixture receipt.",
+    "rng": "CPU construction/prior seed0, CUDA data0/latent1/penalty2/noise5; fresh generator-real batch from data stream once inside native trainer step. Host-only CUDA tensor/implicit-generator contexts restore CPU default and native torch.Generator before native optimizer work.",
+    "scoring": "Exact extracted scorer/requirements/sustained/test_verdict, all24 checks50..1200,4096 samples, live primary plus EMA diagnostic, final5 suffix. Paired isolated output2303, latent990,target991,projection992; forked CPU/CUDA RNG and mode restoration.",
+    "schedule": "Only four recipe overrides:1200steps,256particles,z4,batch128. Input noise ends at completed120; output full at240; decay starts720; final update uses1199. Explicit finite scheduled benchmark configuration, not literal7000 default.",
+    "native_optimizer": "No eager state, state injection, counter relocation, optimizer monkeypatch or EMA replacement. Lazy state required empty before training; first/final actual counters and CUDA moments recorded, unexpected placement errors without repair.",
+    "execution": "Serial autograd context wraps entire public GANTrainer.step; host callback CUDA scope restores before G optimizer. External envelope validates source/fixture/protocol and serial mode before trainer restore; release schema3 unchanged."
+  },
+  "stdlib_preflight": {
+    "status": "PASS",
+    "scope": "stdlib-only preparation; no Torch/GPU/training",
+    "package_files": 12,
+    "exact_host_definitions": 16,
+    "fixture_tensors": 15,
+    "checks": [
+      "bundle/source hashes",
+      "exact release bytes",
+      "recipe defaults plus four declared overrides",
+      "frozen task/card",
+      "15 raw fixture storage hashes",
+      "exact host AST/source spans",
+      "public step enclosed by serial context",
+      "host-only CUDA restoration on exception",
+      "nested serial restoration",
+      "checkpoint identity/mode rejection"
+    ],
+    "runtime_checks": "NOT_RUN; model/import/hash and Adam device assertions execute only in authorized worker",
+    "bundle_manifest_sha256": "4495314edb77e5ac37e612169324d4d7d05e8df73df760fe2213aaf12dade417"
+  },
+  "limits": [
+    "This is preparation for one supporting scheduled K3P baseline, not a mechanism candidate or quality result.",
+    "Runtime import/model-buffer hashes, actual CUDA context behavior and nativeAdam placement remain worker assertions; no Torch was imported in this review.",
+    "Current shared isolated2303 observation protocol is declared explicitly; historicalglobal402 scores are not substituted.",
+    "No resumed quality execution is configured or certified; checkpoint envelope contract was reviewed only."
+  ],
+  "launch_command": "/tmp/pr38-default-env/bin/python /ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/supervisor-support/k3p-vector-reference/worker.py --output /absolute/new/reference-output"
+}

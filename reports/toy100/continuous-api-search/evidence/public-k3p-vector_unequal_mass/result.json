@@ -1,0 +1,153 @@
+{
+  "candidate": "PUBLIC-K3P-0.8.0",
+  "gate": "broader_vector_unequal_mass",
+  "status": "PASS",
+  "seconds": 21.413487521000206,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.05634236252802839,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.1236576374719716
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.04326171427965164,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.10673828572034835
+        },
+        {
+          "metric": "hq",
+          "value": 0.99951171875,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.14951171875000002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.18137958832085133,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.6686204116791487
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.6660385131835938,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.5160385131835937
+        },
+        {
+          "metric": "min_mass_ratio",
+          "value": 0.7399339079856873,
+          "op": ">=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 0.48993390798568726
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 21,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 16,
+        "first_pass_step": 150,
+        "stable_from_step": 450,
+        "stable_from_seconds": 8.395479594124481,
+        "confirmed_step": 650,
+        "confirmed_seconds": 11.610016254009679
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.5416666666666666
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.05634236252802839,
+      "mean_error": 0.07473735511302948,
+      "covariance_error": 0.1326397955417633,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.04326171427965164,
+      "min_mass_ratio": 0.7399339079856873,
+      "hq": 0.99951171875,
+      "component_covariance_error": 0.18137958832085133,
+      "component_covariance_errors": [
+        0.05164181441068649,
+        0.15463154017925262,
+        0.22334039211273193,
+        0.29590460658073425
+      ],
+      "component_min_eigen_ratio": 0.6660385131835938,
+      "component_mass": [
+        0.59326171875,
+        0.2939453125,
+        0.09619140625,
+        0.0166015625
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2430,
+        1204,
+        394,
+        68
+      ],
+      "ema": {
+        "sw1_normalized": 0.05202974231145259,
+        "mean_error": 0.06970211863517761,
+        "covariance_error": 0.1420527547597885,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.04326171427965164,
+        "min_mass_ratio": 0.7399339079856873,
+        "hq": 0.99755859375,
+        "component_covariance_error": 0.2341600116342306,
+        "component_covariance_errors": [
+          0.06989441066980362,
+          0.19932101666927338,
+          0.35368531942367554,
+          0.3137392997741699
+        ],
+        "component_min_eigen_ratio": 0.6348434090614319,
+        "component_mass": [
+          0.59326171875,
+          0.2939453125,
+          0.09619140625,
+          0.0166015625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2430,
+          1204,
+          394,
+          68
+        ]
+      },
+      "seconds": 21.39693229808472
+    },
+    "updates": 1200
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass"
+}

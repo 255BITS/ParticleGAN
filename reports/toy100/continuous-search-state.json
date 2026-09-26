@@ -28,9 +28,9 @@
     "phase": "RUNNING",
     "no_seed_sweeps": true,
     "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
-    "verified_live_utc": "2026-09-26T22:51:18.230238+00:00",
+    "verified_live_utc": "2026-09-26T23:25:18.573047+00:00",
     "verified_live_counts": {
-      "codex": 3,
+      "codex": 2,
       "grok": 0
     },
     "launch_receipt": "reports/toy100/continuous-eligibility/launch/first-launch.json",
@@ -559,14 +559,14 @@
     },
     {
       "lane": "constant_rate_stability",
-      "pid": 1514972,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972",
+      "pid": 1607596,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596",
       "status": "RUNNING"
     },
     {
       "lane": "data_drift_mobility",
-      "pid": 1555576,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576",
+      "pid": 1609802,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802",
       "status": "RUNNING"
     }
   ],
@@ -574,10 +574,10 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "TWO_PARTIAL_SURVIVORS_THREE_LANES_RUNNING_NO_WINNER",
+    "status": "RP5_PARTIAL_SURVIVOR_THREE_LANES_RUNNING_NO_WINNER",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
-    "matched_k3p_owner": "reversible_precision/API-RP5_CONDITIONAL_ON_SURVIVAL_NOT_RUN",
+    "matched_k3p_owner": "RP5_RECOVERY_RING; NEXT_DATA_LANE_UNEQUAL_MASS_REFERENCE",
     "checkpoint_diagnostic_owner": "data_drift_mobility",
     "api_rp2_long": {
       "updates": 30000,
@@ -603,7 +603,7 @@
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
     },
-    "strongest_active_candidate": null,
+    "strongest_active_candidate": "API-RP5_PARTIAL_EVIDENCE_ONLY",
     "api_c6": {
       "single_shift": "PASS",
       "initial_arrival": 590,
@@ -632,12 +632,27 @@
       "arrival_delay": 270,
       "images_passed": 4,
       "broader_tasks": 22,
-      "long": "RUNNING",
+      "long": "COMPLETE_PASS",
       "matched_k3p": "NOT_RUN",
       "qualified": false,
       "component_api": "INCOMPLETE",
-      "vector_passes": 3,
-      "broader_passes": 7
+      "vector_passes": 6,
+      "broader_passes": 10,
+      "long_updates": 30000,
+      "long_arrival_delays": [
+        350,
+        450,
+        250
+      ],
+      "long_after_arrival": [
+        "544/544",
+        "146/146",
+        "1876/1876",
+        "276/276"
+      ],
+      "long_departures": [],
+      "long_replay": "PENDING",
+      "mode_hold": "FAIL_0_OF_24_SOURCE_AUDIT_PENDING"
     },
     "api_dv6": {
       "stationary_after_arrival": "696/696",
@@ -699,11 +714,56 @@
         6360,
         6370,
         6390
-      ]
+      ],
+      "status": "REJECTED_BROADER_QUALITY",
+      "broader_passes": 6,
+      "broader_failures": 1,
+      "failure_task": "vector_unequal_mass",
+      "passing_checks": 0,
+      "component_min_eigen_ratio": 0.021303080022335052,
+      "required_min_eigen_ratio": 0.15
     },
     "survivors": [
-      "API-RP5",
-      "API-DV7"
-    ]
+      "API-RP5"
+    ],
+    "api_dv8": {
+      "single_shift_after_arrival": "171/190",
+      "initial_after_arrival": "175/177",
+      "status": "REJECTED_STABILITY",
+      "qualified": false
+    },
+    "api_dv9": {
+      "single_shift_after_arrival": "189/189",
+      "arrival_delay": 320,
+      "initial_after_arrival": "181/183",
+      "initial_early_departures": [
+        590,
+        600
+      ],
+      "status": "REJECTED_BROADER_QUALITY",
+      "failure_task": "vector_unequal_mass",
+      "passing_checks": 0,
+      "component_covariance_error": 1.1702314019203186,
+      "component_min_eigen_ratio": 0.027236368507146835,
+      "qualified": false
+    },
+    "api_c9": {
+      "single_shift": "NOT_OBSERVED",
+      "observed_through": 4600,
+      "final_hq": 0.597412109375,
+      "image": "FAIL_0_OF_24",
+      "qualified": false
+    },
+    "matched_k3p_vector_reference": {
+      "status": "PASS",
+      "task": "vector_unequal_mass",
+      "passing": 21,
+      "observations": 24,
+      "first_pass": 150,
+      "stable_from": 450,
+      "passing_suffix": 16,
+      "report": "reports/toy100/continuous-api-search/k3p-comparison-results.json",
+      "scope": "SCHEDULED_PUBLIC_REFERENCE_ONLY"
+    }
   }
 }

@@ -1,0 +1,100 @@
+{
+  "purpose": "Reproduce all 19 behavioral cases with unchanged shared_c6 recipe and declared discriminator architecture support; live final-five gate, EMA separate.",
+  "candidates": [
+    {
+      "name": "shared_c6",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "prior_reg": 0.05
+      }
+    }
+  ],
+  "discriminators": {
+    "vector_unequal_mass": {
+      "name": "batchfeat_center6_distance_head",
+      "implementation": "shared_batch_feature_v1",
+      "width": 96,
+      "layers": 3,
+      "fourier": 0,
+      "trunk_normalization": "center",
+      "softplus_beta": 6.0,
+      "feature": "distance",
+      "placement": "head",
+      "kernel_scales": [
+        0.1,
+        0.25,
+        0.5,
+        1.0
+      ],
+      "eps": 1e-05,
+      "batch_dependence": true,
+      "batch_statistics": "current discriminator input only"
+    },
+    "vector_unequal_width": {
+      "activation": "softplus",
+      "beta": 8.0,
+      "branch_hidden": 32,
+      "branch_scale": 0.25,
+      "features": "raw",
+      "fourier": 0,
+      "frequency_scale": 1.0,
+      "hidden": 128,
+      "implementation": "shared_critic_v1",
+      "layers": 3,
+      "name": "width_last_softplus8_128_l3",
+      "normalization": "none",
+      "output_scale": 1.0,
+      "quadratic_scale": 0.25,
+      "raw_linear_skip": false,
+      "residual": false,
+      "residual_scale": 0.7071067811865476
+    },
+    "vector_overlap": {
+      "activation": "softplus",
+      "beta": 5.0,
+      "branch_hidden": 32,
+      "branch_scale": 0.25,
+      "features": "raw",
+      "fourier": 0,
+      "frequency_scale": 1.0,
+      "hidden": 96,
+      "implementation": "shared_critic_v1",
+      "layers": 3,
+      "name": "raw_softplus96_l3",
+      "normalization": "none",
+      "output_scale": 1.0,
+      "quadratic_scale": 0.25,
+      "raw_linear_skip": false,
+      "residual": false,
+      "residual_scale": 0.7071067811865476
+    },
+    "vector_anisotropic": {
+      "activation": "softplus",
+      "beta": 5.0,
+      "branch_hidden": 32,
+      "branch_scale": 0.25,
+      "features": "additive",
+      "fourier": 2,
+      "frequency_scale": 1.0,
+      "hidden": 64,
+      "implementation": "shared_critic_v1",
+      "layers": 2,
+      "name": "additive_raw_fourier64_l2",
+      "normalization": "none",
+      "output_scale": 1.0,
+      "quadratic_scale": 0.25,
+      "raw_linear_skip": true,
+      "residual": false,
+      "residual_scale": 0.7071067811865476
+    }
+  }
+}

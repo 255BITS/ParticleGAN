@@ -1,0 +1,90 @@
+{
+  "candidate": "API-RP5",
+  "gate": "broader_vector_spiral",
+  "status": "PASS",
+  "seconds": 89.24115637107752,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.023970365855931253,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.15602963414406873
+        },
+        {
+          "metric": "mean_error",
+          "value": 0.004572391975671053,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.14542760802432894
+        },
+        {
+          "metric": "covariance_error",
+          "value": 0.03336593508720398,
+          "op": "<=",
+          "threshold": 0.45,
+          "status": "PASS",
+          "margin": 0.41663406491279603
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 23,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 23,
+        "first_pass_step": 134,
+        "stable_from_step": 134,
+        "stable_from_seconds": null,
+        "confirmed_step": 400,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.25
+    },
+    "final": {
+      "step": 1600,
+      "sw1_normalized": 0.023970365855931253,
+      "mean_error": 0.004572391975671053,
+      "covariance_error": 0.03336593508720398,
+      "target_scale": 1.240945816040039,
+      "sample_count": 4096,
+      "ema": {
+        "sw1_normalized": 0.02351155125771772,
+        "mean_error": 0.01716189831495285,
+        "covariance_error": 0.026715535670518875,
+        "target_scale": 1.240945816040039,
+        "sample_count": 4096
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": false,
+      "gap": 0.0011304602958261967,
+      "gap_s": 0.0012562387933552138,
+      "velocity": -1.2704898740304935e-06,
+      "contraction_peak": 5.029809264680088e-05,
+      "contracting": 903,
+      "activity": 0.2824138562961724,
+      "activity_peak": 0.6051855755152181,
+      "quiet_gap": 0.00156201956294843,
+      "quiet_activity": 0.3066260388414032,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 1600,
+      "openings": 1,
+      "closings": 1,
+      "event": null,
+      "velocity_s": -1.7462619606834535e-06
+    },
+    "updates": 1600
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral"
+}

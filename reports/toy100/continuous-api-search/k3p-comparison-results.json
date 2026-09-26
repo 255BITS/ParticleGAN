@@ -1,0 +1,259 @@
+{
+  "results": [
+    {
+      "id": "public-k3p-vector_unequal_mass",
+      "candidate": "PUBLIC-K3P-0.8.0",
+      "scope": "SCHEDULED_PUBLIC_REFERENCE_NOT_CONTINUOUS_CANDIDATE",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass",
+      "result": {
+        "candidate": "PUBLIC-K3P-0.8.0",
+        "gate": "broader_vector_unequal_mass",
+        "status": "PASS",
+        "seconds": 21.413487521000206,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.05634236252802839,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.1236576374719716
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.04326171427965164,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.10673828572034835
+              },
+              {
+                "metric": "hq",
+                "value": 0.99951171875,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14951171875000002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.18137958832085133,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.6686204116791487
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.6660385131835938,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.5160385131835937
+              },
+              {
+                "metric": "min_mass_ratio",
+                "value": 0.7399339079856873,
+                "op": ">=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.48993390798568726
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 21,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 16,
+              "first_pass_step": 150,
+              "stable_from_step": 450,
+              "stable_from_seconds": 8.395479594124481,
+              "confirmed_step": 650,
+              "confirmed_seconds": 11.610016254009679
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.5416666666666666
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.05634236252802839,
+            "mean_error": 0.07473735511302948,
+            "covariance_error": 0.1326397955417633,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.04326171427965164,
+            "min_mass_ratio": 0.7399339079856873,
+            "hq": 0.99951171875,
+            "component_covariance_error": 0.18137958832085133,
+            "component_covariance_errors": [
+              0.05164181441068649,
+              0.15463154017925262,
+              0.22334039211273193,
+              0.29590460658073425
+            ],
+            "component_min_eigen_ratio": 0.6660385131835938,
+            "component_mass": [
+              0.59326171875,
+              0.2939453125,
+              0.09619140625,
+              0.0166015625
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2430,
+              1204,
+              394,
+              68
+            ],
+            "ema": {
+              "sw1_normalized": 0.05202974231145259,
+              "mean_error": 0.06970211863517761,
+              "covariance_error": 0.1420527547597885,
+              "target_scale": 1.7948341369628906,
+              "sample_count": 4096,
+              "mass_tv": 0.04326171427965164,
+              "min_mass_ratio": 0.7399339079856873,
+              "hq": 0.99755859375,
+              "component_covariance_error": 0.2341600116342306,
+              "component_covariance_errors": [
+                0.06989441066980362,
+                0.19932101666927338,
+                0.35368531942367554,
+                0.3137392997741699
+              ],
+              "component_min_eigen_ratio": 0.6348434090614319,
+              "component_mass": [
+                0.59326171875,
+                0.2939453125,
+                0.09619140625,
+                0.0166015625
+              ],
+              "target_mass": [
+                0.550000011920929,
+                0.30000001192092896,
+                0.12999999523162842,
+                0.019999999552965164
+              ],
+              "component_counts": [
+                2430,
+                1204,
+                394,
+                68
+              ]
+            },
+            "seconds": 21.39693229808472
+          },
+          "updates": 1200
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass"
+      },
+      "derived": {
+        "first_pass": 150,
+        "passing": 21,
+        "observations": 24,
+        "passing_suffix": 16,
+        "stable_from": 450,
+        "failing_steps": [
+          50,
+          100,
+          400
+        ]
+      },
+      "artifacts": {
+        "evidence/public-k3p-vector_unequal_mass/artifact-sha256.json": {
+          "sha256": "f63257fc4f20e0133a33e799a22c93bb92173c0d626a51539b0ce9a18c2b8998",
+          "original_sha256": "f63257fc4f20e0133a33e799a22c93bb92173c0d626a51539b0ce9a18c2b8998",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/artifact-sha256.json",
+          "bytes": 1100
+        },
+        "evidence/public-k3p-vector_unequal_mass/declaration.json": {
+          "sha256": "0e45b2b87ba4c583fb7ca46cb6c133b1f5fb7266775e6f5cb7284d577f1d6631",
+          "original_sha256": "0e45b2b87ba4c583fb7ca46cb6c133b1f5fb7266775e6f5cb7284d577f1d6631",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/declaration.json",
+          "bytes": 18171
+        },
+        "evidence/public-k3p-vector_unequal_mass/initial.json": {
+          "sha256": "63decaeb09be34f6d2bb5da1cf041a76d4387a9cbfc5aefd997ba015e81a786d",
+          "original_sha256": "63decaeb09be34f6d2bb5da1cf041a76d4387a9cbfc5aefd997ba015e81a786d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/initial.json",
+          "bytes": 3171
+        },
+        "evidence/public-k3p-vector_unequal_mass/learning-rates.jsonl.gz": {
+          "sha256": "cd8e2a81f4f018b43ad2fd7e0af85afd18bf89da74b76a62537f0684c41d4fbd",
+          "original_sha256": "3ecd088452bc59ab18e32a43b8d189dc835adaeb08a3e7c9ac18b02870115bea",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/learning-rates.jsonl",
+          "bytes": 20659
+        },
+        "evidence/public-k3p-vector_unequal_mass/metrics.jsonl.gz": {
+          "sha256": "fde45b1ba5a81fd98b8952e366aae6945651bf5b88fe4028811d374967bbe56d",
+          "original_sha256": "0221cc569336f2d6d117f251158431495fc24903f05c3fa4abe670a46fe28417",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/metrics.jsonl",
+          "bytes": 6193
+        },
+        "evidence/public-k3p-vector_unequal_mass/optimizer-device-proof-0001.json": {
+          "sha256": "6f847fb8f9fc3203b1023fee291b2ba16b3197bffc079787835731dd3025dec4",
+          "original_sha256": "6f847fb8f9fc3203b1023fee291b2ba16b3197bffc079787835731dd3025dec4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/optimizer-device-proof-0001.json",
+          "bytes": 3178
+        },
+        "evidence/public-k3p-vector_unequal_mass/optimizer-device-proof-1200.json": {
+          "sha256": "dc64a405f2ab55c13411e7352baa049566fcbcfac80367bd4240c7ec6cac6bd4",
+          "original_sha256": "dc64a405f2ab55c13411e7352baa049566fcbcfac80367bd4240c7ec6cac6bd4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/optimizer-device-proof-1200.json",
+          "bytes": 3223
+        },
+        "evidence/public-k3p-vector_unequal_mass/result.json": {
+          "sha256": "0ddf93637a867fee24b06e4e444f45839493a6c2f09e076061acf506ecf7a1e5",
+          "original_sha256": "0ddf93637a867fee24b06e4e444f45839493a6c2f09e076061acf506ecf7a1e5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/result.json",
+          "bytes": 4295
+        },
+        "evidence/public-k3p-vector_unequal_mass/runtime.json": {
+          "sha256": "2e7ce7fbb5006e76277199f1baeeafc10205e39a770405d0bf967fc641c3c75f",
+          "original_sha256": "2e7ce7fbb5006e76277199f1baeeafc10205e39a770405d0bf967fc641c3c75f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/runtime.json",
+          "bytes": 4011
+        },
+        "evidence/public-k3p-vector_unequal_mass/source-preflight.json": {
+          "sha256": "7d7b7e75dd074a36a819362ab9cbabb938172dc21610882879a9b6a15fa5aa4d",
+          "original_sha256": "7d7b7e75dd074a36a819362ab9cbabb938172dc21610882879a9b6a15fa5aa4d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/source-preflight.json",
+          "bytes": 760
+        },
+        "evidence/public-k3p-vector_unequal_mass/source.zip": {
+          "sha256": "0a8798c8ef22bfec5709283d60934efa988b6956ddde94e86780f727ca5df5fa",
+          "original_sha256": "0a8798c8ef22bfec5709283d60934efa988b6956ddde94e86780f727ca5df5fa",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/source.zip",
+          "bytes": 266530
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/final-state.pt",
+          "sha256": "f4c2c6bbe2cb523e5033922921c782191743f48b49861e996c589414e33e9987"
+        },
+        "initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/k3p-unequal-mass/initial-state.pt",
+          "sha256": "7453d8e356fc5367bf676f88c6d6089956c57d5904449fa3ec34f8c2738a6b99"
+        }
+      },
+      "independent_source_audit": "k3p-vector-reference-audit.json",
+      "limitations": [
+        "Explicit benchmark total_steps1200 override; released default7000 not claimed.",
+        "Same canonical fixture and current explicit observation noise2303; historical402 was different.",
+        "One finite vector reference, not recovery/indefinite proof; no seed sweep."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "scope": "stdlib-only preparation; no Torch/GPU/training",
+  "package_files": 12,
+  "exact_host_definitions": 16,
+  "fixture_tensors": 15,
+  "checks": [
+    "bundle/source hashes",
+    "exact release bytes",
+    "recipe defaults plus four declared overrides",
+    "frozen task/card",
+    "15 raw fixture storage hashes",
+    "exact host AST/source spans",
+    "public step enclosed by serial context",
+    "host-only CUDA restoration on exception",
+    "nested serial restoration",
+    "checkpoint identity/mode rejection"
+  ],
+  "runtime_checks": "NOT_RUN; model/import/hash and Adam device assertions execute only in authorized worker",
+  "bundle_manifest_sha256": "4495314edb77e5ac37e612169324d4d7d05e8df73df760fe2213aaf12dade417"
+}

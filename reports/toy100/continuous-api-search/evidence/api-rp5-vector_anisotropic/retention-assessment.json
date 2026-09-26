@@ -1,0 +1,56 @@
+{
+  "candidate": "API-RP5",
+  "gate": "broader_vector_anisotropic",
+  "status": "PASS",
+  "first_arrival": 250,
+  "passing_total": 20,
+  "observations": 24,
+  "passing_since_arrival": 20,
+  "checks_since_arrival": 20,
+  "every_failing_observation_since_arrival": [],
+  "departures": [],
+  "stable_suffix_start": 250,
+  "stable_suffix_checks": 20,
+  "worst_since_arrival": {
+    "sw1_normalized": 0.04578468399170003,
+    "mass_tv": 0.011881515383720398,
+    "hq": 0.882568359375,
+    "component_covariance_error": 0.4977109531561534,
+    "component_min_eigen_ratio": 0.38476431369781494
+  },
+  "controller_events": [
+    {
+      "after_update": 603,
+      "event": "close"
+    }
+  ],
+  "final_open": false,
+  "thresholds": [
+    [
+      "sw1_normalized",
+      "<=",
+      0.18
+    ],
+    [
+      "mass_tv",
+      "<=",
+      0.15
+    ],
+    [
+      "hq",
+      ">=",
+      0.85
+    ],
+    [
+      "component_covariance_error",
+      "<=",
+      0.85
+    ],
+    [
+      "component_min_eigen_ratio",
+      ">=",
+      0.15
+    ]
+  ],
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic"
+}

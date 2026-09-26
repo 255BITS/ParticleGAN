@@ -1,0 +1,63 @@
+{
+  "torch": "2.13.0+cu126",
+  "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+  "cuda": "12.6",
+  "cudnn": 91002,
+  "gpu": "NVIDIA RTX A6000",
+  "deterministic": true,
+  "tf32": false,
+  "threads": 1,
+  "interop_threads": 1,
+  "imported_package": {
+    "particlegan.particle_prior": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/particle_prior.py",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9"
+    },
+    "particlegan.autoencoder": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "particlegan.conditioning": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "particlegan.diffusion": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/diffusion.py",
+      "sha256": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683"
+    },
+    "particlegan.discriminators": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "particlegan.gan_loss": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "particlegan.recipes": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/recipes.py",
+      "sha256": "b037719d79f4864a53ef04841bae8b3dd26e1dde9a8d6a9e8c1cc417f3d1fb77"
+    },
+    "particlegan.training": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/training.py",
+      "sha256": "a9a354fca9870dd92b086746d89a50fcc7f8178c91c5be6296b85358b6af847d"
+    },
+    "particlegan.vicreg_loss": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "particlegan": {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/k3p-vector-reference/source/particlegan/__init__.py",
+      "sha256": "9140e1618fd63767bf98244f7c94471fc8db6c4438bdb0544038b3d4eb8ebfd6"
+    }
+  },
+  "default_device_during_learner": "cpu",
+  "serial_backward": true,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  }
+}

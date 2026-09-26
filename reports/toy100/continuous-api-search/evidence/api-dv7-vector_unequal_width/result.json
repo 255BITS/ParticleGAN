@@ -1,0 +1,158 @@
+{
+  "candidate": "API-DV7",
+  "gate": "broader_vector_unequal_width",
+  "status": "PASS",
+  "seconds": 20.745914513012394,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.02536299700333784,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.15463700299666217
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.0244140625,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.1255859375
+        },
+        {
+          "metric": "hq",
+          "value": 0.974853515625,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.12485351562500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.421040877699852,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.428959122300148
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.2816525399684906,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.1316525399684906
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 20,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 20,
+        "first_pass_step": 250,
+        "stable_from_step": 250,
+        "stable_from_seconds": null,
+        "confirmed_step": 450,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.375
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.02536299700333784,
+      "mean_error": 0.014361071400344372,
+      "covariance_error": 0.05326126888394356,
+      "target_scale": 2.138371229171753,
+      "sample_count": 4096,
+      "mass_tv": 0.0244140625,
+      "min_mass_ratio": 0.9423828125,
+      "hq": 0.974853515625,
+      "component_covariance_error": 0.421040877699852,
+      "component_covariance_errors": [
+        0.5711685419082642,
+        0.4509749710559845,
+        0.28712108731269836,
+        0.37489891052246094
+      ],
+      "component_min_eigen_ratio": 0.2816525399684906,
+      "component_mass": [
+        0.251708984375,
+        0.239990234375,
+        0.235595703125,
+        0.272705078125
+      ],
+      "target_mass": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "component_counts": [
+        1031,
+        983,
+        965,
+        1117
+      ],
+      "ema": {
+        "sw1_normalized": 0.023550506696470134,
+        "mean_error": 0.011509171687066555,
+        "covariance_error": 0.05219708010554314,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.0244140625,
+        "min_mass_ratio": 0.9423828125,
+        "hq": 0.9814453125,
+        "component_covariance_error": 0.3256300054490566,
+        "component_covariance_errors": [
+          0.5186822414398193,
+          0.4079737663269043,
+          0.2470538318157196,
+          0.12881018221378326
+        ],
+        "component_min_eigen_ratio": 0.3049964904785156,
+        "component_mass": [
+          0.251708984375,
+          0.239990234375,
+          0.235595703125,
+          0.272705078125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1031,
+          983,
+          965,
+          1117
+        ]
+      }
+    },
+    "policy": {
+      "data_memory": 0.0,
+      "payoff_error": 0.009969010833054072,
+      "game_trust": 1.0,
+      "game_ratio": 0.5709958944436807,
+      "variant": "dv7",
+      "mobility": 0.0027148235106950933,
+      "alignment": 0.747129287312756,
+      "data_score": 0.6143721342086792,
+      "data_drive": 0.0,
+      "last_cosine": 0.7235022187232971,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width"
+}

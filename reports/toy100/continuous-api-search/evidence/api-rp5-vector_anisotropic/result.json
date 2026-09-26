@@ -1,0 +1,156 @@
+{
+  "candidate": "API-RP5",
+  "gate": "broader_vector_anisotropic",
+  "status": "PASS",
+  "seconds": 115.18418625695631,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.017903032455342298,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.1620969675446577
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.011881515383720398,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.1381184846162796
+        },
+        {
+          "metric": "hq",
+          "value": 0.9638671875,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.11386718750000002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.13800142208735147,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.7119985779126485
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.550503671169281,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.400503671169281
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 20,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 20,
+        "first_pass_step": 250,
+        "stable_from_step": 250,
+        "stable_from_seconds": null,
+        "confirmed_step": 450,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.375
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.017903032455342298,
+      "mean_error": 0.0052740611135959625,
+      "covariance_error": 0.021669888868927956,
+      "target_scale": 2.040409564971924,
+      "sample_count": 4096,
+      "mass_tv": 0.011881515383720398,
+      "min_mass_ratio": 0.982177734375,
+      "hq": 0.9638671875,
+      "component_covariance_error": 0.13800142208735147,
+      "component_covariance_errors": [
+        0.18640166521072388,
+        0.06281325221061707,
+        0.1647893488407135
+      ],
+      "component_min_eigen_ratio": 0.550503671169281,
+      "component_mass": [
+        0.327392578125,
+        0.327392578125,
+        0.34521484375
+      ],
+      "target_mass": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ],
+      "component_counts": [
+        1341,
+        1341,
+        1414
+      ],
+      "ema": {
+        "sw1_normalized": 0.016102814988797745,
+        "mean_error": 0.005848390981554985,
+        "covariance_error": 0.010190652683377266,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.011881515383720398,
+        "min_mass_ratio": 0.982177734375,
+        "hq": 0.97900390625,
+        "component_covariance_error": 0.08267736062407494,
+        "component_covariance_errors": [
+          0.025022130459547043,
+          0.1352461725473404,
+          0.08776377886533737
+        ],
+        "component_min_eigen_ratio": 0.5284708142280579,
+        "component_mass": [
+          0.327392578125,
+          0.327392578125,
+          0.34521484375
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1341,
+          1341,
+          1414
+        ]
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": false,
+      "gap": 0.000636753742583096,
+      "gap_s": 0.0008409079760934696,
+      "velocity": -2.0621639748521917e-06,
+      "contraction_peak": 3.801445834840425e-05,
+      "contracting": 529,
+      "activity": 0.20352954869864032,
+      "activity_peak": 0.8834264191199762,
+      "quiet_gap": 0.0011186445267192856,
+      "quiet_activity": 0.21799397613891042,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 1200,
+      "openings": 1,
+      "closings": 1,
+      "event": null,
+      "velocity_s": -2.3527016459437394e-06
+    },
+    "updates": 1200
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic"
+}

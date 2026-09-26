@@ -7437,6 +7437,4055 @@
         "path": "evidence/api-dv7-img_blobs4/archive-manifest.json",
         "sha256": "eedfd6f1e22bd2e7c923bab9798797eb66e1dd08ea0a53673a5d8b8a9c70f904"
       }
+    },
+    {
+      "id": "api-dv7-vector_two_broad",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+      "recorded_utc": "2026-09-26T23:14:56.995564+00:00",
+      "candidate": "API-DV7",
+      "protocol": "frozen22_vector_two_broad",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-DV7",
+        "gate": "broader_vector_two_broad",
+        "status": "PASS",
+        "seconds": 19.15779842599295,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.05084810072708685,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.12915189927291315
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.029052734375,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.120947265625
+              },
+              {
+                "metric": "hq",
+                "value": 0.992919921875,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14291992187500002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.16005214676260948,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.6899478532373905
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.9688177704811096,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.8188177704811096
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 350,
+              "stable_from_step": 350,
+              "stable_from_seconds": null,
+              "confirmed_step": 550,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.4583333333333333
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.05084810072708685,
+            "mean_error": 0.07010998576879501,
+            "covariance_error": 0.006463172845542431,
+            "target_scale": 1.0601637363433838,
+            "sample_count": 4096,
+            "mass_tv": 0.029052734375,
+            "min_mass_ratio": 0.94189453125,
+            "hq": 0.992919921875,
+            "component_covariance_error": 0.16005214676260948,
+            "component_covariance_errors": [
+              0.08978872746229172,
+              0.23031556606292725
+            ],
+            "component_min_eigen_ratio": 0.9688177704811096,
+            "component_mass": [
+              0.529052734375,
+              0.470947265625
+            ],
+            "target_mass": [
+              0.5,
+              0.5
+            ],
+            "component_counts": [
+              2167,
+              1929
+            ],
+            "ema": {
+              "sw1_normalized": 0.04725102402955574,
+              "mean_error": 0.06388222426176071,
+              "covariance_error": 0.0032744910567998886,
+              "target_scale": 1.0601637363433838,
+              "sample_count": 4096,
+              "mass_tv": 0.029052734375,
+              "min_mass_ratio": 0.94189453125,
+              "hq": 0.990234375,
+              "component_covariance_error": 0.1635850016027689,
+              "component_covariance_errors": [
+                0.04800163581967354,
+                0.27916836738586426
+              ],
+              "component_min_eigen_ratio": 0.9542602896690369,
+              "component_mass": [
+                0.529052734375,
+                0.470947265625
+              ],
+              "target_mass": [
+                0.5,
+                0.5
+              ],
+              "component_counts": [
+                2167,
+                1929
+              ]
+            }
+          },
+          "policy": {
+            "data_memory": 0.0,
+            "payoff_error": 0.004572402272875344,
+            "game_trust": 1.0,
+            "game_ratio": 0.8987380817660097,
+            "variant": "dv7",
+            "mobility": 0.0026782379617114474,
+            "alignment": 0.4058461969482349,
+            "data_score": 1.0688060522079468,
+            "data_drive": 0.0,
+            "last_cosine": 0.6722038388252258,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad"
+      },
+      "derived": {
+        "status": "PASS",
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 18,
+        "first_pass_step": 350,
+        "stable_from_step": 350,
+        "failing_steps": [
+          50,
+          100,
+          150,
+          200,
+          250,
+          300
+        ],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.05084810072708685,
+          "mean_error": 0.07010998576879501,
+          "covariance_error": 0.006463172845542431,
+          "target_scale": 1.0601637363433838,
+          "sample_count": 4096,
+          "mass_tv": 0.029052734375,
+          "min_mass_ratio": 0.94189453125,
+          "hq": 0.992919921875,
+          "component_covariance_error": 0.16005214676260948,
+          "component_covariance_errors": [
+            0.08978872746229172,
+            0.23031556606292725
+          ],
+          "component_min_eigen_ratio": 0.9688177704811096,
+          "component_mass": [
+            0.529052734375,
+            0.470947265625
+          ],
+          "target_mass": [
+            0.5,
+            0.5
+          ],
+          "component_counts": [
+            2167,
+            1929
+          ]
+        },
+        "final_failed_bounds": []
+      },
+      "source_audit": {
+        "source_zip_sha256": "0406f83d7ee4c09696d9fa407b44e2ae86732cfbc338ff59b2fe409c412efe31",
+        "source_hash_mismatches": [],
+        "package_differences": [],
+        "artifact_hash_mismatches": []
+      },
+      "initialization": {
+        "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_two_broad/initial-values.pt",
+        "fixture_sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2",
+        "all_parameter_hashes_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                10
+              ],
+              "sha256": "24562546cfa64edb4fed54efeccfb445aebf69a16831ad22f477d5d7320482a5"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "28408481bbd153aa1de4db94848ecfbb3749aee6ca43f9a440036386c779aa3a"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "b953ce297fe4eaffe0fe11224bd715c6821e0e8bd6687d31c3bae88b05c661e1"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "cc0bc7ee6b8088e9be662d7b7889cfa79c8f400027b0990b39cf284e7f25fff6"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                1,
+                64
+              ],
+              "sha256": "d433e146f23d225a7c577d1b392db8658a51e05daa2ab3c415333606c23fe7f1"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "8dd8efc3155c46f1e02a60324b64216bb77fd6d3ef997905ad3447a755dc059c"
+            }
+          ]
+        },
+        "ema_matches": {
+          "G": true,
+          "prior": true
+        }
+      },
+      "host_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "harness_sha256": "03204e986c5d5ec9d280498f106ae9c5fcafdc6c36b0680d7198d0d53584a871",
+      "resource_recipe_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "artifacts": {
+        "evidence/api-dv7-vector_two_broad/artifact-sha256.json": {
+          "sha256": "2f166867bff5a7042578d860861a26e892905013ff293f07d7889adb91fea75f",
+          "original_sha256": "2f166867bff5a7042578d860861a26e892905013ff293f07d7889adb91fea75f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv7-vector_two_broad/canonical-initialization.json": {
+          "sha256": "fbb7b25610d8f55a33bc496ac3ffde6be3cab841175343a41e8afa00fc830797",
+          "original_sha256": "fbb7b25610d8f55a33bc496ac3ffde6be3cab841175343a41e8afa00fc830797",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/canonical-initialization.json",
+          "bytes": 2065,
+          "original_bytes": 2065,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_two_broad/declaration.json": {
+          "sha256": "e433faefe3eac77151b83cc21fb4bdb4a3e10a75b658a232792673b958594602",
+          "original_sha256": "e433faefe3eac77151b83cc21fb4bdb4a3e10a75b658a232792673b958594602",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/declaration.json",
+          "bytes": 20340,
+          "original_bytes": 20340,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_two_broad/initial.json": {
+          "sha256": "4e42f274de2bb50187e3c36a3880e03872e1feed631efff23d9af9dfffd14d2d",
+          "original_sha256": "4e42f274de2bb50187e3c36a3880e03872e1feed631efff23d9af9dfffd14d2d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_two_broad/learning-rates.jsonl.gz": {
+          "sha256": "41dfaf4488489df19841324ce5323260ce4822089bb5ca11a36b767a4f5a89e6",
+          "original_sha256": "ca65fa65763ab240664de17b766271d7c34740743c3da0a0c97c4dab13f8ad9d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/learning-rates.jsonl",
+          "bytes": 125604,
+          "original_bytes": 819176,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_two_broad/metrics.jsonl.gz": {
+          "sha256": "d966c56532cba81dea556508a236106f60a39e4339659df73f47504912f9b186",
+          "original_sha256": "068c2d222bf5538c55404cf1b8799c7aead791cc268467de570a84e49ba2b624",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/metrics.jsonl",
+          "bytes": 5217,
+          "original_bytes": 26396,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_two_broad/result.json": {
+          "sha256": "2976270ddbfc39b006e31047154894cd181a88cfcfb8ad89b4d167b199a6a407",
+          "original_sha256": "2976270ddbfc39b006e31047154894cd181a88cfcfb8ad89b4d167b199a6a407",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/result.json",
+          "bytes": 3950,
+          "original_bytes": 3950,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_two_broad/source.zip": {
+          "sha256": "0406f83d7ee4c09696d9fa407b44e2ae86732cfbc338ff59b2fe409c412efe31",
+          "original_sha256": "0406f83d7ee4c09696d9fa407b44e2ae86732cfbc338ff59b2fe409c412efe31",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/source.zip",
+          "bytes": 341842,
+          "original_bytes": 341842,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/final-state.pt",
+          "sha256": "121a23abf2302abf0a3ddacc52df89d1a81b8f5245ab92ea6deade7143d825c5",
+          "bytes": 234255,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_two_broad/initial-state.pt",
+          "sha256": "88ac4251054b20c485f10af07ef829312848aefea575b77bcc7b0b0c4c81fd86",
+          "bytes": 109936,
+          "verified_against_original_manifest": true
+        }
+      },
+      "scope_note": "Canonical CUDA host,original gates,independent CUDA data0/latent1/penalty2; explicitly isolated output2303. No legacy training path. Vector final trainer checkpoint omits caller-owned data-generator state; this does not invalidate quality but cannot alone resume this vector host exactly.",
+      "archive_manifest": {
+        "path": "evidence/api-dv7-vector_two_broad/archive-manifest.json",
+        "sha256": "72bf2d86fd401e3dca3510e96244bbdece2eb3b4b4545a85816d5508bf4a8e8f"
+      }
+    },
+    {
+      "id": "api-dv7-vector_unequal_mass",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+      "recorded_utc": "2026-09-26T23:14:56.995564+00:00",
+      "candidate": "API-DV7",
+      "protocol": "frozen22_vector_unequal_mass",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAILURE",
+      "result": {
+        "candidate": "API-DV7",
+        "gate": "broader_vector_unequal_mass",
+        "status": "FAIL",
+        "seconds": 27.988335395930335,
+        "metrics": {
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.1257963850012221,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.054203614998777905
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.08427733927965164,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.06572266072034835
+              },
+              {
+                "metric": "hq",
+                "value": 0.98974609375,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.13974609375000002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.7147043533623219,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.13529564663767812
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.021303080022335052,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "FAIL",
+                "margin": -0.12869691997766494
+              },
+              {
+                "metric": "min_mass_ratio",
+                "value": 0.54931640625,
+                "op": ">=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.29931640625
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.14299657775296107,
+            "confirmation_fraction": 2.0
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.1257963850012221,
+            "mean_error": 0.16789008677005768,
+            "covariance_error": 0.20492613315582275,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.08427733927965164,
+            "min_mass_ratio": 0.54931640625,
+            "hq": 0.98974609375,
+            "component_covariance_error": 0.7147043533623219,
+            "component_covariance_errors": [
+              0.13166764378547668,
+              0.12782321870326996,
+              0.20598024129867554,
+              2.3933463096618652
+            ],
+            "component_min_eigen_ratio": 0.021303080022335052,
+            "component_mass": [
+              0.52001953125,
+              0.38427734375,
+              0.084716796875,
+              0.010986328125
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2130,
+              1574,
+              347,
+              45
+            ],
+            "ema": {
+              "sw1_normalized": 0.12319776423736198,
+              "mean_error": 0.1625223159790039,
+              "covariance_error": 0.2297198474407196,
+              "target_scale": 1.7948341369628906,
+              "sample_count": 4096,
+              "mass_tv": 0.08427733927965164,
+              "min_mass_ratio": 0.54931640625,
+              "hq": 0.98779296875,
+              "component_covariance_error": 0.5903710443526506,
+              "component_covariance_errors": [
+                0.1233685091137886,
+                0.17409086227416992,
+                0.207381010055542,
+                1.856643795967102
+              ],
+              "component_min_eigen_ratio": 0.02031565085053444,
+              "component_mass": [
+                0.52001953125,
+                0.38427734375,
+                0.084716796875,
+                0.010986328125
+              ],
+              "target_mass": [
+                0.550000011920929,
+                0.30000001192092896,
+                0.12999999523162842,
+                0.019999999552965164
+              ],
+              "component_counts": [
+                2130,
+                1574,
+                347,
+                45
+              ]
+            }
+          },
+          "policy": {
+            "data_memory": 0.0,
+            "payoff_error": 0.06015829727766592,
+            "game_trust": 0.9233972291419819,
+            "game_ratio": 1.2880235215619282,
+            "variant": "dv7",
+            "mobility": 0.0558299863427791,
+            "alignment": 0.3820869060836735,
+            "data_score": 0.9017592668533325,
+            "data_drive": 0.0,
+            "last_cosine": 0.49793297052383423,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass"
+      },
+      "derived": {
+        "status": "FAIL",
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "failing_steps": [
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.1257963850012221,
+          "mean_error": 0.16789008677005768,
+          "covariance_error": 0.20492613315582275,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.08427733927965164,
+          "min_mass_ratio": 0.54931640625,
+          "hq": 0.98974609375,
+          "component_covariance_error": 0.7147043533623219,
+          "component_covariance_errors": [
+            0.13166764378547668,
+            0.12782321870326996,
+            0.20598024129867554,
+            2.3933463096618652
+          ],
+          "component_min_eigen_ratio": 0.021303080022335052,
+          "component_mass": [
+            0.52001953125,
+            0.38427734375,
+            0.084716796875,
+            0.010986328125
+          ],
+          "target_mass": [
+            0.550000011920929,
+            0.30000001192092896,
+            0.12999999523162842,
+            0.019999999552965164
+          ],
+          "component_counts": [
+            2130,
+            1574,
+            347,
+            45
+          ]
+        },
+        "final_failed_bounds": [
+          {
+            "metric": "component_min_eigen_ratio",
+            "actual": 0.021303080022335052,
+            "operator": ">=",
+            "required": 0.15
+          }
+        ]
+      },
+      "source_audit": {
+        "source_zip_sha256": "df5d263eaa10f517f47d0ca9b012190d99adf7ab5fb42e21e8788ead1ea2a128",
+        "source_hash_mismatches": [],
+        "package_differences": [],
+        "artifact_hash_mismatches": []
+      },
+      "initialization": {
+        "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_mass/initial-values.pt",
+        "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+        "all_parameter_hashes_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "layers.0.weight",
+              "shape": [
+                96,
+                2
+              ],
+              "sha256": "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f"
+            },
+            {
+              "name": "layers.0.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f"
+            },
+            {
+              "name": "layers.1.weight",
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3"
+            },
+            {
+              "name": "layers.1.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59"
+            },
+            {
+              "name": "layers.2.weight",
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451"
+            },
+            {
+              "name": "layers.2.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820"
+            },
+            {
+              "name": "head.weight",
+              "shape": [
+                1,
+                100
+              ],
+              "sha256": "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d"
+            },
+            {
+              "name": "head.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+            }
+          ]
+        },
+        "ema_matches": {
+          "G": true,
+          "prior": true
+        }
+      },
+      "host_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "harness_sha256": "03204e986c5d5ec9d280498f106ae9c5fcafdc6c36b0680d7198d0d53584a871",
+      "resource_recipe_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "artifacts": {
+        "evidence/api-dv7-vector_unequal_mass/artifact-sha256.json": {
+          "sha256": "a9b396d06cc02d9f925047a045cdcd06e6216e5b206c15572a1f5c8d2cacfab5",
+          "original_sha256": "a9b396d06cc02d9f925047a045cdcd06e6216e5b206c15572a1f5c8d2cacfab5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv7-vector_unequal_mass/canonical-initialization.json": {
+          "sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original_sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/canonical-initialization.json",
+          "bytes": 2369,
+          "original_bytes": 2369,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_mass/declaration.json": {
+          "sha256": "2e91cd626447cf8b620f5a87e862b883c9fe2589be8fdb13e6831b2064e340e5",
+          "original_sha256": "2e91cd626447cf8b620f5a87e862b883c9fe2589be8fdb13e6831b2064e340e5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/declaration.json",
+          "bytes": 22004,
+          "original_bytes": 22004,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_mass/initial.json": {
+          "sha256": "5480c49ea81096fdbdc44b09b7ac970717ba867cd41dd4f656e5d10a529b8f75",
+          "original_sha256": "5480c49ea81096fdbdc44b09b7ac970717ba867cd41dd4f656e5d10a529b8f75",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_mass/learning-rates.jsonl.gz": {
+          "sha256": "e27bdac1e8679924c96f7fa9b18971bac300938ad38bcfdebe572323a6fe0221",
+          "original_sha256": "6132baafd93e7c6d8d64426d14cd9fabb0792597d6650a6ac94411d8b13d6845",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/learning-rates.jsonl",
+          "bytes": 123553,
+          "original_bytes": 817321,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_mass/metrics.jsonl.gz": {
+          "sha256": "59efbfa6390e0a0d1384c440d7df208534454081a7fb7eb011d7fb321e135419",
+          "original_sha256": "82c086bccf4a9f7fe973e9b7028f1dd1933e16e2179b78419afc89d475ed05ec",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/metrics.jsonl",
+          "bytes": 5265,
+          "original_bytes": 31902,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_mass/result.json": {
+          "sha256": "ad16dc2343e06d90e620c512b74de8857e56081b877442b7da823761bb408357",
+          "original_sha256": "ad16dc2343e06d90e620c512b74de8857e56081b877442b7da823761bb408357",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/result.json",
+          "bytes": 4644,
+          "original_bytes": 4644,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_mass/source.zip": {
+          "sha256": "df5d263eaa10f517f47d0ca9b012190d99adf7ab5fb42e21e8788ead1ea2a128",
+          "original_sha256": "df5d263eaa10f517f47d0ca9b012190d99adf7ab5fb42e21e8788ead1ea2a128",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/source.zip",
+          "bytes": 393825,
+          "original_bytes": 393825,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/final-state.pt",
+          "sha256": "c3ddde60bcef00cbedcdaca5a9c656c3f4a86841e05d03d9a94e679ccf78a546",
+          "bytes": 462809,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_mass/initial-state.pt",
+          "sha256": "4e88dc6b928e2fc5809f974a109b6054401f1fc6e2579058a3f5c87982ea3ab5",
+          "bytes": 224188,
+          "verified_against_original_manifest": true
+        }
+      },
+      "scope_note": "Canonical CUDA host,original gates,independent CUDA data0/latent1/penalty2; explicitly isolated output2303. No legacy training path. Vector final trainer checkpoint omits caller-owned data-generator state; this does not invalidate quality but cannot alone resume this vector host exactly.",
+      "archive_manifest": {
+        "path": "evidence/api-dv7-vector_unequal_mass/archive-manifest.json",
+        "sha256": "211f20a56bd51b86204c9f2bb916950dda373496be78e5d359b0edd905661598"
+      }
+    },
+    {
+      "id": "api-dv7-vector_unequal_width",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+      "recorded_utc": "2026-09-26T23:14:56.995564+00:00",
+      "candidate": "API-DV7",
+      "protocol": "frozen22_vector_unequal_width",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-DV7",
+        "gate": "broader_vector_unequal_width",
+        "status": "PASS",
+        "seconds": 20.745914513012394,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.02536299700333784,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.15463700299666217
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.0244140625,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.1255859375
+              },
+              {
+                "metric": "hq",
+                "value": 0.974853515625,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.12485351562500002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.421040877699852,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.428959122300148
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.2816525399684906,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.1316525399684906
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 20,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 20,
+              "first_pass_step": 250,
+              "stable_from_step": 250,
+              "stable_from_seconds": null,
+              "confirmed_step": 450,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.375
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.02536299700333784,
+            "mean_error": 0.014361071400344372,
+            "covariance_error": 0.05326126888394356,
+            "target_scale": 2.138371229171753,
+            "sample_count": 4096,
+            "mass_tv": 0.0244140625,
+            "min_mass_ratio": 0.9423828125,
+            "hq": 0.974853515625,
+            "component_covariance_error": 0.421040877699852,
+            "component_covariance_errors": [
+              0.5711685419082642,
+              0.4509749710559845,
+              0.28712108731269836,
+              0.37489891052246094
+            ],
+            "component_min_eigen_ratio": 0.2816525399684906,
+            "component_mass": [
+              0.251708984375,
+              0.239990234375,
+              0.235595703125,
+              0.272705078125
+            ],
+            "target_mass": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "component_counts": [
+              1031,
+              983,
+              965,
+              1117
+            ],
+            "ema": {
+              "sw1_normalized": 0.023550506696470134,
+              "mean_error": 0.011509171687066555,
+              "covariance_error": 0.05219708010554314,
+              "target_scale": 2.138371229171753,
+              "sample_count": 4096,
+              "mass_tv": 0.0244140625,
+              "min_mass_ratio": 0.9423828125,
+              "hq": 0.9814453125,
+              "component_covariance_error": 0.3256300054490566,
+              "component_covariance_errors": [
+                0.5186822414398193,
+                0.4079737663269043,
+                0.2470538318157196,
+                0.12881018221378326
+              ],
+              "component_min_eigen_ratio": 0.3049964904785156,
+              "component_mass": [
+                0.251708984375,
+                0.239990234375,
+                0.235595703125,
+                0.272705078125
+              ],
+              "target_mass": [
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "component_counts": [
+                1031,
+                983,
+                965,
+                1117
+              ]
+            }
+          },
+          "policy": {
+            "data_memory": 0.0,
+            "payoff_error": 0.009969010833054072,
+            "game_trust": 1.0,
+            "game_ratio": 0.5709958944436807,
+            "variant": "dv7",
+            "mobility": 0.0027148235106950933,
+            "alignment": 0.747129287312756,
+            "data_score": 0.6143721342086792,
+            "data_drive": 0.0,
+            "last_cosine": 0.7235022187232971,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width"
+      },
+      "derived": {
+        "status": "PASS",
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 20,
+        "passing_suffix": 20,
+        "first_pass_step": 250,
+        "stable_from_step": 250,
+        "failing_steps": [
+          50,
+          100,
+          150,
+          200
+        ],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.02536299700333784,
+          "mean_error": 0.014361071400344372,
+          "covariance_error": 0.05326126888394356,
+          "target_scale": 2.138371229171753,
+          "sample_count": 4096,
+          "mass_tv": 0.0244140625,
+          "min_mass_ratio": 0.9423828125,
+          "hq": 0.974853515625,
+          "component_covariance_error": 0.421040877699852,
+          "component_covariance_errors": [
+            0.5711685419082642,
+            0.4509749710559845,
+            0.28712108731269836,
+            0.37489891052246094
+          ],
+          "component_min_eigen_ratio": 0.2816525399684906,
+          "component_mass": [
+            0.251708984375,
+            0.239990234375,
+            0.235595703125,
+            0.272705078125
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            1031,
+            983,
+            965,
+            1117
+          ]
+        },
+        "final_failed_bounds": []
+      },
+      "source_audit": {
+        "source_zip_sha256": "e75260aa76b71d370e49c4c05b1d0d96470f127999f6964111836ba502d8ec52",
+        "source_hash_mismatches": [],
+        "package_differences": [],
+        "artifact_hash_mismatches": []
+      },
+      "initialization": {
+        "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_width/initial-values.pt",
+        "fixture_sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a",
+        "all_parameter_hashes_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "main.layers.0.weight",
+              "shape": [
+                128,
+                2
+              ],
+              "sha256": "0cb4ccc8411b14e20a51ab533ea749d222bc96dbe796f0dd2ee68cd66813c9b8"
+            },
+            {
+              "name": "main.layers.0.bias",
+              "shape": [
+                128
+              ],
+              "sha256": "9cb4be7229a9e8dfcf85540769dc6cc22b4c0b0bde37c011c0e036a8b2f98cdb"
+            },
+            {
+              "name": "main.layers.1.weight",
+              "shape": [
+                128,
+                128
+              ],
+              "sha256": "dba94662073a2281ded27798f634d4ee9a8d7c317ac409d8e433911e7c8d8c8c"
+            },
+            {
+              "name": "main.layers.1.bias",
+              "shape": [
+                128
+              ],
+              "sha256": "5e712b8f287f908d1ce1e1395fc79c5a8a23ffc6741aa3e403a044703542fafe"
+            },
+            {
+              "name": "main.layers.2.weight",
+              "shape": [
+                128,
+                128
+              ],
+              "sha256": "debe983d53a99006dc6bc6cc6eb2b7eb78300e450d1963c263664fa3d91c2786"
+            },
+            {
+              "name": "main.layers.2.bias",
+              "shape": [
+                128
+              ],
+              "sha256": "39575bbe8e7b4a253c3d3317b4376aee74e7998360dac7c8bfd0ccf767262173"
+            },
+            {
+              "name": "main.head.weight",
+              "shape": [
+                1,
+                128
+              ],
+              "sha256": "75e11176dd4556ead03c4cf0bc64b0b1b92e8bcde8350af902e9533925036aa8"
+            },
+            {
+              "name": "main.head.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "65b702563a3846ed803e4349336201ed36fb3d17c66c7ff53167bb5bcd3a54cf"
+            }
+          ]
+        },
+        "ema_matches": {
+          "G": true,
+          "prior": true
+        }
+      },
+      "host_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "harness_sha256": "03204e986c5d5ec9d280498f106ae9c5fcafdc6c36b0680d7198d0d53584a871",
+      "resource_recipe_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "artifacts": {
+        "evidence/api-dv7-vector_unequal_width/artifact-sha256.json": {
+          "sha256": "31478d67b894dd69a50ce1ebc9f18063a439444e0be2b3a577a91052ef6d731d",
+          "original_sha256": "31478d67b894dd69a50ce1ebc9f18063a439444e0be2b3a577a91052ef6d731d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv7-vector_unequal_width/canonical-initialization.json": {
+          "sha256": "2766257b98391bfbfd1027a28ce73c19eb09edfeab860dd8b6f165013de63341",
+          "original_sha256": "2766257b98391bfbfd1027a28ce73c19eb09edfeab860dd8b6f165013de63341",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/canonical-initialization.json",
+          "bytes": 2377,
+          "original_bytes": 2377,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_width/declaration.json": {
+          "sha256": "20981e070ac29c1672e244029d1d4264f15706513553fd6aadcfc5e7a66a5439",
+          "original_sha256": "20981e070ac29c1672e244029d1d4264f15706513553fd6aadcfc5e7a66a5439",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/declaration.json",
+          "bytes": 21741,
+          "original_bytes": 21741,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_width/initial.json": {
+          "sha256": "5bc5f78040ff3e2190696521418c66e0effe5bb6fdb9b8737f344178a54241da",
+          "original_sha256": "5bc5f78040ff3e2190696521418c66e0effe5bb6fdb9b8737f344178a54241da",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_width/learning-rates.jsonl.gz": {
+          "sha256": "bae4d2d33744da93dc0caf71d52a57c1651b543cdda4e3c8e2d45b818677705c",
+          "original_sha256": "5afd45fbb67671e754a6bd2612dfd4acab4369a9f23af306db73b84466490ee0",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/learning-rates.jsonl",
+          "bytes": 124928,
+          "original_bytes": 818373,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_width/metrics.jsonl.gz": {
+          "sha256": "bd7c819687a541ace360ca352ae0abd2903a6de9ead4c27c7cce73d5cb3ab940",
+          "original_sha256": "41fee931c26b0b4a70983acfe5705dbb4bec8e650bd0f86e55cdc3b1d2fdfee0",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/metrics.jsonl",
+          "bytes": 5730,
+          "original_bytes": 30916,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_width/result.json": {
+          "sha256": "a51844a77477ae792389b0eb2e5380cdc176e28434a35ddffa678eda756a6c4c",
+          "original_sha256": "a51844a77477ae792389b0eb2e5380cdc176e28434a35ddffa678eda756a6c4c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/result.json",
+          "bytes": 4264,
+          "original_bytes": 4264,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv7-vector_unequal_width/source.zip": {
+          "sha256": "e75260aa76b71d370e49c4c05b1d0d96470f127999f6964111836ba502d8ec52",
+          "original_sha256": "e75260aa76b71d370e49c4c05b1d0d96470f127999f6964111836ba502d8ec52",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/source.zip",
+          "bytes": 447459,
+          "original_bytes": 447459,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/final-state.pt",
+          "sha256": "48d520c9583785061a06da5e3caaa0c867668fe9d4baa311b6fcc5974e39b4a3",
+          "bytes": 695129,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-vector_unequal_width/initial-state.pt",
+          "sha256": "c3a27decefddd613effd8aaf98456a48551e5af83146804ee76fbaa2dc045e6d",
+          "bytes": 340284,
+          "verified_against_original_manifest": true
+        }
+      },
+      "scope_note": "Canonical CUDA host,original gates,independent CUDA data0/latent1/penalty2; explicitly isolated output2303. No legacy training path. Vector final trainer checkpoint omits caller-owned data-generator state; this does not invalidate quality but cannot alone resume this vector host exactly.",
+      "archive_manifest": {
+        "path": "evidence/api-dv7-vector_unequal_width/archive-manifest.json",
+        "sha256": "5f9085aed9773d21a9c5c5f15d3c097dd40ccad32159d815091e517d48c600e3"
+      }
+    },
+    {
+      "id": "api-c9-img_intensity2",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo",
+      "recorded_utc": "2026-09-26T23:20:08.640812+00:00",
+      "candidate": "API-C9",
+      "protocol": "frozen22_img_intensity2",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAIL",
+      "result": {
+        "candidate": "API-C9",
+        "gate": "broader_img_intensity2",
+        "status": "FAIL",
+        "seconds": 71.14378366689198,
+        "metrics": {
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "final": {
+            "step": 600,
+            "modes": 1,
+            "hq": 0.375,
+            "mean_rmse": 0.07009175419807434,
+            "quality_mode_fractions": [
+              0.09375,
+              0.28125
+            ],
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "distribution_tv": 0.0,
+            "ema": {
+              "modes": 0,
+              "hq": 0.28125,
+              "mean_rmse": 0.0791911706328392,
+              "quality_mode_fractions": [
+                0.09375,
+                0.1875
+              ],
+              "mode_fractions": [
+                0.53125,
+                0.46875
+              ],
+              "distribution_tv": 0.03125
+            }
+          },
+          "policy": {
+            "anchor_min_decay": 0.9,
+            "lr_max": 0.00425,
+            "lr_last": 0.00425,
+            "anchor_started": false,
+            "calls": 600,
+            "observed_steps": 600,
+            "last_sur": 0.48383182287216187,
+            "sur_hist": [],
+            "sur_base": null,
+            "w": 1.0,
+            "low_streak": 0,
+            "alpha": 0.1,
+            "last_ratio": null,
+            "ema_updates": 0,
+            "ema_skips": 0,
+            "ema_reseeds": 0,
+            "formulation": "ka2_fresh"
+          },
+          "game": {
+            "policy": "local_extragradient",
+            "field_evaluations": 8,
+            "accepted_updates": 600,
+            "trials": [
+              {
+                "probe_fraction": 1.0,
+                "relative_field_change": 5.774044513702393
+              },
+              {
+                "probe_fraction": 0.5,
+                "relative_field_change": 3.402899742126465
+              },
+              {
+                "probe_fraction": 0.25,
+                "relative_field_change": 1.7049697637557983
+              },
+              {
+                "probe_fraction": 0.125,
+                "relative_field_change": 1.0716077089309692
+              },
+              {
+                "probe_fraction": 0.0625,
+                "relative_field_change": 0.8174415230751038
+              },
+              {
+                "probe_fraction": 0.03125,
+                "relative_field_change": 0.6668525338172913
+              },
+              {
+                "probe_fraction": 0.015625,
+                "relative_field_change": 0.39452552795410156
+              }
+            ],
+            "secant": null,
+            "local_response": {
+              "predictor_l2": 0.0031602070666849613,
+              "correction_l2": 0.0012467823689803481,
+              "native_alignment": 0.013671047054231167,
+              "probe_fraction": 0.015625
+            },
+            "loss_source": "base_state",
+            "moment_source": "base_gradient",
+            "d": {
+              "preview_l2": 0.12516570091247559,
+              "applied_l2": 0.0017545673763379455,
+              "correction_l2": 0.12368583679199219
+            },
+            "g": {
+              "preview_l2": 0.15887078642845154,
+              "applied_l2": 0.002442368306219578,
+              "correction_l2": 0.1565207988023758
+            }
+          },
+          "updates": 600,
+          "effective_recipe": {
+            "name": "ka2",
+            "model": "gan",
+            "z_dim": 8,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "num_classes": null,
+            "conditioning": "scalar",
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "batch_size": 32,
+            "game_update": "local_extragradient",
+            "optimistic_updates": false,
+            "bounded_updates": false,
+            "continuous": true,
+            "critic_memory": "fresh",
+            "startup_input_steps": 360,
+            "startup_output_steps": 720,
+            "total_steps": 7000,
+            "lr": 0.00425,
+            "d_lr_mult": 1.0,
+            "prior_lr_mult": 2.0,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "prior_betas": null,
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_every": 1,
+            "prior_reg": 0.0,
+            "ema_decay": 0.995,
+            "lr_anneal_start": 0.6,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "network_lr_horizon_cap": 1600,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "direct_particle_gain": true,
+            "d_guard_ratio": 5.0,
+            "d_guard_min_steps": 200,
+            "latent_damping_max_rate": 0.5,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "input_noise_std": 0.5,
+            "input_noise_anneal_end": 0.1,
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.2,
+            "encoder_mode": "none",
+            "routing_temperature": 0.25,
+            "distance_reduction": "sum",
+            "observation_sigma": 0.03,
+            "reconstruction_weight": 1.0
+          },
+          "optimizer_classes": [
+            "K3PGeneratorAdam",
+            "KA2CriticAdam"
+          ],
+          "controller_class": "FreshKA2StepRecord"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2"
+      },
+      "derived": {
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "minimum_stable_checks": 5
+        },
+        "failing_steps": [
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "final_live": {
+          "step": 600,
+          "modes": 1,
+          "hq": 0.375,
+          "mean_rmse": 0.07009175419807434,
+          "quality_mode_fractions": [
+            0.09375,
+            0.28125
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        }
+      },
+      "verification": {
+        "source_zip_sha256": "9f3559153c8a26f49e8401e4feab8bc1eb00f3c4b0b3b04bb5fc6b9089248dc9",
+        "source_count": 26,
+        "declaration_hash_mismatches": [],
+        "missing_declared_files": [],
+        "package_sha256": {
+          "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/game_update.py": "9a6673747ba3844ef3433267c8e0b058a582a000cbb16097722ff53b2741d88d",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "02db7ad69102e6cb17250f34ff0ff2e5e8a77211997eb882175c16ee942bcd1a",
+          "particlegan/ka2.py": "888bb119becf6389320f1a30ef771d236c749dceab914ec087b61cb0303cd701",
+          "particlegan/local_game.py": "2a2c356f6b5302fa9dc463f0e13914cc85fd8620f5fb6191ae0ccc5d6454007a",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "253eeb3353809a4cda1834636f417f651a8f3c9bed5fbbf52f14d6b949b11c39",
+          "particlegan/training.py": "689e5e85d94ba5f917d0686266901fc3730f25275b7cd169dd6ae39ed441718d",
+          "particlegan/update_limit.py": "8c3434130f8f0a7a805f58acdf9ea470cd7f9e39770c0bff71fa67cf132efee2",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "package_differences_from_single": [],
+        "frozen_image_helper_differences": [],
+        "measure_function_ast_equal_to_audited_C7": true,
+        "artifact_hash_mismatches": [],
+        "reported_initial_model_and_global_data_rng_matches_C7": {
+          "models": true,
+          "global_data_rng": true
+        },
+        "runtime": {
+          "torch": "2.13.0+cu126",
+          "cuda_version": "12.6",
+          "device": "NVIDIA RTX A6000",
+          "cuda_visible_devices": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "fp32": true,
+          "deterministic_algorithms": true,
+          "tf32_matmul": false,
+          "tf32_cudnn": false,
+          "threads": 1,
+          "serial_backward": true
+        }
+      },
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          8
+        ],
+        "num_particles": [
+          20000,
+          32
+        ],
+        "batch_size": [
+          2048,
+          32
+        ]
+      },
+      "rate_audit": {
+        "updates": 600,
+        "rate_ranges": {
+          "generator_0": [
+            0.00425,
+            0.00425
+          ],
+          "critic_0": [
+            0.00425,
+            0.00425
+          ],
+          "prior_1": [
+            0.0085,
+            0.0085
+          ]
+        },
+        "controller_and_accepted_counts_exact": true,
+        "reference_counts_exact": true,
+        "mean_field_evaluations": 6.56,
+        "field_evaluations_range": [
+          2,
+          9
+        ],
+        "last500_mean_accepted_l2": {
+          "G": 0.008159991814754903,
+          "D": 0.008887173602473921,
+          "prior": 0.003016365328861866
+        },
+        "probe_fraction_range": [
+          0.0078125,
+          1.0
+        ],
+        "median_probe_fraction": 0.03125,
+        "all_final_locality_ratios_at_most_half": true,
+        "max_accepted_locality_ratio": 0.4994148015975952
+      },
+      "artifacts": {
+        "evidence/api-c9-img_intensity2/artifact-sha256.json": {
+          "sha256": "59b0f7e2a33fa1fce8f184110568b55d83b6e74717ea8ebbb7e3a2712364d9cf",
+          "original_sha256": "59b0f7e2a33fa1fce8f184110568b55d83b6e74717ea8ebbb7e3a2712364d9cf",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/artifact-sha256.json",
+          "bytes": 707,
+          "original_bytes": 707,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-c9-img_intensity2/artifacts-final.json": {
+          "sha256": "cc36435d73138b3f310cc495d2fbd3bfd8cc3dd75a72dccd4e4efb4989111aaa",
+          "original_sha256": "cc36435d73138b3f310cc495d2fbd3bfd8cc3dd75a72dccd4e4efb4989111aaa",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/artifacts-final.json",
+          "bytes": 801,
+          "original_bytes": 801,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-c9-img_intensity2/declaration.json": {
+          "sha256": "6d8ec74ffb30e0ea526959cc761e184034ad014ad8b57aeea7d071f3a120cdee",
+          "original_sha256": "6d8ec74ffb30e0ea526959cc761e184034ad014ad8b57aeea7d071f3a120cdee",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/declaration.json",
+          "bytes": 6620,
+          "original_bytes": 6620,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c9-img_intensity2/initial.json": {
+          "sha256": "8500cd7c0df91d83252627b978a8fafaca4bc041c932bc61312e0f11b6a437a4",
+          "original_sha256": "8500cd7c0df91d83252627b978a8fafaca4bc041c932bc61312e0f11b6a437a4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c9-img_intensity2/learning-rates.jsonl.gz": {
+          "sha256": "cc916c1c30bca4b9b2f8863790f0d52b4d1b5688c741603bd2d19932b38077d0",
+          "original_sha256": "55015fc03566f7a7c866e5987947a20b459cefd8515bf8b0b76c8e2ddf6c0648",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/learning-rates.jsonl",
+          "bytes": 159318,
+          "original_bytes": 1027849,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c9-img_intensity2/metrics.jsonl.gz": {
+          "sha256": "c78b623b33875b5723cf24134d7ae25405d3ac2a8e484f2c682b0676ab042fef",
+          "original_sha256": "056e5d5576303da7688700d57e24393d0bd11dfc484dfa699654d85221f28c26",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/metrics.jsonl",
+          "bytes": 1083,
+          "original_bytes": 8440,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c9-img_intensity2/result.json": {
+          "sha256": "4fa21210ebfc0fe5ae99ea8de9cc0170013ce1c54d8262da23822ccfa9b7f372",
+          "original_sha256": "4fa21210ebfc0fe5ae99ea8de9cc0170013ce1c54d8262da23822ccfa9b7f372",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/result.json",
+          "bytes": 5057,
+          "original_bytes": 5057,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c9-img_intensity2/source.zip": {
+          "sha256": "9f3559153c8a26f49e8401e4feab8bc1eb00f3c4b0b3b04bb5fc6b9089248dc9",
+          "original_sha256": "9f3559153c8a26f49e8401e4feab8bc1eb00f3c4b0b3b04bb5fc6b9089248dc9",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/source.zip",
+          "bytes": 86321,
+          "original_bytes": 86321,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/final-state.pt",
+          "sha256": "c2c8a1e624d0714937c02d3659966c149b79bf0b95b3ab5cf2919749dde3d525",
+          "bytes": 204301,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C9-img_intensity2/initial-state.pt",
+          "sha256": "ec67f1370b9efdedbc9ddfcab93b5a77fd0d9fe45ca74933fec704f944d440fe",
+          "bytes": 107254,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [
+        "artifacts-final.json"
+      ],
+      "scope_note": "Own C9 image result: 0/24 observations pass; final HQ .375 with1 quality mode, meanRMSE .0700917542. This frozen600-update transfer gate fails independently of ring nonarrival. Window is before fresh-reference activation; no mature-anchor or indefinite-stability claim.",
+      "archive_manifest": {
+        "path": "evidence/api-c9-img_intensity2/archive-manifest.json",
+        "sha256": "42dfca121b81b3dacdabf1d1df40ec0ae47fe39265b83ee500496379512eb3ca"
+      }
+    },
+    {
+      "id": "api-dv9-vector_unequal_mass",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+      "recorded_utc": "2026-09-26T23:27:19.481569+00:00",
+      "candidate": "API-DV9",
+      "protocol": "frozen22_vector_unequal_mass",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAILURE",
+      "result": {
+        "candidate": "API-DV9",
+        "gate": "broader_vector_unequal_mass",
+        "status": "FAIL",
+        "seconds": 21.854027930879965,
+        "metrics": {
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.08291431879044855,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.09708568120955144
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.05283201485872269,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.09716798514127731
+              },
+              {
+                "metric": "hq",
+                "value": 0.99755859375,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14755859375000002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 1.1702314019203186,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "FAIL",
+                "margin": -0.3202314019203186
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.027236368507146835,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "FAIL",
+                "margin": -0.12276363149285316
+              },
+              {
+                "metric": "min_mass_ratio",
+                "value": 0.3173828125,
+                "op": ">=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.0673828125
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.19919450595682742,
+            "confirmation_fraction": 2.0
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.08291431879044855,
+            "mean_error": 0.11145146191120148,
+            "covariance_error": 0.1838809847831726,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.05283201485872269,
+            "min_mass_ratio": 0.3173828125,
+            "hq": 0.99755859375,
+            "component_covariance_error": 1.1702314019203186,
+            "component_covariance_errors": [
+              0.142277792096138,
+              0.16622798144817352,
+              0.23249149322509766,
+              4.139928340911865
+            ],
+            "component_min_eigen_ratio": 0.027236368507146835,
+            "component_mass": [
+              0.56494140625,
+              0.337890625,
+              0.0908203125,
+              0.00634765625
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2314,
+              1384,
+              372,
+              26
+            ],
+            "ema": {
+              "sw1_normalized": 0.10028641101050999,
+              "mean_error": 0.1355322152376175,
+              "covariance_error": 0.28362154960632324,
+              "target_scale": 1.7948341369628906,
+              "sample_count": 4096,
+              "mass_tv": 0.05283201485872269,
+              "min_mass_ratio": 0.3173828125,
+              "hq": 0.93798828125,
+              "component_covariance_error": 1.1590303368866444,
+              "component_covariance_errors": [
+                0.197808638215065,
+                0.3303561806678772,
+                1.9210244417190552,
+                2.18693208694458
+              ],
+              "component_min_eigen_ratio": 0.03215548023581505,
+              "component_mass": [
+                0.56494140625,
+                0.337890625,
+                0.0908203125,
+                0.00634765625
+              ],
+              "target_mass": [
+                0.550000011920929,
+                0.30000001192092896,
+                0.12999999523162842,
+                0.019999999552965164
+              ],
+              "component_counts": [
+                2314,
+                1384,
+                372,
+                26
+              ]
+            }
+          },
+          "policy": {
+            "pair_score": 5.480933666229248,
+            "pair_drive": 0.8269778887430826,
+            "data_memory": 0.0,
+            "payoff_error": 0.03401922276057534,
+            "game_trust": 1.0,
+            "game_ratio": 0.6126053525534236,
+            "variant": "dv9",
+            "mobility": 0.1414161905490928,
+            "alignment": 0.3231930302043616,
+            "data_score": 0.9017592668533325,
+            "data_drive": 0.0,
+            "last_cosine": 0.09574183076620102,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": false
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass"
+      },
+      "derived": {
+        "status": "FAIL",
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "failing_steps": [
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.08291431879044855,
+          "mean_error": 0.11145146191120148,
+          "covariance_error": 0.1838809847831726,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.05283201485872269,
+          "min_mass_ratio": 0.3173828125,
+          "hq": 0.99755859375,
+          "component_covariance_error": 1.1702314019203186,
+          "component_covariance_errors": [
+            0.142277792096138,
+            0.16622798144817352,
+            0.23249149322509766,
+            4.139928340911865
+          ],
+          "component_min_eigen_ratio": 0.027236368507146835,
+          "component_mass": [
+            0.56494140625,
+            0.337890625,
+            0.0908203125,
+            0.00634765625
+          ],
+          "target_mass": [
+            0.550000011920929,
+            0.30000001192092896,
+            0.12999999523162842,
+            0.019999999552965164
+          ],
+          "component_counts": [
+            2314,
+            1384,
+            372,
+            26
+          ]
+        },
+        "final_failed_bounds": [
+          {
+            "metric": "component_covariance_error",
+            "actual": 1.1702314019203186,
+            "operator": "<=",
+            "required": 0.85
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "actual": 0.027236368507146835,
+            "operator": ">=",
+            "required": 0.15
+          }
+        ]
+      },
+      "source_audit": {
+        "source_zip_sha256": "0e33d2090893b55e2d863f09e9fab1c078849b5af33bb493f4cb7d6c52b60b0a",
+        "declared_files": 108,
+        "declared_source_exact": true,
+        "all_artifact_hashes_verified": true,
+        "artifact_count": 9,
+        "package_sha256": {
+          "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "3ab57d612273e5e63a60498dbed4b55b1366a041b7423f9803ee19411e52373e",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+          "particlegan/ka2.py": "bccaae71486df56b6206328b10c4a5113847f79eb17356f445b268fc21b16b35",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "a3ced886b23bf9b2ab96523b056162c1a1bb42e38cbf8c39871b0d1a93abe0e3",
+          "particlegan/training.py": "2379a4fb218a228a7b3c289b9ed2ed667a70987e51e969604e556fb6ab0f43a8",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "initialization": {
+        "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_mass/initial-values.pt",
+        "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+        "all_parameter_hashes_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "layers.0.weight",
+              "shape": [
+                96,
+                2
+              ],
+              "sha256": "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f"
+            },
+            {
+              "name": "layers.0.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f"
+            },
+            {
+              "name": "layers.1.weight",
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3"
+            },
+            {
+              "name": "layers.1.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59"
+            },
+            {
+              "name": "layers.2.weight",
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451"
+            },
+            {
+              "name": "layers.2.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820"
+            },
+            {
+              "name": "head.weight",
+              "shape": [
+                1,
+                100
+              ],
+              "sha256": "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d"
+            },
+            {
+              "name": "head.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+            }
+          ]
+        },
+        "ema_matches": {
+          "G": true,
+          "prior": true
+        },
+        "initial_trainer_raw_digest_matches": true
+      },
+      "host_files_identical_to_validated_dv7": {
+        "reports/data-drift-api/vector_gate.py": true,
+        "reports/data-drift-api/frozen_vector_tasks.py": true,
+        "benchmarks/transfer_suite/protocol.py": true,
+        "benchmarks/transfer_suite/public_default_verification.py": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true,
+        "reports/transfer_suite/unadjusted/leading_profile.json": true,
+        "lib/toy_models.py": true,
+        "lib/toy_metrics.py": true,
+        "benchmarks/toy100/models.py": true
+      },
+      "canonical_scorer_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "resource_recipe_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "artifacts": {
+        "evidence/api-dv9-vector_unequal_mass/artifact-sha256.json": {
+          "sha256": "fe455c8641d412f5e3c0fa558fefee2a608e188e0b1816765d4cdb17409b4b00",
+          "original_sha256": "fe455c8641d412f5e3c0fa558fefee2a608e188e0b1816765d4cdb17409b4b00",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv9-vector_unequal_mass/canonical-initialization.json": {
+          "sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original_sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/canonical-initialization.json",
+          "bytes": 2369,
+          "original_bytes": 2369,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv9-vector_unequal_mass/declaration.json": {
+          "sha256": "3e4bc5549ec14f00465893c7a1024f246c96a80fac62f75036bf3823a3c995cd",
+          "original_sha256": "3e4bc5549ec14f00465893c7a1024f246c96a80fac62f75036bf3823a3c995cd",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/declaration.json",
+          "bytes": 22004,
+          "original_bytes": 22004,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv9-vector_unequal_mass/initial.json": {
+          "sha256": "a4cf5dbdb7229c79a4cbe0adf0a5a5fcd9c534c9183cb9faa9b0b83f57e69326",
+          "original_sha256": "a4cf5dbdb7229c79a4cbe0adf0a5a5fcd9c534c9183cb9faa9b0b83f57e69326",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv9-vector_unequal_mass/learning-rates.jsonl.gz": {
+          "sha256": "6347c4a0e2a7da2f9bb98205c47d64c876aeb00994eb35b4d28484b6e7fd2d98",
+          "original_sha256": "bc213344822d7408e6bdee43fd84a36b092ba17076dd10d735d5935a4c798e42",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/learning-rates.jsonl",
+          "bytes": 125022,
+          "original_bytes": 866669,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv9-vector_unequal_mass/metrics.jsonl.gz": {
+          "sha256": "83f23c18fd82c20686ae4f6a733efe537f1a29a9860f946de3a53044a329a161",
+          "original_sha256": "7938fc09fdd1c6b18ba1586140a212cb13323fd62b7c8e666eb7b1fd383aa0a6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/metrics.jsonl",
+          "bytes": 5046,
+          "original_bytes": 31102,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv9-vector_unequal_mass/result.json": {
+          "sha256": "bfeb72b8697c744f7a39dff4a188f706dee5a8a4c67846b62eebc474308bafc3",
+          "original_sha256": "bfeb72b8697c744f7a39dff4a188f706dee5a8a4c67846b62eebc474308bafc3",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/result.json",
+          "bytes": 4691,
+          "original_bytes": 4691,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv9-vector_unequal_mass/source.zip": {
+          "sha256": "0e33d2090893b55e2d863f09e9fab1c078849b5af33bb493f4cb7d6c52b60b0a",
+          "original_sha256": "0e33d2090893b55e2d863f09e9fab1c078849b5af33bb493f4cb7d6c52b60b0a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/source.zip",
+          "bytes": 394345,
+          "original_bytes": 394345,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/final-state.pt",
+          "sha256": "abb608238ee9807b3ed03885988d3c8b0009291d6535c13d2461f5caadbe486b",
+          "bytes": 464923,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv9-vector_unequal_mass/initial-state.pt",
+          "sha256": "8260a46b41e8eca09319932f9d679a5720a1e2e63d35c07762f994590e04dbcb",
+          "bytes": 224316,
+          "verified_against_original_manifest": true
+        }
+      },
+      "scope_note": "Same frozen CUDA host/seed/task/profile/gates; CPU canonical parameter fixture then CUDA data0/latent1/penalty2 and target991/directions992; fixed latent990/output2303 explicit isolated branch. Ordinary actual GANTrainer, no legacy training or external schedule. Trainer-only vector checkpoints omit caller data RNG; this is quality evidence, not exact vector continuation.",
+      "archive_manifest": {
+        "path": "evidence/api-dv9-vector_unequal_mass/archive-manifest.json",
+        "sha256": "9a3461a40718fbe2308e7f13b1d614133f5c0b0e9f5ac763d79bc2d619f168ce"
+      }
+    },
+    {
+      "id": "api-rp5-vector_anisotropic",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic",
+      "recorded_utc": "2026-09-26T23:35:14.849262+00:00",
+      "candidate": "API-RP5",
+      "protocol": "frozen22_vector_anisotropic",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-RP5",
+        "gate": "broader_vector_anisotropic",
+        "status": "PASS",
+        "seconds": 115.18418625695631,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.017903032455342298,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.1620969675446577
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.011881515383720398,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.1381184846162796
+              },
+              {
+                "metric": "hq",
+                "value": 0.9638671875,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.11386718750000002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.13800142208735147,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.7119985779126485
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.550503671169281,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.400503671169281
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 20,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 20,
+              "first_pass_step": 250,
+              "stable_from_step": 250,
+              "stable_from_seconds": null,
+              "confirmed_step": 450,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.375
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.017903032455342298,
+            "mean_error": 0.0052740611135959625,
+            "covariance_error": 0.021669888868927956,
+            "target_scale": 2.040409564971924,
+            "sample_count": 4096,
+            "mass_tv": 0.011881515383720398,
+            "min_mass_ratio": 0.982177734375,
+            "hq": 0.9638671875,
+            "component_covariance_error": 0.13800142208735147,
+            "component_covariance_errors": [
+              0.18640166521072388,
+              0.06281325221061707,
+              0.1647893488407135
+            ],
+            "component_min_eigen_ratio": 0.550503671169281,
+            "component_mass": [
+              0.327392578125,
+              0.327392578125,
+              0.34521484375
+            ],
+            "target_mass": [
+              0.3333333432674408,
+              0.3333333432674408,
+              0.3333333432674408
+            ],
+            "component_counts": [
+              1341,
+              1341,
+              1414
+            ],
+            "ema": {
+              "sw1_normalized": 0.016102814988797745,
+              "mean_error": 0.005848390981554985,
+              "covariance_error": 0.010190652683377266,
+              "target_scale": 2.040409564971924,
+              "sample_count": 4096,
+              "mass_tv": 0.011881515383720398,
+              "min_mass_ratio": 0.982177734375,
+              "hq": 0.97900390625,
+              "component_covariance_error": 0.08267736062407494,
+              "component_covariance_errors": [
+                0.025022130459547043,
+                0.1352461725473404,
+                0.08776377886533737
+              ],
+              "component_min_eigen_ratio": 0.5284708142280579,
+              "component_mass": [
+                0.327392578125,
+                0.327392578125,
+                0.34521484375
+              ],
+              "target_mass": [
+                0.3333333432674408,
+                0.3333333432674408,
+                0.3333333432674408
+              ],
+              "component_counts": [
+                1341,
+                1341,
+                1414
+              ]
+            }
+          },
+          "policy": {
+            "variant": "rp5",
+            "open": false,
+            "gap": 0.000636753742583096,
+            "gap_s": 0.0008409079760934696,
+            "velocity": -2.0621639748521917e-06,
+            "contraction_peak": 3.801445834840425e-05,
+            "contracting": 529,
+            "activity": 0.20352954869864032,
+            "activity_peak": 0.8834264191199762,
+            "quiet_gap": 0.0011186445267192856,
+            "quiet_activity": 0.21799397613891042,
+            "quiet": 0,
+            "shock": 0,
+            "updates": 1200,
+            "openings": 1,
+            "closings": 1,
+            "event": null,
+            "velocity_s": -2.3527016459437394e-06
+          },
+          "updates": 1200
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic"
+      },
+      "derived": {
+        "status": "PASS",
+        "observations": 24,
+        "complete": true,
+        "passing_observations": 20,
+        "passing_suffix": 20,
+        "first_pass_step": 250,
+        "stable_from_step": 250,
+        "failing_steps": [
+          50,
+          100,
+          150,
+          200
+        ],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.017903032455342298,
+          "mean_error": 0.0052740611135959625,
+          "covariance_error": 0.021669888868927956,
+          "target_scale": 2.040409564971924,
+          "sample_count": 4096,
+          "mass_tv": 0.011881515383720398,
+          "min_mass_ratio": 0.982177734375,
+          "hq": 0.9638671875,
+          "component_covariance_error": 0.13800142208735147,
+          "component_covariance_errors": [
+            0.18640166521072388,
+            0.06281325221061707,
+            0.1647893488407135
+          ],
+          "component_min_eigen_ratio": 0.550503671169281,
+          "component_mass": [
+            0.327392578125,
+            0.327392578125,
+            0.34521484375
+          ],
+          "target_mass": [
+            0.3333333432674408,
+            0.3333333432674408,
+            0.3333333432674408
+          ],
+          "component_counts": [
+            1341,
+            1341,
+            1414
+          ]
+        }
+      },
+      "source_and_initialization_audit": {
+        "source_zip_sha256": "4dc9b6d2c695efd3417740585a7fe87548acae577fd0b602d23734a1ed0126af",
+        "source_declaration_hash_mismatches": [],
+        "package_differences": [],
+        "recipe_resource_differences": {
+          "z_dim": [
+            2,
+            4
+          ],
+          "num_particles": [
+            20000,
+            256
+          ],
+          "batch_size": [
+            2048,
+            128
+          ]
+        },
+        "host_function_matches": {
+          "resolve": true,
+          "target_scale": true,
+          "sample_target": true,
+          "score_samples": true,
+          "passes": true
+        },
+        "fixture_path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_anisotropic/initial-values.pt",
+        "fixture_sha256": "25032a4a825b8de3bbbed38e552a47058f257be0849a53bf71dc3afbbbb7db6f",
+        "embedded_fixture_verified": true,
+        "canonical_parameter_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "main.layers.0.weight",
+              "shape": [
+                64,
+                2
+              ],
+              "sha256": "1bcffd178824ae733ba88ee23758436f539d43091cb967f5562a3bb822297347"
+            },
+            {
+              "name": "main.layers.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0fdee845c954b06ee04f40b50ede573e1710e3fcddcc6a7114a2041f56efa945"
+            },
+            {
+              "name": "main.layers.1.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "03917f2fd7498da783b9d98f90fec18a9c367f74018f5b65f7e24dc0e72c8644"
+            },
+            {
+              "name": "main.layers.1.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "2c36054fece87940f815ba007fd40f1699c128fc0fdf79967eda29051959fb10"
+            },
+            {
+              "name": "main.head.weight",
+              "shape": [
+                1,
+                64
+              ],
+              "sha256": "90c6f91ced0819ef1351e67ea33b5e0131ca4604211e94cd4db1cd121f84b157"
+            },
+            {
+              "name": "main.head.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "7e907c4efcf244e7c68e7b7627dcb4dec8ea71b50681e37889d0182c9c900f1c"
+            },
+            {
+              "name": "branch.layers.0.weight",
+              "shape": [
+                32,
+                8
+              ],
+              "sha256": "efb3862da718833dd58f1fcf0236381019cc3e824c3625dcc31eb71ca6da2be9"
+            },
+            {
+              "name": "branch.layers.0.bias",
+              "shape": [
+                32
+              ],
+              "sha256": "0f16c8080032c2331362ec4468f5cc357642bd9cbeb7002684d8430b85c47da8"
+            },
+            {
+              "name": "branch.layers.1.weight",
+              "shape": [
+                32,
+                32
+              ],
+              "sha256": "d8500e4198d16070f0984071603afd3755c8d65ce2a111463a63085158c25d1d"
+            },
+            {
+              "name": "branch.layers.1.bias",
+              "shape": [
+                32
+              ],
+              "sha256": "913c3799ccf2cfe0f20f9aede24e16842b65d942bba20945c16a94ba82ce50b3"
+            },
+            {
+              "name": "branch.head.weight",
+              "shape": [
+                1,
+                32
+              ],
+              "sha256": "c0a84ba17f06929e4cf648cda032c8dad02eb0b0ce99706ca678e8c420f4090f"
+            },
+            {
+              "name": "branch.head.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "33c400aba1b379bfb0a0798d8a8c268561ec8062457a5143787cbb9e52b6d9e1"
+            },
+            {
+              "name": "skip.weight",
+              "shape": [
+                1,
+                2
+              ],
+              "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+            }
+          ]
+        },
+        "buffers": {
+          "G": {},
+          "prior": {},
+          "D": {
+            "frequencies": {
+              "shape": [
+                2
+              ],
+              "sha256": "a4025dcc1a0a0fee0d523f9e5b2d533ab37877cf6eee61215488bcfeaa91b1ed"
+            }
+          }
+        },
+        "initial_ema_matches": {
+          "G": true,
+          "prior": true
+        },
+        "initial_state_sha256": "a4a74e321f24add3bcf0d3f0e0e1243c91f2365908ce83724d48595aa393beab",
+        "harness_sha256": "b0ea88e064520e75cb683a56ada72e5a736d7834a2a611dcaa97e58f1cd60890",
+        "original_artifact_manifest_mismatches": []
+      },
+      "artifacts": {
+        "evidence/api-rp5-vector_anisotropic/artifact-sha256.json": {
+          "sha256": "066e0802005413fbdfd0b12d9e32268b693045a0165c2fe54ce61efbc04bb730",
+          "original_sha256": "066e0802005413fbdfd0b12d9e32268b693045a0165c2fe54ce61efbc04bb730",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/artifact-sha256.json",
+          "bytes": 995,
+          "original_bytes": 995,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp5-vector_anisotropic/canonical-initialization.json": {
+          "sha256": "5ce169b028df47b7c2c71de31841894b2e9331511fe23c82de79cdcaee19cc59",
+          "original_sha256": "5ce169b028df47b7c2c71de31841894b2e9331511fe23c82de79cdcaee19cc59",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/canonical-initialization.json",
+          "bytes": 3214,
+          "original_bytes": 3214,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/declaration.json": {
+          "sha256": "88feba50e1983df69d76b758150851274325bf338b419e0f05c3b1638dee8ce0",
+          "original_sha256": "88feba50e1983df69d76b758150851274325bf338b419e0f05c3b1638dee8ce0",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/declaration.json",
+          "bytes": 22093,
+          "original_bytes": 22093,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/final-state.pt": {
+          "sha256": "3b112bc316da7a38be08dfd8fe6e631c45a1de93694137a1ce695bb770cf5075",
+          "original_sha256": "3b112bc316da7a38be08dfd8fe6e631c45a1de93694137a1ce695bb770cf5075",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/final-state.pt",
+          "bytes": 262415,
+          "original_bytes": 262415,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/initial-state.pt": {
+          "sha256": "a4a74e321f24add3bcf0d3f0e0e1243c91f2365908ce83724d48595aa393beab",
+          "original_sha256": "a4a74e321f24add3bcf0d3f0e0e1243c91f2365908ce83724d48595aa393beab",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/initial-state.pt",
+          "bytes": 258963,
+          "original_bytes": 258963,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/initial.json": {
+          "sha256": "539452d68bb5faea385ea73a9810876bc177ebb496e18532efc90a89da986c20",
+          "original_sha256": "539452d68bb5faea385ea73a9810876bc177ebb496e18532efc90a89da986c20",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/initial.json",
+          "bytes": 766,
+          "original_bytes": 766,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/learning-rates.jsonl.gz": {
+          "sha256": "e2f07f486dd7f8358eafb824a97485437152ec25e3a0335968e73ccead719ae0",
+          "original_sha256": "9fdb825b923f11a6df7e61adbc1ae849c0f28e4177959614dfd9fbeaa6e1b2c3",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/learning-rates.jsonl",
+          "bytes": 238067,
+          "original_bytes": 1386409,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/metrics.jsonl.gz": {
+          "sha256": "1c12d72f0bee77700c5cc0b6604d070204896ca28dbe300a2f70fbca4a301c76",
+          "original_sha256": "802567211042618bcee5f492c93179fe92aea813153de35163d80d0eb343ea39",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/metrics.jsonl",
+          "bytes": 5465,
+          "original_bytes": 31180,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/result.json": {
+          "sha256": "b0d76fb8fd4f75da3bf0dd5f248e447c87f0dacc84e230ebfb633956ce789f59",
+          "original_sha256": "b0d76fb8fd4f75da3bf0dd5f248e447c87f0dacc84e230ebfb633956ce789f59",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/result.json",
+          "bytes": 4409,
+          "original_bytes": 4409,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/retention-assessment.json": {
+          "sha256": "c963a0154d6e653155ad23b4a96bb762281af4bfb378223a08d723bf22c689e3",
+          "original_sha256": "c963a0154d6e653155ad23b4a96bb762281af4bfb378223a08d723bf22c689e3",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/retention-assessment.json",
+          "bytes": 1235,
+          "original_bytes": 1235,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/runtime.json": {
+          "sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+          "original_sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/runtime.json",
+          "bytes": 604,
+          "original_bytes": 604,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_anisotropic/source.zip": {
+          "sha256": "4dc9b6d2c695efd3417740585a7fe87548acae577fd0b602d23734a1ed0126af",
+          "original_sha256": "4dc9b6d2c695efd3417740585a7fe87548acae577fd0b602d23734a1ed0126af",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_anisotropic/source.zip",
+          "bytes": 281746,
+          "original_bytes": 281746,
+          "listed_in_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "scope_note": "Own RP5 public API with canonical initial parameters, frozen CUDA host and explicitly isolated evaluation output seed2303; historical K3P global402 score is not a matched comparator.",
+      "archive_manifest": {
+        "path": "evidence/api-rp5-vector_anisotropic/archive-manifest.json",
+        "sha256": "1ba1113f7a7327626ccffde4d3dc205f91f7ce4cfa90fd63af7a72177c62c49e"
+      }
+    },
+    {
+      "id": "api-rp5-vector_overlap",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap",
+      "recorded_utc": "2026-09-26T23:35:15.031567+00:00",
+      "candidate": "API-RP5",
+      "protocol": "frozen22_vector_overlap",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-RP5",
+        "gate": "broader_vector_overlap",
+        "status": "PASS",
+        "seconds": 81.08202917291783,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.06732194725903196,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.11267805274096804
+              },
+              {
+                "metric": "mean_error",
+                "value": 0.08562331646680832,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.06437668353319168
+              },
+              {
+                "metric": "covariance_error",
+                "value": 0.1186913475394249,
+                "op": "<=",
+                "threshold": 0.45,
+                "status": "PASS",
+                "margin": 0.3313086524605751
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 24,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 24,
+              "first_pass_step": 50,
+              "stable_from_step": 50,
+              "stable_from_seconds": null,
+              "confirmed_step": 250,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.20833333333333334
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.06732194725903196,
+            "mean_error": 0.08562331646680832,
+            "covariance_error": 0.1186913475394249,
+            "target_scale": 0.8509407043457031,
+            "sample_count": 4096,
+            "ema": {
+              "sw1_normalized": 0.037282457656039165,
+              "mean_error": 0.03302428498864174,
+              "covariance_error": 0.09545101225376129,
+              "target_scale": 0.8509407043457031,
+              "sample_count": 4096
+            }
+          },
+          "policy": {
+            "variant": "rp5",
+            "open": true,
+            "gap": 0.0003092036349698901,
+            "gap_s": 0.0006275964558888385,
+            "velocity": -3.216089100191422e-06,
+            "contraction_peak": 1.3333335011847488e-05,
+            "contracting": 47,
+            "activity": 0.38330320675418467,
+            "activity_peak": 0.45956254110076844,
+            "quiet_gap": null,
+            "quiet_activity": null,
+            "quiet": 0,
+            "shock": 0,
+            "updates": 1200,
+            "openings": 1,
+            "closings": 0,
+            "event": null,
+            "velocity_s": -6.90922235613955e-07
+          },
+          "updates": 1200
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap"
+      },
+      "derived": {
+        "status": "PASS",
+        "observations": 24,
+        "complete": true,
+        "passing_observations": 24,
+        "passing_suffix": 24,
+        "first_pass_step": 50,
+        "stable_from_step": 50,
+        "failing_steps": [],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.06732194725903196,
+          "mean_error": 0.08562331646680832,
+          "covariance_error": 0.1186913475394249,
+          "target_scale": 0.8509407043457031,
+          "sample_count": 4096
+        }
+      },
+      "source_and_initialization_audit": {
+        "source_zip_sha256": "0c57d236fe2c2d4bdeb50e98a758b932d1c3653416a757f82bfe72ff7358f4d6",
+        "source_declaration_hash_mismatches": [],
+        "package_differences": [],
+        "recipe_resource_differences": {
+          "z_dim": [
+            2,
+            4
+          ],
+          "num_particles": [
+            20000,
+            256
+          ],
+          "batch_size": [
+            2048,
+            128
+          ]
+        },
+        "host_function_matches": {
+          "resolve": true,
+          "target_scale": true,
+          "sample_target": true,
+          "score_samples": true,
+          "passes": true
+        },
+        "fixture_path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_overlap/initial-values.pt",
+        "fixture_sha256": "4677a19b6a67bee5ad07513985d08d2caa08fb01f33018b88f087b59e5eda905",
+        "embedded_fixture_verified": true,
+        "canonical_parameter_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "main.layers.0.weight",
+              "shape": [
+                96,
+                2
+              ],
+              "sha256": "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f"
+            },
+            {
+              "name": "main.layers.0.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f"
+            },
+            {
+              "name": "main.layers.1.weight",
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3"
+            },
+            {
+              "name": "main.layers.1.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59"
+            },
+            {
+              "name": "main.layers.2.weight",
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451"
+            },
+            {
+              "name": "main.layers.2.bias",
+              "shape": [
+                96
+              ],
+              "sha256": "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820"
+            },
+            {
+              "name": "main.head.weight",
+              "shape": [
+                1,
+                96
+              ],
+              "sha256": "99bad967d07164289caff76516e3b9d8b6fff2089f0d5c513a48a06c3e334873"
+            },
+            {
+              "name": "main.head.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "634845343c7e70ac0ec30575674ecc9474d2c464122bf8aeeaad1416433fd394"
+            }
+          ]
+        },
+        "buffers": {
+          "G": {},
+          "prior": {},
+          "D": {
+            "frequencies": {
+              "shape": [
+                0
+              ],
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        },
+        "initial_ema_matches": {
+          "G": true,
+          "prior": true
+        },
+        "initial_state_sha256": "315b47a2a151da5689f0e40e881743a97a73c9ea5426765eb3872168234830cc",
+        "harness_sha256": "b0ea88e064520e75cb683a56ada72e5a736d7834a2a611dcaa97e58f1cd60890",
+        "original_artifact_manifest_mismatches": []
+      },
+      "artifacts": {
+        "evidence/api-rp5-vector_overlap/artifact-sha256.json": {
+          "sha256": "fd2938d866fc57bf38decca4327285feb395e11ea85188586325d40187711997",
+          "original_sha256": "fd2938d866fc57bf38decca4327285feb395e11ea85188586325d40187711997",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/artifact-sha256.json",
+          "bytes": 995,
+          "original_bytes": 995,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp5-vector_overlap/canonical-initialization.json": {
+          "sha256": "6b2c5407a3d4c20f93de0112eaafff205f743c6d3d2562e4c54c5a11dba58a8b",
+          "original_sha256": "6b2c5407a3d4c20f93de0112eaafff205f743c6d3d2562e4c54c5a11dba58a8b",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/canonical-initialization.json",
+          "bytes": 2452,
+          "original_bytes": 2452,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/declaration.json": {
+          "sha256": "293301eb4754125a3d72debe92c00e3b09a788330575f960c4ac482127d6018f",
+          "original_sha256": "293301eb4754125a3d72debe92c00e3b09a788330575f960c4ac482127d6018f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/declaration.json",
+          "bytes": 20691,
+          "original_bytes": 20691,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/final-state.pt": {
+          "sha256": "dfb43edd8c0c0f5ad09f1ada26739dfbb31d4e45e1d4611c285ac88ddcff8821",
+          "original_sha256": "dfb43edd8c0c0f5ad09f1ada26739dfbb31d4e45e1d4611c285ac88ddcff8821",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/final-state.pt",
+          "bytes": 516825,
+          "original_bytes": 516825,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/initial-state.pt": {
+          "sha256": "315b47a2a151da5689f0e40e881743a97a73c9ea5426765eb3872168234830cc",
+          "original_sha256": "315b47a2a151da5689f0e40e881743a97a73c9ea5426765eb3872168234830cc",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/initial-state.pt",
+          "bytes": 513377,
+          "original_bytes": 513377,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/initial.json": {
+          "sha256": "77ba9e032f8615c9a814a75591b1c00d46df741d46e1554a2fdd8dbc0cf4b01f",
+          "original_sha256": "77ba9e032f8615c9a814a75591b1c00d46df741d46e1554a2fdd8dbc0cf4b01f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/initial.json",
+          "bytes": 766,
+          "original_bytes": 766,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/learning-rates.jsonl.gz": {
+          "sha256": "c78d3f2495d8c5a5d2732cc4ece77bcf225eba902ffe69b4fc9bcda40291847b",
+          "original_sha256": "9d622c56eb7dc57e83747b118e44db9b7c001d44f159db16b630c56371e1b89a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/learning-rates.jsonl",
+          "bytes": 234053,
+          "original_bytes": 1344936,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/metrics.jsonl.gz": {
+          "sha256": "f31d4ab544d1e0224a2fd3dc4bb384bec5e3ad604fb3a0773efc28283e8ab857",
+          "original_sha256": "134bd08864c540dccaf0f0bcd31a35b5482e63a796ec0f3a391f71a0c905f458",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/metrics.jsonl",
+          "bytes": 1827,
+          "original_bytes": 8846,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/result.json": {
+          "sha256": "e0c9dcbc85477bb1729b943e840ef7c828783191bd4f2d3466698873923d5f76",
+          "original_sha256": "e0c9dcbc85477bb1729b943e840ef7c828783191bd4f2d3466698873923d5f76",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/result.json",
+          "bytes": 2594,
+          "original_bytes": 2594,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/retention-assessment.json": {
+          "sha256": "e624b34148f843a461e17a56d556472a967f599d3f33b849ea4004f84ff48080",
+          "original_sha256": "e624b34148f843a461e17a56d556472a967f599d3f33b849ea4004f84ff48080",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/retention-assessment.json",
+          "bytes": 946,
+          "original_bytes": 946,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/runtime.json": {
+          "sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+          "original_sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/runtime.json",
+          "bytes": 604,
+          "original_bytes": 604,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_overlap/source.zip": {
+          "sha256": "0c57d236fe2c2d4bdeb50e98a758b932d1c3653416a757f82bfe72ff7358f4d6",
+          "original_sha256": "0c57d236fe2c2d4bdeb50e98a758b932d1c3653416a757f82bfe72ff7358f4d6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_overlap/source.zip",
+          "bytes": 329965,
+          "original_bytes": 329965,
+          "listed_in_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "scope_note": "Own RP5 public API with canonical initial parameters, frozen CUDA host and explicitly isolated evaluation output seed2303; historical K3P global402 score is not a matched comparator.",
+      "archive_manifest": {
+        "path": "evidence/api-rp5-vector_overlap/archive-manifest.json",
+        "sha256": "7e13f5e799804b9acf34867b64405bfed5c46737542f86fea6c0f36b865c7f98"
+      }
+    },
+    {
+      "id": "api-rp5-vector_spiral",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral",
+      "recorded_utc": "2026-09-26T23:35:15.182182+00:00",
+      "candidate": "API-RP5",
+      "protocol": "frozen22_vector_spiral",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-RP5",
+        "gate": "broader_vector_spiral",
+        "status": "PASS",
+        "seconds": 89.24115637107752,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.023970365855931253,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.15602963414406873
+              },
+              {
+                "metric": "mean_error",
+                "value": 0.004572391975671053,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.14542760802432894
+              },
+              {
+                "metric": "covariance_error",
+                "value": 0.03336593508720398,
+                "op": "<=",
+                "threshold": 0.45,
+                "status": "PASS",
+                "margin": 0.41663406491279603
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 23,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 23,
+              "first_pass_step": 134,
+              "stable_from_step": 134,
+              "stable_from_seconds": null,
+              "confirmed_step": 400,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.25
+          },
+          "final": {
+            "step": 1600,
+            "sw1_normalized": 0.023970365855931253,
+            "mean_error": 0.004572391975671053,
+            "covariance_error": 0.03336593508720398,
+            "target_scale": 1.240945816040039,
+            "sample_count": 4096,
+            "ema": {
+              "sw1_normalized": 0.02351155125771772,
+              "mean_error": 0.01716189831495285,
+              "covariance_error": 0.026715535670518875,
+              "target_scale": 1.240945816040039,
+              "sample_count": 4096
+            }
+          },
+          "policy": {
+            "variant": "rp5",
+            "open": false,
+            "gap": 0.0011304602958261967,
+            "gap_s": 0.0012562387933552138,
+            "velocity": -1.2704898740304935e-06,
+            "contraction_peak": 5.029809264680088e-05,
+            "contracting": 903,
+            "activity": 0.2824138562961724,
+            "activity_peak": 0.6051855755152181,
+            "quiet_gap": 0.00156201956294843,
+            "quiet_activity": 0.3066260388414032,
+            "quiet": 0,
+            "shock": 0,
+            "updates": 1600,
+            "openings": 1,
+            "closings": 1,
+            "event": null,
+            "velocity_s": -1.7462619606834535e-06
+          },
+          "updates": 1600
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral"
+      },
+      "derived": {
+        "status": "PASS",
+        "observations": 24,
+        "complete": true,
+        "passing_observations": 23,
+        "passing_suffix": 23,
+        "first_pass_step": 134,
+        "stable_from_step": 134,
+        "failing_steps": [
+          67
+        ],
+        "final_live": {
+          "step": 1600,
+          "sw1_normalized": 0.023970365855931253,
+          "mean_error": 0.004572391975671053,
+          "covariance_error": 0.03336593508720398,
+          "target_scale": 1.240945816040039,
+          "sample_count": 4096
+        }
+      },
+      "source_and_initialization_audit": {
+        "source_zip_sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6",
+        "source_declaration_hash_mismatches": [],
+        "package_differences": [],
+        "recipe_resource_differences": {
+          "z_dim": [
+            2,
+            4
+          ],
+          "num_particles": [
+            20000,
+            256
+          ],
+          "batch_size": [
+            2048,
+            128
+          ]
+        },
+        "host_function_matches": {
+          "resolve": true,
+          "target_scale": true,
+          "sample_target": true,
+          "score_samples": true,
+          "passes": true
+        },
+        "fixture_path": "/ml2/hypergan/gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991/repo/reports/toy100/a2-qualify/initialization-fixtures/vector_spiral/initial-values.pt",
+        "fixture_sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2",
+        "embedded_fixture_verified": true,
+        "canonical_parameter_match": true,
+        "named_parameter_hashes": {
+          "G": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            }
+          ],
+          "prior": [
+            {
+              "name": "z",
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          "D": [
+            {
+              "name": "net.0.weight",
+              "shape": [
+                64,
+                10
+              ],
+              "sha256": "24562546cfa64edb4fed54efeccfb445aebf69a16831ad22f477d5d7320482a5"
+            },
+            {
+              "name": "net.0.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "28408481bbd153aa1de4db94848ecfbb3749aee6ca43f9a440036386c779aa3a"
+            },
+            {
+              "name": "net.2.weight",
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "b953ce297fe4eaffe0fe11224bd715c6821e0e8bd6687d31c3bae88b05c661e1"
+            },
+            {
+              "name": "net.2.bias",
+              "shape": [
+                64
+              ],
+              "sha256": "cc0bc7ee6b8088e9be662d7b7889cfa79c8f400027b0990b39cf284e7f25fff6"
+            },
+            {
+              "name": "net.4.weight",
+              "shape": [
+                1,
+                64
+              ],
+              "sha256": "d433e146f23d225a7c577d1b392db8658a51e05daa2ab3c415333606c23fe7f1"
+            },
+            {
+              "name": "net.4.bias",
+              "shape": [
+                1
+              ],
+              "sha256": "8dd8efc3155c46f1e02a60324b64216bb77fd6d3ef997905ad3447a755dc059c"
+            }
+          ]
+        },
+        "buffers": {
+          "G": {},
+          "prior": {},
+          "D": {
+            "freqs": {
+              "shape": [
+                2
+              ],
+              "sha256": "a4025dcc1a0a0fee0d523f9e5b2d533ab37877cf6eee61215488bcfeaa91b1ed"
+            }
+          }
+        },
+        "initial_ema_matches": {
+          "G": true,
+          "prior": true
+        },
+        "initial_state_sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+        "harness_sha256": "b0ea88e064520e75cb683a56ada72e5a736d7834a2a611dcaa97e58f1cd60890",
+        "original_artifact_manifest_mismatches": []
+      },
+      "artifacts": {
+        "evidence/api-rp5-vector_spiral/artifact-sha256.json": {
+          "sha256": "c873128b5e3d7f2c41ca6bf52944c70cc0a437cf94c2f1f6fde41ac83749d7e1",
+          "original_sha256": "c873128b5e3d7f2c41ca6bf52944c70cc0a437cf94c2f1f6fde41ac83749d7e1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/artifact-sha256.json",
+          "bytes": 995,
+          "original_bytes": 995,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp5-vector_spiral/canonical-initialization.json": {
+          "sha256": "7b0459206c5de1f7b20bfa4c4bd1276af458023f42e96e814f280f4807e1db1b",
+          "original_sha256": "7b0459206c5de1f7b20bfa4c4bd1276af458023f42e96e814f280f4807e1db1b",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/canonical-initialization.json",
+          "bytes": 2149,
+          "original_bytes": 2149,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/declaration.json": {
+          "sha256": "2fe46ed0fc1cb104953a8d75601543cca47ed2f2158a7bbb75f6318733801b94",
+          "original_sha256": "2fe46ed0fc1cb104953a8d75601543cca47ed2f2158a7bbb75f6318733801b94",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/declaration.json",
+          "bytes": 18458,
+          "original_bytes": 18458,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/final-state.pt": {
+          "sha256": "e631f98e84d1dc2c9c41f7e53080752383a15c89dc881ebf79680cd3687ba621",
+          "original_sha256": "e631f98e84d1dc2c9c41f7e53080752383a15c89dc881ebf79680cd3687ba621",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/final-state.pt",
+          "bytes": 231437,
+          "original_bytes": 231437,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/initial-state.pt": {
+          "sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+          "original_sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/initial-state.pt",
+          "bytes": 227965,
+          "original_bytes": 227965,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/initial.json": {
+          "sha256": "2d97a91b4272ec75572d5f4a44335058fad925b9d924c2c75e34c720b2d5b08f",
+          "original_sha256": "2d97a91b4272ec75572d5f4a44335058fad925b9d924c2c75e34c720b2d5b08f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/initial.json",
+          "bytes": 766,
+          "original_bytes": 766,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/learning-rates.jsonl.gz": {
+          "sha256": "380dede5cfa731fc4f4d1490d98f1609cda1fbe37d6f96eb4bd60d137da77ea5",
+          "original_sha256": "1af7731ef83dc6d9e23582f202c658d8a9477ee119c09ccc1123ad024e6db0d4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/learning-rates.jsonl",
+          "bytes": 310838,
+          "original_bytes": 1816359,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/metrics.jsonl.gz": {
+          "sha256": "a75bf1d3eb52e31f2abc29c589ef5ae4254ca4cfede991a568379f929b046b93",
+          "original_sha256": "fe6a436f917028857d3cd81277f5f1ed1115e929e52d0a0b12f2ae995983651a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/metrics.jsonl",
+          "bytes": 1830,
+          "original_bytes": 8840,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/result.json": {
+          "sha256": "78c20e24071a84358a900adb62a80a710db3d89cfe327a402e2d8dd02c0f7444",
+          "original_sha256": "78c20e24071a84358a900adb62a80a710db3d89cfe327a402e2d8dd02c0f7444",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/result.json",
+          "bytes": 2615,
+          "original_bytes": 2615,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/retention-assessment.json": {
+          "sha256": "d90112da62faa3ef40c0f9725d627597eb4624edcb5cde89705690cfde659a70",
+          "original_sha256": "d90112da62faa3ef40c0f9725d627597eb4624edcb5cde89705690cfde659a70",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/retention-assessment.json",
+          "bytes": 1013,
+          "original_bytes": 1013,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/runtime.json": {
+          "sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+          "original_sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/runtime.json",
+          "bytes": 604,
+          "original_bytes": 604,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp5-vector_spiral/source.zip": {
+          "sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6",
+          "original_sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_spiral/source.zip",
+          "bytes": 278030,
+          "original_bytes": 278030,
+          "listed_in_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "scope_note": "Own RP5 public API with canonical initial parameters, frozen CUDA host and explicitly isolated evaluation output seed2303; historical K3P global402 score is not a matched comparator.",
+      "archive_manifest": {
+        "path": "evidence/api-rp5-vector_spiral/archive-manifest.json",
+        "sha256": "cfd72947bfcea2e452e47ac84c6217ad1c68ddfa0199da1d3a1e935456910854"
+      }
+    },
+    {
+      "id": "api-c10-img_intensity2",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo",
+      "recorded_utc": "2026-09-26T23:37:21.264282+00:00",
+      "candidate": "API-C10",
+      "protocol": "frozen22_img_intensity2",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAIL",
+      "result": {
+        "candidate": "API-C10",
+        "gate": "broader_img_intensity2",
+        "status": "FAIL",
+        "seconds": 27.993769865017384,
+        "metrics": {
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 4,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 1,
+            "first_pass_step": 475,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "final": {
+            "step": 600,
+            "modes": 2,
+            "hq": 0.96875,
+            "mean_rmse": 0.0372871495783329,
+            "quality_mode_fractions": [
+              0.5,
+              0.46875
+            ],
+            "mode_fractions": [
+              0.53125,
+              0.46875
+            ],
+            "distribution_tv": 0.03125,
+            "ema": {
+              "modes": 2,
+              "hq": 0.84375,
+              "mean_rmse": 0.04469072073698044,
+              "quality_mode_fractions": [
+                0.4375,
+                0.40625
+              ],
+              "mode_fractions": [
+                0.53125,
+                0.46875
+              ],
+              "distribution_tv": 0.03125
+            }
+          },
+          "policy": {
+            "anchor_min_decay": 0.9,
+            "lr_max": 0.00425,
+            "lr_last": 0.00425,
+            "anchor_started": false,
+            "calls": 600,
+            "observed_steps": 600,
+            "last_sur": 1.1241748332977295,
+            "sur_hist": [],
+            "sur_base": null,
+            "w": 1.0,
+            "low_streak": 0,
+            "alpha": 0.1,
+            "last_ratio": null,
+            "ema_updates": 0,
+            "ema_skips": 0,
+            "ema_reseeds": 0,
+            "formulation": "ka2_fresh"
+          },
+          "game": {
+            "policy": "balanced_secant",
+            "field_evaluations": 2,
+            "accepted_updates": 600,
+            "preview_moments_discarded": false,
+            "secant": {
+              "radial_secant": -2.8147428035736084,
+              "rotation_squared": 10.633003234863281,
+              "denominator": 25.185264587402344,
+              "norm_ratio": 0.19926303625106812,
+              "moment_source": "base_gradient",
+              "role_scales": {
+                "D": 0.1736488938331604,
+                "G": 0.4699549674987793,
+                "prior": 0.2430340051651001
+              },
+              "metric": "equal_native_role_energy"
+            },
+            "d": {
+              "preview_l2": 0.1736488938331604,
+              "applied_l2": 0.035965919494628906,
+              "correction_l2": 0.15889890491962433
+            },
+            "g": {
+              "preview_l2": 0.5290777087211609,
+              "applied_l2": 0.09446588158607483,
+              "correction_l2": 0.4459535479545593
+            }
+          },
+          "updates": 600,
+          "effective_recipe": {
+            "name": "ka2",
+            "model": "gan",
+            "z_dim": 8,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "num_classes": null,
+            "conditioning": "scalar",
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "batch_size": 32,
+            "game_update": "balanced_secant",
+            "optimistic_updates": false,
+            "bounded_updates": false,
+            "continuous": true,
+            "critic_memory": "fresh",
+            "startup_input_steps": 360,
+            "startup_output_steps": 720,
+            "total_steps": 7000,
+            "lr": 0.00425,
+            "d_lr_mult": 1.0,
+            "prior_lr_mult": 2.0,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "prior_betas": null,
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_every": 1,
+            "prior_reg": 0.0,
+            "ema_decay": 0.995,
+            "lr_anneal_start": 0.6,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "network_lr_horizon_cap": 1600,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "direct_particle_gain": true,
+            "d_guard_ratio": 5.0,
+            "d_guard_min_steps": 200,
+            "latent_damping_max_rate": 0.5,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "input_noise_std": 0.5,
+            "input_noise_anneal_end": 0.1,
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.2,
+            "encoder_mode": "none",
+            "routing_temperature": 0.25,
+            "distance_reduction": "sum",
+            "observation_sigma": 0.03,
+            "reconstruction_weight": 1.0
+          },
+          "optimizer_classes": [
+            "K3PGeneratorAdam",
+            "KA2CriticAdam"
+          ],
+          "controller_class": "FreshKA2StepRecord"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2"
+      },
+      "derived": {
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 4,
+          "passing_suffix": 1,
+          "first_pass_step": 475,
+          "stable_from_step": null,
+          "minimum_stable_checks": 5
+        },
+        "passing_steps": [
+          475,
+          500,
+          525,
+          600
+        ],
+        "failing_steps": [
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          550,
+          575
+        ],
+        "final_live": {
+          "step": 600,
+          "modes": 2,
+          "hq": 0.96875,
+          "mean_rmse": 0.0372871495783329,
+          "quality_mode_fractions": [
+            0.5,
+            0.46875
+          ],
+          "mode_fractions": [
+            0.53125,
+            0.46875
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "verification": {
+        "source_zip_sha256": "84793b51aa3fdbb8dcad34603111821774ad7da6e8a53041ef7dee65f7b8616e",
+        "source_count": 25,
+        "declaration_hash_mismatches": [],
+        "missing_declared_files": [],
+        "package_sha256": {
+          "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/game_update.py": "477b6a30c1e6d6b88e40920bed69019fe94c47b9513a4dfe2ed868604278f351",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "02db7ad69102e6cb17250f34ff0ff2e5e8a77211997eb882175c16ee942bcd1a",
+          "particlegan/ka2.py": "888bb119becf6389320f1a30ef771d236c749dceab914ec087b61cb0303cd701",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "a842c11de7dad9f80f2ec1d36bb2911ba4cf94ef3f746ee6f970ba27733ce7c1",
+          "particlegan/training.py": "e41fff0060ba9f7ef0c3264eb4b6dfd990b9fec3133b619e8de3d0fbfeb34ddc",
+          "particlegan/update_limit.py": "8c3434130f8f0a7a805f58acdf9ea470cd7f9e39770c0bff71fa67cf132efee2",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "package_differences_from_single": [],
+        "frozen_image_helper_differences": [],
+        "measure_function_ast_equal_to_audited_C9": true,
+        "artifact_hash_mismatches": [],
+        "reported_initial_models_and_data_rng_match_C9": {
+          "models": true,
+          "global_data_rng": true
+        },
+        "runtime": {
+          "torch": "2.13.0+cu126",
+          "cuda_version": "12.6",
+          "device": "NVIDIA RTX A6000",
+          "cuda_visible_devices": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "fp32": true,
+          "deterministic_algorithms": true,
+          "tf32_matmul": false,
+          "tf32_cudnn": false,
+          "threads": 1,
+          "serial_backward": true
+        }
+      },
+      "rate_audit": {
+        "updates": 600,
+        "rate_ranges": {
+          "generator_0": [
+            0.00425,
+            0.00425
+          ],
+          "critic_0": [
+            0.00425,
+            0.00425
+          ],
+          "prior_1": [
+            0.0085,
+            0.0085
+          ]
+        },
+        "controller_and_accepted_counts_exact": true,
+        "reference_counts_exact": true,
+        "mean_field_evaluations": 2,
+        "field_evaluations_range": [
+          2,
+          2
+        ],
+        "last500_mean_accepted_l2": {
+          "G": 0.07768259699735791,
+          "D": 0.05935955387935974,
+          "prior": 0.03651755225029774
+        }
+      },
+      "artifacts": {
+        "evidence/api-c10-img_intensity2/artifact-sha256.json": {
+          "sha256": "f9815a9d75d0abd94ccb91d146b3ffa312f462db895afeb9745be5dc5699c4fe",
+          "original_sha256": "f9815a9d75d0abd94ccb91d146b3ffa312f462db895afeb9745be5dc5699c4fe",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/artifact-sha256.json",
+          "bytes": 707,
+          "original_bytes": 707,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-c10-img_intensity2/declaration.json": {
+          "sha256": "e7eff95971288f02c93bc067b426232d5bcb611b798eef763050cce057b18ac8",
+          "original_sha256": "e7eff95971288f02c93bc067b426232d5bcb611b798eef763050cce057b18ac8",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/declaration.json",
+          "bytes": 6538,
+          "original_bytes": 6538,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c10-img_intensity2/initial.json": {
+          "sha256": "85dc840c761800b451d32349d4f57a6d49ebe18da5d6b776f50b48a6b1947db1",
+          "original_sha256": "85dc840c761800b451d32349d4f57a6d49ebe18da5d6b776f50b48a6b1947db1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c10-img_intensity2/learning-rates.jsonl.gz": {
+          "sha256": "d9c7e23434ac19b84887d7d788b75c358bc449c159bb6b43b3238a1c5a6d97fe",
+          "original_sha256": "535939ce4df44634d012ebb4dd3736883d9a0d3ccbfd8fef9ce285fd50fa05eb",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/learning-rates.jsonl",
+          "bytes": 142948,
+          "original_bytes": 847102,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c10-img_intensity2/metrics.jsonl.gz": {
+          "sha256": "24bbeba08bf2f08eaf0c8e04557a6dc37de4ce155c37e58df5490b7b72f839e6",
+          "original_sha256": "6cea66f9501200625261e482d3b749ac2b001ee84ef52ae33699fae3479569e8",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/metrics.jsonl",
+          "bytes": 1213,
+          "original_bytes": 8471,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c10-img_intensity2/result.json": {
+          "sha256": "cfe9d53dd5544398aed120dec0f4ac54089c03788ccc9b18dd6f55d92acb0f0f",
+          "original_sha256": "cfe9d53dd5544398aed120dec0f4ac54089c03788ccc9b18dd6f55d92acb0f0f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/result.json",
+          "bytes": 4435,
+          "original_bytes": 4435,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c10-img_intensity2/source.zip": {
+          "sha256": "84793b51aa3fdbb8dcad34603111821774ad7da6e8a53041ef7dee65f7b8616e",
+          "original_sha256": "84793b51aa3fdbb8dcad34603111821774ad7da6e8a53041ef7dee65f7b8616e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/source.zip",
+          "bytes": 84595,
+          "original_bytes": 84595,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/final-state.pt",
+          "sha256": "4f4d4e745bf09bf47a527e1d08ede36536a8a7d37b623bd207d574867c288f6d",
+          "bytes": 204301,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2/initial-state.pt",
+          "sha256": "3f8693f417bfa741d6e68327f62a05d6f49afa6e8b4f9b7d66e6acdd3303e658",
+          "bytes": 107254,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "scope_note": "Own C10 image failure:4/24 passes and final suffix1<5 despite finalHQ.96875. No mature-anchor or longer stability result:600 updates precede first blended penalty800.",
+      "archive_manifest": {
+        "path": "evidence/api-c10-img_intensity2/archive-manifest.json",
+        "sha256": "eec2a1e77159489a04d5c8e1bf02b928a490b21b7cc4b370f9a0382adcac74db"
+      }
     }
   ]
 }
