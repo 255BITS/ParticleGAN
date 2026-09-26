@@ -1,0 +1,327 @@
+{
+  "broader_entry": {
+    "id": "api-dv7-img_stripes2",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2",
+    "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+    "recorded_utc": "2026-09-26T23:06:58.145175+00:00",
+    "candidate": "API-DV7",
+    "protocol": "frozen22_img_stripes2",
+    "scope": "PUBLIC_API",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-DV7",
+      "gate": "broader_img_stripes2",
+      "status": "PASS",
+      "seconds": 7.838689165888354,
+      "metrics": {
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 50,
+          "stable_from_step": 50,
+          "stable_from_seconds": null,
+          "confirmed_step": 150,
+          "confirmed_seconds": null
+        },
+        "final": {
+          "step": 600,
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.028355048969388008,
+          "quality_mode_fractions": [
+            0.4375,
+            0.5625
+          ],
+          "mode_fractions": [
+            0.4375,
+            0.5625
+          ],
+          "distribution_tv": 0.0625,
+          "ema": {
+            "modes": 2,
+            "hq": 1.0,
+            "mean_rmse": 0.028496161103248596,
+            "quality_mode_fractions": [
+              0.4375,
+              0.5625
+            ],
+            "mode_fractions": [
+              0.4375,
+              0.5625
+            ],
+            "distribution_tv": 0.0625
+          }
+        },
+        "critic_memory": {
+          "anchor_min_decay": 0.9,
+          "lr_max": 0.0042289625,
+          "lr_last": 0.00026787249749273646,
+          "anchor_started": false,
+          "calls": 600,
+          "observed_steps": 600,
+          "last_sur": 0.7861910462379456,
+          "sur_hist": [],
+          "sur_base": null,
+          "w": 1.0,
+          "low_streak": 0,
+          "alpha": 0.0,
+          "last_ratio": null,
+          "ema_updates": 0,
+          "ema_skips": 0,
+          "ema_reseeds": 0,
+          "formulation": "ka2"
+        },
+        "policy": {
+          "data_memory": 0.0,
+          "payoff_error": 0.04258203218902659,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "variant": "dv7",
+          "mobility": 0.05368073065440308,
+          "alignment": 0.645595889826672,
+          "data_score": 0.9786350727081299,
+          "data_drive": 0.0,
+          "last_cosine": 0.6071188449859619,
+          "updates": 600,
+          "reopens": 0,
+          "closed": true
+        },
+        "updates": 600,
+        "effective_recipe": {
+          "name": "ka2",
+          "model": "gan",
+          "z_dim": 8,
+          "num_particles": 32,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 32,
+          "total_steps": null,
+          "continuous_policy": "dv7",
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "prior_reg": 0.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "direct_particle_gain": true,
+          "d_guard_ratio": 5.0,
+          "d_guard_min_steps": 200,
+          "latent_damping_max_rate": 0.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "input_noise_std": 0.0,
+          "input_noise_anneal_end": 0.1,
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.0,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizer_classes": [
+          "K3PGeneratorAdam",
+          "KA2CriticAdam"
+        ],
+        "controller_class": "DataDriftController"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2"
+    },
+    "derived": {
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 23,
+        "passing_suffix": 23,
+        "first_pass_step": 50,
+        "stable_from_step": 50,
+        "minimum_stable_checks": 5
+      },
+      "failing_steps": [
+        25
+      ],
+      "final_live": {
+        "step": 600,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.028355048969388008,
+        "quality_mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "distribution_tv": 0.0625
+      }
+    },
+    "verification": {
+      "source_zip_sha256": "ad0fc385e096dca7db00b8f954f9aab6a91aa166239f2f23fb0415ffe198de7a",
+      "source_count": 52,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "8c40edf140ed170d249392711dc34d35de73a5ad92193265f9b3350688690b51",
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device": "NVIDIA RTX A6000",
+        "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "deterministic_algorithms": true,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "threads": 1,
+        "serial_backward": true
+      }
+    },
+    "recipe_resource_differences": {
+      "z_dim": [
+        2,
+        8
+      ],
+      "num_particles": [
+        20000,
+        32
+      ],
+      "batch_size": [
+        2048,
+        32
+      ]
+    },
+    "rate_audit": {
+      "updates": 600,
+      "max_relative_error_against_declared_recurrence": 2.1413332952185672e-16,
+      "minimum_critic_to_generator_rate": 0.8552055369242254,
+      "ranges": {
+        "generator_0": [
+          0.000268361674228401,
+          0.0042289625
+        ],
+        "prior_1": [
+          0.0008584719000343051,
+          0.008459625
+        ],
+        "critic_0": [
+          0.00026787249749273646,
+          0.0042289625
+        ]
+      }
+    },
+    "artifacts": {
+      "evidence/api-dv7-img_stripes2/artifact-sha256.json": {
+        "sha256": "e2783e79956a38ab53370b97a26d574a3ffebfa6a9f244107aa60a36a8496fe6",
+        "original_sha256": "e2783e79956a38ab53370b97a26d574a3ffebfa6a9f244107aa60a36a8496fe6",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/artifact-sha256.json",
+        "bytes": 707,
+        "original_bytes": 707,
+        "listed_in_original_manifest": false
+      },
+      "evidence/api-dv7-img_stripes2/declaration.json": {
+        "sha256": "226ef4211f06071a29040adf42d75628d8c3c5618f7fd9dad997d0bb9c578bdf",
+        "original_sha256": "226ef4211f06071a29040adf42d75628d8c3c5618f7fd9dad997d0bb9c578bdf",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/declaration.json",
+        "bytes": 9493,
+        "original_bytes": 9493,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-img_stripes2/initial.json": {
+        "sha256": "ff7b5d12974a7dce33d8cce742e0b3eed6bb786047085d54454565d707db4748",
+        "original_sha256": "ff7b5d12974a7dce33d8cce742e0b3eed6bb786047085d54454565d707db4748",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/initial.json",
+        "bytes": 592,
+        "original_bytes": 592,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-img_stripes2/learning-rates.jsonl.gz": {
+        "sha256": "8982751c36e9b30b62cbcc12aff9f4cbf167ac86f15faeb21bba4453635af5b5",
+        "original_sha256": "5308fe572c108a2d5a5902d4b136282d89b852ee3395e3148b0cd07fd75617ce",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/learning-rates.jsonl",
+        "bytes": 110294,
+        "original_bytes": 656618,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-img_stripes2/metrics.jsonl.gz": {
+        "sha256": "d7285959c17534779fe716e329a1ac00173f7558552dbc858297b461b8383677",
+        "original_sha256": "bd4e1ab7a38990da358dd219aa800cfe78a328e7ef55da084db095aeeead89a0",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/metrics.jsonl",
+        "bytes": 922,
+        "original_bytes": 8424,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-img_stripes2/result.json": {
+        "sha256": "31b9be8249c474524a5bf04d461550c10e3b0864c92e7931ae359cf14d7e71b9",
+        "original_sha256": "31b9be8249c474524a5bf04d461550c10e3b0864c92e7931ae359cf14d7e71b9",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/result.json",
+        "bytes": 3744,
+        "original_bytes": 3744,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-dv7-img_stripes2/source.zip": {
+        "sha256": "ad0fc385e096dca7db00b8f954f9aab6a91aa166239f2f23fb0415ffe198de7a",
+        "original_sha256": "ad0fc385e096dca7db00b8f954f9aab6a91aa166239f2f23fb0415ffe198de7a",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/source.zip",
+        "bytes": 159566,
+        "original_bytes": 159566,
+        "listed_in_original_manifest": true
+      }
+    },
+    "external_checkpoints": {
+      "final-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/final-state.pt",
+        "sha256": "e8d5bfda9e3d2bd13098db406ebeec6e45b904356cf146a21e906f8f56376423",
+        "bytes": 241559,
+        "verified_against_original_manifest": true
+      },
+      "initial-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo/reports/data-drift-api/runs/dv7-img_stripes2/initial-state.pt",
+        "sha256": "8c40edf140ed170d249392711dc34d35de73a5ad92193265f9b3350688690b51",
+        "bytes": 107702,
+        "verified_against_original_manifest": true
+      }
+    },
+    "supplementary_files": [],
+    "scope_note": "Own DV7 image evidence under fixed isolated402+step+1901 evaluation; all600 updates remain within799-call KA2 bootstrap. No mature-anchor/long22/K3P claim."
+  },
+  "jsonl_lossless": true,
+  "checkpoints_retained_externally_with_hashes": true
+}

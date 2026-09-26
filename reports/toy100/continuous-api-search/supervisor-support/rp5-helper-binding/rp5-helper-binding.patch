@@ -1,0 +1,205 @@
+diff --git a/particlegan/__init__.py b/particlegan/__init__.py
+--- a/particlegan/__init__.py
++++ b/particlegan/__init__.py
+@@ -8,6 +8,7 @@
+ from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
+ from .gan_loss import GANLoss
+ from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
++from .precision import ReversiblePrecision
+ from .recipes import (
+     NetworkLRTransition,
+     Recipe,
+@@ -23,6 +24,6 @@
+     "ParticleEncoding", "particle_ae", "particle_vae",
+     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
+     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
+-    "Recipe", "NetworkLRTransition", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
++    "Recipe", "NetworkLRTransition", "ReversiblePrecision", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
+     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
+ ]
+diff --git a/particlegan/recipes.py b/particlegan/recipes.py
+--- a/particlegan/recipes.py
++++ b/particlegan/recipes.py
+@@ -447,7 +447,7 @@
+         self.start_step = restored.start_step
+ 
+ 
+-def learning_rate_scales(step, recipe, *, network_transition=None):
++def learning_rate_scales(step, recipe, *, network_transition=None, precision=None):
+     """Return ``(network, prior)`` LR multipliers after ``step`` completed updates.
+ 
+     Generator and critic ("network") follow ``learning_rate_scale`` over
+@@ -455,8 +455,26 @@
+     and then hold; the particle prior follows it over the full budget down to
+     ``lr_floor``. When ``network_transition`` is supplied, G/D instead hold at
+     full LR until its caller-marked plateau, then decay over its ``decay_steps``.
++    A continuous-precision recipe requires its matching ``ReversiblePrecision``
++    controller (for example ``precision=trainer.precision``). Its current scales
++    are returned without advancing it; ``step`` and finite schedules are unused.
++    ``network_transition`` cannot be combined with continuous precision.
+     KA2's critic controller is independent of these multipliers.
+     """
++    if recipe.continuous_precision is not None:
++        from .precision import ReversiblePrecision
++        if network_transition is not None:
++            raise ValueError("continuous precision cannot use network_transition")
++        if precision is None:
++            raise ValueError("continuous precision requires a matching ReversiblePrecision; "
++                             "pass precision=trainer.precision")
++        if not isinstance(precision, ReversiblePrecision):
++            raise TypeError("precision must be a ReversiblePrecision controller")
++        if precision.state["variant"] != recipe.continuous_precision:
++            raise ValueError("precision controller variant does not match recipe")
++        return precision.scales()
++    if precision is not None:
++        raise ValueError("precision controller requires a continuous-precision recipe")
+     total = recipe.total_steps
+     if network_transition is None:
+         horizon = min(total, recipe.network_lr_horizon_cap or total)
+@@ -472,7 +490,8 @@
+     return network, prior
+ 
+ 
+-def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, network_transition=None):
++def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *,
++                         network_transition=None, precision=None):
+     """Set every group's LR from ``learning_rate_scales(step, recipe)``.
+ 
+     ``base_rates`` holds each optimizer's unscaled group LRs (read them once
+@@ -481,9 +500,11 @@
+     loop follows the recipe's split network/prior schedules.
+     Pass a ``NetworkLRTransition`` to choose the network decay from validation
+     while retaining the ordinary prior schedule. Returns ``(network, prior)``
+-    multipliers.
++    multipliers. Continuous-precision recipes instead require their matching
++    ``precision`` controller; this helper reads its scales without advancing it.
+     """
+-    network, prior_scale = learning_rate_scales(step, recipe, network_transition=network_transition)
++    network, prior_scale = learning_rate_scales(
++        step, recipe, network_transition=network_transition, precision=precision)
+     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
+     for optimizer, rates in zip(optimizers, base_rates):
+         for group, rate in zip(optimizer.param_groups, rates):
+diff --git a/tests/test_precision_lr_helpers.py b/tests/test_precision_lr_helpers.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_precision_lr_helpers.py
+@@ -0,0 +1,118 @@
++"""Public LR contracts only: no forwards, gradients or optimizer updates."""
++from copy import deepcopy
++from pathlib import Path
++
++import pytest
++import torch
++from torch import nn
++
++import particlegan
++from particlegan import (
++    GANTrainer, NetworkLRTransition, ReversiblePrecision, get_recipe,
++    learning_rate_scales, scale_learning_rates,
++)
++
++
++def continuous_recipe(**overrides):
++    return get_recipe(**dict(total_steps=None, continuous_precision="rp5",
++                             game_update="secant_resolvent", adam_eager_state=True,
++                             num_particles=8, z_dim=2, **overrides))
++
++
++def optimizer_fixture():
++    generator, critic, prior = nn.Linear(2, 2), nn.Linear(2, 1), nn.Embedding(8, 2)
++    opt_g = torch.optim.Adam([
++        {"params": generator.parameters(), "lr": .00425},
++        {"params": prior.parameters(), "lr": .0085},
++    ])
++    opt_d = torch.optim.Adam(critic.parameters(), lr=.00425)
++    return (opt_g, opt_d), [[.00425, .0085], [.00425]], prior
++
++
++def rates(optimizers):
++    return [[g["lr"] for g in opt.param_groups] for opt in optimizers]
++
++
++def test_tests_use_the_scratch_package():
++    assert Path(particlegan.__file__).resolve().parent == Path(__file__).resolve().parents[1] / "particlegan"
++
++
++@pytest.mark.parametrize("opened,expected", [(True, (1., 1.)), (False, (.01, .05))])
++def test_helpers_read_the_trainer_controller_at_any_age_without_advancing(opened, expected):
++    trainer = GANTrainer(continuous_recipe(), nn.Linear(2, 2), nn.Linear(2, 1),
++                         serial_backward=True, optimizer_options={"foreach": False, "fused": False})
++    trainer.precision.state["open"] = opened
++    before = deepcopy(trainer.precision.state)
++    reference = {k: v.clone() for k, v in trainer.precision.reference.state_dict().items()}
++    for age in (0, 720, 7000, 30000, 10**9):
++        assert learning_rate_scales(age, trainer.recipe, precision=trainer.precision) == expected
++        assert expected == trainer.precision.scales()
++    assert trainer.precision.state == before
++    assert all(torch.equal(v, trainer.precision.reference.state_dict()[k]) for k, v in reference.items())
++    assert trainer.completed_steps == 0
++
++
++def test_inactive_finite_schedule_fields_do_not_change_continuous_scales():
++    controller = ReversiblePrecision(nn.Linear(2, 1), variant="rp5")
++    controller.state["open"] = False
++    for recipe in (continuous_recipe(), continuous_recipe(
++            lr_anneal_start=.1, lr_floor=.9, network_lr_floor=.8, network_lr_horizon_cap=2)):
++        assert learning_rate_scales(10**9, recipe, precision=controller) == (.01, .05)
++
++
++def test_rate_application_splits_roles_without_compounding_and_can_reopen():
++    recipe = continuous_recipe()
++    controller = ReversiblePrecision(nn.Linear(2, 1), variant="rp5")
++    optimizers, base, prior = optimizer_fixture()
++    controller.state["open"] = False
++    for age in (500, 501):
++        assert scale_learning_rates(age, recipe, optimizers, base, prior, precision=controller) == (.01, .05)
++        assert rates(optimizers) == [[.00425 * .01, .0085 * .05], [.00425 * .01]]
++    controller.state["open"] = True
++    scale_learning_rates(502, recipe, optimizers, base, prior, precision=controller)
++    assert rates(optimizers) == base
++    assert all(not opt.state for opt in optimizers)
++
++
++@pytest.mark.parametrize("controller,error,message", [
++    (None, ValueError, "requires a matching ReversiblePrecision"),
++    (object(), TypeError, "must be a ReversiblePrecision"),
++    ("rp1", ValueError, "variant does not match"),
++    ("rp4", ValueError, "variant does not match"),
++])
++def test_invalid_controller_rejected_before_optimizer_mutation(controller, error, message):
++    if isinstance(controller, str):
++        controller = ReversiblePrecision(nn.Linear(2, 1), variant=controller)
++    recipe = continuous_recipe()
++    optimizers, base, prior = optimizer_fixture()
++    before = rates(optimizers)
++    with pytest.raises(error, match=message):
++        learning_rate_scales(123, recipe, precision=controller)
++    with pytest.raises(error, match=message):
++        scale_learning_rates(123, recipe, optimizers, base, prior, precision=controller)
++    assert rates(optimizers) == before
++
++
++def test_controller_and_caller_transition_cannot_select_two_schedules():
++    controller = ReversiblePrecision(nn.Linear(2, 1), variant="rp5")
++    transition = NetworkLRTransition(4, start_step=8)
++    optimizers, base, prior = optimizer_fixture()
++    with pytest.raises(ValueError, match="cannot use network_transition"):
++        scale_learning_rates(12, continuous_recipe(), optimizers, base, prior,
++                             precision=controller, network_transition=transition)
++    assert rates(optimizers) == base
++    with pytest.raises(ValueError, match="requires a continuous-precision recipe"):
++        learning_rate_scales(12, get_recipe(total_steps=20), precision=controller)
++
++
++@pytest.mark.parametrize("age,expected", [
++    (0, (1., 1.)), (10, (.2, 1.)), (15, (.2, .55)), (20, (.2, .1)), (50, (.2, .1)),
++])
++def test_finite_recipe_closed_form_behavior_and_group_application_are_unchanged(age, expected):
++    recipe = get_recipe(total_steps=20, network_lr_horizon_cap=10,
++                        network_lr_floor=.2, lr_floor=.1, lr_anneal_start=.5)
++    assert learning_rate_scales(age, recipe) == pytest.approx(expected)
++    optimizers, base, prior = optimizer_fixture()
++    assert scale_learning_rates(age, recipe, optimizers, base, prior) == pytest.approx(expected)
++    assert rates(optimizers)[0] == pytest.approx([.00425 * expected[0], .0085 * expected[1]])
++    assert rates(optimizers)[1] == pytest.approx([.00425 * expected[0]])

@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "scope": "Three tiny CPU observations of frozen and proposed default paths; no training or optimizer steps",
+  "torch": "2.13.0+cu126",
+  "python": "3.12.13",
+  "baseline_precision_sha256": "07443f3c6ab9e5f4afae492ea0a718f3be8698c0423ac2adbb63c2eae7a7e50d",
+  "observations": [
+    {
+      "observation": 1,
+      "aten_operations": 44,
+      "operation_names_and_output_bytes_equal": true,
+      "full_controller_and_reference_state_equal": true,
+      "trace_sha256": "ffc0922c4d336815a3e5645ddeb105cadc7635edf5cb5cbdfecf54fcc7945259"
+    },
+    {
+      "observation": 2,
+      "aten_operations": 44,
+      "operation_names_and_output_bytes_equal": true,
+      "full_controller_and_reference_state_equal": true,
+      "trace_sha256": "54e334ad0bb9921f527687ae7c314ec7bbb23edb786db6b229b87e7d5fe58a6d"
+    },
+    {
+      "observation": 3,
+      "aten_operations": 44,
+      "operation_names_and_output_bytes_equal": true,
+      "full_controller_and_reference_state_equal": true,
+      "trace_sha256": "8355b99dbeaa324244983c84d056346e63dfd38991202669ce1b806ffb9d41ce"
+    }
+  ]
+}

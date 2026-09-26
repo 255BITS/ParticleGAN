@@ -1,0 +1,98 @@
+{
+  "acquisition": {
+    "start": 0,
+    "end": 7500,
+    "first_arrival": 640,
+    "arrival_delay": 640,
+    "passing_since_arrival": 687,
+    "checks_since_arrival": 687,
+    "every_departure": [],
+    "min_hq_since_arrival": 0.921630859375,
+    "min_modes_since_arrival": 8,
+    "min_hq_all": 0.00390625,
+    "final_stable_suffix_checks": 687,
+    "final_stable_suffix_start": 640,
+    "final_stable_suffix_span": 6860,
+    "final": {
+      "step": 7500,
+      "modes": 8,
+      "hq": 0.974365234375
+    }
+  },
+  "retention": {
+    "passing": 630,
+    "total": 630,
+    "min_hq": 0.9697265625,
+    "failing_steps": []
+  },
+  "transitions": [],
+  "comparison_3600": null,
+  "frozen": {
+    "passing": 0,
+    "total": 0
+  },
+  "policy_ranges": {
+    "mobility": [
+      0.025534458869328903,
+      0.9999992237899609
+    ],
+    "alignment": [
+      -0.9586571694592408,
+      0.5564856262877852
+    ],
+    "data_score": [
+      0.0,
+      2.649094820022583
+    ],
+    "data_drive": [
+      0.0,
+      0.0
+    ]
+  },
+  "final_policy": {
+    "data_memory": 0.0,
+    "payoff_error": 0.16798823373914498,
+    "game_trust": 0.07970218418829167,
+    "game_ratio": 4.398044672874052,
+    "variant": "dv7",
+    "mobility": 0.027978141030701714,
+    "alignment": 0.2743319990582141,
+    "data_score": 1.1424641609191895,
+    "data_drive": 0.0,
+    "last_cosine": 0.7815582752227783,
+    "updates": 7500,
+    "reopens": 0,
+    "closed": true
+  },
+  "rates": {
+    "generator_0": [
+      1.2043958136366541e-06,
+      0.004249996734096261
+    ],
+    "prior_1": [
+      4.9060999976470944e-06,
+      0.008499993732103934
+    ],
+    "critic_0": [
+      1.1723519860800206e-06,
+      0.0042289625
+    ],
+    "input_noise": [
+      0.0,
+      0.0
+    ],
+    "output_noise": [
+      0.029,
+      0.029
+    ]
+  },
+  "initialization_matches_original": {
+    "models_sha256": true,
+    "optimizers_sha256": true,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  }
+}

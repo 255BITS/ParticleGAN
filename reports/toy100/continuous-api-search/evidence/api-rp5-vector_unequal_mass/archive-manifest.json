@@ -1,0 +1,503 @@
+{
+  "broader_entry": {
+    "id": "api-rp5-vector_unequal_mass",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical",
+    "recorded_utc": "2026-09-26T22:57:16.942474+00:00",
+    "candidate": "API-RP5",
+    "protocol": "frozen22_vector_unequal_mass",
+    "scope": "PUBLIC_API",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-RP5",
+      "gate": "broader_vector_unequal_mass",
+      "status": "PASS",
+      "seconds": 100.05407853494398,
+      "metrics": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "sw1_normalized",
+              "value": 0.11385068470313811,
+              "op": "<=",
+              "threshold": 0.18,
+              "status": "PASS",
+              "margin": 0.06614931529686188
+            },
+            {
+              "metric": "mass_tv",
+              "value": 0.04160154610872269,
+              "op": "<=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.10839845389127731
+            },
+            {
+              "metric": "hq",
+              "value": 0.98486328125,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.13486328125000002
+            },
+            {
+              "metric": "component_covariance_error",
+              "value": 0.4697057716548443,
+              "op": "<=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.3802942283451557
+            },
+            {
+              "metric": "component_min_eigen_ratio",
+              "value": 0.4691135287284851,
+              "op": ">=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.3191135287284851
+            },
+            {
+              "metric": "min_mass_ratio",
+              "value": 0.7173978686332703,
+              "op": ">=",
+              "threshold": 0.25,
+              "status": "PASS",
+              "margin": 0.46739786863327026
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 18,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 18,
+            "first_pass_step": 350,
+            "stable_from_step": 350,
+            "stable_from_seconds": null,
+            "confirmed_step": 550,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.4583333333333333
+        },
+        "final": {
+          "step": 1200,
+          "sw1_normalized": 0.11385068470313811,
+          "mean_error": 0.16574260592460632,
+          "covariance_error": 0.17177926003932953,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.04160154610872269,
+          "min_mass_ratio": 0.7173978686332703,
+          "hq": 0.98486328125,
+          "component_covariance_error": 0.4697057716548443,
+          "component_covariance_errors": [
+            0.126494362950325,
+            0.22571495175361633,
+            0.39214688539505005,
+            1.1344668865203857
+          ],
+          "component_min_eigen_ratio": 0.4691135287284851,
+          "component_mass": [
+            0.559814453125,
+            0.331787109375,
+            0.09326171875,
+            0.01513671875
+          ],
+          "target_mass": [
+            0.550000011920929,
+            0.30000001192092896,
+            0.12999999523162842,
+            0.019999999552965164
+          ],
+          "component_counts": [
+            2293,
+            1359,
+            382,
+            62
+          ],
+          "ema": {
+            "sw1_normalized": 0.06831657275161794,
+            "mean_error": 0.09251994639635086,
+            "covariance_error": 0.1471099555492401,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.04160154610872269,
+            "min_mass_ratio": 0.7173978686332703,
+            "hq": 1.0,
+            "component_covariance_error": 0.20197413675487041,
+            "component_covariance_errors": [
+              0.0848885253071785,
+              0.22761228680610657,
+              0.35421720147132874,
+              0.14117853343486786
+            ],
+            "component_min_eigen_ratio": 0.5124332904815674,
+            "component_mass": [
+              0.559814453125,
+              0.331787109375,
+              0.09326171875,
+              0.01513671875
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2293,
+              1359,
+              382,
+              62
+            ]
+          }
+        },
+        "policy": {
+          "variant": "rp5",
+          "open": true,
+          "gap": 0.05750758945941925,
+          "gap_s": 0.08730619180853683,
+          "velocity": -0.00030099598332442024,
+          "contraction_peak": 0.0010747870856704063,
+          "contracting": 15,
+          "activity": 0.3405193833259987,
+          "activity_peak": 0.40228832928940594,
+          "quiet_gap": null,
+          "quiet_activity": null,
+          "quiet": 0,
+          "shock": 0,
+          "updates": 1200,
+          "openings": 1,
+          "closings": 0,
+          "event": null,
+          "velocity_s": -0.00017819819241153459
+        },
+        "updates": 1200
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical"
+    },
+    "derived": {
+      "status": "PASS",
+      "observations": 24,
+      "complete": true,
+      "passing_observations": 18,
+      "passing_suffix": 18,
+      "first_pass_step": 350,
+      "stable_from_step": 350,
+      "failing_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300
+      ],
+      "final_live": {
+        "step": 1200,
+        "sw1_normalized": 0.11385068470313811,
+        "mean_error": 0.16574260592460632,
+        "covariance_error": 0.17177926003932953,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.04160154610872269,
+        "min_mass_ratio": 0.7173978686332703,
+        "hq": 0.98486328125,
+        "component_covariance_error": 0.4697057716548443,
+        "component_covariance_errors": [
+          0.126494362950325,
+          0.22571495175361633,
+          0.39214688539505005,
+          1.1344668865203857
+        ],
+        "component_min_eigen_ratio": 0.4691135287284851,
+        "component_mass": [
+          0.559814453125,
+          0.331787109375,
+          0.09326171875,
+          0.01513671875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2293,
+          1359,
+          382,
+          62
+        ]
+      }
+    },
+    "source_and_initialization_audit": {
+      "source_zip_sha256": "d5608f5a4dfec6979b877cbe085333fb77392348ff886d5971dc839ff99a41ac",
+      "source_declaration_hash_mismatches": [],
+      "package_differences": [],
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "host_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_mass/initial-values.pt",
+      "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+      "embedded_fixture_verified": true,
+      "canonical_parameter_match": true,
+      "named_parameter_hashes": {
+        "G": [
+          {
+            "name": "net.0.weight",
+            "shape": [
+              64,
+              4
+            ],
+            "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+          },
+          {
+            "name": "net.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+          },
+          {
+            "name": "net.2.weight",
+            "shape": [
+              64,
+              64
+            ],
+            "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+          },
+          {
+            "name": "net.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+          },
+          {
+            "name": "net.4.weight",
+            "shape": [
+              2,
+              64
+            ],
+            "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+          },
+          {
+            "name": "net.4.bias",
+            "shape": [
+              2
+            ],
+            "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+          }
+        ],
+        "prior": [
+          {
+            "name": "z",
+            "shape": [
+              256,
+              4
+            ],
+            "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+          }
+        ],
+        "D": [
+          {
+            "name": "layers.0.weight",
+            "shape": [
+              96,
+              2
+            ],
+            "sha256": "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f"
+          },
+          {
+            "name": "layers.0.bias",
+            "shape": [
+              96
+            ],
+            "sha256": "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f"
+          },
+          {
+            "name": "layers.1.weight",
+            "shape": [
+              96,
+              96
+            ],
+            "sha256": "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3"
+          },
+          {
+            "name": "layers.1.bias",
+            "shape": [
+              96
+            ],
+            "sha256": "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59"
+          },
+          {
+            "name": "layers.2.weight",
+            "shape": [
+              96,
+              96
+            ],
+            "sha256": "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451"
+          },
+          {
+            "name": "layers.2.bias",
+            "shape": [
+              96
+            ],
+            "sha256": "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820"
+          },
+          {
+            "name": "head.weight",
+            "shape": [
+              1,
+              100
+            ],
+            "sha256": "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d"
+          },
+          {
+            "name": "head.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+          }
+        ]
+      },
+      "buffers": {
+        "G": {},
+        "prior": {},
+        "D": {
+          "scales": {
+            "shape": [
+              4
+            ],
+            "sha256": "8a2476a84d93c2f144efadea9daafdc28d55c98156c2d92ea0e52a1367b43d08"
+          }
+        }
+      },
+      "initial_ema_matches": {
+        "G": true,
+        "prior": true
+      },
+      "initial_state_sha256": "4ad9dfb7a941a08e3cca20b336609f1a0d368e448c12f19e2100c5d71416d640",
+      "harness_sha256": "b0ea88e064520e75cb683a56ada72e5a736d7834a2a611dcaa97e58f1cd60890",
+      "original_artifact_manifest_mismatches": []
+    },
+    "artifacts": {
+      "evidence/api-rp5-vector_unequal_mass/artifact-sha256.json": {
+        "sha256": "9353c826c0031c60688e7dd0dd947a95e582bb3b225715f6b6efa28ad424cac7",
+        "original_sha256": "9353c826c0031c60688e7dd0dd947a95e582bb3b225715f6b6efa28ad424cac7",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/artifact-sha256.json",
+        "bytes": 896,
+        "original_bytes": 896,
+        "listed_in_original_manifest": false
+      },
+      "evidence/api-rp5-vector_unequal_mass/canonical-initialization.json": {
+        "sha256": "086e352d3a2cef2d9bb6d0f98525455d95f645553ddcb043fa55e26d6ba3dbec",
+        "original_sha256": "086e352d3a2cef2d9bb6d0f98525455d95f645553ddcb043fa55e26d6ba3dbec",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/canonical-initialization.json",
+        "bytes": 2453,
+        "original_bytes": 2453,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/declaration.json": {
+        "sha256": "cca6308608a77b598ce4954d463883bb6a47dac035699e66ed3723a23582ce48",
+        "original_sha256": "cca6308608a77b598ce4954d463883bb6a47dac035699e66ed3723a23582ce48",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/declaration.json",
+        "bytes": 21965,
+        "original_bytes": 21965,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/final-state.pt": {
+        "sha256": "a00a61168c5199ec660ac37fa30ab9041558632fc51c1e216afdb830e792693c",
+        "original_sha256": "a00a61168c5199ec660ac37fa30ab9041558632fc51c1e216afdb830e792693c",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/final-state.pt",
+        "bytes": 517081,
+        "original_bytes": 517081,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/initial-state.pt": {
+        "sha256": "4ad9dfb7a941a08e3cca20b336609f1a0d368e448c12f19e2100c5d71416d640",
+        "original_sha256": "4ad9dfb7a941a08e3cca20b336609f1a0d368e448c12f19e2100c5d71416d640",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/initial-state.pt",
+        "bytes": 513633,
+        "original_bytes": 513633,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/initial.json": {
+        "sha256": "fa75e96ad25c924a94f77513feb994e50cb16b36aec5a243db628a27b1976035",
+        "original_sha256": "fa75e96ad25c924a94f77513feb994e50cb16b36aec5a243db628a27b1976035",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/initial.json",
+        "bytes": 766,
+        "original_bytes": 766,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/learning-rates.jsonl.gz": {
+        "sha256": "5ac3c67f748c16a5296166a3c2f6bf9ec7c08208c59dc02700618971ac2cd43a",
+        "original_sha256": "3d3e52c5d22ec857ab3e70e38bbf0041b91a0705cf9056a829473849cc7d62c1",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/learning-rates.jsonl",
+        "bytes": 233224,
+        "original_bytes": 1336644,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/metrics.jsonl.gz": {
+        "sha256": "7832ebed3591114f7302a85c04f6bcff83a137b7b841513816a7c47045129b5c",
+        "original_sha256": "a392b34e977996ad7967ad7d3a27c65aa3c6d965902732a99e539c98e9b285e7",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/metrics.jsonl",
+        "bytes": 5821,
+        "original_bytes": 33812,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/result.json": {
+        "sha256": "2c9f15d33d110bd906a589df734e6698ae59638b0a0ffb01c527979dea8c0507",
+        "original_sha256": "2c9f15d33d110bd906a589df734e6698ae59638b0a0ffb01c527979dea8c0507",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/result.json",
+        "bytes": 4800,
+        "original_bytes": 4800,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/runtime.json": {
+        "sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+        "original_sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/runtime.json",
+        "bytes": 604,
+        "original_bytes": 604,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_mass/source.zip": {
+        "sha256": "d5608f5a4dfec6979b877cbe085333fb77392348ff886d5971dc839ff99a41ac",
+        "original_sha256": "d5608f5a4dfec6979b877cbe085333fb77392348ff886d5971dc839ff99a41ac",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_mass-canonical/source.zip",
+        "bytes": 330009,
+        "original_bytes": 330009,
+        "listed_in_original_manifest": true
+      }
+    },
+    "supplementary_files": [],
+    "scope_note": "Own RP5 public API with canonical initial parameters, frozen CUDA host and explicitly isolated evaluation output seed2303; historical K3P global402 score is not a matched comparator."
+  },
+  "archive_lossless": true,
+  "all_source_files_copied": true,
+  "checkpoint_bytes_retained": true
+}

@@ -1,0 +1,558 @@
+{
+  "status": "SOURCE_CONTRACT_VERIFIED_LONG_RUN_IN_PROGRESS",
+  "created_utc": "2026-09-26T23:04:22.590716+00:00",
+  "repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo",
+  "run": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-long",
+  "scope": "Read-only CPU/stdlib source, AST and retained JSON/hash verification. No PyTorch import, GPU, model execution, training, tests, worker/package edits or interruption. Partial trace is explicitly not a completed long-run quality result.",
+  "verdict": "Long run uses the exact RP5 learner and resolved ring recipe already tested. No learner horizon/target-change oracle found. No source reason to restart was established. Three long-transition continuation comparisons remain future evidence.",
+  "immutable_sources": {
+    "declaration_sha256": "e989360fa4c31fbb1178a7262d6baf7f057f7cd327e7a58dc5a2a25f9d4267c8",
+    "source_zip_sha256": "3a3d0e4cdd705c53016222072e22a349b5aefb9248cc7af8bef89d143e54b50d",
+    "source_entries_verified": 34,
+    "package_files": 15,
+    "package_sha256": {
+      "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/game_update.py": "9f88b8ed3de9217ba8655b7194a35f78795d6a30fdecaa5f87543b71e31c1292",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+      "particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+      "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+      "particlegan/precision.py": "07443f3c6ab9e5f4afae492ea0a718f3be8698c0423ac2adbb63c2eae7a7e50d",
+      "particlegan/recipes.py": "34800edbae09e69c9051bdf1d29e7564dd202df902035f5092accc10de60e3b5",
+      "particlegan/training.py": "cf5549ccfb01aa7a6456b7d4584bbc1b5108b46e87ba8be6d66a203b12641d52",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "comparisons": [
+      {
+        "run": "rp5-single",
+        "package_equal": true,
+        "package_files": 15,
+        "recipe_differences": {},
+        "source_archive_sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7",
+        "worker_diff": "--- \n\n+++ \n\n@@ -152,5 +152,5 @@\n\n     args.output.mkdir(parents=True, exist_ok=False)\n     sources = sorted((ROOT / \"particlegan\").glob(\"*.py\")) + [\n-        Path(__file__), Path(__file__).parent / (args.schedule + \".md\"), Path(__file__).parent / \"copy-receipt.json\", Path(__file__).parent / \"summarize.py\", Path(__file__).parent / \"evaluation-protocols.json\", ROOT / \"benchmarks/locked_shared/mode_hold.py\",\n+        Path(__file__), Path(__file__).parent / (args.schedule + \".md\"), Path(__file__).parent / \"long-declaration.md\", Path(__file__).parent / \"copy-receipt.json\", Path(__file__).parent / \"summarize.py\", Path(__file__).parent / \"evaluation-protocols.json\", ROOT / \"benchmarks/locked_shared/mode_hold.py\",\n         ROOT / \"benchmarks/locked_shared/mlp.py\"]\n     from source_helpers import imported_sources",
+        "fixture_sources_equal": {
+          "benchmarks/__init__.py": true,
+          "benchmarks/legacy/__init__.py": true,
+          "benchmarks/legacy/gan_loss.py": true,
+          "benchmarks/legacy/grad_regularizers.py": true,
+          "benchmarks/legacy/locked_shared.py": true,
+          "benchmarks/locked_shared/__init__.py": true,
+          "benchmarks/locked_shared/mlp.py": true,
+          "benchmarks/locked_shared/mode_hold.py": true,
+          "benchmarks/locked_shared/observation.py": true,
+          "benchmarks/toy100/__init__.py": true,
+          "benchmarks/toy100/device.py": true,
+          "benchmarks/toy100/problems.py": true
+        },
+        "initial_complete_receipt_equal": true,
+        "runtime_equal": true
+      },
+      {
+        "run": "rp5-stationary",
+        "package_equal": true,
+        "package_files": 15,
+        "recipe_differences": {},
+        "source_archive_sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7",
+        "worker_diff": "--- \n\n+++ \n\n@@ -152,5 +152,5 @@\n\n     args.output.mkdir(parents=True, exist_ok=False)\n     sources = sorted((ROOT / \"particlegan\").glob(\"*.py\")) + [\n-        Path(__file__), Path(__file__).parent / (args.schedule + \".md\"), Path(__file__).parent / \"copy-receipt.json\", Path(__file__).parent / \"summarize.py\", Path(__file__).parent / \"evaluation-protocols.json\", ROOT / \"benchmarks/locked_shared/mode_hold.py\",\n+        Path(__file__), Path(__file__).parent / (args.schedule + \".md\"), Path(__file__).parent / \"long-declaration.md\", Path(__file__).parent / \"copy-receipt.json\", Path(__file__).parent / \"summarize.py\", Path(__file__).parent / \"evaluation-protocols.json\", ROOT / \"benchmarks/locked_shared/mode_hold.py\",\n         ROOT / \"benchmarks/locked_shared/mlp.py\"]\n     from source_helpers import imported_sources",
+        "fixture_sources_equal": {
+          "benchmarks/__init__.py": true,
+          "benchmarks/legacy/__init__.py": true,
+          "benchmarks/legacy/gan_loss.py": true,
+          "benchmarks/legacy/grad_regularizers.py": true,
+          "benchmarks/legacy/locked_shared.py": true,
+          "benchmarks/locked_shared/__init__.py": true,
+          "benchmarks/locked_shared/mlp.py": true,
+          "benchmarks/locked_shared/mode_hold.py": true,
+          "benchmarks/locked_shared/observation.py": true,
+          "benchmarks/toy100/__init__.py": true,
+          "benchmarks/toy100/device.py": true,
+          "benchmarks/toy100/problems.py": true
+        },
+        "initial_complete_receipt_equal": true,
+        "runtime_equal": true
+      },
+      {
+        "run": "rp5-img_intensity2",
+        "package_equal": true,
+        "package_files": 15,
+        "recipe_differences": {
+          "num_particles": {
+            "long": 20000,
+            "reference": 32
+          },
+          "batch_size": {
+            "long": 2048,
+            "reference": 32
+          },
+          "z_dim": {
+            "long": 2,
+            "reference": 8
+          }
+        },
+        "source_archive_sha256": "a8ccfb32480b060ba2790895ff6b534de5bf5ef3b50462111c7e74554536e07c"
+      },
+      {
+        "run": "rp5-img_stripes2",
+        "package_equal": true,
+        "package_files": 15,
+        "recipe_differences": {
+          "num_particles": {
+            "long": 20000,
+            "reference": 32
+          },
+          "batch_size": {
+            "long": 2048,
+            "reference": 32
+          },
+          "z_dim": {
+            "long": 2,
+            "reference": 8
+          }
+        },
+        "source_archive_sha256": "7fc9b13a0fc56a166faca33c49a90da7adbf499ed71cc9be6f963e056eb35cc0"
+      },
+      {
+        "run": "rp5-img_bars4",
+        "package_equal": true,
+        "package_files": 15,
+        "recipe_differences": {
+          "num_particles": {
+            "long": 20000,
+            "reference": 32
+          },
+          "batch_size": {
+            "long": 2048,
+            "reference": 32
+          },
+          "z_dim": {
+            "long": 2,
+            "reference": 8
+          }
+        },
+        "source_archive_sha256": "7fc9b13a0fc56a166faca33c49a90da7adbf499ed71cc9be6f963e056eb35cc0"
+      },
+      {
+        "run": "rp5-img_blobs4",
+        "package_equal": true,
+        "package_files": 15,
+        "recipe_differences": {
+          "num_particles": {
+            "long": 20000,
+            "reference": 32
+          },
+          "batch_size": {
+            "long": 2048,
+            "reference": 32
+          },
+          "z_dim": {
+            "long": 2,
+            "reference": 8
+          }
+        },
+        "source_archive_sha256": "7fc9b13a0fc56a166faca33c49a90da7adbf499ed71cc9be6f963e056eb35cc0"
+      }
+    ]
+  },
+  "learner_contract": {
+    "total_steps": null,
+    "continuous_precision": "rp5",
+    "game_update": "secant_resolvent",
+    "adam_eager_state": true,
+    "serial_backward": true,
+    "absolute_noise_initialization": {
+      "input_zero": 360,
+      "output_full": 720
+    },
+    "evaluator_budget": 30000,
+    "evaluator_changes": [
+      {
+        "after_update": 6000,
+        "absolute_offset": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "after_update": 7800,
+        "absolute_offset": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "after_update": 27000,
+        "absolute_offset": [
+          0.0,
+          1.0
+        ]
+      }
+    ],
+    "proof": [
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          67,
+          79
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          147,
+          151
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          216,
+          221
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          262,
+          269
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "particlegan/training.py",
+        "lines": [
+          177,
+          214
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "particlegan/precision.py",
+        "lines": [
+          23,
+          101
+        ]
+      }
+    ],
+    "interpretation": "make_recipe accepts an evaluator steps argument but never uses it: total_steps=None is explicit. Changes alter only caller means after completed updates. Precision consumes critic-gradient disagreement and accepted normalized motion; fixed initialization/smoothing constants do not use evaluator horizons."
+  },
+  "observation_and_checkpoint": {
+    "streams": "Identical ring worker measure(): fresh isolated device generator seed9 for4096 samples; public sample applies actual output noise at completed count and preserves training RNG/mode. Separate real generator seed0; same minibatch supplied to D/G. Eight modes and HQ>=.90 live primary; EMA diagnostic.",
+    "full_saved_state": "G,D,prior,EMA_G,EMA_prior; KA2/Adam/A2 through optimizer state; precision scalars/reference; completed count; initial group rates; requires_grad/recipe/options/device/dtype/serial execution; private/global RNG plus caller real stream and means.",
+    "changes": "Save main checkpoint before target replacement, build only a separate frozen trainer, load the checkpoint into that frozen trainer (restoring construction-changed global RNG), then replace caller means with original_means+absolute_offset. Main trainer never reloads.",
+    "prefix9000": "Save ordinary source-defined 9000 summary/checkpoint after its observation. segment import at203 dominates this path.",
+    "evidence": [
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          82,
+          88
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          129,
+          144
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "reports/reversible-precision/public_worker.py",
+        "lines": [
+          203,
+          269
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "particlegan/training.py",
+        "lines": [
+          291,
+          331
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "particlegan/training.py",
+        "lines": [
+          334,
+          405
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "particlegan/game_update.py",
+        "lines": [
+          95,
+          152
+        ]
+      },
+      {
+        "archive": "rp5-long/source.zip",
+        "path": "particlegan/precision.py",
+        "lines": [
+          103,
+          112
+        ]
+      }
+    ]
+  },
+  "observed_partial_prefix": {
+    "consistent_cutoff": 8100,
+    "logs": {
+      "learning-rates.jsonl": {
+        "complete_rows": 8126,
+        "last_complete_step": 8126,
+        "complete_lines_sha256": "2a792211a455eaf17d5793a0c57d7361563d66771755606d1e86f557a2154287"
+      },
+      "metrics.jsonl": {
+        "complete_rows": 812,
+        "last_complete_step": 8120,
+        "complete_lines_sha256": "0a6e92a6c71d46aaeab7f027132c2aab119aedecbc46eecf51965ae2ed88a6c8"
+      },
+      "state-hashes.jsonl": {
+        "complete_rows": 81,
+        "last_complete_step": 8100,
+        "complete_lines_sha256": "d70de42c5ccf1c6b678942250e56e569ca02a44c70c3d090d91d1dfdf73289c4"
+      }
+    },
+    "exact_comparisons": [
+      {
+        "reference": "rp5-single",
+        "through": 2400,
+        "checks": {
+          "learning-rates.jsonl": {
+            "equal": true,
+            "rows": 2400,
+            "through": 2400
+          },
+          "metrics.jsonl": {
+            "equal": true,
+            "rows": 240,
+            "through": 2400
+          },
+          "state-hashes.jsonl": {
+            "equal": true,
+            "rows": 24,
+            "through": 2400
+          }
+        }
+      },
+      {
+        "reference": "rp5-stationary",
+        "through": 6000,
+        "checks": {
+          "learning-rates.jsonl": {
+            "equal": true,
+            "rows": 6000,
+            "through": 6000
+          },
+          "metrics.jsonl": {
+            "equal": true,
+            "rows": 600,
+            "through": 6000
+          },
+          "state-hashes.jsonl": {
+            "equal": true,
+            "rows": 60,
+            "through": 6000
+          }
+        }
+      }
+    ],
+    "all_accepted_precision_clocks_match": true,
+    "all_logged_noise_matches": true,
+    "events_through_cutoff": [
+      {
+        "step": 834,
+        "event": "close"
+      },
+      {
+        "step": 6012,
+        "event": "reopen"
+      },
+      {
+        "step": 6733,
+        "event": "close"
+      }
+    ],
+    "quality_conclusion": "None from partial duration; original long run continues.",
+    "transition_states_observed": {
+      "6000": {
+        "open": false,
+        "openings": 1,
+        "closings": 1,
+        "event": null
+      },
+      "6050": {
+        "open": true,
+        "openings": 2,
+        "closings": 1,
+        "event": null
+      },
+      "6100": {
+        "open": true,
+        "openings": 2,
+        "closings": 1,
+        "event": null
+      },
+      "7800": {
+        "open": false,
+        "openings": 2,
+        "closings": 2,
+        "event": null
+      },
+      "7850": {
+        "open": false,
+        "openings": 2,
+        "closings": 2,
+        "event": null
+      },
+      "7900": {
+        "open": false,
+        "openings": 2,
+        "closings": 2,
+        "event": null
+      }
+    }
+  },
+  "prior_checkpoint_evidence": {
+    "status": "PASS",
+    "checks": {
+      "immediate_restore_exact": true,
+      "original_uninterrupted_exact": true,
+      "split_exact": true,
+      "controller_in_checkpoint": true,
+      "reopen_crossed": true,
+      "all_moments_cuda": true
+    },
+    "recorded_states": {
+      "2400": {
+        "open": false,
+        "openings": 1,
+        "closings": 1,
+        "event": null
+      },
+      "2440": {
+        "open": true,
+        "openings": 2,
+        "closings": 1,
+        "event": "reopen"
+      },
+      "2450": {
+        "open": true,
+        "openings": 2,
+        "closings": 1,
+        "event": null
+      },
+      "2500": {
+        "open": true,
+        "openings": 2,
+        "closings": 1,
+        "event": null
+      }
+    },
+    "interpretation": "Existing separate-process comparison covers closed state at2400, reopening2440 and an open-state split2450 through2500. This is meaningful closed/open evidence, but not a substitute for long-aged/repeated-change checkpoints.",
+    "test_scope": "tests/test_precision_game.py exact CPU test resumes after one update; early-open only. Existing73-pass regression is retained evidence, not rerun here."
+  },
+  "declared_long_replay_plan": {
+    "source": "reports/reversible-precision/long-declaration.md:7",
+    "source_sha256": "f28c935d383aa2006ddf094c2906fbeb2bdecbc3f06af61c1a7e3c65f3e317ce",
+    "declaration_sufficient": true,
+    "implementation_status": "Current continuation_check.py remains single-transition-specific:2400/2450/2500,+[1,0],openings==2. No three-long-change replay implementation/result observed at audit time.",
+    "required_replays": [
+      {
+        "change_after_update": 6000,
+        "checkpoint": "change-6000-state.pt",
+        "checkpoint_absolute_offset": [
+          0.0,
+          0.0
+        ],
+        "new_absolute_offset": [
+          1.0,
+          0.0
+        ],
+        "delta_from_saved_means": [
+          1.0,
+          0.0
+        ],
+        "initial_receipt_end": 6100
+      },
+      {
+        "change_after_update": 7800,
+        "checkpoint": "change-7800-state.pt",
+        "checkpoint_absolute_offset": [
+          1.0,
+          0.0
+        ],
+        "new_absolute_offset": [
+          1.0,
+          1.0
+        ],
+        "delta_from_saved_means": [
+          0.0,
+          1.0
+        ],
+        "initial_receipt_end": 7900
+      },
+      {
+        "change_after_update": 27000,
+        "checkpoint": "change-27000-state.pt",
+        "checkpoint_absolute_offset": [
+          1.0,
+          1.0
+        ],
+        "new_absolute_offset": [
+          0.0,
+          1.0
+        ],
+        "delta_from_saved_means": [
+          -1.0,
+          0.0
+        ],
+        "initial_receipt_end": 27100
+      }
+    ],
+    "minimal_missing_evidence": [
+      "Use each saved long change checkpoint in an independent replay process; do not modify/reload the uninterrupted main run. Archive exact learner, host, runtime, checkpoint and replay source hashes.",
+      "Apply correct absolute target using original means, or the listed delta from saved current means; blindly adding the first-shift +[1,0] is wrong at7800 and27000.",
+      "Immediately compare restored full trainer state to saved state; restore caller data RNG and means. Compare full original100-update state receipt including optimizer, controller/reference, EMA, private/global RNG and data stream\u2014not just model tensors.",
+      "Record actual pre-change precision open/closed state and opening/closing counts; detect transitions relative to that checkpoint. Do not hardcode openings==2 or assume all changes start closed.",
+      "A100-update replay proves only that interval. If the unchanged original trace reopens later, cover the first archived receipt after that observed event in the same planned replay; otherwise label reopening coverage not observed. Use an interior split after reopening when that state is actually present, matching prior split-replay design.",
+      "At least one retained replay must demonstrate restoration/continuation from closed precision and one from reopened precision. Existing2400/2450 check already provides these states early in training; long checkpoints add aged/repeated-transition coverage."
+    ],
+    "no_duplicate_training": "These are the worker\u2019s already-declared short continuation checks, not additional quality runs, seeds or mechanisms."
+  },
+  "reporting_cautions": [
+    "Legacy convenience result keys recovery_at_3600/recovery_extended/frozen_control are still anchored to2400 and can mix frozen models across long transitions. Use actual segment boundaries0/6000/7800/27000/30000 and group raw frozen rows by checkpoint; long declaration explicitly warns about this. No threshold or learner change is required.",
+    "Manifest policy string still says RP2 while recipecontinuous_precision=rp5 and package/telemetry identify RP5. Treat as stale descriptive metadata; preserve immutable source and annotate.",
+    "Immutable long declaration contains stale DV6 comparator ownership text; later supervisor instruction transfers conditional ownership to RP5. This does not affect training source.",
+    "Precision checkpoint scalar value validation remains a separately reported release-hardening gap; valid-state replay and source identity are the present scope."
+  ],
+  "retracted_false_alarm": {
+    "initial_claim": "Auditor incorrectly warned that prefix9000 would use local segment before the later import at270.",
+    "correction": "Complete AST/control-flow inspection found from summarize import segment at203 before the loop216. Calls259 and272 are both dominated by that import. No UnboundLocalError is implied; later import270 is redundant but harmless.",
+    "source_sha256": "2f5b5ab6c4f5a45c9bb440843366c229241e24b9a5e26fac600dd08eb7bc3ecd",
+    "import_lines": [
+      203,
+      270
+    ],
+    "loop_line": 216,
+    "call_lines": [
+      259,
+      272
+    ],
+    "action": "Claim retracted immediately. Root confirmed correction reached worker before the stop instruction was read; original run continued. No restart, patch or host-error classification is warranted."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "status": "NOT_RUN; candidate failed first broader gate",
+  "conclusion": "Prepared matched-eager K3P is a distinct configured comparator, not ordinary public-default K3P. It cannot alone establish competition with the released baseline.",
+  "public_release": {
+    "tag": "v0.8.0",
+    "commit": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+    "factory_reference": "2581285121776e23f5fd1a045b1dd4cbdc686aac",
+    "difference_from_tag": "Only recipe/export optional NetworkLRTransition API; ordinary scheduled path unchanged."
+  },
+  "runtime": {
+    "interpreter": "/tmp/pr38-default-env/bin/python",
+    "torch_source": "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch",
+    "version": "2.13.0+cu126",
+    "adam_source_lines": "optim/adam.py:166-175 explicitly allocate CPU scalar steps when fused/capturable false",
+    "historical_results": "public-default-baseline/evidence/{hold,shift}/result.json report 2.14.0+cu130, not same-runtime reference"
+  },
+  "differences": [
+    {
+      "path": "reports/reversible-precision/k3p_reference.py",
+      "issue": "Adds _initialize_adam call and adam_eager_state=True absent from archived public factories."
+    },
+    {
+      "path": "particlegan/k3p.py:109",
+      "issue": "Spike guard computes tensor 1-beta2**step; CPU versus CUDA step placement can change bias-correction arithmetic. Eager state also exposes zero-step state on first guard/A2 call."
+    },
+    {
+      "path": "particlegan/k3p.py:352",
+      "issue": "Retained current RobustCriticAnchor uses lerp for floating buffers; archived v0.8/25812851 uses mul/add. Current kernels are not byte-identical archived public baseline."
+    },
+    {
+      "path": "reports/reversible-precision/k3p_reference.py:35",
+      "issue": "Fixed360/720 noise overrides differ from literal public get_recipe(total_steps=N) milestones .1N/.2N; declare matched configuration explicitly."
+    },
+    {
+      "path": "reports/reversible-precision/k3p_worker.py:227",
+      "issue": "Assertion all tensor state equals CUDA parameter device wrongly rejects ordinary allowed CPU step metadata; needs scalar-step exception for primary public reference."
+    }
+  ],
+  "recommendation": "If later authorized, use archived public package/GANTrainer in same pinned runtime with ordinary lazy CPU step metadata and no relocated/eager optimizer state. Match network/prior initialization, seed/data/evaluator/runtime while preserving baseline algorithm and finite schedules. Record any fixed-noise override distinctly; literal public default uses only declared total_steps/resource overrides. Candidate RP2 may keep eager state as part of its own explicit formulation.",
+  "source_hashes": {
+    "reports/reversible-precision/k3p_reference.py": "959e0b22439b3d7cb5ee691d4d05fb85ccf66f0493cccfeb0ea1d3c0e70feb54",
+    "reports/reversible-precision/k3p_worker.py": "8ade53017f3dc2ae062b2088dbf1ac2c71b0da11be915fae346fb65b1e64e0f4",
+    "reports/reversible-precision/k3p-declaration.md": "8312c39156a3089150ba253d5614e73da732bb5b8e8461c4cc26dd225cc81ae9"
+  },
+  "audit_execution": "Read-only source inspection. No models, tests, training, worker changes or new baseline run."
+}

@@ -1,0 +1,234 @@
+{
+  "audit": "RP5 frozen vector adapter source and completed first-gate audit",
+  "scope": "Source/archive/JSON/raw-storage inspection only; no Torch import, model execution, GPU, tests, training or worker edits.",
+  "worker": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo",
+  "run": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_two_broad",
+  "source_zip_sha256": "c790bb613a7b11e5b380dcc773cac143b0008a3d4bdc933db060774f02085ddc",
+  "declaration_sha256": "34fc88bee5041358aeaaa82229d3b96a654201a2f9e78d7c90d262d35368df6a",
+  "source_declaration_hash_mismatches": [],
+  "artifact_hash_mismatches": [],
+  "package_differences_from_other_RP5_runs": {
+    "rp5-single": [],
+    "rp5-stationary": [],
+    "rp5-img_intensity2": [],
+    "rp5-img_stripes2": [],
+    "rp5-img_bars4": [],
+    "rp5-img_blobs4": []
+  },
+  "verdict": "FIRST_VECTOR_VALID_PASS_UNDER_PREDECLARED_ISOLATED_NOISE; NO_INITIAL_PARAMETER_MISMATCH; OTHER_FIVE_NOT_QUALIFIED_BY_THIS_AUDIT",
+  "initialization": {
+    "canonical_fixture": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_two_broad/initial-values.pt",
+    "canonical_fixture_sha256": "df0f73792aeced920ba976d44077ce762694bdba426f03e7a2f6f9f3b62338b2",
+    "initial_state_sha256": "da2597d646a63cb5860009f953871b9149bc37ddb5afc2b6fd9fbefb11f249b8",
+    "actual_named_parameters": {
+      "G": [
+        {
+          "name": "net.0.weight",
+          "shape": [
+            64,
+            4
+          ],
+          "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.0.bias",
+          "shape": [
+            64
+          ],
+          "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.2.weight",
+          "shape": [
+            64,
+            64
+          ],
+          "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.2.bias",
+          "shape": [
+            64
+          ],
+          "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.4.weight",
+          "shape": [
+            2,
+            64
+          ],
+          "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.4.bias",
+          "shape": [
+            2
+          ],
+          "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        }
+      ],
+      "prior": [
+        {
+          "name": "z",
+          "shape": [
+            256,
+            4
+          ],
+          "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        }
+      ],
+      "D": [
+        {
+          "name": "net.0.weight",
+          "shape": [
+            64,
+            10
+          ],
+          "sha256": "24562546cfa64edb4fed54efeccfb445aebf69a16831ad22f477d5d7320482a5",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.0.bias",
+          "shape": [
+            64
+          ],
+          "sha256": "28408481bbd153aa1de4db94848ecfbb3749aee6ca43f9a440036386c779aa3a",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.2.weight",
+          "shape": [
+            64,
+            64
+          ],
+          "sha256": "b953ce297fe4eaffe0fe11224bd715c6821e0e8bd6687d31c3bae88b05c661e1",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.2.bias",
+          "shape": [
+            64
+          ],
+          "sha256": "cc0bc7ee6b8088e9be662d7b7889cfa79c8f400027b0990b39cf284e7f25fff6",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.4.weight",
+          "shape": [
+            1,
+            64
+          ],
+          "sha256": "d433e146f23d225a7c577d1b392db8658a51e05daa2ab3c415333606c23fe7f1",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        },
+        {
+          "name": "net.4.bias",
+          "shape": [
+            1
+          ],
+          "sha256": "8dd8efc3155c46f1e02a60324b64216bb77fd6d3ef997905ad3447a755dc059c",
+          "dtype": "FloatStorage",
+          "device": "cuda:0"
+        }
+      ]
+    },
+    "parameter_group_matches": {
+      "G": true,
+      "prior": true,
+      "D": true
+    },
+    "EMA_G_matches_live_initial": true,
+    "EMA_prior_matches_live_initial": true,
+    "extra_D_buffer": {
+      "name": "freqs",
+      "shape": [
+        2
+      ],
+      "sha256": "a4025dcc1a0a0fee0d523f9e5b2d533ab37877cf6eee61215488bcfeaa91b1ed",
+      "dtype": "FloatStorage",
+      "device": "cuda:0"
+    },
+    "worker_false_alarm": "canonical-initialization-audit.json compared list(D.state_dict().values()) including leading freqs buffer to D optimizer parameter fixture. G6/6, prior1/1, D6/6 actually match. Filter using ordered named_parameters or checkpoint requires_grad keys; preserve buffers in a separate receipt.",
+    "method": "Restricted ZIP/pickle metadata reader and raw-storage hashes, no torch.load/model execution."
+  },
+  "metrics": {
+    "observations": 24,
+    "complete_expected_steps": true,
+    "passing_observations": 23,
+    "passing_suffix": 23,
+    "first_pass_step": 100,
+    "stable_from_step": 100,
+    "required_final_suffix": 5,
+    "final_live": {
+      "step": 1200,
+      "sw1_normalized": 0.026707096948173782,
+      "mean_error": 0.017096631228923798,
+      "covariance_error": 0.050532497465610504,
+      "target_scale": 1.0601637363433838,
+      "sample_count": 4096,
+      "mass_tv": 0.005615234375,
+      "min_mass_ratio": 0.98876953125,
+      "hq": 0.995361328125,
+      "component_covariance_error": 0.08789168111979961,
+      "component_covariance_errors": [
+        0.12075081467628479,
+        0.05503254756331444
+      ],
+      "component_min_eigen_ratio": 0.9140838980674744,
+      "component_mass": [
+        0.505615234375,
+        0.494384765625
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2071,
+        2025
+      ]
+    },
+    "status": "PASS"
+  },
+  "source_findings": [
+    "Recipe total_steps=None; exact RP5 precision/secant/eager-state package matches ring,stationary,all4images. Only declared resources256particles/z4/batch128 differ. No legacy factory/schedule in executed path.",
+    "Frozen plan/profile and four promoted D cards preserved. All target/scorer functions resolve,target_scale,sample_target,score_samples,passes AST match published CUDA host after normalizing explicit CUDA-default Generator calls to current apply_device_policy routing.",
+    "lib/toy_models,lib/toy_metrics,particlegan/discriminators,shared_critic_research,linear_skip_refinement_research,protocol match frozen runtime bytes. smooth_critic_research differs only in Generator(device=default) routing for a radial feature branch unused by these cards.",
+    "Actual first task CPU reconstruction reproduces all retained fixture parameters exactly. Skipped historical CUDA initializer draws do not alter this candidate training: data/latent/penalty/noise streams are explicit and independent; global observation RNG is forked.",
+    "CUDA data0/latent1/penalty2 preserved; API private noise5 unchanged. JointStage materializes G real callback once before its checkpoint, shares it across preview/correction, restores trainer streams, and commits one accepted update. Data is independent of latent/noise, so moving that draw earlier does not reorder any individual stream.",
+    "All24 observations use4096samples,CUDA latent990,target991,projection992; fixed output2303 explicitly declared before execution. This is the permitted isolated-noise branch, not historical K3P global402. Both live/EMA receive paired draws and full trainer/caller hash invariant is asserted.",
+    "One-thread deterministicFP32 Torch2.13.0+cu126/A6000/TF32off/CUBLAS4096:8 runtime receipt exists. Serial whole-update mode enforced. No extra model sessions were used by auditor."
+  ],
+  "required_followup": [
+    "Preserve original incorrect initialization-audit file as evidence and append corrected parameter-only verification; do not rerun vector_two_broad merely because the bad audit included freqs.",
+    "For remaining5, before training use each declared canonical fixture and verify ordered named parameters against it (or copy exact fixture values before GANTrainer); separately record buffers/EMA. No new seeds or score-based initialization choices.",
+    "Snapshot actual fixture path/hash and corrected declaration/adapter before future runs. Keep source/recipe/controller unchanged except evaluator/fixture validation.",
+    "Use same explicitly declared output-noise adapter for future publicK3P comparison. Historical published K3P metrics alone are not matched measurement under2303.",
+    "Restore/report full traceback on future harness exceptions; current catch records repr(e) only. This does not affect completed first PASS."
+  ],
+  "limitations": [
+    "Remaining5 initialization equality is not inherited from first host; no all6/all22 or K3P superiority claim.",
+    "This audit validates original completed source.zip even if active vector_gate.py is later changed.",
+    "Unchanged long ring may continue independently; source preparation is not a reason to interrupt it."
+  ]
+}

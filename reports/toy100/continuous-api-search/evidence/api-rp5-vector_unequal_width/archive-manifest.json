@@ -1,0 +1,494 @@
+{
+  "broader_entry": {
+    "id": "api-rp5-vector_unequal_width",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical",
+    "recorded_utc": "2026-09-26T22:57:17.068280+00:00",
+    "candidate": "API-RP5",
+    "protocol": "frozen22_vector_unequal_width",
+    "scope": "PUBLIC_API",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-RP5",
+      "gate": "broader_vector_unequal_width",
+      "status": "PASS",
+      "seconds": 81.36120971105993,
+      "metrics": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "sw1_normalized",
+              "value": 0.03556097355117009,
+              "op": "<=",
+              "threshold": 0.18,
+              "status": "PASS",
+              "margin": 0.1444390264488299
+            },
+            {
+              "metric": "mass_tv",
+              "value": 0.02734375,
+              "op": "<=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.12265625
+            },
+            {
+              "metric": "hq",
+              "value": 0.97119140625,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.12119140625000002
+            },
+            {
+              "metric": "component_covariance_error",
+              "value": 0.4927755445241928,
+              "op": "<=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.35722445547580717
+            },
+            {
+              "metric": "component_min_eigen_ratio",
+              "value": 0.3400540053844452,
+              "op": ">=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.1900540053844452
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 19,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 19,
+            "first_pass_step": 300,
+            "stable_from_step": 300,
+            "stable_from_seconds": null,
+            "confirmed_step": 500,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.4166666666666667
+        },
+        "final": {
+          "step": 1200,
+          "sw1_normalized": 0.03556097355117009,
+          "mean_error": 0.04023399204015732,
+          "covariance_error": 0.02397647313773632,
+          "target_scale": 2.138371229171753,
+          "sample_count": 4096,
+          "mass_tv": 0.02734375,
+          "min_mass_ratio": 0.9013671875,
+          "hq": 0.97119140625,
+          "component_covariance_error": 0.4927755445241928,
+          "component_covariance_errors": [
+            0.254774808883667,
+            0.46696361899375916,
+            0.4978696405887604,
+            0.7514941096305847
+          ],
+          "component_min_eigen_ratio": 0.3400540053844452,
+          "component_mass": [
+            0.247314453125,
+            0.2587890625,
+            0.225341796875,
+            0.2685546875
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            1013,
+            1060,
+            923,
+            1100
+          ],
+          "ema": {
+            "sw1_normalized": 0.03237214904840339,
+            "mean_error": 0.03438962623476982,
+            "covariance_error": 0.029612526297569275,
+            "target_scale": 2.138371229171753,
+            "sample_count": 4096,
+            "mass_tv": 0.02734375,
+            "min_mass_ratio": 0.9013671875,
+            "hq": 0.968505859375,
+            "component_covariance_error": 0.45579010993242264,
+            "component_covariance_errors": [
+              0.3571280837059021,
+              0.37038564682006836,
+              0.45503440499305725,
+              0.6406123042106628
+            ],
+            "component_min_eigen_ratio": 0.39292794466018677,
+            "component_mass": [
+              0.247314453125,
+              0.2587890625,
+              0.225341796875,
+              0.2685546875
+            ],
+            "target_mass": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "component_counts": [
+              1013,
+              1060,
+              923,
+              1100
+            ]
+          }
+        },
+        "policy": {
+          "variant": "rp5",
+          "open": false,
+          "gap": 0.0006873594829812646,
+          "gap_s": 0.0008184721435768398,
+          "velocity": -1.3243703090461524e-06,
+          "contraction_peak": 0.00010169397838172872,
+          "contracting": 260,
+          "activity": 0.12053511408456546,
+          "activity_peak": 0.6467085711322412,
+          "quiet_gap": 0.0010344123935943977,
+          "quiet_activity": 0.13025143961347563,
+          "quiet": 0,
+          "shock": 0,
+          "updates": 1200,
+          "openings": 1,
+          "closings": 1,
+          "event": null,
+          "velocity_s": -1.895748328061126e-06
+        },
+        "updates": 1200
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical"
+    },
+    "derived": {
+      "status": "PASS",
+      "observations": 24,
+      "complete": true,
+      "passing_observations": 19,
+      "passing_suffix": 19,
+      "first_pass_step": 300,
+      "stable_from_step": 300,
+      "failing_steps": [
+        50,
+        100,
+        150,
+        200,
+        250
+      ],
+      "final_live": {
+        "step": 1200,
+        "sw1_normalized": 0.03556097355117009,
+        "mean_error": 0.04023399204015732,
+        "covariance_error": 0.02397647313773632,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.02734375,
+        "min_mass_ratio": 0.9013671875,
+        "hq": 0.97119140625,
+        "component_covariance_error": 0.4927755445241928,
+        "component_covariance_errors": [
+          0.254774808883667,
+          0.46696361899375916,
+          0.4978696405887604,
+          0.7514941096305847
+        ],
+        "component_min_eigen_ratio": 0.3400540053844452,
+        "component_mass": [
+          0.247314453125,
+          0.2587890625,
+          0.225341796875,
+          0.2685546875
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1013,
+          1060,
+          923,
+          1100
+        ]
+      }
+    },
+    "source_and_initialization_audit": {
+      "source_zip_sha256": "5619661762678b7777061df9c9f7b760889efd44d4252e3dc1a779a321fbeb20",
+      "source_declaration_hash_mismatches": [],
+      "package_differences": [],
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "host_function_matches": {
+        "resolve": true,
+        "target_scale": true,
+        "sample_target": true,
+        "score_samples": true,
+        "passes": true
+      },
+      "fixture_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/direct-particle-base/initialization-fixtures/vector_unequal_width/initial-values.pt",
+      "fixture_sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a",
+      "embedded_fixture_verified": true,
+      "canonical_parameter_match": true,
+      "named_parameter_hashes": {
+        "G": [
+          {
+            "name": "net.0.weight",
+            "shape": [
+              64,
+              4
+            ],
+            "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+          },
+          {
+            "name": "net.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+          },
+          {
+            "name": "net.2.weight",
+            "shape": [
+              64,
+              64
+            ],
+            "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+          },
+          {
+            "name": "net.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+          },
+          {
+            "name": "net.4.weight",
+            "shape": [
+              2,
+              64
+            ],
+            "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+          },
+          {
+            "name": "net.4.bias",
+            "shape": [
+              2
+            ],
+            "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+          }
+        ],
+        "prior": [
+          {
+            "name": "z",
+            "shape": [
+              256,
+              4
+            ],
+            "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+          }
+        ],
+        "D": [
+          {
+            "name": "main.layers.0.weight",
+            "shape": [
+              128,
+              2
+            ],
+            "sha256": "0cb4ccc8411b14e20a51ab533ea749d222bc96dbe796f0dd2ee68cd66813c9b8"
+          },
+          {
+            "name": "main.layers.0.bias",
+            "shape": [
+              128
+            ],
+            "sha256": "9cb4be7229a9e8dfcf85540769dc6cc22b4c0b0bde37c011c0e036a8b2f98cdb"
+          },
+          {
+            "name": "main.layers.1.weight",
+            "shape": [
+              128,
+              128
+            ],
+            "sha256": "dba94662073a2281ded27798f634d4ee9a8d7c317ac409d8e433911e7c8d8c8c"
+          },
+          {
+            "name": "main.layers.1.bias",
+            "shape": [
+              128
+            ],
+            "sha256": "5e712b8f287f908d1ce1e1395fc79c5a8a23ffc6741aa3e403a044703542fafe"
+          },
+          {
+            "name": "main.layers.2.weight",
+            "shape": [
+              128,
+              128
+            ],
+            "sha256": "debe983d53a99006dc6bc6cc6eb2b7eb78300e450d1963c263664fa3d91c2786"
+          },
+          {
+            "name": "main.layers.2.bias",
+            "shape": [
+              128
+            ],
+            "sha256": "39575bbe8e7b4a253c3d3317b4376aee74e7998360dac7c8bfd0ccf767262173"
+          },
+          {
+            "name": "main.head.weight",
+            "shape": [
+              1,
+              128
+            ],
+            "sha256": "75e11176dd4556ead03c4cf0bc64b0b1b92e8bcde8350af902e9533925036aa8"
+          },
+          {
+            "name": "main.head.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "65b702563a3846ed803e4349336201ed36fb3d17c66c7ff53167bb5bcd3a54cf"
+          }
+        ]
+      },
+      "buffers": {
+        "G": {},
+        "prior": {},
+        "D": {
+          "frequencies": {
+            "shape": [
+              0
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "initial_ema_matches": {
+        "G": true,
+        "prior": true
+      },
+      "initial_state_sha256": "00976d46248ac59632d755f61ee48b4304b8f00faad42c90ed04d6e10a743af3",
+      "harness_sha256": "b0ea88e064520e75cb683a56ada72e5a736d7834a2a611dcaa97e58f1cd60890",
+      "original_artifact_manifest_mismatches": []
+    },
+    "artifacts": {
+      "evidence/api-rp5-vector_unequal_width/artifact-sha256.json": {
+        "sha256": "54a0c8d29e5104eb693ced906c334c0fa623f1ed11ddc8d36b2e15b0f8a94a16",
+        "original_sha256": "54a0c8d29e5104eb693ced906c334c0fa623f1ed11ddc8d36b2e15b0f8a94a16",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/artifact-sha256.json",
+        "bytes": 896,
+        "original_bytes": 896,
+        "listed_in_original_manifest": false
+      },
+      "evidence/api-rp5-vector_unequal_width/canonical-initialization.json": {
+        "sha256": "3e351d28f644e14d079722215631e6dc28105224689408e8559ac8fc071b2e18",
+        "original_sha256": "3e351d28f644e14d079722215631e6dc28105224689408e8559ac8fc071b2e18",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/canonical-initialization.json",
+        "bytes": 2461,
+        "original_bytes": 2461,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/declaration.json": {
+        "sha256": "cbe05f1f8de6243518b8afd40dbdc94370bdf75f192132f37ec45a943ee74dbf",
+        "original_sha256": "cbe05f1f8de6243518b8afd40dbdc94370bdf75f192132f37ec45a943ee74dbf",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/declaration.json",
+        "bytes": 21709,
+        "original_bytes": 21709,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/final-state.pt": {
+        "sha256": "17eed3228a660776ce8807183e6a78092f6bad0192a7f9ebc7566416a778bb2e",
+        "original_sha256": "17eed3228a660776ce8807183e6a78092f6bad0192a7f9ebc7566416a778bb2e",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/final-state.pt",
+        "bytes": 807385,
+        "original_bytes": 807385,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/initial-state.pt": {
+        "sha256": "00976d46248ac59632d755f61ee48b4304b8f00faad42c90ed04d6e10a743af3",
+        "original_sha256": "00976d46248ac59632d755f61ee48b4304b8f00faad42c90ed04d6e10a743af3",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/initial-state.pt",
+        "bytes": 803937,
+        "original_bytes": 803937,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/initial.json": {
+        "sha256": "b646e452b4d24b73919f0861387316cdc1e2a38e24047c9821a41ca970b5fc2d",
+        "original_sha256": "b646e452b4d24b73919f0861387316cdc1e2a38e24047c9821a41ca970b5fc2d",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/initial.json",
+        "bytes": 766,
+        "original_bytes": 766,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/learning-rates.jsonl.gz": {
+        "sha256": "b94d3f843f3fae5d9041a814fc49734926e61ebdc6d3ef14d31932cd5ae18672",
+        "original_sha256": "70b5ed9dc6280169e830ee38f9a0a836058872876dc8e8c609197f1bb4d268c8",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/learning-rates.jsonl",
+        "bytes": 238768,
+        "original_bytes": 1408203,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/metrics.jsonl.gz": {
+        "sha256": "a170367669a110cb1572a2ae891b65b7d7cc19b0198d8f67333ea4ae7d141be2",
+        "original_sha256": "5e12bd780c0d61517e40919dbc6619c2297ddd52d07c33f9cf1fc02dc5bcb02d",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/metrics.jsonl",
+        "bytes": 5774,
+        "original_bytes": 30636,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/result.json": {
+        "sha256": "9153c72593e80ca0f08773b060e538a067a4ea67a4aadcb81b37c385e24cb71a",
+        "original_sha256": "9153c72593e80ca0f08773b060e538a067a4ea67a4aadcb81b37c385e24cb71a",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/result.json",
+        "bytes": 4466,
+        "original_bytes": 4466,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/runtime.json": {
+        "sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+        "original_sha256": "96f2d2aed822d14b84ca7308a7e90c30a83e9757c0c7cc8d6ed408d19f2e5591",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/runtime.json",
+        "bytes": 604,
+        "original_bytes": 604,
+        "listed_in_original_manifest": true
+      },
+      "evidence/api-rp5-vector_unequal_width/source.zip": {
+        "sha256": "5619661762678b7777061df9c9f7b760889efd44d4252e3dc1a779a321fbeb20",
+        "original_sha256": "5619661762678b7777061df9c9f7b760889efd44d4252e3dc1a779a321fbeb20",
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_unequal_width-canonical/source.zip",
+        "bytes": 383643,
+        "original_bytes": 383643,
+        "listed_in_original_manifest": true
+      }
+    },
+    "supplementary_files": [],
+    "scope_note": "Own RP5 public API with canonical initial parameters, frozen CUDA host and explicitly isolated evaluation output seed2303; historical K3P global402 score is not a matched comparator."
+  },
+  "archive_lossless": true,
+  "all_source_files_copied": true,
+  "checkpoint_bytes_retained": true
+}

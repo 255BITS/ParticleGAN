@@ -1,0 +1,148 @@
+{
+  "candidate": "API-RP5",
+  "gate": "broader_vector_two_broad",
+  "status": "PASS",
+  "seconds": 73.48223176109605,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.026707096948173782,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.15329290305182622
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.005615234375,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.144384765625
+        },
+        {
+          "metric": "hq",
+          "value": 0.995361328125,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.14536132812500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.08789168111979961,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.7621083188802004
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.9140838980674744,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.7640838980674743
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 23,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 23,
+        "first_pass_step": 100,
+        "stable_from_step": 100,
+        "stable_from_seconds": null,
+        "confirmed_step": 300,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.25
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.026707096948173782,
+      "mean_error": 0.017096631228923798,
+      "covariance_error": 0.050532497465610504,
+      "target_scale": 1.0601637363433838,
+      "sample_count": 4096,
+      "mass_tv": 0.005615234375,
+      "min_mass_ratio": 0.98876953125,
+      "hq": 0.995361328125,
+      "component_covariance_error": 0.08789168111979961,
+      "component_covariance_errors": [
+        0.12075081467628479,
+        0.05503254756331444
+      ],
+      "component_min_eigen_ratio": 0.9140838980674744,
+      "component_mass": [
+        0.505615234375,
+        0.494384765625
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2071,
+        2025
+      ],
+      "ema": {
+        "sw1_normalized": 0.09115340282086579,
+        "mean_error": 0.02599686197936535,
+        "covariance_error": 0.2537912428379059,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.005615234375,
+        "min_mass_ratio": 0.98876953125,
+        "hq": 0.9912109375,
+        "component_covariance_error": 0.20728616416454315,
+        "component_covariance_errors": [
+          0.2272278070449829,
+          0.1873445212841034
+        ],
+        "component_min_eigen_ratio": 0.6949765086174011,
+        "component_mass": [
+          0.505615234375,
+          0.494384765625
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2071,
+          2025
+        ]
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": false,
+      "gap": 0.003228135406970978,
+      "gap_s": 0.003458714657358738,
+      "velocity": -2.329083337250428e-06,
+      "contraction_peak": 4.416335598905196e-05,
+      "contracting": 312,
+      "activity": 0.16941149182099144,
+      "activity_peak": 2.0897278125236887,
+      "quiet_gap": 0.004119232151433743,
+      "quiet_activity": 0.17064817996972703,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 1200,
+      "openings": 1,
+      "closings": 1,
+      "event": null,
+      "velocity_s": -8.898846489677212e-06
+    },
+    "updates": 1200
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-vector_two_broad"
+}

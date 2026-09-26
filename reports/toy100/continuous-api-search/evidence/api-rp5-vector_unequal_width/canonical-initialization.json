@@ -1,0 +1,108 @@
+{
+  "all_parameter_hashes_match": true,
+  "actual": [
+    [
+      {
+        "shape": [
+          64,
+          4
+        ],
+        "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+      },
+      {
+        "shape": [
+          64
+        ],
+        "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+      },
+      {
+        "shape": [
+          64,
+          64
+        ],
+        "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+      },
+      {
+        "shape": [
+          64
+        ],
+        "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+      },
+      {
+        "shape": [
+          2,
+          64
+        ],
+        "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+      },
+      {
+        "shape": [
+          2
+        ],
+        "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+      },
+      {
+        "shape": [
+          256,
+          4
+        ],
+        "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+      }
+    ],
+    [
+      {
+        "shape": [
+          128,
+          2
+        ],
+        "sha256": "0cb4ccc8411b14e20a51ab533ea749d222bc96dbe796f0dd2ee68cd66813c9b8"
+      },
+      {
+        "shape": [
+          128
+        ],
+        "sha256": "9cb4be7229a9e8dfcf85540769dc6cc22b4c0b0bde37c011c0e036a8b2f98cdb"
+      },
+      {
+        "shape": [
+          128,
+          128
+        ],
+        "sha256": "dba94662073a2281ded27798f634d4ee9a8d7c317ac409d8e433911e7c8d8c8c"
+      },
+      {
+        "shape": [
+          128
+        ],
+        "sha256": "5e712b8f287f908d1ce1e1395fc79c5a8a23ffc6741aa3e403a044703542fafe"
+      },
+      {
+        "shape": [
+          128,
+          128
+        ],
+        "sha256": "debe983d53a99006dc6bc6cc6eb2b7eb78300e450d1963c263664fa3d91c2786"
+      },
+      {
+        "shape": [
+          128
+        ],
+        "sha256": "39575bbe8e7b4a253c3d3317b4376aee74e7998360dac7c8bfd0ccf767262173"
+      },
+      {
+        "shape": [
+          1,
+          128
+        ],
+        "sha256": "75e11176dd4556ead03c4cf0bc64b0b1b92e8bcde8350af902e9533925036aa8"
+      },
+      {
+        "shape": [
+          1
+        ],
+        "sha256": "65b702563a3846ed803e4349336201ed36fb3d17c66c7ff53167bb5bcd3a54cf"
+      }
+    ]
+  ],
+  "fixture_sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a"
+}

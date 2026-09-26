@@ -25,6 +25,7 @@ alone is insufficient, and longer verification remains required.
 | API-DV4: data evidence plus a stability brake, serial execution | NOT_OBSERVED | — | 460 | 175/175 | Initial target not acquired by2400; finite-window result, not impossibility. |
 | API-DV5: payoff imbalance drives reversible mobility | 550 | 186/186 | 350 | 184/186 | Early recovery misses2760/2780, then182 passing checks from2790. Longer stability UNVERIFIED; DV6 prioritized. |
 | API-DV6: current data evidence authorizes memory release | 550 | 186/186 | 390 | 182/182 | Own stationary7500: **696/696**. Completed30000 with early recovery transients and long stable suffixes. **Rejected:** bars4/blobs4 each0/24; other two images pass. |
+| API-DV7: payoff feedback adjusts critic rate alongside data evidence | 640 | 177/177 | 330 | 183/188 | Early settling misses2740–2780; then182 passes. Stationary7500 **687/687**; all four images pass. Completed30000: delays310/270/250, four early first-recovery misses then long stable periods. Broader/API qualification incomplete. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -32,12 +33,13 @@ alone is insufficient, and longer verification remains required.
 | API-C5: local implicit game update, actual hard-copy critic reference | 560 | 185/185 | 270 | 194/194 | Declared .99 reference averaging was not executed; these scores belong to the accidental hard-copy version. A corrected successor must earn its own evidence. |
 | API-C6: corrected averaged reference and serial implicit game update | 590 | 182/182 | 300 | 191/191 | Own image and exact checkpoint PASS. **Rejected:** stationary7500 retains638/692 after arrival, with54 departures and minimumHQ0. |
 | API-C7: explicit fresh critic reference and serial implicit update | 590 | 182/182 | 270 | 194/194 | Image/checkpoint pass. **Rejected:** stationary641/692, late collapses2740–2960 and6440–6720. |
+| API-C8: local secant probe with backtracking | NOT_OBSERVED | — | NOT_OBSERVED | — | Complete4600; neither target reached; finalHQ.2583. Exact numerical solver retained as a research lead. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
 | API-RP3: precision adds generator-update cancellation, serial execution | 610 | 180/180 | 460 | 175/175 | **Rejected:** frozen img_intensity2 passes0/24; controller stays open. Longer tests NOT_RUN. |
 | API-RP4: precision plus implicit game update | 1250 | 108/116 | 350 | 170/186 | **Rejected:** intensity image0/24. |
-| API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images pass; checkpoint and horizon checks pass. Long/broader/K3P incomplete. **Survivor, not selected.** |
+| API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and first three vectors pass; checkpoint and horizon checks pass. Long/broader/K3P incomplete. **Survivor, not selected.** |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -87,12 +89,16 @@ verifies public factory ownership and exact single-run parity with the diagnosti
 
 ## Ongoing work
 
-The current survivor is **API-RP5**, with unchanged-target retention694/694 and
-four independently verified image passes. It closes precision on its own, reopens
+Two candidates currently have useful survivor evidence. **API-RP5** leads broader coverage, with unchanged-target retention694/694 and
+four independently verified image passes and three vector passes. It closes precision on its own, reopens
 after the single target change, and settles again. This remains partial evidence:
-long repeated changes, the remaining18 tasks, component API coverage and matched
+long repeated changes, the remaining15 tasks, component API coverage and matched
 public K3P are incomplete. The precision lane owns that comparator conditionally
-on surviving the remaining gates.
+on surviving the remaining gates. **API-DV7** also passes all four images and
+retains an unchanged target687/687. Its first shifted threshold contact is2730,
+followed by five early misses and a sustained suffix from2790. Its complete30000 run reaches the changed targets after310,270,250 updates, with
+four early misses in the first recovery, then long stable periods. No broader,
+replay or component-API pass is inherited from DV6.
 
 API-DV6 retained the stationary target696/696 and completed30000 updates. First
 arrival delays were410,420,370; two early misses at8280/8290 and one at27380 are

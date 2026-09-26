@@ -1,0 +1,468 @@
+{
+  "created_utc": "2026-09-26T23:06:58.145175+00:00",
+  "audit": "DV7 initial mechanism and own-evidence audit",
+  "scope": "Read-only source/JSON/restricted pickle metadata/raw-byte inspection; no Torch import, models, GPU, tests, training or active-worker edits.",
+  "worker": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576/repo",
+  "mechanism": {
+    "parent": "DV6",
+    "distinct_change": "D LR additionally multiplied by 1/(1+e^2), e=EMA.02(max(0,(G_adversarial-D_adversarial)/log2)), with one accepted-update lag.",
+    "ownership": "particlegan/continuous.py::critic_scale; particlegan/training.py::_step applies to opt_d only. Actual public get_recipe/GANTrainer.step. No harness controller or optimizer state mutation.",
+    "unchanged": "DV6 normalized real-feature innovation, payoff-error mobility, moment-surprise trust, KA2 memory control, ordinary alternating Adam, serial full-step backward, constant noise0/.029.",
+    "comparison_RP5": "No RP5 secant predictor/corrector, precision controller or eager Adam. DV7 has one ordinary D/G transaction, ordinary CPU scalar step metadata.",
+    "adaptive_rates": "Not constant LR: autonomous reversible data/payoff/surprise multipliers; no evaluator-horizon LR/noise schedule."
+  },
+  "changed_package_paths_vs_DV6": [
+    "particlegan/continuous.py",
+    "particlegan/ka2.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "package_hashes": {
+    "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "00ad3d5722c09bd3b5c6e53c83c534cb99570354aff4919efc69e19f3adbe891",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+    "particlegan/ka2.py": "8c86502abc3092762d5e81e4f96d78308b67d389406834a718ef60e614f054c3",
+    "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "particlegan/recipes.py": "06f460564ca5619de80251ed0780948d31c1d290a1b90f8ef31e737fdd4bbfd5",
+    "particlegan/training.py": "60a8d4d6674b41517667bb5a8ba7dd5c87761fed756b8d3a7205389b37177cd2",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "source_audits": {
+    "dv7-single": {
+      "source_zip_sha256": "451555bef4660196277ffbaa75c9cf4f56990e30adcf99e063977d76ea1b843e",
+      "source_count": 30,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "4161971847c3d66a615d7d7f23e469dc5ed9aa284c515e3d8f9e417e9382c988",
+      "runtime": null
+    },
+    "dv7-stationary": {
+      "source_zip_sha256": "0267b928f1822fcb0113303068aa1faffde219b4293a9646bc95d072c1e2d50a",
+      "source_count": 30,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "4161971847c3d66a615d7d7f23e469dc5ed9aa284c515e3d8f9e417e9382c988",
+      "runtime": null
+    },
+    "dv7-long": {
+      "source_zip_sha256": "0267b928f1822fcb0113303068aa1faffde219b4293a9646bc95d072c1e2d50a",
+      "source_count": 30,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "4161971847c3d66a615d7d7f23e469dc5ed9aa284c515e3d8f9e417e9382c988",
+      "runtime": null
+    },
+    "dv7-img_intensity2": {
+      "source_zip_sha256": "189b180b94cb8ba0ae21b7030e6966386a188b662a176f77788dcb21db57ba6d",
+      "source_count": 52,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "8c40edf140ed170d249392711dc34d35de73a5ad92193265f9b3350688690b51",
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device": "NVIDIA RTX A6000",
+        "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "deterministic_algorithms": true,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "threads": 1,
+        "serial_backward": true
+      }
+    },
+    "dv7-img_stripes2": {
+      "source_zip_sha256": "ad0fc385e096dca7db00b8f954f9aab6a91aa166239f2f23fb0415ffe198de7a",
+      "source_count": 52,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "8c40edf140ed170d249392711dc34d35de73a5ad92193265f9b3350688690b51",
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device": "NVIDIA RTX A6000",
+        "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "deterministic_algorithms": true,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "threads": 1,
+        "serial_backward": true
+      }
+    },
+    "dv7-img_bars4": {
+      "source_zip_sha256": "07154ffa8c7c250d2e25b5b85d4de0b419bfb2353c222661332aa175bbfddcf3",
+      "source_count": 52,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "8c40edf140ed170d249392711dc34d35de73a5ad92193265f9b3350688690b51",
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device": "NVIDIA RTX A6000",
+        "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "deterministic_algorithms": true,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "threads": 1,
+        "serial_backward": true
+      }
+    },
+    "dv7-img_blobs4": {
+      "source_zip_sha256": "07154ffa8c7c250d2e25b5b85d4de0b419bfb2353c222661332aa175bbfddcf3",
+      "source_count": 52,
+      "source_hash_mismatches": [],
+      "package_differences_from_single": [],
+      "frozen_image_helper_differences": [],
+      "artifact_hash_mismatches": [],
+      "raw_initial_model_stream_global_rng_matches_DV6_fixture": {
+        "models": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_state_sha256": "8c40edf140ed170d249392711dc34d35de73a5ad92193265f9b3350688690b51",
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device": "NVIDIA RTX A6000",
+        "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "deterministic_algorithms": true,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "threads": 1,
+        "serial_backward": true
+      }
+    }
+  },
+  "rate_audits": {
+    "dv7-single": {
+      "updates": 4600,
+      "max_relative_error_against_declared_recurrence": 4.3062864039120486e-16,
+      "minimum_critic_to_generator_rate": 0.39784910951476327,
+      "ranges": {
+        "generator_0": [
+          6.781542510408995e-06,
+          0.004249996734096261
+        ],
+        "prior_1": [
+          3.750012245896322e-05,
+          0.008499993732103934
+        ],
+        "critic_0": [
+          6.753881282132954e-06,
+          0.0042289625
+        ]
+      }
+    },
+    "dv7-stationary": {
+      "updates": 7500,
+      "max_relative_error_against_declared_recurrence": 4.422387231483999e-16,
+      "minimum_critic_to_generator_rate": 0.39784910951476327,
+      "ranges": {
+        "generator_0": [
+          1.2043958136366541e-06,
+          0.004249996734096261
+        ],
+        "prior_1": [
+          4.9060999976470944e-06,
+          0.008499993732103934
+        ],
+        "critic_0": [
+          1.1723519860800206e-06,
+          0.0042289625
+        ]
+      }
+    },
+    "dv7-img_intensity2": {
+      "updates": 600,
+      "max_relative_error_against_declared_recurrence": 2.1869446305754223e-16,
+      "minimum_critic_to_generator_rate": 0.9227617013193105,
+      "ranges": {
+        "generator_0": [
+          0.0004480291785293458,
+          0.0042289625
+        ],
+        "prior_1": [
+          0.0012032883224300578,
+          0.008459625
+        ],
+        "critic_0": [
+          0.00041342416702043217,
+          0.0042289625
+        ]
+      }
+    },
+    "dv7-img_stripes2": {
+      "updates": 600,
+      "max_relative_error_against_declared_recurrence": 2.1413332952185672e-16,
+      "minimum_critic_to_generator_rate": 0.8552055369242254,
+      "ranges": {
+        "generator_0": [
+          0.000268361674228401,
+          0.0042289625
+        ],
+        "prior_1": [
+          0.0008584719000343051,
+          0.008459625
+        ],
+        "critic_0": [
+          0.00026787249749273646,
+          0.0042289625
+        ]
+      }
+    },
+    "dv7-img_bars4": {
+      "updates": 600,
+      "max_relative_error_against_declared_recurrence": 2.173582882769534e-16,
+      "minimum_critic_to_generator_rate": 0.6297976567634653,
+      "ranges": {
+        "generator_0": [
+          0.00048670606106433946,
+          0.0042289625
+        ],
+        "prior_1": [
+          0.0012775166828507525,
+          0.008459625
+        ],
+        "critic_0": [
+          0.0004696282116867421,
+          0.0042289625
+        ]
+      }
+    },
+    "dv7-img_blobs4": {
+      "updates": 600,
+      "max_relative_error_against_declared_recurrence": 2.2186175023296344e-16,
+      "minimum_critic_to_generator_rate": 0.20285824572956268,
+      "ranges": {
+        "generator_0": [
+          0.0008458657342169061,
+          0.004230886740163118
+        ],
+        "prior_1": [
+          0.001966813025264769,
+          0.00846331798617164
+        ],
+        "critic_0": [
+          0.0007919653540392679,
+          0.0042289625
+        ]
+      }
+    }
+  },
+  "ring_derived": {
+    "single": [
+      {
+        "start": 0,
+        "end": 2400,
+        "first_arrival": 640,
+        "arrival_delay": 640,
+        "passing_since_arrival": 177,
+        "observations_since_arrival": 177,
+        "all_departures": [],
+        "minimum_hq_since_arrival": 0.921630859375,
+        "final_suffix_start": 640,
+        "final_suffix_observations": 177
+      },
+      {
+        "start": 2400,
+        "end": 4600,
+        "first_arrival": 2730,
+        "arrival_delay": 330,
+        "passing_since_arrival": 183,
+        "observations_since_arrival": 188,
+        "all_departures": [
+          {
+            "step": 2740,
+            "modes": 8,
+            "hq": 0.8984375
+          },
+          {
+            "step": 2750,
+            "modes": 8,
+            "hq": 0.645751953125
+          },
+          {
+            "step": 2760,
+            "modes": 8,
+            "hq": 0.635986328125
+          },
+          {
+            "step": 2770,
+            "modes": 7,
+            "hq": 0.60888671875
+          },
+          {
+            "step": 2780,
+            "modes": 8,
+            "hq": 0.849609375
+          }
+        ],
+        "minimum_hq_since_arrival": 0.60888671875,
+        "final_suffix_start": 2790,
+        "final_suffix_observations": 182
+      }
+    ],
+    "stationary": {
+      "start": 0,
+      "end": 7500,
+      "first_arrival": 640,
+      "arrival_delay": 640,
+      "passing_since_arrival": 687,
+      "observations_since_arrival": 687,
+      "all_departures": [],
+      "minimum_hq_since_arrival": 0.921630859375,
+      "final_suffix_start": 640,
+      "final_suffix_observations": 687
+    }
+  },
+  "prefix": {
+    "single4600_vs_stationary7500_exact_receipts": true,
+    "observations": 24,
+    "steps": "100..2400 every100",
+    "scope": "own full trainer/model/optimizer/RNG/caller receipts, not a separate fresh-process resume"
+  },
+  "image_summary": [
+    {
+      "task": "img_intensity2",
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 13,
+      "passing_suffix": 12,
+      "first_pass_step": 275,
+      "stable_from_step": 325,
+      "minimum_stable_checks": 5
+    },
+    {
+      "task": "img_stripes2",
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 23,
+      "passing_suffix": 23,
+      "first_pass_step": 50,
+      "stable_from_step": 50,
+      "minimum_stable_checks": 5
+    },
+    {
+      "task": "img_bars4",
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 20,
+      "passing_suffix": 20,
+      "first_pass_step": 125,
+      "stable_from_step": 125,
+      "minimum_stable_checks": 5
+    },
+    {
+      "task": "img_blobs4",
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 15,
+      "passing_suffix": 15,
+      "first_pass_step": 250,
+      "stable_from_step": 250,
+      "minimum_stable_checks": 5
+    }
+  ],
+  "image_archive_audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/dv7-image-audit.json",
+  "risks": [
+    {
+      "kind": "public helper gap",
+      "path": "particlegan/recipes.py:459",
+      "detail": "scale_learning_rates(...,controller=) applies common network/prior factors and omits DV7 critic_scale. Native/component routes need exact critic binding or are not DV7."
+    },
+    {
+      "kind": "default-device portability",
+      "path": "particlegan/continuous.py:39",
+      "detail": "Local generator is CPU but torch.randn omits device='cpu'. A global CUDA default can conflict. Current ring/image default is CPU; vector harness scopes CUDA only around sampler/scorer, avoiding this gap."
+    },
+    {
+      "kind": "finite evidence",
+      "detail": "New critic factor improves these measured images; they still do not test mature KA2 memory after799. Stationary has no departures after640 but long recurrent/late shifts remain pending."
+    },
+    {
+      "kind": "rate magnitude",
+      "detail": "Stationary rates fall autonomously as low as about1.2e-6 for G/D. Requires long recovery evidence to separate retained precision from excessive slowdown; no fixed scheduling/oracle was found."
+    },
+    {
+      "kind": "detector calibration",
+      "detail": "Flattening is rank-agnostic and scores only observed real batches. Location/scale and random projection are anchored at first batch; 32 projections with160features are a heuristic change signal, not a universal distribution test."
+    },
+    {
+      "kind": "checkpoint scope",
+      "detail": "DV7 controller is serialized; own exact fresh-process continuation not yet present in this audit. DV6 continuation cannot be inherited."
+    },
+    {
+      "kind": "diagnostics",
+      "detail": "Image harness catches repr(error) without full traceback; completed PASS evidence unaffected."
+    },
+    {
+      "kind": "source declaration",
+      "detail": "Ring declaration retains status NOT_RUN from pre-execution manifest. Terminal result.json,complete raw rows and artifact hashes establish completion; never infer status from declaration alone."
+    }
+  ],
+  "pending": [
+    "uninterrupted long30000 terminal result",
+    "remaining own22 quality tasks",
+    "own exact fresh-process checkpoint continuation",
+    "matched exact public K3P comparison"
+  ],
+  "verdict": "OWN_SINGLE_WITH_EARLY_SETTLING_DEPARTURES_AND_STATIONARY_SUPPORTED; FOUR_IMAGE_PASSES_SUPPORTED; NOT_FULLY_QUALIFIED"
+}
