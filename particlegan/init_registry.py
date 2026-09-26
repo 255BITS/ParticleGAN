@@ -9,10 +9,12 @@ called. Names come from the screened families:
 * D, PR #179: ``hid_q`` x ``qr_pb_pq`` hybrids, including ``qr_pb_pq``
 * E, PR #180: structured orthogonal families (Cayley, Fourier, Haar, ...)
 * F, PR #181: particle-prior sequences on the ``hid_q`` and ``qr_pb_pq`` arms
+* ``qr_bz_pq``, ``ortho-init-k3p``: QR weights, zero biases, R2 particle prior
 
 ``hid_q`` is family A's. Family D and family F reproduce that name; the
 registry keeps A's tensors for it. ``qr_pb_pq`` is family D's copy of the
 ortho-search init. Family F's other prior names still use family F's arm.
+``qr_bz_pq`` is the ortho-init-k3p initializer (zero bias, QMC prior).
 """
 from __future__ import annotations
 
@@ -28,6 +30,7 @@ from particlegan import (
     det_init_f,
     deterministic_init,
     family_e_init,
+    qr_bz_pq_init,
     structured_init,
 )
 from particlegan.particle_prior import ParticlePrior
@@ -40,6 +43,7 @@ _FAMILIES = (
     ("D", det_init_d.VARIANTS, det_init_d.install),
     ("E", family_e_init.names(), family_e_init.install),
     ("F", det_init_f.VARIANTS, det_init_f.install),
+    ("qr_bz_pq", (qr_bz_pq_init.VARIANT,), qr_bz_pq_init.install),
 )
 
 _INSTALLERS: dict[str, tuple[str, object]] = {}

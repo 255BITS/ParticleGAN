@@ -10,6 +10,7 @@ SCORED = (
     "had_tm_frob_bias",
     "halton",
     "qr_pb_pq",
+    "qr_bz_pq",
     "mix_pb_weyl",
     "mix_zb_pq",
     "cay_pb_pq",
@@ -43,12 +44,12 @@ SCORED = (
 )
 
 
-def test_scored_names_are_registered_and_default_is_absent():
+def test_scored_names_are_registered():
     from particlegan.init_registry import NAMES
 
     missing = [name for name in SCORED if name not in NAMES]
     assert not missing
-    assert "qr_bz_pq" not in NAMES
+    assert "qr_bz_pq" in NAMES
     assert len(NAMES) == len(set(NAMES))
     assert len(NAMES) > len(SCORED)
 
