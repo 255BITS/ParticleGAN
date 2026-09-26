@@ -1,0 +1,23 @@
+{
+  "event": "build",
+  "torch": "2.14.0+cpu",
+  "torch_git": "08187d9e0fba026dc8217405802ab5381dc88d90",
+  "cuda": false,
+  "phase": "determinism",
+  "variants": [
+    "hid_q",
+    "qr_pb_pq",
+    "hq_pb",
+    "hq_pq",
+    "hq_pb_pq",
+    "hq_zb_pq",
+    "mix_pb_pq",
+    "mix_wq_pq",
+    "mix_pb_weyl",
+    "mix_zb_pq",
+    "qr_wq_pq",
+    "hh_pb_pq",
+    "hh_wq_pq",
+    "hh_zb_pq"
+  ]
+}

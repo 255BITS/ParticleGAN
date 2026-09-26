@@ -1,0 +1,1469 @@
+diff --git a/benchmarks/toy100/__main__.py b/benchmarks/toy100/__main__.py
+index 005a7e21..36beff92 100644
+--- a/benchmarks/toy100/__main__.py
++++ b/benchmarks/toy100/__main__.py
+@@ -37,6 +37,8 @@ def _parser():
+     run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
+                      help="auto uses cuda when available, else cpu; overrides the config device")
+     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
++    run.add_argument("--init", default=None,
++                     help="deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init")
+     accuracy = run.add_mutually_exclusive_group()
+     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
+                           help="require sustained fidelity and a 100k-sample holdout (default)")
+@@ -50,6 +52,9 @@ def _parser():
+ 
+ 
+ def _run(args):
++    if args.init:
++        from particlegan.det_init import install
++        install(args.init)
+     from .device import apply_device_policy, host_device
+ 
+     device_override = args.device
+diff --git a/benchmarks/toy100/det_init_d_driver.py b/benchmarks/toy100/det_init_d_driver.py
+new file mode 100644
+index 00000000..7ab5006a
+--- /dev/null
++++ b/benchmarks/toy100/det_init_d_driver.py
+@@ -0,0 +1,167 @@
++"""Family D CPU screen. One JSON line per finished job, easy to tail.
++
++    python -u -m benchmarks.toy100.det_init_d_driver --phase baseline
++    python -u -m benchmarks.toy100.det_init_d_driver --phase determinism
++    python -u -m benchmarks.toy100.det_init_d_driver --phase screen
++    python -u -m benchmarks.toy100.det_init_d_driver --phase priority --variants hq_pb_pq,mix_pb_pq
++
++Logs: $K3P_DET_ROOT/screen.jsonl and $K3P_DET_ROOT/logs/.
++"""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import os
++import subprocess
++import sys
++import time
++from concurrent.futures import ThreadPoolExecutor
++from pathlib import Path
++
++import torch
++
++ROOT = Path(__file__).resolve().parents[2]
++SCREEN = ROOT / "benchmarks/toy100/det_init_screen.py"
++OUT = Path(os.environ.get("K3P_DET_ROOT", "/tmp/k3p-det-d"))
++JSONL = OUT / "screen.jsonl"
++OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
++SCREEN_GATES = ("ring", "unequal")
++PRIORITY = ("ring", "hold", "unequal", "stripes", "blobs", "grid100", "rotated100", "shift")
++
++
++def _variants():
++    sys.path.insert(0, str(ROOT))
++    from particlegan.det_init import VARIANTS
++    return VARIANTS
++
++
++def _finished(path: Path) -> bool:
++    result = path / "result.json"
++    if result.exists():
++        status = json.loads(result.read_text()).get("status")
++        if status not in (None, "ERROR"):
++            return True
++    if (path / "gate-grid100.json").exists() or (path / "gate-rotated100.json").exists():
++        return True
++    return False
++
++
++def _row(variant: str, offset: int, gate: str, proc: subprocess.CompletedProcess, seconds: float) -> dict:
++    text = (proc.stdout or "").strip().splitlines()
++    payload = {}
++    if text:
++        try:
++            payload = json.loads(text[-1])
++        except json.JSONDecodeError:
++            payload = {"status": "ERROR", "raw": text[-1][:400]}
++    payload.update(variant=variant, seed_offset=offset, gate=gate,
++                   wall_seconds=round(seconds, 3), driver_rc=proc.returncode)
++    return payload
++
++
++def _launch(job):
++    variant, offset, gate, init_only = job
++    name = "baseline" if variant is None else variant
++    folder = OUT / "out" / name / f"s{offset}" / ("init-" + gate if init_only else gate)
++    log = OUT / "logs" / f"{name}-s{offset}-{gate}{'-init' if init_only else ''}.log"
++    if _finished(folder) and not init_only:
++        return {"variant": name, "seed_offset": offset, "gate": gate, "status": "SKIP"}
++    if init_only and (folder / "initial-values.pt").exists() and (folder / "result.json").exists():
++        return {"variant": name, "seed_offset": offset, "gate": gate, "status": "SKIP", "init_only": True}
++    if folder.exists():
++        subprocess.run(["rm", "-rf", str(folder)], check=True)
++    log.parent.mkdir(parents=True, exist_ok=True)
++    cmd = [sys.executable, "-u", str(SCREEN), "--gate", gate, "--output", str(folder),
++           "--log", str(log), "--seed-offset", str(offset)]
++    if variant:
++        cmd.extend(["--init", variant])
++    if init_only:
++        cmd.append("--init-only")
++    started = time.perf_counter()
++    proc = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True)
++    row = _row(name, offset, gate, proc, time.perf_counter() - started)
++    if init_only:
++        row["init_only"] = True
++    with JSONL.open("a") as handle:
++        handle.write(json.dumps(row, sort_keys=True) + "\n")
++    print(json.dumps(row, sort_keys=True), flush=True)
++    return row
++
++
++def _jobs(phase: str, variants):
++    if phase == "baseline":
++        return [(None, offset, gate, False) for offset in OFFSETS for gate in SCREEN_GATES]
++    if phase == "determinism":
++        return [(name, offset, gate, True) for name in variants for gate in SCREEN_GATES for offset in (0, 101)]
++    if phase == "screen":
++        return [(name, offset, gate, False) for name in variants for offset in OFFSETS for gate in SCREEN_GATES]
++    raise ValueError(phase)
++
++
++def _tensor_sha(path: Path) -> str:
++    blob = torch.load(path, map_location="cpu", weights_only=True)
++    digest = hashlib.sha256()
++
++    def eat(value):
++        if torch.is_tensor(value):
++            raw = value.detach().cpu().contiguous()
++            digest.update(str(tuple(raw.shape)).encode())
++            digest.update(raw.numpy().tobytes())
++        elif isinstance(value, (list, tuple)):
++            for item in value:
++                eat(item)
++
++    eat(blob)
++    return digest.hexdigest()
++
++
++def _check_determinism(variants):
++    report = {}
++    for name in variants:
++        per_gate = {}
++        for gate in SCREEN_GATES:
++            left = OUT / "out" / name / "s0" / f"init-{gate}" / "initial-values.pt"
++            right = OUT / "out" / name / "s101" / f"init-{gate}" / "initial-values.pt"
++            if not left.exists() or not right.exists():
++                per_gate[gate] = {"match": False, "error": "missing checkpoint"}
++                continue
++            sha_left, sha_right = _tensor_sha(left), _tensor_sha(right)
++            per_gate[gate] = {"match": sha_left == sha_right, "sha256": sha_left, "sha_s101": sha_right}
++        report[name] = per_gate
++    path = OUT / "determinism.json"
++    path.write_text(json.dumps(report, indent=2) + "\n")
++    rows = [gate for per_gate in report.values() for gate in per_gate.values()]
++    print(json.dumps({"event": "determinism", "pass": sum(row["match"] for row in rows),
++                      "n": len(rows), "path": str(path)}), flush=True)
++    return report
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--phase", required=True, choices=("baseline", "determinism", "screen", "priority"))
++    parser.add_argument("--variants", default=None, help="comma list; default is every family D flag")
++    parser.add_argument("--jobs", type=int, default=int(os.environ.get("K3P_DET_JOBS", "3")))
++    args = parser.parse_args()
++    OUT.mkdir(parents=True, exist_ok=True)
++    (OUT / "logs").mkdir(parents=True, exist_ok=True)
++    names = tuple(args.variants.split(",")) if args.variants else _variants()
++    header = {"event": "build", "torch": torch.__version__, "torch_git": getattr(torch.version, "git_version", None),
++              "cuda": torch.cuda.is_available(), "phase": args.phase, "variants": list(names)}
++    print(json.dumps(header), flush=True)
++    (OUT / "build.json").write_text(json.dumps(header, indent=2) + "\n")
++    if args.phase == "priority":
++        jobs = [(name, 0, gate, False) for name in names for gate in PRIORITY]
++    else:
++        jobs = _jobs(args.phase, names)
++    with ThreadPoolExecutor(max(1, args.jobs)) as pool:
++        list(pool.map(_launch, jobs))
++    if args.phase == "determinism":
++        report = _check_determinism(names)
++        rows = [gate for per_gate in report.values() for gate in per_gate.values()]
++        if not all(row["match"] for row in rows):
++            raise SystemExit(1)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/benchmarks/toy100/det_init_screen.py b/benchmarks/toy100/det_init_screen.py
+new file mode 100644
+index 00000000..7cde0483
+--- /dev/null
++++ b/benchmarks/toy100/det_init_screen.py
+@@ -0,0 +1,131 @@
++"""One K3P CPU gate under an optional deterministic init.
++
++Prints a single JSON object on stdout. Training chatter stays in ``--log``.
++
++    python -u -m benchmarks.toy100.det_init_screen --gate ring --init hq_pb_pq --output /tmp/out --log /tmp/out.log
++"""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import os
++import subprocess
++import sys
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[2]
++K3P = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p"
++CONFIG = K3P / "config.json"
++GATES = ("ring", "unequal", "stripes", "blobs", "hold", "shift", "grid100", "rotated100")
++OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
++
++
++def _command(gate: str, init: str | None, output: Path) -> list[str]:
++    probe = [sys.executable, "-u", str(K3P / "probe.py"), "--repo", str(ROOT),
++             "--config", str(CONFIG), "--backend", "cpu", "--output", str(output)]
++    if gate == "ring":
++        cmd = probe + ["--task", "mode_hold"]
++    elif gate == "unequal":
++        cmd = probe + ["--task", "vector_unequal_mass"]
++    elif gate == "stripes":
++        cmd = probe + ["--task", "img_stripes2"]
++    elif gate == "blobs":
++        cmd = probe + ["--task", "img_blobs4"]
++    elif gate == "hold":
++        cmd = [sys.executable, "-u", str(K3P / "hold.py"), "--repo", str(ROOT),
++               "--config", str(CONFIG), "--task", "mode_hold", "--backend", "cpu",
++               "--network-floor", "0.01", "--prior-floor", "0.05", "--output", str(output)]
++    elif gate == "shift":
++        cmd = [sys.executable, "-u", str(K3P / "shift.py"), "--repo", str(ROOT),
++               "--config", str(CONFIG), "--task", "mode_hold", "--backend", "cpu",
++               "--network-floor", "0.01", "--prior-floor", "0.05", "--output", str(output)]
++    elif gate in ("grid100", "rotated100"):
++        cmd = [sys.executable, "-u", "-m", "benchmarks.toy100", "run",
++               "--config", str(CONFIG), "--problem", gate, "--device", "cpu",
++               "--no-render", "--output", str(output)]
++    else:
++        raise ValueError(gate)
++    if init:
++        cmd.extend(["--init", init])
++    return cmd
++
++
++def _summary(gate: str, output: Path, returncode: int) -> dict:
++    row = {"gate": gate, "returncode": returncode}
++    if gate in ("grid100", "rotated100"):
++        coverage = output / f"gate-{gate}.json"
++        accuracy = output / f"accuracy-gate-{gate}.json"
++        if coverage.exists():
++            row["coverage"] = json.loads(coverage.read_text()).get("status")
++        if accuracy.exists():
++            row["accuracy"] = json.loads(accuracy.read_text()).get("status")
++        summary = output / gate / "summary.json"
++        if summary.exists():
++            row["train_status"] = json.loads(summary.read_text()).get("status")
++        row["status"] = "PASS" if row.get("coverage") == "PASS" and row.get("accuracy") == "PASS" else "FAIL"
++        if not coverage.exists() and not accuracy.exists():
++            row["status"] = "ERROR"
++        return row
++    path = output / "result.json"
++    if not path.exists():
++        row["status"] = "ERROR"
++        return row
++    payload = json.loads(path.read_text())
++    row["status"] = payload.get("status")
++    row["seconds"] = payload.get("seconds")
++    if gate == "hold":
++        gate_row = payload.get("gate") or {}
++        row["hold_checks"] = gate_row.get("hold_checks")
++        row["converged_step"] = gate_row.get("converged_step")
++    elif gate == "shift":
++        hold = payload.get("continued_hold") or {}
++        row["stay"] = f"{hold.get('passing_checks')}/{hold.get('checks')}"
++        row["pass_all"] = hold.get("pass_all")
++    else:
++        live = (payload.get("result") or {}).get("live") or {}
++        keep = ("modes", "hq", "min_mass_ratio", "sw1_normalized", "mass_tv",
++                "component_min_eigen_ratio", "mean_rmse")
++        row["live"] = {key: live.get(key) for key in keep if key in live}
++        conv = (payload.get("result") or {}).get("convergence") or {}
++        if "passing_suffix" in conv:
++            row["passing_suffix"] = conv.get("passing_suffix")
++    initial = output / "initial-values.pt"
++    if initial.exists():
++        row["initial_sha256"] = hashlib.sha256(initial.read_bytes()).hexdigest()
++    return row
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--gate", required=True, choices=GATES)
++    parser.add_argument("--init", default=None)
++    parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--log", type=Path, required=True)
++    parser.add_argument("--seed-offset", type=int, default=0)
++    parser.add_argument("--init-only", action="store_true")
++    args = parser.parse_args()
++    if args.output.exists():
++        raise SystemExit(f"output exists: {args.output}")
++    args.log.parent.mkdir(parents=True, exist_ok=True)
++    env = os.environ.copy()
++    env.update(OMP_NUM_THREADS="1", MKL_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1",
++               PYTHONHASHSEED="0", PYTHONUNBUFFERED="1")
++    if args.seed_offset:
++        env["K3P_SEED_OFFSET"] = str(args.seed_offset)
++    cmd = _command(args.gate, args.init, args.output)
++    if args.init_only and args.gate not in ("grid100", "rotated100"):
++        cmd.append("--init-only")
++    if args.seed_offset or args.init_only:
++        shim = str(Path(__file__).with_name("det_init_seedshim.py"))
++        cmd = [sys.executable, "-u", shim, *cmd[2:]]
++    with args.log.open("w") as log:
++        done = subprocess.run(cmd, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT)
++    row = _summary(args.gate, args.output, done.returncode)
++    row.update(init=args.init or "baseline", seed_offset=args.seed_offset, log=str(args.log))
++    print(json.dumps(row, sort_keys=True), flush=True)
++    raise SystemExit(0 if row.get("status") != "ERROR" else 1)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/benchmarks/toy100/det_init_seedshim.py b/benchmarks/toy100/det_init_seedshim.py
+new file mode 100644
+index 00000000..33fd66ba
+--- /dev/null
++++ b/benchmarks/toy100/det_init_seedshim.py
+@@ -0,0 +1,41 @@
++"""Shift every torch seed by ``K3P_SEED_OFFSET`` and run the remaining argv.
++
++Init values do not read this offset. Only ``manual_seed`` streams move, which
++is the sample and noise randomness. Offset 0 is not routed through this shim.
++"""
++from __future__ import annotations
++
++import os
++import runpy
++import sys
++
++import torch
++
++OFFSET = int(os.environ.get("K3P_SEED_OFFSET", "0"))
++module = None
++if sys.argv[1] == "-m":
++    module = sys.argv[2]
++    sys.argv = [module, *sys.argv[3:]]
++else:
++    script = os.path.abspath(sys.argv[1])
++    sys.path.insert(0, os.path.dirname(script))
++    sys.argv = sys.argv[1:]
++if OFFSET:
++    def shift(seed):
++        return (int(seed) + OFFSET) % (2 ** 63)
++
++    def manual_seed(seed):
++        return torch.default_generator.manual_seed(shift(seed))
++
++    torch.manual_seed = torch.random.manual_seed = manual_seed
++    _Base = torch.Generator
++
++    class Generator(_Base):
++        def manual_seed(self, seed):
++            return super().manual_seed(shift(seed))
++
++    torch.Generator = Generator
++if module is not None:
++    runpy.run_module(module, run_name="__main__")
++else:
++    runpy.run_path(script, run_name="__main__")
+diff --git a/particlegan/det_init.py b/particlegan/det_init.py
+new file mode 100644
+index 00000000..4c8cac15
+--- /dev/null
++++ b/particlegan/det_init.py
+@@ -0,0 +1,492 @@
++"""Deterministic K3P initializers. Family D hybrids of hid_q and qr_pb_pq.
++
++``install(name)`` overwrites random Linear, Conv, and particle-prior draws
++with a closed-form function of tensor shape and construction order. The
++original ``uniform_`` / ``normal_`` still runs first, so later sample streams
++stay on the seed. Host writes after that draw (``copy_(eye)``, ``zero_()``)
++are left alone.
++
++Nothing here changes learning rates, schedules, penalties, or loss weights.
++Omit ``install`` and the PyTorch init is unchanged.
++
++Weight rules
++  house_hid  Square matrices: 3-reflector Householder times the Kaiming gain.
++             Rectangles: tiled scaled identity at the Kaiming RMS. Convolutions
++             put that matrix on the center tap (hid_q weights).
++  house_all  Same Householder, semi-orthogonal on every matrix including
++             rectangles and full convolution kernels, scaled to the RMS of the
++             distribution that actually filled the tensor.
++  qr         Float64 QR of a splitmix64 normal matrix, sign-fixed, scaled to
++             that same declared RMS (qr_pb_pq weights).
++  mix        Householder on square hidden maps, QR on rectangular input/output
++             maps. Square-channel convolutions use the center-tap Householder;
++             other convolutions use QR.
++
++Bias rules
++  weyl_q   Kronecker-Weyl sequence in a quarter of the declared uniform box.
++  pattern  Hash pattern standardized to the declared mean and std.
++  zero     All-zero, when the host did not already rewrite the bias.
++
++Prior rules
++  weyl  Kronecker-Weyl mapped by Acklam's inverse normal, or into the box.
++  r2    Roberts R2 sequence, one point per row, through ``torch.special.ndtri``
++        or into the box.
++
++``hid_q`` and ``qr_pb_pq`` are the two parents, included so a CPU screen can
++compare hybrids to them on the same build.
++"""
++from __future__ import annotations
++
++import contextvars
++import hashlib
++import json
++import math
++
++import numpy as np
++import torch
++from torch import nn
++
++_SPECS = {
++    "hid_q": dict(w="house_hid", b="weyl_q", p="weyl"),
++    "qr_pb_pq": dict(w="qr", b="pattern", p="r2"),
++    "hq_pb": dict(w="house_hid", b="pattern", p="weyl"),
++    "hq_pq": dict(w="house_hid", b="weyl_q", p="r2"),
++    "hq_pb_pq": dict(w="house_hid", b="pattern", p="r2"),
++    "hq_zb_pq": dict(w="house_hid", b="zero", p="r2"),
++    "mix_pb_pq": dict(w="mix", b="pattern", p="r2"),
++    "mix_wq_pq": dict(w="mix", b="weyl_q", p="r2"),
++    "mix_pb_weyl": dict(w="mix", b="pattern", p="weyl"),
++    "mix_zb_pq": dict(w="mix", b="zero", p="r2"),
++    "qr_wq_pq": dict(w="qr", b="weyl_q", p="r2"),
++    "hh_pb_pq": dict(w="house_all", b="pattern", p="r2"),
++    "hh_wq_pq": dict(w="house_all", b="weyl_q", p="r2"),
++    "hh_zb_pq": dict(w="house_all", b="zero", p="r2"),
++}
++VARIANTS = tuple(_SPECS)
++_GAIN = math.sqrt(2.0 / (1.0 + 5.0))  # calculate_gain("leaky_relu", sqrt(5))
++_PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53)
++_STATE = {"name": None}
++_PATCHED = False
++_ORIG = {}
++_Q_CACHE: dict[int, torch.Tensor] = {}
++_SEQ = [0]
++_IN_PRIOR = contextvars.ContextVar("k3p_det_prior", default=False)
++LOG: list[dict] = []
++
++# Acklam inverse-normal. Float64 in and out, then the parameter cast.
++_A = (-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
++      1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00)
++_B = (-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02,
++      6.680131188771972e+01, -1.328068155288572e+01)
++_C = (-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00,
++      -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00)
++_D = (7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00,
++      3.754408661907416e+00)
++_P_LOW = 0.02425
++_CPU = torch.device("cpu")
++
++
++def install(name: str) -> str:
++    """Activate one variant. Construction order restarts at zero."""
++    if name not in _SPECS:
++        raise ValueError(f"init must be one of {', '.join(VARIANTS)}")
++    _ensure_patched()
++    _STATE["name"] = name
++    _SEQ[0] = 0
++    LOG.clear()
++    print(json.dumps({"event": "det_init", "name": name, "spec": _SPECS[name]}), flush=True)
++    return name
++
++
++def uninstall() -> None:
++    """Leave the patches installed but inert."""
++    _STATE["name"] = None
++    _SEQ[0] = 0
++
++
++def active() -> str | None:
++    return _STATE["name"]
++
++
++def spec(name: str | None = None) -> dict:
++    return dict(_SPECS[name or _STATE["name"]])
++
++
++def ndtri(p: torch.Tensor) -> torch.Tensor:
++    """Inverse standard normal CDF. ``p`` in (0, 1), float64 in and out."""
++    p = p.to(dtype=torch.float64, device=_CPU)
++    low = p < _P_LOW
++    high = p > 1.0 - _P_LOW
++    central = ~low & ~high
++    out = torch.empty_like(p)
++    if bool(central.any()):
++        q = p - 0.5
++        r = q * q
++        num = (((((_A[0] * r + _A[1]) * r + _A[2]) * r + _A[3]) * r + _A[4]) * r + _A[5]) * q
++        den = (((((_B[0] * r + _B[1]) * r + _B[2]) * r + _B[3]) * r + _B[4]) * r + 1.0)
++        out = torch.where(central, num / den, out)
++    if bool(low.any()):
++        out = torch.where(low, _tail(p), out)
++    if bool(high.any()):
++        out = torch.where(high, -_tail(1.0 - p), out)
++    return out
++
++
++def _tail(p: torch.Tensor) -> torch.Tensor:
++    q = torch.sqrt(-2.0 * torch.log(p))
++    num = (((((_C[0] * q + _C[1]) * q + _C[2]) * q + _C[3]) * q + _C[4]) * q + _C[5])
++    den = ((((_D[0] * q + _D[1]) * q + _D[2]) * q + _D[3]) * q + 1.0)
++    return num / den
++
++
++def _alpha(index: int) -> float:
++    if index < len(_PRIMES):
++        return math.sqrt(_PRIMES[index])
++    return math.sqrt(_PRIMES[index % len(_PRIMES)] * (index // len(_PRIMES) + 2))
++
++
++def _weyl(n: int, d: int) -> torch.Tensor:
++    """Kronecker sequence in ``(1e-12, 1-1e-12)`` with shape ``(n, d)``."""
++    if n < 0 or d < 0:
++        raise ValueError("weyl size must be nonnegative")
++    if n == 0 or d == 0:
++        return torch.zeros(n, d, dtype=torch.float64, device=_CPU)
++    idx = torch.arange(1, n + 1, dtype=torch.float64, device=_CPU)
++    cols = []
++    for j in range(d):
++        x = idx * _alpha(j)
++        cols.append(x - torch.floor(x))
++    out = torch.stack(cols, 1) if d > 1 else cols[0].unsqueeze(1)
++    return out.clamp(1e-12, 1.0 - 1e-12)
++
++
++def _householder(n: int) -> torch.Tensor:
++    """Deterministic orthogonal ``n x n`` from three rational Householder reflectors."""
++    hit = _Q_CACHE.get(n)
++    if hit is not None:
++        return hit
++    if n <= 0:
++        q = torch.zeros(0, 0, dtype=torch.float64, device=_CPU)
++    elif n == 1:
++        q = torch.ones(1, 1, dtype=torch.float64, device=_CPU)
++    else:
++        rows = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
++        for prime in (2, 3, 5):
++            v = [(((i + 1) * prime) % 997) / 997.0 - 0.5 for i in range(n)]
++            norm = math.sqrt(sum(x * x for x in v))
++            inv = 1.0 / norm
++            v = [x * inv for x in v]
++            qv = [sum(rows[i][j] * v[j] for j in range(n)) for i in range(n)]
++            for i in range(n):
++                scale = 2.0 * qv[i]
++                row = rows[i]
++                for j in range(n):
++                    row[j] -= scale * v[j]
++        q = torch.tensor(rows, dtype=torch.float64, device=_CPU)
++    _Q_CACHE[n] = q
++    return q
++
++
++def _house_semi(rows: int, cols: int) -> torch.Tensor:
++    """Leading block of a Householder orthogonal. Columns or rows are orthonormal."""
++    if rows <= 0 or cols <= 0:
++        return torch.zeros(rows, cols, dtype=torch.float64, device=_CPU)
++    if rows >= cols:
++        return _householder(rows)[:, :cols]
++    return _householder(cols)[:rows, :]
++
++
++def _hash_u01(key: int, n: int) -> np.ndarray:
++    if n <= 0:
++        return np.zeros(0, dtype=np.float64)
++    with np.errstate(over="ignore"):
++        x = (np.arange(n, dtype=np.uint64) + np.uint64(key)) * np.uint64(0x9E3779B97F4A7C15)
++        x = (x ^ (x >> np.uint64(30))) * np.uint64(0xBF58476D1CE4E5B9)
++        x = (x ^ (x >> np.uint64(27))) * np.uint64(0x94D049BB133111EB)
++        x = x ^ (x >> np.uint64(31))
++    return ((x >> np.uint64(11)).astype(np.float64) + 0.5) / float(2 ** 53)
++
++
++def _key(*parts) -> int:
++    return int.from_bytes(hashlib.sha256(repr(parts).encode()).digest()[:8], "little") >> 1
++
++
++def _alloc_key(role: str, shape) -> int:
++    key = _key(_SEQ[0], role, tuple(shape))
++    _SEQ[0] += 1
++    return key
++
++
++def _semi_orthogonal(key: int, rows: int, cols: int) -> torch.Tensor:
++    """Float64 QR with a positive diagonal. Orthonormal columns, or rows if ``rows < cols``."""
++    flip = rows < cols
++    r, c = (cols, rows) if flip else (rows, cols)
++    u = torch.from_numpy(np.ascontiguousarray(_hash_u01(key, r * c))).reshape(r, c)
++    source = torch.special.ndtri(u)
++    q, rr = torch.linalg.qr(source)
++    d = torch.sign(torch.diagonal(rr))
++    d = torch.where(d == 0, torch.ones_like(d), d)
++    q = q * d
++    return q.T.contiguous() if flip else q
++
++
++def _r2(n: int, d: int) -> np.ndarray:
++    """Roberts R2 in ``[0, 1)^d``. Row ``i`` is one point. No RNG."""
++    phi = 2.0
++    for _ in range(64):
++        phi = (1.0 + phi) ** (1.0 / (d + 1))
++    alpha = np.array([(1.0 / phi) ** (j + 1) for j in range(d)])
++    return np.mod(0.5 + np.arange(1, n + 1)[:, None] * alpha[None, :], 1.0)
++
++
++def _declared(tag):
++    kind, a, b = tag
++    if kind == "uniform":
++        rms = math.sqrt((a * a + a * b + b * b) / 3.0)
++        return rms, (a + b) / 2.0, (b - a) / math.sqrt(12.0)
++    return math.sqrt(a * a + b * b), a, b
++
++
++def _kaiming_std(weight: torch.Tensor) -> float:
++    fan_in, _ = nn.init._calculate_fan_in_and_fan_out(weight)
++    return _GAIN / math.sqrt(fan_in) if fan_in > 0 else 0.0
++
++
++def _unit(rows: int, cols: int) -> torch.Tensor:
++    block = torch.zeros(rows, cols, dtype=torch.float64, device=_CPU)
++    if rows == 0 or cols == 0:
++        return block
++    if rows >= cols:
++        reps, rem = divmod(rows, cols)
++        eye = torch.eye(cols, dtype=torch.float64, device=_CPU)
++        for r in range(reps):
++            block[r * cols:(r + 1) * cols] = eye
++        if rem:
++            block[reps * cols:, :rem] = torch.eye(rem, dtype=torch.float64, device=_CPU)
++    else:
++        reps, rem = divmod(cols, rows)
++        eye = torch.eye(rows, dtype=torch.float64, device=_CPU)
++        for r in range(reps):
++            block[:, r * rows:(r + 1) * rows] = eye
++        if rem:
++            block[:rem, reps * rows:] = torch.eye(rem, dtype=torch.float64, device=_CPU)
++    return block
++
++
++def _place(tensor: torch.Tensor, values: torch.Tensor) -> None:
++    with torch.no_grad():
++        tensor.copy_(values.to(dtype=tensor.dtype, device=tensor.device))
++
++
++def _record(tensor, role, rule, key) -> None:
++    raw = tensor.detach().cpu().contiguous()
++    LOG.append({
++        "role": role, "rule": rule, "key": key, "shape": list(tensor.shape),
++        "sha256": hashlib.sha256(raw.numpy().tobytes()).hexdigest(),
++    })
++
++
++def _write_house_hid(weight: torch.Tensor) -> None:
++    shape = tuple(weight.shape)
++    rows, cols = int(shape[0]), int(shape[1])
++    std = _kaiming_std(weight)
++    if rows == cols and rows > 0:
++        block = _householder(rows) * _GAIN
++    else:
++        unit = _unit(rows, cols)
++        nnz = float(unit.abs().sum())
++        block = unit if nnz == 0 or weight.numel() == 0 else unit * (std * math.sqrt(weight.numel() / nnz))
++    if len(shape) == 2:
++        out = block
++    else:
++        out = torch.zeros(shape, dtype=torch.float64, device=_CPU)
++        center = tuple(s // 2 for s in shape[2:])
++        out[(slice(None), slice(None), *center)] = block
++    _place(weight, out)
++
++
++def _write_scaled(weight: torch.Tensor, q: torch.Tensor, tag, out_shape) -> None:
++    rows, cols = q.shape
++    rms = _declared(tag)[0]
++    _place(weight, (q * rms * math.sqrt(max(rows, cols))).reshape(out_shape))
++
++
++def _write_qr(weight: torch.Tensor, tag, key: int) -> None:
++    shape = tuple(weight.shape)
++    rows = int(shape[0])
++    cols = int(math.prod(shape[1:])) if len(shape) > 1 else 1
++    _write_scaled(weight, _semi_orthogonal(key, rows, cols), tag, shape)
++
++
++def _write_house_all(weight: torch.Tensor, tag) -> None:
++    shape = tuple(weight.shape)
++    rows = int(shape[0])
++    cols = int(math.prod(shape[1:])) if len(shape) > 1 else 1
++    _write_scaled(weight, _house_semi(rows, cols), tag, shape)
++
++
++def _channel_square(weight: torch.Tensor) -> bool:
++    shape = tuple(weight.shape)
++    return len(shape) >= 2 and int(shape[0]) == int(shape[1]) and int(shape[0]) > 1
++
++
++def _write_weight(weight: torch.Tensor, tag, key: int) -> str:
++    which = _SPECS[_STATE["name"]]["w"]
++    if which == "house_hid":
++        _write_house_hid(weight)
++        return "house_hid"
++    if which == "house_all":
++        _write_house_all(weight, tag)
++        return "house_all"
++    if which == "qr":
++        _write_qr(weight, tag, key)
++        return "qr"
++    if _channel_square(weight):
++        _write_house_hid(weight)
++        return "mix_house"
++    _write_qr(weight, tag, key)
++    return "mix_qr"
++
++
++def _pattern(key: int, shape, tag) -> torch.Tensor:
++    n = int(math.prod(shape)) if len(shape) else 1
++    _, mean, std = _declared(tag)
++    u = torch.from_numpy(np.ascontiguousarray(_hash_u01(key, n))) * 2 - 1
++    if n > 1:
++        u = (u - u.mean()) / u.std(unbiased=False)
++    return (mean + std * u).reshape(shape)
++
++
++def _weyl_quarter(shape, tag) -> torch.Tensor:
++    kind, a, b = tag
++    n = int(math.prod(shape)) if len(shape) else 1
++    signed = 2.0 * _weyl(n, 1).reshape(-1) - 1.0
++    if kind == "uniform":
++        center = 0.5 * (a + b)
++        half = 0.5 * (b - a)
++        values = center + signed * half * 0.25
++    else:
++        values = a + signed * b * 0.25
++    return values.reshape(shape)
++
++
++def _write_bias(bias: torch.Tensor, tag, key: int) -> str:
++    rule = _SPECS[_STATE["name"]]["b"]
++    if rule == "zero":
++        _place(bias, torch.zeros(bias.shape, dtype=torch.float64, device=_CPU))
++    elif rule == "pattern":
++        _place(bias, _pattern(key, tuple(bias.shape), tag))
++    else:
++        _place(bias, _weyl_quarter(tuple(bias.shape), tag))
++    return "bias_" + rule
++
++
++def _unit_interval(tensor: torch.Tensor) -> torch.Tensor:
++    shape = tuple(tensor.shape)
++    if len(shape) == 2:
++        return _weyl(shape[0], shape[1])
++    if len(shape) == 1:
++        return _weyl(shape[0], 1).reshape(shape)
++    return _weyl(tensor.numel(), 1).reshape(shape)
++
++
++def _write_prior(tensor: torch.Tensor, tag) -> str:
++    kind, a, b = tag
++    rule = _SPECS[_STATE["name"]]["p"]
++    if rule == "weyl":
++        u = _unit_interval(tensor)
++        values = a + (b - a) * u if kind == "uniform" else a + b * ndtri(u)
++        name = "prior_weyl"
++    else:
++        shape = tuple(tensor.shape)
++        if len(shape) >= 2:
++            u_np = _r2(shape[0], int(math.prod(shape[1:])))
++        else:
++            u_np = _r2(max(tensor.numel(), 1), 1)
++        u = torch.from_numpy(np.ascontiguousarray(u_np)).reshape(shape)
++        values = a + (b - a) * u if kind == "uniform" else a + b * torch.special.ndtri(u)
++        name = "prior_r2"
++    _place(tensor, values)
++    return name
++
++
++def _apply_fill(tensor: torch.Tensor, tag) -> None:
++    role = "prior" if _IN_PRIOR.get() else getattr(tensor, "_det_role", None)
++    if role is None:
++        return
++    tensor._det_role = role
++    key = _alloc_key(role, tensor.shape)
++    if role == "prior":
++        rule = _write_prior(tensor, tag)
++    elif role == "bias":
++        rule = _write_bias(tensor, tag, key)
++    else:
++        rule = _write_weight(tensor, tag, key)
++    _record(tensor, role, rule, key)
++
++
++def _bounds(args, kwargs):
++    lo = args[0] if len(args) > 0 else kwargs.get("from", 0.0)
++    hi = args[1] if len(args) > 1 else kwargs.get("to", 1.0)
++    return float(lo), float(hi)
++
++
++def _normal_stats(args, kwargs):
++    mean = args[0] if len(args) > 0 else kwargs.get("mean", 0.0)
++    std = args[1] if len(args) > 1 else kwargs.get("std", 1.0)
++    return float(mean), float(std)
++
++
++def _ensure_patched() -> None:
++    global _PATCHED
++    if _PATCHED:
++        return
++    from particlegan.particle_prior import ParticlePrior
++
++    _ORIG["linear"] = nn.Linear.reset_parameters
++    _ORIG["conv"] = nn.modules.conv._ConvNd.reset_parameters
++    _ORIG["uniform"] = torch.Tensor.uniform_
++    _ORIG["normal"] = torch.Tensor.normal_
++    _ORIG["prior"] = ParticlePrior.__init__
++
++    def linear_reset(self) -> None:
++        self.weight._det_role = "weight"
++        if self.bias is not None:
++            self.bias._det_role = "bias"
++        _ORIG["linear"](self)
++
++    def conv_reset(self) -> None:
++        self.weight._det_role = "weight"
++        if self.bias is not None:
++            self.bias._det_role = "bias"
++        _ORIG["conv"](self)
++
++    def uniform_(self, *args, **kwargs):
++        out = _ORIG["uniform"](self, *args, **kwargs)
++        if _STATE["name"] and isinstance(self, nn.Parameter):
++            lo, hi = _bounds(args, kwargs)
++            _apply_fill(self, ("uniform", lo, hi))
++        return out
++
++    def normal_(self, *args, **kwargs):
++        out = _ORIG["normal"](self, *args, **kwargs)
++        if _STATE["name"] and isinstance(self, nn.Parameter):
++            mean, std = _normal_stats(args, kwargs)
++            _apply_fill(self, ("normal", mean, std))
++        return out
++
++    def prior_init(self, *args, **kwargs):
++        token = _IN_PRIOR.set(True)
++        try:
++            _ORIG["prior"](self, *args, **kwargs)
++        finally:
++            _IN_PRIOR.reset(token)
++        if _STATE["name"] and isinstance(getattr(self, "z", None), nn.Parameter):
++            self.z._det_role = "prior"
++
++    nn.Linear.reset_parameters = linear_reset
++    nn.modules.conv._ConvNd.reset_parameters = conv_reset
++    torch.Tensor.uniform_ = uniform_
++    torch.Tensor.normal_ = normal_
++    ParticlePrior.__init__ = prior_init
++    _PATCHED = True
+diff --git a/reports/toy100/det-init-d/VARIANTS.md b/reports/toy100/det-init-d/VARIANTS.md
+new file mode 100644
+index 00000000..6f894e0a
+--- /dev/null
++++ b/reports/toy100/det-init-d/VARIANTS.md
+@@ -0,0 +1,29 @@
++# Family D deterministic inits
++
++One patch, `particlegan/det_init.py`, selected with `--init`. Default training does not call `install`, so the PyTorch init is unchanged. Recipe knobs (LR, schedules, clips, loss coefficients) are untouched.
++
++Parents, included so this CPU build can be compared with the earlier screens:
++
++| `--init` | weights | bias | particle prior |
++| --- | --- | --- | --- |
++| `hid_q` | Householder on square hidden layers, tiled scaled identity on rectangles, center-tap conv | Kronecker-Weyl at 1/4 of the declared bound | Kronecker-Weyl |
++| `qr_pb_pq` | QR orthogonal, declared RMS | hash pattern at the declared std | Roberts R2 |
++
++Hybrids:
++
++| `--init` | weights | bias | particle prior |
++| --- | --- | --- | --- |
++| `hq_pb` | hid_q | qr pattern | Weyl |
++| `hq_pq` | hid_q | quarter Weyl | R2 |
++| `hq_pb_pq` | hid_q | qr pattern | R2 |
++| `hq_zb_pq` | hid_q | zero | R2 |
++| `mix_pb_pq` | Householder hidden, QR input/output | qr pattern | R2 |
++| `mix_wq_pq` | Householder hidden, QR input/output | quarter Weyl | R2 |
++| `mix_pb_weyl` | Householder hidden, QR input/output | qr pattern | Weyl |
++| `mix_zb_pq` | Householder hidden, QR input/output | zero | R2 |
++| `qr_wq_pq` | QR, declared RMS | quarter Weyl | R2 |
++| `hh_pb_pq` | Householder semi-orthogonal on every layer, declared RMS | qr pattern | R2 |
++| `hh_wq_pq` | Householder semi-orthogonal on every layer, declared RMS | quarter Weyl | R2 |
++| `hh_zb_pq` | Householder semi-orthogonal on every layer, declared RMS | zero | R2 |
++
++Every value is a function of shape and construction order. The torch seed is not read. Host `copy_` / `zero_` after the random draw still wins (identity generator, explicit zero bias).
+diff --git a/reports/toy100/det-init-d/build.json b/reports/toy100/det-init-d/build.json
+new file mode 100644
+index 00000000..868a4c7e
+--- /dev/null
++++ b/reports/toy100/det-init-d/build.json
+@@ -0,0 +1,23 @@
++{
++  "event": "build",
++  "torch": "2.14.0+cpu",
++  "torch_git": "08187d9e0fba026dc8217405802ab5381dc88d90",
++  "cuda": false,
++  "phase": "determinism",
++  "variants": [
++    "hid_q",
++    "qr_pb_pq",
++    "hq_pb",
++    "hq_pq",
++    "hq_pb_pq",
++    "hq_zb_pq",
++    "mix_pb_pq",
++    "mix_wq_pq",
++    "mix_pb_weyl",
++    "mix_zb_pq",
++    "qr_wq_pq",
++    "hh_pb_pq",
++    "hh_wq_pq",
++    "hh_zb_pq"
++  ]
++}
+diff --git a/reports/toy100/det-init-d/determinism.json b/reports/toy100/det-init-d/determinism.json
+new file mode 100644
+index 00000000..4785b5a4
+--- /dev/null
++++ b/reports/toy100/det-init-d/determinism.json
+@@ -0,0 +1,170 @@
++{
++  "hid_q": {
++    "ring": {
++      "match": true,
++      "sha256": "3d5f19b9e94afdc1366f665ad817a1c886bd58ced7d2ef7e01fffca5fc971629",
++      "sha_s101": "3d5f19b9e94afdc1366f665ad817a1c886bd58ced7d2ef7e01fffca5fc971629"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "29c0fc48fed748b67e3bbbb81306481161090e6037dc738bb87616c21b262226",
++      "sha_s101": "29c0fc48fed748b67e3bbbb81306481161090e6037dc738bb87616c21b262226"
++    }
++  },
++  "qr_pb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "68a4e30974b09f9b80855f8e91df7f4b6926b5506702ac1bbe4ace2a55c83612",
++      "sha_s101": "68a4e30974b09f9b80855f8e91df7f4b6926b5506702ac1bbe4ace2a55c83612"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "85dea38e01eb5b64fd16f3234e296ab095b819d6fd590aebf2ea5052ccf6ab64",
++      "sha_s101": "85dea38e01eb5b64fd16f3234e296ab095b819d6fd590aebf2ea5052ccf6ab64"
++    }
++  },
++  "hq_pb": {
++    "ring": {
++      "match": true,
++      "sha256": "8f7e4e783fb7b25fca3c1cc7fefec18301a3a55d9cb189f752a869f5c36fbe83",
++      "sha_s101": "8f7e4e783fb7b25fca3c1cc7fefec18301a3a55d9cb189f752a869f5c36fbe83"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "ec786bdcc8fdcd8cccbbc608b21a5a970aaf3bca84aaca7d7204656dbbf04f6e",
++      "sha_s101": "ec786bdcc8fdcd8cccbbc608b21a5a970aaf3bca84aaca7d7204656dbbf04f6e"
++    }
++  },
++  "hq_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "0154608e833a68f6390b527dd6d14d3213f6c51b20b25aa452dce7a429374505",
++      "sha_s101": "0154608e833a68f6390b527dd6d14d3213f6c51b20b25aa452dce7a429374505"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "4d3cb93b0c06b03e01e5d36d132b2af980aaac2ed871b202f97023c0c32535c1",
++      "sha_s101": "4d3cb93b0c06b03e01e5d36d132b2af980aaac2ed871b202f97023c0c32535c1"
++    }
++  },
++  "hq_pb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "d77c907045291eadb4d324b7952791e118471d10fa636ed7b280a73b794de534",
++      "sha_s101": "d77c907045291eadb4d324b7952791e118471d10fa636ed7b280a73b794de534"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "10b7465c11b8f0593190cf1d83c40c874b394b06518be4f9ca8b075cc0ce19f6",
++      "sha_s101": "10b7465c11b8f0593190cf1d83c40c874b394b06518be4f9ca8b075cc0ce19f6"
++    }
++  },
++  "hq_zb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "5f736cea2e43f6a4fa505e0ce14e6c5fc4a031f88267ce8f6a53d42078f90a59",
++      "sha_s101": "5f736cea2e43f6a4fa505e0ce14e6c5fc4a031f88267ce8f6a53d42078f90a59"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "c8eff0e961240382378683dc519e30dccce146e4eb8bc835bae1f1bc1ac4e387",
++      "sha_s101": "c8eff0e961240382378683dc519e30dccce146e4eb8bc835bae1f1bc1ac4e387"
++    }
++  },
++  "mix_pb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "950882a2cd0818a4177beff87fa491a8469118de14917a6a2fd5db365ce4f5ca",
++      "sha_s101": "950882a2cd0818a4177beff87fa491a8469118de14917a6a2fd5db365ce4f5ca"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "f44efed908ac5756cdf9ea5657a1f1aea0e780847bde083c90cbbca49f848bd2",
++      "sha_s101": "f44efed908ac5756cdf9ea5657a1f1aea0e780847bde083c90cbbca49f848bd2"
++    }
++  },
++  "mix_wq_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "ebc28eeb110a1b6ac2683e07b37959df1438b89ce41cc65d2944b1bddf18bd11",
++      "sha_s101": "ebc28eeb110a1b6ac2683e07b37959df1438b89ce41cc65d2944b1bddf18bd11"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "0b453bc948bbd3a13f95750e7780a1fd77a207d17d68c09e38b42b273646ac05",
++      "sha_s101": "0b453bc948bbd3a13f95750e7780a1fd77a207d17d68c09e38b42b273646ac05"
++    }
++  },
++  "mix_pb_weyl": {
++    "ring": {
++      "match": true,
++      "sha256": "006d34c79061d09c9f6b1c3806a67a49d2a40ba30b0cbbbd05fef6339fa5beda",
++      "sha_s101": "006d34c79061d09c9f6b1c3806a67a49d2a40ba30b0cbbbd05fef6339fa5beda"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "28baa43cfa8bc0a733f2a67c4a4974c4982fffb5507166ae8234b2d8fad3e04c",
++      "sha_s101": "28baa43cfa8bc0a733f2a67c4a4974c4982fffb5507166ae8234b2d8fad3e04c"
++    }
++  },
++  "mix_zb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "1500861b3b4da9e83204c9663f1501bc4051c1943109901655aefce219a12e0a",
++      "sha_s101": "1500861b3b4da9e83204c9663f1501bc4051c1943109901655aefce219a12e0a"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "b90ac67cf0ba18d50d4ce5b3de01a7c2d6b6d09d9f1446f4f39dab82bc216e7c",
++      "sha_s101": "b90ac67cf0ba18d50d4ce5b3de01a7c2d6b6d09d9f1446f4f39dab82bc216e7c"
++    }
++  },
++  "qr_wq_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "2025704b23ec2483a0c3e7895c3606888f9e9bcee4aa061a6e252823167042f8",
++      "sha_s101": "2025704b23ec2483a0c3e7895c3606888f9e9bcee4aa061a6e252823167042f8"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "e0eb85e6f6bcbdda958a8f8142abded67ee146d84138e0b0ea4f599549de0536",
++      "sha_s101": "e0eb85e6f6bcbdda958a8f8142abded67ee146d84138e0b0ea4f599549de0536"
++    }
++  },
++  "hh_pb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "531bd05a997bfa01136b3401513f7feea3aa5697fa8951b813b7c33f0d2a6947",
++      "sha_s101": "531bd05a997bfa01136b3401513f7feea3aa5697fa8951b813b7c33f0d2a6947"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "f017866ed4c31bec788d0330bdb4d1fc7ffe7142c5e5c403a6a1b0be946291f7",
++      "sha_s101": "f017866ed4c31bec788d0330bdb4d1fc7ffe7142c5e5c403a6a1b0be946291f7"
++    }
++  },
++  "hh_wq_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "fa7f56329d8eb83be2595607017c2cb1001d9f47d7359797a98596d4494efba2",
++      "sha_s101": "fa7f56329d8eb83be2595607017c2cb1001d9f47d7359797a98596d4494efba2"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "44210e3458449dce973657943e54af493ed1cdffc1b04ccfdf44827d33ad65ed",
++      "sha_s101": "44210e3458449dce973657943e54af493ed1cdffc1b04ccfdf44827d33ad65ed"
++    }
++  },
++  "hh_zb_pq": {
++    "ring": {
++      "match": true,
++      "sha256": "44dc79e3f34bdd2123889e382b124b0cd5cb722fb6b27e63b18471eeede83fcb",
++      "sha_s101": "44dc79e3f34bdd2123889e382b124b0cd5cb722fb6b27e63b18471eeede83fcb"
++    },
++    "unequal": {
++      "match": true,
++      "sha256": "ecab436d4cebce3069ff88fb7e84f3b9cd0c1d4627df6531a90d11d1ec55e0e4",
++      "sha_s101": "ecab436d4cebce3069ff88fb7e84f3b9cd0c1d4627df6531a90d11d1ec55e0e4"
++    }
++  }
++}
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/hold.py b/reports/toy100/gap-fill-20260925/sources/k3p/hold.py
+index 82ad056e..8b2d4f09 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/hold.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/hold.py
+@@ -24,10 +24,15 @@ p.add_argument('--prior-floor', type=float, required=True)
+ p.add_argument('--anneal-start', type=float, default=.6)
+ p.add_argument('--steps', type=int, default=7500)
+ p.add_argument('--post-window', type=int, default=300)
++p.add_argument('--init', default=None,
++               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
+ a = p.parse_args()
+ a.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(a.repo.resolve()))
+ import torch
++if a.init:
++    from particlegan.det_init import install
++    install(a.init)
+ from torch.utils._python_dispatch import TorchDispatchMode
+ from torch.utils._pytree import tree_map
+ 
+@@ -231,7 +236,8 @@ def ema_measure(step):
+     while frame is not None and frame.f_code.co_name != 'train_mode_hold':
+         frame = frame.f_back
+     snapshot = frame.f_locals['snapshot']
+-    with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
++    devices = [torch.cuda.current_device()] if torch.cuda.is_available() else []
++    with torch.random.fork_rng(devices=devices):
+         row = snapshot(step)
+     return dict(step=step, modes=row['modes'], hq=row['hq'])
+ 
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/native100.py b/reports/toy100/gap-fill-20260925/sources/k3p/native100.py
+index d4c477bc..d2613c2e 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/native100.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/native100.py
+@@ -10,6 +10,8 @@ p.add_argument('--candidate', type=Path, required=True)
+ p.add_argument('--repo', type=Path, required=True)
+ p.add_argument('--task', required=True, choices=['grid100', 'rotated100', 'staggered100'])
+ p.add_argument('--output', type=Path, required=True)
++p.add_argument('--init', default=None,
++               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
+ a = p.parse_args()
+ sys.path[:0] = [str(a.repo.resolve()), str(a.candidate.resolve())]
+ a.output.mkdir(parents=True, exist_ok=False)
+@@ -19,6 +21,9 @@ if not torch.cuda.is_available() or os.environ.get('CUBLAS_WORKSPACE_CONFIG') !=
+ torch.cuda.set_device(0); torch.set_default_device('cuda:0'); torch.set_num_threads(1); torch.set_num_interop_threads(1)
+ torch.use_deterministic_algorithms(True); torch.backends.cudnn.benchmark = False; torch.backends.cudnn.deterministic = True
+ torch.backends.cuda.matmul.allow_tf32 = False; torch.backends.cudnn.allow_tf32 = False
++if a.init:
++    from particlegan.det_init import install
++    install(a.init)
+ import mechanism, response, latent
+ proof = {'adam_calls': 0, 'optimizers': {}}
+ original_init = torch.optim.Adam.__init__
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/probe.py b/reports/toy100/gap-fill-20260925/sources/k3p/probe.py
+index 8a008982..40d133df 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/probe.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/probe.py
+@@ -18,11 +18,16 @@ p.add_argument('--backend', choices=['cpu', 'cuda'], required=True)
+ p.add_argument('--cpu-random', action='store_true')
+ p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
+ p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
++p.add_argument('--init', default=None,
++               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
+ p.add_argument('--output', type=Path, required=True)
+ a = p.parse_args()
+ a.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(a.repo.resolve()))
+ import torch
++if a.init:
++    from particlegan.det_init import install
++    install(a.init)
+ from torch.utils._python_dispatch import TorchDispatchMode
+ from torch.utils._pytree import tree_map
+ 
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/shift.py b/reports/toy100/gap-fill-20260925/sources/k3p/shift.py
+index da422490..ac6e3c2c 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/shift.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/shift.py
+@@ -22,10 +22,15 @@ p.add_argument('--output', type=Path, required=True)
+ p.add_argument('--network-floor', type=float, required=True)
+ p.add_argument('--prior-floor', type=float, required=True)
+ p.add_argument('--anneal-start', type=float, default=.6)
++p.add_argument('--init', default=None,
++               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
+ a = p.parse_args()
+ a.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(a.repo.resolve()))
+ import torch
++if a.init:
++    from particlegan.det_init import install
++    install(a.init)
+ from torch.utils._python_dispatch import TorchDispatchMode
+ from torch.utils._pytree import tree_map
+ 
+diff --git a/tests/test_det_init.py b/tests/test_det_init.py
+new file mode 100644
+index 00000000..eeec55fb
+--- /dev/null
++++ b/tests/test_det_init.py
+@@ -0,0 +1,251 @@
++"""Family D init is seed-independent and leaves the default init alone."""
++import hashlib
++import os
++import subprocess
++import sys
++import textwrap
++
++import torch
++from torch import nn
++
++from particlegan import ParticlePrior
++from particlegan.det_init import VARIANTS, install, spec, uninstall
++
++
++def _blob():
++    layers = nn.Sequential(
++        nn.Linear(4, 16), nn.Linear(16, 16), nn.Linear(16, 2),
++        nn.Conv2d(1, 4, 3), nn.Conv2d(4, 4, 3),
++    )
++    prior = ParticlePrior(8, 3, init_std=0.5)
++    parts = [prior.z.detach().cpu().contiguous()]
++    for module in layers.modules():
++        if isinstance(module, (nn.Linear, nn.Conv2d)):
++            parts.append(module.weight.detach().cpu().contiguous())
++            parts.append(module.bias.detach().cpu().contiguous())
++    return b"".join(part.numpy().tobytes() for part in parts)
++
++
++def _sha(variant, seed):
++    uninstall()
++    torch.manual_seed(seed)
++    if variant:
++        install(variant)
++    try:
++        return hashlib.sha256(_blob()).hexdigest()
++    finally:
++        uninstall()
++
++
++def test_variants_match_across_seeds():
++    seen = {}
++    for name in VARIANTS:
++        first = _sha(name, 0)
++        second = _sha(name, 707)
++        assert first == second, name
++        assert _sha(name, 101) != _sha(None, 101)
++        seen[name] = first
++    assert len(set(seen.values())) == len(VARIANTS)
++
++
++def test_default_init_still_follows_the_seed():
++    uninstall()
++    torch.manual_seed(0)
++    first = nn.Linear(4, 8).weight.detach().clone()
++    torch.manual_seed(1)
++    second = nn.Linear(4, 8).weight.detach().clone()
++    assert not torch.equal(first, second)
++
++
++def test_square_hidden_is_orthogonal_and_rectangular_matches_kaiming_rms():
++    install("hid_q")
++    try:
++        hidden = nn.Linear(16, 16)
++        gain = torch.tensor(2.0 / 6.0, dtype=torch.float64).sqrt()
++        q = hidden.weight.detach().double() / gain
++        eye = torch.eye(16, dtype=torch.float64)
++        assert torch.allclose(q.T @ q, eye, atol=1e-5)
++        rect = nn.Linear(4, 16)
++        fan = rect.weight.shape[1]
++        std = gain / torch.tensor(float(fan)).sqrt()
++        rms = rect.weight.detach().double().pow(2).mean().sqrt()
++        assert torch.allclose(rms, std, rtol=1e-5, atol=0)
++        assert rect.bias.abs().max() <= (0.25 / fan ** 0.5) + 1e-6
++        conv = nn.Conv2d(8, 8, 3)
++        assert conv.weight[:, :, 0, :].abs().sum() == 0
++        assert conv.weight[:, :, :, 0].abs().sum() == 0
++    finally:
++        uninstall()
++
++
++def test_mix_uses_householder_hidden_and_qr_readout():
++    install("mix_pb_pq")
++    try:
++        hidden = nn.Linear(16, 16)
++        gain = torch.tensor(2.0 / 6.0, dtype=torch.float64).sqrt()
++        q = hidden.weight.detach().double() / gain
++        assert torch.allclose(q.T @ q, torch.eye(16, dtype=torch.float64), atol=1e-5)
++        readout = nn.Linear(16, 2)
++        weight = readout.weight.detach().double()
++        gram = weight @ weight.T
++        scale = gram.diag().mean().sqrt()
++        assert torch.allclose(gram / gram.diag().mean(), torch.eye(2, dtype=torch.float64), atol=1e-4)
++        assert scale > 0
++        assert readout.weight.abs().sum() > 0
++        assert not torch.allclose(readout.weight.detach().double()[:, 2:], torch.zeros(2, 14, dtype=torch.float64))
++    finally:
++        uninstall()
++
++
++def test_house_all_rect_is_semi_orthogonal_at_declared_rms():
++    install("hh_pb_pq")
++    try:
++        layer = nn.Linear(4, 16)
++        weight = layer.weight.detach().double()
++        gram = weight.T @ weight
++        rms = weight.pow(2).mean().sqrt()
++        fan = 4.0
++        declared = torch.tensor(2.0 / 6.0, dtype=torch.float64).sqrt() / fan ** 0.5
++        assert torch.allclose(rms, declared, rtol=1e-4, atol=0)
++        column_scale = gram.diag().mean()
++        assert torch.allclose(gram / column_scale, torch.eye(4, dtype=torch.float64), atol=1e-4)
++    finally:
++        uninstall()
++
++
++def test_pattern_bias_matches_declared_std_and_quarter_weyl_is_smaller():
++    install("hq_pb")
++    try:
++        layer = nn.Linear(16, 16)
++        bias = layer.bias.detach().double()
++        bound = 1.0 / 16 ** 0.5
++        declared = bound / 3.0 ** 0.5
++        assert abs(float(bias.mean())) < 1e-6
++        assert abs(float(bias.std(unbiased=False)) - declared) / declared < 1e-5
++    finally:
++        uninstall()
++    install("hid_q")
++    try:
++        layer = nn.Linear(16, 16)
++        assert float(layer.bias.detach().abs().max()) <= 0.25 / 16 ** 0.5 + 1e-6
++    finally:
++        uninstall()
++
++
++def test_r2_prior_differs_from_weyl_and_ignores_the_seed():
++    install("hq_pq")
++    try:
++        torch.manual_seed(1)
++        r2 = ParticlePrior(32, 2, init_std=0.5).z.detach().clone()
++        torch.manual_seed(2)
++        again = ParticlePrior(32, 2, init_std=0.5).z.detach().clone()
++        assert torch.equal(r2, again)
++    finally:
++        uninstall()
++    install("hid_q")
++    try:
++        weyl = ParticlePrior(32, 2, init_std=0.5).z.detach().clone()
++    finally:
++        uninstall()
++    assert not torch.equal(r2, weyl)
++
++
++def test_host_eye_and_zero_bias_win():
++    install("hq_pb")
++    try:
++        layer = nn.Linear(2, 2)
++        assert layer.bias.abs().sum() > 0
++        with torch.no_grad():
++            layer.weight.copy_(torch.eye(2))
++            layer.bias.zero_()
++        assert torch.equal(layer.weight, torch.eye(2))
++        assert torch.equal(layer.bias, torch.zeros(2))
++    finally:
++        uninstall()
++
++
++def test_xavier_refill_keeps_householder_and_changes_qr_scale():
++    install("hid_q")
++    try:
++        layer = nn.Linear(8, 8)
++        before = layer.weight.detach().clone()
++        nn.init.xavier_uniform_(layer.weight)
++        assert torch.equal(before, layer.weight)
++    finally:
++        uninstall()
++    install("qr_pb_pq")
++    try:
++        layer = nn.Linear(8, 8)
++        before = layer.weight.detach().clone()
++        nn.init.xavier_uniform_(layer.weight)
++        assert not torch.equal(before, layer.weight)
++        rms = layer.weight.detach().double().pow(2).mean().sqrt()
++        # Xavier uniform on a square map has RMS sqrt(2 / (fan_in + fan_out)).
++        assert torch.allclose(rms, torch.tensor(2.0 / 16.0, dtype=torch.float64).sqrt(), rtol=1e-4, atol=0)
++    finally:
++        uninstall()
++
++
++def test_rng_consumption_matches_the_default_init():
++    uninstall()
++    torch.manual_seed(3)
++    stream = torch.Generator().manual_seed(5)
++    ParticlePrior(6, 2, init_std=0.5, generator=stream)
++    nn.Linear(3, 5)
++    nn.Conv2d(2, 2, 3)
++    global_state = torch.get_rng_state().clone()
++    prior_state = stream.get_state().clone()
++    install("hq_pb_pq")
++    try:
++        torch.manual_seed(3)
++        stream = torch.Generator().manual_seed(5)
++        ParticlePrior(6, 2, init_std=0.5, generator=stream)
++        nn.Linear(3, 5)
++        nn.Conv2d(2, 2, 3)
++        assert torch.equal(global_state, torch.get_rng_state())
++        assert torch.equal(prior_state, stream.get_state())
++    finally:
++        uninstall()
++
++
++def test_deepcopy_sees_the_deterministic_critic():
++    from copy import deepcopy
++    install("mix_pb_pq")
++    try:
++        critic = nn.Sequential(nn.Linear(6, 8), nn.Linear(8, 1))
++        shadow = deepcopy(critic)
++        for left, right in zip(critic.parameters(), shadow.parameters()):
++            assert torch.equal(left, right)
++    finally:
++        uninstall()
++
++
++def test_two_processes_hash_equal():
++    script = textwrap.dedent("""
++        import hashlib, sys, torch
++        from torch import nn
++        from particlegan import ParticlePrior
++        from particlegan.det_init import install
++        install(sys.argv[1])
++        torch.manual_seed(int(sys.argv[2]))
++        layer = nn.Linear(7, 11)
++        hidden = nn.Linear(11, 11)
++        conv = nn.Conv2d(3, 3, 3)
++        prior = ParticlePrior(5, 2, init_std=0.25, generator=torch.Generator().manual_seed(int(sys.argv[2]) + 9))
++        raw = b"".join(t.detach().cpu().contiguous().numpy().tobytes()
++                       for t in (layer.weight, layer.bias, hidden.weight, hidden.bias,
++                                 conv.weight, conv.bias, prior.z))
++        print(hashlib.sha256(raw).hexdigest())
++    """)
++    hashes = []
++    for seed in (0, 404):
++        done = subprocess.run(
++            [sys.executable, "-c", script, "hh_pb_pq", str(seed)],
++            check=True, capture_output=True, text=True,
++            env={**os.environ, "PYTHONPATH": os.getcwd()},
++        )
++        hashes.append(done.stdout.strip().splitlines()[-1])
++    assert hashes[0] == hashes[1]
++    assert spec("hh_pb_pq") == dict(w="house_all", b="pattern", p="r2")
++    assert spec("qr_pb_pq")["p"] == "r2"
++    assert spec("hid_q")["b"] == "weyl_q"

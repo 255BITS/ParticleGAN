@@ -1,0 +1,170 @@
+{
+  "hid_q": {
+    "ring": {
+      "match": true,
+      "sha256": "3d5f19b9e94afdc1366f665ad817a1c886bd58ced7d2ef7e01fffca5fc971629",
+      "sha_s101": "3d5f19b9e94afdc1366f665ad817a1c886bd58ced7d2ef7e01fffca5fc971629"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "29c0fc48fed748b67e3bbbb81306481161090e6037dc738bb87616c21b262226",
+      "sha_s101": "29c0fc48fed748b67e3bbbb81306481161090e6037dc738bb87616c21b262226"
+    }
+  },
+  "qr_pb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "68a4e30974b09f9b80855f8e91df7f4b6926b5506702ac1bbe4ace2a55c83612",
+      "sha_s101": "68a4e30974b09f9b80855f8e91df7f4b6926b5506702ac1bbe4ace2a55c83612"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "85dea38e01eb5b64fd16f3234e296ab095b819d6fd590aebf2ea5052ccf6ab64",
+      "sha_s101": "85dea38e01eb5b64fd16f3234e296ab095b819d6fd590aebf2ea5052ccf6ab64"
+    }
+  },
+  "hq_pb": {
+    "ring": {
+      "match": true,
+      "sha256": "8f7e4e783fb7b25fca3c1cc7fefec18301a3a55d9cb189f752a869f5c36fbe83",
+      "sha_s101": "8f7e4e783fb7b25fca3c1cc7fefec18301a3a55d9cb189f752a869f5c36fbe83"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "ec786bdcc8fdcd8cccbbc608b21a5a970aaf3bca84aaca7d7204656dbbf04f6e",
+      "sha_s101": "ec786bdcc8fdcd8cccbbc608b21a5a970aaf3bca84aaca7d7204656dbbf04f6e"
+    }
+  },
+  "hq_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "0154608e833a68f6390b527dd6d14d3213f6c51b20b25aa452dce7a429374505",
+      "sha_s101": "0154608e833a68f6390b527dd6d14d3213f6c51b20b25aa452dce7a429374505"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "4d3cb93b0c06b03e01e5d36d132b2af980aaac2ed871b202f97023c0c32535c1",
+      "sha_s101": "4d3cb93b0c06b03e01e5d36d132b2af980aaac2ed871b202f97023c0c32535c1"
+    }
+  },
+  "hq_pb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "d77c907045291eadb4d324b7952791e118471d10fa636ed7b280a73b794de534",
+      "sha_s101": "d77c907045291eadb4d324b7952791e118471d10fa636ed7b280a73b794de534"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "10b7465c11b8f0593190cf1d83c40c874b394b06518be4f9ca8b075cc0ce19f6",
+      "sha_s101": "10b7465c11b8f0593190cf1d83c40c874b394b06518be4f9ca8b075cc0ce19f6"
+    }
+  },
+  "hq_zb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "5f736cea2e43f6a4fa505e0ce14e6c5fc4a031f88267ce8f6a53d42078f90a59",
+      "sha_s101": "5f736cea2e43f6a4fa505e0ce14e6c5fc4a031f88267ce8f6a53d42078f90a59"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "c8eff0e961240382378683dc519e30dccce146e4eb8bc835bae1f1bc1ac4e387",
+      "sha_s101": "c8eff0e961240382378683dc519e30dccce146e4eb8bc835bae1f1bc1ac4e387"
+    }
+  },
+  "mix_pb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "950882a2cd0818a4177beff87fa491a8469118de14917a6a2fd5db365ce4f5ca",
+      "sha_s101": "950882a2cd0818a4177beff87fa491a8469118de14917a6a2fd5db365ce4f5ca"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "f44efed908ac5756cdf9ea5657a1f1aea0e780847bde083c90cbbca49f848bd2",
+      "sha_s101": "f44efed908ac5756cdf9ea5657a1f1aea0e780847bde083c90cbbca49f848bd2"
+    }
+  },
+  "mix_wq_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "ebc28eeb110a1b6ac2683e07b37959df1438b89ce41cc65d2944b1bddf18bd11",
+      "sha_s101": "ebc28eeb110a1b6ac2683e07b37959df1438b89ce41cc65d2944b1bddf18bd11"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "0b453bc948bbd3a13f95750e7780a1fd77a207d17d68c09e38b42b273646ac05",
+      "sha_s101": "0b453bc948bbd3a13f95750e7780a1fd77a207d17d68c09e38b42b273646ac05"
+    }
+  },
+  "mix_pb_weyl": {
+    "ring": {
+      "match": true,
+      "sha256": "006d34c79061d09c9f6b1c3806a67a49d2a40ba30b0cbbbd05fef6339fa5beda",
+      "sha_s101": "006d34c79061d09c9f6b1c3806a67a49d2a40ba30b0cbbbd05fef6339fa5beda"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "28baa43cfa8bc0a733f2a67c4a4974c4982fffb5507166ae8234b2d8fad3e04c",
+      "sha_s101": "28baa43cfa8bc0a733f2a67c4a4974c4982fffb5507166ae8234b2d8fad3e04c"
+    }
+  },
+  "mix_zb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "1500861b3b4da9e83204c9663f1501bc4051c1943109901655aefce219a12e0a",
+      "sha_s101": "1500861b3b4da9e83204c9663f1501bc4051c1943109901655aefce219a12e0a"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "b90ac67cf0ba18d50d4ce5b3de01a7c2d6b6d09d9f1446f4f39dab82bc216e7c",
+      "sha_s101": "b90ac67cf0ba18d50d4ce5b3de01a7c2d6b6d09d9f1446f4f39dab82bc216e7c"
+    }
+  },
+  "qr_wq_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "2025704b23ec2483a0c3e7895c3606888f9e9bcee4aa061a6e252823167042f8",
+      "sha_s101": "2025704b23ec2483a0c3e7895c3606888f9e9bcee4aa061a6e252823167042f8"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "e0eb85e6f6bcbdda958a8f8142abded67ee146d84138e0b0ea4f599549de0536",
+      "sha_s101": "e0eb85e6f6bcbdda958a8f8142abded67ee146d84138e0b0ea4f599549de0536"
+    }
+  },
+  "hh_pb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "531bd05a997bfa01136b3401513f7feea3aa5697fa8951b813b7c33f0d2a6947",
+      "sha_s101": "531bd05a997bfa01136b3401513f7feea3aa5697fa8951b813b7c33f0d2a6947"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "f017866ed4c31bec788d0330bdb4d1fc7ffe7142c5e5c403a6a1b0be946291f7",
+      "sha_s101": "f017866ed4c31bec788d0330bdb4d1fc7ffe7142c5e5c403a6a1b0be946291f7"
+    }
+  },
+  "hh_wq_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "fa7f56329d8eb83be2595607017c2cb1001d9f47d7359797a98596d4494efba2",
+      "sha_s101": "fa7f56329d8eb83be2595607017c2cb1001d9f47d7359797a98596d4494efba2"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "44210e3458449dce973657943e54af493ed1cdffc1b04ccfdf44827d33ad65ed",
+      "sha_s101": "44210e3458449dce973657943e54af493ed1cdffc1b04ccfdf44827d33ad65ed"
+    }
+  },
+  "hh_zb_pq": {
+    "ring": {
+      "match": true,
+      "sha256": "44dc79e3f34bdd2123889e382b124b0cd5cb722fb6b27e63b18471eeede83fcb",
+      "sha_s101": "44dc79e3f34bdd2123889e382b124b0cd5cb722fb6b27e63b18471eeede83fcb"
+    },
+    "unequal": {
+      "match": true,
+      "sha256": "ecab436d4cebce3069ff88fb7e84f3b9cd0c1d4627df6531a90d11d1ec55e0e4",
+      "sha_s101": "ecab436d4cebce3069ff88fb7e84f3b9cd0c1d4627df6531a90d11d1ec55e0e4"
+    }
+  }
+}
