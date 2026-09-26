@@ -36,12 +36,12 @@ Network noise then matches the network anneal. Prior noise falls at least
 as far as the prior anneal (100× versus 20× at the floor). With the flag
 unset this function returns the host batch and does not touch the RNG.
 
-The unequal critic's distance feature is a dense kernel. At the cap, keeping
-that kernel for both the real and the fake backward does not fit. ``install``
-evaluates it in row blocks above 4,096 and recomputes each block on the way
-back. Forward features match the dense kernel bit for bit. The gradient into
-the points differs only by blocked reduction order. The host batch and eval
-stay on the dense path.
+The unequal critic's distance feature is a dense kernel. Above 2,048 rows
+the real, fake, and penalty graphs of that kernel do not fit together on
+this screen. ``install`` evaluates it in row blocks above 2,048 and
+recomputes each block on the way back. Forward features match the dense
+kernel bit for bit. The gradient into the points differs only by blocked
+reduction order. The host batch and eval stay on the dense path.
 """
 from __future__ import annotations
 
@@ -77,14 +77,15 @@ _MILESTONES = (0, 720, 721, 900, 1199, 1200, 2400, 3600)
 
 
 # The unequal critic's distance feature is a dense [N, N, scales] kernel.
-# At the Smith cap that kernel does not fit, for the real row and the fake
-# row at once, on this screen. Above 4,096 rows the same formula is applied
-# in row blocks and each block is recomputed on the way back. Forward
-# features match the dense kernel bit for bit. Critic-parameter gradients
-# match it bit for bit, because they read those features. The gradient into
-# the points differs only by the blocked reduction order (about one ulp).
-# Eval and every batch at or below 4,096 stay on the dense path.
-_RECOMPUTE_ABOVE = 4096
+# Real, fake, and the penalty interpolation each keep one. Above 2,048 rows
+# those graphs no longer fit together on this screen, and the Smith cap is
+# 12,800. The same formula then runs in row blocks, and each block is
+# recomputed on the way back. Forward features match the dense kernel bit
+# for bit. Critic-parameter gradients match it bit for bit, because they
+# read those features. The gradient into the points differs only by the
+# blocked reduction order (about one ulp). Eval is under no_grad and every
+# batch at or below 2,048 stays on the dense path.
+_RECOMPUTE_ABOVE = 2048
 _ROW_BLOCK = 1024
 _PAIRWISE = None
 
