@@ -23,6 +23,28 @@ import torch
 from torch import nn
 
 VARIANT = os.environ.get('K3P_ORTHO_VARIANT', 'qr')
+# Variant spec: comma list of key=value. w: qr|hadamard|fixedgen (weight construction), s: std|spectral (scale match),
+# b: zero|pattern|fixedgen (bias), p: whiten|fixedgen (particle prior). Named shortcuts below.
+_NAMED = {'qr': 'w=qr,s=std,b=zero,p=whiten', 'hadamard': 'w=hadamard,s=std,b=zero,p=whiten',
+          'qr_pb': 'w=qr,s=std,b=pattern,p=whiten', 'qr_pb_pf': 'w=qr,s=std,b=pattern,p=fixedgen',
+          'qrspec_pb': 'w=qr,s=spectral,b=pattern,p=whiten', 'qrspec_pb_pf': 'w=qr,s=spectral,b=pattern,p=fixedgen',
+          'had_pb_pf': 'w=hadamard,s=std,b=pattern,p=fixedgen', 'qr_pf': 'w=qr,s=std,b=zero,p=fixedgen',
+          'fixedgen': 'w=fixedgen,s=std,b=fixedgen,p=fixedgen',
+          'qrspec_pb_pf': 'w=qr,s=spectral,b=pattern,p=fixedgen', 'dct_pb_pf': 'w=dct,s=std,b=pattern,p=fixedgen',
+          'qrhid_pb_pf': 'w=qr,s=std,b=pattern,p=fixedgen,io=fixedgen', 'qrhid_pb_pw': 'w=qr,s=std,b=pattern,p=whiten,io=fixedgen',
+          'qrspechid_pb_pf': 'w=qr,s=spectral,b=pattern,p=fixedgen,io=fixedgen',
+          'qr_pb_pq': 'w=qr,s=std,b=pattern,p=qmc', 'qrhid_pb_pq': 'w=qr,s=std,b=pattern,p=qmc,io=qmc',
+          'had_pb_pq': 'w=hadamard,s=std,b=pattern,p=qmc', 'qrspec_pb_pq': 'w=qr,s=spectral,b=pattern,p=qmc',
+          'dct_pb_pq': 'w=dct,s=std,b=pattern,p=qmc', 'qmc': 'w=qmc,s=std,b=qmc,p=qmc',
+          'qr_bq_pq': 'w=qr,s=std,b=qmc,p=qmc', 'qr_bz_pq': 'w=qr,s=std,b=zero,p=qmc',
+          'eyehid_pb_pq': 'w=eye,s=std,b=pattern,p=qmc,io=qmc', 'qrspechid_pb_pq': 'w=qr,s=spectral,b=pattern,p=qmc,io=qmc',
+          'had_bz_pq': 'w=hadamard,s=std,b=zero,p=qmc', 'dct_bz_pq': 'w=dct,s=std,b=zero,p=qmc',
+          'qrspec_bz_pq': 'w=qr,s=spectral,b=zero,p=qmc', 'qrhid_bz_pq': 'w=qr,s=std,b=zero,p=qmc,io=qmc',
+          'fg_pq': 'w=fixedgen,s=std,b=fixedgen,p=qmc', 'fg_bz_pq': 'w=fixedgen,s=std,b=zero,p=qmc',
+          'qru_pb_pq': 'w=qr,src=uniform,s=std,b=pattern,p=qmc', 'qru_bz_pq': 'w=qr,src=uniform,s=std,b=zero,p=qmc',
+          'qrg1_pb_pq': 'w=qr,s=unit,b=pattern,p=qmc', 'qrg1_bz_pq': 'w=qr,s=unit,b=zero,p=qmc'}
+SPEC = dict(kv.split('=') for kv in _NAMED.get(VARIANT, VARIANT).split(','))
+SPEC = {**dict(w='qr', s='std', b='zero', p='whiten', io='same', src='normal'), **SPEC}
 TAG = '_ortho_tag'
 LOG = []
 _opt_counter = [0]
@@ -58,17 +80,67 @@ def semi_orthogonal(key, rows, cols, kind='normal', variant=None):
     """[rows, cols] float64 with orthonormal columns (rows>=cols) or orthonormal rows (rows<cols)."""
     flip = rows < cols
     r, c = (cols, rows) if flip else (rows, cols)
-    if (variant or VARIANT) == 'hadamard':
+    if (variant or SPEC['w']) == 'hadamard':
         n = 1 << (r - 1).bit_length()
         s_r = torch.from_numpy(np.where(_hash_u01(key, n) < 0.5, -1.0, 1.0))
         s_c = torch.from_numpy(np.where(_hash_u01(key + 1, n) < 0.5, -1.0, 1.0))
         q = (s_r[:, None] * _hadamard(n) * s_c[None, :])[:r, :c] / math.sqrt(n)
         q, _ = torch.linalg.qr(q)  # exact re-orthonormalisation of the truncated block (deterministic)
+    elif (variant or SPEC['w']) == 'eye':
+        q = torch.eye(r, c, dtype=torch.float64, device='cpu')   # identity-based (delta) orthogonal
+    elif (variant or SPEC['w']) == 'dct':
+        k = torch.arange(r, dtype=torch.float64, device='cpu')
+        basis = torch.cos(math.pi / r * (k[None, :] + 0.5) * k[:, None]) * math.sqrt(2.0 / r)
+        basis[0] /= math.sqrt(2.0)                      # orthonormal DCT-II, rows = frequencies
+        cols_pick = torch.from_numpy(np.argsort(_hash_u01(key, r), kind='stable')[:c].copy())
+        signs = torch.from_numpy(np.where(_hash_u01(key + 7, r) < 0.5, -1.0, 1.0))
+        q = (basis.T * signs[None, :])[:, cols_pick]    # r x c, orthonormal columns
     else:
         q, rr = torch.linalg.qr(_source(key, r, c, kind))
         d = torch.sign(torch.diagonal(rr)); d = torch.where(d == 0, torch.ones_like(d), d)
         q = q * d
     return q.T.contiguous() if flip else q
+
+
+def fixedgen_draw(key, shape, tag):
+    """Same distribution as the recipe's declared init, drawn from an isolated CPU generator with a constant
+    per-parameter seed (never the global RNG): deterministic across runs and independent of the torch seed."""
+    g = torch.Generator(device='cpu').manual_seed(key)
+    t = torch.empty(tuple(shape), dtype=torch.float64, device='cpu')
+    kind, a, b = tag
+    return t.uniform_(a, b, generator=g) if kind == 'uniform' else t.normal_(a, b, generator=g)
+
+
+def _r2(n, d):
+    """Roberts R2 low-discrepancy sequence in [0,1)^d (generalised golden ratio); no RNG at all."""
+    phi = 2.0
+    for _ in range(64):
+        phi = (1 + phi) ** (1.0 / (d + 1))
+    alpha = np.array([(1 / phi) ** (j + 1) for j in range(d)])
+    return np.mod(0.5 + np.arange(1, n + 1)[:, None] * alpha[None, :], 1.0)
+
+
+def qmc_draw(key, shape, tag, rows_as_points=False):
+    """Quasi-random sample of the declared distribution. Particle clouds: each row is one R2 point in d dims.
+    Weights: a 1-D R2 sequence over all elements, placed by a hashed permutation (avoids lattice structure in rows)."""
+    shape = tuple(shape); kind, a, b = tag
+    if rows_as_points:
+        u = _r2(shape[0], int(np.prod(shape[1:])))
+    else:
+        n = int(np.prod(shape)) if len(shape) else 1
+        u = _r2(n, 1)[:, 0][np.argsort(_hash_u01(key, n), kind='stable')]
+    u = torch.from_numpy(np.ascontiguousarray(u)).reshape(shape)
+    return a + (b - a) * u if kind == 'uniform' else a + b * torch.special.ndtri(u)
+
+
+def pattern_bias(key, shape, tag):
+    """Deterministic bias with the declared distribution's exact mean/std: hash-uniform pattern, standardised."""
+    n = int(np.prod(shape)) if len(shape) else 1
+    _, mean, std = _declared_rms_mean_std(tag)
+    u = torch.from_numpy(_hash_u01(key, n)) * 2 - 1
+    if n > 1:
+        u = (u - u.mean()) / u.std(unbiased=False)
+    return (mean + std * u).reshape(tuple(shape))
 
 
 def _declared_rms_mean_std(tag):
@@ -145,22 +217,51 @@ def apply(opt, particle_cls):
             rule = 'keep_host_set'
         if rule is None:
             flag = ''
-            if isinstance(owner, particle_cls) and pname == 'z' and tagged is not None:
+            if isinstance(owner, particle_cls) and pname == 'z' and SPEC['p'] == 'qmc':
+                new = qmc_draw(key, p.shape, tagged[0], rows_as_points=True); rule = 'particle_qmc'
+            elif isinstance(owner, particle_cls) and pname == 'z' and SPEC['p'] == 'fixedgen':
+                new = fixedgen_draw(key, p.shape, tagged[0]); rule = 'particle_fixedgen'
+            elif isinstance(owner, particle_cls) and pname == 'z' and tagged is not None:
                 _, mean, std = _declared_rms_mean_std(tagged[0])
                 n, d = p.shape
                 q = semi_orthogonal(key, n, d, tagged[0][0], variant='qr')  # a Hadamard cloud would sit on 2^d corner points
                 new = mean + std * math.sqrt(n) * q
                 rule = f'particle_{tagged[0][0]}_whitened' + flag
             elif pname == 'bias' and oname is not None and p.ndim == 1:
-                new = torch.zeros(tuple(p.shape), dtype=torch.float64, device='cpu'); rule = 'bias_zero' + flag
+                if SPEC['b'] == 'pattern':
+                    new = pattern_bias(key, p.shape, tagged[0]); rule = 'bias_pattern'
+                elif SPEC['b'] == 'qmc':
+                    new = qmc_draw(key, p.shape, tagged[0]); rule = 'bias_qmc'
+                elif SPEC['b'] == 'fixedgen':
+                    new = fixedgen_draw(key, p.shape, tagged[0]); rule = 'bias_fixedgen'
+                else:
+                    new = torch.zeros(tuple(p.shape), dtype=torch.float64, device='cpu'); rule = 'bias_zero' + flag
+            elif SPEC['w'] == 'fixedgen':
+                new = fixedgen_draw(key, p.shape, tagged[0]); rule = 'fixedgen'
+            elif SPEC['w'] == 'qmc':
+                new = qmc_draw(key, p.shape, tagged[0]); rule = 'qmc'
+            elif SPEC['io'] == 'qmc' and (p.ndim < 2 or min(p.shape[0], int(np.prod(p.shape[1:]))) <= 4):
+                new = qmc_draw(key, p.shape, tagged[0]); rule = 'io_qmc'
+            elif SPEC['io'] == 'fixedgen' and (p.ndim < 2 or min(p.shape[0], int(np.prod(p.shape[1:]))) <= 4):
+                # input/output-type layers (rank <= 4, e.g. [128, 2] from a 2-D latent, [1, 128] critic head):
+                # default distribution from the isolated constant-seed generator; hidden layers orthogonal
+                new = fixedgen_draw(key, p.shape, tagged[0]); rule = 'io_fixedgen'
             elif tagged is not None:
                 rms = _declared_rms_mean_std(tagged[0])[0]
                 rows = p.shape[0] if p.ndim >= 1 else 1
                 cols = int(np.prod(p.shape[1:])) if p.ndim >= 2 else (p.shape[0] if p.ndim == 1 else 1)
                 if p.ndim == 1: rows = 1
-                q = semi_orthogonal(key, rows, cols)
-                new = (q * rms * math.sqrt(max(rows, cols))).reshape(p.shape)
-                rule = 'orthogonal_declared_rms' + flag
+                q = semi_orthogonal(key, rows, cols, SPEC['src'])
+                if SPEC['s'] == 'unit':
+                    # classic orthogonal_(gain=1): all singular values 1 (Saxe et al. isometric init)
+                    new = q.reshape(p.shape); rule = 'orthogonal_gain1'
+                elif SPEC['s'] == 'spectral' and min(rows, cols) > 1:
+                    # all singular values = expected top singular value of the declared iid init, ~ std*(sqrt(r)+sqrt(c))
+                    sigma = _declared_rms_mean_std(tagged[0])[2] * (math.sqrt(rows) + math.sqrt(cols))
+                    new = (q * sigma).reshape(p.shape); rule = 'orthogonal_spectral_matched'
+                else:
+                    new = (q * rms * math.sqrt(max(rows, cols))).reshape(p.shape)
+                    rule = 'orthogonal_declared_rms' + flag
             if new is not None:
                 p.copy_(new.to(dtype=p.dtype, device=p.device))
         v = p.detach().cpu().contiguous()
@@ -171,5 +272,5 @@ def apply(opt, particle_cls):
 
 def dump(path):
     all_sha = hashlib.sha256(''.join(r['sha256'] for r in LOG).encode()).hexdigest()
-    json.dump(dict(variant=VARIANT, all_params_sha256=all_sha, n=len(LOG), params=LOG), open(path, 'w'), indent=1)
+    json.dump(dict(variant=VARIANT, spec=SPEC, all_params_sha256=all_sha, n=len(LOG), params=LOG), open(path, 'w'), indent=1)
     return all_sha
