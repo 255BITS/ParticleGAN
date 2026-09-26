@@ -1,33 +1,15 @@
 {
-  "status": "baseline_complete",
-  "selected_candidate": "k3p",
-  "selected_declaration": "reports/toy100/current-research-base.json",
+  "status": "NO_QUALIFIED_CONTINUOUS_WINNER_PREPARED_FOR_COMPACTION",
+  "selected_candidate": null,
+  "selected_declaration": null,
   "active_round": 8,
   "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T133716Z",
   "workflow": [
-    "baseline complete: hold PASS, shift FAIL",
-    "review mechanism comparison recommendations",
-    "qualify changes before promotion"
+    "Compact with continuous-eligibility/launch handoff preserved",
+    "Start three distinct external Codex gpt-6-astra/max approaches",
+    "Review each result and replenish failed approaches until one qualifies",
+    "Validate actual public API and full-learner continuous behavior before promotion; do not merge"
   ],
-  "unverified_candidates": {
-    "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
-    "p3_floor_reopen": "Sensitive4 PASS after observation-hook repair; remaining18 NOT_RUN. Hold1200+300, FAIL77/81 recovery, scheduled noise. Not promoted.",
-    "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted.",
-    "rp1_signal_close": "REJECTED: own hold1200+300 and live shift81/81, but img_intensity2 FAIL (3/24 observations, no sustained confirmation) and native grid100 accuracy FAIL (coverage PASS). Transfer8 PASS/1 FAIL/10 NOT_RUN. No more qualification or promotion.",
-    "pm1_relative_mobility": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Transfer and deeper qualification NOT_RUN. Not promoted.",
-    "pm3_prior_match": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Not promoted.",
-    "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted.",
-    "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification.",
-    "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion.",
-    "ep1_excursion_phase": "Own hold1200+300, stationary5/5, prehold120/120 PASS; recovery16/81 FAIL. Scheduled noise remains. Not promoted.",
-    "pd1_projected_discrepancy": "Recovered unledgered results: hold NOT_CONVERGED, prehold33/120, recovery0/81 FAIL. Not promoted.",
-    "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop.",
-    "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md.",
-    "b3_belief_tie": "TIE with R2 (not a win): hold 114/120 (identical 6 steps), recovery 73/81 delay 480 final 8/1.0. R2 gate rebuilt on AdaBelief belief-surprise. Frozen/toys NOT_RUN. See leaderboard.",
-    "sg3_graded_memory": "Second family: hold 114/120 (same 6 fails), recovery 43/81 delay 1080 final 8/0.919, latch engaged, 19 reseeds. Beats B2 with R2-grade hold. See leaderboard.",
-    "r2_offseed": "DEFINITIVE NEGATIVE: exact R2 FAILs shift+frozen+hold at all of seeds {1,2,3} and fails the nudge at 1e-6 and 3e-7. Mechanism does not widen the basin.",
-    "ka2_asymmetric_kalman": "Best JOINT (not promoted): hold 120/120 FULL + recovery 50/81 delay 1120 final 8/0.996, frozen twin 0/81. Certainty-gated EMA with asymmetric attack/release. Back-loaded (stable 3520); bundle persisted gan-attempts/lead-ka2-bundle. See leaderboard."
-  },
   "previous_round": {
     "round": 2,
     "proposals": 21,
@@ -58,17 +40,17 @@
     "stopped_after_failure": true
   },
   "execution_policy": {
-    "codex": 1,
-    "grok": 7,
-    "max_workers_per_gpu": 4,
+    "codex": 3,
+    "grok": 0,
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "concurrent_approaches": 3,
     "max_workers_per_attempt": 1,
-    "launcher": "reports/toy100/continuous-round-3/launch.py",
-    "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T19:19:05.551652+00:00",
-    "verified_live_counts": {},
-    "verified_gpu_reservations": {},
     "new_launches_allowed": false,
-    "pause_reason": "User authorized the two public-default baseline protocols; historical autonomous search remains stopped."
+    "launch_authorized_after_compaction": true,
+    "phase": "PREPARED_NOT_LAUNCHED",
+    "no_seed_sweeps": true,
+    "handoff": "reports/toy100/continuous-eligibility/launch/README.md"
   },
   "completed_rounds": [
     {
@@ -262,8 +244,8 @@
     "final_attempt_archive": "reports/toy100/continuous-round-3/stop-inventory/manifest.json"
   },
   "historical_current_lead": "r2_moment_surprise",
-  "current_lead": "ka2_asymmetric_kalman",
-  "active_phase": "public_default_baseline_measured",
+  "current_lead": null,
+  "active_phase": "eligibility_audit_complete_launch_after_compaction",
   "baseline": {
     "status": "MEASURED",
     "master_reference": "0ff9a7afe5dcb828239369446cfe71971bce687b",
@@ -313,14 +295,247 @@
     }
   },
   "stop_condition": {
-    "phase": "baseline_only",
-    "protocols": [
-      "hold",
-      "shift"
+    "qualified_winner_required": true,
+    "whole_learner_continuous": true,
+    "caller_managed_phases_allowed": false,
+    "predetermined_training_horizon_allowed": false,
+    "automatic_reversible_adaptation_allowed": true,
+    "deadline_all_81_required": false,
+    "metrics": [
+      "stationary retention",
+      "time to first arrival after change",
+      "all post-arrival departures",
+      "sustained stability"
     ],
-    "qualification_status": "BASELINE_COMPLETE_HOLD_PASS_SHIFT_FAIL",
+    "public_api_required": true,
+    "delayed_repeated_changes_required": true,
+    "checkpoint_continuation_required": true,
+    "broader_quality_qualification_required": true,
     "no_seed_sweeps": true,
-    "no_automatic_search": true,
-    "next_action": "Review measured baseline; recommended first comparison is anchor weight zero at the same declared seed. No automatic launch."
-  }
+    "no_merge": true
+  },
+  "historical_candidate_assessments": {
+    "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
+    "p3_floor_reopen": "Sensitive4 PASS after observation-hook repair; remaining18 NOT_RUN. Hold1200+300, FAIL77/81 recovery, scheduled noise. Not promoted.",
+    "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted.",
+    "rp1_signal_close": "REJECTED: own hold1200+300 and live shift81/81, but img_intensity2 FAIL (3/24 observations, no sustained confirmation) and native grid100 accuracy FAIL (coverage PASS). Transfer8 PASS/1 FAIL/10 NOT_RUN. No more qualification or promotion.",
+    "pm1_relative_mobility": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Transfer and deeper qualification NOT_RUN. Not promoted.",
+    "pm3_prior_match": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Not promoted.",
+    "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted.",
+    "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification.",
+    "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion.",
+    "ep1_excursion_phase": "Own hold1200+300, stationary5/5, prehold120/120 PASS; recovery16/81 FAIL. Scheduled noise remains. Not promoted.",
+    "pd1_projected_discrepancy": "Recovered unledgered results: hold NOT_CONVERGED, prehold33/120, recovery0/81 FAIL. Not promoted.",
+    "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop.",
+    "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md.",
+    "b3_belief_tie": "TIE with R2 (not a win): hold 114/120 (identical 6 steps), recovery 73/81 delay 480 final 8/1.0. R2 gate rebuilt on AdaBelief belief-surprise. Frozen/toys NOT_RUN. See leaderboard.",
+    "sg3_graded_memory": "Second family: hold 114/120 (same 6 fails), recovery 43/81 delay 1080 final 8/0.919, latch engaged, 19 reseeds. Beats B2 with R2-grade hold. See leaderboard.",
+    "r2_offseed": "DEFINITIVE NEGATIVE: exact R2 FAILs shift+frozen+hold at all of seeds {1,2,3} and fails the nudge at 1e-6 and 3e-7. Mechanism does not widen the basin.",
+    "ka2_asymmetric_kalman": "Best JOINT (not promoted): hold 120/120 FULL + recovery 50/81 delay 1120 final 8/0.996, frozen twin 0/81. Certainty-gated EMA with asymmetric attack/release. Back-loaded (stable 3520); bundle persisted gan-attempts/lead-ka2-bundle. See leaderboard."
+  },
+  "historical_selection_before_continuous_audit": {
+    "status": "baseline_complete",
+    "selected_candidate": "k3p",
+    "selected_declaration": "reports/toy100/current-research-base.json",
+    "current_lead": "ka2_asymmetric_kalman",
+    "active_phase": "public_default_baseline_measured",
+    "stop_condition": {
+      "phase": "baseline_only",
+      "protocols": [
+        "hold",
+        "shift"
+      ],
+      "qualification_status": "BASELINE_COMPLETE_HOLD_PASS_SHIFT_FAIL",
+      "no_seed_sweeps": true,
+      "no_automatic_search": true,
+      "next_action": "Review measured baseline; recommended first comparison is anchor weight zero at the same declared seed. No automatic launch."
+    },
+    "execution_policy": {
+      "codex": 1,
+      "grok": 7,
+      "max_workers_per_gpu": 4,
+      "max_workers_per_attempt": 1,
+      "launcher": "reports/toy100/continuous-round-3/launch.py",
+      "reason": "User reduced Codex budget; replace two Codex slots with Grok",
+      "verified_live_utc": "2026-09-25T19:19:05.551652+00:00",
+      "verified_live_counts": {},
+      "verified_gpu_reservations": {},
+      "new_launches_allowed": false,
+      "pause_reason": "User authorized the two public-default baseline protocols; historical autonomous search remains stopped."
+    },
+    "workflow": [
+      "baseline complete: hold PASS, shift FAIL",
+      "review mechanism comparison recommendations",
+      "qualify changes before promotion"
+    ]
+  },
+  "reference_candidate": "k3p",
+  "reference_declaration": "reports/toy100/current-research-base.json",
+  "eligibility_audit": "reports/toy100/continuous-eligibility/audit.json",
+  "candidate_eligibility": {
+    "KA2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "R2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B3-belief": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "SG3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "G1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B3 guarded reseed": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Adaptive memory release retains scheduled LR/noise levels.",
+      "evidence": [
+        "../continuous-practical-leaderboard.md"
+      ]
+    },
+    "K3P": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Horizon-based network/prior rates and noise; finite public trainer budget; retained as reference only.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py",
+        "../../../particlegan/recipes.py",
+        "../../../particlegan/training.py"
+      ]
+    },
+    "PB1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Automatic rate boosts retain underlying horizon-based LR/noise.",
+      "evidence": [
+        "../continuous-round-3/completed-penalty-balance/attempts/k3p_penalty_balance/result.md"
+      ]
+    },
+    "PB2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Automatic rate boosts retain underlying horizon-based LR/noise.",
+      "evidence": [
+        "../continuous-round-3/completed-penalty-balance/attempts/k3p_penalty_balance/result.md"
+      ]
+    },
+    "DI2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Real-data novelty adjusts mobility over the inherited scheduled rates, mixing and noise.",
+      "evidence": [
+        "../continuous-round-3/completed-data-innovation/attempts/k3p_data_innovation/result.md"
+      ]
+    },
+    "PM1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Rates are autonomous/reversible but complete learner retains horizon-based noise.",
+      "evidence": [
+        "../continuous-round-3/completed-mobility/attempts/k3p_particle_mobility/result.md"
+      ]
+    },
+    "PM3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Rates are autonomous/reversible but complete learner retains horizon-based noise.",
+      "evidence": [
+        "../continuous-round-3/completed-mobility/attempts/k3p_particle_mobility/result.md"
+      ]
+    },
+    "P3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Autonomous rate reopening still inherits horizon-based noise.",
+      "evidence": [
+        "../continuous-round-2/attempts/k3p_precision_recovery/result.md"
+      ]
+    },
+    "AP3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Autonomous rate reopening still inherits horizon-based noise.",
+      "evidence": [
+        "../continuous-round-2/sources/ap3_partial_reopen/mechanism.py"
+      ]
+    },
+    "PX3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Genuine rate reopening and return to floor, but inherited horizon-based noise remains.",
+      "evidence": [
+        "../continuous-round-3/completed-prox/attempts/k3p_prox_release/result.md"
+      ]
+    },
+    "EP1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Internal rate rules explicitly retain horizon-based noise in archived source.",
+      "evidence": [
+        "../continuous-round-3/stop-inventory/manifest.json"
+      ]
+    },
+    "PD1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Internal rate rules explicitly retain horizon-based noise in archived source.",
+      "evidence": [
+        "../continuous-round-3/stop-inventory/manifest.json"
+      ]
+    },
+    "RP1": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "No structural schedule DQ here; training-state horizon prefix passes, but image stability and native accuracy fail.",
+      "evidence": [
+        "../continuous-round-3/rp1-rejection.md"
+      ]
+    },
+    "TD3": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "Autonomous rate policy and absolute startup noise; acquisition/retention fail, horizon invariance unverified.",
+      "evidence": [
+        "../continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
+      ]
+    },
+    "A3": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "Full verification records 4/22 PASS, 18 FAIL.",
+      "evidence": [
+        "../continuous-round-2/README.md"
+      ]
+    },
+    "EP2": {
+      "status": "UNVERIFIED_INCOMPLETE",
+      "reason": "No final hold or shift result. Missing evidence is not a measured failure.",
+      "evidence": [
+        "../continuous-round-3/INVENTORY.md"
+      ]
+    }
+  },
+  "qualified_winners": 0
 }

@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "scope": "Read-only exact-source audit; no new training. Local paths identify original artifacts; matching common sources are committed in this PR.",
+  "common_sources": {
+    "reports/toy100/gap-fill-20260925/sources/k3p/shift.py": {
+      "sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+      "excerpts": [
+        {
+          "first_line": 199,
+          "text": "\n\nconfig = json.loads(a.config.read_text())\nconfig['device'] = device\n# Declared schedule: the ONLY change. Network cap stays 1600; prior floor is the recipe lr_floor.\nconfig.update(network_lr_floor=a.network_floor, lr_floor=a.prior_floor, lr_anneal_start=a.anneal_start)\naudit = RandomAudit(a.cpu_random)\nstarted = time.perf_counter()\nrecord = dict(task='mode_hold_shift_recovery', backend=a.backend, schedule=dict(\n                  network_lr_horizon_cap=config['network_lr_horizon_cap'], network_lr_floor=a.network_floor,"
+        },
+        {
+          "first_line": 222,
+          "text": "try:\n    from benchmarks.toy100 import continuous_probe as cp\n    with audit, patch.object(torch.optim.Adam, '__init__', init), patch.object(torch.optim.Adam, 'step', step):\n        out = cp.run_probe(config, mode='scheduled', steps=3600, noise_horizon=1200, diagnostic_every=10,\n                           shift_step=2400, shift=(1.0, 0.0), log=log)\n    keep = ('status', 'terminal_grade', 'stationary', 'continued_hold', 'shift_recovery', 'diagnostic', 'final', 'ema',\n            'shift_pair', 'optimizer_final', 'rate_ranges', 'steps', 'shift_step', 'shift', 'config_sha256')\n    record.update({k: out.get(k) for k in keep})\nexcept Exception:\n    record.update(status='ERROR', error=traceback.format_exc())\nrecord.update(latent_receipt=latent.receipt, response_receipt=response.receipt, regularizer_receipt=mechanism.receipt,"
+        }
+      ]
+    },
+    "reports/toy100/gap-fill-20260925/sources/k3p/config.json": {
+      "sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+      "excerpts": [
+        {
+          "first_line": 33,
+          "text": "  \"g_hidden\": 128,\n  \"gan_mode\": \"rp\",\n  \"input_noise_anneal_end\": 0.1,\n  \"input_noise_std\": 0.5,\n  \"log_interval\": 250,\n  \"loss_type\": \"logistic\",\n  \"lr\": 0.00425,\n  \"lr_anneal_start\": 0.6,\n  \"lr_floor\": 0.05,\n  \"model\": \"gan\",\n  \"n_hidden\": 3,\n  \"name\": \"roundcap_k1p0_c1p0_p0p0_b0p999\",\n  \"network_lr_floor\": 0.01,\n  \"network_lr_horizon_cap\": 1600,\n  \"num_classes\": null,\n  \"num_particles\": 20000,\n  \"observation_sigma\": 0.03,\n  \"output_noise_std\": 0.029,\n  \"output_noise_warmup\": 0.2,\n  \"prior_betas\": null,\n  \"prior_kind\": \"particles\",\n  \"prior_lr_mult\": 2.0,"
+        }
+      ]
+    },
+    "benchmarks/toy100/continuous_probe.py": {
+      "sha256": "87659e2f1b6099e2ce72f112935228f9123e014aa7b46ecae5c14888c79b0570",
+      "excerpts": [
+        {
+          "first_line": 302,
+          "text": "        stack.enter_context(patch.object(mode_hold, \"ring_means\", retain_ring))\n        stack.enter_context(patch.object(mode_hold, \"checkpoint\", observe))\n        stack.enter_context(patch.object(torch.optim.Adam, \"step\", step_optimizer))\n        stack.enter_context(optimizer_defaults(\n            recipe, applied,\n            network_lr_horizon_cap=config.get(\"network_lr_horizon_cap\"),\n            network_lr_floor=config.get(\"network_lr_floor\"),\n        ))\n        control = evaluate.FixedControl(vector_tasks.fixed_policy(\"cosine\"),\n                                        noise_horizon)\n        stack.enter_context(bridge.control_host_schedules(control))\n        result = baseline.run_toy(\"mode_hold\", candidate(recipe), noise_policy=policy)\n    result[\"seconds\"] = time.perf_counter() - started\n    receipt = policy.receipt()\n    if receipt[\"step_calls\"] != steps:\n        raise RuntimeError(\"the host did not complete the requested updates\")\n    context = dict("
+        }
+      ]
+    },
+    "benchmarks/transfer_suite/compare_defaults.py": {
+      "sha256": "8cdefd488e3a9de3692de6434586256852024b21feed0c64aa548554b1309676",
+      "excerpts": [
+        {
+          "first_line": 156,
+          "text": "                    recipe.lr_anneal_start, recipe.lr_floor,\n                )\n            else:\n                from benchmarks.toy100.schedule import policy_multipliers\n                network_scale, prior_scale = policy_multipliers(\n                    completed_updates, self.total_steps,\n                    recipe.lr_anneal_start, recipe.lr_floor,\n                    network_lr_horizon_cap,\n                    network_lr_floor=network_lr_floor,\n                )\n            group_lrs = []\n            for group, rate in zip(optimizer.param_groups, rates):\n                kind = 'd' if role == 'd' else 'prior' if group['_comparison_prior'] else 'g'\n                group['lr'] = rate * (prior_scale if kind == 'prior' else network_scale)\n                if network_lr_horizon_cap is not None:"
+        }
+      ]
+    },
+    "benchmarks/toy100/schedule.py": {
+      "sha256": "7bc234006ac6ba457c8fb897351e5d5999dfcfc1ff6ac4061a06f9e103d33fe1",
+      "excerpts": [
+        {
+          "first_line": 25,
+          "text": "    if type(completed_step) is not int or completed_step < 0:\n        raise ValueError(\"completed_step must be a nonnegative integer\")\n    if type(total_steps) is not int or total_steps <= 0:\n        raise ValueError(\"total_steps must be a positive integer\")\n    if network_lr_horizon_cap is not None and (\n        type(network_lr_horizon_cap) is not int or network_lr_horizon_cap <= 0\n    ):\n        raise ValueError(\"network_lr_horizon_cap must be a positive integer\")\n    if network_lr_floor is not None:\n        if network_lr_horizon_cap is None:\n            raise ValueError(\"network_lr_floor requires network_lr_horizon_cap\")\n        if (isinstance(network_lr_floor, bool)\n                or not isinstance(network_lr_floor, (int, float))\n                or not math.isfinite(network_lr_floor)\n                or not 0 <= network_lr_floor <= 1):\n            raise ValueError(\"network_lr_floor must be a finite fraction in [0, 1]\")\n    horizon = min(total_steps, network_lr_horizon_cap or total_steps)\n    network = learning_rate_scale(\n        completed_step, horizon, anneal_start,\n        floor if network_lr_floor is None else network_lr_floor,\n    )\n    prior = learning_rate_scale(completed_step, total_steps, anneal_start, floor)\n    return network, prior"
+        }
+      ]
+    }
+  },
+  "candidates": {
+    "R2": {
+      "source_directory": "/ml2/hypergan/gan-attempts/formulations-20260925T222617Z/b3_release2/20260925T222617Z-4046392/cands/r2",
+      "sha256": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+        "mechanism.py": "59483b5e57c1bbbcef171f6261c62bf620bf943f3a5ab6d05ab543e91c0bbb4d"
+      },
+      "config_and_shift_match_common_source": true,
+      "mechanism_header": "\"\"\"R2 (b3_release2 lane, proposal 2): NON-prox release via optimizer-moment surprise.\n\nLineage: R1 displacement-band mechanism file; same B3/K3P base (800-call pure-A\nwarmup, s=0.5 LR-decoupled, K3P guard C=5/200, EMA decay 0.999, config/latent/\nresponse byte-identical to K3P). Change: the release signal is the critic\nAdam SECOND-MOMENT SURPRISE, not realized displacement, not prox/median.\n\nSignal: at each critic Adam step, per tensor surprise_n = RMS(grad_n) /\nsqrt(mean bias-corrected exp_avg_sq_n) (the same guard ratio K3P already\ncomputes; ordinary optimizer signal; no budget/shift/metric/target reads).\nsur_hist collects the median-over-tensors surprise of the latest completed\ncritic step at each blended penalty call. base = median of the first 24\npost-warmup blended surprises. ratio = median(last 24) / base. Hysteretic\nband: W==1 and ratio > 3.0 -> W=0 (release); W==0 and ratio < 1.75 -> W=1\n(re-anchor). Cold start: sur_hist < 25 forces W=1 (quiet by construction).\nSettled hold: gradients match their running second moment -> surprise ~1 ->\nW=1. Post-shift transient: stale second moment underestimates new gradients\n-> surprise spikes and stays high while relearning -> W stays 0. Scale-free:\nindependent of the LR floor, so no high-LR vs floored-scale mismatch.\n\npenalty = (coeff/2) * (s*A + (1-s)*(B + W*prox)), s=0.5 fixed (LR-decoupled).\nEMA updates only while W==1; guarded re-seed after 60 consecutive W==0\nblended calls WITH ratio > 3.\n\nRemaining budget dependency (labeled ablation): inherited LR/noise schedules\n(floors .01/.05, network horizon cap 1600) unchanged from K3P.\n\"\"\"\nimport atexit, json, sys\nfrom pathlib import Path\nimport torch\nimport torch.nn.functional as F\nfrom torch.optim.optimizer import register_optimizer_step_post_hook, register_optimizer_step_pre_hook\nfrom particlegan.grad_regularizers import GradientPenalty, _score_scalar\n\nFLOOR = 0.01\nGUARD_C = 5.0\nGUARD_MIN_STEPS = 200\nANCHOR_DECAY = 0.999\nS_FIX = 0.5\nWARMUP_CALLS = 800\nSHORT_WINDOW = 24\nGATE_MIN_SAMPLES = 25\nREL_HI = 3.0\nREL_LO = 1.75\nRESEED_STREAK = 60"
+    },
+    "KA2": {
+      "source_directory": "/ml2/hypergan/gan-attempts/lead-ka2-bundle",
+      "sha256": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+        "mechanism.py": "9f1d5eda4bb2f9e0e51832af77db27bd87fba214e29146b224d9963da390c478"
+      },
+      "config_and_shift_match_common_source": true,
+      "mechanism_header": "\"\"\"KA2 (kal_asym lane): ASYMMETRIC stateful alpha on the R2 base.\n\nKA2 slow-attack/fast-release: attack k=1/60 (false-alarm guard: needs ~sustained surprise over tens of calls; ignores R2's spurious pre-shift release at step ~2275); release k=0.5 (re-anchor within ~2-3 calls once surprise clears: agility). Tests guard+agility corner.\n\nLineage: R1 displacement-band mechanism file; same B3/K3P base (800-call pure-A\nwarmup, s=0.5 LR-decoupled, K3P guard C=5/200, EMA decay 0.999, config/latent/\nresponse byte-identical to K3P). Change: the release signal is the critic\nAdam SECOND-MOMENT SURPRISE, not realized displacement, not prox/median.\n\nSignal: at each critic Adam step, per tensor surprise_n = RMS(grad_n) /\nsqrt(mean bias-corrected exp_avg_sq_n) (the same guard ratio K3P already\ncomputes; ordinary optimizer signal; no budget/shift/metric/target reads).\nsur_hist collects the median-over-tensors surprise of the latest completed\ncritic step at each blended penalty call. base = median of the first 24\npost-warmup blended surprises. ratio = median(last 24) / base. Hysteretic\nband: W==1 and ratio > 3.0 -> W=0 (release); W==0 and ratio < 1.75 -> W=1\n(re-anchor). Cold start: sur_hist < 25 forces W=1 (quiet by construction).\nSettled hold: gradients match their running second moment -> surprise ~1 ->\nW=1. Post-shift transient: stale second moment underestimates new gradients\n-> surprise spikes and stays high while relearning -> W stays 0. Scale-free:\nindependent of the LR floor, so no high-LR vs floored-scale mismatch.\n\npenalty = (coeff/2) * (s*A + (1-s)*(B + W*prox)), s=0.5 fixed (LR-decoupled).\nSTATEFUL alpha drives EMA every critic step (no W gate on updates); guarded\nre-seed after 60 consecutive W==0 blended calls WITH ratio > 3 retained.\nAsymmetric-alpha change (this lane): alpha itself is STATEFUL with different\nattack and release speeds. Instantaneous target t=g(ratio): 0 at ratio<=1,\nlinear 1->3, saturated 1 above 3.0 (same band numbers as R2's validated W\nband). Per blended call with a fresh ratio:\n  alpha <- alpha + (t-alpha)*k, k=K_ATK if t>alpha else K_REL.\nEMA decay = 1 - alpha*(1-0.90): alpha=0 frozen memory, alpha=1 fast tracking.\nEMA updates EVERY critic step (no binary iff-W==1 gate); W band drives only\nthe blend penalty. Guarded reseed (60-streak) retained from R2.\nLR-decoupling: no LR/floor/total-step reads; constant critic LR keeps\nsurprise dynamics (hence ratio/alpha/W) alive.\n\nRemaining budget dependency (labeled ablation): inherited LR/noise schedules\n(floors .01/.05, network horizon cap 1600) unchanged from K3P.\n\n\nRemaining budget dependency (labeled ablation): inherited LR/noise schedules\n(floors .01/.05, network horizon cap 1600) unchanged from K3P.\n\"\"\"\nimport atexit, json, sys\nfrom pathlib import Path"
+    },
+    "B3-belief": {
+      "source_directory": "/ml2/hypergan/gan-attempts/formulations-20260926T035614Z/opt_belief/20260926T035614Z-229075/cands/b3",
+      "sha256": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+        "mechanism.py": "0f40fe8022beeac836ba2d75c80919bdc361142c51563059ca34a00997a0e5e5"
+      },
+      "config_and_shift_match_common_source": true,
+      "mechanism_header": "\"\"\"B3 (opt_belief lane, proposal 3): belief GATE on an Adam-stepped critic.\n\nLineage: B2 (cands/b2/mechanism.py) \u2014 same belief-surprise gate SHAPE\n(median-ratio-vs-baseline + hysteretic band), s=0.5, EMA-iff-release-off,\nguarded re-seed (60), guard C=5/200 recomputed for belief-scaled grads,\nconfig/latent/response byte-identical.\n\nOne coherent change vs B2: the critic steps with PLAIN Adam config betas\n(0.0, 0.999) \u2014 no optimizer change at all. The hooks only OBSERVE: maintain\na shadow belief buffer (m_belief with beta 0.9, s with beta 0.999, updated\nfrom the post-step grad + Adam m) and compute the belief-surprise stream\nfrom it. This isolates the lane thesis (belief is a denoised surprise GATE)\nfrom the optimizer confound that sank B1/B2 (beta1 0.9 + belief step scale\nbroke acquisition: 0-1 modes / 4 modes vs R2's 8).\n\nConcretely per critic step (post-hook, read-only of params):\n  g = current grad (pre-Adam-update grad, same as R2's signal timing)\n  m_b <- 0.9*m_b + 0.1*g   (shadow, own buffer keyed per param)\n  r = g - m_b; s <- 0.999*s + 0.001*r^2\n  bsur_n = RMS(g)/sqrt(mean(s/(1-0.999^t))+eps), median over tensors\nGate/band/EMA/guard identical to B2 except the guard CLIP still applies\n(K3P guard C=5/200 semantics on the belief ratio \u2014 declared guard change,\nsame as B1/B2).\n\nNo total-steps/eval/shift-time/target-center reads. Extra compute: shadow\nbelief buffers only (no extra forwards beyond R2/K3P's EMA anchor).\n\"\"\"\n\nimport atexit\nimport json\nimport os\nimport sys\nfrom pathlib import Path\n\nimport torch\nimport torch.nn.functional as F\nfrom torch.optim.optimizer import (\n    register_optimizer_step_post_hook,\n    register_optimizer_step_pre_hook,\n)\nfrom particlegan.grad_regularizers import GradientPenalty, _score_scalar\n\nFLOOR = 0.01\nGUARD_C = 5.0\nGUARD_MIN_STEPS = 200"
+    },
+    "SG3": {
+      "source_directory": "/ml2/hypergan/gan-attempts/formulations-20260926T020839Z/sur_graded/20260926T020839Z-111448/cands/sg3",
+      "sha256": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+        "mechanism.py": "5e8df9554fe00c381797bbf6ae3acce7063e464184b46fc2fce0c173c8d50ec3"
+      },
+      "config_and_shift_match_common_source": true,
+      "mechanism_header": "\"\"\"SG3 (sur_graded lane, proposal 3): graded surprise memory on the R2 base.\n\nLineage: copy of R2 b3_release2 mechanism (sha256\n59483b5e57c1bbbcef171f6261c62bf620bf943f3a5ab6d05ab543e91c0bbb4d),\nsame B3/K3P base (800-call pure-A warmup, s=0.5 LR-decoupled, K3P guard\nC=5/200, config/latent/response byte-identical to K3P:\na1475108/197df635/7e71d60a). Change: the binary anchor weight W in {0,1}\nis replaced by a CONTINUOUS anchor weight w in [0,1] driven by the same\nsurprise stream and baseline convention as R2. Hysteresis thresholds\nbecome slope: asymmetric time constants (fast attack on rising surprise,\nslow release on falling), no thresholds anywhere.\n\nSignal (unchanged from R2): at each critic Adam step, per-tensor\nsurprise_n = RMS(grad_n) / sqrt(mean bias-corrected exp_avg_sq_n);\nsur_hist collects the median-over-tensors surprise of the latest\ncompleted critic step at each blended penalty call.\nbase = median of the first 24 post-warmup blended surprises.\nratio = median(last 24) / base.\n\nGraded mapping (per blended call):\n  x_tgt = clip((ratio - SUR_LO) / (SUR_HI - SUR_LO), 0, 1),\n          SUR_LO=2.6, SUR_HI=3.2 (raised: R2 settling peaks 2.7 stay calm)\n  x_sm += ATTACK*(x_tgt - x_sm) if x_tgt > x_sm       (fast attack, 0.35)\n       += RELEASE*(x_tgt - x_sm) otherwise            (slow release, 0.02)\n  decay = DECAY_CALM - (DECAY_CALM - DECAY_NOVEL) * x_sm   (0.999 -> 0.90)\n  w     = 1 - (1 - W_MIN) * x_sm                          (1 -> 0.15 floor)\nCalm (ratio <= 1.75): decay pinned at 0.999, w = 1 (full damping).\nHigh surprise (ratio >= 3.0 sustained): decay -> ~0.90 (EMA forgets\nfaster the more surprised it is), w -> 0.15 (a floor of damping is kept\nthrough transients instead of throwing it all away).\nCold start: sur_hist < 25 forces x_sm = 0 (quiet by construction).\n\npenalty = (coeff/2) * (s*A + (1-s)*(B + w*prox)), s=0.5 fixed\n(LR-decoupled; never reads LR/floors/total-steps/shift/metric/targets).\nEMA updates on EVERY critic step with the current smoothed decay\n(continuous memory; no freeze/skip). Guarded re-seed after\nRESEED_STREAK=60 consecutive blended calls in the sustained low-decay\nregime (x_sm > 0.8, i.e. decay < ~0.92): copies critic into EMA.\nGuard unchanged (K3P C=5, min 200 steps). Warmup 800 pure-A calls.\n\nRemaining budget dependency (labeled ablation): inherited LR/noise\nschedules (floors .01/.05, network horizon cap 1600) unchanged from K3P.\nw_trace is directly W-equivalent (R2's W in {0,1}; SG1's w in [0,1]).\n\"\"\"\nimport atexit, json, sys"
+    },
+    "B2": {
+      "source_directory": "/ml2/hypergan/gan-attempts/formulations-20260925T213330Z/a3_fastref/20260925T213330Z-3990040/cands/b2",
+      "sha256": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+        "mechanism.py": "55bb2ef7ab98ed1a078a3e05fa42e16dedff174b606192cc7ddc53d66b11b039"
+      },
+      "config_and_shift_match_common_source": true,
+      "mechanism_header": "\"\"\"B2 (a3_fastref lane, proposal 2): B1 short/long gate + EMA re-seed on sustained novelty.\n\nLineage: exact B1 (800-call pure-A warmup, s=0.5, short=24/long=200 ratio gate\nW=clamp(1-med_short/med_long,0,1), guard, latent/response); one coherent\naddition: sustained-novelty re-seed of the EMA reference. If W<0.25 for 20\nconsecutive blended calls (ordinary training signal only, no timers on\nsteps/budget/shift), the EMA is re-seeded to the current critic (single copy)\nand the counter resets; W computation is unchanged and reversible per call.\nRe-seed lets prox fall once the critic has genuinely moved so a second wave\nof novelty can be detected; without it a stale EMA keeps prox high and W\npinned at 0 (B1 failure). LR-decoupled (s fixed, no LR reads). Remaining\nbudget dependency (labeled ablation): inherited LR/noise schedules.\n\"\"\"\nimport atexit, json, sys\nfrom pathlib import Path\nimport torch\nimport torch.nn.functional as F\nfrom torch.optim.optimizer import register_optimizer_step_post_hook, register_optimizer_step_pre_hook\nfrom particlegan.grad_regularizers import GradientPenalty, _score_scalar\n\nFLOOR = 0.01\nGUARD_C = 5.0\nGUARD_MIN_STEPS = 200\nANCHOR_DECAY = 0.999\nS_FIX = 0.5\nWARMUP_CALLS = 800\nSHORT_WINDOW = 24\nLONG_WINDOW = 200\nGATE_MIN_SAMPLES = 25\nGATE_HOLD_W = 0.5\nRESEED_W = 0.25\nRESEED_STREAK = 20\n_original_penalty = GradientPenalty.penalty\nreceipt = {'calls': 0, 'dimensions': {}, 'extra_critic_forwards': 0, 'rule': 'b2-shortref-reseed',\n           'floor': FLOOR, 'guard_c': GUARD_C, 'guard_min_steps': GUARD_MIN_STEPS,\n           'pure_a_calls': 0, 'blend_calls': 0, 'pure_b_calls': 0,\n           'first_blend_call': None, 'first_pure_b_call': None, 'critic_steps': 0,\n           'critic_parameters': None, 'lr_max': None, 'lr_last': None, 's_trace': [],\n           'anchor_decay': ANCHOR_DECAY, 'anchor_started_call': None, 'prox_trace': [],\n            's_fix': S_FIX, 'lr_decoupled': True, 'w_trace': [],\n            'ema_updates': 0, 'ema_skips': 0, 'ema_reseeds': 0}\n_state = {'ema': None, 'critic': None, 'pending': False, 'lr_max': 0.0, 'lr_last': None,\n          'depth': 0, 'clips': [], 'critic_ref': None, 'prox_hist': [], 'w_last': 1.0,\n          'low_streak': 0}\n"
+    },
+    "G1": {
+      "source_directory": "/ml2/hypergan/gan-attempts/formulations-20260926T003323Z/c1_gboost/20260926T003323Z-3838/work/cands/g1",
+      "sha256": {
+        "config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "shift.py": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+        "mechanism.py": "b4bb3cf979e57473275e6d6421af0c36e602fb331ad7bfce89771b3563c54efa"
+      },
+      "config_and_shift_match_common_source": true,
+      "mechanism_header": "\"\"\"G-BOOST G1: generator-network LR x8 under sustained novelty; prior/particle groups unchanged.\n\nLineage: C1 base + G-boost. \n\nLineage: B3 base (800-call pure-A warmup, s=0.5, W=clamp(1-med24/med200), guarded\nre-seed) + C1 sustained relaxation: a guarded re-seed ALSO clears the long prox\nwindow (keeps the newest SHORT_WINDOW post-novelty samples) plus a short\nsupervised W=0 opening (60 blended calls) so relaxation is sustained, then sets low_streak=0; the long\nmedian re-forms from post-reseed samples and W stays low while novelty persists\ninstead of re-clamping on stale pre-shift history. Reversible: the window\nrefills from ordinary prox samples; no timers, shift oracle, or budget reads.\none coherent guard on the re-seed: re-seed the EMA to the current critic only\nwhen BOTH hold for RESEED_STREAK=40 consecutive blended calls: (i) W<0.25\n(gate says sustained novelty) AND (ii) prox_med_short > 4x the frozen\nconvergence baseline prox_short_med_at_800 (first short-window median after\nwarmup; ordinary training signal, no budget/shift/metric reads). In B1 hold\nthe short median stays ~1e-3 (no re-seed); post-shift prox jumps ~10-30x\n(re-seed fires, reference follows the moved critic, anchor relaxes on new\ndata). EMA otherwise updates only while W>=0.5 (A3 rule). LR-decoupled.\nRemaining budget dependency (labeled ablation): inherited LR/noise schedules.\n\"\"\"\nimport atexit, json, sys\nfrom pathlib import Path\nimport torch\nimport torch.nn.functional as F\nfrom torch.optim.optimizer import register_optimizer_step_post_hook, register_optimizer_step_pre_hook\nfrom particlegan.grad_regularizers import GradientPenalty, _score_scalar\n\nFLOOR = 0.01\nGUARD_C = 5.0\nGUARD_MIN_STEPS = 200\nANCHOR_DECAY = 0.999\nS_FIX = 0.5\nWARMUP_CALLS = 800\nSHORT_WINDOW = 24\nLONG_WINDOW = 200\nGATE_MIN_SAMPLES = 25\nGATE_HOLD_W = 0.5\nRESEED_W = 0.25\nRESEED_STREAK = 40\nRESEED_RATIO = 4.0\nPOST_RESEED_OPEN = 60\nBOOST_G = 12.0\nBOOST_PRIOR = 1.0\n_original_penalty = GradientPenalty.penalty"
+    }
+  }
+}

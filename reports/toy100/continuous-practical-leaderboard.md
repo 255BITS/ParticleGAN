@@ -1,6 +1,31 @@
 # 22-toy results and continuous stability
 
-## Current package baseline — measured
+## Current continuous-learning eligibility — September 26, 2026
+
+**No qualified winner.** The complete learner must run without a caller-managed
+acquisition/maintenance switch or predetermined end time. Automatic reversible
+adaptation is allowed. A clock-independent anchor inside a scheduled learner
+is insufficient. The [entry-by-entry audit](continuous-eligibility/README.md)
+disqualifies 18 current configurations, retains three measured quality rejections,
+and marks EP2 incomplete. These decisions supersede the historical rankings below.
+
+KA2, R2, B3-belief, SG3, B2, B3 guarded reseed, G1 and K3P retain scheduled
+complete learners. PB1/PB2/DI2 retain scheduled base rates/noise; PM1/PM3/P3/AP3/
+PX3/EP1/PD1 retain horizon-based noise despite autonomous rate rules. RP1 and TD3
+are rejected on measured quality, not merely for absolute initialization windows.
+A3 has a measured full-suite rejection; EP2 remains unverified.
+
+The comparison is retention, time to reach a changed target and stability
+thereafter. **81/81 is not a requirement.** The public KA2 constant-rate run
+retains only 61/120 pre-shift checks and passes 126/209 observations after its
+first arrival. The research extension is 105/109 after the previously reported
+settled arrival, not uninterrupted stability. See the audit for sources.
+
+Next: after compaction, run three distinct approaches concurrently through
+external Codex using `gpt-6-astra` at `max`, reviewing and replacing failures.
+No research was launched by this audit. No seed sweeps or merges are authorized.
+
+## Historical public package baseline — measured
 
 Master `0ff9a7af` (package 0.8.0) is merged into this experiment. New work starts
 from `get_recipe()` / `GANTrainer`, using the current package defaults.
@@ -23,7 +48,7 @@ settings. They are not scores for this new package baseline. R2 remains an
 unpromoted historical lead; it retains LR/noise schedules, so its clock-independent
 release is not a horizon-independent learner or demonstrated hyperparameter
 reduction. Its 114/120 pre-shift checks are not a 1200-update hold + 300 extension.
-No new seed experiments or automatic candidate launches are authorized in this phase.
+The current launch authorization and eligibility decisions are recorded above; these older recommendations are historical.
 
 ## Gap-filled leaderboard — September 25, 2026
 
@@ -49,7 +74,7 @@ No new seed sweeps or short acquisition screens contribute to these scores.
 | RG5 + b-cap, no A2, .01/.05 floors | **18/22** | **15/19** | **4/4** | **1/1 new** | **4/4** | Hold **NOT_CONVERGED**; recovery **FAIL 0/81** |
 
 Recovery fractions count passing checks in the fixed 81-check deadline window;
-all 81 are required. Extension failure fractions count **failing** checks. P1's
+these are historical grader outputs, not the current selection rule. Extension failure fractions count **failing** checks. P1's
 22/22 at the declared seeds does not erase its existing staggered100 seed-1235
 failure. The broad P1 results and the old K3 ring control use different source
 implementations of the same formula. P1's own hold/recovery were run in this batch
@@ -264,45 +289,39 @@ include two formulations that pass both blockers but fail trajectory; neither is
 promoted. R1/R2 history is a reason to avoid unchanged repeats, not to reject a
 candidate that passes its measured gates.
 
-## Current lead (not promoted): R2 moment-surprise — September 26, 2026
+## Historical research comparison — eligibility corrected September 26, 2026
 
-**R2 is the top-scoring challenger of the Muse continuous-learning search
-(OpenCode engine, `nano-gpt/meta/muse-spark-1.3-contributor`, 5 batches,
-21 measured candidates, all on the frozen K3P protocol). K3P remains the
-selected base; R2 is a lead, explicitly not promoted.** What it still lacks:
-6 pre-shift hold checks (114/120), 9 deadline checks (72/81), the full 22-toy
-suite (4/4 sensitive screens PASS, rest NOT_RUN), delayed/repeated-change
-stress, and cross-seed + nudge confirmation.
+These are archived finite-run scores. None of the following tested complete
+configurations qualifies for the current continuous-learning requirement.
+The release component's independence from a clock does not establish that
+property for the whole learner. The old deadline fractions are retained only
+as measurements; they do not decide eligibility.
 
-| # | Exact formulation | Hold / extension | Target-shift recovery | Schedule-free release? | Standing |
-|---|---|---:|---:|---|---|
-| 1 | **R2: K3P + moment-surprise release (LEAD, winning)** | **114/120** (6 pre-shift checks short) | **72/81, delay 490** | **Yes — surprise-driven, no clock/budget reads** | **Top qualified score; 4/4 screens PASS, frozen 0/81 (moves)** |
-| 1t | **B3-belief: R2 gate under AdaBelief (TIE)** | **114/120** (identical 6 steps) | **73/81, delay 480** | **Yes — belief-surprise, same band shape** | **Tie, not a win; one check better, same hold gap; frozen/toys NOT_RUN** |
-| 1j | **ka2 asymmetric-Kalman (best JOINT)** | **120/120 FULL** | **50/81, delay 1120** | **Yes — certainty-gated EMA, asymmetric time constants** | **Only full-hold + real recovery; back-loaded (stable 3520); bundle persisted with receipt** |
-| 3 | SG3 graded memory | 114/120 (same 6 fails) | 43/81, delay 1080 | Release yes; LR/noise retained | Second family; latch engaged, 19 reseeds; beats B2 with R2-grade hold |
-| DQ | PM1 / PM3 | Both pass | 79/81 each | No — scheduled noise remains | DISQUALIFIED: schedule-dependent |
-| DQ | PB2 / DI2 / P3 | All pass | 77/81 each | No — scheduled components remain | DISQUALIFIED: schedule-dependent |
-| — | B2 unguarded re-seed | 33/120 FAIL | 40/81 | n/a (hold broken) | Out: speed without stability |
-| ref | K3P (selected, reference) | 1200/1200 + 300/300 | FAIL 28/81 | No — still depends on schedules | Selected base; 22/22 toys |
-| — | B3 guarded re-seed | 120/120 + own-hold PASS | 0/81 | Release yes; LR/noise retained | Holds but does not move |
-| — | G1 G-boost (active) | 120/120 | 45/120 motion, 8-mode final | Boost gated on novelty; LR/noise retained | Active follow-up |
+| Exact formulation | Historical pre-shift hold | Historical deadline count | Current eligibility |
+|---|---:|---:|---|
+| R2 moment-surprise | 114/120 | 72/81 | DISQUALIFIED: inherited LR/noise schedules |
+| B3-belief: Adam with shadow belief statistics | 114/120 | 73/81 | DISQUALIFIED: inherited LR/noise schedules |
+| KA2 asymmetric-Kalman | 120/120 | 50/81 | DISQUALIFIED: inherited schedules; public constant-rate variant unstable |
+| SG3 graded memory | 114/120 | 43/81 | DISQUALIFIED: inherited LR/noise schedules |
+| PM1 / PM3 | Both pass | 79/81 each | DISQUALIFIED: horizon-based noise remains |
+| PB2 / DI2 / P3 | All pass | 77/81 each | DISQUALIFIED: remaining horizon coupling |
+| B2 unguarded reseed | 33/120 | 40/81 | DISQUALIFIED: inherited schedules and instability |
+| K3P reference | Own hold 1200/1200 + extension 300/300 | 28/81 | DISQUALIFIED for continuous selection; comparison baseline only |
+| B3 guarded reseed | 120/120 + own hold passes | 0/81 | DISQUALIFIED: inherited LR/noise schedules |
+| G1 finalized v15 | 120/120 | 47/81 | DISQUALIFIED: reversible G boost over scheduled base learner |
 
-Recovery fractions count passing checks in the fixed 81-check deadline window;
-all 81 are required. R2's final live state re-acquires all 8 modes at HQ 0.997.
-Schedule-dependent releases are disqualified: the task is horizon-independent
-learning, so PM/PB-family scores cannot win regardless of count. Among qualified
-contenders R2 wins outright — the only candidate pairing a schedule-free release
-with measured hold and recovery. (R2 retains K3P's LR/noise level schedules as a
-labeled ablation; its release mechanism itself reads no clock, budget, or shift.)
+G1 v15 replaces the previous partial G1 row; its final HQ is .906 with a
+settled suffix from 3550. The older G1 observation below remains labeled by
+scope. [Exact source receipts](continuous-eligibility/source-receipts.json)
+identify the shared drivers/configs and the audited mechanism sources.
 
 ## Stability-since-arrival (delay-agnostic comparison) — September 26, 2026
 
-Per user direction, recovery is compared by the END state, not by speed: the
-deadline window grades how fast a candidate arrives, but a candidate that
-arrives late and stays is a candidate longer training qualifies. Metric:
-stability measured from each run's own arrival (`stable_from`, first sustained
-re-acquisition) to the end of its window, plus a stable-end boolean (final 8
-modes at HQ >= .90 with a live passing streak). Delay is reported, not graded.
+The table below describes final passing suffixes in the original finite window.
+`stable_from` is retrospective: by construction, observations from that point
+to the endpoint pass. It is not first arrival and cannot establish future
+stability. The current comparison records first arrival, all subsequent
+departures and the final suffix separately, alongside retention.
 
 | Candidate | Arrived (stable_from) | Since-arrival stability | Final | Stable end? |
 |---|---:|---:|---|---|
@@ -310,18 +329,14 @@ modes at HQ >= .90 with a live passing streak). Delay is reported, not graded.
 | R2 | 2890 | 72/72 = 100% | 8 / 0.997 | TRUE |
 | B2 | 3210 | 40/40 = 100% | 8 / 0.988 | TRUE |
 | SG3 | 3480 | 13/13 = 100% | 8 / 0.919 | TRUE |
-| ka2 | 3520 | 9/9 = 100% (109 pending extended run) | 8 / 0.996 | TRUE* |
-| G1 | never | — | 8 / 0.891 intermittent | FALSE |
+| ka2 | 3520 | 9/9 originally; completed extension 105/109 | 8 / 0.996 originally | TRUE only at original endpoint |
+| G1 earlier partial snapshot (superseded by v15 above) | never | — | 8 / 0.891 intermittent | FALSE |
 
-*ka2's 9 is window-truncated (window ends 3600), not arrival-truncated; an
-extended 4600-step ka2 run is measuring 3520→4600 sustain directly.
-
-Reading: everyone who arrives, stays — arrival is the whole game, and no
-arrival has ever left. G1 is exposed by this metric: 8 final modes but suffix
-0 (visits without staying) where deadline-counting showed motion. With delay
-ungraded the top rows tie on stability and the tiebreak returns to hold: ka2
-is the only arrival with a full 120/120 hold, which is why the ka2+G-boost
-combo round exists. Delay figures retained in the rows above for reference.
+The completed KA2 extension has departures at 4280, 4300, 4310 and 4320:
+105/109 observations pass after the originally reported settled arrival.
+The claim that everyone who arrives stays is withdrawn. Neither a good final
+snapshot nor a final passing suffix certifies indefinite stability. All these
+scheduled configurations are disqualified under the current requirement.
 
 **The mechanism, mathematically.** The critic penalty keeps K3P's three terms —
 early R1 acquisition (A), one-sided L2 caps (B), EMA-critic gradient anchor P,
@@ -363,9 +378,8 @@ shift+frozen+hold everywhere off-seed, and fails the nudge at both 1e-6 and
 repo-seed luck plus release. The Lion optimizer family is dead on arrival
 (warm probes FAIL); SGD warm probes FAIL (adaptivity is load-bearing). Combo
 attempts (graded blind-band shapes, G-boost ported onto R2) did not beat R2.
-Per user direction, failing gates are retried at declared seeds before drop
-verdicts; fragile is not broken, robust wins. Active: basin round
-(early-phase acquisition robustness over 8 declared seeds) on both GPUs.
+Those seed/nudge runs are historical only. The current work does not authorize
+new seed sweeps, and no historical batch is described as currently running.
 
 ## Compute cost is count-based (wall clock invalid) — September 26, 2026
 
