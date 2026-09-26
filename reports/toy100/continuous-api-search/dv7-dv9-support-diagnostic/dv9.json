@@ -1,0 +1,44 @@
+{
+  "diagnostic_only": true,
+  "prior_rows": 256,
+  "components": [
+    {
+      "component": 0,
+      "particles": 147,
+      "max_centered_covariance_rank": 2,
+      "noise_free_whitened_eigenvalues": [
+        0.7662915587425232,
+        0.9043908715248108
+      ]
+    },
+    {
+      "component": 1,
+      "particles": 83,
+      "max_centered_covariance_rank": 2,
+      "noise_free_whitened_eigenvalues": [
+        0.7436966300010681,
+        0.9439542293548584
+      ]
+    },
+    {
+      "component": 2,
+      "particles": 24,
+      "max_centered_covariance_rank": 2,
+      "noise_free_whitened_eigenvalues": [
+        0.7106829285621643,
+        1.0314486026763916
+      ]
+    },
+    {
+      "component": 3,
+      "particles": 2,
+      "max_centered_covariance_rank": 1,
+      "noise_free_whitened_eigenvalues": [
+        -1.5323637114761368e-07,
+        7.104162693023682
+      ]
+    }
+  ],
+  "constant_output_noise_variance_ratio": 0.025956790123456794,
+  "note": "Original noisy4096sample quality gates remain FAIL; this enumeration is not a replacement scorer."
+}

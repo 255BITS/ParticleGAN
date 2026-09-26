@@ -574,7 +574,7 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "RP5_PARTIAL_SURVIVOR_THREE_LANES_RUNNING_NO_WINNER",
+    "status": "NO_SURVIVOR_CURRENT_PROPOSALS_RUNNING",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
     "matched_k3p_owner": "RP5_RECOVERY_RING; NEXT_DATA_LANE_UNEQUAL_MASS_REFERENCE",
@@ -603,7 +603,7 @@
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
     },
-    "strongest_active_candidate": "API-RP5_PARTIAL_EVIDENCE_ONLY",
+    "strongest_active_candidate": null,
     "api_c6": {
       "single_shift": "PASS",
       "initial_arrival": 590,
@@ -651,8 +651,15 @@
         "276/276"
       ],
       "long_departures": [],
-      "long_replay": "PENDING",
-      "mode_hold": "FAIL_0_OF_24_SOURCE_AUDIT_PENDING"
+      "long_replay": "NOT_RUN_AFTER_BROADER_FAILURE",
+      "mode_hold": "VERIFIED_FAIL_0_OF_24",
+      "status": "REJECTED_BROADER_QUALITY",
+      "broader_failures": 1,
+      "failure_task": "mode_hold",
+      "final_modes": 5,
+      "required_modes": 8,
+      "controller": "OPEN_FULL_RATE_NO_PREMATURE_CLOSURE",
+      "remaining_broader": "NOT_RUN_AFTER_FAILURE"
     },
     "api_dv6": {
       "stationary_after_arrival": "696/696",
@@ -723,9 +730,7 @@
       "component_min_eigen_ratio": 0.021303080022335052,
       "required_min_eigen_ratio": 0.15
     },
-    "survivors": [
-      "API-RP5"
-    ],
+    "survivors": [],
     "api_dv8": {
       "single_shift_after_arrival": "171/190",
       "initial_after_arrival": "175/177",

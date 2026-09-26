@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-26T23:37:21.264282+00:00",
+  "created_utc": "2026-09-26T23:39:03.560324+00:00",
   "scope": "Immutable sources, receipts, raw checkpoint storage and stdlib metric arithmetic only; no Torch import/tests/model/GPU/training.",
   "run_count": 1,
   "passing_runs": 0,
@@ -9,7 +9,7 @@
       "id": "api-c10-img_intensity2",
       "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C10-img_intensity2",
       "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo",
-      "recorded_utc": "2026-09-26T23:37:21.264282+00:00",
+      "recorded_utc": "2026-09-26T23:39:03.560324+00:00",
       "candidate": "API-C10",
       "protocol": "frozen22_img_intensity2",
       "scope": "PUBLIC_API",

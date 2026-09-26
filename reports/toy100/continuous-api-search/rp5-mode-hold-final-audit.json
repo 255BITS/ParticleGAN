@@ -1,0 +1,369 @@
+{
+  "created_utc": "2026-09-26T23:39:56.171867+00:00",
+  "verdict": "VERIFIED_MEASURED_FROZEN_HOST_FAILURE",
+  "source_zip_sha256": "437cd280dd0fc0aea374ed777687fc7a83c151ff60bfd1103a52035293a90a70",
+  "declared_source_exact": true,
+  "declared_source_entries": 77,
+  "artifact_hashes_all_verified": true,
+  "package_matches_rp5_single": true,
+  "recipe_resource_differences": {
+    "z_dim": [
+      2,
+      4
+    ],
+    "num_particles": [
+      20000,
+      12
+    ],
+    "batch_size": [
+      2048,
+      128
+    ]
+  },
+  "canonical_archive_sha256": "6820de970e8e5b78dace410d88d5a81a73aa38ed73e2912931c329adb790c781",
+  "canonical_worker_sha256": "15b309dde720b63d90fac1e721f4e153ce30022ceb62db0e2d98da4c9c752a4d",
+  "canonical_worker_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/gpu-known-winner-control/worker.py",
+  "canonical_device_proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/gpu-known-winner-control/runs/simpler22_reference/mode_hold/device-proof.json",
+  "canonical_route": "gpu-known-winner-control worker default CUDA -> legacy_noise_adapters.run_legacy -> baseline.run_toy -> ModeHoldRecipe without training_recipe -> ParticlePrior12,z4,std.5. G96x3 and D96x3/Fourier3 construct on global CUDA seed0 after the independently seeded prior draw.",
+  "current_prior": "Public recipe.make_prior(init_std=.5,generator=shared CUDA0), prior_kind=particles; actual raw prior state contains only z, shape12x4. standardize config is discarded for ParticlePrior; no MoG transform or latent noise.",
+  "initialization": {
+    "scope": "Source-defined reconstruction and recorded raw state; no retained historical full initial tensor fixture exists for this host, so no historical byte-identity claim.",
+    "complete_initial_raw_digest_matches": true,
+    "named_parameter_hashes": {
+      "G": [
+        {
+          "name": "net.0.weight",
+          "shape": [
+            96,
+            4
+          ],
+          "sha256": "994ca36d8a87acf11fcf3bf33c223a0518b8dd6c7edfc16f6bbb71250c99e54c"
+        },
+        {
+          "name": "net.0.bias",
+          "shape": [
+            96
+          ],
+          "sha256": "d37993bb53648037ae3be353ff040eaf0380ebc392d82c5020c5f1649ac95cae"
+        },
+        {
+          "name": "net.2.weight",
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "1d2760c30f9af4e2fa11c2482b444f2a53efd359f4ee63cd1a62aaa6a5dba9eb"
+        },
+        {
+          "name": "net.2.bias",
+          "shape": [
+            96
+          ],
+          "sha256": "a7967d4c776eaa95a5974f1b199011d399a5e49b9216f7247c17279839d6a8c4"
+        },
+        {
+          "name": "net.4.weight",
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "057c63a7e9f458ffc3cd25d102adbda7f6130f33774407357f134f92256f08a0"
+        },
+        {
+          "name": "net.4.bias",
+          "shape": [
+            96
+          ],
+          "sha256": "c3a0b2e28661fb0f5c42e5d6e4089aee54988fa127006c7ba87111b7d804789b"
+        },
+        {
+          "name": "net.6.weight",
+          "shape": [
+            2,
+            96
+          ],
+          "sha256": "7db6ac298ee03f84dbde648ce28e7384e643c2c52770e66dea8b17e69ed1f82e"
+        },
+        {
+          "name": "net.6.bias",
+          "shape": [
+            2
+          ],
+          "sha256": "d5cd7c7f1fc53bdf93181a39bd8421b3aec563206e98692e71d70c94b62bc126"
+        }
+      ],
+      "prior": [
+        {
+          "name": "z",
+          "shape": [
+            12,
+            4
+          ],
+          "sha256": "902d100fb18ffa782bcb76495fd45ebe7cfb55c96a1eb6899f657ba7ff60f9d9"
+        }
+      ],
+      "D": [
+        {
+          "name": "net.0.weight",
+          "shape": [
+            96,
+            14
+          ],
+          "sha256": "7bf1a9a9de8f96c74a2c754fdd269feeeff5fd6234d49371c9649fafc727cc19"
+        },
+        {
+          "name": "net.0.bias",
+          "shape": [
+            96
+          ],
+          "sha256": "e7a32f7aa305eaaa1e57ac85640fd5c4c70fa38c7a7c2e6ea4f82e3f821c5e91"
+        },
+        {
+          "name": "net.2.weight",
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "8daba5fc41a403c27bc68eab81b4ed30a68f71ae6818fc20bf39ffa2a7118237"
+        },
+        {
+          "name": "net.2.bias",
+          "shape": [
+            96
+          ],
+          "sha256": "ec6054cf7bd2787b6884c14ba2614dbb41acb8207fdfb3aad7df5331311115eb"
+        },
+        {
+          "name": "net.4.weight",
+          "shape": [
+            96,
+            96
+          ],
+          "sha256": "283344667a4b1704f3fe3fbc7cc566d5d9f1f40081f33d177c3521026399ce39"
+        },
+        {
+          "name": "net.4.bias",
+          "shape": [
+            96
+          ],
+          "sha256": "18f1c5623555d2d679ca09f230fea2ea1ec4977a091e1246787f6cbd432b62e0"
+        },
+        {
+          "name": "net.6.weight",
+          "shape": [
+            1,
+            96
+          ],
+          "sha256": "da24a72b77acb67bc2fa9c47f98954d52de0e868406c70448a5e49cda5b3b479"
+        },
+        {
+          "name": "net.6.bias",
+          "shape": [
+            1
+          ],
+          "sha256": "15c3974484b686abbb316de05f0db7b76e470db3ffc6685b99d481283be391e7"
+        }
+      ]
+    },
+    "parameter_counts": {
+      "G": 19298,
+      "prior": 48,
+      "D": 20161
+    },
+    "ema_matches": {
+      "G": true,
+      "prior": true
+    },
+    "same_parameter_counts_as_canonical_device_proof": true,
+    "initial_step_devices": {
+      "cuda:0": 17
+    },
+    "final_step_devices": {
+      "cuda:0": 17
+    }
+  },
+  "host_functions_match": {
+    "ring_means": true,
+    "sample_ring": true,
+    "diversity": true
+  },
+  "mlp_source_exact": true,
+  "shared_stream": "Frozen order D-real -> D-latent indices -> G-latent indices -> G-real. Clone computes future G-real after exactly two actual ParticlePrior randint draws; original cursor is checked after accepted API update then committed to the post-G-real cursor. RP5 internal preview restores streams before corrector. Same precomputed real tensors and latent index sequence feed both fields; no caller draw reordering.",
+  "shared_stream_proof": {
+    "batch_rows": 1200,
+    "initial_and_final_data_rng_equal_trainer_latent_stream": true,
+    "last_accepted_cursor_matches_saved_final": true,
+    "limitations": "Source plus all1200 runtime cursor assertions and retained hashes; auditor did not regenerate CUDA draws or execute a separate original-host trace."
+  },
+  "evaluation": "Frozen diversity on radius3/sigma.07 ring;4096 CUDA prior draws seed9; independent forked global CUDA output-noise seed402+step paired live/EMA.24 checks every50; all8/HQ>=.90/final5 as declared, ignoring older standalone seven-mode verdict. Candidate-owned fixed360/720 noise amplitude; no vector2303 or large recovery-ring override.",
+  "losses": "Actual current public RP5 GANTrainer/game transaction. Frozen host feature matching default0; canonical candidate bridge explicitly sets particle_l2=0 and vicreg_weight=candidate.prior_reg. RP5 prior_reg0 is unchanged across ring/images/vectors; no positive task-specific auxiliary term was dropped.",
+  "derived": {
+    "status": "FAIL",
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 0,
+    "passing_suffix": 0,
+    "first_pass_step": null,
+    "stable_from_step": null,
+    "maximum_modes": 7,
+    "failing_steps": [
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      550,
+      600,
+      650,
+      700,
+      750,
+      800,
+      850,
+      900,
+      950,
+      1000,
+      1050,
+      1100,
+      1150,
+      1200
+    ],
+    "final_live": {
+      "step": 1200,
+      "modes": 5,
+      "n_modes": 8,
+      "hq": 1.0,
+      "cover": 0.625,
+      "effective_modes": 4.536378860473633
+    },
+    "all_live": [
+      {
+        "step": 50,
+        "modes": 0,
+        "hq": 0.0
+      },
+      {
+        "step": 100,
+        "modes": 1,
+        "hq": 0.000244140625
+      },
+      {
+        "step": 150,
+        "modes": 0,
+        "hq": 0.0
+      },
+      {
+        "step": 200,
+        "modes": 1,
+        "hq": 0.04736328125
+      },
+      {
+        "step": 250,
+        "modes": 0,
+        "hq": 0.0
+      },
+      {
+        "step": 300,
+        "modes": 1,
+        "hq": 0.17626953125
+      },
+      {
+        "step": 350,
+        "modes": 2,
+        "hq": 0.18359375
+      },
+      {
+        "step": 400,
+        "modes": 6,
+        "hq": 0.976806640625
+      },
+      {
+        "step": 450,
+        "modes": 5,
+        "hq": 0.916015625
+      },
+      {
+        "step": 500,
+        "modes": 6,
+        "hq": 1.0
+      },
+      {
+        "step": 550,
+        "modes": 2,
+        "hq": 0.0224609375
+      },
+      {
+        "step": 600,
+        "modes": 6,
+        "hq": 1.0
+      },
+      {
+        "step": 650,
+        "modes": 6,
+        "hq": 0.7392578125
+      },
+      {
+        "step": 700,
+        "modes": 7,
+        "hq": 0.999755859375
+      },
+      {
+        "step": 750,
+        "modes": 3,
+        "hq": 0.229248046875
+      },
+      {
+        "step": 800,
+        "modes": 5,
+        "hq": 0.586181640625
+      },
+      {
+        "step": 850,
+        "modes": 6,
+        "hq": 1.0
+      },
+      {
+        "step": 900,
+        "modes": 2,
+        "hq": 0.423583984375
+      },
+      {
+        "step": 950,
+        "modes": 6,
+        "hq": 0.913818359375
+      },
+      {
+        "step": 1000,
+        "modes": 4,
+        "hq": 0.21875
+      },
+      {
+        "step": 1050,
+        "modes": 5,
+        "hq": 0.996337890625
+      },
+      {
+        "step": 1100,
+        "modes": 5,
+        "hq": 1.0
+      },
+      {
+        "step": 1150,
+        "modes": 5,
+        "hq": 1.0
+      },
+      {
+        "step": 1200,
+        "modes": 5,
+        "hq": 1.0
+      }
+    ]
+  },
+  "controller": "Open at all1200 updates, no close/reopen event; full network/prior rates. Thus this small-host failure is not premature precision closure.",
+  "qualification": "This valid frozen mode_hold failure blocks full22 qualification despite separate long-ring/image/vector strengths. Not proof that all ring tasks fail. No corrected-host rerun justified by this audit.",
+  "scope": "CPU stdlib source/raw metadata/hash/scoring inspection only. No Torch import, model/GPU execution, training, tests, worker edits or shared manifests."
+}

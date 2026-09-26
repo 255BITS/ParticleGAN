@@ -43,7 +43,7 @@ alone is insufficient, and longer verification remains required.
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
 | API-RP3: precision adds generator-update cancellation, serial execution | 610 | 180/180 | 460 | 175/175 | **Rejected:** frozen img_intensity2 passes0/24; controller stays open. Longer tests NOT_RUN. |
 | API-RP4: precision plus implicit game update | 1250 | 108/116 | 350 | 170/186 | **Rejected:** intensity image0/24. |
-| API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and six vectors pass; checkpoint and horizon checks pass. Completed30000: delays350/450/250, with544/544,146/146,1876/1876,276/276 after arrival. Broader/API/K3P incomplete. **Not selected:** mode_hold returned0/24, with independent host/source audit pending. |
+| API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and six vectors pass; checkpoint and horizon checks pass. Completed30000: delays350/450/250, with544/544,146/146,1876/1876,276/276 after arrival. Broader/API/K3P incomplete. **Rejected:** mode_hold0/24, final5/8 modes; frozen host independently verified. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -110,10 +110,12 @@ against the required.15. Two_broad and unequal_width pass18/24 and20/24. All
 parameters, package and frozen scoring were independently verified. Its own
 2400→2500 fresh-process replay passes; none of this removes the measured failure.
 
-The small-particle `mode_hold` host has now returned **0/24** for RP5. Its
-independent adapter audit is pending; the result blocks selection while we check
-whether it represents learner quality or a host mismatch. The ten broader passes
-and full long-run strengths remain recorded either way.
+The small-particle `mode_hold` host rejects RP5: **0/24**, with final5/8 modes
+although HQ is1.0. The independent source/adapter audit found no mismatch; precision
+stayed open at full rates. This is a measured coverage failure, not premature
+rate reduction. The ten broader passes and full long-run strengths remain recorded.
+No finite failure proves that a target could never be learned; this version
+does not meet the frozen broader quality requirement.
 
 The first direct [public K3P comparison](k3p-comparison-results.json) is complete
 on `vector_unequal_mass`, with the same frozen task, canonical parameters and
