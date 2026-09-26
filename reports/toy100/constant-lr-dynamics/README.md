@@ -96,6 +96,14 @@ Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset
 
 Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
 
+## extragradient
+
+`K3P_DYNAMICS=extragradient`. Simultaneous Extra-Adam (Gidel et al. 2019): at the current point, differentiate the critic, the generator, and the particles together; take one Adam step at each group's current learning rate; differentiate again at that joint point on the same minibatch; apply those gradients with Adam from the original point. The extrapolation's moments are not kept. One committed Adam update per player per outer step, so the hold and stay probes still see one moment update per step. Both half-steps use the group rates already written for that update (0.00425 and 0.0085 on this screen). No new coefficient.
+
+Declared before the run and not used: extrapolation from the past (reuse the previous gradient as the lookahead). That drops the extra backward. The hypothesis is that a fresh lookahead of the current field cancels the rotation that walks a mode onto its neighbor, so a stale gradient is a different method.
+
+`vector_unequal_mass` was crashing before any of these dynamics: the probe assigns `scaled_penalty` onto the K3P penalty, which now receives `ema_critic` and has no `arm`. Calls with no `arm` go to the penalty that was replaced. At constant LR that penalty stays in its `s == 1` form.
+
 ## Recommendation
 
 Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
