@@ -26,6 +26,10 @@ Variants (all scales match ``kaiming_uniform_(a=sqrt(5))`` element RMS):
 * ``eye_sign`` — tiled identity with alternating row signs and zero bias.
 * ``sign_q`` — ``eye_sign`` weights, bias at a quarter of the bound.
 * ``hid_h`` — ``hid`` weights, bias at half the default bound.
+* ``block_q`` — square hidden layers are a block-diagonal orthogonal
+  matrix (4×4 Householder blocks, full Householder when the width is
+  not a multiple of 4) times the Kaiming gain. Rectangular layers stay
+  tiled identity. Quarter bias.
 * ``pad_in`` — padded identity on expanding layers, tiled identity on
   contracting layers, bias pattern on every layer.
 * ``tile_in`` — tiled identity on expanding layers, padded identity on
@@ -53,14 +57,15 @@ import torch
 from torch import nn
 
 VARIANTS = ("eye", "eye_bias", "eye_pad", "hid", "hid_bias",
-            "hid_edge", "hid_q", "hid_h", "eye_sign", "sign_q", "pad_in", "tile_in",
+            "hid_edge", "hid_q", "hid_h", "block_q", "eye_sign", "sign_q", "pad_in", "tile_in",
             "tile_read", "tile_read_q", "hid_read")
 _BIAS_VARIANTS = frozenset(("eye_bias", "eye_pad", "hid_bias", "hid_edge", "hid_q", "hid_h",
-                            "sign_q", "pad_in", "tile_in", "tile_read", "tile_read_q", "hid_read"))
+                            "block_q", "sign_q", "pad_in", "tile_in", "tile_read", "tile_read_q", "hid_read"))
 _ORTHO_VARIANTS = frozenset(("hid", "hid_bias", "hid_edge", "hid_q", "hid_h", "hid_read"))
+_BLOCK_VARIANTS = frozenset(("block_q",))
 _READ_VARIANTS = frozenset(("tile_read", "tile_read_q", "hid_read"))
 _BIAS_SCALE = {"hid_q": 0.25, "tile_read_q": 0.25, "hid_read": 0.25,
-               "sign_q": 0.25, "hid_h": 0.5}
+               "sign_q": 0.25, "hid_h": 0.5, "block_q": 0.25}
 _GAIN = math.sqrt(2.0 / (1.0 + 5.0))  # calculate_gain("leaky_relu", sqrt(5))
 _PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53)
 _STATE = {"name": None}
@@ -176,6 +181,17 @@ def _householder(n: int) -> torch.Tensor:
     return q
 
 
+def _block(n: int, width: int = 4) -> torch.Tensor:
+    """Block-diagonal orthogonal. Same block repeated, so the construction stays closed-form."""
+    if n <= width or n % width != 0:
+        return _householder(n)
+    q = _householder(width)
+    out = torch.zeros(n, n, dtype=torch.float64)
+    for i in range(n // width):
+        out[i * width:(i + 1) * width, i * width:(i + 1) * width] = q
+    return out
+
+
 def _fan(weight: torch.Tensor) -> tuple[float, float]:
     fan_in, _ = nn.init._calculate_fan_in_and_fan_out(weight)
     fan_in = float(fan_in)
@@ -188,6 +204,8 @@ def _how(rows: int, cols: int) -> str:
     name = _STATE["name"]
     if name in _ORTHO_VARIANTS and rows == cols and rows > 0:
         return "ortho"
+    if name in _BLOCK_VARIANTS and rows == cols and rows > 0:
+        return "block"
     if name in _READ_VARIANTS and 1 < rows < cols:
         return "pad"
     if name in ("eye_sign", "sign_q"):
@@ -229,6 +247,8 @@ def _unit(rows: int, cols: int, padded: bool) -> torch.Tensor:
 def _matrix(rows: int, cols: int, std: float, how: str, numel: int) -> torch.Tensor:
     if how == "ortho":
         return _householder(rows) * _GAIN
+    if how == "block":
+        return _block(rows) * _GAIN
     unit = _unit(rows, cols, padded=(how == "pad"))
     if how == "sign" and rows:
         signs = torch.where((torch.arange(rows) % 2).to(dtype=torch.bool),

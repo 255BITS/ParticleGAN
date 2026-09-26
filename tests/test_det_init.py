@@ -72,6 +72,19 @@ def test_square_hidden_is_orthogonal_and_rectangular_matches_kaiming_rms():
         uninstall()
 
 
+def test_block_hidden_is_orthogonal_and_local():
+    install("block_q")
+    try:
+        hidden = nn.Linear(16, 16)
+        gain = torch.tensor(2.0 / 6.0, dtype=torch.float64).sqrt()
+        q = hidden.weight.detach().double() / gain
+        assert torch.allclose(q.T @ q, torch.eye(16, dtype=torch.float64), atol=1e-5)
+        assert q[:4, 4:].abs().sum() == 0
+        assert q[4:8, :4].abs().sum() == 0
+    finally:
+        uninstall()
+
+
 def test_readout_pad_is_only_the_wide_map():
     install("tile_read")
     try:
