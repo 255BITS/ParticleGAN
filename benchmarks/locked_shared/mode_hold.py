@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+from particlegan.dynamics.sga import active as sga_active, adjust, assign_grads, mode_hold_players
 from particlegan.dynamics.shared_batch import shared_batch_update
 
 N_MODES = 8
@@ -198,40 +199,60 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for opt, rates in zip((opt_g, opt_d), base_lrs):
                 for group, rate in zip(opt.param_groups, rates):
                     group["lr"] = rate * scale
-        real = sample_ring(means, batch, SIGMA, stream)
-        latent, _ = prior.sample(batch, generator=stream)
-        context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
-        with context:
-            fake = generator(latent).detach()
-        d_loss = gan.d_loss(critic(real), critic(fake))
-        d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
-        opt_d.zero_grad()
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
-
-        # shared_batch: the generator plays the real batch and the latents the
-        # critic just scored. Otherwise the host draws a second batch of each.
-        share = shared_batch_update()
-        if not share:
-            latent, _ = prior.sample(batch, generator=stream)
-        fake = generator(latent)
-        if gan.mode in ("rp", "ra"):
-            real_g = real if share else sample_ring(means, batch, SIGMA, stream)
-            g_loss = gan.g_loss(critic(fake), critic(real_g))
+        if sga_active():
+            # Simultaneous game at the current weights. schedule_optimizer stays
+            # in this frame so the host role lookup still sees opt_d and opt_g.
+            players = mode_hold_players(
+                generator, critic, prior, gan, regularizer, vicreg, recipe,
+                stream, noise_policy, step, batch, means, SIGMA,
+            )
+            grads = adjust(players)
+            del players
+            opt_d.zero_grad()
+            assign_grads([p for p in critic.parameters() if p.requires_grad], grads[0])
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
+            opt_g.zero_grad()
+            prior_ids = {id(p) for p in prior.parameters()}
+            assign_grads([p for p in generator.parameters() if p.requires_grad and id(p) not in prior_ids], grads[1])
+            assign_grads([p for p in prior.parameters() if p.requires_grad], grads[2])
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
         else:
-            # Stranger / unpaired pairing: real and fake are scored apart.
-            g_loss = gan.g_loss(critic(fake))
-        if recipe.fm_weight > 0.0:
-            # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
-            real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
-            g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
-        g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
-        g_loss = g_loss + vicreg(prior.z)
-        opt_g.zero_grad()
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
+            real = sample_ring(means, batch, SIGMA, stream)
+            latent, _ = prior.sample(batch, generator=stream)
+            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+            with context:
+                fake = generator(latent).detach()
+            d_loss = gan.d_loss(critic(real), critic(fake))
+            d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
+            opt_d.zero_grad()
+            d_loss.backward()
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
+
+            # shared_batch: the generator plays the real batch and the latents the
+            # critic just scored. Otherwise the host draws a second batch of each.
+            share = shared_batch_update()
+            if not share:
+                latent, _ = prior.sample(batch, generator=stream)
+            fake = generator(latent)
+            if gan.mode in ("rp", "ra"):
+                real_g = real if share else sample_ring(means, batch, SIGMA, stream)
+                g_loss = gan.g_loss(critic(fake), critic(real_g))
+            else:
+                # Stranger / unpaired pairing: real and fake are scored apart.
+                g_loss = gan.g_loss(critic(fake))
+            if recipe.fm_weight > 0.0:
+                # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
+                real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
+                g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
+            g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
+            g_loss = g_loss + vicreg(prior.z)
+            opt_g.zero_grad()
+            g_loss.backward()
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
         with torch.no_grad():
             for ema, param in zip(ema_g, generator.parameters()):
                 ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)

@@ -5,6 +5,7 @@ import math
 import torch
 from torch import nn
 
+from .dynamics.sga import active as sga_active, adjust, assign_grads, relax_inplace
 from .dynamics.shared_batch import shared_batch_update
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
@@ -183,6 +184,8 @@ class GANTrainer:
                 group["lr"] = rate * (prior_scale if role == "prior" else network)
         sigma_in = input_noise_std(recipe, self.completed_steps)
         sigma_out = output_noise_std(recipe, self.completed_steps)
+        if sga_active():
+            return self._step_sga(real, generator_real, collect_stats, sigma_in, sigma_out)
         noise = self.noise_generator
         critic = self._noisy_D
         critic.std = sigma_in
@@ -242,6 +245,80 @@ class GANTrainer:
         result = {key: value.detach() for key, value in
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
+        result["step"] = self.completed_steps
+        if collect_stats:
+            result["penalty_stats"] = penalty_stats
+        return result
+
+    def _step_sga(self, real, generator_real, collect_stats, sigma_in, sigma_out):
+        """One simultaneous SGA update, then the existing Adam steps.
+
+        Sampling order matches ``step``. Both losses are taken at the current
+        parameters, before either optimizer moves.
+        """
+        recipe = self.recipe
+        noise = self.noise_generator
+        critic = self._noisy_D
+        critic.std = sigma_in
+        relax_inplace(self.D, self.G, self.prior)
+        self.D.train()
+        self.G.eval()
+        with torch.no_grad():
+            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+            fake = self._generate(self.G, latent, sigma_out, noise)
+        loss_d = self.loss.d_loss(critic(real), critic(fake))
+        self.penalty.collect_stats = collect_stats
+        penalty = self.penalty(critic, real, fake)
+        penalty_stats = self.penalty.last_stats
+        loss_d = loss_d + penalty
+
+        self.D.eval()
+        self.G.train()
+        share = shared_batch_update()
+        if not share:
+            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+        fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+        if share:
+            real_g = real
+        else:
+            real_g = generator_real() if callable(generator_real) else generator_real
+            real_g = real if real_g is None else self._batch(real_g, "generator_real")
+        if real_g.shape[1:] != real.shape[1:]:
+            raise ValueError("generator_real must match the real sample shape")
+        if len(real_g) != len(real):
+            raise ValueError("RpGAN generator_real must match the real batch size")
+        real_logits = critic(real_g)
+        loss_gan = self.loss.g_loss(fake_logits, real_logits)
+        prior_reg = loss_gan.new_zeros(())
+        if self.prior.z.requires_grad:
+            raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+            prior_reg = self.prior_regularizer(raw)
+        loss_g = loss_gan + recipe.prior_reg * prior_reg
+        prior_ids = {id(p) for p in self.prior.parameters()}
+        d_params = [p for p in self.D.parameters() if p.requires_grad]
+        g_params = [p for p in self.G.parameters() if p.requires_grad and id(p) not in prior_ids]
+        p_params = [p for p in self.prior.parameters() if p.requires_grad]
+        players = [(d_params, loss_d), (g_params, loss_g), (p_params, loss_g)]
+        values = {key: value.detach() for key, value in
+                  dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+                       prior_regularization=prior_reg, penalty=penalty).items()}
+        grads = adjust(players)
+        del players, loss_d, loss_g, loss_gan, prior_reg, penalty
+        self.opt_d.zero_grad()
+        assign_grads(d_params, grads[0])
+        self.opt_d.step()
+        self.opt_g.zero_grad()
+        assign_grads(g_params, grads[1])
+        assign_grads(p_params, grads[2])
+        self.opt_g.step()
+        with torch.no_grad():
+            for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
+                for averaged, current in zip(target.parameters(), source.parameters()):
+                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                for averaged, current in zip(target.buffers(), source.buffers()):
+                    averaged.copy_(current)
+        self.completed_steps += 1
+        result = dict(values)
         result["step"] = self.completed_steps
         if collect_stats:
             result["penalty_stats"] = penalty_stats
