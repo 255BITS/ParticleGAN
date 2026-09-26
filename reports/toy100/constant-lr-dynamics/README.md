@@ -1,6 +1,6 @@
 # Constant-LR GAN dynamics
 
-Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant: network `0.00425`, prior `0.0085` (`prior_lr_mult` 2). `lr_anneal_start` is 0 and both floors are 1, so `policy_multipliers` stays 1 at steps 0, 720, 721, 1199, 2400, and 4000. The horizon cap stays 1600. No decay, anneal, or warm restart.
+Four mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant: network `0.00425`, prior `0.0085` (`prior_lr_mult` 2). `lr_anneal_start` is 0 and both floors are 1, so `policy_multipliers` stays 1 at steps 0, 720, 721, 1199, 2400, and 4000. The horizon cap stays 1600. No decay, anneal, or warm restart.
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
@@ -53,7 +53,7 @@ Balduzzi et al. 2018, Algorithm 1. One published setting, written before the scr
 
 ## Patches
 
-Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of the three names is set.
+Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of the four names is set.
 
 - `patches/unit_rms.patch`
 - `patches/pair_chord.patch`
@@ -73,7 +73,7 @@ python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamic
 
 Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `hq`, `passing_suffix`). Hold passes only when `status` is `PASS` and `hold_checks == 1200`. Stay passes only when shift's continued hold is `120/120` and `pass_all`. The shift terminal status is not the stay gate.
 
-`vector_unequal_mass` does not run. The probe always imports `mechanism.py`, which replaces `GradientPenalty.penalty` with `scaled_penalty`. That function does not accept `ema_critic` and reads `self.arm`. The current penalty has no `arm`, and `CriticPenalty` always passes `ema_critic`. A direct call raises `TypeError: scaled_penalty() got an unexpected keyword argument 'ema_critic'`. The same error hits the constant-LR baseline. Ring, hold, and stay use the legacy penalty and are not on this path.
+`vector_unequal_mass` runs on this branch. The probe's `scaled_penalty` accepts `ema_critic`. On the K3P penalty (no `.arm`) it delegates to the original penalty, so the penalty value is unchanged. Legacy penalties that still have `.arm` keep their formula. Ring, hold, and stay use the legacy penalty and never call this function.
 
 ## CPU sanity
 
@@ -111,4 +111,27 @@ Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At ste
 
 ## Recommendation
 
-Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
+Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking of those three, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays.
+
+## CPU screen: `sga`
+
+Same build, baseline and `sga`, 64 jobs, 2 at a time. Baseline ring, hold, and stay match the table above (ring 0/8, hold 0/8, stay 0/8, best stay 53/120 at offset 606). Unequal now runs. The screen's unequal row leaves `modes` null; status, hq, and passing suffix are the fields it prints.
+
+Handoff bar missed. The bar is one hold PASS or one stay 120/120, with at least as many ring passes as the baseline. `sga` ring passes 0/8, hold passes 0/8, stay 120/120 is 0/8. Best recorded `sga` stay is 0/120. Completed rings are 0 modes and hq 0.
+
+| offset | baseline ring | sga ring | baseline hold | sga hold | baseline stay | sga stay | baseline unequal | sga unequal |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | NOT_CONVERGED, 0 | 33/120 | 0/120 | FAIL 0.968 / 2 | FAIL 0.027 / 0 |
+| 101 | 7 / 0.659 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | NOT_CONVERGED, 0 | 0/120 | 0/120 | PASS 0.971 / 5 | FAIL 0.000 / 0 |
+| 202 | 7 / 0.985 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | ERROR | 0/120 | 0/120 | FAIL 0.984 / 0 | FAIL 0.000 / 0 |
+| 303 | 6 / 0.670 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | NOT_CONVERGED, 0 | 9/120 | 0/120 | FAIL 0.977 / 0 | FAIL 0.000 / 0 |
+| 404 | 6 / 0.400 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | NOT_CONVERGED, 0 | 17/120 | 0/120 | FAIL 0.912 / 3 | FAIL 0.003 / 0 |
+| 505 | 4 / 0.263 / 0 FAIL | ERROR | NOT_CONVERGED, 0 | ERROR | 0/120 | ERROR | PASS 0.982 / 10 | FAIL 0.000 / 0 |
+| 606 | 7 / 0.694 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | NOT_CONVERGED, 0 | 53/120 | 0/120 | FAIL 0.957 / 0 | FAIL 0.000 / 0 |
+| 707 | 0 / 0.000 / 0 FAIL | 0 / 0.000 / 0 FAIL | NOT_CONVERGED, 0 | ERROR | 0/120 | ERROR | FAIL 0.974 / 0 | FAIL 0.000 / 0 |
+
+Ring cells are modes / hq / passing suffix. Hold cells are status and `hold_checks`. Unequal cells are status, hq, passing suffix. ERROR is the probe refusing to write `result.json` because a metric was NaN, after training had already finished (`sga` receipt `steps` 1200 on the ring, 6300 on the hold, 3600 on the shift). Those hold logs end at step 6300 with `NOT_CONVERGED`, `hold_checks` 0, live modes 0. The two shift logs checkpoint 0 modes from step 2500 through 3600, so they are not a 120/120 stay. Ring offset 505 finished 1200 steps and then hit the same NaN write; it is not a ring pass.
+
+`|λ| = 1` is what the paper plugs into gradient descent. Under this Adam (`β2 = 0.999`) the correction dominates `ξ`. On the offset-0 hold, step 200 already has generator gradient RMS ~178 and an alignment product ~1e20, while both learning rates are still 0.00425 and 0.0085. Displacement RMS falls to ~1e-4 and live modes stay 0 for the rest of the budget. Later alignments go to ±inf, which is the NaN the probe then refuses to serialize. The rotational term never gets a chance to stop a neighbor hop: the particles do not acquire the modes. No second coefficient was run.
+
+Do not send `sga` to the A6000 on this bar.
