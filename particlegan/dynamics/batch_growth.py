@@ -36,12 +36,11 @@ Network noise then matches the network anneal. Prior noise falls at least
 as far as the prior anneal (100× versus 20× at the floor). With the flag
 unset this function returns the host batch and does not touch the RNG.
 
-The unequal critic's distance feature is a dense kernel. Above 2,048 rows
-the real, fake, and penalty graphs of that kernel do not fit together on
-this screen. ``install`` evaluates it in row blocks above 2,048 and
-recomputes each block on the way back. Forward features match the dense
-kernel bit for bit. The gradient into the points differs only by blocked
-reduction order. The host batch and eval stay on the dense path.
+The unequal critic's distance feature is a dense kernel, and its penalty
+asks for a second derivative. Above 2,048 rows those graphs do not fit
+together on this screen. ``install`` evaluates the kernel in row blocks and
+recomputes one block at a time for both derivatives. Forward features match
+the dense kernel bit for bit. The host batch and eval stay on the dense path.
 """
 from __future__ import annotations
 
@@ -77,16 +76,16 @@ _MILESTONES = (0, 720, 721, 900, 1199, 1200, 2400, 3600)
 
 
 # The unequal critic's distance feature is a dense [N, N, scales] kernel.
-# Real, fake, and the penalty interpolation each keep one. Above 2,048 rows
-# those graphs no longer fit together on this screen, and the Smith cap is
-# 12,800. The same formula then runs in row blocks, and each block is
-# recomputed on the way back. Forward features match the dense kernel bit
-# for bit. Critic-parameter gradients match it bit for bit, because they
-# read those features. The gradient into the points differs only by the
-# blocked reduction order (about one ulp). Eval is under no_grad and every
-# batch at or below 2,048 stays on the dense path.
+# The penalty differentiates through d(score)/dx, so a checkpoint of that
+# kernel is kept alive for the second backward. Above 2,048 rows the real
+# and fake copies no longer fit on this screen, and the Smith cap is 12,800.
+# The kernel is then applied in row blocks. The first derivative and the
+# penalty's second derivative each recompute one block and drop it. Forward
+# features match the dense kernel bit for bit. Point gradients and penalty
+# parameter gradients differ by the blocked reduction (about one ulp).
+# Eval is under no_grad, and every batch at or below 2,048 stays dense.
 _RECOMPUTE_ABOVE = 2048
-_ROW_BLOCK = 1024
+_ROW_BLOCK = 512
 _PAIRWISE = None
 
 
@@ -95,36 +94,90 @@ def _install_pairwise_recompute() -> None:
     if _PAIRWISE is not None:
         return
     import torch
-    from torch.utils.checkpoint import checkpoint
+    from torch.autograd import Function
 
     from particlegan.discriminators import BatchDistanceDiscriminator
 
     original = BatchDistanceDiscriminator.pairwise_features
     _PAIRWISE = original
 
+    def _block(points, start, scales, eps, rows):
+        rows_x = points[start:start + rows]
+        delta = rows_x[:, None, :] - points[None, :, :]
+        distance = delta.square().sum(-1)
+        scales2 = scales.square()
+        kernels = torch.exp(-distance[..., None] / (2 * scales2))
+        diag = torch.arange(rows, device=points.device)
+        mask = torch.ones(rows, points.shape[0], 1, device=points.device, dtype=points.dtype)
+        mask[diag, start + diag, :] = 0
+        kernels = kernels * mask
+        weighted = (kernels * distance[..., None]).sum(dim=1)
+        return weighted / (kernels.sum(dim=1) + eps) / scales2
+
+    def _forward_features(points, scales, eps):
+        n = points.shape[0]
+        parts = []
+        for start in range(0, n, _ROW_BLOCK):
+            rows = min(_ROW_BLOCK, n - start)
+            parts.append(_block(points, start, scales, eps, rows))
+        return torch.cat(parts, dim=0)
+
+    def _vjp(points, scales, eps, grad_feat):
+        acc = torch.zeros_like(points)
+        upstream = grad_feat.detach()
+        n = points.shape[0]
+        with torch.enable_grad():
+            for start in range(0, n, _ROW_BLOCK):
+                rows = min(_ROW_BLOCK, n - start)
+                leaf = points.detach().requires_grad_(True)
+                feat = _block(leaf, start, scales, eps, rows)
+                grad = torch.autograd.grad(feat, leaf, upstream[start:start + rows])[0]
+                acc = acc + grad.detach()
+        return acc
+
+    def _jvp(points, scales, eps, direction):
+        parts = []
+        tangent = direction.detach()
+        n = points.shape[0]
+        with torch.enable_grad():
+            for start in range(0, n, _ROW_BLOCK):
+                rows = min(_ROW_BLOCK, n - start)
+
+                def fn(z, start=start, rows=rows):
+                    return _block(z, start, scales, eps, rows)
+
+                _, feature_tangent = torch.func.jvp(fn, (points.detach(),), (tangent,))
+                parts.append(feature_tangent.detach())
+        return torch.cat(parts, dim=0)
+
+    class _LinearVJP(Function):
+        @staticmethod
+        def forward(ctx, grad_feat, points, scales, eps):
+            ctx.save_for_backward(points.detach(), scales.detach())
+            ctx.eps = float(eps)
+            return _vjp(points, scales, ctx.eps, grad_feat)
+
+        @staticmethod
+        def backward(ctx, grad_points):
+            points, scales = ctx.saved_tensors
+            return _jvp(points, scales, ctx.eps, grad_points), None, None, None
+
+    class _BlockedFeatures(Function):
+        @staticmethod
+        def forward(ctx, points, scales, eps):
+            ctx.save_for_backward(points.detach(), scales.detach())
+            ctx.eps = float(eps)
+            return _forward_features(points, scales, ctx.eps)
+
+        @staticmethod
+        def backward(ctx, grad_feat):
+            points, scales = ctx.saved_tensors
+            return _LinearVJP.apply(grad_feat, points, scales, ctx.eps), None, None
+
     def pairwise_features(self, x):
         if x.shape[0] <= _RECOMPUTE_ABOVE or not torch.is_grad_enabled():
             return original(self, x)
-        scales2 = self.scales.square()
-        eps = self.eps
-        n = x.shape[0]
-        parts = []
-        for start in range(0, n, _ROW_BLOCK):
-            rows = x[start:start + _ROW_BLOCK]
-
-            def block(rows, cols, start=start, scales2=scales2, eps=eps):
-                delta = rows[:, None, :] - cols[None, :, :]
-                d2 = delta.square().sum(-1)
-                kernels = torch.exp(-d2[..., None] / (2 * scales2))
-                diag = torch.arange(rows.shape[0], device=rows.device)
-                mask = torch.ones(rows.shape[0], cols.shape[0], 1, device=rows.device, dtype=rows.dtype)
-                mask[diag, start + diag, :] = 0
-                kernels = kernels * mask
-                weighted = (kernels * d2[..., None]).sum(dim=1)
-                return weighted / (kernels.sum(dim=1) + eps) / scales2
-
-            parts.append(checkpoint(block, rows, x, use_reentrant=False))
-        return torch.cat(parts, dim=0)
+        return _BlockedFeatures.apply(x, self.scales, torch.as_tensor(self.eps, dtype=x.dtype, device=x.device))
 
     BatchDistanceDiscriminator.pairwise_features = pairwise_features
 

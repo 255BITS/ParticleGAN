@@ -223,6 +223,29 @@ def test_batch_growth_blocks_the_large_pairwise_kernel():
         large = score(48)
         large_again = score(48)
         small = score(16)
+
+        def penalty(critic, batch):
+            leaf = batch.detach().clone().requires_grad_(True)
+            grad = torch.autograd.grad(critic(leaf).sum(), leaf, create_graph=True)[0]
+            return grad.square().mean()
+
+        torch.manual_seed(0)
+        patched = BatchDistanceDiscriminator()
+        batch = torch.randn(48, 2)
+        patched_penalty = penalty(patched, batch)
+        dense = BatchDistanceDiscriminator()
+        dense.load_state_dict(patched.state_dict())
+        dense.pairwise_features = original.__get__(dense, type(dense))
+        dense_penalty = penalty(dense, batch)
+        assert torch.equal(patched_penalty.detach(), dense_penalty.detach())
+        patched_penalty.backward()
+        first = [(name, p.grad.detach().clone()) for name, p in patched.named_parameters() if p.grad is not None]
+        assert first
+        patched.zero_grad(set_to_none=True)
+        penalty(patched, batch).backward()
+        again = [(name, p.grad.detach()) for name, p in patched.named_parameters() if p.grad is not None]
+        assert [name for name, _ in first] == [name for name, _ in again]
+        assert all(torch.equal(a, b) for (_, a), (_, b) in zip(first, again))
     finally:
         BatchDistanceDiscriminator.pairwise_features = original
         batch_growth._PAIRWISE, batch_growth._RECOMPUTE_ABOVE, batch_growth._ROW_BLOCK = saved
