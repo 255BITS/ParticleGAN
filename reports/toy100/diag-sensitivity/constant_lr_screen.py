@@ -29,6 +29,7 @@ def constant_config(source: Path, dest: Path) -> dict:
     config["network_lr_floor"] = 1.0
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(config, indent=2) + "\n")
+    sys.path.insert(0, str(ROOT))
     from benchmarks.toy100.schedule import policy_multipliers
     for step in (0, 720, 721, 800, 1199, 4000):
         network, prior = policy_multipliers(
