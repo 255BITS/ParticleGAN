@@ -24,7 +24,7 @@ HERE = Path(__file__).resolve().parent
 K3P = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p"
 OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
 GATES = ("ring", "hold", "shift", "unequal")
-DYNAMICS = ("baseline", "unit_rms", "pair_chord", "shared_batch")
+DYNAMICS = ("baseline", "unit_rms", "pair_chord", "shared_batch", "lookahead_minmax")
 
 
 def constant_config(source: Path, dest: Path) -> dict:
