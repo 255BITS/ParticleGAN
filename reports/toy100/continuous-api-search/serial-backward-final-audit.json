@@ -1,0 +1,56 @@
+{
+  "scope": "Final delta review only. Read-only stdlib parsing/hash/AST checks and git show; no training, PyTorch import, GPU operation, benchmark, extra lane or worker checkout edit.",
+  "verdict": "NO_REUSE_BLOCKER_FOUND",
+  "reuse_scope": "Standalone explicit serial execution option may be reused in a new lane. This approves implementation reuse, not model quality or an unrestricted CUDA determinism guarantee.",
+  "base": "fa511ce010120b502f494d717d01b14b8551eed8",
+  "patch_sha256": "cbc74e2bdd473478d3bdfd5e1cba2aae7597743d76ffc97d2a2e7cef3e1f57e6",
+  "confirmed": {
+    "patch_hash_matches_receipt": true,
+    "destinations": [
+      "particlegan/training.py",
+      "tests/test_serial_backward.py"
+    ],
+    "tested_output_hashes_match_both_standalone_and_clean_patch_check_copy": true,
+    "original_step_body_ast_equals_new_private_step_body_ast": true,
+    "drift_policy_coupling": false,
+    "false_inherits_ambient_mode_documented": true,
+    "legacy_checkpoint_ambient_setting_not_captured_documented": true,
+    "same_mode_from_construction_documented": true,
+    "success_and_failure_restore_documented": true,
+    "new_nested_create_graph_and_outer_backward_exception_tests_present": true,
+    "recorded_contract_tests_passed": 6,
+    "dependency_files": 13,
+    "dependency_archive_hashes_match_receipt": true,
+    "dependency_bytes_match_preexisting_archive_or_pinned_commit": true,
+    "complete_source_manifest_entries_per_execution": 28,
+    "both_complete_manifests_equal_archive_plus_dependency_union": true,
+    "post_execution_provenance_repair_labeled_honestly": true,
+    "torch_and_cuda_versions_recorded": [
+      "2.13.0+cu126",
+      "12.6"
+    ]
+  },
+  "prior_findings_resolution": {
+    "effective-mode": "Addressed in standalone patch documentation; default False intentionally preserves legacy caller context.",
+    "source-closure": "Addressed for imported checkout dependencies by 13-file archive and earlier-source byte checks; each serial execution now has a complete28-source manifest.",
+    "direct-nested-test": "Addressed by parameterized nested_grad and outer_backward exception tests; retained log shows6 passing tests.",
+    "scope-of-proof": "Still a scope limit, not a reuse blocker: completed cross-process proof is DV1 on the measured runtime; new lane must declare/use serial mode consistently and own its quality evidence.",
+    "causal-wording": "Earlier report narrative still uses strong root-cause wording; prior audit remains the qualification: graph-priority changes plus serial intervention strongly support scheduling explanation, not universal proof."
+  },
+  "nonblocking_limits": [
+    "GPU identity is not added to the dependency receipt; runtime guarantee remains scoped to the existing measured environment. Record GPU identity in new lane declarations.",
+    "No historical quality score transfers to serial arithmetic. No new quality or benchmark work was run for this review."
+  ],
+  "evidence_sha256": {
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial-backward.patch": "cbc74e2bdd473478d3bdfd5e1cba2aae7597743d76ffc97d2a2e7cef3e1f57e6",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial-patch-receipt.json": "b12bc1781f6865925bdef8fa6f1017724d976497b2636532b675effaf5837c73",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial-dependency-receipt.json": "a5c0cf7566ee57efd23e35bcf41d0d2fff64cfab4297786c659f49f4e6034712",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial-dependencies.zip": "40bf54a872430b032e2f0add291f4d40c30ea7d4cdcf7eec8d3f3bc8aebf3c08",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial-complete-reference-sources.json": "60d6031f9ff598e8cb6f34f5e56371da1e05ead90ed6af461f96fa1804f8bfb6",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial-complete-resume-sources.json": "dceca09e13a3a3463abc74a086bf548877a04293a1d9847c9a3d7409e279d724",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/standalone-pr195/particlegan/training.py": "c3d7f1fb73008778b5f9a754abaeb9a11c01553eda2437390fa4c45a64f97c23",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/standalone-pr195/tests/test_serial_backward.py": "2bc452bdeeb2c2b03081c6fe43c7e121a5a6ee8f46b8d0fb093017512b202c59",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/serial_backward_engine_exception_contract.log": "cc5e30a9560e3afacbfda80fbe1cd40afa6c6fb47edc6ad48e590ef763208fbd",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/serial_dependency_manifest.log": "47d75ca4dc342da4f21e66f22f0882a5879a68ed41843c887690e4a9752f7ed0"
+  }
+}

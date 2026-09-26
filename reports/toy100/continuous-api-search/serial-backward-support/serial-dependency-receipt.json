@@ -1,0 +1,81 @@
+{
+  "timing": "post-execution receipt with previous-source identity checks",
+  "dependencies": {
+    "benchmarks/__init__.py": {
+      "sha256": "53ba1483505036be295d73f5f3308bffb951e9414bf2b1139d8756e260e3b830",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/legacy/__init__.py": {
+      "sha256": "83de2dd27bb1fec5ba74b066b49274ba161e4e480037129e3c99e13b04767f04",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/legacy/gan_loss.py": {
+      "sha256": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/legacy/grad_regularizers.py": {
+      "sha256": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/legacy/locked_shared.py": {
+      "sha256": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/locked_shared/__init__.py": {
+      "sha256": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/locked_shared/mlp.py": {
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "earlier_authority": "dv3-single/source.zip, before both serial tests"
+    },
+    "benchmarks/locked_shared/mode_hold.py": {
+      "sha256": "4bd920c258337fe8b21910b946d94cfe7d699ea858b57353cf0fd8f588084b3d",
+      "earlier_authority": "dv3-single/source.zip, before both serial tests"
+    },
+    "benchmarks/locked_shared/observation.py": {
+      "sha256": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/toy100/__init__.py": {
+      "sha256": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/toy100/device.py": {
+      "sha256": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "benchmarks/toy100/problems.py": {
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "earlier_authority": "pinned fa511ce source; unchanged worktree"
+    },
+    "reports/data-drift-api/worker.py": {
+      "sha256": "eca3ae3b80a799662864b949d8c7d1c664e2a9811d5525f4f36fee58825711ed",
+      "earlier_authority": "dv3-single/source.zip, before both serial tests"
+    }
+  },
+  "skipped": [
+    {
+      "module": "__main__",
+      "reason": "receipt collector, not test dependency"
+    },
+    {
+      "module": "__mp_main__",
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/capture_serial_dependencies.py",
+      "reason": "collector alias, not test dependency"
+    },
+    {
+      "module": "torch.classes",
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/_classes.py",
+      "reason": "synthetic or missing nonfile entry"
+    },
+    {
+      "module": "torch.ops",
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/_ops.py",
+      "reason": "synthetic or missing nonfile entry"
+    }
+  ],
+  "torch": "2.13.0+cu126",
+  "cuda": "12.6",
+  "purpose": "Post-execution receipt: complete imported checkout dependency identities.\nPublic modules and entrypoint are already captured separately per execution.\nNon-public dependencies are checked against a BEFORE-execution candidate ZIP\nor the pinned commit. This is provenance repair, not a pre-execution snapshot.\n"
+}

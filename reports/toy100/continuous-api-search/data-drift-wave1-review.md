@@ -41,7 +41,9 @@ The predecessor also isolated a cross-process CUDA continuation discrepancy.
 Higher-order critic backward creates nodes with thread-local priority counters;
 the first fresh-process gradient summation order can differ from warm execution.
 Immediate checkpoint state and RNG were equal. A scoped `serial_backward=True`
-public trainer option is being tested to make the order reproducible.
+public trainer option now passes a genuine fresh-process1000→1100 replay with
+all final state hashes and ten observations exact. Its six scope/exception/checkpoint
+contract tests pass, and the complete dependency receipt is saved.
 
 Read the predecessor's final diagnostic and the independent audit before using
 the correction. Copy only the reviewed standalone patch/dependencies, record
@@ -57,8 +59,11 @@ followed by stability, not an 81/81 deadline. No seed sweeps or extra final seed
 Use unique names API-DV4 onward and preserve all failures and incomplete runs.
 Reuse unchanged plumbing with a source receipt; never edit the predecessor.
 
-API-RP2 owns the matched public K3P comparison if it survives. Do not duplicate
-that work. The frozen22 route map beside this review explains why legacy runners
+No comparator is currently justified: API-RP2 passed30000 but failed frozen image
+stability; API-C6 passed ring/image/checkpoint gates but then failed54 stationary
+observations across3390–3680 and6780–7010 (638/692 sincearrival,minHQ0).
+All successes and failures are retained. Root will assign one surviving lane
+the exact ordinary public K3P comparison; do not duplicate that work. The frozen22 route map beside this review explains why legacy runners
 cannot qualify a current controller: fourteen hosts can adapt GANTrainer, eight
 need component-controller integration. A cheap sensitive frozen image gate may
 be checked before full22, but its exact model, initialization, evaluation-noise

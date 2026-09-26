@@ -1,0 +1,26 @@
+{
+  "README.md": {
+    "sha256": "48d03298f2061a5f59aea261f3f3305f2e983560a697e3fa9c893d328e28f014",
+    "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/c6-vector-harness/README.md"
+  },
+  "prepare.py": {
+    "sha256": "9aa264f8ed48df3570abc9fd1aaf1359926424a0f66a757e4a466e1ad46cd832",
+    "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/c6-vector-harness/prepare.py"
+  },
+  "receipt-contract.json": {
+    "sha256": "4ad1a68d8b4aea53fe1c52b09635e286a5b0bc8abed23f65205cc9146b73296a",
+    "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/c6-vector-harness/receipt-contract.json"
+  },
+  "verification.json": {
+    "sha256": "448cf7950cc68984444a795dc2677f6f8f29ef6d06d0c18ca62270adbebb8856",
+    "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/c6-vector-harness/verification.json"
+  },
+  "prepared/preparation.json": {
+    "sha256": "92fac192a7e100c521a23d29d1d37dc3b0cf6f4e0ea064cbdeae9517ba7300c9",
+    "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/c6-vector-harness/prepared/preparation.json"
+  },
+  "prepared/source.zip": {
+    "sha256": "f3a9f375db6210bd3e449e5c633830aa81cd7c7970867583adb11bc99efa4ea7",
+    "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/c6-vector-harness/prepared/source.zip"
+  }
+}

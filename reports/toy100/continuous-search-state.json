@@ -28,7 +28,7 @@
     "phase": "RUNNING",
     "no_seed_sweeps": true,
     "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
-    "verified_live_utc": "2026-09-26T21:43:40.205626+00:00",
+    "verified_live_utc": "2026-09-26T22:22:49.299919+00:00",
     "verified_live_counts": {
       "codex": 3,
       "grok": 0
@@ -552,21 +552,21 @@
   ],
   "active_attempts": [
     {
-      "lane": "reversible_precision",
-      "pid": 1398474,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474",
+      "lane": "constant_rate_stability",
+      "pid": 1447914,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914",
       "status": "RUNNING"
     },
     {
       "lane": "data_drift_mobility",
-      "pid": 1398477,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477",
+      "pid": 1504042,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042",
       "status": "RUNNING"
     },
     {
-      "lane": "constant_rate_stability",
-      "pid": 1447914,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914",
+      "lane": "reversible_precision",
+      "pid": 1506445,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445",
       "status": "RUNNING"
     }
   ],
@@ -574,10 +574,10 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "API_RP2_REJECTED_IMAGE_STABILITY_CONSTANT_C6_RUNNING",
+    "status": "RP2_RP3_IMAGE_FAILURES_C6_STATIONARY_FAILURE_REVIEWING_REFILLS",
     "historical_scores_inherited": false,
-    "shared_checkpoint_status": "UNRESOLVED_FILE_CONTINUATION_DISCREPANCY",
-    "matched_k3p_owner": "reversible_precision",
+    "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
+    "matched_k3p_owner": "UNASSIGNED_PENDING_SURVIVOR",
     "checkpoint_diagnostic_owner": "data_drift_mobility",
     "api_rp2_long": {
       "updates": 30000,
@@ -602,6 +602,29 @@
       "final_suffix": 1,
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
+    },
+    "strongest_active_candidate": null,
+    "api_c6": {
+      "single_shift": "PASS",
+      "initial_arrival": 590,
+      "initial_retention": "182/182",
+      "changed_arrival_delay": 300,
+      "changed_retention": "191/191",
+      "frozen_image": "PASS_INDEPENDENTLY_VERIFIED",
+      "checkpoint": "PASS_INDEPENDENTLY_VERIFIED",
+      "stationary": "FAIL",
+      "qualified": false,
+      "stationary_after_arrival": "638/692",
+      "stationary_failure_intervals": [
+        [
+          3390,
+          3680
+        ],
+        [
+          6780,
+          7010
+        ]
+      ]
     }
   }
 }

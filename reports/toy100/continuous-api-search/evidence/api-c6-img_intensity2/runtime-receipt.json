@@ -1,0 +1,19 @@
+{
+  "receipt_scope": "Postrun pinned-environment verification supplement; immutable image source declares its execution controls; does not retroactively replace pretraining declaration",
+  "torch": "2.13.0+cu126",
+  "cuda_version": "12.6",
+  "device": "NVIDIA RTX A6000",
+  "cuda_visible_devices": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+  "python": "/tmp/pr38-default-env/bin/python",
+  "package_identical_to_C6_ring": true,
+  "serial_backward": true,
+  "fp32": true,
+  "deterministic_algorithms_declared_in_source": true,
+  "TF32_declared_off": true,
+  "threads": 1,
+  "ring_runtime": {
+    "torch": "2.13.0+cu126",
+    "cuda_version": "12.6",
+    "device_name": "NVIDIA RTX A6000"
+  }
+}

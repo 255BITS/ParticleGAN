@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "status": "PLANNED_RUNTIME_RECEIPTS_NOT_EXECUTED",
+  "initial": [
+    "Full effective recipe and only-resource field differences from frozen candidate",
+    "Actual package module paths and hashes matching declared candidate source",
+    "G/D/prior class, parameter counts, initialization tensor hashes and original trainability flags",
+    "Full trainer checkpoint plus caller-owned data-generator state",
+    "Python, torch/build/git, CUDA/cuDNN, device, threads, dtype, determinism, TF32, serial_backward, Adam foreach/fused",
+    "Explicit initializer backend and data/latent/penalty/noise/evaluation stream backends and seeds"
+  ],
+  "each_accepted_update": [
+    "Accepted step, G/D update counts and native Adam scalar steps",
+    "Every optimizer-group role, lr, betas and full controller state",
+    "Secant game telemetry and field_evaluations=2",
+    "Actual G/D/prior displacement L2/max-absolute and changed prior rows",
+    "Candidate input/output noise magnitudes at prior completed-step count",
+    "Critic reference update counters and accepted-parameter/reference difference",
+    "Finite losses; exceptions remain ERROR with complete traceback"
+  ],
+  "each_of_24_observations": [
+    "Exact frozen observation step and all score_samples live metrics",
+    "EMA metrics as diagnostics only, with paired identical evaluation draws",
+    "Output noise at accepted completed-step count, fixed vector seed2303; latent seed990",
+    "Before/after learner checkpoint and caller data RNG hashes proving observation isolation"
+  ],
+  "final": [
+    "Full final trainer/caller state and all source/artifact hashes",
+    "Complete 24-point curve and unchanged protocol.test_verdict over live metrics",
+    "Final live bounds plus sustained passing suffix of at least5",
+    "Exact recipe/runtime identity and each applied-rate range",
+    "No inherited passes or replacement of errors/missing observations with endpoints"
+  ]
+}

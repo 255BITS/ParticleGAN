@@ -23,9 +23,11 @@ as time, not turned into a failure by imposing the old prehold deadline.
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
 | API-C4: coupled predictor/corrector with fresh gradients | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired through 4600; successor API-C5 is testing a local implicit game response. |
 | API-C5: local implicit game update, actual hard-copy critic reference | 560 | 185/185 | 270 | 194/194 | Declared .99 reference averaging was not executed; these scores belong to the accidental hard-copy version. A corrected successor must earn its own evidence. |
+| API-C6: corrected averaged reference and serial implicit game update | 590 | 182/182 | 300 | 191/191 | Own image and exact checkpoint PASS. **Rejected:** stationary7500 retains638/692 after arrival, with54 departures and minimumHQ0. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
+| API-RP3: precision adds generator-update cancellation, serial execution | 610 | 180/180 | 460 | 175/175 | **Rejected:** frozen img_intensity2 passes0/24; controller stays open. Longer tests NOT_RUN. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -75,7 +77,14 @@ verifies public factory ownership and exact single-run parity with the diagnosti
 
 ## Ongoing work
 
-The three lanes remain active. At 21:42 UTC the constant-rate lane was refilled
+The three lanes remain active. Data-drift was refilled at22:18 UTC after its
+[completed review](data-drift-wave1-review.md); reversible precision was refilled
+at22:19 after [its review](reversible-precision-wave1-review.md). The latter will
+consider combining RP2 retention control with C6 implicit updates, earning new
+evidence. The next constant-rate [review](constant-rate-wave2-review.md) preserves
+C5's useful hard-copy behavior and C6's measured limitations.
+
+At 21:42 UTC the constant-rate lane was first refilled
 after its first three measured failures. The [review](constant-rate-wave1-review.md)
 and [completed report](constant-rate-wave1-result.md) explain the next direction:
 a coupled predictor/corrector update. [Attempt records](attempts.json) preserve
@@ -102,7 +111,22 @@ API-C5 passes its first single-change window, but a source/checkpoint audit foun
 that its reference update runs while critic gradients are disabled. The reference
 is copied exactly instead of receiving the declared .99 EMA. Its archived scores
 therefore describe the actual hard-copy behavior. They cannot qualify a corrected
-EMA implementation; that successor must be measured separately.
+EMA implementation; that successor must be measured separately. API-C6 now passes its own first
+single-change screen with the corrected .99 reference and explicit serial
+backward execution. The [delta audit](api-c6-independent-audit.md) confirms the
+source repair and saved reference behavior. Its own frozen image and exact
+subprocess continuation checks pass under independent audit. The stationary7500
+run then fails54 checks after arrival, retaining638/692 with minimumHQ0 and zero
+modes; its final passing suffix begins7020. Remaining costly qualification is
+gated off. These successes do not erase the measured retention failure. The
+final API regression also finds duplicated optimizer post-step hooks in the
+copied KA2 wrapper. Its source is preserved; the next candidate must repair this
+contract. This does not explain the no-hook training collapse by itself.
+
+The [six-vector preparation scaffold](vector-harness-preparation/README.md)
+archives frozen declarations and dependencies only: no training loop or quality
+result. Host backend/RNG semantics remain unresolved. It is useful preparation
+for a future survivor, not additional C6 qualification.
 
 Each lane preserves failed versions, explains a proposed repair, and tests it
 before broad qualification. A survivor still needs
