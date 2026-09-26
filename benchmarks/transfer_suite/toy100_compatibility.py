@@ -50,6 +50,7 @@ from .public_default_verification import (
     shape_receipt, vector_discriminator, write,
 )
 from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
+from particlegan.deterministic_init import add_init_argument, use_init
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -117,7 +118,19 @@ def declared_recipe(config: dict):
         raise ValueError("output_noise_rng must be 'isolated' when declared")
     resolved, _ = resolve_config(candidate)
     globals_only = {name: resolved[name] for name in GLOBAL_RECIPE_FIELDS}
-    recipe = gan_v3_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
+    # Forward K3P mechanism fields only when the resolved config actually
+    # carries them. The pre-K3P defaults stay stripped, so a b_cap manifest
+    # still builds the historical GAN v3 recipe. Noise stays on the benchmark
+    # wrappers; putting it on the recipe would apply it twice.
+    extra = {name: resolved[name] for name in (
+        "latent_damping_max_rate", "d_guard_ratio", "d_guard_min_steps",
+        "reg_anchor_decay", "reg_anchor_weight", "direct_particle_gain",
+    ) if name in resolved}
+    if resolved.get("reg_arm") == "k3p":
+        for name in ("network_lr_floor", "network_lr_horizon_cap"):
+            if name in resolved:
+                extra[name] = resolved[name]
+    recipe = gan_v3_recipe(**globals_only, **extra).replace(name=str(config.get("name", "toy100_transfer")))
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)
@@ -718,8 +731,10 @@ if __name__ == "__main__":
                         help="screen all 19 with shared noise on every host")
     parser.add_argument("--tasks", nargs="+", help="bounded named-task screen (always INCOMPLETE)")
     add_device_argument(parser)
+    add_init_argument(parser)
     args = parser.parse_args()
     apply_device_policy(args.device, log=True)
+    use_init(args.init)
     if sum(bool(x) for x in (args.remaining, args.all, args.tasks)) > 1:
         parser.error("--remaining, --all and --tasks are mutually exclusive")
     all_names = tuple(job["spec"]["name"] for job in load_declaration()[0])

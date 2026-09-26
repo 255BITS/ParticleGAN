@@ -48,6 +48,7 @@ from benchmarks.transfer_suite.compare_defaults import candidate, optimizer_defa
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 from benchmarks.transfer_suite.protocol import required_tasks, test_verdict
 from benchmarks.toy100.device import add_device_argument, apply_device_policy, host_device, rng_fork_devices
+from particlegan.deterministic_init import add_init_argument, use_init
 from benchmarks.transfer_suite.toy100_compatibility import declared_recipe
 from benchmarks.gan_v3 import legacy_dict
 
@@ -536,9 +537,11 @@ def main() -> None:
     parser.add_argument("--archive-sources", type=Path,
                         help="directory for the standard transfer-suite source archive")
     add_device_argument(parser)
+    add_init_argument(parser)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     apply_device_policy(args.device, log=True)
+    use_init(args.init)
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
     def log(row):

@@ -23,6 +23,7 @@ from .config import resolve_problem_config
 from .problems import PROBLEM_NAMES
 from .render import render_progress
 from .train import _source_provenance, load_config, train
+from particlegan.deterministic_init import add_init_argument, use_init
 
 
 def _parser():
@@ -37,6 +38,7 @@ def _parser():
     run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
                      help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
+    add_init_argument(run)
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
                           help="require sustained fidelity and a 100k-sample holdout (default)")
@@ -52,6 +54,7 @@ def _parser():
 def _run(args):
     from .device import apply_device_policy, host_device
 
+    use_init(getattr(args, "init", None))
     device_override = args.device
     if device_override is not None:
         apply_device_policy(device_override, log=True)
