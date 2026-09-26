@@ -18,11 +18,16 @@ p.add_argument('--backend', choices=['cpu', 'cuda'], required=True)
 p.add_argument('--cpu-random', action='store_true')
 p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
 p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
+p.add_argument('--init', default=None,
+               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
 p.add_argument('--output', type=Path, required=True)
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))
 import torch
+if a.init:
+    from particlegan.det_init import install
+    install(a.init)
 from torch.utils._python_dispatch import TorchDispatchMode
 from torch.utils._pytree import tree_map
 

@@ -10,6 +10,8 @@ p.add_argument('--candidate', type=Path, required=True)
 p.add_argument('--repo', type=Path, required=True)
 p.add_argument('--task', required=True, choices=['grid100', 'rotated100', 'staggered100'])
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--init', default=None,
+               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
 a = p.parse_args()
 sys.path[:0] = [str(a.repo.resolve()), str(a.candidate.resolve())]
 a.output.mkdir(parents=True, exist_ok=False)
@@ -19,6 +21,9 @@ if not torch.cuda.is_available() or os.environ.get('CUBLAS_WORKSPACE_CONFIG') !=
 torch.cuda.set_device(0); torch.set_default_device('cuda:0'); torch.set_num_threads(1); torch.set_num_interop_threads(1)
 torch.use_deterministic_algorithms(True); torch.backends.cudnn.benchmark = False; torch.backends.cudnn.deterministic = True
 torch.backends.cuda.matmul.allow_tf32 = False; torch.backends.cudnn.allow_tf32 = False
+if a.init:
+    from particlegan.det_init import install
+    install(a.init)
 import mechanism, response, latent
 proof = {'adam_calls': 0, 'optimizers': {}}
 original_init = torch.optim.Adam.__init__
