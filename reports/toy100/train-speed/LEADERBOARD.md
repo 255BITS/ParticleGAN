@@ -24,10 +24,27 @@ evidence, not winners. Append rows; never rewrite history.
 | R2 / alternating_penalty ($0.05) | Alternating real-only/fake-only exact `b_cap` at ×2 weight | FAIL, stop after one bounded test | Parity unit check PASS; grid100 final 3/100 (hq .061), peaked 14 modes @500 → 1 @1000. Held-out side drifts immediately. |
 | R2 / shared_forward_bcap ($0.09) | Share one `D(real)`, `D(fake)` forward between Rp loss and penalty | FAIL (parity), disqualified as specified | Logit values identical, but 2nd-order accumulation order differs: param-grad maxdiff 1.19e-07 (6344 params > 1e-9), compounding 3.8e-06 @1 step → 0.25 @30 steps. Joint input-grad variant is exactly 0.0 but slower (keeps all 4 forwards). |
 | R2 / profile_first ($0.10) | Measured hotspot split, then top hotspot only | No promotion (profiling-only, tree clean) | Pinned CPU 102.1 ms/step: D double-backward+opt **71.7%**, b_cap input-grads 13.7%, D loss-forwards 5.5%, G fwd 4.8%, G bwd+opt 3.5%, sampling 0.2%, EMA 0.1%. Second-order work ≈79% of step. Independently confirmed shared-forward's 30% probe speedup but trajectory drift. Near-miss data banked for R3 (fused input-grad, foreach). |
+| R3 / micro_stack ($0.11) | Stack: foreach Adam + cached centers + uncompressed NPZ + buffered events | 22/22 PASS, **promotion pending** (see below) | Paired grid100 A/B: 315.6s → **299.1s (−5.2%)**, identical gates. Full-suite run confounded by host contention. |
+| R3 / gate_not_bitwise ($0.13) | Re-qualify near-misses on gates not bits | No promotion | Stack 22/22 PASS but not faster on that box; fused Adam diverges (37–42 modes @3000, killed). K=30 foreach-vs-base bit-identical 0.0. |
+| R3 / penalty_subsample ($0.06) | Batch-subset b_cap ×2 weight | FAIL, stopped after bounded test | grid100 63/100, hq .78 from step 1000; ~22% time saving irrelevant without quality. |
 
-Round spend: R1 ≈ $0.68, R2 ≈ $0.23. No promotion yet: the baseline
+Round spend: R1 ≈ $0.68, R2 ≈ $0.23, R3 ≈ $0.30. No promotion yet: the baseline
 remains the winner. Batches: `/ml2/hypergan/gan-attempts/toyspeed-20260926T040626Z`
-(R1), `/ml2/hypergan/gan-attempts/toyspeed-20260926T065716Z` (R2).
+(R1), `/ml2/hypergan/gan-attempts/toyspeed-20260926T065716Z` (R2),
+`/ml2/hypergan/gan-attempts/toyspeed-20260926T073425Z` (R3).
+
+## Pending promotion (needs a clean full-suite timing on a quiet box)
+
+**Micro-stack** (`configs/toy100/micro_stack_foreach_cached.json` + diff to
+`benchmarks/toy100/{problems,train}.py`, `accuracy_evidence.py`, +41/−7):
+foreach (non-fused) Adam + cached static centers + in-place noise scaling +
+uncompressed NPZ + block-buffered event log. All bit-identical on load;
+K=30 foreach-vs-default maxdiff 0.0. Full suite **22/22 PASS**, but run under
+heavy contention (7+ sibling procs), so absolute wall clock is NOT promotable.
+Fair sequential A/B, grid100 7k pinned: baseline train 315.6s → stack
+**299.1s (−16.5s, −5.2%)**, identical modes/hq/stability markers. To promote:
+re-run the full `toy_suite` with this exact config + diff on an unloaded
+pinned-CPU host; on PASS + faster train_seconds, append the winner row.
 
 ## Update contract
 
