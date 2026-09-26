@@ -1,0 +1,46 @@
+# Reversible precision: attempt complete
+
+**No qualified winner. Three proposals used; review point reached.** PR195 base `fa511ce010120b502f494d717d01b14b8551eed8`. All candidate training used actual public `get_recipe()` and `GANTrainer.step()`, one fixed seed per frozen host, one GPU worker at a time, one CPU thread. No default promotion, merge or publication. No running jobs remain.
+
+| Candidate | Initial ring arrival; passing/total since arrival | Shift delay; passing/total | Own broader tasks | Verdict |
+|---|---|---|---|---|
+| API-RP4 | 1250; 108/116 | 350; 170/186 | 0/1 attempted;22 required | Rejected: intensity0/24 |
+| API-RP5 | 570; 184/184 | 270; 194/194 | 10/11 attempted;22 required | Strongest lead; rejected: mode_hold0/24 |
+| API-RP6 | 660; 173/175 | 380; 182/183 | 0/2 attempted;22 required | Rejected: intensity1/24, mode_hold0/24 |
+
+RP4 retained the RP2 open-rate cap while adding C6’s joint implicit correction. It over-damped acquisition and never closed on the image. RP5 removed that extra cap, giving the local implicit solve responsibility for individual motion and the smoothed reference-gap/activity controller responsibility for retention. RP6 changed only the local solve’s inner product to equalize the two adversarial players’ predictor energy. It kept RP5’s temporal controller. Declarations and measured reasons are in `repo/reports/reversible-precision/rp4.md`, `rp5.md`, `rp6.md`; source-copy hashes and diffs are beside them.
+
+**Every ring departure is retained.** RP4 initially fails1260 and1460–1520(every10) after arrival; shifted failures2760,2840,2880,2940–3050(every10),3100. Minima: initialHQ.838623/8modes, shiftedHQ.948730/7modes. Final suffixes1530–2400(88) and3110–4600(150). Pre-change fixed hold108/120. Controller close2044/reopen2446/close3310.
+
+RP5 single-change minimaHQ.934326/.939941,all8,no departures; final suffixes570–2400(184),2670–4600(194),prehold120/120. Close834/reopen2440/close3062. RP6 initially fails680,690 after arrival660, then suffix700–2400(171); shifted failure2790 after arrival2780, then suffix2800–4600(181). MinimaHQ.879395/.887695,all8; prehold120/120. Close843/reopen2540/close3168. All three frozen single-change controls pass0/220. RP6’s early ring transients are reported, not turned into a deadline rejection; its frozen image gate independently fails.
+
+**RP5’s own longer evidence:** stationary7500 arrives570, then694/694,minHQ.934326,no departure or false reopening. Its fresh uninterrupted30000 run completed in1855.02s with no main-learner reload. All transitions:
+
+| Data interval | First arrival (delay) | Passing/total since arrival = final suffix | Minimum HQ / modes |
+|---|---|---|---|
+| 0–6000 | 570 (+570) | 544/544 | 0.934326 / 8 |
+| 6000–7800 | 6350 (+350) | 146/146 | 0.931152 / 8 |
+| 7800–27000 | 8250 (+450) | 1876/1876 | 0.901367 / 8 |
+| 27000–30000 | 27250 (+250) | 276/276 | 0.909912 / 8 |
+
+Every segment’s departure list is empty and stable suffix starts at its arrival. The120 observations before each change all pass. Frozen controls pass0/180,0/1920,0/300(HQ0 throughout). Close834/reopen6012/close6733; changes7800 and27000 adapt while closed. The fixed9000 prefix has544/544,146/146,76/76 after each arrival. These are finite evaluator windows, never learner schedules. Full accounting: `repo/reports/reversible-precision/runs/rp5-long/all-transitions-assessment.json`.
+
+**Broader frozen quality:** all24 observations, unchanged thresholds and final5 requirement. RP5 image intensity6/24(first450, departure475/HQ.875, suffix500–600=5); stripes22/24(first75), bars18/24(first175), blobs19/24(first150). No later departures on those last three. Six vectors pass without later departures: two_broad23/24(first100), unequal_mass18/24(350), unequal_width19/24(300), anisotropic20/24(250), overlap24/24(50), spiral23/24(134). Detailed per-check failures, worst metrics and controller events: `repo/reports/reversible-precision/broader-assessments.json`.
+
+RP5 mode_hold fails0/24,maximum7modes,final5/8 withHQ1.0; controller remains open. All1200 shared data/latent cursor checks pass; independent supervisor audit confirms a real frozen-host failure. RP6 intensity fails1/24,suffix1,final2modes/HQ.90625. It closes353 when the preceding350 observation is1quality-mode/HQ.50. RP6 mode_hold also fails0/24; closes870 and ends7/8,HQ.934814. Both small-host runs preserve the canonical CUDA construction and D-real→D-latent→G-latent→G-real draws; no historical full initial tensor archive exists, so provenance is source reconstruction plus own-state hashes, not asserted historical tensor parity.
+
+The measured RP5 small-host critic accounts for median94.1% of predictor squared motion at721–1200, versus16.3% on its successful large ring. This motivated RP6’s metric, not a proven cause. RP6 improves the small-host endpoint from5 to7modes but still fails every observation and loses image stability. Settling or high HQ can coexist with missing support. `rp5-block-motion-analysis.json` and `rp6-image-analysis.json` preserve that explanation without feeding scores to training.
+
+**API and replay scope:** public opt-in precision, joint update and eager native Adam are bundled in `repo/reports/reversible-precision/final-public-api.patch` and live in `repo/particlegan/precision.py`, `game_update.py`, `training.py`, `recipes.py`. Ordinary finite defaults and native optimizer implementation remain. Serial backward restores caller autograd context and validates checkpoint execution mode. RP5’s separate-process2400→2500 and2450-split replay match complete model/optimizer/KA2/policy/EMA/global/private/data RNG states and actual batches. Its2400 prefix matches every applied rate/noise/policy/game row,240 observations and24 state receipts across4600/7500 evaluator budgets. All initial ring model/RNG hashes match the supplied public fixture. These checks belong to RP5; RP6 has only its own unit continuation check.
+
+Open RP5/RP6 rates are.00425G/D and.0085prior; closed rates.0000425G/D and.000425prior. Startup and reopening share upper rates. Input noise reaches0 at360; output reaches.029 at720; KA2 initializes for799 penalty calls. These fixed one-time initialization rules have no evaluator horizon or change notification and are not user phases. Mature learning continues without resetting them; RP5’s later changes demonstrate that finite-age behavior. API total_steps=None has no stopping limit. Applied rates/noise and full controller state are logged every update.
+
+**Not qualified / NOT_RUN:** RP5 native3+custom8(11 remaining broader tasks), long-change cross-process replays, matched public K3P recovery protocols; RP6 longer qualification and remaining20 broader tasks; RP4 longer qualification and remaining21 tasks. Native adapters and longer replay harnesses are prepared only. Standalone stateless LR helpers still need reviewed precision-controller binding for total_steps=None; custom8 needs a faithful component transaction retaining conditional roles and auxiliary objectives. No LegacyRecipe fallback or factory-only score is claimed.
+
+Supervisor-owned supporting released0.8 K3P unequal_mass reference reports21/24,suffix16,first150,stable450, versus RP5’s18/24,suffix18,first/stable350. It uses the declared isolated2303 observation namespace and ordinary lazy CPU Adam counters. This is external supporting comparison, not this lane’s executed gate or a matched recovery qualification; do not infer dominance. No duplicate comparator was run.
+
+**Validation and receipts:** latest77 regression tests pass; earlier72 and73 pass(222 executed checks across implementations). Ledger has27 rows:20PASS/7FAIL, including the preserved false vector-initialization audit and its explicit correction—the mistaken audit included the critic Fourier buffer; all13 actual parameters matched and no rerun occurred.19 quality-run source ZIPs verify and all15 package files agree within each candidate. Pretraining declarations, source ZIPs, initial/final checkpoints, observations and artifact hashes live in `repo/reports/reversible-precision/runs/`; `final-source-audit.json`, `final-artifact-audit.json`, `final-summary.json` index them. Each executed gate is in `tests.jsonl`; source/provenance corrections are preserved separately.
+
+**Recommendation for supervisor review:** retain exact RP5 as the strongest lead, including its long retention and10 broader passes. Investigate why a small trainable prior loses support despite game contraction, using per-particle force/update alignment and changing critic directions as ordinary training evidence. Avoid using HQ, mode counts or ending time in the learner. RP6 shows that balancing raw player motion alone does not solve this and can trigger premature closure; do not pursue a coefficient or dwell grid. Any successor must earn the sensitive image and small-host gates plus cold/changed-ring evidence before more long/native/component/comparator work. No fourth proposal in this attempt.
+
+Replay instructions: `repo/reports/reversible-precision/replay.md`. Completed logs: `rp4-ring.log`, `rp5-ring.log`, `rp5-long.log`, `rp6-ring.log`, and named broader logs under that directory. `tail -F repo/reports/reversible-precision/current.log` follows the last worker log; all workers have exited.

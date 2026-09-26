@@ -1,0 +1,954 @@
+{
+  "created_utc": "2026-09-26T23:49:22.515849+00:00",
+  "scope": "Existing DV10 two broader runs only; source and stdlib audit, no Torch imports, model execution, GPU use, checkpoint deserialization, training, active checkout changes, shared manifest edits, commit or push.",
+  "base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+  "run_count": 2,
+  "passing_runs": 1,
+  "failed_runs": 1,
+  "independent_checks": [
+    "All17 original artifact hashes including four external checkpoints; all160 declared ZIP members.",
+    "Both14-file public packages equal immutable DV10-single; effective recipes differ only in resource dimensions.",
+    "All48 observations and1800 accepted-update LR rows; all frozen threshold/suffix/arrival fields and available occupancy arithmetic.",
+    "Every LR row matches the data/controller-derived G/prior rate formula and critic payoff factor with its previous-step payoff; no finite-horizon learner schedule.",
+    "Vector canonical fixture bytes,15 raw tensor-storage hashes and original published receipt; source-identical canonical CUDA sampler/scorer ASTs.",
+    "Image frozen task/model/scorer bytes equal pinned base; recorded initial model/RNG hashes equal frozen and RP5/DV6.",
+    "Lossless archive bytes checked after compression."
+  ],
+  "limits": [
+    "Numerical audit recomputes verdicts and available arithmetic from retained observations, not model samples or underlying RMSE/covariance tensors.",
+    "One unequal_mass pass and one bars4 failure do not qualify22 tasks or establish long-run recovery.",
+    "Immutable declaration prose describing only constant0/.029 noise is incomplete for DV10: candidate declaration and public source include continuous learned latent smoothing in training and evaluation.",
+    "Bars4 observation enumerates each base prior row once with latent/output noise; it is not a noiseless32-atom evaluation.",
+    "Vector observation is the declared isolated2303 branch, not historicalglobal402. Same seeds alone do not equate noise realizations across mechanisms that consume different draws.",
+    "Checkpoints remain externally retained under original paths with verified hashes; replay execution is outside this audit."
+  ],
+  "broader_entries": [
+    {
+      "id": "api-dv10-vector_unequal_mass",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
+      "recorded_utc": "2026-09-26T23:49:22.515849+00:00",
+      "candidate": "API-DV10",
+      "protocol": "frozen22_vector_unequal_mass",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-DV10",
+        "gate": "broader_vector_unequal_mass",
+        "status": "PASS",
+        "seconds": 21.86404518294148,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.14006981195736495,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.03993018804263504
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.11381835490465164,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.03618164509534835
+              },
+              {
+                "metric": "hq",
+                "value": 0.980224609375,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.13022460937500002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.7454090751707554,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.10459092482924459
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.8289913535118103,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.6789913535118103
+              },
+              {
+                "metric": "min_mass_ratio",
+                "value": 0.29296875,
+                "op": ">=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.04296875
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 7,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 7,
+              "first_pass_step": 900,
+              "stable_from_step": 900,
+              "stable_from_seconds": null,
+              "confirmed_step": 1100,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.9166666666666666
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.14006981195736495,
+            "mean_error": 0.18536004424095154,
+            "covariance_error": 0.20653420686721802,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.11381835490465164,
+            "min_mass_ratio": 0.29296875,
+            "hq": 0.980224609375,
+            "component_covariance_error": 0.7454090751707554,
+            "component_covariance_errors": [
+              0.07693679630756378,
+              0.12839442491531372,
+              0.8109709024429321,
+              1.965334177017212
+            ],
+            "component_min_eigen_ratio": 0.8289913535118103,
+            "component_mass": [
+              0.490234375,
+              0.413818359375,
+              0.090087890625,
+              0.005859375
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2008,
+              1695,
+              369,
+              24
+            ],
+            "ema": {
+              "sw1_normalized": 0.14303979235077205,
+              "mean_error": 0.1909865289926529,
+              "covariance_error": 0.21148157119750977,
+              "target_scale": 1.7948341369628906,
+              "sample_count": 4096,
+              "mass_tv": 0.11381835490465164,
+              "min_mass_ratio": 0.29296875,
+              "hq": 0.97998046875,
+              "component_covariance_error": 0.7687456477433443,
+              "component_covariance_errors": [
+                0.07580136507749557,
+                0.11256463825702667,
+                0.8735827207565308,
+                2.013033866882324
+              ],
+              "component_min_eigen_ratio": 0.8440911769866943,
+              "component_mass": [
+                0.490234375,
+                0.413818359375,
+                0.090087890625,
+                0.005859375
+              ],
+              "target_mass": [
+                0.550000011920929,
+                0.30000001192092896,
+                0.12999999523162842,
+                0.019999999552965164
+              ],
+              "component_counts": [
+                2008,
+                1695,
+                369,
+                24
+              ]
+            }
+          },
+          "policy": {
+            "latent_bandwidth": [
+              0.127915620803833,
+              0.1488749235868454,
+              0.15025357902050018,
+              0.1463014930486679
+            ],
+            "data_memory": 0.0,
+            "payoff_error": 0.08139988031604317,
+            "game_trust": 0.8367217544778683,
+            "game_ratio": 1.4417470238305,
+            "variant": "dv10",
+            "mobility": 0.016289077125625842,
+            "alignment": 0.22482221490092427,
+            "data_score": 0.9017592668533325,
+            "data_drive": 0.0,
+            "last_cosine": 0.3283815085887909,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass"
+      },
+      "independently_derived_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 7,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 7,
+        "first_pass_step": 900,
+        "stable_from_step": 900,
+        "stable_from_seconds": null,
+        "confirmed_step": 1100,
+        "confirmed_seconds": null
+      },
+      "passing_steps": [
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "departure_steps": [],
+      "final_threshold_margins": [
+        {
+          "metric": "sw1_normalized",
+          "op": "<=",
+          "threshold": 0.18,
+          "value": 0.14006981195736495,
+          "margin": 0.03993018804263504
+        },
+        {
+          "metric": "mass_tv",
+          "op": "<=",
+          "threshold": 0.15,
+          "value": 0.11381835490465164,
+          "margin": 0.03618164509534835
+        },
+        {
+          "metric": "hq",
+          "op": ">=",
+          "threshold": 0.85,
+          "value": 0.980224609375,
+          "margin": 0.13022460937500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "op": "<=",
+          "threshold": 0.85,
+          "value": 0.7454090751707554,
+          "margin": 0.10459092482924459
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "op": ">=",
+          "threshold": 0.15,
+          "value": 0.8289913535118103,
+          "margin": 0.6789913535118103
+        },
+        {
+          "metric": "min_mass_ratio",
+          "op": ">=",
+          "threshold": 0.25,
+          "value": 0.29296875,
+          "margin": 0.04296875
+        }
+      ],
+      "fidelity": {
+        "frozen_base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+        "frozen_spec_exact": true,
+        "frozen_source_exact": {
+          "benchmarks/transfer_suite/image_tasks.py": true,
+          "benchmarks/transfer_suite/plans/default_comparison.json": true,
+          "benchmarks/locked_shared/observation.py": true,
+          "benchmarks/toy100/models.py": true
+        },
+        "source_files_verified": 108,
+        "original_artifact_files_verified": 9,
+        "ring_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-single",
+        "ring_package_files_verified": 14,
+        "ring_package_hashes_equal": true,
+        "package_sha256": {
+          "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "0437e3c32512e956d9833425d8a67087fc122a59aa61c8fe2ead231f40e0ce46",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+          "particlegan/ka2.py": "7fde61e8362c80aaab98433d677b7cdc07304c054af0b32ea554fda78832463a",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "0f64a96134cc3f322b0346dd5950275c199483f5a443153738b173fc74e35e9a",
+          "particlegan/training.py": "2aa50ae94e802a8b54b9dea9f6a1fe8664efdda379942dd4f99ba1ae078ab85a",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "recipe_differences_from_ring": {
+          "z_dim": {
+            "task": 4,
+            "ring": 2
+          },
+          "num_particles": {
+            "task": 256,
+            "ring": 20000
+          },
+          "batch_size": {
+            "task": 128,
+            "ring": 2048
+          }
+        },
+        "host_source": "reports/data-drift-api/vector_gate.py",
+        "canonical_sampler_scorer_source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda/benchmarks/transfer_suite/vector_tasks.py",
+        "canonical_sampler_scorer_sha256": "2bc25be00597d712f58fdec514714292551d77e55fff2f7d993ef46db9c4b918",
+        "canonical_sampler_scorer_asts_identical": {
+          "resolve": true,
+          "target_scale": true,
+          "sample_target": true,
+          "score_samples": true,
+          "passes": true
+        },
+        "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+        "fixture_raw_tensor_hashes": [
+          "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653",
+          "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3",
+          "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541",
+          "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a",
+          "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6",
+          "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f",
+          "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93",
+          "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f",
+          "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f",
+          "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3",
+          "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59",
+          "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451",
+          "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820",
+          "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d",
+          "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+        ],
+        "fixture_raw_tensor_count": 15,
+        "canonical_initialization_receipt_verified": true,
+        "initial_models_match_RP5": true,
+        "initial_models_and_data_rng_match_DV9": true,
+        "initial_model_hashes": {
+          "G": "a04b174653ab4fa2cf727e04b0cb8aa0372e63a798540386946f690f1860b2a8",
+          "D": "f2f3de1b2598494e657ada70e670e8be767f3e3f52df816cee24cd57b6cf9c44",
+          "prior": "1f283eb3aae1b754a4c1c2a79fbddba86048749034fb3f1d80a9f0d5237e8088",
+          "ema_G": "a04b174653ab4fa2cf727e04b0cb8aa0372e63a798540386946f690f1860b2a8",
+          "ema_prior": "1f283eb3aae1b754a4c1c2a79fbddba86048749034fb3f1d80a9f0d5237e8088"
+        },
+        "discriminator_card": {
+          "name": "batchfeat_center6_distance_head",
+          "implementation": "shared_batch_feature_v1",
+          "width": 96,
+          "layers": 3,
+          "fourier": 0,
+          "trunk_normalization": "center",
+          "softplus_beta": 6.0,
+          "feature": "distance",
+          "placement": "head",
+          "kernel_scales": [
+            0.1,
+            0.25,
+            0.5,
+            1.0
+          ],
+          "eps": 1e-05,
+          "batch_dependence": true,
+          "batch_statistics": "current discriminator input only"
+        },
+        "source_note": "Archived original plan optimization/model fields are provenance; actual promoted critic card and effective public recipe are separately retained. Selected CUDA sampler/scorer source matches canonical published CUDA host; observation noise explicitly differs from historical global402."
+      },
+      "noise": {
+        "input_std": 0,
+        "output_std": 0.029,
+        "latent_policy": "Gaussian diagonal latent bandwidth EMA.01 of learned prior std*N**(-1/z_dim), applied by public _generate in both training and evaluation",
+        "all_training_rows_verified": 1200,
+        "evaluation_seed_by_step": {
+          "50": 2303,
+          "100": 2303,
+          "150": 2303,
+          "200": 2303,
+          "250": 2303,
+          "300": 2303,
+          "350": 2303,
+          "400": 2303,
+          "450": 2303,
+          "500": 2303,
+          "550": 2303,
+          "600": 2303,
+          "650": 2303,
+          "700": 2303,
+          "750": 2303,
+          "800": 2303,
+          "850": 2303,
+          "900": 2303,
+          "950": 2303,
+          "1000": 2303,
+          "1050": 2303,
+          "1100": 2303,
+          "1150": 2303,
+          "1200": 2303
+        },
+        "offset": 1901,
+        "draw_order": "Latent perturbation then output perturbation consume the same declared private or isolated stream. The added latent draws are an intentional DV10 learner change; output-noise realizations differ from predecessors even at the same seed.",
+        "sample_count": 4096
+      },
+      "learning_rate_ranges": {
+        "generator_0": {
+          "min": 1.1045632504677203e-05,
+          "max": 0.0042417439364002794,
+          "last": 9.290648105803642e-05
+        },
+        "prior_1": {
+          "min": 5.480451838511112e-05,
+          "max": 0.008484155029455083,
+          "last": 0.00046566435407347927
+        },
+        "critic_0": {
+          "min": 1.0971333701084786e-05,
+          "max": 0.0042289625,
+          "last": 9.231118058371852e-05
+        }
+      },
+      "learning_rate_formula_all_updates_verified": true,
+      "policy_events": [
+        {
+          "step": 727,
+          "closed": true,
+          "reopens": 0
+        }
+      ],
+      "loss_note": "Original raw-card prior_reg/prior_weight values are superseded learner regularization settings. The declared global public recipe uses prior_reg0, as pinned public KA2 does; no frozen task-required auxiliary objective was dropped.",
+      "audit": "dv10-broader-audit.md",
+      "artifacts": {
+        "evidence/api-dv10-vector_unequal_mass/artifact-sha256.json": {
+          "sha256": "17250a692a0b26550e3c11335180f679310c1b37302ab7e0424c5f5a5bae4615",
+          "original_sha256": "17250a692a0b26550e3c11335180f679310c1b37302ab7e0424c5f5a5bae4615",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv10-vector_unequal_mass/canonical-initialization.json": {
+          "sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original_sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/canonical-initialization.json",
+          "bytes": 2369,
+          "original_bytes": 2369,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/declaration.json": {
+          "sha256": "0f8fb69700d96349767b42fc72edf41191313dda06791848cabef61515a11e19",
+          "original_sha256": "0f8fb69700d96349767b42fc72edf41191313dda06791848cabef61515a11e19",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/declaration.json",
+          "bytes": 22007,
+          "original_bytes": 22007,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/initial.json": {
+          "sha256": "396967e3b59c793bac0d81a8f96c7ad05b0e409f742b37563d85a0946559085d",
+          "original_sha256": "396967e3b59c793bac0d81a8f96c7ad05b0e409f742b37563d85a0946559085d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/learning-rates.jsonl.gz": {
+          "sha256": "646a374e9f30ce96f0699474779e2d827c8a5ec4217584628e68ded65adf3c45",
+          "original_sha256": "f056e24d3c490adf022ac5b63ad6d4b3c916df7d010d789b5f15d7956ee710cf",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/learning-rates.jsonl",
+          "bytes": 170104,
+          "original_bytes": 944908,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/metrics.jsonl.gz": {
+          "sha256": "0fa8d6a78318615c6dead52336fa52368798959a083477385e21060c2eed2aee",
+          "original_sha256": "1a5b207db6117960d4aa95af36ef57ce45ba9d2c6b794dd28691bae062b8275c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/metrics.jsonl",
+          "bytes": 5734,
+          "original_bytes": 32820,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/result.json": {
+          "sha256": "7771f38d428d059f8d0585f44315fea14a1616d653137369ea1c5ac990c9cdf7",
+          "original_sha256": "7771f38d428d059f8d0585f44315fea14a1616d653137369ea1c5ac990c9cdf7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/result.json",
+          "bytes": 4766,
+          "original_bytes": 4766,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/source.zip": {
+          "sha256": "46ac505f49f067651ee9530455274461824b577c6b4462575cd47f7ec7772faa",
+          "original_sha256": "46ac505f49f067651ee9530455274461824b577c6b4462575cd47f7ec7772faa",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/source.zip",
+          "bytes": 395512,
+          "original_bytes": 395512,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/assessment.json": {
+          "sha256": "1fc1ffab8313591e6744cfa93d6c887cabcd40a5fc1d1904e6ff1a99d0a43656",
+          "bytes": 9742,
+          "generated_by": "stdlib supervisor audit; not part of original experiment manifest"
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/final-state.pt",
+          "sha256": "475edaee7d4c33c2eb92139b4cdc1745948e30a1c9fffaf45fd851474bbb0983",
+          "bytes": 463451,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/initial-state.pt",
+          "sha256": "8a00af35f5f23358007c39c469ece5514af4d64d3ddbe5f13d47f4d604399328",
+          "bytes": 224834,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "archive_manifest": {
+        "path": "evidence/api-dv10-vector_unequal_mass/archive-manifest.json",
+        "sha256": "5210dec088b045683dca708a8df89b161feb72d738244b844aab4052254a4769"
+      }
+    },
+    {
+      "id": "api-dv10-img_bars4",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
+      "recorded_utc": "2026-09-26T23:49:22.515849+00:00",
+      "candidate": "API-DV10",
+      "protocol": "frozen22_img_bars4",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAILURE",
+      "result": {
+        "candidate": "API-DV10",
+        "gate": "broader_img_bars4",
+        "status": "FAIL",
+        "seconds": 7.5568409690167755,
+        "metrics": {
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 8,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": 350,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "final": {
+            "step": 600,
+            "modes": 4,
+            "hq": 0.8125,
+            "mean_rmse": 0.07474203407764435,
+            "quality_mode_fractions": [
+              0.21875,
+              0.1875,
+              0.25,
+              0.15625
+            ],
+            "mode_fractions": [
+              0.25,
+              0.21875,
+              0.28125,
+              0.25
+            ],
+            "distribution_tv": 0.03125,
+            "ema": {
+              "modes": 4,
+              "hq": 0.84375,
+              "mean_rmse": 0.08116427063941956,
+              "quality_mode_fractions": [
+                0.21875,
+                0.21875,
+                0.25,
+                0.15625
+              ],
+              "mode_fractions": [
+                0.25,
+                0.25,
+                0.28125,
+                0.21875
+              ],
+              "distribution_tv": 0.03125
+            }
+          },
+          "critic_memory": {
+            "anchor_min_decay": 0.9,
+            "lr_max": 0.0042289625,
+            "lr_last": 0.00044149860228376027,
+            "anchor_started": false,
+            "calls": 600,
+            "observed_steps": 600,
+            "last_sur": 0.9724543690681458,
+            "sur_hist": [],
+            "sur_base": null,
+            "w": 1.0,
+            "low_streak": 0,
+            "alpha": 0.0,
+            "last_ratio": null,
+            "ema_updates": 0,
+            "ema_skips": 0,
+            "ema_reseeds": 0,
+            "formulation": "ka2"
+          },
+          "policy": {
+            "latent_bandwidth": [
+              0.6791266202926636,
+              0.889610767364502,
+              0.7703026533126831,
+              0.6761001944541931,
+              0.7473817467689514,
+              0.7208890914916992,
+              0.9164820909500122,
+              0.72624671459198
+            ],
+            "data_memory": 0.0,
+            "payoff_error": 0.1804245478745512,
+            "game_trust": 1.0,
+            "game_ratio": 1.0,
+            "variant": "dv10",
+            "mobility": 0.09817277426738802,
+            "alignment": 0.008303487552684837,
+            "data_score": 1.072440505027771,
+            "data_drive": 0.0,
+            "last_cosine": 0.25720542669296265,
+            "updates": 600,
+            "reopens": 0,
+            "closed": true
+          },
+          "updates": 600,
+          "effective_recipe": {
+            "name": "ka2",
+            "model": "gan",
+            "z_dim": 8,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "num_classes": null,
+            "conditioning": "scalar",
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "batch_size": 32,
+            "total_steps": null,
+            "continuous_policy": "dv10",
+            "lr": 0.00425,
+            "d_lr_mult": 1.0,
+            "prior_lr_mult": 2.0,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "prior_betas": null,
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_every": 1,
+            "prior_reg": 0.0,
+            "ema_decay": 0.995,
+            "lr_anneal_start": 0.6,
+            "lr_floor": 0.05,
+            "network_lr_floor": 0.01,
+            "network_lr_horizon_cap": 1600,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "direct_particle_gain": true,
+            "d_guard_ratio": 5.0,
+            "d_guard_min_steps": 200,
+            "latent_damping_max_rate": 0.5,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "input_noise_std": 0.0,
+            "input_noise_anneal_end": 0.1,
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.0,
+            "encoder_mode": "none",
+            "routing_temperature": 0.25,
+            "distance_reduction": "sum",
+            "observation_sigma": 0.03,
+            "reconstruction_weight": 1.0
+          },
+          "optimizer_classes": [
+            "K3PGeneratorAdam",
+            "KA2CriticAdam"
+          ],
+          "controller_class": "DataDriftController"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4"
+      },
+      "independently_derived_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 8,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 350,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "passing_steps": [
+        350,
+        375,
+        400,
+        425,
+        450,
+        500,
+        525,
+        550
+      ],
+      "departure_steps": [
+        475,
+        575
+      ],
+      "final_threshold_margins": [
+        {
+          "metric": "modes",
+          "op": ">=",
+          "threshold": 4,
+          "value": 4,
+          "margin": 0
+        },
+        {
+          "metric": "hq",
+          "op": ">=",
+          "threshold": 0.9,
+          "value": 0.8125,
+          "margin": -0.08750000000000002
+        }
+      ],
+      "fidelity": {
+        "frozen_base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+        "frozen_spec_exact": true,
+        "frozen_source_exact": {
+          "benchmarks/transfer_suite/image_tasks.py": true,
+          "benchmarks/transfer_suite/plans/default_comparison.json": true,
+          "benchmarks/locked_shared/observation.py": true,
+          "benchmarks/toy100/models.py": true
+        },
+        "source_files_verified": 52,
+        "original_artifact_files_verified": 8,
+        "ring_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-single",
+        "ring_package_files_verified": 14,
+        "ring_package_hashes_equal": true,
+        "package_sha256": {
+          "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "0437e3c32512e956d9833425d8a67087fc122a59aa61c8fe2ead231f40e0ce46",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+          "particlegan/ka2.py": "7fde61e8362c80aaab98433d677b7cdc07304c054af0b32ea554fda78832463a",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "0f64a96134cc3f322b0346dd5950275c199483f5a443153738b173fc74e35e9a",
+          "particlegan/training.py": "2aa50ae94e802a8b54b9dea9f6a1fe8664efdda379942dd4f99ba1ae078ab85a",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "recipe_differences_from_ring": {
+          "z_dim": {
+            "task": 8,
+            "ring": 2
+          },
+          "num_particles": {
+            "task": 32,
+            "ring": 20000
+          },
+          "batch_size": {
+            "task": 32,
+            "ring": 2048
+          }
+        },
+        "host_source": "reports/data-drift-api/remaining_images.py",
+        "architecture": "residual_upsample",
+        "width": 16,
+        "initial_models_and_global_rng_match_frozen_RP5_DV6": true,
+        "initial_model_hashes": {
+          "G": "611c44b7b55c47fcf2518ec08fa9999defd63b484865377819ae33387306784f",
+          "D": "d1c0698d9dc32a0b3630de1818029c62b6659dda3b2ca3e3a41d70619bb8b67d",
+          "prior": "fbe4fb070c1a74015a4bfc581f59d727c73b9399298087e2b1e5d73dd6d03e37",
+          "ema_G": "611c44b7b55c47fcf2518ec08fa9999defd63b484865377819ae33387306784f",
+          "ema_prior": "fbe4fb070c1a74015a4bfc581f59d727c73b9399298087e2b1e5d73dd6d03e37"
+        },
+        "source_note": "Frozen bars4 target, residual-upsampling G/conv D, clamped noisy training data and original nearest-template RMSE/mode/HQ scorer preserved. CPU G,D,prior construction then CUDA. Evaluation enumerates all32 prior base rows once, adds the candidate latent and output noise, and does not clamp generated outputs."
+      },
+      "noise": {
+        "input_std": 0,
+        "output_std": 0.029,
+        "latent_policy": "Gaussian diagonal latent bandwidth EMA.01 of learned prior std*N**(-1/z_dim), applied by public _generate in both training and evaluation",
+        "all_training_rows_verified": 600,
+        "evaluation_seed_by_step": {
+          "25": 2328,
+          "50": 2353,
+          "75": 2378,
+          "100": 2403,
+          "125": 2428,
+          "150": 2453,
+          "175": 2478,
+          "200": 2503,
+          "225": 2528,
+          "250": 2553,
+          "275": 2578,
+          "300": 2603,
+          "325": 2628,
+          "350": 2653,
+          "375": 2678,
+          "400": 2703,
+          "425": 2728,
+          "450": 2753,
+          "475": 2778,
+          "500": 2803,
+          "525": 2828,
+          "550": 2853,
+          "575": 2878,
+          "600": 2903
+        },
+        "offset": 1901,
+        "draw_order": "Latent perturbation then output perturbation consume the same declared private or isolated stream. The added latent draws are an intentional DV10 learner change; output-noise realizations differ from predecessors even at the same seed.",
+        "sample_count": 32
+      },
+      "learning_rate_ranges": {
+        "generator_0": {
+          "min": 0.00045556194773003507,
+          "max": 0.0042289625,
+          "last": 0.00045556194773003507
+        },
+        "prior_1": {
+          "min": 0.0012177451522091584,
+          "max": 0.008459625,
+          "last": 0.0012177451522091584
+        },
+        "critic_0": {
+          "min": 0.00044149860228376027,
+          "max": 0.0042289625,
+          "last": 0.00044149860228376027
+        }
+      },
+      "learning_rate_formula_all_updates_verified": true,
+      "policy_events": [
+        {
+          "step": 595,
+          "closed": true,
+          "reopens": 0
+        }
+      ],
+      "loss_note": "Original raw-card prior_reg/prior_weight values are superseded learner regularization settings. The declared global public recipe uses prior_reg0, as pinned public KA2 does; no frozen task-required auxiliary objective was dropped.",
+      "audit": "dv10-broader-audit.md",
+      "artifacts": {
+        "evidence/api-dv10-img_bars4/artifact-sha256.json": {
+          "sha256": "27daf8f0489c64976d95c8fbce3a900b1dc91d71912534930759932b8debeed6",
+          "original_sha256": "27daf8f0489c64976d95c8fbce3a900b1dc91d71912534930759932b8debeed6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/artifact-sha256.json",
+          "bytes": 707,
+          "original_bytes": 707,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv10-img_bars4/declaration.json": {
+          "sha256": "2fbd6074ce9f9b4c73ac53430655ba3e9a927207d88153623df78cb1531a0e96",
+          "original_sha256": "2fbd6074ce9f9b4c73ac53430655ba3e9a927207d88153623df78cb1531a0e96",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/declaration.json",
+          "bytes": 9470,
+          "original_bytes": 9470,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/initial.json": {
+          "sha256": "e4a92ff0679f04616bce2184b580fb9e842f2acdc4deee43406e477c1885eb34",
+          "original_sha256": "e4a92ff0679f04616bce2184b580fb9e842f2acdc4deee43406e477c1885eb34",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/learning-rates.jsonl.gz": {
+          "sha256": "b3b158d6781ba17d34f8e536d2166720f08deacfcbfb8fa31f7ed719414b3c52",
+          "original_sha256": "8ebcd879841707abfdacbd94ce4ffcfad584e4b506b104725232055ca25c1c1f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/learning-rates.jsonl",
+          "bytes": 155654,
+          "original_bytes": 763141,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/metrics.jsonl.gz": {
+          "sha256": "e2cbbf56c8857e68a6bb24c972c672264704c1419d21dec448688aaebb82c447",
+          "original_sha256": "684e1b65238f2aa354f5467ae52b5fff5c45eb5d9dd6274f37b7c5a817200c7f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/metrics.jsonl",
+          "bytes": 1362,
+          "original_bytes": 9998,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/result.json": {
+          "sha256": "4d8ac5a50bea66a23c2e8b6f202b15b36929167138c9d0358d3831d05145185c",
+          "original_sha256": "4d8ac5a50bea66a23c2e8b6f202b15b36929167138c9d0358d3831d05145185c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/result.json",
+          "bytes": 4144,
+          "original_bytes": 4144,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/source.zip": {
+          "sha256": "02e046fdceca66e1e62d06cb22b6de0c0397bdb4b96ebac17ad3bf80866ddeea",
+          "original_sha256": "02e046fdceca66e1e62d06cb22b6de0c0397bdb4b96ebac17ad3bf80866ddeea",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/source.zip",
+          "bytes": 161240,
+          "original_bytes": 161240,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/assessment.json": {
+          "sha256": "2812687dbdbf8165ee519af57864127424830ecd58f27d892e11bc72e608c47a",
+          "bytes": 6686,
+          "generated_by": "stdlib supervisor audit; not part of original experiment manifest"
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/final-state.pt",
+          "sha256": "8150057816af1f09609e3011880f5be617f5d9e0dbcc52414fc654c659d7f2c6",
+          "bytes": 241880,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/initial-state.pt",
+          "sha256": "5185eefd4774594353f6b4e3911f5091c920d9beab5c316c175067f4e822faa5",
+          "bytes": 107961,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "archive_manifest": {
+        "path": "evidence/api-dv10-img_bars4/archive-manifest.json",
+        "sha256": "d7940facf2187bdbe24e0eb163bffeebf0d0a7b8f5719cd6cb28779a411f8142"
+      }
+    }
+  ]
+}

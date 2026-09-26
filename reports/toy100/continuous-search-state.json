@@ -552,12 +552,6 @@
   ],
   "active_attempts": [
     {
-      "lane": "reversible_precision",
-      "pid": 1506445,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445",
-      "status": "RUNNING"
-    },
-    {
       "lane": "constant_rate_stability",
       "pid": 1607596,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596",
@@ -568,6 +562,12 @@
       "pid": 1609802,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802",
       "status": "RUNNING"
+    },
+    {
+      "lane": "reversible_precision",
+      "pid": 1657545,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545",
+      "status": "RUNNING"
     }
   ],
   "current_api_evidence": {
@@ -577,7 +577,7 @@
     "status": "NO_SURVIVOR_CURRENT_PROPOSALS_RUNNING",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
-    "matched_k3p_owner": "RP5_RECOVERY_RING; NEXT_DATA_LANE_UNEQUAL_MASS_REFERENCE",
+    "matched_k3p_owner": "NEW_PRECISION_LANE_FIXED_RECOVERY_RING_REFERENCE; DATA_UNEQUAL_MASS_COMPLETE",
     "checkpoint_diagnostic_owner": "data_drift_mobility",
     "api_rp2_long": {
       "updates": 30000,
@@ -769,6 +769,39 @@
       "passing_suffix": 16,
       "report": "reports/toy100/continuous-api-search/k3p-comparison-results.json",
       "scope": "SCHEDULED_PUBLIC_REFERENCE_ONLY"
+    },
+    "api_rp6": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "image_passing": "1/24",
+      "image_suffix": 1,
+      "mode_hold_passing": "0/24",
+      "final_modes": 7,
+      "single_initial": "173/175",
+      "initial_early_misses": [
+        680,
+        690
+      ],
+      "shift_delay": 380,
+      "shift_retention": "182/183",
+      "shift_early_misses": [
+        2790
+      ],
+      "qualified": false
+    },
+    "api_dv10": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "unequal_mass": "PASS_7_OF_24_SUFFIX_7",
+      "bars4": "FAIL_8_OF_24_SUFFIX_0",
+      "qualified": false
+    },
+    "api_dv11": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "initial_retention": "185/185",
+      "shift_delay": 290,
+      "shift_retention": "190/192",
+      "shift_final_suffix": 187,
+      "unequal_mass": "FAIL_0_OF_24",
+      "qualified": false
     }
   }
 }

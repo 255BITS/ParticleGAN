@@ -12217,6 +12217,3095 @@
         "path": "evidence/api-rp5-mode_hold/archive-manifest.json",
         "sha256": "85a612f676047a44578ff34ca5cffcd2b4b0737875845ed0b2b9c7864e73ca2a"
       }
+    },
+    {
+      "id": "api-rp6-img_intensity2",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo",
+      "recorded_utc": "2026-09-26T23:45:00.876896+00:00",
+      "candidate": "API-RP6",
+      "protocol": "frozen22_img_intensity2",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAILURE",
+      "result": {
+        "candidate": "API-RP6",
+        "gate": "broader_img_intensity2",
+        "status": "FAIL",
+        "seconds": 26.207091483986005,
+        "metrics": {
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 1,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 1,
+            "first_pass_step": 600,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "final": {
+            "step": 600,
+            "modes": 2,
+            "hq": 0.90625,
+            "mean_rmse": 0.04335765540599823,
+            "quality_mode_fractions": [
+              0.46875,
+              0.4375
+            ],
+            "mode_fractions": [
+              0.46875,
+              0.53125
+            ],
+            "distribution_tv": 0.03125,
+            "ema": {
+              "modes": 2,
+              "hq": 0.6875,
+              "mean_rmse": 0.05569332093000412,
+              "quality_mode_fractions": [
+                0.375,
+                0.3125
+              ],
+              "mode_fractions": [
+                0.53125,
+                0.46875
+              ],
+              "distribution_tv": 0.03125
+            }
+          },
+          "policy": {
+            "variant": "rp6",
+            "open": false,
+            "gap": 0.0009395919623784721,
+            "gap_s": 0.0010193632261701739,
+            "velocity": -8.057703413302114e-07,
+            "contraction_peak": 5.836052516608973e-06,
+            "contracting": 239,
+            "activity": 0.42173389607116174,
+            "activity_peak": 0.684160842764048,
+            "quiet_gap": 0.0010050273543983934,
+            "quiet_activity": 0.44533881581136836,
+            "quiet": 0,
+            "shock": 0,
+            "updates": 600,
+            "openings": 1,
+            "closings": 1,
+            "event": null,
+            "velocity_s": -7.030461650781253e-08
+          },
+          "updates": 600,
+          "effective_recipe": {
+            "name": "ka2",
+            "model": "gan",
+            "z_dim": 8,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "num_classes": null,
+            "conditioning": "scalar",
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "batch_size": 32,
+            "total_steps": null,
+            "continuous_precision": "rp6",
+            "game_update": "relative_secant_resolvent",
+            "adam_eager_state": true,
+            "input_noise_init_steps": 360,
+            "output_noise_init_steps": 720,
+            "lr": 0.00425,
+            "d_lr_mult": 1.0,
+            "prior_lr_mult": 2.0,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "prior_betas": null,
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_every": 1,
+            "prior_reg": 0.0,
+            "ema_decay": 0.995,
+            "lr_anneal_start": 0.6,
+            "lr_floor": 0.05,
+            "network_lr_floor": 0.01,
+            "network_lr_horizon_cap": 1600,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "direct_particle_gain": true,
+            "d_guard_ratio": 5.0,
+            "d_guard_min_steps": 200,
+            "latent_damping_max_rate": 0.5,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "input_noise_std": 0.5,
+            "input_noise_anneal_end": 0.1,
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.2,
+            "encoder_mode": "none",
+            "routing_temperature": 0.25,
+            "distance_reduction": "sum",
+            "observation_sigma": 0.03,
+            "reconstruction_weight": 1.0
+          },
+          "optimizer_classes": [
+            "K3PGeneratorAdam",
+            "KA2CriticAdam"
+          ],
+          "controller_class": "ReversiblePrecision"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2"
+      },
+      "derived": {
+        "status": "FAIL",
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 1,
+        "passing_suffix": 1,
+        "first_pass_step": 600,
+        "final_suffix_start": 600,
+        "stable_from_step": null,
+        "failing_steps": [
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575
+        ],
+        "final_live": {
+          "step": 600,
+          "modes": 2,
+          "hq": 0.90625,
+          "mean_rmse": 0.04335765540599823,
+          "quality_mode_fractions": [
+            0.46875,
+            0.4375
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "source_audit": {
+        "source_zip_sha256": "0b77fc2c491dee1b4f0a115c491b54e6e0f7698c6e60691f6ea80804c9d03bd7",
+        "declared_source_exact": true,
+        "source_entries": 57,
+        "own_rp6_package_matches": true,
+        "all_artifact_hashes_verified": true
+      },
+      "source_host_files_match_validated_rp5": {
+        "benchmarks/transfer_suite/image_tasks.py": true,
+        "benchmarks/locked_shared/observation.py": true,
+        "benchmarks/toy100/models.py": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true
+      },
+      "host_functions_identical": {
+        "measure": true
+      },
+      "same_host_initial_models_optimizers_rng": {
+        "models": true,
+        "optimizers": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_reference_matches": true,
+      "recipe_delta": {
+        "continuous_precision": [
+          "rp5",
+          "rp6"
+        ],
+        "game_update": [
+          "secant_resolvent",
+          "relative_secant_resolvent"
+        ]
+      },
+      "controller_events": [
+        {
+          "step": 353,
+          "event": "close"
+        }
+      ],
+      "all_applied_rate_noise_and_player_weights_verified": true,
+      "all_update_clocks_verified": true,
+      "mode_hold_full_batch_stream_matches_rp5": null,
+      "scope_note": "Own RP6 measurements on exactly the previously validated frozen host. No score inherited. Same initial model/optimizer/RNG bytes; only declared precision label and player-relative secant policy differ. Image CPU init/isolated output402+step+1901; mode_hold CUDA source reconstruction/global output402+step and cloned shared-stream adapter.",
+      "artifacts": {
+        "evidence/api-rp6-img_intensity2/artifact-sha256.json": {
+          "sha256": "32848fe8dcee5877cebdf9694d8839ad38a4960a9cac2c81f7a1fd95c3d2b313",
+          "original_sha256": "32848fe8dcee5877cebdf9694d8839ad38a4960a9cac2c81f7a1fd95c3d2b313",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/artifact-sha256.json",
+          "bytes": 892,
+          "original_bytes": 892,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp6-img_intensity2/declaration.json": {
+          "sha256": "e693a73352decc60cf6d653575bbf7b09a8e98c2d24de8c535bbe7de4b4128d4",
+          "original_sha256": "e693a73352decc60cf6d653575bbf7b09a8e98c2d24de8c535bbe7de4b4128d4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/declaration.json",
+          "bytes": 9911,
+          "original_bytes": 9911,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/final-state.pt": {
+          "sha256": "45901939d4f1a8ee5124cb753d454665aaece1f2d80cd43e561f193eee727ac2",
+          "original_sha256": "45901939d4f1a8ee5124cb753d454665aaece1f2d80cd43e561f193eee727ac2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/final-state.pt",
+          "bytes": 226707,
+          "original_bytes": 226707,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/initial-state.pt": {
+          "sha256": "2724dd342ca3e28bba9c833c5e0c4be242c9c9bafbc6e833994093210e311830",
+          "original_sha256": "2724dd342ca3e28bba9c833c5e0c4be242c9c9bafbc6e833994093210e311830",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/initial-state.pt",
+          "bytes": 226831,
+          "original_bytes": 226831,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/initial.json": {
+          "sha256": "0ff529e6362b5a92ffb1b3bbfae73608bf33d828d335abc5d68970438a7f5b92",
+          "original_sha256": "0ff529e6362b5a92ffb1b3bbfae73608bf33d828d335abc5d68970438a7f5b92",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/learning-rates.jsonl.gz": {
+          "sha256": "cc4ca2e6c7b8cdd4d9f8363f8e90f80baed68c03617944748637c47c23d3cb92",
+          "original_sha256": "2b8ae84af8b49a99be1a5b41d45b9298df41a919cbcb122edb242397edaba1d7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/learning-rates.jsonl",
+          "bytes": 148074,
+          "original_bytes": 800540,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/metrics.jsonl.gz": {
+          "sha256": "2c09d99581b0edc870b7d799ba8dd7188139af72a1b4541bc72585b8d9dbb62f",
+          "original_sha256": "0c999d4e69e75d205b06df5ec6809b5c5421a16a71f197afeda052f6dc4a57b2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/metrics.jsonl",
+          "bytes": 1255,
+          "original_bytes": 8509,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/result.json": {
+          "sha256": "a2946ec5d6943c64a9534459b0d55b7509567a32ddc1dc585c1a6e28f3a44f09",
+          "original_sha256": "a2946ec5d6943c64a9534459b0d55b7509567a32ddc1dc585c1a6e28f3a44f09",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/result.json",
+          "bytes": 3630,
+          "original_bytes": 3630,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/retention-assessment.json": {
+          "sha256": "d200ce9a0e895a5786c15a0f054e1bd2a4367f65090bbcc9cf90859d5831672a",
+          "original_sha256": "d200ce9a0e895a5786c15a0f054e1bd2a4367f65090bbcc9cf90859d5831672a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/retention-assessment.json",
+          "bytes": 835,
+          "original_bytes": 835,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/runtime.json": {
+          "sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+          "original_sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/runtime.json",
+          "bytes": 365,
+          "original_bytes": 365,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-img_intensity2/source.zip": {
+          "sha256": "0b77fc2c491dee1b4f0a115c491b54e6e0f7698c6e60691f6ea80804c9d03bd7",
+          "original_sha256": "0b77fc2c491dee1b4f0a115c491b54e6e0f7698c6e60691f6ea80804c9d03bd7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-img_intensity2/source.zip",
+          "bytes": 172222,
+          "original_bytes": 172222,
+          "listed_in_original_manifest": true
+        }
+      },
+      "archive_manifest": {
+        "path": "evidence/api-rp6-img_intensity2/archive-manifest.json",
+        "sha256": "a2100185f9a47351c0494292cfc57cc5ac7f12b78a08a2bc0442a5d8d45ed3d2"
+      }
+    },
+    {
+      "id": "api-dv10-vector_unequal_mass",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
+      "recorded_utc": "2026-09-26T23:49:22.515849+00:00",
+      "candidate": "API-DV10",
+      "protocol": "frozen22_vector_unequal_mass",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+      "result": {
+        "candidate": "API-DV10",
+        "gate": "broader_vector_unequal_mass",
+        "status": "PASS",
+        "seconds": 21.86404518294148,
+        "metrics": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.14006981195736495,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.03993018804263504
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.11381835490465164,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.03618164509534835
+              },
+              {
+                "metric": "hq",
+                "value": 0.980224609375,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.13022460937500002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 0.7454090751707554,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.10459092482924459
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.8289913535118103,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.6789913535118103
+              },
+              {
+                "metric": "min_mass_ratio",
+                "value": 0.29296875,
+                "op": ">=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.04296875
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 7,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 7,
+              "first_pass_step": 900,
+              "stable_from_step": 900,
+              "stable_from_seconds": null,
+              "confirmed_step": 1100,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.9166666666666666
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.14006981195736495,
+            "mean_error": 0.18536004424095154,
+            "covariance_error": 0.20653420686721802,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.11381835490465164,
+            "min_mass_ratio": 0.29296875,
+            "hq": 0.980224609375,
+            "component_covariance_error": 0.7454090751707554,
+            "component_covariance_errors": [
+              0.07693679630756378,
+              0.12839442491531372,
+              0.8109709024429321,
+              1.965334177017212
+            ],
+            "component_min_eigen_ratio": 0.8289913535118103,
+            "component_mass": [
+              0.490234375,
+              0.413818359375,
+              0.090087890625,
+              0.005859375
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2008,
+              1695,
+              369,
+              24
+            ],
+            "ema": {
+              "sw1_normalized": 0.14303979235077205,
+              "mean_error": 0.1909865289926529,
+              "covariance_error": 0.21148157119750977,
+              "target_scale": 1.7948341369628906,
+              "sample_count": 4096,
+              "mass_tv": 0.11381835490465164,
+              "min_mass_ratio": 0.29296875,
+              "hq": 0.97998046875,
+              "component_covariance_error": 0.7687456477433443,
+              "component_covariance_errors": [
+                0.07580136507749557,
+                0.11256463825702667,
+                0.8735827207565308,
+                2.013033866882324
+              ],
+              "component_min_eigen_ratio": 0.8440911769866943,
+              "component_mass": [
+                0.490234375,
+                0.413818359375,
+                0.090087890625,
+                0.005859375
+              ],
+              "target_mass": [
+                0.550000011920929,
+                0.30000001192092896,
+                0.12999999523162842,
+                0.019999999552965164
+              ],
+              "component_counts": [
+                2008,
+                1695,
+                369,
+                24
+              ]
+            }
+          },
+          "policy": {
+            "latent_bandwidth": [
+              0.127915620803833,
+              0.1488749235868454,
+              0.15025357902050018,
+              0.1463014930486679
+            ],
+            "data_memory": 0.0,
+            "payoff_error": 0.08139988031604317,
+            "game_trust": 0.8367217544778683,
+            "game_ratio": 1.4417470238305,
+            "variant": "dv10",
+            "mobility": 0.016289077125625842,
+            "alignment": 0.22482221490092427,
+            "data_score": 0.9017592668533325,
+            "data_drive": 0.0,
+            "last_cosine": 0.3283815085887909,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass"
+      },
+      "independently_derived_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 7,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 7,
+        "first_pass_step": 900,
+        "stable_from_step": 900,
+        "stable_from_seconds": null,
+        "confirmed_step": 1100,
+        "confirmed_seconds": null
+      },
+      "passing_steps": [
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "departure_steps": [],
+      "final_threshold_margins": [
+        {
+          "metric": "sw1_normalized",
+          "op": "<=",
+          "threshold": 0.18,
+          "value": 0.14006981195736495,
+          "margin": 0.03993018804263504
+        },
+        {
+          "metric": "mass_tv",
+          "op": "<=",
+          "threshold": 0.15,
+          "value": 0.11381835490465164,
+          "margin": 0.03618164509534835
+        },
+        {
+          "metric": "hq",
+          "op": ">=",
+          "threshold": 0.85,
+          "value": 0.980224609375,
+          "margin": 0.13022460937500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "op": "<=",
+          "threshold": 0.85,
+          "value": 0.7454090751707554,
+          "margin": 0.10459092482924459
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "op": ">=",
+          "threshold": 0.15,
+          "value": 0.8289913535118103,
+          "margin": 0.6789913535118103
+        },
+        {
+          "metric": "min_mass_ratio",
+          "op": ">=",
+          "threshold": 0.25,
+          "value": 0.29296875,
+          "margin": 0.04296875
+        }
+      ],
+      "fidelity": {
+        "frozen_base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+        "frozen_spec_exact": true,
+        "frozen_source_exact": {
+          "benchmarks/transfer_suite/image_tasks.py": true,
+          "benchmarks/transfer_suite/plans/default_comparison.json": true,
+          "benchmarks/locked_shared/observation.py": true,
+          "benchmarks/toy100/models.py": true
+        },
+        "source_files_verified": 108,
+        "original_artifact_files_verified": 9,
+        "ring_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-single",
+        "ring_package_files_verified": 14,
+        "ring_package_hashes_equal": true,
+        "package_sha256": {
+          "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "0437e3c32512e956d9833425d8a67087fc122a59aa61c8fe2ead231f40e0ce46",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+          "particlegan/ka2.py": "7fde61e8362c80aaab98433d677b7cdc07304c054af0b32ea554fda78832463a",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "0f64a96134cc3f322b0346dd5950275c199483f5a443153738b173fc74e35e9a",
+          "particlegan/training.py": "2aa50ae94e802a8b54b9dea9f6a1fe8664efdda379942dd4f99ba1ae078ab85a",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "recipe_differences_from_ring": {
+          "z_dim": {
+            "task": 4,
+            "ring": 2
+          },
+          "num_particles": {
+            "task": 256,
+            "ring": 20000
+          },
+          "batch_size": {
+            "task": 128,
+            "ring": 2048
+          }
+        },
+        "host_source": "reports/data-drift-api/vector_gate.py",
+        "canonical_sampler_scorer_source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda/benchmarks/transfer_suite/vector_tasks.py",
+        "canonical_sampler_scorer_sha256": "2bc25be00597d712f58fdec514714292551d77e55fff2f7d993ef46db9c4b918",
+        "canonical_sampler_scorer_asts_identical": {
+          "resolve": true,
+          "target_scale": true,
+          "sample_target": true,
+          "score_samples": true,
+          "passes": true
+        },
+        "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+        "fixture_raw_tensor_hashes": [
+          "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653",
+          "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3",
+          "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541",
+          "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a",
+          "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6",
+          "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f",
+          "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93",
+          "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f",
+          "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f",
+          "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3",
+          "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59",
+          "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451",
+          "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820",
+          "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d",
+          "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+        ],
+        "fixture_raw_tensor_count": 15,
+        "canonical_initialization_receipt_verified": true,
+        "initial_models_match_RP5": true,
+        "initial_models_and_data_rng_match_DV9": true,
+        "initial_model_hashes": {
+          "G": "a04b174653ab4fa2cf727e04b0cb8aa0372e63a798540386946f690f1860b2a8",
+          "D": "f2f3de1b2598494e657ada70e670e8be767f3e3f52df816cee24cd57b6cf9c44",
+          "prior": "1f283eb3aae1b754a4c1c2a79fbddba86048749034fb3f1d80a9f0d5237e8088",
+          "ema_G": "a04b174653ab4fa2cf727e04b0cb8aa0372e63a798540386946f690f1860b2a8",
+          "ema_prior": "1f283eb3aae1b754a4c1c2a79fbddba86048749034fb3f1d80a9f0d5237e8088"
+        },
+        "discriminator_card": {
+          "name": "batchfeat_center6_distance_head",
+          "implementation": "shared_batch_feature_v1",
+          "width": 96,
+          "layers": 3,
+          "fourier": 0,
+          "trunk_normalization": "center",
+          "softplus_beta": 6.0,
+          "feature": "distance",
+          "placement": "head",
+          "kernel_scales": [
+            0.1,
+            0.25,
+            0.5,
+            1.0
+          ],
+          "eps": 1e-05,
+          "batch_dependence": true,
+          "batch_statistics": "current discriminator input only"
+        },
+        "source_note": "Archived original plan optimization/model fields are provenance; actual promoted critic card and effective public recipe are separately retained. Selected CUDA sampler/scorer source matches canonical published CUDA host; observation noise explicitly differs from historical global402."
+      },
+      "noise": {
+        "input_std": 0,
+        "output_std": 0.029,
+        "latent_policy": "Gaussian diagonal latent bandwidth EMA.01 of learned prior std*N**(-1/z_dim), applied by public _generate in both training and evaluation",
+        "all_training_rows_verified": 1200,
+        "evaluation_seed_by_step": {
+          "50": 2303,
+          "100": 2303,
+          "150": 2303,
+          "200": 2303,
+          "250": 2303,
+          "300": 2303,
+          "350": 2303,
+          "400": 2303,
+          "450": 2303,
+          "500": 2303,
+          "550": 2303,
+          "600": 2303,
+          "650": 2303,
+          "700": 2303,
+          "750": 2303,
+          "800": 2303,
+          "850": 2303,
+          "900": 2303,
+          "950": 2303,
+          "1000": 2303,
+          "1050": 2303,
+          "1100": 2303,
+          "1150": 2303,
+          "1200": 2303
+        },
+        "offset": 1901,
+        "draw_order": "Latent perturbation then output perturbation consume the same declared private or isolated stream. The added latent draws are an intentional DV10 learner change; output-noise realizations differ from predecessors even at the same seed.",
+        "sample_count": 4096
+      },
+      "learning_rate_ranges": {
+        "generator_0": {
+          "min": 1.1045632504677203e-05,
+          "max": 0.0042417439364002794,
+          "last": 9.290648105803642e-05
+        },
+        "prior_1": {
+          "min": 5.480451838511112e-05,
+          "max": 0.008484155029455083,
+          "last": 0.00046566435407347927
+        },
+        "critic_0": {
+          "min": 1.0971333701084786e-05,
+          "max": 0.0042289625,
+          "last": 9.231118058371852e-05
+        }
+      },
+      "learning_rate_formula_all_updates_verified": true,
+      "policy_events": [
+        {
+          "step": 727,
+          "closed": true,
+          "reopens": 0
+        }
+      ],
+      "loss_note": "Original raw-card prior_reg/prior_weight values are superseded learner regularization settings. The declared global public recipe uses prior_reg0, as pinned public KA2 does; no frozen task-required auxiliary objective was dropped.",
+      "audit": "dv10-broader-audit.md",
+      "artifacts": {
+        "evidence/api-dv10-vector_unequal_mass/artifact-sha256.json": {
+          "sha256": "17250a692a0b26550e3c11335180f679310c1b37302ab7e0424c5f5a5bae4615",
+          "original_sha256": "17250a692a0b26550e3c11335180f679310c1b37302ab7e0424c5f5a5bae4615",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv10-vector_unequal_mass/canonical-initialization.json": {
+          "sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original_sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/canonical-initialization.json",
+          "bytes": 2369,
+          "original_bytes": 2369,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/declaration.json": {
+          "sha256": "0f8fb69700d96349767b42fc72edf41191313dda06791848cabef61515a11e19",
+          "original_sha256": "0f8fb69700d96349767b42fc72edf41191313dda06791848cabef61515a11e19",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/declaration.json",
+          "bytes": 22007,
+          "original_bytes": 22007,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/initial.json": {
+          "sha256": "396967e3b59c793bac0d81a8f96c7ad05b0e409f742b37563d85a0946559085d",
+          "original_sha256": "396967e3b59c793bac0d81a8f96c7ad05b0e409f742b37563d85a0946559085d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/learning-rates.jsonl.gz": {
+          "sha256": "646a374e9f30ce96f0699474779e2d827c8a5ec4217584628e68ded65adf3c45",
+          "original_sha256": "f056e24d3c490adf022ac5b63ad6d4b3c916df7d010d789b5f15d7956ee710cf",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/learning-rates.jsonl",
+          "bytes": 170104,
+          "original_bytes": 944908,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/metrics.jsonl.gz": {
+          "sha256": "0fa8d6a78318615c6dead52336fa52368798959a083477385e21060c2eed2aee",
+          "original_sha256": "1a5b207db6117960d4aa95af36ef57ce45ba9d2c6b794dd28691bae062b8275c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/metrics.jsonl",
+          "bytes": 5734,
+          "original_bytes": 32820,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/result.json": {
+          "sha256": "7771f38d428d059f8d0585f44315fea14a1616d653137369ea1c5ac990c9cdf7",
+          "original_sha256": "7771f38d428d059f8d0585f44315fea14a1616d653137369ea1c5ac990c9cdf7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/result.json",
+          "bytes": 4766,
+          "original_bytes": 4766,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/source.zip": {
+          "sha256": "46ac505f49f067651ee9530455274461824b577c6b4462575cd47f7ec7772faa",
+          "original_sha256": "46ac505f49f067651ee9530455274461824b577c6b4462575cd47f7ec7772faa",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/source.zip",
+          "bytes": 395512,
+          "original_bytes": 395512,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-vector_unequal_mass/assessment.json": {
+          "sha256": "1fc1ffab8313591e6744cfa93d6c887cabcd40a5fc1d1904e6ff1a99d0a43656",
+          "bytes": 9742,
+          "generated_by": "stdlib supervisor audit; not part of original experiment manifest"
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/final-state.pt",
+          "sha256": "475edaee7d4c33c2eb92139b4cdc1745948e30a1c9fffaf45fd851474bbb0983",
+          "bytes": 463451,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/initial-state.pt",
+          "sha256": "8a00af35f5f23358007c39c469ece5514af4d64d3ddbe5f13d47f4d604399328",
+          "bytes": 224834,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "archive_manifest": {
+        "path": "evidence/api-dv10-vector_unequal_mass/archive-manifest.json",
+        "sha256": "5210dec088b045683dca708a8df89b161feb72d738244b844aab4052254a4769"
+      }
+    },
+    {
+      "id": "api-dv10-img_bars4",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
+      "recorded_utc": "2026-09-26T23:49:22.515849+00:00",
+      "candidate": "API-DV10",
+      "protocol": "frozen22_img_bars4",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAILURE",
+      "result": {
+        "candidate": "API-DV10",
+        "gate": "broader_img_bars4",
+        "status": "FAIL",
+        "seconds": 7.5568409690167755,
+        "metrics": {
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 8,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": 350,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "final": {
+            "step": 600,
+            "modes": 4,
+            "hq": 0.8125,
+            "mean_rmse": 0.07474203407764435,
+            "quality_mode_fractions": [
+              0.21875,
+              0.1875,
+              0.25,
+              0.15625
+            ],
+            "mode_fractions": [
+              0.25,
+              0.21875,
+              0.28125,
+              0.25
+            ],
+            "distribution_tv": 0.03125,
+            "ema": {
+              "modes": 4,
+              "hq": 0.84375,
+              "mean_rmse": 0.08116427063941956,
+              "quality_mode_fractions": [
+                0.21875,
+                0.21875,
+                0.25,
+                0.15625
+              ],
+              "mode_fractions": [
+                0.25,
+                0.25,
+                0.28125,
+                0.21875
+              ],
+              "distribution_tv": 0.03125
+            }
+          },
+          "critic_memory": {
+            "anchor_min_decay": 0.9,
+            "lr_max": 0.0042289625,
+            "lr_last": 0.00044149860228376027,
+            "anchor_started": false,
+            "calls": 600,
+            "observed_steps": 600,
+            "last_sur": 0.9724543690681458,
+            "sur_hist": [],
+            "sur_base": null,
+            "w": 1.0,
+            "low_streak": 0,
+            "alpha": 0.0,
+            "last_ratio": null,
+            "ema_updates": 0,
+            "ema_skips": 0,
+            "ema_reseeds": 0,
+            "formulation": "ka2"
+          },
+          "policy": {
+            "latent_bandwidth": [
+              0.6791266202926636,
+              0.889610767364502,
+              0.7703026533126831,
+              0.6761001944541931,
+              0.7473817467689514,
+              0.7208890914916992,
+              0.9164820909500122,
+              0.72624671459198
+            ],
+            "data_memory": 0.0,
+            "payoff_error": 0.1804245478745512,
+            "game_trust": 1.0,
+            "game_ratio": 1.0,
+            "variant": "dv10",
+            "mobility": 0.09817277426738802,
+            "alignment": 0.008303487552684837,
+            "data_score": 1.072440505027771,
+            "data_drive": 0.0,
+            "last_cosine": 0.25720542669296265,
+            "updates": 600,
+            "reopens": 0,
+            "closed": true
+          },
+          "updates": 600,
+          "effective_recipe": {
+            "name": "ka2",
+            "model": "gan",
+            "z_dim": 8,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "num_classes": null,
+            "conditioning": "scalar",
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "batch_size": 32,
+            "total_steps": null,
+            "continuous_policy": "dv10",
+            "lr": 0.00425,
+            "d_lr_mult": 1.0,
+            "prior_lr_mult": 2.0,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "prior_betas": null,
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_every": 1,
+            "prior_reg": 0.0,
+            "ema_decay": 0.995,
+            "lr_anneal_start": 0.6,
+            "lr_floor": 0.05,
+            "network_lr_floor": 0.01,
+            "network_lr_horizon_cap": 1600,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "direct_particle_gain": true,
+            "d_guard_ratio": 5.0,
+            "d_guard_min_steps": 200,
+            "latent_damping_max_rate": 0.5,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "input_noise_std": 0.0,
+            "input_noise_anneal_end": 0.1,
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.0,
+            "encoder_mode": "none",
+            "routing_temperature": 0.25,
+            "distance_reduction": "sum",
+            "observation_sigma": 0.03,
+            "reconstruction_weight": 1.0
+          },
+          "optimizer_classes": [
+            "K3PGeneratorAdam",
+            "KA2CriticAdam"
+          ],
+          "controller_class": "DataDriftController"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4"
+      },
+      "independently_derived_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 8,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 350,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "passing_steps": [
+        350,
+        375,
+        400,
+        425,
+        450,
+        500,
+        525,
+        550
+      ],
+      "departure_steps": [
+        475,
+        575
+      ],
+      "final_threshold_margins": [
+        {
+          "metric": "modes",
+          "op": ">=",
+          "threshold": 4,
+          "value": 4,
+          "margin": 0
+        },
+        {
+          "metric": "hq",
+          "op": ">=",
+          "threshold": 0.9,
+          "value": 0.8125,
+          "margin": -0.08750000000000002
+        }
+      ],
+      "fidelity": {
+        "frozen_base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+        "frozen_spec_exact": true,
+        "frozen_source_exact": {
+          "benchmarks/transfer_suite/image_tasks.py": true,
+          "benchmarks/transfer_suite/plans/default_comparison.json": true,
+          "benchmarks/locked_shared/observation.py": true,
+          "benchmarks/toy100/models.py": true
+        },
+        "source_files_verified": 52,
+        "original_artifact_files_verified": 8,
+        "ring_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-single",
+        "ring_package_files_verified": 14,
+        "ring_package_hashes_equal": true,
+        "package_sha256": {
+          "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "0437e3c32512e956d9833425d8a67087fc122a59aa61c8fe2ead231f40e0ce46",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+          "particlegan/ka2.py": "7fde61e8362c80aaab98433d677b7cdc07304c054af0b32ea554fda78832463a",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "0f64a96134cc3f322b0346dd5950275c199483f5a443153738b173fc74e35e9a",
+          "particlegan/training.py": "2aa50ae94e802a8b54b9dea9f6a1fe8664efdda379942dd4f99ba1ae078ab85a",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "recipe_differences_from_ring": {
+          "z_dim": {
+            "task": 8,
+            "ring": 2
+          },
+          "num_particles": {
+            "task": 32,
+            "ring": 20000
+          },
+          "batch_size": {
+            "task": 32,
+            "ring": 2048
+          }
+        },
+        "host_source": "reports/data-drift-api/remaining_images.py",
+        "architecture": "residual_upsample",
+        "width": 16,
+        "initial_models_and_global_rng_match_frozen_RP5_DV6": true,
+        "initial_model_hashes": {
+          "G": "611c44b7b55c47fcf2518ec08fa9999defd63b484865377819ae33387306784f",
+          "D": "d1c0698d9dc32a0b3630de1818029c62b6659dda3b2ca3e3a41d70619bb8b67d",
+          "prior": "fbe4fb070c1a74015a4bfc581f59d727c73b9399298087e2b1e5d73dd6d03e37",
+          "ema_G": "611c44b7b55c47fcf2518ec08fa9999defd63b484865377819ae33387306784f",
+          "ema_prior": "fbe4fb070c1a74015a4bfc581f59d727c73b9399298087e2b1e5d73dd6d03e37"
+        },
+        "source_note": "Frozen bars4 target, residual-upsampling G/conv D, clamped noisy training data and original nearest-template RMSE/mode/HQ scorer preserved. CPU G,D,prior construction then CUDA. Evaluation enumerates all32 prior base rows once, adds the candidate latent and output noise, and does not clamp generated outputs."
+      },
+      "noise": {
+        "input_std": 0,
+        "output_std": 0.029,
+        "latent_policy": "Gaussian diagonal latent bandwidth EMA.01 of learned prior std*N**(-1/z_dim), applied by public _generate in both training and evaluation",
+        "all_training_rows_verified": 600,
+        "evaluation_seed_by_step": {
+          "25": 2328,
+          "50": 2353,
+          "75": 2378,
+          "100": 2403,
+          "125": 2428,
+          "150": 2453,
+          "175": 2478,
+          "200": 2503,
+          "225": 2528,
+          "250": 2553,
+          "275": 2578,
+          "300": 2603,
+          "325": 2628,
+          "350": 2653,
+          "375": 2678,
+          "400": 2703,
+          "425": 2728,
+          "450": 2753,
+          "475": 2778,
+          "500": 2803,
+          "525": 2828,
+          "550": 2853,
+          "575": 2878,
+          "600": 2903
+        },
+        "offset": 1901,
+        "draw_order": "Latent perturbation then output perturbation consume the same declared private or isolated stream. The added latent draws are an intentional DV10 learner change; output-noise realizations differ from predecessors even at the same seed.",
+        "sample_count": 32
+      },
+      "learning_rate_ranges": {
+        "generator_0": {
+          "min": 0.00045556194773003507,
+          "max": 0.0042289625,
+          "last": 0.00045556194773003507
+        },
+        "prior_1": {
+          "min": 0.0012177451522091584,
+          "max": 0.008459625,
+          "last": 0.0012177451522091584
+        },
+        "critic_0": {
+          "min": 0.00044149860228376027,
+          "max": 0.0042289625,
+          "last": 0.00044149860228376027
+        }
+      },
+      "learning_rate_formula_all_updates_verified": true,
+      "policy_events": [
+        {
+          "step": 595,
+          "closed": true,
+          "reopens": 0
+        }
+      ],
+      "loss_note": "Original raw-card prior_reg/prior_weight values are superseded learner regularization settings. The declared global public recipe uses prior_reg0, as pinned public KA2 does; no frozen task-required auxiliary objective was dropped.",
+      "audit": "dv10-broader-audit.md",
+      "artifacts": {
+        "evidence/api-dv10-img_bars4/artifact-sha256.json": {
+          "sha256": "27daf8f0489c64976d95c8fbce3a900b1dc91d71912534930759932b8debeed6",
+          "original_sha256": "27daf8f0489c64976d95c8fbce3a900b1dc91d71912534930759932b8debeed6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/artifact-sha256.json",
+          "bytes": 707,
+          "original_bytes": 707,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv10-img_bars4/declaration.json": {
+          "sha256": "2fbd6074ce9f9b4c73ac53430655ba3e9a927207d88153623df78cb1531a0e96",
+          "original_sha256": "2fbd6074ce9f9b4c73ac53430655ba3e9a927207d88153623df78cb1531a0e96",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/declaration.json",
+          "bytes": 9470,
+          "original_bytes": 9470,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/initial.json": {
+          "sha256": "e4a92ff0679f04616bce2184b580fb9e842f2acdc4deee43406e477c1885eb34",
+          "original_sha256": "e4a92ff0679f04616bce2184b580fb9e842f2acdc4deee43406e477c1885eb34",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/learning-rates.jsonl.gz": {
+          "sha256": "b3b158d6781ba17d34f8e536d2166720f08deacfcbfb8fa31f7ed719414b3c52",
+          "original_sha256": "8ebcd879841707abfdacbd94ce4ffcfad584e4b506b104725232055ca25c1c1f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/learning-rates.jsonl",
+          "bytes": 155654,
+          "original_bytes": 763141,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/metrics.jsonl.gz": {
+          "sha256": "e2cbbf56c8857e68a6bb24c972c672264704c1419d21dec448688aaebb82c447",
+          "original_sha256": "684e1b65238f2aa354f5467ae52b5fff5c45eb5d9dd6274f37b7c5a817200c7f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/metrics.jsonl",
+          "bytes": 1362,
+          "original_bytes": 9998,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/result.json": {
+          "sha256": "4d8ac5a50bea66a23c2e8b6f202b15b36929167138c9d0358d3831d05145185c",
+          "original_sha256": "4d8ac5a50bea66a23c2e8b6f202b15b36929167138c9d0358d3831d05145185c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/result.json",
+          "bytes": 4144,
+          "original_bytes": 4144,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/source.zip": {
+          "sha256": "02e046fdceca66e1e62d06cb22b6de0c0397bdb4b96ebac17ad3bf80866ddeea",
+          "original_sha256": "02e046fdceca66e1e62d06cb22b6de0c0397bdb4b96ebac17ad3bf80866ddeea",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/source.zip",
+          "bytes": 161240,
+          "original_bytes": 161240,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv10-img_bars4/assessment.json": {
+          "sha256": "2812687dbdbf8165ee519af57864127424830ecd58f27d892e11bc72e608c47a",
+          "bytes": 6686,
+          "generated_by": "stdlib supervisor audit; not part of original experiment manifest"
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/final-state.pt",
+          "sha256": "8150057816af1f09609e3011880f5be617f5d9e0dbcc52414fc654c659d7f2c6",
+          "bytes": 241880,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-img_bars4/initial-state.pt",
+          "sha256": "5185eefd4774594353f6b4e3911f5091c920d9beab5c316c175067f4e822faa5",
+          "bytes": 107961,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "archive_manifest": {
+        "path": "evidence/api-dv10-img_bars4/archive-manifest.json",
+        "sha256": "d7940facf2187bdbe24e0eb163bffeebf0d0a7b8f5719cd6cb28779a411f8142"
+      }
+    },
+    {
+      "id": "api-rp6-mode_hold",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo",
+      "recorded_utc": "2026-09-26T23:49:36.973460+00:00",
+      "candidate": "API-RP6",
+      "protocol": "frozen22_mode_hold",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAILURE",
+      "result": {
+        "candidate": "API-RP6",
+        "gate": "broader_mode_hold",
+        "status": "FAIL",
+        "seconds": 72.86830005608499,
+        "metrics": {
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 7,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -1
+              },
+              {
+                "metric": "hq",
+                "value": 0.934814453125,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "PASS",
+                "margin": 0.03481445312499998
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0625,
+            "confirmation_fraction": 2.0
+          },
+          "final": {
+            "step": 1200,
+            "modes": 7,
+            "n_modes": 8,
+            "hq": 0.934814453125,
+            "cover": 0.875,
+            "effective_modes": 6.310207843780518,
+            "ema": {
+              "modes": 7,
+              "n_modes": 8,
+              "hq": 0.996337890625,
+              "cover": 0.875,
+              "effective_modes": 6.155881404876709
+            }
+          },
+          "policy": {
+            "variant": "rp6",
+            "open": false,
+            "gap": 0.03129328042268753,
+            "gap_s": 0.028680872559263985,
+            "velocity": 2.6387958216397833e-05,
+            "contraction_peak": 0.0001511299101214786,
+            "contracting": 94,
+            "activity": 0.08129402501400639,
+            "activity_peak": 0.6009985612407954,
+            "quiet_gap": 0.027307082417579818,
+            "quiet_activity": 0.04882048676987373,
+            "quiet": 0,
+            "shock": 0,
+            "updates": 1200,
+            "openings": 1,
+            "closings": 1,
+            "event": null,
+            "velocity_s": 1.7336764090416713e-05
+          },
+          "updates": 1200
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold"
+      },
+      "derived": {
+        "status": "FAIL",
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "final_suffix_start": null,
+        "stable_from_step": null,
+        "failing_steps": [
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "final_live": {
+          "step": 1200,
+          "modes": 7,
+          "n_modes": 8,
+          "hq": 0.934814453125,
+          "cover": 0.875,
+          "effective_modes": 6.310207843780518
+        }
+      },
+      "source_audit": {
+        "source_zip_sha256": "9f0e86744847577a03c5e0a3f9bbd2026a33e1d213f7a362a324914ec26c6b1c",
+        "declared_source_exact": true,
+        "source_entries": 77,
+        "own_rp6_package_matches": true,
+        "all_artifact_hashes_verified": true
+      },
+      "source_host_files_match_validated_rp5": {
+        "benchmarks/locked_shared/mode_hold.py": true,
+        "benchmarks/locked_shared/mlp.py": true,
+        "benchmarks/transfer_suite/protocol.py": true,
+        "reports/reversible-precision/mode-hold-fixture.json": true,
+        "reports/reversible-precision/canonical-mode_hold.py.txt": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true
+      },
+      "host_functions_identical": {
+        "real_data": true,
+        "measure": true
+      },
+      "same_host_initial_models_optimizers_rng": {
+        "models": true,
+        "optimizers": true,
+        "streams": true,
+        "cpu_rng": true,
+        "cuda_rng": true
+      },
+      "initial_reference_matches": true,
+      "recipe_delta": {
+        "continuous_precision": [
+          "rp5",
+          "rp6"
+        ],
+        "game_update": [
+          "secant_resolvent",
+          "relative_secant_resolvent"
+        ]
+      },
+      "controller_events": [
+        {
+          "step": 870,
+          "event": "close"
+        }
+      ],
+      "all_applied_rate_noise_and_player_weights_verified": true,
+      "all_update_clocks_verified": true,
+      "mode_hold_full_batch_stream_matches_rp5": true,
+      "scope_note": "Own RP6 measurements on exactly the previously validated frozen host. No score inherited. Same initial model/optimizer/RNG bytes; only declared precision label and player-relative secant policy differ. Image CPU init/isolated output402+step+1901; mode_hold CUDA source reconstruction/global output402+step and cloned shared-stream adapter.",
+      "artifacts": {
+        "evidence/api-rp6-mode_hold/artifact-sha256.json": {
+          "sha256": "5f01d0ff07a9690356b3faa55c579dccbd665a8e703dededf6634edcbcdf7f00",
+          "original_sha256": "5f01d0ff07a9690356b3faa55c579dccbd665a8e703dededf6634edcbcdf7f00",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/artifact-sha256.json",
+          "bytes": 887,
+          "original_bytes": 887,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp6-mode_hold/batch-receipts.jsonl.gz": {
+          "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+          "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/batch-receipts.jsonl",
+          "bytes": 240947,
+          "original_bytes": 500493,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/declaration.json": {
+          "sha256": "c02773dce149a9af4f1352cdfce6a367cf1bdcf103f45b0611dee1f6e3c50490",
+          "original_sha256": "c02773dce149a9af4f1352cdfce6a367cf1bdcf103f45b0611dee1f6e3c50490",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/declaration.json",
+          "bytes": 12898,
+          "original_bytes": 12898,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/final-state.pt": {
+          "sha256": "f6752f14c6d88c69f0b1be0dab86b8085902ac498e987069cc3b1e3525e9d6a6",
+          "original_sha256": "f6752f14c6d88c69f0b1be0dab86b8085902ac498e987069cc3b1e3525e9d6a6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/final-state.pt",
+          "bytes": 758375,
+          "original_bytes": 758375,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/initial-state.pt": {
+          "sha256": "1d32b4f69b512966a5d07fa40f3ed3e26f10c473cce7e4a6c386548e83339e0a",
+          "original_sha256": "1d32b4f69b512966a5d07fa40f3ed3e26f10c473cce7e4a6c386548e83339e0a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/initial-state.pt",
+          "bytes": 754947,
+          "original_bytes": 754947,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/initial.json": {
+          "sha256": "3725c5aa2f49b0fda87e51aabf09e3a2d3e6a582113d859a3eca554a527644e1",
+          "original_sha256": "3725c5aa2f49b0fda87e51aabf09e3a2d3e6a582113d859a3eca554a527644e1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/initial.json",
+          "bytes": 554,
+          "original_bytes": 554,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/learning-rates.jsonl.gz": {
+          "sha256": "0243bcb024cc72e9e178c9dd76755e601205080a1f09425160618316f5b9afcd",
+          "original_sha256": "abb6d7b92d1190c7db147ba2885bad6fa421b717b98744e364326186e97e4046",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/learning-rates.jsonl",
+          "bytes": 289686,
+          "original_bytes": 1572246,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/metrics.jsonl.gz": {
+          "sha256": "0546f615c25b06626c1b628976ae102b0eba4dd0c90ac69854e9e4a48c6f77d6",
+          "original_sha256": "949446ba1d6436d4897b62bdfc12fb38babaa20af66ee05d3b9c009cbc4e3ec0",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/metrics.jsonl",
+          "bytes": 670,
+          "original_bytes": 4817,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/result.json": {
+          "sha256": "76235dcae34ec2c317e04530a458515192b864ce32260f1dcd36d514a8953c3a",
+          "original_sha256": "76235dcae34ec2c317e04530a458515192b864ce32260f1dcd36d514a8953c3a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/result.json",
+          "bytes": 2182,
+          "original_bytes": 2182,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/runtime.json": {
+          "sha256": "12387a2f6f944c83f3a42cdd09d73c13cfa7eb6cf567e74e77bb9de3d38ffee2",
+          "original_sha256": "12387a2f6f944c83f3a42cdd09d73c13cfa7eb6cf567e74e77bb9de3d38ffee2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/runtime.json",
+          "bytes": 396,
+          "original_bytes": 396,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp6-mode_hold/source.zip": {
+          "sha256": "9f0e86744847577a03c5e0a3f9bbd2026a33e1d213f7a362a324914ec26c6b1c",
+          "original_sha256": "9f0e86744847577a03c5e0a3f9bbd2026a33e1d213f7a362a324914ec26c6b1c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp6-mode_hold/source.zip",
+          "bytes": 232650,
+          "original_bytes": 232650,
+          "listed_in_original_manifest": true
+        }
+      },
+      "archive_manifest": {
+        "path": "evidence/api-rp6-mode_hold/archive-manifest.json",
+        "sha256": "07a33ebcde876fc8e2fa9fee0f5a9b9daefd2bf712d3ba47374e84811e78fcbe"
+      }
+    },
+    {
+      "id": "api-c11-img_intensity2",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo",
+      "recorded_utc": "2026-09-26T23:50:57.172248+00:00",
+      "candidate": "API-C11",
+      "protocol": "frozen22_img_intensity2",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAIL",
+      "result": {
+        "candidate": "API-C11",
+        "gate": "broader_img_intensity2",
+        "status": "FAIL",
+        "seconds": 24.637980688130483,
+        "metrics": {
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "final": {
+            "step": 600,
+            "modes": 1,
+            "hq": 0.65625,
+            "mean_rmse": 0.05057346075773239,
+            "quality_mode_fractions": [
+              0.125,
+              0.53125
+            ],
+            "mode_fractions": [
+              0.375,
+              0.625
+            ],
+            "distribution_tv": 0.125,
+            "ema": {
+              "modes": 0,
+              "hq": 0.1875,
+              "mean_rmse": 0.0762278139591217,
+              "quality_mode_fractions": [
+                0.03125,
+                0.15625
+              ],
+              "mode_fractions": [
+                0.375,
+                0.625
+              ],
+              "distribution_tv": 0.125
+            }
+          },
+          "policy": {
+            "anchor_min_decay": 0.9,
+            "lr_max": 0.00425,
+            "lr_last": 0.00425,
+            "anchor_started": false,
+            "calls": 600,
+            "observed_steps": 600,
+            "last_sur": 0.8206875324249268,
+            "sur_hist": [],
+            "sur_base": null,
+            "w": 1.0,
+            "low_streak": 0,
+            "alpha": 0.1,
+            "last_ratio": null,
+            "ema_updates": 0,
+            "ema_skips": 0,
+            "ema_reseeds": 0,
+            "formulation": "ka2_fresh"
+          },
+          "game": {
+            "policy": "role_secant",
+            "field_evaluations": 2,
+            "accepted_updates": 600,
+            "preview_moments_discarded": false,
+            "secant": {
+              "metric": "independent_role_response",
+              "roles": {
+                "D": {
+                  "radial_secant": -2.8032610416412354,
+                  "rotation_squared": 4.998998641967773,
+                  "denominator": 19.46379280090332,
+                  "norm_ratio": 0.2266659289598465,
+                  "moment_source": "base_gradient"
+                },
+                "G": {
+                  "radial_secant": -1.0911394357681274,
+                  "rotation_squared": 0.10623940080404282,
+                  "denominator": 4.479103088378906,
+                  "norm_ratio": 0.4725028872489929,
+                  "moment_source": "base_gradient"
+                },
+                "prior": {
+                  "radial_secant": -0.8810564875602722,
+                  "rotation_squared": 0.16317810118198395,
+                  "denominator": 3.701551914215088,
+                  "norm_ratio": 0.5197662115097046,
+                  "moment_source": "base_gradient"
+                }
+              },
+              "moment_source": "base_gradient"
+            },
+            "d": {
+              "preview_l2": 0.13878300786018372,
+              "applied_l2": 0.031457383185625076,
+              "correction_l2": 0.112796850502491
+            },
+            "g": {
+              "preview_l2": 0.6102971434593201,
+              "applied_l2": 0.2954815626144409,
+              "correction_l2": 0.3235328793525696
+            }
+          },
+          "updates": 600,
+          "effective_recipe": {
+            "name": "ka2",
+            "model": "gan",
+            "z_dim": 8,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "num_classes": null,
+            "conditioning": "scalar",
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "batch_size": 32,
+            "game_update": "role_secant",
+            "optimistic_updates": false,
+            "bounded_updates": false,
+            "continuous": true,
+            "critic_memory": "fresh",
+            "startup_input_steps": 360,
+            "startup_output_steps": 720,
+            "total_steps": 7000,
+            "lr": 0.00425,
+            "d_lr_mult": 1.0,
+            "prior_lr_mult": 2.0,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "prior_betas": null,
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_every": 1,
+            "prior_reg": 0.0,
+            "ema_decay": 0.995,
+            "lr_anneal_start": 0.6,
+            "lr_floor": 1.0,
+            "network_lr_floor": 1.0,
+            "network_lr_horizon_cap": 1600,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "direct_particle_gain": true,
+            "d_guard_ratio": 5.0,
+            "d_guard_min_steps": 200,
+            "latent_damping_max_rate": 0.5,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "input_noise_std": 0.5,
+            "input_noise_anneal_end": 0.1,
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.2,
+            "encoder_mode": "none",
+            "routing_temperature": 0.25,
+            "distance_reduction": "sum",
+            "observation_sigma": 0.03,
+            "reconstruction_weight": 1.0
+          },
+          "optimizer_classes": [
+            "K3PGeneratorAdam",
+            "KA2CriticAdam"
+          ],
+          "controller_class": "FreshKA2StepRecord"
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2"
+      },
+      "derived": {
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "minimum_stable_checks": 5
+        },
+        "passing_steps": [],
+        "failing_steps": [
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "final_live": {
+          "step": 600,
+          "modes": 1,
+          "hq": 0.65625,
+          "mean_rmse": 0.05057346075773239,
+          "quality_mode_fractions": [
+            0.125,
+            0.53125
+          ],
+          "mode_fractions": [
+            0.375,
+            0.625
+          ],
+          "distribution_tv": 0.125
+        }
+      },
+      "verification": {
+        "source_zip_sha256": "8b1f725c3eb577de849336f66775187585c304eebb9415d9f8bf1d3d6ac5b56a",
+        "source_count": 25,
+        "declaration_hash_mismatches": [],
+        "missing_declared_files": [],
+        "package_sha256": {
+          "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/game_update.py": "fe758850450f542f5e8547bd47b0405b5c676eff0be70c0b757f945e7b5259cf",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "02db7ad69102e6cb17250f34ff0ff2e5e8a77211997eb882175c16ee942bcd1a",
+          "particlegan/ka2.py": "888bb119becf6389320f1a30ef771d236c749dceab914ec087b61cb0303cd701",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "1fff63165699d12bba7f16ed802472e4dab286e8aaa948e5ae6895740fb0bf64",
+          "particlegan/training.py": "e41fff0060ba9f7ef0c3264eb4b6dfd990b9fec3133b619e8de3d0fbfeb34ddc",
+          "particlegan/update_limit.py": "8c3434130f8f0a7a805f58acdf9ea470cd7f9e39770c0bff71fa67cf132efee2",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        },
+        "package_differences_from_single": [],
+        "frozen_image_helper_differences": [],
+        "measure_function_ast_equal_to_audited_C9": true,
+        "artifact_hash_mismatches": [],
+        "reported_initial_models_and_data_rng_match_C9": {
+          "models": true,
+          "global_data_rng": true
+        },
+        "runtime": {
+          "torch": "2.13.0+cu126",
+          "cuda_version": "12.6",
+          "device": "NVIDIA RTX A6000",
+          "cuda_visible_devices": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "fp32": true,
+          "deterministic_algorithms": true,
+          "tf32_matmul": false,
+          "tf32_cudnn": false,
+          "threads": 1,
+          "serial_backward": true
+        }
+      },
+      "rate_audit": {
+        "updates": 600,
+        "rate_ranges": {
+          "generator_0": [
+            0.00425,
+            0.00425
+          ],
+          "critic_0": [
+            0.00425,
+            0.00425
+          ],
+          "prior_1": [
+            0.0085,
+            0.0085
+          ]
+        },
+        "controller_and_accepted_counts_exact": true,
+        "reference_counts_exact": true,
+        "mean_field_evaluations": 2,
+        "field_evaluations_range": [
+          2,
+          2
+        ],
+        "last500_mean_accepted_l2": {
+          "G": 0.09436078199278564,
+          "D": 0.12051110802404583,
+          "prior": 0.04414573529595509
+        }
+      },
+      "artifacts": {
+        "evidence/api-c11-img_intensity2/artifact-sha256.json": {
+          "sha256": "2dfb04c0b5585c53f6bfceb2b121c532c21d7fd8d519197b1184168b4820d3c6",
+          "original_sha256": "2dfb04c0b5585c53f6bfceb2b121c532c21d7fd8d519197b1184168b4820d3c6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/artifact-sha256.json",
+          "bytes": 707,
+          "original_bytes": 707,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-c11-img_intensity2/declaration.json": {
+          "sha256": "152353c9b6966b4959c3586d93dc962dde6b3233af26139ecdaa25817ba23d5d",
+          "original_sha256": "152353c9b6966b4959c3586d93dc962dde6b3233af26139ecdaa25817ba23d5d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/declaration.json",
+          "bytes": 6534,
+          "original_bytes": 6534,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c11-img_intensity2/initial.json": {
+          "sha256": "d9b9ecb233ba442e72ed346eaa09bfdf0d3ef6c4cd9af6e8a611bc21a4dce521",
+          "original_sha256": "d9b9ecb233ba442e72ed346eaa09bfdf0d3ef6c4cd9af6e8a611bc21a4dce521",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c11-img_intensity2/learning-rates.jsonl.gz": {
+          "sha256": "8e0aeeb15d710e1f2db5ec680ae87b93bc2623c5b9a6ebf65f25f9820cb42744",
+          "original_sha256": "351035a908ed3c4501392e7b10a0282adf7eae7b2daeee7c8d19d1e01f85bf28",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/learning-rates.jsonl",
+          "bytes": 179474,
+          "original_bytes": 1044250,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c11-img_intensity2/metrics.jsonl.gz": {
+          "sha256": "adae52d1aacb5525e784c84791686664717176797d348f6e34842086535eaaac",
+          "original_sha256": "84d119ee6111bc884bdf5babcb27f3cc8136a839a963e617aa76b292d61192cc",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/metrics.jsonl",
+          "bytes": 1183,
+          "original_bytes": 8290,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c11-img_intensity2/result.json": {
+          "sha256": "3edeccb0310ef7cd042a8ab801c9c453133bb52c4d92368ad671856ebb87c64e",
+          "original_sha256": "3edeccb0310ef7cd042a8ab801c9c453133bb52c4d92368ad671856ebb87c64e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/result.json",
+          "bytes": 4934,
+          "original_bytes": 4934,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-c11-img_intensity2/source.zip": {
+          "sha256": "8b1f725c3eb577de849336f66775187585c304eebb9415d9f8bf1d3d6ac5b56a",
+          "original_sha256": "8b1f725c3eb577de849336f66775187585c304eebb9415d9f8bf1d3d6ac5b56a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/source.zip",
+          "bytes": 85117,
+          "original_bytes": 85117,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/final-state.pt",
+          "sha256": "81f547fea79451c469670b84e86068055d8a6683b4429380c28ac13fc729f3fe",
+          "bytes": 204301,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C11-img_intensity2/initial-state.pt",
+          "sha256": "11dff54a691cc19642e14aa8ad94d99f441ecb142ecd7c225a476210e2e22092",
+          "bytes": 107254,
+          "verified_against_original_manifest": true
+        }
+      },
+      "supplementary_files": [],
+      "scope_note": "Own C11 image failure:0/24 passes and final suffix0<5; finalHQ.65625 with one quality mode. No mature-anchor or longer stability result:600 updates precede first blended penalty800.",
+      "archive_manifest": {
+        "path": "evidence/api-c11-img_intensity2/archive-manifest.json",
+        "sha256": "c1895f54915b464dc2a2da8d12e1b8ffcaefb9c476c83eafa95370b9ad643046"
+      }
+    },
+    {
+      "id": "api-dv11-vector_unequal_mass",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
+      "recorded_utc": "2026-09-26T23:56:40.630592+00:00",
+      "candidate": "API-DV11",
+      "protocol": "frozen22_vector_unequal_mass",
+      "scope": "PUBLIC_API",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAIL",
+      "result": {
+        "candidate": "API-DV11",
+        "gate": "broader_vector_unequal_mass",
+        "status": "FAIL",
+        "seconds": 22.33763415296562,
+        "metrics": {
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "sw1_normalized",
+                "value": 0.1314016488932105,
+                "op": "<=",
+                "threshold": 0.18,
+                "status": "PASS",
+                "margin": 0.048598351106789506
+              },
+              {
+                "metric": "mass_tv",
+                "value": 0.07280272990465164,
+                "op": "<=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.07719727009534835
+              },
+              {
+                "metric": "hq",
+                "value": 0.950927734375,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.10092773437500002
+              },
+              {
+                "metric": "component_covariance_error",
+                "value": 1.2301770746707916,
+                "op": "<=",
+                "threshold": 0.85,
+                "status": "FAIL",
+                "margin": -0.38017707467079165
+              },
+              {
+                "metric": "component_min_eigen_ratio",
+                "value": 0.16056570410728455,
+                "op": ">=",
+                "threshold": 0.15,
+                "status": "PASS",
+                "margin": 0.010565704107284551
+              },
+              {
+                "metric": "min_mass_ratio",
+                "value": 0.6291316151618958,
+                "op": ">=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.37913161516189575
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.07454452444525327,
+            "confirmation_fraction": 2.0
+          },
+          "final": {
+            "step": 1200,
+            "sw1_normalized": 0.1314016488932105,
+            "mean_error": 0.18134401738643646,
+            "covariance_error": 0.24031423032283783,
+            "target_scale": 1.7948341369628906,
+            "sample_count": 4096,
+            "mass_tv": 0.07280272990465164,
+            "min_mass_ratio": 0.6291316151618958,
+            "hq": 0.950927734375,
+            "component_covariance_error": 1.2301770746707916,
+            "component_covariance_errors": [
+              0.24702782928943634,
+              0.2497072070837021,
+              3.8011770248413086,
+              0.6227962374687195
+            ],
+            "component_min_eigen_ratio": 0.16056570410728455,
+            "component_mass": [
+              0.530517578125,
+              0.372802734375,
+              0.081787109375,
+              0.014892578125
+            ],
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "component_counts": [
+              2173,
+              1527,
+              335,
+              61
+            ],
+            "ema": {
+              "sw1_normalized": 0.1819945125450314,
+              "mean_error": 0.23442964255809784,
+              "covariance_error": 0.5011903047561646,
+              "target_scale": 1.7948341369628906,
+              "sample_count": 4096,
+              "mass_tv": 0.1475585699081421,
+              "min_mass_ratio": 0.0,
+              "hq": 0.87548828125,
+              "component_covariance_error": 1.2633160501718521,
+              "component_covariance_errors": [
+                1.6274070739746094,
+                1.4525377750396729,
+                0.9733193516731262,
+                1.0
+              ],
+              "component_min_eigen_ratio": 0.0,
+              "component_mass": [
+                0.602783203125,
+                0.394775390625,
+                0.00244140625,
+                0.0
+              ],
+              "target_mass": [
+                0.550000011920929,
+                0.30000001192092896,
+                0.12999999523162842,
+                0.019999999552965164
+              ],
+              "component_counts": [
+                2469,
+                1617,
+                10,
+                0
+              ]
+            }
+          },
+          "policy": {
+            "support_score": 18.79547691345215,
+            "support_trust": 0.034816639397566615,
+            "applied_latent_bandwidth": [
+              0.004308979958295822,
+              0.004976810421794653,
+              0.004886407870799303,
+              0.004736481234431267
+            ],
+            "latent_bandwidth": [
+              0.1237620934844017,
+              0.14294345676898956,
+              0.14034691452980042,
+              0.13604074716567993
+            ],
+            "data_memory": 0.0,
+            "payoff_error": 0.2423423814145915,
+            "game_trust": 1.0,
+            "game_ratio": 0.618553734738681,
+            "variant": "dv11",
+            "mobility": 0.771002506252553,
+            "alignment": -0.009541686557406835,
+            "data_score": 0.9017592668533325,
+            "data_drive": 0.0,
+            "last_cosine": -0.7746638059616089,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": false
+          }
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass"
+      },
+      "derived": {
+        "status": "FAIL",
+        "seconds": 22.33763415296562,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "passing_steps": [],
+        "failures": [
+          {
+            "step": 50,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_covariance_error",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.22281489768971638,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.90283203125,
+              "component_covariance_error": 1.261432945728302,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 100,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.23091968669302132,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.95166015625,
+              "component_covariance_error": 0.7046827971935272,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 150,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.22557717239986821,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.97119140625,
+              "component_covariance_error": 0.6534085012972355,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 200,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.20899223307935091,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.986572265625,
+              "component_covariance_error": 0.6163919903337955,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 250,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.2159393895920341,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.982421875,
+              "component_covariance_error": 0.609199395403266,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 300,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.24051013007300667,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.965087890625,
+              "component_covariance_error": 0.7283373102545738,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 350,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.23560881393396457,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.966064453125,
+              "component_covariance_error": 0.6703574880957603,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 400,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.21054754333110168,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.97021484375,
+              "component_covariance_error": 0.6466727592051029,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 450,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.22792005066364862,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.9560546875,
+              "component_covariance_error": 0.6089405249804258,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 500,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.20984530584159572,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.967041015625,
+              "component_covariance_error": 0.5691326875239611,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 550,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.2105806360984474,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.970458984375,
+              "component_covariance_error": 0.5903683789074421,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 600,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.20297443039925187,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.97314453125,
+              "component_covariance_error": 0.565831059589982,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 650,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.21553301107320857,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.96630859375,
+              "component_covariance_error": 0.5763562992215157,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 700,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.24566672378614468,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.934814453125,
+              "component_covariance_error": 0.6857009455561638,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 750,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.2039324768068352,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.96240234375,
+              "component_covariance_error": 0.6129558309912682,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 800,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.23286739447508528,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.947265625,
+              "component_covariance_error": 0.6169596835970879,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 850,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.21335941568102357,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.967529296875,
+              "component_covariance_error": 0.5855505112558603,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 900,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.21331707420750046,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.96484375,
+              "component_covariance_error": 0.5918971691280603,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 950,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.1997612937163261,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.97265625,
+              "component_covariance_error": 0.5738084455952048,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 1000,
+            "failed_metrics": [
+              "sw1_normalized",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.2059168141146215,
+              "mass_tv": 0.1499999761581421,
+              "hq": 0.95361328125,
+              "component_covariance_error": 0.6772834062576294,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 1050,
+            "failed_metrics": [
+              "sw1_normalized",
+              "hq",
+              "component_covariance_error",
+              "component_min_eigen_ratio",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.21262343784869447,
+              "mass_tv": 0.1465820074081421,
+              "hq": 0.776123046875,
+              "component_covariance_error": 1.0462639033794403,
+              "component_min_eigen_ratio": 0.0,
+              "min_mass_ratio": 0.0
+            }
+          },
+          {
+            "step": 1100,
+            "failed_metrics": [
+              "hq",
+              "component_covariance_error",
+              "min_mass_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.16250953098266757,
+              "mass_tv": 0.12218748778104782,
+              "hq": 0.626708984375,
+              "component_covariance_error": 2.9343190789222717,
+              "component_min_eigen_ratio": 1.1457915306091309,
+              "min_mass_ratio": 0.06009615585207939
+            }
+          },
+          {
+            "step": 1150,
+            "failed_metrics": [
+              "component_covariance_error",
+              "component_min_eigen_ratio"
+            ],
+            "values": {
+              "sw1_normalized": 0.15338914437678663,
+              "mass_tv": 0.07280272990465164,
+              "hq": 0.87548828125,
+              "component_covariance_error": 2.1928552463650703,
+              "component_min_eigen_ratio": 0.11487891525030136,
+              "min_mass_ratio": 0.6216196417808533
+            }
+          },
+          {
+            "step": 1200,
+            "failed_metrics": [
+              "component_covariance_error"
+            ],
+            "values": {
+              "sw1_normalized": 0.1314016488932105,
+              "mass_tv": 0.07280272990465164,
+              "hq": 0.950927734375,
+              "component_covariance_error": 1.2301770746707916,
+              "component_min_eigen_ratio": 0.16056570410728455,
+              "min_mass_ratio": 0.6291316151618958
+            }
+          }
+        ],
+        "failure_steps_by_metric": {
+          "sw1_normalized": [
+            50,
+            100,
+            150,
+            200,
+            250,
+            300,
+            350,
+            400,
+            450,
+            500,
+            550,
+            600,
+            650,
+            700,
+            750,
+            800,
+            850,
+            900,
+            950,
+            1000,
+            1050
+          ],
+          "mass_tv": [],
+          "hq": [
+            1050,
+            1100
+          ],
+          "component_covariance_error": [
+            50,
+            1050,
+            1100,
+            1150,
+            1200
+          ],
+          "component_min_eigen_ratio": [
+            50,
+            100,
+            150,
+            200,
+            250,
+            300,
+            350,
+            400,
+            450,
+            500,
+            550,
+            600,
+            650,
+            700,
+            750,
+            800,
+            850,
+            900,
+            950,
+            1000,
+            1050,
+            1150
+          ],
+          "min_mass_ratio": [
+            50,
+            100,
+            150,
+            200,
+            250,
+            300,
+            350,
+            400,
+            450,
+            500,
+            550,
+            600,
+            650,
+            700,
+            750,
+            800,
+            850,
+            900,
+            950,
+            1000,
+            1050,
+            1100
+          ]
+        },
+        "final_thresholds": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.1314016488932105,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.048598351106789506
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.07280272990465164,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.07719727009534835
+          },
+          {
+            "metric": "hq",
+            "value": 0.950927734375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.10092773437500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.2301770746707916,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.38017707467079165
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.16056570410728455,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.010565704107284551
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.6291316151618958,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.37913161516189575
+          }
+        ],
+        "final_live": {
+          "step": 1200,
+          "sw1_normalized": 0.1314016488932105,
+          "mean_error": 0.18134401738643646,
+          "covariance_error": 0.24031423032283783,
+          "target_scale": 1.7948341369628906,
+          "sample_count": 4096,
+          "mass_tv": 0.07280272990465164,
+          "min_mass_ratio": 0.6291316151618958,
+          "hq": 0.950927734375,
+          "component_covariance_error": 1.2301770746707916,
+          "component_covariance_errors": [
+            0.24702782928943634,
+            0.2497072070837021,
+            3.8011770248413086,
+            0.6227962374687195
+          ],
+          "component_min_eigen_ratio": 0.16056570410728455,
+          "component_mass": [
+            0.530517578125,
+            0.372802734375,
+            0.081787109375,
+            0.014892578125
+          ],
+          "target_mass": [
+            0.550000011920929,
+            0.30000001192092896,
+            0.12999999523162842,
+            0.019999999552965164
+          ],
+          "component_counts": [
+            2173,
+            1527,
+            335,
+            61
+          ]
+        }
+      },
+      "verification": {
+        "source_zip_sha256": "48e90cc71ef62d1d6e0d0115cc6289fa8f08ec2eada5218d3ded1819d45b4ef6",
+        "source_count": 108,
+        "declaration_hash_mismatches": [],
+        "missing_declared_files": [],
+        "package_sha256": {
+          "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "f33b26ea2f4d182999076d81508122a2c94156d76d4566d8d69748014ea6b054",
+          "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+          "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+          "particlegan/ka2.py": "75bcba74949f87c8d0fa480eeac27bf43e31cf04b8b391d232fe0729546eebef",
+          "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+          "particlegan/recipes.py": "fec9f0d14b962b41d7d48cab9218ca6e9e9818d389e7877f24ef91c810aecbb6",
+          "particlegan/training.py": "8a955cd64a4b778d1d7baae65c2432245d47b48be4606387ba7e8219336cb9a1",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "host_provenance": {
+        "canonical_host": {
+          "canonical": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda/benchmarks/transfer_suite/vector_tasks.py",
+          "canonical_sha256": "2bc25be00597d712f58fdec514714292551d77e55fff2f7d993ef46db9c4b918",
+          "local": "reports/data-drift-api/frozen_vector_tasks.py",
+          "local_sha256": "597394ca4814a2aec3b6a791b8660721df1098c3fa3c412837a24d3de954fae8",
+          "sampler_and_scorer_asts_identical": [
+            "resolve",
+            "target_scale",
+            "sample_target",
+            "score_samples",
+            "passes"
+          ],
+          "import_only_compatibility_diff": "--- \n+++ \n@@ -10,7 +10,9 @@\n \n import torch\n \n-from particlegan import GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer\n+from particlegan import ParticlePrior, ParticleRegularizer\n+from benchmarks.legacy.gan_loss import GANLoss\n+from benchmarks.legacy.grad_regularizers import GradientPenalty\n from lib.toy_metrics import sliced_w1\n from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator\n from benchmarks.locked_shared.observation import sustained\n"
+        },
+        "functions_compared": [
+          "resolve",
+          "target_scale",
+          "sample_target",
+          "score_samples",
+          "passes"
+        ],
+        "frozen_files": {
+          "benchmarks/transfer_suite/plans/default_comparison.json": {
+            "sha256": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883",
+            "equal_to_frozen_commit": true
+          },
+          "reports/transfer_suite/unadjusted/leading_profile.json": {
+            "sha256": "38327c94dd8c1ad2729ab07a5866191d2c4ec05b3acb841498d5abd786d691dd",
+            "equal_to_frozen_commit": true
+          },
+          "benchmarks/transfer_suite/protocol.py": {
+            "sha256": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+            "equal_to_frozen_commit": true
+          },
+          "benchmarks/locked_shared/observation.py": {
+            "sha256": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "equal_to_frozen_commit": true
+          },
+          "lib/toy_models.py": {
+            "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+            "equal_to_frozen_commit": true
+          },
+          "lib/toy_metrics.py": {
+            "sha256": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+            "equal_to_frozen_commit": true
+          }
+        },
+        "spec_equal_to_frozen_plan": true,
+        "promoted_card_equal": true,
+        "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+        "all_15_fixture_parameters_match_receipt_and_initial_checkpoint": true,
+        "critic_kernel_scale_buffer_matches_card": true,
+        "canonical_receipt_sha256": "bad9bdb2f3069b076ed33e7148d898587383bb6c3f6dff1f24508d6e8465d9b3",
+        "canonical_parameter_receipts": [
+          [
+            {
+              "shape": [
+                64,
+                4
+              ],
+              "sha256": "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653"
+            },
+            {
+              "shape": [
+                64
+              ],
+              "sha256": "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3"
+            },
+            {
+              "shape": [
+                64,
+                64
+              ],
+              "sha256": "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541"
+            },
+            {
+              "shape": [
+                64
+              ],
+              "sha256": "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a"
+            },
+            {
+              "shape": [
+                2,
+                64
+              ],
+              "sha256": "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6"
+            },
+            {
+              "shape": [
+                2
+              ],
+              "sha256": "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f"
+            },
+            {
+              "shape": [
+                256,
+                4
+              ],
+              "sha256": "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93"
+            }
+          ],
+          [
+            {
+              "shape": [
+                96,
+                2
+              ],
+              "sha256": "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f"
+            },
+            {
+              "shape": [
+                96
+              ],
+              "sha256": "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f"
+            },
+            {
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3"
+            },
+            {
+              "shape": [
+                96
+              ],
+              "sha256": "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59"
+            },
+            {
+              "shape": [
+                96,
+                96
+              ],
+              "sha256": "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451"
+            },
+            {
+              "shape": [
+                96
+              ],
+              "sha256": "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820"
+            },
+            {
+              "shape": [
+                1,
+                100
+              ],
+              "sha256": "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d"
+            },
+            {
+              "shape": [
+                1
+              ],
+              "sha256": "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+            }
+          ]
+        ]
+      },
+      "recipe_changes_from_own_ring": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "rate_audit": {
+        "updates": 1200,
+        "rate_mismatches": [],
+        "rate_ranges": {
+          "generator_0": [
+            4.984789349902786e-05,
+            0.004249999999999996
+          ],
+          "critic_0": [
+            1.3279252724431571e-05,
+            0.0042289625
+          ],
+          "prior_1": [
+            9.969578699805573e-05,
+            0.008499999999999992
+          ]
+        },
+        "support_trust_range": [
+          0.005600387655639321,
+          1.0
+        ],
+        "support_score_range": [
+          -4.689858436584473,
+          42.97538757324219
+        ],
+        "applied_bandwidth_range": [
+          0.000685440783854574,
+          0.14240239560604095
+        ],
+        "input_noise": 0.0,
+        "output_noise": 0.029,
+        "support_formula_all_rows": true,
+        "ordering": "Rates use current real-data mobility/game trust and previous generator payoff; support trust updates afterward for both fake draws.",
+        "last_policy": {
+          "support_score": 18.79547691345215,
+          "support_trust": 0.034816639397566615,
+          "applied_latent_bandwidth": [
+            0.004308979958295822,
+            0.004976810421794653,
+            0.004886407870799303,
+            0.004736481234431267
+          ],
+          "latent_bandwidth": [
+            0.1237620934844017,
+            0.14294345676898956,
+            0.14034691452980042,
+            0.13604074716567993
+          ],
+          "data_memory": 0.0,
+          "payoff_error": 0.2423423814145915,
+          "game_trust": 1.0,
+          "game_ratio": 0.618553734738681,
+          "variant": "dv11",
+          "mobility": 0.771002506252553,
+          "alignment": -0.009541686557406835,
+          "data_score": 0.9017592668533325,
+          "data_drive": 0.0,
+          "last_cosine": -0.7746638059616089,
+          "updates": 1200,
+          "reopens": 0,
+          "closed": false
+        }
+      },
+      "checkpoint": {
+        "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/final-state.pt",
+        "sha256": "72285370b1450602eb18e8bfba21a15fc4361a40a9eac0acc10e65c2449c50ae",
+        "completed_steps": 1200,
+        "adam_step_values": [
+          [
+            1200.0
+          ],
+          [
+            1200.0
+          ]
+        ],
+        "adam_step_devices": [
+          [
+            "cpu"
+          ],
+          [
+            "cpu"
+          ]
+        ],
+        "serial_backward": true,
+        "critic_record": {
+          "calls": 1200,
+          "observed_steps": 1200,
+          "ema_updates": 361,
+          "ema_skips": 40,
+          "ema_reseeds": 0,
+          "formulation": "ka2"
+        },
+        "critic_reference_tensor_count": 9,
+        "critic_reference_equal": false,
+        "controller_updates": 1200,
+        "controller_variant": "dv11",
+        "caller_state_keys": [
+          "data_rng"
+        ],
+        "support_state_keys": [
+          "latent_bandwidth",
+          "support_mean",
+          "support_variance",
+          "support_score",
+          "support_trust"
+        ],
+        "support_score": 18.79547691345215,
+        "support_trust": 0.034816639397566615,
+        "support_mean": 0.006940931081771851,
+        "support_variance": 1.3637311724323808e-07,
+        "initial_optimizer_states_empty": true
+      },
+      "artifacts": {
+        "evidence/api-dv11-vector_unequal_mass/artifact-sha256.json": {
+          "sha256": "207dacb178e7954a0a6e57252d974277a4785d7994079976a63af8f7f57b5f28",
+          "original_sha256": "207dacb178e7954a0a6e57252d974277a4785d7994079976a63af8f7f57b5f28",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/artifact-sha256.json",
+          "bytes": 810,
+          "original_bytes": 810,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-dv11-vector_unequal_mass/canonical-initialization.json": {
+          "sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original_sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/canonical-initialization.json",
+          "bytes": 2369,
+          "original_bytes": 2369,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv11-vector_unequal_mass/declaration.json": {
+          "sha256": "f166159787dca2b8cf537d3747a21e92f8ff154df26071b62297c48fbd75d7c5",
+          "original_sha256": "f166159787dca2b8cf537d3747a21e92f8ff154df26071b62297c48fbd75d7c5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/declaration.json",
+          "bytes": 22007,
+          "original_bytes": 22007,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv11-vector_unequal_mass/initial.json": {
+          "sha256": "1721b66e1208b0356e0b9cc38831d6b4c7926ad7b509873d8bf55450104407bd",
+          "original_sha256": "1721b66e1208b0356e0b9cc38831d6b4c7926ad7b509873d8bf55450104407bd",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/initial.json",
+          "bytes": 847,
+          "original_bytes": 847,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv11-vector_unequal_mass/learning-rates.jsonl.gz": {
+          "sha256": "84fc71465648f26b324ede2177623b1fed7c8ce3cfeb683eda286872cbd89f53",
+          "original_sha256": "45de849f47c11c2757ec48bf1eb9d5bc0bf80bef99421e026a152946ff21eac6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/learning-rates.jsonl",
+          "bytes": 226217,
+          "original_bytes": 1170467,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv11-vector_unequal_mass/metrics.jsonl.gz": {
+          "sha256": "17375acbb0d4dc6446d3c7e9946904d01f476f47abbc4fb506daf70cec7cdffd",
+          "original_sha256": "e77686f82dabc4b018766e5846897fde045679a0a4cc33ff27999d784c3f2ffc",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/metrics.jsonl",
+          "bytes": 4758,
+          "original_bytes": 30370,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv11-vector_unequal_mass/result.json": {
+          "sha256": "181ab135dfe5f05600799342a48a7096ed5d8a43a871bb9f0ea19cab78a335a9",
+          "original_sha256": "181ab135dfe5f05600799342a48a7096ed5d8a43a871bb9f0ea19cab78a335a9",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/result.json",
+          "bytes": 4998,
+          "original_bytes": 4998,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-dv11-vector_unequal_mass/source.zip": {
+          "sha256": "48e90cc71ef62d1d6e0d0115cc6289fa8f08ec2eada5218d3ded1819d45b4ef6",
+          "original_sha256": "48e90cc71ef62d1d6e0d0115cc6289fa8f08ec2eada5218d3ded1819d45b4ef6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/source.zip",
+          "bytes": 396066,
+          "original_bytes": 396066,
+          "listed_in_original_manifest": true
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/final-state.pt",
+          "sha256": "72285370b1450602eb18e8bfba21a15fc4361a40a9eac0acc10e65c2449c50ae",
+          "bytes": 464221,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass/initial-state.pt",
+          "sha256": "fb2e5c382221fd9f95698fa212532843accee54eeb2f28f366ae04087c6704a6",
+          "bytes": 224962,
+          "verified_against_original_manifest": true
+        }
+      },
+      "scope_note": "Own DV11 result, no inherited scores: 0/24; final component covariance error 1.230177 > .85, despite five other final bounds passing.",
+      "archive_manifest": {
+        "path": "evidence/api-dv11-vector_unequal_mass/archive-manifest.json",
+        "sha256": "dce8655053c473a8fbf335b11a1e2a2dcb661c61ccc308033a9b31201cb46fb8"
+      }
     }
   ]
 }

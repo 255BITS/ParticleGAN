@@ -1,0 +1,154 @@
+[
+  {
+    "candidate": "API-RP4",
+    "run": "rp4-img_intensity2",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "d6d3e5248a60de2400483a21f36ac9ab8083655b29d22f71322485b58dd6e66c"
+  },
+  {
+    "candidate": "API-RP4",
+    "run": "rp4-single",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "ac4dfe18c5499f41074d5d4347495f8392d00e640469b851e1c2d842bb199ab5"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-img_intensity2",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "a8ccfb32480b060ba2790895ff6b534de5bf5ef3b50462111c7e74554536e07c"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-img_stripes2",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "7fc9b13a0fc56a166faca33c49a90da7adbf499ed71cc9be6f963e056eb35cc0"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-img_bars4",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "7fc9b13a0fc56a166faca33c49a90da7adbf499ed71cc9be6f963e056eb35cc0"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-img_blobs4",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "7fc9b13a0fc56a166faca33c49a90da7adbf499ed71cc9be6f963e056eb35cc0"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-single",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-stationary",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-long",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "3a3d0e4cdd705c53016222072e22a349b5aefb9248cc7af8bef89d143e54b50d"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-vector_two_broad",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "c790bb613a7b11e5b380dcc773cac143b0008a3d4bdc933db060774f02085ddc"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-vector_unequal_mass-canonical",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "d5608f5a4dfec6979b877cbe085333fb77392348ff886d5971dc839ff99a41ac"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-vector_unequal_width-canonical",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "5619661762678b7777061df9c9f7b760889efd44d4252e3dc1a779a321fbeb20"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-vector_anisotropic",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "4dc9b6d2c695efd3417740585a7fe87548acae577fd0b602d23734a1ed0126af"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-vector_overlap",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "0c57d236fe2c2d4bdeb50e98a758b932d1c3653416a757f82bfe72ff7358f4d6"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-vector_spiral",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "b18ebc17d19dde4b17a8b02aad9fe65fa4692da66d2eea075c882d0bd04794d6"
+  },
+  {
+    "candidate": "API-RP5",
+    "run": "rp5-mode_hold",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "437cd280dd0fc0aea374ed777687fc7a83c151ff60bfd1103a52035293a90a70"
+  },
+  {
+    "candidate": "API-RP6",
+    "run": "rp6-img_intensity2",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "0b77fc2c491dee1b4f0a115c491b54e6e0f7698c6e60691f6ea80804c9d03bd7"
+  },
+  {
+    "candidate": "API-RP6",
+    "run": "rp6-single",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "613d010ab28933fa173882c07e46de4621c1e31e5f341e5f1c98f63903254f98"
+  },
+  {
+    "candidate": "API-RP6",
+    "run": "rp6-mode_hold",
+    "all_declared_sources_match_archive": true,
+    "same_candidate_package": true,
+    "package_files": 15,
+    "archive_sha256": "9f0e86744847577a03c5e0a3f9bbd2026a33e1d213f7a362a324914ec26c6b1c"
+  }
+]

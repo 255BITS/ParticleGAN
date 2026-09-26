@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "id": "api-dv10-vector_unequal_mass",
+  "created_utc": "2026-09-26T23:49:22.515849+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass",
+  "files": {
+    "evidence/api-dv10-vector_unequal_mass/artifact-sha256.json": {
+      "sha256": "17250a692a0b26550e3c11335180f679310c1b37302ab7e0424c5f5a5bae4615",
+      "original_sha256": "17250a692a0b26550e3c11335180f679310c1b37302ab7e0424c5f5a5bae4615",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/artifact-sha256.json",
+      "bytes": 810,
+      "original_bytes": 810,
+      "listed_in_original_manifest": false
+    },
+    "evidence/api-dv10-vector_unequal_mass/canonical-initialization.json": {
+      "sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+      "original_sha256": "07f8a7a5cd1506dade55f53f927db5f7dbc70a95fd43e176fe9e751dab1c7d61",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/canonical-initialization.json",
+      "bytes": 2369,
+      "original_bytes": 2369,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/declaration.json": {
+      "sha256": "0f8fb69700d96349767b42fc72edf41191313dda06791848cabef61515a11e19",
+      "original_sha256": "0f8fb69700d96349767b42fc72edf41191313dda06791848cabef61515a11e19",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/declaration.json",
+      "bytes": 22007,
+      "original_bytes": 22007,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/initial.json": {
+      "sha256": "396967e3b59c793bac0d81a8f96c7ad05b0e409f742b37563d85a0946559085d",
+      "original_sha256": "396967e3b59c793bac0d81a8f96c7ad05b0e409f742b37563d85a0946559085d",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/initial.json",
+      "bytes": 847,
+      "original_bytes": 847,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/learning-rates.jsonl.gz": {
+      "sha256": "646a374e9f30ce96f0699474779e2d827c8a5ec4217584628e68ded65adf3c45",
+      "original_sha256": "f056e24d3c490adf022ac5b63ad6d4b3c916df7d010d789b5f15d7956ee710cf",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/learning-rates.jsonl",
+      "bytes": 170104,
+      "original_bytes": 944908,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/metrics.jsonl.gz": {
+      "sha256": "0fa8d6a78318615c6dead52336fa52368798959a083477385e21060c2eed2aee",
+      "original_sha256": "1a5b207db6117960d4aa95af36ef57ce45ba9d2c6b794dd28691bae062b8275c",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/metrics.jsonl",
+      "bytes": 5734,
+      "original_bytes": 32820,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/result.json": {
+      "sha256": "7771f38d428d059f8d0585f44315fea14a1616d653137369ea1c5ac990c9cdf7",
+      "original_sha256": "7771f38d428d059f8d0585f44315fea14a1616d653137369ea1c5ac990c9cdf7",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/result.json",
+      "bytes": 4766,
+      "original_bytes": 4766,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/source.zip": {
+      "sha256": "46ac505f49f067651ee9530455274461824b577c6b4462575cd47f7ec7772faa",
+      "original_sha256": "46ac505f49f067651ee9530455274461824b577c6b4462575cd47f7ec7772faa",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/source.zip",
+      "bytes": 395512,
+      "original_bytes": 395512,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv10-vector_unequal_mass/assessment.json": {
+      "sha256": "1fc1ffab8313591e6744cfa93d6c887cabcd40a5fc1d1904e6ff1a99d0a43656",
+      "bytes": 9742,
+      "generated_by": "stdlib supervisor audit; not part of original experiment manifest"
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/final-state.pt",
+      "sha256": "475edaee7d4c33c2eb92139b4cdc1745948e30a1c9fffaf45fd851474bbb0983",
+      "bytes": 463451,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass/initial-state.pt",
+      "sha256": "8a00af35f5f23358007c39c469ece5514af4d64d3ddbe5f13d47f4d604399328",
+      "bytes": 224834,
+      "verified_against_original_manifest": true
+    }
+  },
+  "supplementary_files_not_in_original_manifest": [],
+  "note": "JSONL compression is lossless and reproducible (gzip mtime0). Source ZIP and original receipts copied byte-for-byte. External checkpoints were content-hash verified, without deserialization. assessment.json is independently generated audit metadata."
+}

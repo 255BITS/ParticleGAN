@@ -1,0 +1,244 @@
+{
+  "id": "api-dv10-vector_unequal_mass",
+  "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-vector_unequal_mass",
+  "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
+  "recorded_utc": "2026-09-26T23:49:22.515849+00:00",
+  "candidate": "API-DV10",
+  "protocol": "frozen22_vector_unequal_mass",
+  "scope": "PUBLIC_API",
+  "archived_source_verified": true,
+  "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+  "independently_derived_convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 7,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 7,
+    "first_pass_step": 900,
+    "stable_from_step": 900,
+    "stable_from_seconds": null,
+    "confirmed_step": 1100,
+    "confirmed_seconds": null
+  },
+  "passing_steps": [
+    900,
+    950,
+    1000,
+    1050,
+    1100,
+    1150,
+    1200
+  ],
+  "departure_steps": [],
+  "final_threshold_margins": [
+    {
+      "metric": "sw1_normalized",
+      "op": "<=",
+      "threshold": 0.18,
+      "value": 0.14006981195736495,
+      "margin": 0.03993018804263504
+    },
+    {
+      "metric": "mass_tv",
+      "op": "<=",
+      "threshold": 0.15,
+      "value": 0.11381835490465164,
+      "margin": 0.03618164509534835
+    },
+    {
+      "metric": "hq",
+      "op": ">=",
+      "threshold": 0.85,
+      "value": 0.980224609375,
+      "margin": 0.13022460937500002
+    },
+    {
+      "metric": "component_covariance_error",
+      "op": "<=",
+      "threshold": 0.85,
+      "value": 0.7454090751707554,
+      "margin": 0.10459092482924459
+    },
+    {
+      "metric": "component_min_eigen_ratio",
+      "op": ">=",
+      "threshold": 0.15,
+      "value": 0.8289913535118103,
+      "margin": 0.6789913535118103
+    },
+    {
+      "metric": "min_mass_ratio",
+      "op": ">=",
+      "threshold": 0.25,
+      "value": 0.29296875,
+      "margin": 0.04296875
+    }
+  ],
+  "fidelity": {
+    "frozen_base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+    "frozen_spec_exact": true,
+    "frozen_source_exact": {
+      "benchmarks/transfer_suite/image_tasks.py": true,
+      "benchmarks/transfer_suite/plans/default_comparison.json": true,
+      "benchmarks/locked_shared/observation.py": true,
+      "benchmarks/toy100/models.py": true
+    },
+    "source_files_verified": 108,
+    "original_artifact_files_verified": 9,
+    "ring_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv10-single",
+    "ring_package_files_verified": 14,
+    "ring_package_hashes_equal": true,
+    "package_sha256": {
+      "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "0437e3c32512e956d9833425d8a67087fc122a59aa61c8fe2ead231f40e0ce46",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+      "particlegan/ka2.py": "7fde61e8362c80aaab98433d677b7cdc07304c054af0b32ea554fda78832463a",
+      "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+      "particlegan/recipes.py": "0f64a96134cc3f322b0346dd5950275c199483f5a443153738b173fc74e35e9a",
+      "particlegan/training.py": "2aa50ae94e802a8b54b9dea9f6a1fe8664efdda379942dd4f99ba1ae078ab85a",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "recipe_differences_from_ring": {
+      "z_dim": {
+        "task": 4,
+        "ring": 2
+      },
+      "num_particles": {
+        "task": 256,
+        "ring": 20000
+      },
+      "batch_size": {
+        "task": 128,
+        "ring": 2048
+      }
+    },
+    "host_source": "reports/data-drift-api/vector_gate.py",
+    "canonical_sampler_scorer_source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda/benchmarks/transfer_suite/vector_tasks.py",
+    "canonical_sampler_scorer_sha256": "2bc25be00597d712f58fdec514714292551d77e55fff2f7d993ef46db9c4b918",
+    "canonical_sampler_scorer_asts_identical": {
+      "resolve": true,
+      "target_scale": true,
+      "sample_target": true,
+      "score_samples": true,
+      "passes": true
+    },
+    "fixture_sha256": "d5d6a1b39bf80354b060f0680381a85d27bd8c89f3b120b6357ab9f28e1e223a",
+    "fixture_raw_tensor_hashes": [
+      "49a0f3e413a86910f803839bf16a5002fa94cae0afbe0b968089135fffb3f653",
+      "9e23c4bd498e7028c4e11d09ec22d127b0c3ad9b15435422a38463b207e5bdf3",
+      "a54684dba614ee6f90a870006bdfa2d4919ecc071e8102e764cf7d0927dbf541",
+      "0f272b62e20a18ad07ea352ab5e239e812944848f22ed162024c1d0aceb09d7a",
+      "15d726b4c16b51b518c05fc03a9a3ec5ed83590d06151ba07dd65e3c348616c6",
+      "9a993e24034b630902d1ea9ec340e17fe9feff656acf20e9f907ac66f8fcc42f",
+      "549791f67863ef1d9158cd44caa75ad2b567c98c98326eb089785d5dc63dcd93",
+      "3ba07903595e130a96a9eacc86a4695f02bfe698e3db7b7b90e2e2efc38d884f",
+      "ae8c45f9b3835d06e5ef10829c3b3721dcfcb06e826dcf15334c026e9c37f40f",
+      "4f6937e9c607e4cba7335c35d0a4899dd467464fbe73825822073dfff3015bb3",
+      "65f9a8bfc6ee0a2286d2cdc31ea718526fd32c27886717a3cd52fad8ea0eef59",
+      "aa157cb02d25cf3bd8819e26780bc7f744d664f964673ae526ffe7c04436e451",
+      "1f0a55b425c4ef7bfa6e2b3f55af3f1f43631370cd6ddbe52bb462c2ae240820",
+      "3a5214ea59d3c4eeb3fb99bb61500e821e9030eb366c4a10b43fab74da150f1d",
+      "0f885a44e44d01e94c2bda2215befb82c87bd0b74246634c00b15e3e8e7b78ea"
+    ],
+    "fixture_raw_tensor_count": 15,
+    "canonical_initialization_receipt_verified": true,
+    "initial_models_match_RP5": true,
+    "initial_models_and_data_rng_match_DV9": true,
+    "initial_model_hashes": {
+      "G": "a04b174653ab4fa2cf727e04b0cb8aa0372e63a798540386946f690f1860b2a8",
+      "D": "f2f3de1b2598494e657ada70e670e8be767f3e3f52df816cee24cd57b6cf9c44",
+      "prior": "1f283eb3aae1b754a4c1c2a79fbddba86048749034fb3f1d80a9f0d5237e8088",
+      "ema_G": "a04b174653ab4fa2cf727e04b0cb8aa0372e63a798540386946f690f1860b2a8",
+      "ema_prior": "1f283eb3aae1b754a4c1c2a79fbddba86048749034fb3f1d80a9f0d5237e8088"
+    },
+    "discriminator_card": {
+      "name": "batchfeat_center6_distance_head",
+      "implementation": "shared_batch_feature_v1",
+      "width": 96,
+      "layers": 3,
+      "fourier": 0,
+      "trunk_normalization": "center",
+      "softplus_beta": 6.0,
+      "feature": "distance",
+      "placement": "head",
+      "kernel_scales": [
+        0.1,
+        0.25,
+        0.5,
+        1.0
+      ],
+      "eps": 1e-05,
+      "batch_dependence": true,
+      "batch_statistics": "current discriminator input only"
+    },
+    "source_note": "Archived original plan optimization/model fields are provenance; actual promoted critic card and effective public recipe are separately retained. Selected CUDA sampler/scorer source matches canonical published CUDA host; observation noise explicitly differs from historical global402."
+  },
+  "noise": {
+    "input_std": 0,
+    "output_std": 0.029,
+    "latent_policy": "Gaussian diagonal latent bandwidth EMA.01 of learned prior std*N**(-1/z_dim), applied by public _generate in both training and evaluation",
+    "all_training_rows_verified": 1200,
+    "evaluation_seed_by_step": {
+      "50": 2303,
+      "100": 2303,
+      "150": 2303,
+      "200": 2303,
+      "250": 2303,
+      "300": 2303,
+      "350": 2303,
+      "400": 2303,
+      "450": 2303,
+      "500": 2303,
+      "550": 2303,
+      "600": 2303,
+      "650": 2303,
+      "700": 2303,
+      "750": 2303,
+      "800": 2303,
+      "850": 2303,
+      "900": 2303,
+      "950": 2303,
+      "1000": 2303,
+      "1050": 2303,
+      "1100": 2303,
+      "1150": 2303,
+      "1200": 2303
+    },
+    "offset": 1901,
+    "draw_order": "Latent perturbation then output perturbation consume the same declared private or isolated stream. The added latent draws are an intentional DV10 learner change; output-noise realizations differ from predecessors even at the same seed.",
+    "sample_count": 4096
+  },
+  "learning_rate_ranges": {
+    "generator_0": {
+      "min": 1.1045632504677203e-05,
+      "max": 0.0042417439364002794,
+      "last": 9.290648105803642e-05
+    },
+    "prior_1": {
+      "min": 5.480451838511112e-05,
+      "max": 0.008484155029455083,
+      "last": 0.00046566435407347927
+    },
+    "critic_0": {
+      "min": 1.0971333701084786e-05,
+      "max": 0.0042289625,
+      "last": 9.231118058371852e-05
+    }
+  },
+  "learning_rate_formula_all_updates_verified": true,
+  "policy_events": [
+    {
+      "step": 727,
+      "closed": true,
+      "reopens": 0
+    }
+  ],
+  "loss_note": "Original raw-card prior_reg/prior_weight values are superseded learner regularization settings. The declared global public recipe uses prior_reg0, as pinned public KA2 does; no frozen task-required auxiliary objective was dropped.",
+  "audit": "dv10-broader-audit.md"
+}
