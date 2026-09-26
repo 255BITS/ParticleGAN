@@ -125,5 +125,4 @@ schemas and K3P optimizer checkpoints are rejected; resume those with the
 release that wrote them, or start a fresh KA2 run.
 
 Frozen-source parity and API tests establish implementation correctness.
-They do not establish performance on unmeasured hosts or replace the missing
-release qualification.
+They do not establish performance on the remaining benchmark hosts.
