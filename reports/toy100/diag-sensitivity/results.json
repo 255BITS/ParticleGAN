@@ -39,5 +39,11 @@
     "unequal_pass": [101, 202, 303, 505],
     "setting": "A2 rho=0.75+0.25*cos on a fully dense latent table; sparse gate unchanged",
     "ring_s0_receipt": {"dense_calls": 1200, "scoped_calls": 0, "calls": 1200}},
+  "constant_lr": {
+    "setting": "lr_anneal_start 0, lr_floor 1, network_lr_floor 1, cap 1600; rates held at 0.00425 and prior 0.0085",
+    "ring": "0/8", "hold": "0/8", "stay": "0/8",
+    "ring_final": {"0": [8, 0.878173828125], "101": [7, 0.6591796875], "202": [7, 0.984619140625], "303": [6, 0.669921875], "404": [6, 0.39990234375], "505": [4, 0.262939453125], "606": [7, 0.694091796875], "707": [0, 0.0]},
+    "stay_checks": {"0": "33/120", "101": "0/120", "202": "0/120", "303": "9/120", "404": "17/120", "505": "0/120", "606": "53/120", "707": "0/120"}
+  },
   "confirmation": "CPU screening only; A6000 repeat required"
 }

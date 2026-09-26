@@ -104,3 +104,26 @@ The early amplifier is the joint alternating step, a nonlinear kink in G and in 
 The neighbour-hop is a later, separate failure, and the two mechanisms that were supposed to be present are idle on this host. Putting them in the graph does not remove the seed dependence. The EMA-critic pull cannot see a hop before step ~964; the guard clips a few pre-hop steps and the empty mode remains. Dense A2 damping does cancel two of the three ring hops and then opens three new ones, and the cancelled hops come back before a 1200-check hold. Both settings are the ones already written down. Changing rho, the guard ratio, or the handover floor would be a sweep.
 
 An A6000 run is still required before treating the pass rates, or the location of the kink, as confirmed. The useful confirmation target is the amplification map, plus the fact that the ring's executed penalty and latent step are not the K3P pull and not A2. Another sweep of these settings is not the useful next run.
+
+## Learning-rate anneal
+
+The cosine anneal is active on the ring, hold, and stay probes. It is not the `training_recipe` branch inside `mode_hold` (that argument is null, so that block does not run). `probe.py` / `hold.py` / `shift.py` install `RecipeControl`, and `control_host_schedules` replaces `schedule_optimizer`. Each optimizer step calls `policy_multipliers` with the recipe's `lr_anneal_start` 0.6, prior floor 0.05, network floor 0.01, and horizon cap 1600. Those numbers come from `reports/toy100/gap-fill-20260925/sources/k3p/config.json`. Hold and shift pass the same floors and the 0.6 start on the command line.
+
+The controller's horizon is the 1,200-step ring budget (`min(1200, 1600)`). `learning_rate_scale` stays at 1 through completed update 720 and first drops at update 721. The saved ring action trace matches that: update 720 is lr 0.00425 / prior 0.0085, update 721 is multiplier 0.999989. By update 1200 the network multiplier is 0.01 and the prior multiplier is 0.05. Hold and stay keep using that 1,200-step horizon, so after update 1200 the rate is already on the floor for the rest of the run. The stay window (updates 1201–2400) is entirely at the floor. The shift rate trace spans 4.25e-5 to 0.00425 for D and 4.25e-4 to 0.0085 for the prior.
+
+Offset 0's mode curve sits on that start. Step 700 is still full LR and already 7 modes, hq 0.50. Step 750 (multiplier 0.990) is 1 mode. Step 800 (multiplier 0.934) is 1 mode. Step 900 (multiplier about 0.69) is 8 modes again, and the run finishes PASS. The 1e-7 sensitivity twins do not re-amplify there: joint-gap growth from update 680 to 1200 is about 1.00× (max about 1.01), aside from the prior twin, which had already collapsed and moves 1.15× at update 728. The baseline weights do move: median parameter step over 600–720 is 0.22, and update 750 is 2.55, mostly in D.
+
+One constant-LR arm, pre-anneal rates held for the whole run (anneal start 0, both floors 1, cap left at 1600). Multipliers measured at 1 and the only rates are 0.00425 and 0.0085, including every hold step and all 3,600 shift steps. Curves match the baseline through step 700 on all 8 offsets. CPU only.
+
+| offset | ring baseline | ring constant | hold baseline | hold constant | stay baseline | stay constant |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | PASS 8 / 0.9998 | FAIL 8 / 0.878 | PASS | NOT_CONVERGED | 120/120 | 33/120 |
+| 101 | FAIL 7 / 1.000 | FAIL 7 / 0.659 | NOT_CONVERGED | NOT_CONVERGED | 0/120 | 0/120 |
+| 202 | FAIL 6 / 0.998 | FAIL 7 / 0.985 | NOT_CONVERGED | NOT_CONVERGED | 0/120 | 0/120 |
+| 303 | PASS 8 / 1.000 | FAIL 6 / 0.670 | POST_CONVERGENCE_FAIL | NOT_CONVERGED | 112/120 | 9/120 |
+| 404 | PASS 8 / 1.000 | FAIL 6 / 0.400 | POST_CONVERGENCE_FAIL | NOT_CONVERGED | 116/120 | 17/120 |
+| 505 | FAIL 6 / 1.000 | FAIL 4 / 0.263 | NOT_CONVERGED | NOT_CONVERGED | 0/120 | 0/120 |
+| 606 | PASS 8 / 1.000 | FAIL 7 / 0.694 | PASS | NOT_CONVERGED | 120/120 | 53/120 |
+| 707 | PASS 8 / 0.999 | FAIL 0 / 0.000 | PASS | NOT_CONVERGED | 120/120 | 0/120 |
+
+Constant LR is 0/8 ring, 0/8 hold, 0/8 stay. On offset 0 the 1-mode hole at 750–800 is gone (8 modes at 750, 7 at 800), then step 900 is 2 modes and the final hq is 0.878. Offsets that the anneal carried to a pass (303, 404, 606, 707) fail at the full rate. Continuous learning still needs a schedule that stays stable without decay; this constant pre-anneal rate is not that schedule. No floor or start was varied.
