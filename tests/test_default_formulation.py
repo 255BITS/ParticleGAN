@@ -5,6 +5,7 @@ from torch import nn
 
 from particlegan import GANLoss, GANTrainer, LinearSkipDiscriminator, Recipe, get_recipe
 from particlegan.grad_regularizers import GradientPenalty
+from particlegan.ka2 import KA2CriticAdam, KA2GradientPenalty
 from benchmarks.transfer_suite.linear_skip_refinement_research import ARCHITECTURES, constructor
 
 
@@ -37,7 +38,9 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     assert [group['lr'] for group in trainer.opt_g.param_groups] == [.00425, .0085]
     assert [group['lr'] for group in trainer.opt_d.param_groups] == [.00425]
     assert all(group['betas'] == (0., .999) for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
-    assert isinstance(trainer.penalty.regularizer, GradientPenalty)
+    assert isinstance(trainer.opt_d, KA2CriticAdam)
+    assert isinstance(trainer.penalty.regularizer, KA2GradientPenalty)
+    assert recipe.name == 'ka2'
     assert trainer.ema_D is not None and trainer.latent_damping is not None
     assert isinstance(trainer.loss, GANLoss)
     result = trainer.step(torch.randn(8, 2))

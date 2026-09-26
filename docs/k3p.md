@@ -1,6 +1,10 @@
-# K3P: the default ParticleGAN formulation
+# K3P: the historical ParticleGAN 0.8.0 formulation
 
-`get_recipe()` and `GANTrainer` train with **K3P**, the formulation that passed
+This page describes the released 0.8.0 implementation. The candidate branch's
+single default is [KA2](ka2.md); the measurements below belong to the frozen
+K3P research bundle and do not transfer to KA2.
+
+In 0.8.0, `get_recipe()` and `GANTrainer` train with **K3P**, whose research bundle passed
 all 22 declared toy gates plus the ring hold and its extension
 ([evidence](../reports/toy100/k3p-base/README.md)). It is a relativistic-paired
 logistic GAN with a learned particle prior. Around the ordinary G/D/prior

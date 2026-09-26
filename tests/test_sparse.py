@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from experiments import analyze_sparse
 from experiments.train_sparse import DEFAULTS, train
 from particlegan import get_recipe
-from particlegan.k3p import CriticPenalty
+from particlegan.ka2 import CriticPenalty
 from lib.sparse_metrics import particle_class_purity
 from lib.sparse_models import JointCritic, SparseCondGenerator, XOnlyCritic
 from lib.sparse_toy import SparseMixedToy

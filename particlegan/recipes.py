@@ -13,13 +13,13 @@ class Recipe:
 
     * ``reg_anchor_weight`` (1.0) scales the critic penalty's EMA-anchor term,
       which ties the critic's input gradient to its parameter EMA once the
-      critic LR anneals. 0 removes the term (no ``ema_critic`` needed).
+      controller anchors the critic. 0 removes the term (no ``ema_critic`` needed).
     * ``direct_particle_gain`` (True) lets a direct sample-particle group
       (``make_generator_optimizer(direct_particles=...)``) raise its LR by up
       to 2x while successive centered gradients agree. False keeps that
       group's LR at the scheduled value (``direct_particle_betas`` still apply).
     """
-    name: str = "k3p"
+    name: str = "ka2"
     model: str = "gan"
     z_dim: int = 2
     num_particles: int = 20_000
@@ -45,13 +45,12 @@ class Recipe:
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
-    # K3P schedule: G/D follow their own cosine over min(total, horizon cap)
+    # G/D follow their own cosine over min(total, horizon cap)
     # down to network_lr_floor; the prior keeps the full-budget cosine above.
-    # network_lr_floor is also K3P's blend floor f (s == 0 at the floor).
     # None means "same as lr_floor"; a None horizon cap means the full budget.
     network_lr_floor: float | None = 0.01
     network_lr_horizon_cap: int | None = 1600
-    reg_anchor_decay: float = 0.999
+    reg_anchor_min_decay: float = 0.90
     # Ablation switches; see the class docstring.
     reg_anchor_weight: float = 1.0
     direct_particle_gain: bool = True
@@ -89,8 +88,8 @@ class Recipe:
         floor = self.network_lr_floor
         if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 <= floor <= 1):
             raise ValueError("network_lr_floor must be None or in [0, 1]")
-        if isinstance(self.reg_anchor_decay, bool) or not 0 <= self.reg_anchor_decay < 1:
-            raise ValueError("reg_anchor_decay must be in [0, 1)")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 <= self.reg_anchor_min_decay < 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
         for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
             value = getattr(self, key)
             if isinstance(value, bool) or not math.isfinite(value) or value < 0:
@@ -233,10 +232,10 @@ class Recipe:
         the critic and its EMA. ``output`` selects the logits from the critic's
         output (default: first element of a tuple/list); ``collect_stats``
         fills ``penalty.last_stats``. ``penalty_overrides`` replace the
-        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
+        recipe's ``coeff``, ``kappa``, ``lazy_k`` or
         ``anchor_weight`` for this penalty.
         """
-        from .k3p import CriticPenalty
+        from .ka2 import CriticPenalty
         return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
                              **penalty_overrides)
 
@@ -244,22 +243,17 @@ class Recipe:
         """Resolved kernel settings for ``make_critic_penalty``."""
         options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                    "anchor_weight": self.reg_anchor_weight, **overrides}
-        # The blend floor f is the network LR floor. A floor >= 1/2 (e.g. 1.0,
-        # a constant LR) keeps r >= 1/2 and hence s == 1 for every f, so the
-        # same formulation needs no separate path.
-        floor = self.resolved_network_lr_floor
-        options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
+        unknown = set(options) - {"coeff", "kappa", "lazy_k", "anchor_weight"}
         if unknown:
             raise TypeError(f"unknown critic penalty options: {sorted(unknown)}")
-        from .grad_regularizers import GradientPenalty
-        GradientPenalty(**options)  # validate
+        from .ka2 import KA2GradientPenalty
+        KA2GradientPenalty(**options)  # validate
         return options
 
     def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
         """Adam over ``critic``'s trainable parameters whose ``step()`` does the
-        recipe's critic-side work (currently K3P: spike guard, EMA-critic update,
-        LR record).
+        recipe's critic-side work (KA2: spike guard, moment surprise, adaptive
+        EMA-critic update and guarded reseed).
 
         ``ema_critic`` is a caller-allocated copy of ``critic`` (e.g.
         ``copy.deepcopy(critic)``) that becomes the EMA; the critic penalty
@@ -267,15 +261,15 @@ class Recipe:
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
         ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
         """
-        from .k3p import K3PCriticAdam
+        from .ka2 import KA2CriticAdam
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
-        return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
-                             ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
+        return KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                             ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
 
     def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
         """Adam over ``params`` (tensors or param groups) whose ``step()`` does the
-        recipe's generator-side work (currently K3P: A2 damping of the sparse
+        recipe's generator-side work (A2 damping of the sparse
         ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
         and the direct-particle response for the param group ``direct_particles``).
 
@@ -291,7 +285,7 @@ class Recipe:
 
     @property
     def resolved_network_lr_floor(self):
-        """G/D LR floor (and K3P blend floor f): ``network_lr_floor`` or ``lr_floor``."""
+        """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
     def make_prior_regularizer(self, **overrides):
@@ -386,7 +380,7 @@ def learning_rate_scales(step, recipe):
     Generator and critic ("network") follow ``learning_rate_scale`` over
     ``min(total_steps, network_lr_horizon_cap)`` down to ``network_lr_floor``
     and then hold; the particle prior follows it over the full budget down to
-    ``lr_floor``. K3P's blend weight is driven by the resulting critic LR.
+    ``lr_floor``. KA2's critic controller is independent of these multipliers.
     """
     total = recipe.total_steps
     horizon = min(total, recipe.network_lr_horizon_cap or total)
@@ -401,7 +395,7 @@ def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None):
     ``base_rates`` holds each optimizer's unscaled group LRs (read them once
     after construction). Groups whose parameters all belong to ``prior`` get
     the prior multiplier; every other group gets the network one, so a custom
-    loop's critic LR follows the same floor K3P's blend weight assumes.
+    loop follows the recipe's split network/prior schedules.
     Returns ``(network, prior)`` multipliers.
     """
     network, prior_scale = learning_rate_scales(step, recipe)

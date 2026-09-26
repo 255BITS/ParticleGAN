@@ -303,7 +303,7 @@ def train(cfg):
         log("G1 -> st; G2 -> at; G3 -> st+1; same z and context; D(st, at, st+1)"
             if cfg["architecture"] == "branches" else "G -> (st, at, st+1); D(st, at, st+1)")
         log(f"MoG recipe: {prior.num_particles} components, sigma_rel={prior.sigma_rel}, sigma={float(prior.sigma):.5f}; "
-            f"Rp logistic, conditioning={cfg['d_conditioning']}, K3P penalty per critic every step, raw-center spread, cosine LR, EMA")
+            f"Rp logistic, conditioning={cfg['d_conditioning']}, recipe penalty per critic every step, raw-center spread, cosine LR, EMA")
         log(f"critics={list(d.critics)}; G loss = joint + {cfg['marginal_weight']} * mean(marginals) when enabled")
         if e is not None:
             log("E(st,at) -> z -> G1/G2/G3; real triple MSE + synthetic st/at reconstruction; "

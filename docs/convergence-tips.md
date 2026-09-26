@@ -179,7 +179,7 @@ All measured in this setting; several contradict common defaults:
    is real and sudden.
 6. Only then consider exotic optimizers, capacity, batch size — expect flat.
 
-## Reference: the winning configuration (this repo)
+## Historical findings and the current candidate
 
 `examples/100gaussians.py` defaults. A later 420-run study of the penalty's
 *centering* (`FINDINGS.md`) replaced the campaign's zero-centered penalty with a one-sided
@@ -188,15 +188,16 @@ LR: the cap damps the game just as well (any sample-point penalty does) but
 leaves D usable slope below the cap, which buys sharper modes at an honest
 core width — 100/100 modes and hq 0.986 at 7k steps, core σ ratio 0.866,
 zero collapses over 5 seeds, bar (100 modes & hq ≥ 0.9) crossed by ~5.5k.
-The example now trains the recipe's critic penalty (K3P, which starts as RMS
-R1 plus a fake-side cap and hands over to one-sided caps with an EMA-critic
-anchor). The shipped example trains 7k steps with a delayed cosine anneal for a
-stable endpoint.
+The example now trains the recipe's critic penalty (KA2, which starts as RMS
+R1 plus a fake-side cap, then fixes a blend with one-sided caps and an adaptive
+EMA-critic anchor). The example trains 7k steps with a delayed cosine anneal.
+The historical scores above do not qualify KA2; see the
+[candidate assessment](../reports/ka2-default-candidate/README.md).
 
 | Ingredient | Value | Why |
 |---|---|---|
 | Objective | RpGAN (relativistic pairing, logistic) | LR headroom, mode balance (§6) |
-| Gradient penalty | recipe default critic penalty (K3P), coeff 1, κ 1, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
+| Gradient penalty | recipe default critic penalty (KA2), coeff 1, κ 1, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
 | D input | Fourier features, K = 2 | resolve σ=0.03 structure from step 1 (§3) |
 | z_dim | 2 (recipe default; data is 2-D) | prior + penalty supply transport (§5) |
 | Optimizers | recipe optimizers (`make_optimizers`), betas (0, 0.999) | sparse particle table (§4) |

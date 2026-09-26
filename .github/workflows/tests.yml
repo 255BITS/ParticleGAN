@@ -80,7 +80,8 @@ jobs:
           assert default.betas == (0., .999)
           assert not hasattr(default, 'reg_arm') and default.reg_coeff == 1.0
           assert default.reg_kappa == 1.0 and default.prior_reg == 0.0
-          assert default.name == 'k3p'
+          assert default.name == 'ka2'
+          assert default.reg_anchor_min_decay == .90
           assert get_recipe('gan') == default
           assert not hasattr(default, 'make_trainer')
           assert get_recipe('ae_gan').encoder_mode == 'ae'

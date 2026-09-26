@@ -1,0 +1,11 @@
+--- source/shift.py
++++ source/extended_shift.py
+@@ -222,7 +222,7 @@
+ try:
+     from benchmarks.toy100 import continuous_probe as cp
+     with audit, patch.object(torch.optim.Adam, '__init__', init), patch.object(torch.optim.Adam, 'step', step):
+-        out = cp.run_probe(config, mode='scheduled', steps=3600, noise_horizon=1200, diagnostic_every=10,
++        out = cp.run_probe(config, mode='scheduled', steps=4600, noise_horizon=1200, diagnostic_every=10,
+                            shift_step=2400, shift=(1.0, 0.0), log=log)
+     keep = ('status', 'terminal_grade', 'stationary', 'continued_hold', 'shift_recovery', 'diagnostic', 'final', 'ema',
+             'shift_pair', 'optimizer_final', 'rate_ranges', 'steps', 'shift_step', 'shift', 'config_sha256')

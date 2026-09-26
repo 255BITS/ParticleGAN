@@ -1,26 +1,14 @@
-"""K3P: the critic/generator regularization ParticleGAN trains with.
+"""Historical K3P critic kernels and shared optimizer/EMA helpers.
 
-Users do not instantiate these classes. The recipe builds them behind
-formulation-agnostic factories and a plain PyTorch loop::
+Public recipe factories now select ``particlegan.ka2`` for the critic.
+KA2 reuses this module's spike guard, robust EMA and conditional-critic
+adapter, together with the unchanged ``K3PGeneratorAdam``, A2 sparse latent
+damping and direct-particle response. The original ``K3PCriticAdam`` and
+``CriticPenalty`` remain available for archived research and parity tests.
 
-    opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-    penalty = recipe.make_critic_penalty(opt_d)
-    d_loss = adv_d + penalty(D, real, fake)
-    opt_d.zero_grad(); d_loss.backward(); opt_d.step()
-    opt_g.zero_grad(); g_loss.backward(); opt_g.step()
-
-The optimizers' ``step()`` does all step-time work and their ``state_dict()``
-holds all state. The classes stay importable here for tests and research.
-Nothing registers optimizer hooks or keeps module-level state.
-
-* ``CriticAnchor``      -- parameter EMA Dbar of one critic (K3P's prox anchor);
-  ``RobustCriticAnchor`` also averages buffers with side-effect-free forwards.
-* ``CriticSpikeGuard``  -- per-tensor gradient-spike clip before a critic Adam step.
-* ``LatentRowDamping``  -- A2: bounded coherence damping of sparse latent-table rows.
-* ``DirectParticleResponse`` -- LR gain for direct sample-particle groups.
-* ``K3PCriticAdam`` / ``K3PGeneratorAdam`` -- the Adam subclasses the recipe's
-  optimizer factories return; ``CriticPenalty`` -- the penalty paired with a
-  ``K3PCriticAdam`` (``recipe.make_critic_penalty``).
+Users construct active components through the recipe's ``make_*`` factories.
+Optimizer ``step()`` performs step-time work and ``state_dict()`` holds its
+state. Nothing registers optimizer hooks or keeps module-level state.
 """
 from contextlib import contextmanager
 from copy import copy, deepcopy
