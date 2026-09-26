@@ -1,0 +1,5 @@
+arm = "misgan"
+mechanism = "mcar_p20"
+total_steps = 7000
+out_dir = "results/misgan/runs/mcar_p20__misgan"
+log_path = "runs/misgan/mcar_p20__misgan.log"

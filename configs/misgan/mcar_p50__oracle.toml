@@ -1,0 +1,5 @@
+arm = "oracle"
+mechanism = "mcar_p50"
+total_steps = 7000
+out_dir = "results/misgan/runs/mcar_p50__oracle"
+log_path = "runs/misgan/mcar_p50__oracle.log"
