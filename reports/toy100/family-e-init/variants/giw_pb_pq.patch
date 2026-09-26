@@ -1,0 +1,1157 @@
+diff --git a/particlegan/family_e_init.py b/particlegan/family_e_init.py
+new file mode 100644
+index 00000000..2867a88a
+--- /dev/null
++++ b/particlegan/family_e_init.py
+@@ -0,0 +1,597 @@
++"""Family E: deterministic structured orthogonal initializers for K3P.
++
++Every value is a closed-form function of tensor shape and parameter ordinal.
++The torch RNG is advanced by the original ``uniform_`` / ``normal_`` call and
++then overwritten, so later sample streams stay on the seed. Host writes that
++land after that draw (``zeros_``, ``copy_`` of an identity) are kept.
++
++Scale ``std`` matches the declared init's element RMS. Scale ``frob`` matches
++the expected Frobenius norm of Kaiming ``uniform_(a=sqrt(5))`` onto the same
++orthonormal frame. For a Linear or a convolution those two scalars are the
++same number (fan-in equals the flattened column count).
++
++The particle table is the Roberts R2 sequence in the declared distribution.
++That prior is the one ring passes have used. Bias schemes are the ones already
++on the board: zero, a standardized golden pattern at the declared RMS, and a
++Weyl sequence at a quarter of the default bound.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++import math
++import os
++
++import torch
++from torch import nn
++
++_PHI = (math.sqrt(5.0) - 1.0) / 2.0
++_SQRT2 = math.sqrt(2.0)
++FAMILIES = ("giv", "giw", "cay", "rft", "cir", "haar", "walsh", "sob", "lat", "but", "exp")
++BIASES = ("bz", "pb", "wq")
++_SCALES = ("std", "frob")
++# Identity of a single-variant patch. ``--init default`` installs this name.
++# ``--init <name>`` overrides it. Every name in ``names()`` stays available.
++PATCH_DEFAULT = "giw_pb_pq"
++TAG = "_family_e_tag"
++_ORIG: dict = {}
++_PATCHED = False
++_OWNERS: dict[int, tuple[nn.Module, str]] = {}
++_STATE = {"name": None, "family": None, "bias": None, "scale": "std", "counter": 0}
++LOG: list = []
++
++
++def names() -> tuple[str, ...]:
++    """Every ``--init`` name this module accepts."""
++    out = [f"{fam}_{bias}_pq" for fam in FAMILIES for bias in BIASES]
++    out += [f"{fam}_{bias}_pq_frob" for fam in FAMILIES for bias in BIASES]
++    return tuple(out)
++
++
++def parse(name: str) -> tuple[str, str, str]:
++    scale = "frob" if name.endswith("_frob") else "std"
++    body = name[: -len("_frob")] if scale == "frob" else name
++    if not body.endswith("_pq"):
++        raise ValueError(f"unknown init {name!r}; choose from {', '.join(names())}")
++    family, bias = body[: -len("_pq")].rsplit("_", 1)
++    if family not in FAMILIES or bias not in BIASES or scale not in _SCALES:
++        raise ValueError(f"unknown init {name!r}; choose from {', '.join(names())}")
++    return family, bias, scale
++
++
++def install(name: str) -> str:
++    """Activate one variant. Default training never calls this."""
++    family, bias, scale = parse(name)
++    _ensure_patched()
++    _STATE.update(name=name, family=family, bias=bias, scale=scale, counter=0)
++    LOG.clear()
++    print(json.dumps({"event": "family_e_init", "name": name,
++                      "family": family, "bias": bias, "scale": scale, "prior": "r2"}), flush=True)
++    return name
++
++
++def uninstall() -> None:
++    """Restore the wrapped methods. Used by tests."""
++    global _PATCHED
++    if not _PATCHED:
++        _STATE["name"] = None
++        return
++    torch.Tensor.uniform_ = _ORIG["uniform_"]
++    torch.Tensor.normal_ = _ORIG["normal_"]
++    nn.Module.register_parameter = _ORIG["register_parameter"]
++    torch.optim.Adam.__init__ = _ORIG["adam"]
++    _PATCHED = False
++    _STATE["name"] = None
++    _OWNERS.clear()
++
++
++def active() -> str | None:
++    return _STATE["name"]
++
++
++def dump(path: str) -> str:
++    blob = "".join(row["sha256"] for row in LOG).encode()
++    all_sha = hashlib.sha256(blob).hexdigest()
++    payload = {
++        "name": _STATE["name"], "family": _STATE["family"], "bias": _STATE["bias"],
++        "scale": _STATE["scale"], "prior": "r2", "all_params_sha256": all_sha,
++        "n": len(LOG), "params": LOG,
++    }
++    with open(path, "w", encoding="utf-8") as handle:
++        json.dump(payload, handle, indent=1)
++    return all_sha
++
++
++def _ensure_patched() -> None:
++    global _PATCHED
++    if _PATCHED:
++        return
++    _ORIG["uniform_"] = torch.Tensor.uniform_
++    _ORIG["normal_"] = torch.Tensor.normal_
++    _ORIG["register_parameter"] = nn.Module.register_parameter
++    _ORIG["adam"] = torch.optim.Adam.__init__
++
++    def uniform_(self, *args, **kwargs):
++        out = _ORIG["uniform_"](self, *args, **kwargs)
++        if isinstance(self, nn.Parameter) and _STATE["name"]:
++            lo = float(args[0] if len(args) > 0 else kwargs.get("from", 0.0))
++            hi = float(args[1] if len(args) > 1 else kwargs.get("to", 1.0))
++            _tag(self, ("uniform", lo, hi))
++        return out
++
++    def normal_(self, *args, **kwargs):
++        out = _ORIG["normal_"](self, *args, **kwargs)
++        if isinstance(self, nn.Parameter) and _STATE["name"]:
++            mean = float(args[0] if len(args) > 0 else kwargs.get("mean", 0.0))
++            std = float(args[1] if len(args) > 1 else kwargs.get("std", 1.0))
++            _tag(self, ("normal", mean, std))
++        return out
++
++    def register_parameter(self, name, param):
++        _ORIG["register_parameter"](self, name, param)
++        if isinstance(param, nn.Parameter):
++            _OWNERS[id(param)] = (self, name)
++
++    def adam_init(opt, params, *args, **kwargs):
++        _ORIG["adam"](opt, params, *args, **kwargs)
++        if _STATE["name"]:
++            _apply(opt)
++
++    torch.Tensor.uniform_ = uniform_
++    torch.Tensor.normal_ = normal_
++    nn.Module.register_parameter = register_parameter
++    torch.optim.Adam.__init__ = adam_init
++    _PATCHED = True
++
++
++def _alloc_key() -> int:
++    key = int(_STATE["counter"])
++    _STATE["counter"] = key + 1
++    return key
++
++
++def _tag(param: nn.Parameter, dist: tuple) -> None:
++    prev = getattr(param, TAG, None)
++    key = prev[2] if prev is not None else _alloc_key()
++    owner = _OWNERS.get(id(param))
++    oname = type(owner[0]).__name__ if owner is not None else ""
++    pname = owner[1] if owner is not None else ""
++    setattr(param, TAG, (dist, param._version, key, oname, pname))
++
++
++def _declared(dist: tuple) -> tuple[float, float, float]:
++    """Return ``(rms, mean, half_width)`` of the declared box or normal."""
++    kind, a, b = dist
++    if kind == "uniform":
++        rms = math.sqrt((a * a + a * b + b * b) / 3.0)
++        return rms, (a + b) / 2.0, (b - a) / 2.0
++    rms = math.sqrt(a * a + b * b)
++    return rms, a, abs(b) * math.sqrt(3.0)
++
++
++def _kaiming_sigma(fan_in: int) -> float:
++    return 1.0 / math.sqrt(3.0 * max(fan_in, 1))
++
++
++def _scale(rows: int, cols: int, dist: tuple, weight: torch.Tensor) -> float:
++    rms = _declared(dist)[0]
++    rank = min(rows, cols)
++    if _STATE["scale"] == "frob":
++        fan_in, _ = nn.init._calculate_fan_in_and_fan_out(weight)
++        sigma = _kaiming_sigma(int(fan_in))
++        target = sigma * math.sqrt(rows * cols)
++        return target / math.sqrt(rank)
++    return rms * math.sqrt(max(rows, cols))
++
++
++def _frac(value: float) -> float:
++    return value - math.floor(value)
++
++
++def _thue(index: int) -> float:
++    return 1.0 if (int(index).bit_count() & 1) == 0 else -1.0
++
++
++def _sign_columns(q: torch.Tensor, key: int) -> torch.Tensor:
++    signs = torch.tensor([_thue(j + key * 17) for j in range(q.shape[1])], dtype=torch.float64)
++    return q * signs
++
++
++def _givens_rows(q: torch.Tensor, i: int, j: int, theta: float) -> None:
++    c, s = math.cos(theta), math.sin(theta)
++    qi = q[i].clone()
++    qj = q[j].clone()
++    q[i] = c * qi + s * qj
++    q[j] = -s * qi + c * qj
++
++
++def _square_givens(n: int, key: int, alpha: float) -> torch.Tensor:
++    q = torch.eye(n, dtype=torch.float64)
++    step = 0
++    for i in range(n):
++        for j in range(i + 1, n):
++            theta = math.pi * _frac((step + 1 + key) * alpha)
++            _givens_rows(q, i, j, theta)
++            step += 1
++    return q
++
++
++def _real_fourier(n: int) -> torch.Tensor:
++    index = torch.arange(n, dtype=torch.float64)
++    cols = [torch.full((n,), 1.0 / math.sqrt(n), dtype=torch.float64)]
++    limit = n // 2 - 1 if n % 2 == 0 else (n - 1) // 2
++    for k in range(1, limit + 1):
++        angle = 2.0 * math.pi * index * k / n
++        cols.append(math.sqrt(2.0 / n) * torch.cos(angle))
++        cols.append(math.sqrt(2.0 / n) * torch.sin(angle))
++    if n % 2 == 0 and n > 1:
++        cols.append((1.0 - 2.0 * (index % 2)) / math.sqrt(n))
++    return torch.stack(cols, dim=1)
++
++
++def _circulant(n: int, key: int) -> torch.Tensor:
++    spec = torch.empty(n, dtype=torch.float64)
++    spec[0] = _thue(key)
++    for k in range(1, n // 2 + 1):
++        sign = _thue(k + key)
++        if 2 * k == n:
++            spec[k] = sign
++        else:
++            spec[k] = sign
++            spec[n - k] = sign
++    column = torch.fft.ifft(spec.to(torch.complex128)).real
++    return torch.stack([torch.roll(column, i) for i in range(n)], dim=0)
++
++
++def _haar(n: int) -> torch.Tensor:
++    """Orthonormal Haar butterfly. Pairs that fit are rotated by pi/4; any n works."""
++    q = torch.eye(n, dtype=torch.float64)
++    span = 1
++    s = math.sqrt(0.5)
++    while span < n:
++        start = 0
++        while start < n:
++            for k in range(span):
++                i = start + k
++                j = i + span
++                if j >= n or j >= start + 2 * span:
++                    break
++                qi = q[i].clone()
++                qj = q[j].clone()
++                q[i] = s * (qi + qj)
++                q[j] = s * (qi - qj)
++            start += 2 * span
++        span *= 2
++    return q
++
++
++def _sylvester(n: int) -> torch.Tensor:
++    h = torch.ones((1, 1), dtype=torch.float64)
++    while h.shape[0] < n:
++        h = torch.cat((torch.cat((h, h), 1), torch.cat((h, -h), 1)), 0)
++    return h
++
++
++def _walsh(n: int) -> torch.Tensor:
++    size = 1 << (n - 1).bit_length()
++    had = _sylvester(size)
++    changes = (had[:, 1:] * had[:, :-1] < 0).sum(dim=1)
++    order = torch.argsort(changes, stable=True)
++    sequency = had[order] / math.sqrt(size)
++    if size == n:
++        return sequency
++    return _qr_square(sequency[:n, :n])
++
++
++def _butterfly(n: int, key: int) -> torch.Tensor:
++    q = torch.eye(n, dtype=torch.float64)
++    stride = 1
++    stage = 0
++    while stride < n:
++        start = 0
++        k = 0
++        while start < n:
++            for offset in range(stride):
++                i = start + offset
++                j = i + stride
++                if j >= n or j >= start + 2 * stride:
++                    break
++                theta = math.pi * _frac((stage + 1) * (k + 1) * _PHI + key * _PHI)
++                _givens_rows(q, i, j, theta)
++                k += 1
++            start += 2 * stride
++        stride *= 2
++        stage += 1
++    return q
++
++
++def _skew_dense(n: int, key: int) -> torch.Tensor:
++    a = torch.zeros((n, n), dtype=torch.float64)
++    scale = 1.0 / math.sqrt(n)
++    for i in range(n):
++        for j in range(i + 1, n):
++            value = math.sin(2.0 * math.pi * _frac((i + 1) * (j + 1) * _PHI + key * _PHI)) * scale
++            a[i, j] = value
++            a[j, i] = -value
++    return a
++
++
++def _cayley(n: int, key: int) -> torch.Tensor:
++    a = _skew_dense(n, key)
++    eye = torch.eye(n, dtype=torch.float64)
++    solved = torch.linalg.solve(eye + a, eye)
++    return (eye - a) @ solved
++
++
++def _expm_skew(n: int, key: int) -> torch.Tensor:
++    """exp of a tridiagonal skew matrix via scaling-and-squaring. Orthogonal in exact arithmetic."""
++    a = torch.zeros((n, n), dtype=torch.float64)
++    for i in range(n - 1):
++        value = math.sin(2.0 * math.pi * _frac((i + 1) * _PHI + (key + 1) * _SQRT2))
++        a[i, i + 1] = value
++        a[i + 1, i] = -value
++    norm = float(torch.linalg.matrix_norm(a, ord=1))
++    steps = max(0, int(math.ceil(math.log2(max(norm, 1.0)))) + 1)
++    b = a / (2.0 ** steps)
++    term = torch.eye(n, dtype=torch.float64)
++    out = term.clone()
++    for k in range(1, 18):
++        term = term @ (b / k)
++        out = out + term
++    for _ in range(steps):
++        out = out @ out
++    return out
++
++
++def _primitive(mask: int, degree: int) -> bool:
++    if degree < 1 or (mask & 1) == 0:
++        return False
++    poly = mask | (1 << degree)
++    state = 1
++    for period in range(1, 1 << degree):
++        bit = state & 1
++        state >>= 1
++        if bit:
++            state ^= poly >> 1
++        if state == 1:
++            return period == (1 << degree) - 1
++    return False
++
++
++_POLY: list[int] = []
++
++
++def _polys(count: int) -> list[int]:
++    """Primitive polynomials, bit k = coefficient of x^k, including x^degree and 1."""
++    while len(_POLY) < count:
++        degree = 1
++        found = False
++        while not found:
++            for mask in range(1, 1 << degree, 2):
++                if _primitive(mask, degree):
++                    poly = mask | (1 << degree)
++                    if poly not in _POLY:
++                        _POLY.append(poly)
++                        found = True
++                        break
++            if not found:
++                degree += 1
++    return _POLY[:count]
++
++
++def _sobol_directions(dim: int, bits: int = 32) -> list[list[int]]:
++    directions = [[1 << (bits - 1 - i) for i in range(bits)]]
++    polys = _polys(dim - 1) if dim > 1 else []
++    for poly in polys:
++        degree = poly.bit_length() - 1
++        m = [0] + [1] * degree
++        for i in range(degree + 1, bits + 1):
++            acc = (m[i - degree] << degree) ^ m[i - degree]
++            for j in range(1, degree):
++                if (poly >> (degree - j)) & 1:
++                    acc ^= m[i - j] << j
++            m.append(acc)
++        directions.append([m[i] << (bits - i) for i in range(1, bits + 1)])
++    return directions
++
++
++def _sobol(n: int, d: int, key: int) -> torch.Tensor:
++    directions = _sobol_directions(d)
++    skip = 1 + key
++    total = skip + n
++    x = [0] * d
++    rows = []
++    for i in range(total):
++        if i:
++            bit = (i & -i).bit_length() - 1
++            for axis in range(d):
++                x[axis] ^= directions[axis][bit]
++        if i >= skip:
++            rows.append([value / float(1 << 32) for value in x])
++    unit = torch.tensor(rows, dtype=torch.float64).clamp(1e-12, 1.0 - 1e-12)
++    return torch.special.ndtri(unit)
++
++
++def _lattice(n: int, d: int, key: int) -> torch.Tensor:
++    primes = []
++    p = 2
++    while len(primes) < d:
++        if all(p % q != 0 for q in primes):
++            primes.append(p)
++        p += 1 if p == 2 else 2
++    alpha = torch.tensor([math.sqrt(p) for p in primes], dtype=torch.float64)
++    index = torch.arange(1, n + 1, dtype=torch.float64)[:, None]
++    unit = torch.remainder(index * alpha + (key + 1) * _PHI, 1.0).clamp(1e-12, 1.0 - 1e-12)
++    return torch.special.ndtri(unit)
++
++
++def _qr_square(block: torch.Tensor) -> torch.Tensor:
++    q, r = torch.linalg.qr(block)
++    sign = torch.where(torch.diagonal(r) < 0, -torch.ones(r.shape[0], dtype=torch.float64),
++                       torch.ones(r.shape[0], dtype=torch.float64))
++    return q * sign
++
++
++def _semi_from_square(q: torch.Tensor, rows: int, cols: int) -> torch.Tensor:
++    size = max(rows, cols)
++    if q.shape[0] != size:
++        q = _qr_square(q[:size, :size]) if q.shape[0] > size else q
++    if rows >= cols:
++        return q[:, :cols]
++    return q[:rows, :]
++
++
++def _semi_from_qr(source: torch.Tensor) -> torch.Tensor:
++    rows, cols = source.shape
++    if rows >= cols:
++        q, r = torch.linalg.qr(source)
++        sign = torch.where(torch.diagonal(r) < 0, -1.0, 1.0)
++        return q * sign.to(dtype=torch.float64)
++    q, r = torch.linalg.qr(source.T)
++    sign = torch.where(torch.diagonal(r) < 0, -1.0, 1.0)
++    return (q * sign.to(dtype=torch.float64)).T
++
++
++def basis(family: str, rows: int, cols: int, key: int = 0) -> torch.Tensor:
++    """Semi-orthogonal ``[rows, cols]`` float64 matrix. Columns (or rows) are orthonormal."""
++    if rows < 1 or cols < 1:
++        return torch.zeros((rows, cols), dtype=torch.float64)
++    size = max(rows, cols)
++    if family == "giv":
++        square = _square_givens(size, key, _PHI)
++    elif family == "giw":
++        square = _square_givens(size, key, _SQRT2)
++    elif family == "cay":
++        square = _cayley(size, key)
++    elif family == "rft":
++        square = _real_fourier(size)
++    elif family == "cir":
++        square = _circulant(size, key)
++    elif family == "haar":
++        square = _haar(size)
++    elif family == "walsh":
++        square = _walsh(size)
++    elif family == "sob":
++        square = None
++    elif family == "lat":
++        square = None
++    elif family == "but":
++        square = _butterfly(size, key)
++    elif family == "exp":
++        square = _expm_skew(size, key)
++    else:
++        raise ValueError(family)
++    if family == "sob":
++        frame = _semi_from_qr(_sobol(rows, cols, key))
++    elif family == "lat":
++        frame = _semi_from_qr(_lattice(rows, cols, key))
++    else:
++        frame = _semi_from_square(square, rows, cols)
++    return _sign_columns(frame, key)
++
++
++def _r2(n: int, d: int) -> torch.Tensor:
++    """Roberts R2 in ``[0, 1)``. Same recurrence the earlier screens used."""
++    phi = 2.0
++    for _ in range(64):
++        phi = (1.0 + phi) ** (1.0 / (d + 1))
++    alpha = torch.tensor([phi ** (-(j + 1)) for j in range(d)], dtype=torch.float64)
++    index = torch.arange(1, n + 1, dtype=torch.float64)[:, None]
++    return torch.remainder(0.5 + index * alpha, 1.0).clamp(1e-12, 1.0 - 1e-12)
++
++
++def _map_unit(unit: torch.Tensor, dist: tuple) -> torch.Tensor:
++    kind, a, b = dist
++    if kind == "uniform":
++        return a + (b - a) * unit
++    return a + b * torch.special.ndtri(unit)
++
++
++def _pattern(n: int, dist: tuple, key: int) -> torch.Tensor:
++    _rms, mean, _half = _declared(dist)
++    std = _rms if dist[0] == "normal" else _declared(dist)[0]
++    # ``_declared`` rms is the element std for a centered uniform and for a normal.
++    if dist[0] == "uniform":
++        std = (dist[2] - dist[1]) / math.sqrt(12.0)
++        mean = (dist[1] + dist[2]) / 2.0
++    else:
++        mean, std = dist[1], abs(dist[2])
++    if n == 0:
++        return torch.zeros(0, dtype=torch.float64)
++    unit = torch.tensor([_frac((i + 1) * _PHI + key * _PHI) for i in range(n)], dtype=torch.float64)
++    unit = unit * 2.0 - 1.0
++    if n > 1:
++        centered = unit - unit.mean()
++        denom = torch.sqrt(torch.mean(centered * centered)).clamp_min(1e-12)
++        unit = centered / denom
++    return mean + std * unit
++
++
++def _weyl_quarter(n: int, dist: tuple, key: int) -> torch.Tensor:
++    _rms, mean, half = _declared(dist)
++    if n == 0:
++        return torch.zeros(0, dtype=torch.float64)
++    index = torch.arange(1, n + 1, dtype=torch.float64)
++    unit = torch.remainder(index * _SQRT2 + (key + 1) * _PHI, 1.0)
++    return mean + (2.0 * unit - 1.0) * (half / 4.0)
++
++
++def _rewrite(param: nn.Parameter, dist: tuple, key: int, oname: str, pname: str) -> tuple[torch.Tensor, str]:
++    if oname == "ParticlePrior" and pname == "z" and param.ndim == 2:
++        unit = _r2(int(param.shape[0]), int(param.shape[1]))
++        return _map_unit(unit, dist).reshape(param.shape), "prior_r2"
++    if param.ndim >= 2 and param.numel() > 0:
++        rows = int(param.shape[0])
++        cols = int(param.numel() // rows)
++        frame = basis(_STATE["family"], rows, cols, key)
++        value = frame * _scale(rows, cols, dist, param)
++        return value.reshape(param.shape), f"weight_{_STATE['family']}_{_STATE['scale']}"
++    if param.ndim == 1:
++        bias = _STATE["bias"]
++        if bias == "bz":
++            return torch.zeros(param.shape, dtype=torch.float64), "bias_zero"
++        if bias == "wq":
++            return _weyl_quarter(param.numel(), dist, key).reshape(param.shape), "bias_weyl_quarter"
++        return _pattern(param.numel(), dist, key).reshape(param.shape), "bias_pattern"
++    return _pattern(param.numel(), dist, key).reshape(param.shape), "pattern_other"
++
++
++@torch.no_grad()
++def _apply(opt) -> None:
++    params = [p for group in opt.param_groups for p in group["params"]]
++    for param in params:
++        tagged = getattr(param, TAG, None)
++        if tagged is None:
++            rule = "keep_untagged"
++            fresh = False
++        else:
++            dist, version, key, oname, pname = tagged
++            fresh = version == param._version
++            rule = None
++            if fresh:
++                value, rule = _rewrite(param, dist, key, oname, pname)
++                param.copy_(value.to(dtype=param.dtype, device=param.device))
++            else:
++                rule = "keep_host"
++        flat = param.detach().cpu().contiguous()
++        LOG.append({
++            "owner": tagged[3] if tagged else "",
++            "name": tagged[4] if tagged else "",
++            "shape": list(param.shape),
++            "rule": rule,
++            "fresh": fresh if tagged is not None else False,
++            "sha256": hashlib.sha256(flat.numpy().tobytes()).hexdigest(),
++        })
++
++
++def _dump_if_requested() -> None:
++    path = os.environ.get("K3P_INIT_DUMP")
++    if not path or not _STATE["name"]:
++        return
++    os.makedirs(path, exist_ok=True)
++    dump(os.path.join(path, "family-e-init.json"))
++
++
++import atexit
++
++atexit.register(_dump_if_requested)
+diff --git a/reports/toy100/family-e-init/screen.py b/reports/toy100/family-e-init/screen.py
+new file mode 100644
+index 00000000..ec9c6c67
+--- /dev/null
++++ b/reports/toy100/family-e-init/screen.py
+@@ -0,0 +1,290 @@
++"""CPU screen for family E orthogonal inits.
++
++Logs one JSON line per finished job to ``/tmp/family-e-init/screen.log``.
++Tail that file. Plans:
++
++  time        one K3P baseline ring run, for a wall-clock reading
++  det         init-only determinism (offset 0 twice, and offset 101)
++  calibrate   K3P random init, ring + unequal mass, 8 sample-seed offsets
++  screen      every family-E variant, same two gates and 8 offsets
++  prio        8 priority gates at offset 0 for the names passed on the command line
++
++Usage: python -u screen.py PLAN [jobs] [variant ...]
++"""
++import hashlib
++import json
++import os
++import subprocess
++import sys
++import threading
++import time
++from concurrent.futures import ThreadPoolExecutor
++from pathlib import Path
++
++sys.path.insert(0, "/workspace")
++import torch
++
++ROOT = Path("/workspace")
++K3P = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p"
++SHIM = Path(__file__).resolve().parent / "shim.py"
++OUT = Path("/tmp/family-e-init")
++LOG = OUT / "screen.log"
++OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
++EARLY = ("mode_hold", "vector_unequal_mass")
++PRIO = (
++    ("probe", "mode_hold"),
++    ("hold", "mode_hold"),
++    ("probe", "vector_unequal_mass"),
++    ("probe", "img_stripes2"),
++    ("probe", "img_blobs4"),
++    ("native", "grid100"),
++    ("native", "rotated100"),
++    ("shift", "mode_hold"),
++)
++
++
++def variants():
++    from particlegan.family_e_init import FAMILIES, BIASES
++    # Frobenius scale matches std bitwise on these Linear hosts, so it is not a second screen.
++    return [f"{fam}_{bias}_pq" for fam in FAMILIES for bias in BIASES]
++
++
++_LOCK = threading.Lock()
++
++
++def _line(row):
++    text = json.dumps(row)
++    print(text, flush=True)
++    with _LOCK:
++        with LOG.open("a", encoding="utf-8") as handle:
++            handle.write(text + "\n")
++
++
++def _env(offset, dump):
++    env = dict(os.environ)
++    env.update({
++        "K3P_SEED_OFFSET": str(offset),
++        "K3P_INIT_DUMP": str(dump),
++        "PYTHONHASHSEED": "0",
++        "OMP_NUM_THREADS": "1",
++        "MKL_NUM_THREADS": "1",
++        "OPENBLAS_NUM_THREADS": "1",
++        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
++    })
++    env.pop("PYTHONPATH", None)
++    return env
++
++
++def _cmd(kind, task, output, init, init_only):
++    if kind == "hold":
++        script = K3P / "hold.py"
++        extra = ["--config", str(K3P / "config.json"), "--backend", "cpu",
++                 "--network-floor", "0.01", "--prior-floor", "0.05"]
++    elif kind == "shift":
++        script = K3P / "shift.py"
++        extra = ["--config", str(K3P / "config.json"), "--backend", "cpu",
++                 "--network-floor", "0.01", "--prior-floor", "0.05"]
++    elif kind == "native":
++        script = K3P / "native100.py"
++        extra = ["--candidate", str(K3P)]
++    else:
++        script = K3P / "probe.py"
++        extra = ["--config", str(K3P / "config.json"), "--backend", "cpu"]
++    cmd = [sys.executable, "-u", str(SHIM), str(script), "--repo", str(ROOT), "--task", task,
++           "--output", str(output), *extra]
++    if init:
++        cmd += ["--init", init]
++    if init_only:
++        cmd += ["--init-only"]
++    if kind == "native":
++        # native100 has no --config; the shim still wraps seeds.
++        cmd = [c for c in cmd if c != "--config"]
++    return cmd
++
++
++def _tensor_hash(path: Path) -> str:
++    if not path.exists():
++        return ""
++    blob = torch.load(path, map_location="cpu", weights_only=True)
++    digest = hashlib.sha256()
++
++    def walk(value):
++        if isinstance(value, torch.Tensor):
++            digest.update(value.detach().cpu().contiguous().numpy().tobytes())
++        elif isinstance(value, dict):
++            for key in sorted(value):
++                walk(value[key])
++        elif isinstance(value, (list, tuple)):
++            for item in value:
++                walk(item)
++
++    walk(blob)
++    return digest.hexdigest()
++
++
++def _metrics(payload):
++    verdict = payload.get("verdict") or {}
++    metrics = {row.get("metric"): row.get("value") for row in verdict.get("metrics") or []}
++    conv = verdict.get("convergence") or {}
++    return {
++        "status": payload.get("status"),
++        "modes": metrics.get("modes"),
++        "hq": metrics.get("hq"),
++        "mmr": metrics.get("min_mass_ratio"),
++        "eigen": metrics.get("component_min_eigen_ratio"),
++        "cov": metrics.get("component_covariance_error"),
++        "suffix": conv.get("passing_suffix"),
++        "seconds": None if payload.get("seconds") is None else round(payload["seconds"], 1),
++    }
++
++
++def _done(path: Path) -> bool:
++    result = path / "result.json"
++    if not result.exists():
++        return False
++    try:
++        status = json.loads(result.read_text()).get("status")
++    except json.JSONDecodeError:
++        return False
++    return status in {"PASS", "FAIL", "INCOMPLETE", "INITIALIZATION_CAPTURED"}
++
++
++def _run(job):
++    kind, task, init, offset, init_only, label = job
++    folder = OUT / "out" / (init or "k3p") / label
++    if _done(folder):
++        _line({"event": "skip", "job": f"{init or 'k3p'}/{label}"})
++        return
++    if folder.exists():
++        subprocess.run(["rm", "-rf", str(folder)], check=False)
++    folder.parent.mkdir(parents=True, exist_ok=True)
++    log_path = OUT / "logs" / f"{init or 'k3p'}-{label}.log"
++    log_path.parent.mkdir(parents=True, exist_ok=True)
++    started = time.time()
++    with log_path.open("w", encoding="utf-8") as handle:
++        rc = subprocess.call(_cmd(kind, task, folder, init, init_only), cwd=ROOT,
++                             stdout=handle, stderr=subprocess.STDOUT, env=_env(offset, folder))
++    row = {"event": "done", "job": f"{init or 'k3p'}/{label}", "rc": rc,
++           "seconds": round(time.time() - started, 1)}
++    result = folder / "result.json"
++    if result.exists():
++        payload = json.loads(result.read_text())
++        row.update(_metrics(payload))
++    else:
++        row["status"] = "MISSING"
++    init_log = folder / "family-e-init.json"
++    if init_log.exists():
++        row["init_sha"] = json.loads(init_log.read_text())["all_params_sha256"][:12]
++    _line(row)
++    _leaderboard()
++
++
++def _leaderboard():
++    rows = []
++    root = OUT / "out"
++    if not root.exists():
++        return
++    names = sorted(p.name for p in root.iterdir() if p.is_dir())
++    for name in names:
++        cells = []
++        passes = {task: [0, 0] for task in EARLY}
++        for offset in OFFSETS:
++            for task in EARLY:
++                path = root / name / f"s{offset}-{task}" / "result.json"
++                if not path.exists():
++                    cells.append(".")
++                    continue
++                payload = json.loads(path.read_text())
++                status = payload.get("status")
++                passes[task][1] += 1
++                passes[task][0] += status == "PASS"
++                metrics = _metrics(payload)
++                mark = "P" if status == "PASS" else "F"
++                if task == "mode_hold" and metrics["modes"] is not None:
++                    mark += str(metrics["modes"])
++                cells.append(mark)
++        if passes["mode_hold"][1] or passes["vector_unequal_mass"][1]:
++            rows.append((passes["mode_hold"][0], passes["vector_unequal_mass"][0], name, passes, cells))
++    rows.sort(key=lambda item: (-item[0], -item[1], item[2]))
++    lines = ["| variant | ring | unequal | cells |", "|---|---:|---:|---|"]
++    for ring, unequal, name, passes, cells in rows:
++        lines.append(f"| `{name}` | {ring}/{passes['mode_hold'][1]} | {unequal}/{passes['vector_unequal_mass'][1]} | {' '.join(cells)} |")
++    text = "\n".join(lines) + "\n"
++    with _LOCK:
++        (OUT / "LEADERBOARD.md").write_text(text)
++
++
++def _jobs(plan, selected):
++    chosen = selected or variants()
++    jobs = []
++    if plan == "time":
++        jobs.append(("probe", "mode_hold", None, 0, False, "s0-mode_hold"))
++    elif plan == "det":
++        for name in chosen:
++            jobs.append(("probe", "mode_hold", name, 0, True, "init-s0"))
++            jobs.append(("probe", "mode_hold", name, 0, True, "init-s0b"))
++            jobs.append(("probe", "mode_hold", name, 101, True, "init-s101"))
++    elif plan == "calibrate":
++        for offset in OFFSETS:
++            for task in EARLY:
++                jobs.append(("probe", task, None, offset, False, f"s{offset}-{task}"))
++    elif plan == "screen":
++        for name in chosen:
++            for offset in OFFSETS:
++                for task in EARLY:
++                    jobs.append(("probe", task, name, offset, False, f"s{offset}-{task}"))
++    elif plan == "prio":
++        for name in chosen:
++            for kind, task in PRIO:
++                jobs.append((kind, task, name, 0, False, f"prio-{kind}-{task}"))
++    else:
++        raise SystemExit(f"unknown plan {plan}")
++    return jobs
++
++
++def _check_det(selected):
++    chosen = selected or variants()
++    bad = []
++    for name in chosen:
++        root = OUT / "out" / name
++        hashes = []
++        files = []
++        for label in ("init-s0", "init-s0b", "init-s101"):
++            path = root / label / "family-e-init.json"
++            values = root / label / "initial-values.pt"
++            if not path.exists():
++                bad.append((name, label, "missing"))
++                continue
++            hashes.append(json.loads(path.read_text())["all_params_sha256"])
++            files.append(_tensor_hash(values))
++        if len(hashes) == 3 and (len(set(hashes)) != 1 or len(set(files)) != 1):
++            bad.append((name, "mismatch", hashes))
++    report = {"event": "determinism", "checked": len(chosen), "bad": [
++        {"name": item[0], "detail": item[1]} for item in bad]}
++    _line(report)
++    (OUT / "determinism.json").write_text(json.dumps(report, indent=1) + "\n")
++    return not bad
++
++
++def main():
++    plan = sys.argv[1]
++    jobs_n = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 3
++    selected = [arg for arg in sys.argv[3 if len(sys.argv) > 2 and sys.argv[2].isdigit() else 2:] if not arg.isdigit()]
++    OUT.mkdir(parents=True, exist_ok=True)
++    (OUT / "logs").mkdir(exist_ok=True)
++    _line({"event": "start", "plan": plan, "jobs": jobs_n, "torch": torch.__version__,
++           "torch_cuda": torch.version.cuda, "torch_git": getattr(torch.version, "git_version", None),
++           "cuda": torch.cuda.is_available(), "tail": str(LOG)})
++    todo = _jobs(plan, selected)
++    with ThreadPoolExecutor(jobs_n) as pool:
++        list(pool.map(_run, todo))
++    if plan == "det":
++        ok = _check_det(selected)
++        if not ok:
++            raise SystemExit(1)
++    _leaderboard()
++    _line({"event": "plan_done", "plan": plan})
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/reports/toy100/family-e-init/shim.py b/reports/toy100/family-e-init/shim.py
+new file mode 100644
+index 00000000..79b1019b
+--- /dev/null
++++ b/reports/toy100/family-e-init/shim.py
+@@ -0,0 +1,34 @@
++"""Run a K3P driver with an optional sample-seed offset.
++
++``K3P_SEED_OFFSET`` is added to every ``manual_seed`` the driver calls. Offset 0
++leaves the declared seeds alone. The offset does not enter the initializer:
++family E weights are a function of shape and parameter order only.
++"""
++import os
++import runpy
++import sys
++
++OFF = int(os.environ.get("K3P_SEED_OFFSET", "0"))
++script = os.path.abspath(sys.argv[1])
++sys.argv = sys.argv[1:]
++sys.path.insert(0, os.path.dirname(script))
++
++import torch
++
++if OFF:
++    def shift(seed):
++        return (int(seed) + OFF) % (2 ** 63)
++
++    def manual_seed(seed):
++        return torch.default_generator.manual_seed(shift(seed))
++
++    torch.manual_seed = torch.random.manual_seed = manual_seed
++    base = torch.Generator
++
++    class Generator(base):
++        def manual_seed(self, seed):
++            return super().manual_seed(shift(seed))
++
++    torch.Generator = Generator
++
++runpy.run_path(script, run_name="__main__")
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/hold.py b/reports/toy100/gap-fill-20260925/sources/k3p/hold.py
+index 82ad056e..14eabda1 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/hold.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/hold.py
+@@ -24,10 +24,14 @@ p.add_argument('--prior-floor', type=float, required=True)
+ p.add_argument('--anneal-start', type=float, default=.6)
+ p.add_argument('--steps', type=int, default=7500)
+ p.add_argument('--post-window', type=int, default=300)
++p.add_argument('--init', default=None, help='family E deterministic orthogonal init name')
+ a = p.parse_args()
+ a.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(a.repo.resolve()))
+ import torch
++if a.init:
++    from particlegan.family_e_init import PATCH_DEFAULT, install
++    install(PATCH_DEFAULT if a.init == "default" else a.init)
+ from torch.utils._python_dispatch import TorchDispatchMode
+ from torch.utils._pytree import tree_map
+ 
+@@ -231,7 +235,8 @@ def ema_measure(step):
+     while frame is not None and frame.f_code.co_name != 'train_mode_hold':
+         frame = frame.f_back
+     snapshot = frame.f_locals['snapshot']
+-    with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
++    devices = [torch.cuda.current_device()] if device == 'cuda' else []
++    with torch.random.fork_rng(devices=devices):
+         row = snapshot(step)
+     return dict(step=step, modes=row['modes'], hq=row['hq'])
+ 
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/native100.py b/reports/toy100/gap-fill-20260925/sources/k3p/native100.py
+index d4c477bc..92569f3a 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/native100.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/native100.py
+@@ -10,10 +10,14 @@ p.add_argument('--candidate', type=Path, required=True)
+ p.add_argument('--repo', type=Path, required=True)
+ p.add_argument('--task', required=True, choices=['grid100', 'rotated100', 'staggered100'])
+ p.add_argument('--output', type=Path, required=True)
++p.add_argument('--init', default=None, help='family E deterministic orthogonal init name')
+ a = p.parse_args()
+ sys.path[:0] = [str(a.repo.resolve()), str(a.candidate.resolve())]
+ a.output.mkdir(parents=True, exist_ok=False)
+ import torch
++if a.init:
++    from particlegan.family_e_init import PATCH_DEFAULT, install
++    install(PATCH_DEFAULT if a.init == "default" else a.init)
+ if not torch.cuda.is_available() or os.environ.get('CUBLAS_WORKSPACE_CONFIG') != ':4096:8':
+     raise RuntimeError('CUDA with CUBLAS_WORKSPACE_CONFIG=:4096:8 required')
+ torch.cuda.set_device(0); torch.set_default_device('cuda:0'); torch.set_num_threads(1); torch.set_num_interop_threads(1)
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/probe.py b/reports/toy100/gap-fill-20260925/sources/k3p/probe.py
+index 8a008982..09c3da97 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/probe.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/probe.py
+@@ -19,10 +19,14 @@ p.add_argument('--cpu-random', action='store_true')
+ p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
+ p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
+ p.add_argument('--output', type=Path, required=True)
++p.add_argument('--init', default=None, help='family E deterministic orthogonal init name')
+ a = p.parse_args()
+ a.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(a.repo.resolve()))
+ import torch
++if a.init:
++    from particlegan.family_e_init import PATCH_DEFAULT, install
++    install(PATCH_DEFAULT if a.init == "default" else a.init)
+ from torch.utils._python_dispatch import TorchDispatchMode
+ from torch.utils._pytree import tree_map
+ 
+diff --git a/reports/toy100/gap-fill-20260925/sources/k3p/shift.py b/reports/toy100/gap-fill-20260925/sources/k3p/shift.py
+index da422490..30b287e7 100644
+--- a/reports/toy100/gap-fill-20260925/sources/k3p/shift.py
++++ b/reports/toy100/gap-fill-20260925/sources/k3p/shift.py
+@@ -22,10 +22,14 @@ p.add_argument('--output', type=Path, required=True)
+ p.add_argument('--network-floor', type=float, required=True)
+ p.add_argument('--prior-floor', type=float, required=True)
+ p.add_argument('--anneal-start', type=float, default=.6)
++p.add_argument('--init', default=None, help='family E deterministic orthogonal init name')
+ a = p.parse_args()
+ a.output.mkdir(parents=True, exist_ok=False)
+ sys.path.insert(0, str(a.repo.resolve()))
+ import torch
++if a.init:
++    from particlegan.family_e_init import PATCH_DEFAULT, install
++    install(PATCH_DEFAULT if a.init == "default" else a.init)
+ from torch.utils._python_dispatch import TorchDispatchMode
+ from torch.utils._pytree import tree_map
+ 
+diff --git a/tests/test_family_e_init.py b/tests/test_family_e_init.py
+new file mode 100644
+index 00000000..cb2828f6
+--- /dev/null
++++ b/tests/test_family_e_init.py
+@@ -0,0 +1,126 @@
++"""Orthogonality, scale, and seed-independence of family E inits."""
++import math
++
++import pytest
++import torch
++from torch import nn
++
++from particlegan import ParticlePrior
++from particlegan.family_e_init import FAMILIES, _sobol, basis, install, names, uninstall
++
++
++def _orth_error(q: torch.Tensor) -> float:
++    rows, cols = q.shape
++    gram = q.T @ q if rows >= cols else q @ q.T
++    eye = torch.eye(gram.shape[0], dtype=torch.float64)
++    return float((gram - eye).abs().max())
++
++
++@pytest.fixture(autouse=True)
++def _clean_hooks():
++    yield
++    uninstall()
++
++
++@pytest.mark.parametrize("family", FAMILIES)
++@pytest.mark.parametrize("n", [1, 2, 3, 4, 7, 8])
++def test_square_bases_are_orthogonal(family, n):
++    err = _orth_error(basis(family, n, n, key=1))
++    assert err < 1e-8, (family, n, err)
++
++
++@pytest.mark.parametrize("family", FAMILIES)
++@pytest.mark.parametrize("shape", [(5, 3), (3, 5)])
++def test_rectangular_bases_are_semi_orthogonal(family, shape):
++    err = _orth_error(basis(family, *shape, key=2))
++    assert err < 1e-8, (family, shape, err)
++
++
++def test_sobol_one_d_matches_the_gray_code_sequence():
++    # After the skipped origin the Gray-code points are 1/2, 3/4, 1/4, 3/8.
++    unit = torch.tensor([0.5, 0.75, 0.25, 0.375], dtype=torch.float64)
++    got = torch.special.ndtri(unit.clamp(1e-12, 1 - 1e-12))
++    assert torch.allclose(_sobol(4, 1, key=0).squeeze(1), got, atol=1e-8)
++
++
++def test_layer_keys_change_the_matrix_and_keep_it_orthogonal():
++    left = basis("giv", 8, 8, key=0)
++    right = basis("giv", 8, 8, key=1)
++    assert not torch.allclose(left, right)
++    assert _orth_error(left) < 1e-8 and _orth_error(right) < 1e-8
++
++
++def test_families_are_not_the_same_matrix():
++    mats = {family: basis(family, 8, 8, key=0) for family in FAMILIES}
++    for left in FAMILIES:
++        for right in FAMILIES:
++            if left < right:
++                assert not torch.allclose(mats[left], mats[right], atol=1e-5), (left, right)
++
++
++def _build(name, seed):
++    uninstall()
++    install(name)
++    torch.manual_seed(seed)
++    layer = nn.Linear(6, 9)
++    torch.optim.Adam(layer.parameters(), lr=1e-3)
++    return layer.weight.detach().clone(), layer.bias.detach().clone()
++
++
++def test_weights_ignore_the_torch_seed_and_match_kaiming_rms():
++    w0, b0 = _build("giv_bz_pq", 0)
++    w1, b1 = _build("giv_bz_pq", 99)
++    assert torch.equal(w0, w1) and torch.equal(b0, b1)
++    assert torch.equal(b0, torch.zeros_like(b0))
++    fan_in = 6
++    target = 1.0 / math.sqrt(3.0 * fan_in)
++    rms = float(w0.double().pow(2).mean().sqrt())
++    assert abs(rms - target) / target < 1e-5
++    err = _orth_error(w0.double() / (target * math.sqrt(9)))
++    assert err < 1e-5
++
++
++def test_frob_matches_std_on_a_linear():
++    std_w, std_b = _build("cay_pb_pq", 1)
++    frob_w, frob_b = _build("cay_pb_pq_frob", 3)
++    assert torch.equal(std_w, frob_w)
++    assert torch.equal(std_b, frob_b)
++
++
++def test_pattern_and_quarter_bias_use_the_declared_scale():
++    _, pattern = _build("rft_pb_pq", 0)
++    _, quarter = _build("rft_wq_pq", 0)
++    fan_in = 6.0
++    bound = 1.0 / math.sqrt(fan_in)
++    declared = (2.0 * bound) / math.sqrt(12.0)
++    assert abs(float(pattern.double().std(unbiased=False)) - declared) / declared < 1e-5
++    assert float(quarter.abs().max()) <= bound / 4.0 + 1e-6
++
++
++def test_r2_prior_is_seed_independent_and_scaled():
++    def draw(seed):
++        uninstall()
++        install("haar_bz_pq")
++        torch.manual_seed(seed)
++        prior = ParticlePrior(64, 3, init_std=0.5)
++        torch.optim.Adam(prior.parameters(), lr=1e-3)
++        return prior.z.detach().clone()
++
++    z0, z1 = draw(0), draw(7)
++    assert torch.equal(z0, z1)
++    assert abs(float(z0.mean())) < 0.15
++    assert abs(float(z0.std(unbiased=False)) - 0.5) < 0.08
++
++
++def test_host_zero_after_reset_is_kept():
++    uninstall()
++    install("exp_bz_pq")
++    layer = nn.Linear(4, 4, bias=False)
++    nn.init.zeros_(layer.weight)
++    torch.optim.Adam(layer.parameters(), lr=1e-3)
++    assert torch.equal(layer.weight, torch.zeros_like(layer.weight))
++
++
++def test_names_cover_every_family_and_bias():
++    assert len(names()) == len(FAMILIES) * 3 * 2
++    assert "giv_bz_pq" in names() and "exp_wq_pq_frob" in names()

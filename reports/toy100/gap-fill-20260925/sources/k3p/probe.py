@@ -19,10 +19,14 @@ p.add_argument('--cpu-random', action='store_true')
 p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
 p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--init', default=None, help='family E deterministic orthogonal init name')
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))
 import torch
+if a.init:
+    from particlegan.family_e_init import PATCH_DEFAULT, install
+    install(PATCH_DEFAULT if a.init == "default" else a.init)
 from torch.utils._python_dispatch import TorchDispatchMode
 from torch.utils._pytree import tree_map
 
