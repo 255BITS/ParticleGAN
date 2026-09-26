@@ -18,6 +18,7 @@ if sys.argv[1] == "-m":
     sys.argv = [module, *sys.argv[3:]]
 else:
     script = os.path.abspath(sys.argv[1])
+    sys.path.insert(0, os.path.dirname(script))
     sys.argv = sys.argv[1:]
 if OFFSET:
     def shift(seed):

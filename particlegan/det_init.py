@@ -28,6 +28,13 @@ Variants (all scales match ``kaiming_uniform_(a=sqrt(5))`` element RMS):
   contracting layers, bias pattern on every layer.
 * ``tile_in`` — tiled identity on expanding layers, padded identity on
   contracting layers, bias pattern on every layer.
+* ``tile_read`` — tiled identity everywhere except a generator-shaped map
+  (``1 < rows < cols``), which stays eye-padded so a 2-wide output reads
+  one hidden block. A 1-wide critic readout stays tiled and sees every
+  unit. Full Weyl bias.
+* ``tile_read_q`` — ``tile_read`` weights, bias at a quarter of the bound.
+* ``hid_read`` — square hidden layers are the Householder orthogonal times
+  the Kaiming gain; rectangular layers follow ``tile_read``. Quarter bias.
 
 The particle table is a Kronecker-Weyl sequence mapped through a rational
 inverse-normal (or into the requested uniform box). It is not a whitened QR
@@ -44,10 +51,13 @@ import torch
 from torch import nn
 
 VARIANTS = ("eye", "eye_bias", "eye_pad", "hid", "hid_bias",
-            "hid_edge", "hid_q", "eye_sign", "pad_in", "tile_in")
+            "hid_edge", "hid_q", "eye_sign", "pad_in", "tile_in",
+            "tile_read", "tile_read_q", "hid_read")
 _BIAS_VARIANTS = frozenset(("eye_bias", "eye_pad", "hid_bias", "hid_edge", "hid_q",
-                            "pad_in", "tile_in"))
-_ORTHO_VARIANTS = frozenset(("hid", "hid_bias", "hid_edge", "hid_q"))
+                            "pad_in", "tile_in", "tile_read", "tile_read_q", "hid_read"))
+_ORTHO_VARIANTS = frozenset(("hid", "hid_bias", "hid_edge", "hid_q", "hid_read"))
+_READ_VARIANTS = frozenset(("tile_read", "tile_read_q", "hid_read"))
+_BIAS_SCALE = {"hid_q": 0.25, "tile_read_q": 0.25, "hid_read": 0.25}
 _GAIN = math.sqrt(2.0 / (1.0 + 5.0))  # calculate_gain("leaky_relu", sqrt(5))
 _PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53)
 _STATE = {"name": None}
@@ -175,6 +185,8 @@ def _how(rows: int, cols: int) -> str:
     name = _STATE["name"]
     if name in _ORTHO_VARIANTS and rows == cols and rows > 0:
         return "ortho"
+    if name in _READ_VARIANTS and 1 < rows < cols:
+        return "pad"
     if name == "eye_sign":
         return "sign"
     if name == "eye_pad":
@@ -258,8 +270,7 @@ def _write_bias(bias: torch.Tensor | None, weight: torch.Tensor) -> None:
         _place(bias, torch.zeros(bias.shape, dtype=torch.float64))
         return
     _, bound = _fan(weight)
-    if name == "hid_q":
-        bound *= 0.25
+    bound *= _BIAS_SCALE.get(name, 1.0)
     n = bias.numel()
     vals = (2.0 * _weyl(n, 1).reshape(-1) - 1.0) * bound
     _place(bias, vals.reshape(bias.shape))

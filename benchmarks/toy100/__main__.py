@@ -38,7 +38,7 @@ def _parser():
                      help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
     run.add_argument("--init", default=None,
-                     help="deterministic init (eye, eye_bias, eye_pad, hid, hid_bias); omit to keep PyTorch init")
+                     help="deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init")
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
                           help="require sustained fidelity and a 100k-sample holdout (default)")

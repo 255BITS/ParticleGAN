@@ -72,6 +72,31 @@ def test_square_hidden_is_orthogonal_and_rectangular_matches_kaiming_rms():
         uninstall()
 
 
+def test_readout_pad_is_only_the_wide_map():
+    install("tile_read")
+    try:
+        wide = nn.Linear(96, 2)
+        assert wide.weight[:, 2:].abs().sum() == 0
+        assert wide.weight[:, :2].abs().sum() > 0
+        critic = nn.Linear(96, 1)
+        assert int((critic.weight != 0).sum()) == 96
+        square = nn.Linear(8, 8)
+        scale = square.weight[0, 0].detach().double()
+        assert torch.allclose(square.weight.detach().double(), scale * torch.eye(8, dtype=torch.float64))
+    finally:
+        uninstall()
+    install("hid_read")
+    try:
+        hidden = nn.Linear(8, 8)
+        gain = torch.tensor(2.0 / 6.0, dtype=torch.float64).sqrt()
+        q = hidden.weight.detach().double() / gain
+        assert torch.allclose(q.T @ q, torch.eye(8, dtype=torch.float64), atol=1e-5)
+        wide = nn.Linear(96, 2)
+        assert wide.weight[:, 2:].abs().sum() == 0
+    finally:
+        uninstall()
+
+
 def test_rng_consumption_matches_the_default_init():
     uninstall()
     torch.manual_seed(3)

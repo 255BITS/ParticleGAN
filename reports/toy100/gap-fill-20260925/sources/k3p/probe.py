@@ -19,7 +19,7 @@ p.add_argument('--cpu-random', action='store_true')
 p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
 p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
 p.add_argument('--init', default=None,
-               help='deterministic init (eye, eye_bias, eye_pad, hid, hid_bias); omit to keep PyTorch init')
+               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
 p.add_argument('--output', type=Path, required=True)
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)

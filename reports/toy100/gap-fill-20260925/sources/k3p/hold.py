@@ -25,7 +25,7 @@ p.add_argument('--anneal-start', type=float, default=.6)
 p.add_argument('--steps', type=int, default=7500)
 p.add_argument('--post-window', type=int, default=300)
 p.add_argument('--init', default=None,
-               help='deterministic init (eye, eye_bias, eye_pad, hid, hid_bias); omit to keep PyTorch init')
+               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))

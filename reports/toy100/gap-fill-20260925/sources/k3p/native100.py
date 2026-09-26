@@ -11,7 +11,7 @@ p.add_argument('--repo', type=Path, required=True)
 p.add_argument('--task', required=True, choices=['grid100', 'rotated100', 'staggered100'])
 p.add_argument('--output', type=Path, required=True)
 p.add_argument('--init', default=None,
-               help='deterministic init (eye, eye_bias, eye_pad, hid, hid_bias); omit to keep PyTorch init')
+               help='deterministic init name from particlegan.det_init.VARIANTS; omit to keep PyTorch init')
 a = p.parse_args()
 sys.path[:0] = [str(a.repo.resolve()), str(a.candidate.resolve())]
 a.output.mkdir(parents=True, exist_ok=False)
