@@ -59,9 +59,71 @@ def test_trainer_lr_scales_network_horizon_and_prior():
     # At the network floor the blend weight is exactly zero; the prior is still annealing.
     assert trainer.penalty.diagnostics()["blend_weight"] == 0.0
     assert learning_rate_scales(17, recipe)[0] == recipe.network_lr_floor
-    # No cap means the full budget; no network floor means lr_floor.
-    same = _recipe(network_lr_horizon_cap=None, network_lr_floor=None)
+    # A full-budget fraction and no cap: G/D share the prior's schedule;
+    # no network floor means lr_floor.
+    same = _recipe(network_lr_horizon_cap=None, network_lr_horizon_fraction=1.0, network_lr_floor=None)
     assert all(a == b for a, b in (learning_rate_scales(s, same) for s in range(20)))
+
+
+def test_network_horizon_scales_with_the_budget():
+    # The default fraction keeps the qualified toy horizon exactly.
+    assert Recipe().total_steps == 7000 and Recipe().network_lr_horizon == 1600
+    assert get_recipe("mog").network_lr_horizon == 1600
+    assert Recipe().network_lr_horizon_cap is None
+    horizons = {steps: Recipe(total_steps=steps).network_lr_horizon for steps in (1, 100, 50_000, 200_000)}
+    assert horizons == {1: 1, 100: 23, 50_000: 11_429, 200_000: 45_714}
+    # A long budget holds full G/D LR far past the former fixed 1600 updates.
+    long = Recipe(total_steps=200_000)
+    assert learning_rate_scales(20_000, long)[0] == 1.0
+    assert learning_rate_scales(45_714, long)[0] == long.network_lr_floor
+    # An explicit cap fixes the horizon in updates, whatever the fraction, and
+    # never exceeds the budget.
+    capped = Recipe(total_steps=200_000, network_lr_horizon_cap=1600)
+    assert capped.network_lr_horizon == 1600
+    assert Recipe(total_steps=200_000, network_lr_horizon_cap=1600,
+                  network_lr_horizon_fraction=.5).network_lr_horizon == 1600
+    assert Recipe(total_steps=1000, network_lr_horizon_cap=1600).network_lr_horizon == 1000
+    assert [learning_rate_scales(s, capped)[0] for s in (1600, 5000)] == [.01, .01]
+    # Fraction 1.0 is the full budget.
+    assert Recipe(total_steps=200_000, network_lr_horizon_fraction=1.0).network_lr_horizon == 200_000
+    for bad in (0, 0.0, -.1, 1.5, float("nan"), True, "0.5"):
+        with pytest.raises(ValueError, match="network_lr_horizon_fraction"):
+            Recipe(network_lr_horizon_fraction=bad)
+
+
+def test_recipe_horizon_fields_round_trip():
+    import json
+    for recipe in (Recipe(), Recipe(total_steps=200_000), Recipe(network_lr_horizon_cap=1600),
+                   Recipe(network_lr_horizon_fraction=1.0)):
+        saved = json.loads(json.dumps(recipe.to_dict()))
+        assert Recipe(**saved) == recipe
+        assert Recipe(**saved).network_lr_horizon == recipe.network_lr_horizon
+
+
+def test_checkpoints_resume_across_equivalent_horizon_fields():
+    # Same budget, same resolved horizon: a cap-recorded checkpoint (as the
+    # former 1600 default wrote) resumes under the fractional default and back.
+    fraction = _recipe(network_lr_horizon_cap=None, network_lr_horizon_fraction=.8)
+    capped = _recipe(network_lr_horizon_cap=16)
+    assert fraction.network_lr_horizon == capped.network_lr_horizon == 16
+    source = _trainer(capped)
+    for real in _reals(3):
+        source.step(real)
+    target = _trainer(fraction)
+    target.load_state_dict(source.state_dict())
+    assert target.completed_steps == 3 and target.recipe == fraction
+    _trainer(capped).load_state_dict(target.state_dict())
+    # A different resolved horizon is a different schedule and is rejected.
+    with pytest.raises(ValueError, match="recipe"):
+        _trainer(_recipe(network_lr_horizon_cap=12)).load_state_dict(source.state_dict())
+    # A recipe saved before the fraction field existed: its None cap meant the
+    # full budget, which it still means on load.
+    legacy = source.state_dict()
+    legacy["recipe"] = {**legacy["recipe"], "network_lr_horizon_cap": None}
+    del legacy["recipe"]["network_lr_horizon_fraction"]
+    _trainer(_recipe(network_lr_horizon_cap=None, network_lr_horizon_fraction=1.0)).load_state_dict(legacy)
+    with pytest.raises(ValueError, match="recipe"):
+        _trainer(_recipe(network_lr_horizon_cap=None)).load_state_dict(legacy)
 
 
 def test_trainer_constant_lr_s_one_no_ema_forward():

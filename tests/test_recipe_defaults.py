@@ -21,10 +21,14 @@ def test_default_matches_every_recorded_winning_field():
     actual = json.loads(json.dumps(get_recipe().to_dict()))
     assert not {'reg_arm', 'loss_type', 'gan_mode', 'reg_method'} & set(actual)
     assert (K3P_CONFIG['loss_type'], K3P_CONFIG['gan_mode']) == ('logistic', 'rp')
-    shared = (set(actual) & set(K3P_CONFIG)) - {'name'}
+    # The frozen config fixed the G/D horizon as a 1600-update cap; the
+    # default now states it as a fraction of the budget that resolves to the
+    # same 1600 updates at the frozen 7000.
+    shared = (set(actual) & set(K3P_CONFIG)) - {'name', 'network_lr_horizon_cap'}
     assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
-    assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
+    assert {'network_lr_floor', 'total_steps', 'input_noise_std', 'output_noise_std',
             'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared
+    assert K3P_CONFIG['network_lr_horizon_cap'] == Recipe().network_lr_horizon == 1600
     assert actual['name'] == 'k3p'
     assert get_recipe() == Recipe()
 

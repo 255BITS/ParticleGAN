@@ -1,5 +1,31 @@
 # Changelog
 
+## Unreleased
+
+- **The G/D LR horizon scales with the training budget.** The new
+  `Recipe.network_lr_horizon_fraction` (default `1600/7000`) sets the
+  generator/critic horizon to `round(fraction × total_steps)` updates, and
+  `network_lr_horizon_cap` now defaults to `None`. At the qualified 7,000
+  updates the horizon is still exactly 1,600, so the toy results are
+  unchanged; at 200,000 it is 45,714 instead of 1,600, so long runs no longer
+  sit at the 1% floor (and finish K3P's R1-to-anchor handover) in their first
+  1% of training. `recipe.network_lr_horizon` reports the resolved value.
+  - Short budgets anneal sooner too: below 7,000 updates the horizon is now
+    under 1,600 (e.g. 46 at 200), where budgets up to 1,600 used to anneal
+    over the full run. The short qualified gates (`lib/yue2_particle_toy.py`,
+    `lib/safe_fast_landing.py`) pin `network_lr_horizon_cap=1600`, and
+    `benchmarks/legacy` keeps the recorded fixed horizon.
+  - An integer `network_lr_horizon_cap` still fixes the horizon in updates and
+    overrides the fraction. Pass `network_lr_horizon_cap=1600` to keep the
+    former fixed horizon at other budgets.
+  - **Changed meaning:** `network_lr_horizon_cap=None` used to mean the full
+    budget; it now means "use the fraction". Use
+    `network_lr_horizon_fraction=1.0` for the full budget.
+  - `GANTrainer` checkpoints compare the recipe by the horizon it resolves to,
+    so a checkpoint recorded with `network_lr_horizon_cap: 1600` at 7,000
+    updates resumes under the new default. Recipes saved before this field
+    load with fraction 1.0, so their `None` cap keeps meaning the full budget.
+
 ## 0.8.0 — 2026-09-25
 
 - **K3P is the default and only formulation.** The critic penalty blends R1 +

@@ -212,9 +212,9 @@ def train(
         reg_coeff=reg_coeff,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
-        # This example anneals G/D over the whole run (not the 1,600-update
-        # toy horizon); K3P's blend follows the critic LR either way.
-        network_lr_horizon_cap=None,
+        # This example anneals G/D over the whole run (not the default
+        # 1600/7000 of it); K3P's blend follows the critic LR either way.
+        network_lr_horizon_fraction=1.0,
     )
     prior = recipe.make_prior().to(device)
 

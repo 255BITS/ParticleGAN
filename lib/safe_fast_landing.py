@@ -246,7 +246,9 @@ def _edit_scale():
 
 
 def _recipe(steps):
-    return get_recipe(total_steps=steps, batch_size=64)
+    # Qualified with the fixed 1600-update G/D horizon, not the
+    # budget-relative default.
+    return get_recipe(total_steps=steps, batch_size=64, network_lr_horizon_cap=1600)
 
 
 def _gain_optimizer(recipe, beta):

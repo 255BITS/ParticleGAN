@@ -40,7 +40,8 @@ coefficient `k·c`.
 | `betas`, `ema_decay` | (0, .999), .995 | Adam; G/prior EMA |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | .00425, 1, 2 | base rates |
 | `lr_anneal_start`, `lr_floor` | .6, .05 | prior: hold 60%, cosine to 5% of the full budget |
-| `network_lr_horizon_cap`, `network_lr_floor` | 1600, .01 | G and D: same cosine over `min(total, cap)` updates, then hold at 1% |
+| `network_lr_horizon_fraction`, `network_lr_floor` | 1600/7000, .01 | G and D: same cosine over `round(fraction × total)` updates (1600 of the toy's 7000), then hold at 1% |
+| `network_lr_horizon_cap` | `None` | an integer fixes the G/D horizon at `min(total, cap)` updates instead |
 | `d_guard_ratio`, `d_guard_min_steps` | 5, 200 | clip a critic tensor whose grad RMS exceeds 5× its Adam RMS (0 disables) |
 | `latent_damping_max_rate` | .5 | A2 on the particle table (0 disables) |
 | `input_noise_std`, `input_noise_anneal_end` | .5, .1 | critic input noise, linear to 0 by 10% of training |
@@ -49,8 +50,12 @@ coefficient `k·c`.
 | `batch_size`, `z_dim`, `num_particles` | 2048, 2, 20000 | the qualified task shape |
 
 `learning_rate_scales(step, recipe)` returns the `(network, prior)` LR
-multipliers. `network_lr_horizon_cap=None` uses the full budget and
-`network_lr_floor=None` reuses `lr_floor`.
+multipliers; `recipe.network_lr_horizon` is the G/D horizon in updates. The
+horizon scales with the budget: 1600 updates at 7000, 11,429 at 50,000 and
+45,714 at 200,000, so K3P's R1-to-anchor handover (which follows the critic
+LR) also stays at the same point of training. `network_lr_horizon_fraction=1.0`
+uses the full budget, an integer `network_lr_horizon_cap` fixes the horizon
+in updates, and `network_lr_floor=None` reuses `lr_floor`.
 
 ## GANTrainer
 

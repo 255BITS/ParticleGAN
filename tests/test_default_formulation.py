@@ -52,7 +52,7 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
 def test_component_choices_share_the_winning_training_defaults(options):
     recipe = get_recipe(**options)
     assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (1., 1., 0., (0., .999))
-    assert (recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (.01, 1600)
+    assert (recipe.network_lr_floor, recipe.network_lr_horizon) == (.01, 1600)
     assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult) == (.00425, 1., 2.)
 
 

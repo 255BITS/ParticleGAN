@@ -122,7 +122,9 @@ def _edit_scale():
 
 def _game(params, critic, steps):
     """The recipe's optimizers, critic penalty and LR schedule for one toy arm."""
-    recipe = get_recipe(total_steps=steps, batch_size=64)
+    # The gate was qualified with the fixed 1600-update G/D horizon (the full
+    # budget of these short arms), not the budget-relative default.
+    recipe = get_recipe(total_steps=steps, batch_size=64, network_lr_horizon_cap=1600)
     # The toy "generator" is one or two scalar gains, not a network: its Adam
     # step size is sized so a sign can flip within the 200-update gate.
     opt = recipe.make_generator_optimizer(params, lr=SCALAR_GAIN_LR)

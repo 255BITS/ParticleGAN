@@ -45,12 +45,16 @@ class Recipe:
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
-    # K3P schedule: G/D follow their own cosine over min(total, horizon cap)
-    # down to network_lr_floor; the prior keeps the full-budget cosine above.
-    # network_lr_floor is also K3P's blend floor f (s == 0 at the floor).
-    # None means "same as lr_floor"; a None horizon cap means the full budget.
+    # K3P schedule: G/D follow their own cosine over the network horizon
+    # (see network_lr_horizon) down to network_lr_floor; the prior keeps the
+    # full-budget cosine above. network_lr_floor is also K3P's blend floor f
+    # (s == 0 at the floor); None means "same as lr_floor". The horizon is
+    # network_lr_horizon_fraction of total_steps (1600 of the toy's 7000
+    # updates; 1.0 is the full budget) unless an integer
+    # network_lr_horizon_cap fixes it in updates.
     network_lr_floor: float | None = 0.01
-    network_lr_horizon_cap: int | None = 1600
+    network_lr_horizon_cap: int | None = None
+    network_lr_horizon_fraction: float = 1600 / 7000
     reg_anchor_decay: float = 0.999
     # Ablation switches; see the class docstring.
     reg_anchor_weight: float = 1.0
@@ -84,6 +88,9 @@ class Recipe:
         if self.network_lr_horizon_cap is not None and (
                 type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap <= 0):
             raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        fraction = self.network_lr_horizon_fraction
+        if isinstance(fraction, bool) or not isinstance(fraction, (int, float)) or not 0 < fraction <= 1:
+            raise ValueError("network_lr_horizon_fraction must be in (0, 1]")
         if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps < 0:
             raise ValueError("d_guard_min_steps must be a nonnegative integer")
         floor = self.network_lr_floor
@@ -169,6 +176,12 @@ class Recipe:
 
     def to_dict(self):
         return asdict(self)
+
+    @property
+    def network_lr_horizon(self):
+        """Updates over which G/D anneal to ``network_lr_floor`` (then hold)."""
+        return network_lr_horizon(self.total_steps, self.network_lr_horizon_cap,
+                                  self.network_lr_horizon_fraction)
 
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
@@ -369,6 +382,18 @@ def get_recipe(name="gan", **overrides):
     return Recipe(**{**options, **overrides})
 
 
+def network_lr_horizon(total_steps, cap=None, fraction=1600 / 7000):
+    """G/D LR horizon in updates, never beyond ``total_steps``.
+
+    An integer ``cap`` fixes it; otherwise it is ``fraction`` of the budget,
+    rounded to the nearest update (at least one). The default fraction gives
+    exactly 1600 of 7000 updates.
+    """
+    if cap is not None:
+        return min(total_steps, cap)
+    return min(total_steps, max(1, round(fraction * total_steps)))
+
+
 def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):
     """Scale by completed updates: full LR for 60%, then cosine to the floor.
 
@@ -384,13 +409,12 @@ def learning_rate_scales(step, recipe):
     """Return ``(network, prior)`` LR multipliers after ``step`` completed updates.
 
     Generator and critic ("network") follow ``learning_rate_scale`` over
-    ``min(total_steps, network_lr_horizon_cap)`` down to ``network_lr_floor``
-    and then hold; the particle prior follows it over the full budget down to
+    ``recipe.network_lr_horizon`` updates down to ``network_lr_floor`` and
+    then hold; the particle prior follows it over the full budget down to
     ``lr_floor``. K3P's blend weight is driven by the resulting critic LR.
     """
     total = recipe.total_steps
-    horizon = min(total, recipe.network_lr_horizon_cap or total)
-    network = learning_rate_scale(step, horizon, recipe.lr_anneal_start, recipe.resolved_network_lr_floor)
+    network = learning_rate_scale(step, recipe.network_lr_horizon, recipe.lr_anneal_start, recipe.resolved_network_lr_floor)
     prior = learning_rate_scale(step, total, recipe.lr_anneal_start, recipe.lr_floor)
     return network, prior
 

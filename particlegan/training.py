@@ -6,7 +6,7 @@ import torch
 from torch import nn
 
 from .particle_prior import ParticlePrior
-from .recipes import Recipe, learning_rate_scales
+from .recipes import Recipe, learning_rate_scales, network_lr_horizon
 
 
 def input_noise_std(recipe, completed_steps):
@@ -299,7 +299,9 @@ class GANTrainer:
         expected = self.state_dict()
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
             raise ValueError("invalid GANTrainer checkpoint schema")
-        for key in ("recipe", "optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
+        if _schedule_view(state["recipe"]) != _schedule_view(expected["recipe"]):
+            raise ValueError("checkpoint recipe does not match trainer")
+        for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
         steps = state["completed_steps"]
@@ -353,7 +355,29 @@ class GANTrainer:
 # had), and fields added since (with their defaults).
 _REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
                           "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+# A recipe saved before network_lr_horizon_fraction had a None cap mean the
+# full budget, which the fraction 1.0 reproduces.
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
+                        "network_lr_horizon_fraction": 1.0}
+_HORIZON_FIELDS = ("network_lr_horizon_cap", "network_lr_horizon_fraction")
+
+
+def _schedule_view(recipe):
+    """Compare a saved recipe by the G/D horizon it resolves to.
+
+    A cap and a fraction that give the same horizon for the same budget run
+    the same schedule, so e.g. a checkpoint recorded with the former default
+    ``network_lr_horizon_cap=1600`` at 7000 updates resumes under the
+    current fractional default.
+    """
+    if not isinstance(recipe, dict):
+        return recipe
+    try:
+        horizon = network_lr_horizon(recipe["total_steps"], *(recipe[key] for key in _HORIZON_FIELDS))
+    except (KeyError, TypeError):
+        return recipe
+    return {**{key: value for key, value in recipe.items() if key not in _HORIZON_FIELDS},
+            "network_lr_horizon": horizon}
 
 
 def _upgrade_recipe_fields(recipe):

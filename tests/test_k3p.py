@@ -434,7 +434,8 @@ def _k3p_trainer():
     from particlegan import GANTrainer, get_recipe
     torch.manual_seed(0)
     recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
-                        total_steps=10, lr_anneal_start=0.1)
+                        total_steps=10, lr_anneal_start=0.1,
+                        network_lr_horizon_fraction=1.0)
     G = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 2)).double()
     D = nn.Sequential(nn.Linear(2, 8), nn.BatchNorm1d(8), nn.ReLU(), nn.Linear(8, 1)).double()
     return GANTrainer(recipe, G, D)

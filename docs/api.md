@@ -92,8 +92,10 @@ require a caller-owned loop.
 `get_recipe()` constructs **K3P** ([details](k3p.md)): Rp logistic, the K3P
 critic penalty (coefficient 1, κ 1, EMA-critic anchor .999), critic spike guard
 (ratio 5 after 200 steps), A2 latent-row damping, Adam (0,.999), G/D LR .00425
-and particle LR .0085. G/D rates hold for 60% of a 1,600-update horizon, then
-cosine to 1% (`network_lr_horizon_cap`, `network_lr_floor`); particle rates hold
+and particle LR .0085. G/D rates hold for 60% of a horizon of 1600/7000 of the budget (1,600 of the toy's
+7,000 updates), then cosine to 1% (`network_lr_horizon_fraction`,
+`network_lr_floor`; an integer `network_lr_horizon_cap` fixes the horizon in
+updates instead); particle rates hold
 for 60% of the budget, then cosine toward 5%. The critic sees annealed input
 noise and the generator output carries warmed-up noise (also in `sample`). There
 is no particle spread or L2 term. Live sampling is the default; EMA is explicit.
@@ -640,7 +642,8 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
 | `prior_reg`, `ema_decay` | `0`, `.995` |
 | `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
-| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule and K3P blend floor; `None` = full budget / `lr_floor`) |
+| `network_lr_horizon_fraction`, `network_lr_floor` | `1600/7000`, `.01` (G/D schedule over `round(fraction × total_steps)` updates and K3P blend floor; fraction `1.0` = full budget, floor `None` = `lr_floor`) |
+| `network_lr_horizon_cap` | `None` (an integer fixes the G/D horizon at `min(total_steps, cap)` updates, overriding the fraction) |
 | `reg_anchor_decay` | `.999` |
 | `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
 | `latent_damping_max_rate` | `.5` (0 disables) |

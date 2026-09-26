@@ -4,7 +4,9 @@
 longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
 the factories that honored them, built from the pinned copies in this
 package. With default switches it trains exactly like ``particlegan``'s
-recipe; archived GAN v3 / locked_shared / arm-study configurations resolve
+recipe, except that it keeps the recorded fixed G/D horizon (a
+1600-update cap; ``None`` = full budget) rather than the fractional
+default. Archived GAN v3 / locked_shared / arm-study configurations resolve
 through it so their receipts stay reproducible. Benchmarks only.
 """
 from copy import copy
@@ -31,7 +33,10 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
+          "network_lr_horizon_fraction": 1.0}
+# The receipts' fixed G/D horizon: a 1600-update cap, and None = full budget.
+_LEGACY_HORIZON = {"network_lr_horizon_cap": 1600, "network_lr_horizon_fraction": 1.0}
 
 
 @dataclass(frozen=True)
@@ -40,6 +45,8 @@ class LegacyRecipe(Recipe):
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
     reg_method: str = "autograd"
+    network_lr_horizon_cap: int | None = 1600
+    network_lr_horizon_fraction: float = 1.0
 
     def __post_init__(self):
         super().__post_init__()
@@ -76,7 +83,7 @@ def get_recipe(name="gan", **overrides):
     from particlegan import get_recipe as current
     base = current(name)
     values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
-    return LegacyRecipe(**{**values, **overrides})
+    return LegacyRecipe(**{**values, **_LEGACY_HORIZON, **overrides})
 
 
 def _first_output(output):

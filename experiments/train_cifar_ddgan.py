@@ -136,7 +136,7 @@ def training_recipe(cfg):
         reg_every=cfg.get('reg_every', 1),
         prior_reg=cfg['prior_reg'], ema_decay=cfg['ema'],
         lr_anneal_start=cfg['lr_anneal_start'], lr_floor=cfg['lr_floor'],
-        network_lr_floor=cfg['lr_floor'], network_lr_horizon_cap=None,
+        network_lr_floor=cfg['lr_floor'], network_lr_horizon_fraction=1.0,
     )
 
 
