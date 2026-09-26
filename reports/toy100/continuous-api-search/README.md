@@ -25,7 +25,7 @@ as time, not turned into a failure by imposing the old prehold deadline.
 | API-C5: local implicit game update, actual hard-copy critic reference | 560 | 185/185 | 270 | 194/194 | Declared .99 reference averaging was not executed; these scores belong to the accidental hard-copy version. A corrected successor must earn its own evidence. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
-| API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. |
+| API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -63,7 +63,14 @@ It also passes its own stationary run through 7500 and its uninterrupted
 arrival after 360, 420 and 320 updates, with no subsequent departures before the
 next change or the end of observation. The declared 9000 prefix independently
 records 537/537, 145/145 and 79/79 after arrival. Exact cross-process continuation,
-matched K3P and broader qualification remain pending. The [independent source audit](api-rp2-single-independent-audit.md)
+matched K3P and full22 remain incomplete. The first frozen broader task,
+`img_intensity2`, rejects this version: only observations 450 and 600 pass out
+of 24, with a final passing suffix of one instead of the required five. Final
+HQ .90625 does not erase the five preceding failures. The unchanged candidate
+and corrected frozen evaluator are verified by the
+[independent archived-source audit](api-rp2-image-completed-audit.md). Its
+[complete image evidence](broader-results.json) is retained; remaining21 tasks
+and the comparator are NOT_RUN after this measured failure. The [independent source audit](api-rp2-single-independent-audit.md)
 verifies public factory ownership and exact single-run parity with the diagnostic.
 
 ## Ongoing work
@@ -76,15 +83,20 @@ both generations. The data-drift lane now owns the shared checkpoint investigati
 all three lanes observed small cross-process discrepancies despite identical
 immediate restored state. The investigation has localized the first difference
 to higher-order critic gradient accumulation: autograd node priority changes
-between fresh and warm processes. A scoped serial-backward execution mode is
-being tested. Its arithmetic differs from these archived runs; it cannot inherit
-their quality scores, and exact continuation remains unpassed.
+between fresh and warm processes. A scoped serial-backward execution mode passes a fresh-process 100-update
+replay: all final state hashes and ten observations agree. The
+[independent audit](serial-backward-audit.md) confirms scope and context
+restoration, and records remaining provenance/documentation details. Its
+arithmetic differs from these archived runs; it cannot inherit their quality
+scores or supply the candidates' missing continuation checks.
 
 The [broader-task route audit](api-rp2-frozen22-route-map.md) found that historical
 runners silently select legacy K3P. Fourteen tasks can be adapted to current
 GANTrainer; eight require a component-controller integration. Unsupported routes
-remain NOT_RUN. The first frozen image task will be tested before that larger
+remain NOT_RUN. The first frozen image task was tested before that larger
 integration effort, with its original model, evaluation stream and quality gates.
+API-RP2 failed it; future candidates can reuse the audited evaluator with source
+receipts, but must earn their own scores.
 
 API-C5 passes its first single-change window, but a source/checkpoint audit found
 that its reference update runs while critic gradients are disabled. The reference

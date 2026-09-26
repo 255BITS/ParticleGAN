@@ -574,7 +574,7 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "API_RP2_30000_PASS_BROADER_AND_CHECKPOINT_OPEN",
+    "status": "API_RP2_REJECTED_IMAGE_STABILITY_CONSTANT_C6_RUNNING",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "UNRESOLVED_FILE_CONTINUATION_DISCREPANCY",
     "matched_k3p_owner": "reversible_precision",
@@ -593,6 +593,15 @@
         "269/269"
       ],
       "report": "reports/toy100/continuous-api-search/evidence/api-rp2-long/result.json"
+    },
+    "api_rp2_broader": {
+      "task": "img_intensity2",
+      "status": "FAIL",
+      "passing": 2,
+      "observations": 24,
+      "final_suffix": 1,
+      "required_suffix": 5,
+      "report": "reports/toy100/continuous-api-search/broader-results.json"
     }
   }
 }
