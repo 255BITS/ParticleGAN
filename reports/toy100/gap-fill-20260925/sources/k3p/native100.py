@@ -10,13 +10,29 @@ p.add_argument('--candidate', type=Path, required=True)
 p.add_argument('--repo', type=Path, required=True)
 p.add_argument('--task', required=True, choices=['grid100', 'rotated100', 'staggered100'])
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--backend', choices=['cpu', 'cuda'], default='cuda')
+p.add_argument('--init', default=None, help='deterministic structured init name; default keeps PyTorch init')
+p.add_argument('--seed-offset', type=int, default=0, help='added to every torch seed; 0 leaves seeds unchanged')
 a = p.parse_args()
 sys.path[:0] = [str(a.repo.resolve()), str(a.candidate.resolve())]
 a.output.mkdir(parents=True, exist_ok=False)
 import torch
-if not torch.cuda.is_available() or os.environ.get('CUBLAS_WORKSPACE_CONFIG') != ':4096:8':
-    raise RuntimeError('CUDA with CUBLAS_WORKSPACE_CONFIG=:4096:8 required')
-torch.cuda.set_device(0); torch.set_default_device('cuda:0'); torch.set_num_threads(1); torch.set_num_interop_threads(1)
+if a.seed_offset or a.init:
+    from particlegan.structured_init import NAMES, configure, install_seed_offset
+    if a.seed_offset:
+        install_seed_offset(a.seed_offset)
+    if a.init:
+        if a.init not in NAMES:
+            raise SystemExit(f'unknown --init {a.init!r}; expected one of: {", ".join(NAMES)}')
+        configure(a.init)
+if a.backend == 'cuda':
+    if not torch.cuda.is_available() or os.environ.get('CUBLAS_WORKSPACE_CONFIG') != ':4096:8':
+        raise RuntimeError('CUDA with CUBLAS_WORKSPACE_CONFIG=:4096:8 required')
+    torch.cuda.set_device(0)
+    torch.set_default_device('cuda:0')
+else:
+    torch.set_default_device('cpu')
+torch.set_num_threads(1); torch.set_num_interop_threads(1)
 torch.use_deterministic_algorithms(True); torch.backends.cudnn.benchmark = False; torch.backends.cudnn.deterministic = True
 torch.backends.cuda.matmul.allow_tf32 = False; torch.backends.cudnn.allow_tf32 = False
 import mechanism, response, latent
@@ -26,13 +42,16 @@ original_step = torch.optim.Adam.step
 
 
 def init(opt, *args, **kwargs):
+    if a.init:
+        from particlegan.structured_init import freeze
+        freeze()
     kwargs.setdefault('foreach', False); kwargs.setdefault('fused', False)
     original_init(opt, *args, **kwargs)
 
 
 def step(opt, *args, **kwargs):
     values = [v for g in opt.param_groups for v in g['params']]
-    assert all(v.device.type == 'cuda' for v in values) and all(v.grad is None or v.grad.device == v.device for v in values)
+    assert all(v.device.type == a.backend for v in values) and all(v.grad is None or v.grad.device == v.device for v in values)
     item = proof['optimizers'].setdefault(str(id(opt)), dict(calls=0, parameters=sum(v.numel() for v in values)))
     item['calls'] += 1; proof['adam_calls'] += 1
     for group in opt.param_groups:
@@ -58,14 +77,15 @@ started = time.perf_counter()
 record = dict(candidate=str(a.candidate), task=a.task, driver_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               candidate_hashes={n: hashlib.sha256((a.candidate / n).read_bytes()).hexdigest() for n in ('config.json', 'mechanism.py', 'response.py', 'latent.py')},
               environment={k: os.environ.get(k) for k in ('CUDA_VISIBLE_DEVICES', 'CUBLAS_WORKSPACE_CONFIG', 'OMP_NUM_THREADS')},
-              torch=torch.__version__, gpu=torch.cuda.get_device_name(0))
+              torch=torch.__version__, init=a.init, seed_offset=a.seed_offset, backend=a.backend,
+              gpu=(torch.cuda.get_device_name(0) if a.backend == 'cuda' else None))
 try:
     from benchmarks.toy100.train import train
     from benchmarks.toy100.config import resolve_problem_config
     from benchmarks.toy100.gate import evaluate_suite
     from benchmarks.toy100.accuracy_gate import evaluate_suite as accuracy_suite
     config = json.loads((a.candidate / 'config.json').read_text())
-    cfg = resolve_problem_config(config, a.task, device='cuda:0')
+    cfg = resolve_problem_config(config, a.task, device=('cuda:0' if a.backend == 'cuda' else 'cpu'))
     with patch.object(torch.optim.Adam, '__init__', init), patch.object(torch.optim.Adam, 'step', step):
         summary = train(cfg, a.output / 'native' / a.task)
     coverage = evaluate_suite(a.output / 'native', problem=a.task)
