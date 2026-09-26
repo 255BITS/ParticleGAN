@@ -67,7 +67,7 @@ python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamic
 
 Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `hq`, `passing_suffix`). Hold passes only when `status` is `PASS` and `hold_checks == 1200`. Stay passes only when shift's continued hold is `120/120` and `pass_all`. The shift terminal status is not the stay gate.
 
-`vector_unequal_mass` does not run. The probe always imports `mechanism.py`, which replaces `GradientPenalty.penalty` with `scaled_penalty`. That function does not accept `ema_critic` and reads `self.arm`. The current penalty has no `arm`, and `CriticPenalty` always passes `ema_critic`. A direct call raises `TypeError: scaled_penalty() got an unexpected keyword argument 'ema_critic'`. The same error hits the constant-LR baseline. Ring, hold, and stay use the legacy penalty and are not on this path.
+`scaled_penalty` now accepts `ema_critic`. The current K3P penalty has no `arm`, and `CriticPenalty` always passes `ema_critic`, so the probe used to raise `TypeError` before `vector_unequal_mass` took a step. Objects without `arm` delegate to that penalty with the keyword forwarded. Ring, hold, and stay use the legacy penalty and are unchanged by this.
 
 ## CPU sanity
 
@@ -103,6 +103,27 @@ Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset
 
 Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
 
+## CPU screen: `d_replay`
+
+64 jobs on this build, 4 at a time, same constant LR as the calibration above. Baseline ring, hold, and stay match that calibration (ring 0/8, hold 0/8, stay 0/8, best stay 53/120 at offset 606). Receipts: `d_replay` ring `mixes=1199`, `passthrough=1`, `held=5120` (40 updates × batch 128). Group LRs stayed `0.00425` and `0.0085`.
+
+Handoff bar: at least one hold PASS or one stay 120/120, with no fewer ring passes than baseline. **Missed.** Ring passes 0/8 on both. Hold `hold_checks=0`, `NOT_CONVERGED`, on all 16 runs. Stay never reached 120/120. Best partial stay is `d_replay` 76/120 at offset 0 (baseline best 53/120 at offset 606).
+
+| offset | ring baseline | ring d_replay | hold both | stay baseline | stay d_replay | unequal baseline | unequal d_replay |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 6 / 0.360 / 0 | 0, NOT_CONVERGED | 33/120 | 76/120 | FAIL | FAIL |
+| 101 | 7 / 0.659 / 0 | 8 / 0.967 / 2 | 0, NOT_CONVERGED | 0/120 | 64/120 | PASS | FAIL |
+| 202 | 7 / 0.985 / 0 | 2 / 0.231 / 0 | 0, NOT_CONVERGED | 0/120 | 0/120 | FAIL | FAIL |
+| 303 | 6 / 0.670 / 0 | 0 / 0.000 / 0 | 0, NOT_CONVERGED | 9/120 | 0/120 | FAIL | FAIL (min mass 0) |
+| 404 | 6 / 0.400 / 0 | 3 / 0.208 / 0 | 0, NOT_CONVERGED | 17/120 | 38/120 | FAIL | FAIL |
+| 505 | 4 / 0.263 / 0 | 1 / 0.000 / 0 | 0, NOT_CONVERGED | 0/120 | 0/120 | PASS | FAIL (min mass 0) |
+| 606 | 7 / 0.694 / 0 | 2 / 0.141 / 0 | 0, NOT_CONVERGED | 53/120 | 0/120 | FAIL | FAIL |
+| 707 | 0 / 0.000 / 0 | 6 / 0.550 / 0 | 0, NOT_CONVERGED | 0/120 | 18/120 | FAIL | FAIL (min mass 0) |
+
+Ring cells are modes / hq / passing suffix. Every ring row is a probe FAIL. Unequal baseline passes 2/8 (offsets 101 and 505) once the penalty crash is gone. `d_replay` unequal is 0/8, and the rare component is empty (`min_mass_ratio` 0) on three offsets.
+
+The FIFO does what it was built to do: for 40 updates D's fake term still includes samples from where the generator just was. Particles ascend `D`. A critic that keeps labeling that trail as fake drives the score down behind them, so the neighbor that already scores higher is still the ascent. The same pressure sits on the early collapsed cloud, which is the trail particles have to leave to reach the ring, and covered modes fell on 6 of 8 offsets. The best stay fraction moved from 53/120 to 76/120 and still ended. Do not send `d_replay` to the A6000 on this bar.
+
 ## Recommendation
 
-Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
+Do not promote any of the three, and do not promote `d_replay` (see the screen above). The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking of those three, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `scaled_penalty` now accepts `ema_critic`, so unequal runs; on this build the constant-LR baseline passes it on 2/8 offsets and `d_replay` on 0/8.
