@@ -249,16 +249,23 @@ selected base; R2 is a lead, explicitly not promoted.** What it still lacks:
 suite (4/4 sensitive screens PASS, rest NOT_RUN), delayed/repeated-change
 stress, and cross-seed + nudge confirmation.
 
-| Exact formulation | Hold / extension | Target-shift recovery | Sensitive toys | Frozen control |
-|---|---:|---:|---:|---|
-| **R2: K3P + moment-surprise release (LEAD)** | **114/120** (6 pre-shift checks short) | **72/81, delay 490** | **4/4 PASS** | **0/81 (moves)** |
-| K3P (selected, reference) | 1200/1200 + 300/300 | FAIL 28/81 | 22/22 | — |
-| B2 unguarded re-seed | 33/120 FAIL | 40/81 | NOT_RUN | — |
-| B3 guarded re-seed | 120/120 + own-hold PASS | 0/81 | 4/4 PASS | 0/81 |
-| G1 G-boost (active) | 120/120 | 45/120 motion, 8-mode final | PENDING | 0/120 |
+| # | Exact formulation | Hold / extension | Target-shift recovery | Schedule-free release? | Standing |
+|---|---|---:|---:|---|---|
+| 1 | **R2: K3P + moment-surprise release (LEAD, winning)** | **114/120** (6 pre-shift checks short) | **72/81, delay 490** | **Yes — surprise-driven, no clock/budget reads** | **Top qualified score; 4/4 screens PASS, frozen 0/81 (moves)** |
+| DQ | PM1 / PM3 | Both pass | 79/81 each | No — scheduled noise remains | DISQUALIFIED: schedule-dependent |
+| DQ | PB2 / DI2 / P3 | All pass | 77/81 each | No — scheduled components remain | DISQUALIFIED: schedule-dependent |
+| — | B2 unguarded re-seed | 33/120 FAIL | 40/81 | n/a (hold broken) | Out: speed without stability |
+| ref | K3P (selected, reference) | 1200/1200 + 300/300 | FAIL 28/81 | No — still depends on schedules | Selected base; 22/22 toys |
+| — | B3 guarded re-seed | 120/120 + own-hold PASS | 0/81 | Release yes; LR/noise retained | Holds but does not move |
+| — | G1 G-boost (active) | 120/120 | 45/120 motion, 8-mode final | Boost gated on novelty; LR/noise retained | Active follow-up |
 
 Recovery fractions count passing checks in the fixed 81-check deadline window;
 all 81 are required. R2's final live state re-acquires all 8 modes at HQ 0.997.
+Schedule-dependent releases are disqualified: the task is horizon-independent
+learning, so PM/PB-family scores cannot win regardless of count. Among qualified
+contenders R2 wins outright — the only candidate pairing a schedule-free release
+with measured hold and recovery. (R2 retains K3P's LR/noise level schedules as a
+labeled ablation; its release mechanism itself reads no clock, budget, or shift.)
 
 **The mechanism, mathematically.** The critic penalty keeps K3P's three terms —
 early R1 acquisition (A), one-sided L2 caps (B), EMA-critic gradient anchor P,
