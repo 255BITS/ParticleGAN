@@ -1,8 +1,9 @@
 # Public-default baseline handoff
 
-Preparation is complete; **qualification training is NOT_RUN**. The user asked
-to compact before establishing the baseline. No search agents or GPU experiment
-jobs were launched by this migration. Do not resume the historical launcher.
+The fresh package 0.8.0 ring baseline has been run at the declared seed.
+See [results and recommendations](RESULTS.md) and the lossless logs, declarations
+and source snapshots under [evidence](evidence/). The hold and target-shift
+protocols are separate measurements; full 22-task qualification remains NOT_RUN.
 
 Worktree: `/home/martyn/dev/ParticleGAN-continuous-search`.
 Branch: `codex/k3p-continuous-search` (PR #155).
@@ -38,7 +39,7 @@ the historical driver's fixed 1200-step noise horizon. Old initialization fixtur
 are not loaded into incompatible shapes. No old 22/22, hold or recovery score is
 inherited. Full transfer/native qualification is still separate and NOT_RUN.
 
-## After compaction
+## Reproduction
 
 From the worktree root, prepare declarations without training:
 
@@ -47,11 +48,11 @@ python -m reports.toy100.public_default_baseline --protocol hold --prepare-only 
 python -m reports.toy100.public_default_baseline --protocol shift --prepare-only --output /tmp/k3p-public-shift-plan
 ```
 
-When baseline work resumes, run each protocol once into a fresh directory:
+The measured protocols used these commands (use fresh output directories for any authorized rerun):
 
 ```sh
 python -u -m reports.toy100.public_default_baseline --protocol hold --device cuda:0 --output runs/public-default-baseline/hold
-python -u -m reports.toy100.public_default_baseline --protocol shift --device cuda:0 --output runs/public-default-baseline/shift
+python -u -m reports.toy100.public_default_baseline --protocol shift --device cuda:1 --output runs/public-default-baseline/shift
 ```
 
 Each run writes `declaration.json` with complete parameters and source hashes,
@@ -76,9 +77,9 @@ optimizer/anchor/history/stream state; it takes no further updates and must pass
 zero deadline checks. `shift-state.pt` also saves the real-data stream and target.
 The new control is forked in-process, not borrowed from an older run.
 
-Live metrics determine verdicts; EMA is diagnostic. First populate the new row
-of [the leaderboard](../continuous-practical-leaderboard.md) with these results,
-including failures, minimum HQ and runtime. Then decide which mechanism to alter.
+Live metrics determine verdicts; EMA is diagnostic.
+[The leaderboard](../continuous-practical-leaderboard.md) records both outcomes,
+including failures, minimum HQ and runtime.
 Delayed/repeated shifts and the full 22-task suite are not implemented as automatic
 follow-ups by this entrypoint and must not be claimed from these two ring runs.
 

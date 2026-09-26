@@ -1,15 +1,13 @@
 {
-  "status": "baseline_pending_after_compaction",
+  "status": "baseline_complete",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 5,
   "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T020611Z",
   "workflow": [
-    "complete package API migration",
-    "compact",
-    "measure fresh public-default baseline",
-    "compare mechanisms at the declared seed",
-    "qualify before promotion"
+    "baseline complete: hold PASS, shift FAIL",
+    "review mechanism comparison recommendations",
+    "qualify changes before promotion"
   ],
   "unverified_candidates": {
     "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
@@ -66,7 +64,7 @@
     "verified_live_counts": {},
     "verified_gpu_reservations": {},
     "new_launches_allowed": false,
-    "pause_reason": "Baseline training deferred until after compaction; historical autonomous search remains stopped."
+    "pause_reason": "User authorized the two public-default baseline protocols; historical autonomous search remains stopped."
   },
   "completed_rounds": [
     {
@@ -261,16 +259,24 @@
   },
   "historical_current_lead": "r2_moment_surprise",
   "current_lead": null,
-  "active_phase": "public_default_baseline",
+  "active_phase": "public_default_baseline_measured",
   "baseline": {
-    "status": "NOT_RUN",
+    "status": "MEASURED",
     "master_reference": "0ff9a7afe5dcb828239369446cfe71971bce687b",
     "entrypoint": "reports.toy100.public_default_baseline",
     "parameters": "reports/toy100/public-default-baseline/parameters.json",
     "handoff": "reports/toy100/public-default-baseline/README.md",
     "historical_scores_inherited": false,
     "seed_sweeps": false,
-    "training_deferred_until_after_compaction": true
+    "training_deferred_until_after_compaction": false,
+    "source_commit": "e21e7728",
+    "run_root": "runs/public-default-baseline",
+    "hold_status": "PASS",
+    "shift_status": "FAIL",
+    "recovery_passing_checks": 0,
+    "recovery_expected_checks": 81,
+    "report": "reports/toy100/public-default-baseline/RESULTS.md",
+    "full_toy_suite_status": "NOT_RUN"
   },
   "historical_stop_condition": {
     "own_hold_checks": 1200,
@@ -308,9 +314,9 @@
       "hold",
       "shift"
     ],
-    "qualification_status": "NOT_RUN",
+    "qualification_status": "BASELINE_COMPLETE_HOLD_PASS_SHIFT_FAIL",
     "no_seed_sweeps": true,
     "no_automatic_search": true,
-    "next_action": "Establish the current package baseline after compaction"
+    "next_action": "Review measured baseline; recommended first comparison is anchor weight zero at the same declared seed. No automatic launch."
   }
 }

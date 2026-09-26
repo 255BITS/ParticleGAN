@@ -1,7 +1,7 @@
 {
   "master_commit": "0ff9a7afe5dcb828239369446cfe71971bce687b",
   "package_version": "0.8.0",
-  "status": "NOT_RUN",
+  "status": "MEASURED",
   "default_recipe": {
     "name": "k3p",
     "model": "gan",
@@ -69,5 +69,11 @@
     }
   },
   "seed": 0,
-  "historical_scores_inherited": false
+  "historical_scores_inherited": false,
+  "results": "RESULTS.md",
+  "protocol_status": {
+    "hold": "PASS",
+    "shift": "FAIL"
+  },
+  "toy_suite_status": "NOT_RUN"
 }

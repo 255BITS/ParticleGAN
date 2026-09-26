@@ -1,7 +1,7 @@
 # Continuous experiment: current package default
 
-Current phase: prepare the fresh baseline, then run it after the requested
-compaction. Do not launch search agents, candidate training or seed sweeps.
+Current phase: fresh package 0.8.0 baseline measured: hold PASS, shift FAIL 0/81.
+See [results and recommendations](../public-default-baseline/RESULTS.md). Do not launch search agents, candidate training or seed sweeps.
 The historical launch STOP markers stay in force.
 
 Start from `particlegan.get_recipe()` and `GANTrainer` on master `0ff9a7af`
@@ -15,7 +15,7 @@ Do not monkey-patch Adam or install the historical mechanism/latent/response
 hooks around package optimizers: the recipe optimizers already perform that work.
 Use `Recipe(**saved_fields)` when restoring a resolved recipe.
 
-The next baseline is a new measurement, not an inherited 22/22 or hold PASS.
+This baseline is a new measurement, not an inherited 22/22 or hold PASS.
 Use current default batch size, particle count, latent dimension, rates, penalties,
 anchor, guard and noise settings. Preserve the ring target, host MLP architecture
 and evaluation thresholds. The declared run budget is passed as `total_steps`;

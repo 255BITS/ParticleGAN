@@ -1,14 +1,22 @@
 # 22-toy results and continuous stability
 
-## Current package baseline — pending measurement
+## Current package baseline — measured
 
 Master `0ff9a7af` (package 0.8.0) is merged into this experiment. New work starts
 from `get_recipe()` / `GANTrainer`, using the current package defaults.
-[Parameters and post-compaction handoff](public-default-baseline/README.md).
+[Results, evidence and recommendations](public-default-baseline/RESULTS.md).
 
 | Formulation | Hold + extension | Recovery | Toy suite | Status |
 |---|---|---|---|---|
-| Public default K3P, package 0.8.0 | NOT_RUN | NOT_RUN | NOT_RUN | Baseline deferred until after compaction |
+| Public default K3P, package 0.8.0 | **PASS 1200/1200 + 300/300** | **FAIL 0/81**; prehold 120/120 | NOT_RUN | Fresh package baseline measured |
+
+Hold minimum HQ: **98.83%**, extension **98.95%**; all 6,300 dense checks
+through update 7500 passed, final HQ **99.54%**. Shift recovery retained eight
+modes throughout the deadline but HQ rose only from **42.26% to 89.09%**, below
+the 90% threshold; matched frozen control HQ stayed zero. Runtime: hold **147.18s**,
+shift **63.12s** on shared A6000 GPUs. One declared seed; no tuning or seed repeats.
+Recommended first comparison: remove the anchor term with `reg_anchor_weight=0`,
+keeping the remaining parameters fixed. No follow-up variant has been launched.
 
 All sections below are historical measurements on their recorded drivers and
 settings. They are not scores for this new package baseline. R2 remains an
