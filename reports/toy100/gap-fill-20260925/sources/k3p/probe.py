@@ -214,6 +214,11 @@ try:
     jobs, profile = load_declaration()
     job = next(j for j in jobs if j['spec']['name'] == a.task)
     spec, card, _ = declared_spec(job, profile, recipe)
+    # Optional sample-splice diagnosis. Unset, this is a no-op.
+    splice_hook = os.environ.get("K3P_SPLICE_HOOK")
+    if splice_hook:
+        import importlib
+        importlib.import_module(splice_hook).install()
     with audit, patch.object(torch.optim.Adam, '__init__', init), patch.object(torch.optim.Adam, 'step', step):
         if spec['runner'] == 'vector':
             result, _ = run_vector(spec, card, recipe, noise, model_policy=declared_model_policy(config))
