@@ -1,5 +1,7 @@
 .venv/
 /artifacts/
+results/det-init-f/runs/
+results/det-init-f/logs/
 results/runs/
 results/runs_audit/
 __pycache__/
