@@ -105,6 +105,31 @@ Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset
 
 Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
 
+## Lookahead-minmax CPU screen
+
+Same build, same constant LR, 64 jobs, 4 at a time. Baseline ring modes and hq match the table above, including offset 0 (8 modes, hq 0.878) and the best stay 53/120 at offset 606. `lookahead_minmax` receipt on a 1200-update ring: `fast_steps=2400` (D and G), `syncs=240`, `players=2`, so the slow step fired once every five paired updates. Group LRs stayed `0.00425` and `[0.00425, 0.0085]`.
+
+Handoff bar: at least one hold PASS or one stay 120/120, with no fewer ring passes than baseline. **Missed.** Ring passes 0/8 on both. Hold 0/8 on both (`NOT_CONVERGED`, `hold_checks` 0). Stay never 120/120. Best partial stay is lookahead 79/120 at offset 303 (minimum modes in that window 3, passing suffix 9). Longest hold settling streak was 105 checks at offset 404, short of the 200-check confirmation.
+
+| offset | baseline ring | lookahead ring | baseline hold | lookahead hold | baseline stay | lookahead stay | baseline unequal | lookahead unequal |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 1 / 0.003 / 0 | 0 | 0 | 33/120 | 0/120 | FAIL suffix 2 | FAIL suffix 0 |
+| 101 | 7 / 0.659 / 0 | 8 / 1.000 / 4 | 0 | 0 | 0/120 | 37/120 | PASS suffix 5 | FAIL suffix 0 |
+| 202 | 7 / 0.985 / 0 | 8 / 0.970 / 1 | 0 | 0 | 0/120 | 67/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 303 | 6 / 0.670 / 0 | 7 / 0.831 / 0 | 0 | 0 | 9/120 | 79/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 404 | 6 / 0.400 / 0 | 6 / 0.560 / 0 | 0 | 0 | 17/120 | 0/120 | FAIL suffix 3 | FAIL suffix 0 |
+| 505 | 4 / 0.263 / 0 | 8 / 0.997 / 4 | 0 | 0 | 0/120 | 14/120 | PASS suffix 10 | FAIL suffix 0 |
+| 606 | 7 / 0.694 / 0 | 8 / 0.736 / 0 | 0 | 0 | 53/120 | 30/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 707 | 0 / 0.000 / 0 | 8 / 0.788 / 0 | 0 | 0 | 0/120 | 22/120 | FAIL suffix 0 | FAIL suffix 0 |
+
+Ring cells are modes / hq / passing suffix. A ring or unequal PASS needs the probe verdict, which here needs a passing suffix of at least 5. Hold cells are `hold_checks` (1200 would be a pass). Unequal now runs: baseline 2/8 PASS, lookahead 0/8.
+
+The slow step acquires 8 modes on five offsets where the baseline often does not, and the best stay fraction rises from 53/120 to 79/120. It does not keep them. `alpha=0.5` every five steps leaves half of each fast Adam move in the weights, and between syncs the step is still the full constant LR with `β2=0.999`. That is a milder damper than the anneal, which cuts the network LR to 1% and then runs the stay window at that floor. The rotation that empties a mode is still there at the pre-anneal step size, so the confirmation streak dies (best ring suffix 4, best hold streak 105) before a 1200-check hold can start.
+
+Do not send this to the A6000. No second `(k, alpha)` was run.
+
+Flag-off and determinism, eight paired Adam steps on D, G, and the particles, SHA-256 of the three parameter tensors: plain Adam and `K3P_DYNAMICS` unset both `908a0708c88d8ce340da50043f582e9af55f4df3fbc576bc82e1a4870a0e514a`. Two `lookahead_minmax` runs both `5640e955ca9424daa2010f81977eb2ca4f721916dcafff4b7a7acdf13ede3e8e`.
+
 ## Recommendation
 
 Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
