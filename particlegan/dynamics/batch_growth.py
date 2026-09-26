@@ -35,6 +35,12 @@ anneal starts.
 Network noise then matches the network anneal. Prior noise falls at least
 as far as the prior anneal (100× versus 20× at the floor). With the flag
 unset this function returns the host batch and does not touch the RNG.
+
+The unequal critic's distance feature is a dense kernel. At the cap, keeping
+that kernel for both the real and the fake backward does not fit. ``install``
+recomputes it on the way back for batches above 4,096. The values and the
+gradients match the dense kernel bit for bit; the host batch and eval stay
+on the dense path.
 """
 from __future__ import annotations
 
@@ -69,11 +75,43 @@ _INSTALLED = False
 _MILESTONES = (0, 720, 721, 900, 1199, 1200, 2400, 3600)
 
 
+# The unequal critic's distance features are a dense [N, N, scales] kernel.
+# Real and fake (and the penalty interpolation) each keep that kernel for
+# backward. At the Smith cap, N = 12,800, two of those graphs are larger
+# than this screen. Recomputing the kernel during backward is the same
+# function: features and gradients match the dense path bit for bit, and
+# batches at or below the eval size (4,096) stay on that path.
+_RECOMPUTE_ABOVE = 4096
+_PAIRWISE = None
+
+
+def _install_pairwise_recompute() -> None:
+    global _PAIRWISE
+    if _PAIRWISE is not None:
+        return
+    import torch
+    from torch.utils.checkpoint import checkpoint
+
+    from particlegan.discriminators import BatchDistanceDiscriminator
+
+    original = BatchDistanceDiscriminator.pairwise_features
+    _PAIRWISE = original
+
+    def pairwise_features(self, x):
+        if x.shape[0] <= _RECOMPUTE_ABOVE or not torch.is_grad_enabled():
+            return original(self, x)
+        bound = original.__get__(self, type(self))
+        return checkpoint(lambda batch: bound(batch), x, use_reentrant=False)
+
+    BatchDistanceDiscriminator.pairwise_features = pairwise_features
+
+
 def install() -> None:
     global _INSTALLED
     if _INSTALLED:
         return
     _INSTALLED = True
+    _install_pairwise_recompute()
     atexit.register(_emit)
     print(json.dumps({
         "event": "dynamics",

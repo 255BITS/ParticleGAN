@@ -196,6 +196,56 @@ def test_batch_growth_is_deterministic_once_the_batch_grows():
     assert _weight_hash(725, None) != grown
 
 
+def test_batch_growth_recomputes_the_large_pairwise_kernel_bit_exactly():
+    from particlegan.discriminators import BatchDistanceDiscriminator
+    from particlegan.dynamics import batch_growth
+
+    original = BatchDistanceDiscriminator.pairwise_features
+    saved = (batch_growth._PAIRWISE, batch_growth._RECOMPUTE_ABOVE)
+    batch_growth._PAIRWISE = None
+    batch_growth._RECOMPUTE_ABOVE = 32
+    try:
+        batch_growth._install_pairwise_recompute()
+
+        def score(n):
+            torch.manual_seed(0)
+            critic = BatchDistanceDiscriminator()
+            batch = torch.randn(n, 2, requires_grad=True)
+            value = critic(batch)
+            value.sum().backward()
+            return (
+                value.detach().clone(),
+                batch.grad.detach().clone(),
+                [p.grad.detach().clone() for p in critic.parameters()],
+            )
+
+        large = score(48)
+        small = score(16)
+    finally:
+        BatchDistanceDiscriminator.pairwise_features = original
+        batch_growth._PAIRWISE, batch_growth._RECOMPUTE_ABOVE = saved
+
+    BatchDistanceDiscriminator.pairwise_features = original
+
+    def reference(n):
+        torch.manual_seed(0)
+        critic = BatchDistanceDiscriminator()
+        batch = torch.randn(n, 2, requires_grad=True)
+        value = critic(batch)
+        value.sum().backward()
+        return (
+            value.detach(),
+            batch.grad.detach(),
+            [p.grad.detach() for p in critic.parameters()],
+        )
+
+    for got, n in ((large, 48), (small, 16)):
+        ref = reference(n)
+        assert torch.equal(got[0], ref[0])
+        assert torch.equal(got[1], ref[1])
+        assert all(torch.equal(a, b) for a, b in zip(got[2], ref[2]))
+
+
 def test_scaled_penalty_accepts_ema_critic():
     import importlib.util
 
