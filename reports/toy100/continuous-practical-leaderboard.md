@@ -238,3 +238,64 @@ reference stays 16/22. [Measured follow-ups](formulation-round-20260924/FOLLOWUP
 include two formulations that pass both blockers but fail trajectory; neither is
 promoted. R1/R2 history is a reason to avoid unchanged repeats, not to reject a
 candidate that passes its measured gates.
+
+## Current lead (not promoted): R2 moment-surprise — September 26, 2026
+
+**R2 is the top-scoring challenger of the Muse continuous-learning search
+(OpenCode engine, `nano-gpt/meta/muse-spark-1.3-contributor`, 5 batches,
+21 measured candidates, all on the frozen K3P protocol). K3P remains the
+selected base; R2 is a lead, explicitly not promoted.** What it still lacks:
+6 pre-shift hold checks (114/120), 9 deadline checks (72/81), the full 22-toy
+suite (4/4 sensitive screens PASS, rest NOT_RUN), delayed/repeated-change
+stress, and cross-seed + nudge confirmation.
+
+| Exact formulation | Hold / extension | Target-shift recovery | Sensitive toys | Frozen control |
+|---|---:|---:|---:|---|
+| **R2: K3P + moment-surprise release (LEAD)** | **114/120** (6 pre-shift checks short) | **72/81, delay 490** | **4/4 PASS** | **0/81 (moves)** |
+| K3P (selected, reference) | 1200/1200 + 300/300 | FAIL 28/81 | 22/22 | — |
+| B2 unguarded re-seed | 33/120 FAIL | 40/81 | NOT_RUN | — |
+| B3 guarded re-seed | 120/120 + own-hold PASS | 0/81 | 4/4 PASS | 0/81 |
+| G1 G-boost (active) | 120/120 | 45/120 motion, 8-mode final | PENDING | 0/120 |
+
+Recovery fractions count passing checks in the fixed 81-check deadline window;
+all 81 are required. R2's final live state re-acquires all 8 modes at HQ 0.997.
+
+**The mechanism, mathematically.** The critic penalty keeps K3P's three terms —
+early R1 acquisition (A), one-sided L2 caps (B), EMA-critic gradient anchor P,
+`decay 0.999` — blended as `1/2·s·A + 1/2·(1−s)·(B + W·P)` with `s = 0.5` fixed
+forever (no LR clock). The only moving part is W, driven by Adam
+second-moment surprise:
+
+```
+surprise = RMS(today's critic grad) / sqrt(v-hat)   # v-hat: Adam's own memory
+ratio    = median(last 24 surprises) / post-warmup baseline
+W = 1 (memory ON) while calm; ratio > 3.0 -> W = 0 (release, relearn);
+W = 0 while ratio < 1.75 -> back to 1 (re-anchor, hold)
+```
+
+Settled hold: gradients match their history, surprise ~ 1, W = 1. Post-shift:
+stale second moments underestimate new gradients, surprise spikes and stays
+spiked while relearning, W stays 0 (measured sustained from step 2275, no
+flicker). The EMA updates only while W = 1 (1469 updates) and skips while
+W = 0 (1332 skips), plus a guarded re-seed to today's critic after 60 straight
+W = 0 calls (17 reseeds). Every prior signal family failed one side of this:
+prox/median, coherence, b/a novelty and deadband ratios never fire (0/3600
+calls); unguarded reseeding fires mid-hold and breaks it (33/120). Surprise
+with hysteresis is the first signal silent in hold and sustained in transient.
+
+**Evidence.** Mechanism `59483b5e57c1bbbcef171f6261c62bf620bf943f3a5ab6d05ab543e91c0bbb4d`
+(config/latent/response byte-identical to pinned K3P `a1475108/197df635/7e71d60a`),
+12 measured gates, live run
+`gan-attempts/formulations-20260925T222617Z/b3_release2/20260925T222617Z-4046392`
+(`cands/r2/`, `out/r2-shift/`, `tests.jsonl`, frozen twin `out/r2-shift-frozen/`).
+Replay: `hold.py`/`shift.py`/`shift_frozen.py`/`probe.py` from `cands/r2/` against
+the frozen CUDA repo with the `cb5ddaeb` fixture at floors `.01/.05`.
+
+**Seed-fragility context (measured, same protocol).** The 22/22 base is a
+single-seed artifact: across declared host seeds, ring/hold/stay pass ~2/8,
+and a 1e-6 init nudge at the repo seed gives NOT_CONVERGED 0/1200 against the
+repo-seed PASS 1200/1200. R2's scores above are repo-seed measurements. Per
+user direction, failing gates are now retried at declared seeds {1,2,3} with
+per-seed fixtures before any drop verdict, and nudge-hold is a first-class
+gate; fragile is not broken, robust wins. Active follow-ups: R2 settling-window
+fix (round 5) and novelty-gated G-boost (round 4, first motion with hold intact).

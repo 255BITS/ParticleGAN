@@ -2,8 +2,8 @@
   "status": "paused_user_requested",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
-  "active_round": 3,
-  "active_batch": null,
+  "active_round": 5,
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T020611Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -52,7 +52,8 @@
     "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion.",
     "ep1_excursion_phase": "Own hold1200+300, stationary5/5, prehold120/120 PASS; recovery16/81 FAIL. Scheduled noise remains. Not promoted.",
     "pd1_projected_discrepancy": "Recovered unledgered results: hold NOT_CONVERGED, prehold33/120, recovery0/81 FAIL. Not promoted.",
-    "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop."
+    "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop.",
+    "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md."
   },
   "previous_round": {
     "round": 2,
@@ -286,5 +287,6 @@
       "anchor_force_balance"
     ],
     "final_attempt_archive": "reports/toy100/continuous-round-3/stop-inventory/manifest.json"
-  }
+  },
+  "current_lead": "r2_moment_surprise"
 }
