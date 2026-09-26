@@ -55,22 +55,15 @@ the cause. Three fixes, in increasing order of principle:
    equilibrium — 5% floor worked, 0% and 2% failed), and annealing from step
    0 **starves fast early progress** — keep full LR through the
    coverage/sharpening phase, then anneal.
-3. **R1 + R2 zero-centered gradient penalties** (the R3GAN recipe: RpGAN loss
-   + R1 on reals + R2 on fakes). This damps the oscillation *in the dynamics*
-   rather than averaging it away, and comes with a local convergence proof.
-   In our runs it was also the enabler for a high-resolution D (see §3).
+3. **A sample-point critic penalty** (`recipe.make_critic_penalty`).
+   Penalizing D's input gradient at real and fake samples damps the
+   oscillation *in the dynamics* rather than averaging it away (the R3GAN line
+   of work gives the local convergence argument). In our runs it was also the
+   enabler for a high-resolution D (see §3).
 
-These compose: our final recipe uses all three. Note that R1/R2 alone (with a
+These compose: the shipped recipe uses all three. A penalty alone (with a
 standard low-capacity D) did **not** converge in this setting — theory
 guarantees local convergence, not fast global convergence.
-
-A fourth lever if you can't use R1/R2: **multiple D steps per G step**. In the
-EMA+decay family (no gradient penalty), going from 1 → 6 D steps cut
-steps-to-converge from 18.5k to 6.8k — a better D estimate per G update damps
-the same oscillation. Two costs: each step gets proportionally more expensive
-(the R1/R2 route reached the same speed at 1 D step), and past ~6 D steps the
-failure mode flips — D over-sharpens before the prior finishes spreading and
-you lose modes instead of sharpness.
 
 ## 3. Discriminator resolution: spectral bias is a real bottleneck
 
@@ -95,18 +88,20 @@ Sharpness stalls and it looks like a loss/optimizer problem. It isn't.
   1. **Coarse-to-fine schedule** — smooth D until coverage completes, then
      ramp the high-frequency features in (~3k steps). Works (8.7k steps,
      robust), but the ramp timing is a sensitive hand-tuned schedule.
-  2. **R1/R2 penalty with a sharp D from step 0** — the penalty caps how
+  2. **Critic penalty with a sharp D from step 0** — the penalty caps how
      steep D actually gets *at the samples*, which keeps usable gradients in
      the empty space while the Fourier capacity handles fine structure at the
-     modes. Better (3.3–3.7k steps) and schedule-free. γ is a steep
-     sharpness-vs-coverage dial, not a stability dial: sweep it log-scale
-     (γ=0.01 → sharp but drops modes; γ=0.1 → covers but plateaus soft;
-     γ=0.02 was the crossover here). Expect fine sensitivity.
+     modes. Better and schedule-free; this is what the recipe does. The
+     penalty strength (`reg_coeff`) and gradient cap (`reg_kappa`) act as a
+     sharpness-vs-coverage dial rather than a stability dial: too strong
+     covers but plateaus soft, too weak sharpens but drops modes. The
+     defaults (1.0, 1.0) are tuned on this benchmark; change them only with
+     coverage and sharpness measurements in hand.
 
 This capacity-vs-steepness distinction is the most interesting transferable
-finding: Fourier features and R1/R2 look like they pull in opposite
-directions, but they control *different properties* of D and compose into
-exactly the discriminator you want.
+finding: Fourier features and a gradient penalty look like they pull in
+opposite directions, but they control *different properties* of D and compose
+into exactly the discriminator you want.
 
 ## 4. Sparsely-updated parameters need special optimizer treatment
 
@@ -127,25 +122,27 @@ degrades over training.
   here), with a broad optimum (10–20×) — starved mobility shows up as missing
   modes, excess as instability.
 
-## 5. Overcomplete latents help transport
+## 5. Overcomplete latents: a lever for weaker setups
 
-Raising z_dim from 2 (= data dimension) to 4 was the single biggest coverage
-lever in the whole campaign: from "never reaches 100 modes even at 40k steps"
-to "reliably 100 modes by ~10k" with near-perfect mode balance, before any
-other fix. The intuition: extra latent dimensions give the generator room to
-route mass around itself instead of tearing. 8 was worse than 4 — modestly
-overcomplete, not huge. If your generator seems topologically stuck, try this
-before touching the loss.
+Early in the campaign, before the other fixes, raising z_dim from 2 (= data
+dimension) to 4 was the single biggest coverage lever: from "never reaches 100
+modes even at 40k steps" to "reliably 100 modes by ~10k". The intuition: extra
+latent dimensions give the generator room to route mass around itself instead
+of tearing. 8 was worse than 4 — modestly overcomplete, not huge.
+
+The shipped recipe keeps z_dim 2 (the data dimension) and still reaches
+100/100 modes: the learnable particle prior and the critic penalty supply the
+transport the extra dimensions used to. If a generator on a new problem seems
+topologically stuck, a modestly overcomplete latent is still worth a try.
 
 ## 6. Relativistic pairing (RpGAN) is an LR amplifier
 
 RpGAN's practical effect here wasn't direct quality — it was **tolerating
 3–5× higher learning rates** without collapse, plus visibly better mode
-balance. Consistent with the R3GAN paper's landscape argument. Without R1/R2
-it still oscillates (as theory predicts); the pair is what's stable. One
-surprise: once R1/R2 was added, the extra LR headroom disappeared (higher LR
-was strictly worse) — the speed now comes from the regularized dynamics, not
-from cranking LR.
+balance. Consistent with the R3GAN paper's landscape argument. Without a
+critic penalty it still oscillates (as theory predicts); the pair is what's
+stable. Once the penalty is in, the speed comes from the regularized dynamics,
+not from cranking LR.
 
 ## 7. Negative results (what not to waste time on)
 
@@ -153,19 +150,17 @@ All measured in this setting; several contradict common defaults:
 
 - **Raw net LR is a nearly flat axis.** The baseline's problem was never
   "LR too low" — sweeping 1e-4→3e-3 changed little until it collapsed.
-  Asymmetry (TTUR, D at 1.5–3× G) mattered far more than scale. And once
-  R1/R2 regularized the game, even TTUR shrank to a mild 1.5× tweak.
+  Asymmetry (TTUR, D faster than G) mattered far more than scale. And once
+  a critic penalty regularized the game, even TTUR shrank to a mild tweak.
 - **Muon on the GAN nets was the worst thing tried** (collapse at any LR).
   Muon on the *particle table* worked (it's an embedding-table story, §4),
-  but was ultimately beaten by plain Adam β1=0 + the R3GAN objective.
+  but was ultimately beaten by plain Adam β1=0 + a penalized RpGAN
+  objective.
   AdamW vs Adam is a literal no-op at weight_decay=0.
 - **Capacity knobs were flat or harmful**: wider/deeper nets, more/fewer
   hidden layers — noise. Fewer particles (500–5k vs 20k) decisively hurt
   coverage; the particle cloud wants to be much larger than the mode count.
 - **Bigger batches hurt** (512–1024 slower than 256 in most configs).
-- **γ-annealing schedules for R1/R2** were not better than a fixed
-  well-chosen γ, and cost robustness. Prefer the static value + log-scale
-  sweep.
 - **Instance-noise annealing and lambda sweeps on the variance regularizer**
   did nothing useful here (the VICReg-style weight had a broad optimum at its
   default, with 3–10× overweighting catastrophic).
@@ -178,7 +173,7 @@ All measured in this setting; several contradict common defaults:
 3. If coverage stalls: overcomplete latent (§5), check sparse-parameter
    momentum (§4), consider RpGAN (§6).
 4. If sharpness stalls: check D's spatial resolution against the data's fine
-   structure (§3); add capacity *with* R1/R2, sweeping γ log-scale.
+   structure (§3); add capacity *with* the critic penalty in place.
 5. Once it converges: delayed LR anneal with a floor (§2.2) so training ends
    *on* the solution instead of orbiting past it — post-convergence blow-up
    is real and sudden.
@@ -187,30 +182,29 @@ All measured in this setting; several contradict common defaults:
 ## Reference: the winning configuration (this repo)
 
 `examples/100gaussians.py` defaults. A later 420-run study of the penalty's
-*centering* (`FINDINGS.md`) replaced the R1/R2 penalty here with a one-sided
+*centering* (`FINDINGS.md`) replaced the campaign's zero-centered penalty with a one-sided
 cap, `relu(‖∇ₓD‖ − 1)²` on reals and fakes at coeff 1.0, and doubled the base
 LR: the cap damps the game just as well (any sample-point penalty does) but
 leaves D usable slope below the cap, which buys sharper modes at an honest
 core width — 100/100 modes and hq 0.986 at 7k steps, core σ ratio 0.866,
 zero collapses over 5 seeds, bar (100 modes & hq ≥ 0.9) crossed by ~5.5k.
-The R1/R2 penalty of the original campaign is still one flag away
-(`--reg_arm a_r1r2 --reg_coeff 0.02`) and remains the choice when you want
-standing curvature at the endpoint (see the provenance caveat in
-`FINDINGS.md`). The shipped example trains 7k steps with a delayed cosine
-anneal for a stable endpoint.
+The example now trains the recipe's critic penalty (K3P, which starts as RMS
+R1 plus a fake-side cap and hands over to one-sided caps with an EMA-critic
+anchor). The shipped example trains 7k steps with a delayed cosine anneal for a
+stable endpoint.
 
 | Ingredient | Value | Why |
 |---|---|---|
 | Objective | RpGAN (relativistic pairing, logistic) | LR headroom, mode balance (§6) |
-| Gradient penalty | one-sided cap `b_cap`, coeff 1.0, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
+| Gradient penalty | recipe default critic penalty (K3P), coeff 1, κ 1, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
 | D input | Fourier features, K = 2 | resolve σ=0.03 structure from step 1 (§3) |
-| z_dim | 4 (data is 2-D) | transport room (§5) |
-| Optimizers | Adam, β1 = 0 everywhere | sparse particle table (§4) |
-| LRs | G/prior-base 6e-4, prior ×10, D ×1.5 | mild TTUR only (§7) |
+| z_dim | 2 (recipe default; data is 2-D) | prior + penalty supply transport (§5) |
+| Optimizers | recipe optimizers (`make_optimizers`), betas (0, 0.999) | sparse particle table (§4) |
+| LRs | G/D 4.25e-3, prior ×2, D ×1 (`get_recipe("gan")`) | mild TTUR only (§7) |
 | EMA | 0.995 on G *and* prior, eval-only | sits on the equilibrium (§2) |
 | LR schedule | full LR for 60% of run, cosine to 5% floor | stable endpoint (§2) |
 | Particles | 20,000 for 100 modes | fewer decisively hurts (§7) |
 
-Baseline for contrast (old defaults: hinge loss, Adam β1=0.5, z_dim 2, plain
-D, no EMA, no anneal): 86–92/100 modes and 30% hq after 12k steps, ~80% hq
-ceiling at 60k, never converged.
+Starting point for contrast (Adam β1=0.5, z_dim 2, plain D, no gradient
+penalty, no EMA, no anneal): 86–92/100 modes and 30% hq after 12k steps, ~80%
+hq ceiling at 60k, never converged.

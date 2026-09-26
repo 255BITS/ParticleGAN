@@ -4,7 +4,8 @@
 `direct_particle_response` as the starting formulation for future research.
 It passes all 22 declared GPU toy gates and the measured ring hold plus
 300-update extension. Target-shift recovery remains the next problem to solve.
-This is a research selection; the public training-package defaults are separate.
+K3P is also the package default: `get_recipe()` and `GANTrainer` train with it
+([package guide](../../../docs/k3p.md)).
 
 ![K3P convergence on three 100-Gaussian layouts](../gap-fill-20260925/k3p-100gaussians-convergence.gif)
 
@@ -115,8 +116,8 @@ python -m pytest -q tests/test_k3p_selection.py
 ```
 
 The standard `benchmarks.toy100` / `benchmarks.toy_suite` commands and CPU CI
-gate still use the historical shared recipe. The public `get_recipe("gan")`
-API still selects GAN v3. Neither entry point installs K3P's research hooks.
+gate still use the historical shared recipe. The public `get_recipe("gan")` API now selects K3P and its recipe-built optimizers
+implement the mechanism without the historical research hooks.
 
 Use `probe.py` for the 19 transfer tasks, `native100.py` for the three native
 problems, and `hold.py`, `shift.py`, `shift_frozen.py` for the ring protocols.
@@ -140,6 +141,10 @@ The next research gate is K3P's own target-shift recovery while protecting its
 hold/extension and all 22 toy passes. No new training is launched by selection.
 
 ## Continuous-learning search
+
+The current experiment has merged master and is preparing a fresh package-default
+baseline after compaction. See [the handoff](../public-default-baseline/README.md).
+The following launcher/results narrative is historical; STOP markers remain set.
 
 [Round 1 results](../continuous-round-1/README.md): 24 candidates, no qualified
 winner. A3 passed hold and extension and reached 71/81 recovery checks; all 22

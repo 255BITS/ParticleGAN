@@ -1,3 +1,8 @@
+> Current work uses the public package default after the master merge.
+> Follow `reports/toy100/k3p-base/continuous-search.md` and the baseline handoff.
+> Training is deferred until after compaction. The instructions below are
+> historical and do not authorize autonomous launches or seed repeats.
+
 # Rolling search with reduced Codex usage
 
 The user reduced concurrent search to **1 Codex + 7 Grok**, replacing the previous

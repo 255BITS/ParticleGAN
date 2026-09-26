@@ -37,7 +37,8 @@ from benchmarks.toy100.models import (
 )
 from benchmarks.toy100.train import AFFINE_MODEL_POLICIES, load_config, resolve_config
 from lib.toy_models import SimpleMLPGenerator
-from particlegan import GANTrainer, get_recipe
+from particlegan import GANTrainer
+from benchmarks.legacy.recipe import get_recipe
 
 from . import image_tasks, suite, vector_tasks
 from .compare_defaults import ema_verdict
@@ -48,6 +49,7 @@ from .public_default_verification import (
     optimizer_receipts, public_module_manifest, rate_action,
     shape_receipt, vector_discriminator, write,
 )
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -115,7 +117,7 @@ def declared_recipe(config: dict):
         raise ValueError("output_noise_rng must be 'isolated' when declared")
     resolved, _ = resolve_config(candidate)
     globals_only = {name: resolved[name] for name in GLOBAL_RECIPE_FIELDS}
-    recipe = get_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
+    recipe = gan_v3_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)
@@ -560,7 +562,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
     (output / config_path.name).write_bytes(config_bytes)
     protocol.update(version="toy100-compatibility-screen-v1", seed=0, device=str(host_device()),
                     threads=1, fixed_tasks=list(tasks), jobs=selected_jobs,
-                    global_recipe=base.to_dict(), noise=noise,
+                    global_recipe=legacy_dict(base), noise=noise,
                     ignored_toy100_resource_overrides=resource_overrides,
                     frozen_discriminators=profile["discriminators"],
                     config_file=config_path.name,
@@ -652,7 +654,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
         record = dict(name=spec["name"], route=route,
                       noise_applied=noise_applied,
                       noise_receipt=receipt,
-                      recipe=base.to_dict(), host_recipe=context["host_recipe"].to_dict(),
+                      recipe=legacy_dict(base), host_recipe=legacy_dict(context["host_recipe"]),
                       noise=noise, original_spec=deepcopy(job["spec"]), spec=spec,
                       discriminator_variant=variant,
                       architecture=variant["name"] if variant else job["architecture"],
@@ -693,7 +695,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
          full_mechanism=full_mechanism,
          tasks=list(tasks),
          config_sha256=protocol["config_sha256"],
-         global_recipe=base.to_dict(), noise=noise,
+         global_recipe=legacy_dict(base), noise=noise,
          cases=[dict(name=row["name"], live=row["verdict"]["status"],
                      ema=row["ema_verdict"]["status"],
                      observations=row["observations"], live_final=row["live"],

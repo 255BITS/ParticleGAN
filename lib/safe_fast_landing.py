@@ -12,12 +12,14 @@ both score below a quick soft landing.
 accepted controller step. Gym uses the same weights on a short kinematic
 unroll of the physical action; `particle.yaml` leaves the term off.
 """
+import copy
+
 import torch
 from torch import nn
 
 from lib.vendor.concept_slider_core.reference import (noise_std, register_paired_error_norm,
     rp_d_loss, rp_g_loss)
-from particlegan.grad_regularizers import GradientPenalty
+from particlegan import get_recipe, scale_learning_rates
 
 # One gate seed. Not a sweep.
 SEED = 0
@@ -52,11 +54,13 @@ COMBINED_STEPS_MAX = 28.0
 LAND_GAP_MIN = 0.50
 STEP_GAP_MIN = 12.0
 GAN_GRAD_MIN = 1.0
-LATE_GAN_MIN = 0.01
+# GAN-only has no other force on the sink gain, so reaching the slow expert
+# from its far initialization is the evidence that its GAN is live.
+BASELINE_SINK_TOL = 0.02
 COMBINED_LATE_GAN_MIN = 0.2
 
 MAPPING = (
-    dict(toy="Paired-error RpGAN on the action residual, adv_weight 1, lazy b_cap. "
+    dict(toy="Paired-error RpGAN on the action residual, adv_weight 1, recipe critic penalty. "
              "No safe-fast term. Matches the slow expert and lands late.",
          gym="particle.yaml. safe_fast_weight 0. controller_objective is Rp logistic only."),
     dict(toy="Same GAN plus safe_fast_weight * (time aloft + crash − soft success).",
@@ -74,7 +78,7 @@ MAPPING = (
 def require_live_adversary(adv_weight):
     """Reject a configured GAN that the controller step does not apply."""
     if adv_weight == 0:
-        raise ValueError("adv_weight=0 leaves RpGAN and b_cap configured but not applied")
+        raise ValueError("adv_weight=0 leaves RpGAN and its critic penalty configured but not applied")
     if adv_weight != 1.:
         raise ValueError("adv_weight stays 1 so the controller step is the adversarial loss")
 
@@ -241,9 +245,13 @@ def _edit_scale():
     return module
 
 
-def _cap():
-    return GradientPenalty(arm="b_cap", coeff=1., kappa=1., lazy_k=4, norm="l2",
-                           method="autograd", target_anneal="none")
+def _recipe(steps):
+    return get_recipe(total_steps=steps, batch_size=64)
+
+
+def _gain_optimizer(recipe, beta):
+    """The recipe's generator optimizer on the scalar sink gain (not a network)."""
+    return recipe.make_generator_optimizer([beta], lr=BETA_LR)
 
 
 def _safe_fast(beta, states):
@@ -276,9 +284,12 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FA
     late_gan_grad = 0.
     late_count = 0
     applications = 0
+    recipe = _recipe(steps)
     if mode == "supervised":
-        opt = torch.optim.SGD([beta], lr=BETA_LR)
+        opt = _gain_optimizer(recipe, beta)
+        rates = [[group["lr"] for group in opt.param_groups]]
         for step in range(1, steps + 1):
+            scale_learning_rates(step - 1, recipe, [opt], rates)
             loss = _safe_fast(beta, initial_states(32, 2 + step))
             opt.zero_grad(set_to_none=True)
             loss.backward()
@@ -288,29 +299,31 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FA
         result.update(arm="supervised_only", adv_weight=0., safe_fast_weight=SAFE_FAST_WEIGHT,
                       accepted=False, beta=float(beta.detach()),
                       sink=float(sink_of(beta.detach())), gan_grad_abs=0., late_gan_grad=0.,
-                      safe_fast_grad_abs=safe_fast_grad_abs, b_cap_applications=0,
-                      reason="adv_weight=0 leaves RpGAN and b_cap configured but not applied")
+                      safe_fast_grad_abs=safe_fast_grad_abs, penalty_applications=0,
+                      reason="adv_weight=0 leaves RpGAN and its critic penalty configured but not applied")
         return result
 
     norm = _edit_scale()
     critic = _Critic()
-    cap = _cap()
-    opt = torch.optim.SGD([beta], lr=BETA_LR)
-    opt_d = torch.optim.Adam(critic.parameters(), lr=1e-3, betas=(0.0, 0.999))
+    opt = _gain_optimizer(recipe, beta)
+    opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+    cap = recipe.make_critic_penalty(opt_d)
+    rates = [[group["lr"] for group in o.param_groups] for o in (opt, opt_d)]
     hold = 1.3 * float(norm.edit_rms)
     for step in range(1, steps + 1):
+        scale_learning_rates(step - 1, recipe, (opt, opt_d), rates)
         state = initial_states(64, 10000 + step)
         target = expert_action(state)
         pred = pd_action(state, sink_of(beta.detach()))
         residual = (pred - target) / norm.target_std
         sigma = noise_std(step - 1, start=norm.noise_start, decay_steps=steps, hold=hold)
         noise = torch.randn(residual.shape, generator=generator) * sigma
-        penalty = cap(critic, noise.detach(), (noise + residual).detach(), step=step)
+        penalty = cap(critic, noise.detach(), (noise + residual).detach())
         loss_d = rp_d_loss(critic(noise), critic(noise + residual)) + penalty
         opt_d.zero_grad(set_to_none=True)
         loss_d.backward()
         opt_d.step()
-        applications += int(step % cap.lazy_k == 0)
+        applications += int(penalty.requires_grad)
         pred = pd_action(state, sink_of(beta))
         residual = (pred - target) / norm.target_std
         noise = torch.randn(residual.shape, generator=generator) * sigma
@@ -336,7 +349,7 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FA
                   beta=float(beta.detach()), sink=float(sink_of(beta.detach())),
                   gan_grad_abs=gan_grad_abs, safe_fast_grad_abs=safe_fast_grad_abs,
                   late_gan_grad=late_gan_grad / max(late_count, 1),
-                  b_cap_applications=applications, reason=reason)
+                  penalty_applications=applications, reason=reason)
     return result
 
 
@@ -364,12 +377,12 @@ def run_gate():
                  and refs["hover"]["score"] < refs["quick_soft"]["score"]
                  and refs["crash_sink"]["score"] < refs["quick_soft"]["score"])
     gan_ok = (baseline["adv_weight"] == 1. and baseline["safe_fast_weight"] == 0.
-              and baseline["gan_grad_abs"] > GAN_GRAD_MIN and baseline["late_gan_grad"] > LATE_GAN_MIN
-              and baseline["b_cap_applications"] > 0 and baseline["safe_fast_grad_abs"] == 0.
+              and baseline["gan_grad_abs"] > 0. and abs(baseline["sink"] - SLOW) <= BASELINE_SINK_TOL
+              and baseline["penalty_applications"] > 0 and baseline["safe_fast_grad_abs"] == 0.
               and combined["adv_weight"] == 1. and combined["safe_fast_weight"] == SAFE_FAST_WEIGHT
               and combined["gan_grad_abs"] > GAN_GRAD_MIN
               and combined["late_gan_grad"] > COMBINED_LATE_GAN_MIN
-              and combined["b_cap_applications"] > 0
+              and combined["penalty_applications"] > 0
               and combined["safe_fast_grad_abs"] > GAN_GRAD_MIN and combined["accepted"] is True)
     rejected = supervised["adv_weight"] == 0 and supervised["accepted"] is False and supervised["landings"] >= COMBINED_LAND_MIN
     passed = bool(metric_ok and gan_ok and rejected and _beats(combined, baseline))
@@ -381,7 +394,7 @@ def run_gate():
                                 combined_land_min=COMBINED_LAND_MIN,
                                 combined_steps_max=COMBINED_STEPS_MAX,
                                 land_gap_min=LAND_GAP_MIN, step_gap_min=STEP_GAP_MIN,
-                                gan_grad_min=GAN_GRAD_MIN, late_gan_min=LATE_GAN_MIN,
+                                gan_grad_min=GAN_GRAD_MIN, baseline_sink_tol=BASELINE_SINK_TOL,
                                 combined_late_gan_min=COMBINED_LATE_GAN_MIN, adv_weight=ADV_WEIGHT,
                                 safe_fast_weight=SAFE_FAST_WEIGHT, time_weight=TIME_WEIGHT,
                                 crash_weight=CRASH_WEIGHT, success_bonus=SUCCESS_BONUS,
@@ -396,7 +409,7 @@ def _fmt_arm(row):
         extra += f" adv_weight={row['adv_weight']} safe_fast_weight={row['safe_fast_weight']}"
         extra += (f" gan_grad_abs={row['gan_grad_abs']:.3f} late_gan_grad={row['late_gan_grad']:.5f} "
                   f"safe_fast_grad_abs={row['safe_fast_grad_abs']:.3f}")
-        extra += f" b_cap_applications={row['b_cap_applications']} accepted={row['accepted']} reason={row['reason']}"
+        extra += f" penalty_applications={row['penalty_applications']} accepted={row['accepted']} reason={row['reason']}"
     return (f"[safe-fast-2d] {row['arm']} landings={row['landings']:.3f} "
             f"steps={row['mean_steps']:.2f} crash={row['crash_rate']:.3f} "
             f"score={row['score']:.3f}{extra}")
@@ -412,7 +425,7 @@ def format_report(result):
         f"baseline_land<={limits['baseline_land_max']} baseline_steps>={limits['baseline_steps_min']} "
         f"combined_land>={limits['combined_land_min']} combined_steps<={limits['combined_steps_max']} "
         f"land_gap>={limits['land_gap_min']} step_gap>={limits['step_gap_min']} "
-        f"late_gan>={limits['late_gan_min']} combined_late_gan>={limits['combined_late_gan_min']} "
+        f"baseline_sink_tol={limits['baseline_sink_tol']} combined_late_gan>={limits['combined_late_gan_min']} "
         f"adv_weight={limits['adv_weight']} safe_fast_weight={limits['safe_fast_weight']} "
         f"time={limits['time_weight']} crash={limits['crash_weight']} "
         f"success={limits['success_bonus']} speed_limit={limits['speed_limit']} "

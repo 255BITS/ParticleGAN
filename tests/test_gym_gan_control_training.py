@@ -8,9 +8,11 @@ import unittest
 import numpy as np
 import torch
 
+
 from experiments.train_gym_gan_control import DEFAULTS, train
 from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, sparse_task_losses
 from lib.gym_state_control import training_recipe, state_control_action
+from particlegan.grad_regularizers import GradientPenalty
 from lib.gym_gan_control import (build_gan_models, initial_hashes, load_gan_control_checkpoint,
     real_views, fake_views, discriminator_loss, generator_loss)
 
@@ -75,7 +77,7 @@ class GanControlTrainingTests(unittest.TestCase):
                 changed = raw.detach().clone()
                 changed[:, 8:10] = float("nan")
                 torch.testing.assert_close(score, critic(changed, context)[0], atol=0, rtol=0)
-                penalty = training_recipe(bundle["config"]).make_gradient_penalty(kappa=0.)
+                penalty = GradientPenalty(kappa=0.)
                 original_penalty, _ = penalty.penalty(lambda x: critic(x, context)[0], raw, raw, 1)
                 changed_penalty, _ = penalty.penalty(lambda x: critic(x, context)[0], changed, changed, 1)
                 self.assertGreater(float(original_penalty.detach()), 0.)
@@ -106,7 +108,8 @@ class GanControlTrainingTests(unittest.TestCase):
             for arm in ("joint", "marginals"):
                 bundle = build_gan_models({**self.cfg, "arm": arm}, fit_sparse_scaler(records))
                 recipe = training_recipe(bundle["config"])
-                gan, reg = recipe.make_loss(), recipe.make_gradient_penalty()
+                gan = recipe.make_loss()
+                opt_d = recipe.make_critic_optimizer(bundle["D"], ema_critic=copy.deepcopy(bundle["D"]))
                 views = real_views(bundle, batch)
                 for path in ("prior", "encoded"):
                     for key in ("E", "G", "prior", "D"):
@@ -128,7 +131,8 @@ class GanControlTrainingTests(unittest.TestCase):
                 fakes = fake_views(bundle, views, torch.Generator().manual_seed(7),
                                    torch.Generator().manual_seed(8), straight_through=True)
                 rngs = {role: torch.Generator().manual_seed(50+i) for i,role in enumerate(bundle["D"].roles())}
-                loss, terms = discriminator_loss(bundle["D"], views, fakes, gan, reg, 1, rngs)
+                penalties = {role: recipe.make_critic_penalty(opt_d) for role, rng in rngs.items()}
+                loss, terms = discriminator_loss(bundle["D"], views, fakes, gan, penalties)
                 loss.backward()
                 self.assertTrue(has_grad(bundle["D"]))
                 self.assertTrue(all(not has_grad(bundle[key]) for key in ("E", "G", "prior")))

@@ -77,17 +77,17 @@ jobs:
           assert default.lr == 0.00425
           assert default.d_lr_mult == 1.0
           assert default.prior_lr_mult == 2.0
-          assert default.betas == (0., .99)
-          assert default.reg_arm == 'b_cap' and default.reg_coeff == 6.0
-          assert default.reg_kappa == 1.25 and default.prior_reg == 0.05
-          assert default.name == 'gan_v3'
+          assert default.betas == (0., .999)
+          assert not hasattr(default, 'reg_arm') and default.reg_coeff == 1.0
+          assert default.reg_kappa == 1.0 and default.prior_reg == 0.0
+          assert default.name == 'k3p'
           assert get_recipe('gan') == default
           assert not hasattr(default, 'make_trainer')
           assert get_recipe('ae_gan').encoder_mode == 'ae'
           assert get_recipe('vae_gan').encoder_mode == 'hard'
           assert get_recipe('ddgan').model == 'ddgan'
           assert get_recipe('ae_gan').lr == default.lr
-          assert get_recipe(prior_kind='mog', sigma_rel=.025, num_particles=8).reg_coeff == 6.
+          assert get_recipe(prior_kind='mog', sigma_rel=.025, num_particles=8).reg_coeff == 1.
           assert sum(p.numel() for p in LinearSkipDiscriminator().parameters()) == 10467
           assert sum(p.numel() for p in BatchDistanceDiscriminator().parameters()) == 19013
           PY

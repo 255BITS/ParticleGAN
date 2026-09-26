@@ -20,7 +20,9 @@ from torch import nn
 from benchmarks.toy100.device import host_device, rng_fork_devices
 import torch.nn.functional as F
 
-from particlegan import GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer
+from particlegan import ParticlePrior, ParticleRegularizer
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from benchmarks.locked_shared.observation import sustained
 from benchmarks.smart_descent.controller import GradientFeedback
 from benchmarks.smart_descent.evaluate import FixedControl

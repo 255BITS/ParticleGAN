@@ -11,7 +11,9 @@ import traceback
 import torch
 
 from benchmarks.toy100.device import host_device, rng_fork_devices
-from particlegan import GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer
+from particlegan import ParticlePrior, ParticleRegularizer
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
 from benchmarks.locked_shared.observation import sustained

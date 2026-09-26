@@ -26,7 +26,7 @@ from experiments.config import read_config
 from experiments.train_gym_transition import sha256, write_json
 from lib.gym_control import build_expert_records, initialize_control, predict_control
 from lib.gym_l2_finetune import LOCKED_SUPERVISION, assert_l2_supervision, l2_objective
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe, scale_learning_rates
 
 DEFAULTS = dict(arm="l2", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1",
@@ -121,9 +121,9 @@ def train(cfg):
     g, ec = bundle["G"], bundle["E_control"]
     recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
-    opt = torch.optim.Adam(list(ec.parameters()) + list(g.branches[1].parameters()),
-                           lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
-    base_rates = [group["lr"] for group in opt.param_groups]
+    opt = recipe.make_generator_optimizer(list(ec.parameters()) + list(g.branches[1].parameters()),
+                                          **(dict(fused=True) if device.type == "cuda" else {}))
+    base_rates = [[group["lr"] for group in opt.param_groups]]
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
@@ -170,9 +170,7 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for group, rate in zip(opt.param_groups, base_rates):
-                group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, [opt], base_rates)
             ids = torch.randint(len(physical), (cfg["batch_size"],), device=device, generator=data_rng)
             real, ctx = normalized[ids], terrain[ids]
             action, _ = predict_control(bundle, physical[ids, :8], previous[ids], ctx)

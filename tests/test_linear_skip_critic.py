@@ -3,7 +3,7 @@ import torch
 
 from benchmarks.transfer_suite.linear_skip_refinement_research import ARCHITECTURES, constructor
 from benchmarks.transfer_suite.smooth_critic_research import SmoothFourierCritic
-from particlegan import GradientPenalty
+from particlegan.grad_regularizers import GradientPenalty
 
 
 def test_zero_skip_preserves_base_function_but_receives_learning_signal():
@@ -30,7 +30,7 @@ def test_active_cap_backpropagates_through_both_critic_paths(card):
         critic.skip.weight.fill_(2.)
     rng = torch.Generator().manual_seed(0)
     real, fake = torch.randn(16, 2, generator=rng), torch.randn(16, 2, generator=rng)
-    penalty = GradientPenalty('b_cap', coeff=3., kappa=.01)(critic, real, fake, step=1, generator=rng)
+    penalty = GradientPenalty(coeff=3., kappa=.01)(critic, real, fake, step=1)
     assert penalty > 0
     (penalty + critic(real).mean()).backward()
     assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in critic.parameters())

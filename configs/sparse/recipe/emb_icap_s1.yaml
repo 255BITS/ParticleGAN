@@ -1,4 +1,3 @@
-arm: g_interp_cap
 coeff: 1.0
 emb_dim: 8
 out_dir: results/sparse/runs/recipe/emb_icap_s1

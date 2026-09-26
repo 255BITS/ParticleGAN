@@ -1,5 +1,22 @@
 # 22-toy results and continuous stability
 
+## Current package baseline — pending measurement
+
+Master `0ff9a7af` (package 0.8.0) is merged into this experiment. New work starts
+from `get_recipe()` / `GANTrainer`, using the current package defaults.
+[Parameters and post-compaction handoff](public-default-baseline/README.md).
+
+| Formulation | Hold + extension | Recovery | Toy suite | Status |
+|---|---|---|---|---|
+| Public default K3P, package 0.8.0 | NOT_RUN | NOT_RUN | NOT_RUN | Baseline deferred until after compaction |
+
+All sections below are historical measurements on their recorded drivers and
+settings. They are not scores for this new package baseline. R2 remains an
+unpromoted historical lead; it retains LR/noise schedules, so its clock-independent
+release is not a horizon-independent learner or demonstrated hyperparameter
+reduction. Its 114/120 pre-shift checks are not a 1200-update hold + 300 extension.
+No new seed experiments or automatic candidate launches are authorized in this phase.
+
 ## Gap-filled leaderboard — September 25, 2026
 
 **Selected research/launcher base: [K3P](k3p-base/README.md), with 22/22 declared toy passes, plus a

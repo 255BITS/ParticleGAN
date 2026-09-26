@@ -20,11 +20,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from experiments.config import merge_config, read_config
-from particlegan import DDGAN, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.image_ddgan import sample_images, update_ema
 from lib.image_moonshots import build_models
-from lib.cifar_speed import SpeedProfiler, cifar_penalty
+from lib.cifar_speed import SpeedProfiler
 
 DEFAULTS = {
     'model': 'ddgan', 'architecture': 'unet', 'd_mode': 'ucd', 'prior': 'learned', 'noise': 'gaussian',
@@ -34,14 +34,14 @@ DEFAULTS = {
     'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
     'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
     'cache_condition': True, 'channels_last': False, 'fused_adam': True,
-    'reg_method': 'autograd', 'reg_every': 4, 'reg_fd_eps': 0.05, 'reg_sync_stats': False,
+    'reg_every': 4, 'reg_sync_stats': False,
     'profile_start': 100, 'profile_steps': 0,
     'seed': 24002, 'classes': 10, 'alpha_bar': [1.0, 0.9, 0.5, 0.05, 0.0001],
     'g_width': 32, 'd_width': 32, 'd_norm': 'group', 'z_dim': 128, 'num_particles': 20000,
     'steps': 10000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
     'prior_lr_mult': 10.0, 'beta1': 0.0, 'prior_reg': 1.0,
-    'reg_arm': 'b_cap', 'reg_coeff': 1.0, 'reg_kappa': 1.0,
-    'gan_mode': 'rp', 'loss_type': 'logistic', 'ucd_lambda': 0.02,
+    'reg_coeff': 1.0, 'reg_kappa': 1.0,
+    'ucd_lambda': 0.02,
     'ema': 0.995, 'lr_anneal_start': 0.6, 'lr_floor': 1.0,
     'horizontal_flip': True, 'tf32': True, 'log_interval': 100,
     'eval_interval': 10000, 'eval_samples': 5000, 'final_samples': 50000,
@@ -68,12 +68,11 @@ def validate(cfg):
     if resolutions and (cfg['architecture'] != 'unet' or type(cfg['g_heads']) is not int or
                         cfg['g_heads'] < 1 or cfg['g_width'] % cfg['g_heads']):
         raise ValueError('U-Net attention requires compatible width and head count')
-    if cfg.get('reg_method', 'autograd') not in ('autograd', 'finite_difference'):
-        raise ValueError('invalid regularizer method')
-    if type(cfg.get('reg_every', 1)) is not int or cfg.get('reg_every', 1) < 1 or cfg.get('reg_fd_eps', .05) <= 0:
-        raise ValueError('invalid regularizer interval/epsilon')
-    if (cfg.get('reg_method', 'autograd') != 'autograd' or not cfg.get('reg_sync_stats', True)) and cfg['reg_arm'] != 'b_cap':
-        raise ValueError('speed regularizer implementation requires b_cap')
+    if type(cfg.get('reg_every', 1)) is not int or cfg.get('reg_every', 1) < 1:
+        raise ValueError('invalid regularizer interval')
+    removed = [k for k in ('reg_arm', 'loss_type', 'gan_mode', 'reg_method', 'reg_fd_eps') if k in cfg]
+    if removed:
+        raise ValueError(f'{removed} were removed: the objective and critic penalty are the recipe default')
     if cfg.get('profile_steps', 0) < 0 or cfg.get('profile_start', 100) < 0:
         raise ValueError('invalid profiling window')
     if cfg.get('cache_condition', False) and cfg.get('d_backbone') not in ('pretrained_resnet18', 'pretrained_resnet34'):
@@ -121,7 +120,9 @@ def training_recipe(cfg):
     """Translate the existing image experiment fields into public API settings.
 
     Architectures, data, checkpoints, and training remain owned by this file.
-    Every experiment override is retained, including historical image defaults.
+    The critic penalty and optimizers are the recipe default; the image-scale
+    LR schedule is recipe fields: G/D follow the full-budget cosine down to
+    ``lr_floor`` (no 1,600-step network horizon at image scale).
     """
     return get_recipe(
         model='ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
@@ -130,11 +131,12 @@ def training_recipe(cfg):
         ucd_target=cfg.get('ucd_target', 'class'), ucd_weight=cfg['ucd_lambda'],
         alpha_bar=cfg['alpha_bar'], batch_size=cfg['batch_size'], total_steps=cfg['steps'],
         lr=cfg['lr'], d_lr_mult=cfg['d_lr_mult'], prior_lr_mult=cfg['prior_lr_mult'],
-        betas=(cfg['beta1'], .999), loss_type=cfg['loss_type'], gan_mode=cfg['gan_mode'],
-        reg_arm=cfg['reg_arm'], reg_coeff=cfg['reg_coeff'], reg_kappa=cfg['reg_kappa'],
-        reg_every=cfg.get('reg_every', 1), reg_method=cfg.get('reg_method', 'autograd'),
+        betas=(cfg['beta1'], .999),
+        reg_coeff=cfg['reg_coeff'], reg_kappa=cfg['reg_kappa'],
+        reg_every=cfg.get('reg_every', 1),
         prior_reg=cfg['prior_reg'], ema_decay=cfg['ema'],
         lr_anneal_start=cfg['lr_anneal_start'], lr_floor=cfg['lr_floor'],
+        network_lr_floor=cfg['lr_floor'], network_lr_horizon_cap=None,
     )
 
 
@@ -204,11 +206,11 @@ def train(cfg, resume=None):
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
     recipe = training_recipe(cfg)
-    og, od = recipe.make_optimizers(g, d, prior, fused=cfg.get('fused_adam', False))
+    og, od = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg.get('fused_adam', False))
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()
-    reg = recipe.make_gradient_penalty(fd_eps=cfg.get('reg_fd_eps', .05))
+    penalty_fn = recipe.make_critic_penalty(od, collect_stats=cfg.get('reg_sync_stats', True))
     start_step, train_seconds = 0, 0.
     if resume:
         for name, obj in [('G', g), ('D', d), ('prior', prior), ('ema_G', eg), ('ema_prior', ep), ('opt_G', og), ('opt_D', od)]:
@@ -290,11 +292,7 @@ def train(cfg, resume=None):
     with (out / 'metrics.jsonl').open('a' if resume else 'w') as log:
         for step in range(start_step + 1, cfg['steps'] + 1):
             profiler.begin(step)
-            scale = learning_rate_scale(step - 1, recipe.total_steps,
-                                        recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, base in zip((og, od), bases):
-                for group, lr in zip(opt.param_groups, base):
-                    group['lr'] = lr * scale
+            scale, _ = scale_learning_rates(step - 1, recipe, (og, od), bases, prior)
             with profiler.region('D_data_fake_condition'):
                 d.requires_grad_(True)
                 c, real, xt, t = batch()
@@ -309,7 +307,10 @@ def train(cfg, resume=None):
                     targets = d.ucd_labels(c, t)
                     ld = ld + ucd_loss(cr, cf, targets, weight=cfg['ucd_lambda'])
             with profiler.region('D_penalty_forward_input_grad'):
-                penalty = cifar_penalty(reg, lambda x: critic(x)[0], real, xf, step, rngs['penalty'], cfg)
+                # Conditioning goes to the critic and its EMA (cached features are frozen).
+                cached = ({'condition_features': d.condition_features(xt)}
+                          if cfg.get('cache_condition', False) else {})
+                penalty = penalty_fn(d, real, xf, c, xt, t, **cached)
                 ld = ld + penalty
             with profiler.region('D_backward_optimizer'):
                 od.zero_grad(set_to_none=True)

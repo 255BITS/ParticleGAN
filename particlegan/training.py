@@ -1,15 +1,50 @@
-"""A small, checkpointable training loop for unconditional particle GANs."""
+"""A small, checkpointable K3P training loop for unconditional particle GANs."""
 from copy import deepcopy
 import math
 
 import torch
+from torch import nn
 
 from .particle_prior import ParticlePrior
-from .recipes import Recipe, learning_rate_scale
+from .recipes import Recipe, learning_rate_scales
+
+
+def input_noise_std(recipe, completed_steps):
+    """Critic input-noise std for the next update (peak, linear to 0)."""
+    end = recipe.input_noise_anneal_end * recipe.total_steps
+    return float(recipe.input_noise_std * max(0.0, 1.0 - completed_steps / end))
+
+
+def output_noise_std(recipe, completed_steps):
+    """Generator output-noise std after ``completed_steps`` (linear warmup)."""
+    if recipe.output_noise_warmup == 0:
+        return float(recipe.output_noise_std)
+    return float(recipe.output_noise_std
+                 * min(1.0, completed_steps / (recipe.output_noise_warmup * recipe.total_steps)))
+
+
+class InputNoise(nn.Module):
+    """``critic(x + std * eps, ...)`` with fresh ``eps`` per call from ``generator``.
+
+    Plain ``critic(x, ...)`` (no draw) while ``std == 0``; set ``std`` as the
+    schedule moves. Pass the wrapper to the recipe's critic penalty like the
+    critic itself: its EMA critic is evaluated through the same wrapper (same
+    ``std`` and noise stream).
+    """
+
+    def __init__(self, critic, std=0.0, generator=None):
+        super().__init__()
+        self.critic, self.std, self.generator = critic, float(std), generator
+
+    def forward(self, x, *args, **kwargs):
+        if self.std == 0:
+            return self.critic(x, *args, **kwargs)
+        noise = torch.randn(x.shape, generator=self.generator, device=x.device, dtype=x.dtype)
+        return self.critic(x + self.std * noise, *args, **kwargs)
 
 
 class GANTrainer:
-    """Own the update mechanics; callers supply networks and real batches.
+    """Own the K3P update mechanics; callers supply networks and real batches.
 
     Supports scalar, unconditional GAN recipes with a particle prior. Fresh real
     batches for the generator can be passed as ``generator_real`` tensors or
@@ -17,6 +52,15 @@ class GANTrainer:
     saved separately when checkpointing. Checkpoints restore global PyTorch RNG
     state as well as this trainer's sampling streams for exact continuation on
     the same device. Sampling never advances training RNG streams.
+
+    Per update: role-wise LR schedule (``learning_rate_scales``), critic step
+    with input noise and the recipe's penalty (``recipe.make_critic_penalty``;
+    the critic optimizer's ``step()`` runs the spike guard and anchor EMA),
+    then a generator/prior step with output noise (the generator optimizer's
+    ``step()`` applies A2 latent damping). The trainer allocates the EMA
+    critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream;
+    the caller's modules are never modified. ``sample`` includes the output
+    noise.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -51,20 +95,42 @@ class GANTrainer:
                 seen.add(id(parameter))
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
+        # The recipe picks the regularization formulation (currently K3P); its
+        # step-time work runs inside these optimizers' step().
         self.opt_g, self.opt_d = recipe.make_optimizers(
-            self.G, self.D, self.prior, **self.optimizer_options)
+            self.G, self.D, self.prior, ema_critic=deepcopy(self.D), **self.optimizer_options)
         self.initial_lrs = [[group["lr"] for group in opt.param_groups]
                             for opt in (self.opt_g, self.opt_d)]
+        prior_ids = {id(p) for p in self.prior.parameters()}
+        self.roles = [["prior" if any(id(p) in prior_ids for p in group["params"]) else "generator"
+                       for group in self.opt_g.param_groups], ["critic"] * len(self.opt_d.param_groups)]
         self.loss = recipe.make_loss()
-        self.penalty = recipe.make_gradient_penalty(**self.penalty_options)
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
         self.ema_G, self.ema_prior = deepcopy(self.G).eval(), deepcopy(self.prior).eval()
         for module in (self.ema_G, self.ema_prior):
             module.requires_grad_(False)
         self.latent_generator = self._stream(latent_generator, seed + 2)
+        # Reserved stream (the penalty draws no randomness); kept so the
+        # checkpoint schema and the other streams' seeds stay unchanged.
         self.penalty_generator = self._stream(penalty_generator, seed + 3)
         self.eval_generator = self._stream(None, seed + 4)
+        self.noise_generator = self._stream(None, seed + 5)
+        self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
+        self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         self.completed_steps = 0
+
+    @property
+    def latent_damping(self):
+        return self.opt_g.latent_damping
+
+    @property
+    def latent_history(self):
+        return self.opt_g.latent_history
+
+    @property
+    def ema_D(self):
+        """The trainer-owned EMA critic (K3P anchor)."""
+        return self.opt_d.ema_critic
 
     def _stream(self, generator, seed):
         generator = torch.Generator(device=self.device).manual_seed(seed) if generator is None else generator
@@ -83,36 +149,51 @@ class GANTrainer:
             raise ValueError(f"{name} must be a nonempty batch on the model device and dtype")
         return batch.detach()
 
+    @staticmethod
+    def _generate(model, latent, sigma, stream):
+        """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+        y = model(latent)
+        if sigma == 0:
+            return y
+        return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
+
     def step(self, real, *, generator_real=None, collect_stats=False):
         """Perform one D update and one G/prior update; return detached losses.
 
-        ``step`` in the result is the completed update count. Only ``rp`` and
-        ``ra`` invoke a generator-real callback. ``collect_stats`` additionally
-        returns the gradient penalty's synchronized diagnostic dictionary.
+        ``step`` in the result is the completed update count. The generator
+        loss pairs fakes with ``generator_real`` (a tensor or a callable;
+        default: ``real``). ``collect_stats`` additionally
+        returns the gradient penalty's synchronized diagnostic dictionary
+        (including K3P's blend weight ``s``).
         """
-        if self.completed_steps >= self.recipe.total_steps:
+        recipe = self.recipe
+        if self.completed_steps >= recipe.total_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
-        if self.recipe.gan_mode in ("rp", "ra") and generator_real is not None and not callable(generator_real):
+        if generator_real is not None and not callable(generator_real):
             generator_real = self._batch(generator_real, "generator_real")
             if generator_real.shape[1:] != real.shape[1:]:
                 raise ValueError("generator_real must match the real sample shape")
-            if self.recipe.gan_mode == "rp" and len(generator_real) != len(real):
+            if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-        scale = learning_rate_scale(self.completed_steps, self.recipe.total_steps,
-                                    self.recipe.lr_anneal_start, self.recipe.lr_floor)
-        for optimizer, rates in zip((self.opt_g, self.opt_d), self.initial_lrs):
-            for group, rate in zip(optimizer.param_groups, rates):
-                group["lr"] = rate * scale
+        network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
+        for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
+            for group, rate, role in zip(optimizer.param_groups, rates, roles):
+                group["lr"] = rate * (prior_scale if role == "prior" else network)
+        sigma_in = input_noise_std(recipe, self.completed_steps)
+        sigma_out = output_noise_std(recipe, self.completed_steps)
+        noise = self.noise_generator
+        critic = self._noisy_D
+        critic.std = sigma_in
         self.D.train()
         self.G.eval()
         with torch.no_grad():
             latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
-            fake = self.G(latent)
-        loss_d = self.loss.d_loss(self.D(real), self.D(fake))
-        penalty, penalty_stats = self.penalty.penalty(
-            self.D, real, fake, self.completed_steps + 1,
-            generator=self.penalty_generator, collect_stats=collect_stats)
+            fake = self._generate(self.G, latent, sigma_out, noise)
+        loss_d = self.loss.d_loss(critic(real), critic(fake))
+        self.penalty.collect_stats = collect_stats
+        penalty = self.penalty(critic, real, fake)
+        penalty_stats = self.penalty.last_stats
         loss_d = loss_d + penalty
         self.opt_d.zero_grad()
         loss_d.backward()
@@ -124,22 +205,20 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
-            fake_logits = self.D(self.G(latent))
-            real_logits = None
-            if self.recipe.gan_mode in ("rp", "ra"):
-                real_g = generator_real() if callable(generator_real) else generator_real
-                real_g = real if real_g is None else self._batch(real_g, "generator_real")
-                if real_g.shape[1:] != real.shape[1:]:
-                    raise ValueError("generator_real must match the real sample shape")
-                if self.recipe.gan_mode == "rp" and len(real_g) != len(real):
-                    raise ValueError("RpGAN generator_real must match the real batch size")
-                real_logits = self.D(real_g)
+            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+            real_g = generator_real() if callable(generator_real) else generator_real
+            real_g = real if real_g is None else self._batch(real_g, "generator_real")
+            if real_g.shape[1:] != real.shape[1:]:
+                raise ValueError("generator_real must match the real sample shape")
+            if len(real_g) != len(real):
+                raise ValueError("RpGAN generator_real must match the real batch size")
+            real_logits = critic(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:
-                raw = self.prior.z if self.recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
                 prior_reg = self.prior_regularizer(raw)
-            loss_g = loss_gan + self.recipe.prior_reg * prior_reg
+            loss_g = loss_gan + recipe.prior_reg * prior_reg
             self.opt_g.zero_grad()
             loss_g.backward()
             self.opt_g.step()
@@ -149,7 +228,7 @@ class GANTrainer:
         with torch.no_grad():
             for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
                 for averaged, current in zip(target.parameters(), source.parameters()):
-                    averaged.mul_(self.recipe.ema_decay).add_(current, alpha=1 - self.recipe.ema_decay)
+                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
                 for averaged, current in zip(target.buffers(), source.buffers()):
                     averaged.copy_(current)
         self.completed_steps += 1
@@ -163,11 +242,12 @@ class GANTrainer:
 
     @torch.no_grad()
     def sample(self, n, *, ema=False, generator=None):
-        """Draw live or EMA samples without changing modes or training RNGs."""
+        """Draw live or EMA samples (with the current output noise) without
+        changing modes or training RNGs."""
         if type(n) is not int or n <= 0:
             raise ValueError("n must be a positive integer")
         stream = self.eval_generator if generator is None else self._stream(generator, 0)
-        if stream is self.latent_generator or stream is self.penalty_generator:
+        if stream in (self.latent_generator, self.penalty_generator, self.noise_generator):
             raise ValueError("sampling requires a stream separate from training")
         model, prior = (self.ema_G, self.ema_prior) if ema else (self.G, self.prior)
         modes = [(module, module.training) for root in (model, prior) for module in root.modules()]
@@ -177,25 +257,26 @@ class GANTrainer:
             prior.eval()
             with torch.random.fork_rng(devices=devices):
                 latent, _ = prior.sample(n, generator=stream)
-                return model(latent)
+                return self._generate(model, latent, output_noise_std(self.recipe, self.completed_steps), stream)
         finally:
             for module, flag in modes:
                 module.training = flag
 
+    _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
+
     def state_dict(self):
         """Return an independent checkpoint; save the caller's data cursor too."""
+        names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
-            "schema": 1, "recipe": self.recipe.to_dict(),
+            "schema": 3, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
-            "models": {name: getattr(self, name).state_dict()
-                       for name in ("G", "D", "prior", "ema_G", "ema_prior")},
+            "models": {name: getattr(self, name).state_dict() for name in names},
             "requires_grad": {name: {key: p.requires_grad for key, p in getattr(self, name).named_parameters()}
-                              for name in ("G", "D", "prior", "ema_G", "ema_prior")},
+                              for name in names},
             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
-            "streams": {name: getattr(self, name).get_state() for name in
-                        ("latent_generator", "penalty_generator", "eval_generator")},
+            "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
             "cpu_rng": torch.get_rng_state(),
             "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
         })
@@ -204,10 +285,19 @@ class GANTrainer:
         """Restore a compatible checkpoint, including global PyTorch RNG state.
 
         Recreate the same parameter freezing before loading. Validation of both
-        optimizers and all RNG states precedes any mutation of the live trainer.
+        optimizers (which carry the K3P state) and all RNG states precedes any
+        mutation of the live trainer. Schema-2 checkpoints (separate K3P state)
+        are upgraded; schema-1 checkpoints (an older formulation) are rejected.
         """
+        if isinstance(state, dict) and state.get("schema") == 1:
+            raise ValueError("schema-1 GANTrainer checkpoints come from an older formulation and cannot "
+                             "resume under K3P; retrain, or pin the old release to continue them")
+        if isinstance(state, dict) and state.get("schema") == 2:
+            state = _upgrade_schema_2(state)
+        if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
+            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
         expected = self.state_dict()
-        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 1:
+        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
             raise ValueError("invalid GANTrainer checkpoint schema")
         for key in ("recipe", "optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
@@ -257,3 +347,34 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
+
+
+# Recipe fields that once named a fixed choice (with the value that choice
+# had), and fields added since (with their defaults).
+_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
+                          "reg_method": "autograd"}
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+
+
+def _upgrade_recipe_fields(recipe):
+    """Drop removed recipe fields that held the only supported value; add new defaults."""
+    if any(key in recipe and recipe[key] != value for key, value in _REMOVED_RECIPE_FIELDS.items()):
+        return recipe  # another formulation: left as is, so the recipe check rejects it
+    recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
+    return {**_ADDED_RECIPE_FIELDS, **recipe}
+
+
+def _upgrade_schema_2(state):
+    """Move a schema-2 checkpoint's separate K3P state into its optimizer states."""
+    try:
+        state = dict(state)
+        k3p = state.pop("k3p")
+        opt_g, opt_d = state["optimizers"]
+        critic = k3p["critic"]
+        opt_g = {**opt_g, "regularizer": {"latent": k3p["latent"], "direct": None}}
+        opt_d = {**opt_d, "regularizer": {"record": critic["penalty"], "ema": critic["ema"],
+                                          "guard": critic["guard"]}}
+    except (KeyError, TypeError, ValueError) as error:
+        raise ValueError("invalid checkpoint K3P state") from error
+    state["optimizers"], state["schema"] = [opt_g, opt_d], 3
+    return state

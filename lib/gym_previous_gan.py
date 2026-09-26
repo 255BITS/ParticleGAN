@@ -62,8 +62,12 @@ def task_loss(decoded, real, cfg):
             dict(action_loss=action, state_loss=state, next_loss=successor))
 
 
-def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, step=1, rngs=None, marginal_weight=1.):
-    """Average prior/encoded paths per role; detach all fake graphs for D updates."""
+def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, marginal_weight=1.):
+    """Average prior/encoded paths per role; detach all fake graphs for D updates.
+
+    ``reg`` (D update) is the recipe's critic penalty (``recipe.make_critic_penalty``)
+    or a role -> penalty dict; each role's EMA submodule is its anchor.
+    """
     terms, roles = {}, {}
     for role in d.roles():
         critic = d.critic_for(role)
@@ -73,9 +77,7 @@ def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, step=1, rngs=Non
             xf, _ = d.inputs(role, fake.detach() if reg is not None else fake, terrain.detach())
             if reg is not None:
                 losses.append(gan.d_loss(critic(xr, context)[0], critic(xf, context)[0]))
-                penalty, _ = reg.penalty(lambda x: critic(x, context)[0], xr, xf, step,
-                                          rngs[role], collect_stats=False)
-                penalties.append(penalty)
+                penalties.append((reg[role] if isinstance(reg, dict) else reg)(critic, xr, xf, context))
             else:
                 with torch.no_grad():
                     dr = critic(xr, context)[0]

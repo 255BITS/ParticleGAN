@@ -36,7 +36,7 @@ def main():
                          'train_s':s['train_seconds'], 'total_s':s['total_seconds'],
                          'peak_train_gb':last['peak_memory_gb'], 'fid':s['final']['fid'], 'fid_samples':s['final']['samples'],
                          'cache':cfg['cache_condition'], 'channels_last':cfg['channels_last'],
-                         'fused_adam':cfg['fused_adam'], 'reg_method':cfg['reg_method'], 'reg_every':cfg['reg_every']})
+                         'fused_adam':cfg['fused_adam'], 'reg_method':cfg.get('reg_method','autograd'), 'reg_every':cfg['reg_every']})
     out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     (out/'leaderboard.json').write_text(json.dumps(rows,indent=2)+'\n')
     lines=['| Run | GPU | Steps × batch | Steady samples/s | Train min | Peak train GiB | FID | FID samples |',

@@ -29,7 +29,7 @@ categorical choice.
 
 Those studies used explicit settings: sigma_rel=.025, G/E LR=.0003,
 D LR=.00045, prior LR=.003, prior betas=(.5,.999), G/E/D betas=(0,.999),
-constant LR and b_cap with lazy interval 4. Toy distance reduction was sum,
+constant LR and the earlier sample-point gradient cap with lazy interval 4. Toy distance reduction was sum,
 temperature .25; images used mean and .125. These are historical results,
 not selectable public presets. Architectures and preprocessing remain caller-owned.
 

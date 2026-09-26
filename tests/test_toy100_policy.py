@@ -236,7 +236,7 @@ def test_policy_update_matches_original_scratch_hook_order(monkeypatch):
     reference = make_trainer(config, recipe)
     production = make_trainer(config, recipe)
     reference.D.sigma = production.D.sigma = .5
-    ordinary_scale = training_module.learning_rate_scale
+    ordinary_scale = learning_rate_scale
     reference_g_step = reference.opt_g.step
 
     def reset_prior_before_g(*args, **kwargs):
@@ -249,10 +249,10 @@ def test_policy_update_matches_original_scratch_hook_order(monkeypatch):
     for _ in range(4):
         rng = torch.get_rng_state()
         with monkeypatch.context() as patch:
-            patch.setattr(training_module, "learning_rate_scale",
-                          lambda step, total, start, floor: ordinary_scale(
-                              step, min(total, 3), start, floor,
-                          ))
+            patch.setattr(training_module, "learning_rate_scales",
+                          lambda step, r: (ordinary_scale(
+                              step, min(r.total_steps, 3), r.lr_anneal_start, r.lr_floor,
+                          ),) * 2)
             old = reference.step(real, generator_real=lambda: real)
         torch.set_rng_state(rng)
         new = step_with_policy(production, real, network_lr_horizon_cap=3,

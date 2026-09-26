@@ -39,7 +39,7 @@ class SafeFastToyTests(unittest.TestCase):
     def test_zero_adv_weight_is_rejected_on_the_gan_arms(self):
         with self.assertRaises(ValueError) as caught:
             train_arm("combined", steps=1, adv_weight=0)
-        self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+        self.assertIn("adv_weight=0 leaves RpGAN and its critic penalty configured but not applied",
                       str(caught.exception))
         with self.assertRaises(ValueError) as caught:
             require_live_adversary(0.25)
@@ -50,15 +50,16 @@ class SafeFastToyTests(unittest.TestCase):
         self.assertTrue(result["passed"], result)
         self.assertEqual(result["baseline"]["adv_weight"], 1)
         self.assertEqual(result["baseline"]["safe_fast_weight"], 0)
-        self.assertGreater(result["baseline"]["gan_grad_abs"], 1)
-        self.assertGreater(result["baseline"]["late_gan_grad"], 0.01)
-        self.assertGreater(result["baseline"]["b_cap_applications"], 0)
+        self.assertGreater(result["baseline"]["gan_grad_abs"], 0)
+        # GAN-only is the only force on the gain: it must reach the slow expert.
+        self.assertLessEqual(abs(result["baseline"]["sink"] - SLOW), 0.02)
+        self.assertGreater(result["baseline"]["penalty_applications"], 0)
         self.assertEqual(result["combined"]["adv_weight"], 1)
         self.assertEqual(result["combined"]["safe_fast_weight"], 1)
         self.assertGreater(result["combined"]["gan_grad_abs"], 1)
         self.assertGreater(result["combined"]["late_gan_grad"], 0.2)
         self.assertGreater(result["combined"]["safe_fast_grad_abs"], 1)
-        self.assertGreater(result["combined"]["b_cap_applications"], 0)
+        self.assertGreater(result["combined"]["penalty_applications"], 0)
         self.assertGreaterEqual(result["combined"]["landings"], 0.95)
         self.assertLessEqual(result["baseline"]["landings"], 0.25)
         self.assertGreaterEqual(result["combined"]["landings"], result["baseline"]["landings"] + 0.50)

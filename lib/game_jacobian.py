@@ -87,7 +87,8 @@ def estimate_update_spectrum(
             internally, so the caller's models are untouched (and stay float32).
         gan_loss: a particlegan.GANLoss configured exactly as in training.
         vic_reg: the VICReg-like module applied to the batch's particles.
-        regularizer: a particlegan.GradientPenalty. Pass a clone with
+        regularizer: a critic gradient penalty with a `.penalty(D, real, fake, step)`
+            method (e.g. `particlegan.grad_regularizers.GradientPenalty`). Pass a clone with
             lazy_k=1 so the penalty applies on every step of the map.
         x_real_fixed: (B, 2) fixed real batch. Both half-steps use it (the D
             step as the reals, the G step as the RpGAN reference batch).

@@ -61,8 +61,6 @@ RUNS_ROOT = Path("results/sparse/runs")
 BASE: Dict = {
     "emb_dim": 0,
     "prior_partition": "class",
-    "arm": "g_interp_cap",
-    "coeff": 1.0,
     # probe round 4/5: wider nets and a wider latent each bought ~5 modes; the
     # Fourier ramp keeps the core width honest (0.8-0.9 vs 0.5-0.6 without it)
     "hidden": 256,
@@ -71,9 +69,11 @@ BASE: Dict = {
     "fourier_ramp_end": 0.7,
 }
 # BASE minus the capacity/schedule additions: the two structural changes alone.
-BASE_MIN: Dict = {"emb_dim": 0, "prior_partition": "class", "arm": "g_interp_cap", "coeff": 1.0}
+BASE_MIN: Dict = {"emb_dim": 0, "prior_partition": "class"}
 
-CHAMPION: Dict = {"emb_dim": 8, "prior_partition": "none", "arm": "b_cap", "coeff": 1.0}
+# The critic penalty is the recipe default (train_sparse uses recipe.make_critic_penalty);
+# the historical penalty-arm comparisons were removed with the legacy arms.
+CHAMPION: Dict = {"emb_dim": 8, "prior_partition": "none"}
 
 
 def parse_kv(s: str) -> Dict:
@@ -103,12 +103,8 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
         ch = dict(CHAMPION)
         g.append(("champion", dict(ch)))                                             # as shipped
         g.append(("champion_f0", {**ch, "fourier": 0}))                             # plain-MLP D
-        g.append(("champion_r1r2", {**ch, "arm": "a_r1r2", "coeff": 1.0}))          # zero-centred, strong
-        g.append(("champion_einterp", {**ch, "arm": "e_interp", "coeff": 1.0}))     # two-sided interpolate
-        g.append(("emb_icap", {**ch, "arm": "g_interp_cap"}))                       # change penalty only
-        g.append(("emb_icap_ramp", {**ch, "arm": "g_interp_cap", "fourier_ramp_start": 0.3, "fourier_ramp_end": 0.7}))
-        g.append(("pp_bcap", {**ch, "emb_dim": 0, "prior_partition": "class"}))     # change conditioning only
-        g.append(("pp_icap", dict(BASE_MIN)))                                       # both structural changes
+        g.append(("champion_ramp", {**ch, "fourier_ramp_start": 0.3, "fourier_ramp_end": 0.7}))
+        g.append(("pp_icap", dict(BASE_MIN)))                                       # prior-only conditioning
         g.append(("pp_icap_ramp", {**BASE_MIN, "fourier_ramp_start": 0.3, "fourier_ramp_end": 0.7}))
         g.append(("pp_icap_f0", {**BASE_MIN, "fourier": 0}))
         g.append(("pp_icap_h256", {**BASE_MIN, "hidden": 256}))
@@ -117,7 +113,7 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
         g.append(("base_f0", {**BASE, "fourier": 0, "fourier_ramp_start": 0.0, "fourier_ramp_end": 0.0}))
         g.append(("base_8k", {**BASE, "total_steps": 8000}))
         g.append(("uncond_floor", {**ch, "emb_dim": 0, "d_mode": "scalar"}))        # no class anywhere
-        g.append(("uncond_ceiling", {**ch, "emb_dim": 0, "arm": "g_interp_cap"}))   # G unconditional, D ucd
+        g.append(("uncond_ceiling", {**ch, "emb_dim": 0}))                          # G unconditional, D ucd
         return g
 
     if stage == "ucd":

@@ -20,7 +20,7 @@ error = (scaler.action(at_hat) - y_action) / S
 real_R = sigma * epsilon
 fake_R = same sigma * epsilon + error
 
-L_R = mean softplus(R(fake_R) - R(real_R)) + lazy cap on those noise coordinates
+L_R = mean softplus(R(fake_R) - R(real_R)) + recipe critic penalty on those noise coordinates
 L_GE = mean softplus(R(real_R) - R(fake_R))
 ```
 
@@ -34,9 +34,10 @@ follows the slider geometric schedule with absolute hold 1.0 on this run's
 update budget. Real and fake inside a pair share noise. The critic update and
 the control update draw independent noise and independent minibatches.
 
-The cap is the slider game's one-sided `b_cap` (threshold 1, coefficient 1)
-applied to `R`'s 2-d noise coordinates every fourth update, with lazy multiplier
-4. It is not a penalty on lander states, actions, or transition samples.
+`R` trains with the recipe's critic optimizer and critic penalty
+(`recipe.make_critic_optimizer`, `recipe.make_critic_penalty`) on its 2-d noise
+coordinates; `E_control` and `G2` use `recipe.make_generator_optimizer`. The
+penalty is not applied to lander states, actions, or transition samples.
 
 Action MSE is computed under `no_grad` and written to the log as `action_mse`.
 It is not added to `L_GE`. State coordinates of the decoded view receive no
@@ -70,9 +71,9 @@ does not run `R`.
 | Recipe | Optimized action term | Who trains | Transition GAN |
 | --- | --- | --- | --- |
 | Imitation L2 | action MSE | `E_control`, `G2` | frozen, unused |
-| Joint L2 fine-tune | action MSE, plus reconstruction | all G/E/prior/D and `E_control` | Rp + sample `b_cap` |
-| Previous-action L2 | action MSE, plus state MSE/BCE | scratch G/E/prior/D | Rp + sample `b_cap` |
-| Scratch sliders, all heads | 18-d paired-error game | scratch G/E/prior/D/R | Rp + sample `b_cap`, still on |
+| Joint L2 fine-tune | action MSE, plus reconstruction | all G/E/prior/D and `E_control` | Rp + recipe critic penalty |
+| Previous-action L2 | action MSE, plus state MSE/BCE | scratch G/E/prior/D | Rp + recipe critic penalty |
+| Scratch sliders, all heads | 18-d paired-error game | scratch G/E/prior/D/R | Rp + recipe critic penalty, still on |
 | **This fine-tune** | **2-d action paired-error game** | **`E_control`, `G2`, `R`** | **frozen, unused** |
 
 The scratch `slider_scope: action` path is a different experiment. It still
@@ -81,8 +82,8 @@ keeps G1/G3 reconstruction. It was implemented and tested, and it was not the
 completed 6/50 run. This fine-tune does not reopen it.
 
 A classic ParticleGAN replacement would drop action MSE and train the joint and
-marginal critics with relativistic loss plus sample-point `b_cap`. That graph
-is not this one. The only adversary here is `R`, and the only cap is on `R`'s
+marginal critics with relativistic loss plus the recipe critic penalty. That graph
+is not this one. The only adversary here is `R`, and the only penalty is on `R`'s
 noise coordinates.
 
 ## Run
@@ -97,7 +98,7 @@ tail -F results/gym/lunar_lander_slider_finetune/live.log
 
 Each line is prefixed with `[action_error]`. `metrics.jsonl` records `loss`,
 `error_G` (same value as `loss`), `error_D`, `cap`, diagnostic `action_mse`,
-and `sigma`. `cap` is zero except every fourth update.
+and `sigma`. `cap` is the recipe critic penalty on R, applied every update.
 
 CPU smoke overrides the device and writes a new directory:
 

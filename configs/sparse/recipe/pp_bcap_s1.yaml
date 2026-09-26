@@ -1,4 +1,3 @@
-arm: b_cap
 coeff: 1.0
 emb_dim: 0
 out_dir: results/sparse/runs/recipe/pp_bcap_s1

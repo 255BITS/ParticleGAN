@@ -1,13 +1,10 @@
 """Fine-tune the controller with YuE2's paired-error adversarial game.
 
 Playback stays E_control(st, previous at) -> z -> G2. Absolute imitation and
-reconstruction L2 stay out of the graph. The controller step is relativistic
-logistic loss on the edit-normalized action residual, plus sample-point b_cap
-on that critic. A configured GAN with weight 0 is rejected.
-
-``adv_posture=yue2`` keeps that cap on every fourth step (``EDIT_CAP_EVERY``).
-``adv_posture=locked_shared`` builds the logistic loss and the every-step cap
-from ``particlegan.locked_shared`` (``make_gan_loss``, ``make_b_cap``).
+reconstruction L2 stay out of the graph. The controller step is the recipe's
+GAN loss on the edit-normalized action residual; the edit critic trains with
+the recipe's critic optimizer and penalty (``recipe.make_critic_optimizer`` /
+``recipe.make_critic_penalty``). A configured GAN with weight 0 is rejected.
 """
 import copy
 import json
@@ -16,11 +13,7 @@ from pathlib import Path
 import torch
 from torch.nn import functional as F
 
-from lib.vendor.concept_slider_core.reference import (GlobalMixErrorCritic, noise_std,
-    rp_d_loss, rp_g_loss)
-from particlegan.grad_regularizers import GradientPenalty
-from particlegan.locked_shared import (LOCKED_SHARED, locked_adv_defaults, make_b_cap,
-    make_gan_loss)
+from lib.vendor.concept_slider_core.reference import GlobalMixErrorCritic, noise_std
 
 from experiments.train_gym_transition import build_models, load_checkpoint
 from lib.safe_fast_landing import require_live_adversary as _require_live_adversary
@@ -37,18 +30,6 @@ REMOVED_L2 = (
 )
 
 
-def require_classic_particle_gan(gan, reg):
-    """Lock Rp logistic and sample-point b_cap. Interpolated caps are a different arm."""
-    if gan.loss_type != "logistic" or gan.mode != "rp":
-        raise ValueError("Arm A requires GANLoss logistic mode='rp'")
-    if reg.arm != "b_cap" or reg.method != "autograd" or reg.norm != "l2" or reg.lazy_k != 1:
-        raise ValueError("Arm A requires sample-point autograd L2 b_cap on every step")
-    if reg.target_anneal != "none" or reg.coeff != 1. or reg.kappa != 1.:
-        raise ValueError("Arm A keeps b_cap coeff 1, kappa 1, and no center anneal")
-
-
-# YuE2 FORMULATION.md: the cap is applied every fourth update and multiplied by 4.
-EDIT_CAP_EVERY = 4
 # FORMULATION.md: the other controls hold scheduled noise at 1.3 times edit RMS.
 EDIT_NOISE_HOLD = 1.3
 
@@ -84,55 +65,6 @@ def normalized_g2_action(bundle, states, previous, terrain):
     return (raw.tanh() - bundle["G"].action_mean) / bundle["G"].action_scale
 
 
-def edit_cap():
-    """Sample-point b_cap on the edit critic. Lazy every fourth step, coeff 1, times 4."""
-    return GradientPenalty(arm="b_cap", coeff=1., kappa=1., lazy_k=EDIT_CAP_EVERY, norm="l2",
-                           method="autograd", target_anneal="none")
-
-
-def adversarial_game(posture):
-    """Return ``(gan or None, cap)`` for one gym adversarial posture.
-
-    ``locked_shared`` calls ``make_gan_loss(LOCKED_SHARED)`` and
-    ``make_b_cap(LOCKED_SHARED)``. ``lazy_k`` is the stamp's 1.
-    ``yue2`` keeps ``edit_cap`` (every fourth step) and the card kernel
-    ``rp_d_loss`` / ``rp_g_loss``. The kernels match; the schedule does not.
-    """
-    if posture == "locked_shared":
-        return make_gan_loss(LOCKED_SHARED), make_b_cap(LOCKED_SHARED)
-    if posture == "yue2":
-        return None, edit_cap()
-    raise ValueError("adv_posture must be yue2 or locked_shared")
-
-
-def locked_shared_recipe_fields(gan, reg):
-    """Recipe fields taken from the built stamp objects, not a second pin dict.
-
-    Cloud fields are recorded and marked unapplied. This gym step does not
-    build the 12-particle demo cloud, and it has no cover term.
-    """
-    stamp = locked_adv_defaults()
-    if gan is None or gan.loss_type != stamp["loss_type"] or gan.mode != stamp["gan_mode"]:
-        raise RuntimeError("locked_shared loss must come from make_gan_loss")
-    actual = (reg.arm, reg.coeff, reg.kappa, reg.norm, reg.lazy_k, reg.method, reg.target_anneal)
-    expected = (stamp["reg_arm"], stamp["reg_coeff"], stamp["reg_kappa"], stamp["reg_norm"],
-                stamp["lazy_k"], stamp["reg_method"], stamp["target_anneal"])
-    if actual != expected:
-        raise RuntimeError(f"locked_shared b_cap must come from make_b_cap: {actual} != {expected}")
-    return dict(
-        stamp="particlegan.locked_shared.LOCKED_SHARED",
-        loss_type=gan.loss_type, gan_mode=gan.mode,
-        reg_arm=reg.arm, reg_method=reg.method, reg_norm=reg.norm,
-        reg_coeff=float(reg.coeff), reg_kappa=float(reg.kappa),
-        reg_every=reg.lazy_k, target_anneal=reg.target_anneal,
-        fm_weight=stamp["fm_weight"], cover_weight=stamp["cover_weight"],
-        cover_posture=stamp["cover_posture"], cover_applied=False,
-        n_particles=stamp["n_particles"], particle_l2=stamp["particle_l2"],
-        z_dim_pin=stamp["z_dim"], particles_applied=False,
-        pairing=stamp["pairing"], critic_pin=stamp["critic"],
-        reg_impl=stamp["reg_impl"])
-
-
 def build_edit_critic(targets, neutrals, cfg):
     """Global-mix critic on the paired action edit. Card setting gmix_t8_w48_l1."""
     if targets.shape != neutrals.shape or targets.ndim != 2 or targets.shape[1] != 2:
@@ -145,6 +77,16 @@ def build_edit_critic(targets, neutrals, cfg):
     return critic
 
 
+def edit_game(recipe, critic, **adam_kwargs):
+    """``(gan, opt_r, penalty)`` for the edit critic, all from the recipe.
+
+    ``opt_r`` is ``recipe.make_critic_optimizer`` with a fresh EMA copy of the
+    critic; ``penalty`` is ``recipe.make_critic_penalty(opt_r)``.
+    """
+    opt_r = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic), **adam_kwargs)
+    return recipe.make_loss(), opt_r, recipe.make_critic_penalty(opt_r)
+
+
 def paired_noise(critic, predicted, target, step, rng, total_steps):
     """Shared Gaussian on the real/fake pair. Fake adds the normalized action error."""
     residual = (predicted - target.detach()) / critic.target_std
@@ -155,34 +97,30 @@ def paired_noise(critic, predicted, target, step, rng, total_steps):
     return noise, noise + residual
 
 
-def discriminator_objective(critic, predicted, target, step, rng, reg, total_steps, gan=None):
-    """Rp logistic plus sample-point b_cap. The action graph is detached.
+def discriminator_objective(critic, predicted, target, step, rng, penalty, total_steps, gan):
+    """Recipe GAN loss plus the recipe critic penalty. The action graph is detached.
 
-    ``gan=None`` is the YuE2 kernel (``rp_d_loss``). A ``GANLoss`` from
-    ``make_gan_loss`` is the locked_shared kernel.
+    ``penalty`` is ``recipe.make_critic_penalty(opt_r)`` for this edit critic.
     """
     noise, fake = paired_noise(critic, predicted.detach(), target, step, rng, total_steps)
-    real_score, fake_score = critic(noise), critic(fake)
-    adversarial = rp_d_loss(real_score, fake_score) if gan is None else gan.d_loss(real_score, fake_score)
-    penalty = reg(critic, noise, fake, step=step)
-    return adversarial + penalty, dict(error_d=adversarial.detach(), b_cap=penalty.detach(),
-                                       b_cap_applied=float(step % reg.lazy_k == 0))
+    adversarial = gan.d_loss(critic(noise), critic(fake))
+    value = penalty(critic, noise, fake)
+    return adversarial + value, dict(error_d=adversarial.detach(), penalty=value.detach())
 
 
 def controller_objective(critic, predicted, target, step, rng, total_steps, adv_weight,
-                         safe_fast_cost=None, safe_fast_weight=0., gan=None):
-    """RpGAN controller loss, plus an optional safe-fast cost.
+                         safe_fast_cost=None, safe_fast_weight=0., *, gan):
+    """Recipe GAN controller loss, plus an optional safe-fast cost.
 
     `safe_fast_weight=0` does not read `safe_fast_cost`, so the proven
     paired-error graph stays the adversarial term alone. There is no action MSE.
-    ``gan=None`` uses ``rp_g_loss``. A locked_shared ``GANLoss`` uses ``g_loss``.
     """
     require_live_adversary(adv_weight)
     noise, fake = paired_noise(critic, predicted, target, step, rng, total_steps)
     with torch.no_grad():
         real_score = critic(noise)
     fake_score = critic(fake)
-    adversarial = rp_g_loss(real_score, fake_score) if gan is None else gan.g_loss(fake_score, real_score)
+    adversarial = gan.g_loss(fake_score, real_score)
     if not adversarial.requires_grad:
         raise RuntimeError("Controller adversarial loss has no gradient")
     loss = adv_weight * adversarial

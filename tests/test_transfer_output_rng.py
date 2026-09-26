@@ -14,6 +14,7 @@ from benchmarks.transfer_suite.toy100_compatibility import (
     _native_noise_receipt, declared_recipe, run_image, run_vector, setup_image,
 )
 from particlegan import get_recipe
+from benchmarks.gan_v3 import gan_v3_recipe
 
 
 def test_isolated_selector_is_optional_exact_and_requires_positive_noise():
@@ -79,7 +80,7 @@ def _image_step(*, isolated: bool):
                  input_noise_anneal_end=0.5, output_noise_warmup=0.0)
     if isolated:
         noise.update(output_noise_std=0.029, output_noise_rng="isolated")
-    context = setup_image(spec, get_recipe(), noise)
+    context = setup_image(spec, gan_v3_recipe(), noise)
     trainer = context["trainer"]
     initial_global = torch.random.get_rng_state().clone()
     centers = context["centers"]
@@ -122,9 +123,9 @@ def test_vector_and_image_routes_record_real_private_draws_and_eval_restoration(
     image.update(runner="image", steps=24, batch_size=4, particles=8, width=4)
     for kind, spec in (("vector", vector), ("image", image)):
         if kind == "vector":
-            result, context = run_vector(spec, None, get_recipe(), noise)
+            result, context = run_vector(spec, None, gan_v3_recipe(), noise)
         else:
-            result, context = run_image(spec, get_recipe(), noise)
+            result, context = run_image(spec, gan_v3_recipe(), noise)
         receipt = _native_noise_receipt(context, noise, spec, result)
         assert len(result["observations"]) == 24
         assert receipt["output_module"] == "IsolatedOutputNoise"

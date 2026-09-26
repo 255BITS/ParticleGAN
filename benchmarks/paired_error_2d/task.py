@@ -14,9 +14,9 @@ import math
 import torch
 from torch import nn
 
-from particlegan.gan_loss import GANLoss
-from particlegan.grad_regularizers import GradRegularizer
-from particlegan.recipes import learning_rate_scale
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradRegularizer
+from particlegan import learning_rate_scale
 from particlegan.vicreg_loss import VICRegLikeLoss
 
 

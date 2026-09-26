@@ -15,6 +15,7 @@ from unittest.mock import patch
 import torch
 from . import shared_discriminator_search as runner, suite
 from .compare_defaults import plan, write
+from benchmarks.gan_v3 import legacy_dict
 
 REPLAY_KEYS = ('recipe', 'candidate', 'original_spec', 'spec', 'architecture',
                'discriminator_variant', 'applied', 'result', 'verdict', 'ema_verdict')
@@ -38,7 +39,7 @@ def replay(reference, implementation, output):
     job = next(job for job in plan() if job['spec']['name'] == expected['spec']['name'])
     assert job['spec']['runner'] == 'vector'
     assert expected['original_spec'] == job['spec']
-    assert expected['recipe'] == json.loads(json.dumps(runner.recipe().to_dict()))
+    assert expected['recipe'] == json.loads(json.dumps(legacy_dict(runner.recipe())))
     module = importlib.import_module(implementation)
     assert module.variant(card) == selected
     output.mkdir(parents=True, exist_ok=False)

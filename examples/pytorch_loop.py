@@ -3,8 +3,21 @@
 CPU smoke: python -u examples/pytorch_loop.py --steps 5 --batch-size 16
 TOML:     python -u examples/pytorch_loop.py --config examples/api.toml
 
-This small MLP demonstrates integration using the recommended defaults.
-Replace its networks and synthetic batches with your own pipeline.
+This small MLP demonstrates integration using the recommended defaults --
+the same update GANTrainer performs, with the control flow in your hands:
+
+* role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
+* critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
+* ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``: Adam
+  optimizers whose ordinary ``step()`` does the recipe's step-time work
+  (currently K3P: spike guard, EMA-critic update, A2 latent damping),
+* ``recipe.make_critic_penalty(opt_d)``: the critic penalty, added to the
+  critic loss like any other term.
+
+To checkpoint, save the modules and both optimizers' ``state_dict()`` (they
+carry the EMA critic and every counter). With several critics, build one
+``recipe.make_critic_optimizer(D_k, ema_critic=...)`` and one penalty per
+critic. Replace the networks and synthetic batches with your own.
 """
 
 import argparse
@@ -15,7 +28,8 @@ import time
 import torch
 from torch import nn
 
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import InputNoise, get_recipe, learning_rate_scales
+from particlegan.training import input_noise_std, output_noise_std
 
 
 @torch.no_grad()
@@ -69,11 +83,19 @@ def main():
     ).to(device)
     prior = recipe.make_prior().to(device)
     gan = recipe.make_loss()
-    penalty = recipe.make_gradient_penalty()
     spread = recipe.make_prior_regularizer()
-    # Ordinary Adam optimizers; replace these with your own if desired.
-    opt_g, opt_d = recipe.make_optimizers(generator, critic, prior)
+    # Adam optimizers ([generator, prior] groups, and the critic); the recipe's
+    # regularization runs inside their step(). The EMA critic is ours to allocate.
+    opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, ema_critic=copy.deepcopy(critic))
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+    penalty = recipe.make_critic_penalty(opt_d)
+    noise = torch.Generator(device=device).manual_seed(43)
+    noisy_critic = InputNoise(critic, generator=noise)  # fresh input noise per evaluation
+
+    def with_noise(x, sigma):
+        if sigma == 0:
+            return x
+        return x + sigma * torch.randn(x.shape, generator=noise, device=x.device, dtype=x.dtype)
     ema_g = copy.deepcopy(generator).eval().requires_grad_(False)
     ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
@@ -82,22 +104,22 @@ def main():
     print(json.dumps({"event": "config", **recipe.to_dict(), "device": str(device)}), flush=True)
     started = time.monotonic()
     for step in range(1, recipe.total_steps + 1):
-        scale = learning_rate_scale(
-            step - 1, recipe.total_steps, start=recipe.lr_anneal_start, floor=recipe.lr_floor,
-        )
-        for opt, rates in zip((opt_g, opt_d), base_lrs):
-            for group, rate in zip(opt.param_groups, rates):
-                group["lr"] = rate * scale
+        network, prior_scale = learning_rate_scales(step - 1, recipe)
+        opt_g.param_groups[0]["lr"] = base_lrs[0][0] * network
+        opt_g.param_groups[1]["lr"] = base_lrs[0][1] * prior_scale
+        opt_d.param_groups[0]["lr"] = base_lrs[1][0] * network
+        noisy_critic.std = input_noise_std(recipe, step - 1)
+        sigma_out = output_noise_std(recipe, step - 1)
 
         # Replace this synthetic batch with a batch from your DataLoader.
         ids = torch.randint(len(centers), (recipe.batch_size,), device=device)
         real = centers[ids] + 0.015 * torch.randn(recipe.batch_size, 2, device=device)
         z, particle_ids = prior.sample(recipe.batch_size)
-        fake = generator(z)
+        fake = with_noise(generator(z), sigma_out)
 
+        d_loss = gan.d_loss(noisy_critic(real), noisy_critic(fake.detach()))
+        d_loss = d_loss + penalty(noisy_critic, real, fake.detach())
         opt_d.zero_grad(set_to_none=True)
-        d_loss = gan.d_loss(critic(real), critic(fake.detach()))
-        d_loss = d_loss + penalty(critic, real, fake.detach(), step=step)
         d_loss.backward()
         opt_d.step()
 
@@ -106,9 +128,9 @@ def main():
         critic.requires_grad_(False)
         try:
             opt_g.zero_grad(set_to_none=True)
-            g_loss = gan.g_loss(critic(fake), critic(real).detach())
+            g_loss = gan.g_loss(noisy_critic(fake), noisy_critic(real).detach())
             prior_loss = spread(prior.z[particle_ids.unique()])
-            total_g = g_loss + prior_loss
+            total_g = g_loss + prior_loss  # spread already carries recipe.prior_reg
             total_g.backward()
             opt_g.step()
         finally:
@@ -121,7 +143,8 @@ def main():
             print(json.dumps({
                 "event": "train", "step": step,
                 "d_loss": d_loss.detach().item(), "g_loss": g_loss.detach().item(),
-                "prior_loss": prior_loss.detach().item(), "lr_scale": scale,
+                "prior_loss": prior_loss.detach().item(), "lr_scale": network,
+                **penalty.diagnostics(),
                 "seconds": round(time.monotonic() - started, 3),
             }), flush=True)
 

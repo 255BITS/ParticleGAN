@@ -1,45 +1,16 @@
 {
-  "status": "paused_user_requested",
+  "status": "baseline_pending_after_compaction",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 5,
   "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T020611Z",
   "workflow": [
-    "solve failing toy",
-    "verify prospective winner on full frozen gates",
-    "promote only verified winner",
-    "continue from verified winner for remaining failures"
+    "complete package API migration",
+    "compact",
+    "measure fresh public-default baseline",
+    "compare mechanisms at the declared seed",
+    "qualify before promotion"
   ],
-  "stop_condition": {
-    "own_hold_checks": 1200,
-    "own_extension_checks": 300,
-    "whole_canonical_shift_status": "PASS",
-    "deadline_recovery_checks": 81,
-    "matched_frozen_control_required": true,
-    "own_toy_passes": 22,
-    "horizon_independence_required": true,
-    "delayed_and_repeated_change_checks_required": true,
-    "long_term_updates": 30000,
-    "long_term_protocol": "reports/toy100/continuous-round-3/long-term-stability-protocol.json",
-    "native100_matrix": {
-      "problems": [
-        "grid100",
-        "rotated100",
-        "staggered100"
-      ],
-      "seeds": [
-        1234,
-        1235,
-        1236,
-        1237
-      ],
-      "required_passes": 12,
-      "required_passes_per_problem": 4,
-      "updates_each": 7000,
-      "coverage_and_accuracy_required": true,
-      "explicit_user_qualification_matrix": true
-    }
-  },
   "unverified_candidates": {
     "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
     "p3_floor_reopen": "Sensitive4 PASS after observation-hook repair; remaining18 NOT_RUN. Hold1200+300, FAIL77/81 recovery, scheduled noise. Not promoted.",
@@ -95,7 +66,7 @@
     "verified_live_counts": {},
     "verified_gpu_reservations": {},
     "new_launches_allowed": false,
-    "pause_reason": "User requested stopping search and taking inventory while allowing existing work to finish."
+    "pause_reason": "Baseline training deferred until after compaction; historical autonomous search remains stopped."
   },
   "completed_rounds": [
     {
@@ -288,5 +259,58 @@
     ],
     "final_attempt_archive": "reports/toy100/continuous-round-3/stop-inventory/manifest.json"
   },
-  "current_lead": "r2_moment_surprise"
+  "historical_current_lead": "r2_moment_surprise",
+  "current_lead": null,
+  "active_phase": "public_default_baseline",
+  "baseline": {
+    "status": "NOT_RUN",
+    "master_reference": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+    "entrypoint": "reports.toy100.public_default_baseline",
+    "parameters": "reports/toy100/public-default-baseline/parameters.json",
+    "handoff": "reports/toy100/public-default-baseline/README.md",
+    "historical_scores_inherited": false,
+    "seed_sweeps": false,
+    "training_deferred_until_after_compaction": true
+  },
+  "historical_stop_condition": {
+    "own_hold_checks": 1200,
+    "own_extension_checks": 300,
+    "whole_canonical_shift_status": "PASS",
+    "deadline_recovery_checks": 81,
+    "matched_frozen_control_required": true,
+    "own_toy_passes": 22,
+    "horizon_independence_required": true,
+    "delayed_and_repeated_change_checks_required": true,
+    "long_term_updates": 30000,
+    "long_term_protocol": "reports/toy100/continuous-round-3/long-term-stability-protocol.json",
+    "native100_matrix": {
+      "problems": [
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "seeds": [
+        1234,
+        1235,
+        1236,
+        1237
+      ],
+      "required_passes": 12,
+      "required_passes_per_problem": 4,
+      "updates_each": 7000,
+      "coverage_and_accuracy_required": true,
+      "explicit_user_qualification_matrix": true
+    }
+  },
+  "stop_condition": {
+    "phase": "baseline_only",
+    "protocols": [
+      "hold",
+      "shift"
+    ],
+    "qualification_status": "NOT_RUN",
+    "no_seed_sweeps": true,
+    "no_automatic_search": true,
+    "next_action": "Establish the current package baseline after compaction"
+  }
 }

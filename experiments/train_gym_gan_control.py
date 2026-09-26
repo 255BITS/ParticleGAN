@@ -22,7 +22,7 @@ from lib.gym_sparse_action import build_sparse_records, fit_sparse_scaler, spars
 from lib.gym_state_control import training_recipe
 from lib.gym_gan_control import (MODULE_KEYS, build_gan_models, initial_hashes, real_views,
     fake_views, discriminator_loss, generator_loss)
-from particlegan import learning_rate_scale
+from particlegan import scale_learning_rates
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24003, device="cuda:1", z_dim=32, num_particles=1024,
@@ -109,17 +109,19 @@ def train(cfg):
     labeled_actions = torch.as_tensor(records["labeled_actions"], device=device)
     recipe = training_recipe(cfg)
     optimizer, optimizer_d = recipe.make_optimizers(bundle["G"], bundle["D"], bundle["prior"],
-        encoder=bundle["E"], fused=device.type == "cuda")
+        encoder=bundle["E"], ema_critic=copy.deepcopy(bundle["D"]), fused=device.type == "cuda")
     optimizers = (optimizer, optimizer_d)
     base_rates = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     prior_regularizer = recipe.make_prior_regularizer()
-    gan, reg = recipe.make_loss(), recipe.make_gradient_penalty()
+    gan = recipe.make_loss()
     ema = {**bundle, **{key: copy.deepcopy(bundle[key]).eval().requires_grad_(False) for key in ("G", "E", "prior")}}
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(labeled=11, auxiliary=21, d_labeled=31, d_auxiliary=41,
                                    latent=51, contact=61, d_latent=71, d_contact=81).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 100 + i)
                 for i, role in enumerate(("joint", "action", "state", "next_state"))}
+    critic_penalties = {role: recipe.make_critic_penalty(optimizer_d)
+                        for role, generator in reg_rngs.items()}
     draws_digest = {name: hashlib.sha256() for name in ("labeled", "auxiliary", "d_labeled", "d_auxiliary")}
     def batch(prefix=""):
         label_name, all_name = prefix + "labeled", prefix + "auxiliary"
@@ -166,10 +168,7 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, bundle["prior"])
             # No generator graph or stale gradients during discriminator optimization.
             optimizer.zero_grad(set_to_none=True)
             bundle["D"].requires_grad_(True)
@@ -177,7 +176,7 @@ def train(cfg):
             d_views = real_views(bundle, d_batch)
             with torch.no_grad():
                 d_fakes = fake_views(bundle, d_views, rng["d_latent"], rng["d_contact"], straight_through=False)
-            d_loss, d_terms = discriminator_loss(bundle["D"], d_views, d_fakes, gan, reg, step, reg_rngs)
+            d_loss, d_terms = discriminator_loss(bundle["D"], d_views, d_fakes, gan, critic_penalties)
             if not torch.isfinite(d_loss):
                 raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
             optimizer_d.zero_grad(set_to_none=True)
