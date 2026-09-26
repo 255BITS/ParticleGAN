@@ -69,7 +69,16 @@ def anchored_gradient_gap(D, x_real, g, dimension):
     return (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
 
 
-def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True):
+def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True, *, ema_critic=None):
+    # CriticPenalty calls penalty(D, real, fake, step, collect_stats, ema_critic=...).
+    # The legacy signature this file was written against takes generator in that slot.
+    if isinstance(generator, bool):
+        collect_stats = generator
+        generator = None
+    # The current K3P kernel has no arm. Leave it on its own formula and pass
+    # ema_critic through. The replacement below is the legacy a_r1r2 host.
+    if not hasattr(self, "arm"):
+        return _original_penalty(self, D, x_real, x_fake, step, collect_stats, ema_critic=ema_critic)
     if self.arm != 'a_r1r2' or (self.lazy_k > 1 and step % self.lazy_k != 0):
         return _original_penalty(self, D, x_real, x_fake, step, generator, collect_stats)
     _state['pending'] = True
