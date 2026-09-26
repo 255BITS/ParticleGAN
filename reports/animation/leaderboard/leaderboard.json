@@ -104,9 +104,9 @@
   },
   {
     "rank": 2,
-    "name": "no_detach",
+    "name": "base",
     "config": {
-      "name": "no_detach",
+      "name": "base",
       "arm": "gan",
       "joint_d": true,
       "anchor": "full",
@@ -137,8 +137,9 @@
         20000
       ],
       "data_dir": "results/animation/bouncing_sprite/data",
-      "out_dir": "results/animation/bouncing_sprite/no_detach",
-      "live_log": "results/animation/bouncing_sprite/live.log"
+      "out_dir": "results/animation/bouncing_sprite/base",
+      "live_log": "results/animation/bouncing_sprite/live.log",
+      "routing_temperature": 0.25
     },
     "parameters": {
       "G": 1031277,
@@ -216,9 +217,9 @@
   },
   {
     "rank": 3,
-    "name": "base",
+    "name": "detach",
     "config": {
-      "name": "base",
+      "name": "detach",
       "arm": "gan",
       "joint_d": true,
       "anchor": "full",
@@ -249,8 +250,9 @@
         20000
       ],
       "data_dir": "results/animation/bouncing_sprite/data",
-      "out_dir": "results/animation/bouncing_sprite/base",
-      "live_log": "results/animation/bouncing_sprite/live.log"
+      "out_dir": "results/animation/bouncing_sprite/detach",
+      "live_log": "results/animation/bouncing_sprite/live.log",
+      "routing_temperature": 0.25
     },
     "parameters": {
       "G": 1031277,
@@ -328,9 +330,9 @@
   },
   {
     "rank": 4,
-    "name": "no_g1_g3_anchor",
+    "name": "detach_no_g1_g3_anchor",
     "config": {
-      "name": "no_g1_g3_anchor",
+      "name": "detach_no_g1_g3_anchor",
       "arm": "gan",
       "joint_d": true,
       "anchor": "g2_only",
@@ -361,8 +363,9 @@
         20000
       ],
       "data_dir": "results/animation/bouncing_sprite/data",
-      "out_dir": "results/animation/bouncing_sprite/no_g1_g3_anchor",
-      "live_log": "results/animation/bouncing_sprite/live.log"
+      "out_dir": "results/animation/bouncing_sprite/detach_no_g1_g3_anchor",
+      "live_log": "results/animation/bouncing_sprite/live.log",
+      "routing_temperature": 0.25
     },
     "parameters": {
       "G": 1031277,
@@ -440,9 +443,9 @@
   },
   {
     "rank": 5,
-    "name": "no_joint_d",
+    "name": "detach_no_joint_d",
     "config": {
-      "name": "no_joint_d",
+      "name": "detach_no_joint_d",
       "arm": "gan",
       "joint_d": false,
       "anchor": "full",
@@ -473,8 +476,9 @@
         20000
       ],
       "data_dir": "results/animation/bouncing_sprite/data",
-      "out_dir": "results/animation/bouncing_sprite/no_joint_d",
-      "live_log": "results/animation/bouncing_sprite/live.log"
+      "out_dir": "results/animation/bouncing_sprite/detach_no_joint_d",
+      "live_log": "results/animation/bouncing_sprite/live.log",
+      "routing_temperature": 0.25
     },
     "parameters": {
       "G": 1031277,

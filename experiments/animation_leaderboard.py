@@ -8,7 +8,7 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 EVALUATION_SOURCES = ("lib/animation_evaluation.py", "lib/sprite_animation.py")
-TRAINING_FIELDS = ("steps", "batch_size", "seed", "lr", "num_particles")
+TRAINING_FIELDS = ("steps", "batch_size", "seed", "lr")  # num_particles is a candidate switch
 FINDINGS_PLACEHOLDER = "_Filled in after the runs complete._"
 
 
@@ -54,7 +54,15 @@ def describe(cfg):
     parts = ["GAN world model: G1/G2/G3 from the MoG prior, E(st) -> z dream loop",
              "joint + marginal critics" if cfg["joint_d"] else "marginal critics only (no joint D)",
              "E anchored on st/st+1/gt" if cfg["anchor"] == "full" else "E anchored on st+1 only (no G1/G3 anchor)",
-             "detached synthetic composition" if cfg["detach_synthetic"] else "synthetic composition not detached"]
+             "detached synthetic composition" if cfg["detach_synthetic"] else "live synthetic composition"]
+    if cfg.get("num_particles", 1024) != 1024:
+        parts.append(f"MoG{cfg['num_particles']} prior")
+    if cfg.get("routing_temperature", .25) != .25:
+        parts.append(f"routing temperature {cfg['routing_temperature']:g}")
+    for key, label in (("real_encoding_weight", "real encoding weight"),
+                       ("synthetic_reconstruction_weight", "synthetic reconstruction weight")):
+        if cfg.get(key, 1.) != 1.:
+            parts.append(f"{label} {cfg[key]:g}")
     return "; ".join(parts) + "."
 
 
@@ -88,8 +96,8 @@ def build(results, out):
     if trained:
         cfg = trained[0]["config"]
         budget = (f"Every trained arm uses {cfg['steps']:,} updates, batch {cfg['batch_size']}, "
-                  f"lr {cfg['lr']:g}, training seed {cfg['seed']} and {cfg['num_particles']:,} MoG components "
-                  f"(the direct arm has no prior). Persistence is untrained. No seed-only repeats.")
+                  f"lr {cfg['lr']:g} and training seed {cfg['seed']}; GAN rows use MoG1024 unless the row says "
+                  f"otherwise (the direct arm has no prior). Persistence is untrained. No seed-only repeats.")
     else:
         budget = "No trained arms yet."
     lines = ["# Animation world model leaderboard", "",

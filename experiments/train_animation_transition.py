@@ -2,7 +2,7 @@
 """Sprite animation world model: z -> (G1 st, G2 st+1, G3 gt), E(st) -> z dream loop.
 
 Arms (one config schema, leaderboard rows differ only in these switches):
-  gan         joint + marginal critics, E anchored on st/st+1/gt, detached composition
+  gan         joint + marginal critics, E anchored on st/st+1/gt, live (undetached) composition
   direct      supervised st -> (st+1, gt) baseline, same updates and frame decoder
   persistence no training; st+1 = st with exact frames (evaluation only)
 """
@@ -30,7 +30,7 @@ from lib.animation_evaluation import (evaluate_split, prior_validity, encoder_he
 from particlegan import get_recipe, learning_rate_scale
 
 
-DEFAULTS = dict(name="base", arm="gan", joint_d=True, anchor="full", detach_synthetic=True,
+DEFAULTS = dict(name="base", arm="gan", joint_d=True, anchor="full", detach_synthetic=False, routing_temperature=.25,
     width=256, encoder_width=256, channels=64,
     d_width=256, marginal_width=128, d_channels=32, z_dim=32, num_particles=1024,
     real_encoding_weight=1., synthetic_reconstruction_weight=1., marginal_weight=1.,
@@ -82,7 +82,7 @@ def build_models(cfg, device):
     prior = recipe.make_prior(device=device,
         generator=torch.Generator(device=device).manual_seed(cfg["seed"] + 101))
     torch.manual_seed(cfg["seed"] + 102)
-    e = AnimationEncoder(cfg["z_dim"], cfg["encoder_width"]).to(device)
+    e = AnimationEncoder(cfg["z_dim"], cfg["encoder_width"], cfg["routing_temperature"]).to(device)
     torch.manual_seed(cfg["seed"] + 100)
     d = AnimationCritics(cfg["d_width"], cfg["marginal_width"], cfg["d_channels"],
                          joint=cfg["joint_d"]).to(device)

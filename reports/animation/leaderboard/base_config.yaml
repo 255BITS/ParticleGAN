@@ -12,7 +12,7 @@ d_channels: 32
 d_width: 256
 data_dir: results/animation/bouncing_sprite/data
 data_seed: 24002
-detach_synthetic: true
+detach_synthetic: false
 device: cuda:1
 encoder_width: 256
 joint_d: true
@@ -30,3 +30,5 @@ steps: 20000
 synthetic_reconstruction_weight: 1.0
 width: 256
 z_dim: 32
+routing_temperature: 0.25
+relabeled_from: no_detach

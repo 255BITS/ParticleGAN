@@ -1,0 +1,4 @@
+name: detach_no_joint_d
+detach_synthetic: true
+joint_d: false
+out_dir: results/animation/bouncing_sprite/detach_no_joint_d

@@ -92,8 +92,9 @@ class AnimationGenerator(nn.Module):
 
 class AnimationEncoder(nn.Module):
     """E(st) -> particle code; returns the raw offset for bound-saturation health."""
-    def __init__(self, z_dim=32, width=256):
+    def __init__(self, z_dim=32, width=256, temperature=.25):
         super().__init__()
+        self.temperature = temperature
         self.features = mlp(STATE_DIM, width, width)
         self.query, self.offset = nn.Linear(width, z_dim), nn.Linear(width, z_dim)
         nn.init.zeros_(self.offset.weight)
@@ -103,7 +104,7 @@ class AnimationEncoder(nn.Module):
         features = self.features(state)
         query = F.layer_norm(self.query(features), (self.query.out_features,))
         offset = self.offset(features)
-        return particle_ae(query, offset, prior, temperature=.25, distance_reduction="sum",
+        return particle_ae(query, offset, prior, temperature=self.temperature, distance_reduction="sum",
                            offset_bound=OFFSET_BOUND), offset
 
 
@@ -113,7 +114,7 @@ def encoded_step(e, g, prior, state):
     return g(encoding.codes[:, 0]), encoding, offset
 
 
-def composed(e, g, prior, fake, detach_input=True):
+def composed(e, g, prior, fake, detach_input=False):
     """G(E(G1(z))) keeping the sampled st; detach_input stops E pushing G1 outward."""
     state = split(fake)[0]
     decoded, encoding, offset = encoded_step(e, g, prior, state.detach() if detach_input else state)
