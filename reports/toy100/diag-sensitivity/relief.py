@@ -1,9 +1,9 @@
-"""Three fixed, GAN-native dampers for the early G–D burst on hid_q K3P.
+"""Fixed, GAN-native dampers for hid_q K3P. Nothing here runs unless ``install`` does.
 
 The ring amplifier is the alternating update in the first few steps: a 1e-7
 change becomes O(1) by about step 8, and the one-step map there is a
 nonlinear kink (singular value grows as the probe epsilon shrinks) living in
-G and in D's response to G. Nothing here is on unless ``install`` runs.
+G and in D's response to G.
 
 optimistic
     Daskalakis et al. 2018, Algorithm 1, alpha = 1. After the host Adam step,
@@ -24,6 +24,21 @@ ema_fake
     The critic's fake forward uses the generator EMA and EMA particles already
     kept at ``recipe.ema`` / ``ema_decay`` (0.995). The generator step stays
     on the live weights. No new decay and no extra loss.
+
+k3p_pull
+    The probe's penalty patch lands on ``particlegan.grad_regularizers``, but
+    the ring calls ``benchmarks.legacy.grad_regularizers``. This points the
+    legacy ``a_r1r2`` penalty at ``mechanism.scaled_penalty`` (the intended
+    EMA-critic pull, spike guard, and handover). Constants stay the ones in
+    mechanism.py. At s == 1 the formula is that file's RMS R1 plus one-sided
+    fake cap, which is what the mechanism calls bit-exact, not the host's
+    symmetric squared R1/R2.
+
+row_damp
+    Same A2 row rule as ``latent.py`` (rho = 0.75 + 0.25 cos, at most half the
+    step removed, parent v from raw g, rho = 1 with no history). The sparse
+    gate is left as written. On a fully dense table, where that gate cannot
+    fire, the same rewrite runs anyway. No new coefficient.
 """
 from __future__ import annotations
 
@@ -31,7 +46,7 @@ import json
 import sys
 from contextlib import contextmanager, nullcontext
 
-NAMES = ("optimistic", "extragradient", "ema_fake")
+NAMES = ("optimistic", "extragradient", "ema_fake", "k3p_pull", "row_damp")
 _NAME = None
 _ORIG_ADAM = None
 _PREV = "k3p_optimistic_prev"
@@ -56,7 +71,11 @@ def _setting(name: str) -> str:
         return "Daskalakis Algorithm 1, alpha=1, on every Adam update"
     if name == "extragradient":
         return "simultaneous extragradient, same minibatch, one host Adam corrector"
-    return "critic fake uses the existing generator EMA (decay 0.995)"
+    if name == "ema_fake":
+        return "critic fake uses the existing generator EMA (decay 0.995)"
+    if name == "k3p_pull":
+        return "legacy a_r1r2 calls mechanism.scaled_penalty (decay 0.999, floor 0.01, guard 5 after 200)"
+    return "A2 rho=0.75+0.25*cos on a dense latent table; sparse gate unchanged"
 
 
 def _install_optimistic() -> None:
@@ -125,10 +144,16 @@ class _Loader:
 
     def exec_module(self, module):
         self.inner.exec_module(module)
-        if self.name.endswith("mode_hold") and _NAME == "extragradient":
+        if self.name == "benchmarks.legacy.grad_regularizers" and _NAME == "k3p_pull":
+            _patch_legacy_penalty(module)
+            print(json.dumps({"event": "relief_hook", "target": "legacy.GradientPenalty.penalty"}), flush=True)
+        elif self.name == "latent" and _NAME == "row_damp":
+            _patch_latent(module)
+            print(json.dumps({"event": "relief_hook", "target": "latent.begin"}), flush=True)
+        elif self.name.endswith("mode_hold") and _NAME == "extragradient":
             module.train_mode_hold = train_mode_hold
             print(json.dumps({"event": "relief_hook", "target": "train_mode_hold"}), flush=True)
-        elif self.name.endswith("training"):
+        elif self.name.endswith("training") and _NAME in ("ema_fake", "extragradient"):
             _patch_trainer(module)
             print(json.dumps({"event": "relief_hook", "target": "GANTrainer.step"}), flush=True)
         elif self.name.endswith("legacy_noise_adapters") and _NAME == "ema_fake":
@@ -150,6 +175,8 @@ class _Finder:
         "particlegan.training",
         "benchmarks.transfer_suite.legacy_noise_adapters",
         "particlegan.particle_prior",
+        "benchmarks.legacy.grad_regularizers",
+        "latent",
     }
 
     def find_spec(self, fullname, path, target=None):
@@ -161,6 +188,132 @@ class _Finder:
             return None
         spec.loader = _Loader(spec.loader, fullname)
         return spec
+
+
+def _patch_legacy_penalty(module) -> None:
+    """Send the legacy a_r1r2 arm through mechanism.scaled_penalty.
+
+    ``__call__`` passes ``ema_critic=``; scaled_penalty does not take it.
+    Other arms stay on the host method. Importing mechanism also registers
+    its spike guard and the LR record the handover weight reads.
+    """
+    import atexit
+    original = module.GradientPenalty.penalty
+
+    def penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True, *, ema_critic=None):
+        if self.arm != "a_r1r2":
+            return original(self, D, x_real, x_fake, step, generator, collect_stats, ema_critic=ema_critic)
+        import mechanism
+        out = mechanism.scaled_penalty(self, D, x_real, x_fake, step=step, generator=generator, collect_stats=collect_stats)
+        calls = mechanism.receipt["calls"]
+        if calls == 1 or calls % 200 == 0:
+            trace = mechanism.receipt["s_trace"]
+            print(json.dumps({
+                "event": "k3p_pull",
+                "calls": calls,
+                "pure_a": mechanism.receipt["pure_a_calls"],
+                "blend": mechanism.receipt["blend_calls"],
+                "pure_b": mechanism.receipt["pure_b_calls"],
+                "critic_steps": mechanism.receipt["critic_steps"],
+                "s": trace[-1] if trace else None,
+            }), flush=True)
+        return out
+
+    module.GradientPenalty.penalty = penalty
+
+    def _done():
+        import mechanism
+        rec = mechanism.receipt
+        print(json.dumps({
+            "event": "k3p_pull_done",
+            "calls": rec["calls"],
+            "pure_a": rec["pure_a_calls"],
+            "blend": rec["blend_calls"],
+            "pure_b": rec["pure_b_calls"],
+            "critic_steps": rec["critic_steps"],
+            "anchor_started_call": rec["anchor_started_call"],
+            "guard_clip_step_count": rec.get("guard_clip_step_count"),
+            "final_s": rec.get("final_s"),
+        }), flush=True)
+
+    atexit.register(_done)
+
+
+_DENSE_HIST = {}
+
+
+def _patch_latent(module) -> None:
+    """Apply the existing A2 rewrite on a dense table, where the sparse gate cannot."""
+    import atexit
+    original = module.begin
+    module.receipt["dense_calls"] = 0
+    warned = {"beta": False}
+
+    def begin(opt):
+        saved = original(opt)
+        if saved:
+            return saved
+        extra = _dense_rewrite(module, opt, warned)
+        return extra
+
+    module.begin = begin
+
+    def _done():
+        print(json.dumps({"event": "row_damp_done", "dense_calls": module.receipt.get("dense_calls", 0),
+                           "scoped_calls": module.receipt.get("scoped_calls", 0),
+                           "calls": module.receipt.get("calls", 0)}), flush=True)
+
+    atexit.register(_done)
+
+
+def _dense_rewrite(module, opt, warned):
+    import response
+    import torch
+    saved = []
+    for group in opt.param_groups:
+        tables = [p for p in group["params"] if id(p) in response.prior_ids and p.grad is not None]
+        if len(tables) != 1 or tables[0].dim() != 2:
+            continue
+        if group["betas"][0] != 0.0:
+            if not warned["beta"]:
+                warned["beta"] = True
+                print(json.dumps({"event": "row_damp_skip", "reason": "beta1!=0"}), flush=True)
+            continue
+        p = tables[0]
+        state = opt.state.get(p)
+        if not state or "exp_avg" not in state:
+            continue
+        g = p.grad.detach()
+        with torch.no_grad():
+            norm = g.square().sum(-1).sqrt()
+            active = norm > 0
+            rows = int(active.numel())
+            if rows == 0 or int(active.sum()) != rows:
+                continue
+            h = _DENSE_HIST.get(id(p))
+            if h is None or h.shape != p.shape:
+                h = torch.zeros_like(p)
+                _DENSE_HIST[id(p)] = h
+            hn = h.square().sum(-1).sqrt()
+            has = hn > 0
+            cos = (g * h).sum(-1) / (norm * hn).clamp_min(1e-30)
+            rho = torch.where(has, 0.75 + 0.25 * cos, torch.ones_like(cos))
+            bc1 = 1.0 - module.B1 ** (float(state["step"]) + 1.0)
+            state["exp_avg"].copy_(g * (2.0 * bc1 * rho - 1.0).unsqueeze(-1))
+            saved.append((group, group["betas"], state["exp_avg"], g.clone()))
+            group["betas"] = (module.B1, group["betas"][1])
+            h[active] = g[active]
+            module.receipt["dense_calls"] += 1
+            n = module.receipt["dense_calls"]
+            if n == 1 or n % 200 == 0:
+                print(json.dumps({
+                    "event": "row_damp",
+                    "dense_calls": n,
+                    "rows": rows,
+                    "rho_mean": float(rho.mean()),
+                    "history_rows": int(has.sum()),
+                }), flush=True)
+    return saved
 
 
 def _raw_adam():

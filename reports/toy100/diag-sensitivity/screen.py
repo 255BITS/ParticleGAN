@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
 GATES = ("ring", "hold", "shift", "unequal")
-RELIEFS = ("optimistic", "extragradient", "ema_fake")
+RELIEFS = ("optimistic", "extragradient", "ema_fake", "k3p_pull", "row_damp")
 
 
 def main() -> None:
