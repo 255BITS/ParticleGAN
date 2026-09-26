@@ -4,7 +4,7 @@ Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant:
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
-Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
+Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch, optimistic}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
 
 Each idea has one setting taken from the existing step, the existing penalty term, or the existing batch. No coefficient, clip, or ratio was swept. Not on this track: coverage, anchors, forward-KL as a training signal, mode quotas, Chamfer assignment.
 
@@ -95,6 +95,20 @@ Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset
 `unit_rms` stay is `ERROR` on all 8 offsets: `continuous_probe` requires Adam's moment counter to equal the update count, and this step does not write moments. The run itself finished (receipt `steps=7200` = 3600 updates × D and G; displacement RMS stayed ~0.00425). Every 100-step checkpoint from 1200 through 2400 misses 8 modes and hq 0.90 (13/13 points on each offset), so that window was not a stay either.
 
 Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
+
+## `optimistic` — Daskalakis Algorithm 1 at constant LR
+
+Hypothesis, written before the run: the neighbor hop in #177 is a rotational game cycle (the critic scores a neighbor higher, particles climb, the emptied mode stays empty). Optimism damps that cycle at a constant learning rate. The annealed hid_q screen already ran this rule and it was worse there; this run is the same published update with no anneal.
+
+The update is `-lr * (2 m_t - m_{t-1})` on D, G, and the particle prior. `m_t` is the bias-corrected Adam direction, `m_0 = 0`, and `lr` / betas stay the group values (network `0.00425`, prior `0.0085`, betas `(0, 0.999)`). No other coefficient.
+
+`vector_unequal_mass` was crashing in `scaled_penalty` (`ema_critic` TypeError, and `self.arm` on a penalty that has no arm). The signature accepts `ema_critic`. At constant LR, `s` stays 1, so the penalty value matches K3P's full-LR term.
+
+```
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics optimistic --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+```
+
+CPU results for this mechanism are filled in after the screen on this build.
 
 ## Recommendation
 
