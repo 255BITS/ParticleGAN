@@ -6,6 +6,7 @@ import torch
 from torch import nn
 
 from .dynamics.shared_batch import shared_batch_update
+from .dynamics.unrolled import critic_for_generator
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
 
@@ -209,7 +210,28 @@ class GANTrainer:
             share = shared_batch_update()
             if not share:
                 latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+            fake = self._generate(self.G, latent, sigma_out, noise)
+            # Unrolled: score G on a functional D advanced k Adam steps. Flag off
+            # returns this critic and does not call the context.
+            # Score the copy with the penalty kernel directly. CriticPenalty's
+            # ema view only accepts the live critic; at constant LR s == 1 the
+            # kernel does not evaluate the anchor.
+            penalty_step = self.opt_d.record.observed_steps + 1
+
+            def d_loss_fn(module, real_b, fake_b, penalty_step=penalty_step):
+                # ema_critic skips the live-critic identity check. Constant LR
+                # keeps s == 1, so the anchor is not evaluated.
+                return (
+                    self.loss.d_loss(module(real_b), module(fake_b))
+                    + self.penalty.regularizer(
+                        module, real_b, fake_b, step=penalty_step, ema_critic=lambda x: x,
+                    )
+                )
+
+            scorer = critic_for_generator(critic, fake, lambda: (
+                self.opt_d, real, d_loss_fn, self.penalty,
+            ))
+            fake_logits = scorer(fake)
             if share:
                 real_g = real
             else:
@@ -219,7 +241,7 @@ class GANTrainer:
                 raise ValueError("generator_real must match the real sample shape")
             if len(real_g) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-            real_logits = critic(real_g)
+            real_logits = scorer(real_g)
             loss_gan = self.loss.g_loss(fake_logits, real_logits)
             prior_reg = loss_gan.new_zeros(())
             if self.prior.z.requires_grad:

@@ -69,9 +69,15 @@ def anchored_gradient_gap(D, x_real, g, dimension):
     return (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
 
 
-def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True):
+def scaled_penalty(self, D, x_real, x_fake, step=1, collect_stats=True, *, ema_critic=None, generator=None):
+    # The probe assigns this onto particlegan.grad_regularizers.GradientPenalty.
+    # That class has no arm; CriticPenalty always passes ema_critic. Delegate so
+    # the K3P penalty (and its keyword) run, and the body below stays the legacy
+    # a_r1r2 path. Call binding used to raise TypeError on ema_critic.
+    if not hasattr(self, 'arm'):
+        return _original_penalty(self, D, x_real, x_fake, step, collect_stats, ema_critic=ema_critic)
     if self.arm != 'a_r1r2' or (self.lazy_k > 1 and step % self.lazy_k != 0):
-        return _original_penalty(self, D, x_real, x_fake, step, generator, collect_stats)
+        return _original_penalty(self, D, x_real, x_fake, step, collect_stats, ema_critic=ema_critic)
     _state['pending'] = True
     coefficient = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
     dimension = x_real[0].numel()
