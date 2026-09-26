@@ -2,6 +2,8 @@
 /artifacts/
 results/det-init-f/runs/
 results/det-init-f/logs/
+results/det-init-f/progress.jsonl
+results/det-init-f/driver.log
 results/runs/
 results/runs_audit/
 __pycache__/
