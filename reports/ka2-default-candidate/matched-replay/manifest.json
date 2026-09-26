@@ -1,0 +1,223 @@
+{
+  "date": "2026-09-26",
+  "public_k3p_commit": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+  "public_ka2_parent": "21a7bc708953623067108dbf0970197dc5e90fe7",
+  "public_ka2_change": "RobustCriticAnchor floating-buffer update uses lerp_; exact loaded file hashes in public result.json",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 7444,
+      "sha256": "ce9383a5e63efab0049853f4c37b5943fdc3fda66107155ce49d4a44b71ee3a2"
+    },
+    {
+      "path": "before-fix-comparison.json",
+      "bytes": 1818,
+      "sha256": "90a6d41c331facc04cacb9830f534772f46aa8b9c1fb3e3bc2c4570af066ba76"
+    },
+    {
+      "path": "compare.py",
+      "bytes": 4157,
+      "sha256": "84a51bb5842fa0556d6b4fbf2772bf899b90e17b249199ff954e0cf0c87247b9"
+    },
+    {
+      "path": "k3p-comparison.json",
+      "bytes": 1480,
+      "sha256": "e347a3a80debd07326bc4c6c203ae59047e5d5de2ab1f890f2697b2ecfcb7f82"
+    },
+    {
+      "path": "ka2-comparison.json",
+      "bytes": 1478,
+      "sha256": "2a3a0b4e0f7b793d853830771221d3c49e4ca773db3e61e91522d425c2ad36c2"
+    },
+    {
+      "path": "results/k3p-canonical-mechanism.json",
+      "bytes": 4641,
+      "sha256": "33da3b272f4de2cb95bcf0d01445a141d93724027cfffc247829e42c43464f24"
+    },
+    {
+      "path": "results/k3p-canonical.json.gz",
+      "bytes": 14701,
+      "sha256": "81bd4bdd84f86d315a47589e9e8ba7d3fa9c288aadab3cf35e32b203d6036be1"
+    },
+    {
+      "path": "results/k3p-public/host.diff",
+      "bytes": 2155,
+      "sha256": "470c1bfd8cd5700b3016312f1612c5e3a13c8c0aafd8ca2552f63779f8dba204"
+    },
+    {
+      "path": "results/k3p-public/host.py",
+      "bytes": 7133,
+      "sha256": "52820f40271a9624563022dcbf2dcd0e4a2d91ebf55c879980b9a7126c0af91b"
+    },
+    {
+      "path": "results/k3p-public/initial-host.json",
+      "bytes": 4153,
+      "sha256": "fdf4ac82d8c3ea611e38e961717c65e5661c19a727157a5da290cdc7d886b3d4"
+    },
+    {
+      "path": "results/k3p-public/randomness.jsonl.gz",
+      "bytes": 1318675,
+      "sha256": "b176622ccd65463979f833606bbdf619ce64e5222328abf2636330fc4fd8f84e"
+    },
+    {
+      "path": "results/k3p-public/result.json.gz",
+      "bytes": 31533,
+      "sha256": "27195b5ef046c3950333b76f65f58aa306441915127a3c574bc68cf161fdd72f"
+    },
+    {
+      "path": "results/k3p-public/updates.jsonl.gz",
+      "bytes": 1837194,
+      "sha256": "59716af73f21457e6d0522c5633b99296999470319bc1f57ff340f43adc1f0e1"
+    },
+    {
+      "path": "results/k3p-research/host.diff",
+      "bytes": 1150,
+      "sha256": "e93c8eebfa81a2d3188e3fd51fbc145de616805304561082f3929830511973aa"
+    },
+    {
+      "path": "results/k3p-research/host.py",
+      "bytes": 7359,
+      "sha256": "6362fe3e83c2d2c1f8245310beb35239813abc543b95524f9c8d5ad22257b0fd"
+    },
+    {
+      "path": "results/k3p-research/initial-host.json",
+      "bytes": 4153,
+      "sha256": "fdf4ac82d8c3ea611e38e961717c65e5661c19a727157a5da290cdc7d886b3d4"
+    },
+    {
+      "path": "results/k3p-research/randomness.jsonl.gz",
+      "bytes": 1318675,
+      "sha256": "b176622ccd65463979f833606bbdf619ce64e5222328abf2636330fc4fd8f84e"
+    },
+    {
+      "path": "results/k3p-research/result.json.gz",
+      "bytes": 32322,
+      "sha256": "05bbea450a515a0342c595b8bf2e6de3990a258aedfe4052285c0cc8c30ad0f8"
+    },
+    {
+      "path": "results/k3p-research/updates.jsonl.gz",
+      "bytes": 1835759,
+      "sha256": "7070977a6301a7358840f4112096ba0f81bec7efab71b5b9528cf9a9efc3a25d"
+    },
+    {
+      "path": "results/ka2-canonical.json.gz",
+      "bytes": 16507,
+      "sha256": "c75cddb2067c2c4be49461193a2258ca518ff152397605685945e3aec668b2b6"
+    },
+    {
+      "path": "results/ka2-public/host.diff",
+      "bytes": 2155,
+      "sha256": "470c1bfd8cd5700b3016312f1612c5e3a13c8c0aafd8ca2552f63779f8dba204"
+    },
+    {
+      "path": "results/ka2-public/host.py",
+      "bytes": 7133,
+      "sha256": "52820f40271a9624563022dcbf2dcd0e4a2d91ebf55c879980b9a7126c0af91b"
+    },
+    {
+      "path": "results/ka2-public/initial-host.json",
+      "bytes": 4153,
+      "sha256": "fdf4ac82d8c3ea611e38e961717c65e5661c19a727157a5da290cdc7d886b3d4"
+    },
+    {
+      "path": "results/ka2-public/randomness.jsonl.gz",
+      "bytes": 1318675,
+      "sha256": "b176622ccd65463979f833606bbdf619ce64e5222328abf2636330fc4fd8f84e"
+    },
+    {
+      "path": "results/ka2-public/result.json.gz",
+      "bytes": 31737,
+      "sha256": "1a4b4d05e052e69d0148cd8e76470efb71cbeaef924281cc22de5a20cc2fc419"
+    },
+    {
+      "path": "results/ka2-public/updates.jsonl.gz",
+      "bytes": 2079176,
+      "sha256": "59e2bdfa85b112a813eb3bef021db26a2191c36a05310c2ac4eb7aab8264f397"
+    },
+    {
+      "path": "results/ka2-public-before-fix/host.diff",
+      "bytes": 2155,
+      "sha256": "470c1bfd8cd5700b3016312f1612c5e3a13c8c0aafd8ca2552f63779f8dba204"
+    },
+    {
+      "path": "results/ka2-public-before-fix/host.py",
+      "bytes": 7133,
+      "sha256": "52820f40271a9624563022dcbf2dcd0e4a2d91ebf55c879980b9a7126c0af91b"
+    },
+    {
+      "path": "results/ka2-public-before-fix/initial-host.json",
+      "bytes": 4153,
+      "sha256": "fdf4ac82d8c3ea611e38e961717c65e5661c19a727157a5da290cdc7d886b3d4"
+    },
+    {
+      "path": "results/ka2-public-before-fix/randomness.jsonl.gz",
+      "bytes": 460482,
+      "sha256": "af718b9af77301003dc047b5743814babfa45e59d6afdb460ca63ab47ec11e40"
+    },
+    {
+      "path": "results/ka2-public-before-fix/result.json.gz",
+      "bytes": 26038,
+      "sha256": "75bc9d4e36eef41dfdf8c03a3dfc194f3e2a133d529cfe370b9a0c22aea64fa6"
+    },
+    {
+      "path": "results/ka2-public-before-fix/updates.jsonl.gz",
+      "bytes": 650974,
+      "sha256": "2f8229a2b1bd2120b19846d49f7cee42fe19a7dbf22f1e58a987bb28d77ce826"
+    },
+    {
+      "path": "results/ka2-research/host.diff",
+      "bytes": 1150,
+      "sha256": "e93c8eebfa81a2d3188e3fd51fbc145de616805304561082f3929830511973aa"
+    },
+    {
+      "path": "results/ka2-research/host.py",
+      "bytes": 7359,
+      "sha256": "6362fe3e83c2d2c1f8245310beb35239813abc543b95524f9c8d5ad22257b0fd"
+    },
+    {
+      "path": "results/ka2-research/initial-host.json",
+      "bytes": 4153,
+      "sha256": "fdf4ac82d8c3ea611e38e961717c65e5661c19a727157a5da290cdc7d886b3d4"
+    },
+    {
+      "path": "results/ka2-research/randomness.jsonl.gz",
+      "bytes": 1318675,
+      "sha256": "b176622ccd65463979f833606bbdf619ce64e5222328abf2636330fc4fd8f84e"
+    },
+    {
+      "path": "results/ka2-research/result.json.gz",
+      "bytes": 34081,
+      "sha256": "ffae13f08398089d4d74f223ca8f77828802c4eb09ebc0879bf68edaf835fb5e"
+    },
+    {
+      "path": "results/ka2-research/updates.jsonl.gz",
+      "bytes": 2079267,
+      "sha256": "bfd4850a80900bab0ec7703551f6454a0c661e22999a62452c85a85d1bd30d2c"
+    },
+    {
+      "path": "results/tests-cpu.log",
+      "bytes": 2191,
+      "sha256": "a1376884ada891fe9ca55c47cee120bdea2c77191b9f4418d6a6ed799924731e"
+    },
+    {
+      "path": "results/tests-gpu-exposed-interrupted.log.gz",
+      "bytes": 20265,
+      "sha256": "3c8d7f512b13e230b9dd9656cb973bd81611eb74d59e6205b83ec8ff17ecac7c"
+    },
+    {
+      "path": "verify_artifacts.py",
+      "bytes": 1894,
+      "sha256": "b42b9ee8a4849cc95c6debeaf9155c6f055a1a7ca682d2cf7d327c78fa160fef"
+    },
+    {
+      "path": "worker-k3p.py",
+      "bytes": 18088,
+      "sha256": "06016a3b02b1ec3bd12cb94df465d0c690e5ca8d6348e0095306b4d2deaa6d54"
+    },
+    {
+      "path": "worker.py",
+      "bytes": 19848,
+      "sha256": "8c8ac08c9f3b409262db73c22f436dcb87f183c72a5fe5b30bb30f5c09b7bdd3"
+    }
+  ]
+}

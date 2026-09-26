@@ -1,0 +1,61 @@
+{
+  "status": "EXACT_MATCH",
+  "checks": {
+    "randomness": true,
+    "diagnostic": true,
+    "continued_hold": true,
+    "shift_recovery": true,
+    "final": true,
+    "ema": true,
+    "optimizer_final": true,
+    "rate_ranges": true,
+    "initial_parameters": true,
+    "initial_host": true,
+    "completed": true
+  },
+  "canonical_checks": {
+    "randomness": true,
+    "diagnostic": true,
+    "continued_hold": true,
+    "shift_recovery": true,
+    "final": true,
+    "ema": true,
+    "optimizer_final": true,
+    "rate_ranges": true,
+    "initial_parameters": true
+  },
+  "streams": {
+    "updates.jsonl": {
+      "rows": 7200,
+      "differing_rows": 0,
+      "first_difference": null,
+      "research_sha256": "d66da500c0bb85429fcaad2767e040952255f74b1010a4738f8e316602306b5a",
+      "public_sha256": "d66da500c0bb85429fcaad2767e040952255f74b1010a4738f8e316602306b5a"
+    },
+    "randomness.jsonl": {
+      "rows": 30813,
+      "differing_rows": 0,
+      "first_difference": null,
+      "research_sha256": "7aa4cdfa5d2197ad076f7efe45fe34749d1173596d68794967915627dcd9b955",
+      "public_sha256": "7aa4cdfa5d2197ad076f7efe45fe34749d1173596d68794967915627dcd9b955"
+    }
+  },
+  "scores": {
+    "research": {
+      "hold": 120,
+      "recovery": 28,
+      "final": {
+        "modes": 8,
+        "hq": 0.917236328125
+      }
+    },
+    "public": {
+      "hold": 120,
+      "recovery": 28,
+      "final": {
+        "modes": 8,
+        "hq": 0.917236328125
+      }
+    }
+  }
+}

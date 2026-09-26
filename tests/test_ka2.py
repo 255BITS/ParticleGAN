@@ -170,3 +170,76 @@ def test_conditional_critic_and_ema_receive_identical_conditioning(monkeypatch):
     hook.remove()
     assert penalty.last_stats["phase"] == "blend" and optimizer.record.calls == 5
     assert seen and all(torch.equal(y, labels) and torch.equal(s, shift) for y, s in seen)
+
+
+class FourierCritic(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.weight = nn.Parameter(torch.tensor(.3, dtype=torch.float32))
+        self.register_buffer("freqs", torch.pi * (2.0 ** torch.arange(3, dtype=torch.float32)))
+
+    def forward(self, x):
+        return torch.sin(x * self.freqs).sum(-1) * self.weight
+
+
+def test_adaptive_ema_keeps_fixed_fourier_buffers_and_anchor_gradients_exact():
+    from particlegan import get_recipe
+    from particlegan.k3p import CriticAnchor
+
+    critic = FourierCritic()
+    optimizer = get_recipe().make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+    # The frozen mechanism averages parameters only; structural Fourier
+    # frequencies stay equal to the live critic. Compare that exact reference.
+    reference = CriticAnchor(critic, copy.deepcopy(critic))
+    optimizer.anchor.start_()
+    reference.start_()
+    record = optimizer.record
+    record.anchor_started = True
+    record.sur_base = 1.0
+    record.sur_hist = [4.0] * 24
+    record.last_sur = 4.0
+    decay_trace = []
+    for step in range(8):
+        if step == 4:
+            # A settled window makes the real KA2 controller release alpha.
+            record.sur_hist = [.5] * 24
+            record.last_sur = .5
+        record.advance_blend()
+        record.record_step(optimizer)
+        reference.decay = optimizer.anchor.decay
+        reference.update_()
+        decay_trace.append(reference.decay)
+        assert torch.equal(optimizer.ema_critic.freqs, critic.freqs)
+        assert all(torch.equal(a, b) for a, b in zip(
+            optimizer.ema_critic.parameters(), reference.ema_critic.parameters()))
+        x = torch.tensor([[.21], [.71], [1.31], [2.72]], requires_grad=True)
+        expected, actual = reference(x), optimizer.anchor(x)
+        assert torch.equal(actual, expected)
+        assert torch.equal(torch.autograd.grad(actual.sum(), x)[0],
+                           torch.autograd.grad(expected.sum(), x)[0])
+    assert decay_trace[3] < decay_trace[0] and decay_trace[4] > decay_trace[3]
+    assert record.ema_updates == 8
+
+
+def test_buffer_ema_still_averages_changing_batchnorm_statistics_and_copies_counts():
+    from particlegan.k3p import RobustCriticAnchor
+
+    critic = nn.BatchNorm1d(3)
+    ema = copy.deepcopy(critic)
+    anchor = RobustCriticAnchor(critic, ema)
+    anchor.start_()
+    for step, decay in enumerate((.999, .9934981558641975, .97, .91), start=1):
+        before_mean, before_var = ema.running_mean.clone(), ema.running_var.clone()
+        with torch.no_grad():
+            critic.running_mean.copy_(torch.tensor([.1, .7, -1.2]) * step)
+            critic.running_var.copy_(torch.tensor([.3, 1.8, 2.1]) * step)
+            critic.num_batches_tracked.fill_(step)
+        anchor.decay = decay
+        anchor.update_()
+        torch.testing.assert_close(ema.running_mean,
+                                   before_mean * decay + critic.running_mean * (1.0 - decay))
+        torch.testing.assert_close(ema.running_var,
+                                   before_var * decay + critic.running_var * (1.0 - decay))
+        assert not torch.equal(ema.running_mean, critic.running_mean)
+        assert not torch.equal(ema.running_var, critic.running_var)
+        assert torch.equal(ema.num_batches_tracked, critic.num_batches_tracked)

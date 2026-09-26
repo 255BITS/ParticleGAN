@@ -10,6 +10,8 @@
   the release that wrote them (0.8.0 for K3P).
 - Replace the fixed `reg_anchor_decay` setting with `reg_anchor_min_decay=.90`,
   the fastest adaptive critic EMA decay. Public factory calls stay the same.
+- Preserve fixed floating buffers exactly during adaptive critic EMA updates;
+  Fourier frequencies must not drift as the EMA decay changes.
 - This is an unmerged release candidate, not a qualified winner. Preserve the
   exact research source and later failures in `reports/ka2-default-candidate/`.
   K3P's historical 22/22 result and README animation do not qualify KA2.

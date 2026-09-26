@@ -349,7 +349,10 @@ class RobustCriticAnchor(CriticAnchor):
         super().update_()
         for e, b in self._buffer_pairs:
             if e.is_floating_point():
-                e.mul_(self.decay).add_(b, alpha=1.0 - self.decay)
+                # Preserve equal buffers exactly: multiplying and adding an
+                # unchanged Fourier frequency can otherwise round it away
+                # from the live value as KA2 changes the decay each step.
+                e.lerp_(b, 1.0 - self.decay)
             else:
                 e.copy_(b)
 

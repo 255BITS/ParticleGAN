@@ -6,11 +6,11 @@ with eventual recovery. The completed extension and toy results still expose
 instability. This draft makes the proposed package change reviewable; these
 historical measurements do not certify the new package implementation.
 
-This report was assembled by reading existing artifacts on September 26, 2026.
-**No training, seed experiments, or benchmark extensions were launched for this
-assessment.** The seed results below already existed. The public default and
-research drivers are distinct implementations and are compared only within
-their recorded scopes.
+The initial assessment used existing artifacts on September 26, 2026. The seed
+results below already existed. A subsequent [matched implementation replay](matched-replay/README.md)
+holds the research ring experiment fixed and compares the frozen mechanisms
+with the public recipe factories. It introduces no seed variants. Its scope
+is separate from the historical 22-task qualification below.
 
 ## Recorded results
 
@@ -123,12 +123,12 @@ they do not identify which change caused the difference or rule out a porting
 bug. See the [recorded public baseline](historical-reports/public-package-baseline.md)
 and the original drivers linked from the archived source files.
 
-A replication should hold the model, settings, initial weights, data and
-random streams, schedules, update order and evaluator fixed while changing
-only the implementation. Compare intermediate losses, gradients, optimizer
-state and parameter updates before comparing final benchmark scores. The
-existing critic parity tests cover one part of this requirement; they do not
-establish full training-loop equivalence.
+The [matched replay](matched-replay/README.md) holds the model, initial weights,
+data and random streams, schedules, update order and evaluator fixed while
+changing the optimizer and penalty implementation. It compares intermediate
+losses, gradients, optimizer state and parameter updates before final scores.
+This isolates the public recipe components; it does not replace the research
+host with `GANTrainer` or repeat the complete 22-task suite.
 
 ### Selection rationale
 
