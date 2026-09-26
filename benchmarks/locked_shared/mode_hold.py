@@ -20,6 +20,7 @@ from dataclasses import dataclass, replace
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
 from particlegan.dynamics.shared_batch import shared_batch_update
+from particlegan.dynamics.unrolled import critic_for_generator
 
 N_MODES = 8
 RADIUS = 3.0
@@ -216,12 +217,22 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         if not share:
             latent, _ = prior.sample(batch, generator=stream)
         fake = generator(latent)
+        # Unrolled: score G on a functional D advanced k Adam steps. Flag off
+        # returns this critic and does not call the context.
+        scorer = critic_for_generator(critic, fake, lambda: (
+            opt_d, real,
+            lambda module, real_b, fake_b: (
+                gan.d_loss(module(real_b), module(fake_b))
+                + regularizer(module, real_b, fake_b, step=step + 1)
+            ),
+            regularizer,
+        ))
         if gan.mode in ("rp", "ra"):
             real_g = real if share else sample_ring(means, batch, SIGMA, stream)
-            g_loss = gan.g_loss(critic(fake), critic(real_g))
+            g_loss = gan.g_loss(scorer(fake), scorer(real_g))
         else:
             # Stranger / unpaired pairing: real and fake are scored apart.
-            g_loss = gan.g_loss(critic(fake))
+            g_loss = gan.g_loss(scorer(fake))
         if recipe.fm_weight > 0.0:
             # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
             real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
