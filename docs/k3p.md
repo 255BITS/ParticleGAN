@@ -52,6 +52,33 @@ coefficient `k·c`.
 multipliers. `network_lr_horizon_cap=None` uses the full budget and
 `network_lr_floor=None` reuses `lr_floor`.
 
+For a caller-owned loop, the caller can start G/D decay when its own validation
+metric plateaus. `NetworkLRTransition` keeps G/D at full LR until marked, then
+cosine-decays them over the chosen duration to `network_lr_floor`. The particle
+prior retains its normal full-budget schedule. K3P's critic penalty reads the
+applied critic LR, so its blend follows this transition automatically. The
+caller owns the plateau rule and must save the transition state with its
+optimizer checkpoint:
+
+```python
+from particlegan import NetworkLRTransition, scale_learning_rates
+
+transition = NetworkLRTransition(decay_steps=40_000)
+# After validation at 120,000 completed updates meets a declared plateau rule:
+transition.mark_plateau(120_000)
+# Before the next optimizer update, using the number of completed updates:
+network_scale, prior_scale = scale_learning_rates(
+    120_000, recipe, (opt_g, opt_d), base_lrs, prior,
+    network_transition=transition)
+checkpoint["network_transition"] = transition.state_dict()
+# On resume, recreate the same transition duration and restore its state:
+transition.load_state_dict(checkpoint["network_transition"])
+```
+
+Passing no transition retains the recipe's fixed network horizon. The
+caller-marked step remains fixed after marking; a different step raises an
+error. This API does not inspect validation data or choose checkpoints.
+
 ## GANTrainer
 
 `GANTrainer(recipe, G, D)` wires everything: it allocates the EMA critic
