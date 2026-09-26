@@ -24,7 +24,7 @@ HERE = Path(__file__).resolve().parent
 K3P = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p"
 OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
 GATES = ("ring", "hold", "shift", "unequal")
-DYNAMICS = ("baseline", "unit_rms", "pair_chord", "shared_batch", "unrolled")
+DYNAMICS = ("baseline", "unit_rms", "pair_chord", "shared_batch", "unrolled", "unrolled_after_acquire")
 
 
 def constant_config(source: Path, dest: Path) -> dict:
@@ -55,6 +55,33 @@ def command(gate: str, config: Path, output: Path, backend: str) -> list[str]:
     script = K3P / ("hold.py" if gate == "hold" else "shift.py")
     return [sys.executable, "-u", str(script), *common, "--task", "mode_hold",
             "--network-floor", "1", "--prior-floor", "1", "--anneal-start", "0"]
+
+
+def switch_step(log: Path, dynamics: str):
+    """Checkpoint step where ``unrolled_after_acquire`` latched, or ``never``."""
+    if dynamics != "unrolled_after_acquire" or not log.exists():
+        return None
+    armed = False
+    step = None
+    for line in log.read_text(errors="replace").splitlines():
+        text = line.strip()
+        if not text.startswith("{"):
+            continue
+        try:
+            event = json.loads(text)
+        except json.JSONDecodeError:
+            continue
+        if event.get("event") == "dynamics" and event.get("name") == "unrolled_after_acquire":
+            armed = True
+        elif event.get("event") == "dynamics_switch" and event.get("name") == "unrolled_after_acquire":
+            step = event.get("step")
+        elif event.get("event") == "dynamics_receipt" and event.get("mechanism") == "unrolled_after_acquire":
+            armed = True
+            if step is None:
+                step = event.get("switch_step")
+    if not armed:
+        return None
+    return "never" if step is None else step
 
 
 def summarize(gate: str, output: Path, code: int) -> dict:
@@ -144,6 +171,9 @@ def main() -> None:
                 continue
             row = summarize(gate, out, proc.returncode)
             row.update(dynamics=name, offset=offset, seconds_wall=round(time.time() - t0, 1))
+            switched = switch_step(log, name)
+            if switched is not None:
+                row["switch_step"] = switched
             rows.append(row)
             print("DONE " + json.dumps(row, sort_keys=True), flush=True)
         running = still

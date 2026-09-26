@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 from contextlib import ExitStack
+import sys
 from copy import deepcopy
 import hashlib
 import inspect
@@ -246,6 +247,10 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                 measured = measure()
                 point = {"step": step, **{key: measured[key] for key in
                          ("modes", "hq", "effective_modes", "hq_counts")}}
+            # Occupancy latch reads this same detector output. Absent module: no-op.
+            acquire = sys.modules.get("particlegan.dynamics.unrolled_after_acquire")
+            if acquire is not None:
+                acquire.note_checkpoint(step, measured)
             diagnostic.append(point)
             if log is not None:
                 log({"event": "checkpoint", **point})

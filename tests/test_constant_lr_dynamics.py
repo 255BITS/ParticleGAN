@@ -335,6 +335,100 @@ def test_scaled_penalty_accepts_ema_critic_and_matches_k3p():
         opt_mod._global_optimizer_post_hooks.update(post)
 
 
+def test_acquire_latches_once_on_the_probe_cadence(monkeypatch):
+    from particlegan.dynamics import unrolled_after_acquire as acquire
+
+    monkeypatch.setenv("K3P_DYNAMICS", "unrolled_after_acquire")
+    acquire.receipt.update(switch_step=None, switch_hq=None, generator_steps=0)
+    occupied = {"modes": 8, "n_modes": 8, "hq": 0.5}
+    acquire.note_checkpoint(40, occupied)
+    acquire.note_checkpoint(50, {"modes": 7, "n_modes": 8, "hq": 0.99})
+    acquire.note_checkpoint(50, {"modes": 8, "hq": 1.0})
+    assert acquire.latched() is False
+    acquire.note_checkpoint(100, occupied)
+    assert acquire.receipt["switch_step"] == 100
+    assert acquire.receipt["switch_hq"] == 0.5
+    acquire.note_checkpoint(150, {"modes": 8, "n_modes": 8, "hq": 0.2})
+    assert acquire.receipt["switch_step"] == 100
+    acquire.receipt.update(switch_step=None, switch_hq=None)
+
+
+def test_acquire_does_not_unroll_until_latched(monkeypatch):
+    from particlegan.dynamics import unrolled
+    from particlegan.dynamics.unrolled import critic_for_generator
+
+    monkeypatch.setenv("K3P_DYNAMICS", "unrolled_after_acquire")
+    from particlegan.dynamics import unrolled_after_acquire as acquire
+
+    acquire.receipt.update(switch_step=None, switch_hq=None)
+    calls = {"n": 0}
+
+    def _forbidden(*args, **kwargs):
+        calls["n"] += 1
+        raise AssertionError("unroll ran before the latch")
+
+    monkeypatch.setattr(unrolled, "_unroll", _forbidden)
+    assert critic_for_generator(object(), None, lambda: (_ for _ in ()).throw(AssertionError("context"))) is not None
+    assert calls["n"] == 0
+    acquire.receipt["switch_step"] = 50
+    try:
+        critic_for_generator(object(), None, lambda: (None, None, None, None))
+    except AssertionError as exc:
+        assert "unroll ran" in str(exc)
+    else:
+        raise AssertionError("latched generator step skipped the unroll")
+    assert calls["n"] == 1
+    acquire.receipt.update(switch_step=None, switch_hq=None)
+
+
+def test_acquire_before_latch_matches_flag_off(monkeypatch):
+    from benchmarks.legacy.grad_regularizers import GradientPenalty
+    from benchmarks.locked_shared.mode_hold import ModeHoldRecipe, train_mode_hold
+    from particlegan.dynamics import unrolled_after_acquire as acquire
+    from tests.test_k3p_trainer import _reals, _recipe, _trainer
+
+    acquire.receipt.update(switch_step=None, switch_hq=None, generator_steps=0)
+
+    def hold(flag):
+        if flag:
+            monkeypatch.setenv("K3P_DYNAMICS", "unrolled_after_acquire")
+        else:
+            monkeypatch.delenv("K3P_DYNAMICS", raising=False)
+        torch.manual_seed(0)
+        row = train_mode_hold(
+            ModeHoldRecipe(steps=2),
+            cap_factory=lambda: GradientPenalty("a_r1r2", coeff=1.0, kappa=1.0),
+            seed=0,
+        )
+        return row["modes"], row["hq"]
+
+    assert hold(False) == hold(True)
+    assert hold(True) == hold(True)
+    assert acquire.latched() is False
+
+    def trainer_hash(flag):
+        if flag:
+            monkeypatch.setenv("K3P_DYNAMICS", "unrolled_after_acquire")
+        else:
+            monkeypatch.delenv("K3P_DYNAMICS", raising=False)
+        torch.manual_seed(0)
+        recipe = _recipe(lr_floor=1.0, network_lr_floor=1.0, lr_anneal_start=0.0, total_steps=3)
+        trainer = _trainer(recipe)
+        for real in _reals(2, seed=1):
+            trainer.step(real)
+        rows = []
+        for module in (trainer.G, trainer.D, trainer.prior):
+            rows.extend(p.detach().cpu() for p in module.parameters())
+        rows.extend(_adam_blob(trainer.opt_d))
+        rows.extend(_adam_blob(trainer.opt_g))
+        return _hash_tensors(rows)
+
+    assert trainer_hash(False) == trainer_hash(True)
+
+
 @pytest.fixture(autouse=True)
 def _clear_dynamics(monkeypatch):
     monkeypatch.delenv("K3P_DYNAMICS", raising=False)
+    module = sys.modules.get("particlegan.dynamics.unrolled_after_acquire")
+    if module is not None:
+        module.receipt.update(switch_step=None, switch_hq=None, generator_steps=0)

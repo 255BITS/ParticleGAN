@@ -63,6 +63,7 @@ python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamic
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics pair_chord --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics shared_batch --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics unrolled --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics unrolled_after_acquire --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 ```
 
 Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `hq`, `passing_suffix`). Hold passes only when `status` is `PASS` and `hold_checks == 1200`. Stay passes only when shift's continued hold is `120/120` and `pass_all`. The shift terminal status is not the stay gate.
@@ -174,4 +175,86 @@ The generator is scored on a critic that has already taken five Adam steps on th
 
 ### Proof
 
-`python3 -m pytest tests/test_constant_lr_dynamics.py` — 10 passed. Flag unset: `test_flag_off_skips_unroll_and_hashes_match` points `_unroll` at a raiser, runs `train_mode_hold` twice for 2 steps, gets the same `(modes, hq)`, and the raiser is never called. `test_trainer_flag_off_hash_matches_and_unrolled_is_deterministic` hashes G, D, the particle prior, and both Adam states after two `GANTrainer` steps: two flag-off runs match, two `unrolled` runs match, and the two hashes differ. `test_unrolled_mode_hold_is_deterministic` matches two flagged 2-step runs. `test_functional_adam_matches_single_tensor_adam` is `torch.equal` to single-tensor Adam, including a second step with `β1 = 0.1`. `test_unroll_leaves_real_discriminator_and_changes_generator_grad` keeps the real D parameters and Adam state bit-identical across the generator backward, and the generator gradient is finite and differs from the plain critic score.
+`python3 -m pytest tests/test_constant_lr_dynamics.py` — 13 passed. Flag unset: `test_flag_off_skips_unroll_and_hashes_match` points `_unroll` at a raiser, runs `train_mode_hold` twice for 2 steps, gets the same `(modes, hq)`, and the raiser is never called. `test_trainer_flag_off_hash_matches_and_unrolled_is_deterministic` hashes G, D, the particle prior, and both Adam states after two `GANTrainer` steps: two flag-off runs match, two `unrolled` runs match, and the two hashes differ. `test_unrolled_mode_hold_is_deterministic` matches two flagged 2-step runs. `test_functional_adam_matches_single_tensor_adam` is `torch.equal` to single-tensor Adam, including a second step with `β1 = 0.1`. `test_unroll_leaves_real_discriminator_and_changes_generator_grad` keeps the real D parameters and Adam state bit-identical across the generator backward, and the generator gradient is finite and differs from the plain critic score. `test_acquire_before_latch_matches_flag_off` matches two-step `train_mode_hold` and two-step `GANTrainer` hashes with the flag unset. `test_acquire_latches_once_on_the_probe_cadence` latches only when `modes == n_modes` on a multiple of 50, and keeps that step. `test_acquire_does_not_unroll_until_latched` does not call `_unroll` before the latch.
+
+## Unrolled after acquire
+
+`K3P_DYNAMICS=unrolled_after_acquire`. Learning rates stay at the constant screen schedule. Generator steps use the plain baseline critic until the latch, then unrolled `k=5` for every later step.
+
+Condition, declared before the run (`particlegan/dynamics/unrolled_after_acquire.py`): the live mode/hq detector is `mode_hold.diversity`. A target mode is occupied when at least one sample lies inside its 3σ ball. The latch fires at the first probe checkpoint on the normal cadence where `modes == n_modes`. The cadence is completed update `step % 50 == 0` (the ring recorder's 24 points on a 1200-step run, and hold's `diagnostic_every`). The hq fraction is not a second threshold. The update that produced the checkpoint stays on baseline dynamics. No step index is a switch time, and the losses have no per-mode term.
+
+## CPU screen (this build)
+
+Same constant LR, 8 offsets, 4 gates, `OMP_NUM_THREADS=1`. Baseline on this build matches the table above and #183: ring 0/8, hold 0/8, stay 0/8, best stay 53/120 (offset 606), unequal 2/8. `unrolled_after_acquire` does not lose ring passes (still 0/8) and does not add a hold PASS or a stay 120/120. **Handoff bar missed.** CPU only; not an A6000 ranking.
+
+| dynamics | ring | hold 1200 | stay 120/120 | unequal |
+| --- | ---: | ---: | ---: | ---: |
+| baseline | 0/8 | 0/8 | 0/8 | 2/8 |
+| unrolled_after_acquire | 0/8 | 0/8 | 0/8 | 2/8 |
+
+Switch step is the first probe checkpoint with `modes == n_modes`, or `never`. Ring, hold, and shift are separate runs, so the step is per gate.
+
+Ring at step 1200, modes / hq / passing suffix. Both columns FAIL.
+
+| offset | baseline | unrolled_after_acquire | switch |
+| ---: | --- | --- | ---: |
+| 0 | 8 / 0.878 / 0 | 0 / 0.000 / 0 | 600 |
+| 101 | 7 / 0.659 / 0 | 7 / 0.659 / 0 | never |
+| 202 | 7 / 0.985 / 0 | 7 / 0.985 / 0 | never |
+| 303 | 6 / 0.670 / 0 | 0 / 0.000 / 0 | 600 |
+| 404 | 6 / 0.400 / 0 | 0 / 0.000 / 0 | 450 |
+| 505 | 4 / 0.263 / 0 | 4 / 0.263 / 0 | never |
+| 606 | 7 / 0.694 / 0 | 0 / 0.000 / 0 | 800 |
+| 707 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 450 |
+
+Hold. Baseline is `NOT_CONVERGED`, `hold_checks` 0, on every offset. `unrolled_after_acquire` is the same: no 1200-check window starts.
+
+| offset | hold | switch |
+| ---: | --- | ---: |
+| 0 | `NOT_CONVERGED`, 0 | 600 |
+| 101 | `NOT_CONVERGED`, 0 | never |
+| 202 | `NOT_CONVERGED`, 0 | 5650 |
+| 303 | `NOT_CONVERGED`, 0 | 600 |
+| 404 | `NOT_CONVERGED`, 0 | 450 |
+| 505 | `NOT_CONVERGED`, 0 | never |
+| 606 | `NOT_CONVERGED`, 0 | 800 |
+| 707 | `NOT_CONVERGED`, 0 | 450 |
+
+Stay, passing checks out of 120. None is 120/120.
+
+| offset | baseline | unrolled_after_acquire | switch |
+| ---: | ---: | ---: | ---: |
+| 0 | 33/120 | 0/120 | 600 |
+| 101 | 0/120 | 0/120 | never |
+| 202 | 0/120 | 0/120 | never |
+| 303 | 9/120 | 0/120 | 600 |
+| 404 | 17/120 | 0/120 | 450 |
+| 505 | 0/120 | 0/120 | never |
+| 606 | 53/120 | 0/120 | 800 |
+| 707 | 0/120 | 0/120 | 450 |
+
+Unequal has no mode count (vector mass metrics). Status, passing suffix, hq. The latch never fired. Both columns match, including the two baseline passes.
+
+| offset | baseline | unrolled_after_acquire | switch |
+| ---: | --- | --- | ---: |
+| 0 | FAIL / 2 / 0.968 | FAIL / 2 / 0.968 | never |
+| 101 | PASS / 5 / 0.971 | PASS / 5 / 0.971 | never |
+| 202 | FAIL / 0 / 0.984 | FAIL / 0 / 0.984 | never |
+| 303 | FAIL / 0 / 0.977 | FAIL / 0 / 0.977 | never |
+| 404 | FAIL / 3 / 0.912 | FAIL / 3 / 0.912 | never |
+| 505 | PASS / 10 / 0.982 | PASS / 10 / 0.982 | never |
+| 606 | FAIL / 0 / 0.957 | FAIL / 0 / 0.957 | never |
+| 707 | FAIL / 0 / 0.974 | FAIL / 0 / 0.974 | never |
+
+Best partial: where the latch stays off, ring, stay, and unequal match this build's baseline (offsets 101, 202, and 505 on ring and stay; all eight on unequal). Where it fires during the ring (450, 600, or 800), step 1200 has 0 modes. Hold never qualifies. Stay falls from a best of 53/120 to 0/120. Offset 202's hold only sees full occupancy at step 5650, inside the settling budget, and still ends `NOT_CONVERGED`.
+
+The cover that baseline builds is not a cover that is stable under the unrolled generator step. On the offsets that latch, the checkpoint that first reports 8 occupied modes already has hq about 0.97–1.00, and the following updates, now scored on a critic five Adam steps ahead, empty that cover before the ring stops. Plain `unrolled` from step 0 can hold for a long window, but only after a slow acquisition (offset 0 qualifies at step 2109). Turning the same reaction on at the moment of first occupancy removes the baseline dynamics that produced the cover, and the hold window never starts. Unequal does not use the ring detector, so the switch is `never` and both baseline passes remain.
+
+### Plain `unrolled` hold, offsets 0 and 707
+
+Re-run on this build. Both match #190.
+
+| offset | status | hold | converged | first failure | at failure |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 0 | `POST_CONVERGENCE_FAIL` | 1151/1200 | 2109 | 3260 | modes 7, hq 0.906 |
+| 707 | `POST_CONVERGENCE_FAIL` | 219/1200 | 3871 | 4090 | modes 8, hq 0.899 |
