@@ -4,7 +4,7 @@ Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant:
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
-Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
+Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch, lookahead_minmax}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`. The same file always installs the unequal-mass penalty shim: the probe's frozen `scaled_penalty` does not accept `ema_critic`, and the current penalty has no `arm`. The shim forwards that call to the saved K3P penalty. Ring, hold, and stay use the legacy penalty and do not enter it.
 
 Each idea has one setting taken from the existing step, the existing penalty term, or the existing batch. No coefficient, clip, or ratio was swept. Not on this track: coverage, anchors, forward-KL as a training signal, mode quotas, Chamfer assignment.
 
@@ -39,9 +39,17 @@ No new coefficient, cap, or target slope. Other arms are unchanged. Early fakes 
 
 The ring host and `GANTrainer` draw a second latent batch and a second real batch after the critic step. This keeps critic-then-generator order. The generator re-forwards the latents the critic just scored and is paired with that same real batch. Output noise on the generator forward is still drawn: that draw is the observation of this forward, not a second minibatch. Not simultaneous, and not extragradient.
 
+### `lookahead_minmax` — slow weights instead of the anneal
+
+Chavdarova et al., ICLR 2021, Lookahead-minmax, Algorithm 1. The only setting is the one the paper fixed for the unstable alternating base optimizer: `k=5`, `alpha=0.5`. No second setting.
+
+Fast weights take the host Adam step at the group learning rate (`0.00425` for D and G, `0.0085` for the particles). A slow copy of each parameter is taken before its first fast step. Every time both players have finished five fast steps, the slow weights of D, G, and the particles move halfway to the fast weights and the fast weights are reset to them. Adam's moments stay on the fast weights. The slow step is one joint update: the critic's fifth step does not backtrack until the generator step that carries the particles has also finished. That is the paper's joint extrapolation, not a separate Lookahead on each optimizer.
+
+Hypothesis, written before the run: the slow-weight average is the damping the cosine anneal is supplying when it drops the learning rate, so the same acquire-and-stay can happen with the learning rate held at the pre-anneal value.
+
 ## Patches
 
-Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of the three names is set.
+Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of those names is set, and also `lookahead_minmax`.
 
 - `patches/unit_rms.patch`
 - `patches/pair_chord.patch`
@@ -56,11 +64,12 @@ python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamic
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics unit_rms --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics pair_chord --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics shared_batch --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics lookahead_minmax --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 ```
 
 Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `hq`, `passing_suffix`). Hold passes only when `status` is `PASS` and `hold_checks == 1200`. Stay passes only when shift's continued hold is `120/120` and `pass_all`. The shift terminal status is not the stay gate.
 
-`vector_unequal_mass` does not run. The probe always imports `mechanism.py`, which replaces `GradientPenalty.penalty` with `scaled_penalty`. That function does not accept `ema_critic` and reads `self.arm`. The current penalty has no `arm`, and `CriticPenalty` always passes `ema_critic`. A direct call raises `TypeError: scaled_penalty() got an unexpected keyword argument 'ema_critic'`. The same error hits the constant-LR baseline. Ring, hold, and stay use the legacy penalty and are not on this path.
+`vector_unequal_mass` used to crash in that frozen `scaled_penalty` (`TypeError: unexpected keyword argument 'ema_critic'`). The screen's `sitecustomize` now forwards the no-`arm` penalty, `ema_critic` included, to the K3P method the probe saved. The forwarded value matches that method. Ring, hold, and stay still use the legacy penalty.
 
 ## CPU sanity
 
@@ -95,6 +104,31 @@ Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset
 `unit_rms` stay is `ERROR` on all 8 offsets: `continuous_probe` requires Adam's moment counter to equal the update count, and this step does not write moments. The run itself finished (receipt `steps=7200` = 3600 updates × D and G; displacement RMS stayed ~0.00425). Every 100-step checkpoint from 1200 through 2400 misses 8 modes and hq 0.90 (13/13 points on each offset), so that window was not a stay either.
 
 Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
+
+## Lookahead-minmax CPU screen
+
+Same build, same constant LR, 64 jobs, 4 at a time. Baseline ring modes and hq match the table above, including offset 0 (8 modes, hq 0.878) and the best stay 53/120 at offset 606. `lookahead_minmax` receipt on a 1200-update ring: `fast_steps=2400` (D and G), `syncs=240`, `players=2`, so the slow step fired once every five paired updates. Group LRs stayed `0.00425` and `[0.00425, 0.0085]`.
+
+Handoff bar: at least one hold PASS or one stay 120/120, with no fewer ring passes than baseline. **Missed.** Ring passes 0/8 on both. Hold 0/8 on both (`NOT_CONVERGED`, `hold_checks` 0). Stay never 120/120. Best partial stay is lookahead 79/120 at offset 303 (minimum modes in that window 3, passing suffix 9). Longest hold settling streak was 105 checks at offset 404, short of the 200-check confirmation.
+
+| offset | baseline ring | lookahead ring | baseline hold | lookahead hold | baseline stay | lookahead stay | baseline unequal | lookahead unequal |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 1 / 0.003 / 0 | 0 | 0 | 33/120 | 0/120 | FAIL suffix 2 | FAIL suffix 0 |
+| 101 | 7 / 0.659 / 0 | 8 / 1.000 / 4 | 0 | 0 | 0/120 | 37/120 | PASS suffix 5 | FAIL suffix 0 |
+| 202 | 7 / 0.985 / 0 | 8 / 0.970 / 1 | 0 | 0 | 0/120 | 67/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 303 | 6 / 0.670 / 0 | 7 / 0.831 / 0 | 0 | 0 | 9/120 | 79/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 404 | 6 / 0.400 / 0 | 6 / 0.560 / 0 | 0 | 0 | 17/120 | 0/120 | FAIL suffix 3 | FAIL suffix 0 |
+| 505 | 4 / 0.263 / 0 | 8 / 0.997 / 4 | 0 | 0 | 0/120 | 14/120 | PASS suffix 10 | FAIL suffix 0 |
+| 606 | 7 / 0.694 / 0 | 8 / 0.736 / 0 | 0 | 0 | 53/120 | 30/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 707 | 0 / 0.000 / 0 | 8 / 0.788 / 0 | 0 | 0 | 0/120 | 22/120 | FAIL suffix 0 | FAIL suffix 0 |
+
+Ring cells are modes / hq / passing suffix. A ring or unequal PASS needs the probe verdict, which here needs a passing suffix of at least 5. Hold cells are `hold_checks` (1200 would be a pass). Unequal now runs: baseline 2/8 PASS, lookahead 0/8.
+
+The slow step acquires 8 modes on five offsets where the baseline often does not, and the best stay fraction rises from 53/120 to 79/120. It does not keep them. `alpha=0.5` every five steps leaves half of each fast Adam move in the weights, and between syncs the step is still the full constant LR with `β2=0.999`. That is a milder damper than the anneal, which cuts the network LR to 1% and then runs the stay window at that floor. The rotation that empties a mode is still there at the pre-anneal step size, so the confirmation streak dies (best ring suffix 4, best hold streak 105) before a 1200-check hold can start.
+
+Do not send this to the A6000. No second `(k, alpha)` was run.
+
+Flag-off and determinism, eight paired Adam steps on D, G, and the particles, SHA-256 of the three parameter tensors: plain Adam and `K3P_DYNAMICS` unset both `908a0708c88d8ce340da50043f582e9af55f4df3fbc576bc82e1a4870a0e514a`. Two `lookahead_minmax` runs both `5640e955ca9424daa2010f81977eb2ca4f721916dcafff4b7a7acdf13ede3e8e`.
 
 ## Recommendation
 
