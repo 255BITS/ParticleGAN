@@ -1,0 +1,1931 @@
+{
+  "calibration": {
+    "ring": "5/8",
+    "ring_seeds": [
+      "P8",
+      "F7",
+      "F5",
+      "P8",
+      "F8",
+      "P8",
+      "P8",
+      "P8"
+    ],
+    "unequal": "2/8",
+    "unequal_seeds": [
+      "P",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "F",
+      "P"
+    ]
+  },
+  "determinism": {
+    "bad": 0,
+    "checked": 128,
+    "event": "determinism_summary"
+  },
+  "errors": 0,
+  "priority": [
+    {
+      "gates": {
+        "blobs": "PASS",
+        "grid100": "FAIL",
+        "hold": "POST_CONVERGENCE_FAIL",
+        "ring": "PASS",
+        "rotated100": "FAIL",
+        "shift": "FAIL",
+        "stripes": "PASS",
+        "unequal": "PASS"
+      },
+      "init": "qr_pb_pq_sobol_b"
+    },
+    {
+      "gates": {
+        "blobs": "FAIL",
+        "grid100": "FAIL",
+        "hold": "POST_CONVERGENCE_FAIL",
+        "ring": "PASS",
+        "rotated100": "FAIL",
+        "shift": "FAIL",
+        "stripes": "PASS",
+        "unequal": "PASS"
+      },
+      "init": "qr_pb_pq_lhs_b"
+    }
+  ],
+  "ranked": [
+    {
+      "complete": true,
+      "init": "qr_pb_pq_sobol_b",
+      "rank": 1,
+      "ring_n": 8,
+      "ring_pass": 7,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "F8",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 6,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_lhs_b",
+      "rank": 2,
+      "ring_n": 8,
+      "ring_pass": 7,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "F6",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "P",
+        "F",
+        "P",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r2_s",
+      "rank": 3,
+      "ring_n": 8,
+      "ring_pass": 7,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "P8",
+        "F8",
+        "P8",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_sobol_x",
+      "rank": 4,
+      "ring_n": 8,
+      "ring_pass": 6,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 6,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_strat",
+      "rank": 5,
+      "ring_n": 8,
+      "ring_pass": 6,
+      "ring_seeds": [
+        "F8",
+        "P8",
+        "F6",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "P",
+        "F",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_halton_b",
+      "rank": 6,
+      "ring_n": 8,
+      "ring_pass": 6,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_lhs",
+      "rank": 7,
+      "ring_n": 8,
+      "ring_pass": 6,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "P8",
+        "F8",
+        "F7",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 0,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_lhs_b",
+      "rank": 8,
+      "ring_n": 8,
+      "ring_pass": 6,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 0,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_strat_s",
+      "rank": 9,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "P8",
+        "F8",
+        "F7",
+        "P8",
+        "P8",
+        "F7",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 6,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_halton_s",
+      "rank": 10,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "F3",
+        "F6",
+        "P8",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "P",
+        "F",
+        "P",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_weyl_s",
+      "rank": 11,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F4",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "P",
+        "P",
+        "F",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q",
+      "rank": 12,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "F6",
+        "P8",
+        "P8",
+        "F6",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "P",
+        "P",
+        "F",
+        "P",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_weyl",
+      "rank": 13,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F8",
+        "F6",
+        "F6",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "P",
+        "F",
+        "F",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq",
+      "rank": 14,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F1",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 3,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "P",
+        "F",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r2_s",
+      "rank": 15,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "F8",
+        "F7",
+        "P8",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 3,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_weyl_b",
+      "rank": 16,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "F6",
+        "P8",
+        "F8",
+        "P8",
+        "P8",
+        "F0",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_sobol_b",
+      "rank": 17,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "F3",
+        "F8",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_halton_s",
+      "rank": 18,
+      "ring_n": 8,
+      "ring_pass": 5,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F8",
+        "P8",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 0,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_lhs_x",
+      "rank": 19,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F8",
+        "P8",
+        "P8",
+        "F8",
+        "P8",
+        "P8",
+        "F7",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 8,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_halton_b",
+      "rank": 20,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "F7",
+        "P8",
+        "F8",
+        "F7",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 7,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_strat_x",
+      "rank": 21,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F8",
+        "F7",
+        "P8",
+        "P8",
+        "F8",
+        "F5",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 7,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r2_x",
+      "rank": 22,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F2",
+        "P8",
+        "F7",
+        "F6",
+        "P8",
+        "P8",
+        "F7",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "F",
+        "P",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r2_x",
+      "rank": 23,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "F7",
+        "P8",
+        "F0",
+        "F8",
+        "P8",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_strat_b",
+      "rank": 24,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F8",
+        "F7",
+        "P8",
+        "P8",
+        "F8",
+        "F5",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "P",
+        "P",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_lhs_s",
+      "rank": 25,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F8",
+        "P8",
+        "P8",
+        "F7",
+        "F7",
+        "F8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "P",
+        "P",
+        "F",
+        "F",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r1_s",
+      "rank": 26,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F7",
+        "F7",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_sobol",
+      "rank": 27,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "F6",
+        "F4"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_strat_x",
+      "rank": 28,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "P8",
+        "F8",
+        "P8",
+        "F1",
+        "F7",
+        "P8",
+        "P8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_weyl_s",
+      "rank": 29,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "P8",
+        "F6",
+        "P8",
+        "P8",
+        "F0",
+        "F7",
+        "F2",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_weyl_x",
+      "rank": 30,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F6",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_fib_b",
+      "rank": 31,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F5",
+        "P8",
+        "P8",
+        "P8",
+        "F3",
+        "P8",
+        "F4",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r1_b",
+      "rank": 32,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F0",
+        "P8",
+        "F6",
+        "P8",
+        "F7",
+        "F5",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r2",
+      "rank": 33,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "F6",
+        "F1"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r2_b",
+      "rank": 34,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "F8",
+        "F8",
+        "F6",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_sobol_s",
+      "rank": 35,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "F6",
+        "F7",
+        "P8",
+        "P8",
+        "P8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_sobol_x",
+      "rank": 36,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "F0",
+        "F7",
+        "F7",
+        "F8",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r1_x",
+      "rank": 37,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "P8",
+        "F7",
+        "P8",
+        "P8",
+        "F7",
+        "F5"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 0,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_strat_b",
+      "rank": 38,
+      "ring_n": 8,
+      "ring_pass": 4,
+      "ring_seeds": [
+        "P8",
+        "F8",
+        "P8",
+        "F1",
+        "F7",
+        "P8",
+        "P8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 0,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_sobol",
+      "rank": 39,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "F0",
+        "F7",
+        "P8",
+        "F7",
+        "P8",
+        "F7",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "F",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_sobol_s",
+      "rank": 40,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "F7",
+        "F7",
+        "F7",
+        "F5",
+        "P8",
+        "P8",
+        "P8",
+        "F4"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "P",
+        "P",
+        "F",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_fib_b",
+      "rank": 41,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "F5",
+        "P8",
+        "F0",
+        "F5",
+        "F0",
+        "P8",
+        "F1"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_fib_x",
+      "rank": 42,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "F3",
+        "F7",
+        "P8",
+        "F1",
+        "F6",
+        "P8",
+        "F0"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "F",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r1_s",
+      "rank": 43,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "P8",
+        "F6",
+        "F6",
+        "P8",
+        "F6",
+        "F6",
+        "F4"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "F",
+        "P",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_weyl_b",
+      "rank": 44,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "F7",
+        "F7",
+        "F7",
+        "P8",
+        "P8",
+        "F3"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 3,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_lhs_x",
+      "rank": 45,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "F7",
+        "F7",
+        "P8",
+        "F6",
+        "P8",
+        "P8",
+        "F7",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 2,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "P",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_fib_s",
+      "rank": 46,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "F8",
+        "F6",
+        "F7",
+        "P8",
+        "F8",
+        "P8",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_lhs_s",
+      "rank": 47,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "F7",
+        "P8",
+        "F0",
+        "P8",
+        "F7",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_strat",
+      "rank": 48,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "F1",
+        "P8",
+        "P8",
+        "P8",
+        "F7",
+        "F8",
+        "F7",
+        "F2"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_fib_s",
+      "rank": 49,
+      "ring_n": 8,
+      "ring_pass": 3,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "F6",
+        "P8",
+        "P8",
+        "F7",
+        "F7",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_halton",
+      "rank": 50,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "F7",
+        "F6",
+        "F7",
+        "P8",
+        "F7",
+        "F0"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 7,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r1_b",
+      "rank": 51,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F6",
+        "F8",
+        "F7",
+        "F6",
+        "P8",
+        "F7",
+        "P8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 7,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_halton_x",
+      "rank": 52,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F5",
+        "F7",
+        "F7",
+        "P8",
+        "F5",
+        "F8",
+        "F6",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 6,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P",
+        "F",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_fib",
+      "rank": 53,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F6",
+        "F7",
+        "P8",
+        "F2",
+        "F8",
+        "F6",
+        "P8",
+        "F6"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "F",
+        "F",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_lhs",
+      "rank": 54,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F5",
+        "F5",
+        "F7",
+        "P8",
+        "F6",
+        "F0",
+        "P8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "F",
+        "P",
+        "P",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r1",
+      "rank": 55,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F7",
+        "F7",
+        "F7",
+        "F7",
+        "P8",
+        "F6",
+        "F5",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "P",
+        "P",
+        "F",
+        "F",
+        "P",
+        "F",
+        "P",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_halton_x",
+      "rank": 56,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "P8",
+        "F6",
+        "P8",
+        "F8",
+        "F6",
+        "F7",
+        "F7",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 3,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "P",
+        "P",
+        "F",
+        "P",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r1_x",
+      "rank": 57,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F2",
+        "F7",
+        "F4",
+        "F7",
+        "F7",
+        "F7",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 3,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "P",
+        "P",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_fib",
+      "rank": 58,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F7",
+        "P8",
+        "F7",
+        "F7",
+        "F8",
+        "F8",
+        "F7",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_halton",
+      "rank": 59,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F5",
+        "F8",
+        "F8",
+        "F6",
+        "F8",
+        "F6",
+        "P8",
+        "P8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_r1",
+      "rank": 60,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "P8",
+        "F6",
+        "F6",
+        "F7",
+        "F7",
+        "P8",
+        "F0",
+        "F0"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_weyl_x",
+      "rank": 61,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "P8",
+        "F7",
+        "F7",
+        "F7",
+        "F5",
+        "F6",
+        "P8",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 1,
+      "unequal_seeds": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_strat_s",
+      "rank": 62,
+      "ring_n": 8,
+      "ring_pass": 2,
+      "ring_seeds": [
+        "F4",
+        "P8",
+        "F7",
+        "F7",
+        "P8",
+        "F8",
+        "F7",
+        "F6"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 0,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "qr_pb_pq_r2_b",
+      "rank": 63,
+      "ring_n": 8,
+      "ring_pass": 1,
+      "ring_seeds": [
+        "F1",
+        "F7",
+        "F8",
+        "F6",
+        "P8",
+        "F6",
+        "F8",
+        "F8"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 5,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "P",
+        "P",
+        "P",
+        "P",
+        "F",
+        "P"
+      ]
+    },
+    {
+      "complete": true,
+      "init": "hid_q_fib_x",
+      "rank": 64,
+      "ring_n": 8,
+      "ring_pass": 1,
+      "ring_seeds": [
+        "F7",
+        "F7",
+        "F7",
+        "F7",
+        "F7",
+        "P8",
+        "F2",
+        "F7"
+      ],
+      "unequal_n": 8,
+      "unequal_pass": 4,
+      "unequal_seeds": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "F",
+        "P",
+        "P",
+        "P"
+      ]
+    }
+  ],
+  "top2": [
+    "qr_pb_pq_sobol_b",
+    "qr_pb_pq_lhs_b"
+  ],
+  "torch": {
+    "event": "build",
+    "numpy": "2.4.4",
+    "phase": "priority",
+    "torch": "2.14.0+cpu",
+    "torch_cuda": null,
+    "torch_file": "/home/ubuntu/.local/lib/python3.12/site-packages/torch/__init__.py",
+    "torch_git": "08187d9e0fba026dc8217405802ab5381dc88d90"
+  }
+}

@@ -138,7 +138,16 @@ def main():
             detail = {"init": name, "gates": {}}
             for gate in PRIORITY_GATES:
                 row = by.get(("priority", name, gate, 0))
-                marks.append(cell(row) if row else ".")
+                if not row:
+                    marks.append(".")
+                elif row.get("status") == "PASS":
+                    marks.append("P")
+                elif row.get("status") == "POST_CONVERGENCE_FAIL":
+                    marks.append("post-fail")
+                elif row.get("status") == "ERROR":
+                    marks.append("E")
+                else:
+                    marks.append("F")
                 if row:
                     detail["gates"][gate] = row.get("status")
             lines.append(f"| {name} | " + " | ".join(marks) + " |")
