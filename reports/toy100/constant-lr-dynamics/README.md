@@ -4,7 +4,7 @@ Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant:
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
-Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
+Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch, ema_g, ema_g_fake}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
 
 Each idea has one setting taken from the existing step, the existing penalty term, or the existing batch. No coefficient, clip, or ratio was swept. Not on this track: coverage, anchors, forward-KL as a training signal, mode quotas, Chamfer assignment.
 
@@ -99,3 +99,21 @@ Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At ste
 ## Recommendation
 
 Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
+
+## `ema_g` — average the generator and the particles
+
+Yazici et al. 2019, "The Unusual Effectiveness of Averaging in GAN Training". At a constant learning rate the iterates can orbit a good equilibrium; the average is the point that sits on it. `K3P_DYNAMICS=ema_g` keeps an exponential moving average of the generator parameters and the particle table at decay 0.999 (the published figure used here, not swept). Live Adam updates are unchanged. The probe's own gate stays on the live weights. The screen scores the average from `ema_g_scores.json` and prints it in a separate column. A pass that the live model misses is labeled `EMA-scored`.
+
+Declared alternative, stated before it was run: `K3P_DYNAMICS=ema_g_fake`. The same average is also the fake the critic trains on. If the critic only sees the orbiting iterate, it keeps scoring the moving point and never has to defend the center. The generator step stays on the live weights. Decay stays 0.999. This is not the already-failed critic-fake average at decay 0.995. No new coefficient.
+
+`vector_unequal_mass` used to crash: the probe's `scaled_penalty` rejected `ema_critic` and read `self.arm` on the current K3P penalty, which has no arm. That call now goes to the K3P penalty unchanged, so unequal runs.
+
+Flag off is the constant-LR baseline. An 8-step ring host with the screen's noise policy hashes G, D, and the particles to `558cbe0de8d87faf4269e1bfb67b6f0fc61277efeeb7c70f0c7eff909b2d405d` with the flag unset, again with the flag unset, and twice with `ema_g`. The two `ema_g` live/EMA curves match each other. `tests/test_ema_g.py` is that proof.
+
+```
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics baseline --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics ema_g --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics ema_g_fake --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+```
+
+CPU numbers for this mechanism are recorded below after the 8-offset screen. They do not rank against the A6000.

@@ -5,6 +5,7 @@ import math
 import torch
 from torch import nn
 
+from .dynamics.ema_g import critic_fakes, decay_or
 from .dynamics.shared_batch import shared_batch_update
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
@@ -189,8 +190,11 @@ class GANTrainer:
         self.D.train()
         self.G.eval()
         with torch.no_grad():
-            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
-            fake = self._generate(self.G, latent, sigma_out, noise)
+            # ema_g_fake: the critic's fake is the averaged generator and particles.
+            # ema_g leaves this on the live model. Flag off is the live model.
+            source_g, source_prior = (self.ema_G, self.ema_prior) if critic_fakes() else (self.G, self.prior)
+            latent, indices = source_prior.sample(len(real), generator=self.latent_generator)
+            fake = self._generate(source_g, latent, sigma_out, noise)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
         penalty = self.penalty(critic, real, fake)
@@ -233,9 +237,10 @@ class GANTrainer:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
         with torch.no_grad():
+            decay = decay_or(recipe.ema_decay)
             for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
                 for averaged, current in zip(target.parameters(), source.parameters()):
-                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                    averaged.mul_(decay).add_(current, alpha=1 - decay)
                 for averaged, current in zip(target.buffers(), source.buffers()):
                     averaged.copy_(current)
         self.completed_steps += 1

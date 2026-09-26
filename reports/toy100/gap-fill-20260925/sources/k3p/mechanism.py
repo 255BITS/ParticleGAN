@@ -69,8 +69,15 @@ def anchored_gradient_gap(D, x_real, g, dimension):
     return (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
 
 
-def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True):
-    if self.arm != 'a_r1r2' or (self.lazy_k > 1 and step % self.lazy_k != 0):
+def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True, *, ema_critic=None):
+    # ParticleGAN's GradientPenalty has no `arm`. CriticPenalty always passes
+    # collect_stats in this positional slot and ema_critic as a keyword, which
+    # TypeError'd vector_unequal_mass. That call is the current K3P penalty.
+    arm = getattr(self, 'arm', None)
+    if arm is None:
+        flag = generator if isinstance(generator, bool) else collect_stats
+        return _original_penalty(self, D, x_real, x_fake, step, flag, ema_critic=ema_critic)
+    if arm != 'a_r1r2' or (self.lazy_k > 1 and step % self.lazy_k != 0):
         return _original_penalty(self, D, x_real, x_fake, step, generator, collect_stats)
     _state['pending'] = True
     coefficient = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
