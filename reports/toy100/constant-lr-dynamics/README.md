@@ -4,7 +4,7 @@ Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant:
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
-Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
+Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch, d_replay}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
 
 Each idea has one setting taken from the existing step, the existing penalty term, or the existing batch. No coefficient, clip, or ratio was swept. Not on this track: coverage, anchors, forward-KL as a training signal, mode quotas, Chamfer assignment.
 
@@ -39,6 +39,12 @@ No new coefficient, cap, or target slope. Other arms are unchanged. Early fakes 
 
 The ring host and `GANTrainer` draw a second latent batch and a second real batch after the critic step. This keeps critic-then-generator order. The generator re-forwards the latents the critic just scored and is paired with that same real batch. Output noise on the generator forward is still drawn: that draw is the observation of this forward, not a second minibatch. Not simultaneous, and not extragradient.
 
+### `d_replay` — the locations the fakes just left
+
+D's fake batch is half the current generator or particle samples and half an even stride across a FIFO of past fakes (Shrivastava et al., CVPR 2017). The generator loss and the particle update are the current sample only. No per-mode logic.
+
+The FIFO holds 40 critic updates. That number is the #177 lead: the gradients that empty a mode onto a higher-scoring neighbor jump about 40 updates before the crossing, and the emptied mode stays empty behind a real-vs-fake logit gap of about 4. Forty updates keeps those departing fakes in D's batch through the climb. It is this generator's recent history, not a second dataset. The half split is the history buffer's usual rate, as a fixed cut of the batch, so the draw adds no RNG. The oldest update is dropped past 40. Not swept.
+
 ## Patches
 
 Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of the three names is set.
@@ -56,6 +62,7 @@ python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamic
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics unit_rms --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics pair_chord --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics shared_batch --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics d_replay --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 ```
 
 Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `hq`, `passing_suffix`). Hold passes only when `status` is `PASS` and `hold_checks == 1200`. Stay passes only when shift's continued hold is `120/120` and `pass_all`. The shift terminal status is not the stay gate.

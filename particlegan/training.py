@@ -5,6 +5,7 @@ import math
 import torch
 from torch import nn
 
+from .dynamics.d_replay import replay_fakes
 from .dynamics.shared_batch import shared_batch_update
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
@@ -191,6 +192,9 @@ class GANTrainer:
         with torch.no_grad():
             latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
             fake = self._generate(self.G, latent, sigma_out, noise)
+        # d_replay mixes this critic batch only. The generator step below
+        # still samples its own latents and scores current fakes.
+        fake = replay_fakes(fake)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
         penalty = self.penalty(critic, real, fake)
