@@ -28,7 +28,7 @@
     "phase": "RUNNING",
     "no_seed_sweeps": true,
     "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
-    "verified_live_utc": "2026-09-26T21:13:30.904227+00:00",
+    "verified_live_utc": "2026-09-26T21:43:40.205626+00:00",
     "verified_live_counts": {
       "codex": 3,
       "grok": 0
@@ -565,8 +565,8 @@
     },
     {
       "lane": "constant_rate_stability",
-      "pid": 1398479,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/constant_rate_stability/20260926T211209Z-1398479",
+      "pid": 1447914,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914",
       "status": "RUNNING"
     }
   ],
@@ -574,7 +574,10 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "FIRST_RESULTS_PRESERVED_REPAIRS_RUNNING",
-    "historical_scores_inherited": false
+    "status": "API_RP2_STATIONARY_PASS_LONG_RUNNING_CONSTANT_LANE_REFILLED",
+    "historical_scores_inherited": false,
+    "shared_checkpoint_status": "UNRESOLVED_FILE_CONTINUATION_DISCREPANCY",
+    "matched_k3p_owner": "reversible_precision",
+    "checkpoint_diagnostic_owner": "data_drift_mobility"
   }
 }

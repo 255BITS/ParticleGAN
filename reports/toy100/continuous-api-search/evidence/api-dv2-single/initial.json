@@ -1,0 +1,25 @@
+{
+  "step": 0,
+  "trainer_sha256": "cc21bb180778051b5b0281ef9aca6ce28a2010410990a0b5f5381e9037d20924",
+  "models_sha256": {
+    "G": "af9bae87618dbdd9e1f90283e3def3a33fbdcfef9804661dbc636158daa07779",
+    "D": "fd32958497c0e4fb1289cc30e4dd3a4392ce17638d0d54a67301c812560a5837",
+    "prior": "ee6f5a4084d69c3f98716eda19ec5604553101c4e1e584344bff7a91ba45f233",
+    "ema_G": "af9bae87618dbdd9e1f90283e3def3a33fbdcfef9804661dbc636158daa07779",
+    "ema_prior": "ee6f5a4084d69c3f98716eda19ec5604553101c4e1e584344bff7a91ba45f233"
+  },
+  "optimizers_sha256": [
+    "10ef7d2fc18da164d78295eb21bff29d9d20858948a599f44a39c45d0fb306d6",
+    "2361efec4be61024e4b01440fdab3ea388fd42da9f76347fe2030e422d8af643"
+  ],
+  "streams_sha256": {
+    "latent_generator": "80e1cc1f4945ba61e9c1e2c0f446cc38231cff14a8820906672cc87a48a7a846",
+    "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+    "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+    "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+  },
+  "cpu_rng_sha256": "78211cc3c1dd585a8d9c793dc872ce856e0868e5670cab7c6ac573e614d44dfe",
+  "cuda_rng_sha256": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+  "real_stream_sha256": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+  "means_sha256": "f285901fa1c672859550334f62149d9bff1c533d2bfcb61f2a2a818044950a7f"
+}
