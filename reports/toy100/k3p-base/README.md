@@ -4,7 +4,8 @@
 `direct_particle_response` as the starting formulation for future research.
 It passes all 22 declared GPU toy gates and the measured ring hold plus
 300-update extension. Target-shift recovery remains the next problem to solve.
-This is a research selection; the public training-package defaults are separate.
+K3P is also the package default: `get_recipe()` and `GANTrainer` train with it
+([package guide](../../../docs/k3p.md)).
 
 ![K3P convergence on three 100-Gaussian layouts](../gap-fill-20260925/k3p-100gaussians-convergence.gif)
 
@@ -115,8 +116,8 @@ python -m pytest -q tests/test_k3p_selection.py
 ```
 
 The standard `benchmarks.toy100` / `benchmarks.toy_suite` commands and CPU CI
-gate still use the historical shared recipe. The public `get_recipe("gan")`
-API still selects GAN v3. Neither entry point installs K3P's research hooks.
+gate still use the historical shared recipe. The public `get_recipe("gan")` API now selects K3P and its recipe-built optimizers
+implement the mechanism without the historical research hooks.
 
 Use `probe.py` for the 19 transfer tasks, `native100.py` for the three native
 problems, and `hold.py`, `shift.py`, `shift_frozen.py` for the ring protocols.
@@ -138,3 +139,46 @@ of those module-global states; restart equivalence is unqualified.
 
 The next research gate is K3P's own target-shift recovery while protecting its
 hold/extension and all 22 toy passes. No new training is launched by selection.
+
+## Continuous-learning search
+
+The current experiment has merged master and is preparing a fresh package-default
+baseline after compaction. See [the handoff](../public-default-baseline/README.md).
+The following launcher/results narrative is historical; STOP markers remain set.
+
+[Round 1 results](../continuous-round-1/README.md): 24 candidates, no qualified
+winner. A3 passed hold and extension and reached 71/81 recovery checks; all 22
+toy gates are still unverified for it. K3P stays selected. The [next round](../continuous-round-2/SEARCH.md)
+verifies A3 separately while independent searches continue from K3P. The loop is
+solve, verify all gates, then promote a verified winner as the next search base.
+
+The [focused search brief](continuous-search.md) targets a formulation that does
+not need the training horizon to define a one-way late phase. K3P's current
+positive floors do not freeze optimization, but its critic handover still
+depends on LR decay. Merely making LR constant would leave that handover at
+the early penalty and keep the EMA anchor inactive.
+
+The [launcher](launch-gan-k3p-continuous.py) reuses the existing search script
+with **three Codex and five Grok lanes**, no Claude: continuous critic constraint,
+reversible plasticity, adaptive anchor memory, relative update control, reversible
+critic mixing, anchor innovation, particle/network balance, and stationary noise.
+Default caps are three proposals, 45 minutes and one benchmark worker per lane,
+four workers on each GPU. Preview without starting agents or training:
+
+```sh
+python /ml2/hypergan/launch-gan-k3p-continuous.py --dry-run
+```
+
+An actual invocation without `--dry-run` starts the eight bounded attempts.
+The first gates are the candidate's own extended hold and matched target-shift
+recovery, followed by all 22 toys and separately declared delayed/repeated-change
+stress checks for survivors. The published K3P source and scores remain fixed.
+
+This work is a separate follow-up to PR #139, based on its final selected K3P
+commit `b979d3c9`. Search outcomes belong to this follow-up; they do not change
+the completed selection in #139. Executable launcher snapshots are in
+[`launcher/`](launcher/); install them alongside the focused entrypoint in the
+workspace root to reproduce this local workflow. They require the existing
+research checkout, retained runtime/fixtures and authenticated agent CLIs.
+See [engine setup and OpenCode/NanoGPT usage](launcher/README.md) for commands,
+authentication, log artifacts and offline integration checks.

@@ -3,7 +3,7 @@
   "display_name": "K3P",
   "parent": "k3_with_a2_bounded_damp",
   "previous_selected_candidate": "direct_particle_response",
-  "role": "user-selected GPU GAN research and launcher default",
+  "role": "Historical K3P comparison base retained for legacy research launchers; not a qualified continuous-learning winner",
   "requires_mechanism": true,
   "requires_response": true,
   "requires_latent": true,
@@ -133,5 +133,7 @@
   "checkpoint": "reports/toy100/gap-fill-20260925/sources/k3p/checkpoint.py",
   "checkpoint_sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
   "convergence_gate": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py",
-  "convergence_gate_sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+  "convergence_gate_sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+  "continuous_learning_eligibility": "DISQUALIFIED_CURRENT_CONFIGURATION",
+  "continuous_eligibility_report": "reports/toy100/continuous-eligibility/README.md"
 }

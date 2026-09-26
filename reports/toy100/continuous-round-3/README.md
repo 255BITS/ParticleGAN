@@ -1,0 +1,183 @@
+# Continuous-learning search — paused
+
+**Stopped at the user's request on 2026-09-25. New launches are disabled.**
+All tracked workers had already exited; partial work is preserved. No new winner
+was qualified and K3P remains selected. See the consolidated
+[inventory and comparison table](INVENTORY.md), including the last recovered
+PD1/EP1 failures, EP2's interrupted hold, and unfinished evaluator work.
+
+## Historical search record
+
+The following records the search before the stop request; proposed follow-ups
+and automatic refill instructions below are suspended by that request.
+
+Last active policy: **at most one Codex and seven Grok attempts**, one benchmark worker
+each, at most four workers per GPU. The launcher checks registered live processes
+before reserving new capacity. Earlier round receipts preserve their original
+three-Codex/five-Grok allocation. Both Codex and Grok over-cap launches have been
+checked and rejected.
+
+K3P stays selected. [Round2](../continuous-round-2/README.md) finished21 new
+proposals with no winner. P3 was the strongest round-2 partial lead: hold1200/1200,
+extension300/300, stationary5/5, pre-hold120/120 and failed recovery77/81.
+Its remaining horizon-based noise and four deadline misses are binding failures.
+
+The initial wave of round 3 has finished **17 formulations, no qualified winner**.
+Of 34 expected canonical hold/shift protocols, 33 completed; EG1's shift was not
+run after its slot moved to independent RP1 auditing. Negative momentum reached
+its agent time cap after saving all six failed canonical runs. Its interrupted
+report-writing is separate from those completed measurements.
+
+| Initial lane | Proposals | Hold + extension passes | Complete live shift passes | Outcome |
+|---|---:|---:|---:|---|
+| Responsive precision | 1 | 1 | 1 | RP1 rejected by image stability and native accuracy |
+| Reference response | 3 | 3 | 0 | Best deadline count 52/81; no transfer qualification |
+| Local curvature | 3 | 0 | 0 | Acquisition/hold failures |
+| Negative momentum | 3 | 0 | 0 | Acquisition/hold failures |
+| Signal and noise | 3 | 0 | 0 | Acquisition/hold failures |
+| Joint trust | 3 | 0 | 0 | Acquisition/hold failures |
+| Predictor/corrector | 1 | 0 | Not run | Failed hold; slot redirected to auditing |
+
+[Exact accounting](first-wave-summary.json) separates raw UNCONFIRMED live shift
+from matched-control qualification. No row borrows parent passes.
+
+The [first replacement wave](first-replacement-wave-summary.json) also finished:
+**20 new formulations, no winner; all40 canonical protocols complete**. Eleven
+own hold+extension protocols pass, but all20 shifts fail. This brings these two
+completed groups to37 formulations and73/74 completed canonical protocols, with
+EG1's earlier shift still NOT_RUN. PB0's unchanged-parent instrumentation and
+qualification harnesses are excluded from formulation counts. The later kernel
+discrepancy attempt is reported separately below; newly launched mechanisms are
+excluded while still running.
+
+| New search | Engine | Question |
+|---|---|---|
+| Acquisition across tasks | Codex | Which training signal preserves both short-image convergence and native precision? |
+| Reference-gap release | Grok | Can contraction of the reference gap end adaptation without premature closing? |
+| Critic confidence | Grok | Does minibatch uncertainty distinguish learning from stochastic oscillation? |
+| Prior mobility | Grok | Can relative prior/network motion retain precision without preventing adaptation? |
+| Acquisition noise | Grok | Can achieved optimizer motion govern noise without a final training duration? |
+| Data innovation | Grok | Can minibatch changes reopen learning without stationary false alarms? |
+| Penalty balance | Grok | Does separating adversarial and regularizer forces improve control? |
+| Qualification harness | Grok | Prepare exact long-run evaluation; no candidate qualification runs |
+
+Earlier local-curvature, negative-momentum, responsive-precision, reference,
+signal/noise, joint-trust and predictor/corrector attempts retain their own
+records. Live lanes are listed by the monitor; this table describes new work.
+
+Every new proposal earns both canonical protocols. A prospective live winner
+then gets its matched frozen control and all22 toys. Only full evidence can
+authorize promotion; paper hypotheses and partial scores are not qualifications.
+Delayed/repeated changes and horizon invariance remain required before claiming
+continuous learning. See [search brief](SEARCH.md) and [research notes](../continuous-search-tools/research-notes.md).
+
+Launches are staggered as slots free up; [receipts](receipts/) record exact base
+commits, commands, engines, GPUs and PIDs. The initial [launch receipt](launch-receipt.json)
+contains only the first three replacements. Watch all live batches with:
+
+```sh
+python3 /ml2/hypergan/monitor-gan.py --once
+```
+
+**RP1 passed the live ring requirements, then failed transfer verification.**
+Own hold was 1200/1200, extension 300/300, stationary 5/5, pre-hold 120/120 and
+recovery 81/81. However, `img_intensity2` failed sustained confirmation (3/24
+passing observations), and native grid100 passed coverage but failed center
+accuracy. Eight transfer gates pass; ten remain unrun. RP1 is rejected and further
+native, seed and stress qualification is stopped. K3P stays selected.
+
+See the [failure diagnosis and evidence](rp1-rejection.md). The substantial
+horizon-prefix audit passes for training state; its separate raw whole-capture
+comparison fails on evaluation counters. The tested observer adapter preserves
+updates while fixing checks that previously compared rates from different steps.
+No audit pass overrides a quality failure.
+
+[Reference-response results](completed-reference/attempts/k3p_reference_response/result.md)
+add three passing own holds/extensions, but every shift fails (29/81, 52/81,
+0/81). These are diagnostic leads only. Fresh searches focus on acquisition and
+precision across tasks, uncertainty in the closing signal, and reference-gap
+release. Every new formulation must earn its own scores.
+
+The user clarified the final native matrix: **all three layouts each4/4 seeds**,
+grid100/rotated100/staggered100 at1234–1237. This is12 full7000-update native runs,
+each requiring coverage AND accuracy; it adds9 runs beyond the22-toy matrix.
+This fixed winner qualification is explicitly authorized, with no seed search.
+The separately declared [30000-update long-term continuation](long-term-stability-protocol.json)
+preserves the9000 stress windows and adds another change at27000. After the same
+formulation clears every requirement, the supervisor will stop remaining searches
+and promote it in PR155. The later user stop request suspends further search and
+verification; no candidate reached that bar.
+
+The [fixed native qualification wrapper](../continuous-search-tools/NATIVE_QUALIFICATION.md)
+is prepared for surviving candidates. Its twelve configuration checks pass with
+zero training updates; it pins candidate source and preserves full7000 budgets.
+No additional RP1 seed qualification was run.
+
+The first replacement Codex attempt also finished: [AC1–AC3 results](completed-acquisition/attempts/k3p_transfer_acquisition/result.md).
+All six canonical protocols fail. AC1/AC2 pass the short image screen, but AC1
+never acquires eight ring modes and AC2 loses a mode after 187 good hold checks.
+AC3 holds for 1027 checks before failure and also fails the image screen. These
+are three additional rejected formulations, excluded from the initial17 count.
+The next Codex direction uses ordinary real/generated training discrepancy,
+with a sampling-noise reference, as a hypothesis for separating model error from
+critic fluctuations. It remains K3P-derived research, not a new selected base.
+
+The first long-run harness preparation passed its synthetic checks but failed
+[root integration review](qualification-harness-review.md): it omitted canonical
+candidate hooks and initialization. It is marked NOT_READY and assigned for
+repair. No candidate long-run score is claimed from those harness checks.
+
+Two more replacement lanes finished, adding six rejected formulations:
+
+| Completed lane | Hold + extension | Recovery checks | Remaining limitation |
+|---|---|---|---|
+| [Prior mobility](completed-mobility/attempts/k3p_particle_mobility/result.md), PM1/PM2/PM3 | All three pass | 79/81, 78/81, 79/81 | Late mode loss; inherited scheduled noise |
+| [Reference-gap release](completed-prox/attempts/k3p_prox_release/result.md), PX1/PX2/PX3 | All three pass | 16/81, 0/81, 71/81 | Mobility closes too early or persists without precision; scheduled noise |
+
+No transfer gate or full qualification is claimed for these six. PM1 detects the
+shift, but its gradient signal has already cooled when a late mode disappears.
+PX3 closes during a lull while the smoothed reference gap is still rising.
+Follow-up hypotheses test a training-minibatch distribution residual and an
+explicit growth/contraction phase. They remain independent proposals from K3P,
+not promotions of these failed candidates.
+
+[Data-innovation results](completed-data-innovation/attempts/k3p_data_innovation/result.md)
+add three further rejected formulations. All hold1200+300; DI1/DI2/DI3 recover
+33/81, 77/81 and45/81. DI2 loses a mode in the last four deadline checks after
+the real-data novelty signal has returned to its stationary range. DI3's hard
+critic-anchor reset worsens recovery. All retain horizon-based rates and noise;
+none earns transfer or long-term qualification.
+
+[Critic-confidence results](completed-confidence/attempts/k3p_critic_confidence/result.md)
+add three rejected formulations; all six canonical protocols fail. Half-batch
+gradient agreement stayed high without stable coverage, while margin uncertainty
+closed acquisition prematurely. A frozen quiet-baseline proposal never closed.
+The next distinct hypothesis corrects the joint game-update direction rather
+than using another scalar confidence threshold; the research note records its
+primary reference and required cross-player derivative checks.
+
+[Penalty balance](completed-penalty-balance/attempts/k3p_penalty_balance/result.md)
+finished **two new controllers**, both rejected. PB1 holds1200+300 and recovers
+79/81 but also fails pre-hold112/120. PB2 holds, keeps pre-hold120/120 and recovers
+77/81; four checks lose a mode. PB0 is an unchanged-parent instrumentation
+diagnostic, not a third new formulation. Both controllers retain scheduled rates
+and noise. The measured penalty/adversarial-force split motivates balancing the
+anchor force directly; it does not establish the cause of RP1's native drift.
+
+[Motion-based noise evidence](completed-progress-noise/evidence.json) contains
+three proposals and six completed canonical failures. The agent timed out after
+saving the last result, before writing its report. PN1/PN2/PN3 never qualified a
+hold and each recovers0/81. PN1 ends input noise at update15; PN2 ends it at391
+but never reaches full output noise; PN3 freezes a raw-gradient peak and also
+fails acquisition. Complete measurements are preserved separately from the
+interrupted report. No descendant benchmark process remained at collection.
+
+The [kernel-discrepancy Codex attempt](completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md)
+has now finished another three rejected formulations: three image PASS and six
+canonical FAIL. All holds have zero qualifying settling checks; TD1/TD2 recover
+0/81, while TD3 recovers53/81 but fails stationary0/5 and pre-hold0/120. TD3 keeps
+near-full mobility and the early critic penalty throughout, never activating the
+anchor. More sensitivity to model error did not solve acquisition. Follow-ups
+separate error detection from update size and critic damping. These sources use
+absolute120/240 startup noise ramps, but no horizon audit or broad qualification
+is claimed after their quality failures.

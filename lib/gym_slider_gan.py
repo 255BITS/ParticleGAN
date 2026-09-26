@@ -57,14 +57,16 @@ def hashes(bundle):
         dict(G=bundle['R'], E=bundle['R'], prior=bundle['R']))['G']}
 
 
-def error_loss(critic, decoded, real, step, rng, *, capper=None):
+def error_loss(critic, decoded, real, step, rng, *, penalty=None):
+    """Paired-error game on R. With ``penalty`` (``recipe.make_critic_penalty``
+    for R's optimizer) this is R's update; without, the generator's."""
     residual = critic.residual(decoded, real)
     noise = torch.randn(residual.shape, generator=rng, device=residual.device) * critic.sigma(step)
-    fake = noise + (residual.detach() if capper is not None else residual)
-    if capper is not None:
+    fake = noise + (residual.detach() if penalty is not None else residual)
+    if penalty is not None:
         adversarial = rp_d_loss(critic(noise), critic(fake))
-        penalty, _ = capper.penalty(critic, noise, fake, step=step, collect_stats=False)
-        return adversarial + penalty, dict(error_d_adversarial=adversarial, error_cap=penalty)
+        value = penalty(critic, noise, fake)
+        return adversarial + value, dict(error_d_adversarial=adversarial, error_cap=value)
     with torch.no_grad():
         real_score = critic(noise)
     loss = rp_g_loss(real_score, critic(fake))

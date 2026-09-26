@@ -22,7 +22,7 @@ from experiments.config import merge_config, read_config
 from experiments.run_grid import code_provenance
 from lib.image_ddgan import update_ema
 from lib.image_particle_autoencoder import DirectGenerator, DirectDiscriminator, ImageRoutingEncoder
-from particlegan import calibrate_mog_sigma, GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
+from particlegan import calibrate_mog_sigma, get_recipe, MoGParticlePrior, ParticleRegularizer, scale_learning_rates
 
 DEFAULTS = {
     'arm': 'gan', 'seed': 24002, 'steps': 10000, 'batch_size': 64,
@@ -55,6 +55,19 @@ def state_hash(modules):
 
 def rng(seed, device='cuda'):
     return torch.Generator(device=device).manual_seed(seed)
+
+
+def training_recipe(cfg):
+    """The default recipe at this experiment's image-scale rates and horizon.
+
+    The critic penalty is applied lazily every 4th step (coefficient x4) for
+    image-scale cost; laziness changes only its frequency, not the technique.
+    """
+    return get_recipe('ae_gan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+                      sigma_rel=cfg['sigma_rel'], routing_temperature=cfg['temperature'],
+                      batch_size=cfg['batch_size'], total_steps=cfg['steps'], lr=cfg['lr'],
+                      d_lr_mult=cfg['d_lr'] / cfg['lr'], prior_lr_mult=cfg['prior_lr'] / cfg['lr'],
+                      ema_decay=cfg['ema'], reg_every=4)
 
 
 def validate(cfg):
@@ -200,13 +213,10 @@ def train(cfg):
     initial_prior = prior.z.detach().clone()
     initial_features = state_hash([d.critic.features])
     eg, ee, ep = [copy.deepcopy(m).eval().requires_grad_(False) for m in (g, e, prior)]
-    og = torch.optim.Adam([
-        {'params': g.parameters(), 'lr': cfg['lr']},
-        {'params': e.parameters(), 'lr': cfg['lr']},
-        {'params': prior.parameters(), 'lr': cfg['prior_lr'], 'betas': (.5, .999)},
-    ], betas=(0., .999), fused=True)
-    od = torch.optim.Adam([p for p in d.parameters() if p.requires_grad], lr=cfg['d_lr'], betas=(0., .999), fused=True)
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=4), ParticleRegularizer()
+    recipe = training_recipe(cfg)
+    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)
+    base_lrs = [[group['lr'] for group in o.param_groups] for o in (og, od)]
+    adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(od), ParticleRegularizer()
     streams = {name: rng(cfg['seed'] + offset) for name, offset in [('data', 2), ('prior', 3)]}
     metadata = {'initialization_sha256': initial_hash, 'sigma': float(prior.sigma),
                 'initial_nearest_neighbor_median': float(prior.d0), 'torch': torch.__version__,
@@ -229,13 +239,14 @@ def train(cfg):
     block_start = time.perf_counter()
     with (out / 'metrics.jsonl').open('w', buffering=1) as log:
         for step in range(1, cfg['steps'] + 1):
+            scale_learning_rates(step - 1, recipe, (og, od), base_lrs, prior)
             d.requires_grad_(True)
             real = batch()
             with torch.no_grad():
                 z, _ = prior.sample(cfg['batch_size'], streams['prior'])
                 fake = g(z)
             od.zero_grad(set_to_none=True)
-            dp = penalty(d, real, fake, step)
+            dp = penalty(d, real, fake)
             dl = adversarial.d_loss(d(real), d(fake)) + dp
             dl.backward()
             od.step()

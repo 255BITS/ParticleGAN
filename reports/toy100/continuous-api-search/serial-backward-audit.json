@@ -1,0 +1,129 @@
+{
+  "scope": "Read-only audit. No PyTorch import, training, GPU operation, benchmark, extra model/agent launch, or worker checkout edit was performed. JSON/zip/AST checks only.",
+  "repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo",
+  "verdict": "Scoped serial implementation is sound by source inspection; captured fresh-process regression passes within its declared variant/runtime scope. Address provenance and claim-scope issues before broad guarantees.",
+  "context_checks": {
+    "whole_step_enclosed": true,
+    "nested_create_graph_enclosed": true,
+    "both_backward_calls_enclosed": true,
+    "caller_thread_local_flag_restored_on_return_or_exception_by_context_manager": true,
+    "other_thread_state_affected": false,
+    "checkpoint_flag_type_and_cross_flag_validation_before_mutation": true,
+    "false_mode_inherits_ambient_setting": true
+  },
+  "local_pytorch_source": {
+    "version": "2.13.0+cu126",
+    "git_version": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "thread_local_sequence_documentation": "include/torch/csrc/autograd/node.h:102-109",
+    "sequence_priority_comparator": "include/torch/csrc/autograd/engine.h:91-104",
+    "context_restore": "autograd/grad_mode.py:338-347"
+  },
+  "independent_evidence_checks": {
+    "critic_graph_nodes": 161,
+    "same_critic_graph_topology": true,
+    "relative_sequence_priority_pairs_changed": 1360,
+    "priority_pairs_caveat": "Includes dependencies, not proof all pairs competed in ready queue.",
+    "serial_final_receipts_equal": true,
+    "serial_observations_equal": true,
+    "matched_observations": 10,
+    "source_archives": [
+      {
+        "run": "serial-checkpoint-reference",
+        "declared_sources": 15,
+        "hash_mismatches": [],
+        "method_ast_sha256": {
+          "__init__": "8519f3c361b5eefdf9600e8829647069b056e73ec3d729c7e6f516e55a158725",
+          "step": "1df2bef5f018ebbd2e303d4527903d4213910ffe0cc1e10eeff3c153945ffc8d",
+          "_step": "fc30b3f3ce46627ccdd01047177e8c208243741f64e99fa8cd0ab78807420c3b",
+          "state_dict": "fdab79a88106ff2b961c9b882597b705b0a9967971d4454bb22742db05379d53"
+        },
+        "training_source_sha256": "e58348e0665bf7a5ba6d75bc1d0969fa5e4f3284a994412841cd15a8e12f4081"
+      },
+      {
+        "run": "serial-checkpoint-resume",
+        "declared_sources": 15,
+        "hash_mismatches": [],
+        "method_ast_sha256": {
+          "__init__": "8519f3c361b5eefdf9600e8829647069b056e73ec3d729c7e6f516e55a158725",
+          "step": "1df2bef5f018ebbd2e303d4527903d4213910ffe0cc1e10eeff3c153945ffc8d",
+          "_step": "fc30b3f3ce46627ccdd01047177e8c208243741f64e99fa8cd0ab78807420c3b",
+          "state_dict": "fdab79a88106ff2b961c9b882597b705b0a9967971d4454bb22742db05379d53"
+        },
+        "training_source_sha256": "1aa26447d6307d70fbab776c7d20e95d298fe11a4a57bf735c17910cc08a6dcb"
+      }
+    ],
+    "source_archive_difference": "Reference/resume differ in docs and load-state validation/legacy recipe normalization; __init__, step, _step and state_dict AST hashes are identical."
+  },
+  "issues": [
+    {
+      "id": "effective-mode",
+      "severity": "medium",
+      "finding": "False preserves ambient caller multithreading mode; the saved opt-in flag does not capture every effective execution-mode change.",
+      "evidence": [
+        "particlegan/training.py:187-195",
+        "particlegan/training.py:299-305",
+        "tests/test_serial_backward.py:56-62"
+      ],
+      "action": "Document False as legacy/inherited execution and narrow the cross-mode rejection claim to explicit serial flags. If actual-mode provenance is promised, persist/validate it without silently overriding legacy caller behavior."
+    },
+    {
+      "id": "scope-of-proof",
+      "severity": "medium",
+      "finding": "The 1000\u21921100 fresh-process match uses dv1 only. Serial execution changes numerical trajectories relative to historical mode, so existing dv3 quality results do not qualify serial mode.",
+      "evidence": [
+        "reports/data-drift-api/serial_checkpoint.py:24-28",
+        "reports/data-drift-api/runs/fresh-objects-single-autograd/result.json",
+        "reports/data-drift-api/worker.py"
+      ],
+      "action": "Use one declared execution mode consistently for further authorized quality work and include variant-specific continuation evidence before claiming it. No extra experiment launched by this audit."
+    },
+    {
+      "id": "source-closure",
+      "severity": "medium",
+      "finding": "Serial regression source archive omits imported worker.py and benchmark model/evaluator helpers; runtime version/device metadata is also absent.",
+      "evidence": [
+        "reports/data-drift-api/serial_checkpoint.py:7-19"
+      ],
+      "action": "Retain hashes/snapshots for imported worker.py, model/evaluator files, exact PyTorch/CUDA version and GPU identity with the completed evidence."
+    },
+    {
+      "id": "direct-nested-test",
+      "severity": "low",
+      "finding": "Current CPU tests inspect forward hooks and a forward exception, not nested create_graph execution or exceptions inside backward. Source scope is correct, but regression coverage could detect future scope narrowing more directly.",
+      "evidence": [
+        "tests/test_serial_backward.py:17-35",
+        "particlegan/ka2.py:236",
+        "particlegan/grad_regularizers.py:269"
+      ],
+      "action": "Add a focused contract test that observes the flag within autograd.grad(create_graph=True) and a backward exception; retain both caller starting modes."
+    },
+    {
+      "id": "causal-wording",
+      "severity": "low",
+      "finding": "Recorded graph ranks and successful serial intervention strongly support an autograd scheduling cause but do not record actual node execution order or isolate each changed priority as causal.",
+      "evidence": [
+        "reports/data-drift-api/autograd_order.py:23-59",
+        "reports/data-drift-api/runs/autograd-order/graphs.json"
+      ],
+      "action": "Call this a strongly supported explanation/workaround, not a proof that all CUDA checkpoint divergence has this sole cause."
+    }
+  ],
+  "reviewed_files_sha256": {
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/particlegan/training.py": "1aa26447d6307d70fbab776c7d20e95d298fe11a4a57bf735c17910cc08a6dcb",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/particlegan/ka2.py": "9fc6ea410a6b316135218902c51aec9077979f6e60ddaae66868799a4d0d1b60",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/tests/test_serial_backward.py": "4bf0974fa4695ac176e6a34c63bab3a22b384143857dc8ff8047ac33ad1d0fe7",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/serial_checkpoint.py": "026cb48850cad19b97c74a7e2c2ded68fe7d177591f3e56412fef96cc76eb160",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/autograd_order.py": "56e363004f66ed84f19075ba6f69ff4fc58ce7e89c24e7229a425600c0fb081c",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/autograd-order/graphs.json": "710b9d9161bea457f366164b80b019090575afa846292ba4b8314ccaa5d14837",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/autograd-order/result.json": "911ccbfb26525ebf49389f2378aeed95273f6cd5073f6393f3a55125f115892e",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/fresh-objects-single-autograd/result.json": "d62d573b1a3f05145186d10e3c6df43677331c1936a222d8ddf0890e17940d89",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/file-localize/result.json": "2f3b24e71d21729ff2afe7bc8170f37f5988d4b5b415a177acbe4732d77e9a59",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/serial-checkpoint-reference/result.json": "6086736f74f94664c4b2d60b25956c0b4ea9c0899558e91b56e18292b616bf8e",
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/serial-checkpoint-resume/result.json": "abcf0bbf3af22b6ac728afe3d374452d2f8153b912f563f40cda5da0dbe19504",
+    "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/version.py": "3bb78a8e24b8ea7a91a75015df2e9651a16a3d372be02bf7eb3f1c72384febed",
+    "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/autograd/grad_mode.py": "ddc32c2cc2dfa5e2320f8c8e75b7d048c7661c58e1c9f7304914a22744e2177f",
+    "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/include/torch/csrc/autograd/node.h": "92f2abc3618ea6a88cf3edc32da2fe3cc268ce0a8628e84c06e5745e9183f1e2",
+    "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/include/torch/csrc/autograd/engine.h": "05ca6d38ab20a050a7f6f78fde8762e44d3cd1b07775a221fb940b11c33d77d4"
+  }
+}

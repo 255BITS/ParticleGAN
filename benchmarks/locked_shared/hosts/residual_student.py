@@ -22,10 +22,11 @@ import torch
 from torch import nn
 
 
-from particlegan import GANLoss, ParticlePrior, ParticleRegularizer
+from particlegan import ParticlePrior, ParticleRegularizer
+from benchmarks.legacy.gan_loss import GANLoss
 
 
-from particlegan.grad_regularizers import GradRegularizer
+from benchmarks.legacy.grad_regularizers import GradRegularizer
 
 
 from ..trajectory import (

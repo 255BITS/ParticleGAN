@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "hold": {
+    "name": "first_convergence_then_hold_v1",
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "start_step": 1200,
+    "modes": 8,
+    "min_hq": 0.9,
+    "convergence": "first consecutive qualifying window; operational quality criterion",
+    "hold": "the next updates, disjoint from confirmation; no restart after failure",
+    "training_feedback": false,
+    "frozen_toy_verdicts_unchanged": true,
+    "status": "PASS",
+    "converged_step": 1400,
+    "settling_checks": 200,
+    "settling_failures": 0,
+    "longest_settling_streak": 200,
+    "hold_checks": 1200,
+    "first_hold_failure": null,
+    "hold_budget_complete": true
+  },
+  "extension": {
+    "checks": 300,
+    "expected_checks": 300,
+    "complete": true,
+    "passing_checks": 300,
+    "pass_all": true,
+    "min_hq": 0.989501953125,
+    "min_modes": 8,
+    "failing_steps": []
+  },
+  "experiment": "public_default_k3p_v1",
+  "protocol": "hold",
+  "device": "cuda:0",
+  "historical_scores_inherited": false,
+  "seconds": 147.18462083296617,
+  "torch": "2.14.0+cu130",
+  "completed_steps": 7500,
+  "final": {
+    "step": 7500,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.995361328125,
+    "cover": 1.0,
+    "effective_modes": 7.990171909332275
+  },
+  "final_ema": {
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.995361328125,
+    "cover": 1.0,
+    "effective_modes": 7.990223407745361
+  }
+}

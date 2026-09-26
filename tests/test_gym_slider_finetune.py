@@ -1,4 +1,5 @@
 """Action MSE stays out of the fine-tune graph; only E_control, G2, and R move."""
+import copy
 import json
 from pathlib import Path
 import tempfile
@@ -23,7 +24,7 @@ class SliderFinetuneTests(unittest.TestCase):
                 "checkpoint": str(root / "initial.pt"), "episodes": str(root / "episodes.json"),
                 "out_dir": str(root / "action_error"), "live_log": str(root / "live.log"), **overrides}
 
-    def test_action_mse_is_diagnostic_and_cap_is_lazy(self):
+    def test_action_mse_is_diagnostic_and_recipe_penalty_trains_r(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
             control_tests.ControlTrainingTests().fixture(root)
@@ -46,14 +47,15 @@ class SliderFinetuneTests(unittest.TestCase):
             self.assertEqual(float(grad[:, :8].abs().sum()), 0.)
             self.assertEqual(float(grad[:, 10:].abs().sum()), 0.)
             self.assertGreater(float(grad[:, 8:10].abs().sum()), 0.)
-            cap = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8, total_steps=4, batch_size=4).make_gradient_penalty(
-                arm="b_cap", lazy_k=4, coeff=1., kappa=1.)
-            steep = lambda sample: 2 * sample[:, 0]
-            noise = torch.randn(4, 2)
-            skipped, _ = cap.penalty(steep, noise, noise, step=1)
-            applied, _ = cap.penalty(steep, noise, noise, step=4)
-            self.assertEqual(float(skipped), 0.)
-            self.assertAlmostEqual(float(applied), 4., places=5)
+            recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8, total_steps=4, batch_size=4)
+            bundle["R"].requires_grad_(True)
+            opt_r = recipe.make_critic_optimizer(bundle["R"], ema_critic=copy.deepcopy(bundle["R"]))
+            penalty = recipe.make_critic_penalty(opt_r)
+            critic_loss, critic_terms = error_loss(bundle["R"], decoded.detach(), real, 1,
+                                                   torch.Generator().manual_seed(9), penalty=penalty)
+            self.assertGreater(float(critic_terms["error_cap"].detach()), 0.)
+            critic_loss.backward()
+            self.assertTrue(any(p.grad is not None for p in bundle["R"].parameters()))
 
     def test_train_updates_only_control_path_and_replays(self):
         with tempfile.TemporaryDirectory() as td:
@@ -84,8 +86,7 @@ class SliderFinetuneTests(unittest.TestCase):
             for row in rows:
                 self.assertAlmostEqual(row["loss"], row["error_g"], places=6)
                 self.assertIn("action_mse", row)
-            self.assertEqual([row["error_cap"] for row in rows[:3]], [0., 0., 0.])
-            self.assertTrue(np.isfinite(rows[3]["error_cap"]))
+            self.assertTrue(all(np.isfinite(row["error_cap"]) for row in rows))
             text = (root / "live.log").read_text()
             self.assertIn("[action_error] START", text)
             self.assertIn("action_mse=", text)

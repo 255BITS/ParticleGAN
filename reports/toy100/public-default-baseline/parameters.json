@@ -1,0 +1,79 @@
+{
+  "master_commit": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+  "package_version": "0.8.0",
+  "status": "MEASURED",
+  "default_recipe": {
+    "name": "k3p",
+    "model": "gan",
+    "z_dim": 2,
+    "num_particles": 20000,
+    "prior_kind": "particles",
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 2048,
+    "total_steps": 7000,
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "prior_betas": null,
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "reg_every": 1,
+    "prior_reg": 0.0,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": true,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "input_noise_std": 0.5,
+    "input_noise_anneal_end": 0.1,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0
+  },
+  "protocol_recipe_overrides": {
+    "hold": {
+      "total_steps": 7500
+    },
+    "shift": {
+      "total_steps": 3600
+    }
+  },
+  "seed": 0,
+  "historical_scores_inherited": false,
+  "results": "RESULTS.md",
+  "protocol_status": {
+    "hold": "PASS",
+    "shift": "FAIL"
+  },
+  "toy_suite_status": "NOT_RUN"
+}

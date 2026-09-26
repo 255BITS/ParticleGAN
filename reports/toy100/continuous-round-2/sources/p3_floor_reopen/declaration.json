@@ -1,0 +1,22 @@
+{
+  "candidate": "p3_floor_reopen",
+  "parent": "k3p",
+  "responds_to": "p2_generator_collapse",
+  "measured_p2": "Hold 1200/1200 min HQ 0.992 and extension 300/300 min HQ 0.995, converged at 1400 with 8 modes by step 600. Shift pre-hold kept 8 modes from step 500, but generator RMS rose from 0.00026 to 0.0036 after the shift while the rate stayed at 0.000425 because the quiet EMA chased the rise. Deadline still had 7 modes at step 2800.",
+  "reopen_difference": "While dwelling, compare RMS with an asymmetric floor: it falls with the quiet regime and creeps upward at 0.999, so a sustained rise stays above 5x the floor. The floor resets when dwell is re-entered.",
+  "measured_p1_failure": "Critic-cosine reversal crossed the dwell bar before 8 modes. The run sat at 7 modes and HQ 1 from about step 1700 to 3500 at 0.000425, then a reopen to about 0.0028 at step 3600 erased the cover. Input noise had been removed; at step 1000-1200, still at the full K3P rate and pure R1, live quality was 7 modes rather than 8.",
+  "base_lr": 0.00425,
+  "prior_lr_multiplier": 2.0,
+  "acquire_multiplier": 1.0,
+  "dwell_multiplier": 0.1,
+  "adapt_multiplier": 0.25,
+  "dwell_entry": "0.98 EMA of generator+prior gradient RMS stays below 0.05 of the running peak, peak >= 0.005, confirmed by a 0.9 EMA above 0.5. One-way out of acquisition. Instantaneous RMS is not the bar: p1 dipped under 0.05 of peak near step 500 with only a few modes. The 0.05 level is the sustained ~60x collapse from about 0.015 to 0.00025.",
+  "reopen": "while dwelling, RMS > 5x the 0.995 quiet EMA, confirmed by a 0.9 EMA above 0.5. Returns to dwell when RMS/peak < 0.05 is similarly confirmed. Post-lock reopen stops at 0.25, not 1.",
+  "critic_mix_s": "tracks the slew from 1 toward 0.10 during the first dwell, then locks at 0. Later rate changes do not turn the anchor off.",
+  "anchor_strength": "1+relu(-cosine of successive raw critic gradients), in [1, 2]",
+  "noise": "retained K3P input 0.5 anneal-end 0.1 and output warmup 0.2 on the driver's frozen noise horizon 1200. Labeled scheduled component, not a horizon-free final rule.",
+  "guard": "unchanged critic-only 5x Adam RMS after 200 steps",
+  "particle_prior": "copied K3P latent.py",
+  "direct_response": "copied K3P response.py",
+  "not_read": ["total training budget", "evaluation scores", "convergence flag", "target identity", "shift time", "target center"]
+}

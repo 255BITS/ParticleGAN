@@ -1,0 +1,11 @@
+engine=grok
+base=2f1ce7287005260474176d33b7b4011822f593f5
+branch=codex/gan-attempt-20260925T184042Z-3804368
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=repair_continuous_qualification
+gpu=GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69
+log=/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/grok.log

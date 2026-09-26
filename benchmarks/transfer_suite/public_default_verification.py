@@ -1,6 +1,6 @@
 """Verify the public GAN default through real user-facing construction paths.
 
-Vector and image cases train through GANTrainer(get_recipe(), ...). The nine
+Vector and image cases train through GANTrainer(gan_v3_recipe(), ...). The nine
 legacy auxiliary hosts retain their required custom loops, using public GAN
 primitives and the same unmodified global recipe. Frozen host data, model
 initialization order, RNG streams, resources, steps, measurements, and gates
@@ -27,6 +27,7 @@ import traceback
 import torch
 
 from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator, rng_fork_devices
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -111,10 +112,10 @@ def load_declaration():
 
 
 def public_default(profile):
-    from particlegan import get_recipe
-    base = get_recipe()
+    from benchmarks.legacy.recipe import get_recipe
+    base = gan_v3_recipe()
     if base.name != 'gan_v3':
-        raise ValueError('get_recipe() does not resolve to the public gan_v3 default')
+        raise ValueError('gan_v3_recipe() does not resolve to the public gan_v3 default')
     for name, expected in profile['candidates'][0]['overrides'].items():
         actual = getattr(base, name)
         if isinstance(actual, tuple):
@@ -401,7 +402,7 @@ def run(output, *, tasks=None, require_installed_root=None):
     protocol = suite.snapshot(output)
     protocol.update(version='public-default-verification-v1',
                     public_package=public_module_manifest(require_installed_root),
-                    base_get_recipe=base.to_dict(),
+                    base_get_recipe=legacy_dict(base),
                     global_recipe_fields=list(GLOBAL_RECIPE_FIELDS),
                     profile_path=str(PROFILE_PATH.relative_to(ROOT)),
                     profile_sha256=hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest(),
@@ -439,8 +440,8 @@ def run(output, *, tasks=None, require_installed_root=None):
             context = dict(applied=[], shapes={}, host_recipe=base)
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
-        record = dict(name=spec['name'], route=route, recipe=base.to_dict(),
-                      host_recipe=context['host_recipe'].to_dict(),
+        record = dict(name=spec['name'], route=route, recipe=legacy_dict(base),
+                      host_recipe=legacy_dict(context['host_recipe']),
                       original_spec=deepcopy(job['spec']), spec=spec,
                       discriminator_variant=variant,
                       architecture=variant['name'] if variant else job['architecture'],

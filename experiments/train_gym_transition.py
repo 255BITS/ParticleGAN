@@ -22,7 +22,7 @@ from lib.gym_transition import (GymTransitionScaler, GymTransitionGenerator,
     GymTransitionEncoder, GymTransitionCritics, DirectPredictor, contact_record,
     encoded_transition, composed_transition, real_reconstruction,
     synthetic_reconstruction, state_reconstruction)
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe, scale_learning_rates
 
 
 DEFAULTS = dict(arm="adversarial", width=128, encoder_width=128, d_width=256,
@@ -165,15 +165,16 @@ def load_checkpoint(path, device="cpu"):
     return bundle
 
 
-def discriminator_loss(d, real, fake, terrain, gan, reg, step, rngs):
+def discriminator_loss(d, real, fake, terrain, gan, penalties):
+    """Rp + recipe penalty per critic role; ``penalties`` maps role -> critic penalty
+    (or is one penalty for all roles)."""
     terms = {}
     for role in d.roles():
         critic = d.critic_for(role)
         xr, context = d.inputs(role, real, terrain)
         xf, _ = d.inputs(role, fake, terrain)
         dr, df = critic(xr, context)[0], critic(xf, context)[0]
-        penalty, _ = reg.penalty(lambda x: critic(x, context)[0], xr, xf, step,
-                                 rngs[role], collect_stats=False)
+        penalty = (penalties[role] if isinstance(penalties, dict) else penalties)(critic, xr, xf, context)
         terms[role] = gan.d_loss(dr, df) + penalty
     return sum(terms.values()), terms
 
@@ -245,18 +246,19 @@ def train(cfg):
         if models[key] is not None:
             ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     if d is not None:
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, fused=device.type == "cuda")
+        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+                                              fused=device.type == "cuda")
     else:
         params = list(direct.parameters()) if direct is not None else list(g.parameters()) + list(e.parameters())
         groups = [dict(params=params, lr=recipe.lr)]
         if prior is not None:
             groups.append(dict(params=list(prior.parameters()), lr=recipe.lr * recipe.prior_lr_mult,
                                betas=recipe.prior_betas or recipe.betas))
-        opt_g = torch.optim.Adam(groups, lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
+        opt_g = recipe.make_generator_optimizer(groups, **(dict(fused=True) if device.type == "cuda" else {}))
         opt_d = None
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     d_data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 21)
     latent_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 12)
@@ -265,6 +267,9 @@ def train(cfg):
     d_contact_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 32)
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
                 for i, role in enumerate(d.roles())} if d is not None else {}
+    # One recipe penalty per critic role (own interpolation stream), paired with opt_d.
+    penalties = ({role: recipe.make_critic_penalty(opt_d) for role, rng in reg_rngs.items()}
+                 if opt_d is not None else None)
     weights = dict(continuous_weight=cfg["continuous_weight"], contact_weight=cfg["contact_weight"])
     provenance = source_provenance(out, cfg["data_dir"])
     write_json(out / "provenance.json", provenance)
@@ -317,10 +322,7 @@ def train(cfg):
         sync()
         segment_started = time.perf_counter()
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, prior)
             ld = train_real.new_zeros(())
             d_terms = {}
             if d is not None:
@@ -331,7 +333,7 @@ def train(cfg):
                     composed_d = composed_transition(e, g, prior, fake_d, context_d, rng=d_contact_rng)[0]
                     half = len(real_d) // 2
                     fake_d = torch.cat([fake_d[:half], composed_d[half:]])
-                ld, d_terms = discriminator_loss(d, real_d, fake_d, context_d, gan, reg, step, reg_rngs)
+                ld, d_terms = discriminator_loss(d, real_d, fake_d, context_d, gan, penalties)
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
                 opt_d.step()

@@ -1,5 +1,57 @@
 # 22-toy results and continuous stability
 
+New actual-API measurements: [September 26 continuous search](continuous-api-search/README.md). No qualified winner; failed short and long traces remain available.
+
+## Current continuous-learning eligibility — September 26, 2026
+
+**No qualified winner.** The complete learner must run without a caller-managed
+acquisition/maintenance switch or predetermined end time. Automatic reversible
+adaptation is allowed. A clock-independent anchor inside a scheduled learner
+is insufficient. The [entry-by-entry audit](continuous-eligibility/README.md)
+disqualifies 18 current configurations, retains three measured quality rejections,
+and marks EP2 incomplete. These decisions supersede the historical rankings below.
+
+KA2, R2, B3-belief, SG3, B2, B3 guarded reseed, G1 and K3P retain scheduled
+complete learners. PB1/PB2/DI2 retain scheduled base rates/noise; PM1/PM3/P3/AP3/
+PX3/EP1/PD1 retain horizon-based noise despite autonomous rate rules. RP1 and TD3
+are rejected on measured quality, not merely for absolute initialization windows.
+A3 has a measured full-suite rejection; EP2 remains unverified.
+
+The comparison is retention, time to reach a changed target and stability
+thereafter. **81/81 is not a requirement.** The public KA2 constant-rate run
+retains only 61/120 pre-shift checks and passes 126/209 observations after its
+first arrival. The research extension is 105/109 after the previously reported
+settled arrival, not uninterrupted stability. See the audit for sources.
+
+Next: after compaction, run three distinct approaches concurrently through
+external Codex using `gpt-6-astra` at `max`, reviewing and replacing failures.
+No research was launched by this audit. No seed sweeps or merges are authorized.
+
+## Historical public package baseline — measured
+
+Master `0ff9a7af` (package 0.8.0) is merged into this experiment. New work starts
+from `get_recipe()` / `GANTrainer`, using the current package defaults.
+[Results, evidence and recommendations](public-default-baseline/RESULTS.md).
+
+| Formulation | Hold + extension | Recovery | Toy suite | Status |
+|---|---|---|---|---|
+| Public default K3P, package 0.8.0 | **PASS 1200/1200 + 300/300** | **FAIL 0/81**; prehold 120/120 | NOT_RUN | Fresh package baseline measured |
+
+Hold minimum HQ: **98.83%**, extension **98.95%**; all 6,300 dense checks
+through update 7500 passed, final HQ **99.54%**. Shift recovery retained eight
+modes throughout the deadline but HQ rose only from **42.26% to 89.09%**, below
+the 90% threshold; matched frozen control HQ stayed zero. Runtime: hold **147.18s**,
+shift **63.12s** on shared A6000 GPUs. One declared seed; no tuning or seed repeats.
+Recommended first comparison: remove the anchor term with `reg_anchor_weight=0`,
+keeping the remaining parameters fixed. No follow-up variant has been launched.
+
+All sections below are historical measurements on their recorded drivers and
+settings. They are not scores for this new package baseline. R2 remains an
+unpromoted historical lead; it retains LR/noise schedules, so its clock-independent
+release is not a horizon-independent learner or demonstrated hyperparameter
+reduction. Its 114/120 pre-shift checks are not a 1200-update hold + 300 extension.
+The current launch authorization and eligibility decisions are recorded above; these older recommendations are historical.
+
 ## Gap-filled leaderboard — September 25, 2026
 
 **Selected research/launcher base: [K3P](k3p-base/README.md), with 22/22 declared toy passes, plus a
@@ -24,7 +76,7 @@ No new seed sweeps or short acquisition screens contribute to these scores.
 | RG5 + b-cap, no A2, .01/.05 floors | **18/22** | **15/19** | **4/4** | **1/1 new** | **4/4** | Hold **NOT_CONVERGED**; recovery **FAIL 0/81** |
 
 Recovery fractions count passing checks in the fixed 81-check deadline window;
-all 81 are required. Extension failure fractions count **failing** checks. P1's
+these are historical grader outputs, not the current selection rule. Extension failure fractions count **failing** checks. P1's
 22/22 at the declared seeds does not erase its existing staggered100 seed-1235
 failure. The broad P1 results and the old K3 ring control use different source
 implementations of the same formula. P1's own hold/recovery were run in this batch
@@ -238,3 +290,110 @@ reference stays 16/22. [Measured follow-ups](formulation-round-20260924/FOLLOWUP
 include two formulations that pass both blockers but fail trajectory; neither is
 promoted. R1/R2 history is a reason to avoid unchanged repeats, not to reject a
 candidate that passes its measured gates.
+
+## Historical research comparison — eligibility corrected September 26, 2026
+
+These are archived finite-run scores. None of the following tested complete
+configurations qualifies for the current continuous-learning requirement.
+The release component's independence from a clock does not establish that
+property for the whole learner. The old deadline fractions are retained only
+as measurements; they do not decide eligibility.
+
+| Exact formulation | Historical pre-shift hold | Historical deadline count | Current eligibility |
+|---|---:|---:|---|
+| R2 moment-surprise | 114/120 | 72/81 | DISQUALIFIED: inherited LR/noise schedules |
+| B3-belief: Adam with shadow belief statistics | 114/120 | 73/81 | DISQUALIFIED: inherited LR/noise schedules |
+| KA2 asymmetric-Kalman | 120/120 | 50/81 | DISQUALIFIED: inherited schedules; public constant-rate variant unstable |
+| SG3 graded memory | 114/120 | 43/81 | DISQUALIFIED: inherited LR/noise schedules |
+| PM1 / PM3 | Both pass | 79/81 each | DISQUALIFIED: horizon-based noise remains |
+| PB2 / DI2 / P3 | All pass | 77/81 each | DISQUALIFIED: remaining horizon coupling |
+| B2 unguarded reseed | 33/120 | 40/81 | DISQUALIFIED: inherited schedules and instability |
+| K3P reference | Own hold 1200/1200 + extension 300/300 | 28/81 | DISQUALIFIED for continuous selection; comparison baseline only |
+| B3 guarded reseed | 120/120 + own hold passes | 0/81 | DISQUALIFIED: inherited LR/noise schedules |
+| G1 finalized v15 | 120/120 | 47/81 | DISQUALIFIED: reversible G boost over scheduled base learner |
+
+G1 v15 replaces the previous partial G1 row; its final HQ is .906 with a
+settled suffix from 3550. The older G1 observation below remains labeled by
+scope. [Exact source receipts](continuous-eligibility/source-receipts.json)
+identify the shared drivers/configs and the audited mechanism sources.
+
+## Stability-since-arrival (delay-agnostic comparison) — September 26, 2026
+
+The table below describes final passing suffixes in the original finite window.
+`stable_from` is retrospective: by construction, observations from that point
+to the endpoint pass. It is not first arrival and cannot establish future
+stability. The current comparison records first arrival, all subsequent
+departures and the final suffix separately, alongside retention.
+
+| Candidate | Arrived (stable_from) | Since-arrival stability | Final | Stable end? |
+|---|---:|---:|---|---|
+| B3-belief | 2880 | 73/73 = 100% | 8 / 1.0 | TRUE |
+| R2 | 2890 | 72/72 = 100% | 8 / 0.997 | TRUE |
+| B2 | 3210 | 40/40 = 100% | 8 / 0.988 | TRUE |
+| SG3 | 3480 | 13/13 = 100% | 8 / 0.919 | TRUE |
+| ka2 | 3520 | 9/9 originally; completed extension 105/109 | 8 / 0.996 originally | TRUE only at original endpoint |
+| G1 earlier partial snapshot (superseded by v15 above) | never | — | 8 / 0.891 intermittent | FALSE |
+
+The completed KA2 extension has departures at 4280, 4300, 4310 and 4320:
+105/109 observations pass after the originally reported settled arrival.
+The claim that everyone who arrives stays is withdrawn. Neither a good final
+snapshot nor a final passing suffix certifies indefinite stability. All these
+scheduled configurations are disqualified under the current requirement.
+
+**The mechanism, mathematically.** The critic penalty keeps K3P's three terms —
+early R1 acquisition (A), one-sided L2 caps (B), EMA-critic gradient anchor P,
+`decay 0.999` — blended as `1/2·s·A + 1/2·(1−s)·(B + W·P)` with `s = 0.5` fixed
+forever (no LR clock). The only moving part is W, driven by Adam
+second-moment surprise:
+
+```
+surprise = RMS(today's critic grad) / sqrt(v-hat)   # v-hat: Adam's own memory
+ratio    = median(last 24 surprises) / post-warmup baseline
+W = 1 (memory ON) while calm; ratio > 3.0 -> W = 0 (release, relearn);
+W = 0 while ratio < 1.75 -> back to 1 (re-anchor, hold)
+```
+
+Settled hold: gradients match their history, surprise ~ 1, W = 1. Post-shift:
+stale second moments underestimate new gradients, surprise spikes and stays
+spiked while relearning, W stays 0 (measured sustained from step 2275, no
+flicker). The EMA updates only while W = 1 (1469 updates) and skips while
+W = 0 (1332 skips), plus a guarded re-seed to today's critic after 60 straight
+W = 0 calls (17 reseeds). Every prior signal family failed one side of this:
+prox/median, coherence, b/a novelty and deadband ratios never fire (0/3600
+calls); unguarded reseeding fires mid-hold and breaks it (33/120). Surprise
+with hysteresis is the first signal silent in hold and sustained in transient.
+
+**Evidence.** Mechanism `59483b5e57c1bbbcef171f6261c62bf620bf943f3a5ab6d05ab543e91c0bbb4d`
+(config/latent/response byte-identical to pinned K3P `a1475108/197df635/7e71d60a`),
+12 measured gates, live run
+`gan-attempts/formulations-20260925T222617Z/b3_release2/20260925T222617Z-4046392`
+(`cands/r2/`, `out/r2-shift/`, `tests.jsonl`, frozen twin `out/r2-shift-frozen/`).
+Replay: `hold.py`/`shift.py`/`shift_frozen.py`/`probe.py` from `cands/r2/` against
+the frozen CUDA repo with the `cb5ddaeb` fixture at floors `.01/.05`.
+
+**Seed-fragility context (measured, same protocol).** The 22/22 base is a
+single-seed artifact: across declared host seeds, ring/hold/stay pass ~2/8,
+and a 1e-6 init nudge at the repo seed gives NOT_CONVERGED 0/1200 against the
+repo-seed PASS 1200/1200. R2 was re-run exactly at seeds {1,2,3}: FAILs
+shift+frozen+hold everywhere off-seed, and fails the nudge at both 1e-6 and
+3e-7 scales — its mechanism does not widen the basin, bounding the claim to
+repo-seed luck plus release. The Lion optimizer family is dead on arrival
+(warm probes FAIL); SGD warm probes FAIL (adaptivity is load-bearing). Combo
+attempts (graded blind-band shapes, G-boost ported onto R2) did not beat R2.
+Those seed/nudge runs are historical only. The current work does not authorize
+new seed sweeps, and no historical batch is described as currently running.
+
+## Compute cost is count-based (wall clock invalid) — September 26, 2026
+
+Per user direction: this box runs 6+ concurrent workers, so wall seconds
+measure contention noise, not compute. Cost = gradient-evaluation counts from
+mechanism receipts (load-invariant): eval-units = pure-A calls x 1 + blended
+calls x 2 (each blended call adds one EMA-critic forward+input-grad), plus
+EMA updates/skips/reseeds and optimizer steps as bookkeeping. Measured
+per-3600-call shift run: ka2, R2, B3-belief, SG3, G1 ALL tie at 6401
+eval-units (799 pure + 2801 blend; same architecture, same protocol) —
+differing only in negligible EMA bookkeeping. Wall-clock differences between
+runs are contention artifacts; ties are reported as ties. The cost metric
+binds only when architectures or step budgets differ. Toy-sweep lanes report
+count-based totals; final-board ranking among full-stable survivors is by
+this count.

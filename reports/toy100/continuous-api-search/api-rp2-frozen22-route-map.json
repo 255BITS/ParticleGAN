@@ -1,0 +1,1330 @@
+{
+  "audit": "RP2 frozen22 qualification preparation; read-only, no training or implementation",
+  "worktree": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo",
+  "candidate_source_snapshot": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo/reports/reversible-precision/runs/rp2/source.zip",
+  "candidate_identity": {
+    "public_recipe": "get_recipe(total_steps=None, continuous_precision=\"rp1\", adam_eager_state=True)",
+    "noise_initialization_updates": [
+      360,
+      720
+    ],
+    "identity_rule": "Keep unchanged precision law, eager-state setting, KA2/guard/A2 behavior and source hashes; adapt only declared host resources, required conditioning/loss plumbing and evaluator loop duration."
+  },
+  "declarations": {
+    "benchmarks/transfer_suite/plans/default_comparison.json": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "native_names_source": "benchmarks/toy100/problems.py::PROBLEM_NAMES",
+    "transfer_profile": "reports/transfer_suite/unadjusted/leading_profile.json",
+    "common_gate": "benchmarks/toy_suite.py",
+    "transfer_gate": "benchmarks/transfer_suite/protocol.py::test_verdict"
+  },
+  "route_counts": {
+    "existing_vector_GANTrainer": 6,
+    "existing_image_GANTrainer": 4,
+    "existing_native_GANTrainer": 3,
+    "mode_hold_can_be_adapted": 1,
+    "custom_component_controller_binding_required": 8
+  },
+  "tasks": [
+    {
+      "name": "two_pole",
+      "frozen_steps": 80,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Direct sample particles with no generator/prior sampling path; current GANTrainer requires a trainable generator and one ParticlePrior.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/two_pole.py",
+      "frozen_spec": {
+        "name": "two_pole",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Basic adversarial movement remains bounded.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 80,
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "trajectory",
+      "frozen_steps": 400,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Conditional slow/fast critic and generator, direct prior.z identity pairing, auxiliary coverage loss.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/trajectory.py",
+      "frozen_spec": {
+        "name": "trajectory",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Preserves the shared trajectory's identity constraint.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ]
+        ]
+      }
+    },
+    {
+      "name": "residual_student",
+      "frozen_steps": 400,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Conditional slow/fast residual model, identity pairing, auxiliary loss and custom update flow.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/hosts/residual_student.py",
+      "frozen_spec": {
+        "name": "residual_student",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Moves the intended residual without choosing the wrong target.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "unipolar",
+      "frozen_steps": 400,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Multiple scale-conditioned critic roles contribute to one update; fixed content/identity terms.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/hosts/unipolar.py",
+      "frozen_spec": {
+        "name": "unipolar",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Target coverage preserves unrelated content.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ]
+      }
+    },
+    {
+      "name": "ae_gan_hold",
+      "frozen_steps": 250,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Encoder/decoder with MoG-style prior routing, reconstruction/hold losses and host critic-update behavior; current GANTrainer explicitly rejects encoders and non-ParticlePrior.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/hosts/ae_gan_hold.py",
+      "frozen_spec": {
+        "name": "ae_gan_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 250,
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      }
+    },
+    {
+      "name": "cover_leftover",
+      "frozen_steps": 800,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Residual model, two particle priors and auxiliary content/coverage terms; factory handles A2 automatically only for exactly one plain ParticlePrior.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/hosts/cover_leftover.py",
+      "frozen_spec": {
+        "name": "cover_leftover",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Coverage preserves both content and the unwanted remainder constraint.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 800,
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      }
+    },
+    {
+      "name": "unused_token_hold",
+      "frozen_steps": 200,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Embedding/slot model and unused-control hold loss, no ordinary sampled particle prior.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/hosts/unused_token_hold.py",
+      "frozen_spec": {
+        "name": "unused_token_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Unused controls remain unchanged while active controls move.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 200,
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      }
+    },
+    {
+      "name": "mid_scale_identity",
+      "frozen_steps": 800,
+      "existing_route": "legacy",
+      "required_route": "custom component-controller binding required",
+      "reason": "Multiple scale-conditioned critic roles and identity losses; ordinary trainer does not accept those roles.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/hosts/mid_scale_identity.py",
+      "frozen_spec": {
+        "name": "mid_scale_identity",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Intermediate control strengths preserve identity and target magnitude.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 800,
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      }
+    },
+    {
+      "name": "mode_hold",
+      "frozen_steps": 1200,
+      "existing_route": "legacy",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Unconditional G/D plus one ParticlePrior; preserve frozen tiny-host resources and initialization. Existing training_recipe shortcut uses removed make_gradient_penalty and numeric budget, so it is not sufficient.",
+      "fixture_and_scoring_source": "benchmarks/locked_shared/mode_hold.py",
+      "frozen_spec": {
+        "name": "mode_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "All eight modes must remain present with sufficient sample quality.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "modes",
+            ">=",
+            8
+          ],
+          [
+            "hq",
+            ">=",
+            0.9
+          ]
+        ]
+      }
+    },
+    {
+      "name": "vector_two_broad",
+      "frozen_steps": 1200,
+      "existing_route": "vector",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/vector_tasks.py",
+      "frozen_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "separated_broad",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Basic learnable multimodal distribution and within-mode spread.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "name": "vector_two_broad",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      }
+    },
+    {
+      "name": "vector_unequal_mass",
+      "frozen_steps": 1200,
+      "existing_route": "vector",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/vector_tasks.py",
+      "frozen_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      }
+    },
+    {
+      "name": "vector_unequal_width",
+      "frozen_steps": 1200,
+      "existing_route": "vector",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/vector_tasks.py",
+      "frozen_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      }
+    },
+    {
+      "name": "vector_anisotropic",
+      "frozen_steps": 1200,
+      "existing_route": "vector",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/vector_tasks.py",
+      "frozen_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      }
+    },
+    {
+      "name": "vector_overlap",
+      "frozen_steps": 1200,
+      "existing_route": "vector",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/vector_tasks.py",
+      "frozen_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      }
+    },
+    {
+      "name": "vector_spiral",
+      "frozen_steps": 1600,
+      "existing_route": "vector",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/vector_tasks.py",
+      "frozen_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "curved_continuous",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "importance_reason": "Checks continuous curved mass rather than a finite list of target mode centers.",
+        "kind": "spiral",
+        "layers": 2,
+        "limitations": "Finite particles approximate a noisy spiral; sliced distances do not prove identical density.",
+        "lr": 0.001,
+        "name": "vector_spiral",
+        "noise": 0.08,
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "radius_max": 2.0,
+        "radius_min": 0.3,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1600,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "turns": 1.5,
+        "z_dim": 4
+      }
+    },
+    {
+      "name": "img_stripes2",
+      "frozen_steps": 600,
+      "existing_route": "image",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/image_tasks.py",
+      "frozen_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 2,
+        "name": "img_stripes2",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "stripes2",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      }
+    },
+    {
+      "name": "img_bars4",
+      "frozen_steps": 600,
+      "existing_route": "image",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/image_tasks.py",
+      "frozen_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 4,
+        "name": "img_bars4",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "bars4",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      }
+    },
+    {
+      "name": "img_blobs4",
+      "frozen_steps": 600,
+      "existing_route": "image",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/image_tasks.py",
+      "frozen_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy location transfer: four small corner patches test localized quality and coverage.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 4,
+        "name": "img_blobs4",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "blobs4",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      }
+    },
+    {
+      "name": "img_intensity2",
+      "frozen_steps": 600,
+      "existing_route": "image",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Existing route calls GANTrainer, but currently with historical LegacyRecipe and scheduled/noise wrappers.",
+      "fixture_and_scoring_source": "benchmarks/transfer_suite/image_tasks.py",
+      "frozen_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 2,
+        "name": "img_intensity2",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "intensity2",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.06
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      }
+    },
+    {
+      "name": "grid100",
+      "frozen_steps": 7000,
+      "declared_training_seed": 1234,
+      "existing_route": "GANTrainer via historical native runner",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Native sampler/architecture/evaluators reusable, but resolve_config forces LegacyRecipe and numeric total_steps; wrapper noise and pre-step cosine hooks must be removed from continuous route.",
+      "fixture_and_scoring_source": "benchmarks/toy100/{problems,train,metrics,gate,accuracy,accuracy_gate}.py",
+      "frozen_resource_config": {
+        "seed": 1234,
+        "steps": 7000,
+        "toy100_model": "affine_square_v1",
+        "num_particles": 20000,
+        "z_dim": 2,
+        "batch_size": 2048,
+        "g_hidden": 128,
+        "d_hidden": 128,
+        "n_hidden": 3,
+        "fourier": 3
+      }
+    },
+    {
+      "name": "rotated100",
+      "frozen_steps": 7000,
+      "declared_training_seed": 1234,
+      "existing_route": "GANTrainer via historical native runner",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Native sampler/architecture/evaluators reusable, but resolve_config forces LegacyRecipe and numeric total_steps; wrapper noise and pre-step cosine hooks must be removed from continuous route.",
+      "fixture_and_scoring_source": "benchmarks/toy100/{problems,train,metrics,gate,accuracy,accuracy_gate}.py",
+      "frozen_resource_config": {
+        "seed": 1234,
+        "steps": 7000,
+        "toy100_model": "affine_square_v1",
+        "num_particles": 20000,
+        "z_dim": 2,
+        "batch_size": 2048,
+        "g_hidden": 128,
+        "d_hidden": 128,
+        "n_hidden": 3,
+        "fourier": 3
+      }
+    },
+    {
+      "name": "staggered100",
+      "frozen_steps": 7000,
+      "declared_training_seed": 1234,
+      "existing_route": "GANTrainer via historical native runner",
+      "required_route": "GANTrainer adaptation feasible",
+      "reason": "Native sampler/architecture/evaluators reusable, but resolve_config forces LegacyRecipe and numeric total_steps; wrapper noise and pre-step cosine hooks must be removed from continuous route.",
+      "fixture_and_scoring_source": "benchmarks/toy100/{problems,train,metrics,gate,accuracy,accuracy_gate}.py",
+      "frozen_resource_config": {
+        "seed": 1234,
+        "steps": 7000,
+        "toy100_model": "affine_square_v1",
+        "num_particles": 20000,
+        "z_dim": 2,
+        "batch_size": 2048,
+        "g_hidden": 128,
+        "d_hidden": 128,
+        "n_hidden": 3,
+        "fourier": 3
+      }
+    }
+  ],
+  "runner_adaptations": [
+    "Construct current particlegan.get_recipe explicitly; never use gan_v3_recipe or LegacyRecipe for RP2.",
+    "Keep evaluation steps outside recipe; total_steps remains None. Existing host_recipe and native resolve_config write numeric total_steps and must get a distinct continuous route.",
+    "Preserve each frozen task architecture/resource card, initialization order, data streams, fixed seed, evaluator samples, thresholds and observation times; do not replace all tasks with ring resources.",
+    "Use trainer-owned fixed absolute noise bootstrap once. Existing toy100_compatibility and native train wrappers add external horizon-based noise and can double-noise current trainer.",
+    "Bypass old cosine FixedControl, optimizer_defaults schedule patches and step_with_policy LR hooks; log actual precision scales/noise/controller state on every update.",
+    "Carry and verify full Recipe.to_dict identity including continuous_precision and adam_eager_state. LegacyRecipe.to_dict and GLOBAL_RECIPE_FIELDS omit these fields.",
+    "Version the candidate execution-receipt checks to support autonomous control while retaining unchanged live quality graders. Old common22 regrader explicitly expects horizon cosine/noise receipts.",
+    "Snapshot all public package files plus any new runner/controller adapters and prove imported module locations. Native full-source and suite.snapshot utilities are reusable."
+  ],
+  "learner_api_gaps": [
+    "ReversiblePrecision is instantiated and advanced only inside GANTrainer. Recipe.make_* factories provide KA2/eager Adam but do not apply RP2 scales or observe precision; factory-only loops silently omit RP2.",
+    "GANTrainer handles unconditional scalar GANs with one exact ParticlePrior and no encoder; it cannot faithfully execute eight conditional/direct-particle/AE/multi-prior hosts unchanged.",
+    "A public reusable component binding is needed for those eight: one consistent controller/critic reference per game, scales before paired D/G updates, normalized actual update activity, ordinary real-data gradient disagreement after update, fixed noise policy, checkpoint state. Conditional roles need data-coordinate differentiation without feeding labels/centers/evaluator scores to policy.",
+    "Multiple prior tables require explicit A2 ownership rather than hiding them in a generic module and losing damping; direct sample particles need the public direct-response path.",
+    "Current learning_rate_scales and scale_learning_rates do not accept None horizons or autonomous controller state; their use would fail or substitute an unrelated schedule."
+  ],
+  "misreporting_risks": [
+    "public_default_verification verifies19 historical GAN-v3 tasks; its name and GANTrainer calls do not imply RP2 qualification.",
+    "toy_suite --with-default-control adds an optional installed-wheel GAN-v3 control; its passes cannot fill missing RP2 cases.",
+    "toy100_compatibility.declared_recipe selects old global fields then constructs gan_v3_recipe, dropping candidate controller identity.",
+    "Historical LegacyRecipe.make_critic_optimizer explicitly returns K3PCriticAdam and bypasses new eager factory; blindly retaining this adapter can mix generator and critic formulations.",
+    "Nine old custom hosts use ordinary Adam/global host patches; inherited labels do not establish public KA2 or precision execution.",
+    "All19 require complete24-observation live evidence and frozen sustained gates. Each native requires coverage AND accuracy (five final evaluations plus independent fixed holdout). EMA/endpoints/ancestor passes cannot substitute.",
+    "Unimplemented custom routes remain NOT_RUN. Do not rewrite their targets/losses into unconditional GANs merely to force GANTrainer coverage."
+  ],
+  "reusable_paths": [
+    "benchmarks/transfer_suite/public_default_verification.py::load_declaration, declared_spec, vector_discriminator, setup_vector/setup_image scaffolding, public_module_manifest",
+    "benchmarks/transfer_suite/vector_tasks.py::sample_target, score_samples; image_tasks.py::templates, measure; locked_shared/observation.py::recording, sustained",
+    "benchmarks/toy100/problems.py::sample_real; train.py native initialization/evidence scaffold; metrics.py, gate.py, accuracy.py, accuracy_gate.py unchanged quality scoring",
+    "benchmarks/transfer_suite/suite.py::snapshot, verify_source; toy100/train.py full public-source archive helpers",
+    "benchmarks/toy_suite.py aggregation/report structure; candidate identity/schedule validators require a new continuous schema, not weakened quality thresholds"
+  ]
+}

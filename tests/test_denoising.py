@@ -89,7 +89,7 @@ def test_invalid_schedule_and_meaningless_one_shot_noise_are_rejected():
 
 def test_joint_ucd_hides_time_and_class_and_preserves_candidate_cap_gradients():
     from lib.denoising_toy import FixedConditionCritic
-    from lib.grad_regularizers import GradRegularizer
+    from particlegan.grad_regularizers import GradientPenalty
     from torch.nn import functional as F
     cfg = {**DEFAULTS, "ucd_target": "time_class"}
     d = ToyDiscriminator(cfg)
@@ -103,7 +103,7 @@ def test_joint_ucd_hides_time_and_class_and_preserves_candidate_cap_gradients():
     # Changing either label only selects a head; neither enters the backbone.
     torch.testing.assert_close(logits, d(x, c.flip(0), xt, t.flip(0))[1])
     assert not torch.equal(logits, d(x, c, xt + 2, t)[1])
-    penalty, _ = GradRegularizer('b_cap', 1, kappa=0).penalty(
+    penalty, _ = GradientPenalty(kappa=0).penalty(
         FixedConditionCritic(d, c, xt, t), x, torch.randn_like(x), 1)
     assert penalty > 0 and torch.isfinite(penalty)
     (penalty + F.cross_entropy(logits, d.ucd_labels(c, t))).backward()

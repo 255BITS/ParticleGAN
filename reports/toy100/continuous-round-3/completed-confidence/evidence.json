@@ -1,0 +1,471 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z",
+  "observed_utc": "2026-09-25T18:54:40.487974+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "f526c96feca59a3a929b604279a6d9d2b34c33f398c0d5df4cabec8d02875e3d",
+        "final.md": "fd2fcafca97e9033867707c9393b7bd7a880f2c1affcd4567e881f82ff6c069f",
+        "tests.jsonl": "bee0cf672fa765b3619bb288faebd2b6732f5c7898b29c37a796d3129b10f405",
+        "run.txt": "411f643dc710edb77945d37be24b249adabb242fb74feb774022f2c5371a6eea",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "FAIL": 6
+  },
+  "records": [
+    {
+      "candidate": "cc1_halfsplit_coherence",
+      "gate": "ring_hold_extension",
+      "status": "FAIL",
+      "seconds": 202.07879345002584,
+      "metrics": {
+        "driver_status": "POST_CONVERGENCE_FAIL",
+        "good_hold_updates": 153,
+        "converged_step": 3933,
+        "hold_checks": 154,
+        "first_hold_failure": 4087,
+        "longest_settling_streak": 200,
+        "extension": "NOT_RUN",
+        "extension_reason": "1200-update hold was not completed; the following 300 updates are the post-failure diagnostic, not the canonical extension",
+        "post_failure": {
+          "checks": 301,
+          "passing": 123,
+          "min_modes": 0,
+          "min_hq": 0.0,
+          "final": {
+            "step": 4387,
+            "modes": 2,
+            "hq": 0.1650390625
+          }
+        },
+        "hold_window": {
+          "min_hq": 0.890625,
+          "min_modes": 8
+        },
+        "last_live": {
+          "step": 4387,
+          "modes": 2,
+          "hq": 0.1650390625
+        },
+        "last_ema": {
+          "step": 4350,
+          "modes": 1,
+          "hq": 0.083251953125
+        },
+        "final_s": 1.0,
+        "final_rate_gain": 1.0,
+        "final_mix_gain": 1.0,
+        "coherence_ema_min": 0.5361764543171186,
+        "coherence_ema_max": 0.980349852838759,
+        "coherence_raw_min": 0.0,
+        "coherence_raw_max": 0.9975184917025036,
+        "pure_a_calls": 4387,
+        "blend_calls": 0,
+        "pure_b_calls": 0,
+        "extra_critic_forwards": 17548,
+        "extra_critic_backwards": 8774,
+        "batch": 128,
+        "half": 64,
+        "lr_last": 0.00425,
+        "anchor_started_call": null,
+        "mechanism_sha256": "9d9ad253d4943587f82e56de7d479890b07ca5a2f8b0f98ee9399a8da1e9a722"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc1-hold/result.json",
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc1-hold/result.json",
+      "snapshot": "evidence/c3ae25af0a23101002ce9eba3ece8918f862e0939d2d5f822439daabd92f7e22.json.gz",
+      "artifact_sha256": "c3ae25af0a23101002ce9eba3ece8918f862e0939d2d5f822439daabd92f7e22"
+    },
+    {
+      "candidate": "cc1_halfsplit_coherence",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 166.14052364206873,
+      "metrics": {
+        "driver_status": "FAIL",
+        "stationary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "pass_all": false,
+          "min_modes": 3,
+          "min_hq": 0.095458984375
+        },
+        "continued_hold": {
+          "checks": 120,
+          "passing_checks": 0,
+          "pass_all": false,
+          "min_modes": 0,
+          "min_hq": 0.0
+        },
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 0,
+          "min_modes": 5,
+          "min_hq": 0.365966796875,
+          "pass_all": false,
+          "passing_suffix": 0
+        },
+        "deadline_pass": false,
+        "delay_updates": null,
+        "final": {
+          "modes": 6,
+          "hq": 0.984375
+        },
+        "ema": {
+          "modes": 6,
+          "hq": 1.0
+        },
+        "rate_ranges": {
+          "d": {
+            "min": 0.00425,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "g": {
+            "min": 0.00425,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "prior": {
+            "min": 0.0085,
+            "max": 0.0085,
+            "observations": 3600
+          }
+        },
+        "optimizer_final": [
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              0.00425
+            ]
+          },
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              0.00425,
+              0.0085
+            ]
+          }
+        ],
+        "pure_a_calls": 3600,
+        "blend_calls": 0,
+        "pure_b_calls": 0,
+        "coherence_ema_min": 0.5619544611839552,
+        "coherence_ema_max": 0.970022041482693,
+        "final_s": 1.0,
+        "final_rate_gain": 1.0,
+        "extra_critic_forwards": 14400,
+        "extra_critic_backwards": 7200,
+        "mechanism_sha256": "9d9ad253d4943587f82e56de7d479890b07ca5a2f8b0f98ee9399a8da1e9a722",
+        "note": "applied critic/generator LR stayed 0.00425 and prior 0.0085 for all 3600 updates; anchor never started"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc1-shift/result.json",
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc1-shift/result.json",
+      "snapshot": "evidence/426f8faa08c71de0fe1ada689be7be9c996f30186b2f15b36af42035878fe076.json.gz",
+      "artifact_sha256": "426f8faa08c71de0fe1ada689be7be9c996f30186b2f15b36af42035878fe076"
+    },
+    {
+      "candidate": "cc2_margin_uncertainty",
+      "gate": "ring_hold_extension",
+      "status": "FAIL",
+      "seconds": 318.3958707519341,
+      "metrics": {
+        "driver_status": "NOT_CONVERGED",
+        "good_hold_updates": 0,
+        "converged_step": null,
+        "settling_checks": 4800,
+        "longest_settling_streak": 0,
+        "extension": "NOT_RUN",
+        "extension_reason": "settling never produced 200 consecutive 8-mode checks",
+        "last_live": {
+          "step": 6300,
+          "modes": 6,
+          "hq": 0.828857421875
+        },
+        "last_ema": {
+          "step": 6300,
+          "modes": 6,
+          "hq": 0.828857421875
+        },
+        "final_s": 0.0,
+        "final_rate_gain": 0.0,
+        "final_confidence_ema": 0.3460410868878673,
+        "final_uncertainty_raw": 0.663876550582239,
+        "uncertainty_min": 0.09185387570647277,
+        "uncertainty_max": 0.9994729566176455,
+        "confidence_min": 0.05550642566569186,
+        "confidence_max": 0.6029618810007752,
+        "pure_a_calls": 201,
+        "blend_calls": 416,
+        "pure_b_calls": 5683,
+        "anchor_started_call": 202,
+        "first_pure_b_call": 202,
+        "extra_critic_forwards": 18698,
+        "extra_critic_backwards": 0,
+        "mechanism_sha256": "9f3f09972764da31fe7adc4e18f7b789ee1337c0f330f15a9c30046f3811e0ae"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc2-hold/result.json",
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc2-hold/result.json",
+      "snapshot": "evidence/9f29f4276f36ecb78142a7497d776e4945dc4dac97e36bd1517b0e554df95c67.json.gz",
+      "artifact_sha256": "9f29f4276f36ecb78142a7497d776e4945dc4dac97e36bd1517b0e554df95c67"
+    },
+    {
+      "candidate": "cc2_margin_uncertainty",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 165.07529231114313,
+      "metrics": {
+        "driver_status": "FAIL",
+        "stationary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "pass_all": false,
+          "min_modes": 6,
+          "min_hq": 0.804443359375
+        },
+        "continued_hold": {
+          "checks": 120,
+          "passing_checks": 0,
+          "pass_all": false,
+          "min_modes": 6,
+          "min_hq": 0.8271484375
+        },
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 0,
+          "min_modes": 4,
+          "min_hq": 0.10205078125,
+          "pass_all": false
+        },
+        "deadline_pass": false,
+        "delay_updates": null,
+        "final": {
+          "modes": 6,
+          "hq": 0.45068359375
+        },
+        "ema": {
+          "modes": 6,
+          "hq": 0.468505859375
+        },
+        "rate_ranges": {
+          "d": {
+            "min": 4.25e-05,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "g": {
+            "min": 4.25e-05,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "prior": {
+            "min": 0.00042500000000000003,
+            "max": 0.0085,
+            "observations": 3600
+          }
+        },
+        "optimizer_final": [
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              4.25e-05
+            ]
+          },
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              4.25e-05,
+              0.00042500000000000003
+            ]
+          }
+        ],
+        "final_s": 0.0,
+        "final_rate_gain": 0.0,
+        "final_confidence_ema": 0.3252336834659888,
+        "pure_a_calls": 201,
+        "blend_calls": 416,
+        "pure_b_calls": 2983,
+        "anchor_started_call": 202,
+        "extra_critic_forwards": 10598,
+        "mechanism_sha256": "9f3f09972764da31fe7adc4e18f7b789ee1337c0f330f15a9c30046f3811e0ae"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc2-shift/result.json",
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc2-shift/result.json",
+      "snapshot": "evidence/d1ea83f242ae6456d1ec1bcb2426be66e66f37c740707f8f6626aa237d26437c.json.gz",
+      "artifact_sha256": "d1ea83f242ae6456d1ec1bcb2426be66e66f37c740707f8f6626aa237d26437c"
+    },
+    {
+      "candidate": "cc3_frozen_baseline_quiet",
+      "gate": "ring_hold_extension",
+      "status": "FAIL",
+      "seconds": 277.0323946659919,
+      "metrics": {
+        "driver_status": "NOT_CONVERGED",
+        "good_hold_updates": 0,
+        "longest_settling_streak": 120,
+        "settling_checks": 4800,
+        "extension": "NOT_RUN",
+        "extension_reason": "settling streak 120 never reached the required 200",
+        "last_live": {
+          "step": 6300,
+          "modes": 6,
+          "hq": 0.958984375
+        },
+        "last_ema": {
+          "step": 6300,
+          "modes": 4,
+          "hq": 0.66748046875
+        },
+        "final_s": 1.0,
+        "final_rate_gain": 1.0,
+        "final_phase": "open",
+        "close_count": 0,
+        "reopen_count": 0,
+        "pure_a_calls": 6300,
+        "blend_calls": 0,
+        "pure_b_calls": 0,
+        "anchor_started_call": null,
+        "extra_critic_forwards": 0,
+        "mechanism_sha256": "82836481f499e5888a5eadc81b7a897523faaa7e61066262b219e6b0acb2cf6f"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc3-hold/result.json",
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc3-hold/result.json",
+      "snapshot": "evidence/0ae5f7b08976df04f209416f07a17b0e05dfc83b0c250b00a7a227088877e25a.json.gz",
+      "artifact_sha256": "0ae5f7b08976df04f209416f07a17b0e05dfc83b0c250b00a7a227088877e25a"
+    },
+    {
+      "candidate": "cc3_frozen_baseline_quiet",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 139.889809851069,
+      "metrics": {
+        "driver_status": "FAIL",
+        "stationary": {
+          "checks": 5,
+          "passing_checks": 5,
+          "pass_all": true,
+          "min_modes": 8,
+          "min_hq": 0.965576171875
+        },
+        "continued_hold": {
+          "checks": 120,
+          "passing_checks": 33,
+          "pass_all": false,
+          "min_modes": 0,
+          "min_hq": 0.0
+        },
+        "deadline_window": {
+          "checks": 81,
+          "passing_checks": 0,
+          "min_modes": 1,
+          "min_hq": 0.07666015625,
+          "pass_all": false
+        },
+        "deadline_pass": false,
+        "delay_updates": null,
+        "final": {
+          "modes": 7,
+          "hq": 0.999755859375
+        },
+        "ema": {
+          "modes": 7,
+          "hq": 0.8544921875
+        },
+        "rate_ranges": {
+          "d": {
+            "min": 0.00425,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "g": {
+            "min": 0.00425,
+            "max": 0.00425,
+            "observations": 3600
+          },
+          "prior": {
+            "min": 0.0085,
+            "max": 0.0085,
+            "observations": 3600
+          }
+        },
+        "optimizer_final": [
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              0.00425
+            ]
+          },
+          {
+            "calls": 3600,
+            "delegate_calls": 3600,
+            "updates": 3600,
+            "moment_steps_min": 3600,
+            "moment_steps_max": 3600,
+            "rates": [
+              0.00425,
+              0.0085
+            ]
+          }
+        ],
+        "final_s": 1.0,
+        "final_phase": "open",
+        "close_count": 0,
+        "reopen_count": 0,
+        "pure_a_calls": 3600,
+        "extra_critic_forwards": 0,
+        "mechanism_sha256": "82836481f499e5888a5eadc81b7a897523faaa7e61066262b219e6b0acb2cf6f",
+        "note": "applied D/G LR stayed 0.00425 and prior 0.0085 for all 3600 updates; quiet dwell never reached 100"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc3-shift/result.json",
+      "lane": "k3p_critic_confidence",
+      "engine": "grok",
+      "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_critic_confidence/20260925T180919Z-3766578/repo/reports/toy100/k3p-critic-confidence-3766578/runs/cc3-shift/result.json",
+      "snapshot": "evidence/bd8028ad42ca81f462f8137d4bfcf8385e90e9a4ca24b2e6e936f869375d829f.json.gz",
+      "artifact_sha256": "bd8028ad42ca81f462f8137d4bfcf8385e90e9a4ca24b2e6e936f869375d829f"
+    }
+  ]
+}

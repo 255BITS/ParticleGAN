@@ -22,7 +22,7 @@ from experiments.train_gym_transition import (discriminator_loss, generator_loss
 from lib.gym_control import build_expert_records, initialize_control, predict_control
 from lib.gym_transition import (contact_record, composed_transition, encoded_transition,
     real_reconstruction, synthetic_reconstruction)
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe, scale_learning_rates
 
 DEFAULTS = dict(arm="joint", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", imitation_weight=1.,
@@ -104,22 +104,24 @@ def train(cfg):
     recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     if cfg["arm"] == "joint":
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior,
-            encoder=torch.nn.ModuleList([e, ec]), fused=device.type == "cuda")
+        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=torch.nn.ModuleList([e, ec]),
+            ema_critic=copy.deepcopy(d), fused=device.type == "cuda")
     else:
-        opt_g = torch.optim.Adam(list(ec.parameters()) + list(g.branches[1].parameters()),
-            lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
+        opt_g = recipe.make_generator_optimizer(list(ec.parameters()) + list(g.branches[1].parameters()),
+            **(dict(fused=True) if device.type == "cuda" else {}))
         opt_d = None
     optimizers = [opt_g] + ([] if opt_d is None else [opt_d])
     base_rates = [[p["lr"] for p in opt.param_groups] for opt in optimizers]
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
                 for i, role in enumerate(d.roles())}
+    penalties = ({role: recipe.make_critic_penalty(opt_d) for role, rng in reg_rngs.items()}
+                 if opt_d is not None else None)
     weights = dict(continuous_weight=world["continuous_weight"], contact_weight=world["contact_weight"])
     parameter_counts = {key: parameter_count(bundle[key]) for key in MODULE_KEYS}
     trainable_counts = {key: sum(p.numel() for p in bundle[key].parameters() if p.requires_grad) for key in MODULE_KEYS}
@@ -159,10 +161,7 @@ def train(cfg):
         segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
+            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, prior)
             ld = lg = lp = le = physical.new_zeros(())
             if opt_d is not None:
                 d.requires_grad_(True)
@@ -173,7 +172,7 @@ def train(cfg):
                     composed_d = composed_transition(e, g, prior, fake_d, ctx_d, rng=rng["d_contact"])[0]
                     half = len(ids) // 2
                     fake_d = torch.cat([fake_d[:half], composed_d[half:]])
-                ld, _ = discriminator_loss(d, real_d, fake_d, ctx_d, gan, reg, step, reg_rngs)
+                ld, _ = discriminator_loss(d, real_d, fake_d, ctx_d, gan, penalties)
                 if not torch.isfinite(ld):
                     raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
                 opt_d.zero_grad(set_to_none=True)

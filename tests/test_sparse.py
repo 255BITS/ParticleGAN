@@ -19,23 +19,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from experiments import analyze_sparse
 from experiments.train_sparse import DEFAULTS, train
-from lib.grad_regularizers import GradRegularizer
+from particlegan import get_recipe
+from particlegan.k3p import CriticPenalty
 from lib.sparse_metrics import particle_class_purity
 from lib.sparse_models import JointCritic, SparseCondGenerator, XOnlyCritic
 from lib.sparse_toy import SparseMixedToy
-
-
-class CoupledCritic(nn.Module):
-    """The x derivative depends on y, exposing incorrect interpolation sites."""
-
-    d = 1
-
-    def __init__(self):
-        super().__init__()
-        self.scale = nn.Parameter(torch.tensor(1.3, dtype=torch.float64))
-
-    def forward(self, x, y, c):
-        return {"adv": self.scale * (x[:, 0] + 2 * y[:, 0]).square()}
 
 
 class SparseRegressionTests(unittest.TestCase):
@@ -47,50 +35,6 @@ class SparseRegressionTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         torch.set_num_threads(cls.old_threads)
-
-    def test_interpolation_values_and_parameter_gradients(self):
-        n = 64
-        real = torch.zeros(n, 2, dtype=torch.float64)
-        fake = torch.ones_like(real)
-        c = torch.zeros(n, dtype=torch.long)
-        for arm in ("g_interp_cap", "e_interp"):
-            for grad_on_y in (False, True):
-                with self.subTest(arm=arm, grad_on_y=grad_on_y):
-                    critic = CoupledCritic()
-                    torch.manual_seed(41)
-                    u = 1 - torch.rand(n, dtype=torch.float64)
-                    # At (x, y) = (u, u), dx = 6*s*u and dy = 12*s*u.
-                    grad_x = 6 * critic.scale * u
-                    norm = (grad_x.square() * (5 if grad_on_y else 1) + 1e-12).sqrt()
-                    deviation = norm - 1
-                    if arm == "g_interp_cap":
-                        deviation = deviation.relu()
-                    expected = 0.7 * deviation.square().mean()
-                    expected_grad = torch.autograd.grad(expected, critic.scale)[0]
-
-                    torch.manual_seed(41)
-                    actual, _ = GradRegularizer(arm, 0.7).penalty(
-                        JointCritic(critic, c, grad_on_y=grad_on_y), real, fake, 0)
-                    actual_grad = torch.autograd.grad(actual, critic.scale)[0]
-                    torch.testing.assert_close(actual, expected, rtol=1e-12, atol=1e-12)
-                    torch.testing.assert_close(actual_grad, expected_grad, rtol=1e-12, atol=1e-12)
-
-    def test_endpoint_arms_preserve_x_only_behavior(self):
-        torch.manual_seed(3)
-        real = torch.randn(32, 2, dtype=torch.float64)
-        fake = torch.randn_like(real)
-        c = torch.zeros(32, dtype=torch.long)
-        critic = CoupledCritic()
-        for arm in ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "f_none"):
-            with self.subTest(arm=arm):
-                reg = GradRegularizer(arm, 0.7)
-                actual, _ = reg.penalty(JointCritic(critic, c, grad_on_y=False), real, fake, 0)
-                endpoint_values = []
-                for xy in (real, fake):
-                    x, y = xy[:, :1], xy[:, 1:]
-                    endpoint_values.append(reg.penalty(XOnlyCritic(critic, y, c), x, x, 0)[0])
-                expected = sum(endpoint_values) / 2
-                torch.testing.assert_close(actual, expected, rtol=1e-12, atol=1e-12)
 
     def test_particle_specialization_uses_associated_ids(self):
         # Every particle serves only its own class; every requested class is
@@ -151,21 +95,21 @@ class SparseRegressionTests(unittest.TestCase):
                "d": 6, "k": 2, "n_modes": 8, "n_classes": 2, "n_symbols": 2,
                "hidden": 16, "n_hidden": 2, "z_dim": 4, "num_particles": 16,
                "emb_dim": 4, "prior_partition": "none", "real_head": "gated",
-               "gate_start_frac": 0.4, "fourier": 1,
-               "arm": "g_interp_cap", "gp_on_y": False}
-        original_penalty = GradRegularizer.penalty
+               "gate_start_frac": 0.4, "fourier": 1, "gp_on_y": False}
+        original_penalty = CriticPenalty.__call__
         penalty_calls = []
 
-        def check_penalty(reg, critic, real, fake, step):
+        def check_penalty(penalty, critic, real, fake):
             self.assertFalse(critic.grad_on_y)
+            self.assertEqual(penalty.regularizer.coeff, get_recipe().reg_coeff)
             self.assertEqual(real.shape, (cfg["batch_size"], cfg["d"] + cfg["n_symbols"]))
             self.assertFalse(torch.equal(real, fake))
-            penalty_calls.append(step)
-            return original_penalty(reg, critic, real, fake, step)
+            penalty_calls.append(penalty.optimizer.record.observed_steps)
+            return original_penalty(penalty, critic, real, fake)
 
         with tempfile.TemporaryDirectory() as directory:
             cfg["out_dir"] = directory
-            with patch.object(GradRegularizer, "penalty", check_penalty), redirect_stdout(io.StringIO()):
+            with patch.object(CriticPenalty, "__call__", check_penalty), redirect_stdout(io.StringIO()):
                 summary = train(cfg, torch.device("cpu"))
             self.assertEqual(penalty_calls, list(range(cfg["total_steps"])))
             self.assertEqual(summary["implementation_versions"], {"x_only_gp": 2, "particle_class_purity": 2})

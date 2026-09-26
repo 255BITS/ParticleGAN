@@ -1,0 +1,11 @@
+engine=codex
+base=4f18d7c73bfe7ee4fbb11d94422578073a90d29f
+branch=codex/gan-attempt-20260925T183536Z-3798526
+model=gpt-6-astra
+effort=max
+minutes=45
+candidates=3
+workers=1
+focus=k3p_training_discrepancy
+gpu=GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69
+log=/ml2/hypergan/gan-attempts/formulations-20260925T183536Z/k3p_training_discrepancy/20260925T183536Z-3798526/codex.log

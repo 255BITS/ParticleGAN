@@ -1,0 +1,287 @@
+{
+  "scope": "Initial seven mechanism lanes of rolling round3; excludes diagnostic-only P3/RP1 transfer verification and later replacement launches",
+  "proposals": 17,
+  "qualified_winners": 0,
+  "canonical_protocols_complete": 33,
+  "canonical_protocols_not_run": 1,
+  "raw_status_counts": {
+    "FAIL": 28,
+    "PASS": 4,
+    "UNCONFIRMED": 1,
+    "SKIPPED": 1
+  },
+  "rows": [
+    {
+      "candidate": "lc1_secant_growth",
+      "lane": "k3p_local_curvature",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 1
+    },
+    {
+      "candidate": "lc1_secant_growth",
+      "lane": "k3p_local_curvature",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 2
+    },
+    {
+      "candidate": "lc2_calibrated_secant",
+      "lane": "k3p_local_curvature",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 3
+    },
+    {
+      "candidate": "lc2_calibrated_secant",
+      "lane": "k3p_local_curvature",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 4
+    },
+    {
+      "candidate": "lc3_step_independent_secant",
+      "lane": "k3p_local_curvature",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 5
+    },
+    {
+      "candidate": "lc3_step_independent_secant",
+      "lane": "k3p_local_curvature",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 6
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "lane": "k3p_responsive_precision",
+      "protocol": "hold_and_extension",
+      "status": "PASS",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 1
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "lane": "k3p_responsive_precision",
+      "protocol": "canonical_shift",
+      "status": "UNCONFIRMED",
+      "archive": "completed-curvature-rp1/evidence.json",
+      "ledger_row": 2
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "lane": "k3p_reference_response",
+      "protocol": "hold_and_extension",
+      "status": "PASS",
+      "archive": "completed-reference/evidence.json",
+      "ledger_row": 1
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "lane": "k3p_reference_response",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-reference/evidence.json",
+      "ledger_row": 2
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "lane": "k3p_reference_response",
+      "protocol": "hold_and_extension",
+      "status": "PASS",
+      "archive": "completed-reference/evidence.json",
+      "ledger_row": 3
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "lane": "k3p_reference_response",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-reference/evidence.json",
+      "ledger_row": 4
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "lane": "k3p_reference_response",
+      "protocol": "hold_and_extension",
+      "status": "PASS",
+      "archive": "completed-reference/evidence.json",
+      "ledger_row": 5
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "lane": "k3p_reference_response",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-reference/evidence.json",
+      "ledger_row": 6
+    },
+    {
+      "candidate": "eg1_scheduled",
+      "lane": "k3p_extragradient",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-codex/evidence.json",
+      "ledger_row": 2
+    },
+    {
+      "candidate": "eg1_scheduled",
+      "lane": "k3p_extragradient",
+      "protocol": "canonical_shift",
+      "status": "SKIPPED",
+      "archive": "completed-codex/evidence.json",
+      "ledger_row": 4
+    },
+    {
+      "candidate": "nm1_actual_displacement",
+      "lane": "k3p_negative_momentum",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-momentum/evidence.json",
+      "ledger_row": 1
+    },
+    {
+      "candidate": "nm1_actual_displacement",
+      "lane": "k3p_negative_momentum",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-momentum/evidence.json",
+      "ledger_row": 2
+    },
+    {
+      "candidate": "nm2_critic_actual_displacement",
+      "lane": "k3p_negative_momentum",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-momentum/evidence.json",
+      "ledger_row": 3
+    },
+    {
+      "candidate": "nm2_critic_actual_displacement",
+      "lane": "k3p_negative_momentum",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-momentum/evidence.json",
+      "ledger_row": 4
+    },
+    {
+      "candidate": "nm3_critic_shrink_only",
+      "lane": "k3p_negative_momentum",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-momentum/evidence.json",
+      "ledger_row": 5
+    },
+    {
+      "candidate": "nm3_critic_shrink_only",
+      "lane": "k3p_negative_momentum",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-momentum/evidence.json",
+      "ledger_row": 6
+    },
+    {
+      "candidate": "jt1_shared_radius",
+      "lane": "k3p_joint_trust",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-trust/evidence.json",
+      "ledger_row": 1
+    },
+    {
+      "candidate": "jt1_shared_radius",
+      "lane": "k3p_joint_trust",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-trust/evidence.json",
+      "ledger_row": 2
+    },
+    {
+      "candidate": "jt2_growth_trust",
+      "lane": "k3p_joint_trust",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-trust/evidence.json",
+      "ledger_row": 3
+    },
+    {
+      "candidate": "jt2_growth_trust",
+      "lane": "k3p_joint_trust",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-trust/evidence.json",
+      "ledger_row": 4
+    },
+    {
+      "candidate": "jt3_late_growth",
+      "lane": "k3p_joint_trust",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-trust/evidence.json",
+      "ledger_row": 5
+    },
+    {
+      "candidate": "jt3_late_growth",
+      "lane": "k3p_joint_trust",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-trust/evidence.json",
+      "ledger_row": 6
+    },
+    {
+      "candidate": "sn1_gap_mobility",
+      "lane": "k3p_signal_noise",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-noise/evidence.json",
+      "ledger_row": 1
+    },
+    {
+      "candidate": "sn1_gap_mobility",
+      "lane": "k3p_signal_noise",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-noise/evidence.json",
+      "ledger_row": 3
+    },
+    {
+      "candidate": "sn2_absolute_gap_noise",
+      "lane": "k3p_signal_noise",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-noise/evidence.json",
+      "ledger_row": 4
+    },
+    {
+      "candidate": "sn2_absolute_gap_noise",
+      "lane": "k3p_signal_noise",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-noise/evidence.json",
+      "ledger_row": 6
+    },
+    {
+      "candidate": "sn3_settle_cosine",
+      "lane": "k3p_signal_noise",
+      "protocol": "hold_and_extension",
+      "status": "FAIL",
+      "archive": "completed-noise/evidence.json",
+      "ledger_row": 7
+    },
+    {
+      "candidate": "sn3_settle_cosine",
+      "lane": "k3p_signal_noise",
+      "protocol": "canonical_shift",
+      "status": "FAIL",
+      "archive": "completed-noise/evidence.json",
+      "ledger_row": 9
+    }
+  ]
+}

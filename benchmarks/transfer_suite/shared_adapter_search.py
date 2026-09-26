@@ -7,10 +7,11 @@ from pathlib import Path
 
 import torch
 
-from particlegan import get_recipe
+from benchmarks.legacy.recipe import get_recipe
 from . import shared_default_search as shared, suite
 from .compare_defaults import plan, read, write
 from .relative_step_adapter import adapted_steps, mechanism
+from benchmarks.gan_v3 import gan_v3_recipe
 
 RECIPE = dict(lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=[0., .99],
               reg_coeff=3., reg_kappa=1.25, prior_reg=.05)
@@ -90,7 +91,7 @@ def run(output):
         suite.verify_source(protocol)
         print(f"START {stage} {card['name']} {name}", flush=True)
         recipe_name = 'lr00425_prior2' if stage == 'control' else card['name']
-        recipe = get_recipe(**RECIPE).replace(name=recipe_name)
+        recipe = gan_v3_recipe(**RECIPE).replace(name=recipe_name)
         evidence = {}
         with adapted_steps(card['mechanism'], evidence):
             payload = shared.episode(by_name[name], recipe)

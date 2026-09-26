@@ -1,0 +1,99 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z",
+  "launched_utc": "2026-09-25T15:44:44Z",
+  "parent_pr": 139,
+  "parent_commit": "b979d3c90bdbf8f58c62d759bc3c5fa94cdf18c8",
+  "search_setup_commit": "55bff295",
+  "executed_checkout_commit": "af42d970f92d00add6235850eb8fb3688e4624a6",
+  "selected_candidate": "k3p",
+  "minutes_per_lane": 45,
+  "proposals_per_lane": 3,
+  "benchmark_workers_per_lane": 1,
+  "codex_attempts": 3,
+  "grok_attempts": 5,
+  "claude_attempts": 0,
+  "status_at_publication": "launched; formulation outcomes not yet qualified",
+  "launcher_sha256": {
+    "try-gan.sh": "2506593a178343dac6a663a4a643343ced8109a5b87622f9cbb98d6c7dacc010",
+    "launch-gan-formulations.py": "9f214f3667f168420c07a4b8c98fdafd6b2efc079b21a98134299e636466b631",
+    "launch-gan-k3p-continuous.py": "68d62059f45aaab882a0d37a228c2c5d41893ab99736b5d809c37426f3ee9794",
+    "claude-stream.py": "d0faecaa79d19aecb0788042249614f0f272790e141e3ff4000abc6986ae25be",
+    "monitor-gan.py": "d2fe80518934ff7c4070dc46f8c61957cd2814d36e79e230278959a14c7cb6bb"
+  },
+  "lanes": [
+    {
+      "lane": "continuous_critic",
+      "engine": "codex",
+      "model": "gpt-6-astra",
+      "gpu": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/continuous_critic"
+    },
+    {
+      "lane": "reversible_plasticity",
+      "engine": "codex",
+      "model": "gpt-6-astra",
+      "gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/reversible_plasticity"
+    },
+    {
+      "lane": "adaptive_anchor",
+      "engine": "codex",
+      "model": "gpt-6-astra",
+      "gpu": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/adaptive_anchor"
+    },
+    {
+      "lane": "relative_update_control",
+      "engine": "grok",
+      "model": "grok-4.7",
+      "gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/relative_update_control"
+    },
+    {
+      "lane": "reversible_critic_mixing",
+      "engine": "grok",
+      "model": "grok-4.7",
+      "gpu": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/reversible_critic_mixing"
+    },
+    {
+      "lane": "anchor_innovation",
+      "engine": "grok",
+      "model": "grok-4.7",
+      "gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/anchor_innovation"
+    },
+    {
+      "lane": "particle_network_balance",
+      "engine": "grok",
+      "model": "grok-4.7",
+      "gpu": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/particle_network_balance"
+    },
+    {
+      "lane": "stationary_noise",
+      "engine": "grok",
+      "model": "grok-4.7",
+      "gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+      "workers": 1,
+      "directory": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/stationary_noise"
+    }
+  ],
+  "validation": {
+    "bash_and_python_syntax": "PASS",
+    "dry_run_eight_lanes_three_codex_five_grok": "PASS",
+    "four_workers_per_gpu": "PASS",
+    "all_22_gates_present": "PASS",
+    "live_grok_cli_connectivity": "PASS",
+    "grok_renderer_raw_events_final_and_usage": "PASS",
+    "codex_grok_command_dry_runs": "PASS",
+    "parent_bundle_and_selection_unchanged": "PASS"
+  }
+}

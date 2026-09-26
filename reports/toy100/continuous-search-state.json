@@ -1,0 +1,598 @@
+{
+  "status": "NO_QUALIFIED_CONTINUOUS_WINNER_SEARCH_RUNNING",
+  "selected_candidate": null,
+  "selected_declaration": null,
+  "workflow": [
+    "Monitor three external Codex gpt-6-astra/max approaches through actual public API experiments",
+    "Review each result and replenish failed approaches until one qualifies",
+    "Validate the same candidate across retention, arrival/stability, repeated changes, long continuation, checkpoint/horizon checks, matched K3P and broader quality; do not merge"
+  ],
+  "previous_round": {
+    "round": 2,
+    "proposals": 21,
+    "qualified_winners": 0,
+    "canonical_protocols_complete": 35,
+    "canonical_protocols_incomplete": 3,
+    "canonical_protocols_not_run": 4,
+    "report": "reports/toy100/continuous-round-2/README.md"
+  },
+  "execution_policy": {
+    "codex": 3,
+    "grok": 0,
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "concurrent_approaches": 3,
+    "max_workers_per_attempt": 1,
+    "new_launches_allowed": true,
+    "launch_authorized_after_compaction": true,
+    "phase": "RUNNING",
+    "no_seed_sweeps": true,
+    "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
+    "verified_live_utc": "2026-09-26T21:43:40.205626+00:00",
+    "verified_live_counts": {
+      "codex": 3,
+      "grok": 0
+    },
+    "launch_receipt": "reports/toy100/continuous-eligibility/launch/first-launch.json",
+    "refill_requires_review": true
+  },
+  "completed_rounds": [
+    {
+      "round": 1,
+      "proposals": 24,
+      "qualified_winners": 0,
+      "report": "reports/toy100/continuous-round-1/README.md"
+    },
+    {
+      "round": 2,
+      "proposals": 21,
+      "qualified_winners": 0,
+      "canonical_protocols_complete": 35,
+      "canonical_protocols_incomplete": 3,
+      "canonical_protocols_not_run": 4,
+      "report": "reports/toy100/continuous-round-2/README.md"
+    }
+  ],
+  "on_verified_completion": [
+    "Stop all remaining search agents and benchmark jobs, preserving their partial evidence",
+    "Promote the same verified formulation in PR155 and update selected base, leaderboard and explanation",
+    "Do not merge PR automatically"
+  ],
+  "round3_first_wave": {
+    "proposals": 17,
+    "qualified_winners": 0,
+    "canonical_protocols_complete": 33,
+    "canonical_protocols_not_run": 1,
+    "report": "reports/toy100/continuous-round-3/first-wave-summary.json"
+  },
+  "round3_first_replacement_wave": {
+    "scope": "First seven replacement mechanism lanes. PB0 is unchanged-parent instrumentation and excluded. Excludes later TD kernel proposals and qualification tooling.",
+    "proposals": 20,
+    "qualified_winners": 0,
+    "canonical_protocols_complete": 40,
+    "canonical_protocols_not_run": 0,
+    "raw_status_counts": {
+      "FAIL": 29,
+      "PASS": 11
+    },
+    "report": "reports/toy100/continuous-round-3/first-replacement-wave-summary.json"
+  },
+  "latest_completed_codex": {
+    "lane": "k3p_training_discrepancy",
+    "proposals": 3,
+    "image_passes": 3,
+    "canonical_protocols_complete": 6,
+    "canonical_failures": 6,
+    "qualified_winners": 0,
+    "report": "reports/toy100/continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
+  },
+  "historical_batches": [
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173407Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173623Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T180919Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181045Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181158Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181418Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T183536Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T184728Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185807Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z"
+  ],
+  "round3_inventory": {
+    "formulations_in_reported_groups": 42,
+    "canonical_protocols_complete_in_reported_groups": 83,
+    "canonical_protocols_expected_in_reported_groups": 84,
+    "additional_partial_formulation": "EP2",
+    "including_ep2": {
+      "formulations": 43,
+      "canonical_protocols_complete": 83,
+      "canonical_protocols_interrupted": 1,
+      "canonical_protocols_not_run": 2
+    },
+    "qualified_winners": 0,
+    "unmeasured_drafts_excluded": [
+      "PD2",
+      "generator_restoring",
+      "anchor_force_balance"
+    ],
+    "final_attempt_archive": "reports/toy100/continuous-round-3/stop-inventory/manifest.json"
+  },
+  "historical_current_lead": "r2_moment_surprise",
+  "current_lead": null,
+  "active_phase": "three_external_api_approaches_running",
+  "baseline": {
+    "status": "MEASURED",
+    "master_reference": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+    "entrypoint": "reports.toy100.public_default_baseline",
+    "parameters": "reports/toy100/public-default-baseline/parameters.json",
+    "handoff": "reports/toy100/public-default-baseline/README.md",
+    "historical_scores_inherited": false,
+    "seed_sweeps": false,
+    "training_deferred_until_after_compaction": false,
+    "source_commit": "e21e7728",
+    "run_root": "runs/public-default-baseline",
+    "hold_status": "PASS",
+    "shift_status": "FAIL",
+    "recovery_passing_checks": 0,
+    "recovery_expected_checks": 81,
+    "report": "reports/toy100/public-default-baseline/RESULTS.md",
+    "full_toy_suite_status": "NOT_RUN"
+  },
+  "historical_stop_condition": {
+    "own_hold_checks": 1200,
+    "own_extension_checks": 300,
+    "whole_canonical_shift_status": "PASS",
+    "deadline_recovery_checks": 81,
+    "matched_frozen_control_required": true,
+    "own_toy_passes": 22,
+    "horizon_independence_required": true,
+    "delayed_and_repeated_change_checks_required": true,
+    "long_term_updates": 30000,
+    "long_term_protocol": "reports/toy100/continuous-round-3/long-term-stability-protocol.json",
+    "native100_matrix": {
+      "problems": [
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "seeds": [
+        1234,
+        1235,
+        1236,
+        1237
+      ],
+      "required_passes": 12,
+      "required_passes_per_problem": 4,
+      "updates_each": 7000,
+      "coverage_and_accuracy_required": true,
+      "explicit_user_qualification_matrix": true
+    }
+  },
+  "stop_condition": {
+    "qualified_winner_required": true,
+    "whole_learner_continuous": true,
+    "caller_managed_phases_allowed": false,
+    "predetermined_training_horizon_allowed": false,
+    "automatic_reversible_adaptation_allowed": true,
+    "deadline_all_81_required": false,
+    "metrics": [
+      "stationary retention",
+      "time to first arrival after change",
+      "all post-arrival departures",
+      "sustained stability"
+    ],
+    "public_api_required": true,
+    "delayed_repeated_changes_required": true,
+    "checkpoint_continuation_required": true,
+    "broader_quality_qualification_required": true,
+    "no_seed_sweeps": true,
+    "no_merge": true
+  },
+  "historical_candidate_assessments": {
+    "a3_reversal_strength": "Rejected: full verification 4/22 PASS, 18 FAIL. Earlier shift also failed 71/81, pre-hold 89/120.",
+    "p3_floor_reopen": "Sensitive4 PASS after observation-hook repair; remaining18 NOT_RUN. Hold1200+300, FAIL77/81 recovery, scheduled noise. Not promoted.",
+    "ap3_partial_reopen": "Hold1200+300, prehold120/120, FAIL72/81 recovery, scheduled noise. Not promoted.",
+    "rp1_signal_close": "REJECTED: own hold1200+300 and live shift81/81, but img_intensity2 FAIL (3/24 observations, no sustained confirmation) and native grid100 accuracy FAIL (coverage PASS). Transfer8 PASS/1 FAIL/10 NOT_RUN. No more qualification or promotion.",
+    "pm1_relative_mobility": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Transfer and deeper qualification NOT_RUN. Not promoted.",
+    "pm3_prior_match": "Own hold1200+300 PASS; recovery79/81 FAIL; scheduled noise remains. Not promoted.",
+    "px3_calm_innovation": "Own hold1200+300 PASS; recovery71/81 FAIL; scheduled noise remains. Not promoted.",
+    "di2_persistent_real_batch_latch": "Own hold1200+300 PASS; recovery77/81 FAIL with final four checks losing a mode. Rates and noise remain horizon dependent. No promotion or deeper qualification.",
+    "pb2_share_square": "Own hold1200+300 and prehold120/120 PASS, recovery77/81 FAIL. Scheduled rates/noise remain. No deeper qualification or promotion.",
+    "ep1_excursion_phase": "Own hold1200+300, stationary5/5, prehold120/120 PASS; recovery16/81 FAIL. Scheduled noise remains. Not promoted.",
+    "pd1_projected_discrepancy": "Recovered unledgered results: hold NOT_CONVERGED, prehold33/120, recovery0/81 FAIL. Not promoted.",
+    "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop.",
+    "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md.",
+    "b3_belief_tie": "TIE with R2 (not a win): hold 114/120 (identical 6 steps), recovery 73/81 delay 480 final 8/1.0. R2 gate rebuilt on AdaBelief belief-surprise. Frozen/toys NOT_RUN. See leaderboard.",
+    "sg3_graded_memory": "Second family: hold 114/120 (same 6 fails), recovery 43/81 delay 1080 final 8/0.919, latch engaged, 19 reseeds. Beats B2 with R2-grade hold. See leaderboard.",
+    "r2_offseed": "DEFINITIVE NEGATIVE: exact R2 FAILs shift+frozen+hold at all of seeds {1,2,3} and fails the nudge at 1e-6 and 3e-7. Mechanism does not widen the basin.",
+    "ka2_asymmetric_kalman": "Best JOINT (not promoted): hold 120/120 FULL + recovery 50/81 delay 1120 final 8/0.996, frozen twin 0/81. Certainty-gated EMA with asymmetric attack/release. Back-loaded (stable 3520); bundle persisted gan-attempts/lead-ka2-bundle. See leaderboard."
+  },
+  "historical_selection_before_continuous_audit": {
+    "status": "baseline_complete",
+    "selected_candidate": "k3p",
+    "selected_declaration": "reports/toy100/current-research-base.json",
+    "current_lead": "ka2_asymmetric_kalman",
+    "active_phase": "public_default_baseline_measured",
+    "stop_condition": {
+      "phase": "baseline_only",
+      "protocols": [
+        "hold",
+        "shift"
+      ],
+      "qualification_status": "BASELINE_COMPLETE_HOLD_PASS_SHIFT_FAIL",
+      "no_seed_sweeps": true,
+      "no_automatic_search": true,
+      "next_action": "Review measured baseline; recommended first comparison is anchor weight zero at the same declared seed. No automatic launch."
+    },
+    "execution_policy": {
+      "codex": 1,
+      "grok": 7,
+      "max_workers_per_gpu": 4,
+      "max_workers_per_attempt": 1,
+      "launcher": "reports/toy100/continuous-round-3/launch.py",
+      "reason": "User reduced Codex budget; replace two Codex slots with Grok",
+      "verified_live_utc": "2026-09-25T19:19:05.551652+00:00",
+      "verified_live_counts": {},
+      "verified_gpu_reservations": {},
+      "new_launches_allowed": false,
+      "pause_reason": "User authorized the two public-default baseline protocols; historical autonomous search remains stopped."
+    },
+    "workflow": [
+      "baseline complete: hold PASS, shift FAIL",
+      "review mechanism comparison recommendations",
+      "qualify changes before promotion"
+    ]
+  },
+  "reference_candidate": "k3p",
+  "reference_declaration": "reports/toy100/current-research-base.json",
+  "eligibility_audit": "reports/toy100/continuous-eligibility/audit.json",
+  "candidate_eligibility": {
+    "KA2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "R2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B3-belief": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "SG3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "G1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B3 guarded reseed": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Adaptive memory release retains scheduled LR/noise levels.",
+      "evidence": [
+        "../continuous-practical-leaderboard.md"
+      ]
+    },
+    "K3P": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Horizon-based network/prior rates and noise; finite public trainer budget; retained as reference only.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py",
+        "../../../particlegan/recipes.py",
+        "../../../particlegan/training.py"
+      ]
+    },
+    "PB1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Automatic rate boosts retain underlying horizon-based LR/noise.",
+      "evidence": [
+        "../continuous-round-3/completed-penalty-balance/attempts/k3p_penalty_balance/result.md"
+      ]
+    },
+    "PB2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Automatic rate boosts retain underlying horizon-based LR/noise.",
+      "evidence": [
+        "../continuous-round-3/completed-penalty-balance/attempts/k3p_penalty_balance/result.md"
+      ]
+    },
+    "DI2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Real-data novelty adjusts mobility over the inherited scheduled rates, mixing and noise.",
+      "evidence": [
+        "../continuous-round-3/completed-data-innovation/attempts/k3p_data_innovation/result.md"
+      ]
+    },
+    "PM1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Rates are autonomous/reversible but complete learner retains horizon-based noise.",
+      "evidence": [
+        "../continuous-round-3/completed-mobility/attempts/k3p_particle_mobility/result.md"
+      ]
+    },
+    "PM3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Rates are autonomous/reversible but complete learner retains horizon-based noise.",
+      "evidence": [
+        "../continuous-round-3/completed-mobility/attempts/k3p_particle_mobility/result.md"
+      ]
+    },
+    "P3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Autonomous rate reopening still inherits horizon-based noise.",
+      "evidence": [
+        "../continuous-round-2/attempts/k3p_precision_recovery/result.md"
+      ]
+    },
+    "AP3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Autonomous rate reopening still inherits horizon-based noise.",
+      "evidence": [
+        "../continuous-round-2/sources/ap3_partial_reopen/mechanism.py"
+      ]
+    },
+    "PX3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Genuine rate reopening and return to floor, but inherited horizon-based noise remains.",
+      "evidence": [
+        "../continuous-round-3/completed-prox/attempts/k3p_prox_release/result.md"
+      ]
+    },
+    "EP1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Internal rate rules explicitly retain horizon-based noise in archived source.",
+      "evidence": [
+        "../continuous-round-3/stop-inventory/manifest.json"
+      ]
+    },
+    "PD1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Internal rate rules explicitly retain horizon-based noise in archived source.",
+      "evidence": [
+        "../continuous-round-3/stop-inventory/manifest.json"
+      ]
+    },
+    "RP1": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "No structural schedule DQ here; training-state horizon prefix passes, but image stability and native accuracy fail.",
+      "evidence": [
+        "../continuous-round-3/rp1-rejection.md"
+      ]
+    },
+    "TD3": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "Autonomous rate policy and absolute startup noise; acquisition/retention fail, horizon invariance unverified.",
+      "evidence": [
+        "../continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
+      ]
+    },
+    "A3": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "Full verification records 4/22 PASS, 18 FAIL.",
+      "evidence": [
+        "../continuous-round-2/README.md"
+      ]
+    },
+    "EP2": {
+      "status": "UNVERIFIED_INCOMPLETE",
+      "reason": "No final hold or shift result. Missing evidence is not a measured failure.",
+      "evidence": [
+        "../continuous-round-3/INVENTORY.md"
+      ]
+    }
+  },
+  "qualified_winners": 0,
+  "historical_execution_before_continuous_api_launch": {
+    "active_round": 8,
+    "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T133716Z",
+    "active_batches": [],
+    "stop_request": {
+      "status": "STOPPED_USER_REQUEST",
+      "requested_by": "user",
+      "requested_utc": "2026-09-25T19:08:29.443504+00:00",
+      "instruction": "Stop the search, let current work finish, take inventory. No new attempts or extensions; current attempts retain existing limits.",
+      "running_at_request": [],
+      "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
+      "new_attempts_allowed": false,
+      "existing_work_policy": "Allow pre-existing work to finish; do not launch replacements or extensions.",
+      "tracked_search_processes": [],
+      "last_eight_attempts": {
+        "terminal": 8,
+        "exit_1": 7,
+        "exit_0_without_audit_deliverable": 1,
+        "result_reports": 0,
+        "note": "Already exited before stop handling. Saved final.md files are last progress messages, not completed reports. Exit cause not established."
+      },
+      "unrelated_baseline_audit": {
+        "root": "/tmp/k3p-audit-20260925",
+        "observed_utc": "2026-09-25T19:19:05.551652+00:00",
+        "processes": [
+          {
+            "pid": 3832970,
+            "argv": [
+              "bash",
+              "run_cell.sh",
+              "cell-a6000-t213",
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69"
+            ]
+          },
+          {
+            "pid": 3832978,
+            "argv": [
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "-"
+            ]
+          },
+          {
+            "pid": 3849934,
+            "argv": [
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "-u",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+              "--repo",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+              "--task",
+              "mid_scale_identity",
+              "--config",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+              "--backend",
+              "cuda",
+              "--initial-state",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt",
+              "--output",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mid_scale_identity"
+            ]
+          },
+          {
+            "pid": 3850081,
+            "argv": [
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "-u",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+              "--repo",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+              "--task",
+              "mode_hold",
+              "--config",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+              "--backend",
+              "cuda",
+              "--initial-state",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+              "--output",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mode_hold"
+            ]
+          }
+        ],
+        "action": "Left untouched to finish; not a registered formulation search. Results not included in this inventory."
+      },
+      "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+      "evidence": "reports/toy100/continuous-round-3/stop-inventory/manifest.json",
+      "qualified_winners": 0,
+      "selected_candidate": "k3p"
+    },
+    "verification_progress": {
+      "observed_utc": "2026-09-25T18:08:10.246458+00:00",
+      "candidate": "rp1_signal_close",
+      "eligible_for_promotion": false,
+      "reason": "Real img_intensity2 and native grid100 accuracy failures",
+      "transfer_counts": {
+        "PASS": 8,
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "native_counts": {
+        "PASS": 0,
+        "FAIL": 1,
+        "INCOMPLETE": 1,
+        "NOT_RUN": 1
+      },
+      "report": "reports/toy100/continuous-round-3/rp1-rejection.md",
+      "complete": false,
+      "stopped_after_failure": true
+    },
+    "verification_ownership": {
+      "rp1_canonical_and_natives": "k3p_responsive_precision Grok lane",
+      "rp1_transfer19": "verify_p3_gates Grok lane after completing P3 sensitive4",
+      "rp1_horizon_and_adapter_audit": "k3p_extragradient Codex slot redirected by supervisor",
+      "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only",
+      "rp1_status": "Qualification stopped after real image and native accuracy failures; partial state witness limitations preserved."
+    },
+    "qualification_tooling": {
+      "native_seed_wrapper": "Prepared; twelve configuration checks pass with zero training updates; candidate installation review still required.",
+      "long_run_evaluator": "NOT_READY: partial repair archived. Two-update instrumentation identity PASS within rewritten evaluator; independent canonical-driver equivalence and complete review unfinished. No 9000/30000 candidate runs.",
+      "review": "reports/toy100/continuous-round-3/qualification-harness-review.md",
+      "canonical_control_companion": "NOT_DELIVERED: Codex exited 0 without source changes, ledger, or result report. Full-state strict companion remains unfinished."
+    },
+    "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+    "inventory_utc": "2026-09-25T19:19:05.551652+00:00"
+  },
+  "active_batch": "/ml2/hypergan/gan-attempts/continuous-api-20260926",
+  "active_batches": [
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926"
+  ],
+  "active_attempts": [
+    {
+      "lane": "reversible_precision",
+      "pid": 1398474,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474",
+      "status": "RUNNING"
+    },
+    {
+      "lane": "data_drift_mobility",
+      "pid": 1398477,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477",
+      "status": "RUNNING"
+    },
+    {
+      "lane": "constant_rate_stability",
+      "pid": 1447914,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914",
+      "status": "RUNNING"
+    }
+  ],
+  "current_api_evidence": {
+    "report": "reports/toy100/continuous-api-search/README.md",
+    "manifest": "reports/toy100/continuous-api-search/first-results.json",
+    "qualified_winner": null,
+    "status": "API_RP2_30000_PASS_BROADER_AND_CHECKPOINT_OPEN",
+    "historical_scores_inherited": false,
+    "shared_checkpoint_status": "UNRESOLVED_FILE_CONTINUATION_DISCREPANCY",
+    "matched_k3p_owner": "reversible_precision",
+    "checkpoint_diagnostic_owner": "data_drift_mobility",
+    "api_rp2_long": {
+      "updates": 30000,
+      "arrival_delays": [
+        360,
+        420,
+        320
+      ],
+      "after_arrival_retention": [
+        "537/537",
+        "145/145",
+        "1879/1879",
+        "269/269"
+      ],
+      "report": "reports/toy100/continuous-api-search/evidence/api-rp2-long/result.json"
+    }
+  }
+}

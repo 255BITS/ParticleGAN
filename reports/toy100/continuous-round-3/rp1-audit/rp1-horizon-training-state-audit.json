@@ -1,0 +1,96 @@
+{
+  "candidate": "regression",
+  "gate": "rp1_horizon_training_state",
+  "status": "PASS",
+  "seconds": 0.009389805840328336,
+  "metrics": {
+    "raw_whole_capture_status": "FAIL",
+    "raw_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-horizon-audit.json",
+    "steps": 1800,
+    "horizons": [
+      1200,
+      7000
+    ],
+    "tensors_compared": 1925,
+    "float32_training_tensor_count": 120,
+    "integer_guard_observation_tensor_count": 1799,
+    "tensor_mismatches": 0,
+    "learner_scalar_differences": {},
+    "observation_counter_differences": {
+      "train_mode_hold/noise_policy/_counts/output_eval_calls": [
+        1324,
+        1322
+      ],
+      "_run_extended/policy/_counts/output_eval_calls": [
+        1324,
+        1322
+      ],
+      "_run_extended/policy/_counts/output_eval_elements": [
+        5438992,
+        5430776
+      ],
+      "run_toy/noise_policy/_counts/output_eval_elements": [
+        5438992,
+        5430776
+      ],
+      "train_mode_hold/noise_policy/_counts/output_eval_elements": [
+        5438992,
+        5430776
+      ],
+      "run_toy/noise_policy/_counts/output_eval_calls": [
+        1324,
+        1322
+      ]
+    },
+    "applied_rate_noise_mixing_traces_equal": true,
+    "cuda_fp32": true,
+    "scope": "Training-state equality only. Raw FAIL retained. Frozen NoisePolicy counters are only incremented and returned in receipt, never read by learner; see legacy_noise_adapters.py lines202-206,228-231,326-329.",
+    "observational_counter_source_proof": {
+      "source": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda/benchmarks/transfer_suite/legacy_noise_adapters.py",
+      "sha256": "b6240105a06ba4b10cedcf38818c187fdd79bee9ad47d47319909cfc1404dc6a",
+      "all_counter_uses": [
+        {
+          "line": 109,
+          "code": "self._counts = {"
+        },
+        {
+          "line": 203,
+          "code": "self._counts[key + \"_calls\"] += 1"
+        },
+        {
+          "line": 206,
+          "code": "self._counts[key + \"_elements\"] += generated.numel()"
+        },
+        {
+          "line": 228,
+          "code": "self._counts[key + \"_calls\"] += 1"
+        },
+        {
+          "line": 231,
+          "code": "self._counts[key + \"_elements\"] += data.numel()"
+        },
+        {
+          "line": 326,
+          "code": "**self._counts,"
+        },
+        {
+          "line": 327,
+          "code": "\"train_output_applied\": bool(self._counts[\"output_train_elements\"]),"
+        },
+        {
+          "line": 328,
+          "code": "\"train_input_applied\": bool(self._counts[\"input_train_elements\"]),"
+        },
+        {
+          "line": 329,
+          "code": "\"eval_output_applied\": bool(self._counts[\"output_eval_elements\"]),"
+        }
+      ],
+      "reason": "Counter initialization, increments, and receipt-only serialization/booleans. No rate, model, gradient, controller, EMA, random draw, branching in training, or sample selection consumes output_eval_calls/elements. RNG tensors, training state and applied traces compare exactly."
+    },
+    "applied_rate_samples": 3600,
+    "noise_samples": 1800,
+    "scope_limit": "Equality at the 1800-update endpoint plus full rate/noise traces and sampled mobility; not equality after every floating operation or arbitrary future targets."
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-horizon-training-state-audit.json"
+}

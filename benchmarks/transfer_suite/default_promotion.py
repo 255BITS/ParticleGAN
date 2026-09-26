@@ -15,6 +15,7 @@ from particlegan import GANTrainer, LinearSkipDiscriminator, learning_rate_scale
 from lib.toy_models import SimpleMLPGenerator
 from . import suite, vector_tasks
 from .protocol import test_verdict
+from benchmarks.gan_v3 import legacy_dict
 
 
 def main():
@@ -47,7 +48,7 @@ def main():
     trainer = GANTrainer(recipe, g, d, prior=prior,
                                  latent_generator=torch.Generator().manual_seed(1),
                                  penalty_generator=torch.Generator().manual_seed(2))
-    write('recipe.json', recipe.to_dict())
+    write('recipe.json', legacy_dict(recipe))
     original_groups = [[dict(lr=group['lr'], betas=group['betas']) for group in opt.param_groups]
                        for opt in (trainer.opt_g, trainer.opt_d)]
     write('optimizer_groups.json', original_groups)

@@ -1,0 +1,21 @@
+{
+  "candidate": "a3_reversal_strength",
+  "role": "reversal-adaptive anchor restoring strength",
+  "base_lr": 0.000425,
+  "prior_lr_multiplier": 2.0,
+  "network_floor": 1.0,
+  "prior_floor": 1.0,
+  "mix_s": 0.0,
+  "anchor_decay": 0.999,
+  "anchor_coefficient": "w(t)=1+relu(-cos(raw critic gradient at t-1, raw gradient at t-2)), bounded [1,2]; default1 without history; cap coefficient unchanged",
+  "penalty_coefficient": 1.0,
+  "cap": 1.0,
+  "guard": "unchanged critic-only: 5x Adam RMS after 200 steps",
+  "input_noise": 0.0,
+  "output_noise": 0.029,
+  "output_noise_warmup": 0.0,
+  "optimizer": "unchanged Adam and direct-response/A2 hooks",
+  "remaining_budget_dependencies": "Formulation rate/multiplier/noise adapters ignore all horizon and step arguments. Frozen host budgets remain solely for termination/evaluation/accounting. Full-state prefix audit required.",
+  "reason": "A2 coherent short-memory rule lost cold coverage (0/4800 qualifying settling checks). Revert to A1 original memory and test stronger restoring force only after critic-gradient reversals. Rates/noise/optimizer/particle rules fixed.",
+  "anchor_memory_history": "one prior raw critic parameter gradient, CUDA FP32; strength scalar CUDA FP32"
+}

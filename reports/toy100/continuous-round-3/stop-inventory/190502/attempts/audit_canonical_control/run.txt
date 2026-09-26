@@ -1,0 +1,11 @@
+engine=codex
+base=682205e460f87f8c4aad27fe5829b7cbd7bb8c4d
+branch=codex/gan-attempt-20260925T190502Z-3834938
+model=gpt-6-astra
+effort=max
+minutes=45
+candidates=1
+workers=1
+focus=audit_canonical_control
+gpu=GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69
+log=/ml2/hypergan/gan-attempts/formulations-20260925T190502Z/audit_canonical_control/20260925T190502Z-3834938/codex.log

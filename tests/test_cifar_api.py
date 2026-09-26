@@ -6,7 +6,7 @@ import torch
 
 from experiments.config import read_config
 from experiments.train_cifar_ddgan import DEFAULTS, training_recipe, resolve_config, validate
-from particlegan import GANLoss, GradientPenalty, ParticleRegularizer, learning_rate_scale
+from particlegan import GANLoss, ParticleRegularizer, learning_rate_scale
 from particlegan.diffusion import DrawSource
 
 
@@ -24,11 +24,9 @@ def test_existing_cifar_configs_resolve_into_recipe(path):
     assert recipe.ema_decay == cfg['ema']
     assert recipe.betas == (cfg['beta1'], .999)
     for key in ('lr', 'd_lr_mult', 'prior_lr_mult', 'prior_reg', 'z_dim', 'num_particles',
-                'loss_type', 'gan_mode', 'reg_arm', 'reg_coeff', 'reg_kappa',
-                'reg_every', 'reg_method', 'lr_anneal_start', 'lr_floor'):
+                'reg_coeff', 'reg_kappa', 'reg_every', 'lr_anneal_start', 'lr_floor'):
         assert getattr(recipe, key) == cfg[key]
     assert isinstance(recipe.make_loss(), GANLoss)
-    assert isinstance(recipe.make_gradient_penalty(), GradientPenalty)
     assert isinstance(recipe.make_prior_regularizer(), ParticleRegularizer)
 
 

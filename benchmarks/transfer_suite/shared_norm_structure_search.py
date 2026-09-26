@@ -14,16 +14,17 @@ import traceback
 from unittest.mock import patch
 
 import torch
-from particlegan import get_recipe
+from benchmarks.legacy.recipe import get_recipe
 from . import suite, vector_tasks
 from .compare_defaults import candidate, effective_spec, ema_verdict, optimizer_defaults, plan, write
 from .protocol import test_verdict
 from .shared_norm_structure_research import ARCHITECTURES, constructor, variant
 from .shared_variants import architecture_spec
+from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
 def recipe():
-    return get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=(0., .99),
+    return gan_v3_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=(0., .99),
                       reg_coeff=6., reg_kappa=1.25, prior_reg=.05).replace(name='shared_c6')
 
 
@@ -51,7 +52,7 @@ def episode(job, card):
         json.dumps(result, allow_nan=False)
     except Exception:
         result = dict(error=traceback.format_exc(), seconds=time.perf_counter()-started)
-    return dict(recipe=settings.to_dict(), candidate=asdict(candidate(settings)), original_spec=deepcopy(job['spec']),
+    return dict(recipe=legacy_dict(settings), candidate=asdict(candidate(settings)), original_spec=deepcopy(job['spec']),
                 spec=spec, discriminator_variant=selected, architecture=card['name'],
                 reference=job['reference'], reference_sha256=job['reference_sha256'], applied=applied,
                 verdict=test_verdict(spec, result), ema_verdict=ema_verdict(spec, result), result=result)
@@ -88,7 +89,7 @@ def run(declaration, output):
     torch.set_num_threads(1)
     protocol = suite.snapshot(output)
     protocol.update(version='shared-norm-structure-v1', declaration=declaration, seed=0, jobs=jobs,
-                    architectures=cards, recipe=recipe().to_dict(),
+                    architectures=cards, recipe=legacy_dict(recipe()),
                     selection='D-only architecture trials. All 24 checks, final 5 live PASS; EMA separate.')
     write(output/'protocol.json', protocol)
     write(output/'plan.json', declaration)

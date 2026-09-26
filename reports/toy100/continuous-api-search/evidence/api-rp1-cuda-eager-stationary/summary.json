@@ -1,0 +1,74 @@
+{
+  "segments": [
+    {
+      "start": 0,
+      "end": 7500,
+      "first_arrival": 640,
+      "delay": 640,
+      "passing_since_arrival": 687,
+      "checks_since_arrival": 687,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 640,
+      "stable_suffix_checks": 687,
+      "minimum_hq_since_arrival": 0.908203125,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 7500,
+        "modes": 8,
+        "hq": 0.98388671875
+      }
+    }
+  ],
+  "events": [
+    {
+      "step": 1546,
+      "variant": "rp1",
+      "open": false,
+      "gap": 0.013445166870951653,
+      "gap_s": 0.015352844190856132,
+      "velocity": -1.9269467877822133e-05,
+      "contraction_peak": 0.0001872115931630669,
+      "contracting": 74,
+      "activity": 0.09545820052675719,
+      "activity_peak": 1.2769448491253044,
+      "quiet_gap": 0.015352844190856132,
+      "quiet_activity": 0.09545820052675719,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 1546,
+      "openings": 1,
+      "closings": 1,
+      "event": "close"
+    }
+  ],
+  "initial_open": "rp1",
+  "initial_baseline_parity": {
+    "models_sha256": true,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  },
+  "final_policy": {
+    "variant": "rp1",
+    "open": false,
+    "gap": 0.0002373325260123238,
+    "gap_s": 0.00026520217852479756,
+    "velocity": -2.8151164154009527e-07,
+    "contraction_peak": 0.0001872115931630669,
+    "contracting": 74,
+    "activity": 0.47199791359050447,
+    "activity_peak": 1.2769448491253044,
+    "quiet_gap": 0.0002732391092962999,
+    "quiet_activity": 0.454201214021495,
+    "quiet": 0,
+    "shock": 0,
+    "updates": 7500,
+    "openings": 1,
+    "closings": 1,
+    "event": null
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "candidate_id": "API-RP1",
+  "protocol": "stationary",
+  "segments": [
+    {
+      "start": 0,
+      "end": 7500,
+      "first_arrival": 640,
+      "delay": 640,
+      "passing_since_arrival": 687,
+      "checks_since_arrival": 687,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 640,
+      "stable_suffix_checks": 687,
+      "minimum_hq_since_arrival": 0.908203125,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 7500,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.98388671875,
+        "cover": 1.0,
+        "effective_modes": 7.984276294708252
+      }
+    }
+  ],
+  "schema": 1,
+  "status": "COMPLETE",
+  "experiment": "ka2_rp1_public_trainer",
+  "schedule": "rp1",
+  "completed_steps": 7500,
+  "seconds": 268.2284412011504,
+  "torch": "2.13.0+cu126",
+  "cuda_version": "12.6",
+  "device": "cuda:0",
+  "device_name": "NVIDIA RTX A6000",
+  "stationary": {
+    "checks": 5,
+    "expected_checks": 5,
+    "complete": true,
+    "passing_checks": 5,
+    "failing_steps": [],
+    "min_hq": 0.95947265625,
+    "min_modes": 8
+  },
+  "prehold": {
+    "checks": 120,
+    "expected_checks": 120,
+    "complete": true,
+    "passing_checks": 120,
+    "failing_steps": [],
+    "min_hq": 0.966552734375,
+    "min_modes": 8
+  },
+  "recovery_at_3600": {
+    "observed_through": 3600,
+    "first_passing_step": 2410,
+    "updates_to_first_pass": 10,
+    "checks_from_first_pass": 120,
+    "passing_checks_from_first_pass": 120,
+    "failing_steps_after_first_pass": [],
+    "stable_suffix_start": 2410,
+    "stable_suffix_checks": 120,
+    "stable_suffix_span_updates": 1190,
+    "stable_suffix_min_hq": 0.979248046875,
+    "final": {
+      "step": 3600,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.983154296875,
+      "cover": 1.0,
+      "effective_modes": 7.985281467437744
+    }
+  },
+  "recovery_extended": {
+    "observed_through": 7500,
+    "first_passing_step": 2410,
+    "updates_to_first_pass": 10,
+    "checks_from_first_pass": 510,
+    "passing_checks_from_first_pass": 510,
+    "failing_steps_after_first_pass": [],
+    "stable_suffix_start": 2410,
+    "stable_suffix_checks": 510,
+    "stable_suffix_span_updates": 5090,
+    "stable_suffix_min_hq": 0.979248046875,
+    "final": {
+      "step": 7500,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.98388671875,
+      "cover": 1.0,
+      "effective_modes": 7.984276294708252
+    }
+  },
+  "frozen_control": {
+    "checks": 0,
+    "expected_checks": 510,
+    "complete": false,
+    "passing_checks": 0,
+    "failing_steps": [],
+    "min_hq": null,
+    "min_modes": null
+  },
+  "lr_ranges": {
+    "generator_0": {
+      "min": 4.25e-05,
+      "max": 0.00425,
+      "observed_steps": 7500
+    },
+    "prior_1": {
+      "min": 0.00042500000000000003,
+      "max": 0.0085,
+      "observed_steps": 7500
+    },
+    "critic_0": {
+      "min": 4.25e-05,
+      "max": 0.00425,
+      "observed_steps": 7500
+    }
+  },
+  "constant_lr_verified_every_step": false,
+  "final": {
+    "step": 7500,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.98388671875,
+    "cover": 1.0,
+    "effective_modes": 7.984276294708252
+  },
+  "final_ema": {
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.983642578125,
+    "cover": 1.0,
+    "effective_modes": 7.984348297119141
+  },
+  "final_state": {
+    "step": 7500,
+    "trainer_sha256": "c0f46452006b69e70dba51b31aac3100a45a973427cf26b8fae1f1f921b6db13",
+    "models_sha256": {
+      "G": "7eba7ddb46ab9fdc19a6170332b0d6012cfbe3a5ddd076a4111324e5ccfe3886",
+      "D": "e03c69530cb78088e6116e63b3614d04db835cb054385a1218be357a7826e832",
+      "prior": "39e10fe29f5b9ec19ae1e6fef8941eacb372c6c3b81c74bd8f7896ee31b02a21",
+      "ema_G": "a5dd872d871000ce0b176589bacddd1aeb1c348d4d749a65876faffc49ed3fdb",
+      "ema_prior": "e1037ee16b1b15052e9a225cd29971adf7c7889aacf08b00803db9887a62e72c"
+    },
+    "optimizers_sha256": [
+      "0e386445ab03e2c92b05efd2f9e2b1095db470d048f0d9ff8fd399bebbfb0621",
+      "7c720939dd89dbc11802be5e9f2132441be82b42dff377364dfef8b41380b983"
+    ],
+    "streams_sha256": {
+      "latent_generator": "b1aec13c38e4ca159c480a000d025b7a8243c5ad6a2beb58b9bbb6b392a1e284",
+      "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+      "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+      "noise_generator": "a0211a7bb07ce096e428745d4da22e36eaaeee99bf72726695393c910e2005c2"
+    },
+    "cpu_rng_sha256": "78211cc3c1dd585a8d9c793dc872ce856e0868e5670cab7c6ac573e614d44dfe",
+    "cuda_rng_sha256": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+    "real_stream_sha256": "896b1863fa44a2aa6f368705e3bdd9ee2ab68bd8c470b5e7c463424d1ef3c92e",
+    "means_sha256": "f285901fa1c672859550334f62149d9bff1c533d2bfcb61f2a2a818044950a7f"
+  }
+}

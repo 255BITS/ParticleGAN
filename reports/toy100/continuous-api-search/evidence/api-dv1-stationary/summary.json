@@ -1,0 +1,149 @@
+{
+  "acquisition": {
+    "start": 0,
+    "end": 7500,
+    "first_arrival": 790,
+    "arrival_delay": 790,
+    "passing_since_arrival": 655,
+    "checks_since_arrival": 672,
+    "every_departure": [
+      4850,
+      4860,
+      4870,
+      4880,
+      4890,
+      4900,
+      4910,
+      4920,
+      4930,
+      4940,
+      4950,
+      4960,
+      4970,
+      4980,
+      4990,
+      5000,
+      5010
+    ],
+    "min_hq_since_arrival": 0.0,
+    "min_modes_since_arrival": 0,
+    "min_hq_all": 0.0,
+    "final_stable_suffix_checks": 249,
+    "final_stable_suffix_start": 5020,
+    "final_stable_suffix_span": 2480,
+    "final": {
+      "step": 7500,
+      "modes": 8,
+      "hq": 0.9921875
+    }
+  },
+  "retention": {
+    "passing": 613,
+    "total": 630,
+    "min_hq": 0.0,
+    "failing_steps": [
+      4850,
+      4860,
+      4870,
+      4880,
+      4890,
+      4900,
+      4910,
+      4920,
+      4930,
+      4940,
+      4950,
+      4960,
+      4970,
+      4980,
+      4990,
+      5000,
+      5010
+    ]
+  },
+  "transitions": [],
+  "comparison_3600": {
+    "start": 2400,
+    "end": 3600,
+    "first_arrival": 2410,
+    "arrival_delay": 10,
+    "passing_since_arrival": 120,
+    "checks_since_arrival": 120,
+    "every_departure": [],
+    "min_hq_since_arrival": 0.97216796875,
+    "min_modes_since_arrival": 8,
+    "min_hq_all": 0.97216796875,
+    "final_stable_suffix_checks": 120,
+    "final_stable_suffix_start": 2410,
+    "final_stable_suffix_span": 1190,
+    "final": {
+      "step": 3600,
+      "modes": 8,
+      "hq": 0.97265625
+    }
+  },
+  "frozen": {
+    "passing": 0,
+    "total": 0
+  },
+  "policy_ranges": {
+    "mobility": [
+      0.0029129431422929386,
+      0.995
+    ],
+    "alignment": [
+      -0.9673323746433744,
+      0.08100321344705738
+    ],
+    "data_score": [
+      0.0,
+      2.5723533630371094
+    ],
+    "data_drive": [
+      0.0,
+      0.0
+    ]
+  },
+  "final_policy": {
+    "variant": "dv1",
+    "mobility": 0.0474666546554956,
+    "alignment": -0.0018051453117435617,
+    "data_score": 0.6868301033973694,
+    "data_drive": 0.0,
+    "last_cosine": -0.4307103753089905,
+    "updates": 7500,
+    "reopens": 0,
+    "closed": true
+  },
+  "rates": {
+    "generator_0": [
+      5.4756208271197545e-05,
+      0.0042289625
+    ],
+    "prior_1": [
+      0.0004485220158740155,
+      0.008459625
+    ],
+    "critic_0": [
+      5.4756208271197545e-05,
+      0.0042289625
+    ],
+    "input_noise": [
+      0.0,
+      0.0
+    ],
+    "output_noise": [
+      0.029,
+      0.029
+    ]
+  },
+  "initialization_matches_original": {
+    "models_sha256": true,
+    "optimizers_sha256": true,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  }
+}

@@ -1,0 +1,11 @@
+engine=codex
+base=a42e42c99f8d5e961665aff19af3ecb204980008
+branch=codex/gan-attempt-20260925T180919Z-3766574
+model=gpt-6-astra
+effort=max
+minutes=45
+candidates=3
+workers=1
+focus=k3p_transfer_acquisition
+gpu=GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69
+log=/ml2/hypergan/gan-attempts/formulations-20260925T180919Z/k3p_transfer_acquisition/20260925T180919Z-3766574/codex.log

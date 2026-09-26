@@ -1,0 +1,86 @@
+{
+  "status": "STOPPED_USER_REQUEST",
+  "requested_by": "user",
+  "requested_utc": "2026-09-25T19:08:29.443504+00:00",
+  "instruction": "Stop the search, let current work finish, take inventory. No new attempts or extensions; current attempts retain existing limits.",
+  "running_at_request": [],
+  "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
+  "new_attempts_allowed": false,
+  "existing_work_policy": "Allow pre-existing work to finish; do not launch replacements or extensions.",
+  "tracked_search_processes": [],
+  "last_eight_attempts": {
+    "terminal": 8,
+    "exit_1": 7,
+    "exit_0_without_audit_deliverable": 1,
+    "result_reports": 0,
+    "note": "Already exited before stop handling. Saved final.md files are last progress messages, not completed reports. Exit cause not established."
+  },
+  "unrelated_baseline_audit": {
+    "root": "/tmp/k3p-audit-20260925",
+    "observed_utc": "2026-09-25T19:19:05.551652+00:00",
+    "processes": [
+      {
+        "pid": 3832970,
+        "argv": [
+          "bash",
+          "run_cell.sh",
+          "cell-a6000-t213",
+          "/tmp/k3p-audit-20260925/venv/bin/python",
+          "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69"
+        ]
+      },
+      {
+        "pid": 3832978,
+        "argv": [
+          "/tmp/k3p-audit-20260925/venv/bin/python",
+          "-"
+        ]
+      },
+      {
+        "pid": 3849934,
+        "argv": [
+          "/tmp/k3p-audit-20260925/venv/bin/python",
+          "-u",
+          "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+          "--repo",
+          "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+          "--task",
+          "mid_scale_identity",
+          "--config",
+          "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+          "--backend",
+          "cuda",
+          "--initial-state",
+          "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt",
+          "--output",
+          "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mid_scale_identity"
+        ]
+      },
+      {
+        "pid": 3850081,
+        "argv": [
+          "/tmp/k3p-audit-20260925/venv/bin/python",
+          "-u",
+          "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+          "--repo",
+          "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+          "--task",
+          "mode_hold",
+          "--config",
+          "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+          "--backend",
+          "cuda",
+          "--initial-state",
+          "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+          "--output",
+          "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mode_hold"
+        ]
+      }
+    ],
+    "action": "Left untouched to finish; not a registered formulation search. Results not included in this inventory."
+  },
+  "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+  "evidence": "reports/toy100/continuous-round-3/stop-inventory/manifest.json",
+  "qualified_winners": 0,
+  "selected_candidate": "k3p"
+}

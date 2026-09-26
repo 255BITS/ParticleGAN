@@ -1,0 +1,22 @@
+{
+  "name": "late_then_orthogonal_shift_v1",
+  "status": "DECLARED_BEFORE_EXECUTION",
+  "candidate": "Any unchanged candidate that first qualifies on canonical hold, control and all 22 toys",
+  "purpose": "Test delayed and repeated adaptation on uninterrupted training state",
+  "fixture": "Original canonical mode_hold initialization and seed; no new seeds",
+  "total_updates": 9000,
+  "initial_target_offset": [0.0, 0.0],
+  "target_changes": [
+    {"after_update": 6000, "absolute_offset": [1.0, 0.0], "deadline_updates": 400, "deadline_checks": {"first": 6400, "last": 7200, "stride": 10, "count": 81}},
+    {"after_update": 7800, "absolute_offset": [1.0, 1.0], "deadline_updates": 400, "deadline_checks": {"first": 8200, "last": 9000, "stride": 10, "count": 81}}
+  ],
+  "required_stable_windows": [
+    {"first": 1000, "last": 1200, "stride": 50},
+    {"first": 1210, "last": 6000, "stride": 10},
+    {"first": 7210, "last": 7800, "stride": 10}
+  ],
+  "quality_at_every_required_check": {"live_modes": 8, "min_live_hq": 0.9},
+  "continuity": ["No restart or reinitialization", "Preserve model, Adam moments, critic and generator EMAs, controller, latent/response history and all RNG", "Positive applied updates after both changes", "Change times and target offsets belong only to the evaluator, never the learner"],
+  "evaluation": "Extend the frozen canonical evaluator with explicit changes and windows; retain its sample counts, metrics and cadence semantics. No selected checkpoints, relaxed checks or deadline movement.",
+  "report": "All required windows and both 81-check deadlines must pass; report every failed step, minima, delay and applied rates. Keep this separate from canonical results and do not claim indefinite learning."
+}

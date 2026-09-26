@@ -1,0 +1,167 @@
+{
+  "audit": "Independent read-only source and retained-data audit of API-DV1 single shift",
+  "candidate_run": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477/repo/reports/data-drift-api/runs/dv1-single",
+  "source_zip_sha256": "6238877c082f2bfcc09b248278686313d8fff3eb6e6c3c35f9e6bdf1f29f202d",
+  "declaration_sha256": "0ce94423f3fb523c3fb589cfbdf29f0e9b50afc33bda50c3a123469409f61500",
+  "base_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+  "scope": "No model execution, training, tests, extra seeds or worker-checkout edits. Only source inspection, manifest hashing, JSON arithmetic and baseline receipt comparison.",
+  "declared_source_verified": {
+    "particlegan/__init__.py": true,
+    "particlegan/autoencoder.py": true,
+    "particlegan/conditioning.py": true,
+    "particlegan/continuous.py": true,
+    "particlegan/diffusion.py": true,
+    "particlegan/discriminators.py": true,
+    "particlegan/gan_loss.py": true,
+    "particlegan/grad_regularizers.py": true,
+    "particlegan/k3p.py": true,
+    "particlegan/ka2.py": true,
+    "particlegan/particle_prior.py": true,
+    "particlegan/recipes.py": true,
+    "particlegan/training.py": true,
+    "particlegan/vicreg_loss.py": true,
+    "reports/data-drift-api/worker.py": true,
+    "reports/data-drift-api/evaluation-protocols.json": true,
+    "reports/data-drift-api/dv1.json": true,
+    "benchmarks/locked_shared/mode_hold.py": true,
+    "benchmarks/locked_shared/mlp.py": true
+  },
+  "source_hash_mismatches": [],
+  "changed_package_or_evaluator_sources": [
+    "particlegan/continuous.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "unchanged_package_or_evaluator_sources": [
+    "particlegan/__init__.py",
+    "particlegan/autoencoder.py",
+    "particlegan/conditioning.py",
+    "particlegan/diffusion.py",
+    "particlegan/discriminators.py",
+    "particlegan/gan_loss.py",
+    "particlegan/grad_regularizers.py",
+    "particlegan/k3p.py",
+    "particlegan/ka2.py",
+    "particlegan/particle_prior.py",
+    "particlegan/vicreg_loss.py",
+    "benchmarks/locked_shared/mode_hold.py",
+    "benchmarks/locked_shared/mlp.py"
+  ],
+  "protocol_matches_governing_bytes": true,
+  "artifact_hash_mismatches": [],
+  "actual_public_trainer": true,
+  "horizon_or_target_leakage_found": false,
+  "mechanism_audit": "Controller receives real batches and successive generator gradients only. No evaluator horizon, shift times, target centers, labels or quality scores enter controller. total_steps=None bypasses stopping and old LR schedule; noise is constant; KA2 bootstrap and guard counts are absolute internal initialization rules. Detector controls scalar role learning rates and does not fit or translate samples.",
+  "observation_steps_complete": true,
+  "derived_metrics": {
+    "prehold": {
+      "checks": 120,
+      "passing_checks": 120,
+      "first_passing_step": 1210,
+      "passing_after_first": 120,
+      "checks_after_first": 120,
+      "departures_after_first": [],
+      "min_hq_after_first": 0.900634765625,
+      "min_modes_after_first": 8
+    },
+    "acquisition": {
+      "checks": 240,
+      "passing_checks": 162,
+      "first_passing_step": 790,
+      "passing_after_first": 162,
+      "checks_after_first": 162,
+      "departures_after_first": [],
+      "min_hq_after_first": 0.900634765625,
+      "min_modes_after_first": 8
+    },
+    "post_shift_to_3600": {
+      "checks": 120,
+      "passing_checks": 78,
+      "first_passing_step": 2830,
+      "passing_after_first": 78,
+      "checks_after_first": 78,
+      "departures_after_first": [],
+      "min_hq_after_first": 0.900634765625,
+      "min_modes_after_first": 8
+    },
+    "post_shift_to_4600": {
+      "checks": 220,
+      "passing_checks": 178,
+      "first_passing_step": 2830,
+      "passing_after_first": 178,
+      "checks_after_first": 178,
+      "departures_after_first": [],
+      "min_hq_after_first": 0.900634765625,
+      "min_modes_after_first": 8
+    }
+  },
+  "frozen_control": {
+    "checks": 220,
+    "passing_checks": 0
+  },
+  "initialization_matches_archived_public_runs": {
+    "constant": {
+      "models_sha256": true,
+      "optimizers_sha256": true,
+      "streams_sha256": true,
+      "cpu_rng_sha256": true,
+      "cuda_rng_sha256": true,
+      "real_stream_sha256": true,
+      "means_sha256": true
+    },
+    "decay": {
+      "models_sha256": true,
+      "optimizers_sha256": true,
+      "streams_sha256": true,
+      "cpu_rng_sha256": true,
+      "cuda_rng_sha256": true,
+      "real_stream_sha256": true,
+      "means_sha256": true
+    }
+  },
+  "initial_trainer_hash_diff_explanation": "Recipe/controller fields differ; model, optimizer, all individual RNG stream and initial means hashes match.",
+  "lr_log_steps_complete": true,
+  "actual_logged_lr_ranges": {
+    "generator_0": {
+      "min": 0.00010590206313184825,
+      "max": 0.0042289625
+    },
+    "prior_1": {
+      "min": 0.0005466807272227392,
+      "max": 0.008459625
+    },
+    "critic_0": {
+      "min": 0.00010590206313184825,
+      "max": 0.0042289625
+    }
+  },
+  "observed_noise_pairs": [
+    [
+      0.0,
+      0.029
+    ]
+  ],
+  "findings": [
+    {
+      "severity": "minor_reporting",
+      "location": "source.zip::reports/data-drift-api/worker.py:191",
+      "finding": "LR ranges are initialized with un-applied base rates, so reported maxima .00425/.0085 exceed actual logged maxima .0042289625/.008459625. Raw per-update logs remain complete."
+    },
+    {
+      "severity": "api_followup",
+      "location": "source.zip::particlegan/recipes.py:421-434",
+      "finding": "Standalone learning_rate_scales/scale_learning_rates still use total_steps arithmetically and do not handle continuous_policy with total_steps=None. GANTrainer correctly bypasses them. Continuous recipe is currently supported via trainer path only."
+    },
+    {
+      "severity": "scope_limit",
+      "location": "source.zip::particlegan/continuous.py:43",
+      "finding": "Normalized innovation uses an asymptotic EMA-reference variance factor .01/1.99 and current batch length for both terms. This is a reasonable fixed-batch heuristic, not a calibrated universal detector; changing batch sizes and correlated features are not covered by this run."
+    },
+    {
+      "severity": "pending_qualification",
+      "location": "evaluation-protocols.json",
+      "finding": "This audit covers the completed single shift only. Stationary run was in progress at supervisor notification; delayed/repeated, long continuation, exact checkpoint, horizon-prefix, matched K3P, and own broader22 require separate evidence. No winner claim."
+    }
+  ],
+  "conclusion": "Initial result supported, with no detected evaluator drift or learner leakage. Promising single-shift survivor only; full qualification remains incomplete."
+}

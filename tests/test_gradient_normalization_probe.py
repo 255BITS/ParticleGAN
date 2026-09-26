@@ -4,7 +4,8 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import BatchDistanceDiscriminator, GradientPenalty
+from particlegan import BatchDistanceDiscriminator
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from benchmarks.transfer_suite.toy100_compatibility import declared_recipe
 from reports.toy100.gradient_normalization_probe import (
     GNReceipt, GradientNormalizedCritic, normalized_score,

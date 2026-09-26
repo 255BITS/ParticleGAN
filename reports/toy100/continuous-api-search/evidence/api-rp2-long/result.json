@@ -1,0 +1,269 @@
+{
+  "candidate_id": "API-RP2",
+  "protocol": "long_continuation",
+  "segments": [
+    {
+      "start": 0,
+      "end": 6000,
+      "first_arrival": 640,
+      "delay": 640,
+      "passing_since_arrival": 537,
+      "checks_since_arrival": 537,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 640,
+      "stable_suffix_checks": 537,
+      "minimum_hq_since_arrival": 0.908203125,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 6000,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.984130859375,
+        "cover": 1.0,
+        "effective_modes": 7.986408233642578
+      }
+    },
+    {
+      "start": 6000,
+      "end": 7800,
+      "first_arrival": 6360,
+      "delay": 360,
+      "passing_since_arrival": 145,
+      "checks_since_arrival": 145,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 6360,
+      "stable_suffix_checks": 145,
+      "minimum_hq_since_arrival": 0.9423828125,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 7800,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.991943359375,
+        "cover": 1.0,
+        "effective_modes": 7.984320163726807
+      }
+    },
+    {
+      "start": 7800,
+      "end": 27000,
+      "first_arrival": 8220,
+      "delay": 420,
+      "passing_since_arrival": 1879,
+      "checks_since_arrival": 1879,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 8220,
+      "stable_suffix_checks": 1879,
+      "minimum_hq_since_arrival": 0.984130859375,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 27000,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.991455078125,
+        "cover": 1.0,
+        "effective_modes": 7.985605239868164
+      }
+    },
+    {
+      "start": 27000,
+      "end": 30000,
+      "first_arrival": 27320,
+      "delay": 320,
+      "passing_since_arrival": 269,
+      "checks_since_arrival": 269,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 27320,
+      "stable_suffix_checks": 269,
+      "minimum_hq_since_arrival": 0.932373046875,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0009765625,
+      "final": {
+        "step": 30000,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.9912109375,
+        "cover": 1.0,
+        "effective_modes": 7.485291481018066
+      }
+    }
+  ],
+  "checkpoint_audits": [
+    {
+      "candidate": "API-RP2",
+      "gate": "in_run_checkpoint_after_6000",
+      "status": "PASS",
+      "seconds": 8.979887133929878,
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo/reports/reversible-precision/runs/rp2-long/checkpoint-audit-6000.json"
+    },
+    {
+      "candidate": "API-RP2",
+      "gate": "in_run_checkpoint_after_7800",
+      "status": "PASS",
+      "seconds": 9.10312578594312,
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo/reports/reversible-precision/runs/rp2-long/checkpoint-audit-7800.json"
+    },
+    {
+      "candidate": "API-RP2",
+      "gate": "in_run_checkpoint_after_27000",
+      "status": "PASS",
+      "seconds": 4.753682111157104,
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo/reports/reversible-precision/runs/rp2-long/checkpoint-audit-27000.json"
+    }
+  ],
+  "schema": 1,
+  "status": "COMPLETE",
+  "experiment": "ka2_rp2_public_trainer",
+  "schedule": "rp2",
+  "completed_steps": 30000,
+  "seconds": 1087.0728341389913,
+  "torch": "2.13.0+cu126",
+  "cuda_version": "12.6",
+  "device": "cuda:0",
+  "device_name": "NVIDIA RTX A6000",
+  "prehold": {
+    "checks": 120,
+    "expected_checks": 120,
+    "complete": true,
+    "passing_checks": 120,
+    "failing_steps": [],
+    "min_hq": 0.966552734375,
+    "min_modes": 8
+  },
+  "lr_ranges": {
+    "generator_0": {
+      "min": 4.25e-05,
+      "max": 0.00425,
+      "observed_steps": 30000
+    },
+    "prior_1": {
+      "min": 0.00042500000000000003,
+      "max": 0.0085,
+      "observed_steps": 30000
+    },
+    "critic_0": {
+      "min": 4.25e-05,
+      "max": 0.00425,
+      "observed_steps": 30000
+    }
+  },
+  "constant_lr_verified_every_step": false,
+  "final": {
+    "step": 30000,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.9912109375,
+    "cover": 1.0,
+    "effective_modes": 7.485291481018066
+  },
+  "final_ema": {
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.991455078125,
+    "cover": 1.0,
+    "effective_modes": 7.485250473022461
+  },
+  "final_state": {
+    "step": 30000,
+    "trainer_sha256": "72a58e01ed8dfbf85058b3f06f5bb94cc6411e0d19c2859054a3763c61e73cd9",
+    "models_sha256": {
+      "G": "4699b8022cd6cee1ddbb6f183bd556ddc930c3e4c1d952226b0a563c8f3839e1",
+      "D": "7e1e3da0db83fc27e2a37b0876e77126b7b5dbe7527daa4611a6748e6c0b7143",
+      "prior": "a45b8a78ff800e1002aada5b207a2a524b18700ab4c31077173778af0b8cae32",
+      "ema_G": "c338e6ea2976847e28207d42868efd9b994703d947fca619dd563bf3aca650e2",
+      "ema_prior": "04065a77d2bebf32fe054397d14981e0590f4152b4e9a79f5f359806e540a57c"
+    },
+    "optimizers_sha256": [
+      "e9c549c4cfbf0a928becd3a1d6f3e26f1a09561da99a2e3f7e0fdd808a7757a4",
+      "e3e31474f759fb550932b509045e8db97ea0add93aa3d62025c5f5f341c3f355"
+    ],
+    "streams_sha256": {
+      "latent_generator": "f1b00a4a583c9584cedccaebcbf67afe81bc5e0ea5a6ad9a0a0a08ec4913e1a4",
+      "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+      "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+      "noise_generator": "21817bae767f223d1a0e2e0e1c23df1d9a1efe47560876b073abf5532918804b"
+    },
+    "cpu_rng_sha256": "78211cc3c1dd585a8d9c793dc872ce856e0868e5670cab7c6ac573e614d44dfe",
+    "cuda_rng_sha256": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+    "real_stream_sha256": "7e0dc6f502d41fa537a0f27a700c835fbdd8fc45f6393436acbd08ca4da93f63",
+    "means_sha256": "b1b5d5b7519f20d0187a2c8b0ec591e06e9a9d6809572991b79586c4222cbea8"
+  },
+  "frozen_controls": [
+    {
+      "start": 6000,
+      "end": 7800,
+      "first_arrival": null,
+      "delay": null,
+      "passing_since_arrival": 0,
+      "checks_since_arrival": 0,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": null,
+      "stable_suffix_checks": 0,
+      "minimum_hq_since_arrival": null,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 7800,
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0
+      }
+    },
+    {
+      "start": 7800,
+      "end": 27000,
+      "first_arrival": null,
+      "delay": null,
+      "passing_since_arrival": 0,
+      "checks_since_arrival": 0,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": null,
+      "stable_suffix_checks": 0,
+      "minimum_hq_since_arrival": null,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_entire_segment": 0.000244140625,
+      "final": {
+        "step": 27000,
+        "modes": 1,
+        "n_modes": 8,
+        "hq": 0.000244140625,
+        "cover": 0.125,
+        "effective_modes": 1.0
+      }
+    },
+    {
+      "start": 27000,
+      "end": 30000,
+      "first_arrival": null,
+      "delay": null,
+      "passing_since_arrival": 0,
+      "checks_since_arrival": 0,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": null,
+      "stable_suffix_checks": 0,
+      "minimum_hq_since_arrival": null,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 30000,
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0
+      }
+    }
+  ]
+}

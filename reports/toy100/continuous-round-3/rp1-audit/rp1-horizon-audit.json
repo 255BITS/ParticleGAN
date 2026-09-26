@@ -1,0 +1,106 @@
+{
+  "candidate": "regression",
+  "gate": "rp1_horizon_prefix",
+  "status": "FAIL",
+  "seconds": 140.9509615858551,
+  "metrics": {
+    "steps": 1800,
+    "horizons": [
+      1200,
+      7000
+    ],
+    "host_lengths": [
+      7500,
+      9000
+    ],
+    "tensors": 1925,
+    "tensor_differences": {},
+    "scalar_differences": {
+      "train_mode_hold/noise_policy/_counts/output_eval_calls": [
+        1324,
+        1322
+      ],
+      "_run_extended/policy/_counts/output_eval_calls": [
+        1324,
+        1322
+      ],
+      "_run_extended/policy/_counts/output_eval_elements": [
+        5438992,
+        5430776
+      ],
+      "run_toy/noise_policy/_counts/output_eval_elements": [
+        5438992,
+        5430776
+      ],
+      "train_mode_hold/noise_policy/_counts/output_eval_elements": [
+        5438992,
+        5430776
+      ],
+      "run_toy/noise_policy/_counts/output_eval_calls": [
+        1324,
+        1322
+      ]
+    },
+    "traces_equal": true,
+    "cuda_fp32": true
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-horizon-audit.json",
+  "commands": [
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/audit_prefix.py",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/candidate",
+      "--repo",
+      "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "--config",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/candidate/config.json",
+      "--task",
+      "mode_hold",
+      "--backend",
+      "cuda",
+      "--initial-state",
+      "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+      "--output",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-prefix1200",
+      "--network-floor",
+      ".01",
+      "--prior-floor",
+      ".05",
+      "--steps",
+      "7500",
+      "--declared-horizon",
+      "1200"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/audit_prefix.py",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/candidate",
+      "--repo",
+      "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+      "--config",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/candidate/config.json",
+      "--task",
+      "mode_hold",
+      "--backend",
+      "cuda",
+      "--initial-state",
+      "/ml2/hypergan/ParticleGAN-epsilon-gan-followup/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+      "--output",
+      "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-prefix7000",
+      "--network-floor",
+      ".01",
+      "--prior-floor",
+      ".05",
+      "--steps",
+      "9000",
+      "--declared-horizon",
+      "7000"
+    ]
+  ],
+  "paths": [
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-prefix1200/prefix.json",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T173446Z/k3p_extragradient/20260925T173446Z-3726843/repo/reports/toy100/rp1-independent-audit/runs/rp1-prefix7000/prefix.json"
+  ]
+}

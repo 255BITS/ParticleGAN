@@ -1,0 +1,11 @@
+engine=grok
+base=22b4b38fc7171b3ae5b4a54b03162d96a966a3d7
+branch=codex/gan-attempt-20260925T184728Z-3812316
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=k3p_excursion_phase
+gpu=GPU-72c1b506-891d-b8bc-b353-e020585e1c47
+log=/ml2/hypergan/gan-attempts/formulations-20260925T184728Z/k3p_excursion_phase/20260925T184728Z-3812316/grok.log

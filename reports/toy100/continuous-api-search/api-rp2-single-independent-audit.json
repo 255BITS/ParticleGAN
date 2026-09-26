@@ -1,0 +1,188 @@
+{
+  "candidate": "API-RP2",
+  "run": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo/reports/reversible-precision/runs/rp2",
+  "scope": "Read-only source and JSON/manifest audit; no training, model execution, tests, seed changes or worker edits.",
+  "source_zip_sha256": "d95316f81a56599316bbb4469bee6802f18d8486810588bc567601daf8d54832",
+  "declaration_sha256": "aa844bf9252a1729ac72e2704a3183048c4e9581fc7460be36df3834206e1fa4",
+  "source_hash_verification": {
+    "particlegan/__init__.py": true,
+    "particlegan/autoencoder.py": true,
+    "particlegan/conditioning.py": true,
+    "particlegan/diffusion.py": true,
+    "particlegan/discriminators.py": true,
+    "particlegan/gan_loss.py": true,
+    "particlegan/grad_regularizers.py": true,
+    "particlegan/k3p.py": true,
+    "particlegan/ka2.py": true,
+    "particlegan/particle_prior.py": true,
+    "particlegan/precision.py": true,
+    "particlegan/recipes.py": true,
+    "particlegan/training.py": true,
+    "particlegan/vicreg_loss.py": true,
+    "reports/reversible-precision/public_worker.py": true,
+    "reports/reversible-precision/summarize.py": true,
+    "reports/reversible-precision/evaluation-protocols.json": true,
+    "benchmarks/locked_shared/mode_hold.py": true,
+    "benchmarks/locked_shared/mlp.py": true
+  },
+  "artifact_hash_mismatches": [],
+  "changed_package_or_evaluator_sources": [
+    "particlegan/precision.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "unchanged_package_or_evaluator_sources": [
+    "particlegan/__init__.py",
+    "particlegan/autoencoder.py",
+    "particlegan/conditioning.py",
+    "particlegan/diffusion.py",
+    "particlegan/discriminators.py",
+    "particlegan/gan_loss.py",
+    "particlegan/grad_regularizers.py",
+    "particlegan/k3p.py",
+    "particlegan/ka2.py",
+    "particlegan/particle_prior.py",
+    "particlegan/vicreg_loss.py",
+    "benchmarks/locked_shared/mode_hold.py",
+    "benchmarks/locked_shared/mlp.py"
+  ],
+  "governing_protocol_identical": true,
+  "public_factory_path": {
+    "factory_option": "adam_eager_state=True",
+    "initialization": "Recipe.make_generator_optimizer and make_critic_optimizer invoke package Recipe._initialize_adam. Counter tensors and moments are allocated there before returning optimizer.",
+    "package_source": "source.zip::particlegan/recipes.py:297-317",
+    "worker_source": "source.zip::reports/reversible-precision/public_worker.py:67-82",
+    "worker_mutates_optimizer_state": false,
+    "worker_actual_api": "get_recipe plus GANTrainer.step",
+    "snapshot_coverage": "All active package files, added precision controller, worker, summarizer, protocol, evaluator and MLP are present in ZIP; declared hashes verify."
+  },
+  "horizon_independence_static_audit": {
+    "horizon_input": null,
+    "horizon_or_target_notification_leak_found": false,
+    "LR_control": "ReversiblePrecision receives critic gradient disagreement and realized generator/prior update activity, not evaluator scores or target centers. Open/close choices are autonomous.",
+    "noise": "Explicit fixed absolute initialization windows: input noise reaches zero after360 completed updates, output reaches.029 after720. These are bootstrap counts independent of evaluation budget/target timings, not absence of a noise schedule.",
+    "stopping": "GANTrainer budget check disabled with total_steps=None.",
+    "verification_limit": "Static source audit; checkpoint continuation and differing-budget execution are separate requirements."
+  },
+  "initialization_comparisons": {
+    "public_constant": {
+      "models_sha256": true,
+      "optimizers_sha256": false,
+      "streams_sha256": true,
+      "cpu_rng_sha256": true,
+      "cuda_rng_sha256": true,
+      "real_stream_sha256": true,
+      "means_sha256": true
+    },
+    "prior_eager_diagnostic": {
+      "models_sha256": true,
+      "optimizers_sha256": true,
+      "streams_sha256": true,
+      "cpu_rng_sha256": true,
+      "cuda_rng_sha256": true,
+      "real_stream_sha256": true,
+      "means_sha256": true
+    }
+  },
+  "observations_complete": true,
+  "derived_metrics": {
+    "acquisition": {
+      "checks": 240,
+      "passing": 177,
+      "first_passing_step": 640,
+      "delay_after_shift": null,
+      "checks_since_arrival": 177,
+      "passing_since_arrival": 177,
+      "departures": [],
+      "minimum_hq_since_arrival": 0.908203125,
+      "minimum_modes_since_arrival": 8
+    },
+    "prehold": {
+      "checks": 120,
+      "passing": 120,
+      "first_passing_step": 1210,
+      "delay_after_shift": null,
+      "checks_since_arrival": 120,
+      "passing_since_arrival": 120,
+      "departures": [],
+      "minimum_hq_since_arrival": 0.966552734375,
+      "minimum_modes_since_arrival": 8
+    },
+    "shift_through_3600": {
+      "checks": 120,
+      "passing": 71,
+      "first_passing_step": 2900,
+      "delay_after_shift": 500,
+      "checks_since_arrival": 71,
+      "passing_since_arrival": 71,
+      "departures": [],
+      "minimum_hq_since_arrival": 0.967529296875,
+      "minimum_modes_since_arrival": 8
+    },
+    "shift_through_4600": {
+      "checks": 220,
+      "passing": 171,
+      "first_passing_step": 2900,
+      "delay_after_shift": 500,
+      "checks_since_arrival": 171,
+      "passing_since_arrival": 171,
+      "departures": [],
+      "minimum_hq_since_arrival": 0.967529296875,
+      "minimum_modes_since_arrival": 8
+    }
+  },
+  "frozen_control": {
+    "checks": 220,
+    "passing": 0
+  },
+  "autonomous_events": [
+    {
+      "step": 1546,
+      "event": "close",
+      "open": false
+    },
+    {
+      "step": 2437,
+      "event": "reopen",
+      "open": true
+    },
+    {
+      "step": 3170,
+      "event": "close",
+      "open": false
+    }
+  ],
+  "old_eager_diagnostic_comparison": {
+    "metrics.jsonl": {
+      "old_rows": 460,
+      "new_rows": 460,
+      "rows_exactly_equal": 460,
+      "only_differing_keys": [],
+      "equal_ignoring_trainer_hash": true
+    },
+    "learning-rates.jsonl": {
+      "old_rows": 4600,
+      "new_rows": 4600,
+      "rows_exactly_equal": 4600,
+      "only_differing_keys": [],
+      "equal_ignoring_trainer_hash": true
+    },
+    "state-hashes.jsonl": {
+      "old_rows": 46,
+      "new_rows": 46,
+      "rows_exactly_equal": 0,
+      "only_differing_keys": [
+        "trainer_sha256"
+      ],
+      "equal_ignoring_trainer_hash": true
+    }
+  },
+  "configuration_distinction": "API-RP2 is a new explicit public opt-in variant. Its CUDA eager zero-state initialization changes KA2 telemetry arithmetic and first-update state availability. Do not relabel default lazy/CPU-counter KA2 or inherit broader passes; numerical equality is only to the retained worker-mutated CUDA-eager diagnostic.",
+  "caveats": [
+    "The legacy public LR helper functions still expect numeric total_steps; continuous trainer bypasses them, but helper compatibility is not complete.",
+    "Result LR maxima are seeded with base initialization rates rather than only applied rates; per-update logs are the authority.",
+    "Policy diagnostics still use variant=rp1 because RP2 reuses the RP1 controller; candidate identity requires recipe adam_eager_state=True as well.",
+    "Single-shift evidence is not stationary, delayed/repeated, long-term, checkpoint, matching-K3P or broader22 qualification."
+  ],
+  "conclusion": "Public-constructor RP2 single shift supported; exact numeric replay of earlier eager diagnostic, with distinct explicit public configuration. No winner claim."
+}

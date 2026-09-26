@@ -23,7 +23,7 @@ from lib.gym_state_control import training_recipe
 from lib.gym_transition import GymTransitionScaler
 from lib.gym_previous_gan import fake_paths, real_record, adversarial_loss
 from lib.gym_slider_gan import MODULE_KEYS, build_models, hashes, paired_loss, error_loss
-from particlegan import learning_rate_scale
+from particlegan import scale_learning_rates
 
 DEFAULTS = dict(arm='sliders', steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500], log_interval=250, seed=24003, device='cuda:1',
@@ -105,17 +105,18 @@ def train(cfg):
     values = {k: torch.as_tensor(v, device=device) for k,v in records.items() if k not in ('episode_ids', 'steps')}
     recipe = training_recipe(cfg)
     opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
-        encoder=bundle['E'], fused=device.type == 'cuda')
-    opt_r = torch.optim.Adam(bundle['R'].parameters(), lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas, fused=device.type == 'cuda')
+        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
+    opt_r = recipe.make_critic_optimizer(bundle['R'], ema_critic=copy.deepcopy(bundle['R']), fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d, opt_r)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
-    capper = recipe.make_gradient_penalty(lazy_k=4, coeff=1., kappa=1., norm='l2', method='autograd')
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
+    r_penalty = recipe.make_critic_penalty(opt_r)
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)
            for k,offset in dict(data=11, d_data=31, latent=51, contact=61, d_latent=71, d_contact=81, error_noise=151, d_error_noise=161).items()}
     reg_rng = {role: torch.Generator(device=device).manual_seed(cfg['seed'] + 100 + i)
                for i,role in enumerate(bundle['D'].roles())}
+    penalties = {role: recipe.make_critic_penalty(opt_d) for role, generator in reg_rng.items()}
     digests = {k: hashlib.sha256() for k in ('data', 'd_data')}
     def batch(name):
         ids = torch.randint(len(triples), (cfg['batch_size'],), device=device, generator=rng[name])
@@ -150,10 +151,7 @@ def train(cfg):
         started = segment = time.perf_counter()
         optimization_seconds = 0.
         for step in range(1, cfg['steps'] + 1):
-            scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, base in zip(optimizers, rates):
-                for group, rate in zip(opt.param_groups, base):
-                    group['lr'] = rate * scale
+            scale, _ = scale_learning_rates(step - 1, recipe, optimizers, rates, bundle['prior'])
             opt_g.zero_grad(set_to_none=True)
             bundle['D'].requires_grad_(True)
             bundle['R'].requires_grad_(True)
@@ -161,10 +159,10 @@ def train(cfg):
             with torch.no_grad():
                 df, d_decoded = fake_paths(bundle, db, rng['d_latent'], rng['d_contact'])
             dl, dt = adversarial_loss(bundle['D'], real_record(bundle, db), df, db['terrain'], gan,
-                reg=reg, step=step, rngs=reg_rng)
+                reg=penalties)
             if not torch.isfinite(dl):
                 raise FloatingPointError(f'Nonfinite D loss at {step}')
-            rl, rt = error_loss(bundle['R'], d_decoded, real_record(bundle, db), step, rng['d_error_noise'], capper=capper)
+            rl, rt = error_loss(bundle['R'], d_decoded, real_record(bundle, db), step, rng['d_error_noise'], penalty=r_penalty)
             if not torch.isfinite(rl):
                 raise FloatingPointError(f'Nonfinite paired-error D loss at {step}')
             opt_r.zero_grad(set_to_none=True)

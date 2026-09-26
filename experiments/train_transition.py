@@ -23,7 +23,7 @@ from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionCritics, TransitionEncoder, encoded_transition, composed_transition,
                             metrics, shuffle_blocks, residual)
 from lib.transition_visuals import render
-from particlegan import get_recipe, learning_rate_scale, ucd_loss
+from particlegan import get_recipe, scale_learning_rates, ucd_loss
 
 
 DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
@@ -32,7 +32,7 @@ DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
                 d_conditioning="concat", g_class_scale=8.0, g_context_scale=1.0,
                 num_particles=1024, critic_mode="joint_marginals", marginal_width=128, marginal_weight=1.0,
                 length=64, geometry_mode="discrete", seed=24002, device="cuda:0",
-                steps=28_000, batch_size=get_recipe().batch_size,
+                steps=28_000, batch_size=256,
                 log_interval=250, eval_per_context=512, normalization_samples=32768,
                 out_dir="results/transition/default", live_log="results/transition/live.log",
                 save_checkpoint=True)
@@ -90,8 +90,13 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, allow_nan=False)+"\n")
 
 
-def discriminator_loss(d, real, fake, c, context, gan, reg, step, rngs, ucd_weight):
-    """Each D has its own Rp, UCD and bcap objective, in its own input space."""
+def discriminator_loss(d, real, fake, c, context, gan, penalties, ucd_weight):
+    """Each D has its own Rp, UCD and gradient-penalty objective, in its own input space.
+
+    ``penalties`` maps role -> ``recipe.make_critic_penalty(opt_d, ...)`` (or is
+    one penalty for every role); each role's EMA critic is the same-named
+    submodule of the optimizer's EMA module.
+    """
     terms = {}
     for name in d.roles():
         critic = d.critic_for(name)
@@ -99,8 +104,7 @@ def discriminator_loss(d, real, fake, c, context, gan, reg, step, rngs, ucd_weig
         xf, _ = d.inputs(name, fake, context)
         dr, cr = critic(xr, c, role_context)
         df, cf = critic(xf, c, role_context)
-        penalty, _ = reg.penalty(lambda x: critic(x, c, role_context)[0], xr, xf, step,
-                                 rngs[name], collect_stats=False)
+        penalty = (penalties[name] if isinstance(penalties, dict) else penalties)(critic, xr, xf, c, role_context)
         classification = ucd_loss(cr, cf, c, weight=ucd_weight) if critic.conditioning == "ucd" else dr.new_zeros(())
         terms[name] = gan.d_loss(dr, df) + classification + penalty
     return sum(terms.values()), terms
@@ -271,12 +275,13 @@ def train(cfg):
     ema_g, ema_prior = copy.deepcopy(g), copy.deepcopy(prior)
     for module in (ema_g, ema_prior):
         module.eval().requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, fused=device.type == "cuda")
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+                                          fused=device.type == "cuda")
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"]+i) for i in (11, 12)]
-    reg_rngs = {name: torch.Generator(device=device).manual_seed(cfg["seed"]+13+i)
-                for i, name in enumerate(d.roles())}
+    # One penalty per role, all paired with opt_d.
+    penalties = {name: recipe.make_critic_penalty(opt_d) for name in d.roles()}
 
     def batch():
         c, geom, tick, real = toy.batch(cfg["batch_size"], rngs[0])
@@ -298,7 +303,7 @@ def train(cfg):
         log("G1 -> st; G2 -> at; G3 -> st+1; same z and context; D(st, at, st+1)"
             if cfg["architecture"] == "branches" else "G -> (st, at, st+1); D(st, at, st+1)")
         log(f"MoG recipe: {prior.num_particles} components, sigma_rel={prior.sigma_rel}, sigma={float(prior.sigma):.5f}; "
-            f"Rp logistic, conditioning={cfg['d_conditioning']}, b_cap per critic every step, raw-center spread, cosine LR, EMA")
+            f"Rp logistic, conditioning={cfg['d_conditioning']}, K3P penalty per critic every step, raw-center spread, cosine LR, EMA")
         log(f"critics={list(d.critics)}; G loss = joint + {cfg['marginal_weight']} * mean(marginals) when enabled")
         if e is not None:
             log("E(st,at) -> z -> G1/G2/G3; real triple MSE + synthetic st/at reconstruction; "
@@ -307,10 +312,7 @@ def train(cfg):
         started = time.perf_counter()
         with (out / "metrics.jsonl").open("w", buffering=1) as metric_log:
             for step in range(1, cfg["steps"]+1):
-                lr_scale = learning_rate_scale(step-1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-                for opt, rates in zip((opt_g, opt_d), base_lrs):
-                    for group, rate in zip(opt.param_groups, rates):
-                        group["lr"] = rate*lr_scale
+                lr_scale, _ = scale_learning_rates(step-1, recipe, (opt_g, opt_d), base_lrs, prior)
                 d.requires_grad_(True)
                 c, context, real = batch()
                 with torch.no_grad():
@@ -319,8 +321,7 @@ def train(cfg):
                         composed = composed_transition(e, g, prior, fake, c, context)[0]
                         # Same D batch size, half prior joint / half composed joint.
                         fake = torch.cat([fake[:len(c)//2], composed[len(c)//2:]], 0)
-                ld, d_terms = discriminator_loss(d, real, fake, c, context, gan, reg, step,
-                                                 reg_rngs, recipe.ucd_weight)
+                ld, d_terms = discriminator_loss(d, real, fake, c, context, gan, penalties, recipe.ucd_weight)
                 opt_d.zero_grad(set_to_none=True)
                 ld.backward()
                 opt_d.step()

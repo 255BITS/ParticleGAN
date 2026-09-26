@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, GradientPenalty, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -49,7 +49,6 @@ DEFAULTS = {
     'fourier': 2,
     'noise_lr_mult': 1.0,
     'noise_reg': 0.0,
-    'reg_fd_eps': 0.05,
     'reg_sync_stats': True,
     'fused_adam': False,
     'drop_xt': False,
@@ -65,7 +64,7 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 
 
 def training_recipe(cfg):
-    """Resolve legacy experiment fields into the public, caller-owned recipe."""
+    """Resolve experiment fields into the public, caller-owned recipe."""
     return get_recipe(
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
         num_classes=cfg["classes"],
@@ -76,9 +75,9 @@ def training_recipe(cfg):
         ucd_target=cfg["ucd_target"], ucd_weight=cfg["ucd_lambda"],
         alpha_bar=cfg["alpha_bar"], batch_size=cfg["batch_size"], total_steps=cfg["steps"],
         lr=cfg["lr"], d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
-        betas=(cfg["beta1"], cfg.get("beta2", .999)), loss_type=cfg["loss_type"], gan_mode=cfg["gan_mode"],
-        reg_arm=cfg["reg_arm"], reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
-        reg_every=cfg["reg_every"], reg_method=cfg["reg_method"], prior_reg=cfg["prior_reg"],
+        betas=(cfg["beta1"], cfg.get("beta2", .999)),
+        reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
+        reg_every=cfg["reg_every"], prior_reg=cfg["prior_reg"],
         ema_decay=cfg["ema"], lr_anneal_start=cfg["lr_anneal_start"], lr_floor=cfg["lr_floor"],
     )
 
@@ -92,9 +91,10 @@ def make_prior(cfg, device):
 
 
 def validate(cfg):
-    GradientPenalty(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
-                    lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
-                    fd_eps=cfg.get("reg_fd_eps", .05))
+    removed = [k for k in ("reg_arm", "loss_type", "gan_mode", "reg_method", "reg_fd_eps") if k in cfg]
+    if removed:
+        raise ValueError(f"{removed} were removed: the objective and critic penalty are the recipe default")
+    training_recipe(cfg)  # validates every recipe field, including the penalty settings
     target = cfg.get("ucd_target", "class")
     if target not in ("class", "time_class") or (target == "time_class" and (cfg["model"] != "ddgan" or cfg["d_mode"] != "ucd")):
         raise ValueError("time_class UCD requires DDGAN with a UCD discriminator")
@@ -209,14 +209,14 @@ def train(cfg):
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for model in (ema_g, ema_prior, ema_noise):
         model.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, fused=cfg["fused_adam"])
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     if cfg["noise"] == "learned":
         # A research-only source with its own rate; ordinary optimizers stay extensible.
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = recipe.make_loss()
-    reg = recipe.make_gradient_penalty(fd_eps=cfg["reg_fd_eps"])
+    penalty = recipe.make_critic_penalty(opt_d, collect_stats=cfg.get("reg_sync_stats", True))
     spread = recipe.make_prior_regularizer()
 
     def batch():
@@ -260,11 +260,7 @@ def train(cfg):
             if step == 1 or (step - 1) % cfg["eval_interval"] == 0:
                 torch.cuda.synchronize()
                 block_start = time.perf_counter()
-            scale = learning_rate_scale(step - 1, recipe.total_steps,
-                                        recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, base in zip((opt_g, opt_d), bases):
-                for group, lr in zip(opt.param_groups, base):
-                    group["lr"] = lr * scale
+            scale_learning_rates(step - 1, recipe, (opt_g, opt_d), bases, prior)
             d.requires_grad_(True)
             c, real, xt, t = batch()
             with torch.no_grad():
@@ -275,8 +271,7 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 targets = d.ucd_labels(c, t)
                 loss_d = loss_d + ucd_loss(cr, cf, targets, weight=cfg["ucd_lambda"])
-            penalty, _ = reg.penalty(lambda x: d(x, c, xt, t)[0], real, xf, step, rngs["penalty"], collect_stats=cfg.get("reg_sync_stats", True))
-            loss_d = loss_d + penalty
+            loss_d = loss_d + penalty(d, real, xf, c, xt=xt, t=t)
             opt_d.zero_grad(set_to_none=True)
             loss_d.backward()
             opt_d.step()

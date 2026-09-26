@@ -1,0 +1,11 @@
+engine=grok
+base=140e82d26eb51507adfd28e20471225b46dc67dd
+branch=codex/gan-attempt-20260925T185807Z-3826065
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=k3p_anchor_force_balance
+gpu=GPU-72c1b506-891d-b8bc-b353-e020585e1c47
+log=/ml2/hypergan/gan-attempts/formulations-20260925T185807Z/k3p_anchor_force_balance/20260925T185807Z-3826065/grok.log

@@ -1,0 +1,1 @@
+nm1 finished both gates. The shift never recovered, and the pre-shift ring sat at seven modes with high HQ. I'm reading the hold verdict and supervisor notes before changing which player gets the momentum.

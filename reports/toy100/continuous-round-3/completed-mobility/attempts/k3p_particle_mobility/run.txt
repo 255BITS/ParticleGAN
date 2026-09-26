@@ -1,0 +1,11 @@
+engine=grok
+base=c674aa07c96ffa1e4bd1c0128939791012ae35fb
+branch=codex/gan-attempt-20260925T181045Z-3769156
+model=grok-4.7
+effort=default
+minutes=45
+candidates=3
+workers=1
+focus=k3p_particle_mobility
+gpu=GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69
+log=/ml2/hypergan/gan-attempts/formulations-20260925T181045Z/k3p_particle_mobility/20260925T181045Z-3769156/grok.log

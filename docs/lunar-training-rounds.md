@@ -29,7 +29,7 @@ shows that its slow controller fails on successful expert training resets.
 ## Fixed-data mechanism and budget comparisons
 
 The audits held expert data, simulator variant, policy architecture, 8,000
-cloning updates, paired Rp logistic loss, `b_cap` cadence, optimizer settings,
+cloning updates, paired Rp logistic loss, gradient-cap cadence, optimizer settings,
 and training seed fixed. The old raw-action world had too little data around
 the off-to-up ignition jump. A training-only collector replayed exact expert
 prefixes on the world-model training seeds and took six one-step main-action

@@ -1,0 +1,143 @@
+{
+  "acquisition": {
+    "start": 0,
+    "end": 2400,
+    "first_arrival": 790,
+    "arrival_delay": 790,
+    "passing_since_arrival": 159,
+    "checks_since_arrival": 162,
+    "every_departure": [
+      1390,
+      1420,
+      1430
+    ],
+    "min_hq_since_arrival": 0.769287109375,
+    "min_modes_since_arrival": 8,
+    "min_hq_all": 0.01171875,
+    "final_stable_suffix_checks": 97,
+    "final_stable_suffix_start": 1440,
+    "final_stable_suffix_span": 960,
+    "final": {
+      "step": 2400,
+      "modes": 8,
+      "hq": 0.973876953125
+    }
+  },
+  "retention": {
+    "passing": 117,
+    "total": 120,
+    "min_hq": 0.769287109375,
+    "failing_steps": [
+      1390,
+      1420,
+      1430
+    ]
+  },
+  "transitions": [
+    {
+      "start": 2400,
+      "end": 4600,
+      "first_arrival": 2800,
+      "arrival_delay": 400,
+      "passing_since_arrival": 181,
+      "checks_since_arrival": 181,
+      "every_departure": [],
+      "min_hq_since_arrival": 0.90234375,
+      "min_modes_since_arrival": 8,
+      "min_hq_all": 0.001708984375,
+      "final_stable_suffix_checks": 181,
+      "final_stable_suffix_start": 2800,
+      "final_stable_suffix_span": 1800,
+      "final": {
+        "step": 4600,
+        "modes": 8,
+        "hq": 0.9951171875
+      }
+    }
+  ],
+  "comparison_3600": {
+    "start": 2400,
+    "end": 3600,
+    "first_arrival": 2800,
+    "arrival_delay": 400,
+    "passing_since_arrival": 81,
+    "checks_since_arrival": 81,
+    "every_departure": [],
+    "min_hq_since_arrival": 0.90234375,
+    "min_modes_since_arrival": 8,
+    "min_hq_all": 0.001708984375,
+    "final_stable_suffix_checks": 81,
+    "final_stable_suffix_start": 2800,
+    "final_stable_suffix_span": 800,
+    "final": {
+      "step": 3600,
+      "modes": 8,
+      "hq": 0.989501953125
+    }
+  },
+  "frozen": {
+    "passing": 0,
+    "total": 220
+  },
+  "policy_ranges": {
+    "mobility": [
+      0.014520142138746913,
+      0.995
+    ],
+    "alignment": [
+      -0.9715109636651991,
+      0.07524445402766734
+    ],
+    "data_score": [
+      0.0,
+      11.862115859985352
+    ],
+    "data_drive": [
+      0.0,
+      1.0
+    ]
+  },
+  "final_policy": {
+    "data_memory": 2.5828504091073067e-05,
+    "variant": "dv2",
+    "mobility": 0.06491172482668062,
+    "alignment": -0.13602023909546318,
+    "data_score": 1.493107557296753,
+    "data_drive": 0.0,
+    "last_cosine": 0.1391875296831131,
+    "updates": 4600,
+    "reopens": 1,
+    "closed": true
+  },
+  "rates": {
+    "generator_0": [
+      0.00010359349804877764,
+      0.0042289625
+    ],
+    "prior_1": [
+      0.0005422501477703814,
+      0.008459625
+    ],
+    "critic_0": [
+      0.00010359349804877764,
+      0.0042289625
+    ],
+    "input_noise": [
+      0.0,
+      0.0
+    ],
+    "output_noise": [
+      0.029,
+      0.029
+    ]
+  },
+  "initialization_matches_original": {
+    "models_sha256": true,
+    "optimizers_sha256": true,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  }
+}

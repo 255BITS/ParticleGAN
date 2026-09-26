@@ -1,0 +1,507 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
+  "observed_utc": "2026-09-25T18:10:06.918248+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_local_curvature/20260925T172651Z-3715973",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "f2e4719e06fb79145e44509abe154a3562297daecec0f167df3d71c2784e6aca",
+        "final.md": "62ea9cd518ee791658c3139e0911b2089a9392c4883ab1398910fa304c410ad7",
+        "tests.jsonl": "f7b8787dfde93dd190fdac2d5ffcd3a5bc8aebedb9aacb83bb97e552906f9f21",
+        "run.txt": "84f982cf3bdfdd475c8aecfd2cfaa81b82b82e910e50325cae13a74d48215e8c",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z/k3p_responsive_precision/20260925T172651Z-3715977",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "6f085105f5d3a54df426f52509371410202ee80d2bf2e0af0308b915fd733618",
+        "final.md": "23363f71a70028019fa782d8e21e30b0f629d4e4f5bdeba4a2c366cced0f419b",
+        "tests.jsonl": "1a837742932073b7b258fbc41d31628db7cd78708500bc0d8359e9671e3db28e",
+        "run.txt": "470f7c085999fc0d5d84791266f8a3d4abfa8aadfbc5e609c7eb1abbf75fceee",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "FAIL": 7,
+    "PASS": 3,
+    "UNCONFIRMED": 1,
+    "ERROR": 3,
+    "SKIPPED": 2
+  },
+  "records": [
+    {
+      "candidate": "lc1_secant_growth",
+      "gate": "ring_hold_extension",
+      "status": "FAIL",
+      "seconds": 150.548,
+      "metrics": {
+        "status": "POST_CONVERGENCE_FAIL",
+        "good_hold_updates": 314,
+        "hold_budget": 1200,
+        "extension_checks": null,
+        "extension_status": "NOT_RUN",
+        "converged_step": 3033,
+        "settling_checks": 1833,
+        "settling_failures": 1255,
+        "first_hold_failure": 3348,
+        "hold_min_hq": 0.877685546875,
+        "hold_min_modes": 8,
+        "post_failure_min_hq": 0.841064453125,
+        "applied_lr_g": [
+          0.00425,
+          0.00425
+        ],
+        "applied_lr_d": [
+          0.00425,
+          0.00425
+        ],
+        "final_s": 1.0,
+        "anchor_calls": 0,
+        "pure_a_calls": 3648,
+        "note": "absolute secant stayed at the base cap; mixing weight remained 1"
+      },
+      "artifact": "reports/toy100/k3p-local-curvature/runs/lc1-hold/result.json",
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "ledger_row": 1,
+      "snapshot": "evidence/d335987aef52b8fa8bab9d9dfd4dde3ee1f1c4d56310b99afdb50feaa4f3978f.json.gz",
+      "artifact_sha256": "d335987aef52b8fa8bab9d9dfd4dde3ee1f1c4d56310b99afdb50feaa4f3978f"
+    },
+    {
+      "candidate": "lc1_secant_growth",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 147.594,
+      "metrics": {
+        "status": "FAIL",
+        "stationary_passing": "0/5",
+        "stationary_min_modes": 2,
+        "stationary_min_hq": 0.094970703125,
+        "continued_hold": "0/120",
+        "continued_min_hq": 0.0,
+        "deadline": "56/81",
+        "deadline_pass": false,
+        "delay_updates": null,
+        "shift_before": {
+          "modes": 7,
+          "hq": 0.893798828125
+        },
+        "final_modes": 4,
+        "final_hq": 0.36767578125,
+        "optimizer_updates": 3600,
+        "applied_g_lr": 0.00425,
+        "applied_d_lr": 0.00425,
+        "anchor_calls": 0,
+        "host_group_lr_at_end": [
+          4.25e-05,
+          0.000425
+        ]
+      },
+      "artifact": "reports/toy100/k3p-local-curvature/runs/lc1-shift/result.json",
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "ledger_row": 2,
+      "snapshot": "evidence/02a2f84683f5840a3e206ea4614dfd1391595057cd7bd273dff3ec9da9b6e95e.json.gz",
+      "artifact_sha256": "02a2f84683f5840a3e206ea4614dfd1391595057cd7bd273dff3ec9da9b6e95e"
+    },
+    {
+      "candidate": "lc2_calibrated_secant",
+      "gate": "ring_hold_extension",
+      "status": "FAIL",
+      "seconds": 353.287,
+      "metrics": {
+        "status": "NOT_CONVERGED",
+        "good_hold_updates": 0,
+        "settling_checks": 4800,
+        "settling_failures": 4800,
+        "extension_status": "NOT_RUN",
+        "last_modes": 7,
+        "last_hq": 0.999755859375,
+        "last_step": 6300,
+        "calibrated_at": {
+          "d": 141,
+          "g": 168,
+          "prior": 175
+        },
+        "anchor_extra_forwards": 6129,
+        "applied_lr_hit_floor": true
+      },
+      "artifact": "reports/toy100/k3p-local-curvature/runs/lc2-hold/result.json",
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "ledger_row": 3,
+      "snapshot": "evidence/03d9665976a810b91dc4f26c2f7cd95128de0fecf1030b5118bbc962a3e3ddf6.json.gz",
+      "artifact_sha256": "03d9665976a810b91dc4f26c2f7cd95128de0fecf1030b5118bbc962a3e3ddf6"
+    },
+    {
+      "candidate": "lc2_calibrated_secant",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 194.0,
+      "metrics": {
+        "status": "FAIL",
+        "stationary": "0/5",
+        "stationary_min_modes": 6,
+        "stationary_min_hq": 1.0,
+        "continued_hold": "0/120",
+        "deadline": "0/81",
+        "deadline_min_modes": 4,
+        "deadline_min_hq": 0.422607421875,
+        "shift_before": {
+          "modes": 6,
+          "hq": 1.0
+        },
+        "final_modes": 6,
+        "final_hq": 0.6640625,
+        "optimizer_updates": 3600
+      },
+      "artifact": "reports/toy100/k3p-local-curvature/runs/lc2-shift/result.json",
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "ledger_row": 4,
+      "snapshot": "evidence/a1ceb4739a76f691c86a0c238c0b8310c3a4f263ab781d8c8e54f97e12579677.json.gz",
+      "artifact_sha256": "a1ceb4739a76f691c86a0c238c0b8310c3a4f263ab781d8c8e54f97e12579677"
+    },
+    {
+      "candidate": "lc3_step_independent_secant",
+      "gate": "ring_hold_extension",
+      "status": "FAIL",
+      "seconds": 333.045,
+      "metrics": {
+        "status": "NOT_CONVERGED",
+        "good_hold_updates": 0,
+        "settling_checks": 4800,
+        "settling_failures": 4800,
+        "extension_status": "NOT_RUN",
+        "last_step": 6300,
+        "last_modes": 4,
+        "last_hq": 1.0,
+        "applied_lr_min": {
+          "d": 0.0007861613373179604,
+          "g": 0.0006918634362503809,
+          "prior": 0.0006208317974545682
+        },
+        "final_s": 0.3571,
+        "extra_critic_forwards": 5655,
+        "blend_calls": 5656,
+        "pure_a_calls": 644
+      },
+      "artifact": "reports/toy100/k3p-local-curvature/runs/lc3-hold/result.json",
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "ledger_row": 5,
+      "snapshot": "evidence/f63bcc421600a521e14a304c54e7c9098009f2028f326093b4f7a9987c6c6e5a.json.gz",
+      "artifact_sha256": "f63bcc421600a521e14a304c54e7c9098009f2028f326093b4f7a9987c6c6e5a"
+    },
+    {
+      "candidate": "lc3_step_independent_secant",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 156.413,
+      "metrics": {
+        "status": "FAIL",
+        "stationary": "0/5",
+        "stationary_min_modes": 5,
+        "stationary_min_hq": 1.0,
+        "continued_hold": "0/120",
+        "continued_min_modes": 0,
+        "deadline": "0/81",
+        "deadline_min_modes": 2,
+        "deadline_min_hq": 0.256591796875,
+        "shift_before": {
+          "modes": 7,
+          "hq": 0.901123046875
+        },
+        "final_modes": 5,
+        "final_hq": 0.9990234375,
+        "optimizer_updates": 3600,
+        "applied_at_3600": {
+          "d": 0.00139924,
+          "g": 0.00121916,
+          "prior": 0.00087474
+        },
+        "final_s": 0.6515,
+        "extra_critic_forwards": 2765
+      },
+      "artifact": "reports/toy100/k3p-local-curvature/runs/lc3-shift/result.json",
+      "lane": "k3p_local_curvature",
+      "engine": "grok",
+      "ledger_row": 6,
+      "snapshot": "evidence/3bad463cb8361a055efaad814937c0600452fb66b0769bc2ff6a13815d601387.json.gz",
+      "artifact_sha256": "3bad463cb8361a055efaad814937c0600452fb66b0769bc2ff6a13815d601387"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "ring_hold_and_extension",
+      "status": "PASS",
+      "seconds": 101.29575955914333,
+      "metrics": {
+        "converged_step": 1400,
+        "settling_checks": 200,
+        "settling_failures": 0,
+        "hold_checks": 1200,
+        "hold_passing": 1200,
+        "hold_min_hq": 0.968505859375,
+        "hold_min_modes": 8,
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "extension_min_hq": 0.968017578125,
+        "extension_min_modes": 8,
+        "extension_steps": "2601-2900",
+        "first_hold_failure": null,
+        "extra_critic_forwards": 2095,
+        "anchor_started_call": 805,
+        "false_reopen": false
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-hold/result.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 1,
+      "snapshot": "evidence/41f7b935a3e71249cd95b0973fa977ba0a63e9fb8fdbd2d58dbc75021e7cfcdb.json.gz",
+      "artifact_sha256": "41f7b935a3e71249cd95b0973fa977ba0a63e9fb8fdbd2d58dbc75021e7cfcdb"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "target_shift_recovery",
+      "status": "UNCONFIRMED",
+      "seconds": 107.73915196885355,
+      "metrics": {
+        "driver_status": "UNCONFIRMED",
+        "stationary_checks": 5,
+        "stationary_passing": 5,
+        "stationary_min_hq": 0.998779296875,
+        "continued_hold_checks": 120,
+        "continued_hold_passing": 120,
+        "continued_hold_min_hq": 0.9755859375,
+        "continued_hold_min_modes": 8,
+        "recovery_checks": 120,
+        "recovery_passing": 108,
+        "recovery_deadline_checks": 81,
+        "recovery_deadline_passing": 81,
+        "recovery_deadline_pass": true,
+        "recovery_delay_updates": 310,
+        "recovery_stable_from_step": 2710,
+        "deadline_min_modes": 8,
+        "deadline_min_hq": 0.913818359375,
+        "deadline_fail_steps": [],
+        "early_recovery_fail_steps": [
+          2410,
+          2420,
+          2430,
+          2440,
+          2450,
+          2460,
+          2470,
+          2480,
+          2500,
+          2510,
+          2680,
+          2700
+        ],
+        "final_modes": 8,
+        "final_hq": 0.999755859375,
+        "ema_modes": 8,
+        "ema_hq": 0.999755859375,
+        "optimizer_updates_each_role": 3600,
+        "extra_critic_forwards": 2795,
+        "anchor_started_call": 805,
+        "note": "live windows pass; matched frozen control still running"
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-shift/result.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 2,
+      "snapshot": "evidence/3d1a4913ca503b59a1c16685bf2b8ea79a9cc3574de0b21f0a3a5f09ff087d7d.json.gz",
+      "artifact_sha256": "3d1a4913ca503b59a1c16685bf2b8ea79a9cc3574de0b21f0a3a5f09ff087d7d"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "matched_frozen_control",
+      "status": "PASS",
+      "seconds": 123.42486393288709,
+      "metrics": {
+        "live_deadline_passing": 81,
+        "live_deadline_checks": 81,
+        "frozen_deadline_passing": 0,
+        "frozen_deadline_checks": 81,
+        "frozen_min_modes": 0,
+        "frozen_min_hq": 0.0,
+        "frozen_optimizer_updates": [
+          2400,
+          2400
+        ],
+        "sensitivity_pass": true,
+        "pre_shift_diagnostic_equal": true,
+        "stationary_equal": true,
+        "continued_hold_equal": true,
+        "shift_pair_equal": true,
+        "source_sha256_matches_runtime": true,
+        "note": "match_frozen_control returned PASS. Active mode/noise_horizon/diagnostic_every/dense_after/dense_until/freeze_after_shift were restored from the hashed shift.py call because that wrapper omitted them. source_sha256 and runtime were recomputed from the frozen runtime with one thread and matched the control's saved provenance. Pre-shift diagnostic, stationary, continued_hold, and shift_pair compared from the saved results."
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-shift-frozen/result.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 3,
+      "snapshot": "evidence/078e9ba19c76071f099a00019d61343f8c9bd5226ccad5c999fcd32ae3319822.json.gz",
+      "artifact_sha256": "078e9ba19c76071f099a00019d61343f8c9bd5226ccad5c999fcd32ae3319822"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "preshift_hash_capture",
+      "status": "ERROR",
+      "seconds": 91.82733534602448,
+      "metrics": {
+        "run": "rp1-shift-capture",
+        "error": "hook device mismatch at step 2400 allclose; observation only, canonical scores unchanged",
+        "rerun": "capture2"
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-shift-capture/result.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 4,
+      "snapshot": "evidence/9bcc5414e676c1a7c40bda8cb422d1df1025ee55f7dbc4bcea9efef7eebd85b8.json.gz",
+      "artifact_sha256": "9bcc5414e676c1a7c40bda8cb422d1df1025ee55f7dbc4bcea9efef7eebd85b8"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "preshift_hash_capture",
+      "status": "ERROR",
+      "seconds": 86.76392439799383,
+      "metrics": {
+        "run": "rp1-shift-frozen-capture",
+        "error": "hook device mismatch at step 2400 allclose; observation only, canonical scores unchanged",
+        "rerun": "capture2"
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-shift-frozen-capture/result.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 5,
+      "snapshot": "evidence/7fd865e0a72142519359ef1c9261bf285c53d2feee4fc7b0236233ca660a325b.json.gz",
+      "artifact_sha256": "7fd865e0a72142519359ef1c9261bf285c53d2feee4fc7b0236233ca660a325b"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "preshift_state_match",
+      "status": "PASS",
+      "seconds": null,
+      "metrics": {
+        "active_deadline": "81/81",
+        "frozen_deadline": "0/81",
+        "diagnostic_matches_original_81": true,
+        "identical": [
+          "generator",
+          "critic",
+          "prior",
+          "opt_g",
+          "opt_d",
+          "ema_g",
+          "ema_z",
+          "critic_ema",
+          "controller",
+          "response_previous",
+          "latent_calls",
+          "cuda_rng",
+          "cpu_rng",
+          "host_stream",
+          "means_pre_shift",
+          "means_post_shift"
+        ],
+        "match_frozen_control": "PASS",
+        "note": "observation rerun of the same source; full probe fields saved; pre-shift hashes equal; means_pre_shift subtracts the host shift because the hook runs after it"
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-shift-capture3/preshift-hashes.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 6,
+      "snapshot": "evidence/1d3744331ed66a236c577c9bdc23c5b59b73ce7ab46917faf0ba3b6bfe730066.json.gz",
+      "artifact_sha256": "1d3744331ed66a236c577c9bdc23c5b59b73ce7ab46917faf0ba3b6bfe730066"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "native:grid100",
+      "status": "FAIL",
+      "seconds": 155,
+      "metrics": {
+        "returncode": 0,
+        "seed": 1234,
+        "kind": "native7000",
+        "coverage": "PASS",
+        "accuracy": "FAIL",
+        "steps": 7000
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/runs/rp1-native-grid100/result.json",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 7,
+      "snapshot": "evidence/5756928ed93ae811fffef00614aa59c615c55a2f8ce14f274161c9503553d20f.json.gz",
+      "artifact_sha256": "5756928ed93ae811fffef00614aa59c615c55a2f8ce14f274161c9503553d20f"
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "native:rotated100",
+      "status": "SKIPPED",
+      "seconds": 0,
+      "metrics": {
+        "seed": 1234,
+        "reason": "stopped after grid100 accuracy FAIL; not a completed run"
+      },
+      "artifact": null,
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 8
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "native:staggered100",
+      "status": "SKIPPED",
+      "seconds": 0,
+      "metrics": {
+        "seed": 1234,
+        "reason": "stopped after grid100 accuracy FAIL; not a completed run"
+      },
+      "artifact": null,
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 9
+    },
+    {
+      "candidate": "rp1_signal_close",
+      "gate": "native:rotated100_training_log",
+      "status": "ERROR",
+      "seconds": null,
+      "metrics": {
+        "seed": 1234,
+        "canonical_verdict": "NOT_WRITTEN",
+        "last_logged_step": 7000,
+        "last_live_modes": 97,
+        "last_live_hq": 0.8514,
+        "note": "process killed after grid100 accuracy FAIL, before coverage/accuracy suites wrote result.json; log is not a gate score"
+      },
+      "artifact": "reports/toy100/k3p-responsive-precision/logs/rp1-native-rotated100.log",
+      "mechanism_sha256": "ed49869c6e06e1ac638cf04dba36b123aa7cb3b883650d7e16aa8843aaa22d14",
+      "lane": "k3p_responsive_precision",
+      "engine": "grok",
+      "ledger_row": 10
+    }
+  ]
+}

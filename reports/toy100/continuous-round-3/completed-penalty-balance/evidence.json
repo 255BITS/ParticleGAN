@@ -1,0 +1,249 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z",
+  "observed_utc": "2026-09-25T18:58:07.483778+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "ba23901b39725dec87933b7efe9ef53c43e979bf94e46e11aaed0300fffcf362",
+        "final.md": "ca1a6c63a6fb5c736ee44e5f73010af1e8eadee34604e3aa5b2e63f09cd8303e",
+        "tests.jsonl": "16354acb0552a96c0fae7322856371c38d3649c5525a9c23376915f56f74e402",
+        "run.txt": "6d77739f67f096850200f17dd8e2bd2b2bb8934a7b1e6f590a164bc8e4c88c12",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "PASS": 5,
+    "FAIL": 3
+  },
+  "records": [
+    {
+      "candidate": "pb0_force_measure",
+      "gate": "warm_probe_force_identity",
+      "status": "PASS",
+      "seconds": 184.066,
+      "metrics": {
+        "extra_penalty_backwards": 3600,
+        "decompose_errors": 0,
+        "pen_coeff_not_one": 0,
+        "penalty_detached_calls": 0,
+        "matched_params": 7,
+        "optimizer_params": 8,
+        "note": "coeff stayed 1; decomposition did not change the K3P shift verdict"
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb0-shift/force-trace.jsonl",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb0-shift/force-trace.jsonl"
+    },
+    {
+      "candidate": "pb0_force_measure",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 184.066,
+      "metrics": {
+        "control": "unchanged K3P plus one penalty backward",
+        "stationary": "5/5",
+        "stationary_min_hq": 0.995849609375,
+        "prehold": "120/120",
+        "prehold_min_hq": 0.90869140625,
+        "recovery_passing_checks": 28,
+        "recovery_checks": 120,
+        "deadline_pass": false,
+        "deadline_step": 2800,
+        "delay_updates": 1130,
+        "stable_from_step": 3530,
+        "min_hq": 0.0,
+        "rate_d": [
+          4.25e-05,
+          0.00425
+        ],
+        "optimizer_updates": [
+          3600,
+          3600
+        ],
+        "canonical_hold_extension": "NOT_RUN",
+        "deadline": "28/81",
+        "deadline_min_hq": 0.66845703125,
+        "deadline_min_modes": 6
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb0-shift/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb0-shift/result.json",
+      "snapshot": "evidence/802bb93f9ffd6ea11bf401e94730af946288e9b8b5ab1a5689fd3764d63843e0.json.gz",
+      "artifact_sha256": "802bb93f9ffd6ea11bf401e94730af946288e9b8b5ab1a5689fd3764d63843e0"
+    },
+    {
+      "candidate": "pb1_fight_reopen",
+      "gate": "ring_hold",
+      "status": "PASS",
+      "seconds": 165.908,
+      "metrics": {
+        "passing_checks": 1200,
+        "checks": 1200,
+        "min_hq": 0.980224609375,
+        "min_modes": 8,
+        "converged_step": 1550,
+        "unmatched_numel": [
+          1
+        ],
+        "matched_numel": 20160,
+        "extra_penalty_backwards": 3050
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb1-hold/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb1-hold/result.json",
+      "snapshot": "evidence/c73f639a0b5043e6b9173a5870bef32e400b453c13526313e857c1bbaceda04b.json.gz",
+      "artifact_sha256": "c73f639a0b5043e6b9173a5870bef32e400b453c13526313e857c1bbaceda04b"
+    },
+    {
+      "candidate": "pb1_fight_reopen",
+      "gate": "ring_extension",
+      "status": "PASS",
+      "seconds": 165.908,
+      "metrics": {
+        "passing_checks": 300,
+        "checks": 300,
+        "min_hq": 0.99462890625,
+        "min_modes": 8,
+        "window": "2751-3050"
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb1-hold/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb1-hold/result.json",
+      "snapshot": "evidence/c73f639a0b5043e6b9173a5870bef32e400b453c13526313e857c1bbaceda04b.json.gz",
+      "artifact_sha256": "c73f639a0b5043e6b9173a5870bef32e400b453c13526313e857c1bbaceda04b"
+    },
+    {
+      "candidate": "pb1_fight_reopen",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 176.41,
+      "metrics": {
+        "stationary": "5/5",
+        "stationary_min_hq": 0.99169921875,
+        "prehold": "112/120",
+        "prehold_min_hq": 0.635009765625,
+        "prehold_min_modes": 7,
+        "prehold_failing": [
+          1280,
+          1290,
+          1300,
+          1310,
+          1320,
+          1330,
+          1340,
+          1350
+        ],
+        "deadline": "79/81",
+        "deadline_pass": false,
+        "deadline_min_hq": 0.870849609375,
+        "deadline_min_modes": 8,
+        "deadline_failing": [
+          2910,
+          3570
+        ],
+        "delay_updates": null,
+        "rate_d_min": 7.744350257151697e-05,
+        "rate_d_max": 0.00425,
+        "optimizer_updates": 3600,
+        "note": "fight reopen improved deadline 28/81 to 79/81 but residual gain broke 8 pre-hold checks"
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb1-shift/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb1-shift/result.json",
+      "snapshot": "evidence/8b791f0e9a19b01babc74057dbbe8867dee08e9e63bacf1abcff543f5b4c9f9e.json.gz",
+      "artifact_sha256": "8b791f0e9a19b01babc74057dbbe8867dee08e9e63bacf1abcff543f5b4c9f9e"
+    },
+    {
+      "candidate": "pb2_share_square",
+      "gate": "ring_hold",
+      "status": "PASS",
+      "seconds": 156.428,
+      "metrics": {
+        "passing_checks": 1200,
+        "checks": 1200,
+        "min_hq": 0.913330078125,
+        "min_modes": 8,
+        "converged_step": 1400
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb2-hold/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb2-hold/result.json",
+      "snapshot": "evidence/6a8bfafbca2861ef7edfa94ac323960d0ceca2f80012c7fb3fa55120d88a0d84.json.gz",
+      "artifact_sha256": "6a8bfafbca2861ef7edfa94ac323960d0ceca2f80012c7fb3fa55120d88a0d84"
+    },
+    {
+      "candidate": "pb2_share_square",
+      "gate": "ring_extension",
+      "status": "PASS",
+      "seconds": 156.428,
+      "metrics": {
+        "passing_checks": 300,
+        "checks": 300,
+        "min_hq": 0.975830078125,
+        "min_modes": 8,
+        "window": "2601-2900"
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb2-hold/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb2-hold/result.json",
+      "snapshot": "evidence/6a8bfafbca2861ef7edfa94ac323960d0ceca2f80012c7fb3fa55120d88a0d84.json.gz",
+      "artifact_sha256": "6a8bfafbca2861ef7edfa94ac323960d0ceca2f80012c7fb3fa55120d88a0d84"
+    },
+    {
+      "candidate": "pb2_share_square",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 165.004,
+      "metrics": {
+        "stationary": "5/5",
+        "stationary_min_hq": 0.9716796875,
+        "prehold": "120/120",
+        "prehold_min_hq": 0.914306640625,
+        "deadline": "77/81",
+        "deadline_pass": false,
+        "delay_updates": 480,
+        "stable_from_step": 2880,
+        "deadline_min_hq": 0.83935546875,
+        "deadline_min_modes": 7,
+        "deadline_failing": [
+          2840,
+          2850,
+          2860,
+          2870
+        ],
+        "rate_d_min": 4.872328733207161e-05,
+        "rate_d_max": 0.00425,
+        "post_shift_mean_lr": 0.00045,
+        "optimizer_updates": 3600
+      },
+      "artifact": "repo/reports/toy100/penalty-balance-3777313/runs/pb2-shift/result.json",
+      "lane": "k3p_penalty_balance",
+      "engine": "grok",
+      "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T181625Z/k3p_penalty_balance/20260925T181625Z-3777313/repo/reports/toy100/penalty-balance-3777313/runs/pb2-shift/result.json",
+      "snapshot": "evidence/17459e8203e6c6276b825d593fcc9f8629827eefc67e914a3ebde3793763e1cc.json.gz",
+      "artifact_sha256": "17459e8203e6c6276b825d593fcc9f8629827eefc67e914a3ebde3793763e1cc"
+    }
+  ]
+}

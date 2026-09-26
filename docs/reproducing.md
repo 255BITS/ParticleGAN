@@ -60,18 +60,10 @@ It must not be interpreted as fresh continuous Gaussian sampling. The learned
 table's optimizer and regularizer are part of the learned-prior intervention;
 further ablations are needed to distinguish their individual effects.
 
-```bash
-python experiments/compare_priors.py --help
-python experiments/compare_priors.py --study-dir runs/prior_comparison --run --device cuda:0
-```
-
-Omit `--run` to emit configurations and a protocol manifest for an external
-scheduler. Use a new study directory for each generation. See
-[the prior-control protocol](prior-controls.md) for outputs and collection.
-Treat the old GIFs and
-regularizer tables as historical recipe results, not as this controlled
-three-way comparison. Use fresh seeds for confirmation after selecting a
-recipe, and retain individual seed scores rather than only an aggregate.
+The completed comparison and its protocol are in
+[the prior-comparison report](../reports/prior-comparison/README.md); its
+driver is in the repository history. Treat the old GIFs as results of earlier
+recipes, not as this controlled three-way comparison.
 
 ## Interpreting shape and diversity
 

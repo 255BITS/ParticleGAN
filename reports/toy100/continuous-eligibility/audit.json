@@ -1,0 +1,187 @@
+{
+  "schema": 1,
+  "audited_pr_head": "20e69012c43cf4c6084825741522f284df63e398",
+  "qualified_winner": null,
+  "requirement": "One continuous learner with no caller-managed acquisition/maintenance switch or predetermined training horizon. Automatic reversible adaptation allowed.",
+  "deadline_all_81_required": false,
+  "finite_evaluation_duration_is_disqualification": false,
+  "initialization_or_smoothing_window_is_disqualification": false,
+  "scope": "Entries in current PR155 comparison tables and candidate state; historical drafts are not promoted.",
+  "entries": {
+    "KA2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "R2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B3-belief": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "SG3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "G1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Complete learner retains one-way horizon-based LR/noise schedules; an adaptive anchor or generator boost does not remove them.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py"
+      ]
+    },
+    "B3 guarded reseed": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Adaptive memory release retains scheduled LR/noise levels.",
+      "evidence": [
+        "../continuous-practical-leaderboard.md"
+      ]
+    },
+    "K3P": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Horizon-based network/prior rates and noise; finite public trainer budget; retained as reference only.",
+      "evidence": [
+        "source-receipts.json",
+        "../gap-fill-20260925/sources/k3p/shift.py",
+        "../../../particlegan/recipes.py",
+        "../../../particlegan/training.py"
+      ]
+    },
+    "PB1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Automatic rate boosts retain underlying horizon-based LR/noise.",
+      "evidence": [
+        "../continuous-round-3/completed-penalty-balance/attempts/k3p_penalty_balance/result.md"
+      ]
+    },
+    "PB2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Automatic rate boosts retain underlying horizon-based LR/noise.",
+      "evidence": [
+        "../continuous-round-3/completed-penalty-balance/attempts/k3p_penalty_balance/result.md"
+      ]
+    },
+    "DI2": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Real-data novelty adjusts mobility over the inherited scheduled rates, mixing and noise.",
+      "evidence": [
+        "../continuous-round-3/completed-data-innovation/attempts/k3p_data_innovation/result.md"
+      ]
+    },
+    "PM1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Rates are autonomous/reversible but complete learner retains horizon-based noise.",
+      "evidence": [
+        "../continuous-round-3/completed-mobility/attempts/k3p_particle_mobility/result.md"
+      ]
+    },
+    "PM3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Rates are autonomous/reversible but complete learner retains horizon-based noise.",
+      "evidence": [
+        "../continuous-round-3/completed-mobility/attempts/k3p_particle_mobility/result.md"
+      ]
+    },
+    "P3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Autonomous rate reopening still inherits horizon-based noise.",
+      "evidence": [
+        "../continuous-round-2/attempts/k3p_precision_recovery/result.md"
+      ]
+    },
+    "AP3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Autonomous rate reopening still inherits horizon-based noise.",
+      "evidence": [
+        "../continuous-round-2/sources/ap3_partial_reopen/mechanism.py"
+      ]
+    },
+    "PX3": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Genuine rate reopening and return to floor, but inherited horizon-based noise remains.",
+      "evidence": [
+        "../continuous-round-3/completed-prox/attempts/k3p_prox_release/result.md"
+      ]
+    },
+    "EP1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Internal rate rules explicitly retain horizon-based noise in archived source.",
+      "evidence": [
+        "../continuous-round-3/stop-inventory/manifest.json"
+      ]
+    },
+    "PD1": {
+      "status": "DISQUALIFIED_CURRENT_CONFIGURATION",
+      "reason": "Internal rate rules explicitly retain horizon-based noise in archived source.",
+      "evidence": [
+        "../continuous-round-3/stop-inventory/manifest.json"
+      ]
+    },
+    "RP1": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "No structural schedule DQ here; training-state horizon prefix passes, but image stability and native accuracy fail.",
+      "evidence": [
+        "../continuous-round-3/rp1-rejection.md"
+      ]
+    },
+    "TD3": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "Autonomous rate policy and absolute startup noise; acquisition/retention fail, horizon invariance unverified.",
+      "evidence": [
+        "../continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
+      ]
+    },
+    "A3": {
+      "status": "REJECTED_MEASURED_QUALITY",
+      "reason": "Full verification records 4/22 PASS, 18 FAIL.",
+      "evidence": [
+        "../continuous-round-2/README.md"
+      ]
+    },
+    "EP2": {
+      "status": "UNVERIFIED_INCOMPLETE",
+      "reason": "No final hold or shift result. Missing evidence is not a measured failure.",
+      "evidence": [
+        "../continuous-round-3/INVENTORY.md"
+      ]
+    }
+  },
+  "execution": {
+    "phase": "THREE_EXTERNAL_API_APPROACHES_RUNNING",
+    "concurrent_approaches": 3,
+    "engine": "codex",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "seed_sweeps": false,
+    "new_research_launched": true,
+    "merge_authorized": false,
+    "launched_utc": "2026-09-26T21:12:09+00:00",
+    "launch_receipt": "launch/first-launch.json"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "DECLARED_BEFORE_NEW_SEARCH_EXECUTION",
+  "purpose": "Shared finite evaluations of a learner intended to continue indefinitely; these budgets and target changes are not learner inputs.",
+  "supersedes_for_new_search": [
+    "reports/toy100/continuous-round-3/stress-protocol.json",
+    "reports/toy100/continuous-round-3/long-term-stability-protocol.json"
+  ],
+  "historical_declarations_and_scores_preserved": true,
+  "fixture": {
+    "source": "PR195 fa511ce010120b502f494d717d01b14b8551eed8 public GANTrainer worker",
+    "worker": "reports/ka2-default-candidate/constant-lr-api/worker.py",
+    "seed": 0,
+    "seed_variants_allowed": false,
+    "num_particles": 20000,
+    "z_dim": 2,
+    "batch_size": 2048,
+    "hidden_width": 96,
+    "hidden_layers": 3,
+    "critic_fourier_scale": 3,
+    "initialization": "Networks initialize on CPU, then move to CUDA; prior construction and RNG streams follow the public worker. Verify initial model and RNG hashes.",
+    "generator_real": "Reuse the discriminator real batch, matching the public baseline.",
+    "candidate_noise_policy": "Declared by each unchanged candidate, with no dependency on evaluator budget or target-change times. Do not silently retain the old horizon-based noise schedule."
+  },
+  "observation": {
+    "primary": "live weights",
+    "ema": "diagnostic only",
+    "every_updates": 10,
+    "samples": 4096,
+    "passing": {"modes": 8, "minimum_hq": 0.9},
+    "stream": "Isolated evaluation generator, using the existing public-worker convention; never advances training streams.",
+    "deadline_all_81_required": false,
+    "fixed_recovery_deadline": null,
+    "report": [
+      "Initial acquisition time and retention through each target change",
+      "First passing observation after every change and its update delay",
+      "Every subsequent failing observation before the next target change or evaluation end",
+      "Passing and total observations since first arrival, with minimum HQ and mode count",
+      "Final uninterrupted passing suffix, explicitly retrospective and separate from first arrival",
+      "All applied learning rates, noise, controller state and any automatic reopening decisions",
+      "Finite-window non-arrival as not observed, not proof that arrival is impossible"
+    ]
+  },
+  "protocols": {
+    "single_shift": {
+      "total_updates": 4600,
+      "initial_target_offset": [0.0, 0.0],
+      "target_changes": [{"after_update": 2400, "absolute_offset": [1.0, 0.0]}],
+      "comparison_endpoint_also_reported": 3600,
+      "frozen_control": "Copy full learner state at the change and sample without further optimizer updates."
+    },
+    "stationary": {
+      "total_updates": 7500,
+      "initial_target_offset": [0.0, 0.0],
+      "target_changes": [],
+      "purpose": "Measure retention and unnecessary automatic reopening under ordinary minibatch noise."
+    },
+    "delayed_repeated": {
+      "total_updates": 9000,
+      "initial_target_offset": [0.0, 0.0],
+      "target_changes": [
+        {"after_update": 6000, "absolute_offset": [1.0, 0.0]},
+        {"after_update": 7800, "absolute_offset": [1.0, 1.0]}
+      ],
+      "purpose": "Same data-change times as the historical stress declaration, with the corrected arrival/stability interpretation."
+    },
+    "long_continuation": {
+      "total_updates": 30000,
+      "initial_target_offset": [0.0, 0.0],
+      "target_changes": [
+        {"after_update": 6000, "absolute_offset": [1.0, 0.0]},
+        {"after_update": 7800, "absolute_offset": [1.0, 1.0]},
+        {"after_update": 27000, "absolute_offset": [0.0, 1.0]}
+      ],
+      "purpose": "One uninterrupted run with a long settled interval before another late target change. Report the 9000-update prefix separately."
+    }
+  },
+  "qualification": {
+    "same_unchanged_candidate_across_protocols": true,
+    "learner_receives_budget_or_target_change_notifications": false,
+    "manual_phase_switch_or_restart": false,
+    "automatic_reversible_internal_states_allowed": true,
+    "absolute_initialization_or_smoothing_windows_alone_disqualify": false,
+    "checkpoint_continuation": "Separate exact continuation check covering models, optimizer, controller, EMA, RNG and caller-owned data-stream state. Do not reload during the uninterrupted long run.",
+    "horizon_independence": "Compare an identical training prefix under different evaluator budgets; the learner must not receive either budget.",
+    "matched_k3p": "Use the same public architecture, initialization, data and runtime. Explicitly declare K3P's historical scheduled baseline; its scores are reference evidence, not eligibility.",
+    "broader_quality": "Complete the surviving exact candidate's own 22-task quality coverage at existing declared seeds; no seed sweeps or inherited ancestor passes.",
+    "success": "Supervisor must assess retention, arrival and subsequent stability across all required evidence. No single endpoint, retrospective suffix, raw deadline count or successful process exit establishes qualification.",
+    "infinite_time_claim": "Finite evidence supports an indefinite-use design; it cannot prove literal infinite stability."
+  }
+}

@@ -1,0 +1,542 @@
+{
+  "candidate": "rp1_signal_close",
+  "qualification": "REJECTED",
+  "scope": "Offline inspection of original fixed-seed7000-update native; no extra training",
+  "events_sha256": "007e4b5ddb10d8ed5f2b5b395faba10217d4f3e801730490dbdba21371dac62f",
+  "events_snapshot": "rp1-additional-evidence/007e4b5ddb10d8ed5f2b5b395faba10217d4f3e801730490dbdba21371dac62f.jsonl.gz",
+  "live_evaluations": [
+    {
+      "step": 0,
+      "center_rms_sigma": null,
+      "accuracy_pass": false,
+      "modes": 0,
+      "hq": 0.0268
+    },
+    {
+      "step": 1,
+      "center_rms_sigma": null,
+      "accuracy_pass": false,
+      "modes": 0,
+      "hq": 0.0269
+    },
+    {
+      "step": 10,
+      "center_rms_sigma": null,
+      "accuracy_pass": false,
+      "modes": 0,
+      "hq": 0.0278
+    },
+    {
+      "step": 25,
+      "center_rms_sigma": null,
+      "accuracy_pass": false,
+      "modes": 0,
+      "hq": 0.02625
+    },
+    {
+      "step": 50,
+      "center_rms_sigma": null,
+      "accuracy_pass": false,
+      "modes": 0,
+      "hq": 0.0257
+    },
+    {
+      "step": 100,
+      "center_rms_sigma": null,
+      "accuracy_pass": false,
+      "modes": 0,
+      "hq": 0.04665
+    },
+    {
+      "step": 250,
+      "center_rms_sigma": 0.29587437226320057,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.73925
+    },
+    {
+      "step": 500,
+      "center_rms_sigma": 0.3776761469354381,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9085
+    },
+    {
+      "step": 750,
+      "center_rms_sigma": 0.3393373876066493,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.93045
+    },
+    {
+      "step": 1000,
+      "center_rms_sigma": 0.3311240573048804,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.94035
+    },
+    {
+      "step": 1250,
+      "center_rms_sigma": 0.32561812839642024,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9474
+    },
+    {
+      "step": 1500,
+      "center_rms_sigma": 0.322735097954621,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.95395
+    },
+    {
+      "step": 1750,
+      "center_rms_sigma": 0.32568126330671404,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9603
+    },
+    {
+      "step": 2000,
+      "center_rms_sigma": 0.3289347573604844,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.96595
+    },
+    {
+      "step": 2250,
+      "center_rms_sigma": 0.3242519957493236,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.97135
+    },
+    {
+      "step": 2500,
+      "center_rms_sigma": 0.3112670303774488,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9756
+    },
+    {
+      "step": 2750,
+      "center_rms_sigma": 0.3011428894932385,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9789
+    },
+    {
+      "step": 3000,
+      "center_rms_sigma": 0.2888217216900228,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9815
+    },
+    {
+      "step": 3250,
+      "center_rms_sigma": 0.2780536022700577,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98345
+    },
+    {
+      "step": 3500,
+      "center_rms_sigma": 0.26847505473341354,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98505
+    },
+    {
+      "step": 3750,
+      "center_rms_sigma": 0.2556127464021715,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9858
+    },
+    {
+      "step": 4000,
+      "center_rms_sigma": 0.24078392606458002,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.987
+    },
+    {
+      "step": 4250,
+      "center_rms_sigma": 0.2305140504072773,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.988
+    },
+    {
+      "step": 4500,
+      "center_rms_sigma": 0.22993835096977863,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98885
+    },
+    {
+      "step": 4750,
+      "center_rms_sigma": 0.22969601348739296,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98745
+    },
+    {
+      "step": 5000,
+      "center_rms_sigma": 0.22061158331237438,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98805
+    },
+    {
+      "step": 5250,
+      "center_rms_sigma": 0.2179771501146287,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98835
+    },
+    {
+      "step": 5500,
+      "center_rms_sigma": 0.2063147577920976,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98845
+    },
+    {
+      "step": 5750,
+      "center_rms_sigma": 0.2502207286402797,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9819
+    },
+    {
+      "step": 6000,
+      "center_rms_sigma": 0.26136615775829325,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9864
+    },
+    {
+      "step": 6250,
+      "center_rms_sigma": 0.26196495416105997,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9878
+    },
+    {
+      "step": 6500,
+      "center_rms_sigma": 0.277675710524899,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98905
+    },
+    {
+      "step": 6750,
+      "center_rms_sigma": 0.28907319120986463,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.9891
+    },
+    {
+      "step": 7000,
+      "center_rms_sigma": 0.28688480387315807,
+      "accuracy_pass": false,
+      "modes": 100,
+      "hq": 0.98905
+    }
+  ],
+  "late_controller_trace": [
+    {
+      "critic_steps": 5499,
+      "calls": 5500,
+      "rate_gain": 0.0,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.0833,
+      "surprise": 0.910202,
+      "quiet": 5170,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.01,
+      "prior_multiplier": 0.05,
+      "lr_last": 4.25e-05
+    },
+    {
+      "critic_steps": 5549,
+      "calls": 5550,
+      "rate_gain": 0.0,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.355269,
+      "surprise": 0.977357,
+      "quiet": 5209,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.01,
+      "prior_multiplier": 0.05,
+      "lr_last": 4.25e-05
+    },
+    {
+      "critic_steps": 5599,
+      "calls": 5600,
+      "rate_gain": 0.0,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.216243,
+      "surprise": 1.029885,
+      "quiet": 5245,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.01,
+      "prior_multiplier": 0.05,
+      "lr_last": 4.25e-05
+    },
+    {
+      "critic_steps": 5649,
+      "calls": 5650,
+      "rate_gain": 0.0,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.248441,
+      "surprise": 1.099741,
+      "quiet": 5282,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.01,
+      "prior_multiplier": 0.05,
+      "lr_last": 4.25e-05
+    },
+    {
+      "critic_steps": 5699,
+      "calls": 5700,
+      "rate_gain": 0.2,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.06883,
+      "surprise": 0.954468,
+      "quiet": 23,
+      "shock": 0,
+      "closed": false,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.20800000000000002,
+      "prior_multiplier": 0.24,
+      "lr_last": 0.0008840000000000001
+    },
+    {
+      "critic_steps": 5749,
+      "calls": 5750,
+      "rate_gain": 0.2,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.168004,
+      "surprise": 0.884534,
+      "quiet": 73,
+      "shock": 0,
+      "closed": false,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.20800000000000002,
+      "prior_multiplier": 0.24,
+      "lr_last": 0.0008840000000000001
+    },
+    {
+      "critic_steps": 5799,
+      "calls": 5800,
+      "rate_gain": 0.2,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.087084,
+      "surprise": 0.951724,
+      "quiet": 123,
+      "shock": 0,
+      "closed": false,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.20800000000000002,
+      "prior_multiplier": 0.24,
+      "lr_last": 0.0008840000000000001
+    },
+    {
+      "critic_steps": 5849,
+      "calls": 5850,
+      "rate_gain": 0.2,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.074783,
+      "surprise": 0.973468,
+      "quiet": 173,
+      "shock": 0,
+      "closed": false,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.20800000000000002,
+      "prior_multiplier": 0.24,
+      "lr_last": 0.0008840000000000001
+    },
+    {
+      "critic_steps": 5899,
+      "calls": 5900,
+      "rate_gain": 0.2,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.126595,
+      "surprise": 1.112455,
+      "quiet": 223,
+      "shock": 0,
+      "closed": false,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.20800000000000002,
+      "prior_multiplier": 0.24,
+      "lr_last": 0.0008840000000000001
+    },
+    {
+      "critic_steps": 5949,
+      "calls": 5950,
+      "rate_gain": 0.157136,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.057779,
+      "surprise": 0.842537,
+      "quiet": 273,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.1655642718798293,
+      "prior_multiplier": 0.19927884675337154,
+      "lr_last": 0.000710326419686136
+    },
+    {
+      "critic_steps": 5999,
+      "calls": 6000,
+      "rate_gain": 0.095068,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.050286,
+      "surprise": 0.874008,
+      "quiet": 323,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.10411732831713,
+      "prior_multiplier": 0.14031460798108436,
+      "lr_last": 0.00044653903570485105
+    },
+    {
+      "critic_steps": 6049,
+      "calls": 6050,
+      "rate_gain": 0.057517,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.089993,
+      "surprise": 1.04112,
+      "quiet": 373,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.06694155465463919,
+      "prior_multiplier": 0.10464088577970426,
+      "lr_last": 0.00028694606796183494
+    },
+    {
+      "critic_steps": 6099,
+      "calls": 6100,
+      "rate_gain": 0.034798,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.128507,
+      "surprise": 0.997665,
+      "quiet": 423,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.044449986038300325,
+      "prior_multiplier": 0.08305806741049021,
+      "lr_last": 0.00019039135420482464
+    },
+    {
+      "critic_steps": 6149,
+      "calls": 6150,
+      "rate_gain": 0.021053,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.108003,
+      "surprise": 1.008972,
+      "quiet": 473,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.030842450565975114,
+      "prior_multiplier": 0.07000033135118824,
+      "lr_last": 0.0001319751665711053
+    },
+    {
+      "critic_steps": 6199,
+      "calls": 6200,
+      "rate_gain": 0.012737,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.061338,
+      "surprise": 0.926949,
+      "quiet": 523,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.022609809046429126,
+      "prior_multiplier": 0.06210032181222997,
+      "lr_last": 9.66330186336604e-05
+    },
+    {
+      "critic_steps": 6249,
+      "calls": 6250,
+      "rate_gain": 0.007706,
+      "mix_gain": 0.0,
+      "s": 0.0,
+      "level": 0.095528,
+      "surprise": 1.003447,
+      "quiet": 573,
+      "shock": 0,
+      "closed": true,
+      "warm": true,
+      "ever_anchored": true,
+      "refit_until": 0,
+      "network_multiplier": 0.017629010978535413,
+      "prior_multiplier": 0.0573207681107158,
+      "lr_last": 7.525080470583384e-05
+    }
+  ],
+  "guard_clip_steps": [
+    5672
+  ],
+  "finding": "Center error improves toward threshold before a late learning-rate increase on the stationary target, then worsens. Temporal evidence does not prove a no-reopen counterfactual would pass.",
+  "learner_feedback": false
+}

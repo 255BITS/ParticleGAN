@@ -1,0 +1,21 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
+  "observed_utc": "2026-09-25T19:16:23.570637+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_acquire_then_maintain",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z/k3p_acquire_then_maintain/20260925T185934Z-3828016",
+      "status": "failed or interrupted (exit 1; artifacts retained)",
+      "files_sha256": {
+        "final.md": "558dffcb95928403a0cedcf8515a13efb8b452ee4cdfae4c1db09ff7fdf6fe15",
+        "run.txt": "cd23d118fdcaa39beb64625cce44a933aeeee58b148fa4b7782d4d1de758295f",
+        "status.txt": "4538e69893a1f9214c89345e92c7914d85be4511616f6088f68530f6840ece4e",
+        "exit-code.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    }
+  ],
+  "ledger_status_counts": {},
+  "records": []
+}

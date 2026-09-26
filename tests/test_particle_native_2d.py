@@ -18,7 +18,7 @@ def test_adversarial_protocol_and_honest_gate_reporting(result):
         assert all(math.isfinite(result[arm][key]) for key in ("live", "ema", "max_live", "max_ema"))
     assert result["adversarial_weight"] == 1.0
     assert result["l2_weight"] == 0.0
-    assert result["b_cap_coeff"] == 1.0
+    assert result["penalty_arm"] == "recipe" and result["penalty_coeff"] > 0
     assert result["supervised_only"] is False
     collapse, passed = toy.gate_status(result["current"]["ema"], result["fixed"]["ema"])
     assert result["collapse"] == collapse

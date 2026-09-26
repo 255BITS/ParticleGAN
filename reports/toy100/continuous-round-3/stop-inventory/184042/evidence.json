@@ -1,0 +1,445 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z",
+  "observed_utc": "2026-09-25T19:16:23.419953+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368",
+      "status": "failed or interrupted (exit 1; artifacts retained)",
+      "files_sha256": {
+        "final.md": "595dbee15fb2d6643b4051fab3b48696fc81be8601ae16436aed9cb5fd152320",
+        "tests.jsonl": "b5ad2eb76bda8a51f979c88a6838733f53dfcca50ba759d3503e66512b235322",
+        "run.txt": "f33ae669abcafa4ce9551af8df98d322a418fc6241b3de2b4a5e8c5c57980284",
+        "status.txt": "4538e69893a1f9214c89345e92c7914d85be4511616f6088f68530f6840ece4e",
+        "exit-code.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "PASS": 19,
+    "ERROR": 1
+  },
+  "records": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "protocol_windows",
+      "metrics": {
+        "deadlines": [
+          81,
+          81
+        ],
+        "extension": [
+          1800,
+          180
+        ],
+        "extension_checks": 2061,
+        "stable": [
+          5,
+          480,
+          60
+        ],
+        "stress_checks": 707,
+        "third_deadline": 81
+      },
+      "seconds": 0.000419,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 1,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "absolute_versus_incremental",
+      "metrics": {
+        "incremental_final": [
+          2.0,
+          2.0
+        ],
+        "long_term_at_27001": [
+          0.0,
+          1.0
+        ],
+        "stress_deltas": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "stress_final": [
+          1.0,
+          1.0
+        ]
+      },
+      "seconds": 0.005869,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 2,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "event_ordering",
+      "metrics": {
+        "actions": 8
+      },
+      "seconds": 0.000216,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 3,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "rng_preservation",
+      "metrics": {
+        "fork_preserves_cpu": true,
+        "fork_preserves_host_stream": true
+      },
+      "seconds": 0.001132,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 4,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "update_accounting",
+      "metrics": {
+        "advanced": true,
+        "stalled_rejected": true
+      },
+      "seconds": 1.5e-05,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 5,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "witness_identity",
+      "metrics": {
+        "complete_sha256": "6d31c1f8eb60b38d865cd8eb86fa738a0276fe7261ee8e0a3bd4826da696a907",
+        "cpu_rejected_for_cuda": true,
+        "partial_labeled": true
+      },
+      "seconds": 0.948489,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 6,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "fail_closed_provenance",
+      "metrics": {
+        "hash_mismatch_rejected": true,
+        "missing_manifest_rejected": true
+      },
+      "seconds": 0.003372,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 7,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "schedule_horizon",
+      "metrics": {
+        "controller_total_steps": 1200,
+        "episode_lengths_recorded": [
+          9000,
+          30000
+        ],
+        "network_lr_horizon_cap": 1600,
+        "noise_horizon": 1200
+      },
+      "seconds": 1.1e-05,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 8,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "candidate": "regression",
+      "gate": "prefix_scoring",
+      "metrics": {
+        "extension_failure_step": 27400,
+        "partial_witness_status": "ERROR",
+        "prefix_failure_step": 6400
+      },
+      "seconds": 0.003915,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 9,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/self-test.json",
+      "snapshot": "evidence/dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e.json.gz",
+      "artifact_sha256": "dcef7e587830b2d9f65ab2aaec6461a2dc4920fb3be50ec476b10af84a85170e"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "scalar_tensor_hash",
+      "metrics": {
+        "direct_view_rejected": true,
+        "zero_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "seconds": 0.000718,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 10,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "reject_missing_hooks",
+      "metrics": {
+        "missing_hooks_rejected": true
+      },
+      "seconds": 6e-06,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 11,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "reject_missing_fixture",
+      "metrics": {
+        "hash_mismatch_rejected": true,
+        "missing_fixture_rejected": true,
+        "optimizers": 2,
+        "pinned_fixture_sha256": "cb5ddaeb89cd32209466ae3bb0cd1c19eb4d16652128df9bfc825e618200dd08"
+      },
+      "seconds": 0.003016,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 12,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "frozen_runtime_pin",
+      "metrics": {
+        "files": 614,
+        "mismatch_rejected": true,
+        "root": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "verified": true
+      },
+      "seconds": 0.014722,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 13,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/identity-prefix.json",
+      "candidate": "regression",
+      "gate": "identity_prefix",
+      "metrics": {
+        "candidate_qualification_ready": false,
+        "error": "ModuleNotFoundError: No module named 'benchmarks.toy100.device'",
+        "qualification": false
+      },
+      "seconds": 0.022543,
+      "status": "ERROR",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 14,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/identity-prefix.json",
+      "observed_later_snapshot": "evidence/e4ee63e4ba45c8340486a5900f8a296c2a3b6ea9937fa6731b9e6c2532204721.json.gz",
+      "observed_later_artifact_sha256": "e4ee63e4ba45c8340486a5900f8a296c2a3b6ea9937fa6731b9e6c2532204721",
+      "snapshot_note": "Original ERROR artifact was overwritten by the worker during repair. This is the later PASS file observed at collection; no historical ERROR snapshot is claimed."
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "scalar_tensor_hash",
+      "metrics": {
+        "direct_view_rejected": true,
+        "zero_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "seconds": 0.000747,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 15,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "reject_missing_hooks",
+      "metrics": {
+        "missing_hooks_rejected": true
+      },
+      "seconds": 7e-06,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 16,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "reject_missing_fixture",
+      "metrics": {
+        "hash_mismatch_rejected": true,
+        "missing_fixture_rejected": true,
+        "optimizers": 2,
+        "pinned_fixture_sha256": "cb5ddaeb89cd32209466ae3bb0cd1c19eb4d16652128df9bfc825e618200dd08"
+      },
+      "seconds": 0.003166,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 17,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "frozen_runtime_pin",
+      "metrics": {
+        "files": 614,
+        "mismatch_rejected": true,
+        "root": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda",
+        "verified": true
+      },
+      "seconds": 0.018397,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 18,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "candidate": "regression",
+      "gate": "witness_state_sensitivity",
+      "metrics": {
+        "anchor_prev_changes_hash": true,
+        "buffer_changes_hash": true,
+        "step_device": "cpu",
+        "step_dtype": "torch.float32",
+        "unknown_state_rejected": true,
+        "weight_decay_changes_hash": true
+      },
+      "seconds": 1.002942,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 19,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/installation-checks.json",
+      "snapshot": "evidence/a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1.json.gz",
+      "artifact_sha256": "a8acb50ed044073ee89069987482e935f5d724c04fd2c9470315546aef7ae0e1"
+    },
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/identity-prefix.json",
+      "candidate": "regression",
+      "gate": "identity_prefix",
+      "metrics": {
+        "adam_calls": 4,
+        "candidate_qualification_ready": false,
+        "failures": [],
+        "fixture": "cb5ddaeb89cd32209466ae3bb0cd1c19eb4d16652128df9bfc825e618200dd08",
+        "frozen_runtime": {
+          "files": 614,
+          "root": "/ml2/hypergan/gan-attempts/claude-pool-20260925T041936Z/qualify_a2_bounded_damp/20260925T041936Z-2509885/repo/reports/toy100/qualify-a2-attempt/prepared/repos/cuda"
+        },
+        "hooks": {
+          "latent_begin": 4,
+          "latent_end": 4,
+          "response_begin": 4,
+          "response_end": 4
+        },
+        "identity_sha256": "19e4c657867ba91d265c5c6556386ee5d72101e1040d31ea5339bbdfac33fff4",
+        "learner_call_delta_off": {
+          "latent_calls": 2,
+          "latent_scoped_calls": 0,
+          "response_calls": 0
+        },
+        "learner_call_delta_on": {
+          "latent_calls": 2,
+          "latent_scoped_calls": 0,
+          "response_calls": 0
+        },
+        "long_term_30000": "NOT_RUN",
+        "qualification": false,
+        "step_hashes": 17,
+        "stress_protocol_9000": "NOT_RUN"
+      },
+      "seconds": 1.673168,
+      "status": "PASS",
+      "lane": "repair_continuous_qualification",
+      "engine": "grok",
+      "ledger_row": 20,
+      "resolved_artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T184042Z/repair_continuous_qualification/20260925T184042Z-3804368/out/identity-prefix.json",
+      "snapshot": "evidence/e4ee63e4ba45c8340486a5900f8a296c2a3b6ea9937fa6731b9e6c2532204721.json.gz",
+      "artifact_sha256": "e4ee63e4ba45c8340486a5900f8a296c2a3b6ea9937fa6731b9e6c2532204721"
+    }
+  ]
+}

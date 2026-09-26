@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "prepared_only": true,
+  "workspace": "/ml2/hypergan",
+  "driver": "/ml2/hypergan/try-gan.sh",
+  "driver_sha256": "b6da05b968b22216588aea85ac99ebb2b56abbb4b896b10c5f78f135512b18c2",
+  "api_repo": "/ml2/hypergan/ParticleGAN-ka2-default",
+  "api_commit": "fa511ce010120b502f494d717d01b14b8551eed8",
+  "evidence_repo": "/ml2/hypergan/ParticleGAN-k3p-continuous-search",
+  "runs_dir": "/ml2/hypergan/gan-attempts/continuous-api-20260926",
+  "engine": "codex",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "minutes": 0,
+  "proposals_per_attempt": 3,
+  "max_agents": 3,
+  "workers_per_agent": 1,
+  "lanes": {
+    "reversible_precision": {
+      "brief": "reversible_precision.md",
+      "gpu": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47"
+    },
+    "data_drift_mobility": {
+      "brief": "data_drift_mobility.md",
+      "gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69"
+    },
+    "constant_rate_stability": {
+      "brief": "constant_rate_stability.md",
+      "gpu": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47"
+    }
+  }
+}

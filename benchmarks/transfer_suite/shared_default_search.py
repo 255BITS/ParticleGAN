@@ -25,6 +25,7 @@ from .compare_defaults import candidate, effective_spec, ema_verdict, optimizer_
 from .linear_skip_refinement_research import constructor as skip_constructor
 from .smooth_critic_research import constructor as smooth_constructor
 from .protocol import test_verdict
+from benchmarks.gan_v3 import legacy_dict
 
 OPTIONS = {'lr', 'd_lr_mult', 'prior_lr_mult', 'betas', 'prior_betas', 'reg_coeff', 'reg_kappa', 'prior_reg'}
 
@@ -78,7 +79,7 @@ def episode(job, recipe):
         json.dumps(result, allow_nan=False)
     except Exception:
         result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - start)
-    return dict(recipe=recipe.to_dict(), candidate=asdict(candidate(recipe)), original_spec=job['spec'],
+    return dict(recipe=legacy_dict(recipe), candidate=asdict(candidate(recipe)), original_spec=job['spec'],
                 spec=spec, architecture=job['architecture'], reference=job['reference'],
                 reference_sha256=job['reference_sha256'], applied=applied,
                 verdict=test_verdict(spec, result), ema_verdict=ema_verdict(spec, result), result=result)

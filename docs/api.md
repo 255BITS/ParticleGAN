@@ -89,46 +89,44 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe()` constructs the shared **GAN v3** winner: Rp logistic,
-b_cap coefficient 6, κ1.25, spread .05, Adam (0,.99), G/D LR .00425 and particle
-LR .0085. Rates hold for 60% of the budget, then cosine toward 5%. There is no
-particle L2 term. Live sampling is the default; EMA is explicit.
+`get_recipe()` constructs **K3P** ([details](k3p.md)): Rp logistic, the K3P
+critic penalty (coefficient 1, κ 1, EMA-critic anchor .999), critic spike guard
+(ratio 5 after 200 steps), A2 latent-row damping, Adam (0,.999), G/D LR .00425
+and particle LR .0085. G/D rates hold for 60% of a 1,600-update horizon, then
+cosine to 1% (`network_lr_horizon_cap`, `network_lr_floor`); particle rates hold
+for 60% of the budget, then cosine toward 5%. The critic sees annealed input
+noise and the generator output carries warmed-up noise (also in `sample`). There
+is no particle spread or L2 term. Live sampling is the default; EMA is explicit.
 
-| Version | Live behavioral toys passed | Meaning |
-| --- | ---: | --- |
-| v1 (archived) | 5/19 | Original preset |
-| v2 (archived) | 8/19 | Previous public preset |
-| v3 (current) | **19/19** | Shared recipe with declared D choices |
-
-The v3 reference D profile scores 15/19. Its 19/19 result keeps optimizer/loss
-settings identical across tests and permits task-specific discriminator
-architectures. Each host retains its frozen resources and update budget.
-The generic API uses 20,000 particles and 7,000 updates; choose resources for
-your application. [Illustrated guide, math and limits](gan-v3.md).
-
-Historical rows preserve measured settings in benchmark receipts. They are not
-public recipe selectors. Restore complete saved settings through
-`Recipe(**saved_recipe)` and resume with the original networks and recipe.
+`GANTrainer` builds everything through the recipe: `trainer.opt_g, trainer.opt_d
+= recipe.make_optimizers(G, D, prior, ema_critic=...)` (the trainer allocates
+`trainer.ema_D`, a frozen deep copy) and `trainer.penalty =
+recipe.make_critic_penalty(trainer.opt_d)`. Checkpoints use schema 3 (the K3P
+state is inside the optimizer states, plus a noise stream); schema-2
+checkpoints are upgraded on load and schema-1 checkpoints (an older
+formulation) raise `ValueError`. Caller-owned loops use the same objects with an ordinary loop:
+`penalty(D, real, fake)` in the critic loss, then `opt_d.step()` and
+`opt_g.step()` as usual. See [regularization factories](#regularization-factories). `learning_rate_scales(step, recipe)` returns the
+`(network, prior)` LR multipliers.
 
 ### Optional vector discriminators
 
 `BatchDistanceDiscriminator(in_dim=2, hidden_dim=96, n_hidden=3,
 scales=(.1,.25,.5,1.), beta=6., eps=1e-5)` accepts nonempty flat
-`[batch, in_dim]` inputs and returns one score per sample. Its 2D defaults exactly
-reproduce the v3 unequal-mass witness with **19,013 parameters**: per-example
-hidden feature centering, Softplus β6, and differentiable kernel-weighted
-neighbor distances appended to the final head. Self-pairs are excluded.
+`[batch, in_dim]` inputs and returns one score per sample (**19,013 parameters**
+at the 2D defaults): per-example hidden feature centering, Softplus β6, and
+differentiable kernel-weighted neighbor distances appended to the final head.
+Self-pairs are excluded.
 
 Scores depend on other samples in the current input batch, including during
 G updates and gradient-cap differentiation. Real/fake calls compute separate
 features; there are no running statistics. Cost is quadratic in batch size,
 and scales are in input-coordinate units. The measured witness uses 2D inputs
-and batch size 128. You supply D explicitly; the class is not substituted for
-every network in the 19/19 architecture profile.
+and batch size 128. You supply D explicitly.
 
 `LinearSkipDiscriminator(in_dim=2, hidden_dim=96, n_hidden=2, fourier=2, beta=5.)`
-remains the historical v2 witness: a smooth Fourier MLP plus a zero-initialized
-raw linear branch, 10,467 parameters. It supports native cap double backward.
+is a smooth Fourier MLP plus a zero-initialized raw linear branch, 10,467
+parameters. It supports the double backward the critic penalty needs.
 Both classes can be passed to `GANTrainer` or used in a custom loop.
 
 ## A minimal DDGAN + UCD loop
@@ -143,7 +141,7 @@ import copy
 import torch
 from torch import nn
 from torch.nn import functional as F
-from particlegan import DDGAN, UCD, get_recipe, learning_rate_scale, ucd_loss
+from particlegan import DDGAN, UCD, get_recipe, scale_learning_rates, ucd_loss
 
 device = torch.device("cpu")
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
@@ -175,19 +173,18 @@ G = Generator(recipe.z_dim, recipe.num_classes, process.steps).to(device)
 D = UCD(LogitNetwork(recipe.num_classes, process.steps), recipe.num_classes).to(device)
 prior = recipe.make_prior().to(device)
 gan = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
 spread = recipe.make_prior_regularizer()
-opt_g, opt_d = recipe.make_optimizers(G, D, prior)
+# Adam optimizers whose step() runs the recipe's regularization (K3P today);
+# the EMA critic is ours to allocate.
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+penalty = recipe.make_critic_penalty(opt_d)
 ema_g = copy.deepcopy(G).eval().requires_grad_(False)
 ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
 for step in range(recipe.total_steps):
-    scale = learning_rate_scale(step, recipe.total_steps,
-                               recipe.lr_anneal_start, recipe.lr_floor)
-    for opt, rates in zip((opt_g, opt_d), base_lrs):
-        for group, rate in zip(opt.param_groups, rates):
-            group["lr"] = rate * scale
+    # G/D follow the network schedule (K3P's blend floor), the prior its own.
+    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
 
     labels = torch.randint(recipe.num_classes, (recipe.batch_size,), device=device)
     real = 0.2 * torch.randn(len(labels), 2, device=device) + (2 * labels[:, None] - 1)
@@ -202,8 +199,7 @@ for step in range(recipe.total_steps):
     fake_score, fake_logits = D(fake.detach(), labels, xt=xt, t=t)
     d_loss = gan.d_loss(real_score, fake_score)
     d_loss += ucd_loss(real_logits, fake_logits, labels, weight=recipe.ucd_weight)
-    d_loss += penalty(lambda x: D(x, labels, xt=xt, t=t)[0],
-                      x_prev, fake.detach(), step=step + 1)
+    d_loss = d_loss + penalty(D, x_prev, fake.detach(), labels, xt=xt, t=t)
     d_loss.backward()
     opt_d.step()
 
@@ -250,7 +246,6 @@ inference walks through every reverse step. Class-only UCD is the default;
 | [UCD](#ucd) | Class-score selection and class supervision |
 | [Recipes](#recipes-and-defaults) | Inspectable defaults and optional factories |
 | [GANTrainer](#gantrainer) | Optional unconditional GAN updates, sampling and checkpoints |
-| [Locked shared](#locked-shared) | Demo RpGAN + `b_cap` stamp (not `Recipe("gan")`) |
 | [TOML](#toml-configuration) | Pass loaded dictionaries to constructors |
 | [Other pipelines](#loss-augmentation-and-teacherstudent-pipelines) | Compose with existing objectives |
 | [Inference](#inference-and-checkpoints) | Generate from saved G and prior states |
@@ -407,81 +402,36 @@ tracks device and dtype.
 ### `GANLoss`
 
 ```python
-GANLoss(loss_type="logistic", mode="rp",
-        label_smoothing=0.0, label_flip_prob=0.0)
+gan = recipe.make_loss()  # GANLoss(): relativistic pairing (RpGAN), logistic link
 ```
 
-`d_loss(real_logits, fake_logits)` and `g_loss(fake_logits, real_logits=None)`
+`d_loss(real_logits, fake_logits)` and `g_loss(fake_logits, real_logits)`
 return scalar tensors to minimize. Both preserve their input gradient paths;
 the caller decides which scores to detach. Inputs are critic scores, without
 a sigmoid; use matching shapes such as `[B]` or `[B, 1]`.
 
-| Option | Values |
-| --- | --- |
-| `loss_type` | `logistic`, `hinge`, `wasserstein`, `lsgan` |
-| `mode` | `vanilla`, `rp` (paired relativistic), `ra` (average relativistic) |
-
-The default D loss is `softplus(fake - real).mean()`; the G loss reverses that
-difference. Both relativistic modes require real scores for `g_loss`. Smoothing
-and label flipping apply to the vanilla logistic D objective. Recompute D's
+The D loss is `softplus(fake - real).mean()`; the G loss reverses that
+difference, so `g_loss` requires real scores paired row by row. Recompute D's
 scores after updating D; freeze its weights during the G step while retaining
 the gradient path through the fake input.
 
-### `GradientPenalty`
+### Critic penalty
 
 ```python
-GradientPenalty(arm="b_cap", coeff=1.0, kappa=1.0, lazy_k=1, norm="l2",
-                target_anneal="none", total_steps=0,
-                method="autograd", fd_eps=0.05)
+penalty = recipe.make_critic_penalty(opt_d)   # opt_d from recipe.make_optimizers(...)
+d_loss = gan.d_loss(D(real), D(fake.detach())) + penalty(D, real, fake.detach())
 ```
 
-Call `penalty(D, real, fake, step=1, generator=None)` to get a scalar loss.
-`D` may be a module or callable returning one scalar score per example. The
-default is the mean squared excess of the input-gradient norm above `kappa`,
-averaged over real and fake samples and scaled by `coeff`.
-
-| `arm` | Penalty |
-| --- | --- |
-| `b_cap` | One-sided gradient cap on reals and fakes |
-| `a_r1r2` | Zero-centered squared L2 gradients on reals and fakes |
-| `c_eikonal` | Two-sided penalty around norm 1 |
-| `d_asym` | Two-sided penalty with weaker pressure below norm 1 |
-| `e_interp` | Two-sided norm-1 penalty on real/fake interpolates |
-| `g_interp_cap` | One-sided gradient cap on interpolates |
-| `f_none` | Zero penalty |
-
-The helper recomputes D on detached candidate tensors with input gradients
-enabled. It builds gradients for the critic's parameters; it does not train the
-generator through the supplied fake batch. Keep conditioning tensors fixed in
-a closure when regularizing a conditional critic.
-
-- `lazy_k > 1` applies the penalty when `step % lazy_k == 0` at `lazy_k` times
-  its weight. Supply the current D-update index; the default `step=1` never advances.
-- Norm choices are `l2`, `l1`, and `linf`; `a_r1r2` requires `l2`.
-- `target_anneal` accepts `none`, `linear`, or `delayed`; annealing requires
-  positive `total_steps`.
-- `method="finite_difference"` is an optional approximation supporting only
-  L2 `b_cap`; `fd_eps` is its input displacement. The default uses exact autograd.
-- `penalty.penalty(D, real, fake, step=1, generator=None, collect_stats=True)`
-  returns `(loss, stats)`. The callable form disables stats to avoid scalar
-  synchronization. A skipped penalty returns a detached zero.
-
-### Locked shared
-
-```python
-from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_gan_loss, make_b_cap
-```
-
-`LOCKED_SHARED` is the demo stamp: RpGAN logistic, `b_cap` coeff 1, κ 1, L2,
-`lazy_k` 1, feature matching off, cover 1.5, a 12-particle cloud at
-`particle_l2` 0.02 when particles are built, and the host critic.
-`make_gan_loss()` and `make_b_cap()` build those two objects and refuse any
-other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
-pairing, and a thinned κ are not this stamp. The selected `get_recipe()`
-uses coefficient 6, κ=1.25 and prior regularization .05; this frozen stamp retains
-its original values.
-The full field table is in [locked shared](locked-shared.md). Lunar Lander's
-import of it is [the gym arm](gym-particle-finetune.md#locked-shared-arm).
+The penalty is a loss term: call it with the critic, reals and detached fakes
+(plus any conditioning, forwarded to the critic and its EMA) and add the
+result to the critic loss. It reads the state it needs from its critic
+optimizer, so build it from the optimizer the recipe made for that critic and
+pass `ema_critic=copy.deepcopy(D)` there. It penalizes the critic's input
+gradient: R1 on reals plus a cap on fakes while the critic LR is high, handing
+over to caps on both plus an EMA-critic gradient anchor as the LR anneals
+([how it works](k3p.md)). `reg_coeff`, `reg_kappa` and `reg_every` set its
+strength, cap and lazy interval. It recomputes D on detached inputs and builds
+gradients only for the critic's parameters.
 
 ### `ParticleRegularizer`
 
@@ -616,15 +566,15 @@ Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 
 `get_recipe(name="gan", **overrides)` selects components without constructing a
 training loop. Explicit keyword fields override the selected configuration.
-Every family uses the current shared optimizer, loss, penalty and schedule
-defaults; historical hyperparameter versions are not selectable. Unknown names
+Every family trains with the same optimizer, loss, penalty and schedule.
+Unknown names
 and fields are rejected. Restore a complete saved configuration with
 `Recipe(**saved_fields)`; use `recipe.replace(name="my-run")` to label a run.
 
 | Name | Components and dimensions |
 | --- | --- |
-| `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 4, no sampling noise |
-| `mog` | GAN, 400 MoG components, latent dimension 4, relative sigma .025 |
+| `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
+| `mog` | GAN, 400 MoG components, latent dimension 2, relative sigma .025 |
 | `ddgan` | DDGAN, UCD with 4 classes, discrete particles |
 | `ddgan_mog` | DDGAN, UCD with 4 classes, 400 MoG components, relative sigma .025 |
 | `ae_gan` | GAN, AE encoding, 400 MoG components, latent dimension 2 |
@@ -682,30 +632,82 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | Shared field | Default |
 | --- | --- |
 | `model`, `conditioning`, `num_classes` | `gan`, `scalar`, `None` |
-| `z_dim`, `num_particles` | `4`, `20_000` |
+| `z_dim`, `num_particles` | `2`, `20_000` |
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
-| `loss_type`, `gan_mode` | `logistic`, `rp` |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
-| `betas`, `prior_betas` | `(0, .99)`, `None` (inherit betas) |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `6`, `1.25` |
-| `reg_every`, `reg_method` | `1`, `autograd` |
-| `prior_reg`, `ema_decay` | `.05`, `.995` |
-| `lr_anneal_start`, `lr_floor` | `.6`, `.05` |
-| `batch_size`, `total_steps` | `256`, `7_000` |
+| `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
+| `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
+| `prior_reg`, `ema_decay` | `0`, `.995` |
+| `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
+| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule and K3P blend floor; `None` = full budget / `lr_floor`) |
+| `reg_anchor_decay` | `.999` |
+| `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
+| `latent_damping_max_rate` | `.5` (0 disables) |
+| `direct_particle_betas` | `(0, .9)` (`make_generator_optimizer(direct_particles=...)`) |
+| `input_noise_std`, `input_noise_anneal_end` | `.5`, `.1` |
+| `output_noise_std`, `output_noise_warmup` | `.029`, `.2` |
+| `batch_size`, `total_steps` | `2048`, `7_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
 
 Architectures, model/prior choices, data and resource budgets belong to the
-caller. Historical v1/v2 comparison receipts live in benchmark data, outside
-the installable package; they are not alternate production defaults.
+caller.
 
 | Optional factory | Result |
 | --- | --- |
 | `recipe.make_prior(**kwargs)` | `ParticlePrior` or `MoGParticlePrior` selected by `prior_kind` |
-| `recipe.make_loss(**kwargs)` | `GANLoss` using recipe loss and mode |
-| `recipe.make_gradient_penalty(**kwargs)` | `GradientPenalty` using recipe penalty settings |
+| `recipe.make_loss()` | `GANLoss` (RpGAN logistic) |
+| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | `(opt_g, opt_d)` Adam optimizers doing the recipe's step-time work (see below) |
+| `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Adam for one (additional) critic (see below) |
+| `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Adam for generator-side params (see below) |
+| `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
 | `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
-| `recipe.make_optimizers(G, D, prior=None, encoder=None, **adam_kwargs)` | `(opt_g, opt_d)`, ordinary Adam optimizers |
+
+### Regularization factories
+
+The recipe, not the caller, chooses the regularization formulation, and your
+loop stays plain PyTorch. Today the factories return K3P implementations
+(`particlegan.k3p.K3PGeneratorAdam`, `K3PCriticAdam`, `CriticPenalty`); a
+future formulation can replace them without changing caller code.
+
+```python
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+penalty = recipe.make_critic_penalty(opt_d)
+d_loss = adv_d + penalty(D, real, fake)                  # or penalty(D, x, fake, labels, t=t)
+opt_d.zero_grad(); d_loss.backward(); opt_d.step()       # guard, Adam, EMA + LR record
+opt_g.zero_grad(); g_loss.backward(); opt_g.step()       # Adam with A2 latent damping
+
+opt_d2 = recipe.make_critic_optimizer(D2, ema_critic=copy.deepcopy(D2))  # a second critic
+penalty2 = recipe.make_critic_penalty(opt_d2)
+
+torch.save({"G": G.state_dict(), "D": D.state_dict(), "D2": D2.state_dict(),
+            "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict(), "opt_d2": opt_d2.state_dict()}, path)
+```
+
+- The optimizers are `torch.optim.Adam` subclasses: `param_groups`, LR
+  schedulers, closures and `state_dict()`/`load_state_dict()` work as usual.
+  Their `state_dict()` adds a `"regularizer"` entry holding the EMA critic,
+  LR record, counters, guard count and A2/direct-particle histories, so the
+  usual checkpoint above resumes bit-exactly.
+- `ema_critic` is caller-allocated (e.g. `copy.deepcopy(D)`); the K3P penalty
+  requires it. The optimizer freezes it and only writes it.
+- `penalty(D, real, fake, *condition, **condition_kwargs)` returns a scalar.
+  Conditioning is forwarded to the critic and its EMA. `D` may be the
+  optimizer's critic, a submodule of it (one role of a shared module; the
+  same-named EMA submodule is used) or a module wrapping one of those (e.g.
+  `InputNoise(D, std, generator)`). A tuple/list output uses its first element
+  unless `output=` selects the logits. The step for `reg_every` is the
+  optimizer's completed step count + 1.
+- `penalty.last_stats` holds the last call's stats when `collect_stats=True`;
+  `penalty.diagnostics()` returns host scalars such as
+  `{"blend_weight": ..., "clipped_tensors": ...}`; `penalty.ema_critic` is the
+  paired EMA module.
+- `make_optimizers` gives a learnable `ParticlePrior` table A2 damping (alone
+  in its group with beta1 0) and the critic the spike guard. Set
+  `latent_damping_max_rate=0` and `d_guard_ratio=0` for plain Adam steps.
+- `make_generator_optimizer(..., direct_particles=[...])` applies the
+  direct-particle response to that param group.
 
 Factory keyword arguments override constructor values for that call, without
 changing the recipe. Optimizers exclude frozen parameters; G and prior have
@@ -741,21 +743,16 @@ betas = [0.0, 0.999]
 [prior]
 z_dim = 16
 num_particles = 4096
-
-[loss]
-loss_type = "logistic"
-mode = "rp"
 ```
 
 ```python
 import tomllib  # Python 3.10: install tomli and import it as tomllib.
-from particlegan import ParticlePrior, GANLoss, get_recipe
+from particlegan import ParticlePrior, get_recipe
 
 with open("model.toml", "rb") as file:
     config = tomllib.load(file)
 recipe = get_recipe(**config["particlegan"])
 prior = ParticlePrior(**config["prior"])
-gan = GANLoss(**config["loss"])
 recipe = get_recipe(**{**config["particlegan"], "lr": 1e-4})
 ```
 
@@ -844,6 +841,6 @@ Inference needs no discriminator or optimizer. Resuming training additionally
 requires your D, optimizer, scheduler, EMA, update-counter, and RNG state.
 
 The [implementation report](../reports/api.md) records the design, migration,
-and validation. Legacy research names such as `GradRegularizer`,
-`VICRegLikeLoss`, `DiffusionSchedule`, and `DrawSource` remain in package
-submodules for repository compatibility; the APIs above are the public entry points.
+and validation. Lower-level names such as `VICRegLikeLoss`,
+`DiffusionSchedule`, and `DrawSource` live in package submodules; the APIs
+above are the public entry points.

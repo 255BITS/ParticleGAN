@@ -28,7 +28,7 @@ error = (encoded prediction - paired target) / training-only scale
 real_R = sigma * noise
 fake_R = same sigma * noise + error
 
-R loss = mean softplus(R(fake_R) - R(real_R)) + gradient cap
+R loss = mean softplus(R(fake_R) - R(real_R)) + recipe critic penalty
 paired G/E loss = mean softplus(R(real_R) - R(fake_R))
 ```
 
@@ -49,8 +49,9 @@ with a median-row-RMS adjustment; only the 9,297 expert training triples fit it.
 The pinned source critic mixes the error into eight width 48 tokens, applies one
 four-head attention layer, and bounds its score at 8. These tokens are mixtures
 of coordinates, not trajectory steps. Noise follows the source's geometric
-schedule with absolute hold 1.0, adapted to our 2,500-update budget. The exact
-gradient cap runs every fourth update with the lazy multiplier 4.
+schedule with absolute hold 1.0, adapted to our 2,500-update budget. `R` trains
+with the recipe's critic optimizer and penalty (`recipe.make_critic_optimizer`,
+`recipe.make_critic_penalty`), like the transition critics.
 
 We reuse the unmodified MIT
 [shared reference implementation](https://github.com/mikkel/sliders-conceptmod/tree/beaffeb3640c4554a7315998c04a5909f384b972/packages/concept-slider-core),

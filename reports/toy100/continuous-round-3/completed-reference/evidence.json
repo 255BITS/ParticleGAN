@@ -1,0 +1,442 @@
+{
+  "batch": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
+  "observed_utc": "2026-09-25T18:06:39.149947+00:00",
+  "scope": "Completed attempt archive; ledger PASS is not formulation qualification",
+  "attempts": [
+    {
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "run": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944",
+      "status": "completed (inspect result.md; exit 0 does not mean a win)",
+      "files_sha256": {
+        "result.md": "29df8df30e33c857085b1285710c3e940d10e3aae396e5b0230b4b477dcf0238",
+        "final.md": "1707a56936dfd9e4f3772de649bd9a687c3e1fb9cf92d152bc1b669c2ecd0a7c",
+        "tests.jsonl": "a3175486a768067e59672ed83be0e44a993e6af1ee106406863c45e12b519944",
+        "run.txt": "9a0ae49f87dbe9f395006a545803ca0a91480304c34c3afbe85edc4a5cc8d3d3",
+        "status.txt": "c599ab597ddd7b0dcacac46b604a3fdbaf73e319dca8b94eab85db64d024bc94",
+        "exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "ledger_status_counts": {
+    "PASS": 3,
+    "FAIL": 3,
+    "NOT_RUN": 15
+  },
+  "records": [
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "ring_hold_extension",
+      "status": "PASS",
+      "seconds": 106.351,
+      "metrics": {
+        "raw_status": "PASS",
+        "driver_terminal": true,
+        "converged_step": 1400,
+        "settling_failures": 0,
+        "hold_checks": 1200,
+        "hold_budget": 1200,
+        "hold_passing": 1200,
+        "hold_min_hq": 0.923828125,
+        "hold_min_modes": 8,
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "extension_min_hq": 0.99658203125,
+        "extension_min_modes": 8,
+        "good_hold_updates": 1200,
+        "last_live": {
+          "step": 2900,
+          "modes": 8,
+          "hq": 1.0
+        },
+        "last_ema": {
+          "step": 2900,
+          "modes": 8,
+          "hq": 0.9990234375
+        },
+        "extra_critic_forwards": 2095,
+        "pure_a_calls": 804,
+        "blend_calls": 390,
+        "pure_b_calls": 1706,
+        "step_600_modes": 8,
+        "step_600_hq": 0.992431640625,
+        "note": "Own hold 1200/1200 and extension 300/300. Anchor latched at critic step 1200 with s=0 and floors. Mix stayed 0. Reference alpha stayed near 0.001 because innovation stayed moderate."
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944/repo/reports/toy100/k3p-reference-response/runs/rr1-hold/result.json",
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 1,
+      "snapshot": "evidence/afc58a5cb2c0f4dcf57bbb2c71b403ffd56a4dc8474d1959b885282c031aff85.json.gz",
+      "artifact_sha256": "afc58a5cb2c0f4dcf57bbb2c71b403ffd56a4dc8474d1959b885282c031aff85"
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 131.416,
+      "metrics": {
+        "raw_status": "FAIL",
+        "stationary_checks": 5,
+        "stationary_passing": 5,
+        "stationary_min_hq": 0.985595703125,
+        "stationary_min_modes": 8,
+        "continued_hold_checks": 120,
+        "continued_hold_passing": 120,
+        "continued_hold_min_hq": 0.92529296875,
+        "deadline_checks": 81,
+        "deadline_passing": 29,
+        "deadline_pass": false,
+        "deadline_min_modes": 5,
+        "deadline_min_hq": 0.556640625,
+        "delay_updates": 1010,
+        "stable_from_step": 3410,
+        "post_shift_min_modes": 1,
+        "post_shift_min_hq": 0.057861328125,
+        "final_modes": 8,
+        "final_hq": 0.977783203125,
+        "ema_modes": 8,
+        "ema_hq": 0.950927734375,
+        "optimizer_updates": 3600,
+        "max_post_rate_gain": 0.1048,
+        "max_post_level": 0.381,
+        "post_s": 0.0,
+        "extra_critic_forwards": 2795,
+        "note": "Pre-shift stationary 5/5 and continued hold 120/120. Critic-gradient RMS level only reached 0.38 after the shift, so the 0.5 reopen never fired and the rate stayed near the floor. Prox residual jumped from ~0.0007 to 0.033; parameter RMS did not separate the shift from hold fluctuations. Deadline 29/81, delay 1010."
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944/repo/reports/toy100/k3p-reference-response/runs/rr1-shift/result.json",
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 2,
+      "snapshot": "evidence/b5ea1053a470861976e7e27ed79f068531e98bffa70b2ba5b418c40b7a141671.json.gz",
+      "artifact_sha256": "b5ea1053a470861976e7e27ed79f068531e98bffa70b2ba5b418c40b7a141671"
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "ring_hold_extension",
+      "status": "PASS",
+      "seconds": 131.833,
+      "metrics": {
+        "raw_status": "PASS",
+        "converged_step": 1400,
+        "settling_failures": 0,
+        "hold_checks": 1200,
+        "hold_passing": 1200,
+        "hold_min_hq": 0.9169921875,
+        "hold_min_modes": 8,
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "extension_min_hq": 0.98291015625,
+        "extension_min_modes": 8,
+        "last_live": {
+          "step": 2900,
+          "modes": 8,
+          "hq": 0.99951171875
+        }
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944/repo/reports/toy100/k3p-reference-response/runs/rr2-hold/result.json",
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 3,
+      "snapshot": "evidence/0c150dbd2d3aef0816273c81fbb38b43b095de51a11edc176ea36c0164dd5310.json.gz",
+      "artifact_sha256": "0c150dbd2d3aef0816273c81fbb38b43b095de51a11edc176ea36c0164dd5310"
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 154.36,
+      "metrics": {
+        "raw_status": "FAIL",
+        "stationary_passing": 5,
+        "stationary_checks": 5,
+        "stationary_min_hq": 0.985595703125,
+        "continued_hold_passing": 120,
+        "continued_hold_checks": 120,
+        "continued_hold_min_hq": 0.91748046875,
+        "deadline_passing": 52,
+        "deadline_checks": 81,
+        "deadline_pass": false,
+        "deadline_min_modes": 4,
+        "deadline_min_hq": 0.412109375,
+        "delay_updates": 1140,
+        "stable_from_step": 3540,
+        "final_modes": 8,
+        "final_hq": 0.95654296875,
+        "post_rate_gain": 0.2,
+        "post_alpha": 0.0002,
+        "note": "Prox ratio opened the 0.2 rate by step 2449 and 8 modes returned by step 2500. Alpha 0.0002 kept the prox ratio above 10 through step 3600, so the rate never released and the deadline window wobble left 52/81, delay 1140."
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944/repo/reports/toy100/k3p-reference-response/runs/rr2-shift/result.json",
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 4,
+      "snapshot": "evidence/b98393d6dbddac34326ba8f5e97ade80115a58dd7f253bfe222ad0b42f9c125f.json.gz",
+      "artifact_sha256": "b98393d6dbddac34326ba8f5e97ade80115a58dd7f253bfe222ad0b42f9c125f"
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "ring_hold_extension",
+      "status": "PASS",
+      "seconds": 141.41,
+      "metrics": {
+        "raw_status": "PASS",
+        "converged_step": 1400,
+        "settling_failures": 0,
+        "hold_checks": 1200,
+        "hold_passing": 1200,
+        "hold_min_hq": 0.9169921875,
+        "hold_min_modes": 8,
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "extension_min_hq": 0.98291015625,
+        "extension_min_modes": 8,
+        "last_live": {
+          "step": 2900,
+          "modes": 8,
+          "hq": 0.99951171875
+        },
+        "note": "Prox rule stayed closed on the hold. Same minima as rr2."
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944/repo/reports/toy100/k3p-reference-response/runs/rr3-hold/result.json",
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 5,
+      "snapshot": "evidence/da94a4e57045f39c902c34fa7088886b91d7d74cf60b66866151e74674ad92eb.json.gz",
+      "artifact_sha256": "da94a4e57045f39c902c34fa7088886b91d7d74cf60b66866151e74674ad92eb"
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "target_shift_recovery",
+      "status": "FAIL",
+      "seconds": 169.059,
+      "metrics": {
+        "raw_status": "FAIL",
+        "stationary_passing": 5,
+        "stationary_checks": 5,
+        "stationary_min_hq": 0.985595703125,
+        "continued_hold_passing": 120,
+        "continued_hold_checks": 120,
+        "continued_hold_min_hq": 0.91748046875,
+        "deadline_passing": 0,
+        "deadline_checks": 81,
+        "deadline_pass": false,
+        "deadline_min_modes": 6,
+        "deadline_min_hq": 0.571533203125,
+        "delay_updates": null,
+        "post_shift_passing": 0,
+        "post_shift_checks": 120,
+        "final_modes": 6,
+        "final_hq": 0.645263671875,
+        "ema_modes": 7,
+        "ema_hq": 0.783447265625,
+        "optimizer_updates": 3600,
+        "final_rates": [
+          4.25e-05,
+          0.000425
+        ],
+        "note": "Gain 0.2 opened at step 2449 then the 0.002 baseline leak closed it by step 2499, before 8 modes returned. Ratio then stayed near 1, so the rate never reopened. Deadline 0/81. Both optimizers took 3600 updates."
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z/k3p_reference_response/20260925T172923Z-3719944/repo/reports/toy100/k3p-reference-response/runs/rr3-shift/result.json",
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 6,
+      "snapshot": "evidence/23826490c26b6765eeff216282dff8cef8097c7b38ee2e7916f4cb7e5fa16e96.json.gz",
+      "artifact_sha256": "23826490c26b6765eeff216282dff8cef8097c7b38ee2e7916f4cb7e5fa16e96"
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "matched_frozen_recovery",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Live shift did not return UNCONFIRMED. Frozen control not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 7
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "sensitive_four",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "No candidate passed hold, extension, and 81/81 recovery."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 8
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "full_22_toys",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 9
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "two_horizon_prefix",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not run. Rates ignore horizon; input/output noise still uses noise_horizon 1200."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 10
+    },
+    {
+      "candidate": "rr1_innovation_reference",
+      "gate": "delayed_repeated_change",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 11
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "matched_frozen_recovery",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Live shift did not return UNCONFIRMED. Frozen control not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 12
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "sensitive_four",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "No candidate passed hold, extension, and 81/81 recovery."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 13
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "full_22_toys",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 14
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "two_horizon_prefix",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not run. Rates ignore horizon; input/output noise still uses noise_horizon 1200."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 15
+    },
+    {
+      "candidate": "rr2_prox_reference",
+      "gate": "delayed_repeated_change",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 16
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "matched_frozen_recovery",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Live shift did not return UNCONFIRMED. Frozen control not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 17
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "sensitive_four",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "No candidate passed hold, extension, and 81/81 recovery."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 18
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "full_22_toys",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 19
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "two_horizon_prefix",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not run. Rates ignore horizon; input/output noise still uses noise_horizon 1200."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 20
+    },
+    {
+      "candidate": "rr3_prox_release",
+      "gate": "delayed_repeated_change",
+      "status": "NOT_RUN",
+      "seconds": null,
+      "metrics": {
+        "note": "Not opened."
+      },
+      "artifact": null,
+      "lane": "k3p_reference_response",
+      "engine": "grok",
+      "ledger_row": 21
+    }
+  ]
+}

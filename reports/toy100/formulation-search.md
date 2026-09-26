@@ -1,3 +1,8 @@
+> Current work uses the public package default after the master merge.
+> Follow `reports/toy100/k3p-base/continuous-search.md` and the baseline handoff.
+> Training is deferred until after compaction. The instructions below are
+> historical and do not authorize autonomous launches or seed repeats.
+
 # Current task: improve the selected K3P GAN
 
 Read AGENTS.md, reports/toy100/current-research-base.json,
@@ -5,6 +10,12 @@ reports/toy100/k3p-base/README.md, and the current leaderboard. K3P is the
 user-selected research and launcher base. Use the exact pinned files under
 reports/toy100/gap-fill-20260925/sources/k3p: config, mechanism, latent, response,
 and the corresponding gate driver. Config alone is not this formulation.
+
+The user's current direction is continuous learning without a training-horizon
+definition of "later". Read reports/toy100/k3p-base/continuous-search.md for that
+objective, the constant-LR/disabled-anchor trap, and the hold/recovery-first
+qualification sequence. The dedicated launch-gan-k3p-continuous.py configures
+three bounded lanes using the existing search launcher.
 
 K3P passes all 22 declared GPU toys, plus its 1,200-update ring hold and all 300
 extension checks. The measured blocker is target-shift recovery at the selected

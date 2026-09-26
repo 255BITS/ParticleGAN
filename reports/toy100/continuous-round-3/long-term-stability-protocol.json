@@ -1,0 +1,43 @@
+{
+  "name": "continuous_30000_v1",
+  "status": "DECLARED_BEFORE_EXECUTION",
+  "reason": "User explicitly requires all continuous tests, all three100-Gaussian layouts each4/4seeds and long-term stability before stopping searches and promoting",
+  "candidate": "Same unchanged formulation qualifying on canonical protocols and original toy gates",
+  "fixture": "Original mode_hold initialization fixture and seed",
+  "total_updates": 30000,
+  "prefix_protocol": "stress-protocol.json: preserve every specified target change, quality window and threshold through update9000",
+  "third_target_change": {
+    "after_update": 27000,
+    "absolute_offset": [
+      0.0,
+      1.0
+    ],
+    "deadline_updates": 400,
+    "deadline_checks": {
+      "first": 27400,
+      "last": 28200,
+      "stride": 10,
+      "count": 81
+    }
+  },
+  "additional_stable_windows": [
+    {
+      "first": 9010,
+      "last": 27000,
+      "stride": 10
+    },
+    {
+      "first": 28210,
+      "last": 30000,
+      "stride": 10
+    }
+  ],
+  "quality_at_every_required_check": {
+    "live_modes": 8,
+    "min_live_hq": 0.9
+  },
+  "execution": "One uninterrupted process from initialization through30000; no checkpoint reload, restarts, state resets, learner changes or extra optimizer updates. Report the existing9000 prefix protocol separately from its longer extension.",
+  "state": "Preserve model, Adam moments, EMAs, controller, latent/response history and every RNG; confirm active positive updates after all changes",
+  "learner_access": "The evaluator alone knows budgets, change times, target offsets and quality; none can enter the learned formulation",
+  "report": "All original and added windows must pass. Preserve all missed checks and rate/state traces. A finite30000-update pass does not establish indefinite stability."
+}

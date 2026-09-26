@@ -2,4 +2,4 @@
 +++ /ml2/hypergan/try-gan.sh (selected K3P default)
 @@ -13,1 +13,1 @@
 -focus='Improve the selected direct-particle-response GAN; gate on unequal-width covariance first.'
-+focus='Improve the selected K3P GAN: target-shift recovery while protecting 22/22 and extended hold.'
++focus='Make selected K3P continuous without a training horizon; preserve 22/22, hold and timely recovery.'
