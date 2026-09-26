@@ -366,3 +366,18 @@ attempts (graded blind-band shapes, G-boost ported onto R2) did not beat R2.
 Per user direction, failing gates are retried at declared seeds before drop
 verdicts; fragile is not broken, robust wins. Active: basin round
 (early-phase acquisition robustness over 8 declared seeds) on both GPUs.
+
+## Compute cost is count-based (wall clock invalid) — September 26, 2026
+
+Per user direction: this box runs 6+ concurrent workers, so wall seconds
+measure contention noise, not compute. Cost = gradient-evaluation counts from
+mechanism receipts (load-invariant): eval-units = pure-A calls x 1 + blended
+calls x 2 (each blended call adds one EMA-critic forward+input-grad), plus
+EMA updates/skips/reseeds and optimizer steps as bookkeeping. Measured
+per-3600-call shift run: ka2, R2, B3-belief, SG3, G1 ALL tie at 6401
+eval-units (799 pure + 2801 blend; same architecture, same protocol) —
+differing only in negligible EMA bookkeeping. Wall-clock differences between
+runs are contention artifacts; ties are reported as ties. The cost metric
+binds only when architectures or step budgets differ. Toy-sweep lanes report
+count-based totals; final-board ranking among full-stable survivors is by
+this count.
