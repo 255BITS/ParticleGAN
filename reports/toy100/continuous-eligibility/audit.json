@@ -173,13 +173,15 @@
     }
   },
   "execution": {
-    "phase": "PREPARED_WAITING_FOR_COMPACTION",
+    "phase": "THREE_EXTERNAL_API_APPROACHES_RUNNING",
     "concurrent_approaches": 3,
     "engine": "codex",
     "model": "gpt-6-astra",
     "reasoning_effort": "max",
     "seed_sweeps": false,
-    "new_research_launched": false,
-    "merge_authorized": false
+    "new_research_launched": true,
+    "merge_authorized": false,
+    "launched_utc": "2026-09-26T21:12:09+00:00",
+    "launch_receipt": "launch/first-launch.json"
   }
 }

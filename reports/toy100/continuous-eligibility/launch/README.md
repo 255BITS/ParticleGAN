@@ -1,7 +1,11 @@
-# Prepared external Codex search: run after compaction
+# External Codex search: three approaches running
 
-**Preparation only. No external model request or GPU experiment was launched.**
-The next supervisor starts three distinct approaches with the existing
+**Started September 26 at 21:12 UTC, after the requested compaction.** All three
+external sessions confirmed `gpt-6-astra` with reasoning effort `max`;
+[the launch receipt](first-launch.json) preserves exact commands, process IDs,
+model headers and log paths. This records launch, not a qualified result.
+
+The supervisor runs three distinct approaches with the existing
 `/ml2/hypergan/try-gan.sh`, using `gpt-6-astra` and reasoning effort `max`.
 Each receives an isolated worktree from public API commit
 `fa511ce010120b502f494d717d01b14b8551eed8` (PR195), one GPU worker,

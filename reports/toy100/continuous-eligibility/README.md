@@ -133,9 +133,11 @@ retrospectively and cannot prove future stability.
 
 The user authorized **three distinct approaches at a time**, replenished after
 review until one meets the requirement, using the external **Codex / Astra / max**
-launcher. The latest instruction is to **compact before launching**. This audit
-does not start model workers or training. The prepared launch handoff lives in
-[launch/](launch/README.md). PRs remain unmerged.
+launcher. After the requested compaction, all three external model sessions
+started on **September 26 at 21:12 UTC**. Their model headers confirm Astra/max.
+The [launch receipt](launch/first-launch.json) and [supervision handoff](launch/README.md)
+preserve the commands, attempts and log paths. Qualification remains pending;
+PRs remain unmerged.
 
 [Machine-readable decisions](audit.json) ·
 [Previous PR body, preserved as history](pr155-body-before.md) ·

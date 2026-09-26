@@ -1,14 +1,11 @@
 {
-  "status": "NO_QUALIFIED_CONTINUOUS_WINNER_PREPARED_FOR_COMPACTION",
+  "status": "NO_QUALIFIED_CONTINUOUS_WINNER_SEARCH_RUNNING",
   "selected_candidate": null,
   "selected_declaration": null,
-  "active_round": 8,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T133716Z",
   "workflow": [
-    "Compact with continuous-eligibility/launch handoff preserved",
-    "Start three distinct external Codex gpt-6-astra/max approaches",
+    "Monitor three external Codex gpt-6-astra/max approaches through actual public API experiments",
     "Review each result and replenish failed approaches until one qualifies",
-    "Validate actual public API and full-learner continuous behavior before promotion; do not merge"
+    "Validate the same candidate across retention, arrival/stability, repeated changes, long continuation, checkpoint/horizon checks, matched K3P and broader quality; do not merge"
   ],
   "previous_round": {
     "round": 2,
@@ -19,26 +16,6 @@
     "canonical_protocols_not_run": 4,
     "report": "reports/toy100/continuous-round-2/README.md"
   },
-  "verification_progress": {
-    "observed_utc": "2026-09-25T18:08:10.246458+00:00",
-    "candidate": "rp1_signal_close",
-    "eligible_for_promotion": false,
-    "reason": "Real img_intensity2 and native grid100 accuracy failures",
-    "transfer_counts": {
-      "PASS": 8,
-      "FAIL": 1,
-      "NOT_RUN": 10
-    },
-    "native_counts": {
-      "PASS": 0,
-      "FAIL": 1,
-      "INCOMPLETE": 1,
-      "NOT_RUN": 1
-    },
-    "report": "reports/toy100/continuous-round-3/rp1-rejection.md",
-    "complete": false,
-    "stopped_after_failure": true
-  },
   "execution_policy": {
     "codex": 3,
     "grok": 0,
@@ -46,11 +23,18 @@
     "reasoning_effort": "max",
     "concurrent_approaches": 3,
     "max_workers_per_attempt": 1,
-    "new_launches_allowed": false,
+    "new_launches_allowed": true,
     "launch_authorized_after_compaction": true,
-    "phase": "PREPARED_NOT_LAUNCHED",
+    "phase": "RUNNING",
     "no_seed_sweeps": true,
-    "handoff": "reports/toy100/continuous-eligibility/launch/README.md"
+    "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
+    "verified_live_utc": "2026-09-26T21:13:30.904227+00:00",
+    "verified_live_counts": {
+      "codex": 3,
+      "grok": 0
+    },
+    "launch_receipt": "reports/toy100/continuous-eligibility/launch/first-launch.json",
+    "refill_requires_review": true
   },
   "completed_rounds": [
     {
@@ -69,13 +53,6 @@
       "report": "reports/toy100/continuous-round-2/README.md"
     }
   ],
-  "verification_ownership": {
-    "rp1_canonical_and_natives": "k3p_responsive_precision Grok lane",
-    "rp1_transfer19": "verify_p3_gates Grok lane after completing P3 sensitive4",
-    "rp1_horizon_and_adapter_audit": "k3p_extragradient Codex slot redirected by supervisor",
-    "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only",
-    "rp1_status": "Qualification stopped after real image and native accuracy failures; partial state witness limitations preserved."
-  },
   "on_verified_completion": [
     "Stop all remaining search agents and benchmark jobs, preserving their partial evidence",
     "Promote the same verified formulation in PR155 and update selected base, leaderboard and explanation",
@@ -87,12 +64,6 @@
     "canonical_protocols_complete": 33,
     "canonical_protocols_not_run": 1,
     "report": "reports/toy100/continuous-round-3/first-wave-summary.json"
-  },
-  "qualification_tooling": {
-    "native_seed_wrapper": "Prepared; twelve configuration checks pass with zero training updates; candidate installation review still required.",
-    "long_run_evaluator": "NOT_READY: partial repair archived. Two-update instrumentation identity PASS within rewritten evaluator; independent canonical-driver equivalence and complete review unfinished. No 9000/30000 candidate runs.",
-    "review": "reports/toy100/continuous-round-3/qualification-harness-review.md",
-    "canonical_control_companion": "NOT_DELIVERED: Codex exited 0 without source changes, ledger, or result report. Full-state strict companion remains unfinished."
   },
   "round3_first_replacement_wave": {
     "scope": "First seven replacement mechanism lanes. PB0 is unchanged-parent instrumentation and excluded. Excludes later TD kernel proposals and qualification tooling.",
@@ -115,92 +86,6 @@
     "qualified_winners": 0,
     "report": "reports/toy100/continuous-round-3/completed-training-discrepancy/attempts/k3p_training_discrepancy/result.md"
   },
-  "stop_request": {
-    "status": "STOPPED_USER_REQUEST",
-    "requested_by": "user",
-    "requested_utc": "2026-09-25T19:08:29.443504+00:00",
-    "instruction": "Stop the search, let current work finish, take inventory. No new attempts or extensions; current attempts retain existing limits.",
-    "running_at_request": [],
-    "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
-    "new_attempts_allowed": false,
-    "existing_work_policy": "Allow pre-existing work to finish; do not launch replacements or extensions.",
-    "tracked_search_processes": [],
-    "last_eight_attempts": {
-      "terminal": 8,
-      "exit_1": 7,
-      "exit_0_without_audit_deliverable": 1,
-      "result_reports": 0,
-      "note": "Already exited before stop handling. Saved final.md files are last progress messages, not completed reports. Exit cause not established."
-    },
-    "unrelated_baseline_audit": {
-      "root": "/tmp/k3p-audit-20260925",
-      "observed_utc": "2026-09-25T19:19:05.551652+00:00",
-      "processes": [
-        {
-          "pid": 3832970,
-          "argv": [
-            "bash",
-            "run_cell.sh",
-            "cell-a6000-t213",
-            "/tmp/k3p-audit-20260925/venv/bin/python",
-            "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69"
-          ]
-        },
-        {
-          "pid": 3832978,
-          "argv": [
-            "/tmp/k3p-audit-20260925/venv/bin/python",
-            "-"
-          ]
-        },
-        {
-          "pid": 3849934,
-          "argv": [
-            "/tmp/k3p-audit-20260925/venv/bin/python",
-            "-u",
-            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
-            "--repo",
-            "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
-            "--task",
-            "mid_scale_identity",
-            "--config",
-            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
-            "--backend",
-            "cuda",
-            "--initial-state",
-            "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt",
-            "--output",
-            "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mid_scale_identity"
-          ]
-        },
-        {
-          "pid": 3850081,
-          "argv": [
-            "/tmp/k3p-audit-20260925/venv/bin/python",
-            "-u",
-            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
-            "--repo",
-            "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
-            "--task",
-            "mode_hold",
-            "--config",
-            "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
-            "--backend",
-            "cuda",
-            "--initial-state",
-            "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
-            "--output",
-            "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mode_hold"
-          ]
-        }
-      ],
-      "action": "Left untouched to finish; not a registered formulation search. Results not included in this inventory."
-    },
-    "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
-    "evidence": "reports/toy100/continuous-round-3/stop-inventory/manifest.json",
-    "qualified_winners": 0,
-    "selected_candidate": "k3p"
-  },
   "historical_batches": [
     "/ml2/hypergan/gan-attempts/formulations-20260925T172651Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T172923Z",
@@ -221,9 +106,6 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z"
   ],
-  "active_batches": [],
-  "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
-  "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
   "round3_inventory": {
     "formulations_in_reported_groups": 42,
     "canonical_protocols_complete_in_reported_groups": 83,
@@ -245,7 +127,7 @@
   },
   "historical_current_lead": "r2_moment_surprise",
   "current_lead": null,
-  "active_phase": "eligibility_audit_complete_launch_after_compaction",
+  "active_phase": "three_external_api_approaches_running",
   "baseline": {
     "status": "MEASURED",
     "master_reference": "0ff9a7afe5dcb828239369446cfe71971bce687b",
@@ -537,5 +419,155 @@
       ]
     }
   },
-  "qualified_winners": 0
+  "qualified_winners": 0,
+  "historical_execution_before_continuous_api_launch": {
+    "active_round": 8,
+    "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T133716Z",
+    "active_batches": [],
+    "stop_request": {
+      "status": "STOPPED_USER_REQUEST",
+      "requested_by": "user",
+      "requested_utc": "2026-09-25T19:08:29.443504+00:00",
+      "instruction": "Stop the search, let current work finish, take inventory. No new attempts or extensions; current attempts retain existing limits.",
+      "running_at_request": [],
+      "inventory_utc": "2026-09-25T19:19:05.551652+00:00",
+      "new_attempts_allowed": false,
+      "existing_work_policy": "Allow pre-existing work to finish; do not launch replacements or extensions.",
+      "tracked_search_processes": [],
+      "last_eight_attempts": {
+        "terminal": 8,
+        "exit_1": 7,
+        "exit_0_without_audit_deliverable": 1,
+        "result_reports": 0,
+        "note": "Already exited before stop handling. Saved final.md files are last progress messages, not completed reports. Exit cause not established."
+      },
+      "unrelated_baseline_audit": {
+        "root": "/tmp/k3p-audit-20260925",
+        "observed_utc": "2026-09-25T19:19:05.551652+00:00",
+        "processes": [
+          {
+            "pid": 3832970,
+            "argv": [
+              "bash",
+              "run_cell.sh",
+              "cell-a6000-t213",
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69"
+            ]
+          },
+          {
+            "pid": 3832978,
+            "argv": [
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "-"
+            ]
+          },
+          {
+            "pid": 3849934,
+            "argv": [
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "-u",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+              "--repo",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+              "--task",
+              "mid_scale_identity",
+              "--config",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+              "--backend",
+              "cuda",
+              "--initial-state",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mid_scale_identity/initial-values.pt",
+              "--output",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mid_scale_identity"
+            ]
+          },
+          {
+            "pid": 3850081,
+            "argv": [
+              "/tmp/k3p-audit-20260925/venv/bin/python",
+              "-u",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/probe.py",
+              "--repo",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/prep/repos/cuda",
+              "--task",
+              "mode_hold",
+              "--config",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/gap-fill-20260925/sources/k3p/config.json",
+              "--backend",
+              "cuda",
+              "--initial-state",
+              "/tmp/k3p-audit-20260925/repo/reports/toy100/direct-particle-base/initialization-fixtures/mode_hold/initial-values.pt",
+              "--output",
+              "/tmp/k3p-audit-20260925/cell-a6000-t213/out/r2/toy-mode_hold"
+            ]
+          }
+        ],
+        "action": "Left untouched to finish; not a registered formulation search. Results not included in this inventory."
+      },
+      "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+      "evidence": "reports/toy100/continuous-round-3/stop-inventory/manifest.json",
+      "qualified_winners": 0,
+      "selected_candidate": "k3p"
+    },
+    "verification_progress": {
+      "observed_utc": "2026-09-25T18:08:10.246458+00:00",
+      "candidate": "rp1_signal_close",
+      "eligible_for_promotion": false,
+      "reason": "Real img_intensity2 and native grid100 accuracy failures",
+      "transfer_counts": {
+        "PASS": 8,
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "native_counts": {
+        "PASS": 0,
+        "FAIL": 1,
+        "INCOMPLETE": 1,
+        "NOT_RUN": 1
+      },
+      "report": "reports/toy100/continuous-round-3/rp1-rejection.md",
+      "complete": false,
+      "stopped_after_failure": true
+    },
+    "verification_ownership": {
+      "rp1_canonical_and_natives": "k3p_responsive_precision Grok lane",
+      "rp1_transfer19": "verify_p3_gates Grok lane after completing P3 sensitive4",
+      "rp1_horizon_and_adapter_audit": "k3p_extragradient Codex slot redirected by supervisor",
+      "p3_diagnostic_screen": "verify_p3_gates Grok lane; sensitive4 only",
+      "rp1_status": "Qualification stopped after real image and native accuracy failures; partial state witness limitations preserved."
+    },
+    "qualification_tooling": {
+      "native_seed_wrapper": "Prepared; twelve configuration checks pass with zero training updates; candidate installation review still required.",
+      "long_run_evaluator": "NOT_READY: partial repair archived. Two-update instrumentation identity PASS within rewritten evaluator; independent canonical-driver equivalence and complete review unfinished. No 9000/30000 candidate runs.",
+      "review": "reports/toy100/continuous-round-3/qualification-harness-review.md",
+      "canonical_control_companion": "NOT_DELIVERED: Codex exited 0 without source changes, ledger, or result report. Full-state strict companion remains unfinished."
+    },
+    "inventory": "reports/toy100/continuous-round-3/INVENTORY.md",
+    "inventory_utc": "2026-09-25T19:19:05.551652+00:00"
+  },
+  "active_batch": "/ml2/hypergan/gan-attempts/continuous-api-20260926",
+  "active_batches": [
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926"
+  ],
+  "active_attempts": [
+    {
+      "lane": "reversible_precision",
+      "pid": 1398474,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474",
+      "status": "RUNNING"
+    },
+    {
+      "lane": "data_drift_mobility",
+      "pid": 1398477,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/data_drift_mobility/20260926T211209Z-1398477",
+      "status": "RUNNING"
+    },
+    {
+      "lane": "constant_rate_stability",
+      "pid": 1398479,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/constant_rate_stability/20260926T211209Z-1398479",
+      "status": "RUNNING"
+    }
+  ]
 }
