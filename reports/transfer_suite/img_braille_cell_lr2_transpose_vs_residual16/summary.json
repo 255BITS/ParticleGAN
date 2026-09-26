@@ -1,0 +1,59 @@
+{
+  "task": "img_braille_cell_lr2",
+  "tip_sha": "ac83ce32b99bd488c2dd700786c0c93f0bb1f27b",
+  "principal": "braille_cell_lr2 left-heavy vs right-heavy mass: published transpose12 vs residual16",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles)",
+  "arms": {
+    "baseline_transpose12": {
+      "card": {
+        "name": "baseline_transpose12",
+        "scope": "published image path (transpose width 12)",
+        "changes": {}
+      },
+      "verdict": "FAIL",
+      "quality": {
+        "sustained": false,
+        "confirmed_step": null,
+        "modes": 1,
+        "hq": 0.375,
+        "mean_rmse": 0.05323111265897751,
+        "error": null,
+        "seconds": 6.64276874018833,
+        "last_obs": {
+          "hq": 0.375,
+          "mean_rmse": 0.05323111265897751,
+          "modes": 1
+        }
+      },
+      "seconds": 6.6431834399700165
+    },
+    "residual16": {
+      "card": {
+        "name": "residual16",
+        "scope": "in-formulation architecture control",
+        "changes": {
+          "architecture": "residual_upsample",
+          "width": 16
+        }
+      },
+      "verdict": "PASS",
+      "quality": {
+        "sustained": true,
+        "confirmed_step": 525,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.03235481679439545,
+        "error": null,
+        "seconds": 5.776333159999922,
+        "last_obs": {
+          "hq": 1.0,
+          "mean_rmse": 0.03235481679439545,
+          "modes": 2
+        }
+      },
+      "seconds": 5.7766789209563285
+    }
+  },
+  "hit": true,
+  "soft_miss": false
+}
