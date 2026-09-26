@@ -64,21 +64,38 @@ Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `
 
 ## CPU sanity
 
-Machine: CPU torch, 4 threads, `OMP_NUM_THREADS=1`. Ring ~14–16 s. These pass rates are a sanity check that the flag runs and the schedule stays at the pre-anneal LR. They are not an A6000 ranking.
+96 jobs, 4 at a time, `OMP_NUM_THREADS=1`. Ring ~15 s, hold ~90–100 s (`NOT_CONVERGED` at the 4800-check settling budget), stay ~40–48 s. Group LRs stayed `0.00425` and `[0.00425, 0.0085]` through the logged steps. These pass rates are not an A6000 ranking.
 
-### Offset 0 ring (full 1200 updates)
+| dynamics | ring | hold 1200 | stay 120/120 |
+| --- | ---: | ---: | ---: |
+| baseline | 0/8 | 0/8 | 0/8 |
+| unit_rms | 0/8 | 0/8 | 0/8 |
+| pair_chord | 0/8 | 0/8 | 0/8 |
+| shared_batch | 1/8 | 0/8 | 0/8 |
 
-Group LRs at step 1200 were `0.00425` and `0.0085` on every run. `unit_rms` receipt `steps=2400` (D and G). Its critic displacement RMS at step 1200 was `0.00425` while gradient RMS was `0.0125` (the RMS step, not Adam). `pair_chord` receipt `calls=1200`.
+The only pass is `shared_batch` ring at offset 606 (8 modes, hq 1.0, passing suffix 8). Hold never started a 1200-check window on any dynamic (`hold_checks` 0, `NOT_CONVERGED`). Stay never reached 120/120. Nothing here acquires all modes and then stays at a constant learning rate.
 
-| dynamics | status | modes | hq | passing suffix |
-| --- | --- | ---: | ---: | ---: |
-| baseline | FAIL | 8 | 0.878 | 0 |
-| unit_rms | FAIL | 2 | 0.156 | 0 |
-| pair_chord | FAIL | 4 | 0.297 | 0 |
-| shared_batch | FAIL | 0 | 0.000 | 0 |
+Ring modes / hq / passing suffix:
 
-The baseline matches #178's constant-LR offset 0 (FAIL, 8 modes, hq 0.878). All three mechanisms were worse on this one offset.
+| offset | baseline | unit_rms | pair_chord | shared_batch |
+| ---: | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 2 / 0.156 / 0 | 4 / 0.297 / 0 | 0 / 0.000 / 0 |
+| 101 | 7 / 0.659 / 0 | 2 / 0.221 / 0 | 3 / 0.038 / 0 | 0 / 0.000 / 0 |
+| 202 | 7 / 0.985 / 0 | 3 / 0.206 / 0 | 5 / 0.340 / 0 | 8 / 0.990 / 3 |
+| 303 | 6 / 0.670 / 0 | 3 / 0.334 / 0 | 5 / 0.581 / 0 | 8 / 0.952 / 1 |
+| 404 | 6 / 0.400 / 0 | 2 / 0.173 / 0 | 7 / 0.739 / 0 | 6 / 0.484 / 0 |
+| 505 | 4 / 0.263 / 0 | 4 / 0.236 / 0 | 3 / 0.299 / 0 | 8 / 1.000 / 1 |
+| 606 | 7 / 0.694 / 0 | 5 / 0.265 / 0 | 7 / 0.648 / 0 | 8 / 1.000 / 8 PASS |
+| 707 | 0 / 0.000 / 0 | 2 / 0.163 / 0 | 4 / 0.392 / 0 | 1 / 0.078 / 0 |
 
-### Eight offsets, ring / hold / stay
+Offset 0 baseline matches #178's constant-LR offset 0 (FAIL, 8 modes, hq 0.878). `unit_rms` and `pair_chord` covered fewer modes than that baseline on every offset. `shared_batch` reached 8 modes on four offsets and kept a passing suffix on one.
 
-`FULL_GRID` in `/tmp/k3p-clr` (96 jobs). The table is filled when that screen prints `ALL_DONE`.
+Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset 606), pair_chord 17/120 (offset 0), shared_batch 64/120 (offset 202).
+
+`unit_rms` stay is `ERROR` on all 8 offsets: `continuous_probe` requires Adam's moment counter to equal the update count, and this step does not write moments. The run itself finished (receipt `steps=7200` = 3600 updates × D and G; displacement RMS stayed ~0.00425). Every 100-step checkpoint from 1200 through 2400 misses 8 modes and hq 0.90 (13/13 points on each offset), so that window was not a stay either.
+
+Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
+
+## Recommendation
+
+Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
