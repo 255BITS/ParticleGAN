@@ -12,6 +12,23 @@ evidence, not winners. Append rows; never rewrite history.
 | 1 | **Baseline**: `constraints_simple_regularization.json` (exact `b_cap` every step, foreach off) | PASS | 374.8 (toy100 ×3 incl. eval+GIF; per-problem 98.8 / 99.9 / 176.1) | — | `reports/toy100/simpler22/`, `reports/toy100/README.md` | **Current winner** |
 | — | *Your candidate here* | — | — | — | `artifacts/toy-suite/<candidate>`, `<candidate>.live.log` | — |
 
+## Screening log (falsified or non-qualifying — kept so rounds don't repeat them)
+
+| Round / lane | Candidate | Verdict | Key numbers |
+| --- | --- | --- | --- |
+| R1 / optimizer_kernels ($0.09) | `fused_adam: false → true` | FAIL, no promotion | grid100 48/100, rotated100 2/100, staggered100 100/100; 20/22 regrade. Optimizer ≈2.7% of step time — no win available in this lane. |
+| R1 / bcap_lazy_schedule ($0.07) | Lazy exact `b_cap` (`reg_every=4`, `=2`, rescaled coeff) | FAIL, no promotion | lazy-4: 0/3 (final modes 13/100/91); lazy-2: 2/3, rotated100 collapses to 5 modes (hq .08). Penalty schedule is load-bearing. foreach (non-fused) Adam preserves the gate. |
+| R1 / eval_io_overhead ($0.08) | Lean logging, `--no-render`, wider eval intervals | No win alone | Eval/I/O ≈1.5% of wall clock (3-problem qual: train 857.4s / eval 12.5s). Render skip saves ≈5.3s per problem GIF. |
+| R1 / host_data_pipeline ($0.09) | Cached static mode centers + in-place noise scaling (`benchmarks/toy100/problems.py`, +15/−1) | PASS but marginal (not promoted) | RNG-order unchanged, bit-identical on CPU/CUDA; sampling 0.140 → 0.072 ms/draw; saves ≈1s per 7k-step problem. Candidate for the micro-win stack. |
+| R1 / graph_compilation ($0.24) | `torch.compile` on b_cap / D / G paths | No candidate qualified | `aot_autograd does not support double backward` (torch 2.13+cu126) — compile cannot touch the exact-penalty path. P3 CUDA run passed toy100 gate but off-profile (pinned profile is CPU). |
+| R2 / alternating_penalty ($0.05) | Alternating real-only/fake-only exact `b_cap` at ×2 weight | FAIL, stop after one bounded test | Parity unit check PASS; grid100 final 3/100 (hq .061), peaked 14 modes @500 → 1 @1000. Held-out side drifts immediately. |
+| R2 / shared_forward_bcap | Share one `D(real)`, `D(fake)` forward between Rp loss and penalty | Running | — |
+| R2 / profile_first | Measured hotspot split, then attack only the top | Running | — |
+
+Round spend: R1 ≈ $0.68, R2 ≈ $0.19 so far. No promotion yet: the baseline
+remains the winner. Batches: `/ml2/hypergan/gan-attempts/toyspeed-20260926T040626Z`
+(R1), `/ml2/hypergan/gan-attempts/toyspeed-20260926T065716Z` (R2).
+
 ## Update contract
 
 - Each winner adds one row above plus its evidence paths (run dir, live log,
