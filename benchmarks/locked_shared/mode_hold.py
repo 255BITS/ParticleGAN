@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+import particlegan.sample_stream as sample_stream
 
 N_MODES = 8
 RADIUS = 3.0
@@ -59,8 +60,14 @@ def ring_means(n_modes: int = N_MODES, radius: float = RADIUS) -> torch.Tensor:
 
 
 def sample_ring(means: torch.Tensor, n: int, sigma: float, generator: torch.Generator) -> torch.Tensor:
-    idx = torch.randint(0, means.shape[0], (int(n),), generator=generator)
-    noise = torch.randn(int(n), means.shape[1], generator=generator)
+    if sample_stream.replacing():
+        idx, noise = sample_stream.index_and_normal(
+            "data", int(n), means.shape[0], means.shape[1],
+            device=means.device, dtype=means.dtype,
+        )
+    else:
+        idx = torch.randint(0, means.shape[0], (int(n),), generator=generator)
+        noise = torch.randn(int(n), means.shape[1], generator=generator)
     return means[idx] + float(sigma) * noise
 
 
@@ -197,40 +204,41 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for opt, rates in zip((opt_g, opt_d), base_lrs):
                 for group, rate in zip(opt.param_groups, rates):
                     group["lr"] = rate * scale
-        real = sample_ring(means, batch, SIGMA, stream)
-        latent, _ = prior.sample(batch, generator=stream)
-        context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
-        with context:
-            fake = generator(latent).detach()
-        d_loss = gan.d_loss(critic(real), critic(fake))
-        d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
-        opt_d.zero_grad()
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
+        with sample_stream.update():
+            real = sample_ring(means, batch, SIGMA, stream)
+            latent, _ = prior.sample(batch, generator=stream)
+            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+            with context:
+                fake = generator(latent).detach()
+            d_loss = gan.d_loss(critic(real), critic(fake))
+            d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
+            opt_d.zero_grad()
+            d_loss.backward()
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
 
-        latent, _ = prior.sample(batch, generator=stream)
-        fake = generator(latent)
-        if gan.mode in ("rp", "ra"):
-            real_g = sample_ring(means, batch, SIGMA, stream)
-            g_loss = gan.g_loss(critic(fake), critic(real_g))
-        else:
-            # Stranger / unpaired pairing: real and fake are scored apart.
-            g_loss = gan.g_loss(critic(fake))
-        if recipe.fm_weight > 0.0:
-            # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
-            real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
-            g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
-        g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
-        g_loss = g_loss + vicreg(prior.z)
-        opt_g.zero_grad()
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
-        with torch.no_grad():
-            for ema, param in zip(ema_g, generator.parameters()):
-                ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)
-            ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
+            latent, _ = prior.sample(batch, generator=stream)
+            fake = generator(latent)
+            if gan.mode in ("rp", "ra"):
+                real_g = sample_ring(means, batch, SIGMA, stream)
+                g_loss = gan.g_loss(critic(fake), critic(real_g))
+            else:
+                # Stranger / unpaired pairing: real and fake are scored apart.
+                g_loss = gan.g_loss(critic(fake))
+            if recipe.fm_weight > 0.0:
+                # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
+                real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
+                g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
+            g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
+            g_loss = g_loss + vicreg(prior.z)
+            opt_g.zero_grad()
+            g_loss.backward()
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
+            with torch.no_grad():
+                for ema, param in zip(ema_g, generator.parameters()):
+                    ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)
+                ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
         checkpoint(step + 1, lambda: measure(step + 1))
         if diagnostics and (step + 1) % 200 == 0:
             curve.append(snapshot(step + 1))

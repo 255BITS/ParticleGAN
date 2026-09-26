@@ -13,6 +13,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+import particlegan.sample_stream as sample_stream
+
 
 # A fixed namespace, separate from GANTrainer's +2/+3/+4 streams and the
 # discriminator input-noise stream at +901. This is a policy constant, never
@@ -73,6 +75,10 @@ class OutputNoise(nn.Module):
         return prediction + self.effective_std() * self._randn(prediction)
 
     def _randn(self, prediction: torch.Tensor) -> torch.Tensor:
+        if sample_stream.replacing():
+            return sample_stream.normal(
+                "output", prediction.shape, device=prediction.device, dtype=prediction.dtype,
+            )
         return torch.randn_like(prediction)
 
 
@@ -103,10 +109,15 @@ class IsolatedOutputNoise(OutputNoise):
         self._output_rng_scope_active = False
 
     def _randn(self, prediction: torch.Tensor) -> torch.Tensor:
-        noise = torch.randn(
-            prediction.shape, generator=self.noise_stream,
-            device=prediction.device, dtype=prediction.dtype,
-        )
+        if sample_stream.replacing():
+            noise = sample_stream.normal(
+                "output", prediction.shape, device=prediction.device, dtype=prediction.dtype,
+            )
+        else:
+            noise = torch.randn(
+                prediction.shape, generator=self.noise_stream,
+                device=prediction.device, dtype=prediction.dtype,
+            )
         self.noise_draw_calls.add_(1)
         self.noise_draw_elements.add_(prediction.numel())
         return noise

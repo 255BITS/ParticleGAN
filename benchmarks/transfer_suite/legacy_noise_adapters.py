@@ -17,6 +17,8 @@ import time
 import torch
 from torch import nn
 
+import particlegan.sample_stream as sample_stream
+
 from benchmarks.toy100.device import experiment_generator, host_device, rng_fork_devices
 from benchmarks.toy100.models import (
     LearnableOutputScale, OUTPUT_NOISE_SEED_OFFSET, linear_input_noise,
@@ -214,7 +216,11 @@ class NoisePolicy:
             if (self._detach_output_scale or self._evaluating
                     or generator_step is False):
                 sigma = sigma.detach()
-        if self.output_stream is None:
+        if sample_stream.replacing() and not self._evaluating:
+            noise = sample_stream.normal(
+                "output", generated.shape, device=generated.device, dtype=generated.dtype,
+            )
+        elif self.output_stream is None:
             noise = torch.randn_like(generated)
         else:
             noise = torch.randn(

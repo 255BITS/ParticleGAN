@@ -29,6 +29,7 @@ from torch import nn
 
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import GANTrainer
+import particlegan.sample_stream as sample_stream
 from benchmarks.legacy.recipe import LegacyRecipe as Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
@@ -879,19 +880,20 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                     resolved["input_noise_std"], trainer.completed_steps,
                     budget, resolved["input_noise_anneal_end"],
                 )
-            real = sample_real(
-                resolved["problem"], recipe.batch_size, device=device, generator=train_data_rng,
-            )
-            stats = step_with_policy(
-                trainer,
-                real,
-                network_lr_horizon_cap=resolved.get("network_lr_horizon_cap"),
-                network_lr_floor=resolved.get("network_lr_floor"),
-                generator_real=lambda: sample_real(
-                    resolved["problem"], recipe.batch_size, device=device,
-                    generator=train_data_rng,
-                ),
-            )
+            with sample_stream.update():
+                real = sample_real(
+                    resolved["problem"], recipe.batch_size, device=device, generator=train_data_rng,
+                )
+                stats = step_with_policy(
+                    trainer,
+                    real,
+                    network_lr_horizon_cap=resolved.get("network_lr_horizon_cap"),
+                    network_lr_floor=resolved.get("network_lr_floor"),
+                    generator_real=lambda: sample_real(
+                        resolved["problem"], recipe.batch_size, device=device,
+                        generator=train_data_rng,
+                    ),
+                )
             _set_output_sigma(trainer, resolved, trainer.completed_steps)
             if device.type == "cuda":
                 torch.cuda.synchronize(device)

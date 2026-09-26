@@ -17,6 +17,8 @@ from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
+import particlegan.sample_stream as sample_stream
+
 
 import torch.nn as nn
 
@@ -352,20 +354,33 @@ def _sample_real_cloud(
     if n_end:
         chunks.append(pole.expand(n_end, -1))
     if n_span:
-        u = torch.rand(n_span, 1).sqrt()
+        if sample_stream.replacing():
+            u = sample_stream.uniforms("data", n_span, 1, device=pole.device, dtype=pole.dtype).sqrt()
+        else:
+            u = torch.rand(n_span, 1).sqrt()
         lo = 1.0 - float(span_frac)
         u = lo + (1.0 - lo) * u
         chunks.append(neu + u * (pole - neu))
     out = torch.cat(chunks, dim=0)
     if float(cloud_std) > 0.0:
-        out = out + float(cloud_std) * torch.randn_like(out)
+        if sample_stream.replacing():
+            out = out + float(cloud_std) * sample_stream.normal(
+                "data", out.shape, device=out.device, dtype=out.dtype,
+            )
+        else:
+            out = out + float(cloud_std) * torch.randn_like(out)
     return out
 
 
 def _particle_batch(prior: ParticlePrior, n: int, jitter: float) -> torch.Tensor:
     z, _idx = prior.sample(n)
     if float(jitter) > 0.0:
-        z = z + float(jitter) * torch.randn_like(z)
+        if sample_stream.replacing():
+            z = z + float(jitter) * sample_stream.normal(
+                sample_stream.last_prior_role(), z.shape, device=z.device, dtype=z.dtype,
+            )
+        else:
+            z = z + float(jitter) * torch.randn_like(z)
     return z
 
 
@@ -459,49 +474,50 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
             group["lr"] = lr * scale
         for group in opt_d.param_groups:
             group["lr"] = lr * scale
-        real_p = _sample_real_cloud(
-            poles_p, neu, half,
-            cloud_std=recipe.knob("cloud_std"),
-            span_frac=recipe.knob("span_frac"),
-            end_margin=recipe.knob("end_margin"),
-        )
-        real_m = _sample_real_cloud(
-            poles_m, neu, half,
-            cloud_std=recipe.knob("cloud_std"),
-            span_frac=recipe.knob("span_frac"),
-            end_margin=recipe.knob("end_margin"),
-        )
-        real = torch.cat([real_p, real_m], dim=0)
-        fake_p, fake_m = fake_batch()
-        fake = torch.cat([fake_p, fake_m], dim=0).detach()
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=False)
-        d_loss = gan.d_loss(critic(real.detach()), critic(fake))
-        cap = penalty(critic, real.detach(), fake, step=step + 1)
-        d_loss = d_loss + cap
-        opt_d.zero_grad()
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
+        with sample_stream.update():
+            real_p = _sample_real_cloud(
+                poles_p, neu, half,
+                cloud_std=recipe.knob("cloud_std"),
+                span_frac=recipe.knob("span_frac"),
+                end_margin=recipe.knob("end_margin"),
+            )
+            real_m = _sample_real_cloud(
+                poles_m, neu, half,
+                cloud_std=recipe.knob("cloud_std"),
+                span_frac=recipe.knob("span_frac"),
+                end_margin=recipe.knob("end_margin"),
+            )
+            real = torch.cat([real_p, real_m], dim=0)
+            fake_p, fake_m = fake_batch()
+            fake = torch.cat([fake_p, fake_m], dim=0).detach()
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=False)
+            d_loss = gan.d_loss(critic(real.detach()), critic(fake))
+            cap = penalty(critic, real.detach(), fake, step=step + 1)
+            d_loss = d_loss + cap
+            opt_d.zero_grad()
+            d_loss.backward()
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
 
-        fake_p, fake_m = fake_batch()
-        fake = torch.cat([fake_p, fake_m], dim=0)
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=True)
-        g_loss = gan.g_loss(critic(fake), critic(real.detach()))
-        parts = torch.cat([prior_p.z, prior_m.z], dim=0)
-        g_loss = g_loss + spread(parts)
-        if particle_l2 > 0.0:
-            g_loss = g_loss + particle_l2 * parts.pow(2).mean()
-        if cover_w > 0.0:
-            cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
-            cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
-            g_loss = g_loss + cover_w * cover
-        opt_g.zero_grad()
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
-        ema.update(generator_params)
+            fake_p, fake_m = fake_batch()
+            fake = torch.cat([fake_p, fake_m], dim=0)
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=True)
+            g_loss = gan.g_loss(critic(fake), critic(real.detach()))
+            parts = torch.cat([prior_p.z, prior_m.z], dim=0)
+            g_loss = g_loss + spread(parts)
+            if particle_l2 > 0.0:
+                g_loss = g_loss + particle_l2 * parts.pow(2).mean()
+            if cover_w > 0.0:
+                cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
+                cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
+                g_loss = g_loss + cover_w * cover
+            opt_g.zero_grad()
+            g_loss.backward()
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
+            ema.update(generator_params)
         checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == recipe.steps:

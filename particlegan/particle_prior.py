@@ -14,6 +14,8 @@ from numbers import Real
 import torch
 import torch.nn as nn
 
+from . import sample_stream
+
 
 class ParticlePrior(nn.Module):
     r"""
@@ -104,6 +106,11 @@ class ParticlePrior(nn.Module):
         if batch_size <= 0:
             raise ValueError(f"batch_size must be positive, got {batch_size}")
 
+        if sample_stream.replacing():
+            return sample_stream.indices(
+                sample_stream.take_prior_role(), batch_size, self.num_particles,
+                device=self.z.device,
+            )
         return torch.randint(
             0,
             self.num_particles,
@@ -301,7 +308,13 @@ class MoGParticlePrior(ParticlePrior):
         z = self.means()[idx.to(self.z.device)]
         if self._noise_enabled:
             if eps is None:
-                eps = torch.randn(z.shape, device=z.device, dtype=z.dtype, generator=generator)
+                if sample_stream.replacing():
+                    eps = sample_stream.normal(
+                        sample_stream.last_prior_role(), z.shape,
+                        device=z.device, dtype=z.dtype,
+                    )
+                else:
+                    eps = torch.randn(z.shape, device=z.device, dtype=z.dtype, generator=generator)
             elif eps.shape != z.shape or eps.device != z.device or eps.dtype != z.dtype:
                 raise ValueError("eps must match sampled codes' shape, device and dtype")
             z = z + self.sigma * eps
@@ -363,8 +376,15 @@ class GaussianPrior(nn.Module):
     def forward(self, batch_size, generator=None):
         if type(batch_size) is not int or batch_size <= 0:
             raise ValueError("batch_size must be a positive integer")
-        return torch.randn((batch_size, self.z_dim), device=self._anchor.device,
-                           dtype=self._anchor.dtype, generator=generator) * self.init_std
+        if sample_stream.replacing():
+            eps = sample_stream.normal(
+                sample_stream.take_prior_role(), (batch_size, self.z_dim),
+                device=self._anchor.device, dtype=self._anchor.dtype,
+            )
+        else:
+            eps = torch.randn((batch_size, self.z_dim), device=self._anchor.device,
+                              dtype=self._anchor.dtype, generator=generator)
+        return eps * self.init_std
 
     def sample(self, batch_size, generator=None):
         return self(batch_size, generator=generator), None
@@ -390,9 +410,15 @@ class FreshGaussianPrior(ParticlePrior):
             return super().sample(batch_size, generator, fixed_first_n=True, offset=offset)
         if batch_size <= 0:
             raise ValueError(f"batch_size must be positive, got {batch_size}")
-        z = torch.randn(batch_size, self.z_dim, device=self.z.device,
-                        dtype=self.z.dtype, generator=generator) * self.init_std
-        return z, None
+        if sample_stream.replacing():
+            eps = sample_stream.normal(
+                sample_stream.take_prior_role(), (batch_size, self.z_dim),
+                device=self.z.device, dtype=self.z.dtype,
+            )
+        else:
+            eps = torch.randn(batch_size, self.z_dim, device=self.z.device,
+                              dtype=self.z.dtype, generator=generator)
+        return eps * self.init_std, None
 
 
 PRIOR_KINDS = ("mog", "particles", "frozen_gaussian", "fresh_gaussian", "gaussian")

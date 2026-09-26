@@ -38,6 +38,7 @@ from benchmarks.toy100.models import (
 from benchmarks.toy100.train import AFFINE_MODEL_POLICIES, load_config, resolve_config
 from lib.toy_models import SimpleMLPGenerator
 from particlegan import GANTrainer
+import particlegan.sample_stream as sample_stream
 from benchmarks.legacy.recipe import get_recipe
 
 from . import image_tasks, suite, vector_tasks
@@ -285,24 +286,25 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
         )
         if noise["input_noise_std"]:
             trainer.D.sigma = sigma
-        real = vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
-        real_g = lambda: vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
-        cap = (model_policy or {}).get("network_lr_horizon_cap")
-        network_floor = (model_policy or {}).get("network_lr_floor")
-        if cap is None:
-            stats = trainer.step(real, generator_real=real_g)
-            action = rate_action(trainer, completed)
-        else:
-            from benchmarks.toy100.schedule import policy_rate_action, step_with_policy
-            stats = step_with_policy(
-                trainer, real, generator_real=real_g,
-                network_lr_horizon_cap=cap,
-                network_lr_floor=network_floor,
-            )
-            action = dict(step=completed) | policy_rate_action(
-                trainer, completed, network_lr_horizon_cap=cap,
-                network_lr_floor=network_floor,
-            )
+        with sample_stream.update():
+            real = vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
+            real_g = lambda: vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
+            cap = (model_policy or {}).get("network_lr_horizon_cap")
+            network_floor = (model_policy or {}).get("network_lr_floor")
+            if cap is None:
+                stats = trainer.step(real, generator_real=real_g)
+                action = rate_action(trainer, completed)
+            else:
+                from benchmarks.toy100.schedule import policy_rate_action, step_with_policy
+                stats = step_with_policy(
+                    trainer, real, generator_real=real_g,
+                    network_lr_horizon_cap=cap,
+                    network_lr_floor=network_floor,
+                )
+                action = dict(step=completed) | policy_rate_action(
+                    trainer, completed, network_lr_horizon_cap=cap,
+                    network_lr_floor=network_floor,
+                )
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != "step" and isinstance(value, torch.Tensor)):
             raise FloatingPointError("nonfinite transfer-screen loss")
@@ -446,24 +448,24 @@ def run_image(spec, base, noise, *, model_policy=None):
         )
         if noise["input_noise_std"]:
             trainer.D.sigma = sigma
-        real = centers[torch.randint(len(centers), (spec["batch_size"],))]
-        real = (real + spec["noise_std"] * torch.randn_like(real)).clamp(0., 1.)
-        cap = (model_policy or {}).get("network_lr_horizon_cap")
-        network_floor = (model_policy or {}).get("network_lr_floor")
-        if cap is None:
-            stats = trainer.step(real, generator_real=real)
-            action = rate_action(trainer, completed)
-        else:
-            from benchmarks.toy100.schedule import policy_rate_action, step_with_policy
-            stats = step_with_policy(
-                trainer, real, generator_real=real,
-                network_lr_horizon_cap=cap,
-                network_lr_floor=network_floor,
-            )
-            action = dict(step=completed) | policy_rate_action(
-                trainer, completed, network_lr_horizon_cap=cap,
-                network_lr_floor=network_floor,
-            )
+        with sample_stream.update():
+            real = sample_stream.image_batch(centers, spec["batch_size"], spec["noise_std"])
+            cap = (model_policy or {}).get("network_lr_horizon_cap")
+            network_floor = (model_policy or {}).get("network_lr_floor")
+            if cap is None:
+                stats = trainer.step(real, generator_real=real)
+                action = rate_action(trainer, completed)
+            else:
+                from benchmarks.toy100.schedule import policy_rate_action, step_with_policy
+                stats = step_with_policy(
+                    trainer, real, generator_real=real,
+                    network_lr_horizon_cap=cap,
+                    network_lr_floor=network_floor,
+                )
+                action = dict(step=completed) | policy_rate_action(
+                    trainer, completed, network_lr_horizon_cap=cap,
+                    network_lr_floor=network_floor,
+                )
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != "step" and isinstance(value, torch.Tensor)):
             raise FloatingPointError("nonfinite transfer-screen loss")
@@ -718,7 +720,9 @@ if __name__ == "__main__":
                         help="screen all 19 with shared noise on every host")
     parser.add_argument("--tasks", nargs="+", help="bounded named-task screen (always INCOMPLETE)")
     add_device_argument(parser)
+    sample_stream.add_argument(parser)
     args = parser.parse_args()
+    sample_stream.apply(args.sample_stream)
     apply_device_policy(args.device, log=True)
     if sum(bool(x) for x in (args.remaining, args.all, args.tasks)) > 1:
         parser.error("--remaining, --all and --tasks are mutually exclusive")

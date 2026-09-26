@@ -17,6 +17,8 @@ from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
+import particlegan.sample_stream as sample_stream
+
 
 import torch.nn.functional as F
 
@@ -282,40 +284,41 @@ def _fit_rpgan(
             noise_policy.set_step(step)
         _apply_lr(opt_g, step, steps)
         _apply_lr(opt_d, step, steps)
-        critic.requires_grad_(True)
-        opt_d.zero_grad(set_to_none=True)
-        d_loss = student.odd.new_zeros(())
-        for scale in SCALES:
-            fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=False)
-            cap, _stats = reg.penalty(
-                lambda z, scale=scale: critic.score(z, scale),
-                real[scale] / critic.input_scale,
-                fake / critic.input_scale,
-                step=step + 1,
-            )
-            d_term = gan.d_loss(critic(real[scale], scale), critic(fake, scale))
-            d_loss = d_loss + 0.5 * (d_term + cap)
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
+        with sample_stream.update():
+            critic.requires_grad_(True)
+            opt_d.zero_grad(set_to_none=True)
+            d_loss = student.odd.new_zeros(())
+            for scale in SCALES:
+                fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
+                if noise_policy is not None:
+                    fake = noise_policy.output(fake, generator_step=False)
+                cap, _stats = reg.penalty(
+                    lambda z, scale=scale: critic.score(z, scale),
+                    real[scale] / critic.input_scale,
+                    fake / critic.input_scale,
+                    step=step + 1,
+                )
+                d_term = gan.d_loss(critic(real[scale], scale), critic(fake, scale))
+                d_loss = d_loss + 0.5 * (d_term + cap)
+            d_loss.backward()
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
 
-        critic.requires_grad_(False)
-        opt_g.zero_grad(set_to_none=True)
-        g_loss = student.odd.new_zeros(())
-        with torch.no_grad():
-            real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
-        for scale in SCALES:
-            fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=True)
-            g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
-            g_loss = g_loss + 0.5 * g_term
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
-        critic.requires_grad_(True)
+            critic.requires_grad_(False)
+            opt_g.zero_grad(set_to_none=True)
+            g_loss = student.odd.new_zeros(())
+            with torch.no_grad():
+                real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
+            for scale in SCALES:
+                fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
+                if noise_policy is not None:
+                    fake = noise_policy.output(fake, generator_step=True)
+                g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
+                g_loss = g_loss + 0.5 * g_term
+            g_loss.backward()
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
+            critic.requires_grad_(True)
         checkpoint(step + 1, lambda: score_residual(student))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:

@@ -10,10 +10,13 @@ p.add_argument('--candidate', type=Path, required=True)
 p.add_argument('--repo', type=Path, required=True)
 p.add_argument('--task', required=True, choices=['grid100', 'rotated100', 'staggered100'])
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--sample-stream', choices=('rng', 'sobol', 'r2'), default=None)
 a = p.parse_args()
 sys.path[:0] = [str(a.repo.resolve()), str(a.candidate.resolve())]
 a.output.mkdir(parents=True, exist_ok=False)
 import torch
+from particlegan.sample_stream import apply as apply_sample_stream
+apply_sample_stream(a.sample_stream)
 if not torch.cuda.is_available() or os.environ.get('CUBLAS_WORKSPACE_CONFIG') != ':4096:8':
     raise RuntimeError('CUDA with CUBLAS_WORKSPACE_CONFIG=:4096:8 required')
 torch.cuda.set_device(0); torch.set_default_device('cuda:0'); torch.set_num_threads(1); torch.set_num_interop_threads(1)
