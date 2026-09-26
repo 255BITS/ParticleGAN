@@ -1,0 +1,4 @@
+Each file is a patch of this branch against develop.
+The filename without .patch is the --init name.
+Apply one patch on develop, then pass that name to --init.
+Default training is unchanged when --init is omitted.
