@@ -3,7 +3,7 @@
 Scripts that used to pin ``GradientPenalty(arm="b_cap", lazy_k=4)`` now use
 ``recipe.make_critic_penalty(opt_d)`` with ``reg_every=4``. Laziness must only
 change *when* the default penalty is applied and scale its coefficient by k on
-the applied steps; the formulation (K3P, its EMA anchor and blend) is unchanged.
+the applied steps; the formulation (KA2, its EMA anchor and blend) is unchanged.
 """
 import copy
 
@@ -41,7 +41,7 @@ def test_lazy_keeps_default_technique_and_only_changes_frequency(via):
     Dk, optk, lazy = _penalty(lazy_recipe, None if via == "recipe" else k)
     eager_k = base.make_critic_penalty(optk)  # drives the lazy run's updates
     assert lazy.regularizer.lazy_k == k and eager.regularizer.lazy_k == 1
-    for key in ("coeff", "kappa", "lr_floor", "anchor_weight"):
+    for key in ("coeff", "kappa", "anchor_weight"):
         assert getattr(lazy.regularizer, key) == getattr(eager.regularizer, key)
     # Same critic state, same batch: the lazy penalty is 0 off-schedule and
     # k times the eager penalty on-schedule (the time-averaged pressure matches).
@@ -65,21 +65,28 @@ def test_lazy_keeps_default_technique_and_only_changes_frequency(via):
     assert optk.record.observed_steps == opt1.record.observed_steps == 12
 
 
-def test_lazy_blend_still_reaches_k3p_phases():
+def test_lazy_blend_counts_applied_calls_independently_of_learning_rate():
     recipe = get_recipe("gan", total_steps=24, network_lr_horizon_cap=24, reg_every=4)
     D = _critic()
     opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D))
     penalty = recipe.make_critic_penalty(opt, collect_stats=True)
-    base = opt.param_groups[0]["lr"]
-    from particlegan import learning_rate_scales
+    # Start just before KA2's measured warmup boundary. Skipped calls must
+    # neither start the anchor nor consume warmup, even at a tiny LR.
+    opt.record.calls = 798
+    opt.param_groups[0]["lr"] *= .01
     phases = []
-    for step in range(1, 25):
-        opt.param_groups[0]["lr"] = base * learning_rate_scales(step - 1, recipe)[0]
+    for step in range(1, 13):
         real, fake = _batch(step)
+        calls_before = opt.record.calls
         pen = penalty(D, real, fake)
         if step % 4 == 0:
             phases.append(penalty.last_stats["phase"])
+            assert opt.record.calls == calls_before + 1
+        else:
+            assert opt.record.calls == calls_before
+        assert opt.record.anchor_started == (step >= 8)
         opt.zero_grad()
         (D(real).mean() - D(fake).mean() + pen).backward()
         opt.step()
-    assert phases[0] == "a" and phases[-1] in ("blend", "b")
+    assert phases == ["a", "blend", "blend"]
+    assert opt.record.observed_steps == 12 and opt.record.calls == 801

@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased — KA2 selected default
+
+- Prepare KA2 as the single recipe formulation across the API, GANTrainer and
+  examples. Critic surprise controls the anchor gate and asymmetric EMA rate;
+  the existing generator updates and LR/noise schedules remain in use.
+- Keep all controller history and EMA state per critic optimizer and in its
+  checkpoint. GANTrainer uses schema 4; older-formulation checkpoints require
+  the release that wrote them (0.8.0 for K3P).
+- Replace the fixed `reg_anchor_decay` setting with `reg_anchor_min_decay=.90`,
+  the fastest adaptive critic EMA decay. Public factory calls stay the same.
+- Preserve fixed floating buffers exactly during adaptive critic EMA updates;
+  Fourier frequencies must not drift as the EMA decay changes.
+- Select KA2 for retention, time to the new distribution and stability after
+  arrival. The old 81/81 deadline score is not a selection requirement.
+  This remains unmerged and unreleased. Preserve the exact research source,
+  later dropouts and incomplete toy coverage in `reports/ka2-default-candidate/`.
+  K3P's historical 22/22 result and README animation are separate evidence.
+
 ## 0.8.0 — 2026-09-25
 
 - **K3P is the default and only formulation.** The critic penalty blends R1 +

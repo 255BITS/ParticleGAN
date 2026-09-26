@@ -3,9 +3,10 @@
 ``LegacyRecipe`` is ``particlegan.Recipe`` plus the fields ParticleGAN no
 longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
 the factories that honored them, built from the pinned copies in this
-package. With default switches it trains exactly like ``particlegan``'s
-recipe; archived GAN v3 / locked_shared / arm-study configurations resolve
-through it so their receipts stay reproducible. Benchmarks only.
+package. Its default switches retain the historical K3P formulation;
+archived GAN v3 / locked_shared / arm-study configurations resolve through
+it so their receipts stay reproducible as the public default evolves.
+Benchmarks only.
 """
 from copy import copy
 from dataclasses import dataclass, fields
@@ -36,6 +37,8 @@ _ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
+    name: str = "k3p"
+    reg_anchor_decay: float = 0.999
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
@@ -43,6 +46,8 @@ class LegacyRecipe(Recipe):
 
     def __post_init__(self):
         super().__post_init__()
+        if isinstance(self.reg_anchor_decay, bool) or not 0 <= self.reg_anchor_decay < 1:
+            raise ValueError("reg_anchor_decay must be in [0, 1)")
         self.make_loss()
         self.make_gradient_penalty()
 
@@ -70,12 +75,23 @@ class LegacyRecipe(Recipe):
         return CriticPenalty(self, optimizer, output=output, generator=generator,
                              collect_stats=collect_stats, **penalty_overrides)
 
+    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+        """Keep archived runs on the K3P optimizer and its fixed-decay EMA."""
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
+        return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                            ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
+                            guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps,
+                            **options)
+
 
 def get_recipe(name="gan", **overrides):
-    """``particlegan.get_recipe`` returning a ``LegacyRecipe``."""
+    """Current model-family shapes with the archived formulation and label."""
     from particlegan import get_recipe as current
     base = current(name)
-    values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
+    values = {f.name: getattr(base, f.name) for f in fields(Recipe)
+              if f.name in _RECORDED_ORDER or f.name in _ADDED}
+    if name == "gan":
+        values["name"] = "k3p"
     return LegacyRecipe(**{**values, **overrides})
 
 

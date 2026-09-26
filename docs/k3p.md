@@ -1,6 +1,10 @@
-# K3P: the default ParticleGAN formulation
+# K3P: the historical ParticleGAN 0.8.0 formulation
 
-`get_recipe()` and `GANTrainer` train with **K3P**, the formulation that passed
+This page describes the released 0.8.0 implementation. The candidate branch's
+single default is [KA2](ka2.md); the measurements below belong to the frozen
+K3P research bundle and do not transfer to KA2.
+
+In 0.8.0, `get_recipe()` and `GANTrainer` train with **K3P**, whose research bundle passed
 all 22 declared toy gates plus the ring hold and its extension
 ([evidence](../reports/toy100/k3p-base/README.md)). It is a relativistic-paired
 logistic GAN with a learned particle prior. Around the ordinary G/D/prior
@@ -51,33 +55,6 @@ coefficient `k·c`.
 `learning_rate_scales(step, recipe)` returns the `(network, prior)` LR
 multipliers. `network_lr_horizon_cap=None` uses the full budget and
 `network_lr_floor=None` reuses `lr_floor`.
-
-For a caller-owned loop, the caller can start G/D decay when its own validation
-metric plateaus. `NetworkLRTransition` keeps G/D at full LR until marked, then
-cosine-decays them over the chosen duration to `network_lr_floor`. The particle
-prior retains its normal full-budget schedule. K3P's critic penalty reads the
-applied critic LR, so its blend follows this transition automatically. The
-caller owns the plateau rule and must save the transition state with its
-optimizer checkpoint:
-
-```python
-from particlegan import NetworkLRTransition, scale_learning_rates
-
-transition = NetworkLRTransition(decay_steps=40_000)
-# After validation at 120,000 completed updates meets a declared plateau rule:
-transition.mark_plateau(120_000)
-# Before the next optimizer update, using the number of completed updates:
-network_scale, prior_scale = scale_learning_rates(
-    120_000, recipe, (opt_g, opt_d), base_lrs, prior,
-    network_transition=transition)
-checkpoint["network_transition"] = transition.state_dict()
-# On resume, recreate the same transition duration and restore its state:
-transition.load_state_dict(checkpoint["network_transition"])
-```
-
-Passing no transition retains the recipe's fixed network horizon. The
-caller-marked step remains fixed after marking; a different step raises an
-error. This API does not inspect validation data or choose checkpoints.
 
 ## GANTrainer
 

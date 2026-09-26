@@ -1,0 +1,48 @@
+--- frozen/train_mode_hold
++++ public/train_mode_hold
+@@ -23,23 +23,16 @@
+         generator = wrap_output(generator, noise_policy)
+         critic = wrap_input(critic, noise_policy)
+     gan = (gan_factory or (training_recipe.make_loss if training_recipe else make_gan_loss))()
+-    regularizer = (cap_factory or (training_recipe.make_gradient_penalty if training_recipe else make_b_cap))()
++    regularizer = None  # paired public penalty is built with opt_d below
+     vicreg = ParticleRegularizer(weight=recipe.vicreg_weight)
+-    opt_g = torch.optim.Adam(
+-        list(generator.parameters()) + list(prior.parameters()),
+-        lr=LR,
+-        betas=(recipe.beta1, recipe.beta2),
+-    )
+-    opt_d = torch.optim.Adam(
+-        critic.parameters(),
+-        lr=LR * recipe.d_lr_mult,
+-        betas=(recipe.beta1, recipe.beta2),
+-    )
++    opt_g, opt_d = _matched_public_optimizers(generator, critic, prior, recipe)
++    regularizer = _matched_penalty
+     if training_recipe is not None:
+         opt_g, opt_d = training_recipe.make_optimizers(generator, critic, prior)
+     if noise_policy is not None:
+         noise_policy.register_generator_optimizer(opt_g, opt_d)
+     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
++    _matched_capture(generator, critic, prior, stream, noise_policy)
+     batch = BATCH if training_recipe is None else training_recipe.batch_size
+     ema_g = [p.detach().clone() for p in generator.parameters()]
+     ema_z = prior.z.detach().clone()
+@@ -97,7 +90,7 @@
+         opt_d.zero_grad()
+         d_loss.backward()
+         schedule_optimizer(opt_d, step)
+-        opt_d.step()
++        _matched_audit_step(opt_d, "d", d_loss)
+ 
+         latent, _ = prior.sample(batch, generator=stream)
+         fake = generator(latent)
+@@ -116,7 +109,7 @@
+         opt_g.zero_grad()
+         g_loss.backward()
+         schedule_optimizer(opt_g, step)
+-        opt_g.step()
++        _matched_audit_step(opt_g, "g", g_loss)
+         with torch.no_grad():
+             for ema, param in zip(ema_g, generator.parameters()):
+                 ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)

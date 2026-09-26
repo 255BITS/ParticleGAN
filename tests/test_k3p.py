@@ -147,12 +147,17 @@ def _recipe_critic(lazy_k=1, split=None):
     ``split`` steps and resume into freshly built objects.
     """
     from particlegan import get_recipe
+    from particlegan.k3p import K3PCriticAdam, CriticPenalty
     recipe = get_recipe(reg_kappa=0.5, reg_coeff=1.0, reg_every=lazy_k, network_lr_floor=0.01,
-                        reg_anchor_decay=0.999, d_guard_ratio=5.0, d_guard_min_steps=3, lr=sc.LR0)
+                        d_guard_ratio=5.0, d_guard_min_steps=3, lr=sc.LR0)
 
     def build(D):
-        opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D), foreach=False)
-        return opt, recipe.make_critic_penalty(opt, collect_stats=True)
+        # Historical K3P parity stays pinned to its implementation when the
+        # public recipe promotes a new critic controller.
+        opt = K3PCriticAdam(D.parameters(), critic=D, ema_critic=copy.deepcopy(D),
+                            anchor_decay=.999, guard_ratio=5., guard_min_steps=3,
+                            lr=sc.LR0, betas=(0., .999), foreach=False)
+        return opt, CriticPenalty(recipe, opt, collect_stats=True)
     D = sc.make_critic()
     opt, penalty = build(D)
     started, prox = [], []
@@ -183,7 +188,7 @@ def _recipe_critic(lazy_k=1, split=None):
 
 
 @pytest.mark.parametrize("lazy_k", [1, 2])
-def test_recipe_optimizer_and_penalty_match_frozen_mechanism(frozen, lazy_k):
+def test_historical_optimizer_and_penalty_match_frozen_mechanism(frozen, lazy_k):
     ref = frozen["critic" if lazy_k == 1 else "lazy"]
     opt, new = _recipe_critic(lazy_k)
     _assert_critic_equal(ref, new)
@@ -430,7 +435,7 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
     anchored.penalty(B, x_r, x_f, ema_critic=emaB)
 
 
-def _k3p_trainer():
+def _buffered_trainer():
     from particlegan import GANTrainer, get_recipe
     torch.manual_seed(0)
     recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
@@ -440,9 +445,11 @@ def _k3p_trainer():
     return GANTrainer(recipe, G, D)
 
 
-def test_trainer_runs_k3p_through_blend_and_resumes_exactly():
+def test_default_trainer_runs_through_blend_and_resumes_exactly(monkeypatch):
+    import particlegan.ka2 as ka2
+    monkeypatch.setattr(ka2, "WARMUP_CALLS", 3)
     reals = [torch.randn(4, 2, dtype=torch.float64, generator=torch.Generator().manual_seed(i)) for i in range(10)]
-    full = _k3p_trainer()
+    full = _buffered_trainer()
     phases, penalties = [], []
     for real in reals:
         out = full.step(real, collect_stats=True)
@@ -453,12 +460,12 @@ def test_trainer_runs_k3p_through_blend_and_resumes_exactly():
     assert critic_state["record"]["anchor_started"]
     assert "1.running_mean" in critic_state["ema"]
 
-    first = _k3p_trainer()
+    first = _buffered_trainer()
     for real in reals[:5]:
         first.step(real)
     checkpoint = first.state_dict()
     assert "ema_D" not in checkpoint["models"] and checkpoint["optimizers"][1]["regularizer"]["ema"] is not None
-    resumed = _k3p_trainer()
+    resumed = _buffered_trainer()
     resumed.load_state_dict(checkpoint)
     for i, real in enumerate(reals[5:], start=5):
         assert torch.equal(resumed.step(real)["penalty"], penalties[i])

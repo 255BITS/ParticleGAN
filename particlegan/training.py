@@ -1,4 +1,4 @@
-"""A small, checkpointable K3P training loop for unconditional particle GANs."""
+"""A checkpointable training loop using the current recipe formulation."""
 from copy import deepcopy
 import math
 
@@ -44,7 +44,7 @@ class InputNoise(nn.Module):
 
 
 class GANTrainer:
-    """Own the K3P update mechanics; callers supply networks and real batches.
+    """Own the recipe's update mechanics; callers supply networks and real batches.
 
     Supports scalar, unconditional GAN recipes with a particle prior. Fresh real
     batches for the generator can be passed as ``generator_real`` tensors or
@@ -95,7 +95,7 @@ class GANTrainer:
                 seen.add(id(parameter))
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
-        # The recipe picks the regularization formulation (currently K3P); its
+        # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=deepcopy(self.D), **self.optimizer_options)
@@ -129,7 +129,7 @@ class GANTrainer:
 
     @property
     def ema_D(self):
-        """The trainer-owned EMA critic (K3P anchor)."""
+        """The trainer-owned EMA critic used by the anchor penalty."""
         return self.opt_d.ema_critic
 
     def _stream(self, generator, seed):
@@ -164,7 +164,7 @@ class GANTrainer:
         loss pairs fakes with ``generator_real`` (a tensor or a callable;
         default: ``real``). ``collect_stats`` additionally
         returns the gradient penalty's synchronized diagnostic dictionary
-        (including K3P's blend weight ``s``).
+        (including the penalty's blend weight ``s``).
         """
         recipe = self.recipe
         if self.completed_steps >= recipe.total_steps:
@@ -268,7 +268,7 @@ class GANTrainer:
         """Return an independent checkpoint; save the caller's data cursor too."""
         names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
-            "schema": 3, "recipe": self.recipe.to_dict(),
+            "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
             "models": {name: getattr(self, name).state_dict() for name in names},
@@ -285,19 +285,17 @@ class GANTrainer:
         """Restore a compatible checkpoint, including global PyTorch RNG state.
 
         Recreate the same parameter freezing before loading. Validation of both
-        optimizers (which carry the K3P state) and all RNG states precedes any
-        mutation of the live trainer. Schema-2 checkpoints (separate K3P state)
-        are upgraded; schema-1 checkpoints (an older formulation) are rejected.
+        optimizers (which carry the KA2 state) and all RNG states precedes any
+        mutation of the live trainer. Earlier formulations cannot be resumed
+        under KA2; use the release that wrote those checkpoints.
         """
-        if isinstance(state, dict) and state.get("schema") == 1:
-            raise ValueError("schema-1 GANTrainer checkpoints come from an older formulation and cannot "
-                             "resume under K3P; retrain, or pin the old release to continue them")
-        if isinstance(state, dict) and state.get("schema") == 2:
-            state = _upgrade_schema_2(state)
-        if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
-            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
+        if isinstance(state, dict) and state.get("schema") in (1, 2, 3):
+            raise ValueError(
+                f"schema-{state['schema']} GANTrainer checkpoints come from an older formulation "
+                "and cannot resume under KA2; pin the release that wrote the checkpoint "
+                "(0.8.0 for K3P), or start a new run")
         expected = self.state_dict()
-        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
+        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 4:
             raise ValueError("invalid GANTrainer checkpoint schema")
         for key in ("recipe", "optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
@@ -347,34 +345,3 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
-
-
-# Recipe fields that once named a fixed choice (with the value that choice
-# had), and fields added since (with their defaults).
-_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
-                          "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
-
-
-def _upgrade_recipe_fields(recipe):
-    """Drop removed recipe fields that held the only supported value; add new defaults."""
-    if any(key in recipe and recipe[key] != value for key, value in _REMOVED_RECIPE_FIELDS.items()):
-        return recipe  # another formulation: left as is, so the recipe check rejects it
-    recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
-    return {**_ADDED_RECIPE_FIELDS, **recipe}
-
-
-def _upgrade_schema_2(state):
-    """Move a schema-2 checkpoint's separate K3P state into its optimizer states."""
-    try:
-        state = dict(state)
-        k3p = state.pop("k3p")
-        opt_g, opt_d = state["optimizers"]
-        critic = k3p["critic"]
-        opt_g = {**opt_g, "regularizer": {"latent": k3p["latent"], "direct": None}}
-        opt_d = {**opt_d, "regularizer": {"record": critic["penalty"], "ema": critic["ema"],
-                                          "guard": critic["guard"]}}
-    except (KeyError, TypeError, ValueError) as error:
-        raise ValueError("invalid checkpoint K3P state") from error
-    state["optimizers"], state["schema"] = [opt_g, opt_d], 3
-    return state

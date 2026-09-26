@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-09-26T18:42:27.160536+00:00",
+  "status": "CANDIDATE_NOT_QUALIFIED_WINNER",
+  "new_training_or_seed_runs": false,
+  "description": "Read-only audit and compact extraction of already-existing research evidence. Package implementation qualification is separate.",
+  "candidate_source_sha256": "9f1d5eda4bb2f9e0e51832af77db27bd87fba214e29146b224d9963da390c478",
+  "files": [
+    {
+      "artifact": "source/mechanism.py",
+      "artifact_sha256": "9f1d5eda4bb2f9e0e51832af77db27bd87fba214e29146b224d9963da390c478",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/mechanism.py",
+      "original_sha256": "9f1d5eda4bb2f9e0e51832af77db27bd87fba214e29146b224d9963da390c478",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/config.json",
+      "artifact_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/config.json",
+      "original_sha256": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/latent.py",
+      "artifact_sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/latent.py",
+      "original_sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/response.py",
+      "artifact_sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/response.py",
+      "original_sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/checkpoint.py",
+      "artifact_sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/checkpoint.py",
+      "original_sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/hold.py",
+      "artifact_sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/hold.py",
+      "original_sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/shift.py",
+      "artifact_sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/shift.py",
+      "original_sha256": "f049e86eac4e1b65212ea2d40c2eee8c9f6a63082a666f6d3f31010f336375a8",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/shift_frozen.py",
+      "artifact_sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/shift_frozen.py",
+      "original_sha256": "9970dd0195d65aeccd2ffeaf874f2a5ed0df2e06f0f934192201258e41f63fc6",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/extended_shift.py",
+      "artifact_sha256": "9c74e481be0e72c158fede7c960eb45776918a4f69100f29cefe219cc1792e81",
+      "original_path": "/tmp/ka2ext/shift.py",
+      "original_sha256": "9c74e481be0e72c158fede7c960eb45776918a4f69100f29cefe219cc1792e81",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/probe.py",
+      "artifact_sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+      "original_path": "/tmp/opencode/rt_ka2_mass/probe.py",
+      "original_sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/seed_capture.py",
+      "artifact_sha256": "21090ebafabb1bdd8e6d71a05a6abf0ced279078cf9c41825b46abb4d022357d",
+      "original_path": "/tmp/opencode/rt_ka2_mass/seed_capture.py",
+      "original_sha256": "21090ebafabb1bdd8e6d71a05a6abf0ced279078cf9c41825b46abb4d022357d",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/seed_run.py",
+      "artifact_sha256": "88d1f31f7385044ea7a1049a269fb7ecdc4d42ba6fc56b1d40eda4c7f8ca99c7",
+      "original_path": "/tmp/opencode/rt_ka2_mass/seed_run.py",
+      "original_sha256": "88d1f31f7385044ea7a1049a269fb7ecdc4d42ba6fc56b1d40eda4c7f8ca99c7",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "source/seed0_probe.py",
+      "artifact_sha256": "2b05e958b7f7299ba435bc881ba060f5ec2b07921c76e3356cd36f299fa89e40",
+      "original_path": "/tmp/opencode/rt_ka2_mass/_run_s0.py",
+      "original_sha256": "2b05e958b7f7299ba435bc881ba060f5ec2b07921c76e3356cd36f299fa89e40",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "historical-reports/initial-ka2.md",
+      "artifact_sha256": "f442be0b6d5a8fb28f1a76f24de3c4f8d92ce77e4a4195669ed78452de212619",
+      "original_path": "/ml2/hypergan/gan-attempts/formulations-20260926T071221Z/kal_asym/20260926T071221Z-447231/result.md",
+      "original_sha256": "f442be0b6d5a8fb28f1a76f24de3c4f8d92ce77e4a4195669ed78452de212619",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "historical-reports/full-suite-attempt.md",
+      "artifact_sha256": "349c6ea1f8610250ad37b1628b9f8a8a75f72978b17d1ce285c1c5220aadd072",
+      "original_path": "/ml2/hypergan/gan-attempts/formulations-20260926T135214Z/t22_ka2/20260926T135214Z-848360/result.md",
+      "original_sha256": "349c6ea1f8610250ad37b1628b9f8a8a75f72978b17d1ce285c1c5220aadd072",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "historical-reports/mass-retest.md",
+      "artifact_sha256": "32d09441d322a1223d1884064ff5d9831a087873376362568a6aeba1975410ac",
+      "original_path": "/ml2/hypergan/gan-attempts/formulations-20260926T181054Z/rt_ka2_mass/20260926T181054Z-1123385/result.md",
+      "original_sha256": "32d09441d322a1223d1884064ff5d9831a087873376362568a6aeba1975410ac",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "historical-reports/r2-full-suite-attempt.md",
+      "artifact_sha256": "a2aa6129a46c0a095356ff368456c5f5802b36fa366c1a61b5641eab4c5b2d7c",
+      "original_path": "/ml2/hypergan/gan-attempts/formulations-20260926T135214Z/t22_r2/20260926T135214Z-848361/result.md",
+      "original_sha256": "a2aa6129a46c0a095356ff368456c5f5802b36fa366c1a61b5641eab4c5b2d7c",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "evidence/original-shift.json",
+      "artifact_sha256": "f33ad887e763aad13308358f4e16308bc4a0c34495bd08bcf49f0141a7d6c623",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/result.json",
+      "original_sha256": "b20810957b6845a093b9c8aeba4463792361e45e1449001396be22de1d5b8e87",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "schedule",
+        "terminal_grade",
+        "stationary",
+        "continued_hold",
+        "shift_recovery",
+        "diagnostic",
+        "final",
+        "optimizer_final",
+        "rate_ranges",
+        "steps",
+        "shift_step",
+        "shift"
+      ],
+      "omitted_top_level_keys": [
+        "ema",
+        "shift_pair",
+        "latent_receipt",
+        "response_receipt",
+        "regularizer_receipt",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/extended-shift.json",
+      "artifact_sha256": "90c969b14266075f072b98fd4f76306a8b01164b187bf5a4773e456ab293dd5b",
+      "original_path": "/tmp/ka2ext/out-ext/result.json",
+      "original_sha256": "cc0696e1fe286ac4035b1ad4e89b77dac53ec0c8b58a4588a08a25aa41091ab4",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "schedule",
+        "terminal_grade",
+        "stationary",
+        "continued_hold",
+        "shift_recovery",
+        "diagnostic",
+        "final",
+        "optimizer_final",
+        "rate_ranges",
+        "steps",
+        "shift_step",
+        "shift"
+      ],
+      "omitted_top_level_keys": [
+        "ema",
+        "shift_pair",
+        "latent_receipt",
+        "response_receipt",
+        "regularizer_receipt",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/frozen-shift.json",
+      "artifact_sha256": "487f9f4cff888c8af1e3068448d36889bab4860908107ab6b4f5e9848e3ee621",
+      "original_path": "/tmp/kalasym/out/ka2-frozen/result.json",
+      "original_sha256": "65259ec85e0504663999589c1d9701ec529e898284cec1d8f7ea5d9e8a6cbb7e",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "schedule",
+        "terminal_grade",
+        "stationary",
+        "continued_hold",
+        "shift_recovery",
+        "diagnostic",
+        "final",
+        "optimizer_final",
+        "rate_ranges",
+        "steps",
+        "shift_step",
+        "shift"
+      ],
+      "omitted_top_level_keys": [
+        "ema",
+        "shift_pair",
+        "frozen_full",
+        "latent_receipt",
+        "response_receipt",
+        "regularizer_receipt",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/original-mass.json",
+      "artifact_sha256": "0513b4a6c6c571707936f1c8fb940e7fbb8c0009d52340de52b591ee5128203b",
+      "original_path": "/tmp/opencode/t22_ka2/out/ka2-toy-vector_unequal_mass/result.json",
+      "original_sha256": "f62eb76bca00d527e73ec7f4bef5434930bf4a0cf6fac6899febb75d61e3d830",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "cpu_random",
+        "init_only",
+        "spec",
+        "verdict",
+        "result"
+      ],
+      "omitted_top_level_keys": [
+        "cpu",
+        "latent_receipt",
+        "response_receipt",
+        "mobility",
+        "regularizer_receipt",
+        "seconds",
+        "checkpoint"
+      ],
+      "retained_result_keys": [
+        "live",
+        "ema",
+        "observations",
+        "convergence",
+        "update_counts"
+      ],
+      "omitted_result_keys": [
+        "actions",
+        "losses",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/mass-seed0.json",
+      "artifact_sha256": "5f518a76036cdfba581998e9385e43e39b7f3b8555ebb57aaebb715354125783",
+      "original_path": "/tmp/opencode/rt_ka2_mass/out/s0/result.json",
+      "original_sha256": "ff66b460e262000dbb0f404c0072f989642daeca464bb637430f2639acf49386",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "cpu_random",
+        "init_only",
+        "spec",
+        "verdict",
+        "result"
+      ],
+      "omitted_top_level_keys": [
+        "cpu",
+        "latent_receipt",
+        "response_receipt",
+        "mobility",
+        "regularizer_receipt",
+        "seconds",
+        "checkpoint"
+      ],
+      "retained_result_keys": [
+        "live",
+        "ema",
+        "observations",
+        "convergence",
+        "update_counts"
+      ],
+      "omitted_result_keys": [
+        "actions",
+        "losses",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/mass-seed1.json",
+      "artifact_sha256": "68970a372b248c58fa1af0e6a9862bb6d6910794be7e3aa0521e7b721630e39e",
+      "original_path": "/tmp/opencode/rt_ka2_mass/out/s1/result.json",
+      "original_sha256": "ba3919c1e725214b36f9fa734b72ded81c5fef151452d5be7c0d9e69ce966ff1",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "cpu_random",
+        "init_only",
+        "spec",
+        "verdict",
+        "result"
+      ],
+      "omitted_top_level_keys": [
+        "cpu",
+        "latent_receipt",
+        "response_receipt",
+        "mobility",
+        "regularizer_receipt",
+        "seconds",
+        "checkpoint"
+      ],
+      "retained_result_keys": [
+        "live",
+        "ema",
+        "observations",
+        "convergence",
+        "update_counts"
+      ],
+      "omitted_result_keys": [
+        "actions",
+        "losses",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/mass-seed2.json",
+      "artifact_sha256": "bf2b7bd8c8fec596909cf599d48b55c98ee31fe009367c43b43796ecf7581b0d",
+      "original_path": "/tmp/opencode/rt_ka2_mass/out/s2/result.json",
+      "original_sha256": "f09bd1cf31777d96160aaebc322a316109806f9cfb0b54fd2e25814544edfeb2",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "cpu_random",
+        "init_only",
+        "spec",
+        "verdict",
+        "result"
+      ],
+      "omitted_top_level_keys": [
+        "cpu",
+        "latent_receipt",
+        "response_receipt",
+        "mobility",
+        "regularizer_receipt",
+        "seconds",
+        "checkpoint"
+      ],
+      "retained_result_keys": [
+        "live",
+        "ema",
+        "observations",
+        "convergence",
+        "update_counts"
+      ],
+      "omitted_result_keys": [
+        "actions",
+        "losses",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "evidence/mass-seed3.json",
+      "artifact_sha256": "a877f3a7742479c3b7ec883881249815127b831ce988096508e0eb1380db68a9",
+      "original_path": "/tmp/opencode/rt_ka2_mass/out/s3/result.json",
+      "original_sha256": "8a2cad4e74edb713ad1dab27dec6c5bf01e87a4f0e1a82c08ed5926cbd9c8646",
+      "representation": "lossless selected JSON subtrees; all diagnostic/observation rows retained",
+      "retained_top_level_keys": [
+        "task",
+        "backend",
+        "torch",
+        "environment",
+        "status",
+        "worker_sha256",
+        "initialization_fixture_sha256",
+        "config",
+        "proof",
+        "randomness",
+        "cpu_random",
+        "init_only",
+        "spec",
+        "verdict",
+        "result"
+      ],
+      "omitted_top_level_keys": [
+        "cpu",
+        "latent_receipt",
+        "response_receipt",
+        "mobility",
+        "regularizer_receipt",
+        "seconds",
+        "checkpoint"
+      ],
+      "retained_result_keys": [
+        "live",
+        "ema",
+        "observations",
+        "convergence",
+        "update_counts"
+      ],
+      "omitted_result_keys": [
+        "actions",
+        "losses",
+        "seconds"
+      ]
+    },
+    {
+      "artifact": "historical-reports/selected-k3p.md",
+      "artifact_sha256": "e3157f8369334d12fb7293a82303e46d24de0dd2c569f689f35611374da1febe",
+      "original_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/k3p-base/README.md",
+      "original_sha256": "e3157f8369334d12fb7293a82303e46d24de0dd2c569f689f35611374da1febe",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "historical-reports/public-package-baseline.md",
+      "artifact_sha256": "36a9f026f94542366cd35f584f86d4a3f9ba8caebfbc374a543004a72b706e52",
+      "original_path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/public-default-baseline/RESULTS.md",
+      "original_sha256": "36a9f026f94542366cd35f584f86d4a3f9ba8caebfbc374a543004a72b706e52",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "evidence/original-mechanism-receipt.json",
+      "artifact_sha256": "defae0e7692ad7b5fd67597370efba77bc204f7e163ca5e0f0842418370be3b4",
+      "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/mechanism-receipt.json",
+      "original_sha256": "defae0e7692ad7b5fd67597370efba77bc204f7e163ca5e0f0842418370be3b4",
+      "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "evidence/r2-shift.json.gz",
+      "artifact_sha256": "d94418397599696f590e50109324eb6c901074046f37829009f24d994126cd79",
+      "original_path": "/ml2/hypergan/gan-attempts/formulations-20260925T222617Z/b3_release2/20260925T222617Z-4046392/out/r2-shift/result.json",
+      "original_sha256": "9f1925a91de04b01661f7eba7467637bb5243d8ea89f84e043280c21ed5f9baa",
+      "representation": "gzip of complete original JSON; no fields omitted"
+    }
+  ],
+  "identity_checks": {
+    "extension_and_mass_retest_core_files_byte_identical_to_bundle": [
+      "mechanism.py",
+      "config.json",
+      "latent.py",
+      "response.py"
+    ],
+    "extended_shift_driver_only_change": "steps=3600 -> steps=4600",
+    "extension_full_diagnostic_prefix_equal": true,
+    "extension_initial_parameter_proof_equal": true,
+    "mass_seed0_verdict_equal": true,
+    "mass_seed0_initial_parameter_proof_equal": true,
+    "mass_seed0_randomness_equal": true
+  }
+}

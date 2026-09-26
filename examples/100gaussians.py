@@ -11,8 +11,8 @@ This is deliberately nastier than the 25-Gaussian grid:
   - D: simple MLP with Fourier input features, x -> scalar score.
   - Loss: R3GAN-style objective — relativistic pairing (RpGAN) logistic loss
     plus the recipe's critic penalty (``recipe.make_critic_penalty``, currently
-    K3P: RMS R1 plus a fake-side cap, handing over to one-sided caps with an
-    EMA-critic anchor as the critic LR falls).
+    KA2: RMS R1 plus a fake-side cap, then a fixed blend with one-sided
+    caps and a surprise-gated adaptive EMA-critic anchor).
 
 The recipe defaults (``particlegan.get_recipe()``) are the one supported
 configuration; this example only exposes sizes, rates and schedule fields:
@@ -246,7 +246,7 @@ def train(
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
         # The recipe's optimizers do its step-time work in step() (currently
-        # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
+        # KA2: spike guard + EMA-critic update for D); we allocate the EMA critic.
         opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
         penalty = recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
@@ -321,7 +321,7 @@ def train(
                 loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
                 ep_z = stats["prior_regularization"]
             else:
-                # K3P schedule: G/D anneal over the network horizon to the
+                # KA2 schedule: G/D anneal over the network horizon to the
                 # network floor; the prior anneals over the full budget.
                 network, prior_scale = learning_rate_scales(global_step, recipe)
                 for opt in all_opts:

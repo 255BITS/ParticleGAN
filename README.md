@@ -10,23 +10,33 @@ missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The package ships one training
 configuration: a relativistic-pairing (RpGAN) logistic loss, a critic gradient
-penalty that hands over from R1 to capped gradients plus an EMA-critic anchor
-as the learning rate anneals, and the optimizer settings and schedules that go
-with them ([how it works](docs/k3p.md)). You write an ordinary PyTorch GAN
+penalty that combines R1, capped gradients and an adaptive EMA-critic anchor,
+and the optimizer settings and schedules that go
+with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
 loop; the recipe builds the pieces.
+
+This branch prepares **KA2 as the selected single default** for the API,
+trainer and examples. It was chosen for the balance of retaining the original
+distribution, reaching a changed target and stability afterward in the research
+run. **Release is blocked:** the public trainer loses stability at constant
+learning rates, and automatic reversible decay has not been implemented and
+verified. It remains an unmerged candidate, with those results and
+incomplete toy coverage documented.
+[Selection rationale and measured results](reports/ka2-default-candidate/README.md).
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
 
-The package default, `GANTrainer(get_recipe("gan"), G, D)` with no overrides, live weights, seed 1234:
+The animation records the **released 0.8.0 K3P default**, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
-at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
+at update 1,430. It is historical evidence, not a KA2 measurement.
+[Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
 ## Install
 
 Requires Python 3.10+ and PyTorch.
 
 ```bash
-python -m pip install particlegan           # the library (0.8.0)
+python -m pip install particlegan           # released library (0.8.0, K3P)
 ```
 
 For the examples, experiments and tests, install from source:
@@ -107,7 +117,7 @@ Any field can be overridden: `get_recipe("mog", total_steps=20_000)`.
 
 ## Learn more
 
-- [How the training formulation works](docs/k3p.md), including several critics and conditional critics
+- [How the training formulation works](docs/ka2.md), including several critics and conditional critics
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`pytorch_loop.py`](examples/pytorch_loop.py) (the full update in your own loop),
