@@ -99,6 +99,39 @@ mode_hold, unequal_width and stripes as PASS. None of these scores is 22/22.
 
 ## Why propose KA2, and what still blocks release
 
+### The 22/22 result is not a failed KA2 API replication
+
+The recorded 22/22 result belongs to **K3P**, not KA2. The new KA2 API
+implementation has not run the full quality suite. That is missing evidence,
+not an observed failure to reproduce 22/22.
+
+Even the K3P research/public ring comparison changes the experiment:
+
+| Ring setup | Research driver | Public 0.8.0 baseline |
+|---|---:|---:|
+| Batch size | 128 | 2048 |
+| Particle count | 12 | 20000 |
+| Latent dimensions | 4 | 2 |
+| Input noise reaches zero, shift run | Update 120 | Update 360 |
+| Output noise reaches full strength, shift run | Update 240 | Update 720 |
+| Generator's real batch | Fresh batch | Reuses critic's batch |
+
+The public baseline also constructs new starting weights instead of loading
+the research fixture, whose parameter shapes differ. These differences
+prevent attributing the 28/81 versus 0/81 recovery result to the API itself;
+they do not identify which change caused the difference or rule out a porting
+bug. See the [recorded public baseline](historical-reports/public-package-baseline.md)
+and the original drivers linked from the archived source files.
+
+A replication should hold the model, settings, initial weights, data and
+random streams, schedules, update order and evaluator fixed while changing
+only the implementation. Compare intermediate losses, gradients, optimizer
+state and parameter updates before comparing final benchmark scores. The
+existing critic parity tests cover one part of this requirement; they do not
+establish full training-loop equivalence.
+
+### Selection rationale
+
 The research rationale is specific: compared with R2, KA2 trades faster
 relearning for an intact pre-shift hold. A gradual response to persistent
 critic surprise changes the critic memory update rate, while a hysteretic

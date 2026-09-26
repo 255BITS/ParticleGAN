@@ -109,6 +109,10 @@ schemas raise `ValueError`; resume them with the release that wrote them
 `opt_g.step()` as usual. See [regularization factories](#regularization-factories). `learning_rate_scales(step, recipe)` returns the
 `(network, prior)` LR multipliers.
 
+Caller-owned loops can use [`NetworkLRTransition`](ka2.md#caller-controlled-learning-rate-decay)
+to start network LR decay when their own validation rule is met. KA2's blend
+still follows its penalty-call warmup; `GANTrainer` retains the fixed recipe schedule.
+
 ### Optional vector discriminators
 
 `BatchDistanceDiscriminator(in_dim=2, hidden_dim=96, n_hidden=3,

@@ -66,6 +66,35 @@ rejected rather than silently ignored. `reg_anchor_weight=0` removes the
 anchor penalty as an explicit ablation. These settings do not select a
 second default formulation.
 
+## Caller-controlled learning-rate decay
+
+For a caller-owned loop, the caller can start G/D decay when its own validation
+metric plateaus. `NetworkLRTransition` keeps G/D at full LR until marked, then
+cosine-decays them over the chosen duration to `network_lr_floor`. The particle
+prior retains its normal full-budget schedule. KA2's blend remains fixed after its warmup; this changes the learning
+rates, not the penalty's blend rule. The caller owns the plateau rule and
+must save the transition state with its
+optimizer checkpoint:
+
+```python
+from particlegan import NetworkLRTransition, scale_learning_rates
+
+transition = NetworkLRTransition(decay_steps=40_000)
+# After validation at 120,000 completed updates meets a declared plateau rule:
+transition.mark_plateau(120_000)
+# Before the next optimizer update, using the number of completed updates:
+network_scale, prior_scale = scale_learning_rates(
+    120_000, recipe, (opt_g, opt_d), base_lrs, prior,
+    network_transition=transition)
+checkpoint["network_transition"] = transition.state_dict()
+# On resume, recreate the same transition duration and restore its state:
+transition.load_state_dict(checkpoint["network_transition"])
+```
+
+Passing no transition retains the recipe's fixed network horizon. The
+caller-marked step remains fixed after marking; a different step raises an
+error. This API does not inspect validation data or choose checkpoints.
+
 ## API and checkpoints
 
 ```python
