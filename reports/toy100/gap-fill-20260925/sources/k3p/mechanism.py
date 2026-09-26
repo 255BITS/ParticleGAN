@@ -69,9 +69,14 @@ def anchored_gradient_gap(D, x_real, g, dimension):
     return (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
 
 
-def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stats=True):
+def scaled_penalty(self, D, x_real, x_fake, step=1, collect_stats=True, *, generator=None, ema_critic=None):
+    # The current K3P penalty takes collect_stats positionally and ema_critic
+    # by keyword, and it has no arm. vector_unequal_mass always passes
+    # ema_critic. Delegate that call to the penalty this replacement captured.
+    if not hasattr(self, "arm"):
+        return _original_penalty(self, D, x_real, x_fake, step, collect_stats, ema_critic=ema_critic)
     if self.arm != 'a_r1r2' or (self.lazy_k > 1 and step % self.lazy_k != 0):
-        return _original_penalty(self, D, x_real, x_fake, step, generator, collect_stats)
+        return _original_penalty(self, D, x_real, x_fake, step, collect_stats, ema_critic=ema_critic)
     _state['pending'] = True
     coefficient = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
     dimension = x_real[0].numel()
