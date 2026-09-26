@@ -1,0 +1,166 @@
+Constant-LR mechanism: shared_batch
+Flag: K3P_DYNAMICS=shared_batch (unset = constant-LR K3P, network 0.00425, prior 0.0085).
+Applies on develop (407c2f7a). One setting: alternating D then G on one real batch and one latent batch.
+
+diff --git a/particlegan/dynamics/__init__.py b/particlegan/dynamics/__init__.py
+new file mode 100644
+index 00000000..7d40f03c
+--- /dev/null
++++ b/particlegan/dynamics/__init__.py
+@@ -0,0 +1,5 @@
++"""Flag-gated GAN dynamics. Nothing here runs unless a mechanism is installed.
++
++The screen sets ``K3P_DYNAMICS`` and imports the named module from
++``sitecustomize``. With the variable unset, training is unchanged.
++"""
+diff --git a/particlegan/dynamics/shared_batch.py b/particlegan/dynamics/shared_batch.py
+new file mode 100644
+index 00000000..f032061f
+--- /dev/null
++++ b/particlegan/dynamics/shared_batch.py
+@@ -0,0 +1,54 @@
++"""One real batch and one latent batch for both players, critic then generator.
++
++The ring host draws a second latent batch and a second real batch after the
++critic step, and ``GANTrainer`` does the same. The two gradients are then not
++the gradient of one game on one sample. The splice diagnosis of this probe
++found the pass/fail cut in short windows of the critic's particle index and of
++the data batch, not in one shared update.
++
++This keeps the alternating order (critic step, then generator step on the
++updated critic). It does not extrapolate and it does not average players.
++The generator re-forwards the latents the critic just scored, and it is paired
++with the same real batch. No coefficient.
++
++Output noise on the generator forward is still drawn, because that draw is the
++observation of this forward, not a second minibatch of data or particles.
++"""
++from __future__ import annotations
++
++import atexit
++import json
++import os
++
++receipt = {"mechanism": "shared_batch", "steps": 0}
++_LOGGED = False
++_INSTALLED = False
++
++
++def install() -> None:
++    global _INSTALLED
++    if _INSTALLED:
++        return
++    _INSTALLED = True
++    atexit.register(_emit)
++    print(json.dumps({
++        "event": "dynamics",
++        "name": "shared_batch",
++        "setting": "alternating D then G on one real batch and one latent batch",
++    }), flush=True)
++
++
++def _emit() -> None:
++    print(json.dumps({"event": "dynamics_receipt", **receipt}), flush=True)
++
++
++def shared_batch_update() -> bool:
++    """True when this update should reuse the critic's real batch and latents."""
++    global _LOGGED
++    if os.environ.get("K3P_DYNAMICS") != "shared_batch":
++        return False
++    receipt["steps"] += 1
++    if not _LOGGED:
++        _LOGGED = True
++        print(json.dumps({"event": "dynamics_step", "name": "shared_batch", "steps": 1}), flush=True)
++    return True
+diff --git a/benchmarks/locked_shared/mode_hold.py b/benchmarks/locked_shared/mode_hold.py
+index eecf7273..229c06f2 100644
+--- a/benchmarks/locked_shared/mode_hold.py
++++ b/benchmarks/locked_shared/mode_hold.py
+@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
+ 
+ from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
+ from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
++from particlegan.dynamics.shared_batch import shared_batch_update
+ 
+ N_MODES = 8
+ RADIUS = 3.0
+@@ -209,10 +210,14 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
+         schedule_optimizer(opt_d, step)
+         opt_d.step()
+ 
+-        latent, _ = prior.sample(batch, generator=stream)
++        # shared_batch: the generator plays the real batch and the latents the
++        # critic just scored. Otherwise the host draws a second batch of each.
++        share = shared_batch_update()
++        if not share:
++            latent, _ = prior.sample(batch, generator=stream)
+         fake = generator(latent)
+         if gan.mode in ("rp", "ra"):
+-            real_g = sample_ring(means, batch, SIGMA, stream)
++            real_g = real if share else sample_ring(means, batch, SIGMA, stream)
+             g_loss = gan.g_loss(critic(fake), critic(real_g))
+         else:
+             # Stranger / unpaired pairing: real and fake are scored apart.
+diff --git a/particlegan/training.py b/particlegan/training.py
+index 48a47093..08d72418 100644
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -5,6 +5,7 @@ import math
+ import torch
+ from torch import nn
+ 
++from .dynamics.shared_batch import shared_batch_update
+ from .particle_prior import ParticlePrior
+ from .recipes import Recipe, learning_rate_scales
+ 
+@@ -188,7 +189,7 @@ class GANTrainer:
+         self.D.train()
+         self.G.eval()
+         with torch.no_grad():
+-            latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
++            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+             fake = self._generate(self.G, latent, sigma_out, noise)
+         loss_d = self.loss.d_loss(critic(real), critic(fake))
+         self.penalty.collect_stats = collect_stats
+@@ -204,10 +205,16 @@ class GANTrainer:
+         flags = [p.requires_grad for p in self.D.parameters()]
+         try:
+             self.D.requires_grad_(False)
+-            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
++            # shared_batch: generator step uses the critic's latents and reals.
++            share = shared_batch_update()
++            if not share:
++                latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+             fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+-            real_g = generator_real() if callable(generator_real) else generator_real
+-            real_g = real if real_g is None else self._batch(real_g, "generator_real")
++            if share:
++                real_g = real
++            else:
++                real_g = generator_real() if callable(generator_real) else generator_real
++                real_g = real if real_g is None else self._batch(real_g, "generator_real")
+             if real_g.shape[1:] != real.shape[1:]:
+                 raise ValueError("generator_real must match the real sample shape")
+             if len(real_g) != len(real):
+diff --git a/reports/toy100/constant-lr-dynamics/sitecustomize.py b/reports/toy100/constant-lr-dynamics/sitecustomize.py
+new file mode 100644
+index 00000000..8658ff3d
+--- /dev/null
++++ b/reports/toy100/constant-lr-dynamics/sitecustomize.py
+@@ -0,0 +1,15 @@
++"""Install shared_batch before the probe captures Adam.step.
++
++Flag: K3P_DYNAMICS=shared_batch. Unset does nothing (constant-LR K3P).
++Put this directory on PYTHONPATH. The branch screen does that.
++"""
++import os
++import sys
++
++name = os.environ.get("K3P_DYNAMICS")
++if name == "shared_batch":
++    from particlegan.dynamics.shared_batch import install
++    install()
++elif name:
++    sys.stderr.write(f"this patch only installs shared_batch, got {name}\n")
++    raise SystemExit(2)

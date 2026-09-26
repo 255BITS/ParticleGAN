@@ -5,6 +5,7 @@ import math
 import torch
 from torch import nn
 
+from .dynamics.shared_batch import shared_batch_update
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
 
@@ -188,7 +189,7 @@ class GANTrainer:
         self.D.train()
         self.G.eval()
         with torch.no_grad():
-            latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
+            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
             fake = self._generate(self.G, latent, sigma_out, noise)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
@@ -204,10 +205,16 @@ class GANTrainer:
         flags = [p.requires_grad for p in self.D.parameters()]
         try:
             self.D.requires_grad_(False)
-            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+            # shared_batch: generator step uses the critic's latents and reals.
+            share = shared_batch_update()
+            if not share:
+                latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
             fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
-            real_g = generator_real() if callable(generator_real) else generator_real
-            real_g = real if real_g is None else self._batch(real_g, "generator_real")
+            if share:
+                real_g = real
+            else:
+                real_g = generator_real() if callable(generator_real) else generator_real
+                real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
                 raise ValueError("generator_real must match the real sample shape")
             if len(real_g) != len(real):
