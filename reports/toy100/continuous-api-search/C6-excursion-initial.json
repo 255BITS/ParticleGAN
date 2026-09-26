@@ -1,0 +1,1510 @@
+{
+  "gate": "stationary7500 still completing",
+  "selected_updates": [
+    {
+      "step": 3300,
+      "updates": {
+        "G": {
+          "l2": 0.03312645107507706,
+          "max_abs": 0.0018975026905536652
+        },
+        "D": {
+          "l2": 0.04647842049598694,
+          "max_abs": 0.0023223161697387695
+        },
+        "prior": {
+          "l2": 0.0407840870320797,
+          "max_abs": 0.005639970302581787,
+          "changed_rows": 1940
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3300,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.1932653188705444,
+          "rotation_squared": 36.18363571166992,
+          "denominator": 40.994049072265625,
+          "norm_ratio": 0.1561851054430008,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.38334667682647705,
+          "applied_l2": 0.04647842049598694,
+          "correction_l2": 0.3781335651874542
+        },
+        "g": {
+          "preview_l2": 0.2340407520532608,
+          "applied_l2": 0.052542395889759064,
+          "correction_l2": 0.2051335871219635
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3300,
+        "observed_steps": 3300,
+        "last_sur": 0.8115063309669495,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 1.8866892881958186,
+        "ema_updates": 2501,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3360,
+      "updates": {
+        "G": {
+          "l2": 0.0627894178032875,
+          "max_abs": 0.0035163816064596176
+        },
+        "D": {
+          "l2": 0.09828741103410721,
+          "max_abs": 0.007018629461526871
+        },
+        "prior": {
+          "l2": 0.1071026548743248,
+          "max_abs": 0.014288872480392456,
+          "changed_rows": 1929
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3360,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.7143088579177856,
+          "rotation_squared": 19.36220932006836,
+          "denominator": 26.72968101501465,
+          "norm_ratio": 0.19342076778411865,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.3345295190811157,
+          "applied_l2": 0.09828741103410721,
+          "correction_l2": 0.32375577092170715
+        },
+        "g": {
+          "preview_l2": 0.7472000122070312,
+          "applied_l2": 0.1241510733962059,
+          "correction_l2": 0.6740602254867554
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3360,
+        "observed_steps": 3360,
+        "last_sur": 0.35661354660987854,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.8285878431269076,
+        "ema_updates": 2561,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3370,
+      "updates": {
+        "G": {
+          "l2": 0.015658600255846977,
+          "max_abs": 0.0006621778011322021
+        },
+        "D": {
+          "l2": 0.035130083560943604,
+          "max_abs": 0.0027851182967424393
+        },
+        "prior": {
+          "l2": 0.041475385427474976,
+          "max_abs": 0.006991863250732422,
+          "changed_rows": 1941
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3370,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -4.027355670928955,
+          "rotation_squared": 34.2176399230957,
+          "denominator": 59.491943359375,
+          "norm_ratio": 0.12964953482151031,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.271638423204422,
+          "applied_l2": 0.035130083560943604,
+          "correction_l2": 0.24225786328315735
+        },
+        "g": {
+          "preview_l2": 0.3414064645767212,
+          "applied_l2": 0.044332824647426605,
+          "correction_l2": 0.32044684886932373
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3370,
+        "observed_steps": 3370,
+        "last_sur": 0.3900316655635834,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.7801413229900525,
+        "ema_updates": 2571,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3380,
+      "updates": {
+        "G": {
+          "l2": 0.03057430125772953,
+          "max_abs": 0.00207437202334404
+        },
+        "D": {
+          "l2": 0.07179009914398193,
+          "max_abs": 0.0044706352055072784
+        },
+        "prior": {
+          "l2": 0.08255375921726227,
+          "max_abs": 0.013972163200378418,
+          "changed_rows": 1943
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3380,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -3.9480738639831543,
+          "rotation_squared": 21.275588989257812,
+          "denominator": 45.75902557373047,
+          "norm_ratio": 0.14782966673374176,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.4449445307254791,
+          "applied_l2": 0.07179009914398193,
+          "correction_l2": 0.3943706452846527
+        },
+        "g": {
+          "preview_l2": 0.6264874339103699,
+          "applied_l2": 0.08803357928991318,
+          "correction_l2": 0.5658095479011536
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3380,
+        "observed_steps": 3380,
+        "last_sur": 0.7618104219436646,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.423587464928714,
+        "ema_updates": 2581,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3385,
+      "updates": {
+        "G": {
+          "l2": 0.314751535654068,
+          "max_abs": 0.022138498723506927
+        },
+        "D": {
+          "l2": 0.3161410987377167,
+          "max_abs": 0.023917026817798615
+        },
+        "prior": {
+          "l2": 0.3907717764377594,
+          "max_abs": 0.028078317642211914,
+          "changed_rows": 1950
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3385,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.5691975355148315,
+          "rotation_squared": 6.329305171966553,
+          "denominator": 12.930082321166992,
+          "norm_ratio": 0.2780989706516266,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 1.2215715646743774,
+          "applied_l2": 0.3161410987377167,
+          "correction_l2": 1.0272033214569092
+        },
+        "g": {
+          "preview_l2": 1.747994065284729,
+          "applied_l2": 0.5017679929733276,
+          "correction_l2": 1.4272465705871582
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3385,
+        "observed_steps": 3385,
+        "last_sur": 2.084810495376587,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.731530717609084,
+        "ema_updates": 2586,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3388,
+      "updates": {
+        "G": {
+          "l2": 0.5671814680099487,
+          "max_abs": 0.03357646241784096
+        },
+        "D": {
+          "l2": 0.5460358262062073,
+          "max_abs": 0.02759924903512001
+        },
+        "prior": {
+          "l2": 0.841009795665741,
+          "max_abs": 0.055773019790649414,
+          "changed_rows": 1959
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3388,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.3682758808135986,
+          "rotation_squared": 8.869192123413086,
+          "denominator": 14.477922439575195,
+          "norm_ratio": 0.262813001871109,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 2.890719175338745,
+          "applied_l2": 0.5460358262062073,
+          "correction_l2": 2.4404594898223877
+        },
+        "g": {
+          "preview_l2": 3.2951602935791016,
+          "applied_l2": 1.014392614364624,
+          "correction_l2": 2.880892276763916
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3388,
+        "observed_steps": 3388,
+        "last_sur": 4.93903923034668,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 3.597226452764805,
+        "ema_updates": 2589,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3389,
+      "updates": {
+        "G": {
+          "l2": 1.2703626155853271,
+          "max_abs": 0.04475307837128639
+        },
+        "D": {
+          "l2": 0.6233549118041992,
+          "max_abs": 0.028669165447354317
+        },
+        "prior": {
+          "l2": 1.6458243131637573,
+          "max_abs": 0.08494317531585693,
+          "changed_rows": 1956
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3389,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -0.9219411611557007,
+          "rotation_squared": 4.631406307220459,
+          "denominator": 8.325263977050781,
+          "norm_ratio": 0.3465780019760132,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 2.8881642818450928,
+          "applied_l2": 0.6233549118041992,
+          "correction_l2": 2.486337661743164
+        },
+        "g": {
+          "preview_l2": 5.55696964263916,
+          "applied_l2": 2.0790765285491943,
+          "correction_l2": 4.431887626647949
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3389,
+        "observed_steps": 3389,
+        "last_sur": 4.8917107582092285,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 4.1868545344204335,
+        "ema_updates": 2590,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3390,
+      "updates": {
+        "G": {
+          "l2": 1.9421435594558716,
+          "max_abs": 0.06500500440597534
+        },
+        "D": {
+          "l2": 0.882140040397644,
+          "max_abs": 0.04104774817824364
+        },
+        "prior": {
+          "l2": 2.380322217941284,
+          "max_abs": 0.12938785552978516,
+          "changed_rows": 1951
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3390,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -0.9519867300987244,
+          "rotation_squared": 1.930132508277893,
+          "denominator": 5.740385055541992,
+          "norm_ratio": 0.41737791895866394,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 2.839709520339966,
+          "applied_l2": 0.882140040397644,
+          "correction_l2": 2.3239450454711914
+        },
+        "g": {
+          "preview_l2": 7.111959934234619,
+          "applied_l2": 3.0721092224121094,
+          "correction_l2": 4.855525970458984
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3390,
+        "observed_steps": 3390,
+        "last_sur": 4.9390435218811035,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 4.187112061004248,
+        "ema_updates": 2591,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3391,
+      "updates": {
+        "G": {
+          "l2": 1.456118106842041,
+          "max_abs": 0.043799735605716705
+        },
+        "D": {
+          "l2": 0.6924244165420532,
+          "max_abs": 0.028742412105202675
+        },
+        "prior": {
+          "l2": 1.3302128314971924,
+          "max_abs": 0.08239223062992096,
+          "changed_rows": 1949
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3391,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -0.8241028785705566,
+          "rotation_squared": 4.648918628692627,
+          "denominator": 7.976269721984863,
+          "norm_ratio": 0.35407891869544983,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 2.8461060523986816,
+          "applied_l2": 0.6924244165420532,
+          "correction_l2": 2.406949758529663
+        },
+        "g": {
+          "preview_l2": 5.171999454498291,
+          "applied_l2": 1.9722439050674438,
+          "correction_l2": 4.181621074676514
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3391,
+        "observed_steps": 3391,
+        "last_sur": 4.939045429229736,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 4.330270385322392,
+        "ema_updates": 2592,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3392,
+      "updates": {
+        "G": {
+          "l2": 0.9474071860313416,
+          "max_abs": 0.03813907876610756
+        },
+        "D": {
+          "l2": 0.6262889504432678,
+          "max_abs": 0.029925629496574402
+        },
+        "prior": {
+          "l2": 1.2240906953811646,
+          "max_abs": 0.07581007480621338,
+          "changed_rows": 1953
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3392,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.6364997625350952,
+          "rotation_squared": 6.829166412353516,
+          "denominator": 13.780298233032227,
+          "norm_ratio": 0.26938334107398987,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 2.7528269290924072,
+          "applied_l2": 0.6262889504432678,
+          "correction_l2": 2.196282148361206
+        },
+        "g": {
+          "preview_l2": 5.553773403167725,
+          "applied_l2": 1.547894835472107,
+          "correction_l2": 4.656688690185547
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3392,
+        "observed_steps": 3392,
+        "last_sur": 4.939047813415527,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 4.8079678443582505,
+        "ema_updates": 2593,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3400,
+      "updates": {
+        "G": {
+          "l2": 1.0136229991912842,
+          "max_abs": 0.059724994003772736
+        },
+        "D": {
+          "l2": 0.9964678287506104,
+          "max_abs": 0.03976663202047348
+        },
+        "prior": {
+          "l2": 2.437736988067627,
+          "max_abs": 0.12131321430206299,
+          "changed_rows": 1942
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3400,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.0488436222076416,
+          "rotation_squared": 1.703192114830017,
+          "denominator": 5.900952339172363,
+          "norm_ratio": 0.41166025400161743,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 2.5835766792297363,
+          "applied_l2": 0.9964678287506104,
+          "correction_l2": 1.8495924472808838
+        },
+        "g": {
+          "preview_l2": 6.34933614730835,
+          "applied_l2": 2.6400742530822754,
+          "correction_l2": 4.347556114196777
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3400,
+        "observed_steps": 3400,
+        "last_sur": 4.939064025878906,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 23.098386201922654,
+        "ema_updates": 2601,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3450,
+      "updates": {
+        "G": {
+          "l2": 1.058127760887146,
+          "max_abs": 0.02488236129283905
+        },
+        "D": {
+          "l2": 0.975321888923645,
+          "max_abs": 0.0739089846611023
+        },
+        "prior": {
+          "l2": 2.4398210048675537,
+          "max_abs": 0.13687440752983093,
+          "changed_rows": 1935
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3450,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -0.9914435148239136,
+          "rotation_squared": 0.3235287070274353,
+          "denominator": 4.2893757820129395,
+          "norm_ratio": 0.4828396737575531,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 1.6683975458145142,
+          "applied_l2": 0.975321888923645,
+          "correction_l2": 1.1561226844787598
+        },
+        "g": {
+          "preview_l2": 5.6242995262146,
+          "applied_l2": 2.659391164779663,
+          "correction_l2": 3.024258852005005
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3450,
+        "observed_steps": 3450,
+        "last_sur": 2.978193759918213,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 15.51388550269576,
+        "ema_updates": 2651,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3500,
+      "updates": {
+        "G": {
+          "l2": 0.5617865920066833,
+          "max_abs": 0.01686117984354496
+        },
+        "D": {
+          "l2": 0.4520704448223114,
+          "max_abs": 0.02179640531539917
+        },
+        "prior": {
+          "l2": 1.5835480690002441,
+          "max_abs": 0.12781810760498047,
+          "changed_rows": 1944
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3500,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -0.8766945004463196,
+          "rotation_squared": 1.9674389362335205,
+          "denominator": 5.4894208908081055,
+          "norm_ratio": 0.4268121123313904,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 1.1081764698028564,
+          "applied_l2": 0.4520704448223114,
+          "correction_l2": 1.0129016637802124
+        },
+        "g": {
+          "preview_l2": 3.9232254028320312,
+          "applied_l2": 1.6802467107772827,
+          "correction_l2": 2.6939990520477295
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3500,
+        "observed_steps": 3500,
+        "last_sur": 2.1636741161346436,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 11.776526874060002,
+        "ema_updates": 2701,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3600,
+      "updates": {
+        "G": {
+          "l2": 0.5465524196624756,
+          "max_abs": 0.014104880392551422
+        },
+        "D": {
+          "l2": 0.46635663509368896,
+          "max_abs": 0.020728088915348053
+        },
+        "prior": {
+          "l2": 1.19686758518219,
+          "max_abs": 0.09688299894332886,
+          "changed_rows": 1947
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3600,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -0.8838341236114502,
+          "rotation_squared": 1.0425868034362793,
+          "denominator": 4.5914177894592285,
+          "norm_ratio": 0.46668797731399536,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.7481052279472351,
+          "applied_l2": 0.46635663509368896,
+          "correction_l2": 0.6853572726249695
+        },
+        "g": {
+          "preview_l2": 2.896141290664673,
+          "applied_l2": 1.3157551288604736,
+          "correction_l2": 1.7561964988708496
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3600,
+        "observed_steps": 3600,
+        "last_sur": 1.5953558683395386,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 7.228206619347916,
+        "ema_updates": 2801,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3680,
+      "updates": {
+        "G": {
+          "l2": 0.02423219382762909,
+          "max_abs": 0.0008357362821698189
+        },
+        "D": {
+          "l2": 0.04771227762103081,
+          "max_abs": 0.0031585469841957092
+        },
+        "prior": {
+          "l2": 0.23538583517074585,
+          "max_abs": 0.0628129243850708,
+          "changed_rows": 1935
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3680,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -1.8987863063812256,
+          "rotation_squared": 4.546784400939941,
+          "denominator": 12.949746131896973,
+          "norm_ratio": 0.2778877317905426,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.16788525879383087,
+          "applied_l2": 0.04771227762103081,
+          "correction_l2": 0.15525725483894348
+        },
+        "g": {
+          "preview_l2": 0.8522899150848389,
+          "applied_l2": 0.23662985861301422,
+          "correction_l2": 0.6715083718299866
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3680,
+        "observed_steps": 3680,
+        "last_sur": 0.34937551617622375,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.5605505158447452,
+        "ema_updates": 2881,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3690,
+      "updates": {
+        "G": {
+          "l2": 0.013767060823738575,
+          "max_abs": 0.0010132640600204468
+        },
+        "D": {
+          "l2": 0.04083049297332764,
+          "max_abs": 0.0027431002818048
+        },
+        "prior": {
+          "l2": 0.22390992939472198,
+          "max_abs": 0.03520214557647705,
+          "changed_rows": 1938
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3690,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -2.0356414318084717,
+          "rotation_squared": 3.6972780227661133,
+          "denominator": 12.912397384643555,
+          "norm_ratio": 0.2782893478870392,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.1811380237340927,
+          "applied_l2": 0.04083049297332764,
+          "correction_l2": 0.1593007892370224
+        },
+        "g": {
+          "preview_l2": 0.7990835309028625,
+          "applied_l2": 0.2243327647447586,
+          "correction_l2": 0.6183049082756042
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3690,
+        "observed_steps": 3690,
+        "last_sur": 0.40636229515075684,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.415479458560912,
+        "ema_updates": 2891,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    },
+    {
+      "step": 3700,
+      "updates": {
+        "G": {
+          "l2": 0.012469316832721233,
+          "max_abs": 0.0006464049220085144
+        },
+        "D": {
+          "l2": 0.037826064974069595,
+          "max_abs": 0.0022907108068466187
+        },
+        "prior": {
+          "l2": 0.1846352368593216,
+          "max_abs": 0.03745394945144653,
+          "changed_rows": 1931
+        }
+      },
+      "game": {
+        "policy": "secant_resolvent",
+        "field_evaluations": 2,
+        "accepted_updates": 3700,
+        "preview_moments_discarded": false,
+        "secant": {
+          "radial_secant": -2.315871238708496,
+          "rotation_squared": 3.7520384788513184,
+          "denominator": 14.747039794921875,
+          "norm_ratio": 0.26040396094322205,
+          "moment_source": "base_gradient"
+        },
+        "d": {
+          "preview_l2": 0.16745498776435852,
+          "applied_l2": 0.037826064974069595,
+          "correction_l2": 0.14234721660614014
+        },
+        "g": {
+          "preview_l2": 0.7057483196258545,
+          "applied_l2": 0.18505580723285675,
+          "correction_l2": 0.5522124767303467
+        }
+      },
+      "controller": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.00425,
+        "anchor_started": true,
+        "calls": 3700,
+        "observed_steps": 3700,
+        "last_sur": 0.36742231249809265,
+        "sur_base": 0.21177716553211212,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.1,
+        "last_ratio": 2.2446329454603022,
+        "ema_updates": 2901,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "event": "observation",
+      "step": 3360,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.989990234375,
+      "cover": 1.0,
+      "effective_modes": 7.848746299743652,
+      "ema": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.995849609375,
+        "cover": 1.0,
+        "effective_modes": 7.847177982330322
+      },
+      "losses": {
+        "loss_d": 0.6226719617843628,
+        "loss_g": 0.8060255646705627,
+        "loss_gan": 0.8060255646705627,
+        "prior_regularization": 0.020343517884612083,
+        "penalty": 0.004188154824078083
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.004188154824078083,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.008225088939070702,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 0,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 2.8285878431269076,
+        "ema_updates": 2561,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3380,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.97021484375,
+      "cover": 1.0,
+      "effective_modes": 7.864930152893066,
+      "ema": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.995849609375,
+        "cover": 1.0,
+        "effective_modes": 7.847177982330322
+      },
+      "losses": {
+        "loss_d": 0.6466490626335144,
+        "loss_g": 0.786148190498352,
+        "loss_gan": 0.786148190498352,
+        "prior_regularization": 0.03065909817814827,
+        "penalty": 0.012721109203994274
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.012721109203994274,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.023990808054804802,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 0,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 2.423587464928714,
+        "ema_updates": 2581,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3390,
+      "modes": 2,
+      "n_modes": 8,
+      "hq": 0.060791015625,
+      "cover": 0.25,
+      "effective_modes": 1.932234764099121,
+      "ema": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.99365234375,
+        "cover": 1.0,
+        "effective_modes": 7.849196910858154
+      },
+      "losses": {
+        "loss_d": 4.036378860473633,
+        "loss_g": 0.927851140499115,
+        "loss_gan": 0.927851140499115,
+        "prior_regularization": 0.025189926847815514,
+        "penalty": 1.8487179279327393
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 1.8487179279327393,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 1.0022315979003906,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 18,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 4.187112061004248,
+        "ema_updates": 2591,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3400,
+      "modes": 2,
+      "n_modes": 8,
+      "hq": 0.01513671875,
+      "cover": 0.25,
+      "effective_modes": 1.1531598567962646,
+      "ema": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.72216796875,
+        "cover": 1.0,
+        "effective_modes": 7.222748279571533
+      },
+      "losses": {
+        "loss_d": 0.8877612948417664,
+        "loss_g": 1.2698314189910889,
+        "loss_gan": 1.2698314189910889,
+        "prior_regularization": 0.019875667989253998,
+        "penalty": 0.3649675250053406
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.3649675250053406,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.413285493850708,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 88,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 23.098386201922654,
+        "ema_updates": 2601,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3450,
+      "modes": 1,
+      "n_modes": 8,
+      "hq": 0.002197265625,
+      "cover": 0.125,
+      "effective_modes": 1.0,
+      "ema": {
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0
+      },
+      "losses": {
+        "loss_d": 0.4427643418312073,
+        "loss_g": 1.318328619003296,
+        "loss_gan": 1.318328619003296,
+        "prior_regularization": 0.04515008255839348,
+        "penalty": 0.06969758868217468
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.06969758868217468,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.12316438555717468,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 239,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 15.51388550269576,
+        "ema_updates": 2651,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3500,
+      "modes": 5,
+      "n_modes": 8,
+      "hq": 0.08203125,
+      "cover": 0.625,
+      "effective_modes": 2.676874876022339,
+      "ema": {
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0
+      },
+      "losses": {
+        "loss_d": 0.5013819336891174,
+        "loss_g": 1.348283052444458,
+        "loss_gan": 1.348283052444458,
+        "prior_regularization": 0.032307881861925125,
+        "penalty": 0.1287045180797577
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.1287045180797577,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.09246531128883362,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 249,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 11.776526874060002,
+        "ema_updates": 2701,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3600,
+      "modes": 6,
+      "n_modes": 8,
+      "hq": 0.259765625,
+      "cover": 0.75,
+      "effective_modes": 3.5842721462249756,
+      "ema": {
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0
+      },
+      "losses": {
+        "loss_d": 0.4415038228034973,
+        "loss_g": 1.1378393173217773,
+        "loss_gan": 1.1378393173217773,
+        "prior_regularization": 0.05111776292324066,
+        "penalty": 0.03900550305843353
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.03900550305843353,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.052732713520526886,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 249,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 7.228206619347916,
+        "ema_updates": 2801,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3680,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.8857421875,
+      "cover": 1.0,
+      "effective_modes": 7.635683059692383,
+      "ema": {
+        "modes": 1,
+        "n_modes": 8,
+        "hq": 0.000244140625,
+        "cover": 0.125,
+        "effective_modes": 1.0
+      },
+      "losses": {
+        "loss_d": 0.6129716038703918,
+        "loss_g": 0.8654978275299072,
+        "loss_gan": 0.8654978275299072,
+        "prior_regularization": 0.05449552461504936,
+        "penalty": 0.021834757179021835
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.021834757179021835,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.010235745459794998,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 249,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 2.5605505158447452,
+        "ema_updates": 2881,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3690,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.92431640625,
+      "cover": 1.0,
+      "effective_modes": 7.70123291015625,
+      "ema": {
+        "modes": 1,
+        "n_modes": 8,
+        "hq": 0.000244140625,
+        "cover": 0.125,
+        "effective_modes": 1.0
+      },
+      "losses": {
+        "loss_d": 0.6171714663505554,
+        "loss_g": 0.8327802419662476,
+        "loss_gan": 0.8327802419662476,
+        "prior_regularization": 0.05589558929204941,
+        "penalty": 0.014633219689130783
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.014633219689130783,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.011598236858844757,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 249,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 2.415479458560912,
+        "ema_updates": 2891,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    },
+    {
+      "event": "observation",
+      "step": 3700,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.951416015625,
+      "cover": 1.0,
+      "effective_modes": 7.729052543640137,
+      "ema": {
+        "modes": 1,
+        "n_modes": 8,
+        "hq": 0.000244140625,
+        "cover": 0.125,
+        "effective_modes": 1.0
+      },
+      "losses": {
+        "loss_d": 0.618243932723999,
+        "loss_g": 0.8450945615768433,
+        "loss_gan": 0.8450945615768433,
+        "prior_regularization": 0.044921357184648514,
+        "penalty": 0.013310769572854042
+      },
+      "penalty": {
+        "applied": true,
+        "pen": 0.013310769572854042,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 0.1,
+        "prox": 0.010130928829312325,
+        "phase": "blend"
+      },
+      "controller": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 249,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.1,
+        "surprise_ratio": 2.2446329454603022,
+        "ema_updates": 2901,
+        "ema_skips": 0,
+        "ema_reseeds": 0
+      },
+      "learning_rates": {
+        "generator_0": 0.00425,
+        "prior_1": 0.0085,
+        "critic_0": 0.00425
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029
+    }
+  ]
+}

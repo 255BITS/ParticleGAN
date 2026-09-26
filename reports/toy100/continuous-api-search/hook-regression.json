@@ -1,0 +1,10 @@
+{
+  "status": "UNRESOLVED_IN_MEASURED_SOURCE",
+  "failure": "tests/test_k3p_trainer.py::test_recipe_optimizers_are_ordinary_adam:post_hook called twice",
+  "cause": "Copied KA2CriticAdam.step calls wrapped K3PCriticAdam.step when no update limiter; both PyTorch step wrappers invoke registered hooks",
+  "artifact": "regression-final.log",
+  "proposed_patch": "proposed-hook-repair.patch",
+  "patch_applied": false,
+  "patch_tested": false,
+  "reason": "Candidate package remains immutable for evidence and supervisor review; no fourth proposal or borrowed quality"
+}

@@ -81,7 +81,8 @@ The three lanes remain active. Data-drift was refilled at22:18 UTC after its
 [completed review](data-drift-wave1-review.md); reversible precision was refilled
 at22:19 after [its review](reversible-precision-wave1-review.md). The latter will
 consider combining RP2 retention control with C6 implicit updates, earning new
-evidence. The next constant-rate [review](constant-rate-wave2-review.md) preserves
+evidence. The constant-rate lane was refilled at22:25 after its
+[second review](constant-rate-wave2-review.md), which preserves
 C5's useful hard-copy behavior and C6's measured limitations.
 
 At 21:42 UTC the constant-rate lane was first refilled

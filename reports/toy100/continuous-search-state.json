@@ -28,7 +28,7 @@
     "phase": "RUNNING",
     "no_seed_sweeps": true,
     "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
-    "verified_live_utc": "2026-09-26T22:22:49.299919+00:00",
+    "verified_live_utc": "2026-09-26T22:25:57.136650+00:00",
     "verified_live_counts": {
       "codex": 3,
       "grok": 0
@@ -552,12 +552,6 @@
   ],
   "active_attempts": [
     {
-      "lane": "constant_rate_stability",
-      "pid": 1447914,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914",
-      "status": "RUNNING"
-    },
-    {
       "lane": "data_drift_mobility",
       "pid": 1504042,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042",
@@ -568,13 +562,19 @@
       "pid": 1506445,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445",
       "status": "RUNNING"
+    },
+    {
+      "lane": "constant_rate_stability",
+      "pid": 1514972,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972",
+      "status": "RUNNING"
     }
   ],
   "current_api_evidence": {
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "RP2_RP3_IMAGE_FAILURES_C6_STATIONARY_FAILURE_REVIEWING_REFILLS",
+    "status": "THREE_REVIEWED_REPLACEMENT_ATTEMPTS_RUNNING_NO_WINNER",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
     "matched_k3p_owner": "UNASSIGNED_PENDING_SURVIVOR",
