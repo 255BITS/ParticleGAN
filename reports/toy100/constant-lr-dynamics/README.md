@@ -4,7 +4,7 @@ Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant:
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
-Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
+Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch, optimistic}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
 
 Each idea has one setting taken from the existing step, the existing penalty term, or the existing batch. No coefficient, clip, or ratio was swept. Not on this track: coverage, anchors, forward-KL as a training signal, mode quotas, Chamfer assignment.
 
@@ -96,6 +96,38 @@ Best stay fraction inside the 120 checks (still a fail): baseline 53/120 (offset
 
 Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At step 1200 the `unit_rms` critic displacement RMS was 0.00425 while its gradient RMS was 0.0125.
 
+## `optimistic` — Daskalakis Algorithm 1 at constant LR
+
+Hypothesis, written before the run: the neighbor hop in #177 is a rotational game cycle (the critic scores a neighbor higher, particles climb, the emptied mode stays empty). Optimism damps that cycle at a constant learning rate. The annealed hid_q screen already ran this rule and it was worse there; this run is the same published update with no anneal.
+
+The update is `-lr * (2 m_t - m_{t-1})` on D, G, and the particle prior. `m_t` is the bias-corrected Adam direction, `m_0 = 0`, and `lr` / betas stay the group values (network `0.00425`, prior `0.0085`, betas `(0, 0.999)`). No other coefficient.
+
+`vector_unequal_mass` was crashing in `scaled_penalty` (`ema_critic` TypeError, and `self.arm` on a penalty that has no arm). The signature accepts `ema_critic`. At constant LR, `s` stays 1, so the penalty value matches K3P's full-LR term.
+
+```
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics baseline --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics optimistic --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+```
+
+CPU only, same build as the baseline above. Offset 0 baseline ring is again FAIL, 8 modes, hq 0.878173828125. Step 1 critic displacement RMS is 0.00425 on the baseline and 0.00850 with optimism (the paper's first step, `m_0 = 0`). Group LRs stay 0.00425 and `[0.00425, 0.0085]` through step 1200. Handoff bar is missed: no hold PASS and no stay 120/120. Ring passes stay 0/8, the same count as the baseline.
+
+| offset | baseline ring | optimistic ring | baseline hold | optimistic hold | baseline stay | optimistic stay | baseline unequal | optimistic unequal |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 0 / 0.000 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 33/120 | 0/120 | FAIL suffix 2 | FAIL suffix 0 |
+| 101 | 7 / 0.659 / 0 | 1 / 0.148 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 0/120 | 1/120 | PASS suffix 5 | FAIL suffix 1 |
+| 202 | 7 / 0.985 / 0 | 4 / 0.295 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 0/120 | 0/120 | FAIL suffix 0 | FAIL suffix 2 |
+| 303 | 6 / 0.670 / 0 | 8 / 0.537 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 9/120 | 0/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 404 | 6 / 0.400 / 0 | 1 / 0.008 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 17/120 | 5/120 | FAIL suffix 3 | FAIL suffix 3 |
+| 505 | 4 / 0.263 / 0 | 2 / 0.115 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 0/120 | 0/120 | PASS suffix 10 | FAIL suffix 0 |
+| 606 | 7 / 0.694 / 0 | 5 / 0.444 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 53/120 | 0/120 | FAIL suffix 0 | FAIL suffix 0 |
+| 707 | 0 / 0.000 / 0 | 3 / 0.099 / 0 | 0, NOT_CONVERGED | 0, NOT_CONVERGED | 0/120 | 0/120 | FAIL suffix 0 | FAIL suffix 0 |
+
+Ring column is modes / hq / passing suffix. Every ring row is FAIL. Hold checks are 0 on all 16 runs. Best stay fraction is still the baseline's 53/120 at offset 606. Optimistic's best stay is 5/120 at offset 404. Unequal modes are not a ring count; the probe verdict is PASS/FAIL plus `passing_suffix`. The bugfix lets unequal finish: baseline 2/8, optimistic 0/8.
+
+Two isolated reruns of optimistic ring offset 0 match on all 106 checkpoint tensors (parameters, Adam moments, the saved direction, RNG). `result.json` differs in wall-clock seconds and the probe's optimizer object ids. A three-step parameter hash at lr 0.00425, betas `(0, 0.999)` is `3e2f5ed9aa0d5e826e457911deb1024e2e7bd9ceeb2d93b544e477dde93e3063` with the flag unset (twice, ordinary Adam keys only) and `dc67f3cad4611f84e33f4ee61162451828571086ec5c2e7d111c55a378ccbd83` with the flag on (twice, including `optimistic_prev_direction`).
+
+Do not send this to the A6000. The first step is `-2 lr m_1`, so the sign step the early kink amplifies is twice as large before a previous direction exists to cancel. Offset 0 is already at 0 modes, and the late gradient cosine is +0.93 rather than a cancelled rotation. The hop this was aimed at is not the failure that fires first.
+
 ## Recommendation
 
-Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
+Do not promote any of these, including `optimistic`. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `optimistic` misses the handoff bar on this CPU screen (no hold PASS, no stay 120/120) and covers fewer modes than the baseline on 6 of 8 offsets. Offset 303 reaches 8 modes at hq 0.537, and offset 707 reaches 3 modes against the baseline's 0; neither passes. `vector_unequal_mass` now runs; on this build the constant-LR baseline passes 2/8 and optimism passes 0/8.
