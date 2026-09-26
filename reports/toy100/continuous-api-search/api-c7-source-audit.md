@@ -1,0 +1,35 @@
+# API-C7 immutable-source delta audit
+
+No source-conformance blocker found for the declared ring and image hosts. This is a source and existing-artifact audit, not a quality qualification or an independently executed regression/replay test. No candidate files changed, no model was constructed, and no tests, training, or GPU computation ran. Existing checkpoints were loaded on CPU with CUDA hidden. Machine-readable hashes and checkpoint/rate receipts are in `API-C7.json`; `inspect_c7.py` reproduces those read-only checks.
+
+## Immutable provenance
+
+The ring source ZIP is SHA256 `e1a9db98f672de3b94eea045b1949ff0e8ee540c631d139e1a7a223fa4bebee2` (21 files). Image ZIP: `b2e0ddbf014037fbc6a953ec4b8d5476ddbbc91c46b5e506b3f30054eb97d488` (24 files). Stationary ZIP: `c27a136fe2303643e8f239168e4a2eacb8cd34943fe38703d8567f2eb6fe69ca` (23 files). Every archived member matches its declaration and the inspected working file. All three contain identical package bytes. The only package changes from immutable C6 are `particlegan/ka2.py` and `particlegan/recipes.py`; game-update and trainer code are unchanged. The separate seven-file verification source ZIP also matches its manifest.
+
+## Declared fresh reference and accepted-state accounting
+
+`FreshKA2StepRecord.record_step` (`ka2.py:216–236`) explicitly sets anchor decay to zero and copies the critic through `anchor.start_()`. It inherits fixed W=1, alpha=.1 telemetry and disabled release/reseed behavior from MovingKA2StepRecord; the effective reference is a copy, not the inherited .99 moving average. The old moving update executes first but is overwritten, with one logical controller count. Its `ka2_fresh` checkpoint marker rejects other controller formulations. RobustCriticAnchor copies parameters and buffers independently of trainability flags.
+
+As in corrected C6, `JointStage.finalize` runs after the trainer restores original critic requires-grad flags and before accepted G/prior EMA (`training.py:262–268`). The secant resolver installs the accepted joint parameters, retains base-field Adam moments/controller state, restores the pre-update reference, and updates that reference using zero decay. Consequently the next update sees the last accepted critic, not a provisional predictor or corrector endpoint. The active penalty begins at applied call 800 after 799 pure-A calls.
+
+At stored ring updates 1600, 1740, 1750, 1800, 2400 and 4600, all nine accepted D/reference state tensors are bitwise equal (maximum difference zero), as fresh-reference semantics require. Adam steps, controller calls, observed steps and completed updates agree at every inspected checkpoint; reference updates equal completed updates minus 799, with no skips/reseeds. Every checkpoint declares serial backward and `ka2_fresh`. Across all 4,600 ring and 600 image rate receipts, controller counters advance once per accepted update and public rates remain exactly G/D=.00425, prior=.0085.
+
+## Same-oracle transaction and public path
+
+The unchanged C6 joint transaction (`game_update.py:91–142`) takes one trainer snapshot, resolves a generator-real callable once, evaluates the predictor, and restores optimizer/controller/critic-reference state, G/prior EMA, model buffers, accepted count, private streams and global CPU/CUDA RNG before correction. It retains the same real tensors and restored latent/noise draws while probing predicted joint parameters. Accepted secant state uses base-field optimizer moments, not an extra clock tick from correction. Sparse prior histories travel with optimizer state; prior parameters participate in the joint secant. The second ordinary stage supplies the accepted RNG/buffer continuation. The supported hosts have no optimizer hooks or stateful custom layers that add state outside these checkpoints.
+
+The ring worker constructs the actual public `get_recipe` + `GANTrainer(..., serial_backward=True)` and calls `trainer.step(real)` (`worker.py:64–77, 219`). Its evaluator budget argument is deliberately unused by recipe construction. Target changes affect the external data means only; neither target identities, future change times, quality metrics nor evaluator horizon enter the learner. Continuous learning-rate scales are always (1,1) (`recipes.py:448–451`); trainer budget stopping is bypassed in continuous mode. Startup noise uses fixed 360/720 update counts, then holds, independent of total_steps. These are declared startup behavior, not an evaluator-dependent schedule.
+
+## Serial execution and hook regression
+
+`GANTrainer.step` wraps the entire dispatch in `torch.autograd.set_multithreading_enabled(False)` (`training.py:171–184`), covering both stages, inner higher-order gradient construction, and outer backward. The checkpoint serial-mode marker is checked before state mutation (`training.py:335–341`). This is unchanged from audited C6, and all inspected C7 checkpoints have true.
+
+The predecessor hook defect was duplicate callbacks when KA2's unbounded branch called a wrapped parent K3P step. C7 `KA2CriticAdam.step` (`ka2.py:338–349`) now performs closure, guard, unwrapped Adam update, optional limiter and record directly, leaving one ordinary optimizer hook boundary. The existing ordinary-optimizer hook test is AST-identical to C6 and still requires exactly one post-hook and one observed step per explicit `opt.step`.
+
+The preserved first C7 regression log reports 35 passes and one failure before the new fresh-reference test reaches training: `get_recipe(**recipe.to_dict())` passes report name `ka2` as an invalid model family. The fixed verification ZIP changes this fixture construction to `t.recipe.replace(critic_memory='fresh')`. It retains exact D/reference equality, zero decay, formulation and full checkpoint roundtrip assertions. The fixed log reports all 36 passing. I inspected these logs/source without rerunning tests; there is no evidence of weakened assertions.
+
+The hook contract is per actual `optimizer.step()`. A secant trainer transaction intentionally performs two staged optimizer calls, so external optimizer hooks run twice and observe staged states; their external side effects are not checkpointed. That differs from a hypothetical once-per-accepted-update trainer callback. These hosts register no optimizer hooks, so this is a contract distinction to document for integration, not a blocker for the submitted evidence.
+
+## Evidence scope
+
+The submitted single-shift result records cold arrival 590 with 182/182 checks and shifted arrival +270 with 194/194 through update 4600; these are C7's own results. The image result records 24 observations and five passing final observations ending at 600. That image budget never activates the anchor (checkpoint calls=600, anchor_started=false, reference updates=0), so it exercises C7's pure-A/secant phase and does not independently validate active fresh-reference behavior. Broader long-run quality qualification and clean-process continuation remain separate worker gates; this audit does not infer their success.

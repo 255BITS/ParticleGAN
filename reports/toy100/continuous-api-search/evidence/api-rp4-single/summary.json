@@ -1,0 +1,169 @@
+{
+  "segments": [
+    {
+      "start": 0,
+      "end": 2400,
+      "first_arrival": 1250,
+      "delay": 1250,
+      "passing_since_arrival": 108,
+      "checks_since_arrival": 116,
+      "every_failing_observation_since_arrival": [
+        1260,
+        1460,
+        1470,
+        1480,
+        1490,
+        1500,
+        1510,
+        1520
+      ],
+      "departures": [
+        1260,
+        1460
+      ],
+      "stable_suffix_start": 1530,
+      "stable_suffix_checks": 88,
+      "minimum_hq_since_arrival": 0.838623046875,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 2400,
+        "modes": 8,
+        "hq": 0.985107421875
+      }
+    },
+    {
+      "start": 2400,
+      "end": 4600,
+      "first_arrival": 2750,
+      "delay": 350,
+      "passing_since_arrival": 170,
+      "checks_since_arrival": 186,
+      "every_failing_observation_since_arrival": [
+        2760,
+        2840,
+        2880,
+        2940,
+        2950,
+        2960,
+        2970,
+        2980,
+        2990,
+        3000,
+        3010,
+        3020,
+        3030,
+        3040,
+        3050,
+        3100
+      ],
+      "departures": [
+        2760,
+        2840,
+        2880,
+        2940,
+        3100
+      ],
+      "stable_suffix_start": 3110,
+      "stable_suffix_checks": 150,
+      "minimum_hq_since_arrival": 0.94873046875,
+      "minimum_modes_since_arrival": 7,
+      "minimum_hq_entire_segment": 0.000244140625,
+      "final": {
+        "step": 4600,
+        "modes": 8,
+        "hq": 0.990234375
+      }
+    }
+  ],
+  "events": [
+    {
+      "step": 2044,
+      "variant": "rp4",
+      "open": false,
+      "gap": 0.010697996243834496,
+      "gap_s": 0.013351615168844436,
+      "velocity": -2.6804231565757952e-05,
+      "contraction_peak": 0.0001513615565508497,
+      "contracting": 546,
+      "activity": 0.07365347824815903,
+      "activity_peak": 0.4560127940683117,
+      "quiet_gap": 0.013351615168844436,
+      "quiet_activity": 0.07365347824815903,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 2044,
+      "openings": 1,
+      "closings": 1,
+      "event": "close"
+    },
+    {
+      "step": 2446,
+      "variant": "rp4",
+      "open": true,
+      "gap": 0.17550905048847198,
+      "gap_s": 0.04121639767099385,
+      "velocity": 0.0013564914426007837,
+      "contraction_peak": 0.0,
+      "contracting": 0,
+      "activity": 1.026724857089976,
+      "activity_peak": 1.026724857089976,
+      "quiet_gap": 0.008890386173618262,
+      "quiet_activity": 0.09603709284129885,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 2446,
+      "openings": 2,
+      "closings": 1,
+      "event": "reopen"
+    },
+    {
+      "step": 3310,
+      "variant": "rp4",
+      "open": false,
+      "gap": 0.026748523116111755,
+      "gap_s": 0.03490303826585787,
+      "velocity": -8.236883989642951e-05,
+      "contraction_peak": 0.00039127661216364906,
+      "contracting": 721,
+      "activity": 0.04406723670400896,
+      "activity_peak": 1.0359379009983143,
+      "quiet_gap": 0.03490303826585787,
+      "quiet_activity": 0.04406723670400896,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 3310,
+      "openings": 2,
+      "closings": 2,
+      "event": "close"
+    }
+  ],
+  "initial_open": "rp4",
+  "initial_baseline_parity": {
+    "models_sha256": true,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  },
+  "final_policy": {
+    "variant": "rp4",
+    "open": false,
+    "gap": 0.005080129019916058,
+    "gap_s": 0.0051132430359414486,
+    "velocity": -3.3448501035766853e-07,
+    "contraction_peak": 0.00039127661216364906,
+    "contracting": 721,
+    "activity": 0.11135870467165165,
+    "activity_peak": 1.0359379009983143,
+    "quiet_gap": 0.005421239047948365,
+    "quiet_activity": 0.10201416062058491,
+    "quiet": 0,
+    "shock": 0,
+    "updates": 4600,
+    "openings": 2,
+    "closings": 2,
+    "event": null
+  }
+}

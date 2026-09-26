@@ -1,0 +1,20 @@
+{
+  "first_arrival": 150,
+  "passing_total": [
+    19,
+    19
+  ],
+  "every_failure_since_arrival": [],
+  "departure_starts": [],
+  "minimum_hq_since_arrival": 0.90625,
+  "minimum_modes_since_arrival": 4,
+  "minimum_hq_entire": 0.0,
+  "final_suffix_start": 150,
+  "final_suffix_checks": 19,
+  "events": [
+    [
+      372,
+      "close"
+    ]
+  ]
+}

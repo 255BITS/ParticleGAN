@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "status": "COMPLETE",
+  "experiment": "dv6_public_trainer",
+  "schedule": "dv6",
+  "completed_steps": 7500,
+  "seconds": 101.14229950797744,
+  "torch": "2.13.0+cu126",
+  "cuda_version": "12.6",
+  "device": "cuda:0",
+  "device_name": "NVIDIA RTX A6000",
+  "stationary": {
+    "checks": 5,
+    "expected_checks": 5,
+    "complete": true,
+    "passing_checks": 5,
+    "failing_steps": [],
+    "min_hq": 0.9599609375,
+    "min_modes": 8
+  },
+  "prehold": {
+    "checks": 120,
+    "expected_checks": 120,
+    "complete": true,
+    "passing_checks": 120,
+    "failing_steps": [],
+    "min_hq": 0.964111328125,
+    "min_modes": 8
+  },
+  "recovery_at_3600": null,
+  "recovery_extended": null,
+  "frozen_control": {
+    "checks": 0,
+    "expected_checks": 510,
+    "complete": false,
+    "passing_checks": 0,
+    "failing_steps": [],
+    "min_hq": null,
+    "min_modes": null
+  },
+  "lr_ranges": {
+    "generator_0": {
+      "min": 6.515896657049806e-07,
+      "max": 0.004249894199730703,
+      "observed_steps": 7500
+    },
+    "prior_1": {
+      "min": 2.5806605725815794e-06,
+      "max": 0.008499796948978119,
+      "observed_steps": 7500
+    },
+    "critic_0": {
+      "min": 6.515896657049806e-07,
+      "max": 0.004249894199730703,
+      "observed_steps": 7500
+    }
+  },
+  "constant_lr_verified_every_step": false,
+  "final": {
+    "step": 7500,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.971923828125,
+    "cover": 1.0,
+    "effective_modes": 7.591212749481201
+  },
+  "final_ema": {
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.97216796875,
+    "cover": 1.0,
+    "effective_modes": 7.591010093688965
+  },
+  "final_state": {
+    "step": 7500,
+    "trainer_sha256": "82098164ef0c7edd313beb9bfc07d5d1c9d2ce7f866ffaa5ec803f4e097f17e7",
+    "models_sha256": {
+      "G": "39dbaabb3f7246318a83b4d16b5c58a34a613eb0f7b8308fb2cecfb905e363a8",
+      "D": "c8ae7eded0f03ca5728e1bad5abba5a1727628d248d19e101e2536e1b9f176cf",
+      "prior": "87dc33716dff26f1cda22ad4eedc06a1645a4b491d3b0e264cb1690b32411bab",
+      "ema_G": "4cd291393c94936e80044848a10f91faae416ef7ed194825f649419ccfe47efc",
+      "ema_prior": "2aa55ce7dfffcf45e58b32c678c7426974dd48944cc8e9dcfe8173cd9061c0a5"
+    },
+    "optimizers_sha256": [
+      "09f213d11423d85791f92cd583104c71674789ffef92940dc737ad337a45070e",
+      "edb77962931f25376fe8fbcc2896839a9e24910df14b6e2f900bf342a480ee23"
+    ],
+    "streams_sha256": {
+      "latent_generator": "b1aec13c38e4ca159c480a000d025b7a8243c5ad6a2beb58b9bbb6b392a1e284",
+      "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+      "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+      "noise_generator": "b61da5ede6cdd63419b7eacad75a607c05933659f73b0625518300ec352b925d"
+    },
+    "cpu_rng_sha256": "78211cc3c1dd585a8d9c793dc872ce856e0868e5670cab7c6ac573e614d44dfe",
+    "cuda_rng_sha256": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+    "real_stream_sha256": "896b1863fa44a2aa6f368705e3bdd9ee2ab68bd8c470b5e7c463424d1ef3c92e",
+    "means_sha256": "f285901fa1c672859550334f62149d9bff1c533d2bfcb61f2a2a818044950a7f"
+  },
+  "complete_history": {
+    "acquisition": {
+      "start": 0,
+      "end": 7500,
+      "first_arrival": 550,
+      "arrival_delay": 550,
+      "passing_since_arrival": 696,
+      "checks_since_arrival": 696,
+      "every_departure": [],
+      "min_hq_since_arrival": 0.900390625,
+      "min_modes_since_arrival": 8,
+      "min_hq_all": 0.010009765625,
+      "final_stable_suffix_checks": 696,
+      "final_stable_suffix_start": 550,
+      "final_stable_suffix_span": 6950,
+      "final": {
+        "step": 7500,
+        "modes": 8,
+        "hq": 0.971923828125
+      }
+    },
+    "retention": {
+      "passing": 630,
+      "total": 630,
+      "min_hq": 0.964111328125,
+      "failing_steps": []
+    },
+    "transitions": [],
+    "comparison_3600": null,
+    "frozen": {
+      "passing": 0,
+      "total": 0
+    },
+    "policy_ranges": {
+      "mobility": [
+        0.027839123422835167,
+        0.9999748543626151
+      ],
+      "alignment": [
+        -0.9685137088793566,
+        0.4477502637459445
+      ],
+      "data_score": [
+        0.0,
+        2.649094820022583
+      ],
+      "data_drive": [
+        0.0,
+        0.0
+      ]
+    },
+    "final_policy": {
+      "data_memory": 0.0,
+      "payoff_error": 0.17061036207386948,
+      "game_trust": 0.014842740588014748,
+      "game_ratio": 9.146962782821367,
+      "variant": "dv6",
+      "mobility": 0.029476947366998463,
+      "alignment": 0.21591594874779152,
+      "data_score": 1.1424641609191895,
+      "data_drive": 0.0,
+      "last_cosine": 0.6379765272140503,
+      "updates": 7500,
+      "reopens": 0,
+      "closed": true
+    },
+    "rates": {
+      "generator_0": [
+        6.515896657049806e-07,
+        0.004249894199730703
+      ],
+      "prior_1": [
+        2.5806605725815794e-06,
+        0.008499796948978119
+      ],
+      "critic_0": [
+        6.515896657049806e-07,
+        0.004249894199730703
+      ],
+      "input_noise": [
+        0.0,
+        0.0
+      ],
+      "output_noise": [
+        0.029,
+        0.029
+      ]
+    },
+    "initialization_matches_original": {
+      "models_sha256": true,
+      "optimizers_sha256": true,
+      "streams_sha256": true,
+      "cpu_rng_sha256": true,
+      "cuda_rng_sha256": true,
+      "real_stream_sha256": true,
+      "means_sha256": true
+    }
+  }
+}

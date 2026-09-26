@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "id": "api-dv6-img_blobs4",
+  "created_utc": "2026-09-26T22:51:21.052058+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4",
+  "files": {
+    "evidence/api-dv6-img_blobs4/artifact-sha256.json": {
+      "sha256": "a863652fdc190977949f944d05e0726e5a4d64a5e00861552368f82068297394",
+      "original_sha256": "a863652fdc190977949f944d05e0726e5a4d64a5e00861552368f82068297394",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/artifact-sha256.json",
+      "bytes": 707,
+      "original_bytes": 707,
+      "listed_in_original_manifest": false
+    },
+    "evidence/api-dv6-img_blobs4/declaration.json": {
+      "sha256": "f95cdb0e8b179df1b44887eddbb22fb90a97b6fa5a431113e711d4c21eb3faf9",
+      "original_sha256": "f95cdb0e8b179df1b44887eddbb22fb90a97b6fa5a431113e711d4c21eb3faf9",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/declaration.json",
+      "bytes": 9366,
+      "original_bytes": 9366,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv6-img_blobs4/initial.json": {
+      "sha256": "736d5ec4eff1e533d407aba2bcc3729f4b3cc82f82015c1f9f71eb387275902f",
+      "original_sha256": "736d5ec4eff1e533d407aba2bcc3729f4b3cc82f82015c1f9f71eb387275902f",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/initial.json",
+      "bytes": 592,
+      "original_bytes": 592,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv6-img_blobs4/learning-rates.jsonl.gz": {
+      "sha256": "c9268c2ac44c030984bdd0f25d11fc5c1a451a7643c8aeee442706aea464df0d",
+      "original_sha256": "c48128baec089af538142ca230fcaa538898a39cae838957dac66d5b98f886d6",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/learning-rates.jsonl",
+      "bytes": 103928,
+      "original_bytes": 655502,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv6-img_blobs4/metrics.jsonl.gz": {
+      "sha256": "743e4cfda991bb76ed86b99adda91ddf8c8285c1fda25bc3eb83290ab6904fa6",
+      "original_sha256": "fc398adf3f7c88830075ea135840a836a77590d5c8a3e9ad583a242134b66708",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/metrics.jsonl",
+      "bytes": 1104,
+      "original_bytes": 9530,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv6-img_blobs4/result.json": {
+      "sha256": "e37091c9e3cf3aed7c7205ed722fc35938e119399a473be1f5c909afd64463ab",
+      "original_sha256": "e37091c9e3cf3aed7c7205ed722fc35938e119399a473be1f5c909afd64463ab",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/result.json",
+      "bytes": 3872,
+      "original_bytes": 3872,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-dv6-img_blobs4/source.zip": {
+      "sha256": "05b03da6e0a08a130e8f3b7d2bfefc752c02c7f37ef065fba2caad1be88a1a6e",
+      "original_sha256": "05b03da6e0a08a130e8f3b7d2bfefc752c02c7f37ef065fba2caad1be88a1a6e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/source.zip",
+      "bytes": 159533,
+      "original_bytes": 159533,
+      "listed_in_original_manifest": true
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/final-state.pt",
+      "sha256": "956d350c26144d22769f6f52b5041019774d339b1d3ad53c75a189d020bbea11",
+      "bytes": 241559,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-img_blobs4/initial-state.pt",
+      "sha256": "0eaf89bed62bc33ef008f85b16b43436e38bd52c4d0e93347a8def62373e2a2c",
+      "bytes": 107702,
+      "verified_against_original_manifest": true
+    }
+  },
+  "supplementary_files_not_in_original_manifest": [],
+  "note": "JSONL compression is lossless and reproducible (gzip mtime0). Immutable source, declarations and original artifact manifest copied byte-for-byte. Checkpoint files remain external, content-hash verified."
+}

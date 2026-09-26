@@ -1,0 +1,423 @@
+{
+  "audit": "DV5/DV6 source and first-arrival/departure/suffix audit",
+  "worktree": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo",
+  "runs": {
+    "dv5-single": {
+      "source_zip_sha256": "2ef18630cbaf300cb7412e405b7497d3490131afd38e2cdfd943540921dfe79f",
+      "source_count": 30,
+      "source_hash_mismatches": [],
+      "artifact_count": 12,
+      "artifact_hash_mismatches": [],
+      "observations_complete": true,
+      "observations": 460,
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 186,
+          "checks_since_arrival": 186,
+          "departures": [],
+          "min_hq_since_arrival": 0.900390625,
+          "stable_suffix_start": 550,
+          "stable_suffix_checks": 186,
+          "stable_suffix_min_hq": 0.900390625
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2750,
+          "arrival_delay": 350,
+          "passing_since_arrival": 184,
+          "checks_since_arrival": 186,
+          "departures": [
+            {
+              "step": 2760,
+              "modes": 7,
+              "hq": 0.5849609375
+            },
+            {
+              "step": 2780,
+              "modes": 8,
+              "hq": 0.88916015625
+            }
+          ],
+          "min_hq_since_arrival": 0.5849609375,
+          "stable_suffix_start": 2790,
+          "stable_suffix_checks": 182,
+          "stable_suffix_min_hq": 0.916259765625
+        }
+      ],
+      "prehold_passing_checks": 120,
+      "frozen_passing": 0,
+      "frozen_checks": 220,
+      "initial_reference_matches": {
+        "models_sha256": true,
+        "optimizers_sha256": true,
+        "streams_sha256": true,
+        "cpu_rng_sha256": true,
+        "cuda_rng_sha256": true,
+        "real_stream_sha256": true,
+        "means_sha256": true
+      },
+      "recipe": {
+        "name": "ka2",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 2048,
+        "total_steps": null,
+        "continuous_policy": "dv5",
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "serial_backward": true,
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device_name": "NVIDIA RTX A6000"
+      },
+      "constant_noise_every_update": true,
+      "applied_rate_ranges": {
+        "generator_0": [
+          5.436969411794235e-07,
+          0.0042499429817412235
+        ],
+        "prior_1": [
+          1.3789718175247066e-06,
+          0.008499890568037939
+        ],
+        "critic_0": [
+          5.436969411794235e-07,
+          0.0042499429817412235
+        ]
+      }
+    },
+    "dv6-single": {
+      "source_zip_sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+      "source_count": 30,
+      "source_hash_mismatches": [],
+      "artifact_count": 12,
+      "artifact_hash_mismatches": [],
+      "observations_complete": true,
+      "observations": 460,
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 186,
+          "checks_since_arrival": 186,
+          "departures": [],
+          "min_hq_since_arrival": 0.900390625,
+          "stable_suffix_start": 550,
+          "stable_suffix_checks": 186,
+          "stable_suffix_min_hq": 0.900390625
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2790,
+          "arrival_delay": 390,
+          "passing_since_arrival": 182,
+          "checks_since_arrival": 182,
+          "departures": [],
+          "min_hq_since_arrival": 0.90673828125,
+          "stable_suffix_start": 2790,
+          "stable_suffix_checks": 182,
+          "stable_suffix_min_hq": 0.90673828125
+        }
+      ],
+      "prehold_passing_checks": 120,
+      "frozen_passing": 0,
+      "frozen_checks": 220,
+      "initial_reference_matches": {
+        "models_sha256": true,
+        "optimizers_sha256": true,
+        "streams_sha256": true,
+        "cpu_rng_sha256": true,
+        "cuda_rng_sha256": true,
+        "real_stream_sha256": true,
+        "means_sha256": true
+      },
+      "recipe": {
+        "name": "ka2",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 2048,
+        "total_steps": null,
+        "continuous_policy": "dv6",
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "serial_backward": true,
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device_name": "NVIDIA RTX A6000"
+      },
+      "constant_noise_every_update": true,
+      "applied_rate_ranges": {
+        "generator_0": [
+          3.3304188407658297e-06,
+          0.004249943018625303
+        ],
+        "prior_1": [
+          1.3532979118804777e-05,
+          0.008499890641806137
+        ],
+        "critic_0": [
+          3.3304188407658297e-06,
+          0.004249943018625303
+        ]
+      }
+    },
+    "dv6-stationary": {
+      "source_zip_sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+      "source_count": 30,
+      "source_hash_mismatches": [],
+      "artifact_count": 11,
+      "artifact_hash_mismatches": [],
+      "observations_complete": true,
+      "observations": 750,
+      "segments": [
+        {
+          "start": 0,
+          "end": 7500,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 696,
+          "checks_since_arrival": 696,
+          "departures": [],
+          "min_hq_since_arrival": 0.900390625,
+          "stable_suffix_start": 550,
+          "stable_suffix_checks": 696,
+          "stable_suffix_min_hq": 0.900390625
+        }
+      ],
+      "prehold_passing_checks": 120,
+      "frozen_passing": 0,
+      "frozen_checks": 0,
+      "initial_reference_matches": {
+        "models_sha256": true,
+        "optimizers_sha256": true,
+        "streams_sha256": true,
+        "cpu_rng_sha256": true,
+        "cuda_rng_sha256": true,
+        "real_stream_sha256": true,
+        "means_sha256": true
+      },
+      "recipe": {
+        "name": "ka2",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 2048,
+        "total_steps": null,
+        "continuous_policy": "dv6",
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "serial_backward": true,
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device_name": "NVIDIA RTX A6000"
+      },
+      "constant_noise_every_update": true,
+      "applied_rate_ranges": {
+        "generator_0": [
+          6.515896657049806e-07,
+          0.004249894199730703
+        ],
+        "prior_1": [
+          2.5806605725815794e-06,
+          0.008499796948978119
+        ],
+        "critic_0": [
+          6.515896657049806e-07,
+          0.004249894199730703
+        ]
+      }
+    }
+  },
+  "same_DV6_package_single_stationary": true,
+  "DV5_DV6_cold2400_observation_rows_equal_except_variant_name": true,
+  "protocol_matches_governing_JSON": true,
+  "initial_reference": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/ka2-default-candidate/constant-lr-api/evidence/constant/initial.json",
+  "source_findings": {
+    "public_API": "get_recipe(total_steps=None,continuous_policy=dv5/dv6,input_noise_std=0,output_noise_warmup=0); actual GANTrainer.step(serial_backward=True)",
+    "whole_learner_horizon_or_oracle_leak": "None found: evaluator alone owns targets and budget. Controller sees ordinary real batches, scalar adversarial payoff, gradients and past surprise. Constant noise0/.029; no finite stopping. Retained799-call startup is absolute initialization.",
+    "DV5": "Fast/slow normalized real-feature EMA discrepancy drives mobility. EMA(max(0,(L_G-L_D_adv)/log2)) squared supports acquisition. Mobility smoothing .05up/.005down. Surprise trust multiplies rates and anchor update; slow data_memory permits surprise exemption and anchor release/reseed.",
+    "DV6_delta": "Current data_drive replaces slow data_memory as permission; memory stays diagnostic. observe_game precedes observe_real, so applied-rate trust uses prior-update evidence, penalty uses current drive.",
+    "normalized_detector": "Flatten samples, first-batch location/std, local CPU RNG1729 projection data_dim\u219232 divided sqrt(dim), nonlinear u/sin/cos/u2 features. FastEMA.1/slowEMA.01 with covariance-corrected mean-difference variance; score3..6 maps to drive0..1. No target-specific dimensions, centers or mode count.",
+    "serial": "Whole update scoped with autograd multithreading disabled; explicit checkpointed flag, incompatible-mode load rejected. Ordinary CPU Adam step metadata unchanged.",
+    "generic_image_shapes": "Real flatten(1), arbitrary data_dim\u00d732 projection, arbitrary flattened generator parameters, scalar payoff losses. KA2 uses sample.numel and flattened gradients; public trainer rank\u22652. Source supports frozen images without learner changes.",
+    "binding": "GANTrainer owns controller and same-object penalty.regularizer.continuous_controller; factories alone omit policy. Complete controller __dict__ is checkpointed, but own continuation remains unverified by this audit."
+  },
+  "assessment": {
+    "DV5": "Longer retention UNVERIFIED; two transition departures alone do not permanently disqualify under shared reporting/supervisor assessment. Original FAIL ledger preserved. Firsttouch2750; last miss2780; observed uninterrupted suffix2790\u20134600.",
+    "DV6": "Own single+stationary evidence supported. Appropriate unchanged candidate for frozen image test; no broader/long/checkpoint/K3P pass inferred.",
+    "comparison": "Both shifted stable suffixes begin2790. DV5 suffixminHQ.916259765625; DV6.90673828125. Cleaner DV6 firsttouch record is not proof of uniformly better trajectory. DV6 adds independently measured stationary evidence.",
+    "distinction": "DV5 misses occur within30updates of firsttouch, suffix starts40updates later. This differs from collapse after a long established stationary period; no new time/departure-count acceptance gate."
+  },
+  "ledger_caveat": {
+    "source": "archived worker.py:297\u2013300",
+    "rule": "PASS only if every segment has arrival and zero every_departure",
+    "assessment": "Stricter automatic label than shared arrival/departure/suffix reporting. Keep original ledger; append separate supervisor assessment."
+  },
+  "limitations": [
+    "Detector normalization is a heuristic, not universal significance calibration; nonlinear feature/batch correlations and data-dependent initial scaling matter.",
+    "Trust can reduce effective rates below nominal floors; no numerical lower bound or universal nonfreezing claim.",
+    "Image shape compatibility does not establish image quality.",
+    "Serial execution is part of candidate identity. Own continuation/prefix/long/repeated/broader/public-K3P evidence remains separate."
+  ],
+  "execution": "Read-only source/ZIP/hash/JSON inspection. No training, tests, GPU, worker edits or original-ledger rewriting."
+}

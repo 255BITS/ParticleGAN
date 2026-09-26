@@ -1,0 +1,14 @@
+{
+  "torch": "2.13.0+cu126",
+  "cuda": "12.6",
+  "device": "NVIDIA RTX A6000",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "serial_backward": true
+}

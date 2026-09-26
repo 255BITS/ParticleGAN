@@ -28,7 +28,7 @@
     "phase": "RUNNING",
     "no_seed_sweeps": true,
     "handoff": "reports/toy100/continuous-eligibility/launch/README.md",
-    "verified_live_utc": "2026-09-26T22:25:57.136650+00:00",
+    "verified_live_utc": "2026-09-26T22:51:18.230238+00:00",
     "verified_live_counts": {
       "codex": 3,
       "grok": 0
@@ -552,12 +552,6 @@
   ],
   "active_attempts": [
     {
-      "lane": "data_drift_mobility",
-      "pid": 1504042,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042",
-      "status": "RUNNING"
-    },
-    {
       "lane": "reversible_precision",
       "pid": 1506445,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445",
@@ -568,6 +562,12 @@
       "pid": 1514972,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972",
       "status": "RUNNING"
+    },
+    {
+      "lane": "data_drift_mobility",
+      "pid": 1555576,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T225101Z-1555568/data_drift_mobility/20260926T225101Z-1555576",
+      "status": "RUNNING"
     }
   ],
   "current_api_evidence": {
@@ -577,7 +577,7 @@
     "status": "THREE_REVIEWED_REPLACEMENT_ATTEMPTS_RUNNING_NO_WINNER",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
-    "matched_k3p_owner": "UNASSIGNED_PENDING_SURVIVOR",
+    "matched_k3p_owner": "reversible_precision/API-RP5_CONDITIONAL_ON_SURVIVAL_NOT_RUN",
     "checkpoint_diagnostic_owner": "data_drift_mobility",
     "api_rp2_long": {
       "updates": 30000,
@@ -603,7 +603,7 @@
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
     },
-    "strongest_active_candidate": null,
+    "strongest_active_candidate": "API-RP5_PARTIAL_EVIDENCE_ONLY",
     "api_c6": {
       "single_shift": "PASS",
       "initial_arrival": 590,
@@ -625,6 +625,39 @@
           7010
         ]
       ]
+    },
+    "api_rp5": {
+      "stationary_after_arrival": "694/694",
+      "single_shift_after_arrival": "194/194",
+      "arrival_delay": 270,
+      "images_passed": 4,
+      "broader_tasks": 22,
+      "long": "NOT_RUN",
+      "matched_k3p": "NOT_RUN",
+      "qualified": false,
+      "component_api": "INCOMPLETE"
+    },
+    "api_dv6": {
+      "stationary_after_arrival": "696/696",
+      "long_updates": 30000,
+      "long_after_arrival": [
+        "546/546",
+        "140/140",
+        "1877/1879",
+        "263/264"
+      ],
+      "long_departures": [
+        8280,
+        8290,
+        27380
+      ],
+      "assessment": "Long stable suffixes after early settling; rejected for separate bars4/blobs4 image failures0/24 each.",
+      "qualified": false
+    },
+    "api_c7": {
+      "stationary_after_arrival": "641/692",
+      "late_collapse": true,
+      "qualified": false
     }
   }
 }

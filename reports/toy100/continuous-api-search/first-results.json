@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "recorded_utc": "2026-09-26T22:15:45.782390+00:00",
+  "recorded_utc": "2026-09-26T22:48:06.597587+00:00",
   "qualified_winner": null,
   "observations": "Live weights; eight modes and HQ>=.90 every10 updates; no deadline gate; no extra seeds.",
   "results": [
@@ -2035,6 +2035,999 @@
           "original_sha256": "6c866c4cd4d38a57ce4affb9a55fae5d2004aa017b800874cb15f34cb0e40502",
           "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/reversible_precision/20260926T211209Z-1398474/repo/reports/reversible-precision/runs/rp3/state-hashes.jsonl",
           "bytes": 21303
+        }
+      }
+    },
+    {
+      "id": "api-dv4-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": null,
+          "arrival_delay": null,
+          "passing_since_arrival": 0,
+          "observations_since_arrival": 0,
+          "all_departures": [],
+          "minimum_hq_since_arrival": null,
+          "minimum_modes_since_arrival": null,
+          "final_suffix_start": null,
+          "final_suffix_observations": 0
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2860,
+          "arrival_delay": 460,
+          "passing_since_arrival": 175,
+          "observations_since_arrival": 175,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.911865234375,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 2860,
+          "final_suffix_observations": 175
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 0,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-dv4-single/source.zip": {
+          "sha256": "fa8ca1b00d2dd32f392bf26c1ba79f6e39ef7e616f772abd463b90edaa362f3e",
+          "original_sha256": "fa8ca1b00d2dd32f392bf26c1ba79f6e39ef7e616f772abd463b90edaa362f3e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/source.zip",
+          "bytes": 84448
+        },
+        "evidence/api-dv4-single/declaration.json": {
+          "sha256": "0225542df4dcb350d298e62b94d925b5d803ac275e64c9564c4c7da6169c126e",
+          "original_sha256": "0225542df4dcb350d298e62b94d925b5d803ac275e64c9564c4c7da6169c126e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/declaration.json",
+          "bytes": 13683
+        },
+        "evidence/api-dv4-single/initial.json": {
+          "sha256": "fae30746d6d2e377c6dab9e7af30c27b40b1aa1c572c24560fd253d86cbcf7b1",
+          "original_sha256": "fae30746d6d2e377c6dab9e7af30c27b40b1aa1c572c24560fd253d86cbcf7b1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-dv4-single/result.json": {
+          "sha256": "f78d54f7f9df0c6df21bfdcfe5fa6855ad2fb0ac68533ab69003c64f1a4049e4",
+          "original_sha256": "f78d54f7f9df0c6df21bfdcfe5fa6855ad2fb0ac68533ab69003c64f1a4049e4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/result.json",
+          "bytes": 13368
+        },
+        "evidence/api-dv4-single/summary.json": {
+          "sha256": "ae9fa831f61cce24ed9d801b512915a4ee8226d7aae15066b053d4ea44a64321",
+          "original_sha256": "ae9fa831f61cce24ed9d801b512915a4ee8226d7aae15066b053d4ea44a64321",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/summary.json",
+          "bytes": 4465
+        },
+        "evidence/api-dv4-single/metrics.jsonl.gz": {
+          "sha256": "6dd25245302751cce473fa73c13ec1513e95978b725114f2194bfd990974f312",
+          "original_sha256": "37c6efa5e77eecc0144375c658ac43233847cd3a6f406f128c7064dbd0d23e8b",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/metrics.jsonl",
+          "bytes": 98211
+        },
+        "evidence/api-dv4-single/learning-rates.jsonl.gz": {
+          "sha256": "a6f1b68354ed5d84a9125dcea102ea644c01be1b3e5bde65005756e3d869e268",
+          "original_sha256": "a084c43d4f42175aff46b78c26faa7a6fc2209b3cbb7a52703dc56edcee075d3",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/learning-rates.jsonl",
+          "bytes": 425646
+        },
+        "evidence/api-dv4-single/state-hashes.jsonl.gz": {
+          "sha256": "98f8a464fe3fd16c08c73f02159a4ab399a37f447baef112a31373273510af9e",
+          "original_sha256": "6594b04e09733e1d01596cdee2b6dc31b22d7bcffa458a83ac2788b58073352b",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv4-single/state-hashes.jsonl",
+          "bytes": 21297
+        }
+      }
+    },
+    {
+      "id": "api-dv5-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 186,
+          "observations_since_arrival": 186,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.900390625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 550,
+          "final_suffix_observations": 186
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2750,
+          "arrival_delay": 350,
+          "passing_since_arrival": 184,
+          "observations_since_arrival": 186,
+          "all_departures": [
+            2760,
+            2780
+          ],
+          "minimum_hq_since_arrival": 0.5849609375,
+          "minimum_modes_since_arrival": 7,
+          "final_suffix_start": 2790,
+          "final_suffix_observations": 182
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-dv5-single/source.zip": {
+          "sha256": "2ef18630cbaf300cb7412e405b7497d3490131afd38e2cdfd943540921dfe79f",
+          "original_sha256": "2ef18630cbaf300cb7412e405b7497d3490131afd38e2cdfd943540921dfe79f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/source.zip",
+          "bytes": 84626
+        },
+        "evidence/api-dv5-single/declaration.json": {
+          "sha256": "5a828a0a820628e5a332f755de0715012cd6fcdf8d1f16c6604811701453e5c5",
+          "original_sha256": "5a828a0a820628e5a332f755de0715012cd6fcdf8d1f16c6604811701453e5c5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/declaration.json",
+          "bytes": 13781
+        },
+        "evidence/api-dv5-single/initial.json": {
+          "sha256": "51ca160c812987f73535b605ea164880afd53dddc1f4d00330140b346f1b03d6",
+          "original_sha256": "51ca160c812987f73535b605ea164880afd53dddc1f4d00330140b346f1b03d6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-dv5-single/result.json": {
+          "sha256": "23e84d20a0189c3567ea4fa971942e4ccf0b98c8cfd82a7b6d11219e8a47449c",
+          "original_sha256": "23e84d20a0189c3567ea4fa971942e4ccf0b98c8cfd82a7b6d11219e8a47449c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/result.json",
+          "bytes": 10376
+        },
+        "evidence/api-dv5-single/summary.json": {
+          "sha256": "7103c0cec69865778dce4aa46e667905b69a8e70c43fdcc092eef65a7b8646f7",
+          "original_sha256": "7103c0cec69865778dce4aa46e667905b69a8e70c43fdcc092eef65a7b8646f7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/summary.json",
+          "bytes": 3151
+        },
+        "evidence/api-dv5-single/metrics.jsonl.gz": {
+          "sha256": "237f1b56488bae9f0f6d268e347c07ffe798241826b598e42edfd54eeb8c0e82",
+          "original_sha256": "6a26bcc5937bc111abf750e4d9291a22b9e616846daeed411a5c21b200371e13",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/metrics.jsonl",
+          "bytes": 102205
+        },
+        "evidence/api-dv5-single/learning-rates.jsonl.gz": {
+          "sha256": "0fa08656b36443e03fe99f9181b460c681ef9b282db671189daa4f4c476775cc",
+          "original_sha256": "af5585aefa39d12defa29123ee90cbc2feb90f3a887a15ab761a7d79fd691737",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/learning-rates.jsonl",
+          "bytes": 491959
+        },
+        "evidence/api-dv5-single/state-hashes.jsonl.gz": {
+          "sha256": "d4ed6422ee5e72927dab9c9ea2b583e47b03045cf6a606d11d7d414f4002b1b1",
+          "original_sha256": "2dc84c5722b71fd18ca89d2366dac65379c1fb1da8614e55a066c9179ab74c8e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv5-single/state-hashes.jsonl",
+          "bytes": 21278
+        }
+      }
+    },
+    {
+      "id": "api-dv6-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 186,
+          "observations_since_arrival": 186,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.900390625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 550,
+          "final_suffix_observations": 186
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2790,
+          "arrival_delay": 390,
+          "passing_since_arrival": 182,
+          "observations_since_arrival": 182,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.90673828125,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 2790,
+          "final_suffix_observations": 182
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-dv6-single/source.zip": {
+          "sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+          "original_sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/source.zip",
+          "bytes": 84723
+        },
+        "evidence/api-dv6-single/declaration.json": {
+          "sha256": "3e32b249d9d5310147346ed640b23dbc7ed725df92767d44de9a713d7b9f3453",
+          "original_sha256": "3e32b249d9d5310147346ed640b23dbc7ed725df92767d44de9a713d7b9f3453",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/declaration.json",
+          "bytes": 13873
+        },
+        "evidence/api-dv6-single/initial.json": {
+          "sha256": "b4842d6d92a1d54eb1fcc022ecedf3b7caff164470a51532ff8285cef67468c4",
+          "original_sha256": "b4842d6d92a1d54eb1fcc022ecedf3b7caff164470a51532ff8285cef67468c4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-dv6-single/result.json": {
+          "sha256": "9bad08580bca7b56173d0e218cf3fb8e54b3b5ae370edf687af6de5607f7de90",
+          "original_sha256": "9bad08580bca7b56173d0e218cf3fb8e54b3b5ae370edf687af6de5607f7de90",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/result.json",
+          "bytes": 10256
+        },
+        "evidence/api-dv6-single/summary.json": {
+          "sha256": "f9511dee58c122d987011948508c5746395d9894e1b63524d8e079c9033c0575",
+          "original_sha256": "f9511dee58c122d987011948508c5746395d9894e1b63524d8e079c9033c0575",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/summary.json",
+          "bytes": 3104
+        },
+        "evidence/api-dv6-single/metrics.jsonl.gz": {
+          "sha256": "5b43fb40e29b97c825f4da216f3bfe622a50e5f85372e8f7d17939ca0235d085",
+          "original_sha256": "390531975bde21ba0003bbb9347317c8fc46172ef5e9943e100afbac64cbeb98",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/metrics.jsonl",
+          "bytes": 103115
+        },
+        "evidence/api-dv6-single/learning-rates.jsonl.gz": {
+          "sha256": "e0dd5b55d9fbc65f5bf4ba810b6147233ce1df3abe86608d7ca1130128646c5a",
+          "original_sha256": "a16fc4811ae26d51f693124753e2e5ab15c723a8f573f82b1a7400bfa0267e8f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/learning-rates.jsonl",
+          "bytes": 492402
+        },
+        "evidence/api-dv6-single/state-hashes.jsonl.gz": {
+          "sha256": "1f9ff81d072cb13a31b88243cd337015d8fdc73d666815af4e89e3c2008354f1",
+          "original_sha256": "821b0067256f4eef2979163b7e7775ad45dbb23949cf6caa6706c73ac5de35f5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-single/state-hashes.jsonl",
+          "bytes": 21269
+        }
+      }
+    },
+    {
+      "id": "api-dv6-stationary",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary",
+      "observed_through": 7500,
+      "complete_declared_evaluation": true,
+      "protocol": "stationary",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 7500,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 696,
+          "observations_since_arrival": 696,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.900390625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 550,
+          "final_suffix_observations": 696
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-dv6-stationary/source.zip": {
+          "sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+          "original_sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/source.zip",
+          "bytes": 84723
+        },
+        "evidence/api-dv6-stationary/declaration.json": {
+          "sha256": "7ed268552db978f3cb4a21a14c295b2856b2fcf4ba75dbdf437f41c87fe94467",
+          "original_sha256": "7ed268552db978f3cb4a21a14c295b2856b2fcf4ba75dbdf437f41c87fe94467",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/declaration.json",
+          "bytes": 13752
+        },
+        "evidence/api-dv6-stationary/initial.json": {
+          "sha256": "b4842d6d92a1d54eb1fcc022ecedf3b7caff164470a51532ff8285cef67468c4",
+          "original_sha256": "b4842d6d92a1d54eb1fcc022ecedf3b7caff164470a51532ff8285cef67468c4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-dv6-stationary/result.json": {
+          "sha256": "bbdf31563918b4ffb5a1afe2ae29c9d6613ab725202175f68cf20bc7db15ac61",
+          "original_sha256": "bbdf31563918b4ffb5a1afe2ae29c9d6613ab725202175f68cf20bc7db15ac61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/result.json",
+          "bytes": 5420
+        },
+        "evidence/api-dv6-stationary/summary.json": {
+          "sha256": "b68fad6ab102c87a4221280af09fcc60de23c61761ef01edc60da2dd21cf761d",
+          "original_sha256": "b68fad6ab102c87a4221280af09fcc60de23c61761ef01edc60da2dd21cf761d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/summary.json",
+          "bytes": 2054
+        },
+        "evidence/api-dv6-stationary/metrics.jsonl.gz": {
+          "sha256": "60dd5ebd823d4c45b6204d7e6d85b7089554680e736ca701518e100ff8cda686",
+          "original_sha256": "deedc4101e7d7c7cbfce3fadc9d911838ea168b9dc4b7135fa30a0300c4b951d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/metrics.jsonl",
+          "bytes": 157644
+        },
+        "evidence/api-dv6-stationary/learning-rates.jsonl.gz": {
+          "sha256": "074454aa49bc14b6a8d7e1e71c60cb9eba6ecd6a8282bb7031de5639a61833a5",
+          "original_sha256": "7d889480341bc82c7e7c6159bc0e55f1e415530544ab203b7acb36e14ec49358",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/learning-rates.jsonl",
+          "bytes": 777974
+        },
+        "evidence/api-dv6-stationary/state-hashes.jsonl.gz": {
+          "sha256": "32e531e514dec6a65b57fc13959f1c0c4319738d69434ef7a4aed42ed9006606",
+          "original_sha256": "cf8eed1663787169ce1bc6bc18125b323dcaf175fa43ff4df8cbdcbb58ae5c2f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-stationary/state-hashes.jsonl",
+          "bytes": 34311
+        }
+      }
+    },
+    {
+      "id": "api-rp4-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 1250,
+          "arrival_delay": 1250,
+          "passing_since_arrival": 108,
+          "observations_since_arrival": 116,
+          "all_departures": [
+            1260,
+            1460,
+            1470,
+            1480,
+            1490,
+            1500,
+            1510,
+            1520
+          ],
+          "minimum_hq_since_arrival": 0.838623046875,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 1530,
+          "final_suffix_observations": 88
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2750,
+          "arrival_delay": 350,
+          "passing_since_arrival": 170,
+          "observations_since_arrival": 186,
+          "all_departures": [
+            2760,
+            2840,
+            2880,
+            2940,
+            2950,
+            2960,
+            2970,
+            2980,
+            2990,
+            3000,
+            3010,
+            3020,
+            3030,
+            3040,
+            3050,
+            3100
+          ],
+          "minimum_hq_since_arrival": 0.94873046875,
+          "minimum_modes_since_arrival": 7,
+          "final_suffix_start": 3110,
+          "final_suffix_observations": 150
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 108,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-rp4-single/source.zip": {
+          "sha256": "ac4dfe18c5499f41074d5d4347495f8392d00e640469b851e1c2d842bb199ab5",
+          "original_sha256": "ac4dfe18c5499f41074d5d4347495f8392d00e640469b851e1c2d842bb199ab5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/source.zip",
+          "bytes": 69102
+        },
+        "evidence/api-rp4-single/declaration.json": {
+          "sha256": "ac8b84ea650e5f22e3f7783ef5da276e2ef2b071eb984958a6f67fdc64f844ca",
+          "original_sha256": "ac8b84ea650e5f22e3f7783ef5da276e2ef2b071eb984958a6f67fdc64f844ca",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/declaration.json",
+          "bytes": 11747
+        },
+        "evidence/api-rp4-single/initial.json": {
+          "sha256": "a012fc6e5c1bbfd5569d7fd7e756c6f4eca0f8252c35f5e9a51e78ca312b0561",
+          "original_sha256": "a012fc6e5c1bbfd5569d7fd7e756c6f4eca0f8252c35f5e9a51e78ca312b0561",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-rp4-single/result.json": {
+          "sha256": "6d35699a6e17fd15020192c5affd7bcbe081996bcd61ad68d1e29ccc9bce22e2",
+          "original_sha256": "6d35699a6e17fd15020192c5affd7bcbe081996bcd61ad68d1e29ccc9bce22e2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/result.json",
+          "bytes": 9245
+        },
+        "evidence/api-rp4-single/summary.json": {
+          "sha256": "83dd58760b73bef5aaed9234fb030a684ca7a1d42813c30126fdbaaa4f89b27f",
+          "original_sha256": "83dd58760b73bef5aaed9234fb030a684ca7a1d42813c30126fdbaaa4f89b27f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/summary.json",
+          "bytes": 3993
+        },
+        "evidence/api-rp4-single/metrics.jsonl.gz": {
+          "sha256": "c2e3c206413292b90aea2ce63166c94c7d38d7155802778ab02c3a2cfa974042",
+          "original_sha256": "f1ff7b029c23bc187c2a985783a99a620cc3e5d6d8730d021570e475d666c5c9",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/metrics.jsonl",
+          "bytes": 141422
+        },
+        "evidence/api-rp4-single/learning-rates.jsonl.gz": {
+          "sha256": "cc8996b9e62108fa949815bf9fb56a6a7ca8df53231a35f111bffd92fc495803",
+          "original_sha256": "0a0480aa1a9acf95248ac935bae05c21921553c8e8a5efe6e30b636c8ae5fbd8",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/learning-rates.jsonl",
+          "bytes": 831011
+        },
+        "evidence/api-rp4-single/state-hashes.jsonl.gz": {
+          "sha256": "7a098c893f2bf107c2e10e29fcb61cb89a2798637dadcfcfa6898d4897fa4922",
+          "original_sha256": "14ba680a8de8a6c9055375f70e7105296be47122769383e3a2958ad7146b1d92",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp4-single/state-hashes.jsonl",
+          "bytes": 21255
+        }
+      }
+    },
+    {
+      "id": "api-dv6-long",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full",
+      "observed_through": 30000,
+      "complete_declared_evaluation": true,
+      "protocol": "long_continuation",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 6000,
+          "first_arrival": 550,
+          "arrival_delay": 550,
+          "passing_since_arrival": 546,
+          "observations_since_arrival": 546,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.900390625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 550,
+          "final_suffix_observations": 546
+        },
+        {
+          "start": 6000,
+          "end": 7800,
+          "first_arrival": 6410,
+          "arrival_delay": 410,
+          "passing_since_arrival": 140,
+          "observations_since_arrival": 140,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.91015625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 6410,
+          "final_suffix_observations": 140
+        },
+        {
+          "start": 7800,
+          "end": 27000,
+          "first_arrival": 8220,
+          "arrival_delay": 420,
+          "passing_since_arrival": 1877,
+          "observations_since_arrival": 1879,
+          "all_departures": [
+            8280,
+            8290
+          ],
+          "minimum_hq_since_arrival": 0.634521484375,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 8300,
+          "final_suffix_observations": 1871
+        },
+        {
+          "start": 27000,
+          "end": 30000,
+          "first_arrival": 27370,
+          "arrival_delay": 370,
+          "passing_since_arrival": 263,
+          "observations_since_arrival": 264,
+          "all_departures": [
+            27380
+          ],
+          "minimum_hq_since_arrival": 0.898681640625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 27390,
+          "final_suffix_observations": 262
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-dv6-long/source.zip": {
+          "sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+          "original_sha256": "b9a6a43dc53862ac9c0823e1f3e3fe9ca970edeac53d0e2e9ba741336bef3ce4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/source.zip",
+          "bytes": 84723
+        },
+        "evidence/api-dv6-long/declaration.json": {
+          "sha256": "a9f5faaf839ebdd231d4ed9da7a07dd6d78803582e11db887d7af7933ea064b1",
+          "original_sha256": "a9f5faaf839ebdd231d4ed9da7a07dd6d78803582e11db887d7af7933ea064b1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/declaration.json",
+          "bytes": 14110
+        },
+        "evidence/api-dv6-long/initial.json": {
+          "sha256": "b4842d6d92a1d54eb1fcc022ecedf3b7caff164470a51532ff8285cef67468c4",
+          "original_sha256": "b4842d6d92a1d54eb1fcc022ecedf3b7caff164470a51532ff8285cef67468c4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-dv6-long/result.json": {
+          "sha256": "c7a3dd7b11e3f44ad63da315f823144ab627bec7d9c82ee199b1baba01449de5",
+          "original_sha256": "c7a3dd7b11e3f44ad63da315f823144ab627bec7d9c82ee199b1baba01449de5",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/result.json",
+          "bytes": 9035
+        },
+        "evidence/api-dv6-long/summary.json": {
+          "sha256": "47860d45a5f7280f298b806ded8bc25eb3b783599cdc1b356cda30fb49974d33",
+          "original_sha256": "47860d45a5f7280f298b806ded8bc25eb3b783599cdc1b356cda30fb49974d33",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/summary.json",
+          "bytes": 5406
+        },
+        "evidence/api-dv6-long/metrics.jsonl.gz": {
+          "sha256": "759369d144b3923a82f3ecf259bfecac400d9fbec00a390b781446ce93f2f987",
+          "original_sha256": "fe2f1b2de7ee5f8cf7ce00375afc559ec4a77fa1f8af7e4814db36619fd69711",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/metrics.jsonl",
+          "bytes": 667940
+        },
+        "evidence/api-dv6-long/learning-rates.jsonl.gz": {
+          "sha256": "52da988ad7db94557287758621ffd069cc0b9494acc2f15469b4a2a80ee1f38d",
+          "original_sha256": "7a8c9fdd0e1b2b8e6aefb04007ceafe97e8d29ba548c5251f7584c633ba3f496",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/learning-rates.jsonl",
+          "bytes": 3405767
+        },
+        "evidence/api-dv6-long/state-hashes.jsonl.gz": {
+          "sha256": "3ac2818faf2bd4f442706477b9b985f63fd91971934e6105a75b959461d11af1",
+          "original_sha256": "d83b6114f58125e0efee4246a3a342977692ab76ed14eda330e95db781893a5e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221835Z-1504033/data_drift_mobility/20260926T221835Z-1504042/repo/reports/data-drift-api/runs/dv6-long-full/state-hashes.jsonl",
+          "bytes": 135579
+        }
+      }
+    },
+    {
+      "id": "api-rp5-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 570,
+          "arrival_delay": 570,
+          "passing_since_arrival": 184,
+          "observations_since_arrival": 184,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.934326171875,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 570,
+          "final_suffix_observations": 184
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2670,
+          "arrival_delay": 270,
+          "passing_since_arrival": 194,
+          "observations_since_arrival": 194,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.93994140625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 2670,
+          "final_suffix_observations": 194
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-rp5-single/source.zip": {
+          "sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7",
+          "original_sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/source.zip",
+          "bytes": 88760
+        },
+        "evidence/api-rp5-single/declaration.json": {
+          "sha256": "18f3bd2a77f38cfdbb8acdaba7adf1786c40deedd27d2a05bf04005f1f4dacf3",
+          "original_sha256": "18f3bd2a77f38cfdbb8acdaba7adf1786c40deedd27d2a05bf04005f1f4dacf3",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/declaration.json",
+          "bytes": 12941
+        },
+        "evidence/api-rp5-single/initial.json": {
+          "sha256": "7f29994741ea317733a8f32980317beecf99059daf744c52372916762bf46738",
+          "original_sha256": "7f29994741ea317733a8f32980317beecf99059daf744c52372916762bf46738",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-rp5-single/result.json": {
+          "sha256": "fab052f5544fac5c31f3c99823152970f656ac9d4c1648f04f83be51226d7478",
+          "original_sha256": "fab052f5544fac5c31f3c99823152970f656ac9d4c1648f04f83be51226d7478",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/result.json",
+          "bytes": 8140
+        },
+        "evidence/api-rp5-single/summary.json": {
+          "sha256": "a510b2fcafd6d0d9ae39b17339606aab58c3a815e91db20f26be84c01fcd296f",
+          "original_sha256": "a510b2fcafd6d0d9ae39b17339606aab58c3a815e91db20f26be84c01fcd296f",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/summary.json",
+          "bytes": 3701
+        },
+        "evidence/api-rp5-single/metrics.jsonl.gz": {
+          "sha256": "1eb9a2ad3d815cb31ad00330608ffb3f5d5b9a209ef841f4f764a24b398d1775",
+          "original_sha256": "8f63fe4b0383255bcdbdae78c673a1428489e477c36e591f1357dca85e6dc7c4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/metrics.jsonl",
+          "bytes": 140475
+        },
+        "evidence/api-rp5-single/learning-rates.jsonl.gz": {
+          "sha256": "3b53b1331fb46e08e49937e86b7fc625e18c7921507b930e56cdffdca484ef48",
+          "original_sha256": "b86394c08bda56f50e6ed0d3a88b956d2f7b467f40a98a8f5502fab8a9673f1e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/learning-rates.jsonl",
+          "bytes": 859238
+        },
+        "evidence/api-rp5-single/state-hashes.jsonl.gz": {
+          "sha256": "4648f3448775b0a1c32d1646b34a7eea13106f2e838e9dc7cbcba6f69e5a1f2e",
+          "original_sha256": "9c2d1c1104affdcadb6d19f97f9e841aa4479692cb4239e4e922badca8f2e7a4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-single/state-hashes.jsonl",
+          "bytes": 21248
+        }
+      }
+    },
+    {
+      "id": "api-rp5-stationary",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary",
+      "observed_through": 7500,
+      "complete_declared_evaluation": true,
+      "protocol": "stationary",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 7500,
+          "first_arrival": 570,
+          "arrival_delay": 570,
+          "passing_since_arrival": 694,
+          "observations_since_arrival": 694,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.934326171875,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 570,
+          "final_suffix_observations": 694
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-rp5-stationary/source.zip": {
+          "sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7",
+          "original_sha256": "43eaad25848e65605afc08b39ff2b714277e0d792315dcb5f5b6f49a25263df7",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/source.zip",
+          "bytes": 88760
+        },
+        "evidence/api-rp5-stationary/declaration.json": {
+          "sha256": "4f1cd33f1c54cc07a935b7b86e76abdacd57ffa439db2824d383cd3e9bbbc856",
+          "original_sha256": "4f1cd33f1c54cc07a935b7b86e76abdacd57ffa439db2824d383cd3e9bbbc856",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/declaration.json",
+          "bytes": 12651
+        },
+        "evidence/api-rp5-stationary/initial.json": {
+          "sha256": "7f29994741ea317733a8f32980317beecf99059daf744c52372916762bf46738",
+          "original_sha256": "7f29994741ea317733a8f32980317beecf99059daf744c52372916762bf46738",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-rp5-stationary/result.json": {
+          "sha256": "b613a358bfc13b2428859d0d213bafa74717dbe677e8201948cd4321cfcba15a",
+          "original_sha256": "b613a358bfc13b2428859d0d213bafa74717dbe677e8201948cd4321cfcba15a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/result.json",
+          "bytes": 4873
+        },
+        "evidence/api-rp5-stationary/summary.json": {
+          "sha256": "f10b4da3d50f169da2ecab4eb00afa8a5d613a16afa860657cb039d7734a8ec9",
+          "original_sha256": "f10b4da3d50f169da2ecab4eb00afa8a5d613a16afa860657cb039d7734a8ec9",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/summary.json",
+          "bytes": 1984
+        },
+        "evidence/api-rp5-stationary/metrics.jsonl.gz": {
+          "sha256": "544a7b3a3d4a6d247db494cfe6b0a60e2a06711d1d79c7790bb4178433c6b8e2",
+          "original_sha256": "7ab153fbb8d49b7c7295356025536470b5629a598d0d8fcd016e7b7e2c93fc69",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/metrics.jsonl",
+          "bytes": 227639
+        },
+        "evidence/api-rp5-stationary/learning-rates.jsonl.gz": {
+          "sha256": "1045c8d561360174939bba1a0ea95f6485606ad46031f81c8351abe41e55c1d1",
+          "original_sha256": "031bc3ba48e594bbc932213b28acd1a6e87cddf34f14e01ea09e4f937169a3fc",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/learning-rates.jsonl",
+          "bytes": 1456041
+        },
+        "evidence/api-rp5-stationary/state-hashes.jsonl.gz": {
+          "sha256": "353bcc150ce387e0ac2d79015811c6f1b734cc2067467d85334a0edda31c8219",
+          "original_sha256": "b38ccb26b57594f6756f8b98cc0b6c1dcc3a2f61a9cd5565b21f204f652f11e9",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-stationary/state-hashes.jsonl",
+          "bytes": 34304
+        }
+      }
+    },
+    {
+      "id": "api-c7-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 590,
+          "arrival_delay": 590,
+          "passing_since_arrival": 182,
+          "observations_since_arrival": 182,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.90087890625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 590,
+          "final_suffix_observations": 182
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2670,
+          "arrival_delay": 270,
+          "passing_since_arrival": 194,
+          "observations_since_arrival": 194,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.938232421875,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 2670,
+          "final_suffix_observations": 194
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-c7-single/source.zip": {
+          "sha256": "e1a9db98f672de3b94eea045b1949ff0e8ee540c631d139e1a7a223fa4bebee2",
+          "original_sha256": "e1a9db98f672de3b94eea045b1949ff0e8ee540c631d139e1a7a223fa4bebee2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/source.zip",
+          "bytes": 67617
+        },
+        "evidence/api-c7-single/declaration.json": {
+          "sha256": "7e8da4d7d8268f1f3b098de0c656e4d4961ed073d296f27f6ae5969b019a0c61",
+          "original_sha256": "7e8da4d7d8268f1f3b098de0c656e4d4961ed073d296f27f6ae5969b019a0c61",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/declaration.json",
+          "bytes": 5657
+        },
+        "evidence/api-c7-single/initial.json": {
+          "sha256": "6e27e6ef67ba9e393658462bbe2d135882291cb8160dbcc0c67e491de243a282",
+          "original_sha256": "6e27e6ef67ba9e393658462bbe2d135882291cb8160dbcc0c67e491de243a282",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-c7-single/result.json": {
+          "sha256": "06c144e8a18cd7962c300cf9ec724fe1b70b825e86ca1767c495e359554dfdd6",
+          "original_sha256": "06c144e8a18cd7962c300cf9ec724fe1b70b825e86ca1767c495e359554dfdd6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/result.json",
+          "bytes": 9624
+        },
+        "evidence/api-c7-single/assessment.json": {
+          "sha256": "1fb5e8658a45ccbe3c08791a8cae8ceba47c3638fd3c4420dc6b0703d16f954d",
+          "original_sha256": "1fb5e8658a45ccbe3c08791a8cae8ceba47c3638fd3c4420dc6b0703d16f954d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/assessment.json",
+          "bytes": 9167
+        },
+        "evidence/api-c7-single/metrics.jsonl.gz": {
+          "sha256": "bed07134d4f173a7c967f84b0ef59dccee4964bc44c475fc5d52301dd7141307",
+          "original_sha256": "49d61a02343f24953a716431e36f1b1a94204e8876e57b690492be31f70bf58b",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/metrics.jsonl",
+          "bytes": 47908
+        },
+        "evidence/api-c7-single/learning-rates.jsonl.gz": {
+          "sha256": "3dac1b1b8de54542b222483a4f9799a0117d29e18fdadf147fdbcccda00ded99",
+          "original_sha256": "b202cbedcddb9f6705c62448b185b8ec7e5764631cac8dcf6d1d2d3693b1292d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/learning-rates.jsonl",
+          "bytes": 1257801
+        },
+        "evidence/api-c7-single/state-hashes.jsonl.gz": {
+          "sha256": "5ea396642a3b2a08571eb82cc2c2bc15120a319b31315cd89672d8ca481668d5",
+          "original_sha256": "11a95cff68535ee1c5ac6a772dae76eae3fbf9d3c3a7813fcd9a68711a043bde",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-single/state-hashes.jsonl",
+          "bytes": 21309
+        }
+      }
+    },
+    {
+      "id": "api-c7-stationary",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary",
+      "observed_through": 7500,
+      "complete_declared_evaluation": true,
+      "protocol": "stationary",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 7500,
+          "first_arrival": 590,
+          "arrival_delay": 590,
+          "passing_since_arrival": 641,
+          "observations_since_arrival": 692,
+          "all_departures": [
+            2740,
+            2750,
+            2760,
+            2770,
+            2780,
+            2790,
+            2800,
+            2810,
+            2820,
+            2830,
+            2840,
+            2850,
+            2860,
+            2870,
+            2880,
+            2890,
+            2900,
+            2910,
+            2920,
+            2930,
+            2940,
+            2950,
+            2960,
+            6440,
+            6450,
+            6460,
+            6470,
+            6480,
+            6490,
+            6500,
+            6510,
+            6520,
+            6530,
+            6540,
+            6550,
+            6560,
+            6570,
+            6580,
+            6590,
+            6600,
+            6610,
+            6620,
+            6630,
+            6640,
+            6650,
+            6660,
+            6670,
+            6680,
+            6690,
+            6710,
+            6720
+          ],
+          "minimum_hq_since_arrival": 0.0009765625,
+          "minimum_modes_since_arrival": 1,
+          "final_suffix_start": 6730,
+          "final_suffix_observations": 78
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-c7-stationary/source.zip": {
+          "sha256": "c27a136fe2303643e8f239168e4a2eacb8cd34943fe38703d8567f2eb6fe69ca",
+          "original_sha256": "c27a136fe2303643e8f239168e4a2eacb8cd34943fe38703d8567f2eb6fe69ca",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/source.zip",
+          "bytes": 69647
+        },
+        "evidence/api-c7-stationary/declaration.json": {
+          "sha256": "34671dae2dbc0bcd201cd7cd5c259a8f5cdd2bf248006c40c8730c96da42b20e",
+          "original_sha256": "34671dae2dbc0bcd201cd7cd5c259a8f5cdd2bf248006c40c8730c96da42b20e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/declaration.json",
+          "bytes": 5626
+        },
+        "evidence/api-c7-stationary/initial.json": {
+          "sha256": "6e27e6ef67ba9e393658462bbe2d135882291cb8160dbcc0c67e491de243a282",
+          "original_sha256": "6e27e6ef67ba9e393658462bbe2d135882291cb8160dbcc0c67e491de243a282",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-c7-stationary/result.json": {
+          "sha256": "548a5bceddb0f63a135fb251e3a54afbeed89e76dc9a9b057ab00740b4446ec1",
+          "original_sha256": "548a5bceddb0f63a135fb251e3a54afbeed89e76dc9a9b057ab00740b4446ec1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/result.json",
+          "bytes": 7465
+        },
+        "evidence/api-c7-stationary/assessment.json": {
+          "sha256": "ec2396e303d280b27eb2cdff0076e44a5b56e58c0d8aa794bf42dabc75143965",
+          "original_sha256": "ec2396e303d280b27eb2cdff0076e44a5b56e58c0d8aa794bf42dabc75143965",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/assessment.json",
+          "bytes": 2010
+        },
+        "evidence/api-c7-stationary/metrics.jsonl.gz": {
+          "sha256": "1f61e51f5f92de3e6330334550f61c2a91ee92feabe4affb105743ab447ba9f4",
+          "original_sha256": "020c8d48c46b979c241a815a25724d201145892b381cd9cc48a5ed12cabc0bac",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/metrics.jsonl",
+          "bytes": 76581
+        },
+        "evidence/api-c7-stationary/learning-rates.jsonl.gz": {
+          "sha256": "ec5a75d5af679adf4decfb172986e9a075640ba67c2b017c34513792c9a91bd3",
+          "original_sha256": "6aa554486299c7b968afd8e994cde95259ebb6fa564c9c70dfc03a706c034f8a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/learning-rates.jsonl",
+          "bytes": 2102338
+        },
+        "evidence/api-c7-stationary/state-hashes.jsonl.gz": {
+          "sha256": "09d0132294c6c648fdab21d1fa3743933050b19b1e0e55806941e754ba47635c",
+          "original_sha256": "22bc7cf0cd664792416fee09b27cc32c84d3b3a872d4e30038507d5e84d454ae",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T222523Z-1514963/constant_rate_stability/20260926T222523Z-1514972/repo/experiments/constant_fresh/C7-stationary/state-hashes.jsonl",
+          "bytes": 34338
         }
       }
     }

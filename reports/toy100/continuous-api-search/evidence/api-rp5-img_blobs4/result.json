@@ -1,0 +1,147 @@
+{
+  "candidate": "API-RP5",
+  "gate": "broader_img_blobs4",
+  "status": "PASS",
+  "seconds": 31.87621554895304,
+  "metrics": {
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 19,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 19,
+      "first_pass_step": 150,
+      "stable_from_step": 150,
+      "stable_from_seconds": null,
+      "confirmed_step": 250,
+      "confirmed_seconds": null
+    },
+    "final": {
+      "step": 600,
+      "modes": 4,
+      "hq": 1.0,
+      "mean_rmse": 0.02498648688197136,
+      "quality_mode_fractions": [
+        0.21875,
+        0.3125,
+        0.21875,
+        0.25
+      ],
+      "mode_fractions": [
+        0.21875,
+        0.3125,
+        0.21875,
+        0.25
+      ],
+      "distribution_tv": 0.0625,
+      "ema": {
+        "modes": 4,
+        "hq": 1.0,
+        "mean_rmse": 0.025037620216608047,
+        "quality_mode_fractions": [
+          0.21875,
+          0.3125,
+          0.21875,
+          0.25
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.3125,
+          0.21875,
+          0.25
+        ],
+        "distribution_tv": 0.0625
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": false,
+      "gap": 0.006150081288069487,
+      "gap_s": 0.006979731808909584,
+      "velocity": -8.380308291314024e-06,
+      "contraction_peak": 0.00025967877485695557,
+      "contracting": 261,
+      "activity": 0.10275766234491217,
+      "activity_peak": 0.9998452666793086,
+      "quiet_gap": 0.00819697473406148,
+      "quiet_activity": 0.08143570090236849,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 600,
+      "openings": 1,
+      "closings": 1,
+      "event": null,
+      "velocity_s": -9.163692635840754e-06
+    },
+    "updates": 600,
+    "effective_recipe": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 8,
+      "num_particles": 32,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 32,
+      "total_steps": null,
+      "continuous_precision": "rp5",
+      "game_update": "secant_resolvent",
+      "adam_eager_state": true,
+      "input_noise_init_steps": 360,
+      "output_noise_init_steps": 720,
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.5,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.2,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0
+    },
+    "optimizer_classes": [
+      "K3PGeneratorAdam",
+      "KA2CriticAdam"
+    ],
+    "controller_class": "ReversiblePrecision"
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T221952Z-1506429/reversible_precision/20260926T221952Z-1506445/repo/reports/reversible-precision/runs/rp5-img_blobs4"
+}
