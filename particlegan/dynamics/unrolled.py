@@ -56,6 +56,21 @@ def _emit() -> None:
     print(json.dumps({"event": "dynamics_receipt", **receipt}), flush=True)
 
 
+def _generator_uses_unroll() -> bool:
+    """Plain ``unrolled`` always. ``unrolled_after_acquire`` only after its latch.
+
+    Any other value, including an unset flag, returns the live critic and does
+    not call the unrolled context.
+    """
+    name = os.environ.get("K3P_DYNAMICS")
+    if name == "unrolled":
+        return True
+    if name != "unrolled_after_acquire":
+        return False
+    from particlegan.dynamics.unrolled_after_acquire import latched
+    return latched()
+
+
 def critic_for_generator(critic, fake, context):
     """Critic module the generator step should call.
 
@@ -65,7 +80,7 @@ def critic_for_generator(critic, fake, context):
     minimizes, and ``penalty`` is that step's penalty object (bookkeeping
     restored after the copy).
     """
-    if os.environ.get("K3P_DYNAMICS") != "unrolled":
+    if not _generator_uses_unroll():
         return critic
     optimizer, real, d_loss_fn, penalty = context()
     return _unroll(critic, fake, optimizer, real, d_loss_fn, penalty)

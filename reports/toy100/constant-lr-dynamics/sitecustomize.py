@@ -19,6 +19,9 @@ elif name == "shared_batch":
 elif name == "unrolled":
     from particlegan.dynamics.unrolled import install
     install()
+elif name == "unrolled_after_acquire":
+    from particlegan.dynamics.unrolled_after_acquire import install
+    install()
 elif name:
     sys.stderr.write(f"unknown K3P_DYNAMICS={name}\n")
     raise SystemExit(2)
