@@ -1,0 +1,24 @@
+{
+  "machine": "cpu",
+  "init": "hid_q",
+  "offsets": [0, 101, 202, 303, 404, 505, 606, 707],
+  "pass_rule": {
+    "ring": "status PASS (modes>=8 and hq>=0.9)",
+    "hold": "status PASS (hold_checks==1200)",
+    "stay": "continued_hold 120/120 and pass_all",
+    "unequal": "status PASS"
+  },
+  "baseline": {"ring": "5/8", "hold": "3/8", "stay": "3/8", "unequal": "4/8",
+    "ring_pass": [0, 303, 404, 606, 707],
+    "hold_pass": [0, 606, 707],
+    "stay_pass": [0, 606, 707],
+    "unequal_pass": [101, 202, 303, 505]},
+  "optimistic": {"ring": "2/8", "hold": "1/8", "stay": "1/8", "unequal": "2/8",
+    "ring_pass": [404, 606],
+    "hold_pass": [404],
+    "stay_pass": [404],
+    "unequal_pass": [202, 404]},
+  "extragradient": {"ring": "0/8", "hold": "0/8", "stay": "0/8", "unequal": "0/8"},
+  "ema_fake": {"ring": "0/8", "hold": "0/8", "stay": "0/8", "unequal": "0/8"},
+  "confirmation": "CPU screening only; A6000 repeat required"
+}

@@ -1,0 +1,84 @@
+# hid_q ring amplifier
+
+CPU screening on this machine only. Seed 0 repeated bit-identical (`hq` 0.999755859375, modes 8). These pass rates are not an A6000 result.
+
+`--init hid_q` fixes the weights. The offset changes samples and noise only. On the ring the live loop is relativistic paired logistic, `a_r1r2` (coeff 1, kappa 1), and Adam with betas `(0, 0.999)`. The EMA-critic pull does not run (the probe patches a different penalty class; calls 0). A2 latent damping enters and then no-ops, because the 12-row table is dense under batch 128 (`scoped_calls` 0). The generator EMA (decay 0.995) is evaluation-only. Unequal mass is the real `GANTrainer` K3P path, not this loop.
+
+## Amplification map
+
+Passing seed 0, one coordinate `+1e-7`, joint L2 of `(D, G, prior)` against the unperturbed run. Growth below is the step-to-step ratio of that joint L2. "Geo" is the geometric mean while the joint L2 sits between `1e-6` and `1e-2`.
+
+| nudge | where it starts | burst | geo in window | max step | ring outcome |
+| --- | --- | --- | --- | --- | --- |
+| G weight | t0 `1.2e-7` in G | t3→t4 ×392, then ×8.8, ×9.8 | 13.2× over 4 steps | 392 | FAIL, 7/8 modes |
+| D weight | t0 `1.2e-7` in D | t0→t1 ×18.6 into G; t4→t5 ×129 | 7.4× over 5 steps | 129 | PASS |
+| one real sample | t1 `7.7e-6` mostly G | t3→t4 ×71, then ×9.5, ×6.4 | 8.8× over 4 steps | 71 | PASS |
+| prior row | t0 `9.7e-8` in the prior | t0→t1 ×129 into G; t2→t3 ×82 | 13.9× over 3 steps | 129 | FAIL, 0 modes |
+
+The prior nudge is the most outcome-sensitive place to put `1e-7`. A D nudge of the same size still passes: direction matters, not just the norm.
+
+Phases, all four twins:
+
+- Updates 1–3 move the error, mostly into G, at a few times to ~100×.
+- Updates 4–6 are the burst (tens to a few hundred times) and land in G and D together. The prior's share of the L2 is ~30× smaller at the burst, then catches up a step later.
+- Updates 7–20 are a shoulder of about 1–2×. The gap is already O(1), so later training cannot pull the twins back together.
+- The learning-rate anneal (update ≥ 720) does not start a second burst. Final joint L2 is O(10), with D the largest share.
+- EMA-critic state and the latent-anchor state stay at 0. They are not the amplifier on this path.
+
+## Jacobian
+
+Replaying one `mode_hold` step from the saved frame is bit-exact (`replay_check` max abs 0). The hooked seed-0 run still passes at the same `hq`.
+
+A random 20-d subspace of the one-step map underestimates the burst (spectral radius about 1.4–1.7 early, about 1.0 after update 20, about 2.1 at update 800 and that late mode is in the prior block). Early on, the joint radius is larger than any diagonal block, and by update 10 the top pair is complex (`1.677 ± 0.363i`). Coupling adds gain, and there is a rotational piece, but these radii are not the observed stretch.
+
+Power iteration of the same one-step map (6 iterations), at the burst. "Step" is the 1-based update index.
+
+| update | eps | mask | singular value | where the image goes |
+| --- | --- | --- | --- | --- |
+| 4 | 1e-4 | joint | 109 | G 100, prior 35, D 28 |
+| 4 | 1e-5 | joint | 566 | G 480, D 298, prior ~1 |
+| 4 | 1e-5 | G only | 565 | same split, G and D |
+| 4 | 1e-5 | D only | 1.8 | stays in D |
+| 4 | 1e-5 | prior only | 1.0 | stays in the prior |
+| 5 | 1e-5 | G only | 447 | G 416, D 150, prior 66 |
+| 5 | 1e-5 | prior only | 465 | almost all into G |
+
+The huge gain is a nonlinear kink: shrinking the probe from `1e-4` to `1e-5` moves the update-4 singular value from ~100 to ~570, and at the smaller probe only a G perturbation excites it. D's linear response at `1e-5` is mild, but a D perturbation at `1e-4` is mapped mostly into G (singular value 159). A finite `1e-7` prior kick still collapses the full trajectory, because the kick is handed to G on the next update and then rides the kink.
+
+The historical "~10× per step" is the shoulder after that kink, not a uniform linear factor from step 0. A fresh `1e-7` error is O(1) by update 6–8. Kernel noise reinjected every step would ride the same burst.
+
+## Reliefs
+
+Each candidate is one fixed change, aimed at that G–D burst. No coefficient sweep, and no coverage, anchor, or forward-KL term. They are off unless `K3P_RELIEF` is set.
+
+- **optimistic.** Daskalakis et al. 2018, Algorithm 1, alpha = 1, after every Adam update (D, G, and the prior). The paper rule, no extra forward.
+- **extragradient.** Simultaneous extragradient on the current minibatch. A raw Adam lookahead predicts D and G; the committed host step writes gradients from that predicted point onto the base point. The existing Adam step is the only extrapolation length.
+- **ema_fake.** The critic's fake forward (and the particles it is drawn from) uses the generator EMA already maintained at decay 0.995. The generator step stays on the live weights.
+
+Screen: 8 offsets × ring, hold (PASS means 1200 checks), stay (120/120 and `pass_all`, not the shift terminal status), unequal. Same `hid_q` baseline on this CPU.
+
+| candidate | ring | hold 1200 | stay | unequal |
+| --- | ---: | ---: | ---: | ---: |
+| baseline hid_q | 5/8 | 3/8 | 3/8 | 4/8 |
+| optimistic α=1 | 2/8 | 1/8 | 1/8 | 2/8 |
+| extragradient | 0/8 | 0/8 | 0/8 | 0/8 |
+| ema fake | 0/8 | 0/8 | 0/8 | 0/8 |
+
+Passing offsets:
+
+| candidate | ring | hold | stay | unequal |
+| --- | --- | --- | --- | --- |
+| baseline | 0, 303, 404, 606, 707 | 0, 606, 707 | 0, 606, 707 | 101, 202, 303, 505 |
+| optimistic | 404, 606 | 404 | 404 | 202, 404 |
+| extragradient | none | none | none | none |
+| ema fake | none | none | none | none |
+
+Optimistic does not stabilize the ring. It drops 5/8 to 2/8 and moves the surviving seeds; 404 becomes the only hold/stay pass, which the baseline did not hold. Extragradient and the EMA fake miss every seed on every gate. Extragradient's ring runs are about 2.5× the baseline wall time, which is the two-pass update actually running. The EMA fake collapses the ring to 0 modes on 7 of 8 offsets.
+
+## Recommendation
+
+Keep the unchanged hid_q baseline. Do not turn on any of these three.
+
+The amplifier is the joint alternating step in the first ~10 updates, and the top stretch is a nonlinear kink in G (and in D's answer to G), not a clean imaginary eigenvalue of either net alone. Alpha = 1 optimism doubles the first Adam step and walks off more seeds than it saves. A full Adam lookahead is far outside the `1e-5` neighborhood where the singular value is already hundreds, so extragradient at the training step evaluates the kink rather than damping it. The 0.995 generator EMA has a time constant of about 200 steps, while the burst is over by update 8, so the critic spends that window scoring a generator that has not moved. Both of those scales were fixed on purpose; changing them would be a sweep this round does not do.
+
+An A6000 run is still required before treating the pass rates, or the location of the kink, as confirmed. The useful confirmation target is the amplification map (which group, which update, the eps-dependent singular value), not another seed sweep of these three reliefs.
