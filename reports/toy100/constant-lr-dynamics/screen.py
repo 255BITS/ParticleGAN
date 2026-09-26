@@ -151,7 +151,7 @@ def _cell(row: dict, kind: str) -> str:
             return text + " PASS" if row.get("stay_pass") else text
         modes, hq, suffix = row.get("modes"), row.get("hq"), row.get("passing_suffix")
         hq_text = f"{hq:.3f}" if isinstance(hq, float) else str(hq)
-        text = f"{modes} / {hq_text} / {suffix}"
+        text = f"{hq_text} / {suffix}" if modes is None else f"{modes} / {hq_text} / {suffix}"
         return text + " PASS" if row.get("status") == "PASS" else text
     if gate == "hold":
         return "PASS" if row.get("ema_pass") else str(row.get("ema_status"))
@@ -160,7 +160,7 @@ def _cell(row: dict, kind: str) -> str:
         return text + " PASS" if row.get("ema_pass") else text
     modes, hq, suffix = row.get("ema_modes"), row.get("ema_hq"), row.get("ema_passing_suffix")
     hq_text = f"{hq:.3f}" if isinstance(hq, float) else str(hq)
-    text = f"{modes} / {hq_text} / {suffix}"
+    text = f"{hq_text} / {suffix}" if modes is None else f"{modes} / {hq_text} / {suffix}"
     label = row.get("label") or ""
     if row.get("ema_pass"):
         text += " PASS"

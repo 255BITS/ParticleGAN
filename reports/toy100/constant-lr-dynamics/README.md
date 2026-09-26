@@ -116,4 +116,55 @@ python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamic
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics ema_g_fake --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 ```
 
-CPU numbers for this mechanism are recorded below after the 8-offset screen. They do not rank against the A6000.
+CPU screen on this build, 8 offsets, 4 jobs. These numbers do not rank against the A6000. Baseline offset 0 ring is 8 modes, hq 0.878, suffix 0, the same constant-LR point as #178. Best baseline stay is 53/120 at offset 606, the same partial as #183.
+
+`ema_g` live matches that baseline on every ring, hold, stay, and unequal cell. The averaged column does not. `ema_g_fake` is the declared alternative and is worse. No hold PASS and no stay 120/120. The handoff bar is missed.
+
+Ring, modes / hq / passing suffix. No ring PASS.
+
+| offset | baseline | ema_g live | ema_g EMA | ema_g_fake live | ema_g_fake EMA |
+| ---: | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 8 / 0.878 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+| 101 | 7 / 0.659 / 0 | 7 / 0.659 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+| 202 | 7 / 0.985 / 0 | 7 / 0.985 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+| 303 | 6 / 0.670 / 0 | 6 / 0.670 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+| 404 | 6 / 0.400 / 0 | 6 / 0.400 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+| 505 | 4 / 0.263 / 0 | 4 / 0.263 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+| 606 | 7 / 0.694 / 0 | 7 / 0.694 / 0 | 0 / 0.000 / 0 | ERROR | 0 / 0.000 / 0 |
+| 707 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 / 0.000 / 0 |
+
+Hold. Every finished run is `NOT_CONVERGED` (`hold_checks` 0). `ema_g_fake` offset 606 is `ERROR` on the live record; the averaged column is still `NOT_CONVERGED`.
+
+Stay, passing checks out of 120. None is 120/120.
+
+| offset | baseline | ema_g live | ema_g EMA | ema_g_fake live | ema_g_fake EMA |
+| ---: | --- | --- | --- | --- | --- |
+| 0 | 33/120 | 33/120 | 0/120 | 0/120 | 0/120 |
+| 101 | 0/120 | 0/120 | 0/120 | 0/120 | 0/120 |
+| 202 | 0/120 | 0/120 | 0/120 | 0/120 | 0/120 |
+| 303 | 9/120 | 9/120 | 0/120 | 0/120 | 0/120 |
+| 404 | 17/120 | 17/120 | 0/120 | 0/120 | 0/120 |
+| 505 | 0/120 | 0/120 | 0/120 | 0/120 | 0/120 |
+| 606 | 53/120 | 53/120 | 0/120 | ERROR | 0/120 |
+| 707 | 0/120 | 0/120 | 0/120 | 0/120 | 0/120 |
+
+Unequal, hq / passing suffix. The bugfix lets the gate run. Passes are the live model only, at offsets 101 and 505, for baseline and for `ema_g` (same cells). The average does not pass. `ema_g_fake` does not pass.
+
+| offset | baseline | ema_g live | ema_g EMA | ema_g_fake live | ema_g_fake EMA |
+| ---: | --- | --- | --- | --- | --- |
+| 0 | 0.968 / 2 | 0.968 / 2 | 0.014 / 0 | 0.000 / 0 | 0.054 / 0 |
+| 101 | 0.971 / 5 PASS | 0.971 / 5 PASS | 0.019 / 0 | 0.000 / 0 | 0.098 / 0 |
+| 202 | 0.984 / 0 | 0.984 / 0 | 0.002 / 0 | 0.000 / 0 | 0.045 / 0 |
+| 303 | 0.977 / 0 | 0.977 / 0 | 0.014 / 0 | 0.000 / 0 | 0.260 / 0 |
+| 404 | 0.912 / 3 | 0.912 / 3 | 0.016 / 0 | 1.000 / 0 | 0.000 / 0 |
+| 505 | 0.982 / 10 PASS | 0.982 / 10 PASS | 0.005 / 0 | 0.000 / 0 | 0.221 / 0 |
+| 606 | 0.957 / 0 | 0.957 / 0 | 0.000 / 0 | 0.000 / 0 | 0.000 / 0 |
+| 707 | 0.974 / 0 | 0.974 / 0 | 0.016 / 0 | 0.000 / 0 | 0.010 / 0 |
+
+`ema_g_fake` offset 606 ring, hold, and stay write a non-finite value, so the probe rejects the JSON (`allow_nan=False`). By step 1000 on that ring the live generator displacement is 0 and the gradient RMS is ~1e-19. The scored curve up to the failure is 0 modes.
+
+Best averaged coverage anywhere: `ema_g` hold, 4 modes, hq 0.238, offset 606, step 6220. No averaged checkpoint has 8 modes and hq 0.90 (streak 0 on ring, hold, and stay, both variants).
+
+Decay 0.999 still weights the initial parameters by about 0.30 after 1200 steps and about 0.027 after 3600. The ring average is still mixed with the transient, which is why it has 0 modes while the live model still shows the baseline's late coverage. That is not the whole miss. At the stay and the hold the initial weight is gone, and the average still never qualifies. The live constant-LR path is not orbiting a covered equilibrium, so the average has no covered center to sit on. Feeding that average to the critic (`ema_g_fake`) does not create one; it drops the live coverage and can go non-finite.
+
+Do not send either variant to the A6000 as a stay recipe.
