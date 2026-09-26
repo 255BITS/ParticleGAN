@@ -1,0 +1,230 @@
+{
+  "candidate": "API-C5",
+  "audit_kind": "read_only_source_and_existing_checkpoint_audit",
+  "audited_at_utc": "2026-09-26T21:59:45.934395+00:00",
+  "repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914/repo",
+  "new_training_or_gpu_work": false,
+  "source_zip_sha256": "e06621731dca330decb5b40e251be382452b349ad690dee0ce931ef05fcbeff3",
+  "manifest_files": 22,
+  "zip_matches_manifest": true,
+  "working_sources_match_manifest": true,
+  "verdict": "BLOCKED_DECLARATION_MISMATCH_AND_UNPASSED_QUALIFICATION",
+  "blocking_finding": "C5 resolves final critic anchor while all critic parameters temporarily have requires_grad=False; CriticAnchor.update_ therefore hard-copies accepted live D instead of declared EMA .99.",
+  "references": [
+    "particlegan/training.py:226",
+    "particlegan/training.py:248",
+    "particlegan/training.py:251",
+    "particlegan/game_update.py:46",
+    "particlegan/game_update.py:61",
+    "particlegan/k3p.py:72"
+  ],
+  "checkpoint_evidence": [
+    {
+      "file": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914/repo/experiments/constant_game/C5-single/state-1600.pt",
+      "sha256": "74aeb7a00eb041639c21541a19e4799896baf5535ec2ed1ee217c9d532f9aa01",
+      "step": 1600,
+      "critic_state_tensors": 9,
+      "equal_live_and_ema_tensors": 9,
+      "max_abs_live_minus_ema": 0.0,
+      "record": {
+        "calls": 1600,
+        "observed_steps": 1600,
+        "ema_updates": 801,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving",
+        "anchor_started": true,
+        "alpha": 0.1,
+        "w": 1.0
+      },
+      "optimizer_step_values": [
+        [
+          1600.0
+        ],
+        [
+          1600.0
+        ]
+      ]
+    },
+    {
+      "file": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914/repo/experiments/constant_game/C5-single/state-1740.pt",
+      "sha256": "8fcdb84d7109efe0be4ffcdebe030887b98425339386e5b5e0492a63729bf267",
+      "step": 1740,
+      "critic_state_tensors": 9,
+      "equal_live_and_ema_tensors": 9,
+      "max_abs_live_minus_ema": 0.0,
+      "record": {
+        "calls": 1740,
+        "observed_steps": 1740,
+        "ema_updates": 941,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving",
+        "anchor_started": true,
+        "alpha": 0.1,
+        "w": 1.0
+      },
+      "optimizer_step_values": [
+        [
+          1740.0
+        ],
+        [
+          1740.0
+        ]
+      ]
+    },
+    {
+      "file": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914/repo/experiments/constant_game/C5-single/state-1750.pt",
+      "sha256": "d9c8f4bc19506b66e382e76a79ac14faf3065c9a54d306ca44c1dad99040c2a3",
+      "step": 1750,
+      "critic_state_tensors": 9,
+      "equal_live_and_ema_tensors": 9,
+      "max_abs_live_minus_ema": 0.0,
+      "record": {
+        "calls": 1750,
+        "observed_steps": 1750,
+        "ema_updates": 951,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving",
+        "anchor_started": true,
+        "alpha": 0.1,
+        "w": 1.0
+      },
+      "optimizer_step_values": [
+        [
+          1750.0
+        ],
+        [
+          1750.0
+        ]
+      ]
+    },
+    {
+      "file": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914/repo/experiments/constant_game/C5-single/state-1800.pt",
+      "sha256": "5404e1ed03da998726cba1787020bd1f1bfc24a1d2179c00ade9f43401d52054",
+      "step": 1800,
+      "critic_state_tensors": 9,
+      "equal_live_and_ema_tensors": 9,
+      "max_abs_live_minus_ema": 0.0,
+      "record": {
+        "calls": 1800,
+        "observed_steps": 1800,
+        "ema_updates": 1001,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving",
+        "anchor_started": true,
+        "alpha": 0.1,
+        "w": 1.0
+      },
+      "optimizer_step_values": [
+        [
+          1800.0
+        ],
+        [
+          1800.0
+        ]
+      ]
+    },
+    {
+      "file": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T214250Z-1447906/constant_rate_stability/20260926T214250Z-1447914/repo/experiments/constant_game/C5-single/shift-state-2400.pt",
+      "sha256": "71b1d1c5f7b3f924042157948ff24e6bd1c3a306e79ea0cf7e0039a316cb9aa8",
+      "step": 2400,
+      "critic_state_tensors": 9,
+      "equal_live_and_ema_tensors": 9,
+      "max_abs_live_minus_ema": 0.0,
+      "record": {
+        "calls": 2400,
+        "observed_steps": 2400,
+        "ema_updates": 1601,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2_moving",
+        "anchor_started": true,
+        "alpha": 0.1,
+        "w": 1.0
+      },
+      "optimizer_step_values": [
+        [
+          2400.0
+        ],
+        [
+          2400.0
+        ]
+      ]
+    }
+  ],
+  "partial_rates": {
+    "read_sha256": "fa9549268bdcd40b46df95a5d45d4a47ddfcac2608e9bfb3e3016cae98751fd3",
+    "complete_rows": 4600,
+    "latest_step": 4600,
+    "distinct_rates": {
+      "generator_0": [
+        0.00425
+      ],
+      "prior_1": [
+        0.0085
+      ],
+      "critic_0": [
+        0.00425
+      ]
+    }
+  },
+  "checkpoint_gate": "Fresh-process CUDA exact continuation explicitly remains unpassed; same-process CPU tests do not establish it.",
+  "recommended_action": "Preserve exact C5 source and results and disclose hard-copy-reference deviation. Repair intended .99 EMA only as a newly declared candidate with own evidence and numerical accepted-reference regression tests.",
+  "scope": "Static source review and CPU loading existing checkpoints only; no training, GPU, unit execution, source edits or extra search lane.",
+  "observed_result": {
+    "status": "COMPLETE",
+    "completed_steps": 4600,
+    "segments": [
+      {
+        "start_after": 0,
+        "observed_through": 2400,
+        "first_arrival": 560,
+        "arrival_delay": 560,
+        "passing_since_arrival": 185,
+        "checks_since_arrival": 185,
+        "departures": [],
+        "departure_intervals": [],
+        "minimum_hq_since_arrival": 0.906494140625,
+        "minimum_modes_since_arrival": 8,
+        "minimum_hq_whole_segment": 0.00048828125,
+        "final_stable_suffix_start": 560,
+        "final_stable_suffix_checks": 185,
+        "final": {
+          "step": 2400,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.99462890625,
+          "cover": 1.0,
+          "effective_modes": 7.80133056640625
+        }
+      },
+      {
+        "start_after": 2400,
+        "observed_through": 4600,
+        "first_arrival": 2670,
+        "arrival_delay": 270,
+        "passing_since_arrival": 194,
+        "checks_since_arrival": 194,
+        "departures": [],
+        "departure_intervals": [],
+        "minimum_hq_since_arrival": 0.92333984375,
+        "minimum_modes_since_arrival": 8,
+        "minimum_hq_whole_segment": 0.003662109375,
+        "final_stable_suffix_start": 2670,
+        "final_stable_suffix_checks": 194,
+        "final": {
+          "step": 4600,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.99560546875,
+          "cover": 1.0,
+          "effective_modes": 7.813113689422607
+        }
+      }
+    ]
+  },
+  "qualification_note": "Single-shift result completed during audit. Scores belong to frozen hard-copy-reference implementation; no broader qualification is inferred."
+}

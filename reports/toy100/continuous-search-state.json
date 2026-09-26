@@ -574,10 +574,25 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "API_RP2_STATIONARY_PASS_LONG_RUNNING_CONSTANT_LANE_REFILLED",
+    "status": "API_RP2_30000_PASS_BROADER_AND_CHECKPOINT_OPEN",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "UNRESOLVED_FILE_CONTINUATION_DISCREPANCY",
     "matched_k3p_owner": "reversible_precision",
-    "checkpoint_diagnostic_owner": "data_drift_mobility"
+    "checkpoint_diagnostic_owner": "data_drift_mobility",
+    "api_rp2_long": {
+      "updates": 30000,
+      "arrival_delays": [
+        360,
+        420,
+        320
+      ],
+      "after_arrival_retention": [
+        "537/537",
+        "145/145",
+        "1879/1879",
+        "269/269"
+      ],
+      "report": "reports/toy100/continuous-api-search/evidence/api-rp2-long/result.json"
+    }
   }
 }
