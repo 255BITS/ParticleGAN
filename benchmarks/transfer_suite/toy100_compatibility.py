@@ -285,8 +285,11 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
         )
         if noise["input_noise_std"]:
             trainer.D.sigma = sigma
-        real = vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
-        real_g = lambda: vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
+        from particlegan.dynamics.batch_growth import paired_batch
+        # Same completed-update index the cosine uses. Flag unset keeps cfg["batch"].
+        n = paired_batch(cfg["batch"], trainer.completed_steps)
+        real = vector_tasks.sample_target(cfg, n, data_rng, completed)
+        real_g = lambda n=n: vector_tasks.sample_target(cfg, n, data_rng, completed)
         cap = (model_policy or {}).get("network_lr_horizon_cap")
         network_floor = (model_policy or {}).get("network_lr_floor")
         if cap is None:

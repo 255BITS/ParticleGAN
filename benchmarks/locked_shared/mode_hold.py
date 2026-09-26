@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+from particlegan.dynamics.batch_growth import paired_batch
 from particlegan.dynamics.shared_batch import shared_batch_update
 
 N_MODES = 8
@@ -198,8 +199,11 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for opt, rates in zip((opt_g, opt_d), base_lrs):
                 for group, rate in zip(opt.param_groups, rates):
                     group["lr"] = rate * scale
-        real = sample_ring(means, batch, SIGMA, stream)
-        latent, _ = prior.sample(batch, generator=stream)
+        # batch_growth: one paired minibatch for the real row, the fake row,
+        # and the particle draw. Flag unset keeps the host batch.
+        n = paired_batch(batch, step)
+        real = sample_ring(means, n, SIGMA, stream)
+        latent, _ = prior.sample(n, generator=stream)
         context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
         with context:
             fake = generator(latent).detach()
@@ -214,17 +218,17 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         # critic just scored. Otherwise the host draws a second batch of each.
         share = shared_batch_update()
         if not share:
-            latent, _ = prior.sample(batch, generator=stream)
+            latent, _ = prior.sample(n, generator=stream)
         fake = generator(latent)
         if gan.mode in ("rp", "ra"):
-            real_g = real if share else sample_ring(means, batch, SIGMA, stream)
+            real_g = real if share else sample_ring(means, n, SIGMA, stream)
             g_loss = gan.g_loss(critic(fake), critic(real_g))
         else:
             # Stranger / unpaired pairing: real and fake are scored apart.
             g_loss = gan.g_loss(critic(fake))
         if recipe.fm_weight > 0.0:
             # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
-            real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
+            real_mean = sample_ring(means, n, SIGMA, stream).detach().mean(0)
             g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
         g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
         g_loss = g_loss + vicreg(prior.z)

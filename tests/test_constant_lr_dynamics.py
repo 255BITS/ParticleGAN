@@ -126,3 +126,101 @@ def test_shared_batch_off_matches_two_draws(monkeypatch):
 @pytest.fixture(autouse=True)
 def _clear_dynamics(monkeypatch):
     monkeypatch.delenv("K3P_DYNAMICS", raising=False)
+
+
+def test_batch_growth_follows_the_published_cosine(monkeypatch):
+    from particlegan.dynamics.batch_growth import factors, floor_cap, paired_batch
+
+    monkeypatch.setenv("K3P_DYNAMICS", "batch_growth")
+    assert factors(0) == (1.0, 1.0)
+    assert factors(720) == (1.0, 1.0)
+    network, prior = factors(721)
+    assert network < 1.0 and prior < 1.0
+    assert abs(network - 0.999989397923744) < 1e-12
+    assert factors(1200) == (0.01, 0.05)
+    assert factors(4000) == (0.01, 0.05)
+    assert paired_batch(128, 720) == 128
+    assert paired_batch(128, 721) == 129
+    assert paired_batch(128, 1200) == floor_cap(128) == 12800
+    assert paired_batch(128, 3600) == 12800
+
+
+def test_batch_growth_flag_off_keeps_the_host_batch():
+    from particlegan.dynamics.batch_growth import paired_batch
+
+    for step in (0, 720, 721, 1200, 4000):
+        assert paired_batch(128, step) == 128
+
+
+def _weight_hash(steps, dynamics):
+    import hashlib
+
+    from benchmarks.locked_shared.mode_hold import ModeHoldRecipe, train_mode_hold
+
+    captured = {}
+    original = torch.optim.Adam.step
+
+    def step(self, *args, **kwargs):
+        result = original(self, *args, **kwargs)
+        key = tuple(tuple(p.shape) for group in self.param_groups for p in group["params"])
+        blob = b"".join(
+            p.detach().cpu().contiguous().numpy().tobytes()
+            for group in self.param_groups for p in group["params"]
+        )
+        captured[key] = hashlib.sha256(blob).hexdigest()
+        return result
+
+    if dynamics:
+        os.environ["K3P_DYNAMICS"] = dynamics
+    else:
+        os.environ.pop("K3P_DYNAMICS", None)
+    torch.optim.Adam.step = step
+    try:
+        train_mode_hold(ModeHoldRecipe(steps=steps), seed=0)
+    finally:
+        torch.optim.Adam.step = original
+        os.environ.pop("K3P_DYNAMICS", None)
+    assert len(captured) == 2
+    return tuple(captured[key] for key in sorted(captured))
+
+
+def test_batch_growth_flag_off_and_pre_anneal_match():
+    first = _weight_hash(4, None)
+    assert _weight_hash(4, None) == first
+    assert _weight_hash(4, "batch_growth") == first
+
+
+def test_batch_growth_is_deterministic_once_the_batch_grows():
+    grown = _weight_hash(725, "batch_growth")
+    assert _weight_hash(725, "batch_growth") == grown
+    assert _weight_hash(725, None) != grown
+
+
+def test_scaled_penalty_accepts_ema_critic():
+    import importlib.util
+
+    from particlegan.grad_regularizers import GradientPenalty
+
+    path = (
+        __import__("pathlib").Path(__file__).resolve().parents[1]
+        / "reports/toy100/gap-fill-20260925/sources/k3p/mechanism.py"
+    )
+    original = GradientPenalty.penalty
+    spec = importlib.util.spec_from_file_location("k3p_probe_mechanism", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    try:
+        penalty = GradientPenalty(coeff=1.0, kappa=1.0, anchor_weight=0.0)
+        critic = nn.Linear(2, 1)
+        real, fake = torch.randn(4, 2), torch.randn(4, 2)
+        skipped, empty = penalty.penalty(
+            critic, real, fake, 1, False, ema_critic=lambda x: torch.zeros(x.shape[0]),
+        )
+        value, stats = penalty.penalty(
+            critic, real, fake, 1, True, ema_critic=lambda x: torch.zeros(x.shape[0]),
+        )
+        assert torch.isfinite(skipped) and empty == {}
+        assert torch.isfinite(value) and value.ndim == 0
+        assert stats["applied"] is True and stats["phase"] == "a"
+    finally:
+        GradientPenalty.penalty = original
