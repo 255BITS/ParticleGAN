@@ -21,7 +21,8 @@ rows), zerofill (plain GAN on f_0(x, m)), misgan, misgan_realmask (fakes masked
 with masks resampled from the training pool), misgan_paired (each fake masked
 with its paired real row's mask), misgan_gauss (frozen-Gaussian priors for all
 three generators, via ``make_prior(learnable=False)``), misgan_hard (G_m masks
-binarized with a straight-through gradient). G_m is trained in every arm, so
+binarized with a straight-through gradient), misgan_detach (G_m's masks are
+detached in L_x, so G_m trains on L_m alone). G_m is trained in every arm, so
 mask metrics exist everywhere.
 
     python experiments/misgan_toy.py --arm misgan --mechanism mcar_p50
@@ -51,7 +52,8 @@ from lib.misgan import (DIM, MECHANISMS, Problem, bayes_posterior, generation_me
                         imputation_metrics, mask_metrics)
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator  # noqa: E402
 
-ARMS = ("oracle", "zerofill", "misgan", "misgan_realmask", "misgan_paired", "misgan_gauss", "misgan_hard")
+ARMS = ("oracle", "zerofill", "misgan", "misgan_realmask", "misgan_paired", "misgan_gauss", "misgan_hard",
+        "misgan_detach")
 # Arms run on every mechanism; the rest only on mcar_p50.
 ALL_MECHANISM_ARMS = ("oracle", "zerofill", "misgan", "misgan_realmask", "misgan_paired")
 
@@ -151,6 +153,8 @@ def train(cfg):
                                                  generator=data_gen)]
         if arm == "misgan_paired":
             return m_real
+        if arm == "misgan_detach":
+            return m_gen.detach()
         return m_gen  # misgan, misgan_gauss, misgan_hard (oracle/zerofill do not mask fakes)
 
     def data_views(gx, m_fake, x, m, x_full):
@@ -251,13 +255,16 @@ def write_grid(directory, steps):
     """One TOML per (mechanism, arm) plus manifest.json for run_grid.py."""
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
-    runs = [(mech, arm) for mech in MECHANISMS for arm in ALL_MECHANISM_ARMS]
-    runs += [("mcar_p50", "misgan_gauss"), ("mcar_p50", "misgan_hard")]
+    runs = [(mech, arm, arm, steps) for mech in MECHANISMS for arm in ALL_MECHANISM_ARMS]
+    runs += [("mcar_p50", arm, arm, steps) for arm in ("misgan_gauss", "misgan_hard", "misgan_detach")]
+    # Follow-ups: does learned-mask G_x converge with a longer budget; is G_m's
+    # L_x gradient what hurts G_x at high missingness.
+    runs += [("mcar_p50", "misgan", "misgan_long", 3 * steps), ("mcar_p80", "misgan_detach", "misgan_detach", steps)]
     paths = []
-    for mech, arm in runs:
-        name = f"{mech}__{arm}"
+    for mech, arm, label, run_steps in runs:
+        name = f"{mech}__{label}"
         path = directory / f"{name}.toml"
-        path.write_text(f'arm = "{arm}"\nmechanism = "{mech}"\ntotal_steps = {steps}\n'
+        path.write_text(f'arm = "{arm}"\nmechanism = "{mech}"\ntotal_steps = {run_steps}\n'
                         f'out_dir = "results/misgan/runs/{name}"\nlog_path = "runs/misgan/{name}.log"\n')
         paths.append(str(path))
     (directory / "manifest.json").write_text(json.dumps(paths, indent=1) + "\n")

@@ -46,7 +46,8 @@ def load_runs(runs_dir):
     for path in sorted(Path(runs_dir).glob("*/summary.json")):
         summary = json.loads(path.read_text())
         cfg = summary["config"]
-        runs.setdefault(cfg["mechanism"], {})[cfg["arm"]] = summary
+        label = path.parent.name.split("__", 1)[-1]  # the arm, or a follow-up label
+        runs.setdefault(cfg["mechanism"], {})[label] = summary
     return runs
 
 
@@ -86,7 +87,8 @@ def comparisons(tables):
         ref = rows["misgan"]
         bayes = rows["*bayes*"]["acc"]
         parts = [f"misgan acc {ref['acc']:.3f} vs Bayes {bayes:.3f} (gap {bayes - ref['acc']:+.3f})"]
-        for arm in ("oracle", "zerofill", "misgan_realmask", "misgan_paired", "misgan_gauss", "misgan_hard"):
+        for arm in ("oracle", "zerofill", "misgan_realmask", "misgan_paired", "misgan_gauss", "misgan_hard",
+                    "misgan_detach", "misgan_long"):
             if arm in rows:
                 r = rows[arm]
                 parts.append(f"{arm} dacc {r['acc'] - ref['acc']:+.3f} ditv {r['itv'] - ref['itv']:+.3f} "
