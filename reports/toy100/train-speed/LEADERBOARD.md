@@ -22,10 +22,10 @@ evidence, not winners. Append rows; never rewrite history.
 | R1 / host_data_pipeline ($0.09) | Cached static mode centers + in-place noise scaling (`benchmarks/toy100/problems.py`, +15/−1) | PASS but marginal (not promoted) | RNG-order unchanged, bit-identical on CPU/CUDA; sampling 0.140 → 0.072 ms/draw; saves ≈1s per 7k-step problem. Candidate for the micro-win stack. |
 | R1 / graph_compilation ($0.24) | `torch.compile` on b_cap / D / G paths | No candidate qualified | `aot_autograd does not support double backward` (torch 2.13+cu126) — compile cannot touch the exact-penalty path. P3 CUDA run passed toy100 gate but off-profile (pinned profile is CPU). |
 | R2 / alternating_penalty ($0.05) | Alternating real-only/fake-only exact `b_cap` at ×2 weight | FAIL, stop after one bounded test | Parity unit check PASS; grid100 final 3/100 (hq .061), peaked 14 modes @500 → 1 @1000. Held-out side drifts immediately. |
-| R2 / shared_forward_bcap | Share one `D(real)`, `D(fake)` forward between Rp loss and penalty | Running | — |
-| R2 / profile_first | Measured hotspot split, then attack only the top | Running | — |
+| R2 / shared_forward_bcap ($0.09) | Share one `D(real)`, `D(fake)` forward between Rp loss and penalty | FAIL (parity), disqualified as specified | Logit values identical, but 2nd-order accumulation order differs: param-grad maxdiff 1.19e-07 (6344 params > 1e-9), compounding 3.8e-06 @1 step → 0.25 @30 steps. Joint input-grad variant is exactly 0.0 but slower (keeps all 4 forwards). |
+| R2 / profile_first ($0.10) | Measured hotspot split, then top hotspot only | No promotion (profiling-only, tree clean) | Pinned CPU 102.1 ms/step: D double-backward+opt **71.7%**, b_cap input-grads 13.7%, D loss-forwards 5.5%, G fwd 4.8%, G bwd+opt 3.5%, sampling 0.2%, EMA 0.1%. Second-order work ≈79% of step. Independently confirmed shared-forward's 30% probe speedup but trajectory drift. Near-miss data banked for R3 (fused input-grad, foreach). |
 
-Round spend: R1 ≈ $0.68, R2 ≈ $0.19 so far. No promotion yet: the baseline
+Round spend: R1 ≈ $0.68, R2 ≈ $0.23. No promotion yet: the baseline
 remains the winner. Batches: `/ml2/hypergan/gan-attempts/toyspeed-20260926T040626Z`
 (R1), `/ml2/hypergan/gan-attempts/toyspeed-20260926T065716Z` (R2).
 
