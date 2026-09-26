@@ -99,6 +99,8 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--log", type=Path, required=True)
     parser.add_argument("--seed-offset", type=int, default=0)
+    parser.add_argument("--diag", action="store_true",
+                        help="write a read-only per-step trace to <output>/diag.jsonl")
     args = parser.parse_args()
     if args.output.exists():
         raise SystemExit(f"output exists: {args.output}")
@@ -108,6 +110,8 @@ def main() -> None:
                PYTHONHASHSEED="0", PYTHONUNBUFFERED="1")
     if args.seed_offset:
         env["K3P_SEED_OFFSET"] = str(args.seed_offset)
+    if args.diag:
+        env["K3P_DIAG_TRAJ"] = str(args.output / "diag.jsonl")
     cmd = _command(args.gate, args.init, args.output)
     if args.seed_offset:
         shim = str(Path(__file__).with_name("det_init_seedshim.py"))
