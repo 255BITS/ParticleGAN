@@ -277,6 +277,8 @@ stress, and cross-seed + nudge confirmation.
 | # | Exact formulation | Hold / extension | Target-shift recovery | Schedule-free release? | Standing |
 |---|---|---:|---:|---|---|
 | 1 | **R2: K3P + moment-surprise release (LEAD, winning)** | **114/120** (6 pre-shift checks short) | **72/81, delay 490** | **Yes — surprise-driven, no clock/budget reads** | **Top qualified score; 4/4 screens PASS, frozen 0/81 (moves)** |
+| 1t | **B3-belief: R2 gate under AdaBelief (TIE)** | **114/120** (identical 6 steps) | **73/81, delay 480** | **Yes — belief-surprise, same band shape** | **Tie, not a win; one check better, same hold gap; frozen/toys NOT_RUN** |
+| 3 | SG3 graded memory | 114/120 (same 6 fails) | 43/81, delay 1080 | Release yes; LR/noise retained | Second family; latch engaged, 19 reseeds; beats B2 with R2-grade hold |
 | DQ | PM1 / PM3 | Both pass | 79/81 each | No — scheduled noise remains | DISQUALIFIED: schedule-dependent |
 | DQ | PB2 / DI2 / P3 | All pass | 77/81 each | No — scheduled components remain | DISQUALIFIED: schedule-dependent |
 | — | B2 unguarded re-seed | 33/120 FAIL | 40/81 | n/a (hold broken) | Out: speed without stability |
@@ -326,8 +328,12 @@ the frozen CUDA repo with the `cb5ddaeb` fixture at floors `.01/.05`.
 **Seed-fragility context (measured, same protocol).** The 22/22 base is a
 single-seed artifact: across declared host seeds, ring/hold/stay pass ~2/8,
 and a 1e-6 init nudge at the repo seed gives NOT_CONVERGED 0/1200 against the
-repo-seed PASS 1200/1200. R2's scores above are repo-seed measurements. Per
-user direction, failing gates are now retried at declared seeds {1,2,3} with
-per-seed fixtures before any drop verdict, and nudge-hold is a first-class
-gate; fragile is not broken, robust wins. Active follow-ups: R2 settling-window
-fix (round 5) and novelty-gated G-boost (round 4, first motion with hold intact).
+repo-seed PASS 1200/1200. R2 was re-run exactly at seeds {1,2,3}: FAILs
+shift+frozen+hold everywhere off-seed, and fails the nudge at both 1e-6 and
+3e-7 scales — its mechanism does not widen the basin, bounding the claim to
+repo-seed luck plus release. The Lion optimizer family is dead on arrival
+(warm probes FAIL); SGD warm probes FAIL (adaptivity is load-bearing). Combo
+attempts (graded blind-band shapes, G-boost ported onto R2) did not beat R2.
+Per user direction, failing gates are retried at declared seeds before drop
+verdicts; fragile is not broken, robust wins. Active: basin round
+(early-phase acquisition robustness over 8 declared seeds) on both GPUs.

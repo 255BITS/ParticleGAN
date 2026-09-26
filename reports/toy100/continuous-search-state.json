@@ -2,8 +2,8 @@
   "status": "baseline_complete",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
-  "active_round": 5,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T020611Z",
+  "active_round": 7,
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T065851Z",
   "workflow": [
     "baseline complete: hold PASS, shift FAIL",
     "review mechanism comparison recommendations",
@@ -22,7 +22,10 @@
     "ep1_excursion_phase": "Own hold1200+300, stationary5/5, prehold120/120 PASS; recovery16/81 FAIL. Scheduled noise remains. Not promoted.",
     "pd1_projected_discrepancy": "Recovered unledgered results: hold NOT_CONVERGED, prehold33/120, recovery0/81 FAIL. Not promoted.",
     "ep2_excursion_phase": "INCOMPLETE: last logged update2050, hold650/1200, no final result. Shift NOT_RUN; not resumed after user stop.",
-    "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md."
+    "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md.",
+    "b3_belief_tie": "TIE with R2 (not a win): hold 114/120 (identical 6 steps), recovery 73/81 delay 480 final 8/1.0. R2 gate rebuilt on AdaBelief belief-surprise. Frozen/toys NOT_RUN. See leaderboard.",
+    "sg3_graded_memory": "Second family: hold 114/120 (same 6 fails), recovery 43/81 delay 1080 final 8/0.919, latch engaged, 19 reseeds. Beats B2 with R2-grade hold. See leaderboard.",
+    "r2_offseed": "DEFINITIVE NEGATIVE: exact R2 FAILs shift+frozen+hold at all of seeds {1,2,3} and fails the nudge at 1e-6 and 3e-7. Mechanism does not widen the basin."
   },
   "previous_round": {
     "round": 2,
