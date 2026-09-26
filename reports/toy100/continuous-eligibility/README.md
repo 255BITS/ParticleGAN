@@ -35,6 +35,48 @@ eligible winners. This audit covers the entries in PR #155's current comparison
 tables and candidate state; it does not pretend to have newly qualified every
 historical draft.
 
+## Keep the scores as research leads
+
+**Disqualified does not mean discarded.** Preserve the exact source, scores and
+failures. Future agents should reuse useful mechanisms while correcting the
+reason the complete configuration was rejected. A descendant cannot inherit
+its parent's passes.
+
+These are the original research measurements, not results from the public API.
+The recovery fractions below are historical passing observations in the old
+81-check window, retained as scores rather than an all-81 selection gate.
+“Own hold” means the separate 1200-check hold plus 300-check extension; it must
+not be conflated with 120 sampled pre-shift observations.
+
+| Research entry | Recorded retention | Original recovery count | Useful lead / limitation |
+|---|---|---:|---|
+| KA2 asymmetric-Kalman | Pre-shift 120/120 | 50/81 | Adaptive critic memory; later extension is 105/109 after reported settled arrival, with dropouts. |
+| R2 moment-surprise | Pre-shift 114/120 | 72/81 | Surprise-driven release; faster recovery with weaker retention. |
+| B3-belief | Pre-shift 114/120 | 73/81 | Shadow belief statistics as a signal; full learner still scheduled. |
+| SG3 graded memory | Pre-shift 114/120 | 43/81 | Graded memory/reseeding; retains the same hold failures. |
+| G1 finalized v15 | Pre-shift 120/120 | 47/81 | Reversible generator boost; scheduled base remains. |
+| B2 unguarded reseed | Pre-shift 33/120 | 40/81 | Reseeding enables motion but damages retention. |
+| B3 guarded reseed | Pre-shift 120/120 | 0/81 | Guarding preserves retention but this version does not recover in the window. |
+| K3P | Own hold 1200/1200 + 300/300; declared 22/22 toys | 28/81 | Strong historical stability baseline; scheduled learner. |
+| PM1 / PM3 | Both own holds and extensions pass | 79/81 each | Autonomous mobility rules; inherited noise still horizon-based. |
+| PB1 | Pre-shift hold fails | 79/81 | Recovery improvement does not erase loss of retention. |
+| PB2 / DI2 / P3 | Own holds and extensions pass | 77/81 each | Penalty balance, data innovation and reopening mechanisms worth separating from inherited schedules. |
+| AP3 | Own hold and extension pass; pre-shift 120/120 | 72/81 | Partial reopening; remaining horizon-based noise. |
+| PX3 | Own hold 1200/1200 + 300/300; pre-shift 120/120 | 71/81 | Bounded reopening followed by return to the floor; useful starting point, not a qualified learner. |
+| RP1 | Own hold 1200/1200 + 300/300; pre-shift 120/120 | 81/81 | Automatic reopening and horizon-prefix evidence; image/native failures remain decisive. |
+| TD3 | Acquisition/retention fails | 53/81 | Discrepancy sensing alone does not solve stable updates. |
+| EP1 | Own hold and extension pass; pre-shift 120/120 | 16/81 | Excursion-controlled rates; remaining horizon-based noise. |
+| PD1 | Own hold not converged; pre-shift 33/120 | 0/81 | Failed projected-discrepancy configuration. |
+| A3 | Pre-shift 89/120; full suite 4/22 | 71/81 | A better recovery count can conceal broad regressions. |
+| EP2 | Partial hold only: last recorded 650/1200 | NOT_RUN | Unfinished evidence; no inferred outcome. |
+
+Sources and original scope are retained in the
+[scored leaderboard](../continuous-practical-leaderboard.md),
+[previous PR body](pr155-body-before.md), and each entry's linked report in
+[audit.json](audit.json). Old raw FAIL labels remain unchanged; current
+eligibility is a separate judgment. No score or failed run was deleted by this
+audit.
+
 ## Why an automatic anchor was insufficient
 
 For R2, KA2, B3-belief, SG3, B2 and G1, the exact config and shift-driver hashes

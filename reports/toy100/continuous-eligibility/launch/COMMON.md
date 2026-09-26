@@ -19,6 +19,10 @@ disqualifying: explain why any retained initialization rule works at arbitrary
 training ages and does not require a user-operated phase switch.
 
 Read the read-only evidence paths supplied below, then act in your own checkout.
+Read the eligibility report's retained scores as research leads: disqualified
+configurations may contain useful ideas. Preserve their measured strengths and
+failures, address the exact disqualification, and re-earn the descendant's own
+scores. Disqualification is not a request to erase evidence or avoid the idea.
 Retain the adversarial learner, trainable particle prior and general-purpose
 API. No target fitting, post-hoc sample translation, per-toy policy, seed sweep,
 coefficient grid or borrowed passes. A focused mechanism may change schedules,
