@@ -47,8 +47,22 @@ def main():
     assert excursion["component_min_eigen_ratio"] >= .15
 
     summary = json.loads((root / "summary.json").read_text())
-    assert summary["status"] == "SELECTED_DEFAULT_PENDING_MERGE"
+    assert summary["status"] == "SELECTED_CANDIDATE_BLOCKED_CONTINUOUS_STABILITY"
     assert summary["selection_criterion"]["deadline_all_81_required"] is False
+    public = summary["public_trainer_verification"]
+    assert public["accepted_rate_policies"] == ["constant", "automatic_reversible_decay"]
+    assert public["merge_ready"] is False
+    assert public["automatic_reversible_decay_implemented"] is False
+    for arm in ("constant", "decay"):
+        result = json.loads((root / "constant-lr-api/evidence" / arm / "result.json").read_text())
+        arrival = result["recovery_extended"]
+        assert public[arm] == dict(
+            prehold_passing=result["prehold"]["passing_checks"], prehold_checks=result["prehold"]["checks"],
+            updates_to_first_pass=arrival["updates_to_first_pass"],
+            passing_from_first_arrival=arrival["passing_checks_from_first_pass"],
+            checks_from_first_arrival=arrival["checks_from_first_pass"],
+            final_passing_suffix_start=arrival["stable_suffix_start"],
+            final_passing_suffix_checks=arrival["stable_suffix_checks"])
     k3p = json.loads(gzip.decompress((root / "matched-replay/results/k3p-canonical.json.gz").read_bytes()))
     r2 = json.loads(gzip.decompress((root / "evidence/r2-shift.json.gz").read_bytes()))
     for name, data in (("KA2", original), ("K3P", k3p), ("R2", r2)):

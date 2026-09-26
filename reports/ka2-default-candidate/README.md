@@ -1,6 +1,19 @@
 # KA2 selected default: rationale and evidence
 
-**KA2 is the selected winner for the next default.** The selection considers
+**KA2 remains the selected research candidate, but merging it as the next
+default is blocked by the public trainer's constant-LR stability result.**
+The new [public API experiment](constant-lr-api/README.md) keeps all three
+learning rates constant for 4,600 updates. It reaches the shifted target after
+120 updates, but loses the original distribution before the shift and repeatedly
+leaves the new distribution afterward. Pre-shift retention is 61/120 checks;
+126/209 checks pass after first arrival. This is a retention and stability
+failure, not a fixed recovery-deadline failure. A subsequent matched decay run
+preserves 120/120 pre-shift checks but reaches the new target after 1,690 updates,
+with 48/52 passing observations afterward. The accepted release requirement is
+constant rates **or automatic reversible decay**. Neither run establishes the
+latter, and the current API has no automatic policy that lowers and restores LRs.
+
+The earlier research selection considers
 time to the new distribution and stability after arrival, while preserving
 the original distribution. The old requirement to pass every check in a fixed
 81-check deadline window is not the selection rule for this default.
@@ -188,13 +201,14 @@ Measured limits and remaining coverage:
   changes and long-term qualification are missing for the exact source.
 - The public optimizer/penalty factories now reproduce the research ring
   exactly. The matched replay does not exercise `GANTrainer` or all toy hosts.
-- Schedule independence and broader robustness remain unproven. This report
-  neither launches nor requests new seed experiments.
+- The new public `GANTrainer` experiment demonstrates instability at constant
+  learning rates with the tested defaults. Broader robustness remains unproven.
+  No seed variants were launched.
 
-**Recommendation:** prepare KA2 as the single selected default, with this
-retention/recovery/stability rationale and the observed limits stated plainly.
-Keep the PR unmerged and targeting `develop`, as requested. Selection does not
-turn missing benchmark coverage into a pass or erase recorded dropouts.
+**Recommendation:** keep the prepared single-default implementation in the
+unmerged draft targeting `develop`. Demonstrate stable continuous learning with
+constant rates or automatic reversible decay before promoting KA2 for release.
+The research selection and exact factory replay do not establish that release requirement.
 
 ## Provenance and offline audit
 

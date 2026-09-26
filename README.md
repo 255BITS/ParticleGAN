@@ -17,8 +17,11 @@ loop; the recipe builds the pieces.
 
 This branch prepares **KA2 as the selected single default** for the API,
 trainer and examples. It was chosen for the balance of retaining the original
-distribution, reaching a changed target and stability afterward. It remains
-unreleased; the measured dropouts and incomplete toy coverage are documented.
+distribution, reaching a changed target and stability afterward in the research
+run. **Release is blocked:** the public trainer loses stability at constant
+learning rates, and automatic reversible decay has not been implemented and
+verified. It remains an unmerged candidate, with those results and
+incomplete toy coverage documented.
 [Selection rationale and measured results](reports/ka2-default-candidate/README.md).
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)

@@ -5,10 +5,13 @@ KA2 formulation on this branch. Model names select the model/prior/encoder,
 not a different training method. Public examples use those same factories.
 The released 0.8.0 package still uses [K3P](k3p.md).
 
-KA2 was selected for full pre-shift retention together with reaching the new
-distribution and stability afterward. Arrival time and subsequent stability
+KA2 was selected in research for full pre-shift retention together with reaching
+the new distribution and stability afterward. Arrival time and subsequent stability
 are measured separately; the old 81-check deadline score is not a selection
-requirement. Later dropouts and incomplete 22-toy coverage remain documented.
+requirement. **The public trainer's constant-LR check now fails retention and
+stability. Automatic decay that can raise rates again is an acceptable route,
+but is not implemented or verified; release remains blocked.** Later dropouts
+and incomplete 22-toy coverage remain documented.
 [Selection rationale and evidence](../reports/ka2-default-candidate/README.md).
 
 ## Critic penalty and adaptive memory

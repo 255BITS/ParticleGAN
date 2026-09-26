@@ -1,5 +1,5 @@
 {
-  "status": "SELECTED_DEFAULT_PENDING_MERGE",
+  "status": "SELECTED_CANDIDATE_BLOCKED_CONTINUOUS_STABILITY",
   "original_shift": {
     "prehold": {
       "checks": 120,
@@ -658,6 +658,34 @@
       "published_settled_delay": 490,
       "checks_from_settled_arrival": 72,
       "passing_from_settled_arrival": 72
+    }
+  },
+  "public_trainer_verification": {
+    "report": "constant-lr-api/README.md",
+    "accepted_rate_policies": [
+      "constant",
+      "automatic_reversible_decay"
+    ],
+    "automatic_reversible_decay_implemented": false,
+    "merge_ready": false,
+    "no_seed_variants": true,
+    "constant": {
+      "prehold_passing": 61,
+      "prehold_checks": 120,
+      "updates_to_first_pass": 120,
+      "passing_from_first_arrival": 126,
+      "checks_from_first_arrival": 209,
+      "final_passing_suffix_start": 4460,
+      "final_passing_suffix_checks": 15
+    },
+    "decay": {
+      "prehold_passing": 120,
+      "prehold_checks": 120,
+      "updates_to_first_pass": 1690,
+      "passing_from_first_arrival": 48,
+      "checks_from_first_arrival": 52,
+      "final_passing_suffix_start": 4380,
+      "final_passing_suffix_checks": 23
     }
   }
 }
