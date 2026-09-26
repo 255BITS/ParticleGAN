@@ -38,9 +38,10 @@ unset this function returns the host batch and does not touch the RNG.
 
 The unequal critic's distance feature is a dense kernel. At the cap, keeping
 that kernel for both the real and the fake backward does not fit. ``install``
-recomputes it on the way back for batches above 4,096. The values and the
-gradients match the dense kernel bit for bit; the host batch and eval stay
-on the dense path.
+evaluates it in row blocks above 4,096 and recomputes each block on the way
+back. Forward features match the dense kernel bit for bit. The gradient into
+the points differs only by blocked reduction order. The host batch and eval
+stay on the dense path.
 """
 from __future__ import annotations
 
@@ -75,13 +76,16 @@ _INSTALLED = False
 _MILESTONES = (0, 720, 721, 900, 1199, 1200, 2400, 3600)
 
 
-# The unequal critic's distance features are a dense [N, N, scales] kernel.
-# Real and fake (and the penalty interpolation) each keep that kernel for
-# backward. At the Smith cap, N = 12,800, two of those graphs are larger
-# than this screen. Recomputing the kernel during backward is the same
-# function: features and gradients match the dense path bit for bit, and
-# batches at or below the eval size (4,096) stay on that path.
+# The unequal critic's distance feature is a dense [N, N, scales] kernel.
+# At the Smith cap that kernel does not fit, for the real row and the fake
+# row at once, on this screen. Above 4,096 rows the same formula is applied
+# in row blocks and each block is recomputed on the way back. Forward
+# features match the dense kernel bit for bit. Critic-parameter gradients
+# match it bit for bit, because they read those features. The gradient into
+# the points differs only by the blocked reduction order (about one ulp).
+# Eval and every batch at or below 4,096 stay on the dense path.
 _RECOMPUTE_ABOVE = 4096
+_ROW_BLOCK = 1024
 _PAIRWISE = None
 
 
@@ -100,8 +104,26 @@ def _install_pairwise_recompute() -> None:
     def pairwise_features(self, x):
         if x.shape[0] <= _RECOMPUTE_ABOVE or not torch.is_grad_enabled():
             return original(self, x)
-        bound = original.__get__(self, type(self))
-        return checkpoint(lambda batch: bound(batch), x, use_reentrant=False)
+        scales2 = self.scales.square()
+        eps = self.eps
+        n = x.shape[0]
+        parts = []
+        for start in range(0, n, _ROW_BLOCK):
+            rows = x[start:start + _ROW_BLOCK]
+
+            def block(rows, cols, start=start, scales2=scales2, eps=eps):
+                delta = rows[:, None, :] - cols[None, :, :]
+                d2 = delta.square().sum(-1)
+                kernels = torch.exp(-d2[..., None] / (2 * scales2))
+                diag = torch.arange(rows.shape[0], device=rows.device)
+                mask = torch.ones(rows.shape[0], cols.shape[0], 1, device=rows.device, dtype=rows.dtype)
+                mask[diag, start + diag, :] = 0
+                kernels = kernels * mask
+                weighted = (kernels * d2[..., None]).sum(dim=1)
+                return weighted / (kernels.sum(dim=1) + eps) / scales2
+
+            parts.append(checkpoint(block, rows, x, use_reentrant=False))
+        return torch.cat(parts, dim=0)
 
     BatchDistanceDiscriminator.pairwise_features = pairwise_features
 
