@@ -278,6 +278,7 @@ stress, and cross-seed + nudge confirmation.
 |---|---|---:|---:|---|---|
 | 1 | **R2: K3P + moment-surprise release (LEAD, winning)** | **114/120** (6 pre-shift checks short) | **72/81, delay 490** | **Yes — surprise-driven, no clock/budget reads** | **Top qualified score; 4/4 screens PASS, frozen 0/81 (moves)** |
 | 1t | **B3-belief: R2 gate under AdaBelief (TIE)** | **114/120** (identical 6 steps) | **73/81, delay 480** | **Yes — belief-surprise, same band shape** | **Tie, not a win; one check better, same hold gap; frozen/toys NOT_RUN** |
+| 1j | **ka2 asymmetric-Kalman (best JOINT)** | **120/120 FULL** | **50/81, delay 1120** | **Yes — certainty-gated EMA, asymmetric time constants** | **Only full-hold + real recovery; back-loaded (stable 3520); bundle persisted with receipt** |
 | 3 | SG3 graded memory | 114/120 (same 6 fails) | 43/81, delay 1080 | Release yes; LR/noise retained | Second family; latch engaged, 19 reseeds; beats B2 with R2-grade hold |
 | DQ | PM1 / PM3 | Both pass | 79/81 each | No — scheduled noise remains | DISQUALIFIED: schedule-dependent |
 | DQ | PB2 / DI2 / P3 | All pass | 77/81 each | No — scheduled components remain | DISQUALIFIED: schedule-dependent |
