@@ -295,6 +295,34 @@ contenders R2 wins outright — the only candidate pairing a schedule-free relea
 with measured hold and recovery. (R2 retains K3P's LR/noise level schedules as a
 labeled ablation; its release mechanism itself reads no clock, budget, or shift.)
 
+## Stability-since-arrival (delay-agnostic comparison) — September 26, 2026
+
+Per user direction, recovery is compared by the END state, not by speed: the
+deadline window grades how fast a candidate arrives, but a candidate that
+arrives late and stays is a candidate longer training qualifies. Metric:
+stability measured from each run's own arrival (`stable_from`, first sustained
+re-acquisition) to the end of its window, plus a stable-end boolean (final 8
+modes at HQ >= .90 with a live passing streak). Delay is reported, not graded.
+
+| Candidate | Arrived (stable_from) | Since-arrival stability | Final | Stable end? |
+|---|---:|---:|---|---|
+| B3-belief | 2880 | 73/73 = 100% | 8 / 1.0 | TRUE |
+| R2 | 2890 | 72/72 = 100% | 8 / 0.997 | TRUE |
+| B2 | 3210 | 40/40 = 100% | 8 / 0.988 | TRUE |
+| SG3 | 3480 | 13/13 = 100% | 8 / 0.919 | TRUE |
+| ka2 | 3520 | 9/9 = 100% (109 pending extended run) | 8 / 0.996 | TRUE* |
+| G1 | never | — | 8 / 0.891 intermittent | FALSE |
+
+*ka2's 9 is window-truncated (window ends 3600), not arrival-truncated; an
+extended 4600-step ka2 run is measuring 3520→4600 sustain directly.
+
+Reading: everyone who arrives, stays — arrival is the whole game, and no
+arrival has ever left. G1 is exposed by this metric: 8 final modes but suffix
+0 (visits without staying) where deadline-counting showed motion. With delay
+ungraded the top rows tie on stability and the tiebreak returns to hold: ka2
+is the only arrival with a full 120/120 hold, which is why the ka2+G-boost
+combo round exists. Delay figures retained in the rows above for reference.
+
 **The mechanism, mathematically.** The critic penalty keeps K3P's three terms —
 early R1 acquisition (A), one-sided L2 caps (B), EMA-critic gradient anchor P,
 `decay 0.999` — blended as `1/2·s·A + 1/2·(1−s)·(B + W·P)` with `s = 0.5` fixed
