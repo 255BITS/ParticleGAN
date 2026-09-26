@@ -7,6 +7,7 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 from __future__ import annotations
 
 from contextlib import nullcontext
+import os
 
 from .observation import checkpoint, schedule_optimizer
 
@@ -189,6 +190,23 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
 
     curve = []
     live_curve = []
+
+    def _diag():
+        return bool(os.environ.get("K3P_DIAG_TRAJ"))
+
+    if _diag():
+        from benchmarks.toy100.diag_traj import (
+            begin_step, flush_step, grad_report, init_fingerprint, observe_critic,
+            particle_support,
+        )
+        begin_step()
+        note_row = init_fingerprint(generator, critic, prior)
+        note_row.update(particle_support(generator, prior, means, SIGMA))
+        note_row["penalty_cls"] = f"{type(regularizer).__module__}.{type(regularizer).__name__}"
+        note_row["penalty_fn"] = getattr(getattr(regularizer, "penalty", None), "__name__", None)
+        note_row["penalty_arm"] = getattr(regularizer, "arm", None)
+        note_row["batch"] = int(batch)
+        flush_step(0, note_row)
     for step in range(recipe.steps):
         if noise_policy is not None:
             noise_policy.set_step(step)
@@ -202,16 +220,36 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
         with context:
             fake = generator(latent).detach()
-        d_loss = gan.d_loss(critic(real), critic(fake))
+        if _diag():
+            begin_step()
+            real_logits = critic(real)
+            fake_logits = critic(fake)
+            d_loss = gan.d_loss(real_logits, fake_logits)
+            observe_critic("d", real, fake, real_logits, fake_logits, means, SIGMA)
+        else:
+            d_loss = gan.d_loss(critic(real), critic(fake))
         d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
         opt_d.zero_grad()
         d_loss.backward()
+        if _diag():
+            grad_report("d", opt_d, prior)
         schedule_optimizer(opt_d, step)
         opt_d.step()
 
         latent, _ = prior.sample(batch, generator=stream)
         fake = generator(latent)
-        if gan.mode in ("rp", "ra"):
+        if _diag():
+            if gan.mode in ("rp", "ra"):
+                real_g = sample_ring(means, batch, SIGMA, stream)
+                fake_logits = critic(fake)
+                real_logits = critic(real_g)
+                g_loss = gan.g_loss(fake_logits, real_logits)
+                observe_critic("g", real_g, fake, real_logits, fake_logits, means, SIGMA)
+            else:
+                # Stranger / unpaired pairing: real and fake are scored apart.
+                fake_logits = critic(fake)
+                g_loss = gan.g_loss(fake_logits)
+        elif gan.mode in ("rp", "ra"):
             real_g = sample_ring(means, batch, SIGMA, stream)
             g_loss = gan.g_loss(critic(fake), critic(real_g))
         else:
@@ -225,12 +263,22 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         g_loss = g_loss + vicreg(prior.z)
         opt_g.zero_grad()
         g_loss.backward()
+        if _diag():
+            grad_report("g", opt_g, prior)
         schedule_optimizer(opt_g, step)
         opt_g.step()
         with torch.no_grad():
             for ema, param in zip(ema_g, generator.parameters()):
                 ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)
             ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
+        if _diag():
+            extra = particle_support(generator, prior, means, SIGMA)
+            if noise_policy is not None:
+                extra["input_sigma"] = round(float(noise_policy.input_sigma), 6)
+                extra["output_sigma"] = round(float(noise_policy.output_sigma), 6)
+            extra["lr_d"] = [round(float(group["lr"]), 8) for group in opt_d.param_groups]
+            extra["lr_g"] = [round(float(group["lr"]), 8) for group in opt_g.param_groups]
+            flush_step(step + 1, extra)
         checkpoint(step + 1, lambda: measure(step + 1))
         if diagnostics and (step + 1) % 200 == 0:
             curve.append(snapshot(step + 1))

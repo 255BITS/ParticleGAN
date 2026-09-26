@@ -16,7 +16,7 @@ Critic guard: before each critic Adam step, a tensor with >= GUARD_MIN_STEPS pri
 exceeds GUARD_C * sqrt(mean bias-corrected v) is scaled down to that ratio (no-op multiply by 1.0 otherwise).
 The critic is the first optimizer stepped after a penalty call. No host or task identity is read.
 """
-import atexit, json, sys
+import atexit, json, os, sys
 from pathlib import Path
 import torch
 import torch.nn.functional as F
@@ -34,6 +34,13 @@ receipt = {'calls': 0, 'dimensions': {}, 'extra_critic_forwards': 0, 'rule': 'k3
            'critic_parameters': None, 'lr_max': None, 'lr_last': None, 's_trace': [], 'rule': 'k3p', 'anchor_decay': ANCHOR_DECAY,
            'anchor_started_call': None, 'prox_trace': []}
 _state = {'ema': None, 'critic': None, 'pending': False, 'lr_max': 0.0, 'lr_last': None, 'depth': 0, 'clips': [], 'critic_ref': None}
+
+
+def _diag(**kwargs):
+    if not os.environ.get('K3P_DIAG_TRAJ'):
+        return
+    from benchmarks.toy100.diag_traj import note
+    note(**kwargs)
 
 
 def handover_weight():
@@ -79,6 +86,7 @@ def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stat
     s = handover_weight()
     receipt['calls'] += 1
     receipt['dimensions'][str(dimension)] = receipt['dimensions'].get(str(dimension), 0) + 1
+    prox_logged, phase = None, 'a'
     if s >= 1.0:
         real_squared = self._grad_norm(D, x_real, squared=True) / dimension
         fake_norm = self._grad_norm(D, x_fake, squared=False) / dimension ** 0.5
@@ -92,15 +100,18 @@ def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stat
         n_r = torch.sqrt(sq_r + 1e-12)
         n_f = self._grad_norm(D, x_fake, squared=False)
         prox = anchored_gradient_gap(D, x_real, g, dimension)
+        prox_logged = prox
         if s > 0.0:
             a_term = (sq_r / dimension).mean() + (n_f / dimension ** 0.5 - self.kappa).relu().square().mean()
             b_term = F.relu(n_r - self.kappa).pow(2).mean() + F.relu(n_f - self.kappa).pow(2).mean() + prox
             penalty = (coefficient / 2.0) * (s * a_term + (1.0 - s) * b_term)
+            phase = 'blend'
             receipt['blend_calls'] += 1
             if receipt['first_blend_call'] is None:
                 receipt['first_blend_call'] = receipt['calls']
         else:
             penalty = (coefficient / 2.0) * (F.relu(n_r - self.kappa).pow(2).mean() + F.relu(n_f - self.kappa).pow(2).mean() + prox)
+            phase = 'b'
             receipt['pure_b_calls'] += 1
             if receipt['first_pure_b_call'] is None:
                 receipt['first_pure_b_call'] = receipt['calls']
@@ -108,6 +119,10 @@ def scaled_penalty(self, D, x_real, x_fake, step=1, generator=None, collect_stat
             receipt['prox_trace'].append([receipt['calls'], float(prox.detach())])
     if receipt['calls'] == 1 or receipt['calls'] % 50 == 0:
         receipt['s_trace'].append([receipt['calls'], round(s, 6)])
+    if os.environ.get('K3P_DIAG_TRAJ'):
+        _diag(s=round(float(s), 6), pen=float(penalty.detach()),
+              prox=None if prox_logged is None else float(prox_logged.detach()),
+              phase=phase)
     stats = {'applied': True, 'pen': float(penalty.detach()), 'fake_cap': self.kappa, 's': s} if collect_stats else {}
     return penalty, stats
 
@@ -132,7 +147,12 @@ def _guard(opt, args, kwargs):
             p.grad.mul_(torch.where(clip, GUARD_C / ratio, torch.ones_like(ratio)))
             flags.append(clip)
     if flags:
-        _state['clips'].append(torch.stack(flags).sum())
+        count = torch.stack(flags).sum()
+        _state['clips'].append(count)
+        if os.environ.get('K3P_DIAG_TRAJ'):
+            _diag(guard_clipped=int(count))
+    elif os.environ.get('K3P_DIAG_TRAJ') and _state['critic'] is not None and id(opt) == _state['critic']:
+        _diag(guard_clipped=0)
 
 
 def _record(opt, args, kwargs):
@@ -148,6 +168,14 @@ def _record(opt, args, kwargs):
     if _state['depth'] == 1:
         if _state['ema'] is not None:
             with torch.no_grad():
+                if os.environ.get('K3P_DIAG_TRAJ'):
+                    sq, numel = None, 0
+                    for e, p in zip(_state['ema'], _critic_params()):
+                        gap = (e - p.detach()).flatten()
+                        sq = gap.square().sum() if sq is None else sq + gap.square().sum()
+                        numel += gap.numel()
+                    rms = (sq / numel).sqrt()
+                    _diag(ema_gap_rms=float(rms), ema_pull_rms=float(rms * (1.0 - ANCHOR_DECAY)))
                 for e, p in zip(_state['ema'], _critic_params()):
                     e.mul_(ANCHOR_DECAY).add_(p.detach(), alpha=1.0 - ANCHOR_DECAY)
         lr = max(float(g['lr']) for g in opt.param_groups)

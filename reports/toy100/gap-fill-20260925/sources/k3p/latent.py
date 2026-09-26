@@ -3,12 +3,28 @@ u_i = (1 - (1 - rho_i) / 2) * g_i: history removes at most half of the current r
 (rho_i = 1 without history).  Inactive rows get u_i = 0 (no transport).  Applied only to registered
 ParticlePrior tables with a missing row this step AND cumulative row-observation rate < 1/2;
 otherwise the exact parent Adam step (betas (0,.999), state untouched).  Parent v from raw g."""
+import os
 import torch
 import response
 B1 = .5
 receipt = {'formula': 'u=(1-(1-rho)/2)*g in [g/2,g], rho=(1+cos(g,h_last_observed))/2, rho=1 without history; scope: missing row and cumulative observed rate<1/2; v parent',
            'calls': 0, 'scoped_calls': 0, 'rows': [], 'tables': {}}
 stats = {}  # id(p) -> [observed row-steps, total row-steps]
+
+
+def _diag_prior(p, *, scoped, active_fraction, rate, rho_mean):
+    if not os.environ.get('K3P_DIAG_TRAJ'):
+        return
+    from benchmarks.toy100.diag_traj import note
+    z = p.detach()
+    row = z.norm(dim=1)
+    note(a2_scoped=bool(scoped),
+         a2_active_fraction=round(float(active_fraction), 6),
+         a2_cumulative_rate=round(float(rate), 6),
+         a2_rho_mean=None if rho_mean is None else round(float(rho_mean), 6),
+         prior_row_norm_mean=round(float(row.mean()), 6),
+         prior_row_norm_std=round(float(row.std(unbiased=False)), 6),
+         prior_coord_std=round(float(z.std(unbiased=False)), 6))
 
 
 def begin(opt):
@@ -35,6 +51,7 @@ def begin(opt):
             if sparse and 'anchor_prev' not in state:
                 state['anchor_prev'] = torch.zeros_like(p)
             if 'anchor_prev' not in state:
+                _diag_prior(p, scoped=False, active_fraction=count / active.numel(), rate=rate, rho_mean=None)
                 continue
             h = state['anchor_prev']
             scoped = sparse and rate < .5
@@ -56,6 +73,8 @@ def begin(opt):
             if receipt['calls'] <= 20 or receipt['calls'] % 50 == 0:
                 receipt['rows'].append(info)
             receipt['tables'][str(active.numel())] = dict(cumulative_rate=rate, scoped_last=scoped)
+            _diag_prior(p, scoped=scoped, active_fraction=info['active_fraction'], rate=rate,
+                        rho_mean=info.get('rho_mean_active'))
     return saved
 
 
