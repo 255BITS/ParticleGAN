@@ -7,7 +7,7 @@ schedule with no mechanism. Other names set ``K3P_DYNAMICS`` for the child.
 CPU numbers do not rank against the A6000. One JSON line per finished job.
 
     python -u reports/toy100/constant-lr-dynamics/screen.py --dynamics baseline --gates ring
-    python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics unit_rms --gates ring hold shift unequal
+    python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics d_replay --gates ring hold shift unequal
 """
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ HERE = Path(__file__).resolve().parent
 K3P = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p"
 OFFSETS = (0, 101, 202, 303, 404, 505, 606, 707)
 GATES = ("ring", "hold", "shift", "unequal")
-DYNAMICS = ("baseline", "unit_rms", "pair_chord", "shared_batch")
+DYNAMICS = ("baseline", "unit_rms", "pair_chord", "shared_batch", "d_replay")
 
 
 def constant_config(source: Path, dest: Path) -> dict:
@@ -80,6 +80,9 @@ def summarize(gate: str, output: Path, code: int) -> dict:
         live = (payload.get("result") or {}).get("live") or {}
         row["modes"] = live.get("modes")
         row["hq"] = live.get("hq")
+        for key in ("mass_tv", "min_mass_ratio", "sw1_normalized"):
+            if key in live:
+                row[key] = live.get(key)
         conv = (payload.get("result") or {}).get("convergence") or {}
         row["passing_suffix"] = conv.get("passing_suffix")
     return row

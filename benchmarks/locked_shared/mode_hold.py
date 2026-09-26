@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+from particlegan.dynamics.d_replay import replay_fakes
 from particlegan.dynamics.shared_batch import shared_batch_update
 
 N_MODES = 8
@@ -203,6 +204,9 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
         with context:
             fake = generator(latent).detach()
+        # d_replay mixes this critic batch only. The generator step below
+        # still draws its own latents and scores current fakes.
+        fake = replay_fakes(fake)
         d_loss = gan.d_loss(critic(real), critic(fake))
         d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
         opt_d.zero_grad()
