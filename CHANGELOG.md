@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — KA2 default candidate
+## Unreleased — KA2 selected default
 
 - Prepare KA2 as the single recipe formulation across the API, GANTrainer and
   examples. Critic surprise controls the anchor gate and asymmetric EMA rate;
@@ -12,9 +12,11 @@
   the fastest adaptive critic EMA decay. Public factory calls stay the same.
 - Preserve fixed floating buffers exactly during adaptive critic EMA updates;
   Fourier frequencies must not drift as the EMA decay changes.
-- This is an unmerged release candidate, not a qualified winner. Preserve the
-  exact research source and later failures in `reports/ka2-default-candidate/`.
-  K3P's historical 22/22 result and README animation do not qualify KA2.
+- Select KA2 for retention, time to the new distribution and stability after
+  arrival. The old 81/81 deadline score is not a selection requirement.
+  This remains unmerged and unreleased. Preserve the exact research source,
+  later dropouts and incomplete toy coverage in `reports/ka2-default-candidate/`.
+  K3P's historical 22/22 result and README animation are separate evidence.
 
 ## 0.8.0 — 2026-09-25
 

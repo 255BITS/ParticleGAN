@@ -491,6 +491,13 @@
       "original_path": "/ml2/hypergan/gan-attempts/lead-ka2-bundle/mechanism-receipt.json",
       "original_sha256": "defae0e7692ad7b5fd67597370efba77bc204f7e163ca5e0f0842418370be3b4",
       "representation": "byte-identical copy"
+    },
+    {
+      "artifact": "evidence/r2-shift.json.gz",
+      "artifact_sha256": "d94418397599696f590e50109324eb6c901074046f37829009f24d994126cd79",
+      "original_path": "/ml2/hypergan/gan-attempts/formulations-20260925T222617Z/b3_release2/20260925T222617Z-4046392/out/r2-shift/result.json",
+      "original_sha256": "9f1925a91de04b01661f7eba7467637bb5243d8ea89f84e043280c21ed5f9baa",
+      "representation": "gzip of complete original JSON; no fields omitted"
     }
   ],
   "identity_checks": {

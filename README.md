@@ -15,10 +15,11 @@ and the optimizer settings and schedules that go
 with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
 loop; the recipe builds the pieces.
 
-This branch prepares **KA2 as the single default** for the API, trainer and
-examples. It is an unreleased candidate: later recovery dropouts and an
-unequal-mass toy failure prevent a qualified-winner claim.
-[Measured results and remaining qualification](reports/ka2-default-candidate/README.md).
+This branch prepares **KA2 as the selected single default** for the API,
+trainer and examples. It was chosen for the balance of retaining the original
+distribution, reaching a changed target and stability afterward. It remains
+unreleased; the measured dropouts and incomplete toy coverage are documented.
+[Selection rationale and measured results](reports/ka2-default-candidate/README.md).
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
 

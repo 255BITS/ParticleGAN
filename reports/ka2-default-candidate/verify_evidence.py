@@ -2,6 +2,7 @@
 from pathlib import Path
 import hashlib
 import json
+import gzip
 
 
 def main():
@@ -44,6 +45,27 @@ def main():
     excursion = next(row for row in mass["result"]["observations"] if row["step"] == 1000)
     assert excursion["component_covariance_error"] > .85
     assert excursion["component_min_eigen_ratio"] >= .15
+
+    summary = json.loads((root / "summary.json").read_text())
+    assert summary["status"] == "SELECTED_DEFAULT_PENDING_MERGE"
+    assert summary["selection_criterion"]["deadline_all_81_required"] is False
+    k3p = json.loads(gzip.decompress((root / "matched-replay/results/k3p-canonical.json.gz").read_bytes()))
+    r2 = json.loads(gzip.decompress((root / "evidence/r2-shift.json.gz").read_bytes()))
+    for name, data in (("KA2", original), ("K3P", k3p), ("R2", r2)):
+        rows = [row for row in data["diagnostic"] if row["step"] > 2400]
+        good = lambda row: row["modes"] >= 8 and row["hq"] >= .90
+        first = next(row["step"] for row in rows if good(row))
+        after = [row for row in rows if row["step"] >= first]
+        settled = data["shift_recovery"]["stable_from_step"]
+        final_run = [row for row in rows if row["step"] >= settled]
+        assert summary["arrival_stability"][name] == dict(
+            shift_step=2400, end_step=3600,
+            prehold_pass=data["continued_hold"]["passing_checks"],
+            prehold_checks=data["continued_hold"]["checks"],
+            first_observed_arrival=first, first_observed_delay=first - 2400,
+            checks_from_first_arrival=len(after), passing_from_first_arrival=sum(map(good, after)),
+            published_settled_arrival=settled, published_settled_delay=settled - 2400,
+            checks_from_settled_arrival=len(final_run), passing_from_settled_arrival=sum(map(good, final_run)))
     print(f"PASS: {len(manifest['files'])} artifact hashes; exact extension prefix; 105/109 extension checks; mass FAIL/PASS/FAIL/PASS. No training run.")
 
 

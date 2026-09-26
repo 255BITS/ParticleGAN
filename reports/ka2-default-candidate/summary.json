@@ -1,6 +1,5 @@
 {
-  "status": "CANDIDATE_NOT_QUALIFIED_WINNER",
-  "new_runs": false,
+  "status": "SELECTED_DEFAULT_PENDING_MERGE",
   "original_shift": {
     "prehold": {
       "checks": 120,
@@ -600,5 +599,65 @@
     "counted_fail": 1,
     "not_run": 20,
     "note": "A post-stop unequal_width PASS was explicitly diagnostic only; earlier initial screens separately passed mode_hold/unequal_width/stripes."
+  },
+  "initial_assessment_new_runs": false,
+  "selection_criterion": {
+    "basis": "user-directed arrival time and subsequent stability, with retention of the original distribution",
+    "deadline_all_81_required": false,
+    "published_settled_arrival_definition": "start of the final uninterrupted passing run in the original 3600-step window; keep this arrival fixed when reading the extension",
+    "first_observation_definition": "first recorded post-shift observation with all eight modes and HQ >= 0.90; ten-update observation spacing",
+    "raw_deadline_verdicts": "historical evaluator outputs, not current selection requirements",
+    "rationale": "KA2 preserves full pre-shift hold and reaches a stable end; R2 settles sooner but loses six pre-shift checks. Selection does not assert zero later dropouts or complete 22-task coverage."
+  },
+  "matched_replay": {
+    "report": "matched-replay/README.md",
+    "K3P": "EXACT_MATCH",
+    "KA2": "EXACT_MATCH",
+    "steps_each": 3600,
+    "scope": "public optimizer and penalty factories in the frozen research host"
+  },
+  "arrival_stability": {
+    "KA2": {
+      "shift_step": 2400,
+      "end_step": 3600,
+      "prehold_pass": 120,
+      "prehold_checks": 120,
+      "first_observed_arrival": 3070,
+      "first_observed_delay": 670,
+      "checks_from_first_arrival": 54,
+      "passing_from_first_arrival": 50,
+      "published_settled_arrival": 3520,
+      "published_settled_delay": 1120,
+      "checks_from_settled_arrival": 9,
+      "passing_from_settled_arrival": 9
+    },
+    "K3P": {
+      "shift_step": 2400,
+      "end_step": 3600,
+      "prehold_pass": 120,
+      "prehold_checks": 120,
+      "first_observed_arrival": 3140,
+      "first_observed_delay": 740,
+      "checks_from_first_arrival": 47,
+      "passing_from_first_arrival": 28,
+      "published_settled_arrival": 3530,
+      "published_settled_delay": 1130,
+      "checks_from_settled_arrival": 8,
+      "passing_from_settled_arrival": 8
+    },
+    "R2": {
+      "shift_step": 2400,
+      "end_step": 3600,
+      "prehold_pass": 114,
+      "prehold_checks": 120,
+      "first_observed_arrival": 2890,
+      "first_observed_delay": 490,
+      "checks_from_first_arrival": 72,
+      "passing_from_first_arrival": 72,
+      "published_settled_arrival": 2890,
+      "published_settled_delay": 490,
+      "checks_from_settled_arrival": 72,
+      "passing_from_settled_arrival": 72
+    }
   }
 }

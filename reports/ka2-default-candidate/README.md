@@ -1,10 +1,17 @@
-# KA2 default candidate: evidence and release assessment
+# KA2 selected default: rationale and evidence
 
-**KA2 is a candidate for the next default, not a qualified winner.** It is the
-most promising historical challenger for combining an intact pre-shift hold
-with eventual recovery. The completed extension and toy results still expose
-instability. This draft makes the proposed package change reviewable; these
-historical measurements do not certify the new package implementation.
+**KA2 is the selected winner for the next default.** The selection considers
+time to the new distribution and stability after arrival, while preserving
+the original distribution. The old requirement to pass every check in a fixed
+81-check deadline window is not the selection rule for this default.
+
+KA2 is the chosen balance: it retains all 120 pre-shift checks, reaches the
+changed target and finishes stable. R2 arrives sooner and stays there in its
+original window, but loses six pre-shift checks. Selection does not imply
+perfect stability or completed coverage of every benchmark; the extension's
+dropouts and incomplete toy suite remain part of the evidence. The corrected
+public optimizer/penalty implementation now exactly reproduces KA2's original
+3600-step research run. This PR remains unmerged and targets `develop`.
 
 The initial assessment used existing artifacts on September 26, 2026. The seed
 results below already existed. A subsequent [matched implementation replay](matched-replay/README.md)
@@ -14,16 +21,34 @@ is separate from the historical 22-task qualification below.
 
 ## Recorded results
 
-| Configuration and scope | Hold | Recovery | Toy qualification |
-|---|---|---|---|
-| Exact historical KA2 | Pre-shift 120/120 checks; minimum HQ .91943 | 50/81 deadline checks; final 8 modes, HQ .99561 at update 3600 | Initial focused screens 3 PASS / 1 FAIL; later full-suite attempt stopped at unequal mass; no native gates |
-| KA2, same source, extended to 4600 | Same 120/120 pre-shift checks | **105/109 checks pass from the previously reported arrival at 3520**; four new failures; final 8 modes, HQ .99927 | No additional toys in this run |
-| [Historical R2](historical-reports/r2-full-suite-attempt.md) | Pre-shift 114/120 checks | 72/81 deadline checks; earlier final passing suffix starts at 2890 | Later exact-source sweep 19 transfer PASS; grid100 FAIL; remaining two natives not run |
-| [Selected historical K3P](historical-reports/selected-k3p.md) | Own hold 1200/1200 + extension 300/300 | 28/81 deadline checks, FAIL | Declared 22/22 under its saved research configuration |
-| [Public package 0.8.0 K3P baseline](historical-reports/public-package-baseline.md) | Own hold 1200/1200 + extension 300/300 | 0/81 deadline checks, FAIL; pre-shift 120/120 | Full suite NOT_RUN for this package baseline |
+The target moves at update 2400. A passing observation has eight modes and
+HQ at least .90. Checks are ten updates apart. The published settled arrival
+starts the final uninterrupted passing run in the original window; it is not
+the first passing observation or a guarantee of future stability.
 
-The research K3P and public-package rows are context, not a controlled direct
-comparison with the draft KA2 package implementation. Historical K3P's declared
+| Research formulation, through 3600 | Pre-shift hold | Published settled arrival (delay) | Checks from that arrival to 3600 |
+|---|---:|---|---:|
+| **KA2, selected** | **120/120** | 3520 (+1120) | **9/9** |
+| [R2](historical-reports/r2-full-suite-attempt.md) | 114/120 | 2890 (+490) | 72/72 |
+| [K3P](historical-reports/selected-k3p.md) | 120/120 | 3530 (+1130) | 8/8 |
+
+The original settled-arrival comparison ends stable for these runs. R2
+recovers sooner, but KA2 wins the joint choice by preserving the full pre-shift
+hold. From KA2's fixed reported arrival at 3520, the completed extension passes
+**105/109** checks through 4600, including four later departures.
+
+First arrival supplies additional context without hiding earlier departures:
+KA2 first passes at 3070 (+670), then passes 50/54 checks through 3600. K3P
+first passes at 3140 (+740), then 28/47. R2 first passes at its settled arrival,
+2890 (+490), then 72/72. KA2 is not claimed to recover faster than R2.
+
+The archived deadline fractions (KA2 50/81, R2 72/81, K3P 28/81) and raw
+`deadline_pass`/`status` fields retain their original evaluator meaning. They
+are historical diagnostics, not the selection requirement used here.
+
+The older [public 0.8.0 baseline](historical-reports/public-package-baseline.md)
+changed the experiment and is not part of this matched selection table.
+Historical K3P's declared
 22/22 does not establish seed robustness. KA2's 120 pre-shift observations are
 spaced ten updates apart; they are **not** the independent own-state hold gate
 with 1200 dense passing checks and a 300-check extension. A descendant's hold
@@ -32,7 +57,8 @@ result cannot be assigned to the exact KA2 source.
 KA2's matched frozen control has the same 120/120 pre-shift result and then
 0/81 recovery checks with zero final modes. Its optimizer counters remain at
 2400 after the target shift, while live KA2 reaches 3600. This supports active
-adaptation in the historical live run, without establishing sustained recovery.
+adaptation in the historical live run. Post-arrival stability is reported
+separately above and in the extension below.
 The evidence retains initialization proofs, counters, schedules and complete
 diagnostic sequences.
 
@@ -53,7 +79,8 @@ also passed from 3070 through 3470 and then failed at 3480–3510. Reporting onl
 the last passing suffix as an arrival time hides those earlier departures.
 The extension therefore demonstrates **105/109**, or 96.33%, passing checks
 from 3520 through 4600, rather than uninterrupted stability. Its full recovery
-window remains FAIL (146/181 deadline-window checks in the longer driver).
+window is labeled FAIL by the historical deadline grader (146/181 checks).
+That label does not decide selection under the arrival-and-stability criterion.
 
 The extended source differs from the original driver only in `steps=3600` →
 `steps=4600`; mechanism, config, latent and response files are byte-identical.
@@ -97,7 +124,7 @@ already-started unequal-width run passed after the stop and was labeled
 diagnostic only. The earlier initial KA2 screen independently recorded
 mode_hold, unequal_width and stripes as PASS. None of these scores is 22/22.
 
-## Why propose KA2, and what still blocks release
+## Why select KA2, and what the evidence covers
 
 ### The 22/22 result is not a failed KA2 API replication
 
@@ -132,8 +159,10 @@ host with `GANTrainer` or repeat the complete 22-task suite.
 
 ### Selection rationale
 
-The research rationale is specific: compared with R2, KA2 trades faster
-relearning for an intact pre-shift hold. A gradual response to persistent
+The research rationale is specific: compared with R2, KA2 accepts slower
+relearning in exchange for an intact pre-shift hold and a stable finish.
+Compared with K3P, it first reaches the changed target earlier and has fewer
+post-arrival departures in the shared window. A gradual response to persistent
 critic surprise changes the critic memory update rate, while a hysteretic
 gate releases the anchor penalty. KA2 has a fixed 0.5 blend after its initial
 acquisition phase, slow attack (1/60), fast release (0.5), surprise thresholds
@@ -148,7 +177,7 @@ same-architecture challengers: 799 pure calls plus 2801 blended calls, or
 wall-clock differences do not establish a speed advantage. Package performance
 has not been established by these archived runs.
 
-Release blockers and missing evidence:
+Measured limits and remaining coverage:
 
 - Recurring post-recovery failures, including four newly visible in the 4600
   extension, contradict uninterrupted stability.
@@ -157,16 +186,15 @@ Release blockers and missing evidence:
   including all three native coverage **and** accuracy gates.
 - Independent own-state hold1200 + extension300, delayed/repeated target
   changes and long-term qualification are missing for the exact source.
-- The package port needs evidence at its real public entry point; source
-  parity and unit checks alone do not establish package-level quality.
+- The public optimizer/penalty factories now reproduce the research ring
+  exactly. The matched replay does not exercise `GANTrainer` or all toy hosts.
 - Schedule independence and broader robustness remain unproven. This report
   neither launches nor requests new seed experiments.
 
-**Recommendation:** keep the proposal as an unmerged draft candidate. KA2 is a
-reasonable formulation to make concrete for review, but the available data
-does not support declaring it a proven replacement for K3P. Choosing it now
-would be an explicit acceptance of incomplete qualification and measured
-instability, rather than the result of a fully passed winner gate.
+**Recommendation:** prepare KA2 as the single selected default, with this
+retention/recovery/stability rationale and the observed limits stated plainly.
+Keep the PR unmerged and targeting `develop`, as requested. Selection does not
+turn missing benchmark coverage into a pass or erase recorded dropouts.
 
 ## Provenance and offline audit
 

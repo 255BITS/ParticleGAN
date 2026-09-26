@@ -1,14 +1,15 @@
-# KA2: the candidate default formulation
+# KA2: the selected default formulation
 
 Every `get_recipe()` model family, `Recipe()` and `GANTrainer` uses the same
 KA2 formulation on this branch. Model names select the model/prior/encoder,
 not a different training method. Public examples use those same factories.
 The released 0.8.0 package still uses [K3P](k3p.md).
 
-KA2 is a candidate for promotion. It combines full pre-shift retention with
-recovery in the recorded ring experiment, but has later recovery dropouts and
-an unequal-mass toy failure. It has not passed a full 22-toy qualification.
-[Evidence, provenance and release blockers](../reports/ka2-default-candidate/README.md).
+KA2 was selected for full pre-shift retention together with reaching the new
+distribution and stability afterward. Arrival time and subsequent stability
+are measured separately; the old 81-check deadline score is not a selection
+requirement. Later dropouts and incomplete 22-toy coverage remain documented.
+[Selection rationale and evidence](../reports/ka2-default-candidate/README.md).
 
 ## Critic penalty and adaptive memory
 

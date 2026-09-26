@@ -12,14 +12,21 @@ It does **not** exercise `GANTrainer` or repeat the full 22-task suite.
 
 ## Completed measurements
 
-| Formulation | Research hold | Public hold | Research recovery | Public recovery | Exact update comparison |
-|---|---:|---:|---:|---:|---|
-| K3P, public 0.8.0 | 120/120 | 120/120 | 28/81 | 28/81 | All 7,200 optimizer updates agree |
-| KA2, corrected draft | 120/120 | 120/120 | 50/81 | 50/81 | All 7,200 optimizer updates agree |
+| Formulation | Hold, both implementations | Published settled arrival after shift, both | Stability from that arrival to 3600, both | Exact update comparison |
+|---|---:|---:|---:|---|
+| K3P, public 0.8.0 | 120/120 | 1130 updates (step 3530) | 8/8 | All 7,200 optimizer updates agree |
+| KA2, corrected draft | 120/120 | 1120 updates (step 3520) | 9/9 | All 7,200 optimizer updates agree |
 
-Hold checks occur every ten steps from 1210 through 2400. Recovery checks
-cover the fixed deadline window, 2800 through 3600. Recovery requires 81/81;
-matching the research result does not turn its failing recovery into a pass.
+Hold checks occur every ten steps from 1210 through 2400. Selection measures
+time to the new distribution and stability afterward. There is no 81/81
+deadline requirement. Raw result files preserve the historical grader's
+deadline fractions (K3P 28/81, KA2 50/81) and FAIL labels for provenance;
+those labels do not decide the selected default.
+
+Published settled arrival starts the final passing run in this original
+window. First passing observations occur earlier: K3P at 3140 (+740 updates),
+then 28/47 checks pass; KA2 at 3070 (+670), then 50/54. The matched replay
+reproduces all these observations, including intervening departures.
 
 For K3P, every recorded loss, raw and post-guard gradient, parameter tensor,
 Adam moment/counter, applied learning rate and critic EMA parameter agrees.
@@ -33,9 +40,12 @@ digest and length, gate, adaptive rate, and EMA update/skip/reseed counts at
 every critic update. All diagnostics match the original KA2 archive.
 [Machine-readable KA2 comparison](ka2-comparison.json).
 
-**Selection:** KA2 retains the measured hold and improves recovery from 28/81
-to 50/81. That is a reason to investigate it, not a completed winner gate.
-Both recovery results fail; KA2's full 22-task qualification remains incomplete.
+**Selection:** KA2 is the chosen default for preserving the original
+distribution while reaching the changed target and finishing stable. R2
+recovers sooner but loses pre-shift stability (114/120); KA2 keeps 120/120.
+The separate extension passes 105/109 checks from KA2's reported arrival,
+so selection is not a claim of zero later dropouts. Full 22-task coverage
+remains incomplete. See the [selection rationale](../README.md).
 
 ## A real KA2 rounding defect found during the audit
 
