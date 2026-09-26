@@ -24,10 +24,14 @@ p.add_argument('--prior-floor', type=float, required=True)
 p.add_argument('--anneal-start', type=float, default=.6)
 p.add_argument('--steps', type=int, default=7500)
 p.add_argument('--post-window', type=int, default=300)
+p.add_argument('--init', default=None, help='family E deterministic orthogonal init name')
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))
 import torch
+if a.init:
+    from particlegan.family_e_init import PATCH_DEFAULT, install
+    install(PATCH_DEFAULT if a.init == "default" else a.init)
 from torch.utils._python_dispatch import TorchDispatchMode
 from torch.utils._pytree import tree_map
 
@@ -231,7 +235,8 @@ def ema_measure(step):
     while frame is not None and frame.f_code.co_name != 'train_mode_hold':
         frame = frame.f_back
     snapshot = frame.f_locals['snapshot']
-    with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
+    devices = [torch.cuda.current_device()] if device == 'cuda' else []
+    with torch.random.fork_rng(devices=devices):
         row = snapshot(step)
     return dict(step=step, modes=row['modes'], hq=row['hq'])
 
