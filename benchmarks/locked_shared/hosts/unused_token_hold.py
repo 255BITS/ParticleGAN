@@ -14,6 +14,8 @@ from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
+import particlegan.sample_stream as sample_stream
+
 
 import torch.nn.functional as F
 
@@ -243,38 +245,39 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
     for step in range(int(recipe.steps)):
         if noise_policy is not None:
             noise_policy.set_step(step)
-        fake = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1).detach()
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=False)
-        opt_d.zero_grad(set_to_none=True)
-        penalty, stats = reg.penalty(critic, real, fake, step=step + 1)
-        if stats.get("applied"):
-            bcap_applied += 1
-        d_loss = gan.d_loss(critic(real), critic(fake)) + penalty
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
+        with sample_stream.update():
+            fake = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1).detach()
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=False)
+            opt_d.zero_grad(set_to_none=True)
+            penalty, stats = reg.penalty(critic, real, fake, step=step + 1)
+            if stats.get("applied"):
+                bcap_applied += 1
+            d_loss = gan.d_loss(critic(real), critic(fake)) + penalty
+            d_loss.backward()
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
 
-        critic.requires_grad_(False)
-        opt_g.zero_grad(set_to_none=True)
-        fake_g = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
-        if noise_policy is not None:
-            fake_g = noise_policy.output(fake_g, generator_step=True)
-        g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
-        # Demo cover and the n=12 cloud are recorded on the card and are
-        # not added here. The train pin is the unused-token hold.
-        if float(recipe.fm_weight) != 0.0:
-            real_feat = critic.features(real).detach().mean(0)
-            fake_feat = critic.features(fake_g).mean(0)
-            g_loss = g_loss + float(recipe.fm_weight) * (real_feat - fake_feat).pow(2).mean()
-        loss = g_loss
-        if float(recipe.hold_weight) != 0.0:
-            embeds = student.embeds(1.0)
-            loss = loss + float(recipe.hold_weight) * unused_hold_loss(embeds, student.neu, pairs)
-        loss.backward()
-        critic.requires_grad_(True)
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
+            critic.requires_grad_(False)
+            opt_g.zero_grad(set_to_none=True)
+            fake_g = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
+            if noise_policy is not None:
+                fake_g = noise_policy.output(fake_g, generator_step=True)
+            g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
+            # Demo cover and the n=12 cloud are recorded on the card and are
+            # not added here. The train pin is the unused-token hold.
+            if float(recipe.fm_weight) != 0.0:
+                real_feat = critic.features(real).detach().mean(0)
+                fake_feat = critic.features(fake_g).mean(0)
+                g_loss = g_loss + float(recipe.fm_weight) * (real_feat - fake_feat).pow(2).mean()
+            loss = g_loss
+            if float(recipe.hold_weight) != 0.0:
+                embeds = student.embeds(1.0)
+                loss = loss + float(recipe.hold_weight) * unused_hold_loss(embeds, student.neu, pairs)
+            loss.backward()
+            critic.requires_grad_(True)
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
         checkpoint(step + 1, lambda: score_student(student))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(recipe.steps):

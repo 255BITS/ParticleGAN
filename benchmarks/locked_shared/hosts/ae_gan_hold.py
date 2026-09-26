@@ -16,6 +16,8 @@ from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
+import particlegan.sample_stream as sample_stream
+
 
 from torch import nn
 
@@ -103,8 +105,14 @@ def _anchors() -> torch.Tensor:
 
 
 def sample_data(n: int) -> torch.Tensor:
-    choice = torch.randint(0, len(ANCHORS), (n,))
-    return _anchors()[choice] + DATA_STD * torch.randn(n, 2)
+    if sample_stream.replacing():
+        choice, noise = sample_stream.index_and_normal(
+            "data", n, len(ANCHORS), 2, dtype=torch.float32,
+        )
+    else:
+        choice = torch.randint(0, len(ANCHORS), (n,))
+        noise = torch.randn(n, 2)
+    return _anchors()[choice] + DATA_STD * noise
 
 
 def _hold_distance(fake: torch.Tensor) -> float:
@@ -193,48 +201,49 @@ def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
     for step in range(1, cfg.steps + 1):
         if noise_policy is not None:
             noise_policy.set_step(step - 1)
-        data = sample_data(cfg.batch)
-        if cfg.adversarial_weight > 0:
-            codes, _ = prior.sample(cfg.batch)
-            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
-            with context:
-                fake = decoder(codes).detach()
-            opt_d.zero_grad(set_to_none=True)
-            d_loss = gan.d_loss(critic(data).squeeze(-1), critic(fake).squeeze(-1))
-            penalty, stats = regularizer.penalty(critic, data, fake, step=step)
-            if stats.get("applied"):
-                penalty_applied += 1
-            (d_loss + penalty).backward()
-            schedule_optimizer(opt_d, step - 1)
-            opt_d.step()
+        with sample_stream.update():
+            data = sample_data(cfg.batch)
+            if cfg.adversarial_weight > 0:
+                codes, _ = prior.sample(cfg.batch)
+                context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+                with context:
+                    fake = decoder(codes).detach()
+                opt_d.zero_grad(set_to_none=True)
+                d_loss = gan.d_loss(critic(data).squeeze(-1), critic(fake).squeeze(-1))
+                penalty, stats = regularizer.penalty(critic, data, fake, step=step)
+                if stats.get("applied"):
+                    penalty_applied += 1
+                (d_loss + penalty).backward()
+                schedule_optimizer(opt_d, step - 1)
+                opt_d.step()
 
-        query, offset = encoder(data).chunk(2, dim=1)
-        encoded = recipe.encode(query, prior, offset=offset)
-        reconstructed = decoder(encoded.codes[:, 0])
-        recon = encoded.reconstruction_loss(reconstructed[:, None], data)
-        codes, _ = prior.sample(cfg.batch)
-        generated = decoder(codes)
-        opt_g.zero_grad(set_to_none=True)
-        for param in critic.parameters():
-            param.requires_grad_(False)
-        loss = cfg.reconstruction_weight * recon + cfg.particle_l2 * prior.z.square().mean()
-        if cfg.adversarial_weight > 0:
-            real_logits = critic(data).squeeze(-1).detach()
-            fake_logits = critic(generated).squeeze(-1)
-            adv = gan.g_loss(fake_logits, real_logits)
-            anchors = _anchors()
-            cover = torch.cdist(anchors, generated).min(dim=1).values.mean()
-            loss = loss + cfg.adversarial_weight * adv + cfg.cover_weight * cover
-            if cfg.fm_weight > 0:
-                real_feat = critic.features(data).detach().mean(0)
-                fake_feat = critic.features(generated).mean(0)
-                loss = loss + cfg.fm_weight * (real_feat - fake_feat).square().mean()
-            adv_steps += 1
-        loss.backward()
-        for param in critic.parameters():
-            param.requires_grad_(True)
-        schedule_optimizer(opt_g, step - 1)
-        opt_g.step()
+            query, offset = encoder(data).chunk(2, dim=1)
+            encoded = recipe.encode(query, prior, offset=offset)
+            reconstructed = decoder(encoded.codes[:, 0])
+            recon = encoded.reconstruction_loss(reconstructed[:, None], data)
+            codes, _ = prior.sample(cfg.batch)
+            generated = decoder(codes)
+            opt_g.zero_grad(set_to_none=True)
+            for param in critic.parameters():
+                param.requires_grad_(False)
+            loss = cfg.reconstruction_weight * recon + cfg.particle_l2 * prior.z.square().mean()
+            if cfg.adversarial_weight > 0:
+                real_logits = critic(data).squeeze(-1).detach()
+                fake_logits = critic(generated).squeeze(-1)
+                adv = gan.g_loss(fake_logits, real_logits)
+                anchors = _anchors()
+                cover = torch.cdist(anchors, generated).min(dim=1).values.mean()
+                loss = loss + cfg.adversarial_weight * adv + cfg.cover_weight * cover
+                if cfg.fm_weight > 0:
+                    real_feat = critic.features(data).detach().mean(0)
+                    fake_feat = critic.features(generated).mean(0)
+                    loss = loss + cfg.fm_weight * (real_feat - fake_feat).square().mean()
+                adv_steps += 1
+            loss.backward()
+            for param in critic.parameters():
+                param.requires_grad_(True)
+            schedule_optimizer(opt_g, step - 1)
+            opt_g.step()
         checkpoint(step, lambda: measure(step))
         if step == 1 or (step % 50 == 0 and step != cfg.steps):
             snap = measure(step)

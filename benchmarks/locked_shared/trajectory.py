@@ -12,6 +12,7 @@ from .observation import checkpoint, schedule_optimizer
 
 import torch
 from torch import nn
+import particlegan.sample_stream as sample_stream
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
 
 from particlegan import ParticlePrior, ParticleRegularizer
@@ -170,35 +171,36 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
     for step in range(1, steps + 1):
         if noise_policy is not None:
             noise_policy.set_step(step - 1)
-        context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
-        with context:
-            fake = generator(slow, prior.z)
-        opt_d.zero_grad(set_to_none=True)
-        d_loss = gan.d_loss(critic(slow, paired), critic(slow, fake.detach()))
-        view.slow = slow.detach()
-        d_loss = d_loss + regularizer(view, paired, fake.detach(), step=step)
-        d_loss.backward()
-        schedule_optimizer(opt_d, step - 1)
-        opt_d.step()
+        with sample_stream.update():
+            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+            with context:
+                fake = generator(slow, prior.z)
+            opt_d.zero_grad(set_to_none=True)
+            d_loss = gan.d_loss(critic(slow, paired), critic(slow, fake.detach()))
+            view.slow = slow.detach()
+            d_loss = d_loss + regularizer(view, paired, fake.detach(), step=step)
+            d_loss.backward()
+            schedule_optimizer(opt_d, step - 1)
+            opt_d.step()
 
-        flags = [p.requires_grad for p in critic.parameters()]
-        critic.requires_grad_(False)
-        try:
-            opt_g.zero_grad(set_to_none=True)
-            fake = generator(slow, prior.z)
-            g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
-            # Cover matches the true fast cloud (set coverage). It does not
-            # retarget identity; only the relativistic pair does that.
-            # fm_weight is 0: no feature-matching term is added.
-            g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
-            g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
-            g_loss = g_loss + spread(prior.z)
-            g_loss.backward()
-            schedule_optimizer(opt_g, step - 1)
-            opt_g.step()
-        finally:
-            for parameter, flag in zip(critic.parameters(), flags):
-                parameter.requires_grad_(flag)
+            flags = [p.requires_grad for p in critic.parameters()]
+            critic.requires_grad_(False)
+            try:
+                opt_g.zero_grad(set_to_none=True)
+                fake = generator(slow, prior.z)
+                g_loss = gan.g_loss(critic(slow, fake), critic(slow, paired).detach())
+                # Cover matches the true fast cloud (set coverage). It does not
+                # retarget identity; only the relativistic pair does that.
+                # fm_weight is 0: no feature-matching term is added.
+                g_loss = g_loss + PROTOCOL["cover_weight"] * _cover(fake, fast)
+                g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
+                g_loss = g_loss + spread(prior.z)
+                g_loss.backward()
+                schedule_optimizer(opt_g, step - 1)
+                opt_g.step()
+            finally:
+                for parameter, flag in zip(critic.parameters(), flags):
+                    parameter.requires_grad_(flag)
         def measure_identity():
             context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
             with context:

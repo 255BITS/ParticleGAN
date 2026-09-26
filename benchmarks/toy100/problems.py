@@ -11,6 +11,8 @@ import math
 
 import torch
 
+import particlegan.sample_stream as sample_stream
+
 
 PROBLEM_NAMES = ("grid100", "rotated100", "staggered100")
 N_MODES = 100
@@ -60,6 +62,11 @@ def sample_real(
     if n <= 0:
         raise ValueError("sample count must be positive")
     centers = _centers(problem_name, device=device, dtype=torch.float32)
-    indices = torch.randint(N_MODES, (n,), device=device, generator=generator)
-    noise = torch.randn(n, 2, device=device, generator=generator)
+    if sample_stream.replacing():
+        indices, noise = sample_stream.index_and_normal(
+            "data", n, N_MODES, 2, device=centers.device, dtype=centers.dtype,
+        )
+    else:
+        indices = torch.randint(N_MODES, (n,), device=device, generator=generator)
+        noise = torch.randn(n, 2, device=device, generator=generator)
     return centers[indices] + DATA_STD * noise

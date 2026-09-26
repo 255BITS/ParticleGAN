@@ -17,6 +17,8 @@ from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
+import particlegan.sample_stream as sample_stream
+
 
 import torch.nn.functional as F
 
@@ -471,44 +473,45 @@ def _fit(
             noise_policy.set_step(step)
         _apply_lr(opt_g, step, steps)
         _apply_lr(opt_d, step, steps)
-        critic.requires_grad_(True)
-        opt_d.zero_grad(set_to_none=True)
-        d_loss = student.odd.new_zeros(())
-        for scale in EVAL_SCALES:
-            fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=False)
-            cap, _stats = reg.penalty(
-                lambda z, scale=scale: critic.score(z, scale),
-                reals[scale] / critic.input_scale,
-                fake / critic.input_scale,
-                step=step + 1,
-            )
-            reg_calls += 1
-            d_term = gan.d_loss(critic(reals[scale], scale), critic(fake, scale))
-            d_loss = d_loss + (d_term + cap) / n_scales
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
+        with sample_stream.update():
+            critic.requires_grad_(True)
+            opt_d.zero_grad(set_to_none=True)
+            d_loss = student.odd.new_zeros(())
+            for scale in EVAL_SCALES:
+                fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
+                if noise_policy is not None:
+                    fake = noise_policy.output(fake, generator_step=False)
+                cap, _stats = reg.penalty(
+                    lambda z, scale=scale: critic.score(z, scale),
+                    reals[scale] / critic.input_scale,
+                    fake / critic.input_scale,
+                    step=step + 1,
+                )
+                reg_calls += 1
+                d_term = gan.d_loss(critic(reals[scale], scale), critic(fake, scale))
+                d_loss = d_loss + (d_term + cap) / n_scales
+            d_loss.backward()
+            schedule_optimizer(opt_d, step)
+            opt_d.step()
 
-        critic.requires_grad_(False)
-        opt_g.zero_grad(set_to_none=True)
-        g_loss = student.odd.new_zeros(())
-        with torch.no_grad():
-            real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
-        for scale in EVAL_SCALES:
-            fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=True)
-            g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
-        cover = student.odd.new_zeros(())
-        for scale in EVAL_SCALES:
-            cover = cover + F.mse_loss(student.state(scale), targets[scale])
-        g_loss = g_loss + cover_w * cover / n_scales
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
-        critic.requires_grad_(True)
+            critic.requires_grad_(False)
+            opt_g.zero_grad(set_to_none=True)
+            g_loss = student.odd.new_zeros(())
+            with torch.no_grad():
+                real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
+            for scale in EVAL_SCALES:
+                fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
+                if noise_policy is not None:
+                    fake = noise_policy.output(fake, generator_step=True)
+                g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
+            cover = student.odd.new_zeros(())
+            for scale in EVAL_SCALES:
+                cover = cover + F.mse_loss(student.state(scale), targets[scale])
+            g_loss = g_loss + cover_w * cover / n_scales
+            g_loss.backward()
+            schedule_optimizer(opt_g, step)
+            opt_g.step()
+            critic.requires_grad_(True)
         checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),
                    pairing="stranger" if arm == "stranger" else "matched", teacher=teacher))
 

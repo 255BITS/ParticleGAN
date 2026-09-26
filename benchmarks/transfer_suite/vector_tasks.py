@@ -10,6 +10,7 @@ import traceback
 
 import torch
 
+import particlegan.sample_stream as sample_stream
 from benchmarks.toy100.device import host_device, rng_fork_devices
 from particlegan import ParticlePrior, ParticleRegularizer
 from benchmarks.legacy.gan_loss import GANLoss
@@ -127,7 +128,27 @@ def target_scale(spec, completed_steps):
 def sample_target(spec, count, rng, completed_steps):
     """Only explicit generators are used; target draws cannot touch training RNGs."""
     kind = spec["kind"]
-    if kind == "gaussian_mixture":
+    if sample_stream.replacing() and kind == "gaussian_mixture":
+        means = torch.tensor(spec["means"], dtype=torch.float32)
+        cov = torch.tensor(spec["covariances"], dtype=torch.float32)
+        index, noise = sample_stream.categorical_and_normal(
+            "data", count, spec["masses"], 2, dtype=torch.float32,
+        )
+        points = means[index] + torch.bmm(torch.linalg.cholesky(cov)[index], noise.unsqueeze(2)).squeeze(2)
+    elif sample_stream.replacing() and kind == "spiral":
+        # One uniform drives both angle and radius, matching the single torch.rand.
+        u, noise = sample_stream.uniform_and_normal("data", count, 1, 2)
+        u = u[:, 0]
+        angle = u*(2*math.pi*spec["turns"])
+        radius = spec["radius_min"]+(spec["radius_max"]-spec["radius_min"])*u
+        points = radius[:, None]*torch.stack([angle.cos(), angle.sin()], 1)
+        points += spec["noise"]*noise
+    elif sample_stream.replacing() and kind == "annulus":
+        u = sample_stream.uniforms("data", count, 2)
+        angle = 2*math.pi*u[:, 0]
+        radius = (spec["radius_min"]**2 + (spec["radius_max"]**2-spec["radius_min"]**2)*u[:, 1]).sqrt()
+        points = radius[:, None]*torch.stack([angle.cos(), angle.sin()], 1)
+    elif kind == "gaussian_mixture":
         means = torch.tensor(spec["means"], dtype=torch.float32)
         cov = torch.tensor(spec["covariances"], dtype=torch.float32)
         index = torch.multinomial(torch.tensor(spec["masses"]), count, replacement=True, generator=rng)

@@ -40,6 +40,7 @@ from unittest.mock import patch
 
 import torch
 
+import particlegan.sample_stream as sample_stream
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline, mode_hold
 from benchmarks.smart_descent import evaluate
@@ -536,8 +537,10 @@ def main() -> None:
     parser.add_argument("--archive-sources", type=Path,
                         help="directory for the standard transfer-suite source archive")
     add_device_argument(parser)
+    sample_stream.add_argument(parser)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
+    sample_stream.apply(args.sample_stream)
     apply_device_policy(args.device, log=True)
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)

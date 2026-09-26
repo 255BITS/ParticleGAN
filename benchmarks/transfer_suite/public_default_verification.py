@@ -26,6 +26,7 @@ import traceback
 
 import torch
 
+import particlegan.sample_stream as sample_stream
 from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator, rng_fork_devices
 from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
@@ -272,9 +273,10 @@ def run_vector(spec, card, base, *, max_steps=None):
     budget = cfg['steps'] if max_steps is None else min(max_steps, cfg['steps'])
     for index in range(budget):
         completed = index+1
-        real = vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
-        real_g = lambda: vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
-        stats = trainer.step(real, generator_real=real_g)
+        with sample_stream.update():
+            real = vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
+            real_g = lambda: vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
+            stats = trainer.step(real, generator_real=real_g)
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != 'step' and isinstance(value, torch.Tensor)):
             raise FloatingPointError('nonfinite public trainer loss')
@@ -334,9 +336,9 @@ def run_image(spec, base, *, max_steps=None):
     budget = spec['steps'] if max_steps is None else min(max_steps, spec['steps'])
     for index in range(budget):
         completed = index+1
-        real = centers[torch.randint(len(centers), (spec['batch_size'],))]
-        real = (real+spec['noise_std']*torch.randn_like(real)).clamp(0., 1.)
-        stats = trainer.step(real, generator_real=real)
+        with sample_stream.update():
+            real = sample_stream.image_batch(centers, spec['batch_size'], spec['noise_std'])
+            stats = trainer.step(real, generator_real=real)
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != 'step' and isinstance(value, torch.Tensor)):
             raise FloatingPointError('nonfinite public trainer loss')

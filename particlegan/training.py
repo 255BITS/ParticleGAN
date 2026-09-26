@@ -5,6 +5,7 @@ import math
 import torch
 from torch import nn
 
+from . import sample_stream
 from .particle_prior import ParticlePrior
 from .recipes import Recipe, learning_rate_scales
 
@@ -155,7 +156,11 @@ class GANTrainer:
         y = model(latent)
         if sigma == 0:
             return y
-        return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        if sample_stream.replacing():
+            eps = sample_stream.normal("output", y.shape, device=y.device, dtype=y.dtype)
+        else:
+            eps = torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        return y + sigma * eps
 
     def step(self, real, *, generator_real=None, collect_stats=False):
         """Perform one D update and one G/prior update; return detached losses.
@@ -176,69 +181,70 @@ class GANTrainer:
                 raise ValueError("generator_real must match the real sample shape")
             if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-        network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
-        for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
-            for group, rate, role in zip(optimizer.param_groups, rates, roles):
-                group["lr"] = rate * (prior_scale if role == "prior" else network)
-        sigma_in = input_noise_std(recipe, self.completed_steps)
-        sigma_out = output_noise_std(recipe, self.completed_steps)
-        noise = self.noise_generator
-        critic = self._noisy_D
-        critic.std = sigma_in
-        self.D.train()
-        self.G.eval()
-        with torch.no_grad():
-            latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
-            fake = self._generate(self.G, latent, sigma_out, noise)
-        loss_d = self.loss.d_loss(critic(real), critic(fake))
-        self.penalty.collect_stats = collect_stats
-        penalty = self.penalty(critic, real, fake)
-        penalty_stats = self.penalty.last_stats
-        loss_d = loss_d + penalty
-        self.opt_d.zero_grad()
-        loss_d.backward()
-        self.opt_d.step()
+        with sample_stream.update():
+            network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
+            for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
+                for group, rate, role in zip(optimizer.param_groups, rates, roles):
+                    group["lr"] = rate * (prior_scale if role == "prior" else network)
+            sigma_in = input_noise_std(recipe, self.completed_steps)
+            sigma_out = output_noise_std(recipe, self.completed_steps)
+            noise = self.noise_generator
+            critic = self._noisy_D
+            critic.std = sigma_in
+            self.D.train()
+            self.G.eval()
+            with torch.no_grad():
+                latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
+                fake = self._generate(self.G, latent, sigma_out, noise)
+            loss_d = self.loss.d_loss(critic(real), critic(fake))
+            self.penalty.collect_stats = collect_stats
+            penalty = self.penalty(critic, real, fake)
+            penalty_stats = self.penalty.last_stats
+            loss_d = loss_d + penalty
+            self.opt_d.zero_grad()
+            loss_d.backward()
+            self.opt_d.step()
 
-        self.D.eval()
-        self.G.train()
-        flags = [p.requires_grad for p in self.D.parameters()]
-        try:
-            self.D.requires_grad_(False)
-            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
-            real_g = generator_real() if callable(generator_real) else generator_real
-            real_g = real if real_g is None else self._batch(real_g, "generator_real")
-            if real_g.shape[1:] != real.shape[1:]:
-                raise ValueError("generator_real must match the real sample shape")
-            if len(real_g) != len(real):
-                raise ValueError("RpGAN generator_real must match the real batch size")
-            real_logits = critic(real_g)
-            loss_gan = self.loss.g_loss(fake_logits, real_logits)
-            prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad:
-                raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
-                prior_reg = self.prior_regularizer(raw)
-            loss_g = loss_gan + recipe.prior_reg * prior_reg
-            self.opt_g.zero_grad()
-            loss_g.backward()
-            self.opt_g.step()
-        finally:
-            for parameter, flag in zip(self.D.parameters(), flags):
-                parameter.requires_grad_(flag)
-        with torch.no_grad():
-            for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
-                for averaged, current in zip(target.parameters(), source.parameters()):
-                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
-                for averaged, current in zip(target.buffers(), source.buffers()):
-                    averaged.copy_(current)
-        self.completed_steps += 1
-        result = {key: value.detach() for key, value in
-                  dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
-                       prior_regularization=prior_reg, penalty=penalty).items()}
-        result["step"] = self.completed_steps
-        if collect_stats:
-            result["penalty_stats"] = penalty_stats
-        return result
+            self.D.eval()
+            self.G.train()
+            flags = [p.requires_grad for p in self.D.parameters()]
+            try:
+                self.D.requires_grad_(False)
+                latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+                fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+                real_g = generator_real() if callable(generator_real) else generator_real
+                real_g = real if real_g is None else self._batch(real_g, "generator_real")
+                if real_g.shape[1:] != real.shape[1:]:
+                    raise ValueError("generator_real must match the real sample shape")
+                if len(real_g) != len(real):
+                    raise ValueError("RpGAN generator_real must match the real batch size")
+                real_logits = critic(real_g)
+                loss_gan = self.loss.g_loss(fake_logits, real_logits)
+                prior_reg = loss_gan.new_zeros(())
+                if self.prior.z.requires_grad:
+                    raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                    prior_reg = self.prior_regularizer(raw)
+                loss_g = loss_gan + recipe.prior_reg * prior_reg
+                self.opt_g.zero_grad()
+                loss_g.backward()
+                self.opt_g.step()
+            finally:
+                for parameter, flag in zip(self.D.parameters(), flags):
+                    parameter.requires_grad_(flag)
+            with torch.no_grad():
+                for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
+                    for averaged, current in zip(target.parameters(), source.parameters()):
+                        averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                    for averaged, current in zip(target.buffers(), source.buffers()):
+                        averaged.copy_(current)
+            self.completed_steps += 1
+            result = {key: value.detach() for key, value in
+                      dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+                           prior_regularization=prior_reg, penalty=penalty).items()}
+            result["step"] = self.completed_steps
+            if collect_stats:
+                result["penalty_stats"] = penalty_stats
+            return result
 
     @torch.no_grad()
     def sample(self, n, *, ema=False, generator=None):
@@ -255,7 +261,7 @@ class GANTrainer:
         try:
             model.eval()
             prior.eval()
-            with torch.random.fork_rng(devices=devices):
+            with sample_stream.suspend(), torch.random.fork_rng(devices=devices):
                 latent, _ = prior.sample(n, generator=stream)
                 return self._generate(model, latent, output_noise_std(self.recipe, self.completed_steps), stream)
         finally:

@@ -25,6 +25,8 @@ import struct
 import sys
 import tarfile
 
+import particlegan.sample_stream as sample_stream
+
 from benchmarks.toy100.accuracy_gate import (
     HOLDOUT_SEED_OFFSETS, evaluate_suite as accuracy_suite,
 )
@@ -1287,7 +1289,7 @@ def _run_command(command: list[str], *, cwd: Path, log: Path, env: dict[str, str
 
 
 def run(config: Path, output: Path, *, with_default_control: bool = False,
-        device: str = "auto"):
+        device: str = "auto", sample_stream_kind: str | None = None):
     config = config.resolve()
     output = output.resolve()
     if output.exists():
@@ -1302,15 +1304,16 @@ def run(config: Path, output: Path, *, with_default_control: bool = False,
     # CPU runs keep the historical mask so a visible GPU cannot change them.
     if device_flag == "cpu":
         env["CUDA_VISIBLE_DEVICES"] = ""
+    stream_args = [] if sample_stream_kind is None else ["--sample-stream", sample_stream_kind]
     commands = [
         ([python, "-u", "-m", "benchmarks.toy100", "run", "--device", device_flag,
           "--config", str(config),
-          "--output", str(output / "toy100"), "--no-render"], ROOT, output / "toy100.log"),
+          "--output", str(output / "toy100"), "--no-render", *stream_args], ROOT, output / "toy100.log"),
         ([python, "-u", "-m", "benchmarks.toy100.accuracy_gate", "--output",
           str(output / "toy100")], ROOT, output / "accuracy.log"),
         ([python, "-u", "-m", "benchmarks.transfer_suite.toy100_compatibility",
           "--device", device_flag,
-          "--config", str(config), "--all", "--output", str(output / "candidate19")],
+          "--config", str(config), "--all", "--output", str(output / "candidate19"), *stream_args],
          ROOT, output / "candidate19.log"),
     ]
     returns = {}
@@ -1351,13 +1354,14 @@ def main(argv=None):
     run_parser.add_argument("--with-default-control", action="store_true")
     run_parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
                             help="auto uses cuda when available, else cpu")
+    sample_stream.add_argument(run_parser)
     regrade_parser = commands.add_parser("regrade", help="independently grade saved evidence")
     regrade_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "run":
         result = run(args.config, args.output,
                      with_default_control=args.with_default_control,
-                     device=args.device)
+                     device=args.device, sample_stream_kind=args.sample_stream)
     else:
         result = regrade(args.output)
     print(json.dumps(dict(status=result["status"], observed_passes=result["observed_passes"],

@@ -10,6 +10,7 @@ from .observation import checkpoint, schedule_optimizer
 
 import torch
 from torch import nn
+import particlegan.sample_stream as sample_stream
 from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
 
 TOY_STEPS = 80
@@ -124,26 +125,27 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
     for step in range(1, TOY_STEPS + 1):
         if noise_policy is not None:
             noise_policy.set_step(step - 1)
-        opt_d.zero_grad(set_to_none=True)
-        fake = particles.detach() if pairing == "live" else stranger
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=False)
-        d_loss = gan.d_loss(critic(real), critic(fake))
-        (d_loss + regularizer(critic, real, fake, step=step)).backward()
-        schedule_optimizer(opt_d, step - 1)
-        opt_d.step()
+        with sample_stream.update():
+            opt_d.zero_grad(set_to_none=True)
+            fake = particles.detach() if pairing == "live" else stranger
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=False)
+            d_loss = gan.d_loss(critic(real), critic(fake))
+            (d_loss + regularizer(critic, real, fake, step=step)).backward()
+            schedule_optimizer(opt_d, step - 1)
+            opt_d.step()
 
-        opt_p.zero_grad(set_to_none=True)
-        d_real = critic(real).detach()
-        generated = particles if pairing == "live" else stranger
-        if noise_policy is not None:
-            generated = noise_policy.output(generated, generator_step=True)
-        paired = critic(generated)
-        g_loss = gan.g_loss(paired, d_real)
-        g_loss = g_loss + particle_l2 * particles.square().mean()
-        g_loss.backward()
-        schedule_optimizer(opt_p, step - 1)
-        opt_p.step()
+            opt_p.zero_grad(set_to_none=True)
+            d_real = critic(real).detach()
+            generated = particles if pairing == "live" else stranger
+            if noise_policy is not None:
+                generated = noise_policy.output(generated, generator_step=True)
+            paired = critic(generated)
+            g_loss = gan.g_loss(paired, d_real)
+            g_loss = g_loss + particle_l2 * particles.square().mean()
+            g_loss.backward()
+            schedule_optimizer(opt_p, step - 1)
+            opt_p.step()
         checkpoint(step, lambda: {"mean_abs": float(particles.detach().abs().mean()),
                                  "grad_med": _grad_median(base_critic, real, particles)})
 

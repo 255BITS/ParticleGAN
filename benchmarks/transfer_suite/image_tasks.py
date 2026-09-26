@@ -17,6 +17,8 @@ import traceback
 import torch
 from torch import nn
 
+import particlegan.sample_stream as sample_stream
+
 from benchmarks.toy100.device import host_device, rng_fork_devices
 import torch.nn.functional as F
 
@@ -210,30 +212,30 @@ def run_episode(spec, policy, *, ablation="none", fixed=False):
             callback_seconds += time.perf_counter() - tick
             optimizer.step()
         for index in range(spec["steps"]):
-            real = centers[torch.randint(len(centers), (spec["batch_size"],))]
-            real = (real + spec["noise_std"] * torch.randn_like(real)).clamp(0., 1.)
-            fake = g(prior.sample(spec["batch_size"])[0]).detach()
-            opt_d.zero_grad(set_to_none=True)
-            d_adv = gan.d_loss(d(real), d(fake))
-            d_reg = penalty(d, real, fake, step=index + 1)
-            d_loss = d_adv + controller.regularization_scale("d") * d_reg
-            d_loss.backward()
-            update(opt_d, index, "d")
-            d.requires_grad_(False)
-            opt_g.zero_grad(set_to_none=True)
-            fake = g(prior.sample(spec["batch_size"])[0])
-            g_adv = gan.g_loss(d(fake), d(real).detach())
-            g_reg = spread(prior.z)
-            g_loss = g_adv + controller.regularization_scale("g") * g_reg
-            g_loss.backward()
-            update(opt_g, index, "g")
-            d.requires_grad_(True)
-            if not bool(torch.isfinite(d_loss) & torch.isfinite(g_loss)):
-                raise FloatingPointError("nonfinite training loss")
-            with torch.no_grad():
-                for live, average in ((g, ema_g), (prior, ema_prior)):
-                    for parameter, averaged in zip(live.parameters(), average.parameters()):
-                        averaged.lerp_(parameter, 1. - spec["ema_decay"])
+            with sample_stream.update():
+                real = sample_stream.image_batch(centers, spec["batch_size"], spec["noise_std"])
+                fake = g(prior.sample(spec["batch_size"])[0]).detach()
+                opt_d.zero_grad(set_to_none=True)
+                d_adv = gan.d_loss(d(real), d(fake))
+                d_reg = penalty(d, real, fake, step=index + 1)
+                d_loss = d_adv + controller.regularization_scale("d") * d_reg
+                d_loss.backward()
+                update(opt_d, index, "d")
+                d.requires_grad_(False)
+                opt_g.zero_grad(set_to_none=True)
+                fake = g(prior.sample(spec["batch_size"])[0])
+                g_adv = gan.g_loss(d(fake), d(real).detach())
+                g_reg = spread(prior.z)
+                g_loss = g_adv + controller.regularization_scale("g") * g_reg
+                g_loss.backward()
+                update(opt_g, index, "g")
+                d.requires_grad_(True)
+                if not bool(torch.isfinite(d_loss) & torch.isfinite(g_loss)):
+                    raise FloatingPointError("nonfinite training loss")
+                with torch.no_grad():
+                    for live, average in ((g, ema_g), (prior, ema_prior)):
+                        for parameter, averaged in zip(live.parameters(), average.parameters()):
+                            averaged.lerp_(parameter, 1. - spec["ema_decay"])
             if index + 1 in expected_steps:
                 live = measure(g, prior, centers, spec["thresholds"])
                 ema = measure(ema_g, ema_prior, centers, spec["thresholds"])
@@ -262,7 +264,9 @@ def main():
     parser.add_argument("--schedule", choices=("cosine", "constant"), default="cosine")
     from benchmarks.toy100.device import add_device_argument, apply_device_policy
     add_device_argument(parser)
+    sample_stream.add_argument(parser)
     args = parser.parse_args()
+    sample_stream.apply(args.sample_stream)
     apply_device_policy(args.device, log=True)
     args.output.mkdir(parents=True, exist_ok=True)
     selected = [spec for spec in TASKS if not args.tasks or spec["name"] in args.tasks]
