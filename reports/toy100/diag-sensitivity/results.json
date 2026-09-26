@@ -20,5 +20,24 @@
     "unequal_pass": [202, 404]},
   "extragradient": {"ring": "0/8", "hold": "0/8", "stay": "0/8", "unequal": "0/8"},
   "ema_fake": {"ring": "0/8", "hold": "0/8", "stay": "0/8", "unequal": "0/8"},
+  "verified_idle_on_baseline_ring_s0": {
+    "regularizer_calls": 0,
+    "latent_calls": 1200,
+    "latent_scoped_calls": 0
+  },
+  "k3p_pull": {"ring": "1/8", "hold": "0/8", "stay": "0/8", "unequal": "1/8",
+    "ring_pass": [606],
+    "hold_pass": [],
+    "stay_pass": [],
+    "unequal_pass": [101],
+    "setting": "legacy a_r1r2 -> mechanism.scaled_penalty; decay 0.999, floor 0.01, guard 5 after step 200",
+    "ring_s0_receipt": {"calls": 1200, "pure_a_calls": 963, "blend_calls": 237, "anchor_started_call": 964, "critic_steps": 1200}},
+  "row_damp": {"ring": "4/8", "hold": "1/8", "stay": "1/8", "unequal": "4/8",
+    "ring_pass": [0, 101, 202, 606],
+    "hold_pass": [0],
+    "stay_pass": [0],
+    "unequal_pass": [101, 202, 303, 505],
+    "setting": "A2 rho=0.75+0.25*cos on a fully dense latent table; sparse gate unchanged",
+    "ring_s0_receipt": {"dense_calls": 1200, "scoped_calls": 0, "calls": 1200}},
   "confirmation": "CPU screening only; A6000 repeat required"
 }

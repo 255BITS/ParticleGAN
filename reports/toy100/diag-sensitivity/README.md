@@ -49,11 +49,13 @@ The historical "~10× per step" is the shoulder after that kink, not a uniform l
 
 ## Reliefs
 
-Each candidate is one fixed change, aimed at that G–D burst. No coefficient sweep, and no coverage, anchor, or forward-KL term. They are off unless `K3P_RELIEF` is set.
+Each candidate is one fixed change. No coefficient sweep, and no coverage, anchor, or forward-KL term. They are off unless `K3P_RELIEF` is set.
 
 - **optimistic.** Daskalakis et al. 2018, Algorithm 1, alpha = 1, after every Adam update (D, G, and the prior). The paper rule, no extra forward.
 - **extragradient.** Simultaneous extragradient on the current minibatch. A raw Adam lookahead predicts D and G; the committed host step writes gradients from that predicted point onto the base point. The existing Adam step is the only extrapolation length.
 - **ema_fake.** The critic's fake forward (and the particles it is drawn from) uses the generator EMA already maintained at decay 0.995. The generator step stays on the live weights.
+- **k3p_pull.** The legacy `a_r1r2` penalty, which is the one this host actually calls, is sent through `mechanism.scaled_penalty`. Decay 0.999, floor 0.01, spike guard 5 after step 200. Those are the constants already in that file.
+- **row_damp.** The same A2 rule as `latent.py`: `rho = 0.75 + 0.25 cos`, at most half the row step removed, parent second moment from the raw gradient, `rho = 1` with no history. The sparse gate is unchanged. On a fully dense table, where that gate cannot fire, the same rewrite runs anyway.
 
 Screen: 8 offsets × ring, hold (PASS means 1200 checks), stay (120/120 and `pass_all`, not the shift terminal status), unequal. Same `hid_q` baseline on this CPU.
 
@@ -63,6 +65,8 @@ Screen: 8 offsets × ring, hold (PASS means 1200 checks), stay (120/120 and `pas
 | optimistic α=1 | 2/8 | 1/8 | 1/8 | 2/8 |
 | extragradient | 0/8 | 0/8 | 0/8 | 0/8 |
 | ema fake | 0/8 | 0/8 | 0/8 | 0/8 |
+| k3p_pull | 1/8 | 0/8 | 0/8 | 1/8 |
+| row_damp | 4/8 | 1/8 | 1/8 | 4/8 |
 
 Passing offsets:
 
@@ -72,13 +76,31 @@ Passing offsets:
 | optimistic | 404, 606 | 404 | 404 | 202, 404 |
 | extragradient | none | none | none | none |
 | ema fake | none | none | none | none |
+| k3p_pull | 606 | none | none | 101 |
+| row_damp | 0, 101, 202, 606 | 0 | 0 | 101, 202, 303, 505 |
 
 Optimistic does not stabilize the ring. It drops 5/8 to 2/8 and moves the surviving seeds; 404 becomes the only hold/stay pass, which the baseline did not hold. Extragradient and the EMA fake miss every seed on every gate. Extragradient's ring runs are about 2.5× the baseline wall time, which is the two-pass update actually running. The EMA fake collapses the ring to 0 modes on 7 of 8 offsets.
 
+## What the ring actually executes
+
+Checked on this machine, not only from the trajectory note. Baseline ring seed 0 writes `regularizer_receipt.calls = 0` (pure-a, blend, pure-b, and critic steps all 0, anchor never started) and `latent_receipt.calls = 1200` with `scoped_calls = 0` and empty tables. The probe assigns `scaled_penalty` onto `particlegan.grad_regularizers.GradientPenalty`. The ring calls `benchmarks.legacy.grad_regularizers`, arm `a_r1r2`. A2's `begin` counts every generator step, then skips the rewrite unless some row was missed and the cumulative hit rate is under 1/2. Batch 128 over 12 particles hits every row, so the rate is 1 and the rewrite never runs.
+
+The trajectory report's neighbour-hop (particles climbing toward a mode the critic scores higher, gradient ~10× and D/G ~23 about 40 steps before the Voronoi edge, then a stuck empty mode) is the failure this follow-up is aimed at. The hop steps they logged (101 at 743, 202 at 444 and 665, 505 at 595 and 698) are all before the handover weight can leave 1. On this schedule `s` stays 1 until the critic's applied LR scale drops below 1/2, which the wired run records as the first blend at call 964.
+
+## Follow-up: wire the idle pieces
+
+`k3p_pull` is in the executed graph. Every ring run records 1200 penalty calls, 963 of them pure `a` and 237 blended, critic steps 1200, anchor started at call 964. The spike guard does clip, including on the hop seeds (ring steps 568 and 884 on offset 101; 324–618 on 202; 316, 388, and 1031 on 505) and not at all on passing baseline offset 0. It does not stop the empty mode: those three offsets still fail, at 7 modes rather than the baseline's 7, 6, and 6. Offsets the baseline passed (0, 303, 404, 707) fail. Hold is 0/8, stay is 0/8 (offset 606 reaches 66/120). Unequal drops from 4/8 to 1/8. While `s == 1` this penalty is the mechanism's RMS R1 plus one-sided fake cap, which is the formula that file treats as its `a_r1r2`, so the early steps are not the host's symmetric squared R1/R2. The prox term itself turns on only at step 964, after the logged hops.
+
+`row_damp` fires. Ring dense-calls are 1200 on the fully covered seeds and 1198 on offset 101 (two steps had a silent row, so the dense branch correctly stood down). First step `rho_mean` is 1 with no history. Later steps sit around 0.72–0.99, so the cosine rule is cutting rows, not passing them through. Scoped calls stay 0 on ring, hold, and stay. Unequal stays on the sparse gate (`scoped_calls` 1200, `dense_calls` 0) and keeps the baseline's four passing offsets.
+
+On the ring, damping that can fire does stop the two cleanest hops: offsets 101 and 202 go from FAIL to PASS (8 modes, hq 1.0 and 0.998). Offset 505 stays FAIL (6 modes, hq 0.67). The same rule drops baseline passes 303, 404, and 707, so the ring rate is 4/8 rather than 5/8. The new ring passes do not survive the longer budget: 101 holds 89 checks then fails, stay 24/120; 202 never converges, stay 15/120. Baseline hold/stay passes 606 and 707 are lost (606 holds 171 checks, stay 40/120).
+
 ## Recommendation
 
-Keep the unchanged hid_q baseline. Do not turn on any of these three.
+Keep the unchanged hid_q baseline. Do not turn on any of these five.
 
-The amplifier is the joint alternating step in the first ~10 updates, and the top stretch is a nonlinear kink in G (and in D's answer to G), not a clean imaginary eigenvalue of either net alone. Alpha = 1 optimism doubles the first Adam step and walks off more seeds than it saves. A full Adam lookahead is far outside the `1e-5` neighborhood where the singular value is already hundreds, so extragradient at the training step evaluates the kink rather than damping it. The 0.995 generator EMA has a time constant of about 200 steps, while the burst is over by update 8, so the critic spends that window scoring a generator that has not moved. Both of those scales were fixed on purpose; changing them would be a sweep this round does not do.
+The early amplifier is the joint alternating step, a nonlinear kink in G and in D's answer to G. Alpha = 1 optimism doubles the first Adam step. A full Adam lookahead evaluates that kink. The 0.995 generator EMA averages over ~200 steps while the burst is over by update 8.
 
-An A6000 run is still required before treating the pass rates, or the location of the kink, as confirmed. The useful confirmation target is the amplification map (which group, which update, the eps-dependent singular value), not another seed sweep of these three reliefs.
+The neighbour-hop is a later, separate failure, and the two mechanisms that were supposed to be present are idle on this host. Putting them in the graph does not remove the seed dependence. The EMA-critic pull cannot see a hop before step ~964; the guard clips a few pre-hop steps and the empty mode remains. Dense A2 damping does cancel two of the three ring hops and then opens three new ones, and the cancelled hops come back before a 1200-check hold. Both settings are the ones already written down. Changing rho, the guard ratio, or the handover floor would be a sweep.
+
+An A6000 run is still required before treating the pass rates, or the location of the kink, as confirmed. The useful confirmation target is the amplification map, plus the fact that the ring's executed penalty and latent step are not the K3P pull and not A2. Another sweep of these settings is not the useful next run.
