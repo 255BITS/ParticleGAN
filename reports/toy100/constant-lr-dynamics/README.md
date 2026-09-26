@@ -105,4 +105,73 @@ Receipts on the ring: `unit_rms` `steps=2400`, `pair_chord` `calls=1200`. At ste
 
 ## Recommendation
 
-Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
+Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` was blocked on the probe for that screen. The penalty fix and the `unrolled` screen are below.
+
+## Unrolled CPU screen
+
+Same constant LR, this build, 64 jobs, 4 at a time, `OMP_NUM_THREADS=1`, `k=5`. Baseline on this build matches the table above and #183: ring 0/8, hold 0/8, stay 0/8, best stay 53/120 (offset 606). `unrolled` ring is also 0/8, so it does not lose ring passes. It does not add a hold PASS or a stay 120/120. **Handoff bar missed.** CPU only; not an A6000 ranking.
+
+| dynamics | ring | hold 1200 | stay 120/120 | unequal |
+| --- | ---: | ---: | ---: | ---: |
+| baseline | 0/8 | 0/8 | 0/8 | 2/8 |
+| unrolled | 0/8 | 0/8 | 0/8 | 0/8 |
+
+Ring at step 1200, modes / hq / passing suffix. Both columns FAIL.
+
+| offset | baseline | unrolled |
+| ---: | --- | --- |
+| 0 | 8 / 0.878 / 0 | 0 / 0.000 / 0 |
+| 101 | 7 / 0.659 / 0 | 0 / 0.000 / 0 |
+| 202 | 7 / 0.985 / 0 | 3 / 0.142 / 0 |
+| 303 | 6 / 0.670 / 0 | 0 / 0.000 / 0 |
+| 404 | 6 / 0.400 / 0 | 0 / 0.000 / 0 |
+| 505 | 4 / 0.263 / 0 | 0 / 0.000 / 0 |
+| 606 | 7 / 0.694 / 0 | 2 / 0.085 / 0 |
+| 707 | 0 / 0.000 / 0 | 2 / 0.079 / 0 |
+
+Hold. Baseline is `NOT_CONVERGED`, `hold_checks` 0, on every offset. Unrolled enters `HOLDING` on two offsets and then drops the window.
+
+| offset | unrolled hold |
+| ---: | --- |
+| 0 | `POST_CONVERGENCE_FAIL`, 1151/1200, converged step 2109, first failure step 3260 (live modes 7, hq 0.906) |
+| 101 | `NOT_CONVERGED`, 0 |
+| 202 | `NOT_CONVERGED`, 0 |
+| 303 | `NOT_CONVERGED`, 0 |
+| 404 | `NOT_CONVERGED`, 0 |
+| 505 | `NOT_CONVERGED`, 0 |
+| 606 | `NOT_CONVERGED`, 0 |
+| 707 | `POST_CONVERGENCE_FAIL`, 219/1200, converged step 3871, first failure step 4090 (live modes 8, hq 0.899) |
+
+Stay, passing checks out of 120. None is 120/120.
+
+| offset | baseline | unrolled |
+| ---: | ---: | ---: |
+| 0 | 33/120 | 50/120 |
+| 101 | 0/120 | 0/120 |
+| 202 | 0/120 | 0/120 |
+| 303 | 9/120 | 0/120 |
+| 404 | 17/120 | 0/120 |
+| 505 | 0/120 | 0/120 |
+| 606 | 53/120 | 59/120 |
+| 707 | 0/120 | 0/120 |
+
+Unequal has no mode count (vector mass metrics). Status, passing suffix, hq. Baseline passes offsets 101 and 505. Unrolled passes none; suffix is 0 everywhere.
+
+| offset | baseline | unrolled |
+| ---: | --- | --- |
+| 0 | FAIL / 2 / 0.968 | FAIL / 0 / 0.012 |
+| 101 | PASS / 5 / 0.971 | FAIL / 0 / 0.021 |
+| 202 | FAIL / 0 / 0.984 | FAIL / 0 / 0.939 |
+| 303 | FAIL / 0 / 0.977 | FAIL / 0 / 0.954 |
+| 404 | FAIL / 3 / 0.912 | FAIL / 0 / 0.910 |
+| 505 | PASS / 10 / 0.982 | FAIL / 0 / 0.822 |
+| 606 | FAIL / 0 / 0.957 | FAIL / 0 / 0.384 |
+| 707 | FAIL / 0 / 0.974 | FAIL / 0 / 0.798 |
+
+Best partial: hold offset 0 kept 8 modes at hq ≥ 0.90 for 1151 checks, then one mode left. Stay never beat 59/120 (offset 606; baseline on that offset is 53/120). Ring modes at step 1200 are lower than baseline on seven offsets.
+
+The generator is scored on a critic that has already taken five Adam steps on the batch it is about to move. That reaction does what the hop hypothesis says once a full cover exists: offset 0 held for 1151 checks and lost the hold when live modes went 8→7, and offset 707 lost it when hq slipped to 0.899 with all 8 modes still present. The same reaction is why the ring, which stops at step 1200, is worse. Baseline offset 0 already has 8 modes there (hq 0.878); unrolled offset 0 has 0 modes there and only qualifies at step 2109. Anticipating D makes the early jump onto an empty mode less attractive, so acquisition slips past the ring gate, and the hold that does form still ends before 1200 checks. Stay stays broken (best 59/120). Unequal loses both baseline passes. This does not hand off to the A6000.
+
+### Proof
+
+`python3 -m pytest tests/test_constant_lr_dynamics.py` — 10 passed. Flag unset: `test_flag_off_skips_unroll_and_hashes_match` points `_unroll` at a raiser, runs `train_mode_hold` twice for 2 steps, gets the same `(modes, hq)`, and the raiser is never called. `test_trainer_flag_off_hash_matches_and_unrolled_is_deterministic` hashes G, D, the particle prior, and both Adam states after two `GANTrainer` steps: two flag-off runs match, two `unrolled` runs match, and the two hashes differ. `test_unrolled_mode_hold_is_deterministic` matches two flagged 2-step runs. `test_functional_adam_matches_single_tensor_adam` is `torch.equal` to single-tensor Adam, including a second step with `β1 = 0.1`. `test_unroll_leaves_real_discriminator_and_changes_generator_grad` keeps the real D parameters and Adam state bit-identical across the generator backward, and the generator gradient is finite and differs from the plain critic score.
