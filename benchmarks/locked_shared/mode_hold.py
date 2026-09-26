@@ -128,6 +128,10 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     # Host critic shape from the 100-Gaussians toy. Fourier width is the
     # sharp-D stress, not an architecture swap.
     critic = SimpleMLPDiscriminator(2, HIDDEN, N_HIDDEN, FOURIER)
+    # LSUV, when ortho_lsuv is installed, rescales the unwrapped modules.
+    # A no-op for the default init and for the non-orthogonal inits.
+    from particlegan.deterministic_init import prepare_modules
+    prepare_modules(generator, critic)
     if noise_policy is not None:
         from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
         generator = wrap_output(generator, noise_policy)
@@ -147,6 +151,17 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     )
     if training_recipe is not None:
         opt_g, opt_d = training_recipe.make_optimizers(generator, critic, prior)
+    # K3P's penalty reads the critic step and, once the LR anneals, an EMA
+    # critic. Decay 0.999 is Recipe.reg_anchor_decay. b_cap is untouched.
+    if getattr(regularizer, "arm", None) == "k3p" and regularizer.anchor is None:
+        import copy
+        from particlegan.k3p import CriticAnchor
+        ema_critic = copy.deepcopy(critic)
+        ema_critic.requires_grad_(False)
+        anchor = CriticAnchor(critic, ema_critic, decay=0.999)
+        regularizer.anchor = anchor
+        regularizer.record.anchor = anchor
+        print('{"event": "mode_hold_k3p_anchor", "decay": 0.999}', flush=True)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
@@ -208,6 +223,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         d_loss.backward()
         schedule_optimizer(opt_d, step)
         opt_d.step()
+        if getattr(regularizer, "arm", None) == "k3p":
+            regularizer.after_critic_step(opt_d)
 
         latent, _ = prior.sample(batch, generator=stream)
         fake = generator(latent)
