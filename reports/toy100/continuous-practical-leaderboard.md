@@ -1,5 +1,7 @@
 # 22-toy results and continuous stability
 
+New actual-API measurements: [September 26 continuous search](continuous-api-search/README.md). No qualified winner; failed short and long traces remain available.
+
 ## Current continuous-learning eligibility — September 26, 2026
 
 **No qualified winner.** The complete learner must run without a caller-managed

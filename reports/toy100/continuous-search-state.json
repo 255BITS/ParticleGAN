@@ -569,5 +569,12 @@
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T211209Z-1398466/constant_rate_stability/20260926T211209Z-1398479",
       "status": "RUNNING"
     }
-  ]
+  ],
+  "current_api_evidence": {
+    "report": "reports/toy100/continuous-api-search/README.md",
+    "manifest": "reports/toy100/continuous-api-search/first-results.json",
+    "qualified_winner": null,
+    "status": "FIRST_RESULTS_PRESERVED_REPAIRS_RUNNING",
+    "historical_scores_inherited": false
+  }
 }
