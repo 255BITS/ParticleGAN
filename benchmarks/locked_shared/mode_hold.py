@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+from particlegan.dynamics import ema_g as ema_dynamics
 from particlegan.dynamics.shared_batch import shared_batch_update
 
 N_MODES = 8
@@ -199,10 +200,15 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
                 for group, rate in zip(opt.param_groups, rates):
                     group["lr"] = rate * scale
         real = sample_ring(means, batch, SIGMA, stream)
-        latent, _ = prior.sample(batch, generator=stream)
         context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
-        with context:
-            fake = generator(latent).detach()
+        if ema_dynamics.critic_fakes():
+            # Predeclared alternative: D trains on the averaged G and particles.
+            with context:
+                fake = ema_dynamics.averaged_fake(generator, prior, ema_g, ema_z, batch, stream)
+        else:
+            latent, _ = prior.sample(batch, generator=stream)
+            with context:
+                fake = generator(latent).detach()
         d_loss = gan.d_loss(critic(real), critic(fake))
         d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
         opt_d.zero_grad()
@@ -232,11 +238,13 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         g_loss.backward()
         schedule_optimizer(opt_g, step)
         opt_g.step()
+        decay = ema_dynamics.decay_or(recipe.ema)
         with torch.no_grad():
             for ema, param in zip(ema_g, generator.parameters()):
-                ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)
-            ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
-        checkpoint(step + 1, lambda: measure(step + 1))
+                ema.mul_(decay).add_(param, alpha=1.0 - decay)
+            ema_z.mul_(decay).add_(prior.z, alpha=1.0 - decay)
+        checkpoint(step + 1, lambda s=step + 1: ema_dynamics.score(
+            s, generator, prior, ema_g, ema_z, lambda: measure(s)))
         if diagnostics and (step + 1) % 200 == 0:
             curve.append(snapshot(step + 1))
         if diagnostics and ((step + 1) % 200 == 0 or

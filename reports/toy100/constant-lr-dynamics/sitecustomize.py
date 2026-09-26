@@ -16,6 +16,9 @@ elif name == "pair_chord":
 elif name == "shared_batch":
     from particlegan.dynamics.shared_batch import install
     install()
+elif name in ("ema_g", "ema_g_fake"):
+    from particlegan.dynamics.ema_g import install
+    install()
 elif name:
     sys.stderr.write(f"unknown K3P_DYNAMICS={name}\n")
     raise SystemExit(2)
