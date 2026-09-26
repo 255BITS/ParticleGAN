@@ -19,6 +19,7 @@ from dataclasses import dataclass, replace
 
 from .mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import ParticlePrior, ParticleRegularizer, learning_rate_scale
+from particlegan.dynamics.shared_batch import shared_batch_update
 
 N_MODES = 8
 RADIUS = 3.0
@@ -209,10 +210,14 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         schedule_optimizer(opt_d, step)
         opt_d.step()
 
-        latent, _ = prior.sample(batch, generator=stream)
+        # shared_batch: the generator plays the real batch and the latents the
+        # critic just scored. Otherwise the host draws a second batch of each.
+        share = shared_batch_update()
+        if not share:
+            latent, _ = prior.sample(batch, generator=stream)
         fake = generator(latent)
         if gan.mode in ("rp", "ra"):
-            real_g = sample_ring(means, batch, SIGMA, stream)
+            real_g = real if share else sample_ring(means, batch, SIGMA, stream)
             g_loss = gan.g_loss(critic(fake), critic(real_g))
         else:
             # Stranger / unpaired pairing: real and fake are scored apart.

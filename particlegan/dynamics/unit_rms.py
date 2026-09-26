@@ -1,0 +1,92 @@
+"""Instantaneous per-tensor RMS step at the group's existing learning rate.
+
+Adam with β1 = 0 steps each coordinate by about ``lr * sign(g)`` once the
+second moment matches ``g``. A sign flip then moves that coordinate by ``2 lr``,
+so a finite-difference probe of size ε reports a singular value of order
+``lr / ε``. That is the early joint G–D kink: at update 4 the measured gain
+went from about 109 at ε = 1e-4 to about 566 at ε = 1e-5, and ``2 * 0.00425 / ε``
+is the same order (85 and 850).
+
+The neighbor hop is the same lag on a longer window. β2 = 0.999 remembers
+``g²`` for about 1000 updates, so a row gradient that jumps about 10× for the
+40 updates before a Voronoi crossing becomes a step about 10× larger than
+``lr``.
+
+This step puts the gradient's own RMS where Adam puts ``sqrt(v̂)``, with no
+memory and no new constant::
+
+    Δ = -lr * g / (sqrt(mean(g²)) + ε)
+
+``lr`` and ``ε`` are the ones already on the Adam group (0.00425 for the
+network, 0.0085 for the prior, ε = 1e-8). Scaling ``g`` by a constant does not
+change Δ. A 10× spike does not change the RMS of Δ. A single near-zero
+coordinate cannot jump by ``2 lr``. Moments are not read and not written, so a
+rewrite that only edits Adam's moments (A2 on a sparse table) is not part of
+this step. The ring never entered that rewrite.
+"""
+from __future__ import annotations
+
+import atexit
+import json
+
+import torch
+
+receipt = {"mechanism": "unit_rms", "steps": 0}
+_ORIGINAL = None
+_LOGGED = False
+
+
+def uninstall() -> None:
+    """Restore ``Adam.step``. Used by tests; training processes leave it installed."""
+    global _ORIGINAL
+    if _ORIGINAL is None:
+        return
+    torch.optim.Adam.step = _ORIGINAL
+    _ORIGINAL = None
+
+
+def install() -> None:
+    """Replace ``Adam.step`` until process exit. Call before anything captures it."""
+    global _ORIGINAL
+    if _ORIGINAL is not None:
+        return
+    _ORIGINAL = torch.optim.Adam.step
+    torch.optim.Adam.step = _step
+    _step._unit_rms = True
+    atexit.register(_emit)
+    print(json.dumps({
+        "event": "dynamics",
+        "name": "unit_rms",
+        "setting": "per-tensor step -lr*g/(rms(g)+eps), group lr and Adam eps, no second-moment memory",
+    }), flush=True)
+
+
+def _emit() -> None:
+    print(json.dumps({"event": "dynamics_receipt", **receipt}), flush=True)
+
+
+def _step(optimizer, closure=None):
+    global _LOGGED
+    loss = None
+    if closure is not None:
+        with torch.enable_grad():
+            loss = closure()
+    with torch.no_grad():
+        for group in optimizer.param_groups:
+            decay = group.get("weight_decay", 0.0) or 0.0
+            if decay != 0.0:
+                raise RuntimeError("unit_rms expects zero weight decay")
+            lr = float(group["lr"])
+            eps = float(group["eps"])
+            sign = -1.0 if not group.get("maximize", False) else 1.0
+            for parameter in group["params"]:
+                grad = parameter.grad
+                if grad is None:
+                    continue
+                rms = grad.square().mean().sqrt()
+                parameter.add_(grad, alpha=sign * lr / (rms + eps))
+    receipt["steps"] += 1
+    if not _LOGGED:
+        _LOGGED = True
+        print(json.dumps({"event": "dynamics_step", "name": "unit_rms", "steps": 1}), flush=True)
+    return loss

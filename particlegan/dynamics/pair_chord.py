@@ -1,0 +1,188 @@
+"""Zero-centered gradient penalty at the midpoint of each relativistic pair.
+
+Particles leave a mode by climbing ``∇D`` across the open segment to a
+neighbor the critic scores higher. The penalty actually executed on the ring
+is zero-centered ``||∇D||²`` at the real sample and at the fake sample
+(legacy ``a_r1r2``, coefficient 1). It does not see the segment between them.
+The K3P penalty used by ``GANTrainer`` has the same hole: at full learning
+rate its zero-centered term is ``||∇D(real)||² / d`` only.
+
+A relativistic pair already picks one real and one fake. The chord between
+those two points has one center, the midpoint. This adds the endpoint term
+that is already zero-centered, with the coefficient already written for one
+endpoint:
+
+* legacy ``a_r1r2``: ``(c/2) mean ||∇D(mid)||²``, the same expression as each
+  of ``(c/2) mean ||∇D(real)||²`` and ``(c/2) mean ||∇D(fake)||²``;
+* K3P, including the ``s == 1`` form used at a constant learning rate:
+  ``(c/2) mean(||∇D(mid)||² / d)``, the same expression as the real term.
+
+No new coefficient, cap, or target slope. The early kink is the same critic
+gain on that chord: fakes still sit near the origin while reals sit on the
+ring, and the midpoint is where a small generator move changes ``D``.
+"""
+from __future__ import annotations
+
+import atexit
+import json
+import sys
+
+import torch
+
+receipt = {"mechanism": "pair_chord", "calls": 0}
+_FINDER = None
+_LOGGED = False
+
+
+def install() -> None:
+    """Wrap the critic penalties. Safe to call before those modules import."""
+    global _FINDER
+    if _FINDER is not None:
+        return
+    _FINDER = _Finder()
+    sys.meta_path.insert(0, _FINDER)
+    for name in ("benchmarks.legacy.grad_regularizers", "particlegan.grad_regularizers", "mechanism"):
+        module = sys.modules.get(name)
+        if module is not None:
+            _Finder._apply(name, module)
+    atexit.register(_emit)
+    print(json.dumps({
+        "event": "dynamics",
+        "name": "pair_chord",
+        "setting": "add the existing zero-centered endpoint term at the pair midpoint",
+    }), flush=True)
+
+
+def _emit() -> None:
+    print(json.dumps({"event": "dynamics_receipt", **receipt}), flush=True)
+
+
+def _chord(critic, real, fake, score, *, per_dim: bool) -> torch.Tensor:
+    mid = (real.detach() + fake.detach()) * 0.5
+    mid.requires_grad_(True)
+    gradient = torch.autograd.grad(score(critic(mid)), mid, create_graph=True)[0]
+    squared = gradient.pow(2).flatten(1).sum(dim=1)
+    if per_dim:
+        squared = squared / real.shape[1:].numel()
+    return squared
+
+
+def _note(stats, penalty, chord, collect_stats):
+    global _LOGGED
+    receipt["calls"] += 1
+    if not _LOGGED:
+        _LOGGED = True
+        print(json.dumps({"event": "dynamics_step", "name": "pair_chord", "calls": 1}), flush=True)
+    if collect_stats and isinstance(stats, dict) and "pen" in stats:
+        stats = dict(stats)
+        stats["pen"] = float(penalty.detach())
+        stats["pair_chord"] = float(chord.mean().detach())
+    return stats
+
+
+def _legacy_wrap(module) -> None:
+    original = module.GradRegularizer.penalty
+    if getattr(original, "_pair_chord", False):
+        return
+    score = module._score_scalar
+
+    def penalty(self, critic, real, fake, step=1, generator=None, collect_stats=True, *, ema_critic=None):
+        pen, stats = original(self, critic, real, fake, step, generator, collect_stats, ema_critic=ema_critic)
+        if self.arm != "a_r1r2" or (self.lazy_k > 1 and step % self.lazy_k != 0):
+            return pen, stats
+        coeff = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
+        chord = _chord(critic, real, fake, score, per_dim=False)
+        pen = pen + (coeff / 2.0) * chord.mean()
+        return pen, _note(stats, pen, chord, collect_stats)
+
+    penalty._pair_chord = True
+    module.GradRegularizer.penalty = penalty
+
+
+def _k3p_wrap(module) -> None:
+    original = module.GradientPenalty.penalty
+    if getattr(original, "_pair_chord", False):
+        return
+    score = module._score_scalar
+
+    def penalty(self, critic, real, fake, step=1, collect_stats=True, *, ema_critic=None):
+        pen, stats = original(self, critic, real, fake, step, collect_stats, ema_critic=ema_critic)
+        if self.lazy_k > 1 and step % self.lazy_k != 0:
+            return pen, stats
+        coeff = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
+        chord = _chord(critic, real, fake, score, per_dim=True)
+        pen = pen + (coeff / 2.0) * chord.mean()
+        return pen, _note(stats, pen, chord, collect_stats)
+
+    penalty._pair_chord = True
+    module.GradientPenalty.penalty = penalty
+
+
+def _mechanism_wrap(module) -> None:
+    """The probe assigns ``scaled_penalty`` onto the K3P class after import."""
+    import particlegan.grad_regularizers as regularizers
+
+    current = regularizers.GradientPenalty.penalty
+    if getattr(current, "_pair_chord_scaled", False):
+        return
+    score = regularizers._score_scalar
+
+    def penalty(self, critic, real, fake, *args, **kwargs):
+        pen, stats = current(self, critic, real, fake, *args, **kwargs)
+        step = int(args[0] if args else kwargs.get("step", 1))
+        if getattr(self, "arm", "a_r1r2") != "a_r1r2":
+            return pen, stats
+        if getattr(self, "lazy_k", 1) > 1 and step % self.lazy_k != 0:
+            return pen, stats
+        coeff = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
+        chord = _chord(critic, real, fake, score, per_dim=True)
+        pen = pen + (coeff / 2.0) * chord.mean()
+        collect = kwargs["collect_stats"] if "collect_stats" in kwargs else True
+        if "collect_stats" not in kwargs and len(args) >= 3 and isinstance(args[2], bool):
+            collect = args[2]
+        return pen, _note(stats, pen, chord, collect)
+
+    penalty._pair_chord_scaled = True
+    regularizers.GradientPenalty.penalty = penalty
+    module.scaled_penalty = penalty
+
+
+class _Loader:
+    def __init__(self, inner, name):
+        self.inner = inner
+        self.name = name
+
+    def create_module(self, spec):
+        create = getattr(self.inner, "create_module", None)
+        return None if create is None else create(spec)
+
+    def exec_module(self, module):
+        self.inner.exec_module(module)
+        _Finder._apply(self.name, module)
+
+
+class _Finder:
+    _TARGETS = {
+        "benchmarks.legacy.grad_regularizers",
+        "particlegan.grad_regularizers",
+        "mechanism",
+    }
+
+    @staticmethod
+    def _apply(name, module) -> None:
+        if name == "benchmarks.legacy.grad_regularizers":
+            _legacy_wrap(module)
+        elif name == "particlegan.grad_regularizers":
+            _k3p_wrap(module)
+        elif name == "mechanism":
+            _mechanism_wrap(module)
+
+    def find_spec(self, fullname, path, target=None):
+        if fullname not in self._TARGETS or fullname in sys.modules:
+            return None
+        import importlib.machinery
+        spec = importlib.machinery.PathFinder.find_spec(fullname, path)
+        if spec is None or spec.loader is None:
+            return None
+        spec.loader = _Loader(spec.loader, fullname)
+        return spec
