@@ -4,7 +4,7 @@ Three mechanisms for the toy100 probes at K3P's pre-anneal rates, held constant:
 
 CPU numbers below do not rank against the A6000. `--init hid_q` fixes the weights. Offset 0 is the unshifted repo seed. The other offsets (`101 202 303 404 505 606 707`) change samples and noise only, via `K3P_SEED_OFFSET`.
 
-Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
+Flag: `K3P_DYNAMICS` in `{unit_rms, pair_chord, shared_batch, extragradient}`. Unset is the constant-LR K3P baseline. `sitecustomize.py` in this directory installs the named mechanism before the probe captures `Adam.step`. The screen puts this directory on `PYTHONPATH`.
 
 Each idea has one setting taken from the existing step, the existing penalty term, or the existing batch. No coefficient, clip, or ratio was swept. Not on this track: coverage, anchors, forward-KL as a training signal, mode quotas, Chamfer assignment.
 
@@ -41,7 +41,7 @@ The ring host and `GANTrainer` draw a second latent batch and a second real batc
 
 ## Patches
 
-Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of the three names is set.
+Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant to be stacked: `__init__.py` is shared, and each patch's `sitecustomize.py` installs only that mechanism. This branch's `sitecustomize.py` installs whichever of the three names, or `extragradient`, is set.
 
 - `patches/unit_rms.patch`
 - `patches/pair_chord.patch`
@@ -49,18 +49,19 @@ Each file applies alone on develop `407c2f7a` (`git apply`). They are not meant 
 
 ## GPU commands
 
-A6000, eight offsets, constant LR. One process per mechanism so a failure does not share a job slot with the others. `unequal` is included. See the note under it before spending a GPU on that gate.
+A6000, eight offsets, constant LR. One process per mechanism so a failure does not share a job slot with the others. `unequal` is included. The extragradient CPU screen is the reason not to spend a GPU on that dynamic.
 
 ```
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics baseline --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics unit_rms --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics pair_chord --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics shared_batch --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
+python -u reports/toy100/constant-lr-dynamics/screen.py --backend cuda --dynamics extragradient --gates ring hold shift unequal --offsets 0 101 202 303 404 505 606 707
 ```
 
 Pass rules the screen prints: ring and unequal use the probe verdict (`modes`, `hq`, `passing_suffix`). Hold passes only when `status` is `PASS` and `hold_checks == 1200`. Stay passes only when shift's continued hold is `120/120` and `pass_all`. The shift terminal status is not the stay gate.
 
-`vector_unequal_mass` does not run. The probe always imports `mechanism.py`, which replaces `GradientPenalty.penalty` with `scaled_penalty`. That function does not accept `ema_critic` and reads `self.arm`. The current penalty has no `arm`, and `CriticPenalty` always passes `ema_critic`. A direct call raises `TypeError: scaled_penalty() got an unexpected keyword argument 'ema_critic'`. The same error hits the constant-LR baseline. Ring, hold, and stay use the legacy penalty and are not on this path.
+`scaled_penalty` now accepts `ema_critic`. A penalty with no `arm` (the current K3P penalty) delegates to the function this replacement captured, so `vector_unequal_mass` runs. Ring, hold, and stay still use the legacy penalty.
 
 ## CPU sanity
 
@@ -104,6 +105,27 @@ Declared before the run and not used: extrapolation from the past (reuse the pre
 
 `vector_unequal_mass` was crashing before any of these dynamics: the probe assigns `scaled_penalty` onto the K3P penalty, which now receives `ema_critic` and has no `arm`. Calls with no `arm` go to the penalty that was replaced. At constant LR that penalty stays in its `s == 1` form.
 
+### CPU screen (this build)
+
+64 jobs, 4 at a time. Baseline ring ~16 s, hold ~100 s, stay ~45 s, unequal ~33 s. Extragradient is about twice that (ring ~36 s, hold ~200 s, stay ~105 s, unequal ~80 s), which is the extra backward. Group LRs stayed `0.00425` and `[0.00425, 0.0085]`. These numbers are not an A6000 ranking. The handoff bar is missed: no hold PASS and no stay 120/120. Ring passes are 0/8, the same count as the baseline, so the miss is the stay, not a lost ring.
+
+| offset | baseline ring | EG ring | baseline hold | EG hold | baseline stay | EG stay | baseline unequal | EG unequal |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 8 / 0.878 / 0 | 0 / 0.000 / 0 | 0 | 0 | 33/120 | 0/120 | FAIL 0.968 / 2 | FAIL 0.001 / 0 |
+| 101 | 7 / 0.659 / 0 | 0 / 0.000 / 0 | 0 | 0 | 0/120 | 0/120 | PASS 0.971 / 5 | FAIL 0.000 / 0 |
+| 202 | 7 / 0.985 / 0 | 0 / 0.000 / 0 | 0 | 0 | 0/120 | 0/120 | FAIL 0.984 / 0 | FAIL 0.000 / 0 |
+| 303 | 6 / 0.670 / 0 | 0 / 0.000 / 0 | 0 | 0 | 9/120 | 0/120 | FAIL 0.977 / 0 | FAIL 0.007 / 0 |
+| 404 | 6 / 0.400 / 0 | 0 / 0.000 / 0 | 0 | 0 | 17/120 | 0/120 | FAIL 0.912 / 3 | FAIL 0.000 / 0 |
+| 505 | 4 / 0.263 / 0 | 0 / 0.000 / 0 | 0 | 0 | 0/120 | 0/120 | PASS 0.982 / 10 | FAIL 0.000 / 0 |
+| 606 | 7 / 0.694 / 0 | 0 / 0.000 / 0 | 0 | 0 | 53/120 | 0/120 | FAIL 0.957 / 0 | FAIL 0.000 / 0 |
+| 707 | 0 / 0.000 / 0 | 0 / 0.000 / 0 | 0 | 0 | 0/120 | 0/120 | FAIL 0.974 / 0 | FAIL 0.000 / 0 |
+
+Ring cells are modes / hq / passing suffix. Hold cells are `hold_checks` (status `NOT_CONVERGED` on every row). Unequal cells are status, hq, passing suffix. Baseline ring and stay repeat the earlier constant-LR sanity, including the best stay of 53/120 at offset 606. Extragradient's best stay is 0/120. Every EG ring checkpoint from step 50 through 1200 is 0 modes.
+
+On offset 0 the committed critic gradient RMS is 0.00785 at step 1 (baseline local field 0.00358) and 0.027 at step 100, with displacement RMS 0.009, larger than the learning rate. At step 1200 that gradient RMS is 0.99 and the displacement has fallen to 0.00037.
+
 ## Recommendation
 
-Do not promote any of the three. The constant-LR baseline still fails ring, hold, and stay on 8/8, which repeats #178. `unit_rms` removes the sign kink and the lagged 10× step (displacement stays at `lr` while the gradient moves) and coverage gets worse, so that kink was not what was holding the modes. `pair_chord` penalizes the open segment and also covers fewer modes than the baseline. `shared_batch` is the only one that passes a CPU ring at all, and it does not hold. A GPU ranking, if one is run, should start from `shared_batch` against this same constant-LR baseline. It should not be read as a recipe that stays. `unequal` is blocked on the probe before any of these dynamics matter.
+Do not send `extragradient` to the A6000. The lookahead did not cancel a neighbor hop: no mode was ever occupied, so there was nothing to rotate off of. Extra-Adam extrapolates by a full Adam step at 0.00425 / 0.0085. The gradient applied from the origin is the field at that point, which is already a different game (step-1 critic gradient about 2× the local field, and a step larger than `lr` by update 100). The hop in #177 is a late crossing between two occupied modes. This step never places a particle on a mode. The late collapse of the displacement is the lagged second moment absorbing that blow-up, the same memory #177 described, reached with an empty ring.
+
+Of the earlier three, still do not promote any. `shared_batch` is the only CPU ring pass, and it does not hold. Baseline unequal, now that the penalty signature is fixed, passes 2/8 offsets. That gate is not the handoff.
