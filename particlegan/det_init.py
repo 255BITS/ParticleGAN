@@ -21,6 +21,13 @@ Variants (all scales match ``kaiming_uniform_(a=sqrt(5))`` element RMS):
   input and output layers stay tiled identity at the Kaiming scale. Convs
   put that matrix on the center tap only (delta-orthogonal). Biases are zero.
 * ``hid_bias`` — ``hid`` weights with the Weyl bias pattern.
+* ``hid_edge`` — ``hid`` weights, bias pattern only on rectangular layers.
+* ``hid_q`` — ``hid`` weights, bias pattern at a quarter of the default bound.
+* ``eye_sign`` — tiled identity with alternating row signs and zero bias.
+* ``pad_in`` — padded identity on expanding layers, tiled identity on
+  contracting layers, bias pattern on every layer.
+* ``tile_in`` — tiled identity on expanding layers, padded identity on
+  contracting layers, bias pattern on every layer.
 
 The particle table is a Kronecker-Weyl sequence mapped through a rational
 inverse-normal (or into the requested uniform box). It is not a whitened QR
@@ -36,8 +43,11 @@ import math
 import torch
 from torch import nn
 
-VARIANTS = ("eye", "eye_bias", "eye_pad", "hid", "hid_bias")
-_BIAS_VARIANTS = frozenset(("eye_bias", "eye_pad", "hid_bias"))
+VARIANTS = ("eye", "eye_bias", "eye_pad", "hid", "hid_bias",
+            "hid_edge", "hid_q", "eye_sign", "pad_in", "tile_in")
+_BIAS_VARIANTS = frozenset(("eye_bias", "eye_pad", "hid_bias", "hid_edge", "hid_q",
+                            "pad_in", "tile_in"))
+_ORTHO_VARIANTS = frozenset(("hid", "hid_bias", "hid_edge", "hid_q"))
 _GAIN = math.sqrt(2.0 / (1.0 + 5.0))  # calculate_gain("leaky_relu", sqrt(5))
 _PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53)
 _STATE = {"name": None}
@@ -163,10 +173,16 @@ def _fan(weight: torch.Tensor) -> tuple[float, float]:
 
 def _how(rows: int, cols: int) -> str:
     name = _STATE["name"]
-    if name in ("hid", "hid_bias") and rows == cols and rows > 0:
+    if name in _ORTHO_VARIANTS and rows == cols and rows > 0:
         return "ortho"
+    if name == "eye_sign":
+        return "sign"
     if name == "eye_pad":
         return "pad"
+    if name == "pad_in":
+        return "pad" if rows >= cols else "tile"
+    if name == "tile_in":
+        return "pad" if rows < cols else "tile"
     return "tile"
 
 
@@ -199,7 +215,12 @@ def _matrix(rows: int, cols: int, std: float, how: str, numel: int) -> torch.Ten
     if how == "ortho":
         return _householder(rows) * _GAIN
     unit = _unit(rows, cols, padded=(how == "pad"))
-    nnz = float(unit.sum())
+    if how == "sign" and rows:
+        signs = torch.where((torch.arange(rows) % 2).to(dtype=torch.bool),
+                            -torch.ones(rows, dtype=torch.float64),
+                            torch.ones(rows, dtype=torch.float64))
+        unit = unit * signs[:, None]
+    nnz = float(unit.abs().sum())
     if nnz == 0 or numel == 0:
         return unit
     return unit * (std * math.sqrt(numel / nnz))
@@ -229,10 +250,16 @@ def _write_weight(weight: torch.Tensor) -> None:
 def _write_bias(bias: torch.Tensor | None, weight: torch.Tensor) -> None:
     if bias is None:
         return
-    if _STATE["name"] not in _BIAS_VARIANTS:
+    name = _STATE["name"]
+    rows, cols = int(weight.shape[0]), int(weight.shape[1])
+    rectangular = rows != cols
+    use_bias = name in _BIAS_VARIANTS and not (name == "hid_edge" and not rectangular)
+    if not use_bias:
         _place(bias, torch.zeros(bias.shape, dtype=torch.float64))
         return
     _, bound = _fan(weight)
+    if name == "hid_q":
+        bound *= 0.25
     n = bias.numel()
     vals = (2.0 * _weyl(n, 1).reshape(-1) - 1.0) * bound
     _place(bias, vals.reshape(bias.shape))
