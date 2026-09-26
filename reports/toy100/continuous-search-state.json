@@ -2,8 +2,8 @@
   "status": "baseline_complete",
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
-  "active_round": 7,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T065851Z",
+  "active_round": 8,
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260926T133716Z",
   "workflow": [
     "baseline complete: hold PASS, shift FAIL",
     "review mechanism comparison recommendations",
@@ -25,7 +25,8 @@
     "r2_moment_surprise": "LEAD (not promoted): hold 114/120, recovery 72/81 delay 490 final 8/0.997, 4/4 sensitive toys, frozen twin 0/81. Moment-surprise release (REL_HI 3.0 / REL_LO 1.75), EMA iff W==1, guarded re-seed. Missing: 6 hold checks, 9 deadline checks, full 22, stress, cross-seed/nudge. See continuous-practical-leaderboard.md.",
     "b3_belief_tie": "TIE with R2 (not a win): hold 114/120 (identical 6 steps), recovery 73/81 delay 480 final 8/1.0. R2 gate rebuilt on AdaBelief belief-surprise. Frozen/toys NOT_RUN. See leaderboard.",
     "sg3_graded_memory": "Second family: hold 114/120 (same 6 fails), recovery 43/81 delay 1080 final 8/0.919, latch engaged, 19 reseeds. Beats B2 with R2-grade hold. See leaderboard.",
-    "r2_offseed": "DEFINITIVE NEGATIVE: exact R2 FAILs shift+frozen+hold at all of seeds {1,2,3} and fails the nudge at 1e-6 and 3e-7. Mechanism does not widen the basin."
+    "r2_offseed": "DEFINITIVE NEGATIVE: exact R2 FAILs shift+frozen+hold at all of seeds {1,2,3} and fails the nudge at 1e-6 and 3e-7. Mechanism does not widen the basin.",
+    "ka2_asymmetric_kalman": "Best JOINT (not promoted): hold 120/120 FULL + recovery 50/81 delay 1120 final 8/0.996, frozen twin 0/81. Certainty-gated EMA with asymmetric attack/release. Back-loaded (stable 3520); bundle persisted gan-attempts/lead-ka2-bundle. See leaderboard."
   },
   "previous_round": {
     "round": 2,
@@ -261,7 +262,7 @@
     "final_attempt_archive": "reports/toy100/continuous-round-3/stop-inventory/manifest.json"
   },
   "historical_current_lead": "r2_moment_surprise",
-  "current_lead": null,
+  "current_lead": "ka2_asymmetric_kalman",
   "active_phase": "public_default_baseline_measured",
   "baseline": {
     "status": "MEASURED",
