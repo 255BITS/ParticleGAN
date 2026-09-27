@@ -13,13 +13,22 @@ skipped in the authoritative CPU run). Both include the same develop initializer
 Earlier measurements remain under `../continuous-api-search/` with their original
 sources and initialization. Neither PR is being merged into develop here.
 
-The first three public controls have completed the new-initialization screen.
+**DV12 is the first new-initialization screen survivor:** it reaches all eight
+modes at update650 and passes all12 observations from there through update1200.
+Its exact adaptive-rate package is now being tested on the unequal-mass target
+that previously rejected it. This is a lead to investigate, not a release winner.
+
+The three public controls have completed the new-initialization screen.
 K3P and default KA2 both finish with 6/8 modes; constant-rate KA2 finishes with
 4/8. All three score 0/24 passing observations. These are measured coverage
 failures, not initialization or harness errors. See [the new leaderboard](leaderboard.md)
 and [the full source inventory](../continuous-api-search/fixed-init-retest-inventory/README.md).
-The 46 experimental API configurations and historical research entries remain
-in the retest queue; no default has been selected.
+The 46 experimental API configurations and historical research entries are tracked
+in [the retest queue](retest-queue.md); no default has been selected.
+Original research mechanisms have their own [new-init scores](research-leaderboard.md),
+separate from public API measurements. Original research KA2 also fails this
+strict screen, ending at7/8 modes. Its old host's looser diagnostic is preserved
+but does not override the common eight-mode gate.
 
 The quick hard screen is the existing small-particle `mode_hold`: 12 particles,
 latent dimension4, batch128, 1200 updates, 24 observations and the unchanged

@@ -1,0 +1,49 @@
+{
+ "calls": 0,
+ "dimensions": {},
+ "extra_critic_forwards": 0,
+ "anchor_forwards": 0,
+ "rule": "pnb3",
+ "guard_c": 5.0,
+ "guard_min_steps": 200,
+ "anchor_decay": 0.999,
+ "anchor_floor": 0.25,
+ "gain_min": 0.05,
+ "gain_max": 1.0,
+ "cos_ema": 0.95,
+ "rise": 1.01,
+ "decay_neg": 0.997,
+ "spike_ratio": 2.0,
+ "formula": "shared gain fixed at 1 so prior/network stay at the recipe 2x ratio; penalty=A+0.25*P; no cosine decay",
+ "budget_dependencies": [
+  "LR gain and critic mix do not read step, total_steps, horizon cap, floors, scores, or targets",
+  "host noise schedule is unchanged K3P (driver noise_horizon 1200); intermediate, not a controller input",
+  "host horizon LR is overwritten for the Adam update and restored before the step returns"
+ ],
+ "critic_parameters": null,
+ "anchor_started_call": null,
+ "s_trace": [],
+ "prox_trace": [],
+ "balance_trace": [],
+ "applied_lr_last": {},
+ "scheduled_lr_last": {},
+ "final_s": 1.0,
+ "final_gain": {
+  "g": 1.0,
+  "d": 1.0,
+  "prior": 1.0
+ },
+ "final_cos_ema": {
+  "g": 1.0,
+  "d": 1.0,
+  "prior": 1.0
+ },
+ "seen": {
+  "g": 0,
+  "d": 0,
+  "prior": 0
+ },
+ "guard_clipped_tensors": 0,
+ "guard_clip_steps": [],
+ "guard_clip_step_count": 0
+}

@@ -46,5 +46,9 @@ All runs use develop’s deterministic network and prior initialization, 1,200 p
 | [API-RP13-new-init](evidence/api-rp13-new-init-logging-error/archive-manifest.json) | ERROR | 0/0 | — | 0 | — / — | INCOMPLETE_NEW_RUN_NO_QUALITY_SCORE |
 | [API-RP15-new-init](evidence/api-rp15-new-init-logging-error/archive-manifest.json) | ERROR | 0/0 | — | 0 | — / — | INCOMPLETE_NEW_RUN_NO_QUALITY_SCORE |
 | [API-RP12-new-init](evidence/api-rp12-new-init-logging-error/archive-manifest.json) | ERROR | 0/0 | — | 0 | — / — | INCOMPLETE_NEW_RUN_NO_QUALITY_SCORE |
+| [API-C10-new-init](evidence/api-c10-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 7 / 98.5% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
+| [API-C11-new-init](evidence/api-c11-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 4 / 92.1% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
+| [API-C8-new-init](evidence/api-c8-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 3 / 57.1% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
+| [API-C9-new-init](evidence/api-c9-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 2 / 48.9% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
 
 Arrival means the first observation meeting both quality and coverage. All later departures and the complete observations are preserved in each linked record. Scheduled controls retain their declared horizon and noise settings; their quality results do not establish autonomous indefinite operation.

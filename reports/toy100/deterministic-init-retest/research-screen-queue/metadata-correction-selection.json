@@ -1,0 +1,44 @@
+[
+  {
+    "queue_row": "research:overnight-20260925/k3g",
+    "candidate": "RESEARCH-k3g-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/k3g-31ccc839",
+    "manifest_sha256": "a10fdf7363501923e068f776f5ecc9b8f29ca44b1b1d36a34c67b126063f8bfb",
+    "source_plan_sha256": "27b600092aee4f93043d8578e56aed79752f5ce5aefd2f3e3e3ea3cdbca7581c",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/k3g-31ccc839/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/k3g-31ccc839/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/k3g-31ccc839/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/k3g-31ccc839",
+    "required_review_relative": "reviews/k3g-31ccc839/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "priority:historical-base/a2_bounded_damp",
+    "candidate": "RESEARCH-a2_bounded_damp-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/a2-bounded-damp-4255bed6",
+    "manifest_sha256": "57ae349b9d76e6c24110dcfee30459eec16eaf2e824bee158481619854054f9d",
+    "source_plan_sha256": "be35af88f12af89ab5556cee074f383dc81848cbed0f8b134e92b72fd44e5966",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/a2-bounded-damp-4255bed6/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/a2-bounded-damp-4255bed6/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/a2-bounded-damp-4255bed6/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/a2-bounded-damp-4255bed6",
+    "required_review_relative": "reviews/a2-bounded-damp-4255bed6/cpu-constructor-proof.json"
+  }
+]

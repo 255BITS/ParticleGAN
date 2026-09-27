@@ -1,0 +1,11 @@
+{
+  "scope": "Reviewer metadata schema issue only, not learner or quality error",
+  "candidates": [
+    "RESEARCH-k3g-new-init",
+    "RESEARCH-a2_bounded_damp-new-init"
+  ],
+  "cause": "KeyError: critic_steps after all constructor assertions; older source receipts do not define this field",
+  "repair": "Check universal calls and optional actual counter fields; no candidate changes; forward/backward/Adamstep sentries remain",
+  "original_batch_results": "next-seventeen-cpu-results.json",
+  "corrected_results": "metadata-correction-cpu-results.json"
+}

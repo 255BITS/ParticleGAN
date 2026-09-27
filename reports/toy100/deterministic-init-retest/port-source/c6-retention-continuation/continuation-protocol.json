@@ -1,0 +1,103 @@
+{
+  "status": "PROSPECTIVE_SUPPLEMENT_SOURCE_REVIEW_REQUIRED",
+  "original_gate": "ALL_ORIGINAL_1200_FAIL_RESULTS_PRESERVED",
+  "start_completed": 1200,
+  "end_completed": 2400,
+  "observations": [
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1600,
+    1650,
+    1700,
+    1750,
+    1800,
+    1850,
+    1900,
+    1950,
+    2000,
+    2050,
+    2100,
+    2150,
+    2200,
+    2250,
+    2300,
+    2350,
+    2400
+  ],
+  "recipe_policy": "Exact original total_steps7000, continuous=True, LRfloors1, startupnoise360/720 and all original game/critic policies. No reset or initializer replay after load.",
+  "restore_policy": "torch.load with no map_location; API load_state_dict then exact serialized material equality including tensor devices, callerdata RNG and native CPU scalar clocks.",
+  "report": [
+    "allnew24 observations",
+    "passing/total since each own original first arrival",
+    "eachdepartureafterownarrival",
+    "minHQ/modes",
+    "finalpassing suffix",
+    "originalfrozen1200FAILseparate"
+  ],
+  "no_model_execution_during_preparation": true,
+  "checkpoint_coverage_caveat": "Original GANTrainer checkpoint omits module training flags; fixed frozen host has no mode-dependent layer and public step resets G/D modes each update. No claim of arbitrary-host mode restoration.",
+  "candidates": {
+    "api-c6": {
+      "candidate": "API-C6-new-init",
+      "original_artifacts": {
+        "initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/initial-state.pt",
+          "sha256": "91bca275fc409ad78b53e48a112e721837d6294a6b08516858733e587007b6c5"
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/final-state.pt",
+          "sha256": "a6bbf1066e9ebdf5066c021bc7e8c62c446d52eceed6b88550d2966d5c93cda7"
+        },
+        "declaration.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/declaration.json",
+          "sha256": "eb0a6be03d56deb5c0f22dbd948984233cccf9ec1daab2c4d40f7aececa4a8a1"
+        },
+        "source.zip": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/source.zip",
+          "sha256": "cae0475a45cf555e514b4aaee4696afa738462ddf556204df9aa6d82a7138ff9"
+        },
+        "metrics.jsonl": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/metrics.jsonl",
+          "sha256": "af5f5892e6ff95ac61255cb08d48569025876d5b6173543b119b9efd84a2dacd"
+        },
+        "result.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/result.json",
+          "sha256": "b1e42c7d72d8e67000c143792b3dddb1fc596d9ffa78848097e0f91162a4968f"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/protocol.json",
+          "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+        },
+        "runtime.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/runtime.json",
+          "sha256": "72d37da77960b89fab894d7b6bfe40027363deab6d7ce3705d98dd2bb5fac3fa"
+        },
+        "artifact-sha256.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022045Z/constant-wave2/20260927T022045Z-1892001/repo/reports/fixed-init-mode-hold/api-c6/artifact-sha256.json",
+          "sha256": "701529382fe0045ba517158ce5d909b901075388b9231c32303668454eb6ee9d"
+        }
+      },
+      "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-c6/package",
+      "candidate_declaration": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-c6/candidate-declaration.json",
+      "candidate_declaration_sha256": "eb0a6be03d56deb5c0f22dbd948984233cccf9ec1daab2c4d40f7aececa4a8a1",
+      "original_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 1,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 1,
+        "first_pass_step": 1200,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      }
+    }
+  },
+  "known_old_init_limitation": "Historical C6 had late stationary7500 collapse; new-init short retention cannot establish long stability."
+}

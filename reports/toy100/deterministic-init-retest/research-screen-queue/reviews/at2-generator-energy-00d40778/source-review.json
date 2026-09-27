@@ -1,0 +1,43 @@
+{
+  "status": "PASS_SOURCE_AND_CPU_INITIALIZATION",
+  "candidate": "RESEARCH-at2_generator_energy-new-init",
+  "manifest_sha256": "46faeb6a70cad638573a814311f291d9c940d50196191cf15769fe2f258e5203",
+  "source_plan_sha256": "344a0556a908a5e3992012c01cdb45f98a6849a8c2f75bb446f7a180ac2300e3",
+  "cpu_proof_sha256": "2fa1c4f494c93465656fc46084e57fe8d6c9a465219ffee97854f59f711e3adc",
+  "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+  "runner_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+  "exact_original_candidate_files": [
+    "checkpoint.py",
+    "convergence_gate.py",
+    "probe.py",
+    "mechanism.py",
+    "hold.py",
+    "config.json",
+    "native100.py",
+    "shift_frozen.py",
+    "declaration.json",
+    "shift.py",
+    "latent.py",
+    "response.py",
+    "signal_policy.py"
+  ],
+  "exact_reviewed_probe_dependency_fallbacks": [],
+  "unchanged_shared_runtime_files": 200,
+  "cpu_checks": {
+    "all_initial_tensors_match_public_host": true,
+    "repeat_without_rng_reset": true,
+    "constructor_rng_cursor_preserved": true,
+    "initializer_rng_neutral": true,
+    "historical_prior_registration_preserved": true,
+    "all_bindings_restore_on_exception": true,
+    "batch_distance_scope_explicit": true
+  },
+  "source_definition": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "scope": "Frozen dense research mode_hold; custom original learner and new public constructor initialization only",
+  "limits": [
+    "CPU constructors only; zero forwards, backwards, optimizers or GPU.",
+    "Fresh external quality required; no old22 scores inherited.",
+    "When original runtime receipt is unresolved, common declared retest runtime is explicit; no historical execution bit-parity claim.",
+    "Historical recipe/horizon eligibility remains separate from small-screen quality."
+  ]
+}

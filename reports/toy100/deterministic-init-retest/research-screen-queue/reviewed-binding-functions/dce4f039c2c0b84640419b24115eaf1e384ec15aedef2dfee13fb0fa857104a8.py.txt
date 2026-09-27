@@ -1,0 +1,16 @@
+def _install_phase_rates():
+    global _ORIGINAL_POLICY
+    from benchmarks.toy100 import schedule
+    _ORIGINAL_POLICY = schedule.policy_multipliers
+    if _ORIGINAL_POLICY is _phase_multipliers:
+        return
+    schedule.policy_multipliers = _phase_multipliers
+    for module in list(sys.modules.values()):
+        if module is None:
+            continue
+        name = getattr(module, '__name__', '')
+        if not name.startswith(('particlegan', 'benchmarks')):
+            continue
+        for attr, value in list(vars(module).items()):
+            if value is _ORIGINAL_POLICY:
+                setattr(module, attr, _phase_multipliers)

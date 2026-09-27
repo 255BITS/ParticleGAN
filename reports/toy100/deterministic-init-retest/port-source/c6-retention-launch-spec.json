@@ -1,0 +1,55 @@
+{
+  "status": "REVIEWED_READY_FOR_EXTERNAL_RUN",
+  "lane": "c6-retention",
+  "sources": {
+    "probe": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/c6-retention-continuation",
+      "files": {
+        "README.md": "721e3460d4bb33d1fde7d2e6a8df97f0c85225e0cd4ae971af331f9250dff8b5",
+        "continuation-protocol.json": "7e6c5d0af35c921ee0f828215a8129f106df06e96ad245b88efeaab8e760a944",
+        "continuation.py": "7f4c574c3a535d8f614a66d15ba39a9813eff21da2128f4f397b46ca4aa06c06",
+        "init_contract.py": "c8bcf84e9b165a83ba78f06c0e288dd4d8b4c77a0b7588cb18fd669f9647ebdd",
+        "mode-hold-source/batch-receipts.jsonl.gz": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+        "mode-hold-source/extraction.json": "a30f17d4a58c2ba4a53a071d0b4783658cc4a23382f43bc6c044d67cc2e87ae6",
+        "mode-hold-source/fixture-receipt.json": "532cbfadb0e5e254ae849568e59e452ea4da7a0f6301649b0f94e437e499cbbc",
+        "mode-hold-source/frozen-mode-hold-host.zip": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+        "mode-hold-source/frozen_host.py": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c",
+        "mode-hold-source/original-execution-contract.py": "23a5796236eae1f794931da3de53c0f5ba62fe6afef39124b83a51efcca78795",
+        "mode_hold_contract.py": "db58961d99fc99df4d4446c114233e4aa7a45886e6f29c694b8a87e5e4851a46",
+        "mode_hold_harness.py": "33d60389fc7a83eeed4fbda5becef3c95adcce0063f0f69baad4aaf303419fbf",
+        "preflight.py": "1274b6d0e9cbe35a5fec220d3f1b0a98aa038135bd7ce6032075a4c5fae276d2",
+        "protocol.json": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+        "bundle-sha256.json": "00fc76428346f0e4bdcae80cab0e971799f4d29b30ca166f345aff96cb3cda8c"
+      }
+    },
+    "review": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/c6-retention-review",
+      "files": {
+        "source-audit.json": "ce5ff006a7328c40dc046fdcb539aab5817dbe73882823fa28d26fa0e51eee98",
+        "source-audit.md": "44573ecb0f76ed186f520700e006b50041893926fe2abcbb69365408c567b735",
+        "source_audit.py": "954de51cd5bd2bb63025e997ff202626b3d10612502ccec10ac82b4980ef56d8"
+      }
+    }
+  },
+  "independent_reviews": [
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/c6-retention-review/source-audit.json",
+      "sha256": "ce5ff006a7328c40dc046fdcb539aab5817dbe73882823fa28d26fa0e51eee98",
+      "required_status": "PASS_SOURCE_REVIEW"
+    }
+  ],
+  "cases": [
+    {
+      "id": "api-c6-retention",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/probe/continuation.py",
+        "--candidate",
+        "api-c6",
+        "--output",
+        "{output}/api-c6-retention"
+      ]
+    }
+  ],
+  "instructions": "SUPPLEMENTARY RETENTION ONLY. Resume exact own new-initC6final1200checkpoint, unchanged package/recipe/callerRNG/nativeCPUAdamclocks. Retain total_steps7000,continuousTrue,LRfloors1,startupnoise360/720 and game update policy. Checkserializedrestore,original1200live+EMAendpoint, all original1200batchreceipts; continue1201\u20132400/all24new50-cadenceobservations. Original1200FAIL1/24suffix1 remainsunchanged. Reportfirst1200arrival, alldepartures/minima/finalsuffix; historicaloldinitlate7500collapse remainsaseparateweakness. No retries, broader tests, seed variants, resets, policyfixes, extra extensions or freshcontrolruns. Originalsource/checkpoints are read-only references. Preserveerrors/source/fullstate/everyobservation. One externalworker only."
+}

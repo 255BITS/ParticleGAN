@@ -1,0 +1,443 @@
+[
+  {
+    "queue_row": "research:continuous-round-2/k3p_balanced_updates/kbu3_late_quiet_band",
+    "candidate": "RESEARCH-kbu3_late_quiet_band-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/kbu3-late-quiet-band-a31ef685",
+    "manifest_sha256": "d531386ccc95ddb239d315e01a6263c3fabcd50c76568d3e226d69dd44e6ef64",
+    "source_plan_sha256": "a15f70a8e161abc3d827d7a2350f43125d9e0a8199d441e49ec5544913626d1e",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/kbu3-late-quiet-band-a31ef685/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/kbu3-late-quiet-band-a31ef685/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/kbu3-late-quiet-band-a31ef685/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/kbu3-late-quiet-band-a31ef685",
+    "required_review_relative": "reviews/kbu3-late-quiet-band-a31ef685/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_precision_recovery/p1_hysteresis_dwell",
+    "candidate": "RESEARCH-p1_hysteresis_dwell-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/p1-hysteresis-dwell-a2bc491a",
+    "manifest_sha256": "645718ce0250341a69b2f5ab70f7f61f3cdd0db059da7e3c38db891c62a59670",
+    "source_plan_sha256": "0e4774a00582251cec0b4bffc034fe67a3ff49e3fc08e21d1efa866313cb81da",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/p1-hysteresis-dwell-a2bc491a/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/p1-hysteresis-dwell-a2bc491a/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/p1-hysteresis-dwell-a2bc491a/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/p1-hysteresis-dwell-a2bc491a",
+    "required_review_relative": "reviews/p1-hysteresis-dwell-a2bc491a/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_precision_recovery/p2_generator_collapse",
+    "candidate": "RESEARCH-p2_generator_collapse-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/p2-generator-collapse-78860412",
+    "manifest_sha256": "804a8d0d6d0faea8e620b14dfceb0aa3dabefb4cb7fa2364b19ae38ac62a8c9a",
+    "source_plan_sha256": "04bf6414425e4ba968d27c282603c4cd2f22c312edb5d8eda89c5cc60034d134",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/p2-generator-collapse-78860412/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/p2-generator-collapse-78860412/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/p2-generator-collapse-78860412/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/p2-generator-collapse-78860412",
+    "required_review_relative": "reviews/p2-generator-collapse-78860412/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-curvature-rp1/k3p_local_curvature/lc1_secant_growth",
+    "candidate": "RESEARCH-lc1_secant_growth-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/lc1-secant-growth-192ca937",
+    "manifest_sha256": "8aca5ae01ef4b85a448f566cb28ce4f113e215221af9f0b43115450148cd1c85",
+    "source_plan_sha256": "e13b0cd9d05e195ec1ff0dca0a40ebce111cbe93b954b3d2ffea454289433ff2",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc1-secant-growth-192ca937/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/lc1-secant-growth-192ca937/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc1-secant-growth-192ca937/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/lc1-secant-growth-192ca937",
+    "required_review_relative": "reviews/lc1-secant-growth-192ca937/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-curvature-rp1/k3p_local_curvature/lc2_calibrated_secant",
+    "candidate": "RESEARCH-lc2_calibrated_secant-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/lc2-calibrated-secant-08b05698",
+    "manifest_sha256": "b516c532c597203dcc3bffea0a59e3d6fbd176216c1ba5185dc644425a4e4c1a",
+    "source_plan_sha256": "ee278495dbe0cbb16b8a2ed9f6b57b133c70144c2201047dadac3e81b2234060",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc2-calibrated-secant-08b05698/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/lc2-calibrated-secant-08b05698/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc2-calibrated-secant-08b05698/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/lc2-calibrated-secant-08b05698",
+    "required_review_relative": "reviews/lc2-calibrated-secant-08b05698/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-curvature-rp1/k3p_local_curvature/lc3_step_independent_secant",
+    "candidate": "RESEARCH-lc3_step_independent_secant-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/lc3-step-independent-secant-19431b8d",
+    "manifest_sha256": "fb01756270f65a630de5a9114fb801af0c0f6b69eb7778bfba8dfd7923b2ebd4",
+    "source_plan_sha256": "4b9ae754f05763814f2d62fa7b20973c738ae5d2be1f2c625219652bf72d86be",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc3-step-independent-secant-19431b8d/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/lc3-step-independent-secant-19431b8d/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc3-step-independent-secant-19431b8d/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/lc3-step-independent-secant-19431b8d",
+    "required_review_relative": "reviews/lc3-step-independent-secant-19431b8d/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-mobility/k3p_particle_mobility/pm2_dwell_anchor",
+    "candidate": "RESEARCH-pm2_dwell_anchor-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/pm2-dwell-anchor-5994a0eb",
+    "manifest_sha256": "068a5770dbdb7dd29adf0fe27a3fe44b63937f570c52b749847833a9fdd2f2ac",
+    "source_plan_sha256": "76c07a21923206c74df1081a77f2a938404198dc8aef16b7a0f0940fcbb62a00",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/pm2-dwell-anchor-5994a0eb/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/pm2-dwell-anchor-5994a0eb/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/pm2-dwell-anchor-5994a0eb/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/pm2-dwell-anchor-5994a0eb",
+    "required_review_relative": "reviews/pm2-dwell-anchor-5994a0eb/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-trust/k3p_joint_trust/jt1_shared_radius",
+    "candidate": "RESEARCH-jt1_shared_radius-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/jt1-shared-radius-0e0495b3",
+    "manifest_sha256": "7b69ad06b826466c0afe9769f0d35723758d642246706b59815d428ef03c33cb",
+    "source_plan_sha256": "44b2333f5ff00926fdb44f022602f74d5544010e9fa5ed96983b1274d55ef7ee",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt1-shared-radius-0e0495b3/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/jt1-shared-radius-0e0495b3/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt1-shared-radius-0e0495b3/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/jt1-shared-radius-0e0495b3",
+    "required_review_relative": "reviews/jt1-shared-radius-0e0495b3/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-trust/k3p_joint_trust/jt2_growth_trust",
+    "candidate": "RESEARCH-jt2_growth_trust-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/jt2-growth-trust-c630d2b1",
+    "manifest_sha256": "c97c68205bdcc32b3a77b1803c8efcb6d91e8143970b79f7d81d7de12718dc53",
+    "source_plan_sha256": "41d0404af44967c8d236fc0eccc2529614287f9fd1cfacf5667579f821f1811d",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt2-growth-trust-c630d2b1/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/jt2-growth-trust-c630d2b1/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt2-growth-trust-c630d2b1/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/jt2-growth-trust-c630d2b1",
+    "required_review_relative": "reviews/jt2-growth-trust-c630d2b1/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-trust/k3p_joint_trust/jt3_late_growth",
+    "candidate": "RESEARCH-jt3_late_growth-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/jt3-late-growth-04e7648a",
+    "manifest_sha256": "d56e6c259f04536c2387e3d288eca6ae6aa9cd23ec85a754b3740530513f292a",
+    "source_plan_sha256": "2f78e1a124a18ecaa483d0a0f0ec5197517a6f2beb9b3ca2c33d2bc77eefae9b",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt3-late-growth-04e7648a/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/jt3-late-growth-04e7648a/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt3-late-growth-04e7648a/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/jt3-late-growth-04e7648a",
+    "required_review_relative": "reviews/jt3-late-growth-04e7648a/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-1/adaptive_anchor/a3_reversal_strength",
+    "candidate": "RESEARCH-a3_reversal_strength-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/a3-reversal-strength-63ada37d",
+    "manifest_sha256": "30dcbc9754387ea22a191f73783ae8a785fb7203daca331b8c36851c1a8407d2",
+    "source_plan_sha256": "157b376ff673dff065a06b49f5a8ecf3844839d6b48eaf42ad225e7ed14ae65b",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/a3-reversal-strength-63ada37d/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/a3-reversal-strength-63ada37d/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/a3-reversal-strength-63ada37d/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/a3-reversal-strength-63ada37d",
+    "required_review_relative": "reviews/a3-reversal-strength-63ada37d/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-1/stationary_noise/sn1",
+    "candidate": "RESEARCH-sn1-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/sn1-9e99c8d7",
+    "manifest_sha256": "1a65d5b9eb74a282e2a2dc2c088178129998eaeb6f304c3f9fa0ed9d993e35f4",
+    "source_plan_sha256": "fef07133a0a5686dc96de62c738bb15b3df2a1d26140d5426d1cfc8e9fd1a3a4",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn1-9e99c8d7/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/sn1-9e99c8d7/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn1-9e99c8d7/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/sn1-9e99c8d7",
+    "required_review_relative": "reviews/sn1-9e99c8d7/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-1/stationary_noise/sn2",
+    "candidate": "RESEARCH-sn2-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/sn2-be227066",
+    "manifest_sha256": "e4c09ad9b9f19c281ef5d0ca7854ad5669b74a56c1061ec364bb2e0fd0f9bc58",
+    "source_plan_sha256": "4832c321108fd0164743ec25f11b0aa4ec85732ad45f3e54fd3a1f94d8dc6260",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn2-be227066/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/sn2-be227066/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn2-be227066/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/sn2-be227066",
+    "required_review_relative": "reviews/sn2-be227066/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-1/stationary_noise/sn3",
+    "candidate": "RESEARCH-sn3-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/sn3-2f595f84",
+    "manifest_sha256": "ab40063282ba28f4d64fba16b11e5b8b94ae2a871c956a898393828301f90e01",
+    "source_plan_sha256": "40874e216893bffdf6aa8eee4d55d8c8004afca25257cb6f1fc5153327629d00",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn3-2f595f84/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/sn3-2f595f84/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn3-2f595f84/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/sn3-2f595f84",
+    "required_review_relative": "reviews/sn3-2f595f84/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_adversarial_progress/ap1_magnitude_phase",
+    "candidate": "RESEARCH-ap1_magnitude_phase-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ap1-magnitude-phase-2c107d81",
+    "manifest_sha256": "9091de085555698ba7a304952e29bf7c7494810beef5a597f9d4bbde5857d539",
+    "source_plan_sha256": "8e4f0dcd8666ef7133de2e12b6074a34a2ae09ca3ea1bcafa2b4c747ba4f85ae",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ap1-magnitude-phase-2c107d81/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ap1-magnitude-phase-2c107d81/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ap1-magnitude-phase-2c107d81/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ap1-magnitude-phase-2c107d81",
+    "required_review_relative": "reviews/ap1-magnitude-phase-2c107d81/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_adversarial_progress/ap2_anchored_reopen",
+    "candidate": "RESEARCH-ap2_anchored_reopen-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ap2-anchored-reopen-feb7886b",
+    "manifest_sha256": "0a5df7a98beb4822dfa0eda5b502901a59d3d376fca1456c139d2d2c6880994c",
+    "source_plan_sha256": "6fced39f112612671306e54d9de4d98b246c22b0a80cc83b54278d105b31e918",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ap2-anchored-reopen-feb7886b/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ap2-anchored-reopen-feb7886b/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ap2-anchored-reopen-feb7886b/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ap2-anchored-reopen-feb7886b",
+    "required_review_relative": "reviews/ap2-anchored-reopen-feb7886b/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_noise_and_signal/ns1_cosine_heat",
+    "candidate": "RESEARCH-ns1_cosine_heat-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ns1-cosine-heat-15ca7e89",
+    "manifest_sha256": "8b1d7c5f2d9e06e8314701c2993e5823c3db0b24adfde896af2095759bd1be2f",
+    "source_plan_sha256": "966cec7c0a5981bdd876fb696bbda0ecce06cacc864f8f5f69b15651d6a02ec2",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns1-cosine-heat-15ca7e89/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ns1-cosine-heat-15ca7e89/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns1-cosine-heat-15ca7e89/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ns1-cosine-heat-15ca7e89",
+    "required_review_relative": "reviews/ns1-cosine-heat-15ca7e89/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_noise_and_signal/ns2_paced_floor",
+    "candidate": "RESEARCH-ns2_paced_floor-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ns2-paced-floor-b0038325",
+    "manifest_sha256": "c7758d9d4ebbf63ccbe1e39f560c005041572ee6fa4bb24e5fd35b62fa9354ca",
+    "source_plan_sha256": "f88cb207b1639471437243b3bebaf40911c565455dc33f1c64d2afe642b362d6",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns2-paced-floor-b0038325/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ns2-paced-floor-b0038325/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns2-paced-floor-b0038325/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ns2-paced-floor-b0038325",
+    "required_review_relative": "reviews/ns2-paced-floor-b0038325/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:continuous-round-2/k3p_noise_and_signal/ns3_fixed_schedule_shock",
+    "candidate": "RESEARCH-ns3_fixed_schedule_shock-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ns3-fixed-schedule-shock-32b0ade5",
+    "manifest_sha256": "94efd6688b8a08ba362fc3d27d9637000fdfc767c3f3878ae06f9221f4a3a0c8",
+    "source_plan_sha256": "be74bf7a3e652085b05d238e7f824308a87ab79fb390a406f27696ee8ddf08e7",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns3-fixed-schedule-shock-32b0ade5/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ns3-fixed-schedule-shock-32b0ade5/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns3-fixed-schedule-shock-32b0ade5/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ns3-fixed-schedule-shock-32b0ade5",
+    "required_review_relative": "reviews/ns3-fixed-schedule-shock-32b0ade5/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-acquisition/k3p_transfer_acquisition/ac1_persistence",
+    "candidate": "RESEARCH-ac1_persistence-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ac1-persistence-549d59e6",
+    "manifest_sha256": "6d980644f65b50ae12b6f98301a2083d994e24a889ca2e6203a52eb471de00b7",
+    "source_plan_sha256": "7dfc021bee670d03a0ccb944ad907711f40d024af9012dfb3605da821e5288f5",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ac1-persistence-549d59e6/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ac1-persistence-549d59e6/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ac1-persistence-549d59e6/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ac1-persistence-549d59e6",
+    "required_review_relative": "reviews/ac1-persistence-549d59e6/cpu-constructor-proof.json"
+  },
+  {
+    "queue_row": "research:round3-completed-acquisition/k3p_transfer_acquisition/ac2_advantage",
+    "candidate": "RESEARCH-ac2_advantage-new-init",
+    "directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ac2-advantage-2486972b",
+    "manifest_sha256": "76a2e7fa135d92891acf05872cf8151302ba68915ade4583655fe22aac02dd89",
+    "source_plan_sha256": "b41b30e120627cf8a66ff54053303187b8fdd6b577056ef1fa84364be9e62c1a",
+    "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+    "worker_sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+    "status": "PREPARED_CPU_REVIEW_PENDING",
+    "required_review": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ac2-advantage-2486972b/cpu-constructor-proof.json",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepared/ac2-advantage-2486972b/run_research_mode_hold.py",
+      "--reviewed-cpu-proof",
+      "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ac2-advantage-2486972b/cpu-constructor-proof.json",
+      "--output",
+      "NEW_OUTPUT_DIRECTORY"
+    ],
+    "directory_relative": "prepared/ac2-advantage-2486972b",
+    "required_review_relative": "reviews/ac2-advantage-2486972b/cpu-constructor-proof.json"
+  }
+]

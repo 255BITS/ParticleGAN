@@ -15,6 +15,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--candidate', required=True)
     parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--logging-v2', action='store_true',
+                        help='Reviewed nested-diagnostic serializer, only RP12–RP15 reruns')
     args = parser.parse_args()
     source = args.source.resolve()
     port = ROOT / 'port-source' / args.candidate
@@ -30,6 +32,14 @@ def main():
     assert {str(p.relative_to(source)): sha(p.read_bytes()) for p in source.rglob('*')
             if p.is_file() and p.name != 'artifact-sha256.json'} == manifest
     seal = read(ROOT / 'harness-sha256.json')['files']
+    if args.logging_v2:
+        assert args.candidate in ('api-rp12', 'api-rp13', 'api-rp14', 'api-rp15')
+        manifest_path = ROOT / 'logging-v2-screen/manifest.json'
+        assert sha(manifest_path.read_bytes()) == 'd18885d0f4c53e421d4028bc0eefb6bd16dbd9fd1296e2986bb1233827274797'
+        logging_review = read(ROOT / 'logging-v2-review/source-audit.json')
+        assert logging_review['status'] == 'PASS_LOGGING_ONLY_REVIEW'
+        assert logging_review['manifest_sha256'] == sha(manifest_path.read_bytes())
+        seal = read(manifest_path)['files']
     with zipfile.ZipFile(source / 'source.zip') as archive:
         assert len(archive.namelist()) == len(set(archive.namelist()))
         required = set(read(source / 'protocol.json')['source_sha256']) | {
@@ -112,6 +122,7 @@ def main():
                     assert value['parameter_device'] == value['exp_avg_device'] == value['exp_avg_sq_device'] == 'cuda:0'
     output = dict(status='PASS', scope='Independent stdlib source/receipts/raw-state audit; no training',
         candidate=declaration['candidate'], result=result['status'], summary=summary, source=str(source),
+        harness_version='logging-v2' if args.logging_v2 else 'v1',
         declaration_sha256=digest, source_zip_sha256=manifest['source.zip'],
         artifacts_verified=len(manifest), sampling_rows_verified=1200, observations_verified=24,
         applied_diagnostic_rows_preserved=1200, initial_tensors_equal_cpu_preflight=True,

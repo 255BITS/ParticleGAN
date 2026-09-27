@@ -1,0 +1,33 @@
+def _patch_noise():
+    global _old_input_noise, _old_output_noise, _noise_patched
+    import benchmarks.toy100.models as toy_models
+    if _old_input_noise is None:
+        _old_input_noise = toy_models.linear_input_noise
+        _old_output_noise = toy_models.linear_output_noise
+    toy_models.linear_input_noise = absolute_input_noise
+    toy_models.linear_output_noise = absolute_output_noise
+    sites = []
+    for module in list(sys.modules.values()):
+        if module is None:
+            continue
+        for attr, value in list(vars(module).items()):
+            if value is _old_input_noise:
+                setattr(module, attr, absolute_input_noise)
+                sites.append(f"{getattr(module, '__name__', '?')}.{attr}:input")
+            elif value is _old_output_noise:
+                setattr(module, attr, absolute_output_noise)
+                sites.append(f"{getattr(module, '__name__', '?')}.{attr}:output")
+    audit = []
+    for step in (0, 60, 119, 120, 240, 1200):
+        for horizon in (1200, 4800):
+            got_in = absolute_input_noise(0.5, step, horizon, 0.1)
+            got_out = absolute_output_noise(0.029, step, horizon, 0.2)
+            ref_in, ref_out = _k3p_reference_noise(step)
+            if got_in != ref_in or got_out != ref_out:
+                raise RuntimeError(f"noise schedule diverges from the 1200-horizon K3P curve at step {step}")
+        audit.append(dict(step=step, input=absolute_input_noise(0.5, step, 1200, 0.1),
+                          output=absolute_output_noise(0.029, step, 1200, 0.2),
+                          same_at_horizon_4800=True))
+    receipt['noise_horizon_audit'] = audit
+    receipt['noise_patch_sites'] = sites
+    _noise_patched = True

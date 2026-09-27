@@ -1,0 +1,52 @@
+"""Stationary formulation policies: schedules receive but never inspect horizon/step.
+
+Rates are fixed at configured initial G/D/prior rates. Input noise is configured
+constant (zero in C3), output noise is fixed .029 from the first update. This is
+installed from the candidate mechanism before constructing any model or optimizer.
+The frozen hosts still use budgets for loop bounds and evaluation, not learning.
+"""
+import sys
+from types import ModuleType
+from particlegan import recipes
+from benchmarks.toy100 import models, schedule
+
+
+def fixed_lr_scale(step, total_steps, start=.6, floor=.05):
+    return 1.0
+
+
+def fixed_policy_multipliers(completed_step, total_steps, anneal_start, floor,
+                             network_lr_horizon_cap=None, *, network_lr_floor=None):
+    return 1.0, 1.0
+
+
+def fixed_input_noise(peak, completed_steps, total_steps, end_fraction):
+    return float(peak)
+
+
+def fixed_output_noise(peak, completed_steps, total_steps, warmup_fraction=0.0):
+    return float(peak)
+
+
+def fixed_step_with_policy(trainer, real, *, network_lr_horizon_cap=None,
+                           network_lr_floor=None, **step_kwargs):
+    return trainer.step(real, **step_kwargs)
+
+
+_replacements = [
+    (recipes.learning_rate_scale, fixed_lr_scale),
+    (schedule.policy_multipliers, fixed_policy_multipliers),
+    (schedule.step_with_policy, fixed_step_with_policy),
+    (models.linear_input_noise, fixed_input_noise),
+    (models.linear_output_noise, fixed_output_noise),
+]
+_mapping = {id(old): (old, new) for old, new in _replacements}
+# Patch already imported aliases, including GANTrainer; later imports get these
+# functions directly from their defining modules. No host loss/body is replaced.
+for _module in list(sys.modules.values()):
+    if not isinstance(_module, ModuleType):
+        continue
+    for _name, _value in list(vars(_module).items()):
+        _replacement = _mapping.get(id(_value))
+        if _replacement is not None and _value is _replacement[0]:
+            setattr(_module, _name, _replacement[1])

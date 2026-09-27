@@ -1,0 +1,75 @@
+{
+  "source_zip": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-dv16-img_intensity2/source.zip",
+  "source_zip_sha256": "fb3fc877499b16e97674068b6b6e410180a862645d989437dd38baf6dbe699e7",
+  "definitions": [
+    {
+      "source": "benchmarks/transfer_suite/image_tasks.py",
+      "definition": "templates",
+      "source_file_sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+      "lines": [
+        65,
+        85
+      ],
+      "span_sha256": "49201732b9d007952bd31405f67c1bbb4514c2890a621900beb6d18ebbe42b64"
+    },
+    {
+      "source": "benchmarks/transfer_suite/image_tasks.py",
+      "definition": "Generator",
+      "source_file_sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+      "lines": [
+        88,
+        116
+      ],
+      "span_sha256": "74b67555ead5ca9d6c485b34f6f63b34e268d36c9626c9dacd86d20ad850169e"
+    },
+    {
+      "source": "benchmarks/transfer_suite/image_tasks.py",
+      "definition": "Discriminator",
+      "source_file_sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+      "lines": [
+        119,
+        132
+      ],
+      "span_sha256": "0b078ccdfdb923fa5355f2a9f48b5df84a2a372ac1b8100e6acab6033cc77164"
+    },
+    {
+      "source": "benchmarks/transfer_suite/image_tasks.py",
+      "definition": "image_metrics",
+      "source_file_sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+      "lines": [
+        135,
+        148
+      ],
+      "span_sha256": "86323ed6fcf76c21086bfc7e0240714ddf6e953a94967887ca8d08121b616097"
+    },
+    {
+      "source": "benchmarks/transfer_suite/image_tasks.py",
+      "definition": "evaluation_steps",
+      "source_file_sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+      "lines": [
+        151,
+        155
+      ],
+      "span_sha256": "021dbe9f06f763d796ee1661ee9e47798bfd063a6fd65586bd5d17901b815d31"
+    },
+    {
+      "source": "benchmarks/locked_shared/observation.py",
+      "definition": "sustained",
+      "source_file_sha256": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "lines": [
+        18,
+        50
+      ],
+      "span_sha256": "f9659bac4479e4944d2e124f4f2d81542c556156e599dd8f47afb443693c8c3b"
+    }
+  ],
+  "frozen_host_sha256": "98dfe053295760f7a86eb4a1011587718a735bec94f36ee86481fd1f50ce7c8d",
+  "plan_sha256": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883",
+  "task_specs_sha256": "60aff41072a8f88d3ca7fa63252af65aeec18e94f57600c7b3413f84139280b4",
+  "constant": "MIN_STABLE_CHECKS = 5 (exact original-observation.py module assignment)",
+  "noise_offset_source": {
+    "path": "benchmarks/toy100/models.py",
+    "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+    "assignment": "OUTPUT_NOISE_SEED_OFFSET = 1901"
+  }
+}

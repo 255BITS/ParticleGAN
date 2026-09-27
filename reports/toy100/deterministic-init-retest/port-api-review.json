@@ -45,7 +45,7 @@
     "comparison_caveat": "public-ka2-constant retains its declared historical4600 horizon with360/720 noise windows; decayed public controls use1200 horizon and120/240 noise windows. It is a declared-policy comparison, not a LR-only ablation.",
     "source_review_no_execution_by_auditor": true
   },
-  "port_status": "ALL_46_PACKAGES_SOURCE_PORTED_45_RUNNABLE_DECLARATIONS_CPU_REVIEW_REQUIRED",
+  "port_status": "ALL_46_SOURCE_PORTED_45_INDEPENDENT_SOURCE_AND_CPU_ZERO_STEP_CLEAR",
   "dv16": {
     "source_zip_sha256": "ba42b3872670296006e0729b64b15838133e75ef46cc876feb2b8746455c88f8",
     "old_base": "fa511ce010120b502f494d717d01b14b8551eed8",
@@ -117,7 +117,17 @@
         "candidate_declaration_sha256": "fdb2557a3492cd20568354d3155be47f3309413af935ff0f0d9a8cdb37c0a2ad",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c1-cpu-preflight.json",
+          "sha256": "07096f853857214681643e28ccddb07ad028d853ce15406b6ca74f602cfcb5fa"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c1-independent-init-audit.json",
+          "sha256": "d3b4848d1266ab46578e204319b91e7962eec6461a7001e68718f50d074df70c"
+        }
       },
       {
         "candidate": "API-C10",
@@ -131,7 +141,17 @@
         "candidate_declaration_sha256": "9f51945d46888c05032f33b4ffd91f50f8f034fc5d2b680b2b5ff2dc1ff412fd",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c10-cpu-preflight.json",
+          "sha256": "61b3f89914757acee4c9dc0812507d2dc7e25e17c00104294c02ab74cb4309dd"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c10-independent-init-audit.json",
+          "sha256": "0bea16d7dc8cf7a2c84f020ff5132060afb680d1348a94eb88b1058e55b02763"
+        }
       },
       {
         "candidate": "API-C11",
@@ -145,7 +165,17 @@
         "candidate_declaration_sha256": "1717e60c2cdf5888643426b7a187605df1d6f03f4b3fe230fb906b669a583fd3",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c11-cpu-preflight.json",
+          "sha256": "e6ad833ad84484a031eb0627d2f6d57c699f03bac6c463ba32365fbb8d065a43"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c11-independent-init-audit.json",
+          "sha256": "7be039e1215d42d86a3058fc8b25ce4416beddc13d5e8f9fbaef24c1f02f4f88"
+        }
       },
       {
         "candidate": "API-C12",
@@ -159,7 +189,17 @@
         "candidate_declaration_sha256": "147599de0f2f16063d031f44fc8691909942a29a46d8726f7e98978dd1a35ef3",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c12-cpu-preflight.json",
+          "sha256": "2efd12c1f3a360e7aa9b7f2f540b5f8ad81544d896c72ff29c38b5794cc69d3c"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c12-independent-init-audit.json",
+          "sha256": "1616e978403c57cf8a3fac3aadaec39b7e632613b0f7667ccd4bf2386dbe0f74"
+        }
       },
       {
         "candidate": "API-C13",
@@ -173,7 +213,17 @@
         "candidate_declaration_sha256": "23e251bf6237403c7191d793068f31e4b00bd42c4f40e56008a8eda2fd1301cf",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c13-cpu-preflight.json",
+          "sha256": "1ced307444f097e2b570810c96321abee537c575f8d358efff250df8f91f2279"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c13-independent-init-audit.json",
+          "sha256": "2923d9c917c166b16eb933c1fcbfdee9b776283d48fdc4152c664a1f97568a56"
+        }
       },
       {
         "candidate": "API-C13-R1",
@@ -187,7 +237,17 @@
         "candidate_declaration_sha256": "e427ac5e930b1422639875cc2768a956f4b8e090406b6c2da352706612f08d37",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c13-r1-cpu-preflight.json",
+          "sha256": "6dbd806fb814c9b7cc5dc405a6a8108d38ea48657e9aa1f0d7bd5b8c3e06252b"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c13-r1-independent-init-audit.json",
+          "sha256": "1598a5566c980dc2f6a48e79481d49cf6124c98382d0a2db9e34660105b3197a"
+        }
       },
       {
         "candidate": "API-C2",
@@ -201,7 +261,17 @@
         "candidate_declaration_sha256": "35c6038a48f542a49dcd68e7b4dcb741eb9cf6e9e1d9271c400e6f036da7b7d9",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c2-cpu-preflight.json",
+          "sha256": "821c86d6edeadbb933c6a3d1be4c6bf14005d5f2861711c9e88f8c91675bd347"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c2-independent-init-audit.json",
+          "sha256": "a3da7bb2237fbca5cd36b1a2413148dddc704256566c29e723e112de7875d52d"
+        }
       },
       {
         "candidate": "API-C3",
@@ -215,7 +285,17 @@
         "candidate_declaration_sha256": "ddb03caf8ff0f0a6024bf07d8dd6f8a4cfda8deff27c05da8355ad443faf97e1",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c3-cpu-preflight.json",
+          "sha256": "0c5a3735ca609d212b426ca91d30b39e6ae68b505cb7acad70dc296b207fe70e"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c3-independent-init-audit.json",
+          "sha256": "a2f1fd7164350c15ed8fdb0edb8b7ef9c5a75585a55185bd007844236be2bcc1"
+        }
       },
       {
         "candidate": "API-C4",
@@ -229,7 +309,17 @@
         "candidate_declaration_sha256": "76af6e9c1708a19f7b42f68b25938c32e1f84530a86dab421d9162ebc0bb8d73",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c4-cpu-preflight.json",
+          "sha256": "866c03c351b786644bd06b4dae2635f3fb6b6d9b5d7798845667e71dd88969af"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c4-independent-init-audit.json",
+          "sha256": "662b765bc8dd38fa78129a1df7261339e5750abdbe818691521fa5d8e72a9be1"
+        }
       },
       {
         "candidate": "API-C5",
@@ -243,7 +333,17 @@
         "candidate_declaration_sha256": "9dc05c9528e3b184f3745899b71ce9fb3d59f78756cbcc7706fa94803c6eabaf",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c5-cpu-preflight.json",
+          "sha256": "a92919a576ddc6ea16050d976c06eb068e26f65e71efdf218775fe91aedc99c3"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c5-independent-init-audit.json",
+          "sha256": "2c50317b22edcb0f2d129d5315e1589c145fa46fde8e673df24fc63b73c58f2c"
+        }
       },
       {
         "candidate": "API-C6",
@@ -257,7 +357,17 @@
         "candidate_declaration_sha256": "eb0a6be03d56deb5c0f22dbd948984233cccf9ec1daab2c4d40f7aececa4a8a1",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c6-cpu-preflight.json",
+          "sha256": "f7b036af6963028700a4b1dae4852efa7e2d2070283b3cab84197b3eddce0e9d"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c6-independent-init-audit.json",
+          "sha256": "9562ea89fa1453c14de0702cdbaa2acc254bbf1a9b4cd158860d3ecf0377ff5f"
+        }
       },
       {
         "candidate": "API-C7",
@@ -271,7 +381,17 @@
         "candidate_declaration_sha256": "f470b18672aba809344f9d804689de93570d4ae962082d3c6b24512e418ca0eb",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c7-cpu-preflight.json",
+          "sha256": "2402871123fef293702b447b8b2b814288b96bbf22035f6735183f5be32191f9"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c7-independent-init-audit.json",
+          "sha256": "1faa6980f30b18a9d6b37df3f8aa1d55e1c6e1220ef9c5707627d18d9682ca74"
+        }
       },
       {
         "candidate": "API-C8",
@@ -285,7 +405,17 @@
         "candidate_declaration_sha256": "3ac309a51ccf1e09ec857292cc0c75b0da7412723658b6fb795c22cefb7862a6",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c8-cpu-preflight.json",
+          "sha256": "d1c6cbf2589124ecfdd0ace2bd6e89c1de0c678299b6d009ffc2a6923ee897b2"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c8-independent-init-audit.json",
+          "sha256": "e5b3c1819735a3e684fe6c8cc018051057ada17fb87d41a029d0ed459e68e85e"
+        }
       },
       {
         "candidate": "API-C9",
@@ -299,7 +429,17 @@
         "candidate_declaration_sha256": "5b50f372b4565bb8c8f44f0decd60cdc184221c1303277710ef4239889741eab",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c9-cpu-preflight.json",
+          "sha256": "2d1cda299b1f2e1d2fc85a9dec789a54b276dac7d6da1db4bbb3a6873d90d8d9"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-c9-independent-init-audit.json",
+          "sha256": "acc7e3cc815df0d88c07986ff519a5fd51a4c8b6b0283fe888ea856948fa08b0"
+        }
       },
       {
         "candidate": "API-DV1",
@@ -313,7 +453,17 @@
         "candidate_declaration_sha256": "a539617ea68ac7f0483cdc90bcca9a40cf1f8961101d1153b25f45d061399b09",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv1-cpu-preflight.json",
+          "sha256": "0b60452e8cb213d6d461f7e5f421ced74e55ba125ceae33355fb4628bbd6d02f"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv1-independent-init-audit.json",
+          "sha256": "16427fba75ff0afbe65dc97efa21ff2b54d0fcf8f936dbe62805aac8a7081f33"
+        }
       },
       {
         "candidate": "API-DV10",
@@ -327,7 +477,17 @@
         "candidate_declaration_sha256": "91b410a539d29e272450639a8255909afc56ba039cf1f20222b1e3c55bd29d8c",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv10-cpu-preflight.json",
+          "sha256": "c8b06a03ee134351f70960b7cc4a7ce7815bd818b2d71449e2e4d77089555b45"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv10-independent-init-audit.json",
+          "sha256": "41e7b7be54e1bbe6a0560400cb866c3d3bb2c2161ff46bc11b7ab4646cca4f87"
+        }
       },
       {
         "candidate": "API-DV11",
@@ -341,7 +501,17 @@
         "candidate_declaration_sha256": "113e27ae90110d49808b3db2b65f730e171be2091098bb774623bcff01d1d329",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv11-cpu-preflight.json",
+          "sha256": "f9142c177ba8c90aa3806e6130e397d41c8293d070857d991ee0a0243241970e"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv11-independent-init-audit.json",
+          "sha256": "e196d904eb98b838b4870b220497fa884c51acc4322b4ecc04acfea5dfd64e93"
+        }
       },
       {
         "candidate": "API-DV12",
@@ -355,7 +525,17 @@
         "candidate_declaration_sha256": "73948be5df82ba059e03d284e5a490dc4f5966a6e208f795461e4f6ce3c9d738",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv12-cpu-preflight.json",
+          "sha256": "bca856f884c00589f8396cf8551a19a84fa19f7b5008f0752baafb63f151cc62"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv12-independent-init-audit.json",
+          "sha256": "13b80363a7f7bbb0d3f9981bdd4bdf7b5498940a8f510c0eb6144185a9255ab9"
+        }
       },
       {
         "candidate": "API-DV13",
@@ -369,7 +549,17 @@
         "candidate_declaration_sha256": "4ab1d5c749586ddbdedc7663585d49a1069a6aacccf32d0fedbe02499b49db42",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv13-cpu-preflight.json",
+          "sha256": "8c6903a52ba78bf5917d8a066fbff38f4783e7a8cdc45c2c54e251dbe62968fc"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv13-independent-init-audit.json",
+          "sha256": "4bdf36db1bd82a525ed85b967b277f4bee396bc8b1267ee0929db03287a801c0"
+        }
       },
       {
         "candidate": "API-DV14",
@@ -383,7 +573,17 @@
         "candidate_declaration_sha256": "f11af2197971e88630cc36e90151e034cea5936cdfc02a1b6797f86ba5306cde",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv14-cpu-preflight.json",
+          "sha256": "44a77fac56e6e3c986bb355ec2579e023b9c097c687f34b843fb292e6beddd1f"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv14-independent-init-audit.json",
+          "sha256": "726250269d0891e0a4386b712a2763cba164d82a037a05c57a93bde284d55bf1"
+        }
       },
       {
         "candidate": "API-DV15",
@@ -397,7 +597,17 @@
         "candidate_declaration_sha256": "9f8f0ab97345fdeb9aef8de6d8854d61a35e4b2c0d3d550254f01c01fc11565e",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv15-cpu-preflight.json",
+          "sha256": "d604f58c1fd6ea04f51dfa5011c3d2266cbcf7eec79661def6016c8d5034e82c"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv15-independent-init-audit.json",
+          "sha256": "bd67eeb61466fc5000ce3a2c90e38a3fd5d0c58e0448c320464c33943ccaa0a0"
+        }
       },
       {
         "candidate": "API-DV16",
@@ -411,7 +621,17 @@
         "candidate_declaration_sha256": "10dec485272b0ce462433ceec9904f86efd167fe73c5e76957cedb223251531c",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv16-cpu-preflight.json",
+          "sha256": "0a051a40a2003b9f2b099cc7324530f88c97372a55007b4192046651d092c700"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv16-independent-init-audit.json",
+          "sha256": "cfc15c940332269c9967c95a8579abfe2ccb4a870f02d4c3d4c5cc728a4d5e71"
+        }
       },
       {
         "candidate": "API-DV2",
@@ -425,7 +645,17 @@
         "candidate_declaration_sha256": "ba688e841b1e51ca31190df32f7c0427e00feb338351daec1759e7e3b944176c",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv2-cpu-preflight.json",
+          "sha256": "519eae957455fd45f00f58283627aa9dcdfc4fa692c1b25edb43eb7f104cb977"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv2-independent-init-audit.json",
+          "sha256": "6e58ada020813ee8a51910aacf7abb324e933f3fb2bd68ccb72ef344689ef3dc"
+        }
       },
       {
         "candidate": "API-DV3",
@@ -439,7 +669,17 @@
         "candidate_declaration_sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv3-cpu-preflight.json",
+          "sha256": "0fa09453986e5edc27d16ba87c8de8f3c37008c3fc7181adaf6ec437c4721e7f"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv3-independent-init-audit.json",
+          "sha256": "5715630316e5fe168dda5a102b9f05c3416d77878a47ef14b890455d1d442119"
+        }
       },
       {
         "candidate": "API-DV4",
@@ -453,7 +693,17 @@
         "candidate_declaration_sha256": "4d6894fe58576a24a503b308568e9524fcefb5f37270d6a0c95f79b50f52ed7a",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv4-cpu-preflight.json",
+          "sha256": "4d47f8985f7bbf9c035c0670ba7be2f58637a062f493c5d9aa8676edb03aba7c"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv4-independent-init-audit.json",
+          "sha256": "d3bf78ea4dcf03a27aa1f08d5505424b9cc670a31a053f5ab97ef9adab768621"
+        }
       },
       {
         "candidate": "API-DV5",
@@ -467,7 +717,17 @@
         "candidate_declaration_sha256": "3c3884dd8db4a1b6b027004fa32431bd4c2453888af757bae50dfccb7861372b",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv5-cpu-preflight.json",
+          "sha256": "610aef9ba975fdcecd116ce3884e15e54f30b1f4f82fae704ab26b44e35e5313"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv5-independent-init-audit.json",
+          "sha256": "9ae195e66a4d8bc7ffd2a6b50c878f14237c33b6a4e0968cf90ef1acf241b3b2"
+        }
       },
       {
         "candidate": "API-DV6",
@@ -481,7 +741,17 @@
         "candidate_declaration_sha256": "b8b58d0595fa225fb895baf96764f501d5d66dfb2593bb31aa4e52967ef0af60",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv6-cpu-preflight.json",
+          "sha256": "0a5fa2da9dcee324e76e85ca3e8cfa7b27a616fb85d92c6a8ddf0eaa84715ea3"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv6-independent-init-audit.json",
+          "sha256": "e1025b605c4b2e2cff0b1d0cca6266f4e32732537ea58f28744aace7c8b54876"
+        }
       },
       {
         "candidate": "API-DV7",
@@ -495,7 +765,17 @@
         "candidate_declaration_sha256": "eb2055f31c38a6f2384635cbbff3194b15dca43462b0bfe8cbe31f0a76a74d6b",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv7-cpu-preflight.json",
+          "sha256": "436a2c60394549e2b4a46f1fc1e1f743a9d688fb6b2e8b06d73f5030b82037d2"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv7-independent-init-audit.json",
+          "sha256": "c22dd601b3aec630db64443e1480efb57581002c63515bdf7c4cda63d5f459d9"
+        }
       },
       {
         "candidate": "API-DV8",
@@ -509,7 +789,17 @@
         "candidate_declaration_sha256": "4423ef587f1adde9121bdee8b4bbbca792f2f08288a734b22643ffd30940f294",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv8-cpu-preflight.json",
+          "sha256": "bd7e50e5d7fa58880e37176e0ed0307e11ca8d0c96dd1b7700841d4ceef5c588"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv8-independent-init-audit.json",
+          "sha256": "668336a488a732ee34b39bb5fa4d6e433183e41d495b95b4750d7eec4aedc826"
+        }
       },
       {
         "candidate": "API-DV9",
@@ -523,7 +813,17 @@
         "candidate_declaration_sha256": "f861b9401628637f81f5a3582b220cbba758716ca823b72f973a732ca51363c7",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv9-cpu-preflight.json",
+          "sha256": "2c0eae354a296b535f5aad4a1abe000cae24301323d57d88048bc9459903c1ce"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-dv9-independent-init-audit.json",
+          "sha256": "c8971c16a056a7b6bea5a3228343ca9f06052f9906eef3c795d81797afbc1e5b"
+        }
       },
       {
         "candidate": "API-RP1-CUDA-EAGER",
@@ -551,7 +851,17 @@
         "candidate_declaration_sha256": "d097b14b3254268ccb5b2c568ce7cefac8b61445b3bdc21f1489b699eedbd1b0",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp1-public-partial-cpu-preflight.json",
+          "sha256": "79ef7bb076558a341dc9559d015d7cfe9527ec6293d3c7753df512485694b4e8"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp1-public-partial-independent-init-audit.json",
+          "sha256": "96dde50027a7018645dbbe9d4d38672f28b4c03b28af5e6fdc1ae99e178176b5"
+        }
       },
       {
         "candidate": "API-RP10",
@@ -565,7 +875,17 @@
         "candidate_declaration_sha256": "2588fee46d5193f06c0fdd833ee3517023c52b7692330fda1ef58532afa4a54e",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp10-cpu-preflight.json",
+          "sha256": "03d8958df46ec3418a2b54011b7e1e33884944e6cfd0beac9cc5ba4990202c9d"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp10-independent-init-audit.json",
+          "sha256": "dcab7a45caa51f36157ba2129c66a7ce6cc25b4a52f6d9600d2049f7283b9452"
+        }
       },
       {
         "candidate": "API-RP11",
@@ -579,7 +899,17 @@
         "candidate_declaration_sha256": "2f6e280c75e68264c93dc0eddf78476dd2f4637b9355777ae5cc2e1cbec8ab4e",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp11-cpu-preflight.json",
+          "sha256": "69fa35ff594fefe820abcd744ac3bfaf071009f250f2193d7fa8e66340eafb61"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp11-independent-init-audit.json",
+          "sha256": "787159831b23a150f1108e2820bbe776b3860c9c7b249151bf513f7911f947a2"
+        }
       },
       {
         "candidate": "API-RP12",
@@ -593,7 +923,17 @@
         "candidate_declaration_sha256": "7ad0a7365975be99fc479995ce80173dfdf88f72573da6883bf5cbe525bcb752",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp12-cpu-preflight.json",
+          "sha256": "8d36f0701cadc3627b23fbb018cb859320aacb95ce1821fbafa48d0cb6fbafe1"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp12-independent-init-audit.json",
+          "sha256": "4cd3866d39de6d63ec68f1ed3e66b6eb41c6d1a05d5d4ed4651bd34ae29e7fc4"
+        }
       },
       {
         "candidate": "API-RP13",
@@ -607,7 +947,17 @@
         "candidate_declaration_sha256": "84b270e7af4676be875386446a136fb348ad8e89b432657fe11edfe5ee4372bb",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp13-cpu-preflight.json",
+          "sha256": "74d397de13d77cb724431fbcf81e0e45270c6f3c22f2a7a020d6289b00886985"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp13-independent-init-audit.json",
+          "sha256": "acdc3230ca8761a09beb4267408aa879122c692a4fd3d0115085a196eaf6cf59"
+        }
       },
       {
         "candidate": "API-RP14",
@@ -621,7 +971,17 @@
         "candidate_declaration_sha256": "835ee55fd7d1d21b9428449cc285143c337129b6e25c67a367892580e5c38069",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp14-cpu-preflight.json",
+          "sha256": "a7935ef32d1d3961670fc10b7c0d22989b2f0d438490ae165c66c580675eb8a5"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp14-independent-init-audit.json",
+          "sha256": "156a2755235874a4ba5f0cab04e25a835c3d815ed1618a29f2d2054a63df754d"
+        }
       },
       {
         "candidate": "API-RP15",
@@ -635,7 +995,17 @@
         "candidate_declaration_sha256": "5f1690459b2253f98048fdb8ef27fdfe54172f1ce48523d508117fe38db0c350",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp15-cpu-preflight.json",
+          "sha256": "690588902cc6d3abfebebecb1ba240708cc82e002938ea78b8155a549e326e34"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp15-independent-init-audit.json",
+          "sha256": "3ef5634c8891a9f007df9da676bcbad6bb1ff1eb907403c51991a95a32c6b821"
+        }
       },
       {
         "candidate": "API-RP2",
@@ -649,7 +1019,17 @@
         "candidate_declaration_sha256": "309b2d2bc489ac32da71faadfdde7ae6950f3243d05fabcd28e530342897d8c2",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp2-cpu-preflight.json",
+          "sha256": "cfc927dca881147f8ab7e4748bbe12d6e89f2676df542847bae7fe8619b74891"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp2-independent-init-audit.json",
+          "sha256": "c35d8f133d211a0a8b78ebd344094602ba41c5d83dbf2fb0c96feef3f88e9dc5"
+        }
       },
       {
         "candidate": "API-RP3",
@@ -663,7 +1043,17 @@
         "candidate_declaration_sha256": "09368e123c6b9832b0f3e1f761b35153e6db31dcaa7468967764d05828752c59",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp3-cpu-preflight.json",
+          "sha256": "4f9997cf449d23a6021c5e8adddbe0da8f6d02a8d37393cd33c1d35676e4f09e"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp3-independent-init-audit.json",
+          "sha256": "d8fe100cc12c6e7b304a7a91705a4e3e36e1a2173bfe9e1bdf439cfb16f6bba2"
+        }
       },
       {
         "candidate": "API-RP4",
@@ -677,7 +1067,17 @@
         "candidate_declaration_sha256": "94952ccd3c1826b1f636dbdc70dabcc007c43501e938f4ef65a7633ff1788804",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp4-cpu-preflight.json",
+          "sha256": "55df01766c0c016549596e39110ed2398e0a28497a82eddc3f6b004570b4ae3f"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp4-independent-init-audit.json",
+          "sha256": "8a2f13e8c414da8959f70e55823145c958b74a147a5a8f274546a9ebda7fea1e"
+        }
       },
       {
         "candidate": "API-RP5",
@@ -691,7 +1091,17 @@
         "candidate_declaration_sha256": "3f1b8356de2e12df9718f52fd6b9f20e90520d45b6bee4b3260771a3b454413d",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp5-cpu-preflight.json",
+          "sha256": "a799e55ca27393b1b048f100b6844fa0e04ed77c6d5abe51e5d0c140e606c296"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp5-independent-init-audit.json",
+          "sha256": "4a75400b1475b5dd1fd9f4af79608bd67b9a46de3dd19690e0fb2ca6e967e584"
+        }
       },
       {
         "candidate": "API-RP6",
@@ -705,7 +1115,17 @@
         "candidate_declaration_sha256": "8a2ac216c97e5332d73f17c5405f3f7f03f5a5beabb893db80d736bc5b60bace",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp6-cpu-preflight.json",
+          "sha256": "5628e0de1a4d0682a84375a407c7311651f9779d5c543dee2050d3f83077b992"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp6-independent-init-audit.json",
+          "sha256": "dd526aae7c569c65af1a8c4c2b75ff82550b81fdbfa67f0bded0001ff0d10d84"
+        }
       },
       {
         "candidate": "API-RP7",
@@ -719,7 +1139,17 @@
         "candidate_declaration_sha256": "92cd3263da3f6097875e9a5257933d3234e698b678d859ea3ff733a7e562265e",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp7-cpu-preflight.json",
+          "sha256": "f7169c8c4c347d9e332efc6ee22030aa16fd11cd00ec6d5266fb6a2f27e2d7cf"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp7-independent-init-audit.json",
+          "sha256": "7632b20cd46fe71cdc299fb75496ddd2977b849444db55158ce278ffcce5ab71"
+        }
       },
       {
         "candidate": "API-RP8",
@@ -733,7 +1163,17 @@
         "candidate_declaration_sha256": "2563d2c3697f9cfe2c094e47a32353e3eb094c0c45deaeaf2e301ffed704c005",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp8-cpu-preflight.json",
+          "sha256": "fd6527eac0b9857c0e7946172080df64ad82a85b3e99f26d3e47dbe872aff4bd"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp8-independent-init-audit.json",
+          "sha256": "db58ca30e31cb12226f0631d7d34de8d4d65e2377a73428137d845d4b90d2767"
+        }
       },
       {
         "candidate": "API-RP9",
@@ -747,8 +1187,21 @@
         "candidate_declaration_sha256": "a05f8c38b0ac329be2b1837feada2bb99604e7e0f0f40461708f0c0442f5fe7d",
         "integration_blocker": null,
         "quality_inherited": false,
-        "cpu_preflight_required": true
+        "cpu_preflight_required": false,
+        "cpu_zero_step": {
+          "status": "PASS_NO_CUDA",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp9-cpu-preflight.json",
+          "sha256": "9e6e9313e321e91bebd53fc8b781e0f52f170d9defa9cfa91a4b7b3abecfb006"
+        },
+        "independent_source_audit": {
+          "status": "PASS_INITIALIZATION_ONLY",
+          "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/api-rp9-independent-init-audit.json",
+          "sha256": "3b26f520cc37d60c4b113ae6bc235d839c12e02f4cca339811f4c11f1e7a4bed"
+        }
       }
-    ]
+    ],
+    "CPU_zero_step_clear_count": 45,
+    "rp1_eager_diagnostic_proposal": "port-source/rp1-eager-compatibility/proposal.md",
+    "adaptive_broader_screen_proposal": "port-source/adaptive-broader-screen/proposal.md"
   }
 }

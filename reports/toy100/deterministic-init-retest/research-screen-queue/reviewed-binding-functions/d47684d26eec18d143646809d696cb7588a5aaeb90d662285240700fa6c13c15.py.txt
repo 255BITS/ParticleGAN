@@ -1,0 +1,34 @@
+def _install_rules():
+    import benchmarks.toy100.models as models
+    import benchmarks.toy100.schedule as schedule
+    original_input = models.linear_input_noise
+    original_output = models.linear_output_noise
+    original_policy = schedule.policy_multipliers
+
+    def input_noise(peak, completed_steps, total_steps, end_fraction):
+        original_input(peak, completed_steps, total_steps, end_fraction)
+        return float(_ctrl['input_std'])
+
+    def output_noise(peak, completed_steps, total_steps, warmup_fraction=0.0):
+        original_output(peak, completed_steps, total_steps, warmup_fraction)
+        return float(_ctrl['output_std'])
+
+    def policy_multipliers(completed_step, total_steps, anneal_start, floor,
+                           network_lr_horizon_cap=None, *, network_lr_floor=None):
+        original_policy(completed_step, total_steps, anneal_start, floor,
+                        network_lr_horizon_cap, network_lr_floor=network_lr_floor)
+        return (network_multiplier(), prior_multiplier())
+
+    models.linear_input_noise = input_noise
+    models.linear_output_noise = output_noise
+    schedule.policy_multipliers = policy_multipliers
+    for mod in list(sys.modules.values()):
+        if mod is None:
+            continue
+        for name, value in list(vars(mod).items()):
+            if value is original_input:
+                setattr(mod, name, input_noise)
+            elif value is original_output:
+                setattr(mod, name, output_noise)
+            elif value is original_policy:
+                setattr(mod, name, policy_multipliers)

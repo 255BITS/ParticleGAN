@@ -1,0 +1,70 @@
+{
+ "calls": 0,
+ "dimensions": {},
+ "extra_critic_forwards": 0,
+ "floor": 0.01,
+ "guard_c": 5.0,
+ "guard_min_steps": 200,
+ "pure_a_calls": 0,
+ "blend_calls": 0,
+ "pure_b_calls": 0,
+ "first_blend_call": null,
+ "first_pure_b_call": null,
+ "critic_steps": 0,
+ "critic_parameters": null,
+ "lr_max": 0.0,
+ "lr_last": null,
+ "s_trace": [],
+ "rule": "pm1_relative_mobility",
+ "anchor_decay": 0.999,
+ "anchor_started_call": null,
+ "prox_trace": [],
+ "group_counts": null,
+ "final_s": 1.0,
+ "mobility": {
+  "acquired": false,
+  "observe_calls": 0,
+  "observe_skips": 0,
+  "last_multiplier": [
+   1.0,
+   1.0
+  ],
+  "network": {
+   "m": 1.0,
+   "phase": "acquire",
+   "peak": 0.0,
+   "quiet": null,
+   "floor": null,
+   "rms": null,
+   "confirm": 0.0
+  },
+  "prior": {
+   "m": 1.0,
+   "phase": "acquire",
+   "peak": 0.0,
+   "quiet": null,
+   "floor": null,
+   "rms": null,
+   "confirm": 0.0
+  },
+  "joint": {
+   "peak": 0.0,
+   "quiet": null,
+   "rms": null,
+   "confirm": 0.0,
+   "ratio": 1.0
+  },
+  "ignored_total_steps": null,
+  "ignored_cap": null,
+  "trace": [],
+  "dwell": 0.1,
+  "adapt": 0.25,
+  "ratio_dwell": 0.05,
+  "reopen_factor": 5.0,
+  "mix_floor": 0.01,
+  "final_s": 1.0
+ },
+ "guard_clipped_tensors": 0,
+ "guard_clip_steps": [],
+ "guard_clip_step_count": 0
+}

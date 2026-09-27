@@ -1,0 +1,33 @@
+{
+  "status": "PASS_SOURCE_AND_DV12_IMAGE_INITIALIZATION",
+  "bundle_sha256": "f334d0038872de81dc2ac44d9b9a884c11bc66f9811945dd17f289f77d0b1ed5",
+  "cpu_receipt": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-screen-review/dv12-intensity2-cpu/cpu-preflight.json",
+  "cpu_receipt_sha256": "e15842cd9b4467c12a1f4dee4796a226543a7388aa91e63602b35337f42e9903",
+  "candidate": "API-DV12-new-init",
+  "cpu_task": "img_intensity2",
+  "six_frozen_definitions_exact": true,
+  "four_frozen_specs_exact": true,
+  "model_resources": {
+    "architecture": "residual_upsample",
+    "width": 16,
+    "z_dim": 8,
+    "particles": 32,
+    "batch": 32,
+    "steps": 600
+  },
+  "initializer": {
+    "repeated_all_non_rng_state": true,
+    "R2_normal_std": 1.0,
+    "rng_neutral": true,
+    "zero_learner_steps": true,
+    "CUDA_initialized": false
+  },
+  "source_transaction": "CPU G\u2192D\u2192prior then CUDA; shared globalCUDA data+latent, independent package noise generator; same real batch in both losses, complete serial publicstep, all600 dry/actual source and accepted cursors",
+  "scoring": "All32 prior rows; unchanged generation with private2303+completed stream; live/EMA24 checks25..600, same original HQ/mode thresholds and final5",
+  "limits": [
+    "Only DV12 intensity2 has a fresh CPU constructor proof; other candidate/task invocations need their declared matching receipt.",
+    "All4 cards share model construction but task source/thresholds remain separately pinned.",
+    "No training or GPU, no quality inheritance, no blanket broader qualification.",
+    "Own runtime must satisfy actualCUDA model/CPU material assertion, device-local bandwidth and600 draw receipts."
+  ]
+}

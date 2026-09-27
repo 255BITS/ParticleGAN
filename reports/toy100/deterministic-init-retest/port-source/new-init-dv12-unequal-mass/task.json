@@ -1,0 +1,168 @@
+{
+  "spec": {
+    "batch": 128,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "covariances": [
+      [
+        [
+          0.0324,
+          0.0
+        ],
+        [
+          0.0,
+          0.0324
+        ]
+      ],
+      [
+        [
+          0.0324,
+          0.0
+        ],
+        [
+          0.0,
+          0.0324
+        ]
+      ],
+      [
+        [
+          0.0324,
+          0.0
+        ],
+        [
+          0.0,
+          0.0324
+        ]
+      ],
+      [
+        [
+          0.0324,
+          0.0
+        ],
+        [
+          0.0,
+          0.0324
+        ]
+      ]
+    ],
+    "d_every": 1,
+    "d_hidden": 96,
+    "d_layers": 2,
+    "d_lr_mult": 1.5,
+    "ema_decay": 0.995,
+    "family": "unequal_mass",
+    "fourier": 2,
+    "g_every": 1,
+    "hidden": 64,
+    "identifiable": true,
+    "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+    "kind": "gaussian_mixture",
+    "layers": 2,
+    "limitations": "Finite-particle approximation; one initialization only.",
+    "lr": 0.001,
+    "masses": [
+      0.55,
+      0.3,
+      0.13,
+      0.02
+    ],
+    "means": [
+      [
+        -1.5,
+        -1.5
+      ],
+      [
+        -1.5,
+        1.5
+      ],
+      [
+        1.5,
+        -1.5
+      ],
+      [
+        1.5,
+        1.5
+      ]
+    ],
+    "name": "vector_unequal_mass",
+    "particles": 256,
+    "phase": "fit",
+    "prior_lr_mult": 10.0,
+    "prior_reg": 0.05,
+    "reg_arm": "b_cap",
+    "reg_coeff": 3.0,
+    "reg_kappa": 1.25,
+    "research_discriminator": {
+      "activation": "softplus",
+      "beta": 5.0,
+      "features": "axis_fourier",
+      "fourier_bands": 2,
+      "hidden": 96,
+      "layers": 2,
+      "name": "linear_skip_d96_beta5",
+      "normalization": "none",
+      "skip": "raw_linear",
+      "skip_bias": false,
+      "skip_output_initialization": "zero"
+    },
+    "runner": "vector",
+    "split": "development",
+    "steps": 1200,
+    "thresholds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ],
+      [
+        "min_mass_ratio",
+        ">=",
+        0.25
+      ]
+    ],
+    "tier": "ranking",
+    "z_dim": 4
+  },
+  "discriminator_card": {
+    "name": "batchfeat_center6_distance_head",
+    "implementation": "shared_batch_feature_v1",
+    "width": 96,
+    "layers": 3,
+    "fourier": 0,
+    "trunk_normalization": "center",
+    "softplus_beta": 6.0,
+    "feature": "distance",
+    "placement": "head",
+    "kernel_scales": [
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "eps": 1e-05,
+    "batch_dependence": true,
+    "batch_statistics": "current discriminator input only"
+  }
+}

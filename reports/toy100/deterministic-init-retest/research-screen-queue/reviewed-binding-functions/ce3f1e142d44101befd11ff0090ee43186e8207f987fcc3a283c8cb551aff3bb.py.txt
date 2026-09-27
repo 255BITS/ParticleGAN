@@ -1,0 +1,45 @@
+def _install_rules():
+    import benchmarks.toy100.models as models
+    import benchmarks.toy100.schedule as schedule
+    original_input = models.linear_input_noise
+    original_output = models.linear_output_noise
+    original_policy = schedule.policy_multipliers
+
+    def input_noise(peak, completed_steps, total_steps, end_fraction):
+        original_input(peak, completed_steps, total_steps, end_fraction)
+        base = float(peak) * max(0.0, 1.0 - completed_steps / float(INPUT_SPAN))
+        return max(base, float(peak) * current_boost())
+
+    def output_noise(peak, completed_steps, total_steps, warmup_fraction=0.0):
+        original_output(peak, completed_steps, total_steps, warmup_fraction)
+        warm = min(1.0, completed_steps / float(OUTPUT_SPAN))
+        return float(peak) * warm * (1.0 - current_boost())
+
+    def policy_multipliers(completed_step, total_steps, anneal_start, floor,
+                           network_lr_horizon_cap=None, *, network_lr_floor=None):
+        original_policy(completed_step, total_steps, anneal_start, floor,
+                        network_lr_horizon_cap, network_lr_floor=network_lr_floor)
+        cached = _rate_state['multiplier_cache'].get(completed_step)
+        if cached is None:
+            _rate_state['completed_step'] = int(completed_step)
+            scheduled = _scheduled(completed_step)
+            _rate_state['scheduled'] = scheduled
+            boost = current_boost()
+            network = scheduled + (1.0 - scheduled) * boost
+            cached = (network, 1.0)
+            _rate_state['multiplier_cache'][completed_step] = cached
+        return cached
+
+    models.linear_input_noise = input_noise
+    models.linear_output_noise = output_noise
+    schedule.policy_multipliers = policy_multipliers
+    for mod in list(sys.modules.values()):
+        if mod is None:
+            continue
+        for name, value in list(vars(mod).items()):
+            if value is original_input:
+                setattr(mod, name, input_noise)
+            elif value is original_output:
+                setattr(mod, name, output_noise)
+            elif value is original_policy:
+                setattr(mod, name, policy_multipliers)

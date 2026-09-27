@@ -1,0 +1,14 @@
+[
+  {
+    "candidate": "RESEARCH-k3g-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/k3g-31ccc839/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/k3g-31ccc839.log"
+  },
+  {
+    "candidate": "RESEARCH-a2_bounded_damp-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/a2-bounded-damp-4255bed6/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/a2-bounded-damp-4255bed6.log"
+  }
+]
