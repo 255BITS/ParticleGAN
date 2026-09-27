@@ -899,6 +899,71 @@ def test_toy_runner_image_candidate_regrades_on_its_own_route(tmp_path, monkeypa
         assert expected in grade["reason"]
 
 
+def _write_vector_candidate_episode(directory, monkeypatch, mutate=lambda record: None):
+    """A real toy_runner vector record (declared spec shrunk to 24 steps) for regrading."""
+    from benchmarks.transfer_suite import vector_tasks
+    from benchmarks.transfer_suite.toy100_compatibility import _runner_noise_receipt
+    jobs, profile = load_declaration()
+    job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
+    base = gan_v3_recipe()
+    declared = toy_suite.declared_spec
+
+    def small(job_, profile_, base_):
+        spec, card, variant = declared(job_, profile_, base_)
+        spec.update(steps=24, batch=8, particles=16, hidden=8, layers=1)
+        return spec, card, variant
+    monkeypatch.setattr(toy_suite, "declared_spec", small)
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5)))
+    monkeypatch.setattr(vector_tasks, "EVAL_SAMPLES", 256)
+    spec, card, variant = small(job, profile, base)
+    noise = dict(output_noise_std=0.029, input_noise_std=0.5, input_noise_anneal_end=0.1,
+                 output_noise_warmup=0.2)
+    policy = {"network_lr_horizon_cap": 8}
+    result, context = run_vector(spec, card, base, noise, model_policy=policy)
+    source_bytes, noise_source_bytes = b"frozen benchmark source", b"frozen noise source"
+    policy_sources = {"benchmarks/toy100/schedule.py": b"schedule", "benchmarks/toy100/train.py": b"train",
+                      "benchmarks/toy100/config.py": b"config", "benchmarks/toy100/__main__.py": b"cli"}
+    hashes = dict(frozen=hashlib.sha256(source_bytes).hexdigest(),
+                  **{"benchmarks/toy100/models.py": hashlib.sha256(noise_source_bytes).hexdigest()},
+                  **{name: hashlib.sha256(raw).hexdigest() for name, raw in policy_sources.items()})
+    verdict = dict(status="PASS", passed=True, convergence=dict(passing_suffix=5))
+    recipe = legacy_dict(base)
+    record = json.loads(json.dumps(dict(
+        name=spec["name"], route="benchmarks.toy_runner + recipe noise/schedule",
+        original_spec=deepcopy(job["spec"]), spec=spec, discriminator_variant=variant,
+        host_recipe=legacy_dict(context["host_recipe"]), source_sha256=hashes,
+        recipe=deepcopy(recipe), noise=deepcopy(noise), model_policy=deepcopy(policy),
+        applied=context["applied"], shapes=context["shapes"],
+        noise_receipt=_runner_noise_receipt(context, noise, spec, result),
+        noise_applied=True, result=result, verdict=verdict), default=float))
+    mutate(record)
+    _archive_candidate(directory, record, job, recipe, noise, verdict, hashes, source_bytes,
+                       noise_source_bytes, policy_sources, policy, with_policy_sources=True)
+    return spec["name"]
+
+
+@pytest.mark.parametrize("tamper,expected", [
+    (None, None),
+    (lambda record: record["host_recipe"].update(input_noise_std=None), "host resource recipe differs"),
+    (lambda record: record["noise_receipt"]["recipe_noise"].update(input_noise_std=0.25), "noise claim differs"),
+    (lambda record: record["applied"][2].update(lr=1.0), "optimizer rate differs"),
+    (lambda record: record["result"]["actions"][3].update(lr_g=1.0), "trainer LR action differs"),
+    (lambda record: record["result"].update(update_counts=dict(g=23, d=24)), "update trace is incomplete"),
+])
+def test_toy_runner_vector_candidate_regrades_on_its_own_route(tmp_path, monkeypatch, tamper, expected):
+    """Vector records from toy100_compatibility (shared runner, recipe noise and
+    horizon) pass the suite's gate, and tampering with the route still fails."""
+    name = _write_vector_candidate_episode(tmp_path / "candidate", monkeypatch, tamper or (lambda r: None))
+    grade = toy_suite._episode_rows(tmp_path / "candidate", (name,), candidate=True)
+    if expected is None:
+        assert grade["status"] == "PASS", grade["reason"]
+        assert grade["cases"][name]["noise_applied"] is True
+    else:
+        assert grade["status"] == "INVALID"
+        assert expected in grade["reason"]
+
+
 @pytest.mark.parametrize("network_floor", [None, .005])
 def test_image_host_recipe_carries_the_declared_cap_and_noise(network_floor):
     """Image hosts train on benchmarks.toy_runner: the cap, floor and noise are

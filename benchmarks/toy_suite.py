@@ -42,7 +42,8 @@ from benchmarks.transfer_suite.public_default_verification import (
     GLOBAL_RECIPE_FIELDS, declared_spec, host_recipe, load_declaration,
 )
 from benchmarks.transfer_suite.toy100_compatibility import (
-    VECTOR_NAMES, declared_model_policy, declared_recipe, image_recipe, output_noise_at,
+    RUNNER_NOISE_FIELDS, VECTOR_NAMES, declared_model_policy, declared_recipe, image_recipe,
+    output_noise_at, vector_recipe,
 )
 from particlegan import get_recipe
 from particlegan.recipes import LRSchedule
@@ -139,6 +140,14 @@ def _toy_runner_image(record: dict) -> bool:
     return record["spec"]["runner"] == "image" and record["result"].get("route") == IMAGE_ROUTE
 
 
+def _toy_runner_vector(record: dict) -> bool:
+    """Vector hosts train on benchmarks.toy_runner (``vector_tasks.VectorTask``):
+    the declared noise and network horizon are recipe fields, and the optimizers'
+    own update counts replace GANTrainer's per-step schedule clock."""
+    return (record["spec"]["runner"] == "vector"
+            and str(record.get("route", "")).startswith(IMAGE_ROUTE))
+
+
 def _check_toy_runner_image(record: dict, host: Recipe, noise: dict | None):
     """Scoped route check for image records: the declared recipe trained, through
     the recipe-built optimizer groups, with observed (not claimed) noise."""
@@ -204,7 +213,7 @@ def _schedule(recipe: Recipe, steps: int, cap=None, network_floor=None) -> LRSch
 
 
 def _check_actions(record: dict, base: Recipe, noise: dict | None,
-                   model_policy: dict | None = None):
+                   model_policy: dict | None = None, *, clock: bool = True):
     """Trainer-route receipts: each update's optimizer clocks and the rates they applied.
 
     The rates are checked against the recipe's own ``LRSchedule`` at the
@@ -221,7 +230,7 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
         raise ValueError(f"trainer action or update trace is incomplete: {name}")
     schedule = _schedule(base, steps, cap, network_floor)
     for completed, action in enumerate(actions, start=1):
-        if action.get("lr_schedule") != {"g": completed, "d": completed}:
+        if clock and action.get("lr_schedule") != {"g": completed, "d": completed}:
             raise ValueError(f"trainer optimizer schedule clock differs: {name}.{completed}")
         network, prior = schedule.scales(completed - 1)
         if cap is None:
@@ -969,6 +978,13 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             expected_host_recipe = (base if expected_spec["runner"] == "legacy"
                                     else host_recipe(base, expected_spec))
             image_route = _toy_runner_image(record)
+            vector_route = _toy_runner_vector(record)
+            if vector_route and candidate:  # declared noise/horizon are recipe fields there
+                try:
+                    expected_host_recipe = vector_recipe(expected_spec, base, protocol["noise"],
+                                                         protocol.get("model_policy"))
+                except ValueError as error:
+                    raise ValueError(f"{error}: {name}") from error
             if image_route and candidate:  # declared noise/schedule are recipe fields there
                 try:
                     expected_host_recipe = image_recipe(expected_spec, base, protocol["noise"],
@@ -1031,6 +1047,11 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                                          and receipt.get("input_nonzero_steps", 0) > 0))
                     if not receipt.get("eval_scope"):
                         raise ValueError(f"custom-host evaluation scope is absent: {name}")
+                elif vector_route:  # the runner's recipe noise, read back per update
+                    declared = {key: protocol["noise"][key] for key in RUNNER_NOISE_FIELDS}
+                    actual_noise = (receipt.get("recipe_noise") == declared
+                                    and (output_std == 0 or receipt.get("output_nonzero_steps", 0) > 0)
+                                    and (input_std == 0 or receipt.get("input_nonzero_steps", 0) > 0))
                 elif image_route:  # observed per update by the screen's noise witness
                     actual_noise = ((output_std == 0 or receipt.get("train_output_applied"))
                                     and (input_std == 0 or receipt.get("train_input_applied")
@@ -1046,7 +1067,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                                     and (input_std == 0 or receipt.get("input_module") == input_module
                                          and receipt.get("input_nonzero_steps", 0) > 0))
                 _check_learned_transfer_noise(record, receipt, protocol["noise"])
-                if not image_route:
+                if not (image_route or vector_route):
                     _check_isolated_transfer_noise(record, receipt, protocol["noise"])
                 if bool(actual_noise) != record.get("noise_applied"):
                     raise ValueError(f"candidate noise claim differs from receipt: {name}")
@@ -1071,7 +1092,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 _check_optimizer_receipts(record, expected_host_recipe)
                 _check_actions(record, expected_host_recipe,
                                protocol["noise"] if candidate else None,
-                               protocol.get("model_policy") if candidate else None)
+                               protocol.get("model_policy") if candidate else None,
+                               clock=not vector_route)
             verdict = test_verdict(record["spec"], result)
             if (verdict["status"] != record["verdict"]["status"]
                     or verdict["passed"] != record["verdict"]["passed"]
