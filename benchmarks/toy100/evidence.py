@@ -51,6 +51,11 @@ def native_config(problem: str, *, steps: int = STEPS, device: str = "cpu", seed
 class _Tap:
     """The declared problem, unchanged, remembering the draw and nets its metrics saw."""
 
+    # ``models.sample_clean`` (via ``AccuracyEvidence.finish``) disables output-noise
+    # wrappers on ``G``/``ema_G``; the runner's ``Model.sample`` never adds training
+    # output noise, so there are none to disable.
+    G = ema_G = None
+
     def __init__(self, problem):
         self.inner, self.draw, self.nets, self.holdout = problem, None, None, {}
 
