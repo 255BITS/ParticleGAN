@@ -261,13 +261,98 @@ def imputation_metrics(problem, draws, post, m=None):
 
 
 def baselines(problem, draws=16, seed=11):
-    """Imputation metrics of the untrained baselines on the fixed test rows."""
+    """Imputation metrics and wall-clock cost (ms per 1k rows, all draws) of the
+    untrained baselines on the fixed test rows."""
+    import time
     gen = torch.Generator(device=problem.device).manual_seed(seed)
-    post, bayes = bayes_posterior(problem, problem.x_test, problem.m_test, draws, gen)
-    out = {"bayes": imputation_metrics(problem, bayes, post),
-           "knn": imputation_metrics(problem, knn_impute(problem, problem.x_test, problem.m_test), post),
-           "mean": imputation_metrics(problem, mean_impute(problem, problem.x_test, problem.m_test), post)}
+    x, m = problem.x_test, problem.m_test
+
+    def timed(fn):
+        if problem.device.type == "cuda":
+            torch.cuda.synchronize(problem.device)
+        start = time.perf_counter()
+        result = fn()
+        if problem.device.type == "cuda":
+            torch.cuda.synchronize(problem.device)
+        return result, 1e6 * (time.perf_counter() - start) / len(x)
+
+    (post, bayes), t_bayes = timed(lambda: bayes_posterior(problem, x, m, draws, gen))
+    knn, t_knn = timed(lambda: knn_impute(problem, x, m))
+    mean, t_mean = timed(lambda: mean_impute(problem, x, m))
+    out = {"bayes": imputation_metrics(problem, bayes, post), "knn": imputation_metrics(problem, knn, post),
+           "mean": imputation_metrics(problem, mean, post)}
+    for name, cost in (("bayes", t_bayes), ("knn", t_knn), ("mean", t_mean)):
+        out[name]["ms_1k"] = cost
     # MAP mode (deterministic ceiling on accuracy) and the sliced-W1 floor.
     out["bayes"]["acc_map"] = float((post.argmax(1) == problem.y_test).float().mean())
     out["floor"] = generation_metrics(problem, problem.x_ref)
     return out
+
+
+# ------------------------------------------------ particle-posterior imputation
+
+SIGMA_GRID = torch.logspace(math.log10(0.005), math.log10(3.0), 30).tolist()
+
+
+def masked_sqdist(x, m, table):
+    """||m * (table_k - x)||^2 for every row and table entry: (n, M)."""
+    xm = x * m
+    d = m @ (table * table).T - 2 * xm @ table.T + (xm * x).sum(1, keepdim=True)
+    return d.clamp_min(0)
+
+
+@torch.no_grad()
+def select_sigma(table, x, m, generator, grid=SIGMA_GRID, chunk=2048):
+    """Kernel width for particle-posterior imputation from training rows only.
+
+    One observed coordinate per row is held out; the rest weight the table
+    entries, w_k ~ exp(-||m' (x_k - x)||^2 / 2 s^2), and the held-out value is
+    scored under sum_k w_k N(x_h; x_k,h, s^2). Returns ``(sigma, mean log-lik)``
+    at the grid maximum. Rows with no observed coordinate are skipped.
+    """
+    keep = m.sum(1) > 0
+    x, m = x[keep], m[keep]
+    u = torch.rand(m.shape, generator=generator, device=m.device) * m
+    held = u.argmax(1)  # a uniformly random observed coordinate
+    rest = m.clone()
+    rest[torch.arange(len(m), device=m.device), held] = 0
+    scores = torch.zeros(len(grid), device=x.device, dtype=torch.float64)
+    for xb, rb, hb in zip(x.split(chunk), rest.split(chunk), held.split(chunk)):
+        d2 = masked_sqdist(xb, rb, table)
+        dh = (table[:, hb].T - xb.gather(1, hb[:, None])) ** 2
+        for i, s in enumerate(grid):
+            logw = -d2 / (2 * s * s)
+            ll = (torch.logsumexp(logw - dh / (2 * s * s), 1) - torch.logsumexp(logw, 1)
+                  - 0.5 * math.log(2 * math.pi * s * s))
+            scores[i] += ll.double().sum()
+    best = int(scores.argmax())
+    return grid[best], float(scores[best] / len(x))
+
+
+@torch.no_grad()
+def ppost_indices(table, x, m, sigma, draws, generator, chunk=2048):
+    """Resample table entries per row with w_k ~ exp(-||m (x_k - x)||^2 / 2 sigma^2): (draws, n)."""
+    out = []
+    for xb, mb in zip(x.split(chunk), m.split(chunk)):
+        w = torch.softmax(-masked_sqdist(xb, mb, table) / (2 * sigma * sigma), 1)
+        out.append(torch.multinomial(w, draws, replacement=True, generator=generator).T)
+    return torch.cat(out, 1)
+
+
+def ppost_impute(table, x, m, sigma, draws, generator):
+    """Particle-posterior imputation: fill missing coordinates from resampled x_k."""
+    k = ppost_indices(table, x, m, sigma, draws, generator)
+    return m * x + (1 - m) * table[k], k
+
+
+def refine_latents(G, z, x, m, steps, make_optimizer):
+    """A few gradient steps on z to fit the observed coordinates (G frozen)."""
+    z = z.detach().clone().requires_grad_(True)
+    opt = make_optimizer([z])
+    for _ in range(steps):
+        loss = ((m * (G(z) - x)) ** 2).sum()
+        opt.zero_grad(set_to_none=True)
+        loss.backward()
+        opt.step()
+    with torch.no_grad():
+        return m * x + (1 - m) * G(z)

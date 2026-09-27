@@ -1,7 +1,7 @@
 import torch
 
 from lib.misgan import (BLOCK_PATTERNS, DIM, Problem, bayes_posterior, imputation_metrics, mask_metrics,
-                        mean_impute, pattern_probs, sample_masks)
+                        mean_impute, pattern_probs, ppost_impute, sample_masks, select_sigma)
 
 
 def test_mask_mechanisms_shapes_and_probabilities():
@@ -32,3 +32,20 @@ def test_bayes_imputer_beats_mean_and_exact_mask_scores_zero():
     assert bayes["itv"] < mean["itv"] and bayes["istd"] > 0 == mean["istd"]
     exact = mask_metrics(problem, problem.m_test)
     assert exact["m_mae"] < 0.02 and exact["m_soft"] == 0
+
+
+def test_ppost_with_the_true_sampler_matches_the_bayes_imputer():
+    """Particle-posterior imputation from exact mixture samples approximates the exact posterior."""
+    problem = Problem("mcar_p80", n_train=1500, n_test=3000, seed=3)
+    gen = torch.Generator().manual_seed(2)
+    post, bayes = bayes_posterior(problem, problem.x_test, problem.m_test, draws=4, generator=gen)
+    # x_ref is an independent clean sample from the true mixture: G_x swapped for the true sampler.
+    sigma, _ = select_sigma(problem.x_ref, problem.x_train, problem.m_train, gen, grid=[0.005, 0.05, 0.5])
+    assert sigma == 0.005  # exact samples: the narrowest kernel wins held-out likelihood
+    draws, _ = ppost_impute(problem.x_ref, problem.x_test, problem.m_test, sigma, 4, gen)
+    observed = problem.m_test.bool()
+    assert torch.equal(draws[0][observed], problem.x_test[observed])
+    exact, particle = imputation_metrics(problem, bayes, post), imputation_metrics(problem, draws, post)
+    assert abs(exact["acc"] - particle["acc"]) < 0.03
+    assert abs(exact["acc_lo"] - particle["acc_lo"]) < 0.05
+    assert abs(exact["itv"] - particle["itv"]) < 0.03

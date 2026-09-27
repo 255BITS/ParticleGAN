@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # misgan_pipeline.sh -- run the MisGAN toy grid, then the leaderboards.
 #
-# Writes grid configs -> runs them on the chosen GPUs (run_grid.py) -> analysis.
+# Writes grid configs -> runs them on the chosen GPUs (run_grid.py) -> particle-
+# posterior imputation + imputation cost from the checkpoints -> analysis.
 # Grid progress, each run's last eval line and the tables all go to ONE file:
 #
 #     tail -f results/misgan/PIPELINE.log      # the whole study
@@ -31,5 +32,7 @@ if [ "${FORCE:-0}" = "1" ]; then FORCE_FLAGS=(--force); fi
 "$PY" experiments/run_grid.py --config_manifest configs/misgan/manifest.json --gpus "$GPUS" \
     --workers_per_gpu "$WORKERS" --python "$PY" --trainer experiments/misgan_toy.py --echo_last_line \
     ${FORCE_FLAGS[@]+"${FORCE_FLAGS[@]}"} 2>&1 | tee -a "$LOG" || log "grid finished with failures"
+log "---------------- ppost + imputation cost (idle GPU) ----------------"
+CUDA_VISIBLE_DEVICES="${GPUS%%,*}" "$PY" experiments/misgan_ppost.py 2>&1 | tee -a "$LOG"
 "$PY" experiments/analyze_misgan.py 2>&1 | tee -a "$LOG"
 log "pipeline finished"
