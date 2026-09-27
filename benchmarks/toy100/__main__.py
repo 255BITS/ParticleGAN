@@ -58,7 +58,7 @@ def _run(args):
     if device_override is not None:
         apply_device_policy(device_override, log=True)
         device_override = str(host_device())
-    from particlegan.init_registry import use_init
+    from benchmarks.init_research.init_registry import use_init
     use_init(getattr(args, "init", None))
     config_bytes = args.config.read_bytes()
     manifest = load_config(args.config)

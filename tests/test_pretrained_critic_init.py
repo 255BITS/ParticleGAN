@@ -1,13 +1,11 @@
-"""Default recipe init keeps a pretrained ImageNet backbone and initializes the new heads."""
+"""Explicit init keeps a frozen pretrained ImageNet backbone and initializes the new heads."""
 import copy
-import warnings
-
 import pytest
 import torch
 
 from experiments.train_cifar_ddgan import DEFAULTS, training_recipe
 from lib.image_moonshots import build_models
-from particlegan import get_recipe, initialize_
+from particlegan import get_recipe, init
 from particlegan.diffusion import DrawSource
 
 
@@ -31,9 +29,7 @@ def _check(d, critic, run):
     backbone = copy.deepcopy(critic.features.state_dict())
     heads = {k: v.clone() for k, v in critic.named_parameters() if not k.startswith('features.')}
     ema = copy.deepcopy(d)
-    with warnings.catch_warnings():
-        warnings.filterwarnings('error', message='make_optimizers is overwriting')
-        run(ema)
+    run(ema)
     for key, value in critic.features.state_dict().items():
         assert torch.equal(value, backbone[key]), key
     changed = {k for k, v in critic.named_parameters() if k in heads and not torch.equal(v, heads[k])}
@@ -49,10 +45,11 @@ def test_cifar_ddgan_pretrained_backbone_kept(fake_imagenet):
     g, d = build_models(cfg)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], 1, 'cpu')
     recipe = training_recipe(cfg)
-    assert recipe.initialization == 'batch_feature_zero'
 
     def run(ema):
-        initialize_(g, key=0)
+        init.deterministic_orthogonal_(g, seed=0)
+        init.deterministic_orthogonal_(d, seed=1)
+        ema.load_state_dict(d.state_dict())
         recipe.make_optimizers(g, d, prior, ema_critic=ema)
     _check(d, d, run)
 
@@ -62,5 +59,8 @@ def test_particle_direct_critic_pretrained_backbone_kept(fake_imagenet):
     torch.set_num_threads(1)
     d = DirectDiscriminator(8)
     g = torch.nn.Linear(4, 4)
-    _check(d, d.critic, lambda ema: get_recipe(z_dim=4, num_particles=8).make_optimizers(
-        g, d, ema_critic=ema))
+    def run(ema):
+        init.deterministic_orthogonal_(d, seed=1)
+        ema.load_state_dict(d.state_dict())
+        get_recipe(z_dim=4, num_particles=8).make_optimizers(g, d, ema_critic=ema)
+    _check(d, d.critic, run)
