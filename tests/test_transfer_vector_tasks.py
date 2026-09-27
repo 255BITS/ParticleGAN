@@ -56,13 +56,27 @@ def test_partial_center_collapse_cannot_hide_behind_average_covariance():
     result = vectors.score_samples(samples, spec, spec["steps"])
     assert result["component_covariance_error"] <= .85
     assert result["component_min_eigen_ratio"] == 0.
-    previous_bounds = [x for x in spec["thresholds"] if x[0] != "component_min_eigen_ratio"]
-    assert vectors.passes(result, previous_bounds)
+    # Protocol v1 (no eigenvalue bound) accepts the collapse; v2 rejects it.
+    v1_bounds = [x for x in vectors.SEPARATED_BOUNDS if x[0] != "component_min_eigen_ratio"]
+    assert vectors.passes(result, v1_bounds)
+    assert not vectors.passes(result, vectors.SEPARATED_BOUNDS)
+    # The v4 core/spill rule rejects it too: collapsed cores have zero spread.
+    assert result["component_core_min_eigen_ratio"] == 0.
     assert not vectors.passes(result, spec["thresholds"])
 
 
-def test_far_outliers_are_spill_not_anisotropic_shape():
-    spec = next(x for x in vectors.TASKS if x["family"] == "anisotropic")
+def test_protocol_v4_core_spill_declarations():
+    by_family = {x["family"]: x["thresholds"] for x in vectors.TASKS}
+    core = vectors.CORE_SPILL_BOUNDS
+    assert by_family["anisotropic"] == core and by_family["unequal_width"] == core
+    assert by_family["unequal_mass"] == core + [["min_mass_ratio", ">=", .25]]
+    for family in ("separated_broad", "narrow_resolution", "changing_scale"):
+        assert by_family[family] == vectors.SEPARATED_BOUNDS
+
+
+@pytest.mark.parametrize("family", ["anisotropic", "unequal_width", "unequal_mass"])
+def test_far_outliers_are_spill_not_shape(family):
+    spec = next(x for x in vectors.TASKS if x["family"] == family)
     samples = vectors.sample_target(spec, 4096, torch.Generator().manual_seed(993), spec["steps"])
     means = torch.tensor(spec["means"])
     first = (torch.cdist(samples, means).argmin(1) == 0).nonzero().squeeze(1)
