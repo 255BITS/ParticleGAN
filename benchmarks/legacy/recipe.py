@@ -31,18 +31,38 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "amsgrad": False}
 
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
+    # The package defaults these receipts were recorded with (the package has
+    # since moved to constant-LR AMSGrad without noise; see docs/k3p.md).
+    lr: float = 0.00425
+    d_lr_mult: float = 1.0
+    reg_coeff: float = 1.0
+    lr_floor: float = 0.05
+    network_lr_floor: float | None = 0.01
+    network_lr_horizon_cap: int | None = 1600
+    input_noise_std: float = 0.5
+    output_noise_std: float = 0.029
+    amsgrad: bool = False
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
     reg_method: str = "autograd"
+    # Removed from the package with the direct sample-particle response (no
+    # benchmark used it); kept so recorded dicts round-trip.
+    direct_particle_gain: bool = True
+    direct_particle_betas: tuple[float, float] = (0.0, 0.9)
 
     def __post_init__(self):
         super().__post_init__()
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if len(self.direct_particle_betas) != 2 or any(not 0 <= b < 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        if type(self.direct_particle_gain) is not bool:
+            raise ValueError("direct_particle_gain must be a boolean")
         self.make_loss()
         self.make_gradient_penalty()
 
@@ -72,11 +92,12 @@ class LegacyRecipe(Recipe):
 
 
 def get_recipe(name="gan", **overrides):
-    """``particlegan.get_recipe`` returning a ``LegacyRecipe``."""
+    """``particlegan.get_recipe`` returning a ``LegacyRecipe`` (on the pinned legacy defaults)."""
     from particlegan import get_recipe as current
-    base = current(name)
-    values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
-    return LegacyRecipe(**{**values, **overrides})
+    base, plain = current(name), Recipe()
+    family = {f.name: getattr(base, f.name) for f in fields(Recipe)
+              if getattr(base, f.name) != getattr(plain, f.name)}
+    return LegacyRecipe(**{**family, **overrides})
 
 
 def _first_output(output):

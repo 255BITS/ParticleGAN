@@ -1,4 +1,4 @@
-"""K3P package components vs the frozen research mechanism (CPU, float64)."""
+"""K3P package components: the R1-free critic penalty, the EMA anchor, guard and A2 (CPU, float64)."""
 import copy
 import subprocess
 import sys
@@ -12,9 +12,8 @@ import torch.nn.functional as F
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import k3p_scenarios as sc  # noqa: E402
 
-from particlegan.k3p import (CriticAnchor, CriticSpikeGuard, DirectParticleResponse,  # noqa: E402
-                             LatentRowDamping)
-from particlegan.grad_regularizers import CriticStepRecord, GradientPenalty  # noqa: E402
+from particlegan.k3p import CriticAnchor, CriticSpikeGuard, LatentRowDamping  # noqa: E402
+from particlegan.grad_regularizers import CriticStepRecord, GradientPenalty, path_points  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -51,256 +50,191 @@ def frozen(tmp_path_factory):
     return torch.load(out, weights_only=False)
 
 
-def _assert_critic_equal(ref, new):
-    assert len(ref["trace"]) == len(new["trace"])
-    for a, b in zip(ref["trace"], new["trace"]):
-        assert a["applied"] == b["applied"], a["t"]
-        assert torch.equal(a["pen"], b["pen"]), a["t"]
-        assert a["s"] == b["s"], a["t"]
-        assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
-        assert (a["ema"] is None) == (b["ema"] is None), a["t"]
-        if a["ema"] is not None:
-            assert all(torch.equal(x, y) for x, y in zip(a["ema"], b["ema"])), a["t"]
-    assert ref["prox"] == new["prox"]
+# ---------------------------------------------------------------- reference formula
+# The formulation promoted from the k3p-no-r1 study (nr_pathcap_anchor), written
+# out term by term: c/2 * [path cap + fake cap + w * mean ||g_r - gbar_r||^2 / d].
+def _ref_rms(D, x):
+    x = x.detach().clone().requires_grad_(True)
+    g = torch.autograd.grad(D(x).sum(), x, create_graph=True)[0]
+    return torch.sqrt(g.pow(2).flatten(1).sum(1) + 1e-12) / x[0].numel() ** 0.5
 
 
-def test_k3p_matches_frozen_mechanism(frozen):
-    ref = frozen["critic"]
-    objs, new = sc.package_critic()
-    _assert_critic_equal(ref, new)
-    s = [row["s"] for row in new["trace"]]
-    assert s[:9] == [1.0] * 9 and 0.0 < s[9] < 1.0 and s[-1] == 0.0  # a, blend, b phases all covered
-    assert next(r["t"] for r in new["trace"] if r["ema"] is not None) == 10
-    assert any(p > 0 for p in new["prox"])
-    assert ref["clipped"] >= 1 and objs["guard"].clipped_tensors == ref["clipped"]
-    assert ref["calls"] == objs["reg"].state_dict()["calls"] == sc.STEPS
+def _ref_penalty(D, Dbar, xr, xf, u, coeff, kappa, weight):
+    n = min(len(xr), len(xf))
+    x_hat = xr[:n] + u[:n, None] * (xf[:n] - xr[:n])
+    path = (_ref_rms(D, x_hat) - kappa).relu().square().mean()
+    fake = (_ref_rms(D, xf) - kappa).relu().square().mean()
+    total = path + fake
+    if Dbar is not None:
+        x = xr.detach().clone().requires_grad_(True)
+        g = torch.autograd.grad(D(x).sum(), x, create_graph=True)[0]
+        xb = xr.detach().clone().requires_grad_(True)
+        gb = torch.autograd.grad(Dbar(xb).sum(), xb)[0]
+        total = total + weight * (g - gb).pow(2).flatten(1).sum(1).mean() / xr[0].numel()
+    return coeff / 2.0 * total
 
 
-def test_k3p_lazy_k_matches_frozen(frozen):
-    ref = frozen["lazy"]
-    objs, new = sc.package_critic(lazy_k=2)
-    _assert_critic_equal(ref, new)
-    rows = new["trace"]
-    assert all(float(r["pen"]) == 0.0 and not r["applied"] for r in rows if r["t"] % 2)
-    assert any(r["s"] < 1.0 for r in rows if not r["t"] % 2)  # still K3P when applied
-    assert objs["reg"].state_dict()["observed_steps"] == sc.STEPS  # s advances every critic step
-    # applied steps carry 2x the coefficient
+def _nudged(D, scale=0.3, seed=11):
+    """A copy of D with perturbed weights (a stand-in for a moved EMA)."""
+    other = copy.deepcopy(D).requires_grad_(False)
+    g = torch.Generator().manual_seed(seed)
+    with torch.no_grad():
+        for p in other.parameters():
+            p.add_(scale * torch.randn(p.shape, generator=g, dtype=p.dtype))
+    return other
+
+
+def test_penalty_is_path_cap_plus_fake_cap_plus_anchor():
+    D = sc.make_critic()
+    ema = copy.deepcopy(D).requires_grad_(False)
+    reg = GradientPenalty(coeff=0.3, kappa=0.2, anchor=CriticAnchor(D, ema))
+    xr, xf = sc.critic_batch(1)
+    # First call starts the anchor: EMA == D, prox exactly 0, no R1 anywhere.
+    pen, st = reg.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(3))
+    u = torch.rand(len(xr), generator=torch.Generator().manual_seed(3), dtype=torch.float32)
+    assert reg.record.anchor_started and st["prox"] == 0.0
+    assert all(torch.equal(e, p) for e, p in zip(ema.parameters(), D.parameters()))
+    assert torch.allclose(pen, _ref_penalty(D, None, xr, xf, u.to(sc.DT), 0.3, 0.2, 1.0), rtol=1e-12)
+    assert st["path_cap"] > 0 and st["fake_cap"] > 0
+    # Later calls add the anchor term against the (moved) EMA critic.
+    reg.after_critic_step(0.1)
+    moved = _nudged(D)
+    ema.load_state_dict(moved.state_dict())
+    pen, st = reg.penalty(D, xr, xf, 2, generator=torch.Generator().manual_seed(4))
+    u = torch.rand(len(xr), generator=torch.Generator().manual_seed(4), dtype=torch.float32)
+    ref = _ref_penalty(D, moved, xr, xf, u.to(sc.DT), 0.3, 0.2, 1.0)
+    assert st["prox"] > 0 and torch.allclose(pen, ref, rtol=1e-12)
+    params = list(D.parameters())[:-1]  # the output bias does not move an input gradient
+    grads = torch.autograd.grad(pen, params, retain_graph=True)
+    ref_grads = torch.autograd.grad(ref, params)
+    assert all(torch.allclose(a, b, rtol=1e-10, atol=1e-14) for a, b in zip(grads, ref_grads))
+
+
+def test_caps_are_one_sided_and_there_is_no_r1():
+    D = nn.Linear(2, 1, dtype=sc.DT)
+    with torch.no_grad():
+        D.weight.copy_(torch.tensor([[0.3, -0.4]], dtype=sc.DT))  # slope RMS .5/sqrt(2) < kappa 1
+    reg = GradientPenalty(anchor_weight=0.0)
+    xr, xf = sc.critic_batch(1)
+    pen, st = reg.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(0))
+    assert pen.item() == 0.0 and st["path_cap"] == 0.0 and st["fake_cap"] == 0.0
+
+
+def test_anchor_weight_scales_and_zero_removes_the_anchor():
     D = sc.make_critic()
     xr, xf = sc.critic_batch(2)
-    one = GradientPenalty(kappa=0.5).penalty(D, xr, xf, 1)[0]
-    two = GradientPenalty(kappa=0.5, lazy_k=2).penalty(D, xr, xf, 2)[0]
-    assert torch.allclose(two, 2 * one, rtol=1e-14, atol=0)
+    plain = GradientPenalty(kappa=0.2, anchor_weight=0.0)  # no anchor, no EMA needed
+    pen0, st0 = plain.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(1))
+    assert st0["prox"] == 0.0 and not plain.record.anchor_started
+    moved = _nudged(D)
+    for weight in (1.0, 2.5):
+        reg = GradientPenalty(kappa=0.2, anchor_weight=weight, anchor=CriticAnchor(D, copy.deepcopy(moved)))
+        reg.record.anchor_started = True  # as after the first call
+        pen, st = reg.penalty(D, xr, xf, 1, ema_critic=moved, generator=torch.Generator().manual_seed(1))
+        u = torch.rand(len(xr), generator=torch.Generator().manual_seed(1), dtype=torch.float32).to(sc.DT)
+        assert torch.allclose(pen, _ref_penalty(D, moved, xr, xf, u, 1.0, 0.2, weight), rtol=1e-12)
+        assert torch.allclose(pen - pen0, torch.tensor(0.5 * st["prox"], dtype=sc.DT), rtol=1e-9)
 
 
-def _package_latent(split=None):
-    prior, G, opt = sc.make_latent()
-    damp = LatentRowDamping(prior.z, torch.zeros_like(prior.z))
+def test_path_positions_come_from_the_generator_and_pair_by_index():
+    D = sc.make_critic()
+    reg = GradientPenalty(kappa=0.1, anchor_weight=0.0)
+    xr, xf = sc.critic_batch(3)
+    a = reg.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(7))[0]
+    b = reg.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(7))[0]
+    c = reg.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(8))[0]
+    assert torch.equal(a, b) and not torch.equal(a, c)
+    u = torch.tensor([0.0, 1.0, 0.5])
+    r = torch.zeros(3, 2, dtype=sc.DT)
+    f = torch.ones(4, 2, dtype=sc.DT)
+    assert torch.equal(path_points(r, f, u), torch.tensor([[0.0, 0.0], [1.0, 1.0], [0.5, 0.5]], dtype=sc.DT))
 
-    def step(o):
-        with damp.around(o):
-            o.step()
-    if split is None:
-        return sc.run_latent(prior, G, opt, range(1, 15), step), damp
-    trace = sc.run_latent(prior, G, opt, range(1, split + 1), step)
-    saved = copy.deepcopy(dict(prior=prior.state_dict(), G=G.state_dict(), opt=opt.state_dict(),
-                               damp=damp.state_dict(), history=damp.history))
-    prior, G, opt = sc.make_latent(seed=99)
-    prior.load_state_dict(saved["prior"]); G.load_state_dict(saved["G"]); opt.load_state_dict(saved["opt"])
-    damp = LatentRowDamping(prior.z, saved["history"].clone())
-    damp.load_state_dict(saved["damp"])
-    return trace + sc.run_latent(prior, G, opt, range(split + 1, 15), step), damp
+
+def test_lazy_penalty_applies_every_kth_step_with_k_times_the_coefficient():
+    D = sc.make_critic()
+    xr, xf = sc.critic_batch(4)
+    once = GradientPenalty(coeff=0.3, kappa=0.2, anchor_weight=0.0)
+    lazy = GradientPenalty(coeff=0.3, kappa=0.2, lazy_k=4, anchor_weight=0.0)
+    skipped, st = lazy.penalty(D, xr, xf, 3)
+    assert skipped.item() == 0.0 and st == {"applied": False, "pen": 0.0}
+    full = once.penalty(D, xr, xf, 1, generator=torch.Generator().manual_seed(2))[0]
+    hit = lazy.penalty(D, xr, xf, 4, generator=torch.Generator().manual_seed(2))[0]
+    assert torch.allclose(hit, 4 * full, rtol=1e-12)
 
 
 def test_latent_row_damping_matches_frozen_a2(frozen):
     ref = frozen["latent"]
-    new, damp = _package_latent()
+
+    def package(split=None):
+        prior, G, opt = sc.make_latent()
+        damp = LatentRowDamping(prior.z, torch.zeros_like(prior.z))
+
+        def step(o):
+            with damp.around(o):
+                o.step()
+        if split is None:
+            return sc.run_latent(prior, G, opt, range(1, 15), step), damp
+        trace = sc.run_latent(prior, G, opt, range(1, split + 1), step)
+        saved = copy.deepcopy(dict(prior=prior.state_dict(), G=G.state_dict(), opt=opt.state_dict(),
+                                   damp=damp.state_dict(), history=damp.history))
+        prior, G, opt = sc.make_latent(seed=99)
+        prior.load_state_dict(saved["prior"]); G.load_state_dict(saved["G"]); opt.load_state_dict(saved["opt"])
+        damp = LatentRowDamping(prior.z, saved["history"].clone())
+        damp.load_state_dict(saved["damp"])
+        return trace + sc.run_latent(prior, G, opt, range(split + 1, 15), step), damp
+
+    new, damp = package()
     assert ref["scoped_calls"] > 0
     for a, b in zip(ref["trace"], new):
         assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
         assert torch.equal(a["exp_avg"], b["exp_avg"]), a["t"]
     assert damp.started and 0 < ref["scoped_calls"] < 9  # rate >= 1/2 switches scoping off on some sparse steps
-    resumed, _ = _package_latent(split=7)
+    resumed, _ = package(split=7)
     for a, b in zip(new, resumed):
         assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
-
-
-def test_direct_particle_response_matches_frozen(frozen):
-    ref = frozen["direct"]["trace"]
-    particles, opt = sc.make_direct()
-    resp = DirectParticleResponse([particles], torch.zeros(particles.numel(), dtype=sc.DT))
-
-    def step(o):
-        with resp.around(o):
-            o.step()
-        return resp.last_gain
-    new = sc.run_direct(particles, opt, range(1, 11), step)
-    assert any(r["gain"] > 1.0 for r in ref)
-    for a, b in zip(ref, new):
-        assert a["gain"] == b["gain"] and a["lr"] == b["lr"] and a["betas"] == b["betas"], a["t"]
-        assert torch.equal(a["params"], b["params"]), a["t"]
-
-
-def _recipe_critic(lazy_k=1, split=None):
-    """The same critic scenario through the recipe's optimizer + penalty (plain opt.step()).
-
-    With ``split``, checkpoint with the usual ``D``/``opt_d`` state_dicts after
-    ``split`` steps and resume into freshly built objects.
-    """
-    from particlegan import get_recipe
-    recipe = get_recipe(reg_kappa=0.5, reg_coeff=1.0, reg_every=lazy_k, network_lr_floor=0.01,
-                        reg_anchor_decay=0.999, d_guard_ratio=5.0, d_guard_min_steps=3, lr=sc.LR0)
-
-    def build(D):
-        opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D), foreach=False)
-        return opt, recipe.make_critic_penalty(opt, collect_stats=True)
-    D = sc.make_critic()
-    opt, penalty = build(D)
-    started, prox = [], []
-
-    class Adapter:  # run_critic's reg.penalty(D, xr, xf, t) -> (pen, stats)
-        def penalty(self, critic, xr, xf, t):
-            assert t == opt.record.observed_steps + 1  # the step comes from the optimizer
-            pen = penalty(critic, xr, xf)
-            if penalty.last_stats.get("phase") in ("blend", "b"):
-                prox.append(penalty.last_stats["prox"])
-            return pen, penalty.last_stats
-
-    def after(o):
-        started.append([e.clone() for e in o.ema_critic.parameters()] if o.record.anchor_started else None)
-    if split is None:
-        trace = sc.run_critic(Adapter(), D, opt, range(1, sc.STEPS + 1), after=after)
-    else:
-        trace = sc.run_critic(Adapter(), D, opt, range(1, split + 1), after=after)
-        saved = copy.deepcopy({"D": D.state_dict(), "opt_d": opt.state_dict()})
-        D = sc.make_critic(seed=9)
-        opt, penalty = build(D)
-        D.load_state_dict(saved["D"])
-        opt.load_state_dict(saved["opt_d"])
-        trace += sc.run_critic(Adapter(), D, opt, range(split + 1, sc.STEPS + 1), after=after)
-    for row, ema in zip(trace, started):
-        row["ema"] = ema
-    return opt, dict(trace=trace, prox=prox)
-
-
-@pytest.mark.parametrize("lazy_k", [1, 2])
-def test_recipe_optimizer_and_penalty_match_frozen_mechanism(frozen, lazy_k):
-    ref = frozen["critic" if lazy_k == 1 else "lazy"]
-    opt, new = _recipe_critic(lazy_k)
-    _assert_critic_equal(ref, new)
-    assert opt.guard.clipped_tensors == ref["clipped"] >= (1 if lazy_k == 1 else 0)
-    if lazy_k == 1:
-        assert opt.record.calls == ref["calls"] == sc.STEPS
-    # Resuming from the usual D / opt_d state_dicts inside the blend is bit-exact.
-    _, resumed = _recipe_critic(lazy_k, split=11)
-    _assert_critic_equal(ref, resumed)
-
-
-def _optimizer_latent(split=None):
-    from particlegan.k3p import K3PGeneratorAdam
-
-    def build(seed=2):
-        prior, G, _ = sc.make_latent(seed)
-        opt = K3PGeneratorAdam([{"params": list(G.parameters())}, {"params": list(prior.parameters())}],
-                               latent_table=prior.z, lr=0.02, betas=(0.0, 0.999), foreach=False)
-        return prior, G, opt
-    prior, G, opt = build()
-    if split is None:
-        return sc.run_latent(prior, G, opt, range(1, 15), lambda o: o.step()), opt
-    trace = sc.run_latent(prior, G, opt, range(1, split + 1), lambda o: o.step())
-    saved = copy.deepcopy(dict(prior=prior.state_dict(), G=G.state_dict(), opt=opt.state_dict()))
-    prior, G, opt = build(seed=99)
-    prior.load_state_dict(saved["prior"]); G.load_state_dict(saved["G"]); opt.load_state_dict(saved["opt"])
-    return trace + sc.run_latent(prior, G, opt, range(split + 1, 15), lambda o: o.step()), opt
-
-
-def test_generator_optimizer_matches_frozen_a2_and_direct(frozen):
-    from particlegan.k3p import K3PGeneratorAdam
-    for new, opt in (_optimizer_latent(), _optimizer_latent(split=7)):
-        for a, b in zip(frozen["latent"]["trace"], new):
-            assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
-            assert torch.equal(a["exp_avg"], b["exp_avg"]), a["t"]
-        assert opt.latent_damping.started
-    particles, _ = sc.make_direct()
-    opt = K3PGeneratorAdam([{"params": [particles], "_comparison_prior": True}], direct_particles=[particles],
-                           lr=0.03, betas=(0.0, 0.999), foreach=False)
-
-    def step(o):
-        o.step()
-        return o.direct_response.last_gain
-    new = sc.run_direct(particles, opt, range(1, 11), step)
-    for a, b in zip(frozen["direct"]["trace"], new):
-        assert a["gain"] == b["gain"] and a["lr"] == b["lr"] and a["betas"] == b["betas"], a["t"]
-        assert torch.equal(a["params"], b["params"]), a["t"]
-
-
-def test_constant_lr_s_is_one_without_anchor():
-    D = sc.make_critic()
-    opt = sc.critic_optimizer(D)
-    reg = GradientPenalty(kappa=0.5)
-    trace = sc.run_critic(reg, D, opt, range(1, 9), after=reg.after_critic_step, lr_fn=lambda t: 1.0)
-    assert all(r["s"] == 1.0 for r in trace)
-    xr, xf = sc.critic_batch(3)
-    pen, st = reg.penalty(D, xr, xf, 9)
-    assert st["phase"] == "a" and st["prox"] == 0.0
-    ref = GradientPenalty
-    real = ref._grad_norm(D, xr, squared=True) / 2
-    fake = (ref._grad_norm(D, xf) / 2 ** 0.5 - 0.5).relu().square()
-    assert torch.equal(pen, 0.5 * (real.mean() + fake.mean()))
-
-
-def test_blend_without_anchor_raises():
-    D = sc.make_critic()
-    reg = GradientPenalty()
-    xr, xf = sc.critic_batch(1)
-    reg.after_critic_step(1.0)
-    reg.after_critic_step(0.1)
-    assert reg.blend_weight() < 1.0
-    with pytest.raises(ValueError, match="needs CriticAnchor/ema_critic"):
-        reg.penalty(D, xr, xf, 3)
-    reg.penalty(D, xr, xf, 3, ema_critic=copy.deepcopy(D))  # a per-call ema_critic is enough
 
 
 def test_missing_after_critic_step_raises():
     D = sc.make_critic()
     xr, xf = sc.critic_batch(1)
     reg = GradientPenalty()
-    reg.penalty(D, xr, xf, 1)
+    reg.penalty(D, xr, xf, 1, ema_critic=copy.deepcopy(D))
     with pytest.raises(RuntimeError, match="after_critic_step"):
-        reg.penalty(D, xr, xf, 2)
+        reg.penalty(D, xr, xf, 2, ema_critic=copy.deepcopy(D))
     lazy = GradientPenalty(lazy_k=4)
-    lazy.penalty(D, xr, xf, 4)
+    lazy.penalty(D, xr, xf, 4, ema_critic=copy.deepcopy(D))
     with pytest.raises(RuntimeError):
-        lazy.penalty(D, xr, xf, 8)
+        lazy.penalty(D, xr, xf, 8, ema_critic=copy.deepcopy(D))
+
+
+def test_anchor_needed_unless_weight_zero():
+    D = sc.make_critic()
+    xr, xf = sc.critic_batch(1)
+    with pytest.raises(ValueError, match="CriticAnchor/ema_critic"):
+        GradientPenalty().penalty(D, xr, xf, 1)
+    GradientPenalty(anchor_weight=0.0).penalty(D, xr, xf, 1)
+    GradientPenalty().penalty(D, xr, xf, 1, ema_critic=copy.deepcopy(D))  # a per-call ema_critic is enough
 
 
 def test_two_critics_independent():
     from torch.optim import optimizer as optim_mod
     hooks = (len(optim_mod._global_optimizer_pre_hooks), len(optim_mod._global_optimizer_post_hooks))
     original_penalty = GradientPenalty.penalty
-    a, trace_a = sc.package_critic()
-    b_objs = {}
-
-    def setup(objs):
-        b_objs.update(objs)
-    # Interleave critic B (constant LR, different data) step by step with a fresh critic A.
+    alone, trace_alone = sc.package_critic()
     A = sc.package_critic(steps=[])[0]
-    B = sc.package_critic(steps=[], setup=setup)[0]
+    B = sc.package_critic(steps=[])[0]
     for t in range(1, sc.STEPS + 1):
         ra = sc.run_package_critic(A, [t])
-        for group in B["opt"].param_groups:
-            group["lr"] = sc.LR0
         xr, xf = sc.critic_batch(t, seed=7)
-        pen, st = B["reg"].penalty(B["D"], xr, xf, t)
+        pen = B["reg"](B["D"], xr, xf, t, generator=B["gen"])
         B["opt"].zero_grad(set_to_none=True)
         (F.softplus(B["D"](xf)).mean() + pen).backward()
         B["guard"].apply_(B["opt"])
         B["opt"].step()
         B["reg"].after_critic_step(B["opt"])
-        assert st["s"] == 1.0
-        assert torch.equal(ra["trace"][0]["pen"], trace_a["trace"][t - 1]["pen"])
-    assert A["reg"].blend_weight() == 0.0 and B["reg"].blend_weight() == 1.0
-    assert all(torch.equal(x, y) for x, y in zip(A["ema"].parameters(), a["ema"].parameters()))
-    assert not B["reg"].state_dict()["anchor_started"]
+        assert torch.equal(ra["trace"][0]["pen"], trace_alone["trace"][t - 1]["pen"])
+    assert all(torch.equal(x, y) for x, y in zip(A["ema"].parameters(), alone["ema"].parameters()))
+    assert not all(torch.equal(x, y) for x, y in zip(A["ema"].parameters(), B["ema"].parameters()))
     assert GradientPenalty.penalty is original_penalty
     assert (len(optim_mod._global_optimizer_pre_hooks), len(optim_mod._global_optimizer_post_hooks)) == hooks
 
@@ -320,31 +254,31 @@ def test_shared_module_multi_role():
     ema = copy.deepcopy(d).requires_grad_(False)
     opt = torch.optim.Adam(d.parameters(), lr=0.05, betas=(0.0, 0.999))
     reg = GradientPenalty(anchor=CriticAnchor(d, ema))
-    phases = []
+    gen = torch.Generator().manual_seed(0)
+    prox = []
     for t in range(1, 9):
-        for group in opt.param_groups:
-            group["lr"] = 0.05 if t < 4 else 0.0004
         xr, xf = sc.critic_batch(t)
         loss = 0
         for role in ("a", "b"):
-            pen, st = reg.penalty(d.critic_for(role), xr, xf, t, ema_critic=ema.critic_for(role))
+            pen, st = reg.penalty(d.critic_for(role), xr, xf, t, ema_critic=ema.critic_for(role), generator=gen)
             loss = loss + pen + F.softplus(d.critic_for(role)(xf)).mean()
-            phases.append(st["phase"])
+            prox.append(st["prox"])
         opt.zero_grad(set_to_none=True)
         loss.backward()
         opt.step()
         reg.after_critic_step(opt)
-    assert phases[:8] == ["a"] * 8 and set(phases[8:]) == {"b"}
+    assert prox[0] == 0.0 and all(p > 0 for p in prox[2:])
     assert reg.state_dict()["observed_steps"] == 8 and reg.state_dict()["calls"] == 16
     assert not all(torch.equal(x, y) for x, y in zip(ema.parameters(), d.parameters()))
 
 
 def test_k3p_state_roundtrip_bit_exact():
     _, full = sc.package_critic()
-    split = 11  # blend phase, anchor running
+    split = 9  # anchor running, after the guarded spike
     first, part = sc.package_critic(steps=range(1, split + 1))
     saved = copy.deepcopy(dict(D=first["D"].state_dict(), ema=first["ema"].state_dict(), opt=first["opt"].state_dict(),
-                               reg=first["reg"].state_dict(), guard=first["guard"].state_dict()))
+                               reg=first["reg"].state_dict(), guard=first["guard"].state_dict(),
+                               gen=first["gen"].get_state()))
 
     def restore(objs):
         objs["D"].load_state_dict(saved["D"])
@@ -352,9 +286,15 @@ def test_k3p_state_roundtrip_bit_exact():
         objs["opt"].load_state_dict(saved["opt"])
         objs["reg"].load_state_dict(saved["reg"])
         objs["guard"].load_state_dict(saved["guard"])
+        objs["gen"].set_state(saved["gen"])
     second, rest = sc.package_critic(steps=range(split + 1, sc.STEPS + 1), setup=restore)
-    assert 0.0 < part["trace"][-1]["s"] < 1.0
-    _assert_critic_equal(full, dict(trace=part["trace"] + rest["trace"], prox=part["prox"] + rest["prox"]))
+    trace = part["trace"] + rest["trace"]
+    assert len(trace) == len(full["trace"])
+    for a, b in zip(full["trace"], trace):
+        assert torch.equal(a["pen"], b["pen"]), a["t"]
+        assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
+        assert all(torch.equal(x, y) for x, y in zip(a["ema"], b["ema"])), a["t"]
+    assert full["prox"][0] == 0.0 and all(p > 0 for p in full["prox"][1:])
     assert second["guard"].clipped_tensors == first["guard"].clipped_tensors >= 1
 
 
@@ -378,11 +318,27 @@ def test_guard_threshold_and_min_steps():
     assert int(young.apply_(opt)) == 0
 
 
+def test_guard_reads_the_amsgrad_max_second_moment():
+    p = nn.Parameter(torch.zeros(4, dtype=sc.DT))
+    opt = torch.optim.Adam([p], lr=0.1, betas=(0.0, 0.5), amsgrad=True)
+    for scale in (10.0, 0.01, 0.01):  # the running max stays at the first, large gradient
+        p.grad = torch.full_like(p, scale)
+        opt.step()
+    st = opt.state[p]
+    grad = 25.0  # a spike against exp_avg_sq, not against the max buffer AMSGrad steps with
+    bc = 1 - 0.5 ** 3
+    assert grad / (st["max_exp_avg_sq"].mean() / bc).sqrt() < 5.0 < grad / (st["exp_avg_sq"].mean() / bc).sqrt()
+    p.grad = torch.full_like(p, grad)
+    assert int(CriticSpikeGuard(ratio=5.0, min_steps=0).apply_(opt)) == 0
+    assert torch.equal(p.grad, torch.full_like(p, grad))
+
+
 def test_k3p_validation():
-    for kwargs in (dict(lr_floor=0.5), dict(lr_floor=-0.1), dict(coeff=-1.0), dict(kappa=float("nan")),
-                   dict(anchor_weight=-1.0), dict(lazy_k=0)):
+    for kwargs in (dict(coeff=-1.0), dict(kappa=float("nan")), dict(anchor_weight=-1.0), dict(lazy_k=0)):
         with pytest.raises(ValueError):
             GradientPenalty(**kwargs)
+    with pytest.raises(TypeError):
+        GradientPenalty(lr_floor=0.01)  # the LR-driven blend is gone
     D = sc.make_critic()
     with pytest.raises(ValueError, match="either anchor"):
         GradientPenalty(anchor=CriticAnchor(D, copy.deepcopy(D)), record=CriticStepRecord())
@@ -421,10 +377,11 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
     anchored.penalty(A, x_r, x_f)
     with pytest.raises(ValueError, match="anchor tracks"):
         anchored.penalty(B, x_r, x_f)
-    plain = GradientPenalty()
-    plain.penalty(A, x_r, x_f)
+    plain_anchor = GradientPenalty(anchor=CriticAnchor(A, copy.deepcopy(A).requires_grad_(False)))
+    plain_anchor.anchor.critic = None  # an anchor that does not name its critic
+    plain_anchor.penalty(A, x_r, x_f)
     with pytest.raises(ValueError, match="different critic"):
-        plain.penalty(B, x_r, x_f)
+        plain_anchor.penalty(B, x_r, x_f)
     # An explicit per-call EMA critic remains the multi-role path.
     emaB = copy.deepcopy(B).requires_grad_(False)
     anchored.penalty(B, x_r, x_f, ema_critic=emaB)
@@ -433,22 +390,21 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
 def _k3p_trainer():
     from particlegan import GANTrainer, get_recipe
     torch.manual_seed(0)
-    recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
-                        total_steps=10, lr_anneal_start=0.1)
+    recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4, total_steps=10)
     G = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 2)).double()
     D = nn.Sequential(nn.Linear(2, 8), nn.BatchNorm1d(8), nn.ReLU(), nn.Linear(8, 1)).double()
     return GANTrainer(recipe, G, D)
 
 
-def test_trainer_runs_k3p_through_blend_and_resumes_exactly():
+def test_trainer_runs_k3p_with_anchor_from_step_one_and_resumes_exactly():
     reals = [torch.randn(4, 2, dtype=torch.float64, generator=torch.Generator().manual_seed(i)) for i in range(10)]
     full = _k3p_trainer()
-    phases, penalties = [], []
+    prox, penalties = [], []
     for real in reals:
         out = full.step(real, collect_stats=True)
-        phases.append(out["penalty_stats"]["phase"])
+        prox.append(out["penalty_stats"]["prox"])
         penalties.append(out["penalty"])
-    assert phases[0] == "a" and "blend" in phases
+    assert prox[0] == 0.0 and all(p > 0 for p in prox[1:])
     critic_state = full.state_dict()["optimizers"][1]["regularizer"]
     assert critic_state["record"]["anchor_started"]
     assert "1.running_mean" in critic_state["ema"]

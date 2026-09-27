@@ -49,7 +49,8 @@ def test_native_active_bcap_value_and_parameter_gradients_are_identical():
     real = torch.tensor([[0., 0.], [.12, .03], [-.07, .10], [.15, -.11]])
     fake = torch.tensor([[.02, -.03], [-.10, .08], [.09, .10], [.20, -.02]])
     def penalty(critic, real, fake, step):
-        return GradientPenalty(coeff=6., kappa=1.25)(critic, real, fake, step=step)
+        return GradientPenalty(coeff=6., kappa=1.25, anchor_weight=0.0)(
+            critic, real, fake, step=step, generator=torch.Generator().manual_seed(0))  # same path points
     old, new = penalty(research, real, fake, step=1), penalty(public, real, fake, step=1)
     assert old > 0 and torch.equal(old, new)
     old.backward()

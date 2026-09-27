@@ -7,26 +7,24 @@ over (text, latent)) that has to keep five words -- apple / grape / lemon /
 melon / berry -- as five separate modes in a 2D latent space, one learnable
 particle per word.
 
-The training recipe here is the same one that `examples/100gaussians.py` ships
-as its default (the 0.1.2 "study champion"), so the two examples differ only in
-the problem they are pointed at:
+The training recipe here is the package default (`get_recipe()`) with this
+problem's own sizes and rates:
 
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - K3P gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
-    reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
-    plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
-    on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
-    the 100gaussians recipe's penalty on grad_x D(x).
+  - K3P gradient penalty on D (package default, recipe.make_critic_penalty):
+    one-sided gradient caps on real-fake paths and on fakes plus EMA-critic
+    gradient proximity (no R1). Because D here is a *joint* critic D(x, z), the
+    penalty is taken on the gradient w.r.t. the whole joint input, which is the
+    BiGAN analogue of the 100gaussians recipe's penalty on grad_x D(x).
   - recipe.make_optimizers(G, D, prior, encoder=E, ...): Adam beta1=0 (the
     particle table is an embedding-like parameter: momentum drifts rows that
     were not sampled), base LR 6e-4, D at 1.5x, particles at the recipe's
     prior multiplier.
   - EMA (0.995) copies of E, G and the prior, used for every dashboard frame:
     the live weights orbit the equilibrium, the averaged copy sits on it.
-  - Delayed cosine LR anneal: full LR for the first 60% of the run, then cosine
-    down to a 5% floor (annealing to exactly 0 destroys the run).
+  - Constant learning rates with AMSGrad (the package default): no schedule.
   - VICReg-like variance/covariance regularization on the particle cloud at
     weight 1.0, which is what keeps the five "stars" from piling up.
 
@@ -56,7 +54,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan import get_recipe, init, scale_learning_rates  # noqa: E402
+from particlegan import get_recipe, init  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -176,10 +174,8 @@ def train(
     d_lr_mult: float = 1.5,
     beta1: float = 0.0,
     lambda_ep: float = 1.0,
-    reg_coeff: float = 1.0,
+    reg_coeff: float = get_recipe().reg_coeff,
     ema_decay: float = 0.995,
-    lr_floor: float = 0.05,
-    lr_anneal_start: float = 0.6,
     viz_interval: int = 50,
     frame_interval: int = 200,
     log_interval: int = 500,
@@ -210,11 +206,7 @@ def train(
         num_particles=NUM_PARTICLES, z_dim=Z_DIM, batch_size=batch_size,
         total_steps=total_steps, lr=lr, d_lr_mult=d_lr_mult, betas=(beta1, 0.999),
         reg_coeff=reg_coeff,
-        prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
-        lr_floor=lr_floor,
-        # This example anneals G/D over the whole run (not the 1,600-update
-        # toy horizon); K3P's blend follows the critic LR either way.
-        network_lr_horizon_cap=None,
+        prior_reg=lambda_ep, ema_decay=ema_decay,
     )
     prior = recipe.make_prior().to(device)
     # Deterministic init replaces the Xavier init above; the table gets R2 points.
@@ -238,9 +230,7 @@ def train(
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
     gan_loss = recipe.make_loss()
 
-    optimizers = (opt_GE, opt_D)
-    base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
-    # K3P gradient penalty (the default), paired with opt_D (EMA critic, LR record).
+    # K3P gradient penalty (the default), paired with opt_D (EMA critic, step record).
     penalty = recipe.make_critic_penalty(opt_D)
 
     loss_D_hist = deque(maxlen=200)
@@ -259,10 +249,6 @@ def train(
     plt.ion()
 
     for step in range(total_steps + 1):
-        # Full LR until lr_anneal_start, then cosine down: G/E/D to the
-        # network floor (K3P's blend floor), particles to lr_floor.
-        scale_learning_rates(step, recipe, optimizers, base_lrs, prior)
-
         # --- TRAIN D ---
         opt_D.zero_grad()
         real_words = [random.choice(WORDS) for _ in range(batch_size)]

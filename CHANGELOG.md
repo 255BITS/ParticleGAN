@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+- **New default formulation: R1-free K3P at constant LR.** The critic penalty
+  is now `reg_coeff/2 · [path cap + fake cap + EMA anchor]`: one-sided RMS
+  gradient caps at `x̂ = r + u(f − r)` (u ~ U(0,1) per batch-index pair) and at
+  the fakes, plus `mean ||∇D(r) − ∇D̄(r)||²/d` against the parameter-EMA critic,
+  which is on from the first step. No R1, no LR-driven blend. New defaults:
+  `lr` .0085, `d_lr_mult` .5, `reg_coeff` .3, `amsgrad=True` (new field, all
+  recipe optimizers), constant LR (`lr_floor` 1, `network_lr_floor` and
+  `network_lr_horizon_cap` None), no instance noise (`input_noise_std`,
+  `output_noise_std` 0). The spike guard reads AMSGrad's max second moment.
+  `make_critic_penalty(opt_d, generator=...)` takes the stream for the path
+  positions (`GANTrainer` passes its penalty stream). The schedule and noise
+  fields remain as optional knobs. Training results differ from 0.8.0.
+- **Removed:** the direct sample-particle response
+  (`make_generator_optimizer(direct_particles=...)`, `DirectParticleResponse`,
+  `Recipe.direct_particle_gain` / `direct_particle_betas`), the penalty's
+  `lr_floor` option and `blend_weight`. `GANTrainer` drops those recipe fields
+  from older checkpoints. Benchmarks that replay archived runs keep the old
+  defaults through `benchmarks.legacy.recipe.LegacyRecipe`.
+- `python -m benchmarks.toy100 run` now defaults to
+  `configs/toy100/default.json`, which trains the package default recipe
+  (`"recipe_defaults": "particlegan"`); other toy100 configs keep resolving on
+  the GAN v3 fields.
 - **`GANTrainer.sample()` returns clean samples by default.** It previously
   added the current training output noise; pass `output_noise=True` for that.
   Training is unchanged (sampling uses only its own stream). The toy100

@@ -22,7 +22,8 @@ def test_public_discriminator_preserves_research_initialization_and_cap_gradient
         with torch.no_grad():
             model.main.net[-1].weight.mul_(100.)
             model.skip.weight.fill_(2.)
-        loss = GradientPenalty(**get_recipe()._penalty_options())(model, real, fake)
+        loss = GradientPenalty(**get_recipe()._penalty_options(anchor_weight=0.0))(
+            model, real, fake, generator=torch.Generator().manual_seed(1))
         assert loss > 0
         (loss + model(real).mean()).backward()
     assert torch.equal(reference(real), promoted(real))
@@ -34,9 +35,10 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     recipe = get_recipe(num_particles=16)
     g, d = nn.Linear(2, 2), LinearSkipDiscriminator()
     trainer = GANTrainer(recipe, g, d)
-    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.00425, .0085]
+    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.0085, .017]
     assert [group['lr'] for group in trainer.opt_d.param_groups] == [.00425]
-    assert all(group['betas'] == (0., .999) for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
+    assert all(group['betas'] == (0., .999) and group['amsgrad']
+               for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
     assert isinstance(trainer.penalty.regularizer, GradientPenalty)
     assert trainer.ema_D is not None and trainer.latent_damping is not None
     assert isinstance(trainer.loss, GANLoss)
@@ -51,9 +53,9 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     dict(prior_kind='mog', sigma_rel=.025, encoder_mode='hard')])
 def test_component_choices_share_the_winning_training_defaults(options):
     recipe = get_recipe(**options)
-    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (1., 1., 0., (0., .999))
-    assert (recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (.01, 1600)
-    assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult) == (.00425, 1., 2.)
+    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (.3, 1., 0., (0., .999))
+    assert (recipe.lr_floor, recipe.resolved_network_lr_floor, recipe.network_lr_horizon_cap) == (1., 1., None)
+    assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult, recipe.amsgrad) == (.0085, .5, 2., True)
 
 
 @pytest.mark.parametrize('kwargs', [dict(in_dim=0), dict(hidden_dim=0), dict(n_hidden=0),

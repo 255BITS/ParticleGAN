@@ -1,32 +1,34 @@
 """Named component configurations share current hyperparameters, without loops."""
-import json
-from pathlib import Path
 
 import pytest
 from torch import nn
 
-from particlegan import GANLoss, GANTrainer, Recipe, get_recipe
+from particlegan import GANLoss, GANTrainer, Recipe, get_recipe, learning_rate_scales
 
 
-K3P_CONFIG = json.loads((Path(__file__).parents[1] / 'reports/toy100/gap-fill-20260925/sources/k3p/config.json').read_text())
+# The promoted formulation: k3p-no-r1 arm nr_pathcap_anchor (gs2_c03_lr2_d05 without R1),
+# whose resolved recipe receipts record exactly these values.
+PROMOTED = dict(lr=.0085, d_lr_mult=.5, prior_lr_mult=2.0, betas=(0.0, .999), amsgrad=True,
+                reg_coeff=.3, reg_kappa=1.0, reg_every=1, reg_anchor_decay=.999, reg_anchor_weight=1.0,
+                d_guard_ratio=5.0, d_guard_min_steps=200, latent_damping_max_rate=.5,
+                input_noise_std=0.0, output_noise_std=0.0, lr_floor=1.0,
+                batch_size=2048, z_dim=2, num_particles=20_000, total_steps=7000, ema_decay=.995, prior_reg=0.0)
 
 
 def without_name(values):
     return {key: value for key, value in values.items() if key != 'name'}
 
 
-def test_default_matches_every_recorded_winning_field():
-    # The frozen K3P config ran arm a_r1r2 under the K3P patch; the package
-    # has no arm/loss switches: K3P and RpGAN logistic are the formulation.
-    actual = json.loads(json.dumps(get_recipe().to_dict()))
-    assert not {'reg_arm', 'loss_type', 'gan_mode', 'reg_method'} & set(actual)
-    assert (K3P_CONFIG['loss_type'], K3P_CONFIG['gan_mode']) == ('logistic', 'rp')
-    shared = (set(actual) & set(K3P_CONFIG)) - {'name'}
-    assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
-    assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
-            'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared
+def test_default_is_the_promoted_r1_free_constant_lr_formulation():
+    recipe = get_recipe()
+    actual = recipe.to_dict()
+    assert not {'reg_arm', 'loss_type', 'gan_mode', 'reg_method', 'direct_particle_gain',
+                'direct_particle_betas'} & set(actual)
+    assert {key: getattr(recipe, key) for key in PROMOTED} == PROMOTED
+    assert recipe.resolved_network_lr_floor == 1.0
+    assert all(learning_rate_scales(step, recipe) == (1.0, 1.0) for step in range(0, 7001, 500))
     assert actual['name'] == 'k3p'
-    assert get_recipe() == Recipe()
+    assert recipe == Recipe()
 
 
 def test_recipe_stays_configuration_and_components_without_training_lifecycle():
@@ -54,7 +56,7 @@ def test_named_components_share_current_training_hyperparameters(name, model, pr
         model, prior, encoder, conditioning)
     fields = ('lr', 'd_lr_mult', 'prior_lr_mult', 'betas', 'prior_betas',
               'reg_coeff', 'reg_kappa', 'reg_every', 'reg_anchor_weight',
-              'direct_particle_gain', 'prior_reg', 'ema_decay',
+              'amsgrad', 'prior_reg', 'ema_decay',
               'lr_anneal_start', 'lr_floor', 'total_steps')
     for field in fields:
         assert getattr(recipe, field) == getattr(get_recipe(), field)
@@ -91,13 +93,14 @@ def test_named_components_do_not_implicitly_choose_training_control_flow(name, o
         GANTrainer(recipe, nn.Linear(recipe.z_dim, 2), nn.Linear(2, 1))
 
 
-def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():
+def test_optimizer_roles_resolve_to_the_promoted_absolute_rates():
     recipe = get_recipe(num_particles=8, z_dim=2)
     generator, discriminator = nn.Linear(2, 2), nn.Linear(2, 1)
     opt_g, opt_d = recipe.make_optimizers(generator, discriminator, recipe.make_prior())
-    assert [group['lr'] for group in opt_g.param_groups] == [.00425, .0085]
+    assert [group['lr'] for group in opt_g.param_groups] == [.0085, .017]
     assert [group['lr'] for group in opt_d.param_groups] == [.00425]
     assert all(group['betas'] == (0., .999) for opt in (opt_g, opt_d) for group in opt.param_groups)
+    assert all(group['amsgrad'] for opt in (opt_g, opt_d) for group in opt.param_groups)
 
 
 def test_json_integer_zero_moments_construct_real_adam_optimizers():

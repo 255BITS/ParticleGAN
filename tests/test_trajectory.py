@@ -70,7 +70,7 @@ class TrajectoryTests(unittest.TestCase):
         grad = torch.autograd.grad(d(candidate, c, context, xt, t)[0].sum(), candidate)[0]
         self.assertTrue(bool(torch.isfinite(grad).all()))
         self.assertGreater(float(grad.norm()), 0)
-        reg = GradientPenalty(kappa=0., lazy_k=4)
+        reg = GradientPenalty(kappa=0., lazy_k=4, anchor_weight=0.)
         penalty, _ = reg.penalty(TrajectoryCritic(d, c, context, xt, t), real, real+.1,
                                  4, collect_stats=False)
         penalty.backward()
@@ -115,7 +115,7 @@ class TrajectoryTests(unittest.TestCase):
         l1 = d(real, 1-c, ctx, xt.detach(), 5-t)[1]
         torch.testing.assert_close(l0, l1)
         d.zero_grad()
-        reg = GradientPenalty(kappa=0., lazy_k=4)
+        reg = GradientPenalty(kappa=0., lazy_k=4, anchor_weight=0.)
         penalty, _ = reg.penalty(TrajectoryCritic(d, c, ctx, xt.detach(), t), real, fake.detach(), 4, collect_stats=False)
         penalty.backward()
         self.assertTrue(any(p.grad is not None and bool((p.grad != 0).any()) for p in d.parameters()))

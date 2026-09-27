@@ -77,7 +77,7 @@ class GanControlTrainingTests(unittest.TestCase):
                 changed = raw.detach().clone()
                 changed[:, 8:10] = float("nan")
                 torch.testing.assert_close(score, critic(changed, context)[0], atol=0, rtol=0)
-                penalty = GradientPenalty(kappa=0.)
+                penalty = GradientPenalty(kappa=0., anchor_weight=0.)
                 original_penalty, _ = penalty.penalty(lambda x: critic(x, context)[0], raw, raw, 1)
                 changed_penalty, _ = penalty.penalty(lambda x: critic(x, context)[0], changed, changed, 1)
                 self.assertGreater(float(original_penalty.detach()), 0.)

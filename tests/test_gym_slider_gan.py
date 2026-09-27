@@ -51,7 +51,7 @@ class SliderGanTests(unittest.TestCase):
             recipe = training_recipe(self.cfg)
             opt_r = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
             x = torch.randn(4,18)
-            penalty = recipe.make_critic_penalty(opt_r)(critic, x, x + .1)
+            penalty = recipe.make_critic_penalty(opt_r, kappa=0.)(critic, x, x + .1)  # kappa 0: caps active
             self.assertGreater(float(penalty.detach()), 0.)
             penalty.backward()
             self.assertTrue(all(p.grad is None or torch.isfinite(p.grad).all() for p in critic.parameters()))

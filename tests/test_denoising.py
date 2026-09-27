@@ -103,7 +103,7 @@ def test_joint_ucd_hides_time_and_class_and_preserves_candidate_cap_gradients():
     # Changing either label only selects a head; neither enters the backbone.
     torch.testing.assert_close(logits, d(x, c.flip(0), xt, t.flip(0))[1])
     assert not torch.equal(logits, d(x, c, xt + 2, t)[1])
-    penalty, _ = GradientPenalty(kappa=0).penalty(
+    penalty, _ = GradientPenalty(kappa=0, anchor_weight=0.0).penalty(
         FixedConditionCritic(d, c, xt, t), x, torch.randn_like(x), 1)
     assert penalty > 0 and torch.isfinite(penalty)
     (penalty + F.cross_entropy(logits, d.ucd_labels(c, t))).backward()
