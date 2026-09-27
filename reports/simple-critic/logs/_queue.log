@@ -1,0 +1,97 @@
+2026-09-26 19:59:57 start full (worker --real drift --lam-real 0.1 --path lower --cap all)
+2026-09-26 19:59:57 start no_path (worker --real drift --lam-real 0.1 --cap all)
+2026-09-26 19:59:57 start full_r1 (worker --real r1 --path lower --cap all)
+2026-09-26 20:00:57 done  no_path rc=0
+2026-09-26 20:00:57 start no_cap (worker --real drift --lam-real 0.1 --path lower)
+2026-09-26 20:00:57 done  full rc=0
+2026-09-26 20:00:57 start no_real (worker --lam-real 0.1 --path lower --cap all)
+2026-09-26 20:00:57 done  full_r1 rc=0
+2026-09-26 20:00:57 start full_hinge (worker --loss hinge --real drift --lam-real 0.1 --path lower --cap all)
+2026-09-26 20:01:56 done  no_cap rc=0
+2026-09-26 20:01:56 start wgangp_ref (worker --real drift --lam-real 0.1 --path two_sided)
+2026-09-26 20:01:56 done  no_real rc=0
+2026-09-26 20:01:56 start int_r1 (worker --real r1 --path lower --path-u 0.1,0.9 --path-target 0.3 --cap all)
+2026-09-26 20:01:58 done  full_hinge rc=0
+2026-09-26 20:01:58 start secant_r1 (worker --real r1 --path secant --path-u 0.1,0.9 --path-target 0.5 --cap all)
+2026-09-26 20:02:55 done  wgangp_ref rc=0
+2026-09-26 20:02:55 start int_r1_hinge (worker --loss hinge --real r1 --path lower --path-u 0.1,0.9 --path-target 0.3 --cap all)
+2026-09-26 20:02:56 done  int_r1 rc=0
+2026-09-26 20:02:56 start int_r1_rp (worker --loss rplogistic --real r1 --path lower --path-u 0.1,0.9 --path-target 0.3 --cap all)
+2026-09-26 20:02:58 done  secant_r1 rc=0
+2026-09-26 20:02:58 start int_r1_b2 (worker --real r1 --path lower --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.3 --cap all)
+2026-09-26 20:03:54 done  int_r1_hinge rc=0
+2026-09-26 20:03:54 start secant_r1_b2 (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all)
+2026-09-26 20:03:56 done  int_r1_rp rc=0
+2026-09-26 20:03:56 start sec_t1 (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --cap all)
+2026-09-26 20:03:57 done  int_r1_b2 rc=0
+2026-09-26 20:03:57 start sec_drift (worker --real drift+r1 --lam-drift 0.001 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all)
+2026-09-26 20:04:56 done  secant_r1_b2 rc=0
+2026-09-26 20:04:56 start sec_center (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --lam-center 1)
+2026-09-26 20:04:57 done  sec_t1 rc=0
+2026-09-26 20:04:57 start sec_nodamp (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:05:00 done  sec_drift rc=0
+2026-09-26 20:05:00 start sec_lazy4 (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --lazy-k 4)
+2026-09-26 20:06:05 done  sec_nodamp rc=0
+2026-09-26 20:06:05 start combo_a (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0 --lam-center 1)
+2026-09-26 20:06:15 done  sec_lazy4 rc=0
+2026-09-26 20:06:15 start combo_b (worker --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --cap all --latent-damping 0 --lam-center 1)
+2026-09-26 20:06:17 done  sec_center rc=0
+2026-09-26 20:06:17 start lr_c0.25_g0.25 (lr_grid --lr-c 0.25 --lr-g 0.25 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:07:32 done  combo_a rc=0
+2026-09-26 20:07:32 start lr_c0.5_g0.5 (lr_grid --lr-c 0.5 --lr-g 0.5 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:07:39 done  combo_b rc=0
+2026-09-26 20:07:39 start lr_c0.5_g1 (lr_grid --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:07:40 done  lr_c0.25_g0.25 rc=0
+2026-09-26 20:07:40 start lr_c0.5_g2 (lr_grid --lr-c 0.5 --lr-g 2 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:08:28 done  lr_c0.5_g0.5 rc=0
+2026-09-26 20:08:29 start lr_c1_g0.5 (lr_grid --lr-c 1 --lr-g 0.5 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:08:36 done  lr_c0.5_g1 rc=0
+2026-09-26 20:08:36 start lr_c1_g2 (lr_grid --lr-c 1 --lr-g 2 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:08:38 done  lr_c0.5_g2 rc=0
+2026-09-26 20:08:38 start lr_c2_g0.5 (lr_grid --lr-c 2 --lr-g 0.5 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:09:19 done  lr_c1_g0.5 rc=0
+2026-09-26 20:09:19 start lr_c2_g1 (lr_grid --lr-c 2 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:09:25 done  lr_c1_g2 rc=0
+2026-09-26 20:09:25 start lr_c2_g2 (lr_grid --lr-c 2 --lr-g 2 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:09:27 done  lr_c2_g0.5 rc=0
+2026-09-26 20:09:27 start lr_c4_g4 (lr_grid --lr-c 4 --lr-g 4 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0)
+2026-09-26 20:10:06 done  lr_c2_g1 rc=0
+2026-09-26 20:10:06 start B_cap2 (curvature --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --cap-target 2 --latent-damping 0)
+2026-09-26 20:10:13 done  lr_c2_g2 rc=0
+2026-09-26 20:10:13 start B_cap3 (curvature --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --cap-target 3 --latent-damping 0)
+2026-09-26 20:10:15 done  lr_c4_g4 rc=0
+2026-09-26 20:10:15 start B_margin (curvature --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0 --lam-margin 10)
+2026-09-26 20:10:58 done  B_cap2 rc=0
+2026-09-26 20:10:58 start B_nnpair (curvature --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --latent-damping 0 --nnpair)
+2026-09-26 20:11:03 done  B_cap3 rc=0
+2026-09-26 20:11:03 start wgan_huber (curvature --lr-c 0.5 --lr-g 1 --d-beta2 0.9 --latent-damping 0 --lam-huber 10)
+2026-09-26 20:11:10 done  B_margin rc=0
+2026-09-26 20:11:10 start wgan_margin (curvature --lr-c 0.5 --lr-g 1 --d-beta2 0.9 --latent-damping 0 --lam-margin 10)
+2026-09-26 20:11:54 done  B_nnpair rc=0
+2026-09-26 20:11:54 start c3_capinterp (round5 --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap interp --cap-target 3 --latent-damping 0)
+2026-09-26 20:11:56 done  wgan_huber rc=0
+2026-09-26 20:11:56 start c3_capnopath (round5 --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap ends --cap-target 3 --latent-damping 0)
+2026-09-26 20:12:02 done  wgan_margin rc=0
+2026-09-26 20:12:02 start c3_r1w (round5 --lr-c 0.5 --lr-g 1 --real r1 --lam-real 0.1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --cap-target 3 --latent-damping 0)
+2026-09-26 20:12:56 done  c3_capinterp rc=0
+2026-09-26 20:12:56 start c3_rate (round5 --lr-c 0.5 --lr-g 1 --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --cap-target 3 --latent-damping 0 --lam-rate 10)
+2026-09-26 20:12:59 done  c3_capnopath rc=0
+2026-09-26 20:12:59 start rp_center (round5 --lr-c 0.5 --lr-g 1 --loss rplogistic --real r1 --path secant --path-u 0.1,0.9 --d-beta2 0.9 --path-target 0.5 --cap all --cap-target 3 --latent-damping 0 --lam-pair-center 1)
+2026-09-26 20:13:05 done  c3_r1w rc=0
+2026-09-26 20:13:05 start rp_center_min (round5 --lr-c 0.5 --lr-g 1 --loss rplogistic --d-beta2 0.9 --cap all --cap-target 3 --latent-damping 0 --lam-pair-center 1)
+2026-09-26 20:14:01 done  c3_rate rc=0
+2026-09-26 20:14:01 start sec_anchor (secant_k3p --anchor)
+2026-09-26 20:14:02 done  rp_center rc=0
+2026-09-26 20:14:02 start sec_guard (secant_k3p --guard)
+2026-09-26 20:14:03 done  rp_center_min rc=0
+2026-09-26 20:14:03 start sec_guard_anchor (secant_k3p --guard --anchor)
+2026-09-26 20:15:08 done  sec_guard rc=0
+2026-09-26 20:15:08 start k3p_constant (k3p --arm constant)
+2026-09-26 20:15:15 done  sec_anchor rc=0
+2026-09-26 20:15:15 start k3p_stock_ref (k3p --arm stock)
+2026-09-26 20:15:21 done  sec_guard_anchor rc=0
+2026-09-26 20:15:21 start ka2_stock_ref (ka2 )
+2026-09-26 20:16:09 done  k3p_constant rc=0
+2026-09-26 20:16:18 done  k3p_stock_ref rc=0
+2026-09-26 20:16:36 done  ka2_stock_ref rc=0
+2026-09-26 20:16:36 queue finished

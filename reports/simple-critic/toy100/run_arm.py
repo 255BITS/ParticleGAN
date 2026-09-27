@@ -207,6 +207,10 @@ def main():
     ap.add_argument("--arm", required=True, choices=sorted(ARMS))
     ap.add_argument("--steps", type=int, default=None, help="smoke tests only: override the config's steps")
     ap.add_argument("--runs-dir", type=Path, default=HERE / "runs", help="parent of the arm's output dir")
+    ap.add_argument("--init", choices=("recipe", "none", "hook"), default="recipe",
+                    help="controls only: recipe = package default via the recipe path (the study setting); "
+                         "none = keep the legacy None pin (old random init replay); "
+                         "hook = develop's toy100 mechanism, registry use_init('batch_feature_zero') (also re-spaces the prior)")
     args = ap.parse_args()
     arm, spec = args.arm, ARMS[args.arm]
     assert Path(particlegan.__file__).resolve().is_relative_to(ROOT), particlegan.__file__
@@ -231,23 +235,31 @@ def main():
         if spec["kind"] == "simple" and spec["latent_damping"] != recipe.latent_damping_max_rate:
             recipe = dataclasses.replace(recipe, latent_damping_max_rate=spec["latent_damping"])
         pinned = recipe.initialization
-        recipe = dataclasses.replace(recipe, initialization=INITIALIZATION)
-        assert _pg_init._external_init is None, "an --init registry hook is installed"
+        if args.init == "recipe":
+            recipe = dataclasses.replace(recipe, initialization=INITIALIZATION)
+            assert _pg_init._external_init is None, "an --init registry hook is installed"
         trainer = original_make(config, recipe)
         crit = convert_to_simple(trainer, arm) if spec["kind"] == "simple" else None
         problem = config["problem"]
-        # make_trainer forks the CPU/device RNG, so these reference builds leave the run untouched.
-        ref = {k: original_make(config, r) for k, r in (("old", init_receipt.old_recipe(recipe)),
-                                                        ("public", recipe))}
-        receipts[problem] = {**init_receipt.receipt(
-            recipe, {"G": trainer.G, "D": trainer.D, "prior": trainer.prior},
-            old={"G": ref["old"].G, "D": ref["old"].D, "prior": ref["old"].prior},
-            public={"G": ref["public"].G, "D": ref["public"].D, "prior": ref["public"].prior},
-            ema_D=trainer.opt_d.ema_critic,
-            applied_via="GANTrainer -> recipe.make_optimizers (benchmark make_trainer, legacy None pin replaced)"),
-            "legacy_pin_replaced": pinned}
-        print(f"INIT {problem} " + init_receipt.summary_line(receipts[problem])[2:].strip(), flush=True)
-        del ref
+        if args.init == "hook":  # reference builds would advance the hook's construction order; record live hashes only
+            receipts[config["problem"]] = {"initialization": "hook", "external_init_hook": _pg_init._external_init,
+                                           "param_sha256": {k: init_receipt.param_sha256(m) for k, m in
+                                                            (("G", trainer.G), ("D", trainer.D), ("prior", trainer.prior))}}
+            print(f"INIT {config['problem']} init=hook hook={_pg_init._external_init} sha "
+                  + " ".join(f"{k}={v[:12]}" for k, v in receipts[config['problem']]["param_sha256"].items()), flush=True)
+        else:
+            # make_trainer forks the CPU/device RNG, so these reference builds leave the run untouched.
+            ref = {k: original_make(config, r) for k, r in (("old", init_receipt.old_recipe(recipe)),
+                                                            ("public", recipe))}
+            receipts[problem] = {**init_receipt.receipt(
+                recipe, {"G": trainer.G, "D": trainer.D, "prior": trainer.prior},
+                old={"G": ref["old"].G, "D": ref["old"].D, "prior": ref["old"].prior},
+                public={"G": ref["public"].G, "D": ref["public"].D, "prior": ref["public"].prior},
+                ema_D=trainer.opt_d.ema_critic,
+                applied_via="GANTrainer -> recipe.make_optimizers (benchmark make_trainer, legacy None pin replaced)"),
+                "legacy_pin_replaced": pinned}
+            print(f"INIT {problem} " + init_receipt.summary_line(receipts[problem])[2:].strip(), flush=True)
+            del ref
         probe = Probe(trainer, problem, diag / f"{problem}.jsonl", None, crit)
         probes[problem] = probe
         inner = trainer.step
@@ -265,12 +277,13 @@ def main():
 
     toy_train.make_trainer = make_trainer
     ns = argparse.Namespace(command="run", config=cfg_path, output=out, problem=None, steps=args.steps,
-                            device="cuda", no_render=True, require_accuracy=True)
+                            device="cuda", no_render=True, require_accuracy=True,
+                            init=INITIALIZATION if args.init == "hook" else None)
     started = time.monotonic()
     code = toy_main._run(ns)
 
     # ---- aggregate
-    result = {"arm": arm, "formulation": spec["desc"], "exit_code": code,
+    result = {"arm": arm, "formulation": spec["desc"], "init_mode": args.init, "exit_code": code,
               "wall_seconds": time.monotonic() - started, "init_receipt": receipts, "problems": {}}
     gate = json.loads((out / "gate.json").read_text()) if (out / "gate.json").exists() else {}
     acc = json.loads((out / "accuracy-gate.json").read_text()) if (out / "accuracy-gate.json").exists() else {}

@@ -10,7 +10,7 @@
 > from the `initialization=None` draw with the same seed. On the ring, G, D (and the EMA/anchor
 > critic) and the particle prior all change. On toy100 only D's weights change: the
 > `affine_square_v1` identity generator, zero biases and the model policy's uniform particle
-> square are kept by the public path.
+> square are kept by the public path. **Results: "Rerun with develop's QR initialization" below.**
 
 **Question.** Can a plain critic, with no instance noise, constant learning
 rates and no adaptive controller, hold the ring-8 target and follow it through
@@ -36,6 +36,122 @@ after update 1000, but fails on within-mode shape (HQ 0.89 to 0.95, gate 0.97).
 On sparse-UCD it ends at 58/64 modes against 62/64 for the constant-LR
 champion. The simple critic carries its stability across, not its accuracy.
 See "Transfer".
+
+## Rerun with develop's QR initialization
+
+**What changed.** origin/develop c720645e (#194) was merged. `Recipe.initialization` now
+defaults to `batch_feature_zero`: `make_optimizers` initializes fresh G/D/E once and syncs
+the EMA critic, and `make_prior` applies R2 init to learnable particle tables. Nothing else
+changed. All 48 ring arms were rerun with their recorded worker and flags (seed 0, no noise,
+constant LRs, no controller for simple arms; reference rows keep their setups; K3P refs from
+`k3p-develop@c720645e`). All 8 toy100 arms were rerun on the full gate (7000 updates, seed 1234).
+Old results are archived in `runs_oldinit/` and `logs_oldinit/` (toy100 likewise). Full
+comparison: `INIT_RERUN.md` (regenerate with `compare_init.py`). New ring board: `leaderboard.md`
+and `LEADERBOARD.md`. Toy100: `toy100/LEADERBOARD.md`.
+
+**How the init was verified.** Every `result.json` carries an `init_receipt` (`init_receipt.py`).
+- Ring: `initialization=batch_feature_zero` and `external_init_hook=None`. G, D and the prior all
+  differ from the `initialization=None` draw, with no tensor left at its old value. The start
+  hashes match a fresh public-recipe build, and the EMA critic equals D at the start
+  (sec_anchor, sec_guard_anchor, k3p_*, ka2). An independent audit rebuilt the start weights:
+  the new code gives the receipt hashes, and the pre-merge code (aa92ddf4, K3P 0ff9a7af)
+  gives the recorded old hashes. For 32 arms the only declaration difference is
+  `recipe.initialization`; the other arms differ only in keys added later at their no-op defaults.
+- Toy100: only D's weights change. G is the identity generator, D's biases stay zero, and
+  `prior.z` keeps the benchmark's own uniform draw. With `run_arm.py --init none`, ref_stock
+  reproduces the archived result exactly.
+
+**New ring leaderboard (top).** fails = fails outside transit. `ref` rows are not ranked.
+
+| # | arm | prehold | arrival | post-arrival | departures | fails | max grad | final HQ |
+|---|---|---|---|---|---|---|---|---|
+| ref | k3p_stock_ref | 120/120 | 1220 | 99/99 | 1 | 0 | 3.55 | 0.954 |
+| ref | k3p_constant | 95/120 | 360 | 185/185 | 1 | 25 | 4.90 | 0.993 |
+| 1 | B_cap3 | 80/120 | 250 | 195/196 | 11 | **41** | 5.43 | 0.995 |
+| 2 | lr_c0.5_g0.5 | 86/120 | 240 | 181/197 | 15 | 50 | 2.40 | 0.993 |
+| 3 | sec_nodamp | 97/120 | 160 | 176/205 | 17 | 52 | 2.73 | 0.982 |
+| 4 | lr_c0.5_g2 | 99/120 | 400 | 148/181 | 9 | 54 | 3.48 | 0.008 |
+| ref | ka2_stock_ref | 78/120 | 390 | 168/182 | 12 | 56 | n/a | 0.724 |
+| 5 | lr_c1_g0.5 | 86/120 | 90 | 185/212 | 25 | 61 | 2.35 | 0.991 |
+| 6 | lr_c0.25_g0.25 | 75/120 | 100 | 192/211 | 6 | 64 | 2.80 | 0.139 |
+| 7 | sec_drift | 83/120 | 250 | 168/196 | 24 | 65 | 2.82 | 0.995 |
+| 8 | combo_a | 90/120 | 200 | 165/201 | 19 | 66 | 3.35 | 0.966 |
+
+Final HQ is one observation; 0.008 and 0.139 are a single bad check, not a collapse.
+
+**Old -> new for key arms (ring).**
+
+| arm | rank | prehold | arrival | departures | fails | max grad |
+|---|---|---|---|---|---|---|
+| B_cap3 | 1 -> 1 | 82 -> 80 | 140 -> 250 | 10 -> 11 | 38 -> 41 | 5.94 -> 5.43 |
+| sec_nodamp | 3 -> 3 | 97 -> 97 | 230 -> 160 | 21 -> 17 | 50 -> 52 | 2.64 -> 2.73 |
+| lr_c0.5_g1 | 2 -> 9 | 96 -> 81 | 260 -> 380 | 17 -> 17 | 42 -> 69 | 2.83 -> 2.66 |
+| rp_center | 4 -> 21 | 66 -> 53 | 300 -> 170 | 5 -> 6 | 54 -> 118 | 4.88 -> 5.63 |
+| secant_r1_b2 | 12 -> 19 | 83 -> 48 | 630 -> 280 | 33 -> 27 | 77 -> 106 | – |
+| lr_c0.5_g0.5 | 15 -> 2 | 97 -> 86 | 560 -> 240 | 29 -> 15 | 81 -> 50 | – |
+| sec_drift | 22 -> 7 | 79 -> 83 | 150 -> 250 | 35 -> 24 | 116 -> 65 | – |
+| k3p_constant | ref | 88 -> 95 | 360 -> 360 | 5 -> 1 | 50 -> 25 | 5.81 -> 4.90 |
+| k3p_stock_ref | ref | 120 -> 120 | 1960 -> 1220 | 3 -> 1 | 0 -> 0 | 7.45 -> 3.55 |
+| ka2_stock_ref | ref | 61 -> 78 | 120 -> 390 | 10 -> 12 | 142 -> 56 | n/a |
+
+13 of 45 ranked arms moved 7 or more places; the median arm moved 2. Every arm in the failure
+group (full*, no_cap, no_real, wgangp_ref, wgan_margin, c3_rate, lr_c4_g4, int_r1* except
+int_r1_b2, secant_r1, sec_lazy4, no_path) still fails after the shift. The exception is
+wgan_huber, which now arrives (at 1020) but has 234 fails. The new init lowers their blow-ups
+(full max grad 685 -> 95) without rescuing them.
+
+**Toy100 gate (new init).** No arm passes. The shipped `ref_stock` drops from PASS 3/3 to 0/3.
+
+| # | arm | pass | modes (g/r/s) | final HQ (g/r/s) | ΔHQ sum vs old | max grad |
+|---|---|---|---|---|---|---|
+| 1 | rp_center | 0/3 | 100/98/100 | 0.980/0.948/0.972 | +0.001 | 2.93 |
+| 2 | c3_r1w | 0/3 | 100/100/100 | 0.967/0.922/0.972 | +0.104 | 4.96 |
+| 3 | sec_nodamp | 0/3 | 100/100/100 | 0.948/0.907/0.944 | +0.057 | 2.26 |
+| 4 | secant_r1_b2 | 0/3 | 100/100/100 | 0.925/0.900/0.948 | −0.023 | 2.14 |
+| 5 | c3_capinterp | 0/3 | 100/97/100 | 0.934/0.811/0.945 | −0.067 | 4.29 |
+| 6 | sec_nodamp_lazy4 | 0/3 | 98/100/95 | 0.851/0.849/0.843 | −0.051 | 2.34 |
+| ref | ref_stock | **0/3** (was 3/3) | 100/71/40 | 0.947/0.615/0.449 | **−0.949** | 9.62 |
+| ref | ref_matched | 0/3 | 66/88/9 | 0.853/0.841/0.148 | +0.514 | 105.67 |
+
+Controls: with `--init none` (old init, merged code), ref_stock gets PASS 3/3 again, identical to
+the archive, so the init alone causes the regression. With `--init hook` (develop's own toy100
+path, which also re-spaces the prior), ref_stock gets 2/3 and grid collapses to 44 modes.
+
+**Do the round 1-5 conclusions still hold?**
+- **Yes: which components are needed.** R1 + secant + cap-all is still required; every arm
+  without one of them still fails. Lazy regularization, the rate penalty and secant t = 1 stay
+  closed. B_cap3 stays ring #1 and sec_nodamp stays #3.
+- **Yes: toy100 fails on within-mode shape, not coverage.** The simple arms still cover 95–100
+  modes and fail on covariance (min–max ratio 0.13–2.9). Their HQ barely moves with the init.
+- **Changed: rp_center as the next base (Round 5 recommendation 1).** Its ring #4 came from a
+  lucky init: fails 54 -> 118 and prehold 66 -> 53. It is still toy100 #1, but the ring no longer
+  supports promoting it.
+- **Changed: the fine ranking in the middle of the ring board.** Changing only the start weights
+  moved fails by 30 to 65 on similar arms. In ranks 2 to 25, gaps under about 30 fails are noise.
+  This invalidates the order among lr-grid cells, B_cap2, c3_capinterp and sec_t1. It also weakens
+  the round 3 claims that rest on small fails gaps, such as "combo_a does not beat sec_nodamp".
+- **Weakened: "keep R1(1)".** R1 0.1 (c3_r1w) is now ring #10 (fails 79 -> 70, 29 behind
+  B_cap3, inside the noise band) and toy100 #2 (ΔHQ +0.104). It still fails covariance, so the
+  flat-D explanation stays refuted, but R1 0.1 is no longer clearly harmful on the ring.
+- **Changed: the references.** k3p_constant (25 fails) now beats every simple arm; before it
+  tied sec_nodamp at 50. On toy100 the shipped ref_stock no longer passes under the new D init,
+  so it cannot serve as a passing baseline until that is resolved.
+- **Changed: the headline answer above.** secant_r1_b2 is now ring #19 (106 fails), so it is no
+  longer the arm to cite. B_cap3 is.
+
+**Recommendations (no seed runs, no spectral norm).**
+1. Keep **B_cap3** as the ring lead. It is the only simple arm in the top 3 under both inits.
+2. Next, graft K3P's anchor/guard onto B_cap3; they were only tested on the older c=1 base. That
+   is the most direct attempt at k3p_constant's 25 fails.
+3. Treat ring arms as tied unless their fails outside transit differ by 30 or more. To separate
+   the top three, change the test rather than the seed, for example a second shift or a longer
+   post-shift window.
+4. On toy100, the next tests are unchanged: the margin secant, and a lower constant particle LR
+   (`prior_lr_mult` 1). Run them on B_cap3's critic settings as well as rp_center's, since the
+   ring no longer favours rp_center.
+5. Find out why ref_stock loses the toy100 gate under `batch_feature_zero` on
+   `constraints_simple_regularization.json` (develop reports 22/22 on a different setup). This
+   is a package-level question, not a simple-critic one.
 
 ## Formulation
 

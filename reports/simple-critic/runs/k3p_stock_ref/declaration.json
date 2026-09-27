@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "experiment": "k3p_simple_critic_shift",
+  "arm": "k3p_stock_ref",
+  "formulation": "REF: K3P k3p-develop@c720645e as released (RpGAN+K3P penalty/anchor/guard, own noise + LR schedules)",
+  "seed": 0,
+  "recipe": {
+    "name": "k3p",
+    "model": "gan",
+    "z_dim": 2,
+    "num_particles": 20000,
+    "prior_kind": "particles",
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 2048,
+    "total_steps": 4600,
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "prior_betas": null,
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "reg_every": 1,
+    "prior_reg": 0.0,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": true,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "input_noise_std": 0.5,
+    "input_noise_anneal_end": 0.1,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0,
+    "initialization": "batch_feature_zero"
+  },
+  "training_api": "particlegan.get_recipe + particlegan.GANTrainer.step (k3p-develop@c720645e)",
+  "k3p_root": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-develop",
+  "init_receipt": {
+    "initialization": "batch_feature_zero",
+    "external_init_hook": null,
+    "applied_via": "GANTrainer (k3p-develop@c720645e)",
+    "param_sha256": {
+      "G": "615e9d129c1c0528cb37b1f78220b557c0753d73542f158c1bda591b05af6243",
+      "D": "e15f6122daf783f9e7a792f406bfbf286320da617f81f8b9aea63cffd8d26961",
+      "prior": "2531df2c5ad8a1cc66e14225e5594c5e6c2248df763941fce7bfad432b4b9c1b"
+    },
+    "ema_D_equals_D": true,
+    "old_init_param_sha256": {
+      "G": "cc3d45353f7846af4d55c456ed7e7bed07597029720597193a7a6a63290f5e57",
+      "D": "a4a859ead6b640a67f438d81e798b7fa101ccd5cf0171b2bbaa6ccfd85c7b06d",
+      "prior": "8f52363bf175e173419c676b2df56b0aad15a8bc95d9b73cc33b4ab4a611bf8a"
+    },
+    "differs_from_old_init": {
+      "G": true,
+      "D": true,
+      "prior": true
+    },
+    "differs_from_old_init_all": true,
+    "tensors_equal_to_old_init": [],
+    "public_path_sha256_match": {
+      "G": true,
+      "D": true,
+      "prior": true
+    }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-develop/particlegan/__init__.py",
+  "torch": "2.14.0+cu130",
+  "k3p_git_commit": "c720645ecae6b648e9fc6034e9d6b48ccff06ed3",
+  "initial_rates": {
+    "generator_0": 0.00425,
+    "prior_1": 0.0085,
+    "critic_0": 0.00425
+  },
+  "device": "cuda:0"
+}

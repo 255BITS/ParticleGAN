@@ -1,0 +1,737 @@
+ARM sec_nodamp | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=0] | particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/particlegan/__init__.py | torch=2.14.0+cu130
+{"cublas_workspace": ":4096:8", "cudnn": 92400, "deterministic": true, "device": "cuda:0", "dtype": "float32", "event": "DEVICE", "gpu": "NVIDIA RTX A6000", "requested": "cuda", "rng": "device-less torch.Generator() uses the selected device", "tf32": false, "threads": 1, "torch": "2.14.0+cu130", "torch_cuda": "13.0"}
+{"event": "problem_start", "problem": "grid100", "steps": 7000, "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/grid100"}
+INIT grid100 init=batch_feature_zero hook=None differs_from_old=D public_path_match=G,D,prior ema_D_equals_D=None sha G=706dc20c76f2 D=7d5ea8b2bc21 prior=6c9872a1f4d8
+TRAINER grid100 opt_d=K3PCriticAdam betas=(0.0, 0.9) ema_critic=False A2=0.0 noise_in=0.0 noise_out=0.0 lr_floor=1.0 net_floor=1.0
+START problem=grid100 steps=7000 device=cuda:0 events=/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/grid100/events.jsonl
+EVAL step=0/7000 model=live modes=0/100 hq=0.0268 pass=False elapsed=1.7s
+EVAL step=0/7000 model=ema modes=0/100 hq=0.0268 pass=False elapsed=1.9s
+PROBE grid100     1 Dr=+0.150 |Dr|max=0.306 Df=-0.028 g r=0.546 f=0.625 p=0.604 max=1.673 Ld=+0.4154 base=0.00556 r1=0.0538 path=0.356 Lg=+0.7884 lr_d=0.00425 1s
+TRAIN step=1/7000 d=0.4154 g=0.7884 train_seconds=0.2
+EVAL step=1/7000 model=live modes=0/100 hq=0.0278 pass=False elapsed=2.5s
+EVAL step=1/7000 model=ema modes=0/100 hq=0.0269 pass=False elapsed=2.7s
+EVAL step=10/7000 model=live modes=0/100 hq=0.0362 pass=False elapsed=3.1s
+EVAL step=10/7000 model=ema modes=0/100 hq=0.0272 pass=False elapsed=3.4s
+EVAL step=25/7000 model=live modes=0/100 hq=0.0648 pass=False elapsed=3.9s
+EVAL step=25/7000 model=ema modes=0/100 hq=0.0275 pass=False elapsed=4.1s
+PROBE grid100    50 Dr=+0.172 |Dr|max=0.229 Df=+0.090 g r=0.147 f=0.363 p=0.339 max=0.753 Ld=+0.0549 base=-0.0313 r1=0.00606 path=0.0801 Lg=+0.7374 lr_d=0.00425 4s
+EVAL step=50/7000 model=live modes=0/100 hq=0.1393 pass=False elapsed=4.8s
+EVAL step=50/7000 model=ema modes=0/100 hq=0.0307 pass=False elapsed=5.2s
+PROBE grid100   100 Dr=+0.279 |Dr|max=0.454 Df=+0.241 g r=0.110 f=0.331 p=0.435 max=0.883 Ld=+0.0189 base=-0.0404 r1=0.0563 path=0.00287 cap=0.000117 Lg=+0.7134 lr_d=0.00425 5s
+EVAL step=100/7000 model=live modes=1/100 hq=0.3660 pass=False elapsed=6.4s
+EVAL step=100/7000 model=ema modes=0/100 hq=0.0424 pass=False elapsed=6.7s
+PROBE grid100   150 Dr=+0.617 |Dr|max=1.443 Df=+0.596 g r=0.297 f=0.274 p=0.465 max=1.136 Ld=-0.0095 base=-0.0297 r1=0.0158 path=0.00391 cap=0.000505 Lg=+0.7248 lr_d=0.00425 7s
+PROBE grid100   200 Dr=+0.601 |Dr|max=1.515 Df=+0.576 g r=0.100 f=0.112 p=0.252 max=0.724 Ld=+0.0200 base=-0.0134 r1=0.025 path=0.00841 cap=1.46e-05 Lg=+0.7336 lr_d=0.00425 7s
+PROBE grid100   250 Dr=+0.515 |Dr|max=1.383 Df=+0.492 g r=0.050 f=0.065 p=0.240 max=0.747 Ld=+0.0361 base=-0.02 r1=0.0444 path=0.00923 cap=0.00248 Lg=+0.7433 lr_d=0.00425 8s
+TRAIN step=250/7000 d=0.0361 g=0.7433 train_seconds=3.9
+EVAL step=250/7000 model=live modes=99/100 hq=0.8248 pass=False elapsed=9.3s
+EVAL step=250/7000 model=ema modes=0/100 hq=0.1477 pass=False elapsed=9.7s
+PROBE grid100   300 Dr=+0.710 |Dr|max=2.636 Df=+0.661 g r=0.044 f=0.062 p=0.311 max=1.409 Ld=-0.0007 base=-0.0514 r1=0.0195 path=0.0206 cap=0.0107 Lg=+0.8369 lr_d=0.00425 10s
+PROBE grid100   350 Dr=+1.246 |Dr|max=2.960 Df=+1.184 g r=0.056 f=0.055 p=0.423 max=1.219 Ld=-0.0323 base=-0.0505 r1=0.00365 path=0.0145 Lg=+0.8472 lr_d=0.00425 11s
+PROBE grid100   400 Dr=+1.421 |Dr|max=3.450 Df=+1.385 g r=0.056 f=0.066 p=0.404 max=1.222 Ld=-0.0377 base=-0.0558 r1=0.00293 path=0.0082 cap=0.00696 Lg=+0.8374 lr_d=0.00425 11s
+PROBE grid100   450 Dr=+0.912 |Dr|max=2.087 Df=+0.910 g r=0.053 f=0.050 p=0.269 max=0.787 Ld=-0.0089 base=-0.0662 r1=0.00551 path=0.00972 cap=0.0421 Lg=+0.7525 lr_d=0.00425 12s
+PROBE grid100   500 Dr=+1.453 |Dr|max=3.858 Df=+1.414 g r=0.072 f=0.086 p=0.448 max=1.194 Ld=-0.0377 base=-0.0597 r1=0.00823 path=0.0105 cap=0.00334 Lg=+0.8919 lr_d=0.00425 13s
+TRAIN step=500/7000 d=-0.0377 g=0.8919 train_seconds=7.7
+EVAL step=500/7000 model=live modes=100/100 hq=0.9062 pass=False elapsed=14.0s
+EVAL step=500/7000 model=ema modes=92/100 hq=0.6777 pass=False elapsed=14.3s
+PROBE grid100   550 Dr=+1.720 |Dr|max=3.956 Df=+1.706 g r=0.062 f=0.079 p=0.490 max=1.296 Ld=-0.0145 base=-0.0326 r1=0.00437 path=0.0137 cap=5.73e-05 Lg=+0.8632 lr_d=0.00425 14s
+PROBE grid100   600 Dr=+1.718 |Dr|max=4.438 Df=+1.623 g r=0.048 f=0.061 p=0.497 max=1.209 Ld=-0.0527 base=-0.0659 r1=0.00272 path=0.0105 Lg=+0.9227 lr_d=0.00425 15s
+PROBE grid100   650 Dr=+1.388 |Dr|max=3.289 Df=+1.363 g r=0.120 f=0.128 p=0.458 max=1.215 Ld=+0.0031 base=-0.0209 r1=0.00909 path=0.0141 cap=0.000732 Lg=+0.8497 lr_d=0.00425 16s
+PROBE grid100   700 Dr=+1.597 |Dr|max=3.949 Df=+1.569 g r=0.140 f=0.130 p=0.490 max=1.588 Ld=-0.0319 base=-0.0507 r1=0.0056 path=0.0131 cap=2.02e-05 Lg=+0.8382 lr_d=0.00425 17s
+PROBE grid100   750 Dr=+1.010 |Dr|max=2.012 Df=+0.992 g r=0.054 f=0.058 p=0.342 max=1.116 Ld=-0.0077 base=-0.0264 r1=0.00386 path=0.00773 cap=0.00714 Lg=+0.7513 lr_d=0.00425 17s
+TRAIN step=750/7000 d=-0.0077 g=0.7513 train_seconds=11.4
+EVAL step=750/7000 model=live modes=100/100 hq=0.9236 pass=False elapsed=18.5s
+EVAL step=750/7000 model=ema modes=100/100 hq=0.8926 pass=False elapsed=19.0s
+PROBE grid100   800 Dr=+1.354 |Dr|max=3.505 Df=+1.303 g r=0.071 f=0.066 p=0.424 max=1.185 Ld=-0.0137 base=-0.0357 r1=0.00554 path=0.0165 cap=3.98e-06 Lg=+0.7975 lr_d=0.00425 19s
+PROBE grid100   850 Dr=+0.889 |Dr|max=2.600 Df=+0.840 g r=0.098 f=0.099 p=0.357 max=0.913 Ld=-0.0110 base=-0.0513 r1=0.0161 path=0.0219 cap=0.00232 Lg=+0.8085 lr_d=0.00425 20s
+PROBE grid100   900 Dr=+0.702 |Dr|max=2.531 Df=+0.688 g r=0.139 f=0.135 p=0.343 max=0.944 Ld=+0.0186 base=-0.00534 r1=0.0117 path=0.00998 cap=0.00226 Lg=+0.7864 lr_d=0.00425 21s
+PROBE grid100   950 Dr=+0.928 |Dr|max=3.040 Df=+0.918 g r=0.040 f=0.039 p=0.371 max=1.039 Ld=+0.0063 base=-0.00756 r1=0.00212 path=0.0109 cap=0.000782 Lg=+0.8116 lr_d=0.00425 21s
+PROBE grid100  1000 Dr=+0.854 |Dr|max=2.612 Df=+0.818 g r=0.054 f=0.059 p=0.334 max=1.118 Ld=+0.0051 base=-0.011 r1=0.0062 path=0.008 cap=0.00188 Lg=+0.7725 lr_d=0.00425 22s
+TRAIN step=1000/7000 d=0.0051 g=0.7725 train_seconds=15.2
+EVAL step=1000/7000 model=live modes=100/100 hq=0.9302 pass=False elapsed=23.1s
+EVAL step=1000/7000 model=ema modes=100/100 hq=0.9121 pass=False elapsed=23.5s
+PROBE grid100  1050 Dr=+0.713 |Dr|max=2.658 Df=+0.709 g r=0.098 f=0.091 p=0.295 max=1.121 Ld=+0.0022 base=-0.0412 r1=0.0173 path=0.0183 cap=0.00785 Lg=+0.7976 lr_d=0.00425 24s
+PROBE grid100  1100 Dr=+0.501 |Dr|max=2.046 Df=+0.497 g r=0.034 f=0.034 p=0.328 max=1.060 Ld=-0.0069 base=-0.0187 r1=0.00506 path=0.00675 Lg=+0.8029 lr_d=0.00425 24s
+PROBE grid100  1150 Dr=+0.220 |Dr|max=1.357 Df=+0.187 g r=0.052 f=0.050 p=0.237 max=0.888 Ld=+0.0430 base=0.026 r1=0.00507 path=0.0119 cap=3.56e-06 Lg=+0.7367 lr_d=0.00425 25s
+PROBE grid100  1200 Dr=+0.903 |Dr|max=2.845 Df=+0.862 g r=0.041 f=0.041 p=0.333 max=1.178 Ld=+0.0061 base=-0.00623 r1=0.00133 path=0.0109 cap=6.29e-05 Lg=+0.7817 lr_d=0.00425 26s
+PROBE grid100  1250 Dr=+0.550 |Dr|max=2.427 Df=+0.484 g r=0.029 f=0.031 p=0.305 max=1.196 Ld=-0.0094 base=-0.0253 r1=0.00831 path=0.00742 cap=0.000142 Lg=+0.7741 lr_d=0.00425 27s
+TRAIN step=1250/7000 d=-0.0094 g=0.7741 train_seconds=19.1
+EVAL step=1250/7000 model=live modes=100/100 hq=0.9358 pass=False elapsed=27.9s
+EVAL step=1250/7000 model=ema modes=100/100 hq=0.9338 pass=False elapsed=28.3s
+PROBE grid100  1300 Dr=-0.147 |Dr|max=1.031 Df=-0.147 g r=0.042 f=0.046 p=0.192 max=0.787 Ld=+0.0304 base=0.0198 r1=0.00181 path=0.00866 cap=9.57e-05 Lg=+0.7406 lr_d=0.00425 28s
+PROBE grid100  1350 Dr=+0.208 |Dr|max=1.763 Df=+0.220 g r=0.026 f=0.028 p=0.246 max=0.958 Ld=-0.0049 base=-0.0116 r1=0.00189 path=0.00485 cap=3.54e-07 Lg=+0.7682 lr_d=0.00425 29s
+PROBE grid100  1400 Dr=-0.076 |Dr|max=2.465 Df=-0.081 g r=0.133 f=0.124 p=0.404 max=1.317 Ld=-0.0028 base=-0.0153 r1=0.00532 path=0.00581 cap=0.00139 Lg=+0.8462 lr_d=0.00425 30s
+PROBE grid100  1450 Dr=+0.505 |Dr|max=1.834 Df=+0.495 g r=0.045 f=0.044 p=0.297 max=1.429 Ld=+0.0165 base=-0.000852 r1=0.00205 path=0.0152 cap=8.58e-05 Lg=+0.7517 lr_d=0.00425 31s
+PROBE grid100  1500 Dr=-0.448 |Dr|max=2.037 Df=-0.469 g r=0.118 f=0.135 p=0.358 max=1.069 Ld=-0.0035 base=-0.0186 r1=0.00725 path=0.00671 cap=0.00115 Lg=+0.8611 lr_d=0.00425 31s
+TRAIN step=1500/7000 d=-0.0035 g=0.8611 train_seconds=22.9
+EVAL step=1500/7000 model=live modes=100/100 hq=0.8456 pass=False elapsed=32.5s
+EVAL step=1500/7000 model=ema modes=100/100 hq=0.9469 pass=False elapsed=32.9s
+PROBE grid100  1550 Dr=+0.472 |Dr|max=1.636 Df=+0.456 g r=0.048 f=0.049 p=0.206 max=1.012 Ld=+0.0122 base=-0.0016 r1=0.0069 path=0.00692 cap=3.86e-08 Lg=+0.7354 lr_d=0.00425 33s
+PROBE grid100  1600 Dr=-0.052 |Dr|max=0.417 Df=-0.056 g r=0.030 f=0.032 p=0.112 max=0.427 Ld=+0.0440 base=0.00565 r1=0.0104 path=0.0216 cap=0.00633 Lg=+0.7014 lr_d=0.00425 34s
+PROBE grid100  1650 Dr=+0.029 |Dr|max=1.772 Df=-0.017 g r=0.044 f=0.052 p=0.348 max=0.960 Ld=-0.0256 base=-0.0331 r1=0.0019 path=0.00565 Lg=+0.8531 lr_d=0.00425 35s
+PROBE grid100  1700 Dr=+0.054 |Dr|max=1.313 Df=+0.055 g r=0.040 f=0.040 p=0.262 max=0.875 Ld=+0.0099 base=0.000787 r1=0.00269 path=0.00646 Lg=+0.7648 lr_d=0.00425 35s
+PROBE grid100  1750 Dr=+0.154 |Dr|max=1.348 Df=+0.138 g r=0.039 f=0.042 p=0.324 max=1.241 Ld=-0.0064 base=-0.0125 r1=0.00349 path=0.00266 cap=7.67e-06 Lg=+0.7334 lr_d=0.00425 36s
+TRAIN step=1750/7000 d=-0.0064 g=0.7334 train_seconds=26.9
+EVAL step=1750/7000 model=live modes=100/100 hq=0.9244 pass=False elapsed=37.4s
+EVAL step=1750/7000 model=ema modes=100/100 hq=0.9597 pass=False elapsed=37.7s
+PROBE grid100  1800 Dr=-0.693 |Dr|max=1.104 Df=-0.694 g r=0.045 f=0.051 p=0.328 max=1.191 Ld=+0.0182 base=0.0103 r1=0.00129 path=0.00659 cap=5.65e-05 Lg=+0.7035 lr_d=0.00425 38s
+PROBE grid100  1850 Dr=-0.201 |Dr|max=0.809 Df=-0.219 g r=0.022 f=0.024 p=0.217 max=0.884 Ld=+0.0080 base=-0.00816 r1=0.000914 path=0.0152 Lg=+0.7448 lr_d=0.00425 38s
+PROBE grid100  1900 Dr=+0.023 |Dr|max=0.852 Df=+0.023 g r=0.050 f=0.054 p=0.232 max=0.856 Ld=+0.0162 base=-0.00464 r1=0.00309 path=0.0177 Lg=+0.7177 lr_d=0.00425 39s
+PROBE grid100  1950 Dr=-0.396 |Dr|max=1.005 Df=-0.402 g r=0.030 f=0.031 p=0.160 max=0.614 Ld=+0.0077 base=-0.00755 r1=0.00201 path=0.0132 Lg=+0.7182 lr_d=0.00425 40s
+PROBE grid100  2000 Dr=+0.043 |Dr|max=2.875 Df=+0.016 g r=0.128 f=0.129 p=0.415 max=1.508 Ld=-0.0137 base=-0.0329 r1=0.005 path=0.011 cap=0.00314 Lg=+0.9538 lr_d=0.00425 41s
+TRAIN step=2000/7000 d=-0.0137 g=0.9538 train_seconds=31.0
+EVAL step=2000/7000 model=live modes=98/100 hq=0.8304 pass=False elapsed=42.2s
+EVAL step=2000/7000 model=ema modes=100/100 hq=0.9631 pass=False elapsed=42.5s
+PROBE grid100  2050 Dr=-0.197 |Dr|max=1.094 Df=-0.191 g r=0.028 f=0.034 p=0.326 max=1.014 Ld=+0.0032 base=-0.00475 r1=0.00115 path=0.00682 Lg=+0.7461 lr_d=0.00425 42s
+PROBE grid100  2100 Dr=+0.370 |Dr|max=1.366 Df=+0.364 g r=0.034 f=0.037 p=0.193 max=0.772 Ld=+0.0229 base=0.00992 r1=0.00629 path=0.00673 cap=7.99e-08 Lg=+0.7130 lr_d=0.00425 43s
+PROBE grid100  2150 Dr=+0.330 |Dr|max=1.228 Df=+0.306 g r=0.043 f=0.042 p=0.167 max=0.681 Ld=+0.0107 base=0.00221 r1=0.00357 path=0.00488 Lg=+0.7171 lr_d=0.00425 44s
+PROBE grid100  2200 Dr=-0.127 |Dr|max=1.110 Df=-0.139 g r=0.028 f=0.033 p=0.220 max=1.045 Ld=-0.0001 base=-0.00469 r1=0.0011 path=0.00352 cap=5.93e-06 Lg=+0.7394 lr_d=0.00425 45s
+PROBE grid100  2250 Dr=+0.335 |Dr|max=1.656 Df=+0.330 g r=0.088 f=0.089 p=0.263 max=1.912 Ld=-0.0024 base=-0.0126 r1=0.0057 path=0.00446 Lg=+0.7869 lr_d=0.00425 46s
+TRAIN step=2250/7000 d=-0.0024 g=0.7869 train_seconds=35.1
+EVAL step=2250/7000 model=live modes=100/100 hq=0.8880 pass=False elapsed=47.1s
+EVAL step=2250/7000 model=ema modes=100/100 hq=0.9673 pass=False elapsed=47.4s
+PROBE grid100  2300 Dr=-0.004 |Dr|max=1.207 Df=-0.026 g r=0.045 f=0.040 p=0.266 max=0.990 Ld=+0.0037 base=-0.00361 r1=0.00183 path=0.00543 Lg=+0.7314 lr_d=0.00425 47s
+PROBE grid100  2350 Dr=+0.925 |Dr|max=2.962 Df=+0.933 g r=0.126 f=0.136 p=0.387 max=1.354 Ld=-0.0109 base=-0.0202 r1=0.00388 path=0.00454 cap=0.00085 Lg=+0.8545 lr_d=0.00425 48s
+PROBE grid100  2400 Dr=-0.043 |Dr|max=0.485 Df=-0.049 g r=0.019 f=0.020 p=0.188 max=1.246 Ld=+0.0159 base=0.00906 r1=0.000542 path=0.00632 Lg=+0.7049 lr_d=0.00425 49s
+PROBE grid100  2450 Dr=+0.393 |Dr|max=2.491 Df=+0.392 g r=0.047 f=0.045 p=0.326 max=1.248 Ld=+0.0007 base=-0.00547 r1=0.00283 path=0.00333 cap=5.66e-05 Lg=+0.7794 lr_d=0.00425 50s
+PROBE grid100  2500 Dr=+0.346 |Dr|max=1.045 Df=+0.339 g r=0.022 f=0.027 p=0.167 max=0.828 Ld=+0.0070 base=-0.00197 r1=0.00145 path=0.0075 Lg=+0.7190 lr_d=0.00425 51s
+TRAIN step=2500/7000 d=0.0070 g=0.7190 train_seconds=39.2
+EVAL step=2500/7000 model=live modes=100/100 hq=0.9102 pass=False elapsed=51.8s
+EVAL step=2500/7000 model=ema modes=100/100 hq=0.9675 pass=False elapsed=52.2s
+PROBE grid100  2550 Dr=-0.266 |Dr|max=1.155 Df=-0.273 g r=0.109 f=0.099 p=0.219 max=0.743 Ld=+0.0137 base=0.00331 r1=0.00445 path=0.0043 cap=0.0016 Lg=+0.7545 lr_d=0.00425 52s
+PROBE grid100  2600 Dr=+0.051 |Dr|max=0.940 Df=+0.043 g r=0.021 f=0.024 p=0.154 max=0.617 Ld=+0.0007 base=-0.00527 r1=0.00183 path=0.00413 Lg=+0.7143 lr_d=0.00425 53s
+PROBE grid100  2650 Dr=-0.031 |Dr|max=2.708 Df=-0.077 g r=0.025 f=0.033 p=0.438 max=1.521 Ld=-0.0250 base=-0.0281 r1=0.000969 path=0.0021 cap=1.95e-07 Lg=+0.9351 lr_d=0.00425 54s
+PROBE grid100  2700 Dr=-0.076 |Dr|max=1.818 Df=-0.090 g r=0.148 f=0.146 p=0.333 max=1.183 Ld=-0.0139 base=-0.0444 r1=0.0215 path=0.00596 cap=0.00293 Lg=+0.7792 lr_d=0.00425 54s
+PROBE grid100  2750 Dr=+0.241 |Dr|max=0.833 Df=+0.232 g r=0.028 f=0.034 p=0.213 max=1.153 Ld=+0.0022 base=-0.00225 r1=0.00089 path=0.00358 Lg=+0.7228 lr_d=0.00425 55s
+TRAIN step=2750/7000 d=0.0022 g=0.7228 train_seconds=42.8
+EVAL step=2750/7000 model=live modes=100/100 hq=0.9130 pass=False elapsed=56.6s
+EVAL step=2750/7000 model=ema modes=100/100 hq=0.9662 pass=False elapsed=57.1s
+PROBE grid100  2800 Dr=-0.423 |Dr|max=1.524 Df=-0.446 g r=0.026 f=0.034 p=0.236 max=1.243 Ld=+0.0060 base=-0.000138 r1=0.000842 path=0.0051 cap=0.000183 Lg=+0.7464 lr_d=0.00425 57s
+PROBE grid100  2850 Dr=-0.216 |Dr|max=0.709 Df=-0.230 g r=0.025 f=0.027 p=0.224 max=0.811 Ld=+0.0153 base=0.00923 r1=0.00122 path=0.00483 Lg=+0.7339 lr_d=0.00425 58s
+PROBE grid100  2900 Dr=-0.362 |Dr|max=1.480 Df=-0.365 g r=0.033 f=0.036 p=0.278 max=1.147 Ld=-0.0047 base=-0.0156 r1=0.00129 path=0.00963 Lg=+0.7735 lr_d=0.00425 59s
+PROBE grid100  2950 Dr=-0.088 |Dr|max=0.577 Df=-0.088 g r=0.020 f=0.022 p=0.139 max=0.529 Ld=+0.0124 base=0.00717 r1=0.00112 path=0.00406 Lg=+0.7076 lr_d=0.00425 59s
+PROBE grid100  3000 Dr=-0.173 |Dr|max=0.799 Df=-0.184 g r=0.018 f=0.019 p=0.247 max=0.961 Ld=-0.0017 base=-0.00721 r1=0.000521 path=0.005 Lg=+0.7190 lr_d=0.00425 60s
+TRAIN step=3000/7000 d=-0.0017 g=0.7190 train_seconds=46.6
+EVAL step=3000/7000 model=live modes=100/100 hq=0.9404 pass=False elapsed=61.4s
+EVAL step=3000/7000 model=ema modes=100/100 hq=0.9748 pass=False elapsed=62.1s
+PROBE grid100  3050 Dr=+0.413 |Dr|max=0.880 Df=+0.402 g r=0.029 f=0.032 p=0.101 max=0.675 Ld=+0.0315 base=-0.00135 r1=0.0249 path=0.00789 Lg=+0.7092 lr_d=0.00425 62s
+PROBE grid100  3100 Dr=-0.469 |Dr|max=1.281 Df=-0.493 g r=0.026 f=0.031 p=0.300 max=1.196 Ld=-0.0125 base=-0.016 r1=0.000741 path=0.00273 cap=5.49e-06 Lg=+0.7733 lr_d=0.00425 63s
+PROBE grid100  3150 Dr=+0.143 |Dr|max=0.791 Df=+0.133 g r=0.013 f=0.014 p=0.173 max=0.796 Ld=-0.0052 base=-0.00792 r1=0.000592 path=0.00217 Lg=+0.7117 lr_d=0.00425 63s
+PROBE grid100  3200 Dr=+0.032 |Dr|max=0.732 Df=+0.017 g r=0.021 f=0.023 p=0.162 max=0.752 Ld=+0.0041 base=0.00131 r1=0.000547 path=0.00228 Lg=+0.7051 lr_d=0.00425 64s
+PROBE grid100  3250 Dr=-0.338 |Dr|max=0.593 Df=-0.349 g r=0.023 f=0.028 p=0.172 max=0.595 Ld=+0.0128 base=0.00291 r1=0.000751 path=0.00917 Lg=+0.7003 lr_d=0.00425 65s
+TRAIN step=3250/7000 d=0.0128 g=0.7003 train_seconds=50.2
+EVAL step=3250/7000 model=live modes=100/100 hq=0.8820 pass=False elapsed=66.2s
+EVAL step=3250/7000 model=ema modes=100/100 hq=0.9801 pass=False elapsed=66.8s
+PROBE grid100  3300 Dr=-0.247 |Dr|max=0.896 Df=-0.264 g r=0.035 f=0.037 p=0.169 max=0.959 Ld=-0.0057 base=-0.0127 r1=0.00174 path=0.00523 Lg=+0.7311 lr_d=0.00425 67s
+PROBE grid100  3350 Dr=+0.207 |Dr|max=0.416 Df=+0.204 g r=0.016 f=0.018 p=0.105 max=0.482 Ld=+0.0045 base=0.000374 r1=0.000812 path=0.00329 Lg=+0.6944 lr_d=0.00425 68s
+PROBE grid100  3400 Dr=+0.060 |Dr|max=0.459 Df=+0.056 g r=0.028 f=0.028 p=0.111 max=0.628 Ld=+0.0009 base=-0.00512 r1=0.00146 path=0.00455 Lg=+0.7024 lr_d=0.00425 68s
+PROBE grid100  3450 Dr=-0.276 |Dr|max=0.951 Df=-0.283 g r=0.022 f=0.025 p=0.130 max=0.958 Ld=-0.0002 base=-0.00373 r1=0.000815 path=0.00273 Lg=+0.7036 lr_d=0.00425 69s
+PROBE grid100  3500 Dr=+0.436 |Dr|max=1.988 Df=+0.421 g r=0.023 f=0.029 p=0.258 max=1.227 Ld=-0.0100 base=-0.0126 r1=0.000575 path=0.00201 Lg=+0.7450 lr_d=0.00425 70s
+TRAIN step=3500/7000 d=-0.0100 g=0.7450 train_seconds=54.0
+EVAL step=3500/7000 model=live modes=100/100 hq=0.9190 pass=False elapsed=71.1s
+EVAL step=3500/7000 model=ema modes=100/100 hq=0.9842 pass=False elapsed=71.6s
+PROBE grid100  3550 Dr=-0.305 |Dr|max=0.999 Df=-0.328 g r=0.031 f=0.034 p=0.236 max=1.105 Ld=+0.0010 base=-0.00636 r1=0.00107 path=0.00631 cap=3.76e-07 Lg=+0.7244 lr_d=0.00425 72s
+PROBE grid100  3600 Dr=+0.099 |Dr|max=1.393 Df=+0.062 g r=0.046 f=0.051 p=0.277 max=1.032 Ld=+0.0006 base=-0.0121 r1=0.00294 path=0.00975 Lg=+0.7713 lr_d=0.00425 72s
+PROBE grid100  3650 Dr=-0.309 |Dr|max=0.878 Df=-0.327 g r=0.038 f=0.044 p=0.207 max=0.789 Ld=-0.0025 base=-0.00876 r1=0.00197 path=0.00426 Lg=+0.7089 lr_d=0.00425 73s
+PROBE grid100  3700 Dr=-0.177 |Dr|max=0.824 Df=-0.189 g r=0.024 f=0.027 p=0.157 max=0.624 Ld=-0.0067 base=-0.0107 r1=0.000529 path=0.00345 Lg=+0.7226 lr_d=0.00425 74s
+PROBE grid100  3750 Dr=-0.040 |Dr|max=0.944 Df=-0.055 g r=0.040 f=0.042 p=0.195 max=0.956 Ld=-0.0037 base=-0.00681 r1=0.000964 path=0.0021 Lg=+0.7314 lr_d=0.00425 75s
+TRAIN step=3750/7000 d=-0.0037 g=0.7314 train_seconds=57.8
+EVAL step=3750/7000 model=live modes=99/100 hq=0.9102 pass=False elapsed=76.0s
+EVAL step=3750/7000 model=ema modes=100/100 hq=0.9859 pass=False elapsed=76.7s
+PROBE grid100  3800 Dr=-0.011 |Dr|max=0.784 Df=-0.012 g r=0.019 f=0.019 p=0.211 max=0.943 Ld=-0.0089 base=-0.0116 r1=0.000521 path=0.00219 Lg=+0.7308 lr_d=0.00425 77s
+PROBE grid100  3850 Dr=+0.433 |Dr|max=1.919 Df=+0.424 g r=0.069 f=0.073 p=0.259 max=1.079 Ld=-0.0019 base=-0.013 r1=0.00169 path=0.00939 Lg=+0.7913 lr_d=0.00425 77s
+PROBE grid100  3900 Dr=-0.058 |Dr|max=0.720 Df=-0.065 g r=0.025 f=0.025 p=0.210 max=1.337 Ld=+0.0091 base=0.00345 r1=0.00209 path=0.00286 cap=0.00071 Lg=+0.7116 lr_d=0.00425 78s
+PROBE grid100  3950 Dr=-0.409 |Dr|max=0.858 Df=-0.419 g r=0.034 f=0.041 p=0.152 max=1.084 Ld=+0.0037 base=-0.00295 r1=0.00237 path=0.00429 Lg=+0.7054 lr_d=0.00425 79s
+PROBE grid100  4000 Dr=+0.275 |Dr|max=0.784 Df=+0.230 g r=0.106 f=0.341 p=0.357 max=1.501 Ld=+0.0026 base=-0.0153 r1=0.0074 path=0.0105 Lg=+0.7181 lr_d=0.00425 79s
+TRAIN step=4000/7000 d=0.0026 g=0.7181 train_seconds=61.3
+EVAL step=4000/7000 model=live modes=39/100 hq=0.4261 pass=False elapsed=80.8s
+EVAL step=4000/7000 model=ema modes=100/100 hq=0.9841 pass=False elapsed=81.6s
+PROBE grid100  4050 Dr=-0.614 |Dr|max=1.781 Df=-0.611 g r=0.044 f=0.043 p=0.245 max=0.881 Ld=-0.0088 base=-0.0122 r1=0.00093 path=0.0025 Lg=+0.7694 lr_d=0.00425 82s
+PROBE grid100  4100 Dr=-0.147 |Dr|max=0.660 Df=-0.151 g r=0.022 f=0.023 p=0.156 max=1.275 Ld=+0.0048 base=-0.00379 r1=0.000416 path=0.00817 Lg=+0.6965 lr_d=0.00425 82s
+PROBE grid100  4150 Dr=-0.038 |Dr|max=0.208 Df=-0.038 g r=0.029 f=0.030 p=0.081 max=0.505 Ld=+0.0056 base=0.00128 r1=0.00167 path=0.00266 Lg=+0.6952 lr_d=0.00425 83s
+PROBE grid100  4200 Dr=+0.148 |Dr|max=1.030 Df=+0.128 g r=0.032 f=0.032 p=0.180 max=1.004 Ld=-0.0047 base=-0.00873 r1=0.000751 path=0.00328 Lg=+0.7089 lr_d=0.00425 84s
+PROBE grid100  4250 Dr=-0.010 |Dr|max=0.275 Df=-0.013 g r=0.029 f=0.041 p=0.167 max=0.590 Ld=+0.0116 base=0.00488 r1=0.00326 path=0.00346 Lg=+0.6974 lr_d=0.00425 84s
+TRAIN step=4250/7000 d=0.0116 g=0.6974 train_seconds=64.8
+EVAL step=4250/7000 model=live modes=100/100 hq=0.8566 pass=False elapsed=85.8s
+EVAL step=4250/7000 model=ema modes=100/100 hq=0.9808 pass=False elapsed=86.6s
+PROBE grid100  4300 Dr=+0.233 |Dr|max=1.243 Df=+0.227 g r=0.028 f=0.032 p=0.189 max=0.722 Ld=+0.0005 base=-0.00364 r1=0.00054 path=0.0036 Lg=+0.7204 lr_d=0.00425 86s
+PROBE grid100  4350 Dr=-0.107 |Dr|max=1.137 Df=-0.130 g r=0.043 f=0.049 p=0.195 max=1.458 Ld=+0.0105 base=0.00728 r1=0.000783 path=0.00248 Lg=+0.7110 lr_d=0.00425 87s
+PROBE grid100  4400 Dr=-0.004 |Dr|max=0.515 Df=-0.012 g r=0.026 f=0.033 p=0.321 max=1.080 Ld=+0.0030 base=-0.00159 r1=0.0021 path=0.00249 cap=7.89e-06 Lg=+0.6981 lr_d=0.00425 88s
+PROBE grid100  4450 Dr=-0.326 |Dr|max=0.988 Df=-0.315 g r=0.019 f=0.021 p=0.181 max=0.802 Ld=-0.0005 base=-0.00757 r1=0.000811 path=0.0063 Lg=+0.7232 lr_d=0.00425 89s
+PROBE grid100  4500 Dr=+0.440 |Dr|max=1.065 Df=+0.435 g r=0.041 f=0.043 p=0.166 max=0.652 Ld=+0.0114 base=0.00365 r1=0.00473 path=0.00304 Lg=+0.7191 lr_d=0.00425 89s
+TRAIN step=4500/7000 d=0.0114 g=0.7191 train_seconds=68.2
+EVAL step=4500/7000 model=live modes=100/100 hq=0.8815 pass=False elapsed=90.6s
+EVAL step=4500/7000 model=ema modes=100/100 hq=0.9857 pass=False elapsed=91.4s
+PROBE grid100  4550 Dr=+0.228 |Dr|max=0.849 Df=+0.216 g r=0.025 f=0.028 p=0.255 max=1.018 Ld=+0.0148 base=0.00761 r1=0.00097 path=0.00584 cap=0.000399 Lg=+0.7080 lr_d=0.00425 91s
+PROBE grid100  4600 Dr=+0.340 |Dr|max=1.883 Df=+0.332 g r=0.043 f=0.046 p=0.290 max=0.869 Ld=-0.0078 base=-0.0145 r1=0.0027 path=0.00394 Lg=+0.7935 lr_d=0.00425 92s
+PROBE grid100  4650 Dr=+0.403 |Dr|max=1.267 Df=+0.404 g r=0.050 f=0.051 p=0.189 max=0.711 Ld=+0.0276 base=0.0216 r1=0.00316 path=0.00281 cap=8.24e-05 Lg=+0.7113 lr_d=0.00425 93s
+PROBE grid100  4700 Dr=-0.240 |Dr|max=1.215 Df=-0.253 g r=0.025 f=0.030 p=0.213 max=0.907 Ld=-0.0020 base=-0.00611 r1=0.00116 path=0.00293 Lg=+0.7732 lr_d=0.00425 93s
+PROBE grid100  4750 Dr=+0.198 |Dr|max=0.855 Df=+0.199 g r=0.030 f=0.033 p=0.231 max=0.991 Ld=+0.0120 base=0.00517 r1=0.00262 path=0.00417 cap=6e-05 Lg=+0.7055 lr_d=0.00425 94s
+TRAIN step=4750/7000 d=0.0120 g=0.7055 train_seconds=71.7
+EVAL step=4750/7000 model=live modes=100/100 hq=0.9313 pass=False elapsed=95.4s
+EVAL step=4750/7000 model=ema modes=100/100 hq=0.9817 pass=False elapsed=96.2s
+PROBE grid100  4800 Dr=+0.243 |Dr|max=0.450 Df=+0.247 g r=0.012 f=0.013 p=0.060 max=0.292 Ld=+0.0429 base=0.0269 r1=0.0126 path=0.00338 Lg=+0.6958 lr_d=0.00425 96s
+PROBE grid100  4850 Dr=-0.187 |Dr|max=0.416 Df=-0.187 g r=0.040 f=0.038 p=0.126 max=0.618 Ld=+0.0189 base=0.0142 r1=0.00183 path=0.00288 Lg=+0.6941 lr_d=0.00425 97s
+PROBE grid100  4900 Dr=-0.106 |Dr|max=0.963 Df=-0.108 g r=0.051 f=0.051 p=0.209 max=0.954 Ld=+0.0073 base=0.00127 r1=0.00349 path=0.00255 Lg=+0.7182 lr_d=0.00425 98s
+PROBE grid100  4950 Dr=-0.403 |Dr|max=0.784 Df=-0.406 g r=0.016 f=0.019 p=0.184 max=0.567 Ld=+0.0110 base=0.00864 r1=0.000198 path=0.0022 Lg=+0.7033 lr_d=0.00425 99s
+PROBE grid100  5000 Dr=-0.307 |Dr|max=1.129 Df=-0.324 g r=0.058 f=0.062 p=0.193 max=1.080 Ld=+0.0070 base=0.00223 r1=0.0026 path=0.00215 Lg=+0.7164 lr_d=0.00425 99s
+TRAIN step=5000/7000 d=0.0070 g=0.7164 train_seconds=75.4
+EVAL step=5000/7000 model=live modes=100/100 hq=0.9266 pass=False elapsed=100.5s
+EVAL step=5000/7000 model=ema modes=100/100 hq=0.9797 pass=False elapsed=101.3s
+PROBE grid100  5050 Dr=-0.197 |Dr|max=0.629 Df=-0.196 g r=0.013 f=0.014 p=0.165 max=0.726 Ld=+0.0024 base=-0.000734 r1=0.000635 path=0.00247 Lg=+0.7088 lr_d=0.00425 101s
+PROBE grid100  5100 Dr=+0.379 |Dr|max=1.138 Df=+0.371 g r=0.026 f=0.031 p=0.181 max=0.712 Ld=+0.0016 base=-0.00231 r1=0.00132 path=0.00259 cap=2.64e-05 Lg=+0.7147 lr_d=0.00425 102s
+PROBE grid100  5150 Dr=-0.425 |Dr|max=1.195 Df=-0.434 g r=0.038 f=0.039 p=0.129 max=0.693 Ld=+0.0035 base=-0.00277 r1=0.000278 path=0.00604 Lg=+0.7040 lr_d=0.00425 103s
+PROBE grid100  5200 Dr=+0.290 |Dr|max=1.986 Df=+0.266 g r=0.033 f=0.038 p=0.298 max=2.263 Ld=-0.0055 base=-0.00975 r1=0.00166 path=0.00258 Lg=+0.8032 lr_d=0.00425 103s
+PROBE grid100  5250 Dr=-0.119 |Dr|max=0.889 Df=-0.126 g r=0.069 f=0.067 p=0.188 max=0.717 Ld=+0.0368 base=0.0218 r1=0.0101 path=0.00433 cap=0.000578 Lg=+0.7370 lr_d=0.00425 104s
+TRAIN step=5250/7000 d=0.0368 g=0.7370 train_seconds=78.9
+EVAL step=5250/7000 model=live modes=100/100 hq=0.8802 pass=False elapsed=105.3s
+EVAL step=5250/7000 model=ema modes=100/100 hq=0.9843 pass=False elapsed=106.2s
+PROBE grid100  5300 Dr=+0.257 |Dr|max=1.810 Df=+0.266 g r=0.027 f=0.027 p=0.257 max=0.979 Ld=+0.0052 base=-0.00469 r1=0.000609 path=0.00931 Lg=+0.7767 lr_d=0.00425 106s
+PROBE grid100  5350 Dr=-0.178 |Dr|max=0.503 Df=-0.176 g r=0.041 f=0.048 p=0.116 max=0.416 Ld=+0.0092 base=-0.00379 r1=0.000918 path=0.0121 Lg=+0.7030 lr_d=0.00425 107s
+PROBE grid100  5400 Dr=+0.085 |Dr|max=0.441 Df=+0.079 g r=0.027 f=0.031 p=0.123 max=0.716 Ld=+0.0160 base=-0.00097 r1=0.000709 path=0.0163 Lg=+0.6969 lr_d=0.00425 108s
+PROBE grid100  5450 Dr=+0.069 |Dr|max=1.342 Df=+0.051 g r=0.037 f=0.039 p=0.218 max=1.000 Ld=+0.0044 base=0.000318 r1=0.00179 path=0.0023 cap=4.05e-06 Lg=+0.7429 lr_d=0.00425 109s
+PROBE grid100  5500 Dr=-0.004 |Dr|max=0.502 Df=-0.010 g r=0.010 f=0.011 p=0.116 max=0.519 Ld=+0.0152 base=0.0122 r1=0.00058 path=0.00243 cap=6.05e-07 Lg=+0.7042 lr_d=0.00425 109s
+TRAIN step=5500/7000 d=0.0152 g=0.7042 train_seconds=82.7
+EVAL step=5500/7000 model=live modes=100/100 hq=0.9376 pass=False elapsed=110.4s
+EVAL step=5500/7000 model=ema modes=100/100 hq=0.9860 pass=False elapsed=111.3s
+PROBE grid100  5550 Dr=-0.128 |Dr|max=0.395 Df=-0.121 g r=0.025 f=0.026 p=0.120 max=0.647 Ld=+0.0322 base=0.0268 r1=0.0016 path=0.00277 cap=0.00105 Lg=+0.6982 lr_d=0.00425 111s
+PROBE grid100  5600 Dr=+0.028 |Dr|max=0.762 Df=+0.023 g r=0.026 f=0.029 p=0.236 max=1.004 Ld=-0.0019 base=-0.00662 r1=0.00256 path=0.00213 Lg=+0.7120 lr_d=0.00425 112s
+PROBE grid100  5650 Dr=-0.091 |Dr|max=0.926 Df=-0.106 g r=0.022 f=0.027 p=0.222 max=0.905 Ld=-0.0024 base=-0.00817 r1=0.00226 path=0.00346 cap=4.41e-05 Lg=+0.7373 lr_d=0.00425 113s
+PROBE grid100  5700 Dr=-0.019 |Dr|max=0.941 Df=-0.015 g r=0.025 f=0.028 p=0.299 max=1.070 Ld=-0.0070 base=-0.00965 r1=0.000623 path=0.00202 Lg=+0.7291 lr_d=0.00425 114s
+PROBE grid100  5750 Dr=-0.075 |Dr|max=1.400 Df=-0.067 g r=0.035 f=0.043 p=0.256 max=1.470 Ld=-0.0058 base=-0.0129 r1=0.00394 path=0.00305 cap=0.000149 Lg=+0.7536 lr_d=0.00425 114s
+TRAIN step=5750/7000 d=-0.0058 g=0.7536 train_seconds=86.5
+EVAL step=5750/7000 model=live modes=100/100 hq=0.9153 pass=False elapsed=115.5s
+EVAL step=5750/7000 model=ema modes=100/100 hq=0.9897 pass=False elapsed=116.4s
+PROBE grid100  5800 Dr=+0.360 |Dr|max=0.907 Df=+0.359 g r=0.013 f=0.016 p=0.113 max=0.543 Ld=+0.0290 base=0.022 r1=0.00257 path=0.00439 Lg=+0.7018 lr_d=0.00425 116s
+PROBE grid100  5850 Dr=-0.032 |Dr|max=0.342 Df=-0.029 g r=0.020 f=0.021 p=0.096 max=0.655 Ld=+0.0128 base=0.00793 r1=0.000788 path=0.00394 cap=0.000173 Lg=+0.6957 lr_d=0.00425 117s
+PROBE grid100  5900 Dr=+0.101 |Dr|max=0.599 Df=+0.104 g r=0.018 f=0.023 p=0.241 max=1.040 Ld=+0.0189 base=0.0152 r1=0.000556 path=0.00308 Lg=+0.7016 lr_d=0.00425 118s
+PROBE grid100  5950 Dr=-0.430 |Dr|max=1.323 Df=-0.439 g r=0.037 f=0.042 p=0.159 max=0.966 Ld=+0.0116 base=-0.00987 r1=0.00454 path=0.0119 cap=0.00503 Lg=+0.7335 lr_d=0.00425 119s
+PROBE grid100  6000 Dr=-0.207 |Dr|max=0.427 Df=-0.210 g r=0.035 f=0.037 p=0.109 max=0.526 Ld=+0.0167 base=0.0028 r1=0.0108 path=0.00315 Lg=+0.6966 lr_d=0.00425 119s
+TRAIN step=6000/7000 d=0.0167 g=0.6966 train_seconds=90.1
+EVAL step=6000/7000 model=live modes=100/100 hq=0.9087 pass=False elapsed=120.6s
+EVAL step=6000/7000 model=ema modes=100/100 hq=0.9837 pass=False elapsed=121.4s
+PROBE grid100  6050 Dr=-0.083 |Dr|max=0.621 Df=-0.083 g r=0.022 f=0.021 p=0.170 max=0.938 Ld=-0.0011 base=-0.00367 r1=0.00091 path=0.00165 Lg=+0.7178 lr_d=0.00425 121s
+PROBE grid100  6100 Dr=+0.031 |Dr|max=0.512 Df=+0.030 g r=0.022 f=0.022 p=0.099 max=0.871 Ld=+0.0062 base=-0.000202 r1=0.00175 path=0.00461 Lg=+0.6993 lr_d=0.00425 122s
+PROBE grid100  6150 Dr=+0.146 |Dr|max=0.671 Df=+0.139 g r=0.031 f=0.032 p=0.105 max=0.365 Ld=+0.0195 base=0.00626 r1=0.00523 path=0.00798 Lg=+0.7115 lr_d=0.00425 123s
+PROBE grid100  6200 Dr=+0.041 |Dr|max=0.443 Df=+0.050 g r=0.027 f=0.031 p=0.247 max=0.863 Ld=+0.0079 base=0.00246 r1=0.000967 path=0.00444 Lg=+0.6984 lr_d=0.00425 124s
+PROBE grid100  6250 Dr=+0.058 |Dr|max=1.163 Df=+0.068 g r=0.088 f=0.085 p=0.220 max=1.200 Ld=+0.0115 base=0.00713 r1=0.00158 path=0.00275 Lg=+0.7362 lr_d=0.00425 124s
+TRAIN step=6250/7000 d=0.0115 g=0.7362 train_seconds=93.8
+EVAL step=6250/7000 model=live modes=100/100 hq=0.8732 pass=False elapsed=125.7s
+EVAL step=6250/7000 model=ema modes=100/100 hq=0.9816 pass=False elapsed=126.4s
+PROBE grid100  6300 Dr=-0.025 |Dr|max=0.353 Df=-0.025 g r=0.023 f=0.025 p=0.198 max=1.382 Ld=+0.0113 base=0.00619 r1=0.000546 path=0.00459 Lg=+0.7052 lr_d=0.00425 126s
+PROBE grid100  6350 Dr=-0.369 |Dr|max=0.751 Df=-0.372 g r=0.023 f=0.026 p=0.129 max=0.365 Ld=+0.0129 base=0.0027 r1=0.00451 path=0.00573 Lg=+0.7017 lr_d=0.00425 127s
+PROBE grid100  6400 Dr=+0.150 |Dr|max=1.901 Df=+0.143 g r=0.062 f=0.068 p=0.304 max=1.055 Ld=+0.0086 base=0.00348 r1=0.00259 path=0.00233 cap=0.000248 Lg=+0.7877 lr_d=0.00425 128s
+PROBE grid100  6450 Dr=-0.681 |Dr|max=1.292 Df=-0.681 g r=0.027 f=0.030 p=0.134 max=0.695 Ld=+0.0352 base=0.0306 r1=0.00118 path=0.00345 Lg=+0.7097 lr_d=0.00425 129s
+PROBE grid100  6500 Dr=-0.078 |Dr|max=0.545 Df=-0.087 g r=0.025 f=0.027 p=0.132 max=0.485 Ld=+0.0165 base=0.00817 r1=0.00157 path=0.00678 Lg=+0.7100 lr_d=0.00425 129s
+TRAIN step=6500/7000 d=0.0165 g=0.7100 train_seconds=97.5
+EVAL step=6500/7000 model=live modes=100/100 hq=0.8927 pass=False elapsed=130.5s
+EVAL step=6500/7000 model=ema modes=100/100 hq=0.9837 pass=False elapsed=131.2s
+PROBE grid100  6550 Dr=+0.034 |Dr|max=0.248 Df=+0.033 g r=0.010 f=0.012 p=0.063 max=0.282 Ld=+0.0070 base=0.00393 r1=0.000703 path=0.00239 Lg=+0.6960 lr_d=0.00425 131s
+PROBE grid100  6600 Dr=-0.085 |Dr|max=0.506 Df=-0.091 g r=0.015 f=0.018 p=0.066 max=0.567 Ld=+0.0103 base=0.00477 r1=0.000936 path=0.00457 Lg=+0.7016 lr_d=0.00425 132s
+PROBE grid100  6650 Dr=-0.059 |Dr|max=0.183 Df=-0.060 g r=0.018 f=0.020 p=0.068 max=0.325 Ld=+0.0044 base=0.000564 r1=0.00118 path=0.00262 Lg=+0.6942 lr_d=0.00425 133s
+PROBE grid100  6700 Dr=+0.148 |Dr|max=0.844 Df=+0.156 g r=0.018 f=0.019 p=0.135 max=1.051 Ld=+0.0063 base=0.00118 r1=0.000502 path=0.00465 Lg=+0.7115 lr_d=0.00425 133s
+PROBE grid100  6750 Dr=+0.740 |Dr|max=1.444 Df=+0.736 g r=0.068 f=0.085 p=0.344 max=1.021 Ld=+0.0081 base=-0.000742 r1=0.00279 path=0.00604 cap=3.47e-05 Lg=+0.7122 lr_d=0.00425 134s
+TRAIN step=6750/7000 d=0.0081 g=0.7122 train_seconds=101.1
+EVAL step=6750/7000 model=live modes=100/100 hq=0.8499 pass=False elapsed=135.3s
+EVAL step=6750/7000 model=ema modes=100/100 hq=0.9863 pass=False elapsed=136.0s
+PROBE grid100  6800 Dr=-0.479 |Dr|max=1.049 Df=-0.486 g r=0.041 f=0.041 p=0.168 max=0.653 Ld=+0.0130 base=0.00748 r1=0.00143 path=0.0041 Lg=+0.7002 lr_d=0.00425 136s
+PROBE grid100  6850 Dr=-0.080 |Dr|max=0.274 Df=-0.074 g r=0.010 f=0.011 p=0.072 max=0.251 Ld=+0.0023 base=0.000331 r1=0.000311 path=0.00169 Lg=+0.6919 lr_d=0.00425 137s
+PROBE grid100  6900 Dr=+0.739 |Dr|max=4.012 Df=+0.694 g r=0.228 f=0.223 p=0.595 max=1.937 Ld=-0.0126 base=-0.0216 r1=0.00222 path=0.00686 Lg=+1.0522 lr_d=0.00425 138s
+PROBE grid100  6950 Dr=+0.649 |Dr|max=0.768 Df=+0.649 g r=0.020 f=0.023 p=0.089 max=0.349 Ld=+0.0500 base=-0.00955 r1=0.0514 path=0.00641 cap=0.00169 Lg=+0.6927 lr_d=0.00425 138s
+PROBE grid100  7000 Dr=-0.118 |Dr|max=0.255 Df=-0.123 g r=0.010 f=0.010 p=0.090 max=0.413 Ld=+0.0027 base=0.000455 r1=0.000181 path=0.00205 Lg=+0.6933 lr_d=0.00425 139s
+TRAIN step=7000/7000 d=0.0027 g=0.6933 train_seconds=104.8
+EVAL step=7000/7000 model=live modes=100/100 hq=0.9483 pass=False elapsed=140.2s
+EVAL step=7000/7000 model=ema modes=100/100 hq=0.9839 pass=False elapsed=140.9s
+COMPLETE problem=grid100 steps=7000 live_modes=100/100 live_hq=0.9483 stable_pass=None total_seconds=143.2
+{"event": "problem_complete", "problem": "grid100", "status": "complete", "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/grid100"}
+{"event": "problem_start", "problem": "rotated100", "steps": 7000, "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/rotated100"}
+INIT rotated100 init=batch_feature_zero hook=None differs_from_old=D public_path_match=G,D,prior ema_D_equals_D=None sha G=706dc20c76f2 D=7d5ea8b2bc21 prior=6c9872a1f4d8
+TRAINER rotated100 opt_d=K3PCriticAdam betas=(0.0, 0.9) ema_critic=False A2=0.0 noise_in=0.0 noise_out=0.0 lr_floor=1.0 net_floor=1.0
+START problem=rotated100 steps=7000 device=cuda:0 events=/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/rotated100/events.jsonl
+EVAL step=0/7000 model=live modes=0/100 hq=0.0201 pass=False elapsed=0.7s
+EVAL step=0/7000 model=ema modes=0/100 hq=0.0201 pass=False elapsed=0.9s
+PROBE rotated100     1 Dr=-0.058 |Dr|max=0.259 Df=-0.065 g r=0.347 f=0.332 p=0.326 max=1.000 Ld=+0.7794 base=-0.000504 r1=0.0573 path=0.723 Lg=+0.6986 lr_d=0.00425 1s
+TRAIN step=1/7000 d=0.7794 g=0.6986 train_seconds=0.0
+EVAL step=1/7000 model=live modes=0/100 hq=0.0193 pass=False elapsed=1.3s
+EVAL step=1/7000 model=ema modes=0/100 hq=0.0201 pass=False elapsed=1.5s
+EVAL step=10/7000 model=live modes=0/100 hq=0.0243 pass=False elapsed=1.9s
+EVAL step=10/7000 model=ema modes=0/100 hq=0.0202 pass=False elapsed=2.1s
+EVAL step=25/7000 model=live modes=0/100 hq=0.0297 pass=False elapsed=2.5s
+EVAL step=25/7000 model=ema modes=0/100 hq=0.0200 pass=False elapsed=2.8s
+PROBE rotated100    50 Dr=+0.219 |Dr|max=0.646 Df=+0.126 g r=0.250 f=0.317 p=0.321 max=1.126 Ld=+0.2111 base=-0.101 r1=0.16 path=0.152 cap=0.00066 Lg=+0.7504 lr_d=0.00425 3s
+EVAL step=50/7000 model=live modes=0/100 hq=0.0580 pass=False elapsed=3.4s
+EVAL step=50/7000 model=ema modes=0/100 hq=0.0214 pass=False elapsed=3.8s
+PROBE rotated100   100 Dr=+0.444 |Dr|max=1.417 Df=+0.302 g r=0.285 f=0.392 p=0.432 max=1.534 Ld=+0.0543 base=-0.144 r1=0.111 path=0.0855 cap=0.00113 Lg=+0.7777 lr_d=0.00425 4s
+EVAL step=100/7000 model=live modes=0/100 hq=0.1787 pass=False elapsed=5.0s
+EVAL step=100/7000 model=ema modes=0/100 hq=0.0266 pass=False elapsed=5.4s
+PROBE rotated100   150 Dr=+0.501 |Dr|max=1.247 Df=+0.368 g r=0.260 f=0.339 p=0.417 max=1.624 Ld=+0.0349 base=-0.142 r1=0.104 path=0.0701 cap=0.00247 Lg=+0.7819 lr_d=0.00425 6s
+PROBE rotated100   200 Dr=+0.439 |Dr|max=1.433 Df=+0.331 g r=0.254 f=0.302 p=0.420 max=1.382 Ld=+0.0306 base=-0.118 r1=0.0915 path=0.0531 cap=0.00363 Lg=+0.7838 lr_d=0.00425 7s
+PROBE rotated100   250 Dr=+0.488 |Dr|max=1.814 Df=+0.363 g r=0.262 f=0.296 p=0.447 max=1.522 Ld=-0.0034 base=-0.121 r1=0.0744 path=0.0413 cap=0.00168 Lg=+0.7937 lr_d=0.00425 8s
+TRAIN step=250/7000 d=-0.0034 g=0.7937 train_seconds=3.6
+EVAL step=250/7000 model=live modes=68/100 hq=0.6089 pass=False elapsed=8.0s
+EVAL step=250/7000 model=ema modes=0/100 hq=0.0864 pass=False elapsed=8.2s
+PROBE rotated100   300 Dr=+0.573 |Dr|max=2.197 Df=+0.456 g r=0.218 f=0.240 p=0.402 max=1.442 Ld=-0.0047 base=-0.117 r1=0.0664 path=0.0443 cap=0.00143 Lg=+0.8024 lr_d=0.00425 9s
+PROBE rotated100   350 Dr=+0.457 |Dr|max=1.865 Df=+0.341 g r=0.165 f=0.196 p=0.366 max=1.345 Ld=-0.0084 base=-0.0952 r1=0.0461 path=0.0398 cap=0.000888 Lg=+0.7972 lr_d=0.00425 10s
+PROBE rotated100   400 Dr=+0.389 |Dr|max=1.847 Df=+0.285 g r=0.181 f=0.196 p=0.374 max=1.447 Ld=-0.0003 base=-0.0723 r1=0.0361 path=0.0331 cap=0.00272 Lg=+0.7888 lr_d=0.00425 10s
+PROBE rotated100   450 Dr=+0.432 |Dr|max=1.833 Df=+0.357 g r=0.219 f=0.246 p=0.418 max=1.447 Ld=-0.0031 base=-0.0994 r1=0.0512 path=0.0441 cap=0.000948 Lg=+0.7774 lr_d=0.00425 11s
+PROBE rotated100   500 Dr=+0.462 |Dr|max=1.565 Df=+0.372 g r=0.161 f=0.180 p=0.350 max=1.522 Ld=-0.0200 base=-0.0806 r1=0.0328 path=0.0262 cap=0.00156 Lg=+0.7715 lr_d=0.00425 12s
+TRAIN step=500/7000 d=-0.0200 g=0.7715 train_seconds=7.5
+EVAL step=500/7000 model=live modes=85/100 hq=0.7673 pass=False elapsed=12.6s
+EVAL step=500/7000 model=ema modes=63/100 hq=0.5004 pass=False elapsed=12.8s
+PROBE rotated100   550 Dr=+0.301 |Dr|max=1.535 Df=+0.228 g r=0.150 f=0.165 p=0.340 max=1.247 Ld=+0.0034 base=-0.0649 r1=0.0337 path=0.0338 cap=0.000883 Lg=+0.7854 lr_d=0.00425 14s
+PROBE rotated100   600 Dr=+0.615 |Dr|max=2.256 Df=+0.515 g r=0.172 f=0.179 p=0.409 max=1.561 Ld=-0.0346 base=-0.093 r1=0.0291 path=0.0283 cap=0.000969 Lg=+0.8067 lr_d=0.00425 14s
+PROBE rotated100   650 Dr=+0.415 |Dr|max=1.492 Df=+0.372 g r=0.154 f=0.168 p=0.333 max=1.367 Ld=-0.0002 base=-0.0475 r1=0.0251 path=0.0217 cap=0.000402 Lg=+0.7545 lr_d=0.00425 15s
+PROBE rotated100   700 Dr=+0.405 |Dr|max=1.665 Df=+0.351 g r=0.154 f=0.168 p=0.359 max=1.313 Ld=-0.0149 base=-0.0679 r1=0.0277 path=0.0242 cap=0.00114 Lg=+0.7750 lr_d=0.00425 16s
+PROBE rotated100   750 Dr=+0.371 |Dr|max=1.462 Df=+0.326 g r=0.120 f=0.133 p=0.295 max=1.482 Ld=-0.0045 base=-0.0473 r1=0.0187 path=0.0239 cap=0.000188 Lg=+0.7488 lr_d=0.00425 17s
+TRAIN step=750/7000 d=-0.0045 g=0.7488 train_seconds=11.8
+EVAL step=750/7000 model=live modes=93/100 hq=0.8250 pass=False elapsed=17.6s
+EVAL step=750/7000 model=ema modes=83/100 hq=0.7446 pass=False elapsed=18.1s
+PROBE rotated100   800 Dr=+0.363 |Dr|max=1.521 Df=+0.283 g r=0.140 f=0.151 p=0.307 max=1.162 Ld=+0.0119 base=-0.0438 r1=0.0362 path=0.0187 cap=0.000773 Lg=+0.7526 lr_d=0.00425 19s
+PROBE rotated100   850 Dr=+0.329 |Dr|max=1.553 Df=+0.278 g r=0.108 f=0.114 p=0.273 max=1.014 Ld=+0.0063 base=-0.0355 r1=0.0208 path=0.021 cap=3.17e-05 Lg=+0.7575 lr_d=0.00425 20s
+PROBE rotated100   900 Dr=+0.344 |Dr|max=1.550 Df=+0.328 g r=0.124 f=0.126 p=0.260 max=1.409 Ld=+0.0159 base=-0.0228 r1=0.0165 path=0.0222 cap=0.000106 Lg=+0.7242 lr_d=0.00425 21s
+PROBE rotated100   950 Dr=+0.230 |Dr|max=1.659 Df=+0.205 g r=0.127 f=0.132 p=0.287 max=1.258 Ld=+0.0207 base=-0.0242 r1=0.0258 path=0.019 cap=0.000148 Lg=+0.7426 lr_d=0.00425 22s
+PROBE rotated100  1000 Dr=+0.258 |Dr|max=1.084 Df=+0.235 g r=0.115 f=0.119 p=0.246 max=0.980 Ld=+0.0393 base=-0.00988 r1=0.0208 path=0.0276 cap=0.000768 Lg=+0.7348 lr_d=0.00425 23s
+TRAIN step=1000/7000 d=0.0393 g=0.7348 train_seconds=16.4
+EVAL step=1000/7000 model=live modes=98/100 hq=0.8577 pass=False elapsed=23.2s
+EVAL step=1000/7000 model=ema modes=93/100 hq=0.8076 pass=False elapsed=23.7s
+PROBE rotated100  1050 Dr=+0.230 |Dr|max=1.134 Df=+0.215 g r=0.133 f=0.134 p=0.269 max=1.111 Ld=+0.0239 base=-0.0272 r1=0.0265 path=0.0245 cap=0.000178 Lg=+0.7403 lr_d=0.00425 25s
+PROBE rotated100  1100 Dr=+0.147 |Dr|max=1.329 Df=+0.118 g r=0.162 f=0.166 p=0.261 max=1.471 Ld=+0.0167 base=-0.0319 r1=0.0264 path=0.0223 cap=1.61e-05 Lg=+0.7183 lr_d=0.00425 26s
+PROBE rotated100  1150 Dr=+0.163 |Dr|max=1.337 Df=+0.122 g r=0.099 f=0.099 p=0.215 max=1.190 Ld=+0.0160 base=-0.0118 r1=0.0133 path=0.0146 cap=4.66e-08 Lg=+0.7276 lr_d=0.00425 26s
+PROBE rotated100  1200 Dr=+0.129 |Dr|max=0.963 Df=+0.093 g r=0.103 f=0.100 p=0.213 max=1.165 Ld=+0.0099 base=-0.0211 r1=0.015 path=0.0159 Lg=+0.7166 lr_d=0.00425 27s
+PROBE rotated100  1250 Dr=+0.147 |Dr|max=0.973 Df=+0.113 g r=0.084 f=0.083 p=0.179 max=0.917 Ld=+0.0095 base=-0.0173 r1=0.0107 path=0.0161 Lg=+0.7149 lr_d=0.00425 28s
+TRAIN step=1250/7000 d=0.0095 g=0.7149 train_seconds=21.0
+EVAL step=1250/7000 model=live modes=100/100 hq=0.8877 pass=False elapsed=28.8s
+EVAL step=1250/7000 model=ema modes=95/100 hq=0.8554 pass=False elapsed=29.3s
+PROBE rotated100  1300 Dr=+0.071 |Dr|max=0.533 Df=+0.050 g r=0.081 f=0.082 p=0.162 max=0.903 Ld=+0.0208 base=-0.0011 r1=0.00987 path=0.0121 Lg=+0.7030 lr_d=0.00425 30s
+PROBE rotated100  1350 Dr=+0.010 |Dr|max=0.630 Df=+0.003 g r=0.057 f=0.060 p=0.157 max=0.847 Ld=+0.0056 base=-0.0101 r1=0.00562 path=0.01 Lg=+0.7109 lr_d=0.00425 31s
+PROBE rotated100  1400 Dr=-0.022 |Dr|max=0.565 Df=-0.034 g r=0.085 f=0.088 p=0.165 max=0.672 Ld=+0.0260 base=-0.00385 r1=0.0157 path=0.0142 Lg=+0.7074 lr_d=0.00425 32s
+PROBE rotated100  1450 Dr=+0.005 |Dr|max=0.635 Df=-0.004 g r=0.080 f=0.081 p=0.166 max=0.863 Ld=+0.0244 base=0.00235 r1=0.00563 path=0.0164 Lg=+0.7087 lr_d=0.00425 33s
+PROBE rotated100  1500 Dr=+0.027 |Dr|max=0.642 Df=+0.014 g r=0.081 f=0.084 p=0.140 max=0.717 Ld=+0.0198 base=-0.0146 r1=0.0194 path=0.015 cap=2.06e-05 Lg=+0.7061 lr_d=0.00425 34s
+TRAIN step=1500/7000 d=0.0198 g=0.7061 train_seconds=25.6
+EVAL step=1500/7000 model=live modes=100/100 hq=0.8912 pass=False elapsed=34.4s
+EVAL step=1500/7000 model=ema modes=100/100 hq=0.8907 pass=False elapsed=34.9s
+PROBE rotated100  1550 Dr=+0.055 |Dr|max=0.640 Df=+0.042 g r=0.100 f=0.101 p=0.152 max=0.889 Ld=+0.0237 base=0.000673 r1=0.0113 path=0.0115 cap=0.000205 Lg=+0.7159 lr_d=0.00425 36s
+PROBE rotated100  1600 Dr=+0.070 |Dr|max=0.982 Df=+0.060 g r=0.078 f=0.078 p=0.137 max=0.857 Ld=+0.0152 base=-0.00669 r1=0.0107 path=0.0112 Lg=+0.7095 lr_d=0.00425 37s
+PROBE rotated100  1650 Dr=+0.092 |Dr|max=0.713 Df=+0.075 g r=0.067 f=0.070 p=0.143 max=0.892 Ld=+0.0089 base=-0.0106 r1=0.00905 path=0.0105 Lg=+0.7047 lr_d=0.00425 38s
+PROBE rotated100  1700 Dr=+0.026 |Dr|max=0.451 Df=+0.024 g r=0.058 f=0.058 p=0.113 max=0.589 Ld=+0.0139 base=-0.00331 r1=0.00632 path=0.0109 Lg=+0.7021 lr_d=0.00425 39s
+PROBE rotated100  1750 Dr=+0.027 |Dr|max=0.555 Df=+0.012 g r=0.122 f=0.121 p=0.189 max=0.963 Ld=+0.0194 base=-0.0133 r1=0.0104 path=0.0223 Lg=+0.7062 lr_d=0.00425 39s
+TRAIN step=1750/7000 d=0.0194 g=0.7062 train_seconds=30.2
+EVAL step=1750/7000 model=live modes=100/100 hq=0.8861 pass=False elapsed=40.0s
+EVAL step=1750/7000 model=ema modes=100/100 hq=0.9159 pass=False elapsed=40.5s
+PROBE rotated100  1800 Dr=-0.028 |Dr|max=0.315 Df=-0.031 g r=0.051 f=0.051 p=0.084 max=0.796 Ld=+0.0195 base=0.00341 r1=0.0048 path=0.0113 cap=2.16e-05 Lg=+0.6942 lr_d=0.00425 41s
+PROBE rotated100  1850 Dr=+0.139 |Dr|max=0.606 Df=+0.133 g r=0.057 f=0.058 p=0.099 max=0.438 Ld=+0.0133 base=-0.00302 r1=0.00341 path=0.0129 Lg=+0.7042 lr_d=0.00425 43s
+PROBE rotated100  1900 Dr=+0.051 |Dr|max=0.361 Df=+0.047 g r=0.042 f=0.042 p=0.096 max=0.494 Ld=+0.0089 base=-0.00393 r1=0.0026 path=0.0102 Lg=+0.6975 lr_d=0.00425 43s
+PROBE rotated100  1950 Dr=+0.053 |Dr|max=0.425 Df=+0.049 g r=0.052 f=0.050 p=0.097 max=0.718 Ld=+0.0106 base=-0.00428 r1=0.00511 path=0.00981 Lg=+0.6965 lr_d=0.00425 44s
+PROBE rotated100  2000 Dr=+0.167 |Dr|max=0.703 Df=+0.160 g r=0.073 f=0.072 p=0.118 max=0.499 Ld=+0.0156 base=-0.0024 r1=0.00748 path=0.0105 Lg=+0.7076 lr_d=0.00425 45s
+TRAIN step=2000/7000 d=0.0156 g=0.7076 train_seconds=34.9
+EVAL step=2000/7000 model=live modes=100/100 hq=0.8969 pass=False elapsed=45.7s
+EVAL step=2000/7000 model=ema modes=100/100 hq=0.9269 pass=False elapsed=46.2s
+PROBE rotated100  2050 Dr=+0.010 |Dr|max=0.307 Df=+0.008 g r=0.042 f=0.045 p=0.094 max=0.388 Ld=+0.0187 base=0.00233 r1=0.00408 path=0.0123 Lg=+0.6992 lr_d=0.00425 47s
+PROBE rotated100  2100 Dr=-0.018 |Dr|max=0.240 Df=-0.018 g r=0.053 f=0.053 p=0.082 max=0.371 Ld=+0.0146 base=0.000211 r1=0.0045 path=0.00984 Lg=+0.6935 lr_d=0.00425 48s
+PROBE rotated100  2150 Dr=-0.032 |Dr|max=0.371 Df=-0.046 g r=0.050 f=0.051 p=0.087 max=0.449 Ld=+0.0166 base=0.000977 r1=0.00236 path=0.0133 Lg=+0.7010 lr_d=0.00425 49s
+PROBE rotated100  2200 Dr=-0.023 |Dr|max=0.183 Df=-0.028 g r=0.037 f=0.038 p=0.054 max=0.436 Ld=+0.0147 base=0.000505 r1=0.00266 path=0.0115 Lg=+0.6946 lr_d=0.00425 50s
+PROBE rotated100  2250 Dr=+0.002 |Dr|max=0.345 Df=-0.001 g r=0.054 f=0.054 p=0.075 max=0.465 Ld=+0.0190 base=0.00103 r1=0.00578 path=0.0122 Lg=+0.6962 lr_d=0.00425 51s
+TRAIN step=2250/7000 d=0.0190 g=0.6962 train_seconds=39.7
+EVAL step=2250/7000 model=live modes=100/100 hq=0.8913 pass=False elapsed=51.4s
+EVAL step=2250/7000 model=ema modes=100/100 hq=0.9338 pass=False elapsed=51.9s
+PROBE rotated100  2300 Dr=-0.047 |Dr|max=0.268 Df=-0.053 g r=0.042 f=0.041 p=0.093 max=0.348 Ld=+0.0094 base=-0.00296 r1=0.00156 path=0.0108 Lg=+0.6968 lr_d=0.00425 53s
+PROBE rotated100  2350 Dr=+0.154 |Dr|max=0.443 Df=+0.150 g r=0.061 f=0.059 p=0.096 max=0.545 Ld=+0.0085 base=-0.00612 r1=0.00423 path=0.0104 Lg=+0.6981 lr_d=0.00425 54s
+PROBE rotated100  2400 Dr=+0.002 |Dr|max=0.663 Df=+0.001 g r=0.049 f=0.049 p=0.089 max=0.607 Ld=+0.0078 base=-0.00366 r1=0.00231 path=0.00914 Lg=+0.6983 lr_d=0.00425 55s
+PROBE rotated100  2450 Dr=-0.006 |Dr|max=0.334 Df=-0.010 g r=0.042 f=0.041 p=0.085 max=0.364 Ld=+0.0086 base=-0.00303 r1=0.0024 path=0.0092 Lg=+0.6937 lr_d=0.00425 56s
+PROBE rotated100  2500 Dr=+0.059 |Dr|max=0.297 Df=+0.057 g r=0.051 f=0.050 p=0.077 max=0.322 Ld=+0.0121 base=-0.000461 r1=0.00263 path=0.00989 Lg=+0.7031 lr_d=0.00425 57s
+TRAIN step=2500/7000 d=0.0121 g=0.7031 train_seconds=44.4
+EVAL step=2500/7000 model=live modes=100/100 hq=0.8984 pass=False elapsed=57.0s
+EVAL step=2500/7000 model=ema modes=100/100 hq=0.9435 pass=False elapsed=57.4s
+PROBE rotated100  2550 Dr=+0.041 |Dr|max=0.438 Df=+0.043 g r=0.055 f=0.049 p=0.085 max=0.813 Ld=+0.0091 base=-0.000355 r1=0.00242 path=0.00703 Lg=+0.6993 lr_d=0.00425 58s
+PROBE rotated100  2600 Dr=-0.053 |Dr|max=0.238 Df=-0.060 g r=0.040 f=0.039 p=0.075 max=0.314 Ld=+0.0072 base=-0.00391 r1=0.00161 path=0.00946 Lg=+0.6965 lr_d=0.00425 59s
+PROBE rotated100  2650 Dr=-0.048 |Dr|max=0.478 Df=-0.060 g r=0.052 f=0.051 p=0.079 max=0.387 Ld=+0.0128 base=-0.00362 r1=0.00527 path=0.0112 Lg=+0.7013 lr_d=0.00425 60s
+PROBE rotated100  2700 Dr=-0.052 |Dr|max=0.772 Df=-0.058 g r=0.078 f=0.076 p=0.116 max=0.495 Ld=+0.0107 base=-0.0109 r1=0.0124 path=0.00923 Lg=+0.6967 lr_d=0.00425 61s
+PROBE rotated100  2750 Dr=+0.026 |Dr|max=0.488 Df=+0.018 g r=0.055 f=0.058 p=0.084 max=0.497 Ld=+0.0029 base=-0.00519 r1=0.00194 path=0.00617 Lg=+0.7056 lr_d=0.00425 62s
+TRAIN step=2750/7000 d=0.0029 g=0.7056 train_seconds=48.8
+EVAL step=2750/7000 model=live modes=100/100 hq=0.8441 pass=False elapsed=62.2s
+EVAL step=2750/7000 model=ema modes=100/100 hq=0.9474 pass=False elapsed=62.6s
+PROBE rotated100  2800 Dr=+0.043 |Dr|max=0.311 Df=+0.038 g r=0.040 f=0.039 p=0.056 max=0.401 Ld=+0.0117 base=0.000438 r1=0.0031 path=0.00813 Lg=+0.6957 lr_d=0.00425 63s
+PROBE rotated100  2850 Dr=-0.071 |Dr|max=0.245 Df=-0.073 g r=0.039 f=0.040 p=0.069 max=0.413 Ld=+0.0060 base=-0.00309 r1=0.00196 path=0.00716 Lg=+0.6965 lr_d=0.00425 64s
+PROBE rotated100  2900 Dr=-0.051 |Dr|max=0.213 Df=-0.054 g r=0.037 f=0.037 p=0.059 max=0.264 Ld=+0.0080 base=-0.0012 r1=0.00188 path=0.00735 Lg=+0.6943 lr_d=0.00425 65s
+PROBE rotated100  2950 Dr=-0.044 |Dr|max=0.110 Df=-0.048 g r=0.028 f=0.028 p=0.040 max=0.281 Ld=+0.0141 base=0.000545 r1=0.00156 path=0.012 Lg=+0.6936 lr_d=0.00425 66s
+PROBE rotated100  3000 Dr=-0.063 |Dr|max=0.164 Df=-0.065 g r=0.027 f=0.027 p=0.047 max=0.304 Ld=+0.0089 base=-0.00171 r1=0.00143 path=0.00916 Lg=+0.6946 lr_d=0.00425 67s
+TRAIN step=3000/7000 d=0.0089 g=0.6946 train_seconds=53.4
+EVAL step=3000/7000 model=live modes=100/100 hq=0.9195 pass=False elapsed=67.6s
+EVAL step=3000/7000 model=ema modes=100/100 hq=0.9496 pass=False elapsed=68.0s
+PROBE rotated100  3050 Dr=-0.008 |Dr|max=0.166 Df=-0.010 g r=0.024 f=0.026 p=0.038 max=0.224 Ld=+0.0068 base=-0.00174 r1=0.00106 path=0.00747 Lg=+0.6943 lr_d=0.00425 69s
+PROBE rotated100  3100 Dr=-0.030 |Dr|max=0.235 Df=-0.035 g r=0.038 f=0.036 p=0.058 max=0.343 Ld=+0.0079 base=-0.00291 r1=0.00088 path=0.00992 Lg=+0.6949 lr_d=0.00425 70s
+PROBE rotated100  3150 Dr=-0.011 |Dr|max=0.186 Df=-0.013 g r=0.025 f=0.025 p=0.041 max=0.221 Ld=+0.0096 base=0.000549 r1=0.00126 path=0.00777 Lg=+0.6938 lr_d=0.00425 71s
+PROBE rotated100  3200 Dr=-0.067 |Dr|max=0.202 Df=-0.076 g r=0.027 f=0.027 p=0.048 max=0.202 Ld=+0.0054 base=-0.00109 r1=0.001 path=0.00553 Lg=+0.6949 lr_d=0.00425 72s
+PROBE rotated100  3250 Dr=-0.044 |Dr|max=0.147 Df=-0.047 g r=0.026 f=0.025 p=0.038 max=0.214 Ld=+0.0103 base=0.00135 r1=0.0014 path=0.00751 Lg=+0.6950 lr_d=0.00425 73s
+TRAIN step=3250/7000 d=0.0103 g=0.6950 train_seconds=57.9
+EVAL step=3250/7000 model=live modes=100/100 hq=0.9153 pass=False elapsed=73.0s
+EVAL step=3250/7000 model=ema modes=100/100 hq=0.9558 pass=False elapsed=73.3s
+PROBE rotated100  3300 Dr=-0.038 |Dr|max=0.149 Df=-0.043 g r=0.033 f=0.033 p=0.047 max=0.271 Ld=+0.0090 base=-0.000302 r1=0.0018 path=0.00746 Lg=+0.6956 lr_d=0.00425 74s
+PROBE rotated100  3350 Dr=-0.048 |Dr|max=0.162 Df=-0.051 g r=0.031 f=0.032 p=0.054 max=0.199 Ld=+0.0103 base=0.00233 r1=0.00224 path=0.00576 Lg=+0.6938 lr_d=0.00425 75s
+PROBE rotated100  3400 Dr=+0.037 |Dr|max=0.669 Df=+0.031 g r=0.091 f=0.095 p=0.111 max=0.711 Ld=+0.0040 base=-0.00497 r1=0.00242 path=0.00659 Lg=+0.7039 lr_d=0.00425 76s
+PROBE rotated100  3450 Dr=+0.091 |Dr|max=0.184 Df=+0.089 g r=0.031 f=0.031 p=0.039 max=0.207 Ld=+0.0089 base=-0.0019 r1=0.000641 path=0.0102 Lg=+0.6940 lr_d=0.00425 77s
+PROBE rotated100  3500 Dr=+0.017 |Dr|max=0.151 Df=+0.014 g r=0.029 f=0.030 p=0.045 max=0.339 Ld=+0.0091 base=-0.00218 r1=0.000833 path=0.0105 Lg=+0.6933 lr_d=0.00425 78s
+TRAIN step=3500/7000 d=0.0091 g=0.6933 train_seconds=62.7
+EVAL step=3500/7000 model=live modes=100/100 hq=0.8852 pass=False elapsed=78.4s
+EVAL step=3500/7000 model=ema modes=100/100 hq=0.9577 pass=False elapsed=78.7s
+PROBE rotated100  3550 Dr=-0.018 |Dr|max=0.154 Df=-0.021 g r=0.046 f=0.045 p=0.055 max=0.344 Ld=+0.0094 base=-0.000117 r1=0.00251 path=0.00696 Lg=+0.6951 lr_d=0.00425 80s
+PROBE rotated100  3600 Dr=-0.105 |Dr|max=0.398 Df=-0.116 g r=0.066 f=0.063 p=0.082 max=0.379 Ld=+0.0053 base=-0.0032 r1=0.00256 path=0.0059 Lg=+0.6994 lr_d=0.00425 81s
+PROBE rotated100  3650 Dr=-0.011 |Dr|max=0.255 Df=-0.019 g r=0.041 f=0.040 p=0.058 max=0.244 Ld=+0.0041 base=-0.00422 r1=0.00196 path=0.00637 Lg=+0.6964 lr_d=0.00425 82s
+PROBE rotated100  3700 Dr=+0.004 |Dr|max=0.186 Df=+0.002 g r=0.018 f=0.019 p=0.029 max=0.185 Ld=+0.0051 base=-6.41e-05 r1=0.000352 path=0.00484 Lg=+0.6944 lr_d=0.00425 82s
+PROBE rotated100  3750 Dr=+0.040 |Dr|max=0.217 Df=+0.038 g r=0.052 f=0.052 p=0.066 max=0.398 Ld=+0.0089 base=-1.88e-06 r1=0.00209 path=0.00677 Lg=+0.6936 lr_d=0.00425 83s
+TRAIN step=3750/7000 d=0.0089 g=0.6936 train_seconds=67.4
+EVAL step=3750/7000 model=live modes=100/100 hq=0.9017 pass=False elapsed=83.8s
+EVAL step=3750/7000 model=ema modes=100/100 hq=0.9619 pass=False elapsed=84.1s
+PROBE rotated100  3800 Dr=-0.011 |Dr|max=0.104 Df=-0.012 g r=0.023 f=0.023 p=0.032 max=0.231 Ld=+0.0051 base=-0.00113 r1=0.000942 path=0.00524 Lg=+0.6944 lr_d=0.00425 85s
+PROBE rotated100  3850 Dr=+0.002 |Dr|max=0.245 Df=-0.000 g r=0.036 f=0.037 p=0.054 max=0.251 Ld=+0.0046 base=-0.00214 r1=0.00196 path=0.00477 Lg=+0.6947 lr_d=0.00425 86s
+PROBE rotated100  3900 Dr=-0.066 |Dr|max=0.170 Df=-0.070 g r=0.025 f=0.025 p=0.037 max=0.195 Ld=+0.0040 base=-0.00114 r1=0.000894 path=0.00428 Lg=+0.6947 lr_d=0.00425 87s
+PROBE rotated100  3950 Dr=-0.079 |Dr|max=0.154 Df=-0.083 g r=0.041 f=0.043 p=0.052 max=0.212 Ld=+0.0054 base=-0.00177 r1=0.00209 path=0.00508 Lg=+0.6942 lr_d=0.00425 88s
+PROBE rotated100  4000 Dr=-0.024 |Dr|max=0.143 Df=-0.024 g r=0.026 f=0.026 p=0.034 max=0.205 Ld=+0.0100 base=-0.000856 r1=0.000521 path=0.0103 Lg=+0.6938 lr_d=0.00425 89s
+TRAIN step=4000/7000 d=0.0100 g=0.6938 train_seconds=72.2
+EVAL step=4000/7000 model=live modes=100/100 hq=0.8939 pass=False elapsed=89.4s
+EVAL step=4000/7000 model=ema modes=100/100 hq=0.9597 pass=False elapsed=89.6s
+PROBE rotated100  4050 Dr=+0.025 |Dr|max=0.317 Df=+0.023 g r=0.043 f=0.043 p=0.050 max=0.305 Ld=+0.0058 base=-0.00238 r1=0.00143 path=0.00676 Lg=+0.6962 lr_d=0.00425 90s
+PROBE rotated100  4100 Dr=-0.055 |Dr|max=0.148 Df=-0.058 g r=0.029 f=0.029 p=0.038 max=0.201 Ld=+0.0055 base=-0.000925 r1=0.000772 path=0.0057 Lg=+0.6937 lr_d=0.00425 91s
+PROBE rotated100  4150 Dr=-0.032 |Dr|max=0.121 Df=-0.033 g r=0.028 f=0.028 p=0.029 max=0.152 Ld=+0.0109 base=0.00199 r1=0.00391 path=0.00496 Lg=+0.6936 lr_d=0.00425 92s
+PROBE rotated100  4200 Dr=-0.028 |Dr|max=0.089 Df=-0.029 g r=0.021 f=0.021 p=0.027 max=0.200 Ld=+0.0081 base=0.002 r1=0.00113 path=0.00493 Lg=+0.6930 lr_d=0.00425 93s
+PROBE rotated100  4250 Dr=-0.044 |Dr|max=0.301 Df=-0.046 g r=0.035 f=0.036 p=0.047 max=0.316 Ld=+0.0035 base=-0.00235 r1=0.00121 path=0.00468 Lg=+0.6973 lr_d=0.00425 94s
+TRAIN step=4250/7000 d=0.0035 g=0.6973 train_seconds=77.0
+EVAL step=4250/7000 model=live modes=100/100 hq=0.8917 pass=False elapsed=94.8s
+EVAL step=4250/7000 model=ema modes=100/100 hq=0.9526 pass=False elapsed=95.2s
+PROBE rotated100  4300 Dr=-0.006 |Dr|max=0.325 Df=-0.009 g r=0.041 f=0.043 p=0.051 max=0.402 Ld=+0.0070 base=-0.00192 r1=0.00206 path=0.00686 Lg=+0.6939 lr_d=0.00425 96s
+PROBE rotated100  4350 Dr=-0.056 |Dr|max=0.208 Df=-0.058 g r=0.026 f=0.026 p=0.037 max=0.221 Ld=+0.0083 base=0.00113 r1=0.00102 path=0.00617 Lg=+0.6948 lr_d=0.00425 97s
+PROBE rotated100  4400 Dr=-0.072 |Dr|max=0.143 Df=-0.073 g r=0.027 f=0.028 p=0.041 max=0.379 Ld=+0.0064 base=-0.00128 r1=0.000789 path=0.00688 Lg=+0.6949 lr_d=0.00425 98s
+PROBE rotated100  4450 Dr=-0.062 |Dr|max=0.185 Df=-0.063 g r=0.023 f=0.022 p=0.028 max=0.355 Ld=+0.0074 base=-0.000555 r1=0.000901 path=0.00708 Lg=+0.6936 lr_d=0.00425 99s
+PROBE rotated100  4500 Dr=-0.048 |Dr|max=0.166 Df=-0.051 g r=0.020 f=0.020 p=0.032 max=0.147 Ld=+0.0062 base=-0.000491 r1=0.000724 path=0.00602 Lg=+0.6943 lr_d=0.00425 100s
+TRAIN step=4500/7000 d=0.0062 g=0.6943 train_seconds=81.7
+EVAL step=4500/7000 model=live modes=100/100 hq=0.9171 pass=False elapsed=100.3s
+EVAL step=4500/7000 model=ema modes=100/100 hq=0.9612 pass=False elapsed=100.6s
+PROBE rotated100  4550 Dr=-0.090 |Dr|max=0.221 Df=-0.093 g r=0.027 f=0.028 p=0.033 max=0.178 Ld=+0.0045 base=-0.000658 r1=0.000972 path=0.00416 Lg=+0.6935 lr_d=0.00425 102s
+PROBE rotated100  4600 Dr=-0.104 |Dr|max=0.285 Df=-0.112 g r=0.052 f=0.053 p=0.081 max=0.294 Ld=+0.0190 base=0.00273 r1=0.00495 path=0.0113 Lg=+0.6960 lr_d=0.00425 102s
+PROBE rotated100  4650 Dr=-0.048 |Dr|max=0.102 Df=-0.049 g r=0.022 f=0.022 p=0.032 max=0.176 Ld=+0.0102 base=0.00296 r1=0.00167 path=0.00561 Lg=+0.6940 lr_d=0.00425 103s
+PROBE rotated100  4700 Dr=-0.028 |Dr|max=0.181 Df=-0.029 g r=0.022 f=0.023 p=0.032 max=0.171 Ld=+0.0043 base=-0.00124 r1=0.0005 path=0.00507 Lg=+0.6933 lr_d=0.00425 104s
+PROBE rotated100  4750 Dr=-0.062 |Dr|max=0.135 Df=-0.063 g r=0.030 f=0.029 p=0.040 max=0.217 Ld=+0.0081 base=-0.00094 r1=0.00204 path=0.00697 Lg=+0.6925 lr_d=0.00425 105s
+TRAIN step=4750/7000 d=0.0081 g=0.6925 train_seconds=86.5
+EVAL step=4750/7000 model=live modes=100/100 hq=0.8839 pass=False elapsed=105.8s
+EVAL step=4750/7000 model=ema modes=100/100 hq=0.9623 pass=False elapsed=106.1s
+PROBE rotated100  4800 Dr=-0.121 |Dr|max=0.189 Df=-0.123 g r=0.035 f=0.035 p=0.045 max=0.196 Ld=+0.0096 base=0.00275 r1=0.00231 path=0.00453 Lg=+0.6948 lr_d=0.00425 107s
+PROBE rotated100  4850 Dr=-0.037 |Dr|max=0.088 Df=-0.037 g r=0.020 f=0.021 p=0.028 max=0.120 Ld=+0.0115 base=0.00399 r1=0.00168 path=0.00584 Lg=+0.6931 lr_d=0.00425 108s
+PROBE rotated100  4900 Dr=-0.023 |Dr|max=0.133 Df=-0.025 g r=0.026 f=0.025 p=0.034 max=0.257 Ld=+0.0114 base=0.00109 r1=0.00105 path=0.00924 Lg=+0.6931 lr_d=0.00425 109s
+PROBE rotated100  4950 Dr=-0.007 |Dr|max=0.153 Df=-0.009 g r=0.027 f=0.027 p=0.038 max=0.165 Ld=+0.0069 base=0.000877 r1=0.000955 path=0.00504 Lg=+0.6936 lr_d=0.00425 110s
+PROBE rotated100  5000 Dr=-0.121 |Dr|max=0.301 Df=-0.124 g r=0.050 f=0.051 p=0.059 max=0.259 Ld=+0.0153 base=0.000179 r1=0.00511 path=0.01 Lg=+0.6952 lr_d=0.00425 111s
+TRAIN step=5000/7000 d=0.0153 g=0.6952 train_seconds=91.3
+EVAL step=5000/7000 model=live modes=99/100 hq=0.8518 pass=False elapsed=111.3s
+EVAL step=5000/7000 model=ema modes=100/100 hq=0.9644 pass=False elapsed=111.6s
+PROBE rotated100  5050 Dr=-0.065 |Dr|max=0.135 Df=-0.066 g r=0.020 f=0.020 p=0.028 max=0.182 Ld=+0.0067 base=-0.000969 r1=0.0012 path=0.00647 Lg=+0.6938 lr_d=0.00425 112s
+PROBE rotated100  5100 Dr=-0.077 |Dr|max=0.164 Df=-0.080 g r=0.026 f=0.024 p=0.038 max=0.306 Ld=+0.0059 base=-0.000644 r1=0.00125 path=0.00525 Lg=+0.6950 lr_d=0.00425 113s
+PROBE rotated100  5150 Dr=-0.004 |Dr|max=0.366 Df=-0.010 g r=0.062 f=0.064 p=0.069 max=0.504 Ld=+0.0070 base=-0.00209 r1=0.00323 path=0.00589 Lg=+0.6960 lr_d=0.00425 114s
+PROBE rotated100  5200 Dr=-0.086 |Dr|max=0.150 Df=-0.091 g r=0.026 f=0.026 p=0.041 max=0.336 Ld=+0.0093 base=-0.00149 r1=0.00107 path=0.00972 Lg=+0.6952 lr_d=0.00425 115s
+PROBE rotated100  5250 Dr=-0.106 |Dr|max=0.182 Df=-0.109 g r=0.027 f=0.028 p=0.042 max=0.228 Ld=+0.0148 base=0.00158 r1=0.00183 path=0.0114 Lg=+0.6944 lr_d=0.00425 116s
+TRAIN step=5250/7000 d=0.0148 g=0.6944 train_seconds=96.1
+EVAL step=5250/7000 model=live modes=100/100 hq=0.8814 pass=False elapsed=116.8s
+EVAL step=5250/7000 model=ema modes=100/100 hq=0.9678 pass=False elapsed=117.1s
+PROBE rotated100  5300 Dr=-0.097 |Dr|max=0.300 Df=-0.099 g r=0.031 f=0.030 p=0.037 max=0.282 Ld=+0.0079 base=0.000488 r1=0.00088 path=0.00649 Lg=+0.6938 lr_d=0.00425 118s
+PROBE rotated100  5350 Dr=-0.067 |Dr|max=0.191 Df=-0.067 g r=0.024 f=0.024 p=0.035 max=0.209 Ld=+0.0057 base=-0.000685 r1=0.000867 path=0.00556 Lg=+0.6947 lr_d=0.00425 119s
+PROBE rotated100  5400 Dr=-0.062 |Dr|max=0.129 Df=-0.063 g r=0.028 f=0.028 p=0.035 max=0.240 Ld=+0.0059 base=-4.61e-05 r1=0.000917 path=0.00507 Lg=+0.6948 lr_d=0.00425 120s
+PROBE rotated100  5450 Dr=-0.044 |Dr|max=0.495 Df=-0.056 g r=0.043 f=0.044 p=0.077 max=0.350 Ld=+0.0024 base=-0.00464 r1=0.00143 path=0.00565 Lg=+0.7016 lr_d=0.00425 121s
+PROBE rotated100  5500 Dr=-0.072 |Dr|max=0.139 Df=-0.075 g r=0.023 f=0.023 p=0.034 max=0.241 Ld=+0.0046 base=-0.000749 r1=0.00075 path=0.00459 Lg=+0.6954 lr_d=0.00425 122s
+TRAIN step=5500/7000 d=0.0046 g=0.6954 train_seconds=100.8
+EVAL step=5500/7000 model=live modes=100/100 hq=0.9080 pass=False elapsed=122.2s
+EVAL step=5500/7000 model=ema modes=100/100 hq=0.9678 pass=False elapsed=122.5s
+PROBE rotated100  5550 Dr=-0.116 |Dr|max=0.170 Df=-0.116 g r=0.024 f=0.023 p=0.030 max=0.225 Ld=+0.0095 base=0.00091 r1=0.00126 path=0.00736 Lg=+0.6938 lr_d=0.00425 123s
+PROBE rotated100  5600 Dr=-0.074 |Dr|max=0.127 Df=-0.077 g r=0.021 f=0.021 p=0.034 max=0.165 Ld=+0.0043 base=-0.00143 r1=0.000549 path=0.00523 Lg=+0.6936 lr_d=0.00425 124s
+PROBE rotated100  5650 Dr=-0.130 |Dr|max=0.246 Df=-0.131 g r=0.025 f=0.026 p=0.036 max=0.246 Ld=+0.0074 base=-0.00234 r1=0.000895 path=0.00881 Lg=+0.6946 lr_d=0.00425 125s
+PROBE rotated100  5700 Dr=-0.144 |Dr|max=0.225 Df=-0.144 g r=0.025 f=0.023 p=0.042 max=0.260 Ld=+0.0042 base=-0.000986 r1=0.0008 path=0.00441 Lg=+0.6933 lr_d=0.00425 126s
+PROBE rotated100  5750 Dr=-0.045 |Dr|max=0.145 Df=-0.047 g r=0.023 f=0.024 p=0.035 max=0.196 Ld=+0.0060 base=-0.000702 r1=0.000713 path=0.00594 Lg=+0.6929 lr_d=0.00425 127s
+TRAIN step=5750/7000 d=0.0060 g=0.6929 train_seconds=105.7
+EVAL step=5750/7000 model=live modes=100/100 hq=0.8548 pass=False elapsed=127.8s
+EVAL step=5750/7000 model=ema modes=100/100 hq=0.9685 pass=False elapsed=128.1s
+PROBE rotated100  5800 Dr=-0.193 |Dr|max=0.369 Df=-0.194 g r=0.054 f=0.053 p=0.072 max=0.295 Ld=+0.0102 base=0.000812 r1=0.00375 path=0.00565 Lg=+0.6942 lr_d=0.00425 129s
+PROBE rotated100  5850 Dr=-0.069 |Dr|max=0.125 Df=-0.069 g r=0.025 f=0.025 p=0.031 max=0.138 Ld=+0.0208 base=0.00197 r1=0.00667 path=0.0122 Lg=+0.6942 lr_d=0.00425 130s
+PROBE rotated100  5900 Dr=-0.081 |Dr|max=0.358 Df=-0.084 g r=0.034 f=0.035 p=0.045 max=0.490 Ld=+0.0108 base=0.00143 r1=0.000745 path=0.00862 Lg=+0.6934 lr_d=0.00425 131s
+PROBE rotated100  5950 Dr=-0.061 |Dr|max=0.422 Df=-0.065 g r=0.038 f=0.037 p=0.045 max=0.348 Ld=+0.0042 base=-0.00298 r1=0.00138 path=0.00584 Lg=+0.6950 lr_d=0.00425 132s
+PROBE rotated100  6000 Dr=-0.078 |Dr|max=0.200 Df=-0.081 g r=0.022 f=0.022 p=0.034 max=0.236 Ld=+0.0055 base=-0.000137 r1=0.00071 path=0.00488 Lg=+0.6945 lr_d=0.00425 133s
+TRAIN step=6000/7000 d=0.0055 g=0.6945 train_seconds=110.5
+EVAL step=6000/7000 model=live modes=100/100 hq=0.8874 pass=False elapsed=133.3s
+EVAL step=6000/7000 model=ema modes=100/100 hq=0.9682 pass=False elapsed=133.6s
+PROBE rotated100  6050 Dr=-0.069 |Dr|max=0.139 Df=-0.070 g r=0.023 f=0.022 p=0.030 max=0.156 Ld=+0.0053 base=-0.00033 r1=0.00131 path=0.00431 Lg=+0.6944 lr_d=0.00425 134s
+PROBE rotated100  6100 Dr=-0.015 |Dr|max=0.173 Df=-0.018 g r=0.024 f=0.023 p=0.032 max=0.313 Ld=+0.0066 base=-0.000848 r1=0.000406 path=0.00704 Lg=+0.6941 lr_d=0.00425 135s
+PROBE rotated100  6150 Dr=-0.158 |Dr|max=0.261 Df=-0.160 g r=0.022 f=0.022 p=0.035 max=0.241 Ld=+0.0057 base=-0.000669 r1=0.000755 path=0.0056 Lg=+0.6952 lr_d=0.00425 137s
+PROBE rotated100  6200 Dr=-0.130 |Dr|max=0.565 Df=-0.132 g r=0.050 f=0.049 p=0.034 max=0.703 Ld=+0.0048 base=-0.00235 r1=0.00167 path=0.00545 Lg=+0.6917 lr_d=0.00425 137s
+PROBE rotated100  6250 Dr=-0.118 |Dr|max=0.215 Df=-0.117 g r=0.028 f=0.028 p=0.034 max=0.656 Ld=+0.0164 base=0.00541 r1=0.00172 path=0.00922 Lg=+0.6924 lr_d=0.00425 138s
+TRAIN step=6250/7000 d=0.0164 g=0.6924 train_seconds=115.3
+EVAL step=6250/7000 model=live modes=100/100 hq=0.8728 pass=False elapsed=138.8s
+EVAL step=6250/7000 model=ema modes=100/100 hq=0.9700 pass=False elapsed=139.1s
+PROBE rotated100  6300 Dr=-0.132 |Dr|max=0.184 Df=-0.132 g r=0.023 f=0.022 p=0.034 max=0.270 Ld=+0.0072 base=0.000841 r1=0.000922 path=0.00546 Lg=+0.6938 lr_d=0.00425 140s
+PROBE rotated100  6350 Dr=-0.101 |Dr|max=0.236 Df=-0.103 g r=0.024 f=0.024 p=0.033 max=0.177 Ld=+0.0094 base=0.00216 r1=0.00141 path=0.00586 Lg=+0.6945 lr_d=0.00425 141s
+PROBE rotated100  6400 Dr=-0.117 |Dr|max=0.215 Df=-0.118 g r=0.025 f=0.026 p=0.038 max=0.305 Ld=+0.0048 base=-0.000771 r1=0.000584 path=0.005 Lg=+0.6940 lr_d=0.00425 142s
+PROBE rotated100  6450 Dr=-0.068 |Dr|max=0.180 Df=-0.071 g r=0.019 f=0.018 p=0.029 max=0.202 Ld=+0.0067 base=0.00192 r1=0.000675 path=0.00413 Lg=+0.6932 lr_d=0.00425 143s
+PROBE rotated100  6500 Dr=-0.115 |Dr|max=0.198 Df=-0.117 g r=0.026 f=0.026 p=0.037 max=0.321 Ld=+0.0054 base=-0.000127 r1=0.00105 path=0.0045 Lg=+0.6942 lr_d=0.00425 144s
+TRAIN step=6500/7000 d=0.0054 g=0.6942 train_seconds=120.1
+EVAL step=6500/7000 model=live modes=100/100 hq=0.9131 pass=False elapsed=144.3s
+EVAL step=6500/7000 model=ema modes=100/100 hq=0.9728 pass=False elapsed=144.7s
+PROBE rotated100  6550 Dr=-0.102 |Dr|max=0.132 Df=-0.103 g r=0.019 f=0.019 p=0.026 max=0.211 Ld=+0.0056 base=-0.000197 r1=0.000695 path=0.00506 Lg=+0.6933 lr_d=0.00425 145s
+PROBE rotated100  6600 Dr=-0.083 |Dr|max=0.140 Df=-0.084 g r=0.018 f=0.019 p=0.024 max=0.127 Ld=+0.0068 base=2.11e-05 r1=0.000946 path=0.00586 Lg=+0.6938 lr_d=0.00425 146s
+PROBE rotated100  6650 Dr=-0.097 |Dr|max=0.308 Df=-0.097 g r=0.021 f=0.021 p=0.026 max=0.298 Ld=+0.0037 base=-0.00084 r1=0.000998 path=0.00355 Lg=+0.6944 lr_d=0.00425 147s
+PROBE rotated100  6700 Dr=-0.108 |Dr|max=0.171 Df=-0.109 g r=0.016 f=0.016 p=0.027 max=0.159 Ld=+0.0049 base=-0.000259 r1=0.0004 path=0.00472 Lg=+0.6936 lr_d=0.00425 148s
+PROBE rotated100  6750 Dr=-0.100 |Dr|max=0.196 Df=-0.103 g r=0.026 f=0.026 p=0.038 max=0.168 Ld=+0.0088 base=0.000604 r1=0.00126 path=0.0069 Lg=+0.6930 lr_d=0.00425 149s
+TRAIN step=6750/7000 d=0.0088 g=0.6930 train_seconds=124.8
+EVAL step=6750/7000 model=live modes=100/100 hq=0.8780 pass=False elapsed=149.7s
+EVAL step=6750/7000 model=ema modes=100/100 hq=0.9695 pass=False elapsed=150.1s
+PROBE rotated100  6800 Dr=-0.082 |Dr|max=0.177 Df=-0.084 g r=0.021 f=0.021 p=0.025 max=0.192 Ld=+0.0094 base=0.000691 r1=0.000822 path=0.00787 Lg=+0.6934 lr_d=0.00425 151s
+PROBE rotated100  6850 Dr=-0.107 |Dr|max=0.156 Df=-0.107 g r=0.017 f=0.018 p=0.026 max=0.194 Ld=+0.0059 base=0.000871 r1=0.000552 path=0.0045 Lg=+0.6939 lr_d=0.00425 152s
+PROBE rotated100  6900 Dr=-0.121 |Dr|max=0.210 Df=-0.122 g r=0.031 f=0.031 p=0.047 max=0.217 Ld=+0.0063 base=-0.000272 r1=0.000994 path=0.00555 Lg=+0.6946 lr_d=0.00425 153s
+PROBE rotated100  6950 Dr=-0.100 |Dr|max=0.196 Df=-0.102 g r=0.017 f=0.017 p=0.022 max=0.143 Ld=+0.0086 base=-0.000128 r1=0.000497 path=0.00823 Lg=+0.6937 lr_d=0.00425 154s
+PROBE rotated100  7000 Dr=-0.087 |Dr|max=0.132 Df=-0.089 g r=0.018 f=0.019 p=0.030 max=0.149 Ld=+0.0052 base=-0.000312 r1=0.000529 path=0.00503 Lg=+0.6938 lr_d=0.00425 155s
+TRAIN step=7000/7000 d=0.0052 g=0.6938 train_seconds=129.6
+EVAL step=7000/7000 model=live modes=100/100 hq=0.9066 pass=False elapsed=155.2s
+EVAL step=7000/7000 model=ema modes=100/100 hq=0.9720 pass=False elapsed=155.5s
+COMPLETE problem=rotated100 steps=7000 live_modes=100/100 live_hq=0.9066 stable_pass=None total_seconds=159.1
+{"event": "problem_complete", "problem": "rotated100", "status": "complete", "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/rotated100"}
+{"event": "problem_start", "problem": "staggered100", "steps": 7000, "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/staggered100"}
+INIT staggered100 init=batch_feature_zero hook=None differs_from_old=D public_path_match=G,D,prior ema_D_equals_D=None sha G=706dc20c76f2 D=7d5ea8b2bc21 prior=6c9872a1f4d8
+TRAINER staggered100 opt_d=K3PCriticAdam betas=(0.0, 0.9) ema_critic=False A2=0.0 noise_in=0.0 noise_out=0.0 lr_floor=1.0 net_floor=1.0
+START problem=staggered100 steps=7000 device=cuda:0 events=/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/staggered100/events.jsonl
+EVAL step=0/7000 model=live modes=0/100 hq=0.0256 pass=False elapsed=0.6s
+EVAL step=0/7000 model=ema modes=0/100 hq=0.0256 pass=False elapsed=0.9s
+PROBE staggered100     1 Dr=+0.069 |Dr|max=0.251 Df=-0.012 g r=0.372 f=0.582 p=0.579 max=1.423 Ld=+0.5739 base=0.00291 r1=0.0558 path=0.515 Lg=+0.7344 lr_d=0.00425 1s
+TRAIN step=1/7000 d=0.5739 g=0.7344 train_seconds=0.0
+EVAL step=1/7000 model=live modes=0/100 hq=0.0256 pass=False elapsed=1.1s
+EVAL step=1/7000 model=ema modes=0/100 hq=0.0257 pass=False elapsed=1.3s
+EVAL step=10/7000 model=live modes=0/100 hq=0.0349 pass=False elapsed=1.7s
+EVAL step=10/7000 model=ema modes=0/100 hq=0.0260 pass=False elapsed=2.1s
+EVAL step=25/7000 model=live modes=0/100 hq=0.0520 pass=False elapsed=2.5s
+EVAL step=25/7000 model=ema modes=0/100 hq=0.0272 pass=False elapsed=2.9s
+PROBE staggered100    50 Dr=+0.096 |Dr|max=0.184 Df=-0.019 g r=0.262 f=0.517 p=0.542 max=1.481 Ld=-0.0604 base=-0.127 r1=0.0547 path=0.00816 cap=0.00372 Lg=+0.7580 lr_d=0.00425 3s
+EVAL step=50/7000 model=live modes=0/100 hq=0.1167 pass=False elapsed=3.4s
+EVAL step=50/7000 model=ema modes=0/100 hq=0.0286 pass=False elapsed=3.6s
+PROBE staggered100   100 Dr=+0.143 |Dr|max=0.331 Df=+0.078 g r=0.176 f=0.405 p=0.486 max=1.152 Ld=+0.0088 base=-0.0664 r1=0.0587 path=0.0157 cap=0.00081 Lg=+0.7301 lr_d=0.00425 4s
+EVAL step=100/7000 model=live modes=1/100 hq=0.3245 pass=False elapsed=4.8s
+EVAL step=100/7000 model=ema modes=0/100 hq=0.0352 pass=False elapsed=5.2s
+PROBE staggered100   150 Dr=+0.105 |Dr|max=0.286 Df=+0.079 g r=0.173 f=0.264 p=0.379 max=0.976 Ld=+0.0321 base=-0.0285 r1=0.0399 path=0.0202 cap=0.000428 Lg=+0.7091 lr_d=0.00425 6s
+PROBE staggered100   200 Dr=+0.122 |Dr|max=0.280 Df=+0.104 g r=0.116 f=0.150 p=0.327 max=1.049 Ld=+0.0282 base=-0.0143 r1=0.0278 path=0.0143 cap=0.000451 Lg=+0.7000 lr_d=0.00425 7s
+PROBE staggered100   250 Dr=+0.112 |Dr|max=0.298 Df=+0.104 g r=0.104 f=0.119 p=0.305 max=0.933 Ld=+0.0085 base=-0.0109 r1=0.0103 path=0.00823 cap=0.000824 Lg=+0.6993 lr_d=0.00425 8s
+TRAIN step=250/7000 d=0.0085 g=0.6993 train_seconds=4.3
+EVAL step=250/7000 model=live modes=98/100 hq=0.8388 pass=False elapsed=8.3s
+EVAL step=250/7000 model=ema modes=0/100 hq=0.1209 pass=False elapsed=8.8s
+PROBE staggered100   300 Dr=+0.189 |Dr|max=0.445 Df=+0.182 g r=0.082 f=0.089 p=0.270 max=0.960 Ld=+0.0156 base=-0.000816 r1=0.0096 path=0.00685 Lg=+0.7021 lr_d=0.00425 10s
+PROBE staggered100   350 Dr=+0.127 |Dr|max=0.458 Df=+0.120 g r=0.058 f=0.063 p=0.266 max=0.929 Ld=+0.0074 base=-0.00319 r1=0.00493 path=0.00566 Lg=+0.7018 lr_d=0.00425 11s
+PROBE staggered100   400 Dr=+0.144 |Dr|max=0.648 Df=+0.137 g r=0.054 f=0.061 p=0.288 max=1.053 Ld=+0.0064 base=-0.00463 r1=0.00481 path=0.00625 Lg=+0.7079 lr_d=0.00425 12s
+PROBE staggered100   450 Dr=+0.144 |Dr|max=0.568 Df=+0.146 g r=0.065 f=0.068 p=0.221 max=0.937 Ld=+0.0183 base=0.00574 r1=0.00582 path=0.00676 Lg=+0.7002 lr_d=0.00425 13s
+PROBE staggered100   500 Dr=+0.228 |Dr|max=1.365 Df=+0.221 g r=0.087 f=0.084 p=0.301 max=1.330 Ld=-0.0133 base=-0.028 r1=0.00819 path=0.00643 cap=7.01e-05 Lg=+0.7431 lr_d=0.00425 14s
+TRAIN step=500/7000 d=-0.0133 g=0.7431 train_seconds=9.3
+EVAL step=500/7000 model=live modes=100/100 hq=0.9317 pass=False elapsed=14.4s
+EVAL step=500/7000 model=ema modes=83/100 hq=0.5956 pass=False elapsed=14.8s
+PROBE staggered100   550 Dr=+0.159 |Dr|max=0.639 Df=+0.158 g r=0.056 f=0.057 p=0.203 max=0.795 Ld=+0.0119 base=-0.000768 r1=0.00716 path=0.00549 Lg=+0.7070 lr_d=0.00425 16s
+PROBE staggered100   600 Dr=+0.212 |Dr|max=1.486 Df=+0.193 g r=0.080 f=0.081 p=0.260 max=0.945 Ld=-0.0127 base=-0.0285 r1=0.00996 path=0.00582 cap=3.2e-06 Lg=+0.7570 lr_d=0.00425 17s
+PROBE staggered100   650 Dr=+0.203 |Dr|max=1.069 Df=+0.173 g r=0.067 f=0.067 p=0.302 max=1.248 Ld=-0.0131 base=-0.0224 r1=0.00472 path=0.00451 Lg=+0.7356 lr_d=0.00425 17s
+PROBE staggered100   700 Dr=+0.133 |Dr|max=0.948 Df=+0.113 g r=0.059 f=0.061 p=0.258 max=0.948 Ld=-0.0087 base=-0.0221 r1=0.0027 path=0.0107 Lg=+0.7234 lr_d=0.00425 18s
+PROBE staggered100   750 Dr=+0.034 |Dr|max=0.535 Df=+0.027 g r=0.042 f=0.042 p=0.137 max=0.762 Ld=+0.0034 base=-0.00807 r1=0.0057 path=0.00581 Lg=+0.7008 lr_d=0.00425 19s
+TRAIN step=750/7000 d=0.0034 g=0.7008 train_seconds=13.8
+EVAL step=750/7000 model=live modes=100/100 hq=0.9365 pass=False elapsed=19.6s
+EVAL step=750/7000 model=ema modes=100/100 hq=0.9226 pass=False elapsed=20.0s
+PROBE staggered100   800 Dr=+0.270 |Dr|max=1.352 Df=+0.267 g r=0.047 f=0.048 p=0.234 max=1.100 Ld=+0.0044 base=-0.00501 r1=0.00383 path=0.00534 cap=0.000198 Lg=+0.7197 lr_d=0.00425 21s
+PROBE staggered100   850 Dr=+0.294 |Dr|max=1.775 Df=+0.258 g r=0.087 f=0.086 p=0.352 max=1.359 Ld=-0.0034 base=-0.0175 r1=0.00492 path=0.00912 cap=8.03e-05 Lg=+0.7969 lr_d=0.00425 22s
+PROBE staggered100   900 Dr=+0.166 |Dr|max=0.585 Df=+0.158 g r=0.040 f=0.042 p=0.212 max=0.966 Ld=+0.0096 base=-0.00265 r1=0.0035 path=0.00871 Lg=+0.7085 lr_d=0.00425 23s
+PROBE staggered100   950 Dr=+0.245 |Dr|max=1.329 Df=+0.229 g r=0.075 f=0.083 p=0.405 max=1.436 Ld=-0.0016 base=-0.0109 r1=0.00271 path=0.00651 cap=0.000104 Lg=+0.7515 lr_d=0.00425 24s
+PROBE staggered100  1000 Dr=+0.239 |Dr|max=1.280 Df=+0.218 g r=0.053 f=0.053 p=0.220 max=1.088 Ld=+0.0127 base=-0.00309 r1=0.00941 path=0.0064 Lg=+0.7226 lr_d=0.00425 25s
+TRAIN step=1000/7000 d=0.0127 g=0.7226 train_seconds=18.4
+EVAL step=1000/7000 model=live modes=100/100 hq=0.9376 pass=False elapsed=25.2s
+EVAL step=1000/7000 model=ema modes=100/100 hq=0.9464 pass=False elapsed=25.7s
+PROBE staggered100  1050 Dr=+0.510 |Dr|max=1.616 Df=+0.511 g r=0.090 f=0.097 p=0.291 max=0.976 Ld=+0.0292 base=-0.0275 r1=0.0244 path=0.00745 cap=0.0248 Lg=+0.7419 lr_d=0.00425 27s
+PROBE staggered100  1100 Dr=+0.041 |Dr|max=0.913 Df=+0.035 g r=0.045 f=0.044 p=0.178 max=0.592 Ld=+0.0105 base=-0.00299 r1=0.00771 path=0.00577 Lg=+0.7174 lr_d=0.00425 28s
+PROBE staggered100  1150 Dr=-0.029 |Dr|max=0.246 Df=-0.032 g r=0.037 f=0.038 p=0.150 max=0.688 Ld=+0.0266 base=0.0158 r1=0.00579 path=0.00495 cap=1.22e-06 Lg=+0.6974 lr_d=0.00425 29s
+PROBE staggered100  1200 Dr=+0.242 |Dr|max=0.909 Df=+0.218 g r=0.055 f=0.057 p=0.229 max=1.065 Ld=+0.0030 base=-0.00581 r1=0.00405 path=0.00474 Lg=+0.7062 lr_d=0.00425 30s
+PROBE staggered100  1250 Dr=+0.327 |Dr|max=1.272 Df=+0.275 g r=0.040 f=0.043 p=0.297 max=1.089 Ld=-0.0163 base=-0.0212 r1=0.00192 path=0.00293 Lg=+0.7444 lr_d=0.00425 31s
+TRAIN step=1250/7000 d=-0.0163 g=0.7444 train_seconds=23.5
+EVAL step=1250/7000 model=live modes=100/100 hq=0.9346 pass=False elapsed=31.2s
+EVAL step=1250/7000 model=ema modes=100/100 hq=0.9573 pass=False elapsed=31.7s
+PROBE staggered100  1300 Dr=+0.140 |Dr|max=0.577 Df=+0.139 g r=0.026 f=0.027 p=0.153 max=0.610 Ld=+0.0191 base=0.0133 r1=0.00208 path=0.00366 Lg=+0.6962 lr_d=0.00425 33s
+PROBE staggered100  1350 Dr=+0.156 |Dr|max=0.520 Df=+0.156 g r=0.030 f=0.031 p=0.175 max=0.602 Ld=+0.0014 base=-0.00501 r1=0.00264 path=0.00376 Lg=+0.7071 lr_d=0.00425 34s
+PROBE staggered100  1400 Dr=+0.067 |Dr|max=0.575 Df=+0.063 g r=0.044 f=0.049 p=0.215 max=0.852 Ld=+0.0125 base=-0.0046 r1=0.00638 path=0.0107 cap=3.04e-06 Lg=+0.7176 lr_d=0.00425 35s
+PROBE staggered100  1450 Dr=+0.068 |Dr|max=0.539 Df=+0.062 g r=0.033 f=0.033 p=0.191 max=0.623 Ld=+0.0114 base=-0.00255 r1=0.0021 path=0.0119 Lg=+0.7061 lr_d=0.00425 36s
+PROBE staggered100  1500 Dr=+0.150 |Dr|max=0.813 Df=+0.139 g r=0.050 f=0.054 p=0.135 max=0.471 Ld=+0.0061 base=-0.00982 r1=0.00733 path=0.00854 Lg=+0.7118 lr_d=0.00425 37s
+TRAIN step=1500/7000 d=0.0061 g=0.7118 train_seconds=28.8
+EVAL step=1500/7000 model=live modes=90/100 hq=0.8145 pass=False elapsed=37.4s
+EVAL step=1500/7000 model=ema modes=100/100 hq=0.9634 pass=False elapsed=37.9s
+PROBE staggered100  1550 Dr=+0.165 |Dr|max=0.551 Df=+0.148 g r=0.045 f=0.047 p=0.174 max=0.980 Ld=+0.0134 base=0.0036 r1=0.00449 path=0.00529 Lg=+0.7008 lr_d=0.00425 39s
+PROBE staggered100  1600 Dr=+0.160 |Dr|max=0.578 Df=+0.153 g r=0.047 f=0.045 p=0.191 max=0.791 Ld=+0.0087 base=-0.00251 r1=0.00733 path=0.00387 Lg=+0.7010 lr_d=0.00425 40s
+PROBE staggered100  1650 Dr=+0.117 |Dr|max=0.986 Df=+0.090 g r=0.047 f=0.048 p=0.279 max=0.890 Ld=-0.0091 base=-0.021 r1=0.00612 path=0.00573 cap=1.83e-05 Lg=+0.7481 lr_d=0.00425 41s
+PROBE staggered100  1700 Dr=+0.145 |Dr|max=0.628 Df=+0.139 g r=0.033 f=0.033 p=0.156 max=0.731 Ld=-0.0015 base=-0.00804 r1=0.00187 path=0.00465 Lg=+0.7043 lr_d=0.00425 42s
+PROBE staggered100  1750 Dr=+0.157 |Dr|max=0.632 Df=+0.153 g r=0.041 f=0.044 p=0.160 max=0.725 Ld=+0.0123 base=0.00392 r1=0.00431 path=0.00408 Lg=+0.7036 lr_d=0.00425 43s
+TRAIN step=1750/7000 d=0.0123 g=0.7036 train_seconds=34.1
+EVAL step=1750/7000 model=live modes=100/100 hq=0.9311 pass=False elapsed=43.6s
+EVAL step=1750/7000 model=ema modes=100/100 hq=0.9659 pass=False elapsed=44.1s
+PROBE staggered100  1800 Dr=+0.033 |Dr|max=0.418 Df=+0.031 g r=0.068 f=0.068 p=0.158 max=0.653 Ld=+0.0102 base=0.00261 r1=0.00376 path=0.00383 cap=1.79e-07 Lg=+0.6992 lr_d=0.00425 45s
+PROBE staggered100  1850 Dr=+0.045 |Dr|max=0.407 Df=+0.030 g r=0.029 f=0.029 p=0.168 max=0.653 Ld=+0.0028 base=-0.00425 r1=0.00155 path=0.00553 Lg=+0.7099 lr_d=0.00425 46s
+PROBE staggered100  1900 Dr=+0.190 |Dr|max=0.803 Df=+0.185 g r=0.041 f=0.040 p=0.172 max=1.012 Ld=+0.0000 base=-0.00866 r1=0.00285 path=0.00581 Lg=+0.7048 lr_d=0.00425 48s
+PROBE staggered100  1950 Dr=+0.033 |Dr|max=0.320 Df=+0.032 g r=0.031 f=0.032 p=0.138 max=0.485 Ld=+0.0118 base=0.00674 r1=0.00103 path=0.00404 Lg=+0.6994 lr_d=0.00425 50s
+PROBE staggered100  2000 Dr=+0.258 |Dr|max=1.914 Df=+0.243 g r=0.090 f=0.108 p=0.288 max=1.211 Ld=-0.0022 base=-0.0144 r1=0.0051 path=0.00707 cap=1.81e-05 Lg=+0.7779 lr_d=0.00425 51s
+TRAIN step=2000/7000 d=-0.0022 g=0.7779 train_seconds=39.5
+EVAL step=2000/7000 model=live modes=89/100 hq=0.8037 pass=False elapsed=51.8s
+EVAL step=2000/7000 model=ema modes=100/100 hq=0.9698 pass=False elapsed=51.9s
+PROBE staggered100  2050 Dr=+0.057 |Dr|max=0.781 Df=+0.056 g r=0.030 f=0.033 p=0.167 max=0.679 Ld=+0.0047 base=-0.00316 r1=0.00149 path=0.00637 Lg=+0.7077 lr_d=0.00425 53s
+PROBE staggered100  2100 Dr=+0.139 |Dr|max=0.623 Df=+0.130 g r=0.028 f=0.027 p=0.140 max=0.641 Ld=+0.0130 base=0.00391 r1=0.00482 path=0.00431 Lg=+0.6965 lr_d=0.00425 54s
+PROBE staggered100  2150 Dr=+0.411 |Dr|max=1.351 Df=+0.377 g r=0.044 f=0.044 p=0.209 max=0.725 Ld=-0.0004 base=-0.0104 r1=0.00477 path=0.00518 Lg=+0.7197 lr_d=0.00425 55s
+PROBE staggered100  2200 Dr=-0.029 |Dr|max=0.261 Df=-0.026 g r=0.024 f=0.025 p=0.120 max=0.542 Ld=+0.0097 base=0.00374 r1=0.00101 path=0.00492 Lg=+0.6961 lr_d=0.00425 56s
+PROBE staggered100  2250 Dr=+0.144 |Dr|max=0.942 Df=+0.141 g r=0.065 f=0.067 p=0.153 max=0.694 Ld=+0.0047 base=-0.00349 r1=0.00378 path=0.00445 Lg=+0.7111 lr_d=0.00425 57s
+TRAIN step=2250/7000 d=0.0047 g=0.7111 train_seconds=44.7
+EVAL step=2250/7000 model=live modes=100/100 hq=0.9124 pass=False elapsed=57.7s
+EVAL step=2250/7000 model=ema modes=100/100 hq=0.9699 pass=False elapsed=58.2s
+PROBE staggered100  2300 Dr=+0.023 |Dr|max=0.383 Df=+0.014 g r=0.030 f=0.029 p=0.146 max=0.626 Ld=+0.0057 base=0.000415 r1=0.00117 path=0.00415 Lg=+0.6994 lr_d=0.00425 59s
+PROBE staggered100  2350 Dr=+0.277 |Dr|max=0.901 Df=+0.277 g r=0.037 f=0.039 p=0.174 max=0.804 Ld=+0.0024 base=-0.00366 r1=0.0021 path=0.00398 Lg=+0.7002 lr_d=0.00425 60s
+PROBE staggered100  2400 Dr=+0.015 |Dr|max=0.752 Df=+0.007 g r=0.031 f=0.030 p=0.175 max=1.019 Ld=+0.0038 base=-0.00269 r1=0.00116 path=0.00528 Lg=+0.7040 lr_d=0.00425 61s
+PROBE staggered100  2450 Dr=+0.246 |Dr|max=1.179 Df=+0.246 g r=0.026 f=0.026 p=0.185 max=0.983 Ld=+0.0026 base=-0.00122 r1=0.00107 path=0.00272 Lg=+0.7140 lr_d=0.00425 63s
+PROBE staggered100  2500 Dr=+0.123 |Dr|max=0.747 Df=+0.118 g r=0.026 f=0.026 p=0.136 max=0.738 Ld=+0.0067 base=0.000431 r1=0.0012 path=0.00507 Lg=+0.7019 lr_d=0.00425 64s
+TRAIN step=2500/7000 d=0.0067 g=0.7019 train_seconds=50.0
+EVAL step=2500/7000 model=live modes=100/100 hq=0.9040 pass=False elapsed=64.0s
+EVAL step=2500/7000 model=ema modes=100/100 hq=0.9725 pass=False elapsed=64.5s
+PROBE staggered100  2550 Dr=-0.003 |Dr|max=0.375 Df=-0.004 g r=0.039 f=0.039 p=0.170 max=0.715 Ld=+0.0083 base=-0.00539 r1=0.00777 path=0.00594 Lg=+0.7038 lr_d=0.00425 66s
+PROBE staggered100  2600 Dr=+0.079 |Dr|max=0.334 Df=+0.075 g r=0.020 f=0.020 p=0.132 max=0.505 Ld=+0.0008 base=-0.00344 r1=0.000626 path=0.00363 Lg=+0.6960 lr_d=0.00425 67s
+PROBE staggered100  2650 Dr=+0.072 |Dr|max=1.077 Df=+0.063 g r=0.063 f=0.061 p=0.206 max=0.823 Ld=-0.0034 base=-0.00776 r1=0.00202 path=0.00235 cap=1.18e-06 Lg=+0.7391 lr_d=0.00425 68s
+PROBE staggered100  2700 Dr=+0.313 |Dr|max=0.979 Df=+0.302 g r=0.058 f=0.058 p=0.181 max=0.701 Ld=+0.0045 base=-0.0211 r1=0.0201 path=0.00549 cap=4.83e-08 Lg=+0.6992 lr_d=0.00425 69s
+PROBE staggered100  2750 Dr=+0.025 |Dr|max=0.359 Df=+0.020 g r=0.021 f=0.022 p=0.130 max=0.594 Ld=+0.0049 base=-0.000468 r1=0.000893 path=0.0045 Lg=+0.7002 lr_d=0.00425 70s
+TRAIN step=2750/7000 d=0.0049 g=0.7002 train_seconds=55.4
+EVAL step=2750/7000 model=live modes=100/100 hq=0.9284 pass=False elapsed=70.3s
+EVAL step=2750/7000 model=ema modes=100/100 hq=0.9735 pass=False elapsed=70.9s
+PROBE staggered100  2800 Dr=+0.034 |Dr|max=0.379 Df=+0.027 g r=0.043 f=0.046 p=0.182 max=0.672 Ld=+0.0107 base=0.00214 r1=0.00119 path=0.00738 Lg=+0.6963 lr_d=0.00425 72s
+PROBE staggered100  2850 Dr=+0.017 |Dr|max=0.342 Df=+0.017 g r=0.020 f=0.019 p=0.075 max=0.444 Ld=+0.0095 base=0.00405 r1=0.0013 path=0.00413 Lg=+0.6964 lr_d=0.00425 73s
+PROBE staggered100  2900 Dr=-0.038 |Dr|max=0.616 Df=-0.041 g r=0.039 f=0.039 p=0.139 max=0.675 Ld=-0.0011 base=-0.00655 r1=0.00182 path=0.00367 Lg=+0.7021 lr_d=0.00425 74s
+PROBE staggered100  2950 Dr=-0.041 |Dr|max=0.525 Df=-0.045 g r=0.035 f=0.036 p=0.199 max=0.873 Ld=+0.0076 base=-0.000778 r1=0.00189 path=0.00652 Lg=+0.7063 lr_d=0.00425 75s
+PROBE staggered100  3000 Dr=+0.052 |Dr|max=0.335 Df=+0.049 g r=0.018 f=0.017 p=0.115 max=0.555 Ld=+0.0031 base=-0.00315 r1=0.000617 path=0.00563 Lg=+0.6947 lr_d=0.00425 76s
+TRAIN step=3000/7000 d=0.0031 g=0.6947 train_seconds=60.6
+EVAL step=3000/7000 model=live modes=100/100 hq=0.9594 pass=False elapsed=76.7s
+EVAL step=3000/7000 model=ema modes=100/100 hq=0.9776 pass=False elapsed=77.3s
+PROBE staggered100  3050 Dr=+0.114 |Dr|max=1.076 Df=+0.101 g r=0.037 f=0.038 p=0.151 max=0.771 Ld=+0.0011 base=-0.00602 r1=0.00151 path=0.00557 Lg=+0.7148 lr_d=0.00425 78s
+PROBE staggered100  3100 Dr=-0.013 |Dr|max=0.743 Df=-0.023 g r=0.025 f=0.025 p=0.163 max=0.856 Ld=+0.0034 base=-0.00605 r1=0.000773 path=0.00872 Lg=+0.7089 lr_d=0.00425 79s
+PROBE staggered100  3150 Dr=+0.068 |Dr|max=0.321 Df=+0.063 g r=0.029 f=0.033 p=0.207 max=0.750 Ld=-0.0011 base=-0.00537 r1=0.00157 path=0.00272 Lg=+0.6970 lr_d=0.00425 80s
+PROBE staggered100  3200 Dr=-0.034 |Dr|max=0.166 Df=-0.035 g r=0.017 f=0.017 p=0.093 max=0.363 Ld=+0.0058 base=0.00234 r1=0.000428 path=0.00302 Lg=+0.6955 lr_d=0.00425 81s
+PROBE staggered100  3250 Dr=+0.000 |Dr|max=0.316 Df=-0.007 g r=0.020 f=0.021 p=0.122 max=0.522 Ld=+0.0042 base=-0.00102 r1=0.000612 path=0.00464 Lg=+0.6971 lr_d=0.00425 82s
+TRAIN step=3250/7000 d=0.0042 g=0.6971 train_seconds=65.7
+EVAL step=3250/7000 model=live modes=100/100 hq=0.9372 pass=False elapsed=82.9s
+EVAL step=3250/7000 model=ema modes=100/100 hq=0.9831 pass=False elapsed=83.5s
+PROBE staggered100  3300 Dr=-0.060 |Dr|max=0.715 Df=-0.065 g r=0.028 f=0.027 p=0.147 max=0.812 Ld=-0.0031 base=-0.00704 r1=0.00125 path=0.00269 Lg=+0.7132 lr_d=0.00425 85s
+PROBE staggered100  3350 Dr=+0.004 |Dr|max=0.368 Df=-0.007 g r=0.030 f=0.029 p=0.145 max=0.582 Ld=+0.0028 base=-0.00202 r1=0.00129 path=0.00355 Lg=+0.7021 lr_d=0.00425 86s
+PROBE staggered100  3400 Dr=-0.009 |Dr|max=0.314 Df=-0.017 g r=0.024 f=0.025 p=0.136 max=0.586 Ld=-0.0014 base=-0.0059 r1=0.000906 path=0.00355 Lg=+0.7015 lr_d=0.00425 87s
+PROBE staggered100  3450 Dr=+0.042 |Dr|max=0.375 Df=+0.035 g r=0.032 f=0.033 p=0.154 max=0.751 Ld=-0.0023 base=-0.00713 r1=0.00138 path=0.00344 Lg=+0.6993 lr_d=0.00425 88s
+PROBE staggered100  3500 Dr=+0.049 |Dr|max=0.651 Df=+0.044 g r=0.024 f=0.024 p=0.156 max=0.661 Ld=-0.0010 base=-0.00512 r1=0.000734 path=0.00335 Lg=+0.6977 lr_d=0.00425 89s
+TRAIN step=3500/7000 d=-0.0010 g=0.6977 train_seconds=70.9
+EVAL step=3500/7000 model=live modes=100/100 hq=0.9404 pass=False elapsed=89.2s
+EVAL step=3500/7000 model=ema modes=100/100 hq=0.9776 pass=False elapsed=89.8s
+PROBE staggered100  3550 Dr=-0.026 |Dr|max=0.304 Df=-0.030 g r=0.036 f=0.033 p=0.091 max=0.412 Ld=+0.0059 base=-0.000451 r1=0.0029 path=0.00347 Lg=+0.6977 lr_d=0.00425 91s
+PROBE staggered100  3600 Dr=-0.023 |Dr|max=0.498 Df=-0.040 g r=0.070 f=0.066 p=0.191 max=0.737 Ld=+0.0049 base=-0.00497 r1=0.00315 path=0.00669 cap=4.89e-06 Lg=+0.7074 lr_d=0.00425 92s
+PROBE staggered100  3650 Dr=+0.019 |Dr|max=0.535 Df=-0.003 g r=0.034 f=0.034 p=0.162 max=0.810 Ld=-0.0038 base=-0.00833 r1=0.000978 path=0.00353 Lg=+0.7119 lr_d=0.00425 93s
+PROBE staggered100  3700 Dr=+0.155 |Dr|max=0.468 Df=+0.150 g r=0.022 f=0.021 p=0.110 max=0.494 Ld=+0.0018 base=-0.00198 r1=0.000861 path=0.00296 Lg=+0.6992 lr_d=0.00425 94s
+PROBE staggered100  3750 Dr=-0.131 |Dr|max=0.494 Df=-0.131 g r=0.023 f=0.024 p=0.146 max=0.665 Ld=+0.0012 base=-0.00233 r1=0.000828 path=0.00266 Lg=+0.6984 lr_d=0.00425 95s
+TRAIN step=3750/7000 d=0.0012 g=0.6984 train_seconds=76.1
+EVAL step=3750/7000 model=live modes=100/100 hq=0.9539 pass=False elapsed=95.6s
+EVAL step=3750/7000 model=ema modes=100/100 hq=0.9761 pass=False elapsed=96.2s
+PROBE staggered100  3800 Dr=-0.086 |Dr|max=0.265 Df=-0.089 g r=0.033 f=0.032 p=0.119 max=0.569 Ld=+0.0048 base=-0.00298 r1=0.00298 path=0.00479 Lg=+0.6977 lr_d=0.00425 97s
+PROBE staggered100  3850 Dr=-0.010 |Dr|max=0.687 Df=-0.012 g r=0.039 f=0.039 p=0.204 max=0.876 Ld=+0.0044 base=5.4e-05 r1=0.00166 path=0.00273 Lg=+0.7104 lr_d=0.00425 98s
+PROBE staggered100  3900 Dr=+0.027 |Dr|max=0.447 Df=+0.021 g r=0.022 f=0.022 p=0.115 max=0.578 Ld=+0.0015 base=-0.00191 r1=0.000507 path=0.00286 Lg=+0.6995 lr_d=0.00425 99s
+PROBE staggered100  3950 Dr=-0.026 |Dr|max=0.345 Df=-0.040 g r=0.023 f=0.025 p=0.156 max=0.691 Ld=-0.0019 base=-0.00605 r1=0.000756 path=0.00339 Lg=+0.6979 lr_d=0.00425 100s
+PROBE staggered100  4000 Dr=-0.041 |Dr|max=0.848 Df=-0.043 g r=0.048 f=0.048 p=0.209 max=0.814 Ld=-0.0034 base=-0.00969 r1=0.00397 path=0.00234 Lg=+0.7218 lr_d=0.00425 101s
+TRAIN step=4000/7000 d=-0.0034 g=0.7218 train_seconds=81.4
+EVAL step=4000/7000 model=live modes=100/100 hq=0.9319 pass=False elapsed=102.0s
+EVAL step=4000/7000 model=ema modes=100/100 hq=0.9797 pass=False elapsed=102.6s
+PROBE staggered100  4050 Dr=-0.053 |Dr|max=0.904 Df=-0.063 g r=0.072 f=0.076 p=0.229 max=0.772 Ld=-0.0017 base=-0.00954 r1=0.0048 path=0.00302 Lg=+0.7265 lr_d=0.00425 104s
+PROBE staggered100  4100 Dr=+0.015 |Dr|max=0.310 Df=+0.011 g r=0.014 f=0.013 p=0.088 max=0.476 Ld=+0.0031 base=-0.000353 r1=0.00042 path=0.00303 Lg=+0.6940 lr_d=0.00425 105s
+PROBE staggered100  4150 Dr=+0.000 |Dr|max=0.167 Df=-0.001 g r=0.025 f=0.024 p=0.092 max=0.396 Ld=+0.0070 base=-0.000547 r1=0.000831 path=0.0067 Lg=+0.6946 lr_d=0.00425 106s
+PROBE staggered100  4200 Dr=+0.043 |Dr|max=0.497 Df=+0.034 g r=0.017 f=0.016 p=0.084 max=0.561 Ld=-0.0008 base=-0.00362 r1=0.000337 path=0.00248 Lg=+0.6959 lr_d=0.00425 107s
+PROBE staggered100  4250 Dr=-0.066 |Dr|max=0.180 Df=-0.068 g r=0.021 f=0.022 p=0.095 max=0.420 Ld=+0.0033 base=0.000638 r1=0.000666 path=0.00203 Lg=+0.6971 lr_d=0.00425 108s
+TRAIN step=4250/7000 d=0.0033 g=0.6971 train_seconds=86.4
+EVAL step=4250/7000 model=live modes=100/100 hq=0.9311 pass=False elapsed=108.3s
+EVAL step=4250/7000 model=ema modes=100/100 hq=0.9819 pass=False elapsed=108.9s
+PROBE staggered100  4300 Dr=-0.153 |Dr|max=1.865 Df=-0.161 g r=0.075 f=0.102 p=0.247 max=1.479 Ld=-0.0045 base=-0.0126 r1=0.00429 path=0.00381 cap=1.01e-05 Lg=+0.7411 lr_d=0.00425 110s
+PROBE staggered100  4350 Dr=+0.010 |Dr|max=0.287 Df=+0.004 g r=0.024 f=0.024 p=0.110 max=0.477 Ld=+0.0055 base=0.00117 r1=0.000933 path=0.00341 Lg=+0.6953 lr_d=0.00425 111s
+PROBE staggered100  4400 Dr=-0.023 |Dr|max=0.238 Df=-0.027 g r=0.033 f=0.037 p=0.247 max=0.757 Ld=-0.0003 base=-0.00406 r1=0.0011 path=0.0027 Lg=+0.6932 lr_d=0.00425 112s
+PROBE staggered100  4450 Dr=+0.043 |Dr|max=0.491 Df=+0.047 g r=0.028 f=0.029 p=0.110 max=0.595 Ld=+0.0056 base=0.00081 r1=0.000972 path=0.00378 Lg=+0.6987 lr_d=0.00425 113s
+PROBE staggered100  4500 Dr=+0.061 |Dr|max=0.532 Df=+0.053 g r=0.025 f=0.026 p=0.150 max=0.633 Ld=+0.0015 base=-0.00262 r1=0.00101 path=0.00315 Lg=+0.7080 lr_d=0.00425 114s
+TRAIN step=4500/7000 d=0.0015 g=0.7080 train_seconds=91.4
+EVAL step=4500/7000 model=live modes=100/100 hq=0.9415 pass=False elapsed=114.4s
+EVAL step=4500/7000 model=ema modes=100/100 hq=0.9789 pass=False elapsed=114.9s
+PROBE staggered100  4550 Dr=-0.087 |Dr|max=0.251 Df=-0.089 g r=0.031 f=0.031 p=0.086 max=0.383 Ld=+0.0105 base=0.00528 r1=0.00182 path=0.0034 Lg=+0.6972 lr_d=0.00425 116s
+PROBE staggered100  4600 Dr=-0.005 |Dr|max=0.644 Df=-0.011 g r=0.047 f=0.047 p=0.138 max=0.812 Ld=+0.0340 base=0.00351 r1=0.00569 path=0.0226 cap=0.00225 Lg=+0.7007 lr_d=0.00425 117s
+PROBE staggered100  4650 Dr=+0.013 |Dr|max=0.353 Df=+0.011 g r=0.021 f=0.021 p=0.131 max=0.473 Ld=+0.0074 base=0.00425 r1=0.000967 path=0.00221 Lg=+0.6965 lr_d=0.00425 118s
+PROBE staggered100  4700 Dr=-0.022 |Dr|max=0.416 Df=-0.026 g r=0.022 f=0.022 p=0.095 max=0.510 Ld=+0.0024 base=-0.000941 r1=0.000405 path=0.00291 Lg=+0.7010 lr_d=0.00425 119s
+PROBE staggered100  4750 Dr=-0.107 |Dr|max=0.250 Df=-0.107 g r=0.020 f=0.020 p=0.103 max=0.418 Ld=+0.0069 base=0.00289 r1=0.000569 path=0.00347 Lg=+0.6950 lr_d=0.00425 120s
+TRAIN step=4750/7000 d=0.0069 g=0.6950 train_seconds=96.4
+EVAL step=4750/7000 model=live modes=100/100 hq=0.9417 pass=False elapsed=120.7s
+EVAL step=4750/7000 model=ema modes=100/100 hq=0.9798 pass=False elapsed=121.2s
+PROBE staggered100  4800 Dr=-0.096 |Dr|max=0.320 Df=-0.097 g r=0.020 f=0.019 p=0.072 max=0.380 Ld=+0.0093 base=0.00602 r1=0.000988 path=0.00233 Lg=+0.6952 lr_d=0.00425 122s
+PROBE staggered100  4850 Dr=-0.092 |Dr|max=0.295 Df=-0.095 g r=0.037 f=0.038 p=0.110 max=0.574 Ld=+0.0165 base=0.00903 r1=0.00351 path=0.00394 Lg=+0.6939 lr_d=0.00425 123s
+PROBE staggered100  4900 Dr=-0.095 |Dr|max=0.485 Df=-0.104 g r=0.038 f=0.041 p=0.187 max=0.817 Ld=+0.0057 base=-0.000106 r1=0.00184 path=0.00393 Lg=+0.6980 lr_d=0.00425 124s
+PROBE staggered100  4950 Dr=-0.061 |Dr|max=0.166 Df=-0.061 g r=0.016 f=0.017 p=0.098 max=0.379 Ld=+0.0092 base=0.00567 r1=0.00042 path=0.00315 Lg=+0.6944 lr_d=0.00425 125s
+PROBE staggered100  5000 Dr=-0.130 |Dr|max=0.455 Df=-0.138 g r=0.032 f=0.032 p=0.119 max=0.588 Ld=+0.0058 base=-0.000299 r1=0.00248 path=0.0036 Lg=+0.6995 lr_d=0.00425 126s
+TRAIN step=5000/7000 d=0.0058 g=0.6995 train_seconds=101.4
+EVAL step=5000/7000 model=live modes=100/100 hq=0.9417 pass=False elapsed=127.0s
+EVAL step=5000/7000 model=ema modes=100/100 hq=0.9823 pass=False elapsed=127.5s
+PROBE staggered100  5050 Dr=-0.072 |Dr|max=0.289 Df=-0.075 g r=0.021 f=0.022 p=0.125 max=0.494 Ld=+0.0037 base=-0.000116 r1=0.000873 path=0.00293 Lg=+0.6954 lr_d=0.00425 128s
+PROBE staggered100  5100 Dr=-0.006 |Dr|max=0.458 Df=-0.009 g r=0.023 f=0.023 p=0.099 max=0.471 Ld=+0.0043 base=-0.00256 r1=0.000635 path=0.0062 Lg=+0.7017 lr_d=0.00425 130s
+PROBE staggered100  5150 Dr=+0.030 |Dr|max=0.255 Df=+0.024 g r=0.077 f=0.079 p=0.184 max=0.940 Ld=+0.0103 base=-0.000938 r1=0.009 path=0.00226 Lg=+0.6975 lr_d=0.00425 131s
+PROBE staggered100  5200 Dr=-0.030 |Dr|max=0.404 Df=-0.033 g r=0.040 f=0.038 p=0.142 max=0.775 Ld=+0.0089 base=0.000464 r1=0.00227 path=0.00615 Lg=+0.6998 lr_d=0.00425 131s
+PROBE staggered100  5250 Dr=+0.064 |Dr|max=0.664 Df=+0.060 g r=0.032 f=0.032 p=0.137 max=0.651 Ld=+0.0154 base=0.01 r1=0.00248 path=0.0029 cap=7.94e-08 Lg=+0.7088 lr_d=0.00425 133s
+TRAIN step=5250/7000 d=0.0154 g=0.7088 train_seconds=106.6
+EVAL step=5250/7000 model=live modes=100/100 hq=0.9039 pass=False elapsed=133.3s
+EVAL step=5250/7000 model=ema modes=100/100 hq=0.9833 pass=False elapsed=133.6s
+PROBE staggered100  5300 Dr=-0.009 |Dr|max=0.742 Df=-0.006 g r=0.025 f=0.026 p=0.136 max=0.651 Ld=+0.0075 base=-0.000137 r1=0.000983 path=0.0067 Lg=+0.7060 lr_d=0.00425 135s
+PROBE staggered100  5350 Dr=+0.032 |Dr|max=0.380 Df=+0.032 g r=0.023 f=0.023 p=0.114 max=0.445 Ld=-0.0008 base=-0.00383 r1=0.000664 path=0.00238 Lg=+0.6994 lr_d=0.00425 136s
+PROBE staggered100  5400 Dr=-0.085 |Dr|max=0.195 Df=-0.088 g r=0.020 f=0.021 p=0.080 max=0.411 Ld=+0.0047 base=-0.00137 r1=0.000819 path=0.00523 Lg=+0.6918 lr_d=0.00425 137s
+PROBE staggered100  5450 Dr=+0.009 |Dr|max=0.421 Df=+0.003 g r=0.025 f=0.025 p=0.098 max=0.465 Ld=+0.0049 base=-0.000481 r1=0.00181 path=0.00359 Lg=+0.7027 lr_d=0.00425 138s
+PROBE staggered100  5500 Dr=-0.035 |Dr|max=0.255 Df=-0.039 g r=0.025 f=0.025 p=0.081 max=0.354 Ld=+0.0085 base=0.00271 r1=0.00111 path=0.00464 Lg=+0.6969 lr_d=0.00425 139s
+TRAIN step=5500/7000 d=0.0085 g=0.6969 train_seconds=112.0
+EVAL step=5500/7000 model=live modes=100/100 hq=0.9365 pass=False elapsed=140.0s
+EVAL step=5500/7000 model=ema modes=100/100 hq=0.9831 pass=False elapsed=140.5s
+PROBE staggered100  5550 Dr=-0.129 |Dr|max=0.181 Df=-0.129 g r=0.017 f=0.018 p=0.041 max=0.212 Ld=+0.0226 base=0.0131 r1=0.00466 path=0.00482 Lg=+0.6936 lr_d=0.00425 142s
+PROBE staggered100  5600 Dr=-0.106 |Dr|max=0.296 Df=-0.110 g r=0.016 f=0.016 p=0.083 max=0.396 Ld=+0.0033 base=-0.0018 r1=0.000618 path=0.00449 Lg=+0.6947 lr_d=0.00425 143s
+PROBE staggered100  5650 Dr=-0.033 |Dr|max=0.321 Df=-0.033 g r=0.019 f=0.020 p=0.106 max=0.477 Ld=+0.0015 base=-0.00438 r1=0.000515 path=0.00536 Lg=+0.6953 lr_d=0.00425 143s
+PROBE staggered100  5700 Dr=-0.060 |Dr|max=0.420 Df=-0.059 g r=0.024 f=0.024 p=0.152 max=0.640 Ld=-0.0036 base=-0.00747 r1=0.000653 path=0.00319 Lg=+0.7032 lr_d=0.00425 144s
+PROBE staggered100  5750 Dr=-0.098 |Dr|max=0.356 Df=-0.096 g r=0.027 f=0.029 p=0.161 max=0.686 Ld=+0.0110 base=-0.00244 r1=0.00165 path=0.0118 Lg=+0.6955 lr_d=0.00425 146s
+TRAIN step=5750/7000 d=0.0110 g=0.6955 train_seconds=117.0
+EVAL step=5750/7000 model=live modes=100/100 hq=0.9262 pass=False elapsed=146.2s
+EVAL step=5750/7000 model=ema modes=100/100 hq=0.9819 pass=False elapsed=146.8s
+PROBE staggered100  5800 Dr=-0.027 |Dr|max=0.380 Df=-0.025 g r=0.041 f=0.041 p=0.089 max=0.379 Ld=+0.0080 base=0.00386 r1=0.00116 path=0.00299 Lg=+0.6958 lr_d=0.00425 148s
+PROBE staggered100  5850 Dr=+0.027 |Dr|max=0.284 Df=+0.023 g r=0.023 f=0.023 p=0.087 max=0.489 Ld=+0.0038 base=-0.000648 r1=0.00173 path=0.00274 Lg=+0.6926 lr_d=0.00425 149s
+PROBE staggered100  5900 Dr=+0.029 |Dr|max=0.314 Df=-0.029 g r=0.119 f=0.379 p=0.349 max=1.001 Ld=+0.0009 base=-0.0135 r1=0.00744 path=0.00696 Lg=+0.7171 lr_d=0.00425 150s
+PROBE staggered100  5950 Dr=+0.162 |Dr|max=1.224 Df=+0.155 g r=0.097 f=0.101 p=0.248 max=1.013 Ld=+0.0025 base=-0.0054 r1=0.00388 path=0.00399 cap=2.36e-05 Lg=+0.7497 lr_d=0.00425 151s
+PROBE staggered100  6000 Dr=-0.007 |Dr|max=0.243 Df=-0.011 g r=0.036 f=0.036 p=0.126 max=0.449 Ld=+0.0059 base=4.93e-05 r1=0.0037 path=0.00211 Lg=+0.6945 lr_d=0.00425 152s
+TRAIN step=6000/7000 d=0.0059 g=0.6945 train_seconds=121.9
+EVAL step=6000/7000 model=live modes=100/100 hq=0.9384 pass=False elapsed=152.3s
+EVAL step=6000/7000 model=ema modes=100/100 hq=0.9843 pass=False elapsed=152.9s
+PROBE staggered100  6050 Dr=-0.124 |Dr|max=0.377 Df=-0.128 g r=0.028 f=0.026 p=0.124 max=0.424 Ld=+0.0154 base=0.00949 r1=0.00122 path=0.00467 Lg=+0.6966 lr_d=0.00425 154s
+PROBE staggered100  6100 Dr=-0.022 |Dr|max=0.137 Df=-0.022 g r=0.012 f=0.011 p=0.066 max=0.258 Ld=+0.0037 base=0.00163 r1=0.000216 path=0.00187 Lg=+0.6937 lr_d=0.00425 155s
+PROBE staggered100  6150 Dr=-0.009 |Dr|max=0.260 Df=-0.012 g r=0.022 f=0.026 p=0.085 max=0.373 Ld=+0.0124 base=0.00281 r1=0.00114 path=0.00843 Lg=+0.7015 lr_d=0.00425 156s
+PROBE staggered100  6200 Dr=+0.083 |Dr|max=0.485 Df=+0.091 g r=0.025 f=0.027 p=0.133 max=0.574 Ld=+0.0015 base=-0.003 r1=0.000816 path=0.00373 Lg=+0.6999 lr_d=0.00425 157s
+PROBE staggered100  6250 Dr=-0.181 |Dr|max=0.419 Df=-0.182 g r=0.028 f=0.029 p=0.121 max=0.465 Ld=+0.0074 base=0.00354 r1=0.00097 path=0.00293 Lg=+0.6943 lr_d=0.00425 158s
+TRAIN step=6250/7000 d=0.0074 g=0.6943 train_seconds=127.1
+EVAL step=6250/7000 model=live modes=100/100 hq=0.9394 pass=False elapsed=158.7s
+EVAL step=6250/7000 model=ema modes=100/100 hq=0.9791 pass=False elapsed=159.3s
+PROBE staggered100  6300 Dr=+0.034 |Dr|max=0.171 Df=+0.033 g r=0.020 f=0.020 p=0.048 max=0.217 Ld=+0.0090 base=0.00511 r1=0.00215 path=0.00175 Lg=+0.6953 lr_d=0.00425 160s
+PROBE staggered100  6350 Dr=-0.157 |Dr|max=0.317 Df=-0.158 g r=0.016 f=0.016 p=0.071 max=0.284 Ld=+0.0075 base=0.0042 r1=0.000689 path=0.00259 Lg=+0.6954 lr_d=0.00425 161s
+PROBE staggered100  6400 Dr=-0.079 |Dr|max=0.254 Df=-0.080 g r=0.041 f=0.040 p=0.114 max=0.398 Ld=+0.0107 base=0.00251 r1=0.00368 path=0.0045 Lg=+0.6985 lr_d=0.00425 162s
+PROBE staggered100  6450 Dr=-0.113 |Dr|max=0.259 Df=-0.115 g r=0.018 f=0.019 p=0.057 max=0.246 Ld=+0.0236 base=0.0185 r1=0.00204 path=0.00302 Lg=+0.6939 lr_d=0.00425 163s
+PROBE staggered100  6500 Dr=-0.039 |Dr|max=0.194 Df=-0.041 g r=0.015 f=0.016 p=0.080 max=0.355 Ld=+0.0054 base=0.00204 r1=0.000412 path=0.00298 Lg=+0.6955 lr_d=0.00425 164s
+TRAIN step=6500/7000 d=0.0054 g=0.6955 train_seconds=132.3
+EVAL step=6500/7000 model=live modes=100/100 hq=0.9283 pass=False elapsed=165.0s
+EVAL step=6500/7000 model=ema modes=100/100 hq=0.9850 pass=False elapsed=165.6s
+PROBE staggered100  6550 Dr=-0.045 |Dr|max=0.121 Df=-0.044 g r=0.011 f=0.011 p=0.053 max=0.253 Ld=+0.0065 base=0.000999 r1=0.000468 path=0.00505 Lg=+0.6937 lr_d=0.00425 167s
+PROBE staggered100  6600 Dr=-0.090 |Dr|max=0.217 Df=-0.094 g r=0.018 f=0.017 p=0.069 max=0.312 Ld=+0.0056 base=0.00288 r1=0.000792 path=0.0019 Lg=+0.6958 lr_d=0.00425 168s
+PROBE staggered100  6650 Dr=-0.017 |Dr|max=0.140 Df=-0.019 g r=0.018 f=0.018 p=0.082 max=0.469 Ld=+0.0053 base=0.000398 r1=0.000563 path=0.00437 Lg=+0.6949 lr_d=0.00425 169s
+PROBE staggered100  6700 Dr=-0.074 |Dr|max=0.245 Df=-0.075 g r=0.020 f=0.019 p=0.099 max=0.411 Ld=+0.0050 base=-0.000206 r1=0.000565 path=0.00465 Lg=+0.6946 lr_d=0.00425 170s
+PROBE staggered100  6750 Dr=+0.008 |Dr|max=0.156 Df=+0.005 g r=0.016 f=0.017 p=0.088 max=0.315 Ld=+0.0046 base=0.00138 r1=0.000539 path=0.00268 Lg=+0.6944 lr_d=0.00425 171s
+TRAIN step=6750/7000 d=0.0046 g=0.6944 train_seconds=137.5
+EVAL step=6750/7000 model=live modes=100/100 hq=0.9336 pass=False elapsed=171.4s
+EVAL step=6750/7000 model=ema modes=100/100 hq=0.9810 pass=False elapsed=171.9s
+PROBE staggered100  6800 Dr=-0.065 |Dr|max=0.198 Df=-0.065 g r=0.016 f=0.016 p=0.058 max=0.287 Ld=+0.0236 base=0.0059 r1=0.000745 path=0.0169 Lg=+0.6928 lr_d=0.00425 173s
+PROBE staggered100  6850 Dr=-0.035 |Dr|max=0.110 Df=-0.034 g r=0.013 f=0.013 p=0.070 max=0.280 Ld=+0.0079 base=0.00121 r1=0.000237 path=0.00646 Lg=+0.6930 lr_d=0.00425 174s
+PROBE staggered100  6900 Dr=+0.022 |Dr|max=0.780 Df=+0.014 g r=0.061 f=0.062 p=0.174 max=0.725 Ld=+0.0004 base=-0.00709 r1=0.00319 path=0.00433 Lg=+0.7244 lr_d=0.00425 175s
+PROBE staggered100  6950 Dr=-0.111 |Dr|max=0.817 Df=-0.121 g r=0.051 f=0.059 p=0.154 max=0.644 Ld=+0.0116 base=-0.00596 r1=0.0126 path=0.0049 Lg=+0.7236 lr_d=0.00425 176s
+PROBE staggered100  7000 Dr=-0.090 |Dr|max=0.149 Df=-0.090 g r=0.013 f=0.013 p=0.070 max=0.232 Ld=+0.0063 base=6.6e-05 r1=0.000312 path=0.00594 Lg=+0.6948 lr_d=0.00425 177s
+TRAIN step=7000/7000 d=0.0063 g=0.6948 train_seconds=142.3
+EVAL step=7000/7000 model=live modes=100/100 hq=0.9443 pass=False elapsed=177.3s
+EVAL step=7000/7000 model=ema modes=100/100 hq=0.9826 pass=False elapsed=177.7s
+COMPLETE problem=staggered100 steps=7000 live_modes=100/100 live_hq=0.9443 stable_pass=None total_seconds=179.6
+{"event": "problem_complete", "problem": "staggered100", "status": "complete", "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/staggered100"}
+{"event": "gate", "status": "FAIL", "passed": 0, "required": 3, "leaderboard": "/home/martyn/dev/ParticleGAN/.claude/worktrees/simple-critic/reports/simple-critic/toy100/runs/sec_nodamp/bench/leaderboard.md"}
+{"event": "accuracy_gate", "status": "FAIL", "passed": 0, "required": 3}
+DONE sec_nodamp exit=1 gate=FAIL accuracy=FAIL 503s
