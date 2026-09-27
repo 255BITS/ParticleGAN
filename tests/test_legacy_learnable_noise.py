@@ -6,46 +6,7 @@ import pytest
 import torch
 from torch import nn
 
-from benchmarks.locked_shared.hosts import (
-    unused_token_hold,
-)
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_output
-
-
-def _run(host, policy, monkeypatch):
-    if host == "unused_token_hold":
-        return unused_token_hold.train(
-            unused_token_hold.UnusedHoldRecipe(steps=2), noise_policy=policy,
-        )
-    raise AssertionError(host)
-
-
-@pytest.mark.parametrize("host", (
-    "unused_token_hold",
-))
-def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
-    host, monkeypatch,
-):
-    policy = NoisePolicy(
-        0.029, 0.5, 0.5, 2, output_noise_learnable=True,
-    )
-    _run(host, policy, monkeypatch)
-    receipt = policy.receipt()
-    assert receipt["output_noise_learnable"] is True
-    assert receipt["output_scale_parameter_count"] == 1
-    assert receipt["output_scale_optimizer_owned"] is True
-    assert receipt["generator_base_parameters"] > 0
-    assert (receipt["generator_total_parameters"]
-            == receipt["generator_base_parameters"] + 1)
-    assert receipt["step_calls"] == 2
-    assert len(receipt["output_sigma_effective_step_trace"]) == 2
-    assert receipt["output_train_elements"] > 0
-    assert receipt["input_train_elements"] > 0
-    assert math.isfinite(receipt["output_scale_final"])
-    assert receipt["output_scale_final"] > 0
-    assert math.isclose(receipt["output_sigma_effective_final_evaluation"],
-                        receipt["output_scale_final"], rel_tol=1e-7)
-    assert not math.isclose(receipt["output_scale_final"], 0.029, abs_tol=1e-8)
 
 
 def test_scalar_gradient_belongs_to_generator_only_and_eval_preserves_rng():
@@ -109,25 +70,3 @@ def test_learnable_scalar_multiplies_the_shared_warmup_without_rng_at_zero():
 def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
     with pytest.raises(ValueError, match="output_noise_learnable"):
         NoisePolicy(std, 0.5, 0.5, 2, output_noise_learnable=learnable)
-
-
-@pytest.mark.parametrize("host", (
-    "unused_token_hold",
-))
-def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rng(
-    host, monkeypatch,
-):
-    control = NoisePolicy(0.0, 0.5, 0.5, 2)
-    _run(host, control, monkeypatch)
-    control_global = torch.random.get_rng_state().clone()
-
-    isolated = NoisePolicy(0.029, 0.5, 0.5, 2,
-                           output_noise_rng="isolated")
-    _run(host, isolated, monkeypatch)
-    receipt = isolated.receipt()
-    assert torch.equal(control_global, torch.random.get_rng_state())
-    assert receipt["step_calls"] == 2
-    assert receipt["output_train_elements"] > 0
-    assert receipt["input_train_elements"] > 0
-    assert receipt["output_noise_training_stream_isolated"] is True
-    assert receipt["output_noise_eval_state_preserved"] is True

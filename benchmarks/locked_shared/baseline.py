@@ -158,8 +158,6 @@ def run_toy(toy, cfg, *, noise_policy=None):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
     with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
-        for module in (unused_token_hold,):
-            stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
         if toy == "two_pole":
             # Problem-only toy on the shared runner (as mode_hold): only the
             # problem's own particle_l2 pull follows the candidate.
@@ -204,9 +202,10 @@ def run_toy(toy, cfg, *, noise_policy=None):
                 raise ValueError("cover_leftover takes its noise from its recipe (benchmarks.toy_runner)")
             raw = cover_leftover.train_cover_leftover()
         elif toy == "unused_token_hold":
-            options = {k: v for k, v in knobs.items() if k in unused_token_hold.UnusedHoldRecipe.__dataclass_fields__}
-            raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options),
-                                          noise_policy=noise_policy)
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("unused_token_hold takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = unused_token_hold.train_unused_token_hold()
         elif toy == "mid_scale_identity":
             # Problem-only toy on the shared runner (like mode_hold): candidate
             # knobs, LR multipliers and noise policies do not apply.
