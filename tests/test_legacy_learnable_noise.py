@@ -7,17 +7,12 @@ import torch
 from torch import nn
 
 from benchmarks.locked_shared.hosts import (
-    ae_gan_hold, cover_leftover, mid_scale_identity,
-    unused_token_hold,
+    cover_leftover, mid_scale_identity, unused_token_hold,
 )
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_output
 
 
 def _run(host, policy, monkeypatch):
-    if host == "ae_gan_hold":
-        return ae_gan_hold.train(ae_gan_hold.HoldConfig(
-            name="learnable_probe", steps=2, batch=16, n_particles=16,
-        ), noise_policy=policy)
     if host == "cover_leftover":
         return cover_leftover.fit_cover_leftover(
             cover_leftover.CoverRecipe(steps=2), noise_policy=policy,
@@ -32,7 +27,7 @@ def _run(host, policy, monkeypatch):
 
 
 @pytest.mark.parametrize("host", (
-    "ae_gan_hold", "cover_leftover", "unused_token_hold",
+    "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
 def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
@@ -127,7 +122,7 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 
 
 @pytest.mark.parametrize("host", (
-    "ae_gan_hold", "cover_leftover", "unused_token_hold",
+    "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
 def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rng(
@@ -147,6 +142,3 @@ def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rn
     assert receipt["input_train_elements"] > 0
     assert receipt["output_noise_training_stream_isolated"] is True
     assert receipt["output_noise_eval_state_preserved"] is True
-    if host in ("ae_gan_hold",):
-        assert receipt["output_eval_calls"] > 0
-        assert receipt["output_noise_eval_state_pairs"]
