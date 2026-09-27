@@ -299,7 +299,8 @@ use unique sampled rows. There is no particle L2 term.
   weights and returns clean samples: the recipe's output noise is a training
   regularizer, so evaluate without it. `output_noise=True` adds the current
   training output noise, drawn from the sampling stream. Its separate RNG and
-  temporary evaluation mode preserve training randomness and module modes. EMA averages G/prior parameters and copies their buffers, including
+  temporary evaluation mode preserve training randomness and module modes.
+  EMA averages G/prior parameters and copies their buffers, including
   integer counters. EMA never determines a live leaderboard pass.
 - `state_dict()` includes G, D, prior, EMA, optimizers, initial learning rates,
   update count and RNG states. `load_state_dict(state)` restores them, including

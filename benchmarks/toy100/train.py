@@ -285,16 +285,17 @@ class IsolatedNoiseGANTrainer(GANTrainer):
     """Preserve private training noise across direct public-style sampling."""
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None, output_noise_eval_seed=None):
+    def sample(self, n, *, ema=False, generator=None, output_noise=False,
+               output_noise_eval_seed=None):
         model = self.ema_G if ema else self.G
         if model._output_rng_scope_active:
             # The caller already paired live/EMA output noise, as in holdout.
-            return super().sample(n, ema=ema, generator=generator)
+            return super().sample(n, ema=ema, generator=generator, output_noise=output_noise)
         if output_noise_eval_seed is None:
             stream = self.eval_generator if generator is None else self._stream(generator, 0)
             output_noise_eval_seed = _noise_state_seed(stream)
         with paired_output_noise((self.G, self.ema_G), seed=output_noise_eval_seed):
-            return super().sample(n, ema=ema, generator=generator)
+            return super().sample(n, ema=ema, generator=generator, output_noise=output_noise)
 
     def load_state_dict(self, state):
         # GANTrainer checks tensor shape/dtype before mutating state, but it

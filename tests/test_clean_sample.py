@@ -142,3 +142,13 @@ def test_toy100_sample_clean_and_holdout_skip_training_noise(tmp_path):
             resolved["seed"] + accuracy_evidence.HOLDOUT_SEED_OFFSETS["latent"])
         expected = trainer.sample(accuracy_evidence.HOLDOUT_N, generator=latent)
     assert np.array_equal(saved["live"], expected.numpy())
+
+
+def test_toy100_isolated_trainer_accepts_the_output_noise_flag():
+    resolved, recipe = resolve_config(_toy_config(output_noise_rng="isolated"))
+    trainer = make_trainer(resolved, recipe)
+    seed = lambda: torch.Generator().manual_seed(9)
+    assert torch.equal(trainer.sample(8, generator=seed()),
+                       trainer.sample(8, generator=seed(), output_noise=True))
+    with pytest.raises(ValueError, match="boolean"):
+        trainer.sample(8, output_noise="yes")
