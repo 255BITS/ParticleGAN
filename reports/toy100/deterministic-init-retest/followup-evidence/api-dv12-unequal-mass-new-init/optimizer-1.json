@@ -1,0 +1,510 @@
+{
+  "G": [
+    {
+      "shape": [
+        64,
+        4
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            64,
+            4
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "b2d340e455c5afb8dc3c1675824c5d7f04fa872bc588ec1c7913c8756a9d2363"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64,
+            4
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "bbe92f546c4f9011ce19e69d17b1e5bb31e12322e21f593c8d29dff084461f23"
+        }
+      }
+    },
+    {
+      "shape": [
+        64
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "4a233af4c928ea25a28d95a8ca117597e18f3300947abfa10ed30a9e8ce8931a"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "fbffaac437f52274e7ab1ec2e8b4eebf0e4de4e99218e88b11a07ae92aefe9ee"
+        }
+      }
+    },
+    {
+      "shape": [
+        64,
+        64
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            64,
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "40f7404134f34757e0f9aabf5e584aaa0287e30db6bc6e4f2e7ccb717060403d"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64,
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "876633f32f19cfda50d602009dc747b3f321c8a6b7a262655b436861c2af3b91"
+        }
+      }
+    },
+    {
+      "shape": [
+        64
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "71a719ed00ad63171f5aee18a8ad595619a334ef2381a8b592dc1ab5342e79bd"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "4d1e90b64c3fabb4f026613d8a6e558bc1848f967fab1c07efc9eeeff49656d6"
+        }
+      }
+    },
+    {
+      "shape": [
+        2,
+        64
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            2,
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "9fea0ed96927264de0461b6c105fe12a375d30e99b69a507c6b469bf16807370"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2,
+            64
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "929201387619b26b8ee3bcd94a8193775ea9986b9d0e48b70097f58eea6257f9"
+        }
+      }
+    },
+    {
+      "shape": [
+        2
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            2
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "3b1880c17592af7fd3080e942e46d0965bc820d0fd3cf7d36b7f0b511ab368de"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "989f1319e7f005d3db3319c2b535bd98d9bbdcc59050690edc98694435745679"
+        }
+      }
+    },
+    {
+      "shape": [
+        256,
+        4
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            256,
+            4
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "7541d4eb404568ef62033945fdacf80c915ccf72b1fcba312006f7f0fea1edef"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            256,
+            4
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "38e3daf239f8dcb0a4ced221606fc1bd48375e2d8528a9895eeb5ffd23522e80"
+        }
+      }
+    }
+  ],
+  "D": [
+    {
+      "shape": [
+        96,
+        2
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            96,
+            2
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "79878a4e97ec3a26e0d7bdec9f21cb48a9b67c77464937b58042d417c685b4b6"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            96,
+            2
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "b2cfecef4cbab17e7225a99a2a570378883b815b58876446b151d0280d518b5c"
+        }
+      }
+    },
+    {
+      "shape": [
+        96
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "96044c8460331c748fb62b19b578dcd99dc1c7db48a94bbf2bcf24d2fdc172d9"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "9abdb656b7e96a7c6e8970f9727becf3aeebe125517067c9c8fee411b804bbbb"
+        }
+      }
+    },
+    {
+      "shape": [
+        96,
+        96
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            96,
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "851d3235bdbead3fb249595cec9f0fb402e04742939e77fcb8ca416bcbbe776f"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            96,
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "1bc12660310fe54ab84338ceb979404ccbc14ae61788fb13094ab53302625991"
+        }
+      }
+    },
+    {
+      "shape": [
+        96
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "c06fca9b1cc65b6ccb5fa8fd7ed11cc4b103bf6fb35e0e15917df0432db7c315"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "2817fc139779f7723d942c3a0e2bf384e7fef6918b4b3e56efc062dbcc4be3c6"
+        }
+      }
+    },
+    {
+      "shape": [
+        96,
+        96
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            96,
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "2f60a2ffe4c425c107911030efce5d0ff7d985d35a1b0880b326fb790140153f"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            96,
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "93bae29b78e188385e111808805121db42fd05738b5e3355e2b3fb33aca3d55d"
+        }
+      }
+    },
+    {
+      "shape": [
+        96
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "a077d83925ca30f3660405679da7c4277c0379a1076147db52a9e5996f19c00f"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            96
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "708691212420b755e371b2df077cdc227831e6f23a790198d0e943d702908cda"
+        }
+      }
+    },
+    {
+      "shape": [
+        1,
+        100
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            1,
+            100
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "ac7423aa242a60e19744dfb83ef5d05fbd0fd13ad41746e4ff7c919d652972f5"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            1,
+            100
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "6b3b7e81a8bde7f135a1243eb5eb4b58a7b95eee20944491f55887d50911e0d9"
+        }
+      }
+    },
+    {
+      "shape": [
+        1
+      ],
+      "step": 1.0,
+      "step_device": "cpu",
+      "parameter_device": "cuda:0",
+      "state": {
+        "step": {
+          "shape": [],
+          "device": "cpu",
+          "dtype": "torch.float32",
+          "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+        },
+        "exp_avg": {
+          "shape": [
+            1
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            1
+          ],
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+        }
+      }
+    }
+  ]
+}

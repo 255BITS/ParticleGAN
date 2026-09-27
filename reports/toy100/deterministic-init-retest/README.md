@@ -15,8 +15,11 @@ sources and initialization. Neither PR is being merged into develop here.
 
 **DV12 is the first new-initialization screen survivor:** it reaches all eight
 modes at update650 and passes all12 observations from there through update1200.
-Its exact adaptive-rate package is now being tested on the unequal-mass target
-that previously rejected it. This is a lead to investigate, not a release winner.
+Its exact adaptive-rate package then failed the unequal-mass target that previously
+rejected it: zero of24 passing observations, covariance error .8793 above the .85
+limit, and minimum mass ratio .2319 below .25. See the [follow-up audit](dv12-vector-runtime-audit.json).
+It is not a release winner. No matching old tiny-screen measurement exists for
+DV12, so its new tiny-screen pass is not labeled an old-fail-to-new-pass change.
 
 The three public controls have completed the new-initialization screen.
 K3P and default KA2 both finish with 6/8 modes; constant-rate KA2 finishes with
