@@ -1,0 +1,7 @@
+# heavy benchmark evidence (regenerable with run.sh); summaries, gates, leaderboards and probes stay
+*.npz
+source.tar.gz
+snapshots/
+quality_checks/
+__pycache__/
+events.jsonl
