@@ -1,0 +1,64 @@
+{
+  "candidate": "public-ka2-constant-new-init",
+  "gate": "deterministic_mode_hold",
+  "status": "FAIL",
+  "seconds": 18.49607746116817,
+  "metrics": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "modes",
+          "value": 4,
+          "op": ">=",
+          "threshold": 8,
+          "status": "FAIL",
+          "margin": -4
+        },
+        {
+          "metric": "hq",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.9,
+          "status": "PASS",
+          "margin": 0.09999999999999998
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.25,
+      "confirmation_fraction": 2.0
+    },
+    "final": {
+      "step": 1200,
+      "modes": 4,
+      "n_modes": 8,
+      "hq": 1.0,
+      "cover": 0.5,
+      "effective_modes": 3.798346757888794,
+      "ema": {
+        "modes": 4,
+        "n_modes": 8,
+        "hq": 0.657470703125,
+        "cover": 0.5,
+        "effective_modes": 3.404873847961426
+      },
+      "seconds": 18.476316072046757
+    },
+    "updates": 1200,
+    "matched_batch_receipts": 1200
+  },
+  "old_quality_inherited": false
+}

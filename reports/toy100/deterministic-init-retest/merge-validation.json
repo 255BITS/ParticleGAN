@@ -7,5 +7,11 @@
     "passed": 60,
     "seconds": 172.9
   },
-  "api_merge": "PENDING_FINAL_REVIEW"
+  "api_merge": "25751c0864dd8259b00c5804f600cd41cce6e4cf",
+  "api_validation": {
+    "cpu_passed": 246,
+    "cpu_skipped": 1,
+    "review": "merge-validation/ka2-develop-merge-review.json",
+    "note": "An earlier unmasked test invocation ran the existing CUDA unit test; authoritative reported suite was rerun explicitly CPU-only. No benchmark experiment was launched by this merge audit."
+  }
 }

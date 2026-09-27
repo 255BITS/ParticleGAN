@@ -1,0 +1,46 @@
+{
+  "status": "NO_SOURCE_LAUNCH_BLOCKER_FOR_PUBLIC_THREE_CONTROLS",
+  "seal_sha256": "15ad9cf18d5fd0387d1f724bbd3ceec45f2474858d51fded318f3fa43f6ddc76",
+  "sealed_files": 15,
+  "controls": [
+    {
+      "candidate": "public-k3p-new-init",
+      "package_files": 22,
+      "all_package_bytes_match_declared_commit": true,
+      "CPU_zero_step_PASS_no_CUDA": true,
+      "cpu_receipt_sha256": "3d3420fccbc6a7023f3308a36816b14c5f35b51e478f31954dd91c04b9c65f0f",
+      "declaration_sha256": "bde5a6729f9ef51631ffd024216d8d9f619e5b55ebf5b11374d1da2f49bde799"
+    },
+    {
+      "candidate": "public-ka2-new-init",
+      "package_files": 23,
+      "all_package_bytes_match_declared_commit": true,
+      "CPU_zero_step_PASS_no_CUDA": true,
+      "cpu_receipt_sha256": "fd00de226d9448e1e63cb2a2bfa53a4950dd2a4fb06d5385e5bf1189581e7521",
+      "declaration_sha256": "b7f9df21c3a4a7094cd3d869db3a130c72966b3e7eb47a243d9194cd8eb8b2b6"
+    },
+    {
+      "candidate": "public-ka2-constant-new-init",
+      "package_files": 23,
+      "all_package_bytes_match_declared_commit": true,
+      "CPU_zero_step_PASS_no_CUDA": true,
+      "cpu_receipt_sha256": "d7b0a55f703945f9149cf01279ef1d67c0aeef49248cef2716873df2f3c07836",
+      "declaration_sha256": "757a1c6fbed4e1a987c02256ebb5b67e54cfc1c67741879cf1ffb143f993ac9a"
+    }
+  ],
+  "verified": [
+    "exact frozen host AST extraction and existing numerical scorer",
+    "full1200 shared-stream dry oracle check before any optimizer update; accepted cursor checked after every public step",
+    "full-step serial scope restores caller execution/default device",
+    "old Gaussian constructor draws retained; actual public initializer replaces weights and prior without additional RNG",
+    "live primary,24 observations,eight modes/HQ.9/final5 suffix;4096 draw and frozen evaluation streams",
+    "dense public G/D/prior parameters receive native lazy Adam state; all scalar countersCPU with CUDA moments; no state injection",
+    "public step returns only scalar loss fields plus excluded penalty_stats; logging is serializable",
+    "fresh package import pinned to sealed root; all complete package sources archived"
+  ],
+  "remaining_runtime_guards": [
+    "actual CUDA constructor/sampling parity and device counters require execution; CPU receipts do not establish quality"
+  ],
+  "comparison_caveat": "public-ka2-constant retains its declared historical4600 horizon with360/720 noise windows; decayed public controls use1200 horizon and120/240 noise windows. It is a declared-policy comparison, not a LR-only ablation.",
+  "source_review_no_execution_by_auditor": true
+}

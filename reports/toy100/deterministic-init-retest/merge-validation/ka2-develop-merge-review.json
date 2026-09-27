@@ -1,0 +1,46 @@
+{
+  "worktree": "/ml2/hypergan/ParticleGAN-ka2-default",
+  "branch": "codex/ka2-default-candidate",
+  "head": "fa511ce010120b502f494d717d01b14b8551eed8",
+  "merge_head": "c720645ecae6b648e9fc6034e9d6b48ccff06ed3",
+  "state": "all conflicts resolved and staged; merge uncommitted",
+  "resolved_conflicts": [
+    "CHANGELOG.md",
+    "README.md",
+    "benchmarks/legacy/recipe.py",
+    "examples/100gaussians.py",
+    "particlegan/training.py"
+  ],
+  "additional_resolution_doc": "docs/api.md",
+  "contracts": [
+    "KA2 mechanics and schema4 unchanged; schema1\u20133 rejected",
+    "Compatible schema4 recipe lacking initialization restores saved weights/metadata as None",
+    "Public fresh initialization batch_feature_zero; initialization=None preserves caller/pretrained parameters and supplied EMA",
+    "Legacy K3P name/fixed reg_anchor_decay preserved; initialization=None and neutral field omitted from historical serialization",
+    "Exactly one example optimizer factory before generator/prior EMA copies",
+    "Historical research and random-init results kept separate from merged candidate qualification"
+  ],
+  "cpu_verification": [
+    {
+      "group": "core",
+      "junit": "/tmp/ka2-develop-merge-core-tests.xml",
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "group": "integration",
+      "junit": "/tmp/ka2-develop-merge-integration-tests.xml",
+      "tests": 165,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "tests_added": false,
+  "test_coverage_note": "Existing initialization tests already cover missing-field resume, preservation, RNG neutrality and EMA synchronization; existing training tests cover old-schema rejection and full checkpoints.",
+  "execution_correction": "First core invocation unintentionally left CUDA visible and completed82 tests, including existing small CUDA checkpoint test, before interruption. Authoritative saved verification was rerun with CUDA_VISIBLE_DEVICES empty;246 passed and1 skipped. No quality training experiment was run.",
+  "research_or_worker_changes": false,
+  "committed": false
+}

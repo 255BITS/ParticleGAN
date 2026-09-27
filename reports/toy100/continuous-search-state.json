@@ -1096,6 +1096,16 @@
     "develop_pin": "c720645ecae6b648e9fc6034e9d6b48ccff06ed3",
     "old_api_pin": "fa511ce010120b502f494d717d01b14b8551eed8",
     "quick_screen": "mode_hold",
-    "policy": "Finish only currently running old-init windows; preserve scores; merge develop; rerun every leaderboard entry as applicable, investigate improvements fully; no PR merge."
+    "policy": "Finish only currently running old-init windows; preserve scores; merge develop; rerun every leaderboard entry as applicable, investigate improvements fully; no PR merge.",
+    "research_merge": "c714f59d",
+    "api_merge": "25751c0864dd8259b00c5804f600cd41cce6e4cf",
+    "status": "NEW_INIT_PUBLIC_CONTROLS_COMPLETE_EXPERIMENTAL_RETEST_IN_PROGRESS",
+    "batch": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927",
+    "public_controls": {
+      "K3P": "FAIL 0/24 final6/8",
+      "KA2_default": "FAIL 0/24 final6/8",
+      "KA2_constant": "FAIL 0/24 final4/8"
+    },
+    "new_results": "reports/toy100/deterministic-init-retest/screen-results.json"
   }
 }

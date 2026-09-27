@@ -1,0 +1,133 @@
+{
+  "id": "public-ka2-constant-new-init",
+  "candidate": "public-ka2-constant-new-init",
+  "status": "FAIL",
+  "seconds": 18.49607746116817,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T020007Z/public-ka2-constant/20260927T020007Z-1853860/repo/reports/fixed-init-mode-hold",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 4,
+    "final_hq": 1.0
+  },
+  "old_comparison": "NOT_MEASURED_ON_THIS_EXACT_SCREEN",
+  "continuous_eligibility": "CONSTANT_RATES_RETEST_NOT_QUALIFIED",
+  "recipe": {
+    "total_steps": 4600,
+    "num_particles": 12,
+    "z_dim": 4,
+    "batch_size": 128,
+    "initialization": "batch_feature_zero",
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": 1600,
+    "input_noise_std": 0.5,
+    "input_noise_anneal_end": 0.0782608695652174,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.1565217391304348,
+    "prior_reg": 0.0,
+    "standardize": true
+  },
+  "complete": true,
+  "artifacts": {
+    "evidence/public-ka2-constant-new-init/artifact-sha256.json": {
+      "sha256": "525c2841565a26c6e6f70a30cc43f70e49294c0998d03cf7bf0b3b7cf660123c",
+      "original_sha256": "525c2841565a26c6e6f70a30cc43f70e49294c0998d03cf7bf0b3b7cf660123c",
+      "bytes": 1484
+    },
+    "evidence/public-ka2-constant-new-init/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "bytes": 240947
+    },
+    "evidence/public-ka2-constant-new-init/declaration.json": {
+      "sha256": "757a1c6fbed4e1a987c02256ebb5b67e54cfc1c67741879cf1ffb143f993ac9a",
+      "original_sha256": "757a1c6fbed4e1a987c02256ebb5b67e54cfc1c67741879cf1ffb143f993ac9a",
+      "bytes": 3886
+    },
+    "evidence/public-ka2-constant-new-init/initial.json": {
+      "sha256": "4aa39acd33c9f8d253e2a6fa49a3c1dc1c5134f912bf90ad1ad9d5da3d6f9ec1",
+      "original_sha256": "4aa39acd33c9f8d253e2a6fa49a3c1dc1c5134f912bf90ad1ad9d5da3d6f9ec1",
+      "bytes": 24773
+    },
+    "evidence/public-ka2-constant-new-init/learning-rates.jsonl.gz": {
+      "sha256": "0c7930743d91e54d18837fae24abcadfa0a88f660d86390375295e147acd6a19",
+      "original_sha256": "dd760aff0666125750cf61033baa3870a2521395116a29b91a6c563f92c89459",
+      "bytes": 79104
+    },
+    "evidence/public-ka2-constant-new-init/metrics.jsonl.gz": {
+      "sha256": "4987f6a9bc79b6d4b3aad0585471a4f43d53de2261524cc50b592cb84605b52d",
+      "original_sha256": "e0307d03b21574cbaeaa13685dd13c43cdfc3c30cdbe436152e027f1945b5b97",
+      "bytes": 939
+    },
+    "evidence/public-ka2-constant-new-init/optimizer-device-proof-0000.json": {
+      "sha256": "5381da243a2e54ab41bb0e9aab7c95380ce35e4c7fbf1470b5bcafa64eb3d1e1",
+      "original_sha256": "5381da243a2e54ab41bb0e9aab7c95380ce35e4c7fbf1470b5bcafa64eb3d1e1",
+      "bytes": 1457
+    },
+    "evidence/public-ka2-constant-new-init/optimizer-device-proof-0001.json": {
+      "sha256": "a3b5a7769a29b2955836dbbd474586cbda510c824367e8f69dfdafbe7bc64d4f",
+      "original_sha256": "a3b5a7769a29b2955836dbbd474586cbda510c824367e8f69dfdafbe7bc64d4f",
+      "bytes": 3582
+    },
+    "evidence/public-ka2-constant-new-init/optimizer-device-proof-1200.json": {
+      "sha256": "957eb27d80c6f4808bb0c02b50ba98715ed45bbcff8934eb78e0ecb86e3090e9",
+      "original_sha256": "957eb27d80c6f4808bb0c02b50ba98715ed45bbcff8934eb78e0ecb86e3090e9",
+      "bytes": 3633
+    },
+    "evidence/public-ka2-constant-new-init/protocol.json": {
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "original_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "bytes": 3797
+    },
+    "evidence/public-ka2-constant-new-init/result.json": {
+      "sha256": "bb8da745b4bfab4fd8badbaa9402d9eb887ef795e0d8803f9dcfb726baeae4ec",
+      "original_sha256": "bb8da745b4bfab4fd8badbaa9402d9eb887ef795e0d8803f9dcfb726baeae4ec",
+      "bytes": 1508
+    },
+    "evidence/public-ka2-constant-new-init/runtime.json": {
+      "sha256": "bb86c4860fc0ef0b834ef62ddbd58563f3a272af8e2e2b8d86f1380fcf19536f",
+      "original_sha256": "bb86c4860fc0ef0b834ef62ddbd58563f3a272af8e2e2b8d86f1380fcf19536f",
+      "bytes": 6974
+    },
+    "evidence/public-ka2-constant-new-init/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/public-ka2-constant-new-init/source-preflight.json": {
+      "sha256": "023ba57f3b9922ea1706dd0f58c14500ecb953617c537435c8ba74ef40747d8d",
+      "original_sha256": "023ba57f3b9922ea1706dd0f58c14500ecb953617c537435c8ba74ef40747d8d",
+      "bytes": 891
+    },
+    "evidence/public-ka2-constant-new-init/source.zip": {
+      "sha256": "8d39788770cee4590061aa08d687f6b6ec0b440dc4523d3d77dc3f4c03bdae5f",
+      "original_sha256": "8d39788770cee4590061aa08d687f6b6ec0b440dc4523d3d77dc3f4c03bdae5f",
+      "bytes": 588190
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T020007Z/public-ka2-constant/20260927T020007Z-1853860/repo/reports/fixed-init-mode-hold/final-state.pt",
+      "sha256": "c9f30a7c633ae29332f86205f5f061114db38ef19a1d494240a44ce97b6240a3",
+      "bytes": 674394
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T020007Z/public-ka2-constant/20260927T020007Z-1853860/repo/reports/fixed-init-mode-hold/initial-state.pt",
+      "sha256": "fcbf0e9e46bc4a471aa9e59866a7cf5eb0718349db0fa09c48654e48405bcb60",
+      "bytes": 340491
+    }
+  },
+  "old_quality_inherited": false
+}
