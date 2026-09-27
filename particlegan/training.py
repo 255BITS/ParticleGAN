@@ -59,7 +59,7 @@ class GANTrainer:
     then a generator/prior step with output noise (the generator optimizer's
     ``step()`` applies A2 latent damping). The trainer allocates the EMA
     critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream;
-    the caller's modules are never modified. ``sample`` includes the output
+    fresh network weights follow ``recipe.initialization``. ``sample`` includes the output
     noise.
     """
 
@@ -297,7 +297,14 @@ class GANTrainer:
         expected = self.state_dict()
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 4:
             raise ValueError("invalid GANTrainer checkpoint schema")
-        for key in ("recipe", "optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
+        saved_recipe = state["recipe"]
+        if (not isinstance(saved_recipe, dict)
+                or saved_recipe.get("initialization") not in (None, "batch_feature_zero")
+                or {k: v for k, v in saved_recipe.items() if k != "initialization"}
+                != {k: v for k, v in expected["recipe"].items() if k != "initialization"}):
+            raise ValueError("checkpoint recipe does not match trainer")
+        # Saved weights replace construction-time initialization completely.
+        for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
         steps = state["completed_steps"]
@@ -340,6 +347,7 @@ class GANTrainer:
         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
             optimizer.load_state_dict(deepcopy(values))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        self.recipe = self.recipe.replace(initialization=saved_recipe.get("initialization"))
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())
         torch.set_rng_state(state["cpu_rng"].cpu())

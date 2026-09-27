@@ -17,6 +17,18 @@
   This remains unmerged and unreleased. Preserve the exact research source,
   later dropouts and incomplete toy coverage in `reports/ka2-default-candidate/`.
   K3P's historical 22/22 result and README animation are separate evidence.
+- Fresh recipes default to `initialization="batch_feature_zero"`: deterministic
+  RMS-matched QR weights, patterned biases, R2 recipe-created particle clouds,
+  and zero initial batch-distance readout coefficients. `GANTrainer` and
+  `make_optimizers` use it; `initialization=None` preserves supplied weights.
+- Export `initialize_(network, key=0)` for standalone PyTorch networks and any
+  optimizer. It consumes no RNG and installs no global hooks. See the
+  [API and migration notes](docs/api.md#initialization) for supported layers,
+  custom/pretrained weights, and checkpoint behavior. NumPy is now a core
+  dependency for the deterministic numerical construction.
+- Add the exact historical `batch_feature_zero` replay hook to the initializer
+  registry, and document its 22/22 fixed-suite result, passing long hold,
+  unresolved shifted-target recovery, and mathematical limits.
 
 ## 0.8.0 — 2026-09-25
 
