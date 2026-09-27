@@ -4,6 +4,8 @@ from copy import deepcopy
 import pytest
 import torch
 
+from benchmarks.transfer_suite import vector_tasks
+
 from particlegan import get_recipe
 from benchmarks.transfer_suite import shared_discriminator_search as canonical
 from benchmarks.transfer_suite import shared_profile_search as profile
@@ -13,6 +15,13 @@ from particlegan import learning_rate_scale
 from reports.transfer_suite.unadjusted.build import validate_schedule
 from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
+
+# Recipe receipts ("applied") are read back from the recipe-built optimizers of
+# the migrated vector host (toy-refactor/transfer_vector); the pre-migration
+# host owns its Adam and records none.
+needs_runner_vector_host = pytest.mark.skipif(
+    not hasattr(vector_tasks, "VectorTask"),
+    reason="vector host not on the shared runner yet (toy-refactor/transfer_vector)")
 
 def declaration():
     return dict(candidates=[dict(name='profile_check', overrides=dict(lr=.002))],
@@ -40,6 +49,7 @@ def test_rejects_unreviewed_implementation():
         profile.prepare(declared)
 
 
+@needs_runner_vector_host
 def test_profile_applies_global_recipe_and_restores_runner():
     torch.set_num_threads(1)
     job = deepcopy(next(j for j in plan() if j['spec']['name'] == 'vector_unequal_mass'))

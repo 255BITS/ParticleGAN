@@ -3,12 +3,22 @@ from copy import deepcopy
 import pytest
 import torch
 
+from benchmarks.transfer_suite import vector_tasks
+
 from benchmarks.transfer_suite.compare_defaults import effective_spec, plan
 from benchmarks.transfer_suite.formulations import axes
 from benchmarks.transfer_suite.shared_discriminator_search import recipe
 from benchmarks.transfer_suite.shared_local_density_research import ARCHITECTURES, constructor, variant
 from benchmarks.transfer_suite.shared_local_density_search import episode
 from benchmarks.transfer_suite.shared_variants import architecture_spec
+
+
+# Recipe receipts ("applied") are read back from the recipe-built optimizers of
+# the migrated vector host (toy-refactor/transfer_vector); the pre-migration
+# host owns its Adam and records none.
+needs_runner_vector_host = pytest.mark.skipif(
+    not hasattr(vector_tasks, "VectorTask"),
+    reason="vector host not on the shared runner yet (toy-refactor/transfer_vector)")
 
 
 @pytest.mark.parametrize('card', ARCHITECTURES, ids=lambda c: c['name'])
@@ -36,6 +46,7 @@ def test_cards_change_only_discriminator():
                 assert after[key] == before[key]
 
 
+@needs_runner_vector_host
 def test_actual_parameter_groups_keep_shared_cap6_recipe():
     torch.set_num_threads(1)
     job = deepcopy(next(j for j in plan() if j['spec']['name'] == 'vector_unequal_mass'))

@@ -3,16 +3,20 @@
 Keep each toy's data, architecture, support and budget fixed. Apply each public
 recipe's loss, regularization and absolute G/D/prior optimizer settings. This
 is distinct from the historical 19/19 row with per-host optimizer settings.
+
+Vector and image hosts take the recipe through their spec (``effective_spec``)
+and train on the shared runner, whose recipe-built optimizers own the rates and
+schedule. Custom hosts go through ``run_custom_host``. Nothing here constructs
+an optimizer or writes a learning rate.
 """
 from benchmarks.locked_shared.recorded_recipes import GAN_V1, GAN_V2
 import argparse
-from contextlib import contextmanager, ExitStack
+from contextlib import ExitStack
 from copy import deepcopy
 from dataclasses import asdict
 import gzip
 import hashlib
 import json
-import math
 from pathlib import Path
 import time
 import traceback
@@ -20,11 +24,8 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import ParticlePrior, learning_rate_scale
-from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline
-from benchmarks.smart_descent import evaluate
-from . import image_tasks, suite, vector_tasks
+from . import suite, vector_tasks
 from .formulations import axes
 from .linear_skip_refinement_research import constructor as skip_constructor
 from .smooth_critic_research import constructor as smooth_constructor
@@ -83,112 +84,48 @@ def effective_spec(original, recipe):
     return spec
 
 
-@contextmanager
-def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
-                       network_lr_floor=None):
-    """Apply absolute recipe rates to every group, including mixed/AE priors.
+def run_custom_host(spec, recipe):
+    """One frozen custom host under ``recipe``.
 
-    The phase bridge identifies existing opt_p direct-particle optimizers. Prior
-    instances identify their parameters even when mixed with generator weights.
-    Both optimizer-level and explicit per-group Adam betas are replaced.
+    A migrated host (``problem_hosts``) trains on the shared runner, whose
+    recipe-built optimizers own the rates and schedule. Any other host still
+    owns its optimizers and runs unchanged (``recipe_owned`` False).
     """
-    if network_lr_floor is not None and (
-            network_lr_horizon_cap is None or isinstance(network_lr_floor, bool)
-            or not isinstance(network_lr_floor, (int, float))
-            or not math.isfinite(network_lr_floor)
-            or not 0 <= network_lr_floor <= 1):
-        raise ValueError("network_lr_floor requires a cap and a finite fraction in [0, 1]")
-    prior_ids = set()
-    original_prior = ParticlePrior.__init__
-    original_adam = torch.optim.Adam.__init__
-    original_role = bridge.optimizer_role
-    original_control = evaluate.FixedControl
+    from . import problem_hosts
+    start = time.perf_counter()
+    if problem_hosts.is_migrated(spec['name']):
+        result, _ = problem_hosts.run_problem(spec, recipe)
+        result['recipe_owned'] = True
+    else:
+        result = baseline.run_toy(spec['name'], candidate(recipe))
+        result['recipe_owned'] = False
+    result['seconds'] = time.perf_counter() - start
+    return result
 
-    def prior_init(self, *args, **kwargs):
-        original_prior(self, *args, **kwargs)
-        prior_ids.update(id(p) for p in self.parameters())
 
-    def adam_init(self, params, *args, **kwargs):
-        params = list(params)
-        if not params or not isinstance(params[0], dict):
-            params = [dict(params=params)]
-        groups = []
-        for group in params:
-            values = list(group['params'])
-            for is_prior in (False, True):
-                selected = [p for p in values if (id(p) in prior_ids) == is_prior]
-                if selected:
-                    groups.append(dict(group, params=selected, _comparison_prior=is_prior,
-                                       betas=recipe.prior_betas or recipe.betas if is_prior else recipe.betas))
-        args = list(args)
-        if len(args) >= 2:
-            args[1] = recipe.betas
+def run_host(spec, recipe, policy, critic=None):
+    """One frozen host under ``recipe`` (already applied to ``spec``); errors become a result.
+
+    ``critic`` (or else a declared ``research_discriminator`` card) only swaps
+    the vector host's critic class; the recipe, optimizers and schedule are
+    untouched.
+    """
+    start = time.perf_counter()
+    try:
+        if spec['runner'] == 'legacy':
+            result = run_custom_host(spec, recipe)
         else:
-            kwargs['betas'] = recipe.betas
-        original_adam(self, groups, *args, **kwargs)
-
-    def role(optimizer, locals_):
-        result = original_role(optimizer, locals_)
-        if locals_.get('opt_p') is optimizer:
-            for group in optimizer.param_groups:
-                # Direct particles remain prior-owned. A learnable output
-                # noise scalar on the same host optimizer is generator-owned.
-                group['_comparison_prior'] = not group.get('_comparison_output_scale', False)
-        return result
-
-    class RecipeControl(original_control):
-        def step(self, optimizer, completed_updates, role):
-            if optimizer not in self.base_rates:
-                for group in optimizer.param_groups:
-                    kind = 'd' if role == 'd' else 'prior' if group['_comparison_prior'] else 'g'
-                    old_rate = group['lr']
-                    group['lr'] = recipe.lr * {'g': 1., 'd': recipe.d_lr_mult, 'prior': recipe.prior_lr_mult}[kind]
-                    group['betas'] = (recipe.prior_betas or recipe.betas) if kind == 'prior' else recipe.betas
-                    applied.append(dict(role=kind, host_lr=old_rate, lr=group['lr'], betas=list(group['betas']),
-                                        parameters=sum(p.numel() for p in group['params'])))
-            rates = self.base_rates.setdefault(
-                optimizer, [group['lr'] for group in optimizer.param_groups],
-            )
-            if network_lr_horizon_cap is None:
-                network_scale = prior_scale = learning_rate_scale(
-                    completed_updates, self.total_steps,
-                    recipe.lr_anneal_start, recipe.lr_floor,
-                )
-            else:
-                from benchmarks.toy100.schedule import policy_multipliers
-                network_scale, prior_scale = policy_multipliers(
-                    completed_updates, self.total_steps,
-                    recipe.lr_anneal_start, recipe.lr_floor,
-                    network_lr_horizon_cap,
-                    network_lr_floor=network_lr_floor,
-                )
-            group_lrs = []
-            for group, rate in zip(optimizer.param_groups, rates):
-                kind = 'd' if role == 'd' else 'prior' if group['_comparison_prior'] else 'g'
-                group['lr'] = rate * (prior_scale if kind == 'prior' else network_scale)
-                if network_lr_horizon_cap is not None:
-                    group_lrs.append(dict(role=kind, lr=group['lr']))
-            if network_lr_horizon_cap is not None or completed_updates % 20 == 0:
-                action = dict(step=completed_updates, role=role,
-                              multiplier=network_scale)
-                if network_lr_horizon_cap is not None:
-                    action.update(network_lr_horizon_cap=network_lr_horizon_cap,
-                                  network_multiplier=network_scale,
-                                  prior_multiplier=prior_scale,
-                                  group_lrs=group_lrs)
-                    if network_lr_floor is not None:
-                        action["network_lr_floor"] = float(network_lr_floor)
-                self.trace.append(action)
-
-    with ExitStack() as stack:
-        stack.enter_context(patch.object(ParticlePrior, '__init__', prior_init))
-        stack.enter_context(patch.object(torch.optim.Adam, '__init__', adam_init))
-        stack.enter_context(patch.object(bridge, 'optimizer_role', role))
-        # Hosts on benchmarks.toy_runner (image_tasks) have no controller to patch.
-        for module in (evaluate, vector_tasks, image_tasks):
-            if hasattr(module, 'FixedControl'):
-                stack.enter_context(patch.object(module, 'FixedControl', RecipeControl))
-        yield
+            card = spec.get('research_discriminator')
+            if critic is None and card:
+                critic = skip_constructor(card) if card.get('skip') == 'raw_linear' else smooth_constructor(card)
+            with ExitStack() as stack:
+                if critic is not None:
+                    stack.enter_context(patch.object(vector_tasks, 'SimpleMLPDiscriminator', critic))
+                result = suite.run_episode(spec, policy, fixed=True, allow_reserved=True)
+        json.dumps(result, allow_nan=False)
+    except Exception:
+        result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - start)
+    return result
 
 
 def ema_verdict(spec, result):
@@ -224,33 +161,13 @@ def run(arm, output, tasks=None):
         spec = effective_spec(job['spec'], recipe)
         name = spec['name']
         print(f'START {arm} {name} steps={spec["steps"]}', flush=True)
-        applied = []
-        start = time.perf_counter()
-        try:
-            with optimizer_defaults(recipe, applied), ExitStack() as stack:
-                if spec['runner'] == 'legacy':
-                    control = evaluate.FixedControl(policy, spec['steps'])
-                    with bridge.control_host_schedules(control):
-                        result = baseline.run_toy(name, candidate(recipe))
-                    result['actions'] = control.trace
-                    result['seconds'] = time.perf_counter() - start
-                else:
-                    card = spec.get('research_discriminator')
-                    if card:
-                        create = skip_constructor(card) if card.get('skip') == 'raw_linear' else smooth_constructor(card)
-                        stack.enter_context(patch.object(vector_tasks, 'SimpleMLPDiscriminator', create))
-                    result = suite.run_episode(spec, policy, fixed=True, allow_reserved=True)
-            json.dumps(result, allow_nan=False)
-        except Exception:
-            result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - start)
+        result = run_host(spec, recipe, policy)
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
-        # toy_runner hosts (image) have no controller; their result carries the
-        # recipe-built optimizer groups as ``applied`` instead.
         record = dict(arm=arm, recipe=legacy_dict(recipe), original_spec=job['spec'], spec=spec,
                       architecture=job['architecture'], reference=job['reference'],
                       reference_sha256=job['reference_sha256'], candidate=asdict(candidate(recipe)),
-                      applied=applied or result.get('applied', []), verdict=verdict, ema_verdict=ema, result=result,
+                      applied=result.get('applied', []), verdict=verdict, ema_verdict=ema, result=result,
                       source_sha256=protocol['source_sha256'])
         raw = (json.dumps(record, sort_keys=True, allow_nan=False) + '\n').encode()
         artifact = f'episodes/{arm}__{name}.json.gz'

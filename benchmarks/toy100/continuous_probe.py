@@ -44,7 +44,7 @@ from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline, mode_hold
 from benchmarks.smart_descent import evaluate
 from benchmarks.transfer_suite import suite, vector_tasks
-from benchmarks.transfer_suite.compare_defaults import candidate, optimizer_defaults
+from benchmarks.transfer_suite.compare_defaults import candidate
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 from benchmarks.transfer_suite.protocol import required_tasks, test_verdict
 from benchmarks.toy100.device import add_device_argument, apply_device_policy, host_device, rng_fork_devices
@@ -302,11 +302,9 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
         stack.enter_context(patch.object(mode_hold, "ring_means", retain_ring))
         stack.enter_context(patch.object(mode_hold, "checkpoint", observe))
         stack.enter_context(patch.object(torch.optim.Adam, "step", step_optimizer))
-        stack.enter_context(optimizer_defaults(
-            recipe, applied,
-            network_lr_horizon_cap=config.get("network_lr_horizon_cap"),
-            network_lr_floor=config.get("network_lr_floor"),
-        ))
+        # compare_defaults.optimizer_defaults (the Adam.__init__/FixedControl
+        # rate override) is removed; toy-refactor/toy100_probes replaces this path.
+        raise NotImplementedError("the legacy mode_hold probe needs the removed optimizer_defaults override")
         control = evaluate.FixedControl(vector_tasks.fixed_policy("cosine"),
                                         noise_horizon)
         stack.enter_context(bridge.control_host_schedules(control))

@@ -7,6 +7,8 @@ from copy import deepcopy
 import torch
 from torch import nn
 
+from particlegan import init
+
 
 def _card(name, family, **options):
     return dict(name=name, implementation='shared_local_density_v1', family=family,
@@ -104,6 +106,12 @@ All learned parameters receive the exact same discriminator Adam settings.
             value = self.activation(left(x))
             x = value.square() if family == 'square' else value*self.activation(self.right[i](x))
         return self.head(x).squeeze(-1)
+
+
+# The card declares these starting values (seeded centers, declared widths,
+# zero coefficients); explicit init keeps them and initializes the linear layers.
+init.register(LocalDensityCritic, lambda module: {
+    name: init.KEEP for name in ("centers", "log_width", "coefficients") if name in module._parameters})
 
 
 def variant(card):

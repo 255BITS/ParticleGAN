@@ -42,6 +42,7 @@ from particlegan import GANTrainer
 from benchmarks.legacy.recipe import get_recipe
 
 from . import image_tasks, suite, vector_tasks
+from . import problem_hosts
 from .compare_defaults import ema_verdict
 from .legacy_noise_adapters import run_legacy as run_noisy_legacy
 from .protocol import test_verdict
@@ -347,9 +348,9 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
         if hashlib.sha256(config_path.read_bytes()).hexdigest() != protocol["config_sha256"]:
             raise RuntimeError("candidate configuration changed during screening")
         spec, card, variant = declared_spec(job, profile, base)
-        route = {"vector": "benchmarks.toy_runner + recipe noise/schedule",
-                 "image": "benchmarks.toy_runner + recipe noise/schedule"}.get(
-                     spec["runner"], "public primitives custom host + shared noise policy")
+        route = ("benchmarks.toy_runner + recipe noise/schedule" if spec["runner"] in ("vector", "image")
+                 else problem_hosts.ROUTE if problem_hosts.is_migrated(spec["name"])
+                 else "host-owned optimizers + shared noise policy")
         print(f'START {spec["name"]} route={route} steps={spec["steps"]}', flush=True)
         started = time.perf_counter()
         try:
@@ -366,6 +367,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
             else:
                 result, context = run_noisy_legacy(
                     spec, base, noise, model_policy=model_policy,
+                    log_path=output / "logs" / f'{spec["name"]}.log',
                 )
             observations = result.get("observations", result.get("curve", []))
             if len(observations) != 24:
@@ -417,8 +419,11 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                       architecture=variant["name"] if variant else job["architecture"],
                       reference=job["reference"], reference_sha256=job["reference_sha256"],
                       applied=context["applied"], shapes=context["shapes"],
+                      recipe_owned=context.get("recipe_owned", spec["runner"] != "legacy"),
                       verdict=verdict, ema_verdict=ema, result=result,
                       source_sha256=protocol["source_sha256"])
+        if "executed_recipe" in context:
+            record["executed_recipe"] = context["executed_recipe"]
         if model_policy:
             record["model_policy"] = model_policy
         raw = (json.dumps(record, sort_keys=True, allow_nan=False) + "\n").encode()
@@ -440,9 +445,11 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
     complete_vector_screen = set(tasks) == set(VECTOR_NAMES)
     complete_all19 = len(tasks) == len(jobs) and set(tasks) == {
         job["spec"]["name"] for job in jobs}
-    full_mechanism = all(row["noise_applied"] for row in records)
+    # A host that still owns its optimizers cannot carry the common recipe.
+    full_mechanism = all(row["noise_applied"] and row["recipe_owned"] for row in records)
     summary = dict(version=protocol["version"],
          attempted=len(records), passed=passed,
+         host_owned_optimizers=[row["name"] for row in records if not row["recipe_owned"]],
          overall=("PASS" if passed == len(tasks) else "FAIL")
          if complete_vector_screen or complete_all19 and full_mechanism else "INCOMPLETE",
          subset_passed=passed == len(tasks),
@@ -457,7 +464,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                      ema=row["ema_verdict"]["status"],
                      observations=row["observations"], live_final=row["live"],
                      route=row["route"], noise_applied=row["noise_applied"],
-                     noise_receipt=row["noise_receipt"],
+                     recipe_owned=row["recipe_owned"], noise_receipt=row["noise_receipt"],
                      artifact=row["artifact"]) for row in records])
     if model_policy:
         summary["model_policy"] = model_policy

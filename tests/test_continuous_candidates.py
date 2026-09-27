@@ -4,7 +4,6 @@ import pytest
 import torch
 
 from benchmarks import learned_lr_evaluation as bridge
-from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
 from benchmarks.gan_v3 import gan_v3_recipe
 from particlegan import GANTrainer
 from particlegan.particle_prior import ParticlePrior
@@ -41,34 +40,6 @@ def test_native_trainer_receipt_has_every_actual_rate_and_role():
                 assert group["update_rms"] >= 0
                 assert group["denominator_min"] >= group["eps"]
     assert receipt["shared_gate_eligible"] is False
-
-
-def test_legacy_constructor_split_and_direct_particle_role():
-    torch.manual_seed(3)
-    with candidate_update(OPTIONS) as receipt:
-        applied = []
-        with optimizer_defaults(_recipe(), applied):
-            prior = ParticlePrior(8, 2)
-            generator = torch.nn.Parameter(torch.ones(2))
-            critic = torch.nn.Parameter(torch.ones(2))
-            opt_g = torch.optim.Adam([generator, prior.z], lr=0.002)
-            opt_d = torch.optim.Adam([critic], lr=0.002)
-            bridge.optimizer_role(opt_d, {"opt_d": opt_d})
-            bridge.optimizer_role(opt_g, {"opt_g": opt_g})
-            for optimizer in (opt_d, opt_g):
-                for group in optimizer.param_groups:
-                    for parameter in group["params"]:
-                        parameter.grad = torch.ones_like(parameter)
-                optimizer.step()
-            direct = torch.nn.Parameter(torch.ones(2))
-            opt_p = torch.optim.Adam([direct], lr=0.002)
-            bridge.optimizer_role(opt_p, {"opt_p": opt_p})
-            direct.grad = torch.ones_like(direct)
-            opt_p.step()
-    assert [[g["role"] for g in u["groups"]] for u in receipt["updates"]] == [
-        ["d"], ["g", "prior"], ["prior"],
-    ]
-    assert receipt["updates"][-1]["groups"][0]["eps"] == 1e-8
 
 
 def test_adapter_matches_plain_adam_with_same_fixed_group_eps():

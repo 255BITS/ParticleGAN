@@ -11,7 +11,7 @@ import time
 
 import torch
 
-from particlegan import GANTrainer, LinearSkipDiscriminator, learning_rate_scale
+from particlegan import GANTrainer, LinearSkipDiscriminator
 from lib.toy_models import SimpleMLPGenerator
 from . import suite, vector_tasks
 from .protocol import test_verdict
@@ -61,8 +61,10 @@ def main():
         completed = step+1
         real = vector_tasks.sample_target(spec, spec['batch'], rng, completed)
         trainer.step(real, generator_real=lambda: vector_tasks.sample_target(spec, spec['batch'], rng, completed))
-        scale = learning_rate_scale(step, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
+        # The recipe-built optimizers applied their own schedule; read it back.
+        scale, _ = trainer.opt_d.lr_schedule.scales(step)
         for opt, groups in zip((trainer.opt_g, trainer.opt_d), original_groups):
+            assert opt.completed_steps == completed
             assert all(group['lr'] == base['lr']*scale for group, base in zip(opt.param_groups, groups))
         if step % 20 == 0:
             actions.extend(dict(step=step, role=role, multiplier=scale) for role in ('d', 'g'))

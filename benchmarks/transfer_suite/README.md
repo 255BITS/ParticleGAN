@@ -17,6 +17,29 @@ retains all 16 historical individual solver witnesses. Reproduce the shared
 image recipe with
 `python -u -m benchmarks.transfer_suite.solvability_search --plan benchmarks/transfer_suite/plans/residual16.json --output /tmp/residual-image-reference`.
 
+## How the harness runs the nine custom hosts
+
+`problem_hosts.HOSTS` maps each custom host to its `benchmarks.toy_runner.ToyProblem`
+class (module, class name). Once that class exists (`ModeHold` on this branch),
+the host runs on a shared `ToyRun` under the recipe under test at the problem's
+task shape: global fields, declared noise and the network LR horizon. The
+recipe-built optimizers own the rates and schedule, and regrading reads their
+saved schedule state. Each host writes one JSON line per observation to
+`<output>/logs/<host>.log` (`tail -f`).
+
+A host that still owns its training loop runs unchanged. Its record says
+`recipe_owned: false`, so `toy_suite` reports the common-recipe gate as
+INCOMPLETE and names the host.
+
+Nothing in the harness builds an optimizer or writes a learning rate. The old
+`optimizer_defaults` override (patched `torch.optim.Adam.__init__` and swapped
+`FixedControl` for a controller that wrote `group['lr']`) has been deleted.
+Vector and image hosts take the recipe through their spec. The optimizer-rule
+and schedule research runners (`shared_adapter_search`, `shared_schedule_search`,
+`compare_formulations`) have been removed. Their reports under `reports/` are
+the record. The D-architecture research families (`shared_*_research.py`)
+declare only critics and all run through `shared_discriminator_search`.
+
 ## Historical controller-study protocol
 
 A poor architecture or deliberately ambiguous dataset can expose a limitation

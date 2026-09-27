@@ -76,11 +76,11 @@ separate candidate mechanism, with integration/parity checks and its exact sourc
 archived. Its rule must be the same everywhere; do not branch on task names or
 feed evaluation metrics/target labels into training.
 
-`shared_schedule_search` additionally accepts global `lr_anneal_start` and
-`lr_floor` changes around `shared_c6`. It applies the declared cosine schedule
-through the existing controller on every host and records actual multipliers.
-The importer checks every recorded action against the recipe's schedule equation.
-Schedule screens remain incomplete until all 19 cases run with that recipe.
+The former `shared_schedule_search` runner (global `lr_anneal_start` and
+`lr_floor` changes around `shared_c6`) has been removed. It patched the harness's
+LR controller. `lr_anneal_start` and `lr_floor` are recipe fields, and the
+recipe-built optimizers apply them inside `step()`. To screen a schedule, declare
+it as a recipe. The archived screens under `reports/transfer_suite` are the record.
 
 ## Rules for comparison
 

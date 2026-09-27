@@ -391,16 +391,29 @@ def wrap_input(
     return model if policy is None else _InputAdapter(model, policy, data_index)
 
 
-def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = None) -> tuple[dict, dict]:
-    """Run one frozen custom host with the common recipe and explicit noise."""
-    from benchmarks import learned_lr_evaluation as bridge
-    from benchmarks.locked_shared import baseline
-    from benchmarks.smart_descent import evaluate
-    from .compare_defaults import candidate, optimizer_defaults
-    from . import vector_tasks
+def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = None,
+               log_path=None) -> tuple[dict, dict]:
+    """Run one frozen custom host with the common recipe and explicit noise.
 
+    A migrated host (a ``ToyProblem``, see ``problem_hosts``) runs on the shared
+    runner: the recipe builds its optimizers, schedule and noise. A host that
+    still owns its training loop runs unchanged with its own optimizers and
+    schedule plus this module's ``NoisePolicy``; its record says
+    ``recipe_owned: False`` and cannot count toward a common-recipe claim.
+    ``NoisePolicy`` (and its learnable output-scale registration) serves only
+    those hosts and goes when the last of them migrates.
+    """
+    from benchmarks.locked_shared import baseline
+    from .compare_defaults import candidate
+    from . import problem_hosts
+
+    if problem_hosts.is_migrated(spec["name"]):
+        result, context = problem_hosts.run_problem(
+            spec, recipe, noise, model_policy=model_policy,
+            eval_scope=EVAL_SCOPES[spec["name"]], log_path=log_path)
+        context["recipe_owned"] = True
+        return result, context
     started = time.perf_counter()
-    applied = []
     policy = NoisePolicy(
         noise["output_noise_std"], noise["input_noise_std"],
         noise["input_noise_anneal_end"], spec["steps"], seed=0,
@@ -408,17 +421,7 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
         output_noise_learnable=noise.get("output_noise_learnable", False),
         output_noise_rng=noise.get("output_noise_rng"),
     )
-    schedule = vector_tasks.fixed_policy("cosine")
-    cap = (model_policy or {}).get("network_lr_horizon_cap")
-    network_floor = (model_policy or {}).get("network_lr_floor")
-    with optimizer_defaults(recipe, applied, network_lr_horizon_cap=cap,
-                            network_lr_floor=network_floor):
-        control = evaluate.FixedControl(schedule, spec["steps"])
-        with bridge.control_host_schedules(control):
-            result = baseline.run_toy(
-                spec["name"], candidate(recipe), noise_policy=policy,
-            )
-    result["actions"] = control.trace
+    result = baseline.run_toy(spec["name"], candidate(recipe), noise_policy=policy)
     result["seconds"] = time.perf_counter() - started
     receipt = policy.receipt()
     receipt["eval_scope"] = EVAL_SCOPES[spec["name"]]
@@ -428,10 +431,11 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
         and receipt["train_input_applied"]
     )
     context = {
-        "applied": applied,
+        "applied": [],
         "shapes": {"host": "legacy auxiliary custom loop"},
         "host_recipe": recipe,
         "noise_receipt": receipt,
         "eval_scope": receipt["eval_scope"],
+        "recipe_owned": False,
     }
     return result, context

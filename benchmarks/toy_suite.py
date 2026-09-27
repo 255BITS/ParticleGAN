@@ -44,8 +44,11 @@ from benchmarks.transfer_suite.public_default_verification import (
 from benchmarks.transfer_suite.toy100_compatibility import (
     VECTOR_NAMES, declared_model_policy, declared_recipe, image_recipe, output_noise_at,
 )
-from particlegan import learning_rate_scale
+from particlegan import get_recipe
+from particlegan.recipes import LRSchedule
 from benchmarks.legacy.recipe import LegacyRecipe as Recipe
+from benchmarks.toy100.schedule import policy_recipe
+from benchmarks.transfer_suite import problem_hosts
 from benchmarks.gan_v3 import legacy_dict, legacy_recipe
 
 
@@ -175,9 +178,7 @@ def _check_optimizer_receipts(record: dict, base: Recipe):
     if not isinstance(receipts, list) or not receipts:
         raise ValueError(f"optimizer receipts are absent: {record['name']}")
     roles = [item.get("role") for item in receipts]
-    if len(set(roles)) != len(roles) or "d" not in roles or not {"g", "prior"}.intersection(roles):
-        raise ValueError(f"optimizer roles differ: {record['name']}")
-    if record["spec"]["runner"] != "legacy" and roles != ["g", "prior", "d"]:
+    if roles != ["g", "prior", "d"]:
         raise ValueError(f"trainer optimizer roles differ: {record['name']}")
     rates = dict(g=base.lr, prior=base.lr * base.prior_lr_mult,
                  d=base.lr * base.d_lr_mult)
@@ -190,74 +191,42 @@ def _check_optimizer_receipts(record: dict, base: Recipe):
             raise ValueError(f"optimizer betas differ from common recipe: {record['name']}.{role}")
         if type(item.get("parameters")) is not int or item["parameters"] <= 0:
             raise ValueError(f"optimizer parameter receipt is invalid: {record['name']}.{role}")
-        if record["spec"]["runner"] != "legacy" and item.get("optimizer") != "Adam":
+        if item.get("optimizer") != "Adam":
             raise ValueError(f"trainer optimizer type differs: {record['name']}.{role}")
+
+
+def _schedule(recipe: Recipe, steps: int, cap=None, network_floor=None) -> LRSchedule:
+    """The schedule a recipe-built optimizer applies on this host (``LRSchedule``)."""
+    recipe = recipe.replace(total_steps=steps)
+    if cap is not None:
+        recipe = policy_recipe(recipe, cap, network_lr_floor=network_floor)
+    return LRSchedule(recipe)
 
 
 def _check_actions(record: dict, base: Recipe, noise: dict | None,
                    model_policy: dict | None = None):
+    """Trainer-route receipts: each update's optimizer clocks and the rates they applied.
+
+    The rates are checked against the recipe's own ``LRSchedule`` at the
+    host budget (and declared network horizon), never a hand-written formula.
+    """
     spec, result = record["spec"], record["result"]
     name, steps = spec["name"], spec["steps"]
     actions = result.get("actions", [])
     cap = (model_policy or {}).get("network_lr_horizon_cap")
     network_floor = (model_policy or {}).get("network_lr_floor")
     if spec["runner"] == "legacy":
-        expected = [(step, role) for step in (
-                    range(steps) if cap is not None else range(0, steps, 20))
-                    for role in ("d", "g")]
-        if [(item.get("step"), item.get("role")) for item in actions] != expected:
-            raise ValueError(f"custom-host optimizer trace is incomplete: {name}")
-        for item in actions:
-            if cap is None:
-                scale = learning_rate_scale(item["step"], steps,
-                                            base.lr_anneal_start, base.lr_floor)
-                if not _close(item.get("multiplier"), scale):
-                    raise ValueError(f"custom-host LR schedule differs from common recipe: {name}")
-                continue
-            from benchmarks.toy100.schedule import policy_multipliers
-            network, prior = policy_multipliers(
-                item["step"], steps, base.lr_anneal_start, base.lr_floor, cap,
-                network_lr_floor=network_floor,
-            )
-            if (item.get("network_lr_horizon_cap") != cap
-                    or not _close(item.get("multiplier"), network)
-                    or not _close(item.get("network_multiplier"), network)
-                    or not _close(item.get("prior_multiplier"), prior)):
-                raise ValueError(f"custom-host network horizon differs: {name}")
-            if (network_floor is not None and not _close(
-                    item.get("network_lr_floor"), network_floor)) or (
-                    network_floor is None and "network_lr_floor" in item):
-                raise ValueError(f"custom-host network floor differs: {name}")
-            expected_roles = ({"d"} if item["role"] == "d" else
-                              {row["role"] for row in record["applied"] if row["role"] != "d"})
-            actual_groups = item.get("group_lrs")
-            if (not isinstance(actual_groups, list)
-                    or not all(isinstance(row, dict) for row in actual_groups)
-                    or len(actual_groups) != len(expected_roles)
-                    or {row.get("role") for row in actual_groups} != expected_roles):
-                raise ValueError(f"custom-host optimizer group receipt differs: {name}")
-            for group in actual_groups:
-                role = group["role"]
-                rate = base.lr * {"g": 1.0, "d": base.d_lr_mult,
-                                  "prior": base.prior_lr_mult}[role]
-                scale = prior if role == "prior" else network
-                if not _close(group.get("lr"), rate * scale):
-                    raise ValueError(f"custom-host optimizer rate differs: {name}.{role}")
-        return
+        raise ValueError(f"custom hosts have no trainer action trace: {name}")
     if len(actions) != steps or result.get("update_counts") != {"g": steps, "d": steps}:
         raise ValueError(f"trainer action or update trace is incomplete: {name}")
+    schedule = _schedule(base, steps, cap, network_floor)
     for completed, action in enumerate(actions, start=1):
+        if action.get("lr_schedule") != {"g": completed, "d": completed}:
+            raise ValueError(f"trainer optimizer schedule clock differs: {name}.{completed}")
+        network, prior = schedule.scales(completed - 1)
         if cap is None:
-            network = prior = learning_rate_scale(
-                completed - 1, steps, base.lr_anneal_start, base.lr_floor,
-            )
             expected_rates = dict(step=completed, multiplier=network)
         else:
-            from benchmarks.toy100.schedule import policy_multipliers
-            network, prior = policy_multipliers(
-                completed - 1, steps, base.lr_anneal_start, base.lr_floor, cap,
-                network_lr_floor=network_floor,
-            )
             expected_rates = dict(step=completed, network_multiplier=network,
                                   prior_multiplier=prior,
                                   network_lr_horizon_cap=cap)
@@ -853,7 +822,9 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                 summary.get("network_lr_floor"), network_floor)) or (
                 network_floor is None and "network_lr_floor" in summary):
             raise ValueError(f"100-mode network floor receipt differs: {name}")
-        from benchmarks.toy100.schedule import policy_multipliers
+        native = get_recipe().replace(lr_anneal_start=config["lr_anneal_start"],
+                                      lr_floor=config["lr_floor"])
+        schedule = _schedule(native, steps, cap, network_floor)
         train_events = {}
         for line in (directory / "events.jsonl").read_text().splitlines():
             event = json.loads(line)
@@ -865,10 +836,7 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
         if set(train_events) != set(range(1, steps + 1)):
             raise ValueError(f"100-mode policy action trace is incomplete: {name}")
         for step, event in train_events.items():
-            network, prior = policy_multipliers(
-                step - 1, steps, config["lr_anneal_start"], config["lr_floor"], cap,
-                network_lr_floor=network_floor,
-            )
+            network, prior = schedule.scales(step - 1)
             expected = dict(network_lr_horizon_cap=cap,
                             network_multiplier=network, prior_multiplier=prior,
                             lr_g=config["lr"] * network,
@@ -1086,9 +1054,19 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 if record["recipe"] != protocol["base_get_recipe"]:
                     raise ValueError(f"public default recipe differs between cases: {name}")
             result = record["result"]
+            recipe_owned = True
             if image_route:
                 _check_toy_runner_image(record, expected_host_recipe,
                                         protocol["noise"] if candidate else None)
+            elif record.get("route") == problem_hosts.ROUTE:
+                problem_hosts.check_receipts(record, base,
+                                             protocol["noise"] if candidate else None,
+                                             protocol.get("model_policy") if candidate else None)
+            elif expected_spec["runner"] == "legacy":
+                # The host still owns its optimizers: no recipe receipts exist.
+                if record.get("recipe_owned") is not False:
+                    raise ValueError(f"custom host claims the recipe without optimizer receipts: {name}")
+                recipe_owned = False
             else:
                 _check_optimizer_receipts(record, expected_host_recipe)
                 _check_actions(record, expected_host_recipe,
@@ -1105,16 +1083,19 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             if [item.get("step") for item in observations] != expected_checkpoints:
                 raise ValueError(f"frozen 24-checkpoint schedule differs: {name}")
             cases[name] = dict(status=verdict["status"], passed=verdict["passed"],
+                               recipe_owned=recipe_owned,
                                observations=len(observations), artifact=str(artifact),
                                noise_applied=record.get("noise_applied", not candidate),
                                eval_scope=(record.get("noise_receipt") or {}).get("eval_scope"),
                                final=result.get("live", {}),
                                passing_suffix=verdict.get("convergence", {}).get("passing_suffix"))
         passed = sum(row["passed"] for row in cases.values())
+        host_owned = sorted(name for name, row in cases.items() if not row["recipe_owned"])
         return dict(status=_status(passed, len(expected_names),
-                                   complete=set(cases) == set(expected_names)),
+                                   complete=set(cases) == set(expected_names) and not host_owned),
                     passed=passed, required=len(expected_names), cases=cases,
-                    protocol=protocol, reason=None)
+                    host_owned_optimizers=host_owned, protocol=protocol,
+                    reason=f"hosts still own their optimizers: {host_owned}" if host_owned else None)
     except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError,
             tarfile.TarError,
             gzip.BadGzipFile, EOFError) as error:
@@ -1278,6 +1259,8 @@ def regrade(output: Path):
                     reason = "100-mode and candidate-19 public package source sets differ"
     else:
         reason = "complete 100-mode and candidate-19 evidence is required"
+    if reason is None and candidate.get("host_owned_optimizers"):
+        reason = candidate["reason"]
     noise_covered = (len(candidate["cases"]) == len(expected19)
                      and all(row["noise_applied"] for row in candidate["cases"].values()))
     if identity and not noise_covered:
@@ -1327,6 +1310,7 @@ def regrade(output: Path):
         row = candidate["cases"].get(name, {})
         lines.append(f"| canonical | `{name}` | {row.get('status', 'MISSING')} | "
                      f"noise applied {row.get('noise_applied', False)}; "
+                     f"recipe optimizers {row.get('recipe_owned', False)}; "
                      f"eval {row.get('eval_scope') or 'generated samples'}; "
                      f"final suffix {row.get('passing_suffix', '—')} |")
     lines += ["", "The public v3 control uses its own recipe and cannot supply missing "
