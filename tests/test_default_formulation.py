@@ -63,9 +63,9 @@ def test_reference_discriminator_rejects_invalid_dimensions(kwargs):
         LinearSkipDiscriminator(**kwargs)
 
 
-def test_historical_stock_comparison_preserves_its_original_settings(tmp_path):
-    from benchmarks.locked_shared.grid_study import load_example, resolved_kwargs
+def test_historical_stock_comparison_preserves_its_original_settings():
+    from benchmarks.locked_shared.grid_study import arm_recipe
 
-    kwargs = resolved_kwargs(load_example(), tmp_path, 'stock', 'cpu', {})
-    assert (kwargs['lr'], kwargs['beta1'], kwargs['beta2']) == (.0006, 0., .999)
-    assert (kwargs['reg_coeff'], kwargs['reg_kappa'], kwargs['lambda_ep']) == (1., 1., 1.)
+    recipe = arm_recipe({})
+    assert (recipe.lr, recipe.betas) == (.0006, (0., .999))
+    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg) == (1., 1., 1.)

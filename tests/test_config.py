@@ -1,11 +1,10 @@
 """TOML/YAML and recipe migration parity, without running experiments."""
-import inspect
 import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
 
-from experiments.config import read_config, recipe_defaults
+from experiments.config import read_config
 from experiments.run_grid import code_provenance, load_config, trainer_defaults
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,13 +48,14 @@ class ConfigTests(unittest.TestCase):
                          {**defaults, **historical})
         self.assertEqual(historical["lr"], .0006)  # Explicit old run configuration.
 
-    def test_example_signature_matches_recipe(self):
+    def test_example_trains_the_shipped_recipe(self):
+        from particlegan import get_recipe
+        from experiments.train_100gaussians import DEFAULTS, training_recipe
         spec = importlib.util.spec_from_file_location("example100", ROOT / "examples/100gaussians.py")
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
-        parameters = inspect.signature(module.train).parameters
-        for key, value in recipe_defaults("100gaussians").items():
-            self.assertEqual(parameters[key].default, value, key)
+        self.assertEqual(module.Gaussians100().recipe(), get_recipe())
+        self.assertEqual(training_recipe(DEFAULTS), get_recipe())
 
     def test_runner_rejects_arbitrary_dynamic_defaults(self):
         with tempfile.TemporaryDirectory() as temp:
