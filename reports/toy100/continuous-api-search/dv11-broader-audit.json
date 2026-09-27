@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-26T23:56:40.630592+00:00",
+  "created_utc": "2026-09-26T23:58:33.510212+00:00",
   "scope": "Immutable source/JSON/raw storage inspection; no Torch import, model/test/training/GPU execution.",
   "candidate": "API-DV11",
   "runs": {
@@ -1095,7 +1095,7 @@
       "id": "api-dv11-vector_unequal_mass",
       "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv11-vector_unequal_mass",
       "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo",
-      "recorded_utc": "2026-09-26T23:56:40.630592+00:00",
+      "recorded_utc": "2026-09-26T23:58:33.510212+00:00",
       "candidate": "API-DV11",
       "protocol": "frozen22_vector_unequal_mass",
       "scope": "PUBLIC_API",
@@ -2238,7 +2238,30 @@
       "archive_manifest": {
         "path": "evidence/api-dv11-vector_unequal_mass/archive-manifest.json",
         "sha256": "dce8655053c473a8fbf335b11a1e2a2dcb661c61ccc308033a9b31201cb46fb8"
-      }
+      },
+      "independently_derived_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "minimum_stable_checks": 5,
+        "first_pass_step": null,
+        "stable_from_step": null
+      },
+      "noise": {
+        "probe": "One full geometry-width Gaussian probe and one paired output epsilon, from trainer noise stream seed5 before D update.",
+        "training": "Both D-fake and G-fake use geometry width times current support trust, with fresh Gaussian draws, then constant output noise .029.",
+        "sampling": "Public GANTrainer.sample and host _generate use the same learned perturbation; sampling does not observe/update support trust.",
+        "evaluation": "Vector latent CUDA990; latent jitter then output epsilon on isolated CUDA2303. Target CUDA991, SW projection CUDA992. All24 live observations retained.",
+        "checkpoint": "Controller bandwidth/support mean/variance/score/trust and private streams serialized; vector caller data_rng also saved."
+      },
+      "public_api_limits": [
+        "GANTrainer supports unconditional scalar GANs and ParticlePrior; custom conditional/auxiliary hosts still need a faithful extension.",
+        "Vector host calls trainer._generate to preserve split evaluation latent/noise streams; learned jitter remains package-owned, but public sample exposes one generator rather than two.",
+        "Component factories and rate helper alone do not execute support probes or prior-bandwidth/controller updates; a component loop must follow GANTrainer ordering and save controller state.",
+        "No installed-wheel origin proof or independent DV11 checkpoint replay was performed by this audit.",
+        "The promoted batch-dependent critic evaluates clean/probe batches separately, as ordinary critic calls. Variance/len(batch) is the declared heuristic, not an independently validated confidence calibration."
+      ]
     }
   ],
   "immutable_package_provenance": {
@@ -2266,6 +2289,7 @@
     "checkpoint": "Controller bandwidth/support mean/variance/score/trust and private streams serialized; vector caller data_rng also saved."
   },
   "archive_entry_file": "reports/toy100/continuous-api-search/dv11-broader-audit.json",
-  "audit_program_sha256": "51780620e75e9fc41216a372754489429a84dc83f2924358a06d27d95cf130d4",
-  "raw_storage_helper_sha256": "a1da10aa37f26864a71c34b07b4a72c3eea46815323612d7ff8eac8fd733aeaa"
+  "audit_program_sha256": "6e91be3304d61d7db70e787e94f6d7c77c226a87c7717507910fefa56da90287",
+  "raw_storage_helper_sha256": "a1da10aa37f26864a71c34b07b4a72c3eea46815323612d7ff8eac8fd733aeaa",
+  "markdown_sha256": "63d771bb67478bd2c86bdb888c81bd3320931fc4ffb2a05872f544327525800a"
 }

@@ -1,0 +1,134 @@
+{
+  "created_utc": "2026-09-27T00:04:50.704454+00:00",
+  "status": "PASS_SOURCE_REVIEW",
+  "bundle": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/supervisor-support/k3p-ring-reference",
+  "bundle_manifest_sha256": "ec3a85663d09712e9a5e226b8f7824540da0b7558d5fbe24b3151e070d60f57f",
+  "worker_sha256": "faaa861f71e29e478150c38187d14b9c81baff19ccdb69414f6092c37155760d",
+  "review_scope": "Independent read-only source/hash/AST review and stdlib preflight; no Torch imports, model execution, GPU, training, test reruns or bundle edits.",
+  "source_execution_blockers": [],
+  "sealed_files_verified": 41,
+  "release_git_identity_checks": {
+    "particlegan/__init__.py": true,
+    "particlegan/autoencoder.py": true,
+    "particlegan/conditioning.py": true,
+    "particlegan/diffusion.py": true,
+    "particlegan/discriminators.py": true,
+    "particlegan/gan_loss.py": true,
+    "particlegan/grad_regularizers.py": true,
+    "particlegan/k3p.py": true,
+    "particlegan/particle_prior.py": true,
+    "particlegan/recipes.py": true,
+    "particlegan/training.py": true,
+    "particlegan/vicreg_loss.py": true
+  },
+  "checks": {
+    "identity": "All12 package bytes independently match git commit0ff9a7afe5dcb828239369446cfe71971bce687b, release ZIP and manifest. No current candidate library files substituted.",
+    "host": "All18 original-host archive entries match retained prior receipt; all16 frozen_host spans match complete originals byte-for-byte. G/D/mode/scorer originals also match archived API-RP5-single source ZIP. No benchmark/candidate imports in executable frozen_host.",
+    "configuration": "Stdlib AST comparison proves declaration recipe equals released dataclass defaults with only total_steps=4600. Literal released total_steps is7000. Input/output schedule milestones460/920, network960/1600 and prior2760/4600; final update uses4599.",
+    "initialization": "Normal CPU default asserted; manual_seed0; G constructorCPU thenCUDA, D constructorCPU thenCUDA, released trainer constructs priorCPU thenCUDA. Same20k/z2/batch2048 width96x3/Fourier3. Initial model/EMA/private/global/data RNG and target hashes must match retained RP5 ring fixture; different optimizer/trainer identity intentionally excluded.",
+    "native_optimizer": "Factories unchanged. foreachFalse/fusedFalse with native capturableFalse; no eager state or relocation. Empty states asserted before train, complete per-parameter CPU scalar counters/CUDA moments and gradients recorded and checked at actual update1,4600 and frozen2400. Released EMA arithmetic preserved.",
+    "transaction": "Exactly one trainer.step call, inside external serial_step context. Context encloses forward, create_graph penalty work, both backwards and optimizer work; finally verifies caller autograd setting restored. No custom backward/optimizer implementation and no Torch default-device mutation.",
+    "data_and_sampling": "Data index and noise draws follow frozen CUDA stream0 order. Same real tensor reused for D/G. Exactly460 live+EMA observations every10, public sample4096 and isolated seed9, frozen diversity all8/HQ.90. Actual output noise at completed step retained separately from training noise at step-1.",
+    "target": "Target change after update2400 is host-owned; no change/mode/quality hint enters released trainer. Finite horizon4600 is explicitly benchmark baseline configuration, not continuous eligibility.",
+    "frozen": "Only separate frozen trainer is loaded. Complete main/caller hash checked before/after frozen construction/load, including global RNG restoration; frozen schema3 state checked against saved state, native placement verified, own frozen state remains unchanged for all220 shifted observations. Main never reloads.",
+    "artifacts": "Sealedsource ZIP/declaration/preflight; runtime/import/Torch source pins; initial rawCPUmodels and initial/change/final envelopes; all metrics/LRs/noise/penalty; state receipts every100; independent first/final/frozen optimizer proofs; summary, errors/traceback/error checkpoint and artifact hashes.",
+    "checkpoint": "External schema1 envelope binds source manifest, resolvedrecipe,host,evaluation,full-step serial mode, untouched schema3 trainer plus caller data_rng/means. Validates before frozen restore. No resumed-main protocol or CUDA replay claim.",
+    "score_scope": "Terminal COMPLETE means fixed measurement completed, not automatic quality PASS/winner. Frozen host summaries retain first arrival, every departure/miss, minima and final suffix; no81/81 or fixed arrival deadline."
+  },
+  "receipt_clarification": {
+    "finding": "Original draft observation output_noise field reflected applied training indexstep-1 while sample uses completedstep.",
+    "resolution": "Owner added explicit evaluation_output_noise for main and frozen observations before final seal; reviewed metadata-only correction."
+  },
+  "remaining_runtime_checks": [
+    "Actual pinnedTorch2.13/cu126/A6000 and imported paths/source hashes are enforced only at authorized execution.",
+    "Exact initial fixture matching and native first/final/frozen Adam placement have not been executed by this audit; preserve ERROR on mismatch without repairs.",
+    "No K3P quality outcome exists for this prepared adapter, and no candidate qualification follows from the source review."
+  ],
+  "source_evidence": [
+    {
+      "path": "worker.py",
+      "lines": [
+        53,
+        119
+      ],
+      "claim": "fresh isolated package, normal CPU default, pinned runtime and exact4600 recipe"
+    },
+    {
+      "path": "worker.py",
+      "lines": [
+        121,
+        180
+      ],
+      "claim": "canonical construction, external checkpoint envelope, lazy-state and initialization assertions"
+    },
+    {
+      "path": "worker.py",
+      "lines": [
+        182,
+        245
+      ],
+      "claim": "matched sampling, full-step serial, ordinary step clocks and frozen control"
+    },
+    {
+      "path": "execution_contract.py",
+      "lines": [
+        7,
+        27
+      ],
+      "claim": "restoring serial context and checkpoint identity/schema validation"
+    },
+    {
+      "path": "source/particlegan/training.py",
+      "lines": [
+        160,
+        241
+      ],
+      "claim": "unchanged released update transaction"
+    },
+    {
+      "path": "source/particlegan/k3p.py",
+      "lines": [
+        359,
+        366
+      ],
+      "claim": "released floating EMA mul/add arithmetic"
+    },
+    {
+      "path": "source/particlegan/recipes.py",
+      "lines": [
+        372,
+        395
+      ],
+      "claim": "released finite schedules"
+    },
+    {
+      "path": "source/frozen_host.py",
+      "claim": "all16 extracted helper spans match pinned original-host definitions"
+    }
+  ],
+  "preflight": {
+    "status": "PASS",
+    "scope": "stdlib-only source preflight; no Torch import/model/GPU/training/tests",
+    "package_files": 12,
+    "exact_host_definitions": 16,
+    "checks": [
+      "sealed file hashes and exact release ZIP",
+      "complete original host provenance",
+      "exact extracted source spans and AST",
+      "release defaults plus only total_steps4600",
+      "public-ring resources and expected initial RNG/model receipts",
+      "scheduled noise460/920 and LR rules",
+      "whole public step inside serial context",
+      "no optimizer monkeypatch/backward or Torch load",
+      "only separate frozen trainer restores; main uninterrupted",
+      "no candidate benchmark import chain"
+    ],
+    "runtime_checks": "NOT_RUN; sealed worker assertions validate imports, Torch/Adam source, initial models/RNG and native counters during authorized execution",
+    "execution_blockers": [
+      "Independent second source review required before external owner execution",
+      "Pinned CUDA runtime and selected lane GPU must satisfy worker assertions",
+      "No model/initialization/first-step native Adam verification has been executed during preparation"
+    ],
+    "bundle_manifest_sha256": "ec3a85663d09712e9a5e226b8f7824540da0b7558d5fbe24b3151e070d60f57f"
+  }
+}

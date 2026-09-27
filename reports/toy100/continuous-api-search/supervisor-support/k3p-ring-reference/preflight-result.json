@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "scope": "stdlib-only source preflight; no Torch import/model/GPU/training/tests",
+  "package_files": 12,
+  "exact_host_definitions": 16,
+  "checks": [
+    "sealed file hashes and exact release ZIP",
+    "complete original host provenance",
+    "exact extracted source spans and AST",
+    "release defaults plus only total_steps4600",
+    "public-ring resources and expected initial RNG/model receipts",
+    "scheduled noise460/920 and LR rules",
+    "whole public step inside serial context",
+    "no optimizer monkeypatch/backward or Torch load",
+    "only separate frozen trainer restores; main uninterrupted",
+    "no candidate benchmark import chain"
+  ],
+  "runtime_checks": "NOT_RUN; sealed worker assertions validate imports, Torch/Adam source, initial models/RNG and native counters during authorized execution",
+  "execution_blockers": [
+    "Independent second source review required before external owner execution",
+    "Pinned CUDA runtime and selected lane GPU must satisfy worker assertions",
+    "No model/initialization/first-step native Adam verification has been executed during preparation"
+  ],
+  "bundle_manifest_sha256": "ec3a85663d09712e9a5e226b8f7824540da0b7558d5fbe24b3151e070d60f57f"
+}

@@ -802,6 +802,13 @@
       "shift_final_suffix": 187,
       "unequal_mass": "FAIL_0_OF_24",
       "qualified": false
+    },
+    "k3p_ring_reference": {
+      "status": "SOURCE_READY_OWNER_AUTHORIZED_RUNTIME_PENDING",
+      "owner_pid": 1657545,
+      "bundle_manifest_sha256": "ec3a85663d09712e9a5e226b8f7824540da0b7558d5fbe24b3151e070d60f57f",
+      "protocol": "single_shift4600",
+      "scope": "UNMODIFIED_RELEASED_K3P_REFERENCE_NOT_ELIGIBLE_CONTINUOUS_DEFAULT"
     }
   }
 }
