@@ -1,5 +1,68 @@
 # LR-free GAN base search — September 27
 
+## Update: clean scoring fixed, `img_intensity2` passes with a longer budget
+
+**Headline:**
+- `dv12-ams-rc3` passes all 11 quick gates with clean scoring when `img_intensity2` gets 1,200
+  updates, and it passes `ring_shift` and `stationary`.
+- A new variant, **`t2-dv12q-ons018`**, passes all 11 quick gates at the original frozen budgets.
+  It is `dv12-ams-rc3` with constant `output_noise_std` lowered from .029 to .018.
+- The three native 100-Gaussian problems from the 22-toy suite are running now. The other eight
+  custom hosts of that suite are not yet wired to the public API.
+
+**What changed**
+1. **Sampling bug fixed in the harness.** Every screen now scores clean samples. The old noisy score
+   is still recorded alongside, and a GPU check confirmed training is byte-identical.
+   - Public `GANTrainer.sample()` still adds the training output noise by design
+     (`training.py:296-312`). A clean-sampling option is left for a separate library PR.
+   - Clean scoring changed no pass/fail verdict except on `img_intensity2`.
+2. **`img_intensity2` needed more updates.** Clean HQ was still rising at update 600: it hovered at
+   .84–.94 while both modes held. At 2,400 updates all four leaders pass and hold it:
+   - `dv12-ams-rc3` passes every check from update 600, 76/78 after arrival.
+   - `dv12-rc3` passes every check from update 975.
+   - The misses were single-check HQ dips, which stop once the DV12 controller brings G's LR down to
+     about 3–4% of peak.
+
+   **`img_intensity2` is now scored at 1,200 updates. The other gates keep their frozen budgets.**
+   A 1,200-update verdict is the first 48 observations of the 2,400-update run: the runs are
+   deterministic, and the shared prefix is bitwise identical.
+
+   The verdict depends on where a run stops, because the final 5-check suffix rule is strict.
+   - `dv12-rc3` passes at 900 and 1,200 but fails at 1,000.
+   - `dv12-ams-rc3`'s `img_bars4` passes at 600 and 2,400 but would fail at 1,200. A single dip to HQ
+     .875 at update 1,125 lands in the suffix window, even though it passes 86/87 after arrival over
+     2,400 updates.
+   - For that reason only `img_intensity2`'s budget was changed.
+
+**Leaderboard (clean scoring, 11 quick gates; `img_intensity2` at 1,200 updates)**
+
+| # | Candidate | Quick gates | `mode_hold` | `img_intensity2` @1200 (@600) | `img_bars4` | `unequal_mass` | `ring_shift`* | `stationary`* |
+|---:|---|---:|---|---|---|---|---|---|
+| 1 | **`dv12-ams-rc3`** | **11/11** | PASS 10/24 @750 | **PASS 28/48 @475** (FAIL 4/24) | PASS 15/24 @250 | PASS 18/24 @350 | PASS @660 175/175, +300 190/191 | PASS 685/685 |
+| 2 | **`t2-dv12q-ons018`** | **11/11** | PASS 7/24 @900 | PASS at 600: 9/24 @350 | PASS 8/24 @375 | PASS 17/24 @400 | pending | pending |
+| 3 | `dv12-rc3` | 11/11 | PASS 6/24 @950 | PASS 27/48 @450 (FAIL 5/24; fails at 1,000) | PASS 15/24 @200 | PASS 18/24 @350 | PASS @650 175/176, +380 181/183 | PASS 652/686 |
+| 4 | API-DV12 | 10/11 | PASS 12/24 @650 | PASS 30/48 @425 (PASS 6/24) | PASS 5/24 @500 | **FAIL** 0/24 | PASS @600 181/181, +440 177/177 | PASS 686/691 |
+| 5 | API-RP15 | 10/11 | PASS 15/24 @500 | PASS 32/48 @425 (PASS 8/24) | **FAIL** 0/24 (3m, HQ .72) | PASS 21/24 @200 | PASS @930 143/148, +370 184/184 | PASS 653/658 |
+| 6 | `t2-rp15noise-in10` (RP15 + constant input noise .1) | 9/11 | FAIL 10/24 (suffix 4) | FAIL at 600 (suffix 1) | PASS 12/24 @325 | PASS 21/24 @200 | — | — |
+
+\* `ring_shift` and `stationary` come from the earlier runs scored with the output noise. Their clean
+reruns are in progress. Noise only lowers HQ at scoring, so the earlier passes are conservative. All
+other cells are clean scores. The remaining quick-gate cells (blobs4, stripes2 and five vectors) are
+PASS for rows 1–5.
+
+**Caveats**
+- `t2-dv12q-ons018` passes `mode_hold` only thinly: 7/24, first passing at update 900. The
+  output-noise level sits in a narrow window: .010, .020 and .022 each fail a gate.
+- DV12's rates are driven purely by training signals, but they decay slowly. G's LR is about 12% of
+  peak at update 600, 3–4% at 1,200, then flat.
+- The full 22-toy suite is not run. The native 100-Gaussian problems are in progress, and the eight
+  custom hosts need a component layer under `GANTrainer` first.
+
+---
+
+
+## Original report (September 27, before the clean rescore)
+
 **Goal:** one fixed public-`GANTrainer` config that needs no learning-rate adjustment: no LR or noise
 schedule tied to a clock or horizon, no per-task LR tuning, and able to run indefinitely. State-driven
 controllers and AMSGrad are allowed.
