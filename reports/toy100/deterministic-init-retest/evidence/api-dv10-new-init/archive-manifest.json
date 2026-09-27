@@ -1,0 +1,173 @@
+{
+  "id": "api-dv10-new-init",
+  "candidate": "API-DV10-new-init",
+  "status": "FAIL",
+  "seconds": 16.85395544813946,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv10",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 8,
+    "final_hq": 0.706787109375
+  },
+  "old_comparison": "NOT_MEASURED_ON_THIS_EXACT_SCREEN",
+  "continuous_eligibility": "UNQUALIFIED_RETEST_IN_PROGRESS",
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "continuous_policy": "dv10",
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "initialization": "batch_feature_zero",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 12,
+    "observation_sigma": 0.03,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "routing_temperature": 0.25,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 4
+  },
+  "complete": true,
+  "artifacts": {
+    "evidence/api-dv10-new-init/artifact-sha256.json": {
+      "sha256": "a8b4405f27f74d646443213c82266e1c754d62b4692fbf05836eb6b94f3816c8",
+      "original_sha256": "a8b4405f27f74d646443213c82266e1c754d62b4692fbf05836eb6b94f3816c8",
+      "bytes": 1484
+    },
+    "evidence/api-dv10-new-init/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "bytes": 240947
+    },
+    "evidence/api-dv10-new-init/declaration.json": {
+      "sha256": "91b410a539d29e272450639a8255909afc56ba039cf1f20222b1e3c55bd29d8c",
+      "original_sha256": "91b410a539d29e272450639a8255909afc56ba039cf1f20222b1e3c55bd29d8c",
+      "bytes": 6385
+    },
+    "evidence/api-dv10-new-init/initial.json": {
+      "sha256": "5eca21f0a145fc4d20c49f3c10f909002f90629f51c22ea7c5cc36c19b5c25af",
+      "original_sha256": "5eca21f0a145fc4d20c49f3c10f909002f90629f51c22ea7c5cc36c19b5c25af",
+      "bytes": 25823
+    },
+    "evidence/api-dv10-new-init/learning-rates.jsonl.gz": {
+      "sha256": "60585042fd4240096a6e23f9f7a1974c8c5370cc6f1753b32eb9e2ce029f05a1",
+      "original_sha256": "5374d652465010443334220b41f26673cbe5ed0311755a8176d80c3b573ea652",
+      "bytes": 231169
+    },
+    "evidence/api-dv10-new-init/metrics.jsonl.gz": {
+      "sha256": "57576b2d9c0be9a8151b5bce4c38e4e998a45347b33bfcda027fc2aa0edf4b9c",
+      "original_sha256": "727b0b1e5a1ce7c114a3941677e836613e652129ae7c8b1c0097192f89a9cdd5",
+      "bytes": 1232
+    },
+    "evidence/api-dv10-new-init/optimizer-device-proof-0000.json": {
+      "sha256": "5381da243a2e54ab41bb0e9aab7c95380ce35e4c7fbf1470b5bcafa64eb3d1e1",
+      "original_sha256": "5381da243a2e54ab41bb0e9aab7c95380ce35e4c7fbf1470b5bcafa64eb3d1e1",
+      "bytes": 1457
+    },
+    "evidence/api-dv10-new-init/optimizer-device-proof-0001.json": {
+      "sha256": "a3b5a7769a29b2955836dbbd474586cbda510c824367e8f69dfdafbe7bc64d4f",
+      "original_sha256": "a3b5a7769a29b2955836dbbd474586cbda510c824367e8f69dfdafbe7bc64d4f",
+      "bytes": 3582
+    },
+    "evidence/api-dv10-new-init/optimizer-device-proof-1200.json": {
+      "sha256": "957eb27d80c6f4808bb0c02b50ba98715ed45bbcff8934eb78e0ecb86e3090e9",
+      "original_sha256": "957eb27d80c6f4808bb0c02b50ba98715ed45bbcff8934eb78e0ecb86e3090e9",
+      "bytes": 3633
+    },
+    "evidence/api-dv10-new-init/protocol.json": {
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "original_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "bytes": 3797
+    },
+    "evidence/api-dv10-new-init/result.json": {
+      "sha256": "5daa549684de7da51e348f15eab6092e5e732ee35cdb37f811a7417a44e0c8f9",
+      "original_sha256": "5daa549684de7da51e348f15eab6092e5e732ee35cdb37f811a7417a44e0c8f9",
+      "bytes": 1534
+    },
+    "evidence/api-dv10-new-init/runtime.json": {
+      "sha256": "2e02cace031c774178b2a7c4427067c8c90c5e6c78fb11e00a0b4506a3f8041a",
+      "original_sha256": "2e02cace031c774178b2a7c4427067c8c90c5e6c78fb11e00a0b4506a3f8041a",
+      "bytes": 7007
+    },
+    "evidence/api-dv10-new-init/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/api-dv10-new-init/source-preflight.json": {
+      "sha256": "7d7560f83fda6b35f4a59baa7ce253d9382bd913146f8992b8b3d0fd4721b292",
+      "original_sha256": "7d7560f83fda6b35f4a59baa7ce253d9382bd913146f8992b8b3d0fd4721b292",
+      "bytes": 880
+    },
+    "evidence/api-dv10-new-init/source.zip": {
+      "sha256": "358baba510ac08f2ae2accf27a91c96e6d96257491999b71e07f61af3659f9c6",
+      "original_sha256": "358baba510ac08f2ae2accf27a91c96e6d96257491999b71e07f61af3659f9c6",
+      "bytes": 593472
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv10/final-state.pt",
+      "sha256": "58cc63d67f9c7e0008b4bbdbfd3e1911ec6c8920d46ffee6bdefd731142a237a",
+      "bytes": 759531
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv10/initial-state.pt",
+      "sha256": "ecc51ffb3e1d9659015b5371e801e3f1dae3d85143a19187e6830bb511a9ee50",
+      "bytes": 341454
+    }
+  },
+  "old_quality_inherited": false
+}

@@ -1,0 +1,173 @@
+{
+  "id": "api-dv6-new-init",
+  "candidate": "API-DV6-new-init",
+  "status": "FAIL",
+  "seconds": 21.296146042877808,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv6",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 6,
+    "final_hq": 1.0
+  },
+  "old_comparison": "NOT_MEASURED_ON_THIS_EXACT_SCREEN",
+  "continuous_eligibility": "UNQUALIFIED_RETEST_IN_PROGRESS",
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "continuous_policy": "dv6",
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "initialization": "batch_feature_zero",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 12,
+    "observation_sigma": 0.03,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "routing_temperature": 0.25,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 4
+  },
+  "complete": true,
+  "artifacts": {
+    "evidence/api-dv6-new-init/artifact-sha256.json": {
+      "sha256": "cbb105d5a6cbc9b1fe130301c613b2f0b2c8eb7eb50a01f536de5285f2b752f3",
+      "original_sha256": "cbb105d5a6cbc9b1fe130301c613b2f0b2c8eb7eb50a01f536de5285f2b752f3",
+      "bytes": 1484
+    },
+    "evidence/api-dv6-new-init/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "bytes": 240947
+    },
+    "evidence/api-dv6-new-init/declaration.json": {
+      "sha256": "b8b58d0595fa225fb895baf96764f501d5d66dfb2593bb31aa4e52967ef0af60",
+      "original_sha256": "b8b58d0595fa225fb895baf96764f501d5d66dfb2593bb31aa4e52967ef0af60",
+      "bytes": 6388
+    },
+    "evidence/api-dv6-new-init/initial.json": {
+      "sha256": "4aafd86235b1727224f4164e3a2fb8a1f2b563a6f2b96d39ad210937553ba12b",
+      "original_sha256": "4aafd86235b1727224f4164e3a2fb8a1f2b563a6f2b96d39ad210937553ba12b",
+      "bytes": 25483
+    },
+    "evidence/api-dv6-new-init/learning-rates.jsonl.gz": {
+      "sha256": "6d4b7230bb3f89d4b5a111cd887e6fa4e34f4f324500be37c150e7ca768fc409",
+      "original_sha256": "8fcac19e1622662cf5ad75a08731d64e56e292bf11496cf60fa093c34b1837f1",
+      "bytes": 176992
+    },
+    "evidence/api-dv6-new-init/metrics.jsonl.gz": {
+      "sha256": "43236ff05eb1492c6f621d044bd0707c9b51f273c1a47c506e0e6c30a2844d47",
+      "original_sha256": "0b83f42d76d80ddfd4e6b57f368de10072bac871f409120c4e18d68f3adb373b",
+      "bytes": 1080
+    },
+    "evidence/api-dv6-new-init/optimizer-device-proof-0000.json": {
+      "sha256": "5381da243a2e54ab41bb0e9aab7c95380ce35e4c7fbf1470b5bcafa64eb3d1e1",
+      "original_sha256": "5381da243a2e54ab41bb0e9aab7c95380ce35e4c7fbf1470b5bcafa64eb3d1e1",
+      "bytes": 1457
+    },
+    "evidence/api-dv6-new-init/optimizer-device-proof-0001.json": {
+      "sha256": "a3b5a7769a29b2955836dbbd474586cbda510c824367e8f69dfdafbe7bc64d4f",
+      "original_sha256": "a3b5a7769a29b2955836dbbd474586cbda510c824367e8f69dfdafbe7bc64d4f",
+      "bytes": 3582
+    },
+    "evidence/api-dv6-new-init/optimizer-device-proof-1200.json": {
+      "sha256": "957eb27d80c6f4808bb0c02b50ba98715ed45bbcff8934eb78e0ecb86e3090e9",
+      "original_sha256": "957eb27d80c6f4808bb0c02b50ba98715ed45bbcff8934eb78e0ecb86e3090e9",
+      "bytes": 3633
+    },
+    "evidence/api-dv6-new-init/protocol.json": {
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "original_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "bytes": 3797
+    },
+    "evidence/api-dv6-new-init/result.json": {
+      "sha256": "5de07442806e83d94db0a2ccdc18994d35aea55598b9c38e47a1d6c5ba54a563",
+      "original_sha256": "5de07442806e83d94db0a2ccdc18994d35aea55598b9c38e47a1d6c5ba54a563",
+      "bytes": 1498
+    },
+    "evidence/api-dv6-new-init/runtime.json": {
+      "sha256": "12e00f8eef2d539cb1137201113bb526ad45edaaecff968b8512428c2a7a3f93",
+      "original_sha256": "12e00f8eef2d539cb1137201113bb526ad45edaaecff968b8512428c2a7a3f93",
+      "bytes": 6990
+    },
+    "evidence/api-dv6-new-init/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/api-dv6-new-init/source-preflight.json": {
+      "sha256": "72d45ab8a606f4e56a1de5685269786a7b51eddb8f86bb8fe772cb03458a5341",
+      "original_sha256": "72d45ab8a606f4e56a1de5685269786a7b51eddb8f86bb8fe772cb03458a5341",
+      "bytes": 879
+    },
+    "evidence/api-dv6-new-init/source.zip": {
+      "sha256": "95ef75bbe210084c7459ac1ac0c2984f59f1851898a8005002ce6845df46bc31",
+      "original_sha256": "95ef75bbe210084c7459ac1ac0c2984f59f1851898a8005002ce6845df46bc31",
+      "bytes": 591928
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv6/final-state.pt",
+      "sha256": "b3cfa959d7e1550c027bc4784d4906354a43857632c4442525b388d3be52645e",
+      "bytes": 759209
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv6/initial-state.pt",
+      "sha256": "34a2f0daa6adaa12cea8f72f8d279c0dca70a9140c06c2c7e1fa491180f5aea2",
+      "bytes": 341131
+    }
+  },
+  "old_quality_inherited": false
+}

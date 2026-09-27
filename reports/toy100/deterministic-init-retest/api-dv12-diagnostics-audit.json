@@ -1,0 +1,150 @@
+{
+  "status": "PASS",
+  "scope": "Independent source and all1200 scalar/rate/controller receipts; no Torch, training, GPU or numerical field replay",
+  "runtime_audit_sha256": "8261541366f191831dd3505b6cca4b8d63c0108357393cdb80ca93bbcc7510e9",
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv12",
+  "source_zip_sha256": "05afa73385192ef06e7c05e7e0dc46f37812ee56e2d8438696dd878304b2ff72",
+  "learning_rates_sha256": "708a1c98e4923814e99cc252597b47a60579190c50caef56ed7c8b0ca1c561e4",
+  "result": {
+    "observations": 24,
+    "passing": 12,
+    "first_arrival": 650,
+    "observations_since_arrival": 12,
+    "passing_since_arrival": 12,
+    "departures": [],
+    "minimum_hq_since_arrival": 0.9033203125,
+    "minimum_modes_since_arrival": 8,
+    "final_suffix": 12,
+    "final_suffix_start": 650,
+    "final_modes": 8,
+    "final_hq": 0.9833984375
+  },
+  "recipe": {
+    "name": "ka2",
+    "model": "gan",
+    "z_dim": 4,
+    "num_particles": 12,
+    "prior_kind": "particles",
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "total_steps": null,
+    "continuous_policy": "dv12",
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "prior_betas": null,
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "reg_every": 1,
+    "prior_reg": 0.0,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": true,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "input_noise_std": 0.0,
+    "input_noise_anneal_end": 0.1,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0,
+    "initialization": "batch_feature_zero"
+  },
+  "verified_rows": 1200,
+  "rate_ranges": {
+    "G": [
+      9.926130781551097e-05,
+      0.004246159340559062
+    ],
+    "prior": [
+      0.00031101817929553505,
+      0.008492629037436585
+    ],
+    "D": [
+      9.659111547862349e-05,
+      0.0042289625
+    ]
+  },
+  "final_rates": [
+    0.00027886199961703486,
+    0.0008745049774009275,
+    0.0002713079957877051
+  ],
+  "final_controller": {
+    "latent_applications": [
+      {
+        "radius_min": 0.19603192806243896,
+        "radius_mean": 0.47519147396087646,
+        "radius_max": 1.0893218517303467,
+        "perturbation_rms": 0.2601768672466278,
+        "clipped_fraction": 0.796875
+      },
+      {
+        "radius_min": 0.19603192806243896,
+        "radius_mean": 0.4877058267593384,
+        "radius_max": 1.0893218517303467,
+        "perturbation_rms": 0.25054463744163513,
+        "clipped_fraction": 0.796875
+      }
+    ],
+    "latent_bandwidth": [
+      0.41611552238464355,
+      0.45555996894836426,
+      0.4880145490169525,
+      0.4659239947795868
+    ],
+    "data_memory": 0.0,
+    "payoff_error": 0.16755502231510863,
+    "game_trust": 0.988006259866329,
+    "game_ratio": 1.1101786557241253,
+    "variant": "dv12",
+    "mobility": 0.05698091483717775,
+    "alignment": 0.15280156264098263,
+    "data_score": 1.1075688600540161,
+    "data_drive": 0.0,
+    "last_cosine": 0.40285733342170715,
+    "updates": 1200,
+    "reopens": 0,
+    "closed": true
+  },
+  "clipped_fraction_range": [
+    0.46875,
+    0.890625
+  ],
+  "observations": "first new-initialization passing screen, not a matched old fail-to-pass claim",
+  "limits": [
+    "Scalar consistency verifies applied-rate ordering and retained diagnostics; it does not independently recompute data features, gradients or nearest-neighbor distances.",
+    "DV12 learns latent bandwidth and clips each perturbation at half the distance to a distinct nearest prior point; this stochastic support perturbation applies to evaluation too, before .029 output noise.",
+    "Standalone factories do not own the full controller/sampler/update transaction; this result exercises public GANTrainer.",
+    "One tiny screen does not establish long stability or broad default qualification."
+  ]
+}

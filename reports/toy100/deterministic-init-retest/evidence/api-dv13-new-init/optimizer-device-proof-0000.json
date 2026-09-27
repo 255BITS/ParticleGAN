@@ -1,0 +1,124 @@
+{
+  "G": [
+    {
+      "shape": [
+        96,
+        4
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96,
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96,
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        2,
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        2
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        12,
+        4
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        12,
+        4
+      ],
+      "state_missing": true
+    }
+  ],
+  "D": [
+    {
+      "shape": [
+        96,
+        14
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96,
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96,
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        1,
+        96
+      ],
+      "state_missing": true
+    },
+    {
+      "shape": [
+        1
+      ],
+      "state_missing": true
+    }
+  ]
+}

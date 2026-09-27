@@ -1,0 +1,66 @@
+{
+  "status": "PASS_SOURCE_REVIEW",
+  "scope": "Independent stdlib source and original checkpoint receipt audit; no Torch import/model execution/GPU",
+  "source_bundle_sha256": "c731fe4faf35eb8eee8216f0df28448a10b5f42e38d18915dba1c733f85520e6",
+  "continuation_source_sha256": "0f9e1b701a25ee10707c0be621be89d5a3a848c3c6d4401143fec244ff97912c",
+  "protocol_sha256": "3ba650b41eaf2e9b1e786d7189f9588286309c7a7fd8aa1136eaf97b1e73b5f8",
+  "candidates": [
+    {
+      "candidate": "api-dv1",
+      "original_result": "FAIL",
+      "original_final_checkpoint_sha256": "3ad0dbd39855bd81507fd9b1231f36c1f540253b842d78f96fab8ce649fe4d49",
+      "original_arrival": 1200,
+      "original_suffix": 1,
+      "native_cpu_counters": 17,
+      "source_declaration_sha256": "a539617ea68ac7f0483cdc90bcca9a40cf1f8961101d1153b25f45d061399b09",
+      "constructor_cpu_proof_reused": "0b60452e8cb213d6d461f7e5f421ced74e55ba125ceae33355fb4628bbd6d02f"
+    },
+    {
+      "candidate": "api-dv2",
+      "original_result": "FAIL",
+      "original_final_checkpoint_sha256": "802ed0419383b2dc5084f4d1f4dc0805e92b0ad90542138435b46e6c7931d725",
+      "original_arrival": 1200,
+      "original_suffix": 1,
+      "native_cpu_counters": 17,
+      "source_declaration_sha256": "ba688e841b1e51ca31190df32f7c0427e00feb338351daec1759e7e3b944176c",
+      "constructor_cpu_proof_reused": "519eae957455fd45f00f58283627aa9dcdfc4fa692c1b25edb43eb7f104cb977"
+    },
+    {
+      "candidate": "api-dv3",
+      "original_result": "FAIL",
+      "original_final_checkpoint_sha256": "01db295a469d510df535e148e54c757fc859731638217bd994561f69a60db922",
+      "original_arrival": 1150,
+      "original_suffix": 2,
+      "native_cpu_counters": 17,
+      "source_declaration_sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d",
+      "constructor_cpu_proof_reused": "0fa09453986e5edc27d16ba87c8de8f3c37008c3fc7181adaf6ec437c4721e7f"
+    },
+    {
+      "candidate": "api-dv4",
+      "original_result": "FAIL",
+      "original_final_checkpoint_sha256": "84a35572a50cfb3e5a1b1f8feeb13b5c5ed9ab7054a53386339cd6f7cfee7883",
+      "original_arrival": 1100,
+      "original_suffix": 3,
+      "native_cpu_counters": 17,
+      "source_declaration_sha256": "4d6894fe58576a24a503b308568e9524fcefb5f37270d6a0c95f79b50f52ed7a",
+      "constructor_cpu_proof_reused": "4d47f8985f7bbf9c035c0670ba7be2f58637a062f493c5d9aa8676edb03aba7c"
+    }
+  ],
+  "findings": [
+    "All14 source bundle files verified by exact seal",
+    "Copied verify/construct/host helpers are byte-identical to already CPU-reviewed sealed v1",
+    "All four checkpoint/result/source authorities match already runtime-audited originals",
+    "Original serialized device placements retained by torch.load without map_location",
+    "Before update1201 exact entire serialized checkpoint comparison includes bytes/devices/RNG and native CPU clocks",
+    "Dry oracle reproduces original1200 receipts and saved cursor, then derives1201-2400 without touching restored learner",
+    "Original live and EMA1200 measurements must reproduce exactly before continuation",
+    "Same public step, full serial scope, streams, recipe totalNone and all rates/noise/controller remain unchanged",
+    "All24 future observations and every departure since own original arrival retained; original gateFAIL preserved"
+  ],
+  "limits": [
+    "Source/receipt review does not execute serialized restore on CUDA; runner enforces it before updates",
+    "No claim of bitwise future equality to an uninterrupted run without a separate comparator",
+    "Original checkpoint omits module training flags; frozen dense host has no mode-dependent layers and public step sets live modes",
+    "Supplement does not revise the original1200 gate verdict or establish full default eligibility"
+  ]
+}

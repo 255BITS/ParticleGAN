@@ -1,0 +1,20 @@
+{
+  "status": "PASS_SOURCE_ONLY",
+  "checks": [
+    "Complete original function hash matches source plan",
+    "Only three reversible textual insertions",
+    "Reverse transform exactly restores complete original source",
+    "Modified function parses/compiles without execution",
+    "No Torch imported by preparation or source-only transform",
+    "Worker source parses; explicit runtime/device contract and retained source ZIP are declared",
+    "Bytecode writes disabled before any historical import",
+    "Runtime capture asserts exact all-role initial tensor hashes against supplied independent CPU proof before optimizer construction"
+  ],
+  "original_sha256": "c0264a954830761efa6090cfbe4b0bcf85a8aa6c9cc320f5db6beb864a3c0f4c",
+  "transformed_sha256": "3abd2d1a60851f564ee7f568bfe0b8f6cb948676c0247753d8610909a817e2d6",
+  "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+  "runtime_or_constructor_tests": "NOT_RUN",
+  "worker_sha256": "0bcb5b0e243be81402e35b9240dff3f3391acb4146054de9bf44d6cf0a73b6fb",
+  "runtime_profile_dependency_explicitly_pinned": "reports/transfer_suite/unadjusted/leading_profile.json",
+  "source_plan_sha256": "0cac7345b4484a8b0d174081f8d84d11708b83a9fd8963ccb5f042ec0c799416"
+}

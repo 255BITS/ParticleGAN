@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "initialization_bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+  "constructor_proof_sha256": "b9c00dafea6e77cdf61cfc6c161ce4ac875df93c7d3d92adb93267354ebdc13f",
+  "initializer_package_git_files": 23,
+  "candidate_original_files": 6,
+  "review": "Original mechanism/latent/response and entire frozen host function preserved except reviewed constructor bindings; standalone actual public initializer/factory used under isolated package namespace; tiny dense host only",
+  "limits": [
+    "Dense tiny frozen research host only; original research execution policy, not publicGANTrainer",
+    "No new quality inherited; own external execution required"
+  ],
+  "source_plan_sha256": "0cac7345b4484a8b0d174081f8d84d11708b83a9fd8963ccb5f042ec0c799416",
+  "manifest_sha256": "8a2d2c200eb5c648b8a285b1dadb0a6636f9adc81601ce39be5c1dcd7db911e5",
+  "runner_sha256": "0bcb5b0e243be81402e35b9240dff3f3391acb4146054de9bf44d6cf0a73b6fb",
+  "final_runner_review": [
+    "Bytecode disabled before historical imports",
+    "Runtime/version/GPU/device/determinism/serial guards explicit",
+    "Actual CUDA initial model material must equal CPU proof before optimizer construction",
+    "Full prepared source ZIP with historical runtime and exact initializer, manifest and CPU proof retained even on error"
+  ]
+}

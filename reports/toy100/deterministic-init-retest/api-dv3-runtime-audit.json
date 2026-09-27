@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "scope": "Independent stdlib source/receipts/raw-state audit; no training",
+  "candidate": "API-DV3-new-init",
+  "result": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 2,
+    "first_arrival": 1150,
+    "observations_since_arrival": 2,
+    "passing_since_arrival": 2,
+    "departures": [],
+    "minimum_hq_since_arrival": 0.90966796875,
+    "minimum_modes_since_arrival": 8,
+    "final_suffix": 2,
+    "final_suffix_start": 1150,
+    "final_modes": 8,
+    "final_hq": 0.91162109375
+  },
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3",
+  "declaration_sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d",
+  "source_zip_sha256": "3df6d510cd9de2089fd873f0ed636875d89bb25a5f0b008a5add2ee8fc92d368",
+  "artifacts_verified": 16,
+  "sampling_rows_verified": 1200,
+  "observations_verified": 24,
+  "applied_diagnostic_rows_preserved": 1200,
+  "initial_tensors_equal_cpu_preflight": true,
+  "initial_state_sha256": "8a46b6852d409c870c3cd166a1886d1b61b0dcaca48cb4b6fddbd60c7bb2cb06",
+  "final_state_sha256": "01db295a469d510df535e148e54c757fc859731638217bd994561f69a60db922",
+  "optimizer_clocks": [
+    [
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      }
+    ],
+    [
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      },
+      {
+        "step": 1200.0,
+        "device": "cpu"
+      }
+    ]
+  ],
+  "limits": [
+    "Candidate-specific LR/controller diagnostics preserved; not independently replayed by this audit",
+    "Short screen does not establish long stability, API breadth, or default eligibility"
+  ]
+}

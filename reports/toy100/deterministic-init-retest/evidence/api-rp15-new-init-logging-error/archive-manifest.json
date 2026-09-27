@@ -1,0 +1,169 @@
+{
+  "id": "api-rp15-new-init-logging-error",
+  "candidate": "API-RP15-new-init",
+  "status": "ERROR",
+  "seconds": 2.0670280251652002,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021646Z/precision-wave2/20260927T021646Z-1885623/repo/reports/fixed-init-mode-hold/api-rp15",
+  "summary": {
+    "observations": 0,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": null,
+    "final_hq": null
+  },
+  "old_comparison": "INCOMPLETE_NEW_RUN_NO_QUALITY_SCORE",
+  "continuous_eligibility": "UNQUALIFIED_RETEST_IN_PROGRESS",
+  "recipe": {
+    "adam_eager_state": true,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "continuous_precision": "rp5",
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "game_update": "secant_resolvent",
+    "generator_update": "shared_tangent_support",
+    "initialization": "batch_feature_zero",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_init_steps": 360,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "noise_policy": "constant",
+    "num_classes": null,
+    "num_particles": 12,
+    "observation_sigma": 0.03,
+    "output_noise_init_steps": 720,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "routing_temperature": 0.25,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 4
+  },
+  "complete": false,
+  "artifacts": {
+    "evidence/api-rp15-new-init-logging-error/artifact-sha256.json": {
+      "sha256": "0989c21b1204a1254dc8137d508a11712278061dc02dc94f91aae60537725c35",
+      "original_sha256": "0989c21b1204a1254dc8137d508a11712278061dc02dc94f91aae60537725c35",
+      "bytes": 1272
+    },
+    "evidence/api-rp15-new-init-logging-error/batch-receipts.jsonl.gz": {
+      "sha256": "6a17d9e35a6a543dcdceacfc27bf9a82145e0cd6eda4ff6224a68604a6e4db45",
+      "original_sha256": "d6356be7200a18114b369f96aa8e227fe10aa9f81fc309faa0f622db29eecab6",
+      "bytes": 280
+    },
+    "evidence/api-rp15-new-init-logging-error/declaration.json": {
+      "sha256": "5f1690459b2253f98048fdb8ef27fdfe54172f1ce48523d508117fe38db0c350",
+      "original_sha256": "5f1690459b2253f98048fdb8ef27fdfe54172f1ce48523d508117fe38db0c350",
+      "bytes": 7179
+    },
+    "evidence/api-rp15-new-init-logging-error/initial.json": {
+      "sha256": "5a0ca2873e0509b49e0b0f0486afa4c21c1dc4de006dbc80a6ba95e29ddaa2a5",
+      "original_sha256": "5a0ca2873e0509b49e0b0f0486afa4c21c1dc4de006dbc80a6ba95e29ddaa2a5",
+      "bytes": 40573
+    },
+    "evidence/api-rp15-new-init-logging-error/learning-rates.jsonl.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 20
+    },
+    "evidence/api-rp15-new-init-logging-error/metrics.jsonl.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 20
+    },
+    "evidence/api-rp15-new-init-logging-error/optimizer-device-proof-0000.json": {
+      "sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "original_sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "bytes": 3633
+    },
+    "evidence/api-rp15-new-init-logging-error/protocol.json": {
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "original_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "bytes": 3797
+    },
+    "evidence/api-rp15-new-init-logging-error/result.json": {
+      "sha256": "748237d7346b311109224041bce3c19830b22eb3169c4abf63d284b846cb7409",
+      "original_sha256": "748237d7346b311109224041bce3c19830b22eb3169c4abf63d284b846cb7409",
+      "bytes": 745
+    },
+    "evidence/api-rp15-new-init-logging-error/runtime.json": {
+      "sha256": "a46e78b57a607f7384cf29d8103d7b05cdcc657eaa74569a48f5b857c73ecf64",
+      "original_sha256": "a46e78b57a607f7384cf29d8103d7b05cdcc657eaa74569a48f5b857c73ecf64",
+      "bytes": 7309
+    },
+    "evidence/api-rp15-new-init-logging-error/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/api-rp15-new-init-logging-error/source-preflight.json": {
+      "sha256": "799d8e01af1177469197f1c7f72d2599518035c21c126fe84ef5300e00464e65",
+      "original_sha256": "799d8e01af1177469197f1c7f72d2599518035c21c126fe84ef5300e00464e65",
+      "bytes": 880
+    },
+    "evidence/api-rp15-new-init-logging-error/source.zip": {
+      "sha256": "47c2f6393f1ad7d3c32113fe08946bf7660292c7ca8fed7d7869fc4b2c83dc3e",
+      "original_sha256": "47c2f6393f1ad7d3c32113fe08946bf7660292c7ca8fed7d7869fc4b2c83dc3e",
+      "bytes": 600494
+    }
+  },
+  "raw_checkpoints": {
+    "error-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021646Z/precision-wave2/20260927T021646Z-1885623/repo/reports/fixed-init-mode-hold/api-rp15/error-state.pt",
+      "sha256": "bed4956c459622e917b6194634bb314d7d43a21a3ecac3a7eb19abb6d9ec0bc4",
+      "bytes": 755303
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021646Z/precision-wave2/20260927T021646Z-1885623/repo/reports/fixed-init-mode-hold/api-rp15/initial-state.pt",
+      "sha256": "3c355bb29e1be425f103bbcdeff6223a80643c03a45c866e0c6965b038b6ad1d",
+      "bytes": 755459
+    }
+  },
+  "old_quality_inherited": false
+}

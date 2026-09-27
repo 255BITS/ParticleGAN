@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scope": "stdlib-only package/source/fixture audit",
+  "candidate": "API-RP6-new-init",
+  "package_files": 25,
+  "declaration_sha256": "8a2ac216c97e5332d73f17c5405f3f7f03f5a5beabb893db80d736bc5b60bace",
+  "protocol_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+  "exact_host_definitions": 21,
+  "frozen_batch_receipts": 1200,
+  "harness_sha256": {
+    "mode_hold_harness.py": "33d60389fc7a83eeed4fbda5becef3c95adcce0063f0f69baad4aaf303419fbf",
+    "mode_hold_contract.py": "db58961d99fc99df4d4446c114233e4aa7a45886e6f29c694b8a87e5e4851a46",
+    "init_contract.py": "c8bcf84e9b165a83ba78f06c0e288dd4d8b4c77a0b7588cb18fd669f9647ebdd",
+    "preflight.py": "1274b6d0e9cbe35a5fec220d3f1b0a98aa038135bd7ce6032075a4c5fae276d2"
+  },
+  "sampling_runtime_check": "NOT_RUN: exact CUDA draw parity must pass before quality execution"
+}

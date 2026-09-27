@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "status": "SOURCE_PREPARED_REQUIRES_INDEPENDENT_LOGGING_REVIEW",
+  "parent_harness_seal": "15ad9cf18d5fd0387d1f724bbd3ceec45f2474858d51fded318f3fa43f6ddc76",
+  "files": {
+    "README.md": "f75ce846b01c8ecfb0a4e7e82b18f098fba4d08936e55abd8ca357a619b29bce",
+    "init_contract.py": "c8bcf84e9b165a83ba78f06c0e288dd4d8b4c77a0b7588cb18fd669f9647ebdd",
+    "mode-hold-source/batch-receipts.jsonl.gz": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+    "mode-hold-source/extraction.json": "a30f17d4a58c2ba4a53a071d0b4783658cc4a23382f43bc6c044d67cc2e87ae6",
+    "mode-hold-source/fixture-receipt.json": "532cbfadb0e5e254ae849568e59e452ea4da7a0f6301649b0f94e437e499cbbc",
+    "mode-hold-source/frozen-mode-hold-host.zip": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+    "mode-hold-source/frozen_host.py": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c",
+    "mode-hold-source/original-execution-contract.py": "23a5796236eae1f794931da3de53c0f5ba62fe6afef39124b83a51efcca78795",
+    "mode_hold_contract.py": "db58961d99fc99df4d4446c114233e4aa7a45886e6f29c694b8a87e5e4851a46",
+    "mode_hold_harness.py": "7cd80861bdeec3e1173433122bf800eed6b3b7877d30aff0c04630c6ba60868e",
+    "preflight.py": "1274b6d0e9cbe35a5fec220d3f1b0a98aa038135bd7ce6032075a4c5fae276d2",
+    "protocol.json": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+  }
+}

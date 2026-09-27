@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "status": "SOURCE_PREPARED_REQUIRES_INDEPENDENT_CPU_REVIEW",
+  "v1_seal_unchanged": "15ad9cf18d5fd0387d1f724bbd3ceec45f2474858d51fded318f3fa43f6ddc76",
+  "files": {
+    "candidate-declaration.json": "59a92e348eb1fc230a2ebbf3138cb53422453ebedfbdbfaae9ce1bf39b29bd7b",
+    "historical_eager_setup.py": "3b3c84174d91f0e724ce8109ffc646a9de50d3e27332de39e9d8d3ae9f72c7e7",
+    "init_contract.py": "c8bcf84e9b165a83ba78f06c0e288dd4d8b4c77a0b7588cb18fd669f9647ebdd",
+    "mode-hold-source/batch-receipts.jsonl.gz": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+    "mode-hold-source/extraction.json": "a30f17d4a58c2ba4a53a071d0b4783658cc4a23382f43bc6c044d67cc2e87ae6",
+    "mode-hold-source/fixture-receipt.json": "532cbfadb0e5e254ae849568e59e452ea4da7a0f6301649b0f94e437e499cbbc",
+    "mode-hold-source/frozen-mode-hold-host.zip": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+    "mode-hold-source/frozen_host.py": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c",
+    "mode-hold-source/original-execution-contract.py": "23a5796236eae1f794931da3de53c0f5ba62fe6afef39124b83a51efcca78795",
+    "mode_hold_contract.py": "19ebe3d00961835457cdabc6b882b304ff687cf9b4afaca13b27dab32e4adbf8",
+    "mode_hold_harness.py": "9303c6c8c005d4c022a569e19928be5482d98388ca257641f2ad20adaade9a17",
+    "original-worker.py": "8f6fa5f80928e0f8df0bc8c9ff886d88e68646130cb91a3060741c63b9b7cfb2",
+    "preflight.py": "1274b6d0e9cbe35a5fec220d3f1b0a98aa038135bd7ce6032075a4c5fae276d2",
+    "protocol.json": "0e8aa3de65dcc9e0128f17e9db1bec0649ba63fa50e316602d361a82978281f9",
+    "reviewed_setup.py": "28dfc86fb477dfcbe1b529b14b30bc510eb5eca504ffc5d02fdcb2da1cc9fa39",
+    "source-review.json": "57bf7a2e92ce3a532438a295874c7abc0688d486e7ce95f18cfaea1f2dcdc6f1"
+  }
+}

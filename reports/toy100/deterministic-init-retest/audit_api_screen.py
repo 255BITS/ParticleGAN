@@ -32,6 +32,10 @@ def main():
     seal = read(ROOT / 'harness-sha256.json')['files']
     with zipfile.ZipFile(source / 'source.zip') as archive:
         assert len(archive.namelist()) == len(set(archive.namelist()))
+        required = set(read(source / 'protocol.json')['source_sha256']) | {
+            'mode_hold_harness.py', 'mode_hold_contract.py', 'init_contract.py',
+            'preflight.py', 'protocol.json', 'candidate-declaration.json'}
+        assert required <= set(archive.namelist()), 'missing required harness or host source'
         assert {n: sha(archive.read(n)) for n in archive.namelist()
                 if n.startswith('particlegan/')} == declaration['package_sha256']
         for name, expected in seal.items():

@@ -1,0 +1,36 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "scope": "HISTORICAL_RP1_WORKER_EAGER_DIAGNOSTIC_NOT_ORDINARY_PUBLIC_API",
+  "candidate": "API-RP1-CUDA-EAGER-new-init-diagnostic",
+  "declaration_sha256": "59a92e348eb1fc230a2ebbf3138cb53422453ebedfbdbfaae9ce1bf39b29bd7b",
+  "manifest_sha256": "bea404c3c04462117704c29eba1b550d2f3fcac36576e222339bc4784c5e3635",
+  "port_manifest_sha256": "e590d99ce49b106ed817c7876af473d5b5a2ab13a58e87d998bd237d7e914473",
+  "cpu_receipt_sha256": "553e55ca56638d2bce0330bb2d207f2af6cba1f42a3f269d99ea8fcad5c89a63",
+  "setup_receipts_sha256": "8cf1d634d8233aace147884c4a4eea4fe7ef5fa065dbcfbd8f73708a430c135b",
+  "source_checks": {
+    "original_loop_AST_exact": true,
+    "original_worker_matches_immutable_sourceZIP": true,
+    "candidate_package_and_recipe_equal_already_reviewed_RP1_public_partial": true,
+    "sealed_v1_unchanged": true,
+    "only_harness_constructor_setup_and_receipt_capture_added": true,
+    "extra_helpers_archived_by_protocol": true
+  },
+  "cpu_checks": {
+    "zero_steps": true,
+    "cuda_initialized": false,
+    "repeat_without_rng_reset": true,
+    "all_initial_params_buffers_equal_reviewed_public_partial": true,
+    "all_nonoptimizer_state_equal_reviewed_public_partial": true,
+    "both_setup_calls_preserve_full_nonoptimizer_state_and_rng": true,
+    "eager_state_counts": {
+      "G": 9,
+      "D": 8
+    },
+    "eager_state_values_zero": true
+  },
+  "limits": [
+    "Explicit historical diagnostic; helper is not package-owned public API behavior",
+    "External CUDA dry1200 sampling validation still required before any update",
+    "No prior scores or eligibility inherited"
+  ]
+}

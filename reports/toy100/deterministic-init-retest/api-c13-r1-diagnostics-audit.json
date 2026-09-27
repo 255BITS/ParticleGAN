@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "candidate": "API-C13-R1-new-init",
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T020858Z/mixed-wave1/20260927T020858Z-1872250/repo/reports/fixed-init-mode-hold/api-c13-r1",
+  "source_zip_sha256": "974bd7d2454558a5c8e50c5b48251ea095a8da17ef3305fe1db19d98a32792c9",
+  "accepted_updates": 1200,
+  "field_evaluations": 19097,
+  "field_count_histogram": {
+    "16": 1160,
+    "14": 10,
+    "13": 6,
+    "15": 15,
+    "12": 4,
+    "7": 1,
+    "9": 2,
+    "11": 1,
+    "10": 1
+  },
+  "converged": 51,
+  "minimum_actual_residual_fallback": 1149,
+  "nominal_rates_G_prior_D": [
+    0.00425,
+    0.0085,
+    0.00425
+  ],
+  "selected_relative_residual_ranges": {
+    "D": [
+      0.08468444645404816,
+      20.987226486206055
+    ],
+    "G": [
+      0.20080403983592987,
+      16.037376403808594
+    ],
+    "prior": [
+      0.14614203572273254,
+      17.47965431213379
+    ]
+  },
+  "seconds": 418.31488816300407,
+  "scope": "Telemetry/source consistency only; no numerical field recomputation, training or GPU",
+  "limits": [
+    "Finite iterative residual minimization with explicit fallback; no exact nonlinear implicit solution guarantee",
+    "Nominal constant rates coexist with variable accepted displacement"
+  ],
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.99853515625
+  }
+}

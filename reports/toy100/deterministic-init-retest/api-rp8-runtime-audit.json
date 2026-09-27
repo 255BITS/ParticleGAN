@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "scope": "Independent stdlib source/receipts/raw-state audit; no training",
+  "candidate": "API-RP8-new-init",
+  "result": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 6,
+    "final_hq": 1.0
+  },
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021646Z/precision-wave2/20260927T021646Z-1885623/repo/reports/fixed-init-mode-hold/api-rp8",
+  "declaration_sha256": "2563d2c3697f9cfe2c094e47a32353e3eb094c0c45deaeaf2e301ffed704c005",
+  "source_zip_sha256": "3f8828acaed239a5a384b75faf919464aeaa096697717bea1dbae2a007da3c53",
+  "artifacts_verified": 16,
+  "sampling_rows_verified": 1200,
+  "observations_verified": 24,
+  "applied_diagnostic_rows_preserved": 1200,
+  "initial_tensors_equal_cpu_preflight": true,
+  "initial_state_sha256": "a9ead33c3829c0097f1116a2ff169ba547f45e359f905bbbc9a0d42e788a0ca0",
+  "final_state_sha256": "682c20267d96a5c1c95f4877727ca7b7ce683a748b6392d2956bd0a9463ee366",
+  "optimizer_clocks": [
+    [
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      }
+    ],
+    [
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0"
+      }
+    ]
+  ],
+  "limits": [
+    "Candidate-specific LR/controller diagnostics preserved; not independently replayed by this audit",
+    "Short screen does not establish long stability, API breadth, or default eligibility"
+  ]
+}

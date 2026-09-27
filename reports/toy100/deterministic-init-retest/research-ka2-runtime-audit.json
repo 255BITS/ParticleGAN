@@ -1,0 +1,444 @@
+{
+  "status": "PASS",
+  "scope": "Independent retained source/runtime/raw-state audit, no Torch/model/GPU execution",
+  "quality_status": "FAIL",
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T022345Z/research-ka2-wave1/20260927T022345Z-1896821/repo/reports/reviewed-probe-output/20260927T022453Z/research-ka2",
+  "artifacts": {
+    "initial-values.pt": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+    "source-plan.json": "0cac7345b4484a8b0d174081f8d84d11708b83a9fd8963ccb5f042ec0c799416",
+    "prepared-source.zip": "3be6bd89a5abef6a3df825d760ea20cca56be7c1ddd22879d9a764002ab0e381",
+    "new-initial-state.pt": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+    "result.json": "39eaa3977e2b2f83d5dfc8de009daa0562ebe21e521e5c41d74f58a7c4576777",
+    "initialization-receipt.json": "11f03123991ebfd17a14b5ab9ab1eea1c9f59ce1de322f57b7699e9d4a8c76ae",
+    "prepared-source-manifest.json": "8a2d2c200eb5c648b8a285b1dadb0a6636f9adc81601ce39be5c1dcd7db911e5",
+    "prepared-source-sha256.json": "46a61b5f36fd8f1796c5d455c5b07bf1941581fe922274bb0a423713fd1b6c4b",
+    "mechanism-receipt.json": "8285204b0ff2943e386863ad962523cbfd0666e134c5923042f529034dfc85cd",
+    "final-state.pt": "d8b1e03953eda0c2e6da7849a377c4fafc4033f654fdac23ab4d4bcf1ee60b30",
+    "runtime.json": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318"
+  },
+  "prepared_source_sha256": {
+    "source_zip_sha256": "3be6bd89a5abef6a3df825d760ea20cca56be7c1ddd22879d9a764002ab0e381",
+    "prepared_manifest_sha256": "8a2d2c200eb5c648b8a285b1dadb0a6636f9adc81601ce39be5c1dcd7db911e5",
+    "reviewed_cpu_proof_sha256": "b9c00dafea6e77cdf61cfc6c161ce4ac875df93c7d3d92adb93267354ebdc13f"
+  },
+  "initial_cuda_material_matches_cpu_proof": true,
+  "all_initial_global_and_shared_rng_equal_frozen": true,
+  "final_shared_cursor_equal_frozen": true,
+  "initialization_fixture_loaded": false,
+  "observations": 24,
+  "passing_observations": 0,
+  "passing_suffix": 0,
+  "final": {
+    "modes": 7,
+    "hq": 0.995361328125
+  },
+  "seconds": 47.16558781196363,
+  "optimizer_clocks": [
+    [
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      }
+    ],
+    [
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 1200.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      }
+    ]
+  ],
+  "mechanism": {
+    "calls": 1200,
+    "dimensions": {
+      "2": 1200
+    },
+    "extra_critic_forwards": 0,
+    "rule": "ka2-slowatk-fastrel",
+    "floor": 0.01,
+    "guard_c": 5.0,
+    "guard_min_steps": 200,
+    "pure_a_calls": 799,
+    "blend_calls": 401,
+    "pure_b_calls": 0,
+    "first_blend_call": 800,
+    "first_pure_b_call": null,
+    "critic_steps": 1200,
+    "critic_parameters": 20161,
+    "lr_max": 0.00425,
+    "lr_last": 4.254505882408814e-05,
+    "s_trace": [
+      [
+        1,
+        0.5
+      ],
+      [
+        50,
+        0.5
+      ],
+      [
+        100,
+        0.5
+      ],
+      [
+        150,
+        0.5
+      ],
+      [
+        200,
+        0.5
+      ],
+      [
+        250,
+        0.5
+      ],
+      [
+        300,
+        0.5
+      ],
+      [
+        350,
+        0.5
+      ],
+      [
+        400,
+        0.5
+      ],
+      [
+        450,
+        0.5
+      ],
+      [
+        500,
+        0.5
+      ],
+      [
+        550,
+        0.5
+      ],
+      [
+        600,
+        0.5
+      ],
+      [
+        650,
+        0.5
+      ],
+      [
+        700,
+        0.5
+      ],
+      [
+        750,
+        0.5
+      ],
+      [
+        800,
+        0.5
+      ],
+      [
+        850,
+        0.5
+      ],
+      [
+        900,
+        0.5
+      ],
+      [
+        950,
+        0.5
+      ],
+      [
+        1000,
+        0.5
+      ],
+      [
+        1050,
+        0.5
+      ],
+      [
+        1100,
+        0.5
+      ],
+      [
+        1150,
+        0.5
+      ],
+      [
+        1200,
+        0.5
+      ]
+    ],
+    "anchor_decay": 0.999,
+    "anchor_started_call": 800,
+    "prox_trace": [
+      [
+        800,
+        0.0
+      ],
+      [
+        850,
+        0.001925333053804934
+      ],
+      [
+        900,
+        0.006564883049577475
+      ],
+      [
+        950,
+        0.0024816426448524
+      ],
+      [
+        1000,
+        0.0036019599065184593
+      ],
+      [
+        1050,
+        0.0009364814031869173
+      ],
+      [
+        1100,
+        0.00175628496799618
+      ],
+      [
+        1150,
+        0.0018935214029625058
+      ],
+      [
+        1200,
+        0.0011216318234801292
+      ]
+    ],
+    "s_fix": 0.5,
+    "lr_decoupled": true,
+    "w_trace": [
+      [
+        800,
+        1.0
+      ],
+      [
+        850,
+        1.0
+      ],
+      [
+        900,
+        1.0
+      ],
+      [
+        950,
+        1.0
+      ],
+      [
+        1000,
+        1.0
+      ],
+      [
+        1050,
+        1.0
+      ],
+      [
+        1100,
+        1.0
+      ],
+      [
+        1150,
+        1.0
+      ],
+      [
+        1200,
+        1.0
+      ]
+    ],
+    "sur_trace": [
+      [
+        800,
+        0.22628119587898254,
+        null
+      ],
+      [
+        850,
+        0.2546568214893341,
+        1.0693
+      ],
+      [
+        900,
+        0.29897159337997437,
+        1.4281
+      ],
+      [
+        950,
+        0.44699740409851074,
+        1.1553
+      ],
+      [
+        1000,
+        0.20707082748413086,
+        1.402
+      ],
+      [
+        1050,
+        0.3199300467967987,
+        1.2313
+      ],
+      [
+        1100,
+        0.8995199799537659,
+        1.1176
+      ],
+      [
+        1150,
+        0.19697275757789612,
+        1.1511
+      ],
+      [
+        1200,
+        0.46949172019958496,
+        1.1063
+      ]
+    ],
+    "sur_base": 0.34232160449028015,
+    "ema_updates": 376,
+    "ema_skips": 25,
+    "ema_reseeds": 0,
+    "alpha_trace": [
+      [
+        800,
+        0.0,
+        null
+      ],
+      [
+        850,
+        0.0177,
+        1.0693
+      ],
+      [
+        900,
+        0.0859,
+        1.4281
+      ],
+      [
+        950,
+        0.0457,
+        1.1553
+      ],
+      [
+        1000,
+        0.0554,
+        1.402
+      ],
+      [
+        1050,
+        0.0872,
+        1.2313
+      ],
+      [
+        1100,
+        0.0234,
+        1.1176
+      ],
+      [
+        1150,
+        0.0436,
+        1.1511
+      ],
+      [
+        1200,
+        0.0341,
+        1.1063
+      ]
+    ],
+    "final_s": 0.5,
+    "final_w": 1.0,
+    "final_sur_base": 0.34232160449028015,
+    "sur_hist_len": 400,
+    "final_alpha": 0.034075795095774256,
+    "final_ratio": 1.1062922461305784,
+    "guard_clipped_tensors": 4,
+    "guard_clip_steps": [
+      890
+    ],
+    "guard_clip_step_count": 1
+  },
+  "limits": [
+    "Historical custom research loop with original eager CUDA Adam state, not public GANTrainer.",
+    "Inner raw host verdict PASS has a looser diagnostic rule and is not authoritative. Outer frozen eight-mode/final-five gate FAIL is authoritative.",
+    "No per-update data batch receipts were emitted by this historical host; exact sealed sampler/update source plus original initial/final shared cursors and retained randomness receipt are verified, not an invented1200-row equality claim.",
+    "No old22 quality inherited; fresh result only."
+  ]
+}

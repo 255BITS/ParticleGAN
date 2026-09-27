@@ -1,0 +1,26 @@
+--- original/train_mode_hold
++++ standalone-new-init/train_mode_hold
+@@ -2,6 +2,8 @@
+                     gan_factory=None, cap_factory=None, diagnostics=False,
+                     training_recipe=None, log=None, noise_policy=None) -> dict:
+     """Train every requested arm and score only its generated samples."""
++    if training_recipe is not None:
++        raise RuntimeError("research binding requires original custom host path")
+     recipe = ModeHoldRecipe() if recipe is None else recipe
+     if training_recipe is not None:
+         recipe = replace(recipe, n_particles=training_recipe.num_particles,
+@@ -12,12 +14,13 @@
+     torch.manual_seed(seed)
+     stream = torch.Generator(device=torch.get_default_device()).manual_seed(seed)
+     means = ring_means()
+-    prior = (ParticlePrior(recipe.n_particles, Z_DIM, init_std=0.5, generator=stream)
++    prior = (_newinit_make_prior(recipe.n_particles, Z_DIM, init_std=0.5, generator=stream)
+              if training_recipe is None else training_recipe.make_prior(generator=stream))
+     generator = SimpleMLPGenerator(Z_DIM, HIDDEN, N_HIDDEN, 2)
+     # Host critic shape from the 100-Gaussians toy. Fourier width is the
+     # sharp-D stress, not an architecture swap.
+     critic = SimpleMLPDiscriminator(2, HIDDEN, N_HIDDEN, FOURIER)
++    _newinit_models(generator, critic, prior, stream)
+     if noise_policy is not None:
+         from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
+         generator = wrap_output(generator, noise_policy)

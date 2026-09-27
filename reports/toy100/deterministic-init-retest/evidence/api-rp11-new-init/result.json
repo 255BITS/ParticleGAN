@@ -1,0 +1,64 @@
+{
+  "candidate": "API-RP11-new-init",
+  "gate": "deterministic_mode_hold",
+  "status": "FAIL",
+  "seconds": 60.75503681995906,
+  "metrics": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "modes",
+          "value": 5,
+          "op": ">=",
+          "threshold": 8,
+          "status": "FAIL",
+          "margin": -3
+        },
+        {
+          "metric": "hq",
+          "value": 0.579833984375,
+          "op": ">=",
+          "threshold": 0.9,
+          "status": "FAIL",
+          "margin": -0.320166015625
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.3653700086805556,
+      "confirmation_fraction": 2.0
+    },
+    "final": {
+      "step": 1200,
+      "modes": 5,
+      "n_modes": 8,
+      "hq": 0.579833984375,
+      "cover": 0.625,
+      "effective_modes": 4.250960826873779,
+      "ema": {
+        "modes": 5,
+        "n_modes": 8,
+        "hq": 0.58203125,
+        "cover": 0.625,
+        "effective_modes": 3.635030746459961
+      },
+      "seconds": 60.73328549298458
+    },
+    "updates": 1200,
+    "matched_batch_receipts": 1200
+  },
+  "old_quality_inherited": false
+}

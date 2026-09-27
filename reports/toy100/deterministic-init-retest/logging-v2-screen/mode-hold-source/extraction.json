@@ -1,0 +1,149 @@
+[
+  {
+    "original": "benchmarks/locked_shared/mlp.py",
+    "name": "SimpleMLPGenerator",
+    "first_line": 16,
+    "last_line": 37,
+    "source_span_sha256": "a095aa85db23cdd4bf93cf0cd28bd5bdcdfd04bb5ead84ea0235d8e51cd5480b"
+  },
+  {
+    "original": "benchmarks/locked_shared/mlp.py",
+    "name": "SimpleMLPDiscriminator",
+    "first_line": 40,
+    "last_line": 73,
+    "source_span_sha256": "dbd1033eccabc1ef603509f95d600c2565be1b086f220e6e24a1669ad2b0fb37"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "N_MODES",
+    "first_line": 23,
+    "last_line": 23,
+    "source_span_sha256": "5fe10921d9fdc26499aca79c6a6d43b4100ee232e5c23ae1cf9071c10485e7bb"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "RADIUS",
+    "first_line": 24,
+    "last_line": 24,
+    "source_span_sha256": "ee4b5f7174347ccd01591f195fe4415059aa5bda2510e68d058ff4451001e7bb"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "SIGMA",
+    "first_line": 25,
+    "last_line": 25,
+    "source_span_sha256": "c87ea3e702ba06c04843345fcc8bbc4ec9276a819b60a92ea1eb61627d8647c6"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "Z_DIM",
+    "first_line": 26,
+    "last_line": 26,
+    "source_span_sha256": "b8f10fe72751fcbe970b0b90c5be38e490584201819b1973e759d0e7823bd35f"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "HIDDEN",
+    "first_line": 27,
+    "last_line": 27,
+    "source_span_sha256": "d6aa86a8bcbb669e759035a227d227ae6ed4791c12025e80f172c302af170132"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "N_HIDDEN",
+    "first_line": 28,
+    "last_line": 28,
+    "source_span_sha256": "c357a7163246447d13bc0f756cc8ee2dc35604536ddcdf9ab7e3f2969d9af4aa"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "FOURIER",
+    "first_line": 29,
+    "last_line": 29,
+    "source_span_sha256": "8d5cdd438c60d2174fe2d806fef774364007ef4885bb28e912fda7d0bf2c5939"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "BATCH",
+    "first_line": 30,
+    "last_line": 30,
+    "source_span_sha256": "c56a5aba3c0fe4ea1a5f0df20c8ccfda3329b4ddfbf5db236d23bb8485b32f52"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "EVAL_N",
+    "first_line": 32,
+    "last_line": 32,
+    "source_span_sha256": "68e3fb35306273c70e5dfadba6634d9107f7a6aee874597efa73f5c4e8398650"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "ring_means",
+    "first_line": 56,
+    "last_line": 58,
+    "source_span_sha256": "84f16450b90f9ba1d72a8c8ea7663b22f6314a8c9a8b8224387fc78e07cd0c13"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "sample_ring",
+    "first_line": 61,
+    "last_line": 64,
+    "source_span_sha256": "82d7cb344d6b357326e223bf6688b0f6baba058d6a1ad22c50c41418a5d640d1"
+  },
+  {
+    "original": "benchmarks/locked_shared/mode_hold.py",
+    "name": "diversity",
+    "first_line": 67,
+    "last_line": 99,
+    "source_span_sha256": "9adb043efc11c84a80a5fe6bed6bc75fd1df58d472dc4d835f9b6730e259dfe1"
+  },
+  {
+    "original": "benchmarks/locked_shared/observation.py",
+    "name": "MIN_STABLE_CHECKS",
+    "first_line": 15,
+    "last_line": 15,
+    "source_span_sha256": "0dd2bb171ed7f775cf447bbd6c015db7eab2dc29c42a3c995bc30daa95da2dd6"
+  },
+  {
+    "original": "benchmarks/locked_shared/observation.py",
+    "name": "sustained",
+    "first_line": 18,
+    "last_line": 50,
+    "source_span_sha256": "f9659bac4479e4944d2e124f4f2d81542c556156e599dd8f47afb443693c8c3b"
+  },
+  {
+    "original": "benchmarks/locked_shared/baseline.py",
+    "name": "score_metrics",
+    "first_line": 137,
+    "last_line": 146,
+    "source_span_sha256": "401120a98dfdf970759bb75dd81f51114d2126af2f2b0b986c9d62290f34c22c"
+  },
+  {
+    "original": "benchmarks/transfer_suite/protocol.py",
+    "name": "requirements",
+    "first_line": 31,
+    "last_line": 36,
+    "source_span_sha256": "37d5d52d0f974ddcfe217ad3bac3a18ec5b8169b087abaf1e9f6bb27b4e89e8f"
+  },
+  {
+    "original": "benchmarks/transfer_suite/protocol.py",
+    "name": "test_verdict",
+    "first_line": 97,
+    "last_line": 118,
+    "source_span_sha256": "3c5112f4e6e47410158a3071a30a83a549038831d0228a1dcdbc54e79793f6d9"
+  },
+  {
+    "original": "reports/reversible-precision/public_worker.py",
+    "name": "digest",
+    "first_line": 40,
+    "last_line": 64,
+    "source_span_sha256": "4ccb9dd5c362680391752c5fa1be50696e8af028bf6777fc6fb4da9acc7ebdb3"
+  },
+  {
+    "original": "reports/reversible-precision/public_worker.py",
+    "name": "rates",
+    "first_line": 123,
+    "last_line": 126,
+    "source_span_sha256": "7d60b3b1d254a0879ecbd4841bab1dd09a7ff07a525862ac446f77dda82cb837"
+  }
+]

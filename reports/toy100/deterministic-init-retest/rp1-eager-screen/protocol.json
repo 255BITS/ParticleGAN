@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "status": "PREPARING_REQUIRES_REVIEW_BEFORE_GPU_RUN",
+  "initializer_commit": "c720645ecae6b648e9fc6034e9d6b48ccff06ed3",
+  "initializer": "batch_feature_zero",
+  "algorithm_source_identity": "separate required candidate manifest; new merged package hashes must be sealed",
+  "host": {
+    "name": "mode_hold",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "All eight modes must remain present with sufficient sample quality.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 1200,
+    "thresholds": [
+      [
+        "modes",
+        ">=",
+        8
+      ],
+      [
+        "hq",
+        ">=",
+        0.9
+      ]
+    ]
+  },
+  "resources": {
+    "num_particles": 12,
+    "z_dim": 4,
+    "batch_size": 128,
+    "init_std": 0.5,
+    "G": [
+      4,
+      96,
+      96,
+      96,
+      2
+    ],
+    "D_hidden": [
+      96,
+      96,
+      96
+    ],
+    "fourier": 3
+  },
+  "construction": "original CUDA prior-first draw order retained; recipe.make_prior(init_std=.5,generator=shared_stream), then G/D; CPUdefault for public trainer/optimizers; initializer replacement consumes no RNG",
+  "data_order": "shared stream0 realD, latentD, latentG, realG; clone cursor to peek two latent draws and realG, pass realG tensor, assert accepted cursor after two draws then commit after realG; compare all1200 hashed receipts.",
+  "evaluation": {
+    "observations": [
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      550,
+      600,
+      650,
+      700,
+      750,
+      800,
+      850,
+      900,
+      950,
+      1000,
+      1050,
+      1100,
+      1150,
+      1200
+    ],
+    "samples": 4096,
+    "latent_seed": 9,
+    "output_noise_seed": "402 + completed_steps; separate global CUDA stream under fork_rng",
+    "final_passing_suffix": 5,
+    "live_primary": true,
+    "ema_diagnostic": true,
+    "candidate_latent_noise_seed": "402 + completed + 1901; separate from global output noise; only when candidate has native latent perturbation"
+  },
+  "no_inherited_quality": true,
+  "training_seed": 0,
+  "seed_sweeps": false,
+  "old_initial_model_values": "intentionally superseded; old raw values are not loaded",
+  "old_fixture_authority": {
+    "bundle": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-support/k3p-mode-hold-reference",
+    "bundle_manifest_sha256": "2ae5dd02c6049121536d0d692b437cb19399721ff5889d35ebe8030a204acf96",
+    "notes": "No historical full initial tensor fixture was retained for canonical mode_hold; RP5/RP7 own recorded states are reconstruction authority."
+  },
+  "source_sha256": {
+    "mode-hold-source/fixture-receipt.json": "532cbfadb0e5e254ae849568e59e452ea4da7a0f6301649b0f94e437e499cbbc",
+    "mode-hold-source/frozen_host.py": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c",
+    "mode-hold-source/frozen-mode-hold-host.zip": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+    "mode-hold-source/batch-receipts.jsonl.gz": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+    "mode-hold-source/original-execution-contract.py": "23a5796236eae1f794931da3de53c0f5ba62fe6afef39124b83a51efcca78795",
+    "mode-hold-source/extraction.json": "a30f17d4a58c2ba4a53a071d0b4783658cc4a23382f43bc6c044d67cc2e87ae6",
+    "historical_eager_setup.py": "3b3c84174d91f0e724ce8109ffc646a9de50d3e27332de39e9d8d3ae9f72c7e7",
+    "reviewed_setup.py": "28dfc86fb477dfcbe1b529b14b30bc510eb5eca504ffc5d02fdcb2da1cc9fa39"
+  },
+  "runtime_expected": {
+    "torch": "2.13.0+cu126",
+    "cuda": "12.6",
+    "gpu": "NVIDIA RTX A6000"
+  },
+  "learner_horizon": "candidate declared horizon retained; evaluation1200 is not injected into horizon-free recipes",
+  "scope": "preparation only; no GPUtraining executed; CPUinitialization checks do not score quality",
+  "historical_setup_scope": "RP1 worker-owned eager diagnostic; complete original setup retained; not released public API"
+}

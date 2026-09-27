@@ -1,0 +1,87 @@
+{
+  "status": "REVIEWED_READY_FOR_EXTERNAL_RUN",
+  "lane": "late-arrival-retention",
+  "sources": {
+    "probe": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/late-arrival-retention",
+      "files": {
+        "README.md": "d335af8a2467af79cf544f383369298f1f8dac8aa0a7bf8b0dbc40c9b95fe396",
+        "continuation-protocol.json": "3ba650b41eaf2e9b1e786d7189f9588286309c7a7fd8aa1136eaf97b1e73b5f8",
+        "continuation.py": "0f9e1b701a25ee10707c0be621be89d5a3a848c3c6d4401143fec244ff97912c",
+        "init_contract.py": "c8bcf84e9b165a83ba78f06c0e288dd4d8b4c77a0b7588cb18fd669f9647ebdd",
+        "mode-hold-source/batch-receipts.jsonl.gz": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+        "mode-hold-source/extraction.json": "a30f17d4a58c2ba4a53a071d0b4783658cc4a23382f43bc6c044d67cc2e87ae6",
+        "mode-hold-source/fixture-receipt.json": "532cbfadb0e5e254ae849568e59e452ea4da7a0f6301649b0f94e437e499cbbc",
+        "mode-hold-source/frozen-mode-hold-host.zip": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+        "mode-hold-source/frozen_host.py": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c",
+        "mode-hold-source/original-execution-contract.py": "23a5796236eae1f794931da3de53c0f5ba62fe6afef39124b83a51efcca78795",
+        "mode_hold_contract.py": "db58961d99fc99df4d4446c114233e4aa7a45886e6f29c694b8a87e5e4851a46",
+        "mode_hold_harness.py": "33d60389fc7a83eeed4fbda5becef3c95adcce0063f0f69baad4aaf303419fbf",
+        "preflight.py": "1274b6d0e9cbe35a5fec220d3f1b0a98aa038135bd7ce6032075a4c5fae276d2",
+        "protocol.json": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+        "bundle-sha256.json": "c731fe4faf35eb8eee8216f0df28448a10b5f42e38d18915dba1c733f85520e6"
+      }
+    },
+    "review": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/late-arrival-retention-review",
+      "files": {
+        "source-audit.json": "aae5177cb3d3b6f640595d39d39cb6b5fcf2fde2f37636795f9d1fb6c4b18ca2",
+        "source-audit.md": "062dd8b3b69fc6326b6aa8b5ad5655f7bc26e52c1c2dbde33d56f0f388575ed9"
+      }
+    }
+  },
+  "independent_reviews": [
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/late-arrival-retention-review/source-audit.json",
+      "sha256": "aae5177cb3d3b6f640595d39d39cb6b5fcf2fde2f37636795f9d1fb6c4b18ca2",
+      "required_status": "PASS_SOURCE_REVIEW"
+    }
+  ],
+  "cases": [
+    {
+      "id": "api-dv1-retention",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/probe/continuation.py",
+        "--candidate",
+        "api-dv1",
+        "--output",
+        "{output}/api-dv1-retention"
+      ]
+    },
+    {
+      "id": "api-dv2-retention",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/probe/continuation.py",
+        "--candidate",
+        "api-dv2",
+        "--output",
+        "{output}/api-dv2-retention"
+      ]
+    },
+    {
+      "id": "api-dv3-retention",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/probe/continuation.py",
+        "--candidate",
+        "api-dv3",
+        "--output",
+        "{output}/api-dv3-retention"
+      ]
+    },
+    {
+      "id": "api-dv4-retention",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/probe/continuation.py",
+        "--candidate",
+        "api-dv4",
+        "--output",
+        "{output}/api-dv4-retention"
+      ]
+    }
+  ],
+  "instructions": "SUPPLEMENTARY RETENTION ONLY. Resume each candidate own exact1200 final checkpoint using unchanged declared package, recipe, sampled-stream cursor and native CPU Adam scalar ownership. Script pins all referenced existing source/checkpoint files, verifies serialized restoration and reproduces original1200 live/EMA evaluation before step1201. Continue to2400, preserving24 additional50-step observations. Original1200 shortscreen scores remain FAIL. Report arrival and allsubsequentdepartures/minima/suffixes acrossoriginalandextension; do not relabel originalfailure asPASS or claim fullfreshprocess updateparity against an unexecuteduninterruptedcontrol. Read-only originalcheckpoint/source references are allowed; neveroverwrite them. No freshinitialization/reset/decay/horizon/controller changes. This uses alreadynew-initialized own state; no historicalrandomweights. No broader tests or extraextensions."
+}
