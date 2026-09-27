@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "CPU constructor-only independent proof; no forward/backward/optimizer step/training/GPU",
+  "source_plan_sha256": "2d2551ffe1f65e158f6556f1329e4deebd6db3457d6686662e07b1e69eb30f2b",
+  "bridge_sha256": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+  "manifest_sha256": "61fee81a43d3f8ee492e7f4cf0e3d95c08b6956a23fddf78c4f1a0e3215cb4f8",
+  "checks": {
+    "all_initial_tensors_match_public_host": true,
+    "repeat_without_rng_reset": true,
+    "constructor_rng_cursor_preserved": true,
+    "initializer_rng_neutral": true,
+    "historical_prior_registration_preserved": true,
+    "all_bindings_restore_on_exception": true,
+    "batch_distance_scope_explicit": true
+  },
+  "cuda_initialized": false,
+  "learner_steps": 0
+}

@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-09-27T02:01:12.901339+00:00",
+  "initialization_epoch": "HISTORICAL_RANDOM_INITIALIZATION",
+  "active_search": "STOPPED_FOR_DEVELOP_FIXED_INIT_RETEST",
+  "shared_historical_leaderboards_rewritten": false,
+  "candidates": {
+    "API-RP14": {
+      "mode_hold": {
+        "status": "PASS",
+        "passing_observations": 11,
+        "observations": 24,
+        "first_arrival": 650,
+        "departures_after_arrival": [
+          750
+        ],
+        "final_suffix_observations": 9,
+        "final_modes": 8,
+        "final_hq": 1.0
+      },
+      "img_intensity2": {
+        "status": "FAIL",
+        "passing_observations": 0,
+        "observations": 24,
+        "final_suffix_observations": 0,
+        "final_modes": 2,
+        "final_hq": 0.8125
+      },
+      "later_regression": {
+        "status": "PASS",
+        "tests": 103,
+        "failures": 0,
+        "errors": 0,
+        "scope": "Later retained original regression. Not asserted to be the pre-training test source."
+      },
+      "remaining_qualification": "NOT_RUN",
+      "limitations_retained": [
+        "Logged max_abs_force_cosine exceeds1 on26 total rows; no valid numerical orthogonality proof from this diagnostic.",
+        "tangent_support API receives all G parameters without filtering frozen parameters; actual benchmark G was fully trainable."
+      ],
+      "new_init_quality": "NOT_RUN"
+    },
+    "API-RP15": {
+      "execution_status": "INTERRUPTED_UNAUTHORIZED_LAUNCH",
+      "original_result_status": "ERROR",
+      "quality_verdict": "NOT_EVALUATED",
+      "completed_declared_gate": false,
+      "last_receipted_update": 322,
+      "observations": 6,
+      "passing_observations": 0,
+      "final_checkpoint": false,
+      "image_and_ring_and_qualification": "NOT_RUN",
+      "new_init_quality": "NOT_RUN",
+      "evidence": "../evidence/api-rp15-mode_hold-interrupted/archive-manifest.json"
+    }
+  },
+  "original_receipts": {
+    "rp14-late-regression-receipts/rp14-seal.json": {
+      "sha256": "f9e884fafd132a0e993a81739f609e86b67305519bdc7fd45313d2f8d641bedb",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp14-late-regression-receipts/rp14-seal.json",
+      "bytes": 393
+    },
+    "rp14-late-regression-receipts/rp14-test-sources.zip": {
+      "sha256": "46ec158ccb0feeabb3a205a80df8f8eabb14faeff178c81c56ab075e62cb8e9e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp14-late-regression-receipts/rp14-test-sources.zip",
+      "bytes": 16131
+    },
+    "rp14-late-regression-receipts/rp14-regression.xml": {
+      "sha256": "80718dc148a807634fedc34b48201d00f46761d91c0835003717bf845498e682",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp14-late-regression-receipts/rp14-regression.xml",
+      "bytes": 14021
+    },
+    "rp14-late-regression-receipts/rp14-regression.log": {
+      "sha256": "5488790780cf9508cd6f5877c871d9d2eaa1e34d0db0364c6633b6af51d3f100",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp14-late-regression-receipts/rp14-regression.log",
+      "bytes": 181
+    },
+    "rp15-interruption-receipts/terminal-supervisor.md": {
+      "sha256": "49576dc177101b7a1211dca2a96f34d01a39d680e1a8d0b8f7e92c52a6e5058e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/terminal-supervisor.md",
+      "bytes": 912
+    },
+    "rp15-interruption-receipts/rp15-complete-public-api.patch": {
+      "sha256": "6a66d707f5d2658d87414c67fc1ccdfa2a237a2089d6faa1b0d8fe9d798583bb",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/rp15-complete-public-api.patch",
+      "bytes": 53057
+    },
+    "rp15-interruption-receipts/rp15-seal.json": {
+      "sha256": "ff294eb935e8d6f1c022fbb3b2f71481945c727ef79b9ee81532ef67d20e5226",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/rp15-seal.json",
+      "bytes": 197
+    },
+    "rp15-interruption-receipts/rp15.md": {
+      "sha256": "b817be0a9adc1914d8033aaf50000582ae2b41ffd361721c22766462e83a26ea",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/rp15.md",
+      "bytes": 3946
+    },
+    "rp15-interruption-receipts/rp15-before-mode_hold-supervisor.md": {
+      "sha256": "49576dc177101b7a1211dca2a96f34d01a39d680e1a8d0b8f7e92c52a6e5058e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/rp15-before-mode_hold-supervisor.md",
+      "bytes": 912
+    },
+    "rp15-interruption-receipts/rp15-package.zip": {
+      "sha256": "c459140b47f83a121aa17c45b2f4eccf3836be87f9289d8bb072e08827bf66b3",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/rp15-package.zip",
+      "bytes": 57924
+    },
+    "rp15-interruption-receipts/rp15-source-lock.json": {
+      "sha256": "b630688ae91e268de249550a958c2d3256fceb4d08038bb9e90e9ff4d627a509",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp15-interruption-receipts/rp15-source-lock.json",
+      "bytes": 1753
+    },
+    "rp14-late-regression-audit.json": {
+      "sha256": "75090796973a29ad8f6d2ecf20f91df408d62551f9817c899243cb0df885ab24",
+      "original": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/rp14-late-regression-audit.json",
+      "bytes": 2474
+    },
+    "rp15-interrupted-audit.json": {
+      "sha256": "6ba8085ee172d2c0b02787e96a812cd1dc864525cf383384962b32163c42dfac",
+      "original": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/rp15-interrupted-audit.json",
+      "bytes": 8117
+    },
+    "rp15-interrupted-audit.md": {
+      "sha256": "6d05bbd7bcf8225b0cad88838ff3d4fc77d8726c75fce11ebe17197b60f2e680",
+      "original": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/rp15-interrupted-audit.md",
+      "bytes": 904
+    }
+  },
+  "policy": "Keep old scores and execution errors. Do not count RP15 as a completed failed gate; no historical pass transfers to new initialization."
+}

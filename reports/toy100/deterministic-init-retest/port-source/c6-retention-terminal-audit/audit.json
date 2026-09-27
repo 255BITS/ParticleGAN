@@ -1,0 +1,52 @@
+{
+  "status": "PASS_C6_SUPPLEMENT_ARTIFACT_AUDIT",
+  "scope": "Separate supplementary retention; original1200scores unchanged",
+  "rows": [
+    {
+      "status": "PASS_INDEPENDENT_ARTIFACT_AND_CPU_STATE_AUDIT",
+      "candidate": "API-C6-new-init",
+      "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025403Z/c6-retention/20260927T025403Z-1946078/repo/reports/reviewed-probe-output/20260927T025536Z/api-c6-retention",
+      "original_gate_status": "FAIL",
+      "supplement_status": "COMPLETE_SUPPLEMENT",
+      "summary": {
+        "first_arrival": 1200,
+        "passing_since_arrival": 21,
+        "observations_since_arrival": 25,
+        "departures": [
+          1800,
+          1850,
+          1900,
+          2250
+        ],
+        "min_hq_since_arrival": 0.183349609375,
+        "min_modes_since_arrival": 3,
+        "final_passing_suffix": 3,
+        "final_suffix_start": 2300
+      },
+      "final_hq": 1.0,
+      "final_modes": 8,
+      "own_serialized_checkpoint_restore_bytes_and_devices_equal": true,
+      "original_live_and_ema_endpoint_reproduced": true,
+      "extension_batches_exact": 1200,
+      "original_batch_replay_runtime_receipt": 1200,
+      "new_observations": 24,
+      "full_applied_rates_and_noise_retained": true,
+      "rate_policy": "Original C6 constant applied rates; total_steps7000/continuousTrue/LRfloors1 remain unchanged",
+      "applied_network_lr_range": [
+        0.00425,
+        0.00425
+      ],
+      "applied_prior_lr_range": [
+        0.0085,
+        0.0085
+      ],
+      "final_native_CPU_clocks_and_CUDA_moments_verified": true,
+      "cuda_initialized": false,
+      "no_model_construction_or_training": true,
+      "independent_freshprocess_update_replay": "NOT_CLAIMED: no uninterrupted future control was run",
+      "checkpoint_mode_scope": "Original GANTrainer checkpoint omits module training flags; fixed frozen host has no mode-dependent layer and public step resets G/D modes each update. No claim of arbitrary-host mode restoration.",
+      "archive_directory": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/supplementary-evidence/api-c6-retention",
+      "independent_audit_sha256": "05fc26248ed4c7223e1d086031a7acd54f8120c7023e40299ced7035b9b2d8ea"
+    }
+  ]
+}

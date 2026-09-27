@@ -1,0 +1,85 @@
+{
+  "id": "research-b3-belief-c972f15c-new-init",
+  "candidate": "RESEARCH-B3-belief-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 6,
+    "final_hq": 0.9990234375
+  },
+  "seconds": 51.46816998394206,
+  "continuous_eligibility": "DISQUALIFIED_CURRENT_CONFIGURATION",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024258Z/research-priority-six-wave1/20260927T024258Z-1927709/repo/reports/reviewed-probe-output/run-20260927T024342Z/b3-belief-c972f15c",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/priority-six/b3-belief-c972f15c-runtime-audit.json",
+  "audit_sha256": "08f4ae664f74a9f78c5422cdd243375f7ac8489eaa9bc65ed48c9a42d5eda5c9",
+  "artifacts": {
+    "research-evidence/research-b3-belief-c972f15c-new-init/source-plan.json": {
+      "sha256": "a2f198ddc71783af0a52e08d24a7f576ec435d94a1f68668d739b1f17e2920ba",
+      "original_sha256": "a2f198ddc71783af0a52e08d24a7f576ec435d94a1f68668d739b1f17e2920ba",
+      "bytes": 39620
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/prepared-source.zip": {
+      "sha256": "7d3442cafe5d52c6fab8a7a5dc237f19d20d98bbe92f8794009da01073469aaf",
+      "original_sha256": "7d3442cafe5d52c6fab8a7a5dc237f19d20d98bbe92f8794009da01073469aaf",
+      "bytes": 650733
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/result.json.gz": {
+      "sha256": "f56ed0995e312d0691164dc425f198f5a1943849c364815f0e2f2d036ccbd3e1",
+      "original_sha256": "8aa0cade2149b5a7882e64baa4ca6180caf6234a3c581955733495bffd894a9c",
+      "bytes": 86084
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/initialization-receipt.json": {
+      "sha256": "b475e482660bea988a686b9077ac87d6f25352540d3986db2da9f3f0a0d66833",
+      "original_sha256": "b475e482660bea988a686b9077ac87d6f25352540d3986db2da9f3f0a0d66833",
+      "bytes": 4491
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/prepared-source-manifest.json": {
+      "sha256": "7f6a9c4374029a30ebfd1ce43f3c862d3c860905df275c150af3bc478f8c57a0",
+      "original_sha256": "7f6a9c4374029a30ebfd1ce43f3c862d3c860905df275c150af3bc478f8c57a0",
+      "bytes": 4989
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/prepared-source-sha256.json": {
+      "sha256": "4150ba04321eaf75f360bd72ef6c026b5f1a277b08368038bdf40f4178fd77f1",
+      "original_sha256": "4150ba04321eaf75f360bd72ef6c026b5f1a277b08368038bdf40f4178fd77f1",
+      "bytes": 291
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/mechanism-receipt.json": {
+      "sha256": "d05bc452d3317d0dbe6a85e96e2e0c37c73c054a47acfefde139790d3a32d85e",
+      "original_sha256": "d05bc452d3317d0dbe6a85e96e2e0c37c73c054a47acfefde139790d3a32d85e",
+      "bytes": 2756
+    },
+    "research-evidence/research-b3-belief-c972f15c-new-init/runtime.json": {
+      "sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "original_sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024258Z/research-priority-six-wave1/20260927T024258Z-1927709/repo/reports/reviewed-probe-output/run-20260927T024342Z/b3-belief-c972f15c/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024258Z/research-priority-six-wave1/20260927T024258Z-1927709/repo/reports/reviewed-probe-output/run-20260927T024342Z/b3-belief-c972f15c/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024258Z/research-priority-six-wave1/20260927T024258Z-1927709/repo/reports/reviewed-probe-output/run-20260927T024342Z/b3-belief-c972f15c/final-state.pt",
+      "sha256": "c82117c5460f756680f45f14686ea8bcb34fd86edfea334736ac46422457cedd",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

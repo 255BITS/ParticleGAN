@@ -1,0 +1,179 @@
+{
+  "id": "api-rp15-new-init",
+  "candidate": "API-RP15-new-init",
+  "status": "PASS",
+  "seconds": 68.6219890192151,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp15",
+  "summary": {
+    "observations": 24,
+    "passing": 14,
+    "first_arrival": 550,
+    "observations_since_arrival": 14,
+    "passing_since_arrival": 14,
+    "departures": [],
+    "minimum_hq_since_arrival": 0.913818359375,
+    "minimum_modes_since_arrival": 8,
+    "final_suffix": 14,
+    "final_suffix_start": 550,
+    "final_modes": 8,
+    "final_hq": 0.999755859375
+  },
+  "old_comparison": "OLD_RUN_INTERRUPTED_AT322_NO_COMPLETE_QUALITY_SCORE",
+  "continuous_eligibility": "UNQUALIFIED_RETEST_IN_PROGRESS",
+  "recipe": {
+    "adam_eager_state": true,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "continuous_precision": "rp5",
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "game_update": "secant_resolvent",
+    "generator_update": "shared_tangent_support",
+    "initialization": "batch_feature_zero",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_init_steps": 360,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "noise_policy": "constant",
+    "num_classes": null,
+    "num_particles": 12,
+    "observation_sigma": 0.03,
+    "output_noise_init_steps": 720,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "routing_temperature": 0.25,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 4
+  },
+  "complete": true,
+  "artifacts": {
+    "evidence/api-rp15-new-init/artifact-sha256.json": {
+      "sha256": "de2bd6e380426278a136e516dc8fae25efcb853d53b4cf204ecdb800bbdecc40",
+      "original_sha256": "de2bd6e380426278a136e516dc8fae25efcb853d53b4cf204ecdb800bbdecc40",
+      "bytes": 1484
+    },
+    "evidence/api-rp15-new-init/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "bytes": 240947
+    },
+    "evidence/api-rp15-new-init/declaration.json": {
+      "sha256": "5f1690459b2253f98048fdb8ef27fdfe54172f1ce48523d508117fe38db0c350",
+      "original_sha256": "5f1690459b2253f98048fdb8ef27fdfe54172f1ce48523d508117fe38db0c350",
+      "bytes": 7179
+    },
+    "evidence/api-rp15-new-init/initial.json": {
+      "sha256": "5a0ca2873e0509b49e0b0f0486afa4c21c1dc4de006dbc80a6ba95e29ddaa2a5",
+      "original_sha256": "5a0ca2873e0509b49e0b0f0486afa4c21c1dc4de006dbc80a6ba95e29ddaa2a5",
+      "bytes": 40573
+    },
+    "evidence/api-rp15-new-init/learning-rates.jsonl.gz": {
+      "sha256": "93bfc7d4098f6037aec9d0c7369539972e80d052f8377099de78fd91e484c90d",
+      "original_sha256": "5c341d9a0f0830e758c20f28f8f46af14fbfbecd13c3951954d885c4bb24ee88",
+      "bytes": 337624
+    },
+    "evidence/api-rp15-new-init/metrics.jsonl.gz": {
+      "sha256": "7acea1453d66f79deea6e39eedf3aae49a2dcfafa71025cb86764ad33bc20ba9",
+      "original_sha256": "48c3c05b8c1d37e4163602015c4e904a7a592b99145cec66f1a7d3ddc753d9d9",
+      "bytes": 1075
+    },
+    "evidence/api-rp15-new-init/optimizer-device-proof-0000.json": {
+      "sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "original_sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "bytes": 3633
+    },
+    "evidence/api-rp15-new-init/optimizer-device-proof-0001.json": {
+      "sha256": "abe59b95cf9b48d40da4deacb24b0d04a673ab9dc61e96ab173f850ce7f6c961",
+      "original_sha256": "abe59b95cf9b48d40da4deacb24b0d04a673ab9dc61e96ab173f850ce7f6c961",
+      "bytes": 3633
+    },
+    "evidence/api-rp15-new-init/optimizer-device-proof-1200.json": {
+      "sha256": "fdbd7de65eb684f310968af9286c5e4a182a7c830c80d4b4171de517edd2286b",
+      "original_sha256": "fdbd7de65eb684f310968af9286c5e4a182a7c830c80d4b4171de517edd2286b",
+      "bytes": 3684
+    },
+    "evidence/api-rp15-new-init/protocol.json": {
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "original_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "bytes": 3797
+    },
+    "evidence/api-rp15-new-init/result.json": {
+      "sha256": "f7b3b31b301e5580ec326a1680de25b019d3cc522221ab8c862f3dd74337570d",
+      "original_sha256": "f7b3b31b301e5580ec326a1680de25b019d3cc522221ab8c862f3dd74337570d",
+      "bytes": 1541
+    },
+    "evidence/api-rp15-new-init/runtime.json": {
+      "sha256": "e114e77410b546c5e25fd45e963549ad66a7c3570859335380c54656a7fc10f4",
+      "original_sha256": "e114e77410b546c5e25fd45e963549ad66a7c3570859335380c54656a7fc10f4",
+      "bytes": 7453
+    },
+    "evidence/api-rp15-new-init/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/api-rp15-new-init/source-preflight.json": {
+      "sha256": "6a94d9c46b3c03152f2f99936b9b578cf4f10775c68aa7d6bc3572df41960b52",
+      "original_sha256": "6a94d9c46b3c03152f2f99936b9b578cf4f10775c68aa7d6bc3572df41960b52",
+      "bytes": 880
+    },
+    "evidence/api-rp15-new-init/source.zip": {
+      "sha256": "00f523a29c55da56d2372d87f986a0cb59bf2c76970a7add788540094a7a80b8",
+      "original_sha256": "00f523a29c55da56d2372d87f986a0cb59bf2c76970a7add788540094a7a80b8",
+      "bytes": 600645
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp15/final-state.pt",
+      "sha256": "2f438f281972f6b6e8bbb09a2740ae30d5515f494393d6a0f5b66495bd531d06",
+      "bytes": 758887
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp15/initial-state.pt",
+      "sha256": "7721cf343d1d6b657de0d2f3308056c872c614b5f65c482dd8a575e72a9a1148",
+      "bytes": 755459
+    }
+  },
+  "old_quality_inherited": false
+}

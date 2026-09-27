@@ -1,0 +1,955 @@
+diff --git i/particlegan/recipes.py w/particlegan/recipes.py
+index 7ecffe54..24c7f9dd 100644
+--- i/particlegan/recipes.py
++++ w/particlegan/recipes.py
+@@ -32,7 +32,14 @@ class Recipe:
+     ucd_weight: float = 0.02
+     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
+     batch_size: int = 2048
+-    total_steps: int = 7_000
++    total_steps: int | None = 7_000
++    continuous_precision: str | None = None
++    generator_update: str = "ordinary"
++    game_update: str = "ordinary"
++    adam_eager_state: bool = False
++    input_noise_init_steps: int = 360
++    output_noise_init_steps: int = 720
++    noise_policy: str = "initialization"
+     lr: float = 0.00425
+     d_lr_mult: float = 1.0
+     prior_lr_mult: float = 2.0
+@@ -75,6 +82,12 @@ class Recipe:
+     reconstruction_weight: float = 1.0
+ 
+     def __post_init__(self):
++        if self.generator_update not in ("ordinary", "activation_metric", "tangent_support", "shared_tangent_support"):
++            raise ValueError("invalid generator_update")
++        if self.noise_policy not in ("initialization", "constant"):
++            raise ValueError("noise_policy must be initialization or constant")
++        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
++            raise ValueError("invalid game_update")
+         object.__setattr__(self, "betas", tuple(self.betas))
+         if self.prior_betas is not None:
+             object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+@@ -102,10 +115,18 @@ class Recipe:
+             raise ValueError("input_noise_anneal_end must be in (0, 1]")
+         if len(self.direct_particle_betas) != 2 or any(not 0 <= b < 1 for b in self.direct_particle_betas):
+             raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+-        for key in ("z_dim", "num_particles", "batch_size", "total_steps", "reg_every"):
++        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+             value = getattr(self, key)
+             if type(value) is not int or value <= 0:
+                 raise ValueError(f"{key} must be a positive integer")
++        if type(self.adam_eager_state) is not bool:
++            raise ValueError("adam_eager_state must be a boolean")
++        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
++            raise ValueError("unknown continuous precision policy")
++        if self.continuous_precision is not None and self.total_steps is not None:
++            raise ValueError("continuous precision requires total_steps=None")
++        if self.continuous_precision is None and (type(self.total_steps) is not int or self.total_steps <= 0):
++            raise ValueError("scheduled recipes require positive total_steps")
+         if self.encoder_mode not in ("none", "ae", "categorical", "hard"):
+             raise ValueError("encoder_mode must be none, ae, categorical, or hard")
+         if self.encoder_mode != "none" and self.prior_kind != "mog":
+@@ -263,9 +284,10 @@ class Recipe:
+         """
+         from .ka2 import KA2CriticAdam
+         options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
+-        return KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
++        optimizer = KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                              ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
+                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
++        return self._initialize_adam(optimizer)
+ 
+     def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
+         """Adam over ``params`` (tensors or param groups) whose ``step()`` does the
+@@ -278,10 +300,30 @@ class Recipe:
+         """
+         from .k3p import K3PGeneratorAdam
+         options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
+-        return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
++        optimizer = K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
+                                 latent_max_rate=self.latent_damping_max_rate,
+                                 direct_betas=self.direct_particle_betas,
+                                 direct_gain=self.direct_particle_gain, **options)
++        return self._initialize_adam(optimizer)
++
++    def _initialize_adam(self, optimizer):
++        """Optional explicit state initialization, including parameter-device counters.
++
++        Adam's update is unchanged. This changes the device arithmetic of KA2
++        moment telemetry and exposes zero-step state to guard/A2, so it is an
++        experimental formulation setting, NOT an equivalent storage optimization.
++        """
++        if self.adam_eager_state:
++            import torch
++            for group in optimizer.param_groups:
++                for parameter in group["params"]:
++                    state = optimizer.state[parameter]
++                    state["step"] = torch.zeros((), dtype=torch.float32, device=parameter.device)
++                    state["exp_avg"] = torch.zeros_like(parameter, memory_format=torch.preserve_format)
++                    state["exp_avg_sq"] = torch.zeros_like(parameter, memory_format=torch.preserve_format)
++                    if group["amsgrad"]:
++                        state["max_exp_avg_sq"] = torch.zeros_like(parameter, memory_format=torch.preserve_format)
++        return optimizer
+ 
+     @property
+     def resolved_network_lr_floor(self):
+diff --git i/particlegan/training.py w/particlegan/training.py
+index 124e48af..d490c1b1 100644
+--- i/particlegan/training.py
++++ w/particlegan/training.py
+@@ -11,12 +11,19 @@ from .recipes import Recipe, learning_rate_scales
+ 
+ def input_noise_std(recipe, completed_steps):
+     """Critic input-noise std for the next update (peak, linear to 0)."""
+-    end = recipe.input_noise_anneal_end * recipe.total_steps
++    if recipe.noise_policy == "constant":
++        return float(recipe.input_noise_std)
++    end = (recipe.input_noise_init_steps if recipe.continuous_precision else
++           recipe.input_noise_anneal_end * recipe.total_steps)
+     return float(recipe.input_noise_std * max(0.0, 1.0 - completed_steps / end))
+ 
+ 
+ def output_noise_std(recipe, completed_steps):
+     """Generator output-noise std after ``completed_steps`` (linear warmup)."""
++    if recipe.noise_policy == "constant":
++        return float(recipe.output_noise_std)
++    if recipe.continuous_precision:
++        return float(recipe.output_noise_std * min(1.0, completed_steps / recipe.output_noise_init_steps))
+     if recipe.output_noise_warmup == 0:
+         return float(recipe.output_noise_std)
+     return float(recipe.output_noise_std
+@@ -61,13 +68,24 @@ class GANTrainer:
+     critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream;
+     the caller's modules are never modified. ``sample`` includes the output
+     noise.
++
++    ``serial_backward=True`` scopes the entire update to one autograd thread
++    for reproducible higher-order CUDA gradients after process restart. It
++    changes summation order from the historical runtime, so the mode is
++    explicit, checkpointed, and checked when loading. The caller's mode is
++    restored on both success and failure. Use the same mode from construction.
++    False inherits the caller's autograd setting; legacy checkpoints do not
++    capture that ambient setting. True enforces the serialized constraint.
+     """
+ 
+     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
+                  latent_generator=None, penalty_generator=None,
+-                 optimizer_options=None, penalty_options=None):
++                 optimizer_options=None, penalty_options=None, serial_backward=False):
+         if not isinstance(recipe, Recipe):
+             raise TypeError("recipe must be a Recipe")
++        if type(serial_backward) is not bool:
++            raise TypeError("serial_backward must be a boolean")
++        self.serial_backward = serial_backward
+         if (recipe.model != "gan" or recipe.conditioning != "scalar"
+                 or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
+             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
+@@ -115,9 +133,15 @@ class GANTrainer:
+         self.penalty_generator = self._stream(penalty_generator, seed + 3)
+         self.eval_generator = self._stream(None, seed + 4)
+         self.noise_generator = self._stream(None, seed + 5)
++        if recipe.game_update == "secant_particle_exploration":
++            self.particle_noise_generator = self._stream(None, seed + 6)
++            self._STREAMS = self._STREAMS + ("particle_noise_generator",)
+         self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
+         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+         self.completed_steps = 0
++        from .precision import ReversiblePrecision
++        self.precision = (ReversiblePrecision(self.D, recipe.continuous_precision)
++                          if recipe.continuous_precision else None)
+ 
+     @property
+     def latent_damping(self):
+@@ -150,12 +174,11 @@ class GANTrainer:
+         return batch.detach()
+ 
+     @staticmethod
+-    def _generate(model, latent, sigma, stream):
++    def _generate(model, latent, sigma, stream, *, return_raw=False):
+         """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+         y = model(latent)
+-        if sigma == 0:
+-            return y
+-        return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
++        noisy = y if sigma == 0 else y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
++        return (noisy, y) if return_raw else noisy
+ 
+     def step(self, real, *, generator_real=None, collect_stats=False):
+         """Perform one D update and one G/prior update; return detached losses.
+@@ -166,8 +189,22 @@ class GANTrainer:
+         returns the gradient penalty's synchronized diagnostic dictionary
+         (including the penalty's blend weight ``s``).
+         """
++        if self.serial_backward:
++            # Keep higher-order graph creation and accumulation on one autograd
++            # thread: cross-thread sequence numbers reorder sums after restart.
++            with torch.autograd.set_multithreading_enabled(False):
++                return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
++        return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
++
++    def _step(self, real, *, generator_real=None, collect_stats=False):
++        if self.recipe.game_update != "ordinary":
++            from .game_update import joint_step
++            return joint_step(self, real, generator_real, collect_stats)
++        return self._ordinary_step(real, generator_real=generator_real, collect_stats=collect_stats)
++
++    def _ordinary_step(self, real, *, generator_real=None, collect_stats=False):
+         recipe = self.recipe
+-        if self.completed_steps >= recipe.total_steps:
++        if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
+             raise RuntimeError("recipe training budget exhausted")
+         real = self._batch(real, "real")
+         if generator_real is not None and not callable(generator_real):
+@@ -176,7 +213,8 @@ class GANTrainer:
+                 raise ValueError("generator_real must match the real sample shape")
+             if len(generator_real) != len(real):
+                 raise ValueError("RpGAN generator_real must match the real batch size")
+-        network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
++        network, prior_scale = (self.precision.scales() if self.precision else
++                                learning_rate_scales(self.completed_steps, recipe))
+         for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
+             for group, rate, role in zip(optimizer.param_groups, rates, roles):
+                 group["lr"] = rate * (prior_scale if role == "prior" else network)
+@@ -197,7 +235,12 @@ class GANTrainer:
+         loss_d = loss_d + penalty
+         self.opt_d.zero_grad()
+         loss_d.backward()
++        stage = getattr(self, "_game_stage", None)
++        if stage is not None:
++            stage.before("d")
+         self.opt_d.step()
++        if stage is not None:
++            stage.after("d")
+ 
+         self.D.eval()
+         self.G.train()
+@@ -205,7 +248,10 @@ class GANTrainer:
+         try:
+             self.D.requires_grad_(False)
+             latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
++            from .generator_metric import ActivationMetric
++            with ActivationMetric(self.G, recipe.generator_update) as metric:
++                fake, generated = self._generate(self.G, latent, sigma_out, noise, return_raw=True)
++                fake_logits = critic(fake)
+             real_g = generator_real() if callable(generator_real) else generator_real
+             real_g = real if real_g is None else self._batch(real_g, "generator_real")
+             if real_g.shape[1:] != real.shape[1:]:
+@@ -220,22 +266,51 @@ class GANTrainer:
+                 prior_reg = self.prior_regularizer(raw)
+             loss_g = loss_gan + recipe.prior_reg * prior_reg
+             self.opt_g.zero_grad()
++            support_grads, support_stats = None, None
++            if recipe.generator_update in ("tangent_support", "shared_tangent_support"):
++                from .generator_support import tangent_support, shared_tangent_support
++                if recipe.generator_update == "tangent_support":
++                    support_grads, support_stats = tangent_support(generated, indices, loss_gan, list(self.G.parameters()))
++                else:
++                    support_grads, support_stats = shared_tangent_support(generated, indices, loss_gan, list(self.G.parameters()), self.opt_g)
+             loss_g.backward()
++            generator_metric_stats = metric.apply()
++            if support_grads is not None:
++                with torch.no_grad():
++                    for p, extra in zip(self.G.parameters(), support_grads):
++                        if extra is not None:
++                            if p.grad is None:
++                                p.grad = extra
++                            else:
++                                p.grad.add_(extra)
++                generator_metric_stats = [support_stats]
++            before = ({id(p): p.detach().clone() for p in self.precision.parameters(self.opt_g)}
++                      if self.precision and stage is None else None)
++            if stage is not None:
++                stage.before("g")
+             self.opt_g.step()
++            if stage is not None:
++                stage.after("g")
++            activity = self.precision.update_activity(self.opt_g, before) if self.precision and stage is None else None
+         finally:
+             for parameter, flag in zip(self.D.parameters(), flags):
+                 parameter.requires_grad_(flag)
++        if stage is not None:
++            stage.finalize()
+         with torch.no_grad():
+             for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
+                 for averaged, current in zip(target.parameters(), source.parameters()):
+                     averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                 for averaged, current in zip(target.buffers(), source.buffers()):
+                     averaged.copy_(current)
++        if self.precision and stage is None:
++            self.precision.observe(self.D, real, activity)
+         self.completed_steps += 1
+         result = {key: value.detach() for key, value in
+                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+                        prior_regularization=prior_reg, penalty=penalty).items()}
+         result["step"] = self.completed_steps
++        result["generator_metric"] = generator_metric_stats
+         if collect_stats:
+             result["penalty_stats"] = penalty_stats
+         return result
+@@ -249,6 +324,8 @@ class GANTrainer:
+         stream = self.eval_generator if generator is None else self._stream(generator, 0)
+         if stream in (self.latent_generator, self.penalty_generator, self.noise_generator):
+             raise ValueError("sampling requires a stream separate from training")
++        if stream is getattr(self, "particle_noise_generator", None):
++            raise ValueError("sampling requires a stream separate from training")
+         model, prior = (self.ema_G, self.ema_prior) if ema else (self.G, self.prior)
+         modes = [(module, module.training) for root in (model, prior) for module in root.modules()]
+         devices = [self.device.index] if self.device.type == "cuda" else []
+@@ -268,6 +345,7 @@ class GANTrainer:
+         """Return an independent checkpoint; save the caller's data cursor too."""
+         names = ("G", "D", "prior", "ema_G", "ema_prior")
+         return deepcopy({
++            **({"serial_backward": True} if self.serial_backward else {}),
+             "schema": 4, "recipe": self.recipe.to_dict(),
+             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
+             "device": str(self.device), "dtype": str(self.dtype),
+@@ -276,6 +354,7 @@ class GANTrainer:
+                               for name in names},
+             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
+             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
++            **({"precision": self.precision.state_dict()} if self.precision else {}),
+             "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
+             "cpu_rng": torch.get_rng_state(),
+             "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
+@@ -295,13 +374,17 @@ class GANTrainer:
+                 "and cannot resume under KA2; pin the release that wrote the checkpoint "
+                 "(0.8.0 for K3P), or start a new run")
+         expected = self.state_dict()
++        if isinstance(state, dict) and (
++                type(state.get("serial_backward", False)) is not bool
++                or state.get("serial_backward", False) != self.serial_backward):
++            raise ValueError("checkpoint serial_backward execution mode does not match trainer")
+         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 4:
+             raise ValueError("invalid GANTrainer checkpoint schema")
+         for key in ("recipe", "optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
+             if state[key] != expected[key]:
+                 raise ValueError(f"checkpoint {key} does not match trainer")
+         steps = state["completed_steps"]
+-        if type(steps) is not int or not 0 <= steps <= self.recipe.total_steps:
++        if type(steps) is not int or (steps < 0 or (self.recipe.total_steps is not None and steps > self.recipe.total_steps)):
+             raise ValueError("invalid checkpoint step count")
+         rates = state["initial_lrs"]
+         if (not isinstance(rates, list) or len(rates) != 2
+@@ -335,10 +418,14 @@ class GANTrainer:
+                 raise ValueError("CPU trainer cannot load CUDA RNG state")
+         except (TypeError, ValueError, RuntimeError, AttributeError) as error:
+             raise ValueError("invalid checkpoint RNG state") from error
++        if self.precision:
++            deepcopy(self.precision).load_state_dict(state["precision"])
+         for name, values in state["models"].items():
+             getattr(self, name).load_state_dict(values)
+         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
+             optimizer.load_state_dict(deepcopy(values))
++        if self.precision:
++            self.precision.load_state_dict(state["precision"])
+         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+         for name, value in state["streams"].items():
+             getattr(self, name).set_state(value.cpu())
+diff --git 1/particlegan/precision.py 2/particlegan/precision.py
+new file mode 100644
+index 00000000..8020a056
+--- /dev/null
++++ 2/particlegan/precision.py
+@@ -0,0 +1,112 @@
++"""Experimental reversible precision, driven only by game/update evidence."""
++from copy import deepcopy
++import math
++import torch
++
++
++class ReversiblePrecision:
++    """A contraction must finish before reducing mobility; every close can reopen.
++
++    The reference EMA and all smoothing windows have fixed update time constants.
++    Neither training age nor an evaluator horizon selects a learning rate.
++    """
++    def __init__(self, critic, variant="rp1"):
++        self.reference = deepcopy(critic).eval().requires_grad_(False)
++        self.state = dict(variant=variant, open=True, gap=None, gap_s=None,
++                          velocity=0., contraction_peak=0., contracting=0,
++                          activity=None, activity_peak=0., quiet_gap=None,
++                          quiet_activity=None, quiet=0, shock=0, updates=0,
++                          openings=1, closings=0, event="initial_open")
++        if variant == "rp5":
++            self.state["velocity_s"] = 0.
++
++    def scales(self):
++        gain = (1. if self.state['variant'] == 'rp5' else .2) if self.state['open'] else 0.
++        return .01 + .99 * gain, .05 + .95 * gain
++
++    @staticmethod
++    def parameters(optimizer):
++        return [p for g in optimizer.param_groups for p in g['params'] if p.grad is not None]
++
++    @torch.no_grad()
++    def update_activity(self, optimizer, before):
++        terms = []
++        for group in optimizer.param_groups:
++            for p in group['params']:
++                if p.grad is not None and id(p) in before:
++                    terms.append(((p - before[id(p)]) / group['lr']).flatten())
++        return float(torch.cat(terms).square().mean().sqrt())
++
++    def observe(self, critic, real, activity):
++        with torch.enable_grad():
++            x = real.detach().clone().requires_grad_(True)
++            y = critic(x)
++            if isinstance(y, (tuple, list)):
++                y = y[0]
++            g = torch.autograd.grad(y.sum(), x)[0].detach()
++            x = real.detach().clone().requires_grad_(True)
++            y = self.reference(x)
++            if isinstance(y, (tuple, list)):
++                y = y[0]
++            ref = torch.autograd.grad(y.sum(), x)[0].detach()
++            gap = float((g - ref).square().mean())
++        with torch.no_grad():
++            for old, new in zip(self.reference.parameters(), critic.parameters()):
++                old.lerp_(new, .001)
++            for old, new in zip(self.reference.buffers(), critic.buffers()):
++                old.copy_(new)
++        self.advance(gap, activity)
++
++    def advance(self, gap, activity):
++        s = self.state
++        if not all(math.isfinite(v) and v >= 0 for v in (gap, activity)):
++            raise ValueError('nonfinite precision evidence')
++        s['updates'] += 1
++        s['event'] = None
++        prev = gap if s['gap_s'] is None else s['gap_s']
++        s['gap'] = gap
++        s['gap_s'] = .99 * prev + .01 * gap
++        s['velocity'] = s['gap_s'] - prev
++        velocity = s['velocity']
++        if s['variant'] == 'rp5':
++            s['velocity_s'] = .95 * s['velocity_s'] + .05 * velocity
++            velocity = s['velocity_s']
++        s['activity'] = activity if s['activity'] is None else .9 * s['activity'] + .1 * activity
++        if s['open']:
++            s['activity_peak'] = max(s['activity_peak'] * .9997, s['activity'])
++            s['contracting'] = s['contracting'] + 1 if velocity < 0 else 0
++            s['contraction_peak'] = max(s['contraction_peak'], -velocity)
++            calm = (s['contracting'] >= 50 and s['contraction_peak'] > 0
++                    and -velocity < .25 * s['contraction_peak']
++                    and s['activity'] < .5 * s['activity_peak'])
++            s['quiet'] = s['quiet'] + 1 if calm else 0
++            if s['quiet'] >= 25:
++                s.update(open=False, quiet_gap=max(s['gap_s'], 1e-12),
++                         quiet_activity=max(s['activity'], 1e-12), quiet=0,
++                         shock=0, event='close')
++                s['closings'] += 1
++        else:
++            ratio = s['gap_s'] / s['quiet_gap']
++            innovation = s['activity'] / s['quiet_activity']
++            # Reference disagreement alone is ambiguous. Require active updates
++            # and a growing excursion as well, with a short noise-rejection dwell.
++            shock = ratio > 4 and innovation > 2 and velocity > 0
++            s['shock'] = s['shock'] + 1 if shock else 0
++            if ratio < 2 and innovation < 2:
++                s['quiet_gap'] = .99 * s['quiet_gap'] + .01 * max(s['gap_s'], 1e-12)
++                s['quiet_activity'] = .99 * s['quiet_activity'] + .01 * max(s['activity'], 1e-12)
++            if s['shock'] >= 5:
++                s.update(open=True, contraction_peak=0., contracting=0,
++                         activity_peak=s['activity'], quiet=0, shock=0, event='reopen')
++                s['openings'] += 1
++
++    def state_dict(self):
++        return deepcopy(dict(state=self.state, reference=self.reference.state_dict()))
++
++    def load_state_dict(self, value):
++        if set(value) != {'state', 'reference'} or value['state'].keys() != self.state.keys():
++            raise ValueError('invalid precision checkpoint')
++        if value['state']['variant'] != self.state['variant']:
++            raise ValueError('precision variant differs')
++        self.reference.load_state_dict(value['reference'])
++        self.state = deepcopy(value['state'])
+diff --git 1/particlegan/game_update.py 2/particlegan/game_update.py
+new file mode 100644
+index 00000000..819655a4
+--- /dev/null
++++ 2/particlegan/game_update.py
+@@ -0,0 +1,305 @@
++"""Transactional joint predictor/corrector using the installed Adam optimizers.
++
++Both fields in a stage see the same joint parameter state. A preview never
++advances accepted optimizer/controller/EMA/RNG clocks. No evaluator inputs.
++"""
++from copy import deepcopy
++import torch
++
++
++IMPLICIT_POLICIES = ("secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration")
++THREE_FIELD_POLICIES = ("two_direction_resolvent", "minimum_residual_resolvent")
++
++
++@torch.no_grad()
++def restore(pairs):
++    for parameter, value in pairs:
++        parameter.copy_(value)
++
++
++def copies(parameters):
++    return [(p, p.detach().clone()) for p in parameters]
++
++
++class JointStage:
++    def __init__(self, trainer, base, correction=False):
++        self.trainer, self.base, self.correction = trainer, base, correction
++        self.pending = None
++        self.predicted_d = None
++        self.reference_before = None
++        self.predictor_state = None
++        self.predicted = None
++        self.secant_stats = None
++        self.first_field = None
++        self.second_direction = None
++
++    def before(self, role):
++        if role == "d" and self.trainer.recipe.game_update in IMPLICIT_POLICIES:
++            self.reference_before = deepcopy(self.trainer.ema_D.state_dict())
++            self.record_before = self.trainer.opt_d.record.state_dict()
++        if self.correction:
++            if role == 'd':
++                self.predicted_d = copies(self.trainer.D.parameters())
++            restore(self.base[role])
++
++    def after(self, role):
++        if role == 'd':
++            self.pending = copies(self.trainer.D.parameters())
++            restore(self.predicted_d if self.correction else self.base['d'])
++        else:
++            restore(self.pending)
++            self.pending = None
++
++    def finalize(self):
++        # Called only after the trainer restores the critic's original flags.
++        if self.correction and (self.trainer.recipe.game_update in ("secant_resolvent", "secant_particle_exploration")
++                                or self.second_direction is not None):
++            self.resolve()
++
++    def resolve(self):
++        pairs = self.base['d'] + self.base['g']
++        predicted = self.predicted['d'] + self.predicted['g']
++        u = [q - b for (_, q), (_, b) in zip(predicted, pairs)]
++        v = [p.detach() - b for p, b in pairs]
++        if self.second_direction is None:
++            delta, self.secant_stats = secant_resolvent(u, v)
++        else:
++            solver = (minimum_residual_resolvent if self.trainer.recipe.game_update == "minimum_residual_resolvent"
++                      else two_direction_resolvent)
++            delta, self.secant_stats = solver(
++                u, self.first_field, v, self.second_direction)
++        if self.trainer.recipe.game_update == "secant_particle_exploration":
++            index = next(i for i, (p, _) in enumerate(pairs) if p is self.trainer.prior.z)
++            noise, stats = particle_exploration(u[index], v[index], delta[index],
++                                               self.trainer.particle_noise_generator)
++            delta[index] = delta[index] + noise
++            self.secant_stats['particle_exploration'] = stats
++        restore([(p, b + d) for (p, b), d in zip(pairs, delta)])
++        # Persist ordinary gradients at the actual state, so extreme preview
++        # gradients cannot blind the next base-state Adam normalization.
++        for opt, state in zip((self.trainer.opt_g, self.trainer.opt_d), self.predictor_state):
++            opt.load_state_dict(deepcopy(state))
++        self.trainer.ema_D.load_state_dict(self.predictor_reference)
++        record = self.trainer.opt_d.record
++        if record.ema_reseeds > self.predictor_record_before["ema_reseeds"]:
++            self.trainer.opt_d.anchor.start_()
++        if record.ema_updates > self.predictor_record_before["ema_updates"]:
++            self.trainer.opt_d.anchor.update_()
++
++
++@torch.no_grad()
++def secant_resolvent(u, v):
++    """Backward-Euler response in a fitted dissipative/rotational plane.
++
++    Fit J u = v-u = a*u+r, r orthogonal to u. Project a to <=0;
++    on this plane use J=a*I+b*R (R a quarter-turn). Then
++    (I-J)^-1 u = ((1-a)*u+r)/((1-a)^2+b^2).
++    No norm threshold or tuned clipping coefficient. Exact for that local
++    linear game model; it is only a secant approximation for a nonlinear GAN.
++    """
++    norm2 = sum(x.square().sum() for x in u).clamp_min(torch.finfo(u[0].dtype).tiny)
++    w = [y-x for x,y in zip(u,v)]
++    a = sum((x*y).sum() for x,y in zip(u,w)) / norm2
++    perpendicular = [y-a*x for x,y in zip(u,w)]
++    b2 = sum(x.square().sum() for x in perpendicular) / norm2
++    radial = 1 + (-a).clamp_min(0)
++    denominator = radial.square() + b2
++    delta = [(radial*x+y)/denominator for x,y in zip(u,perpendicular)]
++    stats = {'radial_secant': float(a), 'rotation_squared': float(b2),
++             'denominator': float(denominator),
++             'norm_ratio': float(denominator.rsqrt()), 'moment_source': 'base_gradient'}
++    return delta, stats
++
++
++@torch.no_grad()
++def particle_exploration(predictor, corrector, accepted, generator):
++    """Zero-mean bounded exploration from two current particle directions."""
++    tiny = torch.finfo(predictor.dtype).tiny
++    first = predictor.square().sum(-1).sqrt()
++    second = corrector.square().sum(-1).sqrt()
++    active = (first > 0) & (second > 0)
++    cosine = ((predictor * corrector).sum(-1) / (first * second).clamp_min(tiny)).clamp(-1, 1)
++    disagreement = torch.where(active, (1-cosine)*.5, torch.zeros_like(cosine))
++    accepted_norm = accepted.square().sum(-1).sqrt()
++    sigma = accepted_norm * (disagreement / predictor.shape[-1]).sqrt()
++    signs = torch.randint(0, 2, predictor.shape, device=predictor.device, generator=generator)
++    noise = (2*signs-1).to(predictor.dtype) * sigma.unsqueeze(-1)
++    return noise, dict(mean_sigma=float(sigma.mean()), max_sigma=float(sigma.max()),
++        mean_disagreement=float(disagreement.mean()), active_rows=int(active.sum()),
++        noisy_rows=int((sigma>0).sum()), noise_l2=float(noise.norm()),
++        deterministic_prior_l2=float(accepted.norm()),
++        max_row_noise_to_step=float(disagreement.sqrt().max()), stream='particle_noise_generator')
++
++
++@torch.no_grad()
++def orthogonal_probe(u, v):
++    """Second secant direction, with the same length as the first predictor."""
++    tiny = torch.finfo(u[0].dtype).tiny
++    norm2 = sum(x.square().sum() for x in u).clamp_min(tiny)
++    w = [y - x for x, y in zip(u, v)]
++    radial = sum((x * y).sum() for x, y in zip(u, w)) / norm2
++    residual = [y - radial * x for x, y in zip(u, w)]
++    rotation = (sum(x.square().sum() for x in residual) / norm2).sqrt()
++    valid = rotation > torch.finfo(u[0].dtype).eps
++    return [torch.where(valid, x / rotation.clamp_min(tiny), torch.zeros_like(x))
++            for x in residual]
++
++
++@torch.no_grad()
++def two_direction_resolvent(u, v, third, direction):
++    """Measure both columns of the local game on a two-direction plane.
++
++    Unlike the isotropic rotation model, the second column is observed. The
++    symmetric part is projected onto the negative semidefinite cone, retaining
++    the measured skew component, then a two-dimensional implicit solve is used.
++    All probes reuse the original minibatches and native Adam state.
++    """
++    tiny = torch.finfo(u[0].dtype).tiny
++    norm2 = sum(x.square().sum() for x in u).clamp_min(tiny)
++    basis = (u, direction)
++    columns = ([y - x for x, y in zip(u, v)],
++               [y - x for x, y in zip(u, third)])
++    h = torch.stack([torch.stack([sum((q * w).sum() for q, w in zip(row, column)) / norm2
++                                 for column in columns]) for row in basis])
++    symmetric = (h + h.T) * .5
++    values, vectors = torch.linalg.eigh(symmetric)
++    dissipative = (vectors * values.clamp_max(0)) @ vectors.T + (h - h.T) * .5
++    rhs = h.new_tensor([1., 0.])
++    coefficients = torch.linalg.solve(torch.eye(2, device=h.device, dtype=h.dtype) - dissipative, rhs)
++    delta = [coefficients[0] * x + coefficients[1] * y for x, y in zip(u, direction)]
++    outside = [w - h[0, 1] * x - h[1, 1] * y for w, x, y in zip(columns[1], u, direction)]
++    return delta, dict(model="measured_two_direction", fitted_matrix=h.tolist(),
++        symmetric_eigenvalues=values.tolist(), applied_matrix=dissipative.tolist(),
++        coefficients=coefficients.tolist(), norm_ratio=float(coefficients.norm()),
++        second_column_outside_ratio=float((sum(x.square().sum() for x in outside) / norm2).sqrt()),
++        moment_source="base_gradient")
++
++
++@torch.no_grad()
++def constrained_coefficients(gram, rhs):
++    """Two-variable PSD least squares on the forward half of the unit disk."""
++    tiny = torch.finfo(gram.dtype).tiny
++    values, vectors = torch.linalg.eigh(gram)
++    values = values.clamp_min(0)
++    coordinates = vectors.T @ rhs
++    rank = values > torch.finfo(gram.dtype).eps * values.max()
++    unconstrained = torch.where(rank, coordinates / values.clamp_min(tiny), torch.zeros_like(coordinates))
++    multiplier = gram.new_zeros(())
++    constrained = bool(unconstrained.norm() > 1)
++    if constrained:
++        lower, upper = gram.new_zeros(()), rhs.norm()
++        for _ in range(32):
++            midpoint = (lower + upper) * .5
++            norm = (coordinates / (values + midpoint).clamp_min(tiny)).norm()
++            lower = torch.where(norm > 1, midpoint, lower)
++            upper = torch.where(norm > 1, upper, midpoint)
++        multiplier = upper
++        unconstrained = coordinates / (values + multiplier).clamp_min(tiny)
++    coefficients = vectors @ unconstrained
++    half_plane = bool(coefficients[0] < 0)
++    if half_plane:
++        scalar = torch.where(gram[1, 1] > tiny, rhs[1] / gram[1, 1].clamp_min(tiny), gram.new_zeros(())).clamp(-1, 1)
++        coefficients = torch.stack((gram.new_zeros(()), scalar))
++    return coefficients, dict(trust_multiplier=float(multiplier), trust_boundary=constrained,
++                              half_plane_active=half_plane, gram_rank=int(rank.sum()))
++
++
++@torch.no_grad()
++def minimum_residual_resolvent(u, v, third, direction):
++    """Use all measured response coordinates, including out-of-plane motion."""
++    norm2 = sum(x.square().sum() for x in u).clamp_min(torch.finfo(u[0].dtype).tiny)
++    columns = ([2*x-y for x, y in zip(u, v)],
++               [q-y+x for x, y, q in zip(u, third, direction)])
++    gram = torch.stack([torch.stack([sum((x*y).sum() for x, y in zip(a, b)) / norm2
++                                    for b in columns]) for a in columns])
++    rhs = torch.stack([sum((x*y).sum() for x, y in zip(a, u)) / norm2 for a in columns])
++    coefficients, stats = constrained_coefficients(gram, rhs)
++    delta = [coefficients[0]*x + coefficients[1]*q for x, q in zip(u, direction)]
++    residual = [x-coefficients[0]*a-coefficients[1]*b for x, a, b in zip(u, *columns)]
++    stats.update(model="full_linear_minimum_residual", coefficients=coefficients.tolist(),
++                 gram=gram.tolist(), rhs=rhs.tolist(), norm_ratio=float(coefficients.norm()),
++                 linear_residual=float((sum(x.square().sum() for x in residual) / norm2).sqrt()),
++                 zero_update=all(not bool(x.count_nonzero()) for x in delta), moment_source="base_gradient")
++    return delta, stats
++
++
++def restore_preview_state(trainer, checkpoint):
++    """Reset all accepted nonparameter clocks before another same-oracle field."""
++    for opt, state in zip((trainer.opt_g, trainer.opt_d), checkpoint['optimizers']):
++        opt.load_state_dict(deepcopy(state))
++    for name in ('ema_G', 'ema_prior'):
++        getattr(trainer, name).load_state_dict(checkpoint['models'][name])
++    for name in ('G', 'D', 'prior'):
++        module = getattr(trainer, name)
++        restore([(b, checkpoint['models'][name][key]) for key, b in module.named_buffers()])
++    trainer.completed_steps = checkpoint['completed_steps']
++    for name, state in checkpoint['streams'].items():
++        getattr(trainer, name).set_state(state.cpu())
++    torch.set_rng_state(checkpoint['cpu_rng'].cpu())
++    if trainer.device.type == 'cuda':
++        torch.cuda.set_rng_state(checkpoint['cuda_rng'].cpu(), trainer.device)
++
++
++def joint_step(trainer, real, generator_real, collect_stats):
++    if callable(generator_real):
++        generator_real = generator_real()
++    checkpoint = trainer.state_dict()
++    base = {'d': copies(trainer.D.parameters()),
++            'g': copies(list(trainer.G.parameters()) + list(trainer.prior.parameters()))}
++    trainer._game_stage = JointStage(trainer, base)
++    try:
++        trainer._ordinary_step(real, generator_real=generator_real, collect_stats=False)
++        predictor_state = None
++        predictor_reference = None
++        if trainer.recipe.game_update in IMPLICIT_POLICIES:
++            predictor_state = [deepcopy(o.state_dict()) for o in (trainer.opt_g, trainer.opt_d)]
++            predictor_reference = trainer._game_stage.reference_before
++            predictor_record_before = trainer._game_stage.record_before
++        predicted = {role: copies([p for p, _ in pairs]) for role, pairs in base.items()}
++        # Keep preview parameters, restore all other accepted state. Adam's
++        # ordinary CPU scalar step metadata remains on CPU.
++        restore_preview_state(trainer, checkpoint)
++        trainer._game_stage = JointStage(trainer, base, correction=True)
++        trainer._game_stage.predictor_state = predictor_state
++        trainer._game_stage.predictor_reference = predictor_reference
++        trainer._game_stage.predictor_record_before = predictor_record_before
++        trainer._game_stage.predicted = predicted
++        result = trainer._ordinary_step(real, generator_real=generator_real, collect_stats=collect_stats)
++        if trainer.recipe.game_update in THREE_FIELD_POLICIES:
++            pairs = base['d'] + base['g']
++            u = [q - b for (_, q), (_, b) in zip(predicted['d'] + predicted['g'], pairs)]
++            v = [p.detach() - b for p, b in pairs]
++            direction = orthogonal_probe(u, v)
++            restore_preview_state(trainer, checkpoint)
++            restore([(p, b + q) for (p, b), q in zip(pairs, direction)])
++            trainer._game_stage = JointStage(trainer, base, correction=True)
++            trainer._game_stage.predictor_state = predictor_state
++            trainer._game_stage.predictor_reference = predictor_reference
++            trainer._game_stage.predictor_record_before = predictor_record_before
++            trainer._game_stage.predicted = predicted
++            trainer._game_stage.first_field = v
++            trainer._game_stage.second_direction = direction
++            result = trainer._ordinary_step(real, generator_real=generator_real, collect_stats=collect_stats)
++        telemetry = {'policy': trainer.recipe.game_update,
++                     'field_evaluations': 3 if trainer.recipe.game_update in THREE_FIELD_POLICIES else 2,
++                     'accepted_updates': trainer.completed_steps, 'preview_moments_discarded': trainer.recipe.game_update == 'extragradient'}
++        if trainer._game_stage.secant_stats is not None:
++            telemetry["secant"] = trainer._game_stage.secant_stats
++        telemetry["generator_metric"] = result.get("generator_metric", [])
++        for role, pairs in base.items():
++            preview = [q - b for (_, q), (_, b) in zip(predicted[role], pairs)]
++            actual = [p.detach() - b for p, b in pairs]
++            telemetry[role] = {'preview_l2': float(sum(x.square().sum() for x in preview).sqrt()),
++                               'applied_l2': float(sum(x.square().sum() for x in actual).sqrt()),
++                               'correction_l2': float(sum((x-y).square().sum() for x,y in zip(actual,preview)).sqrt())}
++        if trainer.precision is not None:
++            before = {id(p): value for p, value in base["g"]}
++            activity = trainer.precision.update_activity(trainer.opt_g, before)
++            trainer.precision.observe(trainer.D, real, activity)
++        trainer.game_stats = telemetry
++        return result
++    except Exception:
++        trainer.load_state_dict(checkpoint)
++        raise
++    finally:
++        trainer._game_stage = None
+diff --git 1/particlegan/generator_metric.py 2/particlegan/generator_metric.py
+new file mode 100644
+index 00000000..e3d6d790
+--- /dev/null
++++ 2/particlegan/generator_metric.py
+@@ -0,0 +1,66 @@
++"""Stateless input-activation metric for dense shared-generator gradients."""
++import torch
++
++
++class ActivationMetric:
++    """Capture only the current G field, never evaluation or critic batches.
++
++    For augmented layer inputs H, C=H.T@H/N and damping=trace(C)/dim.
++    Right-precondition the weight/bias gradient with (C+damping I)^-1,
++    then preserve its Frobenius norm. This is a gradient direction change
++    before native Adam, with no target samples, persistent clock or RNG.
++    Dense affine layers are supported; other layers keep ordinary gradients.
++    """
++    def __init__(self, model, policy):
++        self.layers = [(n, m) for n, m in model.named_modules()
++                       if policy == 'activation_metric' and isinstance(m, torch.nn.Linear)]
++        self.moments = {}
++        self.handles = []
++
++    def __enter__(self):
++        def record(module, inputs):
++            with torch.no_grad():
++                h = inputs[0].detach().reshape(-1, module.in_features)
++                if module.bias is not None:
++                    h = torch.cat((h, torch.ones_like(h[:, :1])), dim=1)
++                gram = h.T @ h
++                if module in self.moments:
++                    old, n = self.moments[module]
++                    gram = gram + old
++                    self.moments[module] = (gram, n + len(h))
++                else:
++                    self.moments[module] = (gram, len(h))
++        for _, layer in self.layers:
++            self.handles.append(layer.register_forward_pre_hook(record))
++        return self
++
++    def __exit__(self, *args):
++        for handle in self.handles:
++            handle.remove()
++
++    @torch.no_grad()
++    def apply(self):
++        stats = []
++        for name, layer in self.layers:
++            if layer not in self.moments or layer.weight.grad is None:
++                continue
++            gram, count = self.moments[layer]
++            covariance = gram / count
++            damping = covariance.diag().mean().clamp_min(torch.finfo(gram.dtype).tiny)
++            gradient = layer.weight.grad
++            bias_active = layer.bias is not None and layer.bias.grad is not None
++            if layer.bias is not None:
++                bg = layer.bias.grad if bias_active else torch.zeros_like(layer.bias)
++                gradient = torch.cat((gradient, bg[:, None]), dim=1)
++            metric = covariance + damping * torch.eye(len(covariance), device=gram.device, dtype=gram.dtype)
++            corrected = torch.linalg.solve(metric, gradient.T).T
++            norm = gradient.norm()
++            corrected *= norm / corrected.norm().clamp_min(torch.finfo(gram.dtype).tiny)
++            stats.append(dict(layer=name, count=count, width=len(covariance), damping=float(damping),
++                gradient_norm=float(norm), corrected_norm=float(corrected.norm()),
++                cosine=float((gradient*corrected).sum()/norm.square().clamp_min(torch.finfo(gram.dtype).tiny)),
++                activation_effective_rank=float(covariance.trace().square()/covariance.square().sum().clamp_min(torch.finfo(gram.dtype).tiny))))
++            layer.weight.grad.copy_(corrected[:, :layer.in_features])
++            if bias_active:
++                layer.bias.grad.copy_(corrected[:, -1])
++        return stats
+diff --git 1/particlegan/generator_support.py 2/particlegan/generator_support.py
+new file mode 100644
+index 00000000..5fafe674
+--- /dev/null
++++ 2/particlegan/generator_support.py
+@@ -0,0 +1,98 @@
++"""Bounded adversarial-tangent separation of crowded generated support."""
++import torch
++
++
++def tangent_support(generated, indices, adversarial_loss, parameters):
++    """Return auxiliary G-only gradients; ordinary prior gradients stay intact.
++
++    Nearest neighbors exclude repeated samples of the same prior row. Kernel
++    scale is the current median neighbor distance. Its output gradient is
++    projected perpendicular to the ordinary adversarial output gradient and
++    bounded by that gradient's norm times current crowding (in [0, 1]).
++    No reference data, labels, times, noise draws, or persistent state.
++    """
++    x = generated.flatten(1)
++    with torch.no_grad():
++        distinct = indices[:, None] != indices[None, :]
++        if not bool(distinct.any()):
++            return [None] * len(parameters), dict(policy='tangent_support', active_rows=0)
++        distances = torch.cdist(x.detach(), x.detach()).square()
++        distances.masked_fill_(~distinct, float('inf'))
++        nearest_distance, nearest = distances.min(dim=1)
++        numerical_floor = torch.finfo(x.dtype).eps * x.detach().square().mean().clamp_min(torch.finfo(x.dtype).tiny)
++        bandwidth = nearest_distance.median().clamp_min(numerical_floor)
++    separation = (x - x[nearest]).square().sum(dim=1)
++    crowding = (-separation / bandwidth).exp()
++    loss = crowding.mean()
++    repulsion = torch.autograd.grad(loss, generated, retain_graph=True)[0].flatten(1).detach()
++    adversarial = torch.autograd.grad(adversarial_loss, generated, retain_graph=True)[0].flatten(1).detach()
++    with torch.no_grad():
++        tiny = torch.finfo(x.dtype).tiny
++        adv2 = adversarial.square().sum(dim=1, keepdim=True)
++        tangent = repulsion - (repulsion * adversarial).sum(dim=1, keepdim=True) / adv2.clamp_min(tiny) * adversarial
++        tangent_norm = tangent.norm(dim=1, keepdim=True)
++        tangent = tangent / tangent_norm.clamp_min(tiny) * adv2.sqrt() * crowding.detach()[:, None]
++        tangent = torch.where(tangent_norm > torch.finfo(x.dtype).eps * repulsion.norm(dim=1, keepdim=True), tangent, torch.zeros_like(tangent))
++        stats = dict(policy='tangent_support', distinct_particles=int(torch.unique(indices).numel()),
++            active_rows=int((tangent.norm(dim=1)>0).sum()), bandwidth_squared=float(bandwidth),
++            median_neighbor_distance=float(nearest_distance.median().sqrt()),
++            mean_crowding=float(crowding.mean()), adversarial_norm=float(adversarial.norm()),
++            tangent_norm=float(tangent.norm()),
++            max_force_ratio=float((tangent.norm(dim=1)/adversarial.norm(dim=1).clamp_min(tiny)).max()),
++            max_abs_force_cosine=float(((tangent*adversarial).sum(dim=1)/(tangent.norm(dim=1)*adversarial.norm(dim=1)).clamp_min(tiny)).abs().max()))
++    grads = torch.autograd.grad(generated, parameters, grad_outputs=tangent.reshape_as(generated), retain_graph=True, allow_unused=True)
++    return grads, stats
++
++
++def shared_tangent_support(generated, indices, adversarial_loss, parameters, optimizer):
++    """Project separation after G pullback, in the existing Adam metric.
++
++    P=(sqrt(v)+eps)^-1 uses the current native second moment only as a
++    measurement metric. Native Adam still performs every actual update.
++    Bound ||h_perp||_P by mean(crowding)*||g||_P, with <g,h_perp>_P=0.
++    There is no projection solver, optimizer-state mutation or new state.
++    """
++    x = generated.flatten(1)
++    with torch.no_grad():
++        distinct = indices[:, None] != indices[None, :]
++        if not bool(distinct.any()):
++            return [None] * len(parameters), dict(policy='shared_tangent_support', active_parameters=0)
++        distances = torch.cdist(x.detach(), x.detach()).square()
++        distances.masked_fill_(~distinct, float('inf'))
++        nearest_distance, nearest = distances.min(dim=1)
++        numerical_floor = torch.finfo(x.dtype).eps * x.detach().square().mean().clamp_min(torch.finfo(x.dtype).tiny)
++        bandwidth = nearest_distance.median().clamp_min(numerical_floor)
++    separation = (x - x[nearest]).square().sum(dim=1)
++    crowding = (-separation / bandwidth).exp()
++    active = [p for p in parameters if p.requires_grad]
++    adversarial = torch.autograd.grad(adversarial_loss, active, retain_graph=True, allow_unused=True)
++    repulsive = torch.autograd.grad(crowding.mean(), active, retain_graph=True, allow_unused=True)
++    groups = {id(p): group for group in optimizer.param_groups for p in group['params']}
++    with torch.no_grad():
++        g = [torch.zeros_like(p) if v is None else v for p, v in zip(active, adversarial)]
++        h = [torch.zeros_like(p) if v is None else v for p, v in zip(active, repulsive)]
++        metric = []
++        for p in active:
++            state = optimizer.state.get(p, {})
++            moment = state.get('exp_avg_sq', torch.zeros_like(p))
++            metric.append((moment.sqrt() + groups[id(p)]['eps']).reciprocal())
++        tiny = torch.finfo(x.dtype).tiny
++        gg = sum((a.square()*m).sum() for a, m in zip(g, metric))
++        gh = sum((a*b*m).sum() for a, b, m in zip(g, h, metric))
++        coefficient = gh / gg.clamp_min(tiny)
++        projected = [b-coefficient*a for a, b in zip(g, h)]
++        hh = sum((b.square()*m).sum() for b, m in zip(projected, metric))
++        gain = crowding.detach().mean()
++        scale = gain * (gg / hh.clamp_min(tiny)).sqrt()
++        corrected = [b*scale for b in projected]
++        cross = sum((a*b*m).sum() for a, b, m in zip(g, corrected, metric))
++        norm2 = sum((b.square()*m).sum() for b, m in zip(corrected, metric))
++        values = {id(p): v for p, v in zip(active, corrected)}
++        stats = dict(policy='shared_tangent_support', distinct_particles=int(torch.unique(indices).numel()),
++            active_parameters=len(active), bandwidth_squared=float(bandwidth),
++            median_neighbor_distance=float(nearest_distance.median().sqrt()),mean_crowding=float(gain),
++            projection_coefficient=float(coefficient),adversarial_metric_norm=float(gg.sqrt()),
++            auxiliary_metric_norm=float(norm2.sqrt()),metric_norm_ratio=float((norm2/gg.clamp_min(tiny)).sqrt()),
++            metric_cosine=float(cross/(gg*norm2).sqrt().clamp_min(tiny)),
++            metric='native_adam_existing_uncorrected_second_moment',native_state_mutated=False)
++    return [values.get(id(p)) for p in parameters], stats

@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-09-27T01:45:19.947700+00:00",
+  "candidate": "API-RP14",
+  "scope": "Later original regression receipt; neither a new quality run nor pre-training proof. Existing quality archives unchanged.",
+  "suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "103",
+    "time": "30.195",
+    "timestamp": "2026-09-26T19:35:41.531570-06:00",
+    "hostname": "pop-os"
+  },
+  "files": {
+    "rp14-regression.xml": {
+      "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-regression.xml",
+      "sha256": "80718dc148a807634fedc34b48201d00f46761d91c0835003717bf845498e682"
+    },
+    "rp14-regression.log": {
+      "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-regression.log",
+      "sha256": "5488790780cf9508cd6f5877c871d9d2eaa1e34d0db0364c6633b6af51d3f100"
+    },
+    "rp14-test-sources.zip": {
+      "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-test-sources.zip",
+      "sha256": "46ec158ccb0feeabb3a205a80df8f8eabb14faeff178c81c56ab075e62cb8e9e"
+    },
+    "rp14-seal.json": {
+      "source": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-seal.json",
+      "sha256": "f9e884fafd132a0e993a81739f609e86b67305519bdc7fd45313d2f8d641bedb"
+    }
+  },
+  "test_source_hashes": {
+    "tests/test_training.py": "52da3e5e38f430e412d18c3ab08647d1f9344d05a61f6c9deb2c06935ebd9fc8",
+    "tests/test_recipe_defaults.py": "06e1f22254f707b8cc77de7b27db6b7ad1f81366ac8543279607190e57b718bd",
+    "tests/test_ka2.py": "17d988744c911291d2f5cdfe7289e8346a44d50859d22b33765a421281cebfcf",
+    "tests/test_serial_backward.py": "2bc452bdeeb2c2b03081c6fe43c7e121a5a6ee8f46b8d0fb093017512b202c59",
+    "tests/test_precision_game.py": "dd3adb39fd20a3190bcb9a5105869c7d6d73fbb60d97cf7115a7325bb12727d1",
+    "tests/test_generator_metric.py": "ddbbf4f8febf4613028c34e211e4f126cd5dda3b3fb74466c8dc941741abe6d2"
+  },
+  "previous_sealed_draft_test_zip_sha256": "9cf18dee83eba1dbeab74a00c198a1c9b14ea4924b083f7596c5f81953eec562"
+}

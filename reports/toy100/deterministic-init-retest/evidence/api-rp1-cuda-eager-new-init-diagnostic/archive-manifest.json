@@ -1,0 +1,180 @@
+{
+  "id": "api-rp1-cuda-eager-new-init-diagnostic",
+  "candidate": "API-RP1-CUDA-EAGER-new-init-diagnostic",
+  "status": "FAIL",
+  "seconds": 21.653704657917842,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025242Z/rp1-eager-diagnostic/20260927T025242Z-1943884/repo/reports/reviewed-probe-output/20260927T025343Z/api-rp1-cuda-eager-diagnostic",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999267578125
+  },
+  "old_comparison": "NOT_MEASURED_ON_THIS_EXACT_SCREEN",
+  "continuous_eligibility": "HISTORICAL_EAGER_SETUP_DIAGNOSTIC_NOT_PUBLIC_DEFAULT",
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "continuous_precision": "rp1",
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "initialization": "batch_feature_zero",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_init_steps": 360,
+    "input_noise_std": 0.5,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 12,
+    "observation_sigma": 0.03,
+    "output_noise_init_steps": 720,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "routing_temperature": 0.25,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 4
+  },
+  "complete": true,
+  "artifacts": {
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/artifact-sha256.json": {
+      "sha256": "620c0c4bdcfaff9de889985338db97ef2f6e5d52e389f3306e3202e7a1723202",
+      "original_sha256": "620c0c4bdcfaff9de889985338db97ef2f6e5d52e389f3306e3202e7a1723202",
+      "bytes": 1585
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "bytes": 240947
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/declaration.json": {
+      "sha256": "59a92e348eb1fc230a2ebbf3138cb53422453ebedfbdbfaae9ce1bf39b29bd7b",
+      "original_sha256": "59a92e348eb1fc230a2ebbf3138cb53422453ebedfbdbfaae9ce1bf39b29bd7b",
+      "bytes": 7217
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/historical-eager-setup.json": {
+      "sha256": "7876cf7c827152562084f9faf878d55d963f1f00b6a2cee569987bb003032bdb",
+      "original_sha256": "7876cf7c827152562084f9faf878d55d963f1f00b6a2cee569987bb003032bdb",
+      "bytes": 503
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/initial.json": {
+      "sha256": "5fe12101d4bc3b8c09d90826e4e5c7228a23455df5afcad04a68f6678cd7111a",
+      "original_sha256": "5fe12101d4bc3b8c09d90826e4e5c7228a23455df5afcad04a68f6678cd7111a",
+      "bytes": 40346
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/learning-rates.jsonl.gz": {
+      "sha256": "21f89ce8ee228407edd0aae24c974925091317046aa2286928524b98c35990f7",
+      "original_sha256": "6eaa6136dca167198da3ae00b118c0e0d14f85d500830416e392920131e1d8fe",
+      "bytes": 77894
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/metrics.jsonl.gz": {
+      "sha256": "86de5a237e0aac241bf9f09b56948b2cef51b7d2ad58596d01104455f9ba524a",
+      "original_sha256": "b255fe79d40c68ebd7d5af635fac5a2a0cef8c26d5174f08f3df1b55036c76cf",
+      "bytes": 983
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/optimizer-device-proof-0000.json": {
+      "sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "original_sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "bytes": 3633
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/optimizer-device-proof-0001.json": {
+      "sha256": "abe59b95cf9b48d40da4deacb24b0d04a673ab9dc61e96ab173f850ce7f6c961",
+      "original_sha256": "abe59b95cf9b48d40da4deacb24b0d04a673ab9dc61e96ab173f850ce7f6c961",
+      "bytes": 3633
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/optimizer-device-proof-1200.json": {
+      "sha256": "fdbd7de65eb684f310968af9286c5e4a182a7c830c80d4b4171de517edd2286b",
+      "original_sha256": "fdbd7de65eb684f310968af9286c5e4a182a7c830c80d4b4171de517edd2286b",
+      "bytes": 3684
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/protocol.json": {
+      "sha256": "0e8aa3de65dcc9e0128f17e9db1bec0649ba63fa50e316602d361a82978281f9",
+      "original_sha256": "0e8aa3de65dcc9e0128f17e9db1bec0649ba63fa50e316602d361a82978281f9",
+      "bytes": 4115
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/result.json": {
+      "sha256": "b34240d43cda80ab9eb5f5798a71c9b1ea4d5bd62e84ada339409d1b69172267",
+      "original_sha256": "b34240d43cda80ab9eb5f5798a71c9b1ea4d5bd62e84ada339409d1b69172267",
+      "bytes": 1547
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/runtime.json": {
+      "sha256": "a2b0f068e2f7fee44017ff38077f559abec91a7690bede2d3010d17a7e6fa4ac",
+      "original_sha256": "a2b0f068e2f7fee44017ff38077f559abec91a7690bede2d3010d17a7e6fa4ac",
+      "bytes": 7158
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/source-preflight.json": {
+      "sha256": "b1eae3b27b0bb7c05d62a821ce6ef782c370a83dd7f49a2387b430e9e409b14a",
+      "original_sha256": "b1eae3b27b0bb7c05d62a821ce6ef782c370a83dd7f49a2387b430e9e409b14a",
+      "bytes": 901
+    },
+    "evidence/api-rp1-cuda-eager-new-init-diagnostic/source.zip": {
+      "sha256": "76eae6631bd3d1aba9d3bb5a0363308c306aaa454816e37b0efbd17f70880f7c",
+      "original_sha256": "76eae6631bd3d1aba9d3bb5a0363308c306aaa454816e37b0efbd17f70880f7c",
+      "bytes": 592863
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025242Z/rp1-eager-diagnostic/20260927T025242Z-1943884/repo/reports/reviewed-probe-output/20260927T025343Z/api-rp1-cuda-eager-diagnostic/final-state.pt",
+      "sha256": "71f96ab1906a5d0d96e4467065b392c9d05aa17698ca88abaae89f8bf3b503a4",
+      "bytes": 758695
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025242Z/rp1-eager-diagnostic/20260927T025242Z-1943884/repo/reports/reviewed-probe-output/20260927T025343Z/api-rp1-cuda-eager-diagnostic/initial-state.pt",
+      "sha256": "97d4c5c5ab311b417d65608379578b119a2705d72011b79c7e04f67397e16e4c",
+      "bytes": 755267
+    }
+  },
+  "old_quality_inherited": false
+}

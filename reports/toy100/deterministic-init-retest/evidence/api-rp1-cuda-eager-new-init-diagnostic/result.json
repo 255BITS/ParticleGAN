@@ -1,0 +1,64 @@
+{
+  "candidate": "API-RP1-CUDA-EAGER-new-init-diagnostic",
+  "gate": "deterministic_mode_hold",
+  "status": "FAIL",
+  "seconds": 21.653704657917842,
+  "metrics": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "modes",
+          "value": 7,
+          "op": ">=",
+          "threshold": 8,
+          "status": "FAIL",
+          "margin": -1
+        },
+        {
+          "metric": "hq",
+          "value": 0.999267578125,
+          "op": ">=",
+          "threshold": 0.9,
+          "status": "PASS",
+          "margin": 0.09926757812499998
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "confirmation_fraction": 2.0
+    },
+    "final": {
+      "step": 1200,
+      "modes": 7,
+      "n_modes": 8,
+      "hq": 0.999267578125,
+      "cover": 0.875,
+      "effective_modes": 6.108346462249756,
+      "ema": {
+        "modes": 7,
+        "n_modes": 8,
+        "hq": 0.885498046875,
+        "cover": 0.875,
+        "effective_modes": 6.137047290802002
+      },
+      "seconds": 21.629481812939048
+    },
+    "updates": 1200,
+    "matched_batch_receipts": 1200
+  },
+  "old_quality_inherited": false
+}

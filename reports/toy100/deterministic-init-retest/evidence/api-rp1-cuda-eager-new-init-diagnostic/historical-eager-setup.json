@@ -1,0 +1,13 @@
+{
+  "scope": "HISTORICAL_WORKER_EAGER_DIAGNOSTIC_NOT_PUBLIC_API",
+  "setup_sha256": "3b3c84174d91f0e724ce8109ffc646a9de50d3e27332de39e9d8d3ae9f72c7e7",
+  "non_optimizer_and_rng_before": "1c3025c1f375f6e896edff84f33297fcbfedf071ad01dbd33ef9a3926fd42794",
+  "non_optimizer_and_rng_after": "1c3025c1f375f6e896edff84f33297fcbfedf071ad01dbd33ef9a3926fd42794",
+  "counts": {
+    "G": 9,
+    "D": 8
+  },
+  "completed_steps": 0,
+  "default_device": "cpu",
+  "only_declared_zero_optimizer_state_created": true
+}

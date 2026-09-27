@@ -1,0 +1,4 @@
+Continue the assigned focused attempt. Preserve failures and read this file before each new batch.
+
+## 2026-09-27T01:38:26.033042+00:00 — user changes weight-initialization baseline
+The user has explicitly requested merging latest develop (new repeatable/nonrandom weight initialization) and retesting the entire leaderboard on a quick hard problem, then fully investigating improved outcomes. This supersedes further old-base mechanism search. Finish ONLY any training/evaluation fixed window already running at this note; preserve outputs/source/declaredinitialization, finalize report and exit. Do not launch another old-base candidate, native/custom test, replay or extension; source/report/audit only after the runningwindow. No newproposal even ifcapremains. Root is merging develop and preparing new matched-init rerun batches. Do not merge/rewrite this activecheckout or relabel oldresults as newinit.

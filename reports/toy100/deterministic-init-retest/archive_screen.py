@@ -38,6 +38,27 @@ def summarize(rows):
                 final_hq=rows[-1]['hq'] if rows else None)
 
 
+def render_table(table):
+    complete = [row for row in table['results'] if row['complete']]
+    lines = ['# New initialization: quick coverage screen', '',
+        'All runs use develop’s deterministic network and prior initialization, 1,200 public API updates, and the same 24 observations. A pass requires all eight modes and at least 90% high-quality samples for the final five observations. This screen does not select a release default.', '',
+        f"{len(complete)} completed measurements; {sum(row['status'] == 'PASS' for row in complete)} passing screens. Logging errors remain visible separately from completed quality scores. RP1 CUDA-eager is a historical setup diagnostic, not the unmodified public default.", '',
+        'See [follow-up findings](README.md) and [late-arrival retention](port-source/late-retention-terminal-audit/table.md) before interpreting a pass or a late arrival as release qualification.', '',
+        '| Configuration | New result | Passing observations | First arrival | Final passing streak | Final modes / quality | Old result on this screen |',
+        '|---|---|---:|---:|---:|---|---|']
+    ordered = sorted(table['results'], key=lambda row: (
+        {'PASS': 0, 'FAIL': 1, 'ERROR': 2}[row['status']],
+        row['summary']['first_arrival'] if row['summary']['first_arrival'] is not None else float('inf'),
+        row['candidate']))
+    for row in ordered:
+        s = row['summary']
+        quality = f"{s['final_hq']:.1%}" if s['final_hq'] is not None else '—'
+        modes = s['final_modes'] if s['final_modes'] is not None else '—'
+        lines.append(f"| [{row['candidate']}]({row['archive_manifest']}) | {row['status']} | {s['passing']}/{s['observations']} | {s['first_arrival'] or '—'} | {s['final_suffix']} | {modes} / {quality} | {row['old_comparison']} |")
+    lines += ['', 'Arrival means the first observation meeting both quality and coverage. All later departures and the complete observations are preserved in each linked record. Scheduled controls retain their declared horizon and noise settings; their quality results do not establish autonomous indefinite operation.', '']
+    return '\n'.join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, required=True)
@@ -102,16 +123,7 @@ def main():
     table['results'].append(entry)
     table['recorded_utc'] = datetime.now(timezone.utc).isoformat()
     write(table_path, table)
-    lines = ['# New initialization: quick coverage screen', '',
-        'All runs use develop’s deterministic network and prior initialization, 1,200 public API updates, and the same 24 observations. A pass requires all eight modes and at least 90% high-quality samples for the final five observations. This screen does not select a release default.', '',
-        '| Configuration | New result | Passing observations | First arrival | Final passing streak | Final modes / quality | Old result on this screen |',
-        '|---|---|---:|---:|---:|---|---|']
-    for row in table['results']:
-        s = row['summary']
-        quality = f"{s['final_hq']:.1%}" if s['final_hq'] is not None else '—'
-        lines.append(f"| [{row['candidate']}]({row['archive_manifest']}) | {row['status']} | {s['passing']}/{s['observations']} | {s['first_arrival'] or '—'} | {s['final_suffix']} | {s['final_modes'] or '—'} / {quality} | {row['old_comparison']} |")
-    lines += ['', 'Arrival means the first observation meeting both quality and coverage. All later departures and the complete observations are preserved in each linked record. Scheduled controls retain their declared horizon and noise settings; their quality results do not establish autonomous indefinite operation.', '']
-    (HERE / 'leaderboard.md').write_text('\n'.join(lines))
+    (HERE / 'leaderboard.md').write_text(render_table(table))
     print(json.dumps(dict(id=args.id, status=result['status'], summary=summary)))
 
 
