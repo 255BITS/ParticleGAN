@@ -22,6 +22,25 @@ The earlier update below scored clean samples, and that was wrong.
 - **Best standing:** `dv12-ams-rc3` passes 13/13 on the harness gates with `img_intensity2` at 1,200
   updates. Ring passes at 178/178 and then 191/192; stationary passes at 685/685.
 
+**Leaderboard (noisy scoring; the 13 harness gates count `img_intensity2` at 1,200 updates)**
+
+| # | Candidate | 13 gates (intensity2 @1200) | mode_hold | intens2 @1200 | intens2 @600 | blobs4 | stripes2 | bars4 | v.broad | v.mass | v.width | v.aniso | v.overlap | v.spiral | ring_shift | stationary | grid100 | rot100 | stag100 |
+|---:|---|---:|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | `dv12-ams-rc3` (DV12 + amsgrad + reg_coeff 3) | 13/13 | PASS 9/24 @800 | PASS 20/48 @650 | FAIL 0/24 | PASS 17/24 @200 | PASS 22/24 @75 | PASS 15/24 @250 | PASS 22/24 @150 | PASS 18/24 @350 | PASS 19/24 @300 | PASS 22/24 @150 | PASS 23/24 @50 | PASS 24/24 @67 | PASS 365/460 | PASS 685/750 | FAIL 0/34 | FAIL 0/34 | FAIL 0/34 |
+| 2 | `dv12-rc3` (plain Adam) | 13/13 | PASS 6/24 @950 | PASS 23/48 @475 | FAIL 2/24 @475 | PASS 17/24 @175 | PASS 22/24 @75 | PASS 15/24 @200 | PASS 22/24 @150 | PASS 18/24 @350 | PASS 19/24 @300 | PASS 22/24 @150 | PASS 21/24 @50 | PASS 24/24 @67 | PASS 356/460 | PASS 652/750 | FAIL 0/34 | FAIL 0/34 | FAIL 0/34 |
+| 3 | `t2-dv12q-ons018` (output noise .018) | 12/13 | PASS 7/24 @900 | — | FAIL 8/24 @350 | PASS 17/24 @175 | PASS 21/24 @100 | PASS 8/24 @375 | PASS 22/24 @150 | PASS 17/24 @400 | PASS 19/24 @300 | PASS 22/24 @150 | PASS 22/24 @50 | PASS 24/24 @67 | PASS 359/460 | PASS 680/750 | FAIL 0/34 | FAIL 0/34 | FAIL 0/34 |
+| 4 | API-DV12 | 12/13 | PASS 12/24 @650 | PASS 30/48 @425 | PASS 6/24 @425 | PASS 18/24 @175 | PASS 21/24 @100 | PASS 5/24 @500 | PASS 22/24 @150 | FAIL 0/24 | PASS 21/24 @200 | PASS 21/24 @200 | PASS 23/24 @50 | PASS 24/24 @67 | PASS 358/460 | PASS 686/750 | FAIL 0/34 | FAIL 0/34 | FAIL 0/34 |
+| 5 | API-RP15 | 12/13 | PASS 14/24 @550 | PASS 28/48 @500 | PASS 5/24 @500 | PASS 17/24 @200 | PASS 21/24 @75 | FAIL 0/24 | PASS 23/24 @100 | PASS 21/24 @200 | PASS 20/24 @250 | PASS 21/24 @200 | PASS 23/24 @50 | PASS 23/24 @67 | PASS 327/460 | PASS 653/750 | FAIL 0/34 | FAIL 0/34 | FAIL 0/34 |
+| 6 | `t2-rp15noise-in10` (RP15 + input noise .1) | 12/13 | PASS 11/24 @600 | — | FAIL 2/24 @550 | PASS 17/24 @200 | PASS 20/24 @125 | PASS 12/24 @325 | PASS 21/24 @200 | PASS 21/24 @200 | PASS 20/24 @250 | PASS 21/24 @200 | PASS 24/24 @50 | PASS 24/24 @67 | PASS 328/460 | PASS 671/750 | — | — | — |
+
+- Ring and stationary cells count all checks, including those before first arrival (460 and 750).
+  Retention after arrival is higher: `dv12-ams-rc3` is 178/178, then 191/192 after the target change,
+  and 685/685 on stationary.
+- `—` means not run. For `t2-dv12q-ons018` and `t2-rp15noise-in10`, `img_intensity2` was not run at
+  1,200 updates, so their 13-gate count uses the 600-update result.
+- The native columns carry the harness caveats: QR critic init instead of the frozen Xavier init, and
+  DV12's latent jitter active at evaluation. Faithful reruns are in progress.
+
 **Native 100-Gaussian problems (grid100, rotated100, staggered100; 7,000 updates): all 15 runs FAIL.**
 This holds under both scorings, for the leaders plus `t2-dv12q-ons018`.
 
