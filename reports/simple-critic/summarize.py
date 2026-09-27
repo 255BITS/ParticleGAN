@@ -11,14 +11,20 @@ Rank: arrived; fewest fails outside transit (prehold + post-arrival); fewest
 departures; earliest arrival. The archived KA2 constant run (noise on, KA2
 controller) is a labeled reference row.
 
-Usage: python summarize.py [--write | --diag]   (--write also saves leaderboard.md; --diag prints probe medians)
+Usage: python summarize.py [--runs-dir DIR] [--write | --diag]
+  --runs-dir  arm directories to score (default runs/; runs_oldinit/ = pre-#194 random-init runs)
+  --write     also saves leaderboard.md (leaderboard_<runs-dir name>.md for a non-default dir)
+  --diag      prints probe medians
+Arms whose result.json carries an init_receipt get an init column (mode, and whether G/D/prior
+differ from the initialization=None draw).
 """
+import argparse
 import gzip
 import json
-import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+RUNS = HERE / "runs"
 SHIFT, PRE = 2400, (1210, 2400)
 REF = HERE.parent / "ka2-default-candidate/constant-lr-api/evidence/constant/metrics.jsonl.gz"
 
@@ -62,21 +68,39 @@ def score(points):
 
 def load_arms():
     rows = []
-    for run in sorted((HERE / "runs").glob("*/")):
+    for run in sorted(RUNS.glob("*/")):
         res, met = run / "result.json", run / "metrics.jsonl"
         if res.exists():
             r = json.loads(res.read_text())
             # A rerun of the KA2 reference (noise + controller) is a labeled reference row, not a ranked arm.
             status = "reference" if r["formulation"].startswith("REF") else "done"
-            rows.append(dict(arm=r["arm"], formulation=r["formulation"], status=status, **score(r["points"])))
+            rows.append(dict(arm=r["arm"], formulation=r["formulation"], status=status,
+                             init=init_label(r.get("init_receipt")), **score(r["points"])))
         elif met.exists():
             pts = [json.loads(line) for line in met.read_text().splitlines() if line.strip()]
             decl = run / "declaration.json"
             form = json.loads(decl.read_text())["formulation"] if decl.exists() else "?"
             if pts:
                 s = score(pts)
-                rows.append(dict(arm=run.name, formulation=form, status=f"running@{s['last_step']}", **s))
+                receipt = json.loads(decl.read_text()).get("init_receipt") if decl.exists() else None
+                rows.append(dict(arm=run.name, formulation=form, status=f"running@{s['last_step']}",
+                                 init=init_label(receipt), **s))
     return rows
+
+
+def init_label(receipt):
+    """'bfz' = batch_feature_zero with G, D and prior all differing from the old random draw."""
+    if not receipt:
+        return "old"
+    mode = receipt.get("initialization")
+    if mode is None:
+        return "none"
+    tag = "bfz" if mode == "batch_feature_zero" else str(mode)
+    differs = receipt.get("differs_from_old_init")
+    if differs is None:
+        return tag
+    same = [k for k, v in differs.items() if not v]
+    return tag if not same else f"{tag} (same:{','.join(same)})"
 
 
 def load_reference():
@@ -85,7 +109,7 @@ def load_reference():
     with gzip.open(REF, "rt") as f:
         pts = [r for r in map(json.loads, f) if r.get("event") == "observation"]
     return dict(arm="ref:ka2-constant", formulation="RpGAN+KA2 penalty/controller, noise on (archived)",
-                status="reference", **score(pts))
+                status="reference", init="old", **score(pts))
 
 
 def fmt(v, spec="{}", none="-"):
@@ -96,7 +120,7 @@ def table(rows):
     rows.sort(key=lambda r: (r["arrival"] is None, r["fails"], r["departures"],
                              r["arrival"] if r["arrival"] is not None else 1e9))
     head = ("| # | arm | formulation | prehold | arrival | post-arrival | departures | longest fail streak "
-            "| final suffix | final HQ | max abs D(real) | max grad-norm | fails outside transit |")
+            "| final suffix | final HQ | max abs D(real) | max grad-norm | fails outside transit | init |")
     lines = [head, "|" + "|".join(["---"] * (head.count("|") - 1)) + "|"]
     rank = 0
     for r in rows:
@@ -110,7 +134,7 @@ def table(rows):
             fmt(r["arrival"], "{}", "none"), f"{r['post_pass']}/{r['post_n']}", str(r["departures"]),
             str(r["streak"]), f"{r['suffix']}" + (f" (from {r['suffix_from']})" if r["suffix"] else ""),
             f"{r['final_hq']:.3f}", fmt(r["dmax"], "{:.2f}", "n/a"), fmt(r["gmax"], "{:.2f}", "n/a"),
-            str(r["fails"])]) + " |")
+            str(r["fails"]), r.get("init", "old")]) + " |")
     return "\n".join(lines)
 
 
@@ -121,7 +145,7 @@ def diag():
             "| g(real) | g(path) | gmax | obs gmax>2 | max gmax |")
     lines = [head, "|" + "|".join(["---"] * (head.count("|") - 1)) + "|"]
     rows = []
-    for run in sorted((HERE / "runs").glob("*/")):
+    for run in sorted(RUNS.glob("*/")):
         f = run / "result.json"
         if not f.exists():
             continue
@@ -141,7 +165,17 @@ def diag():
 
 
 def main():
-    if "--diag" in sys.argv:
+    global RUNS
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--runs-dir", type=Path, default=RUNS)
+    ap.add_argument("--write", action="store_true")
+    ap.add_argument("--diag", action="store_true")
+    args = ap.parse_args()
+    RUNS = args.runs_dir if args.runs_dir.is_absolute() else (Path.cwd() / args.runs_dir)
+    if not RUNS.is_dir():
+        RUNS = HERE / args.runs_dir
+    RUNS = RUNS.resolve()
+    if args.diag:
         print(diag())
         return
     rows = load_arms()
@@ -150,10 +184,14 @@ def main():
         rows.append(ref)
     out = table(rows)
     note = ("\n\n`*` = still running (scored through its last observation). Departures and streaks exclude "
-            "the shift transit (2400 to first arrival). ref = archived KA2 constant-LR run (not a simple arm).")
+            "the shift transit (2400 to first arrival). ref = archived KA2 constant-LR run (not a simple arm). "
+            "init: bfz = batch_feature_zero (#194) with G/D/prior all different from the old random draw; "
+            "old = pre-#194 random init (no receipt).")
     print(out + note)
-    if "--write" in sys.argv:
-        (HERE / "leaderboard.md").write_text("# Simple-critic leaderboard\n\n" + out + note + "\n")
+    print(f"(runs: {RUNS})")
+    if args.write:
+        name = "leaderboard.md" if RUNS == (HERE / "runs").resolve() else f"leaderboard_{RUNS.name}.md"
+        (HERE / name).write_text(f"# Simple-critic leaderboard ({RUNS.name})\n\n" + out + note + "\n")
 
 
 if __name__ == "__main__":

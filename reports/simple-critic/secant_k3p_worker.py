@@ -126,6 +126,12 @@ def run(args):
         u = torch.rand(W.PROBE_N, device=device, generator=s)
         return W.probe(D, real, fake, u)
 
+    # Init: recipe default via recipe.make_prior + recipe.make_optimizers; the anchor's EMA critic is
+    # deep-copied from the already-initialized D.
+    init = W.init_receipt.ring_receipt(
+        recipe, G, D, prior, SimpleMLPGenerator, SimpleMLPDiscriminator, mode_hold,
+        ema_D=None if anchor is None else ema_D,
+        applied_via="recipe.make_prior + recipe.make_optimizers(G, D, prior); anchor EMA = deepcopy(D) after")
     initial_rates = W.rates(opt_g, opt_d, roles)
     config = {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(args).items()}
     mechanisms = {"guard": None if guard is None else {"class": "particlegan.k3p.CriticSpikeGuard",
@@ -140,6 +146,7 @@ def run(args):
         "schema": 1, "experiment": "simple_critic_shift", "arm": args.arm, "formulation": describe(args),
         "config": config, "seed": SEED, "recipe": recipe.to_dict(), "initial_rates": initial_rates,
         "k3p_mechanisms": mechanisms, "noise": "none", "lr": "constant; checked every update",
+        "init_receipt": init,
         "particlegan_file": particlegan.__file__, "torch": torch.__version__,
         "git_commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=W.ROOT, text=True,
                                      capture_output=True).stdout.strip(),
@@ -152,6 +159,7 @@ def run(args):
         log.write(f"# arm={args.arm} formulation={describe(args)} device={args.device} steps={args.steps}\n")
         log.write("# step phase modes hq pass | Dr mean/max |Dr|max Df | grad-norm real fake path(min) max | "
                   "loss_d terms | loss_g | guard clips (cum) | sec\n")
+        log.write(W.init_receipt.summary_line(init))
         for step in range(1, args.steps + 1):
             net_scale, prior_scale = learning_rate_scales(step - 1, recipe)
             if net_scale != 1.0 or prior_scale != 1.0:
@@ -236,7 +244,7 @@ def run(args):
                 log.write(f"# shift (1,0) after {step}; frozen copy on new target: m={frozen_post_shift['modes']} "
                           f"hq={frozen_post_shift['hq']:.3f}\n")
         result = {"schema": 1, "status": "COMPLETE", "arm": args.arm, "formulation": describe(args),
-                  "config": config, "k3p_mechanisms": mechanisms,
+                  "config": config, "k3p_mechanisms": mechanisms, "init_receipt": init,
                   "guard_clipped_tensors": None if guard is None else guard.clipped_tensors,
                   "completed_steps": args.steps, "seconds": time.monotonic() - started,
                   "device": args.device, "torch": torch.__version__,

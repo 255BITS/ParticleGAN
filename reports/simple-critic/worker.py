@@ -48,6 +48,8 @@ from particlegan import get_recipe
 from particlegan.recipes import learning_rate_scales
 from benchmarks.locked_shared import mode_hold
 from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
+sys.path.insert(1, str(HERE))
+import init_receipt  # noqa: E402
 
 SEED = 0
 SHIFT_STEP = 2400
@@ -306,11 +308,16 @@ def run(args):
         u = torch.rand(PROBE_N, device=device, generator=s)
         return probe(D, real, fake, u)
 
+    # Init: recipe default (batch_feature_zero) applied by recipe.make_prior (R2 particles) and
+    # recipe.make_optimizers (G key 0, D key 1); no EMA critic on this path.
+    init = init_receipt.ring_receipt(recipe, G, D, prior, SimpleMLPGenerator, SimpleMLPDiscriminator, mode_hold,
+                                     applied_via="recipe.make_prior + recipe.make_optimizers(G, D, prior)")
     initial_rates = rates(opt_g, opt_d, roles)
     config = {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(args).items()}
     declaration = {
         "schema": 1, "experiment": "simple_critic_shift", "arm": args.arm, "formulation": describe(args),
         "config": config, "seed": SEED, "recipe": recipe.to_dict(), "initial_rates": initial_rates,
+        "init_receipt": init,
         "noise": "none (input_noise_std=0, output_noise_std=0)", "lr": "constant; checked every update",
         "critic_optimizer": "recipe.make_critic_optimizer, guard off, no EMA critic (Adam + inert bookkeeping)",
         "generator_side": f"public trainer update, g_loss={args.g_loss}",
@@ -328,6 +335,7 @@ def run(args):
         log.write(f"# arm={args.arm} formulation={describe(args)} device={args.device} steps={args.steps}\n")
         log.write("# step phase modes hq pass | Dr mean/max |Dr|max Df | grad-norm real fake path(min) max | "
                   "loss_d terms | loss_g | sec\n")
+        log.write(init_receipt.summary_line(init))
         for step in range(1, args.steps + 1):
             net_scale, prior_scale = learning_rate_scales(step - 1, recipe)
             if net_scale != 1.0 or prior_scale != 1.0:
@@ -413,6 +421,7 @@ def run(args):
                   "device": args.device, "torch": torch.__version__,
                   "device_name": torch.cuda.get_device_name(device) if device.type == "cuda" else "cpu",
                   "learning_rates": initial_rates, "constant_lr_verified_updates": len(lr_rows),
+                  "init_receipt": init,
                   "stationary": window(points, 1000, 1200, 50),
                   "prehold": window(points, *PREHOLD),
                   "recovery_extended": recovery(points, args.steps) if args.steps > SHIFT_STEP else None,

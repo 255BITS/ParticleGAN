@@ -1,9 +1,13 @@
-"""K3P (released v0.8.0, public GANTrainer) on the simple-critic ring-8 shift protocol.
+"""K3P (public GANTrainer) on the simple-critic ring-8 shift protocol.
 
 Adapted from reports/ka2-default-candidate/constant-lr-api/worker.py. Data, arch,
-init order, seed 0, (1,0) shift after 2400, 4600 updates, observation every 10
+construction order, seed 0, (1,0) shift after 2400, 4600 updates, observation every 10
 updates on 4096 samples (live G, stream seed+9) are unchanged. particlegan and
-benchmarks.locked_shared are imported from the v0.8.0 worktree (K3P_ROOT).
+benchmarks.locked_shared are imported from the K3P checkout named by --k3p-root
+(default: .claude/worktrees/k3p-develop = origin/develop, the released K3P formulation with
+the #194 batch_feature_zero default init applied by GANTrainer; pass
+--k3p-root .claude/worktrees/k3p-master for the archived v0.8.0 random-init replay).
+The K3P_ROOT environment variable is honored when the flag is absent.
 
 Arms:
   stock     get_recipe(total_steps=4600): K3P exactly as released, its own noise
@@ -29,8 +33,20 @@ import time
 
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 HERE = Path(__file__).resolve().parent
-K3P_ROOT = Path(os.environ.get("K3P_ROOT", "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-master")).resolve()
+_WORKTREES = Path("/home/martyn/dev/ParticleGAN/.claude/worktrees")
+
+
+def _k3p_root(argv):
+    # Resolved before importing particlegan: the flag picks the package checkout.
+    pre = argparse.ArgumentParser(add_help=False)
+    pre.add_argument("--k3p-root", type=Path, default=None)
+    known, _ = pre.parse_known_args(argv)
+    return (known.k3p_root or Path(os.environ.get("K3P_ROOT", _WORKTREES / "k3p-develop"))).resolve()
+
+
+K3P_ROOT = _k3p_root(sys.argv[1:])
 sys.path.insert(0, str(K3P_ROOT))
+sys.path.insert(1, str(HERE))
 
 import torch
 
@@ -40,15 +56,20 @@ from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.locked_shared import mode_hold
 from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
 
+import init_receipt  # noqa: E402
+
 assert Path(particlegan.__file__).resolve().is_relative_to(K3P_ROOT), particlegan.__file__
+K3P_COMMIT = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=K3P_ROOT, text=True,
+                            capture_output=True).stdout.strip()
+K3P_LABEL = f"{K3P_ROOT.name}@{K3P_COMMIT}"
 
 SEED = 0
 SHIFT_STEP = 2400
 OBSERVE_EVERY = 10
 PROBE_N = mode_hold.EVAL_N
 FORMULATION = {
-    "stock": "REF: K3P v0.8.0 as released (RpGAN+K3P penalty/anchor/guard, own noise + LR schedules)",
-    "constant": "REF: K3P v0.8.0 critic/penalty, noise off, constant LRs (floors 1)",
+    "stock": f"REF: K3P {K3P_LABEL} as released (RpGAN+K3P penalty/anchor/guard, own noise + LR schedules)",
+    "constant": f"REF: K3P {K3P_LABEL} critic/penalty, noise off, constant LRs (floors 1)",
 }
 
 
@@ -115,8 +136,8 @@ def rates(trainer):
 
 def run(args):
     arm_name = f"k3p_{'stock_ref' if args.arm == 'stock' else 'constant'}"
-    out_dir = HERE / "runs" / arm_name
-    log_path = HERE / "logs" / f"{arm_name}.log"
+    out_dir = getattr(args, "output", None) or HERE / "runs" / arm_name
+    log_path = getattr(args, "log", None) or HERE / "logs" / f"{arm_name}.log"
     if (out_dir / "result.json").exists():
         raise SystemExit(f"{out_dir}/result.json exists")
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -134,11 +155,19 @@ def run(args):
     device = trainer.device
     stream = torch.Generator(device=args.device).manual_seed(SEED)
     means = mode_hold.ring_means().to(args.device)
+    # Init: whatever the checkout's public path does (GANTrainer -> recipe.make_prior +
+    # recipe.make_optimizers with the trainer's EMA critic); the receipt checks it against a fresh
+    # public-path build and against an initialization=None build (pre-#194 random init).
+    init = init_receipt.ring_receipt(
+        recipe, trainer.G, trainer.D, trainer.prior, SimpleMLPGenerator, SimpleMLPDiscriminator, mode_hold,
+        ema_D=trainer.ema_D, applied_via=f"GANTrainer ({K3P_LABEL})") \
+        if hasattr(recipe, "initialization") else {"initialization": "pre-#194 random (no initialization field)"}
     initial_rates = rates(trainer)
     declaration = {
         "schema": 1, "experiment": "k3p_simple_critic_shift", "arm": arm_name,
         "formulation": FORMULATION[args.arm], "seed": SEED, "recipe": recipe.to_dict(),
-        "training_api": "particlegan.get_recipe + particlegan.GANTrainer.step (v0.8.0)",
+        "training_api": f"particlegan.get_recipe + particlegan.GANTrainer.step ({K3P_LABEL})",
+        "k3p_root": str(K3P_ROOT), "init_receipt": init,
         "particlegan_file": particlegan.__file__, "torch": torch.__version__,
         "k3p_git_commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=K3P_ROOT, text=True,
                                          capture_output=True).stdout.strip(),
@@ -152,6 +181,8 @@ def run(args):
                   f"# particlegan={particlegan.__file__}\n"
                   "# step phase modes hq pass | Dr mean/max |Dr|max Df | grad-norm real fake path(min) max | "
                   "Ld pen s | Lg | lr G/D/prior | noise in/out | sec\n")
+        if "param_sha256" in init:
+            log.write(init_receipt.summary_line(init))
         for step in range(1, args.steps + 1):
             idx = torch.randint(0, 8, (recipe.batch_size,), device=args.device, generator=stream)
             real = means[idx] + mode_hold.SIGMA * torch.randn(
@@ -202,7 +233,8 @@ def run(args):
         result = {"schema": 1, "status": "COMPLETE", "arm": arm_name, "formulation": FORMULATION[args.arm],
                   "completed_steps": trainer.completed_steps, "seconds": time.monotonic() - started,
                   "device": args.device, "torch": torch.__version__, "particlegan_file": particlegan.__file__,
-                  "k3p_git_commit": declaration["k3p_git_commit"], "recipe": recipe.to_dict(),
+                  "k3p_git_commit": declaration["k3p_git_commit"], "k3p_root": str(K3P_ROOT),
+                  "init_receipt": init, "recipe": recipe.to_dict(),
                   "lr_ranges": lr_ranges, "constant_lr_verified_every_step": args.arm == "constant",
                   "final_ema": measure(trainer, means, ema=True), "points": points}
         (out_dir / "result.json").write_text(json.dumps(result, indent=1, allow_nan=False) + "\n")
@@ -214,9 +246,13 @@ def main():
     parser.add_argument("--arm", choices=("stock", "constant"), required=True)
     parser.add_argument("--steps", type=int, default=4600)
     parser.add_argument("--device", default="cuda:1")
+    parser.add_argument("--k3p-root", type=Path, default=None,
+                        help="K3P checkout to import (default: $K3P_ROOT or .claude/worktrees/k3p-develop)")
+    parser.add_argument("--output", type=Path, default=None, help="run dir (default runs/<arm>)")
+    parser.add_argument("--log", type=Path, default=None, help="log file (default logs/<arm>.log)")
     args = parser.parse_args()
-    if args.steps <= SHIFT_STEP or args.steps % OBSERVE_EVERY:
-        parser.error("--steps must be a multiple of 10 greater than the shift at 2400")
+    if args.steps <= 0 or args.steps % OBSERVE_EVERY:
+        parser.error("--steps must be a positive multiple of 10")
     run(args)
 
 

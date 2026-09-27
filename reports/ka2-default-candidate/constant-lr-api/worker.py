@@ -24,6 +24,7 @@ import zipfile
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(1, str(ROOT / "reports/simple-critic"))  # init_receipt (shared init receipt)
 
 import torch
 
@@ -31,6 +32,7 @@ from particlegan import GANTrainer, get_recipe
 from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.locked_shared import mode_hold
 from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator, SimpleMLPGenerator
+import init_receipt  # noqa: E402
 
 SEED = 0
 SHIFT_STEP = 2400
@@ -169,7 +171,9 @@ def run(args):
         "model": {"hidden": mode_hold.HIDDEN, "layers": mode_hold.N_HIDDEN,
                   "fourier": mode_hold.FOURIER, "z_dim": recipe.z_dim},
         "optimizer_options": {"foreach": False, "fused": False},
-        "initialization": "seed 0; original public baseline construction order; no external fixture",
+        "initialization": (f"recipe.initialization={recipe.initialization!r} applied by GANTrainer "
+                           "(make_prior + make_optimizers); seed 0; original public baseline construction "
+                           "order; no external fixture"),
         "noise_horizon": NOISE_HORIZON, "training_budget": args.steps,
         "noise_milestones": {"input_zero_at": 360, "output_full_at": 720},
         "decay_prior_horizon_if_requested": args.steps,
@@ -199,6 +203,12 @@ def run(args):
     torch.backends.cudnn.allow_tf32 = False
     torch.backends.cuda.matmul.allow_tf32 = False
     trainer = make_trainer(recipe, args.device)
+    init = init_receipt.ring_receipt(recipe, trainer.G, trainer.D, trainer.prior, SimpleMLPGenerator,
+                                     SimpleMLPDiscriminator, mode_hold, ema_D=trainer.ema_D,
+                                     applied_via="GANTrainer (recipe.make_prior + recipe.make_optimizers)")
+    manifest["init_receipt"] = init
+    (args.output / "declaration.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    print(init_receipt.summary_line(init).strip(), flush=True)
     stream = torch.Generator(device=args.device).manual_seed(SEED)
     means = mode_hold.ring_means().to(args.device)
     initial_rates = rates(trainer)
@@ -267,6 +277,7 @@ def run(args):
                   "recovery_extended": recovery(live, args.steps),
                   "frozen_control": window(frozen_points, 2410, args.steps),
                   "lr_ranges": lr_ranges, "constant_lr_verified_every_step": args.schedule == "constant",
+                  "init_receipt": init,
                   "final": live[-1], "final_ema": measure(trainer, means, ema=True),
                   "final_state": state_receipt(trainer, stream, means)}
         save_checkpoint(args.output / "final-state.pt", trainer, stream, means)

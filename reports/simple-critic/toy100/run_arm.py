@@ -14,6 +14,17 @@ unchanged through its own ``run`` entry point. This adapter only:
   critic optimizer is rebuilt with no EMA critic, no guard and Adam betas
   (0, beta2). The generator/prior update, LR policy, EMA and data streams are
   the trainer's own;
+* uses the package's default initialization for every arm (refs included): the benchmark
+  resolves its archived configs through ``benchmarks.legacy`` whose recipe pins
+  ``initialization=None`` (old random init); the adapter replaces that pin with
+  ``initialization="batch_feature_zero"`` before the trainer is built, so
+  ``GANTrainer`` -> ``recipe.make_optimizers`` initializes D (key 1) and G (key 0) and
+  syncs the EMA critic, exactly as the public path. The benchmark's ``--init`` registry
+  hook is not used (``K3P_INIT`` must be unset). Kept as drawn, by design of the public
+  path: the ``affine_square_v1`` generator (identity weight, zero bias = constants) and its
+  caller-supplied particle table (the model policy's uniform(-5, 5) square draw;
+  ``make_prior``'s R2 draw is overwritten by that policy and supplied priors are never
+  re-initialized). ``result.json["init_receipt"]`` records all of this per problem;
 * probes D every ``PROBE_EVERY`` updates (no effect on training: its own
   latent/u streams, D frozen): max |D(real)| and input-gradient norms at real,
   fake and interpolate points.
@@ -41,10 +52,14 @@ sys.path.insert(1, str(HERE.parent))
 import torch  # noqa: E402
 
 import particlegan  # noqa: E402
+from particlegan import initialization as _pg_init  # noqa: E402
 import benchmarks.toy100.train as toy_train  # noqa: E402
 from benchmarks.toy100 import __main__ as toy_main  # noqa: E402
 from worker import SimpleCriticLoss, grad_norm  # noqa: E402  (ring-study critic, unchanged)
 from round5_worker import round5_loss  # noqa: E402  (round-5 terms: cap ends, rate, pair-center)
+import init_receipt  # noqa: E402
+
+INITIALIZATION = "batch_feature_zero"  # the package default (#194); overrides the legacy recipe's None pin
 
 BASE_CONFIG = ROOT / "configs/toy100/constraints_simple_regularization.json"
 PROBLEMS = ("grid100", "rotated100", "staggered100")
@@ -190,10 +205,14 @@ class Probe:
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--arm", required=True, choices=sorted(ARMS))
+    ap.add_argument("--steps", type=int, default=None, help="smoke tests only: override the config's steps")
+    ap.add_argument("--runs-dir", type=Path, default=HERE / "runs", help="parent of the arm's output dir")
     args = ap.parse_args()
     arm, spec = args.arm, ARMS[args.arm]
     assert Path(particlegan.__file__).resolve().is_relative_to(ROOT), particlegan.__file__
-    runs = HERE / "runs" / arm
+    if os.environ.get("K3P_INIT"):
+        raise SystemExit("unset K3P_INIT: the adapter applies the package init through the recipe path")
+    runs = args.runs_dir / arm
     if runs.exists():
         raise SystemExit(f"{runs} exists; remove it to rerun")
     (HERE / "configs").mkdir(exist_ok=True)
@@ -205,15 +224,30 @@ def main():
     print(f"ARM {arm} | {spec['desc']} | particlegan={particlegan.__file__} | torch={torch.__version__}",
           flush=True)
 
-    probes = {}
+    probes, receipts = {}, {}
     original_make = toy_train.make_trainer
 
     def make_trainer(config, recipe):
         if spec["kind"] == "simple" and spec["latent_damping"] != recipe.latent_damping_max_rate:
             recipe = dataclasses.replace(recipe, latent_damping_max_rate=spec["latent_damping"])
+        pinned = recipe.initialization
+        recipe = dataclasses.replace(recipe, initialization=INITIALIZATION)
+        assert _pg_init._external_init is None, "an --init registry hook is installed"
         trainer = original_make(config, recipe)
         crit = convert_to_simple(trainer, arm) if spec["kind"] == "simple" else None
         problem = config["problem"]
+        # make_trainer forks the CPU/device RNG, so these reference builds leave the run untouched.
+        ref = {k: original_make(config, r) for k, r in (("old", init_receipt.old_recipe(recipe)),
+                                                        ("public", recipe))}
+        receipts[problem] = {**init_receipt.receipt(
+            recipe, {"G": trainer.G, "D": trainer.D, "prior": trainer.prior},
+            old={"G": ref["old"].G, "D": ref["old"].D, "prior": ref["old"].prior},
+            public={"G": ref["public"].G, "D": ref["public"].D, "prior": ref["public"].prior},
+            ema_D=trainer.opt_d.ema_critic,
+            applied_via="GANTrainer -> recipe.make_optimizers (benchmark make_trainer, legacy None pin replaced)"),
+            "legacy_pin_replaced": pinned}
+        print(f"INIT {problem} " + init_receipt.summary_line(receipts[problem])[2:].strip(), flush=True)
+        del ref
         probe = Probe(trainer, problem, diag / f"{problem}.jsonl", None, crit)
         probes[problem] = probe
         inner = trainer.step
@@ -230,14 +264,14 @@ def main():
         return trainer
 
     toy_train.make_trainer = make_trainer
-    ns = argparse.Namespace(command="run", config=cfg_path, output=out, problem=None, steps=None,
+    ns = argparse.Namespace(command="run", config=cfg_path, output=out, problem=None, steps=args.steps,
                             device="cuda", no_render=True, require_accuracy=True)
     started = time.monotonic()
     code = toy_main._run(ns)
 
     # ---- aggregate
     result = {"arm": arm, "formulation": spec["desc"], "exit_code": code,
-              "wall_seconds": time.monotonic() - started, "problems": {}}
+              "wall_seconds": time.monotonic() - started, "init_receipt": receipts, "problems": {}}
     gate = json.loads((out / "gate.json").read_text()) if (out / "gate.json").exists() else {}
     acc = json.loads((out / "accuracy-gate.json").read_text()) if (out / "accuracy-gate.json").exists() else {}
     result["gate_status"], result["accuracy_status"] = gate.get("status"), acc.get("status")

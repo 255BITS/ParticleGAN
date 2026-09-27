@@ -1,5 +1,17 @@
 # Simple 3-term critic on the KA2 shift protocol
 
+> **Initialization change (merge of origin/develop c720645e, #194).** Every result in rounds
+> 1-5 below used the old random PyTorch init; those runs and logs now live in
+> `runs_oldinit/` and `logs_oldinit/` (`toy100/runs_oldinit/`, `toy100/logs_oldinit/`).
+> Score them with `summarize.py --runs-dir runs_oldinit`. `rerun_all.sh` reruns every ring
+> arm (48, incl. the K3P refs from `.claude/worktrees/k3p-develop` and `ka2_stock_ref`) under
+> the package default `batch_feature_zero` into `runs/`. Every run carries an `init_receipt`
+> (`init_receipt.py`): the mode, sha256 of the initial G/D/prior params, and whether they differ
+> from the `initialization=None` draw with the same seed. On the ring, G, D (and the EMA/anchor
+> critic) and the particle prior all change. On toy100 only D's weights change: the
+> `affine_square_v1` identity generator, zero biases and the model policy's uniform particle
+> square are kept by the public path.
+
 **Question.** Can a plain critic, with no instance noise, constant learning
 rates and no adaptive controller, hold the ring-8 target and follow it through
 the (1,0) shift as well as KA2 does? The requirement was: "keep D from spiking

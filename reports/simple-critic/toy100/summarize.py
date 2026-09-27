@@ -1,4 +1,4 @@
-"""Leaderboard for the 100-Gaussian transfer study: python3 summarize.py [--md]."""
+"""Leaderboard for the 100-Gaussian transfer study: python3 summarize.py [--md] [--runs-dir runs_oldinit]."""
 import json
 import sys
 from pathlib import Path
@@ -6,11 +6,12 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 P = ("grid100", "rotated100", "staggered100")
 ARCHIVE = HERE.parents[2] / "reports/toy100/simpler22/toy100"
+RUNS = HERE / (sys.argv[sys.argv.index("--runs-dir") + 1] if "--runs-dir" in sys.argv else "runs")
 
 
 def load():
     rows = []
-    for f in sorted(HERE.glob("runs/*/result.json")):
+    for f in sorted(RUNS.glob("*/result.json")):
         r = json.loads(f.read_text())
         rows.append(r)
     return rows
@@ -22,7 +23,7 @@ def median(v):
 
 
 def late(arm, problem, key, agg):
-    rows = [json.loads(l) for l in (HERE / "runs" / arm / "diag" / f"{problem}.jsonl").open()]
+    rows = [json.loads(l) for l in (RUNS / arm / "diag" / f"{problem}.jsonl").open()]
     return agg([r[key] for r in rows if r["step"] >= 1000])
 
 
