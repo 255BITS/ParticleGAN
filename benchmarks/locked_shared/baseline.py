@@ -158,8 +158,8 @@ def run_toy(toy, cfg, *, noise_policy=None):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
     with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
-        for module in (trajectory, residual_student, cover_leftover, mid_scale_identity):
-            target = module.PROTOCOL if module in (trajectory, residual_student) else module.FORMULATION
+        for module in (residual_student, cover_leftover, mid_scale_identity):
+            target = module.PROTOCOL if module is residual_student else module.FORMULATION
             values = {k: v for k, v in knobs.items() if k in target}
             if "lr" in target:
                 values["lr"] = target["lr"] * cfg.lr_multiplier
@@ -171,8 +171,11 @@ def run_toy(toy, cfg, *, noise_policy=None):
             raw = two_pole.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
                                  particle_l2=cfg.particle_l2, noise_policy=noise_policy)
         elif toy == "trajectory":
-            raw = trajectory.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
-                                   diagnostics=True, noise_policy=noise_policy)
+            # Problem-only toy on the shared runner: optimizers, loss, penalty,
+            # noise and EMA come from its recipe. Candidate knobs, LR
+            # multipliers and the harness noise policy are not applied (the
+            # policy's receipt records zero step calls).
+            raw = trajectory.train(diagnostics=True)
         elif toy == "mode_hold":
             # Problem-only toy on the shared runner: its optimizers, loss,
             # penalty, noise and EMA come from its recipe, so candidate
