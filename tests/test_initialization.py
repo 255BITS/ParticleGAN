@@ -7,7 +7,8 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import BatchDistanceDiscriminator, GANTrainer, MoGParticlePrior, get_recipe, init
+from particlegan import (BatchDistanceDiscriminator, GANTrainer, LinearSkipDiscriminator, MoGParticlePrior,
+                         ParticlePrior, get_recipe, init)
 from particlegan.particle_prior import calibrate_mog_sigma
 
 
@@ -60,6 +61,22 @@ def test_priors_take_r2_tables_and_mog_spacing_follows():
     init.deterministic_orthogonal_(frozen)
     assert torch.equal(saved, frozen.z)
 
+
+
+def test_public_modules_fully_declared():
+    # The downstream check docs/api.md recommends, applied to our own modules.
+    nets = (BatchDistanceDiscriminator(), LinearSkipDiscriminator(), ParticlePrior(16, 2),
+            MoGParticlePrior(16, 2, sigma=0.3), nn.TransformerEncoderLayer(16, 2, dim_feedforward=32, batch_first=True))
+    for net in nets:
+        undeclared = [p for p, spec in init.declarations(net).items() if spec is None]
+        assert not undeclared, (type(net).__name__, undeclared)
+
+
+def test_values_depend_on_position_in_the_module_passed():
+    net = nn.Sequential(nn.Linear(3, 4), nn.Linear(4, 4))
+    whole = init.deterministic_orthogonal_(copy.deepcopy(net))
+    alone = init.deterministic_orthogonal_(copy.deepcopy(net[1]))
+    assert not torch.equal(whole[1].weight, alone.weight)
 
 @pytest.mark.parametrize("layer", [
     lambda: nn.Linear(1, 1), lambda: nn.Linear(7, 11),

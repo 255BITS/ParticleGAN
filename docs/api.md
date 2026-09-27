@@ -92,11 +92,21 @@ come from hashing `(seed, parameter index, shape)` in CPU float64, then are
 cast to each parameter's dtype and device. No RNG state is read or consumed,
 and results do not depend on the device. The same seed and architecture give
 the same weights, so networks with matching shapes need different seeds (the
-examples use G=0, D=1, E=2). The parameter index is its position in
-`module.named_parameters()`, so initialize the whole network in one call; a
-submodule initialized on its own gets different values. R2 tables ignore the
-seed. Repeating the call rewrites the same values. CPU QR can be slow for very
-large matrices.
+examples use G=0, D=1, E=2). R2 tables ignore the seed. Repeating the call
+rewrites the same values. CPU QR can be slow for very large matrices.
+
+> **Values depend on where a parameter sits in the module you pass.** The
+> parameter index in the hash is its position in `module.named_parameters()`
+> of that module, not a property of the parameter itself. So:
+>
+> - initializing a submodule on its own (`deterministic_orthogonal_(G.head)`)
+>   gives different values than the same submodule gets when you initialize
+>   the whole network (`deterministic_orthogonal_(G)`);
+> - adding, removing or reordering parameters shifts the values of every
+>   parameter after them.
+>
+> Initialize each whole network in one call, and treat an architecture change
+> as a change of initial weights.
 
 Left as they are:
 
@@ -208,6 +218,19 @@ initializing it:
  '2.weight': Uniform(low=-0.1767..., high=0.1767...), '2.bias': Uniform(...)}
 ```
 
+**Recommended downstream check.** A project with custom networks can keep a
+test that fails as soon as a new layer or parameter lacks a declaration,
+instead of finding out when `deterministic_orthogonal_` raises in a run:
+
+```python
+from particlegan import init
+
+def test_networks_fully_declared():
+    for net in (MyGenerator(), MyCritic()):
+        undeclared = [p for p, spec in init.declarations(net).items() if spec is None]
+        assert not undeclared, undeclared
+```
+
 ### Built-in declarations
 
 | Layer | Declaration |
@@ -253,8 +276,8 @@ batch-feature correction, convolution storage, attention, and LoRA. The
 `GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,
 penalty_generator=None, optimizer_options=None, penalty_options=None)` is an
 explicitly imported helper, separate from `Recipe`. Move networks to the same
-device and floating dtype first. When omitted, the helper constructs the prior
-with `recipe.make_prior()`. `seed` controls owned sampling streams. The helper
+device and floating dtype first. When `prior=` is omitted, the helper constructs
+the prior with `recipe.make_prior()`, a plain randomly drawn table. `seed` controls owned sampling streams. The helper
 never changes the weights it receives; for deterministic starting weights,
 call [`init.deterministic_orthogonal_`](#initialization) on G, D and a
 recipe-made prior first and pass `prior=`, as in the minimal loop above.

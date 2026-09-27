@@ -85,11 +85,15 @@ Or let `GANTrainer` run exactly that default update:
 ```python
 from particlegan import GANTrainer
 
-trainer = GANTrainer(get_recipe(), G, D)
+recipe = get_recipe()
+prior = init.deterministic_orthogonal_(recipe.make_prior())
+trainer = GANTrainer(recipe, G, D, prior=prior)
 for _ in range(trainer.recipe.total_steps):
     trainer.step(real_batch(trainer.recipe.batch_size))
 samples = trainer.sample(1024)
 ```
+
+Without `prior=`, the trainer builds a plain randomly drawn particle table.
 
 ## Repeatable initialization
 
@@ -110,6 +114,11 @@ an evenly spread particle table, derived from `seed` alone: the same seed and
 architecture give the same weights, and no random state is used. Call it on
 fresh networks, before loading weights or building optimizers. A custom layer
 it does not know raises an error until you declare it with `init.register`.
+Values depend on each parameter's position in the module you pass, so
+initialize whole networks: a submodule initialized on its own gets different
+values. Projects with custom layers can guard this with a one-line test that
+`init.declarations(net)` has no `None` entries
+([example](docs/api.md#declarationsmodule)).
 See the [API reference](docs/api.md#initialization) and the
 [math and architecture guide](docs/initialization.md).
 
