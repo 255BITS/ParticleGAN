@@ -1,5 +1,12 @@
 # Leaderboard retest with develop initialization
 
+<!-- current-closeout -->
+**Search stopped at the user's request. No qualified default; neither PR merged.**
+The API screen and its follow-ups are complete. Historical research coverage is
+partial because the user requested wrapping up; unrun cases remain explicit.
+[Final results, promising leads, limitations and stop receipts](closeout.md).
+<!-- /current-closeout -->
+
 Every new measurement in this directory must use develop's actual deterministic
 initialization (`batch_feature_zero`) for fresh networks and recipe-created
 learnable priors. Sampling remains stochastic on the existing declared streams.

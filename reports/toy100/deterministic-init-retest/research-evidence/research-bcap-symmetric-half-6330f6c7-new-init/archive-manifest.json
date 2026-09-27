@@ -1,0 +1,75 @@
+{
+  "id": "research-bcap-symmetric-half-6330f6c7-new-init",
+  "candidate": "RESEARCH-bcap_symmetric_half-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 4,
+    "first_arrival": 1050,
+    "observations_since_arrival": 4,
+    "passing_since_arrival": 4,
+    "departures": [],
+    "minimum_hq_since_arrival": 0.992431640625,
+    "minimum_modes_since_arrival": 8,
+    "final_suffix": 4,
+    "final_suffix_start": 1050,
+    "final_modes": 8,
+    "final_hq": 1.0
+  },
+  "seconds": 32.74662922695279,
+  "continuous_eligibility": "HORIZON_DEPENDENT_TESTED_CONFIGURATION",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-symmetric-half-6330f6c7",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-simple-probe-runtime-review/completed/bcap-symmetric-half-6330f6c7-runtime-audit.json",
+  "audit_sha256": "a30ae9b1897f37f5a4477403be9ae7b2afc5259ee6e11d436bf8b9d8374309a9",
+  "artifacts": {
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/source-plan.json": {
+      "sha256": "e8f3f092a0a54ed6df0bad678d7ccd3be8d2460078e8878cf7d5cdf32d9896f5",
+      "original_sha256": "e8f3f092a0a54ed6df0bad678d7ccd3be8d2460078e8878cf7d5cdf32d9896f5",
+      "bytes": 39399
+    },
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/prepared-source.zip": {
+      "sha256": "fed9ce36a53c22040b6d5c3e93a595d99ce12adab304efd95f739054ae90abb4",
+      "original_sha256": "fed9ce36a53c22040b6d5c3e93a595d99ce12adab304efd95f739054ae90abb4",
+      "bytes": 628368
+    },
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/result.json.gz": {
+      "sha256": "46943fdd954ebdf7da89d8c86d43c2b3b80ccf29fae549299140638688ea2b58",
+      "original_sha256": "4f2b34814f3e27c6197c22577926cc798293ca034e92fe84bc2bf4881fa4056e",
+      "bytes": 68659
+    },
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/initialization-receipt.json": {
+      "sha256": "2aad670b4ad30d27b0bd6409b1d61607abff539fdf1be312a41c78d54a7439af",
+      "original_sha256": "2aad670b4ad30d27b0bd6409b1d61607abff539fdf1be312a41c78d54a7439af",
+      "bytes": 4501
+    },
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/prepared-source-manifest.json": {
+      "sha256": "720795ea4afb386678c420a8eb26afb2123877849913c536c92e52f9ef6e8650",
+      "original_sha256": "720795ea4afb386678c420a8eb26afb2123877849913c536c92e52f9ef6e8650",
+      "bytes": 4477
+    },
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/prepared-source-sha256.json": {
+      "sha256": "0acbdbba65bada850e331ef690d1d4c070a2a8537c762477783e5597d53d4b93",
+      "original_sha256": "0acbdbba65bada850e331ef690d1d4c070a2a8537c762477783e5597d53d4b93",
+      "bytes": 291
+    },
+    "research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/runtime.json": {
+      "sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "original_sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "bytes": 13817
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-symmetric-half-6330f6c7/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-symmetric-half-6330f6c7/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    }
+  },
+  "old_quality_inherited": false
+}

@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "candidate": "research:continuous-round-1/stationary_noise/sn3",
+  "prepared_case": "sn3-2f595f84",
+  "new_initialization_quality": {
+    "status": "PASS",
+    "observations": 24,
+    "passing": 11,
+    "first_arrival": 700,
+    "observations_since_arrival": 11,
+    "passing_since_arrival": 11,
+    "departures": [],
+    "minimum_hq_since_arrival": 0.914306640625,
+    "minimum_modes_since_arrival": 8,
+    "final_suffix": 11,
+    "final_suffix_start": 700,
+    "final_modes": 8,
+    "final_hq": 0.914306640625
+  },
+  "quality_authority": {
+    "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-results.json",
+    "row_id": "research-sn3-2f595f84-new-init",
+    "archive_manifest_sha256": "399d20634b679e7ca4a13d719c14cf1332433e67d0e529859500b3ba200e5ab3",
+    "runtime_audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/sn3-2f595f84-runtime-audit.json",
+    "runtime_audit_sha256": "819bc7d38ac0b81c6de53dc9b14a404e647cf0af25ea8e9bafe7b6fc0f21cfae"
+  },
+  "historical_eligibility_label_unchanged": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_plan_sha256": "40874e216893bffdf6aa8eee4d55d8c8004afca25257cb6f1fc5153327629d00",
+  "prepared_manifest_sha256": "ab40063282ba28f4d64fba16b11e5b8b94ae2a871c956a898393828301f90e01",
+  "source_zip_sha256": "b0a9b63350f09b9c172cf0176c05cd24686e48a5e7f491302c9e2fa50c9bed85",
+  "actual_horizon": 1200,
+  "config_total_steps": 7000,
+  "host_override": "Frozen mode_hold observation budget and scheduling context use1200; config resource fields do not override frozen host.",
+  "recorded_action_rows_checked": 2400,
+  "mechanism_receipt": {
+    "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/mechanism-receipt.json",
+    "sha256": "b39af423d3542c0366d221bb6661966a8873e09285705af1c4a3da949512ce53"
+  },
+  "scope": "Source and already completed artifacts only; no new run, repair, port or score inheritance. Historical labels unchanged.",
+  "evidence": [
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "candidate-source/config.json",
+      "sha256": "37a4f4b18634a757a3ee27046f45011e6ef12596e50895e8ce1bef6eaab30629",
+      "line_ranges": [],
+      "reason": "Exact executed config, including declared rate floors/noise values."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "candidate-source/probe.py",
+      "sha256": "e8653d7e450268310d9c7fc529262279f202a2cb10b3bf1470efc7763d4452bc",
+      "line_ranges": [
+        [
+          186,
+          220
+        ]
+      ],
+      "reason": "Imports exact mechanism before host execution; actual legacy host path."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "run_research_mode_hold.py",
+      "sha256": "90c919a82989fee14b865b6e7e34e0618db4c2b7b823c71212d83c63d2907f00",
+      "line_ranges": [
+        [
+          83,
+          90
+        ]
+      ],
+      "reason": "Executes exact candidate probe and config inside initialization-only bridge."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "transformed-train-mode-hold.py.txt",
+      "sha256": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+      "line_ranges": [
+        [
+          85,
+          125
+        ]
+      ],
+      "reason": "Frozen host advances noise and calls schedule before optimizer steps."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "historical-runtime-source.zip!/benchmarks/transfer_suite/legacy_noise_adapters.py",
+      "sha256": "b6240105a06ba4b10cedcf38818c187fdd79bee9ad47d47319909cfc1404dc6a",
+      "line_ranges": [
+        [
+          391,
+          434
+        ],
+        [
+          116,
+          120
+        ],
+        [
+          180,
+          198
+        ]
+      ],
+      "reason": "Host creates NoisePolicy and control with spec.steps=1200."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "historical-runtime-source.zip!/benchmarks/transfer_suite/compare_defaults.py",
+      "sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+      "line_ranges": [
+        [
+          87,
+          189
+        ]
+      ],
+      "reason": "RecipeControl installs actual per-role multipliers at each update."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "historical-runtime-source.zip!/benchmarks/learned_lr_evaluation.py",
+      "sha256": "bb97c215c2bbfc0e6e139420ccbefa19d800e579eb4c27130f47eac913a6846b",
+      "line_ranges": [
+        [
+          56,
+          73
+        ]
+      ],
+      "reason": "Actual optimizer scheduling bridge."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "historical-runtime-source.zip!/benchmarks/toy100/schedule.py",
+      "sha256": "0be9b0818cf69d7e9cc043a45d31addd4db0ab7ba6979a2e2da761af03387901",
+      "line_ranges": [
+        [
+          15,
+          47
+        ]
+      ],
+      "reason": "Original schedule validator and horizon formula."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "historical-runtime-source.zip!/benchmarks/toy100/models.py",
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "line_ranges": [
+        [
+          186,
+          197
+        ],
+        [
+          200,
+          218
+        ]
+      ],
+      "reason": "Original validated input/output noise formulas."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "candidate-source/latent.py",
+      "sha256": "197df6350f5295f7d396f7d3c821808be1d15168d6e5586a89ebfbd403586139",
+      "line_ranges": [
+        [
+          14,
+          59
+        ],
+        [
+          63,
+          66
+        ]
+      ],
+      "reason": "Registered particle gradient damping uses local history, no horizon."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "candidate-source/response.py",
+      "sha256": "7e71d60a343f9f47e1c16600279364f0482863ce116c00f4657355638615987d",
+      "line_ranges": [
+        [
+          20,
+          39
+        ],
+        [
+          41,
+          44
+        ]
+      ],
+      "reason": "Direct-particle response uses gradient history and excludes registered priors."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "candidate-source/checkpoint.py",
+      "sha256": "0185ba142eb5bffa1e28a47690b3526cab9e3a673a9c0ba0a6cd984c0c9444d9",
+      "line_ranges": [
+        [
+          13,
+          32
+        ]
+      ],
+      "reason": "Saver omits mechanism module-global controller/EMA/rate/noise state."
+    },
+    {
+      "archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/prepared-source.zip",
+      "member": "candidate-source/mechanism.py",
+      "sha256": "5f235e5d55b5128cd5d6bf72feb3a060187db354a70001a3fb8fba3077a30755",
+      "line_ranges": [
+        [
+          73,
+          78
+        ],
+        [
+          151,
+          194
+        ],
+        [
+          197,
+          222
+        ],
+        [
+          225,
+          254
+        ],
+        [
+          257,
+          302
+        ]
+      ],
+      "reason": "Reversal-based rate and surprise-based noise override all imported aliases; validated scheduled returns are discarded."
+    }
+  ],
+  "remaining_qualification": [
+    "Actual public GANTrainer/library ownership not established by research-host initialization bridge.",
+    "Checkpoint does not retain all mechanism module-global live state; fresh-process exact continuation unverified.",
+    "New-init long stationary/shifted retention and full22 breadth unverified."
+  ],
+  "followup_status": "NOT_RUN_USER_STOP",
+  "current_configuration_eligibility": "SOURCE_HORIZON_INDEPENDENT_UNQUALIFIED_PENDING_EVIDENCE",
+  "numerical_horizon_dependency_found": false,
+  "reason": "Actual input/output amplitudes and returned per-role rate multipliers ignore horizon values after validation. A finite observation budget and fixed memory constants alone are not disqualifying.",
+  "actual_rate_policy": {
+    "rule": "flip=relu(-critic_gradient_cosine); negative cosine updates memory .999*m+.001*flip, nonnegative cosine .99*m; calm=clip(1-m/.25,0,1); network=.01+.99*calm, prior=.05+.95*calm.",
+    "last_network_rate": 0.002972398684183365,
+    "last_prior_rate": 0.006048037878735752,
+    "constant_applied_rates": false,
+    "scheduled_decay": false
+  },
+  "actual_noise_policy": {
+    "input_rule": ".5*clip((bias_corrected_Adam_surprise-1)/4,0,1)",
+    "output_rule": "constant .029",
+    "scheduled_input_end": null,
+    "scheduled_output_warmup": null,
+    "guard_warmup": 200,
+    "guard_scope": "Fixed estimator warmup, independent of evaluator horizon."
+  },
+  "nonnumerical_horizon_reads": [
+    "Positive integer horizon still required by discarded-return validators; validators permit completed_steps beyond it. No actual prefix-replay proof was run.",
+    "Per-step multiplier_cache grows one entry per update; module-global state is not yet an instance-owned public API controller."
+  ],
+  "old_tiny_screen": {
+    "status": "FAIL_REDERIVED_FROZEN24_FINAL5",
+    "observations": 24,
+    "passing": 5,
+    "first_arrival": 750,
+    "passing_since_arrival": 5,
+    "observations_since_arrival": 10,
+    "departures": [
+      850,
+      950,
+      1000,
+      1050,
+      1100
+    ],
+    "final_suffix": 2,
+    "final": {
+      "step": 1200,
+      "modes": 8,
+      "hq": 0.977783203125
+    },
+    "scope": "Same complete24-point prefix retained by own old hold and shift; no separate old22-suite tiny run claimed."
+  },
+  "old_quality_authorities": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/stationary_noise/20260925T154444Z-3603401/runs/sn3-hold/result.json",
+      "sha256": "aedc1eabbe3938249b56ad3d21e0e79bb5336d8faf1f89b63de692896d127eca",
+      "retained_snapshot": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-round-1/evidence/aedc1eabbe3938249b56ad3d21e0e79bb5336d8faf1f89b63de692896d127eca.json.gz",
+      "snapshot_sha256": "c861f5252d49eefb4f1d15f71406a8784ca0a20d608cb177ec68b5d38fece12e"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/formulations-20260925T154444Z/stationary_noise/20260925T154444Z-3603401/runs/sn3-shift/result.json",
+      "sha256": "925ee43473252fb39ddd3e86c63d2fb9b9cba98930b5527fc1ae5b9b6a53309e",
+      "retained_snapshot": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-round-1/evidence/925ee43473252fb39ddd3e86c63d2fb9b9cba98930b5527fc1ae5b9b6a53309e.json.gz",
+      "snapshot_sha256": "8fbae2909c03e1f49d7b6a0fffd40818a1425e43419e760b30e5e646133dbcf0"
+    }
+  ],
+  "old_retention_failure": {
+    "converged_step": 2522,
+    "good_hold_updates": 156,
+    "first_hold_failure": 2679,
+    "post_failure": {
+      "checks": 301,
+      "passing": 194,
+      "min_modes": 0,
+      "min_hq": 0.0,
+      "final": {
+        "step": 2979,
+        "modes": 8,
+        "hq": 0.915771484375
+      }
+    }
+  },
+  "old_shift_arrival_stability": {
+    "first_arrival": 2740,
+    "delay": 340,
+    "passing_since_arrival": 86,
+    "observations_since_arrival": 87,
+    "misses": [
+      2940
+    ],
+    "final_suffix_start": 2950,
+    "final_suffix_checks": 66
+  },
+  "minimal_existing_followup": {
+    "status": "NOT_RUN_USER_STOP",
+    "runner_member": "candidate-source/hold.py",
+    "runner_sha256": "2ae5a9551739e6bad6190b76bcf252689793181786239238d0b08d2d1cc0c00e",
+    "host_member": "benchmarks/toy100/continuous_probe.py::_run_extended",
+    "description": "Fresh uninterrupted own SN3 hold with initialization-only bridge, exact frozen host and same policy, historical maximum7500 and all raw first-arrival/departure/suffix observations. Do not resume incomplete module-global checkpoint. Requires source/CPU initializer binding review before external execution; not prepared or launched.",
+    "new_mechanism": false,
+    "new_public_port": false
+  }
+}

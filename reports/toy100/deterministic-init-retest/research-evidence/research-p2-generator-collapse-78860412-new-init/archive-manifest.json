@@ -1,0 +1,85 @@
+{
+  "id": "research-p2-generator-collapse-78860412-new-init",
+  "candidate": "RESEARCH-p2_generator_collapse-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 1.0
+  },
+  "seconds": 42.289103796938434,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p2-generator-collapse-78860412",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/p2-generator-collapse-78860412-runtime-audit.json",
+  "audit_sha256": "1d5ac6995c7bbc0ce158524f7d4572fa85d9603f31fe56b4efe5a446c41a4620",
+  "artifacts": {
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/source-plan.json": {
+      "sha256": "04bf6414425e4ba968d27c282603c4cd2f22c312edb5d8eda89c5cc60034d134",
+      "original_sha256": "04bf6414425e4ba968d27c282603c4cd2f22c312edb5d8eda89c5cc60034d134",
+      "bytes": 41724
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/prepared-source.zip": {
+      "sha256": "4c25ffb79d43dd7bae7f1bfc1c3fb2a1d624b8d5e649eee52f03cea6cc819817",
+      "original_sha256": "4c25ffb79d43dd7bae7f1bfc1c3fb2a1d624b8d5e649eee52f03cea6cc819817",
+      "bytes": 654807
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/result.json.gz": {
+      "sha256": "f0436359bd759ac98cbb0e111f5474477a4b0204bd7dd80b3ae8ef6071766876",
+      "original_sha256": "a92e47ed28e98b0d14b053775faa0e177569c338f9f384cbd647e9da8cb636bd",
+      "bytes": 72801
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/initialization-receipt.json": {
+      "sha256": "02ed1c97049a882fdd443fa3deae3a8e185c25de28a7618192e259e4631c0742",
+      "original_sha256": "02ed1c97049a882fdd443fa3deae3a8e185c25de28a7618192e259e4631c0742",
+      "bytes": 4503
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/prepared-source-manifest.json": {
+      "sha256": "804a8d0d6d0faea8e620b14dfceb0aa3dabefb4cb7fa2364b19ae38ac62a8c9a",
+      "original_sha256": "804a8d0d6d0faea8e620b14dfceb0aa3dabefb4cb7fa2364b19ae38ac62a8c9a",
+      "bytes": 5315
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/prepared-source-sha256.json": {
+      "sha256": "8b88102bf355ec39fb4af444c007663ad20c68463885545495aea88e35b5ab2e",
+      "original_sha256": "8b88102bf355ec39fb4af444c007663ad20c68463885545495aea88e35b5ab2e",
+      "bytes": 291
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/mechanism-receipt.json": {
+      "sha256": "2d273c540d7dd7a1fc1b3231e3c3e4012f130ad12a594e9ad8c19e037886a22a",
+      "original_sha256": "2d273c540d7dd7a1fc1b3231e3c3e4012f130ad12a594e9ad8c19e037886a22a",
+      "bytes": 12998
+    },
+    "research-evidence/research-p2-generator-collapse-78860412-new-init/runtime.json": {
+      "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p2-generator-collapse-78860412/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p2-generator-collapse-78860412/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p2-generator-collapse-78860412/final-state.pt",
+      "sha256": "f5353b0323c912b42a4b4fd95a8398189598a3780f8232a262045f24d8260e17",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

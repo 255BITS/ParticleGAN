@@ -1,0 +1,17 @@
+{
+  "status": "PREPARED_AND_FIRST_TERMINAL_AUDITED",
+  "auditor_sha256": "c06ca2587090b581cda1f7c3213235f73efe733e186d6972b0b4e391ccc14c39",
+  "collector_sha256": "57f3e17cf326247a6dc11e121e3f9b81f7f62690d7cfa9f6fbd4d07ca6d06ec3",
+  "raw_reader_sha256": "6c189c6c9d56161c9dc328711687f3927a363c810978e3541fcf3c7269686058",
+  "contract": "Original ordinaryAdam/inlinePenalty probes, not shared85 eager/checkpoint hooks",
+  "scope": "Standard-library only. No Torch/model/learner imports, training or source mutation.",
+  "validation": "First completed original c01 artifact independently passes source/state/init/scheduling/quality audit.",
+  "usage": "python3 reports/toy100/deterministic-init-retest/research-simple-probe-runtime-review/audit_completed.py",
+  "output": "pending-archive-index.json contains exact archive argv for root to apply serially; this auditor never edits shared research-results.",
+  "limits": [
+    "Original probes do not save final checkpoint/native optimizer clocks/final shared RNG cursor; these are explicitly NOT_RETAINED.",
+    "Retained initial buffers/parameters and all17 original constructor random draws are independently matched to canonical fixture.",
+    "All2400 scheduling actions and Adam calls are checked. Full random digest is retained, not replayed."
+  ],
+  "immutable_audits": "Existing per-case files are never rewritten; original artifacts are rehashed before reuse."
+}

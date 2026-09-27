@@ -15,7 +15,7 @@ sha = lambda data: hashlib.sha256(data).hexdigest()
 def render_table(table):
     lines = ['# Research-host results with the new initialization', '',
         'These runs preserve their original research learner and use the reviewed new public initializer. They remain separate from public API qualification. Every score requires all eight modes and HQ≥90% for the final five of 24 observations.', '',
-        'A quality pass does not establish continuous-learning eligibility. [PNB3 retains its passing score but is disqualified in its tested configuration because its noise schedule depends on the chosen training end.](research-eligibility-audits/pnb3-current-configuration.md)', '',
+        'A quality pass does not establish continuous-learning eligibility. [The closeout](closeout.md) records the current eligibility decisions, promising SN3 result, incomplete qualification and user-requested stop. [Exact source audits](research-eligibility-audits/) preserve each configuration’s separate limitations.', '',
         '| Research configuration | Result | Passing observations | First arrival | Final streak | Final modes / quality |',
         '|---|---|---:|---:|---:|---|']
     for row in sorted(table['results'], key=lambda row: (row['status'] != 'PASS', -row['summary']['passing'], row['candidate'])):

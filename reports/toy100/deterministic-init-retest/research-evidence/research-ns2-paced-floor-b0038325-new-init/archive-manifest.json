@@ -1,0 +1,85 @@
+{
+  "id": "research-ns2-paced-floor-b0038325-new-init",
+  "candidate": "RESEARCH-ns2_paced_floor-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 6,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 39.95043224305846,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns2-paced-floor-b0038325",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ns2-paced-floor-b0038325-runtime-audit.json",
+  "audit_sha256": "41ff4dce132f1f6b85e64e6cfecb8723fece692f37f7162e37413ced0136d181",
+  "artifacts": {
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/source-plan.json": {
+      "sha256": "f88cb207b1639471437243b3bebaf40911c565455dc33f1c64d2afe642b362d6",
+      "original_sha256": "f88cb207b1639471437243b3bebaf40911c565455dc33f1c64d2afe642b362d6",
+      "bytes": 41480
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/prepared-source.zip": {
+      "sha256": "e58b90ab8f8bf916b1c6eec29e67d5c506592a0be6dbd2b26d541489a2c03592",
+      "original_sha256": "e58b90ab8f8bf916b1c6eec29e67d5c506592a0be6dbd2b26d541489a2c03592",
+      "bytes": 654330
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/result.json.gz": {
+      "sha256": "63e7b90e593f65d27a0a9a1572df68cf5618ae031c0a744e09c82b83113e6f6f",
+      "original_sha256": "0b2124717c969e6900b90cf090c0a02c0bd110b4052c491aa1102c05cd29e28d",
+      "bytes": 69581
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/initialization-receipt.json": {
+      "sha256": "8b35bac10198763a30f00404777b9f866dde360c85b30c26f696f2af449803d7",
+      "original_sha256": "8b35bac10198763a30f00404777b9f866dde360c85b30c26f696f2af449803d7",
+      "bytes": 4497
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/prepared-source-manifest.json": {
+      "sha256": "c7758d9d4ebbf63ccbe1e39f560c005041572ee6fa4bb24e5fd35b62fa9354ca",
+      "original_sha256": "c7758d9d4ebbf63ccbe1e39f560c005041572ee6fa4bb24e5fd35b62fa9354ca",
+      "bytes": 5203
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/prepared-source-sha256.json": {
+      "sha256": "0277078c8851dec8cb6699b60d35af9380e8bc88e04966438aee7a52e0241e5d",
+      "original_sha256": "0277078c8851dec8cb6699b60d35af9380e8bc88e04966438aee7a52e0241e5d",
+      "bytes": 291
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/mechanism-receipt.json": {
+      "sha256": "c043261fd5991fd61bee29e9fcf913aea4440c5db4a96952ba3efe22ec973263",
+      "original_sha256": "c043261fd5991fd61bee29e9fcf913aea4440c5db4a96952ba3efe22ec973263",
+      "bytes": 5598
+    },
+    "research-evidence/research-ns2-paced-floor-b0038325-new-init/runtime.json": {
+      "sha256": "235e39f2a172cb305a862568c7c7776649f30d7061d656c3320b8b0c945ed465",
+      "original_sha256": "235e39f2a172cb305a862568c7c7776649f30d7061d656c3320b8b0c945ed465",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns2-paced-floor-b0038325/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns2-paced-floor-b0038325/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns2-paced-floor-b0038325/final-state.pt",
+      "sha256": "fd94f372d87676b51c5b56b65f302148f3fedc36b3e42939ce7340cbd820eb5c",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

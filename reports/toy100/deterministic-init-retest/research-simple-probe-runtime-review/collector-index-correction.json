@@ -1,0 +1,7 @@
+{
+  "scope": "Collector metadata only; immutable per-case audit bytes unchanged.",
+  "correction": "Artifact-loop variable renamed to preserve case identity when reusing existing audits.",
+  "malformed_transient_id": "research-runtime.json-new-init",
+  "correct_id": "research-c01-r1r2-435f6f20-new-init",
+  "no_shared_results_modified": true
+}

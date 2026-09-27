@@ -1,0 +1,359 @@
+{
+  "schema": 1,
+  "time_utc": "2026-09-27T03:37:02.290663+00:00",
+  "authority": "Latest explicit user request to wrap up soon, root delegated stop markers and finish-current cooperative shutdown",
+  "stop_markers": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/STOP",
+      "previous_content": null,
+      "sha256": "db3d7834990cfe5d4fe4741d1d7beeb4d7dbb60dbc6a75d4a13c325d6c19364f"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/STOP",
+      "previous_content": null,
+      "sha256": "db3d7834990cfe5d4fe4741d1d7beeb4d7dbb60dbc6a75d4a13c325d6c19364f"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/STOP",
+      "previous_content": null,
+      "sha256": "db3d7834990cfe5d4fe4741d1d7beeb4d7dbb60dbc6a75d4a13c325d6c19364f"
+    }
+  ],
+  "supervisor_instructions": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/supervisor.md",
+      "before_backup": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/retest-closure/user-stop/research-simple-eleven-wave1-20260927T032610Z-1996550-supervisor-before.md",
+      "before_sha256": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+      "after_sha256": "49de5c0783eb456ec5a84d43f595ee38d805ebfb032f873eb161bc253cfada3c"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/supervisor.md",
+      "before_backup": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/retest-closure/user-stop/research-remaining31-tail-a-20260927T033233Z-2006509-supervisor-before.md",
+      "before_sha256": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+      "after_sha256": "49de5c0783eb456ec5a84d43f595ee38d805ebfb032f873eb161bc253cfada3c"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/supervisor.md",
+      "before_backup": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/retest-closure/user-stop/research-remaining31-tail-b-20260927T033233Z-2006553-supervisor-before.md",
+      "before_sha256": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+      "after_sha256": "49de5c0783eb456ec5a84d43f595ee38d805ebfb032f873eb161bc253cfada3c"
+    }
+  ],
+  "owned_processes_before": [
+    {
+      "pid": 1996550,
+      "ppid": 1286,
+      "pgid": 1996550,
+      "sid": 1996550,
+      "start_ticks": 138139079,
+      "argv": [
+        "bash",
+        "/ml2/hypergan/try-gan.sh",
+        "--engine",
+        "codex",
+        "--model",
+        "gpt-6-astra",
+        "--repo",
+        "/ml2/hypergan/ParticleGAN-ka2-default",
+        "--base",
+        "25751c0864dd8259b00c5804f600cd41cce6e4cf",
+        "--gpu",
+        "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "--minutes",
+        "0",
+        "--candidates",
+        "11",
+        "--workers",
+        "1",
+        "--runs-dir",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1",
+        "--prompt-file",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/brief.md",
+        "--focus",
+        "research-simple-eleven-wave1"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo"
+    },
+    {
+      "pid": 1996692,
+      "ppid": 1996550,
+      "pgid": 1996550,
+      "sid": 1996550,
+      "start_ticks": 138139641,
+      "argv": [
+        "/home/mikkel/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/bin/codex",
+        "--no-daemon",
+        "exec",
+        "--ignore-user-config",
+        "--ephemeral",
+        "--model",
+        "gpt-6-astra",
+        "-c",
+        "model_reasoning_effort=\"max\"",
+        "-c",
+        "memories.use_memories=false",
+        "--disable",
+        "memories",
+        "--disable",
+        "external_agent_memory_import",
+        "--disable",
+        "multi_agent",
+        "-c",
+        "approval_policy=\"never\"",
+        "--sandbox",
+        "danger-full-access",
+        "--cd",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/final.md",
+        "-"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo"
+    },
+    {
+      "pid": 1996693,
+      "ppid": 1996550,
+      "pgid": 1996550,
+      "sid": 1996550,
+      "start_ticks": 138139641,
+      "argv": [
+        "tee",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/codex.log"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo"
+    },
+    {
+      "pid": 1997095,
+      "ppid": 1996692,
+      "pgid": 1997095,
+      "sid": 1996550,
+      "start_ticks": 138140727,
+      "argv": [
+        "/home/mikkel/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/bin/codex-code-mode-host"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo"
+    },
+    {
+      "pid": 2006509,
+      "ppid": 1286,
+      "pgid": 2006509,
+      "sid": 2006509,
+      "start_ticks": 138177335,
+      "argv": [
+        "bash",
+        "/ml2/hypergan/try-gan.sh",
+        "--engine",
+        "codex",
+        "--model",
+        "gpt-6-astra",
+        "--repo",
+        "/ml2/hypergan/ParticleGAN-ka2-default",
+        "--base",
+        "25751c0864dd8259b00c5804f600cd41cce6e4cf",
+        "--gpu",
+        "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "--minutes",
+        "0",
+        "--candidates",
+        "13",
+        "--workers",
+        "1",
+        "--runs-dir",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a",
+        "--prompt-file",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/brief.md",
+        "--focus",
+        "research-remaining31-tail-a"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo"
+    },
+    {
+      "pid": 2006553,
+      "ppid": 1286,
+      "pgid": 2006553,
+      "sid": 2006553,
+      "start_ticks": 138177383,
+      "argv": [
+        "bash",
+        "/ml2/hypergan/try-gan.sh",
+        "--engine",
+        "codex",
+        "--model",
+        "gpt-6-astra",
+        "--repo",
+        "/ml2/hypergan/ParticleGAN-ka2-default",
+        "--base",
+        "25751c0864dd8259b00c5804f600cd41cce6e4cf",
+        "--gpu",
+        "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "--minutes",
+        "0",
+        "--candidates",
+        "13",
+        "--workers",
+        "1",
+        "--runs-dir",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b",
+        "--prompt-file",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/brief.md",
+        "--focus",
+        "research-remaining31-tail-b"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/repo"
+    },
+    {
+      "pid": 2006708,
+      "ppid": 2006509,
+      "pgid": 2006509,
+      "sid": 2006509,
+      "start_ticks": 138177943,
+      "argv": [
+        "/home/mikkel/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/bin/codex",
+        "--no-daemon",
+        "exec",
+        "--ignore-user-config",
+        "--ephemeral",
+        "--model",
+        "gpt-6-astra",
+        "-c",
+        "model_reasoning_effort=\"max\"",
+        "-c",
+        "memories.use_memories=false",
+        "--disable",
+        "memories",
+        "--disable",
+        "external_agent_memory_import",
+        "--disable",
+        "multi_agent",
+        "-c",
+        "approval_policy=\"never\"",
+        "--sandbox",
+        "danger-full-access",
+        "--cd",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/final.md",
+        "-"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo"
+    },
+    {
+      "pid": 2006709,
+      "ppid": 2006509,
+      "pgid": 2006509,
+      "sid": 2006509,
+      "start_ticks": 138177943,
+      "argv": [
+        "tee",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/codex.log"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo"
+    },
+    {
+      "pid": 2006926,
+      "ppid": 2006553,
+      "pgid": 2006553,
+      "sid": 2006553,
+      "start_ticks": 138178415,
+      "argv": [
+        "/home/mikkel/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/bin/codex",
+        "--no-daemon",
+        "exec",
+        "--ignore-user-config",
+        "--ephemeral",
+        "--model",
+        "gpt-6-astra",
+        "-c",
+        "model_reasoning_effort=\"max\"",
+        "-c",
+        "memories.use_memories=false",
+        "--disable",
+        "memories",
+        "--disable",
+        "external_agent_memory_import",
+        "--disable",
+        "multi_agent",
+        "-c",
+        "approval_policy=\"never\"",
+        "--sandbox",
+        "danger-full-access",
+        "--cd",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/repo",
+        "--color",
+        "never",
+        "--output-last-message",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/final.md",
+        "-"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/repo"
+    },
+    {
+      "pid": 2006927,
+      "ppid": 2006553,
+      "pgid": 2006553,
+      "sid": 2006553,
+      "start_ticks": 138178415,
+      "argv": [
+        "tee",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/codex.log"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/repo"
+    },
+    {
+      "pid": 2007131,
+      "ppid": 2006708,
+      "pgid": 2007131,
+      "sid": 2006509,
+      "start_ticks": 138178773,
+      "argv": [
+        "/home/mikkel/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/bin/codex-code-mode-host"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo"
+    },
+    {
+      "pid": 2007409,
+      "ppid": 2006926,
+      "pgid": 2007409,
+      "sid": 2006553,
+      "start_ticks": 138179632,
+      "argv": [
+        "/home/mikkel/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/bin/codex-code-mode-host"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-b/20260927T033233Z-2006553/repo"
+    },
+    {
+      "pid": 2013793,
+      "ppid": 2006708,
+      "pgid": 2013793,
+      "sid": 2013793,
+      "start_ticks": 138203708,
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "reports/reviewed-probe-orchestration/launch_case.py",
+        "2"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo"
+    },
+    {
+      "pid": 2013799,
+      "ppid": 2013793,
+      "pgid": 2013793,
+      "sid": 2013793,
+      "start_ticks": 138203713,
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-inputs/case7/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-inputs/review7/cpu-constructor-proof.json",
+        "--output",
+        "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns2-paced-floor-b0038325"
+      ],
+      "cwd": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo"
+    }
+  ],
+  "status": "STOP_REQUESTED_FINISH_CURRENT_NO_NEXT"
+}

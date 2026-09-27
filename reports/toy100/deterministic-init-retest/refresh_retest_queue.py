@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from collections import Counter
 import argparse
 import hashlib
+import gzip
 import json
 import os
 import zipfile
@@ -81,13 +82,16 @@ def attach_research_progress(rows):
         row=by_id.get(alias['id'])
         if row is not None:
             row['linked_queue_rows']=alias['linked_rows'];row['port_status']='FOLLOW_EXACT_LINKED_DEFINITION'
-    index_path=folder/'prepared-index.json'
-    if index_path.exists():
-        for prepared in read(index_path)['rows']:
+    prepared_rows=[]
+    for preparation_folder in (folder,folder/'simple-probe-preparation'):
+        index_path=preparation_folder/'prepared-index.json'
+        if index_path.exists():prepared_rows.extend((preparation_folder,r) for r in read(index_path)['rows'])
+    if prepared_rows:
+        for preparation_folder,prepared in prepared_rows:
             row=by_id.get(prepared['queue_row'])
             if row is None:continue
-            root=folder/prepared['directory_relative'] if prepared.get('directory_relative') else Path(prepared['directory'])
-            proof_path=folder/prepared['required_review_relative'] if prepared.get('required_review_relative') else Path(prepared['required_review'])
+            root=preparation_folder/prepared['directory_relative'] if prepared.get('directory_relative') else Path(prepared['directory'])
+            proof_path=preparation_folder/prepared['required_review_relative'] if prepared.get('required_review_relative') else Path(prepared['required_review'])
             assert sha(root/'manifest.json')==prepared['manifest_sha256']
             row['port_status']='SOURCE_PREPARED_REQUIRES_CPU_PROOF';row['research_preparation']=prepared
             if proof_path.exists():
@@ -106,9 +110,89 @@ def attach_research_progress(rows):
         if row_id not in by_id:raise ValueError('unmapped research archive: '+score['candidate'])
         row=by_id[row_id];audit_path=Path(score['audit']);assert sha(audit_path)==score['audit_sha256']
         audit=read(audit_path)
-        assert audit['status']=='PASS' and audit['quality_status']==score['status'] and audit['observations']==score['summary']['observations'] and audit['passing_observations']==score['summary']['passing'] and audit['passing_suffix']==score['summary']['final_suffix'] and audit['initial_cuda_material_matches_cpu_proof'] is True
-        row.update(execution_status='TERMINAL_ARCHIVED_AND_AUDITED',quality_status='AUDITED_'+score['status'],quality_scope='RESEARCH_HOST_NOT_PUBLIC_API',archive=pin(archive),independent_runtime_audit=pin(audit_path),reported_summary=score['summary'],reported_status=score['status'],continuous_eligibility=score['continuous_eligibility'],seconds=score['seconds'])
+        own_initial_proof=(audit.get('initial_cuda_material_matches_cpu_proof') is True or audit.get('initial_cuda_material_matches_own_cpu_proof') is True)
+        assert audit['status']=='PASS' and audit['quality_status']==score['status'] and audit['observations']==score['summary']['observations'] and audit['passing_observations']==score['summary']['passing'] and audit['passing_suffix']==score['summary']['final_suffix'] and own_initial_proof
+        row.update(port_status='SOURCE_AND_CPU_REVIEWED_RESEARCH_HOST',execution_status='TERMINAL_ARCHIVED_AND_AUDITED',quality_status='AUDITED_'+score['status'],quality_scope='RESEARCH_HOST_NOT_PUBLIC_API',archive=pin(archive),independent_runtime_audit=pin(audit_path),reported_summary=score['summary'],reported_status=score['status'],continuous_eligibility=score['continuous_eligibility'],seconds=score['seconds'])
     return dict(source_queue=pin(queue_path),score_ledger=pin(ledger))
+
+def attach_followups(rows):
+    """A later task failure limits qualification without erasing a screen pass."""
+    ledger=HERE/'followup-results.json'
+    if not ledger.exists():return None
+    by_candidate={r['candidate']:r for r in rows}
+    archives=[(p,read(p)) for p in (HERE/'followup-evidence').glob('*/archive-manifest.json')]
+    for audit in read(ledger)['results']:
+        row=by_candidate.get(audit['candidate'])
+        if row is None:raise ValueError('unmapped followup candidate')
+        if 'archive_manifest' in audit:
+            path=HERE/audit['archive_manifest'];archive=read(path)
+            assert all(archive[k]==audit[k] for k in ('candidate','task','quality_status','audit_sha256'))
+            audit_path=Path(audit['audit']);assert sha(audit_path)==audit['audit_sha256']
+            original=read(audit_path)
+            assert original=={k:v for k,v in audit.items() if k not in ('archive_manifest','audit','audit_sha256')}
+            for rel,item in archive['artifacts'].items():
+                retained=HERE/item['path'];assert sha(retained)==item['sha256']
+                raw=gzip.decompress(retained.read_bytes()) if retained.suffix=='.gz' else retained.read_bytes()
+                assert hashlib.sha256(raw).hexdigest()==item['original_sha256']
+        else:
+            matches=[(p,v) for p,v in archives if v.get('audit')==audit]
+            if len(matches)!=1:raise ValueError('followup audit/archive binding is not unique')
+            path,archive=matches[0]
+            for rel,item in archive['retained'].items():assert sha(path.parent/rel)==item['sha256']
+        assert audit['status']=='PASS'
+        row.setdefault('audited_followups',[]).append(dict(task=audit['task'],quality_status='AUDITED_'+audit['quality_status'],observations=audit['observations'],passing_observations=audit['passing_observations'],passing_suffix=audit['passing_suffix'],first_arrival=audit.get('first_arrival'),final=audit['final'],failed_bounds=audit.get('final_failed_bounds',[]),archive=pin(path),limitations=audit.get('limits',[])))
+        if audit['quality_status']=='FAIL':row['qualification_status']='REJECTED_BY_OWN_COMPLETED_FOLLOWUP; INITIAL_SCREEN_SCORE_PRESERVED'
+    return pin(ledger)
+
+def attach_current_eligibility(rows):
+    """Current source findings and pruned work never overwrite historical scores."""
+    by_id={r['id']:r for r in rows};receipts=[]
+    for path in sorted((HERE/'research-eligibility-audits').glob('*-configuration.json')):
+        audit=read(path);row=by_id[audit['candidate']]
+        for item in audit['evidence']:
+            if 'path' in item:assert sha(Path(item['path']))==item['sha256']
+            else:
+                with zipfile.ZipFile(item['archive']) as archive:
+                    assert hashlib.sha256(archive.read(item['member'])).hexdigest()==item['sha256']
+        authority=audit['quality_authority']
+        score=next(v for v in read(Path(authority['path']))['results'] if v['id']==authority['row_id'])
+        assert sha(HERE/score['archive_manifest'])==authority['archive_manifest_sha256']
+        assert score['status']==audit['new_initialization_quality']['status']
+        row['current_configuration_eligibility']=audit['current_configuration_eligibility']
+        row['current_source_eligibility_audit']=pin(path)
+        row['historical_eligibility_label_preserved']=audit['historical_eligibility_label_unchanged']
+        receipts.append(pin(path))
+    path=HERE/'precision-three-single-shift-preparation/qualification-status.json'
+    if path.exists():
+        status=read(path)
+        for candidate,case in status['cases'].items():
+            row=by_id[candidate]
+            row['further_ring_preparation_status']=case
+            row['further_ring_status_receipt']=pin(path)
+            if case['ring']=='NOT_RUN':
+                assert any(v['task']=='img_bars4' and v['quality_status']=='AUDITED_FAIL' for v in row.get('audited_followups',[])), candidate
+        receipts.append(pin(path))
+    return receipts
+
+def attach_bounded_closure(rows):
+    path=HERE/'retest-closure/coverage-scope.json'
+    if not path.exists():return None
+    scope=read(path);by_id={r['id']:r for r in rows}
+    assert scope['status']=='FROZEN_EXISTING_CANDIDATE_SCOPE_NO_EXPANSION'
+    for item in scope['not_retested']:
+        row=by_id[item['queue_row']]
+        assert row['quality_status']=='NOT_RUN', 'Untested closure cannot erase a quality result'
+        row['execution_status']='NOT_RETESTED_AT_BOUNDED_CLOSURE'
+        row['closure_status']=item['status'];row['not_retested_reason']=item['reason']
+    for item in scope['exact_duplicates']:
+        row=by_id[item['queue_row']]
+        row['execution_status']='COVERED_BY_EXACT_DEFINITION_LINK'
+        row['linked_queue_rows']=[item['covered_by']]
+        row['duplicate_source_proof']=item
+    for alias in scope['aliases']:
+        row=by_id[alias['id']]
+        row['execution_status']='ALIAS_FOLLOWS_LINKED_ROWS';row['linked_queue_rows']=alias['linked_rows']
+    return pin(path)
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -154,6 +238,10 @@ def main():
     for e in inv['legacy_pr_summary_entries']:
         rows.append(dict(id=e['id'],candidate=e['candidate'],category='LEGACY_PR_SOURCE_RECOVERY',lane='research',source_status='MISSING_PINNED_SOURCE_BINDING',summary=e['historical_summary'],port_status='BLOCKED_SOURCE_RECOVERY',cpu_preflight={'status':'PENDING'},execution_status='PENDING',quality_status='NOT_RUN',continuous_eligibility='UNVERIFIED',prior_scores_inherited=False))
     by_candidate={x['candidate']:x for x in rows if x['category'] in ['PUBLIC_CONTROL','API_EXPERIMENTAL']};by_id={x['id']:x for x in rows};batchpins=[];unmatched=[]
+    research_cases={'research-ka2-new-init':'priority:KA2'}
+    for prep in (HERE/'research-screen-queue',HERE/'research-screen-queue/simple-probe-preparation'):
+        if (prep/'prepared-index.json').exists():
+            for entry in read(prep/'prepared-index.json')['rows']:research_cases[Path(entry['directory']).name]=entry['queue_row']
     batches=args.batch or [DEFAULT_BATCH]
     for batch in batches:
         if not batch.exists():continue
@@ -161,9 +249,19 @@ def main():
         for record in records:
             directory=Path(record['directory']);resultpaths=list(directory.glob('*/repo/reports/fixed-init-mode-hold/result.json'))+list(directory.glob('*/repo/reports/fixed-init-mode-hold/*/result.json'))
             for assigned in record.get('candidates',[record['lane']]):
-                target=by_id.get(assigned)
+                target=by_id.get(assigned) or by_id.get(research_cases.get(assigned))
                 if target is not None:
                     target['launch_record']={k:record[k] for k in ['lane','directory','pid','base'] if k in record};target['driver_alive_observed']=process_alive(record['pid']);target['execution_status']='BATCH_ACTIVE_AWAITING_RESULT' if target['driver_alive_observed'] else 'DRIVER_EXITED_NO_TERMINAL_RESULT'
+            if record['lane'].startswith('research-'):
+                for resultpath in directory.glob('*/repo/reports/reviewed-probe-output/*/*/result.json'):
+                    plan_path=resultpath.parent/'source-plan.json';receipt_path=resultpath.parent/'initialization-receipt.json'
+                    if not plan_path.exists() or not receipt_path.exists():continue
+                    plan=read(plan_path);receipt=read(receipt_path)
+                    row=by_id.get(plan.get('source_queue_row') or ('priority:KA2' if plan.get('candidate')=='RESEARCH-KA2-new-init' else None))
+                    if row is None:unmatched.append(pin(resultpath));continue
+                    assert plan['initializer_commit']==INITIALIZER and receipt['source_plan_sha256']==sha(plan_path)
+                    result=read(resultpath)
+                    row.update(execution_status='TERMINAL_RECORDED_PENDING_AUDIT',result=pin(resultpath),reported_status=result.get('status'),seconds=result.get('seconds'),quality_status='PENDING_INDEPENDENT_RESULT_AUDIT',quality_scope='RESEARCH_HOST_NOT_PUBLIC_API')
             for resultpath in resultpaths:
                 result=read(resultpath);row=by_candidate.get(result.get('candidate'));decl=resultpath.parent/'declaration.json'
                 if row is None:unmatched.append(pin(resultpath));continue
@@ -174,9 +272,15 @@ def main():
                 m=result.get('metrics',{});row['complete_quality_window_reported']=m.get('updates')==1200 and m.get('verdict',{}).get('convergence',{}).get('complete') is True
     score_ledger=attach_archived_results(rows)
     research_progress=attach_research_progress(rows)
+    followup_ledger=attach_followups(rows)
+    current_eligibility=attach_current_eligibility(rows)
+    bounded_closure=attach_bounded_closure(rows)
     data=dict(schema=1,recorded_utc=datetime.now(timezone.utc).isoformat(),initializer_commit=INITIALIZER,scope='Authoritative coverage/progress queue, not a winner leaderboard. Source, port, CPU checks, execution, quality and eligibility are independent. Historical scores unchanged.',inventory=pin(INVENTORY/'inventory.json'),api_authority=pin(INVENTORY/'api-screening-candidates.json'),refresh_script=pin(Path(__file__)),batch_receipts=batchpins,counts=dict(rows=len(rows),by_category=dict(Counter(x['category'] for x in rows)),api_experimental_port_status=dict(Counter(x['port_status'] for x in rows if x['category']=='API_EXPERIMENTAL')),execution_status=dict(Counter(x['execution_status'] for x in rows))),historical_reference_mappings=references,conditional_diagnostics=[dict(id='public-ka2-decay-historical-config',status='DECLARED_HISTORICAL_CONFIGURATION_NOT_LAUNCHED',source='continuous-api-search/fixed-init-retest-inventory/api-authority.json#mandatory_controls',condition='Retain exact historical settings as a separate diagnostic; no need to repeat decay before new-init constant result justifies it.')],rows=rows,unmatched_terminal_results=unmatched,policy=['All46 existing API configurations and public3 controls are mapped; source-ported does not mean runtime/quality PASS.','Research priority aliases may point to scored cohort rows; raw row count is not a count of independent algorithms or required duplicate runs.','Never drop prior quality failures because they failed under old initialization. No historical pass transfers.','Preserve each declared learner policy; scheduled historical quality can improve without becoming run-forever eligible.','Do not load old tensor weights. New initializer and caller/data/latent/noise cursor contracts are separate.','Do not execute draft proposals under the retest instruction. Recover missing source identity while ready candidates proceed.'])
     data['score_ledger']=score_ledger
     data['research_progress']=research_progress
+    data['followup_ledger']=followup_ledger
+    data['current_eligibility_receipts']=current_eligibility
+    data['bounded_closure']=bounded_closure
     data['counts']['research_port_status']=dict(Counter(x['port_status'] for x in rows if x['category'] not in ('PUBLIC_CONTROL','API_EXPERIMENTAL')))
     data['counts']['quality_status']=dict(Counter(x['quality_status'] for x in rows))
     data['counts']['api_experimental_cpu_status']=dict(Counter(x['cpu_preflight']['status'] for x in rows if x['category']=='API_EXPERIMENTAL'))
@@ -187,10 +291,24 @@ def main():
     text=['# Fixed-initialization retest queue','',f"Updated {data['recorded_utc']}. This is the progress/coverage authority; historical scores remain in their original ledgers. No entry is promoted by being ported or CPU-checked.",'','## Public controls and all46 API configurations','', '| Candidate | Source | Initialization port | CPU construction | Execution | Quality audit |','|---|---|---|---|---|---|']
     for r in rows:
         if r['category'] in ['PUBLIC_CONTROL','API_EXPERIMENTAL']:text.append(f"| {r['candidate']} | {r['source_status']} | {r['port_status']} | {r['cpu_preflight']['status']} | {r['execution_status']} | {r['quality_status']} |")
+    followups=[(r,v) for r in rows for v in r.get('audited_followups',[])]
+    if followups:
+        text+=['','## Audited followups','','The original screen score is preserved. A failure on another frozen task prevents qualification.','','| Candidate | Task | Quality | Passing observations | Final passing suffix | Failed final bounds |','|---|---|---|---|---|---|']
+        for row,result in followups:
+            bounds='; '.join(f"{v['metric']}={v['value']:.7g} (requires {v['op']} {v['threshold']})" for v in result['failed_bounds'])
+            text.append(f"| {row['candidate']} | {result['task']} | {result['quality_status']} | {result['passing_observations']}/{result['observations']} | {result['passing_suffix']} | {bounds} |")
     text+=['','## Research coverage and source recovery','','These entries map old scored rows and aliases; overlapping rows are not requests for duplicate identical runs. Research-host results remain separate from public API evidence. Missing historical binding stays visible while ready ports proceed. Source-disqualified scheduled configurations retain that eligibility status even if new-init quality improves.','','| Candidate | Historical identity | Source | Port / execution | Quality |','|---|---|---|---|---|']
     for r in rows:
         if r['category'] not in ['PUBLIC_CONTROL','API_EXPERIMENTAL']:text.append(f"| {r['candidate']} | {r['id']} | {r['source_status']} | {r['port_status']} / {r['execution_status']} | {r['quality_status']} |")
-    text+=['','Full exact source/config links, package hashes, prior evidence pointers, CPU receipt hashes, launch PIDs and terminal-result pointers are in [retest-queue.json](retest-queue.json). The old decayed KA2 arm is retained as a conditional diagnostic, separately from default KA2 and the mandatory constant arm.','','Refresh bookkeeping without training: `python reports/toy100/deterministic-init-retest/refresh_retest_queue.py`. Additional batches can be passed with repeated `--batch PATH`. The script reads only the specified batch process/artifact receipts, standard-library source ZIPs and existing CPU reports.']
+    eligibility_rows=[r for r in rows if r.get('current_configuration_eligibility')]
+    if eligibility_rows:
+        text+=['','## Current source eligibility','','Quality scores and historical labels remain unchanged. These findings apply to the exact retested configuration.','','| Candidate | Earned quality | Current source eligibility |','|---|---|---|']
+        for r in eligibility_rows:text.append(f"| {r['candidate']} | {r['quality_status']} | {r['current_configuration_eligibility']} |")
+    pruned=[r for r in rows if r.get('further_ring_preparation_status',{}).get('ring')=='NOT_RUN']
+    if pruned:
+        text+=['','Further ring, vector and long-run qualifications are **NOT_RUN** for '+', '.join(r['candidate'] for r in pruned)+': each has an independently audited failure on its own new-initializer bars4 task. Prepared sources and CPU receipts remain available; they do not authorize additional execution.']
+    if bounded_closure:text+=['','The [bounded coverage closure](retest-closure/README.md) freezes97 reviewed research execution cases and explicitly lists89 NOT_RETESTED definition rows,4 exact duplicate definitions and15 priority aliases. No missing result is inferred as a failure or a pass. Running fixed batches may finish; no new candidate or source reconstruction is authorized.']
+    text+=['','Full exact source/config links, package hashes, prior evidence pointers, CPU receipt hashes, launch PIDs and terminal-result pointers are in [retest-queue.json](retest-queue.json). The old decayed KA2 arm is retained as a historical conditional diagnostic, separately from default KA2 and the mandatory constant arm; it is not an additional authorized launch after bounded closure.','','Refresh bookkeeping without training: `python reports/toy100/deterministic-init-retest/refresh_retest_queue.py`. Additional already-authorized batch receipts can be passed with repeated `--batch PATH`. The script reads only the specified batch process/artifact receipts, standard-library source ZIPs and existing CPU reports.']
     (HERE/'retest-queue.md').write_text('\n'.join(text)+'\n')
     print(json.dumps(data['counts'],indent=2))
 

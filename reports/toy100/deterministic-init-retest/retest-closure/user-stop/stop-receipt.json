@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-09-27T03:38:34.478769+00:00",
+  "status": "STOPPED_USER_REQUEST",
+  "original_completion_target": 97,
+  "full_leaderboard_retest_complete": false,
+  "owned_processes_remaining": [],
+  "batches": [
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550",
+      "output": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z",
+      "original_spec_sha256": "fc206efd1d605d1e56136bd1183bb4e650c289906ab8e738c726e9472afb5848",
+      "cases": [
+        {
+          "id": "c01-r1r2-435f6f20",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c01-r1r2-435f6f20/result.json",
+              "sha256": "e5cbbca6ef6865d6c611db83aface73e064cb51f80324ad410172cb3c68e2852"
+            }
+          ]
+        },
+        {
+          "id": "c02-ra-cap-86cd0c40",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c02-ra-cap-86cd0c40/result.json",
+              "sha256": "2062389d5ad55776cdd743e02ebf11b48bb0796d6cffc01d24dc6c4a054ae604"
+            }
+          ]
+        },
+        {
+          "id": "c03-smooth-cap-3e82a660",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c03-smooth-cap-3e82a660/result.json",
+              "sha256": "46f26d2c2a0d3918170dc5356d1a64529944c714adeef9c979cf6fa53b380b55"
+            }
+          ]
+        },
+        {
+          "id": "c04-hinge-cap-59f1fdf4",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c04-hinge-cap-59f1fdf4/result.json",
+              "sha256": "e978d4bc6fb9cd0469168bd8962ac9f9e38f3c6268402947a14905f2d4ca3e4c"
+            }
+          ]
+        },
+        {
+          "id": "c05-ra-r1r2-fbf0aaf4",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c05-ra-r1r2-fbf0aaf4/result.json",
+              "sha256": "738a8801c86ab1151bdbabd6b1713bbb503f4d2f2dddfc16bed0c68f1f0cac3d"
+            }
+          ]
+        },
+        {
+          "id": "c06-ra-r1-only-18ea9def",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c06-ra-r1-only-18ea9def/result.json",
+              "sha256": "eb2339b5eed614ff51158ce531c9a9c2f099c33583a2f292c374ad5d5ef0e549"
+            }
+          ]
+        },
+        {
+          "id": "ra-r1-fake-cap-42bda24f",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/ra-r1-fake-cap-42bda24f/result.json",
+              "sha256": "e049df90ce554733b4c928006408588893d54bc1c89f6c9150716abae44aa4b6"
+            }
+          ]
+        },
+        {
+          "id": "bcap-symmetric-half-6330f6c7",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-symmetric-half-6330f6c7/result.json",
+              "sha256": "4f2b34814f3e27c6197c22577926cc798293ca034e92fe84bc2bf4881fa4056e"
+            }
+          ]
+        },
+        {
+          "id": "bcap-real-half-fake-one-2f18b41e",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-real-half-fake-one-2f18b41e/result.json",
+              "sha256": "ce34f4b5f67d6d004ed286039ae9f3529df7f55ef791a7bcd78b20cb20f35404"
+            }
+          ]
+        },
+        {
+          "id": "rp-bcap-half-bd1d0577",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/rp-bcap-half-bd1d0577/result.json",
+              "sha256": "3c0aba242dec99c009aa1d1ede24a7dec4a377eb8e6496235d6e82156344e27a"
+            }
+          ]
+        },
+        {
+          "id": "rp-r1-fake-cap-e19ea6cd",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/rp-r1-fake-cap-e19ea6cd/result.json",
+              "sha256": "020028db80916e67bc5bdf7a64b46b3053fbb4e17523b7b5390084bf407c61d1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "attempt": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509",
+      "output": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z",
+      "original_spec_sha256": "07c8f99efd63e52f2be3218d8df0096a549025da077572ba96aa971a9dae8b55",
+      "cases": [
+        {
+          "id": "ap2-anchored-reopen-feb7886b",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ap2-anchored-reopen-feb7886b/result.json",
+              "sha256": "456dde55979faeb5687802993466bdfd46b533d07ea51b538680b303b9911a83"
+            }
+          ]
+        },
+        {
+          "id": "ns1-cosine-heat-15ca7e89",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns1-cosine-heat-15ca7e89/result.json",
+              "sha256": "3ccc4b1139a2d74aa055d42a96b4ce8a1d2a37b81610fa5fbc80e2f952f7de2e"
+            }
+          ]
+        },
+        {
+          "id": "ns2-paced-floor-b0038325",
+          "status": "TERMINAL_ARTIFACT_REQUIRES_AUDIT",
+          "artifacts": [
+            {
+              "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T033233Z/research-remaining31-tail-a/20260927T033233Z-2006509/repo/reports/reviewed-probe-output/20260927T033325Z/ns2-paced-floor-b0038325/result.json",
+              "sha256": "0b2124717c969e6900b90cf090c0a02c0bd110b4052c491aa1102c05cd29e28d"
+            }
+          ]
+        },
+        {
+          "id": "ns3-fixed-schedule-shock-32b0ade5",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "ac1-persistence-549d59e6",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "ac2-advantage-2486972b",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "ac3-gap-magnitude-8b2c2556",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "cc1-halfsplit-coherence-894a403d",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "cc2-margin-uncertainty-f8f9b004",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "cc3-frozen-baseline-quiet-399ef2aa",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "di1-real-batch-innovation-63a67cee",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "di3-latch-then-anchor-snap-4e7feaf7",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        },
+        {
+          "id": "sn1-gap-mobility-dbade7aa",
+          "status": "NOT_RUN_USER_STOP",
+          "artifacts": []
+        }
+      ]
+    }
+  ],
+  "not_run_case_ids": [
+    "ns3-fixed-schedule-shock-32b0ade5",
+    "ac1-persistence-549d59e6",
+    "ac2-advantage-2486972b",
+    "ac3-gap-magnitude-8b2c2556",
+    "cc1-halfsplit-coherence-894a403d",
+    "cc2-margin-uncertainty-f8f9b004",
+    "cc3-frozen-baseline-quiet-399ef2aa",
+    "di1-real-batch-innovation-63a67cee",
+    "di3-latch-then-anchor-snap-4e7feaf7",
+    "sn1-gap-mobility-dbade7aa"
+  ],
+  "notes": [
+    "Partial coverage is explicit; these unrun reviewed cases are stopped by user request, not missing source and not quality failures.",
+    "All terminal results are provisional until independent runtime audit and archive.",
+    "SIGTERM affected idle owned CLI/driver descendants only after active learners ended; artifacts were not deleted.",
+    "Global and both owned batch STOP markers prevent additional launches. Unrelated monitor and processes were not targeted."
+  ]
+}

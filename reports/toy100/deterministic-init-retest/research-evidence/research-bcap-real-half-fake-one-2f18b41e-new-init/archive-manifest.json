@@ -1,0 +1,75 @@
+{
+  "id": "research-bcap-real-half-fake-one-2f18b41e-new-init",
+  "candidate": "RESEARCH-bcap_real_half_fake_one-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 4,
+    "final_hq": 0.403564453125
+  },
+  "seconds": 32.30317840608768,
+  "continuous_eligibility": "HORIZON_DEPENDENT_TESTED_CONFIGURATION",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-real-half-fake-one-2f18b41e",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-simple-probe-runtime-review/completed/bcap-real-half-fake-one-2f18b41e-runtime-audit.json",
+  "audit_sha256": "c0961826d9e079c69f7e36f22df2a5523e1d2b1f5894f80a2781daeabcd23e72",
+  "artifacts": {
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/source-plan.json": {
+      "sha256": "247f059d457de8c3cb5519b13ef30aeee9d58f5cf7e7ef2e31e16f7bd8e33066",
+      "original_sha256": "247f059d457de8c3cb5519b13ef30aeee9d58f5cf7e7ef2e31e16f7bd8e33066",
+      "bytes": 39549
+    },
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/prepared-source.zip": {
+      "sha256": "005c318121a66cfe3a3757626369d17a3c3863a9de1ecbfd9ee078d0af88cba4",
+      "original_sha256": "005c318121a66cfe3a3757626369d17a3c3863a9de1ecbfd9ee078d0af88cba4",
+      "bytes": 629122
+    },
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/result.json.gz": {
+      "sha256": "3c3159400953922feb4c9570c09816a292f4927f78cc8b217d15be2123f2a502",
+      "original_sha256": "ce34f4b5f67d6d004ed286039ae9f3529df7f55ef791a7bcd78b20cb20f35404",
+      "bytes": 69609
+    },
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/initialization-receipt.json": {
+      "sha256": "f92bfd58551e876e9720b7103246ecc0cbe45aea9d0a614b49ac8d380b9eda38",
+      "original_sha256": "f92bfd58551e876e9720b7103246ecc0cbe45aea9d0a614b49ac8d380b9eda38",
+      "bytes": 4505
+    },
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/prepared-source-manifest.json": {
+      "sha256": "4c164d357015786a3b6c23ad2b61e2d95c80d4adcb258ebaf07e8b8e161cd69c",
+      "original_sha256": "4c164d357015786a3b6c23ad2b61e2d95c80d4adcb258ebaf07e8b8e161cd69c",
+      "bytes": 4470
+    },
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/prepared-source-sha256.json": {
+      "sha256": "be9139773d553f25e3fc5627d6f3415827af2e4110161b0276aa1ce2bd4d99ac",
+      "original_sha256": "be9139773d553f25e3fc5627d6f3415827af2e4110161b0276aa1ce2bd4d99ac",
+      "bytes": 291
+    },
+    "research-evidence/research-bcap-real-half-fake-one-2f18b41e-new-init/runtime.json": {
+      "sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "original_sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "bytes": 13817
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-real-half-fake-one-2f18b41e/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/bcap-real-half-fake-one-2f18b41e/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    }
+  },
+  "old_quality_inherited": false
+}

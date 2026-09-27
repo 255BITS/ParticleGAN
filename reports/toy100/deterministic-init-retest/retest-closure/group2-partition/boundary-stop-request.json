@@ -1,0 +1,10 @@
+{
+  "status": "BOUNDARY_STOP_REQUESTED",
+  "recorded_utc": "2026-09-27T03:30:34.916058+00:00",
+  "attempt": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032427Z/research-remaining31-group2/20260927T032427Z-1993545",
+  "supervisor": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032427Z/research-remaining31-group2/20260927T032427Z-1993545/supervisor.md",
+  "previous_sha256": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+  "current_sha256": "55c5316bd62ab255121891dd10b539023bf2b93ad92e3886470e4c822d102d78",
+  "authority": "Root delegated exact existing-case redistribution after user requested bounded completion and stop.",
+  "mutation_scope": "Append supervisor instruction only; no learner/dispatcher edits, process signal or new launch."
+}

@@ -1,0 +1,29 @@
+{
+  "status": "PASS_EXACT_UNTOUCHED_TAIL_PARTITION",
+  "partition_receipt_sha256": "c7611b25fea6a011f8b4527002e0a5a6085f2691ba4e96b695add30f21951812",
+  "original_spec_sha256": "b72575c0be39cd0aae04d243d9ed6778b016a992ae278da43fcbf0a66402b211",
+  "tail_specs": [
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/retest-closure/group2-partition/tail-a-launch-spec.json",
+      "sha256": "07c8f99efd63e52f2be3218d8df0096a549025da077572ba96aa971a9dae8b55"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/retest-closure/group2-partition/tail-b-launch-spec.json",
+      "sha256": "e3461e0c7c6eb259bb9f2ee642400df372b7e5ee49a8e2c1761ff97abf309f8f"
+    }
+  ],
+  "completed_prefix": 5,
+  "untouched_cases": 26,
+  "partition_sizes": [
+    13,
+    13
+  ],
+  "checks": [
+    "Exact original case objects/argv/order retained; no duplicate or new case",
+    "All original source groups/proofs identical and freshly hash-verified",
+    "Boundary-stop acknowledgement and five terminal execution receipts retained",
+    "No original tail output/log/execution exists",
+    "Original dispatcher and learner processes have exited"
+  ],
+  "scope": "Stdlib read-only orchestration review. No worker/source change, GPU use, launch or quality alteration."
+}

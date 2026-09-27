@@ -1,0 +1,75 @@
+{
+  "id": "research-c05-ra-r1r2-fbf0aaf4-new-init",
+  "candidate": "RESEARCH-c05_ra_r1r2-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 0,
+    "final_hq": 0.0
+  },
+  "seconds": 30.665838805027306,
+  "continuous_eligibility": "HORIZON_DEPENDENT_TESTED_CONFIGURATION",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c05-ra-r1r2-fbf0aaf4",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-simple-probe-runtime-review/completed/c05-ra-r1r2-fbf0aaf4-runtime-audit.json",
+  "audit_sha256": "013e50bf982322478045b46fb3843d8c224ccc80b1fca74d2a94f1c43d20dae1",
+  "artifacts": {
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/source-plan.json": {
+      "sha256": "667c9551b012a7d6715b6198a5e73efb2fce549337a292e4a648478db5474802",
+      "original_sha256": "667c9551b012a7d6715b6198a5e73efb2fce549337a292e4a648478db5474802",
+      "bytes": 38073
+    },
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/prepared-source.zip": {
+      "sha256": "eedf3854b26c72821017913969806216950bf7b7fced46561f3e31a3a262f464",
+      "original_sha256": "eedf3854b26c72821017913969806216950bf7b7fced46561f3e31a3a262f464",
+      "bytes": 627634
+    },
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/result.json.gz": {
+      "sha256": "206fb429e2fffd81d3361ba4b16c9ab5707344b34510470e3c53931790192157",
+      "original_sha256": "738a8801c86ab1151bdbabd6b1713bbb503f4d2f2dddfc16bed0c68f1f0cac3d",
+      "bytes": 69088
+    },
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/initialization-receipt.json": {
+      "sha256": "91f2578bf5b0680d6f6b3d21aadcaa83db71493341e67a450b6296718bd3b9f5",
+      "original_sha256": "91f2578bf5b0680d6f6b3d21aadcaa83db71493341e67a450b6296718bd3b9f5",
+      "bytes": 4493
+    },
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/prepared-source-manifest.json": {
+      "sha256": "bcd112aa13bea85e3b55ba5c5bd96e41971f625a869ef045f2c261ff08e68432",
+      "original_sha256": "bcd112aa13bea85e3b55ba5c5bd96e41971f625a869ef045f2c261ff08e68432",
+      "bytes": 4260
+    },
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/prepared-source-sha256.json": {
+      "sha256": "312e760b5d576943a90f6054ae886626bd933ccffc07c733c64c8b4e12ece895",
+      "original_sha256": "312e760b5d576943a90f6054ae886626bd933ccffc07c733c64c8b4e12ece895",
+      "bytes": 291
+    },
+    "research-evidence/research-c05-ra-r1r2-fbf0aaf4-new-init/runtime.json": {
+      "sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "original_sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "bytes": 13817
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c05-ra-r1r2-fbf0aaf4/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c05-ra-r1r2-fbf0aaf4/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    }
+  },
+  "old_quality_inherited": false
+}

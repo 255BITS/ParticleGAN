@@ -1,0 +1,75 @@
+{
+  "id": "research-c06-ra-r1-only-18ea9def-new-init",
+  "candidate": "RESEARCH-c06_ra_r1_only-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 4,
+    "final_hq": 0.484130859375
+  },
+  "seconds": 31.745049766963348,
+  "continuous_eligibility": "HORIZON_DEPENDENT_TESTED_CONFIGURATION",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c06-ra-r1-only-18ea9def",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-simple-probe-runtime-review/completed/c06-ra-r1-only-18ea9def-runtime-audit.json",
+  "audit_sha256": "f02e317b50417b7999eae96eff28b846ea383526ec5ae30028aaed27d3613ae1",
+  "artifacts": {
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/source-plan.json": {
+      "sha256": "5a1aeb6c0536a204650d5b0e0a4ca3518cc61653b1e4d6814840dafb8ceeae1b",
+      "original_sha256": "5a1aeb6c0536a204650d5b0e0a4ca3518cc61653b1e4d6814840dafb8ceeae1b",
+      "bytes": 38188
+    },
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/prepared-source.zip": {
+      "sha256": "929d2a5e85a9042339075621b7d46c5554a3ba10889edfe6de1532f88dcf1668",
+      "original_sha256": "929d2a5e85a9042339075621b7d46c5554a3ba10889edfe6de1532f88dcf1668",
+      "bytes": 628234
+    },
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/result.json.gz": {
+      "sha256": "8d094752c0174221895acc066ec384581297055d24de1ec33c6c89f0e1bbb2d7",
+      "original_sha256": "eb2339b5eed614ff51158ce531c9a9c2f099c33583a2f292c374ad5d5ef0e549",
+      "bytes": 69787
+    },
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/initialization-receipt.json": {
+      "sha256": "59b1cc5b486cb1c9724b0947f7e879ecdc369111841fdb02f224971d1053a470",
+      "original_sha256": "59b1cc5b486cb1c9724b0947f7e879ecdc369111841fdb02f224971d1053a470",
+      "bytes": 4496
+    },
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/prepared-source-manifest.json": {
+      "sha256": "db2575f53d9c7ef02bd3835fd6c8bea35f26852ac615dbad099b762a6d35ec14",
+      "original_sha256": "db2575f53d9c7ef02bd3835fd6c8bea35f26852ac615dbad099b762a6d35ec14",
+      "bytes": 4260
+    },
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/prepared-source-sha256.json": {
+      "sha256": "08ddc657015deb725b01dd7a17a214bf87ae3b64776a7c22a7450927daa8cf8a",
+      "original_sha256": "08ddc657015deb725b01dd7a17a214bf87ae3b64776a7c22a7450927daa8cf8a",
+      "bytes": 291
+    },
+    "research-evidence/research-c06-ra-r1-only-18ea9def-new-init/runtime.json": {
+      "sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "original_sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "bytes": 13817
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c06-ra-r1-only-18ea9def/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/c06-ra-r1-only-18ea9def/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    }
+  },
+  "old_quality_inherited": false
+}

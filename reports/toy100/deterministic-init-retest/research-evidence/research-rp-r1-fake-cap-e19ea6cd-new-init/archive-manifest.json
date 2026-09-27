@@ -1,0 +1,75 @@
+{
+  "id": "research-rp-r1-fake-cap-e19ea6cd-new-init",
+  "candidate": "RESEARCH-rp_r1_fake_cap-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 6,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 30.44143292005174,
+  "continuous_eligibility": "HORIZON_DEPENDENT_TESTED_CONFIGURATION",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/rp-r1-fake-cap-e19ea6cd",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-simple-probe-runtime-review/completed/rp-r1-fake-cap-e19ea6cd-runtime-audit.json",
+  "audit_sha256": "249de3459a866610d3c29f7e8fff3ef6e0f32c33818695d3b15aeaf74deb1fc3",
+  "artifacts": {
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/source-plan.json": {
+      "sha256": "064bf22d8e6258c53c0ad70922b129775a642d4dfa4239241f34e786cc974f83",
+      "original_sha256": "064bf22d8e6258c53c0ad70922b129775a642d4dfa4239241f34e786cc974f83",
+      "bytes": 39667
+    },
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/prepared-source.zip": {
+      "sha256": "9411452888c16fa26d117bd8681697991452b1924557eae875913910eb81188d",
+      "original_sha256": "9411452888c16fa26d117bd8681697991452b1924557eae875913910eb81188d",
+      "bytes": 629514
+    },
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/result.json.gz": {
+      "sha256": "9b6196cc2948771e4192b3cff376dd23d5c1d4b08977991a84a3de4f7f2880d3",
+      "original_sha256": "020028db80916e67bc5bdf7a64b46b3053fbb4e17523b7b5390084bf407c61d1",
+      "bytes": 68640
+    },
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/initialization-receipt.json": {
+      "sha256": "23a44a4535f1f6af6613fd489d8636c63b8e3ed90439382893a88dc2b4b3f9b7",
+      "original_sha256": "23a44a4535f1f6af6613fd489d8636c63b8e3ed90439382893a88dc2b4b3f9b7",
+      "bytes": 4496
+    },
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/prepared-source-manifest.json": {
+      "sha256": "3e59ef1b652aa5eb2ce115ef567f1bca25d230cfb056d9ea47e2d06ca03af98a",
+      "original_sha256": "3e59ef1b652aa5eb2ce115ef567f1bca25d230cfb056d9ea47e2d06ca03af98a",
+      "bytes": 4587
+    },
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/prepared-source-sha256.json": {
+      "sha256": "c70401a20d8c8890e3d82c0b61dd15aab6962e028ee1f088ab4a2201cbb74a01",
+      "original_sha256": "c70401a20d8c8890e3d82c0b61dd15aab6962e028ee1f088ab4a2201cbb74a01",
+      "bytes": 291
+    },
+    "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/runtime.json": {
+      "sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "original_sha256": "c026389398b4b3c6b539e8092c6252edb1a81432036ca9fe0a6bba0b7a814faf",
+      "bytes": 13817
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/rp-r1-fake-cap-e19ea6cd/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T032610Z/research-simple-eleven-wave1/20260927T032610Z-1996550/repo/reports/reviewed-probe-output/20260927T032701Z/rp-r1-fake-cap-e19ea6cd/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    }
+  },
+  "old_quality_inherited": false
+}
