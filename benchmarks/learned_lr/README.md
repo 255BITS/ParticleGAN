@@ -1,5 +1,23 @@
 # Learned learning-rate adapter research
 
+> **Status: retired research, not runnable on the shared toy runner.** The
+> results are frozen in `reports/`. This study controls learning rates by hand:
+> each controller writes `group["lr"]` before every step and scales loss
+> coefficients by monkeypatching. The shared toy runner forbids both, because
+> recipe-built optimizers now own the LR schedule. The locked hosts'
+> `schedule_optimizer` hook is gone, so `control_host_schedules` does nothing
+> and a controller no longer changes a host's rates. Entry points that still run
+> (`learned_lr_evaluation.run`, `smart_descent.study.run_toy`,
+> `smart_descent.evaluate.fixed_toy`) train every arm with the host's own
+> schedule, so their controller rows are identical. Entry points that patch
+> removed host attributes (`mode_hold.schedule_optimizer`, `mode_hold.LR`,
+> `mode_hold.ModeHoldRecipe`) fail with `AttributeError`: `learned_lr.study`,
+> `learned_lr.sgd_study`, `learned_lr.relative_sgd_*` and
+> `smart_descent.study.transfer_episode`. The controller classes and their unit
+> tests are kept only because `transfer_suite` still imports `FixedControl`,
+> `GradientFeedback` and the `learned_lr_evaluation` bridge. To bring a
+> controller back, rebuild it as a recipe-built optimizer option.
+
 This experiment trains a small causal LR controller using ParticleGAN training
 runs as its outer-loop objective. It is an optional research module; it does not
 change `Recipe`, `GANTrainer`, or any default.

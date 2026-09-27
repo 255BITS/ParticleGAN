@@ -1,22 +1,25 @@
 """Run declared D-only variants with one unchanged shared cap6 recipe.
 
 python -u -m benchmarks.transfer_suite.shared_discriminator_search --plan PLAN --output OUTPUT
+
+This is the one D-architecture research runner. A research family declares only
+its critics (``ARCHITECTURES``, ``constructor``, ``variant``) and runs here via
+``family``; the recipe, optimizers and schedule are the shared cap6 recipe's.
 """
 import argparse
+from contextlib import contextmanager
 from copy import deepcopy
 from dataclasses import asdict
 import gzip
 import hashlib
 import json
 from pathlib import Path
-import time
-import traceback
+import sys
 from unittest.mock import patch
 
 import torch
-from benchmarks.legacy.recipe import get_recipe
 from . import suite, vector_tasks
-from .compare_defaults import candidate, effective_spec, ema_verdict, optimizer_defaults, plan, write
+from .compare_defaults import candidate, effective_spec, ema_verdict, plan, run_host, write
 from .protocol import test_verdict
 from .shared_critic_research import ARCHITECTURES, constructor, variant
 from .shared_variants import architecture_spec
@@ -44,24 +47,18 @@ def episode(job, card):
     selected = variant(card)
     settings = recipe()
     spec = effective_spec(architecture_spec(job['spec'], selected), settings)
-    applied = []
-    started = time.perf_counter()
-    try:
-        with optimizer_defaults(settings, applied), patch.object(vector_tasks, 'SimpleMLPDiscriminator', constructor(card)):
-            result = suite.run_episode(spec, vector_tasks.fixed_policy('cosine'), fixed=True)
-        json.dumps(result, allow_nan=False)
-    except Exception:
-        result = dict(error=traceback.format_exc(), seconds=time.perf_counter()-started)
+    result = run_host(spec, settings, vector_tasks.fixed_policy('cosine'), critic=constructor(card))
     return dict(recipe=legacy_dict(settings), candidate=asdict(candidate(settings)), original_spec=deepcopy(job['spec']),
                 spec=spec, discriminator_variant=selected, architecture=card['name'],
-                reference=job['reference'], reference_sha256=job['reference_sha256'], applied=applied,
+                reference=job['reference'], reference_sha256=job['reference_sha256'],
+                applied=result.get('applied', []),
                 verdict=test_verdict(spec, result), ema_verdict=ema_verdict(spec, result), result=result)
 
 
-def render(records, output):
+def render(records, output, title='Shared cap6 discriminator research'):
     names = sorted({row['architecture'] for row in records})
     tasks = list(dict.fromkeys(row['spec']['name'] for row in records))
-    rows = ['# Shared cap6 discriminator research', '',
+    rows = [f'# {title}', '',
             'Every architecture uses the same shared_c6 recipe; original G, resources, targets and gates. '
             'Live PASS requires all 24 observations and a final suffix of at least five. EMA is separate. '
             'Architecture may vary per case; incomplete screens are not complete six-data profiles or 19/19 claims.', '',
@@ -69,7 +66,7 @@ def render(records, output):
             '| --- | ---: | '+' | '.join('---' for _ in tasks)+' |']
     for name in names:
         subset = [r for r in records if r['architecture'] == name]
-        params = next((a['parameters'] for a in subset[0]['applied'] if a['role'] == 'd'), '?')
+        params = next((a['parameters'] for a in subset[0].get('applied', []) if a['role'] == 'd'), '?')
         cells = []
         for task in tasks:
             row = next((r for r in subset if r['spec']['name'] == task), None)
@@ -82,15 +79,17 @@ def render(records, output):
     (output/'README.md').write_text('\n'.join(rows)+'\n')
 
 
-def run(declaration, output):
+def run(declaration, output, *, title='Shared cap6 discriminator research',
+        version='shared-discriminator-v1', stop_on_first_pass=False):
     jobs, cards = prepare(declaration)
     output.mkdir(parents=True, exist_ok=False)
     (output/'episodes').mkdir()
     torch.set_num_threads(1)
     protocol = suite.snapshot(output)
-    protocol.update(version='shared-discriminator-v1', declaration=declaration, seed=0, jobs=jobs,
+    selection = 'D-only architecture trials. All 24 checks, final 5 live PASS; EMA separate.'
+    protocol.update(version=version, declaration=declaration, seed=0, jobs=jobs,
                     architectures=cards, recipe=legacy_dict(recipe()),
-                    selection='D-only architecture trials. All 24 checks, final 5 live PASS; EMA separate.')
+                    selection=selection + (' Stop after first sustained live PASS.' if stop_on_first_pass else ''))
     write(output/'protocol.json', protocol)
     write(output/'plan.json', declaration)
     records = []
@@ -109,20 +108,44 @@ def run(declaration, output):
                            dict(artifact=artifact, uncompressed_sha256=hashlib.sha256(raw).hexdigest(),
                                 live=result.get('live'), ema=result.get('ema'), seconds=result['seconds']))
             write(output/'index.json', dict(records=records))
-            render(records, output)
+            render(records, output, title)
             print(json.dumps(dict(event='DONE', architecture=card['name'], task=name,
                                   status=payload['verdict']['status'],
                                   suffix=payload['verdict'].get('convergence', {}).get('passing_suffix'),
                                   live=result.get('live'), seconds=result['seconds'], error=result.get('error'))), flush=True)
+            if stop_on_first_pass and payload['verdict']['passed']:
+                print(json.dumps(dict(event='STOP', reason='first sustained live PASS',
+                                      architecture=card['name'], task=name)), flush=True)
+                suite.verify_source(protocol)
+                return
     suite.verify_source(protocol)
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=__doc__)
+@contextmanager
+def family(module):
+    """Run ``module``'s declared critics (``ARCHITECTURES``/``constructor``/``variant``) here."""
+    this = sys.modules[__name__]
+    with patch.object(this, 'ARCHITECTURES', module.ARCHITECTURES), \
+            patch.object(this, 'constructor', module.constructor), \
+            patch.object(this, 'variant', module.variant):
+        yield
+
+
+def main(module=None, **options):
+    """``--plan PLAN --output OUTPUT`` for this runner or a research ``module``'s critics."""
+    parser = argparse.ArgumentParser(description=(module or sys.modules[__name__]).__doc__)
     parser.add_argument('--plan', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     from benchmarks.toy100.device import add_device_argument, apply_device_policy
     add_device_argument(parser)
     args = parser.parse_args()
     apply_device_policy(args.device, log=True)
-    run(json.loads(args.plan.read_text()), args.output)
+    declaration = json.loads(args.plan.read_text())
+    if module is None:
+        return run(declaration, args.output, **options)
+    with family(module):
+        return run(declaration, args.output, **options)
+
+
+if __name__ == '__main__':
+    main()

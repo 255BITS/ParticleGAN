@@ -81,13 +81,23 @@ The selected particle centers also receive decoder gradients; routing uses the
 existing straight-through surrogate. The prior spread term is applied once to
 the full raw center table. No objective uses the analytic `st + at` identity.
 
-For D, the first half of a batch uses original triples and the second half uses
-composed triples, generated without gradients. The real batch, D batch size,
-number of updates and per-role bcap penalties stay fixed. Each role contributes
-its full Rp logistic plus bcap loss. Shared state weights receive both state-role
-losses; generator marginal weighting remains an average over three roles.
-The logged `g_terms` describe original-path adversarial terms; `g_loss` is the
-mean over the original and composed paths.
+The leaderboard runs trained D on one batch whose first half was original triples
+and second half composed triples, each role with its full Rp logistic plus bcap
+loss under one critic optimizer. On the shared runner (current code) every critic
+scores the same views as G: the original and composed paths each at weight 0.5,
+joint plus the mean of the three marginal roles; each critic has its own
+recipe-built optimizer and penalty, and the recipe's critic input noise and
+generator output noise apply. Composed triples for D carry no gradient. Shared
+state weights receive both state-role views.
+
+Behaviour change from the leaderboard runs: the runner adds the recipe's
+generator output noise (std ramping 0 -> 0.029 over the first quarter of the
+recipe horizon, then held; in scaled units) to the
+G1/G2/G3 sample before `views()` and `losses()` see it. So the composed path
+encodes the noisy `(st, at)`, and `synthetic_mse` regresses the decoded
+`(st, at)` onto the noisy, detached `fake[:, :4]` rather than the clean G
+output. The encoder's supervised synthetic target therefore carries that noise.
+`real_mse` is unaffected (real batches get no output noise).
 
 ## Recipe and comparison limits
 
@@ -131,8 +141,8 @@ settings from the checkpoint configuration. The encoder is used at inference for
 the composed/conditional paths only; original prior sampling needs no E.
 
 ```bash
-.venv/bin/python -u examples/transition_gan.py --config configs/transition/encoder_separate.yaml
-.venv/bin/python -u examples/transition_gan.py --config configs/transition/encoder_shared_state.yaml
+.venv/bin/python -u experiments/train_transition.py --config configs/transition/encoder_separate.yaml
+.venv/bin/python -u experiments/train_transition.py --config configs/transition/encoder_shared_state.yaml
 tail -F results/transition/live.log
 ```
 

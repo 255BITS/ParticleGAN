@@ -7,7 +7,6 @@ The optional pinned conceptmod checkout supplies application integration checks.
 from __future__ import annotations
 
 import argparse
-from contextlib import ExitStack
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import hashlib
@@ -16,7 +15,6 @@ import math
 from pathlib import Path
 import platform
 import time
-from unittest.mock import patch
 
 import torch
 
@@ -27,7 +25,7 @@ from .observation import recording, sustained, OBSERVATIONS, MIN_STABLE_CHECKS
 from .hosts import ae_gan_hold, cover_leftover, mid_scale_identity, residual_student, unipolar, unused_token_hold
 
 VERSION = "behavior-v2"
-DEFAULT_OUTPUT = Path("reports/behavioral_baseline")
+DEFAULT_OUTPUT = Path("runs/behavioral_baseline")
 
 
 @dataclass(frozen=True)
@@ -42,9 +40,6 @@ class Candidate:
     vicreg_weight: float = 0.05
     cover_weight: float = 1.5
     lr_multiplier: float = 1.0
-    lr_schedule: str = "host"
-    lr_anneal_start: float = 0.6
-    lr_floor: float = 0.05
 
     def __post_init__(self):
         if not self.name or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789_-" for c in self.name):
@@ -55,14 +50,6 @@ class Candidate:
                 raise ValueError(f"{key} must be a finite nonnegative number")
         if self.lr_multiplier == 0:
             raise ValueError("lr_multiplier must be positive")
-        if self.lr_schedule not in ("host", "cosine"):
-            raise ValueError("lr_schedule must be host or cosine")
-        for key in ("lr_anneal_start", "lr_floor"):
-            value = getattr(self, key)
-            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
-                raise ValueError(f"{key} must be finite")
-        if not 0 <= self.lr_anneal_start < 1 or not 0 <= self.lr_floor <= 1:
-            raise ValueError("invalid cosine schedule bounds")
         self.make_loss()
         self.make_penalty()
 
@@ -74,19 +61,13 @@ class Candidate:
                                norm="l2", lazy_k=1, target_anneal="none")
 
     def host_options(self):
-        return {key: value for key, value in asdict(self).items() if key not in ("name", "lr_multiplier", "lr_schedule", "lr_anneal_start", "lr_floor")}
+        return {key: value for key, value in asdict(self).items() if key not in ("name", "lr_multiplier")}
 
 
-DEFAULT_CANDIDATES = (
-    Candidate("locked_shared"),
-    Candidate("no_particle_l2", particle_l2=0.0),
-    Candidate("r1_r2_0_1", reg_arm="a_r1r2", reg_coeff=0.1),
-    Candidate("r1_r2_0_1_no_l2", reg_arm="a_r1r2", reg_coeff=0.1, particle_l2=0.0),
-    Candidate("b_cap_no_l2_lr_half", particle_l2=0.0, lr_multiplier=0.5),
-    Candidate("b_cap_no_l2_lr_quarter", particle_l2=0.0, lr_multiplier=0.25),
-    Candidate("b_cap_no_l2_coeff_2", particle_l2=0.0, reg_coeff=2.0),
-    Candidate("b_cap_no_l2_coeff_5", particle_l2=0.0, reg_coeff=5.0),
-)
+# One row: every host on its own configuration. The historical formulation /
+# LR sweep (no_particle_l2, r1_r2_*, b_cap_no_l2_lr_*, b_cap_no_l2_coeff_*) is
+# recorded in reports/behavioral_baseline; --configs still accepts cards.
+DEFAULT_CANDIDATES = (Candidate("locked_shared"),)
 
 # Values are thresholds from the original behavioral scorers, not tuned on results.
 # A metric may have two bounds, and both must pass. Diagnostic-only values remain
@@ -129,7 +110,7 @@ def protocol():
             "ranking": "passed toys, passed bounds, live ring modes, HQ, effective modes; descending",
             "convergence": {"observations": OBSERVATIONS, "minimum_passing_suffix": MIN_STABLE_CHECKS,
                             "ring_requires_all_modes": True, "timing": "wall seconds including setup and measurement"},
-            "schedule_policy": "host preserves original schedules; cosine replaces all host schedules using initial optimizer group rates",
+            "schedule_policy": "host schedules only; no harness LR override",
             "budgets": BUDGETS, "metrics": METRICS, "shared_checks": SHARED,
             "source_sha256": hashes, "torch": str(torch.__version__), "python": platform.python_version()}
 
@@ -166,47 +147,65 @@ def score_row(row, shared):
 
 
 def run_toy(toy, cfg, *, noise_policy=None):
-    """Serial, scoped host injection; one candidate card, no per-toy tuning."""
-    knobs = cfg.host_options()
-    with recording(BUDGETS[toy], schedule=cfg.lr_schedule, start=cfg.lr_anneal_start,
-                   floor=cfg.lr_floor) as recorder, ExitStack() as stack:
-        for module in (trajectory, residual_student, cover_leftover, mid_scale_identity):
-            target = module.PROTOCOL if module in (trajectory, residual_student) else module.FORMULATION
-            values = {k: v for k, v in knobs.items() if k in target}
-            if "lr" in target:
-                values["lr"] = target["lr"] * cfg.lr_multiplier
-            stack.enter_context(patch.dict(target, values))
-        for module in (mode_hold, unipolar, unused_token_hold, mid_scale_identity):
-            stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
-        stack.enter_context(patch.object(two_pole, "TOY_LR", two_pole.TOY_LR * cfg.lr_multiplier))
+    """One host toy on the shared runner, recorded at the frozen 24 observations.
+
+    Every host is a problem-only ``benchmarks.toy_runner`` toy: optimizers, LR
+    schedule, loss, penalty, noise and EMA come from its recipe. Only a
+    candidate's problem-loss weights (``particle_l2``, ``cover_weight``) reach
+    the hosts that define those losses; its formulation fields, ``lr_multiplier``
+    and any harness ``noise_policy`` do not (a noise policy is refused).
+    """
+    with recording(BUDGETS[toy]) as recorder:
         if toy == "two_pole":
-            raw = two_pole.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
-                                 particle_l2=cfg.particle_l2, noise_policy=noise_policy)
+            # Problem-only toy on the shared runner (as mode_hold): only the
+            # problem's own particle_l2 pull follows the candidate.
+            if noise_policy is not None:
+                raise ValueError("two_pole takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = two_pole.train(particle_l2=cfg.particle_l2)
         elif toy == "trajectory":
-            raw = trajectory.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
-                                   diagnostics=True, noise_policy=noise_policy)
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("trajectory takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = trajectory.train(diagnostics=True)
         elif toy == "mode_hold":
-            raw = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(particle_l2=cfg.particle_l2, vicreg_weight=cfg.vicreg_weight),
-                                           gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
-                                           diagnostics=True, noise_policy=noise_policy)
+            # Problem-only toy on the shared runner: its optimizers, loss,
+            # penalty, noise and EMA come from its recipe, so candidate
+            # formulation knobs, LR multipliers and noise policies do not apply.
+            if noise_policy is not None:
+                raise ValueError("mode_hold takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = mode_hold.train_mode_hold(diagnostics=True)
         elif toy == "residual_student":
-            raw = residual_student.train(noise_policy=noise_policy)
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("residual_student takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = residual_student.train_residual_student()
         elif toy == "unipolar":
-            raw = unipolar.run_arm("locked_rpgan", noise_policy=noise_policy,
-                                   **{k: knobs[k] for k in ("loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")})
+            # Problem-only toy on the shared runner, as mode_hold.
+            if noise_policy is not None:
+                raise ValueError("unipolar takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = unipolar.run_arm("locked_rpgan")
         elif toy == "ae_gan_hold":
-            options = {k: v for k, v in knobs.items() if k in ae_gan_hold.HoldConfig.__dataclass_fields__}
-            raw = ae_gan_hold.train(ae_gan_hold.HoldConfig(name=cfg.name, lr=ae_gan_hold.LR * cfg.lr_multiplier, **options),
-                                    noise_policy=noise_policy)
-            raw.pop("cfg", None)
+            # Problem-only toy on the shared runner (as mode_hold): only the
+            # candidate's host loss weights apply; optimizers, loss, penalty,
+            # LR schedule and noise come from its recipe.
+            if noise_policy is not None:
+                raise ValueError("ae_gan_hold takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = ae_gan_hold.train_ae_gan_hold(ae_gan_hold.AEGanHold(particle_l2=cfg.particle_l2,
+                                                                      cover_weight=cfg.cover_weight))
+            raw.pop("curve", None)
         elif toy == "cover_leftover":
-            raw = cover_leftover.fit_cover_leftover(cover_leftover.CoverRecipe(),
-                                                    noise_policy=noise_policy)
+            # Problem-only toy on the shared runner (see mode_hold above).
+            if noise_policy is not None:
+                raise ValueError("cover_leftover takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = cover_leftover.train_cover_leftover()
         elif toy == "unused_token_hold":
-            options = {k: v for k, v in knobs.items() if k in unused_token_hold.UnusedHoldRecipe.__dataclass_fields__}
-            raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options),
-                                          noise_policy=noise_policy)
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("unused_token_hold takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = unused_token_hold.train_unused_token_hold()
         elif toy == "mid_scale_identity":
+            # Problem-only toy on the shared runner (like mode_hold): candidate
+            # knobs, LR multipliers and noise policies do not apply.
             raw = mid_scale_identity.run_arm("locked", noise_policy=noise_policy)
         else:
             raise ValueError(toy)
@@ -254,7 +253,7 @@ def render(report, destination):
              "Shared checks are run once: they do not depend on the GAN config and do not contribute to its rank.", "",
              "**Regression PASS is a minimum bar for default selection.** The original ring bar permits 7/8 modes. "
              "Actual coverage, HQ, balance and checkpoint stability are visible below; a final-step PASS does not establish a stable ParticleGAN default. "
-             "The [default-selection analysis](default_selection.md) also compares the stock recipe on the ring host.", "",
+             "The recorded default-selection analysis (reports/behavioral_baseline/default_selection.md) also compares the stock recipe on the ring host.", "",
              "Rows rank by passed toys, then passed numerical bounds, then live ring coverage, HQ and effective modes. "
              "Missing/nonfinite results and errors cannot pass. Thresholds and budgets are frozen before config search.", "",
              "| Rank | Config | Live toys | Live bounds | Ring modes | Ring HQ | Effective modes | Regression |",
@@ -356,7 +355,7 @@ def render(report, destination):
         lines += ["", "</details>", ""]
     lines += ["## Reproduce or compare another approach", "", "```bash",
               "python -m benchmarks.locked_shared.baseline --reference /path/to/conceptmod",
-              "python -m benchmarks.locked_shared.baseline --configs my_configs.json --reference /path/to/conceptmod --output reports/my_search",
+              "python -m benchmarks.locked_shared.baseline --configs my_configs.json --reference /path/to/conceptmod --output runs/my_search",
               "# Resume only with exactly matching source, runtime and config fingerprints:",
               "python -m benchmarks.locked_shared.baseline --resume --reference /path/to/conceptmod",
               "```", "", "Use [passing_configs.json](passing_configs.json) to rerun the passing baseline alone, or [configs.json](configs.json) for the comparison set. Each setting applies wherever that loss exists; "
@@ -374,8 +373,9 @@ def main():
     parser.add_argument("--configs", type=Path, help="JSON list of candidate objects; unspecified fields use defaults")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--reference", type=Path, help="clean conceptmod checkout at the pinned revision for shared checks")
-    parser.add_argument("--stock-reference", type=Path, default=DEFAULT_OUTPUT / "stock_ring.json",
-                        help="optional recorded stock-recipe ring comparison; displayed separately from candidate ranks")
+    parser.add_argument("--stock-reference", type=Path,
+                        help="optional recorded stock-recipe ring comparison (e.g. reports/behavioral_baseline/stock_ring.json); "
+                             "displayed separately from candidate ranks")
     parser.add_argument("--resume", action="store_true")
     from benchmarks.toy100.device import add_device_argument, apply_device_policy
     add_device_argument(parser)
@@ -388,7 +388,7 @@ def main():
     fingerprint = protocol()
     report = {"protocol": fingerprint, "protocol_sha256": digest(fingerprint),
               "created_at": datetime.now(timezone.utc).isoformat(), "rows": [], "shared": {}}
-    stock = json.loads(args.stock_reference.read_text()) if args.stock_reference.exists() else None
+    stock = json.loads(args.stock_reference.read_text()) if args.stock_reference else None
     if stock is not None:
         # Preserve only the final observations and the tail needed for display;
         # the source artifact retains the complete curves and per-mode evidence.

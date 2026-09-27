@@ -1,6 +1,7 @@
 """Verify the public GAN default through real user-facing construction paths.
 
-Vector and image cases train through GANTrainer(gan_v3_recipe(), ...). The nine
+Vector and image cases declare only their problem and train on
+benchmarks.toy_runner under gan_v3_recipe() at each task's shape. The nine
 legacy auxiliary hosts retain their required custom loops, using public GAN
 primitives and the same unmodified global recipe. Frozen host data, model
 initialization order, RNG streams, resources, steps, measurements, and gates
@@ -26,7 +27,7 @@ import traceback
 
 import torch
 
-from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator, rng_fork_devices
+from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator
 from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
@@ -162,27 +163,8 @@ def declared_spec(job, profile, base):
     return spec, card, variant
 
 
-def vector_discriminator(spec, card):
-    from particlegan import BatchDistanceDiscriminator
-    from lib.toy_models import SimpleMLPDiscriminator
-    from .shared_critic_research import constructor as smooth_constructor
-    if card is None:
-        return SimpleMLPDiscriminator(2, spec.get('d_hidden', spec['hidden']),
-                                      spec.get('d_layers', spec['layers']), spec['fourier'])
-    if card['implementation'] == 'shared_batch_feature_v1':
-        if (card['feature'], card['placement'], card['trunk_normalization'],
-                card['name']) != ('distance', 'head', 'center', 'batchfeat_center6_distance_head'):
-            raise ValueError('only the promoted public batch-distance card is allowed')
-        return BatchDistanceDiscriminator(in_dim=2, hidden_dim=card['width'],
-            n_hidden=card['layers'], scales=tuple(card['kernel_scales']),
-            beta=card['softplus_beta'], eps=card['eps'])
-    if card['implementation'] == 'shared_critic_v1':
-        return smooth_constructor(card)(2, card['hidden'], card['layers'], card['fourier'])
-    raise ValueError('unknown declared discriminator')
-
-
 def optimizer_receipts(trainer):
-    from particlegan import learning_rate_scale
+    """Base rates and betas of the recipe-built optimizers' groups (read, not recomputed)."""
     roles = (('g', trainer.opt_g.param_groups[0]),
              ('prior', trainer.opt_g.param_groups[1]),
              ('d', trainer.opt_d.param_groups[0]))
@@ -193,13 +175,12 @@ def optimizer_receipts(trainer):
     for role, group in roles:
         betas = (trainer.recipe.prior_betas or trainer.recipe.betas
                  if role == 'prior' else trainer.recipe.betas)
-        if group['lr'] != expected[role] or tuple(group['betas']) != tuple(betas):
+        if group['base_lr'] != expected[role] or tuple(group['betas']) != tuple(betas):
             raise RuntimeError(f'optimizer does not implement public recipe: {role}')
-        receipts.append(dict(role=role, lr=group['lr'], betas=list(group['betas']),
+        receipts.append(dict(role=role, lr=group['base_lr'], betas=list(group['betas']),
                              parameters=sum(p.numel() for p in group['params']),
                              optimizer='Adam'))
-    if learning_rate_scale(0, trainer.recipe.total_steps,
-            trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor) != 1.:
+    if trainer.opt_g.lr_schedule.scales(0) != (1., 1.):
         raise RuntimeError('unexpected public learning-rate schedule')
     return receipts
 
@@ -220,166 +201,64 @@ def shape_receipt(trainer, batch, data_shape):
                 discriminator_parameters=sum(p.numel() for p in trainer.D.parameters()))
 
 
+def schedule_counts(trainer, completed):
+    """Each recipe-built optimizer's own schedule clock after update ``completed``."""
+    counts = dict(g=trainer.opt_g.completed_steps, d=trainer.opt_d.completed_steps)
+    if counts != dict(g=completed, d=completed):
+        raise RuntimeError(f'optimizer schedules missed an update at step {completed}: {counts}')
+    return dict(lr_schedule=counts)
+
+
 def rate_action(trainer, completed):
-    from particlegan import learning_rate_scale
-    scale = learning_rate_scale(completed-1, trainer.recipe.total_steps,
-                                trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor)
+    """The rates the optimizers applied in update ``completed``, read from their groups."""
+    network, _ = trainer.opt_g.lr_schedule.scales(completed-1)
     rates = [group['lr'] for opt in (trainer.opt_g, trainer.opt_d)
              for group in opt.param_groups]
-    expected = [trainer.recipe.lr*scale, trainer.recipe.lr*trainer.recipe.prior_lr_mult*scale,
-                trainer.recipe.lr*trainer.recipe.d_lr_mult*scale]
-    if any(not math.isclose(a, b, rel_tol=1e-14, abs_tol=1e-15)
-           for a, b in zip(rates, expected)):
-        raise RuntimeError(f'actual public optimizer rates differ at step {completed}')
-    return dict(step=completed, multiplier=scale,
-                lr_g=rates[0], lr_prior=rates[1], lr_d=rates[2])
+    return dict(step=completed, multiplier=network,
+                lr_g=rates[0], lr_prior=rates[1], lr_d=rates[2]) | schedule_counts(trainer, completed)
 
 
-def setup_vector(spec, card, base):
-    from particlegan import GANTrainer, ParticlePrior
-    from lib.toy_models import SimpleMLPGenerator
+def run_vector(spec, card, base, *, log_path=None):
+    """The declared default on the shared runner (``vector_tasks.VectorTask``).
+
+    The problem is the frozen host's data, networks and metrics; ``base`` at
+    the task's shape is the recipe whose factories build everything else.
+    ``log_path`` gets one JSON line per observation (``tail -f``).
+    """
     from . import vector_tasks
-    cfg = vector_tasks.resolve(spec)
-    if cfg['d_every'] != 1 or cfg['g_every'] != 1:
-        raise ValueError('GANTrainer route requires one G and D update per frozen step')
     torch.set_num_threads(1)
-    torch.manual_seed(0)
-    data_rng = torch.Generator().manual_seed(0)
-    latent_rng = torch.Generator().manual_seed(1)
-    penalty_rng = torch.Generator().manual_seed(2)
     recipe = host_recipe(base, spec)
-    # The explicit prior is first, exactly as in the frozen vector host.
-    prior = recipe.make_prior(init_std=.5, generator=torch.Generator().manual_seed(0))
-    assert type(prior) is ParticlePrior
-    generator = SimpleMLPGenerator(cfg['z_dim'], cfg['hidden'], cfg['layers'], 2)
-    discriminator = vector_discriminator(spec, card)
-    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
-                                  latent_generator=latent_rng,
-                                  penalty_generator=penalty_rng)
-    shapes = shape_receipt(trainer, cfg['batch'], (2,))
-    return dict(trainer=trainer, cfg=cfg, data_rng=data_rng, shapes=shapes,
-                applied=optimizer_receipts(trainer), host_recipe=recipe)
-
-
-def run_vector(spec, card, base, *, max_steps=None):
-    from benchmarks.locked_shared.observation import sustained
-    from . import vector_tasks
-    started = time.perf_counter()
-    context = setup_vector(spec, card, base)
-    trainer, cfg, data_rng = context['trainer'], context['cfg'], context['data_rng']
-    expected = {math.ceil(i*cfg['steps']/24) for i in range(1, 25)}
-    observations, actions, losses = [], [], []
-    budget = cfg['steps'] if max_steps is None else min(max_steps, cfg['steps'])
-    for index in range(budget):
-        completed = index+1
-        real = vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
-        real_g = lambda: vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
-        stats = trainer.step(real, generator_real=real_g)
-        if not all(torch.isfinite(value) for key, value in stats.items()
-                   if key != 'step' and isinstance(value, torch.Tensor)):
-            raise FloatingPointError('nonfinite public trainer loss')
-        actions.append(rate_action(trainer, completed))
-        if completed in expected:
-            with torch.no_grad(), torch.random.fork_rng(devices=rng_fork_devices()):
-                def measure(model, prior):
-                    latent = prior.sample(vector_tasks.EVAL_SAMPLES,
-                                          generator=torch.Generator().manual_seed(990))[0]
-                    return vector_tasks.score_samples(model(latent), cfg, completed)
-                live = measure(trainer.G, trainer.prior)
-                ema = measure(trainer.ema_G, trainer.ema_prior)
-            observations.append(dict(**live, ema=ema, step=completed,
-                                     seconds=time.perf_counter()-started))
-            losses.append(dict(step=completed, d=float(stats['loss_d']),
-                               g=float(stats['loss_g']), penalty=float(stats['penalty']),
-                               prior=float(stats['prior_regularization'])))
-    result = dict(live=observations[-1] if observations else {},
-                  ema=observations[-1]['ema'] if observations else {},
-                  observations=observations, actions=actions, losses=losses,
-                  update_counts=dict(g=trainer.completed_steps, d=trainer.completed_steps),
-                  seconds=time.perf_counter()-started)
-    if len(observations) == 24:
-        result['live'] = {k: v for k, v in observations[-1].items() if k not in ('ema', 'step', 'seconds')}
-        result['convergence'] = sustained(observations, cfg['thresholds'], expected_steps=expected)
-        result['status'] = 'PASS' if vector_tasks.passes(result['live'], cfg['thresholds']) else 'FAIL'
+    result = vector_tasks.train(vector_tasks.VectorTask(spec, card), recipe, log_path=log_path)
+    context = dict(applied=result.pop('applied'), shapes=result.pop('shapes'), host_recipe=recipe)
     return result, context
 
 
-def setup_image(spec, base):
-    from particlegan import GANTrainer
-    from . import image_tasks
-    torch.set_num_threads(1)
-    torch.manual_seed(0)
-    centers = image_tasks.templates(spec)
-    recipe = host_recipe(base, spec)
-    # Frozen image host constructs G and D before a global-RNG prior draw.
-    generator, discriminator = image_tasks.Generator(spec), image_tasks.Discriminator(spec)
-    prior = recipe.make_prior()
-    global_stream = experiment_generator()
-    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
-                                  latent_generator=global_stream,
-                                  penalty_generator=global_stream)
-    shapes = shape_receipt(trainer, spec['batch_size'], (1, 8, 8))
-    return dict(trainer=trainer, centers=centers, shapes=shapes,
-                applied=optimizer_receipts(trainer), host_recipe=recipe)
-
-
-def run_image(spec, base, *, max_steps=None):
-    from benchmarks.locked_shared.observation import sustained
+def run_image(spec, base, *, max_steps=None, log=None):
+    """The image problem on the shared toy runner under the host recipe."""
     from . import image_tasks
     started = time.perf_counter()
-    context = setup_image(spec, base)
-    trainer, centers = context['trainer'], context['centers']
-    expected = image_tasks.evaluation_steps(spec)
-    observations, actions, losses = [], [], []
-    budget = spec['steps'] if max_steps is None else min(max_steps, spec['steps'])
-    for index in range(budget):
-        completed = index+1
-        real = centers[torch.randint(len(centers), (spec['batch_size'],))]
-        real = (real+spec['noise_std']*torch.randn_like(real)).clamp(0., 1.)
-        stats = trainer.step(real, generator_real=real)
-        if not all(torch.isfinite(value) for key, value in stats.items()
-                   if key != 'step' and isinstance(value, torch.Tensor)):
-            raise FloatingPointError('nonfinite public trainer loss')
-        actions.append(rate_action(trainer, completed))
-        if completed in expected:
-            live = image_tasks.measure(trainer.G, trainer.prior, centers, spec['thresholds'])
-            ema = image_tasks.measure(trainer.ema_G, trainer.ema_prior, centers, spec['thresholds'])
-            observations.append(dict(step=completed, seconds=time.perf_counter()-started,
-                                     **live, ema=ema))
-            losses.append(dict(step=completed, d=float(stats['loss_d']),
-                               g=float(stats['loss_g']), d_penalty=float(stats['penalty']),
-                               prior=float(base.prior_reg*stats['prior_regularization'])))
-    result = dict(live=observations[-1] if observations else {},
-                  ema=observations[-1]['ema'] if observations else {},
-                  observations=observations, losses=losses, actions=actions,
-                  update_counts=dict(g=trainer.completed_steps, d=trainer.completed_steps),
-                  seconds=time.perf_counter()-started)
-    if len(observations) == 24:
-        result['live'] = {k: v for k, v in observations[-1].items() if k not in ('ema', 'step', 'seconds')}
-        result['convergence'] = sustained(observations,
-            [('modes', '>=', spec['thresholds']['modes']),
-             ('hq', '>=', spec['thresholds']['hq_min'])], expected_steps=expected,
-            minimum=spec['thresholds']['minimum_stable_checks'])
-    return result, context
+    torch.set_num_threads(1)
+    recipe = host_recipe(base, spec)
+    applied, shapes = image_tasks.receipts(spec, recipe)
+    result = image_tasks.train(spec, recipe, max_steps=max_steps, log=log)
+    result['seconds'] = time.perf_counter()-started
+    return result, dict(applied=applied, shapes=shapes, host_recipe=recipe)
 
 
 def run_legacy(spec, base):
+    """A migrated host runs on the shared runner under ``base`` (with its own noise
+    fields); a host that still owns its optimizers runs unchanged and says so."""
     from benchmarks.locked_shared import baseline
-    from benchmarks.smart_descent import evaluate
-    from .compare_defaults import candidate, optimizer_defaults
-    from . import vector_tasks
-    from benchmarks import learned_lr_evaluation as bridge
+    from .compare_defaults import candidate
+    from . import problem_hosts
+    if problem_hosts.is_migrated(spec['name']):
+        result, context = problem_hosts.run_problem(spec, base)
+        return result, context | dict(recipe_owned=True)
     started = time.perf_counter()
-    applied = []
-    policy = vector_tasks.fixed_policy('cosine')
-    with optimizer_defaults(base, applied):
-        control = evaluate.FixedControl(policy, spec['steps'])
-        with bridge.control_host_schedules(control):
-            result = baseline.run_toy(spec['name'], candidate(base))
-    result['actions'] = control.trace
+    result = baseline.run_toy(spec['name'], candidate(base))
     result['seconds'] = time.perf_counter()-started
-    return result, dict(applied=applied, shapes=dict(host='legacy auxiliary custom loop'),
-                        host_recipe=base)
+    return result, dict(applied=[], shapes=dict(host='legacy auxiliary custom loop'),
+                        host_recipe=base, recipe_owned=False)
 
 
 def run(output, *, tasks=None, require_installed_root=None):
@@ -407,33 +286,35 @@ def run(output, *, tasks=None, require_installed_root=None):
                     profile_path=str(PROFILE_PATH.relative_to(ROOT)),
                     profile_sha256=hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest(),
                     frozen_profile=profile, jobs=jobs, seed=0,
-                    routes=dict(vector='GANTrainer',
-                                image='GANTrainer',
+                    routes=dict(vector='benchmarks.toy_runner',
+                                image='benchmarks.toy_runner',
                                 legacy='public_primitives_custom_host'))
     write(output/'protocol.json', protocol)
     records = []
     for job in jobs:
         suite.verify_source(protocol)
         spec, card, variant = declared_spec(job, profile, base)
-        route = ('GANTrainer' if spec['runner'] in ('vector', 'image')
-                 else 'public_primitives_custom_host')
+        from . import problem_hosts
+        route = ('benchmarks.toy_runner' if spec['runner'] in ('vector', 'image')
+                 else problem_hosts.ROUTE if problem_hosts.is_migrated(spec['name'])
+                 else 'host-owned optimizers')
         print(f'START {spec["name"]} route={route} steps={spec["steps"]}', flush=True)
         started = time.perf_counter()
         try:
             if spec['runner'] == 'vector':
-                result, context = run_vector(spec, card, base)
+                result, context = run_vector(spec, card, base,
+                                             log_path=output/'logs'/f"{spec['name']}.jsonl")
             elif spec['runner'] == 'image':
-                result, context = run_image(spec, base)
+                result, context = run_image(
+                    spec, base, log=lambda row: print(json.dumps(row, default=float), flush=True))
             else:
                 result, context = run_legacy(spec, base)
             observations = result.get('observations', result.get('curve', []))
             if len(observations) != 24:
                 raise RuntimeError(f'frozen host did not produce 24 live observations: {spec["name"]}')
-            if route == 'GANTrainer':
+            if route == 'benchmarks.toy_runner':
                 if any(not isinstance(point.get('ema'), dict) for point in observations):
                     raise RuntimeError(f'frozen host has an incomplete EMA curve: {spec["name"]}')
-                if len(result['actions']) != spec['steps']:
-                    raise RuntimeError(f'public trainer action trace is incomplete: {spec["name"]}')
             json.dumps(result, allow_nan=False)
         except Exception:
             result = dict(error=traceback.format_exc(), seconds=time.perf_counter()-started)
@@ -441,6 +322,8 @@ def run(output, *, tasks=None, require_installed_root=None):
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
         record = dict(name=spec['name'], route=route, recipe=legacy_dict(base),
+                      recipe_owned=context.get('recipe_owned', spec['runner'] != 'legacy'),
+                      **({'executed_recipe': context['executed_recipe']} if 'executed_recipe' in context else {}),
                       host_recipe=legacy_dict(context['host_recipe']),
                       original_spec=deepcopy(job['spec']), spec=spec,
                       discriminator_variant=variant,
@@ -467,7 +350,10 @@ def run(output, *, tasks=None, require_installed_root=None):
     public_module_manifest(require_installed_root)
     complete = len(records) == 19
     passed = sum(row['verdict']['passed'] for row in records)
+    host_owned = [row['name'] for row in records if not row['recipe_owned']]
+    complete = complete and not host_owned
     write(output/'summary.json', dict(version='public-default-verification-v1',
+         host_owned_optimizers=host_owned,
          attempted=len(records), passed=passed, overall='PASS' if complete and passed == 19 else
          'FAIL' if complete else 'INCOMPLETE', routes=protocol['routes'],
          public_package=protocol['public_package']['package_file'],

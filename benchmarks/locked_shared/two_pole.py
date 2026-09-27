@@ -1,24 +1,36 @@
-"""Behavioral toy extracted from HyperGAN/conceptmod at 5571213.
+"""Two-pole cloud: does a 12-particle cloud travel to the poles at +-1 while
+the critic's median input slope stays bounded?
 
-Original budgets, models and numerical thresholds; no configuration gates.
-See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
+Problem only, from HyperGAN/conceptmod at 5571213 (``leaderboard_honesty.py``;
+see SOURCE.md and LICENSE): the stored host critic, the deterministic
+two-pole data, the particle table (the samples themselves), the live/stranger
+pairing, the particle L2 pull, the travel/slope metrics and the verdict.
+Everything else (optimizers and their LR schedule, loss, critic penalty,
+noise, EMA, observation logging) comes from the shipped recipe through
+``benchmarks.toy_runner``::
+
+    python -m benchmarks.locked_shared.two_pole --log runs/toy-refactor/locked_two_pole.log
 """
 
 from __future__ import annotations
 
-from .observation import checkpoint, schedule_optimizer
-
 import torch
 from torch import nn
-from benchmarks.legacy.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
+
+from particlegan import get_recipe
+from benchmarks.toy_runner import Networks, ToyProblem, main, run
+from .observation import checkpoint
 
 TOY_STEPS = 80
-TOY_SEED = 0
-TOY_LR = 5e-3
-TOY_BETAS = (0.0, 0.99)
+N_PARTICLES = 12
+PARTICLE_L2 = 0.02
+COVER_WEIGHT = 1.5  # logged score only; not part of the verdict
 TRAVEL_MIN = 0.30
 GRAD_MED_MAX = 1.0
 POLES = (-1.0, 1.0)
+PAIRINGS = ("live", "stranger")
+
+# Stored host critic weights (conceptmod 5571213): explicit, not an init recipe.
 _HOST_W1 = (
     -0.007487, 0.536444, -0.823045, -0.735939, -0.385154, 0.268157, -0.019813,
     0.792889, -0.088744, 0.264613, -0.302213, -0.196565, -0.955348, -0.662282,
@@ -73,9 +85,15 @@ def real_batch(n: int) -> torch.Tensor:
     return torch.cat([-1.0 + offset, 1.0 + offset]).unsqueeze(1)
 
 
+def stranger_batch(n: int) -> torch.Tensor:
+    """The stranger arm's fixed fake batch: the critic never sees the particles."""
+    return torch.linspace(-3.0, 3.0, n).unsqueeze(1)
+
+
 def _grad_median(critic: nn.Module, real: torch.Tensor, particles: torch.Tensor) -> float:
-    xs = torch.cat([real, particles.detach()]).detach().requires_grad_(True)
-    grad = torch.autograd.grad(critic(xs).sum(), xs, create_graph=False)[0]
+    with torch.enable_grad():
+        xs = torch.cat([real, particles.detach()]).detach().requires_grad_(True)
+        grad = torch.autograd.grad(critic(xs).sum(), xs, create_graph=False)[0]
     return float(grad.flatten().abs().median())
 
 
@@ -85,7 +103,7 @@ def _nearest(particles: torch.Tensor) -> float:
 
 
 def cell_wins(mean_abs: float, grad_med: float) -> bool:
-    """Travel off the origin, and the b_cap median slope stays ≤ kappa.
+    """Travel off the origin, and the median critic slope stays ≤ kappa.
 
     Both-pole balance and cover_score are logged elsewhere. Gating this cell
     on them would crown a thinned hinge that walks farther than locked_shared.
@@ -93,68 +111,70 @@ def cell_wins(mean_abs: float, grad_med: float) -> bool:
     return mean_abs >= TRAVEL_MIN and grad_med <= GRAD_MED_MAX
 
 
-def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=None,
-          noise_policy=None) -> dict:
-    """Run the original 80-step cloud experiment, including stranger arms."""
-    torch.manual_seed(TOY_SEED)
-    particle_l2 = LOCKED_SHARED.particle_l2 if particle_l2 is None else particle_l2
-    base_critic = HostCritic()
-    if noise_policy is None:
-        critic = base_critic
-    else:
-        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input
-        critic = wrap_input(base_critic, noise_policy)
-    particles = nn.Parameter(torch.zeros(LOCKED_SHARED.n_particles, 1))
-    if noise_policy is not None:
-        noise_policy.register_generator_base(particles)
-    opt_d = torch.optim.Adam(critic.parameters(), lr=TOY_LR, betas=TOY_BETAS)
-    if noise_policy is not None and noise_policy.scale_parameters():
-        opt_p = torch.optim.Adam([
-            {"params": [particles]},
-            {"params": noise_policy.scale_parameters(), "_comparison_output_scale": True},
-        ], lr=TOY_LR, betas=TOY_BETAS)
-    else:
-        opt_p = torch.optim.Adam([particles], lr=TOY_LR, betas=TOY_BETAS)
-    if noise_policy is not None:
-        noise_policy.register_generator_optimizer(opt_p, opt_d)
-    gan = (gan_factory or make_gan_loss)()
-    regularizer = (cap_factory or make_b_cap)()
-    real = real_batch(LOCKED_SHARED.n_particles)
-    stranger = torch.linspace(-3.0, 3.0, LOCKED_SHARED.n_particles).unsqueeze(1)
-    for step in range(1, TOY_STEPS + 1):
-        if noise_policy is not None:
-            noise_policy.set_step(step - 1)
-        opt_d.zero_grad(set_to_none=True)
-        fake = particles.detach() if pairing == "live" else stranger
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=False)
-        d_loss = gan.d_loss(critic(real), critic(fake))
-        (d_loss + regularizer(critic, real, fake, step=step)).backward()
-        schedule_optimizer(opt_d, step - 1)
-        opt_d.step()
+class ParticleCloud(nn.Module):
+    """The samples themselves: a 1-D particle table starting at the origin."""
 
-        opt_p.zero_grad(set_to_none=True)
-        d_real = critic(real).detach()
-        generated = particles if pairing == "live" else stranger
-        if noise_policy is not None:
-            generated = noise_policy.output(generated, generator_step=True)
-        paired = critic(generated)
-        g_loss = gan.g_loss(paired, d_real)
-        g_loss = g_loss + particle_l2 * particles.square().mean()
-        g_loss.backward()
-        schedule_optimizer(opt_p, step - 1)
-        opt_p.step()
-        checkpoint(step, lambda: {"mean_abs": float(particles.detach().abs().mean()),
-                                 "grad_med": _grad_median(base_critic, real, particles)})
+    def __init__(self, n: int = N_PARTICLES) -> None:
+        super().__init__()
+        self.particles = nn.Parameter(torch.zeros(n, 1))
 
-    with torch.no_grad():
-        mean_abs = float(particles.abs().mean())
+
+class TwoPole(ToyProblem):
+    """The two-pole cloud. ``pairing="stranger"`` shows the critic a fixed
+    linspace instead of the particles (so only the L2 pull reaches them);
+    ``particle_l2`` weights the pull toward the origin the cloud must beat."""
+
+    name = "locked_two_pole"
+
+    def __init__(self, *, pairing: str = "live", particle_l2: float = PARTICLE_L2):
+        if pairing not in PAIRINGS:
+            raise ValueError(f"pairing must be one of {PAIRINGS}")
+        self.pairing, self.particle_l2 = pairing, float(particle_l2)
+
+    def recipe(self):
+        return get_recipe(z_dim=1, num_particles=N_PARTICLES, batch_size=N_PARTICLES, total_steps=TOY_STEPS)
+
+    def networks(self, recipe, seed):
+        cloud = ParticleCloud(recipe.num_particles)
+        return Networks(generator=cloud, critics=HostCritic(), prior=None, direct_particles=[cloud.particles])
+
+    def real(self, n, stream):
+        return real_batch(n)
+
+    def fake(self, nets, n, stream, real):
+        particles = nets.generator.particles
+        if n != len(particles):
+            raise ValueError("the two-pole cloud is scored as one full batch of its particles")
+        if self.pairing == "stranger" and real is not None:
+            return stranger_batch(n)
+        return particles[:n]  # a view: detached under the critic step's no_grad
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator" or self.particle_l2 == 0:
+            return {}
+        return {"particle_l2": self.particle_l2 * nets.generator.particles.square().mean()}
+
+    def metrics(self, model):
+        particles = model.nets.generator.particles
         nearest = _nearest(particles)
-    grad_med = _grad_median(base_critic, real, particles)
-    return {
-        "mean_abs": mean_abs,
-        "grad_med": grad_med,
-        "nearest": nearest,
-        "cover_score": LOCKED_SHARED.cover_weight * (1.0 - min(nearest, 1.0)),
-        "verdict": "PASS" if cell_wins(mean_abs, grad_med) else "FAIL",
-    }
+        return {"mean_abs": float(particles.abs().mean()),
+                "grad_med": _grad_median(model.nets.critics, real_batch(len(particles)), particles),
+                "nearest": nearest,
+                "cover_score": COVER_WEIGHT * (1.0 - min(nearest, 1.0))}
+
+    def verdict(self, metrics):
+        return "PASS" if cell_wins(metrics["mean_abs"], metrics["grad_med"]) else "FAIL"
+
+
+def train(*, pairing: str = "live", particle_l2: float | None = None, steps: int | None = None,
+          log=None, log_path=None) -> dict:
+    """Train the cloud on the shared runner; the final live row with its verdict
+    (``ema`` and ``hold`` alongside). Observations go to
+    ``benchmarks.locked_shared.observation`` recorders."""
+    problem = TwoPole(pairing=pairing, particle_l2=PARTICLE_L2 if particle_l2 is None else particle_l2)
+    result = run(problem, steps=steps, log=log, log_path=log_path, observer=checkpoint)
+    return {**result["live"], "ema": result["ema"], "hold": result["hold"]}
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(TwoPole()))

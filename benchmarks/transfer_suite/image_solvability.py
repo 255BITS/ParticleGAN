@@ -3,8 +3,10 @@
 Research only. Supervised expressivity witnesses are a separate control and
 never enter the GAN leaderboard. All previously reserved image data is now
 seen development data; this module does not introduce or inspect a new holdout.
+
+Each card is a task change or a recipe change; episodes train on the shared
+toy runner through ``image_tasks.run_episode`` (no patched host globals).
 """
-from contextlib import contextmanager
 from copy import deepcopy
 import argparse
 import gzip
@@ -15,13 +17,10 @@ from pathlib import Path
 import tarfile
 import time
 import traceback
-from unittest.mock import patch
 
 import torch
-import torch.nn.functional as F
 
 from . import image_tasks as host
-from benchmarks.locked_shared.observation import sustained
 
 HEALTHY = [s for s in host.TASKS if s['tier'] == 'ranking']
 CARDS = [
@@ -41,10 +40,13 @@ CARDS = [
 
 
 def policy():
-    return dict(weights=torch.zeros(2, 2, 5).tolist(), interval=5, schedule='cosine')
+    """Declaration record only: the recipe-built optimizers own the LR schedule."""
+    return dict(weights=torch.zeros(2, 2, 5).tolist(), interval=5, schedule='recipe')
 
 
 def resolve(original, card):
+    """A card changes the task (architecture, width, budget, fixed prior) or the
+    recipe fields ``spec_recipe`` reads (loss, penalty, prior LR multiplier)."""
     spec = deepcopy(original)
     spec.update(loss_type='logistic', gan_mode='rp', prior_lr_multiplier=1., prior_learnable=True)
     spec.update(card['changes'])
@@ -53,36 +55,9 @@ def resolve(original, card):
     return spec
 
 
-@contextmanager
-def configuration(spec):
-    """Scoped adapters expose loss/prior options without mutating the base host.
-
-    Only prior parameters receive the prior LR multiplier. Existing parameter
-    order and RNG consumption remain unchanged for the baseline card.
-    """
-    loss_class, prior_class, adam_class = host.GANLoss, host.ParticlePrior, torch.optim.Adam
-    prior_parameters = set()
-    def loss(*args, **kwargs):
-        return loss_class(spec['loss_type'], spec['gan_mode'])
-    def prior(*args, **kwargs):
-        value = prior_class(*args, **kwargs, learnable=spec['prior_learnable'])
-        prior_parameters.update(id(p) for p in value.parameters())
-        return value
-    def adam(parameters, *args, **kwargs):
-        parameters = list(parameters)
-        if spec['prior_lr_multiplier'] != 1. and any(id(p) in prior_parameters for p in parameters):
-            initial = kwargs['lr']
-            parameters = [dict(params=[p for p in parameters if id(p) not in prior_parameters], lr=initial),
-                          dict(params=[p for p in parameters if id(p) in prior_parameters], lr=initial*spec['prior_lr_multiplier'])]
-        return adam_class(parameters, *args, **kwargs)
-    with patch.object(host, 'GANLoss', loss), patch.object(host, 'ParticlePrior', prior), patch.object(torch.optim, 'Adam', adam):
-        yield
-
-
 def episode(original, card):
     spec = resolve(original, card)
-    with configuration(spec):
-        result = host.run_episode(spec, policy(), fixed=True)
+    result = host.run_episode(spec, policy())
     result['research_card'] = card
     result['effective_spec'] = spec
     result['research_source_sha256'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -90,40 +65,19 @@ def episode(original, card):
 
 
 def supervised(original):
-    """MSE with balanced latent-to-template labels; representability only."""
+    """MSE with balanced latent-to-template labels; representability only.
+
+    Same networks, prior, recipe generator optimizer (schedule included) and
+    EMA as the GAN baseline; no critic and no prior spread term.
+    """
     spec = deepcopy(original)
     torch.set_num_threads(1)
-    torch.manual_seed(0)
     started = time.perf_counter()
     result = dict(kind='supervised expressivity control — not a GAN', spec=spec,
                   live={}, ema={}, observations=[], losses=[], convergence={})
     try:
-        generator = host.Generator(spec)
-        _ = host.Discriminator(spec)  # Match the GAN's prior-initialization RNG position.
-        prior = host.ParticlePrior(spec['particles'], spec['z_dim'])
-        ema_g, ema_prior = deepcopy(generator), deepcopy(prior)
-        centers = host.templates(spec)
-        target = centers[torch.arange(spec['particles']) % spec['modes']]
-        optimizer = torch.optim.Adam([*generator.parameters(), *prior.parameters()], lr=spec['lr_g'], betas=spec['adam_betas'])
-        expected = host.evaluation_steps(spec)
-        schedule = host.FixedControl(policy(), spec['steps'])
-        for index in range(spec['steps']):
-            optimizer.zero_grad(set_to_none=True)
-            loss = F.mse_loss(generator(prior.z), target)
-            loss.backward()
-            schedule.step(optimizer, index, role='g')
-            optimizer.step()
-            with torch.no_grad():
-                for current, average in ((generator, ema_g), (prior, ema_prior)):
-                    for parameter, averaged in zip(current.parameters(), average.parameters()):
-                        averaged.lerp_(parameter, 1-spec['ema_decay'])
-            if index+1 in expected:
-                live = host.measure(generator, prior, centers, spec['thresholds'])
-                ema = host.measure(ema_g, ema_prior, centers, spec['thresholds'])
-                result['observations'].append(dict(step=index+1, seconds=time.perf_counter()-started, **live, ema=ema))
-                result['losses'].append(dict(step=index+1, supervised_mse=float(loss.detach())))
-        result.update(live=live, ema=ema, actions=schedule.trace,
-                      convergence=sustained(result['observations'], [('modes','>=',spec['modes']),('hq','>=',spec['thresholds']['hq_min'])], expected_steps=expected))
+        recipe = host.spec_recipe(spec).replace(prior_reg=0.)
+        result.update(host.train(spec, recipe, problem=host.SupervisedWitness(spec)))
     except Exception:
         result['error'] = traceback.format_exc()
     result['seconds'] = time.perf_counter()-started

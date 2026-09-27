@@ -1,33 +1,29 @@
-"""Numerical host extracted from HyperGAN/conceptmod commit 5571213.
+"""Mid-scale identity toy: does a four-scale residual keep the person at 0.5?
 
-Training/data/evaluation logic retained; config-identity refusals removed.
-See ../SOURCE.md and ../LICENSE. Candidate settings are supplied by baseline.py.
+Problem only, from HyperGAN/conceptmod at 5571213 (see ../SOURCE.md and
+../LICENSE): the smile teacher (guarded concept, identity, stranger), the
+``s*odd + |s|*even + origin + bump(s)*mid`` residual student, the
+scale-conditioned critic architecture, the per-scale views with their 1/4
+averaging, the problem's cover constraint, and the polarity / magnitude /
+identity metrics with their verdict. Everything else (optimizers and their LR
+schedule, loss, critic penalty, input/output noise, EMA, observation logging)
+comes from the shipped recipe through ``benchmarks.toy_runner``::
+
+    python -m benchmarks.locked_shared.hosts.mid_scale_identity --log runs/toy-refactor/mid_scale_identity.log
 """
 
 from __future__ import annotations
 
-
 import math
-
-
 from dataclasses import dataclass
 
-
-from ..observation import checkpoint, schedule_optimizer
-
 import torch
-
-
 import torch.nn.functional as F
-
-
 from torch import nn
 
-
-from benchmarks.legacy.gan_loss import GANLoss
-from benchmarks.legacy.grad_regularizers import GradientPenalty
-
-
+from particlegan import get_recipe, init
+from benchmarks.toy_runner import Networks, ToyProblem, View, main, run
+from ..observation import checkpoint
 from .cover_leftover import (
     LOCKED_COVER,
     LeftoverField,
@@ -36,66 +32,18 @@ from .cover_leftover import (
     leftover_bipolar,
 )
 
-
 EVAL_SCALES = (-1.0, 0.0, 0.5, 1.0)
-
-
 ANIMA_SMILE_SCALES = (0.0, 0.25, 0.5, 1.0)
-
-
 CONCEPT_COS_MIN = 0.85
-
-
 CONCEPT_MAG_LO = 0.75
-
-
 CONCEPT_MAG_HI = 1.25
-
-
 IDENTITY_KEPT_MIN = 0.85
-
-
 GATE_STEPS = 800
-
-
 DIM = 4
-
-
 N_ROWS = 8
-
-
-LR = 5e-3
-
-
-BETAS = (0.0, 0.99)
-
-
-DELAY = 80
-
-
-MIN_LR_RATIO = 0.05
-
-
 CRITIC_HIDDEN = 64
-
-
-FORMULATION = {
-    "loss_type": "logistic",
-    "gan_mode": "rp",
-    "reg_arm": "b_cap",
-    "reg_coeff": 1.0,
-    "reg_kappa": 1.0,
-    "reg_norm": "l2",
-    "reg_lazy": 1,
-    "target_anneal": "none",
-    "fm_weight": 0.0,
-    "cover_weight": LOCKED_COVER,
-    "pairing": "matched",
-    "lr": LR,
-    "beta1": BETAS[0],
-    "beta2": BETAS[1],
-}
-
+COVER_WEIGHT = LOCKED_COVER
+"""Weight of the problem's constraint ``mean_s mse(state(s), target(s))``."""
 
 ARMS = (
     "locked",
@@ -104,7 +52,6 @@ ARMS = (
     "polarity_flipped",
     "stranger",
 )
-
 
 REASON_ORDER = (
     "missing_minus",
@@ -132,15 +79,6 @@ def mid_bump(scale: float) -> float:
 
 def _has_scale(scales, target: float) -> bool:
     return any(abs(float(scale) - float(target)) <= 1e-6 for scale in scales)
-
-
-def delayed_cosine(step: int, *, total: int, delay: int = DELAY, min_ratio: float = MIN_LR_RATIO) -> float:
-    """1.0 for ``delay`` steps, then cosine down to ``min_ratio``."""
-    if step < int(delay):
-        return 1.0
-    span = max(1, int(total) - int(delay))
-    t = min(1.0, float(step - int(delay)) / float(span))
-    return float(min_ratio) + 0.5 * (1.0 - float(min_ratio)) * (1.0 + math.cos(math.pi * t))
 
 
 @dataclass(frozen=True, eq=False)
@@ -222,8 +160,13 @@ class MidScaleResidual(nn.Module):
         return s * self.odd + abs(s) * self.even + self.origin + mid_bump(s) * self.mid
 
 
+# The residual starts at zero on purpose (the fit starts from "no edit"), so
+# the explicit init keeps its constructor values.
+init.register(MidScaleResidual, {"odd": init.KEEP, "even": init.KEEP, "origin": init.KEEP, "mid": init.KEEP})
+
+
 class ScaleCritic(nn.Module):
-    """Two-layer LeakyReLU MLP. The cap differentiates the state, not the scale."""
+    """Two-layer LeakyReLU MLP on ``(state / teacher RMS, scale)``."""
 
     def __init__(self, dim: int, teacher: torch.Tensor, hidden: int = CRITIC_HIDDEN) -> None:
         super().__init__()
@@ -239,17 +182,10 @@ class ScaleCritic(nn.Module):
             nn.Linear(hidden, 1),
         )
 
-    def score(self, z: torch.Tensor, scale: float) -> torch.Tensor:
-        policy = getattr(self, "noise_policy", None)
-        if policy is not None:
-            # The penalty calls score() with normalized states. Add noise in
-            # the original state units for both the penalty and main critic.
-            z = policy.input(z * self.input_scale) / self.input_scale
+    def forward(self, state: torch.Tensor, scale: float) -> torch.Tensor:
+        z = state.float() / self.input_scale
         label = z.new_full((z.shape[0], 1), float(scale))
         return self.net(torch.cat([z, label], dim=-1)).squeeze(-1)
-
-    def forward(self, state: torch.Tensor, scale: float) -> torch.Tensor:
-        return self.score(state.float() / self.input_scale, scale)
 
 
 def _cos(a: torch.Tensor, b: torch.Tensor) -> float:
@@ -397,16 +333,6 @@ def format_row(row: dict) -> str:
     )
 
 
-def _apply_lr(opt: torch.optim.Optimizer, step: int, total: int) -> None:
-    scale = delayed_cosine(step, total=total)
-    for group in opt.param_groups:
-        group["lr"] = group["initial_lr"] * scale
-
-
-def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
-    return vector.detach().unsqueeze(0).expand(rows, -1)
-
-
 def _train_arm_name(arm: str) -> str:
     """``missing_minus`` trains the locked residual and only drifts the eval grid."""
     if arm == "missing_minus":
@@ -420,153 +346,87 @@ def _eval_scales(arm: str) -> tuple[float, ...]:
     return EVAL_SCALES
 
 
-def _fit(
-    arm: str,
-    *,
-    steps: int,
-    seed: int,
-    teacher: SmileTeacher,
-    noise_policy=None,
-) -> tuple[MidScaleResidual, dict]:
-    """Train on :data:`EVAL_SCALES` (always includes ``-1``)."""
-    if not _has_scale(EVAL_SCALES, -1.0):
-        raise RuntimeError("training grid must include -1")
-    train_arm = _train_arm_name(arm)
-    torch.manual_seed(int(seed))
-    student = MidScaleResidual(int(teacher.concept.numel()))
-    if any(param.is_cuda for param in student.parameters()):
-        raise RuntimeError("mid-scale identity toy is CPU only")
-    targets = {scale: teacher.train_target(train_arm, scale) for scale in EVAL_SCALES}
-    cloud = torch.stack([targets[scale] for scale in EVAL_SCALES], dim=0)
-    critic = ScaleCritic(student.odd.numel(), cloud, hidden=CRITIC_HIDDEN)
+class MidScaleIdentity(ToyProblem):
+    """One residual student (no prior) and one scale-conditioned critic.
+
+    A batch is ``batch_size / 4`` rows per training scale, stacked in
+    :data:`EVAL_SCALES` order. Each scale is its own critic view with weight
+    ``1 / len(EVAL_SCALES)``, so the critic and generator losses are the
+    per-scale average. The generator also carries the problem's cover
+    constraint. ``arm`` picks the training target and eval grid (:data:`ARMS`).
+    """
+
+    name = "mid_scale_identity"
+
+    def __init__(self, arm: str = "locked"):
+        if arm not in ARMS:
+            raise ValueError(f"arm must be one of {ARMS}, got {arm!r}")
+        self.arm = arm
+        self.teacher = smile_teacher()
+        train_arm = _train_arm_name(arm)
+        self.targets = {s: self.teacher.train_target(train_arm, s) for s in EVAL_SCALES}
+
+    def recipe(self):
+        # No prior, so z_dim / num_particles do not apply.
+        return get_recipe(batch_size=N_ROWS * len(EVAL_SCALES), total_steps=GATE_STEPS)
+
+    def networks(self, recipe, seed):
+        student = init.deterministic_orthogonal_(MidScaleResidual(int(self.teacher.concept.numel())), seed=seed)
+        cloud = torch.stack([self.targets[s] for s in EVAL_SCALES], dim=0)
+        critic = init.deterministic_orthogonal_(ScaleCritic(student.odd.numel(), cloud), seed=seed + 1)
+        return Networks(generator=student, critics=critic, prior=None)
+
+    def _rows(self, n):
+        if n % len(EVAL_SCALES):
+            raise ValueError(f"batch must be a multiple of {len(EVAL_SCALES)} scales")
+        return n // len(EVAL_SCALES)
+
+    def real(self, n, stream):
+        rows = self._rows(n)
+        return torch.cat([self.targets[s].unsqueeze(0).expand(rows, -1) for s in EVAL_SCALES])
+
+    def fake(self, nets, n, stream, real):
+        rows = self._rows(n)
+        return torch.cat([nets.generator.state(s).unsqueeze(0).expand(rows, -1) for s in EVAL_SCALES])
+
+    def views(self, nets, real, fake):
+        rows, weight = self._rows(len(real.x)), 1.0 / len(EVAL_SCALES)
+        return [View("critic", real.x[i * rows:(i + 1) * rows], fake.x[i * rows:(i + 1) * rows], (s,), weight)
+                for i, s in enumerate(EVAL_SCALES)]
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator" or COVER_WEIGHT == 0:
+            return {}
+        cover = sum(F.mse_loss(nets.generator.state(s), self.targets[s]) for s in EVAL_SCALES)
+        return {"cover": COVER_WEIGHT * cover / len(EVAL_SCALES)}
+
+    def metrics(self, model):
+        return score_hold(model.nets.generator, scales=_eval_scales(self.arm),
+                          pairing="stranger" if self.arm == "stranger" else "matched", teacher=self.teacher)
+
+    def verdict(self, metrics):
+        return "PASS" if metrics["pass"] else "FAIL"
+
+
+def run_arm(arm: str, *, steps: int = GATE_STEPS, seed: int = 0, noise_policy=None, log=None) -> dict:
+    """Fit one arm on the shared runner and score its eval grid.
+
+    Returns the live row (EMA under ``ema``) and prints a tailable line.
+    Observations go to ``benchmarks.locked_shared.observation`` recorders.
+    """
     if noise_policy is not None:
-        critic.noise_policy = noise_policy
-    gan = GANLoss(loss_type=FORMULATION["loss_type"], mode=FORMULATION["gan_mode"])
-    reg = GradientPenalty(
-        arm=FORMULATION["reg_arm"],
-        coeff=FORMULATION["reg_coeff"],
-        kappa=FORMULATION["reg_kappa"],
-        norm=FORMULATION["reg_norm"],
-        lazy_k=FORMULATION["reg_lazy"],
-        target_anneal=FORMULATION["target_anneal"],
-    )
-    if noise_policy is not None:
-        noise_policy.register_generator_base(student)
-    g_parameters = list(student.parameters()) + (
-        noise_policy.scale_parameters() if noise_policy is not None else []
-    )
-    opt_g = torch.optim.Adam(g_parameters, lr=LR, betas=BETAS)
-    opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
-    if noise_policy is not None:
-        noise_policy.register_generator_optimizer(opt_g, opt_d)
-    for opt in (opt_g, opt_d):
-        opt.param_groups[0]["initial_lr"] = LR
-    reals = {scale: _batch(targets[scale]) for scale in EVAL_SCALES}
-    cover_w = float(FORMULATION["cover_weight"])
-    reg_calls = 0
-    n_scales = float(len(EVAL_SCALES))
-
-    for step in range(int(steps)):
-        if noise_policy is not None:
-            noise_policy.set_step(step)
-        _apply_lr(opt_g, step, steps)
-        _apply_lr(opt_d, step, steps)
-        critic.requires_grad_(True)
-        opt_d.zero_grad(set_to_none=True)
-        d_loss = student.odd.new_zeros(())
-        for scale in EVAL_SCALES:
-            fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=False)
-            cap, _stats = reg.penalty(
-                lambda z, scale=scale: critic.score(z, scale),
-                reals[scale] / critic.input_scale,
-                fake / critic.input_scale,
-                step=step + 1,
-            )
-            reg_calls += 1
-            d_term = gan.d_loss(critic(reals[scale], scale), critic(fake, scale))
-            d_loss = d_loss + (d_term + cap) / n_scales
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
-
-        critic.requires_grad_(False)
-        opt_g.zero_grad(set_to_none=True)
-        g_loss = student.odd.new_zeros(())
-        with torch.no_grad():
-            real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
-        for scale in EVAL_SCALES:
-            fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=True)
-            g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
-        cover = student.odd.new_zeros(())
-        for scale in EVAL_SCALES:
-            cover = cover + F.mse_loss(student.state(scale), targets[scale])
-        g_loss = g_loss + cover_w * cover / n_scales
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
-        critic.requires_grad_(True)
-        checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),
-                   pairing="stranger" if arm == "stranger" else "matched", teacher=teacher))
-
-        if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(steps):
-            preview_scales = _eval_scales(arm)
-            preview = score_hold(
-                student,
-                scales=preview_scales,
-                pairing="stranger" if arm == "stranger" else "matched",
-                teacher=teacher,
-            )
-            preview.update(arm=arm, steps=step + 1, seed=seed)
-            print(format_row(preview), flush=True)
-
-    meta = {
-        "steps": int(steps),
-        "seed": int(seed),
-        "train_scales": [float(scale) for scale in EVAL_SCALES],
-        "loss_type": gan.loss_type if hasattr(gan, "loss_type") else FORMULATION["loss_type"],
-        "gan_mode": FORMULATION["gan_mode"],
-        "reg_arm": reg.arm,
-        "reg_coeff": float(reg.coeff),
-        "reg_kappa": float(reg.kappa),
-        "reg_norm": reg.norm,
-        "reg_lazy": int(reg.lazy_k),
-        "reg_anneal": reg.target_anneal,
-        "reg_calls": int(reg_calls),
-        "reg_is_gradient_penalty": isinstance(reg, GradientPenalty),
-        "cover_weight": cover_w,
-        "fm_weight": float(FORMULATION["fm_weight"]),
-        "device": "cpu",
-    }
-    return student, meta
-
-
-def _finish(
-    student: MidScaleResidual,
-    meta: dict,
-    *,
-    arm: str,
-    teacher: SmileTeacher,
-) -> dict:
-    pairing = "stranger" if arm == "stranger" else "matched"
-    row = score_hold(student, scales=_eval_scales(arm), pairing=pairing, teacher=teacher)
-    row.update(meta)
-    row["arm"] = arm
-    print(format_row(row), flush=True)
-    return row
-
-
-def run_arm(arm: str, *, steps: int = GATE_STEPS, seed: int = 0,
-            noise_policy=None, **overrides) -> dict:
-    """Fit one arm and score its eval grid. Prints a tailable line."""
+        raise ValueError("mid_scale_identity takes its noise from its recipe (benchmarks.toy_runner)")
     if type(steps) is not int or steps <= 0:
         raise ValueError("steps must be a positive integer")
     if type(seed) is not int:
         raise ValueError("seed must be an int")
-    teacher = smile_teacher()
-    student, meta = _fit(arm, steps=steps, seed=seed, teacher=teacher,
-                         noise_policy=noise_policy)
-    return _finish(student, meta, arm=arm, teacher=teacher)
+    result = run(MidScaleIdentity(arm), steps=steps, seed=seed, log=log, observer=checkpoint)
+    row = {**result["live"], "arm": arm, "steps": steps, "seed": seed,
+           "train_scales": list(EVAL_SCALES), "cover_weight": COVER_WEIGHT,
+           "ema": result["ema"], "hold": result["hold"]}
+    print(format_row(row), flush=True)
+    return row
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(MidScaleIdentity()))

@@ -23,7 +23,8 @@ The formulation is taken from the
 (`FORMULATION.md`, paired-error game, edit normalization, AR-only training).
 The card's earlier lazy sample-point gradient cap is replaced by the package default.
 Audio code does not run inside ParticleGAN. The 2D gate is
-`python -u examples/yue2_particle_2d.py`.
+`python -u examples/yue2_particle_2d.py`. It runs on the shared toy runner at the
+recipe LR, with a 1000-update budget sized for that LR.
 
 ## Controller step
 

@@ -189,18 +189,67 @@ def test_scale_drift_updates_target_then_stops_before_final_window():
     assert vectors.target_scale(spec, int(.8*spec["steps"])) == 1.6
 
 
-def test_complete_episode_zero_feedback_matches_fixed_and_preserves_missing_failure(monkeypatch):
+def test_complete_fixed_episode_on_shared_runner_and_feedback_is_refused(monkeypatch):
     monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
     spec = dict(vectors.TASKS[0], steps=24, hidden=8, layers=1, particles=12, batch=16)
     policy = vectors.fixed_policy()
     fixed = vectors.run_episode(spec, policy, fixed=True)
-    feedback = vectors.run_episode(spec, policy)
-    assert "error" not in fixed and "error" not in feedback
-    assert fixed["live"] == feedback["live"]
-    assert fixed["ema"] == feedback["ema"]
+    assert "error" not in fixed, fixed.get("error")
     assert len(fixed["observations"]) == 24
+    assert all(isinstance(point["ema"], dict) for point in fixed["observations"])
     assert fixed["convergence"]["complete"]
     assert fixed["update_counts"] == {"g": 24, "d": 24}
-    assert fixed["actions"] and feedback["actions"]
+    assert fixed["status"] in ("PASS", "FAIL")
+    # The spec's declared host recipe, with its rates applied by the optimizers.
+    assert [row["lr"] for row in fixed["applied"]] == [pytest.approx(.001), pytest.approx(.01), pytest.approx(.0015)]
+    assert fixed["actions"][0]["multiplier"] == 1. and fixed["actions"][-1]["multiplier"] < 1.
+    # An adaptive LR controller cannot act on recipe-built optimizers.
+    feedback = vectors.run_episode(spec, policy)
+    assert feedback["status"] == "ERROR" and "not expressible" in feedback["error"]
     assert not vectors.passes({"hq": float("nan")}, [["hq", ">=", .85]])
     assert not vectors.passes({}, [["hq", ">=", .85]])
+
+
+def test_vector_task_declares_only_the_problem():
+    problem = vectors.VectorTask(vectors.TASKS[0])
+    recipe = problem.recipe()
+    assert (recipe.z_dim, recipe.num_particles, recipe.batch_size, recipe.total_steps) == (4, 256, 128, 1200)
+    from particlegan import get_recipe
+    assert recipe == get_recipe(z_dim=4, num_particles=256, batch_size=128, total_steps=1200)
+    with pytest.raises(ValueError, match="one critic and one generator"):
+        vectors.VectorTask(dict(vectors.TASKS[0], d_every=2))
+
+
+def _tiny(spec):
+    return dict(spec, steps=24, hidden=8, layers=1, particles=12, batch=16)
+
+
+def test_scale_drift_target_follows_the_frozen_per_update_clock(monkeypatch):
+    monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
+    spec = _tiny(next(x for x in vectors.TASKS if x["family"] == "changing_scale"))
+    problem = vectors.VectorTask(spec)
+    # Without train()'s per-update observer the ramp has no clock: refused.
+    with pytest.raises(RuntimeError, match="ramps per update"):
+        problem.real(4, torch.Generator().manual_seed(0))
+    calls, original = [], vectors.sample_target
+    monkeypatch.setattr(vectors, "sample_target",
+                        lambda s, n, rng, completed: calls.append((n, completed)) or original(s, n, rng, completed))
+    result = vectors.train(problem, vectors.spec_recipe(spec))
+    assert "error" not in result and len(result["observations"]) == 24
+    # As the frozen host: both real batches of update s draw at completed = s,
+    # and every measurement scores the target at the updates completed so far.
+    assert [c for n, c in calls if n == 16] == [s for s in range(1, 25) for _ in (0, 1)]
+    evaluated = [c for n, c in calls if n == 128]
+    assert set(evaluated) == set(range(1, 25)) and evaluated[-1] == 24
+    scales = [point["target_scale"] for point in result["observations"]]
+    assert scales[0] < scales[-1]
+    assert problem.completed is None
+
+
+def test_patched_adam_is_refused_not_silently_ignored(monkeypatch):
+    monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
+    spec = _tiny(vectors.TASKS[0])
+    original = torch.optim.Adam.step
+    monkeypatch.setattr(torch.optim.Adam, "step", lambda self, *a, **k: original(self, *a, **k))
+    result = vectors.run_episode(spec, vectors.fixed_policy(), fixed=True)
+    assert result["status"] == "ERROR" and "Adam.step is patched" in result["error"]

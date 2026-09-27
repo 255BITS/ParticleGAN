@@ -193,7 +193,8 @@ def main(argv=None):
     dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=Path(__file__).resolve().parents[1], text=True).strip())
     source_dir = args.out / "source"
     source_dir.mkdir()
-    source_paths = [Path(__file__), *(Path(__file__).resolve().parents[1] / "lib").glob("lunar_*.py")]
+    root = Path(__file__).resolve().parents[1]
+    source_paths = [Path(__file__), *(root / "lib").glob("lunar_*.py"), root / "benchmarks" / "toy_runner.py"]
     for source in source_paths:
         shutil.copy2(source, source_dir / source.name)
     config = {**vars(args), "variant": VARIANT, "seed_sets": seed_sets, "revision": revision, "git_dirty": dirty,

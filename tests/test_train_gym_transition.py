@@ -58,6 +58,27 @@ class GymTrainerTest(unittest.TestCase):
                     with self.assertRaises(FileExistsError):
                         train(cfg)
 
+    def test_problem_trains_on_shared_runner_optimizers(self):
+        from benchmarks.toy_runner import ToyRun
+        from experiments.train_gym_transition import GymWorldModel
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.dataset(root / "data")
+            real, terrain = load_split(root / "data", "train")
+            scaler = GymTransitionScaler.fit(real)
+            cfg = {**DEFAULTS, "width": 8, "encoder_width": 8, "d_width": 8, "marginal_width": 8,
+                   "z_dim": 4, "num_particles": 8, "steps": 3, "batch_size": 4, "device": "cpu"}
+            toy = ToyRun(GymWorldModel(cfg, real, terrain, real, terrain, scaler), seed=cfg["seed"])
+            self.assertEqual(sorted(toy.opt_d), ["action", "joint", "state"])
+            self.assertEqual([g["role"] for g in toy.opt_g.param_groups], ["network", "prior"])
+            for _ in range(3):
+                toy.step()
+            self.assertEqual(toy.opt_g.completed_steps, 3)
+            self.assertIn(toy.measure(ema=True)["verdict"], ("PASS", "FAIL"))
+        source = (Path(__file__).resolve().parents[1] / "experiments/train_gym_transition.py").read_text()
+        for forbidden in ("torch.optim", 'group["lr"] =', "scale_learning_rates", "make_optimizers"):
+            self.assertNotIn(forbidden, source)
+
     def test_normalization_uses_only_training_and_capacity_is_matched(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

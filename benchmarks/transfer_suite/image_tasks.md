@@ -35,15 +35,18 @@ kernel3/stride2/padding1 convolutions with 12 then 24 channels, leaky ReLU 0.2,
 and a linear scalar head. There is no batch normalization, reconstruction
 loss, template decoder or pretrained representation.
 
-Training uses ParticleGAN's relativistic-pair logistic GAN loss, exact b_cap
-input-gradient penalty (coefficient 3, kappa 1.25), and 32 learned latent particles
-with ParticleRegularizer weight 0.05. G and prior share Adam; D has a separate
-Adam. Both use LR 0.0017, betas (0,0.99), batch 32, and one update per step.
-There is no particle L2. A feedback action runs after the current backward
-and before each optimizer step; its held regularization action affects the
-following loss. Fixed controls use the same models, data draws and update order.
-The reference cosine holds until 60% then decays to 5% of initial LR. All GAN
-initialization and training use seed 0 and one CPU thread; no seed sweeps.
+`ImageTask(spec)` declares only the problem (data, networks, metrics, verdict);
+training runs on the shared `benchmarks.toy_runner`. `run_episode(spec)` trains
+under `spec_recipe(spec)`, the legacy recipe carrying the card's declared
+formulation: relativistic-pair logistic loss, b_cap input-gradient penalty
+(coefficient 3, kappa 1.25), 32 learned latent particles with prior
+regularizer weight 0.05, LR 0.0017 for G, prior and D, betas (0,0.99), batch 32,
+EMA 0.99. The recipe-built optimizers own the LR schedule (hold until 60%, then
+decay to 5%); there is no LR controller. Each update is one D step then one G
+step on a fresh real batch. Networks and particles take the explicit
+`particlegan.init.deterministic_orthogonal_` init; all training uses seed 0 and
+one CPU thread; no seed sweeps. Records made before this migration used a
+host-local Adam loop with a controller-written cosine and PyTorch default init.
 
 Quality is nearest-template pixel RMSE≤0.10 (≤0.06 for intensity). Regions are
 disjoint: every pair of templates is more than twice that radius apart. A mode
@@ -66,12 +69,12 @@ Run a reference calibration (fresh output directory or unrun task names):
 
 ```bash
 python -m benchmarks.transfer_suite.image_tasks \
-  --output /tmp/pr36-transfer-images-v1 --schedule cosine
+  --output /tmp/transfer-images-v2 --log runs/toy-refactor/transfer_image.log
 ```
 
 The CLI writes the full spec declaration and source/runtime fingerprints before
 training, then one JSON per attempt with all 24 measurements, live/EMA metrics,
-loss checkpoints, action traces, timings and errors. It refuses to overwrite
+loss checkpoints, timings and errors (the log has one JSON line per observation). It refuses to overwrite
 results or mix changed source/spec declarations. The first stripe reference took
 7.95 CPU seconds. The reference evidence below includes every attempt; no learned policy was fitted.
 

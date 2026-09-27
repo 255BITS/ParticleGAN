@@ -11,7 +11,6 @@ from particlegan import (
     get_recipe,
     learning_rate_scale,
     learning_rate_scales,
-    scale_learning_rates,
 )
 from particlegan.grad_regularizers import GradientPenalty
 from torch import nn
@@ -167,17 +166,19 @@ def test_multiple_critics_each_own_k3p_critic_no_global_hooks():
     recipe = _recipe()
     torch.manual_seed(0)
     critics = [nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1)) for _ in range(2)]
-    optimizers = [recipe.make_critic_optimizer(c, ema_critic=copy.deepcopy(c), lr=1e-2) for c in critics]
-    penalties = [recipe.make_critic_penalty(o) for o in optimizers]
+    # Per-role recipes: critic 0 anneals over 8 updates, critic 1 keeps a constant LR.
+    recipes = [recipe.replace(total_steps=8, network_lr_horizon_cap=None, lr_anneal_start=.5, network_lr_floor=.01),
+               recipe.replace(network_lr_floor=1.0)]
+    optimizers = [r.make_critic_optimizer(c, ema_critic=copy.deepcopy(c), lr=1e-2) for r, c in zip(recipes, critics)]
+    penalties = [r.make_critic_penalty(o) for r, o in zip(recipes, optimizers)]
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
         for k, (critic, opt, penalty) in enumerate(zip(critics, optimizers, penalties)):
-            # Critic 0 anneals, critic 1 keeps a constant LR.
-            opt.param_groups[0]["lr"] = 1e-2 * (learning_rate_scale(step - 1, 8, .5, .01) if k == 0 else 1.)
             loss = critic(real).mean() - critic(fake).mean() + penalty(critic, real, fake)
             opt.zero_grad()
             loss.backward()
             opt.step()
+            assert opt.param_groups[0]["lr"] == 1e-2 * (learning_rate_scale(step - 1, 8, .5, .01) if k == 0 else 1.)
     assert penalties[0].diagnostics()["blend_weight"] == 0.0 and penalties[1].diagnostics()["blend_weight"] == 1.0
     assert optimizers[0].record.anchor_started and not optimizers[1].record.anchor_started
     assert (len(optim_module._global_optimizer_pre_hooks), len(optim_module._global_optimizer_post_hooks)) == hooks
@@ -200,13 +201,12 @@ class _TwoRoles(nn.Module):
 
 
 def test_shared_module_multi_role_k3p_critic():
-    recipe = _recipe()
+    recipe = _recipe(total_steps=8, network_lr_horizon_cap=None, lr_anneal_start=.5)
     torch.manual_seed(0)
     d = _TwoRoles()
     opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d), lr=1e-2)
     penalty = recipe.make_critic_penalty(opt, collect_stats=True)
     for step, real in enumerate(_reals(12), start=1):
-        opt.param_groups[0]["lr"] = 1e-2 * learning_rate_scale(step - 1, 8, .5, .01)
         fake, loss, phases = real + 1.0, 0.0, []
         for role in ("joint", "marginal"):
             critic = d.critic_for(role)
@@ -237,7 +237,7 @@ class _Conditional(nn.Module):
 
 
 def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
-    recipe = _recipe()
+    recipe = _recipe(total_steps=8, network_lr_horizon_cap=None, lr_anneal_start=.5)
     torch.manual_seed(0)
     d = _Conditional()
     opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d), lr=1e-2)
@@ -251,7 +251,7 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
     labels, t = torch.tensor([0, 1, 2, 0, 1, 2, 0, 1]), torch.tensor([[0.3]])
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
-        for group in (*opt.param_groups, *ref_opt.param_groups):
+        for group in ref_opt.param_groups:  # the hand-written reference sets its own rate
             group["lr"] = 1e-2 * learning_rate_scale(step - 1, 8, .5, .01)
         pen = penalty(d, real, fake, labels, t=t)
         ref_pen, _ = ref.penalty(lambda x: ref_d(x, labels, t=t)[0], real, fake, step,
@@ -308,14 +308,12 @@ def test_plain_torch_checkpoint_resumes_exactly():
         d = nn.Sequential(nn.Linear(2, 16), nn.LeakyReLU(.2), nn.Linear(16, 1))
         prior = recipe.make_prior()
         opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
-        base = [[group["lr"] for group in o.param_groups] for o in (opt_g, opt_d)]
-        return g, d, prior, opt_g, opt_d, recipe.make_critic_penalty(opt_d), base
+        return g, d, prior, opt_g, opt_d, recipe.make_critic_penalty(opt_d)
 
     def run(parts, steps):
-        g, d, prior, opt_g, opt_d, penalty, base = parts
+        g, d, prior, opt_g, opt_d, penalty = parts
         out = []
         for step in steps:
-            scale_learning_rates(step, recipe, (opt_g, opt_d), base, prior)
             real = reals[step]
             z, _ = prior.sample(8, generator=torch.Generator().manual_seed(100 + step))
             fake = g(z)
@@ -335,11 +333,11 @@ def test_plain_torch_checkpoint_resumes_exactly():
     full_out = run(full, range(20))
     first = build()
     run(first, range(15))
-    g, d, prior, opt_g, opt_d, _, _ = first
+    g, d, prior, opt_g, opt_d, _ = first
     checkpoint = copy.deepcopy({"G": g.state_dict(), "D": d.state_dict(), "prior": prior.state_dict(),
                                 "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict()})
     resumed = build()
-    g, d, prior, opt_g, opt_d, _, _ = resumed
+    g, d, prior, opt_g, opt_d, _ = resumed
     with torch.no_grad():  # scramble everything the checkpoint must restore
         for module in (g, d, prior):
             for p in module.parameters():
@@ -358,14 +356,12 @@ def test_plain_torch_checkpoint_resumes_exactly():
 
 
 def test_recipe_optimizers_are_ordinary_adam():
-    from torch.optim.lr_scheduler import LambdaLR
     recipe = _recipe()
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Linear(2, 1)
     prior = recipe.make_prior()
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
     assert isinstance(opt_g, torch.optim.Adam) and isinstance(opt_d, torch.optim.Adam)
-    schedulers = [LambdaLR(opt_d, lambda epoch: 0.5 ** epoch)]
     calls = []
     opt_d.register_step_post_hook(lambda *args: calls.append(1))
     x = torch.randn(8, 2)
@@ -376,16 +372,17 @@ def test_recipe_optimizers_are_ordinary_adam():
         loss.backward()
         return loss
     assert opt_d.step(closure) is not None and calls == [1] and opt_d.record.observed_steps == 1
-    for scheduler in schedulers:
-        scheduler.step()
-    assert opt_d.param_groups[0]["lr"] == recipe.lr * recipe.d_lr_mult * 0.5
+    # The recipe owns the rate: an outside write is replaced at the next step.
+    opt_d.param_groups[0]["lr"] = 0.5
+    opt_d.step(closure)
+    assert opt_d.param_groups[0]["lr"] == recipe.lr * recipe.d_lr_mult * learning_rate_scales(1, recipe)[0]
     with pytest.raises(ValueError, match="regularizer"):
         opt_d.load_state_dict(torch.optim.Adam(d.parameters()).state_dict())
 
 
-def test_scale_learning_rates_drives_k3p_to_its_floor():
-    # A custom loop using scale_learning_rates gives D the network schedule, so
-    # the critic LR reaches the same floor f K3P blends against (s == 0).
+def test_recipe_schedule_drives_k3p_to_its_floor():
+    # The recipe-built optimizers give D the network schedule, so the critic
+    # LR reaches the same floor f K3P blends against (s == 0).
     recipe = _recipe()
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
@@ -394,15 +391,17 @@ def test_scale_learning_rates_drives_k3p_to_its_floor():
     base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     penalty = recipe.make_critic_penalty(opt_d)
     for step, real in enumerate(_reals(recipe.total_steps), start=1):
-        network, prior_scale = scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior)
-        assert (network, prior_scale) == learning_rate_scales(step - 1, recipe)
-        assert opt_g.param_groups[0]["lr"] == base[0][0] * network
-        assert opt_g.param_groups[1]["lr"] == base[0][1] * prior_scale
-        assert opt_d.param_groups[0]["lr"] == base[1][0] * network
+        network, prior_scale = learning_rate_scales(step - 1, recipe)
         loss = d(real).mean() - d(real + 1).mean() + penalty(d, real, real + 1)
         opt_d.zero_grad()
         loss.backward()
         opt_d.step()
+        opt_g.zero_grad()
+        (g.weight.square().sum() + prior.z.square().sum()).backward()
+        opt_g.step()
+        assert opt_g.param_groups[0]["lr"] == base[0][0] * network
+        assert opt_g.param_groups[1]["lr"] == base[0][1] * prior_scale
+        assert opt_d.param_groups[0]["lr"] == base[1][0] * network
     assert penalty.diagnostics()["blend_weight"] == 0.0
 
 
@@ -434,16 +433,14 @@ def test_caller_marked_transition_moves_k3p_penalty_with_critic_rate():
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
     prior = recipe.make_prior()
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
-    base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    penalty = recipe.make_critic_penalty(opt_d, collect_stats=True)
     transition = NetworkLRTransition(decay_steps=4)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d),
+                                          network_transition=transition)
+    penalty = recipe.make_critic_penalty(opt_d, collect_stats=True)
     phases = []
     for step, real in enumerate(_reals(14), start=1):
         if step == 9:
-            transition.mark_plateau(step - 1)
-        scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior,
-                             network_transition=transition)
+            transition.mark_plateau(opt_d.completed_steps)
         loss = d(real).mean() - d(real + 1).mean() + penalty(d, real, real + 1)
         phases.append(penalty.last_stats.get("phase"))
         opt_d.zero_grad()

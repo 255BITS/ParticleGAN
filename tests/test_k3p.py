@@ -152,6 +152,9 @@ def _recipe_critic(lazy_k=1, split=None):
 
     def build(D):
         opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D), foreach=False)
+        # The frozen scenario drives an arbitrary recorded LR trace (sc.lr_mult),
+        # not a recipe schedule, so its rates are set by run_critic.
+        opt.lr_schedule = None
         return opt, recipe.make_critic_penalty(opt, collect_stats=True)
     D = sc.make_critic()
     opt, penalty = build(D)

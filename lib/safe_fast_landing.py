@@ -11,15 +11,18 @@ both score below a quick soft landing.
 `adv_weight=0` is the supervised ablation. It can land and is not an
 accepted controller step. Gym uses the same weights on a short kinematic
 unroll of the physical action; `particle.yaml` leaves the term off.
-"""
-import copy
 
+Each arm is a ``SafeFastLanding`` problem on ``benchmarks.toy_runner``: the
+plant, the expert, the sink-gain controller, the critic, the safe-fast cost
+and the metrics are declared here; optimizers (and their LR schedule), the
+RpGAN loss, the critic penalty, critic input noise, generator output noise
+and EMA come from the shipped recipe. The gate compares the arms' runs.
+"""
 import torch
 from torch import nn
 
-from lib.vendor.concept_slider_core.reference import (noise_std, register_paired_error_norm,
-    rp_d_loss, rp_g_loss)
-from particlegan import get_recipe, init, scale_learning_rates
+from benchmarks.toy_runner import Networks, Sample, ToyProblem, View, run
+from particlegan import get_recipe, init
 
 # One gate seed. Not a sweep.
 SEED = 0
@@ -36,7 +39,7 @@ RANGE = 0.85
 TEMP = 0.04
 TIME_SCORE = 0.5
 STEPS = 250
-BETA_LR = 0.15
+BETA_INIT = -4.0
 ADV_WEIGHT = 1.0
 SAFE_FAST_WEIGHT = 1.0
 TIME_WEIGHT = 0.15
@@ -53,11 +56,17 @@ COMBINED_LAND_MIN = 0.95
 COMBINED_STEPS_MAX = 28.0
 LAND_GAP_MIN = 0.50
 STEP_GAP_MIN = 12.0
-GAN_GRAD_MIN = 1.0
-# GAN-only has no other force on the sink gain, so reaching the slow expert
-# from its far initialization is the evidence that its GAN is live.
+CRASH_MAX = 0.02
+# GAN-only has no other force on the sink gain, so holding the slow expert is
+# the evidence that its GAN is live.
 BASELINE_SINK_TOL = 0.02
+# The GAN gradient on the gain under the final critic, for the combined arm.
 COMBINED_LATE_GAN_MIN = 0.2
+
+ARMS = {"baseline": "baseline_rpgan", "combined": "combined", "supervised": "supervised_only"}
+REASONS = {"baseline": "RpGAN weight 1 only; slow expert match",
+           "combined": "RpGAN weight 1 plus the safe-fast cost",
+           "supervised": "adv_weight=0 leaves RpGAN and its critic penalty configured but not applied"}
 
 MAPPING = (
     dict(toy="Paired-error RpGAN on the action residual, adv_weight 1, recipe critic penalty. "
@@ -116,13 +125,17 @@ def kinematic_step(state, action):
     return torch.stack([x, y, vx, vy], -1)
 
 
-def initial_states(n, seed):
-    generator = torch.Generator().manual_seed(int(seed))
+def sample_states(n, generator):
+    """Start states (x, y, vx, vy) drawn from ``generator``."""
     x = torch.rand(n, generator=generator) * 0.8 - 0.4
     y = torch.rand(n, generator=generator) * 1.3 + 1.05
     vx = torch.rand(n, generator=generator) * 0.3 - 0.15
     vy = torch.rand(n, generator=generator) * 0.2 - 0.1
     return torch.stack([x, y, vx, vy], -1)
+
+
+def initial_states(n, seed):
+    return sample_states(n, torch.Generator().manual_seed(int(seed)))
 
 
 def rollout_cost(state, transition, horizon, time_weight, crash_weight, success_bonus,
@@ -237,21 +250,23 @@ class _Critic(nn.Module):
         return self.net(coordinates).squeeze(-1)
 
 
-def _edit_scale():
-    module = nn.Module()
-    pool = initial_states(512, 3)
-    targets = expert_action(pool)
-    register_paired_error_norm(module, targets, torch.zeros_like(targets))
-    return module
+class SinkGain(nn.Module):
+    """The controller: one scalar gain on the PD law's sink rate. Starts far from the expert."""
+
+    def __init__(self, beta=BETA_INIT):
+        super().__init__()
+        self.beta = nn.Parameter(torch.tensor(float(beta)))
+
+    def forward(self, state):
+        return pd_action(state, sink_of(self.beta))
 
 
-def _recipe(steps):
-    return get_recipe(total_steps=steps, batch_size=64)
-
-
-def _gain_optimizer(recipe, beta):
-    """The recipe's generator optimizer on the scalar sink gain (not a network)."""
-    return recipe.make_generator_optimizer([beta], lr=BETA_LR)
+def residual_scale(pool=None):
+    """Per-coordinate scale of the expert's paired edit (its action against zero),
+    with one scalar gain so the median row RMS of the normalized edit is 1."""
+    edits = expert_action(initial_states(512, 3) if pool is None else pool)
+    scale = edits.std(0).clamp_min(1e-6)
+    return scale * (edits / scale).pow(2).mean(-1).sqrt().median()
 
 
 def _safe_fast(beta, states):
@@ -264,129 +279,117 @@ def _safe_fast(beta, states):
                         V_LIMIT, PAD)
 
 
-def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FAST_WEIGHT):
-    """Train one arm. `baseline` is GAN only. `combined` adds the safe-fast cost.
+class SafeFastLanding(ToyProblem):
+    """Paired-error GAN on the action residual of a scalar sink gain.
 
-    `supervised` is safe-fast with `adv_weight=0` and is not an accepted arm.
+    ``real`` is the expert's residual against itself (zero) at sampled starts;
+    ``fake`` is the controller's residual at the same starts. ``baseline`` is
+    that GAN only; ``combined`` adds ``safe_fast_weight`` times the safe-fast
+    cost as a generator loss; ``supervised`` has no critic (``adv_weight=0``)
+    and is never an accepted arm.
     """
-    if mode not in ("baseline", "combined", "supervised"):
-        raise ValueError(f"Unknown arm {mode}")
-    if mode == "supervised":
-        if adv_weight != 0:
-            raise ValueError("The supervised ablation is adv_weight 0")
-    else:
-        require_live_adversary(adv_weight)
-    torch.manual_seed(SEED)
-    beta = nn.Parameter(torch.tensor(-4.0))
-    generator = torch.Generator().manual_seed(SEED + 2)
-    gan_grad_abs = 0.
-    safe_fast_grad_abs = 0.
-    late_gan_grad = 0.
-    late_count = 0
-    applications = 0
-    recipe = _recipe(steps)
-    if mode == "supervised":
-        opt = _gain_optimizer(recipe, beta)
-        rates = [[group["lr"] for group in opt.param_groups]]
-        for step in range(1, steps + 1):
-            scale_learning_rates(step - 1, recipe, [opt], rates)
-            loss = _safe_fast(beta, initial_states(32, 2 + step))
-            opt.zero_grad(set_to_none=True)
-            loss.backward()
-            safe_fast_grad_abs += abs(float(beta.grad.detach()))
-            opt.step()
-        result = evaluate_policy(_sink_policy(sink_of(beta.detach())))
-        result.update(arm="supervised_only", adv_weight=0., safe_fast_weight=SAFE_FAST_WEIGHT,
-                      accepted=False, beta=float(beta.detach()),
-                      sink=float(sink_of(beta.detach())), gan_grad_abs=0., late_gan_grad=0.,
-                      safe_fast_grad_abs=safe_fast_grad_abs, penalty_applications=0,
-                      reason="adv_weight=0 leaves RpGAN and its critic penalty configured but not applied")
-        return result
 
-    norm = _edit_scale()
-    critic = _Critic()
-    init.deterministic_orthogonal_(critic, seed=1)  # make_critic_optimizer keeps weights
-    opt = _gain_optimizer(recipe, beta)
-    opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
-    cap = recipe.make_critic_penalty(opt_d)
-    rates = [[group["lr"] for group in o.param_groups] for o in (opt, opt_d)]
-    hold = 1.3 * float(norm.edit_rms)
-    for step in range(1, steps + 1):
-        scale_learning_rates(step - 1, recipe, (opt, opt_d), rates)
-        state = initial_states(64, 10000 + step)
-        target = expert_action(state)
-        pred = pd_action(state, sink_of(beta.detach()))
-        residual = (pred - target) / norm.target_std
-        sigma = noise_std(step - 1, start=norm.noise_start, decay_steps=steps, hold=hold)
-        noise = torch.randn(residual.shape, generator=generator) * sigma
-        penalty = cap(critic, noise.detach(), (noise + residual).detach())
-        loss_d = rp_d_loss(critic(noise), critic(noise + residual)) + penalty
-        opt_d.zero_grad(set_to_none=True)
-        loss_d.backward()
-        opt_d.step()
-        applications += int(penalty.requires_grad)
-        pred = pd_action(state, sink_of(beta))
-        residual = (pred - target) / norm.target_std
-        noise = torch.randn(residual.shape, generator=generator) * sigma
-        loss_g = adv_weight * rp_g_loss(critic(noise).detach(), critic(noise + residual))
-        opt.zero_grad(set_to_none=True)
-        loss_g.backward()
-        gan_now = abs(float(beta.grad.detach()))
-        gan_grad_abs += gan_now
-        if step > steps * 0.6:
-            late_gan_grad += gan_now
-            late_count += 1
-        if mode == "combined":
-            before = beta.grad.detach().clone()
-            (_safe_fast(beta, initial_states(24, 20000 + step)) * safe_fast_weight).backward()
-            safe_fast_grad_abs += float((beta.grad.detach() - before).abs())
-        opt.step()
-    result = evaluate_policy(_sink_policy(sink_of(beta.detach())))
-    accepted = mode == "combined"
-    reason = ("RpGAN weight 1 plus the safe-fast cost" if accepted
-              else "RpGAN weight 1 only; slow expert match")
-    result.update(arm="combined" if accepted else "baseline_rpgan", adv_weight=float(adv_weight),
-                  safe_fast_weight=float(safe_fast_weight) if accepted else 0., accepted=accepted,
-                  beta=float(beta.detach()), sink=float(sink_of(beta.detach())),
-                  gan_grad_abs=gan_grad_abs, safe_fast_grad_abs=safe_fast_grad_abs,
-                  late_gan_grad=late_gan_grad / max(late_count, 1),
-                  penalty_applications=applications, reason=reason)
-    return result
+    def __init__(self, mode, *, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FAST_WEIGHT, steps=STEPS):
+        if mode not in ARMS:
+            raise ValueError(f"Unknown arm {mode}")
+        if mode == "supervised":
+            if adv_weight != 0:
+                raise ValueError("The supervised ablation is adv_weight 0")
+        else:
+            require_live_adversary(adv_weight)
+        self.mode, self.adv_weight, self.steps = mode, float(adv_weight), int(steps)
+        self.safe_fast_weight = 0. if mode == "baseline" else float(safe_fast_weight)
+        self.name = f"safe_fast_2d_{mode}"
+        self.scale = residual_scale()
+        self.loss = self.recipe().make_loss()
+
+    def recipe(self):
+        return get_recipe(total_steps=self.steps, batch_size=64)
+
+    def networks(self, recipe, seed):
+        critics = {} if self.mode == "supervised" else init.deterministic_orthogonal_(_Critic(), seed=seed + 1)
+        return Networks(generator=SinkGain(), critics=critics, prior=None)
+
+    def real(self, n, stream):
+        states = sample_states(n, stream)
+        return Sample(torch.zeros(n, 2), condition=(states,))
+
+    def _residual(self, gain, states):
+        return (gain(states) - expert_action(states)) / self.scale
+
+    def fake(self, nets, n, stream, real):
+        states = sample_states(n, stream) if real is None else real.condition[0]
+        return Sample(self._residual(nets.generator, states), condition=(states,))
+
+    def views(self, nets, real, fake):
+        # The critic reads the residual only; the starts ride along for fake() and losses().
+        return [View("critic", real.x, fake.x, (), self.adv_weight)] if nets.critics else []
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator" or self.safe_fast_weight == 0:
+            return {}
+        return {"safe_fast": self.safe_fast_weight * _safe_fast(nets.generator.beta, real.condition[0])}
+
+    def metrics(self, model):
+        beta = model.nets.generator.beta.detach()
+        row = evaluate_policy(_sink_policy(sink_of(beta)))
+        row.update(arm=ARMS[self.mode], adv_weight=self.adv_weight, safe_fast_weight=self.safe_fast_weight,
+                   accepted=self.mode == "combined", beta=float(beta), sink=float(sink_of(beta)),
+                   reason=REASONS[self.mode], **self._gradients(model))
+        return row
+
+    def _gradients(self, model):
+        """|d loss / d beta| on fixed starts: the GAN term under the current critic, and the safe-fast term."""
+        states = initial_states(256, 1001)
+        gain = SinkGain(model.nets.generator.beta.detach())
+        out = {"gan_grad": 0., "safe_fast_grad": 0.}
+        with torch.enable_grad():
+            if model.nets.critics:
+                critic, residual = model.nets.critics, self._residual(gain, states)
+                g = self.adv_weight * self.loss.g_loss(critic(residual), critic(torch.zeros_like(residual)))
+                out["gan_grad"] = abs(float(torch.autograd.grad(g, gain.beta)[0]))
+            if self.safe_fast_weight:
+                cost = self.safe_fast_weight * _safe_fast(gain.beta, states[:64])
+                out["safe_fast_grad"] = abs(float(torch.autograd.grad(cost, gain.beta)[0]))
+        return out
+
+    def verdict(self, m):
+        if self.mode == "baseline":
+            ok = (m["landings"] <= BASELINE_LAND_MAX and m["mean_steps"] >= BASELINE_STEPS_MIN
+                  and abs(m["sink"] - SLOW) <= BASELINE_SINK_TOL and m["gan_grad"] > 0)
+        elif self.mode == "combined":
+            ok = (m["landings"] >= COMBINED_LAND_MIN and m["mean_steps"] <= COMBINED_STEPS_MAX
+                  and m["sink"] < V_LIMIT and m["gan_grad"] >= COMBINED_LATE_GAN_MIN
+                  and m["safe_fast_grad"] > 0)
+        else:  # the ablation may land; the gate still rejects it
+            ok = m["landings"] >= COMBINED_LAND_MIN
+        return "PASS" if ok and m["crash_rate"] <= CRASH_MAX else "FAIL"
 
 
-def _beats(combined, baseline):
-    return (combined["landings"] >= COMBINED_LAND_MIN
-            and combined["mean_steps"] <= COMBINED_STEPS_MAX
-            and baseline["landings"] <= BASELINE_LAND_MAX
-            and baseline["mean_steps"] >= BASELINE_STEPS_MIN
-            and combined["landings"] >= baseline["landings"] + LAND_GAP_MIN
-            and combined["mean_steps"] <= baseline["mean_steps"] - STEP_GAP_MIN
-            and combined["crash_rate"] <= 0.02 and baseline["crash_rate"] <= 0.02
-            and combined["sink"] < V_LIMIT)
+def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FAST_WEIGHT, log=None):
+    """Train one arm on the shared toy runner; its live metrics row, verdict and hold summary."""
+    problem = SafeFastLanding(mode, adv_weight=adv_weight, safe_fast_weight=safe_fast_weight, steps=steps)
+    result = run(problem, seed=SEED, log=log)
+    return {**result["live"], "hold": result["hold"]}
 
 
-def run_gate():
+def run_gate(log=None):
     """Pass when the combined arm beats GAN-only on rate and steps, and the GAN stays on."""
     torch.set_num_threads(1)
     refs = reference_policies()
-    baseline = train_arm("baseline")
-    combined = train_arm("combined")
-    supervised = train_arm("supervised", adv_weight=0)
+    baseline = train_arm("baseline", log=log)
+    combined = train_arm("combined", log=log)
+    supervised = train_arm("supervised", adv_weight=0, log=log)
     metric_ok = (refs["hover"]["landings"] == 0
                  and refs["crash_sink"]["landings"] == 0
                  and refs["quick_soft"]["landings"] >= COMBINED_LAND_MIN
                  and refs["hover"]["score"] < refs["quick_soft"]["score"]
                  and refs["crash_sink"]["score"] < refs["quick_soft"]["score"])
-    gan_ok = (baseline["adv_weight"] == 1. and baseline["safe_fast_weight"] == 0.
-              and baseline["gan_grad_abs"] > 0. and abs(baseline["sink"] - SLOW) <= BASELINE_SINK_TOL
-              and baseline["penalty_applications"] > 0 and baseline["safe_fast_grad_abs"] == 0.
-              and combined["adv_weight"] == 1. and combined["safe_fast_weight"] == SAFE_FAST_WEIGHT
-              and combined["gan_grad_abs"] > GAN_GRAD_MIN
-              and combined["late_gan_grad"] > COMBINED_LATE_GAN_MIN
-              and combined["penalty_applications"] > 0
-              and combined["safe_fast_grad_abs"] > GAN_GRAD_MIN and combined["accepted"] is True)
-    rejected = supervised["adv_weight"] == 0 and supervised["accepted"] is False and supervised["landings"] >= COMBINED_LAND_MIN
-    passed = bool(metric_ok and gan_ok and rejected and _beats(combined, baseline))
+    gap_ok = (combined["landings"] >= baseline["landings"] + LAND_GAP_MIN
+              and combined["mean_steps"] <= baseline["mean_steps"] - STEP_GAP_MIN)
+    arms_ok = (baseline["verdict"] == "PASS" and combined["verdict"] == "PASS"
+               and supervised["verdict"] == "PASS" and supervised["accepted"] is False)
+    passed = bool(metric_ok and gap_ok and arms_ok)
     return dict(passed=passed, hover=refs["hover"], crash_sink=refs["crash_sink"],
                 quick_soft=refs["quick_soft"], baseline=baseline, combined=combined,
                 supervised=supervised, mapping=MAPPING,
@@ -395,7 +398,7 @@ def run_gate():
                                 combined_land_min=COMBINED_LAND_MIN,
                                 combined_steps_max=COMBINED_STEPS_MAX,
                                 land_gap_min=LAND_GAP_MIN, step_gap_min=STEP_GAP_MIN,
-                                gan_grad_min=GAN_GRAD_MIN, baseline_sink_tol=BASELINE_SINK_TOL,
+                                baseline_sink_tol=BASELINE_SINK_TOL,
                                 combined_late_gan_min=COMBINED_LATE_GAN_MIN, adv_weight=ADV_WEIGHT,
                                 safe_fast_weight=SAFE_FAST_WEIGHT, time_weight=TIME_WEIGHT,
                                 crash_weight=CRASH_WEIGHT, success_bonus=SUCCESS_BONUS,
@@ -407,10 +410,10 @@ def _fmt_arm(row):
     if row.get("sink") is not None:
         extra += f" sink={row['sink']:.3f}"
     if row.get("adv_weight") is not None:
-        extra += f" adv_weight={row['adv_weight']} safe_fast_weight={row['safe_fast_weight']}"
-        extra += (f" gan_grad_abs={row['gan_grad_abs']:.3f} late_gan_grad={row['late_gan_grad']:.5f} "
-                  f"safe_fast_grad_abs={row['safe_fast_grad_abs']:.3f}")
-        extra += f" penalty_applications={row['penalty_applications']} accepted={row['accepted']} reason={row['reason']}"
+        extra += (f" verdict={row['verdict']} adv_weight={row['adv_weight']} "
+                  f"safe_fast_weight={row['safe_fast_weight']} gan_grad={row['gan_grad']:.4f} "
+                  f"safe_fast_grad={row['safe_fast_grad']:.4f} accepted={row['accepted']} "
+                  f"reason={row['reason']}")
     return (f"[safe-fast-2d] {row['arm']} landings={row['landings']:.3f} "
             f"steps={row['mean_steps']:.2f} crash={row['crash_rate']:.3f} "
             f"score={row['score']:.3f}{extra}")

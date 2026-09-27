@@ -134,11 +134,11 @@ tail -f /tmp/behavioral-baseline.log
 
 # New output folder for another candidate set. JSON is a list of candidate objects.
 python -m benchmarks.locked_shared.baseline --configs candidates.json \
-  --reference /tmp/conceptmod-reference --output reports/my_approach
+  --reference /tmp/conceptmod-reference --output runs/my_approach
 
 # Continue an interrupted run with exactly the same config/source/runtime.
 python -m benchmarks.locked_shared.baseline --configs candidates.json \
-  --reference /tmp/conceptmod-reference --output reports/my_approach --resume
+  --reference /tmp/conceptmod-reference --output runs/my_approach --resume
 ```
 
 Each completed toy is saved atomically before the next toy begins. Failures are
@@ -147,8 +147,12 @@ fully passes; exit 1 means there is no full PASS. `--resume` rejects changed
 configs, source, thresholds, budgets or runtime. It retries errored toys. It
 does not accept old results from a different experiment under the same label.
 
-New formulations can extend the loss/penalty factory in `Candidate` while using
-the same `run_toy` hosts and metric definitions. Keep VERSION, thresholds, seed,
+The default run is one row, `locked_shared`: every host on its own
+configuration. Hosts on `benchmarks.toy_runner` (currently the ring) take
+their optimizers, loss, penalty, noise and EMA from their recipe, and
+candidate knobs do not reach them. `Candidate`'s loss/penalty factories and
+`lr_multiplier` are a legacy shim for hosts that still own their optimizers;
+they are removed as those hosts migrate, so do not add new formulations there. Keep VERSION, thresholds, seed,
 budgets, data, evaluation and hosts fixed for a comparable experiment; record
 the changed source fingerprint. Change the protocol version if evaluation or
 host training changes. Never select thresholds or checkpoints to rescue an arm.
@@ -158,8 +162,9 @@ do not edit shared host modules or reuse one result directory concurrently.
 ## Extraction verification
 
 Six additional hosts were extracted from the same reference commit as the
-original three. Their measured default outputs are compared against unchanged,
-SHA-256-pinned originals by:
+original three. Their measured default outputs were compared against unchanged,
+SHA-256-pinned originals by the frozen script below. Hosts migrated to their
+recipe no longer match those originals, so the record stands as extracted:
 
 ```bash
 python -m benchmarks.locked_shared.host_reference --reference /tmp/conceptmod-reference
@@ -188,9 +193,9 @@ of at least five observations establishes measured sustained PASS; missing
 observations cannot pass. The stricter ring convergence target is eight modes
 with HQ at least 90%. Original final regression bounds are unchanged.
 
-New candidate options are `lr_schedule` (`host` by default, or `cosine`),
-`lr_anneal_start` (default 0.6), and `lr_floor` (default 0.05). `host` retains
-the source schedules. `cosine` replaces each host schedule using the same policy
-and each optimizer group's initial rate; it never compounds the host's decay.
-The curve grid and timing policy are stored in protocol `behavior-v2`.
+That study's `lr_schedule: cosine` candidate option (a harness override of
+every host schedule) has since been removed: learning rates belong to each
+host's recipe-built optimizers, which apply their schedule inside `step()`.
+Its recorded results remain in the linked report. The curve grid and timing
+policy are stored in protocol `behavior-v2`.
 Historical `behavior-v1` artifacts retain their original fingerprints.

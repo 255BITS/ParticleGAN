@@ -1,92 +1,47 @@
-"""Numerical host extracted from HyperGAN/conceptmod commit 5571213.
+"""Cover-leftover toy: does a residual cover both caption poles without the leftover?
 
-Training/data/evaluation logic retained; config-identity refusals removed.
-See ../SOURCE.md and ../LICENSE. Candidate settings are supplied by baseline.py.
+Problem only, from HyperGAN/conceptmod at 5571213 (see ../SOURCE.md and
+../LICENSE): the one-row R^4 leftover field, the guarded teacher, the pole
+clouds, the residual student plus one particle table per pole, the Fourier-2
+critic, the cover constraint, the residual geometry metrics and the six
+bounds. Everything else (optimizers and their LR schedule, loss, critic
+penalty, particle regularizer, noise, EMA, observation logging) comes from
+the shipped recipe through ``benchmarks.toy_runner``::
+
+    python -m benchmarks.locked_shared.hosts.cover_leftover --log runs/toy-refactor/locked_cover_leftover.log
 """
 
 from __future__ import annotations
 
-
-import math
-
-
 from dataclasses import dataclass
 
-
-from ..observation import checkpoint, schedule_optimizer
-
 import torch
-
-
 import torch.nn as nn
-
-
 import torch.nn.functional as F
 
-
-from particlegan import ParticlePrior, ParticleRegularizer
-from benchmarks.legacy.gan_loss import GANLoss
-from benchmarks.legacy.grad_regularizers import GradientPenalty
+from particlegan import get_recipe, init
+from benchmarks.toy_runner import Networks, Sample, ToyProblem, main, run
+from ..observation import checkpoint
 
 
 LOCKED_COVER = 1.5
-
-
 LOCKED_TEACHER = "faithful_guard_e"
-
-
 LOCKED_N_PARTICLES = 12
-
-
 U_KEPT_MIN = 0.85
-
-
 CONTENT_KEPT_MIN = 0.75
-
-
 LEAK_RATIO_MAX = 0.20
-
-
 POLE_REL_ERR_MAX = 0.20
-
-
 SAME_DIR_MAX = 0.25
-
-
 GATE_STEPS = 800
+BATCH = 32
+CLOUD_STD = 0.03
+SPAN_FRAC = 0.40
+END_MARGIN = 0.60
+CRITIC_HIDDEN = 64
+CRITIC_N_RAND = 16
+PARTICLE_INIT_STD = 0.05
 
-
-FORMULATION = {
-    "loss_type": "logistic",
-    "gan_mode": "rp",
-    "reg_arm": "b_cap",
-    "reg_coeff": 1.0,
-    "reg_kappa": 1.0,
-    "reg_norm": "l2",
-    "fm_weight": 0.0,
-    "n_particles": LOCKED_N_PARTICLES,
-    "particle_l2": 0.02,
-    "vicreg_weight": 0.05,
-    "vicreg_std": 0.05,
-    "cover_weight": LOCKED_COVER,
-    "teacher": LOCKED_TEACHER,
-    "lr": 5.0e-3,
-    "beta1": 0.0,
-    "beta2": 0.99,
-    "batch": 32,
-    "cloud_std": 0.03,
-    "particle_jitter": 0.01,
-    "span_frac": 0.40,
-    "end_margin": 0.60,
-    "ema": 0.995,
-    "delay": 80,
-    "min_lr_ratio": 0.05,
-    "critic_hidden": 64,
-    "critic_n_rand": 16,
-    "particle_init_std": 0.05,
-}
-
-
+# Problem arms: the cover constraint and the teacher are part of the task.
 ARMS = {
     "locked": {},
     "cover_zero": {"cover_weight": 0.0},
@@ -94,21 +49,9 @@ ARMS = {
 }
 
 
-@dataclass(frozen=True)
-class CoverRecipe:
-    """Host budget and optional control arm."""
-
-    arm: str = "locked"
-    steps: int = GATE_STEPS
-    seed: int = 0
-
-    def knob(self, name: str):
-        if name in ARMS[self.arm]:
-            return ARMS[self.arm][name]
-        return FORMULATION[name]
-
-
 class _Residual(nn.Module):
+    """Odd/even residual ``delta(s) = s * w_odd + |s| * w_even``; starts at zero."""
+
     def __init__(self, dim: int) -> None:
         super().__init__()
         self.w_odd = nn.Parameter(torch.zeros(dim))
@@ -116,6 +59,10 @@ class _Residual(nn.Module):
 
     def delta(self, scale: float) -> torch.Tensor:
         return float(scale) * self.w_odd + abs(float(scale)) * self.w_even
+
+
+# The zero start is the problem: the residual begins at the neutral row.
+init.register(_Residual, {"w_odd": init.KEEP, "w_even": init.KEEP})
 
 
 class _FourierCritic(nn.Module):
@@ -146,20 +93,6 @@ class _FourierCritic(nn.Module):
         proj = x @ self.bank.T
         rand = torch.cat([torch.sin(proj), torch.cos(proj)], dim=-1)
         return self.net(torch.cat([order1, order2, rand], dim=-1)).squeeze(-1)
-
-
-class _EMA:
-    def __init__(self, params: list[torch.Tensor], decay: float) -> None:
-        self.decay = float(decay)
-        self.shadow = [p.detach().clone() for p in params]
-
-    def update(self, params: list[torch.Tensor]) -> None:
-        for shadow, param in zip(self.shadow, params):
-            shadow.mul_(self.decay).add_(param.detach(), alpha=1.0 - self.decay)
-
-    def copy_to(self, params: list[torch.Tensor]) -> None:
-        for shadow, param in zip(self.shadow, params):
-            param.data.copy_(shadow)
 
 
 def _unit(direction: torch.Tensor) -> torch.Tensor:
@@ -289,8 +222,8 @@ def score_geometry(
     poles_m: torch.Tensor,
     neu: torch.Tensor,
 ) -> dict[str, float | bool]:
-    d_plus = residual.delta(1.0).detach()
-    d_minus = residual.delta(-1.0).detach()
+    d_plus = residual.delta(1.0).detach().cpu()
+    d_minus = residual.delta(-1.0).detach().cpu()
     on_u = float(d_plus @ field.basis(0))
     on_c = float(d_plus @ field.basis(1))
     on_e = float(d_plus @ field.basis(2))
@@ -328,245 +261,96 @@ def score_geometry(
     }
 
 
-def _delayed_cosine(step: int, total: int, delay: int, min_ratio: float) -> float:
-    if step < int(delay):
-        return 1.0
-    span = max(1, int(total) - int(delay))
-    t = min(1.0, float(step - int(delay)) / float(span))
-    return float(min_ratio) + 0.5 * (1.0 - float(min_ratio)) * (1.0 + math.cos(math.pi * t))
-
-
-def _sample_real_cloud(
-    pole: torch.Tensor,
-    neu: torch.Tensor,
-    n: int,
-    *,
-    cloud_std: float,
-    span_frac: float,
-    end_margin: float,
-) -> torch.Tensor:
+def sample_pole_cloud(pole: torch.Tensor, neu: torch.Tensor, n: int, stream: torch.Generator) -> torch.Tensor:
     """Pole mass plus a short lyric-span lerp. One row, so every draw shares it."""
-    n_end = int(round(float(end_margin) * int(n)))
+    n_end = int(round(END_MARGIN * int(n)))
     n_span = int(n) - n_end
     chunks = []
     if n_end:
         chunks.append(pole.expand(n_end, -1))
     if n_span:
-        u = torch.rand(n_span, 1).sqrt()
-        lo = 1.0 - float(span_frac)
-        u = lo + (1.0 - lo) * u
-        chunks.append(neu + u * (pole - neu))
+        u = torch.rand(n_span, 1, generator=stream, device=pole.device).sqrt()
+        lo = 1.0 - SPAN_FRAC
+        chunks.append(neu + (lo + (1.0 - lo) * u) * (pole - neu))
     out = torch.cat(chunks, dim=0)
-    if float(cloud_std) > 0.0:
-        out = out + float(cloud_std) * torch.randn_like(out)
-    return out
+    return out + CLOUD_STD * torch.randn(out.shape, generator=stream, device=out.device)
 
 
-def _particle_batch(prior: ParticlePrior, n: int, jitter: float) -> torch.Tensor:
-    z, _idx = prior.sample(n)
-    if float(jitter) > 0.0:
-        z = z + float(jitter) * torch.randn_like(z)
-    return z
+class CoverLeftover(ToyProblem):
+    """Residual student over the neutral row, one particle table per pole, and
+    the problem's cover constraint pulling both residual poles onto the teacher.
+    ``arm`` picks a problem arm from ``ARMS`` (cover off, or an unguarded teacher)."""
+
+    name = "cover_leftover"
+
+    def __init__(self, arm: str = "locked", *, field: LeftoverField | None = None):
+        options = {"cover_weight": LOCKED_COVER, "teacher": LOCKED_TEACHER, **ARMS[arm]}
+        self.arm, self.field = arm, field or LeftoverField()
+        self.cover_weight, self.teacher = float(options["cover_weight"]), options["teacher"]
+        self.poles_p, self.poles_m, self.neu = teacher_poles(self.field, self.teacher)
+
+    def recipe(self):
+        return get_recipe(z_dim=self.field.dim, num_particles=LOCKED_N_PARTICLES,
+                          batch_size=BATCH, total_steps=GATE_STEPS)
+
+    def networks(self, recipe, seed):
+        residual = init.deterministic_orthogonal_(_Residual(self.field.dim), seed=seed)
+        critic = init.deterministic_orthogonal_(
+            _FourierCritic(self.field.dim, n_rand=CRITIC_N_RAND, hidden=CRITIC_HIDDEN, seed=seed), seed=seed + 1)
+        priors = tuple(init.deterministic_orthogonal_(recipe.make_prior(init_std=PARTICLE_INIT_STD), seed=seed)
+                       for _ in ("plus", "minus"))
+        return Networks(generator=residual, critics=critic, prior=priors)
+
+    def _targets(self, device):
+        return self.poles_p.to(device), self.poles_m.to(device), self.neu.to(device)
+
+    def real(self, n, stream):
+        poles_p, poles_m, neu = self._targets(stream.device)
+        half = max(1, n // 2)
+        return torch.cat([sample_pole_cloud(poles_p, neu, half, stream),
+                          sample_pole_cloud(poles_m, neu, half, stream)], dim=0)
+
+    def fake(self, nets, n, stream, real):
+        prior_p, prior_m = nets.priors
+        residual = nets.generator
+        neu = self.neu.to(prior_p.z.device)
+        half = max(1, n // 2)
+        z_p, _ = prior_p.sample(half, generator=stream)
+        z_m, _ = prior_m.sample(half, generator=stream)
+        return torch.cat([neu + residual.delta(1.0) + z_p, neu + residual.delta(-1.0) + z_m], dim=0)
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator" or self.cover_weight == 0:
+            return {}
+        residual = nets.generator
+        poles_p, poles_m, neu = self._targets(residual.w_odd.device)
+        cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
+        cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
+        return {"cover": self.cover_weight * cover}
+
+    def metrics(self, model):
+        row = score_geometry(model.nets.generator, self.field, self.poles_p, self.poles_m, self.neu)
+        row["particle_rms"] = float(torch.cat([p.z for p in model.nets.priors]).pow(2).mean().sqrt())
+        return row
+
+    def verdict(self, metrics):
+        return "PASS" if metrics["pass"] else "FAIL"
 
 
-def _log(handle, message: str) -> None:
-    line = message.rstrip() + "\n"
-    print(line, end="", flush=True)
-    if handle is not None:
-        handle.write(line)
-        handle.flush()
+def train_cover_leftover(problem: CoverLeftover | None = None, *, seed: int = 0, steps: int | None = None,
+                         log=None, log_path=None, recipe=None) -> dict:
+    """Train one arm on the shared runner. The EMA residual row (the host's
+    reported score) with its verdict, plus ``live``, ``live_curve`` and ``hold``.
+
+    Observations go to ``benchmarks.locked_shared.observation`` recorders.
+    """
+    problem = CoverLeftover() if problem is None else problem
+    result = run(problem, recipe=recipe, seed=seed, steps=steps, log=log, log_path=log_path,
+                 observer=checkpoint)
+    return {**result["ema"], "arm": problem.arm, "teacher": problem.teacher,
+            "cover_weight": problem.cover_weight, "steps": result["steps"], "seed": seed,
+            "live": result["live"], "live_curve": result["curve"], "hold": result["hold"]}
 
 
-def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None,
-                       noise_policy=None) -> dict:
-    """Train one arm. Returns the EMA residual score plus recipe pins."""
-    field = field or LeftoverField()
-    torch.manual_seed(recipe.seed)
-    dim = field.dim
-    residual = _Residual(dim)
-    prior_p = ParticlePrior(recipe.knob("n_particles"), dim, init_std=recipe.knob("particle_init_std"))
-    prior_m = ParticlePrior(recipe.knob("n_particles"), dim, init_std=recipe.knob("particle_init_std"))
-    critic = _FourierCritic(
-        dim,
-        n_rand=recipe.knob("critic_n_rand"),
-        hidden=recipe.knob("critic_hidden"),
-        seed=recipe.seed,
-    )
-    if noise_policy is not None:
-        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input
-        critic = wrap_input(critic, noise_policy)
-    gan = GANLoss(loss_type=recipe.knob("loss_type"), mode=recipe.knob("gan_mode"))
-    penalty = GradientPenalty(
-        arm=recipe.knob("reg_arm"),
-        coeff=recipe.knob("reg_coeff"),
-        kappa=recipe.knob("reg_kappa"),
-        norm=recipe.knob("reg_norm"),
-        lazy_k=1,
-        target_anneal="none",
-    )
-    spread = ParticleRegularizer(target_std=recipe.knob("vicreg_std"), weight=recipe.knob("vicreg_weight"))
-    lr = float(recipe.knob("lr"))
-    betas = (float(recipe.knob("beta1")), float(recipe.knob("beta2")))
-    if noise_policy is not None:
-        noise_policy.register_generator_base(residual)
-    generator_params = list(residual.parameters()) + (
-        noise_policy.scale_parameters() if noise_policy is not None else []
-    )
-    opt_g = torch.optim.Adam(
-        [
-            {"params": generator_params, "lr": lr},
-            {"params": list(prior_p.parameters()) + list(prior_m.parameters()), "lr": lr},
-        ],
-        lr=lr,
-        betas=betas,
-    )
-    opt_d = torch.optim.Adam(critic.parameters(), lr=lr, betas=betas)
-    if noise_policy is not None:
-        noise_policy.register_generator_optimizer(opt_g, opt_d)
-    ema = _EMA(generator_params, decay=float(recipe.knob("ema")))
-    poles_p, poles_m, neu = teacher_poles(field, recipe.knob("teacher"))
-    half = max(1, int(recipe.knob("batch")) // 2)
-    jitter = float(recipe.knob("particle_jitter"))
-    cover_w = float(recipe.knob("cover_weight"))
-    particle_l2 = float(recipe.knob("particle_l2"))
-    _log(
-        log,
-        "cover_leftover start arm=%s steps=%s seed=%s teacher=%s cover=%.1f "
-        "penalty_coeff=%.1f kappa=%.1f fm=%.1f n_particles=%s"
-        % (
-            recipe.arm,
-            recipe.steps,
-            recipe.seed,
-            recipe.knob("teacher"),
-            cover_w,
-            penalty.coeff,
-            penalty.kappa,
-            float(recipe.knob("fm_weight")),
-            recipe.knob("n_particles"),
-        ),
-    )
-
-    def fake_batch() -> tuple[torch.Tensor, torch.Tensor]:
-        fake_p = neu + residual.delta(1.0) + _particle_batch(prior_p, half, jitter)
-        fake_m = neu + residual.delta(-1.0) + _particle_batch(prior_m, half, jitter)
-        return fake_p, fake_m
-
-    for step in range(recipe.steps):
-        if noise_policy is not None:
-            noise_policy.set_step(step)
-        scale = _delayed_cosine(step, recipe.steps, int(recipe.knob("delay")), float(recipe.knob("min_lr_ratio")))
-        for group in opt_g.param_groups:
-            group["lr"] = lr * scale
-        for group in opt_d.param_groups:
-            group["lr"] = lr * scale
-        real_p = _sample_real_cloud(
-            poles_p, neu, half,
-            cloud_std=recipe.knob("cloud_std"),
-            span_frac=recipe.knob("span_frac"),
-            end_margin=recipe.knob("end_margin"),
-        )
-        real_m = _sample_real_cloud(
-            poles_m, neu, half,
-            cloud_std=recipe.knob("cloud_std"),
-            span_frac=recipe.knob("span_frac"),
-            end_margin=recipe.knob("end_margin"),
-        )
-        real = torch.cat([real_p, real_m], dim=0)
-        fake_p, fake_m = fake_batch()
-        fake = torch.cat([fake_p, fake_m], dim=0).detach()
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=False)
-        d_loss = gan.d_loss(critic(real.detach()), critic(fake))
-        cap = penalty(critic, real.detach(), fake, step=step + 1)
-        d_loss = d_loss + cap
-        opt_d.zero_grad()
-        d_loss.backward()
-        schedule_optimizer(opt_d, step)
-        opt_d.step()
-
-        fake_p, fake_m = fake_batch()
-        fake = torch.cat([fake_p, fake_m], dim=0)
-        if noise_policy is not None:
-            fake = noise_policy.output(fake, generator_step=True)
-        g_loss = gan.g_loss(critic(fake), critic(real.detach()))
-        parts = torch.cat([prior_p.z, prior_m.z], dim=0)
-        g_loss = g_loss + spread(parts)
-        if particle_l2 > 0.0:
-            g_loss = g_loss + particle_l2 * parts.pow(2).mean()
-        if cover_w > 0.0:
-            cover = (neu + residual.delta(1.0) - poles_p).pow(2).mean()
-            cover = cover + (neu + residual.delta(-1.0) - poles_m).pow(2).mean()
-            g_loss = g_loss + cover_w * cover
-        opt_g.zero_grad()
-        g_loss.backward()
-        schedule_optimizer(opt_g, step)
-        opt_g.step()
-        ema.update(generator_params)
-        checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))
-
-        if step == 0 or (step + 1) % 50 == 0 or step + 1 == recipe.steps:
-            live = score_geometry(residual, field, poles_p, poles_m, neu)
-            _log(
-                log,
-                "cover_leftover arm=%s step=%s/%s d=%.4f g=%.4f cap=%.4f "
-                "u_kept=%.3f content=%.3f leak=%.3f err=%.3f covered=%s"
-                % (
-                    recipe.arm,
-                    step + 1,
-                    recipe.steps,
-                    float(d_loss.detach()),
-                    float(g_loss.detach()),
-                    float(cap.detach()),
-                    live["u_kept"],
-                    live["content_kept"],
-                    live["leak_ratio"],
-                    max(live["pole_rel_err_plus"], live["pole_rel_err_minus"]),
-                    int(live["covered"]),
-                ),
-            )
-
-    live_score = score_geometry(residual, field, poles_p, poles_m, neu)
-    if noise_policy is not None:
-        noise_policy.capture_final_live()
-    ema.copy_to(generator_params)
-    if noise_policy is not None:
-        noise_policy.capture_final_ema()
-    scored = score_geometry(residual, field, poles_p, poles_m, neu)
-    with torch.no_grad():
-        particle_rms = float(torch.cat([prior_p.z, prior_m.z], dim=0).pow(2).mean().sqrt())
-    row = {
-        "arm": recipe.arm,
-        "steps": recipe.steps,
-        "seed": recipe.seed,
-        "teacher": recipe.knob("teacher"),
-        "cover_weight": cover_w,
-        "reg_coeff": float(penalty.coeff),
-        "reg_arm": penalty.arm,
-        "kappa": float(penalty.kappa),
-        "norm": penalty.norm,
-        "fm_weight": float(recipe.knob("fm_weight")),
-        "gan_mode": recipe.knob("gan_mode"),
-        "loss_type": recipe.knob("loss_type"),
-        "n_particles": int(recipe.knob("n_particles")),
-        "particle_l2": particle_l2,
-        "particle_rms": particle_rms,
-        **scored,
-        "live": live_score,
-    }
-    _log(
-        log,
-        "cover_leftover DONE arm=%s pass=%s reasons=%s u_kept=%.3f content=%.3f "
-        "leak=%.3f err=%.3f same_dir=%.3f particle_rms=%.3f"
-        % (
-            recipe.arm,
-            int(row["pass"]),
-            row["fail_reasons"] or "none",
-            row["u_kept"],
-            row["content_kept"],
-            row["leak_ratio"],
-            max(row["pole_rel_err_plus"], row["pole_rel_err_minus"]),
-            row["same_dir"],
-            particle_rms,
-        ),
-    )
-    return row
+if __name__ == "__main__":
+    raise SystemExit(main(CoverLeftover()))

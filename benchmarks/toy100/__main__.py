@@ -1,7 +1,7 @@
 """Run, grade, and inspect the frozen 100-Gaussian suite.
 
 Examples:
-  python -u -m benchmarks.toy100 run --output artifacts/toy100/recommended
+  python -u -m benchmarks.toy100 run --output artifacts/toy100/native
   python -u -m benchmarks.toy100 run --config configs/toy100/baseline.json --output artifacts/toy100/baseline
   python -u -m benchmarks.toy100 run --output artifacts/toy100/grid-deep --problem grid100 --steps 14000
   python -m benchmarks.toy100 gate --output artifacts/toy100/recommended
@@ -29,8 +29,9 @@ def _parser():
     parser = argparse.ArgumentParser(description="100-Gaussian training and evidence gate")
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
-    run.add_argument("--config", type=Path, default=Path("configs/toy100/constraints_simple_regularization.json"),
-                     help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
+    run.add_argument("--config", type=Path, default=None,
+                     help="legacy JSON/TOML research config replayed on GANTrainer; omit to train the "
+                          "problem declared in benchmarks.toy100.native on the shared runner")
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
@@ -38,7 +39,7 @@ def _parser():
                      help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
     run.add_argument("--init", default=None,
-                     help="deterministic weight and particle init name; omit to keep the PyTorch init")
+                     help="legacy --config runs only: deterministic init name (native networks declare theirs)")
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
                           help="require sustained fidelity and a 100k-sample holdout (default)")
@@ -51,6 +52,65 @@ def _parser():
     return parser
 
 
+def _gate(args):
+    """Grade, print the tail-able verdict lines, render; True when everything passes."""
+    gate = evaluate_suite(args.output, problem=args.problem)
+    print(json.dumps({"event": "gate", "status": gate["status"],
+                      "passed": gate["passed_problems"],
+                      "required": gate["required_problems"],
+                      "leaderboard": str(args.output / (f"leaderboard-{args.problem}.md" if args.problem
+                                                          else "leaderboard.md"))}), flush=True)
+    accuracy_ok = True
+    if getattr(args, "require_accuracy", False):
+        accuracy = evaluate_accuracy_suite(args.output, problem=args.problem)
+        accuracy_ok = accuracy["status"] == "PASS"
+        print(json.dumps({"event": "accuracy_gate", "status": accuracy["status"],
+                          "passed": accuracy["passed_problems"],
+                          "required": accuracy["required_problems"]}), flush=True)
+    render_error = None
+    if not args.no_render:
+        try:
+            for path in render_progress(args.output, problem=args.problem):
+                print(json.dumps({"event": "gif", "path": str(path)}), flush=True)
+        except (OSError, ValueError, ImportError) as exc:
+            render_error = exc
+            print(json.dumps({"event": "render_error", "error": str(exc)}), flush=True)
+    return gate["status"] == "PASS" and accuracy_ok and render_error is None
+
+
+def _run_native(args, device):
+    """The declared problem on the shared runner; gate.py/accuracy_gate.py grade it unchanged."""
+    from .evidence import native_config, record
+    from .native import STEPS
+
+    if getattr(args, "init", None) is not None:
+        raise ValueError("--init applies to legacy --config runs; native networks declare their init")
+    steps = STEPS if args.steps is None else args.steps
+    names = (args.problem,) if args.problem else PROBLEM_NAMES
+    configs = {name: native_config(name, steps=steps, device=device) for name in names}
+    for name in names:
+        folder = args.output / name
+        if folder.exists() and any(folder.iterdir()):
+            raise FileExistsError(f"existing run evidence at {folder}; choose a new output directory")
+    args.output.mkdir(parents=True, exist_ok=True)
+    (args.output / "native_manifest.json").write_text(json.dumps({
+        "declaration": "benchmarks.toy100.native.Toy100", "selected_problems": list(names),
+        "resolved_problem_configs": configs}, indent=2, allow_nan=False) + "\n")
+    ok = True
+    for name in names:
+        print(json.dumps({"event": "problem_start", "problem": name, "steps": steps,
+                          "output": str(args.output / name)}), flush=True)
+        try:
+            summary = record(name, args.output / name, steps=steps, device=device)
+            print(json.dumps({"event": "problem_complete", "problem": name,
+                              "status": summary["status"]}), flush=True)
+        except Exception as exc:
+            ok = False
+            print(json.dumps({"event": "problem_error", "problem": name, "error": repr(exc)}), flush=True)
+            traceback.print_exc()
+    return 0 if _gate(args) and ok else 1
+
+
 def _run(args):
     from .device import apply_device_policy, host_device
 
@@ -58,6 +118,8 @@ def _run(args):
     if device_override is not None:
         apply_device_policy(device_override, log=True)
         device_override = str(host_device())
+    if args.config is None:
+        return _run_native(args, device_override or "cpu")
     from benchmarks.init_research.init_registry import use_init
     use_init(getattr(args, "init", None))
     config_bytes = args.config.read_bytes()
@@ -128,29 +190,8 @@ def _run(args):
         print(json.dumps({"event": "policy_source_mismatch",
                           "error": "policy source changed during selected problem run"}), flush=True)
 
-    gate = evaluate_suite(args.output, problem=args.problem)
-    print(json.dumps({"event": "gate", "status": gate["status"],
-                      "passed": gate["passed_problems"],
-                      "required": gate["required_problems"],
-                      "leaderboard": str(args.output / (f"leaderboard-{args.problem}.md" if args.problem
-                                                          else "leaderboard.md"))}), flush=True)
-    accuracy_ok = True
-    if getattr(args, "require_accuracy", False):
-        accuracy = evaluate_accuracy_suite(args.output, problem=args.problem)
-        accuracy_ok = accuracy["status"] == "PASS"
-        print(json.dumps({"event": "accuracy_gate", "status": accuracy["status"],
-                          "passed": accuracy["passed_problems"],
-                          "required": accuracy["required_problems"]}), flush=True)
-    render_error = None
-    if not args.no_render:
-        try:
-            for path in render_progress(args.output, problem=args.problem):
-                print(json.dumps({"event": "gif", "path": str(path)}), flush=True)
-        except (OSError, ValueError, ImportError) as exc:
-            render_error = exc
-            print(json.dumps({"event": "render_error", "error": str(exc)}), flush=True)
-    return 0 if (gate["status"] == "PASS" and accuracy_ok
-                 and render_error is None and policy_source_ok) else 1
+    ok = _gate(args)
+    return 0 if ok and policy_source_ok else 1
 
 
 def main(argv=None):

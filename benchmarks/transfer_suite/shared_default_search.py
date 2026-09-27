@@ -5,25 +5,16 @@ Only a complete 19-case row can qualify as an overall PASS.
 """
 from benchmarks.locked_shared.recorded_recipes import GAN_V2
 import argparse
-from contextlib import ExitStack
 from dataclasses import asdict
 import gzip
 import hashlib
 import json
 from pathlib import Path
-import time
-import traceback
-from unittest.mock import patch
 
 import torch
 
-from benchmarks import learned_lr_evaluation as bridge
-from benchmarks.locked_shared import baseline
-from benchmarks.smart_descent import evaluate
 from . import suite, vector_tasks
-from .compare_defaults import candidate, effective_spec, ema_verdict, optimizer_defaults, plan, write
-from .linear_skip_refinement_research import constructor as skip_constructor
-from .smooth_critic_research import constructor as smooth_constructor
+from .compare_defaults import candidate, effective_spec, ema_verdict, plan, run_host, write
 from .protocol import test_verdict
 from benchmarks.gan_v3 import legacy_dict
 
@@ -59,29 +50,10 @@ def prepare(declaration):
 
 def episode(job, recipe):
     spec = effective_spec(job['spec'], recipe)
-    policy = vector_tasks.fixed_policy('cosine')
-    applied = []
-    start = time.perf_counter()
-    try:
-        with optimizer_defaults(recipe, applied), ExitStack() as stack:
-            if spec['runner'] == 'legacy':
-                control = evaluate.FixedControl(policy, spec['steps'])
-                with bridge.control_host_schedules(control):
-                    result = baseline.run_toy(spec['name'], candidate(recipe))
-                result['actions'] = control.trace
-                result['seconds'] = time.perf_counter() - start
-            else:
-                architecture = spec.get('research_discriminator')
-                if architecture:
-                    create = skip_constructor(architecture) if architecture.get('skip') == 'raw_linear' else smooth_constructor(architecture)
-                    stack.enter_context(patch.object(vector_tasks, 'SimpleMLPDiscriminator', create))
-                result = suite.run_episode(spec, policy, fixed=True, allow_reserved=True)
-        json.dumps(result, allow_nan=False)
-    except Exception:
-        result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - start)
+    result = run_host(spec, recipe, vector_tasks.fixed_policy('cosine'))
     return dict(recipe=legacy_dict(recipe), candidate=asdict(candidate(recipe)), original_spec=job['spec'],
                 spec=spec, architecture=job['architecture'], reference=job['reference'],
-                reference_sha256=job['reference_sha256'], applied=applied,
+                reference_sha256=job['reference_sha256'], applied=result.get('applied', []),
                 verdict=test_verdict(spec, result), ema_verdict=ema_verdict(spec, result), result=result)
 
 

@@ -26,21 +26,12 @@ def test_phase_bridge_rejects_unknown_optimizer_and_restores_callbacks():
     assert optimizer_role(optimizer, {"opt_d": optimizer}) == "d"
     with pytest.raises(RuntimeError, match="no declared"):
         optimizer_role(optimizer, {})
-    original = two_pole.schedule_optimizer
-    with pytest.raises(RuntimeError, match="interrupted"):
-        with control_host_schedules(FixedSchedule(80, cosine=False)):
-            assert two_pole.schedule_optimizer is not original
-            raise RuntimeError("interrupted")
-    assert two_pole.schedule_optimizer is original
 
 
-def test_existing_cosine_toy_matches_research_bridge_exactly():
-    config = baseline.Candidate("test", reg_coeff=3., reg_kappa=1.25,
-                                particle_l2=0., lr_multiplier=.85, lr_schedule="cosine")
-    reference = baseline.run_toy("two_pole", config)
-    from dataclasses import replace
+def test_host_schedule_bridge_is_inert():
+    # Hosts no longer expose schedule_optimizer: a controller cannot rewrite
+    # their rates from outside any more.
+    assert not hasattr(two_pole, "schedule_optimizer")
     with control_host_schedules(FixedSchedule(80, cosine=True)) as timing:
-        observed = baseline.run_toy("two_pole", replace(config, lr_schedule="host"))
-    assert reference["live"] == observed["live"]
-    assert timing["calls"] == 160
-    assert timing["seconds"] > 0
+        pass
+    assert timing == {"seconds": 0., "calls": 0}

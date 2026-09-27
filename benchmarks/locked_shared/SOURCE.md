@@ -6,15 +6,15 @@ The MIT notice is retained in [LICENSE](LICENSE).
 
 | Local experiment | Original source | Kept |
 | --- | --- | --- |
-| `two_pole.py` | `leaderboard_honesty.py` | Stored host weights, live/stranger training, 80 steps, travel and slope thresholds |
-| `trajectory.py` | `shared_trajectory.py` | Arcs, models, full loss, 400 steps, shared/stranger/nearest pairing, identity MSE threshold |
-| `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, full loss, EMA, 1,200 steps, coverage/HQ thresholds |
-| `hosts/residual_student.py` | `residual_student.py` | Conditional residual head, landing objective and all three measured landing/identity bounds |
-| `hosts/unipolar.py` | `unipolar.py` | Positive-pole training, neutral hold, leakage and coverage |
-| `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | AE encoder/decoder training, reconstruction and unconditional hold |
-| `hosts/cover_leftover.py` | `cover_leftover.py` | Guarded teacher, particles, live/EMA residual geometry and all six bounds |
-| `hosts/unused_token_hold.py` | `unused_token_hold.py` | Slot student, concept training and unused-slot hold |
-| `hosts/mid_scale_identity.py` | `mid_scale_identity.py` | Four-scale training, polarity/magnitude and identity checks |
+| `two_pole.py` | `leaderboard_honesty.py` | Stored host weights, two-pole data, particle table, live/stranger pairing, particle L2 pull, 80 steps, travel and slope thresholds. Problem only: optimizers, LR schedule, loss, penalty, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds and the thinned_cap formulation arm was dropped |
+| `trajectory.py` | `shared_trajectory.py` | Arcs, model shapes, set-cover term, 400 steps, shared/stranger/nearest pairing, identity MSE threshold. Problem only: optimizers, LR schedule, loss, penalty, prior regularization, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py` (host particle L2 and VICReg 0.05 dropped), so its reference parity no longer holds |
+| `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, 1,200 steps, coverage/HQ metrics and verdict. Problem only: optimizers, LR schedule, loss, penalty, prior, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
+| `hosts/residual_student.py` | `residual_student.py` | Paired trajectories, residual head, conditional pair critic, both-land residual and demo cover terms, and all three measured landing/identity bounds. Problem only: optimizers, LR schedule, loss, penalty, prior and its regularizer, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
+| `hosts/unipolar.py` | `unipolar.py` | Residual student, scale critic, two-scale targets, positive-pole coverage/leakage/neutral-hold gates and verdict. Problem only: optimizers, LR schedule, loss, penalty, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
+| `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | Two-anchor data, encoder/decoder/critic MLPs, reconstruction, particle-L2 and anchor-cover terms, 250 steps, reconstruction/hold metrics. Problem only on `benchmarks/toy_runner.py` (shipped `ae_gan` recipe), so its `host_reference.py` parity no longer holds |
+| `hosts/cover_leftover.py` | `cover_leftover.py` | Leftover field, guarded teacher, pole clouds, residual + two particle tables, Fourier critic, cover constraint, 800 steps, residual geometry and all six bounds. Problem only: optimizers, LR schedule, loss, penalty, particle regularizer, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
+| `hosts/unused_token_hold.py` | `unused_token_hold.py` | Slot student, slot critic, unused-slot hold loss, 200 steps, hold/move metrics and verdict. Problem only: optimizers, LR schedule, loss, penalty, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity (`host_reference.py`) no longer holds |
+| `hosts/mid_scale_identity.py` | `mid_scale_identity.py` | Smile teacher, residual student, scale critic, four-scale views, cover constraint, polarity/magnitude and identity checks. Problem only: optimizers, LR schedule, loss, penalty, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
 
 The additional hosts remove formulation refusals and unused config gate code;
 their models, random draws, budgets and numerical training operations remain.
@@ -39,35 +39,23 @@ host training loops. In particular, trajectory and ring keep the original
 From the repository root, with CPU PyTorch and pytest installed:
 
 ```bash
-python -m benchmarks.locked_shared --output reports/locked_shared
+python -m benchmarks.locked_shared --output runs/locked_shared
 python -m pytest tests/test_locked_shared_behavior.py tests/test_locked_shared.py tests/test_api_primitives.py -q
 ```
 
-The command logs each arm before and after training, then writes a readable
-`README.md` and full precision `results.json`. It exits nonzero if a default
-behavioral target fails or a requested reference comparison differs. A
-benchmark failure and a parity match can both be true. The pytest checks for
-builder equivalence do not assert that an existing failing reference passes.
+The command trains one row per host toy (two-pole, trajectory, ring), logs a
+`start`/`done` line per toy, then writes a readable `README.md` and full
+precision `results.json`. It exits nonzero if a behavioral target fails.
+Formulation and pairing arms (thinned cap, stranger pairings, cap-off,
+vanilla, FM-on) are no longer part of the suite.
 
-To verify extraction against the unchanged original source as well:
-
-```bash
-git clone https://github.com/HyperGAN/conceptmod.git /tmp/conceptmod-reference
-git -C /tmp/conceptmod-reference checkout 5571213f5e8e129cfda45c785c3f30aad9c1d8c9
-python -m pip download --no-deps particlegan==0.5.0 --dest /tmp/particlegan-reference
-python -m benchmarks.locked_shared \
-  --reference /tmp/conceptmod-reference \
-  --reference-wheel /tmp/particlegan-reference/particlegan-0.5.0-py3-none-any.whl \
-  --output reports/locked_shared
-```
-
-No conceptmod installation or diffusion dependencies are needed. The optional
-reference runner verifies SHA-256 hashes of the four original toy files and
-loads them unchanged, bypassing the package's eager backend imports. Its
-original constructors use the same ParticleGAN primitives as the extracted
-loops. The optional wheel check independently verifies that those primitive
-sources also match PyPI 0.5.0. Parity covers all ten rows and all numeric
-metrics, including negatives, at relative tolerance 1e-6 and absolute 1e-7.
+Rel-1e-6 parity with the unchanged conceptmod source (`reference.py`) and
+PyPI 0.5.0 primitive hashes was verified for the original extraction and is a
+frozen record in [reports/locked_shared](../../reports/locked_shared/README.md).
+It is not rerun: hosts migrated to `benchmarks.toy_runner` take optimizers,
+loss, penalty, noise and EMA from their recipe, so they no longer replay the
+original loops. `reference.py`, `host_reference.py` and `suite_reference.py`
+are kept only as the scripts that produced those records.
 
 This is a selected behavioral leaderboard, not the original suite's mix of
 configuration checks, geometry checks and DSL claims. There is no score for
@@ -85,13 +73,11 @@ results are recorded separately from the extracted behavioral leaderboard:
 python -m benchmarks.locked_shared.suite_reference --reference /path/to/conceptmod
 ```
 
-The [comparison report](../../reports/locked_shared/comparison.md) tests
-existing GAN losses, penalties and host regularization choices on the same
-seed and budgets. It includes separate stock-recipe ring runs with 20,000
-particles and explicitly labels the longer 7,000-step budget. Commands and
-raw measurements are linked there. `investigate --resume` reuses completed
-ring runs and fills missing diagnostics; all training variants can also be
-reproduced from scratch.
+The recorded [comparison report](../../reports/locked_shared/comparison.md)
+tested existing GAN losses, penalties and host regularization choices on the
+same seed and budgets. The scripts that swept those formulations
+(`investigate`, `summarize`, `base_recipe`, `default_selection`) were removed:
+toys now define only their problem and train on their recipe.
 
 Optional diagnostics record live versus EMA ring quality, learning curves,
 trajectory nearest-target assignments and critic slopes. They do not alter

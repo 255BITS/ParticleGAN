@@ -5,7 +5,7 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe
 
 
 def _critic(seed=0):
@@ -22,12 +22,12 @@ def _batch(step):
 def _critic_run(recipe, steps=14, ema=True):
     """Train one critic through the blended/late penalty phases; return penalties and stats."""
     D = _critic()
+    # The critic optimizer anneals over 10 updates (hold 30%, cosine to 1%) itself.
+    recipe = recipe.replace(total_steps=10, lr_anneal_start=.3, network_lr_floor=.01, network_lr_horizon_cap=None)
     opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D) if ema else None, lr=1e-2)
     penalty = recipe.make_critic_penalty(opt, collect_stats=True)
     rows = []
     for step in range(1, steps + 1):
-        for group in opt.param_groups:
-            group["lr"] = 1e-2 * learning_rate_scale(step - 1, 10, .3, .01)
         real, fake = _batch(step)
         pen = penalty(D, real, fake)
         rows.append((pen.detach().clone(), dict(penalty.last_stats)))

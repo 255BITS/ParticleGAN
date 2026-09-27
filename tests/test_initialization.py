@@ -204,3 +204,10 @@ def test_checkpoints_that_recorded_the_old_init_field_still_load():
     checkpoint["recipe"]["initialization"] = "unknown"
     with pytest.raises(ValueError, match="recipe"):
         build().load_state_dict(checkpoint)
+
+
+def test_deterministic_orthogonal_accepts_rmsnorm_without_bias():
+    model = nn.Sequential(nn.Linear(3, 4), nn.RMSNorm(4), nn.Linear(4, 1))
+    before = model[1].weight.detach().clone()
+    init.deterministic_orthogonal_(model)
+    assert torch.equal(model[1].weight, before)  # norm scales are kept

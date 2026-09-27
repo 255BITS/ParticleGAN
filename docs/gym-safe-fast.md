@@ -53,6 +53,23 @@ One seed (`0`), 200 fixed starts. Not a seed sweep. Not Lunar Lander.
 | Combined | 1 | 1 | 1.000 | 22.97 | 1.026 | pass |
 | Supervised safe-fast | 0 | 1 | 1.000 | 19.89 | 0 | rejected |
 
+The table above is the pre-migration gate: the sink gain trained at a
+caller-set `lr=0.15` with the vendored paired-noise schedule. Each arm is now
+a `SafeFastLanding` problem on `benchmarks/toy_runner.py`, so the gain trains
+at the recipe's `lr` (`0.00425`, schedule inside the optimizer), and the critic
+sees the recipe's input and output noise. The GAN gradient is now measured on
+fixed starts under the final critic. At the recipe LR the gate fails:
+
+| Arm (shared runner) | Landings | Steps | Sink | GAN grad | Verdict |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Baseline RpGAN | 0.050 | 46.00 | 0.108 | 0.0025 | PASS (slow expert match) |
+| Combined | 0.320 | 42.58 | 0.144 | 0.068 | FAIL |
+| Supervised safe-fast | 0.335 | 42.67 | 0.144 | 0 | FAIL (rejected anyway) |
+
+Combined and supervised land at the same sink, so the limit is the step size
+on one scalar gain (it moves about 1.1 of the 3.5 needed in 250 updates), not
+the GAN. The gate is flagged, not retuned.
+
 Thresholds the combined arm has to clear: landing rate at least `0.95` and
 at least `0.50` above the baseline; mean steps at most `28` and at least `12`
 below the baseline. The baseline must land at most `0.25` of starts and take

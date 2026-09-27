@@ -1,89 +1,35 @@
-"""Numerical host extracted from HyperGAN/conceptmod commit 5571213.
+"""AE+GAN hold toy: does an adversarial AE keep reconstruction and hold both anchors?
 
-Training/data/evaluation logic retained; config-identity refusals removed.
-See ../SOURCE.md and ../LICENSE. Candidate settings are supplied by baseline.py.
+Problem only, from HyperGAN/conceptmod at 5571213 (see ../SOURCE.md and
+../LICENSE): the two-anchor data, the host MLPs (encoder, decoder = G, critic),
+the host's reconstruction / particle-L2 / anchor-cover terms, the
+reconstruction and hold metrics and the verdict. Everything else (optimizers
+and their LR schedule, loss, critic penalty, MoG prior, noise, EMA,
+observation logging) comes from the shipped ``ae_gan`` recipe through
+``benchmarks.toy_runner``::
+
+    python -m benchmarks.locked_shared.hosts.ae_gan_hold --log runs/toy-refactor/ae_gan_hold.log
 """
 
 from __future__ import annotations
 
-from contextlib import nullcontext
-
-
-from dataclasses import dataclass
-
-
-from ..observation import checkpoint, schedule_optimizer
-
 import torch
-
-
 from torch import nn
 
-
-from benchmarks.legacy.recipe import get_recipe
-
-
-from benchmarks.legacy.grad_regularizers import GradRegularizer
-from benchmarks.gan_v3 import gan_v3_recipe
-
+from particlegan import get_recipe, init
+from benchmarks.toy_runner import Networks, ToyProblem, main, run
+from ..observation import checkpoint
 
 DEMO_COVER = 1.5
-
-
 PARTICLE_L2 = 0.02
-
-
 N_PARTICLES = 12
-
-
 STEPS = 250
-
-
 BATCH = 64
-
-
-LR = 2e-3
-
-
-SEED = 0
-
-
+EVAL_N = 1024
 DATA_STD = 0.05
-
-
 ANCHORS = ((-1.5, 0.0), (1.5, 0.0))
-
-
 RECON_MAX = 0.05
-
-
 HOLD_MAX = 0.35
-
-
-
-
-@dataclass(frozen=True)
-class HoldConfig:
-    name: str
-    loss_type: str = "logistic"
-    gan_mode: str = "rp"
-    reg_arm: str = "b_cap"
-    reg_coeff: float = 1.0
-    reg_kappa: float = 1.0
-    reg_norm: str = "l2"
-    reg_lazy: int = 1
-    target_anneal: str = "none"
-    fm_weight: float = 0.0
-    cover_weight: float = DEMO_COVER
-    particle_l2: float = PARTICLE_L2
-    n_particles: int = N_PARTICLES
-    reconstruction_weight: float = 1.0
-    adversarial_weight: float = 1.0
-    encoder_mode: str = "ae"
-    steps: int = STEPS
-    batch: int = BATCH
-    lr: float = LR
-    seed: int = SEED
 
 
 class MLP(nn.Module):
@@ -98,157 +44,96 @@ class MLP(nn.Module):
         return self.net[1](self.net[0](x))
 
 
-def _anchors() -> torch.Tensor:
-    return torch.tensor(ANCHORS, dtype=torch.float32)
+def _anchors(like: torch.Tensor | None = None) -> torch.Tensor:
+    anchors = torch.tensor(ANCHORS, dtype=torch.float32)
+    return anchors if like is None else anchors.to(like)
 
 
-def sample_data(n: int) -> torch.Tensor:
-    choice = torch.randint(0, len(ANCHORS), (n,))
-    return _anchors()[choice] + DATA_STD * torch.randn(n, 2)
+def sample_data(n: int, generator: torch.Generator | None = None) -> torch.Tensor:
+    choice = torch.randint(0, len(ANCHORS), (n,), generator=generator)
+    return _anchors()[choice] + DATA_STD * torch.randn(n, 2, generator=generator)
 
 
 def _hold_distance(fake: torch.Tensor) -> float:
-    distances = torch.cdist(_anchors(), fake)
-    return float(distances.min(dim=1).values.mean())
+    """Mean over anchors of the closest generated sample (unconditional hold)."""
+    return float(torch.cdist(_anchors(fake), fake).min(dim=1).values.mean())
 
 
-@torch.no_grad()
-def evaluate(encoder, decoder, prior, recipe) -> dict[str, float]:
-    """Score reconstruction and unconditional hold without moving the train RNG."""
-    state = torch.get_rng_state()
-    try:
-        data = sample_data(1024)
-        query, offset = encoder(data).chunk(2, dim=1)
-        encoded = recipe.encode(query, prior, offset=offset)
-        recon = decoder(encoded.codes[:, 0])
-        recon_mse = float((recon - data).square().mean())
-        codes, _ = prior.sample(1024)
-        fake = decoder(codes)
-        return {"recon_mse": recon_mse, "hold": _hold_distance(fake)}
-    finally:
-        torch.set_rng_state(state)
+def verdict(row: dict) -> str:
+    return "PASS" if row["recon_mse"] <= RECON_MAX and row["hold"] <= HOLD_MAX else "FAIL"
 
 
-def _log(arm: str, step: int, metrics: dict, extra: str = "") -> None:
-    print(
-        f"ae-gan-hold arm={arm} step={step} recon={metrics['recon_mse']:.4f} "
-        f"hold={metrics['hold']:.4f}{extra}",
-        flush=True,
-    )
+class AEGanHold(ToyProblem):
+    """Two anchors, AE (encoder E, decoder as G) + MLP critic on a MoG prior.
+
+    ``particle_l2`` (L2 on the prior means), ``cover_weight`` (anchor cover on
+    generated samples) and ``fm_weight`` (critic feature matching) are the
+    host's own generator-side terms; reconstruction uses the recipe's
+    ``encode`` and ``reconstruction_weight``.
+    """
+
+    name = "ae_gan_hold"
+
+    def __init__(self, *, particle_l2: float = PARTICLE_L2, cover_weight: float = DEMO_COVER,
+                 fm_weight: float = 0.0):
+        self.particle_l2, self.cover_weight, self.fm_weight = float(particle_l2), float(cover_weight), float(fm_weight)
+
+    def recipe(self):
+        return get_recipe("ae_gan", z_dim=2, num_particles=N_PARTICLES, batch_size=BATCH, total_steps=STEPS)
+
+    def networks(self, recipe, seed):
+        self._recipe = recipe  # routes encoder queries (recipe.encode) and weights reconstruction
+        encoder = init.deterministic_orthogonal_(MLP(2, 4), seed=seed)
+        decoder = init.deterministic_orthogonal_(MLP(2, 2), seed=seed + 1)
+        critic = init.deterministic_orthogonal_(MLP(2, 1), seed=seed + 2)
+        prior = init.deterministic_orthogonal_(recipe.make_prior(), seed=seed)
+        return Networks(generator=decoder, critics=critic, prior=prior, encoder=encoder)
+
+    def real(self, n, stream):
+        return sample_data(n, stream)
+
+    def _reconstruct(self, nets, x):
+        query, offset = nets.encoder(x).chunk(2, dim=1)
+        encoded = self._recipe.encode(query, nets.prior, offset=offset)
+        return encoded, nets.generator(encoded.codes[:, 0])
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator":
+            return {}
+        encoded, reconstructed = self._reconstruct(nets, real.x)
+        terms = {
+            "reconstruction": self._recipe.reconstruction_weight
+            * encoded.reconstruction_loss(reconstructed[:, None], real.x),
+            "particle_l2": self.particle_l2 * nets.prior.z.square().mean(),
+            "cover": self.cover_weight * torch.cdist(_anchors(fake.x), fake.x).min(dim=1).values.mean(),
+        }
+        if self.fm_weight > 0:
+            critic = nets.critics
+            gap = critic.features(real.x).detach().mean(0) - critic.features(fake.x).mean(0)
+            terms["feature_matching"] = self.fm_weight * gap.square().mean()
+        return terms
+
+    def metrics(self, model):
+        data = self.real(EVAL_N, model.stream)
+        _, recon = self._reconstruct(model.nets, data)
+        return {"recon_mse": float((recon - data).square().mean()),
+                "hold": _hold_distance(model.sample(EVAL_N).x)}
+
+    def verdict(self, metrics):
+        return verdict(metrics)
 
 
-def make_recipe(cfg: HoldConfig):
-    """Frozen AE host resources with this candidate's numerical settings."""
-    return gan_v3_recipe(
-        prior_kind='mog', sigma_rel=0.025, z_dim=2, total_steps=6000,
-        betas=(0., .999), d_lr_mult=1.5, prior_lr_mult=10., prior_betas=(.5, .999),
-        prior_reg=1., lr_floor=1.,
-        num_particles=cfg.n_particles,
-        reg_every=cfg.reg_lazy,
-        reg_arm=cfg.reg_arm,
-        reg_coeff=cfg.reg_coeff,
-        reg_kappa=cfg.reg_kappa,
-        loss_type=cfg.loss_type,
-        gan_mode=cfg.gan_mode,
-        reconstruction_weight=cfg.reconstruction_weight,
-        lr=cfg.lr,
-        encoder_mode=cfg.encoder_mode,
-    )
+def train_ae_gan_hold(problem: AEGanHold | None = None, *, seed: int = 0, steps: int | None = None,
+                      recipe=None, log=None) -> dict:
+    """Train on the shared runner; the EMA row (top level) plus ``live``, ``curve`` and ``hold_summary``.
+
+    Observations go to ``benchmarks.locked_shared.observation`` recorders.
+    """
+    result = run(AEGanHold() if problem is None else problem, recipe=recipe, seed=seed, steps=steps,
+                 log=log, observer=checkpoint)
+    return {**result["ema"], "live": result["live"], "curve": result["curve"],
+            "hold_summary": result["hold"], "steps": result["steps"], "seed": seed}
 
 
-def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
-    """Train and return reconstruction/hold measurements."""
-    torch.manual_seed(cfg.seed)
-    recipe = make_recipe(cfg)
-    prior = recipe.make_prior()
-    encoder, decoder, critic = MLP(2, 4), MLP(2, 2), MLP(2, 1)
-    if noise_policy is not None:
-        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
-        decoder = wrap_output(decoder, noise_policy)
-        critic = wrap_input(critic, noise_policy)
-    opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
-    if noise_policy is not None:
-        noise_policy.register_generator_optimizer(opt_g, opt_d)
-    gan = recipe.make_loss()
-    regularizer = recipe.make_gradient_penalty(norm=cfg.reg_norm, target_anneal=cfg.target_anneal)
-    # The source's removed regularizer audit reset the CPU RNG to seed 0 and
-    # consumed three uniform values (Linear(2, 1) initialization), then two
-    # 8x2 normal tensors. Preserve that training-data stream for EVERY candidate
-    # without constructing an audit critic or checking its loss/penalty identity.
-    stream = torch.Generator().manual_seed(0)
-    torch.rand(3, generator=stream)
-    torch.randn(8, 2, generator=stream)
-    torch.randn(8, 2, generator=stream)
-    torch.set_rng_state(stream.get_state())
-
-    def measure(step: int):
-        context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
-        with context:
-            return evaluate(encoder, decoder, prior, recipe)
-
-    opened = measure(0)
-    _log(cfg.name, 0, opened, extra=" phase=init")
-    penalty_applied = 0
-    adv_steps = 0
-    for step in range(1, cfg.steps + 1):
-        if noise_policy is not None:
-            noise_policy.set_step(step - 1)
-        data = sample_data(cfg.batch)
-        if cfg.adversarial_weight > 0:
-            codes, _ = prior.sample(cfg.batch)
-            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
-            with context:
-                fake = decoder(codes).detach()
-            opt_d.zero_grad(set_to_none=True)
-            d_loss = gan.d_loss(critic(data).squeeze(-1), critic(fake).squeeze(-1))
-            penalty, stats = regularizer.penalty(critic, data, fake, step=step)
-            if stats.get("applied"):
-                penalty_applied += 1
-            (d_loss + penalty).backward()
-            schedule_optimizer(opt_d, step - 1)
-            opt_d.step()
-
-        query, offset = encoder(data).chunk(2, dim=1)
-        encoded = recipe.encode(query, prior, offset=offset)
-        reconstructed = decoder(encoded.codes[:, 0])
-        recon = encoded.reconstruction_loss(reconstructed[:, None], data)
-        codes, _ = prior.sample(cfg.batch)
-        generated = decoder(codes)
-        opt_g.zero_grad(set_to_none=True)
-        for param in critic.parameters():
-            param.requires_grad_(False)
-        loss = cfg.reconstruction_weight * recon + cfg.particle_l2 * prior.z.square().mean()
-        if cfg.adversarial_weight > 0:
-            real_logits = critic(data).squeeze(-1).detach()
-            fake_logits = critic(generated).squeeze(-1)
-            adv = gan.g_loss(fake_logits, real_logits)
-            anchors = _anchors()
-            cover = torch.cdist(anchors, generated).min(dim=1).values.mean()
-            loss = loss + cfg.adversarial_weight * adv + cfg.cover_weight * cover
-            if cfg.fm_weight > 0:
-                real_feat = critic.features(data).detach().mean(0)
-                fake_feat = critic.features(generated).mean(0)
-                loss = loss + cfg.fm_weight * (real_feat - fake_feat).square().mean()
-            adv_steps += 1
-        loss.backward()
-        for param in critic.parameters():
-            param.requires_grad_(True)
-        schedule_optimizer(opt_g, step - 1)
-        opt_g.step()
-        checkpoint(step, lambda: measure(step))
-        if step == 1 or (step % 50 == 0 and step != cfg.steps):
-            snap = measure(step)
-            _log(cfg.name, step, snap, extra=f" loss={float(loss.detach()):.4f}")
-
-    final = measure(cfg.steps)
-    row = {
-        "name": cfg.name,
-        "cfg": cfg,
-        "recon_mse": final["recon_mse"],
-        "hold": final["hold"],
-        "init_recon_mse": opened["recon_mse"],
-        "penalty_applied": penalty_applied,
-        "adv_steps": adv_steps,
-        "steps": cfg.steps,
-    }
-    return row
+if __name__ == "__main__":
+    raise SystemExit(main(AEGanHold()))

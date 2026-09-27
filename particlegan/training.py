@@ -6,7 +6,7 @@ import torch
 from torch import nn
 
 from .particle_prior import ParticlePrior
-from .recipes import Recipe, learning_rate_scales
+from .recipes import Recipe
 
 
 def input_noise_std(recipe, completed_steps):
@@ -53,11 +53,11 @@ class GANTrainer:
     state as well as this trainer's sampling streams for exact continuation on
     the same device. Sampling never advances training RNG streams.
 
-    Per update: role-wise LR schedule (``learning_rate_scales``), critic step
-    with input noise and the recipe's penalty (``recipe.make_critic_penalty``;
-    the critic optimizer's ``step()`` runs the spike guard and anchor EMA),
-    then a generator/prior step with output noise (the generator optimizer's
-    ``step()`` applies A2 latent damping). The trainer allocates the EMA
+    Per update: critic step with input noise and the recipe's penalty
+    (``recipe.make_critic_penalty``; the critic optimizer's ``step()`` applies
+    the recipe's LR schedule, spike guard and anchor EMA), then a
+    generator/prior step with output noise (the generator optimizer's
+    ``step()`` applies the schedule and A2 latent damping). The trainer allocates the EMA
     critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream.
     Networks train from the weights they arrive with; initialize them first
     (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample`` includes
@@ -100,11 +100,6 @@ class GANTrainer:
         # step-time work runs inside these optimizers' step().
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=deepcopy(self.D), **self.optimizer_options)
-        self.initial_lrs = [[group["lr"] for group in opt.param_groups]
-                            for opt in (self.opt_g, self.opt_d)]
-        prior_ids = {id(p) for p in self.prior.parameters()}
-        self.roles = [["prior" if any(id(p) in prior_ids for p in group["params"]) else "generator"
-                       for group in self.opt_g.param_groups], ["critic"] * len(self.opt_d.param_groups)]
         self.loss = recipe.make_loss()
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
         self.ema_G, self.ema_prior = deepcopy(self.G).eval(), deepcopy(self.prior).eval()
@@ -119,6 +114,11 @@ class GANTrainer:
         self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         self.completed_steps = 0
+
+    @property
+    def initial_lrs(self):
+        """Each optimizer's per-group base LRs (the recipe schedule scales these)."""
+        return [[group["base_lr"] for group in opt.param_groups] for opt in (self.opt_g, self.opt_d)]
 
     @property
     def latent_damping(self):
@@ -177,10 +177,6 @@ class GANTrainer:
                 raise ValueError("generator_real must match the real sample shape")
             if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-        network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
-        for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
-            for group, rate, role in zip(optimizer.param_groups, rates, roles):
-                group["lr"] = rate * (prior_scale if role == "prior" else network)
         sigma_in = input_noise_std(recipe, self.completed_steps)
         sigma_out = output_noise_std(recipe, self.completed_steps)
         noise = self.noise_generator
@@ -272,6 +268,28 @@ class GANTrainer:
             for module, flag in modes:
                 module.training = flag
 
+    def _upgrade_lr_schedule(self, state):
+        """Add the schedule state to optimizer states saved before the optimizers owned it.
+
+        Those checkpoints set group LRs from ``initial_lrs`` and the trainer's
+        step count; the optimizers now carry both, with identical results.
+        """
+        if not isinstance(state, dict) or not isinstance(state.get("optimizers"), list):
+            return state
+        try:
+            optimizers, rates, steps = state["optimizers"], state["initial_lrs"], state["completed_steps"]
+            if not all(isinstance(v, dict) and "lr_schedule" not in v for v in optimizers):
+                return state
+            upgraded = []
+            for values, base, live in zip(optimizers, rates, (self.opt_g, self.opt_d)):
+                groups = [{**group, "role": current["role"], "base_lr": rate}
+                          for group, rate, current in zip(values["param_groups"], base, live.param_groups)]
+                upgraded.append({**values, "param_groups": groups,
+                                 "lr_schedule": {"completed_steps": steps, "network_transition": None}})
+        except (KeyError, TypeError) as error:
+            raise ValueError("invalid GANTrainer checkpoint schema") from error
+        return {**state, "optimizers": upgraded}
+
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
 
     def state_dict(self):
@@ -306,6 +324,7 @@ class GANTrainer:
             state = _upgrade_schema_2(state)
         if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
             state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
+        state = self._upgrade_lr_schedule(state)
         expected = self.state_dict()
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
             raise ValueError("invalid GANTrainer checkpoint schema")
@@ -340,6 +359,10 @@ class GANTrainer:
                 deepcopy(optimizer).load_state_dict(deepcopy(values))
         except (KeyError, TypeError, ValueError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid checkpoint optimizer state") from error
+        saved_rates = [[group.get("base_lr") for group in values["param_groups"]] for values in state["optimizers"]]
+        schedule_steps = [values["lr_schedule"]["completed_steps"] for values in state["optimizers"]]
+        if saved_rates != rates or schedule_steps != [steps, steps]:
+            raise ValueError("checkpoint LR schedule does not match its step count and initial learning rates")
         try:
             for value in state["streams"].values():
                 torch.Generator(device=self.device).set_state(value.cpu())
@@ -354,7 +377,7 @@ class GANTrainer:
             getattr(self, name).load_state_dict(values)
         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
             optimizer.load_state_dict(deepcopy(values))
-        self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+        self.completed_steps = steps
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())
         torch.set_rng_state(state["cpu_rng"].cpu())
