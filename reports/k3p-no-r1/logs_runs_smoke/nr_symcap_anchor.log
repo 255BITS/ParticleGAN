@@ -4,3 +4,10 @@
 08:02:55 native-grid100         FAIL  final modes/HQ=93/0.866 | coverage FAIL accuracy FAIL first100 None massTV 0.0543 | 42s rc=0
 08:03:23 toy-img_bars4          FAIL  passing suffix=0/24 | confirmed None modes=3 hq=1 | 39s rc=0
 # 2026-09-27 08:03:23 arm=nr_symcap_anchor finished
+# 2026-09-27 08:16:57 arm=nr_symcap_anchor device=cuda:1 tasks=5 steps=300
+08:17:11 ring8-shift            FAIL  fails outside transit=None | no shift in budget | 11s rc=0
+08:17:15 toy-two_pole           PASS  passing suffix=14/24 | confirmed 50 mean_abs=1.19 grad_med=0.0821 | 2s rc=0
+08:17:17 native-grid100         FAIL  final modes/HQ=93/0.866 | coverage FAIL accuracy FAIL first100 None massTV 0.0543 | 16s rc=0
+08:17:19 toy-unused_token_hold  PASS  passing suffix=19/24 | confirmed 84 unused_hold=0.999 concept_move=0.945 | 2s rc=0
+08:17:31 toy-img_bars4          FAIL  passing suffix=0/24 | confirmed None modes=3 hq=1 | 11s rc=0
+# 2026-09-27 08:17:31 arm=nr_symcap_anchor finished

@@ -48,6 +48,11 @@ def nr_state(monkeypatch):
         monkeypatch.setitem(nr.NR, "kernels", [])
         monkeypatch.setitem(nr.NR, "sums", {})
         monkeypatch.setitem(nr.NR, "critic_opts", [])
+        for key in ("oadam_by_opt", "adam_by_opt", "guard_reads"):
+            monkeypatch.setitem(nr.NR, key, {})
+        for key in ("r1_evals", "stock_calls", "pairsec_rows", "pairsec_no_neighbor", "oadam_steps"):
+            monkeypatch.setitem(nr.NR, key, 0)
+    set_arm("none", "none")
     return set_arm
 
 
@@ -109,6 +114,37 @@ def test_pairsec_parallel_pair_gives_gradient_norm_and_no_double_backprop():
     # the term is a function of D's outputs only: it backpropagates without create_graph input gradients
     val.backward()
     assert D.w.grad is not None and torch.isfinite(D.w.grad).all()
+
+
+def test_pairsec_all_duplicate_reals_is_inert_and_counted(nr_state):
+    """toy-unused_token_hold feeds 8 identical reals: no distinct neighbour, so the term is 0 by definition (not a
+    1e12-amplified logit round-off) and every row is counted as dropped."""
+    x = batch(n=1).expand(8, D_IN).clone()
+
+    class Jitter(nn.Module):  # identical inputs, logits differing by round-off
+        def forward(self, x):
+            return x.sum(1) * 5.0 + 1e-7 * torch.arange(len(x), dtype=x.dtype)
+    val = nr.spike_term("pairsec", Jitter(), x, x, 1.0)
+    assert float(val) == 0.0
+    assert nr.NR["pairsec_no_neighbor"] == 8 and nr.NR["pairsec_rows"] == 8
+
+
+def test_pairsec_skips_duplicates_to_the_nearest_distinct_real(nr_state):
+    w = torch.tensor([2.0, -1.0, 0.5, 3.0], dtype=torch.float64)
+    D, base = Linear(w), batch(n=5)
+    x = torch.cat([base, base[:2]])  # rows 5, 6 duplicate rows 0, 1
+    slopes = nr.secant_slopes(D, x)
+    assert len(slopes) == 7 and nr.NR["pairsec_no_neighbor"] == 0
+    dist = torch.cdist(x, x)
+    dist[dist <= 1e-6] = float("inf")
+    j = dist.argmin(1)
+    diff = x - x[j]
+    assert torch.allclose(slopes, (diff @ w).abs() / diff.norm(dim=1), rtol=1e-10)
+    # one real plus its duplicate and nothing else: dropped, not divided by ~0
+    y = torch.cat([base[:1], base[:1], base[1:2] + 100.0])
+    assert len(nr.secant_slopes(D, y)) == 3  # each duplicate's nearest distinct real is the far row
+    z = torch.cat([base[:1], base[:1]])
+    assert float(nr.pairsec(D, z, 1.0)) == 0.0 and nr.NR["pairsec_no_neighbor"] == 2
 
 
 def test_pairsec_below_slope_one_is_zero():
@@ -187,7 +223,7 @@ def test_arms_file_is_the_full_factorial_on_gs2():
             want["reg_anchor_weight"] = released.reg_anchor_weight
             assert released.reg_anchor_weight > 0
         assert spec["recipe"] == want
-        assert spec["nr"]["guard_buffer"] == ("max_exp_avg_sq" if spec["nr"]["settle"] == "oadam" else "exp_avg_sq")
+        assert spec["nr"]["guard_buffer"] == "max_exp_avg_sq"  # every arm is AMSGrad: one guard buffer for all
 
 
 # ------------------------------------------------------------------ anchor at constant LR
@@ -236,6 +272,29 @@ def test_anchor_is_active_at_constant_lr(nr_state, monkeypatch):
     assert rec["anchor_active"] and rec["r1_weight_applied"] == 0.0 and rec["penalty_patched"]
 
 
+def test_r1_probe_counts_squared_norms_and_stock_penalty_is_a_sentinel(nr_state, monkeypatch):
+    from benchmarks.legacy import grad_regularizers as legacy_gr
+    monkeypatch.setattr(GradientPenalty, "_grad_norm", GradientPenalty.__dict__["_grad_norm"])
+    monkeypatch.setattr(legacy_gr.GradientPenalty, "_grad_norm", legacy_gr.GradientPenalty._grad_norm)
+    monkeypatch.setattr(GradientPenalty, "_k3p_penalty", GradientPenalty._k3p_penalty)
+    monkeypatch.setattr(nr.sa, "_orig_k3p_penalty", nr.sa._orig_k3p_penalty)
+    stock = GradientPenalty._k3p_penalty
+    nr.install_r1_probe()
+    D, r, f = linear_with_rms_slope(0.5), batch(scale=0.1), batch(seed=1, scale=0.1)
+    kernel = GradientPenalty(coeff=0.3, kappa=1.0, lr_floor=0.0)
+    for spike in nr.SPIKES:  # every nr term: no squared norm requested
+        nr_state(spike, "none")
+        nr._PATH_GEN.clear()
+        nr.nr_penalty(kernel, D, r, f, 1, 0.3, False, None)
+        assert nr.NR["r1_evals"] == 0
+    stock(kernel, D, r, f, 1, 0.3, False, None)  # phase-A R1 is caught by the probe
+    assert nr.NR["r1_evals"] == 1 and nr.receipt({})["r1_weight_applied"] == 1
+    nr.sa._orig_k3p_penalty = nr._stock_penalty_sentinel
+    with pytest.raises(RuntimeError):
+        nr.sa._counted_k3p_penalty(kernel, D, r, f, 1, 0.3, False, None)
+    assert nr.NR["stock_calls"] == 1 and nr.receipt({})["stock_k3p_penalty_calls"] == 1
+
+
 # ------------------------------------------------------------------ oadam critic update + guard buffer
 def test_oadam_dispatch_matches_optimistic_adam_amsgrad(nr_state, monkeypatch):
     nr_state("none", "oadam")
@@ -264,9 +323,30 @@ def test_oadam_dispatch_matches_optimistic_adam_amsgrad(nr_state, monkeypatch):
     list(other.param_groups[0]["params"])[0].sum().backward()
     other.step()
     assert "prev_step" not in next(iter(other.state.values()))
+    # per-optimizer counts: the critic got every update from OAdam, the other Adam only stock steps
+    assert nr.NR["oadam_by_opt"] == {id(opt): 12} and nr.NR["adam_by_opt"][id(other)] == 1
+    assert id(opt) not in nr.NR["adam_by_opt"]
+    assert nr._update_rule(12, 0, 12) == "lib.oadam.OptimisticAdam.step"
+    assert nr._update_rule(0, 12, 12) == "torch.optim.Adam.step"
+    assert nr._update_rule(11, 1, 12).startswith("unverified")
 
 
-def test_guard_reads_max_buffer():
+def test_dispatch_counts_stock_steps_in_non_oadam_arms(nr_state, monkeypatch):
+    nr_state("none", "none")
+    monkeypatch.setattr(torch.optim.Adam, "step", torch.optim.Adam.step)
+    nr.install_oadam()
+    D = _mlp()
+    opt = torch.optim.Adam(D.parameters(), lr=0.01, amsgrad=True)
+    nr.NR["critic_opts"].append(opt)
+    for _ in range(3):
+        opt.zero_grad()
+        D(torch.ones(4, 2)).sum().backward()
+        opt.step()
+    assert nr.NR["adam_by_opt"] == {id(opt): 3} and nr.NR["oadam_by_opt"] == {}
+    assert "prev_step" not in next(iter(opt.state.values()))
+
+
+def test_guard_reads_max_buffer(nr_state):
     p = nn.Parameter(torch.zeros(10))
     opt = torch.optim.Adam([p], lr=0.1, betas=(0.0, 0.999), amsgrad=True)
     opt.state[p] = {"step": torch.tensor(500.0), "exp_avg": torch.zeros(10),
@@ -279,3 +359,41 @@ def test_guard_reads_max_buffer():
     opt.state[p]["step"] = 500
     p.grad = torch.full((10,), 20.0)
     assert int(nr.guard_apply_max(guard, opt)) == 1
+    assert nr.NR["guard_reads"] == {id(opt): {"max_exp_avg_sq": 2}}  # the key actually read is tallied
+
+
+# ------------------------------------------------------------------ leaderboard receipt gate
+def _good_receipt(spike, settle):
+    rule = "lib.oadam.OptimisticAdam.step" if settle == "oadam" else "torch.optim.Adam.step"
+    return dict(spike=spike, settle=settle, penalty_patched=True, nr_penalty_calls=10, r1_evals=0,
+                stock_k3p_penalty_calls=0, d_loss_calls={"rp_hinge" if settle == "hinge" else "rp_softplus": 10},
+                oadam_steps=10 if settle == "oadam" else 0, oadam_steps_non_critic=0,
+                critic_optimizers=[dict(update_rule=rule)], guard_reads={"max_exp_avg_sq": 40},
+                anchor_active=settle == "anchor", pathcap_pair_mismatch=0, lr=dict(lr_constant=True))
+
+
+@pytest.mark.parametrize("arm", sorted(nr.NR_ARMS))
+def test_receipt_gate_accepts_engaged_arms(arm):
+    import summarize_nr as sm
+    spec = nr.NR_ARMS[arm]["nr"]
+    assert sm.receipt_ok(arm, {"nr_receipt": _good_receipt(spec["spike"], spec["settle"])}) == []
+
+
+@pytest.mark.parametrize("change", [
+    dict(nr_penalty_calls=0), dict(r1_evals=3), dict(stock_k3p_penalty_calls=1), dict(oadam_steps=0),
+    dict(d_loss_calls={"rp_softplus": 10}), dict(anchor_active=False), dict(pathcap_pair_mismatch=2),
+    dict(lr=dict(lr_constant=False)), dict(nonfinite_terms=True), dict(guard_reads={"exp_avg_sq": 4}),
+    dict(critic_optimizers=[dict(update_rule="torch.optim.Adam.step")]), dict(settle="none")])
+def test_receipt_gate_rejects_unengaged_overrides(change):
+    import summarize_nr as sm
+    rec = _good_receipt("pathcap", "oadam") | change
+    if "anchor_active" in change:
+        rec = _good_receipt("pathcap", "anchor") | change
+        assert sm.receipt_ok("nr_pathcap_anchor", {"nr_receipt": rec})
+        return
+    if "d_loss_calls" in change:
+        rec = _good_receipt("pathcap", "hinge") | change
+        assert sm.receipt_ok("nr_pathcap_hinge", {"nr_receipt": rec})
+        return
+    assert sm.receipt_ok("nr_pathcap_oadam", {"nr_receipt": rec})
+    assert sm.receipt_ok("nr_pathcap_oadam", {}) == ["no nr_receipt"]

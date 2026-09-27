@@ -5,6 +5,8 @@ Rank: passes on the chosen tasks, then ring fails outside transit (shift + multi
 (coverage + accuracy terminal checks /30), then native within-mode covariance error.
 Native cell: P/F cov/acc checks | final HQ | per-mode cov eig ratio min-max (gate .4-1.7) | worst center RMS/sigma.
 Covariance error = mean over natives of max(|ln min eig ratio|, |ln max eig ratio|) (0 = exact within-mode shape).
+Receipt gate: an nr cell whose nr_receipt shows the arm's override did not engage is marked 'X <reason>' and does not
+count as a pass (reference arms have no nr receipt and are not gated).
 """
 import argparse
 import json
@@ -16,12 +18,47 @@ HERE = Path(__file__).resolve().parent
 REF_ROOT = Path("/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/reports/k3p-constant-suite")
 REFS = {"gs2_c03_lr2_d05": REF_ROOT / "runs_grid", "k3p_simple": REF_ROOT / "runs", "k3p_stock": REF_ROOT / "runs"}
 NATIVE = ("grid100", "rotated100", "staggered100")
+ARMS = json.loads((HERE / "arms.json").read_text())["arms"]
 SCREEN = ["native-grid100", "native-rotated100", "native-staggered100", "toy-img_bars4", "toy-two_pole",
           "ring8-shift", "ring8-multishift"]
 
 
 def results(root, arm):
     return {f.parent.name: json.loads(f.read_text()) for f in (root / arm).glob("*/result.json")}
+
+
+def receipt_ok(arm, r):
+    """Reasons the task's nr_receipt contradicts arms.json[arm] (empty list = the arm engaged as specified)."""
+    rec = (r or {}).get("nr_receipt")
+    if not rec:
+        return ["no nr_receipt"]
+    nr, bad = ARMS[arm]["nr"], []
+    spike, settle = nr["spike"], nr["settle"]
+    if (rec.get("spike"), rec.get("settle")) != (spike, settle):
+        bad.append(f"arm {rec.get('spike')}/{rec.get('settle')}")
+    if not rec.get("penalty_patched") or not rec.get("nr_penalty_calls"):
+        bad.append("nr penalty not called")
+    if rec.get("r1_evals", -1) != 0 or rec.get("stock_k3p_penalty_calls", -1) != 0:
+        bad.append(f"R1 evals {rec.get('r1_evals')} stock {rec.get('stock_k3p_penalty_calls')}")
+    if set(rec.get("d_loss_calls") or {}) != {"rp_hinge" if settle == "hinge" else "rp_softplus"}:
+        bad.append(f"d_loss {rec.get('d_loss_calls')}")
+    if (rec.get("oadam_steps", 0) > 0) != (settle == "oadam") or rec.get("oadam_steps_non_critic", -1) != 0:
+        bad.append(f"oadam steps {rec.get('oadam_steps')} (non-critic {rec.get('oadam_steps_non_critic')})")
+    want_rule = "lib.oadam.OptimisticAdam.step" if settle == "oadam" else "torch.optim.Adam.step"
+    rules = [c.get("update_rule") for c in rec.get("critic_optimizers") or []]
+    if not rules or any(u != want_rule for u in rules):
+        bad.append(f"update rule {rules}")
+    if set(rec.get("guard_reads") or {}) - {nr["guard_buffer"]}:
+        bad.append(f"guard read {rec.get('guard_reads')}")
+    if bool(rec.get("anchor_active")) != (settle == "anchor"):
+        bad.append(f"anchor_active {rec.get('anchor_active')}")
+    if rec.get("pathcap_pair_mismatch", 0) != 0:
+        bad.append(f"pathcap mismatch {rec['pathcap_pair_mismatch']}")
+    if (rec.get("lr") or {}).get("lr_constant") is not True:
+        bad.append("lr not constant")
+    if rec.get("nonfinite_terms"):
+        bad.append("nonfinite terms")
+    return bad
 
 
 def native(root, arm, p):
@@ -57,14 +94,18 @@ def ring(r):
 
 def row(root, arm, tasks):
     res = results(root, arm)
-    ns = {p: native(root, arm, p) for p in NATIVE if f"native-{p}" in tasks}
+    gate = {t: receipt_ok(arm, res[t]) for t in tasks if t in res} if arm in ARMS else {}
+    ns = {p: native(root, arm, p) for p in NATIVE if f"native-{p}" in tasks and not gate.get(f"native-{p}")}
     ok = [n for n in ns.values() if n]
     rfail = sum((((res.get(t) or {}).get("raw") or {}).get("score") or {}).get("fails_outside_transit", 10 ** 4)
-                for t in ("ring8-shift", "ring8-multishift") if t in tasks)
+                for t in ("ring8-shift", "ring8-multishift") if t in tasks and not gate.get(t))
     coverr = (sum(max(abs(math.log(max(n["emin"], 1e-9))), abs(math.log(max(n["emax"], 1e-9)))) for n in ok) / len(ok)
               if ok and all(n["emin"] == n["emin"] for n in ok) else float("nan"))
     cells = []
     for t in tasks:
+        if gate.get(t):
+            cells.append("X " + "; ".join(gate[t])[:60])
+            continue
         if t.startswith("native-"):
             cells.append(ncell(ns.get(t.split("-", 1)[1])))
         elif t.startswith("ring8"):
@@ -72,7 +113,9 @@ def row(root, arm, tasks):
         else:
             r = res.get(t)
             cells.append("–" if r is None else f"{'P' if r.get('passed') else 'F'} {(r.get('metric') or {}).get('value')}")
-    return dict(arm=arm, passes=sum(res[t].get("passed") is True for t in tasks if t in res),
+    inert = [t for t in tasks if ((res.get(t) or {}).get("nr_receipt") or {}).get("pairsec_no_neighbor")]
+    return dict(arm=arm, passes=sum(res[t].get("passed") is True and not gate.get(t) for t in tasks if t in res),
+                inert=inert, gated=sum(bool(v) for v in gate.values()),
                 done=sum(t in res for t in tasks), rfail=rfail, checks=sum(n["cov"] + n["acc"] for n in ok),
                 coverr=coverr, cells=cells)
 
@@ -87,6 +130,12 @@ def table(runs, tasks):
     for i, r in enumerate(rows, 1):
         lines.append(f"| {i} | {r['arm']} | {r['passes']}/{r['done']} | {r['rfail'] if r['rfail'] < 10 ** 4 else '–'} | "
                      f"{r['checks']} | {r['coverr']:.2f} | " + " | ".join(r["cells"]) + " |")
+    gated = [f"{r['arm']} ({r['gated']})" for r in rows if r.get("gated")]
+    if gated:
+        lines.append(f"\nReceipt-gated cells (X, not counted as passes): {', '.join(gated)}")
+    inert = [f"{r['arm']}: {', '.join(r['inert'])}" for r in rows if r.get("inert")]
+    if inert:
+        lines.append(f"\npairsec dropped rows with no distinct real neighbour (see pairsec_no_neighbor): {'; '.join(inert)}")
     return lines
 
 

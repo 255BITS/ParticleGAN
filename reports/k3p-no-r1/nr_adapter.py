@@ -13,13 +13,18 @@ after ``suite_adapter.install``, so they reach every host the same way the suite
   only) become mean relu(1 - (D(r) - D(f))); g_loss is untouched. Every arm counts its d_loss calls by form.
 * oadam: ``torch.optim.Adam.step`` is replaced by a hooked dispatcher. For the critic optimizer (GANTrainer:
   ``trainer.opt_d``; legacy: the critic the suite identifies) it runs ``lib/oadam.py`` ``OptimisticAdam.step`` on
-  that optimizer's own param groups/state (amsgrad must be on); every other Adam runs the stock update. The spike
-  guard reads ``max_exp_avg_sq`` in these arms (``guard_buffer``).
+  that optimizer's own param groups/state (amsgrad must be on); every other Adam runs the stock update. The
+  dispatcher is installed in every arm (non-oadam arms route everything to the stock update) so each optimizer's
+  update rule is counted, not assumed.
+* spike guard (all arms): every arm is AMSGrad, so the guard reads ``max_exp_avg_sq``, the buffer the update uses
+  (``guard_buffer``); the key actually read is tallied per optimizer.
 * anchor: the EMA-anchor prox term, normally gated on s < 1 (LR annealed below peak), is evaluated at s == 1.
   The anchor starts on the first penalty call where it can (the legacy swap anchor needs the critic identified),
   then the critic's step record advances the EMA after every critic step, as in K3P's phase B.
 
-Receipts: ``receipt()`` -> nr_receipt.json in each task dir (and ``nr_receipt`` inside result.json).
+Receipts: ``receipt()`` -> nr_receipt.json in each task dir (and ``nr_receipt`` inside result.json). R1 is measured:
+every squared input-gradient norm (the R1 kernel; nr terms never use it) is counted, and the stock K3P penalty is a
+sentinel that counts and raises.
 """
 from __future__ import annotations
 
@@ -58,7 +63,10 @@ PATH_SEED = 7  # pathcap interpolation stream (one per device, per task process)
 
 NR = {"arm": None, "spike": None, "settle": None, "guard_buffer": None, "installed": False,
       "critic_opts": [], "kernels": [], "oadam_steps": 0, "d_loss": {}, "pair_mismatch": 0,
-      "sums": {}, "penalty_calls": 0, "anchor_start_step": None, "anchor_deferred": 0}
+      "sums": {}, "penalty_calls": 0, "anchor_start_step": None, "anchor_deferred": 0,
+      "oadam_by_opt": {}, "adam_by_opt": {}, "guard_reads": {}, "r1_evals": 0, "stock_calls": 0,
+      "pairsec_rows": 0, "pairsec_no_neighbor": 0}
+DUP_DIST = 1e-6  # pairsec: reals closer than this are duplicates, not neighbours
 _PATH_GEN = {}
 
 
@@ -87,26 +95,42 @@ def path_points(x_real, x_fake, u):
 
 
 def nearest_other(x):
-    """Index of each row's nearest other row (Euclidean on flattened rows) and that distance."""
+    """Each row's nearest *distinct* other row (Euclidean on flattened rows): index, distance, has-neighbour mask.
+
+    The diagonal and exact/near duplicates (distance <= DUP_DIST) are excluded; a row with no distinct neighbour has
+    valid == False and must be dropped (a zero-distance secant is undefined, not a slope).
+    """
     flat = x.detach().flatten(1)
     dist = torch.cdist(flat, flat, compute_mode="donot_use_mm_for_euclid_dist")
     dist.fill_diagonal_(float("inf"))
-    j = dist.argmin(dim=1)
-    return j, (flat - flat[j]).norm(dim=1)
+    dist.masked_fill_(dist <= DUP_DIST, float("inf"))
+    best, j = dist.min(dim=1)
+    valid = torch.isfinite(best)
+    return j, (flat - flat[j]).norm(dim=1), valid
 
 
 def secant_slopes(D, x_real):
-    """|D(r_i) - D(r_j)| / ||r_i - r_j|| with r_j = nearest other real; gradient flows through D only."""
-    j, dist = nearest_other(x_real)
+    """|D(r_i) - D(r_j)| / ||r_i - r_j|| with r_j = nearest distinct other real, for rows that have one.
+
+    Gradient flows through D only. Rows without a distinct neighbour are dropped (counted in the receipt).
+    """
+    j, dist, valid = nearest_other(x_real)
+    NR["pairsec_rows"] += len(x_real)
+    NR["pairsec_no_neighbor"] += int((~valid).sum())
     logits = per_sample(D(x_real.detach()))
-    return (logits - logits[j]).abs() / dist.clamp_min(1e-12)
+    return ((logits - logits[j]).abs() / dist.clamp_min(DUP_DIST))[valid]
 
 
 def pairsec(D, x_real, kappa):
     if len(x_real) < 2:
+        NR["pairsec_rows"] += len(x_real)
+        NR["pairsec_no_neighbor"] += len(x_real)
         return x_real.new_zeros(())
     d = x_real[0].numel()
-    return (secant_slopes(D, x_real) / d ** 0.5 - kappa).relu().square().mean()
+    slopes = secant_slopes(D, x_real)
+    if slopes.numel() == 0:
+        return x_real.new_zeros(())
+    return (slopes / d ** 0.5 - kappa).relu().square().mean()
 
 
 def dvalcap(D, x_real, margin=1.0):
@@ -254,18 +278,24 @@ def _is_critic(opt):
     return any(opt is o for o in NR["critic_opts"]) or (sa.LEG["enabled"] and opt is sa.LEG["critic"])
 
 
+def _tally(table, key):
+    table[key] = table.get(key, 0) + 1
+
+
 def oadam_update(opt, closure=None):
     """``OptimisticAdam.step`` on ``opt``'s own groups/state (the critic Adam object keeps its hooks and class)."""
     for g in opt.param_groups:
         if not g.get("amsgrad") or g.get("weight_decay", 0) != 0 or g.get("maximize", False):
             raise ValueError(f"oadam critic needs amsgrad on, no weight decay, no maximize: {g.get('amsgrad')}")
     NR["oadam_steps"] += 1
+    _tally(NR["oadam_by_opt"], id(opt))
     return _RAW_OADAM(opt, closure)
 
 
 def _dispatch(self, closure=None):
     if NR["settle"] == "oadam" and _is_critic(self):
         return oadam_update(self, closure)
+    _tally(NR["adam_by_opt"], id(self))
     return _RAW_ADAM(self, closure)
 
 
@@ -288,7 +318,9 @@ def guard_apply_max(self, optimizer):
                 st = optimizer.state.get(p)
                 if p.grad is None or not st or "exp_avg_sq" not in st:
                     continue
-                buf = st["max_exp_avg_sq"] if "max_exp_avg_sq" in st else st["exp_avg_sq"]
+                key = "max_exp_avg_sq" if "max_exp_avg_sq" in st else "exp_avg_sq"
+                _tally(NR["guard_reads"].setdefault(id(optimizer), {}), key)
+                buf = st[key]
                 t = st["step"]
                 vhat = buf.mean() / (1.0 - beta2 ** t)
                 ratio = p.grad.square().mean().sqrt() / vhat.clamp_min(1e-30).sqrt()
@@ -310,15 +342,42 @@ def install_nr(arm_name):
     if nr["spike"] not in SPIKES or nr["settle"] not in SETTLES:
         raise ValueError(f"bad nr arm {arm_name}: {nr}")
     NR.update(arm=arm_name, spike=nr["spike"], settle=nr["settle"], guard_buffer=nr["guard_buffer"])
-    if nr["guard_buffer"] == "max_exp_avg_sq":
-        CriticSpikeGuard.apply_ = guard_apply_max
-    if nr["settle"] == "oadam":
-        install_oadam()
+    if nr["guard_buffer"] != "max_exp_avg_sq":
+        raise ValueError(f"every nr arm is AMSGrad: the guard must read max_exp_avg_sq, got {nr['guard_buffer']}")
+    CriticSpikeGuard.apply_ = guard_apply_max
+    install_oadam()  # every arm: the dispatcher counts each optimizer's update rule
+
+
+def _stock_penalty_sentinel(self, *args, **kwargs):
+    NR["stock_calls"] += 1
+    raise RuntimeError("stock K3P penalty (phase-A R1) called in an nr arm")
+
+
+def install_r1_probe():
+    """Count every squared input-gradient norm (R1's kernel) on both penalty classes; nr terms never request one."""
+    raw_pkg = K3PKernel.__dict__["_grad_norm"].__func__  # staticmethod
+
+    def pkg_grad_norm(D, x, squared=False):
+        NR["r1_evals"] += bool(squared)
+        return raw_pkg(D, x, squared=squared)
+    K3PKernel._grad_norm = staticmethod(pkg_grad_norm)
+    try:
+        from benchmarks.legacy import grad_regularizers as legacy_gr
+    except ImportError:
+        return
+    raw_leg = legacy_gr.GradientPenalty._grad_norm
+
+    def legacy_grad_norm(self, D, x, squared=False):
+        NR["r1_evals"] += bool(squared)
+        return raw_leg(self, D, x, squared=squared)
+    legacy_gr.GradientPenalty._grad_norm = legacy_grad_norm
 
 
 def install_post():
     """Patches after ``suite_adapter.install`` (which sets its own penalty variant and trainer wrapper)."""
     K3PKernel._k3p_penalty = nr_penalty
+    sa._orig_k3p_penalty = _stock_penalty_sentinel  # the suite's counted wrapper calls this global
+    install_r1_probe()
     pkg_gan_loss.GANLoss.d_loss = _pkg_d_loss
     try:
         from benchmarks.legacy import gan_loss as legacy_gan_loss
@@ -353,21 +412,45 @@ def _has_guard(opt):
     return getattr(opt, "guard", None) is not None
 
 
-def _critic_rows():
+def _critic_list():
     opts = list(NR["critic_opts"])
     if sa.LEG["enabled"] and sa.LEG["critic"] is not None and not any(sa.LEG["critic"] is o for o in opts):
         opts.append(sa.LEG["critic"])
+    return opts
+
+
+def _lr_steps(opt):
+    """Steps the suite's LR receipt (global post-step hook) saw for ``opt``: an independent step count."""
+    idx = next((i for i, o in enumerate(sa._OPTS) if o is opt), None)
+    row = (sa.RECEIPT.get("lr") or {}).get(f"opt{idx}.g0") if idx is not None else None
+    return None if row is None else row["steps"]
+
+
+def _update_rule(oadam, adam, steps):
+    if steps and adam == 0 and oadam == steps:
+        return "lib.oadam.OptimisticAdam.step"
+    if steps and oadam == 0 and adam == steps:
+        return "torch.optim.Adam.step"
+    return f"unverified(oadam={oadam}, adam={adam}, steps={steps})"
+
+
+def _critic_rows():
     rows = []
-    for opt in opts:
+    for opt in _critic_list():
         keys = sorted({k for st in opt.state.values() for k in st})
-        oadam = NR["settle"] == "oadam"
-        rows.append(dict(cls=type(opt).__name__,
-                         update_rule="lib.oadam.OptimisticAdam.step" if oadam else "torch.optim.Adam.step",
+        o, a, n = NR["oadam_by_opt"].get(id(opt), 0), NR["adam_by_opt"].get(id(opt), 0), _lr_steps(opt)
+        rows.append(dict(cls=type(opt).__name__, update_rule=_update_rule(o, a, n), oadam_steps=o, adam_steps=a,
+                         lr_receipt_steps=n,
                          amsgrad=[bool(g.get("amsgrad")) for g in opt.param_groups],
                          betas=[list(g["betas"]) for g in opt.param_groups],
                          lr=[float(g["lr"]) for g in opt.param_groups], state_keys=keys,
-                         guard=NR["guard_buffer"] if _has_guard(opt) else None))
+                         guard=_has_guard(opt), guard_reads=dict(NR["guard_reads"].get(id(opt), {}))))
     return rows
+
+
+def _non_critic_oadam_steps():
+    critic_ids = {id(o) for o in _critic_list()}
+    return sum(v for k, v in NR["oadam_by_opt"].items() if k not in critic_ids)
 
 
 def receipt(cfg):
@@ -380,15 +463,19 @@ def receipt(cfg):
         "positive_frac", 0) > 0
     rec = dict(
         arm=NR["arm"], spike=NR["spike"], settle=NR["settle"],
-        r1_weight_applied=0.0,
+        r1_weight_applied=0.0 if NR["r1_evals"] == 0 else NR["r1_evals"], r1_evals=NR["r1_evals"],
         penalty_patched=K3PKernel._k3p_penalty is nr_penalty,
         penalty_form=(f"c/2*[{NR['spike']} + fake_cap" + (" + anchor_weight*prox" if NR["settle"] == "anchor" else "")
                       + "]"),
-        nr_penalty_calls=NR["penalty_calls"], stock_k3p_penalty_calls=sa.ACTIVITY.get("penalty_calls", 0),
+        nr_penalty_calls=NR["penalty_calls"], stock_k3p_penalty_calls=NR["stock_calls"],
         term_stats=sums, pathcap_pair_mismatch=NR["pair_mismatch"],
+        pairsec_rows=NR["pairsec_rows"], pairsec_no_neighbor=NR["pairsec_no_neighbor"],
         loss_form="rp_hinge" if NR["settle"] == "hinge" else "rp_softplus", d_loss_calls=dict(NR["d_loss"]),
         g_loss="RpGAN softplus (unchanged)",
-        critic_optimizers=_critic_rows(), oadam_steps=NR["oadam_steps"], guard_buffer=NR["guard_buffer"],
+        critic_optimizers=_critic_rows(), oadam_steps=NR["oadam_steps"],
+        oadam_steps_non_critic=_non_critic_oadam_steps(),
+        guard_reads={k: sum(t.get(k, 0) for t in NR["guard_reads"].values())
+                     for k in sorted({k for t in NR["guard_reads"].values() for k in t})},
         anchor_active=anchor_active if NR["settle"] == "anchor" else False,
         anchor_start_step=NR["anchor_start_step"], anchor_deferred_calls=NR["anchor_deferred"], kernels=kernels,
         noise=dict(declared={k: cfg.get(k) for k in ("input_noise_std", "output_noise_std")},

@@ -34,7 +34,7 @@
   "holdout": null,
   "stable_pass": null
  },
- "seconds": 42.0,
+ "seconds": 16.3,
  "init": {
   "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
   "init_sha256": "46c10b8db2a8b99c775024f2f4b8b947ded82cf88190a3c1721a1d936ba51e82",
@@ -133,6 +133,7 @@
   "spike": "symcap",
   "settle": "anchor",
   "r1_weight_applied": 0.0,
+  "r1_evals": 0,
   "penalty_patched": true,
   "penalty_form": "c/2*[symcap + fake_cap + anchor_weight*prox]",
   "nr_penalty_calls": 300,
@@ -155,6 +156,8 @@
    }
   },
   "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
   "loss_form": "rp_softplus",
   "d_loss_calls": {
    "rp_softplus": 300
@@ -164,6 +167,9 @@
    {
     "cls": "K3PCriticAdam",
     "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 300,
+    "lr_receipt_steps": 300,
     "amsgrad": [
      true
     ],
@@ -182,11 +188,17 @@
      "max_exp_avg_sq",
      "step"
     ],
-    "guard": "exp_avg_sq"
+    "guard": true,
+    "guard_reads": {
+     "max_exp_avg_sq": 2392
+    }
    }
   ],
   "oadam_steps": 0,
-  "guard_buffer": "exp_avg_sq",
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "max_exp_avg_sq": 2392
+  },
   "anchor_active": true,
   "anchor_start_step": 0,
   "anchor_deferred_calls": 0,

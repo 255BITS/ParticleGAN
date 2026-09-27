@@ -25,5 +25,5 @@ eval    74 mean_abs=1.397 grad_med=0.7564
 eval    77 mean_abs=1.441 grad_med=0.5186
 eval    80 mean_abs=1.476 grad_med=0.2433
 {"event": "DONE", "task": "two_pole", "status": "FAIL", "suffix": 3, "live": {"mean_abs": 1.4761853218078613, "grad_med": 0.2432684302330017}, "error": null}
-# DONE toy-two_pole status=FAIL metric={'name': 'passing suffix', 'value': '3/24'} 2s
+# DONE toy-two_pole status=FAIL metric={'name': 'passing suffix', 'value': '3/24'} 1s
 # NR receipt spike=pairsec settle=hinge r1=0.0 loss={'rp_hinge': 80} oadam_steps=0 anchor_active=False penalty_calls=80 stock_calls=0

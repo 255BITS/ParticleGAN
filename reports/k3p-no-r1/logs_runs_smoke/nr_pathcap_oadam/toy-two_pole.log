@@ -25,5 +25,5 @@ eval    74 mean_abs=1.553 grad_med=0.402
 eval    77 mean_abs=1.58 grad_med=0.2471
 eval    80 mean_abs=1.598 grad_med=0.08531
 {"event": "DONE", "task": "two_pole", "status": "PASS", "suffix": 7, "live": {"mean_abs": 1.5983580350875854, "grad_med": 0.08530610799789429}, "error": null}
-# DONE toy-two_pole status=PASS metric={'name': 'passing suffix', 'value': '7/24'} 2s
+# DONE toy-two_pole status=PASS metric={'name': 'passing suffix', 'value': '7/24'} 1s
 # NR receipt spike=pathcap settle=oadam r1=0.0 loss={'rp_softplus': 80} oadam_steps=80 anchor_active=False penalty_calls=80 stock_calls=0

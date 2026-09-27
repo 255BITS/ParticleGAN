@@ -4,3 +4,10 @@
 08:03:07 native-grid100         FAIL  final modes/HQ=100/0.986 | coverage FAIL accuracy FAIL first100 250 massTV 0.04905 | 55s rc=0
 08:03:35 toy-img_bars4          FAIL  passing suffix=3/24 | confirmed None modes=4 hq=0.938 | 54s rc=0
 # 2026-09-27 08:03:35 arm=nr_pathcap_oadam finished
+# 2026-09-27 08:16:57 arm=nr_pathcap_oadam device=cuda:1 tasks=5 steps=300
+08:17:11 ring8-shift            FAIL  fails outside transit=None | no shift in budget | 10s rc=0
+08:17:15 native-grid100         FAIL  final modes/HQ=100/0.986 | coverage FAIL accuracy FAIL first100 250 massTV 0.04905 | 16s rc=0
+08:17:15 toy-two_pole           PASS  passing suffix=7/24 | confirmed 74 mean_abs=1.6 grad_med=0.0853 | 1s rc=0
+08:17:19 toy-unused_token_hold  PASS  passing suffix=10/24 | confirmed 159 unused_hold=0.997 concept_move=0.974 | 2s rc=0
+08:17:31 toy-img_bars4          FAIL  passing suffix=3/24 | confirmed None modes=4 hq=0.938 | 10s rc=0
+# 2026-09-27 08:17:31 arm=nr_pathcap_oadam finished

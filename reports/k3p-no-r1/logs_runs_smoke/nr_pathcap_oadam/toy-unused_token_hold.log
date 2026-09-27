@@ -1,0 +1,34 @@
+# arm=nr_pathcap_oadam task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9880 concept=0.0000 unused_dist=0.0120
+eval     9 unused_hold=0.9856 concept_move=0.04009 unused_dist=0.01444 concept_cos=0.2526 concept_delta_norm=0.1587 scale0_err=0
+eval    17 unused_hold=0.9738 concept_move=0.3173 unused_dist=0.02617 concept_cos=0.8874 concept_delta_norm=0.3576 scale0_err=0
+eval    25 unused_hold=0.9627 concept_move=0.5714 unused_dist=0.03728 concept_cos=0.9884 concept_delta_norm=0.5781 scale0_err=0
+eval    34 unused_hold=0.9606 concept_move=0.8244 unused_dist=0.03935 concept_cos=0.9902 concept_delta_norm=0.8326 scale0_err=0
+eval    42 unused_hold=0.9651 concept_move=0.9988 unused_dist=0.03485 concept_cos=0.9993 concept_delta_norm=0.9995 scale0_err=0
+eval    50 unused_hold=0.9751 concept_move=0.8783 unused_dist=0.02493 concept_cos=0.9999 concept_delta_norm=1.122 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9751 concept=0.8783 unused_dist=0.0249
+eval    59 unused_hold=0.9834 concept_move=0.7775 unused_dist=0.01662 concept_cos=0.9993 concept_delta_norm=1.222 scale0_err=0
+eval    67 unused_hold=0.9913 concept_move=0.7286 unused_dist=0.008717 concept_cos=1 concept_delta_norm=1.271 scale0_err=0
+eval    75 unused_hold=0.9972 concept_move=0.7264 unused_dist=0.002776 concept_cos=1 concept_delta_norm=1.274 scale0_err=0
+eval    84 unused_hold=0.9858 concept_move=0.7959 unused_dist=0.01417 concept_cos=1 concept_delta_norm=1.204 scale0_err=0
+eval    92 unused_hold=0.9783 concept_move=0.9163 unused_dist=0.02169 concept_cos=1 concept_delta_norm=1.084 scale0_err=0
+eval   100 unused_hold=0.9789 concept_move=0.9516 unused_dist=0.0211 concept_cos=0.9999 concept_delta_norm=0.9517 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9789 concept=0.9516 unused_dist=0.0211
+eval   109 unused_hold=0.9883 concept_move=0.8585 unused_dist=0.01173 concept_cos=1 concept_delta_norm=0.8585 scale0_err=0
+eval   117 unused_hold=0.9971 concept_move=0.8276 unused_dist=0.00286 concept_cos=0.9998 concept_delta_norm=0.8278 scale0_err=0
+eval   125 unused_hold=0.9939 concept_move=0.8531 unused_dist=0.006053 concept_cos=0.9998 concept_delta_norm=0.8533 scale0_err=0
+eval   134 unused_hold=0.9873 concept_move=0.9354 unused_dist=0.01266 concept_cos=1 concept_delta_norm=0.9355 scale0_err=0
+eval   142 unused_hold=0.9877 concept_move=0.9745 unused_dist=0.01226 concept_cos=0.9998 concept_delta_norm=1.025 scale0_err=0
+eval   150 unused_hold=0.995 concept_move=0.9189 unused_dist=0.005017 concept_cos=0.9986 concept_delta_norm=1.08 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9950 concept=0.9189 unused_dist=0.0050
+eval   159 unused_hold=0.995 concept_move=0.9128 unused_dist=0.00498 concept_cos=1 concept_delta_norm=1.087 scale0_err=0
+eval   167 unused_hold=0.9944 concept_move=0.9356 unused_dist=0.005595 concept_cos=1 concept_delta_norm=1.064 scale0_err=0
+eval   175 unused_hold=0.9932 concept_move=0.9801 unused_dist=0.006794 concept_cos=0.9998 concept_delta_norm=1.02 scale0_err=0
+eval   184 unused_hold=0.9944 concept_move=0.9742 unused_dist=0.005639 concept_cos=0.9991 concept_delta_norm=0.9751 scale0_err=0
+eval   192 unused_hold=0.9987 concept_move=0.9589 unused_dist=0.001323 concept_cos=0.9999 concept_delta_norm=0.959 scale0_err=0
+eval   200 unused_hold=0.9974 concept_move=0.9736 unused_dist=0.002603 concept_cos=0.9995 concept_delta_norm=0.9741 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9974 concept=0.9736 unused_dist=0.0026
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 10, "live": {"unused_hold": 0.9973973443266004, "concept_move": 0.9736259898290776}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '10/24'} 2s
+# NR receipt spike=pathcap settle=oadam r1=0.0 loss={'rp_softplus': 200} oadam_steps=200 anchor_active=False penalty_calls=200 stock_calls=0

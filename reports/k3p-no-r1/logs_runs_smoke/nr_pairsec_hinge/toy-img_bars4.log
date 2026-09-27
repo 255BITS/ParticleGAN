@@ -1,29 +1,29 @@
 # arm=nr_pairsec_hinge task=toy-img_bars4 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
 START img_bars4 route=GANTrainer + generic noise wrappers steps=600
-train     25/600 Ld=+0.5386 Lg=+1.1047 pen=0 s=1 lr_d=0.00425 3s
-train     50/600 Ld=+0.6164 Lg=+1.1419 pen=0 s=1 lr_d=0.00425 5s
-train     75/600 Ld=+0.3430 Lg=+1.6729 pen=0 s=1 lr_d=0.00425 7s
-train    100/600 Ld=+0.3921 Lg=+1.7767 pen=0 s=1 lr_d=0.00425 8s
-train    125/600 Ld=+0.5869 Lg=+1.3642 pen=0 s=1 lr_d=0.00425 10s
-train    150/600 Ld=+0.9171 Lg=+1.3741 pen=0 s=1 lr_d=0.00425 11s
-train    175/600 Ld=+0.7965 Lg=+1.0276 pen=0 s=1 lr_d=0.00425 13s
-train    200/600 Ld=+0.7046 Lg=+1.2576 pen=0 s=1 lr_d=0.00425 14s
-train    225/600 Ld=+0.5044 Lg=+1.3167 pen=0 s=1 lr_d=0.00425 16s
-train    250/600 Ld=+0.7447 Lg=+1.1858 pen=0 s=1 lr_d=0.00425 17s
-train    275/600 Ld=+0.8631 Lg=+1.0273 pen=0 s=1 lr_d=0.00425 19s
-train    300/600 Ld=+0.4702 Lg=+1.4487 pen=0 s=1 lr_d=0.00425 20s
-train    325/600 Ld=+0.7542 Lg=+1.0515 pen=0 s=1 lr_d=0.00425 21s
-train    350/600 Ld=+0.6054 Lg=+1.1266 pen=0 s=1 lr_d=0.00425 23s
-train    375/600 Ld=+0.7352 Lg=+1.0760 pen=0 s=1 lr_d=0.00425 24s
-train    400/600 Ld=+0.8417 Lg=+0.9868 pen=0 s=1 lr_d=0.00425 25s
-train    425/600 Ld=+0.8351 Lg=+0.9736 pen=0 s=1 lr_d=0.00425 26s
-train    450/600 Ld=+0.6923 Lg=+1.2981 pen=0 s=1 lr_d=0.00425 28s
-train    475/600 Ld=+0.6147 Lg=+1.4402 pen=0 s=1 lr_d=0.00425 29s
-train    500/600 Ld=+0.5476 Lg=+1.1668 pen=0 s=1 lr_d=0.00425 30s
-train    525/600 Ld=+0.5957 Lg=+1.1134 pen=0 s=1 lr_d=0.00425 32s
-train    550/600 Ld=+0.6931 Lg=+1.2146 pen=0 s=1 lr_d=0.00425 33s
-train    575/600 Ld=+0.6291 Lg=+1.3759 pen=0 s=1 lr_d=0.00425 34s
-train    600/600 Ld=+0.7503 Lg=+1.0497 pen=0 s=1 lr_d=0.00425 36s
+train     25/600 Ld=+0.5386 Lg=+1.1047 pen=0 s=1 lr_d=0.00425 1s
+train     50/600 Ld=+0.6164 Lg=+1.1419 pen=0 s=1 lr_d=0.00425 1s
+train     75/600 Ld=+0.3430 Lg=+1.6729 pen=0 s=1 lr_d=0.00425 2s
+train    100/600 Ld=+0.3921 Lg=+1.7767 pen=0 s=1 lr_d=0.00425 2s
+train    125/600 Ld=+0.5869 Lg=+1.3642 pen=0 s=1 lr_d=0.00425 2s
+train    150/600 Ld=+0.9171 Lg=+1.3741 pen=0 s=1 lr_d=0.00425 3s
+train    175/600 Ld=+0.7965 Lg=+1.0276 pen=0 s=1 lr_d=0.00425 3s
+train    200/600 Ld=+0.7046 Lg=+1.2576 pen=0 s=1 lr_d=0.00425 4s
+train    225/600 Ld=+0.5044 Lg=+1.3167 pen=0 s=1 lr_d=0.00425 4s
+train    250/600 Ld=+0.7447 Lg=+1.1858 pen=0 s=1 lr_d=0.00425 4s
+train    275/600 Ld=+0.8631 Lg=+1.0273 pen=0 s=1 lr_d=0.00425 5s
+train    300/600 Ld=+0.4702 Lg=+1.4487 pen=0 s=1 lr_d=0.00425 5s
+train    325/600 Ld=+0.7542 Lg=+1.0515 pen=0 s=1 lr_d=0.00425 5s
+train    350/600 Ld=+0.6054 Lg=+1.1266 pen=0 s=1 lr_d=0.00425 6s
+train    375/600 Ld=+0.7352 Lg=+1.0760 pen=0 s=1 lr_d=0.00425 6s
+train    400/600 Ld=+0.8417 Lg=+0.9868 pen=0 s=1 lr_d=0.00425 6s
+train    425/600 Ld=+0.8351 Lg=+0.9736 pen=0 s=1 lr_d=0.00425 7s
+train    450/600 Ld=+0.6923 Lg=+1.2981 pen=0 s=1 lr_d=0.00425 7s
+train    475/600 Ld=+0.6147 Lg=+1.4402 pen=0 s=1 lr_d=0.00425 7s
+train    500/600 Ld=+0.5476 Lg=+1.1668 pen=0 s=1 lr_d=0.00425 8s
+train    525/600 Ld=+0.5957 Lg=+1.1134 pen=0 s=1 lr_d=0.00425 8s
+train    550/600 Ld=+0.6931 Lg=+1.2146 pen=0 s=1 lr_d=0.00425 8s
+train    575/600 Ld=+0.6291 Lg=+1.3759 pen=0 s=1 lr_d=0.00425 9s
+train    600/600 Ld=+0.7503 Lg=+1.0497 pen=0 s=1 lr_d=0.00425 9s
 {"event": "DONE", "task": "img_bars4", "status": "FAIL", "suffix": 0, "live": {"modes": 3, "hq": 1.0, "mean_rmse": 3.89024535252247e-05, "quality_mode_fractions": [0.0, 0.21875, 0.34375, 0.4375], "mode_fractions": [0.0, 0.21875, 0.34375, 0.4375], "distribution_tv": 0.28125}, "error": null}
-# DONE toy-img_bars4 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 38s
+# DONE toy-img_bars4 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 10s
 # NR receipt spike=pairsec settle=hinge r1=0.0 loss={'rp_hinge': 600} oadam_steps=0 anchor_active=False penalty_calls=600 stock_calls=0

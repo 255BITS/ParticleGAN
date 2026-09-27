@@ -7,6 +7,12 @@ R1 does two jobs, spike control and local settling, so this study removes R1 and
 Base for every arm: `gs2_c03_lr2_d05` from `../k3p-constant-suite/GRID.md`. That is k3p_simple with reg_coeff .3,
 lr .0085 and d_lr_mult .5: RpGAN, one-sided RMS fake cap, AMSGrad (0, .999), constant LR, no instance noise, no EMA
 anchor, no direct-particle response, spike guard and A2 on. Every arm removes R1 on reals. The fake cap always stays.
+Every arm is AMSGrad, so in every arm the spike guard reads `max_exp_avg_sq`, the second moment the update actually
+uses. The gs2 reference guard read `exp_avg_sq`, so the control `nr_none_none` differs from the `gs2_c03_lr2_d05`
+reference in two ways: R1 is removed and the guard reads a different buffer. Since `max_exp_avg_sq >= exp_avg_sq`,
+the guard clips less. In the gs2 runs it clipped 138/267 tensors on ring8-shift/multishift and 3 on
+native-staggered100. The guard buffer is the same across all 20 arms, so the settle factor changes only the settling
+mechanism.
 All terms are in RMS units (d = critic input size) and scaled by `reg_coeff/2`, K3P's convention:
 
     pen = c/2 * [spike + mean relu(||grad D(f)||/sqrt d - kappa)^2 (+ anchor_weight * prox)]
@@ -16,14 +22,14 @@ All terms are in RMS units (d = critic input size) and scaled by `reg_coeff/2`, 
 | none | nothing (the R1-removed control) |
 | symcap | mean relu(\|\|grad D(r)\|\|/sqrt d - kappa)^2 |
 | pathcap | the same cap at x = r + u (f - r), u ~ U(0,1) per batch-index pair |
-| pairsec | secant slope s_i = \|D(r_i) - D(r_j)\| / \|\|r_i - r_j\|\|, r_j = nearest other real; mean relu(s/sqrt d - kappa)^2 (no double backprop) |
+| pairsec | secant slope s_i = \|D(r_i) - D(r_j)\| / \|\|r_i - r_j\|\|, r_j = nearest distinct other real (distance > 1e-6); mean relu(s/sqrt d - kappa)^2 over rows that have one, 0 if none (no double backprop) |
 | dvalcap | mean relu(\|D(r) - mean_batch D(r)\| - 1)^2 |
 
 | settle | change |
 |---|---|
 | none | nothing |
 | hinge | critic loss mean relu(1 - (D(r) - D(f))), same pairing; the generator keeps RpGAN softplus |
-| oadam | critic update = `lib/oadam.py` OptimisticAdam(amsgrad=True), betas (0, .999), base critic LR; the spike guard reads `max_exp_avg_sq` |
+| oadam | critic update = `lib/oadam.py` OptimisticAdam(amsgrad=True), betas (0, .999), base critic LR |
 | anchor | K3P's EMA-anchor prox term (stock weight 1, decay .999) forced on at constant LR, where it is normally gated off (s == 1) |
 
 That gives 20 arms, `nr_<spike>_<settle>` (`gen_arms.py` -> `arms.json`).
@@ -47,23 +53,40 @@ k3p-constant-fix worktree and are not rerun.
 
 ## Receipts
 
-Every task directory gets an `nr_receipt.json`, also merged into `result.json` as `nr_receipt`. It records:
-- `r1_weight_applied` (always 0), and proof the stock K3P penalty never ran (`stock_k3p_penalty_calls`)
-- the active spike term, with per-term mean and fraction of calls with a nonzero term
-- the loss form and d_loss call counts by form
-- each critic optimizer's class, update rule, amsgrad flags, betas, LR, state keys and guard buffer
-- the anchor's started flag and step, and whether prox was nonzero
-- declared and applied noise stds, and declared and applied LR ranges
+Every task directory gets an `nr_receipt.json`, also merged into `result.json` as `nr_receipt`. Every field is
+measured during the run, not copied from the config:
+- `r1_evals`: every squared input-gradient norm (R1's kernel) on both penalty classes. No nr term requests one.
+  `r1_weight_applied` is 0 only when this count is 0.
+- `stock_k3p_penalty_calls`: the stock K3P penalty is replaced by a sentinel that counts, then raises.
+- the active spike term, with per-term mean and the fraction of calls where it was nonzero. `pairsec_no_neighbor` /
+  `pairsec_rows` count the reals dropped for having no distinct neighbour. toy-unused_token_hold feeds 8 identical
+  reals, so pairsec is inert there, which makes `nr_pairsec_*` equal to spike=none on that task.
+- the loss form and the number of d_loss calls of each form
+- per critic optimizer: `oadam_steps` and `adam_steps` (counted per optimizer by the Adam.step dispatcher, which is
+  installed in every arm), `lr_receipt_steps` (an independent count from the suite's post-step hook), and the
+  `update_rule` derived from those counts. Also `guard_reads`, a tally of the second-moment key the guard actually
+  read, plus class, amsgrad, betas, LR and state keys. `oadam_steps_non_critic` must be 0.
+- whether the anchor started, at which step, and whether prox was nonzero
+- the declared and applied noise stds and LR ranges
+
+`summarize_nr.py` gates each cell on its receipt (`receipt_ok`). The receipt must show the arm's spike/settle, nr
+penalty calls > 0, zero R1 evals and zero stock calls, d_loss calls only of the arm's form, OAdam steps only in oadam
+arms and only on the critic, the right update rule on every critic, guard reads only of `max_exp_avg_sq`, an active
+anchor only in anchor arms, no pathcap pairing mismatch, constant LR and finite terms. A failing cell is shown as
+`X <reason>` and not counted as a pass. The leaderboard also lists the tasks where pairsec dropped rows.
 
 Unit tests: `python -m pytest -q reports/k3p-no-r1/test_nr_terms.py tests/test_oadam_amsgrad.py`.
 
 ## Smoke (300 steps, `runs_smoke/`)
 
 nr_pathcap_oadam, nr_symcap_anchor and nr_pairsec_hinge ran on native-grid100, toy-two_pole (custom-loop, CPU),
-toy-img_bars4 (standard trainer) and ring8-shift. The receipts confirm, on every route:
-- R1 is 0 and the stock penalty made 0 calls.
-- The OAdam critic took one step per critic update, with `prev_step` and `max_exp_avg_sq` in its state.
-- The anchor started at step 0 (step 1 on the custom-loop host, after the critic is identified), and prox was
+toy-img_bars4 (standard trainer), ring8-shift and toy-unused_token_hold (custom-loop, duplicate reals). All 15
+receipts pass `receipt_ok`, and on every route they show:
+- 0 R1 evaluations and 0 stock penalty calls.
+- In oadam arms, the critic's `oadam_steps` equals its `lr_receipt_steps`, with 0 stock Adam steps and 0 OAdam steps
+  on any other optimizer. In the other arms the critic took only stock Adam steps. Every guard read `max_exp_avg_sq`.
+- On toy-unused_token_hold, pairsec dropped all 1600/1600 rows (term 0) instead of dividing by a zero distance.
+- The anchor started at step 0 (step 1 on the custom-loop hosts, after the critic is identified), and prox was
   nonzero on more than 97% of calls.
 - The hinge replaced every critic d_loss call.
 - Noise was 0 and the LR was constant.
