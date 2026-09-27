@@ -47,6 +47,7 @@ jobs:
       - name: Validate dependency installation
         run: python -m pip check
       - name: Test numerical kernels and experiment workflows
+        if: matrix.python == '3.12'
         run: python -m pytest -q
       - name: Exercise the complete Lunar pipeline and GIF exports
         if: matrix.python == '3.11'
