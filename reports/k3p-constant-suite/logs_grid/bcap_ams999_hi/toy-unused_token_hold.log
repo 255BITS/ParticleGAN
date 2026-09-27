@@ -1,0 +1,33 @@
+# arm=bcap_ams999_hi task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+eval     9 unused_hold=0.996 concept_move=0 unused_dist=0.003991 concept_cos=-0.6061 concept_delta_norm=0.1032 scale0_err=0
+eval    17 unused_hold=0.9945 concept_move=0 unused_dist=0.005524 concept_cos=-0.3845 concept_delta_norm=0.1643 scale0_err=0
+eval    25 unused_hold=0.9951 concept_move=0.01824 unused_dist=0.004928 concept_cos=0.07553 concept_delta_norm=0.2414 scale0_err=0
+eval    34 unused_hold=0.9935 concept_move=0.1498 unused_dist=0.006466 concept_cos=0.4441 concept_delta_norm=0.3374 scale0_err=0
+eval    42 unused_hold=0.9924 concept_move=0.2755 unused_dist=0.007621 concept_cos=0.6612 concept_delta_norm=0.4166 scale0_err=0
+eval    50 unused_hold=0.9922 concept_move=0.3851 unused_dist=0.007846 concept_cos=0.7853 concept_delta_norm=0.4904 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9922 concept=0.3851 unused_dist=0.0078
+eval    59 unused_hold=0.992 concept_move=0.496 unused_dist=0.007999 concept_cos=0.8856 concept_delta_norm=0.5601 scale0_err=0
+eval    67 unused_hold=0.9909 concept_move=0.5873 unused_dist=0.009149 concept_cos=0.9725 concept_delta_norm=0.6039 scale0_err=0
+eval    75 unused_hold=0.9927 concept_move=0.6679 unused_dist=0.007258 concept_cos=0.9969 concept_delta_norm=0.67 scale0_err=0
+eval    84 unused_hold=0.9932 concept_move=0.7495 unused_dist=0.006761 concept_cos=0.9998 concept_delta_norm=0.7497 scale0_err=0
+eval    92 unused_hold=0.994 concept_move=0.8173 unused_dist=0.006035 concept_cos=0.9977 concept_delta_norm=0.8192 scale0_err=0
+eval   100 unused_hold=0.9947 concept_move=0.8793 unused_dist=0.005324 concept_cos=0.9965 concept_delta_norm=0.8824 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9947 concept=0.8793 unused_dist=0.0053
+eval   109 unused_hold=0.9956 concept_move=0.941 unused_dist=0.004372 concept_cos=0.9975 concept_delta_norm=0.9433 scale0_err=0
+eval   117 unused_hold=0.9961 concept_move=0.9857 unused_dist=0.003851 concept_cos=0.9993 concept_delta_norm=0.9865 scale0_err=0
+eval   125 unused_hold=0.9973 concept_move=0.9759 unused_dist=0.002735 concept_cos=0.9999 concept_delta_norm=1.024 scale0_err=0
+eval   134 unused_hold=0.9976 concept_move=0.9476 unused_dist=0.002383 concept_cos=0.9997 concept_delta_norm=1.052 scale0_err=0
+eval   142 unused_hold=0.9989 concept_move=0.9315 unused_dist=0.001087 concept_cos=0.9991 concept_delta_norm=1.068 scale0_err=0
+eval   150 unused_hold=0.9992 concept_move=0.9214 unused_dist=0.0008235 concept_cos=0.9992 concept_delta_norm=1.078 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9992 concept=0.9214 unused_dist=0.0008
+eval   159 unused_hold=0.9991 concept_move=0.916 unused_dist=0.0008536 concept_cos=0.9998 concept_delta_norm=1.084 scale0_err=0
+eval   167 unused_hold=0.9994 concept_move=0.9146 unused_dist=0.0006205 concept_cos=1 concept_delta_norm=1.085 scale0_err=0
+eval   175 unused_hold=0.9997 concept_move=0.916 unused_dist=0.0003383 concept_cos=0.9999 concept_delta_norm=1.084 scale0_err=0
+eval   184 unused_hold=0.9996 concept_move=0.9209 unused_dist=0.0003929 concept_cos=0.9999 concept_delta_norm=1.079 scale0_err=0
+eval   192 unused_hold=0.9995 concept_move=0.9276 unused_dist=0.0005328 concept_cos=1 concept_delta_norm=1.072 scale0_err=0
+eval   200 unused_hold=0.9994 concept_move=0.9356 unused_dist=0.0005917 concept_cos=1 concept_delta_norm=1.064 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9994 concept=0.9356 unused_dist=0.0006
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 13, "live": {"unused_hold": 0.9994082726188935, "concept_move": 0.9355942995251496}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '13/24'} 2s

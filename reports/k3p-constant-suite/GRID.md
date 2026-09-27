@@ -661,6 +661,7 @@ All LRs are constant and noise is 0. Everything else matches simple_B_cap3:
 | gs2_c03_lr2_d05 | 17/26 | 0/3 | **15** | P f0 +940 | **P f0 +940/+310/+110** | .972 / .18 |
 | k3p_simple | 14/26 | 0/3 | 12 | P f0 +430 | P f0 +430/+190/+20 | .971 / .16 |
 | simple_B_cap3 (LR .00425, Adam) | 13/26 | 0/3 | 13 | F f27 +440 | F f93 | .937 / .22 |
+| bcap_ams999_hi (LR .00425) | 11/26 | 0/3 | 11 | F f16 +2190 d11 | F f137 +2190/+1660/+950 d25 | .936 / .04 |
 | bcap_ams_a2g | 0/7 | 0/3 | – | F f120, never arrives | F f120, never arrives | .655 / .16 |
 | bcap_ams_b999 | 0/26 | 0/3 | 0 | F f120, never arrives | F f120, never arrives | .661 / .17 |
 | bcap_ams | 0/26 | 0/3 | 0 | F f120, never arrives | F f120, never arrives | .611 / .08 |
@@ -701,3 +702,46 @@ All LRs are constant and noise is 0. Everything else matches simple_B_cap3:
    "AMSGrad fixes B_cap3's step creep", and it takes one 26-task run.
 3. **Don't promote bcap_ams_a2g.** It has ring fails, no gain over its parent, and 0/7.
 4. **Decide the P (D-EMA prox) arms after item 2.** At 2e-4 they would hit the same budget wall.
+
+## bcap_ams999_hi: B_cap3 + AMSGrad (critic beta2 .999) at B_cap3's own LR
+
+Martyn approved a rerun at B_cap3's original LR. The arm is simple_B_cap3 exactly, with two changes:
+- AMSGrad on every optimizer;
+- critic betas (0,.999).
+
+Everything else is B_cap3's: G .00425, critic .002125, prior .0085, constant, no noise, A2 off, no guard.
+
+**Receipts** (all 26 tasks):
+- AMSGrad was on every optimizer, including the stepping simple critic (LR .002125).
+- The LRs were constant at .00425 / .002125 / .0085.
+- The critic betas were (0,.999).
+- No task errored.
+
+**Result: 11/26**, against simple_B_cap3's 13. See the leaderboard row above.
+
+| | simple_B_cap3 | bcap_ams999_hi |
+|---|---|---|
+| passes | 13/26 | 11/26 |
+| transfer | 13 | 11 (+trajectory, +anisotropic; −unequal_width, −overlap, −stripes2) |
+| ring8-shift | F f27 +440 d13 | F f16 +2190 d11 |
+| ring8-multishift | F f93 +440/+360/+90 d23 | F f137 +2190/+1660/+950 d25 |
+| native HQ (grid / rotated / staggered) | .933 / .930 / .948 | .905 / .961 / .941 |
+| native worst cov ratio (grid / rotated / staggered) | .34 / .15 / .17 | .01 / .05 / .07 |
+
+**Ring behaviour.**
+- Before the shift the ring holds 8 modes at HQ .90–.93, just over the pass bar: prehold 104/120.
+- After the shift it keeps losing and regaining modes (4–8 modes, HQ .18–.64). It needs 2190 updates to re-arrive,
+  and it departs 11 times.
+
+**Verdict: unstable at this LR, not under-trained.**
+- AMSGrad removes Adam's step creep, but B_cap3 without the guard still cannot re-track.
+- It re-tracks 5× slower than B_cap3 with Adam, and native within-mode shape gets worse: the worst ratio falls from
+  .15–.34 to .01–.07.
+- Native coverage has converged (99–100 modes, HQ still rising slowly). The shape failure is not a budget effect.
+
+**bcap_ams999_hi_a2g was skipped.** The rule was to run it only if bcap_ams999_hi kept 0 ring fails, and it did not
+(16 / 137).
+
+**Recommendation.** AMSGrad does not rescue B_cap3 at either LR, so drop the bcap line. Among constant-LR,
+noise-free configurations, gs2_c03_lr2_d05 (17/26, 0 ring fails) remains the best. The P (D-EMA prox) arms stay on
+hold.

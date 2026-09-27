@@ -1458,6 +1458,39 @@
     "lam_center": 0.0,
     "lazy_k": 1
    }
+  },
+  "bcap_ams999_hi": {
+   "formulation": "simple_B_cap3 at its own LRs (G .00425, critic x.5, prior x2; constant, no noise, A2 off, no guard) + AMSGrad on every optimizer, critic betas (0,.999)",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.999,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
   }
  }
 }

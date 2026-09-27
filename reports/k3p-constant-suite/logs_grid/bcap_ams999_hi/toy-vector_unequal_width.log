@@ -1,0 +1,28 @@
+# arm=bcap_ams999_hi task=toy-vector_unequal_width route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_unequal_width route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=-0.4060 Lg=+2.1272 pen=-0.406 s=nan gR=nan/nan lr_d=0.00213 3s
+train    100/1200 Ld=-0.4374 Lg=+1.6131 pen=-0.437 s=nan gR=nan/nan lr_d=0.00213 6s
+train    150/1200 Ld=-0.1589 Lg=+1.7194 pen=-0.159 s=nan gR=nan/nan lr_d=0.00213 9s
+train    200/1200 Ld=-0.7051 Lg=+2.0301 pen=-0.705 s=nan gR=nan/nan lr_d=0.00213 12s
+train    250/1200 Ld=-0.3318 Lg=+1.5470 pen=-0.332 s=nan gR=nan/nan lr_d=0.00213 15s
+train    300/1200 Ld=-0.0916 Lg=+1.0228 pen=-0.0916 s=nan gR=nan/nan lr_d=0.00213 18s
+train    350/1200 Ld=+0.3694 Lg=+1.2358 pen=0.369 s=nan gR=nan/nan lr_d=0.00213 21s
+train    400/1200 Ld=+0.2419 Lg=+1.3487 pen=0.242 s=nan gR=nan/nan lr_d=0.00213 24s
+train    450/1200 Ld=+0.3300 Lg=+1.4337 pen=0.33 s=nan gR=nan/nan lr_d=0.00213 27s
+train    500/1200 Ld=-0.0144 Lg=+1.5944 pen=-0.0144 s=nan gR=nan/nan lr_d=0.00213 30s
+train    550/1200 Ld=+0.1406 Lg=+1.1028 pen=0.141 s=nan gR=nan/nan lr_d=0.00213 33s
+train    600/1200 Ld=-0.0040 Lg=+0.9873 pen=-0.00395 s=nan gR=nan/nan lr_d=0.00213 36s
+train    650/1200 Ld=-0.0849 Lg=+0.9969 pen=-0.0849 s=nan gR=nan/nan lr_d=0.00213 39s
+train    700/1200 Ld=-0.3918 Lg=+1.0414 pen=-0.392 s=nan gR=nan/nan lr_d=0.00213 43s
+train    750/1200 Ld=-0.0571 Lg=+1.0932 pen=-0.0571 s=nan gR=nan/nan lr_d=0.00213 46s
+train    800/1200 Ld=+0.0442 Lg=+1.3896 pen=0.0442 s=nan gR=nan/nan lr_d=0.00213 49s
+train    850/1200 Ld=+0.0431 Lg=+1.2923 pen=0.0431 s=nan gR=nan/nan lr_d=0.00213 52s
+train    900/1200 Ld=+0.0184 Lg=+0.9558 pen=0.0184 s=nan gR=nan/nan lr_d=0.00213 55s
+train    950/1200 Ld=+0.0928 Lg=+1.0951 pen=0.0928 s=nan gR=nan/nan lr_d=0.00213 58s
+train   1000/1200 Ld=+0.1928 Lg=+1.0746 pen=0.193 s=nan gR=nan/nan lr_d=0.00213 61s
+train   1050/1200 Ld=-0.1249 Lg=+1.2496 pen=-0.125 s=nan gR=nan/nan lr_d=0.00213 65s
+train   1100/1200 Ld=+0.2273 Lg=+0.8648 pen=0.227 s=nan gR=nan/nan lr_d=0.00213 68s
+train   1150/1200 Ld=+0.0601 Lg=+1.0551 pen=0.0601 s=nan gR=nan/nan lr_d=0.00213 71s
+train   1200/1200 Ld=-0.0230 Lg=+0.7805 pen=-0.023 s=nan gR=nan/nan lr_d=0.00213 74s
+{"event": "DONE", "task": "vector_unequal_width", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.047516351220133306, "mean_error": 0.02532503567636013, "covariance_error": 0.06405243277549744, "target_scale": 2.138371229171753, "sample_count": 4096, "mass_tv": 0.02099609375, "min_mass_ratio": 0.927734375, "hq": 0.984375, "component_covariance_error": 0.6185575723648071, "component_covariance_errors": [0.4725843667984009, 0.6301742792129517, 0.8191968202590942, 0.5522748231887817], "component_min_eigen_ratio": 0.04682732746005058, "component_mass": [0.257080078125, 0.2470703125, 0.23193359375, 0.263916015625], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [1053, 1012, 950, 1081]}, "error": null}
+# DONE toy-vector_unequal_width status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 76s
