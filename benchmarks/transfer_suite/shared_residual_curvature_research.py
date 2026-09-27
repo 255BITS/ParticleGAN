@@ -2,6 +2,8 @@
 from copy import deepcopy
 import torch
 from torch import nn
+
+from particlegan import init
 from .shared_critic_research import ARCHITECTURES as BASES, SharedResearchCritic
 
 
@@ -45,6 +47,10 @@ class ResidualCurvatureCritic(nn.Module):
         basis=torch.stack((torch.ones_like(dx),dx,dy,dx.square(),dx*dy,dy.square()),-1)
         local=(basis*self.coefficients[None,:,:]).sum(-1)
         return self.main(x)+(weights*local).sum(1)
+
+
+# The branch starts at zero by declaration; explicit init keeps it.
+init.register(ResidualCurvatureCritic, {'coefficients': init.KEEP})
 
 
 def variant(card):
