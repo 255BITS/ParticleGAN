@@ -21,7 +21,6 @@ class Recipe:
     """
     name: str = "k3p"
     model: str = "gan"
-    initialization: str | None = "batch_feature_zero"
     z_dim: int = 2
     num_particles: int = 20_000
     prior_kind: str = "particles"
@@ -75,6 +74,8 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # Append new fields so existing positional Recipe arguments retain meaning.
+    initialization: str | None = "batch_feature_zero"
 
     def __post_init__(self):
         if self.initialization not in (None, "batch_feature_zero"):

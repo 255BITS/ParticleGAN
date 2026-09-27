@@ -7,7 +7,7 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe, initialize_
+from particlegan import BatchDistanceDiscriminator, GANTrainer, Recipe, get_recipe, initialize_
 
 
 def test_default_recipe_repeats_weights_and_prior_without_resetting_rng():
@@ -133,6 +133,7 @@ for x, y in zip(list(g.parameters()) + list(d.parameters()), list(a.parameters()
 
 
 def test_invalid_configuration_and_lazy_modules():
+    assert Recipe("k3p", "gan", 3).z_dim == 3
     with pytest.raises(ValueError, match="initialization"):
         get_recipe(initialization="unknown")
     with pytest.raises(ValueError, match="key"):

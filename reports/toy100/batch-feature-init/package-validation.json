@@ -14,13 +14,14 @@
     "installed wheel outside checkout: AdamW, AE/VAE, GAN",
     "CUDA API smoke: two updates, initializer preserves CPU/CUDA RNG",
     "Lunar smoke pipeline and GIFs (not a task-performance gate)",
-    "build and twine check --strict; clean distribution scopes; pip check"
+    "build and twine check --strict; clean distribution scopes; pip check",
+    "Final positional Recipe compatibility check plus affected recipe/trainer/selection tests: 67 passed, 1 CUDA skip"
   ],
   "source_sha256": {
     "particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
     "particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
     "particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
-    "particlegan/recipes.py": "10466c3ae772404f98bee8fb0b7f86dac3a1779ce76a0052671ee4d0b982531d",
+    "particlegan/recipes.py": "1320aa7dce1f759a8217a83792d8ba57b43e237d8d9e4e4c9a057228f2f9d46f",
     "particlegan/training.py": "02b690c8fea710545f06d84f7998f47164b4c59be4d922fa86aaf49895bee049"
   },
   "logs": "/tmp/pr194-integration-20260926"
