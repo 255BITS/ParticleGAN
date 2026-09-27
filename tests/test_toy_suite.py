@@ -27,7 +27,7 @@ from benchmarks.transfer_suite.public_default_verification import (
 )
 from benchmarks.transfer_suite.toy100_compatibility import (
     declared_model_policy, declared_recipe, output_noise_at,
-    run_image, run_vector, setup_image, setup_vector,
+    run_image, run_vector, setup_image,
 )
 from benchmarks.transfer_suite import vector_tasks
 from lib.toy_models import SimpleMLPGenerator
@@ -717,8 +717,9 @@ def test_transfer_trainer_hosts_record_actual_capped_network_rates(
     assert network < prior
     action = result["actions"][-1]
     assert action["step"] == 24
-    assert action["network_multiplier"] == network
-    assert action["prior_multiplier"] == prior
+    # The shared runner's receipt is the rate read back from the optimizer.
+    assert action["network_multiplier"] == pytest.approx(network, rel=1e-12)
+    assert action["prior_multiplier"] == pytest.approx(prior, rel=1e-12)
     if network_floor is not None:
         assert action["network_lr_floor"] == network_floor
     else:
@@ -726,7 +727,10 @@ def test_transfer_trainer_hosts_record_actual_capped_network_rates(
     assert action["lr_g"] == pytest.approx(recipe.lr * network)
     assert action["lr_prior"] == pytest.approx(recipe.lr * recipe.prior_lr_mult * prior)
     assert action["lr_d"] == pytest.approx(recipe.lr * recipe.d_lr_mult * network)
-    assert context["trainer"].completed_steps == 24
+    if name.startswith("vector"):
+        assert result["update_counts"] == {"g": 24, "d": 24}
+    else:
+        assert context["trainer"].completed_steps == 24
 
 
 @pytest.mark.parametrize("tamper,expected", [
@@ -805,7 +809,21 @@ def test_isolated_transfer_receipt_accepts_restored_eval_stream(tmp_path, monkey
     assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
 
 
-@pytest.mark.parametrize("name", ["vector_two_broad", "img_stripes2"])
+def test_runner_vector_hosts_refuse_learnable_output_noise():
+    """The shared runner has no learnable-noise recipe field; refuse, never approximate."""
+    recipe, noise, _ = declared_recipe(dict(
+        output_noise_std=.029, output_noise_learnable=True,
+        output_noise_warmup=.2, input_noise_std=.5,
+        input_noise_anneal_end=.1,
+    ))
+    jobs, profile = load_declaration()
+    job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
+    spec, card, _ = declared_spec(job, profile, recipe)
+    with pytest.raises(ValueError, match="output_noise_learnable"):
+        run_vector(spec, card, recipe, noise)
+
+
+@pytest.mark.parametrize("name", ["img_stripes2"])
 def test_native_transfer_hosts_register_exactly_one_g_noise_scalar(name):
     recipe, noise, _ = declared_recipe(dict(
         output_noise_std=.029, output_noise_learnable=True,
@@ -815,8 +833,7 @@ def test_native_transfer_hosts_register_exactly_one_g_noise_scalar(name):
     jobs, profile = load_declaration()
     job = next(job for job in jobs if job["spec"]["name"] == name)
     spec, card, _ = declared_spec(job, profile, recipe)
-    context = (setup_vector(spec, card, recipe, noise) if name.startswith("vector")
-               else setup_image(spec, recipe, noise))
+    context = setup_image(spec, recipe, noise)
     trainer = context["trainer"]
     scalar = trainer.G.output_scale.raw_scale
     assert context["applied"][0]["parameters"] == context["generator_base_parameters"] + 1

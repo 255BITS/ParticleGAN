@@ -65,7 +65,9 @@ def run(output):
                 super().step(optimizer, completed_updates, role)
 
         with ExitStack() as stack:
-            for module in (evaluate, vector_tasks, image_tasks):
+            # Vector episodes run no controller (vector_tasks refuses a patched
+            # FixedControl); their receipt is the optimizers' result['applied'].
+            for module in (evaluate, image_tasks):
                 stack.enter_context(patch.object(module, 'FixedControl', AuditControl))
             if spec['runner'] == 'legacy':
                 control = evaluate.FixedControl(policy, spec['steps'])
@@ -79,6 +81,8 @@ def run(output):
                     create = skip_constructor(card) if card.get('skip') == 'raw_linear' else smooth_constructor(card)
                     stack.enter_context(patch.object(vector_tasks, 'SimpleMLPDiscriminator', create))
                 result = suite.run_episode(spec, policy, fixed=True, allow_reserved=True)
+                if spec['runner'] == 'vector':
+                    applied = result.get('applied', [])
         verdict, ema = test_verdict(spec, result), ema_verdict(spec, result)
         record = dict(arm='current_core', original_spec=job['spec'], spec=spec, candidate=asdict(config),
                       architecture=job['architecture'], reference=job['reference'], reference_sha256=job['reference_sha256'],

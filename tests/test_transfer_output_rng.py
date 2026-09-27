@@ -121,11 +121,11 @@ def test_vector_and_image_routes_record_real_private_draws_and_eval_restoration(
                   hidden=8, layers=1)
     image = deepcopy(image_tasks.TASKS[0])
     image.update(runner="image", steps=24, batch_size=4, particles=8, width=4)
-    for kind, spec in (("vector", vector), ("image", image)):
-        if kind == "vector":
-            result, context = run_vector(spec, None, gan_v3_recipe(), noise)
-        else:
-            result, context = run_image(spec, gan_v3_recipe(), noise)
+    # Vector hosts train on the shared runner, which has no isolated output stream.
+    with pytest.raises(ValueError, match="output_noise_rng"):
+        run_vector(vector, None, gan_v3_recipe(), noise)
+    for spec in (image,):
+        result, context = run_image(spec, gan_v3_recipe(), noise)
         receipt = _native_noise_receipt(context, noise, spec, result)
         assert len(result["observations"]) == 24
         assert receipt["output_module"] == "IsolatedOutputNoise"

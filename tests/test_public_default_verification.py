@@ -23,18 +23,22 @@ def test_declared_routes_and_installed_root_guard():
         verification.public_module_manifest(verification.ROOT)
 
 
-def test_vector_public_trainer_uses_promoted_discriminator_and_recipe():
+def test_vector_public_route_uses_promoted_discriminator_and_recipe(monkeypatch):
+    from benchmarks.transfer_suite import vector_tasks
+    monkeypatch.setattr(vector_tasks, 'EVAL_SAMPLES', 128)
     _, base, spec, card, _ = _declaration('vector_unequal_mass')
-    result, context = verification.run_vector(spec, card, base, max_steps=1)
-    assert type(context['trainer'].D).__name__ == 'BatchDistanceDiscriminator'
+    assert type(vector_tasks.vector_discriminator(spec, card)).__name__ == 'BatchDistanceDiscriminator'
+    result, context = verification.run_vector(dict(spec, steps=24), card, base)
     assert context['shapes']['real_batch'] == [128, 2]
     assert context['shapes']['prior'] == [256, 4]
     assert context['shapes']['discriminator_parameters'] == 19013
     assert [row['lr'] for row in context['applied']] == [.00425, .0085, .00425]
     assert all(row['betas'] == [0., .99] for row in context['applied'])
-    assert result['update_counts'] == {'g': 1, 'd': 1}
-    assert result['actions'] == [{'step': 1, 'multiplier': 1.,
-                                  'lr_g': .00425, 'lr_prior': .0085, 'lr_d': .00425}]
+    assert context['host_recipe'].total_steps == 24
+    assert result['update_counts'] == {'g': 24, 'd': 24}
+    assert len(result['observations']) == 24 and result['convergence']['complete']
+    assert result['actions'][0] == {'step': 1, 'multiplier': 1., 'lr_g': .00425, 'lr_prior': .0085,
+                                    'lr_d': .00425, 'input_sigma': 0., 'output_sigma': 0.}
 
 
 def test_image_public_trainer_preserves_frozen_shapes_and_shared_stream():
