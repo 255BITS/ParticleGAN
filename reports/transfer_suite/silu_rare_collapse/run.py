@@ -6,6 +6,8 @@
   Writes diagnose.log / diagnose.jsonl, and one line per observation to diagnose_<arm>.log.
 --arms: targeted arms on unequal_mass (arms.log / arms.jsonl).
 --crosscheck ARM [ARM ...]: those arms on all 8 dev vector tasks (crosscheck.log / crosscheck.jsonl).
+--v5: protocol v5 rescore (v5.log / v5.jsonl): V5_ARMS on unequal_mass plus LeakyReLU and axis_silu on the
+  other 7 dev tasks. Each record carries the v4 and v5 verdict of the same episode.
 Same fixed cosine recipe, seed 0, sustained rule as ../anisotropic_core_metric/run.py.
 One CPU episode per process, 1 thread each. tail -f the printed log for one line per episode.
 Tables for the README: python summarize.py diagnose|arms|crosscheck.
@@ -47,6 +49,8 @@ ARMS = {
     "silu_dlr3": ("axis_silu", {"d_lr_mult": 3.}, "recipe"),
 }
 ARM_LIST = list(ARMS)
+V5_ARMS = ["leaky_orig", "axis_silu", "silu_dlr3", "linear_skip_d96_beta5"]
+SUITE_ARMS = ["leaky_orig", "axis_silu"]
 
 
 def install(arm):
@@ -59,34 +63,6 @@ def install(arm):
         if card is not None:
             vt.SimpleMLPDiscriminator = module.constructor(card)
     return vt, overrides
-
-
-def with_component_core_eigs(vt):
-    """Wrap the suite scorer to also report each component's core min-eigen ratio (reported, not gated)."""
-    import torch
-    score = vt.score_samples
-
-    def scored(fake, spec, completed):
-        out = score(fake, spec, completed)
-        if "component_core_covariance_errors" not in out:
-            return out
-        units = vt.target_scale(spec, completed)
-        means, cov = torch.tensor(spec["means"]) * units, torch.tensor(spec["covariances"]) * units**2
-        assign = torch.cdist(fake, means).argmin(1)
-        delta = fake - means[assign]
-        mahal = torch.einsum("ni,nij,nj->n", delta, torch.linalg.inv(cov)[assign], delta)
-        eigs = []
-        for k in range(len(means)):
-            pts = fake[(assign == k) & (mahal <= vt.CORE_MAHALANOBIS2)]
-            if len(pts) < 10:
-                eigs.append(0.)
-                continue
-            x = pts - pts.mean(0)
-            inv = torch.linalg.inv(torch.linalg.cholesky(cov[k]))
-            eigs.append(float(torch.linalg.eigvalsh(inv @ (x.T @ x / len(pts)) @ inv.T).min()))
-        out["component_core_eigen_ratios"] = eigs
-        return out
-    vt.score_samples = scored
 
 
 def spec_for(vt, task, overrides):
@@ -203,7 +179,6 @@ def run(job):
     import torch
     torch.set_num_threads(1)
     vt, overrides = install(arm)
-    with_component_core_eigs(vt)
     spec = spec_for(vt, task, overrides)
     res = vt.run_episode(spec, vt.fixed_policy("cosine"), fixed=True)
     rec = dict(group=group, task=task, arm=arm, kind=ARMS[arm][2], overrides=overrides, status=res.get("status"),
@@ -215,18 +190,36 @@ def run(job):
                    observation_failing=[[i for i, t in enumerate(spec["thresholds"]) if not vt.passes(o, [t])]
                                         for o in res["observations"]],
                    live={k: v for k, v in res["live"].items() if k not in ("target_mass", "sample_count")})
+        if group == "v5":
+            rec["v4"] = v4_verdict(vt, spec, res["observations"], res["live"])
     return rec
+
+
+def v4_verdict(vt, spec, observations, live):
+    """The same episode under protocol v4: resolved_* shape/spill aggregates back to all-component ones."""
+    import math
+    back = dict(zip(vt.RESOLVED_SHAPE_METRICS, ("component_core_covariance_error", "component_core_min_eigen_ratio",
+                                                "max_component_spill")))
+    thresholds = [[back.get(k, k), op, b] for k, op, b in spec["thresholds"]]
+    expected = {math.ceil(i * spec["steps"] / vt.OBSERVATIONS) for i in range(1, vt.OBSERVATIONS + 1)}
+    conv = vt.sustained(observations, thresholds, expected_steps=expected)
+    return dict(thresholds=thresholds, sustained=conv["stable_from_step"] is not None, passing_suffix=conv["passing_suffix"],
+                failing=[k for k, op, b in thresholds if not vt.passes(live, [[k, op, b]])])
 
 
 def fmt(r):
     if r["status"] == "ERROR":
         return f"{r['task']:<22} {r['arm']:<22} ERROR"
     live = r["live"]
-    s = (f"{r['task']:<22} {r['arm']:<22} {'SUST' if r['sustained'] else 'fail'} suffix={r['passing_suffix']:2d} "
-         f"sw1={live['sw1_normalized']:.3f}")
+    s = f"{r['task']:<22} {r['arm']:<22} "
+    if "v4" in r:
+        s += f"v4 {'SUST' if r['v4']['sustained'] else 'fail'}({r['v4']['passing_suffix']:2d}) -> v5 "
+    s += f"{'SUST' if r['sustained'] else 'fail'} suffix={r['passing_suffix']:2d} sw1={live['sw1_normalized']:.3f}"
     if "mass_tv" in live:
         s += (f" tv={live['mass_tv']:.3f} core={live['component_core_covariance_error']:.2f}"
               f" eig={live['component_core_min_eigen_ratio']:.2f} spill={live['max_component_spill']:.3f}")
+        if "resolved_core_min_eigen_ratio" in live:
+            s += f" resolved_eig={live['resolved_core_min_eigen_ratio']:.2f} resolved_spill={live['resolved_max_component_spill']:.3f}"
     if r["task"] == TASK:
         s += (f" minmass={live['min_mass_ratio']:.2f} rare_mass={live['component_mass'][RARE]:.3f}"
               f" comp_eigs={'/'.join(f'{e:.2f}' for e in live['component_core_eigen_ratios'])}")
@@ -262,11 +255,17 @@ def main():
     mode.add_argument("--diagnose", nargs="*", metavar="ARM", help="default: axis_silu leaky_orig")
     mode.add_argument("--arms", action="store_true")
     mode.add_argument("--crosscheck", nargs="+", metavar="ARM")
+    mode.add_argument("--v5", action="store_true")
     args = ap.parse_args()
     if args.diagnose is not None:
         arms = args.diagnose or ["axis_silu", "leaky_orig"]
         pool_run(diagnose, arms, len(arms), HERE / "diagnose.log", HERE / "diagnose.jsonl", diag_line)
 
+    elif args.v5:
+        from benchmarks.transfer_suite import vector_tasks as vt
+        todo = [("v5", TASK, a) for a in V5_ARMS] + [("v5", t["name"], a) for t in vt.TASKS if t["name"] != TASK
+                                                    for a in SUITE_ARMS]
+        pool_run(run, todo, args.jobs, HERE / "v5.log", HERE / "v5.jsonl", fmt)
     elif args.arms:
         pool_run(run, [("arms", TASK, a) for a in ARM_LIST], args.jobs, HERE / "arms.log", HERE / "arms.jsonl", fmt)
     else:

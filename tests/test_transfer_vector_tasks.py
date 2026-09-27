@@ -65,13 +65,90 @@ def test_partial_center_collapse_cannot_hide_behind_average_covariance():
     assert not vectors.passes(result, spec["thresholds"])
 
 
-def test_protocol_v4_core_spill_declarations():
+def test_protocol_v5_core_spill_declarations():
     by_family = {x["family"]: x["thresholds"] for x in vectors.TASKS}
     core = vectors.CORE_SPILL_BOUNDS
     assert by_family["anisotropic"] == core and by_family["unequal_width"] == core
     assert by_family["unequal_mass"] == core + [["min_mass_ratio", ">=", .25]]
     for family in ("separated_broad", "narrow_resolution", "changing_scale"):
         assert by_family[family] == vectors.SEPARATED_BOUNDS
+    for family in ("overlapping", "curved_continuous"):
+        assert by_family[family] == vectors.DISTRIBUTION_BOUNDS
+    # v5 keeps every v4 bound and value; only the three shape/spill statistics become resolved_* aggregates.
+    renamed = dict(zip(("component_core_covariance_error", "component_core_min_eigen_ratio", "max_component_spill"),
+                       vectors.RESOLVED_SHAPE_METRICS))
+    assert core == [[renamed.get(k, k), op, b] for k, op, b in vectors.CORE_SPILL_BOUNDS_V4]
+    # Oracle-derived floor (reports/transfer_suite/silu_rare_collapse/oracle.py); only the 2% component is exempt.
+    assert vectors.PARTICLE_FLOOR == 32
+    resolved = {x["family"]: vectors.component_resolved(x) for x in vectors.TASKS if x["kind"] == "gaussian_mixture"}
+    assert resolved.pop("unequal_mass") == [True, True, True, False]
+    assert all(all(flags) for flags in resolved.values())
+
+
+def _unequal_mass_with_rare(rare_points):
+    """A true unequal_mass draw whose rare (2%) component is replaced by rare_points."""
+    spec = next(x for x in vectors.TASKS if x["family"] == "unequal_mass")
+    samples = vectors.sample_target(spec, 4096, torch.Generator().manual_seed(993), spec["steps"])
+    means = torch.tensor(spec["means"])
+    rare = torch.cdist(samples, means).argmin(1) == 3
+    samples[rare] = rare_points(int(rare.sum()), means[3])
+    return spec, vectors.score_samples(samples, spec, spec["steps"])
+
+
+def test_particle_floor_exempts_under_resolved_component_shape_but_not_its_mass():
+    # The 2% component (~5 particles) collapsed to a single point: v4 fails it on core eig, v5 exempts its shape.
+    spec, result = _unequal_mass_with_rare(lambda n, mean: mean.repeat(n, 1))
+    assert result["component_resolved"] == [True, True, True, False]
+    assert result["component_core_eigen_ratios"][3] == 0. and result["component_core_min_eigen_ratio"] == 0.
+    assert result["resolved_core_min_eigen_ratio"] == min(result["component_core_eigen_ratios"][:3]) > .15
+    v4 = spec["thresholds"][:3] + vectors.CORE_SPILL_BOUNDS_V4[3:] + [["min_mass_ratio", ">=", .25]]
+    assert not vectors.passes(result, v4)
+    assert vectors.passes(result, spec["thresholds"])
+    # Its mass is still gated: dropping it (points moved onto the big component) fails min_mass_ratio.
+    spec, dropped = _unequal_mass_with_rare(lambda n, mean: torch.tensor(spec["means"][0]).repeat(n, 1))
+    assert dropped["component_mass"][3] == 0. and dropped["resolved_max_component_spill"] <= .05
+    assert not vectors.passes(dropped, spec["thresholds"])
+    assert [k for k, op, b in spec["thresholds"] if not vectors.passes(dropped, [[k, op, b]])] == ["min_mass_ratio"]
+
+
+def test_particle_floor_still_gates_resolved_components():
+    # The 13% component (~33 particles) is resolved: collapsing it fails v5.
+    spec = next(x for x in vectors.TASKS if x["family"] == "unequal_mass")
+    samples = vectors.sample_target(spec, 4096, torch.Generator().manual_seed(993), spec["steps"])
+    means = torch.tensor(spec["means"])
+    member = torch.cdist(samples, means).argmin(1) == 2
+    samples[member] = means[2]
+    result = vectors.score_samples(samples, spec, spec["steps"])
+    assert result["component_resolved"][2]
+    assert result["resolved_core_min_eigen_ratio"] == 0.
+    assert not vectors.passes(result, spec["thresholds"])
+
+
+@pytest.mark.parametrize("spec", [x for x in vectors.TASKS if x["kind"] != "gaussian_mixture" or not x["identifiable"]
+                                  or not ({k for k, _, _ in x["thresholds"]} & set(vectors.RESOLVED_SHAPE_METRICS))
+                                  or all(vectors.component_resolved(x))], ids=lambda x: x["name"])
+def test_particle_floor_leaves_other_tasks_unchanged(spec):
+    """Non-identifiable and whole-component tasks gain no gate; fully resolved core/spill tasks gate the same values."""
+    samples = vectors.sample_target(spec, 4096, torch.Generator().manual_seed(993), spec["steps"])
+    samples[:200] += 1.  # Some spill so the comparison is not only at exact-match values.
+    result = vectors.score_samples(samples, spec, spec["steps"])
+    if spec["kind"] != "gaussian_mixture" or not spec["identifiable"]:
+        assert not set(vectors.RESOLVED_SHAPE_METRICS) & result.keys()
+        return
+    assert result["resolved_core_covariance_error"] == result["component_core_covariance_error"]
+    assert result["resolved_core_min_eigen_ratio"] == result["component_core_min_eigen_ratio"]
+    assert result["resolved_max_component_spill"] == result["max_component_spill"]
+
+
+def test_particle_floor_resolve_guards():
+    anisotropic = next(x for x in vectors.TASKS if x["family"] == "anisotropic")
+    with pytest.raises(ValueError, match="particle floor"):
+        vectors.resolve(dict(anisotropic, particles=64))  # 21 particles per component: nothing resolved.
+    with pytest.raises(ValueError, match="min_mass_ratio"):
+        vectors.resolve(dict(anisotropic, masses=[.8, .1, .1]))  # 26-particle components without a mass floor.
+    unequal_mass = next(x for x in vectors.TASKS if x["family"] == "unequal_mass")
+    assert vectors.component_resolved(vectors.resolve(dict(unequal_mass, particles=1024)))[3] is False  # 20.5
+    assert vectors.component_resolved(vectors.resolve(dict(unequal_mass, particles=1600))) == [True]*4
 
 
 @pytest.mark.parametrize("family", ["anisotropic", "unequal_width", "unequal_mass"])
@@ -86,17 +163,18 @@ def test_far_outliers_are_spill_not_shape(family):
     samples[stray] = means[0] + torch.stack([torch.zeros_like(offsets), -offsets], 1)
     result = vectors.score_samples(samples, spec, spec["steps"])
     old_bounds = [["component_covariance_error", "<=", .85], ["component_min_eigen_ratio", ">=", .15]]
-    core_bounds = [x for x in spec["thresholds"] if x[0] != "max_component_spill"]
+    core_bounds = [x for x in spec["thresholds"] if x[0] != "resolved_max_component_spill"]
     assert result["component_covariance_errors"][0] > 2.6
     assert not vectors.passes(result, old_bounds)
     assert result["component_core_covariance_error"] <= .2
     assert vectors.passes(result, core_bounds)
     assert result["max_component_spill"] == pytest.approx(result["component_spill"][0]) and result["max_component_spill"] > .05
+    assert result["resolved_max_component_spill"] == result["max_component_spill"]
     assert not vectors.passes(result, spec["thresholds"])
 
 
 @pytest.mark.parametrize("key", ["component_core_covariance_error", "component_core_min_eigen_ratio",
-                                 "max_component_spill", "mass_tv"])
+                                 "max_component_spill", "mass_tv", *vectors.RESOLVED_SHAPE_METRICS])
 def test_overlap_rejects_unidentifiable_component_requirements(key):
     spec = deepcopy(next(x for x in vectors.TASKS if x["family"] == "overlapping"))
     spec["thresholds"].append([key, "<=", .15])

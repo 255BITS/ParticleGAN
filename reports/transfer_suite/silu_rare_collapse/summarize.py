@@ -1,4 +1,4 @@
-"""Print compact tables from the jsonl files: python summarize.py [diagnose|arms|crosscheck]."""
+"""Print compact tables from the jsonl files: python summarize.py [diagnose|arms|crosscheck|v5]."""
 import json
 import statistics
 import sys
@@ -56,5 +56,35 @@ def crosscheck():
     print("| **passes** | " + " | ".join(str(sum(by[(t, a)].get("sustained", False) for t in tasks if (t, a) in by)) + "/" + str(len(tasks)) for a in arms) + " |")
 
 
+def v5():
+    rows = [json.loads(line) for line in open(HERE / "v5.jsonl")]
+    verdict = lambda r: f"{'SUST' if r['sustained'] else 'fail'} ({r['passing_suffix']})"
+    short = lambda fs: ", ".join(f.replace("component_", "").replace("resolved_", "") for f in fs) or "-"
+    mass = [r for r in rows if r["task"] == "vector_unequal_mass"]
+    mass.sort(key=lambda r: (-r["sustained"], -r["passing_suffix"], len(r["failing"]), r["live"]["sw1_normalized"]))
+    print("| arm | kind | v4 → v5 verdict (suffix) | sw1 | mass_tv | min_mass_ratio | resolved core err | resolved core eig "
+          "| resolved spill | rare mass | rare core eig (exempt) | v4 failing | v5 failing |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+    for r in mass:
+        v = r["live"]
+        print(f"| {r['arm']} | {r['kind']} | {verdict(r['v4'])} → **{verdict(r)}** | {v['sw1_normalized']:.3f} | "
+              f"{v['mass_tv']:.3f} | {v['min_mass_ratio']:.2f} | {v['resolved_core_covariance_error']:.2f} | "
+              f"{v['resolved_core_min_eigen_ratio']:.2f} | {v['resolved_max_component_spill']:.3f} | "
+              f"{v['component_mass'][3]:.3f} | {v['component_core_eigen_ratios'][3]:.2f} | {short(r['v4']['failing'])} | "
+              f"{short(r['failing'])} |")
+    arms = ["leaky_orig", "axis_silu"]
+    by = {(r["task"], r["arm"]): r for r in rows}
+    tasks = list(dict.fromkeys(r["task"] for r in rows if r["arm"] in arms))
+    print()
+    print("| task | " + " | ".join(f"{a} v4 → v5" for a in arms) + " | v5 failing (" + " / ".join(arms) + ") |")
+    print("|---|" + "---|" * (len(arms) + 1))
+    for t in tasks:
+        cells = [f"{verdict(by[(t, a)]['v4'])} → {verdict(by[(t, a)])}" for a in arms]
+        print(f"| {t} | " + " | ".join(cells) + " | " + " / ".join(short(by[(t, a)]["failing"]) for a in arms) + " |")
+    count = lambda a, old: sum((by[(t, a)]["v4"] if old else by[(t, a)])["sustained"] for t in tasks)
+    print("| **passes** | " + " | ".join(f"{count(a, True)}/{len(tasks)} → **{count(a, False)}/{len(tasks)}**" for a in arms)
+          + " | |")
+
+
 if __name__ == "__main__":
-    {"diagnose": diagnose, "arms": arms, "crosscheck": crosscheck}[sys.argv[1] if len(sys.argv) > 1 else "arms"]()
+    {"diagnose": diagnose, "arms": arms, "crosscheck": crosscheck, "v5": v5}[sys.argv[1] if len(sys.argv) > 1 else "arms"]()

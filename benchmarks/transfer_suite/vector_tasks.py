@@ -28,9 +28,22 @@ SEPARATED_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15],
 # Core/spill rule: shape is scored on each component's 4-sigma core; stray samples are
 # bounded separately by max_component_spill instead of inflating the covariance error.
 # Protocol v3 applied it to anisotropic; protocol v4 to unequal_width and unequal_mass.
+CORE_SPILL_BOUNDS_V4 = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15], ["hq", ">=", .85],
+                        ["component_core_covariance_error", "<=", .5],
+                        ["component_core_min_eigen_ratio", ">=", .15], ["max_component_spill", "<=", .05]]
+# Protocol v5 particle-resolution floor: a component whose declared share of the particle table,
+# masses[k]*particles, is below PARTICLE_FLOOR is under-resolved. The generator's output is one atom
+# per particle, and a perfect sampler with that few atoms fails the shape/spill bounds too often.
+# Its core error, core eigenvalue and spill are still reported (component_resolved marks it) but
+# excluded from the resolved_* aggregates; mass_tv, min_mass_ratio and hq still cover it. The floor
+# comes from a finite-atom oracle, never from GAN runs:
+# reports/transfer_suite/silu_rare_collapse/oracle.py.
+PARTICLE_FLOOR = 32
+RESOLVED_SHAPE_METRICS = ("resolved_core_covariance_error", "resolved_core_min_eigen_ratio",
+                          "resolved_max_component_spill")
 CORE_SPILL_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15], ["hq", ">=", .85],
-                     ["component_core_covariance_error", "<=", .5],
-                     ["component_core_min_eigen_ratio", ">=", .15], ["max_component_spill", "<=", .05]]
+                     ["resolved_core_covariance_error", "<=", .5],
+                     ["resolved_core_min_eigen_ratio", ">=", .15], ["resolved_max_component_spill", "<=", .05]]
 CORE_MAHALANOBIS2 = 16.
 SPILL_MAHALANOBIS2 = 9.
 DISTRIBUTION_BOUNDS = [["sw1_normalized", "<=", .18], ["mean_error", "<=", .15],
@@ -122,10 +135,27 @@ def resolve(spec, *, allow_reserved=False):
         if type(out.get("identifiable")) is not bool:
             raise ValueError("mixture spec must explicitly declare identifiable")
         forbidden = {"mass_tv", "hq", "component_covariance_error", "min_mass_ratio", "component_min_eigen_ratio",
-                     "component_core_covariance_error", "component_core_min_eigen_ratio", "max_component_spill"}
-        if not out["identifiable"] and any(key in forbidden for key, _, _ in out["thresholds"]):
+                     "component_core_covariance_error", "component_core_min_eigen_ratio", "max_component_spill",
+                     *RESOLVED_SHAPE_METRICS}
+        gated = {key for key, _, _ in out["thresholds"]}
+        if not out["identifiable"] and gated & forbidden:
             raise ValueError("overlapping mixtures cannot require component recovery metrics")
+        if gated & set(RESOLVED_SHAPE_METRICS):
+            resolved = component_resolved(out)
+            if not any(resolved):
+                raise ValueError("no component reaches the particle floor; resolved shape gates would be vacuous")
+            if not all(resolved) and "min_mass_ratio" not in gated:
+                raise ValueError("under-resolved components must stay gated by min_mass_ratio")
     return out
+
+
+def component_resolved(spec):
+    """Protocol v5: which components have at least PARTICLE_FLOOR declared particles (spec only).
+
+    A spec without a particle count has no floor: every component counts as resolved.
+    """
+    particles = spec.get("particles")
+    return [particles is None or mass*particles >= PARTICLE_FLOOR for mass in spec["masses"]]
 
 
 def target_scale(spec, completed_steps):
@@ -209,9 +239,17 @@ def score_samples(fake, spec, completed_steps):
                       component_min_eigen_ratio=min(eigen_ratios),
                       component_core_covariance_error=sum(core_errors)/len(core_errors),
                       component_core_covariance_errors=core_errors,
-                      component_core_min_eigen_ratio=min(core_ratios),
+                      component_core_min_eigen_ratio=min(core_ratios), component_core_eigen_ratios=core_ratios,
                       max_component_spill=max(spills), component_spill=spills,
                       component_mass=mass.tolist(), target_mass=target.tolist(), component_counts=counts.tolist())
+        # Protocol v5 aggregates over resolved components only. With none resolved they take the
+        # exact-match values (vacuous); resolve() rejects a spec that would gate on that.
+        resolved = component_resolved(spec)
+        kept = [k for k, ok in enumerate(resolved) if ok]
+        result.update(component_resolved=resolved,
+                      resolved_core_covariance_error=sum(core_errors[k] for k in kept)/len(kept) if kept else 0.,
+                      resolved_core_min_eigen_ratio=min((core_ratios[k] for k in kept), default=1.),
+                      resolved_max_component_spill=max((spills[k] for k in kept), default=0.))
     return result
 
 
