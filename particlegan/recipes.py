@@ -1,5 +1,6 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
 import math
+import warnings
 from dataclasses import asdict, dataclass, replace
 
 
@@ -329,16 +330,24 @@ class Recipe:
         By default, initialize supported fresh G/D/E parameters once with
         ``batch_feature_zero`` and synchronize the supplied EMA critic if D
         changes. Supplied priors are preserved. Use ``initialization=None``
-        on the recipe for pretrained/custom weights or the old random init.
+        on the recipe for pretrained/custom weights or the old random init;
+        a UserWarning flags weights changed before this call that it overwrites.
         Lower-level optimizer factories do not initialize parameters.
         """
         from .initialization import _initialize, _external_init
         if self.initialization is not None and _external_init is None:
-            if generator is not None:
-                _initialize(generator, key=0, only_new=True)
-            changed_critic = _initialize(discriminator, key=1, only_new=True)
-            if encoder is not None:
-                _initialize(encoder, key=2, only_new=True)
+            changed_critic = False
+            for role, module, key in (("generator (G)", generator, 0),
+                                      ("discriminator (D)", discriminator, 1),
+                                      ("encoder (E)", encoder, 2)):
+                if module is None and key != 1:
+                    continue
+                modified = []
+                changed = _initialize(module, key=key, only_new=True, modified=modified)
+                changed_critic = changed_critic or (changed and key == 1)
+                if modified:
+                    _warn_overwrite(role, modified, self.initialization,
+                                    key == 1 and ema_critic is not None, key)
             if changed_critic and ema_critic is not None:
                 ema_critic.load_state_dict(discriminator.state_dict())
         from .particle_prior import ParticlePrior
@@ -362,6 +371,19 @@ class Recipe:
         latent_table = prior.z if type(prior) is ParticlePrior and prior.z.requires_grad else None
         return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
                 self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
+
+
+def _warn_overwrite(role, names, initialization, ema, key):
+    shown = ", ".join(repr(name) for name in names[:3]) + (", ..." if len(names) > 3 else "")
+    sync = " The EMA critic is then synced to the overwritten critic." if ema else ""
+    warnings.warn(
+        f"make_optimizers is overwriting {len(names)} {role} parameter(s) ({shown}) with "
+        f"initialization={initialization!r}, but they were changed after construction "
+        f"(load_state_dict, checkpoint restore, pretrained weights, training steps, or custom "
+        f"init in the module's constructor).{sync} To keep them, call make_optimizers before "
+        f"loading weights, or set initialization=None on the recipe. If the overwrite is "
+        f"intended, call particlegan.initialize_(module, key={key}) before make_optimizers.",
+        UserWarning, stacklevel=3)
 
 
 def get_recipe(name="gan", **overrides):

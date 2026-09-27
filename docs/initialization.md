@@ -24,6 +24,29 @@ and EMA setup; `GANTrainer` uses that same path. `make_prior` gives learnable
 particle tables an R2 cloud before any MoG calibration. Supplied priors are kept.
 For pretrained/custom weights, use `get_recipe(initialization=None)`.
 
+Loading weights into G/D/E *before* `make_optimizers` would let this default
+overwrite them, so `make_optimizers` emits a `UserWarning` naming the network
+(G, D, or E) and the affected parameters. Fix it by calling `make_optimizers`
+before `load_state_dict`/checkpoint restore, or by setting
+`initialization=None`. A constructor that runs its own init (e.g. Xavier)
+also triggers it; when replacing that init is intended, call
+`initialize_(network, key=...)` (G=0, D=1, E=2) before `make_optimizers`. That
+gives the same weights and makes the overwrite explicit.
+
+Detection compares each supported parameter's in-place write counter
+(`tensor._version`) with the count PyTorch's own constructor leaves (one
+write, two for an `nn.Embedding` with `padding_idx`). It catches
+`load_state_dict`, `copy_`, optimizer steps, and custom in-place init. Fresh
+modules, `.to(device)`, dtype casts, and parameters the initializer keeps
+(frozen, constant, identity, zero bias, already initialized) do not warn.
+Known gaps (no warning, weights still overwritten): writes that replace the
+tensor or bypass its counter, namely `load_state_dict(assign=True)`,
+`param.data` writes such as `param.data.copy_(...)`, `copy.deepcopy` of a
+loaded network, and a device/dtype move after loading with
+`torch.__future__.set_swap_module_params_on_conversion(True)`.
+The prior has no such hazard: `make_prior` initializes a table as it creates
+it, and a prior passed to `make_optimizers` is never reinitialized.
+
 For a standalone network and any optimizer:
 
 ```python
