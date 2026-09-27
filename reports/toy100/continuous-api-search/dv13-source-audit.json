@@ -1,0 +1,363 @@
+{
+  "created_utc": "2026-09-27T00:34:35.882460+00:00",
+  "candidate": "API-DV13",
+  "status": "DECLARATION_BINDING_MISMATCH; COMPLETED_AS_RUN_EVIDENCE_RETAINED",
+  "scope": "Independent stdlib-only immutable source/receipt audit; no Torch import, GPU, training, test rerun or active learner edits.",
+  "blocker": {
+    "severity": "declared_mechanism_mismatch",
+    "path": "particlegan/training.py",
+    "line": 141,
+    "actual_attached_variants": [
+      "dv2",
+      "dv3",
+      "dv4",
+      "dv5",
+      "dv6",
+      "dv7",
+      "dv8",
+      "dv9",
+      "dv10",
+      "dv11",
+      "dv12"
+    ],
+    "effect": "DV13 controller owns autonomous learning rates, bandwidth and payoff/surprise observation, but is not attached to KA2GradientPenalty. The ka2.py DV13 path never receives it. KA2 advance_blend retains its standalone surprise-driven behavior; alpha is not multiplied by DV13 game_trust and the data_drive<.1 branch does not force w=1/reset low_streak.",
+    "declaration": "Claims inherited DV7/DV10 data-authorized critic-memory behavior is preserved.",
+    "action": "Finish and preserve started fixed windows. Either explicitly identify the actual unbound-penalty variant and assess only its own evidence, or use a corrected distinct candidate with new sealed source and own scores within max3. Do not silently repair active source or transfer passes."
+  },
+  "source": {
+    "source_zip_sha256": "d101480d7498a1b4f0075454b6727012e9e6d7314c943724d9b1821b2bdcaabb",
+    "source_members": 30,
+    "package_sha256": {
+      "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "e77e70f0dc4bf9d375d3f58a2647e7d5f7f44d329a984c8b3dfe3eaec6332d1b",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+      "particlegan/ka2.py": "a544c68f95fbb50c439098c1f86ba0d22003485cd7dbeb93d0d8d688c827dc83",
+      "particlegan/particle_prior.py": "b7c182d94cadbeaff29a568b5cfaad7da3bfbd91354ac5b1b07980164190ecbf",
+      "particlegan/recipes.py": "ffef9d77feacea9e0470836471ee8276f2a5a181d17524d9798c42cd6a88df50",
+      "particlegan/training.py": "d1c9146b31afa9af7abbb4808a57d10deb043e34aaf6cec2c95eb7ba2996e992",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "declared_source_exact": true
+  },
+  "initialization": {
+    "original_G_D_z_EMA_models_exact": {
+      "G": true,
+      "D": true,
+      "prior": true,
+      "ema_G": true,
+      "ema_prior": true
+    },
+    "original_all_rng_and_target_exact": {
+      "streams_sha256": true,
+      "cpu_rng_sha256": true,
+      "cuda_rng_sha256": true,
+      "real_stream_sha256": true,
+      "means_sha256": true
+    },
+    "new_widths": {
+      "prior": {
+        "shape": [
+          20000,
+          2
+        ],
+        "all_zero": true,
+        "storage_device": "cuda:0",
+        "sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8"
+      },
+      "ema_prior": {
+        "shape": [
+          20000,
+          2
+        ],
+        "all_zero": true,
+        "storage_device": "cuda:0",
+        "sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8"
+      }
+    },
+    "original_critic_optimizer_exact": true,
+    "new_G_optimizer_group_count": 3,
+    "all_states_start_lazy": true
+  },
+  "learned_width_final": {
+    "prior": {
+      "shape": [
+        20000,
+        2
+      ],
+      "minimum": -1.2507662773132324,
+      "maximum": 1.348415493965149,
+      "nonzero": 40000,
+      "sha256": "29a96e687aa43e763f99791c3fc69f563e54d8b394249f47c8abc8f3143a1918"
+    },
+    "ema_prior": {
+      "shape": [
+        20000,
+        2
+      ],
+      "minimum": -1.2507541179656982,
+      "maximum": 1.348494291305542,
+      "nonzero": 40000,
+      "sha256": "25de5e3efcb1f369da43bccd870e42b63ee291b34e97924183790e21e7aa0520"
+    }
+  },
+  "mechanism": {
+    "formula": "latent z_i + controller_bandwidth * softplus(log_width_i)/log(2) * N(0,I); followed by G and independent output noise0.029.",
+    "cost": "O(N*d) prior coordinate spread per accepted update plus dense native Adam/EMA on N*d widths; O(B*d) indexed generation. No nearest-neighbor search, cache or extra critic probes for DV13.",
+    "extra_ring_parameters": 40000,
+    "extra_persistent_FP32_bytes_for_width_EMA_and_two_moments": 640000,
+    "RNG": "zeros_like initialization draws no RNG. One extra latent Gaussian per D/G generation versus atomic prior, same as DV10; index draws unchanged. Public sample uses supplied isolated generator for indices, perturbation, output in order.",
+    "live_EMA": "Correct prior and matching sampled indices passed to _generate for D,G and public sample. EMA widths come from EMA prior; controller base bandwidth is shared live-prior EMA, not an EMA-specific estimator.",
+    "gradients": "Only ordinary generator adversarial path learns indexed widths. Prior z retains its separate A2 group; widths receive native Adam at prior role LR. No new loss or target-moment fitting.",
+    "horizon": "total_steps=None; host budget/change times absent from new learner methods. Input0/output.029 constant; original799-call critic initialization and rolling statistics remain initialization/memory, not an evaluator endpoint.",
+    "shape": "Latent support assumes a two-dimensional particle table N-by-d with matching row indices; output shape remains the supplied G shape and controller flattens real observations. Diagonal latent widths are not a general full covariance model; arbitrary prior types/components are unsupported."
+  },
+  "ring": {
+    "source": {
+      "source_zip_sha256": "d101480d7498a1b4f0075454b6727012e9e6d7314c943724d9b1821b2bdcaabb",
+      "source_members": 30,
+      "package_sha256": {
+        "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/continuous.py": "e77e70f0dc4bf9d375d3f58a2647e7d5f7f44d329a984c8b3dfe3eaec6332d1b",
+        "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "particlegan/ka2.py": "a544c68f95fbb50c439098c1f86ba0d22003485cd7dbeb93d0d8d688c827dc83",
+        "particlegan/particle_prior.py": "b7c182d94cadbeaff29a568b5cfaad7da3bfbd91354ac5b1b07980164190ecbf",
+        "particlegan/recipes.py": "ffef9d77feacea9e0470836471ee8276f2a5a181d17524d9798c42cd6a88df50",
+        "particlegan/training.py": "d1c9146b31afa9af7abbb4808a57d10deb043e34aaf6cec2c95eb7ba2996e992",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "declared_source_exact": true
+    },
+    "completed_updates": 4600,
+    "observations": 460,
+    "rate_rows": 4600,
+    "state_receipts": 46,
+    "segments": [
+      {
+        "start": 0,
+        "end": 2400,
+        "first_arrival": 610,
+        "delay": 610,
+        "passing_since_arrival": 180,
+        "checks_since_arrival": 180,
+        "misses": [],
+        "minimum_hq_since_arrival": 0.905517578125,
+        "minimum_modes_since_arrival": 8,
+        "suffix_checks": 180,
+        "suffix_start": 610
+      },
+      {
+        "start": 2400,
+        "end": 4600,
+        "first_arrival": 2750,
+        "delay": 350,
+        "passing_since_arrival": 181,
+        "checks_since_arrival": 186,
+        "misses": [
+          2770,
+          2780,
+          2790,
+          2810,
+          2850
+        ],
+        "minimum_hq_since_arrival": 0.711669921875,
+        "minimum_modes_since_arrival": 6,
+        "suffix_checks": 175,
+        "suffix_start": 2860
+      }
+    ],
+    "seconds": 66.71223354502581,
+    "frozen_observations": 220,
+    "frozen_passing": 0,
+    "raw_receipts_exact": true,
+    "native_CPU_scalar_Adam_steps": 18,
+    "prior_2_rates_fully_recorded": true,
+    "summary_scope": "summary rates list omits new prior_2, but every-update trace records it equal to prior_1; initial whole-prior/optimizer mismatch is expected from declared new parameters, not original-fixture drift."
+  },
+  "vector": {
+    "source": {
+      "source_zip_sha256": "ae37c1a48ccdf59ba8c6d953f9d5adb15439cd1baa90c9eac67123f1915b8633",
+      "source_members": 108,
+      "package_sha256": {
+        "particlegan/__init__.py": "7aeda61efc908c3ea0889ef15199d8f1f74853ff22ae8c76ad6694c218e29480",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/continuous.py": "e77e70f0dc4bf9d375d3f58a2647e7d5f7f44d329a984c8b3dfe3eaec6332d1b",
+        "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "particlegan/ka2.py": "a544c68f95fbb50c439098c1f86ba0d22003485cd7dbeb93d0d8d688c827dc83",
+        "particlegan/particle_prior.py": "b7c182d94cadbeaff29a568b5cfaad7da3bfbd91354ac5b1b07980164190ecbf",
+        "particlegan/recipes.py": "ffef9d77feacea9e0470836471ee8276f2a5a181d17524d9798c42cd6a88df50",
+        "particlegan/training.py": "d1c9146b31afa9af7abbb4808a57d10deb043e34aaf6cec2c95eb7ba2996e992",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "declared_source_exact": true
+    },
+    "status": "PASS",
+    "observations": 24,
+    "passing": 14,
+    "final_suffix": 10,
+    "first_pass": 400,
+    "suffix_start": 750,
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.12361217103165748,
+      "mean_error": 0.170210063457489,
+      "covariance_error": 0.1783398985862732,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.09526366740465164,
+      "min_mass_ratio": 0.68359375,
+      "hq": 0.981201171875,
+      "component_covariance_error": 0.41123219206929207,
+      "component_covariance_errors": [
+        0.10319067537784576,
+        0.1445605754852295,
+        0.4558374881744385,
+        0.9413400292396545
+      ],
+      "component_min_eigen_ratio": 0.8018379211425781,
+      "component_mass": [
+        0.497802734375,
+        0.395263671875,
+        0.09326171875,
+        0.013671875
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        2039,
+        1619,
+        382,
+        56
+      ],
+      "ema": {
+        "sw1_normalized": 0.12471383805698133,
+        "mean_error": 0.16835148632526398,
+        "covariance_error": 0.1756877899169922,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.09526366740465164,
+        "min_mass_ratio": 0.68359375,
+        "hq": 0.9775390625,
+        "component_covariance_error": 0.5481101032346487,
+        "component_covariance_errors": [
+          0.08053950220346451,
+          0.14257775247097015,
+          0.5179139375686646,
+          1.4514092206954956
+        ],
+        "component_min_eigen_ratio": 0.8005068898200989,
+        "component_mass": [
+          0.497802734375,
+          0.395263671875,
+          0.09326171875,
+          0.013671875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2039,
+          1619,
+          382,
+          56
+        ]
+      }
+    },
+    "seconds": 22.83810782316141,
+    "original_ordered_parameter_fixture_exact": true,
+    "added_widths_initially_zero": true,
+    "unchanged_frozen_host": {
+      "reports/data-drift-api/frozen_vector_tasks.py": true,
+      "benchmarks/transfer_suite/protocol.py": true,
+      "benchmarks/transfer_suite/public_default_verification.py": true,
+      "benchmarks/transfer_suite/plans/default_comparison.json": true,
+      "reports/transfer_suite/unadjusted/leading_profile.json": true,
+      "lib/toy_models.py": true,
+      "lib/toy_metrics.py": true,
+      "benchmarks/toy100/models.py": true
+    },
+    "caller_data_rng_saved": true,
+    "native_CPU_scalar_Adam_steps": 16,
+    "scope": "Own measured pass for identical unbound-penalty DV13 source; not transferable to a corrected declared learner."
+  },
+  "image_harness": {
+    "source_sha256": "4e1f2675b44ebdf6c3e3482b287c6e0f844b38ba2cb4d88a39e8a01300fbf5cc",
+    "status": "SOURCE_PREPARATION_ONLY",
+    "indices_enumerated": true,
+    "legacy_initialization_compare_strips_width_only": true,
+    "caveat": "Manifest prose still says noise only0/.029 and underdescribes candidate latent noise; new widths must be separately proved zero in actual image checkpoint. No image score audited here."
+  },
+  "public_API_caveats": [
+    "Ordinary GANTrainer binds sampling and optimizer width ownership, but misses the inherited penalty-controller binding above.",
+    "make_prior returns atomic samples even though widths exist; standalone factories do not own a complete perturbation/controller/penalty/checkpoint transaction. Conditional/native custom hosts remain unqualified.",
+    "Splitting every prior parameter into its own optimizer group is generic beyond DV13 and changes group/checkpoint topology for multi-parameter priors; unchanged one-table predecessors are unaffected.",
+    "Width softplus has no explicit upper bound; zero coordinate base bandwidth prevents that coordinate width from contributing or learning. These are shape/dynamics assumptions, not established quality failures.",
+    "Checkpoint preserves width parameters, EMA, moments, controller and streams; source identity remains an external binding, so same named recipe alone cannot distinguish repaired wiring.",
+    "Current controller loader validates keys/variant but not deep tensor/clock consistency. Full own CUDA fresh-process continuation and budget-prefix still pending."
+  ],
+  "tests": {
+    "source_retained": true,
+    "declared_contracts": [
+      "original parameters/RNG plus zero widths",
+      "adversarial width/EMA/native-Adam update",
+      "live/EMA own width routing",
+      "isolated samples and full next-state CPU restore",
+      "missing-index rejection before RNG mutation"
+    ],
+    "missing_contract": "No assertion that penalty.regularizer.continuous_controller is trainer.controller; no recorded completed test results reviewed at this point.",
+    "rerun": false
+  },
+  "retained_receipts": {
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/ring-source.zip": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/reports/data-drift-api/runs/dv13-single/source.zip",
+      "sha256": "d101480d7498a1b4f0075454b6727012e9e6d7314c943724d9b1821b2bdcaabb"
+    },
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/ring-declaration.json": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/reports/data-drift-api/runs/dv13-single/declaration.json",
+      "sha256": "5f2bd735cd04a736935656cbeaad118de4da72ae074c66950cebc6c1008b2595"
+    },
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/ring-initial.json": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/reports/data-drift-api/runs/dv13-single/initial.json",
+      "sha256": "979a1c231a1acf58542961daf150c150f8555c75b25bcf2a4b87c2c6db9a6b5b"
+    },
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/ring-summary.json": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/reports/data-drift-api/runs/dv13-single/summary.json",
+      "sha256": "4ba171ae04dbddcb6ab3e5d5f8ac0e4fbbcb696de1ce2ae3de9471d99b16764b"
+    },
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/ring-result.json": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/reports/data-drift-api/runs/dv13-single/result.json",
+      "sha256": "0ccc89e6f9f1e07f5fac84502479a02b2ed17405905e5e61d34f5fde8f289b68"
+    },
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/dv13.json": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/reports/data-drift-api/dv13.json",
+      "sha256": "508f6020be41bac4140ab90d2096c050efa6266d0e08b2c9e102dd6ddd0b79a6"
+    },
+    "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/dv13-source-audit-receipts/test_data_drift_dv13.py": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495/repo/tests/test_data_drift_dv13.py",
+      "sha256": "d5e99a4a8b6801243f0ce3c2641a8bc68b53049b3109cf983e65391286fb704e"
+    }
+  }
+}

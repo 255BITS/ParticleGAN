@@ -1,0 +1,8 @@
+{
+  "candidate": "API-DV13",
+  "status": "CONFIRMED_DECLARATION_MISMATCH",
+  "detected_by": "supervisor source reviewer",
+  "confirmed_source": "particlegan/training.py:141 attaches only dv2-dv12, omits dv13",
+  "actual_behavior": "Separate data/payoff/surprise rate controller and learned widths run. ka2 critic memory retains native surprise mixing; data-driven memory attachment absent. DV7 memory claim in pre-run declaration is false. Original declaration/source/results remain untouched.",
+  "action": "Finish DV13 bars4 with same sealed package to measure learned support image behavior. Corrected memory binding requires DV14 and own evidence. No long/full qualification credit for DV13."
+}

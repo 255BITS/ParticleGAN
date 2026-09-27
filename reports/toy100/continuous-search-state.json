@@ -862,6 +862,28 @@
       "mode_hold": "FAIL_0_OF_24",
       "final_modes": 0,
       "qualified": false
+    },
+    "api_rp8": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "initial_retention": "189/189",
+      "shift_delay": 290,
+      "shift_retention": "192/192",
+      "image": "FAIL_10_OF_24_SUFFIX_3",
+      "mode_hold": "FAIL_0_OF_24",
+      "final_modes": 6,
+      "qualified": false
+    },
+    "api_dv13": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "initial_retention": "180/180",
+      "shift_delay": 350,
+      "shift_retention": "181/186",
+      "shift_final_suffix": 175,
+      "unequal_mass": "PASS_14_OF_24_SUFFIX_10",
+      "bars4": "FAIL_10_OF_24_SUFFIX_2",
+      "actual_critic_memory": "NATIVE_KA2_INTENDED_DATA_BINDING_OMITTED",
+      "declaration_deviation": "reports/toy100/continuous-api-search/dv13-declaration-deviation.json",
+      "qualified": false
     }
   },
   "observed_utc": "2026-09-27T00:29:34.996812+00:00"

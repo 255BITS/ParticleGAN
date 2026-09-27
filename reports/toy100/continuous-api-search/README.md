@@ -31,6 +31,7 @@ alone is insufficient, and longer verification remains required.
 | API-DV10: continuous latent support smoothing | 620 | 179/179 | 320 | 184/189 | Five early recovery misses then180 straight. Unequal_mass7/24, final7 **PASS**; bars4 **FAIL**, finalHQ.8125. Broader host/source independently verified. |
 | API-DV11: critic evidence controls latent smoothing | 560 | 185/185 | 290 | 190/192 | Two early recovery misses, then187 straight. Unequal_mass0/24 **FAIL**; source independently verified. |
 | API-DV12: locally bounded latent smoothing | 590 | 182/182 | 290 | 191/192 | One early recovery miss2730, then187 straight. **Rejected:** unequal_mass2/24, final suffix0; final covariance error.8844 exceeds.85. |
+| API-DV13: learned local latent widths, actual native critic memory | 610 | 180/180 | 350 | 181/186 | Five early recovery misses, then175 straight. Unequal_mass14/24, final10 **PASS**; bars4 **FAIL10/24**, suffix2. Intended data-driven critic-memory attachment was omitted; actual behavior and original declaration preserved. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -51,6 +52,7 @@ alone is insufficient, and longer verification remains required.
 | API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and six vectors pass; checkpoint and horizon checks pass. Completed30000: delays350/450/250, with544/544,146/146,1876/1876,276/276 after arrival. Broader/API incomplete; matched K3P references retained below. **Rejected:** mode_hold0/24, final5/8 modes; frozen host independently verified. |
 | API-RP6: balance predictor energy between adversarial players | 660 | 173/175 | 380 | 182/183 | Early misses680/690 and2790; final shifted suffix181. **Rejected:** intensity1/24, final suffix1. Small-particle task also **FAIL0/24**, final7/8 modes. |
 | API-RP7: richer coupled three-field response | 600 | 181/181 | 340 | 187/187 | **Rejected:** intensity3/24, final suffix2; mode_hold0/24, final0/8 modes andHQ0. Own unchanged package and frozen hosts independently verified. |
+| API-RP8: minimize the full local linear residual | 520 | 189/189 | 290 | 192/192 | **Rejected:** intensity10/24, final suffix3; mode_hold0/24, final6/8 modes withHQ1.0. Broader sources and scorer independently verified. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
