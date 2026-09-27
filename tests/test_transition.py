@@ -12,7 +12,7 @@ from experiments.train_transition import (DEFAULTS, training_recipe, validate, t
 from lib.trajectory import Routes
 from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionDiscriminator, TransitionCritics, shuffle_blocks, residual, metrics)
-from particlegan import get_recipe
+from particlegan import get_recipe, init
 from particlegan.grad_regularizers import GradientPenalty
 
 
@@ -46,7 +46,7 @@ class TransitionTests(unittest.TestCase):
 
     def test_shared_latent_joint_gradients_and_ucd(self):
         recipe = training_recipe(DEFAULTS)
-        prior = recipe.make_prior(num_particles=32)
+        prior = init.deterministic_orthogonal_(recipe.make_prior(num_particles=32))
         g, d = TransitionGenerator(), TransitionDiscriminator(32)
         c, geom, tick, real = self.toy.batch(16, self.rng)
         context = self.toy.condition(geom, tick)
@@ -220,7 +220,7 @@ class TransitionTests(unittest.TestCase):
 
     def test_mog_noise_raw_regularization_and_checkpoint(self):
         recipe = training_recipe(DEFAULTS)
-        prior = recipe.make_prior()
+        prior = init.deterministic_orthogonal_(recipe.make_prior())
         self.assertGreater(float(prior.sigma), 0)
         ids = torch.zeros(32, dtype=torch.long)
         z = prior(ids, generator=self.rng)

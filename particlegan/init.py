@@ -263,8 +263,9 @@ def _register_particlegan():
         module.head.weight[:, -count:].zero_()
 
     def recalibrate(prior):
-        # Calibrated spacing follows the new means; an explicit sigma is kept.
-        if prior.sigma_rel > 0:
+        # Calibrated spacing (d0 > 0, even at sigma_rel=0) follows the new means;
+        # an explicit sigma is kept.
+        if prior.sigma_rel > 0 or prior.d0 > 0:
             sigma, d0 = calibrate_mog_sigma(prior.means(), prior.sigma_rel)
             prior.set_sigma(sigma)
             prior.d0.copy_(d0)

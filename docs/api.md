@@ -15,7 +15,7 @@ trainer owns the training lifecycle.
 ```python
 import torch
 from torch import nn
-from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe
+from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe, init
 
 torch.manual_seed(0)
 device = torch.device("cpu")
@@ -23,7 +23,10 @@ recipe = get_recipe(total_steps=1000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
 D = BatchDistanceDiscriminator().to(device)
-trainer = GANTrainer(recipe, G, D, seed=0)
+init.deterministic_orthogonal_(G, seed=0)   # optional; see Initialization
+init.deterministic_orthogonal_(D, seed=1)
+prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
+trainer = GANTrainer(recipe, G, D, prior=prior, seed=0)
 
 def real_batch():
     return .2 * torch.randn(recipe.batch_size, 2, device=device) + 1
@@ -51,65 +54,199 @@ for applications that manage their own updates.
 
 ## Initialization
 
-```python
-from particlegan import initialize_, get_recipe
+`particlegan.init` is optional, explicit tooling in the style of
+`torch.nn.init`. Nothing else in the package writes network weights: the
+recipe factories, `make_prior` and `GANTrainer` use modules exactly as you
+pass them. The examples initialize like this:
 
-initialize_(network, key=0)               # in place; returns network
-recipe = get_recipe()                    # initialization="batch_feature_zero"
-preserve = get_recipe(initialization=None)
+```python
+from particlegan import get_recipe, init
+
+recipe = get_recipe()
+init.deterministic_orthogonal_(G, seed=0)                    # in place; returns G
+init.deterministic_orthogonal_(D, seed=1)
+init.deterministic_orthogonal_(E, seed=2)                    # an encoder, if any
+prior = init.deterministic_orthogonal_(recipe.make_prior())  # R2 particle table
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
 ```
 
-`initialize_(module, *, key=0)` recursively initializes trainable standard
-`nn.Linear`, Conv1d/2d/3d, ConvTranspose1d/2d/3d, `nn.Embedding`, and
-`nn.MultiheadAttention` parameters. It uses deterministic CPU float64 QR,
-then converts to each parameter's existing dtype/device. Weight entry RMS
-matches the standard PyTorch initialization distribution before selective
-batch-readout/padding zeroing; linear/conv biases
-use a deterministic pattern at their standard scale. Packed attention QKV
-uses one QR over its stored tensor; separate projections use separate QRs.
-Batch-distance readout coefficients start at zero and remain trainable.
+Call it on fresh networks, **before** loading trained weights, taking EMA
+copies, or building optimizers; it does not touch optimizer state or copies
+made earlier. Importing ParticleGAN changes nothing in PyTorch.
 
-The function preserves frozen parameters, constant/identity weight matrices,
-zero biases, normalization parameters, buffers, and unknown custom parameters.
-Embedding padding rows remain zero. Materialize lazy layers first. Custom
-layer scales, fused layouts, parametrized weights, and arbitrary user-defined
-parameters require caller initialization. This is not a guarantee that every
-possible network becomes deterministic. CPU QR can be expensive for large
-matrices; no transformer or LoRA training performance is claimed.
+### `deterministic_orthogonal_(module, *, seed=0, strict=True)`
 
-The key is a nonnegative integer identifying a network, not an RNG seed.
-Weights also depend on parameter order and shape. Calls consume no RNG and
-install no global hooks. Use before optimizer construction (Adam, AdamW, SGD,
-or another optimizer), and before loading trained weights. Repeating the
-explicit call reinitializes supported parameters; it does not clear optimizer
-state. Numerical repeatability assumes the same software/numerical environment.
+Rewrites the trainable parameters of `module` and its submodules in place and
+returns `module`. Each layer class declares, per parameter, the distribution
+its PyTorch constructor draws from; the replacement keeps that distribution's
+scale but not its randomness:
 
-`recipe.make_optimizers` applies this default once to G, D, and optional E,
-using keys 0, 1, and 2. It recognizes parameters previously initialized by
-`initialize_` and preserves them, including after training. If it initializes
-D, it synchronizes the caller-provided EMA critic before building optimizers.
-`GANTrainer` uses this factory. In a custom loop, create your G/E EMA copies
-**after** this factory initializes the live networks. The lower-level `make_generator_optimizer` and
-`make_critic_optimizer` preserve weights; call `initialize_` yourself when
-using them directly. `recipe.make_prior` initializes learnable tables with an
-R2 normal-quantile cloud at `init_std`, before MoG spacing calibration. A
-caller-supplied prior and a frozen Gaussian prior are preserved.
+| Parameter | Value |
+| --- | --- |
+| Matrix or kernel (2+ dims), `Uniform`/`Normal` | Semi-orthogonal matrix over `[shape[0], prod(shape[1:])]`, scaled so the entry RMS equals the declared distribution's RMS; reshaped back |
+| Vector or scalar, `Uniform`/`Normal` | Deterministic pattern with the declared mean and standard deviation |
+| Particle table, `R2Normal(mean, std)` | Row i is the i-th R2 low-discrepancy point mapped through the normal quantile |
 
-**Migration:** use `get_recipe(initialization=None)` when supplying pretrained
-networks, loading network state before building a trainer/optimizers, or keeping
-custom/random initialization. A fresh trainer followed by
-`trainer.load_state_dict(checkpoint)` restores its saved weights and RNG normally.
-The recipe field is included in `to_dict()` and checkpoints. Older saved recipe
-dictionaries lacking it acquire the new default; add `initialization=None` when
-reproducing their original construction. `GANTrainer.load_state_dict` accepts
-either construction setting: it restores saved weights and initialization
-metadata, treating a missing historical field as `None`. Initialization markers are in-memory
-metadata, not checkpoint state. Importing ParticleGAN does not modify PyTorch.
+`seed` is a nonnegative integer that keys a hash, not an RNG seed: values
+come from hashing `(seed, parameter index, shape)` in CPU float64, then are
+cast to each parameter's dtype and device. No RNG state is read or consumed,
+and results do not depend on the device. The same seed and architecture give
+the same weights, so networks with matching shapes need different seeds (the
+examples use G=0, D=1, E=2). The parameter index is its position in
+`module.named_parameters()`, so initialize the whole network in one call; a
+submodule initialized on its own gets different values. R2 tables ignore the
+seed. Repeating the call rewrites the same values. CPU QR can be slow for very
+large matrices.
+
+Left as they are:
+
+- frozen parameters (`requires_grad=False`) and buffers, so a frozen
+  pretrained backbone keeps its weights while its new trainable head is
+  initialized;
+- parameters declared `KEEP` (normalization scales and shifts, `PReLU`
+  slopes, `MultiheadAttention.in_proj_bias`);
+- declared zero vectors and constant or identity matrices, which constructors
+  set on purpose (e.g. zero attention output biases);
+- undeclared parameters when `strict=False`.
+
+**Strict mode.** With `strict=True` (the default), any other trainable
+parameter no declaration covers raises `ValueError` before anything is
+written. The message lists each one as `'path' (OwningClass)`:
+
+```text
+ValueError: deterministic_orthogonal_ has no declaration for 2 trainable parameter(s):
+'1.patterns' (Hopfield), '1.beta' (Hopfield). Declare them with
+particlegan.init.register(<layer class>, {name: Uniform/Normal/R2Normal/KEEP}),
+or pass strict=False to leave them as-is.
+```
+
+Declare the layer with `register`, or pass `strict=False` to leave undeclared
+parameters on their constructor's init. Lazy layers must be materialized
+first, otherwise `ValueError`.
+
+### Initializing priors
+
+`ParticlePrior` declares its table `z` as `R2Normal(0, init_std)`, so
+
+```python
+prior = init.deterministic_orthogonal_(recipe.make_prior())
+```
+
+gives a learnable table the R2 cloud at the prior's `init_std`. For a
+`MoGParticlePrior` whose spacing was calibrated (`d0 > 0`, as
+`recipe.make_prior()` does for MoG recipes, even at `sigma_rel=0`), the call
+recalibrates `sigma` and `d0` on the new centers; an explicitly given `sigma`
+is kept. A
+`learnable=False` table is a buffer and is not changed. `GaussianPrior` has
+no parameters. A learned `DrawSource` table (DDGAN) is declared
+`R2Normal(0, 1)`.
+
+### `register(cls, declarations=None, *, finalize=None)`
+
+Declares how `deterministic_orthogonal_` treats the parameters that `cls`
+itself owns (not those of its submodules). `declarations` maps each parameter
+name to a spec:
+
+| Spec | Meaning |
+| --- | --- |
+| `init.Uniform(low, high)` | The constructor draws U(low, high) |
+| `init.Normal(mean=0, std=1)` | The constructor draws N(mean, std²) |
+| `init.R2Normal(mean=0, std=1)` | 2-D particle table: R2 points through the N(mean, std²) quantile |
+| `init.KEEP` | The constructor's value is deliberate; never changed |
+
+Pass a callable `module -> mapping` when a spec depends on the instance, such
+as its fan-in. Declarations merge along the class MRO, base classes first, so a
+subclass declares only the parameters it adds or overrides; a subclass of
+`nn.Linear` inherits the `weight`/`bias` declarations. Declaring a name the
+module lacks, or a spec of another type, raises when `declarations` or
+`deterministic_orthogonal_` reaches the module. `finalize(module)` runs under `no_grad` after the call has
+written any parameter inside the module, for layout fix-ups (the built-in
+`nn.Embedding` rezeroes its `padding_idx` row). Registering a class again
+replaces its entry.
+
+A Hopfield-style memory layer with raw stored patterns and a learnable inverse
+temperature:
+
+```python
+import math
+import torch
+from torch import nn
+from particlegan import init
+
+class Hopfield(nn.Module):
+    def __init__(self, dim, count, beta=8.0):
+        super().__init__()
+        self.patterns = nn.Parameter(torch.randn(count, dim) / math.sqrt(dim))
+        self.beta = nn.Parameter(torch.tensor(beta))  # inverse temperature
+
+    def forward(self, x):
+        weights = torch.softmax(self.beta * x @ self.patterns.T, dim=-1)
+        return weights @ self.patterns
+
+init.register(Hopfield, lambda layer: {
+    "patterns": init.Normal(0.0, 1 / math.sqrt(layer.patterns.shape[1])),
+    "beta": init.KEEP,     # a chosen temperature, not a random draw
+})
+
+net = nn.Sequential(nn.Linear(16, 32), Hopfield(32, 64), nn.Linear(32, 1))
+init.deterministic_orthogonal_(net, seed=1)
+```
+
+`patterns` becomes a 64×32 semi-orthogonal matrix at RMS `1/sqrt(32)`;
+without `KEEP`, the scalar `beta` would be replaced by a pattern value.
+
+### `declarations(module)`
+
+Returns `{path: spec}` for every trainable parameter, with `None` for an
+undeclared one, and changes nothing. Use it to check a custom network before
+initializing it:
+
+```python
+>>> init.declarations(net)
+{'0.weight': Uniform(low=-0.25, high=0.25), '0.bias': Uniform(low=-0.25, high=0.25),
+ '1.patterns': Normal(mean=0.0, std=0.1767...), '1.beta': KEEP,
+ '2.weight': Uniform(low=-0.1767..., high=0.1767...), '2.bias': Uniform(...)}
+```
+
+### Built-in declarations
+
+| Layer | Declaration |
+| --- | --- |
+| `nn.Linear`, `nn.Conv1d/2d/3d`, `nn.ConvTranspose1d/2d/3d` | `weight`, `bias`: `Uniform(-1/sqrt(fan_in), 1/sqrt(fan_in))`, fan-in = `prod(weight.shape[1:])` |
+| `nn.Embedding` | `weight`: `Normal(0, 1)`; the `padding_idx` row is zeroed afterwards |
+| `nn.MultiheadAttention` | packed `in_proj_weight` or `q/k/v_proj_weight`: Xavier-uniform bound; `bias_k/bias_v`: Xavier-normal std; `in_proj_bias`: `KEEP`; `out_proj` is an `nn.Linear` |
+| `nn.LayerNorm`, `nn.GroupNorm`, BatchNorm, InstanceNorm, `nn.RMSNorm` | `weight`, `bias`: `KEEP` |
+| `nn.PReLU` | `weight`: `KEEP` |
+| `ParticlePrior` (and `MoGParticlePrior`) | `z`: `R2Normal(0, init_std)`; MoG recalibrates calibrated spacing |
+| `particlegan.diffusion.DrawSource` | `table`: `R2Normal(0, 1)` |
+| `BatchDistanceDiscriminator` | its layers use the rules above; the head's batch-distance coefficients are then zeroed, leaving the per-point score path active |
+
+Packed attention QKV uses one QR over its stored tensor. Parametrized weights,
+fused layouts and other custom parameters need their own declaration.
+
+### Migrating from `initialize_` and `Recipe.initialization`
+
+Earlier development builds had `Recipe.initialization="batch_feature_zero"`,
+which `make_optimizers`/`GANTrainer` applied to fresh G/D/E weights (keys 0, 1,
+2) and `make_prior` to learnable tables, plus `particlegan.initialize_`. Both
+are removed; `get_recipe(initialization=...)` is now a `TypeError`.
+
+| Before | Now |
+| --- | --- |
+| `initialize_(module, key=k)` | `init.deterministic_orthogonal_(module, seed=k)` (same values) |
+| implicit init in `make_optimizers` / `GANTrainer` | call `deterministic_orthogonal_` on G (0), D (1), E (2) first, then build the EMA critic |
+| implicit R2 table in `recipe.make_prior()` | `init.deterministic_orthogonal_(recipe.make_prior())`, then pass `prior=` to `GANTrainer` |
+| `get_recipe(initialization=None)` | `get_recipe()`; weights are already left alone |
+
+The old path skipped undeclared custom parameters silently; strict mode now
+reports them. `GANTrainer.load_state_dict` still accepts checkpoints whose saved
+recipe records `initialization` (`None` or `"batch_feature_zero"`); saved
+weights replace construction-time values as before.
 
 The [math guide](initialization.md) describes the QR identities, targeted
 batch-feature correction, convolution storage, attention, and LoRA. The
-[research report](../reports/toy100/batch-feature-init/README.md) separates the
-22/22 frozen-suite evidence from this public API and its unit tests.
+[research report](../reports/toy100/batch-feature-init/README.md) holds the
+22/22 frozen-suite evidence for the construction this API reproduces.
 
 ## GANTrainer
 
@@ -117,11 +254,10 @@ batch-feature correction, convolution storage, attention, and LoRA. The
 penalty_generator=None, optimizer_options=None, penalty_options=None)` is an
 explicitly imported helper, separate from `Recipe`. Move networks to the same
 device and floating dtype first. When omitted, the helper constructs the prior
-from the recipe; supply `prior=` to preserve an existing initialization.
-`seed` controls owned sampling streams. The recipe defaults to deterministic
-network weights and a deterministic recipe-created prior; data sampling and
-training noise still need controlled RNG streams for repeatable training.
-See [initialization](#initialization) for supported layers and preserving weights.
+with `recipe.make_prior()`. `seed` controls owned sampling streams. The helper
+never changes the weights it receives; for deterministic starting weights,
+call [`init.deterministic_orthogonal_`](#initialization) on G, D and a
+recipe-made prior first and pass `prior=`, as in the minimal loop above.
 
 The helper supports scalar, unconditional GANs with `ParticlePrior`. MoG,
 encoders, conditional GANs and DDGAN use the component API. A step performs one
@@ -205,7 +341,7 @@ import copy
 import torch
 from torch import nn
 from torch.nn import functional as F
-from particlegan import DDGAN, UCD, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, UCD, get_recipe, init, scale_learning_rates, ucd_loss
 
 device = torch.device("cpu")
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
@@ -235,7 +371,9 @@ class LogitNetwork(nn.Module):
 
 G = Generator(recipe.z_dim, recipe.num_classes, process.steps).to(device)
 D = UCD(LogitNetwork(recipe.num_classes, process.steps), recipe.num_classes).to(device)
-prior = recipe.make_prior().to(device)
+init.deterministic_orthogonal_(G, seed=0)   # optional deterministic start
+init.deterministic_orthogonal_(D, seed=1)
+prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
 gan = recipe.make_loss()
 spread = recipe.make_prior_regularizer()
 # Adam optimizers whose step() runs the recipe's regularization (K3P today);
@@ -331,9 +469,10 @@ ParticlePrior(num_particles=20_000, z_dim=4, init_std=1.0,
 
 An `nn.Module` with table `prior.z` of shape `[num_particles, z_dim]`, initialized
 from a zero-mean Gaussian with standard deviation `init_std`. By default the
-table is a parameter. With `learnable=False`, it is a fixed buffer. The
-constructor keeps this random draw; `recipe.make_prior()` gives a learnable
-table the recipe's default R2 initialization instead.
+table is a parameter. With `learnable=False`, it is a fixed buffer.
+`recipe.make_prior()` keeps this random draw;
+[`init.deterministic_orthogonal_(prior)`](#initializing-priors) replaces a learnable table
+with a deterministic R2 cloud at `init_std`.
 
 | Method / attribute | Result |
 | --- | --- |
@@ -426,8 +565,9 @@ prior.sigma_rel = 1/40
 
 This calibrates the **already initialized centers without redrawing them**.
 `recipe.make_prior()` with a MoG recipe (or `prior_kind="mog", sigma_rel=...`)
-performs these steps after giving the centers the recipe's default R2
-initialization; the direct constructor above keeps its random draw.
+performs these steps on the constructor's random centers.
+`init.deterministic_orthogonal_(prior)` later moves the centers to an R2 cloud
+and repeats the calibration for a calibrated prior.
 The helper accepts supplied read-space centers; it does not standardize, mutate
 centers, or consume RNG. It returns detached scalar tensors `(sigma, d0)` on the
 centers' device and dtype. The exact median averages the two middle nearest-neighbor
@@ -716,7 +856,6 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `direct_particle_betas` | `(0, .9)` (`make_generator_optimizer(direct_particles=...)`) |
 | `input_noise_std`, `input_noise_anneal_end` | `.5`, `.1` |
 | `output_noise_std`, `output_noise_warmup` | `.029`, `.2` |
-| `initialization` | `"batch_feature_zero"`; `None` preserves supplied weights |
 | `batch_size`, `total_steps` | `2048`, `7_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
@@ -726,9 +865,9 @@ caller.
 
 | Optional factory | Result |
 | --- | --- |
-| `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`; learnable tables follow `initialization` |
+| `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`, tables drawn at random ([initialize](#initializing-priors) for R2) |
 | `recipe.make_loss()` | `GANLoss` (RpGAN logistic) |
-| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Initialize supported fresh G/D/E weights, then build `(opt_g, opt_d)` (see below) |
+| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Adam for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Adam for generator-side params (see below) |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
@@ -748,7 +887,7 @@ d_loss = adv_d + penalty(D, real, fake)                  # or penalty(D, x, fake
 opt_d.zero_grad(); d_loss.backward(); opt_d.step()       # guard, Adam, EMA + LR record
 opt_g.zero_grad(); g_loss.backward(); opt_g.step()       # Adam with A2 latent damping
 
-initialize_(D2, key=3)   # lower-level factories keep weights; 0/1/2 are the recipe's G/D/E keys
+init.deterministic_orthogonal_(D2, seed=3)   # optional; 0/1/2 are the examples' G/D/E seeds
 opt_d2 = recipe.make_critic_optimizer(D2, ema_critic=copy.deepcopy(D2))  # a second critic
 penalty2 = recipe.make_critic_penalty(opt_d2)
 
@@ -823,7 +962,7 @@ from particlegan import get_recipe
 with open("model.toml", "rb") as file:
     config = tomllib.load(file)
 recipe = get_recipe(**config["particlegan"])
-prior = recipe.make_prior(**config["prior"])   # recipe-default table initialization
+prior = recipe.make_prior(**config["prior"])
 recipe = get_recipe(**{**config["particlegan"], "lr": 1e-4})
 ```
 

@@ -8,6 +8,7 @@ import torch
 from torch import nn
 
 from particlegan import BatchDistanceDiscriminator, GANTrainer, MoGParticlePrior, get_recipe, init
+from particlegan.particle_prior import calibrate_mog_sigma
 
 
 def test_recipe_never_touches_weights():
@@ -48,6 +49,9 @@ def test_priors_take_r2_tables_and_mog_spacing_follows():
     again = init.deterministic_orthogonal_(recipe.make_prior())
     assert torch.equal(prior.z, again.z) and torch.equal(prior.sigma, again.sigma)
     assert not torch.equal(prior.sigma, sigma)
+    # sigma_rel=0 still calibrates d0 in make_prior, so d0 follows the new means too.
+    unscaled = init.deterministic_orthogonal_(get_recipe(prior_kind="mog", num_particles=32, z_dim=3).make_prior())
+    assert torch.equal(unscaled.d0, calibrate_mog_sigma(unscaled.means(), 0)[1])
     fixed = MoGParticlePrior(16, 2, sigma=0.3)
     init.deterministic_orthogonal_(fixed)
     assert float(fixed.sigma) == pytest.approx(0.3)

@@ -56,7 +56,7 @@ if str(_REPO_ROOT) not in sys.path:
 
 from experiments.config import read_config
 from particlegan import (  # noqa: E402
-    ParticlePrior, ParticleRegularizer, get_recipe, initialize_, scale_learning_rates, ucd_loss,
+    ParticlePrior, ParticleRegularizer, get_recipe, init, scale_learning_rates, ucd_loss,
 )
 from lib.sparse_toy import SparseMixedToy  # noqa: E402
 from lib.sparse_models import (  # noqa: E402
@@ -254,8 +254,8 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         betas=(float(cfg["beta1"]), 0.999),
         reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
         lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
-    # The recipe builds the table so a learnable one gets its default initialization.
-    prior = recipe.make_prior(learnable=learnable).to(device)
+    # A learnable table starts on R2 points; a frozen Gaussian one is left as drawn.
+    prior = init.deterministic_orthogonal_(recipe.make_prior(learnable=learnable)).to(device)
     G = SparseCondGenerator(
         z_dim=int(cfg["z_dim"]), n_classes=C, d=d, n_symbols=K, k=toy.k, hidden=int(cfg["hidden"]),
         n_hidden=int(cfg["n_hidden"]), emb_dim=int(cfg["emb_dim"]), real_head=str(cfg["real_head"]),
@@ -268,10 +268,9 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     # ---- losses / optimizers ----
     gan_loss = recipe.make_loss()
     vic = ParticleRegularizer()
-    if recipe.initialization is not None:
-        # The recipe's default replaces the constructors' Xavier init; do it explicitly.
-        initialize_(G, key=0)
-        initialize_(D, key=1)
+    # Replaces the constructors' Xavier init.
+    init.deterministic_orthogonal_(G, seed=0)
+    init.deterministic_orthogonal_(D, seed=1)
     # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
     opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
     ema_G, ema_prior = copy.deepcopy(G), copy.deepcopy(prior)

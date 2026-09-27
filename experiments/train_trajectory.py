@@ -17,7 +17,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
-from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, init, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, generate, metrics
 from lib.trajectory_visuals import render
@@ -115,6 +115,8 @@ def train(cfg):
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"]+101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2*cfg["length"], cfg["seed"]+102, device)
     g, d = TrajectoryGenerator(cfg).to(device), TrajectoryDiscriminator(cfg).to(device)
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for m in (ema_g, ema_prior, ema_noise):

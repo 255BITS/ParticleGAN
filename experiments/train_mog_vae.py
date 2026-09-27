@@ -22,7 +22,7 @@ from experiments.run_grid import code_provenance
 from lib.mog_metrics import evaluate as generation_metrics, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
-from particlegan import get_recipe, ParticleRegularizer, scale_learning_rates
+from particlegan import get_recipe, init, ParticleRegularizer, scale_learning_rates
 
 DEFAULTS = {
     'posterior': 'categorical', 'gan_weight': 1., 'kl_weight': 1.,
@@ -231,12 +231,14 @@ def train(cfg):
     g = SimpleMLPGenerator(2, cfg['width']).cuda()
     d = SimpleMLPDiscriminator(hidden_dim=cfg['width']).cuda()
     recipe = training_recipe(cfg)
-    # The recipe builds and calibrates the table, with its default initialization.
-    prior = recipe.make_prior(z_dim=2, generator=rng(cfg['seed'] + 1), device='cuda')
+    # The recipe builds the table; initializing it recalibrates its spacing.
+    prior = init.deterministic_orthogonal_(recipe.make_prior(z_dim=2, generator=rng(cfg['seed'] + 1), device='cuda'))
     e = Encoder(cfg['width']).cuda()
-    # make_optimizers initializes G/D/E; hash the weights training starts from.
+    for seed, module in enumerate((g, d, e)):
+        init.deterministic_orthogonal_(module, seed=seed)
     og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
     initial_sigma = prior.sigma.detach().clone()
+    # Hash the weights training starts from.
     metadata = dict(initialization_sha256=state_hash([g, d, prior, e]), sigma=float(prior.sigma),
                     gpu=torch.cuda.get_device_name(), torch=torch.__version__,
                     evaluation_weights='final online weights; no checkpoint selection',

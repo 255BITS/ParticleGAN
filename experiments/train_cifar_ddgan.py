@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from experiments.config import merge_config, read_config
-from particlegan import DDGAN, get_recipe, initialize_, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, init, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.image_ddgan import sample_images, update_ema
 from lib.image_moonshots import build_models
@@ -204,9 +204,9 @@ def train(cfg, resume=None):
         write_json(out / 'environment.json', env)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
     recipe = training_recipe(cfg)
-    if recipe.initialization is not None:
-        # The recipe's default replaces the generator constructor's init; do it explicitly.
-        initialize_(g, key=0)
+    # Deterministic init before optimizers and any resume; frozen pretrained features stay as loaded.
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
     og, od = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg.get('fused_adam', False))
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
