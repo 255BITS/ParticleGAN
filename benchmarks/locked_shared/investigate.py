@@ -70,9 +70,10 @@ def main():
             row["ring"] = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(**ring_options),
                 gan_factory=gan_factory, cap_factory=cap_factory, diagnostics=True)
         # No VICReg/cover loss is present in this host; those controls leave it unchanged.
+        # two_pole runs on its recipe (benchmarks.toy_runner): the formulation
+        # factories do not reach it, only its own particle_l2 pull does.
         if "two_pole" not in row:
-            row["two_pole"] = two_pole.train(gan_factory=gan_factory, cap_factory=cap_factory,
-                                            particle_l2=(traj_options or {}).get("particle_l2"))
+            row["two_pole"] = two_pole.train(particle_l2=(traj_options or {}).get("particle_l2"))
         if name not in previous:
             report["rows"].append(row)
         args.output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")

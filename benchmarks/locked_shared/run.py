@@ -6,20 +6,15 @@ import math
 
 import torch
 
-from benchmarks.legacy.grad_regularizers import GradientPenalty
 from . import mode_hold, trajectory, two_pole
-
-
-def thinned_cap():
-    # Same effective cap as conceptmod's ThinnedBCap: ignores requested κ=1.
-    return GradientPenalty("b_cap", coeff=1.0, kappa=100.0, norm="l2")
 
 
 def experiments():
     return (
+        # The two-pole cloud runs on its recipe (benchmarks.toy_runner); the
+        # thinned_cap formulation swap is not a problem arm and was dropped.
         ("two_pole", "locked_shared", lambda: two_pole.train()),
         ("two_pole", "stranger", lambda: two_pole.train(pairing="stranger")),
-        ("two_pole", "thinned_cap", lambda: two_pole.train(cap_factory=thinned_cap)),
         ("trajectory", "locked_shared", lambda: trajectory.train()),
         ("trajectory", "stranger", lambda: trajectory.train(pairing="stranger")),
         ("trajectory", "nearest_stranger", lambda: trajectory.train(pairing="nearest_stranger")),

@@ -6,7 +6,7 @@ import pytest
 import torch
 from torch import nn
 
-from benchmarks.locked_shared import trajectory, two_pole
+from benchmarks.locked_shared import trajectory
 from benchmarks.locked_shared.hosts import (
     ae_gan_hold, cover_leftover, mid_scale_identity, residual_student,
     unipolar, unused_token_hold,
@@ -15,9 +15,6 @@ from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_ou
 
 
 def _run(host, policy, monkeypatch):
-    if host == "two_pole":
-        monkeypatch.setattr(two_pole, "TOY_STEPS", 2)
-        return two_pole.train(noise_policy=policy)
     if host == "trajectory":
         monkeypatch.setitem(trajectory.PROTOCOL, "steps", 2)
         return trajectory.train(noise_policy=policy)
@@ -44,7 +41,7 @@ def _run(host, policy, monkeypatch):
 
 
 @pytest.mark.parametrize("host", (
-    "two_pole", "trajectory", "residual_student", "unipolar",
+    "trajectory", "residual_student", "unipolar",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
@@ -140,7 +137,7 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 
 
 @pytest.mark.parametrize("host", (
-    "two_pole", "trajectory", "residual_student", "unipolar",
+    "trajectory", "residual_student", "unipolar",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
