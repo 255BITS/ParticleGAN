@@ -1,9 +1,9 @@
 # A world-model toy without trajectories
 
-Running `python -u examples/transition_gan.py` uses the winning **shared-state
+Running `python -u examples/transition_gan.py` trains the winning **shared-state
 encoder** configuration from [the leaderboard](../reports/transition/leaderboard/README.md).
-The default output directory is `results/transition/default`; use `--out-dir` to
-choose a fresh directory for subsequent runs.
+on the shared toy runner; `experiments/train_transition.py` is the artifact run
+(default output `results/transition/default`; use `--out-dir` for a fresh directory).
 
 ```text
 G1 -> st
@@ -127,15 +127,28 @@ supervision/capacity cohort. The board reports those differences explicitly.
 From the repository root, with the experiments dependencies installed:
 
 ```bash
-.venv/bin/python -u examples/transition_gan.py
+.venv/bin/python -u examples/transition_gan.py --seed 24002 --log runs/toy-refactor/transition_gan.log
 ```
 
-To reproduce the historical three-way adversarial-only comparison:
+`examples/transition_gan.py` declares only the problem (data, networks, critic
+views, encoder terms, metrics, verdict) and trains on the shared runner
+(`benchmarks/toy_runner.py`): recipe-built optimizers own the LR schedule, and
+the recipe's critic input noise, generator output noise, penalties and EMA
+apply. Each observation is one JSON line in the `--log` file (`tail -f` it).
+PASS means held-out joint SW1 < 0.10027 and residual < 0.02393, i.e. beating the
+best adversarial-only leaderboard entry. The leaderboard artifact run trains the
+same problem and adds provenance, saved samples, viewer and checkpoint:
 
 ```bash
-.venv/bin/python -u examples/transition_gan.py --config configs/transition/ucd_joint.yaml
-.venv/bin/python -u examples/transition_gan.py --config configs/transition/marginals.yaml
-.venv/bin/python -u examples/transition_gan.py --config configs/transition/monolithic.yaml
+.venv/bin/python -u experiments/train_transition.py --config configs/transition/default.yaml
+```
+
+The historical three-way adversarial-only comparison used UCD critics, which the
+shared runner does not declare (no recipe factory for the class-head loss), so
+`ucd_joint.yaml`, `marginals.yaml` and `monolithic.yaml` no longer train; their
+completed artifacts can still be analyzed:
+
+```bash
 .venv/bin/python experiments/analyze_transition.py \
   results/transition/mog_1024/branches_joint \
   results/transition/mog_1024/branches_joint_marginals \
@@ -151,7 +164,7 @@ tail -F results/transition/live.log
 A small CPU check (evaluation still visits every context):
 
 ```bash
-.venv/bin/python -u examples/transition_gan.py --device cpu --steps 20 --out-dir results/transition/smoke
+.venv/bin/python -u experiments/train_transition.py --device cpu --steps 20 --out-dir results/transition/smoke
 .venv/bin/python -m pytest tests/test_transition.py -q
 ```
 
@@ -173,7 +186,7 @@ alongside it. Repeated model selection makes these geometries a development
 benchmark, rather than an untouched test set.
 
 ```bash
-.venv/bin/python -u examples/transition_gan.py --config configs/transition/concat.yaml
+.venv/bin/python -u experiments/train_transition.py --config configs/transition/concat.yaml
 .venv/bin/python experiments/transition_leaderboard.py \
   --add concat_joint results/transition/conditioning/branches_concat \
   --note "Explicit class input to a scalar joint critic; G and MoG unchanged."

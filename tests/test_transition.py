@@ -7,20 +7,21 @@ import torch
 
 import yaml
 
-from experiments.train_transition import (DEFAULTS, training_recipe, validate, train,
-                                           discriminator_loss, generator_loss, prior_regularization)
+from benchmarks.toy_runner import ToyRun
+from examples.transition_gan import TransitionGAN
+from experiments.train_transition import DEFAULTS, training_recipe, validate, train
 from lib.trajectory import Routes
 from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionDiscriminator, TransitionCritics, shuffle_blocks, residual, metrics)
 from particlegan import get_recipe, init
 from particlegan.grad_regularizers import GradientPenalty
 
+SMALL = dict(width=8, d_width=16, marginal_width=8, encoder_width=8, num_particles=32, batch_size=16,
+             steps=4, normalization_samples=256, eval_per_context=8)
 
 
-def _penalties(recipe, d, rngs):
-    """One recipe penalty per role, all paired with one critic optimizer."""
-    opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
-    return {name: recipe.make_critic_penalty(opt, kappa=0) for name, rng in rngs.items()}
+def small_run(**overrides):
+    return ToyRun(TransitionGAN(**{**SMALL, **overrides}))
 
 class TransitionTests(unittest.TestCase):
     def setUp(self):
@@ -163,54 +164,44 @@ class TransitionTests(unittest.TestCase):
         restored.load_state_dict(base.state_dict())
         torch.testing.assert_close(restored(z, c, context), base(z, c, context), rtol=0, atol=0)
 
-    def test_concat_class_input_and_penalty_without_ucd(self):
+    def test_concat_class_input_and_ucd_arms_flagged(self):
         recipe = training_recipe({**DEFAULTS, "d_conditioning": "concat"})
         self.assertEqual(recipe.conditioning, "conditional")
         d = TransitionCritics(32, "joint_marginals", 16, conditioning="concat")
         c, geom, tick, real = self.toy.batch(16, self.rng)
         context = self.toy.condition(geom, tick)
-        fake = torch.randn_like(real).requires_grad_()
         for name, critic in d.critics.items():
             x = d.observation(name, real)
             first = critic(x, c, context)[0]
             changed = critic(x, 1-c, context)[0]
             self.assertGreater(float((first-changed).detach().abs().max()), 1e-6)
             self.assertEqual(critic(x, c, context)[1].shape, (16, 1))
-        rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
-        # Positive UCD weight must not invoke CE on a one-logit concat critic.
-        loss, _ = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                      _penalties(recipe, d, rngs), recipe.ucd_weight)
-        loss.backward()
-        for critic in d.critics.values():
-            self.assertGreater(float(critic.net[0].weight.grad[:, -2:].norm()), 0)
-        d.requires_grad_(False)
-        lg, _ = generator_loss(d, real, fake, c, context, recipe.make_loss(), 1.)
-        lg.backward()
-        self.assertTrue(torch.isfinite(fake.grad).all())
-        self.assertGreater(float(fake.grad.norm()), 0)
+        # UCD critics need a classification loss the recipe has no factory for.
+        with self.assertRaises(NotImplementedError):
+            TransitionGAN(d_conditioning="ucd")
+        run = small_run(encoder=False, shared_state_critic=False)
+        before = {k: copy.deepcopy(c.state_dict()) for k, c in run.critics.items()}
+        run.step()
+        for name, critic in run.critics.items():
+            self.assertFalse(torch.equal(critic.critic.net[0].weight, before[name]["critic.net.0.weight"]))
 
-    def test_marginal_critics_isolation_gradients_and_bcap(self):
-        recipe = training_recipe(DEFAULTS)
-        d = TransitionCritics(32, "joint_marginals", 16)
-        c, geom, tick, real = self.toy.batch(16, self.rng)
-        context = self.toy.condition(geom, tick)
-        fake = torch.randn_like(real).requires_grad_()
-        d.requires_grad_(False)
-        total, terms = generator_loss(d, real, fake, c, context, recipe.make_loss(), 1.)
-        torch.testing.assert_close(total, terms["joint"] + (terms["state"]+terms["action"]+terms["next_state"])/3)
-        for name, start in (("state", 0), ("action", 2), ("next_state", 4)):
-            gradient = torch.autograd.grad(terms[name], fake, retain_graph=True)[0]
+    def test_views_weight_marginals_isolate_blocks_and_keep_joint_init(self):
+        run = small_run(encoder=False, shared_state_critic=False)
+        problem, nets = run.problem, run.nets
+        real = problem.real(16, torch.Generator().manual_seed(3))
+        fake = problem.fake(nets, 16, torch.Generator().manual_seed(4), real)
+        views = problem.views(nets, real, fake)
+        self.assertEqual([(v.critic, v.weight) for v in views],
+                         [("joint", 1.), ("state", 1/3), ("action", 1/3), ("next_state", 1/3)])
+        x = fake.x.detach().requires_grad_()
+        gan = run.recipe.make_loss()
+        for view, start in zip(views[1:], (0, 2, 4)):
+            xf, _ = problem.layout.inputs(view.critic, x, real.condition[1])
+            critic = nets.critics[view.critic]
+            gradient = torch.autograd.grad(gan.g_loss(critic(xf, *view.condition), critic(view.real, *view.condition)), x)[0]
             self.assertGreater(float(gradient[:, start:start+2].norm()), 0)
             gradient[:, start:start+2] = 0
             self.assertEqual(float(gradient.norm()), 0)
-        d.requires_grad_(True)
-        rngs = {name: torch.Generator().manual_seed(30+i) for i, name in enumerate(d.critics)}
-        loss, terms = discriminator_loss(d, real, fake.detach(), c, context, recipe.make_loss(),
-                                         _penalties(recipe, d, rngs), recipe.ucd_weight)
-        loss.backward()
-        for critic in d.critics.values():
-            self.assertTrue(torch.isfinite(critic.net[0].weight.grad).all())
-            self.assertGreater(float(critic.net[0].weight.grad.norm()), 0)
         torch.manual_seed(12)
         joint = TransitionCritics(32)
         torch.manual_seed(12)
@@ -225,12 +216,15 @@ class TransitionTests(unittest.TestCase):
         ids = torch.zeros(32, dtype=torch.long)
         z = prior(ids, generator=self.rng)
         self.assertGreater(float(z.detach().std(0).mean()), 0)
+        run = small_run(encoder=False, shared_state_critic=False, num_particles=1024)
+        problem, nets = run.problem, run.nets
         seen = []
-        def spread(raw):
-            seen.append(raw)
-            return recipe.make_prior_regularizer()(raw)
-        prior_regularization(prior, ids, spread).backward()
-        self.assertIs(seen[0], prior.z)
+        spread = problem.spread
+        problem.spread = lambda raw: seen.append(raw) or spread(raw)
+        real = problem.real(16, torch.Generator().manual_seed(3))
+        fake = problem.fake(nets, 16, torch.Generator().manual_seed(4), real)
+        self.assertEqual(set(problem.losses("generator", nets, real, fake)), {"prior_spread"})
+        self.assertIs(seen[0], nets.prior.z)
         self.assertEqual(seen[0].shape[0], 1024)
         restored = recipe.make_prior()
         restored.load_state_dict(prior.state_dict())
@@ -240,7 +234,7 @@ class TransitionTests(unittest.TestCase):
     def test_cpu_training_checkpoint_and_artifacts(self):
         with tempfile.TemporaryDirectory() as folder:
             cfg = {**DEFAULTS, "device": "cpu", "steps": 2, "batch_size": 8,
-                   "encoder": False, "shared_state_critic": False, "d_conditioning": "ucd",
+                   "encoder": False, "shared_state_critic": False, "d_conditioning": "concat",
                    "g_class_scale": 8., "g_context_scale": 4.,
                    "critic_mode": "joint_marginals", "marginal_width": 8,
                    "width": 8, "d_width": 16, "eval_per_context": 8,
@@ -248,6 +242,7 @@ class TransitionTests(unittest.TestCase):
                    "live_log": str(Path(folder)/"live.log")}
             summary = train(cfg)
             self.assertEqual(summary["real_draws"], 32)
+            self.assertIn(summary["verdict"], ("PASS", "FAIL"))
             self.assertEqual(set(summary["critic_parameters"]), {"joint", "state", "action", "next_state"})
             self.assertGreater(float(summary["recipe"]["sigma_rel"]), 0)
             for name in ("source.zip", "viewer.html", "transitions.png", "summary.json", "log.txt"):
