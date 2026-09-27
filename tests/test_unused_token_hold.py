@@ -1,4 +1,5 @@
 """unused_token_hold is a problem-only toy on the shared runner."""
+import json
 from pathlib import Path
 
 import pytest
@@ -25,7 +26,13 @@ def test_runs_on_recipe_deterministically_and_logs_named_losses(tmp_path):
     again = run(uth.UnusedTokenHold(), recipe=recipe, observe_every=4)
     assert first["live"] == again["live"] and first["ema"] == again["ema"]
     assert first["verdict"] == uth.verdict(first["live"])
-    assert '"unused_hold"' in log.read_text().splitlines()[0]
+    # Loss terms must not shadow metric keys in the tail-able log rows.
+    rows = [json.loads(line) for line in log.read_text().splitlines()]
+    for row, point in zip(rows, first["curve"]):
+        assert row["hold_loss"] >= 0
+        for key, value in point.items():
+            if key != "seconds":
+                assert row[key] == value, key
     assert first["live"]["scale0_err"] == 0.0
 
 

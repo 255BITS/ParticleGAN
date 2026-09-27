@@ -157,7 +157,7 @@ class UnusedTokenHold(ToyProblem):
         terms = {}
         if self.hold_weight != 0:
             student = nets.generator
-            terms["unused_hold"] = self.hold_weight * unused_hold_loss(student.embeds(1.0), student.neu, self.pairs)
+            terms["hold_loss"] = self.hold_weight * unused_hold_loss(student.embeds(1.0), student.neu, self.pairs)
         if self.fm_weight != 0:
             critic = nets.critics
             gap = critic.features(real.x).detach().mean(0) - critic.features(fake.x).mean(0)
