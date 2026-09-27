@@ -158,7 +158,7 @@ def run_toy(toy, cfg, *, noise_policy=None):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
     with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
-        for module in (cover_leftover, mid_scale_identity):
+        for module in (mid_scale_identity,):
             target = module.FORMULATION
             values = {k: v for k, v in knobs.items() if k in target}
             if "lr" in target:
@@ -205,8 +205,10 @@ def run_toy(toy, cfg, *, noise_policy=None):
                                                                       cover_weight=cfg.cover_weight))
             raw.pop("curve", None)
         elif toy == "cover_leftover":
-            raw = cover_leftover.fit_cover_leftover(cover_leftover.CoverRecipe(),
-                                                    noise_policy=noise_policy)
+            # Problem-only toy on the shared runner (see mode_hold above).
+            if noise_policy is not None:
+                raise ValueError("cover_leftover takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = cover_leftover.train_cover_leftover()
         elif toy == "unused_token_hold":
             options = {k: v for k, v in knobs.items() if k in unused_token_hold.UnusedHoldRecipe.__dataclass_fields__}
             raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options),

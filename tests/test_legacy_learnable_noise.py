@@ -7,16 +7,12 @@ import torch
 from torch import nn
 
 from benchmarks.locked_shared.hosts import (
-    cover_leftover, mid_scale_identity, unused_token_hold,
+    mid_scale_identity, unused_token_hold,
 )
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_output
 
 
 def _run(host, policy, monkeypatch):
-    if host == "cover_leftover":
-        return cover_leftover.fit_cover_leftover(
-            cover_leftover.CoverRecipe(steps=2), noise_policy=policy,
-        )
     if host == "unused_token_hold":
         return unused_token_hold.train(
             unused_token_hold.UnusedHoldRecipe(steps=2), noise_policy=policy,
@@ -27,7 +23,7 @@ def _run(host, policy, monkeypatch):
 
 
 @pytest.mark.parametrize("host", (
-    "cover_leftover", "unused_token_hold",
+    "unused_token_hold",
     "mid_scale_identity",
 ))
 def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
@@ -53,9 +49,6 @@ def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
     assert math.isclose(receipt["output_sigma_effective_final_evaluation"],
                         receipt["output_scale_final"], rel_tol=1e-7)
     assert not math.isclose(receipt["output_scale_final"], 0.029, abs_tol=1e-8)
-    if host == "cover_leftover":
-        assert receipt["output_scale_ema_final"] > 0
-        assert receipt["output_sigma_effective_ema_final_evaluation"] > 0
 
 
 def test_scalar_gradient_belongs_to_generator_only_and_eval_preserves_rng():
@@ -122,7 +115,7 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 
 
 @pytest.mark.parametrize("host", (
-    "cover_leftover", "unused_token_hold",
+    "unused_token_hold",
     "mid_scale_identity",
 ))
 def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rng(
