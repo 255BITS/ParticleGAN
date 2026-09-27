@@ -6,3 +6,9 @@ __pycache__/
 100gaussians_samples/
 results/sparse/
 .venv
+
+# sparse-secant: keep logs, metrics, summaries; drop heavy artefacts
+results/sparse-secant/**/ckpt.pt
+results/sparse-secant/**/*.npz
+results/sparse-secant/**/*.png
+results/sparse-secant/_launcher.log

@@ -1,0 +1,23 @@
+arm: h_secant_cap
+coeff: 1.0
+emb_dim: 0
+fourier_ramp_end: 0.7
+fourier_ramp_start: 0.3
+gate_start_frac: 0.4
+hidden: 256
+lambda_sp: 0.003
+prior_partition: class
+real_head: gated
+seed: 1
+total_steps: 5000
+ucd_lambda: 0.02
+z_dim: 16
+out_dir: results/sparse-secant/sec_nodamp
+lr_anneal_start: 1.0
+d_base: wgan
+d_beta2: 0.9
+lam_r1: 1.0
+lam_path: 10.0
+path_target: 0.5
+lam_cap: 10.0
+path_u: [0.1, 0.9]

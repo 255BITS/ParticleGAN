@@ -119,7 +119,16 @@ DEFAULTS: Dict = {
     "beta1": 0.0,
     "ema_decay": 0.995,
     "lr_floor": 0.05,
-    "lr_anneal_start": 0.6,
+    "lr_anneal_start": 0.6,       # >= 1.0 disables the anneal (constant LRs)
+    # simple-critic transfer (branch sparse-ucd-secant); defaults reproduce the study
+    "d_base": "gan",              # 'gan' (gan_loss.d_loss, RpGAN) or 'wgan' (E d(f)[c] - E d(r)[c])
+    "d_beta2": 0.999,             # critic Adam beta2 (a constant, not a schedule)
+    "lazy_k": 1,                  # regularizer only on steps % k == 0, weight x k
+    "lam_r1": 1.0,                # h_secant_cap: R1 at real
+    "lam_path": 10.0,             # h_secant_cap: secant path weight
+    "path_target": 0.5,           # h_secant_cap: secant slope t
+    "lam_cap": 10.0,              # h_secant_cap: cap weight (cap = kappa) on real/fake/interp
+    "path_u": [0.1, 0.9],         # h_secant_cap: interp window u in [lo, hi]
     "hidden": 128,
     "n_hidden": 3,
 }
@@ -197,7 +206,7 @@ def save_plots(toy: SparseMixedToy, x_f: torch.Tensor, s_f: torch.Tensor, c_f: t
 #  Training
 # =========================
 
-def train(cfg: Dict, device: torch.device) -> Dict:
+def train(cfg: Dict, device: torch.device, stop_after: int = 0) -> Dict:
     seed = int(cfg["seed"])
     total_steps = int(cfg["total_steps"])
     eval_interval = int(cfg["eval_interval"])
@@ -277,12 +286,22 @@ def train(cfg: Dict, device: torch.device) -> Dict:
 
     # ---- losses / optimizers ----
     gan_loss = GANLoss(loss_type=str(cfg["loss_type"]), mode="rp")
-    regularizer = GradRegularizer(arm=str(cfg["arm"]), coeff=float(cfg["coeff"]), kappa=float(cfg["kappa"]), norm=str(cfg["norm"]))
+    regularizer = GradRegularizer(
+        arm=str(cfg["arm"]), coeff=float(cfg["coeff"]), kappa=float(cfg["kappa"]), norm=str(cfg["norm"]),
+        lazy_k=int(cfg["lazy_k"]), lam_r1=float(cfg["lam_r1"]), lam_path=float(cfg["lam_path"]),
+        path_target=float(cfg["path_target"]), lam_cap=float(cfg["lam_cap"]),
+        path_u=tuple(float(v) for v in cfg["path_u"]),
+    )
+    if cfg["arm"] == "h_secant_cap" and not bool(cfg["gp_on_y"]):
+        raise ValueError("h_secant_cap needs gp_on_y=True (real and fake share the joint input space)")
+    d_base = str(cfg["d_base"])
+    if d_base not in ("gan", "wgan"):
+        raise ValueError(f"d_base must be 'gan' or 'wgan', got {d_base!r}")
     vic = VICRegLikeLoss()
     lr = float(cfg["lr"])
     beta1 = float(cfg["beta1"])
     opt_G = torch.optim.Adam(G.parameters(), lr=lr, betas=(beta1, 0.999))
-    opt_D = torch.optim.Adam(D.parameters(), lr=lr * float(cfg["d_lr_mult"]), betas=(beta1, 0.999))
+    opt_D = torch.optim.Adam(D.parameters(), lr=lr * float(cfg["d_lr_mult"]), betas=(beta1, float(cfg["d_beta2"])))
     opt_P = torch.optim.Adam(prior.parameters(), lr=lr * float(cfg["prior_lr_mult"]), betas=(beta1, 0.999)) if learnable else None
     opts = [o for o in (opt_G, opt_D, opt_P) if o is not None]
     base_lrs = {id(o): [g["lr"] for g in o.param_groups] for o in opts}
@@ -350,8 +369,40 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         ]
         if ucd:
             parts.append(f"| ucd r/f {row['ucd_acc_real']:.2f}/{row['ucd_acc_fake']:.2f}")
+        if "Dr_mean" in row:
+            parts.append(
+                f"| Dr {row['Dr_mean']:+.2f} gap {row['D_gap']:.2f} |Dr|max {row['Dr_absmax_run']:.2f}"
+                f" gn r/f/i med {row['gnr_med']:.2f}/{row['gnf_med']:.2f}/{row['gni_med']:.2f}"
+                f" max {max(row['gnr_max'], row['gnf_max'], row['gni_max']):.2f} lr {row['lr_scale']:.2f}"
+            )
         parts.append("| BAR" if row["bar_all"] else "|")
         return " ".join(parts)
+
+    # ---- D diagnostics (measurement only; own RNG stream, so training is unchanged) ----
+    diag_gen = mk()
+    diag_gen.manual_seed(seed + 5150)
+    run_dr_absmax = torch.zeros((), device=device)
+    diag_hist = {"dr_absmax": 0.0, "gn_max": 0.0}
+    pen_terms: Dict[str, float] = {}  # last applied regularizer terms (survives lazy skips)
+
+    def d_diag(xy_r: torch.Tensor, xy_f: torch.Tensor, c: torch.Tensor) -> Dict[str, float]:
+        critic = JointCritic(D, c)
+        u = torch.rand(xy_r.shape[0], 1, device=device, generator=diag_gen)
+        out = {}
+        with torch.enable_grad():
+            for key, xy in (("r", xy_r), ("f", xy_f), ("i", xy_f + u * (xy_r - xy_f))):
+                xd = xy.detach().clone().requires_grad_(True)
+                a = critic(xd)
+                g = torch.autograd.grad(a.sum(), xd)[0]
+                n = torch.sqrt(g.pow(2).sum(1) + 1e-12).detach()
+                q = torch.quantile(n, torch.tensor([0.5, 0.9], device=device))
+                out[f"gn{key}_med"], out[f"gn{key}_q90"], out[f"gn{key}_max"] = float(q[0]), float(q[1]), float(n.max())
+                if key != "i":
+                    out[f"D{key}_mean"] = float(a.detach().mean())
+                if key == "r":
+                    out["Dr_absmax"] = float(a.detach().abs().max())
+        out["D_gap"] = out["Dr_mean"] - out["Df_mean"]
+        return out
 
     # ---- loop ----
     t0 = time.time()
@@ -385,7 +436,11 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             fo = G(z, c_r, tau=tau)
             x_f, y_f = fo["x"], fo["y"]
         dr, df = D(x_r, y_r, c_r), D(x_f, y_f, c_r)
-        loss_d_gan = gan_loss.d_loss(dr["adv"], df["adv"])
+        if d_base == "wgan":
+            loss_d_gan = df["adv"].mean() - dr["adv"].mean()
+        else:
+            loss_d_gan = gan_loss.d_loss(dr["adv"], df["adv"])
+        run_dr_absmax = torch.maximum(run_dr_absmax, dr["adv"].detach().abs().max())
         loss_d = loss_d_gan
         ucd_ce = torch.zeros((), device=device)
         if ucd and ucd_lambda > 0:
@@ -393,7 +448,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             loss_d = loss_d + ucd_lambda * ucd_ce
         if gp_on_y:
             critic = JointCritic(D, c_r)
-            pen, pst = regularizer.penalty(critic, torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1), step)
+            pen, pst = regularizer.penalty(critic, torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1), step, groups=c_r)
         else:
             # y differs between the two batches, so each side gets its own fixed y.
             pen_r, _ = regularizer.penalty(XOnlyCritic(D, y_r, c_r), x_r, x_r, step)
@@ -404,6 +459,12 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         opt_D.zero_grad()
         loss_d.backward()
         opt_D.step()
+        diag = {}
+        if (step + 1) % eval_interval == 0 or step + 1 == total_steps:
+            diag = d_diag(torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1), c_r)
+            diag["Dr_absmax_run"] = float(run_dr_absmax)
+            diag_hist["dr_absmax"] = max(diag_hist["dr_absmax"], diag["Dr_absmax_run"])
+            diag_hist["gn_max"] = max(diag_hist["gn_max"], diag["gnr_max"], diag["gnf_max"], diag["gni_max"])
 
         # ---- G (+ prior) step ----
         D.eval(); G.train()
@@ -438,10 +499,18 @@ def train(cfg: Dict, device: torch.device) -> Dict:
                 pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
 
         last = {"d_loss": float(loss_d_gan.detach()), "g_loss": float(loss_gan.detach()), "pen": float(pst["pen"]),
-                "ucd_ce": float(ucd_ce.detach()), "tau": float(tau), "ff_scale": D.fourier.scale}
+                "ucd_ce": float(ucd_ce.detach()), "tau": float(tau), "ff_scale": D.fourier.scale,
+                "lr_scale": float(scale)}
+        last.update(diag)
+        if pst.get("applied", True):
+            pen_terms = {k: v for k, v in pst.items() if k.startswith("t_") or k in ("sec_active", "nn_dist")}
+        last.update(pen_terms)
         done = step + 1
         if done % eval_interval == 0 or done == total_steps:
             print(fmt(run_eval(done, last)), flush=True)
+        if stop_after and done >= stop_after:
+            print(f"[stop_after] {done}", flush=True)
+            return {"stopped": done}
 
     wall = time.time() - t0
 
@@ -490,6 +559,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         "wall_clock_sec": float(wall),
         "steps_per_sec": total_steps / max(wall, 1e-9),
         "steps": total_steps,
+        "d_diag": {"max_abs_D_real": diag_hist["dr_absmax"], "max_grad_norm_eval": diag_hist["gn_max"]},
     }
     with open(out_path / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
@@ -512,6 +582,7 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=None)
     ap.add_argument("--total_steps", type=int, default=None)
     ap.add_argument("--set", nargs="*", default=[], help="key=value overrides (yaml-parsed values)")
+    ap.add_argument("--stop_after", type=int, default=0, help="debug: stop after N steps (schedules still use total_steps)")
     args = ap.parse_args()
     cfg = load_config(args.config)
     for kv in args.set:
@@ -526,7 +597,7 @@ def main() -> None:
     if args.total_steps is not None:
         cfg["total_steps"] = args.total_steps
     device = torch.device(args.device) if args.device else torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    train(cfg, device)
+    train(cfg, device, stop_after=args.stop_after)
 
 
 if __name__ == "__main__":

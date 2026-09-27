@@ -34,7 +34,7 @@ Two orthogonal knobs sit on top of that family, both off by default:
     without ever switching arms mid-run.
 """
 
-from typing import Dict, Tuple
+from typing import Dict, Optional, Tuple
 
 import torch
 import torch.nn.functional as F
@@ -61,6 +61,15 @@ class GradRegularizer:
                            D free to be arbitrarily steep *between* reals and
                            fakes (which is where the fakes have to travel), so
                            this is the cap's natural high-dim form.
+            - 'h_secant_cap': the simple-critic ring study's 3-term critic
+                           (branch simple-critic-leaderboard), as a sum
+                               lam_r1 * E_r ||g(r)||^2
+                             + lam_path * E_f relu(t*|r_nn - f| - (D(r_nn) - D(f)))^2
+                             + lam_cap * E_{r u f u i} relu(||g|| - kappa)^2
+                           with r_nn the nearest real of each fake in the batch
+                           (restricted to the same group/class when `groups`
+                           is given) and i = f + u (r - f), u ~ U[path_u].
+                           `coeff` multiplies the whole sum; kappa is the cap.
         coeff (float): penalty strength (`r1_gamma` in the example script).
         kappa (float): the cap for 'b_cap'; ignored by the other arms.
         lazy_k (int): apply the penalty only every k-th step and multiply the
@@ -94,7 +103,7 @@ class GradRegularizer:
             Required (> 0) whenever `target_anneal` is not 'none'.
     """
 
-    ARMS = ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "e_interp", "f_none", "g_interp_cap")
+    ARMS = ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "e_interp", "f_none", "g_interp_cap", "h_secant_cap")
     NORMS = ("l2", "l1", "linf")
     ANNEALS = ("none", "linear", "delayed")
 
@@ -110,6 +119,11 @@ class GradRegularizer:
         norm: str = "l2",
         target_anneal: str = "none",
         total_steps: int = 0,
+        lam_r1: float = 1.0,
+        lam_path: float = 10.0,
+        path_target: float = 0.5,
+        lam_cap: float = 10.0,
+        path_u: Tuple[float, float] = (0.1, 0.9),
     ) -> None:
         if arm not in self.ARMS:
             raise ValueError(f"Unknown grad regularizer arm: {arm} (expected one of {self.ARMS})")
@@ -121,6 +135,9 @@ class GradRegularizer:
         self.norm = str(norm)
         self.target_anneal = str(target_anneal)
         self.total_steps = int(total_steps)
+        self.lam_r1, self.lam_path, self.path_target = float(lam_r1), float(lam_path), float(path_target)
+        self.lam_cap = float(lam_cap)
+        self.path_u = (float(path_u[0]), float(path_u[1]))
 
         if self.lazy_k < 1:
             raise ValueError(f"lazy_k must be >= 1, got {lazy_k}")
@@ -152,6 +169,7 @@ class GradRegularizer:
         x_real: torch.Tensor,
         x_fake: torch.Tensor,
         step: int,
+        groups: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, Dict]:
         """
         Compute the penalty term to add to the discriminator loss.
@@ -175,6 +193,11 @@ class GradRegularizer:
 
         center = self.center(step)
 
+        if self.arm == "h_secant_cap":
+            pen, st = self._secant_cap_term(D, x_real, x_fake, center, groups)
+            pen = coeff_eff * pen
+            st = {k: coeff_eff * v if k.startswith("t_") else v for k, v in st.items()}
+            return pen, {"applied": True, "pen": float(pen.detach()), "center": float(center), **st}
         if self.arm in ("e_interp", "g_interp_cap"):
             pen = coeff_eff * self._interp_term(D, x_real, x_fake, center)
         else:
@@ -194,7 +217,7 @@ class GradRegularizer:
         """
         if self.arm == "a_r1r2":
             return 0.0
-        c0 = self.kappa if self.arm in ("b_cap", "g_interp_cap") else 1.0
+        c0 = self.kappa if self.arm in ("b_cap", "g_interp_cap", "h_secant_cap") else 1.0
 
         if self.target_anneal == "none":
             return c0
@@ -244,6 +267,50 @@ class GradRegularizer:
         if self.arm == "g_interp_cap":
             return F.relu(n_i - center).pow(2).mean()
         return (n_i - center).pow(2).mean()
+
+    def _secant_cap_term(
+        self,
+        D: torch.nn.Module,
+        x_real: torch.Tensor,
+        x_fake: torch.Tensor,
+        cap: float,
+        groups: Optional[torch.Tensor],
+    ) -> Tuple[torch.Tensor, Dict]:
+        """R1 at real + secant path from each fake to its nearest real + cap on real/fake/interp.
+
+        D is called once per part with the batch's own row order, so a critic
+        bound to a per-row class vector (JointCritic) sees the right class on
+        every row: real i, fake i and interp i all share row i's class, and the
+        nearest real is searched only among rows of that class.
+        """
+        n = x_real.shape[0]
+        r = x_real.detach().clone().requires_grad_(True)
+        f = x_fake.detach().clone().requires_grad_(True)
+        lo, hi = self.path_u
+        u = lo + (hi - lo) * torch.rand(n, 1, device=x_real.device, dtype=x_real.dtype)
+        i = (x_fake.detach() + u * (x_real.detach() - x_fake.detach())).requires_grad_(True)
+        dr, df, di = D(r), D(f), D(i)
+        g = torch.autograd.grad(dr.sum() + df.sum() + di.sum(), (r, f, i), create_graph=True)
+        sq = torch.cat([gg.pow(2).flatten(1).sum(1) for gg in g])
+        norm = torch.sqrt(sq + 1e-12)
+        with torch.no_grad():
+            dist_all = torch.cdist(x_fake.detach(), x_real.detach())
+            if groups is not None:
+                dist_all = dist_all.masked_fill(groups[:, None] != groups[None, :], float("inf"))
+            nn_idx = dist_all.argmin(1)
+            dist = (x_real.detach()[nn_idx] - x_fake.detach()).norm(dim=1)
+        t_r1 = self.lam_r1 * sq[:n].mean()
+        t_path = self.lam_path * F.relu(self.path_target * dist - (dr[nn_idx] - df)).pow(2).mean()
+        t_cap = self.lam_cap * F.relu(norm - cap).pow(2).mean()
+        with torch.no_grad():
+            nr, nf, ni = norm[:n], norm[n:2 * n], norm[2 * n:]
+            st = {
+                "t_r1": float(t_r1), "t_path": float(t_path), "t_cap": float(t_cap),
+                "sec_active": float((self.path_target * dist - (dr[nn_idx] - df) > 0).float().mean()),
+                "nn_dist": float(dist.mean()),
+                "max_nr": float(nr.max()), "max_nf": float(nf.max()), "max_ni": float(ni.max()),
+            }
+        return t_r1 + t_path + t_cap, st
 
     def _grad_norm(
         self,
