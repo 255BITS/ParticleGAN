@@ -1,0 +1,9 @@
+# 2026-09-27 08:18:49 arm=nr_none_none device=cuda:0 tasks=7 steps=None
+08:21:55 native-grid100         FAIL  final modes/HQ=100/0.986 | coverage FAIL accuracy FAIL first100 500 massTV 0.0499 | 184s rc=0
+08:25:17 native-rotated100      FAIL  final modes/HQ=90/0.886 | coverage FAIL accuracy FAIL first100 None massTV 0.11445 | 194s rc=0
+08:35:23 native-staggered100    FAIL  final modes/HQ=100/0.985 | coverage FAIL accuracy FAIL first100 250 massTV 0.05135000000000001 | 255s rc=0
+08:42:37 ring8-multishift       FAIL  fails outside transit=182 | prehold 0/120 arrival +1420/none/none departures 8 final HQ 0.981 | 214s rc=0
+08:45:41 ring8-shift            FAIL  fails outside transit=182 | prehold 0/120 arrival +1420 departures 8 final HQ 0.890 | 115s rc=0
+08:48:49 toy-two_pole           PASS  passing suffix=6/24 | confirmed 77 mean_abs=1.54 grad_med=0.119 | 2s rc=0
+08:49:31 toy-img_bars4          FAIL  passing suffix=1/24 | confirmed None modes=4 hq=0.969 | 17s rc=0
+# 2026-09-27 08:49:31 arm=nr_none_none finished

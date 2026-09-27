@@ -1,0 +1,131 @@
+# arm=nr_pairsec_anchor task=native-staggered100 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+{"cublas_workspace": ":4096:8", "cudnn": 92400, "deterministic": true, "device": "cuda:0", "dtype": "float32", "event": "DEVICE", "gpu": "NVIDIA RTX A6000", "requested": "cuda", "rng": "device-less torch.Generator() uses the selected device", "tf32": false, "threads": 1, "torch": "2.14.0+cu130", "torch_cuda": "13.0"}
+{"event": "problem_start", "problem": "staggered100", "steps": 7000, "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/reports/k3p-no-r1/runs/nr_pairsec_anchor/native-staggered100/bench/staggered100"}
+START problem=staggered100 steps=7000 device=cuda:0 events=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/reports/k3p-no-r1/runs/nr_pairsec_anchor/native-staggered100/bench/staggered100/events.jsonl
+EVAL step=0/7000 model=live modes=0/100 hq=0.0256 pass=False elapsed=2.0s
+EVAL step=0/7000 model=ema modes=0/100 hq=0.0256 pass=False elapsed=3.0s
+TRAIN step=1/7000 d=0.7087 g=0.8977 train_seconds=0.2
+EVAL step=1/7000 model=live modes=0/100 hq=0.0268 pass=False elapsed=4.1s
+EVAL step=1/7000 model=ema modes=0/100 hq=0.0257 pass=False elapsed=5.0s
+EVAL step=10/7000 model=live modes=0/100 hq=0.0403 pass=False elapsed=7.2s
+EVAL step=10/7000 model=ema modes=0/100 hq=0.0261 pass=False elapsed=8.2s
+EVAL step=25/7000 model=live modes=0/100 hq=0.0788 pass=False elapsed=10.8s
+EVAL step=25/7000 model=ema modes=0/100 hq=0.0273 pass=False elapsed=11.6s
+EVAL step=50/7000 model=live modes=0/100 hq=0.1741 pass=False elapsed=15.3s
+EVAL step=50/7000 model=ema modes=0/100 hq=0.0297 pass=False elapsed=16.1s
+EVAL step=100/7000 model=live modes=61/100 hq=0.5253 pass=False elapsed=22.9s
+EVAL step=100/7000 model=ema modes=0/100 hq=0.0372 pass=False elapsed=23.8s
+TRAIN step=250/7000 d=0.7213 g=0.7054 train_seconds=27.8
+EVAL step=250/7000 model=live modes=91/100 hq=0.8035 pass=False elapsed=40.7s
+EVAL step=250/7000 model=ema modes=0/100 hq=0.1388 pass=False elapsed=41.5s
+train    291/7000 Ld=+0.7250 Lg=+0.7084 pen=0.0399 s=1 lr_d=0.00425 46s
+TRAIN step=500/7000 d=0.7125 g=0.7015 train_seconds=51.7
+EVAL step=500/7000 model=live modes=94/100 hq=0.8431 pass=False elapsed=66.2s
+EVAL step=500/7000 model=ema modes=72/100 hq=0.6283 pass=False elapsed=66.9s
+train    582/7000 Ld=+0.7025 Lg=+0.7238 pen=0.0225 s=1 lr_d=0.00425 74s
+TRAIN step=750/7000 d=0.7137 g=0.7025 train_seconds=74.9
+EVAL step=750/7000 model=live modes=98/100 hq=0.9132 pass=False elapsed=90.9s
+EVAL step=750/7000 model=ema modes=95/100 hq=0.8755 pass=False elapsed=91.7s
+train    873/7000 Ld=+0.7064 Lg=+0.7000 pen=0.0116 s=1 lr_d=0.00425 103s
+TRAIN step=1000/7000 d=0.7127 g=0.7001 train_seconds=99.2
+EVAL step=1000/7000 model=live modes=86/100 hq=0.8309 pass=False elapsed=116.8s
+EVAL step=1000/7000 model=ema modes=98/100 hq=0.9493 pass=False elapsed=117.6s
+train   1164/7000 Ld=+0.7061 Lg=+0.6955 pen=0.00978 s=1 lr_d=0.00425 133s
+TRAIN step=1250/7000 d=0.7080 g=0.7014 train_seconds=122.4
+EVAL step=1250/7000 model=live modes=87/100 hq=0.8311 pass=False elapsed=141.7s
+EVAL step=1250/7000 model=ema modes=98/100 hq=0.9526 pass=False elapsed=142.5s
+train   1455/7000 Ld=+0.7153 Lg=+0.6926 pen=0.00991 s=1 lr_d=0.00425 162s
+TRAIN step=1500/7000 d=0.7132 g=0.6930 train_seconds=146.4
+EVAL step=1500/7000 model=live modes=98/100 hq=0.9100 pass=False elapsed=167.2s
+EVAL step=1500/7000 model=ema modes=98/100 hq=0.9546 pass=False elapsed=168.0s
+train   1746/7000 Ld=+0.7012 Lg=+0.7043 pen=0.0111 s=1 lr_d=0.00425 191s
+TRAIN step=1750/7000 d=0.7124 g=0.6968 train_seconds=170.5
+EVAL step=1750/7000 model=live modes=87/100 hq=0.8074 pass=False elapsed=192.9s
+EVAL step=1750/7000 model=ema modes=98/100 hq=0.9540 pass=False elapsed=193.6s
+TRAIN step=2000/7000 d=0.7084 g=0.7003 train_seconds=190.3
+EVAL step=2000/7000 model=live modes=92/100 hq=0.8824 pass=False elapsed=213.9s
+EVAL step=2000/7000 model=ema modes=97/100 hq=0.9376 pass=False elapsed=214.5s
+train   2037/7000 Ld=+0.6993 Lg=+0.7014 pen=0.00816 s=1 lr_d=0.00425 217s
+TRAIN step=2250/7000 d=0.7043 g=0.7003 train_seconds=209.2
+EVAL step=2250/7000 model=live modes=94/100 hq=0.9085 pass=False elapsed=234.1s
+EVAL step=2250/7000 model=ema modes=95/100 hq=0.9269 pass=False elapsed=234.7s
+train   2328/7000 Ld=+0.7000 Lg=+0.6987 pen=0.00675 s=1 lr_d=0.00425 240s
+TRAIN step=2500/7000 d=0.6951 g=0.7047 train_seconds=228.3
+EVAL step=2500/7000 model=live modes=98/100 hq=0.9594 pass=False elapsed=254.3s
+EVAL step=2500/7000 model=ema modes=98/100 hq=0.9567 pass=False elapsed=254.9s
+train   2619/7000 Ld=+0.6943 Lg=+0.7002 pen=0.00307 s=1 lr_d=0.00425 264s
+TRAIN step=2750/7000 d=0.6932 g=0.7048 train_seconds=247.7
+EVAL step=2750/7000 model=live modes=98/100 hq=0.9578 pass=False elapsed=274.9s
+EVAL step=2750/7000 model=ema modes=98/100 hq=0.9647 pass=False elapsed=275.5s
+train   2910/7000 Ld=+0.6909 Lg=+0.7053 pen=0.00233 s=1 lr_d=0.00425 287s
+TRAIN step=3000/7000 d=0.6893 g=0.7078 train_seconds=266.3
+EVAL step=3000/7000 model=live modes=98/100 hq=0.9614 pass=False elapsed=294.6s
+EVAL step=3000/7000 model=ema modes=98/100 hq=0.9653 pass=False elapsed=295.1s
+train   3201/7000 Ld=+0.6959 Lg=+0.7030 pen=0.00161 s=1 lr_d=0.00425 309s
+TRAIN step=3250/7000 d=0.6873 g=0.7098 train_seconds=284.4
+EVAL step=3250/7000 model=live modes=98/100 hq=0.9654 pass=False elapsed=313.8s
+EVAL step=3250/7000 model=ema modes=98/100 hq=0.9685 pass=False elapsed=314.3s
+train   3492/7000 Ld=+0.6920 Lg=+0.7067 pen=0.00193 s=1 lr_d=0.00425 331s
+TRAIN step=3500/7000 d=0.6890 g=0.7055 train_seconds=302.5
+EVAL step=3500/7000 model=live modes=98/100 hq=0.9698 pass=False elapsed=333.0s
+EVAL step=3500/7000 model=ema modes=98/100 hq=0.9738 pass=False elapsed=333.5s
+TRAIN step=3750/7000 d=0.6901 g=0.7037 train_seconds=318.6
+EVAL step=3750/7000 model=live modes=98/100 hq=0.9750 pass=False elapsed=350.0s
+EVAL step=3750/7000 model=ema modes=98/100 hq=0.9756 pass=False elapsed=350.4s
+train   3783/7000 Ld=+0.6900 Lg=+0.7094 pen=0.00119 s=1 lr_d=0.00425 352s
+TRAIN step=4000/7000 d=0.6895 g=0.7015 train_seconds=333.2
+EVAL step=4000/7000 model=live modes=98/100 hq=0.9787 pass=False elapsed=365.4s
+EVAL step=4000/7000 model=ema modes=98/100 hq=0.9811 pass=False elapsed=365.7s
+train   4074/7000 Ld=+0.6955 Lg=+0.7052 pen=0.000764 s=1 lr_d=0.00425 369s
+TRAIN step=4250/7000 d=0.6901 g=0.7081 train_seconds=346.0
+EVAL step=4250/7000 model=live modes=98/100 hq=0.9813 pass=False elapsed=378.8s
+EVAL step=4250/7000 model=ema modes=98/100 hq=0.9834 pass=False elapsed=379.1s
+train   4365/7000 Ld=+0.6895 Lg=+0.7077 pen=0.000701 s=1 lr_d=0.00425 385s
+TRAIN step=4500/7000 d=0.6890 g=0.7098 train_seconds=359.5
+EVAL step=4500/7000 model=live modes=98/100 hq=0.9802 pass=False elapsed=393.0s
+EVAL step=4500/7000 model=ema modes=98/100 hq=0.9858 pass=False elapsed=393.3s
+train   4656/7000 Ld=+0.6900 Lg=+0.7061 pen=0.000651 s=1 lr_d=0.00425 402s
+TRAIN step=4750/7000 d=0.6883 g=0.7098 train_seconds=373.3
+EVAL step=4750/7000 model=live modes=98/100 hq=0.9786 pass=False elapsed=407.5s
+EVAL step=4750/7000 model=ema modes=98/100 hq=0.9867 pass=False elapsed=407.9s
+train   4947/7000 Ld=+0.6915 Lg=+0.7026 pen=0.000634 s=1 lr_d=0.00425 418s
+TRAIN step=5000/7000 d=0.6900 g=0.7040 train_seconds=387.1
+EVAL step=5000/7000 model=live modes=98/100 hq=0.9847 pass=False elapsed=422.0s
+EVAL step=5000/7000 model=ema modes=98/100 hq=0.9883 pass=False elapsed=422.3s
+train   5238/7000 Ld=+0.6873 Lg=+0.7129 pen=0.000538 s=1 lr_d=0.00425 435s
+TRAIN step=5250/7000 d=0.6894 g=0.7066 train_seconds=400.7
+EVAL step=5250/7000 model=live modes=98/100 hq=0.9847 pass=False elapsed=436.4s
+EVAL step=5250/7000 model=ema modes=98/100 hq=0.9893 pass=False elapsed=436.7s
+TRAIN step=5500/7000 d=0.6884 g=0.7075 train_seconds=414.4
+EVAL step=5500/7000 model=live modes=98/100 hq=0.9859 pass=False elapsed=450.8s
+EVAL step=5500/7000 model=ema modes=98/100 hq=0.9900 pass=False elapsed=451.1s
+train   5529/7000 Ld=+0.6898 Lg=+0.7105 pen=0.000394 s=1 lr_d=0.00425 452s
+TRAIN step=5750/7000 d=0.6896 g=0.7056 train_seconds=427.9
+EVAL step=5750/7000 model=live modes=98/100 hq=0.9824 pass=False elapsed=465.0s
+EVAL step=5750/7000 model=ema modes=98/100 hq=0.9902 pass=False elapsed=465.3s
+train   5820/7000 Ld=+0.6900 Lg=+0.7054 pen=0.000597 s=1 lr_d=0.00425 469s
+TRAIN step=6000/7000 d=0.6874 g=0.7081 train_seconds=440.7
+EVAL step=6000/7000 model=live modes=98/100 hq=0.9822 pass=False elapsed=478.6s
+EVAL step=6000/7000 model=ema modes=98/100 hq=0.9897 pass=False elapsed=479.0s
+train   6111/7000 Ld=+0.6903 Lg=+0.7113 pen=0.000348 s=1 lr_d=0.00425 485s
+TRAIN step=6250/7000 d=0.6893 g=0.7130 train_seconds=454.6
+EVAL step=6250/7000 model=live modes=98/100 hq=0.9807 pass=False elapsed=493.3s
+EVAL step=6250/7000 model=ema modes=98/100 hq=0.9866 pass=False elapsed=493.7s
+train   6402/7000 Ld=+0.6876 Lg=+0.7042 pen=0.000274 s=1 lr_d=0.00425 502s
+TRAIN step=6500/7000 d=0.6862 g=0.7117 train_seconds=468.2
+EVAL step=6500/7000 model=live modes=98/100 hq=0.9784 pass=False elapsed=507.7s
+EVAL step=6500/7000 model=ema modes=98/100 hq=0.9871 pass=False elapsed=508.0s
+train   6693/7000 Ld=+0.6887 Lg=+0.7152 pen=0.000279 s=1 lr_d=0.00425 517s
+TRAIN step=6750/7000 d=0.6900 g=0.7064 train_seconds=480.9
+EVAL step=6750/7000 model=live modes=98/100 hq=0.9788 pass=False elapsed=520.9s
+EVAL step=6750/7000 model=ema modes=98/100 hq=0.9882 pass=False elapsed=521.2s
+train   6984/7000 Ld=+0.6858 Lg=+0.7128 pen=0.000186 s=1 lr_d=0.00425 533s
+TRAIN step=7000/7000 d=0.6890 g=0.7081 train_seconds=494.3
+EVAL step=7000/7000 model=live modes=98/100 hq=0.9804 pass=False elapsed=535.1s
+EVAL step=7000/7000 model=ema modes=98/100 hq=0.9881 pass=False elapsed=535.5s
+COMPLETE problem=staggered100 steps=7000 live_modes=98/100 live_hq=0.9804 stable_pass=None total_seconds=537.3
+{"event": "problem_complete", "problem": "staggered100", "status": "complete", "output": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/reports/k3p-no-r1/runs/nr_pairsec_anchor/native-staggered100/bench/staggered100"}
+{"event": "gate", "status": "FAIL", "passed": 0, "required": 1, "leaderboard": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/reports/k3p-no-r1/runs/nr_pairsec_anchor/native-staggered100/bench/leaderboard-staggered100.md"}
+{"event": "accuracy_gate", "status": "FAIL", "passed": 0, "required": 1}
+# DONE native-staggered100 status=FAIL metric={'name': 'final modes/HQ', 'value': '98/0.980'} 547s
+# NR receipt spike=pairsec settle=anchor r1=0.0 loss={'rp_softplus': 7000} oadam_steps=0 anchor_active=True penalty_calls=7000 stock_calls=0

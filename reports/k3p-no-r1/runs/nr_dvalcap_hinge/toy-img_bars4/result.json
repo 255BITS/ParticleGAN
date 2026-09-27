@@ -1,0 +1,320 @@
+{
+ "arm": "nr_dvalcap_hinge",
+ "task": "toy-img_bars4",
+ "group": "toy",
+ "route": "gantrainer",
+ "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: dvalcap: real-logit value cap relu(|D(r) - mean_batch D(r)| - 1)^2. settle: hinge: critic loss = relativistic hinge mean relu(1 - (D(r) - D(f))); generator keeps RpGAN softplus. Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled.",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "passing suffix",
+  "value": "0/24"
+ },
+ "detail": "confirmed None modes=1 hq=0.219",
+ "raw": {
+  "verdict": {
+   "status": "FAIL",
+   "attempted": true,
+   "passed": false,
+   "metrics": [
+    {
+     "metric": "modes",
+     "value": 1,
+     "op": ">=",
+     "threshold": 4,
+     "status": "FAIL",
+     "margin": -3
+    },
+    {
+     "metric": "hq",
+     "value": 0.21875,
+     "op": ">=",
+     "threshold": 0.9,
+     "status": "FAIL",
+     "margin": -0.68125
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 0,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 0,
+    "first_pass_step": null,
+    "stable_from_step": null,
+    "stable_from_seconds": null,
+    "confirmed_step": null,
+    "confirmed_seconds": null
+   },
+   "shortfall": 0.7534722222222222,
+   "confirmation_fraction": 2.0
+  },
+  "ema": "FAIL",
+  "noise_applied": true
+ },
+ "seconds": 12.9,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "a0cbc483a48c07d79efce3397e3ed9846ad855828ee7c20ed2dd5639d2ccff7e",
+  "init_tensors": 15
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ],
+   "host_policy": {
+    "input_std": null,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": null,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": null
+   }
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 600,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 600,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 600,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 600,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 600,
+   "guard_clips": 3,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0,
+   "nr_penalty_calls": 600
+  },
+  "final_sha256": "39b6c8167a90a5f5061d1c40aaffde3c0b47719fbb405fb220570c5429c26ee1",
+  "penalty_variant": null,
+  "recipe": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 0.3,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 600,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 0.0,
+   "direct_particle_betas": [
+    0.0,
+    0.999
+   ],
+   "direct_particle_gain": false,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 0.3,
+   "prior_lr_mult": 2.0
+  }
+ },
+ "nr_receipt": {
+  "arm": "nr_dvalcap_hinge",
+  "spike": "dvalcap",
+  "settle": "hinge",
+  "r1_weight_applied": 0.0,
+  "r1_evals": 0,
+  "penalty_patched": true,
+  "penalty_form": "c/2*[dvalcap + fake_cap]",
+  "nr_penalty_calls": 600,
+  "stock_k3p_penalty_calls": 0,
+  "term_stats": {
+   "spike": {
+    "mean": 0.023176859219868978,
+    "positive_frac": 0.8616666666666667,
+    "calls": 600
+   },
+   "fake_cap": {
+    "mean": 0.0,
+    "positive_frac": 0.0,
+    "calls": 600
+   }
+  },
+  "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
+  "loss_form": "rp_hinge",
+  "d_loss_calls": {
+   "rp_hinge": 600
+  },
+  "g_loss": "RpGAN softplus (unchanged)",
+  "critic_optimizers": [
+   {
+    "cls": "K3PCriticAdam",
+    "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 600,
+    "lr_receipt_steps": 600,
+    "amsgrad": [
+     true
+    ],
+    "betas": [
+     [
+      0.0,
+      0.999
+     ]
+    ],
+    "lr": [
+     0.00425
+    ],
+    "state_keys": [
+     "exp_avg",
+     "exp_avg_sq",
+     "max_exp_avg_sq",
+     "step"
+    ],
+    "guard": true,
+    "guard_reads": {
+     "max_exp_avg_sq": 3594
+    }
+   }
+  ],
+  "oadam_steps": 0,
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "max_exp_avg_sq": 3594
+  },
+  "anchor_active": false,
+  "anchor_start_step": null,
+  "anchor_deferred_calls": 0,
+  "kernels": [
+   {
+    "anchor_weight": 0.0,
+    "kappa": 1.0,
+    "coeff": 0.3,
+    "lazy_k": 1,
+    "anchor_started": false,
+    "anchor": "RobustCriticAnchor",
+    "blend_s": 1.0,
+    "record_steps": 600
+   }
+  ],
+  "noise": {
+   "declared": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "applied": {
+    "wrappers": [
+     {
+      "input_wrapper": false,
+      "output_wrapper": false,
+      "recipe_input_noise": 0.0,
+      "recipe_output_noise": 0.0
+     }
+    ],
+    "host_policy": {
+     "input_std": null,
+     "input_nonzero_steps": 0,
+     "input_sigma_first": null,
+     "output_nonzero_steps": 0,
+     "output_scale_initial": null
+    }
+   }
+  },
+  "lr": {
+   "declared": {
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 0.3
+   },
+   "applied_groups": {
+    "opt1.g0": {
+     "min": 0.00425,
+     "max": 0.00425,
+     "steps": 600,
+     "amsgrad": true
+    },
+    "opt0.g0": {
+     "min": 0.0085,
+     "max": 0.0085,
+     "steps": 600,
+     "amsgrad": true
+    },
+    "opt0.g1": {
+     "min": 0.017,
+     "max": 0.017,
+     "steps": 600,
+     "amsgrad": true
+    }
+   },
+   "lr_constant": true,
+   "gantrainer_recipes": [
+    {
+     "lr": 0.0085,
+     "d_lr_mult": 0.5,
+     "betas": [
+      0.0,
+      0.999
+     ],
+     "reg_coeff": 0.3,
+     "reg_kappa": 1.0,
+     "lr_floor": 1.0,
+     "network_lr_floor": 1.0,
+     "network_lr_horizon_cap": 1600,
+     "total_steps": 600,
+     "d_guard_ratio": 5.0,
+     "d_guard_min_steps": 200,
+     "latent_damping_max_rate": 0.5,
+     "reg_anchor_decay": 0.999,
+     "reg_anchor_weight": 0.0,
+     "direct_particle_betas": [
+      0.0,
+      0.999
+     ],
+     "direct_particle_gain": false,
+     "amsgrad": true
+    }
+   ]
+  }
+ }
+}

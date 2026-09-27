@@ -1,0 +1,356 @@
+{
+ "arm": "nr_none_anchor",
+ "task": "native-grid100",
+ "group": "native",
+ "route": "gantrainer",
+ "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: none: R1 removed, nothing added on the real side (control). settle: anchor: K3P EMA-critic anchor prox term forced on at constant LR (stock reg_anchor_weight 1, decay .999). Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled.",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "final modes/HQ",
+  "value": "100/0.990"
+ },
+ "detail": "coverage FAIL accuracy FAIL first100 1250 massTV 0.055",
+ "exit_code": 1,
+ "raw": {
+  "final": {
+   "hq": 0.98965,
+   "mass_tv": 0.055,
+   "max_cov_eig_ratio": 3.1014535116508237,
+   "max_mode_mass": 0.01335,
+   "max_radial_median_ratio": 1.6441570111195298,
+   "min_cov_eig_ratio": 0.04101491936644928,
+   "min_hq_count": 132,
+   "min_hq_mode_mass": 0.0066,
+   "min_radial_median_ratio": 0.5317898016579891,
+   "modes": 100,
+   "n": 20000,
+   "passed": false,
+   "precision": 0.98965,
+   "valid_n": 20000
+  },
+  "first_full_coverage": 1250,
+  "holdout": {
+   "ema": {
+    "abs_cov_trace_bias": 0.146474234647597,
+    "accuracy_pass": false,
+    "accuracy_score": 1.2524783792448468,
+    "all_finite": true,
+    "center_max_sigma": 0.6802404787559082,
+    "center_rms_sigma": 0.3052541690207039,
+    "cov_frob_rms": 0.581515942356921,
+    "cov_trace_bias": -0.146474234647597,
+    "frozen_pass": false,
+    "mass_tv": 0.0487,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.99298,
+    "precision_gap": 0.00408899653824224,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.04828934634932924,
+    "valid_n": 100000,
+    "within_radius_n": 99298
+   },
+   "live": {
+    "abs_cov_trace_bias": 0.10170860371235435,
+    "accuracy_pass": false,
+    "accuracy_score": 1.152734770988514,
+    "all_finite": true,
+    "center_max_sigma": 0.7955946261353981,
+    "center_rms_sigma": 0.3577212576950085,
+    "cov_frob_rms": 0.6155480171654398,
+    "cov_trace_bias": -0.10170860371235435,
+    "frozen_pass": false,
+    "mass_tv": 0.0487,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.98769,
+    "precision_gap": 0.001201003461757777,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.03974320366755216,
+    "valid_n": 100000,
+    "within_radius_n": 98769
+   },
+   "target": {
+    "abs_cov_trace_bias": 0.0004259032355904413,
+    "accuracy_pass": true,
+    "accuracy_score": 0.1208307814719265,
+    "all_finite": true,
+    "center_max_sigma": 0.09693988901822922,
+    "center_rms_sigma": 0.04204673098469886,
+    "cov_frob_rms": 0.052380239447918454,
+    "cov_trace_bias": -0.0004259032355904413,
+    "frozen_pass": true,
+    "mass_tv": 0.013510000000000005,
+    "n": 100000,
+    "passed": true,
+    "precision": 0.98861,
+    "precision_gap": 0.00028100346175774504,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.0017465508776656202,
+    "valid_n": 100000,
+    "within_radius_n": 98861
+   }
+  },
+  "stable_pass": null
+ },
+ "seconds": 197.9,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "46c10b8db2a8b99c775024f2f4b8b947ded82cf88190a3c1721a1d936ba51e82",
+  "init_tensors": 11
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ]
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 7000,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 6999,
+   "a2_calls": 7000,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 7000,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0,
+   "nr_penalty_calls": 7000
+  },
+  "final_sha256": "9df1ed66639f5011c613640a93b042cb01da8fd47d71dbaa9024b99f5cc68d37",
+  "penalty_variant": null,
+  "recipe": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 0.3,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 7000,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.999
+   ],
+   "direct_particle_gain": false,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 0.3,
+   "prior_lr_mult": 2.0
+  }
+ },
+ "nr_receipt": {
+  "arm": "nr_none_anchor",
+  "spike": "none",
+  "settle": "anchor",
+  "r1_weight_applied": 0.0,
+  "r1_evals": 0,
+  "penalty_patched": true,
+  "penalty_form": "c/2*[none + fake_cap + anchor_weight*prox]",
+  "nr_penalty_calls": 7000,
+  "stock_k3p_penalty_calls": 0,
+  "term_stats": {
+   "prox": {
+    "mean": 0.05038275146484375,
+    "positive_frac": 0.9998571428571429,
+    "calls": 7000
+   },
+   "spike": {
+    "mean": 0.0,
+    "positive_frac": 0.0,
+    "calls": 7000
+   },
+   "fake_cap": {
+    "mean": 0.003810814993722098,
+    "positive_frac": 0.057428571428571426,
+    "calls": 7000
+   }
+  },
+  "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
+  "loss_form": "rp_softplus",
+  "d_loss_calls": {
+   "rp_softplus": 7000
+  },
+  "g_loss": "RpGAN softplus (unchanged)",
+  "critic_optimizers": [
+   {
+    "cls": "K3PCriticAdam",
+    "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 7000,
+    "lr_receipt_steps": 7000,
+    "amsgrad": [
+     true
+    ],
+    "betas": [
+     [
+      0.0,
+      0.999
+     ]
+    ],
+    "lr": [
+     0.00425
+    ],
+    "state_keys": [
+     "exp_avg",
+     "exp_avg_sq",
+     "max_exp_avg_sq",
+     "step"
+    ],
+    "guard": true,
+    "guard_reads": {
+     "max_exp_avg_sq": 55992
+    }
+   }
+  ],
+  "oadam_steps": 0,
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "max_exp_avg_sq": 55992
+  },
+  "anchor_active": true,
+  "anchor_start_step": 0,
+  "anchor_deferred_calls": 0,
+  "kernels": [
+   {
+    "anchor_weight": 1.0,
+    "kappa": 1.0,
+    "coeff": 0.3,
+    "lazy_k": 1,
+    "anchor_started": true,
+    "anchor": "RobustCriticAnchor",
+    "blend_s": 1.0,
+    "record_steps": 7000
+   }
+  ],
+  "noise": {
+   "declared": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "applied": {
+    "wrappers": [
+     {
+      "input_wrapper": false,
+      "output_wrapper": false,
+      "recipe_input_noise": 0.0,
+      "recipe_output_noise": 0.0
+     }
+    ]
+   }
+  },
+  "lr": {
+   "declared": {
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 0.3
+   },
+   "applied_groups": {
+    "opt1.g0": {
+     "min": 0.00425,
+     "max": 0.00425,
+     "steps": 7000,
+     "amsgrad": true
+    },
+    "opt0.g0": {
+     "min": 0.0085,
+     "max": 0.0085,
+     "steps": 7000,
+     "amsgrad": true
+    },
+    "opt0.g1": {
+     "min": 0.017,
+     "max": 0.017,
+     "steps": 7000,
+     "amsgrad": true
+    }
+   },
+   "lr_constant": true,
+   "gantrainer_recipes": [
+    {
+     "lr": 0.0085,
+     "d_lr_mult": 0.5,
+     "betas": [
+      0.0,
+      0.999
+     ],
+     "reg_coeff": 0.3,
+     "reg_kappa": 1.0,
+     "lr_floor": 1.0,
+     "network_lr_floor": 1.0,
+     "network_lr_horizon_cap": 1600,
+     "total_steps": 7000,
+     "d_guard_ratio": 5.0,
+     "d_guard_min_steps": 200,
+     "latent_damping_max_rate": 0.5,
+     "reg_anchor_decay": 0.999,
+     "reg_anchor_weight": 1.0,
+     "direct_particle_betas": [
+      0.0,
+      0.999
+     ],
+     "direct_particle_gain": false,
+     "amsgrad": true
+    }
+   ]
+  }
+ }
+}

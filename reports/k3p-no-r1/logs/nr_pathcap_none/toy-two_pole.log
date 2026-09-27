@@ -1,0 +1,29 @@
+# arm=nr_pathcap_none task=toy-two_pole route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START two_pole route=public primitives custom host + shared noise policy steps=80
+eval     4 mean_abs=0.0646 grad_med=0.118
+eval     7 mean_abs=0.1033 grad_med=0.08022
+eval    10 mean_abs=0.1287 grad_med=0.04163
+eval    14 mean_abs=0.1399 grad_med=0.004659
+eval    17 mean_abs=0.1371 grad_med=0.008524
+eval    20 mean_abs=0.1338 grad_med=0.006587
+eval    24 mean_abs=0.1385 grad_med=0.01875
+eval    27 mean_abs=0.1522 grad_med=0.04178
+eval    30 mean_abs=0.1754 grad_med=0.0854
+eval    34 mean_abs=0.2165 grad_med=0.2355
+eval    37 mean_abs=0.3084 grad_med=0.4608
+eval    40 mean_abs=0.4922 grad_med=0.7393
+eval    44 mean_abs=0.7208 grad_med=1.082
+eval    47 mean_abs=0.87 grad_med=1.27
+eval    50 mean_abs=0.9969 grad_med=1.294
+eval    54 mean_abs=1.135 grad_med=1.274
+eval    57 mean_abs=1.219 grad_med=1.131
+eval    60 mean_abs=1.292 grad_med=1.029
+eval    64 mean_abs=1.374 grad_med=0.8392
+eval    67 mean_abs=1.426 grad_med=0.6867
+eval    70 mean_abs=1.469 grad_med=0.5262
+eval    74 mean_abs=1.513 grad_med=0.2982
+eval    77 mean_abs=1.534 grad_med=0.1173
+eval    80 mean_abs=1.543 grad_med=0.07386
+{"event": "DONE", "task": "two_pole", "status": "PASS", "suffix": 6, "live": {"mean_abs": 1.543155550956726, "grad_med": 0.0738598108291626}, "error": null}
+# DONE toy-two_pole status=PASS metric={'name': 'passing suffix', 'value': '6/24'} 2s
+# NR receipt spike=pathcap settle=none r1=0.0 loss={'rp_softplus': 80} oadam_steps=0 anchor_active=False penalty_calls=80 stock_calls=0
