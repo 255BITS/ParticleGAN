@@ -350,7 +350,7 @@ class LunarPolicy(ToyProblem):
         if role != "generator":
             return {}
         if not self.adversarial:
-            return {"action_mse": F.mse_loss(fake.x, real.x)}
+            return {"bc_loss": F.mse_loss(fake.x, real.x)}  # not "action_mse": that is the metric
         states, successor = real.condition[0], self.values["next_states"][real.indices]
         predicted = self.world(states, fake.x)
         # Continuous coordinates have useful action gradients. Contact bits are
