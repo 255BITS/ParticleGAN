@@ -32,6 +32,8 @@ alone is insufficient, and longer verification remains required.
 | API-DV11: critic evidence controls latent smoothing | 560 | 185/185 | 290 | 190/192 | Two early recovery misses, then187 straight. Unequal_mass0/24 **FAIL**; source independently verified. |
 | API-DV12: locally bounded latent smoothing | 590 | 182/182 | 290 | 191/192 | One early recovery miss2730, then187 straight. **Rejected:** unequal_mass2/24, final suffix0; final covariance error.8844 exceeds.85. |
 | API-DV13: learned local latent widths, actual native critic memory | 610 | 180/180 | 350 | 181/186 | Five early recovery misses, then175 straight. Unequal_mass14/24, final10 **PASS**; bars4 **FAIL10/24**, suffix2. Intended data-driven critic-memory attachment was omitted; actual behavior and original declaration preserved. |
+| API-DV14: paired opposite-noise width gradients and repaired memory binding | 590 | 182/182 | 290 | 191/192 | One early recovery miss2720, then188 straight. Unequal_mass14/24, final14 **PASS**; bars4 **FAIL8/24**, suffix0. Own source and full saved states independently verified. |
+| API-DV15: bounded uniform latent perturbations with learned widths | 520 | 189/189 | 330 | 185/188 | Three early recovery misses, then182 straight. Bars4 **PASS11/24**, suffix8. Unequal_mass **FAIL4/24**, suffix2 despite all endpoint bounds passing; unchanged supplemental settling test requested, original score retained. Uniform law changes variance as well as tails. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -44,6 +46,8 @@ alone is insufficient, and longer verification remains required.
 | API-C10: role-balanced joint secant update | 540 | 187/187 | 250 | 196/196 | Own replay passes. **Rejected:** intensity image4/24, final suffix1; finalHQ.96875 does not establish stability. |
 | API-C11: separate response fit for each role | 660 | 175/175 | 280 | 193/193 | Own replay passes. **Rejected:** intensity image0/24, finalHQ.65625 and1qualitymode. |
 | API-C12: residual-checked implicit update | NOT_OBSERVED | — | NOT_OBSERVED | — | Complete4600;80,382 field evaluations,1719.76s. **Rejected:** intensity0/24, finalHQ.46875. Own exact checkpoint replay passes. |
+| API-C13: fixed-macrostep nonlinear residual correction | NOT_RUN | — | NOT_RUN | — | Intensity **PASS11/24**, final11. Public buffer/RNG ownership issue found; original pass retained separately. |
+| API-C13-R1: repaired base-field state ownership, same nonlinear solver | RUNNING | — | RUNNING | — | **Own** intensity **PASS11/24**, final11. Same image final state,8752 field evaluations;117 regression tests. Own recovery ring running; broader/long qualification incomplete. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
@@ -53,6 +57,7 @@ alone is insufficient, and longer verification remains required.
 | API-RP6: balance predictor energy between adversarial players | 660 | 173/175 | 380 | 182/183 | Early misses680/690 and2790; final shifted suffix181. **Rejected:** intensity1/24, final suffix1. Small-particle task also **FAIL0/24**, final7/8 modes. |
 | API-RP7: richer coupled three-field response | 600 | 181/181 | 340 | 187/187 | **Rejected:** intensity3/24, final suffix2; mode_hold0/24, final0/8 modes andHQ0. Own unchanged package and frozen hosts independently verified. |
 | API-RP8: minimize the full local linear residual | 520 | 189/189 | 290 | 192/192 | **Rejected:** intensity10/24, final suffix3; mode_hold0/24, final6/8 modes withHQ1.0. Broader sources and scorer independently verified. |
+| API-RP9: disagreement-driven particle exploration | NOT_RUN | — | NOT_RUN | — | Cheap screens first. **Rejected:** intensity7/24, final suffix1; mode_hold0/24, final6/8 modes. New private particle RNG is checkpointed; separate initial stream-hash receipt is incomplete. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled

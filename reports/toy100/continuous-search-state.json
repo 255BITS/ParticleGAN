@@ -552,9 +552,18 @@
   ],
   "active_attempts": [
     {
+      "lane": "constant_rate_stability",
+      "pid": 1706710,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710",
+      "status": "RUNNING",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "max",
+      "workers": 1
+    },
+    {
       "lane": "reversible_precision",
-      "pid": 1657545,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545",
+      "pid": 1735840,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840",
       "status": "RUNNING",
       "model": "gpt-6-astra",
       "reasoning_effort": "max",
@@ -562,17 +571,8 @@
     },
     {
       "lane": "data_drift_mobility",
-      "pid": 1700495,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002520Z-1700486/data_drift_mobility/20260927T002520Z-1700495",
-      "status": "RUNNING",
-      "model": "gpt-6-astra",
-      "reasoning_effort": "max",
-      "workers": 1
-    },
-    {
-      "lane": "constant_rate_stability",
-      "pid": 1706710,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710",
+      "pid": 1744511,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511",
       "status": "RUNNING",
       "model": "gpt-6-astra",
       "reasoning_effort": "max",
@@ -583,7 +583,7 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "NO_SURVIVOR_CURRENT_PROPOSALS_RUNNING",
+    "status": "EARLY_IMAGE_SURVIVOR_RECOVERY_PENDING_OTHER_LANES_SEARCHING",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
     "matched_k3p_owner": "RECOVERY_AND_UNEQUAL_MASS_REFERENCES_COMPLETE",
@@ -612,7 +612,7 @@
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
     },
-    "strongest_active_candidate": null,
+    "strongest_active_candidate": "API-C13-R1",
     "api_c6": {
       "single_shift": "PASS",
       "initial_arrival": 590,
@@ -739,7 +739,9 @@
       "component_min_eigen_ratio": 0.021303080022335052,
       "required_min_eigen_ratio": 0.15
     },
-    "survivors": [],
+    "survivors": [
+      "API-C13-R1"
+    ],
     "api_dv8": {
       "single_shift_after_arrival": "171/190",
       "initial_after_arrival": "175/177",
@@ -884,7 +886,60 @@
       "actual_critic_memory": "NATIVE_KA2_INTENDED_DATA_BINDING_OMITTED",
       "declaration_deviation": "reports/toy100/continuous-api-search/dv13-declaration-deviation.json",
       "qualified": false
+    },
+    "api_rp9": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "ring": "NOT_RUN_AFTER_CHEAP_BROADER_FAILURE",
+      "image": "FAIL_7_OF_24_SUFFIX_1",
+      "mode_hold": "FAIL_0_OF_24",
+      "final_modes": 6,
+      "qualified": false
+    },
+    "api_dv14": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "initial_retention": "182/182",
+      "shift_delay": 290,
+      "shift_retention": "191/192",
+      "shift_final_suffix": 188,
+      "unequal_mass": "PASS_14_OF_24_SUFFIX_14",
+      "bars4": "FAIL_8_OF_24_SUFFIX_0",
+      "controller_binding": "CORRECTED_AND_VERIFIED",
+      "qualified": false
+    },
+    "api_c13": {
+      "status": "SUPERSEDED_BY_API_STATE_REPAIR",
+      "image": "PASS_11_OF_24_SUFFIX_11",
+      "ring": "NOT_RUN",
+      "qualified": false
+    },
+    "api_c13_r1": {
+      "status": "EARLY_IMAGE_PASS_RING_RUNNING",
+      "image": "OWN_PASS_11_OF_24_SUFFIX_11",
+      "image_field_evaluations": 8752,
+      "image_converged_updates": 99,
+      "image_fallback_updates": 501,
+      "cpu_regression_passes": 117,
+      "qualified": false,
+      "broader_completed": 1,
+      "broader_total": 22
+    },
+    "k3p_mode_hold_reference": {
+      "status": "SOURCE_PREPARATION_AND_INDEPENDENT_REVIEW_REQUIRED",
+      "owner_pid": 1735840,
+      "scope": "UNMODIFIED_RELEASED_K3P_SUPPORTING_REFERENCE_ONLY"
+    },
+    "api_dv15": {
+      "status": "ORIGINAL_BROADER_FAIL_SUPPLEMENTARY_SETTLING_UNVERIFIED",
+      "initial_retention": "189/189",
+      "shift_delay": 330,
+      "shift_retention": "185/188",
+      "shift_final_suffix": 182,
+      "unequal_mass": "ORIGINAL_FAIL_4_OF_24_SUFFIX_2_ENDPOINT_ALL_BOUNDS_PASS",
+      "bars4": "PASS_11_OF_24_SUFFIX_8",
+      "supplementary_window": "UNCHANGED_RESUMED_1200_TO_2400_REQUESTED",
+      "qualified": false,
+      "supplementary_owner_pid": 1744511
     }
   },
-  "observed_utc": "2026-09-27T00:29:34.996812+00:00"
+  "observed_utc": "2026-09-27T00:54:22.366206+00:00"
 }
