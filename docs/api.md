@@ -331,7 +331,9 @@ ParticlePrior(num_particles=20_000, z_dim=4, init_std=1.0,
 
 An `nn.Module` with table `prior.z` of shape `[num_particles, z_dim]`, initialized
 from a zero-mean Gaussian with standard deviation `init_std`. By default the
-table is a parameter. With `learnable=False`, it is a fixed buffer.
+table is a parameter. With `learnable=False`, it is a fixed buffer. The
+constructor keeps this random draw; `recipe.make_prior()` gives a learnable
+table the recipe's default R2 initialization instead.
 
 | Method / attribute | Result |
 | --- | --- |
@@ -423,6 +425,9 @@ prior.sigma_rel = 1/40
 ```
 
 This calibrates the **already initialized centers without redrawing them**.
+`recipe.make_prior()` with a MoG recipe (or `prior_kind="mog", sigma_rel=...`)
+performs these steps after giving the centers the recipe's default R2
+initialization; the direct constructor above keeps its random draw.
 The helper accepts supplied read-space centers; it does not standardize, mutate
 centers, or consume RNG. It returns detached scalar tensors `(sigma, d0)` on the
 centers' device and dtype. The exact median averages the two middle nearest-neighbor
@@ -743,6 +748,7 @@ d_loss = adv_d + penalty(D, real, fake)                  # or penalty(D, x, fake
 opt_d.zero_grad(); d_loss.backward(); opt_d.step()       # guard, Adam, EMA + LR record
 opt_g.zero_grad(); g_loss.backward(); opt_g.step()       # Adam with A2 latent damping
 
+initialize_(D2, key=3)   # lower-level factories keep weights; 0/1/2 are the recipe's G/D/E keys
 opt_d2 = recipe.make_critic_optimizer(D2, ema_critic=copy.deepcopy(D2))  # a second critic
 penalty2 = recipe.make_critic_penalty(opt_d2)
 
@@ -812,12 +818,12 @@ num_particles = 4096
 
 ```python
 import tomllib  # Python 3.10: install tomli and import it as tomllib.
-from particlegan import ParticlePrior, get_recipe
+from particlegan import get_recipe
 
 with open("model.toml", "rb") as file:
     config = tomllib.load(file)
 recipe = get_recipe(**config["particlegan"])
-prior = ParticlePrior(**config["prior"])
+prior = recipe.make_prior(**config["prior"])   # recipe-default table initialization
 recipe = get_recipe(**{**config["particlegan"], "lr": 1e-4})
 ```
 

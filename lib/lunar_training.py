@@ -13,7 +13,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import get_recipe, scale_learning_rates
+from particlegan import get_recipe, initialize_, scale_learning_rates
 
 
 STATE_DIM = 8
@@ -271,6 +271,12 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
     # trainer saves live weights, so checkpoint metadata cannot suggest averaging.
     recipe = get_recipe(total_steps=steps, batch_size=batch_size, lr=3e-4, d_lr_mult=2 / 3,
                         betas=(.5, .99), ema_decay=0.)
+    # The lower-level optimizer factories below keep weights: initialize the
+    # fresh networks here (a loaded initial policy keeps its trained weights).
+    if recipe.initialization is not None:
+        if initial_policy is None:
+            initialize_(policy, key=0)
+        initialize_(critic, key=1)
     gan = recipe.make_loss()
     optimizer_g = recipe.make_generator_optimizer(policy.parameters())
     # Critic Adam whose step() also runs the recipe's spike guard and EMA-critic update.

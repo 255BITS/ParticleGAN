@@ -23,7 +23,7 @@ from experiments.run_grid import code_provenance
 from lib.image_ddgan import update_ema
 from lib.image_particle_autoencoder import DirectGenerator, DirectDiscriminator, ImageRoutingEncoder
 from lib.image_particle_ddgan import ParticleDDGenerator, ParticleDDDiscriminator
-from particlegan import calibrate_mog_sigma, get_recipe, MoGParticlePrior, ParticleRegularizer, scale_learning_rates
+from particlegan import get_recipe, ParticleRegularizer, scale_learning_rates
 
 DEFAULTS = {
     'arm': 'gan', 'model': 'direct',
@@ -268,14 +268,9 @@ def train(cfg):
         g = DirectGenerator(cfg['z_dim'], cfg['width']).cuda()
         d = DirectDiscriminator(cfg['width']).cuda()
     e = ImageRoutingEncoder(cfg['z_dim'], cfg['width']).cuda()
-    prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=cfg['z_dim'],
-                             sigma=0, generator=rng(cfg['seed'] + 1, 'cpu'))
-    sigma, d0 = calibrate_mog_sigma(prior.means(), cfg['sigma_rel'])
-    prior.set_sigma(sigma)
-    prior.d0.copy_(d0)
-    prior.sigma_rel = cfg['sigma_rel']
-    prior = prior.cuda()
     recipe = training_recipe(cfg)
+    # The recipe builds and calibrates the table, with its default initialization.
+    prior = recipe.make_prior(generator=rng(cfg['seed'] + 1, 'cpu')).cuda()
     og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)
     initial_hash = state_hash([g, d, e, prior])
     initial_sigma = prior.sigma.clone()
