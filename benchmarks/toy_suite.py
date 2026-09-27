@@ -42,7 +42,7 @@ from benchmarks.transfer_suite.public_default_verification import (
     GLOBAL_RECIPE_FIELDS, declared_spec, host_recipe, load_declaration,
 )
 from benchmarks.transfer_suite.toy100_compatibility import (
-    VECTOR_NAMES, declared_model_policy, declared_recipe, output_noise_at,
+    VECTOR_NAMES, declared_model_policy, declared_recipe, image_recipe, output_noise_at,
 )
 from particlegan import learning_rate_scale
 from benchmarks.legacy.recipe import LegacyRecipe as Recipe
@@ -125,6 +125,49 @@ def _sha256_hex(value):
     return isinstance(value, str) and len(value) == 64 and all(
         character in "0123456789abcdef" for character in value
     )
+
+
+IMAGE_ROUTE = "benchmarks.toy_runner"
+
+
+def _toy_runner_image(record: dict) -> bool:
+    """Image hosts now train on benchmarks.toy_runner: the recipe-built optimizers
+    own the LR schedule (no per-step action trace, no GANTrainer stream hashes)."""
+    return record["spec"]["runner"] == "image" and record["result"].get("route") == IMAGE_ROUTE
+
+
+def _check_toy_runner_image(record: dict, host: Recipe, noise: dict | None):
+    """Scoped route check for image records: the declared recipe trained, through
+    the recipe-built optimizer groups, with observed (not claimed) noise."""
+    name, steps, result = record["name"], record["spec"]["steps"], record["result"]
+    if result.get("recipe") != _json_value(host.to_dict()):
+        raise ValueError(f"image host trained on a recipe other than the declaration: {name}")
+    if result.get("update_counts") != {"g": steps, "d": steps}:
+        raise ValueError(f"image host update trace is incomplete: {name}")
+    if result.get("eval_streams_preserved") is not True:
+        raise ValueError(f"image host evaluation advanced a training stream: {name}")
+    groups = [("K3PGeneratorAdam", "network", host.lr, host.betas),
+              ("K3PGeneratorAdam", "prior", host.lr * host.prior_lr_mult, host.prior_betas or host.betas),
+              ("K3PCriticAdam", "critic", host.lr * host.d_lr_mult, host.betas)]
+    applied = record.get("applied")
+    if (not isinstance(applied, list)
+            or [(row.get("optimizer"), row.get("role")) for row in applied] != [g[:2] for g in groups]):
+        raise ValueError(f"image host optimizer groups differ: {name}")
+    for row, (_, role, rate, betas) in zip(applied, groups):
+        if (not _close(row.get("lr"), rate) or row.get("betas") != list(betas)
+                or type(row.get("parameters")) is not int or row["parameters"] <= 0):
+            raise ValueError(f"image host optimizer group differs from recipe: {name}.{role}")
+    if noise is None:
+        return
+    receipt = record["noise_receipt"]
+    if receipt.get("schedule_mismatches") != 0:
+        raise ValueError(f"image host observed noise differs from the recipe schedule: {name}")
+    if noise.get("output_noise_rng") == "isolated":
+        if (receipt.get("output_noise_rng") != "runner stream"
+                or receipt.get("output_noise_eval_state_preserved") is not True):
+            raise ValueError(f"image host isolated output-noise receipt differs: {name}")
+    elif any(field in receipt for field in ISOLATED_TRANSFER_RECEIPT_FIELDS):
+        raise ValueError(f"undeclared isolated output-noise receipt: {name}")
 
 
 def _check_optimizer_receipts(record: dict, base: Recipe):
@@ -957,6 +1000,13 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 raise ValueError(f"executed spec, budget, threshold, or discriminator differs: {name}")
             expected_host_recipe = (base if expected_spec["runner"] == "legacy"
                                     else host_recipe(base, expected_spec))
+            image_route = _toy_runner_image(record)
+            if image_route and candidate:  # declared noise/schedule are recipe fields there
+                try:
+                    expected_host_recipe = image_recipe(expected_spec, base, protocol["noise"],
+                                                        protocol.get("model_policy"))
+                except NotImplementedError as error:
+                    raise ValueError(f"{error}: {name}") from error
             if record.get("host_recipe") != _json_value(legacy_dict(expected_host_recipe)):
                 raise ValueError(f"host resource recipe differs from declaration: {name}")
             if record["source_sha256"] != protocol["source_sha256"]:
@@ -987,7 +1037,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 if receipt.get("input_nonzero_steps") != expected_input_nonzero:
                     raise ValueError(f"candidate input noise duration differs: {name}")
                 if "output_noise_warmup" in protocol["noise"] and warmup:
-                    if (not _close(receipt.get("output_sigma_first"), expected_first)
+                    if not image_route and (not _close(receipt.get("output_sigma_first"), expected_first)
                             or not _close(receipt.get("output_sigma_last"), expected_last)):
                         raise ValueError(f"candidate output warmup differs: {name}")
                     expected_output_nonzero = sum(
@@ -1013,6 +1063,10 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                                          and receipt.get("input_nonzero_steps", 0) > 0))
                     if not receipt.get("eval_scope"):
                         raise ValueError(f"custom-host evaluation scope is absent: {name}")
+                elif image_route:  # observed per update by the screen's noise witness
+                    actual_noise = ((output_std == 0 or receipt.get("train_output_applied"))
+                                    and (input_std == 0 or receipt.get("train_input_applied")
+                                         and receipt.get("input_nonzero_steps", 0) > 0))
                 else:
                     output_module = ("IsolatedOutputNoise" if
                                      protocol["noise"].get("output_noise_rng") == "isolated"
@@ -1024,17 +1078,22 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                                     and (input_std == 0 or receipt.get("input_module") == input_module
                                          and receipt.get("input_nonzero_steps", 0) > 0))
                 _check_learned_transfer_noise(record, receipt, protocol["noise"])
-                _check_isolated_transfer_noise(record, receipt, protocol["noise"])
+                if not image_route:
+                    _check_isolated_transfer_noise(record, receipt, protocol["noise"])
                 if bool(actual_noise) != record.get("noise_applied"):
                     raise ValueError(f"candidate noise claim differs from receipt: {name}")
             else:
                 if record["recipe"] != protocol["base_get_recipe"]:
                     raise ValueError(f"public default recipe differs between cases: {name}")
             result = record["result"]
-            _check_optimizer_receipts(record, expected_host_recipe)
-            _check_actions(record, expected_host_recipe,
-                           protocol["noise"] if candidate else None,
-                           protocol.get("model_policy") if candidate else None)
+            if image_route:
+                _check_toy_runner_image(record, expected_host_recipe,
+                                        protocol["noise"] if candidate else None)
+            else:
+                _check_optimizer_receipts(record, expected_host_recipe)
+                _check_actions(record, expected_host_recipe,
+                               protocol["noise"] if candidate else None,
+                               protocol.get("model_policy") if candidate else None)
             verdict = test_verdict(record["spec"], result)
             if (verdict["status"] != record["verdict"]["status"]
                     or verdict["passed"] != record["verdict"]["passed"]

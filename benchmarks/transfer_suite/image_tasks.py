@@ -207,8 +207,14 @@ class ImageTask(ToyProblem):
             raise ValueError("recipe latent shape differs from the image task")
         generator = init.deterministic_orthogonal_(Generator(spec), seed=seed)
         critic = init.deterministic_orthogonal_(Discriminator(spec), seed=seed + 1)
-        prior = init.deterministic_orthogonal_(
-            recipe.make_prior(learnable=spec.get("prior_learnable", True)), seed=seed)
+        # The R2 table is declared on the learnable Parameter; a fixed prior is a
+        # buffer init never touches, so it copies that same table (both arms of
+        # the fixed-vs-learnable card start from identical particles).
+        table = init.deterministic_orthogonal_(recipe.make_prior(), seed=seed)
+        prior = table
+        if not spec.get("prior_learnable", True):
+            prior = recipe.make_prior(learnable=False)
+            prior.z.copy_(table.z.detach())
         return Networks(generator=generator, critics=critic, prior=prior)
 
     def real(self, n, stream):
@@ -268,12 +274,19 @@ def receipts(spec, recipe):
     return groups, shapes
 
 
-def train(spec, recipe=None, *, problem=None, max_steps=None, log=None):
+def _training_streams(toy):
+    return [stream.get_state() for stream in (toy.data_stream, toy.latent_stream, toy.noise_stream)]
+
+
+def train(spec, recipe=None, *, problem=None, max_steps=None, log=None, witness=None):
     """Train one task on the shared runner under ``recipe`` (default: the problem's recipe).
 
     Returns the frozen result shape: final live/EMA metrics, observations at
     ``evaluation_steps`` (live metrics plus an ``ema`` row), losses at the
     runner's observations, and the sustained-convergence summary.
+    ``eval_streams_preserved`` is observed: every evaluation left the run's
+    data, latent and noise streams byte-identical. ``witness(step, toy)``, if
+    given, sees the run after every update (read-only receipts).
     """
     problem = ImageTask(spec) if problem is None else problem
     recipe = problem.recipe() if recipe is None else recipe
@@ -281,12 +294,19 @@ def train(spec, recipe=None, *, problem=None, max_steps=None, log=None):
         raise ValueError("recipe budget or batch differs from the image task")
     steps = spec["steps"] if max_steps is None else min(max_steps, spec["steps"])
     expected = evaluation_steps(spec)
-    wanted, observations, losses = set(expected), [], []
+    wanted, observations, losses, preserved = set(expected), [], [], []
     started = time.perf_counter()
 
     def observe(step, measure):
+        toy = getattr(measure, "__self__", None)
+        if not isinstance(toy, ToyRun):
+            raise TypeError("toy_runner.run must pass the run's bound measure")
+        if witness is not None:
+            witness(step, toy)
         if step in wanted:
+            before = _training_streams(toy)
             live, ema = measure(), measure(ema=True)
+            preserved.append(all(torch.equal(a, b) for a, b in zip(before, _training_streams(toy))))
             for row in (live, ema):
                 row.pop("verdict")
             observations.append(dict(step=step, seconds=time.perf_counter() - started, **live, ema=ema))
@@ -302,6 +322,7 @@ def train(spec, recipe=None, *, problem=None, max_steps=None, log=None):
     strip = lambda row: {k: v for k, v in row.items() if k != "verdict"}
     result = dict(route="benchmarks.toy_runner", recipe=recipe.to_dict(), live=strip(out["live"]),
                   ema=strip(out["ema"]), observations=observations, losses=losses, hold=out["hold"],
+                  eval_streams_preserved=bool(preserved) and all(preserved),
                   update_counts=dict(g=steps, d=0 if isinstance(problem, SupervisedWitness) else steps),
                   seconds=time.perf_counter() - started)
     if len(observations) == len(expected):
@@ -326,7 +347,10 @@ def run_episode(spec, policy=None, *, ablation="none", fixed=True, recipe=None, 
                   created_at=datetime.now(timezone.utc).isoformat())
     try:
         torch.set_num_threads(1)
-        result.update(train(spec, spec_recipe(spec) if recipe is None else recipe, log=log))
+        recipe = spec_recipe(spec) if recipe is None else recipe
+        # The groups the recipe-built optimizers hold (there is no controller to audit).
+        result["applied"], result["shapes"] = receipts(spec, recipe)
+        result.update(train(spec, recipe, log=log))
         json.dumps(result, allow_nan=False)
     except Exception:
         result.update(error=traceback.format_exc(), live={}, ema={}, convergence={})

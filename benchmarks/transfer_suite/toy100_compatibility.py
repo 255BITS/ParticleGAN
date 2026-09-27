@@ -395,19 +395,91 @@ def image_recipe(spec, base, noise, model_policy=None):
         network_lr_floor=policy.get("network_lr_floor"))
 
 
-def _image_noise_receipt(recipe, noise, completed):
-    """The noise schedule the runner applied, read from the recipe it trained on."""
-    from particlegan.training import input_noise_std, output_noise_std
-    receipt = dict(source="recipe schedule applied by benchmarks.toy_runner", step_calls=completed,
-                   train_input_applied=recipe.input_noise_std > 0,
-                   train_output_applied=recipe.output_noise_std > 0,
-                   input_nonzero_steps=sum(input_noise_std(recipe, s) > 0 for s in range(completed)),
-                   output_nonzero_steps=sum(output_noise_std(recipe, s) > 0 for s in range(completed)),
+class _ObservedNoise(image_tasks.ImageTask):
+    """Screen-only receipt: the image problem, plus read-only observation of the
+    training noise the runner actually applied (nothing here changes training).
+
+    Output noise is the residual between the clean batch ``fake()`` returns and
+    the noisy batch the runner hands ``views()``. Input noise is the residual
+    between each view tensor and what the critic network itself receives (a
+    forward pre-hook). Both are compared per update with the recipe schedule, so
+    a missing, misplaced or mis-scaled noise draw fails the receipt.
+    """
+
+    SIGMAS = 6.  # tolerance in sampling s.d. of a residual std (~1/sqrt(2 * elements))
+
+    def __init__(self, spec):
+        super().__init__(spec)
+        self._clean, self._views, self._out, self._in = None, [], [], []
+        self.steps, self.input_sigmas, self.output_calls, self.input_calls = 0, [], 0, 0
+        self.mismatches = []
+
+    def networks(self, recipe, seed):
+        nets = super().networks(recipe, seed)
+
+        def critic_input(module, args):
+            # The first critic call per view tensor; penalty calls come after.
+            if self._views:
+                x = args[0].detach()
+                residuals = [self._residual(x, view) for view in self._views]
+                k = min(range(len(residuals)), key=lambda i: residuals[i][0])
+                self._views.pop(k)
+                self._in.append(residuals[k])
+        nets.critics.register_forward_pre_hook(critic_input)
+        return nets
+
+    @staticmethod
+    def _residual(noisy, clean):
+        return float((noisy - clean).std()), noisy.numel()
+
+    def fake(self, nets, n, stream, real):
+        sample = super().fake(nets, n, stream, real)
+        if real is not None:  # training draw (metrics enumerate the table instead)
+            self._clean = sample.x.detach()
+        return sample
+
+    def views(self, nets, real, fake):
+        if self._clean is not None:
+            self._out.append(self._residual(fake.x.detach(), self._clean))
+            self._clean = None
+        self._views = [real.x.detach(), fake.x.detach()]
+        return super().views(nets, real, fake)
+
+    def witness(self, step, toy):
+        from particlegan.training import input_noise_std, output_noise_std
+        index, out, into = step - 1, self._out, self._in
+        self._out, self._in, self.steps = [], [], self.steps + 1
+
+        def matches(observed, count, expected):  # per update: 2 fake batches, 4 critic inputs
+            return len(observed) == count and all(
+                r == 0 if expected == 0 else abs(r / expected - 1) <= self.SIGMAS / math.sqrt(2 * n)
+                for r, n in observed)
+        sigma_in, sigma_out = input_noise_std(toy.recipe, index), output_noise_std(toy.recipe, index)
+        self.input_sigmas.append(max((r for r, _ in into), default=0.))
+        self.output_calls += sum(r > 0 for r, _ in out)
+        self.input_calls += sum(r > 0 for r, _ in into)
+        if not (matches(out, 2, sigma_out) and matches(into, 4, sigma_in)):
+            self.mismatches.append(dict(step=step, input=[r for r, _ in into], output=[r for r, _ in out],
+                                        expected_input=sigma_in, expected_output=sigma_out))
+
+
+def _image_noise_receipt(problem, noise, result):
+    """What the witness observed while the runner trained (not the recipe's claim)."""
+    matched = not problem.mismatches
+    receipt = dict(source="observed: residuals of the noisy vs clean generator batch and critic input, per update",
+                   step_calls=problem.steps,
+                   train_input_applied=matched and problem.input_calls > 0,
+                   train_output_applied=matched and problem.output_calls > 0,
+                   input_nonzero_steps=sum(s > 0 for s in problem.input_sigmas),
+                   input_train_calls=problem.input_calls,
+                   output_nonzero_steps=problem.output_calls // 2, output_train_calls=problem.output_calls,
+                   schedule_mismatches=len(problem.mismatches),
+                   first_schedule_mismatches=problem.mismatches[:4],
                    output_noise_learnable=False, output_scale_parameter_count=0,
                    eval_scope="finite particle table without training noise")
     if noise.get("output_noise_rng") == "isolated":
-        receipt.update(output_noise_rng="runner stream", output_noise_eval_state_preserved=True,
-                       output_train_calls=2 * receipt["output_nonzero_steps"])
+        receipt.update(output_noise_rng="runner stream",
+                       output_noise_eval_state_preserved=result.get("eval_streams_preserved") is True)
     return receipt
 
 
@@ -416,11 +488,11 @@ def run_image(spec, base, noise, *, model_policy=None, log=None):
     torch.set_num_threads(1)
     recipe = image_recipe(spec, base, noise, model_policy)
     applied, shapes = image_tasks.receipts(spec, recipe)
-    result = image_tasks.train(spec, recipe, log=log)
+    problem = _ObservedNoise(spec)
+    result = image_tasks.train(spec, recipe, problem=problem, log=log, witness=problem.witness)
     result["seconds"] = time.perf_counter() - started
-    completed = result["update_counts"]["g"]
     return result, dict(applied=applied, shapes=shapes, host_recipe=recipe,
-                        noise_receipt=_image_noise_receipt(recipe, noise, completed))
+                        noise_receipt=_image_noise_receipt(problem, noise, result))
 
 
 def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):

@@ -91,10 +91,33 @@ def test_image_route_draws_output_noise_from_the_runner_and_measures_without_it(
     assert all(isinstance(point["ema"], dict) for point in result["observations"])
     receipt = context["noise_receipt"]
     assert receipt["step_calls"] == 24 and receipt["input_nonzero_steps"] == 12
+    assert receipt["input_train_calls"] == 4 * 12  # real + fake per D and G view
+    assert receipt["schedule_mismatches"] == 0
+    assert receipt["train_input_applied"] and receipt["train_output_applied"]
+    assert receipt["output_train_calls"] == 2 * receipt["output_nonzero_steps"] > 0
     assert receipt["output_noise_eval_state_preserved"] is True
     learned = dict(noise, output_noise_learnable=True)
     with pytest.raises(NotImplementedError, match="learnable output noise"):
         run_image(spec, gan_v3_recipe(), learned)
+
+
+@pytest.mark.parametrize("which", ["output", "input"])
+def test_image_noise_receipt_is_observed_and_fails_on_a_wrong_draw(which, monkeypatch):
+    """The receipt measures the noise actually drawn: a runner that applies
+    twice the recipe's sigma fails the claim-vs-receipt check."""
+    from benchmarks import toy_runner
+    torch.set_num_threads(1)
+    spec = deepcopy(image_tasks.TASKS[0])
+    spec.update(runner="image", steps=24, batch_size=4, particles=8, width=4)
+    noise = dict(output_noise_std=0.029, input_noise_std=0.5, input_noise_anneal_end=0.5,
+                 output_noise_warmup=0.2, output_noise_rng="isolated")
+    name = f"{which}_noise_std"
+    original = getattr(toy_runner, name)
+    monkeypatch.setattr(toy_runner, name, lambda recipe, step: 2 * original(recipe, step))
+    _, context = run_image(spec, gan_v3_recipe(), noise)
+    receipt = context["noise_receipt"]
+    assert receipt["schedule_mismatches"] > 0
+    assert not receipt["train_input_applied"] and not receipt["train_output_applied"]
 
 
 def test_vector_route_records_real_private_draws_and_eval_restoration(monkeypatch):

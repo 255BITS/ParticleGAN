@@ -3,6 +3,12 @@
 > Recorded before the image hosts moved to `benchmarks.toy_runner` (recipe-built
 > optimizers and schedule, explicit init, fresh G batch, no patched host
 > globals). Rerunning `image_solvability` now trains every card through that route.
+> The supervised witness now uses the recipe generator optimizer (schedule
+> included), explicit init and runner streams instead of a plain Adam on the
+> global-seed default init: sustained 3/4 → 4/4 (blobs4 now passes at step 325).
+> The fixed prior copies the learnable arm's explicit R2 table instead of a
+> global-RNG `randn` draw, so fixed-vs-learnable isolates learnability:
+> `fixed_prior` sustained 1/4 → 0/4 (blobs4 no longer holds).
 
 **One shared configuration sustains all four healthy image tasks at the original 600-step budget:** residual nearest-neighbor upsampling, width 16, with the original b_cap coefficient 3, kappa 1.25, LRs 0.0017, Adam (0,0.99), and 32 learned particles. This is an architecture repair; it does not establish that the original transpose network or a new LR controller solved the tasks. The best loss-only card on the original width 12 architecture sustains 2/4.
 

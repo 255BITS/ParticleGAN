@@ -88,6 +88,27 @@ def test_episode_trains_on_the_shared_runner_under_the_declared_recipe():
     assert strip(first["observations"]) == strip(second["observations"])  # deterministic
 
 
+def test_episode_records_the_recipe_built_optimizer_groups_and_eval_isolation():
+    result = tasks.run_episode(small(tasks.TASKS[0]))
+    assert [(g["optimizer"], g["role"]) for g in result["applied"]] == [
+        ("K3PGeneratorAdam", "network"), ("K3PGeneratorAdam", "prior"), ("K3PCriticAdam", "critic")]
+    assert result["eval_streams_preserved"] is True
+
+
+def test_fixed_and_learnable_priors_start_from_the_same_explicit_table():
+    """A fixed prior is a buffer (init only declares Parameters): it copies the
+    R2 table, so it is independent of the global RNG and equals the learnable one."""
+    spec = small(tasks.TASKS[0])
+    recipe = tasks.ImageTask(spec).recipe()
+    tables = []
+    for learnable, global_seed in ((True, 1), (False, 1), (False, 2)):
+        torch.manual_seed(global_seed)
+        nets = tasks.ImageTask(dict(spec, prior_learnable=learnable)).networks(recipe, 0)
+        assert nets.prior.z.requires_grad is learnable
+        tables.append(nets.prior.z.detach().clone())
+    assert torch.equal(tables[0], tables[1]) and torch.equal(tables[1], tables[2])
+
+
 def test_no_lr_controller_can_drive_the_image_host():
     with pytest.raises(ValueError, match="no LR controller"):
         tasks.run_episode(small(tasks.TASKS[0]), fixed=False)

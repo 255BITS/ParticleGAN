@@ -81,9 +81,11 @@ def run(output):
                     stack.enter_context(patch.object(vector_tasks, 'SimpleMLPDiscriminator', create))
                 result = suite.run_episode(spec, policy, fixed=True, allow_reserved=True)
         verdict, ema = test_verdict(spec, result), ema_verdict(spec, result)
+        # toy_runner hosts (image) have no controller; their result carries the
+        # recipe-built optimizer groups as ``applied`` instead.
         record = dict(arm='current_core', original_spec=job['spec'], spec=spec, candidate=asdict(config),
                       architecture=job['architecture'], reference=job['reference'], reference_sha256=job['reference_sha256'],
-                      applied=applied, verdict=verdict, ema_verdict=ema, result=result,
+                      applied=applied or result.get('applied', []), verdict=verdict, ema_verdict=ema, result=result,
                       source_sha256=protocol['source_sha256'])
         raw = (json.dumps(record, sort_keys=True, allow_nan=False)+'\n').encode()
         artifact = f'episodes/current_core__{name}.json.gz'

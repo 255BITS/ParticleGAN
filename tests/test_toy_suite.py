@@ -27,7 +27,7 @@ from benchmarks.transfer_suite.public_default_verification import (
 )
 from benchmarks.transfer_suite.toy100_compatibility import (
     declared_model_policy, declared_recipe, image_recipe, output_noise_at,
-    run_vector, setup_vector,
+    run_image, run_vector, setup_vector,
 )
 from benchmarks.transfer_suite import vector_tasks
 from lib.toy_models import SimpleMLPGenerator
@@ -53,6 +53,49 @@ def test_legacy_runner_preserves_original_error_in_failed_evidence(tmp_path, mon
     assert "original legacy training failure" in record["result"]["error"]
     assert "only vector/image hosts" not in record["result"]["error"]
     assert toy_suite._episode_rows(directory, ("trajectory",), candidate=True)["status"] != "PASS"
+
+
+def _archive_candidate(directory, record, job, recipe, noise, verdict, source_hashes, source_bytes,
+                       noise_source_bytes, policy_source_bytes, model_policy, *, with_policy_sources):
+    """Write one candidate episode directory (protocol, index, sources) for regrading."""
+    _, profile = load_declaration()
+    directory.mkdir()
+    (directory / "episodes").mkdir()
+    artifact = f"episodes/{record['name']}.json.gz"
+    raw = (json.dumps(record, sort_keys=True) + "\n").encode()
+    (directory / artifact).write_bytes(gzip.compress(raw, mtime=0))
+    config_bytes = (json.dumps(dict(
+        name="gan_v3", output_noise_std=0.029, input_noise_std=0.5,
+        input_noise_anneal_end=0.1, output_noise_warmup=0.2,
+        **{key: noise[key] for key in ("output_noise_learnable", "output_noise_rng") if key in noise},
+        **(model_policy or {}),
+    )) + "\n").encode()
+    (directory / "candidate.json").write_bytes(config_bytes)
+    (directory / "noise_source.py").write_bytes(noise_source_bytes)
+    with tarfile.open(directory / "source.tar.gz", "w:gz") as archive:
+        member = tarfile.TarInfo("frozen")
+        member.size = len(source_bytes)
+        archive.addfile(member, io.BytesIO(source_bytes))
+        if with_policy_sources:
+            for name, contents in policy_source_bytes.items():
+                member = tarfile.TarInfo(name)
+                member.size = len(contents)
+                archive.addfile(member, io.BytesIO(contents))
+    protocol = dict(
+        source_sha256=source_hashes, global_recipe=recipe, noise=noise,
+        noise_source_sha256=source_hashes["benchmarks/toy100/models.py"],
+        config_file="candidate.json",
+        config_sha256=hashlib.sha256(config_bytes).hexdigest(),
+        ignored_toy100_resource_overrides={},
+        jobs=[job], frozen_discriminators=profile["discriminators"],
+    )
+    if model_policy is not None:
+        protocol["model_policy"] = model_policy
+    (directory / "protocol.json").write_text(json.dumps(protocol))
+    (directory / "index.json").write_text(json.dumps(dict(records=[dict(
+        name=record["name"], artifact=artifact,
+        uncompressed_sha256=hashlib.sha256(raw).hexdigest(), verdict=verdict,
+    )])))
 
 
 def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False,
@@ -186,45 +229,10 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
             output_noise_eval_state_preserved=True,
         )
     mutate(record)
-    directory.mkdir()
-    (directory / "episodes").mkdir()
-    artifact = "episodes/vector_two_broad.json.gz"
-    raw = (json.dumps(record, sort_keys=True) + "\n").encode()
-    (directory / artifact).write_bytes(gzip.compress(raw, mtime=0))
-    config_bytes = (json.dumps(dict(
-        name="gan_v3", output_noise_std=0.029, input_noise_std=0.5,
-        input_noise_anneal_end=0.1, output_noise_warmup=0.2,
-        **({"output_noise_learnable": True} if learned else {}),
-        **({"output_noise_rng": "isolated"} if isolated else {}),
-        **({"network_lr_horizon_cap": cap} if cap is not None else {}),
-        **({"network_lr_floor": network_floor} if network_floor is not None else {}),
-    )) + "\n").encode()
-    (directory / "candidate.json").write_bytes(config_bytes)
-    (directory / "noise_source.py").write_bytes(noise_source_bytes)
-    with tarfile.open(directory / "source.tar.gz", "w:gz") as archive:
-        member = tarfile.TarInfo("frozen")
-        member.size = len(source_bytes)
-        archive.addfile(member, io.BytesIO(source_bytes))
-        if cap is not None or isolated:
-            for name, contents in policy_source_bytes.items():
-                member = tarfile.TarInfo(name)
-                member.size = len(contents)
-                archive.addfile(member, io.BytesIO(contents))
-    protocol = dict(
-        source_sha256=source_hashes, global_recipe=recipe, noise=noise,
-        noise_source_sha256=source_hashes["benchmarks/toy100/models.py"],
-        config_file="candidate.json",
-        config_sha256=hashlib.sha256(config_bytes).hexdigest(),
-        ignored_toy100_resource_overrides={},
-        jobs=[job], frozen_discriminators=profile["discriminators"],
-    )
-    if cap is not None:
-        protocol["model_policy"] = model_policy
-    (directory / "protocol.json").write_text(json.dumps(protocol))
-    (directory / "index.json").write_text(json.dumps(dict(records=[dict(
-        name=spec["name"], artifact=artifact,
-        uncompressed_sha256=hashlib.sha256(raw).hexdigest(), verdict=verdict,
-    )])))
+    _archive_candidate(directory, record, job, recipe, noise, verdict, source_hashes, source_bytes,
+                       noise_source_bytes, policy_source_bytes,
+                       model_policy if cap is not None else None,
+                       with_policy_sources=cap is not None or isolated)
     return spec["name"]
 
 
@@ -801,6 +809,73 @@ def test_isolated_transfer_receipt_accepts_restored_eval_stream(tmp_path, monkey
     directory = tmp_path / "candidate"
     name = _write_candidate_episode(directory, isolated=True)
     assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+
+
+def _write_image_candidate_episode(directory, monkeypatch, mutate=lambda record: None):
+    """A real toy_runner image record (declared spec shrunk to 24 steps) for regrading."""
+    jobs, profile = load_declaration()
+    job = next(job for job in jobs if job["spec"]["name"] == "img_stripes2")
+    base = gan_v3_recipe()
+    declared = toy_suite.declared_spec
+
+    def small(job_, profile_, base_):
+        spec, card, variant = declared(job_, profile_, base_)
+        spec.update(steps=24, batch_size=4, particles=8)
+        return spec, card, variant
+    monkeypatch.setattr(toy_suite, "declared_spec", small)
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5)))
+    spec, _, variant = small(job, profile, base)
+    noise = dict(output_noise_std=0.029, input_noise_std=0.5, input_noise_anneal_end=0.1,
+                 output_noise_warmup=0.2, output_noise_rng="isolated")
+    policy = {"network_lr_horizon_cap": 8}
+    result, context = run_image(spec, base, noise, model_policy=policy)
+    source_bytes, noise_source_bytes = b"frozen benchmark source", b"frozen noise source"
+    policy_sources = {"benchmarks/toy100/schedule.py": b"schedule", "benchmarks/toy100/train.py": b"train",
+                      "benchmarks/toy100/config.py": b"config", "benchmarks/toy100/__main__.py": b"cli"}
+    hashes = dict(frozen=hashlib.sha256(source_bytes).hexdigest(),
+                  **{"benchmarks/toy100/models.py": hashlib.sha256(noise_source_bytes).hexdigest()},
+                  **{name: hashlib.sha256(raw).hexdigest() for name, raw in policy_sources.items()})
+    verdict = dict(status="PASS", passed=True, convergence=dict(passing_suffix=5))
+    recipe = legacy_dict(base)
+    record = json.loads(json.dumps(dict(
+        name=spec["name"], route="benchmarks.toy_runner + recipe noise/schedule",
+        original_spec=deepcopy(job["spec"]), spec=spec, discriminator_variant=variant,
+        host_recipe=legacy_dict(context["host_recipe"]), source_sha256=hashes,
+        recipe=deepcopy(recipe), noise=deepcopy(noise), model_policy=deepcopy(policy),
+        applied=context["applied"], shapes=context["shapes"], noise_receipt=context["noise_receipt"],
+        noise_applied=True, result=result, verdict=verdict), default=float))
+    mutate(record)
+    _archive_candidate(directory, record, job, recipe, noise, verdict, hashes, source_bytes,
+                       noise_source_bytes, policy_sources, policy, with_policy_sources=True)
+    return spec["name"]
+
+
+@pytest.mark.parametrize("tamper,expected", [
+    (None, None),
+    (lambda record: record["applied"][0].update(optimizer="Adam"), "image host optimizer groups differ"),
+    (lambda record: record["applied"][1].update(lr=1.0), "image host optimizer group differs"),
+    (lambda record: record["result"]["recipe"].update(network_lr_horizon_cap=None),
+     "image host trained on a recipe other than the declaration"),
+    (lambda record: record["host_recipe"].update(input_noise_std=None), "host resource recipe differs"),
+    (lambda record: record["noise_receipt"].update(schedule_mismatches=1), "observed noise differs"),
+    (lambda record: record["noise_receipt"].update(train_input_applied=False), "noise claim differs"),
+    (lambda record: record["noise_receipt"].update(output_noise_eval_state_preserved=False),
+     "isolated output-noise receipt differs"),
+    (lambda record: record["result"].update(eval_streams_preserved=False), "advanced a training stream"),
+    (lambda record: record["result"].update(update_counts=dict(g=23, d=24)), "update trace is incomplete"),
+])
+def test_toy_runner_image_candidate_regrades_on_its_own_route(tmp_path, monkeypatch, tamper, expected):
+    """Image records from toy100_compatibility pass the suite's gate through the
+    scoped toy_runner route check, and tampering with that route still fails."""
+    name = _write_image_candidate_episode(tmp_path / "candidate", monkeypatch, tamper or (lambda r: None))
+    grade = toy_suite._episode_rows(tmp_path / "candidate", (name,), candidate=True)
+    if expected is None:
+        assert grade["status"] == "PASS", grade["reason"]
+        assert grade["cases"][name]["noise_applied"] is True
+    else:
+        assert grade["status"] == "INVALID"
+        assert expected in grade["reason"]
 
 
 @pytest.mark.parametrize("network_floor", [None, .005])
