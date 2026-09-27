@@ -12,22 +12,13 @@ This benchmark extracts the 2D subset of the model-glue cap comparison:
 
 The routed MLP and absolute-target normalization are adapted from particle-sliders
 (MIT; original notice included in LICENSE). Model-glue's residual host, affine/swirl
-maps, splits, parameter initialization order and experiment settings are retained.
-The numerical losses, gradient penalty, VIC and cosine schedule call this checkout's
-public ParticleGAN implementations. Neither application is imported by the benchmark.
+maps, splits and paired-error data-noise rule are retained as the problem definition.
+Neither application is imported by the benchmark.
 
-Differences from the nine-host behavioral winner remain explicit: 128×4 routed
-particles, no output reconstruction/cover loss, a noise-corrupted paired-error
-critic, every-fourth-step cap with compensation, and EMA-based checkpoint selection.
-This is an additional transfer benchmark; its results do not change the existing
-29-bound suite or production recipe defaults.
-
-The reproduction holds seed 0 fixed. It does not add a seed search. Both historical
-2D tasks, all three declared recipes and both cloud controls are retained. The
-already opened historical test set is used only to check reproduction, not marketed
-as new independent held-out evidence.
-
-All runtime sources are hashed in `protocol.json`. Optional reference comparison
-reads the historical artifacts and checks tensors and scalars without tolerances,
-including full final optimizer/EMA/RNG states and complete validation curves. A
-mismatch produces a failing exit code and a machine-readable list of differences.
+Training no longer follows the extraction: the problem runs on `benchmarks.toy_runner`
+under the shipped recipe (recipe-built optimizers and schedule, RpGAN loss, the
+recipe's critic penalty, noise and EMA; explicit `particlegan.init`). The particle
+table is the recipe's particle prior. The three historical hyperparameter arms
+(baseline, cap-cosine, cap-cosine-vic005) collapse into that one recipe, and the
+exact artifact audit against model-glue was removed because exactness cannot hold.
+Historical results stay in `reports/paired_error_2d/`.
