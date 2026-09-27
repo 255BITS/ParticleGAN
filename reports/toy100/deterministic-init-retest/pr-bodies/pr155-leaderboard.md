@@ -66,6 +66,8 @@ Rank by quick-screen pass, passing checks, final streak, then earlier arrival; e
 
 **Research quick-screen leaderboard — new deterministic initialization**
 
+RP12 appears only in the API table above: its formulation was run through public `GANTrainer`, with no separate original research-host result. Its 19/24 mode-hold observations are one short screen, and `img_bars4` fails 0/24; it is not qualified for continuous learning.
+
 | Rank | Entry | Screen | Passing checks | First arrival | Final streak | Final clusters / HQ | Why not the default |
 |---:|---|---|---:|---:|---:|---|---|
 | 1 | [pnb3](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-pnb3-a392cdc9-new-init/archive-manifest.json) | PASS | 15/24 | 500 | 15 | 8/8 · 100.00% | **Disqualified:** horizon-based noise |

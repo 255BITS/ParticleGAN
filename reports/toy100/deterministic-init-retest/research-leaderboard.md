@@ -2,6 +2,8 @@
 
 These runs preserve their original research learner and use the reviewed new public initializer. They remain separate from public API qualification. Every score requires all eight modes and HQ≥90% for the final five of 24 observations.
 
+RP12 is an API-only formulation, so it has no original research-host run to rank in this table. Its new-init public `GANTrainer` result is [ranked in the API leaderboard](leaderboard.md): 19/24 passing observations on `mode_hold`, followed by a failed `img_bars4` gate (0/24). This is a continuous-search candidate, but the quick-screen result is not a continuous-learning qualification.
+
 A quality pass does not establish continuous-learning eligibility. [The resumed run](resumed-new-init-results.md) records the completed 22 screens and SN3 long-hold failure. [Exact source audits](research-eligibility-audits/) preserve each configuration’s separate limitations.
 
 | Research configuration | Result | Passing observations | First arrival | Final streak | Final modes / quality |
