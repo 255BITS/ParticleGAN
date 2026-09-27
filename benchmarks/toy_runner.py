@@ -186,7 +186,7 @@ class ToyProblem:
 
 def _critics(nets: Networks) -> dict[str, nn.Module]:
     critics = nets.critics
-    if isinstance(critics, nn.Module):
+    if isinstance(critics, nn.Module) and not isinstance(critics, nn.ModuleDict):
         return {"critic": critics}
     return dict(critics)
 
@@ -337,7 +337,11 @@ class ToyRun:
             prior_reg = self.recipe.prior_reg
             for prior in nets.priors:
                 if prior_reg > 0 and type(prior) is ParticlePrior and prior.z.requires_grad:
-                    g_total = g_total + prior_reg * self.prior_regularizer(prior.z)
+                    # As GANTrainer: the whole table when small, else the rows drawn.
+                    rows = prior.z
+                    if len(rows) > 1024 and len(nets.priors) == 1 and fake.indices is not None:
+                        rows = rows[torch.unique(fake.indices)]
+                    g_total = g_total + prior_reg * self.prior_regularizer(rows)
             for key, term in problem.losses("generator", nets, real, fake).items():
                 g_total = g_total + term
                 out[key] = term.detach()
