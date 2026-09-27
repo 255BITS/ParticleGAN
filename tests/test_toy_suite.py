@@ -95,6 +95,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
                 step, steps, base.lr_anneal_start, base.lr_floor),
             input_sigma=linear_input_noise(0.5, step, steps, 0.1),
             output_sigma=output_noise_at(0.029, step, steps, 0.2),
+            lr_schedule=dict(g=step + 1, d=step + 1),
         ) for step in range(steps)],
         update_counts=dict(g=steps, d=steps),
     )
@@ -391,6 +392,8 @@ def test_candidate_episode_rejects_duplicate_source_archive_member(
      "trainer LR action differs"),
     (lambda record: record["result"]["actions"][80].update(network_multiplier=.99),
      "trainer LR action differs"),
+    (lambda record: record["result"]["actions"][80].update(lr_schedule=dict(g=81, d=80)),
+     "schedule clock differs"),
 ])
 def test_candidate_horizon_policy_binds_each_network_and_prior_rate(
     tmp_path, monkeypatch, tamper, expected,

@@ -3,6 +3,11 @@
 This changes the optimizer update rule, not merely its declared learning rate.
 The underlying Adam moments see unchanged gradients. Each tensor's proposal is
 attenuated, never amplified, using its own pre-update RMS and a common floor.
+
+Frozen: it patches ``torch.optim.Adam.step`` and ``FixedControl.step`` from
+outside the optimizer, so no harness runner uses it (``shared_adapter_search``
+is frozen too). Continuing this line means adding the rule as an option of the
+recipe-built optimizers in ``particlegan.recipes``, not patching Adam.
 """
 from contextlib import contextmanager
 import math

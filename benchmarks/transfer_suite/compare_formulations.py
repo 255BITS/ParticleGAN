@@ -3,6 +3,8 @@
 The proposed reference is the archived 19/19 row. This is explicitly separate
 from compare_defaults, which applies each public numerical optimizer preset.
 """
+
+FROZEN = ('Frozen: this comparison rewrote host optimizer rates through FixedControl and control_host_schedules, which no longer reach host-owned optimizers (learning rates belong to recipe-built optimizers). Its evidence under reports/transfer_suite is the record; compare formulations as recipe fields on problem-only hosts instead.')
 from benchmarks.locked_shared.recorded_recipes import GAN_V1
 import argparse
 from contextlib import ExitStack
@@ -27,6 +29,7 @@ from .protocol import test_verdict
 
 
 def run(output):
+    raise SystemExit(FROZEN)
     output.mkdir(parents=True, exist_ok=False)
     (output / 'episodes').mkdir()
     torch.set_num_threads(1)

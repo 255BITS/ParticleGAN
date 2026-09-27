@@ -1,0 +1,175 @@
+"""Frozen transfer hosts that are problem-only toys, run on the shared runner.
+
+A host is *migrated* when its module declares a ``benchmarks.toy_runner.ToyProblem``
+subclass whose ``name`` is the frozen host name and which constructs without
+arguments (``benchmarks.locked_shared.mode_hold.ModeHold`` is the reference).
+The harness then contributes only the recipe under test: its global fields,
+the declared noise and the model policy's network horizon, at the problem's
+own task shape (``problem.recipe()``'s z_dim / num_particles / batch_size /
+total_steps). ``benchmarks.toy_runner.run`` builds the optimizers (which own
+the LR schedule), loss, critic penalty, prior, noise and EMA from it.
+
+Receipts are read from the recipe-built optimizers after training (their
+schedule state, group roles and base rates), never recomputed from LR
+formulas. Hosts that are not migrated yet still own their optimizers and are
+reported as such (``recipe_owned`` is False); see ``legacy_noise_adapters``.
+"""
+from __future__ import annotations
+
+from importlib import import_module
+import json
+from pathlib import Path
+import time
+
+from benchmarks import toy_runner
+from benchmarks.locked_shared.observation import checkpoint, recording, sustained
+from benchmarks.toy100.device import host_device
+from benchmarks.toy100.schedule import policy_recipe
+from particlegan.training import input_noise_std, output_noise_std
+
+from .protocol import requirements
+
+ROUTE = "problem-only toy on benchmarks.toy_runner"
+TASK_SHAPE = ("z_dim", "num_particles", "batch_size", "total_steps")
+NOISE_FIELDS = ("output_noise_std", "input_noise_std", "input_noise_anneal_end", "output_noise_warmup")
+HOST_MODULES = {
+    "two_pole": "benchmarks.locked_shared.two_pole",
+    "trajectory": "benchmarks.locked_shared.trajectory",
+    "mode_hold": "benchmarks.locked_shared.mode_hold",
+    "residual_student": "benchmarks.locked_shared.hosts.residual_student",
+    "unipolar": "benchmarks.locked_shared.hosts.unipolar",
+    "ae_gan_hold": "benchmarks.locked_shared.hosts.ae_gan_hold",
+    "cover_leftover": "benchmarks.locked_shared.hosts.cover_leftover",
+    "unused_token_hold": "benchmarks.locked_shared.hosts.unused_token_hold",
+    "mid_scale_identity": "benchmarks.locked_shared.hosts.mid_scale_identity",
+}
+
+
+def problem_class(name: str):
+    """The host's ``ToyProblem`` class, or None while the host owns its training loop."""
+    if name not in HOST_MODULES:
+        return None
+    module = import_module(HOST_MODULES[name])
+    found = [value for value in vars(module).values()
+             if isinstance(value, type) and issubclass(value, toy_runner.ToyProblem)
+             and value.__module__ == module.__name__ and value.name == name]
+    if len(found) > 1:
+        raise ValueError(f"{name}: several ToyProblem classes share the host name")
+    return found[0] if found else None
+
+
+def is_migrated(name: str) -> bool:
+    return problem_class(name) is not None
+
+
+def problem_recipe(problem, base, noise: dict | None = None, model_policy: dict | None = None):
+    """``base`` at the problem's task shape, with the declared noise and network horizon.
+
+    ``noise=None`` keeps ``base``'s own noise fields (the public-default control).
+    """
+    noise = {} if noise is None else dict(noise)
+    unsupported = [key for key in ("output_noise_learnable", "output_noise_rng") if noise.get(key)]
+    if unsupported:
+        raise ValueError(f"the shared runner has no {unsupported} option; problem hosts take "
+                         "output noise from the recipe on the runner's own noise stream")
+    shape = problem.recipe()
+    recipe = base.replace(**{key: getattr(shape, key) for key in TASK_SHAPE},
+                          **{key: float(noise.get(key, 0.0)) for key in NOISE_FIELDS if noise})
+    policy = model_policy or {}
+    if policy.get("network_lr_horizon_cap") is not None:
+        recipe = policy_recipe(recipe, policy["network_lr_horizon_cap"],
+                               network_lr_floor=policy.get("network_lr_floor"))
+    return recipe
+
+
+def optimizer_receipts(toy) -> list[dict]:
+    """What each recipe-built optimizer holds after training: schedule state and groups."""
+    def receipt(role, optimizer):
+        return dict(role=role, optimizer=type(optimizer).__name__,
+                    lr_schedule=optimizer.lr_schedule.state_dict(),
+                    groups=[dict(role=group["role"], base_lr=group["base_lr"], lr=group["lr"],
+                                 betas=list(group["betas"]),
+                                 parameters=sum(p.numel() for p in group["params"]))
+                            for group in optimizer.param_groups])
+    return [receipt("generator", toy.opt_g), *(receipt(name, opt) for name, opt in toy.opt_d.items())]
+
+
+def noise_receipt(recipe, completed_steps: int, eval_scope: str) -> dict:
+    """The runner's noise, from its own recipe schedule functions (no draws are counted)."""
+    steps = recipe.total_steps
+    inputs = [input_noise_std(recipe, step) for step in range(steps)]
+    outputs = [output_noise_std(recipe, step) for step in range(steps)]
+    return dict(source="recipe", eval_scope=eval_scope,
+                output_std=recipe.output_noise_std, input_std=recipe.input_noise_std,
+                input_anneal_end=recipe.input_noise_anneal_end,
+                output_noise_warmup=recipe.output_noise_warmup, total_steps=steps,
+                step_calls=completed_steps,
+                input_sigma_first=inputs[0], input_sigma_last=inputs[-1],
+                input_nonzero_steps=sum(value > 0 for value in inputs),
+                output_sigma_first=outputs[0], output_sigma_last=outputs[-1],
+                output_nonzero_steps=sum(value > 0 for value in outputs),
+                train_input_applied=any(value > 0 for value in inputs),
+                train_output_applied=any(value > 0 for value in outputs),
+                output_noise_learnable=False, output_scale_parameter_count=0)
+
+
+def run_problem(spec: dict, base, noise: dict | None = None, *, model_policy: dict | None = None,
+                eval_scope: str = "generated_samples", log_path: str | Path | None = None):
+    """Train one migrated host on the shared runner; ``(result, context)`` in harness form."""
+    started = time.perf_counter()
+    problem = problem_class(spec["name"])()
+    recipe = problem_recipe(problem, base, noise, model_policy)
+    if recipe.total_steps != spec["steps"]:
+        raise ValueError(f"{spec['name']}: problem budget {recipe.total_steps} != frozen {spec['steps']}")
+    runs = []
+
+    def observer(step, measure):
+        if not runs:
+            runs.append(measure.__self__)  # the ToyRun, for its optimizers' receipts
+        checkpoint(step, measure)
+    with recording(spec["steps"]) as recorder:
+        out = toy_runner.run(problem, recipe=recipe, steps=spec["steps"], seed=0, device=host_device(),
+                             observer=observer, log_path=log_path)
+    toy, rules = runs[0], requirements(spec)
+    keys = [key for key, _, _ in rules]
+    result = dict(live={k: out["live"][k] for k in keys if k in out["live"]},
+                  ema={k: out["ema"][k] for k in keys if k in out["ema"]},
+                  observations=recorder.curve, hold=out["hold"],
+                  convergence=sustained(recorder.curve, rules, expected_steps=recorder.steps),
+                  optimizers=optimizer_receipts(toy), seconds=time.perf_counter() - started)
+    context = dict(applied=[], shapes={"host": ROUTE, "problem": problem.name},
+                   host_recipe=base, executed_recipe=recipe.to_dict(),
+                   noise_receipt=noise_receipt(recipe, toy.completed_steps, eval_scope),
+                   eval_scope=eval_scope)
+    return result, context
+
+
+def check_receipts(record: dict, base, noise: dict | None, model_policy: dict | None) -> None:
+    """Regrade a problem-host episode from its optimizers' saved schedule state."""
+    name, steps = record["spec"]["name"], record["spec"]["steps"]
+    cls = problem_class(name)
+    if cls is None:
+        raise ValueError(f"problem-host record for a host that declares no ToyProblem: {name}")
+    recipe = problem_recipe(cls(), base, noise, model_policy)
+    if record.get("executed_recipe") != json.loads(json.dumps(recipe.to_dict())):
+        raise ValueError(f"problem-host recipe differs from the declared recipe at its task shape: {name}")
+    receipts = record["result"].get("optimizers")
+    if not isinstance(receipts, list) or not receipts or receipts[0].get("role") != "generator":
+        raise ValueError(f"problem-host optimizer receipts are absent: {name}")
+    rates = {("generator", "network"): recipe.lr, ("generator", "prior"): recipe.lr * recipe.prior_lr_mult,
+             ("critic", "network"): recipe.lr * recipe.d_lr_mult}
+    prior_betas = list(recipe.prior_betas if recipe.prior_betas is not None else recipe.betas)
+    for item in receipts:
+        side = "generator" if item["role"] == "generator" else "critic"
+        expected_type = "K3PGeneratorAdam" if side == "generator" else "K3PCriticAdam"
+        if item.get("optimizer") != expected_type:
+            raise ValueError(f"problem-host optimizer is not recipe-built: {name}.{item['role']}")
+        if (item.get("lr_schedule") or {}).get("completed_steps") != steps:
+            raise ValueError(f"problem-host schedule did not apply every update: {name}.{item['role']}")
+        for group in item.get("groups") or [None]:
+            if not isinstance(group, dict) or (side, group.get("role")) not in rates:
+                raise ValueError(f"problem-host param group is invalid: {name}.{item['role']}")
+            betas = prior_betas if group["role"] == "prior" else list(recipe.betas)
+            if (group.get("base_lr") != rates[side, group["role"]] or group.get("betas") != betas
+                    or type(group.get("parameters")) is not int or group["parameters"] <= 0):
+                raise ValueError(f"problem-host base rate differs from recipe: {name}.{item['role']}")

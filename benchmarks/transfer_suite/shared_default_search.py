@@ -17,11 +17,9 @@ from unittest.mock import patch
 
 import torch
 
-from benchmarks import learned_lr_evaluation as bridge
-from benchmarks.locked_shared import baseline
-from benchmarks.smart_descent import evaluate
 from . import suite, vector_tasks
-from .compare_defaults import candidate, effective_spec, ema_verdict, optimizer_defaults, plan, write
+from .compare_defaults import (candidate, effective_spec, ema_verdict, optimizer_defaults, plan,
+                               run_custom_host, write)
 from .linear_skip_refinement_research import constructor as skip_constructor
 from .smooth_critic_research import constructor as smooth_constructor
 from .protocol import test_verdict
@@ -63,14 +61,10 @@ def episode(job, recipe):
     applied = []
     start = time.perf_counter()
     try:
-        with optimizer_defaults(recipe, applied), ExitStack() as stack:
-            if spec['runner'] == 'legacy':
-                control = evaluate.FixedControl(policy, spec['steps'])
-                with bridge.control_host_schedules(control):
-                    result = baseline.run_toy(spec['name'], candidate(recipe))
-                result['actions'] = control.trace
-                result['seconds'] = time.perf_counter() - start
-            else:
+        if spec['runner'] == 'legacy':
+            result = run_custom_host(spec, recipe)
+        else:
+            with optimizer_defaults(recipe, applied), ExitStack() as stack:
                 architecture = spec.get('research_discriminator')
                 if architecture:
                     create = skip_constructor(architecture) if architecture.get('skip') == 'raw_linear' else smooth_constructor(architecture)

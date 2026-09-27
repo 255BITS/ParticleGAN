@@ -17,6 +17,25 @@ retains all 16 historical individual solver witnesses. Reproduce the shared
 image recipe with
 `python -u -m benchmarks.transfer_suite.solvability_search --plan benchmarks/transfer_suite/plans/residual16.json --output /tmp/residual-image-reference`.
 
+## How the harness runs the nine custom hosts
+
+A custom host whose module declares a `benchmarks.toy_runner.ToyProblem`
+named after the host (`mode_hold` so far) runs on the shared runner
+(`problem_hosts.py`). The harness supplies only the recipe under test at the
+problem's task shape: global fields, declared noise and the network LR horizon.
+The recipe-built optimizers own the rates and schedule, and regrading reads
+their saved schedule state. Each host writes one JSON line per observation to
+`<output>/logs/<host>.log` (`tail -f`).
+
+A host that still owns its training loop runs unchanged. Its record says
+`recipe_owned: false`, so `toy_suite` reports the common-recipe gate as
+INCOMPLETE and names the host. The old `optimizer_defaults` Adam/`FixedControl`
+rate override can no longer reach those hosts. It is only kept for the vector
+D-architecture research runners until the vector hosts migrate. The
+optimizer-rule and schedule research runners (`shared_adapter_search`,
+`shared_schedule_search`, `compare_formulations`) are frozen. Their reports
+are the record.
+
 ## Historical controller-study protocol
 
 A poor architecture or deliberately ambiguous dataset can expose a limitation

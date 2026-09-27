@@ -189,6 +189,26 @@ def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
         yield
 
 
+def run_custom_host(spec, recipe):
+    """One frozen custom host under ``recipe``, outside the vector-host override.
+
+    A migrated host (``problem_hosts``) trains on the shared runner, whose
+    recipe-built optimizers own the rates and schedule. Any other host still
+    owns its optimizers and runs unchanged (``recipe_owned`` False): the old
+    ``FixedControl``/``control_host_schedules`` rate override no longer reaches it.
+    """
+    from . import problem_hosts
+    start = time.perf_counter()
+    if problem_hosts.is_migrated(spec['name']):
+        result, _ = problem_hosts.run_problem(spec, recipe)
+        result['recipe_owned'] = True
+    else:
+        result = baseline.run_toy(spec['name'], candidate(recipe))
+        result['recipe_owned'] = False
+    result['seconds'] = time.perf_counter() - start
+    return result
+
+
 def ema_verdict(spec, result):
     observations = result.get('observations', [])
     if len(observations) != 24 or not all(isinstance(p.get('ema'), dict) for p in observations):
@@ -225,14 +245,10 @@ def run(arm, output, tasks=None):
         applied = []
         start = time.perf_counter()
         try:
-            with optimizer_defaults(recipe, applied), ExitStack() as stack:
-                if spec['runner'] == 'legacy':
-                    control = evaluate.FixedControl(policy, spec['steps'])
-                    with bridge.control_host_schedules(control):
-                        result = baseline.run_toy(name, candidate(recipe))
-                    result['actions'] = control.trace
-                    result['seconds'] = time.perf_counter() - start
-                else:
+            if spec['runner'] == 'legacy':
+                result = run_custom_host(spec, recipe)
+            else:
+                with optimizer_defaults(recipe, applied), ExitStack() as stack:
                     card = spec.get('research_discriminator')
                     if card:
                         create = skip_constructor(card) if card.get('skip') == 'raw_linear' else smooth_constructor(card)

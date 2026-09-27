@@ -34,7 +34,8 @@ def test_vector_public_trainer_uses_promoted_discriminator_and_recipe():
     assert all(row['betas'] == [0., .99] for row in context['applied'])
     assert result['update_counts'] == {'g': 1, 'd': 1}
     assert result['actions'] == [{'step': 1, 'multiplier': 1.,
-                                  'lr_g': .00425, 'lr_prior': .0085, 'lr_d': .00425}]
+                                  'lr_g': .00425, 'lr_prior': .0085, 'lr_d': .00425,
+                                  'lr_schedule': {'g': 1, 'd': 1}}]
 
 
 def test_image_public_trainer_preserves_frozen_shapes_and_shared_stream():

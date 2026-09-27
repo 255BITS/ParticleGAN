@@ -1,4 +1,6 @@
 """Bounded, frozen relative-step-adapter search on the unchanged shared recipe."""
+
+FROZEN = ('Frozen optimizer-rule research: relative_step_adapter changes the Adam update from outside the optimizer. A rerun needs that rule as a recipe-built optimizer option (particlegan.recipes make_*_optimizer); its reports under reports/transfer_suite are the record.')
 import argparse
 import gzip
 import hashlib
@@ -63,6 +65,7 @@ def render(records, baseline, output):
 
 
 def run(output):
+    raise SystemExit(FROZEN)
     output.mkdir(parents=True, exist_ok=False)
     (output/'episodes').mkdir()
     torch.set_num_threads(1)

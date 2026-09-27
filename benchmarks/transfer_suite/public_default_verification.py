@@ -182,7 +182,7 @@ def vector_discriminator(spec, card):
 
 
 def optimizer_receipts(trainer):
-    from particlegan import learning_rate_scale
+    """Base rates and betas of the recipe-built optimizers' groups (read, not recomputed)."""
     roles = (('g', trainer.opt_g.param_groups[0]),
              ('prior', trainer.opt_g.param_groups[1]),
              ('d', trainer.opt_d.param_groups[0]))
@@ -193,13 +193,12 @@ def optimizer_receipts(trainer):
     for role, group in roles:
         betas = (trainer.recipe.prior_betas or trainer.recipe.betas
                  if role == 'prior' else trainer.recipe.betas)
-        if group['lr'] != expected[role] or tuple(group['betas']) != tuple(betas):
+        if group['base_lr'] != expected[role] or tuple(group['betas']) != tuple(betas):
             raise RuntimeError(f'optimizer does not implement public recipe: {role}')
-        receipts.append(dict(role=role, lr=group['lr'], betas=list(group['betas']),
+        receipts.append(dict(role=role, lr=group['base_lr'], betas=list(group['betas']),
                              parameters=sum(p.numel() for p in group['params']),
                              optimizer='Adam'))
-    if learning_rate_scale(0, trainer.recipe.total_steps,
-            trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor) != 1.:
+    if trainer.opt_g.lr_schedule.scales(0) != (1., 1.):
         raise RuntimeError('unexpected public learning-rate schedule')
     return receipts
 
@@ -220,19 +219,21 @@ def shape_receipt(trainer, batch, data_shape):
                 discriminator_parameters=sum(p.numel() for p in trainer.D.parameters()))
 
 
+def schedule_counts(trainer, completed):
+    """Each recipe-built optimizer's own schedule clock after update ``completed``."""
+    counts = dict(g=trainer.opt_g.completed_steps, d=trainer.opt_d.completed_steps)
+    if counts != dict(g=completed, d=completed):
+        raise RuntimeError(f'optimizer schedules missed an update at step {completed}: {counts}')
+    return dict(lr_schedule=counts)
+
+
 def rate_action(trainer, completed):
-    from particlegan import learning_rate_scale
-    scale = learning_rate_scale(completed-1, trainer.recipe.total_steps,
-                                trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor)
+    """The rates the optimizers applied in update ``completed``, read from their groups."""
+    network, _ = trainer.opt_g.lr_schedule.scales(completed-1)
     rates = [group['lr'] for opt in (trainer.opt_g, trainer.opt_d)
              for group in opt.param_groups]
-    expected = [trainer.recipe.lr*scale, trainer.recipe.lr*trainer.recipe.prior_lr_mult*scale,
-                trainer.recipe.lr*trainer.recipe.d_lr_mult*scale]
-    if any(not math.isclose(a, b, rel_tol=1e-14, abs_tol=1e-15)
-           for a, b in zip(rates, expected)):
-        raise RuntimeError(f'actual public optimizer rates differ at step {completed}')
-    return dict(step=completed, multiplier=scale,
-                lr_g=rates[0], lr_prior=rates[1], lr_d=rates[2])
+    return dict(step=completed, multiplier=network,
+                lr_g=rates[0], lr_prior=rates[1], lr_d=rates[2]) | schedule_counts(trainer, completed)
 
 
 def setup_vector(spec, card, base):
@@ -364,22 +365,19 @@ def run_image(spec, base, *, max_steps=None):
 
 
 def run_legacy(spec, base):
+    """A migrated host runs on the shared runner under ``base`` (with its own noise
+    fields); a host that still owns its optimizers runs unchanged and says so."""
     from benchmarks.locked_shared import baseline
-    from benchmarks.smart_descent import evaluate
-    from .compare_defaults import candidate, optimizer_defaults
-    from . import vector_tasks
-    from benchmarks import learned_lr_evaluation as bridge
+    from .compare_defaults import candidate
+    from . import problem_hosts
+    if problem_hosts.is_migrated(spec['name']):
+        result, context = problem_hosts.run_problem(spec, base)
+        return result, context | dict(recipe_owned=True)
     started = time.perf_counter()
-    applied = []
-    policy = vector_tasks.fixed_policy('cosine')
-    with optimizer_defaults(base, applied):
-        control = evaluate.FixedControl(policy, spec['steps'])
-        with bridge.control_host_schedules(control):
-            result = baseline.run_toy(spec['name'], candidate(base))
-    result['actions'] = control.trace
+    result = baseline.run_toy(spec['name'], candidate(base))
     result['seconds'] = time.perf_counter()-started
-    return result, dict(applied=applied, shapes=dict(host='legacy auxiliary custom loop'),
-                        host_recipe=base)
+    return result, dict(applied=[], shapes=dict(host='legacy auxiliary custom loop'),
+                        host_recipe=base, recipe_owned=False)
 
 
 def run(output, *, tasks=None, require_installed_root=None):
@@ -415,8 +413,10 @@ def run(output, *, tasks=None, require_installed_root=None):
     for job in jobs:
         suite.verify_source(protocol)
         spec, card, variant = declared_spec(job, profile, base)
+        from . import problem_hosts
         route = ('GANTrainer' if spec['runner'] in ('vector', 'image')
-                 else 'public_primitives_custom_host')
+                 else problem_hosts.ROUTE if problem_hosts.is_migrated(spec['name'])
+                 else 'host-owned optimizers')
         print(f'START {spec["name"]} route={route} steps={spec["steps"]}', flush=True)
         started = time.perf_counter()
         try:
@@ -441,6 +441,8 @@ def run(output, *, tasks=None, require_installed_root=None):
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
         record = dict(name=spec['name'], route=route, recipe=legacy_dict(base),
+                      recipe_owned=context.get('recipe_owned', spec['runner'] != 'legacy'),
+                      **({'executed_recipe': context['executed_recipe']} if 'executed_recipe' in context else {}),
                       host_recipe=legacy_dict(context['host_recipe']),
                       original_spec=deepcopy(job['spec']), spec=spec,
                       discriminator_variant=variant,
@@ -467,7 +469,10 @@ def run(output, *, tasks=None, require_installed_root=None):
     public_module_manifest(require_installed_root)
     complete = len(records) == 19
     passed = sum(row['verdict']['passed'] for row in records)
+    host_owned = [row['name'] for row in records if not row['recipe_owned']]
+    complete = complete and not host_owned
     write(output/'summary.json', dict(version='public-default-verification-v1',
+         host_owned_optimizers=host_owned,
          attempted=len(records), passed=passed, overall='PASS' if complete and passed == 19 else
          'FAIL' if complete else 'INCOMPLETE', routes=protocol['routes'],
          public_package=protocol['public_package']['package_file'],

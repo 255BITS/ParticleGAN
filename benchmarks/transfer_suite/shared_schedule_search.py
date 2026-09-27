@@ -5,6 +5,8 @@ shared-default search: lr_anneal_start and lr_floor. Both the historical host
 schedule and the recipe-aware optimizer bridge are instrumented, so receipts
 count the actual calls that set optimizer rates.
 """
+
+FROZEN = ("Frozen schedule research: it patched learning_rate_scale inside the harness's LR override, which is gone. lr_anneal_start/lr_floor are recipe fields that the recipe-built optimizers apply inside step(); rerun a schedule change as a recipe on problem-only hosts. Its reports under reports/transfer_suite are the record.")
 import argparse
 from contextlib import contextmanager
 from copy import deepcopy
@@ -94,6 +96,7 @@ def episode(job, recipe, card=None):
 
 
 def run(declaration, output):
+    raise SystemExit(FROZEN)
     jobs, recipes, discriminators = prepare(declaration)
     output.mkdir(parents=True, exist_ok=False)
     (output/'episodes').mkdir()
