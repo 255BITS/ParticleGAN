@@ -1,6 +1,6 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
-from dataclasses import asdict, dataclass, replace
 import math
+from dataclasses import asdict, dataclass, replace
 
 
 @dataclass(frozen=True)
@@ -74,8 +74,12 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # Append new fields so existing positional Recipe arguments retain meaning.
+    initialization: str | None = "batch_feature_zero"
 
     def __post_init__(self):
+        if self.initialization not in (None, "batch_feature_zero"):
+            raise ValueError("initialization must be 'batch_feature_zero' or None")
         object.__setattr__(self, "betas", tuple(self.betas))
         if self.prior_betas is not None:
             object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
@@ -173,19 +177,25 @@ class Recipe:
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
 
+        Learnable tables follow ``initialization`` (R2 by default), before
+        MoG calibration. ``initialization=None`` keeps the ordinary random draw.
         MoG recipes calibrate spacing on the initialized
         means (potentially expensive). Pass ``sigma=...`` to skip calibration,
         including ``sigma=0`` when restoring a checkpoint.
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
+        from . import initialization
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
+        def initialize(prior):
+            return (initialization._initialize_prior(prior, options.get("init_std", 1.0))
+                    if self.initialization is not None and initialization._external_init is None else prior)
         kind = options.pop("prior_kind", self.prior_kind)
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
             if "sigma" in options:
-                return MoGParticlePrior(**options)
-            prior = MoGParticlePrior(sigma=0, **options)
+                return initialize(MoGParticlePrior(**options))
+            prior = initialize(MoGParticlePrior(sigma=0, **options))
             sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel)
             prior.set_sigma(sigma)
             prior.d0.copy_(d0)
@@ -196,7 +206,7 @@ class Recipe:
         if options.pop("sigma_rel") != 0:
             raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
         options.pop("standardize")
-        return ParticlePrior(**options)
+        return initialize(ParticlePrior(**options))
 
     def encode(self, query, prior, *, offset=None, draws=2, generator=None):
         """Route caller-produced queries; returns a ParticleEncoding.
@@ -315,7 +325,22 @@ class Recipe:
         prior]`` (either may be absent); scale the prior group by the prior
         multiplier of ``learning_rate_scales`` and everything else by the
         network one.
+
+        By default, initialize supported fresh G/D/E parameters once with
+        ``batch_feature_zero`` and synchronize the supplied EMA critic if D
+        changes. Supplied priors are preserved. Use ``initialization=None``
+        on the recipe for pretrained/custom weights or the old random init.
+        Lower-level optimizer factories do not initialize parameters.
         """
+        from .initialization import _initialize, _external_init
+        if self.initialization is not None and _external_init is None:
+            if generator is not None:
+                _initialize(generator, key=0, only_new=True)
+            changed_critic = _initialize(discriminator, key=1, only_new=True)
+            if encoder is not None:
+                _initialize(encoder, key=2, only_new=True)
+            if changed_critic and ema_critic is not None:
+                ema_critic.load_state_dict(discriminator.state_dict())
         from .particle_prior import ParticlePrior
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
@@ -380,31 +405,80 @@ def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):
     return floor + (1 - floor) * 0.5 * (1 + math.cos(math.pi * fraction))
 
 
-def learning_rate_scales(step, recipe):
+class NetworkLRTransition:
+    """Caller-triggered network LR decay for a custom training loop.
+
+    The caller decides when validation has plateaued and marks the number of
+    completed updates. G/D then cosine-decay to the recipe's network floor over
+    ``decay_steps``; the particle prior keeps its ordinary full-budget schedule.
+    Save this object's state alongside the optimizers for exact continuation.
+    """
+
+    def __init__(self, decay_steps, start_step=None):
+        if type(decay_steps) is not int or decay_steps <= 0:
+            raise ValueError("decay_steps must be a positive integer")
+        if start_step is not None and (type(start_step) is not int or start_step < 0):
+            raise ValueError("start_step must be a nonnegative integer or None")
+        self.decay_steps = decay_steps
+        self.start_step = start_step
+
+    def mark_plateau(self, completed_steps):
+        """Start decay after this many updates; repeating the same mark is safe."""
+        if type(completed_steps) is not int or completed_steps < 0:
+            raise ValueError("completed_steps must be a nonnegative integer")
+        if self.start_step is not None and self.start_step != completed_steps:
+            raise ValueError("network LR transition is already marked")
+        self.start_step = completed_steps
+
+    def state_dict(self):
+        return {"decay_steps": self.decay_steps, "start_step": self.start_step}
+
+    def load_state_dict(self, state):
+        if not isinstance(state, dict) or set(state) != {"decay_steps", "start_step"}:
+            raise ValueError("invalid network LR transition state")
+        restored = type(self)(**state)
+        if restored.decay_steps != self.decay_steps:
+            raise ValueError("network LR transition decay_steps differ from the configured schedule")
+        self.start_step = restored.start_step
+
+
+def learning_rate_scales(step, recipe, *, network_transition=None):
     """Return ``(network, prior)`` LR multipliers after ``step`` completed updates.
 
     Generator and critic ("network") follow ``learning_rate_scale`` over
     ``min(total_steps, network_lr_horizon_cap)`` down to ``network_lr_floor``
     and then hold; the particle prior follows it over the full budget down to
-    ``lr_floor``. K3P's blend weight is driven by the resulting critic LR.
+    ``lr_floor``. When ``network_transition`` is supplied, G/D instead hold at
+    full LR until its caller-marked plateau, then decay over its ``decay_steps``.
+    K3P's blend weight is driven by the resulting critic LR.
     """
     total = recipe.total_steps
-    horizon = min(total, recipe.network_lr_horizon_cap or total)
-    network = learning_rate_scale(step, horizon, recipe.lr_anneal_start, recipe.resolved_network_lr_floor)
+    if network_transition is None:
+        horizon = min(total, recipe.network_lr_horizon_cap or total)
+        network = learning_rate_scale(step, horizon, recipe.lr_anneal_start, recipe.resolved_network_lr_floor)
+    elif isinstance(network_transition, NetworkLRTransition):
+        network = (1.0 if network_transition.start_step is None else
+                   learning_rate_scale(step - network_transition.start_step,
+                                       network_transition.decay_steps, 0.0,
+                                       recipe.resolved_network_lr_floor))
+    else:
+        raise TypeError("network_transition must be a NetworkLRTransition or None")
     prior = learning_rate_scale(step, total, recipe.lr_anneal_start, recipe.lr_floor)
     return network, prior
 
 
-def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None):
+def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, network_transition=None):
     """Set every group's LR from ``learning_rate_scales(step, recipe)``.
 
     ``base_rates`` holds each optimizer's unscaled group LRs (read them once
     after construction). Groups whose parameters all belong to ``prior`` get
     the prior multiplier; every other group gets the network one, so a custom
     loop's critic LR follows the same floor K3P's blend weight assumes.
-    Returns ``(network, prior)`` multipliers.
+    Pass a ``NetworkLRTransition`` to choose the network decay from validation
+    while retaining the ordinary prior schedule. Returns ``(network, prior)``
+    multipliers.
     """
-    network, prior_scale = learning_rate_scales(step, recipe)
+    network, prior_scale = learning_rate_scales(step, recipe, network_transition=network_transition)
     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
     for optimizer, rates in zip(optimizers, base_rates):
         for group, rate in zip(optimizer.param_groups, rates):

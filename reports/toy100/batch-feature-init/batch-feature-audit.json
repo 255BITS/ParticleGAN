@@ -1,0 +1,525 @@
+{
+  "partial": false,
+  "runs": [
+    {
+      "phase": "failure-screen",
+      "id": "batch_feature_zero--vector_unequal_mass",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 6,
+          "shape": [
+            1,
+            100
+          ],
+          "elements": 4
+        }
+      ]
+    },
+    {
+      "phase": "failure-screen",
+      "id": "point_feature_zero--vector_unequal_mass",
+      "status": "FAIL",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 6,
+          "shape": [
+            1,
+            100
+          ],
+          "elements": 96
+        }
+      ]
+    },
+    {
+      "phase": "failure-screen",
+      "id": "head_half--vector_unequal_mass",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 6,
+          "shape": [
+            1,
+            100
+          ],
+          "elements": 100
+        },
+        {
+          "optimizer": 1,
+          "parameter": 7,
+          "shape": [
+            1
+          ],
+          "elements": 1
+        }
+      ]
+    },
+    {
+      "phase": "failure-screen",
+      "id": "head_half--trajectory",
+      "status": "FAIL",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 4,
+          "shape": [
+            1,
+            64
+          ],
+          "elements": 64
+        },
+        {
+          "optimizer": 1,
+          "parameter": 5,
+          "shape": [
+            1
+          ],
+          "elements": 1
+        }
+      ]
+    },
+    {
+      "phase": "failure-screen",
+      "id": "head_half--img_stripes2",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 4,
+          "shape": [
+            1,
+            128
+          ],
+          "elements": 128
+        },
+        {
+          "optimizer": 1,
+          "parameter": 5,
+          "shape": [
+            1
+          ],
+          "elements": 1
+        }
+      ]
+    },
+    {
+      "phase": "failure-screen",
+      "id": "head_half--mode_hold",
+      "status": "FAIL",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 6,
+          "shape": [
+            1,
+            96
+          ],
+          "elements": 96
+        },
+        {
+          "optimizer": 1,
+          "parameter": 7,
+          "shape": [
+            1
+          ],
+          "elements": 1
+        }
+      ]
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-two_pole",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 5,
+        "optimizers": 15,
+        "response_history": 1,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-trajectory",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 13,
+        "optimizers": 39,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-residual_student",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 13,
+        "optimizers": 39,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-unipolar",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 9,
+        "optimizers": 27,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-ae_gan_hold",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 13,
+        "optimizers": 39,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-cover_leftover",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 10,
+        "optimizers": 30,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-unused_token_hold",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 6,
+        "optimizers": 18,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-mid_scale_identity",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 10,
+        "optimizers": 30,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-mode_hold",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 17,
+        "optimizers": 51,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-vector_two_broad",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 13,
+        "optimizers": 40,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-vector_unequal_mass",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [
+        {
+          "optimizer": 1,
+          "parameter": 6,
+          "shape": [
+            1,
+            100
+          ],
+          "elements": 4
+        }
+      ]
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-vector_unequal_width",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-vector_anisotropic",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 20,
+        "optimizers": 61,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-vector_overlap",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-vector_spiral",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 13,
+        "optimizers": 40,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-img_stripes2",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-img_bars4",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-img_blobs4",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "toy-img_intensity2",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "initial_changes": [],
+      "final_state_bit_identical_to_qr": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "native-grid100",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "final_and_holdout_arrays_bit_identical_to_qr": {
+        "final_samples.npz": 120000,
+        "holdout_samples.npz": 600000
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "native-rotated100",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "final_and_holdout_arrays_bit_identical_to_qr": {
+        "final_samples.npz": 120000,
+        "holdout_samples.npz": 600000
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "native-staggered100",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "final_and_holdout_arrays_bit_identical_to_qr": {
+        "final_samples.npz": 120000,
+        "holdout_samples.npz": 600000
+      }
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "hold-mode_hold",
+      "status": "PASS",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "recorded_stress_trajectory_exactly_matches_qr": [
+        "gate",
+        "good_hold_updates",
+        "stopped",
+        "hold_window",
+        "post_failure_diagnostic",
+        "dense",
+        "coarse",
+        "ema",
+        "last_live",
+        "last_ema"
+      ],
+      "final_parameter_checkpoint_comparison": "Unavailable: archived stress drivers do not save it"
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "id": "shift-mode_hold",
+      "status": "FAIL",
+      "frozen_driver_matches": true,
+      "full_audited_rng_matches": true,
+      "recorded_stress_trajectory_exactly_matches_qr": [
+        "terminal_grade",
+        "stationary",
+        "continued_hold",
+        "shift_recovery",
+        "diagnostic",
+        "final",
+        "ema",
+        "shift_pair",
+        "optimizer_final",
+        "rate_ranges",
+        "steps",
+        "shift_step",
+        "shift"
+      ],
+      "final_parameter_checkpoint_comparison": "Unavailable: archived stress drivers do not save it"
+    }
+  ],
+  "repeat_unequal_final_state_bit_identical": {
+    "parameters": 15,
+    "optimizers": 46,
+    "response_history": 0,
+    "cpu_rng": 1,
+    "cuda_rng": 1
+  },
+  "manifests": [
+    {
+      "phase": "failure-screen",
+      "files": 1629,
+      "unchanged": true
+    },
+    {
+      "phase": "batch-feature-full-suite",
+      "files": 1629,
+      "unchanged": true
+    }
+  ]
+}

@@ -37,6 +37,8 @@ def _parser():
     run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
                      help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
+    run.add_argument("--init", default=None,
+                     help="deterministic weight and particle init name; omit to keep the PyTorch init")
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
                           help="require sustained fidelity and a 100k-sample holdout (default)")
@@ -56,6 +58,8 @@ def _run(args):
     if device_override is not None:
         apply_device_policy(device_override, log=True)
         device_override = str(host_device())
+    from particlegan.init_registry import use_init
+    use_init(getattr(args, "init", None))
     config_bytes = args.config.read_bytes()
     manifest = load_config(args.config)
     # Preflight every declared problem, even for an individual deep dive. An

@@ -128,6 +128,10 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     # Host critic shape from the 100-Gaussians toy. Fourier width is the
     # sharp-D stress, not an architecture swap.
     critic = SimpleMLPDiscriminator(2, HIDDEN, N_HIDDEN, FOURIER)
+    # LSUV rescales orthogonal weights when --init ortho_lsuv is installed.
+    # Any other init, including the default, returns immediately.
+    from particlegan.deterministic_init import prepare_modules
+    prepare_modules(generator, critic)
     if noise_policy is not None:
         from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
         generator = wrap_output(generator, noise_policy)
