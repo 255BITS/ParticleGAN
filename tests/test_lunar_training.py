@@ -146,3 +146,37 @@ def test_checkpoints_save_exact_live_parameters_and_reject_ema(tmp_path, monkeyp
     torch.save(world, world_path)
     with pytest.raises(ValueError, match="live weights"):
         load_world_model(world_path)
+
+
+def test_stages_run_on_recipe_built_optimizers_that_own_the_schedule(tmp_path):
+    from benchmarks.toy_runner import ToyRun
+    from lib.lunar_training import LunarPolicy
+    torch.set_num_threads(1)
+    data = _transitions()
+    world_path = tmp_path / "world.pt"
+    train_world_model(data, world_path, steps=4, width=8, batch_size=16)
+    world = load_world_model(world_path)
+    shared = dict(steps=6, batch_size=16, width=8, world_weight=2.5, adversarial_weight=1., device="cpu")
+    bc = ToyRun(LunarPolicy(data, None, world, None, adversarial=False, **shared))
+    gan = ToyRun(LunarPolicy(data, None, world, bc.nets.generator, adversarial=True, **shared))
+    assert not bc.critics and set(gan.critics) == {"critic"}
+    for _ in range(6):
+        bc.step()
+        gan.step()
+    # Supervised warm start keeps a flat rate; the adversarial stage decays on the recipe schedule.
+    assert bc.opt_g.param_groups[0]["lr"] == bc.recipe.lr
+    assert gan.opt_g.completed_steps == 6 and gan.opt_g.param_groups[0]["lr"] < gan.recipe.lr
+    assert gan.opt_d["critic"].param_groups[0]["lr"] < gan.recipe.lr * gan.recipe.d_lr_mult
+
+
+def test_rpgan_without_warm_start_reports_the_fresh_policy_before_adversarial(tmp_path):
+    from lib.lunar_training import _fresh_policy, _policy_metrics, _state_statistics, _tensor_records
+    torch.set_num_threads(1)
+    data = _transitions()
+    world_path = tmp_path / "world.pt"
+    train_world_model(data, world_path, steps=4, width=8, batch_size=16)
+    metrics = train_fast_policy(data, world_path, tmp_path / "policy.pt", warmup_steps=0, steps=4,
+                                width=8, batch_size=16)
+    fresh = _fresh_policy(_state_statistics(data), 8)
+    expected = _policy_metrics(fresh, load_world_model(world_path), _tensor_records(data, "cpu"))
+    assert metrics["before_adversarial"] == expected
