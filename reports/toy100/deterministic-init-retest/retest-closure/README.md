@@ -1,6 +1,6 @@
 # Bounded retest coverage
 
-Scope is frozen at97 reviewed research cases (85 grouped + KA2 +11 simple). At 2026-09-27T03:29:03.680135+00:00, 53/97 are archived and independently audited; 44 still await execution or archive. This is not a claim that the remaining batches have finished.
+Search stopped at the user's request. 75/97 reviewed research cases are archived and independently audited; 22 are NOT_RUN_USER_STOP. All owned workers have exited and launch STOP markers are installed. Coverage is partial, not a completed full-leaderboard retest.
 
 All49 API/control quality windows are complete (46 historical configurations, including the explicitly scoped RP1 eager diagnostic, plus3 public controls):4 PASS and45 FAIL. Four earlier logging ERROR records remain preserved. A passing tiny screen does not override a later breadth failure.
 
@@ -13,7 +13,7 @@ The190 research definition rows comprise97 reviewed execution cases,4 exact dupl
 | NOT_RETESTED_OLDER_PACKAGE_INTERFACE | 8 |
 | NOT_RETESTED_UNTESTED_DRAFT | 1 |
 
-These gaps are preserved as untested, not failed quality. Existing source availability does not prove that a different host wrapper preserves initialization and learner arithmetic. No new adapter or source reconstruction is authorized by this closure.
+These89 gaps are additional to the22 reviewed cases stopped by user request. Fifty rows have retained source but no completed reviewed initialization adapter; this is unfinished work, not missing or impossible source. Eight older package definitions likewise retain sources but need a different reviewed binding. Thirty rows lack a unique exact binding, and one is an untested draft. No unavailable adapter is counted as a quality failure or as completed retesting.
 
 | Source/binding group | Rows | Historical labels |
 |---|---:|---|
@@ -45,4 +45,4 @@ These gaps are preserved as untested, not failed quality. Existing source availa
 
 The [frozen scope](coverage-scope.json) lists every exact case, duplicate mapping, alias and untested reason. [Progress](coverage-progress.json) binds current archive/audit hashes. The frozen scope cannot be expanded by rerunning this report.
 
-Refresh evidence status only with `python reports/toy100/deterministic-init-retest/build_retest_closure.py`. Use `--require-complete` for the final closeout; it fails until all97 fixed research cases have independently audited archives. This command never runs training, changes a score, launches a worker or stops a process.
+Refresh bookkeeping only with `python reports/toy100/deterministic-init-retest/build_retest_closure.py`. The user-stop receipt freezes partial coverage and exact unrun IDs. `--require-complete` intentionally fails because the full97 were not run. This command never runs training, changes a score, launches a worker or stops a process.

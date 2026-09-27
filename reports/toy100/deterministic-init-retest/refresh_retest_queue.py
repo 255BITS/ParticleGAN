@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from collections import Counter
 import argparse
 import hashlib
+import io
 import gzip
 import json
 import os
@@ -153,7 +154,11 @@ def attach_current_eligibility(rows):
             if 'path' in item:assert sha(Path(item['path']))==item['sha256']
             else:
                 with zipfile.ZipFile(item['archive']) as archive:
-                    assert hashlib.sha256(archive.read(item['member'])).hexdigest()==item['sha256']
+                    members=item['member'].split('!/')
+                    raw=archive.read(members[0])
+                    for member in members[1:]:
+                        with zipfile.ZipFile(io.BytesIO(raw)) as nested:raw=nested.read(member)
+                    assert hashlib.sha256(raw).hexdigest()==item['sha256']
         authority=audit['quality_authority']
         score=next(v for v in read(Path(authority['path']))['results'] if v['id']==authority['row_id'])
         assert sha(HERE/score['archive_manifest'])==authority['archive_manifest_sha256']
@@ -192,6 +197,15 @@ def attach_bounded_closure(rows):
     for alias in scope['aliases']:
         row=by_id[alias['id']]
         row['execution_status']='ALIAS_FOLLOWS_LINKED_ROWS';row['linked_queue_rows']=alias['linked_rows']
+    stop_path=HERE/'retest-closure/user-stop/stop-receipt.json'
+    if stop_path.exists():
+        stop=read(stop_path)
+        assert stop['status']=='STOPPED_USER_REQUEST' and not stop['owned_processes_remaining']
+        planned={r['case_id']:r['queue_row'] for r in scope['reviewed_research_cases']}
+        for case_id in stop['not_run_case_ids']:
+            row=by_id[planned[case_id]]
+            assert row['quality_status']=='NOT_RUN'
+            row.update(execution_status='NOT_RUN_USER_STOP',not_retested_reason='Exact-source reviewed case left unrun after the user requested wrap-up.',user_stop_receipt=pin(stop_path))
     return pin(path)
 
 def main():
@@ -307,7 +321,7 @@ def main():
     pruned=[r for r in rows if r.get('further_ring_preparation_status',{}).get('ring')=='NOT_RUN']
     if pruned:
         text+=['','Further ring, vector and long-run qualifications are **NOT_RUN** for '+', '.join(r['candidate'] for r in pruned)+': each has an independently audited failure on its own new-initializer bars4 task. Prepared sources and CPU receipts remain available; they do not authorize additional execution.']
-    if bounded_closure:text+=['','The [bounded coverage closure](retest-closure/README.md) freezes97 reviewed research execution cases and explicitly lists89 NOT_RETESTED definition rows,4 exact duplicate definitions and15 priority aliases. No missing result is inferred as a failure or a pass. Running fixed batches may finish; no new candidate or source reconstruction is authorized.']
+    if bounded_closure:text+=['','Search is STOPPED at the user’s request. The [partial coverage closure](retest-closure/README.md) records75 audited research cases and22 NOT_RUN_USER_STOP cases from97 reviewed preparations, plus89 additional untested definition rows,4 exact duplicates and15 aliases. No unrun result is inferred as a failure or pass. Retained source without a reviewed adapter is unfinished work, not missing or impossible source. No new launches are authorized.']
     text+=['','Full exact source/config links, package hashes, prior evidence pointers, CPU receipt hashes, launch PIDs and terminal-result pointers are in [retest-queue.json](retest-queue.json). The old decayed KA2 arm is retained as a historical conditional diagnostic, separately from default KA2 and the mandatory constant arm; it is not an additional authorized launch after bounded closure.','','Refresh bookkeeping without training: `python reports/toy100/deterministic-init-retest/refresh_retest_queue.py`. Additional already-authorized batch receipts can be passed with repeated `--batch PATH`. The script reads only the specified batch process/artifact receipts, standard-library source ZIPs and existing CPU reports.']
     (HERE/'retest-queue.md').write_text('\n'.join(text)+'\n')
     print(json.dumps(data['counts'],indent=2))
