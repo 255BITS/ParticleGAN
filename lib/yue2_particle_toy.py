@@ -219,7 +219,7 @@ class SupervisedOnly(_LanderArm):
         # On the noise-free action: fake.x carries the recipe's generator output noise.
         target = expert_action(real.x)
         denom = F.mse_loss(target, torch.zeros_like(target)).clamp_min(1e-4)
-        return {"rel_l2": F.mse_loss(nets.generator(real.x), target) / denom}
+        return {"supervised_loss": F.mse_loss(nets.generator(real.x), target) / denom}
 
 
 class PairedError(_LanderArm):
