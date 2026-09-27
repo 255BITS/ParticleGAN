@@ -309,6 +309,26 @@ sym and sp@1e-2 >= 0.95. No arm reached it at any eval.
   3500, core width 0.41 against 0.74). Every arm, champion included, drops
   right after the gate turns on at step 2000.
 
+## Round 4: K3P references, guard/anchor, LR grid, curvature
+
+All ring, seed 0, no noise, constant LRs. Details: [LR_GRID.md](LR_GRID.md), [CURVATURE.md](CURVATURE.md).
+
+| Entry | Prehold | Arrival | Departures | Fails outside transit |
+|---|---|---|---|---|
+| ref: K3P v0.8.0 as released (noise + LR decay) | 120/120 | +1960 | 3 | 0 |
+| **B_cap3**: lr_c0.5_g1 with cap c=3 | 82/120 | +140 | 10 | **38** |
+| lr_c0.5_g1 (sec_nodamp, critic LR x0.5) | 96/120 | +260 | 17 | 42 |
+| ref: K3P v0.8.0, noise off, constant LRs | 88/120 | +360 | 5 | 50 |
+| sec_nodamp | 97/120 | +230 | 21 | 50 |
+| secant_r1_b2 + K3P guard / anchor / both | 74 / 54 / 55 | +400 / +220 / +320 | 23 / 24 / 24 | 98 / 115 / 128 |
+| B + peak margin (κ=7.14) | 85/120 | +240 | 13 | 118 |
+| wgan + Huber profile only / + peak margin only | 0/120 | none | - | 120 (margin-only diverges) |
+
+- **K3P's EMA anchor never engages under constant LRs** (it waits for LR annealing), so K3P's constant-LR stability comes from its penalty plus spike guard. Grafting guard/anchor onto the secant critic hurts.
+- **LR grid:** critic LR drives departures and grad-norm (x2 is bad everywhere); G LR drives arrival and D magnitude. Best cell critic x0.5, G x1.
+- **Curvature hypothesis rejected.** Curvature at reals correlates *positively* with departures (Spearman +0.49) and fails (+0.77); within runs it rises before a pass->fail flip. Forcing a curvature floor (peak margin) makes D cone-like and hurts. Loosening the slope cap to 3 is the only curvature-adjacent change that helps.
+- Without Lipschitz terms (plain wgan + one shape penalty) nothing holds 8 modes.
+
 ## Next experiments (distinct formulations, same constraints)
 
 No seed variants and no spectral norm. Closed: secant t = 1, drift, center,
