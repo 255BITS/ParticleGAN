@@ -1,0 +1,28 @@
+# arm=gs_coeff_0.03 task=toy-two_pole route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START two_pole route=public primitives custom host + shared noise policy steps=80
+eval     4 mean_abs=0.03265 grad_med=0.1225
+eval     7 mean_abs=0.05432 grad_med=0.09919
+eval    10 mean_abs=0.07316 grad_med=0.0781
+eval    14 mean_abs=0.09385 grad_med=0.05546
+eval    17 mean_abs=0.1065 grad_med=0.04376
+eval    20 mean_abs=0.1174 grad_med=0.03668
+eval    24 mean_abs=0.1308 grad_med=0.03436
+eval    27 mean_abs=0.1413 grad_med=0.03835
+eval    30 mean_abs=0.1538 grad_med=0.04827
+eval    34 mean_abs=0.1756 grad_med=0.07544
+eval    37 mean_abs=0.1981 grad_med=0.1139
+eval    40 mean_abs=0.2269 grad_med=0.1774
+eval    44 mean_abs=0.2712 grad_med=0.3123
+eval    47 mean_abs=0.2993 grad_med=0.4551
+eval    50 mean_abs=0.313 grad_med=0.6367
+eval    54 mean_abs=0.3472 grad_med=0.9258
+eval    57 mean_abs=0.436 grad_med=1.147
+eval    60 mean_abs=0.5211 grad_med=1.373
+eval    64 mean_abs=0.6257 grad_med=1.66
+eval    67 mean_abs=0.6974 grad_med=1.714
+eval    70 mean_abs=0.7636 grad_med=1.91
+eval    74 mean_abs=0.8432 grad_med=1.913
+eval    77 mean_abs=0.8968 grad_med=1.848
+eval    80 mean_abs=0.9455 grad_med=1.796
+{"event": "DONE", "task": "two_pole", "status": "FAIL", "suffix": 0, "live": {"mean_abs": 0.945513904094696, "grad_med": 1.7955150604248047}, "error": null}
+# DONE toy-two_pole status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 2s

@@ -1,0 +1,33 @@
+# arm=gs_dlr_0.5 task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+eval     9 unused_hold=0.9963 concept_move=0 unused_dist=0.003673 concept_cos=-0.5974 concept_delta_norm=0.1016 scale0_err=0
+eval    17 unused_hold=0.9934 concept_move=0 unused_dist=0.006632 concept_cos=-0.349 concept_delta_norm=0.1664 scale0_err=0
+eval    25 unused_hold=0.9932 concept_move=0.03718 unused_dist=0.006757 concept_cos=0.1507 concept_delta_norm=0.2467 scale0_err=0
+eval    34 unused_hold=0.9912 concept_move=0.1913 unused_dist=0.008754 concept_cos=0.568 concept_delta_norm=0.3368 scale0_err=0
+eval    42 unused_hold=0.9876 concept_move=0.3178 unused_dist=0.01236 concept_cos=0.8431 concept_delta_norm=0.3769 scale0_err=0
+eval    50 unused_hold=0.9882 concept_move=0.4252 unused_dist=0.01179 concept_cos=0.9826 concept_delta_norm=0.4328 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9882 concept=0.4252 unused_dist=0.0118
+eval    59 unused_hold=0.9898 concept_move=0.5282 unused_dist=0.01019 concept_cos=0.9996 concept_delta_norm=0.5284 scale0_err=0
+eval    67 unused_hold=0.9912 concept_move=0.6084 unused_dist=0.008791 concept_cos=0.9927 concept_delta_norm=0.6128 scale0_err=0
+eval    75 unused_hold=0.9925 concept_move=0.6795 unused_dist=0.007456 concept_cos=0.9874 concept_delta_norm=0.6881 scale0_err=0
+eval    84 unused_hold=0.9939 concept_move=0.7477 unused_dist=0.006051 concept_cos=0.9895 concept_delta_norm=0.7557 scale0_err=0
+eval    92 unused_hold=0.9949 concept_move=0.7965 unused_dist=0.005119 concept_cos=0.9951 concept_delta_norm=0.8004 scale0_err=0
+eval   100 unused_hold=0.996 concept_move=0.8362 unused_dist=0.004021 concept_cos=0.9982 concept_delta_norm=0.8377 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9960 concept=0.8362 unused_dist=0.0040
+eval   109 unused_hold=0.997 concept_move=0.8719 unused_dist=0.002973 concept_cos=0.9996 concept_delta_norm=0.8723 scale0_err=0
+eval   117 unused_hold=0.9977 concept_move=0.8975 unused_dist=0.002275 concept_cos=0.9999 concept_delta_norm=0.8977 scale0_err=0
+eval   125 unused_hold=0.9982 concept_move=0.9185 unused_dist=0.001782 concept_cos=0.9999 concept_delta_norm=0.9185 scale0_err=0
+eval   134 unused_hold=0.9986 concept_move=0.9374 unused_dist=0.00136 concept_cos=1 concept_delta_norm=0.9375 scale0_err=0
+eval   142 unused_hold=0.9989 concept_move=0.9509 unused_dist=0.001068 concept_cos=1 concept_delta_norm=0.9509 scale0_err=0
+eval   150 unused_hold=0.9992 concept_move=0.9618 unused_dist=0.0008346 concept_cos=1 concept_delta_norm=0.9618 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9992 concept=0.9618 unused_dist=0.0008
+eval   159 unused_hold=0.9994 concept_move=0.9714 unused_dist=0.0006268 concept_cos=1 concept_delta_norm=0.9714 scale0_err=0
+eval   167 unused_hold=0.9995 concept_move=0.9781 unused_dist=0.0004818 concept_cos=1 concept_delta_norm=0.9781 scale0_err=0
+eval   175 unused_hold=0.9996 concept_move=0.9835 unused_dist=0.000398 concept_cos=1 concept_delta_norm=0.9835 scale0_err=0
+eval   184 unused_hold=0.9997 concept_move=0.9882 unused_dist=0.0002783 concept_cos=1 concept_delta_norm=0.9882 scale0_err=0
+eval   192 unused_hold=0.9998 concept_move=0.9913 unused_dist=0.000203 concept_cos=1 concept_delta_norm=0.9913 scale0_err=0
+eval   200 unused_hold=0.9999 concept_move=0.9936 unused_dist=0.0001479 concept_cos=1 concept_delta_norm=0.9936 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9999 concept=0.9936 unused_dist=0.0001
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 12, "live": {"unused_hold": 0.9998520594381262, "concept_move": 0.9935798675630849}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '12/24'} 3s

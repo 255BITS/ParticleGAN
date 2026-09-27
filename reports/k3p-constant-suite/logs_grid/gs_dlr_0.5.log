@@ -1,0 +1,39 @@
+# 2026-09-27 00:51:37 arm=gs_dlr_0.5 device=cuda:1 tasks=5 steps=None
+00:51:49 toy-two_pole               FAIL  passing suffix=0/24 | confirmed None mean_abs=0.0867 grad_med=0.0108 | 4s rc=0
+00:52:33 toy-img_bars4              PASS  passing suffix=16/24 | confirmed 325 modes=4 hq=0.969 | 50s rc=0
+00:59:21 native-grid100             FAIL  final modes/HQ=99/0.975 | coverage FAIL accuracy FAIL first100 None massTV 0.06290000000000001 | 456s rc=0
+01:00:39 native-rotated100          FAIL  final modes/HQ=100/0.971 | coverage FAIL accuracy FAIL first100 1750 massTV 0.03655 | 536s rc=0
+01:02:09 native-staggered100        FAIL  final modes/HQ=100/0.962 | coverage FAIL accuracy FAIL first100 1000 massTV 0.044500000000000005 | 626s rc=0
+# 2026-09-27 01:02:09 arm=gs_dlr_0.5 finished
+# 2026-09-27 01:41:48 arm=gs_dlr_0.5 device=cuda:1 tasks=2 steps=None
+01:43:16 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +470 departures 0 final HQ 0.992 | 83s rc=0
+01:44:16 ring8-multishift           FAIL  fails outside transit=1 | prehold 120/120 arrival +470/+390/+210 departures 1 final HQ 0.994 | 144s rc=0
+# 2026-09-27 01:44:16 arm=gs_dlr_0.5 finished
+# 2026-09-27 01:55:48 arm=gs_dlr_0.5 device=cuda:1 tasks=26 steps=None
+skip native-grid100 (result.json exists)
+skip native-rotated100 (result.json exists)
+skip native-staggered100 (result.json exists)
+skip ring8-multishift (result.json exists)
+skip ring8-shift (result.json exists)
+skip toy-two_pole (result.json exists)
+01:55:58 toy-ae_gan_hold            FAIL  passing suffix=1/24 | confirmed None recon_mse=0.00319 hold=0.0232 | 6s rc=0
+01:56:00 toy-trajectory             PASS  passing suffix=21/24 | confirmed 134 identity_mse=0.00104 | 7s rc=0
+01:56:00 toy-residual_student       PASS  passing suffix=21/24 | confirmed 134 identity_mse=0.000792 success_rate=1 wrong_pad_rate=0 | 7s rc=0
+01:56:00 toy-unipolar               PASS  passing suffix=19/24 | confirmed 167 cover=1 off_caption=1.06e-10 neu_hold=0.999 | 8s rc=0
+01:56:06 toy-unused_token_hold      PASS  passing suffix=12/24 | confirmed 142 unused_hold=1 concept_move=0.994 | 3s rc=0
+01:56:10 toy-cover_leftover         PASS  passing suffix=11/24 | confirmed 600 u_kept=0.978 content_kept=1 leak_ratio=0.000566 pole_rel_err_plus=0.0143 pole_rel_err_minus=0.0124 same_dir=0.00285 | 9s rc=0
+01:56:18 toy-mid_scale_identity     PASS  passing suffix=17/24 | confirmed 400 concept_cos_plus=1 concept_cos_minus=1 concept_mag_plus=0.998 concept_mag_minus=1 identity_at_0=1 identity_at_mid=0.995 | 14s rc=0
+01:56:20 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=7 hq=1 | 16s rc=0
+01:57:22 toy-vector_two_broad       PASS  passing suffix=21/24 | confirmed 400 sw1_normalized=0.0361 mass_tv=0.00781 hq=0.997 component_covariance_error=0.103 component_min_eigen_ratio=0.784 | 72s rc=0
+01:57:38 toy-vector_unequal_width   FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.0416 mass_tv=0.0352 hq=0.98 component_covariance_error=0.492 component_min_eigen_ratio=0.0251 | 77s rc=0
+01:57:42 shift-mode_hold            FAIL  deadline window=0/81 | delay None pre-shift hold 0/120 | 109s rc=0
+01:57:42 toy-vector_unequal_mass    FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.0308 mass_tv=0.00591 hq=0.969 component_covariance_error=0.919 component_min_eigen_ratio=0.561 min_mass_ratio=0.94 | 87s rc=0
+skip toy-img_bars4 (result.json exists)
+01:57:48 toy-vector_anisotropic     FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.0648 mass_tv=0.0387 hq=0.907 component_covariance_error=0.214 component_min_eigen_ratio=0.0892 | 84s rc=0
+01:58:10 toy-img_stripes2           PASS  passing suffix=18/24 | confirmed 275 modes=2 hq=1 | 23s rc=0
+01:58:10 toy-img_blobs4             PASS  passing suffix=19/24 | confirmed 250 modes=4 hq=1 | 24s rc=0
+01:58:14 toy-img_intensity2         FAIL  passing suffix=2/24 | confirmed None modes=2 hq=0.969 | 22s rc=0
+01:58:28 toy-vector_overlap         FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.115 mean_error=0.157 covariance_error=0.203 | 63s rc=0
+01:58:32 toy-vector_spiral          PASS  passing suffix=23/24 | confirmed 400 sw1_normalized=0.0294 mean_error=0.0143 covariance_error=0.068 | 50s rc=0
+02:00:00 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate NOT_CONVERGED converged None first_fail None minHQ(hold) None stopped gate_done_plus_post_window | 248s rc=0
+# 2026-09-27 02:00:00 arm=gs_dlr_0.5 finished

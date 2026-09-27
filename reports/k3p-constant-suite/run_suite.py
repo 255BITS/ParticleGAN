@@ -250,8 +250,10 @@ def run_shift(name, cfg, cfg_path, out, args, sa, log):
 RING_SHIFTS = {"shift": [(2400, (1.0, 0.0))],
                "multishift": [(2400, (1.0, 0.0)), (4600, (-1.0, 0.0)), (6800, (1.0, 0.0))]}
 RING_STEPS = {"shift": 4600, "multishift": 9000}
+# Grid search (GRID.md) added lr, betas, prior_betas, reg_kappa: no earlier arm sets them, so earlier ring results
+# are unchanged. batch_size stays the ring protocol's 2048.
 RECIPE_KEYS = ("input_noise_std", "output_noise_std", "lr_floor", "network_lr_floor", "reg_coeff", "d_lr_mult",
-               "prior_lr_mult")
+               "prior_lr_mult", "lr", "betas", "prior_betas", "reg_kappa")
 
 
 def ring_score(points, shifts, end, prehold=(1210, 2400)):
@@ -361,7 +363,8 @@ def launch(args):
     tasks.sort(key=ORDER.get)
     runs = Path(args.runs_dir).resolve() / args.arm  # workers run with cwd=ROOT
     default_runs = Path(args.runs_dir).resolve() == (HERE / "runs").resolve()
-    log_root = HERE / "logs" if default_runs else HERE / "logs" / Path(args.runs_dir).resolve().name
+    log_root = (Path(args.logs_dir).resolve() if args.logs_dir else HERE / "logs" if default_runs
+                else HERE / "logs" / Path(args.runs_dir).resolve().name)
     runs.mkdir(parents=True, exist_ok=True)
     import fcntl  # one launcher per arm: a second launcher would rm -rf the first one's live task dirs
     lock = (runs / ".launcher.lock").open("w")
@@ -415,6 +418,7 @@ def main():
     ap.add_argument("--jobs", type=int, default=4)
     ap.add_argument("--steps", type=int, default=None, help="smoke only: shorten native/hold/ring budgets")
     ap.add_argument("--runs-dir", default=str(HERE / "runs"))
+    ap.add_argument("--logs-dir", default=None, help="default: logs/ (or logs/<runs-dir name>)")
     ap.add_argument("--overwrite", action="store_true")
     ap.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     ap.add_argument("--task", help=argparse.SUPPRESS)
