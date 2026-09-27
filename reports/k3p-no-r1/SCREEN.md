@@ -37,8 +37,8 @@ native, and .0015-.09 on ring8-shift, where it is positive on nearly every call.
 ## Top (no arm keeps 0 ring fails, so these are ranked by native passes, then toy cells, then worst cov)
 
 1. `nr_dvalcap_anchor`: 0/3 native, img_bars4 9/24 + two_pole 14/24, worst cov .016, ring fails 228
-2. `nr_pathcap_anchor`: 0/3 native, 0 + 14/24, worst cov .011, ring fails 52
-3. `nr_none_anchor`: 0/3 native, 0 + 14/24, worst cov .0125, ring fails 38
+2. `nr_none_anchor`: 0/3 native, 0 + 14/24, worst cov .0125, ring fails 38
+3. `nr_pathcap_anchor`: 0/3 native, 0 + 14/24, worst cov .0113, ring fails 52
 
 These are not recommended as R1 replacements. All three are worse than gs2 on every axis except two_pole.
 
