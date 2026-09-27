@@ -16,6 +16,10 @@ Critic loss = base + real term + path term + cap term:
   path   on xhat = f + u (r - f), u ~ U(0,1):
          lower: E relu(t - ||grad D(xhat)||)^2 | two_sided: E (||grad D(xhat)|| - t)^2
   cap    E relu(||grad D(x)|| - c)^2 over xhat (interp) or real+fake+xhat (all)
+  center (optional, --lam-center) lam * (E D(r))^2: pins only D's level (batch mean over reals),
+         unlike drift, which also penalizes the spread of D over reals
+  lazy   (optional, --lazy-k k) every non-base term is applied only on critic steps with
+         step % k == 0, with its weight multiplied by k (grad_regularizers lazy_k semantics)
 The generator/prior update is the public trainer's (RpGAN g_loss by default).
 One arm = one formulation, seed 0. Tail logs/<arm>.log.
 """
@@ -104,8 +108,17 @@ class SimpleCriticLoss:
             return F.softplus(-dr).mean() + F.softplus(df).mean()
         return F.softplus(-(dr - df)).mean()  # rplogistic
 
-    def __call__(self, D, real, fake, u):
+    def __call__(self, D, real, fake, u, step=1):
         a, n = self.a, len(real)
+        k = a.lazy_k
+        if k > 1 and step % k != 0:  # lazy skip: base only (grad_regularizers lazy_k semantics)
+            out = D(torch.cat([real, fake]).detach())
+            terms = {"base": self.base(out[:n], out[n:])}
+            zero = out.new_zeros(())
+            terms.update({t: zero for t in ("drift", "r1", "path", "cap")})
+            if a.lam_center:
+                terms["center"] = zero
+            return terms["base"], {kk: v.detach() for kk, v in terms.items()}
         parts = [real, fake]
         u = self.u_lo + (self.u_hi - self.u_lo) * u  # identity for the round-1 default 0,1
         if self.need_path:
@@ -145,6 +158,12 @@ class SimpleCriticLoss:
             terms["cap"] = a.lam_cap * F.relu(norm - a.cap_target).pow(2).mean()
         else:
             terms["cap"] = zero
+        if a.lam_center:
+            terms["center"] = a.lam_center * dr.mean().pow(2)
+        if k > 1:  # lazy application step: proportionally bigger hit
+            for t in terms:
+                if t != "base":
+                    terms[t] = k * terms[t]
         total = sum(terms.values())
         return total, {k: v.detach() for k, v in terms.items()}
 
@@ -202,6 +221,8 @@ def describe(args):
         parts.append(f"path-{args.path}({args.lam_path:g},t={args.path_target:g}{win})")
     if args.cap != "none":
         parts.append(f"cap-{args.cap}({args.lam_cap:g},c={args.cap_target:g})")
+    if args.lam_center:
+        parts.append(f"center({args.lam_center:g})")
     extra = []
     if args.g_loss != "rpgan":
         extra.append(f"G={args.g_loss}")
@@ -213,6 +234,8 @@ def describe(args):
         extra.append(f"Dβ2={args.d_beta2:g}")
     if args.latent_damping != 0.5:
         extra.append(f"A2={args.latent_damping:g}")
+    if args.lazy_k != 1:
+        extra.append(f"lazy_k={args.lazy_k}")
     return " + ".join(parts) + ("" if not extra else " [" + ", ".join(extra) + "]")
 
 
@@ -299,6 +322,7 @@ def run(args):
 
     points, started = [], time.monotonic()
     frozen_post_shift = None
+    critic_step = 0
     lr_rows = []
     with log_path.open("w", buffering=1) as log, (out_dir / "metrics.jsonl").open("w", buffering=1) as metrics:
         log.write(f"# arm={args.arm} formulation={describe(args)} device={args.device} steps={args.steps}\n")
@@ -319,7 +343,8 @@ def run(args):
                     z, _ = prior.sample(len(real), generator=latent_stream)
                     fake = G(z)
                 u = torch.rand(len(real), device=device, generator=penalty_stream)
-                loss_d, terms = critic_loss(D, real, fake, u)
+                critic_step += 1
+                loss_d, terms = critic_loss(D, real, fake, u, critic_step)
                 opt_d.zero_grad()
                 loss_d.backward()
                 opt_d.step()
@@ -422,14 +447,18 @@ def main():
     p.add_argument("--n-critic", type=int, default=1, help="critic updates per G update (fresh fakes)")
     p.add_argument("--d-lr-mult", type=float, default=1.0, help="constant critic LR multiplier")
     p.add_argument("--latent-damping", type=float, default=0.5, help="A2 particle-row damping (recipe default .5)")
+    p.add_argument("--lam-center", type=float, default=0.0,
+                   help="level pin lam*(E D(real))^2 (batch mean only; 0 = off)")
+    p.add_argument("--lazy-k", type=int, default=1,
+                   help="apply all non-base terms every k-th critic step with weight x k (1 = every step)")
     p.add_argument("--steps", type=int, default=4600)
     p.add_argument("--device", default="cuda:0")
     p.add_argument("--output", type=Path, default=None)
     p.add_argument("--log", type=Path, default=None)
     p.add_argument("--overwrite", action="store_true")
     args = p.parse_args()
-    if args.steps <= 0 or args.n_critic < 1:
-        p.error("--steps and --n-critic must be positive")
+    if args.steps <= 0 or args.n_critic < 1 or args.lazy_k < 1:
+        p.error("--steps, --n-critic and --lazy-k must be positive")
     run(args)
 
 
