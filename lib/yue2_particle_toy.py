@@ -27,12 +27,13 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from benchmarks.toy_runner import Networks, ToyProblem, run
+from benchmarks.toy_runner import Networks, ToyProblem, View, run
 from lib.vendor.concept_slider_core.reference import register_paired_error_norm
 from particlegan import get_recipe, init
 
 BATCH = 64
-STEPS = 200
+# Sized for the recipe LR (the old 200-update budget went with a caller-set 12x LR).
+STEPS = 1000
 GAIN = 0.12
 HORIZON = 40
 POSITION_LIMIT = 0.15
@@ -47,8 +48,12 @@ MAPPING = (
               "FORMULATION.md, Paired-error game and noise. A marginal critic is "
               "unchanged if two rows exchange targets.",
          toy="Accepted arm: recipe Rp logistic on the normalized action residual. "
-             "real is the expert's paired error (0); the noise is the recipe's critic "
-             "input noise and generator output noise, not the card's schedule.",
+             "real is the expert's paired error (0) on the same states the student "
+             "acts on (the runner pairs fake with the real batch). The noise is the "
+             "recipe's critic input noise and generator output noise, drawn "
+             "independently for real and fake. A shared draw could be passed through "
+             "the same pairing; the card's step-dependent schedule cannot, because a "
+             "problem does not see the step.",
          gym="controller_objective. adv_weight locked at 1. The four-path sample "
              "RpGAN is not the controller step."),
     dict(yue2="Edit scale from std(target - neutral), then a gain so median row "
@@ -70,8 +75,9 @@ MAPPING = (
     dict(yue2="Distillation rel-L2, MSE(student, teacher) / MSE(teacher, base). "
               "DISTILLATION.md, Hidden-state refinement. The v2 teacher itself "
               "has no output MSE.",
-         toy="Supervised arm uses only that ratio, adv_weight 0 (no critic; the "
-             "recipe generator optimizer). The gate rejects the arm whatever it lands.",
+         toy="Supervised arm uses only that ratio on the noise-free student action, "
+             "adv_weight 0 (no critic; the recipe generator optimizer). It lands, "
+             "and the gate still rejects it.",
          gym="Not a training knob. imitation_weight, real_encoding_weight, and "
              "synthetic_reconstruction_weight stay 0."),
     dict(yue2="Late-layer weighting is not in the card or the v2 configs.",
@@ -210,9 +216,10 @@ class SupervisedOnly(_LanderArm):
         return nets.generator(_states(stream, n) if real is None else real.x)
 
     def losses(self, role, nets, real, fake):
+        # On the noise-free action: fake.x carries the recipe's generator output noise.
         target = expert_action(real.x)
         denom = F.mse_loss(target, torch.zeros_like(target)).clamp_min(1e-4)
-        return {"rel_l2": F.mse_loss(fake.x, target) / denom}
+        return {"rel_l2": F.mse_loss(nets.generator(real.x), target) / denom}
 
 
 class PairedError(_LanderArm):
@@ -230,12 +237,16 @@ class PairedError(_LanderArm):
         return Networks(generator=ScalarGain(), critics=critic, prior=None)
 
     def real(self, n, stream):
-        # The expert's paired error: zero whatever the state.
-        return torch.zeros(n, 2)
+        # The states of the pair; the expert's error on them is zero (see views).
+        return _states(stream, n)
 
     def fake(self, nets, n, stream, real):
-        state = _states(stream, n)
+        state = _states(stream, n) if real is None else real.x
         return (nets.generator(state) - expert_action(state)) / self.edit_std
+
+    def views(self, nets, real, fake):
+        # real = the expert's paired error (0) on the same states; fake = the student's.
+        return [View("critic", torch.zeros_like(fake.x), fake.x)]
 
 
 ARMS = (CollapsedJoint, SupervisedOnly, PairedError)
