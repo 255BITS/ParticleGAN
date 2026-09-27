@@ -52,9 +52,12 @@ rotated, staggered.
 
 | # | arm | formulation | gate | accuracy | final live pass | final modes (g/r/s) | final HQ (g/r/s) | first 100 modes | passing live evals >=1000 | final min-max cov eig ratio | max abs D(real) | max grad-norm (all / >=1000) | median gmax | g(real) median >=1000 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | secant_r1_b2 | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=.5] | FAIL | FAIL | 0/3 | 100/100/100 | 0.948/0.897/0.951 | 1250/2000/500 | 0/25, 0/25, 0/25 | 0.29-1.73, 0.29-1.89, 0.27-1.72 | 5.44 | 5.33 / 2.16 | 0.94/0.39/0.90 | 0.029/0.029/0.037 |
-| 2 | sec_nodamp | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=0] | FAIL | FAIL | 0/3 | 100/100/100 | 0.903/0.886/0.954 | 1000/1500/500 | 0/25, 0/25, 0/25 | 0.17-1.83, 0.36-2.12, 0.21-1.76 | 4.85 | 5.33 / 1.95 | 0.88/0.25/0.89 | 0.029/0.030/0.035 |
-| 3 | sec_nodamp_lazy4 | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=0, lazy_k=4] | FAIL | FAIL | 0/3 | 98/99/100 | 0.859/0.813/0.922 | 2500/2500/2500 | 0/25, 0/25, 0/25 | 0.20-2.05, 0.42-2.22, 0.24-2.36 | 3.93 | 7.85 / 1.85 | 0.81/0.35/0.75 | 0.066/0.041/0.056 |
+| 1 | rp_center | rplogistic + r1(1) + path-secant(10,t=.5) + cap-all(10,c=3) + pair-center(1) [Db2=.9, A2=0, critic LR x.5] | FAIL | FAIL | 0/3 | 98/100/100 | 0.973/0.957/0.969 | None/4750/1000 | 0/25, 0/25, 0/25 | 0.18-2.24, 0.21-1.78, 0.13-2.02 | 1.25 | 4.03 / 3.15 | 1.91/0.78/1.14 | 0.009/0.030/0.018 |
+| 2 | secant_r1_b2 | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=.5] | FAIL | FAIL | 0/3 | 100/100/100 | 0.948/0.897/0.951 | 1250/2000/500 | 0/25, 0/25, 0/25 | 0.29-1.73, 0.29-1.89, 0.27-1.72 | 5.44 | 5.33 / 2.16 | 0.94/0.39/0.90 | 0.029/0.029/0.037 |
+| 3 | c3_capinterp | wgan + r1(1) + path-secant(10,t=.5) + cap-interp(10,c=3) [Db2=.9, A2=0, critic LR x.5] | FAIL | FAIL | 0/3 | 100/100/100 | 0.909/0.908/0.940 | 1250/1500/500 | 0/25, 0/25, 0/25 | 0.14-3.22, 0.26-1.89, 0.20-2.44 | 11.01 | 5.53 / 5.53 | 2.72/0.53/2.37 | 0.039/0.035/0.051 |
+| 4 | c3_r1w | wgan + r1(0.1) + path-secant(10,t=.5) + cap-all(10,c=3) [Db2=.9, A2=0, critic LR x.5] | FAIL | FAIL | 0/3 | 100/100/98 | 0.950/0.938/0.869 | 500/1500/250 | 0/25, 0/25, 0/25 | 0.16-1.87, 0.17-1.74, 0.29-3.00 | 14.73 | 4.85 / 4.27 | 3.18/1.80/2.96 | 0.133/0.163/0.155 |
+| 5 | sec_nodamp | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=0] | FAIL | FAIL | 0/3 | 100/100/100 | 0.903/0.886/0.954 | 1000/1500/500 | 0/25, 0/25, 0/25 | 0.17-1.83, 0.36-2.12, 0.21-1.76 | 4.85 | 5.33 / 1.95 | 0.88/0.25/0.89 | 0.029/0.030/0.035 |
+| 6 | sec_nodamp_lazy4 | wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=0, lazy_k=4] | FAIL | FAIL | 0/3 | 98/99/100 | 0.859/0.813/0.922 | 2500/2500/2500 | 0/25, 0/25, 0/25 | 0.20-2.05, 0.42-2.22, 0.24-2.36 | 3.93 | 7.85 / 1.85 | 0.81/0.35/0.75 | 0.066/0.041/0.056 |
 | ref | ref_stock | REF: benchmark default as shipped (RpGAN-logistic + b_cap(1,k=1), Adam b2 .999, input noise .5->0, output noise .029, cosine LR decay) | PASS | PASS | 3/3 | 100/100/100 | 0.985/0.986/0.989 | 750/750/750 | 8/25, 6/25, 8/25 | 0.62-1.18, 0.68-1.18, 0.59-1.29 | 0.81 | 5.93 / 2.98 | 1.25/1.54/2.13 | 0.777/0.579/0.491 |
 | ref | ref_matched | REF: benchmark default critic (RpGAN-logistic + b_cap(1,k=1), Adam b2 .999), noise off, constant LRs | FAIL | FAIL | 0/3 | 22/92/13 | 0.285/0.856/0.187 | 250/None/250 | 0/25, 0/25, 0/25 | 0.00-5.34, 0.05-2.20, 0.00-3.17 | 14.33 | 122.25 / 122.25 | 11.95/3.08/7.56 | 1.324/0.473/0.981 |
 | ref | ref:archived-cpu | REF: shipped default, archived CPU run (reports/toy100/simpler22) | PASS | PASS | 3/3 | 100/100/100 | 0.985/0.986/0.989 | 750/750/750 | n/a | 0.70-1.27, 0.66-1.25, 0.67-1.15 | n/a | n/a | n/a | n/a |
@@ -97,6 +100,28 @@ covariance eigenvalue ratio in [0.40, 1.70] and radial median ratio in
    slips to 2500, final HQ drops to 0.81 to 0.92, and grid and rotated lose 1
    to 2 modes. Critic-step regularization every step is needed.
 
+## Round 5 arms (ring B_cap3 family)
+
+Three ring round-5 formulations, ported with the ring's cap c=3 and critic LR x0.5 (config
+`d_lr_mult` 0.5): `rp_center` (RpGAN critic + pair-center(1) + R1 + secant + cap-all), `c3_capinterp`
+(cap on interpolates only) and `c3_r1w` (R1 0.1). Term definitions are in `../README.md`, Round 5.
+All fail. Final live HQ and EMA are below:
+
+| arm | final HQ live (g/r/s) | final HQ EMA (g/r/s) | min-max cov ratio EMA (g / r / s) | g(real) median >=1000 |
+|---|---|---|---|---|
+| rp_center | 0.973/0.957/0.969 | 0.999/0.981/0.991 | 0.10-1.55 / 0.05-0.66 / 0.08-1.62 | 0.009/0.030/0.018 |
+| c3_capinterp | 0.909/0.908/0.940 | 0.986/0.973/0.981 | 0.14-1.86 / 0.11-1.22 / 0.11-1.09 | 0.039/0.035/0.051 |
+| c3_r1w | 0.950/0.938/0.869 | 0.988/0.984/0.986 | 0.07-1.20 / 0.09-0.93 / 0.06-0.89 | 0.133/0.163/0.155 |
+| sec_nodamp | 0.903/0.886/0.954 | 0.987/0.963/0.981 | 0.11-0.94 / 0.16-1.25 / 0.11-0.86 | 0.029/0.030/0.035 |
+
+- **Flat D is not the cause.** R1 0.1 raises g(real) about 5x but does not improve HQ or shape.
+  `rp_center` has the flattest D and the best live HQ (grid 0.973 clears the 0.97 bar).
+- **Shape is the shared failure.** Every arm's EMA has some modes squeezed to lines (min cov ratio
+  0.05 to 0.16), so the critic's real term is not what sets per-mode width. Next test: a lower
+  constant particle LR (`prior_lr_mult` 1) on `rp_center`.
+- `rp_center` keeps |D(real)| at 1.25; the wgan arms reach 11 (`c3_capinterp`) and 15 (`c3_r1w`).
+  It loses 2 modes on grid and its mass TV rises to 0.062 (limit 0.10).
+
 ## Recommendations (distinct formulations, same constraints)
 
 1. **Margin secant:** `relu(t*(|r_nn - f| - m) - (D(r_nn) - D(f)))^2` with
@@ -118,6 +143,7 @@ covariance eigenvalue ratio in [0.40, 1.70] and radial median ratio in
 
 ```bash
 bash reports/simple-critic/toy100/run.sh ref_matched sec_nodamp secant_r1_b2 sec_nodamp_lazy4 ref_stock
+bash reports/simple-critic/toy100/run.sh c3_r1w c3_capinterp rp_center   # round 5
 tail -f reports/simple-critic/toy100/logs/sec_nodamp.log      # PROBE/EVAL lines, one per observation
 python3 reports/simple-critic/toy100/summarize.py [--detail]
 ```

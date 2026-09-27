@@ -44,6 +44,7 @@ import particlegan  # noqa: E402
 import benchmarks.toy100.train as toy_train  # noqa: E402
 from benchmarks.toy100 import __main__ as toy_main  # noqa: E402
 from worker import SimpleCriticLoss, grad_norm  # noqa: E402  (ring-study critic, unchanged)
+from round5_worker import round5_loss  # noqa: E402  (round-5 terms: cap ends, rate, pair-center)
 
 BASE_CONFIG = ROOT / "configs/toy100/constraints_simple_regularization.json"
 PROBLEMS = ("grid100", "rotated100", "staggered100")
@@ -67,6 +68,18 @@ ARMS = {
     "sec_nodamp_lazy4": dict(kind="simple", d_beta2=0.9, latent_damping=0.0, crit={**SIMPLE, "lazy_k": 4},
                              desc="wgan + r1(1) + path-secant(10,t=.5) + cap-all(10,c=1) [Db2=.9, A2=0, lazy_k=4]"),
 }
+# Round 5: ring B_cap3 ports (cap c=3, critic LR x0.5 via the config's d_lr_mult) plus one change each.
+CAP3 = {**SIMPLE, "cap_target": 3.0}
+R5 = dict(kind="simple", d_beta2=0.9, latent_damping=0.0, cfg={"d_lr_mult": 0.5})
+ARMS.update({
+    "c3_r1w": dict(R5, crit={**CAP3, "lam_real": 0.1},
+                   desc="wgan + r1(0.1) + path-secant(10,t=.5) + cap-all(10,c=3) [Db2=.9, A2=0, critic LR x.5]"),
+    "c3_capinterp": dict(R5, crit={**CAP3, "cap": "interp"},
+                         desc="wgan + r1(1) + path-secant(10,t=.5) + cap-interp(10,c=3) [Db2=.9, A2=0, critic LR x.5]"),
+    "rp_center": dict(R5, crit={**CAP3, "loss": "rplogistic"}, r5={"lam_pair_center": 1.0},
+                      desc="rplogistic + r1(1) + path-secant(10,t=.5) + cap-all(10,c=3) + pair-center(1) "
+                           "[Db2=.9, A2=0, critic LR x.5]"),
+})
 
 
 def arm_config(name: str) -> dict:
@@ -74,14 +87,17 @@ def arm_config(name: str) -> dict:
     cfg["name"] = f"simple-critic/{name}"
     if ARMS[name].get("matched", True):
         cfg.update(input_noise_std=0.0, output_noise_std=0.0, lr_floor=1.0, network_lr_floor=1.0)
+    cfg.update(ARMS[name].get("cfg", {}))
     return cfg
 
 
 class _Crit:
     """Stands in for the trainer's (loss, penalty) pair so GANTrainer.step runs the simple critic."""
 
-    def __init__(self, trainer, spec, log):
-        self.trainer, self.loss_fn = trainer, SimpleCriticLoss(SimpleNamespace(**spec))
+    def __init__(self, trainer, spec, log, r5=None):
+        cls = SimpleCriticLoss if r5 is None else round5_loss(
+            SimpleCriticLoss, SimpleNamespace(**{"lam_rate": 0.0, "lam_pair_center": 0.0, **r5}))
+        self.trainer, self.loss_fn = trainer, cls(SimpleNamespace(**spec))
         self.base_loss = trainer.loss
         self.critic_steps, self.collect_stats, self.last_stats, self.last_terms = 0, False, {}, {}
         self.log = log
@@ -111,7 +127,7 @@ def convert_to_simple(trainer, arm):
     assert opt_d.guard is None and opt_d.ema_critic is None, "critic optimizer must carry no controller"
     trainer.opt_d = opt_d
     trainer.initial_lrs[1] = [g["lr"] for g in opt_d.param_groups]
-    crit = _Crit(trainer, spec["crit"], None)
+    crit = _Crit(trainer, dict(spec["crit"]), None, spec.get("r5", {} if "cfg" in spec else None))
     trainer.loss, trainer.penalty = crit, crit
     return crit
 

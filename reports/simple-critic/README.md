@@ -329,7 +329,110 @@ All ring, seed 0, no noise, constant LRs. Details: [LR_GRID.md](LR_GRID.md), [CU
 - **Curvature hypothesis rejected.** Curvature at reals correlates *positively* with departures (Spearman +0.49) and fails (+0.77); within runs it rises before a pass->fail flip. Forcing a curvature floor (peak margin) makes D cone-like and hurts. Loosening the slope cap to 3 is the only curvature-adjacent change that helps.
 - Without Lipschitz terms (plain wgan + one shape penalty) nothing holds 8 modes.
 
+## Round 5: R1 weight, cap placement, rate penalty, relativistic + centering
+
+Base **B_cap3** (wgan + R1(1) + secant(10, t 0.5, u in [0.1, 0.9]) + cap-all(10, c=3), critic
+Adam β2 0.9, A2 off, LRs critic 0.002125 / G 0.00425 / prior 0.0085). Ring, seed 0, no noise,
+constant LRs, no controller/guard/anchor; one run per formulation. Code: `round5_worker.py`
+(wraps `lr_grid.py` + `worker.py` read-only and reuses `curvature_worker.py`'s diagnostics),
+launcher `round5.sh`, table `round5_table.py`. With the new flags off it reproduces B_cap3
+bit-for-bit: all 10 metrics.jsonl rows over updates 1–100 are identical (losses, LRs, curvature).
+
+Exact forms of the new terms:
+- **cap-ends**: `lam·mean relu(‖∇D(x)‖ − c)²` over the real and fake points only (no path points
+  are built). `cap-interp` (existing) caps only the u ∈ [0.1, 0.9] interpolates.
+- **rate(λ)**: at critic step k, D has θ_k and a frozen copy holds θ_{k−1} (the parameters from
+  before the previous critic step). On the step's own batch,
+  `λ·mean_i[(D_θk(r_i) − D_θk−1(r_i))² + (D_θk(f_i) − D_θk−1(f_i))²]`, gradient only through θ_k.
+  The copy is then overwritten with θ_k. The term is 0 at step 1.
+- **RpGAN** in this repo (`particlegan/gan_loss.py`): critic `mean_i softplus(−(D(r_i) − D(f_i)))`
+  = softplus(D(f) − D(r)) on index-paired real/fake (worker `--loss rplogistic`); generator
+  `mean_i softplus(−(D(f'_i) − D(r_i)))` on fresh fakes. Every simple arm, B_cap3 included, already
+  used this RpGAN generator loss (`--g-loss rpgan` default); only the critic base changes.
+- **pair-center(λ)**: `λ·(mean_i (D(r_i) + D(f_i))/2)²`. RpGAN sees only differences, so this pins
+  D's level.
+
+### Ring (seed 0)
+
+| arm | change vs B_cap3 | prehold | arrival | post-arrival | departures | longest fail streak | fails outside transit | max abs D(real) | max grad | median curv (wide) | median g(real) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| **B_cap3** | — | 82/120 | +140 | 207/207 | 10 | 23 | **38** | 4.59 | 5.94 | 0.19 (0.37) | 0.084 |
+| ref: k3p_constant | K3P v0.8.0, noise off | 88/120 | +360 | 167/185 | 5 | 32 | 50 | 2.63 | 5.81 | 0.14 (0.28) | 0.039 |
+| rp_center | RpGAN critic + pair-center(1) | 66/120 | +300 | **191/191** | **5** | 50 | 54 | 3.21 | 4.88 | 0.09 (0.26) | 0.064 |
+| c3_capinterp | cap on interpolates only | 94/120 | +250 | 164/196 | 20 | 23 | 58 | 5.44 | 5.07 | 0.39 (0.63) | 0.127 |
+| c3_r1w | R1 weight 0.1 | 78/120 | +170 | 167/204 | 15 | 28 | 79 | 6.04 | 6.42 | 1.07 (1.48) | 0.260 |
+| c3_capnopath | cap on real+fake only | 78/120 | +110 | 162/210 | 33 | 34 | 90 | 9.61 | 15.67 | 0.37 (0.65) | 0.155 |
+| c3_rate | + rate(10) | 0/120 | none | – | – | – | 120 | 4.76 | 6.10 | 0.98 (1.58) | 0.196 |
+| rp_center_min | RpGAN + pair-center(1) + cap-all(c=3) only | 8/120 | +610 | 36/160 | 32 | 41 | 236 | 3.01 | 5.44 | 15.9 (13.7) | 1.804 |
+
+k3p_constant curvature is from the observation-only rerun in `diag/`. `summarize.py` ranks
+B_cap3 #1 (unchanged), rp_center #4 and c3_capinterp #7.
+
+**No combo was run.** No arm lowered fails outside transit below 38. rp_center halves departures
+(10 → 5) and has zero post-arrival fails, but it loses prehold (82 → 66) to a single collapse at
+1910 to 2400 (HQ 0.15, 3 modes at 2000). c3_capinterp raises prehold (94) but doubles departures
+(20). Both are clear losses under the combo rule.
+
+### 100 Gaussians gate (full protocol: 7000 updates, seed 1234, grid/rotated/staggered)
+
+New arms port the ring formulation, including critic LR ×0.5 (config `d_lr_mult` 0.5), to
+`toy100/run_arm.py`. Top two ring arms (rp_center, c3_capinterp) plus c3_r1w, which targets the
+flat-D explanation. Matched rows are from earlier runs, not rerun. Note that sec_nodamp has cap
+c=1 and critic LR ×1, so it differs from the new arms in two settings besides the tested change.
+
+| arm | gate | final modes (g/r/s) | final HQ (g/r/s) | cov-eig-ratio min–max (g / r / s) | mass TV (max) | g(real) median ≥1000 | max grad (all / ≥1000) |
+|---|---|---|---|---|---|---|---|
+| rp_center | FAIL | 98/100/100 | **0.973**/0.957/0.969 | 0.18–2.24 / 0.21–1.78 / 0.13–2.02 | 0.062 | 0.009/0.030/0.018 | 4.03 / 3.15 |
+| c3_capinterp | FAIL | 100/100/100 | 0.909/0.908/0.940 | 0.14–3.22 / 0.26–1.89 / 0.20–2.44 | 0.033 | 0.039/0.035/0.051 | 5.53 / 5.53 |
+| c3_r1w | FAIL | 100/100/98 | 0.950/0.938/0.869 | 0.16–1.87 / 0.17–1.74 / 0.29–3.00 | 0.037 | 0.133/0.163/0.155 | 4.85 / 4.27 |
+| sec_nodamp (matched) | FAIL | 100/100/100 | 0.903/0.886/0.954 | 0.17–1.83 / 0.36–2.12 / 0.21–1.76 | 0.039 | 0.029/0.030/0.035 | 5.33 / 1.95 |
+| ref_stock (shipped) | PASS | 100/100/100 | 0.985/0.986/0.989 | 0.62–1.18 / 0.68–1.18 / 0.59–1.29 | – | 0.777/0.579/0.491 | 5.93 / 2.98 |
+| ref_matched | FAIL | 22/92/13 | 0.285/0.856/0.187 | 0.00–5.34 / 0.05–2.20 / 0.00–3.17 | – | 1.324/0.473/0.981 | 122 / 122 |
+
+Gate needs 100 modes, HQ ≥ 0.97 and cov ratio in [0.40, 1.70] over the five terminal checks.
+No arm has a passing live evaluation (0/25 on every problem).
+
+### Which terms matter
+
+- **R1 weight: the flat-D explanation is refuted.** R1 0.1 raises g(real) about 5× on toy100 (0.13
+  to 0.16) but HQ and covariance do not improve, and staggered loses 2 modes. rp_center has the
+  *flattest* D (g(real) 0.009 to 0.03) and the best HQ. On the ring R1 0.1 doubles fails (79), lets
+  |D(real)| reach 6 and ends collapsed (final HQ 0.10). Keep R1(1).
+- **Cap placement: the cap is needed on both kinds of points, for different jobs.** Without path
+  points (c3_capnopath), grad-norm reaches 15.7 and departures triple (33). Without real/fake points
+  (c3_capinterp), prehold improves (94) but departures double (20) and |D(real)| reaches 11 on
+  toy100. cap-all stays the best placement.
+- **Rate penalty: harmful.** At λ 10 the critic cannot track G, and the run never passes (0/120,
+  modes 0 to 4 throughout). The penalty measured D's per-step output change: RMS about 0.3 per
+  point under Adam β1 0, β2 0.9 at LR 0.002. That is large relative to the gap D(r) − D(f) (about
+  0.1 to 0.8). Penalizing it strongly freezes D; the within-run sharpening signal from Round 4 is
+  not fixed by slowing D down.
+- **Relativistic + centering: the only idea with a real gain, but not a strict one.** On the ring,
+  departures fall to k3p's 5 and there are no post-arrival fails. On toy100 it gives the best final
+  HQ of any simple arm (grid 0.973 passes the HQ bar), and |D(real)| stays at 1.25 versus 4.9 to 15
+  for the wgan arms. It still fails covariance shape (min ratio 0.13 to 0.21) and loses 2 modes on
+  grid. The minimal version (no R1, no secant) does not hold: 236 fails and curvature 16. The secant
+  and R1 terms are what make RpGAN work without noise.
+- **Covariance shape is the common toy100 failure.** Every simple arm, and every EMA, has some modes
+  squeezed to lines (min ratio 0.05 to 0.29), whatever D's slope at the reals. This points at the
+  G/particle side (step noise, per-mode width), not at the critic's real term.
+
+### Recommendations (no seed variants, no spectral norm)
+
+1. **Next base: rp_center** (RpGAN critic + pair-center(1) + R1(1) + secant + cap-all c=3). B_cap3
+   stays ring #1 on fails, but rp_center is the only formulation that improves departures on the
+   ring and HQ on toy100 together, and it keeps D smallest. Its one weakness is a single prehold
+   collapse.
+2. On rp_center, attack the prehold collapse with a distinct term rather than weights: for example
+   the margin secant (Next experiments 1), which stops the path term inside a mode and is also aimed
+   at toy100 covariance shape.
+3. Test the G/particle side on toy100 with a lower constant particle LR (prior_lr_mult 1), on
+   rp_center. The EMA covariance failure says the critic alone will not fix shape.
+4. Closed: R1 below 1, cap on only one point set, the temporal rate penalty, RpGAN without R1/secant.
+
 ## Next experiments (distinct formulations, same constraints)
+
+Round 5 closed item 2 (weaker real term); see its recommendations for the current order.
 
 No seed variants and no spectral norm. Closed: secant t = 1, drift, center,
 lazy regularization (fails on all three benchmarks), and the centered combos.
@@ -364,6 +467,8 @@ bash reports/simple-critic/round2.sh a   # int_r1, int_r1_hinge, int_r1_rp, int_
 bash reports/simple-critic/round2.sh b   # secant_r1_b2
 bash reports/simple-critic/round3.sh     # sec_t1, sec_drift, sec_center, sec_nodamp, sec_lazy4, then combo_a, combo_b
 bash reports/simple-critic/toy100/run.sh secant_r1_b2 sec_nodamp sec_nodamp_lazy4 ref_stock ref_matched   # 100-Gaussian gate
+bash reports/simple-critic/round5.sh     # round 5 ring arms (tail logs/{c3_*,rp_*}.log)
+bash reports/simple-critic/toy100/run.sh c3_r1w c3_capinterp rp_center   # round 5 toy100 arms
 # sparse-UCD: on branch sparse-ucd-secant, experiments/sparse_secant.sh
 
 # a single arm (best formulation)
