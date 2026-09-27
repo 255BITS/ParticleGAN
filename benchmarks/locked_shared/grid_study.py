@@ -1,4 +1,5 @@
-"""Run the actual 100-Gaussian example, with separately scored live/EMA curves.
+"""Run the 100-Gaussian example problem on the shared toy runner, with separately
+scored live/EMA curves.
 
     python -m benchmarks.locked_shared.grid_study --output runs/grid_study
 
@@ -15,7 +16,6 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import importlib.util
-import inspect
 import json
 import math
 import os
@@ -26,16 +26,13 @@ import traceback
 
 import torch
 
-from lib.denoising_toy import GaussianGrid, grid_metrics
-from lib.toy_metrics import per_mode_moments
-from lib.toy_models import mode_coverage
+from benchmarks.toy_runner import run as toy_run
 from .baseline import digest, protocol as behavioral_protocol, score_metrics, write_json
 from .observation import sustained
 
 TOTAL_STEPS = 7000
 INTERVAL = 250
 N_EVAL = 20_000
-EVAL_SEED = 999
 STD = 0.03
 REQUIREMENTS = [("modes", ">=", 100), ("hq", ">=", 0.90)]
 EXPECTED_STEPS = list(range(INTERVAL, TOTAL_STEPS + 1, INTERVAL))
@@ -63,16 +60,19 @@ def load_example():
     return module
 
 
-def synchronize(device):
-    if device.type == "cuda":
-        torch.cuda.synchronize(device)
+def arm_recipe(overrides):
+    """The example problem's own recipe at this study's shape, plus the arm's
+    recipe-field overrides (none for the single ``stock`` arm)."""
+    shape = dict(batch_size=256, num_particles=20_000, total_steps=TOTAL_STEPS)
+    return load_example().Gaussians100().recipe().replace(**{**shape, **overrides})
 
 
 def make_protocol(device):
     base = behavioral_protocol()
     root = Path(__file__).resolve().parents[2]
     hashes = dict(base["source_sha256"])
-    dependencies = [root / "examples" / "100gaussians.py", *sorted((root / "lib").rglob("*.py"))]
+    dependencies = [root / "examples" / "100gaussians.py", root / "benchmarks" / "toy_runner.py",
+                    *sorted((root / "lib").rglob("*.py"))]
     for path in dependencies:
         hashes[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()
     gpu = None
@@ -80,7 +80,8 @@ def make_protocol(device):
         properties = torch.cuda.get_device_properties(device)
         gpu = {"name": properties.name, "index": device.index if device.index is not None else torch.cuda.current_device(),
                "total_memory": properties.total_memory, "capability": [properties.major, properties.minor]}
-    return {"version": "actual-100gaussians-v1", "training_entrypoint": "examples/100gaussians.py:train",
+    return {"version": "actual-100gaussians-v2-toy-runner",
+            "training_entrypoint": "benchmarks/toy_runner.py:run(examples/100gaussians.py:Gaussians100)",
             "seed": 0, "device": str(device), "gpu": gpu,
             "torch": str(torch.__version__), "cuda_runtime": torch.version.cuda,
             "cudnn": torch.backends.cudnn.version(), "python": platform.python_version(),
@@ -90,27 +91,13 @@ def make_protocol(device):
             "float32_matmul_precision": torch.get_float32_matmul_precision(),
             "platform": platform.platform(), "threads": torch.get_num_threads(),
             "total_steps": TOTAL_STEPS, "batch_size": 256, "num_particles": 20_000,
-            "fourier": 2, "evaluation_samples": N_EVAL, "evaluation_seed": EVAL_SEED,
+            "fourier": 2, "evaluation_samples": N_EVAL, "evaluation_seed": "runner eval stream (seed + 9)",
             "std": STD, "coverage_min_count": 10, "requirements": REQUIREMENTS,
             "expected_steps": EXPECTED_STEPS, "minimum_passing_suffix": 5,
-            "evaluation": "fresh independent device Generator(seed=999) for each live/EMA measurement",
-            "timing": "wall seconds include setup and evaluation; training seconds exclude callback/maintenance",
+            "evaluation": "the runner's evaluation stream, restarted for each live/EMA measurement",
+            "timing": "wall seconds include setup and evaluation",
             "distribution_metrics": "grid_metrics plus per_mode_moments, min_count=20; diagnostic only",
             "source_sha256": hashes}
-
-
-def resolved_kwargs(example, output, name, device, overrides):
-    parameters = inspect.signature(example.train).parameters
-    required = {"metric_callback", "metric_interval", "save_plots"}
-    if not required <= parameters.keys():
-        raise RuntimeError(f"example train is missing measurement arguments: {sorted(required - parameters.keys())}")
-    values = {key: p.default for key, p in parameters.items() if p.default is not inspect.Parameter.empty}
-    values.update(epochs=7, steps_per_epoch=1000, batch_size=256, num_particles=20_000,
-                  fourier=2, seed=0, device_str=str(device), out_dir=str(output / name),
-                  return_details=True, metric_interval=INTERVAL, save_plots=False)
-    values.update(overrides)
-    values["metric_callback"] = "benchmarks.locked_shared.grid_study:checkpoint_callback"
-    return values
 
 
 def convergence(row, kind):
@@ -120,7 +107,6 @@ def convergence(row, kind):
     for key in ("first_pass", "stable_from", "confirmed"):
         point = by_step.get(result.get(key + "_step"), {})
         result[key + "_seconds"] = point.get("seconds")
-        result[key + "_train_seconds"] = point.get("train_seconds")
     return result
 
 
@@ -142,9 +128,9 @@ def fmt(value, spec=".3f"):
 
 def render(report, destination):
     lines = ["# Actual 100-Gaussian comparison", "",
-             "Runs the existing `examples/100gaussians.py` trainer: seed 0, 7,000 updates, 20,000 particles, "
+             "Runs the `examples/100gaussians.py` problem on `benchmarks/toy_runner.py`: seed 0, 7,000 updates, 20,000 particles, "
              "batch 256, Fourier 2. Arms run sequentially on the same device. Each checkpoint evaluates "
-             "20,000 fresh fixed-seed draws separately for live and EMA weights.", "",
+             "20,000 draws from the runner's restarted evaluation stream, separately for live and EMA weights.", "",
              "**100-Gaussian coverage/HQ PASS means all 100 modes have at least 10 HQ samples and HQ ≥90% at the final step. "
              "It does not certify the nine-toy suite or distributional calibration.** A stable suffix requires at least "
              "five consecutive passing observations through step 7,000, with the entire 250-step observation schedule present.", "",
@@ -159,20 +145,20 @@ def render(report, destination):
         lines.append(f"| `{row['name']}` | {fmt(live.get('modes'), '.0f')}/100 | {fmt(live.get('hq'), '.2%')} | "
                      f"{fmt(worst, '.2%')} | {coverage_status(row, 'live')} | {fmt(ema.get('modes'), '.0f')}/100 | {fmt(ema.get('hq'), '.2%')} |")
     lines += ["", "First-pass, stable-start and confirmation are observed checkpoint steps, not interpolated convergence times. "
-              "Stable-start is retrospective: every later observation must pass. Wall time includes setup and measurement; "
-              "training time excludes callbacks and maintenance. Throughput uses training time.", "",
-              "| Arm / weights | First pass | Stable from | Confirmed | Stable wall / train sec | Final train sec | Updates/sec |",
+              "Stable-start is retrospective: every later observation must pass. Wall time includes setup and measurement, "
+              "so updates/sec is a lower bound on training throughput.", "",
+              "| Arm / weights | First pass | Stable from | Confirmed | Stable wall sec | Final wall sec | Updates/sec |",
               "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for row in report["rows"]:
         for kind in ("live", "ema"):
             summary = convergence(row, kind)
-            train_seconds = row.get("train_seconds")
-            throughput = TOTAL_STEPS / train_seconds if row.get("finished") and isinstance(train_seconds, (int, float)) and train_seconds > 0 else None
+            seconds = row.get("seconds")
+            throughput = TOTAL_STEPS / seconds if row.get("finished") and isinstance(seconds, (int, float)) and seconds > 0 else None
             lines.append(f"| `{row['name']}` / {kind} | {fmt(summary['first_pass_step'], '.0f')} | "
                          f"{fmt(summary['stable_from_step'], '.0f')} | {fmt(summary['confirmed_step'], '.0f')} | "
-                         f"{fmt(summary['stable_from_seconds'], '.1f')} / {fmt(summary['stable_from_train_seconds'], '.1f')} | "
-                         f"{fmt(train_seconds, '.1f')} | {fmt(throughput, '.1f')} |")
-    lines += ["", "Final distribution diagnostics use separate fixed-seed 20,000-sample fake and real draws, isolated from training. "
+                         f"{fmt(summary['stable_from_seconds'], '.1f')} | "
+                         f"{fmt(seconds, '.1f')} | {fmt(throughput, '.1f')} |")
+    lines += ["", "Final distribution diagnostics use 20,000 fake and real draws from the runner's evaluation stream, isolated from training. "
               "Width and core ratios near 1 indicate matching scale; covariance ratios expose collapsed axes. "
               "TV and SW1 are lower-is-better. These measurements have no tuned PASS threshold. "
               "Width/core summaries omit modes with fewer than 20 samples; audited counts are shown.", "",
@@ -184,9 +170,9 @@ def render(report, destination):
             lines.append(f"| `{row['name']}` / {kind} | {fmt(metrics.get('per_mode_std_ratio'))} / {fmt(metrics.get('per_mode_core_ratio'))} | "
                          f"{fmt(metrics.get('per_mode_cov_eig_min_ratio'))} / {fmt(metrics.get('per_mode_cov_eig_max_ratio'))} | "
                          f"{fmt(metrics.get('per_mode_cov_audited_modes'), '.0f')} | {fmt(metrics.get('mode_tv'))} | {fmt(metrics.get('sw1'))} |")
-    lines += ["", "`stock` is the example's own recipe; only the task shape and measurement hooks are set here. "
-              "Its optimizers apply the recipe's LR schedule.", "",
-              "Exact resolved arguments, source hashes, curves, convergence times and raw diagnostics are in [results.json](results.json). "
+    lines += ["", "`stock` is the example's own recipe; only the task shape (batch, particles, budget) "
+              "is set here. Its optimizers apply the recipe's LR schedule.", "",
+              "Exact resolved recipes, source hashes, curves, convergence times and raw diagnostics are in [results.json](results.json). "
               "Nonfinite values become null and cannot pass. Missing observations cannot certify stability.", ""]
     for row in report["rows"]:
         if row.get("error"):
@@ -194,24 +180,7 @@ def render(report, destination):
     destination.write_text("\n".join(lines))
 
 
-@torch.no_grad()
-def distribution_metrics(generator, prior, device):
-    previous_mode = generator.training
-    generator.eval()
-    try:
-        rng = torch.Generator(device=device).manual_seed(EVAL_SEED)
-        fake = generator(prior.sample(N_EVAL, generator=rng)[0])
-        toy = GaussianGrid(device=device, std=STD, classes=1)
-        labels = torch.zeros(N_EVAL, dtype=torch.long, device=device)
-        real = toy.sample(labels, torch.Generator(device=device).manual_seed(EVAL_SEED))
-        values = grid_metrics(fake, labels, toy, real, seed=EVAL_SEED)
-        values.update(per_mode_moments(fake, min_count=20, std=STD))
-        return json_safe(values)
-    finally:
-        generator.train(previous_mode)
-
-
-def run(output, device, *, training_api=False):
+def run(output, device):
     output = Path(output)
     if (output / "results.json").exists():
         raise FileExistsError(f"refusing to overwrite {output / 'results.json'}")
@@ -225,9 +194,9 @@ def run(output, device, *, training_api=False):
     report = {"created_at": datetime.now(timezone.utc).isoformat(), "protocol": fingerprint,
               "protocol_sha256": digest(fingerprint), "rows": []}
     for name, overrides in ARMS:
-        kwargs = resolved_kwargs(example, output, name, device, {**overrides, "use_training_api": training_api})
-        report["rows"].append({"name": name, "overrides": overrides, "kwargs": kwargs,
-                               "config_sha256": digest(kwargs), "curve": []})
+        recipe = arm_recipe(overrides).to_dict()
+        report["rows"].append({"name": name, "overrides": overrides, "recipe": recipe,
+                               "config_sha256": digest(recipe), "curve": []})
     output.mkdir(parents=True, exist_ok=True)
 
     def save():
@@ -239,57 +208,49 @@ def run(output, device, *, training_api=False):
     save()
     for row in report["rows"]:
         print(f"START 100gaussians arm={row['name']} steps={TOTAL_STEPS} device={device}", flush=True)
-        synchronize(device)
         started = time.perf_counter()
+        # Distribution diagnostics are final-only: switched on after the last
+        # checkpoint, so only the runner's final live/EMA measurements pay for them.
+        problem = example.Gaussians100(distribution=False)
 
-        @torch.no_grad()
-        def checkpoint_callback(step, generator, prior, ema_generator, ema_prior, train_seconds):
-            if step not in EXPECTED_STEPS or (row["curve"] and step <= row["curve"][-1]["step"]):
-                raise ValueError(f"unexpected or duplicate evaluation step {step}")
-            point = {"step": step, "train_seconds": float(train_seconds)}
-            for kind, model, latent in (("live", generator, prior), ("ema", ema_generator, ema_prior)):
-                modes, hq = mode_coverage(model, latent, device, n_eval=N_EVAL, std=STD, min_count=10,
-                                         sample_generator=torch.Generator(device=device).manual_seed(EVAL_SEED))
-                point[kind] = json_safe({"modes": modes, "hq": hq})
-            synchronize(device)
+        def checkpoint(step, measure):
+            if step not in EXPECTED_STEPS:
+                return
+            point = {"step": step}
+            for kind in ("live", "ema"):
+                values = measure(ema=kind == "ema")
+                point[kind] = json_safe({"modes": values["modes"], "hq": values["hq"]})
             point["seconds"] = time.perf_counter() - started
             row["curve"].append(point)
             save()
             print(json.dumps({"event": "100G_CHECKPOINT", "arm": row["name"], **point}, allow_nan=False), flush=True)
+            if step == TOTAL_STEPS:
+                problem.distribution = True
 
-        kwargs = dict(row["kwargs"], metric_callback=checkpoint_callback)
-        details = None
         try:
-            details = example.train(**kwargs)
-            row["train_seconds"] = float(details["train_seconds"])
-            row["trainer_total_seconds"] = float(details["total_seconds"])
-            row["distribution"] = {
-                "live": distribution_metrics(details["G"], details["prior"], device),
-                "ema": distribution_metrics(details["ema_G"], details["ema_prior"], device),
-            }
-            synchronize(device)
+            result = toy_run(problem, recipe=arm_recipe(row["overrides"]),
+                             seed=0, device=device, observe_every=TOTAL_STEPS, observer=checkpoint,
+                             log_path=output / f"{row['name']}.log")
+            row["distribution"] = {kind: json_safe(result[kind]["distribution"]) for kind in ("live", "ema")}
             row["finished"] = True
         except Exception:
             row["error"] = traceback.format_exc()
         finally:
-            synchronize(device)
             row["seconds"] = time.perf_counter() - started
             save()
             print(f"DONE 100gaussians arm={row['name']} live={coverage_status(row, 'live')} "
                   f"ema={coverage_status(row, 'ema')} wall_seconds={row['seconds']:.1f}", flush=True)
-            del details
     return report
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--device", default="cuda")
-    parser.add_argument("--training-api", action="store_true", help="Benchmark the public GANTrainer on the same reference task.")
+    parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
     from benchmarks.toy100.device import apply_device_policy
     apply_device_policy(args.device, log=True)
-    report = run(args.output, torch.device(args.device), training_api=args.training_api)
+    report = run(args.output, torch.device(args.device))
     return 0 if all(row.get("finished") for row in report["rows"]) else 1
 
 

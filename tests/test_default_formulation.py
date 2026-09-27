@@ -63,14 +63,11 @@ def test_reference_discriminator_rejects_invalid_dimensions(kwargs):
         LinearSkipDiscriminator(**kwargs)
 
 
-def test_grid_study_trains_the_example_on_its_own_recipe(tmp_path):
-    import inspect
-    from benchmarks.locked_shared.grid_study import load_example, resolved_kwargs
+def test_grid_study_trains_the_example_on_its_own_recipe():
+    from benchmarks.locked_shared.grid_study import ARMS, arm_recipe, load_example
 
-    example = load_example()
-    kwargs = resolved_kwargs(example, tmp_path, 'stock', 'cpu', {})
-    defaults = {k: p.default for k, p in inspect.signature(example.train).parameters.items()}
-    # Only task shape and measurement hooks are set; every optimizer/penalty
-    # hyperparameter is the example recipe's own default.
-    for key in ('lr', 'd_lr_mult', 'prior_lr_mult', 'beta1', 'beta2', 'reg_coeff', 'reg_kappa', 'lambda_ep'):
-        assert kwargs[key] == defaults[key], key
+    assert ARMS == (("stock", {}),)
+    # Only task shape is set; every optimizer/penalty field is the example recipe's own.
+    own = load_example().Gaussians100().recipe().to_dict()
+    changed = {k for k, v in arm_recipe({}).to_dict().items() if v != own[k]}
+    assert changed <= {"batch_size", "num_particles", "total_steps"}
