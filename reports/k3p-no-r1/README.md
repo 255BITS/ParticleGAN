@@ -101,3 +101,5 @@ dvalcap, with settle none, hinge or oadam) trains img_bars4 with no gradient pen
 
 - `SCREEN.md`: the 20-arm screen on 7 tasks. `AUDIT.md` audits it.
 - `SUITE.md`: the full 26-task suite for the screen top 3, plus a reg_coeff 1.0 check (`<arm>_c1`, launched by `full.sh`).
+- `EMA_R1.md`: R1 centred on the EMA critic's slope, w * mean ||grad D(r) - beta grad Dbar(r)||^2 / d (settle `emar1`,
+  `arms_e1.json`), swept over beta, decay and weight. No beta > 0 beats R1.

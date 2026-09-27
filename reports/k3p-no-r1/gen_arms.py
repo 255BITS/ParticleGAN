@@ -55,7 +55,9 @@ def main():
 E1_GRID = [(0.0, 0.999, 1.0),                                           # control: must reproduce gs2
            (0.5, 0.999, 1.0), (0.8, 0.999, 1.0), (0.95, 0.999, 1.0), (1.0, 0.999, 1.0),  # beta sweep
            (1.0, 0.99, 1.0), (1.0, 0.9, 1.0),                            # decay at beta 1
-           (1.0, 0.999, 3.0), (1.0, 0.999, 10.0)]                        # weight at beta 1
+           (1.0, 0.999, 3.0), (1.0, 0.999, 10.0),                        # weight at beta 1
+           (0.5, 0.9, 1.0),     # follow-up: the only ring-clean beta (.5) x the only cov-keeping decay (.9)
+           (0.2, 0.999, 1.0)]   # follow-up: does any beta > 0 keep gs2's covariance at decay .999?
 
 
 def e1_name(beta, decay, weight):

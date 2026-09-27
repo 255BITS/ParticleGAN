@@ -270,6 +270,66 @@
     "beta": 1.0,
     "guard_buffer": "exp_avg_sq"
    }
+  },
+  "e1_b0.5_d0.9_w1": {
+   "formulation": "gs2_c03_lr2_d05 with R1 on reals replaced by EMA-centred R1: w * mean ||grad D(r) - beta * grad Dbar(r)||^2 / d, beta 0.5, Dbar = K3P parameter-EMA critic (decay 0.9) forced on from step 0 at constant LR, w 1. Fake one-sided RMS cap unchanged; (reg_coeff/2)-scaled. Spike guard reads exp_avg_sq as in gs2.",
+   "critic": "k3p",
+   "base": "gs2_c03_lr2_d05",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_anchor_decay": 0.9
+   },
+   "nr": {
+    "spike": "none",
+    "settle": "emar1",
+    "beta": 0.5,
+    "guard_buffer": "exp_avg_sq"
+   }
+  },
+  "e1_b0.2_d0.999_w1": {
+   "formulation": "gs2_c03_lr2_d05 with R1 on reals replaced by EMA-centred R1: w * mean ||grad D(r) - beta * grad Dbar(r)||^2 / d, beta 0.2, Dbar = K3P parameter-EMA critic (decay 0.999) forced on from step 0 at constant LR, w 1. Fake one-sided RMS cap unchanged; (reg_coeff/2)-scaled. Spike guard reads exp_avg_sq as in gs2.",
+   "critic": "k3p",
+   "base": "gs2_c03_lr2_d05",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_anchor_decay": 0.999
+   },
+   "nr": {
+    "spike": "none",
+    "settle": "emar1",
+    "beta": 0.2,
+    "guard_buffer": "exp_avg_sq"
+   }
   }
  }
 }

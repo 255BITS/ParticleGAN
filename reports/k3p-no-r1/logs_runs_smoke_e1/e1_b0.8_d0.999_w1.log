@@ -1,0 +1,6 @@
+# 2026-09-27 10:21:24 arm=e1_b0.8_d0.999_w1 device=cuda:0 tasks=4 steps=300
+10:21:34 toy-two_pole           PASS  passing suffix=13/24 | confirmed 54 mean_abs=1.18 grad_med=0.099 | 4s rc=0
+10:21:42 ring8-shift            FAIL  fails outside transit=None | no shift in budget | 13s rc=0
+10:21:46 native-grid100         FAIL  final modes/HQ=78/0.736 | coverage FAIL accuracy FAIL first100 None massTV 0.060250000000000005 | 16s rc=0
+10:21:48 toy-img_bars4          FAIL  passing suffix=3/24 | confirmed None modes=4 hq=1 | 18s rc=0
+# 2026-09-27 10:21:48 arm=e1_b0.8_d0.999_w1 finished
