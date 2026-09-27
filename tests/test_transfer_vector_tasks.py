@@ -61,9 +61,31 @@ def test_partial_center_collapse_cannot_hide_behind_average_covariance():
     assert not vectors.passes(result, spec["thresholds"])
 
 
-def test_overlap_rejects_unidentifiable_component_requirements():
+def test_far_outliers_are_spill_not_anisotropic_shape():
+    spec = next(x for x in vectors.TASKS if x["family"] == "anisotropic")
+    samples = vectors.sample_target(spec, 4096, torch.Generator().manual_seed(993), spec["steps"])
+    means = torch.tensor(spec["means"])
+    first = (torch.cdist(samples, means).argmin(1) == 0).nonzero().squeeze(1)
+    # 8% of component 0 moved 1.5-2.5 units off its mean: still nearest to it, far outside 4 sigma.
+    stray = first[:int(.08*len(first))]
+    offsets = torch.linspace(1.5, 2.5, len(stray))
+    samples[stray] = means[0] + torch.stack([torch.zeros_like(offsets), -offsets], 1)
+    result = vectors.score_samples(samples, spec, spec["steps"])
+    old_bounds = [["component_covariance_error", "<=", .85], ["component_min_eigen_ratio", ">=", .15]]
+    core_bounds = [x for x in spec["thresholds"] if x[0] != "max_component_spill"]
+    assert result["component_covariance_errors"][0] > 2.6
+    assert not vectors.passes(result, old_bounds)
+    assert result["component_core_covariance_error"] <= .2
+    assert vectors.passes(result, core_bounds)
+    assert result["max_component_spill"] == pytest.approx(result["component_spill"][0]) and result["max_component_spill"] > .05
+    assert not vectors.passes(result, spec["thresholds"])
+
+
+@pytest.mark.parametrize("key", ["component_core_covariance_error", "component_core_min_eigen_ratio",
+                                 "max_component_spill", "mass_tv"])
+def test_overlap_rejects_unidentifiable_component_requirements(key):
     spec = deepcopy(next(x for x in vectors.TASKS if x["family"] == "overlapping"))
-    spec["thresholds"].append(["mass_tv", "<=", .15])
+    spec["thresholds"].append([key, "<=", .15])
     with pytest.raises(ValueError, match="overlapping"):
         vectors.resolve(spec)
 
