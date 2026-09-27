@@ -7,7 +7,9 @@ import numpy as np
 import torch
 
 from particlegan import init
-from experiments.train_transition import DEFAULTS, train, training_recipe, generator_loss, discriminator_loss
+from benchmarks.toy_runner import ToyRun
+from examples.transition_gan import TransitionGAN
+from experiments.train_transition import DEFAULTS, train, training_recipe
 from lib.transition import (TransitionEncoder, TransitionGenerator, TransitionCritics, TransitionScaler,
                             encoded_transition, composed_transition, Transitions)
 
@@ -55,18 +57,24 @@ class EncoderTests(unittest.TestCase):
         torch.testing.assert_close(st, sn)
         torch.testing.assert_close(cn[:, -1], ct[:, -1]+1/63)
         torch.testing.assert_close(cn[:, :3], ct[:, :3])
-        fake = torch.randn(8, 6, requires_grad=True)
-        loss, terms = generator_loss(d, x, fake, self.c, self.context, self.recipe.make_loss(), 1.)
-        torch.testing.assert_close(loss, terms['joint']+(terms['state']+terms['action']+terms['next_state'])/3)
-        loss.backward()
-        self.assertGreater(float(fake.grad[:, 4:].norm()), 0)
-        rngs = {name: torch.Generator().manual_seed(20+i) for i, name in enumerate(d.roles())}
-        opt_d = self.recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
-        loss, _ = discriminator_loss(d, x, fake.detach(), self.c, self.context, self.recipe.make_loss(),
-                                     {name: self.recipe.make_critic_penalty(opt_d, kappa=0)
-                                      for name, rng in rngs.items()}, 1.)
-        d.zero_grad(); loss.backward()
-        self.assertTrue(all(p.grad is not None and torch.isfinite(p.grad).all() for p in d.parameters()))
+        run = ToyRun(TransitionGAN(width=8, d_width=16, marginal_width=8, encoder_width=8, num_particles=32,
+                                   batch_size=8, steps=4, normalization_samples=256))
+        problem, nets = run.problem, run.nets
+        self.assertEqual(sorted(nets.critics), ["action", "joint", "state"])
+        real = problem.real(8, torch.Generator().manual_seed(3))
+        fake = problem.fake(nets, 8, torch.Generator().manual_seed(4), real)
+        views = problem.views(nets, real, fake)
+        # Mean of the prior and composed paths; joint + mean of three roles, next_state on the state critic.
+        self.assertEqual([(v.critic, v.weight) for v in views],
+                         2*[("joint", .5), ("state", .5/3), ("action", .5/3), ("state", .5/3)])
+        torch.testing.assert_close(views[4].fake[:, :4], fake.x[:, :4])
+        self.assertEqual(set(problem.losses("generator", nets, real, fake)),
+                         {"prior_spread", "real_mse", "synthetic_mse"})
+        before = [copy.deepcopy(p) for p in nets.encoder.parameters()]
+        losses = run.step()
+        self.assertTrue(all(torch.isfinite(v).all() for v in losses.values() if torch.is_tensor(v)))
+        self.assertTrue(any(not torch.equal(a, b) for a, b in zip(before, nets.encoder.parameters())))
+
 
     def test_encoder_training_checkpoint_replays_both_paths(self):
         for shared in (False, True):
