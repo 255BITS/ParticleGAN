@@ -186,10 +186,14 @@ def run_toy(toy, cfg, *, noise_policy=None):
             raw = unipolar.run_arm("locked_rpgan", noise_policy=noise_policy,
                                    **{k: knobs[k] for k in ("loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")})
         elif toy == "ae_gan_hold":
-            options = {k: v for k, v in knobs.items() if k in ae_gan_hold.HoldConfig.__dataclass_fields__}
-            raw = ae_gan_hold.train(ae_gan_hold.HoldConfig(name=cfg.name, lr=ae_gan_hold.LR * cfg.lr_multiplier, **options),
-                                    noise_policy=noise_policy)
-            raw.pop("cfg", None)
+            # Problem-only toy on the shared runner (as mode_hold): only the
+            # candidate's host loss weights apply; optimizers, loss, penalty,
+            # LR schedule and noise come from its recipe.
+            if noise_policy is not None:
+                raise ValueError("ae_gan_hold takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = ae_gan_hold.train_ae_gan_hold(ae_gan_hold.AEGanHold(particle_l2=cfg.particle_l2,
+                                                                      cover_weight=cfg.cover_weight))
+            raw.pop("curve", None)
         elif toy == "cover_leftover":
             raw = cover_leftover.fit_cover_leftover(cover_leftover.CoverRecipe(),
                                                     noise_policy=noise_policy)

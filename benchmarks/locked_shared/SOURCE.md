@@ -11,7 +11,7 @@ The MIT notice is retained in [LICENSE](LICENSE).
 | `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, 1,200 steps, coverage/HQ metrics and verdict. Problem only: optimizers, LR schedule, loss, penalty, prior, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
 | `hosts/residual_student.py` | `residual_student.py` | Conditional residual head, landing objective and all three measured landing/identity bounds |
 | `hosts/unipolar.py` | `unipolar.py` | Positive-pole training, neutral hold, leakage and coverage |
-| `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | AE encoder/decoder training, reconstruction and unconditional hold |
+| `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | Two-anchor data, encoder/decoder/critic MLPs, reconstruction, particle-L2 and anchor-cover terms, 250 steps, reconstruction/hold metrics. Problem only on `benchmarks/toy_runner.py` (shipped `ae_gan` recipe), so its `host_reference.py` parity no longer holds |
 | `hosts/cover_leftover.py` | `cover_leftover.py` | Guarded teacher, particles, live/EMA residual geometry and all six bounds |
 | `hosts/unused_token_hold.py` | `unused_token_hold.py` | Slot student, concept training and unused-slot hold |
 | `hosts/mid_scale_identity.py` | `mid_scale_identity.py` | Four-scale training, polarity/magnitude and identity checks |
