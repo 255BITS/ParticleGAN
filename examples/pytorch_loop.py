@@ -10,7 +10,7 @@ the same update GANTrainer performs, with the control flow in your hands:
 * critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
 * ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``: Adam
   optimizers whose ordinary ``step()`` does the recipe's step-time work
-  (currently K3P: spike guard, EMA-critic update, A2 latent damping),
+  (currently KA2: spike guard, EMA-critic update, A2 latent damping),
 * ``recipe.make_critic_penalty(opt_d)``: the critic penalty, added to the
   critic loss like any other term.
 

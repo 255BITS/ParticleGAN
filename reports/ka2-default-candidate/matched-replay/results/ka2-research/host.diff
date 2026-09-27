@@ -1,0 +1,28 @@
+--- frozen/train_mode_hold
++++ research/train_mode_hold
+@@ -40,6 +40,7 @@
+     if noise_policy is not None:
+         noise_policy.register_generator_optimizer(opt_g, opt_d)
+     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
++    _matched_capture(generator, critic, prior, stream, noise_policy)
+     batch = BATCH if training_recipe is None else training_recipe.batch_size
+     ema_g = [p.detach().clone() for p in generator.parameters()]
+     ema_z = prior.z.detach().clone()
+@@ -97,7 +98,7 @@
+         opt_d.zero_grad()
+         d_loss.backward()
+         schedule_optimizer(opt_d, step)
+-        opt_d.step()
++        _matched_audit_step(opt_d, "d", d_loss)
+ 
+         latent, _ = prior.sample(batch, generator=stream)
+         fake = generator(latent)
+@@ -116,7 +117,7 @@
+         opt_g.zero_grad()
+         g_loss.backward()
+         schedule_optimizer(opt_g, step)
+-        opt_g.step()
++        _matched_audit_step(opt_g, "g", g_loss)
+         with torch.no_grad():
+             for ema, param in zip(ema_g, generator.parameters()):
+                 ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)

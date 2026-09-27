@@ -79,7 +79,7 @@ update, rather than noisy or standardized draws. `prior.json` records calibratio
 
 The task keeps 28,000 updates and batch 256. The current shared recipe uses
 Rp logistic, G/D LR .00425, particle LR .0085, Adam (0,.99), spread .05,
-the K3P critic penalty (coefficient 1, κ 1) and EMA .995. Rates hold for 60%, then cosine to 5%.
+the KA2 critic penalty (coefficient 1, κ 1) and EMA .995. Rates hold for 60%, then cosine to 5%.
 Historical tables below used the earlier explicit MoG study settings; their
 reported scores do not establish results for the new shared default.
 

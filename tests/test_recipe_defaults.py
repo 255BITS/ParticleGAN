@@ -15,9 +15,9 @@ def without_name(values):
     return {key: value for key, value in values.items() if key != 'name'}
 
 
-def test_default_matches_every_recorded_winning_field():
-    # The frozen K3P config ran arm a_r1r2 under the K3P patch; the package
-    # has no arm/loss switches: K3P and RpGAN logistic are the formulation.
+def test_default_preserves_frozen_ka2_shared_configuration():
+    # KA2 keeps the frozen K3P config, latent and response files byte-identical.
+    # The changed critic mechanism is verified separately by source parity tests.
     actual = json.loads(json.dumps(get_recipe().to_dict()))
     assert not {'reg_arm', 'loss_type', 'gan_mode', 'reg_method'} & set(actual)
     assert (K3P_CONFIG['loss_type'], K3P_CONFIG['gan_mode']) == ('logistic', 'rp')
@@ -25,7 +25,9 @@ def test_default_matches_every_recorded_winning_field():
     assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
     assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
             'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared
-    assert actual['name'] == 'k3p'
+    assert actual['name'] == 'ka2'
+    assert actual['reg_anchor_min_decay'] == .90
+    assert 'reg_anchor_decay' not in actual
     assert get_recipe() == Recipe()
 
 
@@ -53,7 +55,7 @@ def test_named_components_share_current_training_hyperparameters(name, model, pr
     assert (recipe.model, recipe.prior_kind, recipe.encoder_mode, recipe.conditioning) == (
         model, prior, encoder, conditioning)
     fields = ('lr', 'd_lr_mult', 'prior_lr_mult', 'betas', 'prior_betas',
-              'reg_coeff', 'reg_kappa', 'reg_every', 'reg_anchor_weight',
+              'reg_coeff', 'reg_kappa', 'reg_every', 'reg_anchor_weight', 'reg_anchor_min_decay',
               'direct_particle_gain', 'prior_reg', 'ema_decay',
               'lr_anneal_start', 'lr_floor', 'total_steps')
     for field in fields:
@@ -63,7 +65,7 @@ def test_named_components_share_current_training_hyperparameters(name, model, pr
     assert Recipe(**recipe.to_dict()) == recipe
 
 
-@pytest.mark.parametrize('name', ['gan_v1', 'gan_v2', 'gan_v3', 'gan_legacy', 'unknown'])
+@pytest.mark.parametrize('name', ['gan_v1', 'gan_v2', 'gan_v3', 'gan_legacy', 'k3p', 'ka2', 'unknown'])
 def test_historical_versions_are_not_selectable(name):
     with pytest.raises(ValueError, match='Unknown recipe'):
         get_recipe(name)

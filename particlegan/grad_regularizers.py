@@ -1,8 +1,8 @@
-"""The critic gradient penalty kernel (K3P) and the per-critic step record it reads.
+"""Historical K3P penalty and step record, also used as KA2 base classes.
 
-Users do not build these directly: ``recipe.make_critic_penalty(opt_d)``
-pairs a ``GradientPenalty`` with the ``CriticStepRecord`` and EMA critic kept
-by the recipe's critic optimizer. See ``docs/k3p.md`` for the formulation.
+The active public ``recipe.make_critic_penalty(opt_d)`` factory constructs
+the KA2 subclass in ``particlegan.ka2``. The original classes here preserve
+K3P research replay and provide shared gradient/lazy-application machinery.
 """
 
 from typing import Any, Callable, Dict, Optional, Tuple

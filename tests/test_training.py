@@ -42,7 +42,7 @@ def assert_checkpoint_equal(left, right):
 def test_winning_recipe_is_the_common_default():
     assert get_recipe() == Recipe()
     winner = get_recipe()
-    assert winner.name == 'k3p'
+    assert winner.name == 'ka2'
     assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., 1., 0.)
     assert (winner.reg_anchor_weight, winner.direct_particle_gain) == (1., True)
     assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)
@@ -83,20 +83,29 @@ def test_freeze_restored_when_generator_callback_raises():
     assert [p.requires_grad for p in trainer.D.parameters()] == flags
 
 
-def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
+@pytest.mark.parametrize("schema", [1, 2, 3])
+def test_old_formulation_checkpoints_are_rejected_before_mutating_state(schema):
     trainer = make_trainer()
     trainer.step(torch.randn(6, 2))
     checkpoint = trainer.state_dict()
-    recipe = dict(checkpoint["recipe"])
-    for key in ("reg_anchor_weight", "direct_particle_gain"):
-        del recipe[key]
-    old = {**checkpoint, "recipe": {**recipe, "loss_type": "logistic", "gan_mode": "rp",
-                                    "reg_arm": "k3p", "reg_method": "autograd"}}
-    restored = make_trainer()
-    restored.load_state_dict(old)
-    assert restored.completed_steps == 1
-    with pytest.raises(ValueError, match="recipe"):
-        make_trainer().load_state_dict({**old, "recipe": {**old["recipe"], "reg_arm": "b_cap"}})
+    old = {**checkpoint, "schema": schema}
+    before = trainer.state_dict()
+    with pytest.raises(ValueError, match="K3P|older|schema"):
+        trainer.load_state_dict(old)
+    assert_checkpoint_equal(before, trainer.state_dict())
+
+
+def test_disguised_k3p_optimizer_is_rejected_without_mutating_live_state():
+    trainer = make_trainer()
+    trainer.step(torch.randn(6, 2))
+    before = trainer.state_dict()
+    bad = deepcopy(before)
+    record = bad["optimizers"][1]["regularizer"]["record"]
+    historical = ("lr_max", "lr_last", "anchor_started", "calls", "observed_steps")
+    bad["optimizers"][1]["regularizer"]["record"] = {key: record[key] for key in historical}
+    with pytest.raises(ValueError, match="optimizer state|K3P"):
+        trainer.load_state_dict(bad)
+    assert_checkpoint_equal(before, trainer.state_dict())
 
 
 @pytest.mark.parametrize("particles", [12, 1025])

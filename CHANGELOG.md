@@ -1,7 +1,24 @@
 # Changelog
 
-## Unreleased
+## Unreleased — KA2 candidate and deterministic initialization
 
+- Prepare KA2 as the single recipe formulation across the API, GANTrainer and
+  examples. Critic surprise controls the anchor gate and asymmetric EMA rate;
+  the existing generator updates and LR/noise schedules remain in use.
+- Keep all controller history and EMA state per critic optimizer and in its
+  checkpoint. GANTrainer uses schema 4; older-formulation checkpoints require
+  the release that wrote them (0.8.0 for K3P).
+- Replace the fixed `reg_anchor_decay` setting with `reg_anchor_min_decay=.90`,
+  the fastest adaptive critic EMA decay. Public factory calls stay the same.
+- Preserve fixed floating buffers exactly during adaptive critic EMA updates;
+  Fourier frequencies must not drift as the EMA decay changes.
+- Evaluate KA2 by retention, time to the new distribution and stability after
+  arrival. The old 81/81 deadline score is not a selection requirement.
+  This remains an unmerged, unreleased candidate. Recheck the public API with
+  develop's deterministic initialization before selecting a default. Preserve
+  earlier initialization results, later dropouts and incomplete toy coverage
+  in `reports/ka2-default-candidate/`; they do not qualify this combined change.
+  K3P's historical 22/22 result and README animation are separate evidence.
 - Fresh recipes default to `initialization="batch_feature_zero"`: deterministic
   RMS-matched QR weights, patterned biases, R2 recipe-created particle clouds,
   and zero initial batch-distance readout coefficients. `GANTrainer` and
@@ -12,8 +29,9 @@
   custom/pretrained weights, and checkpoint behavior. NumPy is now a core
   dependency for the deterministic numerical construction.
 - Add the exact historical `batch_feature_zero` replay hook to the initializer
-  registry, and document its 22/22 fixed-suite result, passing long hold,
-  unresolved shifted-target recovery, and mathematical limits.
+  registry, and document its frozen research trainer's 22/22 fixed-suite result,
+  passing long hold, unresolved shifted-target recovery, and mathematical limits.
+  Those results are not measurements of the combined KA2 API candidate.
 
 ## 0.8.0 — 2026-09-25
 

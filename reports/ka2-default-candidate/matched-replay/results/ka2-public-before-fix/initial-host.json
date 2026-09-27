@@ -1,0 +1,151 @@
+{
+  "modules": {
+    "g": {
+      "model.net.0.weight": {
+        "shape": [
+          96,
+          4
+        ],
+        "dtype": "torch.float32",
+        "sha256": "757302169c372e342337576671574f37c9f89264aa0c26a3fe65f5d76fe1dd69"
+      },
+      "model.net.0.bias": {
+        "shape": [
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "4f29cc350bfef0135307e22c14d9fc490131bf5815b3565f4efd08536fdbb96e"
+      },
+      "model.net.2.weight": {
+        "shape": [
+          96,
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "21bc24741572f983ab6a875173b06d3e767af1d028c8750f4569bcc8a5efe197"
+      },
+      "model.net.2.bias": {
+        "shape": [
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "b8445bdc77ce9236965c492c361376411339a3d64e9b6c1bc9ed41988da3cdb7"
+      },
+      "model.net.4.weight": {
+        "shape": [
+          96,
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "676e714043ef70b616b5adb71bca986bd95a6a4f803890c52611237c879df393"
+      },
+      "model.net.4.bias": {
+        "shape": [
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "b80f840c59507997918e1befe49284e7aff6e890992d61c9cf3784c5b1302e32"
+      },
+      "model.net.6.weight": {
+        "shape": [
+          2,
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "d180f4c10e47e5165d13691f57504266fbf50dc60bfa652474121ef426d3227a"
+      },
+      "model.net.6.bias": {
+        "shape": [
+          2
+        ],
+        "dtype": "torch.float32",
+        "sha256": "0073c4578b9d369d5a62aafa8a4b86c59f2e53980216aa7d7a19a1411dfb27ee"
+      }
+    },
+    "d": {
+      "model.freqs": {
+        "shape": [
+          3
+        ],
+        "dtype": "torch.float32",
+        "sha256": "3ce69bd76dd3628aefe9a8d8235e8f79de819ef95415694c19dd582a266afaac"
+      },
+      "model.net.0.weight": {
+        "shape": [
+          96,
+          14
+        ],
+        "dtype": "torch.float32",
+        "sha256": "81012b1953266fd0febc6fda84c60ed72ba1764e962e9ee656d351d6f0ed3413"
+      },
+      "model.net.0.bias": {
+        "shape": [
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "28b36e9cb15785feafe429769c4903b555164486797e37074dd32dce915eb514"
+      },
+      "model.net.2.weight": {
+        "shape": [
+          96,
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "25dd4395711b08fd1b693ea0f1ecaaa67c5918275127e4fc222f8cb10ef4984b"
+      },
+      "model.net.2.bias": {
+        "shape": [
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "6e2c962ac01946c1f1cb8fdd04baed11910f33d3f256d4e2634adaea20c48b85"
+      },
+      "model.net.4.weight": {
+        "shape": [
+          96,
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "b981b8f47bd81f54a450cddbdc9caf323709cb408219e6eb7a16f25cc1b5f0d6"
+      },
+      "model.net.4.bias": {
+        "shape": [
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "ccfd3969538fdff8c6d0f0d36f2215746e991dd53881284471ff9d55cf029e47"
+      },
+      "model.net.6.weight": {
+        "shape": [
+          1,
+          96
+        ],
+        "dtype": "torch.float32",
+        "sha256": "f4be2620809f60b112ee19a1d5bec033151530137b8a037e19fbb7a102a77b22"
+      },
+      "model.net.6.bias": {
+        "shape": [
+          1
+        ],
+        "dtype": "torch.float32",
+        "sha256": "2ead5fdda2f1283ab5a25ea07417ce6524f37c807c5f2f00f2e2115fc8a8aa5e"
+      }
+    },
+    "prior": {
+      "z": {
+        "shape": [
+          12,
+          4
+        ],
+        "dtype": "torch.float32",
+        "sha256": "939cd5882941e96326c50f0ffb2bb21ac5940dabe3c4b1bbc5bf9143f3d69037"
+      }
+    }
+  },
+  "batch": 128,
+  "particles": 12,
+  "training_stream": "f7548c023e431138b11357593f5cceb9dd35eb0b0a2041f0b1560212eeb6f13e",
+  "global_cuda": "483ce2f0d20e50a89a4cc74dd20baf0d5988900a876984c6a54c11491b151f27",
+  "global_cpu": "1ccf17250133dec5e96478acd63e13d728d0dbbabb30389415a302c6f872f81f",
+  "input_stream": "6581b5875ad3d851aae51867aed50ad0648e0c655c26d59d184f18095ed0a50a"
+}

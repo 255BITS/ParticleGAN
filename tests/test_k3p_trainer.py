@@ -1,4 +1,4 @@
-"""GANTrainer / the recipe's optimizers and critic penalty: K3P as the default, EMA critic and checkpoints."""
+"""GANTrainer with the KA2 default: private controller, EMA critic and checkpoints."""
 import copy
 
 import pytest
@@ -13,14 +13,19 @@ from particlegan import (
     learning_rate_scales,
     scale_learning_rates,
 )
-from particlegan.grad_regularizers import GradientPenalty
+from particlegan.ka2 import KA2GradientPenalty
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
 
+@pytest.fixture(autouse=True)
+def short_acquisition_phase(monkeypatch):
+    # Exercise both phases in small CPU loops. The exact 799/800 boundary is
+    # covered by the frozen-source KA2 tests; production settings are unchanged.
+    monkeypatch.setattr("particlegan.ka2.WARMUP_CALLS", 4)
 
 def _recipe(**overrides):
     # Small sparse table (64 rows, batch 8) so A2 damping is active; a short
-    # network horizon so the K3P blend and floor are reached quickly.
+    # network horizon so schedules reach their floors independently of KA2.
     options = dict(num_particles=64, z_dim=2, batch_size=8, total_steps=20,
                    network_lr_horizon_cap=16, d_guard_min_steps=2)
     return get_recipe(**{**options, **overrides})
@@ -39,16 +44,15 @@ def _reals(n, seed=1):
     return [torch.randn(8, 2, generator=rng) * 2 for _ in range(n)]
 
 
-def test_trainer_default_is_k3p():
+def test_trainer_default_is_ka2():
     recipe = get_recipe()
-    assert recipe == Recipe() and recipe.name == "k3p"
+    assert recipe == Recipe() and recipe.name == "ka2"
     trainer = _trainer()
-    assert isinstance(trainer.penalty.regularizer, GradientPenalty)
-    assert trainer.penalty.regularizer.lr_floor == trainer.recipe.network_lr_floor
+    assert isinstance(trainer.penalty.regularizer, KA2GradientPenalty)
     assert trainer.ema_D is not None and trainer.opt_d.guard is not None
     assert trainer.latent_damping is not None
     phases = [trainer.step(real, collect_stats=True)["penalty_stats"]["phase"] for real in _reals(20)]
-    assert phases[0] == "a" and "blend" in phases and phases[-1] == "b"
+    assert phases[:3] == ["a"] * 3 and phases[3:] == ["blend"] * 17
     assert trainer.opt_d.state_dict()["regularizer"]["record"]["anchor_started"]
     assert trainer.latent_damping.started
 
@@ -63,44 +67,49 @@ def test_trainer_lr_scales_network_horizon_and_prior():
         assert prior == learning_rate_scale(step, 20, recipe.lr_anneal_start, recipe.lr_floor)
         assert [g["lr"] for g in trainer.opt_g.param_groups] == [base[0][0] * network, base[0][1] * prior]
         assert trainer.opt_d.param_groups[0]["lr"] == base[1][0] * network
-    # At the network floor the blend weight is exactly zero; the prior is still annealing.
-    assert trainer.penalty.diagnostics()["blend_weight"] == 0.0
+    # The network floor does not change KA2's fixed blend.
+    assert trainer.penalty.diagnostics()["blend_weight"] == 0.5
     assert learning_rate_scales(17, recipe)[0] == recipe.network_lr_floor
     # No cap means the full budget; no network floor means lr_floor.
     same = _recipe(network_lr_horizon_cap=None, network_lr_floor=None)
     assert all(a == b for a, b in (learning_rate_scales(s, same) for s in range(20)))
 
 
-def test_trainer_constant_lr_s_one_no_ema_forward():
+def test_trainer_constant_lr_still_blends_and_evaluates_ema():
     recipe = _recipe(lr_floor=1.0, network_lr_floor=1.0)
     trainer = _trainer(recipe)
     calls = []
     trainer.ema_D.register_forward_pre_hook(lambda module, inputs: calls.append(1))
-    for real in _reals(20):
+    for step, real in enumerate(_reals(20), start=1):
         stats = trainer.step(real, collect_stats=True)["penalty_stats"]
-        assert stats["s"] == 1.0 and stats["phase"] == "a"
-    assert calls == [] and not trainer.opt_d.record.anchor_started
+        assert stats["s"] == 0.5
+        assert stats["phase"] == ("a" if step < 4 else "blend")
+    # Call 4 initializes the anchor; each later blended call evaluates it.
+    assert len(calls) == 16 and trainer.opt_d.record.anchor_started
 
 
 def _run(trainer, reals):
     return [trainer.step(real, generator_real=lambda r=real: r.flip(0), collect_stats=True) for real in reals]
 
 
-def test_trainer_k3p_resume_bit_exact():
-    reals = _reals(20)
-    full = _trainer()
+def test_trainer_ka2_resume_bit_exact():
+    reals = _reals(40)
+    recipe = _recipe(total_steps=40)
+    full = _trainer(recipe)
     full_out = _run(full, reals)
     phases = [o["penalty_stats"]["phase"] for o in full_out]
-    split = phases.index("blend") + 1
-    assert phases[split] == "blend" and phases[-1] == "b"  # resume inside the blend
+    split = 30
+    assert phases[split] == phases[-1] == "blend"  # resume with mature surprise history
 
-    first = _trainer()
+    first = _trainer(recipe)
     _run(first, reals[:split])
     checkpoint = first.state_dict()
     opt_g_state, opt_d_state = (state["regularizer"] for state in checkpoint["optimizers"])
-    assert checkpoint["schema"] == 3 and opt_d_state["record"]["anchor_started"]
+    assert checkpoint["schema"] == 4 and opt_d_state["record"]["anchor_started"]
+    assert len(opt_d_state["record"]["sur_hist"]) >= 25
+    assert opt_d_state["record"]["sur_base"] is not None
     assert opt_g_state["latent"]["state"]["started"] and "noise_generator" in checkpoint["streams"]
-    resumed = _trainer(seed=5)  # different construction randomness; the checkpoint wins
+    resumed = _trainer(recipe, seed=5)  # different construction randomness; the checkpoint wins
     resumed.load_state_dict(checkpoint)
     resumed_out = _run(resumed, reals[split:])
     for a, b in zip(resumed_out, full_out[split:]):
@@ -127,9 +136,12 @@ def _buffers(module):
 def test_trainer_ema_critic_buffers_no_bn_or_sn_mutation():
     critic = nn.Sequential(spectral_norm(nn.Linear(2, 16)), nn.BatchNorm1d(16), nn.LeakyReLU(.2), nn.Linear(16, 1))
     trainer = _trainer(critic=critic)
-    for real in _reals(20):
+    for real in _reals(19):
         trainer.step(real)
     assert trainer.opt_d.record.anchor_started
+    # Exercise a nonzero adaptive EMA update before checking its buffer policy.
+    trainer.opt_d.record.alpha = .5
+    trainer.step(_reals(1, seed=7)[0])
     ema, live = trainer.ema_D, trainer.D
     # The EMA averages float buffers (not a copy of the live ones).
     assert not torch.equal(ema[1].running_mean, live[1].running_mean)
@@ -149,11 +161,12 @@ def test_trainer_ema_critic_buffers_no_bn_or_sn_mutation():
     assert [m.training for m in ema.modules()] == ema_modes
 
 
-def test_schema1_checkpoint_rejected():
+@pytest.mark.parametrize("schema", [1, 2, 3])
+def test_older_formulation_checkpoint_rejected(schema):
     trainer = _trainer()
     state = trainer.state_dict()
-    state["schema"] = 1
-    with pytest.raises(ValueError, match="schema-1"):
+    state["schema"] = schema
+    with pytest.raises(ValueError, match=f"schema-{schema}"):
         trainer.load_state_dict(state)
     bad = trainer.state_dict()
     bad["optimizers"][1]["regularizer"]["record"] = {}
@@ -161,7 +174,7 @@ def test_schema1_checkpoint_rejected():
         trainer.load_state_dict(bad)
 
 
-def test_multiple_critics_each_own_k3p_critic_no_global_hooks():
+def test_multiple_critics_each_own_ka2_controller_no_global_hooks():
     from torch.optim import optimizer as optim_module
     hooks = (len(optim_module._global_optimizer_pre_hooks), len(optim_module._global_optimizer_post_hooks))
     recipe = _recipe()
@@ -178,8 +191,10 @@ def test_multiple_critics_each_own_k3p_critic_no_global_hooks():
             opt.zero_grad()
             loss.backward()
             opt.step()
-    assert penalties[0].diagnostics()["blend_weight"] == 0.0 and penalties[1].diagnostics()["blend_weight"] == 1.0
-    assert optimizers[0].record.anchor_started and not optimizers[1].record.anchor_started
+    assert all(penalty.diagnostics()["blend_weight"] == .5 for penalty in penalties)
+    assert all(optimizer.record.anchor_started for optimizer in optimizers)
+    assert optimizers[0].record is not optimizers[1].record
+    assert optimizers[0].record.sur_hist != optimizers[1].record.sur_hist
     assert (len(optim_module._global_optimizer_pre_hooks), len(optim_module._global_optimizer_post_hooks)) == hooks
     with pytest.raises(ValueError, match="EMA"):
         recipe.make_critic_penalty(recipe.make_critic_optimizer(critics[0]))
@@ -199,7 +214,7 @@ class _TwoRoles(nn.Module):
         return self.heads[role]
 
 
-def test_shared_module_multi_role_k3p_critic():
+def test_shared_module_multi_role_ka2_critic():
     recipe = _recipe()
     torch.manual_seed(0)
     d = _TwoRoles()
@@ -216,8 +231,10 @@ def test_shared_module_multi_role_k3p_critic():
         opt.zero_grad()
         loss.backward()
         opt.step()
-        assert phases[0] == phases[1]
-    assert phases == ["b", "b"] and opt.record.observed_steps == 12
+        # Applied penalty calls advance acquisition, including separate roles.
+        assert phases == (["a", "a"] if step == 1 else ["a", "blend"] if step == 2 else ["blend", "blend"])
+    assert phases == ["blend", "blend"] and opt.record.observed_steps == 12
+    assert opt.record.calls == 24
     for role in ("joint", "marginal"):
         live, ema = d.critic_for(role)[0].weight, penalty.ema_critic.critic_for(role)[0].weight
         assert not torch.equal(live, ema)
@@ -243,11 +260,11 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
     opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d), lr=1e-2)
     penalty = recipe.make_critic_penalty(opt, collect_stats=True)
     ref_d = copy.deepcopy(d)
-    ref_opt = torch.optim.Adam(ref_d.parameters(), lr=1e-2, betas=recipe.betas)
-    from particlegan.k3p import CriticSpikeGuard, RobustCriticAnchor
-    ref_anchor = RobustCriticAnchor(ref_d, copy.deepcopy(ref_d).requires_grad_(False), decay=recipe.reg_anchor_decay)
-    ref = GradientPenalty(anchor=ref_anchor, **recipe._penalty_options())
-    guard = CriticSpikeGuard(recipe.d_guard_ratio, recipe.d_guard_min_steps)
+    ref_opt = recipe.make_critic_optimizer(ref_d, ema_critic=copy.deepcopy(ref_d), lr=1e-2)
+    ref_anchor = ref_opt.anchor
+    # Explicit conditional callables are the reference for the public wrapper's
+    # argument and output forwarding; formula parity has separate frozen tests.
+    ref = KA2GradientPenalty(record=ref_opt.record, **recipe._penalty_options())
     labels, t = torch.tensor([0, 1, 2, 0, 1, 2, 0, 1]), torch.tensor([[0.3]])
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
@@ -262,10 +279,8 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
             o.zero_grad()
             loss.backward()
         opt.step()
-        guard.apply_(ref_opt)
         ref_opt.step()
-        ref.after_critic_step(ref_opt)
-    assert penalty.last_stats["phase"] == "b"
+    assert penalty.last_stats["phase"] == "blend"
     assert all(torch.equal(a, b) for a, b in zip(d.parameters(), ref_d.parameters()))
     assert all(torch.equal(a, b) for a, b in zip(opt.ema_critic.parameters(), ref_anchor.ema_critic.parameters()))
     # output= selects the logits from other layouts, at construction.
@@ -281,12 +296,12 @@ def test_input_noise_wrapper_penalty_uses_same_noise_on_ema():
     penalty = recipe.make_critic_penalty(opt)
     stream = torch.Generator().manual_seed(3)
     noisy = InputNoise(d, 0.1, stream)
-    opt.record.load_state_dict({**opt.record.state_dict(), "lr_max": 1.0, "lr_last": 0.0,
-                                "observed_steps": 1})  # force the b phase (anchor in use)
+    opt.record.load_state_dict({**opt.record.state_dict(), "calls": 3,
+                                "observed_steps": 1})  # next call blends and starts the anchor
     x = torch.randn(4, 2)
     before = stream.get_state()
     penalty(noisy, x, x + 1)
-    # The anchor starts on its first b-phase call (prox == 0); the second draws EMA noise too.
+    # The anchor starts on its first blended call; the second draws EMA noise too.
     penalty(noisy, x, x + 1)
     draws = 0
     probe = torch.Generator().manual_seed(0)
@@ -298,7 +313,7 @@ def test_input_noise_wrapper_penalty_uses_same_noise_on_ema():
 
 
 def test_plain_torch_checkpoint_resumes_exactly():
-    """The usual ``torch.save({'G', 'D', 'opt_g', 'opt_d'})`` pattern restores all K3P state."""
+    """The usual ``torch.save({'G', 'D', 'opt_g', 'opt_d'})`` pattern restores KA2 state."""
     recipe = _recipe()
     reals = _reals(20)
 
@@ -383,9 +398,8 @@ def test_recipe_optimizers_are_ordinary_adam():
         opt_d.load_state_dict(torch.optim.Adam(d.parameters()).state_dict())
 
 
-def test_scale_learning_rates_drives_k3p_to_its_floor():
-    # A custom loop using scale_learning_rates gives D the network schedule, so
-    # the critic LR reaches the same floor f K3P blends against (s == 0).
+def test_scale_learning_rates_keeps_ka2_blend_independent_of_floor():
+    # A custom loop applies the network schedule without changing the .5 blend.
     recipe = _recipe()
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
@@ -403,7 +417,7 @@ def test_scale_learning_rates_drives_k3p_to_its_floor():
         opt_d.zero_grad()
         loss.backward()
         opt_d.step()
-    assert penalty.diagnostics()["blend_weight"] == 0.0
+    assert penalty.diagnostics()["blend_weight"] == 0.5
 
 
 def test_caller_marked_network_transition_keeps_prior_schedule_and_resumes():
@@ -429,7 +443,7 @@ def test_caller_marked_network_transition_keeps_prior_schedule_and_resumes():
         NetworkLRTransition(decay_steps=5).load_state_dict(transition.state_dict())
 
 
-def test_caller_marked_transition_moves_k3p_penalty_with_critic_rate():
+def test_caller_marked_transition_changes_rates_without_changing_ka2_blend():
     recipe = _recipe(total_steps=20, network_lr_horizon_cap=4)
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
@@ -442,18 +456,23 @@ def test_caller_marked_transition_moves_k3p_penalty_with_critic_rate():
     for step, real in enumerate(_reals(14), start=1):
         if step == 9:
             transition.mark_plateau(step - 1)
-        scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior,
-                             network_transition=transition)
+        network, prior_scale = scale_learning_rates(
+            step - 1, recipe, (opt_g, opt_d), base, prior, network_transition=transition)
+        assert opt_d.param_groups[0]["lr"] == base[1][0] * network
+        assert opt_g.param_groups[0]["lr"] == base[0][0] * network
+        assert opt_g.param_groups[1]["lr"] == base[0][1] * prior_scale
+        assert prior_scale == learning_rate_scales(step - 1, recipe)[1]
+        if step <= 9:
+            assert network == 1.0
         loss = d(real).mean() - d(real + 1).mean() + penalty(d, real, real + 1)
         phases.append(penalty.last_stats.get("phase"))
         opt_d.zero_grad()
         loss.backward()
         opt_d.step()
-    assert phases[7] == "a"
-    # The penalty reads the critic's last completed optimizer step.
-    assert "blend" in phases[10:13]
-    assert phases[13] == "b"
-    assert penalty.diagnostics()["blend_weight"] == 0.0
+    assert network == recipe.network_lr_floor
+    # KA2 warms up by penalty calls, independent of the caller's LR transition.
+    assert phases[:3] == ["a"] * 3 and phases[3:] == ["blend"] * 11
+    assert penalty.diagnostics()["blend_weight"] == 0.5
 
 
 def _sparse_prior_run(recipe, use_factory, steps=6):

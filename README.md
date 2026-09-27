@@ -10,23 +10,33 @@ missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The package ships one training
 configuration: a relativistic-pairing (RpGAN) logistic loss, a critic gradient
-penalty that hands over from R1 to capped gradients plus an EMA-critic anchor
-as the learning rate anneals, and the optimizer settings and schedules that go
-with them ([how it works](docs/k3p.md)). You write an ordinary PyTorch GAN
+penalty that combines R1, capped gradients and an adaptive EMA-critic anchor,
+and the optimizer settings and schedules that go
+with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
 loop; the recipe builds the pieces.
+
+This branch stages **KA2 as a candidate for one shared default** across the API,
+trainer and examples. **It is unmerged and unreleased.** Public API quality,
+recovery and retention must be rechecked with develop's deterministic
+initialization before selection. Earlier research and public API measurements
+used a different initialization and remain separate evidence, including their
+stability failures and incomplete toy coverage.
+[Selection rationale and measured results](reports/ka2-default-candidate/README.md).
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
 
-Recorded with the 0.8.0 recipe and its original random initialization, live weights, seed 1234:
+The animation records the **released 0.8.0 K3P default** with its original random
+initialization, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
-at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
+at update 1,430. It is historical evidence, not a KA2 measurement.
+[Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
 ## Install
 
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
-python -m pip install particlegan           # the library (0.8.0)
+python -m pip install particlegan           # released library (0.8.0, K3P)
 ```
 
 For the examples, experiments and tests, install from source:
@@ -111,9 +121,10 @@ For pretrained weights, custom initialization, or the former random behavior,
 use `get_recipe(initialization=None)`. Supplied priors are always preserved.
 Importing the package does not change PyTorch's global initialization.
 
-The research candidate passed **22/22 fixed toy gates and the long hold**;
-target-shift recovery still fails. This is evidence for the frozen benchmark
-trainer, not a general convergence proof or a transformer/LoRA training result.
+The frozen initializer research run passed **22/22 fixed toy gates and the long
+hold**; target-shift recovery still fails. These results belong to that benchmark
+trainer and do not establish the combined KA2 API candidate's quality. No general
+convergence or transformer/LoRA training performance is claimed.
 See the [API contract](docs/api.md#initialization),
 [math and architecture guide](docs/initialization.md), and
 [qualification report](reports/toy100/batch-feature-init/README.md).
@@ -136,7 +147,7 @@ Any field can be overridden: `get_recipe("mog", total_steps=20_000)`.
 
 ## Learn more
 
-- [How the training formulation works](docs/k3p.md), including several critics and conditional critics
+- [How the training formulation works](docs/ka2.md), including several critics and conditional critics
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`pytorch_loop.py`](examples/pytorch_loop.py) (the full update in your own loop),

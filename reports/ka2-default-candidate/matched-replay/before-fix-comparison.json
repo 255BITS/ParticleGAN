@@ -1,0 +1,47 @@
+{
+  "scope": "1200-step diagnostic of the pre-fix package against the 3600-step research prefix; not a recovery comparison",
+  "initial_host_equal": true,
+  "training_draw_filter": "shape[0] == 128 selects all training-batch draws; evaluation batches are 4096 or 12, initialized network width is 96",
+  "training_draws": 10318,
+  "training_draws_equal": true,
+  "first_numeric_differences": {
+    "controller": {
+      "step": 831,
+      "role": "d",
+      "difference": {
+        "path": "/anchor_buffers",
+        "research": "9e86212bb5aa767b86ba26eaba3ceaf1f6c7dfeb578324a6252503c74d868ab5",
+        "public": "9a13055d17686bebf7cb81f4b4757825fc7abed988b9fa8ac0c0db6e2f8cc933"
+      }
+    },
+    "before": {
+      "step": 832,
+      "role": "d",
+      "difference": {
+        "path": "/gradients",
+        "research": "b2cebcd14638e049be324a643a8662556dec7577d14ef53707206fa41ad8fde3",
+        "public": "977d107d08b9334ea3c8c861cd5934a44776a6ae7a9a383096407a6d424a5708"
+      }
+    },
+    "after": {
+      "step": 832,
+      "role": "d",
+      "difference": {
+        "path": "/parameters",
+        "research": "25e879126229a05c9eaafeaa08e6cd33caecf447d1c61e5b8a3437ebda34f3d3",
+        "public": "b9d5f6cdc6e87393e191dfd00bcfbfa4c92ca9e53f77b875ce75f8be2ef6f042"
+      }
+    },
+    "loss_sha256": {
+      "step": 838,
+      "role": "d",
+      "difference": {
+        "path": "",
+        "research": "29232ba9a74d83dde1d1efceb09da067405bba8c9da9e9ce24ba546c488dbb4d",
+        "public": "3adead2d61346e043a0c34085980d99b3664c980dcea223c09d242491f07a893"
+      }
+    }
+  },
+  "randomness_caveat": "The shorter host budget changes isolated evaluation frequency; aggregate RNG audit sequences differ. Their training-batch subsequences are identical.",
+  "package_commit": "21a7bc708953623067108dbf0970197dc5e90fe7"
+}

@@ -38,7 +38,10 @@ def _critic_run(recipe, steps=14, ema=True):
     return rows, D
 
 
-def test_switch_defaults_are_the_shipped_formulation():
+def test_switch_defaults_are_the_shipped_formulation(monkeypatch):
+    # The frozen-source suite checks the exact 799/800 boundary; reach the
+    # same anchor behavior in this small ablation comparison.
+    monkeypatch.setattr("particlegan.ka2.WARMUP_CALLS", 4)
     recipe = get_recipe()
     assert recipe.reg_anchor_weight == 1.0 and recipe.direct_particle_gain is True
     explicit = recipe.replace(reg_anchor_weight=1.0, direct_particle_gain=True)
@@ -51,7 +54,8 @@ def test_switch_defaults_are_the_shipped_formulation():
     assert any(stats["phase"] in ("blend", "b") and stats["prox"] > 0 for _, stats in rows)
 
 
-def test_anchor_weight_zero_removes_the_anchor_term():
+def test_anchor_weight_zero_removes_the_anchor_term(monkeypatch):
+    monkeypatch.setattr("particlegan.ka2.WARMUP_CALLS", 4)
     base = get_recipe()
     rows, _ = _critic_run(base)
     off, _ = _critic_run(base.replace(reg_anchor_weight=0.0))

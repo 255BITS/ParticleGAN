@@ -15,6 +15,26 @@ from benchmarks.transfer_suite.toy100_compatibility import declared_model_policy
 from particlegan import get_recipe, learning_rate_scale
 
 
+@pytest.mark.parametrize("family", ["gan", "mog", "ddgan", "ddgan_mog", "ae_gan", "vae_gan", "ae_ddgan"])
+def test_archived_recipes_keep_their_critic_while_public_families_use_ka2(family):
+    from benchmarks.legacy.recipe import get_recipe as archived_recipe
+    from particlegan.k3p import K3PCriticAdam
+    from particlegan.ka2 import KA2CriticAdam
+
+    current, archived = get_recipe(family), archived_recipe(family)
+    critic = torch.nn.Linear(2, 1)
+    old = archived.make_critic_optimizer(critic, ema_critic=deepcopy(critic))
+    new = current.make_critic_optimizer(critic, ema_critic=deepcopy(critic))
+    assert type(old) is K3PCriticAdam and type(new) is KA2CriticAdam
+    assert old.anchor.decay == archived.reg_anchor_decay == .999
+    assert "formulation" not in old.record.state_dict()
+    assert new.record.state_dict()["formulation"] == "ka2"
+    assert "reg_anchor_min_decay" not in archived.to_dict()
+    assert "reg_anchor_decay" not in current.to_dict()
+    if family == "gan":
+        assert archived.name == "k3p" and current.name == "ka2"
+
+
 def test_legacy_control_uses_declared_anneal_start_and_floor():
     recipe = get_recipe().replace(lr_anneal_start=0.4, lr_floor=0.01)
     applied = []

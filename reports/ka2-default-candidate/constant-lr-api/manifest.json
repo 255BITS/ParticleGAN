@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "files": {
+    "evidence/constant/declaration.json": "62aa7fafba606de096163c2f3ff321a94d7aa98fcce24d1fd318c3ba1f636688",
+    "evidence/constant/initial.json": "794b063eb5e070ea5f4a35e3b9e18b8502b7cc24f2810730b6ee7022e3a9b051",
+    "evidence/constant/learning-rates.jsonl.gz": "29826e703fcb1823e3ee4580f65fd7c78079b7a21f588ec305629468f7cc6ee9",
+    "evidence/constant/metrics.jsonl.gz": "6b7a23428575d9c182c5ab44f9bc11102bbafecd76beac69e40ec5d2df27981f",
+    "evidence/constant/result.json": "d9ef5b07ddcfa213df00adcbe10d79187c0ed46bfea48363384c656894bb78bb",
+    "evidence/constant/source.zip": "e99b692d58552dbd3df5a154c17d9d392fb2240b99070ea3ae7f22ccdee2910b",
+    "evidence/constant/state-hashes.jsonl.gz": "50ab3f06485c5badc60735ced3700ba923f9b819f0e8bb53560b76d05b713c5a",
+    "evidence/decay/declaration.json": "4e9382483ad14bbf762bf7ccd8b8cc6ebe63eda2df89384ff59dc3ad1d14d97c",
+    "evidence/decay/initial.json": "39c43e50f09f2a51a5bd7855a7dbdf918ad49a10d0b7679527c9d8357965b9e2",
+    "evidence/decay/learning-rates.jsonl.gz": "a5479e2dc4d2c455b9d50085e052b763b4c50f7ba4e60707a4e75585f2c39f00",
+    "evidence/decay/metrics.jsonl.gz": "34b4f8e8250c8e768ab09fb7a0c29deda2be755465a647cc3cd55044bc4aa99c",
+    "evidence/decay/result.json": "3136c3f814f8ae85d4b8b2ccca8e977973618ff01ceca43d0d7a7c511a8b2a97",
+    "evidence/decay/source.zip": "e99b692d58552dbd3df5a154c17d9d392fb2240b99070ea3ae7f22ccdee2910b",
+    "evidence/decay/state-hashes.jsonl.gz": "de4cd73e46896f6a44b48669f2c29b8a549ee8a2e59d9bd67b13c40b75d9dcdf"
+  },
+  "checkpoints_external": [
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/constant/final-state.pt",
+      "bytes": 1470235,
+      "sha256": "8e8e360081f9337ff87915982a40d4e23f63884c2fb29546f1d9056792de6779"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/constant/initial-models-cpu.pt",
+      "bytes": 323381,
+      "sha256": "c6b70802bf9c3419a8d385a2f13694550b66d60f62344bc4eac7d0819b3dcd23"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/constant/initial-state.pt",
+      "bytes": 818318,
+      "sha256": "89c8c554fd3819ac2899003b2a579e361a4f59c071efed3667b34be0aa059efc"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/constant/shift-state.pt",
+      "bytes": 1470235,
+      "sha256": "5dfd2bb573047b08e3667853f71fb497a7e3ba7b4232f416a6d0be863dbf6a02"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/decay/final-state.pt",
+      "bytes": 1470235,
+      "sha256": "c3c13a24e9ea21dd783cf43a302130972eb22f2f7a85b151cba38ce8aa68f75d"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/decay/initial-models-cpu.pt",
+      "bytes": 323381,
+      "sha256": "c6b70802bf9c3419a8d385a2f13694550b66d60f62344bc4eac7d0819b3dcd23"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/decay/initial-state.pt",
+      "bytes": 818318,
+      "sha256": "cbd5dd47cae065cf5f867d5f2babd6ff84988ed54b9457bae5968f96ac868c40"
+    },
+    {
+      "path": "/ml2/hypergan/ka2-constant-api-20260926/decay/shift-state.pt",
+      "bytes": 1470235,
+      "sha256": "16b0ee888aa7f6b2ce404073ccd4d7c474ca9404a821c016208c19773904b829"
+    }
+  ]
+}
