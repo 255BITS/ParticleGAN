@@ -22,7 +22,11 @@ The recipe now defaults to `initialization="batch_feature_zero"`. Its
 `make_optimizers` factory initializes supported G/D/E parameters before optimizer
 and EMA setup; `GANTrainer` uses that same path. `make_prior` gives learnable
 particle tables an R2 cloud before any MoG calibration. Supplied priors are kept.
-For pretrained/custom weights, use `get_recipe(initialization=None)`.
+Frozen parameters are never initialized, so a frozen pretrained backbone
+(`requires_grad_(False)` before `make_optimizers`, as in the CIFAR
+`PretrainedFeatureDiscriminator`) keeps its weights while its new trainable
+head gets the default. For trainable pretrained/custom weights, use
+`get_recipe(initialization=None)`.
 
 Loading weights into G/D/E *before* `make_optimizers` would let this default
 overwrite them, so `make_optimizers` emits a `UserWarning` naming the network
