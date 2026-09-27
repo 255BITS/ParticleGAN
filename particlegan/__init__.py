@@ -7,6 +7,7 @@ from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
+from .initialization import initialize_
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
 from .recipes import (
     NetworkLRTransition,
@@ -20,6 +21,7 @@ from .training import GANTrainer, InputNoise
 from .vicreg_loss import ParticleRegularizer
 
 __all__ = [
+    "initialize_",
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",

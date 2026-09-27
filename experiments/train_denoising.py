@@ -206,10 +206,10 @@ def train(cfg):
     prior = make_prior(cfg, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
     g, d = ToyGenerator(cfg).to(device), ToyDiscriminator(cfg).to(device)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for model in (ema_g, ema_prior, ema_noise):
         model.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     if cfg["noise"] == "learned":
         # A research-only source with its own rate; ordinary optimizers stay extensible.
         opt_g.add_param_group({"params": list(noise.parameters()),

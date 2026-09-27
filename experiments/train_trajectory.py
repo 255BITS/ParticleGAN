@@ -115,10 +115,10 @@ def train(cfg):
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"]+101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2*cfg["length"], cfg["seed"]+102, device)
     g, d = TrajectoryGenerator(cfg).to(device), TrajectoryDiscriminator(cfg).to(device)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for m in (ema_g, ema_prior, ema_noise):
         m.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
     if noise.kind == "learned":
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})

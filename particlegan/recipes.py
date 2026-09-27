@@ -21,6 +21,7 @@ class Recipe:
     """
     name: str = "k3p"
     model: str = "gan"
+    initialization: str | None = "batch_feature_zero"
     z_dim: int = 2
     num_particles: int = 20_000
     prior_kind: str = "particles"
@@ -76,6 +77,8 @@ class Recipe:
     reconstruction_weight: float = 1.0
 
     def __post_init__(self):
+        if self.initialization not in (None, "batch_feature_zero"):
+            raise ValueError("initialization must be 'batch_feature_zero' or None")
         object.__setattr__(self, "betas", tuple(self.betas))
         if self.prior_betas is not None:
             object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
@@ -173,19 +176,25 @@ class Recipe:
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
 
+        Learnable tables follow ``initialization`` (R2 by default), before
+        MoG calibration. ``initialization=None`` keeps the ordinary random draw.
         MoG recipes calibrate spacing on the initialized
         means (potentially expensive). Pass ``sigma=...`` to skip calibration,
         including ``sigma=0`` when restoring a checkpoint.
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
+        from . import initialization
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
+        def initialize(prior):
+            return (initialization._initialize_prior(prior, options.get("init_std", 1.0))
+                    if self.initialization is not None and initialization._external_init is None else prior)
         kind = options.pop("prior_kind", self.prior_kind)
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
             if "sigma" in options:
-                return MoGParticlePrior(**options)
-            prior = MoGParticlePrior(sigma=0, **options)
+                return initialize(MoGParticlePrior(**options))
+            prior = initialize(MoGParticlePrior(sigma=0, **options))
             sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel)
             prior.set_sigma(sigma)
             prior.d0.copy_(d0)
@@ -196,7 +205,7 @@ class Recipe:
         if options.pop("sigma_rel") != 0:
             raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
         options.pop("standardize")
-        return ParticlePrior(**options)
+        return initialize(ParticlePrior(**options))
 
     def encode(self, query, prior, *, offset=None, draws=2, generator=None):
         """Route caller-produced queries; returns a ParticleEncoding.
@@ -315,7 +324,22 @@ class Recipe:
         prior]`` (either may be absent); scale the prior group by the prior
         multiplier of ``learning_rate_scales`` and everything else by the
         network one.
+
+        By default, initialize supported fresh G/D/E parameters once with
+        ``batch_feature_zero`` and synchronize the supplied EMA critic if D
+        changes. Supplied priors are preserved. Use ``initialization=None``
+        on the recipe for pretrained/custom weights or the old random init.
+        Lower-level optimizer factories do not initialize parameters.
         """
+        from .initialization import _initialize, _external_init
+        if self.initialization is not None and _external_init is None:
+            if generator is not None:
+                _initialize(generator, key=0, only_new=True)
+            changed_critic = _initialize(discriminator, key=1, only_new=True)
+            if encoder is not None:
+                _initialize(encoder, key=2, only_new=True)
+            if changed_critic and ema_critic is not None:
+                ema_critic.load_state_dict(discriminator.state_dict())
         from .particle_prior import ParticlePrior
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}

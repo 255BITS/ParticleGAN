@@ -275,13 +275,13 @@ def train(cfg):
     prior.d0.copy_(d0)
     prior.sigma_rel = cfg['sigma_rel']
     prior = prior.cuda()
+    recipe = training_recipe(cfg)
+    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)
     initial_hash = state_hash([g, d, e, prior])
     initial_sigma = prior.sigma.clone()
     initial_prior = prior.z.detach().clone()
     initial_features = state_hash([d.critic.features])
     eg, ee, ep = [copy.deepcopy(m).eval().requires_grad_(False) for m in (g, e, prior)]
-    recipe = training_recipe(cfg)
-    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)
     base_lrs = [[group['lr'] for group in o.param_groups] for o in (og, od)]
     adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(od), ParticleRegularizer()
     streams = {name: rng(cfg['seed'] + offset) for name, offset in [('data', 2), ('prior', 3), ('time', 4), ('corruption', 5), ('reverse', 6)]}

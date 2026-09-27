@@ -10,6 +10,8 @@ called. Names come from the screened families:
 * E, PR #180: structured orthogonal families (Cayley, Fourier, Haar, ...)
 * F, PR #181: particle-prior sequences on the ``hid_q`` and ``qr_pb_pq`` arms
 * ``qr_bz_pq``, ``ortho-init-k3p``: QR weights, zero biases, R2 particle prior
+* ``batch_feature_zero``: original optimizer-time QR, patterned biases, R2
+  prior, and initially zero explicit batch-distance readout coefficients
 
 ``hid_q`` is family A's. Family D and family F reproduce that name; the
 registry keeps A's tensors for it. ``qr_pb_pq`` is family D's copy of the
@@ -25,6 +27,7 @@ import torch
 from torch import nn
 
 from particlegan import (
+    batch_feature_init,
     det_init_a,
     det_init_d,
     det_init_f,
@@ -44,6 +47,7 @@ _FAMILIES = (
     ("E", family_e_init.names(), family_e_init.install),
     ("F", det_init_f.VARIANTS, det_init_f.install),
     ("qr_bz_pq", (qr_bz_pq_init.VARIANT,), qr_bz_pq_init.install),
+    ("batch_feature_zero", (batch_feature_init.VARIANT,), batch_feature_init.install),
 )
 
 _INSTALLERS: dict[str, tuple[str, object]] = {}
@@ -73,6 +77,8 @@ def install(name: str) -> str:
     except KeyError:
         raise ValueError(f"unknown init {name!r}; {len(NAMES)} names are registered") from None
     installer(name)
+    from . import initialization
+    initialization._external_init = name
     return name
 
 
@@ -126,3 +132,31 @@ def witness_sha256(prepare=None) -> str:
             hasher.update(str(value.dtype).encode())
             hasher.update(value.view(torch.uint8).numpy().tobytes())
     return hasher.hexdigest()
+
+
+def main() -> None:
+    """Install an initializer before an unmodified Python training script."""
+    import argparse
+    from pathlib import Path
+    import runpy
+    import sys
+
+    parser = argparse.ArgumentParser(description=main.__doc__)
+    parser.add_argument("--init", required=True, choices=NAMES)
+    parser.add_argument("script", nargs=argparse.REMAINDER,
+                        help="-- path/to/train.py [training arguments]")
+    args = parser.parse_args()
+    script = args.script[1:] if args.script[:1] == ["--"] else args.script
+    if not script:
+        parser.error("supply a training script after --")
+    path = Path(script[0]).resolve()
+    if not path.is_file():
+        parser.error(f"training script does not exist: {path}")
+    install(args.init)
+    sys.argv = [str(path), *script[1:]]
+    sys.path.insert(0, str(path.parent))
+    runpy.run_path(str(path), run_name="__main__")
+
+
+if __name__ == "__main__":
+    main()

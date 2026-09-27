@@ -11,6 +11,7 @@ SCORED = (
     "halton",
     "qr_pb_pq",
     "qr_bz_pq",
+    "batch_feature_zero",
     "mix_pb_weyl",
     "mix_zb_pq",
     "cay_pb_pq",

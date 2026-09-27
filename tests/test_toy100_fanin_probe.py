@@ -45,6 +45,8 @@ def test_declared_optimizer_rates_stay_identical_and_weight_step_is_fanin_scaled
         "lr": .00425, "d_lr_mult": 1.0, "prior_lr_mult": 2.0,
         "betas": [0.0, .99], "output_noise_std": .029,
     })
+    # A custom fan-in parameterization retains the experiment's own weights.
+    recipe = recipe.replace(initialization=None)
     baseline = make_trainer(config, recipe)
     for change_d in (False, True):
         candidate = make_equalized_trainer(config, recipe, parameterize_d=change_d)

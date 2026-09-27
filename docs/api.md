@@ -2,7 +2,7 @@
 
 ParticleGAN provides independent PyTorch priors, losses, and diffusion helpers.
 You supply models and data; use an optional GAN trainer or compose your own loop. Install the package
-with `python -m pip install particlegan`; the core dependency is PyTorch.
+with `python -m pip install particlegan`; the core dependencies are PyTorch and NumPy.
 
 ## A minimal training loop
 
@@ -49,6 +49,68 @@ python -u examples/quickstart_gan.py --steps 1000 --resume run.pt --output run.p
 The explicit [component-based loop](../examples/pytorch_loop.py) remains available
 for applications that manage their own updates.
 
+## Initialization
+
+```python
+from particlegan import initialize_, get_recipe
+
+initialize_(network, key=0)               # in place; returns network
+recipe = get_recipe()                    # initialization="batch_feature_zero"
+preserve = get_recipe(initialization=None)
+```
+
+`initialize_(module, *, key=0)` recursively initializes trainable standard
+`nn.Linear`, Conv1d/2d/3d, ConvTranspose1d/2d/3d, `nn.Embedding`, and
+`nn.MultiheadAttention` parameters. It uses deterministic CPU float64 QR,
+then converts to each parameter's existing dtype/device. Weight entry RMS
+matches the standard PyTorch initialization distribution before selective
+batch-readout/padding zeroing; linear/conv biases
+use a deterministic pattern at their standard scale. Packed attention QKV
+uses one QR over its stored tensor; separate projections use separate QRs.
+Batch-distance readout coefficients start at zero and remain trainable.
+
+The function preserves frozen parameters, constant/identity weight matrices,
+zero biases, normalization parameters, buffers, and unknown custom parameters.
+Embedding padding rows remain zero. Materialize lazy layers first. Custom
+layer scales, fused layouts, parametrized weights, and arbitrary user-defined
+parameters require caller initialization. This is not a guarantee that every
+possible network becomes deterministic. CPU QR can be expensive for large
+matrices; no transformer or LoRA training performance is claimed.
+
+The key is a nonnegative integer identifying a network, not an RNG seed.
+Weights also depend on parameter order and shape. Calls consume no RNG and
+install no global hooks. Use before optimizer construction (Adam, AdamW, SGD,
+or another optimizer), and before loading trained weights. Repeating the
+explicit call reinitializes supported parameters; it does not clear optimizer
+state. Numerical repeatability assumes the same software/numerical environment.
+
+`recipe.make_optimizers` applies this default once to G, D, and optional E,
+using keys 0, 1, and 2. It recognizes parameters previously initialized by
+`initialize_` and preserves them, including after training. If it initializes
+D, it synchronizes the caller-provided EMA critic before building optimizers.
+`GANTrainer` uses this factory. In a custom loop, create your G/E EMA copies
+**after** this factory initializes the live networks. The lower-level `make_generator_optimizer` and
+`make_critic_optimizer` preserve weights; call `initialize_` yourself when
+using them directly. `recipe.make_prior` initializes learnable tables with an
+R2 normal-quantile cloud at `init_std`, before MoG spacing calibration. A
+caller-supplied prior and a frozen Gaussian prior are preserved.
+
+**Migration:** use `get_recipe(initialization=None)` when supplying pretrained
+networks, loading network state before building a trainer/optimizers, or keeping
+custom/random initialization. A fresh trainer followed by
+`trainer.load_state_dict(checkpoint)` restores its saved weights and RNG normally.
+The recipe field is included in `to_dict()` and checkpoints. Older saved recipe
+dictionaries lacking it acquire the new default; add `initialization=None` when
+reproducing their original construction. `GANTrainer.load_state_dict` accepts
+either construction setting: it restores saved weights and initialization
+metadata, treating a missing historical field as `None`. Initialization markers are in-memory
+metadata, not checkpoint state. Importing ParticleGAN does not modify PyTorch.
+
+The [math guide](initialization.md) describes the QR identities, targeted
+batch-feature correction, convolution storage, attention, and LoRA. The
+[research report](../reports/toy100/batch-feature-init/README.md) separates the
+22/22 frozen-suite evidence from this public API and its unit tests.
+
 ## GANTrainer
 
 `GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,
@@ -56,8 +118,10 @@ penalty_generator=None, optimizer_options=None, penalty_options=None)` is an
 explicitly imported helper, separate from `Recipe`. Move networks to the same
 device and floating dtype first. When omitted, the helper constructs the prior
 from the recipe; supply `prior=` to preserve an existing initialization.
-`seed` controls owned sampling streams, while callers seed network/prior
-initialization with `torch.manual_seed`.
+`seed` controls owned sampling streams. The recipe defaults to deterministic
+network weights and a deterministic recipe-created prior; data sampling and
+training noise still need controlled RNG streams for repeatable training.
+See [initialization](#initialization) for supported layers and preserving weights.
 
 The helper supports scalar, unconditional GANs with `ParticlePrior`. MoG,
 encoders, conditional GANs and DDGAN use the component API. A step performs one
@@ -647,6 +711,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `direct_particle_betas` | `(0, .9)` (`make_generator_optimizer(direct_particles=...)`) |
 | `input_noise_std`, `input_noise_anneal_end` | `.5`, `.1` |
 | `output_noise_std`, `output_noise_warmup` | `.029`, `.2` |
+| `initialization` | `"batch_feature_zero"`; `None` preserves supplied weights |
 | `batch_size`, `total_steps` | `2048`, `7_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
@@ -656,9 +721,9 @@ caller.
 
 | Optional factory | Result |
 | --- | --- |
-| `recipe.make_prior(**kwargs)` | `ParticlePrior` or `MoGParticlePrior` selected by `prior_kind` |
+| `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`; learnable tables follow `initialization` |
 | `recipe.make_loss()` | `GANLoss` (RpGAN logistic) |
-| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | `(opt_g, opt_d)` Adam optimizers doing the recipe's step-time work (see below) |
+| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Initialize supported fresh G/D/E weights, then build `(opt_g, opt_d)` (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Adam for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Adam for generator-side params (see below) |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |

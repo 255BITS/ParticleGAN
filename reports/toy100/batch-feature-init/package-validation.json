@@ -1,0 +1,27 @@
+{
+  "cpu_python": "3.10",
+  "cpu_torch": "2.14.0+cpu",
+  "cuda_torch": "2.13.0+cu126",
+  "cpu_tests_after_migration": {
+    "passed": 1080,
+    "subtests": 18,
+    "skipped": 6,
+    "excludes": "tests/test_det_init_registry.py; its three tests passed in the preceding complete run"
+  },
+  "checks": [
+    "175 registry initializers built twice identically",
+    "24 packaged research replays with exact state/array/trajectory parity",
+    "installed wheel outside checkout: AdamW, AE/VAE, GAN",
+    "CUDA API smoke: two updates, initializer preserves CPU/CUDA RNG",
+    "Lunar smoke pipeline and GIFs (not a task-performance gate)",
+    "build and twine check --strict; clean distribution scopes; pip check"
+  ],
+  "source_sha256": {
+    "particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "particlegan/recipes.py": "10466c3ae772404f98bee8fb0b7f86dac3a1779ce76a0052671ee4d0b982531d",
+    "particlegan/training.py": "02b690c8fea710545f06d84f7998f47164b4c59be4d922fa86aaf49895bee049"
+  },
+  "logs": "/tmp/pr194-integration-20260926"
+}

@@ -258,6 +258,17 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         d=d, n_symbols=K, n_classes=C, hidden=int(cfg["hidden"]), n_hidden=int(cfg["n_hidden"]),
         fourier=int(cfg["fourier"]), d_mode=str(cfg["d_mode"]),
     ).to(device)
+    # ---- losses / optimizers ----
+    recipe = get_recipe(
+        z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
+        lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
+        betas=(float(cfg["beta1"]), 0.999),
+        reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
+        lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
+    gan_loss = recipe.make_loss()
+    vic = ParticleRegularizer()
+    # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
+    opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
     ema_G, ema_prior = copy.deepcopy(G), copy.deepcopy(prior)
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)
@@ -271,17 +282,6 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             idx = pr.sample_indices(n, generator=gen)
         return pr(idx), idx
 
-    # ---- losses / optimizers ----
-    recipe = get_recipe(
-        z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
-        lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
-        betas=(float(cfg["beta1"]), 0.999),
-        reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
-        lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
-    gan_loss = recipe.make_loss()
-    vic = ParticleRegularizer()
-    # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
-    opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
     penalty_fn = recipe.make_critic_penalty(opt_D)
     opts = [opt_G, opt_D]
     base_lrs = [[g["lr"] for g in o.param_groups] for o in opts]
