@@ -68,7 +68,7 @@ class TransitionTests(unittest.TestCase):
         b = d(real, 1-c, context)[1]
         torch.testing.assert_close(a, b)
         d.zero_grad()
-        penalty, _ = GradientPenalty(kappa=0).penalty(
+        penalty, _ = GradientPenalty(kappa=0, anchor_weight=0.0).penalty(
             lambda x: d(x, c, context)[0], real, fake.detach(), 1, collect_stats=False)
         penalty.backward()
         self.assertGreater(float(d.net[0].weight.grad.norm()), 0)

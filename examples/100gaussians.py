@@ -9,10 +9,9 @@ This is deliberately nastier than the 25-Gaussian grid:
   - Prior: particlegan.ParticlePrior (learnable particles in latent space).
   - G: simple MLP mapping z -> x in R^2.
   - D: simple MLP with Fourier input features, x -> scalar score.
-  - Loss: R3GAN-style objective — relativistic pairing (RpGAN) logistic loss
-    plus the recipe's critic penalty (``recipe.make_critic_penalty``, currently
-    K3P: RMS R1 plus a fake-side cap, handing over to one-sided caps with an
-    EMA-critic anchor as the critic LR falls).
+  - Loss: relativistic pairing (RpGAN) logistic loss plus the recipe's critic
+    penalty (``recipe.make_critic_penalty``, currently K3P: one-sided gradient
+    caps on real-fake paths and on fakes, plus an EMA-critic anchor; no R1).
 
 The recipe defaults (``particlegan.get_recipe()``) are the one supported
 configuration; this example only exposes sizes, rates and schedule fields:
@@ -24,9 +23,9 @@ configuration; this example only exposes sizes, rates and schedule fields:
     so momentum drifts the unsampled rows of the particle table
   - EMA (0.995) copies of G and the prior for snapshots/eval: the live
     weights orbit the equilibrium; the EMA copy sits on it
-  - role-wise LR schedule (``learning_rate_scales``): G/D hold full LR for
-    60% of the network horizon, then cosine to the network floor; the prior
-    follows the same shape over the full budget down to ``lr_floor``.
+  - constant learning rates with AMSGrad and no instance noise. ``lr_floor``
+    below 1 turns on the recipe's optional schedule (``learning_rate_scales``):
+    full LR for ``lr_anneal_start`` of the run, then cosine to the floor.
 
 Visualization:
   - At fixed intervals, we sample the SAME latent particles (fixed_first_n=True)
@@ -55,10 +54,7 @@ if str(_REPO_ROOT) not in sys.path:
 from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
-from particlegan import (  # noqa: E402
-    GANTrainer, InputNoise, ParticlePrior, get_recipe, init, learning_rate_scales,
-)
-from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
+from particlegan import GANTrainer, ParticlePrior, get_recipe, init, learning_rate_scales  # noqa: E402
 
 from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
@@ -255,8 +251,9 @@ def train(
         # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
-        # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
-        penalty = recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
+        # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it
+        # (its random path positions come from the penalty stream).
+        penalty = recipe.make_critic_penalty(opt_D, generator=penalty_gen, collect_stats=reg_sync_stats)
         # A separate prior optimizer (own LR/betas); its step() applies the
         # recipe's latent-table update (currently A2 latent-row damping).
         opt_prior = (
@@ -266,8 +263,6 @@ def train(
                 betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
             if learnable_prior else None
         )
-        noise_gen = torch.Generator(device=device).manual_seed(seed + 5)
-        noisy_D = InputNoise(D, generator=noise_gen)  # annealed critic input noise, fresh per call
 
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
@@ -303,10 +298,7 @@ def train(
 
     total_steps = epochs * steps_per_epoch
     all_opts = tuple(opt for opt in (opt_G, opt_D, opt_prior) if opt is not None)
-    base_lrs = {
-        id(opt): [g["lr"] for g in opt.param_groups]
-        for opt in all_opts
-    }
+    base_lrs = {id(opt): [g["lr"] for g in opt.param_groups] for opt in all_opts}
 
     def synchronize():
         if device.type == "cuda":
@@ -328,21 +320,12 @@ def train(
                 loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
                 ep_z = stats["prior_regularization"]
             else:
-                # K3P schedule: G/D anneal over the network horizon to the
-                # network floor; the prior anneals over the full budget.
+                # The recipe's optional schedule (constant at the default floors of 1).
                 network, prior_scale = learning_rate_scales(global_step, recipe)
                 for opt in all_opts:
                     scale = prior_scale if opt is opt_prior else network
                     for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                         group["lr"] = base * scale
-                noisy_D.std = input_noise_std(recipe, global_step)
-                sigma_out = output_noise_std(recipe, global_step)
-
-                def generate(z):  # warmed-up generator output noise
-                    x = G(z)
-                    if sigma_out == 0:
-                        return x
-                    return x + sigma_out * torch.randn(x.shape, generator=noise_gen, device=x.device, dtype=x.dtype)
 
                 # -------------------------
                 # 1) Discriminator step
@@ -357,10 +340,10 @@ def train(
                 )
                 with torch.no_grad():
                     z_fake, _ = prior.sample(batch_size, generator=latent_gen)
-                    x_fake = generate(z_fake)
+                    x_fake = G(z_fake)
 
-                real_logits = noisy_D(x_real)
-                fake_logits = noisy_D(x_fake)
+                real_logits = D(x_real)
+                fake_logits = D(x_fake)
 
                 if mog_metrics:
                     last_d_gap = (real_logits.detach().mean() - fake_logits.detach().mean())
@@ -370,7 +353,7 @@ def train(
                 # Fourier D coexist with full mode coverage: it caps D's
                 # steepness where the data is. The regularizer recomputes its own
                 # graph internally, so neither batch needs requires_grad here.
-                loss_d = loss_d + penalty(noisy_D, x_real, x_fake)
+                loss_d = loss_d + penalty(D, x_real, x_fake)
 
                 opt_D.zero_grad()
                 loss_d.backward()
@@ -383,8 +366,8 @@ def train(
                 G.train()
 
                 z_fake, idx = prior.sample(batch_size, generator=latent_gen)
-                x_fake = generate(z_fake)
-                fake_logits = noisy_D(x_fake)
+                x_fake = G(z_fake)
+                fake_logits = D(x_fake)
 
                 with torch.no_grad():
                     x_real_g = sample_100gaussians(
@@ -392,7 +375,7 @@ def train(
                         device=device,
                         generator=train_gen,
                     )
-                real_logits_g = noisy_D(x_real_g)
+                real_logits_g = D(x_real_g)
                 loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
 
                 ep_z = loss_gan.new_zeros(())
@@ -525,18 +508,10 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
     parser.add_argument("--training-api", action="store_true", help="Use the public GANTrainer for the learned-particle recipe.")
     parser.add_argument("--fourier", type=int, default=2)
     parser.add_argument("--ema_decay", type=float, default=_RECIPE.ema_decay)
-    parser.add_argument(
-        "--lr_floor",
-        type=float,
-        default=_RECIPE.lr_floor,
-        help="Cosine LR anneal floor as a fraction of the base LRs.",
-    )
-    parser.add_argument(
-        "--lr_anneal_start",
-        type=float,
-        default=_RECIPE.lr_anneal_start,
-        help="Fraction of the run at full LR before the cosine anneal begins.",
-    )
+    parser.add_argument("--lr_floor", type=float, default=_RECIPE.lr_floor,
+                        help="Optional LR schedule floor as a fraction of the base LRs (1 = constant).")
+    parser.add_argument("--lr_anneal_start", type=float, default=_RECIPE.lr_anneal_start,
+                        help="With lr_floor < 1: fraction of the run at full LR before the cosine anneal.")
     parser.add_argument("--out_dir", type=str, default=default_out_dir)
     parser.add_argument("--log_interval", type=int, default=100)
     parser.add_argument("--snapshot_interval", type=int, default=500)

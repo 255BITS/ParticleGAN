@@ -113,7 +113,7 @@ def test_pretrained_joint_ucd_frozen_and_second_order(monkeypatch):
     feature_only = logits * (2 ** .5) - pixels
     grad = torch.autograd.grad(feature_only.sum(), real, retain_graph=True)[0]
     assert torch.isfinite(grad).all() and grad.abs().sum() > 0
-    penalty, _ = GradientPenalty(kappa=0).penalty(FixedConditionCritic(d, c, xt, t), real.detach(), fake, 1)
+    penalty, _ = GradientPenalty(kappa=0, anchor_weight=0.0).penalty(FixedConditionCritic(d, c, xt, t), real.detach(), fake, 1)
     loss = penalty + F.cross_entropy(logits, d.ucd_labels(c, t))
     opt = torch.optim.Adam([p for p in d.parameters() if p.requires_grad])
     loss.backward(); opt.step()

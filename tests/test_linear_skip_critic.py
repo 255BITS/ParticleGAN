@@ -30,7 +30,7 @@ def test_active_cap_backpropagates_through_both_critic_paths(card):
         critic.skip.weight.fill_(2.)
     rng = torch.Generator().manual_seed(0)
     real, fake = torch.randn(16, 2, generator=rng), torch.randn(16, 2, generator=rng)
-    penalty = GradientPenalty(coeff=3., kappa=.01)(critic, real, fake, step=1)
+    penalty = GradientPenalty(coeff=3., kappa=.01, anchor_weight=0.0)(critic, real, fake, step=1)
     assert penalty > 0
     (penalty + critic(real).mean()).backward()
     assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in critic.parameters())

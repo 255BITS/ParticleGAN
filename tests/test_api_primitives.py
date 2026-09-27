@@ -39,27 +39,37 @@ def test_explicit_generators_leave_global_rng_untouched():
     assert not list(gaussian.parameters())
 
 
-def test_penalty_early_form_value_derivative_and_callable_match():
-    # Before the critic LR anneals (s == 1): R1 on reals plus a cap on fakes, RMS units.
+def test_penalty_value_derivative_and_callable_match():
+    # A linear critic has the same input gradient w everywhere: the path cap and
+    # the fake cap are both relu(|w|/sqrt(d) - 1)^2 (RMS units), whatever u is.
     discriminator = nn.Linear(2, 1, bias=False).double()
     with torch.no_grad():
         discriminator.weight.copy_(torch.tensor([[3., 4.]]))
     real = torch.zeros(3, 2, dtype=torch.float64)
     fake = torch.ones_like(real, requires_grad=True)
-    regularizer = GradientPenalty()
+    regularizer = GradientPenalty(anchor_weight=0.0)
     penalty, stats = regularizer.penalty(discriminator, real, fake)
     w = torch.tensor([3., 4.], dtype=torch.float64, requires_grad=True)
-    expected = 0.5 * (w.square().sum() / 2 + (w.norm() / 2 ** .5 - 1).relu().square())
+    expected = 0.5 * 2 * (w.norm() / 2 ** .5 - 1).relu().square()
     torch.testing.assert_close(penalty, expected.detach())
     torch.testing.assert_close(regularizer(discriminator, real, fake), penalty)
-    assert stats["applied"] and stats["center"] == 1 and stats["s"] == 1 and stats["phase"] == "a"
+    assert stats["applied"] and stats["center"] == 1 and stats["prox"] == 0
     penalty.backward()
     expected.backward()
     torch.testing.assert_close(discriminator.weight.grad, w.grad.unsqueeze(0))
     assert fake.grad is None
-    lazy = GradientPenalty(lazy_k=2)
+    lazy = GradientPenalty(lazy_k=2, anchor_weight=0.0)
     assert lazy(discriminator, real, fake, step=1).item() == 0
     torch.testing.assert_close(lazy(discriminator, real, fake, step=2), 2 * penalty)
+    # The anchor term: mean ||w - wbar||^2 / d against the EMA critic, after its first (starting) call.
+    flat = nn.Linear(2, 1, bias=False).double()
+    with torch.no_grad():
+        flat.weight.zero_()
+    anchored = GradientPenalty()
+    torch.testing.assert_close(anchored(discriminator, real, fake, ema_critic=flat), penalty.detach())
+    anchored.after_critic_step(1.0)
+    torch.testing.assert_close(anchored(discriminator, real, fake, step=2, ema_critic=flat),
+                               penalty.detach() + 0.5 * 25 / 2)
 
 
 @pytest.mark.parametrize("rows", [0, 1])
@@ -192,7 +202,7 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     generator.bias.requires_grad_(False)
     opt_g, opt_d = recipe.make_optimizers(generator, discriminator, prior)
     assert [g["lr"] for g in opt_g.param_groups] == [.001, .002]
-    assert opt_d.param_groups[0]["lr"] == .001
+    assert opt_d.param_groups[0]["lr"] == .001 * .5  # d_lr_mult .5
     assert all(p is not generator.bias for g in opt_g.param_groups for p in g["params"])
     assert opt_g.param_groups[1]["params"] == [prior.z]
     for frozen in (GaussianPrior(2), ParticlePrior(8, 2, learnable=False)):

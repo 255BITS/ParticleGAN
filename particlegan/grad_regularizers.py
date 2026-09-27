@@ -9,7 +9,6 @@ from typing import Any, Callable, Dict, Optional, Tuple
 import math
 
 import torch
-import torch.nn.functional as F
 
 
 def _score_scalar(logits):
@@ -25,11 +24,12 @@ def _score_scalar(logits):
 
 
 class CriticStepRecord:
-    """Per-critic step state that K3P's penalty reads: LR record, anchor start, counters.
+    """Per-critic step state that K3P's penalty reads: anchor start, counters, LR record.
 
     One record belongs to one critic optimizer. ``record_step`` (after every
     critic optimizer step) advances the anchor EMA once started, then records
-    the applied LR. The penalty starts the anchor and counts its calls.
+    the applied LR (diagnostic only). The penalty starts the anchor and counts
+    its calls.
     """
 
     KEYS = ("lr_max", "lr_last", "anchor_started", "calls", "observed_steps")
@@ -66,32 +66,40 @@ class CriticStepRecord:
         self.lr_max, self.lr_last, self.anchor_started, self.calls, self.observed_steps = values
 
 
+def path_points(x_real: torch.Tensor, x_fake: torch.Tensor, u: torch.Tensor) -> torch.Tensor:
+    """``x_hat = r + u (f - r)``, pairing reals and fakes by batch index (first ``min(len)`` rows)."""
+    n = min(len(x_real), len(x_fake))
+    r, f = x_real[:n].detach(), x_fake[:n].detach()
+    u = u[:n].reshape(n, *([1] * (r.dim() - 1))).to(r.dtype)
+    return r + u * (f - r)
+
+
 class GradientPenalty:
-    """K3P critic gradient penalty: a learning-rate-scheduled handover.
+    """K3P critic gradient penalty: a path cap, a fake cap and an EMA anchor. No R1.
 
-    ``pen = coeff/2 * (s * A + (1 - s) * B)`` with
+    ``pen = coeff/2 * (path_cap + fake_cap + anchor_weight * prox)`` with
 
-    * ``A`` (early, full LR): R1 on reals plus a one-sided cap on fakes, in RMS
-      units: ``mean ||g_r||^2 / d + mean relu(||g_f|| / sqrt(d) - kappa)^2``;
-    * ``B`` (late, annealed LR): one-sided caps on reals and fakes in L2 units
-      plus ``anchor_weight * prox``, where ``prox = mean ||g_r - gbar_r||^2 / d``
-      ties the critic's input gradient to that of its parameter EMA Dbar;
-    * ``s = max(0, min(1, 2r) - 2f) / (1 - 2f)``, ``r`` = last critic LR / max
-      critic LR seen, ``f`` = ``lr_floor``. A constant LR keeps ``s == 1``.
+    * ``path_cap = mean relu(||g(x_hat)|| / sqrt(d) - kappa)^2`` at
+      ``x_hat = r + u (f - r)``, ``u ~ U(0, 1)`` per pair, reals and fakes
+      paired by batch index;
+    * ``fake_cap = mean relu(||g(f)|| / sqrt(d) - kappa)^2``;
+    * ``prox = mean ||g(r) - gbar(r)||^2 / d``, which ties the critic's input
+      gradient at the reals to that of its parameter EMA Dbar. The anchor
+      starts at the first call (``prox`` is exactly 0 then) and the critic
+      optimizer's step record advances the EMA after every critic step.
 
-    ``g = grad_x D(x)`` and ``d`` is the per-sample input size.
+    ``g = grad_x D(x)``, ``gbar = grad_x Dbar(x)`` and ``d`` is the per-sample
+    input size. The caps are one-sided, so a critic whose slope stays below
+    ``kappa`` is not penalized at all; nothing pulls the slope at the data to 0.
 
     Args:
         coeff: penalty strength.
-        kappa: the cap on the gradient norm.
+        kappa: the cap on the per-dimension (RMS) gradient norm.
         lazy_k: apply every k-th step with the coefficient multiplied by k.
-        lr_floor: the critic LR floor f as a fraction of the peak LR, so
-            ``s == 0`` exactly at the floor.
-        anchor_weight: weight of the EMA-anchor term ``prox`` (1 is K3P;
-            0 removes it and needs no anchor).
+        anchor_weight: weight of the EMA-anchor term ``prox`` (0 removes it
+            and needs no anchor).
         anchor: a ``particlegan.k3p.CriticAnchor`` (or anything with
-            ``start_()``, ``update_()`` and ``__call__``), started at the first
-            blended call.
+            ``start_()``, ``update_()`` and ``__call__``).
         record: a ``CriticStepRecord`` shared with the critic optimizer that
             records its own steps (the recipe's critic optimizer does). Its
             anchor is used. Default: a private record.
@@ -102,7 +110,6 @@ class GradientPenalty:
         coeff: float = 1.0,
         kappa: float = 1.0,
         lazy_k: int = 1,
-        lr_floor: float = 0.01,
         anchor_weight: float = 1.0,
         anchor: Optional[Any] = None,
         record: Optional[CriticStepRecord] = None,
@@ -110,7 +117,6 @@ class GradientPenalty:
         self.coeff = float(coeff)
         self.kappa = float(kappa)
         self.lazy_k = int(lazy_k)
-        self.lr_floor = float(lr_floor)
         self.anchor_weight = float(anchor_weight)
         for name in ("coeff", "kappa", "anchor_weight"):
             value = getattr(self, name)
@@ -118,14 +124,12 @@ class GradientPenalty:
                 raise ValueError(f"{name} must be finite and nonnegative")
         if self.lazy_k < 1:
             raise ValueError(f"lazy_k must be >= 1, got {lazy_k}")
-        if not math.isfinite(self.lr_floor) or not 0.0 <= self.lr_floor < 0.5:
-            raise ValueError(f"lr_floor must satisfy 0 <= lr_floor < 0.5, got {lr_floor}")
         if record is None:
             record = CriticStepRecord(anchor)
         elif anchor is not None and anchor is not record.anchor:
             raise ValueError("pass either anchor= or a record= holding that anchor, not both")
-        # Step state (LR record, anchor start, counters); shared with the
-        # critic optimizer when the recipe builds the pair.
+        # Step state (anchor start, counters); shared with the critic
+        # optimizer when the recipe builds the pair.
         self.record = record
         self.anchor = record.anchor
         # Identity of the critic served through the constructor anchor
@@ -133,20 +137,11 @@ class GradientPenalty:
         # anchoring a second critic to the first critic's EMA.
         self._critic_id: Optional[int] = None
 
-    def blend_weight(self) -> float:
-        """Handover weight s in [0, 1]; 1.0 before any recorded step."""
-        if self.record.lr_last is None or self.record.lr_max <= 0.0:
-            return 1.0
-        r = self.record.lr_last / self.record.lr_max
-        f = self.lr_floor
-        return max(0.0, min(1.0, 2.0 * r) - 2.0 * f) / (1.0 - 2.0 * f)
-
     def after_critic_step(self, optimizer_or_lr) -> None:
         """Record one critic optimizer step (call right after ``optimizer.step()``).
 
-        Accepts the critic optimizer (the max group LR is used) or the applied
-        LR as a number. Advances the anchor EMA (once started), then records
-        the LR that drives s. The recipe's critic optimizer does this itself.
+        Advances the anchor EMA (once started). The recipe's critic optimizer
+        does this itself.
         """
         self.record.record_step(optimizer_or_lr)
 
@@ -166,16 +161,18 @@ class GradientPenalty:
         collect_stats: bool = True,
         *,
         ema_critic: Optional[Callable[[torch.Tensor], torch.Tensor]] = None,
+        generator: Optional[torch.Generator] = None,
     ) -> Tuple[torch.Tensor, Dict]:
         """Return ``(penalty, stats)`` for one critic step.
 
         ``penalty`` is a scalar attached to D's graph, or a detached zero when
         the lazy schedule skips ``step``. ``stats`` is empty unless
         ``collect_stats`` (which costs a host sync); then it holds
-        ``applied``, ``pen``, ``center``, ``s``, ``prox`` and ``phase``
-        (``'a'``, ``'blend'`` or ``'b'``). ``ema_critic`` evaluates Dbar for
-        this call (default: the anchor). Several calls per critic step (e.g.
-        one per role of a shared module) are allowed.
+        ``applied``, ``pen``, ``center``, ``path_cap``, ``fake_cap`` and
+        ``prox``. ``ema_critic`` evaluates Dbar for this call (default: the
+        anchor). ``generator`` draws the path positions ``u`` (default: the
+        global RNG). Several calls per critic step (e.g. one per role of a
+        shared module) are allowed.
         """
         if self.lazy_k > 1 and step % self.lazy_k != 0:
             zero = torch.zeros((), device=x_real.device, dtype=x_real.dtype)
@@ -183,23 +180,29 @@ class GradientPenalty:
         # Lazy regularization: fewer applications, proportionally bigger hits,
         # so the time-averaged pressure on D is unchanged.
         coefficient = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
-        return self._k3p_penalty(D, x_real, x_fake, step, coefficient, collect_stats, ema_critic)
+        return self._k3p_penalty(D, x_real, x_fake, step, coefficient, collect_stats, ema_critic, generator)
 
-    def __call__(self, D, x_real, x_fake, step=1, *, ema_critic=None):
+    def __call__(self, D, x_real, x_fake, step=1, *, ema_critic=None, generator=None):
         """Return only the penalty tensor, without collecting synchronized stats."""
-        return self.penalty(D, x_real, x_fake, step, collect_stats=False, ema_critic=ema_critic)[0]
+        return self.penalty(D, x_real, x_fake, step, collect_stats=False, ema_critic=ema_critic,
+                            generator=generator)[0]
 
-    def _k3p_penalty(self, D, x_real, x_fake, step, coefficient, collect_stats, ema_critic):
-        """K3P, op for op the frozen reports/toy100/gap-fill-20260925 k3p rule."""
+    def _cap(self, D, x):
+        """``mean relu(||grad_x D(x)|| / sqrt(d) - kappa)^2`` (create_graph)."""
+        rms = self._grad_norm(D, x, squared=False) / x[0].numel() ** 0.5
+        return (rms - self.kappa).relu().square().mean()
+
+    def _k3p_penalty(self, D, x_real, x_fake, step, coefficient, collect_stats, ema_critic, generator):
         dimension = x_real[0].numel()
         if dimension != x_fake[0].numel():
             raise ValueError("k3p needs reals and fakes of the same per-sample size")
-        if step > self.lazy_k and self.record.observed_steps == 0:
+        use_anchor = self.anchor_weight != 0.0
+        if use_anchor and step > self.lazy_k and self.record.observed_steps == 0:
             raise RuntimeError(
                 "k3p: after_critic_step(critic_optimizer) was never called; "
-                "without it s stays 1 (the early form) forever"
+                "without it the EMA anchor never moves"
             )
-        if ema_critic is None:
+        if ema_critic is None and use_anchor:
             owner = getattr(self.anchor, "critic", None)
             if owner is not None and D is not owner:
                 raise ValueError(
@@ -213,50 +216,41 @@ class GradientPenalty:
                     "k3p: this penalty already serves a different critic; "
                     "use one penalty per critic or pass ema_critic= explicitly"
                 )
-        s = self.blend_weight()
         self.record.calls += 1
-        if s >= 1.0:
-            real_squared = self._grad_norm(D, x_real, squared=True) / dimension
-            fake_norm = self._grad_norm(D, x_fake, squared=False) / dimension ** 0.5
-            fake_cap = (fake_norm - self.kappa).relu().square()
-            pen = (coefficient / 2.0) * (real_squared.mean() + fake_cap.mean())
-            prox, phase = None, "a"
-        else:
-            use_anchor = self.anchor_weight != 0.0
-            anchor = ema_critic if ema_critic is not None else self.anchor
-            if use_anchor and anchor is None:
-                raise ValueError("k3p blended phase needs CriticAnchor/ema_critic")
-            x = x_real.detach().clone().requires_grad_(True)
-            g = torch.autograd.grad(_score_scalar(D(x)), x, create_graph=True)[0]
-            sq_r = g.pow(2).flatten(1).sum(dim=1)
-            n_r = torch.sqrt(sq_r + 1e-12)
-            n_f = self._grad_norm(D, x_fake, squared=False)
-            if not self.record.anchor_started:
-                if self.anchor is not None:
-                    self.anchor.start_()
-                self.record.anchor_started = True
-                prox = g.new_zeros(())
-            elif not use_anchor:
-                prox = g.new_zeros(())
-            else:
-                xb = x_real.detach().clone().requires_grad_(True)
-                with torch.enable_grad():
-                    gb = torch.autograd.grad(_score_scalar(anchor(xb)), xb)[0].detach()
-                prox = (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
-                if self.anchor_weight != 1.0:
-                    prox = self.anchor_weight * prox
-            b_term = F.relu(n_r - self.kappa).pow(2).mean() + F.relu(n_f - self.kappa).pow(2).mean() + prox
-            if s > 0.0:
-                a_term = (sq_r / dimension).mean() + (n_f / dimension ** 0.5 - self.kappa).relu().square().mean()
-                pen = (coefficient / 2.0) * (s * a_term + (1.0 - s) * b_term)
-                phase = "blend"
-            else:
-                pen = (coefficient / 2.0) * b_term
-                phase = "b"
+        u = torch.rand(len(x_real), device=x_real.device, generator=generator)
+        path_cap = self._cap(D, path_points(x_real, x_fake, u))
+        fake_cap = self._cap(D, x_fake.detach())
+        total = path_cap + fake_cap
+        prox = None
+        if use_anchor:
+            prox = self._prox(D, x_real, ema_critic, dimension)
+            total = total + prox
+        pen = (coefficient / 2.0) * total
         if not collect_stats:
             return pen, {}
-        return pen, {"applied": True, "pen": float(pen.detach()), "center": self.kappa, "s": s,
-                     "prox": 0.0 if prox is None else float(prox.detach()), "phase": phase}
+        return pen, {"applied": True, "pen": float(pen.detach()), "center": self.kappa,
+                     "path_cap": float(path_cap.detach()), "fake_cap": float(fake_cap.detach()),
+                     "prox": 0.0 if prox is None else float(prox.detach())}
+
+    def _prox(self, D, x_real, ema_critic, dimension):
+        """``anchor_weight * mean ||g_r - gbar_r||^2 / d``; starts the anchor (prox 0) on the first call."""
+        if not self.record.anchor_started:
+            anchor = self.anchor
+            if anchor is None and ema_critic is None:
+                raise ValueError("k3p needs a CriticAnchor/ema_critic (or anchor_weight=0)")
+            if anchor is not None:
+                anchor.start_()
+            self.record.anchor_started = True
+            return x_real.new_zeros(())  # Dbar == D on the starting call
+        anchor = ema_critic if ema_critic is not None else self.anchor
+        if anchor is None:
+            raise ValueError("k3p needs a CriticAnchor/ema_critic (or anchor_weight=0)")
+        x = x_real.detach().clone().requires_grad_(True)
+        g = torch.autograd.grad(_score_scalar(D(x)), x, create_graph=True)[0]
+        xb = x_real.detach().clone().requires_grad_(True)
+        with torch.enable_grad():
+            gb = torch.autograd.grad(_score_scalar(anchor(xb)), xb)[0].detach()
+        return self.anchor_weight * (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
 
     @staticmethod
     def _grad_norm(D: torch.nn.Module, x: torch.Tensor, squared: bool = False) -> torch.Tensor:

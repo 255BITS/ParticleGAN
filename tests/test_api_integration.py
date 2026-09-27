@@ -115,7 +115,7 @@ def test_ucd_and_ddgan_losses_fit_an_external_discriminator_update():
     sr, lr = critic(real, labels, xt=xt, t=t)
     sf, lf = critic(fake.detach(), labels, xt=xt, t=t)
     objective = GANLoss().d_loss(sr, sf) + ucd_loss(lr, lf, labels)
-    objective += GradientPenalty(kappa=0)(
+    objective += GradientPenalty(kappa=0, anchor_weight=0.0)(
         lambda x: critic(x, labels, xt=xt, t=t)[0], real, fake.detach())
     objective.backward()
     assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in critic.parameters())

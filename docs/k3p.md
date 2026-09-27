@@ -1,91 +1,78 @@
 # K3P: the default ParticleGAN formulation
 
-`get_recipe()` and `GANTrainer` train with **K3P**, the formulation that passed
-all 22 declared toy gates plus the ring hold and its extension
-([evidence](../reports/toy100/k3p-base/README.md)). It is a relativistic-paired
-logistic GAN with a learned particle prior. Around the ordinary G/D/prior
-updates it adds a critic penalty that changes with the critic's learning rate,
-an EMA-critic anchor, a critic spike guard, sparse latent-row damping (A2), a
-split learning-rate schedule and annealed input/output noise. All of these
-are recipe hyperparameters; none is switched on or off by detecting the task.
+`get_recipe()` and `GANTrainer` train with **K3P**: a relativistic-paired
+(RpGAN) logistic GAN with a learned particle prior, a critic gradient penalty
+without R1, an always-on EMA-critic anchor, a critic spike guard and sparse
+latent-row damping (A2). Learning rates are constant, every optimizer is
+AMSGrad, and there is no instance noise. All of these are recipe
+hyperparameters; none is switched on or off by detecting the task.
 
 ## The penalty
 
-With input dimension `d`, coefficient `c` and cap `κ` (both 1 by default):
+With input dimension `d`, coefficient `c` (.3) and cap `κ` (1):
 
 ```text
-A = mean(||∇D(real)||² / d) + mean(relu(||∇D(fake)|| / √d − κ)²)
-B = mean(relu(||∇D(real)|| − κ)²) + mean(relu(||∇D(fake)|| − κ)²)
-P = mean(||∇D(real) − ∇D̄(real)||² / d)        D̄ = parameter EMA of D (decay .999)
-s = max(0, min(1, 2r) − 2f) / (1 − 2f)          r = last critic LR / max critic LR
-penalty = c/2 · (s·A + (1 − s)·(B + P))
+x̂ = r + u·(f − r)            u ~ U(0, 1) per pair; reals and fakes paired by batch index
+path = mean(relu(||∇D(x̂)|| / √d − κ)²)
+fake = mean(relu(||∇D(f)|| / √d − κ)²)
+prox = mean(||∇D(r) − ∇D̄(r)||² / d)        D̄ = parameter EMA of D (decay .999)
+penalty = c/2 · (path + fake + prox)
 ```
 
-`f` is `network_lr_floor` (.01). While the critic LR is at its peak, `s = 1`
-and the penalty is exactly the RMS R1 + fake-cap form `A`. As the LR anneals,
-it hands over to one-sided caps plus the anchor term `P`, which is zero for a
-stationary critic, so it damps oscillation without flattening the critic at the
-data. The anchor starts at the first blended call. With a constant LR, `s`
-stays 1: same formulation, no separate code path, and no EMA forward.
+Both caps are one-sided: a critic whose per-dimension slope stays under `κ`
+pays nothing, so nothing pulls the slope at the data to zero (R1 does). The
+path cap controls slope spikes anywhere between the data and the samples;
+the anchor term is zero for a stationary critic and damps oscillation by tying
+the critic's input gradient at the reals to that of its own parameter EMA. The
+anchor starts at the first penalty call (the term is exactly zero then) and
+the critic optimizer advances the EMA after every critic step.
+`reg_anchor_weight` scales `prox` (0 removes it and needs no EMA critic).
 
 `reg_every = k > 1` applies the same penalty every `k`-th step with
-coefficient `k·c`.
+coefficient `k·c`. The path positions `u` come from the `generator` passed to
+`make_critic_penalty` (`GANTrainer` passes its penalty stream), or the global
+RNG.
 
 ## Defaults
 
 | Field | Value | Meaning |
 | --- | --- | --- |
-| `reg_coeff`, `reg_kappa` | 1, 1 | penalty above |
-| `reg_anchor_decay` | .999 | EMA critic decay per critic step |
-| `betas`, `ema_decay` | (0, .999), .995 | Adam; G/prior EMA |
-| `lr`, `d_lr_mult`, `prior_lr_mult` | .00425, 1, 2 | base rates |
-| `lr_anneal_start`, `lr_floor` | .6, .05 | prior: hold 60%, cosine to 5% of the full budget |
-| `network_lr_horizon_cap`, `network_lr_floor` | 1600, .01 | G and D: same cosine over `min(total, cap)` updates, then hold at 1% |
-| `d_guard_ratio`, `d_guard_min_steps` | 5, 200 | clip a critic tensor whose grad RMS exceeds 5× its Adam RMS (0 disables) |
+| `reg_coeff`, `reg_kappa` | .3, 1 | penalty above |
+| `reg_anchor_decay`, `reg_anchor_weight` | .999, 1 | EMA critic decay per critic step; weight of `prox` |
+| `betas`, `amsgrad`, `ema_decay` | (0, .999), True, .995 | AMSGrad for G, prior and critic; G/prior EMA |
+| `lr`, `d_lr_mult`, `prior_lr_mult` | .0085, .5, 2 | constant rates: G .0085, critic .00425, prior .017 |
+| `d_guard_ratio`, `d_guard_min_steps` | 5, 200 | clip a critic tensor whose grad RMS exceeds 5× its Adam RMS (AMSGrad's max second moment; 0 disables) |
 | `latent_damping_max_rate` | .5 | A2 on the particle table (0 disables) |
-| `input_noise_std`, `input_noise_anneal_end` | .5, .1 | critic input noise, linear to 0 by 10% of training |
-| `output_noise_std`, `output_noise_warmup` | .029, .2 | generator output noise, linear warmup over 20% |
 | `prior_reg` | 0 | no particle spread penalty |
 | `batch_size`, `z_dim`, `num_particles` | 2048, 2, 20000 | the qualified task shape |
 
-`learning_rate_scales(step, recipe)` returns the `(network, prior)` LR
-multipliers. `network_lr_horizon_cap=None` uses the full budget and
-`network_lr_floor=None` reuses `lr_floor`.
+AMSGrad matters at a constant LR: with plain Adam the step creeps up during a
+stationary hold, because the gradients shrink at equilibrium while the
+second-moment estimate keeps decaying; AMSGrad's running maximum makes the step
+shrink with the gradient instead.
 
-For a caller-owned loop, the caller can start G/D decay when its own validation
-metric plateaus. `NetworkLRTransition` keeps G/D at full LR until marked, then
-cosine-decays them over the chosen duration to `network_lr_floor`. The particle
-prior retains its normal full-budget schedule. K3P's critic penalty reads the
-applied critic LR, so its blend follows this transition automatically. The
-caller owns the plateau rule and must save the transition state with its
-optimizer checkpoint:
+### Optional schedule and noise
 
-```python
-from particlegan import NetworkLRTransition, scale_learning_rates
-
-transition = NetworkLRTransition(decay_steps=40_000)
-# After validation at 120,000 completed updates meets a declared plateau rule:
-transition.mark_plateau(120_000)
-# Before the next optimizer update, using the number of completed updates:
-network_scale, prior_scale = scale_learning_rates(
-    120_000, recipe, (opt_g, opt_d), base_lrs, prior,
-    network_transition=transition)
-checkpoint["network_transition"] = transition.state_dict()
-# On resume, recreate the same transition duration and restore its state:
-transition.load_state_dict(checkpoint["network_transition"])
-```
-
-Passing no transition retains the recipe's fixed network horizon. The
-caller-marked step remains fixed after marking; a different step raises an
-error. This API does not inspect validation data or choose checkpoints.
+The recipe keeps an LR schedule and instance noise as knobs, off by default.
+Lowering `lr_floor` (and optionally `network_lr_floor`,
+`network_lr_horizon_cap`, `lr_anneal_start`) makes `GANTrainer` and
+`learning_rate_scales(step, recipe)` anneal: G/D follow a cosine over
+`min(total, cap)` updates down to `network_lr_floor`, the prior one over the
+full budget down to `lr_floor`. `input_noise_std` / `output_noise_std` add
+annealed critic input noise and warmed-up generator output noise in
+`GANTrainer`. The penalty does not depend on the learning rate, so it is the
+same formulation either way. In a caller-owned loop, `NetworkLRTransition`
+starts the G/D decay when the caller's own validation metric plateaus; see
+`scale_learning_rates` in the [API reference](api.md).
 
 ## GANTrainer
 
 `GANTrainer(recipe, G, D)` wires everything: it allocates the EMA critic
 (`trainer.ema_D`, a frozen deep copy), builds the recipe's optimizers (which
-allocate the A2 history buffer) and a noise stream, and saves and restores all
-of them. Checkpoints use schema 3: the K3P state lives in the optimizer
-states (`"regularizer"` entry) plus the noise stream. Schema-2 checkpoints
+allocate the A2 history buffer) and its random streams (the penalty's path
+positions among them), and saves and restores all of them. Checkpoints use
+schema 3: the K3P state lives in the optimizer states (`"regularizer"` entry)
+plus the streams. Schema-2 checkpoints
 (separate `"k3p"` entry) are upgraded on load; schema-1 checkpoints (an older
 formulation) are rejected with a clear error.
 
@@ -104,22 +91,23 @@ state is in their `state_dict()`:
 
 ```python
 import copy
-from particlegan import get_recipe, init, learning_rate_scales
+from particlegan import get_recipe, init
 
 recipe = get_recipe(total_steps=steps)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-penalty = recipe.make_critic_penalty(opt_d)   # reads EMA, LR record and step from opt_d
+penalty = recipe.make_critic_penalty(opt_d)   # reads the EMA critic and step record from opt_d
 ...
 loss_d = adv + penalty(D, real, fake)
-opt_d.zero_grad(); loss_d.backward(); opt_d.step()   # guard, Adam, anchor EMA + LR record
+opt_d.zero_grad(); loss_d.backward(); opt_d.step()   # guard, AMSGrad, anchor EMA
 ...
 opt_g.zero_grad(); loss_g.backward(); opt_g.step()   # Adam with A2 latent damping
 torch.save({"G": G.state_dict(), "D": D.state_dict(), "prior": prior.state_dict(),
             "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict()}, path)
 ```
 
-`penalty.diagnostics()` returns host scalars such as the blend weight;
-`make_critic_penalty(opt_d, collect_stats=True)` fills `penalty.last_stats`.
+`penalty.diagnostics()` returns host scalars such as the guard's clip count;
+`make_critic_penalty(opt_d, collect_stats=True)` fills `penalty.last_stats`
+(the path cap, fake cap and anchor terms).
 The penalty's step (for lazy application) is the critic optimizer's completed
 step count + 1, so several calls per critic step share one step.
 
@@ -140,8 +128,8 @@ for role in D.roles():
     d_loss = d_loss + penalty(D.critic_for(role), xr, xf, ctx)
 ```
 
-Critics with separate optimizers get separate pairs; their blend weights and
-EMAs are independent. Nothing registers optimizer hooks or keeps module-level
+Critics with separate optimizers get separate pairs; their EMAs are
+independent. Nothing registers optimizer hooks or keeps module-level
 state:
 
 ```python
@@ -154,7 +142,5 @@ opt_d2.zero_grad(); d2_loss.backward(); opt_d2.step()
 
 The concrete classes (`K3PCriticAdam`, `K3PGeneratorAdam`, `CriticPenalty` and
 the primitives `CriticAnchor`, `RobustCriticAnchor`, `CriticSpikeGuard`,
-`LatentRowDamping`, `DirectParticleResponse`) stay importable from
-`particlegan.k3p` for low-level tests and research, but they are not the public
-API. Direct sample-particle groups use
-`recipe.make_generator_optimizer(params, direct_particles=[...])`.
+`LatentRowDamping`) stay importable from `particlegan.k3p` for low-level tests
+and research, but they are not the public API.

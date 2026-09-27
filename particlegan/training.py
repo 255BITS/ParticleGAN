@@ -53,15 +53,17 @@ class GANTrainer:
     state as well as this trainer's sampling streams for exact continuation on
     the same device. Sampling never advances training RNG streams.
 
-    Per update: role-wise LR schedule (``learning_rate_scales``), critic step
-    with input noise and the recipe's penalty (``recipe.make_critic_penalty``;
-    the critic optimizer's ``step()`` runs the spike guard and anchor EMA),
-    then a generator/prior step with output noise (the generator optimizer's
-    ``step()`` applies A2 latent damping). The trainer allocates the EMA
-    critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream.
-    Networks train from the weights they arrive with; initialize them first
-    (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample`` includes
-    the output noise.
+    Per update: a critic step with the recipe's penalty
+    (``recipe.make_critic_penalty``, drawing its path positions from the
+    trainer's penalty stream; the critic optimizer's ``step()`` runs the spike
+    guard and anchor EMA), then a generator/prior step (the generator
+    optimizer's ``step()`` applies A2 latent damping). The trainer allocates
+    the EMA critic ``ema_D`` (a frozen deep copy). The recipe's optional LR
+    schedule (``learning_rate_scales``) and instance noise are applied too;
+    both are off by default. Networks train from the weights they arrive
+    with; initialize them first (e.g.
+    ``particlegan.init.deterministic_orthogonal_``). ``sample`` returns clean
+    samples.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -111,13 +113,13 @@ class GANTrainer:
         for module in (self.ema_G, self.ema_prior):
             module.requires_grad_(False)
         self.latent_generator = self._stream(latent_generator, seed + 2)
-        # Reserved stream (the penalty draws no randomness); kept so the
-        # checkpoint schema and the other streams' seeds stay unchanged.
+        # The critic penalty's path positions.
         self.penalty_generator = self._stream(penalty_generator, seed + 3)
         self.eval_generator = self._stream(None, seed + 4)
         self.noise_generator = self._stream(None, seed + 5)
         self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
-        self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        self.penalty = recipe.make_critic_penalty(self.opt_d, generator=self.penalty_generator,
+                                                  **self.penalty_options)
         self.completed_steps = 0
 
     @property
@@ -164,8 +166,7 @@ class GANTrainer:
         ``step`` in the result is the completed update count. The generator
         loss pairs fakes with ``generator_real`` (a tensor or a callable;
         default: ``real``). ``collect_stats`` additionally
-        returns the gradient penalty's synchronized diagnostic dictionary
-        (including K3P's blend weight ``s``).
+        returns the gradient penalty's synchronized diagnostic dictionary.
         """
         recipe = self.recipe
         if self.completed_steps >= recipe.total_steps:
@@ -363,10 +364,12 @@ class GANTrainer:
 
 
 # Recipe fields that once named a fixed choice (with the value that choice
-# had), and fields added since (with their defaults).
+# had), fields of a removed feature GANTrainer never used, and fields added
+# since (with the values older checkpoints trained with).
 _REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
                           "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_UNUSED_RECIPE_FIELDS = ("direct_particle_gain", "direct_particle_betas")
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "amsgrad": False}
 # Construction-time init once lived on the recipe; saved weights supersede it.
 _INIT_FIELD_VALUES = (None, "batch_feature_zero")
 
@@ -377,7 +380,8 @@ def _upgrade_recipe_fields(recipe):
         return recipe  # another formulation: left as is, so the recipe check rejects it
     if recipe.get("initialization") in _INIT_FIELD_VALUES:
         recipe = {key: value for key, value in recipe.items() if key != "initialization"}
-    recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
+    recipe = {key: value for key, value in recipe.items()
+              if key not in _REMOVED_RECIPE_FIELDS and key not in _UNUSED_RECIPE_FIELDS}
     return {**_ADDED_RECIPE_FIELDS, **recipe}
 
 
@@ -388,7 +392,7 @@ def _upgrade_schema_2(state):
         k3p = state.pop("k3p")
         opt_g, opt_d = state["optimizers"]
         critic = k3p["critic"]
-        opt_g = {**opt_g, "regularizer": {"latent": k3p["latent"], "direct": None}}
+        opt_g = {**opt_g, "regularizer": {"latent": k3p["latent"]}}
         opt_d = {**opt_d, "regularizer": {"record": critic["penalty"], "ema": critic["ema"],
                                           "guard": critic["guard"]}}
     except (KeyError, TypeError, ValueError) as error:

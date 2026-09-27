@@ -19,7 +19,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from experiments import analyze_sparse
 from experiments.train_sparse import DEFAULTS, train
-from particlegan import get_recipe
 from particlegan.k3p import CriticPenalty
 from lib.sparse_metrics import particle_class_purity
 from lib.sparse_models import JointCritic, SparseCondGenerator, XOnlyCritic
@@ -101,7 +100,7 @@ class SparseRegressionTests(unittest.TestCase):
 
         def check_penalty(penalty, critic, real, fake):
             self.assertFalse(critic.grad_on_y)
-            self.assertEqual(penalty.regularizer.coeff, get_recipe().reg_coeff)
+            self.assertEqual(penalty.regularizer.coeff, cfg["coeff"])
             self.assertEqual(real.shape, (cfg["batch_size"], cfg["d"] + cfg["n_symbols"]))
             self.assertFalse(torch.equal(real, fake))
             penalty_calls.append(penalty.optimizer.record.observed_steps)

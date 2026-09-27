@@ -156,7 +156,7 @@ def test_native_g_d_and_prior_groups_use_actual_capped_rates():
     recipe = Recipe(
         total_steps=4, num_particles=32, z_dim=2, batch_size=8,
         lr=0.01, prior_lr_mult=2.0, d_lr_mult=1.0,
-        lr_anneal_start=0.5, lr_floor=0.05,
+        lr_anneal_start=0.5, lr_floor=0.05, amsgrad=False,  # the scratch optimizer has no AMSGrad
     )
     generator = torch.nn.Linear(2, 2)
     discriminator = SimpleMLPDiscriminator(in_dim=2, hidden_dim=8, n_hidden=1, fourier=1)
