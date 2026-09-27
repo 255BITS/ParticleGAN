@@ -1,0 +1,85 @@
+{
+  "id": "research-td1-kernel-b6f35894-new-init",
+  "candidate": "RESEARCH-td1_kernel-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.916015625
+  },
+  "seconds": 42.943120492156595,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/td1-kernel-b6f35894-runtime-audit.json",
+  "audit_sha256": "cb1a2693218999df75e540e09b12f15a5853750027585b0d5abb95e0dafde063",
+  "artifacts": {
+    "research-evidence/research-td1-kernel-b6f35894-new-init/source-plan.json": {
+      "sha256": "f44cbbc0ac9f6edb86c101eb0880099ef7d688bb759dc5c367139a4c97c3d182",
+      "original_sha256": "f44cbbc0ac9f6edb86c101eb0880099ef7d688bb759dc5c367139a4c97c3d182",
+      "bytes": 41025
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/prepared-source.zip": {
+      "sha256": "d6c13cb59dac28539aad5d536569a465c825bbfbb61b86471d15b18b0df7c3ff",
+      "original_sha256": "d6c13cb59dac28539aad5d536569a465c825bbfbb61b86471d15b18b0df7c3ff",
+      "bytes": 652436
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/result.json.gz": {
+      "sha256": "8d86f0cc3ae8c3bd86945a8b06cb1443dd0c03db289cc0fe9be8d203904a5b28",
+      "original_sha256": "2a0aacc54e762f1a82f90cc704b26e61ae1e3aa107be582001f6e09f56122764",
+      "bytes": 113567
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/initialization-receipt.json": {
+      "sha256": "ed3614f67556764ba5f39124f3a9b8c8b9ae5ab5c4a515b7607af093daee4e16",
+      "original_sha256": "ed3614f67556764ba5f39124f3a9b8c8b9ae5ab5c4a515b7607af093daee4e16",
+      "bytes": 4492
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/prepared-source-manifest.json": {
+      "sha256": "a6103892bdaf28837d5efc0f798a0cb0fab01084201481f307fcf4d4b2fd37c0",
+      "original_sha256": "a6103892bdaf28837d5efc0f798a0cb0fab01084201481f307fcf4d4b2fd37c0",
+      "bytes": 5094
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/prepared-source-sha256.json": {
+      "sha256": "88b0bdf5c39c81d446db3cd5e6b467636130176fe5a69493c203605b16923f3a",
+      "original_sha256": "88b0bdf5c39c81d446db3cd5e6b467636130176fe5a69493c203605b16923f3a",
+      "bytes": 291
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/mechanism-receipt.json": {
+      "sha256": "78487b422452337e652c0e527eb74ae28c68233e97c02dbb74262b5b632c762b",
+      "original_sha256": "78487b422452337e652c0e527eb74ae28c68233e97c02dbb74262b5b632c762b",
+      "bytes": 8565
+    },
+    "research-evidence/research-td1-kernel-b6f35894-new-init/runtime.json": {
+      "sha256": "83737e05d23396dfa218b63d64eae0617f3e5449894e18e865c1651502fc709c",
+      "original_sha256": "83737e05d23396dfa218b63d64eae0617f3e5449894e18e865c1651502fc709c",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894/final-state.pt",
+      "sha256": "5e337db8349fb682a60351f76a31124eacd67bc96301501b86965e94e349833a",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

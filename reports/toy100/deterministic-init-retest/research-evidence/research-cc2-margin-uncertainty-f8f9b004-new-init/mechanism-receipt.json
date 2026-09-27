@@ -1,0 +1,575 @@
+{
+ "calls": 1200,
+ "dimensions": {
+  "2": 1200
+ },
+ "extra_critic_forwards": 3398,
+ "extra_critic_backwards": 0,
+ "floor": 0.01,
+ "prior_floor": 0.05,
+ "guard_c": 5.0,
+ "guard_min_steps": 200,
+ "pure_a_calls": 201,
+ "blend_calls": 999,
+ "pure_b_calls": 0,
+ "first_blend_call": 202,
+ "first_pure_b_call": null,
+ "critic_steps": 1200,
+ "critic_parameters": 20161,
+ "lr_max": 0.00425,
+ "lr_last": 0.0010230957757801054,
+ "s_trace": [
+  [
+   1,
+   1.0
+  ],
+  [
+   50,
+   1.0
+  ],
+  [
+   100,
+   1.0
+  ],
+  [
+   150,
+   1.0
+  ],
+  [
+   200,
+   1.0
+  ],
+  [
+   250,
+   0.461863
+  ],
+  [
+   300,
+   0.468677
+  ],
+  [
+   350,
+   0.414393
+  ],
+  [
+   400,
+   0.400106
+  ],
+  [
+   450,
+   0.432019
+  ],
+  [
+   500,
+   0.449472
+  ],
+  [
+   550,
+   0.453014
+  ],
+  [
+   600,
+   0.418808
+  ],
+  [
+   650,
+   0.462451
+  ],
+  [
+   700,
+   0.501343
+  ],
+  [
+   750,
+   0.500451
+  ],
+  [
+   800,
+   0.434335
+  ],
+  [
+   850,
+   0.503857
+  ],
+  [
+   900,
+   0.506103
+  ],
+  [
+   950,
+   0.443834
+  ],
+  [
+   1000,
+   0.482785
+  ],
+  [
+   1050,
+   0.325405
+  ],
+  [
+   1100,
+   0.423077
+  ],
+  [
+   1150,
+   0.423244
+  ],
+  [
+   1200,
+   0.455222
+  ]
+ ],
+ "rule": "cc2_margin_uncertainty",
+ "anchor_decay": 0.999,
+ "anchor_started_call": 202,
+ "prox_trace": [
+  [
+   250,
+   0.018334273248910904
+  ],
+  [
+   300,
+   0.013373354449868202
+  ],
+  [
+   350,
+   0.021879050880670547
+  ],
+  [
+   400,
+   0.03231477364897728
+  ],
+  [
+   450,
+   0.023127097636461258
+  ],
+  [
+   500,
+   0.020214006304740906
+  ],
+  [
+   550,
+   0.01560181099921465
+  ],
+  [
+   600,
+   0.01432226225733757
+  ],
+  [
+   650,
+   0.020295705646276474
+  ],
+  [
+   700,
+   0.016481488943099976
+  ],
+  [
+   750,
+   0.013617679476737976
+  ],
+  [
+   800,
+   0.01197843812406063
+  ],
+  [
+   850,
+   0.019745854660868645
+  ],
+  [
+   900,
+   0.012784330174326897
+  ],
+  [
+   950,
+   0.012938305735588074
+  ],
+  [
+   1000,
+   0.030564330518245697
+  ],
+  [
+   1050,
+   0.01895895227789879
+  ],
+  [
+   1100,
+   0.010553429834544659
+  ],
+  [
+   1150,
+   0.008352811448276043
+  ],
+  [
+   1200,
+   0.02145589515566826
+  ]
+ ],
+ "phase_trace": [
+  {
+   "critic_steps": 0,
+   "calls": 1,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "uncertainty_raw": 0.932965,
+   "confidence_ema": null,
+   "grad_rms": null,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": null
+  },
+  {
+   "critic_steps": 49,
+   "calls": 50,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "uncertainty_raw": 0.838037,
+   "confidence_ema": 0.168728,
+   "grad_rms": 0.0020943,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 99,
+   "calls": 100,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "uncertainty_raw": 0.455949,
+   "confidence_ema": 0.255276,
+   "grad_rms": 0.00301895,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 149,
+   "calls": 150,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "uncertainty_raw": 0.479545,
+   "confidence_ema": 0.520545,
+   "grad_rms": 0.00874574,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 199,
+   "calls": 200,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "uncertainty_raw": 0.416388,
+   "confidence_ema": 0.540774,
+   "grad_rms": 0.0199879,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 249,
+   "calls": 250,
+   "rate_gain": 0.236313,
+   "mix_gain": 0.236313,
+   "s": 0.461863,
+   "uncertainty_raw": 0.400066,
+   "confidence_ema": 0.618156,
+   "grad_rms": 0.00396633,
+   "network_multiplier": 0.24394985383843001,
+   "prior_multiplier": 0.2744973344914227,
+   "lr_last": 0.0010665035400613282
+  },
+  {
+   "critic_steps": 299,
+   "calls": 300,
+   "rate_gain": 0.239652,
+   "mix_gain": 0.239652,
+   "s": 0.468677,
+   "uncertainty_raw": 0.401349,
+   "confidence_ema": 0.619826,
+   "grad_rms": 0.00159408,
+   "network_multiplier": 0.24725517531399516,
+   "prior_multiplier": 0.2776691076245408,
+   "lr_last": 0.0010629974570213543
+  },
+  {
+   "critic_steps": 349,
+   "calls": 350,
+   "rate_gain": 0.213053,
+   "mix_gain": 0.213053,
+   "s": 0.414393,
+   "uncertainty_raw": 0.403993,
+   "confidence_ema": 0.606526,
+   "grad_rms": 0.00291217,
+   "network_multiplier": 0.22092212396377783,
+   "prior_multiplier": 0.2524000179450393,
+   "lr_last": 0.0009647781806186794
+  },
+  {
+   "critic_steps": 399,
+   "calls": 400,
+   "rate_gain": 0.206052,
+   "mix_gain": 0.206052,
+   "s": 0.400106,
+   "uncertainty_raw": 0.353841,
+   "confidence_ema": 0.603026,
+   "grad_rms": 0.00314966,
+   "network_multiplier": 0.21399162584839077,
+   "prior_multiplier": 0.24574953995552645,
+   "lr_last": 0.0009036989649421482
+  },
+  {
+   "critic_steps": 449,
+   "calls": 450,
+   "rate_gain": 0.221689,
+   "mix_gain": 0.221689,
+   "s": 0.432019,
+   "uncertainty_raw": 0.365059,
+   "confidence_ema": 0.610845,
+   "grad_rms": 0.00377291,
+   "network_multiplier": 0.22947238745038487,
+   "prior_multiplier": 0.2606048162402683,
+   "lr_last": 0.0009689817497885123
+  },
+  {
+   "critic_steps": 499,
+   "calls": 500,
+   "rate_gain": 0.230241,
+   "mix_gain": 0.230241,
+   "s": 0.449472,
+   "uncertainty_raw": 0.402816,
+   "confidence_ema": 0.615121,
+   "grad_rms": 0.002168,
+   "network_multiplier": 0.2379386835332541,
+   "prior_multiplier": 0.2687290397541327,
+   "lr_last": 0.0010201936395925432
+  },
+  {
+   "critic_steps": 549,
+   "calls": 550,
+   "rate_gain": 0.231977,
+   "mix_gain": 0.231977,
+   "s": 0.453014,
+   "uncertainty_raw": 0.371907,
+   "confidence_ema": 0.615988,
+   "grad_rms": 0.00284794,
+   "network_multiplier": 0.23965696443092002,
+   "prior_multiplier": 0.2703778951609838,
+   "lr_last": 0.0010075056681067038
+  },
+  {
+   "critic_steps": 599,
+   "calls": 600,
+   "rate_gain": 0.215216,
+   "mix_gain": 0.215216,
+   "s": 0.418808,
+   "uncertainty_raw": 0.394942,
+   "confidence_ema": 0.607608,
+   "grad_rms": 0.00216763,
+   "network_multiplier": 0.22306398319480644,
+   "prior_multiplier": 0.2544553374091577,
+   "lr_last": 0.0009576259742602914
+  },
+  {
+   "critic_steps": 649,
+   "calls": 650,
+   "rate_gain": 0.236601,
+   "mix_gain": 0.236601,
+   "s": 0.462451,
+   "uncertainty_raw": 0.380468,
+   "confidence_ema": 0.6183,
+   "grad_rms": 0.00227522,
+   "network_multiplier": 0.24423476899837396,
+   "prior_multiplier": 0.2747707379277326,
+   "lr_last": 0.0010396873792832104
+  },
+  {
+   "critic_steps": 699,
+   "calls": 700,
+   "rate_gain": 0.255658,
+   "mix_gain": 0.255658,
+   "s": 0.501343,
+   "uncertainty_raw": 0.361022,
+   "confidence_ema": 0.627829,
+   "grad_rms": 0.00298885,
+   "network_multiplier": 0.2631016138090503,
+   "prior_multiplier": 0.2928752859783816,
+   "lr_last": 0.0011316538447590297
+  },
+  {
+   "critic_steps": 749,
+   "calls": 750,
+   "rate_gain": 0.255221,
+   "mix_gain": 0.255221,
+   "s": 0.500451,
+   "uncertainty_raw": 0.326665,
+   "confidence_ema": 0.627611,
+   "grad_rms": 0.0020894,
+   "network_multiplier": 0.2626688793826293,
+   "prior_multiplier": 0.2924600357712099,
+   "lr_last": 0.0011045390204326812
+  },
+  {
+   "critic_steps": 799,
+   "calls": 800,
+   "rate_gain": 0.222824,
+   "mix_gain": 0.222824,
+   "s": 0.434335,
+   "uncertainty_raw": 0.338949,
+   "confidence_ema": 0.611412,
+   "grad_rms": 0.00283464,
+   "network_multiplier": 0.2305960216551636,
+   "prior_multiplier": 0.2616830510832378,
+   "lr_last": 0.0009854580157812756
+  },
+  {
+   "critic_steps": 849,
+   "calls": 850,
+   "rate_gain": 0.25689,
+   "mix_gain": 0.25689,
+   "s": 0.503857,
+   "uncertainty_raw": 0.44569,
+   "confidence_ema": 0.628445,
+   "grad_rms": 0.00331247,
+   "network_multiplier": 0.26432106358008234,
+   "prior_multiplier": 0.2940454650515941,
+   "lr_last": 0.0011151892039631248
+  },
+  {
+   "critic_steps": 899,
+   "calls": 900,
+   "rate_gain": 0.25799,
+   "mix_gain": 0.25799,
+   "s": 0.506103,
+   "uncertainty_raw": 0.352863,
+   "confidence_ema": 0.628995,
+   "grad_rms": 0.00208218,
+   "network_multiplier": 0.2654104271350992,
+   "prior_multiplier": 0.29509081391751946,
+   "lr_last": 0.001126760684003371
+  },
+  {
+   "critic_steps": 949,
+   "calls": 950,
+   "rate_gain": 0.227479,
+   "mix_gain": 0.227479,
+   "s": 0.443834,
+   "uncertainty_raw": 0.407669,
+   "confidence_ema": 0.613739,
+   "grad_rms": 0.00216026,
+   "network_multiplier": 0.23520402495923548,
+   "prior_multiplier": 0.26610487243562997,
+   "lr_last": 0.0010036649745393622
+  },
+  {
+   "critic_steps": 999,
+   "calls": 1000,
+   "rate_gain": 0.246565,
+   "mix_gain": 0.246565,
+   "s": 0.482785,
+   "uncertainty_raw": 0.358099,
+   "confidence_ema": 0.623282,
+   "grad_rms": 0.00325024,
+   "network_multiplier": 0.25409896148185696,
+   "prior_multiplier": 0.2842363771795597,
+   "lr_last": 0.001072217849316106
+  },
+  {
+   "critic_steps": 1049,
+   "calls": 1050,
+   "rate_gain": 0.169448,
+   "mix_gain": 0.169448,
+   "s": 0.325405,
+   "uncertainty_raw": 0.412077,
+   "confidence_ema": 0.584724,
+   "grad_rms": 0.00335847,
+   "network_multiplier": 0.17775382070724827,
+   "prior_multiplier": 0.21097588855746047,
+   "lr_last": 0.0007498488352575491
+  },
+  {
+   "critic_steps": 1099,
+   "calls": 1100,
+   "rate_gain": 0.217308,
+   "mix_gain": 0.217308,
+   "s": 0.423077,
+   "uncertainty_raw": 0.399036,
+   "confidence_ema": 0.608654,
+   "grad_rms": 0.00254892,
+   "network_multiplier": 0.22513464081102968,
+   "prior_multiplier": 0.2564423320913921,
+   "lr_last": 0.0009585757798177069
+  },
+  {
+   "critic_steps": 1149,
+   "calls": 1150,
+   "rate_gain": 0.21739,
+   "mix_gain": 0.21739,
+   "s": 0.423244,
+   "uncertainty_raw": 0.387679,
+   "confidence_ema": 0.608695,
+   "grad_rms": 0.0013843,
+   "network_multiplier": 0.22521562744439583,
+   "prior_multiplier": 0.25652004653755156,
+   "lr_last": 0.000970701238938122
+  },
+  {
+   "critic_steps": 1199,
+   "calls": 1200,
+   "rate_gain": 0.233059,
+   "mix_gain": 0.233059,
+   "s": 0.455222,
+   "uncertainty_raw": 0.495075,
+   "confidence_ema": 0.61653,
+   "grad_rms": 0.00572069,
+   "network_multiplier": 0.24072841783061302,
+   "prior_multiplier": 0.2714060575142246,
+   "lr_last": 0.0010214221824852007
+  }
+ ],
+ "signal": "paired_margin_coefficient_of_variation",
+ "uncertainty_formula": "var(margin)/(var(margin)+mean(margin)^2); confidence=1-uncertainty; gain=relu(2*confidence-1)",
+ "normalization": "mean and variance over batch pairs; each pair is one scalar margin averaged over remaining axes",
+ "ema_weight": 0.05,
+ "warmup": 200,
+ "cv_close": "gain reaches 0 when confidence <= 0.5, i.e. the batch std of the margin is at least the absolute mean",
+ "rate_rule": "network=0.01+0.99*gain prior=0.05+0.95*gain after warmup; warmup forces gain 1",
+ "mix_rule": "mix gain equals rate gain; K3P handover maps that gain to s and does not read applied LR",
+ "noise": "unchanged host schedule; intermediate ablation; ring driver still passes noise_horizon 1200",
+ "budget_dependencies": [
+  "host noise still receives a horizon (ring driver hardcodes 1200; transfer tasks pass their step count)",
+  "config network_lr_horizon_cap remains because the host requires it; phase_multipliers ignores the value",
+  "phase_multipliers still accepts step, total, anneal, and floors and does not use them",
+  "warmup 200 and EMA weight 0.05 are estimator constants, not a training horizon"
+ ],
+ "ignored_schedule_args_sample": {
+  "nargs": 5,
+  "has_network_lr_floor": true
+ },
+ "parent_failure": "cc1 half-split coherence EMA stayed in [0.536, 0.980] and never left gain 1",
+ "uncertainty_min": 0.16905287220756882,
+ "uncertainty_max": 0.999936968966193,
+ "confidence_min": 0.06703479311480764,
+ "confidence_max": 0.653136510729547,
+ "phase_install_sites": [
+  "benchmarks.toy100.schedule.policy_multipliers"
+ ],
+ "batch": 128,
+ "final_s": 0.432445956405839,
+ "final_rate_gain": 0.22189851863886112,
+ "final_mix_gain": 0.22189851863886112,
+ "final_confidence_ema": 0.6109492593194306,
+ "final_uncertainty_raw": 0.49507538875363505,
+ "final_grad_rms": 0.0034777841065078974,
+ "guard_clipped_tensors": 2,
+ "guard_clip_steps": [
+  1012,
+  1015
+ ],
+ "guard_clip_step_count": 2
+}

@@ -1,0 +1,85 @@
+{
+  "id": "research-ac1-persistence-549d59e6-new-init",
+  "candidate": "RESEARCH-ac1_persistence-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 5,
+    "final_hq": 0.7333984375
+  },
+  "seconds": 43.87742663617246,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ac1-persistence-549d59e6-runtime-audit.json",
+  "audit_sha256": "d7d717b7d55f7543e5af688a2eb348e4aad824012d681207587bdbde7dffbfab",
+  "artifacts": {
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/source-plan.json": {
+      "sha256": "7dfc021bee670d03a0ccb944ad907711f40d024af9012dfb3605da821e5288f5",
+      "original_sha256": "7dfc021bee670d03a0ccb944ad907711f40d024af9012dfb3605da821e5288f5",
+      "bytes": 41043
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/prepared-source.zip": {
+      "sha256": "28ffd7cb0fe1ed5d9649727c5150e020f8361e07b3e4a5dad1be72adda2d9150",
+      "original_sha256": "28ffd7cb0fe1ed5d9649727c5150e020f8361e07b3e4a5dad1be72adda2d9150",
+      "bytes": 652125
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/result.json.gz": {
+      "sha256": "266d7e71e55afabb97e2004e46aab1ddde120235a6cf32d1734c58ae6fa3cd97",
+      "original_sha256": "252f4ee518decb9ea9fa791a283d3ba314ad6196d3c431124ef35fc320326e35",
+      "bytes": 112712
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/initialization-receipt.json": {
+      "sha256": "e363183dc5ec5138c8dd539f165e38e02062aa9a746a9579c069120b6d01aa0d",
+      "original_sha256": "e363183dc5ec5138c8dd539f165e38e02062aa9a746a9579c069120b6d01aa0d",
+      "bytes": 4497
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/prepared-source-manifest.json": {
+      "sha256": "6d980644f65b50ae12b6f98301a2083d994e24a889ca2e6203a52eb471de00b7",
+      "original_sha256": "6d980644f65b50ae12b6f98301a2083d994e24a889ca2e6203a52eb471de00b7",
+      "bytes": 5094
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/prepared-source-sha256.json": {
+      "sha256": "4fc503251eba3e6933c04ca1b37d533b9859fe8daa779741693f2968f22457a6",
+      "original_sha256": "4fc503251eba3e6933c04ca1b37d533b9859fe8daa779741693f2968f22457a6",
+      "bytes": 291
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/mechanism-receipt.json": {
+      "sha256": "3f13d506f26d2f700c0c8a139745773aa6f7c1761da7df81764f8fd0811a351a",
+      "original_sha256": "3f13d506f26d2f700c0c8a139745773aa6f7c1761da7df81764f8fd0811a351a",
+      "bytes": 6945
+    },
+    "research-evidence/research-ac1-persistence-549d59e6-new-init/runtime.json": {
+      "sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+      "original_sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6/final-state.pt",
+      "sha256": "e337a43c1d44114a361bd0a26d40908116c1a1a6b2a32f48efb2c39757ddf4a2",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

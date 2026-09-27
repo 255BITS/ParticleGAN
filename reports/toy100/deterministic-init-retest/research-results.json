@@ -6354,7 +6354,1899 @@
       },
       "old_quality_inherited": false,
       "archive_manifest": "research-evidence/research-rp-r1-fake-cap-e19ea6cd-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-ns3-fixed-schedule-shock-32b0ade5-new-init",
+      "candidate": "RESEARCH-ns3_fixed_schedule_shock-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 6,
+        "final_hq": 0.94873046875
+      },
+      "seconds": 39.19674824504182,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ns3-fixed-schedule-shock-32b0ade5",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ns3-fixed-schedule-shock-32b0ade5-runtime-audit.json",
+      "audit_sha256": "8d77e29d3c0d3cd9c60b2d2320fe4777ff896f35c5833afceb0c9be6ea27570b",
+      "artifacts": {
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/source-plan.json": {
+          "sha256": "be74bf7a3e652085b05d238e7f824308a87ab79fb390a406f27696ee8ddf08e7",
+          "original_sha256": "be74bf7a3e652085b05d238e7f824308a87ab79fb390a406f27696ee8ddf08e7",
+          "bytes": 41669
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/prepared-source.zip": {
+          "sha256": "b93bd546c1063c00728d0078a9596226023e450bbf99060866b8f4bc2a0813e0",
+          "original_sha256": "b93bd546c1063c00728d0078a9596226023e450bbf99060866b8f4bc2a0813e0",
+          "bytes": 654190
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/result.json.gz": {
+          "sha256": "0cc2a0a27bbf507751866cd55db98a841f21d4df4b9f779a736ac4b5e9582f13",
+          "original_sha256": "b4b8925e2de839f382ebae337d7318f76f64d4c9018dea38e8d18486e7f9d20a",
+          "bytes": 67417
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/initialization-receipt.json": {
+          "sha256": "4a643bdc46595a42fc74a6fe20d950d314dd5769c1aacf4634f9dab63c28bbbc",
+          "original_sha256": "4a643bdc46595a42fc74a6fe20d950d314dd5769c1aacf4634f9dab63c28bbbc",
+          "bytes": 4506
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/prepared-source-manifest.json": {
+          "sha256": "94efd6688b8a08ba362fc3d27d9637000fdfc767c3f3878ae06f9221f4a3a0c8",
+          "original_sha256": "94efd6688b8a08ba362fc3d27d9637000fdfc767c3f3878ae06f9221f4a3a0c8",
+          "bytes": 5203
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/prepared-source-sha256.json": {
+          "sha256": "f91b8887f2c9c52cde56e07aa78c8ebc47f76d5c9b2a9466007060a98d11f885",
+          "original_sha256": "f91b8887f2c9c52cde56e07aa78c8ebc47f76d5c9b2a9466007060a98d11f885",
+          "bytes": 291
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/mechanism-receipt.json": {
+          "sha256": "965183fd6bcd96044939335a5247f3107ec722bebe118c0d7a542fd195a0f96e",
+          "original_sha256": "965183fd6bcd96044939335a5247f3107ec722bebe118c0d7a542fd195a0f96e",
+          "bytes": 4640
+        },
+        "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/runtime.json": {
+          "sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+          "original_sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ns3-fixed-schedule-shock-32b0ade5/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ns3-fixed-schedule-shock-32b0ade5/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ns3-fixed-schedule-shock-32b0ade5/final-state.pt",
+          "sha256": "9499097116c643c6d8325aa12ecc990bd39d35b252e276c965aea444a0759e98",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-ns3-fixed-schedule-shock-32b0ade5-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-ac1-persistence-549d59e6-new-init",
+      "candidate": "RESEARCH-ac1_persistence-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 5,
+        "final_hq": 0.7333984375
+      },
+      "seconds": 43.87742663617246,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ac1-persistence-549d59e6-runtime-audit.json",
+      "audit_sha256": "d7d717b7d55f7543e5af688a2eb348e4aad824012d681207587bdbde7dffbfab",
+      "artifacts": {
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/source-plan.json": {
+          "sha256": "7dfc021bee670d03a0ccb944ad907711f40d024af9012dfb3605da821e5288f5",
+          "original_sha256": "7dfc021bee670d03a0ccb944ad907711f40d024af9012dfb3605da821e5288f5",
+          "bytes": 41043
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/prepared-source.zip": {
+          "sha256": "28ffd7cb0fe1ed5d9649727c5150e020f8361e07b3e4a5dad1be72adda2d9150",
+          "original_sha256": "28ffd7cb0fe1ed5d9649727c5150e020f8361e07b3e4a5dad1be72adda2d9150",
+          "bytes": 652125
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/result.json.gz": {
+          "sha256": "266d7e71e55afabb97e2004e46aab1ddde120235a6cf32d1734c58ae6fa3cd97",
+          "original_sha256": "252f4ee518decb9ea9fa791a283d3ba314ad6196d3c431124ef35fc320326e35",
+          "bytes": 112712
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/initialization-receipt.json": {
+          "sha256": "e363183dc5ec5138c8dd539f165e38e02062aa9a746a9579c069120b6d01aa0d",
+          "original_sha256": "e363183dc5ec5138c8dd539f165e38e02062aa9a746a9579c069120b6d01aa0d",
+          "bytes": 4497
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/prepared-source-manifest.json": {
+          "sha256": "6d980644f65b50ae12b6f98301a2083d994e24a889ca2e6203a52eb471de00b7",
+          "original_sha256": "6d980644f65b50ae12b6f98301a2083d994e24a889ca2e6203a52eb471de00b7",
+          "bytes": 5094
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/prepared-source-sha256.json": {
+          "sha256": "4fc503251eba3e6933c04ca1b37d533b9859fe8daa779741693f2968f22457a6",
+          "original_sha256": "4fc503251eba3e6933c04ca1b37d533b9859fe8daa779741693f2968f22457a6",
+          "bytes": 291
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/mechanism-receipt.json": {
+          "sha256": "3f13d506f26d2f700c0c8a139745773aa6f7c1761da7df81764f8fd0811a351a",
+          "original_sha256": "3f13d506f26d2f700c0c8a139745773aa6f7c1761da7df81764f8fd0811a351a",
+          "bytes": 6945
+        },
+        "research-evidence/research-ac1-persistence-549d59e6-new-init/runtime.json": {
+          "sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+          "original_sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac1-persistence-549d59e6/final-state.pt",
+          "sha256": "e337a43c1d44114a361bd0a26d40908116c1a1a6b2a32f48efb2c39757ddf4a2",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-ac1-persistence-549d59e6-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-ac2-advantage-2486972b-new-init",
+      "candidate": "RESEARCH-ac2_advantage-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 3,
+        "final_hq": 0.91650390625
+      },
+      "seconds": 42.761797475861385,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac2-advantage-2486972b",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ac2-advantage-2486972b-runtime-audit.json",
+      "audit_sha256": "1fdd8d6b2ed4f0f6451505de1169b5979667e0449b8624407994db795c90a8ea",
+      "artifacts": {
+        "research-evidence/research-ac2-advantage-2486972b-new-init/source-plan.json": {
+          "sha256": "b41b30e120627cf8a66ff54053303187b8fdd6b577056ef1fa84364be9e62c1a",
+          "original_sha256": "b41b30e120627cf8a66ff54053303187b8fdd6b577056ef1fa84364be9e62c1a",
+          "bytes": 41029
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/prepared-source.zip": {
+          "sha256": "bf00458b3a0c17528a1028b5158670ca4680b8c93b9644dcba4e2c15a3d4dbdb",
+          "original_sha256": "bf00458b3a0c17528a1028b5158670ca4680b8c93b9644dcba4e2c15a3d4dbdb",
+          "bytes": 652491
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/result.json.gz": {
+          "sha256": "8e77a4f304286b5b6e7b4faf9e6377b6592c10122ed3cac21e31994c10ce3cd0",
+          "original_sha256": "53de68bbd44694d6a19821e96c130431c7ea00ef68d75ecabe9a66430f816359",
+          "bytes": 109651
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/initialization-receipt.json": {
+          "sha256": "5b3689c8fc0f03f5033d9c0ca028e2db13abc4a9ef1255fc5726aa6c35ffa9c3",
+          "original_sha256": "5b3689c8fc0f03f5033d9c0ca028e2db13abc4a9ef1255fc5726aa6c35ffa9c3",
+          "bytes": 4495
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/prepared-source-manifest.json": {
+          "sha256": "76a2e7fa135d92891acf05872cf8151302ba68915ade4583655fe22aac02dd89",
+          "original_sha256": "76a2e7fa135d92891acf05872cf8151302ba68915ade4583655fe22aac02dd89",
+          "bytes": 5094
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/prepared-source-sha256.json": {
+          "sha256": "abeb331ca43948fb4e81c545e2d17fa77fb3a82f78f685436a6f27a3c9cae9ef",
+          "original_sha256": "abeb331ca43948fb4e81c545e2d17fa77fb3a82f78f685436a6f27a3c9cae9ef",
+          "bytes": 291
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/mechanism-receipt.json": {
+          "sha256": "8238162b527632e89f9ecb13a6848c3dd528dc125b7b12dce5f4a8f7a53f3bec",
+          "original_sha256": "8238162b527632e89f9ecb13a6848c3dd528dc125b7b12dce5f4a8f7a53f3bec",
+          "bytes": 8675
+        },
+        "research-evidence/research-ac2-advantage-2486972b-new-init/runtime.json": {
+          "sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+          "original_sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac2-advantage-2486972b/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac2-advantage-2486972b/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac2-advantage-2486972b/final-state.pt",
+          "sha256": "a9855bc08e8944d18fd5049e956f3d56427610abd7e06d4f70a49fda61a2034f",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-ac2-advantage-2486972b-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-ac3-gap-magnitude-8b2c2556-new-init",
+      "candidate": "RESEARCH-ac3_gap_magnitude-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 4,
+        "final_hq": 0.91650390625
+      },
+      "seconds": 40.596625263104215,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac3-gap-magnitude-8b2c2556",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ac3-gap-magnitude-8b2c2556-runtime-audit.json",
+      "audit_sha256": "3bdccb84ae3a544854705e68686d66b8c27aa243c65803ced93f867746fc3fe3",
+      "artifacts": {
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/source-plan.json": {
+          "sha256": "bfc365c47ac5befc9a58306d33265dbc598697a311ae2498fbad2199dea13979",
+          "original_sha256": "bfc365c47ac5befc9a58306d33265dbc598697a311ae2498fbad2199dea13979",
+          "bytes": 41057
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/prepared-source.zip": {
+          "sha256": "660d80e12296788e38c9c628e26278f48a8701404e279c91778ad8c939997c4b",
+          "original_sha256": "660d80e12296788e38c9c628e26278f48a8701404e279c91778ad8c939997c4b",
+          "bytes": 652709
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/result.json.gz": {
+          "sha256": "4a8ef14d9d5510e23a4cce417a98d50aca304a667a3b21dadfa9245cc0fec9ab",
+          "original_sha256": "8c740ba4e01967625534c91a857a117a047333a80a2ebe069fc91c218dcca5fc",
+          "bytes": 113839
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/initialization-receipt.json": {
+          "sha256": "11ff64801ff4e1d1ea49e3558361bc309e90542ce1e3fef42d1e933b20757c27",
+          "original_sha256": "11ff64801ff4e1d1ea49e3558361bc309e90542ce1e3fef42d1e933b20757c27",
+          "bytes": 4499
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/prepared-source-manifest.json": {
+          "sha256": "2c5520c28ce8817eed55c91c4ff564f764d88203a94c79d85eb8792fe4b17c25",
+          "original_sha256": "2c5520c28ce8817eed55c91c4ff564f764d88203a94c79d85eb8792fe4b17c25",
+          "bytes": 5094
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/prepared-source-sha256.json": {
+          "sha256": "7267ab09e86beb97eaea4f6c6b30acfbe9f404b2063ac2165aae0c92256a4d6c",
+          "original_sha256": "7267ab09e86beb97eaea4f6c6b30acfbe9f404b2063ac2165aae0c92256a4d6c",
+          "bytes": 291
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/mechanism-receipt.json": {
+          "sha256": "133e163023510ee57ff49b99f77dac1bd361546c4bde438b6bf066d9328a4564",
+          "original_sha256": "133e163023510ee57ff49b99f77dac1bd361546c4bde438b6bf066d9328a4564",
+          "bytes": 9439
+        },
+        "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/runtime.json": {
+          "sha256": "83737e05d23396dfa218b63d64eae0617f3e5449894e18e865c1651502fc709c",
+          "original_sha256": "83737e05d23396dfa218b63d64eae0617f3e5449894e18e865c1651502fc709c",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac3-gap-magnitude-8b2c2556/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac3-gap-magnitude-8b2c2556/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ac3-gap-magnitude-8b2c2556/final-state.pt",
+          "sha256": "702d42cc14a5e465443eb113892d6952fb9e28133555cd0f877bdc88daea178d",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-ac3-gap-magnitude-8b2c2556-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-cc1-halfsplit-coherence-894a403d-new-init",
+      "candidate": "RESEARCH-cc1_halfsplit_coherence-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.99853515625
+      },
+      "seconds": 49.06781723094173,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc1-halfsplit-coherence-894a403d",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/cc1-halfsplit-coherence-894a403d-runtime-audit.json",
+      "audit_sha256": "2eca3d2f5413116e4e1061223d192041cfe67d0d3c42da1709b71e6a2006e77f",
+      "artifacts": {
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/source-plan.json": {
+          "sha256": "8bd61a64275a794f4e7add25c79f23a858bfb953bc4ddcada1fca0de674ee134",
+          "original_sha256": "8bd61a64275a794f4e7add25c79f23a858bfb953bc4ddcada1fca0de674ee134",
+          "bytes": 41128
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/prepared-source.zip": {
+          "sha256": "bf69ecad7610d820be562e9b8bcd426bc29195ac0e6d34fc777059ae7950d238",
+          "original_sha256": "bf69ecad7610d820be562e9b8bcd426bc29195ac0e6d34fc777059ae7950d238",
+          "bytes": 653994
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/result.json.gz": {
+          "sha256": "b3dd78e5c7b240ad61438a3c182625cf7b85dabaa8f067c8c52c647c7e3fe253",
+          "original_sha256": "6929639e8762b642bdd05fbc819541afb1385dd66cc60b10e09ec3e01951cade",
+          "bytes": 60567
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/initialization-receipt.json": {
+          "sha256": "0567218e45c1fafddd158fa6996ab2d6106e34406a188581dd4fd6d4d47de919",
+          "original_sha256": "0567218e45c1fafddd158fa6996ab2d6106e34406a188581dd4fd6d4d47de919",
+          "bytes": 4505
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/prepared-source-manifest.json": {
+          "sha256": "a9422584aa1e59bf39024ac8a74e515f42161565c1209a61a4920ae9974fd590",
+          "original_sha256": "a9422584aa1e59bf39024ac8a74e515f42161565c1209a61a4920ae9974fd590",
+          "bytes": 5094
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/prepared-source-sha256.json": {
+          "sha256": "b1a6910d6d5f18d998111a2f415f601f690b1d5b766ca43c6e5346dffd1ff033",
+          "original_sha256": "b1a6910d6d5f18d998111a2f415f601f690b1d5b766ca43c6e5346dffd1ff033",
+          "bytes": 291
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/mechanism-receipt.json": {
+          "sha256": "c030a115ec499c30a0786068cc317c264a8002429374da3f686c62dc9cca2b21",
+          "original_sha256": "c030a115ec499c30a0786068cc317c264a8002429374da3f686c62dc9cca2b21",
+          "bytes": 9070
+        },
+        "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/runtime.json": {
+          "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc1-halfsplit-coherence-894a403d/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc1-halfsplit-coherence-894a403d/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc1-halfsplit-coherence-894a403d/final-state.pt",
+          "sha256": "1569c94069e0e59a6ef94e9da9a00884419ca9d45ed87ccc724b0da1f547511d",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-cc1-halfsplit-coherence-894a403d-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-cc2-margin-uncertainty-f8f9b004-new-init",
+      "candidate": "RESEARCH-cc2_margin_uncertainty-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 3,
+        "final_hq": 1.0
+      },
+      "seconds": 41.669177803210914,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc2-margin-uncertainty-f8f9b004",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/cc2-margin-uncertainty-f8f9b004-runtime-audit.json",
+      "audit_sha256": "a1866caa5f41bfbb932b20331e8d14ff4beaa16a7e0d7a373635f19b17489e52",
+      "artifacts": {
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/source-plan.json": {
+          "sha256": "bb7e0216e10e58f1a4156d17fec7d70b0ee8537aed51422283c6fc29a855484e",
+          "original_sha256": "bb7e0216e10e58f1a4156d17fec7d70b0ee8537aed51422283c6fc29a855484e",
+          "bytes": 41123
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/prepared-source.zip": {
+          "sha256": "4f2e4506c90c0631f00fc1558ebf4227df4a155c03c401c9fa34822de5ef78d3",
+          "original_sha256": "4f2e4506c90c0631f00fc1558ebf4227df4a155c03c401c9fa34822de5ef78d3",
+          "bytes": 653607
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/result.json.gz": {
+          "sha256": "d3c061320747bd0216d99cd6ceb3e37ef3a201c66e42640fb846e35c9e1ed639",
+          "original_sha256": "ee86ea86e6786a1b8cfe49826f4df2ad5f060c25dfa3abd837d94404a561f08d",
+          "bytes": 116028
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/initialization-receipt.json": {
+          "sha256": "c0482f28d0edd1795235fa77a60a9a7d8f63d9274e5b4c38e600736258af52f5",
+          "original_sha256": "c0482f28d0edd1795235fa77a60a9a7d8f63d9274e5b4c38e600736258af52f5",
+          "bytes": 4504
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/prepared-source-manifest.json": {
+          "sha256": "1de585f9d9c99953d5be702eb22e1ddf9a818588c07498fd72094f1dd80dff68",
+          "original_sha256": "1de585f9d9c99953d5be702eb22e1ddf9a818588c07498fd72094f1dd80dff68",
+          "bytes": 5094
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/prepared-source-sha256.json": {
+          "sha256": "d129333b298585ea7297878854736397234281654f079d758438d545ea4e0a72",
+          "original_sha256": "d129333b298585ea7297878854736397234281654f079d758438d545ea4e0a72",
+          "bytes": 291
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/mechanism-receipt.json": {
+          "sha256": "fa963ea82e07f9e5e4e9760b0d6a71f8dcfe9d9d5d490d9ac203cc9bc0b1703d",
+          "original_sha256": "fa963ea82e07f9e5e4e9760b0d6a71f8dcfe9d9d5d490d9ac203cc9bc0b1703d",
+          "bytes": 12059
+        },
+        "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/runtime.json": {
+          "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc2-margin-uncertainty-f8f9b004/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc2-margin-uncertainty-f8f9b004/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc2-margin-uncertainty-f8f9b004/final-state.pt",
+          "sha256": "2a2c5ba31549753426894e69db416b4fe7b14b4887ec47298c271ba186e41c58",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-cc2-margin-uncertainty-f8f9b004-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-cc3-frozen-baseline-quiet-399ef2aa-new-init",
+      "candidate": "RESEARCH-cc3_frozen_baseline_quiet-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 5,
+        "final_hq": 0.732666015625
+      },
+      "seconds": 41.8155004021246,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/cc3-frozen-baseline-quiet-399ef2aa-runtime-audit.json",
+      "audit_sha256": "4fe7ad3a349485c8ffa98f3965e11978b2eddb5b3fed942df330595bdc81293a",
+      "artifacts": {
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/source-plan.json": {
+          "sha256": "ee5b1017d95ee4f1d5ab1edd0ee58947c74fd8e9af36b26b41965a76366b6c8c",
+          "original_sha256": "ee5b1017d95ee4f1d5ab1edd0ee58947c74fd8e9af36b26b41965a76366b6c8c",
+          "bytes": 41138
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/prepared-source.zip": {
+          "sha256": "03b9fd1fafa859bd0d6defdaaa8ef0acde5fdf5182b9a580c170b11601a48ce1",
+          "original_sha256": "03b9fd1fafa859bd0d6defdaaa8ef0acde5fdf5182b9a580c170b11601a48ce1",
+          "bytes": 653471
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/result.json.gz": {
+          "sha256": "ed8e1040b7a4da7aa30db470fe0267c5e9e575214dd11a866609a859736de40e",
+          "original_sha256": "2da6b49532d74fc15d80e2f4efcb1983fce37fd7248d75d50ba24c5a415f325a",
+          "bytes": 61347
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/initialization-receipt.json": {
+          "sha256": "8997ce262d2aa59d665b48907c31218124068ce5671815973dc2785f696ea83d",
+          "original_sha256": "8997ce262d2aa59d665b48907c31218124068ce5671815973dc2785f696ea83d",
+          "bytes": 4507
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/prepared-source-manifest.json": {
+          "sha256": "d5856f6061bc1af2d6d598be867c1d2e86e55e8ec943fcb274ecd6be0109e6ea",
+          "original_sha256": "d5856f6061bc1af2d6d598be867c1d2e86e55e8ec943fcb274ecd6be0109e6ea",
+          "bytes": 5094
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/prepared-source-sha256.json": {
+          "sha256": "94ef169fd7708b25342a65a93a412dff73e965f29351f31bedbb12fd987fcd08",
+          "original_sha256": "94ef169fd7708b25342a65a93a412dff73e965f29351f31bedbb12fd987fcd08",
+          "bytes": 291
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/mechanism-receipt.json": {
+          "sha256": "51ac0100925d037713c321676c2b765da1ae4246239af5db3a204aa30a789691",
+          "original_sha256": "51ac0100925d037713c321676c2b765da1ae4246239af5db3a204aa30a789691",
+          "bytes": 10777
+        },
+        "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/runtime.json": {
+          "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa/final-state.pt",
+          "sha256": "49c40be69d2c08a5f81e9c5ff46a0b6528451981aaf6586c3eeadb14b4adf548",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-di1-real-batch-innovation-63a67cee-new-init",
+      "candidate": "RESEARCH-di1_real_batch_innovation-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 39.60952396597713,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/di1-real-batch-innovation-63a67cee-runtime-audit.json",
+      "audit_sha256": "03305920d0777f9dcb383bc301f3247db0a18dd84b5e1e9d698b6d6efae3356b",
+      "artifacts": {
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/source-plan.json": {
+          "sha256": "b163df94748e8adc9bdf458368e0c178128942edbb76d68ac4e166e2762850af",
+          "original_sha256": "b163df94748e8adc9bdf458368e0c178128942edbb76d68ac4e166e2762850af",
+          "bytes": 41127
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/prepared-source.zip": {
+          "sha256": "2d61a8547affee4f93ea392898bc2f11a581ea961735df12dd1e74f33de90102",
+          "original_sha256": "2d61a8547affee4f93ea392898bc2f11a581ea961735df12dd1e74f33de90102",
+          "bytes": 652921
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/result.json.gz": {
+          "sha256": "3ddc4cbaf3bb629c2555372f929cf4027a51b86de804fdc91fe5167abfaa033a",
+          "original_sha256": "61307dae0b659572c8ba7bd03c826eddd60cf8b81efb96c7e4cfb3be358c2f67",
+          "bytes": 85642
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/initialization-receipt.json": {
+          "sha256": "97a29a036acfcacad99ef2fa80963ca6354b2e369347eb75a14e5b15c50ba848",
+          "original_sha256": "97a29a036acfcacad99ef2fa80963ca6354b2e369347eb75a14e5b15c50ba848",
+          "bytes": 4507
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/prepared-source-manifest.json": {
+          "sha256": "c7be1f0cd0d75640943be27e05b0aaf8da4763e0f6b587640b11e956c27ea37d",
+          "original_sha256": "c7be1f0cd0d75640943be27e05b0aaf8da4763e0f6b587640b11e956c27ea37d",
+          "bytes": 5094
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/prepared-source-sha256.json": {
+          "sha256": "77aee11516f6825d0458f6cd0b37338b01f70e32b77ac21557da359bf31cdffa",
+          "original_sha256": "77aee11516f6825d0458f6cd0b37338b01f70e32b77ac21557da359bf31cdffa",
+          "bytes": 291
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/mechanism-receipt.json": {
+          "sha256": "22e04ec2854c2c7d5c1aa7a4c984055788d2799c347d77487858e4b9f6e386fa",
+          "original_sha256": "22e04ec2854c2c7d5c1aa7a4c984055788d2799c347d77487858e4b9f6e386fa",
+          "bytes": 8522
+        },
+        "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/runtime.json": {
+          "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee/final-state.pt",
+          "sha256": "9c3592f454b7a890aec231fea2e02a5d6ac3988e47b248bcd6a00cc218c73fd4",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-di3-latch-then-anchor-snap-4e7feaf7-new-init",
+      "candidate": "RESEARCH-di3_latch_then_anchor_snap-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 41.206153739010915,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/di3-latch-then-anchor-snap-4e7feaf7-runtime-audit.json",
+      "audit_sha256": "6e386be7be3344d43fee2361826a882a1c08cd8c33759c49efbb79dfb69ae0ae",
+      "artifacts": {
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/source-plan.json": {
+          "sha256": "ce4e61d7a87fbc200e148c06bc2ee2475ae9c9afdbbfb5e1da67017e8e2e3e26",
+          "original_sha256": "ce4e61d7a87fbc200e148c06bc2ee2475ae9c9afdbbfb5e1da67017e8e2e3e26",
+          "bytes": 41133
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/prepared-source.zip": {
+          "sha256": "9208f5e9e0806262f3d7c3ed5088efe243457eef5eec7e3571a5d843fb401dab",
+          "original_sha256": "9208f5e9e0806262f3d7c3ed5088efe243457eef5eec7e3571a5d843fb401dab",
+          "bytes": 653700
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/result.json.gz": {
+          "sha256": "17be62db089805cdc5fd1190d6d82bd3afd293dca59a758aa3c6b23257f1a9dc",
+          "original_sha256": "2b182cba68d31f854748dbd562f1b4d786f7449a4b9edea9f5cad76b13815cd7",
+          "bytes": 85930
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/initialization-receipt.json": {
+          "sha256": "9311cd15ac4ddec48dbd1e106a5f9f678fed44c94c665b421f1aba34a0b94a37",
+          "original_sha256": "9311cd15ac4ddec48dbd1e106a5f9f678fed44c94c665b421f1aba34a0b94a37",
+          "bytes": 4508
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/prepared-source-manifest.json": {
+          "sha256": "c8b0514059e6c032c8f702ea7a6cec5d3a8ee135d2ce2c663e5720308c2f11b9",
+          "original_sha256": "c8b0514059e6c032c8f702ea7a6cec5d3a8ee135d2ce2c663e5720308c2f11b9",
+          "bytes": 5094
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/prepared-source-sha256.json": {
+          "sha256": "e65f9455e87e1992c2348a58857000f69b342af76d07b7ec2ffb73c13525a37e",
+          "original_sha256": "e65f9455e87e1992c2348a58857000f69b342af76d07b7ec2ffb73c13525a37e",
+          "bytes": 291
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/mechanism-receipt.json": {
+          "sha256": "fb88cb93432a451f0bde91e1e722ae92b15906bc95480c0fc1fa44ea2ff081ef",
+          "original_sha256": "fb88cb93432a451f0bde91e1e722ae92b15906bc95480c0fc1fa44ea2ff081ef",
+          "bytes": 9405
+        },
+        "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/runtime.json": {
+          "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7/final-state.pt",
+          "sha256": "bcfed526a45ac0569221860e43ceb3ffc5312060fa3f592f29e83829f430e059",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-sn1-gap-mobility-dbade7aa-new-init",
+      "candidate": "RESEARCH-sn1_gap_mobility-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 0,
+        "final_hq": 0.0
+      },
+      "seconds": 42.74996125116013,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn1-gap-mobility-dbade7aa",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/sn1-gap-mobility-dbade7aa-runtime-audit.json",
+      "audit_sha256": "5c20f80a308783721aa7699e1d22dab64da4fef28a419701b677449d7b58c74a",
+      "artifacts": {
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/source-plan.json": {
+          "sha256": "798e59d49674144670f7068ae8263474841d613712732ef6b68bc61644048333",
+          "original_sha256": "798e59d49674144670f7068ae8263474841d613712732ef6b68bc61644048333",
+          "bytes": 41195
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/prepared-source.zip": {
+          "sha256": "880379ef5a53e0d5b2d872ef33ffc4393cc49b21a2a48b4b93370580efebf345",
+          "original_sha256": "880379ef5a53e0d5b2d872ef33ffc4393cc49b21a2a48b4b93370580efebf345",
+          "bytes": 653421
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/result.json.gz": {
+          "sha256": "6f33609c2a4475ab3c53c2a8528dc67b79639e5996eba914771c061112dae4f8",
+          "original_sha256": "2108902dacf88a77b5e7cde705076ae2446064040588bdd7fc108b21ea1b0447",
+          "bytes": 59012
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/initialization-receipt.json": {
+          "sha256": "f783cc5d7076eed68281256df2bf9cf576b457fe63cabb0b6c5078552f77899d",
+          "original_sha256": "f783cc5d7076eed68281256df2bf9cf576b457fe63cabb0b6c5078552f77899d",
+          "bytes": 4498
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/prepared-source-manifest.json": {
+          "sha256": "c3d63ebcbf6798b9d2acfc5892242c76b01b7175d3384e4bfcff4fed27843374",
+          "original_sha256": "c3d63ebcbf6798b9d2acfc5892242c76b01b7175d3384e4bfcff4fed27843374",
+          "bytes": 5094
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/prepared-source-sha256.json": {
+          "sha256": "f894e76a2c55a504e3ffbb68961f6db31fc62b912cf02436cbf64c2982a8e163",
+          "original_sha256": "f894e76a2c55a504e3ffbb68961f6db31fc62b912cf02436cbf64c2982a8e163",
+          "bytes": 291
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/mechanism-receipt.json": {
+          "sha256": "3809c13bcd947878d34bae2b345c4c4caf3dda4e715545eba162127a0fa7fc2f",
+          "original_sha256": "3809c13bcd947878d34bae2b345c4c4caf3dda4e715545eba162127a0fa7fc2f",
+          "bytes": 7259
+        },
+        "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/runtime.json": {
+          "sha256": "235e39f2a172cb305a862568c7c7776649f30d7061d656c3320b8b0c945ed465",
+          "original_sha256": "235e39f2a172cb305a862568c7c7776649f30d7061d656c3320b8b0c945ed465",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn1-gap-mobility-dbade7aa/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn1-gap-mobility-dbade7aa/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn1-gap-mobility-dbade7aa/final-state.pt",
+          "sha256": "fc0f91bd8a298a0da411c202481c47b99133cbe9878ea38621328ae8816ad580",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-sn1-gap-mobility-dbade7aa-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-sn3-settle-cosine-f26f985e-new-init",
+      "candidate": "RESEARCH-sn3_settle_cosine-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 4,
+        "final_hq": 0.9990234375
+      },
+      "seconds": 42.76098259887658,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/sn3-settle-cosine-f26f985e-runtime-audit.json",
+      "audit_sha256": "2d95d7ae37d78b260dfcbe724bf8052161eb69fcce836cf603ab4749f74eb86c",
+      "artifacts": {
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/source-plan.json": {
+          "sha256": "10c1217e8539fdaa005b51dd6507278d3b2668fc1eb9dd130ea4218bd6be3609",
+          "original_sha256": "10c1217e8539fdaa005b51dd6507278d3b2668fc1eb9dd130ea4218bd6be3609",
+          "bytes": 41206
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/prepared-source.zip": {
+          "sha256": "4beb1421dcea14b7f93f970e8d9c98bf2adffa7b81ac99417a358873a9419259",
+          "original_sha256": "4beb1421dcea14b7f93f970e8d9c98bf2adffa7b81ac99417a358873a9419259",
+          "bytes": 653156
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/result.json.gz": {
+          "sha256": "039a75a8455b25639243f79a81e3b0d61112726997ba0f7703ff26f4def7ef57",
+          "original_sha256": "10c9793fa6fa8779e6c7bc53555c6d494407af438cb82fc9c02c02d824e5eccc",
+          "bytes": 73858
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/initialization-receipt.json": {
+          "sha256": "99a28498dfb46bba06b73263c171a983e21553e86444f6c2941506f9c7f28a43",
+          "original_sha256": "99a28498dfb46bba06b73263c171a983e21553e86444f6c2941506f9c7f28a43",
+          "bytes": 4499
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/prepared-source-manifest.json": {
+          "sha256": "5736984aa4e46c988e8934e9cfd87c5ee6109b237855031e3baee6c5fb6b9e32",
+          "original_sha256": "5736984aa4e46c988e8934e9cfd87c5ee6109b237855031e3baee6c5fb6b9e32",
+          "bytes": 5094
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/prepared-source-sha256.json": {
+          "sha256": "3535b9f64e736001d3021393404e60a19a12df13209b3c1544309de0d67c8ee8",
+          "original_sha256": "3535b9f64e736001d3021393404e60a19a12df13209b3c1544309de0d67c8ee8",
+          "bytes": 291
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/mechanism-receipt.json": {
+          "sha256": "401fd095dc35f3bdf122fe5a35caeb87e074a29bb723f377b95544f997a18d27",
+          "original_sha256": "401fd095dc35f3bdf122fe5a35caeb87e074a29bb723f377b95544f997a18d27",
+          "bytes": 7267
+        },
+        "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/runtime.json": {
+          "sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+          "original_sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e/final-state.pt",
+          "sha256": "2cd5cb6c1203d49b1610a2a72b9fd06a0356d0898b8e87cef803a35378a7bd3f",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-pn1-motion-noise-814d29bb-new-init",
+      "candidate": "RESEARCH-pn1_motion_noise-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.914794921875
+      },
+      "seconds": 41.39883574191481,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/pn1-motion-noise-814d29bb-runtime-audit.json",
+      "audit_sha256": "fce8640721a9cf47fc0548d8cd6aed69f38cb49581cf9c00087459704e4b2fd8",
+      "artifacts": {
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/source-plan.json": {
+          "sha256": "77a60edeb6714bdf014689effc11193f64b8af631b144e9605cd3e77561222d8",
+          "original_sha256": "77a60edeb6714bdf014689effc11193f64b8af631b144e9605cd3e77561222d8",
+          "bytes": 41096
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/prepared-source.zip": {
+          "sha256": "a20c850b3ffc5a381dc78cf3a42adf4a79801c5ffdda6e1a5cfdf88d2454b972",
+          "original_sha256": "a20c850b3ffc5a381dc78cf3a42adf4a79801c5ffdda6e1a5cfdf88d2454b972",
+          "bytes": 653282
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/result.json.gz": {
+          "sha256": "cf81865b325104de06ad211d234d1f338deb0242ed9af8074bc6fafb7068680a",
+          "original_sha256": "2d3fbfbf8148e519681df545dd3387d02ff0ce1432a6b159e5365944d3c1a0ff",
+          "bytes": 86067
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/initialization-receipt.json": {
+          "sha256": "02a4bcc74ca5ea865b2d41ec07f6b635bc33b2973a9bf4dd90aeed69f1da433e",
+          "original_sha256": "02a4bcc74ca5ea865b2d41ec07f6b635bc33b2973a9bf4dd90aeed69f1da433e",
+          "bytes": 4498
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/prepared-source-manifest.json": {
+          "sha256": "9f69dc614e6878f8bb372b6a9f9881cb33b69de7d3d80b605b288e83bb3618fc",
+          "original_sha256": "9f69dc614e6878f8bb372b6a9f9881cb33b69de7d3d80b605b288e83bb3618fc",
+          "bytes": 5094
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/prepared-source-sha256.json": {
+          "sha256": "8f49027698c3a9aaffb1dcee8a2710ce134c64f7f20aff7f6a6d6a869f806578",
+          "original_sha256": "8f49027698c3a9aaffb1dcee8a2710ce134c64f7f20aff7f6a6d6a869f806578",
+          "bytes": 291
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/mechanism-receipt.json": {
+          "sha256": "9320c0a5fdc4e1d03c27f5a73fc107c0184df6388463b97e0d803b1860119a74",
+          "original_sha256": "9320c0a5fdc4e1d03c27f5a73fc107c0184df6388463b97e0d803b1860119a74",
+          "bytes": 6262
+        },
+        "research-evidence/research-pn1-motion-noise-814d29bb-new-init/runtime.json": {
+          "sha256": "8a7c26168cad89a3b594876b84fee8dfd75cd699acee79dc87ffad0e64d35ff6",
+          "original_sha256": "8a7c26168cad89a3b594876b84fee8dfd75cd699acee79dc87ffad0e64d35ff6",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb/final-state.pt",
+          "sha256": "5c3eacc66dffebdf080cff6d75849a3b6cd452d99b66c7d399df27e6069ba0f6",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-pn1-motion-noise-814d29bb-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-pn2-rate-normalized-contraction-06b0914c-new-init",
+      "candidate": "RESEARCH-pn2_rate_normalized_contraction-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 5,
+        "final_hq": 0.948486328125
+      },
+      "seconds": 45.307365162996575,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn2-rate-normalized-contraction-06b0914c",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/pn2-rate-normalized-contraction-06b0914c-runtime-audit.json",
+      "audit_sha256": "dd2675096f6d5dc63f012fa5e29aeaa3266144405ee10931ba794a796d031c8e",
+      "artifacts": {
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/source-plan.json": {
+          "sha256": "2241999298dc09a199ecf8f4b290e8fd2d628279970c4c537f928d09874feb96",
+          "original_sha256": "2241999298dc09a199ecf8f4b290e8fd2d628279970c4c537f928d09874feb96",
+          "bytes": 41171
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/prepared-source.zip": {
+          "sha256": "c4cf0b3cd7961418bf28215973a8e0387d70629a8c345296bbe3f092f3190de8",
+          "original_sha256": "c4cf0b3cd7961418bf28215973a8e0387d70629a8c345296bbe3f092f3190de8",
+          "bytes": 653624
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/result.json.gz": {
+          "sha256": "2ea1ad0fe7eb69104eaefa2296114967beaf84405469f1bc21c47601938b18b9",
+          "original_sha256": "6b9112ca1f85d1aa5745a2aef2d7decad2f46e8853888b5aeeac781245682d2d",
+          "bytes": 87611
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/initialization-receipt.json": {
+          "sha256": "073e1561ccd33a8d8fe598126c75717e5623a1e45f06dbd1479e5b77ad6f2bc2",
+          "original_sha256": "073e1561ccd33a8d8fe598126c75717e5623a1e45f06dbd1479e5b77ad6f2bc2",
+          "bytes": 4513
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/prepared-source-manifest.json": {
+          "sha256": "cc0ff5935e8bb035ebb4861eb06614b4ec1f3cfe9d258ce702e79abd43cad76a",
+          "original_sha256": "cc0ff5935e8bb035ebb4861eb06614b4ec1f3cfe9d258ce702e79abd43cad76a",
+          "bytes": 5094
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/prepared-source-sha256.json": {
+          "sha256": "b8ea0a7b319a1f081cfb68f245b93169743e6da89a29ba4d39f3a70a6a8a31bb",
+          "original_sha256": "b8ea0a7b319a1f081cfb68f245b93169743e6da89a29ba4d39f3a70a6a8a31bb",
+          "bytes": 291
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/mechanism-receipt.json": {
+          "sha256": "48e66e124259b08f2cbc19fc26eb75eecd756c18bdf802475ca52ccea0223121",
+          "original_sha256": "48e66e124259b08f2cbc19fc26eb75eecd756c18bdf802475ca52ccea0223121",
+          "bytes": 6122
+        },
+        "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/runtime.json": {
+          "sha256": "bf92638976de1ef9a6b03a44c5508c7f1750401279da62b7600ce2216d0fa7bb",
+          "original_sha256": "bf92638976de1ef9a6b03a44c5508c7f1750401279da62b7600ce2216d0fa7bb",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn2-rate-normalized-contraction-06b0914c/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn2-rate-normalized-contraction-06b0914c/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn2-rate-normalized-contraction-06b0914c/final-state.pt",
+          "sha256": "a6dd2241abda17ba4a2ee995af95a4e1b8ac415efa75ccd60325dc87d1cf3a0d",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-pn2-rate-normalized-contraction-06b0914c-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-pn3-frozen-raw-peak-957bfa9a-new-init",
+      "candidate": "RESEARCH-pn3_frozen_raw_peak-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 3,
+        "final_hq": 0.578369140625
+      },
+      "seconds": 44.21643804409541,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn3-frozen-raw-peak-957bfa9a",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/pn3-frozen-raw-peak-957bfa9a-runtime-audit.json",
+      "audit_sha256": "8c686e7f69860370d3e2e1e8086284ee0f7da296e49b76184b5fd5a99e304cc4",
+      "artifacts": {
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/source-plan.json": {
+          "sha256": "d4b17686ffe8f28910702b817b3aa39c27f5581aabafe835d911231a1cea16d5",
+          "original_sha256": "d4b17686ffe8f28910702b817b3aa39c27f5581aabafe835d911231a1cea16d5",
+          "bytes": 41111
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/prepared-source.zip": {
+          "sha256": "dd8fa597692bc61c276bb689146dde9942235663d0d7da59cd8ba9788996fe51",
+          "original_sha256": "dd8fa597692bc61c276bb689146dde9942235663d0d7da59cd8ba9788996fe51",
+          "bytes": 653641
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/result.json.gz": {
+          "sha256": "07efb5c20cd5261b7b22802ddf018b6fab7dae87701c63abdd28d4d0374ea67c",
+          "original_sha256": "f6e54879bcd43c345f753765e5b8594bdff6509feb9d32a76dc59a794073c2a3",
+          "bytes": 87834
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/initialization-receipt.json": {
+          "sha256": "39e545c68ed4e1ab16c7a266530d2fb9ad2f1d865dda9ff8dc3040bb70e7870b",
+          "original_sha256": "39e545c68ed4e1ab16c7a266530d2fb9ad2f1d865dda9ff8dc3040bb70e7870b",
+          "bytes": 4501
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/prepared-source-manifest.json": {
+          "sha256": "02a6ed74edfa72cc64f87b4e4a915139f0e64dd68cc643b6a2dab3486aa92ce9",
+          "original_sha256": "02a6ed74edfa72cc64f87b4e4a915139f0e64dd68cc643b6a2dab3486aa92ce9",
+          "bytes": 5094
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/prepared-source-sha256.json": {
+          "sha256": "ce5be922cbbda6a293dda0ac4c9d7f74616605c09fa8e0678d1da4cb926fec56",
+          "original_sha256": "ce5be922cbbda6a293dda0ac4c9d7f74616605c09fa8e0678d1da4cb926fec56",
+          "bytes": 291
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/mechanism-receipt.json": {
+          "sha256": "350bfcc4908993f89fd7578fff30c62fcb266342081ff8124c115af1ca5e6ed6",
+          "original_sha256": "350bfcc4908993f89fd7578fff30c62fcb266342081ff8124c115af1ca5e6ed6",
+          "bytes": 6610
+        },
+        "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/runtime.json": {
+          "sha256": "8a7c26168cad89a3b594876b84fee8dfd75cd699acee79dc87ffad0e64d35ff6",
+          "original_sha256": "8a7c26168cad89a3b594876b84fee8dfd75cd699acee79dc87ffad0e64d35ff6",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn3-frozen-raw-peak-957bfa9a/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn3-frozen-raw-peak-957bfa9a/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn3-frozen-raw-peak-957bfa9a/final-state.pt",
+          "sha256": "e61745276f6bbc739042028b8cbb9dc8f45acce00cda818a057f5ca3c0568262",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-pn3-frozen-raw-peak-957bfa9a-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-px1-gap-contraction-b4b92eb2-new-init",
+      "candidate": "RESEARCH-px1_gap_contraction-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 40.47443352709524,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px1-gap-contraction-b4b92eb2",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/px1-gap-contraction-b4b92eb2-runtime-audit.json",
+      "audit_sha256": "6d3dfb124cd64dbb7d60733aadcedaa33a15d265888e32a5b3c9bb2e1fa48ac2",
+      "artifacts": {
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/source-plan.json": {
+          "sha256": "a53e82c9905342317bb114b372d72a5cec31b99506c6883bdf803313212c6d5e",
+          "original_sha256": "a53e82c9905342317bb114b372d72a5cec31b99506c6883bdf803313212c6d5e",
+          "bytes": 41050
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/prepared-source.zip": {
+          "sha256": "c00fe29e2c13a91325362dc30ac92ae403c6ce02f624b0c6150013292b759461",
+          "original_sha256": "c00fe29e2c13a91325362dc30ac92ae403c6ce02f624b0c6150013292b759461",
+          "bytes": 653704
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/result.json.gz": {
+          "sha256": "aa55e37220231484ab59bd8c24c76ee7e062a1004c3479f8c6fbfc0a6ad5e0a4",
+          "original_sha256": "a35ce5a6501e4c7206f60d042d9bdb56f674555ae041b4c7a2cd2c64d07b5261",
+          "bytes": 82466
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/initialization-receipt.json": {
+          "sha256": "04f9c437457962251d267cdd8340afdc29d4eb8781824b0da7ca3a57cd4f5202",
+          "original_sha256": "04f9c437457962251d267cdd8340afdc29d4eb8781824b0da7ca3a57cd4f5202",
+          "bytes": 4501
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/prepared-source-manifest.json": {
+          "sha256": "2a6f732b87def9681854b02ef1cec11de65ec91428b57e28249d41b50bc7b45c",
+          "original_sha256": "2a6f732b87def9681854b02ef1cec11de65ec91428b57e28249d41b50bc7b45c",
+          "bytes": 5094
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/prepared-source-sha256.json": {
+          "sha256": "08d92c296a4acf854be9ea764d660eb5b81d527938997d55eebfd1af616e193d",
+          "original_sha256": "08d92c296a4acf854be9ea764d660eb5b81d527938997d55eebfd1af616e193d",
+          "bytes": 291
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/mechanism-receipt.json": {
+          "sha256": "999548acf37140dafcfafb65ca692022e91add152b997735f2ea722f9c52ce1f",
+          "original_sha256": "999548acf37140dafcfafb65ca692022e91add152b997735f2ea722f9c52ce1f",
+          "bytes": 15526
+        },
+        "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/runtime.json": {
+          "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px1-gap-contraction-b4b92eb2/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px1-gap-contraction-b4b92eb2/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px1-gap-contraction-b4b92eb2/final-state.pt",
+          "sha256": "d3bce654562bb5249aa96d7a32703742c39f5c8ce4148c1ef381bec89ad9e12d",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-px1-gap-contraction-b4b92eb2-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-px2-proportional-gap-6c17331e-new-init",
+      "candidate": "RESEARCH-px2_proportional_gap-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 39.92971402895637,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/px2-proportional-gap-6c17331e-runtime-audit.json",
+      "audit_sha256": "db25cd04bdd30f0a071c96912f621ff7122584c05427dd680cf71f6843e70b8b",
+      "artifacts": {
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/source-plan.json": {
+          "sha256": "12ad842572eff99098e90f111e4e02ada57c3a6abee156d7abeef1dcc2296eab",
+          "original_sha256": "12ad842572eff99098e90f111e4e02ada57c3a6abee156d7abeef1dcc2296eab",
+          "bytes": 41055
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/prepared-source.zip": {
+          "sha256": "26395fb177735548257eb4d56418009a45f8fdeded4dc7bf7e2cd7bd365d5b1c",
+          "original_sha256": "26395fb177735548257eb4d56418009a45f8fdeded4dc7bf7e2cd7bd365d5b1c",
+          "bytes": 653754
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/result.json.gz": {
+          "sha256": "efdaeaea5a7a8d857add3a475b4666dbaa5921f241c7bae1e5e55dd35e112641",
+          "original_sha256": "0a387ad3b3d9d70e46f287ceca8e669772c4c00cee0829c6f23b83df03e38533",
+          "bytes": 82459
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/initialization-receipt.json": {
+          "sha256": "1e11463c9cd8b7c541806efd2edcfbd7f45e0e9340806b45375645fc09428344",
+          "original_sha256": "1e11463c9cd8b7c541806efd2edcfbd7f45e0e9340806b45375645fc09428344",
+          "bytes": 4502
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/prepared-source-manifest.json": {
+          "sha256": "88aa9a72c9710e1c98522426ba89be9f303c7b361378a4fb3f604315a4c30d1c",
+          "original_sha256": "88aa9a72c9710e1c98522426ba89be9f303c7b361378a4fb3f604315a4c30d1c",
+          "bytes": 5094
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/prepared-source-sha256.json": {
+          "sha256": "c59363d5011cb2c81f729f0e6912ef8b47f9e622e5f76962fb925bffad04e6a6",
+          "original_sha256": "c59363d5011cb2c81f729f0e6912ef8b47f9e622e5f76962fb925bffad04e6a6",
+          "bytes": 291
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/mechanism-receipt.json": {
+          "sha256": "2b2bceacdbe62cda434b25c83d2f95a540e41a1a02cc431014fcc6be8fd6c051",
+          "original_sha256": "2b2bceacdbe62cda434b25c83d2f95a540e41a1a02cc431014fcc6be8fd6c051",
+          "bytes": 15482
+        },
+        "research-evidence/research-px2-proportional-gap-6c17331e-new-init/runtime.json": {
+          "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e/final-state.pt",
+          "sha256": "bca4605aa885f8118f08f30491b92f8044a69f83f9a7fb14af40359e98bae760",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-px2-proportional-gap-6c17331e-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-rr1-innovation-reference-2c71f674-new-init",
+      "candidate": "RESEARCH-rr1_innovation_reference-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 41.54361332580447,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/rr1-innovation-reference-2c71f674-runtime-audit.json",
+      "audit_sha256": "273f4561df45815bb80a7cede86672a275b1c6728150586871bd92d1f17d96db",
+      "artifacts": {
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/source-plan.json": {
+          "sha256": "c0e100d8fb2d9d81aef39e8ee5a006cc714f05038337ea07ecfb601c7f5a2447",
+          "original_sha256": "c0e100d8fb2d9d81aef39e8ee5a006cc714f05038337ea07ecfb601c7f5a2447",
+          "bytes": 41120
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/prepared-source.zip": {
+          "sha256": "1b9ee094d7d4e4bf45060b8b804abbf5b96de9a9ea9d6f12ec619883aaa3077c",
+          "original_sha256": "1b9ee094d7d4e4bf45060b8b804abbf5b96de9a9ea9d6f12ec619883aaa3077c",
+          "bytes": 653118
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/result.json.gz": {
+          "sha256": "2ad81b1e6d3a06b330f860f5ac4cc71d952977a319aa8b852b719bfa8d6561be",
+          "original_sha256": "950e2ec637f557536c8bdd25b37dfa6e42a9c20dd6a86e37af51433099e485c0",
+          "bytes": 82247
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/initialization-receipt.json": {
+          "sha256": "b18aae852862091aa769b786b3f7b0389f0691e2f44947ca2398737125b73bff",
+          "original_sha256": "b18aae852862091aa769b786b3f7b0389f0691e2f44947ca2398737125b73bff",
+          "bytes": 4506
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/prepared-source-manifest.json": {
+          "sha256": "ddeafdd31724652313a3869331f92cb968219344e307b9094e04f8b5f6661fb8",
+          "original_sha256": "ddeafdd31724652313a3869331f92cb968219344e307b9094e04f8b5f6661fb8",
+          "bytes": 5094
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/prepared-source-sha256.json": {
+          "sha256": "0008d698a94a90f50705cb70d2142a523b48e77e3b52c25b1716c1e60996652e",
+          "original_sha256": "0008d698a94a90f50705cb70d2142a523b48e77e3b52c25b1716c1e60996652e",
+          "bytes": 291
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/mechanism-receipt.json": {
+          "sha256": "883bf79c8134f2709663e1c62129dfa5d7a7ef245695bd1b8476e46bd8bf9690",
+          "original_sha256": "883bf79c8134f2709663e1c62129dfa5d7a7ef245695bd1b8476e46bd8bf9690",
+          "bytes": 11790
+        },
+        "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/runtime.json": {
+          "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674/final-state.pt",
+          "sha256": "7e80e92926a5b6717c541b6d94a353e462316a6abf4b6a2ed0ad80f191419ec2",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-rr2-prox-reference-51ecd753-new-init",
+      "candidate": "RESEARCH-rr2_prox_reference-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 38.84024051413871,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr2-prox-reference-51ecd753",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/rr2-prox-reference-51ecd753-runtime-audit.json",
+      "audit_sha256": "d1c859b1ecabe8bdf500c23857dfad34cc9801ca4b84bbf1577fb936ab6ef47e",
+      "artifacts": {
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/source-plan.json": {
+          "sha256": "2c42697e048e41d07c6b965711aac67a82bf72d68c0aaa2299c2c3557bc986ea",
+          "original_sha256": "2c42697e048e41d07c6b965711aac67a82bf72d68c0aaa2299c2c3557bc986ea",
+          "bytes": 41091
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/prepared-source.zip": {
+          "sha256": "cdad42708e032963cc5838f153d67319f160ee318ef9cad5424ab3058108c3d2",
+          "original_sha256": "cdad42708e032963cc5838f153d67319f160ee318ef9cad5424ab3058108c3d2",
+          "bytes": 653293
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/result.json.gz": {
+          "sha256": "233b3956699e67401ab72649a49d40610c891ad37561f7f1a123e1bb848d1936",
+          "original_sha256": "82bfa055a043b2310b347d945df03950d563253fc68d84cf71b056828008d284",
+          "bytes": 82376
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/initialization-receipt.json": {
+          "sha256": "e25e1b295a0b881d25190cb9c4c32cf01d5cad47e208e02847d204e4f30eaef3",
+          "original_sha256": "e25e1b295a0b881d25190cb9c4c32cf01d5cad47e208e02847d204e4f30eaef3",
+          "bytes": 4500
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/prepared-source-manifest.json": {
+          "sha256": "6e17228d8991e0bb7aaae4a77855ca7c324e4e00ed9017472a9a9cf9fd1b06a9",
+          "original_sha256": "6e17228d8991e0bb7aaae4a77855ca7c324e4e00ed9017472a9a9cf9fd1b06a9",
+          "bytes": 5094
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/prepared-source-sha256.json": {
+          "sha256": "fdd252ad708bc911a452df070ddec1dc4a75fb87e69c079e4f96fca314a346f9",
+          "original_sha256": "fdd252ad708bc911a452df070ddec1dc4a75fb87e69c079e4f96fca314a346f9",
+          "bytes": 291
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/mechanism-receipt.json": {
+          "sha256": "f7d56125309f00be1091b0ebac29e9bacf3ed35e8cd079d894072b46e92823ea",
+          "original_sha256": "f7d56125309f00be1091b0ebac29e9bacf3ed35e8cd079d894072b46e92823ea",
+          "bytes": 13361
+        },
+        "research-evidence/research-rr2-prox-reference-51ecd753-new-init/runtime.json": {
+          "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr2-prox-reference-51ecd753/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr2-prox-reference-51ecd753/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr2-prox-reference-51ecd753/final-state.pt",
+          "sha256": "95105b465fb53e1c8e0780ee30d093dbac84ab7b530ce30f368cce33f0db9614",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-rr2-prox-reference-51ecd753-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-rr3-prox-release-f0730455-new-init",
+      "candidate": "RESEARCH-rr3_prox_release-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 41.84792643110268,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/rr3-prox-release-f0730455-runtime-audit.json",
+      "audit_sha256": "bea79e2d349593bc8798a44be4b800505fbb98eccf2d9363fb596af3d0b2b7ad",
+      "artifacts": {
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/source-plan.json": {
+          "sha256": "6e3c7aa3faa5760657db7c373166ddf5fcfb250898415e8942a4bde657bbec0f",
+          "original_sha256": "6e3c7aa3faa5760657db7c373166ddf5fcfb250898415e8942a4bde657bbec0f",
+          "bytes": 41081
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/prepared-source.zip": {
+          "sha256": "b8cf2a4599abc2778c6528fe48b9cbfc9a66709e2b900eae8b7cf638ea228a3c",
+          "original_sha256": "b8cf2a4599abc2778c6528fe48b9cbfc9a66709e2b900eae8b7cf638ea228a3c",
+          "bytes": 653535
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/result.json.gz": {
+          "sha256": "fe18bdf3bf6312e335f7cf97c45ba7d3fcea56464cba73cd97f1a1c49ed6f8fc",
+          "original_sha256": "4683be235c172e917dc5edaf117b7d889cc1d4ba68e4a5e6d82d1f2d03157f44",
+          "bytes": 82358
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/initialization-receipt.json": {
+          "sha256": "c70f689473fb44276757a814dd25618790f160284f16e51b519a0cc26bb544ce",
+          "original_sha256": "c70f689473fb44276757a814dd25618790f160284f16e51b519a0cc26bb544ce",
+          "bytes": 4498
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/prepared-source-manifest.json": {
+          "sha256": "36a5f4414ca86742ca4bddf4a4d11487f505151e06aaa32724a620eab13664fc",
+          "original_sha256": "36a5f4414ca86742ca4bddf4a4d11487f505151e06aaa32724a620eab13664fc",
+          "bytes": 5094
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/prepared-source-sha256.json": {
+          "sha256": "5185784ba5c64312cdb9259378864b5d53a83c220e433f3db1c6249fa64a8a50",
+          "original_sha256": "5185784ba5c64312cdb9259378864b5d53a83c220e433f3db1c6249fa64a8a50",
+          "bytes": 291
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/mechanism-receipt.json": {
+          "sha256": "83cac571a2740bdef348bb51b7b99a4bf5784047eee6e4ec7b333bee279ec21f",
+          "original_sha256": "83cac571a2740bdef348bb51b7b99a4bf5784047eee6e4ec7b333bee279ec21f",
+          "bytes": 13356
+        },
+        "research-evidence/research-rr3-prox-release-f0730455-new-init/runtime.json": {
+          "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455/final-state.pt",
+          "sha256": "fd9b6334de3cd9aa92447f164fff168f41ebd6b500d83cc3a48999fd252cb232",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-rr3-prox-release-f0730455-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-td1-kernel-b6f35894-new-init",
+      "candidate": "RESEARCH-td1_kernel-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.916015625
+      },
+      "seconds": 42.943120492156595,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/td1-kernel-b6f35894-runtime-audit.json",
+      "audit_sha256": "cb1a2693218999df75e540e09b12f15a5853750027585b0d5abb95e0dafde063",
+      "artifacts": {
+        "research-evidence/research-td1-kernel-b6f35894-new-init/source-plan.json": {
+          "sha256": "f44cbbc0ac9f6edb86c101eb0880099ef7d688bb759dc5c367139a4c97c3d182",
+          "original_sha256": "f44cbbc0ac9f6edb86c101eb0880099ef7d688bb759dc5c367139a4c97c3d182",
+          "bytes": 41025
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/prepared-source.zip": {
+          "sha256": "d6c13cb59dac28539aad5d536569a465c825bbfbb61b86471d15b18b0df7c3ff",
+          "original_sha256": "d6c13cb59dac28539aad5d536569a465c825bbfbb61b86471d15b18b0df7c3ff",
+          "bytes": 652436
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/result.json.gz": {
+          "sha256": "8d86f0cc3ae8c3bd86945a8b06cb1443dd0c03db289cc0fe9be8d203904a5b28",
+          "original_sha256": "2a0aacc54e762f1a82f90cc704b26e61ae1e3aa107be582001f6e09f56122764",
+          "bytes": 113567
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/initialization-receipt.json": {
+          "sha256": "ed3614f67556764ba5f39124f3a9b8c8b9ae5ab5c4a515b7607af093daee4e16",
+          "original_sha256": "ed3614f67556764ba5f39124f3a9b8c8b9ae5ab5c4a515b7607af093daee4e16",
+          "bytes": 4492
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/prepared-source-manifest.json": {
+          "sha256": "a6103892bdaf28837d5efc0f798a0cb0fab01084201481f307fcf4d4b2fd37c0",
+          "original_sha256": "a6103892bdaf28837d5efc0f798a0cb0fab01084201481f307fcf4d4b2fd37c0",
+          "bytes": 5094
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/prepared-source-sha256.json": {
+          "sha256": "88b0bdf5c39c81d446db3cd5e6b467636130176fe5a69493c203605b16923f3a",
+          "original_sha256": "88b0bdf5c39c81d446db3cd5e6b467636130176fe5a69493c203605b16923f3a",
+          "bytes": 291
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/mechanism-receipt.json": {
+          "sha256": "78487b422452337e652c0e527eb74ae28c68233e97c02dbb74262b5b632c762b",
+          "original_sha256": "78487b422452337e652c0e527eb74ae28c68233e97c02dbb74262b5b632c762b",
+          "bytes": 8565
+        },
+        "research-evidence/research-td1-kernel-b6f35894-new-init/runtime.json": {
+          "sha256": "83737e05d23396dfa218b63d64eae0617f3e5449894e18e865c1651502fc709c",
+          "original_sha256": "83737e05d23396dfa218b63d64eae0617f3e5449894e18e865c1651502fc709c",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td1-kernel-b6f35894/final-state.pt",
+          "sha256": "5e337db8349fb682a60351f76a31124eacd67bc96301501b86965e94e349833a",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-td1-kernel-b6f35894-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-td2-separate-constraint-a1291463-new-init",
+      "candidate": "RESEARCH-td2_separate_constraint-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 6,
+        "final_hq": 0.908203125
+      },
+      "seconds": 42.092098030028865,
+      "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/td2-separate-constraint-a1291463-runtime-audit.json",
+      "audit_sha256": "e30b099a49e5c2cad9c5596bc9e18307f3f4ebe28ecce254cebd9b7afc8715a5",
+      "artifacts": {
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/source-plan.json": {
+          "sha256": "f84f310f67df77f8a0db9a404ffd813c35b240fdd9969d62750ad3af1ef1ec3a",
+          "original_sha256": "f84f310f67df77f8a0db9a404ffd813c35b240fdd9969d62750ad3af1ef1ec3a",
+          "bytes": 41116
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/prepared-source.zip": {
+          "sha256": "6362f193a9c6b4fd7f395eb63c6b93807792d63b73e54d377f1c2d386bfa2888",
+          "original_sha256": "6362f193a9c6b4fd7f395eb63c6b93807792d63b73e54d377f1c2d386bfa2888",
+          "bytes": 652951
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/result.json.gz": {
+          "sha256": "308bde74e59f830e234e5c9e5afaa844321ea9ea642dbb0059d8fdbf0447d613",
+          "original_sha256": "96e9f484d24073ad1f8f4d3b2458ea49c1923846d1696ba4f314956753a2b82e",
+          "bytes": 113160
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/initialization-receipt.json": {
+          "sha256": "827dce07d428080a0a95530fb2e1e427c420d161d301e0e67353b6cf207f2407",
+          "original_sha256": "827dce07d428080a0a95530fb2e1e427c420d161d301e0e67353b6cf207f2407",
+          "bytes": 4505
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/prepared-source-manifest.json": {
+          "sha256": "d8a206e889c8ae935a976404ca1a3b133a593fd7fa66e35a51dc5e59170ac633",
+          "original_sha256": "d8a206e889c8ae935a976404ca1a3b133a593fd7fa66e35a51dc5e59170ac633",
+          "bytes": 5094
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/prepared-source-sha256.json": {
+          "sha256": "cac35de6afeab26af7c0b83cffbc522720a474ffeefbb995b5549e3eafe0da1d",
+          "original_sha256": "cac35de6afeab26af7c0b83cffbc522720a474ffeefbb995b5549e3eafe0da1d",
+          "bytes": 291
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/mechanism-receipt.json": {
+          "sha256": "8d157986e888d48e36bc1ebffbfa1cb964ee6a7f7203cff07e7b20f1f4bea64e",
+          "original_sha256": "8d157986e888d48e36bc1ebffbfa1cb964ee6a7f7203cff07e7b20f1f4bea64e",
+          "bytes": 7412
+        },
+        "research-evidence/research-td2-separate-constraint-a1291463-new-init/runtime.json": {
+          "sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+          "original_sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463/final-state.pt",
+          "sha256": "8f3df08e78b224a3174d7e097dfe84af487b6c3bd7b410fafb365ad6ccd054b8",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-td2-separate-constraint-a1291463-new-init/archive-manifest.json"
+    },
+    {
+      "id": "research-ep2-8fe3d1db-new-init",
+      "candidate": "RESEARCH-EP2-new-init",
+      "scope": "RESEARCH_HOST",
+      "status": "FAIL",
+      "summary": {
+        "observations": 24,
+        "passing": 0,
+        "first_arrival": null,
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "departures": [],
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "final_suffix": 0,
+        "final_suffix_start": null,
+        "final_modes": 7,
+        "final_hq": 0.999755859375
+      },
+      "seconds": 38.9619813458994,
+      "continuous_eligibility": "UNVERIFIED",
+      "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ep2-8fe3d1db-runtime-audit.json",
+      "audit_sha256": "a3a87235a7b5862cf3c56501aba0c3818f1c908ce2a59e5d79f7272ce6e8a5c6",
+      "artifacts": {
+        "research-evidence/research-ep2-8fe3d1db-new-init/source-plan.json": {
+          "sha256": "bd8121a2b6f724e68556362aff467abe053e9a7191f5361646999a087136a135",
+          "original_sha256": "bd8121a2b6f724e68556362aff467abe053e9a7191f5361646999a087136a135",
+          "bytes": 50026
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/prepared-source.zip": {
+          "sha256": "ccb0658c7195f6c77b92dbf80f232245b018ce87a206232ca577203f96a551f9",
+          "original_sha256": "ccb0658c7195f6c77b92dbf80f232245b018ce87a206232ca577203f96a551f9",
+          "bytes": 655081
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/result.json.gz": {
+          "sha256": "baa4e02023c89d32667b015f538feb178f1fd33c151706b0519c9a7ccb18572c",
+          "original_sha256": "ac664c180cde62da96024d0f48e86f57ac96fd8d5a8e86fe1ff0356c32180466",
+          "bytes": 82663
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/initialization-receipt.json": {
+          "sha256": "09af1f6a4d8caec8e76750d54b91aae9481cc1212c9524c3fb40751beecb17ef",
+          "original_sha256": "09af1f6a4d8caec8e76750d54b91aae9481cc1212c9524c3fb40751beecb17ef",
+          "bytes": 4485
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/prepared-source-manifest.json": {
+          "sha256": "8772561b448c8476ac83290cc920eeb9cd14b918ba804b63cc14b61a710f945f",
+          "original_sha256": "8772561b448c8476ac83290cc920eeb9cd14b918ba804b63cc14b61a710f945f",
+          "bytes": 5094
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/prepared-source-sha256.json": {
+          "sha256": "74045f80f26b4eca573a1b78e4efbb08f8cfcca521d15456981a941f9098ebc7",
+          "original_sha256": "74045f80f26b4eca573a1b78e4efbb08f8cfcca521d15456981a941f9098ebc7",
+          "bytes": 291
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/mechanism-receipt.json": {
+          "sha256": "bad61585024893b83ff139b50a1b9bfa076c7f4d4431f86e70cabf5665808d02",
+          "original_sha256": "bad61585024893b83ff139b50a1b9bfa076c7f4d4431f86e70cabf5665808d02",
+          "bytes": 21086
+        },
+        "research-evidence/research-ep2-8fe3d1db-new-init/runtime.json": {
+          "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+          "bytes": 13661
+        }
+      },
+      "raw_checkpoints": {
+        "initial-values.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db/initial-values.pt",
+          "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+          "bytes": 163601
+        },
+        "new-initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db/new-initial-state.pt",
+          "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+          "bytes": 170162
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db/final-state.pt",
+          "sha256": "97cbe81679d6c127d59d2898d1740257f9b930c2e5c448b69aaefcf7d4241e39",
+          "bytes": 668820
+        }
+      },
+      "old_quality_inherited": false,
+      "archive_manifest": "research-evidence/research-ep2-8fe3d1db-new-init/archive-manifest.json"
     }
   ],
-  "recorded_utc": "2026-09-27T03:38:05.357505+00:00"
+  "recorded_utc": "2026-09-27T04:00:24.962392+00:00"
 }

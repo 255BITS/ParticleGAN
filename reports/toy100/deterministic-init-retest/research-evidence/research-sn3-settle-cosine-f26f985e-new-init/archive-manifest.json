@@ -1,0 +1,85 @@
+{
+  "id": "research-sn3-settle-cosine-f26f985e-new-init",
+  "candidate": "RESEARCH-sn3_settle_cosine-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 4,
+    "final_hq": 0.9990234375
+  },
+  "seconds": 42.76098259887658,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/sn3-settle-cosine-f26f985e-runtime-audit.json",
+  "audit_sha256": "2d95d7ae37d78b260dfcbe724bf8052161eb69fcce836cf603ab4749f74eb86c",
+  "artifacts": {
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/source-plan.json": {
+      "sha256": "10c1217e8539fdaa005b51dd6507278d3b2668fc1eb9dd130ea4218bd6be3609",
+      "original_sha256": "10c1217e8539fdaa005b51dd6507278d3b2668fc1eb9dd130ea4218bd6be3609",
+      "bytes": 41206
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/prepared-source.zip": {
+      "sha256": "4beb1421dcea14b7f93f970e8d9c98bf2adffa7b81ac99417a358873a9419259",
+      "original_sha256": "4beb1421dcea14b7f93f970e8d9c98bf2adffa7b81ac99417a358873a9419259",
+      "bytes": 653156
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/result.json.gz": {
+      "sha256": "039a75a8455b25639243f79a81e3b0d61112726997ba0f7703ff26f4def7ef57",
+      "original_sha256": "10c9793fa6fa8779e6c7bc53555c6d494407af438cb82fc9c02c02d824e5eccc",
+      "bytes": 73858
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/initialization-receipt.json": {
+      "sha256": "99a28498dfb46bba06b73263c171a983e21553e86444f6c2941506f9c7f28a43",
+      "original_sha256": "99a28498dfb46bba06b73263c171a983e21553e86444f6c2941506f9c7f28a43",
+      "bytes": 4499
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/prepared-source-manifest.json": {
+      "sha256": "5736984aa4e46c988e8934e9cfd87c5ee6109b237855031e3baee6c5fb6b9e32",
+      "original_sha256": "5736984aa4e46c988e8934e9cfd87c5ee6109b237855031e3baee6c5fb6b9e32",
+      "bytes": 5094
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/prepared-source-sha256.json": {
+      "sha256": "3535b9f64e736001d3021393404e60a19a12df13209b3c1544309de0d67c8ee8",
+      "original_sha256": "3535b9f64e736001d3021393404e60a19a12df13209b3c1544309de0d67c8ee8",
+      "bytes": 291
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/mechanism-receipt.json": {
+      "sha256": "401fd095dc35f3bdf122fe5a35caeb87e074a29bb723f377b95544f997a18d27",
+      "original_sha256": "401fd095dc35f3bdf122fe5a35caeb87e074a29bb723f377b95544f997a18d27",
+      "bytes": 7267
+    },
+    "research-evidence/research-sn3-settle-cosine-f26f985e-new-init/runtime.json": {
+      "sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "original_sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/sn3-settle-cosine-f26f985e/final-state.pt",
+      "sha256": "2cd5cb6c1203d49b1610a2a72b9fd06a0356d0898b8e87cef803a35378a7bd3f",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

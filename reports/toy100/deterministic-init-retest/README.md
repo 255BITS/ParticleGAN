@@ -1,10 +1,11 @@
 # Leaderboard retest with develop initialization
 
 <!-- current-closeout -->
-**Search stopped at the user's request. No qualified default; neither PR merged.**
-The API screen and its follow-ups are complete. Historical research coverage is
-partial because the user requested wrapping up; unrun cases remain explicit.
-[Final results, promising leads, limitations and stop receipts](closeout.md).
+**Resumed retest complete: no qualified default.** The 22 research cases previously
+marked `UNTESTED` all ran with the merged initialization and failed the quick screen;
+SN3 failed its uninterrupted long hold. [Results and evidence](resumed-new-init-results.md)
+and the [97-row research leaderboard](research-leaderboard.md) include the new scores.
+The [earlier closeout](closeout.md) preserves the historical pause and its limits.
 <!-- /current-closeout -->
 
 Every new measurement in this directory must use develop's actual deterministic
@@ -75,6 +76,11 @@ Original research mechanisms have their own [new-init scores](research-leaderboa
 separate from public API measurements. Original research KA2 also fails this
 strict screen, ending at7/8 modes. Its old host's looser diagnostic is preserved
 but does not override the common eight-mode gate.
+
+The API leaderboard runs candidates through the public `GANTrainer` path. The
+research leaderboard runs each original custom research learner. Both use the
+same 1,200-update, 24-observation coverage screen and merged initialization;
+only the API runs establish behavior through the public trainer.
 
 The quick hard screen is the existing small-particle `mode_hold`: 12 particles,
 latent dimension4, batch128, 1200 updates, 24 observations and the unchanged

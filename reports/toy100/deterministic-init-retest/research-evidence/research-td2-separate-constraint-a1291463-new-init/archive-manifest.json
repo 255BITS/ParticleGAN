@@ -1,0 +1,85 @@
+{
+  "id": "research-td2-separate-constraint-a1291463-new-init",
+  "candidate": "RESEARCH-td2_separate_constraint-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 6,
+    "final_hq": 0.908203125
+  },
+  "seconds": 42.092098030028865,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/td2-separate-constraint-a1291463-runtime-audit.json",
+  "audit_sha256": "e30b099a49e5c2cad9c5596bc9e18307f3f4ebe28ecce254cebd9b7afc8715a5",
+  "artifacts": {
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/source-plan.json": {
+      "sha256": "f84f310f67df77f8a0db9a404ffd813c35b240fdd9969d62750ad3af1ef1ec3a",
+      "original_sha256": "f84f310f67df77f8a0db9a404ffd813c35b240fdd9969d62750ad3af1ef1ec3a",
+      "bytes": 41116
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/prepared-source.zip": {
+      "sha256": "6362f193a9c6b4fd7f395eb63c6b93807792d63b73e54d377f1c2d386bfa2888",
+      "original_sha256": "6362f193a9c6b4fd7f395eb63c6b93807792d63b73e54d377f1c2d386bfa2888",
+      "bytes": 652951
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/result.json.gz": {
+      "sha256": "308bde74e59f830e234e5c9e5afaa844321ea9ea642dbb0059d8fdbf0447d613",
+      "original_sha256": "96e9f484d24073ad1f8f4d3b2458ea49c1923846d1696ba4f314956753a2b82e",
+      "bytes": 113160
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/initialization-receipt.json": {
+      "sha256": "827dce07d428080a0a95530fb2e1e427c420d161d301e0e67353b6cf207f2407",
+      "original_sha256": "827dce07d428080a0a95530fb2e1e427c420d161d301e0e67353b6cf207f2407",
+      "bytes": 4505
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/prepared-source-manifest.json": {
+      "sha256": "d8a206e889c8ae935a976404ca1a3b133a593fd7fa66e35a51dc5e59170ac633",
+      "original_sha256": "d8a206e889c8ae935a976404ca1a3b133a593fd7fa66e35a51dc5e59170ac633",
+      "bytes": 5094
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/prepared-source-sha256.json": {
+      "sha256": "cac35de6afeab26af7c0b83cffbc522720a474ffeefbb995b5549e3eafe0da1d",
+      "original_sha256": "cac35de6afeab26af7c0b83cffbc522720a474ffeefbb995b5549e3eafe0da1d",
+      "bytes": 291
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/mechanism-receipt.json": {
+      "sha256": "8d157986e888d48e36bc1ebffbfa1cb964ee6a7f7203cff07e7b20f1f4bea64e",
+      "original_sha256": "8d157986e888d48e36bc1ebffbfa1cb964ee6a7f7203cff07e7b20f1f4bea64e",
+      "bytes": 7412
+    },
+    "research-evidence/research-td2-separate-constraint-a1291463-new-init/runtime.json": {
+      "sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+      "original_sha256": "f244fd14acb31e3c4f4d15998ee5c3867f1f4991f4a21c1b0395310e3ce5b0fd",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/td2-separate-constraint-a1291463/final-state.pt",
+      "sha256": "8f3df08e78b224a3174d7e097dfe84af487b6c3bd7b410fafb365ad6ccd054b8",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

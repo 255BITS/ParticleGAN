@@ -1,0 +1,85 @@
+{
+  "id": "research-cc3-frozen-baseline-quiet-399ef2aa-new-init",
+  "candidate": "RESEARCH-cc3_frozen_baseline_quiet-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 5,
+    "final_hq": 0.732666015625
+  },
+  "seconds": 41.8155004021246,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/cc3-frozen-baseline-quiet-399ef2aa-runtime-audit.json",
+  "audit_sha256": "4fe7ad3a349485c8ffa98f3965e11978b2eddb5b3fed942df330595bdc81293a",
+  "artifacts": {
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/source-plan.json": {
+      "sha256": "ee5b1017d95ee4f1d5ab1edd0ee58947c74fd8e9af36b26b41965a76366b6c8c",
+      "original_sha256": "ee5b1017d95ee4f1d5ab1edd0ee58947c74fd8e9af36b26b41965a76366b6c8c",
+      "bytes": 41138
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/prepared-source.zip": {
+      "sha256": "03b9fd1fafa859bd0d6defdaaa8ef0acde5fdf5182b9a580c170b11601a48ce1",
+      "original_sha256": "03b9fd1fafa859bd0d6defdaaa8ef0acde5fdf5182b9a580c170b11601a48ce1",
+      "bytes": 653471
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/result.json.gz": {
+      "sha256": "ed8e1040b7a4da7aa30db470fe0267c5e9e575214dd11a866609a859736de40e",
+      "original_sha256": "2da6b49532d74fc15d80e2f4efcb1983fce37fd7248d75d50ba24c5a415f325a",
+      "bytes": 61347
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/initialization-receipt.json": {
+      "sha256": "8997ce262d2aa59d665b48907c31218124068ce5671815973dc2785f696ea83d",
+      "original_sha256": "8997ce262d2aa59d665b48907c31218124068ce5671815973dc2785f696ea83d",
+      "bytes": 4507
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/prepared-source-manifest.json": {
+      "sha256": "d5856f6061bc1af2d6d598be867c1d2e86e55e8ec943fcb274ecd6be0109e6ea",
+      "original_sha256": "d5856f6061bc1af2d6d598be867c1d2e86e55e8ec943fcb274ecd6be0109e6ea",
+      "bytes": 5094
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/prepared-source-sha256.json": {
+      "sha256": "94ef169fd7708b25342a65a93a412dff73e965f29351f31bedbb12fd987fcd08",
+      "original_sha256": "94ef169fd7708b25342a65a93a412dff73e965f29351f31bedbb12fd987fcd08",
+      "bytes": 291
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/mechanism-receipt.json": {
+      "sha256": "51ac0100925d037713c321676c2b765da1ae4246239af5db3a204aa30a789691",
+      "original_sha256": "51ac0100925d037713c321676c2b765da1ae4246239af5db3a204aa30a789691",
+      "bytes": 10777
+    },
+    "research-evidence/research-cc3-frozen-baseline-quiet-399ef2aa-new-init/runtime.json": {
+      "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/cc3-frozen-baseline-quiet-399ef2aa/final-state.pt",
+      "sha256": "49c40be69d2c08a5f81e9c5ff46a0b6528451981aaf6586c3eeadb14b4adf548",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

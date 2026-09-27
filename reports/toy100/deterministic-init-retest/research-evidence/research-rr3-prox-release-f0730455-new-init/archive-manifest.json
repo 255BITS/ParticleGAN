@@ -1,0 +1,85 @@
+{
+  "id": "research-rr3-prox-release-f0730455-new-init",
+  "candidate": "RESEARCH-rr3_prox_release-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 41.84792643110268,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/rr3-prox-release-f0730455-runtime-audit.json",
+  "audit_sha256": "bea79e2d349593bc8798a44be4b800505fbb98eccf2d9363fb596af3d0b2b7ad",
+  "artifacts": {
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/source-plan.json": {
+      "sha256": "6e3c7aa3faa5760657db7c373166ddf5fcfb250898415e8942a4bde657bbec0f",
+      "original_sha256": "6e3c7aa3faa5760657db7c373166ddf5fcfb250898415e8942a4bde657bbec0f",
+      "bytes": 41081
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/prepared-source.zip": {
+      "sha256": "b8cf2a4599abc2778c6528fe48b9cbfc9a66709e2b900eae8b7cf638ea228a3c",
+      "original_sha256": "b8cf2a4599abc2778c6528fe48b9cbfc9a66709e2b900eae8b7cf638ea228a3c",
+      "bytes": 653535
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/result.json.gz": {
+      "sha256": "fe18bdf3bf6312e335f7cf97c45ba7d3fcea56464cba73cd97f1a1c49ed6f8fc",
+      "original_sha256": "4683be235c172e917dc5edaf117b7d889cc1d4ba68e4a5e6d82d1f2d03157f44",
+      "bytes": 82358
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/initialization-receipt.json": {
+      "sha256": "c70f689473fb44276757a814dd25618790f160284f16e51b519a0cc26bb544ce",
+      "original_sha256": "c70f689473fb44276757a814dd25618790f160284f16e51b519a0cc26bb544ce",
+      "bytes": 4498
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/prepared-source-manifest.json": {
+      "sha256": "36a5f4414ca86742ca4bddf4a4d11487f505151e06aaa32724a620eab13664fc",
+      "original_sha256": "36a5f4414ca86742ca4bddf4a4d11487f505151e06aaa32724a620eab13664fc",
+      "bytes": 5094
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/prepared-source-sha256.json": {
+      "sha256": "5185784ba5c64312cdb9259378864b5d53a83c220e433f3db1c6249fa64a8a50",
+      "original_sha256": "5185784ba5c64312cdb9259378864b5d53a83c220e433f3db1c6249fa64a8a50",
+      "bytes": 291
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/mechanism-receipt.json": {
+      "sha256": "83cac571a2740bdef348bb51b7b99a4bf5784047eee6e4ec7b333bee279ec21f",
+      "original_sha256": "83cac571a2740bdef348bb51b7b99a4bf5784047eee6e4ec7b333bee279ec21f",
+      "bytes": 13356
+    },
+    "research-evidence/research-rr3-prox-release-f0730455-new-init/runtime.json": {
+      "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr3-prox-release-f0730455/final-state.pt",
+      "sha256": "fd9b6334de3cd9aa92447f164fff168f41ebd6b500d83cc3a48999fd252cb232",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

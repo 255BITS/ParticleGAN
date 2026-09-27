@@ -1,0 +1,85 @@
+{
+  "id": "research-di1-real-batch-innovation-63a67cee-new-init",
+  "candidate": "RESEARCH-di1_real_batch_innovation-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 39.60952396597713,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/di1-real-batch-innovation-63a67cee-runtime-audit.json",
+  "audit_sha256": "03305920d0777f9dcb383bc301f3247db0a18dd84b5e1e9d698b6d6efae3356b",
+  "artifacts": {
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/source-plan.json": {
+      "sha256": "b163df94748e8adc9bdf458368e0c178128942edbb76d68ac4e166e2762850af",
+      "original_sha256": "b163df94748e8adc9bdf458368e0c178128942edbb76d68ac4e166e2762850af",
+      "bytes": 41127
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/prepared-source.zip": {
+      "sha256": "2d61a8547affee4f93ea392898bc2f11a581ea961735df12dd1e74f33de90102",
+      "original_sha256": "2d61a8547affee4f93ea392898bc2f11a581ea961735df12dd1e74f33de90102",
+      "bytes": 652921
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/result.json.gz": {
+      "sha256": "3ddc4cbaf3bb629c2555372f929cf4027a51b86de804fdc91fe5167abfaa033a",
+      "original_sha256": "61307dae0b659572c8ba7bd03c826eddd60cf8b81efb96c7e4cfb3be358c2f67",
+      "bytes": 85642
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/initialization-receipt.json": {
+      "sha256": "97a29a036acfcacad99ef2fa80963ca6354b2e369347eb75a14e5b15c50ba848",
+      "original_sha256": "97a29a036acfcacad99ef2fa80963ca6354b2e369347eb75a14e5b15c50ba848",
+      "bytes": 4507
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/prepared-source-manifest.json": {
+      "sha256": "c7be1f0cd0d75640943be27e05b0aaf8da4763e0f6b587640b11e956c27ea37d",
+      "original_sha256": "c7be1f0cd0d75640943be27e05b0aaf8da4763e0f6b587640b11e956c27ea37d",
+      "bytes": 5094
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/prepared-source-sha256.json": {
+      "sha256": "77aee11516f6825d0458f6cd0b37338b01f70e32b77ac21557da359bf31cdffa",
+      "original_sha256": "77aee11516f6825d0458f6cd0b37338b01f70e32b77ac21557da359bf31cdffa",
+      "bytes": 291
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/mechanism-receipt.json": {
+      "sha256": "22e04ec2854c2c7d5c1aa7a4c984055788d2799c347d77487858e4b9f6e386fa",
+      "original_sha256": "22e04ec2854c2c7d5c1aa7a4c984055788d2799c347d77487858e4b9f6e386fa",
+      "bytes": 8522
+    },
+    "research-evidence/research-di1-real-batch-innovation-63a67cee-new-init/runtime.json": {
+      "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+      "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di1-real-batch-innovation-63a67cee/final-state.pt",
+      "sha256": "9c3592f454b7a890aec231fea2e02a5d6ac3988e47b248bcd6a00cc218c73fd4",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

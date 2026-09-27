@@ -1,5 +1,10 @@
 # Retest closeout — search stopped
 
+This is the September 26 pause record. The user later authorized the 22 stopped
+screens and SN3 long hold; their [resumed results](resumed-new-init-results.md)
+supersede its `NOT_RUN_USER_STOP` and SN3 follow-up status. Historical scores and
+stop receipts below are retained as recorded.
+
 The user requested wrapping up because tokens were running low. The search is
 stopped; neither PR is merged and no default is promoted. PR195 still targets
 `develop`. Do not restart or replenish this search without a new user instruction.

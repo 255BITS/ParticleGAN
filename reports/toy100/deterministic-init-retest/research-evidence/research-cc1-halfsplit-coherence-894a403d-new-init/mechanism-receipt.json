@@ -1,0 +1,472 @@
+{
+ "calls": 1200,
+ "dimensions": {
+  "2": 1200
+ },
+ "extra_critic_forwards": 4800,
+ "extra_critic_backwards": 2400,
+ "floor": 0.01,
+ "prior_floor": 0.05,
+ "guard_c": 5.0,
+ "guard_min_steps": 200,
+ "pure_a_calls": 1200,
+ "blend_calls": 0,
+ "pure_b_calls": 0,
+ "first_blend_call": null,
+ "first_pure_b_call": null,
+ "critic_steps": 1200,
+ "critic_parameters": 20161,
+ "lr_max": 0.00425,
+ "lr_last": 0.00425,
+ "s_trace": [
+  [
+   1,
+   1.0
+  ],
+  [
+   50,
+   1.0
+  ],
+  [
+   100,
+   1.0
+  ],
+  [
+   150,
+   1.0
+  ],
+  [
+   200,
+   1.0
+  ],
+  [
+   250,
+   1.0
+  ],
+  [
+   300,
+   1.0
+  ],
+  [
+   350,
+   1.0
+  ],
+  [
+   400,
+   1.0
+  ],
+  [
+   450,
+   1.0
+  ],
+  [
+   500,
+   1.0
+  ],
+  [
+   550,
+   1.0
+  ],
+  [
+   600,
+   1.0
+  ],
+  [
+   650,
+   1.0
+  ],
+  [
+   700,
+   1.0
+  ],
+  [
+   750,
+   1.0
+  ],
+  [
+   800,
+   1.0
+  ],
+  [
+   850,
+   1.0
+  ],
+  [
+   900,
+   1.0
+  ],
+  [
+   950,
+   1.0
+  ],
+  [
+   1000,
+   1.0
+  ],
+  [
+   1050,
+   1.0
+  ],
+  [
+   1100,
+   1.0
+  ],
+  [
+   1150,
+   1.0
+  ],
+  [
+   1200,
+   1.0
+  ]
+ ],
+ "rule": "cc1_halfsplit_coherence",
+ "anchor_decay": 0.999,
+ "anchor_started_call": null,
+ "prox_trace": [],
+ "phase_trace": [
+  {
+   "critic_steps": 0,
+   "calls": 1,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.869367,
+   "coherence_ema": null,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": null
+  },
+  {
+   "critic_steps": 49,
+   "calls": 50,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.610383,
+   "coherence_ema": 0.95003,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 99,
+   "calls": 100,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.890931,
+   "coherence_ema": 0.921453,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 149,
+   "calls": 150,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.987776,
+   "coherence_ema": 0.966565,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 199,
+   "calls": 200,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.91595,
+   "coherence_ema": 0.952249,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 249,
+   "calls": 250,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.883153,
+   "coherence_ema": 0.931344,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 299,
+   "calls": 300,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.826059,
+   "coherence_ema": 0.910665,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 349,
+   "calls": 350,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.882529,
+   "coherence_ema": 0.912204,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 399,
+   "calls": 400,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.985604,
+   "coherence_ema": 0.943493,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 449,
+   "calls": 450,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.693923,
+   "coherence_ema": 0.933774,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 499,
+   "calls": 500,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.876733,
+   "coherence_ema": 0.924434,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 549,
+   "calls": 550,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.670921,
+   "coherence_ema": 0.900012,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 599,
+   "calls": 600,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.587276,
+   "coherence_ema": 0.856657,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 649,
+   "calls": 650,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.587073,
+   "coherence_ema": 0.802397,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 699,
+   "calls": 700,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.574934,
+   "coherence_ema": 0.706232,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 749,
+   "calls": 750,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.426746,
+   "coherence_ema": 0.671517,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 799,
+   "calls": 800,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.800944,
+   "coherence_ema": 0.724341,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 849,
+   "calls": 850,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.678723,
+   "coherence_ema": 0.745118,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 899,
+   "calls": 900,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.538278,
+   "coherence_ema": 0.648439,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 949,
+   "calls": 950,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.0,
+   "coherence_ema": 0.638735,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 999,
+   "calls": 1000,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.076671,
+   "coherence_ema": 0.722062,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 1049,
+   "calls": 1050,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.714073,
+   "coherence_ema": 0.794411,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 1099,
+   "calls": 1100,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.315338,
+   "coherence_ema": 0.817368,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 1149,
+   "calls": 1150,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.0,
+   "coherence_ema": 0.697808,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  },
+  {
+   "critic_steps": 1199,
+   "calls": 1200,
+   "rate_gain": 1.0,
+   "mix_gain": 1.0,
+   "s": 1.0,
+   "coherence_raw": 0.45509,
+   "coherence_ema": 0.65316,
+   "network_multiplier": 1.0,
+   "prior_multiplier": 1.0,
+   "lr_last": 0.00425
+  }
+ ],
+ "signal": "half_batch_parameter_gradient_coherence",
+ "coherence_formula": "clip(1 - ||g1-g2||^2 / ||g1+g2||^2, 0, 1)",
+ "normalization": "loss mean over each half; coherence is a ratio of squared Euclidean norms",
+ "split": "deterministic prefix halves; no shuffle; drop one trailing sample if odd; undersized batches stay open",
+ "loss": "Rp logistic softplus(-(real-fake)).mean() on critic parameters; penalty graph is separate",
+ "close_at": 0.08,
+ "open_at": 0.35,
+ "rise": 0.1,
+ "fall": 0.01,
+ "warmup": 200,
+ "rate_rule": "network=0.01+0.99*gain prior=0.05+0.95*gain; gain from coherence EMA after warmup",
+ "mix_rule": "mix gain equals rate gain; K3P handover maps that gain to s and does not read applied LR",
+ "noise": "unchanged host schedule; intermediate ablation; ring driver still passes noise_horizon 1200",
+ "budget_dependencies": [
+  "host noise still receives a horizon (ring driver hardcodes 1200; transfer tasks pass their step count)",
+  "config network_lr_horizon_cap remains because the host requires it; phase_multipliers ignores the value",
+  "phase_multipliers still accepts step, total, anneal, and floors and does not use them",
+  "warmup 200 and the rise/fall EMA weights are estimator constants, not a training horizon"
+ ],
+ "ignored_schedule_args_sample": {
+  "nargs": 5,
+  "has_network_lr_floor": true
+ },
+ "undersized_batches": 0,
+ "raw_min": 0.0,
+ "raw_max": 0.9976338983640112,
+ "ema_min": 0.6013608227725807,
+ "ema_max": 0.9716032217954091,
+ "phase_install_sites": [
+  "benchmarks.toy100.schedule.policy_multipliers"
+ ],
+ "half": 64,
+ "batch": 128,
+ "final_s": 1.0,
+ "final_rate_gain": 1.0,
+ "final_mix_gain": 1.0,
+ "final_coherence_ema": 0.6511790622905691,
+ "final_coherence_raw": 0.45508997054769496,
+ "guard_clipped_tensors": 1,
+ "guard_clip_steps": [
+  228
+ ],
+ "guard_clip_step_count": 1
+}

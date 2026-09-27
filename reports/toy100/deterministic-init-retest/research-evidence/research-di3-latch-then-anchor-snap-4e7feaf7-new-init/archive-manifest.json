@@ -1,0 +1,85 @@
+{
+  "id": "research-di3-latch-then-anchor-snap-4e7feaf7-new-init",
+  "candidate": "RESEARCH-di3_latch_then_anchor_snap-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 41.206153739010915,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/di3-latch-then-anchor-snap-4e7feaf7-runtime-audit.json",
+  "audit_sha256": "6e386be7be3344d43fee2361826a882a1c08cd8c33759c49efbb79dfb69ae0ae",
+  "artifacts": {
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/source-plan.json": {
+      "sha256": "ce4e61d7a87fbc200e148c06bc2ee2475ae9c9afdbbfb5e1da67017e8e2e3e26",
+      "original_sha256": "ce4e61d7a87fbc200e148c06bc2ee2475ae9c9afdbbfb5e1da67017e8e2e3e26",
+      "bytes": 41133
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/prepared-source.zip": {
+      "sha256": "9208f5e9e0806262f3d7c3ed5088efe243457eef5eec7e3571a5d843fb401dab",
+      "original_sha256": "9208f5e9e0806262f3d7c3ed5088efe243457eef5eec7e3571a5d843fb401dab",
+      "bytes": 653700
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/result.json.gz": {
+      "sha256": "17be62db089805cdc5fd1190d6d82bd3afd293dca59a758aa3c6b23257f1a9dc",
+      "original_sha256": "2b182cba68d31f854748dbd562f1b4d786f7449a4b9edea9f5cad76b13815cd7",
+      "bytes": 85930
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/initialization-receipt.json": {
+      "sha256": "9311cd15ac4ddec48dbd1e106a5f9f678fed44c94c665b421f1aba34a0b94a37",
+      "original_sha256": "9311cd15ac4ddec48dbd1e106a5f9f678fed44c94c665b421f1aba34a0b94a37",
+      "bytes": 4508
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/prepared-source-manifest.json": {
+      "sha256": "c8b0514059e6c032c8f702ea7a6cec5d3a8ee135d2ce2c663e5720308c2f11b9",
+      "original_sha256": "c8b0514059e6c032c8f702ea7a6cec5d3a8ee135d2ce2c663e5720308c2f11b9",
+      "bytes": 5094
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/prepared-source-sha256.json": {
+      "sha256": "e65f9455e87e1992c2348a58857000f69b342af76d07b7ec2ffb73c13525a37e",
+      "original_sha256": "e65f9455e87e1992c2348a58857000f69b342af76d07b7ec2ffb73c13525a37e",
+      "bytes": 291
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/mechanism-receipt.json": {
+      "sha256": "fb88cb93432a451f0bde91e1e722ae92b15906bc95480c0fc1fa44ea2ff081ef",
+      "original_sha256": "fb88cb93432a451f0bde91e1e722ae92b15906bc95480c0fc1fa44ea2ff081ef",
+      "bytes": 9405
+    },
+    "research-evidence/research-di3-latch-then-anchor-snap-4e7feaf7-new-init/runtime.json": {
+      "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/di3-latch-then-anchor-snap-4e7feaf7/final-state.pt",
+      "sha256": "bcfed526a45ac0569221860e43ceb3ffc5312060fa3f592f29e83829f430e059",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

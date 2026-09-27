@@ -13,23 +13,31 @@ sha = lambda data: hashlib.sha256(data).hexdigest()
 
 
 def render_table(table):
+    hold_audit = ROOT / 'sn3-long-hold-audit.json'
+    sn3_hold_failed = (hold_audit.exists() and
+        json.loads(hold_audit.read_text()).get('quality_status') == 'POST_CONVERGENCE_FAIL')
     lines = ['# Research-host results with the new initialization', '',
         'These runs preserve their original research learner and use the reviewed new public initializer. They remain separate from public API qualification. Every score requires all eight modes and HQ≥90% for the final five of 24 observations.', '',
-        'A quality pass does not establish continuous-learning eligibility. [The closeout](closeout.md) records the current eligibility decisions, promising SN3 result, incomplete qualification and user-requested stop. [Exact source audits](research-eligibility-audits/) preserve each configuration’s separate limitations.', '',
+        'A quality pass does not establish continuous-learning eligibility. [The resumed run](resumed-new-init-results.md) records the completed 22 screens and SN3 long-hold failure. [Exact source audits](research-eligibility-audits/) preserve each configuration’s separate limitations.', '',
         '| Research configuration | Result | Passing observations | First arrival | Final streak | Final modes / quality |',
         '|---|---|---:|---:|---:|---|']
     for row in sorted(table['results'], key=lambda row: (row['status'] != 'PASS', -row['summary']['passing'], row['candidate'])):
         s = row['summary']
-        marker = ' **PROMISING — UNFINISHED**' if row['id'] == 'research-sn3-2f595f84-new-init' else ''
+        marker = (' **LONG HOLD FAILED**' if sn3_hold_failed else ' **PROMISING — UNFINISHED**') if row['id'] == 'research-sn3-2f595f84-new-init' else ''
         lines.append(f"| [{row['candidate']}]({row['archive_manifest']}){marker} | {row['status']} | {s['passing']}/24 | {s['first_arrival'] or '—'} | {s['final_suffix']} | {s['final_modes']}/8 / {s['final_hq']:.1%} |")
     lines += ['', 'Inner host diagnostic labels do not override the strict eight-mode score. Original schedules, source limitations, and old-initialization evidence remain attached to each configuration.', '']
+    if sn3_hold_failed:
+        lines += ['SN3 passed the quick screen but [failed its own uninterrupted long hold](sn3-long-hold-evidence/archive-manifest.json): 393/1,200 required hold updates before the first quality departure.', '']
     stop = ROOT / 'retest-closure/user-stop/stop-receipt.json'
     if stop.exists():
-        pending = json.loads(stop.read_text())['not_run_case_ids']
-        lines += ['**Unfinished work:** SN3 is the one confirmed promising lead; its longer stability and public API qualification remain unrun. The cases below have no new score and are not ranked.', '',
-                  '| Unrun research case | Status |', '|---|---|']
-        lines += [f'| `{case}` | UNTESTED — PROMISE UNKNOWN |' for case in sorted(pending)]
-        lines.append('')
+        historical = json.loads(stop.read_text())['not_run_case_ids']
+        completed = {row['id'] for row in table['results']}
+        pending = sorted(case for case in historical if 'research-' + case + '-new-init' not in completed)
+        if pending:
+            lines += ['**Remaining untested cases:** The historical stop receipt lists cases that were unrun when the search paused. These cases still have no new score.', '',
+                      '| Unrun research case | Status |', '|---|---|']
+            lines += [f'| `{case}` | UNTESTED — PROMISE UNKNOWN |' for case in pending]
+            lines.append('')
     (ROOT / 'research-leaderboard.md').write_text('\n'.join(lines))
 
 

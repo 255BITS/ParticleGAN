@@ -1,0 +1,432 @@
+{
+ "calls": 1200,
+ "dimensions": {
+  "2": 1200
+ },
+ "extra_critic_forwards": 0,
+ "floor": 0.01,
+ "guard_c": 5.0,
+ "guard_min_steps": 200,
+ "pure_a_calls": 1200,
+ "blend_calls": 0,
+ "pure_b_calls": 0,
+ "first_blend_call": null,
+ "first_pure_b_call": null,
+ "critic_steps": 1200,
+ "critic_parameters": 20161,
+ "lr_max": 0.00425,
+ "lr_last": 0.0029608512141381105,
+ "s_trace": [
+  [
+   1,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   50,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   100,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   150,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   200,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   250,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   300,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   350,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   400,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   450,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   500,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   550,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   600,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   650,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   700,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   750,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   800,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   850,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   900,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   950,
+   1.0,
+   1.0,
+   0.0
+  ],
+  [
+   1000,
+   1.0,
+   0.991413,
+   0.0
+  ],
+  [
+   1050,
+   1.0,
+   0.954531,
+   0.0
+  ],
+  [
+   1100,
+   1.0,
+   0.890705,
+   0.0
+  ],
+  [
+   1150,
+   1.0,
+   0.80376,
+   0.0
+  ],
+  [
+   1200,
+   1.0,
+   0.698909,
+   0.0
+  ]
+ ],
+ "rule": "ns3_fixed_schedule_shock",
+ "anchor_decay": 0.999,
+ "anchor_started_call": null,
+ "prox_trace": [],
+ "handover": "K3P s from the fixed scheduled multiplier, not the applied LR",
+ "noise_rule": "input peak*max(0,1-step/120) then max with peak*boost; output peak*min(1,step/240)*(1-boost)",
+ "optimizer_policy": "network=learning_rate_scale(step,1600,0.6,0.01) then reopen with boost; prior multiplier 1",
+ "final_s": 1.0,
+ "final_scheduled": 0.6966708739148495,
+ "final_boost": 0.0,
+ "lr_trace": [
+  [
+   1,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   null,
+   null
+  ],
+  [
+   50,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.000805
+  ],
+  [
+   100,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.098647,
+   0.006587
+  ],
+  [
+   150,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.011843
+  ],
+  [
+   200,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.00599
+  ],
+  [
+   250,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.014289
+  ],
+  [
+   300,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.003352
+  ],
+  [
+   350,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.002789
+  ],
+  [
+   400,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.007088
+  ],
+  [
+   450,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.003082
+  ],
+  [
+   500,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.005016
+  ],
+  [
+   550,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.00569
+  ],
+  [
+   600,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.006307
+  ],
+  [
+   650,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.002123
+  ],
+  [
+   700,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.002814
+  ],
+  [
+   750,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.002995
+  ],
+  [
+   800,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.002001
+  ],
+  [
+   850,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.005135
+  ],
+  [
+   900,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.002848
+  ],
+  [
+   950,
+   0.00425,
+   1.0,
+   1.0,
+   0.0,
+   0.0,
+   0.005418
+  ],
+  [
+   1000,
+   0.00421157,
+   0.990957,
+   1.0,
+   0.0,
+   0.0,
+   0.004415
+  ],
+  [
+   1050,
+   0.00405241,
+   0.953508,
+   1.0,
+   0.0,
+   0.0,
+   0.006072
+  ],
+  [
+   1100,
+   0.003779,
+   0.889177,
+   1.0,
+   0.0,
+   0.0,
+   0.007064
+  ],
+  [
+   1150,
+   0.00340773,
+   0.801819,
+   1.0,
+   0.0,
+   0.0,
+   0.003286
+  ],
+  [
+   1200,
+   0.00296085,
+   0.696671,
+   1.0,
+   0.0,
+   0.0,
+   0.006948
+  ]
+ ],
+ "trace_columns": [
+  "critic_step",
+  "applied_critic_lr",
+  "scheduled",
+  "s",
+  "boost",
+  "shock",
+  "grad_rms"
+ ],
+ "multiplier_cache_entries": 1200,
+ "budget_dependencies": [
+  "Applied rates and noise do not read total_steps, noise_horizon, or network_lr_horizon_cap.",
+  "The frozen linear_* and policy_multipliers functions are called and their returns are discarded.",
+  "1600, 0.6, 0.01, 120, and 240 are fixed copies of the parent ring schedule, not the run budget.",
+  "Changing the declared horizon does not change those constants. A two-horizon prefix is still required to confirm.",
+  "Direct-response gain still multiplies direct particle steps and restores the base rate.",
+  "Guard warmup of 200 critic steps is an estimator constant."
+ ],
+ "guard_clipped_tensors": 2,
+ "guard_clip_steps": [
+  924,
+  1143
+ ],
+ "guard_clip_step_count": 2
+}

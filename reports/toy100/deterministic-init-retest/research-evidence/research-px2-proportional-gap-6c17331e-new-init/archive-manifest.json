@@ -1,0 +1,85 @@
+{
+  "id": "research-px2-proportional-gap-6c17331e-new-init",
+  "candidate": "RESEARCH-px2_proportional_gap-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 39.92971402895637,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/px2-proportional-gap-6c17331e-runtime-audit.json",
+  "audit_sha256": "db25cd04bdd30f0a071c96912f621ff7122584c05427dd680cf71f6843e70b8b",
+  "artifacts": {
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/source-plan.json": {
+      "sha256": "12ad842572eff99098e90f111e4e02ada57c3a6abee156d7abeef1dcc2296eab",
+      "original_sha256": "12ad842572eff99098e90f111e4e02ada57c3a6abee156d7abeef1dcc2296eab",
+      "bytes": 41055
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/prepared-source.zip": {
+      "sha256": "26395fb177735548257eb4d56418009a45f8fdeded4dc7bf7e2cd7bd365d5b1c",
+      "original_sha256": "26395fb177735548257eb4d56418009a45f8fdeded4dc7bf7e2cd7bd365d5b1c",
+      "bytes": 653754
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/result.json.gz": {
+      "sha256": "efdaeaea5a7a8d857add3a475b4666dbaa5921f241c7bae1e5e55dd35e112641",
+      "original_sha256": "0a387ad3b3d9d70e46f287ceca8e669772c4c00cee0829c6f23b83df03e38533",
+      "bytes": 82459
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/initialization-receipt.json": {
+      "sha256": "1e11463c9cd8b7c541806efd2edcfbd7f45e0e9340806b45375645fc09428344",
+      "original_sha256": "1e11463c9cd8b7c541806efd2edcfbd7f45e0e9340806b45375645fc09428344",
+      "bytes": 4502
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/prepared-source-manifest.json": {
+      "sha256": "88aa9a72c9710e1c98522426ba89be9f303c7b361378a4fb3f604315a4c30d1c",
+      "original_sha256": "88aa9a72c9710e1c98522426ba89be9f303c7b361378a4fb3f604315a4c30d1c",
+      "bytes": 5094
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/prepared-source-sha256.json": {
+      "sha256": "c59363d5011cb2c81f729f0e6912ef8b47f9e622e5f76962fb925bffad04e6a6",
+      "original_sha256": "c59363d5011cb2c81f729f0e6912ef8b47f9e622e5f76962fb925bffad04e6a6",
+      "bytes": 291
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/mechanism-receipt.json": {
+      "sha256": "2b2bceacdbe62cda434b25c83d2f95a540e41a1a02cc431014fcc6be8fd6c051",
+      "original_sha256": "2b2bceacdbe62cda434b25c83d2f95a540e41a1a02cc431014fcc6be8fd6c051",
+      "bytes": 15482
+    },
+    "research-evidence/research-px2-proportional-gap-6c17331e-new-init/runtime.json": {
+      "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+      "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/px2-proportional-gap-6c17331e/final-state.pt",
+      "sha256": "bca4605aa885f8118f08f30491b92f8044a69f83f9a7fb14af40359e98bae760",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

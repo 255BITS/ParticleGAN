@@ -1,0 +1,85 @@
+{
+  "id": "research-ep2-8fe3d1db-new-init",
+  "candidate": "RESEARCH-EP2-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 38.9619813458994,
+  "continuous_eligibility": "UNVERIFIED",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ep2-8fe3d1db-runtime-audit.json",
+  "audit_sha256": "a3a87235a7b5862cf3c56501aba0c3818f1c908ce2a59e5d79f7272ce6e8a5c6",
+  "artifacts": {
+    "research-evidence/research-ep2-8fe3d1db-new-init/source-plan.json": {
+      "sha256": "bd8121a2b6f724e68556362aff467abe053e9a7191f5361646999a087136a135",
+      "original_sha256": "bd8121a2b6f724e68556362aff467abe053e9a7191f5361646999a087136a135",
+      "bytes": 50026
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/prepared-source.zip": {
+      "sha256": "ccb0658c7195f6c77b92dbf80f232245b018ce87a206232ca577203f96a551f9",
+      "original_sha256": "ccb0658c7195f6c77b92dbf80f232245b018ce87a206232ca577203f96a551f9",
+      "bytes": 655081
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/result.json.gz": {
+      "sha256": "baa4e02023c89d32667b015f538feb178f1fd33c151706b0519c9a7ccb18572c",
+      "original_sha256": "ac664c180cde62da96024d0f48e86f57ac96fd8d5a8e86fe1ff0356c32180466",
+      "bytes": 82663
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/initialization-receipt.json": {
+      "sha256": "09af1f6a4d8caec8e76750d54b91aae9481cc1212c9524c3fb40751beecb17ef",
+      "original_sha256": "09af1f6a4d8caec8e76750d54b91aae9481cc1212c9524c3fb40751beecb17ef",
+      "bytes": 4485
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/prepared-source-manifest.json": {
+      "sha256": "8772561b448c8476ac83290cc920eeb9cd14b918ba804b63cc14b61a710f945f",
+      "original_sha256": "8772561b448c8476ac83290cc920eeb9cd14b918ba804b63cc14b61a710f945f",
+      "bytes": 5094
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/prepared-source-sha256.json": {
+      "sha256": "74045f80f26b4eca573a1b78e4efbb08f8cfcca521d15456981a941f9098ebc7",
+      "original_sha256": "74045f80f26b4eca573a1b78e4efbb08f8cfcca521d15456981a941f9098ebc7",
+      "bytes": 291
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/mechanism-receipt.json": {
+      "sha256": "bad61585024893b83ff139b50a1b9bfa076c7f4d4431f86e70cabf5665808d02",
+      "original_sha256": "bad61585024893b83ff139b50a1b9bfa076c7f4d4431f86e70cabf5665808d02",
+      "bytes": 21086
+    },
+    "research-evidence/research-ep2-8fe3d1db-new-init/runtime.json": {
+      "sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+      "original_sha256": "d706629c87d0c8d7f38388bd6289f44d1a8980d9f0aea5980d38f14a229eb5b1",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/ep2-8fe3d1db/final-state.pt",
+      "sha256": "97cbe81679d6c127d59d2898d1740257f9b930c2e5c448b69aaefcf7d4241e39",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

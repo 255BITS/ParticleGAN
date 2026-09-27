@@ -1,0 +1,85 @@
+{
+  "id": "research-rr1-innovation-reference-2c71f674-new-init",
+  "candidate": "RESEARCH-rr1_innovation_reference-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.999755859375
+  },
+  "seconds": 41.54361332580447,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/rr1-innovation-reference-2c71f674-runtime-audit.json",
+  "audit_sha256": "273f4561df45815bb80a7cede86672a275b1c6728150586871bd92d1f17d96db",
+  "artifacts": {
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/source-plan.json": {
+      "sha256": "c0e100d8fb2d9d81aef39e8ee5a006cc714f05038337ea07ecfb601c7f5a2447",
+      "original_sha256": "c0e100d8fb2d9d81aef39e8ee5a006cc714f05038337ea07ecfb601c7f5a2447",
+      "bytes": 41120
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/prepared-source.zip": {
+      "sha256": "1b9ee094d7d4e4bf45060b8b804abbf5b96de9a9ea9d6f12ec619883aaa3077c",
+      "original_sha256": "1b9ee094d7d4e4bf45060b8b804abbf5b96de9a9ea9d6f12ec619883aaa3077c",
+      "bytes": 653118
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/result.json.gz": {
+      "sha256": "2ad81b1e6d3a06b330f860f5ac4cc71d952977a319aa8b852b719bfa8d6561be",
+      "original_sha256": "950e2ec637f557536c8bdd25b37dfa6e42a9c20dd6a86e37af51433099e485c0",
+      "bytes": 82247
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/initialization-receipt.json": {
+      "sha256": "b18aae852862091aa769b786b3f7b0389f0691e2f44947ca2398737125b73bff",
+      "original_sha256": "b18aae852862091aa769b786b3f7b0389f0691e2f44947ca2398737125b73bff",
+      "bytes": 4506
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/prepared-source-manifest.json": {
+      "sha256": "ddeafdd31724652313a3869331f92cb968219344e307b9094e04f8b5f6661fb8",
+      "original_sha256": "ddeafdd31724652313a3869331f92cb968219344e307b9094e04f8b5f6661fb8",
+      "bytes": 5094
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/prepared-source-sha256.json": {
+      "sha256": "0008d698a94a90f50705cb70d2142a523b48e77e3b52c25b1716c1e60996652e",
+      "original_sha256": "0008d698a94a90f50705cb70d2142a523b48e77e3b52c25b1716c1e60996652e",
+      "bytes": 291
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/mechanism-receipt.json": {
+      "sha256": "883bf79c8134f2709663e1c62129dfa5d7a7ef245695bd1b8476e46bd8bf9690",
+      "original_sha256": "883bf79c8134f2709663e1c62129dfa5d7a7ef245695bd1b8476e46bd8bf9690",
+      "bytes": 11790
+    },
+    "research-evidence/research-rr1-innovation-reference-2c71f674-new-init/runtime.json": {
+      "sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "original_sha256": "e9046d47d00b5704a979db127e2669b4d4bbb65ff46a69a159490bb915fa8d28",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/rr1-innovation-reference-2c71f674/final-state.pt",
+      "sha256": "7e80e92926a5b6717c541b6d94a353e462316a6abf4b6a2ed0ad80f191419ec2",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}

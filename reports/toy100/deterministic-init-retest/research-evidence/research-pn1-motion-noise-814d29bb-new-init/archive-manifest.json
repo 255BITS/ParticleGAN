@@ -1,0 +1,85 @@
+{
+  "id": "research-pn1-motion-noise-814d29bb-new-init",
+  "candidate": "RESEARCH-pn1_motion_noise-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.914794921875
+  },
+  "seconds": 41.39883574191481,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/pn1-motion-noise-814d29bb-runtime-audit.json",
+  "audit_sha256": "fce8640721a9cf47fc0548d8cd6aed69f38cb49581cf9c00087459704e4b2fd8",
+  "artifacts": {
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/source-plan.json": {
+      "sha256": "77a60edeb6714bdf014689effc11193f64b8af631b144e9605cd3e77561222d8",
+      "original_sha256": "77a60edeb6714bdf014689effc11193f64b8af631b144e9605cd3e77561222d8",
+      "bytes": 41096
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/prepared-source.zip": {
+      "sha256": "a20c850b3ffc5a381dc78cf3a42adf4a79801c5ffdda6e1a5cfdf88d2454b972",
+      "original_sha256": "a20c850b3ffc5a381dc78cf3a42adf4a79801c5ffdda6e1a5cfdf88d2454b972",
+      "bytes": 653282
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/result.json.gz": {
+      "sha256": "cf81865b325104de06ad211d234d1f338deb0242ed9af8074bc6fafb7068680a",
+      "original_sha256": "2d3fbfbf8148e519681df545dd3387d02ff0ce1432a6b159e5365944d3c1a0ff",
+      "bytes": 86067
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/initialization-receipt.json": {
+      "sha256": "02a4bcc74ca5ea865b2d41ec07f6b635bc33b2973a9bf4dd90aeed69f1da433e",
+      "original_sha256": "02a4bcc74ca5ea865b2d41ec07f6b635bc33b2973a9bf4dd90aeed69f1da433e",
+      "bytes": 4498
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/prepared-source-manifest.json": {
+      "sha256": "9f69dc614e6878f8bb372b6a9f9881cb33b69de7d3d80b605b288e83bb3618fc",
+      "original_sha256": "9f69dc614e6878f8bb372b6a9f9881cb33b69de7d3d80b605b288e83bb3618fc",
+      "bytes": 5094
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/prepared-source-sha256.json": {
+      "sha256": "8f49027698c3a9aaffb1dcee8a2710ce134c64f7f20aff7f6a6d6a869f806578",
+      "original_sha256": "8f49027698c3a9aaffb1dcee8a2710ce134c64f7f20aff7f6a6d6a869f806578",
+      "bytes": 291
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/mechanism-receipt.json": {
+      "sha256": "9320c0a5fdc4e1d03c27f5a73fc107c0184df6388463b97e0d803b1860119a74",
+      "original_sha256": "9320c0a5fdc4e1d03c27f5a73fc107c0184df6388463b97e0d803b1860119a74",
+      "bytes": 6262
+    },
+    "research-evidence/research-pn1-motion-noise-814d29bb-new-init/runtime.json": {
+      "sha256": "8a7c26168cad89a3b594876b84fee8dfd75cd699acee79dc87ffad0e64d35ff6",
+      "original_sha256": "8a7c26168cad89a3b594876b84fee8dfd75cd699acee79dc87ffad0e64d35ff6",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/pr155-unfinished-new-init-20260926/pn1-motion-noise-814d29bb/final-state.pt",
+      "sha256": "5c3eacc66dffebdf080cff6d75849a3b6cd452d99b66c7d399df27e6069ba0f6",
+      "bytes": 668820
+    }
+  },
+  "old_quality_inherited": false
+}
