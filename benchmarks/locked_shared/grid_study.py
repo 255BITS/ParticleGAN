@@ -218,6 +218,9 @@ def run(output, device):
     for row in report["rows"]:
         print(f"START 100gaussians arm={row['name']} steps={TOTAL_STEPS} device={device}", flush=True)
         started = time.perf_counter()
+        # Distribution diagnostics are final-only: switched on after the last
+        # checkpoint, so only the runner's final live/EMA measurements pay for them.
+        problem = example.Gaussians100(distribution=False)
 
         def checkpoint(step, measure):
             if step not in EXPECTED_STEPS:
@@ -230,9 +233,11 @@ def run(output, device):
             row["curve"].append(point)
             save()
             print(json.dumps({"event": "100G_CHECKPOINT", "arm": row["name"], **point}, allow_nan=False), flush=True)
+            if step == TOTAL_STEPS:
+                problem.distribution = True
 
         try:
-            result = toy_run(example.Gaussians100(distribution=True), recipe=arm_recipe(row["overrides"]),
+            result = toy_run(problem, recipe=arm_recipe(row["overrides"]),
                              seed=0, device=device, observe_every=TOTAL_STEPS, observer=checkpoint,
                              log_path=output / f"{row['name']}.log")
             row["distribution"] = {kind: json_safe(result[kind]["distribution"]) for kind in ("live", "ema")}

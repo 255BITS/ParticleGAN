@@ -71,3 +71,42 @@ def test_grid_study_arms_are_recipes():
     assert (stock.lr, stock.betas, stock.reg_coeff, stock.reg_kappa, stock.prior_reg) == (.0006, (0., .999), 1., 1., 1.)
     assert (stock.batch_size, stock.num_particles, stock.total_steps) == (256, 20_000, 7000)
     assert recipes["penalty_only"].reg_kappa == 1.25 and recipes["toy_transfer"].prior_reg == .05
+
+
+def test_grid_study_distribution_metrics_are_final_only(tmp_path, monkeypatch):
+    """Checkpoints score coverage only; the grid distribution diagnostics run at the end."""
+    import lib.toy_metrics
+    from benchmarks.locked_shared import grid_study
+    calls = []
+    moments = lib.toy_metrics.per_mode_moments
+    monkeypatch.setattr(lib.toy_metrics, "per_mode_moments", lambda *a, **k: calls.append(1) or moments(*a, **k))
+    monkeypatch.setattr(grid_study, "TOTAL_STEPS", 4)
+    monkeypatch.setattr(grid_study, "EXPECTED_STEPS", [2, 4])
+    monkeypatch.setattr(grid_study, "ARMS", (("stock", {}),))
+    monkeypatch.setattr(grid_study, "arm_recipe", lambda overrides: small(total_steps=4))
+    torch.set_num_threads(1)
+    row, = grid_study.run(tmp_path / "grid", torch.device("cpu"))["rows"]
+    assert row.get("finished"), row.get("error")
+    assert [p["step"] for p in row["curve"]] == [2, 4]
+    assert {"sw1", "mode_tv"} <= set(row["distribution"]["live"]) and {"sw1"} <= set(row["distribution"]["ema"])
+    assert len(calls) == 3  # the runner's final observation plus its final live and EMA measurements
+
+
+def test_toml_runner_observers_preserve_training(tmp_path):
+    """The TOML runner's d_gap and snapshots read the run without touching its training RNG."""
+    from experiments.train_100gaussians import critic_gap, save_fake_scatter
+    torch.set_num_threads(1)
+    problem, recipe = load_example().Gaussians100(), small(total_steps=4)
+    plain, observed = ToyRun(problem, recipe=recipe), ToyRun(problem, recipe=recipe)
+    real = sample_100gaussians(64, "cpu", generator=torch.Generator().manual_seed(1))
+    for step in range(recipe.total_steps):
+        plain.step()
+        observed.step()
+        gap = critic_gap(observed, 16, 0)
+        assert isinstance(gap, float) and gap == gap
+        save_fake_scatter(observed.ema_nets.generator, observed.ema_nets.prior, tmp_path / f"{step}.png", real)
+    assert len(list(tmp_path.glob("*.png"))) == recipe.total_steps
+    a, b = plain.state_dict(), observed.state_dict()
+    for x, y in zip(a["generator_side"] + a["ema"], b["generator_side"] + b["ema"]):
+        for key in x:
+            assert torch.equal(x[key], y[key]), key
