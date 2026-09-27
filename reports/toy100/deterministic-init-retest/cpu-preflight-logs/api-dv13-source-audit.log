@@ -1,0 +1,17 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "candidate": "API-DV13-new-init",
+  "declaration_sha256": "4ab1d5c749586ddbdedc7663585d49a1069a6aacccf32d0fedbe02499b49db42",
+  "port_manifest_sha256": "bcadc1a3109eb36b28f51a5c7bfc4ed4977ec1e8d9ea226d418c94ae992a20ce",
+  "cpu_receipt_sha256": "8c6903a52ba78bf5917d8a066fbff38f4783e7a8cdc45c2c54e251dbe62968fc",
+  "geometry": {
+    "geometry_check": "PASS",
+    "latent_bandwidth": {
+      "shape": [
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "b6233677be1e794e4ef850f6149c42294b4fe2460322c83759715fc62dd782f6"
+    }
+  }
+}

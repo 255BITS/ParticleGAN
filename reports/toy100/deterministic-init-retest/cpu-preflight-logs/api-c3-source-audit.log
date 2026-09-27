@@ -1,0 +1,10 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "candidate": "API-C3-new-init",
+  "declaration_sha256": "ddb03caf8ff0f0a6024bf07d8dd6f8a4cfda8deff27c05da8355ad443faf97e1",
+  "port_manifest_sha256": "2842faf344abd70d7295b4e6668ec43dc983c9c5c028d007641a221e3ae76fd0",
+  "cpu_receipt_sha256": "0c5a3735ca609d212b426ca91d30b39e6ae68b505cb7acad70dc296b207fe70e",
+  "geometry": {
+    "geometry_check": "not applicable: no declared bandwidth controller"
+  }
+}

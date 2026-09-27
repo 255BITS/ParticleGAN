@@ -1,0 +1,10 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "candidate": "API-RP14-new-init",
+  "declaration_sha256": "835ee55fd7d1d21b9428449cc285143c337129b6e25c67a367892580e5c38069",
+  "port_manifest_sha256": "dd4cf1457ca593049f2af1ccabb9f0f79f72984024448bd5b59fd140acdaa8a3",
+  "cpu_receipt_sha256": "a7935ef32d1d3961670fc10b7c0d22989b2f0d438490ae165c66c580675eb8a5",
+  "geometry": {
+    "geometry_check": "not applicable: no declared bandwidth controller"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "candidate": "API-RP3-new-init",
+  "declaration_sha256": "09368e123c6b9832b0f3e1f761b35153e6db31dcaa7468967764d05828752c59",
+  "port_manifest_sha256": "578b5f6b1b3881a840d37ddb6c01c5dc925f6343f1e8ca4a7c34b65a23d07855",
+  "cpu_receipt_sha256": "4f9997cf449d23a6021c5e8adddbe0da8f6d02a8d37393cd33c1d35676e4f09e",
+  "geometry": {
+    "geometry_check": "not applicable: no declared bandwidth controller"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "candidate": "API-RP7-new-init",
+  "declaration_sha256": "92cd3263da3f6097875e9a5257933d3234e698b678d859ea3ff733a7e562265e",
+  "port_manifest_sha256": "37b78b8308b91995f67b95abac9be3f031bf960f336820ad2d5665663369db81",
+  "cpu_receipt_sha256": "f7169c8c4c347d9e332efc6ee22030aa16fd11cd00ec6d5266fb6a2f27e2d7cf",
+  "geometry": {
+    "geometry_check": "not applicable: no declared bandwidth controller"
+  }
+}
