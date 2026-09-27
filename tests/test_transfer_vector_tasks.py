@@ -132,14 +132,10 @@ def test_scale_drift_target_follows_the_frozen_per_update_clock(monkeypatch):
     assert problem.completed is None
 
 
-def test_patched_controller_or_adam_is_refused_not_silently_ignored(monkeypatch):
+def test_patched_adam_is_refused_not_silently_ignored(monkeypatch):
     monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
     spec = _tiny(vectors.TASKS[0])
-    from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
-    from benchmarks.transfer_suite.relative_step_adapter import adapted_steps, mechanism
-    with optimizer_defaults(vectors.spec_recipe(spec), []):
-        result = vectors.run_episode(spec, vectors.fixed_policy(), fixed=True)
-    assert result["status"] == "ERROR" and "FixedControl was patched" in result["error"]
-    with adapted_steps(mechanism(None), {}):
-        result = vectors.run_episode(spec, vectors.fixed_policy(), fixed=True)
+    original = torch.optim.Adam.step
+    monkeypatch.setattr(torch.optim.Adam, "step", lambda self, *a, **k: original(self, *a, **k))
+    result = vectors.run_episode(spec, vectors.fixed_policy(), fixed=True)
     assert result["status"] == "ERROR" and "Adam.step is patched" in result["error"]

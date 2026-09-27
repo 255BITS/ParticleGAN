@@ -30,20 +30,6 @@ from particlegan.training import output_noise_std
 
 
 
-class _RecipeOwnsRates:
-    """No LR controller runs on this host: the recipe-built optimizers own the rates."""
-
-    def __repr__(self):
-        return "RECIPE_OWNS_RATES"
-
-
-RECIPE_OWNS_RATES = _RecipeOwnsRates()
-# Research harnesses (compare_defaults.optimizer_defaults, compare_formulations'
-# audit) patch this name to set or read per-group rates from a controller. No
-# controller runs here, so ``train`` refuses when it has been replaced instead
-# of silently recording nothing; read ``result["applied"]`` / ``["actions"]``.
-FixedControl = RECIPE_OWNS_RATES
-
 OBSERVATIONS = 24
 EVAL_SAMPLES = 4096
 SEPARATED_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15],
@@ -323,20 +309,12 @@ def _groups(toy):
 
 
 def _refuse_patched_hosts():
-    """Fail closed when a research harness patched a rate controller or Adam itself.
+    """Fail closed when something patched ``torch.optim.Adam`` itself.
 
-    Such patches were written for the frozen host's own ``torch.optim.Adam``
-    and ``FixedControl``. On the shared runner nothing reads ``FixedControl``
-    (a patch would record ``applied=[]`` and drop any LR policy it carries),
-    and the recipe-built K3P optimizers subclass ``torch.optim.Adam``, so a
-    patched ``Adam.step`` would wrap only their inner Adam update, inside the
-    K3P step-time machinery -- an unmeasured change, refused instead.
+    The recipe-built K3P optimizers subclass ``torch.optim.Adam``, so a patched
+    ``Adam.__init__``/``Adam.step`` (e.g. the frozen ``init_research`` hooks)
+    would change the runner's own optimizer in an unmeasured way.
     """
-    if FixedControl is not RECIPE_OWNS_RATES:
-        raise RuntimeError("vector_tasks.FixedControl was patched (e.g. compare_defaults.optimizer_defaults "
-                           "or an audit controller), but no controller runs on the shared runner: the "
-                           "recipe-built optimizers own the rates. Declare them in the recipe and read "
-                           "result['applied'] / result['actions'] instead")
     for name in ("__init__", "step"):
         method = getattr(torch.optim.Adam, name)
         if (method.__module__, method.__qualname__) != ("torch.optim.adam", f"Adam.{name}"):
