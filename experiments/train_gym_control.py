@@ -105,7 +105,7 @@ def train(cfg):
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     if cfg["arm"] == "joint":
         opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=torch.nn.ModuleList([e, ec]),
-            ema_critic=copy.deepcopy(d), fused=device.type == "cuda")
+                                              fused=device.type == "cuda")
     else:
         opt_g = recipe.make_generator_optimizer(list(ec.parameters()) + list(g.branches[1].parameters()),
             **(dict(fused=True) if device.type == "cuda" else {}))

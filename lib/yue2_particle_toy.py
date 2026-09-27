@@ -17,7 +17,6 @@ This file does not run YuE2. Late-layer weighting is not in FORMULATION.md
 MSE are not in the v2 teacher. Distillation rel-L2 is the rejected supervised
 arm, not the shipped update.
 """
-import copy
 
 import torch
 from torch import nn
@@ -127,7 +126,7 @@ def _game(params, critic, steps):
     # step size is sized so a sign can flip within the 200-update gate.
     opt = recipe.make_generator_optimizer(params, lr=SCALAR_GAIN_LR)
     init.deterministic_orthogonal_(critic, seed=1)  # make_critic_optimizer keeps weights
-    opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+    opt_d = recipe.make_critic_optimizer(critic)
     rates = [[group["lr"] for group in o.param_groups] for o in (opt, opt_d)]
     return recipe, opt, opt_d, recipe.make_critic_penalty(opt_d), rates
 

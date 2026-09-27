@@ -247,7 +247,7 @@ def train(cfg):
     recipe = training_recipe(cfg)
     g, e, prior, d, direct = [models[k] for k in ("G", "E", "prior", "D", "direct")]
     if d is not None:
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e,
                                               fused=device.type == "cuda")
     else:
         params = list(direct.parameters()) if direct is not None else list(g.parameters()) + list(e.parameters())

@@ -186,7 +186,7 @@ class GradRegularizer:
             Required (> 0) whenever `target_anneal` is not 'none'.
         lr_floor (float): k3p only; the declared critic LR floor f as a
             fraction of the peak LR, so s == 0 exactly at the floor.
-        anchor: k3p only; a particlegan.k3p.CriticAnchor (or anything with
+        anchor: k3p only; a benchmarks.legacy.critic_optimizer.CriticAnchor (or anything with
             start_(), update_() and __call__). Started at the first blended
             call and updated by `after_critic_step`.
         record: k3p only; a CriticStepRecord shared with a critic optimizer

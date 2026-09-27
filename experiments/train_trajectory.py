@@ -117,7 +117,7 @@ def train(cfg):
     g, d = TrajectoryGenerator(cfg).to(device), TrajectoryDiscriminator(cfg).to(device)
     init.deterministic_orthogonal_(g, seed=0)
     init.deterministic_orthogonal_(d, seed=1)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, fused=True)
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for m in (ema_g, ema_prior, ema_noise):
         m.requires_grad_(False)

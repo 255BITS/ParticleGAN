@@ -206,7 +206,7 @@ def train(cfg):
     prior = init.deterministic_orthogonal_(recipe.make_prior(generator=rng(cfg['seed'] + 1, 'cpu'))).cuda()
     for module, seed in ((g, 0), (d, 1), (e, 2)):
         init.deterministic_orthogonal_(module, seed=seed)
-    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)
+    og, od = recipe.make_optimizers(g, d, prior, encoder=e, fused=True)
     initial_hash = state_hash([g, d, e, prior])
     initial_sigma = prior.sigma.clone()
     initial_prior = prior.z.detach().clone()

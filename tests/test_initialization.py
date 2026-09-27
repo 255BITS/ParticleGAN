@@ -16,10 +16,10 @@ def test_recipe_never_touches_weights():
     torch.manual_seed(0)
     recipe = get_recipe(num_particles=8)
     g, d = nn.Linear(2, 2), nn.Linear(2, 1)
-    prior, ema = recipe.make_prior(), copy.deepcopy(d)
-    modules = (g, d, prior, ema)
+    prior = recipe.make_prior()
+    modules = (g, d, prior)
     before = [[p.clone() for p in m.parameters()] for m in modules]
-    recipe.make_optimizers(g, d, prior, ema_critic=ema)
+    recipe.make_optimizers(g, d, prior)
     GANTrainer(recipe, g, d, prior=prior)
     for saved, module in zip(before, modules):
         assert all(torch.equal(a, b) for a, b in zip(saved, module.parameters()))

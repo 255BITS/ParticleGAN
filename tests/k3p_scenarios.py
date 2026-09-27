@@ -4,7 +4,6 @@ The same scenario code drives the frozen research mechanism (global hooks,
 run in a subprocess by tests/test_k3p.py) and the package API (in-process),
 so any difference in the traces is a difference in the K3P math.
 """
-import copy
 import math
 
 import torch
@@ -18,13 +17,9 @@ SPIKE_STEP = 7
 FROZEN_SOURCES = "reports/toy100/gap-fill-20260925/sources/k3p"
 
 
-def lr_mult(t):
-    """Flat (s == 1) for 1-4, cosine down to 0.1x for 5-12 (blend), then below the floor (s == 0)."""
-    if t <= 4:
-        return 1.0
-    if t <= 12:
-        return 0.1 + 0.45 * (1.0 + math.cos(math.pi * (t - 4) / 8))
-    return 0.005
+def flat_lr(t):
+    """A constant LR: the frozen mechanism then stays in its phase A (R1 + fake cap) on every step."""
+    return 1.0
 
 
 def make_critic(seed=0):
@@ -48,7 +43,7 @@ def critic_batch(t, seed=1):
     return xr, xf
 
 
-def run_critic(reg, D, opt, steps, *, guard=None, after=None, lr_fn=lr_mult, trace=None, seed=1):
+def run_critic(reg, D, opt, steps, *, guard=None, after=None, lr_fn=flat_lr, trace=None, seed=1):
     trace = [] if trace is None else trace
     for t in steps:
         for group in opt.param_groups:
@@ -127,7 +122,11 @@ def run_direct(particles, opt, steps, step_fn, trace=None):
 # ---------------------------------------------------------------- frozen side
 
 def frozen_all(mechanism, latent, response):
-    """Run every scenario through the frozen hook-based mechanism (subprocess only)."""
+    """Run every scenario through the frozen hook-based mechanism (subprocess only).
+
+    The critic scenarios run at a constant LR, where the frozen K3P never
+    leaves phase A (R1 on reals + one-sided fake cap), the shipped penalty.
+    """
     from benchmarks.legacy.grad_regularizers import GradRegularizer
     keep = []
     prox_log = []
@@ -195,14 +194,12 @@ def frozen_all(mechanism, latent, response):
 def package_critic(lazy_k=1, steps=range(1, STEPS + 1), setup=None):
     """Build the package K3P critic stack; returns (objects, trace)."""
     from particlegan.grad_regularizers import GradientPenalty
-    from particlegan.k3p import CriticAnchor, CriticSpikeGuard
+    from particlegan.k3p import CriticSpikeGuard
     D = make_critic()
-    ema = copy.deepcopy(D).requires_grad_(False)
     opt = critic_optimizer(D)
-    anchor = CriticAnchor(D, ema, decay=0.999)
-    reg = GradientPenalty(coeff=1.0, kappa=0.5, lazy_k=lazy_k, lr_floor=0.01, anchor=anchor)
+    reg = GradientPenalty(coeff=1.0, kappa=0.5, lazy_k=lazy_k)
     guard = CriticSpikeGuard(ratio=5.0, min_steps=3)
-    objs = dict(D=D, ema=ema, opt=opt, anchor=anchor, reg=reg, guard=guard)
+    objs = dict(D=D, opt=opt, reg=reg, guard=guard)
     if setup is not None:
         setup(objs)
     trace = run_package_critic(objs, steps)
@@ -210,27 +207,8 @@ def package_critic(lazy_k=1, steps=range(1, STEPS + 1), setup=None):
 
 
 def run_package_critic(objs, steps):
-    reg, anchor = objs["reg"], objs["anchor"]
-    started = []
-
-    def after(o):
-        reg.after_critic_step(o)
-        started.append([e.clone() for e in objs["ema"].parameters()] if reg.state_dict()["anchor_started"] else None)
-
-    prox = []
-    original = reg.penalty
-
-    def penalty(*args, **kwargs):
-        pen, st = original(*args, **kwargs)
-        if st.get("phase") in ("blend", "b"):
-            prox.append(st["prox"])
-        return pen, st
-
-    reg.penalty = penalty
-    try:
-        trace = run_critic(reg, objs["D"], objs["opt"], steps, guard=objs["guard"], after=after)
-    finally:
-        del reg.penalty
-    for row, ema in zip(trace, started):
-        row["ema"] = ema
-    return dict(trace=trace, prox=prox)
+    reg = objs["reg"]
+    trace = run_critic(reg, objs["D"], objs["opt"], steps, guard=objs["guard"], after=reg.after_critic_step)
+    for row in trace:
+        row["ema"] = None
+    return dict(trace=trace, prox=[])

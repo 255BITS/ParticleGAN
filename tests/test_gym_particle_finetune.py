@@ -1,5 +1,4 @@
 """Arm A finetune: paired-error GAN with the recipe critic penalty, adv_weight locked at 1."""
-import copy
 import json
 from pathlib import Path
 import tempfile
@@ -153,7 +152,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             recipe = training_recipe({**bundle["world_config"], "steps": 2, "batch_size": 4})
             gan = recipe.make_loss()
             reg = recipe.make_critic_penalty(recipe.make_critic_optimizer(
-                bundle["D"], ema_critic=copy.deepcopy(bundle["D"])))
+                bundle["D"]))
             expectations = dict(control=("E_control",), prior=(), encoded=("E",), composed=("E",))
             seen = set()
             for path, encoders in expectations.items():

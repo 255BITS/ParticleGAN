@@ -4,7 +4,6 @@
 Copied from train_mog_vae.py to preserve previous queue provenance. Soft arms
 use unbiased two-draw routing; hard routing uses a biased ST query gradient."""
 import argparse
-import copy
 import hashlib
 import json
 import math
@@ -258,7 +257,7 @@ def train(cfg):
     e = Encoder(cfg['width']).cuda()
     for seed, module in enumerate((g, d, e)):
         init.deterministic_orthogonal_(module, seed=seed)
-    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
+    og, od = recipe.make_optimizers(g, d, prior, encoder=e)
     initial_sigma = prior.sigma.detach().clone()
     # Hash the weights training starts from.
     metadata = dict(initialization_sha256=state_hash([g, d, prior, e]), sigma=float(prior.sigma),

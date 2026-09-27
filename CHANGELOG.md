@@ -2,6 +2,30 @@
 
 ## Unreleased
 
+- **New default formulation: K3P gs2 at constant LR.** The critic penalty is
+  now `reg_coeff/2 · [mean ||∇D(r)||²/d + mean relu(||∇D(f)||/√d − κ)²]`:
+  zero-centred R1 on the reals plus a one-sided RMS cap on the fakes, with no
+  EMA anchor and no LR-driven blend. New defaults: `lr` .0085, `d_lr_mult` .5,
+  `reg_coeff` .3, `amsgrad=True` (new field, all recipe optimizers), constant
+  LR (`lr_floor` 1, `network_lr_floor` and `network_lr_horizon_cap` None), no
+  instance noise (`input_noise_std`, `output_noise_std` 0). The spike guard
+  and A2 latent damping are unchanged. The schedule and noise fields remain as
+  optional knobs. Training results differ from 0.8.0.
+- **Removed:** the EMA-critic anchor (`Recipe.reg_anchor_decay` /
+  `reg_anchor_weight`, the `ema_critic=` argument of `make_optimizers` /
+  `make_critic_optimizer`, `CriticAnchor`, `RobustCriticAnchor`,
+  `GANTrainer.ema_D`); the direct sample-particle response
+  (`make_generator_optimizer(direct_particles=...)`, `DirectParticleResponse`,
+  `Recipe.direct_particle_gain` / `direct_particle_betas`); the penalty's
+  `lr_floor` option and `blend_weight`. `GANTrainer` drops those recipe fields,
+  and the critic optimizer drops a saved EMA critic, when loading older
+  checkpoints. Benchmarks that replay archived runs keep the old defaults and
+  the EMA anchor through `benchmarks.legacy.recipe.LegacyRecipe`
+  (`benchmarks.legacy.critic_optimizer.LegacyCriticAdam`).
+- `python -m benchmarks.toy100 run` now defaults to
+  `configs/toy100/default.json`, which trains the package default recipe
+  (`"recipe_defaults": "particlegan"`); other toy100 configs keep resolving on
+  the GAN v3 fields.
 - **`GANTrainer.sample()` returns clean samples by default.** It previously
   added the current training output noise; pass `output_noise=True` for that.
   Training is unchanged (sampling uses only its own stream). The toy100

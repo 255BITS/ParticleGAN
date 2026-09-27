@@ -42,9 +42,10 @@ def test_cifar_optimizer_factory_matches_historical_groups_and_updates(kind):
     groups = [{'params': list(old_g.parameters()), 'lr': cfg['lr']}]
     if kind == 'learned':
         groups.append({'params': list(old_prior.parameters()), 'lr': cfg['lr'] * cfg['prior_lr_mult']})
-    old_og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999), fused=False)
+    old_og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999), amsgrad=recipe.amsgrad, fused=False)
     old_od = torch.optim.Adam((p for p in old_d.parameters() if p.requires_grad),
-                              lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999), fused=False)
+                              lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999),
+                              amsgrad=recipe.amsgrad, fused=False)
     og, od = recipe.make_optimizers(g, d, prior, fused=False)
     assert og.state_dict()['param_groups'] == old_og.state_dict()['param_groups']
     assert od.state_dict()['param_groups'] == old_od.state_dict()['param_groups']

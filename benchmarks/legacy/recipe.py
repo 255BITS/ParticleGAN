@@ -7,7 +7,7 @@ package. With default switches it trains exactly like ``particlegan``'s
 recipe; archived GAN v3 / locked_shared / arm-study configurations resolve
 through it so their receipts stay reproducible. Benchmarks only.
 """
-from copy import copy
+from copy import copy, deepcopy
 from dataclasses import dataclass, fields
 
 import torch.nn as nn
@@ -15,6 +15,7 @@ import torch.nn as nn
 from particlegan import Recipe
 from particlegan.k3p import K3PCriticAdam
 
+from .critic_optimizer import LegacyCriticAdam
 from .gan_loss import GANLoss
 from .grad_regularizers import GradientPenalty
 
@@ -31,18 +32,45 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "amsgrad": False}
 
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
+    # The package defaults these receipts were recorded with (the package has
+    # since moved to constant-LR AMSGrad without noise; see docs/k3p.md).
+    lr: float = 0.00425
+    d_lr_mult: float = 1.0
+    reg_coeff: float = 1.0
+    lr_floor: float = 0.05
+    network_lr_floor: float | None = 0.01
+    network_lr_horizon_cap: int | None = 1600
+    input_noise_std: float = 0.5
+    output_noise_std: float = 0.029
+    amsgrad: bool = False
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
     reg_method: str = "autograd"
+    # Removed from the package with the direct sample-particle response (no
+    # benchmark used it); kept so recorded dicts round-trip.
+    direct_particle_gain: bool = True
+    direct_particle_betas: tuple[float, float] = (0.0, 0.9)
+    # Removed from the package with the EMA-critic anchor. The legacy K3P
+    # penalty evaluates the EMA critic that LegacyCriticAdam keeps at this
+    # decay (reg_anchor_weight only round-trips recorded dicts).
+    reg_anchor_decay: float = 0.999
+    reg_anchor_weight: float = 1.0
 
     def __post_init__(self):
         super().__post_init__()
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if len(self.direct_particle_betas) != 2 or any(not 0 <= b < 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        if type(self.direct_particle_gain) is not bool:
+            raise ValueError("direct_particle_gain must be a boolean")
+        if isinstance(self.reg_anchor_decay, bool) or not 0 <= self.reg_anchor_decay < 1:
+            raise ValueError("reg_anchor_decay must be in [0, 1)")
         self.make_loss()
         self.make_gradient_penalty()
 
@@ -70,13 +98,38 @@ class LegacyRecipe(Recipe):
         return CriticPenalty(self, optimizer, output=output, generator=generator,
                              collect_stats=collect_stats, **penalty_overrides)
 
+    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+        """The package critic optimizer plus the EMA critic the legacy K3P penalty reads.
+
+        A K3P recipe allocates ``copy.deepcopy(critic)`` as the EMA when
+        ``ema_critic`` is not given (GANTrainer and the package factories no
+        longer pass one).
+        """
+        if ema_critic is None and self.reg_arm == "k3p":
+            ema_critic = deepcopy(critic)
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
+                   **adam_kwargs}
+        return LegacyCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                                ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
+                                guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps,
+                                **options)
+
+    def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
+                        **adam_kwargs):
+        """``Recipe.make_optimizers`` with ``make_critic_optimizer``'s EMA critic (``ema_critic`` optional)."""
+        opt_g, opt_d = super().make_optimizers(generator, discriminator, prior, encoder=encoder, **adam_kwargs)
+        if ema_critic is not None:
+            opt_d = self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
+        return opt_g, opt_d
+
 
 def get_recipe(name="gan", **overrides):
-    """``particlegan.get_recipe`` returning a ``LegacyRecipe``."""
+    """``particlegan.get_recipe`` returning a ``LegacyRecipe`` (on the pinned legacy defaults)."""
     from particlegan import get_recipe as current
-    base = current(name)
-    values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
-    return LegacyRecipe(**{**values, **overrides})
+    base, plain = current(name), Recipe()
+    family = {f.name: getattr(base, f.name) for f in fields(Recipe)
+              if getattr(base, f.name) != getattr(plain, f.name)}
+    return LegacyRecipe(**{**family, **overrides})
 
 
 def _first_output(output):
@@ -109,7 +162,7 @@ class CriticPenalty:
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
         self.optimizer, self.critic = optimizer, optimizer.critic
         k3p = penalty_overrides.get("arm", recipe.reg_arm) == "k3p"
-        if k3p and optimizer.anchor is None:
+        if k3p and getattr(optimizer, "anchor", None) is None:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
         options = {"record": optimizer.record} if k3p else {}
@@ -122,7 +175,7 @@ class CriticPenalty:
     @property
     def ema_critic(self):
         """The paired optimizer's EMA critic module (None without one)."""
-        return self.optimizer.ema_critic
+        return getattr(self.optimizer, "ema_critic", None)
 
     def _ema_view(self, critic):
         """``m -> module`` mapping the EMA root to the EMA counterpart of ``critic``."""
@@ -148,7 +201,7 @@ class CriticPenalty:
         def live(x):
             return output(critic(x, *condition, **condition_kwargs))
         options = {}
-        anchor = self.optimizer.anchor
+        anchor = getattr(self.optimizer, "anchor", None)
         if anchor is not None and self.regularizer.arm == "k3p":
             view = self._ema_view(critic)
             options["ema_critic"] = lambda x: anchor.forward(

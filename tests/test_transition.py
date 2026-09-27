@@ -1,4 +1,3 @@
-import copy
 import tempfile
 import unittest
 from pathlib import Path
@@ -19,7 +18,7 @@ from particlegan.grad_regularizers import GradientPenalty
 
 def _penalties(recipe, d, rngs):
     """One recipe penalty per role, all paired with one critic optimizer."""
-    opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
+    opt = recipe.make_critic_optimizer(d)
     return {name: recipe.make_critic_penalty(opt, kappa=0) for name, rng in rngs.items()}
 
 class TransitionTests(unittest.TestCase):

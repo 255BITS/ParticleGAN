@@ -1,5 +1,4 @@
 """Paired noise, recipe critic penalty on R, removal of reconstruction gradients, and configuration."""
-import copy
 import math
 from pathlib import Path
 import tempfile
@@ -49,7 +48,7 @@ class SliderGanTests(unittest.TestCase):
             # R trains with the recipe's critic optimizer and penalty; the
             # attention critic supports the penalty's second derivatives.
             recipe = training_recipe(self.cfg)
-            opt_r = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+            opt_r = recipe.make_critic_optimizer(critic)
             x = torch.randn(4,18)
             penalty = recipe.make_critic_penalty(opt_r)(critic, x, x + .1)
             self.assertGreater(float(penalty.detach()), 0.)

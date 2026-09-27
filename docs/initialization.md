@@ -55,7 +55,7 @@ the host's own init, keep that init and skip this call.
 
 The toy100 benchmark is such a host. Its critic
 (`SimpleMLPDiscriminator(fourier=3)`) keeps xavier weights and zero biases
-(`benchmarks/toy100/train.py`). The default gate uses
+(`benchmarks/toy100/train.py`). Measured with
 `configs/toy100/constraints_simple_regularization.json`, seed 1234 and 7000
 updates:
 

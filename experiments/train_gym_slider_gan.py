@@ -95,7 +95,7 @@ def train(cfg):
     init.deterministic_orthogonal_(bundle['D'], seed=1)
     init.deterministic_orthogonal_(bundle['E'], seed=2)
     opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
-        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
+        encoder=bundle['E'], fused=device.type == 'cuda')
     provenance = dict(sources=sources, source_archive_sha256=sha256(out / 'source.zip'),
         episodes=dict(path=cfg['episodes'], sha256=sha256(cfg['episodes'])),
         expert_data=dict(count=len(triples), episode_ids=np.unique(records['episode_ids']).tolist(),
@@ -109,7 +109,7 @@ def train(cfg):
         error_normalization='Per-coordinate sample std of training target minus training mean, then median row RMS gain; no held-out inputs',
         slider_source='Anima paired-error game; shared core pinned at beaffeb3640c4554a7315998c04a5909f384b972')
     values = {k: torch.as_tensor(v, device=device) for k,v in records.items() if k not in ('episode_ids', 'steps')}
-    opt_r = recipe.make_critic_optimizer(bundle['R'], ema_critic=copy.deepcopy(bundle['R']), fused=device.type == 'cuda')
+    opt_r = recipe.make_critic_optimizer(bundle['R'], fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d, opt_r)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()

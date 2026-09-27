@@ -109,7 +109,7 @@ class GanControlTrainingTests(unittest.TestCase):
                 bundle = build_gan_models({**self.cfg, "arm": arm}, fit_sparse_scaler(records))
                 recipe = training_recipe(bundle["config"])
                 gan = recipe.make_loss()
-                opt_d = recipe.make_critic_optimizer(bundle["D"], ema_critic=copy.deepcopy(bundle["D"]))
+                opt_d = recipe.make_critic_optimizer(bundle["D"])
                 views = real_views(bundle, batch)
                 for path in ("prior", "encoded"):
                     for key in ("E", "G", "prior", "D"):

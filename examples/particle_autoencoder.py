@@ -1,5 +1,4 @@
 """Installed-package smoke example; one caller-owned step for AE and VAE."""
-import copy
 
 import torch
 from torch import nn
@@ -14,8 +13,7 @@ def main():
         init.deterministic_orthogonal_(decoder, seed=0)
         init.deterministic_orthogonal_(critic, seed=1)
         init.deterministic_orthogonal_(encoder, seed=2)
-        opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder,
-                                              ema_critic=copy.deepcopy(critic))
+        opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
         x = torch.randn(8, 2)
         query, offset = encoder(x).chunk(2, dim=1)
         encoded = recipe.encode(query, prior, offset=offset if recipe.encoder_mode == 'ae' else None)

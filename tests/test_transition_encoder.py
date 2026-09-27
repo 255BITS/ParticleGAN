@@ -1,4 +1,3 @@
-import copy
 import tempfile
 import unittest
 from pathlib import Path
@@ -61,7 +60,7 @@ class EncoderTests(unittest.TestCase):
         loss.backward()
         self.assertGreater(float(fake.grad[:, 4:].norm()), 0)
         rngs = {name: torch.Generator().manual_seed(20+i) for i, name in enumerate(d.roles())}
-        opt_d = self.recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
+        opt_d = self.recipe.make_critic_optimizer(d)
         loss, _ = discriminator_loss(d, x, fake.detach(), self.c, self.context, self.recipe.make_loss(),
                                      {name: self.recipe.make_critic_penalty(opt_d, kappa=0)
                                       for name, rng in rngs.items()}, 1.)

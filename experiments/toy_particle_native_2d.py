@@ -174,7 +174,7 @@ def run_arm(name, kind, recipe, init, log):
             param.requires_grad_(id(param) in seen)
     opt_g = recipe.make_generator_optimizer(chosen)
     # One recipe critic optimizer (with its EMA) and one penalty per critic.
-    opt_ds = [recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic)) for critic in critics]
+    opt_ds = [recipe.make_critic_optimizer(critic) for critic in critics]
     reg = {critic: recipe.make_critic_penalty(opt) for critic, opt in zip(critics, opt_ds)}
     optimizers = [opt_g, *opt_ds]
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]

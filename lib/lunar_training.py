@@ -5,7 +5,6 @@ The policy's adversarial phase has no action-cloning term. Its frozen learned
 world model supplies a differentiable successor target from expert transitions.
 Rollout success and speed must be measured separately in the actual simulator.
 """
-import copy
 from pathlib import Path
 
 import numpy as np
@@ -278,8 +277,8 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
     init.deterministic_orthogonal_(critic, seed=1)
     gan = recipe.make_loss()
     optimizer_g = recipe.make_generator_optimizer(policy.parameters())
-    # Critic Adam whose step() also runs the recipe's spike guard and EMA-critic update.
-    optimizer_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+    # Critic Adam whose step() also runs the recipe's spike guard.
+    optimizer_d = recipe.make_critic_optimizer(critic)
     penalty = recipe.make_critic_penalty(optimizer_d)
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in (optimizer_g, optimizer_d)]
     rng = torch.Generator(device=device).manual_seed(seed + 29)

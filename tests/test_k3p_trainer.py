@@ -1,4 +1,4 @@
-"""GANTrainer / the recipe's optimizers and critic penalty: K3P as the default, EMA critic and checkpoints."""
+"""GANTrainer / the recipe's optimizers and critic penalty: K3P as the default, and checkpoints."""
 import copy
 
 import pytest
@@ -15,14 +15,11 @@ from particlegan import (
 )
 from particlegan.grad_regularizers import GradientPenalty
 from torch import nn
-from torch.nn.utils.parametrizations import spectral_norm
 
 
 def _recipe(**overrides):
-    # Small sparse table (64 rows, batch 8) so A2 damping is active; a short
-    # network horizon so the K3P blend and floor are reached quickly.
-    options = dict(num_particles=64, z_dim=2, batch_size=8, total_steps=20,
-                   network_lr_horizon_cap=16, d_guard_min_steps=2)
+    # Small sparse table (64 rows, batch 8) so A2 damping is active.
+    options = dict(num_particles=64, z_dim=2, batch_size=8, total_steps=20, d_guard_min_steps=2)
     return get_recipe(**{**options, **overrides})
 
 
@@ -44,42 +41,40 @@ def test_trainer_default_is_k3p():
     assert recipe == Recipe() and recipe.name == "k3p"
     trainer = _trainer()
     assert isinstance(trainer.penalty.regularizer, GradientPenalty)
-    assert trainer.penalty.regularizer.lr_floor == trainer.recipe.network_lr_floor
-    assert trainer.ema_D is not None and trainer.opt_d.guard is not None
+    assert trainer.opt_d.guard is not None and not hasattr(trainer, "ema_D")
     assert trainer.latent_damping is not None
-    phases = [trainer.step(real, collect_stats=True)["penalty_stats"]["phase"] for real in _reals(20)]
-    assert phases[0] == "a" and "blend" in phases and phases[-1] == "b"
-    assert trainer.opt_d.state_dict()["regularizer"]["record"]["anchor_started"]
+    assert all(g["amsgrad"] for opt in (trainer.opt_g, trainer.opt_d) for g in opt.param_groups)
+    streams = {name: getattr(trainer, name).get_state() for name in trainer._STREAMS}
+    stats = [trainer.step(real, collect_stats=True)["penalty_stats"] for real in _reals(20)]
+    assert all(s["applied"] and s["r1"] > 0 for s in stats)
+    assert set(stats[0]) == {"applied", "pen", "center", "r1", "fake_cap"}
+    # The penalty draws nothing: the reserved penalty stream never moves.
+    assert torch.equal(trainer.penalty_generator.get_state(), streams["penalty_generator"])
+    assert set(trainer.opt_d.state_dict()["regularizer"]) == {"record", "guard"}
     assert trainer.latent_damping.started
 
 
-def test_trainer_lr_scales_network_horizon_and_prior():
+def test_trainer_lr_is_constant_by_default_and_the_optional_schedule_still_applies():
     trainer = _trainer()
-    recipe, base = trainer.recipe, trainer.initial_lrs
-    for step, real in enumerate(_reals(20)):
+    base = trainer.initial_lrs
+    for real in _reals(20):
         trainer.step(real)
+        assert [g["lr"] for g in trainer.opt_g.param_groups] == base[0]
+        assert [g["lr"] for g in trainer.opt_d.param_groups] == base[1]
+    assert base == [[.0085, .017], [.00425]]
+    scheduled = _trainer(_recipe(lr_floor=0.05, network_lr_floor=0.01, network_lr_horizon_cap=16))
+    recipe, base = scheduled.recipe, scheduled.initial_lrs
+    for step, real in enumerate(_reals(20)):
+        scheduled.step(real)
         network, prior = learning_rate_scales(step, recipe)
         assert network == learning_rate_scale(step, 16, recipe.lr_anneal_start, recipe.network_lr_floor)
         assert prior == learning_rate_scale(step, 20, recipe.lr_anneal_start, recipe.lr_floor)
-        assert [g["lr"] for g in trainer.opt_g.param_groups] == [base[0][0] * network, base[0][1] * prior]
-        assert trainer.opt_d.param_groups[0]["lr"] == base[1][0] * network
-    # At the network floor the blend weight is exactly zero; the prior is still annealing.
-    assert trainer.penalty.diagnostics()["blend_weight"] == 0.0
+        assert [g["lr"] for g in scheduled.opt_g.param_groups] == [base[0][0] * network, base[0][1] * prior]
+        assert scheduled.opt_d.param_groups[0]["lr"] == base[1][0] * network
     assert learning_rate_scales(17, recipe)[0] == recipe.network_lr_floor
     # No cap means the full budget; no network floor means lr_floor.
-    same = _recipe(network_lr_horizon_cap=None, network_lr_floor=None)
+    same = _recipe(lr_floor=0.05, network_lr_horizon_cap=None, network_lr_floor=None)
     assert all(a == b for a, b in (learning_rate_scales(s, same) for s in range(20)))
-
-
-def test_trainer_constant_lr_s_one_no_ema_forward():
-    recipe = _recipe(lr_floor=1.0, network_lr_floor=1.0)
-    trainer = _trainer(recipe)
-    calls = []
-    trainer.ema_D.register_forward_pre_hook(lambda module, inputs: calls.append(1))
-    for real in _reals(20):
-        stats = trainer.step(real, collect_stats=True)["penalty_stats"]
-        assert stats["s"] == 1.0 and stats["phase"] == "a"
-    assert calls == [] and not trainer.opt_d.record.anchor_started
 
 
 def _run(trainer, reals):
@@ -90,16 +85,14 @@ def test_trainer_k3p_resume_bit_exact():
     reals = _reals(20)
     full = _trainer()
     full_out = _run(full, reals)
-    phases = [o["penalty_stats"]["phase"] for o in full_out]
-    split = phases.index("blend") + 1
-    assert phases[split] == "blend" and phases[-1] == "b"  # resume inside the blend
+    split = 11  # guard armed (min steps 2)
 
     first = _trainer()
     _run(first, reals[:split])
     checkpoint = first.state_dict()
     opt_g_state, opt_d_state = (state["regularizer"] for state in checkpoint["optimizers"])
-    assert checkpoint["schema"] == 3 and opt_d_state["record"]["anchor_started"]
-    assert opt_g_state["latent"]["state"]["started"] and "noise_generator" in checkpoint["streams"]
+    assert checkpoint["schema"] == 3 and opt_d_state["record"]["observed_steps"] == split
+    assert opt_g_state["latent"]["state"]["started"] and "penalty_generator" in checkpoint["streams"]
     resumed = _trainer(seed=5)  # different construction randomness; the checkpoint wins
     resumed.load_state_dict(checkpoint)
     resumed_out = _run(resumed, reals[split:])
@@ -112,41 +105,10 @@ def test_trainer_k3p_resume_bit_exact():
         for key, value in left["models"][name].items():
             assert torch.equal(value, right["models"][name][key]), (name, key)
     (left_g, left_d), (right_g, right_d) = ([o["regularizer"] for o in x["optimizers"]] for x in (left, right))
-    for key, value in left_d["ema"].items():
-        assert torch.equal(value, right_d["ema"][key]), key
     assert left_d["record"] == right_d["record"] and left_d["guard"] == right_d["guard"]
     assert torch.equal(left_g["latent"]["history"], right_g["latent"]["history"])
     for name, value in left["streams"].items():
         assert torch.equal(value, right["streams"][name]), name
-
-
-def _buffers(module):
-    return {k: v.detach().clone() for k, v in module.named_buffers()}
-
-
-def test_trainer_ema_critic_buffers_no_bn_or_sn_mutation():
-    critic = nn.Sequential(spectral_norm(nn.Linear(2, 16)), nn.BatchNorm1d(16), nn.LeakyReLU(.2), nn.Linear(16, 1))
-    trainer = _trainer(critic=critic)
-    for real in _reals(20):
-        trainer.step(real)
-    assert trainer.opt_d.record.anchor_started
-    ema, live = trainer.ema_D, trainer.D
-    # The EMA averages float buffers (not a copy of the live ones).
-    assert not torch.equal(ema[1].running_mean, live[1].running_mean)
-    assert ema[1].num_batches_tracked == live[1].num_batches_tracked
-    # An anchor evaluation in train mode changes no EMA or live state.
-    live.train()
-    ema_modes = [m.training for m in ema.modules()]
-    before_ema, before_live = _buffers(ema), _buffers(live)
-    before_params = [p.detach().clone() for p in ema.parameters()]
-    x = torch.randn(8, 2, requires_grad=True)
-    torch.autograd.grad(trainer.opt_d.anchor(x).sum(), x)
-    for key, value in _buffers(ema).items():
-        assert torch.equal(value, before_ema[key]), key
-    for key, value in _buffers(live).items():
-        assert torch.equal(value, before_live[key]), key
-    assert all(torch.equal(a, b) for a, b in zip(ema.parameters(), before_params))
-    assert [m.training for m in ema.modules()] == ema_modes
 
 
 def test_schema1_checkpoint_rejected():
@@ -167,26 +129,22 @@ def test_multiple_critics_each_own_k3p_critic_no_global_hooks():
     recipe = _recipe()
     torch.manual_seed(0)
     critics = [nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1)) for _ in range(2)]
-    optimizers = [recipe.make_critic_optimizer(c, ema_critic=copy.deepcopy(c), lr=1e-2) for c in critics]
+    optimizers = [recipe.make_critic_optimizer(c, lr=1e-2) for c in critics]
     penalties = [recipe.make_critic_penalty(o) for o in optimizers]
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
         for k, (critic, opt, penalty) in enumerate(zip(critics, optimizers, penalties)):
-            # Critic 0 anneals, critic 1 keeps a constant LR.
-            opt.param_groups[0]["lr"] = 1e-2 * (learning_rate_scale(step - 1, 8, .5, .01) if k == 0 else 1.)
+            if step > 6 and k == 1:
+                continue  # critic 1 stops training: its record stops too
             loss = critic(real).mean() - critic(fake).mean() + penalty(critic, real, fake)
             opt.zero_grad()
             loss.backward()
             opt.step()
-    assert penalties[0].diagnostics()["blend_weight"] == 0.0 and penalties[1].diagnostics()["blend_weight"] == 1.0
-    assert optimizers[0].record.anchor_started and not optimizers[1].record.anchor_started
+    assert [o.record.observed_steps for o in optimizers] == [12, 6]
+    assert [o.record.calls for o in optimizers] == [12, 6]
     assert (len(optim_module._global_optimizer_pre_hooks), len(optim_module._global_optimizer_post_hooks)) == hooks
-    with pytest.raises(ValueError, match="EMA"):
-        recipe.make_critic_penalty(recipe.make_critic_optimizer(critics[0]))
     with pytest.raises(TypeError, match="make_critic_optimizer"):
         recipe.make_critic_penalty(torch.optim.Adam(critics[0].parameters()))
-    with pytest.raises(TypeError, match="paired"):
-        penalties[0](critics[1], real, fake)
 
 
 class _TwoRoles(nn.Module):
@@ -203,24 +161,19 @@ def test_shared_module_multi_role_k3p_critic():
     recipe = _recipe()
     torch.manual_seed(0)
     d = _TwoRoles()
-    opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d), lr=1e-2)
+    opt = recipe.make_critic_optimizer(d, lr=1e-2)
     penalty = recipe.make_critic_penalty(opt, collect_stats=True)
     for step, real in enumerate(_reals(12), start=1):
-        opt.param_groups[0]["lr"] = 1e-2 * learning_rate_scale(step - 1, 8, .5, .01)
-        fake, loss, phases = real + 1.0, 0.0, []
+        fake, loss = real + 1.0, 0.0
         for role in ("joint", "marginal"):
             critic = d.critic_for(role)
-            pen = penalty(critic, real, fake)  # the EMA uses the same-named role submodule
-            phases.append(penalty.last_stats["phase"])
+            pen = penalty(critic, real, fake)
+            assert torch.equal(pen, GradientPenalty(**recipe._penalty_options())(critic, real, fake))
             loss = loss + critic(real).mean() - critic(fake).mean() + pen
         opt.zero_grad()
         loss.backward()
         opt.step()
-        assert phases[0] == phases[1]
-    assert phases == ["b", "b"] and opt.record.observed_steps == 12
-    for role in ("joint", "marginal"):
-        live, ema = d.critic_for(role)[0].weight, penalty.ema_critic.critic_for(role)[0].weight
-        assert not torch.equal(live, ema)
+    assert opt.record.observed_steps == 12 and opt.record.calls == 24
 
 
 class _Conditional(nn.Module):
@@ -236,26 +189,22 @@ class _Conditional(nn.Module):
         return self.body(h), h
 
 
-def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
+def test_conditional_penalty_forwards_conditioning_to_the_critic():
     recipe = _recipe()
     torch.manual_seed(0)
     d = _Conditional()
-    opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d), lr=1e-2)
+    opt = recipe.make_critic_optimizer(d, lr=1e-2)
     penalty = recipe.make_critic_penalty(opt, collect_stats=True)
     ref_d = copy.deepcopy(d)
-    ref_opt = torch.optim.Adam(ref_d.parameters(), lr=1e-2, betas=recipe.betas)
-    from particlegan.k3p import CriticSpikeGuard, RobustCriticAnchor
-    ref_anchor = RobustCriticAnchor(ref_d, copy.deepcopy(ref_d).requires_grad_(False), decay=recipe.reg_anchor_decay)
-    ref = GradientPenalty(anchor=ref_anchor, **recipe._penalty_options())
+    ref_opt = torch.optim.Adam(ref_d.parameters(), lr=1e-2, betas=recipe.betas, amsgrad=recipe.amsgrad)
+    from particlegan.k3p import CriticSpikeGuard
+    ref = GradientPenalty(**recipe._penalty_options())
     guard = CriticSpikeGuard(recipe.d_guard_ratio, recipe.d_guard_min_steps)
     labels, t = torch.tensor([0, 1, 2, 0, 1, 2, 0, 1]), torch.tensor([[0.3]])
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
-        for group in (*opt.param_groups, *ref_opt.param_groups):
-            group["lr"] = 1e-2 * learning_rate_scale(step - 1, 8, .5, .01)
         pen = penalty(d, real, fake, labels, t=t)
-        ref_pen, _ = ref.penalty(lambda x: ref_d(x, labels, t=t)[0], real, fake, step,
-                                 ema_critic=lambda x: ref_anchor.forward(lambda m, y: m(y, labels, t=t)[0], x))
+        ref_pen, _ = ref.penalty(lambda x: ref_d(x, labels, t=t)[0], real, fake, step)
         assert torch.equal(pen, ref_pen), step
         for critic, o, p in ((d, opt, pen), (ref_d, ref_opt, ref_pen)):
             loss = critic(real, labels, t=t)[0].mean() - critic(fake, labels, t=t)[0].mean() + p
@@ -265,28 +214,25 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
         guard.apply_(ref_opt)
         ref_opt.step()
         ref.after_critic_step(ref_opt)
-    assert penalty.last_stats["phase"] == "b"
+    assert penalty.last_stats["r1"] > 0
     assert all(torch.equal(a, b) for a, b in zip(d.parameters(), ref_d.parameters()))
-    assert all(torch.equal(a, b) for a, b in zip(opt.ema_critic.parameters(), ref_anchor.ema_critic.parameters()))
     # output= selects the logits from other layouts, at construction.
     swapped = recipe.make_critic_penalty(opt, output=lambda out: out[0])
-    assert torch.equal(swapped(d, real, fake, labels, t=t), penalty(d, real, fake, labels, t=t))
+    same = recipe.make_critic_penalty(opt)
+    assert torch.equal(swapped(d, real, fake, labels, t=t), same(d, real, fake, labels, t=t))
 
 
-def test_input_noise_wrapper_penalty_uses_same_noise_on_ema():
+def test_input_noise_wrapper_penalty_draws_through_the_wrapper():
     recipe = _recipe()
     torch.manual_seed(0)
     d = nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
-    opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
+    opt = recipe.make_critic_optimizer(d)
     penalty = recipe.make_critic_penalty(opt)
     stream = torch.Generator().manual_seed(3)
     noisy = InputNoise(d, 0.1, stream)
-    opt.record.load_state_dict({**opt.record.state_dict(), "lr_max": 1.0, "lr_last": 0.0,
-                                "observed_steps": 1})  # force the b phase (anchor in use)
     x = torch.randn(4, 2)
     before = stream.get_state()
     penalty(noisy, x, x + 1)
-    # The anchor starts on its first b-phase call (prox == 0); the second draws EMA noise too.
     penalty(noisy, x, x + 1)
     draws = 0
     probe = torch.Generator().manual_seed(0)
@@ -294,7 +240,7 @@ def test_input_noise_wrapper_penalty_uses_same_noise_on_ema():
     while not torch.equal(probe.get_state(), stream.get_state()):
         torch.randn(4, 2, generator=probe)
         draws += 1
-    assert draws == 2 + 3  # each call: live real + fake; the 2nd adds the EMA real draw
+    assert draws == 2 * 2  # each call: one draw at the reals (R1) and one at the fakes
 
 
 def test_plain_torch_checkpoint_resumes_exactly():
@@ -307,7 +253,7 @@ def test_plain_torch_checkpoint_resumes_exactly():
         g = nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 2))
         d = nn.Sequential(nn.Linear(2, 16), nn.LeakyReLU(.2), nn.Linear(16, 1))
         prior = recipe.make_prior()
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
+        opt_g, opt_d = recipe.make_optimizers(g, d, prior)
         base = [[group["lr"] for group in o.param_groups] for o in (opt_g, opt_d)]
         return g, d, prior, opt_g, opt_d, recipe.make_critic_penalty(opt_d), base
 
@@ -349,11 +295,9 @@ def test_plain_torch_checkpoint_resumes_exactly():
     prior.load_state_dict(checkpoint["prior"])
     opt_g.load_state_dict(checkpoint["opt_g"])
     opt_d.load_state_dict(checkpoint["opt_d"])
-    assert opt_d.record.anchor_started and opt_g.latent_damping.started
+    assert opt_d.record.observed_steps == 15 and opt_g.latent_damping.started
     for a, b in zip(run(resumed, range(15, 20)), full_out[15:]):
         assert torch.equal(a[0], b[0]) and torch.equal(a[1], b[1])
-    for x, y in zip(resumed[4].ema_critic.parameters(), full[4].ema_critic.parameters()):
-        assert torch.equal(x, y)
     assert torch.equal(resumed[3].latent_history, full[3].latent_history)
 
 
@@ -363,7 +307,7 @@ def test_recipe_optimizers_are_ordinary_adam():
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Linear(2, 1)
     prior = recipe.make_prior()
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior)
     assert isinstance(opt_g, torch.optim.Adam) and isinstance(opt_d, torch.optim.Adam)
     schedulers = [LambdaLR(opt_d, lambda epoch: 0.5 ** epoch)]
     calls = []
@@ -383,14 +327,13 @@ def test_recipe_optimizers_are_ordinary_adam():
         opt_d.load_state_dict(torch.optim.Adam(d.parameters()).state_dict())
 
 
-def test_scale_learning_rates_drives_k3p_to_its_floor():
-    # A custom loop using scale_learning_rates gives D the network schedule, so
-    # the critic LR reaches the same floor f K3P blends against (s == 0).
-    recipe = _recipe()
+def test_scale_learning_rates_applies_the_optional_schedule():
+    # A custom loop using scale_learning_rates gives D the network schedule.
+    recipe = _recipe(lr_floor=0.05, network_lr_floor=0.01, network_lr_horizon_cap=16)
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
     prior = recipe.make_prior()
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior)
     base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     penalty = recipe.make_critic_penalty(opt_d)
     for step, real in enumerate(_reals(recipe.total_steps), start=1):
@@ -403,11 +346,12 @@ def test_scale_learning_rates_drives_k3p_to_its_floor():
         opt_d.zero_grad()
         loss.backward()
         opt_d.step()
-    assert penalty.diagnostics()["blend_weight"] == 0.0
+    assert opt_d.param_groups[0]["lr"] == base[1][0] * recipe.network_lr_floor
+    assert scale_learning_rates(0, get_recipe(), (opt_g, opt_d), base, prior) == (1.0, 1.0)
 
 
 def test_caller_marked_network_transition_keeps_prior_schedule_and_resumes():
-    recipe = _recipe(total_steps=20, network_lr_horizon_cap=4)
+    recipe = _recipe(total_steps=20, network_lr_horizon_cap=4, lr_floor=0.05, network_lr_floor=0.01)
     transition = NetworkLRTransition(decay_steps=4)
     assert learning_rate_scales(8, recipe, network_transition=transition) == (
         1.0, learning_rate_scales(8, recipe)[1])
@@ -427,33 +371,6 @@ def test_caller_marked_network_transition_keeps_prior_schedule_and_resumes():
                                           for step in range(8, 20)]
     with pytest.raises(ValueError, match="decay_steps differ"):
         NetworkLRTransition(decay_steps=5).load_state_dict(transition.state_dict())
-
-
-def test_caller_marked_transition_moves_k3p_penalty_with_critic_rate():
-    recipe = _recipe(total_steps=20, network_lr_horizon_cap=4)
-    torch.manual_seed(0)
-    g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
-    prior = recipe.make_prior()
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
-    base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    penalty = recipe.make_critic_penalty(opt_d, collect_stats=True)
-    transition = NetworkLRTransition(decay_steps=4)
-    phases = []
-    for step, real in enumerate(_reals(14), start=1):
-        if step == 9:
-            transition.mark_plateau(step - 1)
-        scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior,
-                             network_transition=transition)
-        loss = d(real).mean() - d(real + 1).mean() + penalty(d, real, real + 1)
-        phases.append(penalty.last_stats.get("phase"))
-        opt_d.zero_grad()
-        loss.backward()
-        opt_d.step()
-    assert phases[7] == "a"
-    # The penalty reads the critic's last completed optimizer step.
-    assert "blend" in phases[10:13]
-    assert phases[13] == "b"
-    assert penalty.diagnostics()["blend_weight"] == 0.0
 
 
 def _sparse_prior_run(recipe, use_factory, steps=6):
@@ -486,52 +403,19 @@ def test_generator_optimizer_matches_latent_damping_and_resumes():
     assert torch.equal(opt_g_z, direct)
     extra = opt_g.state_dict()["regularizer"]
     assert damping.started and extra["latent"]["state"] == damping.state_dict()
-    assert extra["direct"] is None
+    assert set(extra) == {"latent"}
     state = copy.deepcopy(opt_g.state_dict())
     opt_g.load_state_dict(state)
     assert torch.equal(opt_g.latent_history, state["regularizer"]["latent"]["history"])
     with pytest.raises(ValueError):
-        opt_g.load_state_dict({**state, "regularizer": {"latent": None, "direct": None}})
+        opt_g.load_state_dict({**state, "regularizer": {"latent": None}})
+    # A state saved before the direct response was removed (always None under GANTrainer) loads.
+    opt_g.load_state_dict({**state, "regularizer": {**state["regularizer"], "direct": None}})
     # Disabled damping: step() is exactly Adam.step().
     off = recipe.replace(latent_damping_max_rate=0.0)
     plain, plain_opt = _sparse_prior_run(off, True)
     assert torch.equal(plain, _sparse_prior_run(off, False)[0])
-    assert plain_opt.state_dict()["regularizer"] == {"latent": None, "direct": None}
-
-
-def test_generator_optimizer_direct_particles():
-    from particlegan.k3p import DirectParticleResponse
-    recipe = _recipe()
-    results = []
-    for use_factory in (True, False):
-        torch.manual_seed(0)
-        particles = nn.Parameter(torch.randn(16, 2))
-        if use_factory:
-            opt = recipe.make_generator_optimizer([particles], direct_particles=[particles],
-                                                  lr=1e-2, betas=(0.0, 0.999))
-        else:
-            opt = torch.optim.Adam([particles], lr=1e-2, betas=(0.0, 0.999))
-            resp = DirectParticleResponse([particles], torch.zeros(particles.numel()),
-                                          betas=recipe.direct_particle_betas)
-        for step in range(5):
-            opt.zero_grad()
-            (particles - torch.tensor([1.0, -1.0]) * step).square().sum().backward()
-            if use_factory:
-                opt.step()
-            else:
-                with resp.around(opt):
-                    opt.step()
-        results.append(particles.detach().clone())
-    assert torch.equal(*results)
-    assert opt_state_direct(recipe) == {"started": True}
-
-
-def opt_state_direct(recipe):
-    particles = nn.Parameter(torch.randn(4, 2))
-    opt = recipe.make_generator_optimizer([particles], direct_particles=[particles])
-    particles.sum().backward()
-    opt.step()
-    return opt.state_dict()["regularizer"]["direct"]["state"]
+    assert plain_opt.state_dict()["regularizer"] == {"latent": None}
 
 
 def test_api_doc_example_runs():

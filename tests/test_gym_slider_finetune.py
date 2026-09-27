@@ -1,5 +1,4 @@
 """Action MSE stays out of the fine-tune graph; only E_control, G2, and R move."""
-import copy
 import json
 from pathlib import Path
 import tempfile
@@ -49,7 +48,7 @@ class SliderFinetuneTests(unittest.TestCase):
             self.assertGreater(float(grad[:, 8:10].abs().sum()), 0.)
             recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8, total_steps=4, batch_size=4)
             bundle["R"].requires_grad_(True)
-            opt_r = recipe.make_critic_optimizer(bundle["R"], ema_critic=copy.deepcopy(bundle["R"]))
+            opt_r = recipe.make_critic_optimizer(bundle["R"])
             penalty = recipe.make_critic_penalty(opt_r)
             critic_loss, critic_terms = error_loss(bundle["R"], decoded.detach(), real, 1,
                                                    torch.Generator().manual_seed(9), penalty=penalty)
