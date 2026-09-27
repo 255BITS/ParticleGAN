@@ -1,0 +1,14 @@
+{
+  "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+  "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+  "initial.json": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+  "optimizer-final.json": "1abf7fa44e31aef8dfcf9eb5bee9e5e6cad555b83eecab014fb9276b06b4068b",
+  "batch-receipts.json": "31fb3aec07f09722d6b7a72a46bda789b5492db937aeb9a86ca67ef197099b6e",
+  "learning-rates.jsonl": "990fc49511470ee581bd605120f0571732b0f63cd8551dbb84868d66f6f0c170",
+  "declaration.json": "9074fa39ec4bc1104860650dea24f6127351493eb34405ba1333e6484d39679c",
+  "result.json": "c25e07ab65497973c37a5da0334cf824368d9c485eeef78ac13c6b657a268faf",
+  "source.zip": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+  "metrics.jsonl": "2b5e7eba250ddc8d973c387d855a1de55daa07c33c3518651b1adade3986093e",
+  "final-state.pt": "4257e2db030901fe66ce0ac172c23562e8800b4258ff1e14c3e3834dcf031e32",
+  "initial-state.pt": "78d56b91b83751326f044185f93cefde5d00d3e5ff78888d01b43d810d5893a7"
+}

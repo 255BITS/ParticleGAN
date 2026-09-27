@@ -1,0 +1,110 @@
+[
+  {
+    "candidate": "api-rp12",
+    "task": "vector_two_broad",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp12-vector_two_broad-cpu.log"
+  },
+  {
+    "candidate": "api-rp12",
+    "task": "vector_unequal_mass",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp12-vector_unequal_mass-cpu.log"
+  },
+  {
+    "candidate": "api-rp12",
+    "task": "vector_unequal_width",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp12-vector_unequal_width-cpu.log"
+  },
+  {
+    "candidate": "api-rp12",
+    "task": "vector_anisotropic",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp12-vector_anisotropic-cpu.log"
+  },
+  {
+    "candidate": "api-rp12",
+    "task": "vector_overlap",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp12-vector_overlap-cpu.log"
+  },
+  {
+    "candidate": "api-rp12",
+    "task": "vector_spiral",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp12-vector_spiral-cpu.log"
+  },
+  {
+    "candidate": "api-rp14",
+    "task": "vector_two_broad",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp14-vector_two_broad-cpu.log"
+  },
+  {
+    "candidate": "api-rp14",
+    "task": "vector_unequal_mass",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp14-vector_unequal_mass-cpu.log"
+  },
+  {
+    "candidate": "api-rp14",
+    "task": "vector_unequal_width",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp14-vector_unequal_width-cpu.log"
+  },
+  {
+    "candidate": "api-rp14",
+    "task": "vector_anisotropic",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp14-vector_anisotropic-cpu.log"
+  },
+  {
+    "candidate": "api-rp14",
+    "task": "vector_overlap",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp14-vector_overlap-cpu.log"
+  },
+  {
+    "candidate": "api-rp14",
+    "task": "vector_spiral",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp14-vector_spiral-cpu.log"
+  },
+  {
+    "candidate": "api-rp15",
+    "task": "vector_two_broad",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp15-vector_two_broad-cpu.log"
+  },
+  {
+    "candidate": "api-rp15",
+    "task": "vector_unequal_mass",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp15-vector_unequal_mass-cpu.log"
+  },
+  {
+    "candidate": "api-rp15",
+    "task": "vector_unequal_width",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp15-vector_unequal_width-cpu.log"
+  },
+  {
+    "candidate": "api-rp15",
+    "task": "vector_anisotropic",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp15-vector_anisotropic-cpu.log"
+  },
+  {
+    "candidate": "api-rp15",
+    "task": "vector_overlap",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp15-vector_overlap-cpu.log"
+  },
+  {
+    "candidate": "api-rp15",
+    "task": "vector_spiral",
+    "returncode": 0,
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/precision-vector-review/api-rp15-vector_spiral-cpu.log"
+  }
+]

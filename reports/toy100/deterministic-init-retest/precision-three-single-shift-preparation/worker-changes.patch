@@ -1,0 +1,99 @@
+--- reviewed-dv23-ring/worker.py
++++ precision-three-ring/worker.py
+@@ -1,4 +1,4 @@
+-"""Sealed deterministic-init DV2/DV3 original recovery-ring retest. No training on import."""
++"""Sealed deterministic-init RP12/RP14/RP15 original recovery-ring followup. No training on import."""
+ from pathlib import Path
+ import argparse
+ from datetime import datetime, timezone
+@@ -132,7 +132,15 @@
+             assert_defaults()
+             torch.manual_seed(0)
+             value = construct(torch,package,host,recipe,"cuda:0")
+-            assert not value.opt_g.state and not value.opt_d.state, "release Adam must begin lazy/empty"
++            assert value.serial_backward is True and value.precision is not None
++            for optimizer in (value.opt_g,value.opt_d):
++                for group in optimizer.param_groups:
++                    for parameter in group['params']:
++                        state=optimizer.state[parameter]
++                        assert {'step','exp_avg','exp_avg_sq'} <= state.keys()
++                        assert state['step'].shape==() and float(state['step'])==0
++                        assert all(state[key].device==parameter.device for key in ('step','exp_avg','exp_avg_sq'))
++                        assert not bool(state['exp_avg'].count_nonzero()) and not bool(state['exp_avg_sq'].count_nonzero())
+             return value
+ 
+         trainer = make_trainer()
+@@ -172,17 +180,18 @@
+                             exp_avg_dtype=str(state["exp_avg"].dtype), exp_avg_sq_dtype=str(state["exp_avg_sq"].dtype)))
+                 proof[role] = entries
+             dump(args.output / ("optimizer-device-proof-" + label + ".json"), proof)
+-            assert all(r["step_device"] == "cpu" and r["step_shape"] == [] and r["step"] == value.completed_steps
++            assert all(r["step_device"] == r["parameter_device"] and r["step_shape"] == [] and r["step"] == value.completed_steps
+                        and r["parameter_device"] == r["exp_avg_device"] == r["exp_avg_sq_device"] == "cuda:0"
+                        and r["gradient_device"] in (None, "cuda:0") and r["gradient_dtype"] in (None, "torch.float32")
+                        and r["dtype"] == r["exp_avg_dtype"] == r["exp_avg_sq_dtype"] == r["step_dtype"] == "torch.float32"
+-                       for entries in proof.values() for r in entries), "unexpected native Adam placement; no relocation or repair allowed"
+-
++                       for entries in proof.values() for r in entries), "unexpected declared package-owned eager Adam placement; no relocation or repair allowed"
++
++        optimizer_proof(trainer, "main-0000")
+         initial = host.state_receipt(trainer, stream, means)
+         expected_initial = declaration["expected_initial_fixture"]
+         matches = {k:initial[k] == wanted for k,wanted in expected_initial.items()}
+         dump(args.output / "initial.json", initial)
+-        dump(args.output / "initialization-audit.json", dict(matches=matches, adam_state_empty=True,
++        dump(args.output / "initialization-audit.json", dict(matches=matches, adam_state_empty=False, adam_eager_state=recipe.adam_eager_state, counter_ownership="unchanged public candidate recipe",
+              scope=declaration["initial_comparison_scope"]))
+         save_checkpoint("initial-state.pt")
+         torch.save({name:{k:v.detach().cpu().clone() for k,v in model.state_dict().items()}
+@@ -200,6 +209,15 @@
+             state = frozen.state_dict()
+             # Process-global RNG belongs to the running process, not the frozen model.
+             return host.digest({k:v for k,v in state.items() if k not in ("cpu_rng", "cuda_rng")})
++
++        def serializable(value):
++            if isinstance(value,torch.Tensor):
++                value=value.detach().cpu()
++                return value.item() if value.numel()==1 else value.tolist()
++            if isinstance(value,dict):return {str(k):serializable(v) for k,v in value.items()}
++            if isinstance(value,(list,tuple)):return [serializable(v) for v in value]
++            if value is None or isinstance(value,(str,int,float,bool)):return value
++            raise TypeError(type(value))
+ 
+         frozen_digest = None
+         with (args.output / "metrics.jsonl").open("w", buffering=1) as obs, \
+@@ -213,19 +231,23 @@
+                     stats = trainer.step(real, generator_real=real, collect_stats=step % 10 == 0)
+                 assert_defaults()
+                 assert trainer.completed_steps == step
++                assert trainer.precision.state['updates']==step
++                assert trainer.game_stats['accepted_updates']==step
++                assert trainer.game_stats['field_evaluations']==2
+                 if step in (1, 4600):
+                     optimizer_proof(trainer, f"main-{step:04d}")
+                 rate_row = dict(step=step, **host.rates(trainer), input_noise=input_noise_std(recipe,step-1),
+                                 output_noise=output_noise_std(recipe,step-1), penalty=trainer.penalty.diagnostics(),
+-                                accepted_updates=step, policy=trainer.controller.diagnostics())
++                                accepted_updates=step, precision=dict(trainer.precision.state), game=trainer.game_stats)
+                 lr.write(json.dumps(rate_row, allow_nan=False) + "\n")
+                 if step % 10 == 0:
+                     before = host.digest(envelope())
+                     point = dict(step=step, **measure(trainer), ema=measure(trainer,True),
+-                                 learning_rates=host.rates(trainer), penalty=trainer.penalty.diagnostics(), policy=trainer.controller.diagnostics(),
++                                 learning_rates=host.rates(trainer), penalty=trainer.penalty.diagnostics(), precision=dict(trainer.precision.state), game=trainer.game_stats,
+                                  input_noise=input_noise_std(recipe,step-1), output_noise=output_noise_std(recipe,step-1),
+                                  evaluation_output_noise=output_noise_std(recipe,step),
+                                  losses={k:float(v) for k,v in stats.items() if isinstance(v,torch.Tensor)},
++                                 trainer_stats=serializable(stats),
+                                  seconds=time.monotonic()-started)
+                     if frozen is not None:
+                         assert frozen.completed_steps == 2400
+@@ -259,7 +281,7 @@
+         metrics = dict(segments=segments, comparison3600=host.segment(observations,2400,3600),
+                        frozen_control=dict(checkpoint=2400,updates_after_copy=0,passing=sum(map(host.good,controls)),
+                                            observations=len(controls),maximum_hq=max(p["hq"] for p in controls)),
+-                       completed_updates=trainer.completed_steps,observations=len(observations),
++                       completed_updates=trainer.completed_steps,field_evaluations=2*trainer.completed_steps,observations=len(observations),
+                        final=observations[-1],rate_rows=4600,source_and_runtime_assertions_passed=True)
+         dump(args.output / "summary.json", metrics)
+         status = "COMPLETE"

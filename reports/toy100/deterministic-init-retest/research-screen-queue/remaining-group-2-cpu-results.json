@@ -1,0 +1,128 @@
+[
+  {
+    "candidate": "RESEARCH-kbu3_late_quiet_band-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/kbu3-late-quiet-band-a31ef685/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/kbu3-late-quiet-band-a31ef685.log"
+  },
+  {
+    "candidate": "RESEARCH-p1_hysteresis_dwell-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/p1-hysteresis-dwell-a2bc491a/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/p1-hysteresis-dwell-a2bc491a.log"
+  },
+  {
+    "candidate": "RESEARCH-p2_generator_collapse-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/p2-generator-collapse-78860412/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/p2-generator-collapse-78860412.log"
+  },
+  {
+    "candidate": "RESEARCH-lc1_secant_growth-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc1-secant-growth-192ca937/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/lc1-secant-growth-192ca937.log"
+  },
+  {
+    "candidate": "RESEARCH-lc2_calibrated_secant-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc2-calibrated-secant-08b05698/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/lc2-calibrated-secant-08b05698.log"
+  },
+  {
+    "candidate": "RESEARCH-lc3_step_independent_secant-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/lc3-step-independent-secant-19431b8d/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/lc3-step-independent-secant-19431b8d.log"
+  },
+  {
+    "candidate": "RESEARCH-pm2_dwell_anchor-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/pm2-dwell-anchor-5994a0eb/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/pm2-dwell-anchor-5994a0eb.log"
+  },
+  {
+    "candidate": "RESEARCH-jt1_shared_radius-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt1-shared-radius-0e0495b3/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/jt1-shared-radius-0e0495b3.log"
+  },
+  {
+    "candidate": "RESEARCH-jt2_growth_trust-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt2-growth-trust-c630d2b1/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/jt2-growth-trust-c630d2b1.log"
+  },
+  {
+    "candidate": "RESEARCH-jt3_late_growth-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/jt3-late-growth-04e7648a/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/jt3-late-growth-04e7648a.log"
+  },
+  {
+    "candidate": "RESEARCH-a3_reversal_strength-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/a3-reversal-strength-63ada37d/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/a3-reversal-strength-63ada37d.log"
+  },
+  {
+    "candidate": "RESEARCH-sn1-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn1-9e99c8d7/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/sn1-9e99c8d7.log"
+  },
+  {
+    "candidate": "RESEARCH-sn2-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn2-be227066/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/sn2-be227066.log"
+  },
+  {
+    "candidate": "RESEARCH-sn3-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/sn3-2f595f84/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/sn3-2f595f84.log"
+  },
+  {
+    "candidate": "RESEARCH-ap1_magnitude_phase-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ap1-magnitude-phase-2c107d81/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ap1-magnitude-phase-2c107d81.log"
+  },
+  {
+    "candidate": "RESEARCH-ap2_anchored_reopen-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ap2-anchored-reopen-feb7886b/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ap2-anchored-reopen-feb7886b.log"
+  },
+  {
+    "candidate": "RESEARCH-ns1_cosine_heat-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns1-cosine-heat-15ca7e89/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ns1-cosine-heat-15ca7e89.log"
+  },
+  {
+    "candidate": "RESEARCH-ns2_paced_floor-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns2-paced-floor-b0038325/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ns2-paced-floor-b0038325.log"
+  },
+  {
+    "candidate": "RESEARCH-ns3_fixed_schedule_shock-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ns3-fixed-schedule-shock-32b0ade5/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ns3-fixed-schedule-shock-32b0ade5.log"
+  },
+  {
+    "candidate": "RESEARCH-ac1_persistence-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ac1-persistence-549d59e6/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ac1-persistence-549d59e6.log"
+  },
+  {
+    "candidate": "RESEARCH-ac2_advantage-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/reviews/ac2-advantage-2486972b/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/review-logs/ac2-advantage-2486972b.log"
+  }
+]

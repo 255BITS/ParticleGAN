@@ -1,0 +1,37 @@
+{
+  "before_any_cpu_proof": true,
+  "changes": [
+    {
+      "candidate": "API-DV2-new-init",
+      "old_seal": "cef2720d4266813c80795922e2339a72b0af17459ac780cfcccdc83f7353b5de",
+      "new_seal": "d02488bdf4d3513f7bc102820f3bba6be18f9fa734f1f42f55d306bb21fd9f9b",
+      "change": "Construction prose only; original global CPU prior draw and separate streams named accurately.",
+      "worker_unchanged": true,
+      "package_unchanged": true
+    },
+    {
+      "candidate": "API-DV3-new-init",
+      "old_seal": "9641db419f4fe75dd5a61d609e68a04f88c1d985838e11297c23b94e1107d8b4",
+      "new_seal": "af99f5eff8c2867afeb4910e35d3f8e115d0b6e176b8a16fa70302877ec02c8e",
+      "change": "Construction prose only; original global CPU prior draw and separate streams named accurately.",
+      "worker_unchanged": true,
+      "package_unchanged": true
+    },
+    {
+      "candidate": "API-DV2-new-init",
+      "old_seal": "d02488bdf4d3513f7bc102820f3bba6be18f9fa734f1f42f55d306bb21fd9f9b",
+      "new_seal": "d2f15f3b0e5fc0e82b70662ed730fe7e119d49749e2e2c4f7f0725ea8dba43f6",
+      "change": "Peer source review found inherited comparator labels; host text now exact candidate/public initializer; frozen control correctly says schema4. Actual schema validation was already4.",
+      "worker_unchanged": true,
+      "package_unchanged": true
+    },
+    {
+      "candidate": "API-DV3-new-init",
+      "old_seal": "af99f5eff8c2867afeb4910e35d3f8e115d0b6e176b8a16fa70302877ec02c8e",
+      "new_seal": "1784e8590c5d911b9df89b37ba2e06b7437865f9acf8c5db38e0be709495e3a3",
+      "change": "Peer source review found inherited comparator labels; host text now exact candidate/public initializer; frozen control correctly says schema4. Actual schema validation was already4.",
+      "worker_unchanged": true,
+      "package_unchanged": true
+    }
+  ]
+}

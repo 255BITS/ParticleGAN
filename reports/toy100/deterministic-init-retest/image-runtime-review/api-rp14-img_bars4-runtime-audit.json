@@ -1,0 +1,190 @@
+{
+  "status": "PASS",
+  "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+  "quality_status": "FAIL",
+  "candidate": "API-RP14-new-init",
+  "task": "img_bars4",
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp14-img-bars4",
+  "observations": 24,
+  "passing_observations": 0,
+  "passing_suffix": 0,
+  "first_arrival": null,
+  "departures": [],
+  "passing_since_arrival": 0,
+  "observations_since_arrival": 0,
+  "minimum_modes_since_arrival": null,
+  "minimum_hq_since_arrival": null,
+  "final_suffix_start": null,
+  "final": {
+    "step": 600,
+    "seconds": 29.706030037952587,
+    "modes": 1,
+    "hq": 0.34375,
+    "mean_rmse": 0.16503866016864777,
+    "quality_mode_fractions": [
+      0.09375,
+      0.0625,
+      0.125,
+      0.0625
+    ],
+    "mode_fractions": [
+      0.25,
+      0.1875,
+      0.3125,
+      0.25
+    ],
+    "distribution_tv": 0.0625,
+    "ema": {
+      "modes": 0,
+      "hq": 0.21875,
+      "mean_rmse": 0.20126423239707947,
+      "quality_mode_fractions": [
+        0.09375,
+        0.0625,
+        0.0625,
+        0.0
+      ],
+      "mode_fractions": [
+        0.21875,
+        0.1875,
+        0.34375,
+        0.25
+      ],
+      "distribution_tv": 0.09375
+    }
+  },
+  "seconds": 29.726856800029054,
+  "old_result": {
+    "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+  },
+  "source_zip_sha256": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+  "cpu_receipt_sha256": "cbab7320ca094a24839a8897d8391203a87dc982a18324d883b01ef0fea86479",
+  "optimizer_clocks": [
+    [
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      }
+    ],
+    [
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      },
+      {
+        "step": 600.0,
+        "device": "cuda:0",
+        "moment_device": "cuda:0"
+      }
+    ]
+  ],
+  "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+  "initial_raw_state_matches_full_initial_receipt": true,
+  "full_dry_sampling_receipts": 600,
+  "final_shared_sampling_cursor_matches": true,
+  "applied_rate_and_controller_rows": 600,
+  "field_evaluations": 1200,
+  "precision_events": [],
+  "final_precision": {
+    "variant": "rp5",
+    "open": true,
+    "gap": 0.13951586186885834,
+    "gap_s": 0.12031423187120525,
+    "velocity": 0.0001939558585621476,
+    "contraction_peak": 1.691750489106542e-05,
+    "contracting": 0,
+    "activity": 0.34247211917395926,
+    "activity_peak": 0.7691732875362746,
+    "quiet_gap": null,
+    "quiet_activity": null,
+    "quiet": 0,
+    "shock": 0,
+    "updates": 600,
+    "openings": 1,
+    "closings": 0,
+    "event": null,
+    "velocity_s": 0.0001240169863557678
+  },
+  "artifacts": {
+    "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+    "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+    "initial.json": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+    "optimizer-final.json": "907bb9e62821228161d41273db91cbf71188a514b167964295e4f54c7ff7395f",
+    "batch-receipts.json": "b7a42e04ee7a305aea93528a4596fd9d8bb0fa54b696287c12395b76fc2639f8",
+    "learning-rates.jsonl": "edaa11ffaf24c3616b100630647b36bcd4ed5ec9d6933f242d7fa743940cbf95",
+    "declaration.json": "cf6edce7732d08fd31110bf008cd6e88a9aedc65ba59a1d00fda8f63c2d25a5f",
+    "result.json": "6dc2cdb7dee2a7970499cf5e06e8e457582f7722c7ec112098fdadcc9f646427",
+    "source.zip": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+    "metrics.jsonl": "126ac4777f7bb7c7f9b528176670cda0ede5c7480c63e395a795239bd3ff6b47",
+    "final-state.pt": "094f92d533417e2b5f35f7aa814f586ca064b99ae42d32a94f304ec7a951590c",
+    "initial-state.pt": "78d56b91b83751326f044185f93cefde5d00d3e5ff78888d01b43d810d5893a7"
+  },
+  "limits": [
+    "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+    "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+    "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+  ],
+  "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad"
+}

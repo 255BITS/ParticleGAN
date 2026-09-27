@@ -12,6 +12,19 @@ ROOT = Path(__file__).resolve().parent
 sha = lambda data: hashlib.sha256(data).hexdigest()
 
 
+def render_table(table):
+    lines = ['# Research-host results with the new initialization', '',
+        'These runs preserve their original research learner and use the reviewed new public initializer. They remain separate from public API qualification. Every score requires all eight modes and HQ≥90% for the final five of 24 observations.', '',
+        'A quality pass does not establish continuous-learning eligibility. [PNB3 retains its passing score but is disqualified in its tested configuration because its noise schedule depends on the chosen training end.](research-eligibility-audits/pnb3-current-configuration.md)', '',
+        '| Research configuration | Result | Passing observations | First arrival | Final streak | Final modes / quality |',
+        '|---|---|---:|---:|---:|---|']
+    for row in sorted(table['results'], key=lambda row: (row['status'] != 'PASS', -row['summary']['passing'], row['candidate'])):
+        s = row['summary']
+        lines.append(f"| [{row['candidate']}]({row['archive_manifest']}) | {row['status']} | {s['passing']}/24 | {s['first_arrival'] or '—'} | {s['final_suffix']} | {s['final_modes']}/8 / {s['final_hq']:.1%} |")
+    lines += ['', 'Inner host diagnostic labels do not override the strict eight-mode score. Original schedules, source limitations, and old-initialization evidence remain attached to each configuration.', '']
+    (ROOT / 'research-leaderboard.md').write_text('\n'.join(lines))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--audit', type=Path, required=True)
@@ -59,15 +72,7 @@ def main():
     table['results'].append(entry)
     table['recorded_utc'] = datetime.now(timezone.utc).isoformat()
     table_path.write_text(json.dumps(table, indent=2) + '\n')
-    lines = ['# Research-host results with the new initialization', '',
-        'These runs preserve their original research learner and use the reviewed new public initializer. They remain separate from public API qualification. Every score requires all eight modes and HQ≥90% for the final five of 24 observations.', '',
-        '| Research configuration | Result | Passing observations | First arrival | Final streak | Final modes / quality |',
-        '|---|---|---:|---:|---:|---|']
-    for row in table['results']:
-        s = row['summary']
-        lines.append(f"| [{row['candidate']}]({row['archive_manifest']}) | {row['status']} | {s['passing']}/24 | {s['first_arrival'] or '—'} | {s['final_suffix']} | {s['final_modes']}/8 / {s['final_hq']:.1%} |")
-    lines += ['', 'Inner host diagnostic labels do not override the strict eight-mode score. Original schedules, source limitations, and old-initialization evidence remain attached to each configuration.', '']
-    (ROOT / 'research-leaderboard.md').write_text('\n'.join(lines))
+    render_table(table)
     print(json.dumps(dict(id=args.id, status=result['status'], summary=summary)))
 
 

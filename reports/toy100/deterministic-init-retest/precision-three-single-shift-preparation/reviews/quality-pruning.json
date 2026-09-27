@@ -1,0 +1,23 @@
+{
+  "status": "ALL_THREE_REJECTED_NO_FURTHER_GPU_QUALIFICATION",
+  "reason": "Own new-init bars4 failed0/24 for RP12, RP14 and RP15; all confirmed by independent runtime source/init/sampling/state audits from constant_lr_evidence.",
+  "observed_final": {
+    "API-RP12-new-init": {
+      "passing_checks": 0
+    },
+    "API-RP14-new-init": {
+      "passing_checks": 0,
+      "modes": 1,
+      "hq": 0.34375
+    },
+    "API-RP15-new-init": {
+      "passing_checks": 0,
+      "modes": 3,
+      "hq": 0.71875
+    }
+  },
+  "scope": "No precision ring/vector/long GPU runs. Existing source/CPU preparation retained; not quality passes. No further CPU/model execution required.",
+  "vector_source_review_sha256": "4ed89bf2a1c0f8110d438bbae854e9867af0f72939d43566a3d6cbf2fd41d6c9",
+  "ring_source_review_sha256": "4ceba9f4427a3ddfb5aa2630f19671975642a14078e99096ac7bd8fb3d836a26",
+  "initialization_receipts_unchanged": true
+}

@@ -1,0 +1,87 @@
+{
+  "candidate": "API-RP12-new-init",
+  "task": "img_bars4",
+  "quality_status": "FAIL",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp12-img-bars4",
+  "artifacts": {
+    "artifact-sha256.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/artifact-sha256.json",
+      "sha256": "bc1c1a404f96c57d5182b025f651c07043d015bc57e3452c13bcd64b3b215850",
+      "original_sha256": "bc1c1a404f96c57d5182b025f651c07043d015bc57e3452c13bcd64b3b215850",
+      "bytes": 1097
+    },
+    "batch-receipts.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/batch-receipts.json.gz",
+      "sha256": "0b7c12335f31314dd918cda98785cc726ec83ab608090ddbee8687110f30eb64",
+      "original_sha256": "b7a42e04ee7a305aea93528a4596fd9d8bb0fa54b696287c12395b76fc2639f8",
+      "bytes": 100697
+    },
+    "declaration.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/declaration.json",
+      "sha256": "42b50ab3beaaabc0f3cbf2c47a9bf14d8e395a583b114437c56b3e30e8fb2501",
+      "original_sha256": "42b50ab3beaaabc0f3cbf2c47a9bf14d8e395a583b114437c56b3e30e8fb2501",
+      "bytes": 12263
+    },
+    "initial-model-cpu-cuda-proof.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/initial-model-cpu-cuda-proof.json",
+      "sha256": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+      "original_sha256": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+      "bytes": 5920
+    },
+    "initial.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/initial.json",
+      "sha256": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+      "original_sha256": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+      "bytes": 31022
+    },
+    "learning-rates.jsonl": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/learning-rates.jsonl.gz",
+      "sha256": "bf9564f3c75905c3b38d20c1c9031f8808877a2aee0a3d9233a3c352634ec694",
+      "original_sha256": "e9938987b3cf8aca4c471e72ed33c71a29001badeffe6e1a94360118801dc02e",
+      "bytes": 144108
+    },
+    "metrics.jsonl": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/metrics.jsonl.gz",
+      "sha256": "9cd69acc2afad870ac4f157b2abce73249bd026264bc223fae4e25bd98091339",
+      "original_sha256": "bb5e70d42cd501fe85193757bfd52fe62680c33255cfca153137c926bd6abf7a",
+      "bytes": 1388
+    },
+    "optimizer-final.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/optimizer-final.json",
+      "sha256": "bc543a17868abe09e4733d95de1a2437899c08eeddc76153dac6ba828e267c47",
+      "original_sha256": "bc543a17868abe09e4733d95de1a2437899c08eeddc76153dac6ba828e267c47",
+      "bytes": 13343
+    },
+    "optimizer-initial.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/optimizer-initial.json",
+      "sha256": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+      "original_sha256": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+      "bytes": 13313
+    },
+    "result.json": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/result.json",
+      "sha256": "6cceca8312f45dbcbdc75a81999b1f4f97b2fcf1a7e9afbbcaa7a9fb4c5f53a4",
+      "original_sha256": "6cceca8312f45dbcbdc75a81999b1f4f97b2fcf1a7e9afbbcaa7a9fb4c5f53a4",
+      "bytes": 8646
+    },
+    "source.zip": {
+      "path": "followup-evidence/api-rp12-img-bars4-new-init/source.zip",
+      "sha256": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+      "original_sha256": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+      "bytes": 137232
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp12-img-bars4/final-state.pt",
+      "sha256": "25a68ce2e6076928d34cfe1cd43b6c8c2277505d1f0a5ccdda1df5341374d1c8",
+      "bytes": 232918
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp12-img-bars4/initial-state.pt",
+      "sha256": "f6c559c749a645d4faa808c327c7de167b3052bfe8215af4467169e1334c4f0d",
+      "bytes": 233112
+    }
+  },
+  "audit_sha256": "d6ecfa052738409df17ea5e90056c8ce537aff496331abb5bef07fc054aa3a69"
+}

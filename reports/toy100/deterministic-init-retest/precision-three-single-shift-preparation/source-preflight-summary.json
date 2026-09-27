@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "status": "PASS_SOURCE_ONLY",
+      "manifest_sha256": "883195fac3e8e721fbc4b34d13393b89af188949a334bfea3894878499f07e05",
+      "package_files": 25,
+      "quality": "NOT_RUN"
+    },
+    {
+      "status": "PASS_SOURCE_ONLY",
+      "manifest_sha256": "263ff75f07d3a3fb99065f5477f03fefa21899154239147cfe0054c916234489",
+      "package_files": 27,
+      "quality": "NOT_RUN"
+    },
+    {
+      "status": "PASS_SOURCE_ONLY",
+      "manifest_sha256": "6aa48b73df1081c6a6b57930efe4a54df68d54f00caab0dd310ce8457c008208",
+      "package_files": 27,
+      "quality": "NOT_RUN"
+    }
+  ],
+  "torch_imported": false,
+  "training": false
+}

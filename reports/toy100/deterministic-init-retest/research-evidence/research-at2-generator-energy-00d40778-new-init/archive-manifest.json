@@ -1,0 +1,85 @@
+{
+  "id": "research-at2-generator-energy-00d40778-new-init",
+  "candidate": "RESEARCH-at2_generator_energy-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.916259765625
+  },
+  "seconds": 43.61351415817626,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at2-generator-energy-00d40778",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/at2-generator-energy-00d40778-runtime-audit.json",
+  "audit_sha256": "1170d475ed4f344a55a72b45fe7c8bb106b75bf34acf3112661ca6d56074c55d",
+  "artifacts": {
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/source-plan.json": {
+      "sha256": "344a0556a908a5e3992012c01cdb45f98a6849a8c2f75bb446f7a180ac2300e3",
+      "original_sha256": "344a0556a908a5e3992012c01cdb45f98a6849a8c2f75bb446f7a180ac2300e3",
+      "bytes": 41722
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/prepared-source.zip": {
+      "sha256": "d4a9d971b0523bf02bd21d88baa50de60b80c363b1470bb240adbdd57057e5a8",
+      "original_sha256": "d4a9d971b0523bf02bd21d88baa50de60b80c363b1470bb240adbdd57057e5a8",
+      "bytes": 654643
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/result.json.gz": {
+      "sha256": "2d7aafeb160c85f377cf436d7699a35a804d8f8bd2c9ad0cdb9557725dddd890",
+      "original_sha256": "5a44d5deb266afc20382dbb33ecf42102f659c7f0124378a1d88d3fad585caf5",
+      "bytes": 110769
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/initialization-receipt.json": {
+      "sha256": "09f2d6a9a1fb44861be4aebb910018fd23b5908dbe299af7e755f4b3c4def4c3",
+      "original_sha256": "09f2d6a9a1fb44861be4aebb910018fd23b5908dbe299af7e755f4b3c4def4c3",
+      "bytes": 4502
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/prepared-source-manifest.json": {
+      "sha256": "46faeb6a70cad638573a814311f291d9c940d50196191cf15769fe2f258e5203",
+      "original_sha256": "46faeb6a70cad638573a814311f291d9c940d50196191cf15769fe2f258e5203",
+      "bytes": 5312
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/prepared-source-sha256.json": {
+      "sha256": "48b6f8ac4ef5316f313463c89a945833ca44a19f9a7a723f546c75cc947eb8ab",
+      "original_sha256": "48b6f8ac4ef5316f313463c89a945833ca44a19f9a7a723f546c75cc947eb8ab",
+      "bytes": 291
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/mechanism-receipt.json": {
+      "sha256": "6dcd35de3e51fd3f521cf31b51fa8e844fd1e90fcefae358823e834ae9049e4b",
+      "original_sha256": "6dcd35de3e51fd3f521cf31b51fa8e844fd1e90fcefae358823e834ae9049e4b",
+      "bytes": 7646
+    },
+    "research-evidence/research-at2-generator-energy-00d40778-new-init/runtime.json": {
+      "sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "original_sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at2-generator-energy-00d40778/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at2-generator-energy-00d40778/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at2-generator-energy-00d40778/final-state.pt",
+      "sha256": "62e5dd08a6d0efca61c74b378ce23946b585d77882192bea4502cd4f3e8a3930",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

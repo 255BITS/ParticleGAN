@@ -1,0 +1,329 @@
+{
+  "status": "PASS_INITIALIZATION_ONLY",
+  "candidates": 11,
+  "index_sha256": "0df00c2186cbd37d659200213faf4420152f84c71251dab87c195ce7a89ab856",
+  "rows": [
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-c01_r1r2-new-init",
+      "manifest_sha256": "db77bc83152698afceecea1877cf7d8abf996db486a5f65f5f7b3115976fd02b",
+      "source_plan_sha256": "0cb5fed6819c53171521371a4a71888e5a4e11e4c971aaea5ac02ea8626851fa",
+      "cpu_proof_sha256": "7bb68610a0cb988ceef3be2d2f4bd5b7fdc11d779facda93b64da6b83563fe1b",
+      "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-c02_ra_cap-new-init",
+      "manifest_sha256": "8ba9a6d8062a3237a71d9145fd8f073d7e343231fc79bed675e4b2c06c7d6d1e",
+      "source_plan_sha256": "19486a88730ef624c5564b26646f353be1f572206fa7ebf9d4782208d5a6f7ca",
+      "cpu_proof_sha256": "5544e605bda35c43eaae84cb790f7e0549ebb54ebf015e5ededce7e0e626ffc0",
+      "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-c03_smooth_cap-new-init",
+      "manifest_sha256": "5537659c70b0456e8b44458e2ba50054b013f68d546db2438957989c16fd2db8",
+      "source_plan_sha256": "6360a6ac9300cbf18e3d0a7ba9e650dfdd23484e8fb63c8a9be16c4e07f025a1",
+      "cpu_proof_sha256": "ab5489bd7a8d3e0e21e568e9e89edf14d88752a71dc266b2ff9fcef83479069e",
+      "probe_sha256": "6008a4b0baa69ab21500d6f71bc3b3cfd852860f186f85a7b1123d6db4b8ed3b",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "smooth_cap_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-c04_hinge_cap-new-init",
+      "manifest_sha256": "d41d424204172d52096914d1a5b0d009ac62714f4fe64a4efd990af1f142e074",
+      "source_plan_sha256": "b80cd91eb285d9d5ff619e9ede988af05f1a3ac3413cd105bf4dce603d064bec",
+      "cpu_proof_sha256": "4e4979d90e9753d214ea3137d4a58201ae7a327f9229daa4ef47f1c9caab9ade",
+      "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-c05_ra_r1r2-new-init",
+      "manifest_sha256": "bcd112aa13bea85e3b55ba5c5bd96e41971f625a869ef045f2c261ff08e68432",
+      "source_plan_sha256": "667c9551b012a7d6715b6198a5e73efb2fce549337a292e4a648478db5474802",
+      "cpu_proof_sha256": "293f922bd83babb0041d169bae8d5ff2726462a448770e3ab65fbe70cc5c2b91",
+      "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-c06_ra_r1_only-new-init",
+      "manifest_sha256": "db2575f53d9c7ef02bd3835fd6c8bea35f26852ac615dbad099b762a6d35ec14",
+      "source_plan_sha256": "5a1aeb6c0536a204650d5b0e0a4ca3518cc61653b1e4d6814840dafb8ceeae1b",
+      "cpu_proof_sha256": "dce388122f4c2e69be72d1e8a24f33c65d7daf066c691fdf6dad1cd79d354577",
+      "probe_sha256": "459b03b1b062ae5debb391512f2bde0bfbcd521950caaedadead18ab98108d9f",
+      "penalty_binding": {
+        "penalty": "r1_only_penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-ra_r1_fake_cap-new-init",
+      "manifest_sha256": "66f0d08ba723fe5bddf790d0f227936f8cc3f20a28a8a6ecce4055259700437c",
+      "source_plan_sha256": "ebef080be89b08f85da649920979bb2138634c4b3481c30dcd7ed96cbab88d9f",
+      "cpu_proof_sha256": "b1c4be70cd524c6fefa7b6d8ccc0803d8f37a6f3e91a6189e57a02898c420495",
+      "probe_sha256": "b68488e3901c78c63c8275b335c75ecc0c59a69c93380417023d416baab25419",
+      "penalty_binding": {
+        "penalty": "hybrid_penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-bcap_symmetric_half-new-init",
+      "manifest_sha256": "720795ea4afb386678c420a8eb26afb2123877849913c536c92e52f9ef6e8650",
+      "source_plan_sha256": "e8f3f092a0a54ed6df0bad678d7ccd3be8d2460078e8878cf7d5cdf32d9896f5",
+      "cpu_proof_sha256": "f786a9ce64bec92a3462b3217ccea248fbaa0a4716a32bebef88a018939ca060",
+      "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-bcap_real_half_fake_one-new-init",
+      "manifest_sha256": "4c164d357015786a3b6c23ad2b61e2d95c80d4adcb258ebaf07e8b8e161cd69c",
+      "source_plan_sha256": "247f059d457de8c3cb5519b13ef30aeee9d58f5cf7e7ef2e31e16f7bd8e33066",
+      "cpu_proof_sha256": "ba448b42a062f5eb1170beb5998800efce6794693f14b8e59c3cb10b6baea78e",
+      "probe_sha256": "e35c75d0d40175450e1f23f530a9086010a97195741d90f7096be7227d97b8f8",
+      "penalty_binding": {
+        "penalty": "asymmetric_cap",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-rp_bcap_half-new-init",
+      "manifest_sha256": "8f4c83c2a96534c78e4314cf7a2de3c7928e2aff118c4a95b141e742d886029a",
+      "source_plan_sha256": "474814d7739822c0a49c3633f19147840e9e44b26e345150d1854afa96a022db",
+      "cpu_proof_sha256": "1866e80be9a84a9b02d7077f0c9bf8e6205ed27bad0802314ab5ea83ca0a7e29",
+      "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+      "penalty_binding": {
+        "penalty": "penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    },
+    {
+      "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+      "candidate": "RESEARCH-rp_r1_fake_cap-new-init",
+      "manifest_sha256": "3e59ef1b652aa5eb2ce115ef567f1bca25d230cfb056d9ea47e2d06ca03af98a",
+      "source_plan_sha256": "064bf22d8e6258c53c0ad70922b129775a642d4dfa4239241f34e786cc974f83",
+      "cpu_proof_sha256": "e87dfcc81f1a221c3b4b48f6cec2e648d8c7ca445455dd0d078a90e4f10b1bc1",
+      "probe_sha256": "b68488e3901c78c63c8275b335c75ecc0c59a69c93380417023d416baab25419",
+      "penalty_binding": {
+        "penalty": "hybrid_penalty",
+        "phi": "_phi"
+      },
+      "ordinary_Adam_preserved": true,
+      "added_later_hooks": false,
+      "constructor_checks": {
+        "all_initial_tensors_match_public_host": true,
+        "repeat_without_rng_reset": true,
+        "constructor_rng_cursor_preserved": true,
+        "initializer_rng_neutral": true,
+        "historical_prior_registration_preserved": true,
+        "all_bindings_restore_on_exception": true,
+        "batch_distance_scope_explicit": true
+      },
+      "limits": [
+        "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+        "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+        "No original finalcheckpoint retained; no continuation/replay claim",
+        "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+      ]
+    }
+  ],
+  "CPU_max_concurrency": 3,
+  "training_steps": 0,
+  "scope": "Separate exact original inline-penalty/config probes; no later hook injection"
+}

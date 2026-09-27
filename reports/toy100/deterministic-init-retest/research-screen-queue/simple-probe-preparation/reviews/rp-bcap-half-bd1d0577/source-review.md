@@ -1,0 +1,5 @@
+# RESEARCH-rp_bcap_half-new-init original-probe initialization review
+
+PASS. Exact original probe/config and all declared local files match retained source and inventory snapshot. The ordinary Adam wrapper is preserved; no later mechanism/latent/response/eager-state stack is injected. The CPU reviewer runs the actual original probe setup, including its inline penalty assignment, then stops at the initializer capture before optimizer construction or any forward. All seven constructor invariants pass; the plain historical prior class remains unchanged, with no invented registration hook. Active penalty function identities match this exact probe variant.
+
+The same reviewed bridge and complete historical runtime are retained. The external runner differs from the reviewed template only in source directory, report label, descriptive optimizer metadata and docstring. Initial CUDA model tensors must match the CPU proof before updates. This clears preparation only: no quality is inherited, original schedules remain, and the old probe has no final checkpoint supporting continuation/replay.

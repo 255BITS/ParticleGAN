@@ -1,0 +1,85 @@
+{
+  "id": "research-at3-peak-rate-slow-reference-daa3c747-new-init",
+  "candidate": "RESEARCH-at3_peak_rate_slow_reference-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 5,
+    "final_hq": 0.375
+  },
+  "seconds": 46.26669615507126,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at3-peak-rate-slow-reference-daa3c747",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/at3-peak-rate-slow-reference-daa3c747-runtime-audit.json",
+  "audit_sha256": "1fd2186316fed15aaae190b2b7d7e30279cdac337a583605733d4f0434a67493",
+  "artifacts": {
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/source-plan.json": {
+      "sha256": "aabcb16c687db958471a61d9cdbe8c9a5b297c5fce13e8481ee4ffa7155f2e38",
+      "original_sha256": "aabcb16c687db958471a61d9cdbe8c9a5b297c5fce13e8481ee4ffa7155f2e38",
+      "bytes": 41762
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/prepared-source.zip": {
+      "sha256": "676dcbb464f65fab78b1067956746b3be6710705adf1bea2b907f8e5f7cd2a5f",
+      "original_sha256": "676dcbb464f65fab78b1067956746b3be6710705adf1bea2b907f8e5f7cd2a5f",
+      "bytes": 654114
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/result.json.gz": {
+      "sha256": "9feae6c33334bf828b8a173605179a5e0eaf3a169d0d5fe7e7c50697fbacb441",
+      "original_sha256": "35c82cffdc01cdd6b02d005ae72f7069e24958c08d058050d79c17f559718a8c",
+      "bytes": 59863
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/initialization-receipt.json": {
+      "sha256": "0d03443a3b2a5d0c92925ad3a0ad95ad13c5faf63171a979c3f47dbad3a1f391",
+      "original_sha256": "0d03443a3b2a5d0c92925ad3a0ad95ad13c5faf63171a979c3f47dbad3a1f391",
+      "bytes": 4510
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/prepared-source-manifest.json": {
+      "sha256": "30b6c4d35e60b34d6fe6bbf8dd9623483079f6ce349491b259bba50d6ce2ffd8",
+      "original_sha256": "30b6c4d35e60b34d6fe6bbf8dd9623483079f6ce349491b259bba50d6ce2ffd8",
+      "bytes": 5312
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/prepared-source-sha256.json": {
+      "sha256": "6565f0d23fae7576e16791e5d7622a1c63faa46138e8e3fc2b12d59e7acb1305",
+      "original_sha256": "6565f0d23fae7576e16791e5d7622a1c63faa46138e8e3fc2b12d59e7acb1305",
+      "bytes": 291
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/mechanism-receipt.json": {
+      "sha256": "a3df440bdba20e07fce53e9d2539ab84f7c7ae570a5cd9c5afcdbd64649141b3",
+      "original_sha256": "a3df440bdba20e07fce53e9d2539ab84f7c7ae570a5cd9c5afcdbd64649141b3",
+      "bytes": 5519
+    },
+    "research-evidence/research-at3-peak-rate-slow-reference-daa3c747-new-init/runtime.json": {
+      "sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "original_sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at3-peak-rate-slow-reference-daa3c747/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at3-peak-rate-slow-reference-daa3c747/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/at3-peak-rate-slow-reference-daa3c747/final-state.pt",
+      "sha256": "6eb72bcec72ed719d6684269c11155740e63fa6b711eef90f195f4ba899cb0c5",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

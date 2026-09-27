@@ -691,6 +691,1745 @@
       "archive_manifest": "followup-evidence/api-rp15-img-intensity2-new-init/archive-manifest.json",
       "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp15-runtime-audit.json",
       "audit_sha256": "2ddea79e65faa26bda65a2b1129fa39f705ebafc58f53b87374e4d3ce43bc235"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "FAIL",
+      "candidate": "API-RP12-new-init",
+      "task": "img_bars4",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp12-img-bars4",
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_arrival": null,
+      "departures": [],
+      "passing_since_arrival": 0,
+      "observations_since_arrival": 0,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_since_arrival": null,
+      "final_suffix_start": null,
+      "final": {
+        "step": 600,
+        "seconds": 28.714274446014315,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.035823456943035126,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.5,
+          0.03125,
+          0.0
+        ],
+        "distribution_tv": 0.46875,
+        "ema": {
+          "modes": 2,
+          "hq": 0.9375,
+          "mean_rmse": 0.03599892184138298,
+          "quality_mode_fractions": [
+            0.4375,
+            0.5,
+            0.0,
+            0.0
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125,
+            0.0,
+            0.0
+          ],
+          "distribution_tv": 0.5
+        }
+      },
+      "seconds": 28.73460594099015,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+      "cpu_receipt_sha256": "a6b63f817958c4cc4624405adabaf0bbe03c446bab0d099c9f76d1c8ffa26aad",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.040407028049230576,
+        "gap_s": 0.03798669305532278,
+        "velocity": 2.444782822128705e-05,
+        "contraction_peak": 5.68323585147869e-05,
+        "contracting": 0,
+        "activity": 0.04569910258655118,
+        "activity_peak": 0.8262326594788453,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 1.4939575583557491e-05
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+        "optimizer-final.json": "bc543a17868abe09e4733d95de1a2437899c08eeddc76153dac6ba828e267c47",
+        "batch-receipts.json": "b7a42e04ee7a305aea93528a4596fd9d8bb0fa54b696287c12395b76fc2639f8",
+        "learning-rates.jsonl": "e9938987b3cf8aca4c471e72ed33c71a29001badeffe6e1a94360118801dc02e",
+        "declaration.json": "42b50ab3beaaabc0f3cbf2c47a9bf14d8e395a583b114437c56b3e30e8fb2501",
+        "result.json": "6cceca8312f45dbcbdc75a81999b1f4f97b2fcf1a7e9afbbcaa7a9fb4c5f53a4",
+        "source.zip": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+        "metrics.jsonl": "bb5e70d42cd501fe85193757bfd52fe62680c33255cfca153137c926bd6abf7a",
+        "final-state.pt": "25a68ce2e6076928d34cfe1cd43b6c8c2277505d1f0a5ccdda1df5341374d1c8",
+        "initial-state.pt": "f6c559c749a645d4faa808c327c7de167b3052bfe8215af4467169e1334c4f0d"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp12-img-bars4-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp12-img_bars4-runtime-audit.json",
+      "audit_sha256": "d6ecfa052738409df17ea5e90056c8ce537aff496331abb5bef07fc054aa3a69"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP12-new-init",
+      "task": "img_blobs4",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp12-img-blobs4",
+      "observations": 24,
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "first_arrival": 200,
+      "departures": [],
+      "passing_since_arrival": 17,
+      "observations_since_arrival": 17,
+      "minimum_modes_since_arrival": 4,
+      "minimum_hq_since_arrival": 0.90625,
+      "final_suffix_start": 200,
+      "final": {
+        "step": 600,
+        "seconds": 27.494089102139696,
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.036870986223220825,
+        "quality_mode_fractions": [
+          0.21875,
+          0.25,
+          0.28125,
+          0.21875
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.25,
+          0.3125,
+          0.21875
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 4,
+          "hq": 0.96875,
+          "mean_rmse": 0.03656661510467529,
+          "quality_mode_fractions": [
+            0.21875,
+            0.25,
+            0.28125,
+            0.21875
+          ],
+          "mode_fractions": [
+            0.21875,
+            0.25,
+            0.3125,
+            0.21875
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 27.51447829604149,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+      "cpu_receipt_sha256": "77ed4c2d9a0ac513e34f193c7a69a94308250c62a34765197e754c029ebf1f55",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [
+        {
+          "step": 383,
+          "event": "close",
+          "open": false
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.01436239667236805,
+        "gap_s": 0.015531598632725175,
+        "velocity": -1.181012081168803e-05,
+        "contraction_peak": 0.00018145241712260184,
+        "contracting": 269,
+        "activity": 0.04697484289210159,
+        "activity_peak": 0.9458810312789273,
+        "quiet_gap": 0.015357718075582375,
+        "quiet_activity": 0.042963695106187895,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": -2.9155564302197896e-06
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+        "optimizer-final.json": "a5691b48d230abd9e37301f24a46fc10aef0dfe24d18849ad679bbf406ec7bca",
+        "batch-receipts.json": "1ec806d394e4b1c87a57df6004db1ecf1ffddbfdb0eedf0d85f81b20bbf3c947",
+        "learning-rates.jsonl": "022a933c0b232065b82c3b93abac6e4aba4795c4103351894bc48df13f9024c1",
+        "declaration.json": "3a05db39bc222fa14d5707dc290c4702171df1d9c98623e2944b617d6ecae590",
+        "result.json": "bd3d43e4e3f6fdf91463c13918028c5a9f554b77cbe3a4347019270e0b9cfdf8",
+        "source.zip": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+        "metrics.jsonl": "cd4fd3a874ef9ceccbcb0364cdc8ae27ad939545053a30f56f0e5aa8c3ea5ea6",
+        "final-state.pt": "0e772587053ec58fa81661464e37cba28becc86c0adc323c44d3f6afc58c178d",
+        "initial-state.pt": "f6c559c749a645d4faa808c327c7de167b3052bfe8215af4467169e1334c4f0d"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp12-img-blobs4-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp12-img_blobs4-runtime-audit.json",
+      "audit_sha256": "861c286c7343670fa9bc1e20770f715d5a813d0b3a528afd44ddf1e347bfea37"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP12-new-init",
+      "task": "img_stripes2",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp12-img-stripes2",
+      "observations": 24,
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "first_arrival": 200,
+      "departures": [],
+      "passing_since_arrival": 17,
+      "observations_since_arrival": 17,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.90625,
+      "final_suffix_start": 200,
+      "final": {
+        "step": 600,
+        "seconds": 27.52133353985846,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.02877606824040413,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.029535317793488503,
+          "quality_mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 27.543505381792784,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+      "cpu_receipt_sha256": "7d995d2545fa27789ee79e541713a788cc31c4aa276fc16d1243999ed02861da",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.040359750390052795,
+        "gap_s": 0.027666835546659583,
+        "velocity": 0.0001282112610443767,
+        "contraction_peak": 4.51036406490495e-05,
+        "contracting": 0,
+        "activity": 0.14897139592962585,
+        "activity_peak": 0.7304199209240502,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 0.0001063742006836294
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+        "optimizer-final.json": "f3d5b905eba26509301f375c0f843f2bf63aa2a5514e7541f935ef9b3e27a27b",
+        "batch-receipts.json": "31fb3aec07f09722d6b7a72a46bda789b5492db937aeb9a86ca67ef197099b6e",
+        "learning-rates.jsonl": "1168ed0d8daeab88aedf03ec778b8e4a732de73166c90f0d29dc68e249f7bc48",
+        "declaration.json": "20aa3d24b39dccbd1338b16e5a985d2906b81d9a5ca842e2913b9217fc99a367",
+        "result.json": "46345280d30dd15f0ce4624f7dacf481242804316e735b91e4c452147fdc675c",
+        "source.zip": "c4a1e0b35409d07606bb2a017238f76c15dd0cb566f440b7434bf7161e8cb7f7",
+        "metrics.jsonl": "8fbffa246be5ff25affbb93364fced8f3e09fc9df31a9f2c9fcdcebe501678e3",
+        "final-state.pt": "c9be026eaee090bd4f71bf1d4bd33afba3bd255c3a7cdfac412f8d2028d45947",
+        "initial-state.pt": "f6c559c749a645d4faa808c327c7de167b3052bfe8215af4467169e1334c4f0d"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp12-img-stripes2-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp12-img_stripes2-runtime-audit.json",
+      "audit_sha256": "e4fdddd9f4e5dc8c7f0b7aeb9b8ac7fa82cb85d6f29d93f31c5aeecbba3c0cd8"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "FAIL",
+      "candidate": "API-RP14-new-init",
+      "task": "img_bars4",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp14-img-bars4",
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_arrival": null,
+      "departures": [],
+      "passing_since_arrival": 0,
+      "observations_since_arrival": 0,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_since_arrival": null,
+      "final_suffix_start": null,
+      "final": {
+        "step": 600,
+        "seconds": 29.706030037952587,
+        "modes": 1,
+        "hq": 0.34375,
+        "mean_rmse": 0.16503866016864777,
+        "quality_mode_fractions": [
+          0.09375,
+          0.0625,
+          0.125,
+          0.0625
+        ],
+        "mode_fractions": [
+          0.25,
+          0.1875,
+          0.3125,
+          0.25
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 0,
+          "hq": 0.21875,
+          "mean_rmse": 0.20126423239707947,
+          "quality_mode_fractions": [
+            0.09375,
+            0.0625,
+            0.0625,
+            0.0
+          ],
+          "mode_fractions": [
+            0.21875,
+            0.1875,
+            0.34375,
+            0.25
+          ],
+          "distribution_tv": 0.09375
+        }
+      },
+      "seconds": 29.726856800029054,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+      "cpu_receipt_sha256": "cbab7320ca094a24839a8897d8391203a87dc982a18324d883b01ef0fea86479",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.13951586186885834,
+        "gap_s": 0.12031423187120525,
+        "velocity": 0.0001939558585621476,
+        "contraction_peak": 1.691750489106542e-05,
+        "contracting": 0,
+        "activity": 0.34247211917395926,
+        "activity_peak": 0.7691732875362746,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 0.0001240169863557678
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+        "optimizer-final.json": "907bb9e62821228161d41273db91cbf71188a514b167964295e4f54c7ff7395f",
+        "batch-receipts.json": "b7a42e04ee7a305aea93528a4596fd9d8bb0fa54b696287c12395b76fc2639f8",
+        "learning-rates.jsonl": "edaa11ffaf24c3616b100630647b36bcd4ed5ec9d6933f242d7fa743940cbf95",
+        "declaration.json": "cf6edce7732d08fd31110bf008cd6e88a9aedc65ba59a1d00fda8f63c2d25a5f",
+        "result.json": "6dc2cdb7dee2a7970499cf5e06e8e457582f7722c7ec112098fdadcc9f646427",
+        "source.zip": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+        "metrics.jsonl": "126ac4777f7bb7c7f9b528176670cda0ede5c7480c63e395a795239bd3ff6b47",
+        "final-state.pt": "094f92d533417e2b5f35f7aa814f586ca064b99ae42d32a94f304ec7a951590c",
+        "initial-state.pt": "78d56b91b83751326f044185f93cefde5d00d3e5ff78888d01b43d810d5893a7"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp14-img-bars4-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp14-img_bars4-runtime-audit.json",
+      "audit_sha256": "e75f7b5c8e61266cc1921a7b637fda9026d30d81f21e9fbb15d014458578abc6"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP14-new-init",
+      "task": "img_blobs4",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp14-img-blobs4",
+      "observations": 24,
+      "passing_observations": 6,
+      "passing_suffix": 6,
+      "first_arrival": 475,
+      "departures": [],
+      "passing_since_arrival": 6,
+      "observations_since_arrival": 6,
+      "minimum_modes_since_arrival": 4,
+      "minimum_hq_since_arrival": 0.9375,
+      "final_suffix_start": 475,
+      "final": {
+        "step": 600,
+        "seconds": 29.61792291305028,
+        "modes": 4,
+        "hq": 0.9375,
+        "mean_rmse": 0.046263016760349274,
+        "quality_mode_fractions": [
+          0.3125,
+          0.15625,
+          0.1875,
+          0.28125
+        ],
+        "mode_fractions": [
+          0.3125,
+          0.1875,
+          0.1875,
+          0.3125
+        ],
+        "distribution_tv": 0.125,
+        "ema": {
+          "modes": 4,
+          "hq": 0.8125,
+          "mean_rmse": 0.07045979052782059,
+          "quality_mode_fractions": [
+            0.21875,
+            0.15625,
+            0.1875,
+            0.25
+          ],
+          "mode_fractions": [
+            0.3125,
+            0.1875,
+            0.1875,
+            0.3125
+          ],
+          "distribution_tv": 0.125
+        }
+      },
+      "seconds": 29.638522906927392,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+      "cpu_receipt_sha256": "44b063e31112cf6595c108c0289b6c191cc77a7c3c8c1e4bed9582a8392d4b10",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [
+        {
+          "step": 521,
+          "event": "close",
+          "open": false
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.10135567933320999,
+        "gap_s": 0.10192579857694015,
+        "velocity": -5.758780239700778e-06,
+        "contraction_peak": 0.00024155054788573457,
+        "contracting": 127,
+        "activity": 0.4615903353447539,
+        "activity_peak": 0.7666303116118623,
+        "quiet_gap": 0.1023403097287279,
+        "quiet_activity": 0.2602755576410382,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": -7.138594704520539e-06
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+        "optimizer-final.json": "8b27aa555adbda2a525d4b7b7c2a39c90ad84e1fcc03e22a9bd2d9293a799e24",
+        "batch-receipts.json": "1ec806d394e4b1c87a57df6004db1ecf1ffddbfdb0eedf0d85f81b20bbf3c947",
+        "learning-rates.jsonl": "c7a56a2d3ed22d700e322d2b509ffc1612efb03cf6d1cc1104d75f7ecb25e71b",
+        "declaration.json": "70244973158a5ded36c5928b14b1bdf81855ea5b51c745d394ec069b6eff1ec0",
+        "result.json": "098c443fb48d70835bcd9b8b9341fd5610cbe57dc9af2616ca87258b577d526c",
+        "source.zip": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+        "metrics.jsonl": "c6b9838778380c5b484537887542da3ee19e70a1edcac08cae4d42ee46e62dda",
+        "final-state.pt": "208c33652b46740dab3f57ac37937ceb10d60220705d5939a5ca1acba4e4773d",
+        "initial-state.pt": "78d56b91b83751326f044185f93cefde5d00d3e5ff78888d01b43d810d5893a7"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp14-img-blobs4-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp14-img_blobs4-runtime-audit.json",
+      "audit_sha256": "a4c71a63e49edb4e3ecfdabb238782f1d87f8d67543a34ca383eafd3638f791d"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP14-new-init",
+      "task": "img_stripes2",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp14-img-stripes2",
+      "observations": 24,
+      "passing_observations": 13,
+      "passing_suffix": 13,
+      "first_arrival": 300,
+      "departures": [],
+      "passing_since_arrival": 13,
+      "observations_since_arrival": 13,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.90625,
+      "final_suffix_start": 300,
+      "final": {
+        "step": 600,
+        "seconds": 28.991768153151497,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.046967461705207825,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "distribution_tv": 0.0,
+        "ema": {
+          "modes": 2,
+          "hq": 0.9375,
+          "mean_rmse": 0.06258761137723923,
+          "quality_mode_fractions": [
+            0.46875,
+            0.46875
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        }
+      },
+      "seconds": 29.012280516093597,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+      "cpu_receipt_sha256": "1e076d17af29cfea63ef084d378dd883c55564604b1421b1721ea46b9c5bee8d",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [
+        {
+          "step": 474,
+          "event": "close",
+          "open": false
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.048064280301332474,
+        "gap_s": 0.04786348446450292,
+        "velocity": 2.028240776059953e-06,
+        "contraction_peak": 0.00019830587381293409,
+        "contracting": 185,
+        "activity": 0.4522277242896459,
+        "activity_peak": 0.6916148000762851,
+        "quiet_gap": 0.044628280945160345,
+        "quiet_activity": 0.12445957086913745,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": 1.5162876659226027e-05
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+        "optimizer-final.json": "1abf7fa44e31aef8dfcf9eb5bee9e5e6cad555b83eecab014fb9276b06b4068b",
+        "batch-receipts.json": "31fb3aec07f09722d6b7a72a46bda789b5492db937aeb9a86ca67ef197099b6e",
+        "learning-rates.jsonl": "990fc49511470ee581bd605120f0571732b0f63cd8551dbb84868d66f6f0c170",
+        "declaration.json": "9074fa39ec4bc1104860650dea24f6127351493eb34405ba1333e6484d39679c",
+        "result.json": "c25e07ab65497973c37a5da0334cf824368d9c485eeef78ac13c6b657a268faf",
+        "source.zip": "9d95f63a5860256bdb338a5611bae896f65bb68c9b5cce2447b98b4734f179e3",
+        "metrics.jsonl": "2b5e7eba250ddc8d973c387d855a1de55daa07c33c3518651b1adade3986093e",
+        "final-state.pt": "4257e2db030901fe66ce0ac172c23562e8800b4258ff1e14c3e3834dcf031e32",
+        "initial-state.pt": "78d56b91b83751326f044185f93cefde5d00d3e5ff78888d01b43d810d5893a7"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp14-img-stripes2-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp14-img_stripes2-runtime-audit.json",
+      "audit_sha256": "b2b35f6b11422e458a8b78b3af7c09f04188dff2aa56701026eac3acbd5c57a3"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "FAIL",
+      "candidate": "API-RP15-new-init",
+      "task": "img_bars4",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp15-img-bars4",
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_arrival": null,
+      "departures": [],
+      "passing_since_arrival": 0,
+      "observations_since_arrival": 0,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_since_arrival": null,
+      "final_suffix_start": null,
+      "final": {
+        "step": 600,
+        "seconds": 30.833802775014192,
+        "modes": 3,
+        "hq": 0.71875,
+        "mean_rmse": 0.11599914729595184,
+        "quality_mode_fractions": [
+          0.1875,
+          0.09375,
+          0.28125,
+          0.15625
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.125,
+          0.40625,
+          0.25
+        ],
+        "distribution_tv": 0.15625,
+        "ema": {
+          "modes": 2,
+          "hq": 0.59375,
+          "mean_rmse": 0.1320371776819229,
+          "quality_mode_fractions": [
+            0.09375,
+            0.09375,
+            0.25,
+            0.15625
+          ],
+          "mode_fractions": [
+            0.21875,
+            0.125,
+            0.40625,
+            0.25
+          ],
+          "distribution_tv": 0.15625
+        }
+      },
+      "seconds": 30.853957412065938,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "ddd325a7db9ee1d88ad1b5f363826b95d7b820ca5f43a1f15e583351c991d1a2",
+      "cpu_receipt_sha256": "e19ed95054f4390135f87a26bcc722e86b881d1f60f96c69ee7c33e3d292def7",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.07281562685966492,
+        "gap_s": 0.08024085072380961,
+        "velocity": -7.500226125398135e-05,
+        "contraction_peak": 0.00011493052552650096,
+        "contracting": 0,
+        "activity": 0.28959512362412865,
+        "activity_peak": 0.7222443043684887,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 5.371499768314777e-05
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+        "optimizer-final.json": "600ebbe3ded7effc3bc317a6768b287eaba55197584d800a7c1afaf1c05d6e18",
+        "batch-receipts.json": "b7a42e04ee7a305aea93528a4596fd9d8bb0fa54b696287c12395b76fc2639f8",
+        "learning-rates.jsonl": "5b32606c7ee1b8529b8f874df964419301079982c95f1c64602e2a4ce48a15c7",
+        "declaration.json": "748c236f9fd3e6e7b976e1c7d010b46568ee1881585a5fced494a082b6e6ecdd",
+        "result.json": "46c13b5105a9b64f157fa777e2ba7b9e2b47686dbbe96033f867dade13dc768a",
+        "source.zip": "ddd325a7db9ee1d88ad1b5f363826b95d7b820ca5f43a1f15e583351c991d1a2",
+        "metrics.jsonl": "d4b6b467cc976f18a61dbdc7996652d3a5e3b3d40bd3944d27f2f4010ddc93d2",
+        "final-state.pt": "d784dd2fd8b0f487f8765209af0d3da37fd259f31a695b22378daf3ff135fca4",
+        "initial-state.pt": "c37b050c82af30ce40dc80536cc2db95d40e6aab8c88fef1f00e2ab71092915c"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp15-img-bars4-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp15-img_bars4-runtime-audit.json",
+      "audit_sha256": "c1cc1f2bde2835cc05340b5db3cd5f2e63bd72490b66136183f4e8854287c1a9"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP15-new-init",
+      "task": "img_blobs4",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp15-img-blobs4",
+      "observations": 24,
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "first_arrival": 200,
+      "departures": [],
+      "passing_since_arrival": 17,
+      "observations_since_arrival": 17,
+      "minimum_modes_since_arrival": 4,
+      "minimum_hq_since_arrival": 0.9375,
+      "final_suffix_start": 200,
+      "final": {
+        "step": 600,
+        "seconds": 30.88381085009314,
+        "modes": 4,
+        "hq": 1.0,
+        "mean_rmse": 0.031014377251267433,
+        "quality_mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "distribution_tv": 0.03125,
+        "ema": {
+          "modes": 4,
+          "hq": 0.96875,
+          "mean_rmse": 0.037674084305763245,
+          "quality_mode_fractions": [
+            0.28125,
+            0.1875,
+            0.25,
+            0.25
+          ],
+          "mode_fractions": [
+            0.28125,
+            0.21875,
+            0.25,
+            0.25
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "seconds": 30.904643905116245,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "ddd325a7db9ee1d88ad1b5f363826b95d7b820ca5f43a1f15e583351c991d1a2",
+      "cpu_receipt_sha256": "0c049f5a0d4ed4fb837e65448983d8c0edbba6ef4c645ed1dbda5c327b5f9537",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [
+        {
+          "step": 308,
+          "event": "close",
+          "open": false
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.021466806530952454,
+        "gap_s": 0.021474890868818212,
+        "velocity": -8.165997844242212e-08,
+        "contraction_peak": 0.00019884589632689943,
+        "contracting": 197,
+        "activity": 0.20251621432476807,
+        "activity_peak": 0.7824501197158781,
+        "quiet_gap": 0.02132570089673286,
+        "quiet_activity": 0.09985734660843881,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": -4.1504824355532856e-06
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+        "optimizer-final.json": "8aee56c33982b4990221c87e10c6259ab867c9782f94eaca3ac39448db5ccb4f",
+        "batch-receipts.json": "1ec806d394e4b1c87a57df6004db1ecf1ffddbfdb0eedf0d85f81b20bbf3c947",
+        "learning-rates.jsonl": "975be53f3227b9635da2e3fbc6f589dd70ee95a658e04466980bdef468045a2c",
+        "declaration.json": "7f00e03a7221d370c60e9ce07249a78ffff211fcc67a0dd1cf2ff70a31524661",
+        "result.json": "cd907dad931e9c92211f9ca48ce5d07e4dfb33ec0b6d2a76efd02b82580fb175",
+        "source.zip": "ddd325a7db9ee1d88ad1b5f363826b95d7b820ca5f43a1f15e583351c991d1a2",
+        "metrics.jsonl": "d1dd5302880a658c7a8e6096994cfca34af2d54a7bd3a429f7b34edf057eb2b6",
+        "final-state.pt": "89b2ac21c9266c50045b47b128597e45e9f5098b37319222c50e11610f5755c0",
+        "initial-state.pt": "c37b050c82af30ce40dc80536cc2db95d40e6aab8c88fef1f00e2ab71092915c"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp15-img-blobs4-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp15-img_blobs4-runtime-audit.json",
+      "audit_sha256": "10a2a9bae772408146586b25f9be314ff91a6c4507eaefaada0e74aaf13c8a81"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP15-new-init",
+      "task": "img_stripes2",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031201Z/precision-nine-images/20260927T031201Z-1974536/repo/reports/reviewed-probe-output/20260927T031244Z/api-rp15-img-stripes2",
+      "observations": 24,
+      "passing_observations": 21,
+      "passing_suffix": 15,
+      "first_arrival": 75,
+      "departures": [
+        225
+      ],
+      "passing_since_arrival": 21,
+      "observations_since_arrival": 22,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.875,
+      "final_suffix_start": 250,
+      "final": {
+        "step": 600,
+        "seconds": 30.619905006838962,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.031375229358673096,
+        "quality_mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "distribution_tv": 0.15625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.029298802837729454,
+          "quality_mode_fractions": [
+            0.65625,
+            0.34375
+          ],
+          "mode_fractions": [
+            0.65625,
+            0.34375
+          ],
+          "distribution_tv": 0.15625
+        }
+      },
+      "seconds": 30.640982560813427,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "ddd325a7db9ee1d88ad1b5f363826b95d7b820ca5f43a1f15e583351c991d1a2",
+      "cpu_receipt_sha256": "d16e5a29dc7ec4df282b2d50b72c8967d6e36367745f6725bad210f1909cb371",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.03617964684963226,
+        "gap_s": 0.026712936454582732,
+        "velocity": 9.562333732373099e-05,
+        "contraction_peak": 6.200551790882566e-05,
+        "contracting": 0,
+        "activity": 0.12212442034200086,
+        "activity_peak": 0.6872424619918526,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 0.00010950930414122354
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+        "optimizer-final.json": "50f241b91021425306fe21f9530d7cf71da33fb91c1acbc428cb3ab4b98248bf",
+        "batch-receipts.json": "31fb3aec07f09722d6b7a72a46bda789b5492db937aeb9a86ca67ef197099b6e",
+        "learning-rates.jsonl": "9c236d7a8c4d3fec3a12d9446fee025126f251ab46025c865ed48174329bb65b",
+        "declaration.json": "3a3cde9d78a7d31691769792a1d247bf5fc1f6420b01dffae61043f84df36338",
+        "result.json": "1f765bf7cb0f0f2ca5016203b9a6839d5a815aa6cca824e6963a093df195db6c",
+        "source.zip": "ddd325a7db9ee1d88ad1b5f363826b95d7b820ca5f43a1f15e583351c991d1a2",
+        "metrics.jsonl": "9e8382e0a5e9cef49f27a2279c9bf35a0ee68b65fe36e5fdbdf8b6fcaaa616e9",
+        "final-state.pt": "3b14138ae97910c94ae7f6b547eea606e66ff7c5a6c7e35fc15a459567d225a2",
+        "initial-state.pt": "c37b050c82af30ce40dc80536cc2db95d40e6aab8c88fef1f00e2ab71092915c"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "7b6cc92c9ee2346678401ec0b61e72dad2b35e0711d055dcb2b0cbd3fd38c7ad",
+      "archive_manifest": "followup-evidence/api-rp15-img-stripes2-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp15-img_stripes2-runtime-audit.json",
+      "audit_sha256": "f62e2d0aa9e66a9885e1f06ee0a96f3d32726b6fb8ebd019ae5012094330a61d"
     }
   ]
 }

@@ -1,0 +1,85 @@
+{
+  "id": "research-p1-hysteresis-dwell-a2bc491a-new-init",
+  "candidate": "RESEARCH-p1_hysteresis_dwell-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 2,
+    "final_hq": 0.137451171875
+  },
+  "seconds": 41.202835160074756,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p1-hysteresis-dwell-a2bc491a",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/p1-hysteresis-dwell-a2bc491a-runtime-audit.json",
+  "audit_sha256": "408a61c931417aae29808dede57325780ef7b8174afd907f89bdc768aec80c42",
+  "artifacts": {
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/source-plan.json": {
+      "sha256": "0e4774a00582251cec0b4bffc034fe67a3ff49e3fc08e21d1efa866313cb81da",
+      "original_sha256": "0e4774a00582251cec0b4bffc034fe67a3ff49e3fc08e21d1efa866313cb81da",
+      "bytes": 41710
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/prepared-source.zip": {
+      "sha256": "a8d39b8b2505522a43692f461324dc1b4e9e2d6feaf1b72d590b63e01db2f90b",
+      "original_sha256": "a8d39b8b2505522a43692f461324dc1b4e9e2d6feaf1b72d590b63e01db2f90b",
+      "bytes": 655137
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/result.json.gz": {
+      "sha256": "fa9c0a1c238644eb69a95fc6eccbb4775cf3386f1f53829148db7e6c0e2081c2",
+      "original_sha256": "febc228d4bafa536d6295b801010274ec1103a753e869413674c3cef66cecef1",
+      "bytes": 59966
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/initialization-receipt.json": {
+      "sha256": "c1ef3f8bd4180dab2c89e706d9bad63838598673eff1fc7e5e472f7d875b07cc",
+      "original_sha256": "c1ef3f8bd4180dab2c89e706d9bad63838598673eff1fc7e5e472f7d875b07cc",
+      "bytes": 4501
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/prepared-source-manifest.json": {
+      "sha256": "645718ce0250341a69b2f5ab70f7f61f3cdd0db059da7e3c38db891c62a59670",
+      "original_sha256": "645718ce0250341a69b2f5ab70f7f61f3cdd0db059da7e3c38db891c62a59670",
+      "bytes": 5315
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/prepared-source-sha256.json": {
+      "sha256": "a7e0654b9cadef2fa13bd04b7383e8b15248671df9105499238ae9f67b06bc43",
+      "original_sha256": "a7e0654b9cadef2fa13bd04b7383e8b15248671df9105499238ae9f67b06bc43",
+      "bytes": 291
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/mechanism-receipt.json": {
+      "sha256": "d5bf413d0e959dafdd9f528152ba65803ed0984502458522163baa171d0721de",
+      "original_sha256": "d5bf413d0e959dafdd9f528152ba65803ed0984502458522163baa171d0721de",
+      "bytes": 9100
+    },
+    "research-evidence/research-p1-hysteresis-dwell-a2bc491a-new-init/runtime.json": {
+      "sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "original_sha256": "254ec0a01de5414bdbd8db459633d8611aa080fda22e69ffdd0d5de11301ab4d",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p1-hysteresis-dwell-a2bc491a/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p1-hysteresis-dwell-a2bc491a/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/p1-hysteresis-dwell-a2bc491a/final-state.pt",
+      "sha256": "73a22a69d5e5f1ac00bb03384be4a2840ceb59c65c3e67f874cac5b4313864ce",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

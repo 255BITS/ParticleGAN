@@ -120,7 +120,18 @@ def audit(source, row, index_path):
     original_binding = definition['source_binding']
     if original_binding['receipt'] is not None:
         receipt = original_binding['receipt']
-        assert hashfile(Path(receipt['path'])) == receipt['sha256']
+        if isinstance(receipt, list):
+            import gzip
+            assert receipt
+            for item in receipt:
+                snapshot = item['retained_snapshot']
+                content = Path(snapshot['path']).read_bytes()
+                assert sha(content) == snapshot['sha256'] and len(content) == snapshot['bytes']
+                original = gzip.decompress(content)
+                assert sha(original) == item['sha256'] and len(original) == item['bytes']
+                assert definition['candidate_files'][Path(item['source']).name] == item['sha256']
+        else:
+            assert hashfile(Path(receipt['path'])) == receipt['sha256']
     for name, expected in original_binding['recorded_files_verified'].items():
         assert definition['candidate_files'][name] == expected
     for name, expected in plan['candidate_files'].items():

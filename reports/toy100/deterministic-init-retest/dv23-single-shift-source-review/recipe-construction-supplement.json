@@ -1,0 +1,30 @@
+{
+  "status": "PASS_SOURCE_REVIEW",
+  "scope": "Narrow supplement; earlier source review retained",
+  "reason": "CPU preflight caught recipe-family label misuse before models/training. Public dataclass constructs exact declared resolved recipe; no field, package, host or learner arithmetic changes.",
+  "rows": [
+    {
+      "candidate": "API-DV2-new-init",
+      "manifest_sha256": "71a11cf0be54c435b1f811e5dccbd97fa1dcb82dee4f56294fdfac2b65958f38",
+      "worker_sha256": "6d040c8c03c7374d2e1696c9d4e8eae04e60e66fbb548ea88a26482f60ab46e1",
+      "prior_worker_sha256": "40726ec45e9f871beaf0eb60646111df30b968787bd178559bf8e20dd046340f",
+      "declaration_unchanged": true,
+      "package_unchanged": true,
+      "only_worker_change": "public Recipe constructor/import for exact saved resolved fields; unsupported get_recipe saved-name selection removed"
+    },
+    {
+      "candidate": "API-DV3-new-init",
+      "manifest_sha256": "7e1b32d1a06b14e2431c72c555c21a1455a17835a063ae4c52a5d215dc1ec198",
+      "worker_sha256": "6d040c8c03c7374d2e1696c9d4e8eae04e60e66fbb548ea88a26482f60ab46e1",
+      "prior_worker_sha256": "40726ec45e9f871beaf0eb60646111df30b968787bd178559bf8e20dd046340f",
+      "declaration_unchanged": true,
+      "package_unchanged": true,
+      "only_worker_change": "public Recipe constructor/import for exact saved resolved fields; unsupported get_recipe saved-name selection removed"
+    }
+  ],
+  "prior_audit_sha256": "907b721969881678963be02de3a4c3d8a7fd17fd9e7cc053ad9aff5f687ebb72",
+  "limits": [
+    "Matching final own CPU proofs and actual runtime guards remain required",
+    "No quality or training executed by source reviewer"
+  ]
+}

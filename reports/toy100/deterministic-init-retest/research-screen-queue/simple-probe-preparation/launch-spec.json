@@ -1,0 +1,769 @@
+{
+  "status": "REVIEWED_READY_FOR_EXTERNAL_RUN",
+  "lane": "research-simple-eleven-wave1",
+  "sources": {
+    "case0": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/c01-r1r2-435f6f20",
+      "files": {
+        "README.md": "a3100736853dc5536931a327880f0017482488d43203cb36d12b1cc1a1a3ee0a",
+        "candidate-source/config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "candidate-source/declaration.json": "9d7c3ca725fb118cf2a5b32555b7b90227d74def13a0de0511afbdac8c098cb2",
+        "candidate-source/probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "0cb5fed6819c53171521371a4a71888e5a4e11e4c971aaea5ac02ea8626851fa",
+        "source-preflight.json": "b145d14b541aca2a09765acdde06f29825ce081c1fb8df6846aa5010b1fa6619",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "db77bc83152698afceecea1877cf7d8abf996db486a5f65f5f7b3115976fd02b"
+      }
+    },
+    "review0": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c01-r1r2-435f6f20",
+      "files": {
+        "cpu-constructor-proof.json": "7bb68610a0cb988ceef3be2d2f4bd5b7fdc11d779facda93b64da6b83563fe1b",
+        "source-review.json": "9bd690527e40daa849be089a3de49676055261e271e8ded52177107d33983303",
+        "source-review.md": "bbbc0586950d5e6342160c91f12ec046f54475699045eae6042a83cfd1f6009e"
+      }
+    },
+    "case1": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/c02-ra-cap-86cd0c40",
+      "files": {
+        "README.md": "ed4f8ded8c8484d1d23df1c0958caee966ccb3ac0c64c6348b722d7a660f7fb6",
+        "candidate-source/config.json": "c04129bdd0ffdd7e89fd3be94008007fd8631838ea6820a08e8c39fd281e7260",
+        "candidate-source/declaration.json": "eec55b724f17177ab7f0187d1fc180b20e6bb352f994a4bb7b9c2a5ad37a4a14",
+        "candidate-source/probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "19486a88730ef624c5564b26646f353be1f572206fa7ebf9d4782208d5a6f7ca",
+        "source-preflight.json": "b145d14b541aca2a09765acdde06f29825ce081c1fb8df6846aa5010b1fa6619",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "8ba9a6d8062a3237a71d9145fd8f073d7e343231fc79bed675e4b2c06c7d6d1e"
+      }
+    },
+    "review1": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c02-ra-cap-86cd0c40",
+      "files": {
+        "cpu-constructor-proof.json": "5544e605bda35c43eaae84cb790f7e0549ebb54ebf015e5ededce7e0e626ffc0",
+        "source-review.json": "f4f4b33f9561d46906f511356beb478878f1072206dfbf93d804a7a657b85ca8",
+        "source-review.md": "c955786cb487e3979db5f050bc0918cdc9ae5452a9ddd51eb0dfa444e953e4f0"
+      }
+    },
+    "case2": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/c03-smooth-cap-3e82a660",
+      "files": {
+        "README.md": "9f9ad618f942885a8758acb2079224ade2d8fd0fde0625a4c00e8c8ab8c619f6",
+        "candidate-source/config.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "candidate-source/declaration.json": "4a3fc89cf3d316f8d1bd5e7688e6913d4aab85fad3719b9633433c0578a1e9cd",
+        "candidate-source/probe.py": "6008a4b0baa69ab21500d6f71bc3b3cfd852860f186f85a7b1123d6db4b8ed3b",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "6360a6ac9300cbf18e3d0a7ba9e650dfdd23484e8fb63c8a9be16c4e07f025a1",
+        "source-preflight.json": "380babe7d434de018a9d94daac2283317b5019bda9d57b8379141a7cafe3a084",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "5537659c70b0456e8b44458e2ba50054b013f68d546db2438957989c16fd2db8"
+      }
+    },
+    "review2": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c03-smooth-cap-3e82a660",
+      "files": {
+        "cpu-constructor-proof.json": "ab5489bd7a8d3e0e21e568e9e89edf14d88752a71dc266b2ff9fcef83479069e",
+        "source-review.json": "3ffc5906c8a52bb76292ff5e3e52e2435b9ec1bff7fcf6f330c38a8a817f16e0",
+        "source-review.md": "8f987fe58b2ab0d21b6644800485dd22ace6153f5c44262ab9478c23d5b80f6f"
+      }
+    },
+    "case3": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/c04-hinge-cap-59f1fdf4",
+      "files": {
+        "README.md": "8e80ea804ea0d7dc542cb2ed3ab6e37ca5a5b95c0bf3ad1f683ba96857f13051",
+        "candidate-source/config.json": "31fc848e6511937477095b7c5a3377ab4c3e6e6e3e61d8a372f3aefc65ad0f6d",
+        "candidate-source/declaration.json": "174655b77319caaaa1a949ce2924c2c13a30f249524186a17cee9130645d380e",
+        "candidate-source/probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "b80cd91eb285d9d5ff619e9ede988af05f1a3ac3413cd105bf4dce603d064bec",
+        "source-preflight.json": "b145d14b541aca2a09765acdde06f29825ce081c1fb8df6846aa5010b1fa6619",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "d41d424204172d52096914d1a5b0d009ac62714f4fe64a4efd990af1f142e074"
+      }
+    },
+    "review3": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c04-hinge-cap-59f1fdf4",
+      "files": {
+        "cpu-constructor-proof.json": "4e4979d90e9753d214ea3137d4a58201ae7a327f9229daa4ef47f1c9caab9ade",
+        "source-review.json": "e15bcf94c4bb40a1b447d1f6fedd189a3aad0be5524fc1a97314a45d5b995533",
+        "source-review.md": "6703856aca5e304198f66eb4fa62bcf7ee7bf2552a21e8132b3d0942d177e60f"
+      }
+    },
+    "case4": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/c05-ra-r1r2-fbf0aaf4",
+      "files": {
+        "README.md": "77e0ece6c9447133a26a8213ed029d7a2594cbfe50c11ea4278292707595eab7",
+        "candidate-source/config.json": "3211ea08a169058dce5f30fed987826f07bc3c3c9a1f08ca8b2d5a69ce2d99c7",
+        "candidate-source/declaration.json": "fc1bfdf8934a5c2f9b53ac65cea3c7980464f511cb2bfc1cd990ec832c08d65f",
+        "candidate-source/probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "667c9551b012a7d6715b6198a5e73efb2fce549337a292e4a648478db5474802",
+        "source-preflight.json": "b145d14b541aca2a09765acdde06f29825ce081c1fb8df6846aa5010b1fa6619",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "bcd112aa13bea85e3b55ba5c5bd96e41971f625a869ef045f2c261ff08e68432"
+      }
+    },
+    "review4": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c05-ra-r1r2-fbf0aaf4",
+      "files": {
+        "cpu-constructor-proof.json": "293f922bd83babb0041d169bae8d5ff2726462a448770e3ab65fbe70cc5c2b91",
+        "source-review.json": "d7df07745ee6bb5f622a63af549dd90c7a8594e304f8319b707e71df0cfc374b",
+        "source-review.md": "2e41b9834c6eee28df0c13310cf45804a9903703bfb09044c1f40f0564ae093c"
+      }
+    },
+    "case5": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/c06-ra-r1-only-18ea9def",
+      "files": {
+        "README.md": "6be97c89742f2614f38946128682ef368b12f3aba2c7b9771855930823269320",
+        "candidate-source/config.json": "3211ea08a169058dce5f30fed987826f07bc3c3c9a1f08ca8b2d5a69ce2d99c7",
+        "candidate-source/declaration.json": "7f418c3e50a73fa023ad00c49091d849242d10f54744f54cebbc1b5fe84cb7b9",
+        "candidate-source/probe.py": "459b03b1b062ae5debb391512f2bde0bfbcd521950caaedadead18ab98108d9f",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "5a1aeb6c0536a204650d5b0e0a4ca3518cc61653b1e4d6814840dafb8ceeae1b",
+        "source-preflight.json": "78cff73b8e3cb4bbb1056588b79c0d572b819f046224fa91f726ffe7b32ba68c",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "db2575f53d9c7ef02bd3835fd6c8bea35f26852ac615dbad099b762a6d35ec14"
+      }
+    },
+    "review5": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c06-ra-r1-only-18ea9def",
+      "files": {
+        "cpu-constructor-proof.json": "dce388122f4c2e69be72d1e8a24f33c65d7daf066c691fdf6dad1cd79d354577",
+        "source-review.json": "9b8554f0f82edbda8ed45b367b9bf6c2122231f844281656db926fb8fab584bc",
+        "source-review.md": "4a0dc66aa1797407a0949ef1f50b29af7a68ff50c707cb056926cdbc7b8576bc"
+      }
+    },
+    "case6": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/ra-r1-fake-cap-42bda24f",
+      "files": {
+        "README.md": "a818839b54e3dfa64c4a51d4a2d1352aee55924c988886187f518283dfa6a393",
+        "candidate-source/audit.json": "e30dd00a0871d8bcb67505eb00f94a8ade20f2327ed15872db050881ab35f6b4",
+        "candidate-source/config.json": "3211ea08a169058dce5f30fed987826f07bc3c3c9a1f08ca8b2d5a69ce2d99c7",
+        "candidate-source/declaration.json": "63cd1e8032ebf9ab51f255635303dddf7520efa01cccbe6b1aec6094e35b875a",
+        "candidate-source/hybrid_install.py": "0ebb0d552b0dfa884c8c85b84816357809cdde59d1ab1b9fe8dd6d2eb81c6498",
+        "candidate-source/probe.py": "b68488e3901c78c63c8275b335c75ecc0c59a69c93380417023d416baab25419",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "ebef080be89b08f85da649920979bb2138634c4b3481c30dcd7ed96cbab88d9f",
+        "source-preflight.json": "5733678fda2cee140cc6c6fe42cdec11940199f69b7893c4209e80b07408f9a7",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "66f0d08ba723fe5bddf790d0f227936f8cc3f20a28a8a6ecce4055259700437c"
+      }
+    },
+    "review6": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/ra-r1-fake-cap-42bda24f",
+      "files": {
+        "cpu-constructor-proof.json": "b1c4be70cd524c6fefa7b6d8ccc0803d8f37a6f3e91a6189e57a02898c420495",
+        "source-review.json": "771086d201493ab3f57d01413d1250bd760e7563a5056fabcdce366abd7505af",
+        "source-review.md": "ff767f52662784550cb908ed4b87debbf81117a26eb0e07d2f2ebedebd801b11"
+      }
+    },
+    "case7": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/bcap-symmetric-half-6330f6c7",
+      "files": {
+        "README.md": "6759c127a5e312b229337c66ae7c521b0522d5b38408346b8244493c9307788b",
+        "candidate-source/audit.json": "64a36e49ba31030688b36d1f00b5b7cb62bf97ce2c96893fb74e0c8916bff42b",
+        "candidate-source/config.json": "833b3f0011ba4c8aabfd2f682f96bddcad1576b5a72b6a132c785b51a250d11f",
+        "candidate-source/declaration.json": "a00ccb3333a8cc1457fff0d7c95bf4ccdbd9b01a2846746af4fcfc81d88e6947",
+        "candidate-source/probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+        "candidate-source/regression-audit.json": "fbd6e8ef13e362b040a323575e8105404960416a6776cfef54fdf63138d1245f",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "e8f3f092a0a54ed6df0bad678d7ccd3be8d2460078e8878cf7d5cdf32d9896f5",
+        "source-preflight.json": "b145d14b541aca2a09765acdde06f29825ce081c1fb8df6846aa5010b1fa6619",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "720795ea4afb386678c420a8eb26afb2123877849913c536c92e52f9ef6e8650"
+      }
+    },
+    "review7": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/bcap-symmetric-half-6330f6c7",
+      "files": {
+        "cpu-constructor-proof.json": "f786a9ce64bec92a3462b3217ccea248fbaa0a4716a32bebef88a018939ca060",
+        "source-review.json": "37d31d8ec6e87582c62bb64ea696c06e683d57850a40c459280a929e460cf7db",
+        "source-review.md": "88f22c6c0c0c99accdf8d94319177f07b78df8154f5287021927f0ab8d5fd017"
+      }
+    },
+    "case8": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/bcap-real-half-fake-one-2f18b41e",
+      "files": {
+        "README.md": "2afcb497c4acd1e1b7de7d8443184812a1f57296d50c998af0c100008ed5c667",
+        "candidate-source/audit.json": "64a36e49ba31030688b36d1f00b5b7cb62bf97ce2c96893fb74e0c8916bff42b",
+        "candidate-source/cap_install.py": "b997694c177f3afca23812d3e7c230b3b8090aa5652a995daf08587b106340d2",
+        "candidate-source/config.json": "c04129bdd0ffdd7e89fd3be94008007fd8631838ea6820a08e8c39fd281e7260",
+        "candidate-source/declaration.json": "5a8851060ac890823ff50f2b8374b50baeac5dea684b6907face4b7740c63ddf",
+        "candidate-source/probe.py": "e35c75d0d40175450e1f23f530a9086010a97195741d90f7096be7227d97b8f8",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "247f059d457de8c3cb5519b13ef30aeee9d58f5cf7e7ef2e31e16f7bd8e33066",
+        "source-preflight.json": "54f9a7674171b185c2b6b253d3feca51d8b968824e3b87338c9df607c5ef4575",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "4c164d357015786a3b6c23ad2b61e2d95c80d4adcb258ebaf07e8b8e161cd69c"
+      }
+    },
+    "review8": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/bcap-real-half-fake-one-2f18b41e",
+      "files": {
+        "cpu-constructor-proof.json": "ba448b42a062f5eb1170beb5998800efce6794693f14b8e59c3cb10b6baea78e",
+        "source-review.json": "39cb062fdba9f23ffd2b923bf516acdfcf2d54d80fcb38c447d50a9c0d66fe07",
+        "source-review.md": "9712b348dd58ef8653fe1dac6a25e5ad476600269dcde539306d3cf0ccdf356a"
+      }
+    },
+    "case9": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/rp-bcap-half-bd1d0577",
+      "files": {
+        "README.md": "6dca94bce860f039be732b5f1f0b3935f847946e2556aaee4b167f25d173bea5",
+        "candidate-source/audit.json": "64a36e49ba31030688b36d1f00b5b7cb62bf97ce2c96893fb74e0c8916bff42b",
+        "candidate-source/config.json": "1b936ad83078c06f7ece05bf32b7b87ec97b31c2c295288df3d98560e5fb702d",
+        "candidate-source/declaration.json": "02fb85af78f85e919edcb415f07f32747d795a74a0253eade40a7b1ce9eb273a",
+        "candidate-source/probe.py": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "474814d7739822c0a49c3633f19147840e9e44b26e345150d1854afa96a022db",
+        "source-preflight.json": "b145d14b541aca2a09765acdde06f29825ce081c1fb8df6846aa5010b1fa6619",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "8f4c83c2a96534c78e4314cf7a2de3c7928e2aff118c4a95b141e742d886029a"
+      }
+    },
+    "review9": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/rp-bcap-half-bd1d0577",
+      "files": {
+        "cpu-constructor-proof.json": "1866e80be9a84a9b02d7077f0c9bf8e6205ed27bad0802314ab5ea83ca0a7e29",
+        "source-review.json": "7878963828380daaa187d128cd52f2b5823a12c584886c432ea3b134c22bef6f",
+        "source-review.md": "7a5663aab255c0c5a6fe73743d0575c710829485c7c57751dcc15c5049990b7e"
+      }
+    },
+    "case10": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/prepared/rp-r1-fake-cap-e19ea6cd",
+      "files": {
+        "README.md": "a4b2e9799ad5de80e4fc8b692b6943bb587700fad8fdf4aa32492af6f213c497",
+        "candidate-source/audit.json": "64a36e49ba31030688b36d1f00b5b7cb62bf97ce2c96893fb74e0c8916bff42b",
+        "candidate-source/config.json": "a1475108a82f67a93e0cdcd793b920b0cc2b1e1ccf31285974adc3b341b2fca2",
+        "candidate-source/declaration.json": "c0eb66e376460e1b37d7bf6c197c3294befa14529318878b2a8f4301b36277cc",
+        "candidate-source/hybrid_install.py": "0ebb0d552b0dfa884c8c85b84816357809cdde59d1ab1b9fe8dd6d2eb81c6498",
+        "candidate-source/probe.py": "b68488e3901c78c63c8275b335c75ecc0c59a69c93380417023d416baab25419",
+        "candidate-source/regression-audit.json": "fbd6e8ef13e362b040a323575e8105404960416a6776cfef54fdf63138d1245f",
+        "frozen-mode-hold.py.txt": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45",
+        "historical-runtime-source.zip": "ecd71405e7bd49cd4a636e6c9e0c78cc31b0dcb3a1de9678761bdd9916f818f6",
+        "initialization-host.patch": "c7fd8268acdce80e13d93a85624657b0286c9442b3243469e6d5af1e5fc608af",
+        "initialization_bridge.py": "5380a6dfa0f540dcf4d91be85a1b2655a556d542a7b2e8eb01d9a77732df1b17",
+        "initializer-authority/particlegan/__init__.py": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e",
+        "initializer-authority/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "initializer-authority/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+        "initializer-authority/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "initializer-authority/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+        "initializer-authority/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+        "initializer-authority/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+        "initializer-authority/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+        "initializer-authority/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "initializer-authority/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "initializer-authority/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+        "initializer-authority/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "initializer-authority/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "initializer-authority/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+        "initializer-authority/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+        "initializer-authority/particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "initializer-authority/particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "initializer-authority/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "initializer-authority/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+        "initializer-authority/particlegan/recipes.py": "b1f0eb9646d251fe935346507b6b2452c7641890e8e485cb8fbb06f73180bafd",
+        "initializer-authority/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+        "initializer-authority/particlegan/training.py": "8e4bfc8ff7b5d93f2d9dffbb0ad641efa32d69d8ff4d6a651278d021303f3718",
+        "initializer-authority/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "original-train-mode-hold.py.txt": "e0660628bfba59f0ec9ccacc0d220e2ec88c6a49a32f5222e09b2944f4b5fb0f",
+        "run_research_mode_hold.py": "1d58328ddbff4f6d4be25d58b161db0cee7ee674a067e903b249afc76143f4a2",
+        "source-plan.json": "064bf22d8e6258c53c0ad70922b129775a642d4dfa4239241f34e786cc974f83",
+        "source-preflight.json": "5733678fda2cee140cc6c6fe42cdec11940199f69b7893c4209e80b07408f9a7",
+        "transformed-train-mode-hold.py.txt": "b1cbd0b7c74b1e3d91232edfffff901f7efd36641b4e5778cc8e60b0ad191424",
+        "manifest.json": "3e59ef1b652aa5eb2ce115ef567f1bca25d230cfb056d9ea47e2d06ca03af98a"
+      }
+    },
+    "review10": {
+      "root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/rp-r1-fake-cap-e19ea6cd",
+      "files": {
+        "cpu-constructor-proof.json": "e87dfcc81f1a221c3b4b48f6cec2e648d8c7ca445455dd0d078a90e4f10b1bc1",
+        "source-review.json": "667cd3cb733affac19a2b2cde10b02bf5be953d998c1b2b0736aa74eba6734e4",
+        "source-review.md": "ca90f58a6c309dac50ced71f445428c8f5623d01c3009d403c2c9a435557771f"
+      }
+    }
+  },
+  "independent_reviews": [
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c01-r1r2-435f6f20/cpu-constructor-proof.json",
+      "sha256": "7bb68610a0cb988ceef3be2d2f4bd5b7fdc11d779facda93b64da6b83563fe1b",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c02-ra-cap-86cd0c40/cpu-constructor-proof.json",
+      "sha256": "5544e605bda35c43eaae84cb790f7e0549ebb54ebf015e5ededce7e0e626ffc0",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c03-smooth-cap-3e82a660/cpu-constructor-proof.json",
+      "sha256": "ab5489bd7a8d3e0e21e568e9e89edf14d88752a71dc266b2ff9fcef83479069e",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c04-hinge-cap-59f1fdf4/cpu-constructor-proof.json",
+      "sha256": "4e4979d90e9753d214ea3137d4a58201ae7a327f9229daa4ef47f1c9caab9ade",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c05-ra-r1r2-fbf0aaf4/cpu-constructor-proof.json",
+      "sha256": "293f922bd83babb0041d169bae8d5ff2726462a448770e3ab65fbe70cc5c2b91",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c06-ra-r1-only-18ea9def/cpu-constructor-proof.json",
+      "sha256": "dce388122f4c2e69be72d1e8a24f33c65d7daf066c691fdf6dad1cd79d354577",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/ra-r1-fake-cap-42bda24f/cpu-constructor-proof.json",
+      "sha256": "b1c4be70cd524c6fefa7b6d8ccc0803d8f37a6f3e91a6189e57a02898c420495",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/bcap-symmetric-half-6330f6c7/cpu-constructor-proof.json",
+      "sha256": "f786a9ce64bec92a3462b3217ccea248fbaa0a4716a32bebef88a018939ca060",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/bcap-real-half-fake-one-2f18b41e/cpu-constructor-proof.json",
+      "sha256": "ba448b42a062f5eb1170beb5998800efce6794693f14b8e59c3cb10b6baea78e",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/rp-bcap-half-bd1d0577/cpu-constructor-proof.json",
+      "sha256": "1866e80be9a84a9b02d7077f0c9bf8e6205ed27bad0802314ab5ea83ca0a7e29",
+      "required_status": "PASS"
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/rp-r1-fake-cap-e19ea6cd/cpu-constructor-proof.json",
+      "sha256": "e87dfcc81f1a221c3b4b48f6cec2e648d8c7ca445455dd0d078a90e4f10b1bc1",
+      "required_status": "PASS"
+    }
+  ],
+  "cases": [
+    {
+      "id": "c01-r1r2-435f6f20",
+      "queue_row": "research:formulation-round-20260924/critic_formulation/c01_r1r2",
+      "candidate": "RESEARCH-c01_r1r2-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case0/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review0/cpu-constructor-proof.json",
+        "--output",
+        "{output}/c01-r1r2-435f6f20"
+      ]
+    },
+    {
+      "id": "c02-ra-cap-86cd0c40",
+      "queue_row": "research:formulation-round-20260924/critic_formulation/c02_ra_cap",
+      "candidate": "RESEARCH-c02_ra_cap-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case1/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review1/cpu-constructor-proof.json",
+        "--output",
+        "{output}/c02-ra-cap-86cd0c40"
+      ]
+    },
+    {
+      "id": "c03-smooth-cap-3e82a660",
+      "queue_row": "research:formulation-round-20260924/critic_formulation/c03_smooth_cap",
+      "candidate": "RESEARCH-c03_smooth_cap-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case2/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review2/cpu-constructor-proof.json",
+        "--output",
+        "{output}/c03-smooth-cap-3e82a660"
+      ]
+    },
+    {
+      "id": "c04-hinge-cap-59f1fdf4",
+      "queue_row": "research:formulation-round-20260924/critic_formulation/c04_hinge_cap",
+      "candidate": "RESEARCH-c04_hinge_cap-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case3/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review3/cpu-constructor-proof.json",
+        "--output",
+        "{output}/c04-hinge-cap-59f1fdf4"
+      ]
+    },
+    {
+      "id": "c05-ra-r1r2-fbf0aaf4",
+      "queue_row": "research:formulation-round-20260924/critic_formulation/c05_ra_r1r2",
+      "candidate": "RESEARCH-c05_ra_r1r2-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case4/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review4/cpu-constructor-proof.json",
+        "--output",
+        "{output}/c05-ra-r1r2-fbf0aaf4"
+      ]
+    },
+    {
+      "id": "c06-ra-r1-only-18ea9def",
+      "queue_row": "research:formulation-round-20260924/critic_formulation/c06_ra_r1_only",
+      "candidate": "RESEARCH-c06_ra_r1_only-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case5/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review5/cpu-constructor-proof.json",
+        "--output",
+        "{output}/c06-ra-r1-only-18ea9def"
+      ]
+    },
+    {
+      "id": "ra-r1-fake-cap-42bda24f",
+      "queue_row": "research:formulation-round-20260924/followups/ra_r1_fake_cap",
+      "candidate": "RESEARCH-ra_r1_fake_cap-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case6/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review6/cpu-constructor-proof.json",
+        "--output",
+        "{output}/ra-r1-fake-cap-42bda24f"
+      ]
+    },
+    {
+      "id": "bcap-symmetric-half-6330f6c7",
+      "queue_row": "research:formulation-round-20260924/followups/bcap_symmetric_half",
+      "candidate": "RESEARCH-bcap_symmetric_half-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case7/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review7/cpu-constructor-proof.json",
+        "--output",
+        "{output}/bcap-symmetric-half-6330f6c7"
+      ]
+    },
+    {
+      "id": "bcap-real-half-fake-one-2f18b41e",
+      "queue_row": "research:formulation-round-20260924/followups/bcap_real_half_fake_one",
+      "candidate": "RESEARCH-bcap_real_half_fake_one-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case8/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review8/cpu-constructor-proof.json",
+        "--output",
+        "{output}/bcap-real-half-fake-one-2f18b41e"
+      ]
+    },
+    {
+      "id": "rp-bcap-half-bd1d0577",
+      "queue_row": "research:formulation-round-20260924/followups/rp_bcap_half",
+      "candidate": "RESEARCH-rp_bcap_half-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case9/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review9/cpu-constructor-proof.json",
+        "--output",
+        "{output}/rp-bcap-half-bd1d0577"
+      ]
+    },
+    {
+      "id": "rp-r1-fake-cap-e19ea6cd",
+      "queue_row": "research:formulation-round-20260924/followups/rp_r1_fake_cap",
+      "candidate": "RESEARCH-rp_r1_fake_cap-new-init",
+      "argv": [
+        "/tmp/pr38-default-env/bin/python",
+        "{inputs}/case10/run_research_mode_hold.py",
+        "--reviewed-cpu-proof",
+        "{inputs}/review10/cpu-constructor-proof.json",
+        "--output",
+        "{output}/rp-r1-fake-cap-e19ea6cd"
+      ]
+    }
+  ],
+  "instructions": "Fixed historical research tiny-host retest batch. One fresh process for each listed exact original candidate; public standalone initialization only, no old weights. Retain original losses/hooks/schedules and original ordinary Adam metadata (no eager counter injection),1200 accepted steps/all24 observations/final-five gate. These are research-host results, not public API scores; historical quality and eligibility do not transfer. Preserve exceptions and every receipt; no repairs, retries, seeds or additional tests. Candidate source-bound constructor proofs and actual initial-tensor assertions are mandatory."
+}

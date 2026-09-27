@@ -1,0 +1,62 @@
+[
+  {
+    "candidate": "RESEARCH-c02_ra_cap-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c02-ra-cap-86cd0c40/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/c02-ra-cap-86cd0c40.log"
+  },
+  {
+    "candidate": "RESEARCH-c03_smooth_cap-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c03-smooth-cap-3e82a660/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/c03-smooth-cap-3e82a660.log"
+  },
+  {
+    "candidate": "RESEARCH-c04_hinge_cap-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c04-hinge-cap-59f1fdf4/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/c04-hinge-cap-59f1fdf4.log"
+  },
+  {
+    "candidate": "RESEARCH-c05_ra_r1r2-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c05-ra-r1r2-fbf0aaf4/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/c05-ra-r1r2-fbf0aaf4.log"
+  },
+  {
+    "candidate": "RESEARCH-c06_ra_r1_only-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/c06-ra-r1-only-18ea9def/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/c06-ra-r1-only-18ea9def.log"
+  },
+  {
+    "candidate": "RESEARCH-ra_r1_fake_cap-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/ra-r1-fake-cap-42bda24f/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/ra-r1-fake-cap-42bda24f.log"
+  },
+  {
+    "candidate": "RESEARCH-bcap_symmetric_half-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/bcap-symmetric-half-6330f6c7/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/bcap-symmetric-half-6330f6c7.log"
+  },
+  {
+    "candidate": "RESEARCH-bcap_real_half_fake_one-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/bcap-real-half-fake-one-2f18b41e/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/bcap-real-half-fake-one-2f18b41e.log"
+  },
+  {
+    "candidate": "RESEARCH-rp_bcap_half-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/rp-bcap-half-bd1d0577/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/rp-bcap-half-bd1d0577.log"
+  },
+  {
+    "candidate": "RESEARCH-rp_r1_fake_cap-new-init",
+    "returncode": 0,
+    "proof": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/reviews/rp-r1-fake-cap-e19ea6cd/cpu-constructor-proof.json",
+    "log": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/simple-probe-preparation/review-logs/rp-r1-fake-cap-e19ea6cd.log"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "status": "PASS_ORIGINAL_PROBE_SOURCE_AND_CPU_INITIALIZATION",
+  "candidate": "RESEARCH-c01_r1r2-new-init",
+  "manifest_sha256": "db77bc83152698afceecea1877cf7d8abf996db486a5f65f5f7b3115976fd02b",
+  "source_plan_sha256": "0cb5fed6819c53171521371a4a71888e5a4e11e4c971aaea5ac02ea8626851fa",
+  "cpu_proof_sha256": "7bb68610a0cb988ceef3be2d2f4bd5b7fdc11d779facda93b64da6b83563fe1b",
+  "probe_sha256": "5cc4d7b1a5e68b8387233d83d3a4bab83c018e69ea6623e41032b690eb6bbeef",
+  "penalty_binding": {
+    "penalty": "penalty",
+    "phi": "_phi"
+  },
+  "ordinary_Adam_preserved": true,
+  "added_later_hooks": false,
+  "constructor_checks": {
+    "all_initial_tensors_match_public_host": true,
+    "repeat_without_rng_reset": true,
+    "constructor_rng_cursor_preserved": true,
+    "initializer_rng_neutral": true,
+    "historical_prior_registration_preserved": true,
+    "all_bindings_restore_on_exception": true,
+    "batch_distance_scope_explicit": true
+  },
+  "limits": [
+    "Original probe/config run, not shared85 six-hook pipeline or publicGANTrainer",
+    "No forward/backward/optimizer construction or step; CPUcapture occurs immediately after model initialization",
+    "No original finalcheckpoint retained; no continuation/replay claim",
+    "Fresh quality required; historical horizon policies and eligibility remain unchanged"
+  ]
+}

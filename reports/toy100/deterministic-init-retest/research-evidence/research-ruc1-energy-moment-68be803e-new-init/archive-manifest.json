@@ -1,0 +1,85 @@
+{
+  "id": "research-ruc1-energy-moment-68be803e-new-init",
+  "candidate": "RESEARCH-ruc1_energy_moment-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 4,
+    "final_hq": 0.548095703125
+  },
+  "seconds": 57.34333416912705,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/ruc1-energy-moment-68be803e",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/ruc1-energy-moment-68be803e-runtime-audit.json",
+  "audit_sha256": "70d21cec941f4eb81cd1a6133ac5c314dad04fab9a9d404bfa03788e271ec792",
+  "artifacts": {
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/source-plan.json": {
+      "sha256": "c1ef70ba60952a470de78dcd93d2a233ee0ef682bbbcd6c4040d62f3d4809e5a",
+      "original_sha256": "c1ef70ba60952a470de78dcd93d2a233ee0ef682bbbcd6c4040d62f3d4809e5a",
+      "bytes": 41242
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/prepared-source.zip": {
+      "sha256": "c90c0a5870ec1e303027cc681b132afb1532f147a0016487333be5f1cb2a3a56",
+      "original_sha256": "c90c0a5870ec1e303027cc681b132afb1532f147a0016487333be5f1cb2a3a56",
+      "bytes": 656462
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/result.json.gz": {
+      "sha256": "79143302210df49a3392a698d7b9da94cdf8e45a3a2ebfb04ae1d234408ddddd",
+      "original_sha256": "a80fe9d0f96b0f71b117fe5a3c7db5db1a11a05032992717c251020006686b72",
+      "bytes": 102839
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/initialization-receipt.json": {
+      "sha256": "f8131285140f141d770851a610a207884f4d2d1a4d97d0ad638c69d41c4c034f",
+      "original_sha256": "f8131285140f141d770851a610a207884f4d2d1a4d97d0ad638c69d41c4c034f",
+      "bytes": 4500
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/prepared-source-manifest.json": {
+      "sha256": "575b27ebc731748f9a02ae415f8566d71e4ad0163171be6fd9ffcdc34012e8d1",
+      "original_sha256": "575b27ebc731748f9a02ae415f8566d71e4ad0163171be6fd9ffcdc34012e8d1",
+      "bytes": 5206
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/prepared-source-sha256.json": {
+      "sha256": "54d68663e9bf4579baeede878ae998e59af94e580f999d9dd66885de56dbe10a",
+      "original_sha256": "54d68663e9bf4579baeede878ae998e59af94e580f999d9dd66885de56dbe10a",
+      "bytes": 291
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/mechanism-receipt.json": {
+      "sha256": "77e177e5afc3d9f64f0c4de563fe67317f1d0fb887cbf07995da5d51e2f7e341",
+      "original_sha256": "77e177e5afc3d9f64f0c4de563fe67317f1d0fb887cbf07995da5d51e2f7e341",
+      "bytes": 50745
+    },
+    "research-evidence/research-ruc1-energy-moment-68be803e-new-init/runtime.json": {
+      "sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "original_sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/ruc1-energy-moment-68be803e/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/ruc1-energy-moment-68be803e/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/ruc1-energy-moment-68be803e/final-state.pt",
+      "sha256": "e3c0d5b150b25c7bf7d51cb8ec776e544117cd9045068e57bcd8646ad0b5487d",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

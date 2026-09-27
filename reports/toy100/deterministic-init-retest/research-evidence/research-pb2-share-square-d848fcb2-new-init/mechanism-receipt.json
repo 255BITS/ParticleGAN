@@ -1,0 +1,168 @@
+{
+ "calls": 1200,
+ "dimensions": {
+  "2": 1200
+ },
+ "extra_critic_forwards": 0,
+ "extra_penalty_backwards": 1200,
+ "rule": "pb2_share_square",
+ "floor": 0.01,
+ "guard_c": 5.0,
+ "guard_min_steps": 200,
+ "pure_a_calls": 970,
+ "blend_calls": 230,
+ "pure_b_calls": 0,
+ "first_blend_call": 971,
+ "first_pure_b_call": null,
+ "critic_steps": 1200,
+ "critic_parameters": 20161,
+ "lr_max": 0.00425,
+ "lr_last": 0.00019520139198801693,
+ "s_trace": [
+  [
+   1,
+   1.0
+  ],
+  [
+   50,
+   1.0
+  ],
+  [
+   100,
+   1.0
+  ],
+  [
+   150,
+   1.0
+  ],
+  [
+   200,
+   1.0
+  ],
+  [
+   250,
+   1.0
+  ],
+  [
+   300,
+   1.0
+  ],
+  [
+   350,
+   1.0
+  ],
+  [
+   400,
+   1.0
+  ],
+  [
+   450,
+   1.0
+  ],
+  [
+   500,
+   1.0
+  ],
+  [
+   550,
+   1.0
+  ],
+  [
+   600,
+   1.0
+  ],
+  [
+   650,
+   1.0
+  ],
+  [
+   700,
+   1.0
+  ],
+  [
+   750,
+   1.0
+  ],
+  [
+   800,
+   1.0
+  ],
+  [
+   850,
+   1.0
+  ],
+  [
+   900,
+   1.0
+  ],
+  [
+   950,
+   1.0
+  ],
+  [
+   1000,
+   0.860652
+  ],
+  [
+   1050,
+   0.490339
+  ],
+  [
+   1100,
+   0.254281
+  ],
+  [
+   1150,
+   0.119148
+  ],
+  [
+   1200,
+   0.077032
+  ]
+ ],
+ "anchor_decay": 0.999,
+ "anchor_started_call": 971,
+ "prox_trace": [
+  [
+   1000,
+   0.0022283559665083885
+  ],
+  [
+   1050,
+   0.0011571687646210194
+  ],
+  [
+   1100,
+   0.0017328110989183187
+  ],
+  [
+   1150,
+   0.0011990366037935019
+  ],
+  [
+   1200,
+   0.0009897247655317187
+  ]
+ ],
+ "control": "penalty_share_square",
+ "share_ema_decay": 0.9,
+ "rate_rule": "q=Pn/(An+Pn); gain=ema(q^2, decay 0.9); m=m_k3p+(1-m_k3p)*gain; gain starts at 0",
+ "mix_rule": "K3P handover of the applied critic LR; a larger penalty share raises LR and therefore releases the anchor",
+ "horizon_note": "K3P LR schedule and noise still read the declared horizon; the share term does not. Intermediate ablation.",
+ "why": "pb1 fight_ema stayed near 0.02 on the quiet floor and failed pre-hold checks 1280-1350; squaring the penalty share suppresses that floor and keeps the post-shift reopen",
+ "decomposition": "g_tot = g_adv + coeff * g_pen; g_pen = d(penalty)/d(critic) via autograd.grad, not written into .grad; one Adam step per role",
+ "penalty_detached_calls": 0,
+ "decompose_errors": 0,
+ "pen_coeff_not_one": 0,
+ "matched_params": 7,
+ "optimizer_params": 8,
+ "unmatched_numel": [
+  1
+ ],
+ "matched_numel": 20160,
+ "multiplier_calls": 2400,
+ "final_s": 0.07332599855366959,
+ "guard_clipped_tensors": 0,
+ "guard_clip_steps": [],
+ "guard_clip_step_count": 0
+}

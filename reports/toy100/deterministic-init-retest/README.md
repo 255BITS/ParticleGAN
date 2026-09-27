@@ -18,7 +18,9 @@ tiny-screen score was0/24; the new initialization reaches all eight modes at300
 and retains19/19 passing observations through1200 (final HQ99.83%). Its prior
 image intensity failure also becomes a pass: first325, then12/12 passing checks
 through600, compared with only4 passing checks under the old initialization.
-Broader quality, recovery and long stability remain unverified. The first new attempt stopped on
+Its broader image follow-up then fails bars4 at 0/24, so this version is rejected
+for default selection. The improvement remains a useful research result.
+The first new attempt stopped on
 a nested-diagnostic logging error; the reviewed serializer correction changes
 no learner, sampling, initialization or scoring behavior, and the error is retained.
 
@@ -27,8 +29,13 @@ and the separate historical RP1 eager diagnostic) have completed. The four
 passing screens are RP12, RP15, RP14 and DV12. RP14 also changes from an old
 image failure0/24 to a new image pass9/24, with one early quality departure;
 RP15 passes the image gate5/24 but has no completed old comparison. These three
-image runs and DV12's vector failure are in [follow-up results](followup-results.json).
-None has completed release qualification.
+image improvements and DV12's vector failure are in [follow-up results](followup-results.json).
+All twelve declared image checks are now complete: RP12, RP14 and RP15 each pass
+intensity2, blobs4 and stripes2, but fail bars4 at 0/24. Thus all four quick-screen
+survivors have a measured failure on another task. Further precision ring/vector/
+long qualification is explicitly NOT_RUN after these failures; the reviewed
+source preparations and completed CPU proofs remain available.
+See [the image summary](image-runtime-review/complete-image-batch-audit.md).
 
 DV12 was the first new-initialization screen survivor: it reaches all eight
 modes at update650 and passes all12 observations from there through update1200.
@@ -84,3 +91,7 @@ Three external Astra/max sessions may run independent frozen-candidate batches,
 with one GPU worker each. Freeze and review the common harness first; finish and
 archive old-init work before launching the new batches. Keep all samples random
 according to their recorded streams and all scored observations unchanged.
+
+The user requested a finite closeout: finish this retest and the required
+follow-ups, update the PR and its body with the final evidence, then stop the
+search. Do not start another mechanism search or merge either PR.

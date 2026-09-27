@@ -1,0 +1,830 @@
+{
+  "status": "PASS_ALL_TWELVE_IMAGE_ARTIFACT_AUDITS",
+  "quality_scope": "Own finite image qualification only; each ofthree candidates fails bars4 and is pruned from furtherGPUqualification",
+  "results": [
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_bars4",
+      "quality_status": "FAIL",
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_arrival": null,
+      "departures": [],
+      "passing_since_arrival": 0,
+      "observations_since_arrival": 0,
+      "minimum_hq_since_arrival": null,
+      "final": {
+        "step": 600,
+        "seconds": 28.714274446014315,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.035823456943035126,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.5,
+          0.03125,
+          0.0
+        ],
+        "distribution_tv": 0.46875,
+        "ema": {
+          "modes": 2,
+          "hq": 0.9375,
+          "mean_rmse": 0.03599892184138298,
+          "quality_mode_fractions": [
+            0.4375,
+            0.5,
+            0.0,
+            0.0
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125,
+            0.0,
+            0.0
+          ],
+          "distribution_tv": 0.5
+        }
+      },
+      "seconds": 28.73460594099015,
+      "archive_manifest": "followup-evidence/api-rp12-img-bars4-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_blobs4",
+      "quality_status": "PASS",
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "first_arrival": 200,
+      "departures": [],
+      "passing_since_arrival": 17,
+      "observations_since_arrival": 17,
+      "minimum_hq_since_arrival": 0.90625,
+      "final": {
+        "step": 600,
+        "seconds": 27.494089102139696,
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.036870986223220825,
+        "quality_mode_fractions": [
+          0.21875,
+          0.25,
+          0.28125,
+          0.21875
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.25,
+          0.3125,
+          0.21875
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 4,
+          "hq": 0.96875,
+          "mean_rmse": 0.03656661510467529,
+          "quality_mode_fractions": [
+            0.21875,
+            0.25,
+            0.28125,
+            0.21875
+          ],
+          "mode_fractions": [
+            0.21875,
+            0.25,
+            0.3125,
+            0.21875
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 27.51447829604149,
+      "archive_manifest": "followup-evidence/api-rp12-img-blobs4-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_intensity2",
+      "quality_status": "PASS",
+      "passing_observations": 12,
+      "passing_suffix": 12,
+      "first_arrival": 325,
+      "departures": [],
+      "passing_since_arrival": 12,
+      "observations_since_arrival": 12,
+      "minimum_hq_since_arrival": 0.90625,
+      "final": {
+        "step": 600,
+        "seconds": 28.25489855185151,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.03741007670760155,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.03922593221068382,
+          "quality_mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 28.277093359967694,
+      "archive_manifest": "followup-evidence/api-rp12-img-intensity2-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_stripes2",
+      "quality_status": "PASS",
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "first_arrival": 200,
+      "departures": [],
+      "passing_since_arrival": 17,
+      "observations_since_arrival": 17,
+      "minimum_hq_since_arrival": 0.90625,
+      "final": {
+        "step": 600,
+        "seconds": 27.52133353985846,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.02877606824040413,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.029535317793488503,
+          "quality_mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 27.543505381792784,
+      "archive_manifest": "followup-evidence/api-rp12-img-stripes2-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_bars4",
+      "quality_status": "FAIL",
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_arrival": null,
+      "departures": [],
+      "passing_since_arrival": 0,
+      "observations_since_arrival": 0,
+      "minimum_hq_since_arrival": null,
+      "final": {
+        "step": 600,
+        "seconds": 29.706030037952587,
+        "modes": 1,
+        "hq": 0.34375,
+        "mean_rmse": 0.16503866016864777,
+        "quality_mode_fractions": [
+          0.09375,
+          0.0625,
+          0.125,
+          0.0625
+        ],
+        "mode_fractions": [
+          0.25,
+          0.1875,
+          0.3125,
+          0.25
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 0,
+          "hq": 0.21875,
+          "mean_rmse": 0.20126423239707947,
+          "quality_mode_fractions": [
+            0.09375,
+            0.0625,
+            0.0625,
+            0.0
+          ],
+          "mode_fractions": [
+            0.21875,
+            0.1875,
+            0.34375,
+            0.25
+          ],
+          "distribution_tv": 0.09375
+        }
+      },
+      "seconds": 29.726856800029054,
+      "archive_manifest": "followup-evidence/api-rp14-img-bars4-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_blobs4",
+      "quality_status": "PASS",
+      "passing_observations": 6,
+      "passing_suffix": 6,
+      "first_arrival": 475,
+      "departures": [],
+      "passing_since_arrival": 6,
+      "observations_since_arrival": 6,
+      "minimum_hq_since_arrival": 0.9375,
+      "final": {
+        "step": 600,
+        "seconds": 29.61792291305028,
+        "modes": 4,
+        "hq": 0.9375,
+        "mean_rmse": 0.046263016760349274,
+        "quality_mode_fractions": [
+          0.3125,
+          0.15625,
+          0.1875,
+          0.28125
+        ],
+        "mode_fractions": [
+          0.3125,
+          0.1875,
+          0.1875,
+          0.3125
+        ],
+        "distribution_tv": 0.125,
+        "ema": {
+          "modes": 4,
+          "hq": 0.8125,
+          "mean_rmse": 0.07045979052782059,
+          "quality_mode_fractions": [
+            0.21875,
+            0.15625,
+            0.1875,
+            0.25
+          ],
+          "mode_fractions": [
+            0.3125,
+            0.1875,
+            0.1875,
+            0.3125
+          ],
+          "distribution_tv": 0.125
+        }
+      },
+      "seconds": 29.638522906927392,
+      "archive_manifest": "followup-evidence/api-rp14-img-blobs4-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_intensity2",
+      "quality_status": "PASS",
+      "passing_observations": 9,
+      "passing_suffix": 5,
+      "first_arrival": 375,
+      "departures": [
+        475
+      ],
+      "passing_since_arrival": 9,
+      "observations_since_arrival": 10,
+      "minimum_hq_since_arrival": 0.875,
+      "final": {
+        "step": 600,
+        "seconds": 29.267250081989914,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04096594452857971,
+        "quality_mode_fractions": [
+          0.4375,
+          0.53125
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "distribution_tv": 0.03125,
+        "ema": {
+          "modes": 2,
+          "hq": 0.78125,
+          "mean_rmse": 0.049935366958379745,
+          "quality_mode_fractions": [
+            0.375,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "seconds": 29.2869770671241,
+      "archive_manifest": "followup-evidence/api-rp14-img-intensity2-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_stripes2",
+      "quality_status": "PASS",
+      "passing_observations": 13,
+      "passing_suffix": 13,
+      "first_arrival": 300,
+      "departures": [],
+      "passing_since_arrival": 13,
+      "observations_since_arrival": 13,
+      "minimum_hq_since_arrival": 0.90625,
+      "final": {
+        "step": 600,
+        "seconds": 28.991768153151497,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.046967461705207825,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "distribution_tv": 0.0,
+        "ema": {
+          "modes": 2,
+          "hq": 0.9375,
+          "mean_rmse": 0.06258761137723923,
+          "quality_mode_fractions": [
+            0.46875,
+            0.46875
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        }
+      },
+      "seconds": 29.012280516093597,
+      "archive_manifest": "followup-evidence/api-rp14-img-stripes2-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_bars4",
+      "quality_status": "FAIL",
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_arrival": null,
+      "departures": [],
+      "passing_since_arrival": 0,
+      "observations_since_arrival": 0,
+      "minimum_hq_since_arrival": null,
+      "final": {
+        "step": 600,
+        "seconds": 30.833802775014192,
+        "modes": 3,
+        "hq": 0.71875,
+        "mean_rmse": 0.11599914729595184,
+        "quality_mode_fractions": [
+          0.1875,
+          0.09375,
+          0.28125,
+          0.15625
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.125,
+          0.40625,
+          0.25
+        ],
+        "distribution_tv": 0.15625,
+        "ema": {
+          "modes": 2,
+          "hq": 0.59375,
+          "mean_rmse": 0.1320371776819229,
+          "quality_mode_fractions": [
+            0.09375,
+            0.09375,
+            0.25,
+            0.15625
+          ],
+          "mode_fractions": [
+            0.21875,
+            0.125,
+            0.40625,
+            0.25
+          ],
+          "distribution_tv": 0.15625
+        }
+      },
+      "seconds": 30.853957412065938,
+      "archive_manifest": "followup-evidence/api-rp15-img-bars4-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_blobs4",
+      "quality_status": "PASS",
+      "passing_observations": 17,
+      "passing_suffix": 17,
+      "first_arrival": 200,
+      "departures": [],
+      "passing_since_arrival": 17,
+      "observations_since_arrival": 17,
+      "minimum_hq_since_arrival": 0.9375,
+      "final": {
+        "step": 600,
+        "seconds": 30.88381085009314,
+        "modes": 4,
+        "hq": 1.0,
+        "mean_rmse": 0.031014377251267433,
+        "quality_mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.21875,
+          0.25,
+          0.25
+        ],
+        "distribution_tv": 0.03125,
+        "ema": {
+          "modes": 4,
+          "hq": 0.96875,
+          "mean_rmse": 0.037674084305763245,
+          "quality_mode_fractions": [
+            0.28125,
+            0.1875,
+            0.25,
+            0.25
+          ],
+          "mode_fractions": [
+            0.28125,
+            0.21875,
+            0.25,
+            0.25
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "seconds": 30.904643905116245,
+      "archive_manifest": "followup-evidence/api-rp15-img-blobs4-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_intensity2",
+      "quality_status": "PASS",
+      "passing_observations": 5,
+      "passing_suffix": 5,
+      "first_arrival": 500,
+      "departures": [],
+      "passing_since_arrival": 5,
+      "observations_since_arrival": 5,
+      "minimum_hq_since_arrival": 0.9375,
+      "final": {
+        "step": 600,
+        "seconds": 30.64822291699238,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04123776778578758,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "distribution_tv": 0.0,
+        "ema": {
+          "modes": 2,
+          "hq": 0.8125,
+          "mean_rmse": 0.05133938044309616,
+          "quality_mode_fractions": [
+            0.40625,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        }
+      },
+      "seconds": 30.670483766123652,
+      "archive_manifest": "followup-evidence/api-rp15-img-intensity2-new-init/archive-manifest.json"
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_stripes2",
+      "quality_status": "PASS",
+      "passing_observations": 21,
+      "passing_suffix": 15,
+      "first_arrival": 75,
+      "departures": [
+        225
+      ],
+      "passing_since_arrival": 21,
+      "observations_since_arrival": 22,
+      "minimum_hq_since_arrival": 0.875,
+      "final": {
+        "step": 600,
+        "seconds": 30.619905006838962,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.031375229358673096,
+        "quality_mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "distribution_tv": 0.15625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.029298802837729454,
+          "quality_mode_fractions": [
+            0.65625,
+            0.34375
+          ],
+          "mode_fractions": [
+            0.65625,
+            0.34375
+          ],
+          "distribution_tv": 0.15625
+        }
+      },
+      "seconds": 30.640982560813427,
+      "archive_manifest": "followup-evidence/api-rp15-img-stripes2-new-init/archive-manifest.json"
+    }
+  ],
+  "extra_initial_state_coverage": [
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_bars4",
+      "cpu_sha256": "a6b63f817958c4cc4624405adabaf0bbe03c446bab0d099c9f76d1c8ffa26aad",
+      "initial_receipt_sha256": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_blobs4",
+      "cpu_sha256": "77ed4c2d9a0ac513e34f193c7a69a94308250c62a34765197e754c029ebf1f55",
+      "initial_receipt_sha256": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_intensity2",
+      "cpu_sha256": "113482ea0948829f7b25344ada49d49dc6ffeed6a52f220e88d5d90b4675ea82",
+      "initial_receipt_sha256": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP12-new-init",
+      "task": "img_stripes2",
+      "cpu_sha256": "7d995d2545fa27789ee79e541713a788cc31c4aa276fc16d1243999ed02861da",
+      "initial_receipt_sha256": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_bars4",
+      "cpu_sha256": "cbab7320ca094a24839a8897d8391203a87dc982a18324d883b01ef0fea86479",
+      "initial_receipt_sha256": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_blobs4",
+      "cpu_sha256": "44b063e31112cf6595c108c0289b6c191cc77a7c3c8c1e4bed9582a8392d4b10",
+      "initial_receipt_sha256": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_intensity2",
+      "cpu_sha256": "5fbb627aa231697035c89ac68343d34f72f3f5963fb9e54f0a8fc27b4dd83cd0",
+      "initial_receipt_sha256": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "task": "img_stripes2",
+      "cpu_sha256": "1e076d17af29cfea63ef084d378dd883c55564604b1421b1721ea46b9c5bee8d",
+      "initial_receipt_sha256": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_bars4",
+      "cpu_sha256": "e19ed95054f4390135f87a26bcc722e86b881d1f60f96c69ee7c33e3d292def7",
+      "initial_receipt_sha256": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_blobs4",
+      "cpu_sha256": "0c049f5a0d4ed4fb837e65448983d8c0edbba6ef4c645ed1dbda5c327b5f9537",
+      "initial_receipt_sha256": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_intensity2",
+      "cpu_sha256": "685a1d3a8b8ccfc68c4a97a6d8474714157d3e7a0ea55d8fba5103efcd33a62a",
+      "initial_receipt_sha256": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "task": "img_stripes2",
+      "cpu_sha256": "d16e5a29dc7ec4df282b2d50b72c8967d6e36367745f6725bad210f1909cb371",
+      "initial_receipt_sha256": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+      "full_non_RNG_initial_state_equal": true,
+      "includes": [
+        "precision state and reference",
+        "optimizer moments and metadata values",
+        "requires_grad",
+        "models including buffers",
+        "recipe and optimizer options"
+      ],
+      "ignored": [
+        "tensor device placement",
+        "trainer device label",
+        "CPU/CUDA/stream RNG retained separately in original audit"
+      ],
+      "quality_from_component_fractions_equal_all24": true
+    }
+  ],
+  "original_scores_unchanged": true,
+  "training_or_GPU_by_auditor": false
+}
