@@ -1,4 +1,10 @@
-# External Codex search: three approaches running
+# Historical external Codex search launch
+
+**Superseded by the user's stop instruction.** Finish only the already declared
+[deterministic-initialization retest](../../deterministic-init-retest/README.md),
+update the PR and body, then stop. Do not replenish mechanisms or restart this
+search. The launch instructions below are preserved as history, not current
+authorization. A later restart requires a new explicit user instruction.
 
 **Started September 26 at 21:12 UTC, after the requested compaction.** All three
 external sessions confirmed `gpt-6-astra` with reasoning effort `max`;
@@ -11,7 +17,7 @@ Each receives an isolated worktree from public API commit
 `fa511ce010120b502f494d717d01b14b8551eed8` (PR195), one GPU worker,
 and no hard timeout (`--minutes 0`). A three-proposal cap provides a review
 point per attempt; it is not a total search budget. No token or dollar budget
-was supplied. Continue reviewed attempts until qualification or user stop.
+was supplied. The later user stop instruction now bounds the work.
 
 | Approach | First mechanism lead | GPU |
 |---|---|---|
@@ -50,12 +56,12 @@ establish. The shared driver explicitly supplies `model_reasoning_effort="max"`.
 
 ## Start after compaction
 
-Read the eligibility audit and these briefs, inspect live jobs and current GPU
-memory, then resume this new search. Existing user authorization covers this
-launch; do not ask for approval again. The September 25
+The original launch instruction was to read the eligibility audit and these
+briefs, inspect live jobs and current GPU memory, then resume the search. That
+authorization has been superseded by the latest stop instruction. The September 25
 `continuous-round-3/search-stop.json` is preserved historical evidence. The
-latest user requested a new search after compaction; that old round's stop must
-not silently prevent the newly authorized run.
+historical round's stop predates this launch, but does not override the current
+user request to stop after the bounded retest.
 
 The wrapper honors `/ml2/hypergan/gan-attempts/STOP` and
 `/ml2/hypergan/gan-attempts/continuous-api-20260926/STOP`. It never deletes them.

@@ -50,6 +50,12 @@ continuations show DV2 passing25/25 observations since arrival at1200, and DV3
 passing26/26 since1150, through2400. DV1 and DV4 each have one quality departure
 and later recover. [Full continuation evidence](port-source/late-retention-terminal-audit/table.md)
 keeps the original1200-update scores intact while recording arrival and stability.
+Their own 4,600-update ring follow-ups now complete the comparison: neither
+reaches full quality on the original target before the change at 2,400. DV2 then
+reaches the new target after 380 updates and passes 183/183 later checks; DV3
+after 500 updates and 171/171. Both autonomously reopen at update 2,407. This is
+successful later adaptation with unverified initial acquisition, not a release
+win or a recovery-deadline failure. [Old/new ring comparison](dv23-ring-runtime-review/audit.md).
 
 The three public controls have completed the new-initialization screen.
 K3P and default KA2 both finish with 6/8 modes; constant-rate KA2 finishes with

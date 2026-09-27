@@ -1,5 +1,10 @@
 # Continuous-learning eligibility: no qualified winner
 
+Current evidence is in the [deterministic-initialization retest](../deterministic-init-retest/README.md).
+This audit and its scores retain the earlier initialization. The user requested
+a bounded retest closeout and then a stopped search; older launch instructions
+are historical.
+
 **The requirement is one learner that can point at a target and keep running.**
 The caller must not choose a training end, switch from acquisition to maintenance,
 or restart learning when the target changes. Automatic rate reduction is allowed

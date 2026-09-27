@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "recorded_utc": "2026-09-27T03:30:28.531184+00:00",
+  "ledgers": {
+    "screen-results.json": {
+      "sha256": "37bf1965695a18f88bd7d5fc9367d25411d4777128ba8ff56f4733f4bc0f9e57",
+      "rows": 53,
+      "status_counts": {
+        "FAIL": 45,
+        "PASS": 4,
+        "ERROR": 4
+      }
+    },
+    "research-results.json": {
+      "sha256": "31c3433d6f8c63d146ed1acaa5f8c01f762ad1a5bf319f70301030c0fac5b053",
+      "rows": 53,
+      "status_counts": {
+        "FAIL": 52,
+        "PASS": 1
+      }
+    }
+  },
+  "unique_archived_files": 1211,
+  "checks": [
+    "Unique IDs within each ledger",
+    "Archived byte lengths and SHA256",
+    "Lossless gzip original SHA256",
+    "Research audit hashes",
+    "Archive manifest agrees with ledger"
+  ],
+  "limits": [
+    "Does not rerun training or replace the independent runtime audits",
+    "External raw checkpoint bytes were checked by their runtime audits; this check covers committed archives",
+    "Follow-up image/vector/ring evidence has its own independent audit"
+  ]
+}

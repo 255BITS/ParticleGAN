@@ -1,0 +1,22 @@
+{
+  "status": "PASS_INITIAL_SOURCE_RUNTIME_AND_FROZEN_CONTROL_RECEIPTS",
+  "candidate": "API-DV2-new-init",
+  "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031740Z/dv23-new-init-ring/20260927T031740Z-1983204/repo/reports/reviewed-probe-output/fixed-batch-0ii7edgr/api-dv2-single-shift",
+  "manifest_sha256": "71a11cf0be54c435b1f811e5dccbd97fa1dcb82dee4f56294fdfac2b65958f38",
+  "cpu_proof_sha256": "dd35aded6131b57cfb04ad1696184b874ea2e291b5e2a78103a1eb50d2e00cb1",
+  "source_zip_sha256": "784e556f6f544afbf79eef5c21f8aa1d8b6b7c27544ea8c820588e3310bb25d4",
+  "artifact_manifest_sha256": "c589c7e78be6d9afb45f9737d92b2ad6b7ea9e82d917b5ee4b0efd713cc8b53e",
+  "checks": [
+    "Full sealed source and own CPU proof identity",
+    "Exact actualCUDA complete initial material equals independent CPUproof",
+    "Raw initial schema4 state equals proof excluding only device/actualRNG states; nativeAdam empty",
+    "Original declared global/private/caller RNG and means fixture retained",
+    "Pinned runtime/Torch source, CPU factory default and full-step serial mode",
+    "Separate frozen control copied at2400; original source asserts main restoration and frozen immutability atall220 checks",
+    "Native17CPU clocks verified from retained first/frozen/final receipts, no repair"
+  ],
+  "limits": [
+    "Independent cross-check supports constant_lr_evidence terminal metrics/rawfinal/rate audit; no duplicate quality determination here.",
+    "No Torch/GPU/model execution. Frozen invariance evidence is completed own guarded execution, not a new replay."
+  ]
+}

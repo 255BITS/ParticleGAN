@@ -1,10 +1,12 @@
 # Continuous API search — September 26
 
 **Historical initialization results. No qualified winner.** These measurements
-used public API base `fa511ce010120b502f494d717d01b14b8551eed8`. The user has now
-requested merging develop `c720645e`, adopting its deterministic initialization,
-and rerunning the leaderboard with a quick hard screen before full follow-up.
-Old-init workers finish only their running window; neither PR is merged.
+used public API base `fa511ce010120b502f494d717d01b14b8551eed8`.
+Develop `c720645e` has been merged into both working branches. The
+[new-initialization leaderboard and follow-ups](../deterministic-init-retest/README.md)
+are the current evidence. The user requested finishing that bounded retest,
+updating the PR, and stopping the search. Historical launch recommendations in
+this directory do not authorize further work; neither PR is merged.
 These scores remain evidence of the old initialization and do not establish
 results under the new initializer.
 

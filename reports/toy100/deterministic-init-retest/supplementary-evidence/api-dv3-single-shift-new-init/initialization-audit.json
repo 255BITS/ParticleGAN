@@ -1,0 +1,11 @@
+{
+  "matches": {
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  },
+  "adam_state_empty": true,
+  "scope": "Compare original ring RNG/means only; all tensors freshly use new initializer. Every initialized state tensor and named parameter/buffer must also equal independent CPU proof."
+}

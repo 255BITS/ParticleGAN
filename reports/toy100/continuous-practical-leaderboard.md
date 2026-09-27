@@ -1,6 +1,11 @@
 # 22-toy results and continuous stability
 
-New actual-API measurements: [September 26 continuous search](continuous-api-search/README.md). No qualified winner; failed short and long traces remain available.
+**New initialization:** [deterministic-initialization retest](deterministic-init-retest/README.md)
+contains the current measurements. The scores below retain their original
+initialization and protocols; they must not be copied into the new leaderboard.
+There is no qualified winner. The user requested a finite retest closeout followed
+by stopping the search; the historical launch recommendations below do not
+authorize another round.
 
 ## Current continuous-learning eligibility — September 26, 2026
 
@@ -23,9 +28,9 @@ retains only 61/120 pre-shift checks and passes 126/209 observations after its
 first arrival. The research extension is 105/109 after the previously reported
 settled arrival, not uninterrupted stability. See the audit for sources.
 
-Next: after compaction, run three distinct approaches concurrently through
-external Codex using `gpt-6-astra` at `max`, reviewing and replacing failures.
-No research was launched by this audit. No seed sweeps or merges are authorized.
+The original three-approach search was superseded by the bounded deterministic-
+initialization retest. Preserve these scores and exact sources as research leads.
+Neither PR is authorized for merging by this work.
 
 ## Historical public package baseline — measured
 

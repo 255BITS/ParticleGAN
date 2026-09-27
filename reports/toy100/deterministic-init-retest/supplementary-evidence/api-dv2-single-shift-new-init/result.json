@@ -1,0 +1,307 @@
+{
+  "candidate": "API-DV2-new-init",
+  "gate": "single_shift4600_new_init",
+  "status": "COMPLETE",
+  "status_scope": "measurement completeness; supervisor assesses arrival and retention, no automatic winner claim",
+  "seconds": 90.8551875280682,
+  "metrics": {
+    "segments": [
+      {
+        "start": 0,
+        "end": 2400,
+        "first_arrival": null,
+        "delay": null,
+        "passing_since_arrival": 0,
+        "checks_since_arrival": 0,
+        "every_failing_observation_since_arrival": [],
+        "departures": [],
+        "stable_suffix_start": null,
+        "stable_suffix_checks": 0,
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "minimum_hq_entire_segment": 0.00927734375,
+        "final": {
+          "step": 2400,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.843017578125,
+          "cover": 1.0,
+          "effective_modes": 6.974562644958496,
+          "ema": {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.835693359375,
+            "cover": 1.0,
+            "effective_modes": 6.920559406280518
+          },
+          "learning_rates": {
+            "generator_0": 4.293822439592918e-05,
+            "prior_1": 0.0004258410367194601,
+            "critic_0": 4.293822439592918e-05
+          },
+          "penalty": {
+            "blend_weight": 0.5,
+            "clipped_tensors": 0,
+            "anchor_weight": 1.0,
+            "anchor_alpha": 0.0,
+            "surprise_ratio": 1.8742272177744304,
+            "ema_updates": 0,
+            "ema_skips": 1601,
+            "ema_reseeds": 0
+          },
+          "policy": {
+            "data_memory": 0.0,
+            "variant": "dv2",
+            "mobility": 0.00010415315411269731,
+            "alignment": -0.05666735897285273,
+            "data_score": 0.9652360677719116,
+            "data_drive": 0.0,
+            "last_cosine": 0.10506122559309006,
+            "updates": 2400,
+            "reopens": 0,
+            "closed": true
+          },
+          "input_noise": 0.0,
+          "output_noise": 0.029,
+          "evaluation_output_noise": 0.029,
+          "losses": {
+            "loss_d": 0.5877581238746643,
+            "loss_g": 0.9702733755111694,
+            "loss_gan": 0.9702733755111694,
+            "prior_regularization": 0.003248533932492137,
+            "penalty": 0.006763385143131018
+          },
+          "seconds": 47.39193589007482
+        }
+      },
+      {
+        "start": 2400,
+        "end": 4600,
+        "first_arrival": 2780,
+        "delay": 380,
+        "passing_since_arrival": 183,
+        "checks_since_arrival": 183,
+        "every_failing_observation_since_arrival": [],
+        "departures": [],
+        "stable_suffix_start": 2780,
+        "stable_suffix_checks": 183,
+        "minimum_hq_since_arrival": 0.907958984375,
+        "minimum_modes_since_arrival": 8,
+        "minimum_hq_entire_segment": 0.0,
+        "final": {
+          "step": 4600,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.995849609375,
+          "cover": 1.0,
+          "effective_modes": 7.41238260269165,
+          "ema": {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.993408203125,
+            "cover": 1.0,
+            "effective_modes": 7.406849384307861
+          },
+          "learning_rates": {
+            "generator_0": 0.00031392567713250003,
+            "prior_1": 0.000945917966213889,
+            "critic_0": 0.00031392567713250003
+          },
+          "penalty": {
+            "blend_weight": 0.5,
+            "clipped_tensors": 166,
+            "anchor_weight": 1.0,
+            "anchor_alpha": 0.0,
+            "surprise_ratio": 1.192763883114926,
+            "ema_updates": 417,
+            "ema_skips": 3384,
+            "ema_reseeds": 2
+          },
+          "policy": {
+            "data_memory": 2.5828504091073067e-05,
+            "variant": "dv2",
+            "mobility": 0.06450996485620915,
+            "alignment": -0.047127566141806555,
+            "data_score": 1.493107557296753,
+            "data_drive": 0.0,
+            "last_cosine": 0.045599035918712616,
+            "updates": 4600,
+            "reopens": 1,
+            "closed": true
+          },
+          "input_noise": 0.0,
+          "output_noise": 0.029,
+          "evaluation_output_noise": 0.029,
+          "losses": {
+            "loss_d": 0.6681306958198547,
+            "loss_g": 0.8029706478118896,
+            "loss_gan": 0.8029706478118896,
+            "prior_regularization": 0.003661208553239703,
+            "penalty": 0.005095803178846836
+          },
+          "seconds": 90.7954642761033,
+          "frozen": {
+            "step": 4600,
+            "modes": 0,
+            "n_modes": 8,
+            "hq": 0.0,
+            "cover": 0.0,
+            "effective_modes": 0.0,
+            "evaluation_output_noise": 0.029
+          }
+        }
+      }
+    ],
+    "comparison3600": {
+      "start": 2400,
+      "end": 3600,
+      "first_arrival": 2780,
+      "delay": 380,
+      "passing_since_arrival": 83,
+      "checks_since_arrival": 83,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": 2780,
+      "stable_suffix_checks": 83,
+      "minimum_hq_since_arrival": 0.907958984375,
+      "minimum_modes_since_arrival": 8,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 3600,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.985107421875,
+        "cover": 1.0,
+        "effective_modes": 7.3966498374938965,
+        "ema": {
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.9755859375,
+          "cover": 1.0,
+          "effective_modes": 7.384674072265625
+        },
+        "learning_rates": {
+          "generator_0": 0.0005238048431015314,
+          "prior_1": 0.0013487163655483937,
+          "critic_0": 0.0005238048431015314
+        },
+        "penalty": {
+          "blend_weight": 0.5,
+          "clipped_tensors": 166,
+          "anchor_weight": 1.0,
+          "anchor_alpha": 0.0,
+          "surprise_ratio": 0.7151482573897565,
+          "ema_updates": 417,
+          "ema_skips": 2384,
+          "ema_reseeds": 2
+        },
+        "policy": {
+          "data_memory": 0.0038816690798992113,
+          "variant": "dv2",
+          "mobility": 0.11439211957255649,
+          "alignment": 0.03609287939516125,
+          "data_score": 1.1275348663330078,
+          "data_drive": 0.0,
+          "last_cosine": 0.364744633436203,
+          "updates": 3600,
+          "reopens": 1,
+          "closed": true
+        },
+        "input_noise": 0.0,
+        "output_noise": 0.029,
+        "evaluation_output_noise": 0.029,
+        "losses": {
+          "loss_d": 0.6551366448402405,
+          "loss_g": 0.8222131729125977,
+          "loss_gan": 0.8222131729125977,
+          "prior_regularization": 0.00779108889400959,
+          "penalty": 0.005385575816035271
+        },
+        "seconds": 70.96190806408413,
+        "frozen": {
+          "step": 3600,
+          "modes": 0,
+          "n_modes": 8,
+          "hq": 0.0,
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "evaluation_output_noise": 0.029
+        }
+      }
+    },
+    "frozen_control": {
+      "checkpoint": 2400,
+      "updates_after_copy": 0,
+      "passing": 0,
+      "observations": 220,
+      "maximum_hq": 0.0
+    },
+    "completed_updates": 4600,
+    "observations": 460,
+    "final": {
+      "step": 4600,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.995849609375,
+      "cover": 1.0,
+      "effective_modes": 7.41238260269165,
+      "ema": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.993408203125,
+        "cover": 1.0,
+        "effective_modes": 7.406849384307861
+      },
+      "learning_rates": {
+        "generator_0": 0.00031392567713250003,
+        "prior_1": 0.000945917966213889,
+        "critic_0": 0.00031392567713250003
+      },
+      "penalty": {
+        "blend_weight": 0.5,
+        "clipped_tensors": 166,
+        "anchor_weight": 1.0,
+        "anchor_alpha": 0.0,
+        "surprise_ratio": 1.192763883114926,
+        "ema_updates": 417,
+        "ema_skips": 3384,
+        "ema_reseeds": 2
+      },
+      "policy": {
+        "data_memory": 2.5828504091073067e-05,
+        "variant": "dv2",
+        "mobility": 0.06450996485620915,
+        "alignment": -0.047127566141806555,
+        "data_score": 1.493107557296753,
+        "data_drive": 0.0,
+        "last_cosine": 0.045599035918712616,
+        "updates": 4600,
+        "reopens": 1,
+        "closed": true
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029,
+      "evaluation_output_noise": 0.029,
+      "losses": {
+        "loss_d": 0.6681306958198547,
+        "loss_g": 0.8029706478118896,
+        "loss_gan": 0.8029706478118896,
+        "prior_regularization": 0.003661208553239703,
+        "penalty": 0.005095803178846836
+      },
+      "seconds": 90.7954642761033,
+      "frozen": {
+        "step": 4600,
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0,
+        "evaluation_output_noise": 0.029
+      }
+    },
+    "rate_rows": 4600,
+    "source_and_runtime_assertions_passed": true
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T031740Z/dv23-new-init-ring/20260927T031740Z-1983204/repo/reports/reviewed-probe-output/fixed-batch-0ii7edgr/api-dv2-single-shift"
+}
