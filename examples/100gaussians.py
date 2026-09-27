@@ -56,7 +56,7 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GANTrainer, InputNoise, ParticlePrior, get_recipe, initialize_, learning_rate_scales,
+    GANTrainer, InputNoise, ParticlePrior, get_recipe, init, learning_rate_scales,
 )
 from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
 
@@ -225,10 +225,13 @@ def train(
             nn.init.xavier_uniform_(m.weight)
             if m.bias is not None:
                 nn.init.zeros_(m.bias)
-    if recipe.initialization is not None:
-        # The recipe's default replaces the Xavier init above; do it explicitly.
-        initialize_(G, key=0)
-        initialize_(D, key=1)
+    # The recipe's deterministic init replaces the Xavier init above; learnable
+    # recipe tables get R2 points (MoG spacing recalibrated). The fresh-Gaussian
+    # control's supplied prior keeps its draw.
+    init.deterministic_orthogonal_(G, seed=0)
+    init.deterministic_orthogonal_(D, seed=1)
+    if learnable_prior:
+        init.deterministic_orthogonal_(prior)
 
     if use_training_api:
         trainer = GANTrainer(

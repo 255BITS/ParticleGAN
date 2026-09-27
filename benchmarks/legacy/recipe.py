@@ -3,8 +3,8 @@
 ``LegacyRecipe`` is ``particlegan.Recipe`` plus the fields ParticleGAN no
 longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
 the factories that honored them, built from the pinned copies in this
-package. Initialization retains the historical random default; archived
-GAN v3 / locked_shared / arm-study configurations resolve
+package. With default switches it trains exactly like ``particlegan``'s
+recipe; archived GAN v3 / locked_shared / arm-study configurations resolve
 through it so their receipts stay reproducible. Benchmarks only.
 """
 from copy import copy
@@ -31,12 +31,11 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "initialization": None}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
 
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
-    initialization: str | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
@@ -77,7 +76,7 @@ def get_recipe(name="gan", **overrides):
     from particlegan import get_recipe as current
     base = current(name)
     values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
-    return LegacyRecipe(**{**values, "initialization": None, **overrides})
+    return LegacyRecipe(**{**values, **overrides})
 
 
 def _first_output(output):

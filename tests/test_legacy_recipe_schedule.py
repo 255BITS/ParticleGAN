@@ -12,7 +12,7 @@ from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
 from benchmarks.transfer_suite.legacy_noise_adapters import run_legacy
 from benchmarks.transfer_suite.public_default_verification import declared_spec, load_declaration
 from benchmarks.transfer_suite.toy100_compatibility import declared_model_policy, declared_recipe
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe, init, learning_rate_scale
 
 
 def test_legacy_control_uses_declared_anneal_start_and_floor():
@@ -39,7 +39,7 @@ def _mixed_generator_update(cap, network_floor=None):
     network = torch.nn.Parameter(torch.ones(()))
     with optimizer_defaults(recipe, applied, network_lr_horizon_cap=cap,
                             network_lr_floor=network_floor):
-        prior = recipe.make_prior()
+        prior = init.deterministic_orthogonal_(recipe.make_prior())
         optimizer = torch.optim.Adam([
             {"params": [network]}, {"params": list(prior.parameters())},
         ], lr=.005)
@@ -92,7 +92,7 @@ def test_legacy_cap_changes_network_rate_but_preserves_prior_schedule():
     network = torch.nn.Parameter(torch.ones(()))
     applied = []
     with optimizer_defaults(recipe, applied, network_lr_horizon_cap=40):
-        prior = recipe.make_prior()
+        prior = init.deterministic_orthogonal_(recipe.make_prior())
         optimizer = torch.optim.Adam([
             {"params": [network]}, {"params": list(prior.parameters())},
         ], lr=.005)

@@ -1,6 +1,5 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
 import math
-import warnings
 from dataclasses import asdict, dataclass, replace
 
 
@@ -75,12 +74,8 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
-    # Append new fields so existing positional Recipe arguments retain meaning.
-    initialization: str | None = "batch_feature_zero"
 
     def __post_init__(self):
-        if self.initialization not in (None, "batch_feature_zero"):
-            raise ValueError("initialization must be 'batch_feature_zero' or None")
         object.__setattr__(self, "betas", tuple(self.betas))
         if self.prior_betas is not None:
             object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
@@ -178,25 +173,21 @@ class Recipe:
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
 
-        Learnable tables follow ``initialization`` (R2 by default), before
-        MoG calibration. ``initialization=None`` keeps the ordinary random draw.
-        MoG recipes calibrate spacing on the initialized
+        Learnable tables take the ordinary random draw; use
+        ``particlegan.init.deterministic_orthogonal_(prior)`` for R2 points (it
+        recalibrates MoG spacing). MoG recipes calibrate spacing on the
         means (potentially expensive). Pass ``sigma=...`` to skip calibration,
         including ``sigma=0`` when restoring a checkpoint.
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
-        from . import initialization
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
-        def initialize(prior):
-            return (initialization._initialize_prior(prior, options.get("init_std", 1.0))
-                    if self.initialization is not None and initialization._external_init is None else prior)
         kind = options.pop("prior_kind", self.prior_kind)
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
             if "sigma" in options:
-                return initialize(MoGParticlePrior(**options))
-            prior = initialize(MoGParticlePrior(sigma=0, **options))
+                return MoGParticlePrior(**options)
+            prior = MoGParticlePrior(sigma=0, **options)
             sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel)
             prior.set_sigma(sigma)
             prior.d0.copy_(d0)
@@ -207,7 +198,7 @@ class Recipe:
         if options.pop("sigma_rel") != 0:
             raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
         options.pop("standardize")
-        return initialize(ParticlePrior(**options))
+        return ParticlePrior(**options)
 
     def encode(self, query, prior, *, offset=None, draws=2, generator=None):
         """Route caller-produced queries; returns a ParticleEncoding.
@@ -327,29 +318,9 @@ class Recipe:
         multiplier of ``learning_rate_scales`` and everything else by the
         network one.
 
-        By default, initialize supported fresh G/D/E parameters once with
-        ``batch_feature_zero`` and synchronize the supplied EMA critic if D
-        changes. Supplied priors are preserved. Use ``initialization=None``
-        on the recipe for pretrained/custom weights or the old random init;
-        a UserWarning flags weights changed before this call that it overwrites.
-        Lower-level optimizer factories do not initialize parameters.
+        Parameters are used as supplied; initialize fresh networks first (e.g.
+        ``particlegan.init.deterministic_orthogonal_``).
         """
-        from .initialization import _initialize, _external_init
-        if self.initialization is not None and _external_init is None:
-            changed_critic = False
-            for role, module, key in (("generator (G)", generator, 0),
-                                      ("discriminator (D)", discriminator, 1),
-                                      ("encoder (E)", encoder, 2)):
-                if module is None and key != 1:
-                    continue
-                modified = []
-                changed = _initialize(module, key=key, only_new=True, modified=modified)
-                changed_critic = changed_critic or (changed and key == 1)
-                if modified:
-                    _warn_overwrite(role, modified, self.initialization,
-                                    key == 1 and ema_critic is not None, key)
-            if changed_critic and ema_critic is not None:
-                ema_critic.load_state_dict(discriminator.state_dict())
         from .particle_prior import ParticlePrior
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
@@ -372,18 +343,6 @@ class Recipe:
         return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
                 self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
 
-
-def _warn_overwrite(role, names, initialization, ema, key):
-    shown = ", ".join(repr(name) for name in names[:3]) + (", ..." if len(names) > 3 else "")
-    sync = " The EMA critic is then synced to the overwritten critic." if ema else ""
-    warnings.warn(
-        f"make_optimizers is overwriting {len(names)} {role} parameter(s) ({shown}) with "
-        f"initialization={initialization!r}, but they were changed after construction "
-        f"(load_state_dict, checkpoint restore, pretrained weights, training steps, or custom "
-        f"init in the module's constructor).{sync} To keep them, call make_optimizers before "
-        f"loading weights, or set initialization=None on the recipe. If the overwrite is "
-        f"intended, call particlegan.initialize_(module, key={key}) before make_optimizers.",
-        UserWarning, stacklevel=3)
 
 
 def get_recipe(name="gan", **overrides):

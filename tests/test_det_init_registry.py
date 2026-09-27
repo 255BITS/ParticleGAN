@@ -46,7 +46,7 @@ SCORED = (
 
 
 def test_scored_names_are_registered():
-    from particlegan.init_registry import NAMES
+    from benchmarks.init_research.init_registry import NAMES
 
     missing = [name for name in SCORED if name not in NAMES]
     assert not missing
@@ -59,7 +59,7 @@ def test_import_does_not_change_the_default_init():
     script = r"""
 import torch
 from torch import nn
-import particlegan.init_registry  # noqa: F401
+import benchmarks.init_research.init_registry  # noqa: F401
 torch.manual_seed(0)
 first = nn.Linear(4, 8).weight.detach().clone()
 torch.manual_seed(1)
@@ -77,7 +77,7 @@ import sys
 import torch
 torch.set_default_device("cpu")
 torch.set_num_threads(1)
-from particlegan.init_registry import install, witness_sha256
+from benchmarks.init_research.init_registry import install, witness_sha256
 install(sys.argv[1])
 print(witness_sha256())
 """
@@ -98,7 +98,7 @@ print(witness_sha256())
 def test_every_registered_init_is_deterministic():
     from concurrent.futures import ThreadPoolExecutor
 
-    from particlegan.init_registry import NAMES
+    from benchmarks.init_research.init_registry import NAMES
 
     def both(name):
         return name, _hash_process(name), _hash_process(name)

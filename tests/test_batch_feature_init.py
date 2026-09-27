@@ -16,7 +16,7 @@ def test_neutral_branch_is_trainable_and_preserves_host_assignments():
 import torch
 from torch import nn
 from particlegan import BatchDistanceDiscriminator, ParticlePrior
-from particlegan.init_registry import install, family_of
+from benchmarks.init_research.init_registry import install, family_of
 assert family_of('batch_feature_zero') == 'batch_feature_zero'
 install('batch_feature_zero')
 torch.manual_seed(0)
@@ -52,7 +52,7 @@ def test_reinstall_repeats_fresh_models_and_consumes_the_original_rng_stream():
 import torch
 from torch import nn
 from particlegan import BatchDistanceDiscriminator, ParticlePrior
-from particlegan import batch_feature_init as init
+from benchmarks.init_research import batch_feature_init as init
 original = (torch.Tensor.uniform_, torch.Tensor.normal_, torch.optim.Adam.__init__)
 def build(enabled):
     if enabled: init.install()
@@ -80,7 +80,7 @@ def test_nonprior_normal_parameters_are_initialized_at_declared_rms():
     run('''
 import torch
 from torch import nn
-from particlegan.batch_feature_init import install
+from benchmarks.init_research.batch_feature_init import install
 install()
 parameter = nn.Parameter(torch.empty(4,7))
 with torch.no_grad(): parameter.normal_(.4,.2)
@@ -102,7 +102,7 @@ assert not critic.head.weight[:, -4:].any()
 print('neutral readout active')
 ''')
     before = script.read_bytes()
-    done = subprocess.run([sys.executable, "-m", "particlegan.init_registry",
+    done = subprocess.run([sys.executable, "-m", "benchmarks.init_research.init_registry",
                            "--init", "batch_feature_zero", "--", str(script),
                            "--example", "value"], capture_output=True, text=True)
     assert done.returncode == 0, done.stdout + done.stderr

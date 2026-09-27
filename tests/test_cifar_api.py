@@ -34,8 +34,7 @@ def test_existing_cifar_configs_resolve_into_recipe(path):
 def test_cifar_optimizer_factory_matches_historical_groups_and_updates(kind):
     import copy
     cfg = {**DEFAULTS, 'z_dim': 3, 'num_particles': 8, 'prior': kind, 'prior_reg': .3}
-    # Isolate optimizer parity from the intentionally changed weight default.
-    recipe = training_recipe(cfg).replace(initialization=None)
+    recipe = training_recipe(cfg)
     g, d = torch.nn.Linear(3, 2), torch.nn.Linear(2, 1)
     d.bias.requires_grad_(False)
     prior = DrawSource(kind, 8, 3, 101, 'cpu')

@@ -19,7 +19,7 @@ from torch import nn
 
 from lib.vendor.concept_slider_core.reference import (noise_std, register_paired_error_norm,
     rp_d_loss, rp_g_loss)
-from particlegan import get_recipe, initialize_, scale_learning_rates
+from particlegan import get_recipe, init, scale_learning_rates
 
 # One gate seed. Not a sweep.
 SEED = 0
@@ -305,8 +305,7 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FA
 
     norm = _edit_scale()
     critic = _Critic()
-    if recipe.initialization is not None:
-        initialize_(critic, key=1)  # make_critic_optimizer keeps weights
+    init.deterministic_orthogonal_(critic, seed=1)  # make_critic_optimizer keeps weights
     opt = _gain_optimizer(recipe, beta)
     opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
     cap = recipe.make_critic_penalty(opt_d)

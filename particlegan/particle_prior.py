@@ -61,6 +61,7 @@ class ParticlePrior(nn.Module):
             raise ValueError("init_std must be finite and nonnegative")
 
         factory_kwargs = {"device": device, "dtype": dtype}
+        self.init_std = float(init_std)
 
         # One tensor of particles.
         # When learnable (the default) it is a single Parameter, so DDP /

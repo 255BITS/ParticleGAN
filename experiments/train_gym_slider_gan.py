@@ -23,7 +23,7 @@ from lib.gym_state_control import training_recipe
 from lib.gym_transition import GymTransitionScaler
 from lib.gym_previous_gan import fake_paths, real_record, adversarial_loss
 from lib.gym_slider_gan import MODULE_KEYS, build_models, hashes, paired_loss, error_loss
-from particlegan import scale_learning_rates
+from particlegan import init, scale_learning_rates
 
 DEFAULTS = dict(arm='sliders', steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500], log_interval=250, seed=24003, device='cuda:1',
@@ -91,6 +91,9 @@ def train(cfg):
                 raise RuntimeError('Source changed during capture')
             archive.writestr(name, value)
     recipe = training_recipe(cfg)
+    # build_state_models initialized G and the prior; the fresh E and D start here.
+    init.deterministic_orthogonal_(bundle['D'], seed=1)
+    init.deterministic_orthogonal_(bundle['E'], seed=2)
     opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
         encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
     provenance = dict(sources=sources, source_archive_sha256=sha256(out / 'source.zip'),
