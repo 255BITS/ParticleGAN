@@ -711,6 +711,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
 | `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule and K3P blend floor; `None` = full budget / `lr_floor`) |
 | `reg_anchor_decay` | `.999` |
+| `amsgrad` | `False` (AMSGrad for all recipe optimizers; set `True` with a constant G/D LR) |
 | `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
 | `latent_damping_max_rate` | `.5` (0 disables) |
 | `direct_particle_betas` | `(0, .9)` (`make_generator_optimizer(direct_particles=...)`) |

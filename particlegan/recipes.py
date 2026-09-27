@@ -76,6 +76,11 @@ class Recipe:
     reconstruction_weight: float = 1.0
     # Append new fields so existing positional Recipe arguments retain meaning.
     initialization: str | None = "batch_feature_zero"
+    # AMSGrad for every recipe optimizer (G, prior and critic). Recommended
+    # with a constant G/D LR (network_lr_floor >= 1/2): the Adam step then
+    # shrinks with the gradient at equilibrium instead of creeping up as the
+    # second moment decays. The annealed default schedule keeps plain Adam.
+    amsgrad: bool = False
 
     def __post_init__(self):
         if self.initialization not in (None, "batch_feature_zero"):
@@ -144,6 +149,8 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
+        if type(self.amsgrad) is not bool:
+            raise ValueError("amsgrad must be a boolean")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
@@ -275,10 +282,11 @@ class Recipe:
         ``copy.deepcopy(critic)``) that becomes the EMA; the critic penalty
         requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
-        ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
+        ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
         """
         from .k3p import K3PCriticAdam
-        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
+                   **adam_kwargs}
         return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                              ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
@@ -290,10 +298,10 @@ class Recipe:
         and the direct-particle response for the param group ``direct_particles``).
 
         With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
-        override the recipe's ``lr`` and ``betas`` or add Adam options.
+        override the recipe's ``lr``, ``betas`` and ``amsgrad`` or add Adam options.
         """
         from .k3p import K3PGeneratorAdam
-        options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
+        options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, **adam_kwargs}
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,

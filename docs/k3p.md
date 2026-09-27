@@ -28,6 +28,13 @@ stationary critic, so it damps oscillation without flattening the critic at the
 data. The anchor starts at the first blended call. With a constant LR, `s`
 stays 1: same formulation, no separate code path, and no EMA forward.
 
+A constant LR also never shrinks the Adam step. At equilibrium the gradients
+settle while Adam's second moment keeps decaying (β2 = .999), so the effective
+G and D steps creep up until the equilibrium is kicked out (a sudden collapse
+after a long clean hold). With a constant LR set `amsgrad=True`: every recipe
+optimizer then uses AMSGrad, whose step shrinks with the gradient instead of
+growing. The default (annealed) schedule keeps plain Adam (`amsgrad=False`).
+
 `reg_every = k > 1` applies the same penalty every `k`-th step with
 coefficient `k·c`.
 
@@ -37,6 +44,7 @@ coefficient `k·c`.
 | --- | --- | --- |
 | `reg_coeff`, `reg_kappa` | 1, 1 | penalty above |
 | `reg_anchor_decay` | .999 | EMA critic decay per critic step |
+| `amsgrad` | False | AMSGrad for all recipe optimizers; set True with a constant G/D LR |
 | `betas`, `ema_decay` | (0, .999), .995 | Adam; G/prior EMA |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | .00425, 1, 2 | base rates |
 | `lr_anneal_start`, `lr_floor` | .6, .05 | prior: hold 60%, cosine to 5% of the full budget |

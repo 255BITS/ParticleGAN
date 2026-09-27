@@ -362,7 +362,7 @@ class GANTrainer:
 _REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
                           "reg_method": "autograd"}
 _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
-                        "initialization": None}
+                        "initialization": None, "amsgrad": False}
 
 
 def _upgrade_recipe_fields(recipe):
