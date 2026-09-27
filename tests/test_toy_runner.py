@@ -190,3 +190,16 @@ def test_runner_rejects_unknown_role_recipes():
     with pytest.raises(ValueError, match="unknown roles"):
         ToyRun(Bad())
     assert toy_runner.RECIPE_PRIOR is Networks(None, {}).prior
+
+
+class Colliding(Student):
+    """A generator loss named like a metric would overwrite it in the logged row."""
+    name = "colliding"
+
+    def losses(self, role, nets, real, fake):
+        return {"err": (fake.x - 2 * fake.condition[0]).pow(2).mean()}
+
+
+def test_runner_rejects_loss_names_that_collide_with_metrics():
+    with pytest.raises(ValueError, match="collide with metric keys"):
+        run(Colliding(steps=4), observe_every=2)

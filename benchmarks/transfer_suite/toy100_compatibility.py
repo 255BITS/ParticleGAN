@@ -485,6 +485,7 @@ if __name__ == "__main__":
     parser.add_argument("--init", default=None,
                         help="deterministic weight and particle init name; omit to keep the PyTorch init")
     args = parser.parse_args()
+    torch.set_num_threads(1)  # the screen's declared protocol (threads=1) for every route
     apply_device_policy(args.device, log=True)
     from benchmarks.init_research.init_registry import use_init
     use_init(args.init)

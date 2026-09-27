@@ -474,6 +474,10 @@ def run(problem: ToyProblem, *, recipe: Recipe | None = None, steps: int | None 
             observer(step, toy.measure)
         if step in observe:
             point = {"step": step, **toy.measure(), "seconds": round(time.monotonic() - started, 3)}
+            clash = sorted((set(point) | {"toy"}) & (set(losses) - {"step"}))
+            if clash:
+                raise ValueError(f"{problem.name}: loss names {clash} collide with metric keys; "
+                                 "rename the losses so the logged row keeps both")
             curve.append(point)
             emit({"toy": problem.name, **point, **{k: float(v) for k, v in losses.items() if k != "step"}})
     live, ema = toy.measure(), toy.measure(ema=True)

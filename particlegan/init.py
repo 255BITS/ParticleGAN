@@ -252,8 +252,9 @@ def _attention(module):
 
 register(nn.MultiheadAttention, _attention)
 for _cls in (nn.LayerNorm, nn.GroupNorm, nn.modules.batchnorm._BatchNorm,
-             nn.modules.instancenorm._InstanceNorm, nn.RMSNorm):
+             nn.modules.instancenorm._InstanceNorm):
     register(_cls, {"weight": KEEP, "bias": KEEP})
+register(nn.RMSNorm, {"weight": KEEP})  # RMSNorm has no bias
 register(nn.PReLU, {"weight": KEEP})
 
 

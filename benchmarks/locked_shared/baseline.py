@@ -7,7 +7,6 @@ The optional pinned conceptmod checkout supplies application integration checks.
 from __future__ import annotations
 
 import argparse
-from contextlib import ExitStack
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import hashlib
@@ -16,7 +15,6 @@ import math
 from pathlib import Path
 import platform
 import time
-from unittest.mock import patch
 
 import torch
 
@@ -149,17 +147,15 @@ def score_row(row, shared):
 
 
 def run_toy(toy, cfg, *, noise_policy=None):
-    """Serial, scoped host injection; one candidate card, no per-toy tuning.
+    """One host toy on the shared runner, recorded at the frozen 24 observations.
 
-    Hosts on ``benchmarks.toy_runner`` (mode_hold) take everything from their
-    recipe; candidate knobs do not reach them. The patching below is a legacy
-    shim for hosts that still own their optimizers and formulation classes:
-    each host's entry is removed when that host migrates, and the shim (with
-    ``Candidate``'s formulation factories and ``lr_multiplier``) goes once
-    every locked host has.
+    Every host is a problem-only ``benchmarks.toy_runner`` toy: optimizers, LR
+    schedule, loss, penalty, noise and EMA come from its recipe. Only a
+    candidate's problem-loss weights (``particle_l2``, ``cover_weight``) reach
+    the hosts that define those losses; its formulation fields, ``lr_multiplier``
+    and any harness ``noise_policy`` do not (a noise policy is refused).
     """
-    knobs = cfg.host_options()
-    with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
+    with recording(BUDGETS[toy]) as recorder:
         if toy == "two_pole":
             # Problem-only toy on the shared runner (as mode_hold): only the
             # problem's own particle_l2 pull follows the candidate.
@@ -167,10 +163,9 @@ def run_toy(toy, cfg, *, noise_policy=None):
                 raise ValueError("two_pole takes its noise from its recipe (benchmarks.toy_runner)")
             raw = two_pole.train(particle_l2=cfg.particle_l2)
         elif toy == "trajectory":
-            # Problem-only toy on the shared runner: optimizers, loss, penalty,
-            # noise and EMA come from its recipe. Candidate knobs, LR
-            # multipliers and the harness noise policy are not applied (the
-            # policy's receipt records zero step calls).
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("trajectory takes its noise from its recipe (benchmarks.toy_runner)")
             raw = trajectory.train(diagnostics=True)
         elif toy == "mode_hold":
             # Problem-only toy on the shared runner: its optimizers, loss,
