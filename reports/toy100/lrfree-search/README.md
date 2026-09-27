@@ -1,6 +1,56 @@
 # LR-free GAN base search — September 27
 
-## Update: clean scoring fixed, `img_intensity2` passes with a longer budget
+## Correction: score the model's own samples (noisy), not clean samples
+
+The earlier update below scored clean samples, and that was wrong.
+
+- In this library, output noise is a **permanent part of the generator's sampling distribution**. It
+  warms up and then stays; it is not annealed away. A model's samples are `G(z) + noise`.
+- On the native 100-Gaussian problems these recipes use noise .029, close to the data std of .03. The
+  generator puts particles at the mode centres and lets the noise supply the width. Clean samples
+  therefore come out 40–90% too narrow per mode (covariance-trace bias −.41 to −.91).
+- The noisy score, which is also the frozen protocol, is the correct verdict. The clean score is
+  kept only as a sharpness diagnostic.
+
+**Verdicts under noisy scoring**
+- `img_intensity2` still passes at 1,200 updates:
+  - `dv12-ams-rc3`: PASS 20/48 @650, final streak 16 (600 updates: FAIL 0/24);
+  - `dv12-rc3`: PASS 23/48 @475 (600 updates: FAIL 2/24).
+  - So "it only needed more updates" still holds.
+- **`t2-dv12q-ons018` drops to 12/13.** Its `img_intensity2` pass at 600 updates held only under
+  clean scoring (noisy: FAIL 8/24, suffix 4).
+- **Best standing:** `dv12-ams-rc3` passes 13/13 on the harness gates with `img_intensity2` at 1,200
+  updates. Ring passes at 178/178 and then 191/192; stationary passes at 685/685.
+
+**Native 100-Gaussian problems (grid100, rotated100, staggered100; 7,000 updates): all 15 runs FAIL.**
+This holds under both scorings, for the leaders plus `t2-dv12q-ons018`.
+
+| Result | Detail |
+|---|---|
+| Coverage | 99–100 modes |
+| Precision | .88–.97 (needs ≥ .97) |
+| Centre RMS | .17–.44σ (needs ≤ .20) |
+| Closest miss | API-RP15 grid100 (noisy): covariance-trace bias .103 vs .10, radial KS .045 vs .04 |
+
+Two caveats before these native numbers count:
+- The harness replaced the frozen card's Xavier critic init with deterministic QR init. `develop` #207
+  deliberately keeps Xavier for toy100.
+- DV12's latent perturbation stays active at evaluation.
+
+These will be rerun faithfully.
+
+**Next (proposed):**
+- Replace hand-tuned output noise with **learnable output noise**. The generator learns its own noise
+  scale, driven by state rather than a clock.
+- Rerun the native problems with the Xavier critic.
+- Then run the critic-regularizer ablation and port the remaining 8 hosts of the 22-toy suite.
+
+Draft PR #209 is on hold; its clean-by-default `sample()` rests on the same mistaken premise.
+
+---
+
+
+## Update (superseded by the correction above): clean scoring fixed, `img_intensity2` passes with a longer budget
 
 **Headline:**
 - `dv12-ams-rc3` passes all 11 quick gates with clean scoring when `img_intensity2` gets 1,200
