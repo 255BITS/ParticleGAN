@@ -5,7 +5,7 @@ import math
 import pytest
 import torch
 
-from benchmarks.locked_shared import mode_hold, trajectory
+from benchmarks.locked_shared import trajectory
 from benchmarks.locked_shared.hosts import ae_gan_hold, residual_student
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 
@@ -17,10 +17,6 @@ def _run_host(name, policy, monkeypatch):
     if name == "residual_student":
         monkeypatch.setitem(residual_student.PROTOCOL, "steps", 2)
         return residual_student.train(noise_policy=policy)
-    if name == "mode_hold":
-        return mode_hold.train_mode_hold(
-            mode_hold.ModeHoldRecipe(steps=2), noise_policy=policy,
-        )
     if name == "ae_gan_hold":
         return ae_gan_hold.train(
             ae_gan_hold.HoldConfig(name="noise_probe", steps=2, batch=16,
@@ -31,7 +27,7 @@ def _run_host(name, policy, monkeypatch):
 
 
 @pytest.mark.parametrize(
-    "host", ("trajectory", "residual_student", "mode_hold", "ae_gan_hold"),
+    "host", ("trajectory", "residual_student", "ae_gan_hold"),
 )
 def test_four_custom_hosts_have_zero_noise_parity_and_actual_noise_calls(host, monkeypatch):
     original = _run_host(host, None, monkeypatch)

@@ -6,7 +6,6 @@ import math
 
 import torch
 
-from benchmarks.legacy.gan_loss import GANLoss
 from benchmarks.legacy.grad_regularizers import GradientPenalty
 from . import mode_hold, trajectory, two_pole
 
@@ -14,14 +13,6 @@ from . import mode_hold, trajectory, two_pole
 def thinned_cap():
     # Same effective cap as conceptmod's ThinnedBCap: ignores requested κ=1.
     return GradientPenalty("b_cap", coeff=1.0, kappa=100.0, norm="l2")
-
-
-def no_cap():
-    return GradientPenalty("f_none", coeff=0.0)
-
-
-def vanilla():
-    return GANLoss("logistic", "vanilla")
 
 
 def experiments():
@@ -32,10 +23,10 @@ def experiments():
         ("trajectory", "locked_shared", lambda: trajectory.train()),
         ("trajectory", "stranger", lambda: trajectory.train(pairing="stranger")),
         ("trajectory", "nearest_stranger", lambda: trajectory.train(pairing="nearest_stranger")),
+        # The ring runs on its recipe (benchmarks.toy_runner); formulation
+        # swaps (cap_off, vanilla) are not problem arms and were dropped.
         ("ring", "locked_shared", lambda: mode_hold.train_mode_hold()),
-        ("ring", "cap_off", lambda: mode_hold.train_mode_hold(cap_factory=no_cap)),
-        ("ring", "vanilla", lambda: mode_hold.train_mode_hold(gan_factory=vanilla)),
-        ("ring", "fm_on", lambda: mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(fm_weight=0.1))),
+        ("ring", "fm_on", lambda: mode_hold.train_mode_hold(mode_hold.ModeHold(fm_weight=0.1))),
     )
 
 

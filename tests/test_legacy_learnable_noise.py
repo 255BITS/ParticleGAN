@@ -6,16 +6,12 @@ import pytest
 import torch
 from torch import nn
 
-from benchmarks import learned_lr_evaluation as bridge
-from benchmarks.locked_shared import mode_hold, trajectory, two_pole
+from benchmarks.locked_shared import trajectory, two_pole
 from benchmarks.locked_shared.hosts import (
     ae_gan_hold, cover_leftover, mid_scale_identity, residual_student,
     unipolar, unused_token_hold,
 )
-from benchmarks.smart_descent import evaluate
-from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_output
-from particlegan import get_recipe
 
 
 def _run(host, policy, monkeypatch):
@@ -44,17 +40,13 @@ def _run(host, policy, monkeypatch):
         )
     if host == "mid_scale_identity":
         return mid_scale_identity.run_arm("locked", steps=2, noise_policy=policy)
-    if host == "mode_hold":
-        return mode_hold.train_mode_hold(
-            mode_hold.ModeHoldRecipe(steps=2), noise_policy=policy,
-        )
     raise AssertionError(host)
 
 
 @pytest.mark.parametrize("host", (
     "two_pole", "trajectory", "residual_student", "unipolar",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
-    "mid_scale_identity", "mode_hold",
+    "mid_scale_identity",
 ))
 def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
     host, monkeypatch,
@@ -79,7 +71,7 @@ def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
     assert math.isclose(receipt["output_sigma_effective_final_evaluation"],
                         receipt["output_scale_final"], rel_tol=1e-7)
     assert not math.isclose(receipt["output_scale_final"], 0.029, abs_tol=1e-8)
-    if host in ("mode_hold", "cover_leftover"):
+    if host == "cover_leftover":
         assert receipt["output_scale_ema_final"] > 0
         assert receipt["output_sigma_effective_ema_final_evaluation"] > 0
 
@@ -141,26 +133,6 @@ def test_learnable_scalar_multiplies_the_shared_warmup_without_rng_at_zero():
                         learned, rel_tol=1e-6)
 
 
-def test_two_pole_direct_particles_keep_prior_role_while_scalar_is_generator(
-    monkeypatch,
-):
-    monkeypatch.setattr(two_pole, "TOY_STEPS", 2)
-    policy = NoisePolicy(0.029, 0.5, 0.5, 2, output_noise_learnable=True)
-    recipe = get_recipe()
-    applied = []
-    with optimizer_defaults(recipe, applied):
-        control = evaluate.FixedControl({"schedule": "cosine"}, 2)
-        with bridge.control_host_schedules(control):
-            two_pole.train(noise_policy=policy)
-    roles = {item["role"]: item for item in applied}
-    assert set(roles) == {"d", "prior", "g"}
-    assert roles["g"]["parameters"] == 1
-    assert roles["prior"]["parameters"] == policy.generator_base_parameters
-    assert math.isclose(roles["g"]["lr"], recipe.lr)
-    assert math.isclose(roles["prior"]["lr"], recipe.lr * recipe.prior_lr_mult)
-    assert policy.receipt()["output_scale_optimizer_owned"]
-
-
 @pytest.mark.parametrize("learnable,std", [(True, 0.0), (1, 0.029)])
 def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
     with pytest.raises(ValueError, match="output_noise_learnable"):
@@ -170,7 +142,7 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 @pytest.mark.parametrize("host", (
     "two_pole", "trajectory", "residual_student", "unipolar",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
-    "mid_scale_identity", "mode_hold",
+    "mid_scale_identity",
 ))
 def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rng(
     host, monkeypatch,
@@ -189,6 +161,6 @@ def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rn
     assert receipt["input_train_elements"] > 0
     assert receipt["output_noise_training_stream_isolated"] is True
     assert receipt["output_noise_eval_state_preserved"] is True
-    if host in ("trajectory", "residual_student", "ae_gan_hold", "mode_hold"):
+    if host in ("trajectory", "residual_student", "ae_gan_hold"):
         assert receipt["output_eval_calls"] > 0
         assert receipt["output_noise_eval_state_pairs"]

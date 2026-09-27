@@ -1,8 +1,8 @@
-"""Benchmark-local optimizer policy for a shared network LR horizon.
+"""Benchmark-local network LR horizon policy, expressed as a recipe schedule.
 
-The public Recipe and GANTrainer keep their original full-budget schedule.
-Only the dense generator and discriminator rates are adjusted here; the
-particle prior always follows the ordinary full-budget cosine.
+The toy100 trainer recipe keeps its full-budget schedule. A policy changes
+only the dense generator and discriminator horizon/floor that the recipe-built
+optimizers apply; the particle prior always follows the full-budget cosine.
 """
 
 from __future__ import annotations
@@ -47,20 +47,34 @@ def policy_multipliers(
     return network, prior
 
 
+def policy_recipe(recipe, network_lr_horizon_cap: int | None = None, *,
+                  network_lr_floor: float | None = None):
+    """The recipe whose own LR schedule is this policy (``policy_multipliers``).
+
+    Only the schedule fields change: G/D over ``min(total, cap)`` to the policy
+    floor (default: the recipe's ``lr_floor``), the prior over the full budget.
+    """
+    cap = network_lr_horizon_cap
+    floor = recipe.lr_floor if network_lr_floor is None else float(network_lr_floor)
+    return recipe.replace(network_lr_horizon_cap=cap, network_lr_floor=floor)
+
+
 def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None,
                      network_lr_floor: float | None = None, **step_kwargs):
     """Run one ordinary GANTrainer update with a capped dense-network horizon.
 
-    GANTrainer sets ordinary full-budget group rates inside ``step``. Local
-    optimizer pre-step hooks replace the G and D group rates by their exact
-    capped values immediately before the updates. The prior remains on the
-    ordinary full-budget rate. Hooks are removed even when an update raises;
-    the trainer's base rates are never modified, including in checkpoints.
+    The trainer's recipe-built optimizers apply their LR schedule inside
+    ``step()``; for this update their schedules read ``policy_recipe`` (the
+    same update counts, the policy's network horizon and floor), then return
+    to the trainer recipe. Nothing writes group rates, the trainer recipe (and
+    so the critic penalty) is unchanged, and base rates are never modified,
+    including in checkpoints. The schedules are restored even when an update
+    raises.
     """
     total = trainer.recipe.total_steps
     if network_lr_horizon_cap is None and network_lr_floor is None:
         return trainer.step(real, **step_kwargs)
-    network, prior = policy_multipliers(
+    policy_multipliers(  # validate
         trainer.completed_steps, total, trainer.recipe.lr_anneal_start,
         trainer.recipe.lr_floor, network_lr_horizon_cap,
         network_lr_floor=network_lr_floor,
@@ -70,23 +84,16 @@ def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None
         return trainer.step(real, **step_kwargs)
     if len(trainer.opt_g.param_groups) != 2 or len(trainer.opt_d.param_groups) != 1:
         raise RuntimeError("expected G, prior, and D optimizer groups")
-
-    def set_g_rates(optimizer, args, kwargs):
-        optimizer.param_groups[0]["lr"] = trainer.initial_lrs[0][0] * network
-        optimizer.param_groups[1]["lr"] = trainer.initial_lrs[0][1] * prior
-
-    def set_d_rate(optimizer, args, kwargs):
-        optimizer.param_groups[0]["lr"] = trainer.initial_lrs[1][0] * network
-
-    g_hook = trainer.opt_g.register_step_pre_hook(set_g_rates)
+    policy = policy_recipe(trainer.recipe, network_lr_horizon_cap, network_lr_floor=network_lr_floor)
+    schedules = [trainer.opt_g.lr_schedule, trainer.opt_d.lr_schedule]
+    originals = [schedule.recipe for schedule in schedules]
     try:
-        d_hook = trainer.opt_d.register_step_pre_hook(set_d_rate)
-        try:
-            return trainer.step(real, **step_kwargs)
-        finally:
-            d_hook.remove()
+        for schedule in schedules:
+            schedule.recipe = policy
+        return trainer.step(real, **step_kwargs)
     finally:
-        g_hook.remove()
+        for schedule, original in zip(schedules, originals):
+            schedule.recipe = original
 
 
 def policy_rate_action(trainer, completed_step: int, *,

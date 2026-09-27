@@ -26,7 +26,7 @@ def main():
     for steps in (1200, 7000):
         recipe = GAN_V1.replace(total_steps=steps).replace(name="gan")
         print(f"START stock ring recipe steps={steps} particles={recipe.num_particles}", flush=True)
-        row = train_mode_hold(training_recipe=recipe, diagnostics=True)
+        row = train_mode_hold(recipe=recipe, diagnostics=True)
         report["rows"].append({"recipe": legacy_dict(recipe), "ring": row})
         path.write_text(json.dumps(report, indent=2) + "\n")
         print(json.dumps({k: v for k, v in row.items() if k != "curve"}), flush=True)

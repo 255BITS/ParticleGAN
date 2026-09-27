@@ -14,7 +14,7 @@ import json
 from typing import Callable
 
 
-from ..observation import checkpoint, schedule_optimizer
+from ..observation import checkpoint
 
 import torch
 
@@ -246,7 +246,6 @@ def train(*, pairing: str = "shared", echo: bool = False,
         view.slow = slow.detach()
         d_loss = d_loss + regularizer(view, paired, fake.detach(), step=step)
         d_loss.backward()
-        schedule_optimizer(opt_d, step - 1)
         opt_d.step()
 
         flags = [p.requires_grad for p in critic.parameters()]
@@ -267,7 +266,6 @@ def train(*, pairing: str = "shared", echo: bool = False,
                 residual = fake.new_zeros(())
             g_loss = g_loss + RESIDUAL_WEIGHT * residual
             g_loss.backward()
-            schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):

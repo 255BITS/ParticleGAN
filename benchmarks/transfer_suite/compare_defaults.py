@@ -60,8 +60,7 @@ def candidate(recipe):
     return baseline.Candidate(
         name=recipe.name, loss_type=recipe.loss_type, gan_mode=recipe.gan_mode,
         reg_arm=recipe.reg_arm, reg_coeff=recipe.reg_coeff, reg_kappa=recipe.reg_kappa,
-        particle_l2=0., vicreg_weight=recipe.prior_reg, lr_multiplier=1.,
-        lr_schedule='host', lr_anneal_start=recipe.lr_anneal_start, lr_floor=recipe.lr_floor)
+        particle_l2=0., vicreg_weight=recipe.prior_reg, lr_multiplier=1.)
 
 
 def effective_spec(original, recipe):

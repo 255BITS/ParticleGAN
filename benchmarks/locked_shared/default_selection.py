@@ -36,7 +36,7 @@ def main():
         start = time.monotonic()
         def log(point):
             print(f"STEP {name} {point['step']}/{recipe.total_steps} live_modes={point['modes']}/8 live_HQ={point['hq']:.6f}", flush=True)
-        result = train_mode_hold(training_recipe=recipe, diagnostics=True, log=log)
+        result = train_mode_hold(recipe=recipe, diagnostics=True, log=log)
         report["rows"].append({"name": name, "recipe": asdict(recipe), "ring": result,
                                "seconds": time.monotonic() - start})
         write_json(output, report)

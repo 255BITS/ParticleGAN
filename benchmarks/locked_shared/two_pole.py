@@ -6,7 +6,7 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
-from .observation import checkpoint, schedule_optimizer
+from .observation import checkpoint
 
 import torch
 from torch import nn
@@ -130,7 +130,6 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
             fake = noise_policy.output(fake, generator_step=False)
         d_loss = gan.d_loss(critic(real), critic(fake))
         (d_loss + regularizer(critic, real, fake, step=step)).backward()
-        schedule_optimizer(opt_d, step - 1)
         opt_d.step()
 
         opt_p.zero_grad(set_to_none=True)
@@ -142,7 +141,6 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         g_loss = gan.g_loss(paired, d_real)
         g_loss = g_loss + particle_l2 * particles.square().mean()
         g_loss.backward()
-        schedule_optimizer(opt_p, step - 1)
         opt_p.step()
         checkpoint(step, lambda: {"mean_abs": float(particles.detach().abs().mean()),
                                  "grad_med": _grad_median(base_critic, real, particles)})

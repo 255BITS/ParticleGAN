@@ -13,7 +13,7 @@ import math
 from dataclasses import dataclass
 
 
-from ..observation import checkpoint, schedule_optimizer
+from ..observation import checkpoint
 
 import torch
 
@@ -488,7 +488,6 @@ def _fit(
             d_term = gan.d_loss(critic(reals[scale], scale), critic(fake, scale))
             d_loss = d_loss + (d_term + cap) / n_scales
         d_loss.backward()
-        schedule_optimizer(opt_d, step)
         opt_d.step()
 
         critic.requires_grad_(False)
@@ -506,7 +505,6 @@ def _fit(
             cover = cover + F.mse_loss(student.state(scale), targets[scale])
         g_loss = g_loss + cover_w * cover / n_scales
         g_loss.backward()
-        schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)
         checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),

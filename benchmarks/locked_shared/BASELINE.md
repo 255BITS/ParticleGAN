@@ -188,9 +188,9 @@ of at least five observations establishes measured sustained PASS; missing
 observations cannot pass. The stricter ring convergence target is eight modes
 with HQ at least 90%. Original final regression bounds are unchanged.
 
-New candidate options are `lr_schedule` (`host` by default, or `cosine`),
-`lr_anneal_start` (default 0.6), and `lr_floor` (default 0.05). `host` retains
-the source schedules. `cosine` replaces each host schedule using the same policy
-and each optimizer group's initial rate; it never compounds the host's decay.
-The curve grid and timing policy are stored in protocol `behavior-v2`.
+That study's `lr_schedule: cosine` candidate option (a harness override of
+every host schedule) has since been removed: learning rates belong to each
+host's recipe-built optimizers, which apply their schedule inside `step()`.
+Its recorded results remain in the linked report. The curve grid and timing
+policy are stored in protocol `behavior-v2`.
 Historical `behavior-v1` artifacts retain their original fingerprints.

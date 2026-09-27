@@ -8,7 +8,7 @@ The MIT notice is retained in [LICENSE](LICENSE).
 | --- | --- | --- |
 | `two_pole.py` | `leaderboard_honesty.py` | Stored host weights, live/stranger training, 80 steps, travel and slope thresholds |
 | `trajectory.py` | `shared_trajectory.py` | Arcs, models, full loss, 400 steps, shared/stranger/nearest pairing, identity MSE threshold |
-| `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, full loss, EMA, 1,200 steps, coverage/HQ thresholds |
+| `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, 1,200 steps, coverage/HQ metrics and verdict. Problem only: optimizers, LR schedule, loss, penalty, prior, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
 | `hosts/residual_student.py` | `residual_student.py` | Conditional residual head, landing objective and all three measured landing/identity bounds |
 | `hosts/unipolar.py` | `unipolar.py` | Positive-pole training, neutral hold, leakage and coverage |
 | `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | AE encoder/decoder training, reconstruction and unconditional hold |

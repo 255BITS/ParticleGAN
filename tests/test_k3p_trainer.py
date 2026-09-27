@@ -356,7 +356,6 @@ def test_plain_torch_checkpoint_resumes_exactly():
 
 
 def test_recipe_optimizers_are_ordinary_adam():
-    from torch.optim.lr_scheduler import LambdaLR
     recipe = _recipe()
     torch.manual_seed(0)
     g, d = nn.Linear(2, 2), nn.Linear(2, 1)
@@ -373,8 +372,8 @@ def test_recipe_optimizers_are_ordinary_adam():
         loss.backward()
         return loss
     assert opt_d.step(closure) is not None and calls == [1] and opt_d.record.observed_steps == 1
-    # The recipe owns the rate: a torch LR scheduler's write is replaced at the next step.
-    LambdaLR(opt_d, lambda epoch: 0.5 ** epoch).step()
+    # The recipe owns the rate: an outside write is replaced at the next step.
+    opt_d.param_groups[0]["lr"] = 0.5
     opt_d.step(closure)
     assert opt_d.param_groups[0]["lr"] == recipe.lr * recipe.d_lr_mult * learning_rate_scales(1, recipe)[0]
     with pytest.raises(ValueError, match="regularizer"):

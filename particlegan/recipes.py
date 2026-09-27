@@ -523,9 +523,11 @@ class LRSchedule:
 def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, network_transition=None):
     """Deprecated: recipe-built optimizers apply ``LRSchedule`` inside ``step()``.
 
-    Writing group LRs by hand is redundant (the next ``step()`` overwrites them
-    from the optimizer's own count) and will be removed once every caller has
-    migrated. Returns ``learning_rate_scales(step, recipe)``.
+    Kept until every caller has migrated. Groups whose parameters all belong
+    to ``prior`` are tagged ``role="prior"`` so a recipe-built optimizer's own
+    schedule gives them the prior multiplier, as this function always did; the
+    LR writes are redundant (the next ``step()`` sets the same rates from the
+    optimizer's own count). Returns ``learning_rate_scales(step, recipe)``.
     """
     import warnings
     warnings.warn("scale_learning_rates is deprecated: recipe-built optimizers apply the recipe's "
@@ -535,5 +537,7 @@ def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, ne
     for optimizer, rates in zip(optimizers, base_rates):
         for group, rate in zip(optimizer.param_groups, rates):
             is_prior = bool(prior_ids) and all(id(p) in prior_ids for p in group["params"])
+            if is_prior and "role" in group:
+                group["role"] = "prior"
             group["lr"] = rate * (prior_scale if is_prior else network)
     return network, prior_scale

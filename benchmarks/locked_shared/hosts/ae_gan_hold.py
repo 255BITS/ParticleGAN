@@ -12,7 +12,7 @@ from contextlib import nullcontext
 from dataclasses import dataclass
 
 
-from ..observation import checkpoint, schedule_optimizer
+from ..observation import checkpoint
 
 import torch
 
@@ -205,7 +205,6 @@ def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
             if stats.get("applied"):
                 penalty_applied += 1
             (d_loss + penalty).backward()
-            schedule_optimizer(opt_d, step - 1)
             opt_d.step()
 
         query, offset = encoder(data).chunk(2, dim=1)
@@ -233,7 +232,6 @@ def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
         loss.backward()
         for param in critic.parameters():
             param.requires_grad_(True)
-        schedule_optimizer(opt_g, step - 1)
         opt_g.step()
         checkpoint(step, lambda: measure(step))
         if step == 1 or (step % 50 == 0 and step != cfg.steps):

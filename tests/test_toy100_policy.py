@@ -236,23 +236,28 @@ def test_noop_horizon_and_checkpoint_replay_are_exact(monkeypatch, network_floor
             torch.testing.assert_close(left, right, rtol=0, atol=0)
     assert second.initial_lrs == replay.initial_lrs == checkpoint["initial_lrs"]
 
+    # The policy is the optimizers' own schedule reading a policy recipe for
+    # the update; it is restored even when the update raises.
     def broken_step(*args, **kwargs):
-        assert second.opt_g._optimizer_step_pre_hooks
-        assert second.opt_d._optimizer_step_pre_hooks
+        for opt in (second.opt_g, second.opt_d):
+            assert opt.lr_schedule.recipe.network_lr_horizon_cap == 3
         raise RuntimeError("injected failure")
 
     monkeypatch.setattr(second, "step", broken_step)
     with pytest.raises(RuntimeError, match="injected failure"):
         step_with_policy(second, real, network_lr_horizon_cap=3)
     assert second.initial_lrs == checkpoint["initial_lrs"]
+    assert second.opt_g.lr_schedule.recipe is second.opt_d.lr_schedule.recipe is second.recipe
     assert not second.opt_g._optimizer_step_pre_hooks
     assert not second.opt_d._optimizer_step_pre_hooks
 
 
-def test_policy_update_matches_original_scratch_hook_order(monkeypatch):
-    """The role-specific production hooks reproduce the archived probe math."""
-    from particlegan import training as training_module
+def test_policy_update_matches_original_scratch_hook_order():
+    """The policy schedule reproduces the archived probe math.
 
+    The reference sets the archived rates by hand on optimizers whose own
+    schedule is switched off (a test-only reference, not a caller pattern).
+    """
     config, recipe = resolve_config(_small_config(output_noise_std=.029,
                                                    input_noise_std=.5))
     torch.set_num_threads(1)
@@ -261,23 +266,17 @@ def test_policy_update_matches_original_scratch_hook_order(monkeypatch):
     production = make_trainer(config, recipe)
     reference.D.sigma = production.D.sigma = .5
     ordinary_scale = learning_rate_scale
-    reference_g_step = reference.opt_g.step
-
-    def reset_prior_before_g(*args, **kwargs):
-        full = ordinary_scale(reference.completed_steps, recipe.total_steps,
-                              recipe.lr_anneal_start, recipe.lr_floor)
-        reference.opt_g.param_groups[1]["lr"] = reference.initial_lrs[0][1] * full
-        return reference_g_step(*args, **kwargs)
-
-    reference.opt_g.step = reset_prior_before_g
+    bases = reference.initial_lrs
+    reference.opt_g.lr_schedule = reference.opt_d.lr_schedule = None
     for _ in range(4):
         rng = torch.get_rng_state()
-        with monkeypatch.context() as patch:
-            patch.setattr(training_module, "learning_rate_scales",
-                          lambda step, r: (ordinary_scale(
-                              step, min(r.total_steps, 3), r.lr_anneal_start, r.lr_floor,
-                          ),) * 2)
-            old = reference.step(real, generator_real=lambda: real)
+        completed = reference.completed_steps
+        network = ordinary_scale(completed, min(recipe.total_steps, 3), recipe.lr_anneal_start, recipe.lr_floor)
+        full = ordinary_scale(completed, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
+        reference.opt_g.param_groups[0]["lr"] = bases[0][0] * network
+        reference.opt_g.param_groups[1]["lr"] = bases[0][1] * full
+        reference.opt_d.param_groups[0]["lr"] = bases[1][0] * network
+        old = reference.step(real, generator_real=lambda: real)
         torch.set_rng_state(rng)
         new = step_with_policy(production, real, network_lr_horizon_cap=3,
                                generator_real=lambda: real)

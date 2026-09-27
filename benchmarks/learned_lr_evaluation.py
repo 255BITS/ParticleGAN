@@ -54,23 +54,15 @@ def optimizer_role(optimizer, local_variables):
 
 @contextmanager
 def control_host_schedules(controller):
-    timing = {"seconds": 0., "calls": 0}
+    """Inert since the hosts' ``schedule_optimizer`` hook was removed.
 
-    def before_step(optimizer, completed_updates):
-        started = time.perf_counter()
-        frame = inspect.currentframe().f_back
-        try:
-            role = optimizer_role(optimizer, frame.f_locals)
-        finally:
-            del frame
-        controller.step(optimizer, completed_updates, role=role)
-        timing["seconds"] += time.perf_counter() - started
-        timing["calls"] += 1
-
-    with ExitStack() as stack:
-        for name in baseline.METRICS:
-            stack.enter_context(patch.object(getattr(baseline, name), "schedule_optimizer", before_step))
-        yield timing
+    Learning rates belong to recipe-built optimizers, so a controller can no
+    longer rewrite a locked host's group rates from outside; the locked hosts
+    run their own schedules inside this context. Kept only so the frozen
+    LR-control research still imports; retire it with that research.
+    """
+    del controller
+    yield {"seconds": 0., "calls": 0}
 
 
 def fingerprint(policy_path, policy):
@@ -140,8 +132,6 @@ def run(policy_path, candidate_path, reference, output):
     if len(cards) != 1:
         raise ValueError("supply one fixed formulation for a schedule-only comparison")
     candidate = baseline.Candidate(**cards[0])
-    # Scheduling belongs exclusively to the compared controller.
-    candidate = replace(candidate, lr_schedule="host")
     protocol = fingerprint(policy_path, policy)
     report = {"created_at": datetime.now(timezone.utc).isoformat(), "protocol": protocol,
               "protocol_sha256": baseline.digest(protocol), "rows": [], "shared": {}}

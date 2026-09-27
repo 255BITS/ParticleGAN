@@ -135,9 +135,8 @@ def test_diagnostics_preserve_training_and_show_quality_in_report(tmp_path):
     before = torch.get_num_threads()
     torch.set_num_threads(1)
     try:
-        recipe = mode_hold.ModeHoldRecipe(steps=200)
-        original = mode_hold.train_mode_hold(recipe)
-        measured = mode_hold.train_mode_hold(recipe, diagnostics=True)
+        original = mode_hold.train_mode_hold(steps=200)
+        measured = mode_hold.train_mode_hold(steps=200, diagnostics=True)
         assert original == {key: measured[key] for key in original}
     finally:
         torch.set_num_threads(before)

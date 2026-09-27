@@ -24,9 +24,10 @@ configuration; this example only exposes sizes, rates and schedule fields:
     so momentum drifts the unsampled rows of the particle table
   - EMA (0.995) copies of G and the prior for snapshots/eval: the live
     weights orbit the equilibrium; the EMA copy sits on it
-  - role-wise LR schedule (``learning_rate_scales``): G/D hold full LR for
-    60% of the network horizon, then cosine to the network floor; the prior
-    follows the same shape over the full budget down to ``lr_floor``.
+  - role-wise LR schedule, applied by the recipe-built optimizers inside
+    ``step()``: G/D hold full LR for 60% of the network horizon, then cosine
+    to the network floor; the prior follows the same shape over the full
+    budget down to ``lr_floor``.
 
 Visualization:
   - At fixed intervals, we sample the SAME latent particles (fixed_first_n=True)
@@ -56,7 +57,7 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GANTrainer, InputNoise, ParticlePrior, get_recipe, init, learning_rate_scales,
+    GANTrainer, InputNoise, ParticlePrior, get_recipe, init,
 )
 from particlegan.training import input_noise_std, output_noise_std  # noqa: E402
 
@@ -261,7 +262,7 @@ def train(
         # recipe's latent-table update (currently A2 latent-row damping).
         opt_prior = (
             recipe.make_generator_optimizer(
-                prior.parameters(), latent_table=prior.z,
+                [{"params": list(prior.parameters()), "role": "prior"}], latent_table=prior.z,
                 lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
                 betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
             if learnable_prior else None
@@ -302,11 +303,6 @@ def train(
         )
 
     total_steps = epochs * steps_per_epoch
-    all_opts = tuple(opt for opt in (opt_G, opt_D, opt_prior) if opt is not None)
-    base_lrs = {
-        id(opt): [g["lr"] for g in opt.param_groups]
-        for opt in all_opts
-    }
 
     def synchronize():
         if device.type == "cuda":
@@ -328,13 +324,6 @@ def train(
                 loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
                 ep_z = stats["prior_regularization"]
             else:
-                # K3P schedule: G/D anneal over the network horizon to the
-                # network floor; the prior anneals over the full budget.
-                network, prior_scale = learning_rate_scales(global_step, recipe)
-                for opt in all_opts:
-                    scale = prior_scale if opt is opt_prior else network
-                    for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
-                        group["lr"] = base * scale
                 noisy_D.std = input_noise_std(recipe, global_step)
                 sigma_out = output_noise_std(recipe, global_step)
 

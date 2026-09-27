@@ -46,8 +46,14 @@ def test_cifar_optimizer_factory_matches_historical_groups_and_updates(kind):
     old_od = torch.optim.Adam((p for p in old_d.parameters() if p.requires_grad),
                               lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999), fused=False)
     og, od = recipe.make_optimizers(g, d, prior, fused=False)
-    assert og.state_dict()['param_groups'] == old_og.state_dict()['param_groups']
-    assert od.state_dict()['param_groups'] == old_od.state_dict()['param_groups']
+
+    def adam_groups(opt):  # recipe optimizers add their schedule's role/base_lr keys
+        return [{k: v for k, v in group.items() if k not in ('role', 'base_lr')}
+                for group in opt.state_dict()['param_groups']]
+    assert adam_groups(og) == old_og.state_dict()['param_groups']
+    assert adam_groups(od) == old_od.state_dict()['param_groups']
+    roles = ['network', 'prior'] if kind == 'learned' else ['network']
+    assert [group['role'] for group in og.param_groups] == roles
     for current, old in zip((g, d, prior), (old_g, old_d, old_prior)):
         for p, q in zip(current.parameters(), old.parameters()):
             if p.requires_grad:

@@ -1,17 +1,10 @@
 """The custom-host control must use the candidate's LR schedule fields."""
 
-from copy import deepcopy
-
-import pytest
 import torch
 
-from benchmarks.toy_suite import _check_actions
 from benchmarks.smart_descent import evaluate
 from benchmarks.toy100.schedule import policy_multipliers
 from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
-from benchmarks.transfer_suite.legacy_noise_adapters import run_legacy
-from benchmarks.transfer_suite.public_default_verification import declared_spec, load_declaration
-from benchmarks.transfer_suite.toy100_compatibility import declared_model_policy, declared_recipe
 from particlegan import get_recipe, init, learning_rate_scale
 
 
@@ -112,36 +105,3 @@ def test_legacy_cap_changes_network_rate_but_preserves_prior_schedule():
         group_lrs=[dict(role="g", lr=recipe.lr * network_scale),
                    dict(role="prior", lr=recipe.lr * recipe.prior_lr_mult * prior_scale)],
     )]
-
-
-@pytest.mark.parametrize("network_floor", [None, .005])
-def test_custom_host_cap_receipts_cover_every_update_and_reject_missing_middle(
-    network_floor,
-):
-    declaration = {"network_lr_horizon_cap": 40}
-    if network_floor is not None:
-        declaration["network_lr_floor"] = network_floor
-    recipe, noise, _ = declared_recipe(declaration)
-    jobs, profile = load_declaration()
-    job = next(row for row in jobs if row["spec"]["name"] == "two_pole")
-    spec, _, _ = declared_spec(job, profile, recipe)
-    policy = declared_model_policy(declaration)
-    result, context = run_legacy(spec, recipe, noise, model_policy=policy)
-    record = dict(spec=spec, result=result, applied=context["applied"])
-    assert len(result["actions"]) == spec["steps"] * 2
-    _check_actions(record, recipe, noise, policy)
-
-    missing = deepcopy(record)
-    missing["result"]["actions"].pop(3)
-    with pytest.raises(ValueError, match="optimizer trace is incomplete"):
-        _check_actions(missing, recipe, noise, policy)
-
-    altered = deepcopy(record)
-    altered["result"]["actions"][-1]["group_lrs"][0]["lr"] = .99
-    with pytest.raises(ValueError, match="optimizer rate differs"):
-        _check_actions(altered, recipe, noise, policy)
-    if network_floor is not None:
-        altered = deepcopy(record)
-        altered["result"]["actions"][-1].pop("network_lr_floor")
-        with pytest.raises(ValueError, match="network floor differs"):
-            _check_actions(altered, recipe, noise, policy)
