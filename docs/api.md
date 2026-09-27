@@ -71,6 +71,10 @@ Batch-distance readout coefficients start at zero and remain trainable.
 
 The function preserves frozen parameters, constant/identity weight matrices,
 zero biases, normalization parameters, buffers, and unknown custom parameters.
+It also preserves parameters the host re-initialized away from the standard
+PyTorch scale (`xavier_uniform_`, `kaiming_*`, a manual rescale): only tensors
+whose realized mean square is a plausible draw of the standard declaration
+(within 8 sampling standard deviations) are replaced.
 Embedding padding rows remain zero. Materialize lazy layers first. Custom
 layer scales, fused layouts, parametrized weights, and arbitrary user-defined
 parameters require caller initialization. This is not a guarantee that every

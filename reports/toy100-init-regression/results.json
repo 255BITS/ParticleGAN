@@ -1,0 +1,886 @@
+{
+ "fix_scale": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 70,
+   "hq": 0.66025,
+   "first_100_modes_step": null,
+   "max_grad": 9.988640785217285,
+   "modes_at": {
+    "500": 0,
+    "750": 0,
+    "1000": 10,
+    "1500": 40,
+    "3000": 58
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.3365867343983644
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.0034173702459794
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.0034519350567723
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.454437880190888
+    },
+    "ema_matches_D": true
+   },
+   "desc": "rejected fix: QR at the host's realized per-layer RMS (scale-honoring direct API)"
+  },
+  "rotated100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.987,
+   "first_100_modes_step": 750,
+   "max_grad": 3.878246784210205,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.3365867343983644
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.0034173702459794
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.0034519350567723
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.454437880190888
+    },
+    "ema_matches_D": true
+   },
+   "desc": "rejected fix: QR at the host's realized per-layer RMS (scale-honoring direct API)"
+  },
+  "staggered100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.9881,
+   "first_100_modes_step": 750,
+   "max_grad": 3.636929988861084,
+   "modes_at": {
+    "500": 1,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.3365867343983644
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.0034173702459794
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.0034519350567723
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.454437880190888
+    },
+    "ema_matches_D": true
+   },
+   "desc": "rejected fix: QR at the host's realized per-layer RMS (scale-honoring direct API)"
+  }
+ },
+ "hook": {
+  "grid100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.9846,
+   "first_100_modes_step": 750,
+   "max_grad": 3.9650235176086426,
+   "modes_at": {
+    "500": 7,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11867816746234894,
+     "sn": 1.3426901902690422
+    },
+    "L1": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000365137707
+    },
+    "L2": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000341300097
+    },
+    "L3": {
+     "rms": 0.12451455742120743,
+     "sn": 1.4087214400036867
+    },
+    "ema_matches_D": false
+   },
+   "desc": "develop's registry hook --init batch_feature_zero (xavier-RMS QR + R2 prior)"
+  },
+  "rotated100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 2,
+   "hq": 0.0613,
+   "first_100_modes_step": 750,
+   "max_grad": 16.361515045166016,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 2,
+    "3000": 2
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11867816746234894,
+     "sn": 1.3426901902690422
+    },
+    "L1": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000365137707
+    },
+    "L2": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000341300097
+    },
+    "L3": {
+     "rms": 0.12451455742120743,
+     "sn": 1.4087214400036867
+    },
+    "ema_matches_D": false
+   },
+   "desc": "develop's registry hook --init batch_feature_zero (xavier-RMS QR + R2 prior)"
+  },
+  "staggered100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.99005,
+   "first_100_modes_step": 750,
+   "max_grad": 3.798816680908203,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11867816746234894,
+     "sn": 1.3426901902690422
+    },
+    "L1": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000365137707
+    },
+    "L2": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000341300097
+    },
+    "L3": {
+     "rms": 0.12451455742120743,
+     "sn": 1.4087214400036867
+    },
+    "ema_matches_D": false
+   },
+   "desc": "develop's registry hook --init batch_feature_zero (xavier-RMS QR + R2 prior)"
+  }
+ },
+ "new_hid_old_ro": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 97,
+   "hq": 0.93115,
+   "first_100_modes_step": null,
+   "max_grad": 7.461049556732178,
+   "modes_at": {
+    "500": 0,
+    "750": 38,
+    "1000": 91,
+    "1500": 95,
+    "3000": 96
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "new L0-L2 + old xavier readout"
+  },
+  "staggered100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.99005,
+   "first_100_modes_step": 750,
+   "max_grad": 2.6042518615722656,
+   "modes_at": {
+    "500": 3,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "new L0-L2 + old xavier readout"
+  }
+ },
+ "new_r2prior": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 99,
+   "hq": 0.97065,
+   "first_100_modes_step": null,
+   "max_grad": 3.970881938934326,
+   "modes_at": {
+    "500": 0,
+    "750": 90,
+    "1000": 99,
+    "1500": 99,
+    "3000": 99
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "new D + R2 re-spaced prior (the hook's prior)"
+  },
+  "staggered100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 55,
+   "hq": 0.5778,
+   "first_100_modes_step": null,
+   "max_grad": 4.952755928039551,
+   "modes_at": {
+    "500": 0,
+    "750": 2,
+    "1000": 10,
+    "1500": 31,
+    "3000": 46
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "new D + R2 re-spaced prior (the hook's prior)"
+  }
+ },
+ "old": {
+  "grid100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.98755,
+   "first_100_modes_step": 750,
+   "max_grad": 5.680172920227051,
+   "modes_at": {
+    "500": 8,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "old init: xavier_uniform random, zero bias (legacy pin kept)"
+  },
+  "staggered100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.98495,
+   "first_100_modes_step": 750,
+   "max_grad": 5.605926990509033,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "old init: xavier_uniform random, zero bias (legacy pin kept)"
+  }
+ },
+ "old_hid_new_ro": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 99,
+   "hq": 0.96,
+   "first_100_modes_step": null,
+   "max_grad": 2.9776289463043213,
+   "modes_at": {
+    "500": 0,
+    "750": 86,
+    "1000": 97,
+    "1500": 98,
+    "3000": 99
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "old xavier L0-L2 + new QR readout"
+  },
+  "staggered100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 88,
+   "hq": 0.7751,
+   "first_100_modes_step": null,
+   "max_grad": 6.386519432067871,
+   "modes_at": {
+    "500": 0,
+    "750": 10,
+    "1000": 34,
+    "1500": 66,
+    "3000": 76
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "old xavier L0-L2 + new QR readout"
+  }
+ },
+ "qr_xavier": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 65,
+   "hq": 0.61395,
+   "first_100_modes_step": null,
+   "max_grad": 5.547124862670898,
+   "modes_at": {
+    "500": 0,
+    "750": 2,
+    "1000": 8,
+    "1500": 21,
+    "3000": 41
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11867816746234894,
+     "sn": 1.3426901902690422
+    },
+    "L1": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000365137707
+    },
+    "L2": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000341300097
+    },
+    "L3": {
+     "rms": 0.12451455742120743,
+     "sn": 1.4087214400036867
+    },
+    "ema_matches_D": true
+   },
+   "desc": "QR (same keys) at the host's xavier RMS per layer"
+  },
+  "staggered100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.98925,
+   "first_100_modes_step": 750,
+   "max_grad": 3.8289544582366943,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11867816746234894,
+     "sn": 1.3426901902690422
+    },
+    "L1": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000365137707
+    },
+    "L2": {
+     "rms": 0.0883883461356163,
+     "sn": 1.0000000341300097
+    },
+    "L3": {
+     "rms": 0.12451455742120743,
+     "sn": 1.4087214400036867
+    },
+    "ema_matches_D": true
+   },
+   "desc": "QR (same keys) at the host's xavier RMS per layer"
+  }
+ },
+ "rand_default": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "PASS",
+   "accuracy": "FAIL",
+   "modes": 100,
+   "hq": 0.9838,
+   "first_100_modes_step": 750,
+   "max_grad": 2.118741989135742,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15360194444656372,
+     "sn": 2.1443331666089125
+    },
+    "L1": {
+     "rms": 0.05120542645454407,
+     "sn": 1.152412618696698
+    },
+    "L2": {
+     "rms": 0.05120718851685524,
+     "sn": 1.126854572564008
+    },
+    "L3": {
+     "rms": 0.05268711596727371,
+     "sn": 0.5960866713526611
+    },
+    "ema_matches_D": true
+   },
+   "desc": "old xavier draw rescaled to torch-default RMS per layer"
+  },
+  "staggered100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 94,
+   "hq": 0.8059,
+   "first_100_modes_step": null,
+   "max_grad": 4.928162574768066,
+   "modes_at": {
+    "500": 0,
+    "750": 6,
+    "1000": 25,
+    "1500": 58,
+    "3000": 76
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15360194444656372,
+     "sn": 2.1443331666089125
+    },
+    "L1": {
+     "rms": 0.05120542645454407,
+     "sn": 1.152412618696698
+    },
+    "L2": {
+     "rms": 0.05120718851685524,
+     "sn": 1.126854572564008
+    },
+    "L3": {
+     "rms": 0.05268711596727371,
+     "sn": 0.5960866713526611
+    },
+    "ema_matches_D": true
+   },
+   "desc": "old xavier draw rescaled to torch-default RMS per layer"
+  }
+ },
+ "recipe": {
+  "grid100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 100,
+   "hq": 0.9543,
+   "first_100_modes_step": 2500,
+   "max_grad": 2.9153573513031006,
+   "modes_at": {
+    "500": 0,
+    "750": 92,
+    "1000": 99,
+    "1500": 99,
+    "3000": 99
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "public path on develop: recipe.initialization='batch_feature_zero'"
+  },
+  "rotated100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 2,
+   "hq": 0.031,
+   "first_100_modes_step": 750,
+   "max_grad": 22.493698120117188,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 0,
+    "1500": 1,
+    "3000": 1
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "public path on develop: recipe.initialization='batch_feature_zero'"
+  },
+  "staggered100": {
+   "gate": "FAIL",
+   "coverage": "FAIL",
+   "accuracy": "FAIL",
+   "modes": 44,
+   "hq": 0.46955,
+   "first_100_modes_step": null,
+   "max_grad": 8.48009204864502,
+   "modes_at": {
+    "500": 0,
+    "750": 0,
+    "1000": 3,
+    "1500": 14,
+    "3000": 29
+   },
+   "init": {
+    "L0": {
+     "rms": 0.15430335700511932,
+     "sn": 1.7457431446186382
+    },
+    "L1": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502896941729
+    },
+    "L2": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502895770031
+    },
+    "L3": {
+     "rms": 0.05103103443980217,
+     "sn": 0.5773502699671207
+    },
+    "ema_matches_D": true
+   },
+   "desc": "public path on develop: recipe.initialization='batch_feature_zero'"
+  }
+ },
+ "recipe_fixed": {
+  "grid100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.98755,
+   "first_100_modes_step": 750,
+   "max_grad": 5.680172920227051,
+   "modes_at": {
+    "500": 8,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "THE FIX: public path; initialize_ keeps host-initialized (non-default-scale) weights"
+  },
+  "rotated100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.98675,
+   "first_100_modes_step": 750,
+   "max_grad": 5.274232387542725,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "THE FIX: public path; initialize_ keeps host-initialized (non-default-scale) weights"
+  },
+  "staggered100": {
+   "gate": "PASS",
+   "coverage": "PASS",
+   "accuracy": "PASS",
+   "modes": 100,
+   "hq": 0.98495,
+   "first_100_modes_step": 750,
+   "max_grad": 5.605926990509033,
+   "modes_at": {
+    "500": 0,
+    "750": 100,
+    "1000": 100,
+    "1500": 100,
+    "3000": 100
+   },
+   "init": {
+    "L0": {
+     "rms": 0.11813869327306747,
+     "sn": 1.6492546622110558
+    },
+    "L1": {
+     "rms": 0.08869040012359619,
+     "sn": 1.99603724142204
+    },
+    "L2": {
+     "rms": 0.08869346231222153,
+     "sn": 1.951769404261692
+    },
+    "L3": {
+     "rms": 0.12855535745620728,
+     "sn": 1.4544378790073977
+    },
+    "ema_matches_D": true
+   },
+   "desc": "THE FIX: public path; initialize_ keeps host-initialized (non-default-scale) weights"
+  }
+ }
+}

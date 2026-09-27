@@ -23,6 +23,10 @@ The recipe now defaults to `initialization="batch_feature_zero"`. Its
 and EMA setup; `GANTrainer` uses that same path. `make_prior` gives learnable
 particle tables an R2 cloud before any MoG calibration. Supplied priors are kept.
 For pretrained/custom weights, use `get_recipe(initialization=None)`.
+Weights a host re-initialized at a non-default scale (for example the
+`xavier_uniform_` MLPs of `examples/100gaussians.py` and `benchmarks/toy100`)
+are kept by the direct API; see
+[the toy100 regression report](../reports/toy100-init-regression/README.md).
 
 For a standalone network and any optimizer:
 

@@ -54,6 +54,23 @@ def _keep_constant(parameter):
                                                 device=parameter.device, dtype=parameter.dtype)))
 
 
+def _host_initialized(parameter, tag, sigmas=8.0):
+    """True when a fresh tensor is not a draw from its standard PyTorch declaration.
+
+    A host that re-initialized a weight (``xavier_uniform_``, ``kaiming_*``, a
+    manual rescale) chose its scale; replacing it at the PyTorch default RMS can
+    silently shrink a network (4x smaller input gradients for the xavier toy100
+    critic). The realized mean square of a default draw has relative standard
+    deviation sqrt(0.8/n) (symmetric uniform) or sqrt(2/n) (zero-mean normal);
+    anything more than ``sigmas`` of those away from the declared RMS is kept.
+    """
+    rms = _qr._declared_rms_mean_std(tag)[0]
+    if rms == 0:
+        return False
+    ratio = float(parameter.detach().double().square().mean()) / rms**2
+    return abs(ratio - 1) > sigmas * math.sqrt((.8 if tag[0] == "uniform" else 2.) / parameter.numel())
+
+
 @torch.no_grad()
 def _initialize(module, *, key=0, only_new=False):
     if not isinstance(module, nn.Module):
@@ -74,7 +91,7 @@ def _initialize(module, *, key=0, only_new=False):
             continue
         child, name, tag = owners[id(parameter)]
         setattr(parameter, _MARK, True)
-        if _keep_constant(parameter):
+        if _keep_constant(parameter) or _host_initialized(parameter, tag):
             continue
         tensor_key = _qr._key(key, index, tuple(parameter.shape))
         if name == "bias":
@@ -105,7 +122,9 @@ def initialize_(module: nn.Module, *, key: int = 0) -> nn.Module:
     CPU QR at standard PyTorch RMS scales; random linear/conv biases use a
     deterministic pattern. BatchDistanceDiscriminator's batch readout starts
     at zero. Frozen parameters, constant/identity matrices, zero biases,
-    normalization parameters, buffers, and unknown custom parameters are kept.
+    parameters the host re-initialized away from the PyTorch default scale
+    (e.g. ``xavier_uniform_``), normalization parameters, buffers, and unknown
+    custom parameters are kept.
     No RNG state is consumed and no optimizer or global hooks are involved.
 
     ``key`` distinguishes networks without using a random seed. The recipe

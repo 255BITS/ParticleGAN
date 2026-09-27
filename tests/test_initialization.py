@@ -88,6 +88,29 @@ def test_matrix_gram_and_declared_scale(layer):
                                atol=1e-14, rtol=1e-13)
 
 
+def test_host_reinitialized_weights_are_kept_default_draws_replaced():
+    # examples/100gaussians.py and benchmarks/toy100 xavier-initialize their MLPs;
+    # replacing those at the PyTorch default RMS shrank the toy100 critic 4x.
+    torch.manual_seed(0)
+    net = nn.Sequential(nn.Linear(14, 128), nn.LeakyReLU(), nn.Linear(128, 128), nn.Linear(128, 1))
+    nn.init.xavier_uniform_(net[0].weight)
+    nn.init.kaiming_normal_(net[3].weight)
+    with torch.no_grad():
+        net[2].weight.mul_(.1)
+    custom = {i: net[i].weight.clone() for i in (0, 2, 3)}
+    default = [net[i].bias.clone() for i in (0, 2, 3)]
+    initialize_(net)
+    for i, saved in custom.items():
+        assert torch.equal(net[i].weight, saved), i
+    assert all(not torch.equal(a, b) for a, b in zip(default, (net[i].bias for i in (0, 2, 3))))
+    # Default draws of any size stay in the replaced set (tiny tensors included).
+    for shape in ((1, 1), (2, 1), (1, 128), (128, 14), (512, 512)):
+        layer = nn.Linear(shape[1], shape[0])
+        before = layer.weight.clone()
+        initialize_(layer)
+        assert not torch.equal(before, layer.weight), shape
+
+
 def test_transformer_layers_and_lora_preserve_special_parameters():
     first = initialize_(nn.TransformerEncoderLayer(8, 2, dim_feedforward=16).double())
     second = initialize_(nn.TransformerEncoderLayer(8, 2, dim_feedforward=16).double())
