@@ -217,16 +217,17 @@ def rate_action(trainer, completed):
                 lr_g=rates[0], lr_prior=rates[1], lr_d=rates[2])
 
 
-def run_vector(spec, card, base):
+def run_vector(spec, card, base, *, log_path=None):
     """The declared default on the shared runner (``vector_tasks.VectorTask``).
 
     The problem is the frozen host's data, networks and metrics; ``base`` at
     the task's shape is the recipe whose factories build everything else.
+    ``log_path`` gets one JSON line per observation (``tail -f``).
     """
     from . import vector_tasks
     torch.set_num_threads(1)
     recipe = host_recipe(base, spec)
-    result = vector_tasks.train(vector_tasks.VectorTask(spec, card), recipe)
+    result = vector_tasks.train(vector_tasks.VectorTask(spec, card), recipe, log_path=log_path)
     context = dict(applied=result.pop('applied'), shapes=result.pop('shapes'), host_recipe=recipe)
     return result, context
 
@@ -348,7 +349,8 @@ def run(output, *, tasks=None, require_installed_root=None):
         started = time.perf_counter()
         try:
             if spec['runner'] == 'vector':
-                result, context = run_vector(spec, card, base)
+                result, context = run_vector(spec, card, base,
+                                             log_path=output/'logs'/f"{spec['name']}.jsonl")
             elif spec['runner'] == 'image':
                 result, context = run_image(spec, base)
             else:

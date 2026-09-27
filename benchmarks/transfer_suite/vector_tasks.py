@@ -22,15 +22,27 @@ import torch
 from benchmarks.gan_v3 import gan_v3_recipe
 from benchmarks.locked_shared.observation import checkpoint, recording, sustained
 from benchmarks.toy100.device import host_device
-from benchmarks.toy_runner import Networks, ToyProblem, run
+from benchmarks.toy_runner import Networks, ToyProblem, ToyRun, run
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
 from particlegan import get_recipe, init
 from particlegan.training import output_noise_std
 
-# Nothing here reads this name; compare_defaults.optimizer_defaults (a core
-# file) still patches it for the frozen LR-control research.
-FixedControl = None
+
+
+class _RecipeOwnsRates:
+    """No LR controller runs on this host: the recipe-built optimizers own the rates."""
+
+    def __repr__(self):
+        return "RECIPE_OWNS_RATES"
+
+
+RECIPE_OWNS_RATES = _RecipeOwnsRates()
+# Research harnesses (compare_defaults.optimizer_defaults, compare_formulations'
+# audit) patch this name to set or read per-group rates from a controller. No
+# controller runs here, so ``train`` refuses when it has been replaced instead
+# of silently recording nothing; read ``result["applied"]`` / ``["actions"]``.
+FixedControl = RECIPE_OWNS_RATES
 
 OBSERVATIONS = 24
 EVAL_SAMPLES = 4096
@@ -219,9 +231,10 @@ class VectorTask(ToyProblem):
 
     def __init__(self, spec, card=None, *, allow_reserved=False):
         self.spec = resolve(spec, allow_reserved=allow_reserved)
-        if self.spec.get("scale_start", 1.) != 1. or self.spec.get("scale_end", 1.) != 1.:
-            raise ValueError("a ramped target scale is not expressible on the shared runner "
-                             "(it has a one-shot shift, not a per-step target)")
+        self.ramped = self.spec.get("scale_start", 1.) != 1. or self.spec.get("scale_end", 1.) != 1.
+        # Updates completed so far; ``train``'s per-update observer advances it
+        # so a ramped target moves exactly as the frozen per-step host's did.
+        self.completed = None
         if self.spec["d_every"] != 1 or self.spec["g_every"] != 1:
             raise ValueError("the shared runner performs one critic and one generator update per step")
         self.card, self.name = card, self.spec["name"]
@@ -239,11 +252,21 @@ class VectorTask(ToyProblem):
         prior = init.deterministic_orthogonal_(recipe.make_prior(), seed=seed)
         return Networks(generator=generator, critics=critic, prior=prior)
 
+    def _clock(self, offset):
+        """The host's ``completed`` count: ``offset=1`` while an update is in flight."""
+        if self.completed is None:
+            if self.ramped:
+                raise RuntimeError(f"{self.name}: the target ramps per update; run it through "
+                                   "vector_tasks.train, whose observer advances the target clock "
+                                   "(the bare toy_runner CLI has no per-update hook)")
+            return 0  # stationary target: the scale is 1 at every step
+        return self.completed + offset
+
     def real(self, n, stream):
-        return sample_target(self.spec, n, stream, 0)
+        return sample_target(self.spec, n, stream, self._clock(1))
 
     def metrics(self, model):
-        return score_samples(model.sample(EVAL_SAMPLES).x, self.spec, self.spec["steps"])
+        return score_samples(model.sample(EVAL_SAMPLES).x, self.spec, self._clock(0))
 
     def verdict(self, metrics):
         return "PASS" if passes(metrics, self.spec["thresholds"]) else "FAIL"
@@ -299,6 +322,29 @@ def _groups(toy):
             ("d", opt_d, opt_d.param_groups[0]))
 
 
+def _refuse_patched_hosts():
+    """Fail closed when a research harness patched a rate controller or Adam itself.
+
+    Such patches were written for the frozen host's own ``torch.optim.Adam``
+    and ``FixedControl``. On the shared runner nothing reads ``FixedControl``
+    (a patch would record ``applied=[]`` and drop any LR policy it carries),
+    and the recipe-built K3P optimizers subclass ``torch.optim.Adam``, so a
+    patched ``Adam.step`` would wrap only their inner Adam update, inside the
+    K3P step-time machinery -- an unmeasured change, refused instead.
+    """
+    if FixedControl is not RECIPE_OWNS_RATES:
+        raise RuntimeError("vector_tasks.FixedControl was patched (e.g. compare_defaults.optimizer_defaults "
+                           "or an audit controller), but no controller runs on the shared runner: the "
+                           "recipe-built optimizers own the rates. Declare them in the recipe and read "
+                           "result['applied'] / result['actions'] instead")
+    for name in ("__init__", "step"):
+        method = getattr(torch.optim.Adam, name)
+        if (method.__module__, method.__qualname__) != ("torch.optim.adam", f"Adam.{name}"):
+            raise RuntimeError(f"torch.optim.Adam.{name} is patched ({method.__module__}.{method.__qualname__}); "
+                               "the recipe-built K3P optimizers subclass Adam, so the patch would change "
+                               "the runner's own optimizer in an unmeasured way")
+
+
 def train(problem, recipe=None, *, log_path=None):
     """Run ``problem`` on the shared runner; the frozen 24-checkpoint result.
 
@@ -307,11 +353,17 @@ def train(problem, recipe=None, *, log_path=None):
     back from the recipe-built optimizers; nothing here sets a rate.
     """
     started = time.perf_counter()
+    _refuse_patched_hosts()
     recipe = problem.recipe() if recipe is None else recipe
     actions, owner = [], {}
+    problem.completed = 0
 
     def observe(step, measure):
-        toy = owner.setdefault("toy", measure.__self__)  # the ToyRun whose measure this is
+        # The runner passes its bound ``ToyRun.measure``; the receipts read that run.
+        toy = owner.setdefault("toy", getattr(measure, "__self__", None))
+        if not isinstance(toy, ToyRun):
+            raise TypeError("the shared runner no longer passes ToyRun.measure to observers")
+        problem.completed = step
         rates = {role: (group["lr"], group["base_lr"]) for role, _, group in _groups(toy)}
         network, prior = (rates[role][0] / rates[role][1] for role in ("g", "prior"))
         action = dict(step=step, multiplier=network)
@@ -326,8 +378,11 @@ def train(problem, recipe=None, *, log_path=None):
                                      output_sigma=output_noise_std(toy.recipe, step - 1)))
         checkpoint(step, lambda: {**measure(), "ema": measure(ema=True)})
 
-    with recording(recipe.total_steps) as recorder:
-        outcome = run(problem, recipe=recipe, observer=observe, log_path=log_path)
+    try:
+        with recording(recipe.total_steps) as recorder:
+            outcome = run(problem, recipe=recipe, observer=observe, log_path=log_path)
+    finally:
+        problem.completed = None
     toy = owner["toy"]
     applied = [dict(role=role, lr=group["base_lr"], betas=list(group["betas"]),
                     parameters=sum(p.numel() for p in group["params"]),

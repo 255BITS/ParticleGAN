@@ -102,8 +102,44 @@ def test_vector_task_declares_only_the_problem():
     assert (recipe.z_dim, recipe.num_particles, recipe.batch_size, recipe.total_steps) == (4, 256, 128, 1200)
     from particlegan import get_recipe
     assert recipe == get_recipe(z_dim=4, num_particles=256, batch_size=128, total_steps=1200)
-    for name in ("vector_scale_drift",):
-        with pytest.raises(ValueError, match="not expressible"):
-            vectors.VectorTask(next(t for t in vectors.TASKS if t["name"] == name))
     with pytest.raises(ValueError, match="one critic and one generator"):
         vectors.VectorTask(dict(vectors.TASKS[0], d_every=2))
+
+
+def _tiny(spec):
+    return dict(spec, steps=24, hidden=8, layers=1, particles=12, batch=16)
+
+
+def test_scale_drift_target_follows_the_frozen_per_update_clock(monkeypatch):
+    monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
+    spec = _tiny(next(x for x in vectors.TASKS if x["family"] == "changing_scale"))
+    problem = vectors.VectorTask(spec)
+    # Without train()'s per-update observer the ramp has no clock: refused.
+    with pytest.raises(RuntimeError, match="ramps per update"):
+        problem.real(4, torch.Generator().manual_seed(0))
+    calls, original = [], vectors.sample_target
+    monkeypatch.setattr(vectors, "sample_target",
+                        lambda s, n, rng, completed: calls.append((n, completed)) or original(s, n, rng, completed))
+    result = vectors.train(problem, vectors.spec_recipe(spec))
+    assert "error" not in result and len(result["observations"]) == 24
+    # As the frozen host: both real batches of update s draw at completed = s,
+    # and every measurement scores the target at the updates completed so far.
+    assert [c for n, c in calls if n == 16] == [s for s in range(1, 25) for _ in (0, 1)]
+    evaluated = [c for n, c in calls if n == 128]
+    assert set(evaluated) == set(range(1, 25)) and evaluated[-1] == 24
+    scales = [point["target_scale"] for point in result["observations"]]
+    assert scales[0] < scales[-1]
+    assert problem.completed is None
+
+
+def test_patched_controller_or_adam_is_refused_not_silently_ignored(monkeypatch):
+    monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
+    spec = _tiny(vectors.TASKS[0])
+    from benchmarks.transfer_suite.compare_defaults import optimizer_defaults
+    from benchmarks.transfer_suite.relative_step_adapter import adapted_steps, mechanism
+    with optimizer_defaults(vectors.spec_recipe(spec), []):
+        result = vectors.run_episode(spec, vectors.fixed_policy(), fixed=True)
+    assert result["status"] == "ERROR" and "FixedControl was patched" in result["error"]
+    with adapted_steps(mechanism(None), {}):
+        result = vectors.run_episode(spec, vectors.fixed_policy(), fixed=True)
+    assert result["status"] == "ERROR" and "Adam.step is patched" in result["error"]
