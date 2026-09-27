@@ -1,0 +1,29 @@
+# arm=nr_dvalcap_hinge task=toy-img_bars4 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START img_bars4 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+0.5386 Lg=+1.1047 pen=0 s=1 lr_d=0.00425 1s
+train     50/600 Ld=+0.6394 Lg=+1.1442 pen=0.0069 s=1 lr_d=0.00425 2s
+train     75/600 Ld=+0.4537 Lg=+1.5874 pen=0.00964 s=1 lr_d=0.00425 2s
+train    100/600 Ld=+0.4234 Lg=+1.4592 pen=0 s=1 lr_d=0.00425 3s
+train    125/600 Ld=+0.5962 Lg=+1.3859 pen=0.00153 s=1 lr_d=0.00425 4s
+train    150/600 Ld=+0.8962 Lg=+1.1440 pen=0.0077 s=1 lr_d=0.00425 4s
+train    175/600 Ld=+0.7489 Lg=+1.0120 pen=0.00458 s=1 lr_d=0.00425 5s
+train    200/600 Ld=+0.6704 Lg=+1.1289 pen=0.0101 s=1 lr_d=0.00425 5s
+train    225/600 Ld=+0.5515 Lg=+1.1041 pen=0.00173 s=1 lr_d=0.00425 6s
+train    250/600 Ld=+0.7649 Lg=+1.0706 pen=0.00169 s=1 lr_d=0.00425 6s
+train    275/600 Ld=+0.8579 Lg=+0.9405 pen=0.002 s=1 lr_d=0.00425 6s
+train    300/600 Ld=+0.4383 Lg=+1.3268 pen=0 s=1 lr_d=0.00425 7s
+train    325/600 Ld=+0.7623 Lg=+1.0027 pen=0.00357 s=1 lr_d=0.00425 7s
+train    350/600 Ld=+0.5938 Lg=+1.0545 pen=0.00209 s=1 lr_d=0.00425 8s
+train    375/600 Ld=+0.6642 Lg=+1.0959 pen=0.00095 s=1 lr_d=0.00425 8s
+train    400/600 Ld=+0.9072 Lg=+0.9207 pen=0.00512 s=1 lr_d=0.00425 9s
+train    425/600 Ld=+0.7627 Lg=+1.0134 pen=0.00413 s=1 lr_d=0.00425 9s
+train    450/600 Ld=+0.7880 Lg=+1.1146 pen=0.0147 s=1 lr_d=0.00425 9s
+train    475/600 Ld=+0.6473 Lg=+1.1846 pen=0.00193 s=1 lr_d=0.00425 10s
+train    500/600 Ld=+0.5674 Lg=+1.2629 pen=0.00208 s=1 lr_d=0.00425 10s
+train    525/600 Ld=+0.5764 Lg=+1.1321 pen=0.00126 s=1 lr_d=0.00425 11s
+train    550/600 Ld=+0.7304 Lg=+1.1071 pen=0.000754 s=1 lr_d=0.00425 11s
+train    575/600 Ld=+0.0309 Lg=+2.3134 pen=0 s=1 lr_d=0.00425 11s
+train    600/600 Ld=+0.0306 Lg=+2.2086 pen=0 s=1 lr_d=0.00425 12s
+{"event": "DONE", "task": "img_bars4", "status": "FAIL", "suffix": 0, "live": {"modes": 1, "hq": 0.21875, "mean_rmse": 0.3902110755443573, "quality_mode_fractions": [0.0, 0.21875, 0.0, 0.0], "mode_fractions": [0.375, 0.375, 0.21875, 0.03125], "distribution_tv": 0.25}, "error": null}
+# DONE toy-img_bars4 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 13s
+# NR receipt spike=dvalcap settle=hinge r1=0.0 loss={'rp_hinge': 600} oadam_steps=0 anchor_active=False penalty_calls=600 stock_calls=0

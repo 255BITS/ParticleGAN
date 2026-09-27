@@ -1,0 +1,29 @@
+# arm=nr_dvalcap_anchor task=toy-vector_unequal_width route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START vector_unequal_width route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.6928 Lg=+0.7920 pen=0.00233 s=1 lr_d=0.00425 3s
+train    100/1200 Ld=+0.6972 Lg=+0.7482 pen=0.000246 s=1 lr_d=0.00425 5s
+train    150/1200 Ld=+0.6962 Lg=+0.7159 pen=0.000235 s=1 lr_d=0.00425 7s
+train    200/1200 Ld=+0.6869 Lg=+0.7173 pen=0.000246 s=1 lr_d=0.00425 8s
+train    250/1200 Ld=+0.7007 Lg=+0.7092 pen=0.000218 s=1 lr_d=0.00425 10s
+train    300/1200 Ld=+0.6879 Lg=+0.7163 pen=0.000253 s=1 lr_d=0.00425 12s
+train    350/1200 Ld=+0.6845 Lg=+0.7030 pen=0.000363 s=1 lr_d=0.00425 14s
+train    400/1200 Ld=+0.6828 Lg=+0.7192 pen=0.000345 s=1 lr_d=0.00425 16s
+train    450/1200 Ld=+0.6831 Lg=+0.6921 pen=0.000287 s=1 lr_d=0.00425 18s
+train    500/1200 Ld=+0.6770 Lg=+0.7177 pen=0.00036 s=1 lr_d=0.00425 20s
+train    550/1200 Ld=+0.6994 Lg=+0.6942 pen=0.000305 s=1 lr_d=0.00425 22s
+train    600/1200 Ld=+0.6871 Lg=+0.7057 pen=0.000321 s=1 lr_d=0.00425 24s
+train    650/1200 Ld=+0.6909 Lg=+0.7086 pen=0.000293 s=1 lr_d=0.00425 26s
+train    700/1200 Ld=+0.6727 Lg=+0.6974 pen=0.000232 s=1 lr_d=0.00425 28s
+train    750/1200 Ld=+0.6854 Lg=+0.7153 pen=0.000206 s=1 lr_d=0.00425 30s
+train    800/1200 Ld=+0.6856 Lg=+0.7067 pen=0.000146 s=1 lr_d=0.00425 32s
+train    850/1200 Ld=+0.6844 Lg=+0.7110 pen=0.000117 s=1 lr_d=0.00425 34s
+train    900/1200 Ld=+0.6868 Lg=+0.6965 pen=9.24e-05 s=1 lr_d=0.00425 36s
+train    950/1200 Ld=+0.6903 Lg=+0.7077 pen=7.43e-05 s=1 lr_d=0.00425 38s
+train   1000/1200 Ld=+0.6870 Lg=+0.7084 pen=5.51e-05 s=1 lr_d=0.00425 39s
+train   1050/1200 Ld=+0.6916 Lg=+0.6910 pen=3.46e-05 s=1 lr_d=0.00425 41s
+train   1100/1200 Ld=+0.6851 Lg=+0.6998 pen=3.27e-05 s=1 lr_d=0.00425 43s
+train   1150/1200 Ld=+0.6920 Lg=+0.7032 pen=2.69e-05 s=1 lr_d=0.00425 45s
+train   1200/1200 Ld=+0.6946 Lg=+0.7033 pen=1.98e-05 s=1 lr_d=0.00425 46s
+{"event": "DONE", "task": "vector_unequal_width", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.08184754084049031, "mean_error": 0.09913914650678635, "covariance_error": 0.03788212686777115, "target_scale": 2.138371229171753, "sample_count": 4096, "mass_tv": 0.04541015625, "min_mass_ratio": 0.841796875, "hq": 0.989013671875, "component_covariance_error": 0.6137042120099068, "component_covariance_errors": [0.9460053443908691, 0.6451520323753357, 0.6002106070518494, 0.2634488642215729], "component_min_eigen_ratio": 0.02826746180653572, "component_mass": [0.249755859375, 0.21044921875, 0.29541015625, 0.244384765625], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [1023, 862, 1210, 1001]}, "error": null}
+# DONE toy-vector_unequal_width status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 48s
+# NR receipt spike=dvalcap settle=anchor r1=0.0 loss={'rp_softplus': 1200} oadam_steps=0 anchor_active=True penalty_calls=1200 stock_calls=0

@@ -1,0 +1,153 @@
+{
+ "arm": "e1_b0.5_d0.9_w1",
+ "spike": "none",
+ "settle": "emar1",
+ "r1_weight_applied": 0.0,
+ "r1_evals": 0,
+ "penalty_patched": true,
+ "penalty_form": "c/2*[w*mean||g_r - beta*gbar_r||^2/d + fake_cap]",
+ "nr_penalty_calls": 80,
+ "stock_k3p_penalty_calls": 0,
+ "term_stats": {
+  "real_rms": {
+   "mean": 0.44072818756103516,
+   "positive_frac": 1.0,
+   "calls": 80
+  },
+  "real": {
+   "mean": 0.09229689836502075,
+   "positive_frac": 1.0,
+   "calls": 80
+  },
+  "fake_cap": {
+   "mean": 0.0,
+   "positive_frac": 0.0,
+   "calls": 80
+  },
+  "ema_rms": {
+   "mean": 0.420379638671875,
+   "positive_frac": 1.0,
+   "calls": 79
+  }
+ },
+ "pathcap_pair_mismatch": 0,
+ "pairsec_rows": 0,
+ "pairsec_no_neighbor": 0,
+ "loss_form": "rp_softplus",
+ "d_loss_calls": {
+  "rp_softplus": 80
+ },
+ "g_loss": "RpGAN softplus (unchanged)",
+ "critic_optimizers": [
+  {
+   "cls": "Adam",
+   "update_rule": "torch.optim.Adam.step",
+   "oadam_steps": 0,
+   "adam_steps": 80,
+   "lr_receipt_steps": 80,
+   "amsgrad": [
+    true
+   ],
+   "betas": [
+    [
+     0.0,
+     0.999
+    ]
+   ],
+   "lr": [
+    0.00425
+   ],
+   "state_keys": [
+    "exp_avg",
+    "exp_avg_sq",
+    "max_exp_avg_sq",
+    "step"
+   ],
+   "guard": true,
+   "guard_reads": {
+    "exp_avg_sq": 316
+   }
+  }
+ ],
+ "oadam_steps": 0,
+ "oadam_steps_non_critic": 0,
+ "guard_reads": {
+  "exp_avg_sq": 316
+ },
+ "anchor_active": true,
+ "anchor_start_step": 1,
+ "anchor_deferred_calls": 0,
+ "kernels": [
+  {
+   "anchor_weight": 1.0,
+   "kappa": 1.0,
+   "coeff": 0.3,
+   "lazy_k": 1,
+   "anchor_started": true,
+   "anchor": "SwapAnchor",
+   "anchor_decay": 0.9,
+   "blend_s": 1.0,
+   "record_steps": 80
+  }
+ ],
+ "noise": {
+  "declared": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "applied": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  }
+ },
+ "lr": {
+  "declared": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "prior_lr_mult": 2.0,
+   "reg_coeff": 0.3
+  },
+  "applied_groups": {
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 80,
+    "amsgrad": true
+   },
+   "opt1.g0": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 80,
+    "amsgrad": true
+   }
+  },
+  "lr_constant": true,
+  "gantrainer_recipes": []
+ },
+ "emar1": {
+  "beta": 0.5,
+  "decay": [
+   0.9
+  ],
+  "weight": [
+   1.0
+  ],
+  "anchor_started": [
+   true
+  ],
+  "anchor_start_step": 1,
+  "ema_evals": 79,
+  "deferred_calls": 1,
+  "real_rms_max": 0.9482797384262085,
+  "real_rms_mean": 0.44072818756103516,
+  "ema_rms_mean": 0.420379638671875,
+  "guard_buffer": "exp_avg_sq"
+ }
+}

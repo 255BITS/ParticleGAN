@@ -1,0 +1,381 @@
+{
+ "arm": "e1_b0.2_d0.999_w1",
+ "task": "native-grid100",
+ "group": "native",
+ "route": "gantrainer",
+ "formulation": "gs2_c03_lr2_d05 with R1 on reals replaced by EMA-centred R1: w * mean ||grad D(r) - beta * grad Dbar(r)||^2 / d, beta 0.2, Dbar = K3P parameter-EMA critic (decay 0.999) forced on from step 0 at constant LR, w 1. Fake one-sided RMS cap unchanged; (reg_coeff/2)-scaled. Spike guard reads exp_avg_sq as in gs2.",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "final modes/HQ",
+  "value": "100/0.977"
+ },
+ "detail": "coverage FAIL accuracy FAIL first100 500 massTV 0.06100000000000001",
+ "exit_code": 1,
+ "raw": {
+  "final": {
+   "hq": 0.97745,
+   "mass_tv": 0.06100000000000001,
+   "max_cov_eig_ratio": 2.402541005504638,
+   "max_mode_mass": 0.0125,
+   "max_radial_median_ratio": 1.5181891158488041,
+   "min_cov_eig_ratio": 0.19892102703898512,
+   "min_hq_count": 110,
+   "min_hq_mode_mass": 0.0055,
+   "min_radial_median_ratio": 0.6466592591131705,
+   "modes": 100,
+   "n": 20000,
+   "passed": false,
+   "precision": 0.97745,
+   "valid_n": 20000
+  },
+  "first_full_coverage": 500,
+  "holdout": {
+   "ema": {
+    "abs_cov_trace_bias": 0.132190119114311,
+    "accuracy_pass": false,
+    "accuracy_score": 1.1861674179082702,
+    "all_finite": true,
+    "center_max_sigma": 0.4384664946576288,
+    "center_rms_sigma": 0.15811488617943303,
+    "cov_frob_rms": 0.3668953328368006,
+    "cov_trace_bias": -0.132190119114311,
+    "frozen_pass": false,
+    "mass_tv": 0.05793999999999999,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.98931,
+    "precision_gap": 0.0004189965382422889,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.06666109531704556,
+    "valid_n": 100000,
+    "within_radius_n": 98931
+   },
+   "live": {
+    "abs_cov_trace_bias": 0.05375462438102374,
+    "accuracy_pass": false,
+    "accuracy_score": 0.9199817411589193,
+    "all_finite": true,
+    "center_max_sigma": 0.7353036453405578,
+    "center_rms_sigma": 0.3204272792155004,
+    "cov_frob_rms": 0.4781854032708495,
+    "cov_trace_bias": -0.05375462438102374,
+    "frozen_pass": false,
+    "mass_tv": 0.05792,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.9774,
+    "precision_gap": 0.011491003461757687,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.022996439656584183,
+    "valid_n": 100000,
+    "within_radius_n": 97740
+   },
+   "target": {
+    "abs_cov_trace_bias": 0.0004259032355904413,
+    "accuracy_pass": true,
+    "accuracy_score": 0.1208307814719265,
+    "all_finite": true,
+    "center_max_sigma": 0.09693988901822922,
+    "center_rms_sigma": 0.04204673098469886,
+    "cov_frob_rms": 0.052380239447918454,
+    "cov_trace_bias": -0.0004259032355904413,
+    "frozen_pass": true,
+    "mass_tv": 0.013510000000000005,
+    "n": 100000,
+    "passed": true,
+    "precision": 0.98861,
+    "precision_gap": 0.00028100346175774504,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.0017465508776656202,
+    "valid_n": 100000,
+    "within_radius_n": 98861
+   }
+  },
+  "stable_pass": null
+ },
+ "seconds": 347.3,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "46c10b8db2a8b99c775024f2f4b8b947ded82cf88190a3c1721a1d936ba51e82",
+  "init_tensors": 11
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ]
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 7000,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 6999,
+   "a2_calls": 7000,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 7000,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0,
+   "nr_penalty_calls": 7000
+  },
+  "final_sha256": "6d32cd64f3ff2e4c658995cb3e70ae2ff2ae753b2abd4aac7122f6ec252dbc6e",
+  "penalty_variant": null,
+  "recipe": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 0.3,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 7000,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.999
+   ],
+   "direct_particle_gain": false,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 0.3,
+   "prior_lr_mult": 2.0
+  }
+ },
+ "nr_receipt": {
+  "arm": "e1_b0.2_d0.999_w1",
+  "spike": "none",
+  "settle": "emar1",
+  "r1_weight_applied": 0.0,
+  "r1_evals": 0,
+  "penalty_patched": true,
+  "penalty_form": "c/2*[w*mean||g_r - beta*gbar_r||^2/d + fake_cap]",
+  "nr_penalty_calls": 7000,
+  "stock_k3p_penalty_calls": 0,
+  "term_stats": {
+   "real_rms": {
+    "mean": 0.02733894348144531,
+    "positive_frac": 1.0,
+    "calls": 7000
+   },
+   "ema_rms": {
+    "mean": 0.09526682826450893,
+    "positive_frac": 1.0,
+    "calls": 7000
+   },
+   "real": {
+    "mean": 0.006511077880859375,
+    "positive_frac": 1.0,
+    "calls": 7000
+   },
+   "fake_cap": {
+    "mean": 0.0009855540820530482,
+    "positive_frac": 0.022285714285714287,
+    "calls": 7000
+   }
+  },
+  "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
+  "loss_form": "rp_softplus",
+  "d_loss_calls": {
+   "rp_softplus": 7000
+  },
+  "g_loss": "RpGAN softplus (unchanged)",
+  "critic_optimizers": [
+   {
+    "cls": "K3PCriticAdam",
+    "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 7000,
+    "lr_receipt_steps": 7000,
+    "amsgrad": [
+     true
+    ],
+    "betas": [
+     [
+      0.0,
+      0.999
+     ]
+    ],
+    "lr": [
+     0.00425
+    ],
+    "state_keys": [
+     "exp_avg",
+     "exp_avg_sq",
+     "max_exp_avg_sq",
+     "step"
+    ],
+    "guard": true,
+    "guard_reads": {
+     "exp_avg_sq": 55992
+    }
+   }
+  ],
+  "oadam_steps": 0,
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "exp_avg_sq": 55992
+  },
+  "anchor_active": true,
+  "anchor_start_step": 0,
+  "anchor_deferred_calls": 0,
+  "kernels": [
+   {
+    "anchor_weight": 1.0,
+    "kappa": 1.0,
+    "coeff": 0.3,
+    "lazy_k": 1,
+    "anchor_started": true,
+    "anchor": "RobustCriticAnchor",
+    "anchor_decay": 0.999,
+    "blend_s": 1.0,
+    "record_steps": 7000
+   }
+  ],
+  "noise": {
+   "declared": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "applied": {
+    "wrappers": [
+     {
+      "input_wrapper": false,
+      "output_wrapper": false,
+      "recipe_input_noise": 0.0,
+      "recipe_output_noise": 0.0
+     }
+    ]
+   }
+  },
+  "lr": {
+   "declared": {
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 0.3
+   },
+   "applied_groups": {
+    "opt1.g0": {
+     "min": 0.00425,
+     "max": 0.00425,
+     "steps": 7000,
+     "amsgrad": true
+    },
+    "opt0.g0": {
+     "min": 0.0085,
+     "max": 0.0085,
+     "steps": 7000,
+     "amsgrad": true
+    },
+    "opt0.g1": {
+     "min": 0.017,
+     "max": 0.017,
+     "steps": 7000,
+     "amsgrad": true
+    }
+   },
+   "lr_constant": true,
+   "gantrainer_recipes": [
+    {
+     "lr": 0.0085,
+     "d_lr_mult": 0.5,
+     "betas": [
+      0.0,
+      0.999
+     ],
+     "reg_coeff": 0.3,
+     "reg_kappa": 1.0,
+     "lr_floor": 1.0,
+     "network_lr_floor": 1.0,
+     "network_lr_horizon_cap": 1600,
+     "total_steps": 7000,
+     "d_guard_ratio": 5.0,
+     "d_guard_min_steps": 200,
+     "latent_damping_max_rate": 0.5,
+     "reg_anchor_decay": 0.999,
+     "reg_anchor_weight": 1.0,
+     "direct_particle_betas": [
+      0.0,
+      0.999
+     ],
+     "direct_particle_gain": false,
+     "amsgrad": true
+    }
+   ]
+  },
+  "emar1": {
+   "beta": 0.2,
+   "decay": [
+    0.999
+   ],
+   "weight": [
+    1.0
+   ],
+   "anchor_started": [
+    true
+   ],
+   "anchor_start_step": 0,
+   "ema_evals": 7000,
+   "deferred_calls": 0,
+   "real_rms_max": 5.412603855133057,
+   "real_rms_mean": 0.02733894348144531,
+   "ema_rms_mean": 0.09526682826450893,
+   "guard_buffer": "exp_avg_sq"
+  }
+ }
+}

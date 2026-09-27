@@ -22,6 +22,12 @@ choice.
 Depends on torch alone.
 
 Vendored unchanged from ParticleGAN-WorldModel/pwm/oadam.py (2026-08-21).
+
+Addition (2026-09-27, branch k3p-no-r1): an opt-in ``amsgrad`` flag. With
+``amsgrad=False`` (the default) every update is bit-identical to the vendored
+file. With ``amsgrad=True`` the running max of the raw second moment v is kept
+in state ``max_exp_avg_sq`` and the denominator uses its bias-corrected value
+(torch.optim.Adam's AMSGrad convention); the optimistic lookback is unchanged.
 """
 
 from __future__ import annotations
@@ -82,20 +88,28 @@ class OptimisticAdam(torch.optim.Optimizer):
          multiplies both terms. Identical to the paper for a constant lr and
          the well-behaved choice if one is ever scheduled.
 
+    AMSGRAD (opt-in, ``amsgrad=True``; added 2026-09-27): keep
+    vmax_t = max(vmax_{t-1}, v_t) elementwise in state ``max_exp_avg_sq`` and use
+    sqrt(vmax_t / (1 - beta2^t)) + eps as the denominator, torch.optim.Adam's
+    AMSGrad convention (max of the raw v, then bias-corrected). The lookback
+    semantics are unchanged: p_{t-1} is the stored preconditioned step, computed
+    with the denominator of its own step. The raw vmax never decreases.
+
     Supports the subset of the torch.optim.Adam interface a minimax loop
-    needs: per-group lr/betas/eps, and nothing else (no weight decay, no
-    amsgrad, no fused/foreach kernels, no sparse gradients).
+    needs: per-group lr/betas/eps/amsgrad, and nothing else (no weight decay,
+    no fused/foreach kernels, no sparse gradients).
     """
 
     def __init__(self, params, lr: float = 1e-3,
-                 betas: tuple[float, float] = (0.9, 0.999), eps: float = 1e-8):
+                 betas: tuple[float, float] = (0.9, 0.999), eps: float = 1e-8,
+                 amsgrad: bool = False):
         if lr < 0.0:
             raise ValueError(f"invalid lr {lr}")
         if eps < 0.0:
             raise ValueError(f"invalid eps {eps}")
         if not 0.0 <= betas[0] < 1.0 or not 0.0 <= betas[1] < 1.0:
             raise ValueError(f"invalid betas {betas}")
-        super().__init__(params, dict(lr=lr, betas=betas, eps=eps))
+        super().__init__(params, dict(lr=lr, betas=betas, eps=eps, amsgrad=bool(amsgrad)))
 
     @torch.no_grad()
     def step(self, closure=None):
@@ -107,6 +121,7 @@ class OptimisticAdam(torch.optim.Optimizer):
             lr = group["lr"]
             beta1, beta2 = group["betas"]
             eps = group["eps"]
+            amsgrad = bool(group.get("amsgrad", False))
             for p in group["params"]:
                 if p.grad is None:
                     continue
@@ -121,6 +136,8 @@ class OptimisticAdam(torch.optim.Optimizer):
                     state["exp_avg_sq"] = torch.zeros_like(p)
                     # p_0 == 0: at t == 1 the lookback term contributes nothing.
                     state["prev_step"] = torch.zeros_like(p)
+                if amsgrad and "max_exp_avg_sq" not in state:
+                    state["max_exp_avg_sq"] = torch.zeros_like(p)
                 state["step"] += 1
                 t = state["step"]
                 m, v = state["exp_avg"], state["exp_avg_sq"]
@@ -128,6 +145,10 @@ class OptimisticAdam(torch.optim.Optimizer):
 
                 m.mul_(beta1).add_(grad, alpha=1.0 - beta1)
                 v.mul_(beta2).addcmul_(grad, grad, value=1.0 - beta2)
+                if amsgrad:
+                    # vmax_t = max(vmax_{t-1}, v_t); never decreases.
+                    torch.maximum(state["max_exp_avg_sq"], v, out=state["max_exp_avg_sq"])
+                    v = state["max_exp_avg_sq"]
                 # denominator: sqrt(vhat) + eps  (eps OUTSIDE the sqrt)
                 denom = v.div(1.0 - beta2 ** t).sqrt_().add_(eps)
                 cur_step = m.div(1.0 - beta1 ** t).div_(denom)

@@ -1,0 +1,29 @@
+# arm=nr_dvalcap_anchor task=toy-trajectory route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START trajectory route=public primitives custom host + shared noise policy steps=400
+eval    17 identity_mse=0.3967
+eval    34 identity_mse=0.04364
+eval    50 identity_mse=0.008258
+eval    67 identity_mse=0.02344
+eval    84 identity_mse=0.02007
+eval   100 identity_mse=0.009294
+eval   117 identity_mse=0.01639
+eval   134 identity_mse=0.003339
+eval   150 identity_mse=0.00154
+eval   167 identity_mse=0.003863
+eval   184 identity_mse=0.006737
+eval   200 identity_mse=0.008368
+eval   217 identity_mse=0.001883
+eval   234 identity_mse=0.0008865
+eval   250 identity_mse=0.0006038
+eval   267 identity_mse=0.0004398
+eval   284 identity_mse=0.0003198
+eval   300 identity_mse=0.0002186
+eval   317 identity_mse=0.0001863
+eval   334 identity_mse=0.0001467
+eval   350 identity_mse=0.0001189
+eval   367 identity_mse=0.0001028
+eval   384 identity_mse=7.729e-05
+eval   400 identity_mse=6.563e-05
+{"event": "DONE", "task": "trajectory", "status": "PASS", "suffix": 19, "live": {"identity_mse": 6.56301635899581e-05}, "error": null}
+# DONE toy-trajectory status=PASS metric={'name': 'passing suffix', 'value': '19/24'} 6s
+# NR receipt spike=dvalcap settle=anchor r1=0.0 loss={'rp_softplus': 400} oadam_steps=0 anchor_active=True penalty_calls=400 stock_calls=0

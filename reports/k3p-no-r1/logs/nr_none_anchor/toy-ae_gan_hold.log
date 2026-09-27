@@ -1,0 +1,35 @@
+# arm=nr_none_anchor task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2006 hold=1.2818 loss=4.2147
+eval    11 recon_mse=0.03967 hold=0.1627
+eval    21 recon_mse=0.01501 hold=0.1156
+eval    32 recon_mse=0.02206 hold=0.1498
+eval    42 recon_mse=0.02179 hold=0.1435
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0114 hold=0.1114 loss=1.0347
+eval    53 recon_mse=0.006429 hold=0.06222
+eval    63 recon_mse=0.01498 hold=0.0843
+eval    73 recon_mse=0.1419 hold=0.1194
+eval    84 recon_mse=0.005199 hold=0.06247
+eval    94 recon_mse=0.005853 hold=0.03977
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0132 hold=0.0462 loss=0.9065
+eval   105 recon_mse=0.01143 hold=0.08038
+eval   115 recon_mse=0.009757 hold=0.07802
+eval   125 recon_mse=0.007605 hold=0.07568
+eval   136 recon_mse=0.01228 hold=0.1193
+eval   146 recon_mse=0.01483 hold=0.1302
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0088 hold=0.0592 loss=0.8748
+eval   157 recon_mse=0.01084 hold=0.08269
+eval   167 recon_mse=0.01153 hold=0.07387
+eval   178 recon_mse=0.01195 hold=0.05791
+eval   188 recon_mse=0.02299 hold=0.07951
+eval   198 recon_mse=0.01329 hold=0.0719
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0095 hold=0.0826 loss=0.8669
+eval   209 recon_mse=0.00329 hold=0.01727
+eval   219 recon_mse=0.009704 hold=0.01206
+eval   230 recon_mse=0.0089 hold=0.06274
+eval   240 recon_mse=0.009982 hold=0.03061
+eval   250 recon_mse=0.006079 hold=0.05135
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 17, "live": {"recon_mse": 0.006078604143112898, "hold": 0.05135142803192139}, "error": null}
+# DONE toy-ae_gan_hold status=PASS metric={'name': 'passing suffix', 'value': '17/24'} 4s
+# NR receipt spike=none settle=anchor r1=0.0 loss={'rp_softplus': 250} oadam_steps=0 anchor_active=True penalty_calls=250 stock_calls=0

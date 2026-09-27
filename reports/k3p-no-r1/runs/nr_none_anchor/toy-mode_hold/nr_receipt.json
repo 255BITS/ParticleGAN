@@ -1,0 +1,134 @@
+{
+ "arm": "nr_none_anchor",
+ "spike": "none",
+ "settle": "anchor",
+ "r1_weight_applied": 0.0,
+ "r1_evals": 0,
+ "penalty_patched": true,
+ "penalty_form": "c/2*[none + fake_cap + anchor_weight*prox]",
+ "nr_penalty_calls": 1200,
+ "stock_k3p_penalty_calls": 0,
+ "term_stats": {
+  "prox": {
+   "mean": 0.159915771484375,
+   "positive_frac": 0.9983333333333333,
+   "calls": 1200
+  },
+  "spike": {
+   "mean": 0.0,
+   "positive_frac": 0.0,
+   "calls": 1200
+  },
+  "fake_cap": {
+   "mean": 0.08716419855753581,
+   "positive_frac": 0.8108333333333333,
+   "calls": 1200
+  }
+ },
+ "pathcap_pair_mismatch": 0,
+ "pairsec_rows": 0,
+ "pairsec_no_neighbor": 0,
+ "loss_form": "rp_softplus",
+ "d_loss_calls": {
+  "rp_softplus": 1200
+ },
+ "g_loss": "RpGAN softplus (unchanged)",
+ "critic_optimizers": [
+  {
+   "cls": "Adam",
+   "update_rule": "torch.optim.Adam.step",
+   "oadam_steps": 0,
+   "adam_steps": 1200,
+   "lr_receipt_steps": 1200,
+   "amsgrad": [
+    true
+   ],
+   "betas": [
+    [
+     0.0,
+     0.999
+    ]
+   ],
+   "lr": [
+    0.00425
+   ],
+   "state_keys": [
+    "exp_avg",
+    "exp_avg_sq",
+    "max_exp_avg_sq",
+    "step"
+   ],
+   "guard": true,
+   "guard_reads": {
+    "max_exp_avg_sq": 9592
+   }
+  }
+ ],
+ "oadam_steps": 0,
+ "oadam_steps_non_critic": 0,
+ "guard_reads": {
+  "max_exp_avg_sq": 9592
+ },
+ "anchor_active": true,
+ "anchor_start_step": 1,
+ "anchor_deferred_calls": 1,
+ "kernels": [
+  {
+   "anchor_weight": 1.0,
+   "kappa": 1.0,
+   "coeff": 0.3,
+   "lazy_k": 1,
+   "anchor_started": true,
+   "anchor": "SwapAnchor",
+   "blend_s": 1.0,
+   "record_steps": 1200
+  }
+ ],
+ "noise": {
+  "declared": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "applied": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  }
+ },
+ "lr": {
+  "declared": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "prior_lr_mult": 2.0,
+   "reg_coeff": 0.3
+  },
+  "applied_groups": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 1200,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 1200,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 1200,
+    "amsgrad": true
+   }
+  },
+  "lr_constant": true,
+  "gantrainer_recipes": []
+ }
+}

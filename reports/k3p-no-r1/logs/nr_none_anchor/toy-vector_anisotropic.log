@@ -1,0 +1,29 @@
+# arm=nr_none_anchor task=toy-vector_anisotropic route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START vector_anisotropic route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.4821 Lg=+1.4755 pen=0.0345 s=1 lr_d=0.00425 2s
+train    100/1200 Ld=+0.6603 Lg=+0.8444 pen=0.0161 s=1 lr_d=0.00425 5s
+train    150/1200 Ld=+0.6881 Lg=+0.7622 pen=0.00261 s=1 lr_d=0.00425 7s
+train    200/1200 Ld=+0.7072 Lg=+0.7279 pen=0.00174 s=1 lr_d=0.00425 9s
+train    250/1200 Ld=+0.7107 Lg=+0.7609 pen=0.00117 s=1 lr_d=0.00425 11s
+train    300/1200 Ld=+0.6480 Lg=+0.8259 pen=0.00115 s=1 lr_d=0.00425 14s
+train    350/1200 Ld=+0.6750 Lg=+0.8130 pen=0.00068 s=1 lr_d=0.00425 16s
+train    400/1200 Ld=+0.6372 Lg=+0.7749 pen=0.000707 s=1 lr_d=0.00425 19s
+train    450/1200 Ld=+0.6630 Lg=+0.7975 pen=0.00143 s=1 lr_d=0.00425 21s
+train    500/1200 Ld=+0.6484 Lg=+0.8484 pen=0.00102 s=1 lr_d=0.00425 23s
+train    550/1200 Ld=+0.6383 Lg=+0.8537 pen=0.00118 s=1 lr_d=0.00425 26s
+train    600/1200 Ld=+0.6747 Lg=+0.7665 pen=0.00113 s=1 lr_d=0.00425 28s
+train    650/1200 Ld=+0.6683 Lg=+0.7588 pen=0.000923 s=1 lr_d=0.00425 31s
+train    700/1200 Ld=+0.6890 Lg=+0.7856 pen=0.00053 s=1 lr_d=0.00425 33s
+train    750/1200 Ld=+0.6522 Lg=+0.8096 pen=0.00065 s=1 lr_d=0.00425 35s
+train    800/1200 Ld=+0.6616 Lg=+0.7698 pen=0.000437 s=1 lr_d=0.00425 38s
+train    850/1200 Ld=+0.6552 Lg=+0.7679 pen=0.000659 s=1 lr_d=0.00425 40s
+train    900/1200 Ld=+0.6822 Lg=+0.7643 pen=0.000694 s=1 lr_d=0.00425 42s
+train    950/1200 Ld=+0.6491 Lg=+0.7810 pen=0.000547 s=1 lr_d=0.00425 44s
+train   1000/1200 Ld=+0.6273 Lg=+0.8248 pen=0.000557 s=1 lr_d=0.00425 47s
+train   1050/1200 Ld=+0.6613 Lg=+0.8078 pen=0.000316 s=1 lr_d=0.00425 49s
+train   1100/1200 Ld=+0.6376 Lg=+0.7998 pen=0.000356 s=1 lr_d=0.00425 51s
+train   1150/1200 Ld=+0.6417 Lg=+0.8048 pen=0.00045 s=1 lr_d=0.00425 53s
+train   1200/1200 Ld=+0.6474 Lg=+0.7822 pen=0.00033 s=1 lr_d=0.00425 55s
+{"event": "DONE", "task": "vector_anisotropic", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.15238396136618207, "mean_error": 0.20289191603660583, "covariance_error": 0.26152315735816956, "target_scale": 2.040409564971924, "sample_count": 4096, "mass_tv": 0.1504720002412796, "min_mass_ratio": 0.548583984375, "hq": 0.99169921875, "component_covariance_error": 0.28039688368638355, "component_covariance_errors": [0.19124023616313934, 0.39808839559555054, 0.2518620193004608], "component_min_eigen_ratio": 0.071546271443367, "component_mass": [0.423583984375, 0.182861328125, 0.3935546875], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1735, 749, 1612]}, "error": null}
+# DONE toy-vector_anisotropic status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 57s
+# NR receipt spike=none settle=anchor r1=0.0 loss={'rp_softplus': 1200} oadam_steps=0 anchor_active=True penalty_calls=1200 stock_calls=0

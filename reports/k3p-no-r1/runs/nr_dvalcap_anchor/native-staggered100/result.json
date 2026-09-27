@@ -1,0 +1,356 @@
+{
+ "arm": "nr_dvalcap_anchor",
+ "task": "native-staggered100",
+ "group": "native",
+ "route": "gantrainer",
+ "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: dvalcap: real-logit value cap relu(|D(r) - mean_batch D(r)| - 1)^2. settle: anchor: K3P EMA-critic anchor prox term forced on at constant LR (stock reg_anchor_weight 1, decay .999). Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled.",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "final modes/HQ",
+  "value": "99/0.983"
+ },
+ "detail": "coverage FAIL accuracy FAIL first100 None massTV 0.059500000000000004",
+ "exit_code": 1,
+ "raw": {
+  "final": {
+   "hq": 0.9826,
+   "mass_tv": 0.059500000000000004,
+   "max_cov_eig_ratio": 2.209377316715975,
+   "max_mode_mass": 0.01325,
+   "max_radial_median_ratio": 1.3962139497993362,
+   "min_cov_eig_ratio": 0.01594834301968378,
+   "min_hq_count": 90,
+   "min_hq_mode_mass": 0.0045,
+   "min_radial_median_ratio": 0.3547665383467395,
+   "modes": 99,
+   "n": 20000,
+   "passed": false,
+   "precision": 0.9826,
+   "valid_n": 20000
+  },
+  "first_full_coverage": null,
+  "holdout": {
+   "ema": {
+    "abs_cov_trace_bias": 0.3422384863898721,
+    "accuracy_pass": false,
+    "accuracy_score": 2.376865289807732,
+    "all_finite": true,
+    "center_max_sigma": 0.9888945808809892,
+    "center_rms_sigma": 0.27484902685888596,
+    "cov_frob_rms": 0.5262503045987349,
+    "cov_trace_bias": -0.3422384863898721,
+    "frozen_pass": false,
+    "mass_tv": 0.05269,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.98995,
+    "precision_gap": 0.0010589965382422628,
+    "problem": "staggered100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.1533065797748444,
+    "valid_n": 100000,
+    "within_radius_n": 98995
+   },
+   "live": {
+    "abs_cov_trace_bias": 0.25299169336794736,
+    "accuracy_pass": false,
+    "accuracy_score": 1.919077291132016,
+    "all_finite": true,
+    "center_max_sigma": 1.0793802995167383,
+    "center_rms_sigma": 0.3504410805024372,
+    "cov_frob_rms": 0.5137357662224584,
+    "cov_trace_bias": -0.25299169336794736,
+    "frozen_pass": false,
+    "mass_tv": 0.05269,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.98351,
+    "precision_gap": 0.0053810034617577385,
+    "problem": "staggered100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.10064080646678952,
+    "valid_n": 100000,
+    "within_radius_n": 98351
+   },
+   "target": {
+    "abs_cov_trace_bias": 0.0004259053910541377,
+    "accuracy_pass": true,
+    "accuracy_score": 0.12079699602648855,
+    "all_finite": true,
+    "center_max_sigma": 0.09693588363184877,
+    "center_rms_sigma": 0.04204681221075388,
+    "cov_frob_rms": 0.052380238792159674,
+    "cov_trace_bias": -0.0004259053910541377,
+    "frozen_pass": true,
+    "mass_tv": 0.013510000000000005,
+    "n": 100000,
+    "passed": true,
+    "precision": 0.98861,
+    "precision_gap": 0.00028100346175774504,
+    "problem": "staggered100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.0017411280989990674,
+    "valid_n": 100000,
+    "within_radius_n": 98861
+   }
+  },
+  "stable_pass": null
+ },
+ "seconds": 357.2,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "46c10b8db2a8b99c775024f2f4b8b947ded82cf88190a3c1721a1d936ba51e82",
+  "init_tensors": 11
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ]
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 7000,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 6999,
+   "a2_calls": 7000,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 7000,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0,
+   "nr_penalty_calls": 7000
+  },
+  "final_sha256": "1f6e1abc409fc1cec9db71d64347c023859155f9e13cbc5bee522b6eb843aa95",
+  "penalty_variant": null,
+  "recipe": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 0.3,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 7000,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.999
+   ],
+   "direct_particle_gain": false,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 0.3,
+   "prior_lr_mult": 2.0
+  }
+ },
+ "nr_receipt": {
+  "arm": "nr_dvalcap_anchor",
+  "spike": "dvalcap",
+  "settle": "anchor",
+  "r1_weight_applied": 0.0,
+  "r1_evals": 0,
+  "penalty_patched": true,
+  "penalty_form": "c/2*[dvalcap + fake_cap + anchor_weight*prox]",
+  "nr_penalty_calls": 7000,
+  "stock_k3p_penalty_calls": 0,
+  "term_stats": {
+   "prox": {
+    "mean": 0.042309361049107146,
+    "positive_frac": 0.9998571428571429,
+    "calls": 7000
+   },
+   "spike": {
+    "mean": 7.3331278014978e-10,
+    "positive_frac": 0.00042857142857142855,
+    "calls": 7000
+   },
+   "fake_cap": {
+    "mean": 0.001265089852469308,
+    "positive_frac": 0.29128571428571426,
+    "calls": 7000
+   }
+  },
+  "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
+  "loss_form": "rp_softplus",
+  "d_loss_calls": {
+   "rp_softplus": 7000
+  },
+  "g_loss": "RpGAN softplus (unchanged)",
+  "critic_optimizers": [
+   {
+    "cls": "K3PCriticAdam",
+    "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 7000,
+    "lr_receipt_steps": 7000,
+    "amsgrad": [
+     true
+    ],
+    "betas": [
+     [
+      0.0,
+      0.999
+     ]
+    ],
+    "lr": [
+     0.00425
+    ],
+    "state_keys": [
+     "exp_avg",
+     "exp_avg_sq",
+     "max_exp_avg_sq",
+     "step"
+    ],
+    "guard": true,
+    "guard_reads": {
+     "max_exp_avg_sq": 55992
+    }
+   }
+  ],
+  "oadam_steps": 0,
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "max_exp_avg_sq": 55992
+  },
+  "anchor_active": true,
+  "anchor_start_step": 0,
+  "anchor_deferred_calls": 0,
+  "kernels": [
+   {
+    "anchor_weight": 1.0,
+    "kappa": 1.0,
+    "coeff": 0.3,
+    "lazy_k": 1,
+    "anchor_started": true,
+    "anchor": "RobustCriticAnchor",
+    "blend_s": 1.0,
+    "record_steps": 7000
+   }
+  ],
+  "noise": {
+   "declared": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "applied": {
+    "wrappers": [
+     {
+      "input_wrapper": false,
+      "output_wrapper": false,
+      "recipe_input_noise": 0.0,
+      "recipe_output_noise": 0.0
+     }
+    ]
+   }
+  },
+  "lr": {
+   "declared": {
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 0.3
+   },
+   "applied_groups": {
+    "opt1.g0": {
+     "min": 0.00425,
+     "max": 0.00425,
+     "steps": 7000,
+     "amsgrad": true
+    },
+    "opt0.g0": {
+     "min": 0.0085,
+     "max": 0.0085,
+     "steps": 7000,
+     "amsgrad": true
+    },
+    "opt0.g1": {
+     "min": 0.017,
+     "max": 0.017,
+     "steps": 7000,
+     "amsgrad": true
+    }
+   },
+   "lr_constant": true,
+   "gantrainer_recipes": [
+    {
+     "lr": 0.0085,
+     "d_lr_mult": 0.5,
+     "betas": [
+      0.0,
+      0.999
+     ],
+     "reg_coeff": 0.3,
+     "reg_kappa": 1.0,
+     "lr_floor": 1.0,
+     "network_lr_floor": 1.0,
+     "network_lr_horizon_cap": 1600,
+     "total_steps": 7000,
+     "d_guard_ratio": 5.0,
+     "d_guard_min_steps": 200,
+     "latent_damping_max_rate": 0.5,
+     "reg_anchor_decay": 0.999,
+     "reg_anchor_weight": 1.0,
+     "direct_particle_betas": [
+      0.0,
+      0.999
+     ],
+     "direct_particle_gain": false,
+     "amsgrad": true
+    }
+   ]
+  }
+ }
+}

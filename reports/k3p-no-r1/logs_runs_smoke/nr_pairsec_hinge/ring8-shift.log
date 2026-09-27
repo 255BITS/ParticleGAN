@@ -1,0 +1,34 @@
+# arm=nr_pairsec_hinge task=ring8-shift route=ring particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+# step modes hq pass | Ld Lg pen s | lr G/D/prior | noise in/out | sec
+   10 m=1 hq=0.000 fail | Ld=+1.0202 Lg=+1.2787 pen=0.0394 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 1s
+   20 m=2 hq=0.003 fail | Ld=+0.8343 Lg=+1.5972 pen=0.0857 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 1s
+   30 m=1 hq=0.001 fail | Ld=+0.3234 Lg=+1.5119 pen=0.0374 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 2s
+   40 m=2 hq=0.002 fail | Ld=+0.5424 Lg=+1.5231 pen=0.0797 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 2s
+   50 m=7 hq=0.008 fail | Ld=+0.3265 Lg=+1.4154 pen=0.0607 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 2s
+   60 m=5 hq=0.006 fail | Ld=+0.1643 Lg=+1.3420 pen=0.0715 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 3s
+   70 m=2 hq=0.010 fail | Ld=+0.0676 Lg=+1.6232 pen=0.0156 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 3s
+   80 m=4 hq=0.006 fail | Ld=+0.2058 Lg=+1.9311 pen=0.0297 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 3s
+   90 m=6 hq=0.014 fail | Ld=+0.1751 Lg=+1.5291 pen=0.0442 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 4s
+  100 m=8 hq=0.037 fail | Ld=+0.1301 Lg=+1.4985 pen=0.0532 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 4s
+  110 m=8 hq=0.026 fail | Ld=+0.1961 Lg=+1.6725 pen=0.0222 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 5s
+  120 m=8 hq=0.022 fail | Ld=+0.1304 Lg=+1.5020 pen=0.0421 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 5s
+  130 m=8 hq=0.058 fail | Ld=+0.1450 Lg=+1.4830 pen=0.0617 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 6s
+  140 m=6 hq=0.015 fail | Ld=+0.2209 Lg=+2.0012 pen=0.0301 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 6s
+  150 m=7 hq=0.028 fail | Ld=+0.1217 Lg=+1.5555 pen=0.0284 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 6s
+  160 m=8 hq=0.031 fail | Ld=+0.1220 Lg=+1.5064 pen=0.0396 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 7s
+  170 m=3 hq=0.019 fail | Ld=+0.1133 Lg=+1.6254 pen=0.026 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 8s
+  180 m=5 hq=0.024 fail | Ld=+0.1192 Lg=+1.5495 pen=0.0372 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 8s
+  190 m=4 hq=0.024 fail | Ld=+0.1598 Lg=+1.6365 pen=0.0266 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 8s
+  200 m=5 hq=0.043 fail | Ld=+0.1283 Lg=+1.6409 pen=0.0249 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 9s
+  210 m=8 hq=0.046 fail | Ld=+0.0757 Lg=+1.6510 pen=0.0231 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 9s
+  220 m=3 hq=0.030 fail | Ld=+0.0821 Lg=+1.7572 pen=0.0136 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 10s
+  230 m=6 hq=0.049 fail | Ld=+0.0979 Lg=+1.6471 pen=0.0235 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 10s
+  240 m=6 hq=0.042 fail | Ld=+0.1232 Lg=+1.6110 pen=0.0217 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 11s
+  250 m=6 hq=0.060 fail | Ld=+0.1759 Lg=+1.4941 pen=0.0394 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 11s
+  260 m=6 hq=0.068 fail | Ld=+0.1709 Lg=+1.8220 pen=0.0468 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 11s
+  270 m=5 hq=0.044 fail | Ld=+0.1227 Lg=+2.0071 pen=0.0431 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 12s
+  280 m=4 hq=0.033 fail | Ld=+0.1217 Lg=+1.6002 pen=0.0524 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 12s
+  290 m=5 hq=0.083 fail | Ld=+0.0987 Lg=+1.6357 pen=0.0318 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 13s
+  300 m=3 hq=0.006 fail | Ld=+0.3482 Lg=+1.4348 pen=0.0394 s=1 | lr 0.0085/0.00425/0.017 | noise 0/0 | 13s
+# DONE ring8-shift status=FAIL metric={'name': 'fails outside transit', 'value': None} 14s
+# NR receipt spike=pairsec settle=hinge r1=0.0 loss={'rp_hinge': 300} oadam_steps=0 anchor_active=False penalty_calls=300 stock_calls=0

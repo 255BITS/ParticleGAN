@@ -1,0 +1,539 @@
+{
+ "arm": "e1_b0.8_d0.999_w1",
+ "task": "ring8-shift",
+ "group": "ring8",
+ "route": "ring",
+ "formulation": "gs2_c03_lr2_d05 with R1 on reals replaced by EMA-centred R1: w * mean ||grad D(r) - beta * grad Dbar(r)||^2 / d, beta 0.8, Dbar = K3P parameter-EMA critic (decay 0.999) forced on from step 0 at constant LR, w 1. Fake one-sided RMS cap unchanged; (reg_coeff/2)-scaled. Spike guard reads exp_avg_sq as in gs2.",
+ "steps_override": 300,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "fails outside transit",
+  "value": null
+ },
+ "detail": "no shift in budget",
+ "raw": {
+  "score": null,
+  "recipe": {
+   "name": "k3p",
+   "model": "gan",
+   "z_dim": 2,
+   "num_particles": 20000,
+   "prior_kind": "particles",
+   "sigma_rel": 0.0,
+   "standardize": true,
+   "num_classes": null,
+   "conditioning": "scalar",
+   "ucd_target": "class",
+   "ucd_weight": 0.02,
+   "alpha_bar": [
+    1.0,
+    0.9,
+    0.5,
+    0.05,
+    0.0001
+   ],
+   "batch_size": 2048,
+   "total_steps": 300,
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "prior_lr_mult": 2.0,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "prior_betas": null,
+   "reg_coeff": 0.3,
+   "reg_kappa": 1.0,
+   "reg_every": 1,
+   "prior_reg": 0.0,
+   "ema_decay": 0.995,
+   "lr_anneal_start": 0.6,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_gain": false,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "direct_particle_betas": [
+    0.0,
+    0.999
+   ],
+   "input_noise_std": 0.0,
+   "input_noise_anneal_end": 0.1,
+   "output_noise_std": 0.0,
+   "output_noise_warmup": 0.2,
+   "encoder_mode": "none",
+   "routing_temperature": 0.25,
+   "distance_reduction": "sum",
+   "observation_sigma": 0.03,
+   "reconstruction_weight": 1.0,
+   "amsgrad": true
+  },
+  "points": [
+   {
+    "step": 10,
+    "modes": 0,
+    "hq": 0.0,
+    "pass": false
+   },
+   {
+    "step": 20,
+    "modes": 1,
+    "hq": 0.0009765625,
+    "pass": false
+   },
+   {
+    "step": 30,
+    "modes": 5,
+    "hq": 0.0068359375,
+    "pass": false
+   },
+   {
+    "step": 40,
+    "modes": 6,
+    "hq": 0.017333984375,
+    "pass": false
+   },
+   {
+    "step": 50,
+    "modes": 6,
+    "hq": 0.00634765625,
+    "pass": false
+   },
+   {
+    "step": 60,
+    "modes": 7,
+    "hq": 0.01220703125,
+    "pass": false
+   },
+   {
+    "step": 70,
+    "modes": 6,
+    "hq": 0.010009765625,
+    "pass": false
+   },
+   {
+    "step": 80,
+    "modes": 5,
+    "hq": 0.0146484375,
+    "pass": false
+   },
+   {
+    "step": 90,
+    "modes": 7,
+    "hq": 0.025146484375,
+    "pass": false
+   },
+   {
+    "step": 100,
+    "modes": 8,
+    "hq": 0.0361328125,
+    "pass": false
+   },
+   {
+    "step": 110,
+    "modes": 5,
+    "hq": 0.0400390625,
+    "pass": false
+   },
+   {
+    "step": 120,
+    "modes": 7,
+    "hq": 0.021484375,
+    "pass": false
+   },
+   {
+    "step": 130,
+    "modes": 8,
+    "hq": 0.022705078125,
+    "pass": false
+   },
+   {
+    "step": 140,
+    "modes": 7,
+    "hq": 0.040283203125,
+    "pass": false
+   },
+   {
+    "step": 150,
+    "modes": 8,
+    "hq": 0.02734375,
+    "pass": false
+   },
+   {
+    "step": 160,
+    "modes": 7,
+    "hq": 0.12158203125,
+    "pass": false
+   },
+   {
+    "step": 170,
+    "modes": 3,
+    "hq": 0.036865234375,
+    "pass": false
+   },
+   {
+    "step": 180,
+    "modes": 8,
+    "hq": 0.033935546875,
+    "pass": false
+   },
+   {
+    "step": 190,
+    "modes": 6,
+    "hq": 0.088134765625,
+    "pass": false
+   },
+   {
+    "step": 200,
+    "modes": 6,
+    "hq": 0.077392578125,
+    "pass": false
+   },
+   {
+    "step": 210,
+    "modes": 8,
+    "hq": 0.107421875,
+    "pass": false
+   },
+   {
+    "step": 220,
+    "modes": 8,
+    "hq": 0.17138671875,
+    "pass": false
+   },
+   {
+    "step": 230,
+    "modes": 8,
+    "hq": 0.1181640625,
+    "pass": false
+   },
+   {
+    "step": 240,
+    "modes": 5,
+    "hq": 0.048095703125,
+    "pass": false
+   },
+   {
+    "step": 250,
+    "modes": 7,
+    "hq": 0.10498046875,
+    "pass": false
+   },
+   {
+    "step": 260,
+    "modes": 5,
+    "hq": 0.130859375,
+    "pass": false
+   },
+   {
+    "step": 270,
+    "modes": 5,
+    "hq": 0.15283203125,
+    "pass": false
+   },
+   {
+    "step": 280,
+    "modes": 7,
+    "hq": 0.22607421875,
+    "pass": false
+   },
+   {
+    "step": 290,
+    "modes": 5,
+    "hq": 0.059326171875,
+    "pass": false
+   },
+   {
+    "step": 300,
+    "modes": 4,
+    "hq": 0.08056640625,
+    "pass": false
+   }
+  ]
+ },
+ "seconds": 13.4,
+ "init": {
+  "function": "particlegan.init.deterministic_orthogonal_(G, seed=0), (D, seed=1), (recipe.make_prior())",
+  "init_sha256": "6a095898e591a87b00ba2892dc5a09d7700df3dbfa40bbde2bef6cbb179693a0",
+  "init_tensors": 17
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ]
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 300,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 300,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 300,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 299,
+   "a2_calls": 300,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 300,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0,
+   "nr_penalty_calls": 300
+  },
+  "final_sha256": "0dbabcbd0945c4683bbee80e82561baaff1a82945d4c05c74cf462f48d469d31",
+  "penalty_variant": null,
+  "recipe": {
+   "lr": 0.0085,
+   "d_lr_mult": 0.5,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 0.3,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 300,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.999
+   ],
+   "direct_particle_gain": false,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 0.3,
+   "prior_lr_mult": 2.0
+  }
+ },
+ "nr_receipt": {
+  "arm": "e1_b0.8_d0.999_w1",
+  "spike": "none",
+  "settle": "emar1",
+  "r1_weight_applied": 0.0,
+  "r1_evals": 0,
+  "penalty_patched": true,
+  "penalty_form": "c/2*[w*mean||g_r - beta*gbar_r||^2/d + fake_cap]",
+  "nr_penalty_calls": 300,
+  "stock_k3p_penalty_calls": 0,
+  "term_stats": {
+   "real_rms": {
+    "mean": 0.43321461995442706,
+    "positive_frac": 1.0,
+    "calls": 300
+   },
+   "ema_rms": {
+    "mean": 0.15994314829508463,
+    "positive_frac": 1.0,
+    "calls": 300
+   },
+   "real": {
+    "mean": 0.22938695271809895,
+    "positive_frac": 1.0,
+    "calls": 300
+   },
+   "fake_cap": {
+    "mean": 0.16942882537841797,
+    "positive_frac": 0.9866666666666667,
+    "calls": 300
+   }
+  },
+  "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
+  "loss_form": "rp_softplus",
+  "d_loss_calls": {
+   "rp_softplus": 300
+  },
+  "g_loss": "RpGAN softplus (unchanged)",
+  "critic_optimizers": [
+   {
+    "cls": "K3PCriticAdam",
+    "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 300,
+    "lr_receipt_steps": 300,
+    "amsgrad": [
+     true
+    ],
+    "betas": [
+     [
+      0.0,
+      0.999
+     ]
+    ],
+    "lr": [
+     0.00425
+    ],
+    "state_keys": [
+     "exp_avg",
+     "exp_avg_sq",
+     "max_exp_avg_sq",
+     "step"
+    ],
+    "guard": true,
+    "guard_reads": {
+     "exp_avg_sq": 2392
+    }
+   }
+  ],
+  "oadam_steps": 0,
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "exp_avg_sq": 2392
+  },
+  "anchor_active": true,
+  "anchor_start_step": 0,
+  "anchor_deferred_calls": 0,
+  "kernels": [
+   {
+    "anchor_weight": 1.0,
+    "kappa": 1.0,
+    "coeff": 0.3,
+    "lazy_k": 1,
+    "anchor_started": true,
+    "anchor": "RobustCriticAnchor",
+    "anchor_decay": 0.999,
+    "blend_s": 1.0,
+    "record_steps": 300
+   }
+  ],
+  "noise": {
+   "declared": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "applied": {
+    "wrappers": [
+     {
+      "input_wrapper": false,
+      "output_wrapper": false,
+      "recipe_input_noise": 0.0,
+      "recipe_output_noise": 0.0
+     }
+    ]
+   }
+  },
+  "lr": {
+   "declared": {
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 0.3
+   },
+   "applied_groups": {
+    "opt1.g0": {
+     "min": 0.00425,
+     "max": 0.00425,
+     "steps": 300,
+     "amsgrad": true
+    },
+    "opt0.g0": {
+     "min": 0.0085,
+     "max": 0.0085,
+     "steps": 300,
+     "amsgrad": true
+    },
+    "opt0.g1": {
+     "min": 0.017,
+     "max": 0.017,
+     "steps": 300,
+     "amsgrad": true
+    }
+   },
+   "lr_constant": true,
+   "gantrainer_recipes": [
+    {
+     "lr": 0.0085,
+     "d_lr_mult": 0.5,
+     "betas": [
+      0.0,
+      0.999
+     ],
+     "reg_coeff": 0.3,
+     "reg_kappa": 1.0,
+     "lr_floor": 1.0,
+     "network_lr_floor": 1.0,
+     "network_lr_horizon_cap": 1600,
+     "total_steps": 300,
+     "d_guard_ratio": 5.0,
+     "d_guard_min_steps": 200,
+     "latent_damping_max_rate": 0.5,
+     "reg_anchor_decay": 0.999,
+     "reg_anchor_weight": 1.0,
+     "direct_particle_betas": [
+      0.0,
+      0.999
+     ],
+     "direct_particle_gain": false,
+     "amsgrad": true
+    }
+   ]
+  },
+  "emar1": {
+   "beta": 0.8,
+   "decay": [
+    0.999
+   ],
+   "weight": [
+    1.0
+   ],
+   "anchor_started": [
+    true
+   ],
+   "anchor_start_step": 0,
+   "ema_evals": 300,
+   "deferred_calls": 0,
+   "real_rms_max": 3.1502530574798584,
+   "real_rms_mean": 0.43321461995442706,
+   "ema_rms_mean": 0.15994314829508463,
+   "guard_buffer": "exp_avg_sq"
+  }
+ }
+}
