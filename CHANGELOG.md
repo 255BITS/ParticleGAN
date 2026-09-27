@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **`GANTrainer.sample()` returns clean samples by default.** It previously
+  added the current training output noise; pass `output_noise=True` for that.
+  Training is unchanged (sampling uses only its own stream). The toy100
+  benchmark now scores clean evaluation and holdout draws too (its summary
+  records `"eval_output_noise": "clean"`), so its scores are not directly
+  comparable with earlier runs trained with output noise.
 - **Explicit initialization API, `particlegan.init`**, in the style of
   `torch.nn.init`. `init.deterministic_orthogonal_(module, *, seed=0,
   strict=True)` gives trainable weights deterministic orthogonal matrices at
