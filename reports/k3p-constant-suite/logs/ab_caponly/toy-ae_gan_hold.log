@@ -1,0 +1,34 @@
+# arm=ab_caponly task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2443 hold=1.3589 loss=4.2147
+eval    11 recon_mse=0.3731 hold=0.4132
+eval    21 recon_mse=0.1193 hold=0.03575
+eval    32 recon_mse=0.04522 hold=0.06809
+eval    42 recon_mse=0.0189 hold=0.06146
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0045 hold=0.0546 loss=1.0571
+eval    53 recon_mse=0.006383 hold=0.03835
+eval    63 recon_mse=0.007753 hold=0.04008
+eval    73 recon_mse=0.01348 hold=0.07244
+eval    84 recon_mse=0.02021 hold=0.07963
+eval    94 recon_mse=0.04369 hold=0.04268
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0266 hold=0.0228 loss=0.8448
+eval   105 recon_mse=0.01516 hold=0.02999
+eval   115 recon_mse=0.008208 hold=0.04507
+eval   125 recon_mse=0.009443 hold=0.02861
+eval   136 recon_mse=0.0053 hold=0.03886
+eval   146 recon_mse=0.004267 hold=0.01962
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0056 hold=0.0131 loss=0.7853
+eval   157 recon_mse=0.003743 hold=0.03519
+eval   167 recon_mse=0.004989 hold=0.05335
+eval   178 recon_mse=0.01016 hold=0.02877
+eval   188 recon_mse=0.02112 hold=0.007408
+eval   198 recon_mse=0.01596 hold=0.02814
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0156 hold=0.0411 loss=0.8653
+eval   209 recon_mse=0.009048 hold=0.03658
+eval   219 recon_mse=0.00416 hold=0.0372
+eval   230 recon_mse=0.008773 hold=0.05204
+eval   240 recon_mse=0.004595 hold=0.05393
+eval   250 recon_mse=0.004325 hold=0.04496
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 22, "live": {"recon_mse": 0.004324594512581825, "hold": 0.044956058263778687}, "error": null}
+# DONE toy-ae_gan_hold status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 5s

@@ -1,0 +1,180 @@
+{
+ "arm": "ab_caponly",
+ "task": "toy-vector_two_broad",
+ "group": "toy",
+ "route": "gantrainer",
+ "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty = one-sided RMS cap (kappa 1) on reals and fakes, no R1",
+ "steps_override": null,
+ "status": "PASS",
+ "passed": true,
+ "metric": {
+  "name": "passing suffix",
+  "value": "23/24"
+ },
+ "detail": "confirmed 300 sw1_normalized=0.0814 mass_tv=0.0173 hq=0.982 component_covariance_error=0.206 component_min_eigen_ratio=0.657",
+ "raw": {
+  "verdict": {
+   "status": "PASS",
+   "attempted": true,
+   "passed": true,
+   "metrics": [
+    {
+     "metric": "sw1_normalized",
+     "value": 0.08138223159732194,
+     "op": "<=",
+     "threshold": 0.18,
+     "status": "PASS",
+     "margin": 0.09861776840267805
+    },
+    {
+     "metric": "mass_tv",
+     "value": 0.017333984375,
+     "op": "<=",
+     "threshold": 0.15,
+     "status": "PASS",
+     "margin": 0.132666015625
+    },
+    {
+     "metric": "hq",
+     "value": 0.982177734375,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.13217773437500002
+    },
+    {
+     "metric": "component_covariance_error",
+     "value": 0.20602532476186752,
+     "op": "<=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.6439746752381325
+    },
+    {
+     "metric": "component_min_eigen_ratio",
+     "value": 0.6565885543823242,
+     "op": ">=",
+     "threshold": 0.15,
+     "status": "PASS",
+     "margin": 0.5065885543823242
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 23,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 23,
+    "first_pass_step": 100,
+    "stable_from_step": 100,
+    "stable_from_seconds": 5.71430033800425,
+    "confirmed_step": 300,
+    "confirmed_seconds": 14.59203633404104
+   },
+   "shortfall": 0.0,
+   "confirmation_fraction": 0.25
+  },
+  "ema": "PASS",
+  "noise_applied": true
+ },
+ "seconds": 47.0,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "817be23243d0b1dca8b9cc38e323d8d2d638afc93ec90a8431f5d7a1a2764a85",
+  "init_tensors": 13
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ],
+   "host_policy": {
+    "input_std": null,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": null,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": null
+   }
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 1200,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 1200,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 1200,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 1199,
+   "a2_calls": 1200,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 1200,
+   "guard_clips": 0,
+   "penalty_calls": 1200,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "dcd634c580d26ac85b55104171375c347e988faa68332e0f3141e99c41ad2f56",
+  "penalty_variant": "cap_only",
+  "recipe": {
+   "lr": 0.00425,
+   "d_lr_mult": 1.0,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 1.0,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 1200,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.9
+   ],
+   "direct_particle_gain": true,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 1.0,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

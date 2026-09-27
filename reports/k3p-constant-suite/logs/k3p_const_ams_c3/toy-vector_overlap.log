@@ -1,0 +1,28 @@
+# arm=k3p_const_ams_c3 task=toy-vector_overlap route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_overlap route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.6933 Lg=+0.6933 pen=1.22e-05 s=1 lr_d=0.00425 2s
+train    100/1200 Ld=+0.6938 Lg=+0.6929 pen=8.91e-05 s=1 lr_d=0.00425 3s
+train    150/1200 Ld=+0.6931 Lg=+0.6936 pen=1.35e-05 s=1 lr_d=0.00425 3s
+train    200/1200 Ld=+0.6930 Lg=+0.6930 pen=3.23e-05 s=1 lr_d=0.00425 4s
+train    250/1200 Ld=+0.6932 Lg=+0.6932 pen=1.32e-05 s=1 lr_d=0.00425 5s
+train    300/1200 Ld=+0.6932 Lg=+0.6931 pen=2.9e-06 s=1 lr_d=0.00425 6s
+train    350/1200 Ld=+0.6933 Lg=+0.6931 pen=5.42e-06 s=1 lr_d=0.00425 7s
+train    400/1200 Ld=+0.6933 Lg=+0.6930 pen=8.45e-06 s=1 lr_d=0.00425 8s
+train    450/1200 Ld=+0.6931 Lg=+0.6932 pen=1.12e-06 s=1 lr_d=0.00425 9s
+train    500/1200 Ld=+0.6931 Lg=+0.6931 pen=1.19e-06 s=1 lr_d=0.00425 10s
+train    550/1200 Ld=+0.6932 Lg=+0.6931 pen=3.23e-06 s=1 lr_d=0.00425 11s
+train    600/1200 Ld=+0.6933 Lg=+0.6931 pen=1.52e-06 s=1 lr_d=0.00425 12s
+train    650/1200 Ld=+0.6932 Lg=+0.6932 pen=1.2e-07 s=1 lr_d=0.00425 13s
+train    700/1200 Ld=+0.6931 Lg=+0.6933 pen=3.68e-06 s=1 lr_d=0.00425 14s
+train    750/1200 Ld=+0.6931 Lg=+0.6931 pen=7.78e-08 s=1 lr_d=0.00425 15s
+train    800/1200 Ld=+0.6932 Lg=+0.6931 pen=7.01e-08 s=1 lr_d=0.00425 16s
+train    850/1200 Ld=+0.6931 Lg=+0.6932 pen=4.59e-08 s=1 lr_d=0.00425 17s
+train    900/1200 Ld=+0.6931 Lg=+0.6931 pen=4.35e-08 s=1 lr_d=0.00425 18s
+train    950/1200 Ld=+0.6931 Lg=+0.6932 pen=3.73e-09 s=1 lr_d=0.00425 19s
+train   1000/1200 Ld=+0.6932 Lg=+0.6931 pen=4.95e-08 s=1 lr_d=0.00425 20s
+train   1050/1200 Ld=+0.6932 Lg=+0.6931 pen=1.02e-07 s=1 lr_d=0.00425 20s
+train   1100/1200 Ld=+0.6931 Lg=+0.6931 pen=1.21e-07 s=1 lr_d=0.00425 21s
+train   1150/1200 Ld=+0.6932 Lg=+0.6931 pen=7.84e-08 s=1 lr_d=0.00425 22s
+train   1200/1200 Ld=+0.6931 Lg=+0.6932 pen=3.17e-08 s=1 lr_d=0.00425 23s
+{"event": "DONE", "task": "vector_overlap", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.10484737555980436, "mean_error": 0.15743058919906616, "covariance_error": 0.15258042514324188, "target_scale": 0.8509407043457031, "sample_count": 4096}, "error": null}
+# DONE toy-vector_overlap status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 24s

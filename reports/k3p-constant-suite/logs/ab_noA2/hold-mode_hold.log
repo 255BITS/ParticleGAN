@@ -1,0 +1,128 @@
+# arm=ab_noA2 task=hold-mode_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+eval    50 acq m=1 hq=0.083
+eval   100 acq m=0 hq=0.000
+eval   150 acq m=0 hq=0.000
+eval   200 acq m=2 hq=0.162
+eval   250 acq m=3 hq=0.328
+eval   300 acq m=2 hq=0.160
+eval   350 acq m=1 hq=0.083
+eval   400 acq m=3 hq=0.334
+eval   450 acq m=4 hq=0.591
+eval   500 acq m=6 hq=1.000
+eval   550 acq m=5 hq=0.668
+eval   600 acq m=4 hq=0.667
+eval   650 acq m=0 hq=0.000
+eval   700 acq m=3 hq=0.413
+eval   750 acq m=5 hq=0.838
+eval   800 acq m=7 hq=1.000
+eval   850 acq m=4 hq=0.419
+eval   900 acq m=2 hq=0.327
+eval   950 acq m=1 hq=0.088
+eval  1000 acq m=5 hq=0.748
+eval  1050 acq m=1 hq=0.083
+eval  1100 acq m=5 hq=0.833
+eval  1150 acq m=3 hq=0.745
+eval  1200 acq m=5 hq=1.000
+eval  1250 SETTLING m=5 hq=0.916 hold=0 streak=0
+eval  1300 SETTLING m=4 hq=0.833 hold=0 streak=0
+eval  1350 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1400 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1450 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1500 SETTLING m=3 hq=0.745 hold=0 streak=0
+eval  1550 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1600 SETTLING m=4 hq=0.912 hold=0 streak=0
+eval  1650 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1700 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1750 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1800 SETTLING m=5 hq=0.916 hold=0 streak=0
+eval  1850 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  1900 SETTLING m=5 hq=0.916 hold=0 streak=0
+eval  1950 SETTLING m=4 hq=0.586 hold=0 streak=0
+eval  2000 SETTLING m=5 hq=0.917 hold=0 streak=0
+eval  2050 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2100 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2150 SETTLING m=5 hq=0.835 hold=0 streak=0
+eval  2200 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2250 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2300 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2350 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2400 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2450 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2500 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2550 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2600 SETTLING m=5 hq=0.836 hold=0 streak=0
+eval  2650 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2700 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2750 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2800 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2850 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2900 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  2950 SETTLING m=5 hq=0.754 hold=0 streak=0
+eval  3000 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3050 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3100 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3150 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3200 SETTLING m=4 hq=0.836 hold=0 streak=0
+eval  3250 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3300 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3350 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3400 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3450 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3500 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3550 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3600 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3650 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3700 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3750 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3800 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3850 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3900 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  3950 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4000 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4050 SETTLING m=5 hq=0.916 hold=0 streak=0
+eval  4100 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4150 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4200 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4250 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4300 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4350 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4400 SETTLING m=5 hq=0.912 hold=0 streak=0
+eval  4450 SETTLING m=4 hq=0.666 hold=0 streak=0
+eval  4500 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4550 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4600 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4650 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4700 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4750 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4800 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4850 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4900 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  4950 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5000 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5050 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5100 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5150 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5200 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5250 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5300 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5350 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5400 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5450 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5500 SETTLING m=5 hq=1.000 hold=0 streak=0
+eval  5550 SETTLING m=5 hq=0.912 hold=0 streak=0
+eval  5600 SETTLING m=4 hq=0.833 hold=0 streak=0
+eval  5650 SETTLING m=4 hq=0.829 hold=0 streak=0
+eval  5700 SETTLING m=6 hq=1.000 hold=0 streak=0
+eval  5750 SETTLING m=6 hq=0.750 hold=0 streak=0
+eval  5800 SETTLING m=4 hq=0.587 hold=0 streak=0
+eval  5850 SETTLING m=1 hq=0.078 hold=0 streak=0
+eval  5900 SETTLING m=6 hq=1.000 hold=0 streak=0
+eval  5950 SETTLING m=6 hq=1.000 hold=0 streak=0
+eval  6000 NOT_CONVERGED m=6 hq=1.000 hold=0 streak=0
+eval  6050 NOT_CONVERGED m=6 hq=0.915 hold=0 streak=0
+eval  6100 NOT_CONVERGED m=6 hq=1.000 hold=0 streak=0
+eval  6150 NOT_CONVERGED m=5 hq=0.836 hold=0 streak=0
+eval  6200 NOT_CONVERGED m=6 hq=1.000 hold=0 streak=0
+eval  6250 NOT_CONVERGED m=6 hq=1.000 hold=0 streak=0
+eval  6300 NOT_CONVERGED m=6 hq=1.000 hold=0 streak=0
+# DONE hold-mode_hold status=FAIL metric={'name': 'hold+ext', 'value': '0/1200+0/0'} 418s

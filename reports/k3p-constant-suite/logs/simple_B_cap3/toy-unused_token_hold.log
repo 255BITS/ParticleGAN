@@ -1,0 +1,33 @@
+# arm=simple_B_cap3 task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+eval     9 unused_hold=0.9959 concept_move=0 unused_dist=0.004106 concept_cos=-0.6009 concept_delta_norm=0.1038 scale0_err=0
+eval    17 unused_hold=0.9943 concept_move=0 unused_dist=0.005726 concept_cos=-0.3561 concept_delta_norm=0.1681 scale0_err=0
+eval    25 unused_hold=0.9941 concept_move=0.02942 unused_dist=0.005899 concept_cos=0.1163 concept_delta_norm=0.253 scale0_err=0
+eval    34 unused_hold=0.9929 concept_move=0.1671 unused_dist=0.007131 concept_cos=0.4565 concept_delta_norm=0.366 scale0_err=0
+eval    42 unused_hold=0.9922 concept_move=0.2916 unused_dist=0.007847 concept_cos=0.6457 concept_delta_norm=0.4515 scale0_err=0
+eval    50 unused_hold=0.9921 concept_move=0.3989 unused_dist=0.00793 concept_cos=0.7692 concept_delta_norm=0.5185 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9921 concept=0.3989 unused_dist=0.0079
+eval    59 unused_hold=0.9897 concept_move=0.5027 unused_dist=0.01032 concept_cos=0.8847 concept_delta_norm=0.5682 scale0_err=0
+eval    67 unused_hold=0.9908 concept_move=0.5837 unused_dist=0.009247 concept_cos=0.9729 concept_delta_norm=0.6 scale0_err=0
+eval    75 unused_hold=0.992 concept_move=0.6547 unused_dist=0.007951 concept_cos=0.998 concept_delta_norm=0.656 scale0_err=0
+eval    84 unused_hold=0.9951 concept_move=0.7276 unused_dist=0.00495 concept_cos=0.9995 concept_delta_norm=0.7279 scale0_err=0
+eval    92 unused_hold=0.9961 concept_move=0.7776 unused_dist=0.003919 concept_cos=0.9994 concept_delta_norm=0.7781 scale0_err=0
+eval   100 unused_hold=0.9968 concept_move=0.8191 unused_dist=0.003167 concept_cos=0.9994 concept_delta_norm=0.8196 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9968 concept=0.8191 unused_dist=0.0032
+eval   109 unused_hold=0.9978 concept_move=0.8546 unused_dist=0.002245 concept_cos=0.9998 concept_delta_norm=0.8548 scale0_err=0
+eval   117 unused_hold=0.9983 concept_move=0.8785 unused_dist=0.001717 concept_cos=0.9999 concept_delta_norm=0.8786 scale0_err=0
+eval   125 unused_hold=0.9987 concept_move=0.899 unused_dist=0.00133 concept_cos=1 concept_delta_norm=0.899 scale0_err=0
+eval   134 unused_hold=0.999 concept_move=0.9165 unused_dist=0.001015 concept_cos=1 concept_delta_norm=0.9165 scale0_err=0
+eval   142 unused_hold=0.9992 concept_move=0.9291 unused_dist=0.0008106 concept_cos=1 concept_delta_norm=0.9291 scale0_err=0
+eval   150 unused_hold=0.9979 concept_move=0.9389 unused_dist=0.002091 concept_cos=1 concept_delta_norm=0.9389 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9979 concept=0.9389 unused_dist=0.0021
+eval   159 unused_hold=0.9994 concept_move=0.9493 unused_dist=0.0005855 concept_cos=1 concept_delta_norm=0.9493 scale0_err=0
+eval   167 unused_hold=0.9987 concept_move=0.9568 unused_dist=0.001336 concept_cos=1 concept_delta_norm=0.9568 scale0_err=0
+eval   175 unused_hold=0.9991 concept_move=0.9627 unused_dist=0.0009174 concept_cos=1 concept_delta_norm=0.9627 scale0_err=0
+eval   184 unused_hold=0.9989 concept_move=0.9681 unused_dist=0.001145 concept_cos=1 concept_delta_norm=0.9681 scale0_err=0
+eval   192 unused_hold=0.9981 concept_move=0.9726 unused_dist=0.001869 concept_cos=1 concept_delta_norm=0.9726 scale0_err=0
+eval   200 unused_hold=0.9994 concept_move=0.9762 unused_dist=0.0006487 concept_cos=1 concept_delta_norm=0.9762 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9994 concept=0.9762 unused_dist=0.0006
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 12, "live": {"unused_hold": 0.9993512951768935, "concept_move": 0.9761706008809412}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '12/24'} 2s

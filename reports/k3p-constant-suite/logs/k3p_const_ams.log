@@ -1,0 +1,93 @@
+# 2026-09-26 22:36:42 arm=k3p_const_ams device=cuda:0 tasks=5 steps=1500
+22:37:20 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate SETTLING converged None first_fail None minHQ(hold) None stopped budget | 34s rc=0
+22:37:34 native-grid100             FAIL  final modes/HQ=99/0.955 | coverage None accuracy None first100 None massTV 0.0618 | 48s rc=0
+22:37:54 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=5 hq=1 | 30s rc=0
+# 2026-09-26 22:38:59 arm=k3p_const_ams device=cuda:0 tasks=26 steps=None
+# 2026-09-26 22:39:22 arm=k3p_const_ams device=cuda:0 tasks=26 steps=None
+22:39:25 native-staggered100        FAIL  final modes/HQ=None/nan | coverage FAIL accuracy FAIL first100 None massTV None | 23s rc=0
+22:39:28 native-staggered100        ERROR None=None | FileExistsError: existing run evidence at /home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/reports/k3p-constant-suite/runs/k3p_const_ams/native-s | 2s rc=0
+# 2026-09-26 22:40:13 RESET: lines above invalid (duplicate launcher collision)
+# 2026-09-26 22:40:23 arm=k3p_const_ams device=cuda:0 tasks=26 steps=None
+22:42:27 native-grid100             FAIL  final modes/HQ=99/0.973 | coverage FAIL accuracy FAIL first100 None massTV 0.061450000000000005 | 121s rc=0
+22:42:31 native-rotated100          FAIL  final modes/HQ=100/0.971 | coverage FAIL accuracy FAIL first100 1500 massTV 0.0371 | 125s rc=0
+22:42:37 native-staggered100        FAIL  final modes/HQ=100/0.970 | coverage FAIL accuracy FAIL first100 500 massTV 0.0403 | 132s rc=0
+22:43:31 shift-mode_hold            FAIL  deadline window=0/81 | delay None pre-shift hold 0/120 | 51s rc=0
+22:44:31 ring8-multishift           PASS  fails outside transit=0 | prehold 120/120 arrival +430/+190/+20 departures 0 final HQ 0.991 | 118s rc=0
+22:44:35 toy-two_pole               FAIL  passing suffix=2/24 | confirmed None mean_abs=0.444 grad_med=0.125 | 2s rc=0
+22:44:37 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +430 departures 0 final HQ 0.993 | 64s rc=0
+22:44:41 toy-trajectory             PASS  passing suffix=22/24 | confirmed 117 identity_mse=0.00096 | 3s rc=0
+22:44:43 toy-residual_student       PASS  passing suffix=8/24 | confirmed 350 identity_mse=0.00242 success_rate=1 wrong_pad_rate=0 | 3s rc=0
+22:44:47 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate NOT_CONVERGED converged None first_fail None minHQ(hold) None stopped gate_done_plus_post_window | 136s rc=0
+22:44:47 toy-unipolar               PASS  passing suffix=18/24 | confirmed 184 cover=1 off_caption=2.69e-11 neu_hold=0.999 | 3s rc=0
+22:44:49 toy-ae_gan_hold            PASS  passing suffix=22/24 | confirmed 73 recon_mse=0.0216 hold=0.01 | 2s rc=0
+22:44:51 toy-unused_token_hold      PASS  passing suffix=10/24 | confirmed 159 unused_hold=0.997 concept_move=0.972 | 2s rc=0
+22:44:55 toy-cover_leftover         PASS  passing suffix=11/24 | confirmed 600 u_kept=0.978 content_kept=1 leak_ratio=7.96e-05 pole_rel_err_plus=0.0145 pole_rel_err_minus=0.017 same_dir=0.00294 | 5s rc=0
+22:44:59 toy-mid_scale_identity     PASS  passing suffix=16/24 | confirmed 434 concept_cos_plus=1 concept_cos_minus=1 concept_mag_plus=0.999 concept_mag_minus=1 identity_at_0=0.998 identity_at_mid=0.999 | 8s rc=0
+22:45:03 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=7 hq=1 | 9s rc=0
+22:45:19 toy-vector_two_broad       PASS  passing suffix=21/24 | confirmed 400 sw1_normalized=0.023 mass_tv=0.000732 hq=0.984 component_covariance_error=0.161 component_min_eigen_ratio=0.836 | 22s rc=0
+22:45:29 toy-vector_unequal_width   FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.15 mass_tv=0.118 hq=0.99 component_covariance_error=0.461 component_min_eigen_ratio=0.0626 | 24s rc=0
+22:45:33 toy-vector_unequal_mass    FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.212 mass_tv=0.195 hq=1 component_covariance_error=0.342 component_min_eigen_ratio=2.47e-08 min_mass_ratio=0.281 | 32s rc=0
+22:45:53 toy-vector_anisotropic     PASS  passing suffix=5/24 | confirmed 1200 sw1_normalized=0.143 mass_tv=0.113 hq=0.988 component_covariance_error=0.486 component_min_eigen_ratio=0.258 | 31s rc=0
+22:45:55 toy-vector_overlap         PASS  passing suffix=9/24 | confirmed 1000 sw1_normalized=0.11 mean_error=0.142 covariance_error=0.201 | 22s rc=0
+22:46:01 toy-vector_spiral          PASS  passing suffix=24/24 | confirmed 334 sw1_normalized=0.0458 mean_error=0.0261 covariance_error=0.177 | 25s rc=0
+22:46:07 toy-img_stripes2           PASS  passing suffix=5/24 | confirmed 600 modes=2 hq=1 | 10s rc=0
+22:46:07 toy-img_bars4              FAIL  passing suffix=3/24 | confirmed None modes=4 hq=0.969 | 10s rc=0
+22:46:13 toy-img_blobs4             FAIL  passing suffix=0/24 | confirmed None modes=2 hq=0.719 | 10s rc=0
+22:46:19 toy-img_intensity2         FAIL  passing suffix=0/24 | confirmed None modes=2 hq=0.719 | 9s rc=0
+# 2026-09-26 22:46:19 arm=k3p_const_ams finished
+# 2026-09-26 23:13:27 arm=k3p_const_ams device=cuda:1 tasks=26 steps=400
+# 2026-09-26 23:13:27 arm=k3p_const_ams device=cuda:0 tasks=26 steps=400
+23:13:45 native-grid100             NO_RESULT None=None |  | 18s rc=0
+23:13:45 native-rotated100          NO_RESULT None=None |  | 18s rc=0
+23:13:47 native-rotated100          NO_RESULT None=None |  | 20s rc=0
+23:13:47 native-staggered100        NO_RESULT None=None |  | 20s rc=0
+23:13:47 native-grid100             NO_RESULT None=None |  | 20s rc=0
+23:13:47 native-staggered100        NO_RESULT None=None |  | 20s rc=0
+23:13:57 hold-mode_hold             NO_RESULT None=None |  | 12s rc=0
+23:13:59 hold-mode_hold             NO_RESULT None=None |  | 14s rc=0
+23:14:01 ring8-multishift           NO_RESULT None=None |  | 14s rc=0
+23:14:03 ring8-multishift           NO_RESULT None=None |  | 16s rc=0
+23:14:07 toy-two_pole               NO_RESULT None=None |  | 6s rc=0
+23:14:07 toy-two_pole               NO_RESULT None=None |  | 4s rc=0
+23:14:09 ring8-shift                NO_RESULT None=None |  | 12s rc=0
+23:14:11 ring8-shift                NO_RESULT None=None |  | 12s rc=0
+23:14:13 toy-trajectory             NO_RESULT None=None |  | 6s rc=0
+23:14:13 toy-trajectory             NO_RESULT None=None |  | 6s rc=0
+23:14:15 toy-residual_student       NO_RESULT None=None |  | 6s rc=0
+23:14:17 toy-residual_student       NO_RESULT None=None |  | 6s rc=0
+23:14:21 toy-unipolar               NO_RESULT None=None |  | 8s rc=0
+23:14:21 toy-ae_gan_hold            NO_RESULT None=None |  | 6s rc=0
+23:14:21 toy-unipolar               NO_RESULT None=None |  | 8s rc=0
+23:14:23 toy-ae_gan_hold            NO_RESULT None=None |  | 6s rc=0
+23:14:27 toy-unused_token_hold      NO_RESULT None=None |  | 6s rc=0
+23:14:29 toy-unused_token_hold      NO_RESULT None=None |  | 6s rc=0
+23:14:31 toy-cover_leftover         NO_RESULT None=None |  | 10s rc=0
+23:14:31 toy-cover_leftover         NO_RESULT None=None |  | 10s rc=0
+23:14:39 toy-mid_scale_identity     NO_RESULT None=None |  | 12s rc=0
+23:14:41 toy-mid_scale_identity     NO_RESULT None=None |  | 12s rc=0
+23:14:45 toy-mode_hold              NO_RESULT None=None |  | 14s rc=0
+23:14:45 toy-mode_hold              NO_RESULT None=None |  | 14s rc=0
+23:14:59 shift-mode_hold            NO_RESULT None=None |  | 72s rc=0
+23:15:01 shift-mode_hold            NO_RESULT None=None |  | 74s rc=0
+23:15:17 toy-vector_two_broad       NO_RESULT None=None |  | 36s rc=0
+23:15:19 toy-vector_two_broad       NO_RESULT None=None |  | 40s rc=0
+23:15:33 toy-vector_unequal_mass    NO_RESULT None=None |  | 48s rc=0
+23:15:37 toy-vector_unequal_mass    NO_RESULT None=None |  | 52s rc=0
+23:15:37 toy-vector_unequal_width   NO_RESULT None=None |  | 38s rc=0
+23:15:43 toy-vector_unequal_width   NO_RESULT None=None |  | 42s rc=0
+23:16:03 toy-vector_anisotropic     NO_RESULT None=None |  | 46s rc=0
+23:16:07 toy-vector_anisotropic     NO_RESULT None=None |  | 48s rc=0
+23:16:11 toy-vector_overlap         NO_RESULT None=None |  | 38s rc=0
+23:16:13 toy-vector_overlap         NO_RESULT None=None |  | 36s rc=0
+23:16:15 toy-vector_spiral          NO_RESULT None=None |  | 38s rc=0
+23:16:21 toy-vector_spiral          NO_RESULT None=None |  | 38s rc=0
+23:16:21 toy-img_stripes2           NO_RESULT None=None |  | 18s rc=0
+23:16:23 toy-img_stripes2           NO_RESULT None=None |  | 16s rc=0
+23:16:29 toy-img_bars4              NO_RESULT None=None |  | 16s rc=0
+23:16:29 toy-img_bars4              NO_RESULT None=None |  | 18s rc=0
+23:16:33 toy-img_blobs4             NO_RESULT None=None |  | 18s rc=0
+23:16:37 toy-img_blobs4             NO_RESULT None=None |  | 16s rc=0
+23:16:37 toy-img_intensity2         NO_RESULT None=None |  | 14s rc=0
+# 2026-09-26 23:16:37 arm=k3p_const_ams finished
+23:16:37 toy-img_intensity2         NO_RESULT None=None |  | 16s rc=0
+# 2026-09-26 23:16:37 arm=k3p_const_ams finished

@@ -1,0 +1,28 @@
+# arm=ab_absunits task=toy-trajectory route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START trajectory route=public primitives custom host + shared noise policy steps=400
+eval    17 identity_mse=0.4947
+eval    34 identity_mse=0.4823
+eval    50 identity_mse=0.4766
+eval    67 identity_mse=0.4675
+eval    84 identity_mse=0.4998
+eval   100 identity_mse=0.5361
+eval   117 identity_mse=0.4527
+eval   134 identity_mse=0.5041
+eval   150 identity_mse=0.5224
+eval   167 identity_mse=0.4639
+eval   184 identity_mse=0.4858
+eval   200 identity_mse=0.4607
+eval   217 identity_mse=0.4808
+eval   234 identity_mse=0.4847
+eval   250 identity_mse=0.5058
+eval   267 identity_mse=0.4418
+eval   284 identity_mse=0.4622
+eval   300 identity_mse=0.4827
+eval   317 identity_mse=0.4763
+eval   334 identity_mse=0.5318
+eval   350 identity_mse=0.4547
+eval   367 identity_mse=0.5172
+eval   384 identity_mse=0.507
+eval   400 identity_mse=0.5099
+{"event": "DONE", "task": "trajectory", "status": "FAIL", "suffix": 0, "live": {"identity_mse": 0.509926974773407}, "error": null}
+# DONE toy-trajectory status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 4s

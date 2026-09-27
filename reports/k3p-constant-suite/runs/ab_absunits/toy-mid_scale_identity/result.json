@@ -1,0 +1,195 @@
+{
+ "arm": "ab_absunits",
+ "task": "toy-mid_scale_identity",
+ "group": "toy",
+ "route": "legacy",
+ "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty in L2 units: ||g_r||^2 + relu(||g_f|| - kappa)^2 (no 1/d, 1/sqrt d)",
+ "steps_override": null,
+ "status": "PASS",
+ "passed": true,
+ "metric": {
+  "name": "passing suffix",
+  "value": "13/24"
+ },
+ "detail": "confirmed 534 concept_cos_plus=1 concept_cos_minus=1 concept_mag_plus=1 concept_mag_minus=0.998 identity_at_0=0.982 identity_at_mid=0.999",
+ "raw": {
+  "verdict": {
+   "status": "PASS",
+   "attempted": true,
+   "passed": true,
+   "metrics": [
+    {
+     "metric": "concept_cos_plus",
+     "value": 0.9999064803123474,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.14990648031234743
+    },
+    {
+     "metric": "concept_cos_minus",
+     "value": 0.9999310374259949,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.1499310374259949
+    },
+    {
+     "metric": "concept_mag_plus",
+     "value": 1.0031771659851074,
+     "op": ">=",
+     "threshold": 0.75,
+     "status": "PASS",
+     "margin": 0.2531771659851074
+    },
+    {
+     "metric": "concept_mag_plus",
+     "value": 1.0031771659851074,
+     "op": "<=",
+     "threshold": 1.25,
+     "status": "PASS",
+     "margin": 0.24682283401489258
+    },
+    {
+     "metric": "concept_mag_minus",
+     "value": 0.9981806874275208,
+     "op": ">=",
+     "threshold": 0.75,
+     "status": "PASS",
+     "margin": 0.24818068742752075
+    },
+    {
+     "metric": "concept_mag_minus",
+     "value": 0.9981806874275208,
+     "op": "<=",
+     "threshold": 1.25,
+     "status": "PASS",
+     "margin": 0.25181931257247925
+    },
+    {
+     "metric": "identity_at_0",
+     "value": 0.9824993183868868,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.13249931838688678
+    },
+    {
+     "metric": "identity_at_mid",
+     "value": 0.9986316941546554,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.14863169415465538
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 13,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 13,
+    "first_pass_step": 400,
+    "stable_from_step": 400,
+    "stable_from_seconds": 8.009450496989302,
+    "confirmed_step": 534,
+    "confirmed_seconds": 9.877306109003257
+   },
+   "shortfall": 0.0,
+   "confirmation_fraction": 0.6675
+  },
+  "ema": "N/A",
+  "noise_applied": true
+ },
+ "seconds": 15.0,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "2ad3d15efb40e9acac4877994ef81660fa3c41fde66217ec0d4b6d809c78c010",
+  "init_tensors": 10
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  },
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_betas": [
+     0.0,
+     0.9
+    ],
+    "direct_particle_gain": true,
+    "amsgrad": true
+   },
+   "calls": 3200,
+   "s_last": 1.0,
+   "critic_parameters": 4609,
+   "guard_clipped_tensors": 0,
+   "record": {
+    "lr_max": 0.00425,
+    "lr_last": 0.00425,
+    "anchor_started": false,
+    "calls": 3200,
+    "observed_steps": 800
+   }
+  },
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 800,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 800,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 0,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 800,
+   "guard_clips": 0,
+   "penalty_calls": 3200,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "612781691becaf6e46f7b31f744e921c1a47359a5814ab2f01e1881c0649396e",
+  "penalty_variant": "abs_units",
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 1.0,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

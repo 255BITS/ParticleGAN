@@ -1,0 +1,10 @@
+# arm=ab_nodirect task=hold-mode_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+eval    50 acq m=1 hq=0.083
+eval   100 acq m=0 hq=0.000
+eval   150 acq m=0 hq=0.000
+eval   200 acq m=2 hq=0.162
+eval   250 acq m=3 hq=0.328
+eval   300 acq m=2 hq=0.160
+eval   350 acq m=1 hq=0.083
+eval   400 acq m=3 hq=0.334
+# DONE hold-mode_hold status=FAIL metric={'name': 'hold+ext', 'value': '0/1200+0/0'} 11s

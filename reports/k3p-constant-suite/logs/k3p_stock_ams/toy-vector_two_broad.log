@@ -1,0 +1,28 @@
+# arm=k3p_stock_ams task=toy-vector_two_broad route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_two_broad route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.6930 Lg=+0.6995 pen=0.00432 s=1 lr_d=0.00425 1s
+train    100/1200 Ld=+0.6942 Lg=+0.6932 pen=0.000187 s=1 lr_d=0.00425 2s
+train    150/1200 Ld=+0.6938 Lg=+0.6932 pen=0.000299 s=1 lr_d=0.00425 3s
+train    200/1200 Ld=+0.6925 Lg=+0.6930 pen=0.000125 s=1 lr_d=0.00425 3s
+train    250/1200 Ld=+0.6932 Lg=+0.6936 pen=0.000106 s=1 lr_d=0.00425 4s
+train    300/1200 Ld=+0.6933 Lg=+0.6936 pen=0.000125 s=1 lr_d=0.00425 5s
+train    350/1200 Ld=+0.6931 Lg=+0.6951 pen=3.52e-05 s=1 lr_d=0.00425 5s
+train    400/1200 Ld=+0.6929 Lg=+0.6928 pen=5.74e-05 s=1 lr_d=0.00425 6s
+train    450/1200 Ld=+0.6933 Lg=+0.6931 pen=6.03e-05 s=1 lr_d=0.00425 7s
+train    500/1200 Ld=+0.6930 Lg=+0.6935 pen=8.29e-05 s=1 lr_d=0.00425 8s
+train    550/1200 Ld=+0.6935 Lg=+0.6941 pen=9.62e-05 s=1 lr_d=0.00425 8s
+train    600/1200 Ld=+0.6931 Lg=+0.6938 pen=3.83e-05 s=1 lr_d=0.00425 9s
+train    650/1200 Ld=+0.6941 Lg=+0.6940 pen=0.000142 s=1 lr_d=0.00425 10s
+train    700/1200 Ld=+0.6934 Lg=+0.6933 pen=3.79e-05 s=1 lr_d=0.00425 11s
+train    750/1200 Ld=+0.6932 Lg=+0.6935 pen=3.31e-05 s=1 lr_d=0.00421 12s
+train    800/1200 Ld=+0.6932 Lg=+0.6931 pen=2.43e-05 s=1 lr_d=0.00397 12s
+train    850/1200 Ld=+0.6927 Lg=+0.6936 pen=3.67e-05 s=1 lr_d=0.00354 13s
+train    900/1200 Ld=+0.6934 Lg=+0.6933 pen=4.15e-05 s=1 lr_d=0.00296 14s
+train    950/1200 Ld=+0.6931 Lg=+0.6935 pen=2.05e-05 s=1 lr_d=0.0023 15s
+train   1000/1200 Ld=+0.6931 Lg=+0.6929 pen=1.95e-05 s=0.762 lr_d=0.00162 16s
+train   1050/1200 Ld=+0.6931 Lg=+0.6930 pen=1.72e-05 s=0.46 lr_d=0.000989 17s
+train   1100/1200 Ld=+0.6929 Lg=+0.6934 pen=1.73e-05 s=0.217 lr_d=0.000486 18s
+train   1150/1200 Ld=+0.6929 Lg=+0.6932 pen=2.62e-05 s=0.0579 lr_d=0.000159 18s
+train   1200/1200 Ld=+0.6947 Lg=+0.6930 pen=2.1e-05 s=8.65e-05 lr_d=4.25e-05 19s
+{"event": "DONE", "task": "vector_two_broad", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.027467225179005583, "mean_error": 0.02827322855591774, "covariance_error": 0.017933765426278114, "target_scale": 1.0601637363433838, "sample_count": 4096, "mass_tv": 0.011962890625, "min_mass_ratio": 0.97607421875, "hq": 0.985107421875, "component_covariance_error": 0.10882541351020336, "component_covariance_errors": [0.05164852365851402, 0.1660023033618927], "component_min_eigen_ratio": 0.9601736068725586, "component_mass": [0.511962890625, 0.488037109375], "target_mass": [0.5, 0.5], "component_counts": [2097, 1999]}, "error": null}
+# DONE toy-vector_two_broad status=PASS metric={'name': 'passing suffix', 'value': '23/24'} 21s

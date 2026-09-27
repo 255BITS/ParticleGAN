@@ -1,0 +1,32 @@
+# 2026-09-26 22:36:42 arm=k3p_stock device=cuda:0 tasks=5 steps=1500
+22:37:22 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate SETTLING converged None first_fail None minHQ(hold) None stopped budget | 35s rc=0
+22:37:36 native-grid100             FAIL  final modes/HQ=100/0.966 | coverage None accuracy None first100 500 massTV 0.0441 | 50s rc=0
+22:37:56 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=7 hq=1 | 30s rc=0
+# 2026-09-26 22:46:19 arm=k3p_stock device=cuda:0 tasks=26 steps=None
+22:49:01 native-grid100             PASS  final modes/HQ=100/0.987 | coverage PASS accuracy PASS first100 750 massTV 0.041400000000000006 | 159s rc=0
+22:49:05 native-rotated100          PASS  final modes/HQ=100/0.982 | coverage PASS accuracy PASS first100 750 massTV 0.036000000000000004 | 163s rc=0
+22:49:19 native-staggered100        PASS  final modes/HQ=100/0.987 | coverage PASS accuracy PASS first100 750 massTV 0.04190000000000001 | 176s rc=0
+22:50:35 shift-mode_hold            FAIL  deadline window=0/81 | delay None pre-shift hold 0/120 | 73s rc=0
+22:51:39 ring8-multishift           FAIL  fails outside transit=2 | prehold 120/120 arrival +1990/none/+1640 departures 4 final HQ 0.934 | 152s rc=0
+22:51:43 toy-two_pole               PASS  passing suffix=9/24 | confirmed 67 mean_abs=0.626 grad_med=0.138 | 2s rc=0
+22:51:45 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +1220 departures 1 final HQ 0.954 | 68s rc=0
+22:51:49 toy-trajectory             PASS  passing suffix=23/24 | confirmed 100 identity_mse=0.000891 | 3s rc=0
+22:51:51 toy-residual_student       PASS  passing suffix=20/24 | confirmed 150 identity_mse=0.000914 success_rate=1 wrong_pad_rate=0 | 3s rc=0
+22:51:55 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate NOT_CONVERGED converged None first_fail None minHQ(hold) None stopped gate_done_plus_post_window | 171s rc=0
+22:51:55 toy-unipolar               PASS  passing suffix=19/24 | confirmed 167 cover=0.999 off_caption=1.07e-05 neu_hold=0.99 | 4s rc=0
+22:51:57 toy-ae_gan_hold            PASS  passing suffix=22/24 | confirmed 73 recon_mse=0.00517 hold=0.00377 | 2s rc=0
+22:51:59 toy-unused_token_hold      PASS  passing suffix=11/24 | confirmed 150 unused_hold=0.999 concept_move=0.948 | 2s rc=0
+22:52:03 toy-cover_leftover         PASS  passing suffix=13/24 | confirmed 534 u_kept=0.982 content_kept=1 leak_ratio=0.000678 pole_rel_err_plus=0.0117 pole_rel_err_minus=0.0128 same_dir=0.00118 | 5s rc=0
+22:52:09 toy-mid_scale_identity     PASS  passing suffix=17/24 | confirmed 400 concept_cos_plus=1 concept_cos_minus=1 concept_mag_plus=1 concept_mag_minus=1 identity_at_0=0.997 identity_at_mid=0.991 | 8s rc=0
+22:52:11 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=5 hq=0.901 | 9s rc=0
+22:52:27 toy-vector_two_broad       PASS  passing suffix=23/24 | confirmed 300 sw1_normalized=0.0375 mass_tv=0.0151 hq=0.993 component_covariance_error=0.126 component_min_eigen_ratio=0.852 | 21s rc=0
+22:52:37 toy-vector_unequal_width   FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.0453 mass_tv=0.0364 hq=0.864 component_covariance_error=1.29 component_min_eigen_ratio=0.413 | 23s rc=0
+22:52:41 toy-vector_unequal_mass    FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.0208 mass_tv=0.0117 hq=0.979 component_covariance_error=0.917 component_min_eigen_ratio=0.0648 min_mass_ratio=0.979 | 30s rc=0
+22:53:05 toy-vector_anisotropic     PASS  passing suffix=6/24 | confirmed 1150 sw1_normalized=0.0445 mass_tv=0.0179 hq=0.964 component_covariance_error=0.323 component_min_eigen_ratio=0.211 | 34s rc=0
+22:53:09 toy-vector_overlap         PASS  passing suffix=11/24 | confirmed 900 sw1_normalized=0.0527 mean_error=0.051 covariance_error=0.117 | 29s rc=0
+22:53:19 toy-vector_spiral          PASS  passing suffix=21/24 | confirmed 534 sw1_normalized=0.0242 mean_error=0.00442 covariance_error=0.0504 | 34s rc=0
+22:53:23 toy-img_stripes2           PASS  passing suffix=22/24 | confirmed 175 modes=2 hq=0.969 | 14s rc=0
+22:53:27 toy-img_bars4              PASS  passing suffix=10/24 | confirmed 475 modes=4 hq=1 | 14s rc=0
+22:53:37 toy-img_blobs4             FAIL  passing suffix=0/24 | confirmed None modes=4 hq=0.875 | 15s rc=0
+22:53:41 toy-img_intensity2         FAIL  passing suffix=0/24 | confirmed None modes=0 hq=0 | 14s rc=0
+# 2026-09-26 22:53:41 arm=k3p_stock finished

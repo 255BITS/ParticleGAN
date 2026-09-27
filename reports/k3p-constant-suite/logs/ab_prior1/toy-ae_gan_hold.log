@@ -1,0 +1,34 @@
+# arm=ab_prior1 task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2391 hold=1.3600 loss=4.2120
+eval    11 recon_mse=0.3736 hold=0.3925
+eval    21 recon_mse=0.0785 hold=0.06853
+eval    32 recon_mse=0.04225 hold=0.03175
+eval    42 recon_mse=0.00737 hold=0.0519
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0049 hold=0.0509 loss=0.9247
+eval    53 recon_mse=0.005941 hold=0.03287
+eval    63 recon_mse=0.007853 hold=0.05693
+eval    73 recon_mse=0.005603 hold=0.04874
+eval    84 recon_mse=0.005014 hold=0.02924
+eval    94 recon_mse=0.003562 hold=0.0318
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0029 hold=0.0308 loss=0.9105
+eval   105 recon_mse=0.004144 hold=0.0412
+eval   115 recon_mse=0.005117 hold=0.04321
+eval   125 recon_mse=0.006876 hold=0.04257
+eval   136 recon_mse=0.01714 hold=0.04233
+eval   146 recon_mse=0.01365 hold=0.04602
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0158 hold=0.0490 loss=0.8540
+eval   157 recon_mse=0.03757 hold=0.03398
+eval   167 recon_mse=0.004902 hold=0.02827
+eval   178 recon_mse=0.01232 hold=0.03934
+eval   188 recon_mse=0.01759 hold=0.03299
+eval   198 recon_mse=0.0107 hold=0.03022
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0169 hold=0.0243 loss=0.8864
+eval   209 recon_mse=0.0343 hold=0.0219
+eval   219 recon_mse=0.01039 hold=0.03048
+eval   230 recon_mse=0.01138 hold=0.04472
+eval   240 recon_mse=0.01358 hold=0.05469
+eval   250 recon_mse=0.01968 hold=0.02089
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 22, "live": {"recon_mse": 0.01967884786427021, "hold": 0.020888347178697586}, "error": null}
+# DONE toy-ae_gan_hold status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 4s

@@ -1,0 +1,60 @@
+# arm=ab_absunits task=hold-mode_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+eval    50 acq m=0 hq=0.000
+eval   100 acq m=0 hq=0.000
+eval   150 acq m=0 hq=0.000
+eval   200 acq m=0 hq=0.000
+eval   250 acq m=1 hq=0.085
+eval   300 acq m=0 hq=0.000
+eval   350 acq m=2 hq=0.255
+eval   400 acq m=1 hq=0.081
+eval   450 acq m=1 hq=0.083
+eval   500 acq m=1 hq=0.167
+eval   550 acq m=2 hq=0.167
+eval   600 acq m=2 hq=0.251
+eval   650 acq m=4 hq=0.501
+eval   700 acq m=7 hq=1.000
+eval   750 acq m=7 hq=1.000
+eval   800 acq m=6 hq=0.757
+eval   850 acq m=7 hq=1.000
+eval   900 acq m=7 hq=1.000
+eval   950 acq m=7 hq=1.000
+eval  1000 acq m=7 hq=0.917
+eval  1050 acq m=5 hq=0.667
+eval  1100 acq m=5 hq=0.586
+eval  1150 acq m=4 hq=0.581
+eval  1200 acq m=4 hq=0.497
+eval  1250 SETTLING m=6 hq=0.833 hold=0 streak=0
+eval  1300 SETTLING m=8 hq=1.000 hold=0 streak=14
+eval  1350 SETTLING m=8 hq=1.000 hold=0 streak=12
+eval  1400 SETTLING m=8 hq=1.000 hold=0 streak=10
+eval  1450 SETTLING m=8 hq=1.000 hold=0 streak=60
+eval  1500 SETTLING m=7 hq=0.922 hold=0 streak=0
+eval  1550 SETTLING m=8 hq=0.919 hold=0 streak=28
+eval  1600 SETTLING m=8 hq=1.000 hold=0 streak=78
+eval  1650 SETTLING m=8 hq=1.000 hold=0 streak=128
+eval  1700 SETTLING m=6 hq=0.755 hold=0 streak=0
+eval  1750 SETTLING m=8 hq=1.000 hold=0 streak=35
+eval  1800 SETTLING m=8 hq=1.000 hold=0 streak=37
+eval  1850 SETTLING m=8 hq=1.000 hold=0 streak=87
+eval  1900 SETTLING m=8 hq=1.000 hold=0 streak=43
+eval  1950 SETTLING m=6 hq=0.753 hold=0 streak=0
+eval  2000 SETTLING m=8 hq=1.000 hold=0 streak=48
+eval  2050 SETTLING m=8 hq=0.912 hold=0 streak=10
+eval  2100 SETTLING m=5 hq=0.660 hold=0 streak=0
+eval  2150 SETTLING m=8 hq=1.000 hold=0 streak=41
+eval  2200 SETTLING m=8 hq=1.000 hold=0 streak=91
+eval  2250 SETTLING m=8 hq=1.000 hold=0 streak=141
+eval  2300 SETTLING m=8 hq=1.000 hold=0 streak=191
+eval  2350 HOLDING m=8 hq=1.000 hold=41 streak=200
+eval  2400 HOLDING m=8 hq=1.000 hold=91 streak=200
+eval  2450 HOLDING m=8 hq=1.000 hold=141 streak=200
+eval  2500 HOLDING m=8 hq=1.000 hold=191 streak=200
+eval  2550 HOLDING m=8 hq=1.000 hold=241 streak=200
+eval  2600 HOLDING m=8 hq=1.000 hold=291 streak=200
+eval  2650 POST_CONVERGENCE_FAIL m=8 hq=1.000 hold=299 streak=200
+eval  2700 POST_CONVERGENCE_FAIL m=8 hq=1.000 hold=299 streak=200
+eval  2750 POST_CONVERGENCE_FAIL m=8 hq=1.000 hold=299 streak=200
+eval  2800 POST_CONVERGENCE_FAIL m=8 hq=1.000 hold=299 streak=200
+eval  2850 POST_CONVERGENCE_FAIL m=8 hq=1.000 hold=299 streak=200
+eval  2900 POST_CONVERGENCE_FAIL m=8 hq=1.000 hold=299 streak=200
+# DONE hold-mode_hold status=FAIL metric={'name': 'hold+ext', 'value': '299/1200+0/0'} 146s

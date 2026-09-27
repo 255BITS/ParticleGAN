@@ -1,0 +1,35 @@
+# 2026-09-26 23:13:27 arm=ab_prior1 device=cuda:0 tasks=5 steps=300
+23:13:35 toy-two_pole               NO_RESULT None=None |  | 8s rc=0
+23:13:37 ring8-shift                NO_RESULT None=None |  | 10s rc=0
+23:13:43 toy-unipolar               NO_RESULT None=None |  | 8s rc=0
+23:14:03 toy-img_stripes2           NO_RESULT None=None |  | 20s rc=0
+23:14:15 toy-vector_two_broad       NO_RESULT None=None |  | 38s rc=0
+# 2026-09-26 23:14:15 arm=ab_prior1 finished
+# 2026-09-26 23:18:18 arm=ab_prior1 device=cuda:0 tasks=26 steps=None
+23:22:40 native-grid100             FAIL  final modes/HQ=96/0.922 | coverage FAIL accuracy FAIL first100 None massTV 0.06305000000000001 | 258s rc=0
+23:23:04 native-rotated100          FAIL  final modes/HQ=100/0.966 | coverage FAIL accuracy FAIL first100 3000 massTV 0.058 | 282s rc=0
+23:23:52 native-staggered100        FAIL  final modes/HQ=100/0.970 | coverage FAIL accuracy FAIL first100 750 massTV 0.04855 | 331s rc=0
+23:25:48 shift-mode_hold            FAIL  deadline window=8/81 | delay 1130 pre-shift hold 0/120 | 113s rc=0
+23:27:32 ring8-multishift           FAIL  fails outside transit=5 | prehold 120/120 arrival +370/+430/+30 departures 3 final HQ 0.991 | 264s rc=0
+23:27:38 toy-two_pole               FAIL  passing suffix=0/24 | confirmed None mean_abs=0.041 grad_med=0.0177 | 2s rc=0
+23:27:48 toy-trajectory             PASS  passing suffix=22/24 | confirmed 117 identity_mse=0.00888 | 5s rc=0
+23:27:56 ring8-shift                FAIL  fails outside transit=5 | prehold 120/120 arrival +370 departures 3 final HQ 0.991 | 124s rc=0
+23:27:58 toy-residual_student       PASS  passing suffix=23/24 | confirmed 100 identity_mse=0.000882 success_rate=1 wrong_pad_rate=0 | 6s rc=0
+23:28:06 toy-unipolar               PASS  passing suffix=18/24 | confirmed 184 cover=1 off_caption=2.69e-11 neu_hold=0.999 | 5s rc=0
+23:28:06 toy-ae_gan_hold            PASS  passing suffix=22/24 | confirmed 73 recon_mse=0.0197 hold=0.0209 | 4s rc=0
+23:28:14 toy-unused_token_hold      PASS  passing suffix=10/24 | confirmed 159 unused_hold=0.997 concept_move=0.972 | 3s rc=0
+23:28:20 toy-cover_leftover         PASS  passing suffix=9/24 | confirmed 667 u_kept=0.939 content_kept=1 leak_ratio=0.000234 pole_rel_err_plus=0.0401 pole_rel_err_minus=0.0396 same_dir=0.00253 | 10s rc=0
+23:28:34 toy-mid_scale_identity     PASS  passing suffix=16/24 | confirmed 434 concept_cos_plus=1 concept_cos_minus=1 concept_mag_plus=0.999 concept_mag_minus=1 identity_at_0=0.998 identity_at_mid=0.999 | 15s rc=0
+23:28:42 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=6 hq=1 | 18s rc=0
+23:29:32 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate NOT_CONVERGED converged None first_fail None minHQ(hold) None stopped gate_done_plus_post_window | 407s rc=0
+23:29:34 toy-vector_two_broad       PASS  passing suffix=20/24 | confirmed 450 sw1_normalized=0.0467 mass_tv=0.00903 hq=0.986 component_covariance_error=0.157 component_min_eigen_ratio=0.732 | 56s rc=0
+23:29:58 toy-vector_unequal_mass    FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.0658 mass_tv=0.0505 hq=0.984 component_covariance_error=0.315 component_min_eigen_ratio=0.0483 min_mass_ratio=0.549 | 71s rc=0
+23:30:36 toy-vector_unequal_width   PASS  passing suffix=21/24 | confirmed 400 sw1_normalized=0.134 mass_tv=0.102 hq=0.959 component_covariance_error=0.418 component_min_eigen_ratio=0.156 | 60s rc=0
+23:30:44 toy-vector_anisotropic     PASS  passing suffix=21/24 | confirmed 400 sw1_normalized=0.111 mass_tv=0.0959 hq=0.989 component_covariance_error=0.283 component_min_eigen_ratio=0.277 | 67s rc=0
+23:30:50 toy-vector_overlap         FAIL  passing suffix=3/24 | confirmed None sw1_normalized=0.0893 mean_error=0.129 covariance_error=0.143 | 49s rc=0
+23:31:04 toy-img_stripes2           FAIL  passing suffix=0/24 | confirmed None modes=1 hq=1 | 17s rc=0
+23:31:08 toy-img_bars4              FAIL  passing suffix=0/24 | confirmed None modes=2 hq=0.938 | 16s rc=0
+23:31:22 toy-vector_spiral          PASS  passing suffix=23/24 | confirmed 400 sw1_normalized=0.0412 mean_error=0.0545 covariance_error=0.0536 | 41s rc=0
+23:31:26 toy-img_blobs4             PASS  passing suffix=18/24 | confirmed 275 modes=4 hq=0.906 | 17s rc=0
+23:31:26 toy-img_intensity2         PASS  passing suffix=5/24 | confirmed 600 modes=2 hq=1 | 16s rc=0
+# 2026-09-26 23:31:26 arm=ab_prior1 finished

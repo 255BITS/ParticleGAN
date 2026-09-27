@@ -1,0 +1,28 @@
+# arm=k3p_stock task=toy-img_stripes2 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_stripes2 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+0.5342 Lg=+1.0086 pen=0.0163 s=1 lr_d=0.00425 1s
+train     50/600 Ld=+0.6554 Lg=+0.7691 pen=0.0045 s=1 lr_d=0.00425 2s
+train     75/600 Ld=+0.7932 Lg=+0.6949 pen=0.00232 s=1 lr_d=0.00425 2s
+train    100/600 Ld=+0.5967 Lg=+0.9268 pen=0.00165 s=1 lr_d=0.00425 3s
+train    125/600 Ld=+0.6552 Lg=+0.7579 pen=0.00151 s=1 lr_d=0.00425 3s
+train    150/600 Ld=+0.6830 Lg=+0.7673 pen=0.00136 s=1 lr_d=0.00425 4s
+train    175/600 Ld=+0.6611 Lg=+0.7463 pen=0.000759 s=1 lr_d=0.00425 4s
+train    200/600 Ld=+0.6829 Lg=+0.8046 pen=0.000753 s=1 lr_d=0.00425 5s
+train    225/600 Ld=+0.6733 Lg=+0.7501 pen=0.000968 s=1 lr_d=0.00425 5s
+train    250/600 Ld=+0.6844 Lg=+0.7505 pen=0.000899 s=1 lr_d=0.00425 6s
+train    275/600 Ld=+0.6787 Lg=+0.7575 pen=0.000589 s=1 lr_d=0.00425 6s
+train    300/600 Ld=+0.6819 Lg=+0.7233 pen=0.000473 s=1 lr_d=0.00425 7s
+train    325/600 Ld=+0.6812 Lg=+0.7884 pen=0.000733 s=1 lr_d=0.00425 8s
+train    350/600 Ld=+0.6646 Lg=+0.8204 pen=0.000821 s=1 lr_d=0.00425 8s
+train    375/600 Ld=+0.6508 Lg=+0.9081 pen=0.00075 s=1 lr_d=0.00421 9s
+train    400/600 Ld=+0.6599 Lg=+0.7718 pen=0.000513 s=1 lr_d=0.00398 9s
+train    425/600 Ld=+0.7190 Lg=+0.7023 pen=0.000567 s=1 lr_d=0.00355 10s
+train    450/600 Ld=+0.6966 Lg=+0.7099 pen=0.000446 s=1 lr_d=0.00298 10s
+train    475/600 Ld=+0.6715 Lg=+0.7431 pen=0.000575 s=1 lr_d=0.00231 11s
+train    500/600 Ld=+0.6907 Lg=+0.7644 pen=0.000427 s=0.774 lr_d=0.00163 11s
+train    525/600 Ld=+0.6640 Lg=+0.7890 pen=0.000344 s=0.471 lr_d=0.001 11s
+train    550/600 Ld=+0.7296 Lg=+0.6897 pen=0.000234 s=0.225 lr_d=0.000494 12s
+train    575/600 Ld=+0.6573 Lg=+0.7539 pen=0.000152 s=0.0624 lr_d=0.000163 12s
+train    600/600 Ld=+0.6954 Lg=+0.7340 pen=0.000112 s=0.000346 lr_d=4.27e-05 13s
+{"event": "DONE", "task": "img_stripes2", "status": "PASS", "suffix": 22, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.03587605804204941, "quality_mode_fractions": [0.40625, 0.5625], "mode_fractions": [0.40625, 0.59375], "distribution_tv": 0.09375}, "error": null}
+# DONE toy-img_stripes2 status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 14s

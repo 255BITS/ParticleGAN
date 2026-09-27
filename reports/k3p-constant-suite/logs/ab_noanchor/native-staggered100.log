@@ -1,0 +1,53 @@
+# arm=ab_noanchor task=native-staggered100 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+{"cublas_workspace": ":4096:8", "cudnn": 92400, "deterministic": true, "device": "cuda:0", "dtype": "float32", "event": "DEVICE", "gpu": "NVIDIA RTX A6000", "requested": "cuda", "rng": "device-less torch.Generator() uses the selected device", "tf32": false, "threads": 1, "torch": "2.14.0+cu130", "torch_cuda": "13.0"}
+{"event": "problem_start", "problem": "staggered100", "steps": 400, "output": "runs_smoke/a/ab_noanchor/native-staggered100/bench/staggered100"}
+START problem=staggered100 steps=400 device=cuda:0 events=runs_smoke/a/ab_noanchor/native-staggered100/bench/staggered100/events.jsonl
+EVAL step=0/400 model=live modes=0/100 hq=0.0256 pass=False elapsed=2.3s
+EVAL step=0/400 model=ema modes=0/100 hq=0.0256 pass=False elapsed=2.5s
+TRAIN step=1/400 d=0.9614 g=0.7449 train_seconds=0.2
+EVAL step=1/400 model=live modes=0/100 hq=0.0260 pass=False elapsed=2.9s
+EVAL step=1/400 model=ema modes=0/100 hq=0.0257 pass=False elapsed=3.1s
+EVAL step=10/400 model=live modes=0/100 hq=0.0312 pass=False elapsed=3.6s
+EVAL step=10/400 model=ema modes=0/100 hq=0.0258 pass=False elapsed=3.8s
+train     16/400 Ld=+0.7148 Lg=+0.7612 pen=0.0739 s=1 lr_d=0.00425 3s
+EVAL step=25/400 model=live modes=0/100 hq=0.0449 pass=False elapsed=4.4s
+EVAL step=25/400 model=ema modes=0/100 hq=0.0263 pass=False elapsed=4.6s
+train     32/400 Ld=+0.6742 Lg=+0.7796 pen=0.0513 s=1 lr_d=0.00425 3s
+train     48/400 Ld=+0.6828 Lg=+0.8038 pen=0.0756 s=1 lr_d=0.00425 4s
+EVAL step=50/400 model=live modes=0/100 hq=0.0907 pass=False elapsed=5.4s
+EVAL step=50/400 model=ema modes=0/100 hq=0.0285 pass=False elapsed=5.6s
+train     64/400 Ld=+0.6795 Lg=+0.8074 pen=0.0794 s=1 lr_d=0.00425 5s
+train     80/400 Ld=+0.6626 Lg=+0.7890 pen=0.0422 s=1 lr_d=0.00425 5s
+train     96/400 Ld=+0.6694 Lg=+0.7691 pen=0.039 s=1 lr_d=0.00425 5s
+EVAL step=100/400 model=live modes=0/100 hq=0.2814 pass=False elapsed=7.1s
+EVAL step=100/400 model=ema modes=0/100 hq=0.0325 pass=False elapsed=7.4s
+train    112/400 Ld=+0.6802 Lg=+0.7512 pen=0.0349 s=1 lr_d=0.00425 6s
+train    128/400 Ld=+0.6812 Lg=+0.7454 pen=0.0275 s=1 lr_d=0.00425 7s
+train    144/400 Ld=+0.6792 Lg=+0.7269 pen=0.0176 s=1 lr_d=0.00425 7s
+train    160/400 Ld=+0.6901 Lg=+0.7216 pen=0.0192 s=1 lr_d=0.00425 8s
+train    176/400 Ld=+0.6918 Lg=+0.7155 pen=0.016 s=1 lr_d=0.00425 8s
+train    192/400 Ld=+0.6894 Lg=+0.7130 pen=0.0117 s=1 lr_d=0.00425 8s
+train    208/400 Ld=+0.6888 Lg=+0.7112 pen=0.0107 s=1 lr_d=0.00425 9s
+train    224/400 Ld=+0.6871 Lg=+0.7091 pen=0.00714 s=1 lr_d=0.00425 9s
+train    240/400 Ld=+0.6928 Lg=+0.7078 pen=0.0101 s=1 lr_d=0.00425 10s
+TRAIN step=250/400 d=0.6919 g=0.7048 train_seconds=6.6
+EVAL step=250/400 model=live modes=98/100 hq=0.7805 pass=False elapsed=11.6s
+EVAL step=250/400 model=ema modes=0/100 hq=0.1095 pass=False elapsed=11.9s
+train    256/400 Ld=+0.6894 Lg=+0.7047 pen=0.00503 s=1 lr_d=0.00425 11s
+train    272/400 Ld=+0.6902 Lg=+0.7043 pen=0.00473 s=1 lr_d=0.00425 11s
+train    288/400 Ld=+0.6899 Lg=+0.7040 pen=0.0041 s=1 lr_d=0.00425 11s
+train    304/400 Ld=+0.6924 Lg=+0.7001 pen=0.00387 s=1 lr_d=0.00425 12s
+train    320/400 Ld=+0.6896 Lg=+0.7018 pen=0.00296 s=1 lr_d=0.00425 12s
+train    336/400 Ld=+0.6928 Lg=+0.7026 pen=0.00295 s=1 lr_d=0.00425 13s
+train    352/400 Ld=+0.6898 Lg=+0.7037 pen=0.00349 s=1 lr_d=0.00425 13s
+train    368/400 Ld=+0.6897 Lg=+0.7011 pen=0.00359 s=1 lr_d=0.00425 13s
+train    384/400 Ld=+0.6902 Lg=+0.7049 pen=0.00246 s=1 lr_d=0.00425 13s
+train    400/400 Ld=+0.6916 Lg=+0.7011 pen=0.00226 s=1 lr_d=0.00425 14s
+TRAIN step=400/400 d=0.6916 g=0.7011 train_seconds=9.8
+EVAL step=400/400 model=live modes=100/100 hq=0.8889 pass=False elapsed=15.1s
+EVAL step=400/400 model=ema modes=1/100 hq=0.3013 pass=False elapsed=15.2s
+COMPLETE problem=staggered100 steps=400 live_modes=100/100 live_hq=0.8889 stable_pass=None total_seconds=15.2
+{"event": "problem_complete", "problem": "staggered100", "status": "complete", "output": "runs_smoke/a/ab_noanchor/native-staggered100/bench/staggered100"}
+{"event": "gate", "status": "FAIL", "passed": 0, "required": 1, "leaderboard": "runs_smoke/a/ab_noanchor/native-staggered100/bench/leaderboard-staggered100.md"}
+{"event": "accuracy_gate", "status": "FAIL", "passed": 0, "required": 1}
+# DONE native-staggered100 status=FAIL metric={'name': 'final modes/HQ', 'value': '100/0.889'} 18s

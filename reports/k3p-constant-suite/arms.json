@@ -1,0 +1,251 @@
+{
+ "_doc": "One arm = one formulation. 'config' overrides the suite's benchmark config (configs/toy100/constraints_simple_regularization.json with reg_arm a_r1r2 as the host marker); the same keys map 1:1 onto the ring tasks' particlegan recipe. 'recipe' overrides the released K3P recipe fields (particlegan.get_recipe() defaults) on every host. 'critic' is 'k3p' (the package K3P penalty/optimizers) or 'simple_B_cap3'. Noise off = input and output instance noise 0 from step 0; constant LR = lr_floor = network_lr_floor = 1.",
+ "arms": {
+  "k3p_stock": {
+   "formulation": "K3P as released on develop: RpGAN + K3P penalty/EMA anchor/spike guard + A2, input noise .5->0 and output noise .029, cosine LR decay (net floor .01 over a 1600 horizon, prior floor .05), Adam (0,.999)",
+   "critic": "k3p",
+   "config": {},
+   "recipe": {}
+  },
+  "k3p_stock_oldinit": {
+   "formulation": "calibration: k3p_stock with no particlegan.init call anywhere (constructor init on ring too). native/toy/hold/shift already use constructor init in this suite, so only the ring tasks differ from k3p_stock",
+   "critic": "k3p",
+   "config": {},
+   "recipe": {},
+   "init": "constructor"
+  },
+  "k3p_stock_ams": {
+   "formulation": "k3p + ams: k3p_stock with AMSGrad on every optimizer",
+   "critic": "k3p",
+   "config": {},
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "k3p_nonoise": {
+   "formulation": "k3p_stock (LR decay, Adam) with no instance noise",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "recipe": {}
+  },
+  "k3p_nonoise_ams": {
+   "formulation": "k3p_stock LR decay + AMSGrad, no instance noise",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "k3p_const": {
+   "formulation": "K3P constant LR (floors 1), Adam, no instance noise (baseline for the constant problem)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {}
+  },
+  "k3p_const_ams": {
+   "formulation": "k3p constant ams: constant LR (floors 1) + AMSGrad, no instance noise",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "k3p_const_ams_c3": {
+   "formulation": "k3p_const_ams + penalty coefficient x3 (reg_coeff 3)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 3.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "simple_B_cap3": {
+   "formulation": "simple-critic winner B_cap3: wgan + R1(1) + secant to nearest real (10, t .5) + cap-all (10, c=3); critic Adam (0,.9), critic LR x.5, no guard/EMA anchor, A2 off; RpGAN G loss; no noise, constant LR",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0
+   },
+   "simple": {
+    "d_beta2": 0.9,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "ab_noanchor": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): EMA anchor term off (reg_anchor_weight 0); inert at constant LR (s==1), bit-exactness check",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0
+   }
+  },
+  "ab_noguard": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): critic spike guard off (d_guard_ratio 0)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "d_guard_ratio": 0.0
+   }
+  },
+  "ab_noA2": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): A2 latent-row damping off (latent_damping_max_rate 0)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "latent_damping_max_rate": 0.0
+   }
+  },
+  "ab_nodirect": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): direct-particle response off (gain False, betas = G's (0,.999))",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "ab_prior1": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): prior LR multiplier 2 -> 1 (prior LR = G's)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "ab_r1only": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty = R1 on reals only (RMS units), fake one-sided cap dropped",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   },
+   "penalty": "r1_only"
+  },
+  "ab_caponly": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty = one-sided RMS cap (kappa 1) on reals and fakes, no R1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   },
+   "penalty": "cap_only"
+  },
+  "ab_absunits": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty in L2 units: ||g_r||^2 + relu(||g_f|| - kappa)^2 (no 1/d, 1/sqrt d)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   },
+   "penalty": "abs_units"
+  },
+  "k3p_simple": {
+   "formulation": "k3p_simple: k3p_const_ams minus every component whose removal cost no suite pass or ring stability: EMA anchor/EMA critic term off (reg_anchor_weight 0; inert at constant LR), direct-particle response off (gain False, betas = G's). Keeps AMSGrad, constant LR, no noise, R1+fake one-sided RMS cap, spike guard, A2, prior LR x2",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,28 @@
+# arm=ab_absunits task=toy-vector_two_broad route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_two_broad route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.6783 Lg=+0.7942 pen=0.029 s=1 lr_d=0.00425 3s
+train    100/1200 Ld=+0.6716 Lg=+0.7169 pen=0.00198 s=1 lr_d=0.00425 5s
+train    150/1200 Ld=+0.6937 Lg=+0.7003 pen=0.002 s=1 lr_d=0.00425 6s
+train    200/1200 Ld=+0.6964 Lg=+0.6943 pen=0.00187 s=1 lr_d=0.00425 7s
+train    250/1200 Ld=+0.6931 Lg=+0.6938 pen=0.000231 s=1 lr_d=0.00425 9s
+train    300/1200 Ld=+0.6940 Lg=+0.6929 pen=0.000184 s=1 lr_d=0.00425 10s
+train    350/1200 Ld=+0.6925 Lg=+0.6954 pen=9.33e-05 s=1 lr_d=0.00425 11s
+train    400/1200 Ld=+0.6928 Lg=+0.6920 pen=5.26e-05 s=1 lr_d=0.00425 13s
+train    450/1200 Ld=+0.6935 Lg=+0.6931 pen=0.000123 s=1 lr_d=0.00425 14s
+train    500/1200 Ld=+0.6928 Lg=+0.6933 pen=0.000141 s=1 lr_d=0.00425 15s
+train    550/1200 Ld=+0.6943 Lg=+0.6932 pen=0.000177 s=1 lr_d=0.00425 16s
+train    600/1200 Ld=+0.6935 Lg=+0.6933 pen=5.68e-05 s=1 lr_d=0.00425 18s
+train    650/1200 Ld=+0.6932 Lg=+0.6932 pen=0.000127 s=1 lr_d=0.00425 19s
+train    700/1200 Ld=+0.6936 Lg=+0.6932 pen=0.000145 s=1 lr_d=0.00425 20s
+train    750/1200 Ld=+0.6931 Lg=+0.6946 pen=6.49e-05 s=1 lr_d=0.00425 22s
+train    800/1200 Ld=+0.6945 Lg=+0.6934 pen=3.02e-05 s=1 lr_d=0.00425 25s
+train    850/1200 Ld=+0.6922 Lg=+0.6938 pen=0.000122 s=1 lr_d=0.00425 26s
+train    900/1200 Ld=+0.6930 Lg=+0.6945 pen=8.76e-05 s=1 lr_d=0.00425 28s
+train    950/1200 Ld=+0.6935 Lg=+0.6932 pen=7.61e-05 s=1 lr_d=0.00425 30s
+train   1000/1200 Ld=+0.6932 Lg=+0.6932 pen=3.57e-05 s=1 lr_d=0.00425 31s
+train   1050/1200 Ld=+0.6938 Lg=+0.6933 pen=6.57e-05 s=1 lr_d=0.00425 33s
+train   1100/1200 Ld=+0.6928 Lg=+0.6932 pen=3.51e-05 s=1 lr_d=0.00425 34s
+train   1150/1200 Ld=+0.6931 Lg=+0.6936 pen=6.6e-05 s=1 lr_d=0.00425 36s
+train   1200/1200 Ld=+0.6954 Lg=+0.6935 pen=0.000122 s=1 lr_d=0.00425 37s
+{"event": "DONE", "task": "vector_two_broad", "status": "PASS", "suffix": 22, "live": {"sw1_normalized": 0.04631071622698351, "mean_error": 0.029370438307523727, "covariance_error": 0.09439373761415482, "target_scale": 1.0601637363433838, "sample_count": 4096, "mass_tv": 0.011474609375, "min_mass_ratio": 0.97705078125, "hq": 0.984375, "component_covariance_error": 0.2628258094191551, "component_covariance_errors": [0.17178384959697723, 0.353867769241333], "component_min_eigen_ratio": 0.8471651673316956, "component_mass": [0.511474609375, 0.488525390625], "target_mass": [0.5, 0.5], "component_counts": [2095, 2001]}, "error": null}
+# DONE toy-vector_two_broad status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 42s

@@ -1,0 +1,16 @@
+23:18:18 start ab_noA2 cuda:0
+23:18:18 start ab_noguard cuda:0
+23:18:18 start ab_prior1 cuda:0
+23:18:18 start ab_r1only cuda:1
+23:18:18 start ab_caponly cuda:1
+23:18:18 start ab_absunits cuda:1
+23:29:18 end ab_absunits rc=0
+23:29:24 end ab_r1only rc=0
+23:30:04 end ab_caponly rc=0
+23:30:10 end ab_noA2 rc=0
+23:30:46 end ab_noguard rc=0
+23:31:26 end ab_prior1 rc=0
+23:31:26 queue done: ab_noguard@cuda:0 ab_noA2@cuda:0 ab_prior1@cuda:0 ab_r1only@cuda:1 ab_caponly@cuda:1 ab_absunits@cuda:1
+23:32:01 start k3p_simple cuda:1
+23:39:21 end k3p_simple rc=0
+23:39:21 queue done: k3p_simple@cuda:1

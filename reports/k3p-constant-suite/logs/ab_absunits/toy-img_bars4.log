@@ -1,0 +1,28 @@
+# arm=ab_absunits task=toy-img_bars4 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_bars4 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+0.6004 Lg=+0.9221 pen=0.048 s=1 lr_d=0.00425 2s
+train     50/600 Ld=+0.6701 Lg=+0.7720 pen=0.0288 s=1 lr_d=0.00425 3s
+train     75/600 Ld=+0.6563 Lg=+0.7545 pen=0.00854 s=1 lr_d=0.00425 3s
+train    100/600 Ld=+0.6894 Lg=+0.7124 pen=0.00572 s=1 lr_d=0.00425 4s
+train    125/600 Ld=+0.6664 Lg=+0.7342 pen=0.00444 s=1 lr_d=0.00425 4s
+train    150/600 Ld=+0.6920 Lg=+0.7056 pen=0.0016 s=1 lr_d=0.00425 5s
+train    175/600 Ld=+0.6841 Lg=+0.7272 pen=0.00144 s=1 lr_d=0.00425 6s
+train    200/600 Ld=+0.6902 Lg=+0.7091 pen=0.000839 s=1 lr_d=0.00425 6s
+train    225/600 Ld=+0.6898 Lg=+0.7005 pen=0.000712 s=1 lr_d=0.00425 7s
+train    250/600 Ld=+0.6984 Lg=+0.7125 pen=0.000481 s=1 lr_d=0.00425 7s
+train    275/600 Ld=+0.6863 Lg=+0.7039 pen=0.00064 s=1 lr_d=0.00425 8s
+train    300/600 Ld=+0.6912 Lg=+0.6833 pen=0.000782 s=1 lr_d=0.00425 9s
+train    325/600 Ld=+0.6918 Lg=+0.6997 pen=0.000352 s=1 lr_d=0.00425 9s
+train    350/600 Ld=+0.6919 Lg=+0.6977 pen=0.000246 s=1 lr_d=0.00425 10s
+train    375/600 Ld=+0.6866 Lg=+0.7002 pen=0.000481 s=1 lr_d=0.00425 10s
+train    400/600 Ld=+0.6808 Lg=+0.7007 pen=0.000257 s=1 lr_d=0.00425 11s
+train    425/600 Ld=+0.6994 Lg=+0.6940 pen=0.000194 s=1 lr_d=0.00425 11s
+train    450/600 Ld=+0.6842 Lg=+0.6964 pen=0.000344 s=1 lr_d=0.00425 12s
+train    475/600 Ld=+0.6911 Lg=+0.6879 pen=0.000395 s=1 lr_d=0.00425 13s
+train    500/600 Ld=+0.6719 Lg=+0.7118 pen=0.000948 s=1 lr_d=0.00425 13s
+train    525/600 Ld=+0.6919 Lg=+0.7002 pen=0.000312 s=1 lr_d=0.00425 14s
+train    550/600 Ld=+0.6911 Lg=+0.6965 pen=0.000217 s=1 lr_d=0.00425 15s
+train    575/600 Ld=+0.6967 Lg=+0.6956 pen=0.000277 s=1 lr_d=0.00425 16s
+train    600/600 Ld=+0.6843 Lg=+0.7029 pen=0.000315 s=1 lr_d=0.00425 16s
+{"event": "DONE", "task": "img_bars4", "status": "PASS", "suffix": 20, "live": {"modes": 4, "hq": 0.9375, "mean_rmse": 0.01214195042848587, "quality_mode_fractions": [0.25, 0.21875, 0.25, 0.21875], "mode_fractions": [0.28125, 0.25, 0.25, 0.21875], "distribution_tv": 0.03125}, "error": null}
+# DONE toy-img_bars4 status=PASS metric={'name': 'passing suffix', 'value': '20/24'} 19s

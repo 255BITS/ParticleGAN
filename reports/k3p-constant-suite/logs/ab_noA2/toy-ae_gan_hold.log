@@ -1,0 +1,34 @@
+# arm=ab_noA2 task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2443 hold=1.3589 loss=4.2120
+eval    11 recon_mse=0.3751 hold=0.4374
+eval    21 recon_mse=0.1222 hold=0.05019
+eval    32 recon_mse=0.04362 hold=0.009207
+eval    42 recon_mse=0.01011 hold=0.0743
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0051 hold=0.0629 loss=0.9208
+eval    53 recon_mse=0.007935 hold=0.03472
+eval    63 recon_mse=0.006024 hold=0.03881
+eval    73 recon_mse=0.006134 hold=0.03482
+eval    84 recon_mse=0.003072 hold=0.008224
+eval    94 recon_mse=0.002945 hold=0.02435
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0039 hold=0.0250 loss=0.8929
+eval   105 recon_mse=0.009577 hold=0.05445
+eval   115 recon_mse=0.006813 hold=0.04346
+eval   125 recon_mse=0.007148 hold=0.04913
+eval   136 recon_mse=0.004807 hold=0.02151
+eval   146 recon_mse=0.01241 hold=0.01726
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0204 hold=0.0264 loss=0.8893
+eval   157 recon_mse=0.009743 hold=0.03832
+eval   167 recon_mse=0.007934 hold=0.0558
+eval   178 recon_mse=0.00449 hold=0.03616
+eval   188 recon_mse=0.0052 hold=0.02729
+eval   198 recon_mse=0.003971 hold=0.02791
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0039 hold=0.0340 loss=0.8155
+eval   209 recon_mse=0.003265 hold=0.02924
+eval   219 recon_mse=0.003158 hold=0.01463
+eval   230 recon_mse=0.006685 hold=0.01907
+eval   240 recon_mse=0.005548 hold=0.02492
+eval   250 recon_mse=0.02165 hold=0.01004
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 22, "live": {"recon_mse": 0.02164911851286888, "hold": 0.010038183070719242}, "error": null}
+# DONE toy-ae_gan_hold status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 3s
