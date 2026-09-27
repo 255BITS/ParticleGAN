@@ -83,3 +83,31 @@ def test_perturb_equals_old_implementation_bitwise(device, dtype, z_dim, n):
     leaf = latent.detach().requires_grad_()
     prior.perturb(leaf, torch.Generator(device=device).manual_seed(11)).sum().backward()
     assert torch.equal(leaf.grad, torch.ones_like(leaf))
+
+
+@pytest.mark.parametrize("device", DEVICES)
+@pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+@pytest.mark.parametrize("z_dim", [3, 31, 32, 33, 64, 256])
+def test_search_bitwise_for_wide_and_strided_tables(device, dtype, z_dim):
+    # cdist sums in a different order past one warp (z_dim > 32) or on a strided table; those
+    # cases must stay on cdist, so they too are unchanged.
+    g = torch.Generator().manual_seed(z_dim)
+    scale = torch.logspace(-2, 2, z_dim, dtype=dtype)
+    table = (torch.randn(3000, z_dim, generator=g, dtype=dtype) * scale).to(device)
+    latent = torch.cat([table[:400], (torch.randn(400, z_dim, generator=g, dtype=dtype) * scale).to(device)])
+    strided = table.t().contiguous().t()
+    for lat, tab in ((latent, table), (latent, strided), (latent[::2], table[::3])):
+        assert _bitwise(_old_nearest(lat, tab), _nearest_other(lat, tab))
+
+
+@pytest.mark.parametrize("device", DEVICES)
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
+def test_search_half_precision_behaves_as_before(device, dtype):
+    table = torch.randn(50, 4, generator=torch.Generator().manual_seed(0)).to(device, dtype)
+    try:
+        old = _old_nearest(table[:10], table)
+    except RuntimeError:
+        with pytest.raises(RuntimeError):
+            _nearest_other(table[:10], table)
+    else:
+        assert _bitwise(old, _nearest_other(table[:10], table))

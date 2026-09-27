@@ -254,7 +254,8 @@ class ParticlePrior(nn.Module):
 def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
     """Distance from each ``latent`` row to its nearest ``table`` row at a nonzero distance (inf if none)."""
     nearest = torch.full((len(latent),), float("inf"), device=latent.device, dtype=latent.dtype)
-    if not latent.is_cuda:
+    if not (latent.is_cuda and latent.dtype in (torch.float32, torch.float64)
+            and 0 < latent.shape[1] <= 32):
         for centers in table.split(4096):
             distance = torch.cdist(latent, centers, compute_mode="donot_use_mm_for_euclid_dist")
             distance.masked_fill_(distance == 0, float("inf"))
@@ -263,10 +264,12 @@ def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
     # On CUDA, broadcast squared distances instead of cdist, whose no-mm path is a slow generic kernel
     # (~25x here). CUDA cdist is sqrt(sum of squares) and sqrt is monotone and correctly rounded, so
     # min-then-sqrt is bitwise the old sqrt-then-min; a min is exact, so the chunking (2048 // z_dim
-    # centers, to bound memory) cannot change it either. CPU cdist rounds differently (up to 1 ulp),
-    # so CPU keeps it to stay bitwise unchanged.
-    query = latent[:, None, :]
-    for centers in table.split(max(1, 2048 // latent.shape[1])):
+    # centers, to bound memory) cannot change it either. The sums themselves agree only for
+    # contiguous rows of at most 32 (one warp) float32/float64 elements: beyond that cdist adds in a
+    # different order (~1 ulp apart on ~25% of pairs), and a strided table reorders the sum even
+    # below it. So every other case, and CPU (whose cdist rounds differently), keeps cdist unchanged.
+    query = latent.contiguous()[:, None, :]
+    for centers in table.contiguous().split(2048 // latent.shape[1]):
         distance = query - centers[None, :, :]
         distance = distance.mul_(distance).sum(-1)
         distance.masked_fill_(distance == 0, float("inf"))
