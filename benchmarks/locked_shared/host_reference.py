@@ -45,21 +45,20 @@ def main():
     with patch.dict(sys.modules, packages):
         for filename in HASHES:
             sys.modules.pop("conceptmod.toys." + Path(filename).stem, None)
-        for name in (Path(f).stem for f in HASHES if f != "shared_trajectory.py"):
+        # cover_leftover now runs on its recipe (benchmarks.toy_runner): no parity to check.
+        for name in (Path(f).stem for f in HASHES if f not in ("shared_trajectory.py", "cover_leftover.py")):
             print(f"START parity={name}", flush=True)
             original = importlib.import_module("conceptmod.toys." + name)
             if name == "residual_student":
                 expected = original.train_locked()
             elif name == "ae_gan_hold":
                 expected = original.train(original.locked_config())
-            elif name == "cover_leftover":
-                expected = original.fit_cover_leftover(original.CoverRecipe())
             elif name == "unused_token_hold":
                 expected = original.train(original.locked_recipe())
             else:
                 expected = original.run_arm("locked_rpgan" if name == "unipolar" else "locked")
             extracted = run_toy(name, Candidate("locked_shared"))
-            actual = extracted["ema"] if name == "cover_leftover" else extracted["live"]
+            actual = extracted["live"]
             comparisons = {key: {"reference": expected[key], "extracted": actual[key],
                                   "abs_diff": abs(expected[key] - actual[key]),
                                   "matches": math.isclose(expected[key], actual[key], rel_tol=1e-6, abs_tol=1e-7)}
