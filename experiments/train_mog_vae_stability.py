@@ -25,7 +25,7 @@ from experiments.run_grid import code_provenance
 from lib.mog_metrics import evaluate as generation_metrics, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
-from particlegan import calibrate_mog_sigma, get_recipe, MoGParticlePrior, ParticleRegularizer, scale_learning_rates
+from particlegan import get_recipe, ParticleRegularizer, scale_learning_rates
 
 DEFAULTS = {
     'posterior': 'categorical', 'gan_weight': 1., 'kl_weight': 1.,
@@ -252,22 +252,18 @@ def train(cfg):
             archive.write(ROOT / name, arcname=name)
     g = SimpleMLPGenerator(2, cfg['width']).cuda()
     d = SimpleMLPDiscriminator(hidden_dim=cfg['width']).cuda()
-    prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=2,
-                            sigma=0, generator=rng(cfg['seed'] + 1), device='cuda')
-    sigma, d0 = calibrate_mog_sigma(prior.means(), cfg['sigma_rel'])
-    prior.set_sigma(sigma)
-    prior.d0.copy_(d0)
-    prior.sigma_rel = cfg['sigma_rel']
-    prior = prior.cuda()
+    recipe = training_recipe(cfg)
+    # The recipe builds and calibrates the table, with its default initialization.
+    prior = recipe.make_prior(z_dim=2, generator=rng(cfg['seed'] + 1), device='cuda')
     e = Encoder(cfg['width']).cuda()
+    # make_optimizers initializes G/D/E; hash the weights training starts from.
+    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
     initial_sigma = prior.sigma.detach().clone()
     metadata = dict(initialization_sha256=state_hash([g, d, prior, e]), sigma=float(prior.sigma),
                     gpu=torch.cuda.get_device_name(), torch=torch.__version__,
                     evaluation_weights='final online weights; no checkpoint selection',
                     parameters={k: sum(p.numel() for p in m.parameters()) for k, m in [('G', g), ('D', d), ('E', e), ('prior', prior)]})
     write_json(out / 'metadata.json', metadata)
-    recipe = training_recipe(cfg)
-    og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
     base_lrs = [[group['lr'] for group in o.param_groups] for o in (og, od)]
     adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(od), ParticleRegularizer()
     streams = {k: rng(cfg['seed'] + v) for k, v in [('data', 2), ('prior', 3), ('posterior', 4)]}

@@ -22,7 +22,7 @@ from lib.gym_transition import (GymTransitionScaler, GymTransitionGenerator,
     GymTransitionEncoder, GymTransitionCritics, DirectPredictor, contact_record,
     encoded_transition, composed_transition, real_reconstruction,
     synthetic_reconstruction, state_reconstruction)
-from particlegan import get_recipe, scale_learning_rates
+from particlegan import get_recipe, initialize_, scale_learning_rates
 
 
 DEFAULTS = dict(arm="adversarial", width=128, encoder_width=128, d_width=256,
@@ -111,12 +111,20 @@ def build_models(cfg, scaler, device):
     torch.manual_seed(cfg["seed"] + 102)
     e = GymTransitionEncoder(z_dim=cfg["z_dim"], width=cfg["encoder_width"],
                              context_dim=cfg["context_dim"]).to(device)
+    # The recipe's G/E initialization for every arm; the reconstruction and direct
+    # arms use make_generator_optimizer, which keeps weights. D gets it from
+    # make_optimizers in the adversarial arm.
+    if recipe.initialization is not None:
+        initialize_(g, key=0)
+        initialize_(e, key=2)
     inference_target = parameter_count(e) + parameter_count(g.branches[2]) + parameter_count(prior)
     d = direct = None
     if cfg["arm"] == "direct":
         torch.manual_seed(cfg["seed"] + 103)
         direct = DirectPredictor(context_dim=cfg["context_dim"],
                                  target_parameters=inference_target).to(device)
+        if recipe.initialization is not None:
+            initialize_(direct, key=0)
         g = e = prior = None
     elif cfg["arm"] == "adversarial":
         torch.manual_seed(cfg["seed"] + 100)

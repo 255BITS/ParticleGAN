@@ -17,7 +17,10 @@ the same update GANTrainer performs, with the control flow in your hands:
 To checkpoint, save the modules and both optimizers' ``state_dict()`` (they
 carry the EMA critic and every counter). With several critics, build one
 ``recipe.make_critic_optimizer(D_k, ema_critic=...)`` and one penalty per
-critic. Replace the networks and synthetic batches with your own.
+critic; that lower-level factory keeps weights, so call
+``particlegan.initialize_(D_k, key=k)`` on a fresh extra critic first (keys
+0/1/2 are the recipe's G/D/E). Replace the networks and synthetic batches with
+your own.
 """
 
 import argparse
