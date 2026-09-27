@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "id": "public-k3p-mode_hold",
+  "created_utc": "2026-09-27T01:04:57.687402+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold",
+  "files": {
+    "evidence/public-k3p-mode_hold/artifact-sha256.json": {
+      "sha256": "5f8105c06de3dcfa752ad98cd1c8c23d6eea57af88ceecb8ab91117e04f33ddc",
+      "original_sha256": "5f8105c06de3dcfa752ad98cd1c8c23d6eea57af88ceecb8ab91117e04f33ddc",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/artifact-sha256.json",
+      "bytes": 1293,
+      "original_bytes": 1293,
+      "listed_in_original_manifest": false
+    },
+    "evidence/public-k3p-mode_hold/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/batch-receipts.jsonl",
+      "bytes": 240947,
+      "original_bytes": 500493,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/declaration.json": {
+      "sha256": "493467061c9f249203d4e54459564031e75eec289dff7aac2469409797d9eac4",
+      "original_sha256": "493467061c9f249203d4e54459564031e75eec289dff7aac2469409797d9eac4",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/declaration.json",
+      "bytes": 8403,
+      "original_bytes": 8403,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/initial.json": {
+      "sha256": "52f380210d095461fb1a74b9c4e9d7f70e1520b4f762b3bee6011fc9371d1b02",
+      "original_sha256": "52f380210d095461fb1a74b9c4e9d7f70e1520b4f762b3bee6011fc9371d1b02",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/initial.json",
+      "bytes": 7361,
+      "original_bytes": 7361,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/learning-rates.jsonl.gz": {
+      "sha256": "0f5a17f060df2eea5f114d1ddb64c6d9fedcf3dd24fac2f4f582d4b8f8578f98",
+      "original_sha256": "b3e1c9987402c76a920fc718716aded4d1866c340f27bd196b9411415cf67253",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/learning-rates.jsonl",
+      "bytes": 79049,
+      "original_bytes": 475457,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/metrics.jsonl.gz": {
+      "sha256": "e36ee88ea585f96eb1a5ed93a73431b98dd79d64cbc545d83171b81036d096c6",
+      "original_sha256": "364a93cbec2a70d8b785500f87c6350d63a4aca1a798ab11b649a986c75dec8f",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/metrics.jsonl",
+      "bytes": 1053,
+      "original_bytes": 5669,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/optimizer-device-proof-0001.json": {
+      "sha256": "ccde4f950f1d064445f94a06e919e37aebbb65ae79e27f558b8e28b15cd7b8ba",
+      "original_sha256": "ccde4f950f1d064445f94a06e919e37aebbb65ae79e27f558b8e28b15cd7b8ba",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/optimizer-device-proof-0001.json",
+      "bytes": 3595,
+      "original_bytes": 3595,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/optimizer-device-proof-1200.json": {
+      "sha256": "9568a04d92b9aaf7d0df747e1ea3f6df04a36ed7042255ea2fe69d3b7fd0ce47",
+      "original_sha256": "9568a04d92b9aaf7d0df747e1ea3f6df04a36ed7042255ea2fe69d3b7fd0ce47",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/optimizer-device-proof-1200.json",
+      "bytes": 3646,
+      "original_bytes": 3646,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/result.json": {
+      "sha256": "70d79514083baeefad5d523dd533c024a85df27a775640550f5431af59776734",
+      "original_sha256": "70d79514083baeefad5d523dd533c024a85df27a775640550f5431af59776734",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/result.json",
+      "bytes": 1767,
+      "original_bytes": 1767,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/retention-assessment.json": {
+      "sha256": "98672474614b6547cf7683d6a74a0ef8e936e6e8830e56211671b50c164121fe",
+      "original_sha256": "98672474614b6547cf7683d6a74a0ef8e936e6e8830e56211671b50c164121fe",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/retention-assessment.json",
+      "bytes": 1200,
+      "original_bytes": 1200,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/runtime.json": {
+      "sha256": "6cb8bfcf9ca309442b389fb047922a118fb994eebca47e1cf90a8af3bfc614ed",
+      "original_sha256": "6cb8bfcf9ca309442b389fb047922a118fb994eebca47e1cf90a8af3bfc614ed",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/runtime.json",
+      "bytes": 4081,
+      "original_bytes": 4081,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/source-preflight.json": {
+      "sha256": "b1890ec14cfb77dd46030b8931fb2a3b7430abe65e6fbcab85aa07257282bdfb",
+      "original_sha256": "b1890ec14cfb77dd46030b8931fb2a3b7430abe65e6fbcab85aa07257282bdfb",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/source-preflight.json",
+      "bytes": 992,
+      "original_bytes": 992,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/source.zip": {
+      "sha256": "b1d161efc0112134d757e85b7d9e3071953c56b346cafb807877b0a4567a25fd",
+      "original_sha256": "b1d161efc0112134d757e85b7d9e3071953c56b346cafb807877b0a4567a25fd",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/source.zip",
+      "bytes": 3457746,
+      "original_bytes": 3457746,
+      "listed_in_original_manifest": true
+    },
+    "evidence/public-k3p-mode_hold/assessment.json": {
+      "sha256": "ed6ccb74bc3b5e66747443c885aa228ec08eb45daea8509aa7e261f3657a18e3",
+      "bytes": 14610,
+      "generated_by": "Independent supervisor stdlib audit; not original experiment artifact"
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/final-state.pt",
+      "sha256": "5a160c613f02420c9d898dedeaea9872c24e6d079563f07e790abd4bf468fd75",
+      "bytes": 672154,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/k3p-mode_hold/initial-state.pt",
+      "sha256": "d5576aa5dd2dcd1a263a5858dfeefa822d4b3250ecdbaf4bfff0008b1d6c4b87",
+      "bytes": 341899,
+      "verified_against_original_manifest": true
+    }
+  },
+  "note": "Original source/receipts byte copied; JSONL losslessly compressed (mtime0). Initial/final checkpoint raw storage independently inspected with restricted stdlib reader and retained at external content-hash-verified paths."
+}

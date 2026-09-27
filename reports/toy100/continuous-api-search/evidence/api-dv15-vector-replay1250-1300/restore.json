@@ -1,0 +1,1557 @@
+{
+  "value_exact": true,
+  "placement_exact": true,
+  "state_sha256": "335d2fe0ef3d6e4f9243e9c84c8afc75196438addc196de408718caacd0e8673",
+  "placement": {
+    "trainer": {
+      "serial_backward": null,
+      "controller": {
+        "variant": null,
+        "width_pair": {
+          "forward_gradient_rms": null,
+          "reverse_gradient_rms": null,
+          "average_gradient_rms": null
+        },
+        "latent_bandwidth": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            4
+          ],
+          "storage_device": "cuda:0"
+        },
+        "latent_applications": [
+          {
+            "width_min": null,
+            "width_mean": null,
+            "width_max": null,
+            "perturbation_rms": null
+          },
+          {
+            "width_min": null,
+            "width_mean": null,
+            "width_max": null,
+            "perturbation_rms": null
+          }
+        ],
+        "mobility": null,
+        "game_trust": null,
+        "game_ratio": null,
+        "payoff_error": null,
+        "data_memory": null,
+        "fast_reference": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            160
+          ],
+          "storage_device": "cuda:0"
+        },
+        "fast_mean_variance": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            160
+          ],
+          "storage_device": "cuda:0"
+        },
+        "slow_mean_variance": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            160
+          ],
+          "storage_device": "cuda:0"
+        },
+        "mean_covariance": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            160
+          ],
+          "storage_device": "cuda:0"
+        },
+        "alignment": null,
+        "data_score": null,
+        "data_drive": null,
+        "last_cosine": null,
+        "previous_gradient": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            4610
+          ],
+          "storage_device": "cuda:0"
+        },
+        "location": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            2
+          ],
+          "storage_device": "cuda:0"
+        },
+        "scale": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            2
+          ],
+          "storage_device": "cuda:0"
+        },
+        "projection": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            2,
+            32
+          ],
+          "storage_device": "cuda:0"
+        },
+        "reference": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            160
+          ],
+          "storage_device": "cuda:0"
+        },
+        "variance": {
+          "device": "cuda:0",
+          "dtype": "torch.float32",
+          "shape": [
+            160
+          ],
+          "storage_device": "cuda:0"
+        },
+        "updates": null,
+        "reopens": null,
+        "closed": null
+      },
+      "schema": null,
+      "recipe": {
+        "name": null,
+        "model": null,
+        "z_dim": null,
+        "num_particles": null,
+        "prior_kind": null,
+        "sigma_rel": null,
+        "standardize": null,
+        "num_classes": null,
+        "conditioning": null,
+        "ucd_target": null,
+        "ucd_weight": null,
+        "alpha_bar": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "batch_size": null,
+        "total_steps": null,
+        "continuous_policy": null,
+        "lr": null,
+        "d_lr_mult": null,
+        "prior_lr_mult": null,
+        "betas": [
+          null,
+          null
+        ],
+        "prior_betas": null,
+        "reg_coeff": null,
+        "reg_kappa": null,
+        "reg_every": null,
+        "prior_reg": null,
+        "ema_decay": null,
+        "lr_anneal_start": null,
+        "lr_floor": null,
+        "network_lr_floor": null,
+        "network_lr_horizon_cap": null,
+        "reg_anchor_min_decay": null,
+        "reg_anchor_weight": null,
+        "direct_particle_gain": null,
+        "d_guard_ratio": null,
+        "d_guard_min_steps": null,
+        "latent_damping_max_rate": null,
+        "direct_particle_betas": [
+          null,
+          null
+        ],
+        "input_noise_std": null,
+        "input_noise_anneal_end": null,
+        "output_noise_std": null,
+        "output_noise_warmup": null,
+        "encoder_mode": null,
+        "routing_temperature": null,
+        "distance_reduction": null,
+        "observation_sigma": null,
+        "reconstruction_weight": null
+      },
+      "optimizer_options": {
+        "foreach": null,
+        "fused": null
+      },
+      "penalty_options": {},
+      "device": null,
+      "dtype": null,
+      "models": {
+        "G": {
+          "net.0.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64,
+              4
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.0.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.2.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64,
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.2.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.4.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              2,
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.4.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              2
+            ],
+            "storage_device": "cuda:0"
+          }
+        },
+        "D": {
+          "scales": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              4
+            ],
+            "storage_device": "cuda:0"
+          },
+          "layers.0.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              96,
+              2
+            ],
+            "storage_device": "cuda:0"
+          },
+          "layers.0.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              96
+            ],
+            "storage_device": "cuda:0"
+          },
+          "layers.1.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              96,
+              96
+            ],
+            "storage_device": "cuda:0"
+          },
+          "layers.1.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              96
+            ],
+            "storage_device": "cuda:0"
+          },
+          "layers.2.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              96,
+              96
+            ],
+            "storage_device": "cuda:0"
+          },
+          "layers.2.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              96
+            ],
+            "storage_device": "cuda:0"
+          },
+          "head.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              1,
+              100
+            ],
+            "storage_device": "cuda:0"
+          },
+          "head.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              1
+            ],
+            "storage_device": "cuda:0"
+          }
+        },
+        "prior": {
+          "z": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              256,
+              4
+            ],
+            "storage_device": "cuda:0"
+          },
+          "log_width": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              256,
+              4
+            ],
+            "storage_device": "cuda:0"
+          }
+        },
+        "ema_G": {
+          "net.0.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64,
+              4
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.0.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.2.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64,
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.2.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.4.weight": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              2,
+              64
+            ],
+            "storage_device": "cuda:0"
+          },
+          "net.4.bias": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              2
+            ],
+            "storage_device": "cuda:0"
+          }
+        },
+        "ema_prior": {
+          "z": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              256,
+              4
+            ],
+            "storage_device": "cuda:0"
+          },
+          "log_width": {
+            "device": "cuda:0",
+            "dtype": "torch.float32",
+            "shape": [
+              256,
+              4
+            ],
+            "storage_device": "cuda:0"
+          }
+        }
+      },
+      "requires_grad": {
+        "G": {
+          "net.0.weight": null,
+          "net.0.bias": null,
+          "net.2.weight": null,
+          "net.2.bias": null,
+          "net.4.weight": null,
+          "net.4.bias": null
+        },
+        "D": {
+          "layers.0.weight": null,
+          "layers.0.bias": null,
+          "layers.1.weight": null,
+          "layers.1.bias": null,
+          "layers.2.weight": null,
+          "layers.2.bias": null,
+          "head.weight": null,
+          "head.bias": null
+        },
+        "prior": {
+          "z": null,
+          "log_width": null
+        },
+        "ema_G": {
+          "net.0.weight": null,
+          "net.0.bias": null,
+          "net.2.weight": null,
+          "net.2.bias": null,
+          "net.4.weight": null,
+          "net.4.bias": null
+        },
+        "ema_prior": {
+          "z": null,
+          "log_width": null
+        }
+      },
+      "optimizers": [
+        {
+          "state": {
+            "0": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "1": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "2": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64,
+                  64
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64,
+                  64
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "3": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  64
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "4": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  2,
+                  64
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  2,
+                  64
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "5": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  2
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  2
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "6": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  256,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  256,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "7": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  256,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  256,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              }
+            }
+          },
+          "param_groups": [
+            {
+              "lr": null,
+              "betas": [
+                null,
+                null
+              ],
+              "eps": null,
+              "weight_decay": null,
+              "amsgrad": null,
+              "maximize": null,
+              "foreach": null,
+              "capturable": null,
+              "differentiable": null,
+              "fused": null,
+              "decoupled_weight_decay": null,
+              "params": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            },
+            {
+              "lr": null,
+              "betas": [
+                null,
+                null
+              ],
+              "eps": null,
+              "weight_decay": null,
+              "amsgrad": null,
+              "maximize": null,
+              "foreach": null,
+              "capturable": null,
+              "differentiable": null,
+              "fused": null,
+              "decoupled_weight_decay": null,
+              "params": [
+                null
+              ]
+            },
+            {
+              "lr": null,
+              "betas": [
+                null,
+                null
+              ],
+              "eps": null,
+              "weight_decay": null,
+              "amsgrad": null,
+              "maximize": null,
+              "foreach": null,
+              "capturable": null,
+              "differentiable": null,
+              "fused": null,
+              "decoupled_weight_decay": null,
+              "params": [
+                null
+              ]
+            }
+          ],
+          "regularizer": {
+            "latent": {
+              "state": {
+                "observed": null,
+                "total": null,
+                "started": null
+              },
+              "history": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  256,
+                  4
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "direct": null
+          }
+        },
+        {
+          "state": {
+            "0": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  2
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  2
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "1": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "2": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  96
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "3": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "4": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  96
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "5": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "6": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  1,
+                  100
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  1,
+                  100
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "7": {
+              "step": {
+                "device": "cpu",
+                "dtype": "torch.float32",
+                "shape": [],
+                "storage_device": "cpu"
+              },
+              "exp_avg": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  1
+                ],
+                "storage_device": "cuda:0"
+              },
+              "exp_avg_sq": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  1
+                ],
+                "storage_device": "cuda:0"
+              }
+            }
+          },
+          "param_groups": [
+            {
+              "lr": null,
+              "betas": [
+                null,
+                null
+              ],
+              "eps": null,
+              "weight_decay": null,
+              "amsgrad": null,
+              "maximize": null,
+              "foreach": null,
+              "capturable": null,
+              "differentiable": null,
+              "fused": null,
+              "decoupled_weight_decay": null,
+              "params": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          ],
+          "regularizer": {
+            "record": {
+              "anchor_min_decay": null,
+              "lr_max": null,
+              "lr_last": null,
+              "anchor_started": null,
+              "calls": null,
+              "observed_steps": null,
+              "last_sur": null,
+              "sur_hist": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ],
+              "sur_base": null,
+              "w": null,
+              "low_streak": null,
+              "alpha": null,
+              "last_ratio": null,
+              "ema_updates": null,
+              "ema_skips": null,
+              "ema_reseeds": null,
+              "formulation": null
+            },
+            "ema": {
+              "scales": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  4
+                ],
+                "storage_device": "cuda:0"
+              },
+              "layers.0.weight": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  2
+                ],
+                "storage_device": "cuda:0"
+              },
+              "layers.0.bias": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "layers.1.weight": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "layers.1.bias": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "layers.2.weight": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96,
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "layers.2.bias": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  96
+                ],
+                "storage_device": "cuda:0"
+              },
+              "head.weight": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  1,
+                  100
+                ],
+                "storage_device": "cuda:0"
+              },
+              "head.bias": {
+                "device": "cuda:0",
+                "dtype": "torch.float32",
+                "shape": [
+                  1
+                ],
+                "storage_device": "cuda:0"
+              }
+            },
+            "guard": {
+              "clipped_tensors": null
+            }
+          }
+        }
+      ],
+      "initial_lrs": [
+        [
+          null,
+          null,
+          null
+        ],
+        [
+          null
+        ]
+      ],
+      "completed_steps": null,
+      "streams": {
+        "latent_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "shape": [
+            16
+          ],
+          "storage_device": "cpu"
+        },
+        "penalty_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "shape": [
+            16
+          ],
+          "storage_device": "cpu"
+        },
+        "eval_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "shape": [
+            16
+          ],
+          "storage_device": "cpu"
+        },
+        "noise_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "shape": [
+            16
+          ],
+          "storage_device": "cpu"
+        }
+      },
+      "cpu_rng": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "shape": [
+          5056
+        ],
+        "storage_device": "cpu"
+      },
+      "cuda_rng": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "shape": [
+          16
+        ],
+        "storage_device": "cpu"
+      }
+    },
+    "data_rng": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "shape": [
+        16
+      ],
+      "storage_device": "cpu"
+    }
+  }
+}

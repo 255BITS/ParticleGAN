@@ -1,0 +1,482 @@
+{
+  "broader_entry": {
+    "id": "api-dv15-vector_unequal_width",
+    "candidate": "API-DV15",
+    "protocol": "frozen22_vector_unequal_width",
+    "scope": "PUBLIC_API",
+    "recorded_utc": "2026-09-27T01:05:29.455704+00:00",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width",
+    "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-DV15",
+      "gate": "broader_vector_unequal_width",
+      "status": "PASS",
+      "seconds": 25.511306641157717,
+      "metrics": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "sw1_normalized",
+              "value": 0.04371895340595624,
+              "op": "<=",
+              "threshold": 0.18,
+              "status": "PASS",
+              "margin": 0.13628104659404375
+            },
+            {
+              "metric": "mass_tv",
+              "value": 0.05224609375,
+              "op": "<=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.09775390625
+            },
+            {
+              "metric": "hq",
+              "value": 0.975341796875,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.12534179687500002
+            },
+            {
+              "metric": "component_covariance_error",
+              "value": 0.4217933900654316,
+              "op": "<=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.4282066099345684
+            },
+            {
+              "metric": "component_min_eigen_ratio",
+              "value": 0.6367297172546387,
+              "op": ">=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.48672971725463865
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 18,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 18,
+            "first_pass_step": 350,
+            "stable_from_step": 350,
+            "stable_from_seconds": null,
+            "confirmed_step": 550,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.4583333333333333
+        },
+        "final": {
+          "step": 1200,
+          "sw1_normalized": 0.04371895340595624,
+          "mean_error": 0.058828484266996384,
+          "covariance_error": 0.011382944881916046,
+          "target_scale": 2.138371229171753,
+          "sample_count": 4096,
+          "mass_tv": 0.05224609375,
+          "min_mass_ratio": 0.880859375,
+          "hq": 0.975341796875,
+          "component_covariance_error": 0.4217933900654316,
+          "component_covariance_errors": [
+            0.9866504669189453,
+            0.19206438958644867,
+            0.2568729817867279,
+            0.2515857219696045
+          ],
+          "component_min_eigen_ratio": 0.6367297172546387,
+          "component_mass": [
+            0.22021484375,
+            0.260986328125,
+            0.2275390625,
+            0.291259765625
+          ],
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "component_counts": [
+            902,
+            1069,
+            932,
+            1193
+          ],
+          "ema": {
+            "sw1_normalized": 0.04603401624644232,
+            "mean_error": 0.06402838975191116,
+            "covariance_error": 0.01956769824028015,
+            "target_scale": 2.138371229171753,
+            "sample_count": 4096,
+            "mass_tv": 0.05224609375,
+            "min_mass_ratio": 0.880859375,
+            "hq": 0.9736328125,
+            "component_covariance_error": 0.44412433356046677,
+            "component_covariance_errors": [
+              1.1024091243743896,
+              0.16557273268699646,
+              0.2439744472503662,
+              0.26454102993011475
+            ],
+            "component_min_eigen_ratio": 0.6308499574661255,
+            "component_mass": [
+              0.22021484375,
+              0.260986328125,
+              0.2275390625,
+              0.291259765625
+            ],
+            "target_mass": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "component_counts": [
+              902,
+              1069,
+              932,
+              1193
+            ]
+          }
+        },
+        "policy": {
+          "width_pair": {
+            "forward_gradient_rms": 5.829539531987393e-06,
+            "reverse_gradient_rms": 4.614992121787509e-06,
+            "average_gradient_rms": 4.745528713101521e-06
+          },
+          "latent_applications": [
+            {
+              "width_min": 0.07274139672517776,
+              "width_mean": 0.10904790461063385,
+              "width_max": 0.17750871181488037,
+              "perturbation_rms": 0.06255818158388138
+            },
+            {
+              "width_min": 0.07411735504865646,
+              "width_mean": 0.11059142649173737,
+              "width_max": 0.17750871181488037,
+              "perturbation_rms": 0.06326469779014587
+            }
+          ],
+          "latent_bandwidth": [
+            0.1186164990067482,
+            0.1399807333946228,
+            0.13669179379940033,
+            0.12563371658325195
+          ],
+          "data_memory": 0.0,
+          "payoff_error": 0.016696947305222865,
+          "game_trust": 1.0,
+          "game_ratio": 0.9162299680346142,
+          "variant": "dv15",
+          "mobility": 0.002989805319410075,
+          "alignment": 0.3435089214527085,
+          "data_score": 0.6143721342086792,
+          "data_drive": 0.0,
+          "last_cosine": -0.11801911890506744,
+          "updates": 1200,
+          "reopens": 0,
+          "closed": true
+        }
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width"
+    },
+    "derived": {
+      "status": "PASS",
+      "observations": 24,
+      "passing_observations": 18,
+      "passing_suffix": 18,
+      "first_pass_step": 350,
+      "stable_from_step": 350,
+      "every_miss_after_first": [],
+      "passing_steps": [
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "failing_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300
+      ],
+      "final_live": {
+        "step": 1200,
+        "sw1_normalized": 0.04371895340595624,
+        "mean_error": 0.058828484266996384,
+        "covariance_error": 0.011382944881916046,
+        "target_scale": 2.138371229171753,
+        "sample_count": 4096,
+        "mass_tv": 0.05224609375,
+        "min_mass_ratio": 0.880859375,
+        "hq": 0.975341796875,
+        "component_covariance_error": 0.4217933900654316,
+        "component_covariance_errors": [
+          0.9866504669189453,
+          0.19206438958644867,
+          0.2568729817867279,
+          0.2515857219696045
+        ],
+        "component_min_eigen_ratio": 0.6367297172546387,
+        "component_mass": [
+          0.22021484375,
+          0.260986328125,
+          0.2275390625,
+          0.291259765625
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          902,
+          1069,
+          932,
+          1193
+        ]
+      },
+      "seconds": 25.511306641157717
+    },
+    "source_and_initialization_audit": {
+      "source_zip_sha256": "bbe8916e45d3db1c24fd3fc559c07a45e879affa6322c7e80c0e14beb1961f18",
+      "unchanged14_file_DV15_package": true,
+      "unchanged_host_scorer_and_helpers": {
+        "benchmarks/__init__.py": true,
+        "benchmarks/gan_v3.py": true,
+        "benchmarks/learned_lr_evaluation.py": true,
+        "benchmarks/legacy/__init__.py": true,
+        "benchmarks/legacy/gan_loss.py": true,
+        "benchmarks/legacy/grad_regularizers.py": true,
+        "benchmarks/legacy/locked_shared.py": true,
+        "benchmarks/legacy/recipe.py": true,
+        "benchmarks/locked_shared/__init__.py": true,
+        "benchmarks/locked_shared/baseline.py": true,
+        "benchmarks/locked_shared/hosts/__init__.py": true,
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": true,
+        "benchmarks/locked_shared/hosts/cover_leftover.py": true,
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": true,
+        "benchmarks/locked_shared/hosts/residual_student.py": true,
+        "benchmarks/locked_shared/hosts/unipolar.py": true,
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": true,
+        "benchmarks/locked_shared/mlp.py": true,
+        "benchmarks/locked_shared/mode_hold.py": true,
+        "benchmarks/locked_shared/observation.py": true,
+        "benchmarks/locked_shared/trajectory.py": true,
+        "benchmarks/locked_shared/two_pole.py": true,
+        "benchmarks/smart_descent/__init__.py": true,
+        "benchmarks/smart_descent/controller.py": true,
+        "benchmarks/smart_descent/evaluate.py": true,
+        "benchmarks/smart_descent/study.py": true,
+        "benchmarks/toy100/__init__.py": true,
+        "benchmarks/toy100/device.py": true,
+        "benchmarks/toy100/models.py": true,
+        "benchmarks/toy100/problems.py": true,
+        "benchmarks/transfer_suite/__init__.py": true,
+        "benchmarks/transfer_suite/compare_defaults.py": true,
+        "benchmarks/transfer_suite/compare_formulations.py": true,
+        "benchmarks/transfer_suite/default_promotion.py": true,
+        "benchmarks/transfer_suite/formulations.py": true,
+        "benchmarks/transfer_suite/image_solvability.py": true,
+        "benchmarks/transfer_suite/image_tasks.py": true,
+        "benchmarks/transfer_suite/legacy_noise_adapters.py": true,
+        "benchmarks/transfer_suite/linear_skip_refinement_research.py": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true,
+        "benchmarks/transfer_suite/protocol.py": true,
+        "benchmarks/transfer_suite/public_default_verification.py": true,
+        "benchmarks/transfer_suite/relative_step_adapter.py": true,
+        "benchmarks/transfer_suite/replay_shared_architecture.py": true,
+        "benchmarks/transfer_suite/run_linear_skip.py": true,
+        "benchmarks/transfer_suite/shared_adapter_search.py": true,
+        "benchmarks/transfer_suite/shared_batch_feature_research.py": true,
+        "benchmarks/transfer_suite/shared_batch_feature_search.py": true,
+        "benchmarks/transfer_suite/shared_critic_research.py": true,
+        "benchmarks/transfer_suite/shared_default_search.py": true,
+        "benchmarks/transfer_suite/shared_discriminator_search.py": true,
+        "benchmarks/transfer_suite/shared_ensemble_research.py": true,
+        "benchmarks/transfer_suite/shared_ensemble_search.py": true,
+        "benchmarks/transfer_suite/shared_geometry_readout_research.py": true,
+        "benchmarks/transfer_suite/shared_geometry_readout_search.py": true,
+        "benchmarks/transfer_suite/shared_geometry_research.py": true,
+        "benchmarks/transfer_suite/shared_geometry_residual_research.py": true,
+        "benchmarks/transfer_suite/shared_geometry_residual_search.py": true,
+        "benchmarks/transfer_suite/shared_geometry_search.py": true,
+        "benchmarks/transfer_suite/shared_local_density_research.py": true,
+        "benchmarks/transfer_suite/shared_local_density_search.py": true,
+        "benchmarks/transfer_suite/shared_norm_structure_research.py": true,
+        "benchmarks/transfer_suite/shared_norm_structure_search.py": true,
+        "benchmarks/transfer_suite/shared_pointnorm_research.py": true,
+        "benchmarks/transfer_suite/shared_pointnorm_search.py": true,
+        "benchmarks/transfer_suite/shared_profile_search.py": true,
+        "benchmarks/transfer_suite/shared_rare_diagnostic.py": true,
+        "benchmarks/transfer_suite/shared_rare_gradient_research.py": true,
+        "benchmarks/transfer_suite/shared_rare_gradient_search.py": true,
+        "benchmarks/transfer_suite/shared_residual_curvature_research.py": true,
+        "benchmarks/transfer_suite/shared_residual_curvature_search.py": true,
+        "benchmarks/transfer_suite/shared_schedule_search.py": true,
+        "benchmarks/transfer_suite/shared_variants.py": true,
+        "benchmarks/transfer_suite/shared_width_catalog.py": true,
+        "benchmarks/transfer_suite/shared_width_last_refinement.py": true,
+        "benchmarks/transfer_suite/shared_width_refinement.py": true,
+        "benchmarks/transfer_suite/shared_width_search.py": true,
+        "benchmarks/transfer_suite/smooth_critic_research.py": true,
+        "benchmarks/transfer_suite/solvability_search.py": true,
+        "benchmarks/transfer_suite/stress_tasks.py": true,
+        "benchmarks/transfer_suite/suite.py": true,
+        "benchmarks/transfer_suite/toy100_compatibility.py": true,
+        "benchmarks/transfer_suite/vector_tasks.py": true,
+        "lib/toy_metrics.py": true,
+        "lib/toy_models.py": true,
+        "reports/data-drift-api/dv15.json": true,
+        "reports/data-drift-api/frozen_vector_tasks.py": true,
+        "reports/data-drift-api/vector-fixtures.json": true,
+        "reports/data-drift-api/vector-host-receipt.json": true,
+        "reports/data-drift-api/vector-protocol.json": true,
+        "reports/data-drift-api/vector_gate.py": true,
+        "reports/data-drift-api/worker.py": true,
+        "reports/transfer_suite/unadjusted/leading_profile.json": true
+      },
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ]
+      },
+      "initialization": {
+        "canonical_ordered_parameters": true,
+        "fixture_sha256": "c2b1ee06835ebe2f206b26ce1b09196c6f9ee68b7be95c79535bb2cc3d13904a",
+        "zero_added_widths": true,
+        "initial_ema_exact": true,
+        "private_and_data_streams_same_fixed_seeds": true
+      },
+      "all_manifest_hashes_match": true,
+      "native_CPU_scalar_steps": 16,
+      "CUDA_optimizer_moments": true,
+      "caller_rng_saved": true,
+      "observations": 24,
+      "per_update_rows": 1200,
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "gpu": "NVIDIA RTX A6000",
+        "physical_gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "tf32": false,
+        "threads": 1,
+        "deterministic": true
+      }
+    },
+    "raw_checkpoints_retained": true,
+    "artifacts": {
+      "evidence/api-dv15-vector_unequal_width/artifact-sha256.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/artifact-sha256.json",
+        "original_sha256": "6ccf4bd45f7d31b80ef8c1b9aee44258aa2e4b5ebb0408e6f2e39b47ba6d2405",
+        "sha256": "6ccf4bd45f7d31b80ef8c1b9aee44258aa2e4b5ebb0408e6f2e39b47ba6d2405",
+        "original_bytes": 810,
+        "bytes": 810
+      },
+      "evidence/api-dv15-vector_unequal_width/canonical-initialization.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/canonical-initialization.json",
+        "original_sha256": "2766257b98391bfbfd1027a28ce73c19eb09edfeab860dd8b6f165013de63341",
+        "sha256": "2766257b98391bfbfd1027a28ce73c19eb09edfeab860dd8b6f165013de63341",
+        "original_bytes": 2377,
+        "bytes": 2377
+      },
+      "evidence/api-dv15-vector_unequal_width/declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/declaration.json",
+        "original_sha256": "3f00eb793da28e6eae3522a361285c2848718e9692f3379438a251a8851b792c",
+        "sha256": "3f00eb793da28e6eae3522a361285c2848718e9692f3379438a251a8851b792c",
+        "original_bytes": 21744,
+        "bytes": 21744
+      },
+      "evidence/api-dv15-vector_unequal_width/final-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/final-state.pt",
+        "original_sha256": "81422a3e25f7696b4a4b038e09abcae5f0d273ec60475a35bc1363cc3b53e93c",
+        "sha256": "81422a3e25f7696b4a4b038e09abcae5f0d273ec60475a35bc1363cc3b53e93c",
+        "original_bytes": 714145,
+        "bytes": 714145
+      },
+      "evidence/api-dv15-vector_unequal_width/initial-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/initial-state.pt",
+        "original_sha256": "e88634f04222b080568b08f5e7aa768f7716c65e67ceabafe7bdcf9daf16e46a",
+        "sha256": "e88634f04222b080568b08f5e7aa768f7716c65e67ceabafe7bdcf9daf16e46a",
+        "original_bytes": 349896,
+        "bytes": 349896
+      },
+      "evidence/api-dv15-vector_unequal_width/initial.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/initial.json",
+        "original_sha256": "e58e8b8f285e80bf3f53b25f7a9c1c98e22c05c390e5479e9abf6e2d1e15ba01",
+        "sha256": "e58e8b8f285e80bf3f53b25f7a9c1c98e22c05c390e5479e9abf6e2d1e15ba01",
+        "original_bytes": 847,
+        "bytes": 847
+      },
+      "evidence/api-dv15-vector_unequal_width/learning-rates.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/learning-rates.jsonl",
+        "original_sha256": "e7dd8791e844e1f4bddcfd68182712f026745a4193f9537c04fb8d3f7526d58d",
+        "sha256": "3260f615a7306c7e82c99871577f088ec14e4df7e39f556ad7119bcc2be36a29",
+        "original_bytes": 1556122,
+        "bytes": 307201
+      },
+      "evidence/api-dv15-vector_unequal_width/metrics.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/metrics.jsonl",
+        "original_sha256": "d49789ec4df818921470c80548164bb3771af40018b2ba39f8ee37795a7c8111",
+        "sha256": "70c64f768c656b23c47f98f97bfdb4aa15aaa356d1678b545d0d2e0e4c0a5057",
+        "original_bytes": 30752,
+        "bytes": 5833
+      },
+      "evidence/api-dv15-vector_unequal_width/result.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/result.json",
+        "original_sha256": "8a2f28bfb91089c39677b2c37b631d71ec1132a7231d3a6d76965de8ac2e3cad",
+        "sha256": "8a2f28bfb91089c39677b2c37b631d71ec1132a7231d3a6d76965de8ac2e3cad",
+        "original_bytes": 5067,
+        "bytes": 5067
+      },
+      "evidence/api-dv15-vector_unequal_width/source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-unequal-width/source.zip",
+        "original_sha256": "bbe8916e45d3db1c24fd3fc559c07a45e879affa6322c7e80c0e14beb1961f18",
+        "sha256": "bbe8916e45d3db1c24fd3fc559c07a45e879affa6322c7e80c0e14beb1961f18",
+        "original_bytes": 451372,
+        "bytes": 451372
+      }
+    },
+    "scope_note": "Own unchanged14-file DV15 public trainer on frozen host, thresholds and canonical initialization. Explicit candidate uniform latent perturbation plus output Gaussian.029 applies to train/live/EMA. Original fixed-budget status preserved; supervisor separately assesses settling/retention and supplementary evidence. No predecessor or sibling pass inherited."
+  },
+  "jsonl_lossless": true
+}

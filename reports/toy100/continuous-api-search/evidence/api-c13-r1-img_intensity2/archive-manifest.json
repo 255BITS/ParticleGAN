@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "id": "api-c13-r1-img_intensity2",
+  "created_utc": "2026-09-27T00:42:12.295362+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2",
+  "files": {
+    "evidence/api-c13-r1-img_intensity2/artifact-sha256.json": {
+      "sha256": "9e2b87e1ca4414f0d4935f4690d3f528abe8f06fa5b770bf96af1c6abc7df987",
+      "original_sha256": "9e2b87e1ca4414f0d4935f4690d3f528abe8f06fa5b770bf96af1c6abc7df987",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/artifact-sha256.json",
+      "bytes": 707,
+      "original_bytes": 707,
+      "listed_in_original_manifest": false
+    },
+    "evidence/api-c13-r1-img_intensity2/declaration.json": {
+      "sha256": "375ad20feb3a891f12f8151acb7e81458327c00b375880c70db2ae265d6fe4f1",
+      "original_sha256": "375ad20feb3a891f12f8151acb7e81458327c00b375880c70db2ae265d6fe4f1",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/declaration.json",
+      "bytes": 6749,
+      "original_bytes": 6749,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-c13-r1-img_intensity2/initial.json": {
+      "sha256": "6d038e076bb167c994995b7e29f64efee149da508da76f7aabf7f76db535bb43",
+      "original_sha256": "6d038e076bb167c994995b7e29f64efee149da508da76f7aabf7f76db535bb43",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/initial.json",
+      "bytes": 592,
+      "original_bytes": 592,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-c13-r1-img_intensity2/learning-rates.jsonl.gz": {
+      "sha256": "eeaa419aa364f8d604ed4bda28d25ff876260db6513cfc858c04ce3903756045",
+      "original_sha256": "3b53bff1bafc1365c3e9695c8892c05b26f180cd42055c7a604a40e65ee95a58",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/learning-rates.jsonl",
+      "bytes": 508997,
+      "original_bytes": 2525538,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-c13-r1-img_intensity2/metrics.jsonl.gz": {
+      "sha256": "0fc3320ec8db8c24ca7d19d5d372a56774a4bfe3e650a7dc29a335d3353de5ca",
+      "original_sha256": "83d4fa38fc9408b83c17492795907a0a81ad181b7292a559b560c85dcbc20ddf",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/metrics.jsonl",
+      "bytes": 1015,
+      "original_bytes": 8063,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-c13-r1-img_intensity2/result.json": {
+      "sha256": "23c34ac45aee9223359d031376bf3282edf07e439082037f971409ce51c7eec2",
+      "original_sha256": "23c34ac45aee9223359d031376bf3282edf07e439082037f971409ce51c7eec2",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/result.json",
+      "bytes": 9007,
+      "original_bytes": 9007,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-c13-r1-img_intensity2/source.zip": {
+      "sha256": "29a169f4042159d83c42e709c2da18adcba11859a35fdc40706b6fe20d0d0c48",
+      "original_sha256": "29a169f4042159d83c42e709c2da18adcba11859a35fdc40706b6fe20d0d0c48",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/source.zip",
+      "bytes": 90374,
+      "original_bytes": 90374,
+      "listed_in_original_manifest": true
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/final-state.pt",
+      "sha256": "7fa171d47599865503a8de9a37af5f58958e96459b035145b235da83bab3839a",
+      "bytes": 204301,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T002917Z-1706701/constant_rate_stability/20260927T002917Z-1706710/repo/experiments/nonlinear_macrostep/C13-R1-img_intensity2/initial-state.pt",
+      "sha256": "668273de62cad2957b5b175ebd8de7d813fd4dfbbc775ad04cc9105d5d15e2ab",
+      "bytes": 107254,
+      "verified_against_original_manifest": true
+    }
+  },
+  "note": "Source/declarations/results copied exactly; JSONL gzip mtime0 is lossless; checkpoints remain external with verified hashes."
+}

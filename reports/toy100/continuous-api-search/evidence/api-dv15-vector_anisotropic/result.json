@@ -1,0 +1,175 @@
+{
+  "candidate": "API-DV15",
+  "gate": "broader_vector_anisotropic",
+  "status": "PASS",
+  "seconds": 34.424281862797216,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.032401372945250216,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.14759862705474977
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.031168624758720398,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.1188313752412796
+        },
+        {
+          "metric": "hq",
+          "value": 0.978271484375,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.12827148437500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.1461342473824819,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.703865752617518
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.7835612893104553,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.6335612893104553
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 21,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 21,
+        "first_pass_step": 200,
+        "stable_from_step": 200,
+        "stable_from_seconds": null,
+        "confirmed_step": 400,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.3333333333333333
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.032401372945250216,
+      "mean_error": 0.03953644260764122,
+      "covariance_error": 0.05463621765375137,
+      "target_scale": 2.040409564971924,
+      "sample_count": 4096,
+      "mass_tv": 0.031168624758720398,
+      "min_mass_ratio": 0.947021484375,
+      "hq": 0.978271484375,
+      "component_covariance_error": 0.1461342473824819,
+      "component_covariance_errors": [
+        0.08216837793588638,
+        0.11632855981588364,
+        0.23990580439567566
+      ],
+      "component_min_eigen_ratio": 0.7835612893104553,
+      "component_mass": [
+        0.315673828125,
+        0.364501953125,
+        0.31982421875
+      ],
+      "target_mass": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ],
+      "component_counts": [
+        1293,
+        1493,
+        1310
+      ],
+      "ema": {
+        "sw1_normalized": 0.03236933092493215,
+        "mean_error": 0.037457387894392014,
+        "covariance_error": 0.06266427785158157,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.031168624758720398,
+        "min_mass_ratio": 0.947021484375,
+        "hq": 0.975830078125,
+        "component_covariance_error": 0.12974509100119272,
+        "component_covariance_errors": [
+          0.09678468853235245,
+          0.09782110899686813,
+          0.1946294754743576
+        ],
+        "component_min_eigen_ratio": 0.8030121326446533,
+        "component_mass": [
+          0.315673828125,
+          0.364501953125,
+          0.31982421875
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1293,
+          1493,
+          1310
+        ]
+      }
+    },
+    "policy": {
+      "width_pair": {
+        "forward_gradient_rms": 6.488044618890854e-06,
+        "reverse_gradient_rms": 4.823345534532564e-06,
+        "average_gradient_rms": 4.8563383643340785e-06
+      },
+      "latent_applications": [
+        {
+          "width_min": 0.09062668681144714,
+          "width_mean": 0.12621988356113434,
+          "width_max": 0.1640559285879135,
+          "perturbation_rms": 0.07236769795417786
+        },
+        {
+          "width_min": 0.08904224634170532,
+          "width_mean": 0.1247803121805191,
+          "width_max": 0.15902014076709747,
+          "perturbation_rms": 0.07133805006742477
+        }
+      ],
+      "latent_bandwidth": [
+        0.12502384185791016,
+        0.14779192209243774,
+        0.14869213104248047,
+        0.140391007065773
+      ],
+      "data_memory": 0.0,
+      "payoff_error": 0.005430520503776106,
+      "game_trust": 0.9983258494617375,
+      "game_ratio": 1.0409506778751179,
+      "variant": "dv15",
+      "mobility": 0.0026995766557409416,
+      "alignment": 0.4854535551625315,
+      "data_score": 0.6995735168457031,
+      "data_drive": 0.0,
+      "last_cosine": 0.6788043975830078,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-anisotropic"
+}

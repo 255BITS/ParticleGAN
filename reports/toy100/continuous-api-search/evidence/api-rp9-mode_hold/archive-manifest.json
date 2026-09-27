@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "id": "api-rp9-mode_hold",
+  "created_utc": "2026-09-27T00:41:38.451418+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold",
+  "files": {
+    "evidence/api-rp9-mode_hold/artifact-sha256.json": {
+      "sha256": "01af33927ca53caae91438e7be337c12a4c1057d384f9b7960f434c230fb8ee2",
+      "original_sha256": "01af33927ca53caae91438e7be337c12a4c1057d384f9b7960f434c230fb8ee2",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/artifact-sha256.json",
+      "bytes": 887,
+      "original_bytes": 887,
+      "listed_in_original_manifest": false
+    },
+    "evidence/api-rp9-mode_hold/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/batch-receipts.jsonl",
+      "bytes": 240947,
+      "original_bytes": 500493,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/declaration.json": {
+      "sha256": "1d99ad25a3f92cac77148de35d555d993c0cfecfe93c44253e308cfda33092d6",
+      "original_sha256": "1d99ad25a3f92cac77148de35d555d993c0cfecfe93c44253e308cfda33092d6",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/declaration.json",
+      "bytes": 13004,
+      "original_bytes": 13004,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/initial.json": {
+      "sha256": "2aefc091560c7ab68c72dede8601b4edfc53546dc47ecc08d97009c66b68344f",
+      "original_sha256": "2aefc091560c7ab68c72dede8601b4edfc53546dc47ecc08d97009c66b68344f",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/initial.json",
+      "bytes": 554,
+      "original_bytes": 554,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/learning-rates.jsonl.gz": {
+      "sha256": "36d9995378057cf2af3fdabc38fa7f2c3c40f07d3bafe03d6c599ef036f68703",
+      "original_sha256": "3062a1d38d7774b5fa30a0903eb29bb6d251196a2dd3f5837d081477ea9b7cb3",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/learning-rates.jsonl",
+      "bytes": 318925,
+      "original_bytes": 1781447,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/metrics.jsonl.gz": {
+      "sha256": "52214a1a14724c4f5d1d9c67c3d2510390aabd5cdd3d7a1d9eec040433b9aa0d",
+      "original_sha256": "245cfeda3a9fc4ea44a51f0425d85eb573785757282dafba7149dcbac432da49",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/metrics.jsonl",
+      "bytes": 621,
+      "original_bytes": 4763,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/result.json": {
+      "sha256": "fc7e4e04cf7d823fe93a80cb0683ac9b1bb338584fcd71d4f4112634e549f87e",
+      "original_sha256": "fc7e4e04cf7d823fe93a80cb0683ac9b1bb338584fcd71d4f4112634e549f87e",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/result.json",
+      "bytes": 2183,
+      "original_bytes": 2183,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/runtime.json": {
+      "sha256": "12387a2f6f944c83f3a42cdd09d73c13cfa7eb6cf567e74e77bb9de3d38ffee2",
+      "original_sha256": "12387a2f6f944c83f3a42cdd09d73c13cfa7eb6cf567e74e77bb9de3d38ffee2",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/runtime.json",
+      "bytes": 396,
+      "original_bytes": 396,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/source.zip": {
+      "sha256": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+      "original_sha256": "73b67ddffc9b9fd72888dbe95c8d135c21d117f1306885bd7ed39d2e10462829",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/source.zip",
+      "bytes": 231934,
+      "original_bytes": 231934,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp9-mode_hold/assessment.json": {
+      "sha256": "6e21bfe6198c65b6dfa1266214cc595b4ca961dc244361982a712eb90ff3ff9f",
+      "bytes": 9369,
+      "generated_by": "Independent stdlib supervisor audit; not original experiment artifact"
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/final-state.pt",
+      "sha256": "8bd3f1026483083856f5e89dce2d6b55c7e9f9422e9fcc0fc08276927daa8add",
+      "bytes": 758697,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold/initial-state.pt",
+      "sha256": "0c1c62c1a6766f8e7172c50f8241d5f7aec53090dd6ee07858299cec23486c05",
+      "bytes": 755271,
+      "verified_against_original_manifest": true
+    }
+  },
+  "note": "Original receipts/source copied byte-for-byte; JSONL losslessly compressed with gzip mtime0. Checkpoints content-hash verified and retained at original paths, not deserialized. Assessment independently derived from retained observations and immutable source."
+}

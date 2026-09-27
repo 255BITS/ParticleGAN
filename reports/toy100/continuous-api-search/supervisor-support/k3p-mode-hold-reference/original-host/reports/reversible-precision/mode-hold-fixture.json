@@ -1,0 +1,24 @@
+{
+  "source_archive": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/gpu-known-winner-control/archives/simpler22_reference.tar.gz",
+  "archive_sha256": "6820de970e8e5b78dace410d88d5a81a73aa38ed73e2912931c329adb790c781",
+  "archived_sources": {
+    "benchmarks/locked_shared/mode_hold.py": {
+      "local_copy": "reports/reversible-precision/canonical-mode_hold.py.txt",
+      "sha256": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45"
+    },
+    "benchmarks/locked_shared/mlp.py": {
+      "local_copy": "reports/reversible-precision/canonical-mlp.py.txt",
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": {
+      "local_copy": "reports/reversible-precision/canonical-legacy_noise_adapters.py.txt",
+      "sha256": "b6240105a06ba4b10cedcf38818c187fdd79bee9ad47d47319909cfc1404dc6a"
+    }
+  },
+  "current_helpers": {
+    "benchmarks/locked_shared/mode_hold.py": "4bd920c258337fe8b21910b946d94cfe7d699ea858b57353cf0fd8f588084b3d",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "2e4ebc45fc92a3464d230d0bac8cddc00521f760b20be6538a103a6e27700c09",
+    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+  }
+}

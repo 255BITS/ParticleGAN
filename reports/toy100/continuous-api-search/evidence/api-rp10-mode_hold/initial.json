@@ -1,0 +1,11 @@
+{
+  "backend": "canonical CUDA shared-stream host",
+  "complete": "f179ccbe1665033e6863b140e458580701e7ac5963ca0fa7a6832bc87498c43b",
+  "models": {
+    "G": "4c3267e3d4c2f1bae6e31d2507349428a41e2738804017e1d7822afc03e5506c",
+    "D": "70f21a1da6b3b68b652d492b1378fd5b7773b060d30a24363c883ba8fbb28faa",
+    "prior": "0f9b6d7770aac5b39c4ee75b16a5ac3a8d39ead68f345e883e3156ccf4240246",
+    "ema_G": "4c3267e3d4c2f1bae6e31d2507349428a41e2738804017e1d7822afc03e5506c",
+    "ema_prior": "0f9b6d7770aac5b39c4ee75b16a5ac3a8d39ead68f345e883e3156ccf4240246"
+  }
+}

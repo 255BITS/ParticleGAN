@@ -1,0 +1,82 @@
+{
+  "candidate": "API-RP10",
+  "gate": "broader_mode_hold",
+  "status": "FAIL",
+  "seconds": 88.35934771597385,
+  "metrics": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "modes",
+          "value": 7,
+          "op": ">=",
+          "threshold": 8,
+          "status": "FAIL",
+          "margin": -1
+        },
+        {
+          "metric": "hq",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.9,
+          "status": "PASS",
+          "margin": 0.09999999999999998
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "confirmation_fraction": 2.0
+    },
+    "final": {
+      "step": 1200,
+      "modes": 7,
+      "n_modes": 8,
+      "hq": 1.0,
+      "cover": 0.875,
+      "effective_modes": 6.14341926574707,
+      "ema": {
+        "modes": 7,
+        "n_modes": 8,
+        "hq": 0.814208984375,
+        "cover": 0.875,
+        "effective_modes": 6.275671005249023
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": false,
+      "gap": 0.010005621239542961,
+      "gap_s": 0.014007524599399638,
+      "velocity": -4.042326626117927e-05,
+      "contraction_peak": 0.0001434802354231013,
+      "contracting": 271,
+      "activity": 0.022289663181056327,
+      "activity_peak": 0.49921557832196695,
+      "quiet_gap": 0.015651965221111144,
+      "quiet_activity": 0.03262570410713909,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 1200,
+      "openings": 1,
+      "closings": 1,
+      "event": null,
+      "velocity_s": -2.143078580330653e-05
+    },
+    "updates": 1200
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-mode_hold"
+}

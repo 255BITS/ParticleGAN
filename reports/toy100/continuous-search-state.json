@@ -583,10 +583,10 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "EARLY_IMAGE_SURVIVOR_RECOVERY_PENDING_OTHER_LANES_SEARCHING",
+    "status": "EARLY_CANDIDATES_UNDER_QUALIFICATION",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
-    "matched_k3p_owner": "RECOVERY_AND_UNEQUAL_MASS_REFERENCES_COMPLETE",
+    "matched_k3p_owner": "RECOVERY_UNEQUAL_MASS_AND_MODE_HOLD_REFERENCES_COMPLETE",
     "checkpoint_diagnostic_owner": "data_drift_mobility",
     "api_rp2_long": {
       "updates": 30000,
@@ -913,7 +913,7 @@
       "qualified": false
     },
     "api_c13_r1": {
-      "status": "EARLY_IMAGE_PASS_RING_RUNNING",
+      "status": "OWN_RING_COMPLETE_BROADER_QUALIFICATION",
       "image": "OWN_PASS_11_OF_24_SUFFIX_11",
       "image_field_evaluations": 8752,
       "image_converged_updates": 99,
@@ -921,25 +921,66 @@
       "cpu_regression_passes": 117,
       "qualified": false,
       "broader_completed": 1,
-      "broader_total": 22
+      "broader_total": 22,
+      "initial_arrival": 230,
+      "initial_retention": "210/218",
+      "initial_settled_from": 350,
+      "initial_final_suffix": 206,
+      "changed_arrival_delay": 130,
+      "changed_retention": "208/208",
+      "ring_seconds": 1879.5925968219526,
+      "terminal_independent_audit": "VERIFIED",
+      "ring_field_evaluations": 73594,
+      "ring_converged_steps": 3,
+      "ring_fallback_steps": 4597
     },
     "k3p_mode_hold_reference": {
-      "status": "SOURCE_PREPARATION_AND_INDEPENDENT_REVIEW_REQUIRED",
+      "status": "COMPLETE_INDEPENDENTLY_VERIFIED",
       "owner_pid": 1735840,
-      "scope": "UNMODIFIED_RELEASED_K3P_SUPPORTING_REFERENCE_ONLY"
+      "scope": "UNMODIFIED_RELEASED_K3P_SUPPORTING_REFERENCE_ONLY",
+      "bundle_manifest_sha256": "2ae5dd02c6049121536d0d692b437cb19399721ff5889d35ebe8030a204acf96",
+      "worker_sha256": "c2050d4cd8d78e9b7d50c7f8e2783fc34f5bbca8aa48b4f54c79162388f7c68d",
+      "quality": "FAIL_0_OF_24",
+      "maximum_modes": 6,
+      "final_modes": 6,
+      "final_hq": 0.97607421875,
+      "seconds": 19.32361010904424,
+      "report": "reports/toy100/continuous-api-search/k3p-comparison-results.json"
     },
     "api_dv15": {
-      "status": "ORIGINAL_BROADER_FAIL_SUPPLEMENTARY_SETTLING_UNVERIFIED",
+      "status": "REJECTED_BROADER_QUALITY",
       "initial_retention": "189/189",
       "shift_delay": 330,
       "shift_retention": "185/188",
       "shift_final_suffix": 182,
       "unequal_mass": "ORIGINAL_FAIL_4_OF_24_SUFFIX_2_ENDPOINT_ALL_BOUNDS_PASS",
       "bars4": "PASS_11_OF_24_SUFFIX_8",
-      "supplementary_window": "UNCHANGED_RESUMED_1200_TO_2400_REQUESTED",
+      "supplementary_window": "VERIFIED_RESUMED_1200_TO_2400_24_OF_24",
       "qualified": false,
-      "supplementary_owner_pid": 1744511
+      "supplementary_owner_pid": 1744511,
+      "combined_since_first_arrival": "28/29",
+      "combined_final_suffix": 26,
+      "combined_only_miss": 1100,
+      "own_checkpoint_replay": "VERIFIED_EXACT_DIRECT_AND_SPLIT_FULL_STATE_STORAGE_AND_TRACES",
+      "original_budget_failure_retained": true,
+      "stationary_after_arrival": "699/699",
+      "stationary_first_arrival": 520,
+      "own_ring_replay": "VERIFIED_EXACT_2400_TO_2500",
+      "budget_prefix": "VERIFIED_EXACT_THROUGH_2400",
+      "intensity": "FAIL_7_OF_24_SUFFIX_3",
+      "mode_hold": "FAIL_0_OF_24_FINAL_7_OF_8",
+      "other_vector_passes": 5,
+      "image_passes": 3,
+      "long": "NOT_RUN_AFTER_BROADER_FAILURE"
+    },
+    "api_rp10": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "image": "FAIL_4_OF_24_SUFFIX_1",
+      "mode_hold": "FAIL_0_OF_24",
+      "final_modes": 7,
+      "ring": "NOT_RUN_AFTER_CHEAP_FAILURE",
+      "qualified": false
     }
   },
-  "observed_utc": "2026-09-27T00:54:22.366206+00:00"
+  "observed_utc": "2026-09-27T01:13:52.662556+00:00"
 }

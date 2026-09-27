@@ -1,0 +1,140 @@
+{
+  "candidate": "API-RP10",
+  "gate": "broader_img_intensity2",
+  "status": "FAIL",
+  "seconds": 44.866104145068675,
+  "metrics": {
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 4,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 1,
+      "first_pass_step": 450,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "final": {
+      "step": 600,
+      "modes": 2,
+      "hq": 1.0,
+      "mean_rmse": 0.035797275602817535,
+      "quality_mode_fractions": [
+        0.53125,
+        0.46875
+      ],
+      "mode_fractions": [
+        0.53125,
+        0.46875
+      ],
+      "distribution_tv": 0.03125,
+      "ema": {
+        "modes": 2,
+        "hq": 0.8125,
+        "mean_rmse": 0.048233628273010254,
+        "quality_mode_fractions": [
+          0.46875,
+          0.34375
+        ],
+        "mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "distribution_tv": 0.03125
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": true,
+      "gap": 0.05599650368094444,
+      "gap_s": 0.043405955237081136,
+      "velocity": 0.000127177257008719,
+      "contraction_peak": 1.0759369751774888e-05,
+      "contracting": 0,
+      "activity": 0.21012419297008456,
+      "activity_peak": 0.6495689191057883,
+      "quiet_gap": null,
+      "quiet_activity": null,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 600,
+      "openings": 1,
+      "closings": 0,
+      "event": null,
+      "velocity_s": 0.00018343917049759825
+    },
+    "updates": 600,
+    "effective_recipe": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 8,
+      "num_particles": 32,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 32,
+      "total_steps": null,
+      "continuous_precision": "rp5",
+      "game_update": "secant_resolvent",
+      "adam_eager_state": true,
+      "input_noise_init_steps": 360,
+      "output_noise_init_steps": 720,
+      "noise_policy": "constant",
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.0,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.2,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0
+    },
+    "optimizer_classes": [
+      "K3PGeneratorAdam",
+      "KA2CriticAdam"
+    ],
+    "controller_class": "ReversiblePrecision"
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2"
+}

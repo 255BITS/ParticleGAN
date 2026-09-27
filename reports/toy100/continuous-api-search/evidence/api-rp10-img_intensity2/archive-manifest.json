@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "id": "api-rp10-img_intensity2",
+  "created_utc": "2026-09-27T01:07:35.058317+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2",
+  "files": {
+    "evidence/api-rp10-img_intensity2/artifact-sha256.json": {
+      "sha256": "312d80a27443a9dc9f8203a1e67b8a7920aa09eee253978c718aff1a07909b7c",
+      "original_sha256": "312d80a27443a9dc9f8203a1e67b8a7920aa09eee253978c718aff1a07909b7c",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/artifact-sha256.json",
+      "bytes": 892,
+      "original_bytes": 892,
+      "listed_in_original_manifest": false
+    },
+    "evidence/api-rp10-img_intensity2/declaration.json": {
+      "sha256": "5fbdacbe1230e8f6910a6d97bab006e216e257357001d9efa5f3dfbe61ddee69",
+      "original_sha256": "5fbdacbe1230e8f6910a6d97bab006e216e257357001d9efa5f3dfbe61ddee69",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/declaration.json",
+      "bytes": 9683,
+      "original_bytes": 9683,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/initial.json": {
+      "sha256": "e1dc7c3262905602f63361d210634ed02a5bc6d5975d73d87e88e8ff0c196db1",
+      "original_sha256": "e1dc7c3262905602f63361d210634ed02a5bc6d5975d73d87e88e8ff0c196db1",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/initial.json",
+      "bytes": 592,
+      "original_bytes": 592,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/learning-rates.jsonl.gz": {
+      "sha256": "099f6495ef0e1f3f75a528ddb436d664a0e9bb4c00c23a7ca706caa72e1cdf32",
+      "original_sha256": "f3868d34e8665b092f0e9df563ade58005bbd8a61b8750392beaff40c05c88f6",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/learning-rates.jsonl",
+      "bytes": 113168,
+      "original_bytes": 660492,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/metrics.jsonl.gz": {
+      "sha256": "983f8570acd2c5804febf74b2e17fe6dc13c7d42518cec98ee9a7e703c655580",
+      "original_sha256": "8bde648c0fc1a9dd9f185aeef0184549dd25e88e52d07e5b095be2d220436f4f",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/metrics.jsonl",
+      "bytes": 1215,
+      "original_bytes": 8526,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/result.json": {
+      "sha256": "2936409ac78c1cfc0130c6287a7591dd044c45666a82cd532e55c29ee95e5b01",
+      "original_sha256": "2936409ac78c1cfc0130c6287a7591dd044c45666a82cd532e55c29ee95e5b01",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/result.json",
+      "bytes": 3621,
+      "original_bytes": 3621,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/retention-assessment.json": {
+      "sha256": "1459594ae31dad230c8b1b65c671511e9637c52d466168e15e3888a522a254c8",
+      "original_sha256": "1459594ae31dad230c8b1b65c671511e9637c52d466168e15e3888a522a254c8",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/retention-assessment.json",
+      "bytes": 1453,
+      "original_bytes": 1453,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/runtime.json": {
+      "sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+      "original_sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/runtime.json",
+      "bytes": 365,
+      "original_bytes": 365,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/source.zip": {
+      "sha256": "63e233231e1fc457f5426f46321f7cf50ed910a590467920e0c52d52481ed4ca",
+      "original_sha256": "63e233231e1fc457f5426f46321f7cf50ed910a590467920e0c52d52481ed4ca",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/source.zip",
+      "bytes": 169788,
+      "original_bytes": 169788,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp10-img_intensity2/assessment.json": {
+      "sha256": "da5e3c7610c98c1bc9436c17249494801ab107dc302127ece21bd134c9107a48",
+      "bytes": 8444,
+      "generated_by": "Independent stdlib supervisor audit; not original experiment artifact"
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/final-state.pt",
+      "sha256": "2f6b413e2f318a030f062592cfe458918f4a920da22af5a56798b867f465b3c2",
+      "bytes": 226707,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-img_intensity2/initial-state.pt",
+      "sha256": "21c5b67f12e612f0978d8974a99a750e6594d04e3b870900c88920c95befc9e5",
+      "bytes": 226895,
+      "verified_against_original_manifest": true
+    }
+  },
+  "note": "Original receipts/source copied byte-for-byte; JSONL losslessly compressed with gzip mtime0. Checkpoints content-hash verified and retained at original paths, not deserialized. Assessment independently derived from retained observations and immutable source."
+}

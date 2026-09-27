@@ -1,0 +1,56 @@
+{
+  "candidate": "API-RP10",
+  "gate": "broader_mode_hold",
+  "status": "FAIL",
+  "first_arrival": null,
+  "passing_total": 0,
+  "observations": 24,
+  "passing_since_arrival": 0,
+  "checks_since_arrival": 0,
+  "every_failing_observation_since_arrival": [],
+  "departures": [],
+  "stable_suffix_start": null,
+  "stable_suffix_checks": 0,
+  "worst_since_arrival": {
+    "modes": null,
+    "hq": null
+  },
+  "controller_events": [
+    {
+      "after_update": 1086,
+      "event": "close"
+    }
+  ],
+  "final_open": false,
+  "seconds": 88.35934771597385,
+  "final": {
+    "step": 1200,
+    "modes": 7,
+    "n_modes": 8,
+    "hq": 1.0,
+    "cover": 0.875,
+    "effective_modes": 6.14341926574707,
+    "ema": {
+      "modes": 7,
+      "n_modes": 8,
+      "hq": 0.814208984375,
+      "cover": 0.875,
+      "effective_modes": 6.275671005249023
+    }
+  },
+  "minimum_hq_entire_window": 0.003662109375,
+  "maximum_modes": 7,
+  "thresholds": [
+    [
+      "modes",
+      ">=",
+      8
+    ],
+    [
+      "hq",
+      ">=",
+      0.9
+    ]
+  ],
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840/repo/reports/reversible-precision/runs/rp10-mode_hold"
+}

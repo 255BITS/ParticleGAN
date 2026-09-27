@@ -33,7 +33,7 @@ alone is insufficient, and longer verification remains required.
 | API-DV12: locally bounded latent smoothing | 590 | 182/182 | 290 | 191/192 | One early recovery miss2730, then187 straight. **Rejected:** unequal_mass2/24, final suffix0; final covariance error.8844 exceeds.85. |
 | API-DV13: learned local latent widths, actual native critic memory | 610 | 180/180 | 350 | 181/186 | Five early recovery misses, then175 straight. Unequal_mass14/24, final10 **PASS**; bars4 **FAIL10/24**, suffix2. Intended data-driven critic-memory attachment was omitted; actual behavior and original declaration preserved. |
 | API-DV14: paired opposite-noise width gradients and repaired memory binding | 590 | 182/182 | 290 | 191/192 | One early recovery miss2720, then188 straight. Unequal_mass14/24, final14 **PASS**; bars4 **FAIL8/24**, suffix0. Own source and full saved states independently verified. |
-| API-DV15: bounded uniform latent perturbations with learned widths | 520 | 189/189 | 330 | 185/188 | Three early recovery misses, then182 straight. Bars4 **PASS11/24**, suffix8. Unequal_mass **FAIL4/24**, suffix2 despite all endpoint bounds passing; unchanged supplemental settling test requested, original score retained. Uniform law changes variance as well as tails. |
+| API-DV15: bounded uniform latent perturbations with learned widths | 520 | 189/189 | 330 | 185/188 | Stationary **699/699**; five vectors and three images pass. Unequal_mass original **FAIL4/24**, supplement **24/24**, exact direct/split replay. **Rejected:** intensity **FAIL7/24**, suffix3; mode_hold **FAIL0/24**, final7/8. All original scores retained. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -47,7 +47,7 @@ alone is insufficient, and longer verification remains required.
 | API-C11: separate response fit for each role | 660 | 175/175 | 280 | 193/193 | Own replay passes. **Rejected:** intensity image0/24, finalHQ.65625 and1qualitymode. |
 | API-C12: residual-checked implicit update | NOT_OBSERVED | — | NOT_OBSERVED | — | Complete4600;80,382 field evaluations,1719.76s. **Rejected:** intensity0/24, finalHQ.46875. Own exact checkpoint replay passes. |
 | API-C13: fixed-macrostep nonlinear residual correction | NOT_RUN | — | NOT_RUN | — | Intensity **PASS11/24**, final11. Public buffer/RNG ownership issue found; original pass retained separately. |
-| API-C13-R1: repaired base-field state ownership, same nonlinear solver | RUNNING | — | RUNNING | — | **Own** intensity **PASS11/24**, final11. Same image final state,8752 field evaluations;117 regression tests. Own recovery ring running; broader/long qualification incomplete. |
+| API-C13-R1: repaired base-field state ownership, same nonlinear solver | 230 | 210/218 | 130 | 208/208 | Initial early misses through340, then206 straight from350. Own intensity **PASS11/24**, final11. Ring1879.59s;73,594 fields,3 converged and4,597 fallback updates, independently verified. Broader and long qualification incomplete. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
@@ -58,6 +58,7 @@ alone is insufficient, and longer verification remains required.
 | API-RP7: richer coupled three-field response | 600 | 181/181 | 340 | 187/187 | **Rejected:** intensity3/24, final suffix2; mode_hold0/24, final0/8 modes andHQ0. Own unchanged package and frozen hosts independently verified. |
 | API-RP8: minimize the full local linear residual | 520 | 189/189 | 290 | 192/192 | **Rejected:** intensity10/24, final suffix3; mode_hold0/24, final6/8 modes withHQ1.0. Broader sources and scorer independently verified. |
 | API-RP9: disagreement-driven particle exploration | NOT_RUN | — | NOT_RUN | — | Cheap screens first. **Rejected:** intensity7/24, final suffix1; mode_hold0/24, final6/8 modes. New private particle RNG is checkpointed; separate initial stream-hash receipt is incomplete. |
+| API-RP10: constant observation noise, reversible precision and implicit response | NOT_RUN | — | NOT_RUN | — | **Rejected:** intensity **FAIL4/24**, suffix1; mode_hold **FAIL0/24**, final7/8. Own sealed source,93 corrected regression passes; original test failures preserved. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -107,6 +108,25 @@ verifies public factory ownership and exact single-run parity with the diagnosti
 
 ## Ongoing work
 
+**C13-R1 is the remaining early lead; no candidate is qualified.**
+It reaches the changed ring target after130 updates and then passes208/208 checks.
+Initial acquisition has early misses through340, then206 consecutive passes from350.
+Its own intensity image passes11/24 with a final11-check suffix. Broader quality,
+long retention/repeated changes and complete API qualification remain outstanding.
+
+**DV15 is rejected by separate image and small-particle quality failures.**
+Its original uneven-distribution test remains FAIL4/24, final suffix2 at1200.
+An unchanged continuation from that exact checkpoint through2400 passes all24
+additional checks. Combined evidence is28/29 since first contact1000, with only
+the early1100 miss and a final26-check suffix from1150. Direct and split
+fresh-process replays match complete state, device placement, observations and
+per-update traces. This is [supplementary evidence](supplementary-results.json),
+not a rewritten original score or a default winner. Its own stationary7500 run
+retains699/699 checks after arrival520; ring replay and budget-prefix checks pass.
+Five other vectors pass, as do bars, blobs and stripes. Intensity fails7/24 with
+final suffix3, and mode_hold fails0/24 with maximum/final7 of8 modes. All of these
+scores remain useful even though DV15 cannot become the default.
+
 The strongest result so far is **API-RP5**, with unchanged-target retention694/694 and
 four independently verified image passes and six vector passes. It closes precision on its own, reopens
 after the single target change, and settles again. This remains partial evidence:
@@ -152,6 +172,11 @@ changed target after270 updates and retains194/194. This supports RP5's recovery
 advantage in this matched test, while its separate coverage failure still rejects
 it. K3P's finite nonarrival is not proof that it could never recover. Runtime74.75s
 is retained; controlled wall-clock superiority is not established from these runs.
+
+The released **K3P small-particle reference also fails: 0/24, final6/8 modes**.
+Its exact v0.8.0 package, frozen fixture,1200 batch transactions and native optimizer
+states were independently checked. This is a limitation of the released baseline
+as well; it does not remove the coverage requirement for a new default.
 
 API-DV6 retained the stationary target696/696 and completed30000 updates. First
 arrival delays were410,420,370; two early misses at8280/8290 and one at27380 are

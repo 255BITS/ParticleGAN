@@ -1,0 +1,534 @@
+{
+  "created_utc": "2026-09-27T01:11:02.010125+00:00",
+  "broader_entries": [
+    {
+      "id": "api-dv15-mode_hold",
+      "candidate": "API-DV15",
+      "protocol": "frozen22_mode_hold",
+      "scope": "PUBLIC_API",
+      "recorded_utc": "2026-09-27T01:11:02.010125+00:00",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold",
+      "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo",
+      "archived_source_verified": true,
+      "independent_evaluator_audit": "VERIFIED_MEASURED_FAIL",
+      "result": {
+        "candidate": "API-DV15",
+        "gate": "broader_mode_hold",
+        "status": "FAIL",
+        "seconds": 28.582556239096448,
+        "metrics": {
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 7,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -1
+              },
+              {
+                "metric": "hq",
+                "value": 0.96142578125,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "PASS",
+                "margin": 0.06142578124999998
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0625,
+            "confirmation_fraction": 2.0
+          },
+          "final": {
+            "step": 1200,
+            "modes": 7,
+            "n_modes": 8,
+            "hq": 0.96142578125,
+            "cover": 0.875,
+            "effective_modes": 6.378623962402344,
+            "ema": {
+              "modes": 7,
+              "n_modes": 8,
+              "hq": 0.401123046875,
+              "cover": 0.875,
+              "effective_modes": 4.756967067718506
+            }
+          },
+          "policy": {
+            "width_pair": {
+              "forward_gradient_rms": 0.00047954724868759513,
+              "reverse_gradient_rms": 0.0004106791748199612,
+              "average_gradient_rms": 0.0004417856107465923
+            },
+            "latent_applications": [
+              {
+                "width_min": 0.035496585071086884,
+                "width_mean": 0.10158692300319672,
+                "width_max": 0.2181110978126526,
+                "perturbation_rms": 0.06116248667240143
+              },
+              {
+                "width_min": 0.035496585071086884,
+                "width_mean": 0.10074209421873093,
+                "width_max": 0.2181110978126526,
+                "perturbation_rms": 0.06472313404083252
+              }
+            ],
+            "latent_bandwidth": [
+              0.23311688005924225,
+              0.24800316989421844,
+              0.45549699664115906,
+              0.3740593492984772
+            ],
+            "data_memory": 0.0,
+            "payoff_error": 0.755527483540832,
+            "game_trust": 1.0,
+            "game_ratio": 0.4078198887876144,
+            "variant": "dv15",
+            "mobility": 0.7060121622526453,
+            "alignment": -0.5686650388039863,
+            "data_score": 1.1075688600540161,
+            "data_drive": 0.0,
+            "last_cosine": 0.6250219941139221,
+            "updates": 1200,
+            "reopens": 0,
+            "closed": false
+          },
+          "updates": 1200
+        },
+        "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold"
+      },
+      "derived": {
+        "status": "FAIL",
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "maximum_modes": 7,
+        "max_hq": 0.96142578125,
+        "all_live": [
+          {
+            "step": 50,
+            "modes": 2,
+            "hq": 0.0537109375
+          },
+          {
+            "step": 100,
+            "modes": 3,
+            "hq": 0.039794921875
+          },
+          {
+            "step": 150,
+            "modes": 4,
+            "hq": 0.0283203125
+          },
+          {
+            "step": 200,
+            "modes": 3,
+            "hq": 0.08251953125
+          },
+          {
+            "step": 250,
+            "modes": 4,
+            "hq": 0.24365234375
+          },
+          {
+            "step": 300,
+            "modes": 4,
+            "hq": 0.046875
+          },
+          {
+            "step": 350,
+            "modes": 4,
+            "hq": 0.08154296875
+          },
+          {
+            "step": 400,
+            "modes": 5,
+            "hq": 0.25048828125
+          },
+          {
+            "step": 450,
+            "modes": 3,
+            "hq": 0.069580078125
+          },
+          {
+            "step": 500,
+            "modes": 4,
+            "hq": 0.25537109375
+          },
+          {
+            "step": 550,
+            "modes": 4,
+            "hq": 0.190673828125
+          },
+          {
+            "step": 600,
+            "modes": 4,
+            "hq": 0.28466796875
+          },
+          {
+            "step": 650,
+            "modes": 3,
+            "hq": 0.1875
+          },
+          {
+            "step": 700,
+            "modes": 3,
+            "hq": 0.457763671875
+          },
+          {
+            "step": 750,
+            "modes": 3,
+            "hq": 0.009765625
+          },
+          {
+            "step": 800,
+            "modes": 5,
+            "hq": 0.160888671875
+          },
+          {
+            "step": 850,
+            "modes": 6,
+            "hq": 0.479736328125
+          },
+          {
+            "step": 900,
+            "modes": 7,
+            "hq": 0.720703125
+          },
+          {
+            "step": 950,
+            "modes": 7,
+            "hq": 0.666748046875
+          },
+          {
+            "step": 1000,
+            "modes": 7,
+            "hq": 0.687255859375
+          },
+          {
+            "step": 1050,
+            "modes": 7,
+            "hq": 0.7958984375
+          },
+          {
+            "step": 1100,
+            "modes": 6,
+            "hq": 0.501220703125
+          },
+          {
+            "step": 1150,
+            "modes": 7,
+            "hq": 0.9404296875
+          },
+          {
+            "step": 1200,
+            "modes": 7,
+            "hq": 0.96142578125
+          }
+        ],
+        "final_live": {
+          "step": 1200,
+          "modes": 7,
+          "n_modes": 8,
+          "hq": 0.96142578125,
+          "cover": 0.875,
+          "effective_modes": 6.378623962402344
+        },
+        "seconds": 28.582556239096448
+      },
+      "source_and_host_audit": {
+        "created_utc": "2026-09-27T01:11:02.010125+00:00",
+        "status": "VERIFIED_MEASURED_FROZEN_HOST_FAIL",
+        "source_zip_sha256": "21c760bfd59d72fe612bf77d49d2d0b80d704652555c4a2744cee3918648151b",
+        "all_source_artifact_hashes_match": true,
+        "unchanged14_file_DV15": true,
+        "recipe_resource_differences": {
+          "z_dim": [
+            2,
+            4
+          ],
+          "num_particles": [
+            20000,
+            12
+          ],
+          "batch_size": [
+            2048,
+            128
+          ]
+        },
+        "frozen_host_functions": {
+          "ring_means": true,
+          "sample_ring": true,
+          "diversity": true
+        },
+        "model_and_scorer_source_exact": true,
+        "fixture_scope": "Source-defined canonical CUDA reconstruction independently checked against RP5/RP7 saved initial models; no historical tensor fixture claim. Only initial model values/RNG copied, never learned weights or scores.",
+        "initialization": {
+          "all_original_models_match": {
+            "G": true,
+            "D": true,
+            "prior": true,
+            "ema_G": true,
+            "ema_prior": true
+          },
+          "added_zero_widths": true,
+          "lazy_native_optimizers": true,
+          "private_global_caller_streams_exact": true,
+          "initial_complete_digest_exact": true
+        },
+        "shared_stream": {
+          "all1200_batch_rows_exact_canonical": true,
+          "order": "D-real,D-latent,G-latent,G-real",
+          "adapter": "Clone/preview data stream, actual two public index draws, assert accepted cursor before G-real then commit exact cursor after G-real.",
+          "caller_and_trainer_final_cursor_exact": true
+        },
+        "sampling": "Original4096 prior indices CUDA9. Candidate uniform latent noise independent localCUDA402+step+1901 via actual public _generate(sigma0), followed by original frozen forked global402+step Gaussian output .029. Same declared law for live/EMA; no mutation of training RNG.",
+        "losses": "Frozen feature matching0; canonical bridge particle_l20 and globally declared DV15 prior_reg0, no task-required positive auxiliary objective dropped.",
+        "native_CPU_scalar_steps": 18,
+        "derived": {
+          "status": "FAIL",
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "maximum_modes": 7,
+          "max_hq": 0.96142578125,
+          "all_live": [
+            {
+              "step": 50,
+              "modes": 2,
+              "hq": 0.0537109375
+            },
+            {
+              "step": 100,
+              "modes": 3,
+              "hq": 0.039794921875
+            },
+            {
+              "step": 150,
+              "modes": 4,
+              "hq": 0.0283203125
+            },
+            {
+              "step": 200,
+              "modes": 3,
+              "hq": 0.08251953125
+            },
+            {
+              "step": 250,
+              "modes": 4,
+              "hq": 0.24365234375
+            },
+            {
+              "step": 300,
+              "modes": 4,
+              "hq": 0.046875
+            },
+            {
+              "step": 350,
+              "modes": 4,
+              "hq": 0.08154296875
+            },
+            {
+              "step": 400,
+              "modes": 5,
+              "hq": 0.25048828125
+            },
+            {
+              "step": 450,
+              "modes": 3,
+              "hq": 0.069580078125
+            },
+            {
+              "step": 500,
+              "modes": 4,
+              "hq": 0.25537109375
+            },
+            {
+              "step": 550,
+              "modes": 4,
+              "hq": 0.190673828125
+            },
+            {
+              "step": 600,
+              "modes": 4,
+              "hq": 0.28466796875
+            },
+            {
+              "step": 650,
+              "modes": 3,
+              "hq": 0.1875
+            },
+            {
+              "step": 700,
+              "modes": 3,
+              "hq": 0.457763671875
+            },
+            {
+              "step": 750,
+              "modes": 3,
+              "hq": 0.009765625
+            },
+            {
+              "step": 800,
+              "modes": 5,
+              "hq": 0.160888671875
+            },
+            {
+              "step": 850,
+              "modes": 6,
+              "hq": 0.479736328125
+            },
+            {
+              "step": 900,
+              "modes": 7,
+              "hq": 0.720703125
+            },
+            {
+              "step": 950,
+              "modes": 7,
+              "hq": 0.666748046875
+            },
+            {
+              "step": 1000,
+              "modes": 7,
+              "hq": 0.687255859375
+            },
+            {
+              "step": 1050,
+              "modes": 7,
+              "hq": 0.7958984375
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.501220703125
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.9404296875
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.96142578125
+            }
+          ],
+          "final_live": {
+            "step": 1200,
+            "modes": 7,
+            "n_modes": 8,
+            "hq": 0.96142578125,
+            "cover": 0.875,
+            "effective_modes": 6.378623962402344
+          },
+          "seconds": 28.582556239096448
+        },
+        "scope": "Read-only stdlib source/raw tensor metadata/score audit. No Torch, model, GPU, training or test execution."
+      },
+      "raw_checkpoints_retained": true,
+      "artifacts": {
+        "evidence/api-dv15-mode_hold/artifact-sha256.json": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/artifact-sha256.json",
+          "original_sha256": "74f249a3b42c120784e984b80b3d20460719938ff5de2d840ed38ed1e669217f",
+          "sha256": "74f249a3b42c120784e984b80b3d20460719938ff5de2d840ed38ed1e669217f",
+          "original_bytes": 887,
+          "bytes": 887
+        },
+        "evidence/api-dv15-mode_hold/batch-receipts.jsonl.gz": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/batch-receipts.jsonl",
+          "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+          "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+          "original_bytes": 500493,
+          "bytes": 240947
+        },
+        "evidence/api-dv15-mode_hold/declaration.json": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/declaration.json",
+          "original_sha256": "4de17833fd93b4888754dbe2b63577805e394d610804285ee5b24d1704971797",
+          "sha256": "4de17833fd93b4888754dbe2b63577805e394d610804285ee5b24d1704971797",
+          "original_bytes": 8999,
+          "bytes": 8999
+        },
+        "evidence/api-dv15-mode_hold/final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/final-state.pt",
+          "original_sha256": "421f010452b7b00e99baa7f248c9edf8910311c92e51347b00598cc22f354441",
+          "sha256": "421f010452b7b00e99baa7f248c9edf8910311c92e51347b00598cc22f354441",
+          "original_bytes": 761781,
+          "bytes": 761781
+        },
+        "evidence/api-dv15-mode_hold/initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/initial-state.pt",
+          "original_sha256": "c60d6bd077f20585fb385084c6e74fe14b94cc27e3801dddb75dac2d88fe89f0",
+          "sha256": "c60d6bd077f20585fb385084c6e74fe14b94cc27e3801dddb75dac2d88fe89f0",
+          "original_bytes": 342164,
+          "bytes": 342164
+        },
+        "evidence/api-dv15-mode_hold/initial.json": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/initial.json",
+          "original_sha256": "693eec507c043657dccfe59180134f0e6a798217055225647dbc9a28f13fc8ab",
+          "sha256": "693eec507c043657dccfe59180134f0e6a798217055225647dbc9a28f13fc8ab",
+          "original_bytes": 1049,
+          "bytes": 1049
+        },
+        "evidence/api-dv15-mode_hold/learning-rates.jsonl.gz": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/learning-rates.jsonl",
+          "original_sha256": "e5b4d92a7ccec0b80b7fc0691d5279de1f028e20a8780c3813439e54bbcb4a34",
+          "sha256": "a22bfc9b62584d31dcd090218ffd9b5ffaee6a35cfe56e0a7ddccbc6efb46e6a",
+          "original_bytes": 1543728,
+          "bytes": 286345
+        },
+        "evidence/api-dv15-mode_hold/metrics.jsonl.gz": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/metrics.jsonl",
+          "original_sha256": "1bdc77d292d24c8e6dce0e4dff6207f52e2c9165ae202c82e374adcd2a7770b6",
+          "sha256": "344ee5a35ba3ae878c754fdda569550236f1180ad204e67eaac328c1a029bd8b",
+          "original_bytes": 5125,
+          "bytes": 917
+        },
+        "evidence/api-dv15-mode_hold/result.json": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/result.json",
+          "original_sha256": "2b6f1559848da73900969886befabd9898d4b3915cd2d541600c8cb361ca8c77",
+          "sha256": "2b6f1559848da73900969886befabd9898d4b3915cd2d541600c8cb361ca8c77",
+          "original_bytes": 2811,
+          "bytes": 2811
+        },
+        "evidence/api-dv15-mode_hold/runtime.json": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/runtime.json",
+          "original_sha256": "a8136d09e5001ca9185253acec5125fef6580ef9b8fd9f47407111f45985eb72",
+          "sha256": "a8136d09e5001ca9185253acec5125fef6580ef9b8fd9f47407111f45985eb72",
+          "original_bytes": 396,
+          "bytes": 396
+        },
+        "evidence/api-dv15-mode_hold/source.zip": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv15-mode-hold/source.zip",
+          "original_sha256": "21c760bfd59d72fe612bf77d49d2d0b80d704652555c4a2744cee3918648151b",
+          "sha256": "21c760bfd59d72fe612bf77d49d2d0b80d704652555c4a2744cee3918648151b",
+          "original_bytes": 771483,
+          "bytes": 771483
+        }
+      },
+      "scope_note": "Own unchanged DV15 small12-particle mode_hold. Canonical source-defined CUDA initial fixture reproduced onCPU beforeCUDA; no trained ancestor state or score inherited. All1200 original batches/cursors exact; frozen thresholds and24 checks unchanged. Prospective isolated candidate latent-noise stream retains original frozen Gaussian output stream.",
+      "archive_manifest": {
+        "path": "evidence/api-dv15-mode_hold/archive-manifest.json",
+        "sha256": "75159be8daf196d398ea802fa8e841ad73717561c7ebe0bc725ce910a208844f"
+      }
+    }
+  ]
+}
