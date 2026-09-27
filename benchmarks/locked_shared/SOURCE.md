@@ -7,7 +7,7 @@ The MIT notice is retained in [LICENSE](LICENSE).
 | Local experiment | Original source | Kept |
 | --- | --- | --- |
 | `two_pole.py` | `leaderboard_honesty.py` | Stored host weights, two-pole data, particle table, live/stranger pairing, particle L2 pull, 80 steps, travel and slope thresholds. Problem only: optimizers, LR schedule, loss, penalty, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds and the thinned_cap formulation arm was dropped |
-| `trajectory.py` | `shared_trajectory.py` | Arcs, models, full loss, 400 steps, shared/stranger/nearest pairing, identity MSE threshold |
+| `trajectory.py` | `shared_trajectory.py` | Arcs, model shapes, set-cover term, 400 steps, shared/stranger/nearest pairing, identity MSE threshold. Problem only: optimizers, LR schedule, loss, penalty, prior regularization, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py` (host particle L2 and VICReg 0.05 dropped), so its reference parity no longer holds |
 | `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, 1,200 steps, coverage/HQ metrics and verdict. Problem only: optimizers, LR schedule, loss, penalty, prior, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity no longer holds |
 | `hosts/residual_student.py` | `residual_student.py` | Conditional residual head, landing objective and all three measured landing/identity bounds |
 | `hosts/unipolar.py` | `unipolar.py` | Positive-pole training, neutral hold, leakage and coverage |

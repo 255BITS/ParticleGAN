@@ -64,21 +64,15 @@ def test_missing_error_shared_failure_and_ema_cannot_rescue_live():
     assert score_row(passing_row(), failed_shared)["status"] == "FAIL"
 
 
-def test_candidate_settings_reach_training_and_restore_host(monkeypatch):
-    before = dict(trajectory.PROTOCOL)
+def test_trajectory_runs_on_its_recipe_not_candidate_knobs(monkeypatch):
     seen = {}
     def train(**kwargs):
-        seen.update(trajectory.PROTOCOL)
-        seen["gan"] = kwargs["gan_factory"]().mode
-        seen["penalty"] = kwargs["cap_factory"]().arm
+        seen.update(kwargs)
         return {"identity_mse": 0.0}
     monkeypatch.setattr(trajectory, "train", train)
     run_toy("trajectory", Candidate("alternative", gan_mode="ra", reg_arm="a_r1r2", reg_coeff=0.1,
                                      particle_l2=0, cover_weight=1, vicreg_weight=0.2, lr_multiplier=0.5))
-    assert seen["particle_l2"] == 0 and seen["cover_weight"] == 1 and seen["vicreg_weight"] == 0.2
-    assert seen["lr"] == before["lr"] * 0.5
-    assert seen["gan"] == "ra" and seen["penalty"] == "a_r1r2"
-    assert trajectory.PROTOCOL == before
+    assert seen == {"diagnostics": True}
 
 
 def test_two_pole_runs_on_its_recipe_under_the_harness():

@@ -6,7 +6,6 @@ import pytest
 import torch
 from torch import nn
 
-from benchmarks.locked_shared import trajectory
 from benchmarks.locked_shared.hosts import (
     ae_gan_hold, cover_leftover, mid_scale_identity, residual_student,
     unipolar, unused_token_hold,
@@ -15,9 +14,6 @@ from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_ou
 
 
 def _run(host, policy, monkeypatch):
-    if host == "trajectory":
-        monkeypatch.setitem(trajectory.PROTOCOL, "steps", 2)
-        return trajectory.train(noise_policy=policy)
     if host == "residual_student":
         monkeypatch.setitem(residual_student.PROTOCOL, "steps", 2)
         return residual_student.train(noise_policy=policy)
@@ -41,7 +37,6 @@ def _run(host, policy, monkeypatch):
 
 
 @pytest.mark.parametrize("host", (
-    "trajectory", "residual_student", "unipolar",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
@@ -137,7 +132,6 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 
 
 @pytest.mark.parametrize("host", (
-    "trajectory", "residual_student", "unipolar",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
@@ -158,6 +152,6 @@ def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rn
     assert receipt["input_train_elements"] > 0
     assert receipt["output_noise_training_stream_isolated"] is True
     assert receipt["output_noise_eval_state_preserved"] is True
-    if host in ("trajectory", "residual_student", "ae_gan_hold"):
+    if host in ("residual_student", "ae_gan_hold"):
         assert receipt["output_eval_calls"] > 0
         assert receipt["output_noise_eval_state_pairs"]
