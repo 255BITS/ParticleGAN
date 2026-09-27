@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-
+from particlegan import init
 from experiments.train_transition import DEFAULTS, train, training_recipe, generator_loss, discriminator_loss
 from lib.transition import (TransitionEncoder, TransitionGenerator, TransitionCritics, TransitionScaler,
                             encoded_transition, composed_transition, Transitions)
@@ -17,7 +17,7 @@ class EncoderTests(unittest.TestCase):
         torch.set_num_threads(1)
         torch.manual_seed(11)
         self.recipe = training_recipe(DEFAULTS)
-        self.prior = self.recipe.make_prior(num_particles=32)
+        self.prior = init.deterministic_orthogonal_(self.recipe.make_prior(num_particles=32))
         self.g = TransitionGenerator(width=16)
         self.e = TransitionEncoder(width=16)
         self.c = torch.arange(8) % 2

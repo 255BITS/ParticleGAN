@@ -26,7 +26,7 @@ import os
 import torch
 from torch import nn
 
-from particlegan import (
+from benchmarks.init_research import (
     batch_feature_init,
     det_init_a,
     det_init_d,
@@ -77,8 +77,6 @@ def install(name: str) -> str:
     except KeyError:
         raise ValueError(f"unknown init {name!r}; {len(NAMES)} names are registered") from None
     installer(name)
-    from . import initialization
-    initialization._external_init = name
     return name
 
 

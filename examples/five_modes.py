@@ -56,7 +56,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan import get_recipe, scale_learning_rates  # noqa: E402
+from particlegan import get_recipe, init, scale_learning_rates  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -217,6 +217,10 @@ def train(
         network_lr_horizon_cap=None,
     )
     prior = recipe.make_prior().to(device)
+    # Deterministic init replaces the Xavier init above; the table gets R2 points.
+    for seed, network in enumerate((G, D, E)):
+        init.deterministic_orthogonal_(network, seed=seed)
+    init.deterministic_orthogonal_(prior)
 
     # Optimizers: [E+G, particle table] groups (the table at the recipe's
     # prior LR multiplier) and the critic. Their step() does the recipe's

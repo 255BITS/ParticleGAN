@@ -1,5 +1,9 @@
 # Batch-feature initialization: research and package integration
 
+> **API update:** the recipe no longer initializes weights and `initialize_` is gone; this
+> construction is now the explicit `particlegan.init.deterministic_orthogonal_(module, seed=k)`
+> ([API](../../../docs/api.md#initialization)), and the research registry lives in `benchmarks/init_research`.
+
 The initialization-only search selected **QR weights + patterned biases + R2
 particles + zero explicit batch-distance readout coefficients**. The frozen
 research run passed all **22/22 fixed benchmark gates**, plus long hold.

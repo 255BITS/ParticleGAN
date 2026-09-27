@@ -2,17 +2,26 @@
 
 ## Unreleased
 
-- Fresh recipes default to `initialization="batch_feature_zero"`: deterministic
-  RMS-matched QR weights, patterned biases, R2 recipe-created particle clouds,
-  and zero initial batch-distance readout coefficients. `GANTrainer` and
-  `make_optimizers` use it; `initialization=None` preserves supplied weights.
-- Export `initialize_(network, key=0)` for standalone PyTorch networks and any
-  optimizer. It consumes no RNG and installs no global hooks. See the
-  [API and migration notes](docs/api.md#initialization) for supported layers,
-  custom/pretrained weights, and checkpoint behavior. NumPy is now a core
-  dependency for the deterministic numerical construction.
-- Add the exact historical `batch_feature_zero` replay hook to the initializer
-  registry, and document its 22/22 fixed-suite result, passing long hold,
+- **Explicit initialization API, `particlegan.init`**, in the style of
+  `torch.nn.init`. `init.deterministic_orthogonal_(module, *, seed=0,
+  strict=True)` gives trainable weights deterministic orthogonal matrices at
+  PyTorch's default scale and patterned biases, particle tables an R2 cloud
+  (MoG spacing recalibrated), and a `BatchDistanceDiscriminator` zero initial
+  batch-feature coefficients. It hashes `seed`, so it consumes no RNG; the
+  examples use G=0, D=1, E=2. Layers declare their parameters with
+  `init.register(cls, {name: Uniform/Normal/R2Normal/KEEP})`, and undeclared
+  trainable parameters raise unless `strict=False`; `init.declarations(module)`
+  shows what a network would get. NumPy is now a core dependency. See the
+  [API reference](docs/api.md#initialization).
+- The recipe, `make_prior`, `make_optimizers` and `GANTrainer` never change
+  weights; `Recipe.initialization` and `initialize_` from earlier development
+  builds are removed (`initialize_(m, key=k)` is
+  `init.deterministic_orthogonal_(m, seed=k)`). `GANTrainer` still loads
+  checkpoints whose saved recipe records `initialization`.
+- The research initializer registry, including the exact historical
+  `batch_feature_zero` replay hook, moved to `benchmarks/init_research`
+  (`python -m benchmarks.init_research.init_registry --init NAME -- script.py`).
+  Its report documents the 22/22 fixed-suite result, passing long hold,
   unresolved shifted-target recovery, and mathematical limits.
 
 ## 0.8.0 — 2026-09-25

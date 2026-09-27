@@ -17,10 +17,9 @@ the same update GANTrainer performs, with the control flow in your hands:
 To checkpoint, save the modules and both optimizers' ``state_dict()`` (they
 carry the EMA critic and every counter). With several critics, build one
 ``recipe.make_critic_optimizer(D_k, ema_critic=...)`` and one penalty per
-critic; that lower-level factory keeps weights, so call
-``particlegan.initialize_(D_k, key=k)`` on a fresh extra critic first (keys
-0/1/2 are the recipe's G/D/E). Replace the networks and synthetic batches with
-your own.
+critic, and call ``particlegan.init.deterministic_orthogonal_(D_k, seed=k)``
+on a fresh extra critic first (seeds 0/1/2 are the examples' G/D/E). Replace
+the networks and synthetic batches with your own.
 """
 
 import argparse
@@ -31,7 +30,7 @@ import time
 import torch
 from torch import nn
 
-from particlegan import InputNoise, get_recipe, learning_rate_scales
+from particlegan import InputNoise, get_recipe, init, learning_rate_scales
 from particlegan.training import input_noise_std, output_noise_std
 
 
@@ -85,6 +84,10 @@ def main():
         nn.Linear(64, 64), nn.LeakyReLU(0.2), nn.Linear(64, 1),
     ).to(device)
     prior = recipe.make_prior().to(device)
+    # Deterministic initial weights and R2 particle table; optimizers keep weights as given.
+    init.deterministic_orthogonal_(generator, seed=0)
+    init.deterministic_orthogonal_(critic, seed=1)
+    init.deterministic_orthogonal_(prior)
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()
     # Adam optimizers ([generator, prior] groups, and the critic); the recipe's

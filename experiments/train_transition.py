@@ -23,7 +23,7 @@ from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionCritics, TransitionEncoder, encoded_transition, composed_transition,
                             metrics, shuffle_blocks, residual)
 from lib.transition_visuals import render
-from particlegan import get_recipe, scale_learning_rates, ucd_loss
+from particlegan import get_recipe, init, scale_learning_rates, ucd_loss
 
 
 DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
@@ -261,7 +261,8 @@ def train(cfg):
     torch.manual_seed(cfg["seed"]+100)
     d = TransitionCritics(cfg["d_width"], cfg["critic_mode"], cfg["marginal_width"], cfg["d_conditioning"],
                          shared_state=cfg["shared_state_critic"], scaler=scaler, length=cfg["length"]).to(device)
-    prior = recipe.make_prior(device=device, generator=torch.Generator(device=device).manual_seed(cfg["seed"]+101))
+    prior = init.deterministic_orthogonal_(
+        recipe.make_prior(device=device, generator=torch.Generator(device=device).manual_seed(cfg["seed"]+101)))
     write_json(out / "prior.json", dict(kind="mog", num_particles=prior.num_particles,
                                        sigma_rel=prior.sigma_rel, sigma=float(prior.sigma),
                                        initial_neighbor_distance=float(prior.d0), standardize=prior.standardize,
@@ -269,6 +270,9 @@ def train(cfg):
     torch.manual_seed(cfg["seed"]+102)
     e = TransitionEncoder(cfg["z_dim"], cfg["encoder_width"], cfg["g_class_scale"],
                           cfg["g_context_scale"]).to(device) if cfg["encoder"] else None
+    for seed, module in enumerate((g, d, e)):
+        if module is not None:
+            init.deterministic_orthogonal_(module, seed=seed)
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
                                           fused=device.type == "cuda")
     ema_e = copy.deepcopy(e) if e is not None else None

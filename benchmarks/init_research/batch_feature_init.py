@@ -20,8 +20,8 @@ import torch
 from torch import nn
 
 from . import qr_bz_pq_init as _qr
-from .discriminators import BatchDistanceDiscriminator
-from .particle_prior import ParticlePrior
+from particlegan.discriminators import BatchDistanceDiscriminator
+from particlegan.particle_prior import ParticlePrior
 
 VARIANT = "batch_feature_zero"
 _TAG = "_batch_feature_init_declaration"
@@ -43,14 +43,6 @@ def install(name: str = VARIANT) -> str:
     global _optimizer_index
     _optimizer_index = 0
     _zeroed_heads.clear()
-    # This hook can also be installed directly, outside the registry.
-    # The frozen benchmark runtime does not contain the direct public API.
-    try:
-        from . import initialization
-    except ImportError:
-        pass
-    else:
-        initialization._external_init = name
     if not _originals:
         for operation in ("uniform_", "normal_"):
             original = getattr(torch.Tensor, operation)
@@ -101,9 +93,6 @@ def uninstall() -> None:
     _originals.clear()
     _wrappers.clear()
     _zeroed_heads.clear()
-    from . import initialization
-    if initialization._external_init == VARIANT:
-        initialization._external_init = None
 
 
 @torch.no_grad()

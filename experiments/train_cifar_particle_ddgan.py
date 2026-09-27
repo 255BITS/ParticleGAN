@@ -23,7 +23,7 @@ from experiments.run_grid import code_provenance
 from lib.image_ddgan import update_ema
 from lib.image_particle_autoencoder import DirectGenerator, DirectDiscriminator, ImageRoutingEncoder
 from lib.image_particle_ddgan import ParticleDDGenerator, ParticleDDDiscriminator
-from particlegan import get_recipe, ParticleRegularizer, scale_learning_rates
+from particlegan import get_recipe, init, ParticleRegularizer, scale_learning_rates
 
 DEFAULTS = {
     'arm': 'gan', 'model': 'direct',
@@ -269,8 +269,10 @@ def train(cfg):
         d = DirectDiscriminator(cfg['width']).cuda()
     e = ImageRoutingEncoder(cfg['z_dim'], cfg['width']).cuda()
     recipe = training_recipe(cfg)
-    # The recipe builds and calibrates the table, with its default initialization.
-    prior = recipe.make_prior(generator=rng(cfg['seed'] + 1, 'cpu')).cuda()
+    # The recipe builds the table; R2 init recalibrates its spacing on the CPU.
+    prior = init.deterministic_orthogonal_(recipe.make_prior(generator=rng(cfg['seed'] + 1, 'cpu'))).cuda()
+    for module, seed in ((g, 0), (d, 1), (e, 2)):
+        init.deterministic_orthogonal_(module, seed=seed)
     og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)
     initial_hash = state_hash([g, d, e, prior])
     initial_sigma = prior.sigma.clone()

@@ -16,7 +16,7 @@ from torch import nn
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from particlegan import get_recipe, ParticleRegularizer, scale_learning_rates
+from particlegan import get_recipe, init, ParticleRegularizer, scale_learning_rates
 from lib.mog_metrics import component_metrics, geometry, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
@@ -191,11 +191,14 @@ def train(arm, cfg):
     g = SimpleMLPGenerator(2, cfg.width).to(device)
     d = SimpleMLPDiscriminator(hidden_dim=cfg.width).to(device)
     # The default recipe at this scout's small-batch learning rates. It builds
-    # and calibrates the 400-particle table, with its default initialization.
+    # the 400-particle table; initializing it recalibrates its spacing.
     recipe = get_recipe("ae_gan", batch_size=cfg.batch_size, total_steps=cfg.steps,
                         lr=.0006, d_lr_mult=1.5, prior_lr_mult=10.)
-    prior = recipe.make_prior(generator=draw_rng(device, cfg.seed + 1), device=device).to(device)
+    prior = init.deterministic_orthogonal_(
+        recipe.make_prior(generator=draw_rng(device, cfg.seed + 1), device=device).to(device))
     e = RoutingEncoder(cfg.width).to(device)
+    for seed, module in enumerate((g, d, e)):
+        init.deterministic_orthogonal_(module, seed=seed)
     initial_sigma = prior.sigma.detach().clone()
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
     base_lrs = [[group["lr"] for group in o.param_groups] for o in (opt_g, opt_d)]
