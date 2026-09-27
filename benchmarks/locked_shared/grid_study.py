@@ -1,12 +1,15 @@
 """Run the actual 100-Gaussian example, with separately scored live/EMA curves.
 
-    python -m benchmarks.locked_shared.grid_study --output reports/grid_study
+    python -m benchmarks.locked_shared.grid_study --output runs/grid_study
 
-The 100-mode/HQ criterion is independent of the nine extracted toy bounds.
+One arm: the example trains on its own recipe; this script passes only the
+task shape (budget, batch, particles, Fourier width, seed) and measurement
+hooks. The 100-mode/HQ criterion is independent of the nine extracted toy
+bounds. Historical hyperparameter arms (legacy stock, toy_transfer,
+penalty_only) are recorded in reports/grid_study.
 """
 
 from __future__ import annotations
-from benchmarks.locked_shared.recorded_recipes import GAN_V1
 
 import argparse
 from datetime import datetime, timezone
@@ -36,12 +39,7 @@ EVAL_SEED = 999
 STD = 0.03
 REQUIREMENTS = [("modes", ">=", 100), ("hq", ">=", 0.90)]
 EXPECTED_STEPS = list(range(INTERVAL, TOTAL_STEPS + 1, INTERVAL))
-ARMS = (
-    ("stock", {}),
-    ("toy_transfer", {"reg_kappa": 1.25, "reg_coeff": 3.0,
-                      "lr": 0.0006 * 0.85, "lambda_ep": 0.05}),
-    ("penalty_only", {"reg_kappa": 1.25, "reg_coeff": 3.0}),
-)
+ARMS = (("stock", {}),)
 
 
 def json_safe(value):
@@ -102,17 +100,14 @@ def make_protocol(device):
 
 
 def resolved_kwargs(example, output, name, device, overrides):
-    legacy = GAN_V1
     parameters = inspect.signature(example.train).parameters
-    required = {"reg_kappa", "metric_callback", "metric_interval", "save_plots"}
+    required = {"metric_callback", "metric_interval", "save_plots"}
     if not required <= parameters.keys():
         raise RuntimeError(f"example train is missing measurement arguments: {sorted(required - parameters.keys())}")
     values = {key: p.default for key, p in parameters.items() if p.default is not inspect.Parameter.empty}
     values.update(epochs=7, steps_per_epoch=1000, batch_size=256, num_particles=20_000,
                   fourier=2, seed=0, device_str=str(device), out_dir=str(output / name),
-                  return_details=True, metric_interval=INTERVAL, save_plots=False,
-                  lr=legacy.lr, d_lr_mult=legacy.d_lr_mult, prior_lr_mult=legacy.prior_lr_mult, beta1=legacy.betas[0], beta2=legacy.betas[1],
-                  reg_coeff=legacy.reg_coeff, reg_kappa=legacy.reg_kappa, lambda_ep=legacy.prior_reg)
+                  return_details=True, metric_interval=INTERVAL, save_plots=False)
     values.update(overrides)
     values["metric_callback"] = "benchmarks.locked_shared.grid_study:checkpoint_callback"
     return values
@@ -189,9 +184,8 @@ def render(report, destination):
             lines.append(f"| `{row['name']}` / {kind} | {fmt(metrics.get('per_mode_std_ratio'))} / {fmt(metrics.get('per_mode_core_ratio'))} | "
                          f"{fmt(metrics.get('per_mode_cov_eig_min_ratio'))} / {fmt(metrics.get('per_mode_cov_eig_max_ratio'))} | "
                          f"{fmt(metrics.get('per_mode_cov_audited_modes'), '.0f')} | {fmt(metrics.get('mode_tv'))} | {fmt(metrics.get('sw1'))} |")
-    lines += ["", "`stock` keeps the trainer's recipe. `toy_transfer` uses cap κ=1.25, coefficient=3, "
-              "LR=0.00051 and prior regularization=0.05. `penalty_only` changes only cap κ/coefficient. "
-              "The existing 60%-delay cosine schedule and 5% floor remain shared.", "",
+    lines += ["", "`stock` is the example's own recipe; only the task shape and measurement hooks are set here. "
+              "Its optimizers apply the recipe's LR schedule.", "",
               "Exact resolved arguments, source hashes, curves, convergence times and raw diagnostics are in [results.json](results.json). "
               "Nonfinite values become null and cannot pass. Missing observations cannot certify stability.", ""]
     for row in report["rows"]:

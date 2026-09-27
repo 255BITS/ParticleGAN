@@ -27,7 +27,7 @@ from .observation import recording, sustained, OBSERVATIONS, MIN_STABLE_CHECKS
 from .hosts import ae_gan_hold, cover_leftover, mid_scale_identity, residual_student, unipolar, unused_token_hold
 
 VERSION = "behavior-v2"
-DEFAULT_OUTPUT = Path("reports/behavioral_baseline")
+DEFAULT_OUTPUT = Path("runs/behavioral_baseline")
 
 
 @dataclass(frozen=True)
@@ -66,16 +66,10 @@ class Candidate:
         return {key: value for key, value in asdict(self).items() if key not in ("name", "lr_multiplier")}
 
 
-DEFAULT_CANDIDATES = (
-    Candidate("locked_shared"),
-    Candidate("no_particle_l2", particle_l2=0.0),
-    Candidate("r1_r2_0_1", reg_arm="a_r1r2", reg_coeff=0.1),
-    Candidate("r1_r2_0_1_no_l2", reg_arm="a_r1r2", reg_coeff=0.1, particle_l2=0.0),
-    Candidate("b_cap_no_l2_lr_half", particle_l2=0.0, lr_multiplier=0.5),
-    Candidate("b_cap_no_l2_lr_quarter", particle_l2=0.0, lr_multiplier=0.25),
-    Candidate("b_cap_no_l2_coeff_2", particle_l2=0.0, reg_coeff=2.0),
-    Candidate("b_cap_no_l2_coeff_5", particle_l2=0.0, reg_coeff=5.0),
-)
+# One row: every host on its own configuration. The historical formulation /
+# LR sweep (no_particle_l2, r1_r2_*, b_cap_no_l2_lr_*, b_cap_no_l2_coeff_*) is
+# recorded in reports/behavioral_baseline; --configs still accepts cards.
+DEFAULT_CANDIDATES = (Candidate("locked_shared"),)
 
 # Values are thresholds from the original behavioral scorers, not tuned on results.
 # A metric may have two bounds, and both must pass. Diagnostic-only values remain
@@ -155,7 +149,15 @@ def score_row(row, shared):
 
 
 def run_toy(toy, cfg, *, noise_policy=None):
-    """Serial, scoped host injection; one candidate card, no per-toy tuning."""
+    """Serial, scoped host injection; one candidate card, no per-toy tuning.
+
+    Hosts on ``benchmarks.toy_runner`` (mode_hold) take everything from their
+    recipe; candidate knobs do not reach them. The patching below is a legacy
+    shim for hosts that still own their optimizers and formulation classes:
+    each host's entry is removed when that host migrates, and the shim (with
+    ``Candidate``'s formulation factories and ``lr_multiplier``) goes once
+    every locked host has.
+    """
     knobs = cfg.host_options()
     with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
         if toy == "two_pole":
@@ -256,7 +258,7 @@ def render(report, destination):
              "Shared checks are run once: they do not depend on the GAN config and do not contribute to its rank.", "",
              "**Regression PASS is a minimum bar for default selection.** The original ring bar permits 7/8 modes. "
              "Actual coverage, HQ, balance and checkpoint stability are visible below; a final-step PASS does not establish a stable ParticleGAN default. "
-             "The [default-selection analysis](default_selection.md) also compares the stock recipe on the ring host.", "",
+             "The recorded default-selection analysis (reports/behavioral_baseline/default_selection.md) also compares the stock recipe on the ring host.", "",
              "Rows rank by passed toys, then passed numerical bounds, then live ring coverage, HQ and effective modes. "
              "Missing/nonfinite results and errors cannot pass. Thresholds and budgets are frozen before config search.", "",
              "| Rank | Config | Live toys | Live bounds | Ring modes | Ring HQ | Effective modes | Regression |",
@@ -358,7 +360,7 @@ def render(report, destination):
         lines += ["", "</details>", ""]
     lines += ["## Reproduce or compare another approach", "", "```bash",
               "python -m benchmarks.locked_shared.baseline --reference /path/to/conceptmod",
-              "python -m benchmarks.locked_shared.baseline --configs my_configs.json --reference /path/to/conceptmod --output reports/my_search",
+              "python -m benchmarks.locked_shared.baseline --configs my_configs.json --reference /path/to/conceptmod --output runs/my_search",
               "# Resume only with exactly matching source, runtime and config fingerprints:",
               "python -m benchmarks.locked_shared.baseline --resume --reference /path/to/conceptmod",
               "```", "", "Use [passing_configs.json](passing_configs.json) to rerun the passing baseline alone, or [configs.json](configs.json) for the comparison set. Each setting applies wherever that loss exists; "
@@ -376,8 +378,9 @@ def main():
     parser.add_argument("--configs", type=Path, help="JSON list of candidate objects; unspecified fields use defaults")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--reference", type=Path, help="clean conceptmod checkout at the pinned revision for shared checks")
-    parser.add_argument("--stock-reference", type=Path, default=DEFAULT_OUTPUT / "stock_ring.json",
-                        help="optional recorded stock-recipe ring comparison; displayed separately from candidate ranks")
+    parser.add_argument("--stock-reference", type=Path,
+                        help="optional recorded stock-recipe ring comparison (e.g. reports/behavioral_baseline/stock_ring.json); "
+                             "displayed separately from candidate ranks")
     parser.add_argument("--resume", action="store_true")
     from benchmarks.toy100.device import add_device_argument, apply_device_policy
     add_device_argument(parser)
@@ -390,7 +393,7 @@ def main():
     fingerprint = protocol()
     report = {"protocol": fingerprint, "protocol_sha256": digest(fingerprint),
               "created_at": datetime.now(timezone.utc).isoformat(), "rows": [], "shared": {}}
-    stock = json.loads(args.stock_reference.read_text()) if args.stock_reference.exists() else None
+    stock = json.loads(args.stock_reference.read_text()) if args.stock_reference else None
     if stock is not None:
         # Preserve only the final observations and the tail needed for display;
         # the source artifact retains the complete curves and per-mode evidence.

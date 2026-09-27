@@ -39,35 +39,23 @@ host training loops. In particular, trajectory and ring keep the original
 From the repository root, with CPU PyTorch and pytest installed:
 
 ```bash
-python -m benchmarks.locked_shared --output reports/locked_shared
+python -m benchmarks.locked_shared --output runs/locked_shared
 python -m pytest tests/test_locked_shared_behavior.py tests/test_locked_shared.py tests/test_api_primitives.py -q
 ```
 
-The command logs each arm before and after training, then writes a readable
-`README.md` and full precision `results.json`. It exits nonzero if a default
-behavioral target fails or a requested reference comparison differs. A
-benchmark failure and a parity match can both be true. The pytest checks for
-builder equivalence do not assert that an existing failing reference passes.
+The command trains one row per host toy (two-pole, trajectory, ring), logs a
+`start`/`done` line per toy, then writes a readable `README.md` and full
+precision `results.json`. It exits nonzero if a behavioral target fails.
+Formulation and pairing arms (thinned cap, stranger pairings, cap-off,
+vanilla, FM-on) are no longer part of the suite.
 
-To verify extraction against the unchanged original source as well:
-
-```bash
-git clone https://github.com/HyperGAN/conceptmod.git /tmp/conceptmod-reference
-git -C /tmp/conceptmod-reference checkout 5571213f5e8e129cfda45c785c3f30aad9c1d8c9
-python -m pip download --no-deps particlegan==0.5.0 --dest /tmp/particlegan-reference
-python -m benchmarks.locked_shared \
-  --reference /tmp/conceptmod-reference \
-  --reference-wheel /tmp/particlegan-reference/particlegan-0.5.0-py3-none-any.whl \
-  --output reports/locked_shared
-```
-
-No conceptmod installation or diffusion dependencies are needed. The optional
-reference runner verifies SHA-256 hashes of the four original toy files and
-loads them unchanged, bypassing the package's eager backend imports. Its
-original constructors use the same ParticleGAN primitives as the extracted
-loops. The optional wheel check independently verifies that those primitive
-sources also match PyPI 0.5.0. Parity covers all ten rows and all numeric
-metrics, including negatives, at relative tolerance 1e-6 and absolute 1e-7.
+Rel-1e-6 parity with the unchanged conceptmod source (`reference.py`) and
+PyPI 0.5.0 primitive hashes was verified for the original extraction and is a
+frozen record in [reports/locked_shared](../../reports/locked_shared/README.md).
+It is not rerun: hosts migrated to `benchmarks.toy_runner` take optimizers,
+loss, penalty, noise and EMA from their recipe, so they no longer replay the
+original loops. `reference.py`, `host_reference.py` and `suite_reference.py`
+are kept only as the scripts that produced those records.
 
 This is a selected behavioral leaderboard, not the original suite's mix of
 configuration checks, geometry checks and DSL claims. There is no score for
@@ -85,13 +73,11 @@ results are recorded separately from the extracted behavioral leaderboard:
 python -m benchmarks.locked_shared.suite_reference --reference /path/to/conceptmod
 ```
 
-The [comparison report](../../reports/locked_shared/comparison.md) tests
-existing GAN losses, penalties and host regularization choices on the same
-seed and budgets. It includes separate stock-recipe ring runs with 20,000
-particles and explicitly labels the longer 7,000-step budget. Commands and
-raw measurements are linked there. `investigate --resume` reuses completed
-ring runs and fills missing diagnostics; all training variants can also be
-reproduced from scratch.
+The recorded [comparison report](../../reports/locked_shared/comparison.md)
+tested existing GAN losses, penalties and host regularization choices on the
+same seed and budgets. The scripts that swept those formulations
+(`investigate`, `summarize`, `base_recipe`, `default_selection`) were removed:
+toys now define only their problem and train on their recipe.
 
 Optional diagnostics record live versus EMA ring quality, learning curves,
 trajectory nearest-target assignments and critic slopes. They do not alter
