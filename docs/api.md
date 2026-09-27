@@ -300,9 +300,10 @@ use unique sampled rows. There is no particle L2 term.
   training, including the prior's support jitter, and the current output
   noise is added, drawn from the sampling stream (the generator places
   particles near mode centres; the noise supplies the spread).
-  `output_noise=False` returns the clean generator mean as a diagnostic. Its
-  separate RNG and
-  temporary evaluation mode preserve training randomness and module modes.
+  `output_noise=False` returns the clean generator mean as a diagnostic
+  (noise added inside a wrapped `G` module is not affected). Sampling's
+  separate RNG and temporary evaluation mode preserve training randomness and
+  module modes.
   EMA averages G/prior parameters and copies their buffers, including
   integer counters. EMA never determines a live leaderboard pass.
 - `state_dict()` includes G, D, prior, EMA, optimizers, initial learning rates,

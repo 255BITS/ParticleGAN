@@ -155,6 +155,8 @@ def sample_clean(trainer, n: int, **options) -> torch.Tensor:
     Disables the benchmark's wrapper noise and passes ``output_noise=False``
     for the recipe's own output noise. Not the model's samples.
     """
+    if "output_noise" in options:
+        raise TypeError("sample_clean always samples without output noise")
     with clean_output_noise((trainer.G, trainer.ema_G)):
         return trainer.sample(n, output_noise=False, **options)
 

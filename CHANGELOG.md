@@ -40,14 +40,15 @@
   (`"recipe_defaults": "particlegan"`; the recipe's own output noise is
   recorded as `recipe_output_noise_std`); other toy100 configs keep resolving
   on the GAN v3 fields.
-- **`GANTrainer.sample()` adds the output noise by default** (its sampling
-  law): the generator places particles near mode centres and the noise
-  supplies the spread, so clean samples are too narrow per mode.
-  `sample(..., output_noise=False)` returns the clean generator mean as a
-  diagnostic. Training is unchanged (sampling uses only its own stream). The
-  toy100 benchmark scores noisy evaluation and holdout draws (its summary
-  records `"eval_output_noise": "noisy"`);
-  `benchmarks.toy100.models.sample_clean` remains a clean diagnostic.
+- **`GANTrainer.sample(..., output_noise=False)`** returns the clean
+  generator mean as a diagnostic. The default is unchanged: samples include
+  the current output noise, which is part of the sampling law (the generator
+  places particles near mode centres and the noise supplies the spread, so
+  clean samples are too narrow per mode). Training is unchanged (sampling
+  uses only its own stream). toy100 evaluation and holdout draws include the
+  output noise as before; the run summary records
+  `"eval_output_noise": "noisy"`, and
+  `benchmarks.toy100.models.sample_clean` is a clean diagnostic.
 - **Explicit initialization API, `particlegan.init`**, in the style of
   `torch.nn.init`. `init.deterministic_orthogonal_(module, *, seed=0,
   strict=True)` gives trainable weights deterministic orthogonal matrices at

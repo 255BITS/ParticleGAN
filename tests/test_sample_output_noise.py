@@ -134,6 +134,8 @@ def test_toy100_holdout_is_noisy_and_sample_clean_is_a_diagnostic(tmp_path):
     assert torch.equal(clean, trainer.sample(256, generator=seed()))
     trainer.G.std = .029
     assert not torch.equal(clean, noisy)
+    with pytest.raises(TypeError, match="without output noise"):
+        sample_clean(trainer, 4, output_noise=True)
 
     evidence = accuracy_evidence.AccuracyEvidence(
         resolved, tmp_path, [4], torch.zeros(resolved["eval_samples"], 2))
