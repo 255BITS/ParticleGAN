@@ -564,3 +564,140 @@ the gate needs ≥ .4.
    Both are architecture changes, outside "existing knobs".
 4. **Every ring-clean config found so far is a point, not a region.** Before promoting gs2_c03_lr2_d05, check that
    it holds on another ring geometry (another mode count or radius), a new task rather than a seed repeat.
+
+---
+
+# simple_B_cap3 with AMSGrad at LR 2e-4 (bcap arms)
+
+## Question
+
+The simple-critic winner simple_B_cap3 scored 13/26, with ring fails f27 / f93. Does AMSGrad fix its constant-LR
+step creep?
+
+Martyn's amendment moves every bcap arm to a base LR of **2e-4**, keeping B_cap3's ratios:
+- G: 2e-4
+- critic: 1e-4 (×.5)
+- prior: 4e-4 (×2)
+
+All LRs are constant and noise is 0. Everything else matches simple_B_cap3:
+- penalty: wgan + R1(1) + secant(10, t .5) + cap-all(10, c 3);
+- A2 off, no guard.
+
+| arm | change vs simple_B_cap3 | tasks |
+|---|---|---|
+| bcap_ams | AMSGrad on G, prior and critic; critic betas (0,.9); LR 2e-4 base | 26 |
+| bcap_ams_b999 | bcap_ams with critic beta2 .999 | 26 |
+| bcap_ams_a2g | bcap_ams_b999 (the better on the 7 tasks) + A2 (.5) + K3P spike guard (5×, 200 steps) | 7 |
+
+**Harness.**
+- A simple_B_cap3 arm now keeps the K3P spike guard when its recipe sets `d_guard_ratio > 0`. On GANTrainer and
+  ring hosts it comes from `make_critic_optimizer`; on legacy hosts from `LEG["guard"]`.
+- With ratio 0 (simple_B_cap3 itself) nothing changes.
+
+**Receipts** (all 26 tasks of both full-suite arms):
+- AMSGrad reached the critic optimizer that actually steps on every host: the rebuilt simple critic on GANTrainer
+  and ring hosts (`opt2`, LR 1e-4, `amsgrad` True), and the patched Adam on legacy hosts.
+- Every group's LR was constant, at 2e-4 / 1e-4 / 4e-4.
+- Critic betas were (0,.9) or (0,.999) as declared.
+- bcap_ams_a2g's guard and A2 engaged: 517 guard clips and 8999/9000 A2-damped steps on multishift.
+- The D-EMA prox arms (P) were **not** run. They are on hold at Martyn's request, and no code was written.
+
+## Result: 0/26 at 2e-4. Mostly under-trained, and the ring is unstable at critic β2 .9
+
+### 7-task table (native worst-mode covariance ratio, toy cells, ring fails/arrivals)
+
+| arm | 5-task passes | native checks cov+acc /30 | mean HQ | mean min eig | mean worst center | grid100 | rotated100 | staggered100 | img_bars4 | two_pole | ring8-shift | ring8-multishift |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| k3p_stock | 5/5 | 30 | 0.985 | 0.61 | 0.17 | P 5/5 0.987 0.61-1.19 c0.18 | P 5/5 0.982 0.65-1.20 c0.16 | P 5/5 0.987 0.57-1.21 c0.16 | P 10/24 | P 9/24 | P f0 +1220 d1 | F f2 +1990/x/+1640 d4 |
+| gs2_c03_lr2_d05 | 2/5 | 0 | 0.972 | 0.18 | 0.38 | F 0/0 0.980 0.14-2.62 c0.33 | F 0/0 0.969 0.15-2.02 c0.42 | F 0/0 0.966 0.23-1.96 c0.39 | P 19/24 | P 13/24 | P f0 +940 d0 | P f0 +940/+310/+110 d0 |
+| simple_B_cap3 | 1/5 | 0 | 0.937 | 0.22 | 0.66 | F 0/0 0.933 0.34-2.76 c0.75 | F 0/0 0.930 0.15-1.90 c0.74 | F 0/0 0.948 0.17-2.04 c0.49 | F 0/24 | P 20/24 | F f27 +440 d13 | F f93 +440/+360/+90 d23 |
+| k3p_simple | 0/5 | 0 | 0.971 | 0.16 | 0.33 | F 0/0 0.973 0.15-1.91 c0.27 | F 0/0 0.971 0.14-1.81 c0.41 | F 0/0 0.970 0.20-1.78 c0.32 | F 3/24 | F 0/24 | P f0 +430 d0 | P f0 +430/+190/+20 d0 |
+| bcap_ams | 0/5 | 0 | 0.611 | 0.08 | inf | F 0/0 0.560 0.15-4.37 c0.78 | F 0/0 0.567 0.00-2.86 cinf | F 0/0 0.705 0.10-3.77 c0.59 | F 0/24 | F 0/24 | F f120 x d0 | F f120 x/x/x d0 |
+| bcap_ams_b999 | 0/5 | 0 | 0.661 | 0.17 | inf | F 0/0 0.675 0.23-3.58 c0.53 | F 0/0 0.597 0.00-3.47 cinf | F 0/0 0.711 0.28-3.23 c0.45 | F 0/24 | F 0/24 | F f120 x d0 | F f120 x/x/x d0 |
+| bcap_ams_a2g | 0/5 | 0 | 0.655 | 0.16 | inf | F 0/0 0.671 0.33-3.43 c0.56 | F 0/0 0.584 0.00-3.14 cinf | F 0/0 0.712 0.16-3.10 c0.52 | F 0/24 | F 0/24 | F f120 x d0 | F f120 x/x/x d0 |
+
+### Full suite
+
+| arm | passes | native | transfer /19 | ring8-shift | ring8-multishift |
+|---|---|---|---|---|---|
+| simple_B_cap3 | 13/26 | 0/3 | 13 | F f27 +440 d13 | F f93 +440/+360/+90 d23 |
+| bcap_ams | 0/26 | 0/3 | 0 | F f120 x d0 | F f120 x/x/x d0 |
+| bcap_ams_b999 | 0/26 | 0/3 | 0 | F f120 x d0 | F f120 x/x/x d0 |
+
+| task | simple_B_cap3 | bcap_ams | bcap_ams_b999 |
+|---|---|---|---|
+| native-grid100 | F 100/0.933 | F 64/0.560 | F 82/0.675 |
+| native-rotated100 | F 100/0.930 | F 65/0.567 | F 73/0.597 |
+| native-staggered100 | F 100/0.948 | F 91/0.705 | F 95/0.711 |
+| hold-mode_hold | F 0/1200+0/0 | F 0/1200+0/0 | F 0/1200+0/0 |
+| ring8-multishift | F f93 +440/+360/+90 d23 | F f120 x/x/x d0 | F f120 x/x/x d0 |
+| shift-mode_hold | F 3/81 | F 0/81 | F 0/81 |
+| ring8-shift | F f27 +440 d13 | F f120 x d0 | F f120 x d0 |
+| toy-two_pole | P 20/24 | F 0/24 | F 0/24 |
+| toy-trajectory | P 5/24 | F 0/24 | F 0/24 |
+| toy-residual_student | F 0/24 | F 0/24 | F 0/24 |
+| toy-unipolar | P 18/24 | F 0/24 | F 0/24 |
+| toy-ae_gan_hold | P 11/24 | F 0/24 | F 0/24 |
+| toy-cover_leftover | P 14/24 | F 0/24 | F 0/24 |
+| toy-unused_token_hold | P 12/24 | F 0/24 | F 0/24 |
+| toy-mid_scale_identity | P 15/24 | F 0/24 | F 0/24 |
+| toy-mode_hold | F 0/24 | F 0/24 | F 0/24 |
+| toy-vector_two_broad | P 23/24 | F 0/24 | F 0/24 |
+| toy-vector_unequal_mass | F 2/24 | F 0/24 | F 0/24 |
+| toy-vector_unequal_width | P 8/24 | F 0/24 | F 0/24 |
+| toy-vector_anisotropic | F 2/24 | F 0/24 | F 0/24 |
+| toy-vector_overlap | P 7/24 | F 0/24 | F 0/24 |
+| toy-vector_spiral | P 23/24 | F 0/24 | F 2/24 |
+| toy-img_stripes2 | P 12/24 | F 0/24 | F 0/24 |
+| toy-img_bars4 | F 0/24 | F 0/24 | F 0/24 |
+| toy-img_blobs4 | F 0/24 | F 0/24 | F 0/24 |
+| toy-img_intensity2 | P 11/24 | F 0/24 | F 0/24 |
+
+### Leaderboard
+
+| arm | passes | native | transfer /19 | ring8-shift | ring8-multishift | native mean HQ / mean worst cov ratio |
+|---|---|---|---|---|---|---|
+| k3p_stock | **18/26** | 3/3 | 14 | P f0 +1220 | F f2 | .985 / .61 |
+| gs2_c03_lr2_d05 | 17/26 | 0/3 | **15** | P f0 +940 | **P f0 +940/+310/+110** | .972 / .18 |
+| k3p_simple | 14/26 | 0/3 | 12 | P f0 +430 | P f0 +430/+190/+20 | .971 / .16 |
+| simple_B_cap3 (LR .00425, Adam) | 13/26 | 0/3 | 13 | F f27 +440 | F f93 | .937 / .22 |
+| bcap_ams_a2g | 0/7 | 0/3 | – | F f120, never arrives | F f120, never arrives | .655 / .16 |
+| bcap_ams_b999 | 0/26 | 0/3 | 0 | F f120, never arrives | F f120, never arrives | .661 / .17 |
+| bcap_ams | 0/26 | 0/3 | 0 | F f120, never arrives | F f120, never arrives | .611 / .08 |
+
+### Under-trained vs unstable
+
+- **Native (all three arms): under-trained.** Live modes and HQ rise monotonically through the whole 7000-update
+  budget and are still rising at the end.
+
+  | arm, task | update 1500 | 3000 | 4500 | 6000 | 7000 |
+  |---|---|---|---|---|---|
+  | bcap_ams_b999, staggered100: modes / HQ | 0 / .19 | 24 / .43 | 76 / .59 | 87 / .67 | 95 / .71 |
+  | bcap_ams, grid100: modes | 0 | 5 | 32 | 60 | 64 |
+
+  None is unstable. The worst-mode covariance and center numbers are therefore not comparable to the converged arms.
+- **Ring with critic β2 .9 (bcap_ams): unstable.**
+  - It never holds more than 1 mode.
+  - The penalty spikes to 33.8 near update 3000, and HQ decays to about 0.
+  - This is the step-creep / critic-blowup failure: at β2 .9 AMSGrad's max second moment forgets quickly and does
+    not bound the step.
+- **Ring with critic β2 .999 (bcap_ams_b999, and bcap_ams_a2g): under-trained, not unstable.**
+  - The mode count climbs slowly: 1 → 8 by update 5400–6000, with HQ reaching .63 at 9000.
+  - There are no departures, and the ring never reaches the pass bar (8 modes, HQ ≥ .9).
+  - It never forms before the first shift at 2400, so "fails" counts every check.
+  - A2 and the guard (a2g) don't change this: the ring forms at the same slow rate.
+- **Transfer hosts: under-trained.** The host budgets are 80–600 updates, fixed for LRs about 20× larger. For
+  example, two_pole's `mean_abs` rises linearly (.003 → .065 over its 80 updates) and unipolar's cover rises
+  .01 → .36. Neither plateaus.
+
+## Recommendations
+
+1. **At LR 2e-4 the suite's fixed budgets are too short for B_cap3.** The 0/26 measures the budget, not the
+   formulation. The one real stability finding is that critic β2 .9 with AMSGrad blows up on the ring, while β2
+   .999 is stable but slow. Use β2 .999 with AMSGrad.
+2. **For a fair test at 2e-4, give each task a budget scaled with the LR.** For example, ×10 on native and the
+   ring: 70k updates, with the shift schedule stretched to match. This can't be done inside the frozen transfer
+   hosts. Alternatively, run B_cap3 + AMSGrad (β2 .999) at the suite's .00425. That is the direct test of
+   "AMSGrad fixes B_cap3's step creep", and it takes one 26-task run.
+3. **Don't promote bcap_ams_a2g.** It has ring fails, no gain over its parent, and 0/7.
+4. **Decide the P (D-EMA prox) arms after item 2.** At 2e-4 they would hit the same budget wall.

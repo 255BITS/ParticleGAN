@@ -167,7 +167,7 @@ def convert_to_simple(trainer):
     # Built with the recipe's betas so hosts' construction-time optimizer_receipts check passes;
     # beta2 = d_beta2 is applied at every critic step (SimpleCrit.__call__), before the first update.
     opt_d = recipe.make_critic_optimizer(D, ema_critic=None, **trainer.optimizer_options)
-    assert opt_d.guard is None and opt_d.ema_critic is None
+    assert opt_d.ema_critic is None and (opt_d.guard is None) == (not recipe.d_guard_ratio)
     trainer.opt_d = opt_d
     trainer.initial_lrs[1] = [g["lr"] for g in opt_d.param_groups]
     crit = SimpleCrit(trainer)
@@ -290,7 +290,7 @@ def _pre(opt, args, kwargs):
         if ARM["critic"] == "simple_B_cap3":
             for g in opt.param_groups:
                 g["betas"] = (g["betas"][0], ARM["simple"]["d_beta2"])
-        elif LEG["guard"] is not None:
+        if LEG["guard"] is not None:  # simple_B_cap3 arms get it only with a nonzero recipe d_guard_ratio
             LEG["guard"].apply_(opt)
     else:
         for index, group in enumerate(opt.param_groups):
@@ -471,6 +471,8 @@ def install(arm_name: str, *, route: str, config: dict | None = None, log=print)
         if ARM["critic"] == "simple_B_cap3":
             _LEGACY_SIMPLE.append(simple_loss())
             GANLoss.d_loss = lambda self, real_logits, fake_logits: real_logits.new_zeros(()).sum()
+            LEG["guard"] = (CriticSpikeGuard(PKG_RECIPE.d_guard_ratio, PKG_RECIPE.d_guard_min_steps)
+                            if PKG_RECIPE.d_guard_ratio else None)
         else:
             LEG["anchor"] = SwapAnchor(PKG_RECIPE.reg_anchor_decay) if PKG_RECIPE.reg_anchor_weight else None
             LEG["record"] = CriticStepRecord(LEG["anchor"])

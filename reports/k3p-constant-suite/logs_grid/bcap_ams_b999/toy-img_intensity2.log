@@ -1,0 +1,28 @@
+# arm=bcap_ams_b999 task=toy-img_intensity2 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_intensity2 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+21.4573 Lg=+0.7330 pen=21.5 s=nan gR=nan/nan lr_d=0.0001 2s
+train     50/600 Ld=+9.5250 Lg=+0.7164 pen=9.52 s=nan gR=nan/nan lr_d=0.0001 2s
+train     75/600 Ld=+6.1017 Lg=+0.7131 pen=6.1 s=nan gR=nan/nan lr_d=0.0001 3s
+train    100/600 Ld=+4.9756 Lg=+0.7277 pen=4.98 s=nan gR=nan/nan lr_d=0.0001 4s
+train    125/600 Ld=+4.2569 Lg=+0.7491 pen=4.26 s=nan gR=nan/nan lr_d=0.0001 4s
+train    150/600 Ld=+3.6785 Lg=+0.7724 pen=3.68 s=nan gR=nan/nan lr_d=0.0001 5s
+train    175/600 Ld=+3.1833 Lg=+0.7911 pen=3.18 s=nan gR=nan/nan lr_d=0.0001 5s
+train    200/600 Ld=+2.6014 Lg=+0.8138 pen=2.6 s=nan gR=nan/nan lr_d=0.0001 6s
+train    225/600 Ld=+2.0764 Lg=+0.8533 pen=2.08 s=nan gR=nan/nan lr_d=0.0001 7s
+train    250/600 Ld=+1.6507 Lg=+0.8704 pen=1.65 s=nan gR=nan/nan lr_d=0.0001 7s
+train    275/600 Ld=+0.9304 Lg=+0.9523 pen=0.93 s=nan gR=nan/nan lr_d=0.0001 8s
+train    300/600 Ld=+0.4919 Lg=+0.9789 pen=0.492 s=nan gR=nan/nan lr_d=0.0001 8s
+train    325/600 Ld=-0.0446 Lg=+1.0989 pen=-0.0446 s=nan gR=nan/nan lr_d=0.0001 9s
+train    350/600 Ld=+0.3856 Lg=+1.1145 pen=0.386 s=nan gR=nan/nan lr_d=0.0001 10s
+train    375/600 Ld=+8.5903 Lg=+0.9960 pen=8.59 s=nan gR=nan/nan lr_d=0.0001 10s
+train    400/600 Ld=+7.6991 Lg=+0.9190 pen=7.7 s=nan gR=nan/nan lr_d=0.0001 11s
+train    425/600 Ld=+4.8557 Lg=+0.7283 pen=4.86 s=nan gR=nan/nan lr_d=0.0001 11s
+train    450/600 Ld=+3.1837 Lg=+0.6759 pen=3.18 s=nan gR=nan/nan lr_d=0.0001 12s
+train    475/600 Ld=+2.1726 Lg=+0.5759 pen=2.17 s=nan gR=nan/nan lr_d=0.0001 13s
+train    500/600 Ld=+1.9020 Lg=+0.6074 pen=1.9 s=nan gR=nan/nan lr_d=0.0001 13s
+train    525/600 Ld=+1.7499 Lg=+0.5692 pen=1.75 s=nan gR=nan/nan lr_d=0.0001 14s
+train    550/600 Ld=+1.7698 Lg=+0.5799 pen=1.77 s=nan gR=nan/nan lr_d=0.0001 14s
+train    575/600 Ld=+1.5770 Lg=+0.5920 pen=1.58 s=nan gR=nan/nan lr_d=0.0001 15s
+train    600/600 Ld=+1.4722 Lg=+0.6063 pen=1.47 s=nan gR=nan/nan lr_d=0.0001 15s
+{"event": "DONE", "task": "img_intensity2", "status": "FAIL", "suffix": 0, "live": {"modes": 0, "hq": 0.0, "mean_rmse": 0.07196313142776489, "quality_mode_fractions": [0.0, 0.0], "mode_fractions": [0.0, 1.0], "distribution_tv": 0.5}, "error": null}
+# DONE toy-img_intensity2 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 17s

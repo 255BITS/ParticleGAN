@@ -1356,6 +1356,108 @@
     ],
     "reg_real_weight": 3.3333333333333335
    }
+  },
+  "bcap_ams": {
+   "formulation": "simple_B_cap3 + AMSGrad on every optimizer (G, prior, critic), critic betas (0,.9); LR 2e-4 (G 2e-4, critic 1e-4, prior 4e-4), constant, no noise, A2 off, no guard",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5,
+    "lr": 0.0002
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.9,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "bcap_ams_b999": {
+   "formulation": "simple_B_cap3 + AMSGrad on every optimizer (G, prior, critic), critic betas (0,.999); LR 2e-4 (G 2e-4, critic 1e-4, prior 4e-4), constant, no noise, A2 off, no guard",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5,
+    "lr": 0.0002
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.999,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "bcap_ams_a2g": {
+   "formulation": "bcap_ams_b999 (simple_B_cap3 + AMSGrad everywhere, critic betas (0,.999), LR G 2e-4 / critic 1e-4 / prior 4e-4) + A2 latent damping (.5) + K3P critic spike guard (ratio 5, min 200 steps)",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5,
+    "lr": 0.0002
+   },
+   "recipe": {
+    "d_guard_ratio": 5.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.999,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
   }
  }
 }
