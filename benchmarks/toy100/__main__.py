@@ -80,7 +80,8 @@ def _gate(args):
 
 def _run_native(args, device):
     """The declared problem on the shared runner; gate.py/accuracy_gate.py grade it unchanged."""
-    from .native import STEPS, native_config, record
+    from .evidence import native_config, record
+    from .native import STEPS
 
     if getattr(args, "init", None) is not None:
         raise ValueError("--init applies to legacy --config runs; native networks declare their init")
