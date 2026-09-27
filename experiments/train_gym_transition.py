@@ -1,7 +1,14 @@
 #!/usr/bin/env python
-"""Finite-data Lunar Lander: direct baseline and three-generator MoG world models."""
+"""Finite-data Lunar Lander: direct baseline and three-generator MoG world models.
+
+``GymWorldModel`` declares the problem (data, networks, critic views,
+reconstruction losses, validation metrics, verdict); the shared
+``benchmarks.toy_runner.ToyRun`` trains it from the recipe. ``train`` keeps
+only this experiment's checkpoint protocol (EMA checkpoints at fixed steps,
+best-by-validation selection, provenance) that downstream control experiments
+read through ``load_checkpoint``.
+"""
 import argparse
-import copy
 import hashlib
 import json
 import math
@@ -13,6 +20,7 @@ import zipfile
 
 import numpy as np
 import torch
+from torch import nn
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,7 +30,8 @@ from lib.gym_transition import (GymTransitionScaler, GymTransitionGenerator,
     GymTransitionEncoder, GymTransitionCritics, DirectPredictor, contact_record,
     encoded_transition, composed_transition, real_reconstruction,
     synthetic_reconstruction, state_reconstruction)
-from particlegan import get_recipe, init, scale_learning_rates
+from particlegan import get_recipe, init
+from benchmarks.toy_runner import Networks, Sample, ToyProblem, ToyRun, View
 
 
 DEFAULTS = dict(arm="adversarial", width=128, encoder_width=128, d_width=256,
@@ -210,7 +219,8 @@ def validation_metrics(bundle, real, terrain):
 
 def source_provenance(out, data_dir):
     files = [Path(__file__), ROOT / "lib/gym_transition.py", ROOT / "lib/gym_data.py",
-             ROOT / "examples/gym_world_model.py", ROOT / "experiments/collect_gym_transition.py"]
+             ROOT / "examples/gym_world_model.py", ROOT / "experiments/collect_gym_transition.py",
+             ROOT / "benchmarks/toy_runner.py"]
     files += sorted((ROOT / "particlegan").glob("*.py"))
     files += sorted((ROOT / "configs/gym/lunar_lander").glob("*.yaml"))
     files = [p for p in files if p.exists()]
@@ -225,6 +235,109 @@ def source_provenance(out, data_dir):
                ("train.npz", "validation.npz", "test.npz", "metadata.json", "episodes.json")
                if (Path(data_dir) / name).exists()}
     return dict(sources=sources, dataset=dataset, source_archive_sha256=sha256(out / "source.zip"))
+
+
+class _Logits(nn.Module):
+    """Score adapter: a transition critic returns ``(logits, logits[:, None])``."""
+
+    def __init__(self, critic):
+        super().__init__()
+        self.critic = critic
+
+    def forward(self, x, context):
+        return self.critic(x, context)[0]
+
+
+class GymWorldModel(ToyProblem):
+    """Finite-data Lunar Lander transitions: the problem only.
+
+    Roles: G (G1 -> st, G2 -> at, G3 -> st+1) and E (st, at, terrain) -> z_hat on
+    a shared MoG prior, plus three critics scoring four views (joint, state,
+    action, next_state). ``arm`` picks direct (supervised predictor, no prior),
+    reconstruction (G + E + prior, no critic) or adversarial. The shared runner
+    builds every optimizer, the loss, penalties, noise and EMA from the recipe.
+    Verdict: PASS when validation next-state MSE beats persistence (st+1 = st).
+    """
+
+    name = "gym_world_model"
+
+    def __init__(self, cfg, train_real, train_terrain, validation_real, validation_terrain, scaler):
+        self.cfg, self.scaler, self.device = cfg, scaler, train_real.device
+        self.train_x, self.train_terrain = scaler(train_real), train_terrain
+        self.validation_real, self.validation_terrain = validation_real, validation_terrain
+        persistence = (validation_real[:, :6] - validation_real[:, 10:16]) / scaler.state_scale
+        self.persistence_mse = float(persistence.square().mean())
+        self.weights = dict(continuous_weight=cfg["continuous_weight"], contact_weight=cfg["contact_weight"])
+        self.models = None
+
+    def recipe(self):
+        return training_recipe(self.cfg)
+
+    def networks(self, recipe, seed):
+        self.models = m = build_models(self.cfg, self.scaler, self.device)
+        if m["direct"] is not None:
+            return Networks(generator=m["direct"], critics={}, prior=None)
+        critics = {} if m["D"] is None else nn.ModuleDict({k: _Logits(v) for k, v in m["D"].critics.items()})
+        return Networks(generator=m["G"], critics=critics, prior=m["prior"], encoder=m["E"])
+
+    def real(self, n, stream):
+        ids = torch.randint(len(self.train_x), (n,), device=self.device, generator=stream)
+        return Sample(self.train_x[ids], condition=(self.train_terrain[ids],))
+
+    def fake(self, nets, n, stream, real):
+        """Paired with a real batch's terrain; condition carries the clean parts for ``losses``."""
+        if real is None:
+            raise ValueError("gym_world_model samples are conditioned on a real batch's terrain")
+        context = real.condition[0]
+        if self.cfg["arm"] == "direct":
+            prediction = nets.generator(real.x[:, :10], context)
+            return Sample(prediction, condition=(context, prediction))
+        prior = nets.priors[0]
+        z, ids = prior.sample(n, stream)
+        record = contact_record(nets.generator(z, context), rng=stream, straight_through=True)
+        composed, decoded, _ = composed_transition(nets.encoder, nets.generator, prior, record, context,
+                                                   rng=stream, straight_through=True)
+        return Sample(torch.cat([record, composed]), condition=(context, record, decoded), indices=ids)
+
+    def views(self, nets, real, fake):
+        """Sampled and composed records each score every role; marginals share ``marginal_weight``."""
+        if self.models["D"] is None:
+            return []
+        n, context, marginal = len(real.x), real.condition[0], self.cfg["marginal_weight"]
+        views = []
+        for part in (fake.x[:n], fake.x[n:]):
+            for role in GymTransitionCritics.roles():
+                xr, c = self.models["D"].inputs(role, real.x, context)
+                xf, _ = self.models["D"].inputs(role, part, context)
+                views.append(View("state" if role == "next_state" else role, xr, xf, (c,),
+                                  .5 if role == "joint" else .5 * marginal / 3))
+        return views
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator":
+            return {}
+        context = real.condition[0]
+        if self.cfg["arm"] == "direct":
+            return {"reconstruction": state_reconstruction(fake.condition[1], real.x[:, 10:], **self.weights)[0]}
+        _, record, decoded = fake.condition
+        decoded_real, _ = encoded_transition(nets.encoder, nets.generator, nets.priors[0], real.x[:, :10], context)
+        return {"real_reconstruction": self.cfg["real_encoding_weight"]
+                * real_reconstruction(decoded_real, real.x, **self.weights)[0],
+                "synthetic_reconstruction": self.cfg["synthetic_reconstruction_weight"]
+                * synthetic_reconstruction(decoded, record, **self.weights)[0]}
+
+    def bundle(self, nets):
+        direct = self.cfg["arm"] == "direct"
+        return dict(G=None if direct else nets.generator, E=nets.encoder, direct=nets.generator if direct else None,
+                    prior=None if direct else nets.priors[0], scaler=self.scaler, config=self.cfg,
+                    device=self.device)
+
+    def metrics(self, model):
+        metrics = validation_metrics(self.bundle(model.nets), self.validation_real, self.validation_terrain)
+        return dict(metrics, persistence_mse=self.persistence_mse)
+
+    def verdict(self, metrics):
+        return "PASS" if metrics["next_standardized_mse"] < metrics["persistence_mse"] else "FAIL"
 
 
 def train(cfg):
@@ -242,40 +355,12 @@ def train(cfg):
     train_real, train_terrain = load_split(cfg["data_dir"], "train", device, cfg["context_dim"])
     validation_real, validation_terrain = load_split(cfg["data_dir"], "validation", device, cfg["context_dim"])
     scaler = GymTransitionScaler.fit(train_real).to(device)
-    real_normalized = scaler(train_real)
-    models = build_models(cfg, scaler, device)
-    recipe = training_recipe(cfg)
-    g, e, prior, d, direct = [models[k] for k in ("G", "E", "prior", "D", "direct")]
-    if d is not None:
-        opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
-                                              fused=device.type == "cuda")
-    else:
-        params = list(direct.parameters()) if direct is not None else list(g.parameters()) + list(e.parameters())
-        groups = [dict(params=params, lr=recipe.lr)]
-        if prior is not None:
-            groups.append(dict(params=list(prior.parameters()), lr=recipe.lr * recipe.prior_lr_mult,
-                               betas=recipe.prior_betas or recipe.betas))
-        opt_g = recipe.make_generator_optimizer(groups, **(dict(fused=True) if device.type == "cuda" else {}))
-        opt_d = None
-    ema = {**models}
-    for key in ("G", "E", "prior", "direct"):
-        if models[key] is not None:
-            ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
-    optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
-    base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
-    data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
-    d_data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 21)
-    latent_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 12)
-    contact_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 31)
-    d_latent_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 22)
-    d_contact_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 32)
-    reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
-                for i, role in enumerate(d.roles())} if d is not None else {}
-    # One recipe penalty per critic role (own interpolation stream), paired with opt_d.
-    penalties = ({role: recipe.make_critic_penalty(opt_d) for role, rng in reg_rngs.items()}
-                 if opt_d is not None else None)
-    weights = dict(continuous_weight=cfg["continuous_weight"], contact_weight=cfg["contact_weight"])
+    problem = GymWorldModel(cfg, train_real, train_terrain, validation_real, validation_terrain, scaler)
+    toy = ToyRun(problem, seed=cfg["seed"], device=device)
+    models, recipe, adversarial = problem.models, toy.recipe, bool(toy.critics)
+    # Checkpoint schema read by load_checkpoint: EMA generator side, live critics.
+    ema = {key: problem.bundle(toy.ema_nets)[key] for key in ("G", "E", "prior", "direct")}
+    ema["D"] = models["D"]
     provenance = source_provenance(out, cfg["data_dir"])
     write_json(out / "provenance.json", provenance)
     write_json(out / "recipe.json", recipe.to_dict())
@@ -285,19 +370,16 @@ def train(cfg):
         cuda=torch.version.cuda, device=str(device),
         gpu=torch.cuda.get_device_name(device) if device.type == "cuda" else None))
     (out / "config.yaml").write_text(yaml.safe_dump(cfg))
+    prior = models["prior"]
     if prior is not None:
         write_json(out / "prior.json", dict(kind="mog", components=prior.num_particles,
             sigma_rel=prior.sigma_rel, sigma=float(prior.sigma),
-            initial_neighbor_distance=float(prior.d0), regularize="full raw center table"))
+            initial_neighbor_distance=float(prior.d0), regularize="recipe prior_reg via the shared runner"))
     parameters = {key: parameter_count(models[key]) for key in ("G", "E", "prior", "D", "direct")}
-    inference_parameters = parameter_count(direct) if direct is not None else models["inference_target"]
+    inference_parameters = parameters["direct"] if models["direct"] is not None else models["inference_target"]
     checkpoints = sorted({x for x in cfg["checkpoints"] if x <= cfg["steps"]} | {cfg["steps"]})
     history, best, best_step = [], float("inf"), None
     optimization_seconds = 0.
-
-    def batch(rng):
-        ids = torch.randint(len(real_normalized), (cfg["batch_size"],), device=device, generator=rng)
-        return real_normalized[ids], train_terrain[ids]
 
     def sync():
         if device.type == "cuda":
@@ -318,73 +400,25 @@ def train(cfg):
             log_file.write(text + "\n")
             live_file.write(text + "\n")
 
-        log(f"START arm={cfg['arm']} steps={cfg['steps']} finite_train={len(train_real)} device={device}")
-        log("G1 -> st; G2 -> at; G3 -> st+1; E(st,at,terrain) -> z_hat -> G3; shared MoG1024 latent" if g is not None
-            else "Direct supervised comparison: (st,at,terrain) -> st+1")
-        log("State contacts use BCE; fake adversarial contacts use Bernoulli bits with straight-through G gradients")
+        log(f"START arm={cfg['arm']} steps={cfg['steps']} finite_train={len(train_real)} device={device} "
+            f"runner=benchmarks.toy_runner persistence_mse={problem.persistence_mse:.6f}")
         log(f"Parameters={parameters}; inference={inference_parameters}; target={models['inference_target']}")
         started = time.perf_counter()
         sync()
         segment_started = time.perf_counter()
-        for step in range(1, cfg["steps"] + 1):
-            lr_scale, _ = scale_learning_rates(step - 1, recipe, optimizers, base_rates, prior)
-            ld = train_real.new_zeros(())
-            d_terms = {}
-            if d is not None:
-                d.requires_grad_(True)
-                real_d, context_d = batch(d_data_rng)
-                with torch.no_grad():
-                    fake_d = contact_record(g(prior.sample(len(real_d), d_latent_rng)[0], context_d), rng=d_contact_rng)
-                    composed_d = composed_transition(e, g, prior, fake_d, context_d, rng=d_contact_rng)[0]
-                    half = len(real_d) // 2
-                    fake_d = torch.cat([fake_d[:half], composed_d[half:]])
-                ld, d_terms = discriminator_loss(d, real_d, fake_d, context_d, gan, penalties)
-                opt_d.zero_grad(set_to_none=True)
-                ld.backward()
-                opt_d.step()
-                d.requires_grad_(False)
-            real, context = batch(data_rng)
-            lg = lp = real.new_zeros(())
-            g_terms, reconstruction_terms = {}, {}
-            if direct is not None:
-                decoded = direct(real[:, :10], context)
-                le, reconstruction_terms = state_reconstruction(decoded, real[:, 10:], **weights)
-            else:
-                z, ids = prior.sample(len(real), latent_rng)
-                fake = contact_record(g(z, context), rng=contact_rng, straight_through=True)
-                composed, decoded_fake, _ = composed_transition(e, g, prior, fake, context,
-                    rng=contact_rng, straight_through=True)
-                decoded_real, _ = encoded_transition(e, g, prior, real[:, :10], context)
-                lr, real_terms = real_reconstruction(decoded_real, real, **weights)
-                ls, synthetic_terms = synthetic_reconstruction(decoded_fake, fake, **weights)
-                le = cfg["real_encoding_weight"] * lr + cfg["synthetic_reconstruction_weight"] * ls
-                reconstruction_terms = {**{f"real_{k}": v for k, v in real_terms.items()},
-                                        **{f"synthetic_{k}": v for k, v in synthetic_terms.items()}}
-                lp = spread(prior.z)
-                if d is not None:
-                    original_loss, g_terms = generator_loss(d, real, fake, context, gan, cfg["marginal_weight"])
-                    composed_loss, _ = generator_loss(d, real, composed, context, gan, cfg["marginal_weight"])
-                    lg = (original_loss + composed_loss) / 2
-            loss = le + lg + lp
-            if not torch.isfinite(loss):
-                raise FloatingPointError(f"Nonfinite training loss at step {step}")
-            opt_g.zero_grad(set_to_none=True)
-            loss.backward()
-            opt_g.step()
-            with torch.no_grad():
-                for key in ("G", "E", "prior", "direct"):
-                    if models[key] is not None:
-                        for target, source in zip(ema[key].parameters(), models[key].parameters()):
-                            target.lerp_(source, 1 - recipe.ema_decay)
+        for _ in range(cfg["steps"]):
+            terms = {k: float(v) for k, v in toy.step().items() if k != "step"}
+            step = toy.completed_steps
+            if not all(math.isfinite(v) for v in terms.values()):
+                raise FloatingPointError(f"Nonfinite training loss at step {step}: {terms}")
             if step == 1 or step % cfg["log_interval"] == 0 or step in checkpoints:
                 sync()
-                row = dict(step=step, loss=float(loss.detach()), d_loss=float(ld.detach()),
-                    g_loss=float(lg.detach()), prior_loss=float(lp.detach()),
-                    reconstruction_loss=float(le.detach()), lr_scale=lr_scale,
-                    elapsed_seconds=time.perf_counter() - started,
-                    reconstruction_terms={k: float(v.detach()) for k, v in reconstruction_terms.items()},
-                    d_terms={k: float(v.detach()) for k, v in d_terms.items()},
-                    g_terms={k: float(v.detach()) for k, v in g_terms.items()})
+                group = toy.opt_g.param_groups[0]
+                row = dict(step=step, loss=terms["loss_g"], d_loss=terms.get("loss_d", 0.),
+                    g_loss=terms["loss_gan"],
+                    reconstruction_loss=sum(v for k, v in terms.items() if "reconstruction" in k),
+                    lr_scale=group["lr"] / group["base_lr"], elapsed_seconds=time.perf_counter() - started,
+                    terms=terms)
                 metrics_file.write(json.dumps(row, allow_nan=False) + "\n")
                 log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} D={row['d_loss']:.5f} "
                     f"G={row['g_loss']:.5f} reconstruction={row['reconstruction_loss']:.5f} "
@@ -392,7 +426,7 @@ def train(cfg):
             if step in checkpoints:
                 sync()
                 optimization_seconds += time.perf_counter() - segment_started
-                validation = validation_metrics(ema, validation_real, validation_terrain)
+                validation = toy.measure(ema=True)
                 history.append(dict(step=step, **validation))
                 save(out / f"checkpoint_{step}.pt", step, validation)
                 if validation["next_standardized_mse"] < best:
@@ -405,20 +439,25 @@ def train(cfg):
         summary = dict(config=cfg, recipe=recipe.to_dict(), provenance=provenance,
             parameters=parameters, full_parameters=sum(parameters.values()),
             inference_parameters=inference_parameters, inference_target=models["inference_target"],
-            direct_width=direct.width if direct is not None else None,
+            direct_width=models["direct"].width if models["direct"] is not None else None,
             unique_training_triples=len(train_real), normalization_triples=len(train_real),
             generator_optimizer_record_draws=cfg["steps"] * cfg["batch_size"],
-            discriminator_optimizer_record_draws=cfg["steps"] * cfg["batch_size"] if d is not None else 0,
-            real_draws=cfg["steps"] * cfg["batch_size"] * (2 if d is not None else 1),
+            discriminator_optimizer_record_draws=cfg["steps"] * cfg["batch_size"] if adversarial else 0,
+            real_draws=cfg["steps"] * cfg["batch_size"] * (2 if adversarial else 1),
             validation_record_draws=len(validation_real) * len(checkpoints),
             train_seconds=optimization_seconds, total_seconds=time.perf_counter() - started,
             validation_history=history, best_step=best_step, best_validation_mse=best,
-            final_validation=history[-1], selection="minimum validation six-coordinate standardized MSE",
+            final_validation=history[-1], verdict=history[-1]["verdict"],
+            persistence_mse=problem.persistence_mse,
+            selection="minimum validation six-coordinate standardized MSE",
             checkpoints={p.name: sha256(p) for p in sorted(out.glob("*.pt"))},
+            runner="benchmarks.toy_runner.ToyRun: recipe-built optimizers, loss, penalties, noise, EMA",
             contact_training="BCE logits; Bernoulli hard fake records with ST G gradient; detached synthetic contact bits",
             inference="deterministic E->G3 continuous point prediction and contact probabilities; privileged terrain context")
         write_json(out / "summary.json", summary)
-        log(f"COMPLETE best_step={best_step} validation_mse={best:.7f} train_seconds={optimization_seconds:.1f}")
+        log(f"COMPLETE verdict={summary['verdict']} best_step={best_step} validation_mse={best:.7f} "
+            f"final_mse={history[-1]['next_standardized_mse']:.7f} persistence_mse={problem.persistence_mse:.7f} "
+            f"train_seconds={optimization_seconds:.1f}")
     return summary
 
 

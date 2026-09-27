@@ -4,7 +4,9 @@
     tail -F results/gym/lunar_lander/live.log
 
 Use configs/gym/lunar_lander/direct.yaml or reconstruction.yaml for comparisons.
-See docs/gym-world-model-plan.md for collection and evaluation requirements.
+Needs a pre-collected dataset (--data-dir, default results/gym/lunar_lander/data;
+see experiments/collect_gym_transition.py and docs/gym-world-model-plan.md).
+The problem (GymWorldModel) trains on the shared benchmarks.toy_runner.ToyRun.
 """
 from pathlib import Path
 import sys
