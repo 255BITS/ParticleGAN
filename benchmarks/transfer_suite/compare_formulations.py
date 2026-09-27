@@ -66,7 +66,8 @@ def run(output):
 
         with ExitStack() as stack:
             for module in (evaluate, vector_tasks, image_tasks):
-                stack.enter_context(patch.object(module, 'FixedControl', AuditControl))
+                if hasattr(module, 'FixedControl'):  # toy_runner hosts have none
+                    stack.enter_context(patch.object(module, 'FixedControl', AuditControl))
             if spec['runner'] == 'legacy':
                 control = evaluate.FixedControl(policy, spec['steps'])
                 with bridge.control_host_schedules(control):

@@ -184,8 +184,10 @@ def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
         stack.enter_context(patch.object(ParticlePrior, '__init__', prior_init))
         stack.enter_context(patch.object(torch.optim.Adam, '__init__', adam_init))
         stack.enter_context(patch.object(bridge, 'optimizer_role', role))
+        # Hosts on benchmarks.toy_runner (image_tasks) have no controller to patch.
         for module in (evaluate, vector_tasks, image_tasks):
-            stack.enter_context(patch.object(module, 'FixedControl', RecipeControl))
+            if hasattr(module, 'FixedControl'):
+                stack.enter_context(patch.object(module, 'FixedControl', RecipeControl))
         yield
 
 
