@@ -258,38 +258,52 @@ class Recipe:
         GradientPenalty(**options)  # validate
         return options
 
-    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+    def make_critic_optimizer(self, critic, *, ema_critic=None, network_transition=None, **adam_kwargs):
         """Adam over ``critic``'s trainable parameters whose ``step()`` does the
-        recipe's critic-side work (currently K3P: spike guard, EMA-critic update,
-        LR record).
+        recipe's critic-side work: the LR schedule (``LRSchedule``), then K3P's
+        spike guard, EMA-critic update and LR record.
 
         ``ema_critic`` is a caller-allocated copy of ``critic`` (e.g.
         ``copy.deepcopy(critic)``) that becomes the EMA; the critic penalty
-        requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
-        EMA critic and all counters. ``adam_kwargs`` override the recipe's
-        ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
+        requires it unless ``reg_anchor_weight == 0``. Checkpoint with
+        ``optimizer.state_dict()``: it holds the EMA critic, the schedule and
+        all counters. ``adam_kwargs`` override the recipe's ``lr * d_lr_mult``
+        (the schedule's base rate) and ``betas`` or add options such as
+        ``fused``. ``network_transition`` is described in ``LRSchedule``.
         """
         from .k3p import K3PCriticAdam
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
         return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                              ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
-                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
+                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps,
+                             lr_schedule=LRSchedule(self, network_transition), **options)
 
-    def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
+    def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None,
+                                 network_transition=None, **adam_kwargs):
         """Adam over ``params`` (tensors or param groups) whose ``step()`` does the
-        recipe's generator-side work (currently K3P: A2 damping of the sparse
-        ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
-        and the direct-particle response for the param group ``direct_particles``).
+        recipe's generator-side work: the LR schedule (``LRSchedule``), then K3P's
+        A2 damping of the sparse ``latent_table`` (e.g. ``prior.z`` alone in its
+        group with beta1 == 0) and the direct-particle response for the param
+        group ``direct_particles``.
 
-        With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
-        override the recipe's ``lr`` and ``betas`` or add Adam options.
+        Groups follow the network schedule unless they carry ``"role":
+        "prior"`` (see ``prior_param_group``). Each group's LR when it joins the
+        optimizer is its base rate. ``adam_kwargs`` override the recipe's
+        ``lr`` and ``betas`` or add Adam options.
         """
         from .k3p import K3PGeneratorAdam
         options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,
-                                direct_gain=self.direct_particle_gain, **options)
+                                direct_gain=self.direct_particle_gain,
+                                lr_schedule=LRSchedule(self, network_transition), **options)
+
+    def prior_param_group(self, params):
+        """A generator-optimizer param group for prior parameters: the prior's
+        base LR (``lr * prior_lr_mult``), betas and schedule role."""
+        return {"params": list(params), "lr": self.lr * self.prior_lr_mult, "role": "prior",
+                "betas": self.prior_betas if self.prior_betas is not None else self.betas}
 
     @property
     def resolved_network_lr_floor(self):
@@ -301,22 +315,22 @@ class Recipe:
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
-                        **adam_kwargs):
+                        network_transition=None, **adam_kwargs):
         """Return ``(opt_g, opt_d)``: Adam optimizers whose ``step()`` does the recipe's work.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
         a learnable ``ParticlePrior`` table gets A2 damping) and ``opt_d`` the
         critic (``make_critic_optimizer``, with the caller-allocated
         ``ema_critic``). Use them like any Adam: ``zero_grad``/``step``,
-        ``state_dict``/``load_state_dict`` (which carry all regularization
-        state), LR schedulers. Move modules to their desired device before
-        calling. Frozen parameters are excluded, and a Gaussian/frozen prior
-        adds no optimizer group. Additional Adam options, such as ``fused`` or
-        ``eps``, apply to both optimizers. Set learning rates and betas on the
-        recipe. The generator optimizer's groups are ``[generator/encoder,
-        prior]`` (either may be absent); scale the prior group by the prior
-        multiplier of ``learning_rate_scales`` and everything else by the
-        network one.
+        ``state_dict``/``load_state_dict`` (which carry all regularization and
+        schedule state). Each optimizer applies the recipe's LR schedule inside
+        ``step()`` from its own update count (``LRSchedule``); callers never set
+        learning rates. Move modules to their desired device before calling.
+        Frozen parameters are excluded, and a Gaussian/frozen prior adds no
+        optimizer group. Additional Adam options, such as ``fused`` or ``eps``,
+        apply to both optimizers. Set learning rates and betas on the recipe.
+        The generator optimizer's groups are ``[generator/encoder, prior]``
+        (either may be absent). One ``network_transition`` is shared by both.
 
         Parameters are used as supplied; initialize fresh networks first (e.g.
         ``particlegan.init.deterministic_orthogonal_``).
@@ -336,13 +350,13 @@ class Recipe:
         if g_params:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
-            groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
-                           "betas": self.prior_betas if self.prior_betas is not None else self.betas})
+            groups.append(self.prior_param_group(prior_params))
         # A2 acts on a plain particle table (not MoG means or Gaussian priors).
         latent_table = prior.z if type(prior) is ParticlePrior and prior.z.requires_grad else None
-        return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
-                self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
-
+        return (self.make_generator_optimizer(groups, latent_table=latent_table,
+                                              network_transition=network_transition, **adam_kwargs),
+                self.make_critic_optimizer(discriminator, ema_critic=ema_critic,
+                                           network_transition=network_transition, **adam_kwargs))
 
 
 def get_recipe(name="gan", **overrides):
@@ -387,12 +401,13 @@ def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):
 
 
 class NetworkLRTransition:
-    """Caller-triggered network LR decay for a custom training loop.
+    """Caller-triggered network LR decay, applied by the recipe-built optimizers.
 
-    The caller decides when validation has plateaued and marks the number of
-    completed updates. G/D then cosine-decay to the recipe's network floor over
-    ``decay_steps``; the particle prior keeps its ordinary full-budget schedule.
-    Save this object's state alongside the optimizers for exact continuation.
+    Pass one transition to ``recipe.make_optimizers(..., network_transition=t)``
+    (or to both ``make_*_optimizer`` factories). G/D then hold full LR until the
+    caller marks a plateau with the completed update count, and cosine-decay to
+    the recipe's network floor over ``decay_steps``; the particle prior keeps its
+    ordinary full-budget schedule. The optimizers save and restore its state.
     """
 
     def __init__(self, decay_steps, start_step=None):
@@ -431,6 +446,7 @@ def learning_rate_scales(step, recipe, *, network_transition=None):
     and then hold; the particle prior follows it over the full budget down to
     ``lr_floor``. When ``network_transition`` is supplied, G/D instead hold at
     full LR until its caller-marked plateau, then decay over its ``decay_steps``.
+    Recipe-built optimizers apply these multipliers themselves (``LRSchedule``);
     K3P's blend weight is driven by the resulting critic LR.
     """
     total = recipe.total_steps
@@ -448,17 +464,72 @@ def learning_rate_scales(step, recipe, *, network_transition=None):
     return network, prior
 
 
-def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, network_transition=None):
-    """Set every group's LR from ``learning_rate_scales(step, recipe)``.
+class LRSchedule:
+    """The recipe's role-wise LR schedule, owned by one recipe-built optimizer.
 
-    ``base_rates`` holds each optimizer's unscaled group LRs (read them once
-    after construction). Groups whose parameters all belong to ``prior`` get
-    the prior multiplier; every other group gets the network one, so a custom
-    loop's critic LR follows the same floor K3P's blend weight assumes.
-    Pass a ``NetworkLRTransition`` to choose the network decay from validation
-    while retaining the ordinary prior schedule. Returns ``(network, prior)``
-    multipliers.
+    The optimizer calls ``apply`` at the start of every ``step()`` and
+    ``advance`` after it, so the schedule counts that optimizer's own updates.
+    Each param group has a ``role`` (``"network"`` or ``"prior"``) and a
+    ``base_lr`` captured once when the group joins the optimizer; ``apply`` sets
+    ``lr = base_lr * scale`` from ``learning_rate_scales(completed_steps,
+    recipe, network_transition=...)``, so nothing compounds. The rates reach
+    their floors at ``total_steps`` (the network horizon cap first) and hold
+    there for any extended run. The state (update count, transition) lives in
+    the optimizer's ``state_dict()``.
     """
+
+    ROLES = ("network", "prior")
+
+    def __init__(self, recipe, network_transition=None):
+        if not isinstance(recipe, Recipe):
+            raise TypeError("recipe must be a Recipe")
+        if network_transition is not None and not isinstance(network_transition, NetworkLRTransition):
+            raise TypeError("network_transition must be a NetworkLRTransition or None")
+        self.recipe, self.network_transition = recipe, network_transition
+        self.completed_steps = 0
+
+    def scales(self, completed_steps=None):
+        """``(network, prior)`` multipliers for the update after ``completed_steps`` (default: now)."""
+        step = self.completed_steps if completed_steps is None else completed_steps
+        return learning_rate_scales(step, self.recipe, network_transition=self.network_transition)
+
+    def apply(self, optimizer):
+        network, prior = self.scales()
+        for group in optimizer.param_groups:
+            group["lr"] = group["base_lr"] * (prior if group["role"] == "prior" else network)
+        return network, prior
+
+    def advance(self):
+        self.completed_steps += 1
+
+    def state_dict(self):
+        return {"completed_steps": self.completed_steps,
+                "network_transition": None if self.network_transition is None
+                else self.network_transition.state_dict()}
+
+    def load_state_dict(self, state):
+        if not isinstance(state, dict) or set(state) != {"completed_steps", "network_transition"}:
+            raise ValueError("invalid LR schedule state")
+        steps, transition = state["completed_steps"], state["network_transition"]
+        if type(steps) is not int or steps < 0:
+            raise ValueError("invalid LR schedule step count")
+        if (transition is None) != (self.network_transition is None):
+            raise ValueError("LR schedule state does not match this optimizer's network transition")
+        if transition is not None:
+            self.network_transition.load_state_dict(transition)
+        self.completed_steps = steps
+
+
+def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, network_transition=None):
+    """Deprecated: recipe-built optimizers apply ``LRSchedule`` inside ``step()``.
+
+    Writing group LRs by hand is redundant (the next ``step()`` overwrites them
+    from the optimizer's own count) and will be removed once every caller has
+    migrated. Returns ``learning_rate_scales(step, recipe)``.
+    """
+    import warnings
+    warnings.warn("scale_learning_rates is deprecated: recipe-built optimizers apply the recipe's "
+                  "LR schedule inside step()", DeprecationWarning, stacklevel=2)
     network, prior_scale = learning_rate_scales(step, recipe, network_transition=network_transition)
     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
     for optimizer, rates in zip(optimizers, base_rates):

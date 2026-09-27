@@ -408,24 +408,88 @@ def _closure_loss(closure):
         return closure()
 
 
-class K3PCriticAdam(Adam):
+_SCHEDULE_KEY = "lr_schedule"
+
+
+class _RecipeAdam(Adam):
+    """Adam whose ``step()`` applies a recipe ``LRSchedule`` from its own update count.
+
+    Every param group carries ``role`` (``"network"`` unless given, or
+    ``"prior"``) and ``base_lr`` (its LR when it joined, captured once, also
+    for groups added later). With ``lr_schedule=None`` the LR is left alone.
+    """
+
+    def __init__(self, params, *, lr_schedule=None, **adam_kwargs):
+        super().__init__(params, **adam_kwargs)
+        self.lr_schedule = lr_schedule
+
+    def add_param_group(self, param_group):
+        role = param_group.get("role", "network")
+        from .recipes import LRSchedule
+        if role not in LRSchedule.ROLES:
+            raise ValueError(f"param group role must be one of {LRSchedule.ROLES}")
+        super().add_param_group(param_group)
+        group = self.param_groups[-1]
+        group["role"] = role
+        group["base_lr"] = group["lr"]
+
+    @property
+    def completed_steps(self):
+        """Updates this optimizer has applied (the schedule's clock); None without a schedule."""
+        return None if self.lr_schedule is None else self.lr_schedule.completed_steps
+
+    def _begin_schedule(self):
+        if self.lr_schedule is not None:
+            self.lr_schedule.apply(self)
+
+    def _end_schedule(self):
+        if self.lr_schedule is not None:
+            self.lr_schedule.advance()
+
+    def _schedule_state(self):
+        return None if self.lr_schedule is None else self.lr_schedule.state_dict()
+
+    def _split_schedule(self, state_dict):
+        """Pop and validate the schedule entry; fill group keys a saved state lacks."""
+        if _SCHEDULE_KEY not in state_dict and self.lr_schedule is not None:
+            raise ValueError("optimizer state has no 'lr_schedule' entry (saved before the recipe-owned "
+                             "LR schedule); restore it through GANTrainer or retrain")
+        schedule = state_dict.pop(_SCHEDULE_KEY, None)
+        if (schedule is None) != (self.lr_schedule is None):
+            raise ValueError("optimizer state does not match this optimizer's LR schedule")
+        if schedule is not None:
+            deepcopy(self.lr_schedule).load_state_dict(schedule)  # validate before mutating
+        saved = state_dict.get("param_groups")
+        if isinstance(saved, list) and len(saved) == len(self.param_groups):
+            state_dict["param_groups"] = [{"role": current["role"], "base_lr": current["base_lr"], **dict(group)}
+                                          for group, current in zip(saved, self.param_groups)]
+        return schedule
+
+    def _load_schedule(self, schedule):
+        if schedule is not None:
+            self.lr_schedule.load_state_dict(schedule)
+
+
+class K3PCriticAdam(_RecipeAdam):
     """Adam for one critic whose ``step()`` also does K3P's critic-side work.
 
     Built by ``recipe.make_critic_optimizer(critic, ema_critic=...)`` (and by
-    ``recipe.make_optimizers``). ``step()`` = spike guard on the gradients,
-    the Adam update, then the anchor EMA update and the LR record that the
+    ``recipe.make_optimizers``). ``step()`` = the recipe's LR schedule, spike
+    guard on the gradients, the Adam update, then the anchor EMA update and
+    the LR record that the
     paired penalty (``recipe.make_critic_penalty(optimizer)``) reads.
     ``ema_critic`` is the caller-allocated EMA module (e.g.
     ``copy.deepcopy(critic)``); None keeps no anchor. ``state_dict()`` holds
     everything (Adam state, EMA critic, LR record, counters) under the extra
-    ``"regularizer"`` key, so the usual optimizer checkpoint resumes exactly.
+    ``"regularizer"`` key and the schedule under ``"lr_schedule"``, so the
+    usual optimizer checkpoint resumes exactly.
     """
 
-    _OWN_ATTRS = ("critic", "ema_critic", "anchor", "record", "guard")
+    _OWN_ATTRS = ("critic", "ema_critic", "anchor", "record", "guard", "lr_schedule")
 
     def __init__(self, params, *, critic, ema_critic=None, anchor_decay=0.999,
-                 guard_ratio=5.0, guard_min_steps=200, **adam_kwargs):
-        super().__init__(params, **adam_kwargs)
+                 guard_ratio=5.0, guard_min_steps=200, lr_schedule=None, **adam_kwargs):
+        super().__init__(params, lr_schedule=lr_schedule, **adam_kwargs)
         if not isinstance(critic, nn.Module):
             raise TypeError("critic must be an nn.Module")
         self.critic, self.ema_critic = critic, ema_critic
@@ -444,10 +508,12 @@ class K3PCriticAdam(Adam):
 
     def step(self, closure=None):
         loss = _closure_loss(closure)
+        self._begin_schedule()
         if self.guard is not None:
             self.guard.apply_(self)
         _adam_step(self)
         self.record.record_step(self)
+        self._end_schedule()
         return loss
 
     def state_dict(self):
@@ -457,6 +523,7 @@ class K3PCriticAdam(Adam):
             "ema": None if self.ema_critic is None else self.ema_critic.state_dict(),
             "guard": None if self.guard is None else self.guard.state_dict(),
         }
+        state[_SCHEDULE_KEY] = self._schedule_state()
         return state
 
     def load_state_dict(self, state_dict):
@@ -467,12 +534,14 @@ class K3PCriticAdam(Adam):
         if (extra["ema"] is None) != (self.ema_critic is None) or (extra["guard"] is None) != (self.guard is None):
             raise ValueError("critic optimizer state does not match this recipe/EMA critic")
         # Validate every part before mutating anything.
+        schedule = self._split_schedule(state_dict)
         copy(self.record).load_state_dict(extra["record"])
         if self.guard is not None:
             copy(self.guard).load_state_dict(dict(extra["guard"]))
         if self.ema_critic is not None:
             deepcopy(self.ema_critic).load_state_dict(extra["ema"])
         super().load_state_dict(state_dict)
+        self._load_schedule(schedule)
         self.record.load_state_dict(extra["record"])
         if self.guard is not None:
             self.guard.load_state_dict(dict(extra["guard"]))
@@ -480,7 +549,7 @@ class K3PCriticAdam(Adam):
             self.ema_critic.load_state_dict(extra["ema"])
 
 
-class K3PGeneratorAdam(Adam):
+class K3PGeneratorAdam(_RecipeAdam):
     """Adam for the generator side whose ``step()`` applies K3P's update modifications.
 
     Built by ``recipe.make_generator_optimizer(params, latent_table=...,
@@ -489,15 +558,16 @@ class K3PGeneratorAdam(Adam):
     table (alone in its param group with beta1 == 0) and
     ``DirectParticleResponse`` on one param group of direct sample particles;
     their history buffers are allocated here. With neither, ``step()`` is
-    exactly ``Adam.step()``. ``state_dict()`` carries the histories and
-    counters under the extra ``"regularizer"`` key.
+    exactly ``Adam.step()`` after the recipe's LR schedule. ``state_dict()``
+    carries the histories and counters under the extra ``"regularizer"`` key
+    and the schedule under ``"lr_schedule"``.
     """
 
-    _OWN_ATTRS = ("latent_damping", "latent_history", "direct_response", "direct_history")
+    _OWN_ATTRS = ("latent_damping", "latent_history", "direct_response", "direct_history", "lr_schedule")
 
     def __init__(self, params, *, latent_table=None, direct_particles=None, latent_max_rate=0.5,
-                 direct_betas=(0.0, 0.9), direct_gain=True, **adam_kwargs):
-        super().__init__(params, **adam_kwargs)
+                 direct_betas=(0.0, 0.9), direct_gain=True, lr_schedule=None, **adam_kwargs):
+        super().__init__(params, lr_schedule=lr_schedule, **adam_kwargs)
         self.latent_damping = self.latent_history = None
         self.direct_response = self.direct_history = None
         if latent_table is not None and latent_table.requires_grad and latent_max_rate > 0:
@@ -525,6 +595,7 @@ class K3PGeneratorAdam(Adam):
 
     def step(self, closure=None):
         loss = _closure_loss(closure)
+        self._begin_schedule()
         latent = None if self.latent_damping is None else self.latent_damping.begin(self)
         try:
             direct = None if self.direct_response is None else self.direct_response.begin(self)
@@ -536,6 +607,7 @@ class K3PGeneratorAdam(Adam):
         finally:
             if self.latent_damping is not None:
                 self.latent_damping.end(latent)
+        self._end_schedule()
         return loss
 
     def state_dict(self):
@@ -546,6 +618,7 @@ class K3PGeneratorAdam(Adam):
             "direct": None if self.direct_response is None else
             {"state": self.direct_response.state_dict(), "history": self.direct_history},
         }
+        state[_SCHEDULE_KEY] = self._schedule_state()
         return state
 
     def load_state_dict(self, state_dict):
@@ -564,7 +637,9 @@ class K3PGeneratorAdam(Adam):
                         or part["history"].shape != history.shape or part["history"].dtype != history.dtype):
                     raise ValueError("generator optimizer history does not match")
                 copy(owner).load_state_dict(dict(part["state"]))  # validate before mutating
+        schedule = self._split_schedule(state_dict)
         super().load_state_dict(state_dict)
+        self._load_schedule(schedule)
         for part, owner, history in parts:
             if part is not None:
                 owner.load_state_dict(dict(part["state"]))

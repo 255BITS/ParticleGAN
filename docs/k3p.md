@@ -48,6 +48,8 @@ coefficient `k·c`.
 | `prior_reg` | 0 | no particle spread penalty |
 | `batch_size`, `z_dim`, `num_particles` | 2048, 2, 20000 | the qualified task shape |
 
+The recipe-built optimizers apply this schedule inside `step()` from their own
+update counts (`LRSchedule`), holding the floors past `total_steps`;
 `learning_rate_scales(step, recipe)` returns the `(network, prior)` LR
 multipliers. `network_lr_horizon_cap=None` uses the full budget and
 `network_lr_floor=None` reuses `lr_floor`.
@@ -57,22 +59,19 @@ metric plateaus. `NetworkLRTransition` keeps G/D at full LR until marked, then
 cosine-decays them over the chosen duration to `network_lr_floor`. The particle
 prior retains its normal full-budget schedule. K3P's critic penalty reads the
 applied critic LR, so its blend follows this transition automatically. The
-caller owns the plateau rule and must save the transition state with its
-optimizer checkpoint:
+caller owns the plateau rule; the optimizers apply the transition and save its
+state in their own checkpoints:
 
 ```python
-from particlegan import NetworkLRTransition, scale_learning_rates
+from particlegan import NetworkLRTransition
 
 transition = NetworkLRTransition(decay_steps=40_000)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D),
+                                      network_transition=transition)
 # After validation at 120,000 completed updates meets a declared plateau rule:
-transition.mark_plateau(120_000)
-# Before the next optimizer update, using the number of completed updates:
-network_scale, prior_scale = scale_learning_rates(
-    120_000, recipe, (opt_g, opt_d), base_lrs, prior,
-    network_transition=transition)
-checkpoint["network_transition"] = transition.state_dict()
-# On resume, recreate the same transition duration and restore its state:
-transition.load_state_dict(checkpoint["network_transition"])
+transition.mark_plateau(opt_d.completed_steps)
+# On resume, pass a transition with the same duration; loading opt_g/opt_d
+# restores its marked step.
 ```
 
 Passing no transition retains the recipe's fixed network horizon. The
@@ -104,16 +103,16 @@ state is in their `state_dict()`:
 
 ```python
 import copy
-from particlegan import get_recipe, init, learning_rate_scales
+from particlegan import get_recipe, init
 
 recipe = get_recipe(total_steps=steps)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 penalty = recipe.make_critic_penalty(opt_d)   # reads EMA, LR record and step from opt_d
 ...
 loss_d = adv + penalty(D, real, fake)
-opt_d.zero_grad(); loss_d.backward(); opt_d.step()   # guard, Adam, anchor EMA + LR record
+opt_d.zero_grad(); loss_d.backward(); opt_d.step()   # LR schedule, guard, Adam, anchor EMA + LR record
 ...
-opt_g.zero_grad(); loss_g.backward(); opt_g.step()   # Adam with A2 latent damping
+opt_g.zero_grad(); loss_g.backward(); opt_g.step()   # LR schedule, Adam with A2 latent damping
 torch.save({"G": G.state_dict(), "D": D.state_dict(), "prior": prior.state_dict(),
             "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict()}, path)
 ```

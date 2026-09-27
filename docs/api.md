@@ -329,8 +329,11 @@ state is inside the optimizer states, plus a noise stream); schema-2
 checkpoints are upgraded on load and schema-1 checkpoints (an older
 formulation) raise `ValueError`. Caller-owned loops use the same objects with an ordinary loop:
 `penalty(D, real, fake)` in the critic loss, then `opt_d.step()` and
-`opt_g.step()` as usual. See [regularization factories](#regularization-factories). `learning_rate_scales(step, recipe)` returns the
-`(network, prior)` LR multipliers.
+`opt_g.step()` as usual. See [regularization factories](#regularization-factories). Each
+recipe-built optimizer applies the recipe's LR schedule inside `step()` from its
+own update count (`LRSchedule`; groups carry a `role` and a `base_lr`), so
+callers never set learning rates. `learning_rate_scales(step, recipe)` returns
+the `(network, prior)` LR multipliers that schedule uses.
 
 ### Optional vector discriminators
 
@@ -364,7 +367,7 @@ import copy
 import torch
 from torch import nn
 from torch.nn import functional as F
-from particlegan import DDGAN, UCD, get_recipe, init, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, UCD, get_recipe, init, ucd_loss
 
 device = torch.device("cpu")
 recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
@@ -399,18 +402,15 @@ init.deterministic_orthogonal_(D, seed=1)
 prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
 gan = recipe.make_loss()
 spread = recipe.make_prior_regularizer()
-# Adam optimizers whose step() runs the recipe's regularization (K3P today);
-# the EMA critic is ours to allocate.
+# Adam optimizers whose step() runs the recipe's LR schedule (G/D on the network
+# schedule, the prior on its own) and regularization (K3P today); the EMA
+# critic is ours to allocate.
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
 penalty = recipe.make_critic_penalty(opt_d)
 ema_g = copy.deepcopy(G).eval().requires_grad_(False)
 ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
 for step in range(recipe.total_steps):
-    # G/D follow the network schedule (K3P's blend floor), the prior its own.
-    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
-
     labels = torch.randint(recipe.num_classes, (recipe.batch_size,), device=device)
     real = 0.2 * torch.randn(len(labels), 2, device=device) + (2 * labels[:, None] - 1)
     t = torch.randint(1, process.steps + 1, (len(real),), device=device)

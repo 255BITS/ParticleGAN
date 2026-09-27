@@ -45,7 +45,7 @@ Everything comes from role-named factories on a recipe; the loop is yours.
 import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, init, scale_learning_rates
+from particlegan import get_recipe, init
 
 def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
@@ -59,10 +59,8 @@ init.deterministic_orthogonal_(D, seed=1)
 prior = init.deterministic_orthogonal_(recipe.make_prior())  # the learnable particle table
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss()
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
 
 for step in range(recipe.total_steps):
-    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
     real = real_batch(recipe.batch_size)
     z, _ = prior.sample(recipe.batch_size)
     fake = G(z)
@@ -74,9 +72,10 @@ for step in range(recipe.total_steps):
     opt_g.zero_grad(); g_loss.backward(); opt_g.step()
 ```
 
-`opt_g` and `opt_d` are Adam optimizers whose `step()` also does the
-formulation's step-time work, and their `state_dict()` holds all of its state,
-so checkpoint them as usual. [`examples/pytorch_loop.py`](examples/pytorch_loop.py)
+`opt_g` and `opt_d` are Adam optimizers whose `step()` also applies the
+recipe's LR schedule and the formulation's step-time work, and their
+`state_dict()` holds all of that state, so checkpoint them as usual; the loop
+never sets learning rates. [`examples/pytorch_loop.py`](examples/pytorch_loop.py)
 adds the remaining pieces of the default update (critic input noise, generator
 output noise, EMA weights).
 

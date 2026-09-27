@@ -1,0 +1,10 @@
+STEP 200 modes 1 hq 0.0811
+STEP 400 modes 1 hq 0.0828
+STEP 600 modes 3 hq 0.4153
+STEP 800 modes 3 hq 0.4243
+STEP 1000 modes 5 hq 0.823
+STEP 1050 modes 2 hq 0.1743
+STEP 1100 modes 5 hq 0.6636
+STEP 1150 modes 5 hq 0.4983
+STEP 1200 modes 5 hq 0.823
+FINAL {"ema": {"modes": 3, "hq": 0.494873046875, "effective_modes": 2.7219676971435547, "verdict": "INCONCLUSIVE"}, "live": {"modes": 5, "hq": 0.822998046875, "effective_modes": 4.734151840209961, "verdict": "INCONCLUSIVE"}, "seconds": 6.722052474040538}
