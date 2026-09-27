@@ -13,7 +13,14 @@ skipped in the authoritative CPU run). Both include the same develop initializer
 Earlier measurements remain under `../continuous-api-search/` with their original
 sources and initialization. Neither PR is being merged into develop here.
 
-**DV12 is the first new-initialization screen survivor:** it reaches all eight
+**RP12 is the first confirmed old-failure to new-pass change:** its exact old
+tiny-screen score was0/24; the new initialization reaches all eight modes at300
+and retains19/19 passing observations through1200 (final HQ99.83%). Its prior
+image intensity failure is the next follow-up. The first new attempt stopped on
+a nested-diagnostic logging error; the reviewed serializer correction changes
+no learner, sampling, initialization or scoring behavior, and the error is retained.
+
+DV12 was the first new-initialization screen survivor: it reaches all eight
 modes at update650 and passes all12 observations from there through update1200.
 Its exact adaptive-rate package then failed the unequal-mass target that previously
 rejected it: zero of24 passing observations, covariance error .8793 above the .85

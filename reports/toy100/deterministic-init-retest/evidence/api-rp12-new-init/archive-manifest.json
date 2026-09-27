@@ -1,0 +1,180 @@
+{
+  "id": "api-rp12-new-init",
+  "candidate": "API-RP12-new-init",
+  "status": "PASS",
+  "seconds": 63.96427965699695,
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp12",
+  "summary": {
+    "observations": 24,
+    "passing": 19,
+    "first_arrival": 300,
+    "observations_since_arrival": 19,
+    "passing_since_arrival": 19,
+    "departures": [],
+    "minimum_hq_since_arrival": 0.91845703125,
+    "minimum_modes_since_arrival": 8,
+    "final_suffix": 19,
+    "final_suffix_start": 300,
+    "final_modes": 8,
+    "final_hq": 0.998291015625
+  },
+  "old_comparison": "FAIL 0/24; final streak 0",
+  "continuous_eligibility": "UNQUALIFIED_RETEST_IN_PROGRESS",
+  "recipe": {
+    "adam_eager_state": true,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 128,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "conditioning": "scalar",
+    "continuous_precision": "rp5",
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "game_update": "secant_resolvent",
+    "initialization": "batch_feature_zero",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_init_steps": 360,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "model": "gan",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "noise_policy": "constant",
+    "num_classes": null,
+    "num_particles": 12,
+    "observation_sigma": 0.03,
+    "output_noise_init_steps": 720,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "particle_loss_weighting": "uniform_sampled",
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "relativistic_pairing": "all_pairs",
+    "routing_temperature": 0.25,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 4
+  },
+  "complete": true,
+  "artifacts": {
+    "evidence/api-rp12-new-init/artifact-sha256.json": {
+      "sha256": "14f16a180f19ad252bf56e40bfc9d263b416c2c7b146bbc05dc8367fd2fd7079",
+      "original_sha256": "14f16a180f19ad252bf56e40bfc9d263b416c2c7b146bbc05dc8367fd2fd7079",
+      "bytes": 1484
+    },
+    "evidence/api-rp12-new-init/batch-receipts.jsonl.gz": {
+      "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+      "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+      "bytes": 240947
+    },
+    "evidence/api-rp12-new-init/declaration.json": {
+      "sha256": "7ad0a7365975be99fc479995ce80173dfdf88f72573da6883bf5cbe525bcb752",
+      "original_sha256": "7ad0a7365975be99fc479995ce80173dfdf88f72573da6883bf5cbe525bcb752",
+      "bytes": 7034
+    },
+    "evidence/api-rp12-new-init/initial.json": {
+      "sha256": "262476eec179a7e44a24749ace570c115ad670d112d6d0c2e276d23e63506961",
+      "original_sha256": "262476eec179a7e44a24749ace570c115ad670d112d6d0c2e276d23e63506961",
+      "bytes": 40618
+    },
+    "evidence/api-rp12-new-init/learning-rates.jsonl.gz": {
+      "sha256": "2abad7cb5d92eeeb4ffa234a7bdbf381fa4ab20422b1532f646bd1de84df4a10",
+      "original_sha256": "0e223585ba1228b930fe51d571da87d047532b1a2a6127263e8a852f063f51c0",
+      "bytes": 264338
+    },
+    "evidence/api-rp12-new-init/metrics.jsonl.gz": {
+      "sha256": "e36cfbc4f41b4285b5127569f22bcceaacc0c0b029bb646733a64f63050a9543",
+      "original_sha256": "861344d61dfc51e0e1bb0bad0455dca945701045d7e802e175c12f18bbe254d4",
+      "bytes": 912
+    },
+    "evidence/api-rp12-new-init/optimizer-device-proof-0000.json": {
+      "sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "original_sha256": "85428fdc2330ad922eeae30ad333400fed3cbd47ab898df66fd7bbed57b22cd0",
+      "bytes": 3633
+    },
+    "evidence/api-rp12-new-init/optimizer-device-proof-0001.json": {
+      "sha256": "abe59b95cf9b48d40da4deacb24b0d04a673ab9dc61e96ab173f850ce7f6c961",
+      "original_sha256": "abe59b95cf9b48d40da4deacb24b0d04a673ab9dc61e96ab173f850ce7f6c961",
+      "bytes": 3633
+    },
+    "evidence/api-rp12-new-init/optimizer-device-proof-1200.json": {
+      "sha256": "fdbd7de65eb684f310968af9286c5e4a182a7c830c80d4b4171de517edd2286b",
+      "original_sha256": "fdbd7de65eb684f310968af9286c5e4a182a7c830c80d4b4171de517edd2286b",
+      "bytes": 3684
+    },
+    "evidence/api-rp12-new-init/protocol.json": {
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "original_sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+      "bytes": 3797
+    },
+    "evidence/api-rp12-new-init/result.json": {
+      "sha256": "68144620735dde74fb43849071cfa382c74bcb2eac1753c536e0286d142c420e",
+      "original_sha256": "68144620735dde74fb43849071cfa382c74bcb2eac1753c536e0286d142c420e",
+      "bytes": 1546
+    },
+    "evidence/api-rp12-new-init/runtime.json": {
+      "sha256": "c5cc04bb1bb467dcdcf34cf9fc7c3d12313c1c8ced9c49d09c34263cff86c26a",
+      "original_sha256": "c5cc04bb1bb467dcdcf34cf9fc7c3d12313c1c8ced9c49d09c34263cff86c26a",
+      "bytes": 7494
+    },
+    "evidence/api-rp12-new-init/sampling-preflight.json": {
+      "sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "original_sha256": "74594f3b6f899d44b0ee33c1cda624c0d23a2a6d33bceea86a4cc6f4fdd0ff09",
+      "bytes": 142
+    },
+    "evidence/api-rp12-new-init/source-preflight.json": {
+      "sha256": "2c73a4c3d90a8f61b9ba0ded291565130387d1b91bb8aa983754dbe49d0bbd9a",
+      "original_sha256": "2c73a4c3d90a8f61b9ba0ded291565130387d1b91bb8aa983754dbe49d0bbd9a",
+      "bytes": 880
+    },
+    "evidence/api-rp12-new-init/source.zip": {
+      "sha256": "0926ffffda018b8622cabe4ba917eb94d32e4c1d8c9baf93fe4861f754ecd57c",
+      "original_sha256": "0926ffffda018b8622cabe4ba917eb94d32e4c1d8c9baf93fe4861f754ecd57c",
+      "bytes": 598173
+    }
+  },
+  "raw_checkpoints": {
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp12/final-state.pt",
+      "sha256": "e5a15831b91f48f878f7d3f19d8073db7671d72c04dbba88b4a6164a69cac6e5",
+      "bytes": 758951
+    },
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp12/initial-state.pt",
+      "sha256": "fca937b71b7da4f9cc64305222b11c3e4def39435c331208edc16bf7ec7472a9",
+      "bytes": 755523
+    }
+  },
+  "old_quality_inherited": false
+}

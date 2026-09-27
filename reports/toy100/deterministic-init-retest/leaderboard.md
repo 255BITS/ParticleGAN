@@ -52,5 +52,7 @@ All runs use develop’s deterministic network and prior initialization, 1,200 p
 | [API-C9-new-init](evidence/api-c9-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 2 / 48.9% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
 | [API-C12-new-init](evidence/api-c12-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | — / 0.0% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
 | [API-C13-new-init](evidence/api-c13-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 7 / 99.9% | NOT_MEASURED_ON_THIS_EXACT_SCREEN |
+| [API-RP12-new-init](evidence/api-rp12-new-init/archive-manifest.json) | PASS | 19/24 | 300 | 19 | 8 / 99.8% | FAIL 0/24; final streak 0 |
+| [API-RP13-new-init](evidence/api-rp13-new-init/archive-manifest.json) | FAIL | 6/24 | 450 | 0 | 7 / 83.9% | FAIL 0/24; final streak 0 |
 
 Arrival means the first observation meeting both quality and coverage. All later departures and the complete observations are preserved in each linked record. Scheduled controls retain their declared horizon and noise settings; their quality results do not establish autonomous indefinite operation.
