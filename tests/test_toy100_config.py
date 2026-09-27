@@ -70,7 +70,8 @@ def test_unselected_invalid_override_blocks_individual_run(tmp_path, monkeypatch
     assert not args.output.exists()
 
 
-def test_default_command_uses_shared_winner_and_strict_accuracy():
+def test_default_command_uses_native_problem_and_strict_accuracy():
+    # No --config trains benchmarks.toy100.native on the shared runner; a config replays legacy research.
     args = cli._parser().parse_args(["run", "--output", "/tmp/toy100-example", "--no-render"])
-    assert str(args.config) == "configs/toy100/constraints_simple_regularization.json"
+    assert args.config is None
     assert args.require_accuracy is True
