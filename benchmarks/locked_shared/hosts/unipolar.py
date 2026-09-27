@@ -1,102 +1,44 @@
-"""Numerical host extracted from HyperGAN/conceptmod commit 5571213.
+"""Unipolar toy: can a free-origin residual cover the + pole without moving scale 0?
 
-Training/data/evaluation logic retained; config-identity refusals removed.
-See ../SOURCE.md and ../LICENSE. Candidate settings are supplied by baseline.py.
+Problem only, from HyperGAN/conceptmod at 5571213 (see ../SOURCE.md and
+../LICENSE): the residual student, the scale-conditioned critic, the two-scale
+targets ({0, +1}, averaged 0.5/0.5), the unipolar gates and the verdict.
+Everything else (optimizers and their LR schedule, loss, critic penalty,
+noise, EMA, observation logging) comes from the shipped recipe through
+``benchmarks.toy_runner``::
+
+    python -m benchmarks.locked_shared.hosts.unipolar --log runs/toy-refactor/locked_unipolar.log
+    python -m benchmarks.locked_shared.hosts.unipolar --arm mse_only
+
+Arms: ``locked_rpgan`` (the GAN arm), ``polarity_flipped`` (trains on the
+- pole; the gates still read the true + pole, so it should FAIL) and
+``mse_only`` (student-only: no critic, the plus-only MSE is its sole loss,
+optimized by the same recipe generator optimizer).
 """
 
 from __future__ import annotations
 
-
-import math
-
-
-from dataclasses import dataclass
-
-
-from ..observation import checkpoint
+import argparse
 
 import torch
-
-
 import torch.nn.functional as F
-
-
 from torch import nn
 
-
-from benchmarks.legacy.gan_loss import GANLoss
-from benchmarks.legacy.grad_regularizers import GradientPenalty
-
+from particlegan import get_recipe, init
+from benchmarks.toy_runner import Networks, ToyProblem, View, main, run
+from ..observation import checkpoint
 
 PLUS_COVER_MIN = 0.85
-
-
 PLUS_OFF_MAX = 0.05
-
-
 PLUS_NEU_HOLD_MIN = 0.85
-
-
 DIM = 4
-
-
 N_ROWS = 8
-
-
 SCALES = (0.0, 1.0)
-
-
-LR = 5e-3
-
-
-BETAS = (0.0, 0.99)
-
-
-DELAY = 80
-
-
-MIN_LR_RATIO = 0.05
-
-
+STEPS = 400
 CRITIC_HIDDEN = 64
-
-
-DEMO_LOCKED_COVER = 1.5  # locked_baseline_defaults.LOCKED["cover_weight"]
-
-
 PLUS = torch.tensor([1.0, 0.0, 0.0, 0.0])
-
-
 OFF_AXIS = torch.tensor([0.0, 1.0, 0.0, 0.0])
-
-
-@dataclass(frozen=True)
-class UnipolarRecipe:
-    """Adv shape for one arm. ``polarity`` +1 is the plus pole; -1 flips it."""
-
-    arm: str = "locked_rpgan"
-    loss_type: str = "logistic"
-    gan_mode: str = "rp"
-    reg_arm: str = "b_cap"
-    reg_coeff: float = 1.0
-    reg_kappa: float = 1.0
-    reg_norm: str = "l2"
-    reg_lazy: int = 1
-    target_anneal: str = "none"
-    fm_weight: float = 0.0
-    cover_weight: float = 0.0
-    polarity: float = 1.0
-    steps: int = 400
-    seed: int = 0
-
-
-def delayed_cosine(step: int, *, total: int, delay: int = DELAY, min_ratio: float = MIN_LR_RATIO) -> float:
-    """1.0 for ``delay`` steps, then cosine down to ``min_ratio`` (slider2d.adv)."""
-    if step < int(delay):
-        return 1.0
-    span = max(1, int(total) - int(delay))
-    t = min(1.0, float(step - int(delay)) / float(span))
-    return float(min_ratio) + 0.5 * (1.0 - float(min_ratio)) * (1.0 + math.cos(math.pi * t))
+ARMS = ("locked_rpgan", "mse_only", "polarity_flipped")
 
 
 class FreeOriginResidual(nn.Module):
@@ -117,8 +59,12 @@ class FreeOriginResidual(nn.Module):
         return s * self.odd + abs(s) * self.even + self.origin
 
 
+# The zero start is the problem (the residual begins at the identity).
+init.register(FreeOriginResidual, {"odd": init.KEEP, "even": init.KEEP, "origin": init.KEEP})
+
+
 class ScaleCritic(nn.Module):
-    """Two-layer LeakyReLU MLP. The cap differentiates the delta, not the scale label."""
+    """Two-layer LeakyReLU MLP on (delta / teacher RMS, scale label)."""
 
     def __init__(self, dim: int, teacher: torch.Tensor, hidden: int = CRITIC_HIDDEN) -> None:
         super().__init__()
@@ -135,20 +81,11 @@ class ScaleCritic(nn.Module):
         )
 
     def score(self, z: torch.Tensor, scale: float) -> torch.Tensor:
-        policy = getattr(self, "noise_policy", None)
-        if policy is not None:
-            # The penalty calls score() in normalized coordinates. Inject the
-            # shared raw-data noise once, then return to those coordinates.
-            z = policy.input(z * self.input_scale) / self.input_scale
         label = z.new_full((z.shape[0], 1), float(scale))
         return self.net(torch.cat([z, label], dim=-1)).squeeze(-1)
 
     def forward(self, delta: torch.Tensor, scale: float) -> torch.Tensor:
         return self.score(delta.float() / self.input_scale, scale)
-
-
-def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
-    return vector.detach().unsqueeze(0).expand(rows, -1)
 
 
 def _cos(a: torch.Tensor, b: torch.Tensor) -> float:
@@ -157,8 +94,7 @@ def _cos(a: torch.Tensor, b: torch.Tensor) -> float:
 
 def score_residual(student: FreeOriginResidual) -> dict:
     """Unipolar gates. They always read the true plus pole, never the training pole."""
-    plus = PLUS
-    off = OFF_AXIS
+    plus, off = PLUS.to(student.odd.device), OFF_AXIS.to(student.odd.device)
     d1 = student.delta(1.0).detach()
     d0 = student.delta(0.0).detach()
     d_half = student.delta(0.5).detach()
@@ -189,6 +125,9 @@ def score_residual(student: FreeOriginResidual) -> dict:
         "cos_plus": cos_plus,
         "mag_ratio": mag_ratio,
         "half_norm_ratio": half_ratio,
+        "origin_norm": float(student.origin.detach().norm()),
+        "odd_norm": float(student.odd.detach().norm()),
+        "even_norm": float(student.even.detach().norm()),
         "hit": hit,
         "canary": {
             "scored": False,
@@ -201,205 +140,73 @@ def score_residual(student: FreeOriginResidual) -> dict:
     }
 
 
-def format_row(row: dict) -> str:
-    """One line, meant to be tailed."""
-    return (
-        f"unipolar_dir arm={row['arm']} step={row['steps']} seed={row['seed']} "
-        f"cover={row['cover']:.4f} leak={row['off_caption']:.4f} "
-        f"neu_hold={row['neu_hold']:.4f} cos_plus={row['cos_plus']:+.4f} "
-        f"hit={'PASS' if row['hit'] else 'FAIL'}"
-    )
+class Unipolar(ToyProblem):
+    """Scale 0 must stay at the origin while scale +1 lands on the (training) pole.
+
+    A batch is ``N_ROWS`` copies per scale, scale 0 rows first. The critic
+    reads the scale label as its condition; each scale is one view at weight
+    ``1/len(SCALES)``.
+    """
+
+    def __init__(self, arm: str = "locked_rpgan"):
+        if arm not in ARMS:
+            raise ValueError(f"unknown arm {arm!r}; this family is {', '.join(ARMS)}")
+        self.arm = arm
+        self.name = "unipolar" if arm == "locked_rpgan" else f"unipolar_{arm}"
+        self.target = (-PLUS if arm == "polarity_flipped" else PLUS).clone()
+
+    def recipe(self):
+        return get_recipe(batch_size=N_ROWS, total_steps=STEPS)
+
+    def networks(self, recipe, seed):
+        student = init.deterministic_orthogonal_(FreeOriginResidual(DIM), seed=seed)
+        if self.arm == "mse_only":
+            return Networks(generator=student, critics={}, prior=None)
+        teacher = self.target.unsqueeze(0).expand(N_ROWS, -1)
+        critic = init.deterministic_orthogonal_(ScaleCritic(DIM, teacher), seed=seed + 1)
+        return Networks(generator=student, critics=critic, prior=None)
+
+    def real(self, n, stream):
+        target = self.target.to(stream.device)
+        return torch.cat([(s * target).expand(n, -1) for s in SCALES])
+
+    def fake(self, nets, n, stream, real):
+        return torch.cat([nets.generator.delta(s).unsqueeze(0).expand(n, -1) for s in SCALES])
+
+    def views(self, nets, real, fake):
+        if not nets.critics:
+            return []
+        n = real.x.shape[0] // len(SCALES)
+        return [View("critic", real.x[i * n:(i + 1) * n], fake.x[i * n:(i + 1) * n], (s,), 1.0 / len(SCALES))
+                for i, s in enumerate(SCALES)]
+
+    def losses(self, role, nets, real, fake):
+        if role != "generator" or self.arm != "mse_only":
+            return {}
+        # Plus-only coordinate MSE on the noise-free residual; scale 0 is not in it.
+        return {"mse": F.mse_loss(nets.generator.delta(1.0), self.target.to(nets.generator.odd.device))}
+
+    def metrics(self, model):
+        return score_residual(model.nets.generator)
+
+    def verdict(self, metrics):
+        return "PASS" if metrics["hit"] else "FAIL"
 
 
-def _apply_lr(opt: torch.optim.Optimizer, step: int, total: int) -> None:
-    scale = delayed_cosine(step, total=total)
-    for group in opt.param_groups:
-        group["lr"] = group["initial_lr"] * scale
+def run_arm(arm: str = "locked_rpgan", *, steps: int | None = None, seed: int = 0, log=None,
+            log_path=None, recipe=None) -> dict:
+    """Train one arm on the shared runner. Top level is the EMA row (like
+    ``mode_hold.train_mode_hold``); ``live`` holds the live row, ``curve`` the
+    live observations and ``hold`` their summary. Observations also go to
+    ``benchmarks.locked_shared.observation`` recorders."""
+    result = run(Unipolar(arm), recipe=recipe, steps=steps, seed=seed, observe_every=50,
+                 log=log, log_path=log_path, observer=checkpoint)
+    return {**result["ema"], "arm": arm, "steps": result["steps"], "seed": seed, "live": result["live"],
+            "live_curve": result["curve"], "hold": result["hold"]}
 
 
-def _fit_mse_only(student: FreeOriginResidual, target: torch.Tensor, *, steps: int) -> list[dict]:
-    """Plus-only coordinate MSE. Scale 0 is not in the loss, so the origin can drift."""
-    opt = torch.optim.Adam(student.parameters(), lr=LR, betas=BETAS)
-    opt.param_groups[0]["initial_lr"] = LR
-    history = []
-    for step in range(steps):
-        _apply_lr(opt, step, steps)
-        loss = F.mse_loss(student.delta(1.0), target)
-        opt.zero_grad(set_to_none=True)
-        loss.backward()
-        opt.step()
-        if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:
-            row = score_residual(student)
-            row.update(step=step + 1, loss=float(loss.detach()))
-            history.append(row)
-            print(
-                f"unipolar_dir arm=mse_only step={step + 1}/{steps} "
-                f"cover={row['cover']:.4f} leak={row['off_caption']:.4f} "
-                f"neu_hold={row['neu_hold']:.4f} hit={'PASS' if row['hit'] else 'FAIL'}",
-                flush=True,
-            )
-    return history
-
-
-def _fit_rpgan(
-    student: FreeOriginResidual,
-    critic: ScaleCritic,
-    target: torch.Tensor,
-    *,
-    steps: int,
-    recipe: UnipolarRecipe,
-    noise_policy=None,
-) -> tuple[list[dict], GradientPenalty]:
-    """One D update then one G update, averaged over scales ``{0, +1}``."""
-    gan = GANLoss(loss_type=recipe.loss_type, mode=recipe.gan_mode)
-    reg = GradientPenalty(
-        arm=recipe.reg_arm,
-        coeff=recipe.reg_coeff,
-        kappa=recipe.reg_kappa,
-        norm=recipe.reg_norm,
-        lazy_k=recipe.reg_lazy,
-        target_anneal=recipe.target_anneal,
-    )
-    if noise_policy is not None:
-        noise_policy.register_generator_base(student)
-    g_parameters = list(student.parameters()) + (
-        noise_policy.scale_parameters() if noise_policy is not None else []
-    )
-    opt_g = torch.optim.Adam(g_parameters, lr=LR, betas=BETAS)
-    opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
-    if noise_policy is not None:
-        noise_policy.register_generator_optimizer(opt_g, opt_d)
-    for opt in (opt_g, opt_d):
-        opt.param_groups[0]["initial_lr"] = LR
-    real = {
-        0.0: _batch(torch.zeros_like(target)),
-        1.0: _batch(target),
-    }
-    history = []
-    for step in range(steps):
-        if noise_policy is not None:
-            noise_policy.set_step(step)
-        _apply_lr(opt_g, step, steps)
-        _apply_lr(opt_d, step, steps)
-        critic.requires_grad_(True)
-        opt_d.zero_grad(set_to_none=True)
-        d_loss = student.odd.new_zeros(())
-        for scale in SCALES:
-            fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=False)
-            cap, _stats = reg.penalty(
-                lambda z, scale=scale: critic.score(z, scale),
-                real[scale] / critic.input_scale,
-                fake / critic.input_scale,
-                step=step + 1,
-            )
-            d_term = gan.d_loss(critic(real[scale], scale), critic(fake, scale))
-            d_loss = d_loss + 0.5 * (d_term + cap)
-        d_loss.backward()
-        opt_d.step()
-
-        critic.requires_grad_(False)
-        opt_g.zero_grad(set_to_none=True)
-        g_loss = student.odd.new_zeros(())
-        with torch.no_grad():
-            real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
-        for scale in SCALES:
-            fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
-            if noise_policy is not None:
-                fake = noise_policy.output(fake, generator_step=True)
-            g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
-            g_loss = g_loss + 0.5 * g_term
-        g_loss.backward()
-        opt_g.step()
-        critic.requires_grad_(True)
-        checkpoint(step + 1, lambda: score_residual(student))
-
-        if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:
-            row = score_residual(student)
-            row.update(step=step + 1, g_loss=float(g_loss.detach()), d_loss=float(d_loss.detach()))
-            history.append(row)
-            print(
-                f"unipolar_dir arm={recipe.arm} step={step + 1}/{steps} "
-                f"cover={row['cover']:.4f} leak={row['off_caption']:.4f} "
-                f"neu_hold={row['neu_hold']:.4f} cos_plus={row['cos_plus']:+.4f} "
-                f"hit={'PASS' if row['hit'] else 'FAIL'}",
-                flush=True,
-            )
-    return history, reg
-
-
-def run_arm(
-    arm: str,
-    *,
-    steps: int = 400,
-    seed: int = 0,
-    fm_weight: float = 0.0,
-    cover_weight: float = 0.0,
-    gan_mode: str = "rp",
-    loss_type: str = "logistic",
-    reg_arm: str = "b_cap",
-    reg_coeff: float = 1.0,
-    reg_kappa: float = 1.0,
-    reg_norm: str = "l2",
-    noise_policy=None,
-) -> dict:
-    """Fit one arm and score the unipolar gates. Prints a tailable line per checkpoint."""
-    if arm not in ("locked_rpgan", "mse_only", "polarity_flipped"):
-        raise ValueError(
-            f"unknown arm {arm!r}; this family is locked_rpgan, mse_only, polarity_flipped"
-        )
-    if noise_policy is not None and arm == "mse_only":
-        raise ValueError("noise policy requires the GAN training arm")
-    polarity = -1.0 if arm == "polarity_flipped" else 1.0
-    recipe = UnipolarRecipe(
-        arm=arm,
-        loss_type=loss_type,
-        gan_mode=gan_mode,
-        reg_arm=reg_arm,
-        reg_coeff=reg_coeff,
-        reg_kappa=reg_kappa,
-        reg_norm=reg_norm,
-        fm_weight=fm_weight,
-        cover_weight=cover_weight,
-        polarity=polarity,
-        steps=int(steps),
-        seed=int(seed),
-    )
-    torch.manual_seed(recipe.seed)
-    student = FreeOriginResidual(DIM)
-    target = recipe.polarity * PLUS
-    reg_used = None
-    if arm == "mse_only":
-        history = _fit_mse_only(student, target, steps=recipe.steps)
-    else:
-        teacher = _batch(PLUS if recipe.polarity > 0 else -PLUS)
-        critic = ScaleCritic(DIM, teacher, hidden=CRITIC_HIDDEN)
-        if noise_policy is not None:
-            critic.noise_policy = noise_policy
-        history, reg_used = _fit_rpgan(student, critic, target, steps=recipe.steps,
-                                      recipe=recipe, noise_policy=noise_policy)
-    row = score_residual(student)
-    row.update(
-        arm=arm,
-        steps=recipe.steps,
-        seed=recipe.seed,
-        polarity=recipe.polarity,
-        fm_weight=recipe.fm_weight,
-        cover_weight=recipe.cover_weight,
-        gan_mode=recipe.gan_mode if arm != "mse_only" else "mse",
-        loss_type=recipe.loss_type if arm != "mse_only" else "mse",
-        reg_arm=None if reg_used is None else reg_used.arm,
-        reg_coeff=None if reg_used is None else reg_used.coeff,
-        reg_kappa=None if reg_used is None else reg_used.kappa,
-        reg_norm=None if reg_used is None else reg_used.norm,
-        reg_lazy=None if reg_used is None else reg_used.lazy_k,
-        reg_anneal=None if reg_used is None else reg_used.target_anneal,
-        reg_is_gradient_penalty=isinstance(reg_used, GradientPenalty),
-        origin_norm=float(student.origin.detach().norm()),
-        odd_norm=float(student.odd.detach().norm()),
-        even_norm=float(student.even.detach().norm()),
-        history=history,
-    )
-    print(format_row(row), flush=True)
-    return row
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("--arm", choices=ARMS, default="locked_rpgan")
+    known, rest = parser.parse_known_args()
+    raise SystemExit(main(Unipolar(known.arm), rest))

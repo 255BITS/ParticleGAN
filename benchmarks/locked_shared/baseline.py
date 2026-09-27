@@ -164,7 +164,7 @@ def run_toy(toy, cfg, *, noise_policy=None):
             if "lr" in target:
                 values["lr"] = target["lr"] * cfg.lr_multiplier
             stack.enter_context(patch.dict(target, values))
-        for module in (unipolar, unused_token_hold, mid_scale_identity):
+        for module in (unused_token_hold, mid_scale_identity):
             stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
         stack.enter_context(patch.object(two_pole, "TOY_LR", two_pole.TOY_LR * cfg.lr_multiplier))
         if toy == "two_pole":
@@ -183,8 +183,10 @@ def run_toy(toy, cfg, *, noise_policy=None):
         elif toy == "residual_student":
             raw = residual_student.train(noise_policy=noise_policy)
         elif toy == "unipolar":
-            raw = unipolar.run_arm("locked_rpgan", noise_policy=noise_policy,
-                                   **{k: knobs[k] for k in ("loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")})
+            # Problem-only toy on the shared runner, as mode_hold.
+            if noise_policy is not None:
+                raise ValueError("unipolar takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = unipolar.run_arm("locked_rpgan")
         elif toy == "ae_gan_hold":
             options = {k: v for k, v in knobs.items() if k in ae_gan_hold.HoldConfig.__dataclass_fields__}
             raw = ae_gan_hold.train(ae_gan_hold.HoldConfig(name=cfg.name, lr=ae_gan_hold.LR * cfg.lr_multiplier, **options),

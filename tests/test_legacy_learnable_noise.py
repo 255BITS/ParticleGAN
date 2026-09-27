@@ -9,7 +9,7 @@ from torch import nn
 from benchmarks.locked_shared import trajectory, two_pole
 from benchmarks.locked_shared.hosts import (
     ae_gan_hold, cover_leftover, mid_scale_identity, residual_student,
-    unipolar, unused_token_hold,
+    unused_token_hold,
 )
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_output
 
@@ -24,8 +24,6 @@ def _run(host, policy, monkeypatch):
     if host == "residual_student":
         monkeypatch.setitem(residual_student.PROTOCOL, "steps", 2)
         return residual_student.train(noise_policy=policy)
-    if host == "unipolar":
-        return unipolar.run_arm("locked_rpgan", steps=2, noise_policy=policy)
     if host == "ae_gan_hold":
         return ae_gan_hold.train(ae_gan_hold.HoldConfig(
             name="learnable_probe", steps=2, batch=16, n_particles=16,
@@ -44,7 +42,7 @@ def _run(host, policy, monkeypatch):
 
 
 @pytest.mark.parametrize("host", (
-    "two_pole", "trajectory", "residual_student", "unipolar",
+    "two_pole", "trajectory", "residual_student",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
@@ -140,7 +138,7 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 
 
 @pytest.mark.parametrize("host", (
-    "two_pole", "trajectory", "residual_student", "unipolar",
+    "two_pole", "trajectory", "residual_student",
     "ae_gan_hold", "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
