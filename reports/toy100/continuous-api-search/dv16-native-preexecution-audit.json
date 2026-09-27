@@ -1,0 +1,63 @@
+{
+  "status": "SOURCE_REVIEW_NO_EXECUTION_BLOCKER",
+  "files": {
+    "native_gate.py": "3a64a3fc3e8410a4d04b8b01a3398d90f88735c62079013102076fd2a9087354",
+    "native_audit.py": "5149f34e39bfa14754bc81d95c81d0381112f1aa1322166b8841514613e614ab",
+    "dv16-native-declaration.json": "e62857af7bc076ff29e251baef2899db5fd4b707381973f5b9348da6cc1321bf",
+    "inherited-native-fixture.json": "84e9d478d9c58396dfe7d5405e457ec3dfe6090e026b694713617785472da2a7",
+    "inherited-canonical-native-model-policy.json": "f2faf5ed1b8d57a43959f6eadc58a586b912bb2f4313122ec4fef433a9087a80",
+    "inherited-canonical-native-worker.py.txt": "15b309dde720b63d90fac1e721f4e153ce30022ceb62db0e2d98da4c9c752a4d"
+  },
+  "frozen_host_files": {
+    "configs/toy100/constraints_simple_regularization.json": true,
+    "benchmarks/toy100/train.py": true,
+    "benchmarks/toy100/problems.py": true,
+    "benchmarks/toy100/models.py": true,
+    "benchmarks/toy100/metrics.py": true,
+    "benchmarks/toy100/accuracy.py": true,
+    "benchmarks/toy100/accuracy_evidence.py": true,
+    "benchmarks/toy100/gate.py": true,
+    "benchmarks/toy100/accuracy_gate.py": true,
+    "benchmarks/toy100/config.py": true,
+    "benchmarks/toy100/device.py": true,
+    "lib/toy_models.py": true
+  },
+  "exact_own_ring_package": {
+    "particlegan/__init__.py": true,
+    "particlegan/autoencoder.py": true,
+    "particlegan/conditioning.py": true,
+    "particlegan/continuous.py": true,
+    "particlegan/diffusion.py": true,
+    "particlegan/discriminators.py": true,
+    "particlegan/gan_loss.py": true,
+    "particlegan/grad_regularizers.py": true,
+    "particlegan/k3p.py": true,
+    "particlegan/ka2.py": true,
+    "particlegan/particle_prior.py": true,
+    "particlegan/recipes.py": true,
+    "particlegan/training.py": true,
+    "particlegan/vicreg_loss.py": true
+  },
+  "initialization": "Prior CUDA normal then uniform[-5,5], G CUDA defaults then identity, all D CUDA defaults then all Xavier redraws; seed1234. Learned width/shear zero allocations consume no RNG. Result copied to CPU modules before CUDA/public GANTrainer/native lazy Adam.",
+  "streams": {
+    "training_data": 1234,
+    "target": 1635,
+    "latent": 1637,
+    "output": 1636,
+    "support_uniform": 3537,
+    "holdout_target": 2835,
+    "holdout_latent": 2837,
+    "holdout_output": 2836,
+    "holdout_support_uniform": 4737
+  },
+  "training": "Exact actual GANTrainer.step; D-real then fresh G-real, total_steps None, dv16 controller, no auxiliary task objective removed.",
+  "scoring": "Original gate.score_run plus accuracy_gate.score_run;34 observations0..7000, final5 clouds6000..7000 and100000 holdout; actual recipe validated separately from obsolete LegacyRecipe resolver.",
+  "limits": [
+    "Historical prior/G initial raw hashes asserted; no historical full initial critic tensor/hash exists. New D reconstruction is source-defined, not historically bit-proved.",
+    "No execution or source approval for eight custom/auxiliary hosts yet. Standalone factories cannot replace GANTrainer paired width/shear/controller transaction.",
+    "Native observation helper pairs live/EMA output streams through separate forks; live-primary frozen output1636/2836 preserved. EMA is diagnostic. New support noise explicit independent1901 offset, not a relocation of frozen output noise.",
+    "Prepared runtime assertions remain pending; current files can change and immutable executed ZIP must be rechecked.",
+    "Docstring still says RP5 but runtime declaration/recipe/source equality require API-DV16."
+  ],
+  "no_torch_or_execution": true
+}

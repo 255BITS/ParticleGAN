@@ -1,0 +1,939 @@
+{
+  "schema": 1,
+  "candidate": "API-RP14",
+  "scope": "Source and retained artifact stdlib audit; no Torch/training/GPU.",
+  "status": "Tiny PASS; image FAIL rejects candidate overall.",
+  "package_sha256": {
+    "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/game_update.py": "94830d2db8ff24a4deef1ed96b8b2302965f80e512ecb79588c3abd28fe52618",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/generator_metric.py": "dc2153f27cbe91450576681013983e001c7dd0d166299aa3007ce7fa7e3fc9a6",
+    "particlegan/generator_support.py": "98793619a8e170711181cf3f773b0cfbc0af630a065681fac1ba2bfafbb48786",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+    "particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+    "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "particlegan/precision.py": "07443f3c6ab9e5f4afae492ea0a718f3be8698c0423ac2adbb63c2eae7a7e50d",
+    "particlegan/recipes.py": "c4222fdc5b0da9caf4c02cfcb33e446f14d051a21829bd29646da061ca9fbb6e",
+    "particlegan/training.py": "61976c5d3f1164046073ad3b57fe3aab220d4fd310b0ba2d7bc829043b5e7c84",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "assessments": {
+    "mode_hold": {
+      "schema": 1,
+      "candidate": "API-RP14",
+      "task": "mode_hold",
+      "audit_scope": "Existing source/JSON and byte hashes only; no Torch imports, checkpoint deserialization, training, GPU, or model execution.",
+      "original_result_status": "PASS",
+      "source_members_verified": 79,
+      "original_artifacts_verified": 11,
+      "exact_package_sha256": {
+        "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "particlegan/game_update.py": "94830d2db8ff24a4deef1ed96b8b2302965f80e512ecb79588c3abd28fe52618",
+        "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "particlegan/generator_metric.py": "dc2153f27cbe91450576681013983e001c7dd0d166299aa3007ce7fa7e3fc9a6",
+        "particlegan/generator_support.py": "98793619a8e170711181cf3f773b0cfbc0af630a065681fac1ba2bfafbb48786",
+        "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "particlegan/precision.py": "07443f3c6ab9e5f4afae492ea0a718f3be8698c0423ac2adbb63c2eae7a7e50d",
+        "particlegan/recipes.py": "c4222fdc5b0da9caf4c02cfcb33e446f14d051a21829bd29646da061ca9fbb6e",
+        "particlegan/training.py": "61976c5d3f1164046073ad3b57fe3aab220d4fd310b0ba2d7bc829043b5e7c84",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "package_identical_across_both_completed_runs": true,
+      "all_steps_present": true,
+      "observations": 24,
+      "learning_rate_records": 1200,
+      "all_logged_numbers_finite": true,
+      "accepted_clocks_and_two_fields_verified_every_step": true,
+      "precision_events": [
+        {
+          "step": 1083,
+          "event": "close"
+        }
+      ],
+      "actual_rate_changes": [
+        {
+          "step": 1,
+          "rates": {
+            "generator_0": 0.00425,
+            "critic_0": 0.00425,
+            "prior_1": 0.0085
+          }
+        },
+        {
+          "step": 1084,
+          "rates": {
+            "generator_0": 4.25e-05,
+            "critic_0": 4.25e-05,
+            "prior_1": 0.00042500000000000003
+          }
+        }
+      ],
+      "lr_ranges": {
+        "generator_0": {
+          "min": 4.25e-05,
+          "max": 0.00425,
+          "observed_steps": 1200
+        },
+        "critic_0": {
+          "min": 4.25e-05,
+          "max": 0.00425,
+          "observed_steps": 1200
+        },
+        "prior_1": {
+          "min": 0.00042500000000000003,
+          "max": 0.0085,
+          "observed_steps": 1200
+        }
+      },
+      "rates_match_preupdate_precision_state_every_step": true,
+      "stationary_noise": {
+        "policy": "constant",
+        "input_std": 0,
+        "output_std": 0.029
+      },
+      "actual_training_noise_verified_every_step": true,
+      "observation_output_noise": [
+        {
+          "step": 50,
+          "std": 0.029
+        },
+        {
+          "step": 100,
+          "std": 0.029
+        },
+        {
+          "step": 150,
+          "std": 0.029
+        },
+        {
+          "step": 200,
+          "std": 0.029
+        },
+        {
+          "step": 250,
+          "std": 0.029
+        },
+        {
+          "step": 300,
+          "std": 0.029
+        },
+        {
+          "step": 350,
+          "std": 0.029
+        },
+        {
+          "step": 400,
+          "std": 0.029
+        },
+        {
+          "step": 450,
+          "std": 0.029
+        },
+        {
+          "step": 500,
+          "std": 0.029
+        },
+        {
+          "step": 550,
+          "std": 0.029
+        },
+        {
+          "step": 600,
+          "std": 0.029
+        },
+        {
+          "step": 650,
+          "std": 0.029
+        },
+        {
+          "step": 700,
+          "std": 0.029
+        },
+        {
+          "step": 750,
+          "std": 0.029
+        },
+        {
+          "step": 800,
+          "std": 0.029
+        },
+        {
+          "step": 850,
+          "std": 0.029
+        },
+        {
+          "step": 900,
+          "std": 0.029
+        },
+        {
+          "step": 950,
+          "std": 0.029
+        },
+        {
+          "step": 1000,
+          "std": 0.029
+        },
+        {
+          "step": 1050,
+          "std": 0.029
+        },
+        {
+          "step": 1100,
+          "std": 0.029
+        },
+        {
+          "step": 1150,
+          "std": 0.029
+        },
+        {
+          "step": 1200,
+          "std": 0.029
+        }
+      ],
+      "observation_noise_receipt_scope": "Derived from immutable public sampler/host source at completed step; logged training noise uses step-1.",
+      "initial_receipt_comparison_to_rp5": {
+        "reference": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-rp5-mode_hold/initial.json",
+        "differing_fields": [
+          "complete"
+        ],
+        "explanation": "Whole-state digest includes stationary noise and tangent-support recipe settings. All individually retained initial model fields and image global_data_rng match RP5; broad receipts omit private per-stream hashes."
+      },
+      "common_frozen_helper_source_parity_to_rp5": {
+        "benchmarks/transfer_suite/plans/default_comparison.json": true,
+        "benchmarks/locked_shared/mlp.py": true,
+        "benchmarks/locked_shared/__init__.py": true,
+        "benchmarks/__init__.py": true,
+        "benchmarks/locked_shared/mode_hold.py": true,
+        "benchmarks/transfer_suite/legacy_noise_adapters.py": true,
+        "benchmarks/transfer_suite/vector_tasks.py": true,
+        "benchmarks/smart_descent/evaluate.py": true,
+        "benchmarks/locked_shared/shared_checks.py": true,
+        "benchmarks/locked_shared/baseline.py": true,
+        "benchmarks/toy100/device.py": true,
+        "benchmarks/toy100/__init__.py": true,
+        "benchmarks/toy100/problems.py": true,
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": true,
+        "benchmarks/legacy/grad_regularizers.py": true,
+        "benchmarks/legacy/__init__.py": true,
+        "benchmarks/legacy/gan_loss.py": true,
+        "benchmarks/locked_shared/observation.py": true,
+        "benchmarks/locked_shared/hosts/__init__.py": true,
+        "benchmarks/locked_shared/hosts/unipolar.py": true,
+        "benchmarks/locked_shared/hosts/residual_student.py": true,
+        "benchmarks/locked_shared/trajectory.py": true,
+        "benchmarks/legacy/locked_shared.py": true,
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": true,
+        "benchmarks/locked_shared/hosts/cover_leftover.py": true,
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": true,
+        "benchmarks/gan_v3.py": true,
+        "benchmarks/legacy/recipe.py": true,
+        "benchmarks/locked_shared/two_pole.py": true,
+        "benchmarks/locked_shared/reference.py": true,
+        "benchmarks/smart_descent/study.py": true,
+        "benchmarks/smart_descent/controller.py": true,
+        "benchmarks/smart_descent/__init__.py": true,
+        "benchmarks/learned_lr_evaluation.py": true,
+        "benchmarks/learned_lr/controller.py": true,
+        "benchmarks/learned_lr/__init__.py": true,
+        "lib/toy_models.py": true,
+        "lib/toy_metrics.py": true,
+        "benchmarks/transfer_suite/__init__.py": true,
+        "benchmarks/transfer_suite/compare_defaults.py": true,
+        "benchmarks/toy100/schedule.py": true,
+        "benchmarks/transfer_suite/protocol.py": true,
+        "benchmarks/transfer_suite/smooth_critic_research.py": true,
+        "benchmarks/transfer_suite/linear_skip_refinement_research.py": true,
+        "benchmarks/transfer_suite/formulations.py": true,
+        "benchmarks/transfer_suite/suite.py": true,
+        "benchmarks/transfer_suite/image_tasks.py": true,
+        "benchmarks/transfer_suite/stress_tasks.py": true,
+        "benchmarks/locked_shared/recorded_recipes.py": true,
+        "benchmarks/toy100/models.py": true
+      },
+      "quality": {
+        "observations": 24,
+        "passing_observations": 11,
+        "first_arrival": 650,
+        "passing_steps": [
+          650,
+          700,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "observations_since_arrival": 12,
+        "passing_since_arrival": 11,
+        "failing_observations_since_arrival": [
+          750
+        ],
+        "final_suffix_start": 800,
+        "final_suffix_observations": 9,
+        "minimum_hq_since_arrival": 0.732177734375,
+        "minimum_modes_since_arrival": 7,
+        "minimum_hq": 0.0,
+        "maximum_hq": 1.0,
+        "maximum_modes": 8,
+        "final": {
+          "step": 1200,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 1.0,
+          "cover": 1.0,
+          "effective_modes": 7.533111572265625,
+          "ema": {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.915771484375,
+            "cover": 1.0,
+            "effective_modes": 7.480123043060303
+          }
+        }
+      },
+      "declared_minimum_final_stable_checks": 5,
+      "batch_receipts": {
+        "records": 1200,
+        "all_rows_equal_to_rp5": true,
+        "note": "All real/latent draws and accepted cursor hashes match frozen RP5 mode_hold host; no tensor regeneration."
+      },
+      "fixture": "Separate frozen tiny mode_hold task: 12 particles, z4, batch128; canonical prior-first CUDA initialization and shared seed0 data/latent stream; isolated latent9 and observation noise402+step. Not the 20k public recovery ring.",
+      "rng_receipt_limit": "Declared secant_resolvent creates no particle-noise stream. Existing private seed5 training-noise stream loses input-noise draws and adds full output-noise draws from first update. Broad initial.json omits private per-stream hashes; no raw-checkpoint RNG equality claim.",
+      "conclusion": "Own tiny quality gate PASS, preserving its intervening miss; whole candidate rejected by image failure. Own ring NOT_RUN."
+    },
+    "img_intensity2": {
+      "schema": 1,
+      "candidate": "API-RP14",
+      "task": "img_intensity2",
+      "audit_scope": "Existing source/JSON and byte hashes only; no Torch imports, checkpoint deserialization, training, GPU, or model execution.",
+      "original_result_status": "FAIL",
+      "source_members_verified": 57,
+      "original_artifacts_verified": 10,
+      "exact_package_sha256": {
+        "particlegan/__init__.py": "809ad708c3ae11fea993c69640cd3e3095ff61ff61ccb66245a4bc4e37ddb5e5",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "particlegan/game_update.py": "94830d2db8ff24a4deef1ed96b8b2302965f80e512ecb79588c3abd28fe52618",
+        "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "particlegan/generator_metric.py": "dc2153f27cbe91450576681013983e001c7dd0d166299aa3007ce7fa7e3fc9a6",
+        "particlegan/generator_support.py": "98793619a8e170711181cf3f773b0cfbc0af630a065681fac1ba2bfafbb48786",
+        "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "particlegan/k3p.py": "e0480e206d9d903fa9d95d9203e9df893dc623dc428fb77d1ddce8f6d5ee8822",
+        "particlegan/ka2.py": "34ec5ff03ca19e78b6d26bb9038b87da05aa6ae040881fce98fa3eec1f54a51a",
+        "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+        "particlegan/precision.py": "07443f3c6ab9e5f4afae492ea0a718f3be8698c0423ac2adbb63c2eae7a7e50d",
+        "particlegan/recipes.py": "c4222fdc5b0da9caf4c02cfcb33e446f14d051a21829bd29646da061ca9fbb6e",
+        "particlegan/training.py": "61976c5d3f1164046073ad3b57fe3aab220d4fd310b0ba2d7bc829043b5e7c84",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "package_identical_across_both_completed_runs": true,
+      "all_steps_present": true,
+      "observations": 24,
+      "learning_rate_records": 600,
+      "all_logged_numbers_finite": true,
+      "accepted_clocks_and_two_fields_verified_every_step": true,
+      "precision_events": [],
+      "actual_rate_changes": [
+        {
+          "step": 1,
+          "rates": {
+            "generator_0": 0.00425,
+            "critic_0": 0.00425,
+            "prior_1": 0.0085
+          }
+        }
+      ],
+      "lr_ranges": {
+        "generator_0": {
+          "min": 0.00425,
+          "max": 0.00425,
+          "observed_steps": 600
+        },
+        "critic_0": {
+          "min": 0.00425,
+          "max": 0.00425,
+          "observed_steps": 600
+        },
+        "prior_1": {
+          "min": 0.0085,
+          "max": 0.0085,
+          "observed_steps": 600
+        }
+      },
+      "rates_match_preupdate_precision_state_every_step": true,
+      "stationary_noise": {
+        "policy": "constant",
+        "input_std": 0,
+        "output_std": 0.029
+      },
+      "actual_training_noise_verified_every_step": true,
+      "observation_output_noise": [
+        {
+          "step": 25,
+          "std": 0.029
+        },
+        {
+          "step": 50,
+          "std": 0.029
+        },
+        {
+          "step": 75,
+          "std": 0.029
+        },
+        {
+          "step": 100,
+          "std": 0.029
+        },
+        {
+          "step": 125,
+          "std": 0.029
+        },
+        {
+          "step": 150,
+          "std": 0.029
+        },
+        {
+          "step": 175,
+          "std": 0.029
+        },
+        {
+          "step": 200,
+          "std": 0.029
+        },
+        {
+          "step": 225,
+          "std": 0.029
+        },
+        {
+          "step": 250,
+          "std": 0.029
+        },
+        {
+          "step": 275,
+          "std": 0.029
+        },
+        {
+          "step": 300,
+          "std": 0.029
+        },
+        {
+          "step": 325,
+          "std": 0.029
+        },
+        {
+          "step": 350,
+          "std": 0.029
+        },
+        {
+          "step": 375,
+          "std": 0.029
+        },
+        {
+          "step": 400,
+          "std": 0.029
+        },
+        {
+          "step": 425,
+          "std": 0.029
+        },
+        {
+          "step": 450,
+          "std": 0.029
+        },
+        {
+          "step": 475,
+          "std": 0.029
+        },
+        {
+          "step": 500,
+          "std": 0.029
+        },
+        {
+          "step": 525,
+          "std": 0.029
+        },
+        {
+          "step": 550,
+          "std": 0.029
+        },
+        {
+          "step": 575,
+          "std": 0.029
+        },
+        {
+          "step": 600,
+          "std": 0.029
+        }
+      ],
+      "observation_noise_receipt_scope": "Derived from immutable public sampler/host source at completed step; logged training noise uses step-1.",
+      "initial_receipt_comparison_to_rp5": {
+        "reference": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-rp5-img_intensity2/initial.json",
+        "differing_fields": [
+          "trainer"
+        ],
+        "explanation": "Whole-state digest includes stationary noise and tangent-support recipe settings. All individually retained initial model fields and image global_data_rng match RP5; broad receipts omit private per-stream hashes."
+      },
+      "common_frozen_helper_source_parity_to_rp5": {
+        "benchmarks/__init__.py": true,
+        "benchmarks/gan_v3.py": true,
+        "benchmarks/learned_lr_evaluation.py": true,
+        "benchmarks/legacy/__init__.py": true,
+        "benchmarks/legacy/gan_loss.py": true,
+        "benchmarks/legacy/grad_regularizers.py": true,
+        "benchmarks/legacy/locked_shared.py": true,
+        "benchmarks/legacy/recipe.py": true,
+        "benchmarks/locked_shared/__init__.py": true,
+        "benchmarks/locked_shared/baseline.py": true,
+        "benchmarks/locked_shared/hosts/__init__.py": true,
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": true,
+        "benchmarks/locked_shared/hosts/cover_leftover.py": true,
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": true,
+        "benchmarks/locked_shared/hosts/residual_student.py": true,
+        "benchmarks/locked_shared/hosts/unipolar.py": true,
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": true,
+        "benchmarks/locked_shared/mlp.py": true,
+        "benchmarks/locked_shared/mode_hold.py": true,
+        "benchmarks/locked_shared/observation.py": true,
+        "benchmarks/locked_shared/trajectory.py": true,
+        "benchmarks/locked_shared/two_pole.py": true,
+        "benchmarks/smart_descent/__init__.py": true,
+        "benchmarks/smart_descent/controller.py": true,
+        "benchmarks/smart_descent/evaluate.py": true,
+        "benchmarks/smart_descent/study.py": true,
+        "benchmarks/toy100/__init__.py": true,
+        "benchmarks/toy100/device.py": true,
+        "benchmarks/toy100/models.py": true,
+        "benchmarks/toy100/problems.py": true,
+        "benchmarks/transfer_suite/__init__.py": true,
+        "benchmarks/transfer_suite/image_tasks.py": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true
+      },
+      "quality": {
+        "observations": 24,
+        "passing_observations": 0,
+        "first_arrival": null,
+        "passing_steps": [],
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "failing_observations_since_arrival": [],
+        "final_suffix_start": null,
+        "final_suffix_observations": 0,
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "minimum_hq": 0.0,
+        "maximum_hq": 0.8125,
+        "maximum_modes": 2,
+        "final": {
+          "step": 600,
+          "modes": 2,
+          "hq": 0.8125,
+          "mean_rmse": 0.048316486179828644,
+          "quality_mode_fractions": [
+            0.40625,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125
+          ],
+          "distribution_tv": 0.03125,
+          "ema": {
+            "modes": 1,
+            "hq": 0.5,
+            "mean_rmse": 0.06817059218883514,
+            "quality_mode_fractions": [
+              0.3125,
+              0.1875
+            ],
+            "mode_fractions": [
+              0.53125,
+              0.46875
+            ],
+            "distribution_tv": 0.03125
+          }
+        }
+      },
+      "declared_minimum_final_stable_checks": 5,
+      "fixture": "Frozen image intensity2 templates (.35/.85 patches), 8x8 grayscale; all32 prior rows; CPU G/D/prior init then CUDA; shared global CUDA data/latent/penalty and isolated output noise seed402+step+1901.",
+      "objective_configuration": "Historical image task prior_weight=.05; candidate-wide public prior_reg=0 explicitly declared. Regularization setting differs; task templates/scorer/thresholds and stream protocol do not.",
+      "rng_receipt_limit": "Declared secant_resolvent creates no particle-noise stream. Existing private seed5 training-noise stream loses input-noise draws and adds full output-noise draws from first update. Broad initial.json omits private per-stream hashes; no raw-checkpoint RNG equality claim.",
+      "conclusion": "Own image quality gate FAIL; tiny success preserved separately. Own ring NOT_RUN."
+    }
+  },
+  "broader_entries": [
+    {
+      "id": "api-rp14-mode_hold",
+      "candidate": "API-RP14",
+      "task": "mode_hold",
+      "status": "PASS",
+      "steps": 1200,
+      "observations": 24,
+      "passing_observations": 11,
+      "passing_suffix": 9,
+      "first_pass_step": 650,
+      "final": {
+        "step": 1200,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 1.0,
+        "cover": 1.0,
+        "effective_modes": 7.533111572265625,
+        "ema": {
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.915771484375,
+          "cover": 1.0,
+          "effective_modes": 7.480123043060303
+        }
+      },
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold",
+      "scope": "PUBLIC_API",
+      "note": "Own tiny quality gate PASS, preserving its intervening miss; whole candidate rejected by image failure. Own ring NOT_RUN.",
+      "artifacts": {
+        "evidence/api-rp14-mode_hold/artifact-sha256.json": {
+          "sha256": "32046b608a5e453be8345e62d0e18a8b4c6f42b3f94554429bcd06a8108dfc11",
+          "original_sha256": "32046b608a5e453be8345e62d0e18a8b4c6f42b3f94554429bcd06a8108dfc11",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/artifact-sha256.json",
+          "bytes": 986,
+          "original_bytes": 986,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp14-mode_hold/batch-receipts.jsonl.gz": {
+          "sha256": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+          "original_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/batch-receipts.jsonl",
+          "bytes": 240947,
+          "original_bytes": 500493,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/declaration.json": {
+          "sha256": "fc087edd0f701723946e17c65821b56bc42dd7afa55c24db420fa18e92285c83",
+          "original_sha256": "fc087edd0f701723946e17c65821b56bc42dd7afa55c24db420fa18e92285c83",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/declaration.json",
+          "bytes": 13154,
+          "original_bytes": 13154,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/initial.json": {
+          "sha256": "59314a61a185a1b9043ee1f54e135f52df42cb87c4f84bc670907da7dbd1881a",
+          "original_sha256": "59314a61a185a1b9043ee1f54e135f52df42cb87c4f84bc670907da7dbd1881a",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/initial.json",
+          "bytes": 554,
+          "original_bytes": 554,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/learning-rates.jsonl.gz": {
+          "sha256": "73ac0d97da495d67cf06df902bc6cb1607262f0c06e37ed0368580cfbb14f26d",
+          "original_sha256": "76723d10cde7ec2e709306d5a15337aa1ec871d1ddc1df7ac08ec9c175c969f1",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/learning-rates.jsonl",
+          "bytes": 324620,
+          "original_bytes": 1802796,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/metrics.jsonl.gz": {
+          "sha256": "3a18e8be2839fcb7a74fedb188e243d054b7c84778ebd6068f80648d4ec695a4",
+          "original_sha256": "b85373f640d0e8868cf5f03624f56e0447a6024c173ddba6596cfdd0d1f71a90",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/metrics.jsonl",
+          "bytes": 720,
+          "original_bytes": 4919,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/result.json": {
+          "sha256": "99d79a14a07e54cbfa7fc39a173a245c7615240c5cd0aa2db9aae17a01645f91",
+          "original_sha256": "99d79a14a07e54cbfa7fc39a173a245c7615240c5cd0aa2db9aae17a01645f91",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/result.json",
+          "bytes": 2172,
+          "original_bytes": 2172,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/retention-assessment.json": {
+          "sha256": "eae0155df5fecbf39977e108f8fb0dd533caacd938869fd240eeef7244e0b60e",
+          "original_sha256": "eae0155df5fecbf39977e108f8fb0dd533caacd938869fd240eeef7244e0b60e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/retention-assessment.json",
+          "bytes": 1242,
+          "original_bytes": 1242,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/runtime.json": {
+          "sha256": "12387a2f6f944c83f3a42cdd09d73c13cfa7eb6cf567e74e77bb9de3d38ffee2",
+          "original_sha256": "12387a2f6f944c83f3a42cdd09d73c13cfa7eb6cf567e74e77bb9de3d38ffee2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/runtime.json",
+          "bytes": 396,
+          "original_bytes": 396,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/source.zip": {
+          "sha256": "b81549ed97dd93904dc22761a8b6fc4954de055e307ececa1e6611acb2a56e18",
+          "original_sha256": "b81549ed97dd93904dc22761a8b6fc4954de055e307ececa1e6611acb2a56e18",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/source.zip",
+          "bytes": 233173,
+          "original_bytes": 233173,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-mode_hold/assessment.json": {
+          "sha256": "f59fad1c6f0b56f5102afb1ebf5735fcbf9281c34c7786e6769569af982fe570",
+          "bytes": 9635,
+          "generated_by": "Independent stdlib supervisor audit; not original experiment artifact"
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/final-state.pt",
+          "sha256": "23baa49b2270af27bed62b4dfe7f8b6a5a1fac5770f33d8e47375697583e4cca",
+          "bytes": 758439,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-mode_hold/initial-state.pt",
+          "sha256": "5984a3da9eea8f5715b0704e0f110a31c85f743c8e8f5c0352f394ce4ec42205",
+          "bytes": 755011,
+          "verified_against_original_manifest": true
+        }
+      },
+      "archive_manifest": {
+        "path": "evidence/api-rp14-mode_hold/archive-manifest.json",
+        "sha256": "58a9136923e4e441121c784a5d089e181fbd0e65343dd356d625aa69d0b922b1"
+      }
+    },
+    {
+      "id": "api-rp14-img_intensity2",
+      "candidate": "API-RP14",
+      "task": "img_intensity2",
+      "status": "FAIL",
+      "steps": 600,
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "final": {
+        "step": 600,
+        "modes": 2,
+        "hq": 0.8125,
+        "mean_rmse": 0.048316486179828644,
+        "quality_mode_fractions": [
+          0.40625,
+          0.40625
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "distribution_tv": 0.03125,
+        "ema": {
+          "modes": 1,
+          "hq": 0.5,
+          "mean_rmse": 0.06817059218883514,
+          "quality_mode_fractions": [
+            0.3125,
+            0.1875
+          ],
+          "mode_fractions": [
+            0.53125,
+            0.46875
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2",
+      "scope": "PUBLIC_API",
+      "note": "Own image quality gate FAIL; tiny success preserved separately. Own ring NOT_RUN.",
+      "artifacts": {
+        "evidence/api-rp14-img_intensity2/artifact-sha256.json": {
+          "sha256": "7a391314c9003ecea3bb00074eb7546a5fde34caf93a9ed1b2a8386f9f20fc9d",
+          "original_sha256": "7a391314c9003ecea3bb00074eb7546a5fde34caf93a9ed1b2a8386f9f20fc9d",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/artifact-sha256.json",
+          "bytes": 892,
+          "original_bytes": 892,
+          "listed_in_original_manifest": false
+        },
+        "evidence/api-rp14-img_intensity2/declaration.json": {
+          "sha256": "7b3ba8dffa6c6f9dd136e1cfebcaa62e9a206b75721e0afa57b4758b68a254d6",
+          "original_sha256": "7b3ba8dffa6c6f9dd136e1cfebcaa62e9a206b75721e0afa57b4758b68a254d6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/declaration.json",
+          "bytes": 9941,
+          "original_bytes": 9941,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/initial.json": {
+          "sha256": "5c5881f0f6d69f6035c3a0589c3f0a78d808e608f7a8c8d42cf88d9fd6d829e4",
+          "original_sha256": "5c5881f0f6d69f6035c3a0589c3f0a78d808e608f7a8c8d42cf88d9fd6d829e4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/initial.json",
+          "bytes": 592,
+          "original_bytes": 592,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/learning-rates.jsonl.gz": {
+          "sha256": "cb9eaaae61485d01ebfe079274351c2f8da7e0429fd19275312d49635840147a",
+          "original_sha256": "8c825db18f490c144e92bb11d2c3f30543852d9c128f9d38f4aad2d1b0a904bd",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/learning-rates.jsonl",
+          "bytes": 159589,
+          "original_bytes": 883438,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/metrics.jsonl.gz": {
+          "sha256": "4bf302e863362df3a43e479d064618bac9cb5488cd17cd991235bfa33b3a35c1",
+          "original_sha256": "c551734ee179586def06235d879e1f1985dacc2f66647bb51c82ca9569ba5e34",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/metrics.jsonl",
+          "bytes": 1172,
+          "original_bytes": 8486,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/result.json": {
+          "sha256": "ed7e6a2ed0475ea4a758868f4fd850f954f3692d9d09fc00020905730912f8fe",
+          "original_sha256": "ed7e6a2ed0475ea4a758868f4fd850f954f3692d9d09fc00020905730912f8fe",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/result.json",
+          "bytes": 3642,
+          "original_bytes": 3642,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/retention-assessment.json": {
+          "sha256": "86b1646feb70350135574e9927936fb7ebfbda5fe0115bc770f9694c86b82f01",
+          "original_sha256": "86b1646feb70350135574e9927936fb7ebfbda5fe0115bc770f9694c86b82f01",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/retention-assessment.json",
+          "bytes": 1399,
+          "original_bytes": 1399,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/runtime.json": {
+          "sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+          "original_sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/runtime.json",
+          "bytes": 365,
+          "original_bytes": 365,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/source.zip": {
+          "sha256": "f4309d973dc8893d655d5343e5cf32fefd958facab8120b2ad0261739caf39c2",
+          "original_sha256": "f4309d973dc8893d655d5343e5cf32fefd958facab8120b2ad0261739caf39c2",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/source.zip",
+          "bytes": 171719,
+          "original_bytes": 171719,
+          "listed_in_original_manifest": true
+        },
+        "evidence/api-rp14-img_intensity2/assessment.json": {
+          "sha256": "36f16d17894fb20fe3148a634df53b1637c8910b82d12325006fe7a0d343a668",
+          "bytes": 8575,
+          "generated_by": "Independent stdlib supervisor audit; not original experiment artifact"
+        }
+      },
+      "external_checkpoints": {
+        "final-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/final-state.pt",
+          "sha256": "5b6a816080a71a84eb33fa8e4f8f6a953c98b30115efabf3b9a4c02eb0aabddf",
+          "bytes": 226771,
+          "verified_against_original_manifest": true
+        },
+        "initial-state.pt": {
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp14-img_intensity2/initial-state.pt",
+          "sha256": "779644068dbb1999997783911b9348a8f2fd7fab3f7817e1ef8647bc9fa7e8ea",
+          "bytes": 226959,
+          "verified_against_original_manifest": true
+        }
+      },
+      "archive_manifest": {
+        "path": "evidence/api-rp14-img_intensity2/archive-manifest.json",
+        "sha256": "b7c3e0afa27b7d6cecbfcca327bae6b8865873a2168b1129cfd24220ddd9aa0a"
+      }
+    }
+  ],
+  "supplementary_receipts": {
+    "directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp14-completed-audit-receipts",
+    "files": {
+      "rp14-source-lock.json": "c329cbb7fb13747e5345350fc6241980ad388159a1b91a671117988aa760d92e",
+      "rp14-package.zip": "b0348a3083d72f6ea92a5f5cb55455330872f41fe064748c7fe6dde167177f95",
+      "rp14-seal.json": "f9e884fafd132a0e993a81739f609e86b67305519bdc7fd45313d2f8d641bedb",
+      "rp14.md": "73560cd53dc1c90d8064d1ec6b81f8717202c2d7cc7ca94a055d564090df097b",
+      "rp14-test-sources.zip": "46ec158ccb0feeabb3a205a80df8f8eabb14faeff178c81c56ab075e62cb8e9e",
+      "rp14-complete-public-api.patch": "ca87ef5eae173541f28c00f8fff4f4fdb79bd0fa9b8cf2f25c87dca35a445614",
+      "rp14-before-mode_hold-supervisor.md": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+      "rp14-before-image-supervisor.md": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+      "rp14-mode_hold.log": "5d4b30e9a3f89ed80a4a719afcfddd2c52407be758f4014415dc1b2a18059d6d",
+      "rp14-image.log": "a79f8519ee9b6dd9a0079909a33101f43fc75902b755c4054f3f55e4abcc8587"
+    },
+    "originals": {
+      "rp14-source-lock.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-source-lock.json",
+        "sha256": "c329cbb7fb13747e5345350fc6241980ad388159a1b91a671117988aa760d92e",
+        "bytes": 1753
+      },
+      "rp14-package.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-package.zip",
+        "sha256": "b0348a3083d72f6ea92a5f5cb55455330872f41fe064748c7fe6dde167177f95",
+        "bytes": 57127
+      },
+      "rp14-seal.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-seal.json",
+        "sha256": "f9e884fafd132a0e993a81739f609e86b67305519bdc7fd45313d2f8d641bedb",
+        "bytes": 393
+      },
+      "rp14.md": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14.md",
+        "sha256": "73560cd53dc1c90d8064d1ec6b81f8717202c2d7cc7ca94a055d564090df097b",
+        "bytes": 3618
+      },
+      "rp14-test-sources.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-test-sources.zip",
+        "sha256": "46ec158ccb0feeabb3a205a80df8f8eabb14faeff178c81c56ab075e62cb8e9e",
+        "bytes": 16131
+      },
+      "rp14-complete-public-api.patch": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-complete-public-api.patch",
+        "sha256": "ca87ef5eae173541f28c00f8fff4f4fdb79bd0fa9b8cf2f25c87dca35a445614",
+        "bytes": 49274
+      },
+      "rp14-before-mode_hold-supervisor.md": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-before-mode_hold-supervisor.md",
+        "sha256": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+        "bytes": 99
+      },
+      "rp14-before-image-supervisor.md": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-before-image-supervisor.md",
+        "sha256": "d720ce03011a175be4cd46a904efb1ead242e2ea676e8c34b0fabf2fd6f354c4",
+        "bytes": 99
+      },
+      "rp14-mode_hold.log": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-mode_hold.log",
+        "sha256": "5d4b30e9a3f89ed80a4a719afcfddd2c52407be758f4014415dc1b2a18059d6d",
+        "bytes": 7416
+      },
+      "rp14-image.log": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/rp14-image.log",
+        "sha256": "a79f8519ee9b6dd9a0079909a33101f43fc75902b755c4054f3f55e4abcc8587",
+        "bytes": 11614
+      }
+    }
+  },
+  "regression_receipt": {
+    "status": "NO_RP14_SPECIFIC_REGRESSION_RECEIPT_AT_ARCHIVE_TIME",
+    "note": "Separate initial test-source ZIP has no support-specific test; no inherited99-pass claim."
+  },
+  "ring_evaluation": "NOT_RUN after image failure",
+  "shared_manifests_edited": false,
+  "active_checkout_edited": false,
+  "training_or_gpu_execution": false,
+  "source_audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/rp14-source-audit.json",
+  "raw_checkpoint_followup": {
+    "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/rp14-completed-audit-receipts/raw-force-followup.json",
+    "sha256": "c5fd9946859b589b5883b5a19ac273b215f8a5300d36f59ad52d0d1acec3e881",
+    "scope": "Raw initial model and private/global/caller RNG parity with RP5; final accepted clocks; retained force diagnostics."
+  },
+  "reported_run_seconds": 103.5961742689833
+}

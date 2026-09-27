@@ -1,0 +1,124 @@
+{
+  "acquisition": {
+    "start": 0,
+    "end": 7500,
+    "first_arrival": 580,
+    "arrival_delay": 580,
+    "passing_since_arrival": 693,
+    "checks_since_arrival": 693,
+    "every_departure": [],
+    "min_hq_since_arrival": 0.905517578125,
+    "min_modes_since_arrival": 8,
+    "min_hq_all": 0.010498046875,
+    "final_stable_suffix_checks": 693,
+    "final_stable_suffix_start": 580,
+    "final_stable_suffix_span": 6920,
+    "final": {
+      "step": 7500,
+      "modes": 8,
+      "hq": 0.98876953125
+    }
+  },
+  "retention": {
+    "passing": 630,
+    "total": 630,
+    "min_hq": 0.97802734375,
+    "failing_steps": []
+  },
+  "transitions": [],
+  "comparison_3600": null,
+  "frozen": {
+    "passing": 0,
+    "total": 0
+  },
+  "policy_ranges": {
+    "mobility": [
+      0.06413093955365667,
+      0.9999999382948966
+    ],
+    "alignment": [
+      -0.9620518880417344,
+      0.8180846728951382
+    ],
+    "data_score": [
+      0.0,
+      2.649094820022583
+    ],
+    "data_drive": [
+      0.0,
+      0.0
+    ]
+  },
+  "final_policy": {
+    "width_pair": {
+      "forward_gradient_rms": 2.3382366265423116e-08,
+      "reverse_gradient_rms": 1.4863762665129343e-08,
+      "average_gradient_rms": 1.274772110093636e-08,
+      "shear_gradient_rms": 6.980449551718948e-09
+    },
+    "latent_applications": [
+      {
+        "width_min": 0.003824980463832617,
+        "width_mean": 0.006712067872285843,
+        "width_max": 0.009491732344031334,
+        "perturbation_rms": 0.003894780995324254,
+        "shear_norm_max": 0.5825408101081848
+      },
+      {
+        "width_min": 0.0037291396874934435,
+        "width_mean": 0.006721395067870617,
+        "width_max": 0.009365684352815151,
+        "perturbation_rms": 0.0038829781115055084,
+        "shear_norm_max": 0.6120418906211853
+      }
+    ],
+    "latent_bandwidth": [
+      0.00701700896024704,
+      0.007029266096651554
+    ],
+    "data_memory": 0.0,
+    "payoff_error": 0.25666677836858043,
+    "game_trust": 0.017323973198407488,
+    "game_ratio": 8.531499108424613,
+    "variant": "dv16",
+    "mobility": 0.06646545933010052,
+    "alignment": 0.5917578337215317,
+    "data_score": 1.1424641609191895,
+    "data_drive": 0.0,
+    "last_cosine": 0.3838765621185303,
+    "updates": 7500,
+    "reopens": 0,
+    "closed": true
+  },
+  "rates": {
+    "generator_0": [
+      1.293272876694669e-06,
+      0.004249999740375778
+    ],
+    "prior_1": [
+      3.847164638852445e-06,
+      0.008499999501731291
+    ],
+    "critic_0": [
+      1.2125403094164086e-06,
+      0.0042289625
+    ],
+    "input_noise": [
+      0.0,
+      0.0
+    ],
+    "output_noise": [
+      0.029,
+      0.029
+    ]
+  },
+  "initialization_matches_original": {
+    "models_sha256": false,
+    "optimizers_sha256": false,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  }
+}

@@ -127,7 +127,7 @@
   },
   "historical_current_lead": "r2_moment_surprise",
   "current_lead": null,
-  "active_phase": "three_external_api_approaches_running",
+  "active_phase": "MERGE_DEVELOP_AND_RETEST_WITH_DETERMINISTIC_INITIALIZATION",
   "baseline": {
     "status": "MEASURED",
     "master_reference": "0ff9a7afe5dcb828239369446cfe71971bce687b",
@@ -583,7 +583,7 @@
     "report": "reports/toy100/continuous-api-search/README.md",
     "manifest": "reports/toy100/continuous-api-search/first-results.json",
     "qualified_winner": null,
-    "status": "EARLY_CANDIDATES_UNDER_QUALIFICATION",
+    "status": "DEVELOP_INITIALIZATION_UPDATE_AND_LEADERBOARD_RETEST_PREPARING",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
     "matched_k3p_owner": "RECOVERY_UNEQUAL_MASS_AND_MODE_HOLD_REFERENCES_COMPLETE",
@@ -612,7 +612,7 @@
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
     },
-    "strongest_active_candidate": "API-DV16",
+    "strongest_active_candidate": null,
     "api_c6": {
       "single_shift": "PASS",
       "initial_arrival": 590,
@@ -739,9 +739,7 @@
       "component_min_eigen_ratio": 0.021303080022335052,
       "required_min_eigen_ratio": 0.15
     },
-    "survivors": [
-      "API-DV16"
-    ],
+    "survivors": [],
     "api_dv8": {
       "single_shift_after_arrival": "171/190",
       "initial_after_arrival": "175/177",
@@ -1003,7 +1001,7 @@
       "qualified": false
     },
     "api_dv16": {
-      "status": "OWN_EARLY_QUALITY_PASSES_FURTHER_QUALIFICATION",
+      "status": "HISTORICAL_INITIALIZATION_REJECTED_LATE_RETENTION",
       "mode_hold": "VERIFIED_PASS_11_OF_24_SUFFIX_11",
       "mode_hold_first_arrival": 700,
       "intensity": "VERIFIED_PASS_8_OF_24_SUFFIX_6",
@@ -1036,8 +1034,68 @@
       "two_broad": "VERIFIED_PASS_21_OF_24_SUFFIX_21",
       "anisotropic": "VERIFIED_PASS_21_OF_24_SUFFIX_21",
       "overlap": "VERIFIED_PASS_24_OF_24",
-      "spiral": "VERIFIED_PASS_24_OF_24"
+      "spiral": "VERIFIED_PASS_24_OF_24",
+      "stationary_after_arrival": "693/693",
+      "stationary_first_arrival": 580,
+      "stationary_independent_audit": "VERIFIED",
+      "long": "COMPLETE_30000_VERIFIED",
+      "own_ring_replay": "VERIFIED_EXACT_2400_TO_2500_FULL_STATE_STORAGE_AND_OBSERVATIONS",
+      "budget_prefix": "VERIFIED_EXACT_SINGLE_VS_STATIONARY_THROUGH_2400",
+      "native_source": "PREEXECUTION_VERIFIED_D_SOURCE_DEFINED_RECONSTRUCTION",
+      "custom_api": "SOURCE_REVIEW_AND_FAITHFUL_INTEGRATION_PENDING",
+      "long_late_departures": [
+        16910,
+        16920,
+        16930,
+        16940,
+        16950,
+        16960,
+        16970,
+        16980,
+        16990
+      ],
+      "long_late_min_hq": 0.6044921875,
+      "long_late_min_modes": 6,
+      "long_late_recovered_at": 17000,
+      "native": "SOURCE_READY_NOT_RUN_AFTER_RETENTION_FAILURE",
+      "long_replay": "NOT_RUN_AFTER_RETENTION_FAILURE",
+      "long_arrival_delays": [
+        420,
+        270,
+        270
+      ],
+      "long_after_arrival": [
+        "543/543",
+        "139/139",
+        "1884/1894",
+        "274/274"
+      ],
+      "long_early_departures": [
+        8110
+      ],
+      "long_final_middle_suffix": 1001
+    },
+    "api_rp13": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "image": "FAIL_1_OF_24_SUFFIX_1",
+      "mode_hold": "FAIL_0_OF_24_FINAL_7_OF_8",
+      "cpu_regression_passes": 99,
+      "ring": "NOT_RUN_AFTER_CHEAP_FAILURE",
+      "qualified": false
+    },
+    "api_rp14": {
+      "status": "HISTORICAL_INITIALIZATION_REJECTED_IMAGE_QUALITY",
+      "mode_hold": "PASS_11_OF_24_SUFFIX_9",
+      "image": "FAIL_0_OF_24",
+      "qualified": false
     }
   },
-  "observed_utc": "2026-09-27T01:23:50.294937+00:00"
+  "observed_utc": "2026-09-27T01:37:12.818968+00:00",
+  "initialization_retest": {
+    "requested_utc": "2026-09-27T01:41:51.469107+00:00",
+    "develop_pin": "c720645ecae6b648e9fc6034e9d6b48ccff06ed3",
+    "old_api_pin": "fa511ce010120b502f494d717d01b14b8551eed8",
+    "quick_screen": "mode_hold",
+    "policy": "Finish only currently running old-init windows; preserve scores; merge develop; rerun every leaderboard entry as applicable, investigate improvements fully; no PR merge."
+  }
 }

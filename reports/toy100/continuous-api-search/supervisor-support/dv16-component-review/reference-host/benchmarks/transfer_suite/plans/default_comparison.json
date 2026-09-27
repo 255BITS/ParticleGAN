@@ -1,0 +1,1149 @@
+[
+  {
+    "spec": {
+      "name": "two_pole",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Basic adversarial movement remains bounded.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 80,
+      "thresholds": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__two_pole.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56"
+  },
+  {
+    "spec": {
+      "name": "trajectory",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Preserves the shared trajectory's identity constraint.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 400,
+      "thresholds": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__trajectory.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5"
+  },
+  {
+    "spec": {
+      "name": "residual_student",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Moves the intended residual without choosing the wrong target.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 400,
+      "thresholds": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ],
+        [
+          "success_rate",
+          ">=",
+          1.0
+        ],
+        [
+          "wrong_pad_rate",
+          "<=",
+          0.0
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__residual_student.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08"
+  },
+  {
+    "spec": {
+      "name": "unipolar",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Target coverage preserves unrelated content.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 400,
+      "thresholds": [
+        [
+          "cover",
+          ">=",
+          0.85
+        ],
+        [
+          "off_caption",
+          "<=",
+          0.05
+        ],
+        [
+          "neu_hold",
+          ">=",
+          0.85
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__unipolar.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5"
+  },
+  {
+    "spec": {
+      "name": "ae_gan_hold",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 250,
+      "thresholds": [
+        [
+          "recon_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "hold",
+          "<=",
+          0.35
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__ae_gan_hold.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2"
+  },
+  {
+    "spec": {
+      "name": "cover_leftover",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Coverage preserves both content and the unwanted remainder constraint.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 800,
+      "thresholds": [
+        [
+          "u_kept",
+          ">=",
+          0.85
+        ],
+        [
+          "content_kept",
+          ">=",
+          0.75
+        ],
+        [
+          "leak_ratio",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_plus",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_minus",
+          "<=",
+          0.2
+        ],
+        [
+          "same_dir",
+          "<=",
+          0.25
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__cover_leftover.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188"
+  },
+  {
+    "spec": {
+      "name": "unused_token_hold",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Unused controls remain unchanged while active controls move.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 200,
+      "thresholds": [
+        [
+          "unused_hold",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_move",
+          ">=",
+          0.85
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__unused_token_hold.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f"
+  },
+  {
+    "spec": {
+      "name": "mid_scale_identity",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "Intermediate control strengths preserve identity and target magnitude.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 800,
+      "thresholds": [
+        [
+          "concept_cos_plus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_cos_minus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_mag_plus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_plus",
+          "<=",
+          1.25
+        ],
+        [
+          "concept_mag_minus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_minus",
+          "<=",
+          1.25
+        ],
+        [
+          "identity_at_0",
+          ">=",
+          0.85
+        ],
+        [
+          "identity_at_mid",
+          ">=",
+          0.85
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__mid_scale_identity.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b"
+  },
+  {
+    "spec": {
+      "name": "mode_hold",
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "tier": "required",
+      "importance_reason": "All eight modes must remain present with sufficient sample quality.",
+      "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+      "steps": 1200,
+      "thresholds": [
+        [
+          "modes",
+          ">=",
+          8
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ]
+    },
+    "reference": "study/episodes/cosine__mode_hold.json.gz",
+    "architecture": "original host",
+    "reference_sha256": "394c7fec15bad3baa25b7c95017381d00925d6fa08e09b9aefff0406501cdb52"
+  },
+  {
+    "spec": {
+      "batch": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "covariances": [
+        [
+          [
+            0.0625,
+            0.0
+          ],
+          [
+            0.0,
+            0.0625
+          ]
+        ],
+        [
+          [
+            0.0625,
+            0.0
+          ],
+          [
+            0.0,
+            0.0625
+          ]
+        ]
+      ],
+      "d_every": 1,
+      "d_lr_mult": 1.5,
+      "ema_decay": 0.995,
+      "family": "separated_broad",
+      "fourier": 2,
+      "g_every": 1,
+      "hidden": 64,
+      "identifiable": true,
+      "importance_reason": "Basic learnable multimodal distribution and within-mode spread.",
+      "kind": "gaussian_mixture",
+      "layers": 2,
+      "limitations": "Finite-particle approximation; one initialization only.",
+      "lr": 0.001,
+      "masses": [
+        0.5,
+        0.5
+      ],
+      "means": [
+        [
+          -1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "name": "vector_two_broad",
+      "particles": 256,
+      "phase": "fit",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "runner": "vector",
+      "split": "development",
+      "steps": 1200,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "tier": "ranking",
+      "z_dim": 4
+    },
+    "reference": "study/episodes/cosine__vector_two_broad.json.gz",
+    "architecture": "original architecture",
+    "reference_sha256": "5f8ed7df513dd4474890f0576de4fcf93c7512739d4d6d50a1ea0225e651ead7"
+  },
+  {
+    "spec": {
+      "batch": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "covariances": [
+        [
+          [
+            0.0324,
+            0.0
+          ],
+          [
+            0.0,
+            0.0324
+          ]
+        ],
+        [
+          [
+            0.0324,
+            0.0
+          ],
+          [
+            0.0,
+            0.0324
+          ]
+        ],
+        [
+          [
+            0.0324,
+            0.0
+          ],
+          [
+            0.0,
+            0.0324
+          ]
+        ],
+        [
+          [
+            0.0324,
+            0.0
+          ],
+          [
+            0.0,
+            0.0324
+          ]
+        ]
+      ],
+      "d_every": 1,
+      "d_hidden": 96,
+      "d_layers": 2,
+      "d_lr_mult": 1.5,
+      "ema_decay": 0.995,
+      "family": "unequal_mass",
+      "fourier": 2,
+      "g_every": 1,
+      "hidden": 64,
+      "identifiable": true,
+      "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+      "kind": "gaussian_mixture",
+      "layers": 2,
+      "limitations": "Finite-particle approximation; one initialization only.",
+      "lr": 0.001,
+      "masses": [
+        0.55,
+        0.3,
+        0.13,
+        0.02
+      ],
+      "means": [
+        [
+          -1.5,
+          -1.5
+        ],
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          1.5,
+          -1.5
+        ],
+        [
+          1.5,
+          1.5
+        ]
+      ],
+      "name": "vector_unequal_mass",
+      "particles": 256,
+      "phase": "fit",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "research_discriminator": {
+        "activation": "softplus",
+        "beta": 5.0,
+        "features": "axis_fourier",
+        "fourier_bands": 2,
+        "hidden": 96,
+        "layers": 2,
+        "name": "linear_skip_d96_beta5",
+        "normalization": "none",
+        "skip": "raw_linear",
+        "skip_bias": false,
+        "skip_output_initialization": "zero"
+      },
+      "runner": "vector",
+      "split": "development",
+      "steps": 1200,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25
+        ]
+      ],
+      "tier": "ranking",
+      "z_dim": 4
+    },
+    "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+    "architecture": "linear_skip_d96_beta5",
+    "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf"
+  },
+  {
+    "spec": {
+      "batch": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "covariances": [
+        [
+          [
+            0.004900000000000001,
+            0.0
+          ],
+          [
+            0.0,
+            0.004900000000000001
+          ]
+        ],
+        [
+          [
+            0.0144,
+            0.0
+          ],
+          [
+            0.0,
+            0.0144
+          ]
+        ],
+        [
+          [
+            0.04000000000000001,
+            0.0
+          ],
+          [
+            0.0,
+            0.04000000000000001
+          ]
+        ],
+        [
+          [
+            0.09,
+            0.0
+          ],
+          [
+            0.0,
+            0.09
+          ]
+        ]
+      ],
+      "d_every": 1,
+      "d_lr_mult": 1.5,
+      "ema_decay": 0.995,
+      "family": "unequal_width",
+      "fourier": 2,
+      "g_every": 1,
+      "hidden": 64,
+      "identifiable": true,
+      "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+      "kind": "gaussian_mixture",
+      "layers": 2,
+      "limitations": "Finite-particle approximation; one initialization only.",
+      "lr": 0.001,
+      "masses": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "means": [
+        [
+          -1.5,
+          -1.5
+        ],
+        [
+          -1.5,
+          1.5
+        ],
+        [
+          1.5,
+          -1.5
+        ],
+        [
+          1.5,
+          1.5
+        ]
+      ],
+      "name": "vector_unequal_width",
+      "particles": 256,
+      "phase": "fit",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "research_discriminator": {
+        "activation": "softplus",
+        "beta": 5.0,
+        "features": "axis",
+        "name": "axis_softplus5"
+      },
+      "runner": "vector",
+      "split": "development",
+      "steps": 1200,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "tier": "ranking",
+      "z_dim": 4
+    },
+    "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+    "architecture": "axis_softplus5",
+    "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e"
+  },
+  {
+    "spec": {
+      "batch": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "covariances": [
+        [
+          [
+            0.09,
+            0.018
+          ],
+          [
+            0.018,
+            0.0081
+          ]
+        ],
+        [
+          [
+            0.0081,
+            -0.018
+          ],
+          [
+            -0.018,
+            0.09
+          ]
+        ],
+        [
+          [
+            0.04,
+            0.03
+          ],
+          [
+            0.03,
+            0.04
+          ]
+        ]
+      ],
+      "d_every": 1,
+      "d_lr_mult": 1.5,
+      "ema_decay": 0.995,
+      "family": "anisotropic",
+      "fourier": 2,
+      "g_every": 1,
+      "hidden": 64,
+      "identifiable": true,
+      "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "kind": "gaussian_mixture",
+      "layers": 2,
+      "limitations": "Finite-particle approximation; one initialization only.",
+      "lr": 0.001,
+      "masses": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "means": [
+        [
+          -2.0,
+          -1.0
+        ],
+        [
+          0.0,
+          1.5
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "name": "vector_anisotropic",
+      "particles": 256,
+      "phase": "fit",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "runner": "vector",
+      "split": "development",
+      "steps": 1200,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "tier": "ranking",
+      "z_dim": 4
+    },
+    "reference": "study/episodes/cosine__vector_anisotropic.json.gz",
+    "architecture": "original architecture",
+    "reference_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428"
+  },
+  {
+    "spec": {
+      "batch": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "covariances": [
+        [
+          [
+            0.30250000000000005,
+            0.0
+          ],
+          [
+            0.0,
+            0.30250000000000005
+          ]
+        ],
+        [
+          [
+            0.30250000000000005,
+            0.0
+          ],
+          [
+            0.0,
+            0.30250000000000005
+          ]
+        ]
+      ],
+      "d_every": 1,
+      "d_hidden": 128,
+      "d_layers": 3,
+      "d_lr_mult": 1.5,
+      "ema_decay": 0.995,
+      "family": "overlapping",
+      "fourier": 3,
+      "g_every": 1,
+      "hidden": 64,
+      "identifiable": false,
+      "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+      "kind": "gaussian_mixture",
+      "layers": 2,
+      "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+      "lr": 0.001,
+      "masses": [
+        0.5,
+        0.5
+      ],
+      "means": [
+        [
+          -0.35,
+          0.0
+        ],
+        [
+          0.35,
+          0.0
+        ]
+      ],
+      "name": "vector_overlap",
+      "particles": 256,
+      "phase": "fit",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "runner": "vector",
+      "split": "development",
+      "steps": 1200,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mean_error",
+          "<=",
+          0.15
+        ],
+        [
+          "covariance_error",
+          "<=",
+          0.45
+        ]
+      ],
+      "tier": "ranking",
+      "z_dim": 4
+    },
+    "reference": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz",
+    "architecture": "d128_l3_f3",
+    "reference_sha256": "49c882392411dfcb65f3c5261a63e0c8bf56fc170bf4e1dcbb621e0ef57301a0"
+  },
+  {
+    "spec": {
+      "batch": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "d_every": 1,
+      "d_lr_mult": 1.5,
+      "ema_decay": 0.995,
+      "family": "curved_continuous",
+      "fourier": 2,
+      "g_every": 1,
+      "hidden": 64,
+      "importance_reason": "Checks continuous curved mass rather than a finite list of target mode centers.",
+      "kind": "spiral",
+      "layers": 2,
+      "limitations": "Finite particles approximate a noisy spiral; sliced distances do not prove identical density.",
+      "lr": 0.001,
+      "name": "vector_spiral",
+      "noise": 0.08,
+      "particles": 256,
+      "phase": "fit",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "radius_max": 2.0,
+      "radius_min": 0.3,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "runner": "vector",
+      "split": "development",
+      "steps": 1600,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mean_error",
+          "<=",
+          0.15
+        ],
+        [
+          "covariance_error",
+          "<=",
+          0.45
+        ]
+      ],
+      "tier": "ranking",
+      "turns": 1.5,
+      "z_dim": 4
+    },
+    "reference": "study/episodes/cosine__vector_spiral.json.gz",
+    "architecture": "original architecture",
+    "reference_sha256": "528a316f74aa36bf6e29a7acd1a9ac0406f82061c32222b1849eaded0823a666"
+  },
+  {
+    "spec": {
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "architecture": "residual_upsample",
+      "batch_size": 32,
+      "ema_decay": 0.99,
+      "family": "image_conv_transpose",
+      "gan_mode": "rp",
+      "gradient_penalty": "b_cap",
+      "importance_reason": "Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.",
+      "kappa": 1.25,
+      "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+      "loss_type": "logistic",
+      "lr_d": 0.0017,
+      "lr_g": 0.0017,
+      "modes": 2,
+      "name": "img_stripes2",
+      "noise_std": 0.01,
+      "particles": 32,
+      "pattern": "stripes2",
+      "penalty_coeff": 3.0,
+      "prior_learnable": true,
+      "prior_lr_multiplier": 1.0,
+      "prior_weight": 0.05,
+      "split": "development",
+      "steps": 600,
+      "thresholds": {
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.1
+      },
+      "tier": "ranking",
+      "width": 16,
+      "z_dim": 8,
+      "runner": "image"
+    },
+    "reference": "solvability/images/stage1/episodes/residual16__img_stripes2.json.gz",
+    "architecture": "residual16",
+    "reference_sha256": "b9b83caf1061f49c027ede780c9c0c447e72873cca0344a80996104a83d77479"
+  },
+  {
+    "spec": {
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "architecture": "residual_upsample",
+      "batch_size": 32,
+      "ema_decay": 0.99,
+      "family": "image_conv_transpose",
+      "gan_mode": "rp",
+      "gradient_penalty": "b_cap",
+      "importance_reason": "Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.",
+      "kappa": 1.25,
+      "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+      "loss_type": "logistic",
+      "lr_d": 0.0017,
+      "lr_g": 0.0017,
+      "modes": 4,
+      "name": "img_bars4",
+      "noise_std": 0.01,
+      "particles": 32,
+      "pattern": "bars4",
+      "penalty_coeff": 3.0,
+      "prior_learnable": true,
+      "prior_lr_multiplier": 1.0,
+      "prior_weight": 0.05,
+      "split": "development",
+      "steps": 600,
+      "thresholds": {
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.125,
+        "minimum_stable_checks": 5,
+        "modes": 4,
+        "observations": 24,
+        "quality_rmse": 0.1
+      },
+      "tier": "ranking",
+      "width": 16,
+      "z_dim": 8,
+      "runner": "image"
+    },
+    "reference": "solvability/images/stage1/episodes/residual16__img_bars4.json.gz",
+    "architecture": "residual16",
+    "reference_sha256": "15708bea52dd93c45d5f61c98355239fe3d73b99e268e05ad80653b9729eb26b"
+  },
+  {
+    "spec": {
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "architecture": "residual_upsample",
+      "batch_size": 32,
+      "ema_decay": 0.99,
+      "family": "image_conv_transpose",
+      "gan_mode": "rp",
+      "gradient_penalty": "b_cap",
+      "importance_reason": "Healthy location transfer: four small corner patches test localized quality and coverage.",
+      "kappa": 1.25,
+      "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+      "loss_type": "logistic",
+      "lr_d": 0.0017,
+      "lr_g": 0.0017,
+      "modes": 4,
+      "name": "img_blobs4",
+      "noise_std": 0.01,
+      "particles": 32,
+      "pattern": "blobs4",
+      "penalty_coeff": 3.0,
+      "prior_learnable": true,
+      "prior_lr_multiplier": 1.0,
+      "prior_weight": 0.05,
+      "split": "development",
+      "steps": 600,
+      "thresholds": {
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.125,
+        "minimum_stable_checks": 5,
+        "modes": 4,
+        "observations": 24,
+        "quality_rmse": 0.1
+      },
+      "tier": "ranking",
+      "width": 16,
+      "z_dim": 8,
+      "runner": "image"
+    },
+    "reference": "solvability/images/stage1/episodes/residual16__img_blobs4.json.gz",
+    "architecture": "residual16",
+    "reference_sha256": "a2ff48c2008108372bd43914e79df4e8f3547f50f0aa858db31ddbaa1219125b"
+  },
+  {
+    "spec": {
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "architecture": "residual_upsample",
+      "batch_size": 32,
+      "ema_decay": 0.99,
+      "family": "image_conv_transpose",
+      "gan_mode": "rp",
+      "gradient_penalty": "b_cap",
+      "importance_reason": "Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.",
+      "kappa": 1.25,
+      "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+      "loss_type": "logistic",
+      "lr_d": 0.0017,
+      "lr_g": 0.0017,
+      "modes": 2,
+      "name": "img_intensity2",
+      "noise_std": 0.01,
+      "particles": 32,
+      "pattern": "intensity2",
+      "penalty_coeff": 3.0,
+      "prior_learnable": true,
+      "prior_lr_multiplier": 1.0,
+      "prior_weight": 0.05,
+      "split": "development",
+      "steps": 600,
+      "thresholds": {
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "tier": "ranking",
+      "width": 16,
+      "z_dim": 8,
+      "runner": "image"
+    },
+    "reference": "solvability/images/stage1/episodes/residual16__img_intensity2.json.gz",
+    "architecture": "residual16",
+    "reference_sha256": "127f9da08ea919d4ce2d319626308ae326da3456579d7b13c1708b0d178fae7d"
+  }
+]

@@ -1,0 +1,239 @@
+{
+  "supplementary_entry": {
+    "id": "api-dv16-ring-api-checks",
+    "candidate": "API-DV16",
+    "scope": "PUBLIC_API_PREFIX_AND_FRESH_PROCESS_REPLAY",
+    "recorded_utc": "2026-09-27T01:33:45.427064+00:00",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks",
+    "audit": {
+      "created_utc": "2026-09-27T01:33:45.427064+00:00",
+      "status": "STATIONARY_RETAINED; PREFIX_AND_FRESH_PROCESS_RING_REPLAY_EXACT",
+      "source": {
+        "dv16-stationary": {
+          "zip_sha256": "cd6881e3ab849276825315949b5c3536b7f614cacdb39b676e76c7d4f999d15a",
+          "all_source_artifact_hashes_match": true,
+          "exact14_file_package": true,
+          "unchanged_common_host_sources": {
+            "particlegan/__init__.py": true,
+            "particlegan/autoencoder.py": true,
+            "particlegan/conditioning.py": true,
+            "particlegan/continuous.py": true,
+            "particlegan/diffusion.py": true,
+            "particlegan/discriminators.py": true,
+            "particlegan/gan_loss.py": true,
+            "particlegan/grad_regularizers.py": true,
+            "particlegan/k3p.py": true,
+            "particlegan/ka2.py": true,
+            "particlegan/particle_prior.py": true,
+            "particlegan/recipes.py": true,
+            "particlegan/training.py": true,
+            "particlegan/vicreg_loss.py": true,
+            "reports/data-drift-api/worker.py": true,
+            "reports/data-drift-api/summarize.py": true,
+            "reports/data-drift-api/evaluation-protocols.json": true,
+            "reports/data-drift-api/dv16.json": true,
+            "benchmarks/locked_shared/mode_hold.py": true,
+            "benchmarks/locked_shared/mlp.py": true,
+            "benchmarks/__init__.py": true,
+            "benchmarks/locked_shared/__init__.py": true,
+            "benchmarks/locked_shared/observation.py": true,
+            "benchmarks/legacy/__init__.py": true,
+            "benchmarks/legacy/gan_loss.py": true,
+            "benchmarks/legacy/grad_regularizers.py": true,
+            "benchmarks/legacy/locked_shared.py": true,
+            "benchmarks/toy100/device.py": true,
+            "benchmarks/toy100/__init__.py": true,
+            "benchmarks/toy100/problems.py": true
+          }
+        },
+        "dv16-api-checks": {
+          "zip_sha256": "d4d5ad2a0047ccef7888e89881f6b16da8614c1fb15d76899b5d7adaa43ae192",
+          "all_source_artifact_hashes_match": true,
+          "exact14_file_package": true,
+          "unchanged_common_host_sources": {
+            "particlegan/__init__.py": true,
+            "particlegan/autoencoder.py": true,
+            "particlegan/conditioning.py": true,
+            "particlegan/continuous.py": true,
+            "particlegan/diffusion.py": true,
+            "particlegan/discriminators.py": true,
+            "particlegan/gan_loss.py": true,
+            "particlegan/grad_regularizers.py": true,
+            "particlegan/k3p.py": true,
+            "particlegan/ka2.py": true,
+            "particlegan/particle_prior.py": true,
+            "particlegan/recipes.py": true,
+            "particlegan/training.py": true,
+            "particlegan/vicreg_loss.py": true,
+            "reports/data-drift-api/worker.py": true,
+            "reports/data-drift-api/summarize.py": true,
+            "reports/data-drift-api/evaluation-protocols.json": true,
+            "reports/data-drift-api/dv16.json": true,
+            "benchmarks/locked_shared/mode_hold.py": true,
+            "benchmarks/locked_shared/mlp.py": true,
+            "benchmarks/__init__.py": true,
+            "benchmarks/locked_shared/__init__.py": true,
+            "benchmarks/locked_shared/observation.py": true,
+            "benchmarks/legacy/__init__.py": true,
+            "benchmarks/legacy/gan_loss.py": true,
+            "benchmarks/legacy/grad_regularizers.py": true,
+            "benchmarks/legacy/locked_shared.py": true,
+            "benchmarks/toy100/device.py": true,
+            "benchmarks/toy100/__init__.py": true,
+            "benchmarks/toy100/problems.py": true
+          }
+        }
+      },
+      "stationary": {
+        "first_arrival": 580,
+        "passing_since_arrival": 693,
+        "checks_since_arrival": 693,
+        "every_departure": [],
+        "min_hq": 0.905517578125,
+        "min_modes": 8,
+        "final_suffix": 693,
+        "final_suffix_start": 580,
+        "observations": 750,
+        "rate_rows": 7500,
+        "state_receipts": 75,
+        "initial_full_state_and_placement_matches_own_single": true,
+        "final_raw_receipt_exact": true,
+        "native_placement": {
+          "nativeCPUsteps": 19,
+          "CUDAotherOptimizerTensors": true
+        },
+        "controller_events": [
+          {
+            "step": 1200,
+            "event": "close"
+          }
+        ],
+        "seconds": 134.8882143329829,
+        "inapplicable_legacy_field": "frozen_control incomplete is not applicable to declared no-change stationary protocol.",
+        "summary_initialization_field": "summary initialization_matches_original compares an ancestor model/optimizer, not own DV16; own initial state matches exactly."
+      },
+      "prefix": {
+        "budgets": [
+          4600,
+          7500
+        ],
+        "prefix_updates": 2400,
+        "all24_full_state_receipts_equal": true,
+        "all240_live_EMA_observations_equal": true,
+        "all2400_applied_rates_noise_policy_rows_equal": true,
+        "scope": "Saved full-state receipts every100; every applied trace row. No separately saved full raw state each update."
+      },
+      "ring_replay": {
+        "from_update": 2400,
+        "to_update": 2500,
+        "own_original_change_checkpoint": true,
+        "process_id": 1804350,
+        "fresh_interpreter": true,
+        "all10_live_EMA_observations_rates_policy_equal": true,
+        "final_raw_full_receipt_equal": true,
+        "caller_data_RNG_and_target_means_included": true,
+        "native_placement": {
+          "nativeCPUsteps": 19,
+          "CUDAotherOptimizerTensors": true
+        },
+        "original_native_placement": {
+          "nativeCPUsteps": 19,
+          "CUDAotherOptimizerTensors": true
+        },
+        "helper_caveat": "Placement helper itself included; its passive top-level benchmark imports are cross-bound to earlier continuation ZIP copied as supporting provenance only, not inherited learner evidence.",
+        "helper_sha256": "c7246144cfebed52fa132ae3328fcf19416cacaaebb2ede9f05b9a856f21dc03",
+        "passive_import_source_sha256": {
+          "reports/data-drift-api/dv15_continue.py": "c7246144cfebed52fa132ae3328fcf19416cacaaebb2ede9f05b9a856f21dc03",
+          "reports/data-drift-api/frozen_vector_tasks.py": "597394ca4814a2aec3b6a791b8660721df1098c3fa3c412837a24d3de954fae8"
+        },
+        "initial_restore_scope": "Runtime assertion records exact fulltrainer values and placement; original raw2400 retained; no separately persisted immediate restored state."
+      },
+      "evidence_limits": [
+        "Long/repeated changes and remaining11 frozen native/custom tasks are not established by this audit.",
+        "Adaptive numerical rates, not literally constant rates; no evaluator horizon enters learner.",
+        "No Torch, GPU, model/training/test execution or worker edits by auditor."
+      ]
+    },
+    "artifacts": {
+      "evidence/api-dv16-ring-api-checks/artifact-sha256.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/artifact-sha256.json",
+        "original_sha256": "ccda7c024da07168b654ec23daefbee710e268f8e5ebf0db6fecceb53e24ac46",
+        "sha256": "ccda7c024da07168b654ec23daefbee710e268f8e5ebf0db6fecceb53e24ac46",
+        "original_bytes": 572,
+        "bytes": 572
+      },
+      "evidence/api-dv16-ring-api-checks/continuation.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/continuation.jsonl",
+        "original_sha256": "3299cbfba347089ed6ea45f0165322c66c611c4056f61a744d7a20cf07844566",
+        "sha256": "a2047ed8066a041e9e533f576d3393db4dd2094746614237519aa0a9b89859d5",
+        "original_bytes": 14237,
+        "bytes": 3720
+      },
+      "evidence/api-dv16-ring-api-checks/continued-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/continued-state.pt",
+        "original_sha256": "ee861fb37ea7775f8cd8d6ac5d512d03ba2eb37c13b01994328083ea75501229",
+        "sha256": "ee861fb37ea7775f8cd8d6ac5d512d03ba2eb37c13b01994328083ea75501229",
+        "original_bytes": 2838829,
+        "bytes": 2838829
+      },
+      "evidence/api-dv16-ring-api-checks/declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/declaration.json",
+        "original_sha256": "05a946f25a8c96d50fa0bb016befac79321d1ec6aa99e30c5cac7ca9599f2b56",
+        "sha256": "05a946f25a8c96d50fa0bb016befac79321d1ec6aa99e30c5cac7ca9599f2b56",
+        "original_bytes": 3765,
+        "bytes": 3765
+      },
+      "evidence/api-dv16-ring-api-checks/fresh_process_checkpoint_2400_2500.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/fresh_process_checkpoint_2400_2500.json",
+        "original_sha256": "175f7b1e8c2da3ec7601a57de1dd29d205035f612dfbe6b78a477ec8ad7f2991",
+        "sha256": "175f7b1e8c2da3ec7601a57de1dd29d205035f612dfbe6b78a477ec8ad7f2991",
+        "original_bytes": 3322,
+        "bytes": 3322
+      },
+      "evidence/api-dv16-ring-api-checks/horizon_prefix_2400.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/horizon_prefix_2400.json",
+        "original_sha256": "21cd5a9a7d795ebe7b0cb99760775b40a492ecf4f3ff13b173551929f6fd57ee",
+        "sha256": "21cd5a9a7d795ebe7b0cb99760775b40a492ecf4f3ff13b173551929f6fd57ee",
+        "original_bytes": 254,
+        "bytes": 254
+      },
+      "evidence/api-dv16-ring-api-checks/source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks/source.zip",
+        "original_sha256": "d4d5ad2a0047ccef7888e89881f6b16da8614c1fb15d76899b5d7adaa43ae192",
+        "sha256": "d4d5ad2a0047ccef7888e89881f6b16da8614c1fb15d76899b5d7adaa43ae192",
+        "original_bytes": 95766,
+        "bytes": 95766
+      },
+      "evidence/api-dv16-ring-api-checks/resume-input-2400-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-single/change-2400-state.pt",
+        "original_sha256": "8343c86a1e5c6fe1a472ddd680df9dcef2adc2b9de9c6bb0b3279f7692151cc6",
+        "sha256": "8343c86a1e5c6fe1a472ddd680df9dcef2adc2b9de9c6bb0b3279f7692151cc6",
+        "original_bytes": 2839011,
+        "bytes": 2839011
+      },
+      "evidence/api-dv16-ring-api-checks/process.log": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-api-checks.log",
+        "original_sha256": "734a19ebd0b9c51fba9f7d7c1ff4b576f3a55ec6dbe815fdc7bfd5856619fed8",
+        "sha256": "734a19ebd0b9c51fba9f7d7c1ff4b576f3a55ec6dbe815fdc7bfd5856619fed8",
+        "original_bytes": 3924,
+        "bytes": 3924
+      },
+      "evidence/api-dv16-ring-api-checks/supporting-passive-imports-source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv15-continuation-source.zip",
+        "original_sha256": "9844644fea0907a059e792cbda6d6a78a0b7872071232fd284d7886ba48d4192",
+        "sha256": "9844644fea0907a059e792cbda6d6a78a0b7872071232fd284d7886ba48d4192",
+        "original_bytes": 69413,
+        "bytes": 69413
+      },
+      "evidence/api-dv16-ring-api-checks/supporting-passive-imports-declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv15-continuation-declaration.json",
+        "original_sha256": "cf8d8a6218e9997fbef321d902024cc90ee4d9d6cf9a04b55996661c448151c4",
+        "sha256": "cf8d8a6218e9997fbef321d902024cc90ee4d9d6cf9a04b55996661c448151c4",
+        "original_bytes": 3392,
+        "bytes": 3392
+      }
+    },
+    "raw_checkpoints_retained": true
+  },
+  "jsonl_lossless": true
+}

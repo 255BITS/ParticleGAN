@@ -1,8 +1,12 @@
 # Continuous API search — September 26
 
-Three external Codex sessions are testing distinct approaches with `gpt-6-astra`
-and max reasoning. **No qualified winner.** The public API base is
-`fa511ce010120b502f494d717d01b14b8551eed8`; neither PR is merged.
+**Historical initialization results. No qualified winner.** These measurements
+used public API base `fa511ce010120b502f494d717d01b14b8551eed8`. The user has now
+requested merging develop `c720645e`, adopting its deterministic initialization,
+and rerunning the leaderboard with a quick hard screen before full follow-up.
+Old-init workers finish only their running window; neither PR is merged.
+These scores remain evidence of the old initialization and do not establish
+results under the new initializer.
 
 These are new measurements through `get_recipe()` and `GANTrainer.step()`.
 All runs use the declared public fixture and seed 0. No seed sweeps. The learner
@@ -34,7 +38,7 @@ alone is insufficient, and longer verification remains required.
 | API-DV13: learned local latent widths, actual native critic memory | 610 | 180/180 | 350 | 181/186 | Five early recovery misses, then175 straight. Unequal_mass14/24, final10 **PASS**; bars4 **FAIL10/24**, suffix2. Intended data-driven critic-memory attachment was omitted; actual behavior and original declaration preserved. |
 | API-DV14: paired opposite-noise width gradients and repaired memory binding | 590 | 182/182 | 290 | 191/192 | One early recovery miss2720, then188 straight. Unequal_mass14/24, final14 **PASS**; bars4 **FAIL8/24**, suffix0. Own source and full saved states independently verified. |
 | API-DV15: bounded uniform latent perturbations with learned widths | 520 | 189/189 | 330 | 185/188 | Stationary **699/699**; five vectors and three images pass. Unequal_mass original **FAIL4/24**, supplement **24/24**, exact direct/split replay. **Rejected:** intensity **FAIL7/24**, suffix3; mode_hold **FAIL0/24**, final7/8. All original scores retained. |
-| API-DV16: learned bounded rank-one latent correlation | 580 | 183/183 | 290 | 191/192 | One early recovery miss2700, then190 straight. Own all6vectors, all4images and mode_hold **PASS (11/22)**, independently verified. Own ring and saved-state audit verifies; longer/full-API qualification pending. |
+| API-DV16: learned bounded rank-one latent correlation | 580 | 183/183 | 290 | 191/192 | One early recovery miss2700, then190 straight. Own all6vectors, all4images and mode_hold **PASS (11/22)**, independently verified. Own ring/replay/prefix and stationary693/693 verify. **Late retention failure:**16910–16990,min6modes/HQ.60449; full30000 complete. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -62,6 +66,8 @@ alone is insufficient, and longer verification remains required.
 | API-RP10: constant observation noise, reversible precision and implicit response | NOT_RUN | — | NOT_RUN | — | **Rejected:** intensity **FAIL4/24**, suffix1; mode_hold **FAIL0/24**, final7/8. Own sealed source,93 corrected regression passes; original test failures preserved. |
 | API-RP11: all-pairs adversarial averaging | NOT_RUN | — | NOT_RUN | — | **Rejected:** intensity **FAIL4/24**, suffix1; mode_hold **FAIL0/24**, final6/8. Exact own package and frozen host verified. |
 | API-RP12: equal weight per observed particle in adversarial losses | NOT_RUN | — | NOT_RUN | — | **Rejected:** mode_hold **FAIL0/24**, final7/8. Intensity **FAIL4/24**, final4 from525, no later miss; one check short of the frozen final5 rule, kept separately from no-coverage failure. |
+| API-RP13: activation-conditioned generator gradients | NOT_RUN | — | NOT_RUN | — | **Rejected:** mode_hold0/24, final7/8; intensity1/24, only600 passes. Own16-file package/fixtures/streams verified;99 CPU regressions. |
+| API-RP14: projected generated-output support force | NOT_RUN | — | NOT_RUN | — | Own mode_hold **PASS11/24**, final9; intensity **FAIL0/24**. Original force-cosine telemetry is invalid; frozen-parameter API compatibility and missing mechanism tests retained as limits. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -111,7 +117,12 @@ verifies public factory ownership and exact single-run parity with the diagnosti
 
 ## Ongoing work
 
-**DV16 is the current lead; no candidate is qualified.**
+**DV16 has a late retention failure; no candidate is qualified.**
+Its completed30000-update window has nine late departures16910–16990, long after
+the target changed at7800. MinimumHQ is.60449 with six of eight modes; it recovers
+at17000. The full run finishes with a third recovery after270 updates and274/274 checks,
+but that successful ending does not erase the earlier loss of an established target. Unstarted native/custom
+qualification is deferred; all prepared sources and eleven quality passes remain.
 It now has **11/22 independently verified broader passes**: all six vectors,
 all four images and small-particle mode_hold. The remaining tasks are three
 native100 distributions and eight custom/auxiliary API routes.
@@ -122,8 +133,11 @@ bars19/24/final19, blobs14/24/final12 and stripes21/24/final21 passes are also
 independently verified. It has now completed its own recovery ring: first arrival580,
 183/183 original-target checks; shifted arrival+290, one early2700 miss, then190
 straight passes from2710. Ring source, all updates and saved states verify; its controller closes at1200,
-reopens at2406 and closes again at3126. Long stability and remaining broader/API
-qualification remain outstanding.
+reopens at2406 and closes again at3126. Own stationary7500 retains693/693 after arrival580; source/full saved-state
+audit, exact2400→2500 fresh-process replay and2400-update budget-prefix checks
+are independently verified. The30000 repeated-change run is complete, with delays420/270/270 and the late
+failure recorded above.
+Remaining native/custom API qualification is unrun after that failure.
 
 **C13-R1 is rejected by small-particle coverage**, despite its strong recovery
 and exact checkpoint tests. Its own mode_hold fails0/24, final7/8 modes withHQ1;

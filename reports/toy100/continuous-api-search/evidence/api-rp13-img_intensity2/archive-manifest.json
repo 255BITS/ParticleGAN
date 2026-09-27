@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "api-rp13-img_intensity2",
+  "created_utc": "2026-09-27T01:29:35.827247+00:00",
+  "original_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2",
+  "files": {
+    "evidence/api-rp13-img_intensity2/artifact-sha256.json": {
+      "sha256": "d1ba0eaa16e803412275da094eb56095fc4d99954c52fcc3b28598a0f481730b",
+      "original_sha256": "d1ba0eaa16e803412275da094eb56095fc4d99954c52fcc3b28598a0f481730b",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/artifact-sha256.json",
+      "bytes": 793,
+      "original_bytes": 793,
+      "listed_in_original_manifest": false
+    },
+    "evidence/api-rp13-img_intensity2/declaration.json": {
+      "sha256": "7df5d3c1db51fc73d193ae933bb03691523e680029265ed2e4d5c0e261f08940",
+      "original_sha256": "7df5d3c1db51fc73d193ae933bb03691523e680029265ed2e4d5c0e261f08940",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/declaration.json",
+      "bytes": 9835,
+      "original_bytes": 9835,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/initial.json": {
+      "sha256": "6b96dc0eea2406d273fb20b1132e3bcd72e73ea219a3fceebee4f326d16e2738",
+      "original_sha256": "6b96dc0eea2406d273fb20b1132e3bcd72e73ea219a3fceebee4f326d16e2738",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/initial.json",
+      "bytes": 592,
+      "original_bytes": 592,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/learning-rates.jsonl.gz": {
+      "sha256": "99536c7edc32158510a72a7a660bcf648b4a01faec49faf05069221231ba4403",
+      "original_sha256": "38a7bc14fd9b7ef59929c15e130e4a7a1aa270d9b552bc9257dac75d249810d7",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/learning-rates.jsonl",
+      "bytes": 143879,
+      "original_bytes": 814419,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/metrics.jsonl.gz": {
+      "sha256": "49eb164144e1d9932ae15eaf17be3e27df5b7b4a32d3094a9a2d452d81ff572d",
+      "original_sha256": "840618f15e8caac295ebc94fa1a129347223e6ef388e6c535a8fa94278985523",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/metrics.jsonl",
+      "bytes": 1200,
+      "original_bytes": 8341,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/result.json": {
+      "sha256": "c6de93596c31eee5970bdd019ac7cf73ce8c2c89625b15d5496080c46488f42a",
+      "original_sha256": "c6de93596c31eee5970bdd019ac7cf73ce8c2c89625b15d5496080c46488f42a",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/result.json",
+      "bytes": 3636,
+      "original_bytes": 3636,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/runtime.json": {
+      "sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+      "original_sha256": "b39307db5346b0aa2d35f303eb4cc0401be318360142852f2e8c7dd98f2dd647",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/runtime.json",
+      "bytes": 365,
+      "original_bytes": 365,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/source.zip": {
+      "sha256": "0b48adf9f4102c627d9362696e0a2d5487bdce6c505b11725f1509d03d357140",
+      "original_sha256": "0b48adf9f4102c627d9362696e0a2d5487bdce6c505b11725f1509d03d357140",
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/source.zip",
+      "bytes": 170117,
+      "original_bytes": 170117,
+      "listed_in_original_manifest": true
+    },
+    "evidence/api-rp13-img_intensity2/assessment.json": {
+      "sha256": "1d75371e2f2d00756033a9b4dfd5347166c366c7d40c436e525e56ef826d160e",
+      "bytes": 8484,
+      "generated_by": "Independent stdlib supervisor audit; not original experiment artifact"
+    }
+  },
+  "external_checkpoints": {
+    "final-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/final-state.pt",
+      "sha256": "29877b3cc52b5b0a827319f5eb95166724eedf671759d63c31ff1670c60f06c0",
+      "bytes": 226771,
+      "verified_against_original_manifest": true
+    },
+    "initial-state.pt": {
+      "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-img_intensity2/initial-state.pt",
+      "sha256": "0387336cf9f997a4686f4f1e02f8774209f8f98f6471501f8c151bb6857b021a",
+      "bytes": 226959,
+      "verified_against_original_manifest": true
+    }
+  },
+  "note": "Original receipts/source copied byte-for-byte; JSONL losslessly compressed with gzip mtime0. Checkpoints content-hash verified and retained at original paths, not deserialized. Assessment independently derived from retained observations and immutable source."
+}

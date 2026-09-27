@@ -1,0 +1,82 @@
+{
+  "candidate": "API-RP13",
+  "gate": "broader_mode_hold",
+  "status": "FAIL",
+  "seconds": 75.74521536799148,
+  "metrics": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "modes",
+          "value": 7,
+          "op": ">=",
+          "threshold": 8,
+          "status": "FAIL",
+          "margin": -1
+        },
+        {
+          "metric": "hq",
+          "value": 0.916748046875,
+          "op": ">=",
+          "threshold": 0.9,
+          "status": "PASS",
+          "margin": 0.016748046874999978
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "confirmation_fraction": 2.0
+    },
+    "final": {
+      "step": 1200,
+      "modes": 7,
+      "n_modes": 8,
+      "hq": 0.916748046875,
+      "cover": 0.875,
+      "effective_modes": 6.340312957763672,
+      "ema": {
+        "modes": 7,
+        "n_modes": 8,
+        "hq": 0.9140625,
+        "cover": 0.875,
+        "effective_modes": 6.342522144317627
+      }
+    },
+    "policy": {
+      "variant": "rp5",
+      "open": false,
+      "gap": 0.016229256987571716,
+      "gap_s": 0.019188118246713553,
+      "velocity": -2.9887487466080664e-05,
+      "contraction_peak": 0.00012216417013461881,
+      "contracting": 393,
+      "activity": 0.08148713047161417,
+      "activity_peak": 0.7335142522100822,
+      "quiet_gap": 0.018753812043724255,
+      "quiet_activity": 0.08540592311724904,
+      "quiet": 0,
+      "shock": 0,
+      "updates": 1200,
+      "openings": 1,
+      "closings": 1,
+      "event": null,
+      "velocity_s": 2.6611023579560336e-06
+    },
+    "updates": 1200
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929/repo/reports/reversible-precision/runs/rp13-mode_hold"
+}
