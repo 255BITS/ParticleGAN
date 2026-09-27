@@ -134,11 +134,11 @@ tail -f /tmp/behavioral-baseline.log
 
 # New output folder for another candidate set. JSON is a list of candidate objects.
 python -m benchmarks.locked_shared.baseline --configs candidates.json \
-  --reference /tmp/conceptmod-reference --output reports/my_approach
+  --reference /tmp/conceptmod-reference --output runs/my_approach
 
 # Continue an interrupted run with exactly the same config/source/runtime.
 python -m benchmarks.locked_shared.baseline --configs candidates.json \
-  --reference /tmp/conceptmod-reference --output reports/my_approach --resume
+  --reference /tmp/conceptmod-reference --output runs/my_approach --resume
 ```
 
 Each completed toy is saved atomically before the next toy begins. Failures are
@@ -147,8 +147,12 @@ fully passes; exit 1 means there is no full PASS. `--resume` rejects changed
 configs, source, thresholds, budgets or runtime. It retries errored toys. It
 does not accept old results from a different experiment under the same label.
 
-New formulations can extend the loss/penalty factory in `Candidate` while using
-the same `run_toy` hosts and metric definitions. Keep VERSION, thresholds, seed,
+The default run is one row, `locked_shared`: every host on its own
+configuration. Hosts on `benchmarks.toy_runner` (currently the ring) take
+their optimizers, loss, penalty, noise and EMA from their recipe, and
+candidate knobs do not reach them. `Candidate`'s loss/penalty factories and
+`lr_multiplier` are a legacy shim for hosts that still own their optimizers;
+they are removed as those hosts migrate, so do not add new formulations there. Keep VERSION, thresholds, seed,
 budgets, data, evaluation and hosts fixed for a comparable experiment; record
 the changed source fingerprint. Change the protocol version if evaluation or
 host training changes. Never select thresholds or checkpoints to rescue an arm.
@@ -158,8 +162,9 @@ do not edit shared host modules or reuse one result directory concurrently.
 ## Extraction verification
 
 Six additional hosts were extracted from the same reference commit as the
-original three. Their measured default outputs are compared against unchanged,
-SHA-256-pinned originals by:
+original three. Their measured default outputs were compared against unchanged,
+SHA-256-pinned originals by the frozen script below. Hosts migrated to their
+recipe no longer match those originals, so the record stands as extracted:
 
 ```bash
 python -m benchmarks.locked_shared.host_reference --reference /tmp/conceptmod-reference

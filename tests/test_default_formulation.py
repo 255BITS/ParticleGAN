@@ -63,9 +63,14 @@ def test_reference_discriminator_rejects_invalid_dimensions(kwargs):
         LinearSkipDiscriminator(**kwargs)
 
 
-def test_historical_stock_comparison_preserves_its_original_settings(tmp_path):
+def test_grid_study_trains_the_example_on_its_own_recipe(tmp_path):
+    import inspect
     from benchmarks.locked_shared.grid_study import load_example, resolved_kwargs
 
-    kwargs = resolved_kwargs(load_example(), tmp_path, 'stock', 'cpu', {})
-    assert (kwargs['lr'], kwargs['beta1'], kwargs['beta2']) == (.0006, 0., .999)
-    assert (kwargs['reg_coeff'], kwargs['reg_kappa'], kwargs['lambda_ep']) == (1., 1., 1.)
+    example = load_example()
+    kwargs = resolved_kwargs(example, tmp_path, 'stock', 'cpu', {})
+    defaults = {k: p.default for k, p in inspect.signature(example.train).parameters.items()}
+    # Only task shape and measurement hooks are set; every optimizer/penalty
+    # hyperparameter is the example recipe's own default.
+    for key in ('lr', 'd_lr_mult', 'prior_lr_mult', 'beta1', 'beta2', 'reg_coeff', 'reg_kappa', 'lambda_ep'):
+        assert kwargs[key] == defaults[key], key
