@@ -174,6 +174,12 @@ def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool 
     weights, so give networks with matching shapes different seeds (the
     examples use G=0, D=1, E=2). R2 tables do not depend on the seed.
 
+    Values also depend on each parameter's position in
+    ``module.named_parameters()`` of the module passed: a submodule initialized
+    on its own gets different values than inside its whole network, and
+    adding or reordering parameters shifts later values. Initialize each whole
+    network in one call.
+
     Kept as-is: frozen parameters, buffers, ``KEEP`` declarations, zero
     vectors and constant or identity matrices the constructor set on purpose.
     With ``strict=True`` any other trainable parameter without a declaration

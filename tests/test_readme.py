@@ -16,7 +16,7 @@ def _shrink(code, original):
 
 def test_readme_loop_and_trainer_snippet_run():
     loop = next(b for b in BLOCKS if "make_critic_penalty(opt_d)" in b and "for step in range" in b)
-    trainer = next(b for b in BLOCKS if "GANTrainer(get_recipe()" in b)
+    trainer = next(b for b in BLOCKS if "GANTrainer(recipe, G, D, prior=prior)" in b)
     torch.manual_seed(0)
     namespace = {"__name__": "__readme__"}
     exec(compile(_shrink(loop, "get_recipe(total_steps=2000)"), "README.md", "exec"), namespace)
