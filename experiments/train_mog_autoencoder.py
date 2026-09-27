@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """Fixed-sigma particle routing scout; one seed, mechanism ablations only."""
 import argparse
-import copy
 import hashlib
 import json
 import math
@@ -200,7 +199,7 @@ def train(arm, cfg):
     for seed, module in enumerate((g, d, e)):
         init.deterministic_orthogonal_(module, seed=seed)
     initial_sigma = prior.sigma.detach().clone()
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e)
     base_lrs = [[group["lr"] for group in o.param_groups] for o in (opt_g, opt_d)]
     adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(opt_d), ParticleRegularizer()
     data_rng = draw_rng(device, cfg.seed + 2)

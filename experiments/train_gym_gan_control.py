@@ -109,7 +109,7 @@ def train(cfg):
     recipe = training_recipe(cfg)
     init.deterministic_orthogonal_(bundle["D"], seed=1)
     optimizer, optimizer_d = recipe.make_optimizers(bundle["G"], bundle["D"], bundle["prior"],
-        encoder=bundle["E"], ema_critic=copy.deepcopy(bundle["D"]), fused=device.type == "cuda")
+        encoder=bundle["E"], fused=device.type == "cuda")
     provenance = capture_provenance(out, cfg, records, selection, bundle)
     optimizers = (optimizer, optimizer_d)
     base_rates = [[g["lr"] for g in opt.param_groups] for opt in optimizers]

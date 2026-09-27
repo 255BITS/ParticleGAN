@@ -207,7 +207,7 @@ def train(cfg, resume=None):
     # Deterministic init before optimizers and any resume; frozen pretrained features stay as loaded.
     init.deterministic_orthogonal_(g, seed=0)
     init.deterministic_orthogonal_(d, seed=1)
-    og, od = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg.get('fused_adam', False))
+    og, od = recipe.make_optimizers(g, d, prior, fused=cfg.get('fused_adam', False))
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]

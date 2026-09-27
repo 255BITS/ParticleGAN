@@ -94,8 +94,7 @@ def discriminator_loss(d, real, fake, c, context, gan, penalties, ucd_weight):
     """Each D has its own Rp, UCD and gradient-penalty objective, in its own input space.
 
     ``penalties`` maps role -> ``recipe.make_critic_penalty(opt_d, ...)`` (or is
-    one penalty for every role); each role's EMA critic is the same-named
-    submodule of the optimizer's EMA module.
+    one penalty for every role).
     """
     terms = {}
     for name in d.roles():
@@ -273,7 +272,7 @@ def train(cfg):
     for seed, module in enumerate((g, d, e)):
         if module is not None:
             init.deterministic_orthogonal_(module, seed=seed)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e,
                                           fused=device.type == "cuda")
     ema_e = copy.deepcopy(e) if e is not None else None
     if ema_e is not None:

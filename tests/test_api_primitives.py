@@ -39,8 +39,8 @@ def test_explicit_generators_leave_global_rng_untouched():
     assert not list(gaussian.parameters())
 
 
-def test_penalty_early_form_value_derivative_and_callable_match():
-    # Before the critic LR anneals (s == 1): R1 on reals plus a cap on fakes, RMS units.
+def test_penalty_value_derivative_and_callable_match():
+    # R1 on reals plus a cap on fakes, RMS units; a linear critic has input gradient w.
     discriminator = nn.Linear(2, 1, bias=False).double()
     with torch.no_grad():
         discriminator.weight.copy_(torch.tensor([[3., 4.]]))
@@ -52,7 +52,7 @@ def test_penalty_early_form_value_derivative_and_callable_match():
     expected = 0.5 * (w.square().sum() / 2 + (w.norm() / 2 ** .5 - 1).relu().square())
     torch.testing.assert_close(penalty, expected.detach())
     torch.testing.assert_close(regularizer(discriminator, real, fake), penalty)
-    assert stats["applied"] and stats["center"] == 1 and stats["s"] == 1 and stats["phase"] == "a"
+    assert stats["applied"] and stats["center"] == 1 and stats["r1"] == 12.5
     penalty.backward()
     expected.backward()
     torch.testing.assert_close(discriminator.weight.grad, w.grad.unsqueeze(0))
@@ -185,14 +185,14 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     assert Recipe(**recipe.to_dict()) == recipe
     prior = recipe.make_prior()
     assert prior.z.shape == (8, 2)
-    critic_opt = recipe.make_critic_optimizer(nn.Linear(2, 1), ema_critic=nn.Linear(2, 1))
+    critic_opt = recipe.make_critic_optimizer(nn.Linear(2, 1))
     assert recipe.make_critic_penalty(critic_opt).regularizer.coeff == .3
     assert recipe.make_prior_regularizer().weight == .4
     generator, discriminator = nn.Linear(2, 2), nn.Linear(2, 1)
     generator.bias.requires_grad_(False)
     opt_g, opt_d = recipe.make_optimizers(generator, discriminator, prior)
     assert [g["lr"] for g in opt_g.param_groups] == [.001, .002]
-    assert opt_d.param_groups[0]["lr"] == .001
+    assert opt_d.param_groups[0]["lr"] == .001 * .5  # d_lr_mult .5
     assert all(p is not generator.bias for g in opt_g.param_groups for p in g["params"])
     assert opt_g.param_groups[1]["params"] == [prior.z]
     for frozen in (GaussianPrior(2), ParticlePrior(8, 2, learnable=False)):

@@ -113,7 +113,7 @@ def train(cfg):
     fused = dict(fused=True) if device.type == "cuda" else {}
     opt_g = recipe.make_generator_optimizer(
         list(bundle["E_control"].parameters()) + list(bundle["G"].branches[1].parameters()), **fused)
-    opt_r = recipe.make_critic_optimizer(bundle["R"], ema_critic=copy.deepcopy(bundle["R"]), **fused)
+    opt_r = recipe.make_critic_optimizer(bundle["R"], **fused)
     optimizers = (opt_g, opt_r)
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     penalty = recipe.make_critic_penalty(opt_r)

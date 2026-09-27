@@ -50,7 +50,7 @@ def test_cifar_ddgan_pretrained_backbone_kept(fake_imagenet):
         init.deterministic_orthogonal_(g, seed=0)
         init.deterministic_orthogonal_(d, seed=1)
         ema.load_state_dict(d.state_dict())
-        recipe.make_optimizers(g, d, prior, ema_critic=ema)
+        recipe.make_optimizers(g, d, prior)
     _check(d, d, run)
 
 
@@ -62,5 +62,5 @@ def test_particle_direct_critic_pretrained_backbone_kept(fake_imagenet):
     def run(ema):
         init.deterministic_orthogonal_(d, seed=1)
         ema.load_state_dict(d.state_dict())
-        get_recipe(z_dim=4, num_particles=8).make_optimizers(g, d, ema_critic=ema)
+        get_recipe(z_dim=4, num_particles=8).make_optimizers(g, d)
     _check(d, d.critic, run)

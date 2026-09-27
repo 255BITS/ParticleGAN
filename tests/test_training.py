@@ -43,9 +43,10 @@ def test_winning_recipe_is_the_common_default():
     assert get_recipe() == Recipe()
     winner = get_recipe()
     assert winner.name == 'k3p'
-    assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., 1., 0.)
-    assert (winner.reg_anchor_weight, winner.direct_particle_gain) == (1., True)
-    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)
+    assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., .3, 0.)
+    assert winner.amsgrad and not hasattr(winner, "reg_anchor_weight")
+    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.0085, (0., .999), 2., .5)
+    assert (winner.lr_floor, winner.input_noise_std, winner.output_noise_std) == (1., 0., 0.)
     assert isinstance(make_trainer(), GANTrainer)
 
 
@@ -88,10 +89,11 @@ def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
     trainer.step(torch.randn(6, 2))
     checkpoint = trainer.state_dict()
     recipe = dict(checkpoint["recipe"])
-    for key in ("reg_anchor_weight", "direct_particle_gain"):
-        del recipe[key]
     old = {**checkpoint, "recipe": {**recipe, "loss_type": "logistic", "gan_mode": "rp",
-                                    "reg_arm": "k3p", "reg_method": "autograd"}}
+                                    "reg_arm": "k3p", "reg_method": "autograd",
+                                    # the removed direct-particle response and EMA anchor
+                                    "direct_particle_gain": True, "direct_particle_betas": [0.0, 0.9],
+                                    "reg_anchor_decay": 0.999, "reg_anchor_weight": 1.0}}
     restored = make_trainer()
     restored.load_state_dict(old)
     assert restored.completed_steps == 1

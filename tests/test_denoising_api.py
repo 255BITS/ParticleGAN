@@ -88,8 +88,9 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
     for source, key in ((old_prior, "prior_lr_mult"), (old_noise, "noise_lr_mult")):
         if source.kind == "learned":
             groups.append({"params": list(source.parameters()), "lr": cfg["lr"] * cfg[key]})
-    old_opts = (torch.optim.Adam(groups, betas=(cfg["beta1"], cfg.get("beta2", .999))),
-                torch.optim.Adam(old_d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], cfg.get("beta2", .999))))
+    old_opts = (torch.optim.Adam(groups, betas=(cfg["beta1"], cfg.get("beta2", .999)), amsgrad=recipe.amsgrad),
+                torch.optim.Adam(old_d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], cfg.get("beta2", .999)),
+                                 amsgrad=recipe.amsgrad))
     # Compare multiple real Adam updates, including each separately rated source.
     for current, original in zip((opt_g, opt_d), old_opts):
         assert len(current.param_groups) == len(original.param_groups)
@@ -110,7 +111,7 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
     torch.testing.assert_close(torch.autograd.grad(actual, rows)[0],
                                torch.autograd.grad(expected, rows)[0], rtol=0, atol=0)
     # Every trainer follows the recipe's default penalty and LR schedule.
-    assert recipe.reg_anchor_weight == get_recipe().reg_anchor_weight
+    assert set(recipe._penalty_options()) == {"coeff", "kappa", "lazy_k"}
     if trainer is train_trajectory:
         assert (recipe.lr_floor, recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (
             get_recipe().lr_floor, get_recipe().network_lr_floor, get_recipe().network_lr_horizon_cap)

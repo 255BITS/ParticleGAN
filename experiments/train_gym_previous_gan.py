@@ -89,7 +89,7 @@ def train(cfg):
     init.deterministic_orthogonal_(bundle['D'], seed=1)
     init.deterministic_orthogonal_(bundle['E'], seed=2)
     opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
-        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
+        encoder=bundle['E'], fused=device.type == 'cuda')
     provenance = dict(sources=sources, source_archive_sha256=sha256(out / 'source.zip'),
         episodes=dict(path=cfg['episodes'], sha256=sha256(cfg['episodes'])),
         expert_data=dict(count=len(triples), episode_ids=np.unique(records['episode_ids']).tolist(),

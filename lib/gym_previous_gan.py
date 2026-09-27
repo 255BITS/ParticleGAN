@@ -66,7 +66,7 @@ def adversarial_loss(d, real, fakes, terrain, gan, *, reg=None, marginal_weight=
     """Average prior/encoded paths per role; detach all fake graphs for D updates.
 
     ``reg`` (D update) is the recipe's critic penalty (``recipe.make_critic_penalty``)
-    or a role -> penalty dict; each role's EMA submodule is its anchor.
+    or a role -> penalty dict.
     """
     terms, roles = {}, {}
     for role in d.roles():

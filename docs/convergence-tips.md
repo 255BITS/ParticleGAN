@@ -188,10 +188,12 @@ LR: the cap damps the game just as well (any sample-point penalty does) but
 leaves D usable slope below the cap, which buys sharper modes at an honest
 core width — 100/100 modes and hq 0.986 at 7k steps, core σ ratio 0.866,
 zero collapses over 5 seeds, bar (100 modes & hq ≥ 0.9) crossed by ~5.5k.
-The example now trains the recipe's critic penalty (K3P, which starts as RMS
-R1 plus a fake-side cap and hands over to one-sided caps with an EMA-critic
-anchor). The shipped example trains 7k steps with a delayed cosine anneal for a
-stable endpoint.
+The campaign's recipe is recorded below. The package default has since moved
+on: the example now trains `get_recipe()` (K3P: zero-centred R1 on reals plus
+a one-sided cap on fakes, coeff .3, constant LRs G .0085 / D .00425 with
+AMSGrad, no noise, no anneal; see [k3p.md](k3p.md)).
+
+Campaign recipe (historical):
 
 | Ingredient | Value | Why |
 |---|---|---|

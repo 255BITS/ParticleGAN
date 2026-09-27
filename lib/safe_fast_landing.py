@@ -12,7 +12,6 @@ both score below a quick soft landing.
 accepted controller step. Gym uses the same weights on a short kinematic
 unroll of the physical action; `particle.yaml` leaves the term off.
 """
-import copy
 
 import torch
 from torch import nn
@@ -307,7 +306,7 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, safe_fast_weight=SAFE_FA
     critic = _Critic()
     init.deterministic_orthogonal_(critic, seed=1)  # make_critic_optimizer keeps weights
     opt = _gain_optimizer(recipe, beta)
-    opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
+    opt_d = recipe.make_critic_optimizer(critic)
     cap = recipe.make_critic_penalty(opt_d)
     rates = [[group["lr"] for group in o.param_groups] for o in (opt, opt_d)]
     hold = 1.3 * float(norm.edit_rms)

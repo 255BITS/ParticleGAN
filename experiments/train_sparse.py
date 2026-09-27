@@ -272,7 +272,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     init.deterministic_orthogonal_(G, seed=0)
     init.deterministic_orthogonal_(D, seed=1)
     # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
-    opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+    opt_G, opt_D = recipe.make_optimizers(G, D, prior)
     ema_G, ema_prior = copy.deepcopy(G), copy.deepcopy(prior)
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)

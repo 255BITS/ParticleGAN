@@ -34,11 +34,12 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     recipe = get_recipe(num_particles=16)
     g, d = nn.Linear(2, 2), LinearSkipDiscriminator()
     trainer = GANTrainer(recipe, g, d)
-    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.00425, .0085]
+    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.0085, .017]
     assert [group['lr'] for group in trainer.opt_d.param_groups] == [.00425]
-    assert all(group['betas'] == (0., .999) for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
+    assert all(group['betas'] == (0., .999) and group['amsgrad']
+               for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
     assert isinstance(trainer.penalty.regularizer, GradientPenalty)
-    assert trainer.ema_D is not None and trainer.latent_damping is not None
+    assert trainer.latent_damping is not None and not hasattr(trainer.opt_d, "ema_critic")
     assert isinstance(trainer.loss, GANLoss)
     result = trainer.step(torch.randn(8, 2))
     assert torch.equal(result['loss_g'], result['loss_gan'] + 0. * result['prior_regularization'])
@@ -51,9 +52,9 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     dict(prior_kind='mog', sigma_rel=.025, encoder_mode='hard')])
 def test_component_choices_share_the_winning_training_defaults(options):
     recipe = get_recipe(**options)
-    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (1., 1., 0., (0., .999))
-    assert (recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (.01, 1600)
-    assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult) == (.00425, 1., 2.)
+    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (.3, 1., 0., (0., .999))
+    assert (recipe.lr_floor, recipe.resolved_network_lr_floor, recipe.network_lr_horizon_cap) == (1., 1., None)
+    assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult, recipe.amsgrad) == (.0085, .5, 2., True)
 
 
 @pytest.mark.parametrize('kwargs', [dict(in_dim=0), dict(hidden_dim=0), dict(n_hidden=0),

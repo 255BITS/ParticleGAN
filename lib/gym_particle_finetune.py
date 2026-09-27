@@ -83,7 +83,7 @@ def edit_game(recipe, critic, **adam_kwargs):
     ``opt_r`` is ``recipe.make_critic_optimizer`` with a fresh EMA copy of the
     critic; ``penalty`` is ``recipe.make_critic_penalty(opt_r)``.
     """
-    opt_r = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic), **adam_kwargs)
+    opt_r = recipe.make_critic_optimizer(critic, **adam_kwargs)
     return recipe.make_loss(), opt_r, recipe.make_critic_penalty(opt_r)
 
 
