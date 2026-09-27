@@ -1,23 +1,30 @@
 """Frozen transfer hosts that are problem-only toys, run on the shared runner.
 
-A host is *migrated* when its module declares a ``benchmarks.toy_runner.ToyProblem``
-subclass whose ``name`` is the frozen host name and which constructs without
-arguments (``benchmarks.locked_shared.mode_hold.ModeHold`` is the reference).
-The harness then contributes only the recipe under test: its global fields,
-the declared noise and the model policy's network horizon, at the problem's
-own task shape (``problem.recipe()``'s z_dim / num_particles / batch_size /
-total_steps). ``benchmarks.toy_runner.run`` builds the optimizers (which own
-the LR schedule), loss, critic penalty, prior, noise and EMA from it.
+``HOSTS`` names each frozen host's ``benchmarks.toy_runner.ToyProblem`` class
+explicitly as (module, class). A host is *migrated* once that attribute exists
+and is a ``ToyProblem``; its no-argument construction is the frozen host arm.
+The problem's own ``name`` need not equal the host name (``TwoPole.name`` is
+``"locked_two_pole"``; ``Unipolar`` sets it per instance), so it is never used
+for lookup. ``benchmarks.locked_shared.mode_hold.ModeHold`` is the reference.
 
-Receipts are read from the recipe-built optimizers after training (their
-schedule state, group roles and base rates), never recomputed from LR
-formulas. Hosts that are not migrated yet still own their optimizers and are
-reported as such (``recipe_owned`` is False); see ``legacy_noise_adapters``.
+The harness contributes only the recipe under test: its global fields, the
+declared noise and the model policy's network horizon, at the problem's own
+task shape (``problem.recipe()``'s z_dim / num_particles / batch_size /
+total_steps). ``benchmarks.toy_runner.ToyRun`` builds the optimizers (which own
+the LR schedule), loss, critic penalty, prior, noise and EMA from it; the
+harness only calls ``step()`` and records the frozen 24 observations.
+
+Receipts are read from the public ``ToyRun`` after training: each recipe-built
+optimizer's saved schedule state, group roles and base rates. Nothing is
+recomputed from LR formulas. Hosts that are not migrated yet still own their
+optimizers and are reported as such (``recipe_owned`` is False); see
+``legacy_noise_adapters``.
 """
 from __future__ import annotations
 
 from importlib import import_module
 import json
+import math
 from pathlib import Path
 import time
 
@@ -32,30 +39,27 @@ from .protocol import requirements
 ROUTE = "problem-only toy on benchmarks.toy_runner"
 TASK_SHAPE = ("z_dim", "num_particles", "batch_size", "total_steps")
 NOISE_FIELDS = ("output_noise_std", "input_noise_std", "input_noise_anneal_end", "output_noise_warmup")
-HOST_MODULES = {
-    "two_pole": "benchmarks.locked_shared.two_pole",
-    "trajectory": "benchmarks.locked_shared.trajectory",
-    "mode_hold": "benchmarks.locked_shared.mode_hold",
-    "residual_student": "benchmarks.locked_shared.hosts.residual_student",
-    "unipolar": "benchmarks.locked_shared.hosts.unipolar",
-    "ae_gan_hold": "benchmarks.locked_shared.hosts.ae_gan_hold",
-    "cover_leftover": "benchmarks.locked_shared.hosts.cover_leftover",
-    "unused_token_hold": "benchmarks.locked_shared.hosts.unused_token_hold",
-    "mid_scale_identity": "benchmarks.locked_shared.hosts.mid_scale_identity",
+# Frozen host name -> (module, ToyProblem class).
+HOSTS = {
+    "two_pole": ("benchmarks.locked_shared.two_pole", "TwoPole"),
+    "trajectory": ("benchmarks.locked_shared.trajectory", "Trajectory"),
+    "mode_hold": ("benchmarks.locked_shared.mode_hold", "ModeHold"),
+    "residual_student": ("benchmarks.locked_shared.hosts.residual_student", "ResidualStudent"),
+    "unipolar": ("benchmarks.locked_shared.hosts.unipolar", "Unipolar"),
+    "ae_gan_hold": ("benchmarks.locked_shared.hosts.ae_gan_hold", "AEGanHold"),
+    "cover_leftover": ("benchmarks.locked_shared.hosts.cover_leftover", "CoverLeftover"),
+    "unused_token_hold": ("benchmarks.locked_shared.hosts.unused_token_hold", "UnusedTokenHold"),
+    "mid_scale_identity": ("benchmarks.locked_shared.hosts.mid_scale_identity", "MidScaleIdentity"),
 }
 
 
 def problem_class(name: str):
     """The host's ``ToyProblem`` class, or None while the host owns its training loop."""
-    if name not in HOST_MODULES:
+    if name not in HOSTS:
         return None
-    module = import_module(HOST_MODULES[name])
-    found = [value for value in vars(module).values()
-             if isinstance(value, type) and issubclass(value, toy_runner.ToyProblem)
-             and value.__module__ == module.__name__ and value.name == name]
-    if len(found) > 1:
-        raise ValueError(f"{name}: several ToyProblem classes share the host name")
-    return found[0] if found else None
+    module, attribute = HOSTS[name]
+    value = getattr(import_module(module), attribute, None)
+    return value if isinstance(value, type) and issubclass(value, toy_runner.ToyProblem) else None
 
 
 def is_migrated(name: str) -> bool:
@@ -82,8 +86,8 @@ def problem_recipe(problem, base, noise: dict | None = None, model_policy: dict 
     return recipe
 
 
-def optimizer_receipts(toy) -> list[dict]:
-    """What each recipe-built optimizer holds after training: schedule state and groups."""
+def optimizer_receipts(toy: toy_runner.ToyRun) -> list[dict]:
+    """What each recipe-built optimizer of a ``ToyRun`` holds: schedule state and groups."""
     def receipt(role, optimizer):
         return dict(role=role, optimizer=type(optimizer).__name__,
                     lr_schedule=optimizer.lr_schedule.state_dict(),
@@ -113,28 +117,47 @@ def noise_receipt(recipe, completed_steps: int, eval_scope: str) -> dict:
                 output_noise_learnable=False, output_scale_parameter_count=0)
 
 
+def _jsonl(path):
+    """One JSON line per observation (``tail -f``), or a no-op without a path."""
+    if path is None:
+        return lambda row: None
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("")
+
+    def emit(row):
+        with path.open("a") as handle:
+            handle.write(json.dumps(row, allow_nan=False, default=float) + "\n")
+    return emit
+
+
 def run_problem(spec: dict, base, noise: dict | None = None, *, model_policy: dict | None = None,
                 eval_scope: str = "generated_samples", log_path: str | Path | None = None):
-    """Train one migrated host on the shared runner; ``(result, context)`` in harness form."""
+    """Train one migrated host on a public ``ToyRun``; ``(result, context)`` in harness form."""
     started = time.perf_counter()
     problem = problem_class(spec["name"])()
     recipe = problem_recipe(problem, base, noise, model_policy)
-    if recipe.total_steps != spec["steps"]:
-        raise ValueError(f"{spec['name']}: problem budget {recipe.total_steps} != frozen {spec['steps']}")
-    runs = []
-
-    def observer(step, measure):
-        if not runs:
-            runs.append(measure.__self__)  # the ToyRun, for its optimizers' receipts
-        checkpoint(step, measure)
-    with recording(spec["steps"]) as recorder:
-        out = toy_runner.run(problem, recipe=recipe, steps=spec["steps"], seed=0, device=host_device(),
-                             observer=observer, log_path=log_path)
-    toy, rules = runs[0], requirements(spec)
+    steps = spec["steps"]
+    if recipe.total_steps != steps:
+        raise ValueError(f"{spec['name']}: problem budget {recipe.total_steps} != frozen {steps}")
+    toy = toy_runner.ToyRun(problem, recipe=recipe, seed=0, device=host_device())
+    emit = _jsonl(log_path)
+    with recording(steps) as recorder:
+        for _ in range(steps):
+            losses = {k: float(v) for k, v in toy.step().items() if k != "step"}
+            if not all(math.isfinite(value) for value in losses.values()):
+                raise FloatingPointError(f"{spec['name']}: non-finite loss at step {toy.completed_steps}")
+            observed = len(recorder.curve)
+            checkpoint(toy.completed_steps, lambda: {**toy.measure(), "ema": toy.measure(ema=True)})
+            if len(recorder.curve) > observed:
+                emit({"toy": spec["name"], **recorder.curve[-1], **losses})
+    live, ema = toy.measure(), toy.measure(ema=True)
+    emit({"toy": spec["name"], "event": "final", "live": live, "ema": ema})
+    rules = requirements(spec)
     keys = [key for key, _, _ in rules]
-    result = dict(live={k: out["live"][k] for k in keys if k in out["live"]},
-                  ema={k: out["ema"][k] for k in keys if k in out["ema"]},
-                  observations=recorder.curve, hold=out["hold"],
+    result = dict(live={k: live[k] for k in keys if k in live},
+                  ema={k: ema[k] for k in keys if k in ema},
+                  observations=recorder.curve,
                   convergence=sustained(recorder.curve, rules, expected_steps=recorder.steps),
                   optimizers=optimizer_receipts(toy), seconds=time.perf_counter() - started)
     context = dict(applied=[], shapes={"host": ROUTE, "problem": problem.name},

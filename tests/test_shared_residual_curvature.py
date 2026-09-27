@@ -2,6 +2,8 @@
 from copy import deepcopy
 import pytest
 import torch
+
+from benchmarks.transfer_suite import vector_tasks
 from benchmarks.transfer_suite.compare_defaults import effective_spec,plan
 from benchmarks.transfer_suite.formulations import axes
 from benchmarks.transfer_suite.shared_critic_research import SharedResearchCritic,ARCHITECTURES as BASES
@@ -9,6 +11,14 @@ from benchmarks.transfer_suite.shared_residual_curvature_research import ARCHITE
 from benchmarks.transfer_suite.shared_residual_curvature_search import episode
 from benchmarks.transfer_suite.shared_discriminator_search import recipe
 from benchmarks.transfer_suite.shared_variants import architecture_spec
+
+# Recipe receipts ("applied") are read back from the recipe-built optimizers of
+# the migrated vector host (toy-refactor/transfer_vector); the pre-migration
+# host owns its Adam and records none.
+needs_runner_vector_host = pytest.mark.skipif(
+    not hasattr(vector_tasks, "VectorTask"),
+    reason="vector host not on the shared runner yet (toy-refactor/transfer_vector)")
+
 
 @pytest.mark.parametrize('card',ARCHITECTURES,ids=lambda c:c['name'])
 def test_exact_base_initial_score_rng_and_cap_path(card):
@@ -29,6 +39,7 @@ def test_exact_base_initial_score_rng_and_cap_path(card):
     assert torch.allclose(model(x),torch.cat([model(p[None]) for p in x]),atol=1e-7)
 
 
+@needs_runner_vector_host
 def test_discriminator_only_overrides_and_actual_receipts():
     torch.set_num_threads(1)
     job=deepcopy(next(j for j in plan() if j['spec']['name']=='vector_unequal_mass'))

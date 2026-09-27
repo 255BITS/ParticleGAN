@@ -29,14 +29,15 @@ then completes the other13tasks for the candidate with most sustained passes,
 lowest mean metric shortfall and finally lexical candidate name. No new fitting
 occurs after screening. Seed0 only; EMA remains separate.
 
-```bash
-/tmp/pr38-default-env/bin/python -m pytest -q tests/test_relative_step_adapter.py
-/tmp/pr38-default-env/bin/python -u -m benchmarks.transfer_suite.shared_adapter_search \
-  --output /tmp/shared-adapter-replay > /tmp/shared-adapter-replay.log 2>&1
-tail -f /tmp/shared-adapter-replay.log
-```
+The runner (`shared_adapter_search`) and the Adam-patching implementation have
+been removed: the rule changed Adam's update from outside the optimizer, and
+optimizers now come only from the recipe. The exact sources and their contract
+test are archived in
+`reports/transfer_suite/unadjusted/runs/shared-adapter-search/reproduction/`.
+`relative_step_adapter.mechanism` keeps the declared card so archived rows still
+validate. A new attempt belongs in the recipe-built optimizers as an option.
 
-Use a fresh output directory. The output records the full shared recipe plus an
+The output recorded the full shared recipe plus an
 explicit `mechanism` card, all observations/actions, tensor-level gradient and
 proposal norms, actual attenuation, source archive and runtime fingerprints.
 Importing these rows into the primary leaderboard must retain the mechanism

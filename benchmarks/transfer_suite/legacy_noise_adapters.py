@@ -400,8 +400,8 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
     still owns its training loop runs unchanged with its own optimizers and
     schedule plus this module's ``NoisePolicy``; its record says
     ``recipe_owned: False`` and cannot count toward a common-recipe claim.
-    (The old ``optimizer_defaults`` Adam/``FixedControl`` override is not used:
-    it cannot reach host-owned rates any more and is deleted with the hosts.)
+    ``NoisePolicy`` (and its learnable output-scale registration) serves only
+    those hosts and goes when the last of them migrates.
     """
     from benchmarks.locked_shared import baseline
     from .compare_defaults import candidate

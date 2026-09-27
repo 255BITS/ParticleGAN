@@ -39,9 +39,22 @@ class Tiny(ToyProblem):
         return "PASS" if metrics["mean_err"] <= 10.0 else "FAIL"
 
 
+class Renamed(Tiny):
+    """The problem's own label differs from the host name (as ``TwoPole``'s does)."""
+    name = "locked_tiny"
+
+
+class InstanceNamed(Tiny):
+    """The label is set per instance (as ``Unipolar``'s is); the class keeps the default."""
+    name = ToyProblem.name
+
+    def __init__(self, arm="locked"):
+        self.name = "tiny" if arm == "locked" else f"tiny_{arm}"
+
+
 @pytest.fixture
 def tiny_host(monkeypatch):
-    monkeypatch.setattr(problem_hosts, "problem_class", lambda name: Tiny if name == "tiny" else None)
+    monkeypatch.setitem(problem_hosts.HOSTS, "tiny", (__name__, "Tiny"))
     threads = torch.get_num_threads()
     torch.set_num_threads(1)
     yield
@@ -49,14 +62,37 @@ def tiny_host(monkeypatch):
 
 
 def test_mode_hold_is_discovered_as_a_problem_host():
-    assert problem_hosts.problem_class("mode_hold").name == "mode_hold"
+    from benchmarks.locked_shared.mode_hold import ModeHold
+    assert problem_hosts.problem_class("mode_hold") is ModeHold
     assert problem_hosts.problem_class("vector_two_broad") is None
 
 
-def test_problem_host_uses_common_recipe_and_regrades_from_schedule_state(tiny_host):
+def test_every_host_maps_to_an_importable_module_and_a_problem_class_or_none():
+    assert len(problem_hosts.HOSTS) == 9
+    for name in problem_hosts.HOSTS:
+        cls = problem_hosts.problem_class(name)
+        assert cls is None or issubclass(cls, ToyProblem), name
+
+
+def test_lookup_is_by_declared_class_not_by_the_problem_label(monkeypatch):
+    monkeypatch.setitem(problem_hosts.HOSTS, "renamed", (__name__, "Renamed"))
+    monkeypatch.setitem(problem_hosts.HOSTS, "instance", (__name__, "InstanceNamed"))
+    monkeypatch.setitem(problem_hosts.HOSTS, "absent", (__name__, "NotDeclaredYet"))
+    monkeypatch.setitem(problem_hosts.HOSTS, "not_a_problem", (__name__, "SPEC"))
+    assert problem_hosts.problem_class("renamed") is Renamed
+    assert problem_hosts.problem_class("instance") is InstanceNamed
+    assert InstanceNamed.name == "toy" and InstanceNamed().name == "tiny"
+    assert not problem_hosts.is_migrated("absent") and not problem_hosts.is_migrated("not_a_problem")
+
+
+def test_problem_host_uses_common_recipe_and_regrades_from_schedule_state(tiny_host, tmp_path):
     base = gan_v3_recipe()
-    result, context = problem_hosts.run_problem(SPEC, base, NOISE, model_policy=POLICY)
+    log = tmp_path / "tiny.log"
+    result, context = problem_hosts.run_problem(SPEC, base, NOISE, model_policy=POLICY, log_path=log)
     assert [p["step"] for p in result["observations"]] == list(range(1, 25))
+    assert all("mean_err" in p["ema"] for p in result["observations"])
+    rows = [json.loads(line) for line in log.read_text().splitlines()]
+    assert [row["step"] for row in rows[:-1]] == list(range(1, 25)) and rows[-1]["event"] == "final"
     executed = context["executed_recipe"]
     assert (executed["lr"], executed["total_steps"], executed["batch_size"]) == (base.lr, 24, 32)
     assert (executed["network_lr_horizon_cap"], executed["network_lr_floor"]) == (12, 0.01)
