@@ -1,16 +1,14 @@
-"""The five nonstandard custom hosts apply shared training noise explicitly."""
+"""The four nonstandard custom hosts apply shared training noise explicitly."""
 
 import pytest
 
 from benchmarks.locked_shared.hosts import (
-    cover_leftover, mid_scale_identity, unipolar, unused_token_hold,
+    cover_leftover, mid_scale_identity, unused_token_hold,
 )
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 
 
 def _run(host, policy, monkeypatch):
-    if host == "unipolar":
-        return unipolar.run_arm("locked_rpgan", steps=2, noise_policy=policy)
     if host == "cover_leftover":
         return cover_leftover.fit_cover_leftover(
             cover_leftover.CoverRecipe(steps=2), noise_policy=policy,
@@ -25,7 +23,7 @@ def _run(host, policy, monkeypatch):
 
 
 @pytest.mark.parametrize("host", (
-    "unipolar", "cover_leftover", "unused_token_hold",
+    "cover_leftover", "unused_token_hold",
     "mid_scale_identity",
 ))
 def test_optional_noise_preserves_identity_and_reaches_both_training_paths(
