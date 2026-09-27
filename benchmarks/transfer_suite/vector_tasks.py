@@ -1,4 +1,13 @@
-"""Predeclared vector-distribution transfer tasks; reserved data is never calibrated."""
+"""Predeclared vector-distribution transfer tasks; reserved data is never calibrated.
+
+Problem only: the 2-D targets (mixtures, spiral, annulus), the host MLPs, the
+sliced/mixture metrics and the verdict (``VectorTask``). Training runs on the
+shared ``benchmarks.toy_runner``; optimizers and their LR schedule, loss,
+critic penalty, noise and EMA come from the recipe::
+
+    python -m benchmarks.transfer_suite.vector_tasks --task vector_two_broad \
+        --log runs/toy-refactor/vector_two_broad.log
+"""
 from copy import deepcopy
 import hashlib
 import json
@@ -10,15 +19,18 @@ import traceback
 
 import torch
 
-from benchmarks.toy100.device import host_device, rng_fork_devices
-from particlegan import ParticlePrior, ParticleRegularizer
-from benchmarks.legacy.gan_loss import GANLoss
-from benchmarks.legacy.grad_regularizers import GradientPenalty
+from benchmarks.gan_v3 import gan_v3_recipe
+from benchmarks.locked_shared.observation import checkpoint, recording, sustained
+from benchmarks.toy100.device import host_device
+from benchmarks.toy_runner import Networks, ToyProblem, run
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
-from benchmarks.locked_shared.observation import sustained
-from benchmarks.smart_descent.controller import FEATURES, GradientFeedback
-from benchmarks.smart_descent.evaluate import FixedControl
+from particlegan import get_recipe, init
+from particlegan.training import output_noise_std
+
+# Nothing here reads this name; compare_defaults.optimizer_defaults (a core
+# file) still patches it for the frozen LR-control research.
+FixedControl = None
 
 OBSERVATIONS = 24
 EVAL_SAMPLES = 4096
@@ -198,87 +210,168 @@ def passes(metrics, thresholds):
                for key, op, bound in thresholds)
 
 
-def run_episode(spec, policy, *, ablation="none", fixed=False, allow_reserved=False):
-    """Serial CPU episode; only current gradients enter feedback, never toy metrics.
+class VectorTask(ToyProblem):
+    """One predeclared 2-D target on the host SimpleMLP generator and critic.
 
-    d_every/g_every vary update ratios on the shared outer-step clock. Evaluation
-    uses fixed independent draws. Reserved and unsupported families fail closed.
+    ``card`` is a declared research-discriminator card (``vector_discriminator``);
+    None keeps the host SimpleMLP critic.
+    """
+
+    def __init__(self, spec, card=None, *, allow_reserved=False):
+        self.spec = resolve(spec, allow_reserved=allow_reserved)
+        if self.spec.get("scale_start", 1.) != 1. or self.spec.get("scale_end", 1.) != 1.:
+            raise ValueError("a ramped target scale is not expressible on the shared runner "
+                             "(it has a one-shot shift, not a per-step target)")
+        if self.spec["d_every"] != 1 or self.spec["g_every"] != 1:
+            raise ValueError("the shared runner performs one critic and one generator update per step")
+        self.card, self.name = card, self.spec["name"]
+
+    def recipe(self):
+        s = self.spec
+        return get_recipe(z_dim=s["z_dim"], num_particles=s["particles"], batch_size=s["batch"],
+                          total_steps=s["steps"])
+
+    def networks(self, recipe, seed):
+        s = self.spec
+        generator = SimpleMLPGenerator(s["z_dim"], s["hidden"], s["layers"], 2)
+        generator = init.deterministic_orthogonal_(generator, seed=seed)
+        critic = init.deterministic_orthogonal_(vector_discriminator(s, self.card), seed=seed + 1)
+        prior = init.deterministic_orthogonal_(recipe.make_prior(), seed=seed)
+        return Networks(generator=generator, critics=critic, prior=prior)
+
+    def real(self, n, stream):
+        return sample_target(self.spec, n, stream, 0)
+
+    def metrics(self, model):
+        return score_samples(model.sample(EVAL_SAMPLES).x, self.spec, self.spec["steps"])
+
+    def verdict(self, metrics):
+        return "PASS" if passes(metrics, self.spec["thresholds"]) else "FAIL"
+
+
+def vector_discriminator(spec, card=None):
+    """The host critic, or the critic of a declared research card."""
+    from particlegan import BatchDistanceDiscriminator
+    from .shared_critic_research import constructor as smooth_constructor
+    if card is None:
+        return SimpleMLPDiscriminator(2, spec.get("d_hidden", spec["hidden"]),
+                                      spec.get("d_layers", spec["layers"]), spec["fourier"])
+    if card["implementation"] == "shared_batch_feature_v1":
+        if (card["feature"], card["placement"], card["trunk_normalization"],
+                card["name"]) != ("distance", "head", "center", "batchfeat_center6_distance_head"):
+            raise ValueError("only the promoted public batch-distance card is allowed")
+        return BatchDistanceDiscriminator(in_dim=2, hidden_dim=card["width"],
+            n_hidden=card["layers"], scales=tuple(card["kernel_scales"]),
+            beta=card["softplus_beta"], eps=card["eps"])
+    if card["implementation"] == "shared_critic_v1":
+        return smooth_constructor(card)(2, card["hidden"], card["layers"], card["fourier"])
+    raise ValueError("unknown declared discriminator")
+
+
+# Spec fields that declare the frozen transfer host's recipe (not its problem).
+HOST_RECIPE_FIELDS = ("lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_reg", "ema_decay",
+                      "loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")
+
+
+def spec_recipe(spec, schedule="cosine"):
+    """The frozen transfer host's declared GAN v3 recipe at the task's shape.
+
+    A fixed ``cosine`` card is that recipe's own schedule; ``constant`` is the
+    same recipe with ``lr_floor=1``. The recipe-built optimizers apply it.
+    """
+    if schedule not in ("cosine", "constant"):
+        raise ValueError(f"unknown fixed schedule: {schedule}")
+    cfg = resolve(spec, allow_reserved=True)
+    fields = {key: cfg[key] for key in HOST_RECIPE_FIELDS if key in cfg}
+    fields["betas"] = tuple(fields["betas"])
+    if schedule == "constant":
+        fields["lr_floor"] = 1.
+    return gan_v3_recipe(z_dim=cfg["z_dim"], num_particles=cfg["particles"], batch_size=cfg["batch"],
+                         total_steps=cfg["steps"], **fields)
+
+
+def _groups(toy):
+    """``(role, optimizer, group)`` for the g, prior and d groups of a 1G + prior + 1D run."""
+    (opt_d,) = toy.opt_d.values()
+    if len(toy.opt_g.param_groups) != 2 or len(opt_d.param_groups) != 1:
+        raise RuntimeError("expected generator, prior and critic optimizer groups")
+    return (("g", toy.opt_g, toy.opt_g.param_groups[0]), ("prior", toy.opt_g, toy.opt_g.param_groups[1]),
+            ("d", opt_d, opt_d.param_groups[0]))
+
+
+def train(problem, recipe=None, *, log_path=None):
+    """Run ``problem`` on the shared runner; the frozen 24-checkpoint result.
+
+    Observations (live, EMA under ``ema``) go through the shared
+    ``observation.Recorder``. ``actions`` and ``applied`` are receipts read
+    back from the recipe-built optimizers; nothing here sets a rate.
     """
     started = time.perf_counter()
-    result = dict(live={}, ema={}, observations=[], convergence={}, actions=[], controller_seconds=0.)
-    controller = None
+    recipe = problem.recipe() if recipe is None else recipe
+    actions, owner = [], {}
+
+    def observe(step, measure):
+        toy = owner.setdefault("toy", measure.__self__)  # the ToyRun whose measure this is
+        rates = {role: (group["lr"], group["base_lr"]) for role, _, group in _groups(toy)}
+        network, prior = (rates[role][0] / rates[role][1] for role in ("g", "prior"))
+        action = dict(step=step, multiplier=network)
+        if toy.recipe.network_lr_horizon_cap is not None:
+            action.update(network_multiplier=network, prior_multiplier=prior,
+                          network_lr_horizon_cap=toy.recipe.network_lr_horizon_cap)
+            if toy.recipe.network_lr_floor is not None:
+                action["network_lr_floor"] = float(toy.recipe.network_lr_floor)
+        (noisy,) = toy.noisy.values()
+        actions.append(action | dict(lr_g=rates["g"][0], lr_prior=rates["prior"][0], lr_d=rates["d"][0],
+                                     input_sigma=noisy.std,
+                                     output_sigma=output_noise_std(toy.recipe, step - 1)))
+        checkpoint(step, lambda: {**measure(), "ema": measure(ema=True)})
+
+    with recording(recipe.total_steps) as recorder:
+        outcome = run(problem, recipe=recipe, observer=observe, log_path=log_path)
+    toy = owner["toy"]
+    applied = [dict(role=role, lr=group["base_lr"], betas=list(group["betas"]),
+                    parameters=sum(p.numel() for p in group["params"]),
+                    optimizer="Adam" if isinstance(opt, torch.optim.Adam) else type(opt).__name__)
+               for role, opt, group in _groups(toy)]
+    nets = toy.nets
+    shapes = dict(real_batch=[recipe.batch_size, 2], latent_batch=[recipe.batch_size, recipe.z_dim],
+                  prior=list(nets.prior.z.shape),
+                  generator_parameters=sum(p.numel() for p in nets.generator.parameters()),
+                  discriminator_parameters=sum(p.numel() for p in nets.critics.parameters()))
+    strip = lambda row: {k: v for k, v in row.items() if k != "verdict"}
+    observations = recorder.curve
+    result = dict(live=strip(outcome["live"]), ema=strip(outcome["ema"]), observations=observations,
+                  actions=actions, applied=applied, shapes=shapes,
+                  update_counts=dict(g=toy.opt_g.completed_steps,
+                                     d=next(iter(toy.opt_d.values())).completed_steps),
+                  convergence=sustained(observations, problem.spec["thresholds"], expected_steps=recorder.steps),
+                  status=outcome["verdict"], hold=outcome["hold"], recipe=outcome["recipe"],
+                  seconds=time.perf_counter() - started)
+    json.dumps(result, allow_nan=False)
+    return result
+
+
+def run_episode(spec, policy, *, ablation="none", fixed=False, allow_reserved=False):
+    """One episode on the shared runner under the spec's declared host recipe.
+
+    Only fixed schedule cards run. The recipe-built optimizers own the LR, so
+    an adaptive (feedback) controller or its ablations cannot act here; they
+    return an ERROR result rather than silently running the fixed schedule.
+    """
+    started = time.perf_counter()
     try:
-        cfg = resolve(spec, allow_reserved=allow_reserved)
+        if not fixed:
+            raise NotImplementedError("adaptive LR controllers are not expressible: "
+                                      "recipe-built optimizers own the learning rate")
+        if ablation != "none":
+            raise ValueError("ablations apply to adaptive controllers only")
         torch.set_num_threads(1)
-        torch.manual_seed(0)
-        controller = (FixedControl if fixed else GradientFeedback)(policy, cfg["steps"], ablation=ablation)
-        data_rng, latent_rng = torch.Generator().manual_seed(0), torch.Generator().manual_seed(1)
-        penalty_rng = torch.Generator().manual_seed(2)
-        prior = ParticlePrior(cfg["particles"], cfg["z_dim"], init_std=.5, generator=torch.Generator().manual_seed(0))
-        generator = SimpleMLPGenerator(cfg["z_dim"], cfg["hidden"], cfg["layers"], 2)
-        critic = SimpleMLPDiscriminator(2, cfg.get("d_hidden", cfg["hidden"]), cfg.get("d_layers", cfg["layers"]), cfg["fourier"])
-        ema_g, ema_prior = deepcopy(generator), deepcopy(prior)
-        opt_g = torch.optim.Adam([{"params": generator.parameters(), "lr": cfg["lr"]},
-                                  {"params": prior.parameters(), "lr": cfg["lr"]*cfg["prior_lr_mult"]}], betas=tuple(cfg["betas"]))
-        opt_d = torch.optim.Adam(critic.parameters(), lr=cfg["lr"]*cfg["d_lr_mult"], betas=tuple(cfg["betas"]))
-        gan = GANLoss(cfg.get("loss_type", "logistic"), cfg.get("gan_mode", "rp"))
-        penalty = GradientPenalty(cfg["reg_arm"], coeff=cfg["reg_coeff"], kappa=cfg["reg_kappa"])
-        spread = ParticleRegularizer(weight=cfg["prior_reg"])
-        expected = {math.ceil(i*cfg["steps"]/OBSERVATIONS) for i in range(1, OBSERVATIONS+1)}
-        updates = {"g": 0, "d": 0}
-
-        def update(optimizer, step, role):
-            tick = time.perf_counter()
-            controller.step(optimizer, step, role=role)
-            result["controller_seconds"] += time.perf_counter()-tick
-            optimizer.step()
-            updates[role] += 1
-
-        @torch.no_grad()
-        def measure(model, latent, completed):
-            samples = model(latent.sample(EVAL_SAMPLES, generator=torch.Generator().manual_seed(990))[0])
-            return score_samples(samples, cfg, completed)
-
-        for step in range(cfg["steps"]):
-            completed = step+1
-            real = sample_target(cfg, cfg["batch"], data_rng, completed)
-            if step % cfg["d_every"] == 0:
-                fake = generator(prior.sample(cfg["batch"], generator=latent_rng)[0]).detach()
-                d_loss = gan.d_loss(critic(real), critic(fake))
-                d_loss += penalty(critic, real, fake, step=completed, generator=penalty_rng)*controller.regularization_scale("d")
-                opt_d.zero_grad(set_to_none=True)
-                d_loss.backward()
-                update(opt_d, step, "d")
-            if step % cfg["g_every"] == 0:
-                critic.requires_grad_(False)
-                try:
-                    latent = prior.sample(cfg["batch"], generator=latent_rng)[0]
-                    fake_logits = critic(generator(latent))
-                    real_g = sample_target(cfg, cfg["batch"], data_rng, completed)
-                    real_logits = critic(real_g) if gan.mode in ("rp", "ra") else None
-                    g_loss = gan.g_loss(fake_logits, real_logits)
-                    g_loss += spread(prior.z)*controller.regularization_scale("g")
-                    opt_g.zero_grad(set_to_none=True)
-                    g_loss.backward()
-                    update(opt_g, step, "g")
-                finally:
-                    critic.requires_grad_(True)
-                with torch.no_grad():
-                    for target, source in ((ema_g, generator), (ema_prior, prior)):
-                        for averaged, current in zip(target.parameters(), source.parameters()):
-                            averaged.mul_(cfg["ema_decay"]).add_(current, alpha=1-cfg["ema_decay"])
-            if completed in expected:
-                with torch.random.fork_rng(devices=rng_fork_devices()):
-                    live, ema = measure(generator, prior, completed), measure(ema_g, ema_prior, completed)
-                result["observations"].append(dict(**live, ema=ema, step=completed, seconds=time.perf_counter()-started))
-        result.update(live=live, ema=ema, update_counts=updates,
-                      convergence=sustained(result["observations"], cfg["thresholds"], expected_steps=expected),
-                      status="PASS" if passes(live, cfg["thresholds"]) else "FAIL")
-        json.dumps(result, allow_nan=False)
+        problem = VectorTask(spec, allow_reserved=allow_reserved)
+        result = train(problem, spec_recipe(spec, (policy or {}).get("schedule", "cosine")))
     except Exception:
-        result["error"] = traceback.format_exc()
-        result["status"] = "ERROR"
-    result.update(seconds=time.perf_counter()-started, actions=[] if controller is None else controller.trace)
+        result = dict(live={}, ema={}, observations=[], convergence={}, actions=[],
+                      error=traceback.format_exc(), status="ERROR")
+    result.update(seconds=time.perf_counter() - started, controller_seconds=0.)
     return result
 
 
@@ -288,8 +381,8 @@ def fingerprint():
              root/"lib/toy_models.py", root/"lib/toy_metrics.py",
              root/"benchmarks/locked_shared/observation.py",
              root/"benchmarks/learned_lr_evaluation.py",
-             *root.joinpath("benchmarks/smart_descent").glob("*.py"), Path(__file__)]
-    return dict(version="transfer-vectors-v2", seed=0, device=str(host_device()), threads=1,
+             root/"benchmarks/toy_runner.py", Path(__file__)]
+    return dict(version="transfer-vectors-v3", seed=0, device=str(host_device()), threads=1,
                 python=platform.python_version(), torch=str(torch.__version__), torch_git_revision=torch.version.git_version,
                 torch_build=torch.__config__.show(), cpu_capability=torch.backends.cpu.get_cpu_capability(),
                 evaluation_samples=EVAL_SAMPLES, observations=OBSERVATIONS,
@@ -297,4 +390,20 @@ def fingerprint():
 
 
 def fixed_policy(schedule="cosine"):
+    """The suite's fixed-schedule card (smart_descent card format; training reads only ``schedule``)."""
+    from benchmarks.smart_descent.controller import FEATURES
     return dict(version=2, features=list(FEATURES), weights=[[[0.]*5 for _ in range(2)] for _ in range(2)], interval=5, schedule=schedule)
+
+
+def main(argv=None):
+    """``python -m benchmarks.transfer_suite.vector_tasks --task NAME [toy_runner.main options]``."""
+    import argparse
+    from benchmarks.toy_runner import main as runner_main
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("--task", default=TASKS[0]["name"], choices=[t["name"] for t in TASKS])
+    args, rest = parser.parse_known_args(argv)
+    return runner_main(VectorTask(next(t for t in TASKS if t["name"] == args.task)), rest)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

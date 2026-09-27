@@ -1,6 +1,7 @@
 """Verify the public GAN default through real user-facing construction paths.
 
-Vector and image cases train through GANTrainer(gan_v3_recipe(), ...). The nine
+Vector cases train on the shared toy runner under gan_v3_recipe() at each
+task's shape; image cases through GANTrainer(gan_v3_recipe(), ...). The nine
 legacy auxiliary hosts retain their required custom loops, using public GAN
 primitives and the same unmodified global recipe. Frozen host data, model
 initialization order, RNG streams, resources, steps, measurements, and gates
@@ -26,7 +27,7 @@ import traceback
 
 import torch
 
-from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator, rng_fork_devices
+from benchmarks.toy100.device import add_device_argument, apply_device_policy, experiment_generator
 from benchmarks.gan_v3 import gan_v3_recipe, legacy_dict
 
 
@@ -162,25 +163,6 @@ def declared_spec(job, profile, base):
     return spec, card, variant
 
 
-def vector_discriminator(spec, card):
-    from particlegan import BatchDistanceDiscriminator
-    from lib.toy_models import SimpleMLPDiscriminator
-    from .shared_critic_research import constructor as smooth_constructor
-    if card is None:
-        return SimpleMLPDiscriminator(2, spec.get('d_hidden', spec['hidden']),
-                                      spec.get('d_layers', spec['layers']), spec['fourier'])
-    if card['implementation'] == 'shared_batch_feature_v1':
-        if (card['feature'], card['placement'], card['trunk_normalization'],
-                card['name']) != ('distance', 'head', 'center', 'batchfeat_center6_distance_head'):
-            raise ValueError('only the promoted public batch-distance card is allowed')
-        return BatchDistanceDiscriminator(in_dim=2, hidden_dim=card['width'],
-            n_hidden=card['layers'], scales=tuple(card['kernel_scales']),
-            beta=card['softplus_beta'], eps=card['eps'])
-    if card['implementation'] == 'shared_critic_v1':
-        return smooth_constructor(card)(2, card['hidden'], card['layers'], card['fourier'])
-    raise ValueError('unknown declared discriminator')
-
-
 def optimizer_receipts(trainer):
     from particlegan import learning_rate_scale
     roles = (('g', trainer.opt_g.param_groups[0]),
@@ -235,72 +217,17 @@ def rate_action(trainer, completed):
                 lr_g=rates[0], lr_prior=rates[1], lr_d=rates[2])
 
 
-def setup_vector(spec, card, base):
-    from particlegan import GANTrainer, ParticlePrior
-    from lib.toy_models import SimpleMLPGenerator
+def run_vector(spec, card, base):
+    """The declared default on the shared runner (``vector_tasks.VectorTask``).
+
+    The problem is the frozen host's data, networks and metrics; ``base`` at
+    the task's shape is the recipe whose factories build everything else.
+    """
     from . import vector_tasks
-    cfg = vector_tasks.resolve(spec)
-    if cfg['d_every'] != 1 or cfg['g_every'] != 1:
-        raise ValueError('GANTrainer route requires one G and D update per frozen step')
     torch.set_num_threads(1)
-    torch.manual_seed(0)
-    data_rng = torch.Generator().manual_seed(0)
-    latent_rng = torch.Generator().manual_seed(1)
-    penalty_rng = torch.Generator().manual_seed(2)
     recipe = host_recipe(base, spec)
-    # The explicit prior is first, exactly as in the frozen vector host.
-    prior = recipe.make_prior(init_std=.5, generator=torch.Generator().manual_seed(0))
-    assert type(prior) is ParticlePrior
-    generator = SimpleMLPGenerator(cfg['z_dim'], cfg['hidden'], cfg['layers'], 2)
-    discriminator = vector_discriminator(spec, card)
-    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
-                                  latent_generator=latent_rng,
-                                  penalty_generator=penalty_rng)
-    shapes = shape_receipt(trainer, cfg['batch'], (2,))
-    return dict(trainer=trainer, cfg=cfg, data_rng=data_rng, shapes=shapes,
-                applied=optimizer_receipts(trainer), host_recipe=recipe)
-
-
-def run_vector(spec, card, base, *, max_steps=None):
-    from benchmarks.locked_shared.observation import sustained
-    from . import vector_tasks
-    started = time.perf_counter()
-    context = setup_vector(spec, card, base)
-    trainer, cfg, data_rng = context['trainer'], context['cfg'], context['data_rng']
-    expected = {math.ceil(i*cfg['steps']/24) for i in range(1, 25)}
-    observations, actions, losses = [], [], []
-    budget = cfg['steps'] if max_steps is None else min(max_steps, cfg['steps'])
-    for index in range(budget):
-        completed = index+1
-        real = vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
-        real_g = lambda: vector_tasks.sample_target(cfg, cfg['batch'], data_rng, completed)
-        stats = trainer.step(real, generator_real=real_g)
-        if not all(torch.isfinite(value) for key, value in stats.items()
-                   if key != 'step' and isinstance(value, torch.Tensor)):
-            raise FloatingPointError('nonfinite public trainer loss')
-        actions.append(rate_action(trainer, completed))
-        if completed in expected:
-            with torch.no_grad(), torch.random.fork_rng(devices=rng_fork_devices()):
-                def measure(model, prior):
-                    latent = prior.sample(vector_tasks.EVAL_SAMPLES,
-                                          generator=torch.Generator().manual_seed(990))[0]
-                    return vector_tasks.score_samples(model(latent), cfg, completed)
-                live = measure(trainer.G, trainer.prior)
-                ema = measure(trainer.ema_G, trainer.ema_prior)
-            observations.append(dict(**live, ema=ema, step=completed,
-                                     seconds=time.perf_counter()-started))
-            losses.append(dict(step=completed, d=float(stats['loss_d']),
-                               g=float(stats['loss_g']), penalty=float(stats['penalty']),
-                               prior=float(stats['prior_regularization'])))
-    result = dict(live=observations[-1] if observations else {},
-                  ema=observations[-1]['ema'] if observations else {},
-                  observations=observations, actions=actions, losses=losses,
-                  update_counts=dict(g=trainer.completed_steps, d=trainer.completed_steps),
-                  seconds=time.perf_counter()-started)
-    if len(observations) == 24:
-        result['live'] = {k: v for k, v in observations[-1].items() if k not in ('ema', 'step', 'seconds')}
-        result['convergence'] = sustained(observations, cfg['thresholds'], expected_steps=expected)
-        result['status'] = 'PASS' if vector_tasks.passes(result['live'], cfg['thresholds']) else 'FAIL'
+    result = vector_tasks.train(vector_tasks.VectorTask(spec, card), recipe)
+    context = dict(applied=result.pop('applied'), shapes=result.pop('shapes'), host_recipe=recipe)
     return result, context
 
 
@@ -407,7 +334,7 @@ def run(output, *, tasks=None, require_installed_root=None):
                     profile_path=str(PROFILE_PATH.relative_to(ROOT)),
                     profile_sha256=hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest(),
                     frozen_profile=profile, jobs=jobs, seed=0,
-                    routes=dict(vector='GANTrainer',
+                    routes=dict(vector='toy_runner',
                                 image='GANTrainer',
                                 legacy='public_primitives_custom_host'))
     write(output/'protocol.json', protocol)
@@ -415,8 +342,8 @@ def run(output, *, tasks=None, require_installed_root=None):
     for job in jobs:
         suite.verify_source(protocol)
         spec, card, variant = declared_spec(job, profile, base)
-        route = ('GANTrainer' if spec['runner'] in ('vector', 'image')
-                 else 'public_primitives_custom_host')
+        route = ('toy_runner' if spec['runner'] == 'vector' else 'GANTrainer'
+                 if spec['runner'] == 'image' else 'public_primitives_custom_host')
         print(f'START {spec["name"]} route={route} steps={spec["steps"]}', flush=True)
         started = time.perf_counter()
         try:
@@ -429,7 +356,7 @@ def run(output, *, tasks=None, require_installed_root=None):
             observations = result.get('observations', result.get('curve', []))
             if len(observations) != 24:
                 raise RuntimeError(f'frozen host did not produce 24 live observations: {spec["name"]}')
-            if route == 'GANTrainer':
+            if route in ('GANTrainer', 'toy_runner'):
                 if any(not isinstance(point.get('ema'), dict) for point in observations):
                     raise RuntimeError(f'frozen host has an incomplete EMA curve: {spec["name"]}')
                 if len(result['actions']) != spec['steps']:

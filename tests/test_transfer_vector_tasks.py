@@ -75,18 +75,35 @@ def test_scale_drift_updates_target_then_stops_before_final_window():
     assert vectors.target_scale(spec, int(.8*spec["steps"])) == 1.6
 
 
-def test_complete_episode_zero_feedback_matches_fixed_and_preserves_missing_failure(monkeypatch):
+def test_complete_fixed_episode_on_shared_runner_and_feedback_is_refused(monkeypatch):
     monkeypatch.setattr(vectors, "EVAL_SAMPLES", 128)
     spec = dict(vectors.TASKS[0], steps=24, hidden=8, layers=1, particles=12, batch=16)
     policy = vectors.fixed_policy()
     fixed = vectors.run_episode(spec, policy, fixed=True)
-    feedback = vectors.run_episode(spec, policy)
-    assert "error" not in fixed and "error" not in feedback
-    assert fixed["live"] == feedback["live"]
-    assert fixed["ema"] == feedback["ema"]
+    assert "error" not in fixed, fixed.get("error")
     assert len(fixed["observations"]) == 24
+    assert all(isinstance(point["ema"], dict) for point in fixed["observations"])
     assert fixed["convergence"]["complete"]
     assert fixed["update_counts"] == {"g": 24, "d": 24}
-    assert fixed["actions"] and feedback["actions"]
+    assert fixed["status"] in ("PASS", "FAIL")
+    # The spec's declared host recipe, with its rates applied by the optimizers.
+    assert [row["lr"] for row in fixed["applied"]] == [pytest.approx(.001), pytest.approx(.01), pytest.approx(.0015)]
+    assert fixed["actions"][0]["multiplier"] == 1. and fixed["actions"][-1]["multiplier"] < 1.
+    # An adaptive LR controller cannot act on recipe-built optimizers.
+    feedback = vectors.run_episode(spec, policy)
+    assert feedback["status"] == "ERROR" and "not expressible" in feedback["error"]
     assert not vectors.passes({"hq": float("nan")}, [["hq", ">=", .85]])
     assert not vectors.passes({}, [["hq", ">=", .85]])
+
+
+def test_vector_task_declares_only_the_problem():
+    problem = vectors.VectorTask(vectors.TASKS[0])
+    recipe = problem.recipe()
+    assert (recipe.z_dim, recipe.num_particles, recipe.batch_size, recipe.total_steps) == (4, 256, 128, 1200)
+    from particlegan import get_recipe
+    assert recipe == get_recipe(z_dim=4, num_particles=256, batch_size=128, total_steps=1200)
+    for name in ("vector_scale_drift",):
+        with pytest.raises(ValueError, match="not expressible"):
+            vectors.VectorTask(next(t for t in vectors.TASKS if t["name"] == name))
+    with pytest.raises(ValueError, match="one critic and one generator"):
+        vectors.VectorTask(dict(vectors.TASKS[0], d_every=2))
