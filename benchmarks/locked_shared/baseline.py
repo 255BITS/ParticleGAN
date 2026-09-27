@@ -166,10 +166,12 @@ def run_toy(toy, cfg, *, noise_policy=None):
             stack.enter_context(patch.dict(target, values))
         for module in (unipolar, unused_token_hold, mid_scale_identity):
             stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
-        stack.enter_context(patch.object(two_pole, "TOY_LR", two_pole.TOY_LR * cfg.lr_multiplier))
         if toy == "two_pole":
-            raw = two_pole.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
-                                 particle_l2=cfg.particle_l2, noise_policy=noise_policy)
+            # Problem-only toy on the shared runner (as mode_hold): only the
+            # problem's own particle_l2 pull follows the candidate.
+            if noise_policy is not None:
+                raise ValueError("two_pole takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = two_pole.train(particle_l2=cfg.particle_l2)
         elif toy == "trajectory":
             raw = trajectory.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
                                    diagnostics=True, noise_policy=noise_policy)

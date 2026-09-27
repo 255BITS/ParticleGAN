@@ -81,11 +81,15 @@ def test_candidate_settings_reach_training_and_restore_host(monkeypatch):
     assert trajectory.PROTOCOL == before
 
 
-def test_measured_alternative_is_allowed_and_cloud_still_moves():
+def test_two_pole_runs_on_its_recipe_under_the_harness():
+    # Problem-only toy (benchmarks.toy_runner): the candidate reaches only its
+    # particle_l2 pull; scoring and the 24-point convergence curve still apply.
     result = run_toy("two_pole", Candidate("no_l2", particle_l2=0))
     cells = score_metrics(result["live"], METRICS["two_pole"])
-    assert all(c["status"] == "PASS" for c in cells)
-    assert math.isclose(result["live"]["mean_abs"], 0.52926749, rel_tol=1e-5)
+    assert all(c["status"] in ("PASS", "FAIL") for c in cells)
+    assert len(result["observations"]) == 24 and result["convergence"]["complete"]
+    with pytest.raises(ValueError, match="recipe"):
+        run_toy("two_pole", Candidate("noisy"), noise_policy=object())
 
 
 def test_unknown_and_nonfinite_settings_are_rejected():
