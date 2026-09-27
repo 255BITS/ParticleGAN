@@ -218,6 +218,11 @@ def train(
     )
     prior = recipe.make_prior().to(device)
 
+    # Optimizers: [E+G, particle table] groups (the table at the recipe's
+    # prior LR multiplier) and the critic. Their step() does the recipe's
+    # step-time work; the critic's also updates the EMA critic we allocate here.
+    opt_GE, opt_D = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
+
     # EMA copies of E / G / prior. Every dashboard frame is read off these:
     # the live weights orbit the equilibrium, the averaged ones sit on it.
     ema_E = copy.deepcopy(E)
@@ -228,11 +233,6 @@ def train(
 
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
     gan_loss = recipe.make_loss()
-
-    # Optimizers: [E+G, particle table] groups (the table at the recipe's
-    # prior LR multiplier) and the critic. Their step() does the recipe's
-    # step-time work; the critic's also updates the EMA critic we allocate here.
-    opt_GE, opt_D = recipe.make_optimizers(G, D, prior, encoder=E, ema_critic=copy.deepcopy(D))
 
     optimizers = (opt_GE, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]

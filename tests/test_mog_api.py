@@ -315,7 +315,8 @@ def test_recipe_calibrates_original_centers_with_legacy_rounding(dtype):
     means = (centers - centers.mean(0)) / (centers.std(0) + 1e-6)
     points = means.cpu().double().numpy()
     d0 = centers.new_tensor(float(np.median(cKDTree(points).query(points, k=2)[0][:, 1])))
-    prior = get_recipe('mog', num_particles=16, z_dim=3).make_prior(dtype=dtype, generator=b)
+    # This migration contract compares the historical random centers.
+    prior = get_recipe('mog', num_particles=16, z_dim=3, initialization=None).make_prior(dtype=dtype, generator=b)
     assert torch.equal(prior.z, centers) and torch.equal(a.get_state(), b.get_state())
     assert torch.equal(prior.d0, d0) and torch.equal(prior.sigma, d0 * .025)
 

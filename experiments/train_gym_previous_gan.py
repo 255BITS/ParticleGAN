@@ -84,6 +84,9 @@ def train(cfg):
             if hashlib.sha256(value).hexdigest() != digest:
                 raise RuntimeError('Source changed during capture')
             archive.writestr(name, value)
+    recipe = training_recipe(cfg)
+    opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
+        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
     provenance = dict(sources=sources, source_archive_sha256=sha256(out / 'source.zip'),
         episodes=dict(path=cfg['episodes'], sha256=sha256(cfg['episodes'])),
         expert_data=dict(count=len(triples), episode_ids=np.unique(records['episode_ids']).tolist(),
@@ -95,9 +98,6 @@ def train(cfg):
         gan_training=True, adversarial_semantics='Prior and control-encoded full triples; average paths per role; no synthetic cycle',
         supervision='All expert training actions; action MSE plus G1/G3 reconstruction, each weight 1')
     values = {k: torch.as_tensor(v, device=device) for k,v in records.items() if k not in ('episode_ids', 'steps')}
-    recipe = training_recipe(cfg)
-    opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
-        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()

@@ -269,14 +269,14 @@ def train(cfg):
     torch.manual_seed(cfg["seed"]+102)
     e = TransitionEncoder(cfg["z_dim"], cfg["encoder_width"], cfg["g_class_scale"],
                           cfg["g_context_scale"]).to(device) if cfg["encoder"] else None
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
+                                          fused=device.type == "cuda")
     ema_e = copy.deepcopy(e) if e is not None else None
     if ema_e is not None:
         ema_e.eval().requires_grad_(False)
     ema_g, ema_prior = copy.deepcopy(g), copy.deepcopy(prior)
     for module in (ema_g, ema_prior):
         module.eval().requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
-                                          fused=device.type == "cuda")
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"]+i) for i in (11, 12)]

@@ -235,6 +235,9 @@ def train(
         ema_G, ema_prior = trainer.ema_G, trainer.ema_prior
         opt_G, opt_D, opt_prior = trainer.opt_g, trainer.opt_d, None
     else:
+        # The recipe's optimizers do its step-time work in step() (currently
+        # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
+        opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # EMA copies of G + prior for snapshots/eval; the live weights orbit the
         # equilibrium, the averaged ones sit on it.
         ema_G = copy.deepcopy(G)
@@ -245,9 +248,6 @@ def train(
         # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
         vic_reg = recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
-        # The recipe's optimizers do its step-time work in step() (currently
-        # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
-        opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
         penalty = recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
         # A separate prior optimizer (own LR/betas); its step() applies the
