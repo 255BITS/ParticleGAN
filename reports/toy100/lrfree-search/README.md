@@ -1,5 +1,65 @@
 # LR-free GAN base search — September 27
 
+## Latest leaderboard (September 27, evening)
+
+Scoring is noisy throughout, meaning the model's own samples. The harness has 13 gates: 10 quick gates,
+`img_intensity2` judged at 1,200 updates, `ring_shift` and `stationary`. The 100-Gaussian columns are
+separate from those 13. All native runs FAIL, and the precision needed there is ≥ .97.
+
+| # | Config | Harness gates | Fails | `intensity2` @1200 | ring_shift | stationary | grid100 | rotated100 | staggered100 | native init |
+|---:|---|---:|---|---|---|---|---|---|---|---|
+| 1 | **`st-10`**: stationarity-tested LR + learnable σ | 13/13 | — | PASS 33/48 | PASS 357/460 | PASS 677/750 | FAIL 98m p0.969 | FAIL 100m p0.930 | — | Xavier |
+| 2 | **`dv12-ams-rc3`**: DV12 + amsgrad + reg 3 (current #217 default) | 13/13 | — | PASS 20/48 | PASS 369/460 | PASS 688/750 | FAIL 91m p0.707 | FAIL 56m p0.519 | FAIL 97m p0.722 | Xavier |
+| 3 | `nr-D`: dv12-ams-rc3, EMA anchor off | 13/13 | — | PASS 20/48 | PASS 366/460 | PASS 685/750 | FAIL 94m p0.722 | FAIL 56m p0.522 | FAIL 97m p0.732 | Xavier |
+| 4 | `dv12-rc3`: plain Adam | 13/13 | — | PASS 23/48 | PASS 363/460 | PASS 663/750 | FAIL 99m p0.938 | FAIL 100m p0.895 | FAIL 100m p0.919 | QR |
+| 5 | `st-00`: dv12-ams-rc3 + learnable σ | 12/13 | mode_hold | PASS 16/48 | PASS 346/460 | PASS 684/750 | FAIL 81m p0.672 | FAIL 60m p0.515 | — | Xavier |
+| 6 | `nr-mob-r1`: σ tied to mobility | 12/13 | bars4 | PASS 32/48 | PASS 373/460 | PASS 691/750 | FAIL 78m p0.656 | FAIL 59m p0.504 | FAIL 93m p0.728 | Xavier |
+| 7 | API-DV12 (reg 1) | 12/13 | v.unequal_mass | PASS 30/48 | PASS 360/460 | PASS 687/750 | FAIL 99m p0.972 | FAIL 100m p0.928 | FAIL 100m p0.953 | QR |
+| 8 | API-RP15 | 12/13 | bars4 | PASS 28/48 | PASS 328/460 | PASS 654/750 | FAIL 100m p0.969 | FAIL 98m p0.908 | FAIL 100m p0.918 | QR |
+| 9 | `t2-dv12q-ons018`: output noise .018 | 12/13 | intens2 | FAIL 8/24 (@600) | PASS 363/460 | PASS 685/750 | FAIL 99m p0.909 | FAIL 100m p0.881 | FAIL 100m p0.904 | QR |
+| 10 | `st-01`: learnable σ + birth–death | 11/13 | mode_hold, v.unequal_mass | PASS 33/48 | PASS 384/460 | PASS 702/750 | FAIL 99m p0.943 | FAIL 60m p0.515 | — | Xavier |
+| 11 | `nr-lat-r1`: no output noise | 11/13 | mode_hold, bars4 | PASS 31/48 | PASS 365/460 | PASS 684/750 | FAIL 76m p0.640 | FAIL 56m p0.496 | FAIL 93m p0.725 | Xavier |
+| 12 | `nr-C`: reg_coeff 1 | 11/13 | bars4, v.unequal_mass | PASS 32/48 | PASS 371/460 | PASS 673/750 | — | — | — |  |
+| 13 | `nr-fix-nor1`: R1-on-real off | 9/13 | mode_hold, bars4, v.unequal_mass, v.anisotropic | PASS 23/48 | PASS 340/460 | PASS 663/750 | — | — | — |  |
+| 14 | `st-11`: stationarity + birth–death | 9/13 | mode_hold, v.unequal_mass, v.unequal_width, v.anisotropic | PASS 32/48 | PASS 299/460 | PASS 705/750 | FAIL 99m p0.969 | FAIL 100m p0.930 | — | Xavier |
+| 15 | `nr-A`: whole critic penalty off | 7/13 | mode_hold, bars4, v.unequal_mass, v.anisotropic, ring, stationary | PASS 21/48 | FAIL 0/460 | FAIL 0/750 | — | — | — |  |
+| 16 | `nr-E`: penalty off + no pe damping | 5/13 | mode_hold, blobs4, bars4, v.unequal_mass, v.unequal_width, intens2, ring, stationary | FAIL 7/48 | FAIL 0/460 | FAIL 0/750 | — | — | — |  |
+| — | *Reference: stock annealed K3P (LR schedule over 7,000 steps; not a candidate)* | — | — | — | — | — | FAIL 97m p0.980 | PASS 100m p0.982 | PASS 100m p0.981 | Xavier |
+
+**Notes**
+- **Native init varies by row, and it matters a lot.** "QR" rows are the library's default
+  deterministic init. "Xavier" rows use the frozen card's critic init, which needs
+  `initialization=null`. That also switches off the library init elsewhere, and it hurts DV12:
+  `dv12-ams-rc3` reaches 99 grid100 modes at precision .89 with QR, but 91 modes at .71 with Xavier.
+  Compare native columns only within the same init.
+- **`dv12-ams-rc3` at 21,000 updates (QR):**
+  - rotated100 keeps improving. Precision goes .878 → .908 → .931 and every accuracy limit passes
+    from update 9,750, so on a rough extrapolation it would pass somewhere around 35–45k updates.
+  - grid100 is stuck at 99 modes. DV12's game trust holds G's LR at about 1.5e-6.
+- **The stock annealed K3P passes rotated100 and staggered100** in this harness, so the harness is
+  sound and the remaining gap is in the continuous learners.
+
+**What the recent rounds found**
+- **Stationarity-tested LR (`st-10`) is the most promising lever.** It passes 13/13 harness gates.
+  It does not collapse the LR while there is still progress to make: on rotated100 modes go 60 → 100
+  and precision .52 → .93 compared with `st-00`, and after a target change the LR comes back up.
+  - Open issue: the prior table's test never settles.
+  - Confound: every 2×2 arm used learnable σ.
+- **Birth–death (`st-01`) gives the best native shape on grid100:** centre .23σ, radial KS .024, trace
+  bias +.03. But its guard skipped every step on rotated100, and it hurts the small tables
+  (`mode_hold`, `unequal_mass`).
+- **Noise × R1 round:**
+  - The fuzziness is the output noise itself, not R1. Removing R1, or all output noise, makes things
+    worse.
+  - DV12's `1/(1+pe²)` damping on the critic cannot replace the critic penalty (`nr-A` 7/13, `nr-E` 5/13).
+  - The EMA-critic anchor has no measurable effect (`nr-D` matches the base).
+- **Next:** give the stationarity test a small-drift rule so the prior table can settle, fix the
+  birth–death guard and its small-table behaviour, and rerun both on fixed σ .029 to separate them
+  from learnable σ.
+
+---
+
+
 ## Correction: score the model's own samples (noisy), not clean samples
 
 The earlier update below scored clean samples, and that was wrong.
