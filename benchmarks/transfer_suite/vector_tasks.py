@@ -25,6 +25,13 @@ EVAL_SAMPLES = 4096
 SEPARATED_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15],
                     ["hq", ">=", .85], ["component_covariance_error", "<=", .85],
                     ["component_min_eigen_ratio", ">=", .15]]
+# Anisotropic shape is scored on each component's 4-sigma core; stray samples are
+# bounded separately by max_component_spill instead of inflating the covariance error.
+ANISOTROPIC_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15], ["hq", ">=", .85],
+                      ["component_core_covariance_error", "<=", .5],
+                      ["component_core_min_eigen_ratio", ">=", .15], ["max_component_spill", "<=", .05]]
+CORE_MAHALANOBIS2 = 16.
+SPILL_MAHALANOBIS2 = 9.
 DISTRIBUTION_BOUNDS = [["sw1_normalized", "<=", .18], ["mean_error", "<=", .15],
                        ["covariance_error", "<=", .45]]
 DEFAULTS = dict(hidden=64, layers=2, fourier=2, z_dim=4, particles=256, batch=128,
@@ -59,7 +66,8 @@ TASKS = [
           means=_CORNERS, widths=[.07, .12, .20, .30]),
     _task("vector_anisotropic", "anisotropic", "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
           means=[[-2., -1.], [0., 1.5], [2., -1.]],
-          covariance=[[[.09, .018], [.018, .0081]], [[.0081, -.018], [-.018, .09]], [[.04, .03], [.03, .04]]]),
+          covariance=[[[.09, .018], [.018, .0081]], [[.0081, -.018], [-.018, .09]], [[.04, .03], [.03, .04]]],
+          thresholds=deepcopy(ANISOTROPIC_BOUNDS)),
     _task("vector_overlap", "overlapping", "Scores the observable distribution when latent components are not identifiable.",
           means=[[-.35, 0.], [.35, 0.]], widths=[.55, .55], identifiable=False,
           limitations="Component labels and mode recall are deliberately not scored for overlapping densities."),
@@ -112,7 +120,8 @@ def resolve(spec, *, allow_reserved=False):
             raise ValueError("covariances must be symmetric positive definite")
         if type(out.get("identifiable")) is not bool:
             raise ValueError("mixture spec must explicitly declare identifiable")
-        forbidden = {"mass_tv", "hq", "component_covariance_error", "min_mass_ratio", "component_min_eigen_ratio"}
+        forbidden = {"mass_tv", "hq", "component_covariance_error", "min_mass_ratio", "component_min_eigen_ratio",
+                     "component_core_covariance_error", "component_core_min_eigen_ratio", "max_component_spill"}
         if not out["identifiable"] and any(key in forbidden for key, _, _ in out["thresholds"]):
             raise ValueError("overlapping mixtures cannot require component recovery metrics")
     return out
@@ -172,22 +181,35 @@ def score_samples(fake, spec, completed_steps):
         mass = counts/len(fake)
         delta = fake-means[assignment]
         mahal = torch.einsum("ni,nij,nj->n", delta, torch.linalg.inv(cov)[assignment], delta)
-        errors, eigen_ratios = [], []
-        for k in range(len(means)):
-            points = fake[assignment == k]
+        def shape(points, k):
             if len(points) < 10:
-                errors.append(1.)
-                eigen_ratios.append(0.)
-            else:
-                x = points-points.mean(0)
-                empirical = x.T@x/len(points)
-                errors.append(float((empirical-cov[k]).norm()/cov[k].norm()))
-                inverse = torch.linalg.inv(torch.linalg.cholesky(cov[k]))
-                eigen_ratios.append(float(torch.linalg.eigvalsh(inverse@empirical@inverse.T).min()))
+                return 1., 0.
+            x = points-points.mean(0)
+            empirical = x.T@x/len(points)
+            inverse = torch.linalg.inv(torch.linalg.cholesky(cov[k]))
+            return (float((empirical-cov[k]).norm()/cov[k].norm()),
+                    float(torch.linalg.eigvalsh(inverse@empirical@inverse.T).min()))
+
+        errors, eigen_ratios, core_errors, core_ratios, spills = [], [], [], [], []
+        for k in range(len(means)):
+            member = assignment == k
+            error, ratio = shape(fake[member], k)
+            errors.append(error)
+            eigen_ratios.append(ratio)
+            # Core: assigned samples within 4 sigma of this component, so a few stray
+            # samples far away cannot dominate a small covariance's Frobenius error.
+            error, ratio = shape(fake[member & (mahal <= CORE_MAHALANOBIS2)], k)
+            core_errors.append(error)
+            core_ratios.append(ratio)
+            spills.append(float((mahal[member] > SPILL_MAHALANOBIS2).float().mean()) if member.sum() >= 10 else 1.)
         result.update(mass_tv=float((mass-target).abs().sum()/2),
                       min_mass_ratio=float((mass/target).min()), hq=float((mahal <= 9).float().mean()),
                       component_covariance_error=sum(errors)/len(errors), component_covariance_errors=errors,
                       component_min_eigen_ratio=min(eigen_ratios),
+                      component_core_covariance_error=sum(core_errors)/len(core_errors),
+                      component_core_covariance_errors=core_errors,
+                      component_core_min_eigen_ratio=min(core_ratios),
+                      max_component_spill=max(spills), component_spill=spills,
                       component_mass=mass.tolist(), target_mass=target.tolist(), component_counts=counts.tolist())
     return result
 

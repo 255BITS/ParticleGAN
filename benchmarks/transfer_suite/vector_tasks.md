@@ -35,6 +35,13 @@ Metrics are properties of the generated distribution:
 - Every separated-mixture case also requires the minimum eigenvalue of every whitened
   empirical component covariance to be ≥0.15. A broad axis cannot conceal a
   collapsed narrow axis. This is a coarse covariance check, not a density proof.
+- The anisotropic case scores shape on each component's core instead: assigned
+  samples with squared Mahalanobis distance ≤16 (within 4σ). It requires mean
+  relative core covariance error ≤0.5, minimum whitened core eigenvalue ≥0.15,
+  and `max_component_spill` ≤0.05, the largest per-component fraction of assigned
+  samples beyond 3σ (≈1.1% for a true Gaussian). Components with fewer than ten
+  (core) samples score core error 1, eigenvalue 0 and spill 1. Its SW1, TV and
+  HQ bounds are unchanged; the whole-component covariance bounds no longer gate it.
 - Overlapping mixtures and the spiral use only observable distribution metrics:
   SW1, normalized mean error ≤0.15, and relative covariance error ≤0.45. They
   have no component-label, occupancy or mode-count gate. Per-sample component
@@ -82,10 +89,20 @@ training and all other bounds are unchanged. Original v1 sources and reference
 results are retained exactly; v2 evidence explicitly re-scores their already
 recorded per-component eigenvalue metrics without retraining.
 
+Protocol v3 (anisotropic core metric) changes only the anisotropic case. Its
+target covariances have Frobenius norm ≈0.09, so a whole-component covariance
+error let 1–8% of stray samples 1–2 units from a mean dominate the score: it
+measured spill, not shape (for example 4.61 overall but 0.11 within 4σ). Shape is
+now scored on the 4σ core and stray mass is bounded explicitly by
+`max_component_spill`. The old whole-component metrics are still reported for
+every identifiable mixture and still gate the other cases. Recorded historical
+results keep the thresholds stored with them. Evidence:
+[anisotropic core metric report](../../reports/transfer_suite/anisotropic_core_metric/README.md).
+
 ## Fixed-reference evidence
 
 The frozen seed-0 CPU reference uses the cosine schedule already implemented by
-`FixedControl`. Under protocol v2 it passes 4/6 ranking cases at the last
+`FixedControl`. The table below is protocol v2 evidence. Under protocol v2 it passes 4/6 ranking cases at the last
 checkpoint and sustains 3/6. Every episode completed all 24 observations. The
 eight original episodes took 49.56 seconds combined, with individual costs
 5.35–7.71 seconds including evaluation. These are local measurements, not
