@@ -19,6 +19,8 @@ REF_ROOT = Path("/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix
 REFS = {"gs2_c03_lr2_d05": REF_ROOT / "runs_grid", "k3p_simple": REF_ROOT / "runs", "k3p_stock": REF_ROOT / "runs"}
 NATIVE = ("grid100", "rotated100", "staggered100")
 ARMS = json.loads((HERE / "arms.json").read_text())["arms"]
+if (HERE / "arms_e1.json").exists():
+    ARMS.update(json.loads((HERE / "arms_e1.json").read_text())["arms"])
 SCREEN = ["native-grid100", "native-rotated100", "native-staggered100", "toy-img_bars4", "toy-two_pole",
           "ring8-shift", "ring8-multishift"]
 
@@ -50,7 +52,15 @@ def receipt_ok(arm, r):
         bad.append(f"update rule {rules}")
     if set(rec.get("guard_reads") or {}) - {nr["guard_buffer"]}:
         bad.append(f"guard read {rec.get('guard_reads')}")
-    if bool(rec.get("anchor_active")) != (settle == "anchor"):
+    if settle == "emar1":
+        e1, recipe = rec.get("emar1") or {}, ARMS[arm]["recipe"]
+        want = dict(beta=nr["beta"], decay=[recipe["reg_anchor_decay"]], weight=[recipe["reg_anchor_weight"]])
+        got = {k: e1.get(k) for k in want}
+        if got != want:
+            bad.append(f"emar1 {got} != {want}")
+        if not e1.get("anchor_started") or not all(e1["anchor_started"]):
+            bad.append(f"anchor_started {e1.get('anchor_started')}")
+    if bool(rec.get("anchor_active")) != (settle in ("anchor", "emar1")):
         bad.append(f"anchor_active {rec.get('anchor_active')}")
     if rec.get("pathcap_pair_mismatch", 0) != 0:
         bad.append(f"pathcap mismatch {rec['pathcap_pair_mismatch']}")

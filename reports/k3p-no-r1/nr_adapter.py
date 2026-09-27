@@ -56,16 +56,24 @@ _spec.loader.exec_module(_oadam)
 OptimisticAdam = _oadam.OptimisticAdam  # lib/oadam.py of this worktree (by path: lib/ is not a package)
 
 NR_ARMS = json.loads((HERE / "arms.json").read_text())["arms"]
+# EMA-centred R1 family (EMA_R1.md): real term = w * mean ||grad D(r) - beta * grad Dbar(r)||^2 / d, Dbar = K3P's
+# parameter-EMA critic (reg_anchor_decay, reg_anchor_weight = w) forced on at constant LR. beta 0 = gs2's R1.
+E1_ARMS = json.loads((HERE / "arms_e1.json").read_text())["arms"] if (HERE / "arms_e1.json").exists() else {}
 sa.ARMS.update(NR_ARMS)  # the suite's worker/launcher look arms up in sa.ARMS
+sa.ARMS.update(E1_ARMS)
 SPIKES = ("none", "symcap", "pathcap", "pairsec", "dvalcap")
-SETTLES = ("none", "hinge", "oadam", "anchor")
+SETTLES = ("none", "hinge", "oadam", "anchor")  # the 5 x 4 factorial
+E1_SETTLE = "emar1"
+GUARD_BUFFERS = ("max_exp_avg_sq", "exp_avg_sq")
+_STOCK_GUARD = CriticSpikeGuard.apply_  # the package guard (reads exp_avg_sq), captured before any patch
 PATH_SEED = 7  # pathcap interpolation stream (one per device, per task process)
 
 NR = {"arm": None, "spike": None, "settle": None, "guard_buffer": None, "installed": False,
       "critic_opts": [], "kernels": [], "oadam_steps": 0, "d_loss": {}, "pair_mismatch": 0,
       "sums": {}, "penalty_calls": 0, "anchor_start_step": None, "anchor_deferred": 0,
       "oadam_by_opt": {}, "adam_by_opt": {}, "guard_reads": {}, "r1_evals": 0, "stock_calls": 0,
-      "pairsec_rows": 0, "pairsec_no_neighbor": 0}
+      "pairsec_rows": 0, "pairsec_no_neighbor": 0,
+      "beta": None, "e1_ema_evals": 0, "e1_deferred": 0, "real_rms_max": None}
 DUP_DIST = 1e-6  # pairsec: reals closer than this are duplicates, not neighbours
 _PATH_GEN = {}
 
@@ -194,6 +202,65 @@ def anchor_prox(kernel, D, x_real, ema_critic, dimension):
     return kernel.anchor_weight * (g - gb).pow(2).flatten(1).sum(dim=1).mean() / dimension
 
 
+def ema_centred_r1(D, x_real, beta, weight=1.0, ema_fn=None):
+    """``weight * mean ||g - beta * gbar||^2 / d`` with g = grad_x D(r) (create_graph) and gbar = grad_x Dbar(r).
+
+    beta == 0 is op for op the real term of ``GradientPenalty._k3p_penalty`` at s == 1 (``_grad_norm(squared=True)
+    / d``, then mean), so it is bit-identical to gs2's R1. beta == 1 is K3P's prox ``mean ||g - gbar||^2 / d``.
+    ``ema_fn`` None means Dbar == D (the anchor is not started yet): gbar = g.detach(). Returns (term, g, gbar).
+    """
+    dimension = x_real[0].numel()
+    x = x_real.detach().clone().requires_grad_(True)
+    g = torch.autograd.grad(_score_scalar(D(x)), x, create_graph=True)[0]
+    gb = None
+    if beta == 0.0:
+        diff = g
+    else:
+        if ema_fn is None:
+            gb = g.detach()
+        else:
+            xb = x_real.detach().clone().requires_grad_(True)
+            with torch.enable_grad():
+                gb = torch.autograd.grad(_score_scalar(ema_fn(xb)), xb)[0].detach()
+        diff = g - gb if beta == 1.0 else g - beta * gb
+    term = (diff.pow(2).flatten(1).sum(dim=1) / dimension).mean()
+    if weight != 1.0:
+        term = weight * term
+    return term, g, gb
+
+
+def e1_anchor_fn(kernel, ema_critic):
+    """Start the EMA anchor on the first call it can (forced on at s == 1); the Dbar callable, or None (Dbar == D)."""
+    record, anchor = kernel.record, kernel.anchor
+    if kernel.anchor_weight <= 0:
+        raise ValueError("emar1 arm needs reg_anchor_weight > 0 (it is the term's weight)")
+    if not record.anchor_started:
+        if not _anchor_ready(anchor):
+            NR["e1_deferred"] += 1
+            return None
+        anchor.start_()
+        record.anchor_started = True
+        NR["anchor_start_step"] = record.observed_steps
+    return ema_critic if ema_critic is not None else anchor
+
+
+def emar1_real(kernel, D, x_real, ema_critic):
+    beta = NR["beta"]
+    fn = e1_anchor_fn(kernel, ema_critic)
+    term, g, gb = ema_centred_r1(D, x_real, beta, kernel.anchor_weight, fn)
+    d = x_real[0].numel()
+    with torch.no_grad():
+        rms = g.detach().flatten(1).norm(dim=1) / d ** 0.5
+        m = rms.max()
+        NR["real_rms_max"] = m if NR["real_rms_max"] is None else torch.maximum(NR["real_rms_max"], m.to(
+            NR["real_rms_max"].device))
+        _acc("real_rms", rms.mean())
+        if gb is not None and fn is not None:
+            NR["e1_ema_evals"] += 1
+            _acc("ema_rms", (gb.flatten(1).norm(dim=1) / d ** 0.5).mean())
+    return term
+
+
 def _acc(name, value):
     v = value.detach().float()
     s = NR["sums"].setdefault(name, [torch.zeros((), device=v.device), torch.zeros((), device=v.device), 0])
@@ -218,6 +285,16 @@ def nr_penalty(self, D, x_real, x_fake, step, coefficient, collect_stats, ema_cr
     NR["penalty_calls"] += 1
     sa.ACTIVITY["nr_penalty_calls"] = NR["penalty_calls"]
     k = self.kappa
+    if NR["settle"] == "emar1":  # real term first, then the fake cap: gs2's op order
+        real = emar1_real(self, D, x_real, ema_critic)
+        fake_cap = cap(D, x_fake.detach(), k)
+        pen = (coefficient / 2.0) * (real + fake_cap)
+        _acc("real", real)
+        _acc("fake_cap", fake_cap)
+        if not collect_stats:
+            return pen, {}
+        return pen, {"applied": True, "pen": float(pen.detach()), "center": k, "s": s, "prox": 0.0,
+                     "phase": f"e1:b{NR['beta']}", "real": float(real.detach()), "fake_cap": float(fake_cap.detach())}
     u = _path_u(x_real) if NR["spike"] == "pathcap" else None
     spike = spike_term(NR["spike"], D, x_real, x_fake, k, u)
     fake_cap = cap(D, x_fake.detach(), k)
@@ -334,17 +411,35 @@ def guard_apply_max(self, optimizer):
         return count
 
 
+def guard_apply_stock(self, optimizer):
+    """The package guard unchanged (reads ``exp_avg_sq``, as gs2 did), with the key it reads tallied."""
+    for group in optimizer.param_groups:
+        for p in group["params"]:
+            st = optimizer.state.get(p)
+            if p.grad is not None and st and "exp_avg_sq" in st:
+                _tally(NR["guard_reads"].setdefault(id(optimizer), {}), "exp_avg_sq")
+    return _STOCK_GUARD(self, optimizer)
+
+
 # ------------------------------------------------------------------ install / receipt
 def install_nr(arm_name):
     """Patches that must precede ``suite_adapter.install`` (it wraps the guard with its counters)."""
     arm = sa.ARMS[arm_name]
     nr = arm["nr"]
-    if nr["spike"] not in SPIKES or nr["settle"] not in SETTLES:
+    if nr["spike"] not in SPIKES or nr["settle"] not in SETTLES + (E1_SETTLE,):
         raise ValueError(f"bad nr arm {arm_name}: {nr}")
-    NR.update(arm=arm_name, spike=nr["spike"], settle=nr["settle"], guard_buffer=nr["guard_buffer"])
-    if nr["guard_buffer"] != "max_exp_avg_sq":
+    NR.update(arm=arm_name, spike=nr["spike"], settle=nr["settle"], guard_buffer=nr["guard_buffer"],
+              beta=nr.get("beta"))
+    if nr["guard_buffer"] not in GUARD_BUFFERS:
+        raise ValueError(f"guard buffer must be one of {GUARD_BUFFERS}, got {nr['guard_buffer']}")
+    if nr["settle"] == "emar1":
+        if not isinstance(nr.get("beta"), (int, float)) or not 0.0 <= nr["beta"] <= 1.0:
+            raise ValueError(f"emar1 arm needs 0 <= beta <= 1, got {nr.get('beta')}")
+        if nr["spike"] != "none":
+            raise ValueError("emar1 replaces R1 only: spike must be 'none'")
+    elif nr["guard_buffer"] != "max_exp_avg_sq":
         raise ValueError(f"every nr arm is AMSGrad: the guard must read max_exp_avg_sq, got {nr['guard_buffer']}")
-    CriticSpikeGuard.apply_ = guard_apply_max
+    CriticSpikeGuard.apply_ = guard_apply_max if nr["guard_buffer"] == "max_exp_avg_sq" else guard_apply_stock
     install_oadam()  # every arm: the dispatcher counts each optimizer's update rule
 
 
@@ -398,7 +493,7 @@ _ORIG_INSTALL = sa.install
 
 def install(arm_name, *, route, config=None, log=print):
     """Drop-in for ``suite_adapter.install`` (the suite worker calls ``sa.install``)."""
-    if arm_name not in NR_ARMS:
+    if arm_name not in NR_ARMS and arm_name not in E1_ARMS:
         return _ORIG_INSTALL(arm_name, route=route, config=config, log=log)
     install_nr(arm_name)
     receipt = _ORIG_INSTALL(arm_name, route=route, config=config, log=log)
@@ -458,6 +553,7 @@ def receipt(cfg):
             for k, v in NR["sums"].items()}
     kernels = [dict(anchor_weight=k.anchor_weight, kappa=k.kappa, coeff=k.coeff, lazy_k=k.lazy_k,
                     anchor_started=k.record.anchor_started, anchor=type(k.anchor).__name__ if k.anchor else None,
+                    anchor_decay=getattr(k.anchor, "decay", None),
                     blend_s=k.blend_weight(), record_steps=k.record.observed_steps) for k in NR["kernels"]]
     anchor_active = bool(kernels) and all(k["anchor_started"] for k in kernels) and sums.get("prox", {}).get(
         "positive_frac", 0) > 0
@@ -485,6 +581,17 @@ def receipt(cfg):
                 applied_groups=sa.RECEIPT.get("lr"), lr_constant=sa.RECEIPT.get("lr_constant"),
                 gantrainer_recipes=sa.RECEIPT.get("gantrainer_recipes")),
     )
+    if NR["settle"] == "emar1":
+        rec["anchor_active"] = bool(kernels) and all(k["anchor_started"] for k in kernels) and (
+            NR["beta"] == 0.0 or NR["e1_ema_evals"] > 0)
+        rec["penalty_form"] = "c/2*[w*mean||g_r - beta*gbar_r||^2/d + fake_cap]"
+        rec["emar1"] = dict(
+            beta=NR["beta"], decay=sorted({k["anchor_decay"] for k in kernels}, key=str),
+            weight=sorted({k["anchor_weight"] for k in kernels}), anchor_started=[k["anchor_started"] for k in kernels],
+            anchor_start_step=NR["anchor_start_step"], ema_evals=NR["e1_ema_evals"], deferred_calls=NR["e1_deferred"],
+            real_rms_max=None if NR["real_rms_max"] is None else float(NR["real_rms_max"]),
+            real_rms_mean=sums.get("real_rms", {}).get("mean"), ema_rms_mean=sums.get("ema_rms", {}).get("mean"),
+            guard_buffer=NR["guard_buffer"])
     if not math.isfinite(sum(v["mean"] for v in sums.values())):
         rec["nonfinite_terms"] = True
     return rec

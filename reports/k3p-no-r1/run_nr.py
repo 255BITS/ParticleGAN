@@ -35,6 +35,8 @@ import run_suite as rs  # noqa: E402
 SCREEN = ["native-grid100", "native-rotated100", "native-staggered100", "toy-img_bars4", "toy-two_pole",
           "ring8-shift", "ring8-multishift"]
 ARMS = json.loads((HERE / "arms.json").read_text())["arms"]
+if (HERE / "arms_e1.json").exists():
+    ARMS.update(json.loads((HERE / "arms_e1.json").read_text())["arms"])
 
 
 def worker(args):

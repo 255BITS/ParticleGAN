@@ -211,13 +211,15 @@ def test_r1_is_zero_in_every_nr_arm(arm, nr_state):
 
 
 def test_arms_file_is_the_full_factorial_on_gs2():
-    assert len(nr.NR_ARMS) == 20
+    factorial = {k: v for k, v in nr.NR_ARMS.items() if "coeff_check_of" not in v}  # _c1: reg_coeff 1.0 checks
+    assert len(factorial) == 20
     names = {f"nr_{s}_{t}" for s in nr.SPIKES for t in nr.SETTLES}
-    assert set(nr.NR_ARMS) == names
+    assert set(factorial) == names
     base = nr.sa.ARMS["gs2_c03_lr2_d05"]
     released = get_recipe()
     for name, spec in nr.NR_ARMS.items():
-        assert spec["config"] == base["config"]
+        want_config = dict(base["config"], reg_coeff=1.0) if "coeff_check_of" in spec else base["config"]
+        assert spec["config"] == want_config
         want = dict(base["recipe"])
         if spec["nr"]["settle"] == "anchor":
             want["reg_anchor_weight"] = released.reg_anchor_weight
@@ -397,3 +399,122 @@ def test_receipt_gate_rejects_unengaged_overrides(change):
         return
     assert sm.receipt_ok("nr_pathcap_oadam", {"nr_receipt": rec})
     assert sm.receipt_ok("nr_pathcap_oadam", {}) == ["no nr_receipt"]
+
+
+# ------------------------------------------------------------------ EMA-centred R1 (emar1 arms, EMA_R1.md)
+@pytest.fixture
+def e1_state(nr_state, monkeypatch):
+    def set_beta(beta):
+        nr_state("none", "emar1")
+        monkeypatch.setitem(nr.NR, "beta", beta)
+        monkeypatch.setitem(nr.NR, "guard_buffer", "exp_avg_sq")
+        for key in ("e1_ema_evals", "e1_deferred"):
+            monkeypatch.setitem(nr.NR, key, 0)
+        monkeypatch.setitem(nr.NR, "real_rms_max", None)
+        monkeypatch.setitem(nr.NR, "anchor_start_step", None)
+    return set_beta
+
+
+def _mlp_double(seed=0, d=3):
+    torch.manual_seed(seed)
+    return nn.Sequential(nn.Linear(d, 16), nn.Tanh(), nn.Linear(16, 1)).double()
+
+
+def _grads(D, pen):
+    D.zero_grad()
+    pen.backward()
+    return [torch.zeros_like(p) if p.grad is None else p.grad.clone() for p in D.parameters()]  # output bias: None
+
+
+def test_e1_beta0_is_bit_identical_to_gs2_r1(e1_state):
+    e1_state(0.0)
+    D = _mlp_double()
+    r, f = batch(n=32, d=3), batch(n=32, d=3, seed=1, scale=3.0)
+    d = r[0].numel()
+    # the isolated real term == K3P's phase-A R1 kernel, bit for bit
+    term, _, gb = nr.ema_centred_r1(D, r, 0.0, 1.0, None)
+    assert gb is None and torch.equal(term, (GradientPenalty._grad_norm(D, r, squared=True) / d).mean())
+    # the whole penalty (real term + fake cap) == gs2's stock s == 1 penalty, value and parameter gradients
+    stock_kernel = GradientPenalty(coeff=0.3, kappa=1.0, lr_floor=0.0, anchor_weight=0.0)
+    stock, _ = stock_kernel._k3p_penalty(D, r, f, 1, 0.3, False, None)
+    g_stock = _grads(D, stock)
+    kernel = GradientPenalty(coeff=0.3, kappa=1.0, lr_floor=0.0, anchor=CriticAnchor(D, copy.deepcopy(D)),
+                             anchor_weight=1.0)
+    for _ in range(2):  # the starting call and a started call: beta 0 ignores Dbar either way
+        pen, _ = nr.nr_penalty(kernel, D, r, f, 1, 0.3, False, None)
+        assert torch.equal(pen, stock) and float(stock) > 0
+        assert all(torch.equal(a, b) for a, b in zip(_grads(D, pen), g_stock))
+    assert kernel.record.anchor_started
+
+
+def test_e1_beta1_matches_the_existing_prox_term(e1_state):
+    e1_state(1.0)
+    D = _mlp_double()
+    r = batch(n=32, d=3)
+    d = r[0].numel()
+    for w in (1.0, 3.0):
+        anchor = CriticAnchor(D, copy.deepcopy(D))
+        kernel = GradientPenalty(coeff=0.3, kappa=1.0, lr_floor=0.0, anchor=anchor, anchor_weight=w)
+        anchor.start_()
+        kernel.record.anchor_started = True
+        with torch.no_grad():  # the live critic moves away from its EMA
+            for p in D.parameters():
+                p.add_(0.3 * torch.randn_like(p))
+        prox = nr.anchor_prox(kernel, D, r, None, d)
+        term, g, gb = nr.ema_centred_r1(D, r, 1.0, w, anchor)
+        assert float(prox) > 1e-3
+        torch.testing.assert_close(term, prox, rtol=1e-12, atol=0)
+        for a, b in zip(_grads(D, term), _grads(D, prox)):
+            torch.testing.assert_close(a, b, rtol=1e-10, atol=1e-14)
+
+
+@pytest.mark.parametrize("beta", [0.0, 0.5, 0.8, 1.0])
+def test_e1_linear_known_value(beta, e1_state):
+    e1_state(beta)
+    w, wbar = torch.tensor([1.0, -2.0, 0.5, 3.0], dtype=torch.float64), torch.tensor([0.5, 1.0, 0.0, 2.0],
+                                                                                        dtype=torch.float64)
+    D, Dbar = Linear(w), Linear(wbar)
+    term, _, _ = nr.ema_centred_r1(D, batch(), beta, 2.0, Dbar)
+    assert float(term) == pytest.approx(2.0 * float((w - beta * wbar).square().sum()) / D_IN)
+
+
+def test_e1_receipt_records_beta_decay_weight_from_live_objects(e1_state, monkeypatch):
+    import summarize_nr as sm
+    e1_state(0.8)
+    monkeypatch.setattr(GradientPenalty, "_k3p_penalty", nr.nr_penalty)
+    recipe = get_recipe(lr_floor=1.0, network_lr_floor=1.0, reg_anchor_weight=3.0, reg_anchor_decay=0.9,
+                        amsgrad=True, reg_coeff=0.3)
+    D = _mlp()
+    opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D))
+    pen = recipe.make_critic_penalty(opt)
+    g = torch.Generator().manual_seed(1)
+    for _ in range(5):
+        r, f = torch.randn(64, 2, generator=g), torch.randn(64, 2, generator=g) + 1.0
+        loss = torch.nn.functional.softplus(-(D(r) - D(f))).mean() + pen(D, r, f)
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+    rec = nr.receipt({})
+    e1 = rec["emar1"]
+    assert (e1["beta"], e1["decay"], e1["weight"], e1["anchor_started"]) == (0.8, [0.9], [3.0], [True])
+    assert e1["ema_evals"] == 5 and e1["real_rms_max"] > 0 and rec["anchor_active"] and rec["r1_evals"] == 0
+    assert opt.anchor.decay == 0.9  # the recipe's decay reached the live anchor
+    arm = dict(nr=dict(spike="none", settle="emar1", beta=0.8, guard_buffer="exp_avg_sq"),
+               recipe=dict(reg_anchor_weight=3.0, reg_anchor_decay=0.9))
+    monkeypatch.setitem(sm.ARMS, "e1_test", arm)
+    good = dict(rec, d_loss_calls={"rp_softplus": 5}, critic_optimizers=[dict(update_rule="torch.optim.Adam.step")],
+                guard_reads={"exp_avg_sq": 20}, lr=dict(lr_constant=True))
+    assert sm.receipt_ok("e1_test", {"nr_receipt": good}) == []
+    bad = dict(good, emar1=dict(e1, decay=[0.999]))
+    assert sm.receipt_ok("e1_test", {"nr_receipt": bad})
+
+
+def test_e1_arms_file():
+    assert set(nr.E1_ARMS) and not set(nr.E1_ARMS) & set(nr.NR_ARMS)
+    base = nr.sa.ARMS["gs2_c03_lr2_d05"]
+    for name, spec in nr.E1_ARMS.items():
+        e = spec["nr"]
+        assert spec["config"] == base["config"] and e["settle"] == "emar1" and e["guard_buffer"] == "exp_avg_sq"
+        assert {k: v for k, v in spec["recipe"].items() if not k.startswith("reg_anchor")} == {
+            k: v for k, v in base["recipe"].items() if not k.startswith("reg_anchor")}
+        assert name == f"e1_b{e['beta']:g}_d{spec['recipe']['reg_anchor_decay']:g}_w{spec['recipe']['reg_anchor_weight']:g}"
