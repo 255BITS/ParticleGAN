@@ -10,6 +10,9 @@ python run.py --diagnose [ARM ...]   # per-observation rare-component probe -> d
 python run.py --arms                 # 17 arms on unequal_mass -> arms.log / arms.jsonl
 python run.py --crosscheck ARM ...   # arms x 8 dev vector tasks -> crosscheck.log / crosscheck.jsonl
 python summarize.py diagnose|arms|crosscheck   # the tables below
+python oracle.py                     # protocol v5 finite-atom oracle -> oracle.log / oracle.jsonl
+python run.py --v5                   # protocol v5 rescore (18 episodes) -> v5.log / v5.jsonl
+python summarize.py v5
 ```
 
 Research code only. No default critic, recipe or protocol changes. Two opt-in options were
@@ -157,3 +160,116 @@ five passes and adds unequal_mass.
    fails an ideal i.i.d. sampler 28% of the time per observation. Consider a finite-atom-aware
    bound for components below about 10 particles. Pair it with the spill normalization suggested
    in the v4 section of `../anisotropic_core_metric/README.md`.
+
+## Protocol v5: particle-resolution floor
+
+The rule reads only the spec. A component is under-resolved when `masses[k] * particles` is below
+`PARTICLE_FLOOR = 32`. Its core error, core eigenvalue and spill are still reported, flagged by
+`component_resolved`, but the gate uses `resolved_*` aggregates over the resolved components.
+Mass (`mass_tv`, `min_mass_ratio`) and `hq` still cover every component. At 256 particles, only
+the unequal_mass 2% component (5.1 particles) is exempt. The 13% component (33.3 particles) is
+still gated. `resolve()` refuses a gated spec where no component is resolved, or where an exempt
+component has no `min_mass_ratio` bound. The `resolved_*` values for an empty set (0, 1, 0)
+therefore never reach a verdict. The rule applies to anisotropic, unequal_width and unequal_mass.
+Every anisotropic and unequal_width component has ≥64 particles, so their gated values are
+identical to v4.
+
+### Oracle (how 32 was chosen)
+
+`ParticlePrior.sample` is pure indexing into a fixed particle table with no latent noise, and G
+is deterministic, so a generated component is exactly n atoms. The oracle is a perfect sampler
+under that model. It draws n atoms i.i.d. from the true component Gaussian, and gives each atom a
+Binomial(4096, 1/256) multiplicity from the suite's evaluation multinomial. It scores them with
+the suite's per-component core/spill statistics; `oracle.py` checks its replica against
+`score_samples`. There are 20k trials per cell. It covers the isotropic shape and each of the 3
+anisotropic covariances, and each column below is the worst over those 4 shapes. The grid and
+the selection rule were declared in `oracle.py` before it ran. The rule picks the smallest n at
+which every gated statistic's per-observation false-fail rate is ≤5% at that n and every larger
+grid n. The rule is per component. The gate averages core error over components, so this is
+conservative for core error. "sust." is the rate of failing the 5-observation suffix, assuming
+independent atom draws per observation. Frozen atoms give the per-observation rate instead.
+
+| n atoms | core err >.5 | core eig <.15 | spill >.05 | any | any, sust. |
+|---|---|---|---|---|---|
+| 3 | 0.942 | 0.713 | 0.033 | 0.943 | 1.000 |
+| 5 | 0.782 | 0.297 | 0.056 | 0.786 | 1.000 |
+| 8 | 0.560 | 0.070 | 0.087 | 0.575 | 0.986 |
+| 10 | 0.439 | 0.028 | 0.110 | 0.469 | 0.958 |
+| 12 | 0.354 | 0.010 | 0.124 | 0.401 | 0.923 |
+| 16 | 0.226 | 0.002 | 0.135 | 0.296 | 0.827 |
+| 20 | 0.146 | 0.000 | 0.110 | 0.211 | 0.694 |
+| 24 | 0.102 | 0.000 | 0.072 | 0.146 | 0.545 |
+| **32** | **0.046** | 0.000 | **0.048** | 0.085 | 0.358 |
+| 40 | 0.026 | 0.000 | 0.042 | 0.063 | 0.277 |
+| 48 | 0.017 | 0.000 | 0.027 | 0.039 | 0.179 |
+| 64 | 0.006 | 0.000 | 0.015 | 0.019 | 0.093 |
+
+- **Core error binds, not core eig.** Eig alone would give a floor of 10. The relative Frobenius
+  error of a covariance estimated from n atoms shrinks only as about 1/√n, and it drops below .5
+  reliably only at about 32 atoms. At 5 atoms a perfect sampler fails core error 78% of the time.
+- **Spill is non-monotone.** With k of n atoms beyond 3σ (p=1.1% each), spill is k/n. For n<20,
+  one stray atom is already >5%, so the false-fail rate climbs to 13.5% at n=16. It falls only
+  once two strays are needed (n≥20).
+- The rule chooses per-metric bounds, but the combined rate at 32 is 8.5% per observation. Even at
+  64 atoms, a perfect sampler misses the sustained rule 9% of the time per component.
+
+### Rescore (vector_unequal_mass, fixed cosine recipe, seed 0, sustained rule)
+
+The v4 and v5 verdicts come from the same episode (`run.py --v5`). Every metric reproduces the
+earlier runs exactly. Resolved columns cover the 3 big components. The rare component is exempt,
+and its core eig is shown for reference.
+
+| arm | kind | v4 → v5 verdict (suffix) | sw1 | mass_tv | min_mass_ratio | resolved core err | resolved core eig | resolved spill | rare mass | rare core eig (exempt) | v4 failing (final) | v5 failing (final) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| silu_dlr3 | recipe | fail (0) → **SUST (10)** | 0.092 | 0.055 | 0.90 | 0.39 | 0.44 | 0.011 | 0.025 | 0.08 | core eig | - |
+| linear_skip_d96_beta5 | critic | fail (3) → **SUST (7)** | 0.066 | 0.047 | 0.91 | 0.36 | 0.27 | 0.021 | 0.029 | 0.56 | - | - |
+| axis_silu | ref | fail (0) → fail (2) | 0.137 | 0.086 | 0.65 | 0.19 | 0.70 | 0.046 | 0.013 | 0.00 | core eig | - (spill, earlier obs) |
+| leaky_orig | ref | fail (0) → fail (1) | 0.081 | 0.052 | 0.91 | 0.18 | 0.77 | 0.048 | 0.024 | 0.45 | spill | - (spill, earlier obs) |
+
+**What fails now:** only `resolved_max_component_spill`, from the big components, not the rare
+one. At the final observation it is the 55% component. LeakyReLU's big component spills 4–5% beyond 3σ. That bound fails in 8 of its last
+12 observations, but not at the final one. axis_silu's big component spills 4.6% and fails 5 of
+its last 12. The 42% "spill" LeakyReLU showed under v4 came from the exempt rare component. The
+55% component has about 140 particles. Extrapolating the oracle, a perfect sampler would fail
+there far less than 1% of the time, so this is genuine marginal spill, not particle noise.
+
+### Suite (8 dev vector tasks, sustained)
+
+LeakyReLU and axis_silu were rerun on all 8 tasks. Every non-unequal_mass verdict and suffix is
+identical under v4 and v5, and they match #208/#210/#212.
+`test_particle_floor_leaves_other_tasks_unchanged` pins the equality of the gated values.
+
+| task | leaky_orig v4 → v5 | axis_silu v4 → v5 |
+|---|---|---|
+| vector_two_broad | SUST (19) → SUST (19) | SUST (21) → SUST (21) |
+| vector_unequal_mass | fail (0) → fail (1) | fail (0) → fail (2) |
+| vector_unequal_width | fail (0) → fail (0), spill | SUST (8) → SUST (8) |
+| vector_anisotropic | SUST (5) → SUST (5) | SUST (15) → SUST (15) |
+| vector_overlap | fail (4) → fail (4) | fail (4) → fail (4) |
+| vector_spiral | SUST (23) → SUST (23) | SUST (21) → SUST (21) |
+| vector_scale_drift (diag) | SUST (22) → SUST (22) | SUST (11) → SUST (11) |
+| vector_narrow (diag) | fail (0) → fail (0) | fail (0) → fail (0) |
+| **passes** | 4/8 → **4/8** | 5/8 → **5/8** |
+
+linear_skip_d96_beta5 moves from 3/8 to 4/8. Its only change is unequal_mass; the other 7 tasks
+reuse the cross-check above. It still loses unequal_width and anisotropic on spill.
+
+### Recommendations (v5)
+
+1. **Keep v5.** It removes a failure mode that a perfect sampler hits 79% of the time, and it
+   changes no other verdict. unequal_mass now names a real, fixable cause: spill of about 5%
+   from the 55% component.
+2. **What v5 no longer detects.** axis_silu's rare core is still a point collapse (eig 0.00,
+   about 3 particles, mass ratio .65), and v5 no longer penalizes it. Only its mass is gated.
+   Resolving a 2% component needs ≥1600 particles, so rare-mode shape at 256 particles is
+   unmeasurable, not merely unscored. If rare-mode shape matters, declare a separate task with
+   more particles. Do not lower the floor.
+3. **Next experiment for unequal_mass.** Both reference critics now miss only on big-component
+   spill, suffix 1–2. silu_dlr3 (critic LR 3×) passes with suffix 10 and the lowest spill
+   (.011). Critic LR 3× with axis_silu on the whole suite is the single most informative
+   follow-up. It is a recipe change, so it is a suite-wide proposal, not a critic promotion.
+4. **Protocol noise floor elsewhere.** The oracle shows core/spill gates are not free even for
+   well-resolved components. A perfect 64-atom sampler misses the sustained rule 9% of the time
+   per component. The spill bound (.05, versus a 1.1% expectation) dominates that at mid n.
+   Weigh this before reading one marginal spill failure, such as LeakyReLU unequal_width at
+   .055, as a real difference.

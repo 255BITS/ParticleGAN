@@ -143,3 +143,10 @@ A smooth SiLU critic forms a bump wider than σ over the under-filled 2% mode, a
 mode's 3 particles together in the generator's row space. None of 14 SiLU arms keeps the rare
 core (rare core eig ≤.08). No critic-side variant keeps SiLU's 5/8; both cross-checked
 alternatives score 3/8.
+
+## Follow-up: protocol v5
+
+The unequal_mass core-eig and spill gates on the 2% component (~5 particles) mostly measured
+particle count. Protocol v5 exempts components below 32 declared particles from the shape and spill
+gates; their mass is still gated. See the [v5 section](../silu_rare_collapse/README.md#protocol-v5-particle-resolution-floor).
+Pass counts are unchanged: axis_silu 5/8, LeakyReLU 4/8.
