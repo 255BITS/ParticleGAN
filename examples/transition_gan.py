@@ -67,7 +67,7 @@ class Score(nn.Module):
 class TransitionGAN(ToyProblem):
     name = "transition_gan"
 
-    def __init__(self, **overrides):
+    def __init__(self, device="cpu", **overrides):
         unknown = set(overrides) - set(PROBLEM_DEFAULTS)
         if unknown:
             raise ValueError(f"unknown transition options: {sorted(unknown)}")
@@ -76,7 +76,10 @@ class TransitionGAN(ToyProblem):
             # UCD critics need a classification loss on the class-head logits, which the
             # recipe has no generic factory for; the historical UCD arms are not runnable here.
             raise NotImplementedError("the shared runner declares concat critics only (UCD arms are flagged)")
-        self.toy = Transitions(cfg["length"], torch.device("cpu"), cfg["geometry_mode"])
+        # The normalization is fit on the run device, as on the leaderboard: fit() draws from a
+        # device-specific generator (seed 91001), so a CPU fit would differ from a CUDA fit.
+        self.device = torch.device(device)
+        self.toy = Transitions(cfg["length"], self.device, cfg["geometry_mode"])
         self.scaler = TransitionScaler.fit(self.toy, cfg["normalization_samples"])
         self.layout = None
         self._composed = None
@@ -102,15 +105,14 @@ class TransitionGAN(ToyProblem):
         critics = {name: Score(critic) for name, critic in self.layout.critics.items()}
         return Networks(generator=g, critics=critics, prior=prior, encoder=e)
 
-    def _data(self, device):
-        device = torch.device(device)
-        if self.toy.device != device:
-            self.toy = Transitions(self.cfg["length"], device, self.cfg["geometry_mode"])
-            self.scaler = self.scaler.to(device)
+    def data(self, device=None):
+        """The toy and its fitted scaler; both live on the device given at construction."""
+        if device is not None and torch.device(device) != self.device:
+            raise ValueError(f"TransitionGAN was fit on {self.device}; construct TransitionGAN(device={str(device)!r})")
         return self.toy, self.scaler
 
     def real(self, n, stream):
-        toy, scaler = self._data(stream.device)
+        toy, scaler = self.data(stream.device)
         c, geom, tick, x = toy.batch(n, stream)
         return Sample(scaler(x), condition=(c, toy.condition(geom, tick)))
 
@@ -160,6 +162,8 @@ class TransitionGAN(ToyProblem):
             decoded_real, _ = encoded_transition(nets.encoder, nets.generator, prior, real.x[:, :4], c, context)
             decoded_fake = self.composed(nets, fake)[1]
             # Reconstruct generated observations; never regress to latent IDs or analytic physics.
+            # fake.x already carries the runner's generator output noise, so the composed path
+            # encodes, and synthetic_mse targets, the noisy G1/G2 sample (the leaderboard used clean).
             terms["real_mse"] = cfg["real_encoding_weight"]*(decoded_real-real.x).square().mean()
             terms["synthetic_mse"] = cfg["synthetic_reconstruction_weight"]*(
                 decoded_fake[:, :4]-fake.x[:, :4].detach()).square().mean()
@@ -169,7 +173,7 @@ class TransitionGAN(ToyProblem):
         """Held-out geometries on the leaderboard's fixed reference draws (evaluate() in memory)."""
         nets = model.nets
         device = next(nets.generator.parameters()).device
-        toy, scaler = self._data(device)
+        toy, scaler = self.data(device)
         ticks = sorted(set(round(f*(toy.length-2)) for f in EVAL_TICKS))
         cc, gg = toy.contexts("test")
         c0, geom0 = cc.repeat_interleave(len(ticks)), gg.repeat_interleave(len(ticks), 0)
@@ -211,4 +215,9 @@ class TransitionGAN(ToyProblem):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main(TransitionGAN()))
+    import argparse
+    # The shared CLI owns --device; the problem needs it up front to fit its normalization there.
+    peek = argparse.ArgumentParser(add_help=False)
+    peek.add_argument("--device", default="cpu")
+    known, _ = peek.parse_known_args()
+    raise SystemExit(main(TransitionGAN(device=known.device)))

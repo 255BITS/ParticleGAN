@@ -185,6 +185,20 @@ class TransitionTests(unittest.TestCase):
         for name, critic in run.critics.items():
             self.assertFalse(torch.equal(critic.critic.net[0].weight, before[name]["critic.net.0.weight"]))
 
+    def test_normalization_is_fit_on_the_construction_device(self):
+        # fit() draws from a device-specific generator, so the problem fits where it runs
+        # (as the leaderboard did) and refuses a runner device it was not fit on.
+        problem = TransitionGAN(device="cpu", **SMALL)
+        toy, scaler = problem.data("cpu")
+        self.assertEqual(toy.device, torch.device("cpu"))
+        expected = TransitionScaler.fit(Transitions(64, torch.device("cpu")), SMALL["normalization_samples"])
+        self.assertTrue(torch.equal(scaler.mean, expected.mean) and torch.equal(scaler.scale, expected.scale))
+        with self.assertRaises(ValueError):
+            problem.data("meta")
+        if torch.cuda.is_available():
+            cuda = TransitionGAN(device="cuda:0", **SMALL)
+            self.assertEqual(cuda.data()[1].mean.device.type, "cuda")
+
     def test_views_weight_marginals_isolate_blocks_and_keep_joint_init(self):
         run = small_run(encoder=False, shared_state_critic=False)
         problem, nets = run.problem, run.nets

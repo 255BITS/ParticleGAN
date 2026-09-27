@@ -182,7 +182,7 @@ def train(cfg):
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
-    problem = TransitionGAN(**{k: cfg[k] for k in PROBLEM_DEFAULTS})
+    problem = TransitionGAN(device=device, **{k: cfg[k] for k in PROBLEM_DEFAULTS})
     recipe = problem.recipe()
     out = Path(cfg["out_dir"])
     out.mkdir(parents=True, exist_ok=True)
@@ -205,7 +205,7 @@ def train(cfg):
                visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"))
     write_json(out / "environment.json", env)
     run = ToyRun(problem, recipe=recipe, seed=cfg["seed"], device=device)
-    toy, scaler = problem._data(device)
+    toy, scaler = problem.data(device)
     g, prior, e, d = run.nets.generator, run.nets.prior, run.nets.encoder, problem.layout
     write_json(out / "normalization.json", dict(mean=scaler.mean.tolist(), scale=scaler.scale.tolist(),
                                                split="train", seed=91001, count=cfg["normalization_samples"]))

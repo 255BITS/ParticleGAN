@@ -90,6 +90,15 @@ recipe-built optimizer and penalty, and the recipe's critic input noise and
 generator output noise apply. Composed triples for D carry no gradient. Shared
 state weights receive both state-role views.
 
+Behaviour change from the leaderboard runs: the runner adds the recipe's
+generator output noise (std ramping 0 -> 0.029 over the first quarter of the
+recipe horizon, then held; in scaled units) to the
+G1/G2/G3 sample before `views()` and `losses()` see it. So the composed path
+encodes the noisy `(st, at)`, and `synthetic_mse` regresses the decoded
+`(st, at)` onto the noisy, detached `fake[:, :4]` rather than the clean G
+output. The encoder's supervised synthetic target therefore carries that noise.
+`real_mse` is unaffected (real batches get no output noise).
+
 ## Recipe and comparison limits
 
 The recorded comparison below used the original MoG study settings. Current
