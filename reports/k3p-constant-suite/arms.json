@@ -874,6 +874,488 @@
      0.999
     ]
    }
+  },
+  "gsR_r0.1_c0.3": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 0.1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.3333333333333333
+   }
+  },
+  "gsR_r0.03_c0.3": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 0.03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.1
+   }
+  },
+  "gsR_r0_c0.3": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 0",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.0
+   }
+  },
+  "gsR_r0.1_c1": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.1
+   }
+  },
+  "gsR_r0.03_c1": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.03
+   }
+  },
+  "gsRs_r0.1_c1": {
+   "formulation": "R1/cap split: k3p_simple with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.1
+   }
+  },
+  "gsRs_r0.03_c1": {
+   "formulation": "R1/cap split: k3p_simple with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.03
+   }
+  },
+  "gsRs_r0_c1": {
+   "formulation": "R1/cap split: k3p_simple with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.0
+   }
+  },
+  "gsC_cap_w": {
+   "formulation": "symmetric cap: gs2_c03_lr2_d05 (reg_coeff .3, lr .0085, d_lr_mult .5) with R1 on reals replaced by the fakes' one-sided RMS cap (kappa 1 on both)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap"
+   }
+  },
+  "gsC_cap_s": {
+   "formulation": "symmetric cap: k3p_simple (reg_coeff 1) with R1 on reals replaced by the fakes' one-sided RMS cap (kappa 1 on both)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap"
+   }
+  },
+  "gsC_cap_s_k0.5": {
+   "formulation": "symmetric cap: k3p_simple with R1 on reals replaced by a one-sided RMS cap at 0.5 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 0.5
+   }
+  },
+  "gsC_cap_s_k2": {
+   "formulation": "symmetric cap: k3p_simple with R1 on reals replaced by a one-sided RMS cap at 2 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 2.0
+   }
+  },
+  "gsX_r1_c0.1": {
+   "formulation": "reverse R1/cap split: k3p_simple with fake cap at reg_coeff 0.1 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.1
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 10.0
+   }
+  },
+  "gsX_r1_c0.03": {
+   "formulation": "reverse R1/cap split: k3p_simple with fake cap at reg_coeff 0.03 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 33.333333333333336
+   }
+  },
+  "gsX_w_r0.3_c0.1": {
+   "formulation": "reverse R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.1 and R1-on-reals at reg_coeff*reg_real_weight = 0.3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.1,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 3.0
+   }
+  },
+  "gsC_cap_s_k0.25": {
+   "formulation": "symmetric cap: k3p_simple with R1 on reals replaced by a one-sided RMS cap at 0.25 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 0.25
+   }
+  },
+  "gsC_cap_w_k0.5": {
+   "formulation": "symmetric cap: gs2_c03_lr2_d05 (reg_coeff .3, lr .0085, d_lr_mult .5) with R1 on reals replaced by a one-sided RMS cap at 0.5 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 0.5
+   }
+  },
+  "gsX_r0.3_c0.03": {
+   "formulation": "R1/cap split neighbour: k3p_simple with fake cap at reg_coeff 0.03 and R1-on-reals at reg_coeff*reg_real_weight = 0.3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 10.0
+   }
+  },
+  "gsX_r3_c0.03": {
+   "formulation": "R1/cap split neighbour: k3p_simple with fake cap at reg_coeff 0.03 and R1-on-reals at reg_coeff*reg_real_weight = 3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 100.0
+   }
+  },
+  "gsX_r1_c0.01": {
+   "formulation": "R1/cap split neighbour: k3p_simple with fake cap at reg_coeff 0.01 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.01
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 100.0
+   }
+  },
+  "gsX_w_r0.3_c1": {
+   "formulation": "R1/cap split neighbour: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 1 and R1-on-reals at reg_coeff*reg_real_weight = 0.3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.3
+   }
+  },
+  "gsX_w_r1_c0.3": {
+   "formulation": "R1/cap split neighbour: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 3.3333333333333335
+   }
   }
  }
 }

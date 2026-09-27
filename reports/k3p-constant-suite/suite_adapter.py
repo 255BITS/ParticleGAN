@@ -48,7 +48,8 @@ MARKER_ARM = "a_r1r2"
 ARMS = json.loads((HERE / "arms.json").read_text())["arms"]
 RELEASED = get_recipe()
 K3P_FIELDS = ("d_guard_ratio", "d_guard_min_steps", "latent_damping_max_rate", "reg_anchor_decay",
-              "reg_anchor_weight", "direct_particle_betas", "direct_particle_gain", "amsgrad")
+              "reg_anchor_weight", "direct_particle_betas", "direct_particle_gain", "amsgrad", "reg_real_weight",
+              "reg_real_mode", "reg_real_kappa")
 
 RECEIPT = {"optimizers": [], "lr": {}, "amsgrad_flags": [], "noise": {}, "k3p_legacy": {}, "simple_calls": 0,
            "gantrainer_recipes": [], "route": None}
@@ -203,6 +204,7 @@ def _trainer_init(self, recipe, generator, discriminator, *args, **kwargs):
             ps = out.get("penalty_stats") or {}
             LOG(f"train {out['step']:6d}/{self.recipe.total_steps} Ld={float(out['loss_d']):+.4f} "
                 f"Lg={float(out['loss_g']):+.4f} pen={float(out['penalty']):.3g} s={ps.get('s', float('nan')):.3g} "
+                f"gR={ps.get('real_rms_mean', float('nan')):.3g}/{ps.get('real_rms_max', float('nan')):.3g} "
                 f"lr_d={self.opt_d.param_groups[0]['lr']:.3g} {time.monotonic() - t0:.0f}s")
         return out
     self.step = step

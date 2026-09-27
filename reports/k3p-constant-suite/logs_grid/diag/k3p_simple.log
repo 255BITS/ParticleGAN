@@ -1,0 +1,4 @@
+# 2026-09-27 07:57:09 arm=k3p_simple device=cuda:0 tasks=2 steps=None
+07:59:31 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +430 departures 0 final HQ 0.993 | 137s rc=0
+08:01:13 ring8-multishift           PASS  fails outside transit=0 | prehold 120/120 arrival +430/+190/+20 departures 0 final HQ 0.991 | 240s rc=0
+# 2026-09-27 08:01:13 arm=k3p_simple finished

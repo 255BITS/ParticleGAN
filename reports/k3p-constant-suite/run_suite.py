@@ -328,15 +328,17 @@ def run_ring(name, cfg, cfg_path, out, args, sa, log):
             d = mode_hold.diversity(fake, means)
             p = dict(step=step, modes=d["modes"], hq=d["hq"], passed=d["modes"] == 8 and .9 <= d["hq"] <= 1.0)
             p["pass"] = p.pop("passed")
-            points.append(p)
             ps = stats.get("penalty_stats") or {}
+            p.update({k: ps[k] for k in ("real_rms_mean", "real_rms_max", "fake_rms_max") if k in ps})
+            points.append(p)
             lrs = [trainer.opt_g.param_groups[0]["lr"], trainer.opt_d.param_groups[0]["lr"],
                    trainer.opt_g.param_groups[-1]["lr"]]
             vals = [float(stats[k]) for k in ("loss_d", "loss_g", "penalty")]
             if not all(map(lambda v: v == v and abs(v) != float("inf"), vals)):
                 raise RuntimeError(f"nonfinite losses at {step}: {vals}")
             log(f"{step:5d} m={p['modes']} hq={p['hq']:.3f} {'PASS' if p['pass'] else 'fail'} | "
-                f"Ld={vals[0]:+.4f} Lg={vals[1]:+.4f} pen={vals[2]:.3g} s={ps.get('s', float('nan')):.3g} | "
+                f"Ld={vals[0]:+.4f} Lg={vals[1]:+.4f} pen={vals[2]:.3g} s={ps.get('s', float('nan')):.3g} "
+                f"gR={ps.get('real_rms_mean', float('nan')):.3g}/{ps.get('real_rms_max', float('nan')):.3g} | "
                 f"lr {'/'.join(f'{v:.3g}' for v in lrs)} | noise {input_noise_std(recipe, step - 1):.3g}/"
                 f"{output_noise_std(recipe, step - 1):.3g} | {time.monotonic() - t0:.0f}s")
         if step in shift_at:

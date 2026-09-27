@@ -16,7 +16,7 @@ from run_suite import TASKS  # noqa: E402
 
 NATIVE = ("grid100", "rotated100", "staggered100")
 TARGET = [f"native-{p}" for p in NATIVE] + ["toy-img_bars4", "toy-two_pole"]
-REFS = ("k3p_simple", "k3p_stock")
+REFS = tuple(p.name for p in (HERE / "runs").glob("*/"))  # suite arms (runs/); grid arms live in runs_grid/
 
 
 def results(arm):
@@ -34,6 +34,9 @@ def native(arm, p):
         a = json.loads((b / f"accuracy-gate-{p}.json").read_text())["problems"][p]
     except (FileNotFoundError, KeyError):
         return None
+    if "final_metrics" not in g:
+        return dict(passed=False, cov=0, acc=0, hq=float("nan"), emin=float("nan"), emax=float("nan"),
+                    center=float("nan"), tv=float("nan"), modes=None, reason=g.get("reason", g.get("status")))
     m = re.search(r"only (\d+)/5", g.get("reason", ""))
     cov = 5 if g["status"] == "PASS" else int(m.group(1)) if m else 0
     f = g["final_metrics"]
@@ -47,6 +50,8 @@ def native(arm, p):
 def ncell(n):
     if n is None:
         return "–"
+    if n.get("reason"):
+        return f"F ({n['reason'][:40]})"
     return (f"{'P' if n['passed'] else 'F'} {n['cov']}/{n['acc']} {n['hq']:.3f} "
             f"{n['emin']:.2f}-{n['emax']:.2f} c{n['center']:.2f}")
 

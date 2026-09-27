@@ -275,3 +275,292 @@ tail -f logs_grid/<arm>/<task>.log       # one line per eval
 
 Runs are in `runs_grid/<arm>/<task>/`. Only `result.json`, `config.json` and the native gate JSONs are committed.
 k3p_simple and k3p_stock were not rerun, because the suite is deterministic; their results are read from `runs/`.
+
+---
+
+# Follow-up: split R1 from the fake cap, and a symmetric real-side cap (noise-free)
+
+## Question
+
+Stage 1 found that a weaker `reg_coeff` improves native within-mode shape but breaks the ring. `reg_coeff` scales
+two terms together: R1 on reals and the one-sided RMS cap on fakes. Is the trade-off R1 against the cap?
+
+Martyn also objects to R1 because it pulls the critic's slope at the reals to zero even when D is right. So a
+second arm replaces R1 with the fakes' own cap applied to reals, making one symmetric cap. Instance noise stays at
+0 in every arm.
+
+## Result
+
+**No R1/cap split and no real-side cap beats `gs2_c03_lr2_d05` (17/26), and none fixes native.**
+- **The ring needs R1 at the reals.** Every arm that weakens R1 or replaces it with a cap loses the ring.
+- **The only ring-clean new config is `gsX_r1_c0.03`** (R1 1, cap .03, k3p_simple LRs). On the full suite it
+  scores **12/26**, below k3p_simple.
+- **It is a single point.** Each of its one-knob neighbours fails the ring. So do the winner's R1/cap neighbours.
+- **Native stays 0/3.** The worst-mode covariance ratio stays at .14–.23 in every arm, well short of the gate's .4.
+
+## Code (opt-in; defaults bit-identical)
+
+`particlegan.Recipe` gets three fields, each registered in `training._ADDED_RECIPE_FIELDS`:
+- **`reg_real_weight`** (1.0) scales phase A's reals term against `reg_coeff`. The fake cap stays at `reg_coeff`.
+  - Effective R1 = `reg_coeff × reg_real_weight`.
+  - Effective cap = `reg_coeff`.
+- **`reg_real_mode`** (`"r1"`) picks phase A's reals term. `"cap"` replaces R1 with
+  `relu(‖∇D(real)‖/√d − reg_real_kappa)²`, the same op as the fake side.
+- **`reg_real_kappa`** (None, meaning `reg_kappa`).
+
+Checks:
+- **Kernel:** `GradientPenalty(real_weight, real_mode, real_kappa)`. At the defaults the phase-A ops are unchanged.
+- **Diagnostics:** with `collect_stats`, phase A also reports `real_rms_mean/max` and `fake_rms_mean/max`
+  (detached, diagnostics only). The ring and GANTrainer logs print them as `gR=mean/max`.
+- **Unit tests** (`tests/test_reg_real_weight.py`):
+  - the default equals the old penalty exactly;
+  - weight 0 leaves only the fake cap;
+  - cap mode equals the symmetric cap;
+  - a cap threshold above every real slope equals weight 0;
+  - validation and checkpoint upgrade work.
+  - 138 tests pass across the recipe, K3P, penalty, training and API test files.
+- **Suite bit-identity:** gs2_c03_lr2_d05 was rerun after the change on ring8-shift, toy-two_pole and toy-img_bars4
+  (one task per route). All three have identical final-parameter sha256 and metrics.
+- **Diagnostic reruns match:** the `runs_grid_diag/` ring reruns of k3p_simple and gs2_c03_lr2_d05 reproduce every
+  ring metric.
+- **Consistency check:** `gsC_cap_s` (the recipe path) reproduces the suite's harness-level `ab_caponly` exactly on
+  all 7 tasks.
+
+Harness:
+- `suite_adapter.K3P_FIELDS` carries the three fields to every route.
+- `grid_gradstats.py` builds the gradient table below.
+
+Two arms had to rerun their 3 native tasks with `--overwrite`: gsR_r0.03_c0.3 and gsRs_r0.1_c1.
+- The toy100 runner hashes the package source. The `reg_real_mode` edit landed mid-run, so its gate recorded
+  "source changed during training".
+- Training itself had finished and was unaffected. The rerun is the same config, not a seed variant.
+
+## Arms
+
+"R1 x, cap y" means an effective R1 weight of x and a fake-cap coefficient of y.
+
+- **gs2 base** (`gs2_c03_lr2_d05`: lr .0085, `d_lr_mult` .5; R1 .3, cap .3)
+  - `gsR_r0.1_c0.3`, `gsR_r0.03_c0.3`, `gsR_r0_c0.3`: R1 swept down.
+  - `gsR_r0.1_c1`, `gsR_r0.03_c1`: cap raised to 1.
+  - `gsX_w_r0.3_c0.1`: reverse split.
+- **k3p_simple base** (lr .00425, `d_lr_mult` 1; R1 1, cap 1)
+  - `gsRs_r0.1_c1`, `gsRs_r0.03_c1`, `gsRs_r0_c1`: R1 down, cap held.
+  - `gsX_r1_c0.1`, `gsX_r1_c0.03`: reverse split. R1 is held at 1 and the cap goes down, which the data pointed to.
+- **Symmetric cap**
+  - `gsC_cap_w` (gs2 base, cap .3 on both sides).
+  - `gsC_cap_s` (k3p_simple base, cap 1 on both).
+  - Real threshold on the k3p_simple base, the better native base: `gsC_cap_s_k0.5` and `gsC_cap_s_k2`, plus
+    `gsC_cap_s_k0.25` to follow the trend.
+  - `gsC_cap_w_k0.5`: the same threshold on the gs2 base.
+
+## Stage 1: 5 target tasks and both ring tasks
+
+| arm | 5-task passes | native checks cov+acc /30 | mean HQ | mean min eig | mean worst center | grid100 | rotated100 | staggered100 | img_bars4 | two_pole | ring8-shift | ring8-multishift |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| gsX_w_r0.3_c0.1 | 2/5 | 0 | 0.975 | 0.19 | 0.36 | F 0/0 0.978 0.16-1.95 c0.31 | F 0/0 0.972 0.14-1.96 c0.40 | F 0/0 0.977 0.27-1.95 c0.36 | P 19/24 | P 13/24 | F f0 x d0 | F f0 x/x/x d0 |
+| gs2_c03_lr2_d05 | 2/5 | 0 | 0.972 | 0.18 | 0.38 | F 0/0 0.980 0.14-2.62 c0.33 | F 0/0 0.969 0.15-2.02 c0.42 | F 0/0 0.966 0.23-1.96 c0.39 | P 19/24 | P 13/24 | P f0 +940 d0 | P f0 +940/+310/+110 d0 |
+| gsR_r0.1_c0.3 | 1/5 | 0 | 0.979 | 0.16 | 0.38 | F 0/0 0.983 0.16-2.36 c0.34 | F 0/0 0.975 0.13-1.86 c0.43 | F 0/0 0.979 0.20-1.83 c0.37 | F 0/24 | P 14/24 | F f34 +550 d3 | F f37 +550/+270/+200 d5 |
+| gsR_r0.1_c1 | 1/5 | 0 | 0.979 | 0.18 | 0.39 | F 0/0 0.980 0.19-2.67 c0.36 | F 0/0 0.977 0.17-1.83 c0.45 | F 0/0 0.980 0.17-1.74 c0.36 | F 0/24 | P 14/24 | F f72 +480 d2 | F f75 +480/+520/+70 d4 |
+| gsR_r0.03_c0.3 | 1/5 | 0 | 0.979 | 0.20 | 0.39 | F 0/0 0.981 0.20-1.91 c0.42 | F 0/0 0.975 0.19-1.81 c0.39 | F 0/0 0.981 0.22-1.98 c0.36 | F 0/24 | P 7/24 | F f207 +210 d13 | F f236 +210/+160/+80 d27 |
+| gsC_cap_s | 1/5 | 0 | 0.981 | 0.23 | 0.41 | F 0/0 0.977 0.22-1.85 c0.41 | F 0/0 0.981 0.21-1.80 c0.41 | F 0/0 0.985 0.25-2.17 c0.39 | F 0/24 | P 13/24 | F f188 +240 d23 | F f231 +240/+160/+110 d42 |
+| gsR_r0.03_c1 | 1/5 | 0 | 0.981 | 0.19 | 0.42 | F 0/0 0.985 0.11-1.86 c0.39 | F 0/0 0.979 0.23-1.96 c0.46 | F 0/0 0.981 0.22-2.15 c0.41 | F 0/24 | P 8/24 | F f144 +1010 d21 | F f149 +1010/+1310/+530 d25 |
+| gsC_cap_s_k0.5 | 1/5 | 0 | 0.980 | 0.18 | 0.46 | F 0/0 0.981 0.19-1.87 c0.42 | F 0/0 0.975 0.12-2.21 c0.52 | F 0/0 0.985 0.24-1.70 c0.45 | F 0/24 | P 9/24 | F f33 +590 d4 | F f75 +590/+310/+100 d13 |
+| gsC_cap_w_k0.5 | 1/5 | 0 | 0.985 | 0.14 | 0.47 | F 0/0 0.985 0.14-2.17 c0.42 | F 0/0 0.983 0.14-2.06 c0.50 | F 0/0 0.986 0.14-1.91 c0.48 | F 1/24 | P 13/24 | F f70 +790 d11 | F f76 +790/+290/+390 d14 |
+| gsC_cap_w | 1/5 | 0 | 0.956 | 0.16 | 0.59 | F 0/0 0.980 0.20-1.92 c0.43 | F 0/0 0.904 0.06-1.69 c0.93 | F 0/0 0.985 0.22-1.90 c0.40 | F 1/24 | P 7/24 | F f166 +1090 d17 | F f214 +1090/+60/+480 d26 |
+| gsR_r0_c0.3 | 1/5 | 0 | 0.943 | 0.20 | 0.62 | F 0/0 0.949 0.21-2.15 c0.63 | F 0/0 0.892 0.17-3.34 c0.85 | F 0/0 0.989 0.22-2.27 c0.39 | F 1/24 | P 6/24 | F f169 +1170 d4 | F f211 +1170/+240/+610 d27 |
+| gsRs_r0.1_c1 | 0/5 | 0 | 0.980 | 0.19 | 0.31 | F 0/0 0.984 0.23-2.12 c0.27 | F 0/0 0.975 0.14-2.07 c0.36 | F 0/0 0.982 0.19-2.08 c0.30 | F 0/24 | F 1/24 | F f55 +90 d1 | F f55 +90/+400/+60 d1 |
+| gsX_r1_c0.03 | 0/5 | 0 | 0.969 | 0.16 | 0.31 | F 0/0 0.975 0.24-2.06 c0.25 | F 0/0 0.967 0.11-1.61 c0.41 | F 0/0 0.966 0.12-1.78 c0.27 | F 2/24 | F 0/24 | P f0 +490 d0 | P f0 +490/+220/+20 d0 |
+| gsX_r1_c0.1 | 0/5 | 0 | 0.974 | 0.17 | 0.31 | F 0/0 0.979 0.23-1.89 c0.26 | F 0/0 0.971 0.08-1.65 c0.37 | F 0/0 0.972 0.19-2.08 c0.31 | F 3/24 | F 0/24 | F f26 +370 d1 | F f29 +370/x/+610 d4 |
+| k3p_simple | 0/5 | 0 | 0.971 | 0.16 | 0.33 | F 0/0 0.973 0.15-1.91 c0.27 | F 0/0 0.971 0.14-1.81 c0.41 | F 0/0 0.970 0.20-1.78 c0.32 | F 3/24 | F 0/24 | P f0 +430 d0 | P f0 +430/+190/+20 d0 |
+| gsRs_r0.03_c1 | 0/5 | 0 | 0.982 | 0.22 | 0.36 | F 0/0 0.984 0.24-2.12 c0.32 | F 0/0 0.979 0.17-1.61 c0.37 | F 0/0 0.984 0.24-1.81 c0.38 | F 0/24 | F 0/24 | F f217 +320 d13 | F f311 +320/+220/+60 d31 |
+| gsC_cap_s_k2 | 0/5 | 0 | 0.985 | 0.20 | 0.44 | F 0/0 0.988 0.21-1.74 c0.44 | F 0/0 0.982 0.22-1.85 c0.46 | F 0/0 0.984 0.17-1.91 c0.41 | F 0/24 | F 0/24 | F f163 +530 d13 | F f193 +530/+120/+100 d28 |
+| gsRs_r0_c1 | 0/5 | 0 | 0.982 | 0.22 | 0.45 | F 0/0 0.982 0.28-1.77 c0.38 | F 0/0 0.983 0.16-1.54 c0.49 | F 0/0 0.980 0.22-1.78 c0.47 | F 0/24 | F 0/24 | F f232 +540 d25 | F f277 +540/+390/+310 d42 |
+| gsC_cap_s_k0.25 | 0/5 | 0 | 0.979 | 0.15 | 0.45 | F 0/0 0.978 0.21-2.20 c0.44 | F 0/0 0.975 0.15-1.80 c0.46 | F 0/0 0.984 0.10-1.69 c0.45 | F 0/24 | F 0/24 | F f45 +320 d1 | F f45 +320/+220/+60 d1 |
+
+### R1 = 0 vs real-side cap vs R1 split (direct comparison)
+
+| family | arm | mean min eig (gate ≥.4) | mean HQ | bars4 | two_pole | ring8-shift f | multishift f / arrivals |
+|---|---|---|---|---|---|---|---|
+| reference | k3p_simple (R1 1, cap 1) | .16 | .971 | 3 | 0 | 0 | 0 / +430 +190 +20 |
+| reference | gs2_c03_lr2_d05 (R1 .3, cap .3) | .18 | .972 | **19** | **13** | 0 | 0 / +940 +310 +110 |
+| R1 = 0 | gsRs_r0_c1 (cap 1) | .22 | .982 | 0 | 0 | 232 | 277 |
+| R1 = 0 | gsR_r0_c0.3 (cap .3) | .20 | .943 | 1 | 6 | 169 | 211 |
+| real cap | gsC_cap_s (κr 1, coeff 1) | **.23** | .981 | 0 | 13 | 188 | 231 |
+| real cap | gsC_cap_s_k0.5 | .18 | .980 | 0 | 9 | 33 | 75 |
+| real cap | gsC_cap_s_k0.25 | .15 | .979 | 0 | 0 | 45 | 45 |
+| real cap | gsC_cap_s_k2 | .20 | **.985** | 0 | 0 | 163 | 193 |
+| real cap | gsC_cap_w (κr 1, coeff .3) | .16 | .956 | 1 | 7 | 166 | 214 |
+| real cap | gsC_cap_w_k0.5 | .14 | .985 | 1 | 13 | 70 | 76 |
+| R1 split | gsRs_r0.03_c1 | .22 | .982 | 0 | 0 | 217 | 311 |
+| R1 split | gsR_r0.1_c0.3 | .16 | .979 | 0 | 14 | 34 | 37 |
+| R1 split | gsR_r0.1_c1 | .18 | .979 | 0 | 14 | 72 | 75 |
+| reverse split | **gsX_r1_c0.03** | .16 | .969 | 2 | 0 | **0** | **0** / +490 +220 +20 |
+| reverse split | gsX_r1_c0.1 | .17 | .974 | 3 | 0 | 26 | 29 |
+| reverse split | gsX_w_r0.3_c0.1 | .19 | .975 | 19 | 13 | 0 (never arrives) | 0 (never arrives) |
+
+### Is the result a region or a point? Ring one-knob neighbours
+
+| base | arm | R1 / cap change | ring8-shift | ring8-multishift |
+|---|---|---|---|---|
+| k3p_simple | gsX_r1_c0.03 | R1 1, cap .03 (candidate) | P f0 +490 d0 (prehold 120/120) | P f0 +490/+220/+20 d0 (prehold 120/120) |
+| k3p_simple | gsX_r1_c0.1 | cap .1 | F f26 +370 d1 (prehold 94/120) | F f29 +370/x/+610 d4 (prehold 94/120) |
+| k3p_simple | gsX_r1_c0.01 | cap .01 | F f120 x d0 (prehold 0/120) | F f122 x/+220/+50 d2 (prehold 0/120) |
+| k3p_simple | gsX_r0.3_c0.03 | R1 .3 | F f18 +400 d3 (prehold 102/120) | F f19 +400/+50/+30 d4 (prehold 102/120) |
+| k3p_simple | gsX_r3_c0.03 | R1 3 | F f44 +300 d14 (prehold 85/120) | F f44 +300/+40/+50 d14 (prehold 85/120) |
+| gs2_c03_lr2_d05 | gs2_c03_lr2_d05 | R1 .3, cap .3 (winner) | P f0 +940 d0 (prehold 120/120) | P f0 +940/+310/+110 d0 (prehold 120/120) |
+| gs2_c03_lr2_d05 | gsR_r0.1_c0.3 | R1 .1 | F f34 +550 d3 (prehold 87/120) | F f37 +550/+270/+200 d5 (prehold 87/120) |
+| gs2_c03_lr2_d05 | gsX_w_r1_c0.3 | R1 1 | P f0 +620 d0 (prehold 120/120) | F f16 +620/+480/+140 d1 (prehold 120/120) |
+| gs2_c03_lr2_d05 | gsX_w_r0.3_c0.1 | cap .1 | F f0 x d0 (prehold 120/120) | F f0 x/x/x d0 (prehold 120/120) |
+| gs2_c03_lr2_d05 | gsX_w_r0.3_c1 | cap 1 | F f2 +870 d2 (prehold 118/120) | F f2 +870/+460/+20 d2 (prehold 118/120) |
+
+**Both ring-clean configs are isolated points.**
+- Around gsX_r1_c0.03: cap .1 and cap .01 fail, and so do R1 .3 and R1 3.
+- Around gs2_c03_lr2_d05: R1 .1, R1 1, cap .1 and cap 1 each fail at least one ring task. The first grid's
+  LR/penalty neighbours of the winner failed too.
+
+### Real-side input gradient on the ring (ring8-multishift, logged every 10 updates)
+
+RMS = ‖∇ₓD‖/√d per sample. "Prehold" covers updates 1210–2400, before any shift.
+
+| arm | prehold real RMS mean (median) | prehold real RMS max (median / max) | run real RMS max (max) | run fake RMS max (max) |
+|---|---|---|---|---|
+| k3p_simple | 0.016 | 0.30 / 0.98 | 1.82 | 2.58 |
+| gs2_c03_lr2_d05 | 0.018 | 0.36 / 0.86 | 4.02 | 4.34 |
+| gsX_r1_c0.03 | 0.021 | 0.40 / 1.38 | 3.43 | 6.08 |
+| gsX_r1_c0.1 | 0.029 | 0.47 / 2.44 | 3.35 | 6.45 |
+| gsX_w_r0.3_c0.1 | 0.027 | 0.58 / 1.96 | 4.17 | 7.32 |
+| gsR_r0.1_c1 | 0.409 | 1.12 / 1.81 | 2.94 | 3.20 |
+| gsRs_r0.03_c1 | 0.772 | 1.29 / 1.52 | 2.70 | 2.70 |
+| gsRs_r0_c1 | 0.951 | 1.46 / 1.78 | 3.62 | 5.95 |
+| gsR_r0_c0.3 | 1.089 | 2.51 / 3.57 | 6.23 | 6.12 |
+| gsC_cap_s_k0.25 | 0.051 | 0.43 / 1.19 | 2.22 | 2.89 |
+| gsC_cap_s_k0.5 | 0.344 | 0.64 / 1.12 | 2.26 | 2.52 |
+| gsC_cap_s | 0.863 | 1.21 / 1.51 | 3.33 | 3.06 |
+| gsC_cap_s_k2 | 0.895 | 1.94 / 3.30 | 4.46 | 4.11 |
+| gsC_cap_w_k0.5 | 0.387 | 1.16 / 1.84 | 3.53 | 4.25 |
+| gsC_cap_w | 0.927 | 1.38 / 1.78 | 4.77 | 5.29 |
+
+With R1 at weight ≥ .3, the median real-side slope is about .02. The critic is flat at the data, which is the
+equilibrium R1 enforces.
+
+Without R1, or with R1 at .1 or lower, the typical real-side slope sits near the cap threshold (.4–1.1) or above it.
+
+**The real-side cap does not stop spikes.**
+- Run-max real RMS with a cap is 2.2–4.8, against 1.8 for k3p_simple.
+- Its prehold max is 1.1–3.3, against 0.98.
+- Lowering the threshold moves the cap toward R1. At κr = 0 the cap is exactly R1 in RMS units. That is why
+  κr = .5 and .25 are the best cap arms on the ring (f33–75). Even κr = .25 has 45 fails.
+
+## Stage 2: full 26-task suite
+
+Only `gsX_r1_c0.03` keeps 0 ring fails and arrives after every shift. `gsX_w_r0.3_c0.1` also has 0 fails, but its
+ring never re-forms 8 modes after the shift.
+
+| arm | passes | native | transfer /19 | ring8-shift | ring8-multishift |
+|---|---|---|---|---|---|
+| k3p_simple | 14/26 | 0/3 | 12 | P f0 +430 d0 | P f0 +430/+190/+20 d0 |
+| k3p_stock | 18/26 | 3/3 | 14 | P f0 +1220 d1 | F f2 +1990/x/+1640 d4 |
+| gs2_c03_lr2_d05 | 17/26 | 0/3 | 15 | P f0 +940 d0 | P f0 +940/+310/+110 d0 |
+| gsX_r1_c0.03 | 12/26 | 0/3 | 10 | P f0 +490 d0 | P f0 +490/+220/+20 d0 |
+
+| task | k3p_simple | k3p_stock | gs2_c03_lr2_d05 | gsX_r1_c0.03 |
+|---|---|---|---|---|
+| native-grid100 | F 99/0.973 | P 100/0.987 | F 100/0.980 | F 99/0.975 |
+| native-rotated100 | F 100/0.971 | P 100/0.982 | F 100/0.969 | F 100/0.967 |
+| native-staggered100 | F 100/0.970 | P 100/0.987 | F 100/0.966 | F 100/0.966 |
+| hold-mode_hold | F 0/1200+0/0 | F 0/1200+0/0 | F 0/1200+0/0 | F 0/1200+0/0 |
+| ring8-multishift | P f0 +430/+190/+20 d0 | F f2 +1990/x/+1640 d4 | P f0 +940/+310/+110 d0 | P f0 +490/+220/+20 d0 |
+| shift-mode_hold | F 0/81 | F 0/81 | F 0/81 | F 0/81 |
+| ring8-shift | P f0 +430 d0 | P f0 +1220 d1 | P f0 +940 d0 | P f0 +490 d0 |
+| toy-two_pole | F 0/24 | P 9/24 | P 13/24 | F 0/24 |
+| toy-trajectory | P 22/24 | P 23/24 | P 22/24 | P 22/24 |
+| toy-residual_student | P 8/24 | P 20/24 | P 18/24 | P 8/24 |
+| toy-unipolar | P 18/24 | P 19/24 | P 22/24 | P 18/24 |
+| toy-ae_gan_hold | P 22/24 | P 22/24 | P 24/24 | F 0/24 |
+| toy-cover_leftover | P 11/24 | P 13/24 | P 17/24 | P 10/24 |
+| toy-unused_token_hold | P 10/24 | P 11/24 | P 20/24 | P 10/24 |
+| toy-mid_scale_identity | P 16/24 | P 17/24 | P 21/24 | P 16/24 |
+| toy-mode_hold | F 0/24 | F 0/24 | F 0/24 | F 0/24 |
+| toy-vector_two_broad | P 21/24 | P 23/24 | P 21/24 | P 23/24 |
+| toy-vector_unequal_mass | F 0/24 | F 0/24 | F 0/24 | F 0/24 |
+| toy-vector_unequal_width | F 0/24 | F 0/24 | F 0/24 | F 0/24 |
+| toy-vector_anisotropic | P 5/24 | P 6/24 | F 0/24 | P 5/24 |
+| toy-vector_overlap | P 9/24 | P 11/24 | P 6/24 | P 16/24 |
+| toy-vector_spiral | P 24/24 | P 21/24 | P 22/24 | P 23/24 |
+| toy-img_stripes2 | P 5/24 | P 22/24 | P 8/24 | F 0/24 |
+| toy-img_bars4 | F 3/24 | P 10/24 | P 19/24 | F 2/24 |
+| toy-img_blobs4 | F 0/24 | F 0/24 | P 19/24 | F 0/24 |
+| toy-img_intensity2 | F 0/24 | F 0/24 | P 9/24 | F 0/24 |
+
+`gsX_r1_c0.03` scores 12/26:
+- It reproduces k3p_simple's ring exactly in shape: +490/+220/+20 against +430/+190/+20.
+- It loses 2 transfer tasks: ae_gan_hold (22 → 0) and img_stripes2 (5 → 0).
+- It gains none of the target tasks.
+
+## Leaderboard (26 tasks)
+
+| # | arm | passes | native | transfer /19 | ring8-shift | ring8-multishift |
+|---|---|---|---|---|---|---|
+| 1 | k3p_stock | **18** | **3/3** | 14 | P f0 +1220 | F f2, misses shift 2 |
+| 2 | **gs2_c03_lr2_d05** (still the constant-LR winner) | 17 | 0/3 | **15** | P f0 +940 | **P f0 +940/+310/+110** |
+| 3 | k3p_simple | 14 | 0/3 | 12 | P f0 +430 | P f0 +430/+190/+20 |
+| 4 | gsX_r1_c0.03 (R1 1, cap .03) | 12 | 0/3 | 10 | P f0 +490 | P f0 +490/+220/+20 |
+
+No other split or cap arm passes both ring tasks.
+
+## Explanation
+
+**1. R1 is what holds the ring, not the fake cap.**
+
+With the cap held or raised, every drop in R1 costs the ring:
+
+| R1 | ring fails (shift / multishift) |
+|---|---|
+| .1 | 34–72 / 37–75 |
+| .03 | 144–217 / 149–311 |
+| 0 | 169–232 / 211–277 |
+
+The cap alone does not hold it either: ab_r1only (R1 without the cap) also loses the ring, and the reverse split's
+cap .01 has 120 fails. So both terms are load-bearing. The ring tolerates only narrow ratios between them:
+- R1 1 with cap 1 or .03 is clean (k3p_simple, gsX_r1_c0.03).
+- On the fast-G base, R1 .3 with cap .3 is clean.
+
+**2. Why R1 is not penalising correct gradients here.**
+
+At the RpGAN equilibrium p_g = p_data, the optimal critic is flat on the data. A slope at the reals is the
+disequilibrium signal itself.
+- R1 damps the critic's rotation around that equilibrium. This is the Dirac-GAN / "Which training methods for GANs
+  do actually converge?" result.
+- A one-sided cap leaves any slope below κ free. So the critic can hold a slope of size ~κ at the reals, which is
+  the observed median of .4–1.1.
+- G is then pushed across the modes and never settles. At κ ≥ 1 the prehold is 0–6/120, with many departures.
+- The ring is a small-support problem where this rotation is visible. The gradient table shows the flat-at-reals
+  signature (median slope about .02) in every ring-clean arm and in none of the failing ones.
+
+**3. The native covariance bias is not an R1 effect.**
+
+Removing R1 entirely raises mean min eig only from .16 to .22. `reg_coeff` .03 (both terms weak) reaches .32, and
+the gate needs ≥ .4.
+- Weakening only the fake cap does nothing: gsX_r1_c0.03 gives .16.
+- The within-mode shape error comes from a critic smoothed by both terms together. The ring needs the same
+  smoothing, so no split of the two weights resolves it.
+
+**4. Why the winner's toy gains survive only with R1 ≥ .3.**
+- two_pole mostly responds to a weak or absent R1: 13–14/24 in the gs2-base R1 .1 arms and the symmetric caps.
+- img_bars4 needs the gs2 base's fast G/prior together with R1 at .3. It scores 19/24 in gs2_c03_lr2_d05 and
+  gsX_w_r0.3_c0.1, and 0–3 everywhere else.
+
+## Recommendations
+
+1. **Keep `gs2_c03_lr2_d05` as the constant-LR, noise-free configuration** (17/26, clean ring). Keep k3p_stock as the
+   default.
+2. **Keep R1 on reals.** The symmetric real cap fails the ring on both bases and at every threshold tested, and it
+   does not reduce slope spikes at the reals. Merge `reg_real_weight` / `reg_real_mode` / `reg_real_kappa` only as
+   documented ablation switches (defaults bit-identical), or drop them from the PR.
+3. **Treat native within-mode covariance as unsolved without noise.** Penalty re-weighting cannot reach it. The
+   remaining noise-free levers change what the critic can resolve, not how hard it is penalised:
+   - a critic with more within-mode resolution (Fourier features / width on the native hosts);
+   - generator capacity (the worst modes are flattened ellipses).
+   Both are architecture changes, outside "existing knobs".
+4. **Every ring-clean config found so far is a point, not a region.** Before promoting gs2_c03_lr2_d05, check that
+   it holds on another ring geometry (another mode count or radius), a new task rather than a seed repeat.

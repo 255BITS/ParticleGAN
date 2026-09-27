@@ -80,6 +80,14 @@ class Recipe:
     # shrinks with the gradient at equilibrium instead of creeping up as the
     # second moment decays. The annealed default schedule keeps plain Adam.
     amsgrad: bool = False
+    # Weight of the critic penalty's R1-on-reals term relative to reg_coeff
+    # (phase A); the one-sided fake cap stays at reg_coeff. 1.0 is K3P;
+    # 0 leaves only the fake cap.
+    reg_real_weight: float = 1.0
+    # Phase A's reals term: "r1" (K3P) or "cap", the fakes' one-sided RMS cap
+    # applied to reals at reg_real_kappa (None: reg_kappa).
+    reg_real_mode: str = "r1"
+    reg_real_kappa: float | None = None
 
     def __post_init__(self):
         object.__setattr__(self, "betas", tuple(self.betas))
@@ -150,7 +158,7 @@ class Recipe:
             raise ValueError("amsgrad must be a boolean")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
-        for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
+        for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "reg_real_weight", "prior_reg", "ucd_weight",
                     "reconstruction_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
@@ -243,8 +251,9 @@ class Recipe:
         the critic and its EMA. ``output`` selects the logits from the critic's
         output (default: first element of a tuple/list); ``collect_stats``
         fills ``penalty.last_stats``. ``penalty_overrides`` replace the
-        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
-        ``anchor_weight`` for this penalty.
+        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor``,
+        ``anchor_weight``, ``real_weight``, ``real_mode`` or ``real_kappa``
+        for this penalty.
         """
         from .k3p import CriticPenalty
         return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
@@ -253,13 +262,15 @@ class Recipe:
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
         options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
-                   "anchor_weight": self.reg_anchor_weight, **overrides}
+                   "anchor_weight": self.reg_anchor_weight, "real_weight": self.reg_real_weight,
+                   "real_mode": self.reg_real_mode, "real_kappa": self.reg_real_kappa, **overrides}
         # The blend floor f is the network LR floor. A floor >= 1/2 (e.g. 1.0,
         # a constant LR) keeps r >= 1/2 and hence s == 1 for every f, so the
         # same formulation needs no separate path.
         floor = self.resolved_network_lr_floor
         options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
+        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight", "real_weight",
+                                  "real_mode", "real_kappa"}
         if unknown:
             raise TypeError(f"unknown critic penalty options: {sorted(unknown)}")
         from .grad_regularizers import GradientPenalty

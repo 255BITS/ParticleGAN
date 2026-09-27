@@ -1,0 +1,37 @@
+# 2026-09-27 08:01:43 arm=gsX_r1_c0.03 device=cuda:1 tasks=7 steps=None
+08:01:49 toy-two_pole               FAIL  passing suffix=0/24 | confirmed None mean_abs=0.16 grad_med=0.0589 | 3s rc=0
+08:02:19 toy-img_bars4              FAIL  passing suffix=2/24 | confirmed None modes=4 hq=0.938 | 33s rc=0
+08:04:15 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +490 departures 0 final HQ 0.987 | 148s rc=0
+08:05:51 ring8-multishift           PASS  fails outside transit=0 | prehold 120/120 arrival +490/+220/+20 departures 0 final HQ 0.985 | 245s rc=0
+08:06:03 native-grid100             FAIL  final modes/HQ=99/0.975 | coverage FAIL accuracy FAIL first100 None massTV 0.0639 | 257s rc=0
+08:06:21 native-rotated100          FAIL  final modes/HQ=100/0.967 | coverage FAIL accuracy FAIL first100 2500 massTV 0.0421 | 275s rc=0
+08:06:33 native-staggered100        FAIL  final modes/HQ=100/0.966 | coverage FAIL accuracy FAIL first100 1000 massTV 0.047200000000000006 | 288s rc=0
+# 2026-09-27 08:06:33 arm=gsX_r1_c0.03 finished
+# 2026-09-27 08:12:47 arm=gsX_r1_c0.03 device=cuda:1 tasks=26 steps=None
+skip native-grid100 (result.json exists)
+skip native-rotated100 (result.json exists)
+skip native-staggered100 (result.json exists)
+skip ring8-multishift (result.json exists)
+skip ring8-shift (result.json exists)
+skip toy-two_pole (result.json exists)
+08:12:53 toy-ae_gan_hold            FAIL  passing suffix=0/24 | confirmed None recon_mse=0.0548 hold=0.0183 | 4s rc=0
+08:12:55 toy-trajectory             PASS  passing suffix=22/24 | confirmed 117 identity_mse=0.00377 | 4s rc=0
+08:12:55 toy-residual_student       PASS  passing suffix=8/24 | confirmed 350 identity_mse=0.00242 success_rate=1 wrong_pad_rate=0 | 4s rc=0
+08:12:55 toy-unipolar               PASS  passing suffix=18/24 | confirmed 184 cover=1 off_caption=2.73e-11 neu_hold=0.999 | 4s rc=0
+08:12:57 toy-cover_leftover         PASS  passing suffix=10/24 | confirmed 634 u_kept=0.966 content_kept=1 leak_ratio=0.000226 pole_rel_err_plus=0.0226 pole_rel_err_minus=0.0243 same_dir=0.00145 | 6s rc=0
+08:12:57 toy-unused_token_hold      PASS  passing suffix=10/24 | confirmed 159 unused_hold=0.997 concept_move=0.972 | 2s rc=0
+08:13:05 toy-mid_scale_identity     PASS  passing suffix=16/24 | confirmed 434 concept_cos_plus=1 concept_cos_minus=1 concept_mag_plus=0.999 concept_mag_minus=1 identity_at_0=0.998 identity_at_mid=0.999 | 8s rc=0
+08:13:07 toy-mode_hold              FAIL  passing suffix=0/24 | confirmed None modes=6 hq=1 | 9s rc=0
+08:13:33 toy-vector_two_broad       PASS  passing suffix=23/24 | confirmed 300 sw1_normalized=0.0333 mass_tv=0.01 hq=0.984 component_covariance_error=0.142 component_min_eigen_ratio=0.817 | 35s rc=0
+08:13:35 toy-vector_unequal_width   FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.159 mass_tv=0.142 hq=0.992 component_covariance_error=0.355 component_min_eigen_ratio=0.107 | 36s rc=0
+08:13:45 toy-vector_unequal_mass    FAIL  passing suffix=0/24 | confirmed None sw1_normalized=0.216 mass_tv=0.194 hq=0.986 component_covariance_error=1.11 component_min_eigen_ratio=0.237 min_mass_ratio=0.38 | 45s rc=0
+skip toy-img_bars4 (result.json exists)
+08:13:47 toy-vector_overlap         PASS  passing suffix=16/24 | confirmed 650 sw1_normalized=0.0883 mean_error=0.135 covariance_error=0.0851 | 36s rc=0
+08:13:51 shift-mode_hold            FAIL  deadline window=0/81 | delay None pre-shift hold 0/120 | 61s rc=0
+08:13:51 toy-vector_anisotropic     PASS  passing suffix=5/24 | confirmed 1200 sw1_normalized=0.154 mass_tv=0.119 hq=0.981 component_covariance_error=0.56 component_min_eigen_ratio=0.297 | 44s rc=0
+08:13:51 toy-img_stripes2           FAIL  passing suffix=0/24 | confirmed None modes=1 hq=1 | 13s rc=0
+08:13:59 toy-img_blobs4             FAIL  passing suffix=0/24 | confirmed None modes=3 hq=1 | 11s rc=0
+08:13:59 toy-img_intensity2         FAIL  passing suffix=0/24 | confirmed None modes=2 hq=0.812 | 10s rc=0
+08:14:03 toy-vector_spiral          PASS  passing suffix=23/24 | confirmed 400 sw1_normalized=0.0381 mean_error=0.0436 covariance_error=0.0458 | 28s rc=0
+08:14:51 hold-mode_hold             FAIL  hold+ext=0/1200+0/0 | gate NOT_CONVERGED converged None first_fail None minHQ(hold) None stopped gate_done_plus_post_window | 120s rc=0
+# 2026-09-27 08:14:51 arm=gsX_r1_c0.03 finished
