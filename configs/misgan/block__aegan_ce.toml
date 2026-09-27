@@ -1,0 +1,5 @@
+arm = "aegan_ce"
+mechanism = "block"
+total_steps = 7000
+out_dir = "results/misgan/runs/block__aegan_ce"
+log_path = "runs/misgan/block__aegan_ce.log"

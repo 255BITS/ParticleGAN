@@ -5,9 +5,10 @@ Incomplete Data with GANs"): a data generator, a mask generator and an imputer,
 trained jointly with this repo's recipe. Results: [FINDINGS.md](FINDINGS.md).
 
 ```bash
-experiments/misgan_pipeline.sh              # grid + leaderboards (GPUS=0,1 WORKERS=6)
+experiments/misgan_pipeline.sh              # grid, ppost + cost, leaderboards (GPUS=0,1 WORKERS=6)
 tail -f results/misgan/PIPELINE.log         # the whole study
 tail -f runs/misgan/mcar_p50__misgan.log    # one run: one line per eval
+python experiments/misgan_ppost.py          # ppost + imputation cost from checkpoints
 python experiments/analyze_misgan.py        # re-print tables, refresh FINDINGS.md
 ```
 
@@ -78,19 +79,50 @@ D_i use Fourier input features; D_m uses none.
 | `misgan` | all | f(x, m) vs f(G_x, G_m) | G_x |
 | `misgan_realmask` | all | fakes masked with masks resampled from the training pool | G_x |
 | `misgan_paired` | all | each fake masked with its RpGAN-paired real row's mask | G_x |
-| `misgan_gauss` | mcar_p50 | as `misgan`, with frozen-Gaussian priors for all three generators (`make_prior(learnable=False)`) | G_x |
+| `misgan_gauss` | all | as `misgan`, with frozen-Gaussian priors for all three generators (`make_prior(learnable=False)`) | G_x |
 | `misgan_hard` | mcar_p50 | as `misgan`, with G_m masks binarized by a straight-through estimator (tests the soft-mask critic shortcut) | G_x |
-
-Two follow-ups were added after the first grid. They are in the same pipeline:
-
-| run | where | change |
-| --- | --- | --- |
-| `misgan_detach` | mcar_p50, mcar_p80 | as `misgan`, but G_m's masks are detached inside L_x, so G_m trains on L_m alone |
-| `misgan_long` | mcar_p50 | `misgan` with 3x the budget (21,000 updates). The G/D LR horizon cap stays at 1,600, while the prior LR and the noise schedules stretch with the budget |
+| `misgan_detach` | all | as `misgan`, but G_m's masks are detached inside L_x, so G_m trains on L_m alone | G_x |
+| `misgan_long` | mcar_p50 | `misgan` with 3x the budget (21,000 updates). The G/D LR horizon cap stays at 1,600, while the prior LR and the noise schedules stretch with the budget | G_x |
 
 G_m and D_m train in every arm. G_m gets L_x gradient only where its masks
 enter D_x (`misgan`, `misgan_gauss`, `misgan_hard`). The seed is fixed, and
 arms differ only in substance.
+
+### Round 2: imputing with G_x itself
+
+These arms drop G_i/D_i. They all build on `misgan_detach` (G_m's masks are
+detached in L_x) and run on every mechanism.
+
+| arm | extra pieces | imputation |
+| --- | --- | --- |
+| `aegan_recon_w{0.1,1}` | Encoder E([x*m, m, z2]) -> z_x, where z2 comes from its own recipe particle prior (z_dim 8). E is trained with the masked reconstruction w*\|\|m (G_x(E(.)) - x)\|\|^2, which also trains G_x. A latent critic D_z (its own recipe-built pair) scores E's outputs against draws from G_x's prior, so E stays inside the prior's support. | m*x + (1-m)*G_x(E(x*m, m, z2)), 16 draws of z2 |
+| `aegan_ce` | E([x*m, m]) -> logits over G_x's 20,000-particle table. It is trained with cross-entropy against the stop-grad particle-posterior weights from the current G_x: softmax(-\|\|m (G_x(z_k) - x)\|\|^2 / 2 sigma^2). sigma is refit every 500 updates by the held-out-coordinate rule below. This is a single-pass, amortized ppost. | sample k from E's categorical, fill from G_x(z_k) |
+
+Round-2 generator scalar: `L_m + alpha*(L_x + beta*L_i + L_z + w*rec + CE)`.
+Each term reaches only its own generators.
+
+**`ppost` (no training), `experiments/misgan_ppost.py`.**
+- Draw M latents from a trained run's EMA prior and compute x_k = G_x(z_k).
+- Each test row resamples k with w_k ~ exp(-||m (x_k - x_obs)||^2 / 2 sigma^2)
+  and fills its missing coordinates from x_k.
+- sigma maximizes the log-likelihood of one held-out observed coordinate per
+  training row, over 4,096 training rows and a log grid from 0.005 to 3. No
+  test data or ground truth is used.
+- The grid is M in {256, 4096}, each without and with refinement (`r`).
+  Refinement takes 20 Adam steps on z, from the recipe's
+  `make_generator_optimizer` with lr 0.01, fitting the observed coordinates
+  from the resampled particle.
+- Sources: `oracle`, `misgan`, `misgan_realmask`, `misgan_detach`,
+  `misgan_gauss`, `aegan_recon_w*` and `aegan_ce`.
+- The main leaderboard shows `ppost:<run>` at M = 4096 without refinement
+  (fixed before the runs). The per-mechanism ppost table shows all four
+  configurations.
+
+**Cost.** `ms_1k` is the wall-clock time to impute 1,000 test rows with 16 draws
+each, on one otherwise idle GPU. It is measured after the grid, from the EMA
+checkpoints (`ckpt.pt`), and excludes ppost's one-time sigma fit.
+`tests/test_misgan_toy.py` checks that ppost with exact mixture samples in
+place of G_x matches the Bayes-optimal imputer.
 
 ## Metrics
 
@@ -111,6 +143,7 @@ per eval. The final values go to `results/misgan/runs/<run>/summary.json`.
 | `istd` | per-row std over the K draws on missing coordinates (0 = deterministic imputer) |
 | `rmse` | RMSE on missing coordinates (standardized units, over draws) |
 | `imodes`, `ihq` | modes and 3-sigma % of the imputed test set (first draw) |
+| `ms_1k` | wall-clock ms to impute 1,000 test rows with 16 draws (post hoc, idle GPU) |
 
 The baselines use no training and run on the same test rows:
 

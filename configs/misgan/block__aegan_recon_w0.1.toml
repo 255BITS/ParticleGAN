@@ -1,0 +1,6 @@
+arm = "aegan_recon"
+mechanism = "block"
+total_steps = 7000
+recon_weight = 0.1
+out_dir = "results/misgan/runs/block__aegan_recon_w0.1"
+log_path = "runs/misgan/block__aegan_recon_w0.1.log"

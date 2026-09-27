@@ -1,0 +1,6 @@
+arm = "aegan_recon"
+mechanism = "mcar_p20"
+total_steps = 7000
+recon_weight = 1.0
+out_dir = "results/misgan/runs/mcar_p20__aegan_recon_w1"
+log_path = "runs/misgan/mcar_p20__aegan_recon_w1.log"

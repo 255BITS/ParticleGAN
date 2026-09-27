@@ -1,0 +1,5 @@
+arm = "aegan_ce"
+mechanism = "mcar_p50"
+total_steps = 7000
+out_dir = "results/misgan/runs/mcar_p50__aegan_ce"
+log_path = "runs/misgan/mcar_p50__aegan_ce.log"
