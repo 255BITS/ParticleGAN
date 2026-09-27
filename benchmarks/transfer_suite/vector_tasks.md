@@ -35,13 +35,15 @@ Metrics are properties of the generated distribution:
 - Every separated-mixture case also requires the minimum eigenvalue of every whitened
   empirical component covariance to be ≥0.15. A broad axis cannot conceal a
   collapsed narrow axis. This is a coarse covariance check, not a density proof.
-- The anisotropic case scores shape on each component's core instead: assigned
+- The anisotropic (protocol v3), unequal-width and unequal-mass (protocol v4)
+  cases score shape on each component's core instead: assigned
   samples with squared Mahalanobis distance ≤16 (within 4σ). It requires mean
   relative core covariance error ≤0.5, minimum whitened core eigenvalue ≥0.15,
   and `max_component_spill` ≤0.05, the largest per-component fraction of assigned
   samples beyond 3σ (≈1.1% for a true Gaussian). Components with fewer than ten
-  (core) samples score core error 1, eigenvalue 0 and spill 1. Its SW1, TV and
-  HQ bounds are unchanged; the whole-component covariance bounds no longer gate it.
+  (core) samples score core error 1, eigenvalue 0 and spill 1. Their SW1, TV, HQ
+  (and unequal-mass `min_mass_ratio`) bounds are unchanged; the whole-component
+  covariance bounds no longer gate them.
 - Overlapping mixtures and the spiral use only observable distribution metrics:
   SW1, normalized mean error ≤0.15, and relative covariance error ≤0.45. They
   have no component-label, occupancy or mode-count gate. Per-sample component
@@ -98,6 +100,17 @@ now scored on the 4σ core and stray mass is bounded explicitly by
 every identifiable mixture and still gate the other cases. Recorded historical
 results keep the thresholds stored with them. Evidence:
 [anisotropic core metric report](../../reports/transfer_suite/anisotropic_core_metric/README.md).
+
+Protocol v4 (core metric for unequal widths and masses) applies the same six
+core/spill bounds to the unequal-width and unequal-mass cases; unequal mass keeps
+`min_mass_ratio` ≥0.25. Their v2 covariance failures were also spill: the
+reference LeakyReLU critic scored 7.81 whole-component but 0.18 core error on
+unequal width, and 5.80 vs 0.31 on unequal mass. Both cases still fail under v4,
+now on the cause: 5.5% spill from the narrowest component and 42% spill around
+the rare 2% component. Broad-separated, narrow and changing-scale cases keep the
+v2 whole-component bounds. Recorded historical results keep the thresholds
+stored with them; the v2 table below is not rescored. Evidence:
+[v4 section of the core metric report](../../reports/transfer_suite/anisotropic_core_metric/README.md#protocol-v4-unequal-width-and-unequal-mass).
 
 ## Fixed-reference evidence
 

@@ -25,11 +25,12 @@ EVAL_SAMPLES = 4096
 SEPARATED_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15],
                     ["hq", ">=", .85], ["component_covariance_error", "<=", .85],
                     ["component_min_eigen_ratio", ">=", .15]]
-# Anisotropic shape is scored on each component's 4-sigma core; stray samples are
+# Core/spill rule: shape is scored on each component's 4-sigma core; stray samples are
 # bounded separately by max_component_spill instead of inflating the covariance error.
-ANISOTROPIC_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15], ["hq", ">=", .85],
-                      ["component_core_covariance_error", "<=", .5],
-                      ["component_core_min_eigen_ratio", ">=", .15], ["max_component_spill", "<=", .05]]
+# Protocol v3 applied it to anisotropic; protocol v4 to unequal_width and unequal_mass.
+CORE_SPILL_BOUNDS = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15], ["hq", ">=", .85],
+                     ["component_core_covariance_error", "<=", .5],
+                     ["component_core_min_eigen_ratio", ">=", .15], ["max_component_spill", "<=", .05]]
 CORE_MAHALANOBIS2 = 16.
 SPILL_MAHALANOBIS2 = 9.
 DISTRIBUTION_BOUNDS = [["sw1_normalized", "<=", .18], ["mean_error", "<=", .15],
@@ -61,13 +62,13 @@ TASKS = [
           means=[[-1., 0.], [1., 0.]], widths=[.25, .25]),
     _task("vector_unequal_mass", "unequal_mass", "Checks target occupancy including the rare 2% component, not uniformity.",
           means=_CORNERS, widths=[.18]*4, masses=[.55, .30, .13, .02],
-          thresholds=deepcopy(SEPARATED_BOUNDS)+[["min_mass_ratio", ">=", .25]]),
+          thresholds=deepcopy(CORE_SPILL_BOUNDS)+[["min_mass_ratio", ">=", .25]]),
     _task("vector_unequal_width", "unequal_width", "Checks component-specific scales without imposing one shared Gaussian width.",
-          means=_CORNERS, widths=[.07, .12, .20, .30]),
+          means=_CORNERS, widths=[.07, .12, .20, .30], thresholds=deepcopy(CORE_SPILL_BOUNDS)),
     _task("vector_anisotropic", "anisotropic", "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
           means=[[-2., -1.], [0., 1.5], [2., -1.]],
           covariance=[[[.09, .018], [.018, .0081]], [[.0081, -.018], [-.018, .09]], [[.04, .03], [.03, .04]]],
-          thresholds=deepcopy(ANISOTROPIC_BOUNDS)),
+          thresholds=deepcopy(CORE_SPILL_BOUNDS)),
     _task("vector_overlap", "overlapping", "Scores the observable distribution when latent components are not identifiable.",
           means=[[-.35, 0.], [.35, 0.]], widths=[.55, .55], identifiable=False,
           limitations="Component labels and mode recall are deliberately not scored for overlapping densities."),
