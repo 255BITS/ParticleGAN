@@ -50,6 +50,7 @@ alone is insufficient, and longer verification remains required.
 | API-RP4: precision plus implicit game update | 1250 | 108/116 | 350 | 170/186 | **Rejected:** intensity image0/24. |
 | API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and six vectors pass; checkpoint and horizon checks pass. Completed30000: delays350/450/250, with544/544,146/146,1876/1876,276/276 after arrival. Broader/API incomplete; matched K3P references retained below. **Rejected:** mode_hold0/24, final5/8 modes; frozen host independently verified. |
 | API-RP6: balance predictor energy between adversarial players | 660 | 173/175 | 380 | 182/183 | Early misses680/690 and2790; final shifted suffix181. **Rejected:** intensity1/24, final suffix1. Small-particle task also **FAIL0/24**, final7/8 modes. |
+| API-RP7: richer coupled three-field response | 600 | 181/181 | 340 | 187/187 | **Rejected:** intensity3/24, final suffix2; mode_hold0/24, final0/8 modes andHQ0. Own unchanged package and frozen hosts independently verified. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled

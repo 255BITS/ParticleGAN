@@ -852,6 +852,16 @@
       "ring_seconds": 1719.7583,
       "ring_joint_fields": 80382,
       "qualified": false
+    },
+    "api_rp7": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "initial_retention": "181/181",
+      "shift_delay": 340,
+      "shift_retention": "187/187",
+      "image": "FAIL_3_OF_24_SUFFIX_2",
+      "mode_hold": "FAIL_0_OF_24",
+      "final_modes": 0,
+      "qualified": false
     }
   },
   "observed_utc": "2026-09-27T00:29:34.996812+00:00"
