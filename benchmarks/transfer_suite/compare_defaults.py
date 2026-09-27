@@ -184,8 +184,10 @@ def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
         stack.enter_context(patch.object(ParticlePrior, '__init__', prior_init))
         stack.enter_context(patch.object(torch.optim.Adam, '__init__', adam_init))
         stack.enter_context(patch.object(bridge, 'optimizer_role', role))
+        # Hosts on benchmarks.toy_runner (image_tasks) have no controller to patch.
         for module in (evaluate, vector_tasks, image_tasks):
-            stack.enter_context(patch.object(module, 'FixedControl', RecipeControl))
+            if hasattr(module, 'FixedControl'):
+                stack.enter_context(patch.object(module, 'FixedControl', RecipeControl))
         yield
 
 
@@ -243,10 +245,12 @@ def run(arm, output, tasks=None):
             result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - start)
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
+        # toy_runner hosts (image) have no controller; their result carries the
+        # recipe-built optimizer groups as ``applied`` instead.
         record = dict(arm=arm, recipe=legacy_dict(recipe), original_spec=job['spec'], spec=spec,
                       architecture=job['architecture'], reference=job['reference'],
                       reference_sha256=job['reference_sha256'], candidate=asdict(candidate(recipe)),
-                      applied=applied, verdict=verdict, ema_verdict=ema, result=result,
+                      applied=applied or result.get('applied', []), verdict=verdict, ema_verdict=ema, result=result,
                       source_sha256=protocol['source_sha256'])
         raw = (json.dumps(record, sort_keys=True, allow_nan=False) + '\n').encode()
         artifact = f'episodes/{arm}__{name}.json.gz'

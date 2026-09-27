@@ -1,7 +1,7 @@
 """Verify the public GAN default through real user-facing construction paths.
 
-Vector cases train on the shared toy runner under gan_v3_recipe() at each
-task's shape; image cases through GANTrainer(gan_v3_recipe(), ...). The nine
+Vector and image cases declare only their problem and train on
+benchmarks.toy_runner under gan_v3_recipe() at each task's shape. The nine
 legacy auxiliary hosts retain their required custom loops, using public GAN
 primitives and the same unmodified global recipe. Frozen host data, model
 initialization order, RNG streams, resources, steps, measurements, and gates
@@ -232,63 +232,16 @@ def run_vector(spec, card, base, *, log_path=None):
     return result, context
 
 
-def setup_image(spec, base):
-    from particlegan import GANTrainer
-    from . import image_tasks
-    torch.set_num_threads(1)
-    torch.manual_seed(0)
-    centers = image_tasks.templates(spec)
-    recipe = host_recipe(base, spec)
-    # Frozen image host constructs G and D before a global-RNG prior draw.
-    generator, discriminator = image_tasks.Generator(spec), image_tasks.Discriminator(spec)
-    prior = recipe.make_prior()
-    global_stream = experiment_generator()
-    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
-                                  latent_generator=global_stream,
-                                  penalty_generator=global_stream)
-    shapes = shape_receipt(trainer, spec['batch_size'], (1, 8, 8))
-    return dict(trainer=trainer, centers=centers, shapes=shapes,
-                applied=optimizer_receipts(trainer), host_recipe=recipe)
-
-
-def run_image(spec, base, *, max_steps=None):
-    from benchmarks.locked_shared.observation import sustained
+def run_image(spec, base, *, max_steps=None, log=None):
+    """The image problem on the shared toy runner under the host recipe."""
     from . import image_tasks
     started = time.perf_counter()
-    context = setup_image(spec, base)
-    trainer, centers = context['trainer'], context['centers']
-    expected = image_tasks.evaluation_steps(spec)
-    observations, actions, losses = [], [], []
-    budget = spec['steps'] if max_steps is None else min(max_steps, spec['steps'])
-    for index in range(budget):
-        completed = index+1
-        real = centers[torch.randint(len(centers), (spec['batch_size'],))]
-        real = (real+spec['noise_std']*torch.randn_like(real)).clamp(0., 1.)
-        stats = trainer.step(real, generator_real=real)
-        if not all(torch.isfinite(value) for key, value in stats.items()
-                   if key != 'step' and isinstance(value, torch.Tensor)):
-            raise FloatingPointError('nonfinite public trainer loss')
-        actions.append(rate_action(trainer, completed))
-        if completed in expected:
-            live = image_tasks.measure(trainer.G, trainer.prior, centers, spec['thresholds'])
-            ema = image_tasks.measure(trainer.ema_G, trainer.ema_prior, centers, spec['thresholds'])
-            observations.append(dict(step=completed, seconds=time.perf_counter()-started,
-                                     **live, ema=ema))
-            losses.append(dict(step=completed, d=float(stats['loss_d']),
-                               g=float(stats['loss_g']), d_penalty=float(stats['penalty']),
-                               prior=float(base.prior_reg*stats['prior_regularization'])))
-    result = dict(live=observations[-1] if observations else {},
-                  ema=observations[-1]['ema'] if observations else {},
-                  observations=observations, losses=losses, actions=actions,
-                  update_counts=dict(g=trainer.completed_steps, d=trainer.completed_steps),
-                  seconds=time.perf_counter()-started)
-    if len(observations) == 24:
-        result['live'] = {k: v for k, v in observations[-1].items() if k not in ('ema', 'step', 'seconds')}
-        result['convergence'] = sustained(observations,
-            [('modes', '>=', spec['thresholds']['modes']),
-             ('hq', '>=', spec['thresholds']['hq_min'])], expected_steps=expected,
-            minimum=spec['thresholds']['minimum_stable_checks'])
-    return result, context
+    torch.set_num_threads(1)
+    recipe = host_recipe(base, spec)
+    applied, shapes = image_tasks.receipts(spec, recipe)
+    result = image_tasks.train(spec, recipe, max_steps=max_steps, log=log)
+    result['seconds'] = time.perf_counter()-started
+    return result, dict(applied=applied, shapes=shapes, host_recipe=recipe)
 
 
 def run_legacy(spec, base):
@@ -335,16 +288,16 @@ def run(output, *, tasks=None, require_installed_root=None):
                     profile_path=str(PROFILE_PATH.relative_to(ROOT)),
                     profile_sha256=hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest(),
                     frozen_profile=profile, jobs=jobs, seed=0,
-                    routes=dict(vector='toy_runner',
-                                image='GANTrainer',
+                    routes=dict(vector='benchmarks.toy_runner',
+                                image='benchmarks.toy_runner',
                                 legacy='public_primitives_custom_host'))
     write(output/'protocol.json', protocol)
     records = []
     for job in jobs:
         suite.verify_source(protocol)
         spec, card, variant = declared_spec(job, profile, base)
-        route = ('toy_runner' if spec['runner'] == 'vector' else 'GANTrainer'
-                 if spec['runner'] == 'image' else 'public_primitives_custom_host')
+        route = dict(vector='benchmarks.toy_runner', image='benchmarks.toy_runner').get(
+            spec['runner'], 'public_primitives_custom_host')
         print(f'START {spec["name"]} route={route} steps={spec["steps"]}', flush=True)
         started = time.perf_counter()
         try:
@@ -352,17 +305,16 @@ def run(output, *, tasks=None, require_installed_root=None):
                 result, context = run_vector(spec, card, base,
                                              log_path=output/'logs'/f"{spec['name']}.jsonl")
             elif spec['runner'] == 'image':
-                result, context = run_image(spec, base)
+                result, context = run_image(
+                    spec, base, log=lambda row: print(json.dumps(row, default=float), flush=True))
             else:
                 result, context = run_legacy(spec, base)
             observations = result.get('observations', result.get('curve', []))
             if len(observations) != 24:
                 raise RuntimeError(f'frozen host did not produce 24 live observations: {spec["name"]}')
-            if route in ('GANTrainer', 'toy_runner'):
+            if route != 'public_primitives_custom_host':
                 if any(not isinstance(point.get('ema'), dict) for point in observations):
                     raise RuntimeError(f'frozen host has an incomplete EMA curve: {spec["name"]}')
-                if len(result['actions']) != spec['steps']:
-                    raise RuntimeError(f'public trainer action trace is incomplete: {spec["name"]}')
             json.dumps(result, allow_nan=False)
         except Exception:
             result = dict(error=traceback.format_exc(), seconds=time.perf_counter()-started)

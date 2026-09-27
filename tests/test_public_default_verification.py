@@ -41,14 +41,16 @@ def test_vector_public_route_uses_promoted_discriminator_and_recipe(monkeypatch)
                                     'lr_d': .00425, 'input_sigma': 0., 'output_sigma': 0.}
 
 
-def test_image_public_trainer_preserves_frozen_shapes_and_shared_stream():
+def test_image_host_trains_on_the_shared_runner_under_the_public_recipe():
     _, base, spec, card, _ = _declaration('img_stripes2')
     assert card is None
     result, context = verification.run_image(spec, base, max_steps=1)
     assert context['shapes']['real_batch'] == [32, 1, 8, 8]
     assert context['shapes']['prior'] == [32, 8]
     assert context['shapes']['generator_output'] == [2, 1, 8, 8]
-    assert context['trainer'].latent_generator is context['trainer'].penalty_generator
     assert [row['lr'] for row in context['applied']] == [.00425, .0085, .00425]
+    assert [row['optimizer'] for row in context['applied']] == [
+        'K3PGeneratorAdam', 'K3PGeneratorAdam', 'K3PCriticAdam']
+    assert context['host_recipe'].total_steps == spec['steps']
+    assert result['route'] == 'benchmarks.toy_runner'
     assert result['update_counts'] == {'g': 1, 'd': 1}
-    assert len(result['actions']) == 1

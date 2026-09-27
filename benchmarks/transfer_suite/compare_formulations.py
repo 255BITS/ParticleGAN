@@ -68,7 +68,8 @@ def run(output):
             # Vector episodes run no controller (vector_tasks refuses a patched
             # FixedControl); their receipt is the optimizers' result['applied'].
             for module in (evaluate, image_tasks):
-                stack.enter_context(patch.object(module, 'FixedControl', AuditControl))
+                if hasattr(module, 'FixedControl'):  # toy_runner hosts have none
+                    stack.enter_context(patch.object(module, 'FixedControl', AuditControl))
             if spec['runner'] == 'legacy':
                 control = evaluate.FixedControl(policy, spec['steps'])
                 with bridge.control_host_schedules(control):
@@ -84,9 +85,11 @@ def run(output):
                 if spec['runner'] == 'vector':
                     applied = result.get('applied', [])
         verdict, ema = test_verdict(spec, result), ema_verdict(spec, result)
+        # toy_runner hosts (image) have no controller; their result carries the
+        # recipe-built optimizer groups as ``applied`` instead.
         record = dict(arm='current_core', original_spec=job['spec'], spec=spec, candidate=asdict(config),
                       architecture=job['architecture'], reference=job['reference'], reference_sha256=job['reference_sha256'],
-                      applied=applied, verdict=verdict, ema_verdict=ema, result=result,
+                      applied=applied or result.get('applied', []), verdict=verdict, ema_verdict=ema, result=result,
                       source_sha256=protocol['source_sha256'])
         raw = (json.dumps(record, sort_keys=True, allow_nan=False)+'\n').encode()
         artifact = f'episodes/current_core__{name}.json.gz'
