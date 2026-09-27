@@ -9,6 +9,10 @@ ARCHITECTURES = [
     dict(name='axis_softplus1', features='axis', activation='softplus', beta=1.),
     dict(name='axis_softplus5', features='axis', activation='softplus', beta=5.),
     dict(name='axis_tanh', features='axis', activation='tanh'),
+    # LeakyReLU(.2) on the first hidden layer only (piecewise-linear kinks near the input), SiLU after.
+    dict(name='axis_leaky1_silu', features='axis', activation='silu', first_activation='leaky_relu'),
+    # Adds a bias-free raw-coordinate linear score, initialized to zero, beside the MLP output.
+    dict(name='axis_silu_raw_skip', features='axis', activation='silu', raw_skip=True),
     dict(name='oriented4_silu', features='oriented', activation='silu', radial_bands=[1.,1.,2.,2.], orientation_seed=0),
     dict(name='oriented8_silu', features='oriented', activation='silu', radial_bands=[.5,.5,1.,1.,2.,2.,4.,4.], orientation_seed=0),
     dict(name='oriented8_softplus1', features='oriented', activation='softplus', beta=1., radial_bands=[.5,.5,1.,1.,2.,2.,4.,4.], orientation_seed=0),
@@ -41,23 +45,30 @@ class SmoothFourierCritic(nn.Module):
         else:
             raise ValueError('unknown research Fourier features')
         layers=[]
-        for _ in range(n_hidden):
+        for i in range(n_hidden):
             layers.append(nn.Linear(dim,hidden_dim))
-            kind=architecture['activation']
-            if kind=='silu':layers.append(nn.SiLU())
+            kind=architecture.get('first_activation',architecture['activation']) if i==0 else architecture['activation']
+            if kind=='leaky_relu':layers.append(nn.LeakyReLU(.2))
+            elif kind=='silu':layers.append(nn.SiLU())
             elif kind=='softplus':layers.append(nn.Softplus(beta=architecture['beta']))
             elif kind=='tanh':layers.append(nn.Tanh())
             else:raise ValueError('unknown smooth activation')
             dim=hidden_dim
         layers.append(nn.Linear(dim,1))
         self.net=nn.Sequential(*layers)
+        # Created after the MLP, so the MLP's initialization is unchanged by the option.
+        self.skip=None
+        if architecture.get('raw_skip'):
+            self.skip=nn.Linear(in_dim,1,bias=False)
+            nn.init.zeros_(self.skip.weight)
 
     def encode(self,x):
         phase=(x.unsqueeze(-1)*self.freqs).flatten(1) if self.features=='axis' else x@self.projection.T
         return torch.cat([x,phase.sin(),phase.cos()],dim=1)
 
     def forward(self,x):
-        return self.net(self.encode(x)).squeeze(-1)
+        out=self.net(self.encode(x)).squeeze(-1)
+        return out if self.skip is None else out+self.skip(x).squeeze(-1)
 
 
 def constructor(architecture):

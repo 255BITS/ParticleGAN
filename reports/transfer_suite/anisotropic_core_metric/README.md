@@ -135,3 +135,11 @@ Under v3 both critics scored 4/8. The v4 change moves only SiLU unequal_width.
    samples, so a few dozen strays from 55%/30% neighbors dominate it. If that
    case keeps failing only on spill, consider normalizing spill by target mass.
    That would need a separate protocol change, not a tweak.
+
+## Follow-up: SiLU rare-mode collapse
+
+The unequal_mass collapse is diagnosed in [`../silu_rare_collapse/`](../silu_rare_collapse/README.md).
+A smooth SiLU critic forms a bump wider than σ over the under-filled 2% mode, and it pulls the
+mode's 3 particles together in the generator's row space. None of 14 SiLU arms keeps the rare
+core (rare core eig ≤.08). No critic-side variant keeps SiLU's 5/8; both cross-checked
+alternatives score 3/8.
