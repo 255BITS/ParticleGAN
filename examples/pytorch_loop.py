@@ -6,18 +6,21 @@ TOML:     python -u examples/pytorch_loop.py --config examples/api.toml
 This small MLP demonstrates integration using the recommended defaults --
 the same update GANTrainer performs, with the control flow in your hands:
 
-* role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
-* critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
 * ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``: Adam
-  optimizers whose ordinary ``step()`` does the recipe's step-time work
-  (currently K3P: spike guard, EMA-critic update, A2 latent damping),
+  optimizers whose ordinary ``step()`` does the recipe's step-time work: the
+  role-wise LR schedule (the loop never sets learning rates), then K3P's spike
+  guard, EMA-critic update and A2 latent damping,
 * ``recipe.make_critic_penalty(opt_d)``: the critic penalty, added to the
-  critic loss like any other term.
+  critic loss like any other term,
+* critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
+* EMA weights with ``torch.optim.swa_utils.AveragedModel``.
 
-To checkpoint, save the modules and both optimizers' ``state_dict()`` (they
-carry the EMA critic and every counter). With several critics, build one
-``recipe.make_critic_optimizer(D_k, ema_critic=...)`` and one penalty per
-critic, and call ``particlegan.init.deterministic_orthogonal_(D_k, seed=k)``
+The run ends with a ``complete`` line that scores the EMA generator on the
+10x10 grid (``modes`` hit within 3 sigma, ``hq`` fraction, ``verdict``). To
+checkpoint, save the modules and both optimizers' ``state_dict()`` (they
+carry the EMA critic, the LR schedule and every counter). With several
+critics, build one ``recipe.make_critic_optimizer(D_k, ema_critic=...)`` and
+one penalty per critic, and call ``particlegan.init.deterministic_orthogonal_(D_k, seed=k)``
 on a fresh extra critic first (seeds 0/1/2 are the examples' G/D/E). Replace
 the networks and synthetic batches with your own.
 """
@@ -29,17 +32,21 @@ import time
 
 import torch
 from torch import nn
+from torch.optim.swa_utils import AveragedModel, get_ema_multi_avg_fn
 
-from particlegan import InputNoise, get_recipe, init, learning_rate_scales
+from particlegan import InputNoise, get_recipe, init
 from particlegan.training import input_noise_std, output_noise_std
 
+SIGMA = 0.015  # width of each synthetic grid mode
 
-@torch.no_grad()
-def update_ema(average, current, decay):
-    for target, source in zip(average.parameters(), current.parameters()):
-        target.lerp_(source, 1.0 - decay)
-    for target, source in zip(average.buffers(), current.buffers()):
-        target.copy_(source)
+
+def grid_score(samples, centers, sigma=SIGMA):
+    """Modes hit within 3 sigma, the fraction of samples within 3 sigma, and a verdict."""
+    nearest, which = torch.cdist(samples, centers).min(dim=1)
+    hq = nearest <= 3 * sigma
+    row = {"modes": int(which[hq].unique().numel()), "hq": float(hq.float().mean())}
+    row["verdict"] = "PASS" if row["modes"] == len(centers) and row["hq"] >= 0.9 else "FAIL"
+    return row
 
 
 def main():
@@ -93,7 +100,6 @@ def main():
     # Adam optimizers ([generator, prior] groups, and the critic); the recipe's
     # regularization runs inside their step(). The EMA critic is ours to allocate.
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, ema_critic=copy.deepcopy(critic))
-    base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     penalty = recipe.make_critic_penalty(opt_d)
     noise = torch.Generator(device=device).manual_seed(43)
     noisy_critic = InputNoise(critic, generator=noise)  # fresh input noise per evaluation
@@ -102,24 +108,21 @@ def main():
         if sigma == 0:
             return x
         return x + sigma * torch.randn(x.shape, generator=noise, device=x.device, dtype=x.dtype)
-    ema_g = copy.deepcopy(generator).eval().requires_grad_(False)
-    ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
+    ema = get_ema_multi_avg_fn(recipe.ema_decay)
+    ema_g, ema_prior = (AveragedModel(module, multi_avg_fn=ema, use_buffers=True).eval().requires_grad_(False)
+                        for module in (generator, prior))
 
     axis = torch.linspace(-1.0, 1.0, 10, device=device)
     centers = torch.cartesian_prod(axis, axis)
     print(json.dumps({"event": "config", **recipe.to_dict(), "device": str(device)}), flush=True)
     started = time.monotonic()
     for step in range(1, recipe.total_steps + 1):
-        network, prior_scale = learning_rate_scales(step - 1, recipe)
-        opt_g.param_groups[0]["lr"] = base_lrs[0][0] * network
-        opt_g.param_groups[1]["lr"] = base_lrs[0][1] * prior_scale
-        opt_d.param_groups[0]["lr"] = base_lrs[1][0] * network
         noisy_critic.std = input_noise_std(recipe, step - 1)
         sigma_out = output_noise_std(recipe, step - 1)
 
         # Replace this synthetic batch with a batch from your DataLoader.
         ids = torch.randint(len(centers), (recipe.batch_size,), device=device)
-        real = centers[ids] + 0.015 * torch.randn(recipe.batch_size, 2, device=device)
+        real = centers[ids] + SIGMA * torch.randn(recipe.batch_size, 2, device=device)
         z, particle_ids = prior.sample(recipe.batch_size)
         fake = with_noise(generator(z), sigma_out)
 
@@ -142,24 +145,25 @@ def main():
         finally:
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
-        update_ema(ema_g, generator, recipe.ema_decay)
-        update_ema(ema_prior, prior, recipe.ema_decay)
+        ema_g.update_parameters(generator)
+        ema_prior.update_parameters(prior)
 
         if step == 1 or step % args.log_every == 0 or step == recipe.total_steps:
             print(json.dumps({
                 "event": "train", "step": step,
                 "d_loss": d_loss.detach().item(), "g_loss": g_loss.detach().item(),
-                "prior_loss": prior_loss.detach().item(), "lr_scale": network,
+                "prior_loss": prior_loss.detach().item(), "lr": opt_d.param_groups[0]["lr"],
                 **penalty.diagnostics(),
                 "seconds": round(time.monotonic() - started, 3),
             }), flush=True)
 
     with torch.no_grad():
-        z, _ = ema_prior.sample(256)
+        z, _ = ema_prior.module.sample(4096, generator=torch.Generator(device=device).manual_seed(44))
         samples = ema_g(z)
     if not torch.isfinite(samples).all():
         raise RuntimeError("non-finite generated samples")
-    print(json.dumps({"event": "complete", "sample_shape": list(samples.shape)}), flush=True)
+    print(json.dumps({"event": "complete", "step": recipe.total_steps, **grid_score(samples, centers)}),
+          flush=True)
 
 
 if __name__ == "__main__":
