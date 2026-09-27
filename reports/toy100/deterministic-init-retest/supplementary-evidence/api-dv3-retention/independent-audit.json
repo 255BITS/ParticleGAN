@@ -1,0 +1,131 @@
+{
+  "status": "PASS_INDEPENDENT_ARTIFACT_AND_CPU_STATE_AUDIT",
+  "candidate": "API-DV3-new-init",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T023216Z/late-arrival-retention/20260927T023216Z-1911906/repo/reports/reviewed-probe-output/batch-20260927T023216Z-1911906/api-dv3-retention",
+  "original_gate_status": "FAIL",
+  "supplement_status": "COMPLETE_SUPPLEMENT",
+  "summary": {
+    "first_arrival": 1150,
+    "passing_since_arrival": 26,
+    "observations_since_arrival": 26,
+    "departures": [],
+    "min_hq_since_arrival": 0.90966796875,
+    "min_modes_since_arrival": 8,
+    "final_passing_suffix": 26,
+    "final_suffix_start": 1150
+  },
+  "final_hq": 0.91162109375,
+  "final_modes": 8,
+  "own_serialized_checkpoint_restore_bytes_and_devices_equal": true,
+  "original_live_and_ema_endpoint_reproduced": true,
+  "extension_batches_exact": 1200,
+  "original_batch_replay_runtime_receipt": 1200,
+  "new_observations": 24,
+  "full_applied_rates_and_noise_retained": true,
+  "rate_policy": "Source-defined adaptive mobility; not fixed learning rates or a total-step decay schedule",
+  "applied_network_lr_range": [
+    8.271907540495064e-05,
+    0.0005323518712578492
+  ],
+  "applied_prior_lr_range": [
+    0.0005021881245145518,
+    0.0013651197529191046
+  ],
+  "final_native_CPU_clocks_and_CUDA_moments_verified": true,
+  "cuda_initialized": false,
+  "no_model_construction_or_training": true,
+  "independent_freshprocess_update_replay": "NOT_CLAIMED: no uninterrupted future control was run",
+  "checkpoint_mode_scope": "Original GANTrainer checkpoint omits module training flags; fixed frozen host has no mode-dependent layer and public step resets G/D modes each update. No claim of arbitrary-host mode restoration.",
+  "archive": {
+    "artifact-sha256.json": {
+      "archived_file": "artifact-sha256.json",
+      "original_sha256": "eac3a2421865de32622314766699a7564bc25c4b7052a1e2f4d9e6a542b9f63d",
+      "archive_sha256": "eac3a2421865de32622314766699a7564bc25c4b7052a1e2f4d9e6a542b9f63d",
+      "bytes": 1335
+    },
+    "batch-receipts.jsonl": {
+      "archived_file": "batch-receipts.jsonl.gz",
+      "original_sha256": "7a21295453f2d667dbe6ade99b037760cf44c6319bb5e8974783e735f36df293",
+      "archive_sha256": "f6e183bd9a53a5372a947eeeca42aea567d7069baea36451bf8ca793d2d968a0",
+      "bytes": 501600
+    },
+    "continuation-protocol.json": {
+      "archived_file": "continuation-protocol.json",
+      "original_sha256": "ea2bf86ffd93f9ea58c99bfd8753e73a93d9c16f19f4b5109092429526f06c36",
+      "archive_sha256": "ea2bf86ffd93f9ea58c99bfd8753e73a93d9c16f19f4b5109092429526f06c36",
+      "bytes": 19811
+    },
+    "expected-extension-batches.json": {
+      "archived_file": "expected-extension-batches.json.gz",
+      "original_sha256": "ec2303dd5f53fbab3800a1f9caf6a2f6c46084d984e4dc7cd35d6496472b306a",
+      "archive_sha256": "1f6c072bca584ce26569760138dc95a3caca800a308945eea91c262d90290963",
+      "bytes": 538803
+    },
+    "final-state.pt": {
+      "archived_file": "final-state.pt.gz",
+      "original_sha256": "528def19e90d63b8a15f1c741bb6a9396f2e383004742f17aaf294666389ef44",
+      "archive_sha256": "cab2ea71e47b72912c5f9ec77c4a874ed2e090e79518402c008fc271ee9d6414",
+      "bytes": 759209
+    },
+    "learning-rates.jsonl": {
+      "archived_file": "learning-rates.jsonl.gz",
+      "original_sha256": "a78070879951728202f55ca3961c92ebb9ed53a353bb3149f99219cbc4c78626",
+      "archive_sha256": "c69738f0f78af0ae685d47ecbe6713990b0e0befbe135c2428d02bef7c37141f",
+      "bytes": 1167592
+    },
+    "metrics.jsonl": {
+      "archived_file": "metrics.jsonl.gz",
+      "original_sha256": "2e697df3aa9a62758cf52619829fd94daa99e75c067372c759987a019e2e5494",
+      "archive_sha256": "9dd16902c46e1723142a579caa9f0b4a452615a564ba2b86f91acf3af869b739",
+      "bytes": 6063
+    },
+    "optimizer-device-proof-1201.json": {
+      "archived_file": "optimizer-device-proof-1201.json",
+      "original_sha256": "c69b2e3f2781c19d17047b106df9195473d2bdde72f5732529968d5e43ead6ec",
+      "archive_sha256": "c69b2e3f2781c19d17047b106df9195473d2bdde72f5732529968d5e43ead6ec",
+      "bytes": 3633
+    },
+    "optimizer-device-proof-2400.json": {
+      "archived_file": "optimizer-device-proof-2400.json",
+      "original_sha256": "ad1af529fa6abed5a4f571e14f70590ec2c36865a80f7d992656c6a94ec7429a",
+      "archive_sha256": "ad1af529fa6abed5a4f571e14f70590ec2c36865a80f7d992656c6a94ec7429a",
+      "bytes": 3633
+    },
+    "restore-proof.json": {
+      "archived_file": "restore-proof.json",
+      "original_sha256": "a4511f1a841b59ae10933146dd2347073ab6ba0c6081cfe901d1af09e0b2878d",
+      "archive_sha256": "a4511f1a841b59ae10933146dd2347073ab6ba0c6081cfe901d1af09e0b2878d",
+      "bytes": 54259
+    },
+    "restored-observation.json": {
+      "archived_file": "restored-observation.json",
+      "original_sha256": "6fe9ed789b6595f534b084722c81b180c221086044b1e1bb41723eb9bfad5da0",
+      "archive_sha256": "6fe9ed789b6595f534b084722c81b180c221086044b1e1bb41723eb9bfad5da0",
+      "bytes": 263
+    },
+    "result.json": {
+      "archived_file": "result.json",
+      "original_sha256": "beaa27f4b55e675af4cc8aca431b61b695380869109476ed4501c5a09e85865e",
+      "archive_sha256": "beaa27f4b55e675af4cc8aca431b61b695380869109476ed4501c5a09e85865e",
+      "bytes": 6734
+    },
+    "sampling-preflight.json": {
+      "archived_file": "sampling-preflight.json",
+      "original_sha256": "4f21951abbebd831a9bb59937a756f6749ff66ef92799a5880b7325a99e85725",
+      "archive_sha256": "4f21951abbebd831a9bb59937a756f6749ff66ef92799a5880b7325a99e85725",
+      "bytes": 307
+    },
+    "source-preflight.json": {
+      "archived_file": "source-preflight.json",
+      "original_sha256": "1703caea009be1f94757f09e1dcdc4680fc69276d74b7aa034d4938f0a49be88",
+      "archive_sha256": "1703caea009be1f94757f09e1dcdc4680fc69276d74b7aa034d4938f0a49be88",
+      "bytes": 879
+    },
+    "source.zip": {
+      "archived_file": "source.zip",
+      "original_sha256": "a349b4e2cd7d15728cadb28e13687eaaf0d8bb0b7bae8ce22a0458f5afe0e9da",
+      "archive_sha256": "a349b4e2cd7d15728cadb28e13687eaaf0d8bb0b7bae8ce22a0458f5afe0e9da",
+      "bytes": 600425
+    }
+  }
+}

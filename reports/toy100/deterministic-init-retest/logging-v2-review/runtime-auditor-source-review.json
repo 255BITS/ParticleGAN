@@ -1,0 +1,11 @@
+{
+  "status": "PASS_SOURCE_REVIEW",
+  "auditor_sha256": "ceed4e38b1b2f519efac365e0b0b9004207a278182cc9a56eedb58c676efa507",
+  "logging_manifest_sha256": "d18885d0f4c53e421d4028bc0eefb6bd16dbd9fd1296e2986bb1233827274797",
+  "behavior": "--logging-v2 is explicit store_true; defaults to originalv1 seal; opted-in branch asserts RP12\u2013RP15 exact aliases and reviewed fixed loggingseal before archive verification",
+  "scope": "Full source review confirms same artifact/source/batch/scoring/rawcheckpoint checks; only selected harnessseal and reportedversion differ",
+  "limits": [
+    "No frozen harness edits",
+    "No quality inferred; terminal artifacts must pass auditor"
+  ]
+}

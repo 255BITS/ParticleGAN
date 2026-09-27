@@ -21,6 +21,12 @@ limit, and minimum mass ratio .2319 below .25. See the [follow-up audit](dv12-ve
 It is not a release winner. No matching old tiny-screen measurement exists for
 DV12, so its new tiny-screen pass is not labeled an old-fail-to-new-pass change.
 
+Late arrivals receive separate retention measurements: unchanged checkpoint
+continuations show DV2 passing25/25 observations since arrival at1200, and DV3
+passing26/26 since1150, through2400. DV1 and DV4 each have one quality departure
+and later recover. [Full continuation evidence](port-source/late-retention-terminal-audit/table.md)
+keeps the original1200-update scores intact while recording arrival and stability.
+
 The three public controls have completed the new-initialization screen.
 K3P and default KA2 both finish with 6/8 modes; constant-rate KA2 finishes with
 4/8. All three score 0/24 passing observations. These are measured coverage

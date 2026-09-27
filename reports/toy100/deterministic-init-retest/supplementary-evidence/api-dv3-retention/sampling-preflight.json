@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "matched_original_batches": 1200,
+  "declared_extension_batches": 1200,
+  "learner_updates": 0,
+  "final_cursor": {
+    "shape": [
+      16
+    ],
+    "dtype": "torch.uint8",
+    "device": "cpu",
+    "sha256": "ff8bc06a33f63cf2156ab135d35a361a60102226569df4039b02e1ef86367cf3"
+  }
+}

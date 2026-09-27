@@ -1,0 +1,324 @@
+{
+  "status": "PROSPECTIVE_SUPPLEMENT_SOURCE_REVIEW_REQUIRED",
+  "original_gate": "ALL_ORIGINAL_1200_FAIL_RESULTS_PRESERVED",
+  "start_completed": 1200,
+  "end_completed": 2400,
+  "observations": [
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1600,
+    1650,
+    1700,
+    1750,
+    1800,
+    1850,
+    1900,
+    1950,
+    2000,
+    2050,
+    2100,
+    2150,
+    2200,
+    2250,
+    2300,
+    2350,
+    2400
+  ],
+  "recipe_policy": "Unchanged total_steps=None and alloriginalrates/noise/controller. No reset or initializer replay after load.",
+  "restore_policy": "torch.load with no map_location; API load_state_dict then exact serialized material equality including tensor devices, callerdata RNG and native CPU scalar clocks.",
+  "report": [
+    "allnew24 observations",
+    "passing/total since each own original first arrival",
+    "eachdepartureafterownarrival",
+    "minHQ/modes",
+    "finalpassing suffix",
+    "originalfrozen1200FAILseparate"
+  ],
+  "no_model_execution_during_preparation": true,
+  "checkpoint_coverage_caveat": "Original GANTrainer checkpoint omits module training flags; fixed frozen host has no mode-dependent layer and public step resets G/D modes each update. No claim of arbitrary-host mode restoration.",
+  "candidates": {
+    "api-dv1": {
+      "candidate": "API-DV1-new-init",
+      "original_artifacts": {
+        "initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/initial-state.pt",
+          "sha256": "8cba5e983e706ce85a1d3baceec073295ac82de02b1fbedc7fdc3f147c13862b"
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/final-state.pt",
+          "sha256": "3ad0dbd39855bd81507fd9b1231f36c1f540253b842d78f96fab8ce649fe4d49"
+        },
+        "declaration.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/declaration.json",
+          "sha256": "a539617ea68ac7f0483cdc90bcca9a40cf1f8961101d1153b25f45d061399b09"
+        },
+        "source.zip": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/source.zip",
+          "sha256": "f0c07a8cf8ddbc5e244e6e67f3ddc344cb4d5dcc7398d5ef29ebe127fe81eaee"
+        },
+        "metrics.jsonl": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/metrics.jsonl",
+          "sha256": "c2673e06375c04ddefee332e7f3799bf18d40909fc3f7a0dd5ee56509ae8ba40"
+        },
+        "result.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/result.json",
+          "sha256": "e755730fb532b1c5df9f0e4368ffd99087bad3c2898892f766f097f42d1bce90"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/protocol.json",
+          "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+        },
+        "runtime.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/runtime.json",
+          "sha256": "5ea1037cbfe34cef918af4496b9974a23b692b973e24d8921769852d2f58240d"
+        },
+        "artifact-sha256.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv1/artifact-sha256.json",
+          "sha256": "29d68b3b5ba29b9470b999903e019da49c0bfce3907ea423057966819949ee51"
+        }
+      },
+      "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv1/package",
+      "candidate_declaration": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv1/candidate-declaration.json",
+      "candidate_declaration_sha256": "a539617ea68ac7f0483cdc90bcca9a40cf1f8961101d1153b25f45d061399b09",
+      "original_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 1,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 1,
+        "first_pass_step": 1200,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      }
+    },
+    "api-dv2": {
+      "candidate": "API-DV2-new-init",
+      "original_artifacts": {
+        "initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/initial-state.pt",
+          "sha256": "a9399738448607467f06a7e3c3b185bad8771ad0e3ae8c7eced796470ac14765"
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/final-state.pt",
+          "sha256": "802ed0419383b2dc5084f4d1f4dc0805e92b0ad90542138435b46e6c7931d725"
+        },
+        "declaration.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/declaration.json",
+          "sha256": "ba688e841b1e51ca31190df32f7c0427e00feb338351daec1759e7e3b944176c"
+        },
+        "source.zip": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/source.zip",
+          "sha256": "73dc1a54f34a62c25720acffbfe7f2a9f8a0c151ced873ef9e76e7abba1a7c8b"
+        },
+        "metrics.jsonl": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/metrics.jsonl",
+          "sha256": "e269c25603751ed51983b1a6ad2db8c3346c82e16c9512d27f68dc8a7745cb1a"
+        },
+        "result.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/result.json",
+          "sha256": "ae32d9cf9434c52af8e8df8c7b9c52cb378a2f2a656eaa9f4ed5fad11f7ff713"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/protocol.json",
+          "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+        },
+        "runtime.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/runtime.json",
+          "sha256": "84a9df50936e7d263827c99cd5f1f0c82b805b9142d157a54664a6d742eedc30"
+        },
+        "artifact-sha256.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv2/artifact-sha256.json",
+          "sha256": "e301fd130a988a284889846bbbacd383e7cef967e5bb44fc54688dc24fe551ad"
+        }
+      },
+      "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv2/package",
+      "candidate_declaration": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv2/candidate-declaration.json",
+      "candidate_declaration_sha256": "ba688e841b1e51ca31190df32f7c0427e00feb338351daec1759e7e3b944176c",
+      "original_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 1,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 1,
+        "first_pass_step": 1200,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      }
+    },
+    "api-dv3": {
+      "candidate": "API-DV3-new-init",
+      "original_artifacts": {
+        "initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/initial-state.pt",
+          "sha256": "8a46b6852d409c870c3cd166a1886d1b61b0dcaca48cb4b6fddbd60c7bb2cb06"
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/final-state.pt",
+          "sha256": "01db295a469d510df535e148e54c757fc859731638217bd994561f69a60db922"
+        },
+        "declaration.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/declaration.json",
+          "sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d"
+        },
+        "source.zip": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/source.zip",
+          "sha256": "3df6d510cd9de2089fd873f0ed636875d89bb25a5f0b008a5add2ee8fc92d368"
+        },
+        "metrics.jsonl": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/metrics.jsonl",
+          "sha256": "381b5345b66424544f787cbf772cda25db27f3a02c2b3decfefb6961ea6c156a"
+        },
+        "result.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/result.json",
+          "sha256": "c9f11760f7769cac9f439bfe4dc0ea7d8960e965d38a3025a7f63f074c1ef3ff"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/protocol.json",
+          "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+        },
+        "runtime.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/runtime.json",
+          "sha256": "f762c65b2d2477cc00556039f9895e94425dcb744895e000b26b8bffbabfb9a6"
+        },
+        "artifact-sha256.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/artifact-sha256.json",
+          "sha256": "436380d09425e8d168181df657905c46c414ce4799441f42cac0c8711a5d4def"
+        }
+      },
+      "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv3/package",
+      "candidate_declaration": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv3/candidate-declaration.json",
+      "candidate_declaration_sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d",
+      "original_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 2,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 2,
+        "first_pass_step": 1150,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      }
+    },
+    "api-dv4": {
+      "candidate": "API-DV4-new-init",
+      "original_artifacts": {
+        "initial-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/initial-state.pt",
+          "sha256": "52b04b7f3e6d9a56c1d11d36c325681a0ce6a0bc59453e612ac6ddbf007fff35"
+        },
+        "final-state.pt": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/final-state.pt",
+          "sha256": "84a35572a50cfb3e5a1b1f8feeb13b5c5ed9ab7054a53386339cd6f7cfee7883"
+        },
+        "declaration.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/declaration.json",
+          "sha256": "4d6894fe58576a24a503b308568e9524fcefb5f37270d6a0c95f79b50f52ed7a"
+        },
+        "source.zip": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/source.zip",
+          "sha256": "b74608bd2dacb93445b659148b7de51d5df3135fbaf82655817e8c1f8a1bcb58"
+        },
+        "metrics.jsonl": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/metrics.jsonl",
+          "sha256": "72546b7a748c934bd3bc1a2f0cfe8df044d1bfdb0968e263ac03d6c56ff72acb"
+        },
+        "result.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/result.json",
+          "sha256": "8aadae405d2c3d71a65acfc6de55eaeefa4f1701ee981ce0d0bf08f9194d9a6d"
+        },
+        "protocol.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/protocol.json",
+          "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+        },
+        "runtime.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/runtime.json",
+          "sha256": "b26f2cca8c0202f7012c3e7101d0e6fa7c343394b09f583ccef9d915ffa80adf"
+        },
+        "artifact-sha256.json": {
+          "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv4/artifact-sha256.json",
+          "sha256": "799494dc17c419a20002a24a9e4ca03246fa0c53369d82dce114d40889bad1e4"
+        }
+      },
+      "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv4/package",
+      "candidate_declaration": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv4/candidate-declaration.json",
+      "candidate_declaration_sha256": "4d6894fe58576a24a503b308568e9524fcefb5f37270d6a0c95f79b50f52ed7a",
+      "original_convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 3,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 3,
+        "first_pass_step": 1100,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      }
+    }
+  },
+  "candidate": "API-DV3-new-init",
+  "original_artifacts": {
+    "initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/initial-state.pt",
+      "sha256": "8a46b6852d409c870c3cd166a1886d1b61b0dcaca48cb4b6fddbd60c7bb2cb06"
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/final-state.pt",
+      "sha256": "01db295a469d510df535e148e54c757fc859731638217bd994561f69a60db922"
+    },
+    "declaration.json": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/declaration.json",
+      "sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d"
+    },
+    "source.zip": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/source.zip",
+      "sha256": "3df6d510cd9de2089fd873f0ed636875d89bb25a5f0b008a5add2ee8fc92d368"
+    },
+    "metrics.jsonl": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/metrics.jsonl",
+      "sha256": "381b5345b66424544f787cbf772cda25db27f3a02c2b3decfefb6961ea6c156a"
+    },
+    "result.json": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/result.json",
+      "sha256": "c9f11760f7769cac9f439bfe4dc0ea7d8960e965d38a3025a7f63f074c1ef3ff"
+    },
+    "protocol.json": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/protocol.json",
+      "sha256": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c"
+    },
+    "runtime.json": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/runtime.json",
+      "sha256": "f762c65b2d2477cc00556039f9895e94425dcb744895e000b26b8bffbabfb9a6"
+    },
+    "artifact-sha256.json": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T021205Z/data-wave2/20260927T021205Z-1878197/repo/reports/fixed-init-mode-hold/api-dv3/artifact-sha256.json",
+      "sha256": "436380d09425e8d168181df657905c46c414ce4799441f42cac0c8711a5d4def"
+    }
+  },
+  "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv3/package",
+  "candidate_declaration": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/port-source/api-dv3/candidate-declaration.json",
+  "candidate_declaration_sha256": "008277c5ed8f423e3947133eaab2364a3129f91155f49fcf17873dfceba07c4d",
+  "original_convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 2,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 2,
+    "first_pass_step": 1150,
+    "stable_from_step": null,
+    "stable_from_seconds": null,
+    "confirmed_step": null,
+    "confirmed_seconds": null
+  }
+}

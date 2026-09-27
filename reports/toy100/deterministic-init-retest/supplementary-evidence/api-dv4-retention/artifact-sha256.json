@@ -1,0 +1,16 @@
+{
+  "optimizer-device-proof-2400.json": "ad1af529fa6abed5a4f571e14f70590ec2c36865a80f7d992656c6a94ec7429a",
+  "source-preflight.json": "8e92d844bc3c73fbd5f69fc780da02bffe85d930a9d7c9ee1dbba18e83717150",
+  "batch-receipts.jsonl": "7a21295453f2d667dbe6ade99b037760cf44c6319bb5e8974783e735f36df293",
+  "sampling-preflight.json": "4f21951abbebd831a9bb59937a756f6749ff66ef92799a5880b7325a99e85725",
+  "expected-extension-batches.json": "ec2303dd5f53fbab3800a1f9caf6a2f6c46084d984e4dc7cd35d6496472b306a",
+  "learning-rates.jsonl": "c7d91800fdefdfc4fc53a9d0d3deb3751aa62c0aefc3dd44fe8399a061a47e63",
+  "restored-observation.json": "6fe9ed789b6595f534b084722c81b180c221086044b1e1bb41723eb9bfad5da0",
+  "continuation-protocol.json": "6f4ede61e4b8b512702cc3b6aef0b89c8030dffcefd343f3fbcaf8e770c33039",
+  "result.json": "48d45de80625450d435da3df94fd0de4f1a7c5b7f708423eb2a3ae6864ea43e0",
+  "source.zip": "a155c5da6ccd67c7724adcb7f6da68021194bdde18c63a22ec248c5f22a960ca",
+  "metrics.jsonl": "78fa8a1468116d030cede6aafaa2f8e5d502d5270679593607ee011a1e9f65fb",
+  "final-state.pt": "e57ff71a28be649b1ac3cc0e2ffaa0090b26dd88ab1950fbe811134b4e34718b",
+  "restore-proof.json": "1827be87a5fe9fc7c6064c81363fc48c09cd646eaa67a10b2ca41fcfe800cf7d",
+  "optimizer-device-proof-1201.json": "c69b2e3f2781c19d17047b106df9195473d2bdde72f5732529968d5e43ead6ec"
+}

@@ -1,0 +1,23 @@
+{
+  "status": "PREPARED_SOURCE_REVIEWED_NOT_YET_RUN",
+  "auditor": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/audit_rp1_eager_screen.py",
+  "auditor_sha256": "e3985da8198d670d1b1aefa7e7b3ab942db6754f42491913ab8b6a784a35dc32",
+  "base_auditor_sha256": "ceed4e38b1b2f519efac365e0b0b9004207a278182cc9a56eedb58c676efa507",
+  "manifest_sha256": "bea404c3c04462117704c29eba1b550d2f3fcac36576e222339bc4784c5e3635",
+  "declaration_sha256": "59a92e348eb1fc230a2ebbf3138cb53422453ebedfbdbfaae9ce1bf39b29bd7b",
+  "cpu_receipt_sha256": "553e55ca56638d2bce0330bb2d207f2af6cba1f42a3f269d99ea8fcad5c89a63",
+  "command": "/tmp/pr38-default-env/bin/python reports/toy100/deterministic-init-retest/audit_rp1_eager_screen.py --source COMPLETE_EXTERNAL_OUTPUT",
+  "scope": "Historical RP1 CUDA eager diagnostic only; exact declaration/setup/CPU seal plus ordinary complete artifact/source/1200batch/24observation checks",
+  "extra_checks": [
+    "historical setup receipt before/after nonoptimizer+RNG equality",
+    "independent rawstorage recomputation of setup portable digest",
+    "17 exact zero raw initial eager states and parameter-device counters0/1/1200",
+    "all1200 applied rates match original RP1 open/quiet scale set and startupnoise360/720",
+    "final precision acceptedupdates1200"
+  ],
+  "limits": [
+    "No quality result claimed before actual terminal artifact audit",
+    "Controller transition evidence absent from this package per-step log; no reconstructed transition trace claimed",
+    "No modifications to frozen harness or candidate"
+  ]
+}
