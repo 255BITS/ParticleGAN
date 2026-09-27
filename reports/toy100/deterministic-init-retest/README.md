@@ -16,9 +16,19 @@ sources and initialization. Neither PR is being merged into develop here.
 **RP12 is the first confirmed old-failure to new-pass change:** its exact old
 tiny-screen score was0/24; the new initialization reaches all eight modes at300
 and retains19/19 passing observations through1200 (final HQ99.83%). Its prior
-image intensity failure is the next follow-up. The first new attempt stopped on
+image intensity failure also becomes a pass: first325, then12/12 passing checks
+through600, compared with only4 passing checks under the old initialization.
+Broader quality, recovery and long stability remain unverified. The first new attempt stopped on
 a nested-diagnostic logging error; the reviewed serializer correction changes
 no learner, sampling, initialization or scoring behavior, and the error is retained.
+
+All49 declared quick-screen configurations (including the three public controls
+and the separate historical RP1 eager diagnostic) have completed. The four
+passing screens are RP12, RP15, RP14 and DV12. RP14 also changes from an old
+image failure0/24 to a new image pass9/24, with one early quality departure;
+RP15 passes the image gate5/24 but has no completed old comparison. These three
+image runs and DV12's vector failure are in [follow-up results](followup-results.json).
+None has completed release qualification.
 
 DV12 was the first new-initialization screen survivor: it reaches all eight
 modes at update650 and passes all12 observations from there through update1200.

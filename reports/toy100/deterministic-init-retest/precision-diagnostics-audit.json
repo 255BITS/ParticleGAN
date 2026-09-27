@@ -1,0 +1,183 @@
+{
+  "status": "PASS_RECORDED_DIAGNOSTICS",
+  "candidates": [
+    {
+      "candidate": "API-RP12-new-init",
+      "transitions": [
+        {
+          "first_update": 1,
+          "state": "open",
+          "rates": [
+            [
+              0.00425,
+              0.0085
+            ],
+            [
+              0.00425
+            ]
+          ]
+        },
+        {
+          "first_update": 551,
+          "state": "reduced",
+          "rates": [
+            [
+              4.25e-05,
+              0.00042500000000000003
+            ],
+            [
+              4.25e-05
+            ]
+          ]
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.007506075315177441,
+        "gap_s": 0.007933828301885486,
+        "velocity": -4.32073723947643e-06,
+        "contraction_peak": 0.00024735973714174023,
+        "contracting": 408,
+        "activity": 0.04692870340969291,
+        "activity_peak": 0.6574415574278469,
+        "quiet_gap": 0.007801414320755102,
+        "quiet_activity": 0.049287241440626815,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 1200,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": 1.160524375857455e-06
+      },
+      "nominal_game_fields": 2400,
+      "rate_rows_verified": 1200,
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp12",
+      "rates_sha256": "0e223585ba1228b930fe51d571da87d047532b1a2a6127263e8a852f063f51c0",
+      "final_state_sha256": "e5a15831b91f48f878f7d3f19d8073db7671d72c04dbba88b4a6164a69cac6e5",
+      "source_game_update_sha256": "00d78c77224bc590098e677abba728b9f1da6c3a62c70942023a82121cbe3ee4"
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "transitions": [
+        {
+          "first_update": 1,
+          "state": "open",
+          "rates": [
+            [
+              0.00425,
+              0.0085
+            ],
+            [
+              0.00425
+            ]
+          ]
+        },
+        {
+          "first_update": 857,
+          "state": "reduced",
+          "rates": [
+            [
+              4.25e-05,
+              0.00042500000000000003
+            ],
+            [
+              4.25e-05
+            ]
+          ]
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.008694312535226345,
+        "gap_s": 0.00990113362759215,
+        "velocity": -1.2190112044098422e-05,
+        "contraction_peak": 0.00016080915898846767,
+        "contracting": 391,
+        "activity": 0.041097904146030546,
+        "activity_peak": 0.5200582216511079,
+        "quiet_gap": 0.01051331509728191,
+        "quiet_activity": 0.0346204378879071,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 1200,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": -7.122345969719774e-06
+      },
+      "nominal_game_fields": 2400,
+      "rate_rows_verified": 1200,
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp14",
+      "rates_sha256": "ba6dd76c7bd90056750327633556afadc786f5f7e26a49fd0edcb2b884e2b397",
+      "final_state_sha256": "a3588636085a92b2bbc8168c2a8e4d5b2e2bb943e6b1fb850f309f08d6653ddd",
+      "source_game_update_sha256": "94830d2db8ff24a4deef1ed96b8b2302965f80e512ecb79588c3abd28fe52618"
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "transitions": [
+        {
+          "first_update": 1,
+          "state": "open",
+          "rates": [
+            [
+              0.00425,
+              0.0085
+            ],
+            [
+              0.00425
+            ]
+          ]
+        },
+        {
+          "first_update": 788,
+          "state": "reduced",
+          "rates": [
+            [
+              4.25e-05,
+              0.00042500000000000003
+            ],
+            [
+              4.25e-05
+            ]
+          ]
+        }
+      ],
+      "final_precision": {
+        "variant": "rp5",
+        "open": false,
+        "gap": 0.00499860942363739,
+        "gap_s": 0.007479834638959451,
+        "velocity": -2.5062880962848852e-05,
+        "contraction_peak": 0.00018447827633052331,
+        "contracting": 563,
+        "activity": 0.01965167384321972,
+        "activity_peak": 0.5401248284128486,
+        "quiet_gap": 0.008289756205680407,
+        "quiet_activity": 0.02257967033726714,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 1200,
+        "openings": 1,
+        "closings": 1,
+        "event": null,
+        "velocity_s": -4.3903136042265e-06
+      },
+      "nominal_game_fields": 2400,
+      "rate_rows_verified": 1200,
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T024858Z/precision-logging-v2/20260927T024858Z-1937661/repo/reports/reviewed-probe-output/20260927T024953Z/api-rp15",
+      "rates_sha256": "5c341d9a0f0830e758c20f28f8f46af14fbfbecd13c3951954d885c4bb24ee88",
+      "final_state_sha256": "2f438f281972f6b6e8bbb09a2740ae30d5515f494393d6a0f5b66495bd531d06",
+      "source_game_update_sha256": "94830d2db8ff24a4deef1ed96b8b2302965f80e512ecb79588c3abd28fe52618"
+    }
+  ],
+  "limits": [
+    "Checks nominal applied group rates, constant noise, source-bound game-field counters and final controller transition counts; no learner or floating-point controller replay.",
+    "Tiny harness does not emit every precision state, so raw gap/activity smoothing is not independently reconstructed.",
+    "Field count excludes auxiliary controller/scoring work and does not establish runtime superiority.",
+    "No target change occurs here. A reduced rate with retained quality does not prove autonomous recovery.",
+    "RP14 inherited force-cosine diagnostic limitations remain; this audit does not validate that metric."
+  ]
+}

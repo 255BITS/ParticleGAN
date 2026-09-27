@@ -128,6 +128,569 @@
         "Candidate-specific controller/rates are retained, not independently replayed here.",
         "No first passing observation within1200 updates; this finite failure is not proof that later arrival is impossible."
       ]
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP12-new-init",
+      "task": "img_intensity2",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030024Z/precision-three-intensity2/20260927T030024Z-1956338/repo/reports/reviewed-probe-output/20260927T030124Z/api-rp12-img-intensity2",
+      "observations": 24,
+      "passing_observations": 12,
+      "passing_suffix": 12,
+      "first_arrival": 325,
+      "departures": [],
+      "passing_since_arrival": 12,
+      "observations_since_arrival": 12,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.90625,
+      "final_suffix_start": 325,
+      "final": {
+        "step": 600,
+        "seconds": 28.25489855185151,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.03741007670760155,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.03922593221068382,
+          "quality_mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 28.277093359967694,
+      "old_result": {
+        "status": "FAIL",
+        "source": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-rp12-img_intensity2/result.json",
+        "source_sha256": "0c02e8c2f153b3b661c9d919f44f02adea191efcb57dfef2866744e196237716",
+        "old_initialization": true
+      },
+      "source_zip_sha256": "033909204c8de86fa2be5ce2e6914026330ebd2979a1c91caff9d6c864323f17",
+      "cpu_receipt_sha256": "113482ea0948829f7b25344ada49d49dc6ffeed6a52f220e88d5d90b4675ea82",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.07128789275884628,
+        "gap_s": 0.047617920421455316,
+        "velocity": 0.00023909062967061856,
+        "contraction_peak": 8.272555847864997e-06,
+        "contracting": 0,
+        "activity": 0.16233560049083318,
+        "activity_peak": 0.8046693273334502,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 0.00019459592280236573
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "827c5938d23608a42fbe29dea7fc955dcc44a424fe580e6f03d0d1886a714a4a",
+        "optimizer-final.json": "c06ff3f9b2d50e6af9aaf0a1915fceafe3f33a32aa2ad12c3de733a7c069564f",
+        "batch-receipts.json": "54a7880c541c940fde67dcb69a5e78282d904b731128719a738a11a5280819cd",
+        "learning-rates.jsonl": "13a020500b9ef5a2afc93dce367c5c380edbcc2984b36143d62bdef92cfb9769",
+        "declaration.json": "621e511a48c48b69257368c0f61c957c5b979b01feea0e374f2191754296c829",
+        "result.json": "ea4a48418aab89155ea6eb5ed7acf09332a1496414a5d96c4e784dfb55cd678b",
+        "source.zip": "033909204c8de86fa2be5ce2e6914026330ebd2979a1c91caff9d6c864323f17",
+        "metrics.jsonl": "9f22b3461d185a732e37bcb424653a362590ce0b416602926841ec0b456ca04c",
+        "final-state.pt": "aa6a1e14e4a96c702cecd5d287ef0cb8e2b35785e356e41fada18bd939799fbf",
+        "initial-state.pt": "f6c559c749a645d4faa808c327c7de167b3052bfe8215af4467169e1334c4f0d"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "c5cb73d91cc7613ca2f7f228cde50a70548970f220119a99e82282c05071d9c9",
+      "archive_manifest": "followup-evidence/api-rp12-img-intensity2-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp12-runtime-audit.json",
+      "audit_sha256": "78708d3947f57fc3d8d4a69c8d82624a4a7e2ce73fa30adad8a113ea1789dab5"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP14-new-init",
+      "task": "img_intensity2",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030024Z/precision-three-intensity2/20260927T030024Z-1956338/repo/reports/reviewed-probe-output/20260927T030124Z/api-rp14-img-intensity2",
+      "observations": 24,
+      "passing_observations": 9,
+      "passing_suffix": 5,
+      "first_arrival": 375,
+      "departures": [
+        475
+      ],
+      "passing_since_arrival": 9,
+      "observations_since_arrival": 10,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.875,
+      "final_suffix_start": 500,
+      "final": {
+        "step": 600,
+        "seconds": 29.267250081989914,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04096594452857971,
+        "quality_mode_fractions": [
+          0.4375,
+          0.53125
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "distribution_tv": 0.03125,
+        "ema": {
+          "modes": 2,
+          "hq": 0.78125,
+          "mean_rmse": 0.049935366958379745,
+          "quality_mode_fractions": [
+            0.375,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "seconds": 29.2869770671241,
+      "old_result": {
+        "status": "FAIL",
+        "source": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-rp14-img_intensity2/result.json",
+        "source_sha256": "ed7e6a2ed0475ea4a758868f4fd850f954f3692d9d09fc00020905730912f8fe",
+        "old_initialization": true
+      },
+      "source_zip_sha256": "ea194888ecb3f1a606a357217b0d93f02f877b71f3b38609765fc8621c099c70",
+      "cpu_receipt_sha256": "5fbb627aa231697035c89ac68343d34f72f3f5963fb9e54f0a8fc27b4dd83cd0",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.15556824207305908,
+        "gap_s": 0.15076319682450173,
+        "velocity": 4.853581059149903e-05,
+        "contraction_peak": 0.0,
+        "contracting": 0,
+        "activity": 0.19282830287983338,
+        "activity_peak": 0.7312000628989686,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 9.626499705704593e-05
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "a8fa828853450658d5547d39d18a50c03a999b441195ae1f619babbfe4606d8f",
+        "optimizer-final.json": "afe5a2e1e92a17bcfa625665bc08b85124e9f41cd243a788c9e2f9160420738e",
+        "batch-receipts.json": "54a7880c541c940fde67dcb69a5e78282d904b731128719a738a11a5280819cd",
+        "learning-rates.jsonl": "8b45590c34ab512d22a789bacc0219a2fea553f7f444235f1268a447e0a24d1a",
+        "declaration.json": "cf6bab4c795e07612cb900537d919f4363160f0a6285eba7429743f13ee25046",
+        "result.json": "180bbf2d4d27c7ff45ffaac05d8f5eb8ece207aba690241211693a672464a071",
+        "source.zip": "ea194888ecb3f1a606a357217b0d93f02f877b71f3b38609765fc8621c099c70",
+        "metrics.jsonl": "f3983bc54fff632ec2a74dc3f5983f0c33855cffde209a21c1b836c8d35a3da7",
+        "final-state.pt": "ad5b38d5824c371cd409810d79e28b70dfb1ba6fc77d6ee79836cea9b30eddce",
+        "initial-state.pt": "78d56b91b83751326f044185f93cefde5d00d3e5ff78888d01b43d810d5893a7"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "c5cb73d91cc7613ca2f7f228cde50a70548970f220119a99e82282c05071d9c9",
+      "archive_manifest": "followup-evidence/api-rp14-img-intensity2-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp14-runtime-audit.json",
+      "audit_sha256": "0cdd30fe091d572f3b36815de008f13477a7fad7c907736ddcce9ae2ff114f0d"
+    },
+    {
+      "status": "PASS",
+      "scope": "Independent stdlib source, raw-state and scoring audit; no Torch or training",
+      "quality_status": "PASS",
+      "candidate": "API-RP15-new-init",
+      "task": "img_intensity2",
+      "source": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030024Z/precision-three-intensity2/20260927T030024Z-1956338/repo/reports/reviewed-probe-output/20260927T030124Z/api-rp15-img-intensity2",
+      "observations": 24,
+      "passing_observations": 5,
+      "passing_suffix": 5,
+      "first_arrival": 500,
+      "departures": [],
+      "passing_since_arrival": 5,
+      "observations_since_arrival": 5,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.9375,
+      "final_suffix_start": 500,
+      "final": {
+        "step": 600,
+        "seconds": 30.64822291699238,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04123776778578758,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "distribution_tv": 0.0,
+        "ema": {
+          "modes": 2,
+          "hq": 0.8125,
+          "mean_rmse": 0.05133938044309616,
+          "quality_mode_fractions": [
+            0.40625,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        }
+      },
+      "seconds": 30.670483766123652,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      },
+      "source_zip_sha256": "998ce77bc57d69a8730960c0c32d77cf67328a11c5dffe921a0aaa7814c122d9",
+      "cpu_receipt_sha256": "685a1d3a8b8ccfc68c4a97a6d8474714157d3e7a0ea55d8fba5103efcd33a62a",
+      "optimizer_clocks": [
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ],
+        [
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          },
+          {
+            "step": 600.0,
+            "device": "cuda:0",
+            "moment_device": "cuda:0"
+          }
+        ]
+      ],
+      "actual_CUDA_model_bytes_equal_own_CPU_proof": true,
+      "initial_raw_state_matches_full_initial_receipt": true,
+      "full_dry_sampling_receipts": 600,
+      "final_shared_sampling_cursor_matches": true,
+      "applied_rate_and_controller_rows": 600,
+      "field_evaluations": 1200,
+      "precision_events": [],
+      "final_precision": {
+        "variant": "rp5",
+        "open": true,
+        "gap": 0.1431850641965866,
+        "gap_s": 0.1279635016720904,
+        "velocity": 0.000153753156813069,
+        "contraction_peak": 0.0,
+        "contracting": 0,
+        "activity": 0.21210562541579767,
+        "activity_peak": 0.6835457083788833,
+        "quiet_gap": null,
+        "quiet_activity": null,
+        "quiet": 0,
+        "shock": 0,
+        "updates": 600,
+        "openings": 1,
+        "closings": 0,
+        "event": null,
+        "velocity_s": 0.0001473200438089361
+      },
+      "artifacts": {
+        "initial-model-cpu-cuda-proof.json": "965dcdb9b39935304701431635562012ca52dd774d64818dc76ceb4597aad96f",
+        "optimizer-initial.json": "ecbb6b8dde51982c08b2c6b083287ce1e49e1767703b4c18e2165d57ecdb4293",
+        "initial.json": "64a8836b7ee262a5483645dfb0e4ac8217fbed5ff64eaf793f7ee930d24d59c3",
+        "optimizer-final.json": "c3a324eec1d24e9527d99fafcfe6db717932ed6bf86662de2a18af8d2b30a682",
+        "batch-receipts.json": "54a7880c541c940fde67dcb69a5e78282d904b731128719a738a11a5280819cd",
+        "learning-rates.jsonl": "a169719754b6c5894c7ff1873c5a780a19ce784d76a15bc576cfc9bce221b231",
+        "declaration.json": "3f2b295a0606f4be77a66f46e5c311dabb6216a49f113995a19ff0289bce7ec6",
+        "result.json": "4089b774786c7a778e1a4e5bd77278c0ddbdce5cabcb43920b69aae1594d1ce1",
+        "source.zip": "998ce77bc57d69a8730960c0c32d77cf67328a11c5dffe921a0aaa7814c122d9",
+        "metrics.jsonl": "6e8db4db0d6dac4a28809229ac853688fcd14e0b952eb40f362f6b3a81e0ca11",
+        "final-state.pt": "32b7c33033418432d518c80e289092d4da02e72079dcc444ff85a38a6916ded1",
+        "initial-state.pt": "c37b050c82af30ce40dc80536cc2db95d40e6aab8c88fef1f00e2ab71092915c"
+      },
+      "limits": [
+        "The sealed worker checked all actual real/latent draws and accepted shared cursors against retained600 dry receipts. Audit verifies source assertions, expected receipts and final cursor; it does not rerun sampling.",
+        "Each accepted public update includes two game fields; cost is retained without equal-compute speed claims.",
+        "This finite image score does not establish ring recovery, indefinite retention, checkpoint replay or full22 qualification."
+      ],
+      "audit_source_sha256": "c5cb73d91cc7613ca2f7f228cde50a70548970f220119a99e82282c05071d9c9",
+      "archive_manifest": "followup-evidence/api-rp15-img-intensity2-new-init/archive-manifest.json",
+      "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/image-runtime-review/api-rp15-runtime-audit.json",
+      "audit_sha256": "2ddea79e65faa26bda65a2b1129fa39f705ebafc58f53b87374e4d3ce43bc235"
     }
   ]
 }

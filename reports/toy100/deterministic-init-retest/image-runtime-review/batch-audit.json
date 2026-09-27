@@ -1,0 +1,157 @@
+{
+  "status": "PASS_ALL_THREE_IMAGE_AUDITS",
+  "rows": [
+    {
+      "candidate": "API-RP12-new-init",
+      "quality_status": "PASS",
+      "passing_observations": 12,
+      "passing_suffix": 12,
+      "first_arrival": 325,
+      "departures": [],
+      "passing_since_arrival": 12,
+      "observations_since_arrival": 12,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.90625,
+      "final": {
+        "step": 600,
+        "seconds": 28.25489855185151,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.03741007670760155,
+        "quality_mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "distribution_tv": 0.0625,
+        "ema": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.03922593221068382,
+          "quality_mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "distribution_tv": 0.0625
+        }
+      },
+      "seconds": 28.277093359967694,
+      "precision_events": [],
+      "field_evaluations": 1200,
+      "old_result": {
+        "status": "FAIL",
+        "source": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-rp12-img_intensity2/result.json",
+        "source_sha256": "0c02e8c2f153b3b661c9d919f44f02adea191efcb57dfef2866744e196237716",
+        "old_initialization": true
+      }
+    },
+    {
+      "candidate": "API-RP14-new-init",
+      "quality_status": "PASS",
+      "passing_observations": 9,
+      "passing_suffix": 5,
+      "first_arrival": 375,
+      "departures": [
+        475
+      ],
+      "passing_since_arrival": 9,
+      "observations_since_arrival": 10,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.875,
+      "final": {
+        "step": 600,
+        "seconds": 29.267250081989914,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04096594452857971,
+        "quality_mode_fractions": [
+          0.4375,
+          0.53125
+        ],
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "distribution_tv": 0.03125,
+        "ema": {
+          "modes": 2,
+          "hq": 0.78125,
+          "mean_rmse": 0.049935366958379745,
+          "quality_mode_fractions": [
+            0.375,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.46875,
+            0.53125
+          ],
+          "distribution_tv": 0.03125
+        }
+      },
+      "seconds": 29.2869770671241,
+      "precision_events": [],
+      "field_evaluations": 1200,
+      "old_result": {
+        "status": "FAIL",
+        "source": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/continuous-api-search/evidence/api-rp14-img_intensity2/result.json",
+        "source_sha256": "ed7e6a2ed0475ea4a758868f4fd850f954f3692d9d09fc00020905730912f8fe",
+        "old_initialization": true
+      }
+    },
+    {
+      "candidate": "API-RP15-new-init",
+      "quality_status": "PASS",
+      "passing_observations": 5,
+      "passing_suffix": 5,
+      "first_arrival": 500,
+      "departures": [],
+      "passing_since_arrival": 5,
+      "observations_since_arrival": 5,
+      "minimum_modes_since_arrival": 2,
+      "minimum_hq_since_arrival": 0.9375,
+      "final": {
+        "step": 600,
+        "seconds": 30.64822291699238,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.04123776778578758,
+        "quality_mode_fractions": [
+          0.46875,
+          0.5
+        ],
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "distribution_tv": 0.0,
+        "ema": {
+          "modes": 2,
+          "hq": 0.8125,
+          "mean_rmse": 0.05133938044309616,
+          "quality_mode_fractions": [
+            0.40625,
+            0.40625
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        }
+      },
+      "seconds": 30.670483766123652,
+      "precision_events": [],
+      "field_evaluations": 1200,
+      "old_result": {
+        "status": "NOT_MEASURED_ON_THIS_EXACT_IMAGE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "research-a2-coherent-memory-d4f67fe0-new-init",
+  "candidate": "RESEARCH-a2_coherent_memory-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 4,
+    "final_hq": 0.416015625
+  },
+  "seconds": 45.03781988588162,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/a2-coherent-memory-d4f67fe0",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/a2-coherent-memory-d4f67fe0-runtime-audit.json",
+  "audit_sha256": "f5fc20b5f418b3eb4b201f509f8da9651136c59874ff418f6198d7c46a769dac",
+  "artifacts": {
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/source-plan.json": {
+      "sha256": "671a710923c9bad38e400e2610c882b97ad22a6d8f274ab84104103de5a82dc3",
+      "original_sha256": "671a710923c9bad38e400e2610c882b97ad22a6d8f274ab84104103de5a82dc3",
+      "bytes": 42383
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/prepared-source.zip": {
+      "sha256": "f0e6c3c9cfe76c1c5b2e08a9a3c78c8d19b1a77318032d032e89c613d578a549",
+      "original_sha256": "f0e6c3c9cfe76c1c5b2e08a9a3c78c8d19b1a77318032d032e89c613d578a549",
+      "bytes": 653949
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/result.json.gz": {
+      "sha256": "0394e06a330ec6271387fad151aeaba098d0aa3149dd163677f57350e842b57d",
+      "original_sha256": "66215ae7193a6111c4675a8027cac76efc6ef682f32635668129728eaa151bd2",
+      "bytes": 61622
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/initialization-receipt.json": {
+      "sha256": "6e05459742fc1e3783c829f7c509a76322d064abb43d800003488d10d4925391",
+      "original_sha256": "6e05459742fc1e3783c829f7c509a76322d064abb43d800003488d10d4925391",
+      "bytes": 4500
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/prepared-source-manifest.json": {
+      "sha256": "d11c07b54b939ae06dff6bc7f0f8a9257c4b36b2404cba4d531417dccc97db2e",
+      "original_sha256": "d11c07b54b939ae06dff6bc7f0f8a9257c4b36b2404cba4d531417dccc97db2e",
+      "bytes": 5307
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/prepared-source-sha256.json": {
+      "sha256": "3b65f172771c236b28095c0061e710d70edded43e43eb49418d0719317e73edd",
+      "original_sha256": "3b65f172771c236b28095c0061e710d70edded43e43eb49418d0719317e73edd",
+      "bytes": 291
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/mechanism-receipt.json": {
+      "sha256": "9f56051996526ac766b1fe5e16f53254da7f5dbd99b14bfdba19ee651c06e41f",
+      "original_sha256": "9f56051996526ac766b1fe5e16f53254da7f5dbd99b14bfdba19ee651c06e41f",
+      "bytes": 9334
+    },
+    "research-evidence/research-a2-coherent-memory-d4f67fe0-new-init/runtime.json": {
+      "sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "original_sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/a2-coherent-memory-d4f67fe0/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/a2-coherent-memory-d4f67fe0/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/a2-coherent-memory-d4f67fe0/final-state.pt",
+      "sha256": "e3c5d3e3e5f0f914985ca679c9206a8594f8c8da8b6ba3922b3c8a9d80d30419",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

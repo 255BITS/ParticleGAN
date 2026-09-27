@@ -1,0 +1,85 @@
+{
+  "id": "research-innov1-e55837fb-new-init",
+  "candidate": "RESEARCH-innov1-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.966064453125
+  },
+  "seconds": 50.731177719077095,
+  "continuous_eligibility": "UNVERIFIED_UNLESS_LINKED_TO_EXISTING_SOURCE_AUDIT",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/innov1-e55837fb",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/innov1-e55837fb-runtime-audit.json",
+  "audit_sha256": "08e185d6d1da89cd410480ef9df6dd1b15d4892a394940d9d4c59b5892825da2",
+  "artifacts": {
+    "research-evidence/research-innov1-e55837fb-new-init/source-plan.json": {
+      "sha256": "0495193d0d535463ea67167ec1822ac034c0b1cd7848bae65a7eaee729912e78",
+      "original_sha256": "0495193d0d535463ea67167ec1822ac034c0b1cd7848bae65a7eaee729912e78",
+      "bytes": 40782
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/prepared-source.zip": {
+      "sha256": "996bf810c42174391c7975d34fb81b7b3175ea33a24db72ed54e176a8af2ab4d",
+      "original_sha256": "996bf810c42174391c7975d34fb81b7b3175ea33a24db72ed54e176a8af2ab4d",
+      "bytes": 651589
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/result.json.gz": {
+      "sha256": "3fc568141c0f0a7aa18995813b9d79b3cc145818e7c57c5305a8bb2b6a7e37e5",
+      "original_sha256": "f4a40826d605e94625774ecb4159d09bad0f51fe883be0e21b3f25f28899cd5d",
+      "bytes": 86232
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/initialization-receipt.json": {
+      "sha256": "3465799746c93a0ed47af414dbced5522eb0e0c7cd52ece55cca28ec49c62cdb",
+      "original_sha256": "3465799746c93a0ed47af414dbced5522eb0e0c7cd52ece55cca28ec49c62cdb",
+      "bytes": 4488
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/prepared-source-manifest.json": {
+      "sha256": "5da776223d693c1be7b9891b8f4f681d64652767efe03ec0bb5f12566d8d86dd",
+      "original_sha256": "5da776223d693c1be7b9891b8f4f681d64652767efe03ec0bb5f12566d8d86dd",
+      "bytes": 5094
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/prepared-source-sha256.json": {
+      "sha256": "26684cc5550b847f30d4a21d5d0b247e2839e3efe4beceb5a2a7f8c04a26b7c5",
+      "original_sha256": "26684cc5550b847f30d4a21d5d0b247e2839e3efe4beceb5a2a7f8c04a26b7c5",
+      "bytes": 291
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/mechanism-receipt.json": {
+      "sha256": "65859af47a0b06015174d7331a0234a1686a4e03d24a45966fe8875e5839c14c",
+      "original_sha256": "65859af47a0b06015174d7331a0234a1686a4e03d24a45966fe8875e5839c14c",
+      "bytes": 3399
+    },
+    "research-evidence/research-innov1-e55837fb-new-init/runtime.json": {
+      "sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "original_sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/innov1-e55837fb/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/innov1-e55837fb/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T030029Z/research-remaining31-group1/20260927T030029Z-1956552/repo/reports/reviewed-probe-output/batch-20260927T030145Z/innov1-e55837fb/final-state.pt",
+      "sha256": "3e7b6622881e275bf2db91e313b609b7d2f912f05cc95b409d552dc46cdfa31f",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}

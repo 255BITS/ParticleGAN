@@ -1,0 +1,80 @@
+{
+  "id": "research-a2-bounded-damp-4255bed6-new-init",
+  "candidate": "RESEARCH-a2_bounded_damp-new-init",
+  "scope": "RESEARCH_HOST",
+  "status": "FAIL",
+  "summary": {
+    "observations": 24,
+    "passing": 0,
+    "first_arrival": null,
+    "observations_since_arrival": 0,
+    "passing_since_arrival": 0,
+    "departures": [],
+    "minimum_hq_since_arrival": null,
+    "minimum_modes_since_arrival": null,
+    "final_suffix": 0,
+    "final_suffix_start": null,
+    "final_modes": 7,
+    "final_hq": 0.99951171875
+  },
+  "seconds": 39.29051035316661,
+  "continuous_eligibility": "Research-host configuration; public API parity not implied.",
+  "source_directory": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025800Z/research-priority-seventeen-wave2/20260927T025801Z-1952572/repo/reports/reviewed-probe-output/fixed-batch/a2-bounded-damp-4255bed6",
+  "audit": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-mode-hold-review/completed/a2-bounded-damp-4255bed6-runtime-audit.json",
+  "audit_sha256": "6bfa6706d3913ae4e52b43ef90f0c97167b4f7897f4268e13cfc60e78a83a010",
+  "artifacts": {
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/source-plan.json": {
+      "sha256": "be35af88f12af89ab5556cee074f383dc81848cbed0f8b134e92b72fd44e5966",
+      "original_sha256": "be35af88f12af89ab5556cee074f383dc81848cbed0f8b134e92b72fd44e5966",
+      "bytes": 38805
+    },
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/prepared-source.zip": {
+      "sha256": "9eba654f4e3e7b4fc4d4787e4d9b8dd4e1db8c09c5499021e661771564c82096",
+      "original_sha256": "9eba654f4e3e7b4fc4d4787e4d9b8dd4e1db8c09c5499021e661771564c82096",
+      "bytes": 632561
+    },
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/result.json.gz": {
+      "sha256": "a59dfe46591c0a7dcceeb4c30defa6234286557c55942a85a1f1392c1c6db9dd",
+      "original_sha256": "cb898aa809c4e4e57702c8a11d6cec97eb1554a1fd9cb6d51164b668258f85d5",
+      "bytes": 83942
+    },
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/initialization-receipt.json": {
+      "sha256": "5ba4c2ce3bf697af537e76a8f32817256acbe3f726dc5ed3df6046a60116a208",
+      "original_sha256": "5ba4c2ce3bf697af537e76a8f32817256acbe3f726dc5ed3df6046a60116a208",
+      "bytes": 4497
+    },
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/prepared-source-manifest.json": {
+      "sha256": "57ae349b9d76e6c24110dcfee30459eec16eaf2e824bee158481619854054f9d",
+      "original_sha256": "57ae349b9d76e6c24110dcfee30459eec16eaf2e824bee158481619854054f9d",
+      "bytes": 4677
+    },
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/prepared-source-sha256.json": {
+      "sha256": "d6df8c4323de23dd64af399db04695f71f84c971f8d2c1d48ded25aff48eabc2",
+      "original_sha256": "d6df8c4323de23dd64af399db04695f71f84c971f8d2c1d48ded25aff48eabc2",
+      "bytes": 291
+    },
+    "research-evidence/research-a2-bounded-damp-4255bed6-new-init/runtime.json": {
+      "sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "original_sha256": "9fba0f4929fe287431681559a34c98318ecd362cb1663433ab04684e9b962318",
+      "bytes": 13661
+    }
+  },
+  "raw_checkpoints": {
+    "initial-values.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025800Z/research-priority-seventeen-wave2/20260927T025801Z-1952572/repo/reports/reviewed-probe-output/fixed-batch/a2-bounded-damp-4255bed6/initial-values.pt",
+      "sha256": "eae89537b4144c59fb69485c0ddc30c619914e061651e0c7ebd69bbf3d934f7e",
+      "bytes": 163601
+    },
+    "new-initial-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025800Z/research-priority-seventeen-wave2/20260927T025801Z-1952572/repo/reports/reviewed-probe-output/fixed-batch/a2-bounded-damp-4255bed6/new-initial-state.pt",
+      "sha256": "fd366fa59f9704ddff7ab84f8f30d64356ce01a52a6c431a9c83a86126d35dc1",
+      "bytes": 170162
+    },
+    "final-state.pt": {
+      "path": "/ml2/hypergan/gan-attempts/deterministic-init-retest-20260927/20260927T025800Z/research-priority-seventeen-wave2/20260927T025801Z-1952572/repo/reports/reviewed-probe-output/fixed-batch/a2-bounded-damp-4255bed6/final-state.pt",
+      "sha256": "5b214b84650f1829f7c12521dd481cd0df81e98d28ad7f778666b33b3ebe598d",
+      "bytes": 668884
+    }
+  },
+  "old_quality_inherited": false
+}
