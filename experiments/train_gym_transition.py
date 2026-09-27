@@ -241,10 +241,6 @@ def train(cfg):
     models = build_models(cfg, scaler, device)
     recipe = training_recipe(cfg)
     g, e, prior, d, direct = [models[k] for k in ("G", "E", "prior", "D", "direct")]
-    ema = {**models}
-    for key in ("G", "E", "prior", "direct"):
-        if models[key] is not None:
-            ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     if d is not None:
         opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d),
                                               fused=device.type == "cuda")
@@ -256,6 +252,10 @@ def train(cfg):
                                betas=recipe.prior_betas or recipe.betas))
         opt_g = recipe.make_generator_optimizer(groups, **(dict(fused=True) if device.type == "cuda" else {}))
         opt_d = None
+    ema = {**models}
+    for key in ("G", "E", "prior", "direct"):
+        if models[key] is not None:
+            ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()

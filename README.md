@@ -15,25 +15,25 @@ and the optimizer settings and schedules that go
 with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
 loop; the recipe builds the pieces.
 
-This branch prepares **KA2 as the selected single default** for the API,
-trainer and examples. It was chosen for the balance of retaining the original
-distribution, reaching a changed target and stability afterward in the research
-run. **Release is blocked:** the public trainer loses stability at constant
-learning rates, and automatic reversible decay has not been implemented and
-verified. It remains an unmerged candidate, with those results and
-incomplete toy coverage documented.
+This branch stages **KA2 as a candidate for one shared default** across the API,
+trainer and examples. **It is unmerged and unreleased.** Public API quality,
+recovery and retention must be rechecked with develop's deterministic
+initialization before selection. Earlier research and public API measurements
+used a different initialization and remain separate evidence, including their
+stability failures and incomplete toy coverage.
 [Selection rationale and measured results](reports/ka2-default-candidate/README.md).
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
 
-The animation records the **released 0.8.0 K3P default**, live weights, seed 1234:
+The animation records the **released 0.8.0 K3P default** with its original random
+initialization, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
 at update 1,430. It is historical evidence, not a KA2 measurement.
 [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
 ## Install
 
-Requires Python 3.10+ and PyTorch.
+Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
 python -m pip install particlegan           # released library (0.8.0, K3P)
@@ -98,6 +98,36 @@ for _ in range(trainer.recipe.total_steps):
     trainer.step(real_batch(trainer.recipe.batch_size))
 samples = trainer.sample(1024)
 ```
+
+## Repeatable initialization
+
+`get_recipe()` defaults to `initialization="batch_feature_zero"`.
+`GANTrainer` and `recipe.make_optimizers(G, D, prior)` initialize supported fresh
+network weights with deterministic, RMS-matched QR matrices and patterned
+biases. The batch-distance critic starts with zero batch-feature coefficients;
+its ordinary score path stays active. Recipe-created particle priors use a
+deterministic R2 cloud. Sampling remains stochastic.
+
+For a standalone PyTorch network, initialize before building its optimizer:
+
+```python
+from particlegan import initialize_
+
+network = initialize_(nn.Sequential(nn.Linear(16, 64), nn.ReLU(), nn.Linear(64, 4)))
+optimizer = torch.optim.AdamW(network.parameters())
+```
+
+For pretrained weights, custom initialization, or the former random behavior,
+use `get_recipe(initialization=None)`. Supplied priors are always preserved.
+Importing the package does not change PyTorch's global initialization.
+
+The frozen initializer research run passed **22/22 fixed toy gates and the long
+hold**; target-shift recovery still fails. These results belong to that benchmark
+trainer and do not establish the combined KA2 API candidate's quality. No general
+convergence or transformer/LoRA training performance is claimed.
+See the [API contract](docs/api.md#initialization),
+[math and architecture guide](docs/initialization.md), and
+[qualification report](reports/toy100/batch-feature-init/README.md).
 
 ## Model families
 

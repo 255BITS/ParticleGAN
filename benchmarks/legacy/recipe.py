@@ -3,8 +3,8 @@
 ``LegacyRecipe`` is ``particlegan.Recipe`` plus the fields ParticleGAN no
 longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
 the factories that honored them, built from the pinned copies in this
-package. Its default switches retain the historical K3P formulation;
-archived GAN v3 / locked_shared / arm-study configurations resolve through
+package. Its defaults retain the historical K3P formulation and random
+initialization. Archived GAN v3 / locked_shared / arm-study configurations resolve through
 it so their receipts stay reproducible as the public default evolves.
 Benchmarks only.
 """
@@ -32,13 +32,14 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "initialization": None}
 
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
     name: str = "k3p"
     reg_anchor_decay: float = 0.999
+    initialization: str | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
@@ -92,7 +93,7 @@ def get_recipe(name="gan", **overrides):
               if f.name in _RECORDED_ORDER or f.name in _ADDED}
     if name == "gan":
         values["name"] = "k3p"
-    return LegacyRecipe(**{**values, **overrides})
+    return LegacyRecipe(**{**values, "initialization": None, **overrides})
 
 
 def _first_output(output):

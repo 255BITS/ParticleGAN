@@ -1,0 +1,304 @@
+{
+  "scope": "Packaged replay hook on the frozen research trainer; not a current-public-trainer qualification",
+  "rows": [
+    {
+      "id": "toy-two_pole",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 5,
+      "equal_final_state_tensors": {
+        "parameters": 5,
+        "optimizers": 15,
+        "response_history": 1,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-trajectory",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 13,
+      "equal_final_state_tensors": {
+        "parameters": 13,
+        "optimizers": 39,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-residual_student",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 13,
+      "equal_final_state_tensors": {
+        "parameters": 13,
+        "optimizers": 39,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-unipolar",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 9,
+      "equal_final_state_tensors": {
+        "parameters": 9,
+        "optimizers": 27,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-ae_gan_hold",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 13,
+      "equal_final_state_tensors": {
+        "parameters": 13,
+        "optimizers": 39,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-cover_leftover",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 10,
+      "equal_final_state_tensors": {
+        "parameters": 10,
+        "optimizers": 30,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-unused_token_hold",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 6,
+      "equal_final_state_tensors": {
+        "parameters": 6,
+        "optimizers": 18,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-mid_scale_identity",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 10,
+      "equal_final_state_tensors": {
+        "parameters": 10,
+        "optimizers": 30,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-mode_hold",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 17,
+      "equal_final_state_tensors": {
+        "parameters": 17,
+        "optimizers": 51,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-vector_two_broad",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 13,
+      "equal_final_state_tensors": {
+        "parameters": 13,
+        "optimizers": 40,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-vector_unequal_mass",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-vector_unequal_width",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-vector_anisotropic",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 20,
+      "equal_final_state_tensors": {
+        "parameters": 20,
+        "optimizers": 61,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-vector_overlap",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-vector_spiral",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 13,
+      "equal_final_state_tensors": {
+        "parameters": 13,
+        "optimizers": 40,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-img_stripes2",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-img_bars4",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-img_blobs4",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "toy-img_intensity2",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_initial_tensors": 15,
+      "equal_final_state_tensors": {
+        "parameters": 15,
+        "optimizers": 46,
+        "response_history": 0,
+        "cpu_rng": 1,
+        "cuda_rng": 1
+      }
+    },
+    {
+      "id": "native-grid100",
+      "status": "PASS",
+      "equal_sample_elements": {
+        "final_samples.npz": 120000,
+        "holdout_samples.npz": 600000
+      }
+    },
+    {
+      "id": "native-rotated100",
+      "status": "PASS",
+      "equal_sample_elements": {
+        "final_samples.npz": 120000,
+        "holdout_samples.npz": 600000
+      }
+    },
+    {
+      "id": "native-staggered100",
+      "status": "PASS",
+      "equal_sample_elements": {
+        "final_samples.npz": 120000,
+        "holdout_samples.npz": 600000
+      }
+    },
+    {
+      "id": "hold-mode_hold",
+      "status": "PASS",
+      "full_rng_digest_equal": true,
+      "equal_recorded_stress_trajectory": true,
+      "final_checkpoint_available": false
+    },
+    {
+      "id": "shift-mode_hold",
+      "status": "FAIL",
+      "full_rng_digest_equal": true,
+      "equal_recorded_stress_trajectory": true,
+      "final_checkpoint_available": false
+    }
+  ],
+  "manifests": [
+    {
+      "root": "/ml2/hypergan/pr194-init-search-20260926/package-init-parity-suite",
+      "files": 1630,
+      "unchanged": true,
+      "sha256": "81681ca3abe27e0aa7410bf7a828dfcda967d5216261804c2fd9cf969a761b88"
+    },
+    {
+      "root": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite",
+      "files": 1629,
+      "unchanged": true,
+      "sha256": "56d1faa52f9cf6af5b4a0e6a9702c60cbb0c9326027c6662c921a32194090f1b"
+    }
+  ]
+}

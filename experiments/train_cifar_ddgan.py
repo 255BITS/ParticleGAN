@@ -203,10 +203,10 @@ def train(cfg, resume=None):
         env['pretrained_D'] = d.pretrained_metadata
         write_json(out / 'environment.json', env)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
-    initial_prior = prior.table.detach().clone()
-    eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
     recipe = training_recipe(cfg)
     og, od = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg.get('fused_adam', False))
+    initial_prior = prior.table.detach().clone()
+    eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()

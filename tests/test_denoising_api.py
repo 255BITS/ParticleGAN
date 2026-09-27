@@ -73,7 +73,8 @@ def test_denoising_rejects_invalid_mog_settings(options):
 ])
 def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer, config):
     cfg = {**trainer.DEFAULTS, **read_config(Path(__file__).parents[1] / config)}
-    recipe = trainer.training_recipe(cfg)
+    # These controls share existing tensors; only the optimizer is under test.
+    recipe = trainer.training_recipe(cfg).replace(initialization=None)
     g, d = torch.nn.Linear(4, 2), torch.nn.Linear(2, 1)
     prior = DrawSource(cfg["prior"], 8, 4, cfg["seed"], "cpu")
     noise = DrawSource(cfg["noise"], 8, 2, cfg["seed"] + 1, "cpu")
