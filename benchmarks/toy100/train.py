@@ -28,7 +28,7 @@ import torch
 from torch import nn
 
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
-from particlegan import GANTrainer
+from particlegan import GANTrainer, get_recipe as package_recipe
 from benchmarks.legacy.recipe import LegacyRecipe as Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
@@ -67,7 +67,7 @@ RUN_DEFAULTS = {
     "input_noise_anneal_end": 0.5,
 }
 OPTIONAL_RUN_FIELDS = {
-    "output_noise_warmup", "output_noise_learnable",
+    "recipe_defaults", "recipe_output_noise_std", "output_noise_warmup", "output_noise_learnable",
     "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
 }
 AFFINE_MODEL_POLICIES = {
@@ -77,6 +77,13 @@ AFFINE_MODEL_POLICIES = {
 }
 EMPIRICAL_INIT_SEED_OFFSET = 701
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
+# Which defaults fill the recipe fields a config leaves out: the archived GAN v3
+# fields (absent/"gan_v3", every historical config) or the package's own
+# ``get_recipe()`` ("particlegan", configs/toy100/default.json). The package
+# recipe applies its own generator output noise; the benchmark's run-level
+# noise wrappers stay off unless a config sets them.
+RECIPE_DEFAULTS = ("gan_v3", "particlegan")
+_LEGACY_ONLY_FIELDS = {field.name for field in fields(Recipe)} - {field.name for field in fields(package_recipe())}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
 
 # The v1 policy archive held only the first 13 files below. v2 includes every
@@ -223,6 +230,12 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
             raise ValueError("output_noise_rng must be 'isolated'")
         if run["output_noise_std"] <= 0:
             raise ValueError("isolated output_noise_rng requires output_noise_std > 0")
+    defaults = run.get("recipe_defaults", "gan_v3")
+    if defaults not in RECIPE_DEFAULTS:
+        raise ValueError(f"recipe_defaults must be one of {', '.join(RECIPE_DEFAULTS)}")
+    if defaults == "particlegan" and set(user) & _LEGACY_ONLY_FIELDS:
+        raise ValueError("recipe_defaults 'particlegan' trains the package formulation; remove "
+                         + ", ".join(sorted(set(user) & _LEGACY_ONLY_FIELDS)))
     if "toy100_model" in run and run["toy100_model"] not in AFFINE_MODEL_POLICIES:
         raise ValueError("unsupported toy100_model")
     if "network_lr_horizon_cap" in run and (
@@ -243,9 +256,12 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
     recipe_kwargs = {key: user[key] for key in user
                      if key in RECIPE_FIELDS and key not in RUN_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
-    recipe = gan_v3_recipe(**recipe_kwargs)
+    recipe = package_recipe(**recipe_kwargs) if defaults == "particlegan" else gan_v3_recipe(**recipe_kwargs)
     if "name" in user:
         recipe = recipe.replace(name=user["name"])
+    if "recipe_output_noise_std" in run and (defaults != "particlegan"
+                                             or run["recipe_output_noise_std"] != recipe.output_noise_std):
+        raise ValueError("recipe_output_noise_std only records the package recipe's own output noise")
     if (recipe.model != "gan" or recipe.conditioning != "scalar"
             or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
         raise ValueError("toy100 requires an unconditional scalar GAN with a learned particle prior")
@@ -253,7 +269,14 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("affine toy100_model requires z_dim=2")
     run["device"] = str(device)
     # Store all resolved inputs, including the public recipe's inherited values.
-    return {**legacy_dict(recipe), **run}, recipe
+    if defaults == "particlegan":
+        # The package trainer adds the recipe's output noise itself; record it
+        # under its own key (output_noise_std is the benchmark wrapper's run field).
+        resolved = {key: value for key, value in recipe.to_dict().items() if key not in RUN_FIELDS}
+        run["recipe_output_noise_std"] = recipe.output_noise_std
+    else:
+        resolved = legacy_dict(recipe)
+    return {**resolved, **run}, recipe
 
 
 def _init_linear(module: nn.Module) -> None:
@@ -422,7 +445,7 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
             discriminator = wrapper(discriminator, seed=seed + 901, device=device)
         trainer_class = IsolatedNoiseGANTrainer if isolated else GANTrainer
         penalty_options = None
-        if recipe.reg_arm == "k3p" and config.get("network_lr_floor") is not None:
+        if getattr(recipe, "reg_arm", None) == "k3p" and config.get("network_lr_floor") is not None:
             # The capped-horizon hooks lower D to network_lr_floor, while the
             # neutral trainer recipe resolves its floor to lr_floor; K3P's
             # blend floor f must be the critic floor actually applied.

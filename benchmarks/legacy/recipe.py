@@ -3,8 +3,11 @@
 ``LegacyRecipe`` is ``particlegan.Recipe`` plus the fields ParticleGAN no
 longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
 the factories that honored them, built from the pinned copies in this
-package. With default switches it trains exactly like ``particlegan``'s
-recipe; archived GAN v3 / locked_shared / arm-study configurations resolve
+package. It pins the package defaults these receipts were recorded with
+(K3P, ParticleGAN 0.8: LR schedule, instance noise, plain Adam, the K3P
+critic optimizer and penalty, no LR controller and no prior jitter), so with
+default switches it trains exactly like ``particlegan`` 0.8's recipe;
+archived GAN v3 / locked_shared / arm-study / K3P configurations resolve
 through it so their receipts stay reproducible. Benchmarks only.
 """
 from copy import copy
@@ -13,8 +16,8 @@ from dataclasses import dataclass, fields
 import torch.nn as nn
 
 from particlegan import Recipe
-from particlegan.k3p import K3PCriticAdam
 
+from .critic_optimizer import LegacyCriticAdam
 from .gan_loss import GANLoss
 from .grad_regularizers import GradientPenalty
 
@@ -31,18 +34,45 @@ _RECORDED_ORDER = (
     'output_noise_std', 'output_noise_warmup', 'encoder_mode', 'routing_temperature', 'distance_reduction',
     'observation_sigma', 'reconstruction_weight')
 # Fields added after those receipts, with the values that reproduce them.
-_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "amsgrad": False,
+          "reg_anchor_min_decay": 0.9}
 
 
 @dataclass(frozen=True)
 class LegacyRecipe(Recipe):
+    # K3P-era particle priors had no support jitter.
+    _support_jitter = False
+
+    # The package defaults these receipts were recorded with (the package has
+    # since moved to the DV12 controller + KA2; see docs/k3p.md).
+    name: str = "k3p"
+    reg_coeff: float = 1.0
+    lr_floor: float = 0.05
+    network_lr_floor: float | None = 0.01
+    network_lr_horizon_cap: int | None = 1600
+    input_noise_std: float = 0.5
+    output_noise_warmup: float = 0.2
+    amsgrad: bool = False
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "k3p"
     reg_method: str = "autograd"
+    # Removed from the package with the direct sample-particle response (no
+    # benchmark used it); kept so recorded dicts round-trip.
+    direct_particle_gain: bool = True
+    direct_particle_betas: tuple[float, float] = (0.0, 0.9)
+    # The K3P anchor's fixed EMA decay (LegacyCriticAdam).
+    reg_anchor_decay: float = 0.999
 
     def __post_init__(self):
         super().__post_init__()
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if len(self.direct_particle_betas) != 2 or any(not 0 <= b < 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        if type(self.direct_particle_gain) is not bool:
+            raise ValueError("direct_particle_gain must be a boolean")
+        if isinstance(self.reg_anchor_decay, bool) or not 0 <= self.reg_anchor_decay < 1:
+            raise ValueError("reg_anchor_decay must be in [0, 1)")
         self.make_loss()
         self.make_gradient_penalty()
 
@@ -53,7 +83,8 @@ class LegacyRecipe(Recipe):
         out.update({key: values[key] for key, neutral in _ADDED.items() if values[key] != neutral})
         return out
 
-    def make_loss(self, **overrides):
+    def make_loss(self, optimizer=None, **overrides):
+        """The pinned loss; ``optimizer`` is accepted for the package's call shape and unused."""
         return GANLoss(**{"loss_type": self.loss_type, "mode": self.gan_mode, **overrides})
 
     def make_gradient_penalty(self, **overrides):
@@ -70,13 +101,55 @@ class LegacyRecipe(Recipe):
         return CriticPenalty(self, optimizer, output=output, generator=generator,
                              collect_stats=collect_stats, **penalty_overrides)
 
+    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+        """The pinned K3P critic optimizer (guard, Adam, fixed-decay EMA critic, LR record)."""
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
+                   **adam_kwargs}
+        return LegacyCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                                ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
+                                guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps,
+                                **options)
+
+    def make_generator_optimizer(self, params, *, latent_table=None, **adam_kwargs):
+        """The package generator optimizer without an LR controller: Adam plus A2."""
+        return super().make_generator_optimizer(params, latent_table=latent_table, **adam_kwargs)
+
+    def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
+                        **adam_kwargs):
+        """``(opt_g, opt_d)`` as ParticleGAN 0.8 built them: no shared LR controller."""
+        from particlegan.particle_prior import ParticlePrior
+        prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
+        g_params, seen = [], {id(p) for p in prior_params}
+        for module in (generator, encoder):
+            if module is not None:
+                for p in module.parameters():
+                    if p.requires_grad and id(p) not in seen:
+                        g_params.append(p)
+                        seen.add(id(p))
+        groups = []
+        if g_params:
+            groups.append({"params": g_params, "lr": self.lr})
+        if prior_params:
+            groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
+                           "betas": self.prior_betas if self.prior_betas is not None else self.betas})
+        latent_table = prior.z if type(prior) is ParticlePrior and prior.z.requires_grad else None
+        return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
+                self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
+
 
 def get_recipe(name="gan", **overrides):
-    """``particlegan.get_recipe`` returning a ``LegacyRecipe``."""
+    """``particlegan.get_recipe`` returning a ``LegacyRecipe`` (on the pinned legacy defaults).
+
+    Only the family's own fields come from the package (for example the MoG
+    prior of ``"mog"``); everything else keeps the recorded defaults.
+    """
     from particlegan import get_recipe as current
-    base = current(name)
-    values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
-    return LegacyRecipe(**{**values, **overrides})
+    base, plain = current(name), Recipe()
+    family = {f.name: getattr(base, f.name) for f in fields(Recipe)
+              if getattr(base, f.name) != getattr(plain, f.name)}
+    if name == "gan":
+        family.pop("name", None)
+    return LegacyRecipe(**{**family, **overrides})
 
 
 def _first_output(output):
@@ -105,7 +178,7 @@ class CriticPenalty:
 
     def __init__(self, recipe, optimizer, *, output=None, generator=None, collect_stats=False,
                  **penalty_overrides):
-        if not isinstance(optimizer, K3PCriticAdam):
+        if not isinstance(optimizer, LegacyCriticAdam):
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
         self.optimizer, self.critic = optimizer, optimizer.critic
         k3p = penalty_overrides.get("arm", recipe.reg_arm) == "k3p"

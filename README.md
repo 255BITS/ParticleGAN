@@ -10,10 +10,10 @@ missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The package ships one training
 configuration: a relativistic-pairing (RpGAN) logistic loss, a critic gradient
-penalty that hands over from R1 to capped gradients plus an EMA-critic anchor
-as the learning rate anneals, and the optimizer settings and schedules that go
-with them ([how it works](docs/k3p.md)). You write an ordinary PyTorch GAN
-loop; the recipe builds the pieces.
+penalty with an EMA-critic anchor, and optimizers that pick their own learning
+rates from how training is going, so there is no learning-rate schedule to
+tune ([how it works](docs/k3p.md)). You write an ordinary PyTorch GAN loop;
+the recipe builds the pieces.
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
 
@@ -45,7 +45,7 @@ Everything comes from role-named factories on a recipe; the loop is yours.
 import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, init, scale_learning_rates
+from particlegan import get_recipe, init
 
 def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
@@ -58,11 +58,9 @@ init.deterministic_orthogonal_(G, seed=0)        # optional: repeatable weights
 init.deterministic_orthogonal_(D, seed=1)
 prior = init.deterministic_orthogonal_(recipe.make_prior())  # the learnable particle table
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss()
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss(opt_d)
 
 for step in range(recipe.total_steps):
-    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
     real = real_batch(recipe.batch_size)
     z, _ = prior.sample(recipe.batch_size)
     fake = G(z)
@@ -75,10 +73,12 @@ for step in range(recipe.total_steps):
 ```
 
 `opt_g` and `opt_d` are Adam optimizers whose `step()` also does the
-formulation's step-time work, and their `state_dict()` holds all of its state,
-so checkpoint them as usual. [`examples/pytorch_loop.py`](examples/pytorch_loop.py)
-adds the remaining pieces of the default update (critic input noise, generator
-output noise, EMA weights).
+formulation's step-time work, including choosing the learning rates, and
+their `state_dict()` holds all of its state, so checkpoint them as usual. The
+loss and the penalty are built from `opt_d` because they tell the optimizers
+how the game is going; use them every step.
+[`examples/pytorch_loop.py`](examples/pytorch_loop.py) adds the remaining
+pieces of the default update (generator output noise, EMA weights).
 
 Or let `GANTrainer` run exactly that default update:
 

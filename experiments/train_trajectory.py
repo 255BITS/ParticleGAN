@@ -124,7 +124,7 @@ def train(cfg):
     if noise.kind == "learned":
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
-    gan = recipe.make_loss()
+    gan = recipe.make_loss(opt_d)
     spread = recipe.make_prior_regularizer()
     penalty_fn = recipe.make_critic_penalty(opt_d)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]

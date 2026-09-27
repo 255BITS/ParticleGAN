@@ -49,7 +49,7 @@ width 48, 1 layer, 4 heads, score bound 8). Whitening must be
 The edit critic's optimizer and penalty come from `edit_game(recipe, critic)`
 (`recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))` and
 `recipe.make_critic_penalty(opt_r)`); the controller optimizer is
-`recipe.make_generator_optimizer`, on the recipe's role-wise LR schedule. The old four-path joint/action/state game remains in the library
+`recipe.make_generator_optimizer`, on the recipe's optional role-wise LR schedule. The old four-path joint/action/state game remains in the library
 and is not the controller step. Prior VIC is not applied because the prior is
 frozen (`prior_loss=0` in the log).
 

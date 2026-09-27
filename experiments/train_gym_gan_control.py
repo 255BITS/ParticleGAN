@@ -114,7 +114,7 @@ def train(cfg):
     optimizers = (optimizer, optimizer_d)
     base_rates = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
     prior_regularizer = recipe.make_prior_regularizer()
-    gan = recipe.make_loss()
+    gan = recipe.make_loss(optimizer_d)
     ema = {**bundle, **{key: copy.deepcopy(bundle[key]).eval().requires_grad_(False) for key in ("G", "E", "prior")}}
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(labeled=11, auxiliary=21, d_labeled=31, d_auxiliary=41,

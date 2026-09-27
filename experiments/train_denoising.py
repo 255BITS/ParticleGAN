@@ -219,7 +219,7 @@ def train(cfg):
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    gan = recipe.make_loss()
+    gan = recipe.make_loss(opt_d)
     penalty = recipe.make_critic_penalty(opt_d, collect_stats=cfg.get("reg_sync_stats", True))
     spread = recipe.make_prior_regularizer()
 

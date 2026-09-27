@@ -109,7 +109,7 @@ DEFAULTS: Dict = {
     "ucd_lambda": 0.1,            # lambda_1: CE(d(x), c) on reals + fakes (ucd only)
     "gp_on_y": True,              # penalize grad w.r.t. [x | y] (True) or x only (False)
     # recipe
-    "coeff": 1.0,                 # recipe reg_coeff
+    "coeff": 3.0,                 # recipe reg_coeff
     "kappa": 1.0,                 # recipe reg_kappa
     "lr": 6e-4,
     "d_lr_mult": 1.5,
@@ -266,13 +266,13 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         fourier=int(cfg["fourier"]), d_mode=str(cfg["d_mode"]),
     ).to(device)
     # ---- losses / optimizers ----
-    gan_loss = recipe.make_loss()
     vic = ParticleRegularizer()
     # Replaces the constructors' Xavier init.
     init.deterministic_orthogonal_(G, seed=0)
     init.deterministic_orthogonal_(D, seed=1)
     # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
     opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+    gan_loss = recipe.make_loss(opt_D)
     ema_G, ema_prior = copy.deepcopy(G), copy.deepcopy(prior)
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)

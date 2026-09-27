@@ -1,11 +1,11 @@
 """Run, grade, and inspect the frozen 100-Gaussian suite.
 
 Examples:
-  python -u -m benchmarks.toy100 run --output artifacts/toy100/recommended
+  python -u -m benchmarks.toy100 run --output artifacts/toy100/default
   python -u -m benchmarks.toy100 run --config configs/toy100/baseline.json --output artifacts/toy100/baseline
   python -u -m benchmarks.toy100 run --output artifacts/toy100/grid-deep --problem grid100 --steps 14000
-  python -m benchmarks.toy100 gate --output artifacts/toy100/recommended
-  python -m benchmarks.toy100 render --output artifacts/toy100/recommended
+  python -m benchmarks.toy100 gate --output artifacts/toy100/default
+  python -m benchmarks.toy100 render --output artifacts/toy100/default
 """
 
 from __future__ import annotations
@@ -29,8 +29,8 @@ def _parser():
     parser = argparse.ArgumentParser(description="100-Gaussian training and evidence gate")
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
-    run.add_argument("--config", type=Path, default=Path("configs/toy100/constraints_simple_regularization.json"),
-                     help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
+    run.add_argument("--config", type=Path, default=Path("configs/toy100/default.json"),
+                     help="frozen JSON/TOML recipe (default: the package default recipe)")
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")

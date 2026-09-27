@@ -1,4 +1,4 @@
-"""A small, checkpointable K3P training loop for unconditional particle GANs."""
+"""A small, checkpointable training loop for unconditional particle GANs."""
 from copy import deepcopy
 import math
 
@@ -53,15 +53,19 @@ class GANTrainer:
     state as well as this trainer's sampling streams for exact continuation on
     the same device. Sampling never advances training RNG streams.
 
-    Per update: role-wise LR schedule (``learning_rate_scales``), critic step
-    with input noise and the recipe's penalty (``recipe.make_critic_penalty``;
-    the critic optimizer's ``step()`` runs the spike guard and anchor EMA),
-    then a generator/prior step with output noise (the generator optimizer's
-    ``step()`` applies A2 latent damping). The trainer allocates the EMA
-    critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream.
-    Networks train from the weights they arrive with; initialize them first
-    (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample`` includes
-    the output noise.
+    Per update: a critic step with the recipe's loss and penalty
+    (``recipe.make_loss(opt_d)``, ``recipe.make_critic_penalty(opt_d)``; the
+    critic optimizer's ``step()`` applies the LR controller's critic rate and
+    runs the spike guard and KA2 EMA critic), then a generator/prior step with
+    output noise (the generator optimizer's ``step()`` applies the
+    controller's generator/prior rates, A2 latent damping and the prior's
+    jitter-width update). The recipe's optional LR schedule
+    (``learning_rate_scales``) and critic input noise are applied too; both
+    are off by default. The trainer allocates the EMA critic ``ema_D`` (a
+    frozen deep copy). Latent jitter and output noise come from a trainer
+    stream. Networks train from the weights they arrive with; initialize them
+    first (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample``
+    returns clean samples (jittered latents, no output noise).
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -81,6 +85,8 @@ class GANTrainer:
                       if prior is None else prior)
         if type(self.prior) is not ParticlePrior:
             raise ValueError("prior must be a ParticlePrior")
+        if self.prior.support_jitter != getattr(recipe, "_support_jitter", False):
+            raise ValueError("prior support_jitter must match the recipe: build it with recipe.make_prior()")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
         if not any(p.requires_grad for p in discriminator.parameters()):
@@ -96,8 +102,8 @@ class GANTrainer:
                 seen.add(id(parameter))
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
-        # The recipe picks the regularization formulation (currently K3P); its
-        # step-time work runs inside these optimizers' step().
+        # The recipe picks the regularization formulation; its step-time work
+        # (including the LR controller) runs inside these optimizers' step().
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=deepcopy(self.D), **self.optimizer_options)
         self.initial_lrs = [[group["lr"] for group in opt.param_groups]
@@ -105,7 +111,7 @@ class GANTrainer:
         prior_ids = {id(p) for p in self.prior.parameters()}
         self.roles = [["prior" if any(id(p) in prior_ids for p in group["params"]) else "generator"
                        for group in self.opt_g.param_groups], ["critic"] * len(self.opt_d.param_groups)]
-        self.loss = recipe.make_loss()
+        self.loss = recipe.make_loss(self.opt_d)
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
         self.ema_G, self.ema_prior = deepcopy(self.G).eval(), deepcopy(self.prior).eval()
         for module in (self.ema_G, self.ema_prior):
@@ -164,8 +170,7 @@ class GANTrainer:
         ``step`` in the result is the completed update count. The generator
         loss pairs fakes with ``generator_real`` (a tensor or a callable;
         default: ``real``). ``collect_stats`` additionally
-        returns the gradient penalty's synchronized diagnostic dictionary
-        (including K3P's blend weight ``s``).
+        returns the gradient penalty's synchronized diagnostic dictionary.
         """
         recipe = self.recipe
         if self.completed_steps >= recipe.total_steps:
@@ -189,7 +194,7 @@ class GANTrainer:
         self.D.train()
         self.G.eval()
         with torch.no_grad():
-            latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
+            latent, _ = self.prior.sample(len(real), generator=self.latent_generator, noise_generator=noise)
             fake = self._generate(self.G, latent, sigma_out, noise)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
@@ -205,7 +210,8 @@ class GANTrainer:
         flags = [p.requires_grad for p in self.D.parameters()]
         try:
             self.D.requires_grad_(False)
-            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+            latent, indices = self.prior.sample(len(real), generator=self.latent_generator,
+                                                noise_generator=noise)
             fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -246,6 +252,8 @@ class GANTrainer:
         """Draw live or EMA samples without changing modes or training RNGs.
 
         Samples are clean by default: output noise is a training regularizer.
+        Latents are drawn from the prior as in training (support jitter
+        included).
         ``output_noise=True`` adds the current training output noise (drawn
         from the sampling stream, as before). Only the sampling stream
         (``generator`` or the trainer's evaluation stream) is consumed, so
@@ -295,9 +303,11 @@ class GANTrainer:
         """Restore a compatible checkpoint, including global PyTorch RNG state.
 
         Recreate the same parameter freezing before loading. Validation of both
-        optimizers (which carry the K3P state) and all RNG states precedes any
-        mutation of the live trainer. Schema-2 checkpoints (separate K3P state)
-        are upgraded; schema-1 checkpoints (an older formulation) are rejected.
+        optimizers (which carry the regularization and LR-controller state)
+        and all RNG states precedes any mutation of the live trainer. Schema-2
+        checkpoints (separate K3P state) are upgraded; schema-1 checkpoints
+        (an older formulation) are rejected. K3P checkpoints load only into a
+        trainer whose recipe reproduces K3P (``benchmarks.legacy``).
         """
         if isinstance(state, dict) and state.get("schema") == 1:
             raise ValueError("schema-1 GANTrainer checkpoints come from an older formulation and cannot "
@@ -305,11 +315,16 @@ class GANTrainer:
         if isinstance(state, dict) and state.get("schema") == 2:
             state = _upgrade_schema_2(state)
         if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
-            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
+            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"], self.recipe.to_dict())}
         expected = self.state_dict()
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
+        if (isinstance(saved_recipe, dict) and _K3P_RECIPE_FIELD in saved_recipe
+                and _K3P_RECIPE_FIELD not in expected["recipe"]):
+            raise ValueError("this checkpoint was trained with K3P (ParticleGAN 0.8), an older "
+                             "formulation; it cannot resume under the current recipe. Pin the release "
+                             "that wrote it, or replay it with benchmarks.legacy.LegacyRecipe")
         if not isinstance(saved_recipe, dict) or saved_recipe != expected["recipe"]:
             raise ValueError("checkpoint recipe does not match trainer")
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
@@ -363,22 +378,35 @@ class GANTrainer:
 
 
 # Recipe fields that once named a fixed choice (with the value that choice
-# had), and fields added since (with their defaults).
+# had), and fields added to K3P-era recipes since (with the values those
+# checkpoints trained with). A K3P-era recipe is recognized by its
+# reg_anchor_decay field; it resumes only under a recipe that still has it
+# (benchmarks.legacy.LegacyRecipe).
 _REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
                           "reg_method": "autograd"}
 _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_K3P_RECIPE_FIELD = "reg_anchor_decay"
 # Construction-time init once lived on the recipe; saved weights supersede it.
 _INIT_FIELD_VALUES = (None, "batch_feature_zero")
 
 
-def _upgrade_recipe_fields(recipe):
-    """Drop removed recipe fields that held the only supported value; add new defaults."""
-    if any(key in recipe and recipe[key] != value for key, value in _REMOVED_RECIPE_FIELDS.items()):
+def _upgrade_recipe_fields(recipe, current):
+    """Drop removed recipe fields that held the only supported value; add new defaults.
+
+    Only fields the ``current`` recipe dict lacks are dropped or added, so a
+    recipe that still records them (``benchmarks.legacy.LegacyRecipe``)
+    round-trips its own checkpoints unchanged.
+    """
+    if any(key in recipe and key not in current and recipe[key] != value
+           for key, value in _REMOVED_RECIPE_FIELDS.items()):
         return recipe  # another formulation: left as is, so the recipe check rejects it
-    if recipe.get("initialization") in _INIT_FIELD_VALUES:
+    if recipe.get("initialization") in _INIT_FIELD_VALUES and "initialization" not in current:
         recipe = {key: value for key, value in recipe.items() if key != "initialization"}
-    recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
-    return {**_ADDED_RECIPE_FIELDS, **recipe}
+    recipe = {key: value for key, value in recipe.items()
+              if key not in _REMOVED_RECIPE_FIELDS or key in current}
+    if _K3P_RECIPE_FIELD not in recipe:
+        return recipe
+    return {**{key: value for key, value in _ADDED_RECIPE_FIELDS.items() if key in current}, **recipe}
 
 
 def _upgrade_schema_2(state):

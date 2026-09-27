@@ -263,7 +263,7 @@ def train(cfg):
             ema[key] = copy.deepcopy(models[key]).eval().requires_grad_(False)
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(opt_d), recipe.make_prior_regularizer()
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     d_data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 21)
     latent_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 12)

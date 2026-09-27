@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--output", type=Path, default=Path("quickstart.pt"))
     parser.add_argument("--resume", type=Path)
-    parser.add_argument("--stop-after", type=int, help="Save early without changing the full-run LR schedule.")
+    parser.add_argument("--stop-after", type=int, help="Save early; the budget only bounds the loop.")
     args = parser.parse_args()
     if args.stop_after is not None and not 0 < args.stop_after <= args.steps:
         parser.error("--stop-after must be between 1 and --steps")

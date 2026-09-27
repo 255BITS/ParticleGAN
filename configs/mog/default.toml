@@ -14,6 +14,8 @@ d_lr_mult = 1.5
 prior_lr_mult = 10.0
 # Keep the separately selected MoG formulation and Adam settings pinned.
 beta2 = 0.999
+# The selected run annealed LRs (full for 60%, cosine to 5%); the package default has no schedule.
+lr_floor = 0.05
 lambda_ep = 1.0
 reg_coeff = 1.0
 reg_kappa = 1.0

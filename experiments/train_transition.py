@@ -282,7 +282,7 @@ def train(cfg):
     for module in (ema_g, ema_prior):
         module.eval().requires_grad_(False)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(opt_d), recipe.make_prior_regularizer()
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"]+i) for i in (11, 12)]
     # One penalty per role, all paired with opt_d.
     penalties = {name: recipe.make_critic_penalty(opt_d) for name in d.roles()}

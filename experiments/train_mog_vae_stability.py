@@ -267,7 +267,7 @@ def train(cfg):
                     parameters={k: sum(p.numel() for p in m.parameters()) for k, m in [('G', g), ('D', d), ('E', e), ('prior', prior)]})
     write_json(out / 'metadata.json', metadata)
     base_lrs = [[group['lr'] for group in o.param_groups] for o in (og, od)]
-    adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(od), ParticleRegularizer()
+    adversarial, penalty, spread = recipe.make_loss(od), recipe.make_critic_penalty(od), ParticleRegularizer()
     streams = {k: rng(cfg['seed'] + v) for k, v in [('data', 2), ('prior', 3), ('posterior', 4)]}
     print(f"START posterior={cfg['posterior']} steps={cfg['steps']} sigma={float(prior.sigma):.8g} init={metadata['initialization_sha256']}", flush=True)
     train_seconds = 0.

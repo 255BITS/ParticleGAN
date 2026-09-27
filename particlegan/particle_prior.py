@@ -27,6 +27,10 @@ class ParticlePrior(nn.Module):
       * data-parallel / multi-GPU friendly (z is just a regular Parameter),
       * easy to plug into EP-style regularizers that operate on the full cloud.
 
+    `support_jitter=True` (what `recipe.make_prior()` builds) makes `sample()`
+    return each draw jittered inside its particle's cell (`perturb`), at a
+    width the recipe's generator optimizer tracks (`track_support_`).
+
     Pass `learnable=False` for the frozen-Gaussian control: identical interface,
     identical sampling, but the cloud is a buffer rather than a Parameter, so it
     never moves and `parameters()` comes back empty.
@@ -41,6 +45,9 @@ class ParticlePrior(nn.Module):
         z = prior(idx)  # Keep the DDP forward path so gradients synchronize.
     """
 
+    # Instances set this in __init__; subclasses with their own __init__ keep it off.
+    support_jitter = False
+
     def __init__(
         self,
         num_particles: int = 20_000,
@@ -50,6 +57,7 @@ class ParticlePrior(nn.Module):
         dtype: Optional[torch.dtype] = None,
         learnable: bool = True,
         generator: Optional[torch.Generator] = None,
+        support_jitter: bool = False,
     ) -> None:
         super().__init__()
 
@@ -81,6 +89,14 @@ class ParticlePrior(nn.Module):
             self.register_buffer("z", z)
         with torch.no_grad():
             self.z.normal_(mean=0.0, std=init_std, generator=generator)
+        if type(support_jitter) is not bool:
+            raise ValueError("support_jitter must be a boolean")
+        self.support_jitter = support_jitter
+        if support_jitter:
+            # Set from the table at the first draw (or generator step), so
+            # initializing z after construction is always respected.
+            self.register_buffer("support_width", torch.zeros(z_dim, **factory_kwargs))
+            self.register_buffer("support_ready", torch.zeros((), dtype=torch.bool, device=device))
 
     @property
     def num_particles(self) -> int:
@@ -135,6 +151,7 @@ class ParticlePrior(nn.Module):
         *,
         fixed_first_n: bool = False,
         offset: int = 0,
+        noise_generator: Optional[torch.Generator] = None,
     ) -> Tuple[torch.Tensor, torch.LongTensor]:
         """
         Convenience wrapper returning both latent codes and their indices.
@@ -149,6 +166,10 @@ class ParticlePrior(nn.Module):
 
         This is handy for evaluation snapshots where you want to keep a fixed
         latent grid over the course of training (e.g. for videos).
+
+        A prior built with ``support_jitter`` (``recipe.make_prior()``) returns
+        ``perturb(z[idx])``: the jitter is drawn from ``noise_generator``
+        (default: ``generator``) after the indices.
 
         Returns:
             z_batch: (B, z_dim)
@@ -176,7 +197,62 @@ class ParticlePrior(nn.Module):
             with torch.no_grad():
                 idx = self.sample_indices(batch_size, generator=generator)
         z_batch = self.z[idx]
+        if self.support_jitter:
+            z_batch = self.perturb(z_batch, generator if noise_generator is None else noise_generator)
         return z_batch, idx
+
+    @torch.no_grad()
+    def track_support_(self) -> None:
+        """Advance the jitter width: EMA (.01) of the table's cell size.
+
+        The cell size is the per-dimension spread of the table times
+        ``N ** (-1 / d)``, the linear size of one of ``N`` equal-volume cells.
+        The recipe's generator optimizer calls this after every step.
+        """
+        if not self.support_jitter:
+            return
+        z = self.z.detach()
+        width = z.std(0, unbiased=False) * len(z) ** (-1. / z.shape[1])
+        if not bool(self.support_ready):
+            self.support_width.copy_(width)
+            self.support_ready.fill_(True)
+        else:
+            self.support_width.lerp_(width, .01)
+
+    def perturb(self, latent: torch.Tensor, generator: Optional[torch.Generator] = None) -> torch.Tensor:
+        """``latent`` plus Gaussian jitter at ``support_width``, kept inside each point's cell.
+
+        Each row moves by ``support_width * eps`` (``eps`` drawn from
+        ``generator``), shortened to at most half the distance to its nearest
+        other particle, so a draw never crosses into a neighbour's support.
+        Gradients flow to ``latent`` unchanged.
+        """
+        if not self.support_jitter:
+            raise RuntimeError("this prior was built without support_jitter")
+        if not bool(self.support_ready):
+            self.track_support_()
+        noise = torch.randn(latent.shape, device=latent.device, dtype=latent.dtype, generator=generator)
+        displacement = self.support_width * noise
+        with torch.no_grad():
+            nearest = torch.full((len(latent),), float("inf"), device=latent.device, dtype=latent.dtype)
+            for centers in self.z.detach().split(4096):
+                distance = torch.cdist(latent.detach(), centers, compute_mode="donot_use_mm_for_euclid_dist")
+                distance.masked_fill_(distance == 0, float("inf"))
+                nearest = torch.minimum(nearest, distance.min(1).values)
+            radius = torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
+            norm = displacement.norm(dim=1)
+            fraction = (radius / norm.clamp_min(1e-20)).clamp_max(1.)
+        displacement = displacement * fraction.unsqueeze(1)
+        return latent + displacement
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict,
+                              missing_keys, unexpected_keys, error_msgs):
+        # Tables saved before (or without) support jitter restart its width.
+        if self.support_jitter and prefix + "support_width" not in state_dict:
+            state_dict[prefix + "support_width"] = torch.zeros_like(self.support_width)
+            state_dict[prefix + "support_ready"] = torch.zeros_like(self.support_ready)
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+                                      missing_keys, unexpected_keys, error_msgs)
 
 
 def _nonnegative_scalar(value, name):

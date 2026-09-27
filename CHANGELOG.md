@@ -2,6 +2,44 @@
 
 ## Unreleased
 
+- **New default formulation: DV12 + KA2 (PR #155's `dv12-ams-rc3`).** There is
+  no LR schedule and no horizon: the recipe optimizers share a state-driven
+  controller (`particlegan.dv12`) that runs G, prior and D at a fraction of
+  their peak `lr` chosen from training signals (payoff error, drift of
+  random-feature statistics of the real batches, the critic's Adam moment
+  surprise). The critic penalty is KA2: R1 + a one-sided fake cap for the first
+  799 calls, then a fixed 50/50 blend with one-sided caps plus a
+  surprise-gated EMA-critic anchor. `recipe.make_prior()` particle tables get
+  support jitter (`ParticlePrior(support_jitter=True)`, `perturb`,
+  `support_width`), and the generator trains with constant output noise.
+  New defaults: `reg_coeff` 3, `amsgrad=True` (new field, all recipe
+  optimizers), `reg_anchor_min_decay` .9 (replaces `reg_anchor_decay`),
+  `input_noise_std` 0, `output_noise_warmup` 0, and the optional schedule off
+  (`lr_floor` 1, `network_lr_floor` and `network_lr_horizon_cap` None).
+  Training results differ from 0.8.0.
+- **Loop change:** build the loss from the critic optimizer,
+  `recipe.make_loss(opt_d)` (it reports the payoff to the controller), and
+  call `recipe.make_critic_penalty(opt_d)` every critic step (it shows the
+  real batch to the controller). `group["lr"]` stays the peak you set; each
+  `step()` applies the controller's fraction and restores it, and the applied
+  rates are in `opt.applied_lrs`. `make_generator_optimizer` /
+  `make_critic_optimizer` accept `controller=` (and `prior=`) to pair
+  separately built optimizers. `learning_rate_scales` / `scale_learning_rates`
+  / `NetworkLRTransition` remain an optional peak schedule (identity by
+  default).
+- **Removed:** the K3P LR-driven blend (the penalty's `lr_floor` option) and
+  the direct sample-particle response (`make_generator_optimizer(direct_particles=...)`,
+  `DirectParticleResponse`, `Recipe.direct_particle_gain` /
+  `direct_particle_betas`). K3P (0.8) checkpoints are rejected with a clear
+  error. Benchmarks that replay archived runs keep the 0.8 defaults, the K3P
+  critic optimizer and penalty, and a jitter-free prior through
+  `benchmarks.legacy.recipe.LegacyRecipe`
+  (`benchmarks.legacy.critic_optimizer.LegacyCriticAdam`).
+- `python -m benchmarks.toy100 run` now defaults to
+  `configs/toy100/default.json`, which trains the package default recipe
+  (`"recipe_defaults": "particlegan"`; the recipe's own output noise is
+  recorded as `recipe_output_noise_std`); other toy100 configs keep resolving
+  on the GAN v3 fields.
 - **`GANTrainer.sample()` returns clean samples by default.** It previously
   added the current training output noise; pass `output_noise=True` for that.
   Training is unchanged (sampling uses only its own stream). The toy100
