@@ -172,8 +172,14 @@ def _world_metrics(model, values):
 def _lunar_recipe(*, total_steps, batch_size, supervised, **rates):
     """The shipped recipe at this stage's shape, with the lunar family's rates.
 
-    Supervised stages (world fit, BC warm start) keep the constant rate they
-    always had (network floor 1.0: the recipe schedule is flat). No stage uses
+    Effective rates match develop's pipeline stage by stage. There the world
+    fit (plain Adam) and the BC warm start (recipe G optimizer, never
+    rescaled) ran at a constant rate, so supervised stages get network floor
+    1.0 (a flat schedule). The RpGAN stage set G and D by hand to the recipe
+    cosine over its own ``steps``; here it is a fresh run whose optimizers
+    apply that same schedule. (Unmigrated code on the optimizer-owned-schedule
+    core instead pushed BC through the GAN horizon, leaving G at the 0.01
+    floor for all of RpGAN; that side effect is deliberately not kept.) No stage uses
     critic input or generator output noise: the policy's executed actions have
     exact-zero engine semantics that output noise would destroy. ema_decay=0:
     checkpoints and evaluation use live weights.
@@ -291,6 +297,10 @@ def _policy_metrics(policy, world, values):
                                                               target_delta / world.delta_scale).cpu())}
 
 
+def _fresh_policy(statistics, width):
+    return init.deterministic_orthogonal_(FastPolicy(*statistics, width), seed=0)
+
+
 class LunarPolicy(ToyProblem):
     """The landing policy on expert transitions, as one of two stages.
 
@@ -318,7 +328,7 @@ class LunarPolicy(ToyProblem):
     def networks(self, recipe, seed):
         if self.policy is None:
             # A loaded initial policy keeps its trained weights; a fresh one is initialized here.
-            self.policy = init.deterministic_orthogonal_(FastPolicy(*self.statistics, self.width), seed=0)
+            self.policy = _fresh_policy(self.statistics, self.width)
         critics = {}
         if self.adversarial:
             critic = ConditionalCritic(self.policy.state_mean, self.policy.state_scale, self.width)
@@ -389,9 +399,12 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
         stage = LunarPolicy(records, validation, world, policy, adversarial=False, **shared)
         run(stage, seed=seed, device=device, log=log)
         policy = stage.policy
+    if policy is None:
+        # No warm start: the RpGAN stage starts from (and reports) a fresh policy.
+        policy = _fresh_policy(_state_statistics(records), width).to(device)
     shared["steps"] = steps
     stage = LunarPolicy(records, validation, world, policy, adversarial=True, **shared)
-    before_adversarial = None if policy is None else _policy_metrics(policy, world, stage.scored)
+    before_adversarial = _policy_metrics(policy, world, stage.scored)
     run(stage, seed=seed, device=device, log=log)
     policy = stage.policy.eval()
     train_values = stage.values

@@ -167,3 +167,16 @@ def test_stages_run_on_recipe_built_optimizers_that_own_the_schedule(tmp_path):
     assert bc.opt_g.param_groups[0]["lr"] == bc.recipe.lr
     assert gan.opt_g.completed_steps == 6 and gan.opt_g.param_groups[0]["lr"] < gan.recipe.lr
     assert gan.opt_d["critic"].param_groups[0]["lr"] < gan.recipe.lr * gan.recipe.d_lr_mult
+
+
+def test_rpgan_without_warm_start_reports_the_fresh_policy_before_adversarial(tmp_path):
+    from lib.lunar_training import _fresh_policy, _policy_metrics, _state_statistics, _tensor_records
+    torch.set_num_threads(1)
+    data = _transitions()
+    world_path = tmp_path / "world.pt"
+    train_world_model(data, world_path, steps=4, width=8, batch_size=16)
+    metrics = train_fast_policy(data, world_path, tmp_path / "policy.pt", warmup_steps=0, steps=4,
+                                width=8, batch_size=16)
+    fresh = _fresh_policy(_state_statistics(data), 8)
+    expected = _policy_metrics(fresh, load_world_model(world_path), _tensor_records(data, "cpu"))
+    assert metrics["before_adversarial"] == expected
