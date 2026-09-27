@@ -158,8 +158,8 @@ def run_toy(toy, cfg, *, noise_policy=None):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
     with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
-        for module in (residual_student, cover_leftover, mid_scale_identity):
-            target = module.PROTOCOL if module is residual_student else module.FORMULATION
+        for module in (cover_leftover, mid_scale_identity):
+            target = module.FORMULATION
             values = {k: v for k, v in knobs.items() if k in target}
             if "lr" in target:
                 values["lr"] = target["lr"] * cfg.lr_multiplier
@@ -186,7 +186,10 @@ def run_toy(toy, cfg, *, noise_policy=None):
                 raise ValueError("mode_hold takes its noise from its recipe (benchmarks.toy_runner)")
             raw = mode_hold.train_mode_hold(diagnostics=True)
         elif toy == "residual_student":
-            raw = residual_student.train(noise_policy=noise_policy)
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("residual_student takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = residual_student.train_residual_student()
         elif toy == "unipolar":
             raw = unipolar.run_arm("locked_rpgan", noise_policy=noise_policy,
                                    **{k: knobs[k] for k in ("loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")})
