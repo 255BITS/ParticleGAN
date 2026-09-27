@@ -300,7 +300,14 @@ class GymWorldModel(ToyProblem):
         return Sample(torch.cat([record, composed]), condition=(context, record, decoded), indices=ids)
 
     def views(self, nets, real, fake):
-        """Sampled and composed records each score every role; marginals share ``marginal_weight``."""
+        """Sampled and composed records each score every role; marginals share ``marginal_weight``.
+
+        The runner uses one weight per view for both the D and the G step, so
+        the critic side now carries the generator weights: joint 0.5 x 2 = 1,
+        each marginal role (marginal_weight / 3) x 2. The pre-runner
+        ``discriminator_loss`` weighted every role 1 on one half-sampled /
+        half-composed batch, so ``loss_d`` does not compare with pre-runner logs.
+        """
         if self.models["D"] is None:
             return []
         n, context, marginal = len(real.x), real.condition[0], self.cfg["marginal_weight"]
@@ -406,8 +413,14 @@ def train(cfg):
         started = time.perf_counter()
         sync()
         segment_started = time.perf_counter()
+        # FLAG: this loop duplicates benchmarks.toy_runner.run() (step + non-finite
+        # check) because run()'s observer(step, measure) gets neither the ToyRun
+        # (toy.ema_nets / critics, needed to write load_checkpoint-schema .pt files)
+        # nor the step's losses (needed for metrics.jsonl), and run() always adds
+        # its own observation schedule. Missing shared hook: an observer that
+        # receives (toy, step, losses), with run()'s built-in observations optional.
         for _ in range(cfg["steps"]):
-            terms = {k: float(v) for k, v in toy.step().items() if k != "step"}
+            terms ={k: float(v) for k, v in toy.step().items() if k != "step"}
             step = toy.completed_steps
             if not all(math.isfinite(v) for v in terms.values()):
                 raise FloatingPointError(f"Nonfinite training loss at step {step}: {terms}")
