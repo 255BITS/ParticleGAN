@@ -13,7 +13,7 @@ The MIT notice is retained in [LICENSE](LICENSE).
 | `hosts/unipolar.py` | `unipolar.py` | Positive-pole training, neutral hold, leakage and coverage |
 | `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | AE encoder/decoder training, reconstruction and unconditional hold |
 | `hosts/cover_leftover.py` | `cover_leftover.py` | Guarded teacher, particles, live/EMA residual geometry and all six bounds |
-| `hosts/unused_token_hold.py` | `unused_token_hold.py` | Slot student, concept training and unused-slot hold |
+| `hosts/unused_token_hold.py` | `unused_token_hold.py` | Slot student, slot critic, unused-slot hold loss, 200 steps, hold/move metrics and verdict. Problem only: optimizers, LR schedule, loss, penalty, noise and EMA come from the shipped recipe through `benchmarks/toy_runner.py`, so its reference parity (`host_reference.py`) no longer holds |
 | `hosts/mid_scale_identity.py` | `mid_scale_identity.py` | Four-scale training, polarity/magnitude and identity checks |
 
 The additional hosts remove formulation refusals and unused config gate code;

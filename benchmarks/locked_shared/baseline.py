@@ -164,7 +164,7 @@ def run_toy(toy, cfg, *, noise_policy=None):
             if "lr" in target:
                 values["lr"] = target["lr"] * cfg.lr_multiplier
             stack.enter_context(patch.dict(target, values))
-        for module in (unipolar, unused_token_hold, mid_scale_identity):
+        for module in (unipolar, mid_scale_identity):
             stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
         stack.enter_context(patch.object(two_pole, "TOY_LR", two_pole.TOY_LR * cfg.lr_multiplier))
         if toy == "two_pole":
@@ -194,9 +194,10 @@ def run_toy(toy, cfg, *, noise_policy=None):
             raw = cover_leftover.fit_cover_leftover(cover_leftover.CoverRecipe(),
                                                     noise_policy=noise_policy)
         elif toy == "unused_token_hold":
-            options = {k: v for k, v in knobs.items() if k in unused_token_hold.UnusedHoldRecipe.__dataclass_fields__}
-            raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options),
-                                          noise_policy=noise_policy)
+            # Problem-only toy on the shared runner, like mode_hold.
+            if noise_policy is not None:
+                raise ValueError("unused_token_hold takes its noise from its recipe (benchmarks.toy_runner)")
+            raw = unused_token_hold.train_unused_token_hold()
         elif toy == "mid_scale_identity":
             raw = mid_scale_identity.run_arm("locked", noise_policy=noise_policy)
         else:
