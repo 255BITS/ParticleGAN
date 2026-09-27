@@ -1,0 +1,495 @@
+{
+  "broader_entry": {
+    "id": "api-dv16-vector_anisotropic",
+    "candidate": "API-DV16",
+    "protocol": "frozen22_vector_anisotropic",
+    "scope": "PUBLIC_API",
+    "recorded_utc": "2026-09-27T01:25:38.086150+00:00",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic",
+    "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-DV16",
+      "gate": "broader_vector_anisotropic",
+      "status": "PASS",
+      "seconds": 28.724963549990207,
+      "metrics": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "sw1_normalized",
+              "value": 0.03977400264638241,
+              "op": "<=",
+              "threshold": 0.18,
+              "status": "PASS",
+              "margin": 0.14022599735361757
+            },
+            {
+              "metric": "mass_tv",
+              "value": 0.0436197966337204,
+              "op": "<=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.1063802033662796
+            },
+            {
+              "metric": "hq",
+              "value": 0.98193359375,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.13193359375000002
+            },
+            {
+              "metric": "component_covariance_error",
+              "value": 0.16423762838045755,
+              "op": "<=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.6857623716195425
+            },
+            {
+              "metric": "component_min_eigen_ratio",
+              "value": 0.6763312220573425,
+              "op": ">=",
+              "threshold": 0.15,
+              "status": "PASS",
+              "margin": 0.5263312220573425
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 21,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 21,
+            "first_pass_step": 200,
+            "stable_from_step": 200,
+            "stable_from_seconds": null,
+            "confirmed_step": 400,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.3333333333333333
+        },
+        "final": {
+          "step": 1200,
+          "sw1_normalized": 0.03977400264638241,
+          "mean_error": 0.04882880672812462,
+          "covariance_error": 0.07095937430858612,
+          "target_scale": 2.040409564971924,
+          "sample_count": 4096,
+          "mass_tv": 0.0436197966337204,
+          "min_mass_ratio": 0.8759765625,
+          "hq": 0.98193359375,
+          "component_covariance_error": 0.16423762838045755,
+          "component_covariance_errors": [
+            0.12747451663017273,
+            0.10827401280403137,
+            0.2569643557071686
+          ],
+          "component_min_eigen_ratio": 0.6763312220573425,
+          "component_mass": [
+            0.2919921875,
+            0.376953125,
+            0.3310546875
+          ],
+          "target_mass": [
+            0.3333333432674408,
+            0.3333333432674408,
+            0.3333333432674408
+          ],
+          "component_counts": [
+            1196,
+            1544,
+            1356
+          ],
+          "ema": {
+            "sw1_normalized": 0.04106871935796949,
+            "mean_error": 0.05419467017054558,
+            "covariance_error": 0.08474131673574448,
+            "target_scale": 2.040409564971924,
+            "sample_count": 4096,
+            "mass_tv": 0.0436197966337204,
+            "min_mass_ratio": 0.8759765625,
+            "hq": 0.982177734375,
+            "component_covariance_error": 0.16597949961821237,
+            "component_covariance_errors": [
+              0.1443466991186142,
+              0.10129794478416443,
+              0.2522938549518585
+            ],
+            "component_min_eigen_ratio": 0.7326985597610474,
+            "component_mass": [
+              0.2919921875,
+              0.376953125,
+              0.3310546875
+            ],
+            "target_mass": [
+              0.3333333432674408,
+              0.3333333432674408,
+              0.3333333432674408
+            ],
+            "component_counts": [
+              1196,
+              1544,
+              1356
+            ]
+          }
+        },
+        "policy": {
+          "width_pair": {
+            "forward_gradient_rms": 3.959306923206896e-06,
+            "reverse_gradient_rms": 2.5888250547723146e-06,
+            "average_gradient_rms": 2.32613069783838e-06,
+            "shear_gradient_rms": 2.45349838223774e-06
+          },
+          "latent_applications": [
+            {
+              "width_min": 0.09175635129213333,
+              "width_mean": 0.12929360568523407,
+              "width_max": 0.1696830540895462,
+              "perturbation_rms": 0.07448019832372665,
+              "shear_norm_max": 0.4848221242427826
+            },
+            {
+              "width_min": 0.09320732206106186,
+              "width_mean": 0.12745124101638794,
+              "width_max": 0.1696830540895462,
+              "perturbation_rms": 0.07251263409852982,
+              "shear_norm_max": 0.4848221242427826
+            }
+          ],
+          "latent_bandwidth": [
+            0.12724751234054565,
+            0.14803412556648254,
+            0.1495400071144104,
+            0.1410522311925888
+          ],
+          "data_memory": 0.0,
+          "payoff_error": 0.012345800208885621,
+          "game_trust": 0.9499673870731947,
+          "game_ratio": 1.229494480096868,
+          "variant": "dv16",
+          "mobility": 0.0028422395527847276,
+          "alignment": 0.6914026364751609,
+          "data_score": 0.6995735168457031,
+          "data_drive": 0.0,
+          "last_cosine": 0.5167366862297058,
+          "updates": 1200,
+          "reopens": 0,
+          "closed": true
+        }
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic"
+    },
+    "derived": {
+      "status": "PASS",
+      "observations": 24,
+      "passing_observations": 21,
+      "passing_suffix": 21,
+      "first_pass_step": 200,
+      "stable_from_step": 200,
+      "every_miss_after_first": [],
+      "passing_steps": [
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "failing_steps": [
+        50,
+        100,
+        150
+      ],
+      "final_live": {
+        "step": 1200,
+        "sw1_normalized": 0.03977400264638241,
+        "mean_error": 0.04882880672812462,
+        "covariance_error": 0.07095937430858612,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.0436197966337204,
+        "min_mass_ratio": 0.8759765625,
+        "hq": 0.98193359375,
+        "component_covariance_error": 0.16423762838045755,
+        "component_covariance_errors": [
+          0.12747451663017273,
+          0.10827401280403137,
+          0.2569643557071686
+        ],
+        "component_min_eigen_ratio": 0.6763312220573425,
+        "component_mass": [
+          0.2919921875,
+          0.376953125,
+          0.3310546875
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1196,
+          1544,
+          1356
+        ]
+      },
+      "seconds": 28.724963549990207
+    },
+    "source_and_initialization_audit": {
+      "source_zip_sha256": "5d485b10e934e0abe00fb02d57388437781e6730c7f29dcfb235a8141f16e34e",
+      "unchanged14_file_DV16_package": true,
+      "unchanged_host_scorer_and_helpers": {
+        "benchmarks/__init__.py": true,
+        "benchmarks/gan_v3.py": true,
+        "benchmarks/learned_lr_evaluation.py": true,
+        "benchmarks/legacy/__init__.py": true,
+        "benchmarks/legacy/gan_loss.py": true,
+        "benchmarks/legacy/grad_regularizers.py": true,
+        "benchmarks/legacy/locked_shared.py": true,
+        "benchmarks/legacy/recipe.py": true,
+        "benchmarks/locked_shared/__init__.py": true,
+        "benchmarks/locked_shared/baseline.py": true,
+        "benchmarks/locked_shared/hosts/__init__.py": true,
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": true,
+        "benchmarks/locked_shared/hosts/cover_leftover.py": true,
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": true,
+        "benchmarks/locked_shared/hosts/residual_student.py": true,
+        "benchmarks/locked_shared/hosts/unipolar.py": true,
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": true,
+        "benchmarks/locked_shared/mlp.py": true,
+        "benchmarks/locked_shared/mode_hold.py": true,
+        "benchmarks/locked_shared/observation.py": true,
+        "benchmarks/locked_shared/trajectory.py": true,
+        "benchmarks/locked_shared/two_pole.py": true,
+        "benchmarks/smart_descent/__init__.py": true,
+        "benchmarks/smart_descent/controller.py": true,
+        "benchmarks/smart_descent/evaluate.py": true,
+        "benchmarks/smart_descent/study.py": true,
+        "benchmarks/toy100/__init__.py": true,
+        "benchmarks/toy100/device.py": true,
+        "benchmarks/toy100/models.py": true,
+        "benchmarks/toy100/problems.py": true,
+        "benchmarks/transfer_suite/__init__.py": true,
+        "benchmarks/transfer_suite/compare_defaults.py": true,
+        "benchmarks/transfer_suite/compare_formulations.py": true,
+        "benchmarks/transfer_suite/default_promotion.py": true,
+        "benchmarks/transfer_suite/formulations.py": true,
+        "benchmarks/transfer_suite/image_solvability.py": true,
+        "benchmarks/transfer_suite/image_tasks.py": true,
+        "benchmarks/transfer_suite/legacy_noise_adapters.py": true,
+        "benchmarks/transfer_suite/linear_skip_refinement_research.py": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true,
+        "benchmarks/transfer_suite/protocol.py": true,
+        "benchmarks/transfer_suite/public_default_verification.py": true,
+        "benchmarks/transfer_suite/relative_step_adapter.py": true,
+        "benchmarks/transfer_suite/replay_shared_architecture.py": true,
+        "benchmarks/transfer_suite/run_linear_skip.py": true,
+        "benchmarks/transfer_suite/shared_adapter_search.py": true,
+        "benchmarks/transfer_suite/shared_batch_feature_research.py": true,
+        "benchmarks/transfer_suite/shared_batch_feature_search.py": true,
+        "benchmarks/transfer_suite/shared_critic_research.py": true,
+        "benchmarks/transfer_suite/shared_default_search.py": true,
+        "benchmarks/transfer_suite/shared_discriminator_search.py": true,
+        "benchmarks/transfer_suite/shared_ensemble_research.py": true,
+        "benchmarks/transfer_suite/shared_ensemble_search.py": true,
+        "benchmarks/transfer_suite/shared_geometry_readout_research.py": true,
+        "benchmarks/transfer_suite/shared_geometry_readout_search.py": true,
+        "benchmarks/transfer_suite/shared_geometry_research.py": true,
+        "benchmarks/transfer_suite/shared_geometry_residual_research.py": true,
+        "benchmarks/transfer_suite/shared_geometry_residual_search.py": true,
+        "benchmarks/transfer_suite/shared_geometry_search.py": true,
+        "benchmarks/transfer_suite/shared_local_density_research.py": true,
+        "benchmarks/transfer_suite/shared_local_density_search.py": true,
+        "benchmarks/transfer_suite/shared_norm_structure_research.py": true,
+        "benchmarks/transfer_suite/shared_norm_structure_search.py": true,
+        "benchmarks/transfer_suite/shared_pointnorm_research.py": true,
+        "benchmarks/transfer_suite/shared_pointnorm_search.py": true,
+        "benchmarks/transfer_suite/shared_profile_search.py": true,
+        "benchmarks/transfer_suite/shared_rare_diagnostic.py": true,
+        "benchmarks/transfer_suite/shared_rare_gradient_research.py": true,
+        "benchmarks/transfer_suite/shared_rare_gradient_search.py": true,
+        "benchmarks/transfer_suite/shared_residual_curvature_research.py": true,
+        "benchmarks/transfer_suite/shared_residual_curvature_search.py": true,
+        "benchmarks/transfer_suite/shared_schedule_search.py": true,
+        "benchmarks/transfer_suite/shared_variants.py": true,
+        "benchmarks/transfer_suite/shared_width_catalog.py": true,
+        "benchmarks/transfer_suite/shared_width_last_refinement.py": true,
+        "benchmarks/transfer_suite/shared_width_refinement.py": true,
+        "benchmarks/transfer_suite/shared_width_search.py": true,
+        "benchmarks/transfer_suite/smooth_critic_research.py": true,
+        "benchmarks/transfer_suite/solvability_search.py": true,
+        "benchmarks/transfer_suite/stress_tasks.py": true,
+        "benchmarks/transfer_suite/suite.py": true,
+        "benchmarks/transfer_suite/toy100_compatibility.py": true,
+        "benchmarks/transfer_suite/vector_tasks.py": true,
+        "lib/toy_metrics.py": true,
+        "lib/toy_models.py": true,
+        "reports/data-drift-api/frozen_vector_tasks.py": true,
+        "reports/data-drift-api/vector-fixtures.json": true,
+        "reports/data-drift-api/vector-host-receipt.json": true,
+        "reports/data-drift-api/vector-protocol.json": true,
+        "reports/transfer_suite/unadjusted/leading_profile.json": true
+      },
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          4
+        ],
+        "num_particles": [
+          20000,
+          256
+        ],
+        "batch_size": [
+          2048,
+          128
+        ],
+        "continuous_policy": [
+          "dv15",
+          "dv16"
+        ]
+      },
+      "initialization": {
+        "canonical_ordered_parameters": true,
+        "fixture_sha256": "25032a4a825b8de3bbbed38e552a47058f257be0849a53bf71dc3afbbbb7db6f",
+        "zero_added_widths": true,
+        "initial_ema_exact": true,
+        "private_and_data_streams_same_fixed_seeds": true
+      },
+      "all_manifest_hashes_match": true,
+      "native_CPU_scalar_steps": 22,
+      "CUDA_optimizer_moments": true,
+      "caller_rng_saved": true,
+      "observations": 24,
+      "per_update_rows": 1200,
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "gpu": "NVIDIA RTX A6000",
+        "physical_gpu": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "tf32": false,
+        "threads": 1,
+        "deterministic": true
+      }
+    },
+    "raw_checkpoints_retained": true,
+    "artifacts": {
+      "evidence/api-dv16-vector_anisotropic/artifact-sha256.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/artifact-sha256.json",
+        "original_sha256": "341bf57d6a410649d47fa77d17abee69aa62481993b5d65d5827f4da425ae77d",
+        "sha256": "341bf57d6a410649d47fa77d17abee69aa62481993b5d65d5827f4da425ae77d",
+        "original_bytes": 810,
+        "bytes": 810
+      },
+      "evidence/api-dv16-vector_anisotropic/canonical-initialization.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/canonical-initialization.json",
+        "original_sha256": "27e5e342a458338ba9e0b4a9ee247215db94ebd4ae53acf5e019f89a4f074d25",
+        "sha256": "27e5e342a458338ba9e0b4a9ee247215db94ebd4ae53acf5e019f89a4f074d25",
+        "original_bytes": 3130,
+        "bytes": 3130
+      },
+      "evidence/api-dv16-vector_anisotropic/declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/declaration.json",
+        "original_sha256": "07056d10bcda3386d9f09c43501885694e66d02bb31ef4fce6dea0ea74bc9fb6",
+        "sha256": "07056d10bcda3386d9f09c43501885694e66d02bb31ef4fce6dea0ea74bc9fb6",
+        "original_bytes": 22318,
+        "bytes": 22318
+      },
+      "evidence/api-dv16-vector_anisotropic/final-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/final-state.pt",
+        "original_sha256": "6af7d89ba3458ec80cb28f05e45ad1d1cd4f37f4fed490c94dde480b63a1c4c1",
+        "sha256": "6af7d89ba3458ec80cb28f05e45ad1d1cd4f37f4fed490c94dde480b63a1c4c1",
+        "original_bytes": 296349,
+        "bytes": 296349
+      },
+      "evidence/api-dv16-vector_anisotropic/initial-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/initial-state.pt",
+        "original_sha256": "c8393abe72ace164c6407b05ca3834cf7447d445b1ec0f20fb1f4a1d6574e653",
+        "sha256": "c8393abe72ace164c6407b05ca3834cf7447d445b1ec0f20fb1f4a1d6574e653",
+        "original_bytes": 140588,
+        "bytes": 140588
+      },
+      "evidence/api-dv16-vector_anisotropic/initial.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/initial.json",
+        "original_sha256": "cd964fdff1133132085752cb21ef2ed3b30796cad1b68b8422c3fa44270e7586",
+        "sha256": "cd964fdff1133132085752cb21ef2ed3b30796cad1b68b8422c3fa44270e7586",
+        "original_bytes": 847,
+        "bytes": 847
+      },
+      "evidence/api-dv16-vector_anisotropic/learning-rates.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/learning-rates.jsonl",
+        "original_sha256": "58ab01ab0c73f0594fe7fb3ffd1209b70de19e2506b12295c7db56604eb512b7",
+        "sha256": "507bd9b6857685de1de5f3aaf26fdb530ba8eeb1d38eddec1a3316f62851af15",
+        "original_bytes": 1740217,
+        "bytes": 342279
+      },
+      "evidence/api-dv16-vector_anisotropic/metrics.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/metrics.jsonl",
+        "original_sha256": "7b9d6d07a20eeee930911fb4b26dea6c7f991a766b80f5b4d3a86a234236c4b1",
+        "sha256": "0de712014415faafc680d242959131958af92ac84e599ce1811d09029dcaf1cb",
+        "original_bytes": 30739,
+        "bytes": 5472
+      },
+      "evidence/api-dv16-vector_anisotropic/result.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/result.json",
+        "original_sha256": "8a744ec4de0d7634716111ec13386b457ee48c3a5fbe8250d26617d7756f3e44",
+        "sha256": "8a744ec4de0d7634716111ec13386b457ee48c3a5fbe8250d26617d7756f3e44",
+        "original_bytes": 5155,
+        "bytes": 5155
+      },
+      "evidence/api-dv16-vector_anisotropic/source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic/source.zip",
+        "original_sha256": "5d485b10e934e0abe00fb02d57388437781e6730c7f29dcfb235a8141f16e34e",
+        "sha256": "5d485b10e934e0abe00fb02d57388437781e6730c7f29dcfb235a8141f16e34e",
+        "original_bytes": 349415,
+        "bytes": 349415
+      },
+      "evidence/api-dv16-vector_anisotropic/pretraining-source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16-source.zip",
+        "original_sha256": "2076c76cdb15bb198585e52002c92be1ab2ddd7948270ba64107533fb8379ee5",
+        "sha256": "2076c76cdb15bb198585e52002c92be1ab2ddd7948270ba64107533fb8379ee5",
+        "original_bytes": 74430,
+        "bytes": 74430
+      },
+      "evidence/api-dv16-vector_anisotropic/mechanism-declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16.json",
+        "original_sha256": "524c5581bfe57543980f219ea36da6207c465eae54c51b22e65bec19bf42dc97",
+        "sha256": "524c5581bfe57543980f219ea36da6207c465eae54c51b22e65bec19bf42dc97",
+        "original_bytes": 2175,
+        "bytes": 2175
+      },
+      "evidence/api-dv16-vector_anisotropic/package-seal.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/candidate-packages/dv16.json",
+        "original_sha256": "4204ae09adf5d03bf5a40f13b2057735f68b1b55f66b2cc74b1bc0e04d33035b",
+        "sha256": "4204ae09adf5d03bf5a40f13b2057735f68b1b55f66b2cc74b1bc0e04d33035b",
+        "original_bytes": 1520,
+        "bytes": 1520
+      }
+    },
+    "scope_note": "Own sealed14-file DV16 public trainer on frozen host, thresholds and canonical initialization. Explicit candidate normalized rank-one compact latent perturbation plus output Gaussian.029 applies to train/live/EMA. Original fixed-budget status preserved; supervisor separately assesses settling/retention and supplementary evidence. No predecessor or sibling pass inherited."
+  },
+  "jsonl_lossless": true
+}

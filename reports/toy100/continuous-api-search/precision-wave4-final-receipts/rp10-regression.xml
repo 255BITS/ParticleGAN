@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="93" time="31.184" timestamp="2026-09-26T18:53:05.131180-06:00" hostname="pop-os"><testcase classname="tests.test_training" name="test_winning_recipe_is_the_common_default" time="0.916" /><testcase classname="tests.test_training" name="test_step_updates_prior_restores_frozen_parameters_and_detaches_results" time="0.232" /><testcase classname="tests.test_training" name="test_freeze_restored_when_generator_callback_raises" time="0.004" /><testcase classname="tests.test_training" name="test_old_formulation_checkpoints_are_rejected_before_mutating_state[1]" time="0.011" /><testcase classname="tests.test_training" name="test_old_formulation_checkpoints_are_rejected_before_mutating_state[2]" time="0.011" /><testcase classname="tests.test_training" name="test_old_formulation_checkpoints_are_rejected_before_mutating_state[3]" time="0.009" /><testcase classname="tests.test_training" name="test_disguised_k3p_optimizer_is_rejected_without_mutating_live_state" time="0.015" /><testcase classname="tests.test_training" name="test_prior_regularizes_full_small_table_or_unique_large_sample[12]" time="0.006" /><testcase classname="tests.test_training" name="test_prior_regularizes_full_small_table_or_unique_large_sample[1025]" time="0.007" /><testcase classname="tests.test_training" name="test_ema_updates_parameters_and_copies_float_and_integer_buffers" time="0.007" /><testcase classname="tests.test_training" name="test_sample_preserves_modes_and_training_randomness" time="0.021" /><testcase classname="tests.test_training" name="test_checkpoint_exact_continuation_with_dropout_and_independent_storage" time="0.028" /><testcase classname="tests.test_training" name="test_schedule_budget_and_rejected_checkpoint_do_not_change_models" time="0.021" /><testcase classname="tests.test_training" name="test_validation_rejects_unsupported_recipe_and_mismatched_models" time="0.003" /><testcase classname="tests.test_training" name="test_generator_real_tensor_validation_precedes_any_update[invalid0]" time="0.011" /><testcase classname="tests.test_training" name="test_generator_real_tensor_validation_precedes_any_update[invalid1]" time="0.008" /><testcase classname="tests.test_training" name="test_generator_real_tensor_validation_precedes_any_update[invalid2]" time="0.008" /><testcase classname="tests.test_training" name="test_generator_real_tensor_validation_precedes_any_update[invalid3]" time="0.011" /><testcase classname="tests.test_training" name="test_malformed_checkpoint_does_not_mutate_any_live_state[second_optimizer]" time="0.019" /><testcase classname="tests.test_training" name="test_malformed_checkpoint_does_not_mutate_any_live_state[latent_rng]" time="0.019" /><testcase classname="tests.test_training" name="test_malformed_checkpoint_does_not_mutate_any_live_state[cpu_rng]" time="0.019" /><testcase classname="tests.test_training" name="test_checkpoint_requires_matching_parameter_freezing" time="0.013" /><testcase classname="tests.test_training" name="test_cuda_accepts_current_device_streams_and_restores_checkpoint" time="0.488" /><testcase classname="tests.test_recipe_defaults" name="test_default_preserves_frozen_ka2_shared_configuration" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_recipe_stays_configuration_and_components_without_training_lifecycle" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[gan-gan-particles-none-scalar]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[mog-gan-mog-none-scalar]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[ddgan-ddgan-particles-none-ucd]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[ddgan_mog-ddgan-mog-none-ucd]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[ae_gan-gan-mog-ae-scalar]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[vae_gan-gan-mog-hard-scalar]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_share_current_training_hyperparameters[ae_ddgan-ddgan-mog-ae-scalar]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[gan_v1]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[gan_v2]" time="0.000" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[gan_v3]" time="0.000" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[gan_legacy]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[k3p]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[ka2]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_historical_versions_are_not_selectable[unknown]" time="0.000" /><testcase classname="tests.test_recipe_defaults" name="test_named_recipe_overrides_and_small_objects" time="0.159" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_do_not_implicitly_choose_training_control_flow[gan-overrides0]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_do_not_implicitly_choose_training_control_flow[ae_gan-overrides1]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_do_not_implicitly_choose_training_control_flow[vae_gan-overrides2]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_do_not_implicitly_choose_training_control_flow[ddgan-overrides3]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_named_components_do_not_implicitly_choose_training_control_flow[mog-overrides4]" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_v3_optimizer_roles_resolve_to_recorded_absolute_rates" time="0.001" /><testcase classname="tests.test_recipe_defaults" name="test_json_integer_zero_moments_construct_real_adam_optimizers" time="0.001" /><testcase classname="tests.test_ka2" name="test_default_matches_exact_frozen_ka2_through_release_reseed_and_reanchor[every_step]" time="8.444" /><testcase classname="tests.test_ka2" name="test_optimizer_checkpoint_continues_active_history_bit_exactly[every_step]" time="2.359" /><testcase classname="tests.test_ka2" name="test_default_matches_exact_frozen_ka2_through_release_reseed_and_reanchor[lazy2]" time="12.153" /><testcase classname="tests.test_ka2" name="test_optimizer_checkpoint_continues_active_history_bit_exactly[lazy2]" time="3.872" /><testcase classname="tests.test_ka2" name="test_surprise_uses_post_adam_moments_and_upper_median" time="0.002" /><testcase classname="tests.test_ka2" name="test_two_default_critics_own_their_controller_state_without_global_hooks" time="0.291" /><testcase classname="tests.test_ka2" name="test_conditional_critic_and_ema_receive_identical_conditioning" time="0.013" /><testcase classname="tests.test_ka2" name="test_adaptive_ema_keeps_fixed_fourier_buffers_and_anchor_gradients_exact" time="0.003" /><testcase classname="tests.test_ka2" name="test_buffer_ema_still_averages_changing_batchnorm_statistics_and_copies_counts" time="0.025" /><testcase classname="tests.test_serial_backward" name="test_serial_scope_restores_caller_on_success_and_exception" time="0.010" /><testcase classname="tests.test_serial_backward" name="test_serial_execution_mode_is_checkpointed_and_validated_before_mutation" time="0.016" /><testcase classname="tests.test_serial_backward" name="test_invalid_serial_mode_and_legacy_caller_context" time="0.006" /><testcase classname="tests.test_serial_backward" name="test_original_recipe_checkpoint_remains_loadable" time="0.006" /><testcase classname="tests.test_serial_backward" name="test_autograd_engine_exception_restores_caller[nested_grad]" time="0.003" /><testcase classname="tests.test_serial_backward" name="test_autograd_engine_exception_restores_caller[outer_backward]" time="0.003" /><testcase classname="tests.test_precision_game" name="test_secant_matches_implicit_linear_game[0.0-4.0]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_secant_matches_implicit_linear_game[-3.0-2.0]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_secant_matches_implicit_linear_game[-5.0-0.0]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_secant_matches_implicit_linear_game[0.0-0.0]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_one_accepted_clock_sparse_sampling_and_policy_update" time="0.017" /><testcase classname="tests.test_precision_game" name="test_checkpoint_full_controller_exact[rp4]" time="0.053" /><testcase classname="tests.test_precision_game" name="test_checkpoint_full_controller_exact[rp5]" time="0.056" /><testcase classname="tests.test_precision_game" name="test_failed_preview_rolls_back_controller_model_optimizer_and_rng[corrector_field]" time="0.019" /><testcase classname="tests.test_precision_game" name="test_failed_preview_rolls_back_controller_model_optimizer_and_rng[precision_evidence]" time="0.025" /><testcase classname="tests.test_precision_game" name="test_generator_callback_once" time="0.016" /><testcase classname="tests.test_precision_game" name="test_ordinary_optimizer_post_hooks_once" time="0.005" /><testcase classname="tests.test_precision_game" name="test_ka2_skipping_reference_is_not_forced_to_move" time="0.030" /><testcase classname="tests.test_precision_game" name="test_measured_second_direction_solves_dissipative_linear_game[matrix0]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_measured_second_direction_solves_dissipative_linear_game[matrix1]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_measured_second_direction_solves_dissipative_linear_game[matrix2]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_measured_second_direction_solves_dissipative_linear_game[matrix3]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_zero_predictor_stays_finite" time="0.001" /><testcase classname="tests.test_precision_game" name="test_minimum_residual_disk_and_half_plane[gram0-rhs0-expected0]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_minimum_residual_disk_and_half_plane[gram1-rhs1-expected1]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_minimum_residual_disk_and_half_plane[gram2-rhs2-expected2]" time="0.002" /><testcase classname="tests.test_precision_game" name="test_minimum_residual_disk_and_half_plane[gram3-rhs3-expected3]" time="0.001" /><testcase classname="tests.test_precision_game" name="test_out_of_plane_response_is_used_by_minimum_residual" time="0.001" /><testcase classname="tests.test_precision_game" name="test_particle_noise_bound_and_predictor_agreement" time="0.001" /><testcase classname="tests.test_precision_game" name="test_particle_rng_is_private_and_replayable_without_advancing_other_streams" time="0.026" /><testcase classname="tests.test_precision_game" name="test_rp10_stationary_noise_has_no_age_or_budget_dependency[0]" time="0.001"><failure message="ValueError: continuous precision requires total_steps=None">age = 0
+
+    @pytest.mark.parametrize('age',[0,1,360,720,30000,10**9])
+    def test_rp10_stationary_noise_has_no_age_or_budget_dependency(age):
+        from particlegan.training import input_noise_std,output_noise_std
+        for horizon in [None,1200,7500,30000]:
+&gt;           r=get_recipe(total_steps=horizon,continuous_precision='rp5',game_update='secant_resolvent',
+                         noise_policy='constant',input_noise_std=0.)
+
+tests/test_precision_game.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+particlegan/recipes.py:402: in get_recipe
+    return Recipe(**{**options, **overrides})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:53: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Recipe(name='ka2', model='gan', z_dim=2, num_particles=20000, prior_kind='particles', sigma_rel=0.0, standardize=True,...der_mode='none', routing_temperature=0.25, distance_reduction='sum', observation_sigma=0.03, reconstruction_weight=1.0)
+
+    def __post_init__(self):
+        if self.noise_policy not in ("initialization", "constant"):
+            raise ValueError("noise_policy must be initialization or constant")
+        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
+            raise ValueError("invalid game_update")
+        object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+        object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap &lt;= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps &lt; 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 &lt;= floor &lt;= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 &lt;= self.reg_anchor_min_decay &lt; 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value &lt; 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 &lt;= value &lt;= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 &lt; self.input_noise_anneal_end &lt;= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 &lt;= b &lt; 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+            value = getattr(self, key)
+            if type(value) is not int or value &lt;= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if type(self.adam_eager_state) is not bool:
+            raise ValueError("adam_eager_state must be a boolean")
+        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
+            raise ValueError("unknown continuous precision policy")
+        if self.continuous_precision is not None and self.total_steps is not None:
+&gt;           raise ValueError("continuous precision requires total_steps=None")
+E           ValueError: continuous precision requires total_steps=None
+
+particlegan/recipes.py:124: ValueError</failure></testcase><testcase classname="tests.test_precision_game" name="test_rp10_stationary_noise_has_no_age_or_budget_dependency[1]" time="0.001"><failure message="ValueError: continuous precision requires total_steps=None">age = 1
+
+    @pytest.mark.parametrize('age',[0,1,360,720,30000,10**9])
+    def test_rp10_stationary_noise_has_no_age_or_budget_dependency(age):
+        from particlegan.training import input_noise_std,output_noise_std
+        for horizon in [None,1200,7500,30000]:
+&gt;           r=get_recipe(total_steps=horizon,continuous_precision='rp5',game_update='secant_resolvent',
+                         noise_policy='constant',input_noise_std=0.)
+
+tests/test_precision_game.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+particlegan/recipes.py:402: in get_recipe
+    return Recipe(**{**options, **overrides})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:53: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Recipe(name='ka2', model='gan', z_dim=2, num_particles=20000, prior_kind='particles', sigma_rel=0.0, standardize=True,...der_mode='none', routing_temperature=0.25, distance_reduction='sum', observation_sigma=0.03, reconstruction_weight=1.0)
+
+    def __post_init__(self):
+        if self.noise_policy not in ("initialization", "constant"):
+            raise ValueError("noise_policy must be initialization or constant")
+        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
+            raise ValueError("invalid game_update")
+        object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+        object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap &lt;= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps &lt; 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 &lt;= floor &lt;= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 &lt;= self.reg_anchor_min_decay &lt; 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value &lt; 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 &lt;= value &lt;= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 &lt; self.input_noise_anneal_end &lt;= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 &lt;= b &lt; 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+            value = getattr(self, key)
+            if type(value) is not int or value &lt;= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if type(self.adam_eager_state) is not bool:
+            raise ValueError("adam_eager_state must be a boolean")
+        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
+            raise ValueError("unknown continuous precision policy")
+        if self.continuous_precision is not None and self.total_steps is not None:
+&gt;           raise ValueError("continuous precision requires total_steps=None")
+E           ValueError: continuous precision requires total_steps=None
+
+particlegan/recipes.py:124: ValueError</failure></testcase><testcase classname="tests.test_precision_game" name="test_rp10_stationary_noise_has_no_age_or_budget_dependency[360]" time="0.001"><failure message="ValueError: continuous precision requires total_steps=None">age = 360
+
+    @pytest.mark.parametrize('age',[0,1,360,720,30000,10**9])
+    def test_rp10_stationary_noise_has_no_age_or_budget_dependency(age):
+        from particlegan.training import input_noise_std,output_noise_std
+        for horizon in [None,1200,7500,30000]:
+&gt;           r=get_recipe(total_steps=horizon,continuous_precision='rp5',game_update='secant_resolvent',
+                         noise_policy='constant',input_noise_std=0.)
+
+tests/test_precision_game.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+particlegan/recipes.py:402: in get_recipe
+    return Recipe(**{**options, **overrides})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:53: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Recipe(name='ka2', model='gan', z_dim=2, num_particles=20000, prior_kind='particles', sigma_rel=0.0, standardize=True,...der_mode='none', routing_temperature=0.25, distance_reduction='sum', observation_sigma=0.03, reconstruction_weight=1.0)
+
+    def __post_init__(self):
+        if self.noise_policy not in ("initialization", "constant"):
+            raise ValueError("noise_policy must be initialization or constant")
+        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
+            raise ValueError("invalid game_update")
+        object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+        object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap &lt;= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps &lt; 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 &lt;= floor &lt;= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 &lt;= self.reg_anchor_min_decay &lt; 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value &lt; 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 &lt;= value &lt;= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 &lt; self.input_noise_anneal_end &lt;= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 &lt;= b &lt; 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+            value = getattr(self, key)
+            if type(value) is not int or value &lt;= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if type(self.adam_eager_state) is not bool:
+            raise ValueError("adam_eager_state must be a boolean")
+        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
+            raise ValueError("unknown continuous precision policy")
+        if self.continuous_precision is not None and self.total_steps is not None:
+&gt;           raise ValueError("continuous precision requires total_steps=None")
+E           ValueError: continuous precision requires total_steps=None
+
+particlegan/recipes.py:124: ValueError</failure></testcase><testcase classname="tests.test_precision_game" name="test_rp10_stationary_noise_has_no_age_or_budget_dependency[720]" time="0.001"><failure message="ValueError: continuous precision requires total_steps=None">age = 720
+
+    @pytest.mark.parametrize('age',[0,1,360,720,30000,10**9])
+    def test_rp10_stationary_noise_has_no_age_or_budget_dependency(age):
+        from particlegan.training import input_noise_std,output_noise_std
+        for horizon in [None,1200,7500,30000]:
+&gt;           r=get_recipe(total_steps=horizon,continuous_precision='rp5',game_update='secant_resolvent',
+                         noise_policy='constant',input_noise_std=0.)
+
+tests/test_precision_game.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+particlegan/recipes.py:402: in get_recipe
+    return Recipe(**{**options, **overrides})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:53: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Recipe(name='ka2', model='gan', z_dim=2, num_particles=20000, prior_kind='particles', sigma_rel=0.0, standardize=True,...der_mode='none', routing_temperature=0.25, distance_reduction='sum', observation_sigma=0.03, reconstruction_weight=1.0)
+
+    def __post_init__(self):
+        if self.noise_policy not in ("initialization", "constant"):
+            raise ValueError("noise_policy must be initialization or constant")
+        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
+            raise ValueError("invalid game_update")
+        object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+        object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap &lt;= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps &lt; 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 &lt;= floor &lt;= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 &lt;= self.reg_anchor_min_decay &lt; 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value &lt; 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 &lt;= value &lt;= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 &lt; self.input_noise_anneal_end &lt;= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 &lt;= b &lt; 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+            value = getattr(self, key)
+            if type(value) is not int or value &lt;= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if type(self.adam_eager_state) is not bool:
+            raise ValueError("adam_eager_state must be a boolean")
+        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
+            raise ValueError("unknown continuous precision policy")
+        if self.continuous_precision is not None and self.total_steps is not None:
+&gt;           raise ValueError("continuous precision requires total_steps=None")
+E           ValueError: continuous precision requires total_steps=None
+
+particlegan/recipes.py:124: ValueError</failure></testcase><testcase classname="tests.test_precision_game" name="test_rp10_stationary_noise_has_no_age_or_budget_dependency[30000]" time="0.001"><failure message="ValueError: continuous precision requires total_steps=None">age = 30000
+
+    @pytest.mark.parametrize('age',[0,1,360,720,30000,10**9])
+    def test_rp10_stationary_noise_has_no_age_or_budget_dependency(age):
+        from particlegan.training import input_noise_std,output_noise_std
+        for horizon in [None,1200,7500,30000]:
+&gt;           r=get_recipe(total_steps=horizon,continuous_precision='rp5',game_update='secant_resolvent',
+                         noise_policy='constant',input_noise_std=0.)
+
+tests/test_precision_game.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+particlegan/recipes.py:402: in get_recipe
+    return Recipe(**{**options, **overrides})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:53: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Recipe(name='ka2', model='gan', z_dim=2, num_particles=20000, prior_kind='particles', sigma_rel=0.0, standardize=True,...der_mode='none', routing_temperature=0.25, distance_reduction='sum', observation_sigma=0.03, reconstruction_weight=1.0)
+
+    def __post_init__(self):
+        if self.noise_policy not in ("initialization", "constant"):
+            raise ValueError("noise_policy must be initialization or constant")
+        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
+            raise ValueError("invalid game_update")
+        object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+        object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap &lt;= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps &lt; 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 &lt;= floor &lt;= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 &lt;= self.reg_anchor_min_decay &lt; 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value &lt; 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 &lt;= value &lt;= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 &lt; self.input_noise_anneal_end &lt;= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 &lt;= b &lt; 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+            value = getattr(self, key)
+            if type(value) is not int or value &lt;= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if type(self.adam_eager_state) is not bool:
+            raise ValueError("adam_eager_state must be a boolean")
+        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
+            raise ValueError("unknown continuous precision policy")
+        if self.continuous_precision is not None and self.total_steps is not None:
+&gt;           raise ValueError("continuous precision requires total_steps=None")
+E           ValueError: continuous precision requires total_steps=None
+
+particlegan/recipes.py:124: ValueError</failure></testcase><testcase classname="tests.test_precision_game" name="test_rp10_stationary_noise_has_no_age_or_budget_dependency[1000000000]" time="0.001"><failure message="ValueError: continuous precision requires total_steps=None">age = 1000000000
+
+    @pytest.mark.parametrize('age',[0,1,360,720,30000,10**9])
+    def test_rp10_stationary_noise_has_no_age_or_budget_dependency(age):
+        from particlegan.training import input_noise_std,output_noise_std
+        for horizon in [None,1200,7500,30000]:
+&gt;           r=get_recipe(total_steps=horizon,continuous_precision='rp5',game_update='secant_resolvent',
+                         noise_policy='constant',input_noise_std=0.)
+
+tests/test_precision_game.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+particlegan/recipes.py:402: in get_recipe
+    return Recipe(**{**options, **overrides})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;string&gt;:53: in __init__
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Recipe(name='ka2', model='gan', z_dim=2, num_particles=20000, prior_kind='particles', sigma_rel=0.0, standardize=True,...der_mode='none', routing_temperature=0.25, distance_reduction='sum', observation_sigma=0.03, reconstruction_weight=1.0)
+
+    def __post_init__(self):
+        if self.noise_policy not in ("initialization", "constant"):
+            raise ValueError("noise_policy must be initialization or constant")
+        if self.game_update not in ("ordinary", "secant_resolvent", "two_direction_resolvent", "minimum_residual_resolvent", "secant_particle_exploration"):
+            raise ValueError("invalid game_update")
+        object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
+        object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
+        object.__setattr__(self, "direct_particle_betas", tuple(float(b) for b in self.direct_particle_betas))
+        if self.network_lr_horizon_cap is not None and (
+                type(self.network_lr_horizon_cap) is not int or self.network_lr_horizon_cap &lt;= 0):
+            raise ValueError("network_lr_horizon_cap must be a positive integer or None")
+        if type(self.d_guard_min_steps) is not int or self.d_guard_min_steps &lt; 0:
+            raise ValueError("d_guard_min_steps must be a nonnegative integer")
+        floor = self.network_lr_floor
+        if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 &lt;= floor &lt;= 1):
+            raise ValueError("network_lr_floor must be None or in [0, 1]")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 &lt;= self.reg_anchor_min_decay &lt; 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
+        for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or value &lt; 0:
+                raise ValueError(f"{key} must be finite and nonnegative")
+        for key in ("latent_damping_max_rate", "output_noise_warmup"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 &lt;= value &lt;= 1:
+                raise ValueError(f"{key} must be in [0, 1]")
+        if not math.isfinite(self.input_noise_anneal_end) or not 0 &lt; self.input_noise_anneal_end &lt;= 1:
+            raise ValueError("input_noise_anneal_end must be in (0, 1]")
+        if len(self.direct_particle_betas) != 2 or any(not 0 &lt;= b &lt; 1 for b in self.direct_particle_betas):
+            raise ValueError("direct_particle_betas must contain two values in [0, 1)")
+        for key in ("z_dim", "num_particles", "batch_size", "reg_every", "input_noise_init_steps", "output_noise_init_steps"):
+            value = getattr(self, key)
+            if type(value) is not int or value &lt;= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if type(self.adam_eager_state) is not bool:
+            raise ValueError("adam_eager_state must be a boolean")
+        if self.continuous_precision not in (None, "rp1", "rp4", "rp5"):
+            raise ValueError("unknown continuous precision policy")
+        if self.continuous_precision is not None and self.total_steps is not None:
+&gt;           raise ValueError("continuous precision requires total_steps=None")
+E           ValueError: continuous precision requires total_steps=None
+
+particlegan/recipes.py:124: ValueError</failure></testcase><testcase classname="tests.test_precision_game" name="test_rp10_full_checkpoint_continuation_with_constant_noise" time="0.050" /></testsuite></testsuites>

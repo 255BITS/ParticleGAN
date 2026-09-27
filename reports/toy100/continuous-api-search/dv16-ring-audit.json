@@ -1,0 +1,111 @@
+{
+  "created_utc": "2026-09-27T01:25:02.563741+00:00",
+  "candidate": "API-DV16",
+  "status": "OWN_SINGLE_SHIFT_SOURCE_AND_RAW_EVIDENCE_VERIFIED",
+  "source_zip_sha256": "cd6881e3ab849276825315949b5c3536b7f614cacdb39b676e76c7d4f999d15a",
+  "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-single",
+  "declared_source_artifact_hashes_match": true,
+  "package_exact_own_pretraining14": true,
+  "frozen_host_unchanged": {
+    "reports/data-drift-api/summarize.py": true,
+    "benchmarks/locked_shared/__init__.py": true,
+    "benchmarks/__init__.py": true,
+    "benchmarks/locked_shared/observation.py": true,
+    "benchmarks/legacy/grad_regularizers.py": true,
+    "benchmarks/locked_shared/mlp.py": true,
+    "benchmarks/toy100/__init__.py": true,
+    "benchmarks/legacy/locked_shared.py": true,
+    "benchmarks/toy100/problems.py": true,
+    "benchmarks/legacy/gan_loss.py": true,
+    "benchmarks/legacy/__init__.py": true,
+    "reports/data-drift-api/evaluation-protocols.json": true,
+    "benchmarks/toy100/device.py": true,
+    "benchmarks/locked_shared/mode_hold.py": true
+  },
+  "initialization": {
+    "original_and_width_models_match_DV15": {
+      "G": true,
+      "D": true,
+      "prior": true,
+      "ema_G": true,
+      "ema_prior": true
+    },
+    "zero_added_shape_shear": true,
+    "all_private_global_caller_RNG_and_targets_match": true,
+    "original_lazy_optimizer_groups_match_after_excluding_declared_new_shape_group": true
+  },
+  "observations": 460,
+  "rate_rows": 4600,
+  "state_receipt_rows": 46,
+  "segments": [
+    {
+      "first_arrival": 580,
+      "arrival_delay": 580,
+      "passing_since_arrival": 183,
+      "checks_since_arrival": 183,
+      "every_departure": [],
+      "min_hq_since_arrival": 0.905517578125,
+      "min_modes_since_arrival": 8,
+      "final_stable_suffix_checks": 183,
+      "final_stable_suffix_start": 580
+    },
+    {
+      "first_arrival": 2690,
+      "arrival_delay": 290,
+      "passing_since_arrival": 191,
+      "checks_since_arrival": 192,
+      "every_departure": [
+        2700
+      ],
+      "min_hq_since_arrival": 0.87646484375,
+      "min_modes_since_arrival": 8,
+      "final_stable_suffix_checks": 190,
+      "final_stable_suffix_start": 2710
+    }
+  ],
+  "prehold": {
+    "passing": 120,
+    "total": 120
+  },
+  "frozen": {
+    "passing": 0,
+    "total": 220
+  },
+  "controller_events": [
+    {
+      "step": 1200,
+      "event": "close"
+    },
+    {
+      "step": 2406,
+      "event": "reopen"
+    },
+    {
+      "step": 3126,
+      "event": "close"
+    }
+  ],
+  "raw_checkpoint_proofs": [
+    {
+      "file": "change-2400-state.pt",
+      "file_sha256": "8343c86a1e5c6fe1a472ddd680df9dcef2adc2b9de9c6bb0b3279f7692151cc6",
+      "all_receipt_fields_match": true,
+      "nativeCPUsteps": 19,
+      "CUDAmoments": true
+    },
+    {
+      "file": "final-state.pt",
+      "file_sha256": "21a2b2ea7a6378b595ac7d3db8ba532832d00043fbf5d676525749f3fdef9e96",
+      "all_receipt_fields_match": true,
+      "nativeCPUsteps": 19,
+      "CUDAmoments": true
+    }
+  ],
+  "seconds": 81.20749195292592,
+  "limits": [
+    "This is own single-shift evidence only; stationary/long/late-change and exact CUDA replay must be re-earned for DV16.",
+    "Inherited summary ranges can omit newer prior groups; all4600 raw rows verify z,width,shear rates agree.",
+    "Original acquisition and every post-change settling miss retained; no81/81 or perfect-after-first-touch shortcut."
+  ],
+  "scope": "Stdlib source/raw tensor metadata only. No Torch, GPU, model/training/tests, active edits or shared manifests. Root owns ring archival."
+}

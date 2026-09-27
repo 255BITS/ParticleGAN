@@ -34,6 +34,7 @@ alone is insufficient, and longer verification remains required.
 | API-DV13: learned local latent widths, actual native critic memory | 610 | 180/180 | 350 | 181/186 | Five early recovery misses, then175 straight. Unequal_mass14/24, final10 **PASS**; bars4 **FAIL10/24**, suffix2. Intended data-driven critic-memory attachment was omitted; actual behavior and original declaration preserved. |
 | API-DV14: paired opposite-noise width gradients and repaired memory binding | 590 | 182/182 | 290 | 191/192 | One early recovery miss2720, then188 straight. Unequal_mass14/24, final14 **PASS**; bars4 **FAIL8/24**, suffix0. Own source and full saved states independently verified. |
 | API-DV15: bounded uniform latent perturbations with learned widths | 520 | 189/189 | 330 | 185/188 | Stationary **699/699**; five vectors and three images pass. Unequal_mass original **FAIL4/24**, supplement **24/24**, exact direct/split replay. **Rejected:** intensity **FAIL7/24**, suffix3; mode_hold **FAIL0/24**, final7/8. All original scores retained. |
+| API-DV16: learned bounded rank-one latent correlation | 580 | 183/183 | 290 | 191/192 | One early recovery miss2700, then190 straight. Own all6vectors, all4images and mode_hold **PASS (11/22)**, independently verified. Own ring and saved-state audit verifies; longer/full-API qualification pending. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -47,7 +48,7 @@ alone is insufficient, and longer verification remains required.
 | API-C11: separate response fit for each role | 660 | 175/175 | 280 | 193/193 | Own replay passes. **Rejected:** intensity image0/24, finalHQ.65625 and1qualitymode. |
 | API-C12: residual-checked implicit update | NOT_OBSERVED | — | NOT_OBSERVED | — | Complete4600;80,382 field evaluations,1719.76s. **Rejected:** intensity0/24, finalHQ.46875. Own exact checkpoint replay passes. |
 | API-C13: fixed-macrostep nonlinear residual correction | NOT_RUN | — | NOT_RUN | — | Intensity **PASS11/24**, final11. Public buffer/RNG ownership issue found; original pass retained separately. |
-| API-C13-R1: repaired base-field state ownership, same nonlinear solver | 230 | 210/218 | 130 | 208/208 | Initial early misses through340, then206 straight from350. Own intensity **PASS11/24**, final11. Ring1879.59s;73,594 fields,3 converged and4,597 fallback updates, independently verified. Broader and long qualification incomplete. |
+| API-C13-R1: repaired base-field state ownership, same nonlinear solver | 230 | 210/218 | 130 | 208/208 | Initial early misses through340, then206 straight from350. Own intensity **PASS11/24**, final11. Ring1879.59s;73,594 fields,3 converged and4,597 fallback updates, independently verified. **Rejected:** mode_hold0/24, final7/8 modes,413.23s. Own exact checkpoint replay passes; long NOT_RUN. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
@@ -59,6 +60,8 @@ alone is insufficient, and longer verification remains required.
 | API-RP8: minimize the full local linear residual | 520 | 189/189 | 290 | 192/192 | **Rejected:** intensity10/24, final suffix3; mode_hold0/24, final6/8 modes withHQ1.0. Broader sources and scorer independently verified. |
 | API-RP9: disagreement-driven particle exploration | NOT_RUN | — | NOT_RUN | — | Cheap screens first. **Rejected:** intensity7/24, final suffix1; mode_hold0/24, final6/8 modes. New private particle RNG is checkpointed; separate initial stream-hash receipt is incomplete. |
 | API-RP10: constant observation noise, reversible precision and implicit response | NOT_RUN | — | NOT_RUN | — | **Rejected:** intensity **FAIL4/24**, suffix1; mode_hold **FAIL0/24**, final7/8. Own sealed source,93 corrected regression passes; original test failures preserved. |
+| API-RP11: all-pairs adversarial averaging | NOT_RUN | — | NOT_RUN | — | **Rejected:** intensity **FAIL4/24**, suffix1; mode_hold **FAIL0/24**, final6/8. Exact own package and frozen host verified. |
+| API-RP12: equal weight per observed particle in adversarial losses | NOT_RUN | — | NOT_RUN | — | **Rejected:** mode_hold **FAIL0/24**, final7/8. Intensity **FAIL4/24**, final4 from525, no later miss; one check short of the frozen final5 rule, kept separately from no-coverage failure. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
 stationary runs end at 7500. Passing means all eight modes and HQ ≥ .90, sampled
@@ -108,11 +111,27 @@ verifies public factory ownership and exact single-run parity with the diagnosti
 
 ## Ongoing work
 
-**C13-R1 is the remaining early lead; no candidate is qualified.**
+**DV16 is the current lead; no candidate is qualified.**
+It now has **11/22 independently verified broader passes**: all six vectors,
+all four images and small-particle mode_hold. The remaining tasks are three
+native100 distributions and eight custom/auxiliary API routes.
+DV16 adds learned correlation to its local latent shapes. Its own small-particle
+test passes11/24, with all11 checks passing from700; package, initialization and
+all1200 caller transactions were independently verified. Its own intensity8/24/final6, uneven-distribution15/24/final15 and
+bars19/24/final19, blobs14/24/final12 and stripes21/24/final21 passes are also
+independently verified. It has now completed its own recovery ring: first arrival580,
+183/183 original-target checks; shifted arrival+290, one early2700 miss, then190
+straight passes from2710. Ring source, all updates and saved states verify; its controller closes at1200,
+reopens at2406 and closes again at3126. Long stability and remaining broader/API
+qualification remain outstanding.
+
+**C13-R1 is rejected by small-particle coverage**, despite its strong recovery
+and exact checkpoint tests. Its own mode_hold fails0/24, final7/8 modes withHQ1;
+all source, initialization and caller batches were independently verified.
 It reaches the changed ring target after130 updates and then passes208/208 checks.
 Initial acquisition has early misses through340, then206 consecutive passes from350.
-Its own intensity image passes11/24 with a final11-check suffix. Broader quality,
-long retention/repeated changes and complete API qualification remain outstanding.
+Its own intensity image passes11/24 with a final11-check suffix. Remaining
+quality/long qualification is unrun after the separate coverage failure.
 
 **DV15 is rejected by separate image and small-particle quality failures.**
 Its original uneven-distribution test remains FAIL4/24, final suffix2 at1200.

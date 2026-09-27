@@ -561,18 +561,18 @@
       "workers": 1
     },
     {
-      "lane": "reversible_precision",
-      "pid": 1735840,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T004741Z-1735831/reversible_precision/20260927T004742Z-1735840",
+      "lane": "data_drift_mobility",
+      "pid": 1744511,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511",
       "status": "RUNNING",
       "model": "gpt-6-astra",
       "reasoning_effort": "max",
       "workers": 1
     },
     {
-      "lane": "data_drift_mobility",
-      "pid": 1744511,
-      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511",
+      "lane": "reversible_precision",
+      "pid": 1793929,
+      "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T012238Z-1793878/reversible_precision/20260927T012238Z-1793929",
       "status": "RUNNING",
       "model": "gpt-6-astra",
       "reasoning_effort": "max",
@@ -612,7 +612,7 @@
       "required_suffix": 5,
       "report": "reports/toy100/continuous-api-search/broader-results.json"
     },
-    "strongest_active_candidate": "API-C13-R1",
+    "strongest_active_candidate": "API-DV16",
     "api_c6": {
       "single_shift": "PASS",
       "initial_arrival": 590,
@@ -740,7 +740,7 @@
       "required_min_eigen_ratio": 0.15
     },
     "survivors": [
-      "API-C13-R1"
+      "API-DV16"
     ],
     "api_dv8": {
       "single_shift_after_arrival": "171/190",
@@ -913,7 +913,7 @@
       "qualified": false
     },
     "api_c13_r1": {
-      "status": "OWN_RING_COMPLETE_BROADER_QUALIFICATION",
+      "status": "REJECTED_BROADER_QUALITY",
       "image": "OWN_PASS_11_OF_24_SUFFIX_11",
       "image_field_evaluations": 8752,
       "image_converged_updates": 99,
@@ -932,7 +932,12 @@
       "terminal_independent_audit": "VERIFIED",
       "ring_field_evaluations": 73594,
       "ring_converged_steps": 3,
-      "ring_fallback_steps": 4597
+      "ring_fallback_steps": 4597,
+      "own_checkpoint": "VERIFIED_EXACT_1600_TO_1800_FULL_STATE_AND_200_UPDATE_TRACES",
+      "mode_hold": "VERIFIED_FAIL_0_OF_24_FINAL_7_OF_8",
+      "mode_hold_seconds": 413.2331,
+      "mode_hold_fields": 19090,
+      "long": "NOT_RUN_AFTER_BROADER_FAILURE"
     },
     "k3p_mode_hold_reference": {
       "status": "COMPLETE_INDEPENDENTLY_VERIFIED",
@@ -980,7 +985,59 @@
       "final_modes": 7,
       "ring": "NOT_RUN_AFTER_CHEAP_FAILURE",
       "qualified": false
+    },
+    "api_rp11": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "image": "FAIL_4_OF_24_SUFFIX_1",
+      "mode_hold": "FAIL_0_OF_24",
+      "final_modes": 6,
+      "ring": "NOT_RUN_AFTER_CHEAP_FAILURE",
+      "qualified": false
+    },
+    "api_rp12": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "image": "FAIL_4_OF_24_SUFFIX_4",
+      "mode_hold": "FAIL_0_OF_24",
+      "final_modes": 7,
+      "ring": "NOT_RUN_AFTER_CHEAP_FAILURE",
+      "qualified": false
+    },
+    "api_dv16": {
+      "status": "OWN_EARLY_QUALITY_PASSES_FURTHER_QUALIFICATION",
+      "mode_hold": "VERIFIED_PASS_11_OF_24_SUFFIX_11",
+      "mode_hold_first_arrival": 700,
+      "intensity": "VERIFIED_PASS_8_OF_24_SUFFIX_6",
+      "unequal_mass": "VERIFIED_PASS_15_OF_24_SUFFIX_15",
+      "qualified": false,
+      "mechanism": "LEARNED_BOUNDED_RANK_ONE_LATENT_CORRELATION",
+      "bars": "VERIFIED_PASS_19_OF_24_SUFFIX_19",
+      "broader_passes": 11,
+      "initial_arrival": 580,
+      "initial_retention": "183/183",
+      "changed_arrival_delay": 290,
+      "changed_retention": "191/192",
+      "changed_early_miss": 2700,
+      "changed_final_suffix": 190,
+      "ring_independent_audit": "VERIFIED",
+      "blobs": "VERIFIED_PASS_14_OF_24_SUFFIX_12",
+      "stripes": "VERIFIED_PASS_21_OF_24_SUFFIX_21",
+      "controller_events": [
+        "CLOSE_1200",
+        "REOPEN_2406",
+        "CLOSE_3126"
+      ],
+      "vector_passes": 6,
+      "image_passes": 4,
+      "remaining_broader": [
+        "3_NATIVE100",
+        "8_CUSTOM_AUXILIARY"
+      ],
+      "unequal_width": "VERIFIED_PASS_19_OF_24_SUFFIX_19",
+      "two_broad": "VERIFIED_PASS_21_OF_24_SUFFIX_21",
+      "anisotropic": "VERIFIED_PASS_21_OF_24_SUFFIX_21",
+      "overlap": "VERIFIED_PASS_24_OF_24",
+      "spiral": "VERIFIED_PASS_24_OF_24"
     }
   },
-  "observed_utc": "2026-09-27T01:13:52.662556+00:00"
+  "observed_utc": "2026-09-27T01:23:50.294937+00:00"
 }

@@ -1,0 +1,189 @@
+{
+  "candidate": "API-DV16",
+  "gate": "broader_img_bars4",
+  "status": "PASS",
+  "seconds": 11.13346043182537,
+  "metrics": {
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 19,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 19,
+      "first_pass_step": 150,
+      "stable_from_step": 150,
+      "stable_from_seconds": null,
+      "confirmed_step": 250,
+      "confirmed_seconds": null
+    },
+    "final": {
+      "step": 600,
+      "modes": 4,
+      "hq": 1.0,
+      "mean_rmse": 0.030176417902112007,
+      "quality_mode_fractions": [
+        0.21875,
+        0.28125,
+        0.21875,
+        0.28125
+      ],
+      "mode_fractions": [
+        0.21875,
+        0.28125,
+        0.21875,
+        0.28125
+      ],
+      "distribution_tv": 0.0625,
+      "ema": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.03543844074010849,
+        "quality_mode_fractions": [
+          0.21875,
+          0.28125,
+          0.1875,
+          0.28125
+        ],
+        "mode_fractions": [
+          0.21875,
+          0.28125,
+          0.21875,
+          0.28125
+        ],
+        "distribution_tv": 0.0625
+      }
+    },
+    "critic_memory": {
+      "anchor_min_decay": 0.9,
+      "lr_max": 0.0042289625,
+      "lr_last": 0.00033049489870475896,
+      "anchor_started": false,
+      "calls": 600,
+      "observed_steps": 600,
+      "last_sur": 0.49318963289260864,
+      "sur_hist": [],
+      "sur_base": null,
+      "w": 1.0,
+      "low_streak": 0,
+      "alpha": 0.0,
+      "last_ratio": null,
+      "ema_updates": 0,
+      "ema_skips": 0,
+      "ema_reseeds": 0,
+      "formulation": "ka2"
+    },
+    "policy": {
+      "width_pair": {
+        "forward_gradient_rms": 0.0008954418590292335,
+        "reverse_gradient_rms": 0.0004003461799584329,
+        "average_gradient_rms": 0.0005825556581839919,
+        "shear_gradient_rms": 0.00019196349603589624
+      },
+      "latent_applications": [
+        {
+          "width_min": 0.48954182863235474,
+          "width_mean": 0.689156711101532,
+          "width_max": 1.1612012386322021,
+          "perturbation_rms": 0.4097472131252289,
+          "shear_norm_max": 0.537693440914154
+        },
+        {
+          "width_min": 0.48954182863235474,
+          "width_mean": 0.6896549463272095,
+          "width_max": 1.1612012386322021,
+          "perturbation_rms": 0.40127331018447876,
+          "shear_norm_max": 0.537693440914154
+        }
+      ],
+      "latent_bandwidth": [
+        0.6534919142723083,
+        0.9069392681121826,
+        0.7671725749969482,
+        0.7013221979141235,
+        0.6838038563728333,
+        0.6844619512557983,
+        0.8367440104484558,
+        0.7184309959411621
+      ],
+      "data_memory": 0.0,
+      "payoff_error": 0.0625462722511012,
+      "game_trust": 1.0,
+      "game_ratio": 1.0,
+      "variant": "dv16",
+      "mobility": 0.06875431849711122,
+      "alignment": 0.06886789533664578,
+      "data_score": 1.072440505027771,
+      "data_drive": 0.0,
+      "last_cosine": 0.5287677049636841,
+      "updates": 600,
+      "reopens": 0,
+      "closed": true
+    },
+    "updates": 600,
+    "effective_recipe": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 8,
+      "num_particles": 32,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 32,
+      "total_steps": null,
+      "continuous_policy": "dv16",
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.0,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0
+    },
+    "optimizer_classes": [
+      "K3PGeneratorAdam",
+      "KA2CriticAdam"
+    ],
+    "controller_class": "DataDriftController"
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-bars"
+}

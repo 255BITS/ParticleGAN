@@ -1,0 +1,12 @@
+{
+  "initial.json": "10ff07917053c4da26e60ad844451f2bde72997c4810ea703b4832eb1b995e9d",
+  "batch-receipts.jsonl": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+  "learning-rates.jsonl": "f1f180cd62a1c2d4a0228be05d8cf99e2f652cc67b922c6ecdeea43f3860aa97",
+  "declaration.json": "43f43d17c198f6af15cb6c16213079846438aec5a0a1bd9489180dfa25d3f1e9",
+  "result.json": "e13f3b8688d78b1f6f8e21fb5be8d7dc32e7ddd49a0631e760e45df03cfcc0c7",
+  "source.zip": "ba42b3872670296006e0729b64b15838133e75ef46cc876feb2b8746455c88f8",
+  "metrics.jsonl": "6bfefb3e97ab486332f9f6ce410c7614750a475e368d2e48d9eb5d0f46583e77",
+  "final-state.pt": "a035639cfaf20110be83225d9cc587e15a0f93fed9ea235c68f5071ddc1b7bad",
+  "runtime.json": "a8136d09e5001ca9185253acec5125fef6580ef9b8fd9f47407111f45985eb72",
+  "initial-state.pt": "71b00a43a932fb243d1c5270ba74ad000380f9369a1c1fb3b01d0eabf2a8e48b"
+}

@@ -1,0 +1,13 @@
+DV16 source and first mode_hold audit
+
+Own mode_hold PASS11/24, final11-check suffix700–1200, no later miss; final8modes/HQ0.94091796875. This is a new-mechanism result. No DV15 ring, broader, long-age or replay pass transfers.
+
+The public library owns zero-initialized per-particle rank-one shear q alongside learned diagonal widths. Factory/optimizer/EMA/checkpoint routes include it; KA2's live controller binding includesDV16. The normalized shear preserves each coordinate variance1/3 in exact arithmetic while learning correlations. It uses the existing uniform samples and no new random draw. Ordinary G/z/D gradients remain from the positive sample; the existing paired opposite-sample pass averages gradients only for width/q. Full-step serial scope, native Adam and z-only direct damping remain. No target/horizon/quality signal or extra data-fitting loss is introduced; shape work/storage stays linear.
+
+All original G/D/z/EMA model values, private/global/caller RNG and frozen host/scorer match the audited initial fixture. New widths/shears start zero; all1200 real/latent batch hashes and accepted cursors match canonical history. Full24 observations and1200 rate/noise rows verify, including equal prior_z/width/shear rates. Nineteen native scalar Adam counters remainCPU; momentsCUDA. Final live/EMA shears are nonzero and finite. Same frozen data, latent and Gaussian-output observation streams are retained, with the previously declared independent candidate latent-noise stream.
+
+Receipt caveat: the run embeds the older generic host declaration; correct DV16 recipe, own14-file package seal and separate pretraining mechanism/source ZIP are cross-bound and copied into the new evidence directory. The host itself changes only candidate routing/seal and baseline-hash exclusion of the newly declared parameter. Recorded early CPU preflight failures were test-design mistakes (global real draw after checkpoint; then designated default evaluation RNG advancement); errors remain, started quality window finished, no learner fix occurred. Corrected isolated-generator CPU contract passes, without implying own CUDA replay.
+
+The exact-real invertibility argument gives no uniform condition-number floor; arbitrarily large q and FP32 rounding could approach degeneracy. This is a portability/design caveat, not an observed current-host failure or new gate. Generic stateful/stochastic-module and factory transaction gaps remain. No executed-host blocker found.
+
+Lossless archive: evidence/api-dv16-mode_hold; ready entry: continuous-api-search/dv16-mode-hold-audit.json. Detailed hashes, learned values and source assessment: supervisor-audit/dv16-source-mode-hold-audit.json. No Torch, GPU, model/training/tests or active edits by auditor.

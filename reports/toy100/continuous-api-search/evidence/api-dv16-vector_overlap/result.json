@@ -1,0 +1,112 @@
+{
+  "candidate": "API-DV16",
+  "gate": "broader_vector_overlap",
+  "status": "PASS",
+  "seconds": 20.034867644077167,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.048656561457721605,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.1313434385422784
+        },
+        {
+          "metric": "mean_error",
+          "value": 0.05797659233212471,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.09202340766787528
+        },
+        {
+          "metric": "covariance_error",
+          "value": 0.048739902675151825,
+          "op": "<=",
+          "threshold": 0.45,
+          "status": "PASS",
+          "margin": 0.4012600973248482
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 24,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 24,
+        "first_pass_step": 50,
+        "stable_from_step": 50,
+        "stable_from_seconds": null,
+        "confirmed_step": 250,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.20833333333333334
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.048656561457721605,
+      "mean_error": 0.05797659233212471,
+      "covariance_error": 0.048739902675151825,
+      "target_scale": 0.8509407043457031,
+      "sample_count": 4096,
+      "ema": {
+        "sw1_normalized": 0.038390215548496205,
+        "mean_error": 0.033525481820106506,
+        "covariance_error": 0.05944262072443962,
+        "target_scale": 0.8509407043457031,
+        "sample_count": 4096
+      }
+    },
+    "policy": {
+      "width_pair": {
+        "forward_gradient_rms": 3.2051326570581296e-07,
+        "reverse_gradient_rms": 3.3993720194303023e-07,
+        "average_gradient_rms": 6.662550333658146e-08,
+        "shear_gradient_rms": 6.228363957916372e-08
+      },
+      "latent_applications": [
+        {
+          "width_min": 0.1062391847372055,
+          "width_mean": 0.13800528645515442,
+          "width_max": 0.17551521956920624,
+          "perturbation_rms": 0.07909568399190903,
+          "shear_norm_max": 0.23128294944763184
+        },
+        {
+          "width_min": 0.10821350663900375,
+          "width_mean": 0.13716363906860352,
+          "width_max": 0.17278753221035004,
+          "perturbation_rms": 0.07901088148355484,
+          "shear_norm_max": 0.2624061703681946
+        }
+      ],
+      "latent_bandwidth": [
+        0.11532513052225113,
+        0.144357368350029,
+        0.1405351459980011,
+        0.13534829020500183
+      ],
+      "data_memory": 0.0,
+      "payoff_error": 0.00011854742506067226,
+      "game_trust": 0.6400250135751699,
+      "game_ratio": 1.7499592882869894,
+      "variant": "dv16",
+      "mobility": 0.002442362582785605,
+      "alignment": 0.9706739533351075,
+      "data_score": 1.0885924100875854,
+      "data_drive": 0.0,
+      "last_cosine": 0.9808825850486755,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-overlap"
+}

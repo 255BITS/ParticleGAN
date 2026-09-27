@@ -1,0 +1,350 @@
+{
+  "schema": 1,
+  "candidates": [
+    {
+      "candidate": "API-RP10",
+      "package_seal": "429604ffc7e8850824c0e4127c34376f7e8dc094b93eabcd53b89eca1c2525b2",
+      "tiny": {
+        "observations": 24,
+        "passing_observations": 0,
+        "first_arrival": null,
+        "passing_steps": [],
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "failing_observations_since_arrival": [],
+        "final_suffix_start": null,
+        "final_suffix_observations": 0,
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "minimum_hq": 0.003662109375,
+        "maximum_hq": 1.0,
+        "maximum_modes": 7,
+        "final": {
+          "step": 1200,
+          "modes": 7,
+          "n_modes": 8,
+          "hq": 1.0,
+          "cover": 0.875,
+          "effective_modes": 6.14341926574707,
+          "ema": {
+            "modes": 7,
+            "n_modes": 8,
+            "hq": 0.814208984375,
+            "cover": 0.875,
+            "effective_modes": 6.275671005249023
+          }
+        }
+      },
+      "image": {
+        "observations": 24,
+        "passing_observations": 4,
+        "first_arrival": 450,
+        "passing_steps": [
+          450,
+          525,
+          550,
+          600
+        ],
+        "observations_since_arrival": 7,
+        "passing_since_arrival": 4,
+        "failing_observations_since_arrival": [
+          475,
+          500,
+          575
+        ],
+        "final_suffix_start": 600,
+        "final_suffix_observations": 1,
+        "minimum_hq_since_arrival": 0.5625,
+        "minimum_modes_since_arrival": 1,
+        "minimum_hq": 0.03125,
+        "maximum_hq": 1.0,
+        "maximum_modes": 2,
+        "final": {
+          "step": 600,
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.035797275602817535,
+          "quality_mode_fractions": [
+            0.53125,
+            0.46875
+          ],
+          "mode_fractions": [
+            0.53125,
+            0.46875
+          ],
+          "distribution_tv": 0.03125,
+          "ema": {
+            "modes": 2,
+            "hq": 0.8125,
+            "mean_rmse": 0.048233628273010254,
+            "quality_mode_fractions": [
+              0.46875,
+              0.34375
+            ],
+            "mode_fractions": [
+              0.53125,
+              0.46875
+            ],
+            "distribution_tv": 0.03125
+          }
+        }
+      },
+      "precision_events": {
+        "mode_hold": [
+          {
+            "step": 1086,
+            "event": "close"
+          }
+        ],
+        "img_intensity2": []
+      },
+      "seconds": 133.22545186104253
+    },
+    {
+      "candidate": "API-RP11",
+      "package_seal": "41c381829294f3019316f4fdf7edd0cfcf7e975d7c20b4daa20fceb0ed0d8a31",
+      "tiny": {
+        "observations": 24,
+        "passing_observations": 0,
+        "first_arrival": null,
+        "passing_steps": [],
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "failing_observations_since_arrival": [],
+        "final_suffix_start": null,
+        "final_suffix_observations": 0,
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "minimum_hq": 0.002197265625,
+        "maximum_hq": 1.0,
+        "maximum_modes": 6,
+        "final": {
+          "step": 1200,
+          "modes": 6,
+          "n_modes": 8,
+          "hq": 0.990234375,
+          "cover": 0.75,
+          "effective_modes": 5.4943132400512695,
+          "ema": {
+            "modes": 2,
+            "n_modes": 8,
+            "hq": 0.271484375,
+            "cover": 0.25,
+            "effective_modes": 1.9050414562225342
+          }
+        }
+      },
+      "image": {
+        "observations": 24,
+        "passing_observations": 4,
+        "first_arrival": 450,
+        "passing_steps": [
+          450,
+          525,
+          550,
+          600
+        ],
+        "observations_since_arrival": 7,
+        "passing_since_arrival": 4,
+        "failing_observations_since_arrival": [
+          475,
+          500,
+          575
+        ],
+        "final_suffix_start": 600,
+        "final_suffix_observations": 1,
+        "minimum_hq_since_arrival": 0.6875,
+        "minimum_modes_since_arrival": 1,
+        "minimum_hq": 0.03125,
+        "maximum_hq": 1.0,
+        "maximum_modes": 2,
+        "final": {
+          "step": 600,
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.03335302323102951,
+          "quality_mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0,
+          "ema": {
+            "modes": 2,
+            "hq": 0.875,
+            "mean_rmse": 0.04700864106416702,
+            "quality_mode_fractions": [
+              0.46875,
+              0.40625
+            ],
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "distribution_tv": 0.0
+          }
+        }
+      },
+      "precision_events": {
+        "mode_hold": [],
+        "img_intensity2": []
+      },
+      "seconds": 157.60460934322327
+    },
+    {
+      "candidate": "API-RP12",
+      "package_seal": "d4fe5ac65a738cbd6e10168f4e4c970f653a5dd7dc1ff29102a5e1cad63aa63a",
+      "tiny": {
+        "observations": 24,
+        "passing_observations": 0,
+        "first_arrival": null,
+        "passing_steps": [],
+        "observations_since_arrival": 0,
+        "passing_since_arrival": 0,
+        "failing_observations_since_arrival": [],
+        "final_suffix_start": null,
+        "final_suffix_observations": 0,
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "minimum_hq": 0.0,
+        "maximum_hq": 1.0,
+        "maximum_modes": 7,
+        "final": {
+          "step": 1200,
+          "modes": 7,
+          "n_modes": 8,
+          "hq": 1.0,
+          "cover": 0.875,
+          "effective_modes": 6.70712423324585,
+          "ema": {
+            "modes": 7,
+            "n_modes": 8,
+            "hq": 0.8388671875,
+            "cover": 0.875,
+            "effective_modes": 6.570866107940674
+          }
+        }
+      },
+      "image": {
+        "observations": 24,
+        "passing_observations": 4,
+        "first_arrival": 525,
+        "passing_steps": [
+          525,
+          550,
+          575,
+          600
+        ],
+        "observations_since_arrival": 4,
+        "passing_since_arrival": 4,
+        "failing_observations_since_arrival": [],
+        "final_suffix_start": 525,
+        "final_suffix_observations": 4,
+        "minimum_hq_since_arrival": 0.90625,
+        "minimum_modes_since_arrival": 2,
+        "minimum_hq": 0.09375,
+        "maximum_hq": 1.0,
+        "maximum_modes": 2,
+        "final": {
+          "step": 600,
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.03622826188802719,
+          "quality_mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0,
+          "ema": {
+            "modes": 2,
+            "hq": 0.8125,
+            "mean_rmse": 0.04905707761645317,
+            "quality_mode_fractions": [
+              0.4375,
+              0.375
+            ],
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "distribution_tv": 0.0
+          }
+        }
+      },
+      "precision_events": {
+        "mode_hold": [
+          {
+            "step": 1147,
+            "event": "close"
+          }
+        ],
+        "img_intensity2": []
+      },
+      "seconds": 136.12013871688396
+    }
+  ],
+  "candidate_quality_seconds": 426.95019992114976,
+  "reference_seconds": 19.32361010904424,
+  "regressions": {
+    "rp10-regression": {
+      "tests": "93",
+      "failures": "6",
+      "errors": "0",
+      "skipped": "0",
+      "time": "31.184",
+      "timestamp": "2026-09-26T18:53:05.131180-06:00"
+    },
+    "rp10-regression-corrected": {
+      "tests": "93",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "30.835",
+      "timestamp": "2026-09-26T18:53:58.508997-06:00"
+    },
+    "rp11-regression": {
+      "tests": "96",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "31.186",
+      "timestamp": "2026-09-26T19:03:59.849416-06:00"
+    },
+    "rp12-regression": {
+      "tests": "100",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "30.536",
+      "timestamp": "2026-09-26T19:11:14.568037-06:00"
+    }
+  },
+  "owner_final_audit": {
+    "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/precision-wave4-final-receipts/final-artifact-source-initial-audit.json",
+    "sha256": "5c7c99429d9237c65d06f99c23b4ae489d5016ffec20aad119f40172d15f8f8b",
+    "claimed_status": "PASS",
+    "scope": "Owner CPU read-only state audit; independent raw-state audit confirms initial comparisons and final clocks separately."
+  },
+  "independent_raw_state_audit": {
+    "path": "/ml2/hypergan/gan-attempts/continuous-api-20260926/supervisor-audit/precision-wave4-raw-state-audit.json",
+    "sha256": "f15abc12cd03518298ec4d93026dd7cbb5b387e04a6952bea904161bfdb1266c"
+  },
+  "qualified_winner": null,
+  "not_run": [
+    "own public single_shift4600 ring/frozen control",
+    "stationary7500",
+    "delayed/repeated9000",
+    "uninterrupted30000 at fixed6000/7800/27000 changes",
+    "remaining22-task breadth",
+    "differing-evaluation-budget trained prefix",
+    "own cross-process CUDA continuation"
+  ],
+  "next_direction": "Diagnose missing shared-generator support during full-rate acquisition before another temporal controller; choose a distinct mechanism and preserve cheap gates, rather than repeating constant-noise, all-pairs/multiplicity loss, secant/residual or particle-noise variants. No implementation or experiment performed by this review."
+}

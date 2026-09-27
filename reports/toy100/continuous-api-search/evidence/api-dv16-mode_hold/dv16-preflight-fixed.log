@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16_preflight.py", line 17, in <module>
+    before=digest(t.state_dict());t.sample(100);t.sample(100,ema=True);assert digest(t.state_dict())==before
+                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,257 @@
+{
+  "created_utc": "2026-09-27T01:21:05.432101+00:00",
+  "status": "SOURCE_CONSISTENT; OWN_MODE_HOLD_PASS",
+  "source_zip_sha256": "ba42b3872670296006e0729b64b15838133e75ef46cc876feb2b8746455c88f8",
+  "pretraining_source_zip_sha256": "2076c76cdb15bb198585e52002c92be1ab2ddd7948270ba64107533fb8379ee5",
+  "all_source_artifact_hashes_match": true,
+  "package_matches_own_DV16_pretraining_seal": true,
+  "changed_from_DV15": [
+    "particlegan/ka2.py",
+    "particlegan/particle_prior.py",
+    "particlegan/continuous.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "recipe_resource_and_mechanism_differences": {
+    "z_dim": [
+      2,
+      4
+    ],
+    "num_particles": [
+      20000,
+      12
+    ],
+    "batch_size": [
+      2048,
+      128
+    ],
+    "continuous_policy": [
+      "dv15",
+      "dv16"
+    ]
+  },
+  "frozen_host_functions": {
+    "ring_means": true,
+    "sample_ring": true,
+    "diversity": true
+  },
+  "model_and_scorer_source_exact": true,
+  "mechanism": {
+    "candidate": "API-DV16",
+    "proposal": 1,
+    "parent": "exactimmutableDV15",
+    "status": "DECLARED_BEFORE_TRAINING",
+    "mechanism": "Learned bounded rank-one correlation for compact latent cells: v=ones/sqrt(d),u=q/sqrt(1+||q||\u00b2),epsilon_i=(e_i+u_i(v dot e))/sqrt(1+2u_i*v_i+u_i\u00b2),e uniform[-1,1]. Each coordinate retains variance1/3; fullrankI+uvT because||u||<1. q is per-particletrainable zero; original learned diagonalwidth multipliesepsilon. Shape parameters learn ONLY ordinaryRpGAN gradients using retained paired width pass extended toq. G/z/D stay ordinarydraw gradients.",
+    "motivation": "DV15 sixvector near-shape strengths, butmodehold0/24 while mobility>=.706 and intensityFAIL7/24/suffix3. Scalarprioracceleration cannotfix alreadyopenmodehold. Learn localcorrelation to align cells with generator sensitivity; hypothesis not targetfit or proven explanation.",
+    "state": "newprior.shape_shear NxD zeros without RNGdraw, nativeAdamgroup withprior role, EMAparameter; checkpoint all trainer/controller/RNG. No additionalcallerrealbatch or main/private RNGconsumption; opposite passclonespreGnoise andrestoresGbuffers/globalRNG asDV15.",
+    "live_ema": "same normalizedshear law using correspondinglive/EMA widths,centers,shear. No posthoctranslation.",
+    "noise": "input0/outputGaussian.029; compact marginalvariance1/3 unchanged; learnedcorrelationchangesjointlaw/support. Existingdrawseeds and hostdata/scoring preserved.",
+    "cost": "O(Nd+Bd) extra storage/work, no pairsearch; same extra G/critic forward/shape-onlybackward asDV15, oneadditionalnativeAdamgroup.",
+    "policy": "same normalizedrealtemporaldata evidence,separatepayoff/self-surprisecontrol,memorybinding,799callreferenceinitialization; no horizon,change,task,quality/labelinput or manualphase",
+    "protocol": "supervisor01:12 orderscheapmode_hold1200,intensity600,unequal_mass1200 first. Finisheverywindow. Advanceonmeasuredresults; coldAPIring4600 andownbars600 beforelongexpansion. Sharedstationary7500/delayed9000/30000 declarationunchanged.",
+    "failure_rule": "originalfrozen gates neverrewritten; no seed sweep or coefficientgrid; no borrowed passes; at mostDV16\u201318"
+  },
+  "source_assessment": {
+    "public_owner": "ParticlePrior owns q, recipe factory enables it, public optimizer factory gives separate native prior-role group, GANTrainer owns live/EMA sampling and paired shape gradients, live KA2 binding correct.",
+    "math": "u=q/sqrt(1+||q||\u00b2), v=ones/sqrt(d); each normalized coordinate has exact-real variance1/3 because Var(e_i+u_i v\u00b7e)=(1+2u_i*v_i+u_i\u00b2)/3. I+uvT is invertible for finite realq since||u||<1; normalization changes correlation, not marginal variance.",
+    "gradients": "Ordinary positive-sample G/z/D gradients retained; paired opposite latent perturbation averages only log_width/shape_shear gradients. Native optimizers each step once. No target-fitting objective.",
+    "RNG": "q zeros consume no RNG. Same private uniform draws; q transform deterministic. Pair uses copied pre-G private RNG, same output epsilon, no extra real or accepted stream draws. Public live/EMA use matching table widths/q.",
+    "horizon": "No new target/horizon/task/quality input; same normalized data/game controller and initial799-call KA2 bootstrap.",
+    "cost": "Adds NxD q parameters, EMA and native moment tensors; O(Nd+Bd) work/storage, same extra shape-only backward."
+  },
+  "initialization": {
+    "all_original_models_match": {
+      "G": true,
+      "D": true,
+      "prior": true,
+      "ema_G": true,
+      "ema_prior": true
+    },
+    "added_zero_widths_and_shear": true,
+    "lazy_native_optimizers": true,
+    "private_global_caller_streams_exact": true,
+    "initial_complete_digest_exact": true
+  },
+  "shared_stream": {
+    "all1200_batch_rows_exact_canonical": true,
+    "order": "D-real,D-latent,G-latent,G-real",
+    "caller_and_trainer_final_cursor_exact": true
+  },
+  "learned_shear": {
+    "prior": {
+      "raw_max_abs": 0.8999975919723511,
+      "max_normalized_shear_norm": 0.7792063361533951
+    },
+    "ema_prior": {
+      "raw_max_abs": 0.891514241695404,
+      "max_normalized_shear_norm": 0.7750903997460394
+    }
+  },
+  "native_CPU_scalar_steps": 19,
+  "derived": {
+    "status": "PASS",
+    "observations": 24,
+    "passing_observations": 11,
+    "passing_suffix": 11,
+    "first_pass_step": 700,
+    "maximum_modes": 8,
+    "max_hq": 0.94384765625,
+    "all_live": [
+      {
+        "step": 50,
+        "modes": 0,
+        "hq": 0.0
+      },
+      {
+        "step": 100,
+        "modes": 3,
+        "hq": 0.0068359375
+      },
+      {
+        "step": 150,
+        "modes": 6,
+        "hq": 0.040283203125
+      },
+      {
+        "step": 200,
+        "modes": 8,
+        "hq": 0.042724609375
+      },
+      {
+        "step": 250,
+        "modes": 6,
+        "hq": 0.058349609375
+      },
+      {
+        "step": 300,
+        "modes": 6,
+        "hq": 0.094482421875
+      },
+      {
+        "step": 350,
+        "modes": 5,
+        "hq": 0.086669921875
+      },
+      {
+        "step": 400,
+        "modes": 7,
+        "hq": 0.146728515625
+      },
+      {
+        "step": 450,
+        "modes": 6,
+        "hq": 0.0673828125
+      },
+      {
+        "step": 500,
+        "modes": 7,
+        "hq": 0.211181640625
+      },
+      {
+        "step": 550,
+        "modes": 8,
+        "hq": 0.6533203125
+      },
+      {
+        "step": 600,
+        "modes": 8,
+        "hq": 0.86767578125
+      },
+      {
+        "step": 650,
+        "modes": 8,
+        "hq": 0.8759765625
+      },
+      {
+        "step": 700,
+        "modes": 8,
+        "hq": 0.90380859375
+      },
+      {
+        "step": 750,
+        "modes": 8,
+        "hq": 0.90185546875
+      },
+      {
+        "step": 800,
+        "modes": 8,
+        "hq": 0.920654296875
+      },
+      {
+        "step": 850,
+        "modes": 8,
+        "hq": 0.9208984375
+      },
+      {
+        "step": 900,
+        "modes": 8,
+        "hq": 0.9296875
+      },
+      {
+        "step": 950,
+        "modes": 8,
+        "hq": 0.936279296875
+      },
+      {
+        "step": 1000,
+        "modes": 8,
+        "hq": 0.93310546875
+      },
+      {
+        "step": 1050,
+        "modes": 8,
+        "hq": 0.937744140625
+      },
+      {
+        "step": 1100,
+        "modes": 8,
+        "hq": 0.93408203125
+      },
+      {
+        "step": 1150,
+        "modes": 8,
+        "hq": 0.94384765625
+      },
+      {
+        "step": 1200,
+        "modes": 8,
+        "hq": 0.94091796875
+      }
+    ],
+    "final_live": {
+      "step": 1200,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.94091796875,
+      "cover": 1.0,
+      "effective_modes": 7.497217178344727
+    },
+    "seconds": 20.87926263688132
+  },
+  "preflight": {
+    "deviation": "mode_hold launch was queued before failed isolation assertion was inspected; started1200 window finishes unchanged",
+    "classification": "two test-design mistakes, not a silent learner fix: checkpointbefore real draw, then comparing fullstate afterdefaultsample consumes its designatedeval RNG",
+    "all_failures_retained": true,
+    "learner_package_unchanged_during_window": true,
+    "corrected_preflight": "explicit isolated evaluation generators and checkpoint after realtensorconstruction; execute sequentially aftermodehold"
+  },
+  "recorded_corrected_preflight": {
+    "candidate": "regression",
+    "gate": "dv16_shape_gradient_binding_restore_isolation",
+    "status": "PASS",
+    "seconds": 1.123414867091924,
+    "metrics": {
+      "checks": 7,
+      "scope": "CPU contracts only"
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16_preflight.py"
+  },
+  "receipt_caveat": "Own run ZIP retains generic DV15 host declaration; actual recipe/run identity is DV16. Separate pretraining sourceZIP/decl/package-seal cross-bound and archived to make full new mechanism reviewable.",
+  "limitations": [
+    "Invertibility proof is for finite real arithmetic, not a uniform condition-number bound; q may approach degeneracy at large magnitude and FP32 can round||u||to1. Observed values are retained, no manufactured gate.",
+    "Generator latent table remains rank2 and diagonal/rank-one shape only; arbitrary stochastic/stateful-module and nonzero critic-input-noise paired semantics remain unqualified.",
+    "Own ring, stationary, long/prefix and fresh-process CUDA continuation are not inherited from DV15.",
+    "Corrected recorded CPU contracts are not quality or CUDA replay evidence."
+  ],
+  "scope": "Read-only stdlib source/raw tensor metadata/score audit. No Torch, model, GPU, training or test execution."
+}

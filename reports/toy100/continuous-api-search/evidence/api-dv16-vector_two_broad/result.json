@@ -1,0 +1,170 @@
+{
+  "candidate": "API-DV16",
+  "gate": "broader_vector_two_broad",
+  "status": "PASS",
+  "seconds": 19.27058632299304,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.0661505860930332,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.11384941390696679
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.03955078125,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.11044921875
+        },
+        {
+          "metric": "hq",
+          "value": 0.974365234375,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.12436523437500002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.423693161457777,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.42630683854222295
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.9273184537887573,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.7773184537887573
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 21,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 21,
+        "first_pass_step": 200,
+        "stable_from_step": 200,
+        "stable_from_seconds": null,
+        "confirmed_step": 400,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.3333333333333333
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.0661505860930332,
+      "mean_error": 0.08121504634618759,
+      "covariance_error": 0.05111358314752579,
+      "target_scale": 1.0601637363433838,
+      "sample_count": 4096,
+      "mass_tv": 0.03955078125,
+      "min_mass_ratio": 0.9208984375,
+      "hq": 0.974365234375,
+      "component_covariance_error": 0.423693161457777,
+      "component_covariance_errors": [
+        0.08167549222707748,
+        0.7657108306884766
+      ],
+      "component_min_eigen_ratio": 0.9273184537887573,
+      "component_mass": [
+        0.53955078125,
+        0.46044921875
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2210,
+        1886
+      ],
+      "ema": {
+        "sw1_normalized": 0.062094568291763075,
+        "mean_error": 0.07344934344291687,
+        "covariance_error": 0.03870764374732971,
+        "target_scale": 1.0601637363433838,
+        "sample_count": 4096,
+        "mass_tv": 0.042236328125,
+        "min_mass_ratio": 0.91552734375,
+        "hq": 0.971435546875,
+        "component_covariance_error": 0.413278266787529,
+        "component_covariance_errors": [
+          0.06012001633644104,
+          0.7664365172386169
+        ],
+        "component_min_eigen_ratio": 0.9112535119056702,
+        "component_mass": [
+          0.542236328125,
+          0.457763671875
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2221,
+          1875
+        ]
+      }
+    },
+    "policy": {
+      "width_pair": {
+        "forward_gradient_rms": 3.1578449579683365e-06,
+        "reverse_gradient_rms": 3.944402124034241e-06,
+        "average_gradient_rms": 2.3706384126853663e-06,
+        "shear_gradient_rms": 2.717816187214339e-06
+      },
+      "latent_applications": [
+        {
+          "width_min": 0.0976649671792984,
+          "width_mean": 0.13019531965255737,
+          "width_max": 0.1896553486585617,
+          "perturbation_rms": 0.07459550350904465,
+          "shear_norm_max": 0.4567548930644989
+        },
+        {
+          "width_min": 0.09608414024114609,
+          "width_mean": 0.13086017966270447,
+          "width_max": 0.16669204831123352,
+          "perturbation_rms": 0.07553178817033768,
+          "shear_norm_max": 0.4586224853992462
+        }
+      ],
+      "latent_bandwidth": [
+        0.12474936246871948,
+        0.14350970089435577,
+        0.13971419632434845,
+        0.13443893194198608
+      ],
+      "data_memory": 0.0,
+      "payoff_error": 0.006875308337663077,
+      "game_trust": 1.0,
+      "game_ratio": 0.9137625830334436,
+      "variant": "dv16",
+      "mobility": 0.0027209567247754194,
+      "alignment": 0.27380259397181866,
+      "data_score": 1.0688060522079468,
+      "data_drive": 0.0,
+      "last_cosine": 0.5758726596832275,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-two-broad"
+}

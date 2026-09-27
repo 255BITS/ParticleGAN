@@ -1,0 +1,242 @@
+{
+  "runs": {
+    "k3p-mode_hold": {
+      "artifact_hashes": 14,
+      "source_hashes": 12,
+      "observations": 24,
+      "updates": 1200,
+      "package_sha256": "0f0af56822e8b9c5b652ad5e0b0c581aa78aedf07bae632fda58cb94fef8a3b3",
+      "matched_caller_batch_cursor_receipts": 1200
+    },
+    "rp10-mode_hold": {
+      "artifact_hashes": 11,
+      "source_hashes": 77,
+      "observations": 24,
+      "updates": 1200,
+      "package_sha256": "44cba2a8b93681c6e1a072bc623a868402c79281c7e01d697a7019ff4fdf24d7",
+      "initial_parity_with": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold",
+      "initial_models_optimizer_policy_global_common_rng_equal": true,
+      "initial_stream_hashes": {
+        "latent_generator": "ce4442ae0b5bf865c53acc540a934fcdeb6f2e8ac2cc1d994fe6b853ff478292",
+        "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+        "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+        "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+      },
+      "native_adam_clocks": [
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200
+      ],
+      "matched_caller_batch_cursor_receipts": 1200
+    },
+    "rp10-img_intensity2": {
+      "artifact_hashes": 10,
+      "source_hashes": 55,
+      "observations": 24,
+      "updates": 600,
+      "package_sha256": "44cba2a8b93681c6e1a072bc623a868402c79281c7e01d697a7019ff4fdf24d7",
+      "initial_parity_with": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-img_intensity2",
+      "initial_models_optimizer_policy_global_common_rng_equal": true,
+      "initial_stream_hashes": {
+        "latent_generator": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+        "penalty_generator": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+        "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+        "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+      },
+      "native_adam_clocks": [
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600
+      ]
+    },
+    "rp11-mode_hold": {
+      "artifact_hashes": 11,
+      "source_hashes": 77,
+      "observations": 24,
+      "updates": 1200,
+      "package_sha256": "fda2e07f286cf5a27af3a497b1b9ab871cbea216d35a16096567db28abf213ed",
+      "initial_parity_with": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold",
+      "initial_models_optimizer_policy_global_common_rng_equal": true,
+      "initial_stream_hashes": {
+        "latent_generator": "ce4442ae0b5bf865c53acc540a934fcdeb6f2e8ac2cc1d994fe6b853ff478292",
+        "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+        "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+        "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+      },
+      "native_adam_clocks": [
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200
+      ],
+      "matched_caller_batch_cursor_receipts": 1200
+    },
+    "rp11-img_intensity2": {
+      "artifact_hashes": 10,
+      "source_hashes": 55,
+      "observations": 24,
+      "updates": 600,
+      "package_sha256": "fda2e07f286cf5a27af3a497b1b9ab871cbea216d35a16096567db28abf213ed",
+      "initial_parity_with": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-img_intensity2",
+      "initial_models_optimizer_policy_global_common_rng_equal": true,
+      "initial_stream_hashes": {
+        "latent_generator": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+        "penalty_generator": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+        "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+        "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+      },
+      "native_adam_clocks": [
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600
+      ]
+    },
+    "rp12-mode_hold": {
+      "artifact_hashes": 11,
+      "source_hashes": 77,
+      "observations": 24,
+      "updates": 1200,
+      "package_sha256": "80040602da252df7631b01d5080607f4cc3854e3dace56a19af3b24a52c85df4",
+      "initial_parity_with": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-mode_hold",
+      "initial_models_optimizer_policy_global_common_rng_equal": true,
+      "initial_stream_hashes": {
+        "latent_generator": "ce4442ae0b5bf865c53acc540a934fcdeb6f2e8ac2cc1d994fe6b853ff478292",
+        "penalty_generator": "a894132fc9012156054fa356aa8faf2c12a858ea96d4649cdb43e86de62338aa",
+        "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+        "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+      },
+      "native_adam_clocks": [
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200,
+        1200
+      ],
+      "matched_caller_batch_cursor_receipts": 1200
+    },
+    "rp12-img_intensity2": {
+      "artifact_hashes": 10,
+      "source_hashes": 55,
+      "observations": 24,
+      "updates": 600,
+      "package_sha256": "80040602da252df7631b01d5080607f4cc3854e3dace56a19af3b24a52c85df4",
+      "initial_parity_with": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp9-img_intensity2",
+      "initial_models_optimizer_policy_global_common_rng_equal": true,
+      "initial_stream_hashes": {
+        "latent_generator": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+        "penalty_generator": "97bcdf7bb384723883ae9b97fc22476b6efa00f76f79af83e7b023da6b843ce6",
+        "eval_generator": "661189c730dfe6ae13d59db8f7dbfc14c9eadd0e5f3d9b28e14d8b0335ed1c00",
+        "noise_generator": "b6ef5ddb648638ef8a64bf6575bc79a2032564715da6fda8542ccdfe60697be9"
+      },
+      "native_adam_clocks": [
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600,
+        600
+      ]
+    }
+  },
+  "same_package_within_candidate": {
+    "PUBLIC-K3P-v0.8.0": {
+      "gates": 1,
+      "package_files": 12,
+      "equal": true
+    },
+    "API-RP10": {
+      "gates": 2,
+      "package_files": 15,
+      "equal": true
+    },
+    "API-RP11": {
+      "gates": 2,
+      "package_files": 15,
+      "equal": true
+    },
+    "API-RP12": {
+      "gates": 2,
+      "package_files": 15,
+      "equal": true
+    }
+  },
+  "limits": [
+    "CPU audit of saved states is not a new CUDA continuation or evaluator-budget-prefix test.",
+    "Tiny canonical CUDA construction and image CPU construction are separate frozen hosts."
+  ],
+  "artifact_hashes": 77,
+  "source_hashes": 408,
+  "status": "PASS"
+}

@@ -1,0 +1,420 @@
+{
+  "broader_entry": {
+    "id": "api-dv16-img_stripes2",
+    "candidate": "API-DV16",
+    "protocol": "frozen22_img_stripes2",
+    "scope": "PUBLIC_API",
+    "recorded_utc": "2026-09-27T01:23:36.457708+00:00",
+    "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes",
+    "source_repo": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo",
+    "archived_source_verified": true,
+    "independent_evaluator_audit": "VERIFIED_MEASURED_PASS",
+    "result": {
+      "candidate": "API-DV16",
+      "gate": "broader_img_stripes2",
+      "status": "PASS",
+      "seconds": 10.557902048807591,
+      "metrics": {
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 21,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": null,
+          "confirmed_step": 200,
+          "confirmed_seconds": null
+        },
+        "final": {
+          "step": 600,
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.029563479125499725,
+          "quality_mode_fractions": [
+            0.4375,
+            0.5625
+          ],
+          "mode_fractions": [
+            0.4375,
+            0.5625
+          ],
+          "distribution_tv": 0.0625,
+          "ema": {
+            "modes": 2,
+            "hq": 1.0,
+            "mean_rmse": 0.030321389436721802,
+            "quality_mode_fractions": [
+              0.4375,
+              0.5625
+            ],
+            "mode_fractions": [
+              0.4375,
+              0.5625
+            ],
+            "distribution_tv": 0.0625
+          }
+        },
+        "critic_memory": {
+          "anchor_min_decay": 0.9,
+          "lr_max": 0.0042289625,
+          "lr_last": 0.0002715504228522951,
+          "anchor_started": false,
+          "calls": 600,
+          "observed_steps": 600,
+          "last_sur": 0.7324495315551758,
+          "sur_hist": [],
+          "sur_base": null,
+          "w": 1.0,
+          "low_streak": 0,
+          "alpha": 0.0,
+          "last_ratio": null,
+          "ema_updates": 0,
+          "ema_skips": 0,
+          "ema_reseeds": 0,
+          "formulation": "ka2"
+        },
+        "policy": {
+          "width_pair": {
+            "forward_gradient_rms": 7.439861292368732e-06,
+            "reverse_gradient_rms": 5.034966761741089e-06,
+            "average_gradient_rms": 4.596246526489267e-06,
+            "shear_gradient_rms": 5.799618520541117e-06
+          },
+          "latent_applications": [
+            {
+              "width_min": 0.5252952575683594,
+              "width_mean": 0.6673541069030762,
+              "width_max": 0.8785039782524109,
+              "perturbation_rms": 0.39490577578544617,
+              "shear_norm_max": 0.3880402445793152
+            },
+            {
+              "width_min": 0.4872928559780121,
+              "width_mean": 0.6555148959159851,
+              "width_max": 0.8785039782524109,
+              "perturbation_rms": 0.37257084250450134,
+              "shear_norm_max": 0.3813389539718628
+            }
+          ],
+          "latent_bandwidth": [
+            0.6423695087432861,
+            0.7948219776153564,
+            0.7506275177001953,
+            0.7331029772758484,
+            0.6875585913658142,
+            0.6468073725700378,
+            0.8167492151260376,
+            0.6365891098976135
+          ],
+          "data_memory": 0.0,
+          "payoff_error": 0.04258864805423448,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "variant": "dv16",
+          "mobility": 0.05455584451426499,
+          "alignment": 0.2720773536855528,
+          "data_score": 0.9786350727081299,
+          "data_drive": 0.0,
+          "last_cosine": 0.2872043251991272,
+          "updates": 600,
+          "reopens": 0,
+          "closed": true
+        },
+        "updates": 600,
+        "effective_recipe": {
+          "name": "ka2",
+          "model": "gan",
+          "z_dim": 8,
+          "num_particles": 32,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 32,
+          "total_steps": null,
+          "continuous_policy": "dv16",
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "prior_reg": 0.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "direct_particle_gain": true,
+          "d_guard_ratio": 5.0,
+          "d_guard_min_steps": 200,
+          "latent_damping_max_rate": 0.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "input_noise_std": 0.0,
+          "input_noise_anneal_end": 0.1,
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.0,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizer_classes": [
+          "K3PGeneratorAdam",
+          "KA2CriticAdam"
+        ],
+        "controller_class": "DataDriftController"
+      },
+      "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes"
+    },
+    "derived": {
+      "status": "PASS",
+      "observations": 24,
+      "passing_observations": 21,
+      "passing_suffix": 21,
+      "first_pass_step": 100,
+      "stable_from_step": 100,
+      "every_miss_after_first": [],
+      "passing_steps": [
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "failing_steps": [
+        25,
+        50,
+        75
+      ],
+      "final_live": {
+        "step": 600,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.029563479125499725,
+        "quality_mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "distribution_tv": 0.0625
+      },
+      "seconds": 10.557902048807591
+    },
+    "source_and_initialization_audit": {
+      "source_zip_sha256": "fb3fc877499b16e97674068b6b6e410180a862645d989437dd38baf6dbe699e7",
+      "unchanged14_file_DV16_package": true,
+      "unchanged_host_scorer_and_helpers": {
+        "benchmarks/__init__.py": true,
+        "benchmarks/gan_v3.py": true,
+        "benchmarks/learned_lr_evaluation.py": true,
+        "benchmarks/legacy/__init__.py": true,
+        "benchmarks/legacy/gan_loss.py": true,
+        "benchmarks/legacy/grad_regularizers.py": true,
+        "benchmarks/legacy/locked_shared.py": true,
+        "benchmarks/legacy/recipe.py": true,
+        "benchmarks/locked_shared/__init__.py": true,
+        "benchmarks/locked_shared/baseline.py": true,
+        "benchmarks/locked_shared/hosts/__init__.py": true,
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": true,
+        "benchmarks/locked_shared/hosts/cover_leftover.py": true,
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": true,
+        "benchmarks/locked_shared/hosts/residual_student.py": true,
+        "benchmarks/locked_shared/hosts/unipolar.py": true,
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": true,
+        "benchmarks/locked_shared/mlp.py": true,
+        "benchmarks/locked_shared/mode_hold.py": true,
+        "benchmarks/locked_shared/observation.py": true,
+        "benchmarks/locked_shared/trajectory.py": true,
+        "benchmarks/locked_shared/two_pole.py": true,
+        "benchmarks/smart_descent/__init__.py": true,
+        "benchmarks/smart_descent/controller.py": true,
+        "benchmarks/smart_descent/evaluate.py": true,
+        "benchmarks/smart_descent/study.py": true,
+        "benchmarks/toy100/__init__.py": true,
+        "benchmarks/toy100/device.py": true,
+        "benchmarks/toy100/models.py": true,
+        "benchmarks/toy100/problems.py": true,
+        "benchmarks/transfer_suite/__init__.py": true,
+        "benchmarks/transfer_suite/image_tasks.py": true,
+        "benchmarks/transfer_suite/plans/default_comparison.json": true,
+        "reports/data-drift-api/frozen-image-initial.json": true,
+        "reports/data-drift-api/remaining-images-protocol.json": true
+      },
+      "recipe_resource_differences": {
+        "z_dim": [
+          2,
+          8
+        ],
+        "num_particles": [
+          20000,
+          32
+        ],
+        "batch_size": [
+          2048,
+          32
+        ],
+        "continuous_policy": [
+          "dv15",
+          "dv16"
+        ]
+      },
+      "initialization": {
+        "frozen_original_model_hashes": true,
+        "zero_added_widths": true,
+        "original_and_width_models_RNG_exact_DV15_bars": true,
+        "added_zero_shear": true,
+        "shared_global_data_latent_penalty_stream_saved": true
+      },
+      "all_manifest_hashes_match": true,
+      "native_CPU_scalar_steps": 17,
+      "CUDA_optimizer_moments": true,
+      "caller_rng_saved": true,
+      "observations": 24,
+      "per_update_rows": 600,
+      "runtime": {
+        "torch": "2.13.0+cu126",
+        "cuda_version": "12.6",
+        "device": "NVIDIA RTX A6000",
+        "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "fp32": true,
+        "deterministic_algorithms": true,
+        "tf32_matmul": false,
+        "tf32_cudnn": false,
+        "threads": 1,
+        "serial_backward": true
+      }
+    },
+    "raw_checkpoints_retained": true,
+    "artifacts": {
+      "evidence/api-dv16-img_stripes2/artifact-sha256.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/artifact-sha256.json",
+        "original_sha256": "38578b8c905fd4b1ac47a17bc976f8d610f4dd0ef1d3c6bdd2ae43ce1fb34117",
+        "sha256": "38578b8c905fd4b1ac47a17bc976f8d610f4dd0ef1d3c6bdd2ae43ce1fb34117",
+        "original_bytes": 707,
+        "bytes": 707
+      },
+      "evidence/api-dv16-img_stripes2/declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/declaration.json",
+        "original_sha256": "1e5015587412718b1f184549f7871b2958bc7d0fb028299b3d08c5cb13205811",
+        "sha256": "1e5015587412718b1f184549f7871b2958bc7d0fb028299b3d08c5cb13205811",
+        "original_bytes": 9496,
+        "bytes": 9496
+      },
+      "evidence/api-dv16-img_stripes2/final-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/final-state.pt",
+        "original_sha256": "b8dd8910fd5f449e210d51fba29a1a7ce40cd913ac40ae55d96bbc0e39cac0cd",
+        "sha256": "b8dd8910fd5f449e210d51fba29a1a7ce40cd913ac40ae55d96bbc0e39cac0cd",
+        "original_bytes": 253605,
+        "bytes": 253605
+      },
+      "evidence/api-dv16-img_stripes2/initial-state.pt": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/initial-state.pt",
+        "original_sha256": "eabb6a63413f3ec6969b145f496866ee64e261d5ae9b7b1e5f9064c289a9375e",
+        "sha256": "eabb6a63413f3ec6969b145f496866ee64e261d5ae9b7b1e5f9064c289a9375e",
+        "original_bytes": 113605,
+        "bytes": 113605
+      },
+      "evidence/api-dv16-img_stripes2/initial.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/initial.json",
+        "original_sha256": "b93f5108cc05533544eff02cecd8dce703bdb6f18c666a1015e4ba309982c321",
+        "sha256": "b93f5108cc05533544eff02cecd8dce703bdb6f18c666a1015e4ba309982c321",
+        "original_bytes": 592,
+        "bytes": 592
+      },
+      "evidence/api-dv16-img_stripes2/learning-rates.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/learning-rates.jsonl",
+        "original_sha256": "97cc1bcdcb8e8293d77e32a4e9a07c832cc65fa74586a28797449c1aeee4766d",
+        "sha256": "11e9dc377bf7db90af889c5be5b4bdd83cbdfe2c52c4c5f03891855088e26d0f",
+        "original_bytes": 1159382,
+        "bytes": 241643
+      },
+      "evidence/api-dv16-img_stripes2/metrics.jsonl.gz": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/metrics.jsonl",
+        "original_sha256": "3991dfca5b24f04723b42a0da84efc7f895830388b43e4459903847bc4daa584",
+        "sha256": "8eb1bc1aa6f198fc843d97353551649f4227d5714d1226b5c0e8a325c13304b6",
+        "original_bytes": 8463,
+        "bytes": 979
+      },
+      "evidence/api-dv16-img_stripes2/result.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/result.json",
+        "original_sha256": "3b3c46c102c566330b2eea2c197ce419f009260996d081b3c325b36687bba5ee",
+        "sha256": "3b3c46c102c566330b2eea2c197ce419f009260996d081b3c325b36687bba5ee",
+        "original_bytes": 4791,
+        "bytes": 4791
+      },
+      "evidence/api-dv16-img_stripes2/source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-stripes/source.zip",
+        "original_sha256": "fb3fc877499b16e97674068b6b6e410180a862645d989437dd38baf6dbe699e7",
+        "sha256": "fb3fc877499b16e97674068b6b6e410180a862645d989437dd38baf6dbe699e7",
+        "original_bytes": 163471,
+        "bytes": 163471
+      },
+      "evidence/api-dv16-img_stripes2/pretraining-source.zip": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16-source.zip",
+        "original_sha256": "2076c76cdb15bb198585e52002c92be1ab2ddd7948270ba64107533fb8379ee5",
+        "sha256": "2076c76cdb15bb198585e52002c92be1ab2ddd7948270ba64107533fb8379ee5",
+        "original_bytes": 74430,
+        "bytes": 74430
+      },
+      "evidence/api-dv16-img_stripes2/mechanism-declaration.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16.json",
+        "original_sha256": "524c5581bfe57543980f219ea36da6207c465eae54c51b22e65bec19bf42dc97",
+        "sha256": "524c5581bfe57543980f219ea36da6207c465eae54c51b22e65bec19bf42dc97",
+        "original_bytes": 2175,
+        "bytes": 2175
+      },
+      "evidence/api-dv16-img_stripes2/package-seal.json": {
+        "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/candidate-packages/dv16.json",
+        "original_sha256": "4204ae09adf5d03bf5a40f13b2057735f68b1b55f66b2cc74b1bc0e04d33035b",
+        "sha256": "4204ae09adf5d03bf5a40f13b2057735f68b1b55f66b2cc74b1bc0e04d33035b",
+        "original_bytes": 1520,
+        "bytes": 1520
+      }
+    },
+    "scope_note": "Own sealed14-file DV16 public trainer on frozen host, thresholds and canonical initialization. Explicit candidate normalized rank-one compact latent perturbation plus output Gaussian.029 applies to train/live/EMA. Original fixed-budget status preserved; supervisor separately assesses settling/retention and supplementary evidence. No predecessor or sibling pass inherited."
+  },
+  "jsonl_lossless": true
+}

@@ -1,0 +1,9 @@
+# RP12 immutable source preflight
+
+RP12's declared equal sampled-particle estimator is implemented in the public package: Recipe.particle_weights normalizes inverse within-batch multiplicity, and GANLoss accepts those detached weights on the fake axis in both D and G all-pairs losses. Actual GANTrainer passes each player's existing sampled prior indices. These are learner-owned row IDs, not target labels. Penalty and prior-regularization sampling remain unchanged, as declared.
+
+The selector adds no RNG stream or learned state. New recipe fields participate in existing checkpoint compatibility checks; full-step serial context, two-field secant arithmetic, precision observation, preview state restoration and failure rollback remain intact. The only game_update change carries per-player distinct-count/effective-batch/min/max-weight diagnostics into the retained update record. No target, shift, score or evaluator budget is passed into this mechanism.
+
+Frozen package identity, all15 package hashes, all three public host recipe calls, evaluator protocol equality, and started-run source identity are verified in rp12-source-audit.json. Retained regression reports100 passes; no models or tests were executed by the auditor. Source review found no new blocker. Both fixed gates are now complete and FAIL: tiny0/24, image4/24suffix4 with requiredsuffix5. No predecessor score or cheap algebra test qualifies this package.
+
+The fixed hosts and API limitations are unchanged. All-pairs cost is quadratic in batch logits; no default-batch2048 cost has yet been measured. The unbiased uniform-row interpretation is specific to the declared uniform prior and row-wise host models; it does not claim to average the unchanged penalty or every stochastic component. Original source/regression receipts are pinned under supervisor-audit/rp12-source-audit-receipts.

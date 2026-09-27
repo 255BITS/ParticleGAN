@@ -1,0 +1,11 @@
+# C13-R1 completed ring audit
+
+The own 4,600-update ring window completed in 1,879.5926 seconds. After translation at update 2,400, first qualifying recovery occurred at 2,530 (+130); all 208 subsequent observations passed, with minimum HQ .938720703125. Final quality was all eight modes and HQ .99169921875. The frozen control passed none of its 220 translated observations.
+
+Cold acquisition was not flawless: first qualifying observation was 230, followed by 210/218 passes through 2,400. Misses occurred at 260 and 280–340, including HQ .02099609375 at 280. The later uninterrupted passing suffix starts at 350 and contains 206 observations. These first-arrival misses are retained separately from later stability. The completed 3,600 comparison prefix has the same +130 recovery and 108/108 subsequent passes.
+
+The transaction used 73,594 joint fields across 4,600 accepted updates: mean 15.9987, range 13–16. Only three updates met the per-role residual tolerance; 4,597 accepted the declared fallback and 4,469 chose an earlier evaluated trial. The cold prefix had zero converged updates. Selected residual ratios reached D 13.1723, G 16.5967 and prior 11.9050. Nominal G/D rates stayed .00425 and prior .0085, but applied displacement varied. This is measured bounded residual correction with fallback, not an exact implicit solve or a wall-clock speed claim.
+
+All 460 observations and 4,600 rate/controller records were checked. The 25-entry immutable ring source matches its declaration and the package matches the independently measured R1 image. Raw checkpoints at 1,600, 1,750, 2,400, 3,600 and 4,600 retain native CPU Adam scalar clocks at the accepted step, the declared serial execution mode and exact critic counters. The final critic has 3,801 accepted fresh-reference updates; all nine critic/reference tensors match byte-for-byte. Completed output hashes and full numerical cost/ratio records are retained in the adjacent JSON.
+
+Root owns the ring archive and shared ledger; this audit did not duplicate them. Own checkpoint continuation and next frozen gates are separate evidence, not inferred from ring quality. No Torch import, tests, training, GPU operation or active-worker source edit was performed.

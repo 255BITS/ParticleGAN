@@ -1,0 +1,178 @@
+{
+  "candidate": "API-DV16",
+  "gate": "broader_vector_anisotropic",
+  "status": "PASS",
+  "seconds": 28.724963549990207,
+  "metrics": {
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.03977400264638241,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.14022599735361757
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.0436197966337204,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.1063802033662796
+        },
+        {
+          "metric": "hq",
+          "value": 0.98193359375,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.13193359375000002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.16423762838045755,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.6857623716195425
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.6763312220573425,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.5263312220573425
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 21,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 21,
+        "first_pass_step": 200,
+        "stable_from_step": 200,
+        "stable_from_seconds": null,
+        "confirmed_step": 400,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.3333333333333333
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.03977400264638241,
+      "mean_error": 0.04882880672812462,
+      "covariance_error": 0.07095937430858612,
+      "target_scale": 2.040409564971924,
+      "sample_count": 4096,
+      "mass_tv": 0.0436197966337204,
+      "min_mass_ratio": 0.8759765625,
+      "hq": 0.98193359375,
+      "component_covariance_error": 0.16423762838045755,
+      "component_covariance_errors": [
+        0.12747451663017273,
+        0.10827401280403137,
+        0.2569643557071686
+      ],
+      "component_min_eigen_ratio": 0.6763312220573425,
+      "component_mass": [
+        0.2919921875,
+        0.376953125,
+        0.3310546875
+      ],
+      "target_mass": [
+        0.3333333432674408,
+        0.3333333432674408,
+        0.3333333432674408
+      ],
+      "component_counts": [
+        1196,
+        1544,
+        1356
+      ],
+      "ema": {
+        "sw1_normalized": 0.04106871935796949,
+        "mean_error": 0.05419467017054558,
+        "covariance_error": 0.08474131673574448,
+        "target_scale": 2.040409564971924,
+        "sample_count": 4096,
+        "mass_tv": 0.0436197966337204,
+        "min_mass_ratio": 0.8759765625,
+        "hq": 0.982177734375,
+        "component_covariance_error": 0.16597949961821237,
+        "component_covariance_errors": [
+          0.1443466991186142,
+          0.10129794478416443,
+          0.2522938549518585
+        ],
+        "component_min_eigen_ratio": 0.7326985597610474,
+        "component_mass": [
+          0.2919921875,
+          0.376953125,
+          0.3310546875
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1196,
+          1544,
+          1356
+        ]
+      }
+    },
+    "policy": {
+      "width_pair": {
+        "forward_gradient_rms": 3.959306923206896e-06,
+        "reverse_gradient_rms": 2.5888250547723146e-06,
+        "average_gradient_rms": 2.32613069783838e-06,
+        "shear_gradient_rms": 2.45349838223774e-06
+      },
+      "latent_applications": [
+        {
+          "width_min": 0.09175635129213333,
+          "width_mean": 0.12929360568523407,
+          "width_max": 0.1696830540895462,
+          "perturbation_rms": 0.07448019832372665,
+          "shear_norm_max": 0.4848221242427826
+        },
+        {
+          "width_min": 0.09320732206106186,
+          "width_mean": 0.12745124101638794,
+          "width_max": 0.1696830540895462,
+          "perturbation_rms": 0.07251263409852982,
+          "shear_norm_max": 0.4848221242427826
+        }
+      ],
+      "latent_bandwidth": [
+        0.12724751234054565,
+        0.14803412556648254,
+        0.1495400071144104,
+        0.1410522311925888
+      ],
+      "data_memory": 0.0,
+      "payoff_error": 0.012345800208885621,
+      "game_trust": 0.9499673870731947,
+      "game_ratio": 1.229494480096868,
+      "variant": "dv16",
+      "mobility": 0.0028422395527847276,
+      "alignment": 0.6914026364751609,
+      "data_score": 0.6995735168457031,
+      "data_drive": 0.0,
+      "last_cosine": 0.5167366862297058,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/runs/dv16-anisotropic"
+}

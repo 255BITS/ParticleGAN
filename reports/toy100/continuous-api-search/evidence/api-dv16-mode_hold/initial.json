@@ -1,0 +1,18 @@
+{
+  "backend": "canonical initialCUDA values loaded onCPU beforeCUDA training; exact original model hashes",
+  "canonical_original_models": {
+    "G": "4c3267e3d4c2f1bae6e31d2507349428a41e2738804017e1d7822afc03e5506c",
+    "D": "70f21a1da6b3b68b652d492b1378fd5b7773b060d30a24363c883ba8fbb28faa",
+    "prior": "0f9b6d7770aac5b39c4ee75b16a5ac3a8d39ead68f345e883e3156ccf4240246",
+    "ema_G": "4c3267e3d4c2f1bae6e31d2507349428a41e2738804017e1d7822afc03e5506c",
+    "ema_prior": "0f9b6d7770aac5b39c4ee75b16a5ac3a8d39ead68f345e883e3156ccf4240246"
+  },
+  "complete": "83c3e7e8769f53bad194340b18d6f236962d7f163f82eef69981c6d3f53b0a48",
+  "models": {
+    "G": "4c3267e3d4c2f1bae6e31d2507349428a41e2738804017e1d7822afc03e5506c",
+    "D": "70f21a1da6b3b68b652d492b1378fd5b7773b060d30a24363c883ba8fbb28faa",
+    "prior": "be1f2cdd3b8c1a585f411f24d30aa2fbc91664c8f41042033dd18545e9d625fb",
+    "ema_G": "4c3267e3d4c2f1bae6e31d2507349428a41e2738804017e1d7822afc03e5506c",
+    "ema_prior": "be1f2cdd3b8c1a585f411f24d30aa2fbc91664c8f41042033dd18545e9d625fb"
+  }
+}
