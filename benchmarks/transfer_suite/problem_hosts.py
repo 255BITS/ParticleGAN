@@ -9,8 +9,9 @@ for lookup. ``benchmarks.locked_shared.mode_hold.ModeHold`` is the reference.
 
 The harness contributes only the recipe under test: its global fields, the
 declared noise and the model policy's network horizon, at the problem's own
-task shape (``problem.recipe()``'s z_dim / num_particles / batch_size /
-total_steps). ``benchmarks.toy_runner.ToyRun`` builds the optimizers (which own
+task shape and prior/encoder structure (``problem.recipe()``'s z_dim /
+num_particles / batch_size / total_steps, and prior_kind / sigma_rel /
+encoder_mode, which ``AEGanHold``'s ``ae_gan`` preset sets). ``benchmarks.toy_runner.ToyRun`` builds the optimizers (which own
 the LR schedule), loss, critic penalty, prior, noise and EMA from it; the
 harness only calls ``step()`` and records the frozen 24 observations.
 
@@ -38,6 +39,9 @@ from .protocol import requirements
 
 ROUTE = "problem-only toy on benchmarks.toy_runner"
 TASK_SHAPE = ("z_dim", "num_particles", "batch_size", "total_steps")
+# The prior/encoder structure the problem's networks are built against (a MoG
+# prior and AE encoder for ``ae_gan``); never a training setting under test.
+STRUCTURE = ("prior_kind", "sigma_rel", "encoder_mode")
 NOISE_FIELDS = ("output_noise_std", "input_noise_std", "input_noise_anneal_end", "output_noise_warmup")
 # Frozen host name -> (module, ToyProblem class).
 HOSTS = {
@@ -67,7 +71,7 @@ def is_migrated(name: str) -> bool:
 
 
 def problem_recipe(problem, base, noise: dict | None = None, model_policy: dict | None = None):
-    """``base`` at the problem's task shape, with the declared noise and network horizon.
+    """``base`` at the problem's task shape and structure, with the declared noise and horizon.
 
     ``noise=None`` keeps ``base``'s own noise fields (the public-default control).
     """
@@ -77,7 +81,7 @@ def problem_recipe(problem, base, noise: dict | None = None, model_policy: dict 
         raise ValueError(f"the shared runner has no {unsupported} option; problem hosts take "
                          "output noise from the recipe on the runner's own noise stream")
     shape = problem.recipe()
-    recipe = base.replace(**{key: getattr(shape, key) for key in TASK_SHAPE},
+    recipe = base.replace(**{key: getattr(shape, key) for key in TASK_SHAPE + STRUCTURE},
                           **{key: float(noise.get(key, 0.0)) for key in NOISE_FIELDS if noise})
     policy = model_policy or {}
     if policy.get("network_lr_horizon_cap") is not None:

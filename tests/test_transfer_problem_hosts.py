@@ -117,3 +117,14 @@ def test_problem_host_uses_common_recipe_and_regrades_from_schedule_state(tiny_h
 def test_problem_host_rejects_noise_options_the_runner_lacks(tiny_host):
     with pytest.raises(ValueError, match="output_noise_learnable"):
         problem_hosts.problem_recipe(Tiny(), gan_v3_recipe(), dict(NOISE, output_noise_learnable=True))
+
+
+def test_problem_keeps_its_prior_and_encoder_structure_under_the_common_recipe():
+    class AETiny(Tiny):
+        def recipe(self):
+            return get_recipe("ae_gan", z_dim=2, num_particles=12, batch_size=32, total_steps=24)
+
+    base = gan_v3_recipe()
+    recipe = problem_hosts.problem_recipe(AETiny(), base, NOISE, POLICY)
+    assert (recipe.encoder_mode, recipe.prior_kind, recipe.sigma_rel) == ("ae", "mog", 0.025)
+    assert (recipe.lr, recipe.reg_arm, recipe.betas) == (base.lr, base.reg_arm, base.betas)
