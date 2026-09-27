@@ -1,0 +1,259 @@
+{
+  "candidate": "PUBLIC-K3P-0.8.0",
+  "gate": "public_ring_single_shift4600_reference",
+  "status": "COMPLETE",
+  "status_scope": "measurement completeness; supervisor assesses arrival and retention, no automatic winner claim",
+  "seconds": 74.74916023691185,
+  "metrics": {
+    "segments": [
+      {
+        "start": 0,
+        "end": 2400,
+        "first_arrival": 670,
+        "delay": 670,
+        "passing_since_arrival": 157,
+        "checks_since_arrival": 174,
+        "every_failing_observation_since_arrival": [
+          770,
+          800,
+          810,
+          850,
+          960,
+          970,
+          1110,
+          1120,
+          1130,
+          1140,
+          1150,
+          1160,
+          1170,
+          1180,
+          1190,
+          1200,
+          1210
+        ],
+        "departures": [
+          770,
+          800,
+          850,
+          960,
+          1110
+        ],
+        "stable_suffix_start": 1220,
+        "stable_suffix_checks": 119,
+        "minimum_hq_since_arrival": 0.004150390625,
+        "minimum_modes_since_arrival": 2,
+        "minimum_hq_entire_segment": 0.0,
+        "final": {
+          "step": 2400,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.98583984375,
+          "cover": 1.0,
+          "effective_modes": 7.262673377990723,
+          "ema": {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.984619140625,
+            "cover": 1.0,
+            "effective_modes": 7.255491256713867
+          },
+          "learning_rates": {
+            "generator_0": 4.25e-05,
+            "prior_1": 0.0085,
+            "critic_0": 4.25e-05
+          },
+          "penalty": {
+            "blend_weight": 0.0,
+            "clipped_tensors": 9
+          },
+          "input_noise": 0.0,
+          "output_noise": 0.029,
+          "evaluation_output_noise": 0.029,
+          "losses": {
+            "loss_d": 0.6309999227523804,
+            "loss_g": 0.9223254919052124,
+            "loss_gan": 0.9223254919052124,
+            "prior_regularization": 0.03818155825138092,
+            "penalty": 0.00021884260058868676
+          },
+          "seconds": 38.781518277945
+        }
+      },
+      {
+        "start": 2400,
+        "end": 4600,
+        "first_arrival": null,
+        "delay": null,
+        "passing_since_arrival": 0,
+        "checks_since_arrival": 0,
+        "every_failing_observation_since_arrival": [],
+        "departures": [],
+        "stable_suffix_start": null,
+        "stable_suffix_checks": 0,
+        "minimum_hq_since_arrival": null,
+        "minimum_modes_since_arrival": null,
+        "minimum_hq_entire_segment": 0.0,
+        "final": {
+          "step": 4600,
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.8232421875,
+          "cover": 1.0,
+          "effective_modes": 7.291824817657471,
+          "ema": {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.830322265625,
+            "cover": 1.0,
+            "effective_modes": 7.258069038391113
+          },
+          "learning_rates": {
+            "generator_0": 4.25e-05,
+            "prior_1": 0.00042500588500089944,
+            "critic_0": 4.25e-05
+          },
+          "penalty": {
+            "blend_weight": 0.0,
+            "clipped_tensors": 88
+          },
+          "input_noise": 0.0,
+          "output_noise": 0.029,
+          "evaluation_output_noise": 0.029,
+          "losses": {
+            "loss_d": 0.6462957859039307,
+            "loss_g": 0.8584580421447754,
+            "loss_gan": 0.8584580421447754,
+            "prior_regularization": 0.022495992481708527,
+            "penalty": 0.008266226388514042
+          },
+          "seconds": 74.70413081091829,
+          "frozen": {
+            "step": 4600,
+            "modes": 0,
+            "n_modes": 8,
+            "hq": 0.0,
+            "cover": 0.0,
+            "effective_modes": 0.0,
+            "evaluation_output_noise": 0.029
+          }
+        }
+      }
+    ],
+    "comparison3600": {
+      "start": 2400,
+      "end": 3600,
+      "first_arrival": null,
+      "delay": null,
+      "passing_since_arrival": 0,
+      "checks_since_arrival": 0,
+      "every_failing_observation_since_arrival": [],
+      "departures": [],
+      "stable_suffix_start": null,
+      "stable_suffix_checks": 0,
+      "minimum_hq_since_arrival": null,
+      "minimum_modes_since_arrival": null,
+      "minimum_hq_entire_segment": 0.0,
+      "final": {
+        "step": 3600,
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.69677734375,
+        "cover": 1.0,
+        "effective_modes": 7.146645545959473,
+        "ema": {
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.64306640625,
+          "cover": 1.0,
+          "effective_modes": 6.763571739196777
+        },
+        "learning_rates": {
+          "generator_0": 4.25e-05,
+          "prior_1": 0.005019101410196847,
+          "critic_0": 4.25e-05
+        },
+        "penalty": {
+          "blend_weight": 0.0,
+          "clipped_tensors": 88
+        },
+        "input_noise": 0.0,
+        "output_noise": 0.029,
+        "evaluation_output_noise": 0.029,
+        "losses": {
+          "loss_d": 0.6559975743293762,
+          "loss_g": 0.8057630658149719,
+          "loss_gan": 0.8057630658149719,
+          "prior_regularization": 0.023165635764598846,
+          "penalty": 0.013318071141839027
+        },
+        "seconds": 58.3368218569085,
+        "frozen": {
+          "step": 3600,
+          "modes": 0,
+          "n_modes": 8,
+          "hq": 0.0,
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "evaluation_output_noise": 0.029
+        }
+      }
+    },
+    "frozen_control": {
+      "checkpoint": 2400,
+      "updates_after_copy": 0,
+      "passing": 0,
+      "observations": 220,
+      "maximum_hq": 0.0
+    },
+    "completed_updates": 4600,
+    "observations": 460,
+    "final": {
+      "step": 4600,
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 0.8232421875,
+      "cover": 1.0,
+      "effective_modes": 7.291824817657471,
+      "ema": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.830322265625,
+        "cover": 1.0,
+        "effective_modes": 7.258069038391113
+      },
+      "learning_rates": {
+        "generator_0": 4.25e-05,
+        "prior_1": 0.00042500588500089944,
+        "critic_0": 4.25e-05
+      },
+      "penalty": {
+        "blend_weight": 0.0,
+        "clipped_tensors": 88
+      },
+      "input_noise": 0.0,
+      "output_noise": 0.029,
+      "evaluation_output_noise": 0.029,
+      "losses": {
+        "loss_d": 0.6462957859039307,
+        "loss_g": 0.8584580421447754,
+        "loss_gan": 0.8584580421447754,
+        "prior_regularization": 0.022495992481708527,
+        "penalty": 0.008266226388514042
+      },
+      "seconds": 74.70413081091829,
+      "frozen": {
+        "step": 4600,
+        "modes": 0,
+        "n_modes": 8,
+        "hq": 0.0,
+        "cover": 0.0,
+        "effective_modes": 0.0,
+        "evaluation_output_noise": 0.029
+      }
+    },
+    "rate_rows": 4600,
+    "source_and_runtime_assertions_passed": true
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/k3p-reference"
+}

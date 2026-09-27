@@ -30,6 +30,7 @@ alone is insufficient, and longer verification remains required.
 | API-DV9: moment discrepancy drives prior mobility | 580 | 181/183 | 320 | 189/189 | Early initial misses590/600 then180 straight. **Rejected:** unequal_mass0/24, covariance error1.1702 and eigenratio.02724. |
 | API-DV10: continuous latent support smoothing | 620 | 179/179 | 320 | 184/189 | Five early recovery misses then180 straight. Unequal_mass7/24, final7 **PASS**; bars4 **FAIL**, finalHQ.8125. Broader host/source independently verified. |
 | API-DV11: critic evidence controls latent smoothing | 560 | 185/185 | 290 | 190/192 | Two early recovery misses, then187 straight. Unequal_mass0/24 **FAIL**; source independently verified. |
+| API-DV12: locally bounded latent smoothing | 590 | 182/182 | 290 | 191/192 | One early recovery miss2730, then187 straight. **Rejected:** unequal_mass2/24, final suffix0; final covariance error.8844 exceeds.85. |
 | API-C1: continuously moving critic reference, constant rates | 580 | **172/183** | 570 | 164/164 | Original-target departures reject this version. |
 | API-C2: C1 plus a bound on each coordinate's Adam displacement | 1960 | 45/45 | 1890 | 32/32 | Stationary 7500: **296/555** after arrival; rejected for repeated loss of the unchanged distribution. |
 | API-C3: bounded optimistic displacement correction | NOT_OBSERVED | — | NOT_OBSERVED | — | Neither target acquired in the declared window; final HQ .1245. |
@@ -41,12 +42,13 @@ alone is insufficient, and longer verification remains required.
 | API-C9: local extragradient acceptance | NOT_OBSERVED | — | NOT_OBSERVED | — | Complete4600; finalHQ.5974 while improving. Separate image **FAIL0/24**, finalHQ.375. Own exact checkpoint replay passes. |
 | API-C10: role-balanced joint secant update | 540 | 187/187 | 250 | 196/196 | Own replay passes. **Rejected:** intensity image4/24, final suffix1; finalHQ.96875 does not establish stability. |
 | API-C11: separate response fit for each role | 660 | 175/175 | 280 | 193/193 | Own replay passes. **Rejected:** intensity image0/24, finalHQ.65625 and1qualitymode. |
+| API-C12: residual-checked implicit update | NOT_OBSERVED | — | NOT_OBSERVED | — | Complete4600;80,382 field evaluations,1719.76s. **Rejected:** intensity0/24, finalHQ.46875. Own exact checkpoint replay passes. |
 | API-RP1: reversible precision, ordinary public initialization | 640 | **146/166 through 2290** | NOT_RUN | NOT_RUN | Valid partial measurement; the run was stopped under an incorrect assumption about CPU scalar counters. |
 | API-RP1-CUDA-EAGER: same rate rule with test-script optimizer initialization | 640 | 177/177 | 500 | 171/171 | Stationary 7500: 687/687 after arrival. **Diagnostic only:** worker edits optimizer state after API construction. |
 | API-RP2: precision controller with explicit library-owned initialization | 640 | 177/177 | 500 | 171/171 | Own stationary 7500: **687/687** after arrival. Own 30000: **537/537**, **145/145**, **1879/1879**, **269/269** after each arrival; recovery delays **360, 420, 320**. **Rejected:** frozen img_intensity2 stability fails. |
 | API-RP3: precision adds generator-update cancellation, serial execution | 610 | 180/180 | 460 | 175/175 | **Rejected:** frozen img_intensity2 passes0/24; controller stays open. Longer tests NOT_RUN. |
 | API-RP4: precision plus implicit game update | 1250 | 108/116 | 350 | 170/186 | **Rejected:** intensity image0/24. |
-| API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and six vectors pass; checkpoint and horizon checks pass. Completed30000: delays350/450/250, with544/544,146/146,1876/1876,276/276 after arrival. Broader/API/K3P incomplete. **Rejected:** mode_hold0/24, final5/8 modes; frozen host independently verified. |
+| API-RP5: smoothed precision signal plus implicit game update | 570 | 184/184 | 270 | 194/194 | Stationary7500: **694/694**; all four images and six vectors pass; checkpoint and horizon checks pass. Completed30000: delays350/450/250, with544/544,146/146,1876/1876,276/276 after arrival. Broader/API incomplete; matched K3P references retained below. **Rejected:** mode_hold0/24, final5/8 modes; frozen host independently verified. |
 | API-RP6: balance predictor energy between adversarial players | 660 | 173/175 | 380 | 182/183 | Early misses680/690 and2790; final shifted suffix181. **Rejected:** intensity1/24, final suffix1. Small-particle task also **FAIL0/24**, final7/8 modes. |
 
 Single-change evaluations end at 4600, with a data change after 2400. The
@@ -103,8 +105,8 @@ after the single target change, and settles again. This remains partial evidence
 its complete30000 run has no post-arrival departures across three changes, recovering
 after350/450/250 updates. It reopens after the first change; the next two recover
 while rates remain reduced. Remaining broader tasks, long-change checkpoint
-replays, component API coverage and matched public K3P are incomplete. The precision lane owns that comparator conditionally
-on surviving the remaining gates. **API-DV7** also passes all four images and
+replays and component API coverage remain incomplete. Matched public K3P
+references are now complete and reported below. **API-DV7** also passes all four images and
 retains an unchanged target687/687. Its first shifted threshold contact is2730,
 followed by five early misses and a sustained suffix from2790. Its complete30000 run reaches the changed targets after310,270,250 updates, with
 four early misses in the first recovery, then long stable periods. It is now
@@ -120,8 +122,9 @@ stayed open at full rates. This is a measured coverage failure, not premature
 rate reduction. The ten broader passes and full long-run strengths remain recorded.
 No finite failure proves that a target could never be learned; this version
 does not meet the frozen broader quality requirement. The third precision
-proposal, RP6, changes the local response metric and is running its declared
-diagnostics. Its own intensity image is a verified failure1/24, final suffix1.
+proposal, RP6, changes the local response metric. It completed its declared
+diagnostics: intensity image is a verified failure1/24, final suffix1, and
+mode_hold fails0/24 with final7/8 modes.
 That does not inherit or erase RP5’s separate results.
 
 The first direct [public K3P comparison](k3p-comparison-results.json) is complete
@@ -131,6 +134,16 @@ all consecutive from350. K3P first touches the threshold earlier (150 versus350)
 and finishes more accurately (normalized distance .0563 versus .1139). This is
 one task, not overall dominance or recovery proof. The exact released0.8 package
 uses its declared1200-update benchmark schedule; RP5's learner has no ending.
+
+The matched **public K3P recovery reference** is complete and independently
+verified. With the released4600-update benchmark schedule, original arrival is670,
+with157/174 passing checks after first contact and a stable119-check suffix from1220.
+After the change at2400, it never reaches the frozen quality threshold by4600:
+bestHQ.8389, finalHQ.8232; the frozen control passes0/220. RP5 reaches the same
+changed target after270 updates and retains194/194. This supports RP5's recovery
+advantage in this matched test, while its separate coverage failure still rejects
+it. K3P's finite nonarrival is not proof that it could never recover. Runtime74.75s
+is retained; controlled wall-clock superiority is not established from these runs.
 
 API-DV6 retained the stationary target696/696 and completed30000 updates. First
 arrival delays were410,420,370; two early misses at8280/8290 and one at27380 are

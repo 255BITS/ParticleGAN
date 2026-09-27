@@ -1,0 +1,13 @@
+{
+  "matches": {
+    "step": true,
+    "models_sha256": true,
+    "streams_sha256": true,
+    "cpu_rng_sha256": true,
+    "cuda_rng_sha256": true,
+    "real_stream_sha256": true,
+    "means_sha256": true
+  },
+  "adam_state_empty": true,
+  "scope": "Exact model/EMA,private/global/data RNG and means receipt identity; optimizer/trainer identity intentionally differs from candidate."
+}

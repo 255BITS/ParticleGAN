@@ -561,7 +561,7 @@
       "lane": "data_drift_mobility",
       "pid": 1609802,
       "attempt": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802",
-      "status": "RUNNING"
+      "status": "COMPLETED_REVIEW_BEFORE_REFILL"
     },
     {
       "lane": "reversible_precision",
@@ -577,7 +577,7 @@
     "status": "NO_SURVIVOR_CURRENT_PROPOSALS_RUNNING",
     "historical_scores_inherited": false,
     "shared_checkpoint_status": "SCOPED_SERIAL_FIX_VERIFIED_NEW_CANDIDATES_REQUIRE_OWN_RESULTS",
-    "matched_k3p_owner": "NEW_PRECISION_LANE_FIXED_RECOVERY_RING_REFERENCE; DATA_UNEQUAL_MASS_COMPLETE",
+    "matched_k3p_owner": "RECOVERY_AND_UNEQUAL_MASS_REFERENCES_COMPLETE",
     "checkpoint_diagnostic_owner": "data_drift_mobility",
     "api_rp2_long": {
       "updates": 30000,
@@ -633,7 +633,7 @@
       "images_passed": 4,
       "broader_tasks": 22,
       "long": "COMPLETE_PASS",
-      "matched_k3p": "NOT_RUN",
+      "matched_k3p": "RECOVERY_AND_UNEQUAL_MASS_REFERENCES_COMPLETE",
       "qualified": false,
       "component_api": "INCOMPLETE",
       "vector_passes": 6,
@@ -804,11 +804,45 @@
       "qualified": false
     },
     "k3p_ring_reference": {
-      "status": "SOURCE_READY_OWNER_AUTHORIZED_RUNTIME_PENDING",
+      "status": "COMPLETE_INDEPENDENTLY_VERIFIED",
       "owner_pid": 1657545,
       "bundle_manifest_sha256": "ec3a85663d09712e9a5e226b8f7824540da0b7558d5fbe24b3151e070d60f57f",
       "protocol": "single_shift4600",
-      "scope": "UNMODIFIED_RELEASED_K3P_REFERENCE_NOT_ELIGIBLE_CONTINUOUS_DEFAULT"
+      "scope": "UNMODIFIED_RELEASED_K3P_REFERENCE_NOT_ELIGIBLE_CONTINUOUS_DEFAULT",
+      "original_first": 670,
+      "original_retention": "157/174",
+      "original_stable_from": 1220,
+      "original_suffix": 119,
+      "changed_arrival": "NOT_OBSERVED_THROUGH_2200_POSTCHANGE_UPDATES",
+      "changed_max_hq": 0.8388671875,
+      "changed_final_hq": 0.8232421875,
+      "frozen_control": "0/220",
+      "seconds": 74.74916023691185,
+      "report": "reports/toy100/continuous-api-search/k3p-comparison-results.json"
+    },
+    "api_dv12": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "initial_retention": "182/182",
+      "shift_delay": 290,
+      "shift_retention": "191/192",
+      "shift_early_misses": [
+        2730
+      ],
+      "shift_final_suffix": 187,
+      "unequal_mass": "FAIL_2_OF_24_SUFFIX_0",
+      "final_covariance_error": 0.884388,
+      "required_max_covariance_error": 0.85,
+      "qualified": false
+    },
+    "api_c12": {
+      "status": "REJECTED_BROADER_QUALITY",
+      "single_shift": "NOT_OBSERVED_THROUGH_4600",
+      "image": "FAIL_0_OF_24",
+      "image_final_hq": 0.46875,
+      "checkpoint": "OWN_EXACT_1600_TO_1800_VERIFIED",
+      "ring_seconds": 1719.7583,
+      "ring_joint_fields": 80382,
+      "qualified": false
     }
   }
 }

@@ -1,0 +1,188 @@
+{
+  "candidate": "API-DV12",
+  "gate": "broader_vector_unequal_mass",
+  "status": "FAIL",
+  "seconds": 27.276094255037606,
+  "metrics": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "sw1_normalized",
+          "value": 0.12311612821595945,
+          "op": "<=",
+          "threshold": 0.18,
+          "status": "PASS",
+          "margin": 0.05688387178404054
+        },
+        {
+          "metric": "mass_tv",
+          "value": 0.10185546427965164,
+          "op": "<=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.04814453572034835
+        },
+        {
+          "metric": "hq",
+          "value": 0.9853515625,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.13535156250000002
+        },
+        {
+          "metric": "component_covariance_error",
+          "value": 0.8843883238732815,
+          "op": "<=",
+          "threshold": 0.85,
+          "status": "FAIL",
+          "margin": -0.0343883238732815
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "value": 0.6248248219490051,
+          "op": ">=",
+          "threshold": 0.15,
+          "status": "PASS",
+          "margin": 0.4748248219490051
+        },
+        {
+          "metric": "min_mass_ratio",
+          "value": 0.32958984375,
+          "op": ">=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 0.07958984375
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 2,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": 1000,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.006742808602604216,
+      "confirmation_fraction": 2.0
+    },
+    "final": {
+      "step": 1200,
+      "sw1_normalized": 0.12311612821595945,
+      "mean_error": 0.15906164050102234,
+      "covariance_error": 0.1800207644701004,
+      "target_scale": 1.7948341369628906,
+      "sample_count": 4096,
+      "mass_tv": 0.10185546427965164,
+      "min_mass_ratio": 0.32958984375,
+      "hq": 0.9853515625,
+      "component_covariance_error": 0.8843883238732815,
+      "component_covariance_errors": [
+        0.09657905995845795,
+        0.18137958645820618,
+        0.2040519416332245,
+        3.0555427074432373
+      ],
+      "component_min_eigen_ratio": 0.6248248219490051,
+      "component_mass": [
+        0.4853515625,
+        0.40185546875,
+        0.106201171875,
+        0.006591796875
+      ],
+      "target_mass": [
+        0.550000011920929,
+        0.30000001192092896,
+        0.12999999523162842,
+        0.019999999552965164
+      ],
+      "component_counts": [
+        1988,
+        1646,
+        435,
+        27
+      ],
+      "ema": {
+        "sw1_normalized": 0.126553583383811,
+        "mean_error": 0.16389532387256622,
+        "covariance_error": 0.1752757728099823,
+        "target_scale": 1.7948341369628906,
+        "sample_count": 4096,
+        "mass_tv": 0.10283202677965164,
+        "min_mass_ratio": 0.32958984375,
+        "hq": 0.98583984375,
+        "component_covariance_error": 0.8526750169694424,
+        "component_covariance_errors": [
+          0.07694029808044434,
+          0.16255439817905426,
+          0.19827041029930115,
+          2.9729349613189697
+        ],
+        "component_min_eigen_ratio": 0.6258549690246582,
+        "component_mass": [
+          0.484375,
+          0.40283203125,
+          0.106201171875,
+          0.006591796875
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          1984,
+          1650,
+          435,
+          27
+        ]
+      }
+    },
+    "policy": {
+      "latent_applications": [
+        {
+          "radius_min": 0.022148964926600456,
+          "radius_mean": 0.13440898060798645,
+          "radius_max": 0.4055494964122772,
+          "perturbation_rms": 0.06831330060958862,
+          "clipped_fraction": 0.9140625
+        },
+        {
+          "radius_min": 0.022910572588443756,
+          "radius_mean": 0.14108026027679443,
+          "radius_max": 0.5078867673873901,
+          "perturbation_rms": 0.07004766166210175,
+          "clipped_fraction": 0.859375
+        }
+      ],
+      "latent_bandwidth": [
+        0.12546168267726898,
+        0.1470041424036026,
+        0.1462537795305252,
+        0.13914290070533752
+      ],
+      "data_memory": 0.0,
+      "payoff_error": 0.06525861089847784,
+      "game_trust": 0.2427191995525391,
+      "game_ratio": 2.766348555397555,
+      "variant": "dv12",
+      "mobility": 0.014676904442964576,
+      "alignment": 0.2820321569470737,
+      "data_score": 0.9017592668533325,
+      "data_drive": 0.0,
+      "last_cosine": 0.22476676106452942,
+      "updates": 1200,
+      "reopens": 0,
+      "closed": true
+    }
+  },
+  "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232546Z-1609794/data_drift_mobility/20260926T232546Z-1609802/repo/reports/data-drift-api/runs/dv12-vector_unequal_mass"
+}
