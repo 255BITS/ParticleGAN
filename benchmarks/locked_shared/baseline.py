@@ -158,13 +158,13 @@ def run_toy(toy, cfg, *, noise_policy=None):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
     with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
-        for module in (trajectory, residual_student, cover_leftover, mid_scale_identity):
+        for module in (trajectory, residual_student, cover_leftover):
             target = module.PROTOCOL if module in (trajectory, residual_student) else module.FORMULATION
             values = {k: v for k, v in knobs.items() if k in target}
             if "lr" in target:
                 values["lr"] = target["lr"] * cfg.lr_multiplier
             stack.enter_context(patch.dict(target, values))
-        for module in (unipolar, unused_token_hold, mid_scale_identity):
+        for module in (unipolar, unused_token_hold):
             stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
         stack.enter_context(patch.object(two_pole, "TOY_LR", two_pole.TOY_LR * cfg.lr_multiplier))
         if toy == "two_pole":
@@ -198,6 +198,8 @@ def run_toy(toy, cfg, *, noise_policy=None):
             raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options),
                                           noise_policy=noise_policy)
         elif toy == "mid_scale_identity":
+            # Problem-only toy on the shared runner (like mode_hold): candidate
+            # knobs, LR multipliers and noise policies do not apply.
             raw = mid_scale_identity.run_arm("locked", noise_policy=noise_policy)
         else:
             raise ValueError(toy)
