@@ -560,6 +560,93 @@
     "settle": "anchor",
     "guard_buffer": "max_exp_avg_sq"
    }
+  },
+  "nr_dvalcap_anchor_c1": {
+   "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: dvalcap: real-logit value cap relu(|D(r) - mean_batch D(r)| - 1)^2. settle: anchor: K3P EMA-critic anchor prox term forced on at constant LR (stock reg_anchor_weight 1, decay .999). Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled, reg_coeff 1.0.",
+   "critic": "k3p",
+   "base": "gs2_c03_lr2_d05",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   },
+   "nr": {
+    "spike": "dvalcap",
+    "settle": "anchor",
+    "guard_buffer": "max_exp_avg_sq"
+   },
+   "coeff_check_of": "nr_dvalcap_anchor"
+  },
+  "nr_none_anchor_c1": {
+   "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: none: R1 removed, nothing added on the real side (control). settle: anchor: K3P EMA-critic anchor prox term forced on at constant LR (stock reg_anchor_weight 1, decay .999). Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled, reg_coeff 1.0.",
+   "critic": "k3p",
+   "base": "gs2_c03_lr2_d05",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   },
+   "nr": {
+    "spike": "none",
+    "settle": "anchor",
+    "guard_buffer": "max_exp_avg_sq"
+   },
+   "coeff_check_of": "nr_none_anchor"
+  },
+  "nr_pathcap_anchor_c1": {
+   "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: pathcap: one-sided RMS cap at x_hat = r + u (f - r), u~U(0,1) per batch-index pair. settle: anchor: K3P EMA-critic anchor prox term forced on at constant LR (stock reg_anchor_weight 1, decay .999). Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled, reg_coeff 1.0.",
+   "critic": "k3p",
+   "base": "gs2_c03_lr2_d05",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   },
+   "nr": {
+    "spike": "pathcap",
+    "settle": "anchor",
+    "guard_buffer": "max_exp_avg_sq"
+   },
+   "coeff_check_of": "nr_pathcap_anchor"
   }
  }
 }

@@ -1,0 +1,48 @@
+# arm=nr_pathcap_anchor task=toy-cover_leftover route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START cover_leftover route=public primitives custom host + shared noise policy steps=800
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=0.3 kappa=1.0 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.7439 cap=0.0000 u_kept=0.017 content=0.000 leak=0.000 err=0.747 covered=0
+eval    34 u_kept=0.3028 content_kept=0.4218 leak_ratio=0.008616 on_u=0.3028 on_content=0.232 on_e=0.002609 pole_rel_err_plus=0.5053 pole_rel_err_minus=0.4738 covered=False pass=False fail_reasons=undershoot,content leak_frac=-0.9933 same_dir=0.08703 even_norm=0.03936 odd_norm=0.4129
+cover_leftover arm=locked step=50/800 d=0.7060 g=1.0095 cap=0.0080 u_kept=0.370 content=0.565 leak=0.006 err=0.445 covered=0
+eval    67 u_kept=0.4307 content_kept=0.6626 leak_ratio=0.006507 on_u=0.4307 on_content=0.3644 on_e=0.002803 pole_rel_err_plus=0.3946 pole_rel_err_minus=0.3553 covered=False pass=False fail_reasons=undershoot,content leak_frac=-0.9996 same_dir=0.0491 even_norm=0.03065 odd_norm=0.5936
+eval   100 u_kept=0.5475 content_kept=0.8312 leak_ratio=0.005358 on_u=0.5475 on_content=0.4572 on_e=0.002934 pole_rel_err_plus=0.3045 pole_rel_err_minus=0.2916 covered=False pass=False fail_reasons=undershoot leak_frac=-0.9994 same_dir=0.01831 even_norm=0.01341 odd_norm=0.7188
+cover_leftover arm=locked step=100/800 d=0.6945 g=0.8583 cap=0.0071 u_kept=0.548 content=0.831 leak=0.005 err=0.304 covered=0
+eval   134 u_kept=0.6508 content_kept=0.9122 leak_ratio=0.003552 on_u=0.6508 on_content=0.5017 on_e=-0.002312 pole_rel_err_plus=0.2324 pole_rel_err_minus=0.2325 covered=False pass=False fail_reasons=undershoot leak_frac=-0.9999 same_dir=0.005164 even_norm=0.004261 odd_norm=0.8209
+cover_leftover arm=locked step=150/800 d=0.6955 g=0.7720 cap=0.0044 u_kept=0.695 content=0.939 leak=0.004 err=0.205 covered=0
+eval   167 u_kept=0.7342 content_kept=0.9576 leak_ratio=0.001845 on_u=0.7342 on_content=0.5267 on_e=0.001355 pole_rel_err_plus=0.1759 pole_rel_err_minus=0.1783 covered=True pass=False fail_reasons=undershoot leak_frac=-1 same_dir=0.002668 even_norm=0.002413 odd_norm=0.9021
+eval   200 u_kept=0.8004 content_kept=0.9907 leak_ratio=0.0009269 on_u=0.8004 on_content=0.5449 on_e=-0.0007419 pole_rel_err_plus=0.1316 pole_rel_err_minus=0.134 covered=True pass=False fail_reasons=undershoot leak_frac=-1 same_dir=0.005186 even_norm=0.005028 odd_norm=0.9644
+cover_leftover arm=locked step=200/800 d=0.6984 g=0.7265 cap=0.0046 u_kept=0.800 content=0.991 leak=0.001 err=0.134 covered=1
+eval   234 u_kept=0.8531 content_kept=0.9977 leak_ratio=0.00401 on_u=0.8531 on_content=0.5488 on_e=-0.003421 pole_rel_err_plus=0.09682 pole_rel_err_minus=0.09611 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.004278 even_norm=0.004354 odd_norm=1.013
+cover_leftover arm=locked step=250/800 d=0.6955 g=0.7060 cap=0.0044 u_kept=0.872 content=0.992 leak=0.000 err=0.084 covered=1
+eval   267 u_kept=0.8912 content_kept=0.9924 leak_ratio=0.002181 on_u=0.8912 on_content=0.5458 on_e=0.001943 pole_rel_err_plus=0.07185 pole_rel_err_minus=0.0684 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.003547 even_norm=0.003732 odd_norm=1.048
+eval   300 u_kept=0.9304 content_kept=0.9981 leak_ratio=0.0007787 on_u=0.9304 on_content=0.5489 on_e=0.0007245 pole_rel_err_plus=0.04589 pole_rel_err_minus=0.05158 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.004098 even_norm=0.00443 odd_norm=1.077
+cover_leftover arm=locked step=300/800 d=0.6956 g=0.6987 cap=0.0033 u_kept=0.930 content=0.998 leak=0.001 err=0.052 covered=1
+eval   334 u_kept=0.9529 content_kept=0.9934 leak_ratio=0.002872 on_u=0.9529 on_content=0.5463 on_e=-0.002737 pole_rel_err_plus=0.03124 pole_rel_err_minus=0.03877 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.00596 even_norm=0.006561 odd_norm=1.094
+cover_leftover arm=locked step=350/800 d=0.6979 g=0.6946 cap=0.0027 u_kept=0.948 content=0.998 leak=0.002 err=0.034 covered=1
+eval   367 u_kept=0.9682 content_kept=1.003 leak_ratio=0.0002333 on_u=0.9682 on_content=0.5516 on_e=0.0002259 pole_rel_err_plus=0.02104 pole_rel_err_minus=0.02421 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.002809 even_norm=0.003133 odd_norm=1.112
+eval   400 u_kept=0.9712 content_kept=0.9964 leak_ratio=0.003517 on_u=0.9712 on_content=0.548 on_e=0.003416 pole_rel_err_plus=0.01917 pole_rel_err_minus=0.01432 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.003945 even_norm=0.004433 odd_norm=1.119
+cover_leftover arm=locked step=400/800 d=0.6952 g=0.6936 cap=0.0018 u_kept=0.971 content=0.996 leak=0.004 err=0.019 covered=1
+eval   434 u_kept=0.9874 content_kept=1.007 leak_ratio=0.0006372 on_u=0.9874 on_content=0.5541 on_e=-0.0006292 pole_rel_err_plus=0.008849 pole_rel_err_minus=0.01489 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.005752 even_norm=0.006514 odd_norm=1.126
+cover_leftover arm=locked step=450/800 d=0.6964 g=0.6930 cap=0.0018 u_kept=0.985 content=1.000 leak=0.003 err=0.011 covered=1
+eval   467 u_kept=0.9931 content_kept=1.002 leak_ratio=0.002385 on_u=0.9931 on_content=0.5512 on_e=-0.002369 pole_rel_err_plus=0.00494 pole_rel_err_minus=0.007796 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.00288 even_norm=0.003281 odd_norm=1.136
+eval   500 u_kept=0.9959 content_kept=1.011 leak_ratio=0.003452 on_u=0.9959 on_content=0.556 on_e=-0.003438 pole_rel_err_plus=0.005422 pole_rel_err_minus=0.007446 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.005929 even_norm=0.006772 odd_norm=1.135
+cover_leftover arm=locked step=500/800 d=0.6944 g=0.6935 cap=0.0011 u_kept=0.996 content=1.011 leak=0.003 err=0.007 covered=1
+eval   534 u_kept=0.9991 content_kept=0.9944 leak_ratio=0.002516 on_u=0.9991 on_content=0.5469 on_e=0.002514 pole_rel_err_plus=0.003155 pole_rel_err_minus=0.006073 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.005073 even_norm=0.005799 odd_norm=1.137
+cover_leftover arm=locked step=550/800 d=0.6942 g=0.6930 cap=0.0009 u_kept=0.997 content=1.002 leak=0.000 err=0.005 covered=1
+eval   567 u_kept=0.9947 content_kept=1 leak_ratio=0.001814 on_u=0.9947 on_content=0.5501 on_e=0.001805 pole_rel_err_plus=0.004323 pole_rel_err_minus=0.003874 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.004752 even_norm=0.005446 odd_norm=1.14
+eval   600 u_kept=0.9997 content_kept=1.003 leak_ratio=0.001379 on_u=0.9997 on_content=0.5517 on_e=0.001378 pole_rel_err_plus=0.002593 pole_rel_err_minus=0.00241 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.002225 even_norm=0.002541 odd_norm=1.14
+cover_leftover arm=locked step=600/800 d=0.6942 g=0.6931 cap=0.0010 u_kept=1.000 content=1.003 leak=0.001 err=0.003 covered=1
+eval   634 u_kept=0.9995 content_kept=1.008 leak_ratio=0.0006314 on_u=0.9995 on_content=0.5545 on_e=0.0006311 pole_rel_err_plus=0.003274 pole_rel_err_minus=0.005456 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.004962 even_norm=0.005684 odd_norm=1.14
+cover_leftover arm=locked step=650/800 d=0.6943 g=0.6934 cap=0.0009 u_kept=0.998 content=0.999 leak=0.001 err=0.002 covered=1
+eval   667 u_kept=1.001 content_kept=1.008 leak_ratio=0.005492 on_u=1.001 on_content=0.5546 on_e=-0.005495 pole_rel_err_plus=0.004924 pole_rel_err_minus=0.002775 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.00445 even_norm=0.005101 odd_norm=1.141
+eval   700 u_kept=0.9962 content_kept=0.9951 leak_ratio=0.0009682 on_u=0.9962 on_content=0.5473 on_e=0.0009645 pole_rel_err_plus=0.004446 pole_rel_err_minus=0.004308 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.00548 even_norm=0.006287 odd_norm=1.141
+cover_leftover arm=locked step=700/800 d=0.6942 g=0.6933 cap=0.0007 u_kept=0.996 content=0.995 leak=0.001 err=0.004 covered=1
+eval   734 u_kept=1.009 content_kept=1.002 leak_ratio=0.002124 on_u=1.009 on_content=0.5511 on_e=-0.002143 pole_rel_err_plus=0.006062 pole_rel_err_minus=0.007226 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.008649 even_norm=0.009951 odd_norm=1.141
+cover_leftover arm=locked step=750/800 d=0.6938 g=0.6930 cap=0.0006 u_kept=0.997 content=0.999 leak=0.003 err=0.006 covered=1
+eval   767 u_kept=0.996 content_kept=1.004 leak_ratio=0.001194 on_u=0.996 on_content=0.5521 on_e=-0.001189 pole_rel_err_plus=0.003441 pole_rel_err_minus=0.005405 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.004827 even_norm=0.005543 odd_norm=1.143
+eval   800 u_kept=1 content_kept=1.006 leak_ratio=0.002355 on_u=1 on_content=0.5531 on_e=-0.002355 pole_rel_err_plus=0.003514 pole_rel_err_minus=0.004536 covered=True pass=True fail_reasons= leak_frac=-1 same_dir=0.004268 even_norm=0.004883 odd_norm=1.139
+cover_leftover arm=locked step=800/800 d=0.6932 g=0.6936 cap=0.0007 u_kept=1.000 content=1.006 leak=0.002 err=0.005 covered=1
+cover_leftover DONE arm=locked pass=1 reasons=none u_kept=0.961 content=0.976 leak=0.000 err=0.028 same_dir=0.000 particle_rms=0.057
+{"event": "DONE", "task": "cover_leftover", "status": "PASS", "suffix": 18, "live": {"u_kept": 0.9999701280732664, "content_kept": 1.005549087448213, "leak_ratio": 0.0023548318818627347, "pole_rel_err_plus": 0.0035135147627443075, "pole_rel_err_minus": 0.004536141641438007, "same_dir": 0.004267852597467603}, "error": null}
+# DONE toy-cover_leftover status=PASS metric={'name': 'passing suffix', 'value': '18/24'} 10s
+# NR receipt spike=pathcap settle=anchor r1=0.0 loss={'rp_softplus': 800} oadam_steps=0 anchor_active=True penalty_calls=800 stock_calls=0

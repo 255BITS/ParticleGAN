@@ -96,3 +96,8 @@ The transfer toys ignore `--steps`, so those smoke cells are full-budget results
 Caveat: on toy-img_bars4 every cap term (symcap, pathcap, pairsec and the fake cap) was 0 on every call, because
 image-critic RMS slopes stay below 1. Without R1, any arm whose only active terms are caps (every spike except
 dvalcap, with settle none, hinge or oadam) trains img_bars4 with no gradient penalty at all.
+
+## Results
+
+- `SCREEN.md`: the 20-arm screen on 7 tasks. `AUDIT.md` audits it.
+- `SUITE.md`: the full 26-task suite for the screen top 3, plus a reg_coeff 1.0 check (`<arm>_c1`, launched by `full.sh`).

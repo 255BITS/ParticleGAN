@@ -35,6 +35,13 @@ def main():
                 critic="k3p", base=BASE_NAME, config=dict(base["config"]), recipe=recipe,
                 nr=dict(spike=spike, settle=settle,
                         guard_buffer="max_exp_avg_sq"))
+    # coefficient check: the full-suite finalists with reg_coeff 1.0 (base .3 was tuned with R1 present)
+    for name in ("nr_dvalcap_anchor", "nr_none_anchor", "nr_pathcap_anchor"):
+        arm = json.loads(json.dumps(arms[name]))
+        arm["config"]["reg_coeff"] = 1.0
+        arm["formulation"] = arm["formulation"].replace("(reg_coeff/2)-scaled", "(reg_coeff/2)-scaled, reg_coeff 1.0")
+        arm["coeff_check_of"] = name
+        arms[f"{name}_c1"] = arm
     doc = ("No-R1 factorial (5 spike controls x 4 settling mechanisms) on gs2_c03_lr2_d05 = k3p_simple + reg_coeff .3, "
            "lr .0085, d_lr_mult .5 (constant LR, AMSGrad (0,.999), no noise, no EMA anchor, no direct response, "
            "guard + A2 on). Every arm removes R1 on reals; every arm's spike guard reads max_exp_avg_sq (the AMSGrad buffer "

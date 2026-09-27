@@ -1,0 +1,276 @@
+{
+ "arm": "nr_none_anchor_c1",
+ "task": "toy-two_pole",
+ "group": "toy",
+ "route": "legacy",
+ "formulation": "gs2_c03_lr2_d05 with R1 on reals removed. spike: none: R1 removed, nothing added on the real side (control). settle: anchor: K3P EMA-critic anchor prox term forced on at constant LR (stock reg_anchor_weight 1, decay .999). Fake one-sided RMS cap kept; all terms (reg_coeff/2)-scaled, reg_coeff 1.0.",
+ "steps_override": null,
+ "status": "PASS",
+ "passed": true,
+ "metric": {
+  "name": "passing suffix",
+  "value": "18/24"
+ },
+ "detail": "confirmed 37 mean_abs=0.973 grad_med=0.129",
+ "raw": {
+  "verdict": {
+   "status": "PASS",
+   "attempted": true,
+   "passed": true,
+   "metrics": [
+    {
+     "metric": "mean_abs",
+     "value": 0.9726142287254333,
+     "op": ">=",
+     "threshold": 0.3,
+     "status": "PASS",
+     "margin": 0.6726142287254333
+    },
+    {
+     "metric": "grad_med",
+     "value": 0.12925761938095093,
+     "op": "<=",
+     "threshold": 1.0,
+     "status": "PASS",
+     "margin": 0.8707423806190491
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 18,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 18,
+    "first_pass_step": 24,
+    "stable_from_step": 24,
+    "stable_from_seconds": 1.4381959949387237,
+    "confirmed_step": 37,
+    "confirmed_seconds": 1.4672867519548163
+   },
+   "shortfall": 0.0,
+   "confirmation_fraction": 0.4625
+  },
+  "ema": "N/A",
+  "noise_applied": true
+ },
+ "seconds": 1.8,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "38643bdfff62cf904056f75c9581a292f2d5fc2b771c6b016a966f9568a7778d",
+  "init_tensors": 5
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  },
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "direct_particle_gain": false,
+    "amsgrad": true
+   },
+   "calls": 80,
+   "s_last": 1.0,
+   "critic_parameters": 97,
+   "guard_clipped_tensors": 0,
+   "record": {
+    "lr_max": 0.00425,
+    "lr_last": 0.00425,
+    "anchor_started": true,
+    "calls": 80,
+    "observed_steps": 80
+   }
+  },
+  "simple_calls": 0,
+  "lr": {
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 80,
+    "amsgrad": true
+   },
+   "opt1.g0": {
+    "min": 0.017,
+    "max": 0.017,
+    "steps": 80,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 0,
+   "direct_steps": 80,
+   "direct_gain_steps": 0,
+   "guard_calls": 80,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0,
+   "nr_penalty_calls": 80
+  },
+  "final_sha256": "9a64a8290b8a67771b656baee9d3e6e60dd241effecc525fd6e8aa3e70d9fb15",
+  "penalty_variant": null,
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ },
+ "nr_receipt": {
+  "arm": "nr_none_anchor_c1",
+  "spike": "none",
+  "settle": "anchor",
+  "r1_weight_applied": 0.0,
+  "r1_evals": 0,
+  "penalty_patched": true,
+  "penalty_form": "c/2*[none + fake_cap + anchor_weight*prox]",
+  "nr_penalty_calls": 80,
+  "stock_k3p_penalty_calls": 0,
+  "term_stats": {
+   "prox": {
+    "mean": 0.05371363759040833,
+    "positive_frac": 0.975,
+    "calls": 80
+   },
+   "spike": {
+    "mean": 0.0,
+    "positive_frac": 0.0,
+    "calls": 80
+   },
+   "fake_cap": {
+    "mean": 0.0,
+    "positive_frac": 0.0,
+    "calls": 80
+   }
+  },
+  "pathcap_pair_mismatch": 0,
+  "pairsec_rows": 0,
+  "pairsec_no_neighbor": 0,
+  "loss_form": "rp_softplus",
+  "d_loss_calls": {
+   "rp_softplus": 80
+  },
+  "g_loss": "RpGAN softplus (unchanged)",
+  "critic_optimizers": [
+   {
+    "cls": "Adam",
+    "update_rule": "torch.optim.Adam.step",
+    "oadam_steps": 0,
+    "adam_steps": 80,
+    "lr_receipt_steps": 80,
+    "amsgrad": [
+     true
+    ],
+    "betas": [
+     [
+      0.0,
+      0.999
+     ]
+    ],
+    "lr": [
+     0.00425
+    ],
+    "state_keys": [
+     "exp_avg",
+     "exp_avg_sq",
+     "max_exp_avg_sq",
+     "step"
+    ],
+    "guard": true,
+    "guard_reads": {
+     "max_exp_avg_sq": 316
+    }
+   }
+  ],
+  "oadam_steps": 0,
+  "oadam_steps_non_critic": 0,
+  "guard_reads": {
+   "max_exp_avg_sq": 316
+  },
+  "anchor_active": true,
+  "anchor_start_step": 1,
+  "anchor_deferred_calls": 1,
+  "kernels": [
+   {
+    "anchor_weight": 1.0,
+    "kappa": 1.0,
+    "coeff": 1.0,
+    "lazy_k": 1,
+    "anchor_started": true,
+    "anchor": "SwapAnchor",
+    "blend_s": 1.0,
+    "record_steps": 80
+   }
+  ],
+  "noise": {
+   "declared": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "applied": {
+    "host_policy": {
+     "input_std": 0.0,
+     "input_nonzero_steps": 0,
+     "input_sigma_first": 0.0,
+     "output_nonzero_steps": 0,
+     "output_scale_initial": 0.0
+    }
+   }
+  },
+  "lr": {
+   "declared": {
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 1.0
+   },
+   "applied_groups": {
+    "opt0.g0": {
+     "min": 0.00425,
+     "max": 0.00425,
+     "steps": 80,
+     "amsgrad": true
+    },
+    "opt1.g0": {
+     "min": 0.017,
+     "max": 0.017,
+     "steps": 80,
+     "amsgrad": true
+    }
+   },
+   "lr_constant": true,
+   "gantrainer_recipes": []
+  }
+ }
+}

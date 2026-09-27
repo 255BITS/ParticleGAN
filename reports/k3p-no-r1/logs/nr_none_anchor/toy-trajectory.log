@@ -1,0 +1,29 @@
+# arm=nr_none_anchor task=toy-trajectory route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-no-r1/particlegan/__init__.py
+START trajectory route=public primitives custom host + shared noise policy steps=400
+eval    17 identity_mse=0.3899
+eval    34 identity_mse=0.02697
+eval    50 identity_mse=0.03495
+eval    67 identity_mse=0.0132
+eval    84 identity_mse=0.0174
+eval   100 identity_mse=0.01251
+eval   117 identity_mse=0.003819
+eval   134 identity_mse=0.002066
+eval   150 identity_mse=0.001461
+eval   167 identity_mse=0.001166
+eval   184 identity_mse=0.0009517
+eval   200 identity_mse=0.0007598
+eval   217 identity_mse=0.0005951
+eval   234 identity_mse=0.0005751
+eval   250 identity_mse=0.0005048
+eval   267 identity_mse=0.0004356
+eval   284 identity_mse=0.0007921
+eval   300 identity_mse=0.001329
+eval   317 identity_mse=0.002267
+eval   334 identity_mse=0.007303
+eval   350 identity_mse=0.02427
+eval   367 identity_mse=0.01747
+eval   384 identity_mse=0.016
+eval   400 identity_mse=0.002901
+{"event": "DONE", "task": "trajectory", "status": "FAIL", "suffix": 3, "live": {"identity_mse": 0.0029011424630880356}, "error": null}
+# DONE toy-trajectory status=FAIL metric={'name': 'passing suffix', 'value': '3/24'} 4s
+# NR receipt spike=none settle=anchor r1=0.0 loss={'rp_softplus': 400} oadam_steps=0 anchor_active=True penalty_calls=400 stock_calls=0
