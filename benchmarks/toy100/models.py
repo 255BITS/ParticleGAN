@@ -38,10 +38,10 @@ class LearnableOutputScale(nn.Module):
 
 
 class OutputNoise(nn.Module):
-    """Add fresh isotropic output noise to training fakes.
+    """Add fresh isotropic output noise in both training and sampling.
 
     Inside :func:`clean_output_noise` the wrapper returns the clean
-    prediction without drawing, so evaluation scores the generator itself.
+    prediction without drawing (a diagnostic of the generator mean).
     """
 
     _clean = False
@@ -130,10 +130,11 @@ class IsolatedOutputNoise(OutputNoise):
 
 @contextmanager
 def clean_output_noise(models):
-    """Disable output noise (and its draws) on the given wrappers for scoring.
+    """Disable output noise (and its draws) on the given wrappers.
 
-    Output noise is a training regularizer: evaluation should score the clean
-    generator. No stream is touched, so training noise replays exactly.
+    Diagnostic only: output noise is part of the sampling law, and
+    evaluation scores noisy samples. No stream is touched, so training noise
+    replays exactly.
     """
     wrappers = tuple(dict.fromkeys(
         model for model in models if isinstance(model, OutputNoise)
@@ -149,9 +150,13 @@ def clean_output_noise(models):
 
 
 def sample_clean(trainer, n: int, **options) -> torch.Tensor:
-    """``trainer.sample`` without the benchmark's training output noise."""
+    """Diagnostic: the clean generator mean, without any output noise.
+
+    Disables the benchmark's wrapper noise and passes ``output_noise=False``
+    for the recipe's own output noise. Not the model's samples.
+    """
     with clean_output_noise((trainer.G, trainer.ema_G)):
-        return trainer.sample(n, **options)
+        return trainer.sample(n, output_noise=False, **options)
 
 
 @contextmanager

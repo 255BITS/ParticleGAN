@@ -35,7 +35,6 @@ from .metrics import EVAL_N, evaluate_samples
 from .models import (
     OUTPUT_NOISE_SEED_OFFSET, InputNoise, IsolatedOutputNoise, OutputNoise,
     StatefulInputNoise, linear_input_noise, linear_output_noise, paired_output_noise,
-    sample_clean,
 )
 from .problems import PROBLEM_NAMES, sample_real
 from .schedule import policy_rate_action, step_with_policy
@@ -308,7 +307,7 @@ class IsolatedNoiseGANTrainer(GANTrainer):
     """Preserve private training noise across direct public-style sampling."""
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None, output_noise=False,
+    def sample(self, n, *, ema=False, generator=None, output_noise=True,
                output_noise_eval_seed=None):
         model = self.ema_G if ema else self.G
         if model._output_rng_scope_active:
@@ -742,9 +741,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         "status": "running", "problem": resolved["problem"], "budget_steps": budget,
         "config": resolved, "eval_steps": eval_steps, "snapshot_steps": snap_steps,
         "provenance": provenance, "environment": environment,
-        # Evaluation and holdout draws omit training output noise. Evidence
-        # without this key predates the change and scored noisy samples.
-        "eval_output_noise": "clean",
+        # Evaluation and holdout draws include the output noise (the model's
+        # sampling law). Only #209-era evidence recorded "clean"; evidence
+        # without this key also scored noisy samples.
+        "eval_output_noise": "noisy",
     }
     if "network_lr_horizon_cap" in resolved:
         summary["network_lr_horizon_cap"] = resolved["network_lr_horizon_cap"]
@@ -837,9 +837,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         before_state = _noise_state_sha256(sampled_model)
                         before_draws = sampled_model.draw_receipt()
                         sample_options["output_noise_eval_seed"] = resolved["seed"] + 402
-                    # Score the generator itself: output noise is a training
-                    # regularizer, so evaluation samples are drawn clean.
-                    draw = sample_clean(trainer, count, **sample_options)
+                    # Score the model's sampling law: output noise included.
+                    draw = trainer.sample(count, **sample_options)
                     if isolated:
                         after_state = _noise_state_sha256(sampled_model)
                         after_draws = sampled_model.draw_receipt()

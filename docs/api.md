@@ -295,11 +295,13 @@ use unique sampled rows. There is no particle L2 term.
   recipe weight. `generator_real` can supply a fresh tensor or zero-argument
   callback for RP/RA; otherwise the real batch is reused. RP requires equal
   batch sizes. `collect_stats=True` also returns penalty diagnostics.
-- `sample(n, ema=False, generator=None, output_noise=False)` defaults to live
-  weights and returns clean samples: the recipe's output noise is a training
-  regularizer, so evaluate without it. Latents are drawn as in training,
-  including the prior's support jitter. `output_noise=True` adds the current
-  training output noise, drawn from the sampling stream. Its separate RNG and
+- `sample(n, ema=False, generator=None, output_noise=True)` defaults to live
+  weights and follows the model's sampling law: latents are drawn as in
+  training, including the prior's support jitter, and the current output
+  noise is added, drawn from the sampling stream (the generator places
+  particles near mode centres; the noise supplies the spread).
+  `output_noise=False` returns the clean generator mean as a diagnostic. Its
+  separate RNG and
   temporary evaluation mode preserve training randomness and module modes.
   EMA averages G/prior parameters and copies their buffers, including
   integer counters. EMA never determines a live leaderboard pass.
