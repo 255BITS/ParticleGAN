@@ -238,11 +238,19 @@ class GANTrainer:
         return result
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None):
-        """Draw live or EMA samples (with the current output noise) without
-        changing modes or training RNGs."""
+    def sample(self, n, *, ema=False, generator=None, output_noise=False):
+        """Draw live or EMA samples without changing modes or training RNGs.
+
+        Samples are clean by default: output noise is a training regularizer.
+        ``output_noise=True`` adds the current training output noise (drawn
+        from the sampling stream, as before). Only the sampling stream
+        (``generator`` or the trainer's evaluation stream) is consumed, so
+        either choice leaves training trajectories unchanged.
+        """
         if type(n) is not int or n <= 0:
             raise ValueError("n must be a positive integer")
+        if type(output_noise) is not bool:
+            raise ValueError("output_noise must be a boolean")
         stream = self.eval_generator if generator is None else self._stream(generator, 0)
         if stream in (self.latent_generator, self.penalty_generator, self.noise_generator):
             raise ValueError("sampling requires a stream separate from training")
@@ -254,7 +262,8 @@ class GANTrainer:
             prior.eval()
             with torch.random.fork_rng(devices=devices):
                 latent, _ = prior.sample(n, generator=stream)
-                return self._generate(model, latent, output_noise_std(self.recipe, self.completed_steps), stream)
+                sigma = output_noise_std(self.recipe, self.completed_steps) if output_noise else 0.0
+                return self._generate(model, latent, sigma, stream)
         finally:
             for module, flag in modes:
                 module.training = flag
