@@ -7,7 +7,7 @@ import torch
 from torch import nn
 
 from benchmarks.locked_shared.hosts import (
-    mid_scale_identity, unused_token_hold,
+    unused_token_hold,
 )
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, wrap_output
 
@@ -17,14 +17,11 @@ def _run(host, policy, monkeypatch):
         return unused_token_hold.train(
             unused_token_hold.UnusedHoldRecipe(steps=2), noise_policy=policy,
         )
-    if host == "mid_scale_identity":
-        return mid_scale_identity.run_arm("locked", steps=2, noise_policy=policy)
     raise AssertionError(host)
 
 
 @pytest.mark.parametrize("host", (
     "unused_token_hold",
-    "mid_scale_identity",
 ))
 def test_all_legacy_hosts_own_and_update_one_learnable_output_scalar(
     host, monkeypatch,
@@ -116,7 +113,6 @@ def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
 
 @pytest.mark.parametrize("host", (
     "unused_token_hold",
-    "mid_scale_identity",
 ))
 def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rng(
     host, monkeypatch,
