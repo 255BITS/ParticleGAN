@@ -1,0 +1,6 @@
+# 2026-09-27 08:02:09 arm=nr_pathcap_oadam device=cuda:1 tasks=4 steps=300
+08:02:33 toy-two_pole           PASS  passing suffix=7/24 | confirmed 74 mean_abs=1.6 grad_med=0.0853 | 2s rc=0
+08:02:43 ring8-shift            FAIL  fails outside transit=None | no shift in budget | 31s rc=0
+08:03:07 native-grid100         FAIL  final modes/HQ=100/0.986 | coverage FAIL accuracy FAIL first100 250 massTV 0.04905 | 55s rc=0
+08:03:35 toy-img_bars4          FAIL  passing suffix=3/24 | confirmed None modes=4 hq=0.938 | 54s rc=0
+# 2026-09-27 08:03:35 arm=nr_pathcap_oadam finished

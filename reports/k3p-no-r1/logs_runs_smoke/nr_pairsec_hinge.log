@@ -1,0 +1,6 @@
+# 2026-09-27 08:02:09 arm=nr_pairsec_hinge device=cuda:1 tasks=4 steps=300
+08:02:37 ring8-shift            FAIL  fails outside transit=None | no shift in budget | 25s rc=0
+08:02:41 toy-two_pole           FAIL  passing suffix=3/24 | confirmed None mean_abs=1.48 grad_med=0.243 | 2s rc=0
+08:03:01 native-grid100         FAIL  final modes/HQ=100/0.970 | coverage FAIL accuracy FAIL first100 250 massTV 0.053849999999999995 | 48s rc=0
+08:03:23 toy-img_bars4          FAIL  passing suffix=0/24 | confirmed None modes=3 hq=1 | 38s rc=0
+# 2026-09-27 08:03:23 arm=nr_pairsec_hinge finished
