@@ -26,6 +26,7 @@ Recovery is arrival time followed by stability, without an 81/81 deadline requir
 | New initialization | Develop `c720645e` merged; fresh networks and recipe-created priors use deterministic initialization; samples remain stochastic |
 | Merge tests | 246 CPU tests passed; one CUDA-only test skipped in the authoritative CPU run |
 | Old checkpoints | K3P schema 1–3 remain incompatible with KA2; use 0.8.0 for those checkpoints |
+| Unfinished research lead | **SN3: PROMISING — UNFINISHED**; longer stability and public API checks unrun |
 | Wider retest | 49 API + 75 research configurations complete; remaining work explicitly untested |
 | Search / merge | Stopped; draft; unmerged; base `develop` |
 

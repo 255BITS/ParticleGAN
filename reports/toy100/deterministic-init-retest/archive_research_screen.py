@@ -20,8 +20,16 @@ def render_table(table):
         '|---|---|---:|---:|---:|---|']
     for row in sorted(table['results'], key=lambda row: (row['status'] != 'PASS', -row['summary']['passing'], row['candidate'])):
         s = row['summary']
-        lines.append(f"| [{row['candidate']}]({row['archive_manifest']}) | {row['status']} | {s['passing']}/24 | {s['first_arrival'] or '—'} | {s['final_suffix']} | {s['final_modes']}/8 / {s['final_hq']:.1%} |")
+        marker = ' **PROMISING — UNFINISHED**' if row['id'] == 'research-sn3-2f595f84-new-init' else ''
+        lines.append(f"| [{row['candidate']}]({row['archive_manifest']}){marker} | {row['status']} | {s['passing']}/24 | {s['first_arrival'] or '—'} | {s['final_suffix']} | {s['final_modes']}/8 / {s['final_hq']:.1%} |")
     lines += ['', 'Inner host diagnostic labels do not override the strict eight-mode score. Original schedules, source limitations, and old-initialization evidence remain attached to each configuration.', '']
+    stop = ROOT / 'retest-closure/user-stop/stop-receipt.json'
+    if stop.exists():
+        pending = json.loads(stop.read_text())['not_run_case_ids']
+        lines += ['**Unfinished work:** SN3 is the one confirmed promising lead; its longer stability and public API qualification remain unrun. The cases below have no new score and are not ranked.', '',
+                  '| Unrun research case | Status |', '|---|---|']
+        lines += [f'| `{case}` | UNTESTED — PROMISE UNKNOWN |' for case in sorted(pending)]
+        lines.append('')
     (ROOT / 'research-leaderboard.md').write_text('\n'.join(lines))
 
 

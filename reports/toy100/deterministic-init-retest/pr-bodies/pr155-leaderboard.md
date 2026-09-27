@@ -71,7 +71,7 @@ Quick-screen ranking: PASS first, then passing checks, final streak, and earlier
 | 1 | [pnb3](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-pnb3-a392cdc9-new-init/archive-manifest.json) | PASS | 15/24 | 500 | 15 | 8/8 · 100.00% | **Disqualified:** horizon-based noise |
 | 2 | [jt2 growth trust](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-jt2-growth-trust-c630d2b1-new-init/archive-manifest.json) | PASS | 15/24 | 450 | 10 | 8/8 · 99.90% | **Disqualified:** timed rates and noise |
 | 3 | [ra r1 fake cap](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-ra-r1-fake-cap-42bda24f-new-init/archive-manifest.json) | PASS | 11/24 | 700 | 11 | 8/8 · 100.00% | **Disqualified:** timed learning rates |
-| 3 | [sn3](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/archive-manifest.json) | PASS | 11/24 | 700 | 11 | 8/8 · 91.43% | **Unqualified:** autonomous controls; long/API checks unrun |
+| 3 | [sn3](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn3-2f595f84-new-init/archive-manifest.json) | PASS | 11/24 | 700 | 11 | 8/8 · 91.43% | **PROMISING — UNFINISHED:** autonomous controls; longer stability and API checks unrun |
 
 <details>
 <summary>Remaining 71 scored entries, in the same rank order</summary>
@@ -149,6 +149,42 @@ Quick-screen ranking: PASS first, then passing checks, final streak, and earlier
 | 8 | [sn1](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn1-9e99c8d7-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 7/8 · 76.03% | Quick screen fails; not qualified |
 | 8 | [sn2 absolute gap noise](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-sn2-absolute-gap-noise-cdb88771-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 5/8 · 87.01% | Quick screen fails; not qualified |
 | 8 | [td3 sampling dispersion](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/research-evidence/research-td3-sampling-dispersion-261ceb26-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 7/8 · 99.00% | Quick screen fails; not qualified |
+
+</details>
+
+**Unfinished leads and unrun cases**
+
+| Entry | Mark | Work remaining |
+|---|---|---|
+| Research SN3 | **PROMISING — UNFINISHED** | Longer stability with the new initialization; public API qualification |
+
+<details>
+<summary>22 unrun research cases — UNTESTED, promise unknown (not ranked)</summary>
+
+| Research case | Mark |
+|---|---|
+| `ac1-persistence-549d59e6` | **UNTESTED — PROMISE UNKNOWN** |
+| `ac2-advantage-2486972b` | **UNTESTED — PROMISE UNKNOWN** |
+| `ac3-gap-magnitude-8b2c2556` | **UNTESTED — PROMISE UNKNOWN** |
+| `cc1-halfsplit-coherence-894a403d` | **UNTESTED — PROMISE UNKNOWN** |
+| `cc2-margin-uncertainty-f8f9b004` | **UNTESTED — PROMISE UNKNOWN** |
+| `cc3-frozen-baseline-quiet-399ef2aa` | **UNTESTED — PROMISE UNKNOWN** |
+| `di1-real-batch-innovation-63a67cee` | **UNTESTED — PROMISE UNKNOWN** |
+| `di3-latch-then-anchor-snap-4e7feaf7` | **UNTESTED — PROMISE UNKNOWN** |
+| `ep2-8fe3d1db` | **UNTESTED — PROMISE UNKNOWN** |
+| `ns3-fixed-schedule-shock-32b0ade5` | **UNTESTED — PROMISE UNKNOWN** |
+| `pn1-motion-noise-814d29bb` | **UNTESTED — PROMISE UNKNOWN** |
+| `pn2-rate-normalized-contraction-06b0914c` | **UNTESTED — PROMISE UNKNOWN** |
+| `pn3-frozen-raw-peak-957bfa9a` | **UNTESTED — PROMISE UNKNOWN** |
+| `px1-gap-contraction-b4b92eb2` | **UNTESTED — PROMISE UNKNOWN** |
+| `px2-proportional-gap-6c17331e` | **UNTESTED — PROMISE UNKNOWN** |
+| `rr1-innovation-reference-2c71f674` | **UNTESTED — PROMISE UNKNOWN** |
+| `rr2-prox-reference-51ecd753` | **UNTESTED — PROMISE UNKNOWN** |
+| `rr3-prox-release-f0730455` | **UNTESTED — PROMISE UNKNOWN** |
+| `sn1-gap-mobility-dbade7aa` | **UNTESTED — PROMISE UNKNOWN** |
+| `sn3-settle-cosine-f26f985e` | **UNTESTED — PROMISE UNKNOWN** |
+| `td1-kernel-b6f35894` | **UNTESTED — PROMISE UNKNOWN** |
+| `td2-separate-constraint-a1291463` | **UNTESTED — PROMISE UNKNOWN** |
 
 </details>
 

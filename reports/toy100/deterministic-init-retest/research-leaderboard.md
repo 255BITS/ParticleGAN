@@ -9,7 +9,7 @@ A quality pass does not establish continuous-learning eligibility. [The closeout
 | [RESEARCH-jt2_growth_trust-new-init](research-evidence/research-jt2-growth-trust-c630d2b1-new-init/archive-manifest.json) | PASS | 15/24 | 450 | 10 | 8/8 / 99.9% |
 | [RESEARCH-pnb3-new-init](research-evidence/research-pnb3-a392cdc9-new-init/archive-manifest.json) | PASS | 15/24 | 500 | 15 | 8/8 / 100.0% |
 | [RESEARCH-ra_r1_fake_cap-new-init](research-evidence/research-ra-r1-fake-cap-42bda24f-new-init/archive-manifest.json) | PASS | 11/24 | 700 | 11 | 8/8 / 100.0% |
-| [RESEARCH-sn3-new-init](research-evidence/research-sn3-2f595f84-new-init/archive-manifest.json) | PASS | 11/24 | 700 | 11 | 8/8 / 91.4% |
+| [RESEARCH-sn3-new-init](research-evidence/research-sn3-2f595f84-new-init/archive-manifest.json) **PROMISING — UNFINISHED** | PASS | 11/24 | 700 | 11 | 8/8 / 91.4% |
 | [RESEARCH-c01_r1r2-new-init](research-evidence/research-c01-r1r2-435f6f20-new-init/archive-manifest.json) | FAIL | 8/24 | 500 | 0 | 8/8 / 80.8% |
 | [RESEARCH-sn2-new-init](research-evidence/research-sn2-be227066-new-init/archive-manifest.json) | FAIL | 8/24 | 500 | 0 | 6/8 / 91.6% |
 | [RESEARCH-bcap_symmetric_half-new-init](research-evidence/research-bcap-symmetric-half-6330f6c7-new-init/archive-manifest.json) | FAIL | 4/24 | 1050 | 4 | 8/8 / 100.0% |
@@ -83,3 +83,30 @@ A quality pass does not establish continuous-learning eligibility. [The closeout
 | [RESEARCH-td3_sampling_dispersion-new-init](research-evidence/research-td3-sampling-dispersion-261ceb26-new-init/archive-manifest.json) | FAIL | 0/24 | — | 0 | 7/8 / 99.0% |
 
 Inner host diagnostic labels do not override the strict eight-mode score. Original schedules, source limitations, and old-initialization evidence remain attached to each configuration.
+
+**Unfinished work:** SN3 is the one confirmed promising lead; its longer stability and public API qualification remain unrun. The cases below have no new score and are not ranked.
+
+| Unrun research case | Status |
+|---|---|
+| `ac1-persistence-549d59e6` | UNTESTED — PROMISE UNKNOWN |
+| `ac2-advantage-2486972b` | UNTESTED — PROMISE UNKNOWN |
+| `ac3-gap-magnitude-8b2c2556` | UNTESTED — PROMISE UNKNOWN |
+| `cc1-halfsplit-coherence-894a403d` | UNTESTED — PROMISE UNKNOWN |
+| `cc2-margin-uncertainty-f8f9b004` | UNTESTED — PROMISE UNKNOWN |
+| `cc3-frozen-baseline-quiet-399ef2aa` | UNTESTED — PROMISE UNKNOWN |
+| `di1-real-batch-innovation-63a67cee` | UNTESTED — PROMISE UNKNOWN |
+| `di3-latch-then-anchor-snap-4e7feaf7` | UNTESTED — PROMISE UNKNOWN |
+| `ep2-8fe3d1db` | UNTESTED — PROMISE UNKNOWN |
+| `ns3-fixed-schedule-shock-32b0ade5` | UNTESTED — PROMISE UNKNOWN |
+| `pn1-motion-noise-814d29bb` | UNTESTED — PROMISE UNKNOWN |
+| `pn2-rate-normalized-contraction-06b0914c` | UNTESTED — PROMISE UNKNOWN |
+| `pn3-frozen-raw-peak-957bfa9a` | UNTESTED — PROMISE UNKNOWN |
+| `px1-gap-contraction-b4b92eb2` | UNTESTED — PROMISE UNKNOWN |
+| `px2-proportional-gap-6c17331e` | UNTESTED — PROMISE UNKNOWN |
+| `rr1-innovation-reference-2c71f674` | UNTESTED — PROMISE UNKNOWN |
+| `rr2-prox-reference-51ecd753` | UNTESTED — PROMISE UNKNOWN |
+| `rr3-prox-release-f0730455` | UNTESTED — PROMISE UNKNOWN |
+| `sn1-gap-mobility-dbade7aa` | UNTESTED — PROMISE UNKNOWN |
+| `sn3-settle-cosine-f26f985e` | UNTESTED — PROMISE UNKNOWN |
+| `td1-kernel-b6f35894` | UNTESTED — PROMISE UNKNOWN |
+| `td2-separate-constraint-a1291463` | UNTESTED — PROMISE UNKNOWN |
