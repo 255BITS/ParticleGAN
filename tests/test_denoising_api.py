@@ -7,7 +7,7 @@ import torch
 
 from experiments.config import read_config
 from experiments import train_denoising, train_trajectory
-from particlegan import ParticleRegularizer, get_recipe, learning_rate_scale
+from particlegan import ParticleRegularizer, get_recipe, initialize_, learning_rate_scale
 from particlegan.diffusion import DrawSource
 
 
@@ -24,6 +24,8 @@ def test_mog_latent_updates_and_checkpoint_sampling(model):
     prior = train_denoising.make_prior(cfg, "cpu")
     assert isinstance(prior, MoGParticlePrior)
     g, d = ToyGenerator(cfg), ToyDiscriminator(cfg)
+    initialize_(g, key=0)  # replaces the constructors' Xavier init, as training does
+    initialize_(d, key=1)
     opt, _ = recipe.make_optimizers(g, d, prior)
     assert opt.param_groups[1]["betas"] == (.5, .999)
     before = prior.z.detach().clone()

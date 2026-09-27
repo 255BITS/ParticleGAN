@@ -43,6 +43,15 @@ def _declarations(module):
     return {}
 
 
+def _changed_since_construction(child, parameter):
+    # PyTorch's own constructors write each supported parameter in place once
+    # (an Embedding padding row adds one more write). Any later in-place write,
+    # such as load_state_dict, copy_, or an optimizer step, bumps _version past
+    # that; dtype/device moves and the recipe's own init mark do not.
+    fresh = 2 if isinstance(child, nn.Embedding) and child.padding_idx is not None else 1
+    return parameter._version > fresh
+
+
 def _keep_constant(parameter):
     if parameter.ndim < 2:
         return bool(torch.all(parameter == 0))
@@ -55,7 +64,7 @@ def _keep_constant(parameter):
 
 
 @torch.no_grad()
-def _initialize(module, *, key=0, only_new=False):
+def _initialize(module, *, key=0, only_new=False, modified=None):
     if not isinstance(module, nn.Module):
         raise TypeError("initialize_ expects an nn.Module")
     if type(key) is not int or key < 0:
@@ -67,7 +76,7 @@ def _initialize(module, *, key=0, only_new=False):
             if name in declarations:
                 owners.setdefault(id(parameter), (child, name, declarations[name]))
     changed = set()
-    for index, parameter in enumerate(module.parameters()):
+    for index, (path, parameter) in enumerate(module.named_parameters()):
         if (not parameter.requires_grad or not parameter.numel()
                 or id(parameter) not in owners
                 or (only_new and getattr(parameter, _MARK, False))):
@@ -76,6 +85,8 @@ def _initialize(module, *, key=0, only_new=False):
         setattr(parameter, _MARK, True)
         if _keep_constant(parameter):
             continue
+        if modified is not None and _changed_since_construction(child, parameter):
+            modified.append(path)
         tensor_key = _qr._key(key, index, tuple(parameter.shape))
         if name == "bias":
             value = _qr.pattern_bias(tensor_key, parameter.shape, tag)

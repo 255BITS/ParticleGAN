@@ -56,7 +56,7 @@ if str(_REPO_ROOT) not in sys.path:
 
 from experiments.config import read_config
 from particlegan import (  # noqa: E402
-    ParticlePrior, ParticleRegularizer, get_recipe, scale_learning_rates, ucd_loss,
+    ParticlePrior, ParticleRegularizer, get_recipe, initialize_, scale_learning_rates, ucd_loss,
 )
 from lib.sparse_toy import SparseMixedToy  # noqa: E402
 from lib.sparse_models import (  # noqa: E402
@@ -268,6 +268,10 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     # ---- losses / optimizers ----
     gan_loss = recipe.make_loss()
     vic = ParticleRegularizer()
+    if recipe.initialization is not None:
+        # The recipe's default replaces the constructors' Xavier init; do it explicitly.
+        initialize_(G, key=0)
+        initialize_(D, key=1)
     # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
     opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
     ema_G, ema_prior = copy.deepcopy(G), copy.deepcopy(prior)

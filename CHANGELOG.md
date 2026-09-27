@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- `make_optimizers` warns (`UserWarning`) when default initialization is about
+  to overwrite G/D/E weights changed after construction, e.g. loaded before the
+  call or replaced by custom constructor init. It names the network,
+  parameters, and fixes: call `make_optimizers` first, use
+  `initialization=None`, or call `initialize_` explicitly when the overwrite
+  is intended. Behavior is unchanged; repo examples/experiments whose
+  constructors run their own init now call `initialize_` explicitly.
 - Fresh recipes default to `initialization="batch_feature_zero"`: deterministic
   RMS-matched QR weights, patterned biases, R2 recipe-created particle clouds,
   and zero initial batch-distance readout coefficients. `GANTrainer` and
