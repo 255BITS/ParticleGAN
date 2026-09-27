@@ -1,0 +1,106 @@
+{
+  "created_utc": "2026-09-27T00:28:34.870764+00:00",
+  "scope": "Stdlib raw tensor metadata/storage only; no Torch import or test execution.",
+  "native_saved_states": {
+    "C10-single/state-1600.pt": {
+      "sha256": "91c1fb0607a94edddcd60e6255338d38fca76a72ff293d1052d05d7078295a18",
+      "accepted_steps": 1600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C10-single/state-1750.pt": {
+      "sha256": "8ad90a628853568c3355a66d07c154d84fbadc3427aeb6194c2f2460d172551a",
+      "accepted_steps": 1750,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C10-single/final-state.pt": {
+      "sha256": "ef628f617ab200c50fdbe2ee3817dbcc822e0902890dcb9f9e6e1f519b813e3e",
+      "accepted_steps": 4600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C10-img_intensity2/final-state.pt": {
+      "sha256": "4f4d4e745bf09bf47a527e1d08ede36536a8a7d37b623bd207d574867c288f6d",
+      "accepted_steps": 600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C11-single/state-1600.pt": {
+      "sha256": "0d0c896359f3c93d251724fb35b5b25de0cbfdd6ec7e78d60a5dd62efeee8032",
+      "accepted_steps": 1600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C11-single/state-1750.pt": {
+      "sha256": "6d24e7db68e7369785d3967d6dafd85ce79c9115d6694a8b29d39db237d166f5",
+      "accepted_steps": 1750,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C11-single/final-state.pt": {
+      "sha256": "baaa529a90a2984cea3c42bcfc25c337d3f9920258d3641bc7c0e71b98d713a2",
+      "accepted_steps": 4600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C11-img_intensity2/final-state.pt": {
+      "sha256": "81f547fea79451c469670b84e86068055d8a6683b4429380c28ac13fc729f3fe",
+      "accepted_steps": 600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C12-single/state-1600.pt": {
+      "sha256": "f96368a4bffe2b79ad6d49b21159594eb3d1f95e459a70c3e8df20a022752527",
+      "accepted_steps": 1600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C12-single/state-1750.pt": {
+      "sha256": "a6d9d23f85627437f2e980faf57355006d67eff587e61f30d0f14fc735846e49",
+      "accepted_steps": 1750,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C12-single/final-state.pt": {
+      "sha256": "31303b94ef4548d43e66ccc2f8eee36508d51d0ba2d0e9f6f6ba3df732345787",
+      "accepted_steps": 4600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    },
+    "C12-img_intensity2/final-state.pt": {
+      "sha256": "2aabbd5dd5a57a9b7715ba48edaf96463c73eb0cc1484a8fd11006cf57deacb9",
+      "accepted_steps": 600,
+      "native_clock_and_reference_match_receipt": true,
+      "models_and_moments_cuda": true,
+      "steps_scalar_cpu": true
+    }
+  },
+  "native_state_count": 12,
+  "source_entry_counts": {
+    "C10-single": 21,
+    "C10-img_intensity2": 25,
+    "C11-single": 24,
+    "C11-img_intensity2": 25,
+    "C12-single": 28,
+    "C12-img_intensity2": 26
+  },
+  "source_entries": 149,
+  "source_hash_mismatches": [],
+  "driver_status": "completed (inspect result.md; exit 0 does not mean a win)",
+  "final_report_sha256": "a0cffb5ace7952d8a012f8555778146b939c71b0b7f4e21cd5a04099118a835e",
+  "regression_log_sha256": "6aa57d60a84e6dfb86aa9fb538b63b079dd8d1f0b855bde4d5e9cd29bb11747d",
+  "regression_receipt": "........................................................................ [ 64%]\n.......................................                                  [100%]\n111 passed in 30.71s",
+  "regression_source_sha256": "71dc16682ee6e07317ab97547e55d76ba526916520ab97340d87c9f3cc27ba7f"
+}

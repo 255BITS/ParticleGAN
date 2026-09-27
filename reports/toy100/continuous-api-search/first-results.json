@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "recorded_utc": "2026-09-27T00:15:34.571532+00:00",
+  "recorded_utc": "2026-09-27T00:28:11.031654+00:00",
   "qualified_winner": null,
   "observations": "Live weights; eight modes and HQ>=.90 every10 updates; no deadline gate; no extra seeds.",
   "results": [
@@ -4500,6 +4500,98 @@
           "original_sha256": "5c10b200fd57bab1d58a6f49b3a57228d63d6898487ced1cc5cb5c7c0aefa1aa",
           "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T232429Z-1607588/constant_rate_stability/20260926T232429Z-1607596/repo/experiments/constant_conditioning/C12-single/state-hashes.jsonl",
           "bytes": 21302
+        }
+      }
+    },
+    {
+      "id": "api-rp8-single",
+      "scope": "PUBLIC_API",
+      "source_directory": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single",
+      "observed_through": 4600,
+      "complete_declared_evaluation": true,
+      "protocol": "single_shift",
+      "protocol_sha256": "4568fc0d21000b8500e07622dc9db2a2ddb6fbeda124b44f972154d5427989ca",
+      "segments": [
+        {
+          "start": 0,
+          "end": 2400,
+          "first_arrival": 520,
+          "arrival_delay": 520,
+          "passing_since_arrival": 189,
+          "observations_since_arrival": 189,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.905517578125,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 520,
+          "final_suffix_observations": 189
+        },
+        {
+          "start": 2400,
+          "end": 4600,
+          "first_arrival": 2690,
+          "arrival_delay": 290,
+          "passing_since_arrival": 192,
+          "observations_since_arrival": 192,
+          "all_departures": [],
+          "minimum_hq_since_arrival": 0.927978515625,
+          "minimum_modes_since_arrival": 8,
+          "final_suffix_start": 2690,
+          "final_suffix_observations": 192
+        }
+      ],
+      "historical_prehold_window": {
+        "passing": 120,
+        "observations": 120,
+        "note": "Not an acquisition deadline; use retention since actual arrival."
+      },
+      "artifacts": {
+        "evidence/api-rp8-single/source.zip": {
+          "sha256": "d5cd8fc264f63e27b8ac0523705a5ce794cbed5c84fc70a07b9111841ba9c6a4",
+          "original_sha256": "d5cd8fc264f63e27b8ac0523705a5ce794cbed5c84fc70a07b9111841ba9c6a4",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/source.zip",
+          "bytes": 93906
+        },
+        "evidence/api-rp8-single/declaration.json": {
+          "sha256": "8d3bdd9657ce4b0f8afe28e18e55d9ae65d568b80c0374fdcc95d580184dd4a8",
+          "original_sha256": "8d3bdd9657ce4b0f8afe28e18e55d9ae65d568b80c0374fdcc95d580184dd4a8",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/declaration.json",
+          "bytes": 13085
+        },
+        "evidence/api-rp8-single/initial.json": {
+          "sha256": "27b07da552d89b731e8e47119c3c75cf1a8ffcbf419598dba8adef1beebe167c",
+          "original_sha256": "27b07da552d89b731e8e47119c3c75cf1a8ffcbf419598dba8adef1beebe167c",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/initial.json",
+          "bytes": 1450
+        },
+        "evidence/api-rp8-single/result.json": {
+          "sha256": "e3f8ec748fbf3403302561dc2673bf740ae9ef248f771d54a493eae7f5ca1c92",
+          "original_sha256": "e3f8ec748fbf3403302561dc2673bf740ae9ef248f771d54a493eae7f5ca1c92",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/result.json",
+          "bytes": 8132
+        },
+        "evidence/api-rp8-single/summary.json": {
+          "sha256": "1c0eb7707cd1b8f18f6af2fef0a440a23a3095d19325853465e9ec815acf67e3",
+          "original_sha256": "1c0eb7707cd1b8f18f6af2fef0a440a23a3095d19325853465e9ec815acf67e3",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/summary.json",
+          "bytes": 3695
+        },
+        "evidence/api-rp8-single/metrics.jsonl.gz": {
+          "sha256": "9276bcc6b9d47837517b204f38e8724411d5d9f8776909353dbbb3fd7d4c4402",
+          "original_sha256": "624d3c5c79bcfc22041599658caf2d8de036bbbd01188d5284be372371a9db8e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/metrics.jsonl",
+          "bytes": 172379
+        },
+        "evidence/api-rp8-single/learning-rates.jsonl.gz": {
+          "sha256": "289c632f9171286657d8d6d4c6f80474e093026600d0823025c0de3a32b44535",
+          "original_sha256": "0fa386bbc733aca362615b1a4e13ca76b29bd6fc949315b46a48b21beda82a5e",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/learning-rates.jsonl",
+          "bytes": 1164586
+        },
+        "evidence/api-rp8-single/state-hashes.jsonl.gz": {
+          "sha256": "2452d4b93d9b391abfc112cd865c930be75c50cffd2e6f989881e89f326ca829",
+          "original_sha256": "6912e391268b689b47b3a6a996a461720f8c926c21e0a127a288b3ee33dce6f6",
+          "original": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260926T235648Z-1657537/reversible_precision/20260926T235648Z-1657545/repo/reports/reversible-precision/runs/rp8-single/state-hashes.jsonl",
+          "bytes": 21283
         }
       }
     }
