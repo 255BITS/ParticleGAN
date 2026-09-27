@@ -26,10 +26,17 @@ Left on CPU, with no algorithm change:
 PR #148/#149 ``gan_followup_probe.py`` and ``canonical_env.py`` are not on
 this branch. That env check pins ``CUDA_VISIBLE_DEVICES`` empty, so it is not
 imported here.
+
+The CUDA policy is process-global by design: benchmark code builds tensors and
+generators without a device argument and relies on the default device. Only CLI
+entry points call ``apply_device_policy``. Code that calls one of those entry
+points in-process (tests) should wrap it in ``device_policy_scope()`` so the
+policy does not outlive the call.
 """
 
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 
@@ -178,6 +185,70 @@ def apply_device_policy(requested: str | None = None, *, log: bool = False) -> d
     if log:
         print(json.dumps({"event": "DEVICE", **receipt}, sort_keys=True), flush=True)
     return dict(receipt)
+
+
+_POLICY_ENV = ("TOY100_DEVICE", "CUBLAS_WORKSPACE_CONFIG")
+
+
+def _policy_state() -> dict:
+    """Everything ``apply_device_policy`` can change, process- and module-wide."""
+    return dict(
+        selected=_SELECTED,
+        receipt=_RECEIPT,
+        patched=_GENERATOR_PATCHED,
+        generator=torch.Generator,
+        default_device=torch.get_default_device(),
+        deterministic=torch.are_deterministic_algorithms_enabled(),
+        deterministic_warn_only=torch.is_deterministic_algorithms_warn_only_enabled(),
+        cudnn_benchmark=torch.backends.cudnn.benchmark,
+        cudnn_deterministic=torch.backends.cudnn.deterministic,
+        cudnn_tf32=torch.backends.cudnn.allow_tf32,
+        matmul_tf32=torch.backends.cuda.matmul.allow_tf32,
+        matmul_precision=torch.get_float32_matmul_precision(),
+        threads=torch.get_num_threads(),
+        env={name: os.environ.get(name) for name in _POLICY_ENV},
+    )
+
+
+def _restore_policy_state(state: dict) -> None:
+    global _SELECTED, _RECEIPT, _GENERATOR_PATCHED
+    _SELECTED, _RECEIPT, _GENERATOR_PATCHED = state["selected"], state["receipt"], state["patched"]
+    torch.Generator = state["generator"]
+    if torch.get_default_device() != state["default_device"]:
+        # A CPU default means "no default set"; clearing avoids a device mode.
+        default = state["default_device"]
+        torch.set_default_device(None if default.type == "cpu" else default)
+    if (torch.are_deterministic_algorithms_enabled() != state["deterministic"]
+            or torch.is_deterministic_algorithms_warn_only_enabled() != state["deterministic_warn_only"]):
+        torch.use_deterministic_algorithms(state["deterministic"], warn_only=state["deterministic_warn_only"])
+    torch.backends.cudnn.benchmark = state["cudnn_benchmark"]
+    torch.backends.cudnn.deterministic = state["cudnn_deterministic"]
+    torch.backends.cudnn.allow_tf32 = state["cudnn_tf32"]
+    torch.backends.cuda.matmul.allow_tf32 = state["matmul_tf32"]
+    if torch.get_float32_matmul_precision() != state["matmul_precision"]:
+        torch.set_float32_matmul_precision(state["matmul_precision"])
+    if torch.get_num_threads() != state["threads"]:
+        torch.set_num_threads(state["threads"])
+    for name, value in state["env"].items():
+        if value is None:
+            os.environ.pop(name, None)
+        else:
+            os.environ[name] = value
+
+
+@contextlib.contextmanager
+def device_policy_scope():
+    """Undo ``apply_device_policy`` (and thread-count changes) on exit.
+
+    CLI processes do not need this; the policy lasts for the whole run. Use it
+    when calling a CLI ``main()`` in-process so the CUDA default device, routed
+    ``torch.Generator``, determinism flags and selection do not leak.
+    """
+    state = _policy_state()
+    try:
+        yield
+    finally:
+        _restore_policy_state(state)
 
 
 def add_device_argument(parser, *, default: str = "auto"):
