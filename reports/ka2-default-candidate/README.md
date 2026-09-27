@@ -1,7 +1,26 @@
-# KA2 selected default: rationale and evidence
+# KA2 API candidate: not qualified as the default
 
-**KA2 remains the selected research candidate, but merging it as the next
-default is blocked by the public trainer's constant-LR stability result.**
+**Do not select this KA2 configuration as the release default.** Develop's actual
+deterministic network and prior initialization is merged from `c720645e` (PR194).
+With that initialization, default KA2 and K3P both finish the quick eight-cluster
+screen with six clusters, and constant-rate KA2 finishes with four. Each scores
+0/24 passing observations. The original asymmetric-Kalman research version also
+fails the strict screen, ending with seven clusters. Sampling remains stochastic.
+
+The requirement is a learner that can run continuously without a chosen training
+end or caller-controlled phases. Automatic reversible rate changes are allowed.
+The tested KA2 configurations have not demonstrated that behavior. See the
+[current leaderboard and follow-ups](https://github.com/255BITS/ParticleGAN/blob/codex/k3p-continuous-search/reports/toy100/deterministic-init-retest/README.md).
+The user requested finishing the bounded retest and stopping the search. This PR
+remains draft and unmerged, targeting `develop`; no default is promoted.
+
+The develop merge passed 246 CPU tests, with one CUDA-only test skipped in the
+authoritative CPU run. Those tests validate integration, not benchmark quality.
+
+## Historical selection and subsequent failures
+
+**KA2 was the initial research candidate. Its public trainer's constant-LR
+stability result then blocked promotion.**
 The new [public API experiment](constant-lr-api/README.md) keeps all three
 learning rates constant for 4,600 updates. It reaches the shifted target after
 120 updates, but loses the original distribution before the shift and repeatedly
@@ -18,7 +37,7 @@ time to the new distribution and stability after arrival, while preserving
 the original distribution. The old requirement to pass every check in a fixed
 81-check deadline window is not the selection rule for this default.
 
-KA2 is the chosen balance: it retains all 120 pre-shift checks, reaches the
+The original selection favored KA2's balance: it retains all 120 pre-shift checks, reaches the
 changed target and finishes stable. R2 arrives sooner and stays there in its
 original window, but loses six pre-shift checks. Selection does not imply
 perfect stability or completed coverage of every benchmark; the extension's
@@ -41,7 +60,7 @@ the first passing observation or a guarantee of future stability.
 
 | Research formulation, through 3600 | Pre-shift hold | Published settled arrival (delay) | Checks from that arrival to 3600 |
 |---|---:|---|---:|
-| **KA2, selected** | **120/120** | 3520 (+1120) | **9/9** |
+| **KA2, historically selected** | **120/120** | 3520 (+1120) | **9/9** |
 | [R2](historical-reports/r2-full-suite-attempt.md) | 114/120 | 2890 (+490) | 72/72 |
 | [K3P](historical-reports/selected-k3p.md) | 120/120 | 3530 (+1130) | 8/8 |
 
