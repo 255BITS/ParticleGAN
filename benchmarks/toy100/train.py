@@ -256,6 +256,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
 
 
 def _init_linear(module: nn.Module) -> None:
+    """The benchmark's chosen init: ``xavier_uniform_`` weights, zero biases.
+
+    This is deliberate, not a placeholder for ``particlegan.init``. The toy100
+    recipes were tuned and gated on this critic. ``deterministic_orthogonal_(D,
+    seed=1)`` redraws it at ``nn.Linear``'s declared (PyTorch-default) scale,
+    and that fails the default gate 0/3 (docs/initialization.md).
+    """
     for layer in module.modules():
         if isinstance(layer, nn.Linear):
             nn.init.xavier_uniform_(layer.weight)
@@ -349,7 +356,11 @@ def _moment_init_box(config: Mapping[str, Any], device: torch.device):
 
 
 def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
-    """Match the public 100-Gaussian example's model and initialization."""
+    """Build the toy100 networks with the benchmark's explicit init.
+
+    The prior and G follow ``toy100_model``. D keeps :func:`_init_linear`'s xavier
+    weights. ``GANTrainer`` trains the weights it is given and does not re-draw them.
+    """
     device = torch.device(config["device"])
     seed = config["seed"]
     devices = [device.index if device.index is not None else torch.cuda.current_device()] if device.type == "cuda" else []

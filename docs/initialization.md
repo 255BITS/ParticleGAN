@@ -46,6 +46,31 @@ uses one QR over its stored tensor. Splitting logical Q/K/V blocks, custom
 depth scaling, and architecture-specific LoRA initializers remain extensions
 requiring their own evaluation.
 
+### Hosts that choose their own init
+
+`deterministic_orthogonal_` draws at the scale the layer's constructor declares
+(`nn.Linear`: U(±1/√fan_in)). It does not see a later re-init, so calling it
+after `xavier_uniform_` replaces the xavier weights. If a recipe was tuned on
+the host's own init, keep that init and skip this call.
+
+The toy100 benchmark is such a host. Its critic
+(`SimpleMLPDiscriminator(fourier=3)`) keeps xavier weights and zero biases
+(`benchmarks/toy100/train.py`). The default gate uses
+`configs/toy100/constraints_simple_regularization.json`, seed 1234 and 7000
+updates:
+
+| D init | gate | final HQ grid / rotated / staggered |
+|---|---|---|
+| xavier (benchmark) | PASS 3/3 | 0.987 / 0.985 / 0.989 |
+| `deterministic_orthogonal_(D, seed=1)` | FAIL 0/3 | 0.954 / 0.031 / 0.470 |
+
+The redraw makes the hidden layers 1.7x smaller and the readout 2.4x smaller
+than xavier, and D's output std falls from 0.25 to 0.03. The failing runs spike
+the critic gradient while the input noise anneals, and they miss the short
+mode-acquisition window. QR at xavier's RMS passed this gate, but it failed grid
+under other keys during the #201 investigation, so it is not a supported
+substitute.
+
 ### Exact historical replay
 
 The research hooks that produced the 22/22 result live in
