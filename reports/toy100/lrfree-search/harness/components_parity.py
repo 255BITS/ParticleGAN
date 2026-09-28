@@ -80,6 +80,8 @@ def trainer_state(trainer, torch):
         lrs=[[g['lr'] for g in o.param_groups] for o in (trainer.opt_g, trainer.opt_d)],
         controller=None if getattr(trainer, 'controller', None) is None else trainer.controller.state_dict(),
         lr_settle=None if getattr(trainer, 'lr_settle', None) is None else trainer.lr_settle.state_dict(),
+        birth_death=None if getattr(trainer, 'birth_death', None) is None
+        else trainer.birth_death.state_dict(),
         log_sigma=None if getattr(trainer, 'log_output_sigma', None) is None else trainer.log_output_sigma.detach().clone(),
         last_sigma=getattr(trainer, 'last_output_sigma', None),
         streams=[getattr(trainer, n).get_state() for n in ('latent_generator', 'penalty_generator',
@@ -95,6 +97,7 @@ def engine_state(eng, torch):
         lrs=eng.current_lrs(),
         controller=None if eng.controller is None else eng.controller.state_dict(),
         lr_settle=None if eng.lr_settle is None else eng.lr_settle.state_dict(),
+        birth_death=None if eng.birth_death is None else eng.birth_death.state_dict(),
         log_sigma=None if eng.log_output_sigma is None else eng.log_output_sigma.detach().clone(),
         last_sigma=eng.last_output_sigma if eng._sigma_api else None,
         streams=[getattr(eng, n).get_state() for n in ('latent_generator', 'penalty_generator',

@@ -71,8 +71,13 @@ def trainer_methods(package):
                   if inspect.isfunction(v) or isinstance(v, property))
 
 
-def check_package(package, recipe, *, allow_dv11=False):
-    """Refusals that do not depend on a host (see design §2.1)."""
+def check_package(package, recipe, tables=None, *, allow_dv11=False):
+    """Refusals that do not depend on a host (see design §2.1).
+
+    ``tables`` is the host binding (available only at build time); the BD
+    table check therefore runs in ``build`` via ``check_tables``, while the
+    rest stays here so scalar parity (no host tables) keeps working.
+    """
     unknown = set(trainer_methods(package)) - KNOWN_TRAINER_METHODS
     if unknown:
         raise EngineRefusal(f'GANTrainer defines hooks the engine does not re-express: {sorted(unknown)}')
@@ -83,14 +88,24 @@ def check_package(package, recipe, *, allow_dv11=False):
             field.default_factory() if field.default_factory is not dataclasses.MISSING else dataclasses.MISSING)
         if getattr(recipe, field.name) != default:
             raise EngineRefusal(f'recipe field {field.name}={getattr(recipe, field.name)!r} is not bound by the engine')
-    if getattr(recipe, 'particle_birth_death', False):
-        raise EngineRefusal('particle_birth_death is not bound for custom hosts')
+    if tables is not None:
+        check_tables(package, recipe, tables)
     if recipe.model != 'gan':
         raise EngineRefusal(f'model={recipe.model!r} (GANTrainer route supports gan only)')
     if recipe.conditioning != 'scalar':
         raise EngineRefusal(f'conditioning={recipe.conditioning!r} (GANTrainer route supports scalar only)')
     if getattr(recipe, 'continuous_policy', None) == 'dv11' and not allow_dv11:
         raise EngineRefusal('dv11 observe_support needs a latent->sample module; the custom hosts bind maps, not G')
+
+
+def check_tables(package, recipe, tables):
+    """BD table check (needs the host binding): bound only on plain trainable tables."""
+    if getattr(recipe, 'particle_birth_death', False):
+        if not tables:
+            raise EngineRefusal('particle_birth_death needs a prior table (no-table hosts)')
+        for table in tables:
+            if not _is_plain_table(package, table) or not table.z.requires_grad:
+                raise EngineRefusal('particle_birth_death needs plain trainable ParticlePrior tables')
 
 
 def _is_plain_table(package, table):
@@ -179,6 +194,7 @@ class Engine:
                 raise ValueError('direct particles must be trainable, unshared, on the model device and dtype')
             seen.add(id(parameter))
         prior0 = self.tables[0] if self.tables else None
+        check_tables(package, recipe, self.tables)
         # 2. make_optimizers: role groups [g(+E), prior], betas, amsgrad, A2 (plain table), KA2 critic Adam
         #    with spike guard and EMA critic, batch_feature_zero on fresh modules (GANTrainer line order).
         if self.direct:
@@ -254,7 +270,23 @@ class Engine:
         if stationarity:
             self.lr_settle = continuous.StationarityLR(
                 (self.opt_g, self.opt_d), prior_param=self.tables[0].z if self.tables else None)
+        # Birth-death (GANTrainer.__init__ order: after lr_settle, before built).
+        # Bound only on plain trainable tables (check_tables); refused elsewhere.
+        # The package module is constructed with the engine as ``trainer`` so
+        # every attribute it reads exists: G/G_side (generator or module list),
+        # prior (tables[0]), ema_prior (ema_tables[0]), opt_g (Adam state +
+        # A2 latent_history via the package's own generator optimizer),
+        # controller, completed_steps, device/dtype. Private stream seed + 6,
+        # exactly as GANTrainer.
         self.birth_death = None
+        if getattr(recipe, 'particle_birth_death', False):
+            from importlib import import_module
+            self.G = self.g_container
+            self.ema_G = self.ema_G_side[0] if len(self.ema_G_side) == 1 else nn.ModuleList(self.ema_G_side)
+            self.prior = self.tables[0]
+            self.ema_prior = self.ema_tables[0]
+            birth_death = import_module(package.__name__ + '.birth_death')
+            self.birth_death = birth_death.ParticleBirthDeath(self, self.seed + 6)
         self.built = True
         self.penalty_calls = 0
         self.last_penalty_stats = {}
@@ -399,6 +431,7 @@ class Engine:
                                                                   'eval_generator', 'noise_generator')},
             'controller': None if self.controller is None else self.controller.state_dict(),
             'lr_settle': None if self.lr_settle is None else self.lr_settle.state_dict(),
+            'birth_death': None if self.birth_death is None else self.birth_death.state_dict(),
             'log_output_sigma': None if self.log_output_sigma is None else self.log_output_sigma.detach(),
             'cpu_rng': torch.get_rng_state(),
             **({'direct': [p.detach() for p in self.direct], 'ema_direct': self.ema_direct} if self.direct else {})})
@@ -429,6 +462,8 @@ class Update:
             if view is not None:
                 c.observe_prior(view)
             c.observe_game(eng.penalty.regularizer.record)
+        if eng.birth_death is not None:
+            eng.birth_death.observe_real(self.real.detach().flatten(1) if self.real.ndim > 2 else self.real)
         if eng.lr_settle is None:
             network, prior_scale = (eng.package.learning_rate_scales(eng.completed_steps, recipe)
                                     if c is None else c.observe_real(self.real))
@@ -612,6 +647,18 @@ class Update:
                     averaged.copy_(current)
             for averaged, current in zip(eng.ema_direct, eng.direct):
                 averaged.mul_(decay).add_(current, alpha=1 - decay)
+        # Birth-death moves (GANTrainer._step tail: after EMA, before completed += 1).
+        # maybe_apply runs its evaluation when the reservoir turns over and moves
+        # matched rows (prior.z + ema.z + optimizer rows + A2 history); then the
+        # moved rows' settle blocks are rebased (a teleport is not gradient
+        # movement), exactly as GANTrainer lines 349-356.
+        if eng.birth_death is not None:
+            event = eng.birth_death.maybe_apply(eng, eng.last_output_sigma)
+            if event and event.get("moves") and eng.lr_settle is not None:
+                for group, tester, role in zip(eng.opt_g.param_groups, eng.lr_settle.testers[0], eng.roles[0]):
+                    if role == "prior" and tester is not None:
+                        tester.rebase(group["params"], eng.birth_death.moved_rows)
+            self.bd_event = event
         eng.completed_steps += 1
         self.stage = 'done'
 
