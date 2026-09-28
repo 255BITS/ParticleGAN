@@ -1,0 +1,287 @@
+{
+ "source": "benchmarks/transfer_suite/plans/default_comparison.json (PR #155 checkout)",
+ "source_sha256": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883",
+ "eval_scopes_source": "benchmarks/transfer_suite/legacy_noise_adapters.py::EVAL_SCOPES",
+ "eval_scopes_source_sha256": "2e4ebc45fc92a3464d230d0bac8cddc00521f760b20be6538a103a6e27700c09",
+ "tasks": {
+  "two_pole": {
+   "spec": {
+    "name": "two_pole",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Basic adversarial movement remains bounded.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 80,
+    "thresholds": [
+     [
+      "mean_abs",
+      ">=",
+      0.3
+     ],
+     [
+      "grad_med",
+      "<=",
+      1.0
+     ]
+    ]
+   },
+   "eval_scope": "learned_particles_and_critic_gradient",
+   "reference": "study/episodes/cosine__two_pole.json.gz",
+   "reference_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56"
+  },
+  "trajectory": {
+   "spec": {
+    "name": "trajectory",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Preserves the shared trajectory's identity constraint.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 400,
+    "thresholds": [
+     [
+      "identity_mse",
+      "<=",
+      0.02
+     ]
+    ]
+   },
+   "eval_scope": "generated_samples",
+   "reference": "study/episodes/cosine__trajectory.json.gz",
+   "reference_sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5"
+  },
+  "residual_student": {
+   "spec": {
+    "name": "residual_student",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Moves the intended residual without choosing the wrong target.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 400,
+    "thresholds": [
+     [
+      "identity_mse",
+      "<=",
+      0.02
+     ],
+     [
+      "success_rate",
+      ">=",
+      1.0
+     ],
+     [
+      "wrong_pad_rate",
+      "<=",
+      0.0
+     ]
+    ]
+   },
+   "eval_scope": "generated_samples",
+   "reference": "study/episodes/cosine__residual_student.json.gz",
+   "reference_sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08"
+  },
+  "unipolar": {
+   "spec": {
+    "name": "unipolar",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Target coverage preserves unrelated content.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 400,
+    "thresholds": [
+     [
+      "cover",
+      ">=",
+      0.85
+     ],
+     [
+      "off_caption",
+      "<=",
+      0.05
+     ],
+     [
+      "neu_hold",
+      ">=",
+      0.85
+     ]
+    ]
+   },
+   "eval_scope": "learned_residual_parameters",
+   "reference": "study/episodes/cosine__unipolar.json.gz",
+   "reference_sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5"
+  },
+  "ae_gan_hold": {
+   "spec": {
+    "name": "ae_gan_hold",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 250,
+    "thresholds": [
+     [
+      "recon_mse",
+      "<=",
+      0.05
+     ],
+     [
+      "hold",
+      "<=",
+      0.35
+     ]
+    ]
+   },
+   "eval_scope": "generated_and_reconstructed_samples",
+   "reference": "study/episodes/cosine__ae_gan_hold.json.gz",
+   "reference_sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2"
+  },
+  "cover_leftover": {
+   "spec": {
+    "name": "cover_leftover",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Coverage preserves both content and the unwanted remainder constraint.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 800,
+    "thresholds": [
+     [
+      "u_kept",
+      ">=",
+      0.85
+     ],
+     [
+      "content_kept",
+      ">=",
+      0.75
+     ],
+     [
+      "leak_ratio",
+      "<=",
+      0.2
+     ],
+     [
+      "pole_rel_err_plus",
+      "<=",
+      0.2
+     ],
+     [
+      "pole_rel_err_minus",
+      "<=",
+      0.2
+     ],
+     [
+      "same_dir",
+      "<=",
+      0.25
+     ]
+    ]
+   },
+   "eval_scope": "learned_residual_parameters",
+   "reference": "study/episodes/cosine__cover_leftover.json.gz",
+   "reference_sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188"
+  },
+  "unused_token_hold": {
+   "spec": {
+    "name": "unused_token_hold",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Unused controls remain unchanged while active controls move.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 200,
+    "thresholds": [
+     [
+      "unused_hold",
+      ">=",
+      0.85
+     ],
+     [
+      "concept_move",
+      ">=",
+      0.85
+     ]
+    ]
+   },
+   "eval_scope": "learned_embedding_parameters",
+   "reference": "study/episodes/cosine__unused_token_hold.json.gz",
+   "reference_sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f"
+  },
+  "mid_scale_identity": {
+   "spec": {
+    "name": "mid_scale_identity",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Intermediate control strengths preserve identity and target magnitude.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 800,
+    "thresholds": [
+     [
+      "concept_cos_plus",
+      ">=",
+      0.85
+     ],
+     [
+      "concept_cos_minus",
+      ">=",
+      0.85
+     ],
+     [
+      "concept_mag_plus",
+      ">=",
+      0.75
+     ],
+     [
+      "concept_mag_plus",
+      "<=",
+      1.25
+     ],
+     [
+      "concept_mag_minus",
+      ">=",
+      0.75
+     ],
+     [
+      "concept_mag_minus",
+      "<=",
+      1.25
+     ],
+     [
+      "identity_at_0",
+      ">=",
+      0.85
+     ],
+     [
+      "identity_at_mid",
+      ">=",
+      0.85
+     ]
+    ]
+   },
+   "eval_scope": "learned_residual_parameters",
+   "reference": "study/episodes/cosine__mid_scale_identity.json.gz",
+   "reference_sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b"
+  }
+ }
+}

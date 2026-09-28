@@ -1,5 +1,23 @@
 # LR-free GAN base search — September 27
 
+## 22-check leaderboard: all eight custom hosts now run (September 27, night)
+
+The eight custom hosts of the 22-toy suite now run for any candidate package in the LR-free harness
+([custom22 report](custom22/README.md); the harness is committed at [`harness/`](harness/)). The candidate's own
+policy (controller, KA2, amsgrad, noise) is bitwise parity-checked against its `GANTrainer.step`, and the host
+copies are verbatim. As a known-good control, develop K3P with its annealed schedule passes 8/8 through the same
+engine. Noisy scoring throughout.
+
+| Candidate | Quick 11 | Custom 8 | Native 3 | **/22** | ring / stationary |
+|---|---:|---:|---:|---:|---|
+| `st-10` (stationarity LR + learnable σ) | 11 | 5 | 0 | **16** | PASS / PASS |
+| `dv12-ams-rc3` (#217 default) | 11 | 4 | 0 | **15** | PASS / PASS |
+
+Both fail `two_pole`. The cause is AMSGrad's second-moment memory on the direct particles: the step collapses as
+gradients shrink about 20× in the first 10 updates. With amsgrad off and reg_coeff 1, rc3 passes; K3P plus amsgrad
+fails. `dv12-ams-rc3` also misses `cover_leftover`, `unused_token_hold` and `mid_scale_identity`. `st-10` misses
+`trajectory`, and `unused_token_hold` on streak length only.
+
 ## Current 100-Gaussian readout: QR initialization is primary
 
 The library's `batch_feature_zero` QR initialization is the primary native
