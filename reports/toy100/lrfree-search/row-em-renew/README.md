@@ -94,3 +94,17 @@ support, while retaining a fully renewed real reservoir, then rerun all
 three frozen tasks. The current 3/3 receipt establishes accuracy for this
 package; the full 22-check suite has not been scored for it, and no default
 change follows from this native-only result.
+
+## Full PR #155 all22 replay
+
+The requested frozen `all22` preset completed with **10 PASS, 4 FAIL, and 8
+ERROR**. The native tasks (`grid100`, `rotated100`, `staggered100`) each PASS
+all five terminal full-accuracy observations and the independent 100,000-sample
+holdout. Of the 11 quick gates, seven PASS: `img_stripes2` and all six vector
+gates. `mode_hold`, `img_intensity2`, `img_blobs4`, and `img_bars4` FAIL. All
+eight custom hosts report `ERROR parity` before training because the custom
+engine rejects `_sigma_intrinsic_scale`; these errors were left intact as
+requested and are not scored as training failures. The compact task matrix and
+result receipts are in [`all22-leaderboard.md`](all22-leaderboard.md) and
+[`all22-summary.json`](all22-summary.json). This partial full-suite result
+does not promote the candidate as a default.

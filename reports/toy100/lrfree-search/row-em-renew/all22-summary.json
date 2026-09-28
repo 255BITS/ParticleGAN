@@ -1,0 +1,151 @@
+{
+  "candidate": "row-em-renew-all22",
+  "config_hash": "5c4e70b71d184f3c",
+  "package_sha256": "1fc12d29e2c5964f91c9523006e569cba743eba2e3e9851a68afa063c08cd324",
+  "preset": "all22",
+  "counts": {
+    "pass": 10,
+    "fail": 4,
+    "error": 8,
+    "total": 22
+  },
+  "tasks": [
+    {
+      "task": "ae_gan_hold",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "cover_leftover",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "grid100",
+      "status": "PASS",
+      "reason": null,
+      "native_status": "PASS",
+      "terminal_accuracy": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "holdout_pass": true
+    },
+    {
+      "task": "img_bars4",
+      "status": "FAIL",
+      "reason": null
+    },
+    {
+      "task": "img_blobs4",
+      "status": "FAIL",
+      "reason": null
+    },
+    {
+      "task": "img_intensity2",
+      "status": "FAIL",
+      "reason": null
+    },
+    {
+      "task": "img_stripes2",
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "task": "mid_scale_identity",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "mode_hold",
+      "status": "FAIL",
+      "reason": null
+    },
+    {
+      "task": "residual_student",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "rotated100",
+      "status": "PASS",
+      "reason": null,
+      "native_status": "PASS",
+      "terminal_accuracy": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "holdout_pass": true
+    },
+    {
+      "task": "staggered100",
+      "status": "PASS",
+      "reason": null,
+      "native_status": "PASS",
+      "terminal_accuracy": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "holdout_pass": true
+    },
+    {
+      "task": "trajectory",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "two_pole",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "unipolar",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "unused_token_hold",
+      "status": "ERROR",
+      "reason": null
+    },
+    {
+      "task": "vector_anisotropic",
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "task": "vector_overlap",
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "task": "vector_spiral",
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "task": "vector_two_broad",
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "task": "vector_unequal_mass",
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "task": "vector_unequal_width",
+      "status": "PASS",
+      "reason": null
+    }
+  ]
+}
