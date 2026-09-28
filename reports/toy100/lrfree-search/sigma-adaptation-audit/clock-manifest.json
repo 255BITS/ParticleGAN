@@ -1,0 +1,12 @@
+{
+  "source": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/candidate-prior-couple-sigma",
+  "differences_from_sigma_effective": [
+    "package/particlegan/training.py"
+  ],
+  "training_sha256": "7cf1c4f5e1061b97e020d297072597864435ce14d15cc28941e4607c95e5db97",
+  "birth_death_sha256": "dbd240bfcef490d2e48305573cfd4517d8e1b4d4513ef0c316e4bed6f4b4e33c",
+  "continuous_sha256": "f7aa28aca51f7e57b15ac4d8b6e1f0ba764f25ac65a9bc4713b94e0723fdfadd",
+  "overrides_sha256": "bccb5824e4c4e5cf1c39ff202f53fa00c7f2f7e4a8c73ba3ebb125d2ed9ba77c",
+  "policy": "Sigma own tester scale is multiplied by min(applied non-sigma G/prior scales) after the existing release gate.",
+  "test": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/sigma-clock-smoke.json"
+}
