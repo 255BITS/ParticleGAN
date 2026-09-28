@@ -96,6 +96,46 @@ supplied-prior path differs from exact #217. The exact-head adapted run above
 resolves that provenance gap. The published #217 CLI Xavier figure uses
 another initialization and should not be substituted for this QR table.
 
+### #215 QR grid100 extension to 14,000 updates
+
+The exact same #215 QR package continued grid100 to 14,000 updates. The
+`total_steps=14000` override lifts #215's 7,000-step trainer limit; the
+constant learning rates and native scorer are unchanged. Its first 7,000
+`rates.jsonl` rows are byte-identical to the original run, and the frozen
+7k subbudget holdout and common gate fields agree with that run. The 14k
+frozen verdict remains **FAIL**, with 0/62 passing checks, no terminal
+streak, and a failing 100k holdout.
+
+| Live grid100 metric | 7,000 | 14,000 | Native limit |
+|---|---:|---:|---:|
+| Modes | 100 | 100 | 100 |
+| Precision | .9857 | .9832 | ≥.97 |
+| Covariance eigenvalue ratios | .184–1.992 | .256–2.480 | .40–1.70 |
+| Centre RMS / data σ | .259 | .244 | ≤.20 |
+| Radial KS | .04686 | .04157 | ≤.04 |
+
+The 14k holdout has precision `.98384`, centre RMS `.21793σ`, and radial
+KS `.04192`, so it fails independently too. Higher minimum covariance ratio
+and slightly better centring did not close the shape gap; precision and the
+maximum ratio also worsened. This one-task extension does not change the
+7k three-card count or prove a 13-gate result for a longer schedule. Exact
+final/subbudget fields and selected trajectory are in
+[results.json](results.json).
+
+The [overrides](pr215-qr-grid14k-overrides.json) and
+[candidate options](pr215-qr-grid14k-options.json) reproduce the registered
+job with the QR package reconstructed from the source commit and adapter:
+
+```bash
+cd /ml2/hypergan/lrfree-20260926
+/tmp/pr38-default-env/bin/python harness/submit.py \
+  --cand pr215-gs2-qr-grid14k-repro \
+  --package-root /ml2/hypergan/lrfree-20260926/candidates/pr215-gs2-qr/package \
+  --overrides /ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/lrfree-search/comparison-pr215-pr217/pr215-qr-grid14k-overrides.json \
+  --candidate-options /ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/lrfree-search/comparison-pr215-pr217/pr215-qr-grid14k-options.json \
+  --tasks grid100 --note 'PR215 QR grid100 14k continuation'
+```
+
 ## High-dimensional nearest-search follow-up
 
 Exact #217 commit `261fcfd` computes support-jitter's nearest-particle

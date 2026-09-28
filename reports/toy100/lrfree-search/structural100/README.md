@@ -118,6 +118,16 @@ native gate evaluation; it does not show that a resumed run would pass or
 that the critic had converged. The copied summary links to the full read-only
 harness artifacts and states the derivative and interval limits.
 
+A later [bounded saved-critic audit](critic-underfit-audit.md) compared 250
+D-only updates at the post-cut LR `.000265625` and restored pre-cut LR
+`.000531250` on the same frozen 14k generator law. Both reduced a
+fixed-context KA2 held-out objective by about `3.65e−5`. The direct
+pre-minus-post difference was `−1.03e−7` (95% interval
+`−7.48e−6` to `+7.27e−6`), so this test did not resolve an advantage for
+doubling D's LR. It shows residual critic descent at this checkpoint, not a
+passing GAN continuation or a general LR rule. Grid100 had no saved final
+state for the analogous audit.
+
 `st6-eg-qr` was stopped after the grid diagnostic deteriorated: at step 500
 it had zero covered modes and HQ fraction `.0032`. Its harness `result.json`
 says `ERROR` because no final native result was produced. That is an early

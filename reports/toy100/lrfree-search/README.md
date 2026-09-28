@@ -41,6 +41,11 @@ recovered favorable local covariance-repair derivatives after 250 critic-only
 updates with both warm and fresh-QR critics. It suggests critic tracking may
 contribute to the saved adverse shape signal; it made no generator update or
 new native gate evaluation.
+A later [bounded saved-critic audit](structural100/critic-underfit-audit.md)
+found held-out KA2 descent after 250 critic-only updates at both the saved
+post-cut and restored pre-cut D rates. Their total-objective difference was
+unresolved (95% interval `−7.48e−6` to `+7.27e−6`); restoring the larger
+rate has no demonstrated advantage here. Neither test continued the GAN.
 
 The Xavier birth/death controls all fail their frozen native gates. Cells
 show final modes / precision after 7,000 updates; they are not comparable
@@ -85,6 +90,13 @@ draws latent jitter through the source prior. Every arm **fails all three
 native 100-Gaussian gates**, with zero of 34 passing checks and failing 100k
 holdouts on each task. The exact statuses, package digests, run paths, and
 native metrics are in [results.json](comparison-pr215-pr217/results.json).
+
+The #215 QR grid100 continuation to 14,000 updates also **FAILS**: 0/62
+passing checks and a failing holdout. Its 7k rate prefix is byte-identical
+to the original, and its final 100 modes / `.9832` precision still have
+centre RMS `.244σ`, covariance eigenvalue ratios `.256–2.480`, and radial
+KS `.04157`. The [extension record](comparison-pr215-pr217/README.md#215-qr-grid100-extension-to-14000-updates)
+keeps this longer single-task result separate from the 7k three-card score.
 
 The published #215 **17/26** belongs to #202's different host suite, and
 the #217 high-`z` throughput regression belongs to a separate performance
