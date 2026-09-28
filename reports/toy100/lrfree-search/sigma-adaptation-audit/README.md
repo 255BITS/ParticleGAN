@@ -4,9 +4,11 @@ Both source-isolated sigma follow-ups to the committed [prior-rate coupling](../
 
 | Candidate | σ at 7k | Noisy precision | Centre / data σ | Covariance eig ratios | Trace bias abs | Radial KS | Frozen result |
 |---|---:|---:|---:|---:|---:|---:|---|
-| Committed prior coupling | .02000 | .96875 | .12646 | .572–1.330 | .00957 | .03298 | FAIL 0/34, precision |
-| Effective-scale release | .00954 | .98425 | .12048 | .485–1.205 | .12566 | .10117 | FAIL 12/34, trace and radial |
-| Shared intrinsic clock | .01905 | .97065 | .12402 | .505–1.302 | .02866 | .04401 | FAIL 2/34, radial |
+| Committed prior coupling | .02000 | .96875 | .12646 | .572–1.330 | .00957 | .03298 | FAIL, precision |
+| Effective-scale release | .00954 | .98425 | .12048 | .485–1.205 | .12566 | .10117 | FAIL, trace and radial |
+| Shared intrinsic clock | .01905 | .97065 | .12402 | .505–1.302 | .02866 | .04401 | FAIL, radial |
+
+The runner's `passing_checks` field counts an older coverage-style observation rule (12/34 and 2/34 for these arms). The stricter accuracy check passed **0/34** observations for each, including **0/5** at the required terminal checkpoints.
 
 The effective-scale patch changes `_output_sigma()` and `_sigma_intrinsic_scale()` to read **applied** non-sigma G/prior rates rather than the raw prior tester, and excludes sigma's own tester from the floor. This corrects a real state mismatch: the coupled prior's raw tester stayed at 1 while its applied rate had fallen to 1/64. Sigma first released at update 3,625 with its own full rate 0.00425, then shrank rapidly. Its independent holdout also fails trace (.11409) and radial KS (.09406).
 
