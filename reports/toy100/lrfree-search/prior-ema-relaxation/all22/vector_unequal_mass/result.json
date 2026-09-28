@@ -1,0 +1,422 @@
+{
+ "status": "FAIL",
+ "task": "vector_unequal_mass",
+ "cand": "cf1-d2-prior-ema-relaxation-final",
+ "passing_checks": 0,
+ "observations": 24,
+ "first_arrival": null,
+ "final_streak": 0,
+ "final": {
+  "step": 1200,
+  "sw1_normalized": 0.0415358315134802,
+  "mean_error": 0.05107933282852173,
+  "covariance_error": 0.10089796781539917,
+  "target_scale": 1.7948341369628906,
+  "sample_count": 4096,
+  "mass_tv": 0.025244126096367836,
+  "min_mass_ratio": 0.146484375,
+  "hq": 0.9482421875,
+  "component_covariance_error": 1.37071767821908,
+  "component_covariance_errors": [
+   0.19814766943454742,
+   1.2685452699661255,
+   1.0005558729171753,
+   3.0156219005584717
+  ],
+  "component_min_eigen_ratio": 0.3659786880016327,
+  "component_mass": [
+   0.557861328125,
+   0.3173828125,
+   0.121826171875,
+   0.0029296875
+  ],
+  "target_mass": [
+   0.550000011920929,
+   0.30000001192092896,
+   0.12999999523162842,
+   0.019999999552965164
+  ],
+  "component_counts": [
+   2285,
+   1300,
+   499,
+   12
+  ],
+  "pass": false,
+  "seconds": 42.635
+ },
+ "ema_final": {
+  "sw1_normalized": 0.06248492726565074,
+  "mean_error": 0.08886441588401794,
+  "covariance_error": 0.1557897925376892,
+  "target_scale": 1.7948341369628906,
+  "sample_count": 4096,
+  "mass_tv": 0.03281248360872269,
+  "min_mass_ratio": 0.0,
+  "hq": 0.939208984375,
+  "component_covariance_error": 1.0092106610536575,
+  "component_covariance_errors": [
+   0.2940305471420288,
+   0.9830837845802307,
+   1.7597283124923706,
+   1.0
+  ],
+  "component_min_eigen_ratio": 0.0,
+  "component_mass": [
+   0.563232421875,
+   0.319580078125,
+   0.1171875,
+   0.0
+  ],
+  "target_mass": [
+   0.550000011920929,
+   0.30000001192092896,
+   0.12999999523162842,
+   0.019999999552965164
+  ],
+  "component_counts": [
+   2307,
+   1309,
+   480,
+   0
+  ]
+ },
+ "final_lr": [
+  [
+   0.0010625,
+   0.0085,
+   0.00425
+  ],
+  [
+   0.0042394746102461895
+  ]
+ ],
+ "seconds": 43.6,
+ "train_seconds": 42.64,
+ "stream_deviations": 1200,
+ "warnings": [
+  "step 1: generator_real called more than once (cached tensor reused)",
+  "step 1: candidate latent stream consumption differs from two index draws",
+  "step 2: generator_real called more than once (cached tensor reused)",
+  "step 2: candidate latent stream consumption differs from two index draws",
+  "step 3: generator_real called more than once (cached tensor reused)",
+  "step 3: candidate latent stream consumption differs from two index draws",
+  "step 4: generator_real called more than once (cached tensor reused)",
+  "step 4: candidate latent stream consumption differs from two index draws",
+  "step 5: generator_real called more than once (cached tensor reused)",
+  "step 5: candidate latent stream consumption differs from two index draws",
+  "step 6: generator_real called more than once (cached tensor reused)",
+  "step 7: generator_real called more than once (cached tensor reused)",
+  "step 8: generator_real called more than once (cached tensor reused)",
+  "step 9: generator_real called more than once (cached tensor reused)",
+  "step 10: generator_real called more than once (cached tensor reused)",
+  "step 11: generator_real called more than once (cached tensor reused)",
+  "step 12: generator_real called more than once (cached tensor reused)",
+  "step 13: generator_real called more than once (cached tensor reused)",
+  "step 14: generator_real called more than once (cached tensor reused)",
+  "step 15: generator_real called more than once (cached tensor reused)"
+ ],
+ "completed_steps": 1200,
+ "recipe": {
+  "name": "ka2",
+  "model": "gan",
+  "z_dim": 4,
+  "num_particles": 256,
+  "prior_kind": "particles",
+  "sigma_rel": 0.0,
+  "standardize": true,
+  "num_classes": null,
+  "conditioning": "scalar",
+  "ucd_target": "class",
+  "ucd_weight": 0.02,
+  "alpha_bar": [
+   1.0,
+   0.9,
+   0.5,
+   0.05,
+   0.0001
+  ],
+  "batch_size": 128,
+  "total_steps": null,
+  "continuous_policy": "dv12",
+  "lr": 0.00425,
+  "d_lr_mult": 1.0,
+  "prior_lr_mult": 2.0,
+  "betas": [
+   0.0,
+   0.999
+  ],
+  "prior_betas": null,
+  "reg_coeff": 3.0,
+  "reg_kappa": 1.0,
+  "reg_every": 1,
+  "prior_reg": 0.0,
+  "ema_decay": 0.995,
+  "lr_anneal_start": 0.6,
+  "lr_floor": 0.05,
+  "network_lr_floor": 0.01,
+  "network_lr_horizon_cap": 1600,
+  "reg_anchor_min_decay": 0.9,
+  "reg_anchor_weight": 1.0,
+  "direct_particle_gain": true,
+  "d_guard_ratio": 5.0,
+  "d_guard_min_steps": 200,
+  "latent_damping_max_rate": 0.5,
+  "direct_particle_betas": [
+   0.0,
+   0.9
+  ],
+  "input_noise_std": 0.0,
+  "input_noise_anneal_end": 0.1,
+  "output_noise_std": 0.029,
+  "output_noise_warmup": 0.0,
+  "encoder_mode": "none",
+  "routing_temperature": 0.25,
+  "distance_reduction": "sum",
+  "observation_sigma": 0.03,
+  "reconstruction_weight": 1.0,
+  "initialization": "batch_feature_zero",
+  "amsgrad": true,
+  "critic_r1_real": true,
+  "critic_payoff_damping": true,
+  "output_noise_mode": "learnable",
+  "lr_control": "stationarity",
+  "particle_birth_death": true
+ },
+ "max_gpu_mib": 108.0,
+ "verdict": {
+  "status": "FAIL",
+  "attempted": true,
+  "passed": false,
+  "metrics": [
+   {
+    "metric": "sw1_normalized",
+    "value": 0.0415358315134802,
+    "op": "<=",
+    "threshold": 0.18,
+    "status": "PASS",
+    "margin": 0.1384641684865198
+   },
+   {
+    "metric": "mass_tv",
+    "value": 0.025244126096367836,
+    "op": "<=",
+    "threshold": 0.15,
+    "status": "PASS",
+    "margin": 0.12475587390363216
+   },
+   {
+    "metric": "hq",
+    "value": 0.9482421875,
+    "op": ">=",
+    "threshold": 0.85,
+    "status": "PASS",
+    "margin": 0.09824218750000002
+   },
+   {
+    "metric": "component_covariance_error",
+    "value": 1.37071767821908,
+    "op": "<=",
+    "threshold": 0.85,
+    "status": "FAIL",
+    "margin": -0.52071767821908
+   },
+   {
+    "metric": "component_min_eigen_ratio",
+    "value": 0.3659786880016327,
+    "op": ">=",
+    "threshold": 0.15,
+    "status": "PASS",
+    "margin": 0.2159786880016327
+   },
+   {
+    "metric": "min_mass_ratio",
+    "value": 0.146484375,
+    "op": ">=",
+    "threshold": 0.25,
+    "status": "FAIL",
+    "margin": -0.103515625
+   }
+  ],
+  "convergence": {
+   "complete": true,
+   "observations": 24,
+   "passing_observations": 0,
+   "minimum_stable_checks": 5,
+   "passing_suffix": 0,
+   "first_pass_step": null,
+   "stable_from_step": null,
+   "stable_from_seconds": null,
+   "confirmed_step": null,
+   "confirmed_seconds": null
+  },
+  "shortfall": 0.17111192219981963,
+  "confirmation_fraction": 2.0
+ },
+ "thresholds": [
+  [
+   "sw1_normalized",
+   "<=",
+   0.18
+  ],
+  [
+   "mass_tv",
+   "<=",
+   0.15
+  ],
+  [
+   "hq",
+   ">=",
+   0.85
+  ],
+  [
+   "component_covariance_error",
+   "<=",
+   0.85
+  ],
+  [
+   "component_min_eigen_ratio",
+   ">=",
+   0.15
+  ],
+  [
+   "min_mass_ratio",
+   ">=",
+   0.25
+  ]
+ ],
+ "clean_status": "FAIL",
+ "clean_passing_checks": 0,
+ "clean_first_arrival": null,
+ "clean_final_streak": 0,
+ "clean_final": {
+  "step": 1200,
+  "sw1_normalized": 0.04215948820947705,
+  "mean_error": 0.0509994775056839,
+  "covariance_error": 0.10090740770101547,
+  "target_scale": 1.7948341369628906,
+  "sample_count": 4096,
+  "mass_tv": 0.025244126096367836,
+  "min_mass_ratio": 0.146484375,
+  "hq": 0.95166015625,
+  "component_covariance_error": 1.3088250309228897,
+  "component_covariance_errors": [
+   0.2033202052116394,
+   1.2682067155838013,
+   1.0078058242797852,
+   2.755967378616333
+  ],
+  "component_min_eigen_ratio": 0.3272172808647156,
+  "component_mass": [
+   0.557861328125,
+   0.3173828125,
+   0.121826171875,
+   0.0029296875
+  ],
+  "target_mass": [
+   0.550000011920929,
+   0.30000001192092896,
+   0.12999999523162842,
+   0.019999999552965164
+  ],
+  "component_counts": [
+   2285,
+   1300,
+   499,
+   12
+  ]
+ },
+ "eval_output_noise": true,
+ "header": {
+  "cand": "cf1-d2-prior-ema-relaxation-final",
+  "task": "vector_unequal_mass",
+  "package_root": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/lrfree-search/prior-ema-relaxation/package",
+  "package_sha256": "64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc",
+  "overrides": {
+   "alpha_bar": [
+    1.0,
+    0.9,
+    0.5,
+    0.05,
+    0.0001
+   ],
+   "amsgrad": true,
+   "batch_size": 128,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "conditioning": "scalar",
+   "continuous_policy": "dv12",
+   "d_guard_min_steps": 200,
+   "d_guard_ratio": 5.0,
+   "d_lr_mult": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.9
+   ],
+   "direct_particle_gain": true,
+   "distance_reduction": "sum",
+   "ema_decay": 0.995,
+   "encoder_mode": "none",
+   "initialization": "batch_feature_zero",
+   "input_noise_anneal_end": 0.1,
+   "input_noise_std": 0.0,
+   "latent_damping_max_rate": 0.5,
+   "lr": 0.00425,
+   "lr_anneal_start": 0.6,
+   "lr_control": "stationarity",
+   "lr_floor": 0.05,
+   "model": "gan",
+   "network_lr_floor": 0.01,
+   "network_lr_horizon_cap": 1600,
+   "num_classes": null,
+   "num_particles": 12,
+   "observation_sigma": 0.03,
+   "output_noise_mode": "learnable",
+   "output_noise_std": 0.029,
+   "output_noise_warmup": 0.0,
+   "prior_betas": null,
+   "prior_kind": "particles",
+   "prior_lr_mult": 2.0,
+   "prior_reg": 0.0,
+   "reconstruction_weight": 1.0,
+   "reg_anchor_min_decay": 0.9,
+   "reg_anchor_weight": 1.0,
+   "reg_coeff": 3.0,
+   "reg_every": 1,
+   "reg_kappa": 1.0,
+   "routing_temperature": 0.25,
+   "sigma_rel": 0.0,
+   "standardize": true,
+   "total_steps": null,
+   "ucd_target": "class",
+   "ucd_weight": 0.02,
+   "z_dim": 4,
+   "particle_birth_death": true
+  },
+  "options": {
+   "evaluation_generate": "plain",
+   "serial_backward_argument": true,
+   "strict_streams": false,
+   "initialization": "batch_feature_zero",
+   "diagnostics": true,
+   "save_final_state": false,
+   "ring_frozen_control": false,
+   "eval_output_noise": true,
+   "image_prior_perturb": false
+  },
+  "auto_detected": {
+   "evaluation_generate": "plain",
+   "serial_backward_argument": true
+  },
+  "declared_options": {},
+  "device": "cuda:0",
+  "cuda_visible_devices": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+  "torch": "2.13.0+cu126",
+  "cuda": "12.6",
+  "gpu": "NVIDIA RTX A6000",
+  "host": "pop-os",
+  "python": "/tmp/pr38-default-env/bin/python"
+ }
+}
