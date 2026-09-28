@@ -1,0 +1,14 @@
+{
+  "grid100": {
+    "final_samples": "916e64046145733da37522d8b77348080940a9abaddaf4d61c3bd8867b233680",
+    "holdout_samples": "8b7cbdbfca3a922bcd13923fff8153cb26713b36975c464105106a2e3cc551cc"
+  },
+  "rotated100": {
+    "final_samples": "07859fee03ec339f83e2677db20aca9061a8fa5dce41c2bf945fb40654dba625",
+    "holdout_samples": "a85454a7bd6523a5daf275e5151b761a3e52f8b085c86fa42b59c1ab7a386f36"
+  },
+  "staggered100": {
+    "final_samples": "fb0d0f9ee93f185cfee8905840f595485309edf1f72975487f4d4d13f5618d67",
+    "holdout_samples": "5c4048e7d0a27843b2812d86cef332b8868ec4ab9bad8e4e878c52491226c9d7"
+  }
+}
