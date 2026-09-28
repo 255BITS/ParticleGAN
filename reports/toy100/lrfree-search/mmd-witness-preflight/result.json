@@ -1,0 +1,1240 @@
+{
+  "method": "Gaussian-kernel unbiased MMD2; analytically integrated Gaussian output noise; independent real fit/heldout, independent latent jitter, shared sampled prior rows per block; exact native G/prior sign-LRs for directional predictions; sigma frozen in checkpoint",
+  "bandwidth": "median 10th other-neighbor distance from 8192 independent unlabeled real draws per task",
+  "batch_size": 2048,
+  "blocks_per_task": 8,
+  "tasks": [
+    {
+      "task": "grid100",
+      "checkpoint": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/runs/h2-handoff-critic-floor/grid100/final-state.pt",
+      "checkpoint_sha256": "bd1543c4418d2052289db166ff5b50882b0e885e54fa64c2f4f7a598e5697723",
+      "step": 7000,
+      "sigma": 0.019999999552965164,
+      "latent_width": [
+        0.020936092361807823,
+        0.021092062816023827
+      ],
+      "calibration_seed": 990100,
+      "bandwidth": 0.021569107279297742,
+      "native_lr_g": 6.640625e-05,
+      "native_lr_prior": 0.0001328125,
+      "rows": [
+        {
+          "block": 0,
+          "fit_mmd2": 1.6388483345508575e-05,
+          "heldout_mmd2": 3.0150171369314194e-05,
+          "real_real_null_mmd2": -2.79303640127182e-05,
+          "heldout_mmd2_minus_real_null": 5.8080535382032394e-05,
+          "fit_terms": [
+            0.002106122672557831,
+            0.0020308205857872963,
+            0.0020602773874998093
+          ],
+          "heldout_terms": [
+            0.0021080425940454006,
+            0.002086340682581067,
+            0.0020821166690438986
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.556978645567142e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.0143488654866815e-06,
+          "heldout_pred_delta_g_plus_prior": -3.5713275110538234e-06,
+          "heldout_observed_delta_g_plus_prior": -3.3802352845668793e-06,
+          "heldout_observed_delta_q_self": -1.4512334018945694e-06,
+          "heldout_observed_delta_real_q_attraction": -1.928769052028656e-06,
+          "fit_grad_logsigma": -0.00015948235522955656,
+          "heldout_grad_logsigma": -0.00010564237891230732,
+          "heldout_sigma_central_diff": -0.00010570511221885681,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00010564237891230732,
+          "g_fit_heldout_grad_cosine": 0.9295879006385803,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.35532939434051514,
+          "shared_prior_rows": 1959
+        },
+        {
+          "block": 1,
+          "fit_mmd2": 7.677357643842697e-06,
+          "heldout_mmd2": -4.1865743696689606e-05,
+          "real_real_null_mmd2": -4.543457180261612e-05,
+          "heldout_mmd2_minus_real_null": 3.5688281059265137e-06,
+          "fit_terms": [
+            0.0020625172182917595,
+            0.002073027892038226,
+            0.0020639339927583933
+          ],
+          "heldout_terms": [
+            0.0020707056391984224,
+            0.0020843518432229757,
+            0.002098461613059044
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -3.338865610658104e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.530165491203661e-06,
+          "heldout_pred_delta_g_plus_prior": -1.8640520522694715e-06,
+          "heldout_observed_delta_g_plus_prior": -1.6852281987667084e-06,
+          "heldout_observed_delta_q_self": -1.985812559723854e-06,
+          "heldout_observed_delta_real_q_attraction": 3.003515303134918e-07,
+          "fit_grad_logsigma": -6.390705675585195e-05,
+          "heldout_grad_logsigma": -3.0094683097559027e-05,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -3.0094683097559027e-05,
+          "g_fit_heldout_grad_cosine": 0.3483718931674957,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.24588777124881744,
+          "shared_prior_rows": 1948
+        },
+        {
+          "block": 2,
+          "fit_mmd2": 3.1550880521535873e-05,
+          "heldout_mmd2": 2.859765663743019e-05,
+          "real_real_null_mmd2": -2.9266811907291412e-05,
+          "heldout_mmd2_minus_real_null": 5.7864468544721603e-05,
+          "fit_terms": [
+            0.002089217770844698,
+            0.0020567479077726603,
+            0.002057207515463233
+          ],
+          "heldout_terms": [
+            0.0020962220150977373,
+            0.002101664198562503,
+            0.002084644278511405
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.1630786502792034e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.1428145373647567e-06,
+          "heldout_pred_delta_g_plus_prior": -3.30589318764396e-06,
+          "heldout_observed_delta_g_plus_prior": -3.1138770282268524e-06,
+          "heldout_observed_delta_q_self": -1.7690472304821014e-06,
+          "heldout_observed_delta_real_q_attraction": -1.344829797744751e-06,
+          "fit_grad_logsigma": -0.0001379279710818082,
+          "heldout_grad_logsigma": -0.00011367678234819323,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00011367678234819323,
+          "g_fit_heldout_grad_cosine": 0.7003561854362488,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3530277609825134,
+          "shared_prior_rows": 1958
+        },
+        {
+          "block": 3,
+          "fit_mmd2": 1.7304904758930206e-05,
+          "heldout_mmd2": 4.5354943722486496e-05,
+          "real_real_null_mmd2": -6.362516433000565e-05,
+          "heldout_mmd2_minus_real_null": 0.00010898010805249214,
+          "fit_terms": [
+            0.002101981546729803,
+            0.0020584878511726856,
+            0.0020715822465717793
+          ],
+          "heldout_terms": [
+            0.002101051388308406,
+            0.0021326642017811537,
+            0.0020941803231835365
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.7297975318797398e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.9431638520472916e-06,
+          "heldout_pred_delta_g_plus_prior": -3.6729613839270314e-06,
+          "heldout_observed_delta_g_plus_prior": -3.469642251729965e-06,
+          "heldout_observed_delta_q_self": -1.8095597624778748e-06,
+          "heldout_observed_delta_real_q_attraction": -1.6600824892520905e-06,
+          "fit_grad_logsigma": -0.00015244260430335999,
+          "heldout_grad_logsigma": -0.00010325967741664499,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00010325967741664499,
+          "g_fit_heldout_grad_cosine": 0.507581353187561,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3168502151966095,
+          "shared_prior_rows": 1948
+        },
+        {
+          "block": 4,
+          "fit_mmd2": 2.0731240510940552e-05,
+          "heldout_mmd2": 5.182111635804176e-05,
+          "real_real_null_mmd2": 3.9703212678432465e-05,
+          "heldout_mmd2_minus_real_null": 1.2117903679609299e-05,
+          "fit_terms": [
+            0.002097485587000847,
+            0.002025236375629902,
+            0.002050995361059904
+          ],
+          "heldout_terms": [
+            0.002097046235576272,
+            0.0019885613583028316,
+            0.0020168933551758528
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -2.969391061924398e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.7623306121095084e-06,
+          "heldout_pred_delta_g_plus_prior": -2.059269718301948e-06,
+          "heldout_observed_delta_g_plus_prior": -1.8808059394359589e-06,
+          "heldout_observed_delta_q_self": -1.9168946892023087e-06,
+          "heldout_observed_delta_real_q_attraction": 3.632158041000366e-08,
+          "fit_grad_logsigma": -0.00016514374874532223,
+          "heldout_grad_logsigma": -0.0002272574492963031,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0002272574492963031,
+          "g_fit_heldout_grad_cosine": 0.38582277297973633,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.29622626304626465,
+          "shared_prior_rows": 1963
+        },
+        {
+          "block": 5,
+          "fit_mmd2": -5.76116144657135e-05,
+          "heldout_mmd2": 6.873486563563347e-05,
+          "real_real_null_mmd2": 1.1171214282512665e-06,
+          "heldout_mmd2_minus_real_null": 6.76177442073822e-05,
+          "fit_terms": [
+            0.002077216049656272,
+            0.0020026653073728085,
+            0.002068746369332075
+          ],
+          "heldout_terms": [
+            0.0020855532493442297,
+            0.0020384506788104773,
+            0.0020276345312595367
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": 4.2714074766081467e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.8360614149059984e-06,
+          "heldout_pred_delta_g_plus_prior": -1.4089206672451837e-06,
+          "heldout_observed_delta_g_plus_prior": -1.246575266122818e-06,
+          "heldout_observed_delta_q_self": -1.2847594916820526e-06,
+          "heldout_observed_delta_real_q_attraction": 3.818422555923462e-08,
+          "fit_grad_logsigma": -9.327709267381579e-05,
+          "heldout_grad_logsigma": -0.00016427725495304912,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00016427725495304912,
+          "g_fit_heldout_grad_cosine": 0.540907621383667,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3122292160987854,
+          "shared_prior_rows": 1955
+        },
+        {
+          "block": 6,
+          "fit_mmd2": 0.0001179184764623642,
+          "heldout_mmd2": -2.5088898837566376e-05,
+          "real_real_null_mmd2": 3.412459045648575e-05,
+          "heldout_mmd2_minus_real_null": -5.9213489294052124e-05,
+          "fit_terms": [
+            0.0020938401576131582,
+            0.0020599006675183773,
+            0.002017911057919264
+          ],
+          "heldout_terms": [
+            0.002092468785122037,
+            0.002032308606430888,
+            0.0020749331451952457
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.3065945267953794e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.414083953932277e-06,
+          "heldout_pred_delta_g_plus_prior": -2.7206784807276563e-06,
+          "heldout_observed_delta_g_plus_prior": -2.520158886909485e-06,
+          "heldout_observed_delta_q_self": -1.692911610007286e-06,
+          "heldout_observed_delta_real_q_attraction": -8.270144462585449e-07,
+          "fit_grad_logsigma": -0.00019880651962012053,
+          "heldout_grad_logsigma": -0.00012607469398062676,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00012607469398062676,
+          "g_fit_heldout_grad_cosine": 0.6080218553543091,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.24677623808383942,
+          "shared_prior_rows": 1929
+        },
+        {
+          "block": 7,
+          "fit_mmd2": 3.2520387321710587e-05,
+          "heldout_mmd2": 1.6468577086925507e-05,
+          "real_real_null_mmd2": -4.980945959687233e-05,
+          "heldout_mmd2_minus_real_null": 6.627803668379784e-05,
+          "fit_terms": [
+            0.00206544972024858,
+            0.0020593751687556505,
+            0.00204615225084126
+          ],
+          "heldout_terms": [
+            0.0020649870857596397,
+            0.001991845201700926,
+            0.00202018185518682
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -8.110243356895808e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.7104351854868582e-06,
+          "heldout_pred_delta_g_plus_prior": -2.521459521176439e-06,
+          "heldout_observed_delta_g_plus_prior": -2.353917807340622e-06,
+          "heldout_observed_delta_q_self": -1.7238780856132507e-06,
+          "heldout_observed_delta_real_q_attraction": -6.300397217273712e-07,
+          "fit_grad_logsigma": -5.5405496823368594e-05,
+          "heldout_grad_logsigma": -0.000141693206387572,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.000141693206387572,
+          "g_fit_heldout_grad_cosine": -0.23170413076877594,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.32507336139678955,
+          "shared_prior_rows": 1936
+        }
+      ],
+      "summary": {
+        "fit_mmd2": {
+          "mean": 2.3310014512389898e-05,
+          "ci95_t": [
+            -1.6642955767607942e-05,
+            6.326298479238774e-05
+          ],
+          "negative_blocks": 1,
+          "positive_blocks": 7,
+          "sd_between_blocks": 4.778943834578997e-05
+        },
+        "heldout_mmd2": {
+          "mean": 2.1771586034446955e-05,
+          "ci95_t": [
+            -9.91417611568495e-06,
+            5.345734818457886e-05
+          ],
+          "negative_blocks": 2,
+          "positive_blocks": 6,
+          "sd_between_blocks": 3.7900680878067015e-05
+        },
+        "real_real_null_mmd2": {
+          "mean": -1.764018088579178e-05,
+          "ci95_t": [
+            -4.9992552573458526e-05,
+            1.4712190801874968e-05
+          ],
+          "negative_blocks": 5,
+          "positive_blocks": 3,
+          "sd_between_blocks": 3.869804075322719e-05
+        },
+        "heldout_mmd2_minus_real_null": {
+          "mean": 3.941176692023873e-05,
+          "ci95_t": [
+            -3.917265132175678e-06,
+            8.274079897265314e-05
+          ],
+          "negative_blocks": 1,
+          "positive_blocks": 7,
+          "sd_between_blocks": 5.182768868847485e-05
+        },
+        "heldout_pred_delta_g_at_native_sign_lr": {
+          "mean": -8.463948262260601e-07,
+          "ci95_t": [
+            -1.4611575319449147e-06,
+            -2.3163212050720542e-07
+          ],
+          "negative_blocks": 7,
+          "positive_blocks": 1,
+          "sd_between_blocks": 7.35343685747207e-07
+        },
+        "heldout_pred_delta_prior_at_native_sign_lr": {
+          "mean": -1.794175489067129e-06,
+          "ci95_t": [
+            -1.998023295955997e-06,
+            -1.5903276821782611e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 2.4383098755781875e-07
+        },
+        "heldout_pred_delta_g_plus_prior": {
+          "mean": -2.640570315293189e-06,
+          "ci95_t": [
+            -3.336690966680215e-06,
+            -1.9444496639061633e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 8.326593671896883e-07
+        },
+        "heldout_observed_delta_g_plus_prior": {
+          "mean": -2.456305082887411e-06,
+          "ci95_t": [
+            -3.1425603171948368e-06,
+            -1.7700498485799855e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 8.208589243696185e-07
+        },
+        "heldout_observed_delta_q_self": {
+          "mean": -1.7042621038854122e-06,
+          "ci95_t": [
+            -1.8991227739653131e-06,
+            -1.5094014338055113e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 2.3308109293353027e-07
+        },
+        "heldout_observed_delta_real_q_attraction": {
+          "mean": -7.519847713410854e-07,
+          "ci95_t": [
+            -1.4539176453908978e-06,
+            -5.005189729127298e-08
+          ],
+          "negative_blocks": 5,
+          "positive_blocks": 3,
+          "sd_between_blocks": 8.396116126585141e-07
+        },
+        "fit_grad_logsigma": {
+          "mean": -0.00012829910565415048,
+          "ci95_t": [
+            -0.0001714670283148616,
+            -8.513118299343937e-05
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 5.1634978927779354e-05
+        },
+        "heldout_grad_logsigma": {
+          "mean": -0.00012649701579903194,
+          "ci95_t": [
+            -0.00017362429227935425,
+            -7.936973931870964e-05
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 5.637092956988233e-05
+        },
+        "heldout_pred_delta_sigma_per_unit_log_step": {
+          "mean": -0.00012649701579903194,
+          "ci95_t": [
+            -0.00017362429227935425,
+            -7.936973931870964e-05
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 5.637092956988233e-05
+        },
+        "g_fit_heldout_grad_cosine": {
+          "mean": 0.4736181814223528,
+          "ci95_t": [
+            0.1902966854933137,
+            0.7569396773513919
+          ],
+          "negative_blocks": 1,
+          "positive_blocks": 7,
+          "sd_between_blocks": 0.3388928299159872
+        },
+        "prior_shared_rows_fit_heldout_grad_cosine": {
+          "mean": 0.3064250275492668,
+          "ci95_t": [
+            0.27126620112494704,
+            0.3415838539735866
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 0.042054960017742435
+        }
+      },
+      "seconds": 0.6909395828843117
+    },
+    {
+      "task": "rotated100",
+      "checkpoint": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/runs/h2-handoff-critic-floor/rotated100/final-state.pt",
+      "checkpoint_sha256": "42c717127328e8a202e390ef2ee517462da2c1ab320a880d364c639d091640f7",
+      "step": 7000,
+      "sigma": 0.019999999552965164,
+      "latent_width": [
+        0.01856164075434208,
+        0.018418334424495697
+      ],
+      "calibration_seed": 1000100,
+      "bandwidth": 0.021339267675919472,
+      "native_lr_g": 6.640625e-05,
+      "native_lr_prior": 0.0001328125,
+      "rows": [
+        {
+          "block": 0,
+          "fit_mmd2": 0.00019011925905942917,
+          "heldout_mmd2": 0.00011315150186419487,
+          "real_real_null_mmd2": -2.369796857237816e-05,
+          "heldout_mmd2_minus_real_null": 0.00013684947043657303,
+          "fit_terms": [
+            0.002425434300675988,
+            0.0019805151969194412,
+            0.0021079150028526783
+          ],
+          "heldout_terms": [
+            0.0024269521236419678,
+            0.0019646678119897842,
+            0.0021392342168837786
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.291273406422988e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.2736799110134598e-06,
+          "heldout_pred_delta_g_plus_prior": -3.564953317436448e-06,
+          "heldout_observed_delta_g_plus_prior": -3.3811666071414948e-06,
+          "heldout_observed_delta_q_self": -3.3837277442216873e-06,
+          "heldout_observed_delta_real_q_attraction": 2.3283064365386963e-09,
+          "fit_grad_logsigma": -0.0006803992437198758,
+          "heldout_grad_logsigma": -0.0006837695837020874,
+          "heldout_sigma_central_diff": -0.0006835907697677612,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0006837695837020874,
+          "g_fit_heldout_grad_cosine": 0.8301019668579102,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.33915722370147705,
+          "shared_prior_rows": 1948
+        },
+        {
+          "block": 1,
+          "fit_mmd2": 0.0001608729362487793,
+          "heldout_mmd2": 0.0001892060972750187,
+          "real_real_null_mmd2": -4.7744251787662506e-05,
+          "heldout_mmd2_minus_real_null": 0.0002369503490626812,
+          "fit_terms": [
+            0.002395050134509802,
+            0.0020306124351918697,
+            0.002132394816726446
+          ],
+          "heldout_terms": [
+            0.002394258975982666,
+            0.0019396976567804813,
+            0.0020723752677440643
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -7.026067549986692e-08,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.9785981041641207e-06,
+          "heldout_pred_delta_g_plus_prior": -3.0488587796639877e-06,
+          "heldout_observed_delta_g_plus_prior": -2.8810463845729828e-06,
+          "heldout_observed_delta_q_self": -2.966262400150299e-06,
+          "heldout_observed_delta_real_q_attraction": 8.521601557731628e-08,
+          "fit_grad_logsigma": -0.0006539138848893344,
+          "heldout_grad_logsigma": -0.0007528598653152585,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0007528598653152585,
+          "g_fit_heldout_grad_cosine": 0.19942186772823334,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.41230058670043945,
+          "shared_prior_rows": 1968
+        },
+        {
+          "block": 2,
+          "fit_mmd2": 0.0001996583305299282,
+          "heldout_mmd2": 0.0001477147452533245,
+          "real_real_null_mmd2": -1.3228040188550949e-05,
+          "heldout_mmd2_minus_real_null": 0.00016094278544187546,
+          "fit_terms": [
+            0.002429475076496601,
+            0.0019680773839354515,
+            0.002098947064951062
+          ],
+          "heldout_terms": [
+            0.0024325235281139612,
+            0.002013649558648467,
+            0.002149229170754552
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -4.568242957248003e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.523246166674653e-06,
+          "heldout_pred_delta_g_plus_prior": -2.9800704623994534e-06,
+          "heldout_observed_delta_g_plus_prior": -2.7781352400779724e-06,
+          "heldout_observed_delta_q_self": -2.7061905711889267e-06,
+          "heldout_observed_delta_real_q_attraction": -7.171183824539185e-08,
+          "fit_grad_logsigma": -0.0007617227383889258,
+          "heldout_grad_logsigma": -0.0006533653941005468,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0006533653941005468,
+          "g_fit_heldout_grad_cosine": 0.25256597995758057,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.31393730640411377,
+          "shared_prior_rows": 1957
+        },
+        {
+          "block": 3,
+          "fit_mmd2": 0.00016943877562880516,
+          "heldout_mmd2": 0.00014294590801000595,
+          "real_real_null_mmd2": -3.0151568353176117e-05,
+          "heldout_mmd2_minus_real_null": 0.00017309747636318207,
+          "fit_terms": [
+            0.002400848548859358,
+            0.002072473056614399,
+            0.002151941414922476
+          ],
+          "heldout_terms": [
+            0.002402908867225051,
+            0.0020678050350397825,
+            0.0021638839971274137
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.3677672541234642e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.7760652326614945e-06,
+          "heldout_pred_delta_g_plus_prior": -3.1438324867849587e-06,
+          "heldout_observed_delta_g_plus_prior": -2.9671937227249146e-06,
+          "heldout_observed_delta_q_self": -3.210734575986862e-06,
+          "heldout_observed_delta_real_q_attraction": 2.4354085326194763e-07,
+          "fit_grad_logsigma": -0.0005593266687355936,
+          "heldout_grad_logsigma": -0.0005957852117717266,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0005957852117717266,
+          "g_fit_heldout_grad_cosine": 0.5846511721611023,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.2961231470108032,
+          "shared_prior_rows": 1940
+        },
+        {
+          "block": 4,
+          "fit_mmd2": 0.00017153425142169,
+          "heldout_mmd2": 0.00020302971825003624,
+          "real_real_null_mmd2": -9.707175195217133e-06,
+          "heldout_mmd2_minus_real_null": 0.00021273689344525337,
+          "fit_terms": [
+            0.0024676239117980003,
+            0.0020077526569366455,
+            0.002151921158656478
+          ],
+          "heldout_terms": [
+            0.002467102138325572,
+            0.0020150828640908003,
+            0.002139577642083168
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -9.958399687093333e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.1018988718424225e-06,
+          "heldout_pred_delta_g_plus_prior": -3.097738840551756e-06,
+          "heldout_observed_delta_g_plus_prior": -2.9243528842926025e-06,
+          "heldout_observed_delta_q_self": -2.979068085551262e-06,
+          "heldout_observed_delta_real_q_attraction": 5.448237061500549e-08,
+          "fit_grad_logsigma": -0.0006695477641187608,
+          "heldout_grad_logsigma": -0.0006687988061457872,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0006687988061457872,
+          "g_fit_heldout_grad_cosine": 0.3093581199645996,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3477511405944824,
+          "shared_prior_rows": 1948
+        },
+        {
+          "block": 5,
+          "fit_mmd2": 2.4091918021440506e-05,
+          "heldout_mmd2": 5.918554961681366e-05,
+          "real_real_null_mmd2": 8.905772119760513e-06,
+          "heldout_mmd2_minus_real_null": 5.0279777497053146e-05,
+          "fit_terms": [
+            0.0023586468305438757,
+            0.002046740148216486,
+            0.0021906474139541388
+          ],
+          "heldout_terms": [
+            0.0023597562685608864,
+            0.001942075788974762,
+            0.0021213232539594173
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -9.66529796642135e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.8976268165715737e-06,
+          "heldout_pred_delta_g_plus_prior": -2.8641566132137086e-06,
+          "heldout_observed_delta_g_plus_prior": -2.6887282729148865e-06,
+          "heldout_observed_delta_q_self": -2.2582244127988815e-06,
+          "heldout_observed_delta_real_q_attraction": -4.302710294723511e-07,
+          "fit_grad_logsigma": -0.0004838387540075928,
+          "heldout_grad_logsigma": -0.0006124365027062595,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0006124365027062595,
+          "g_fit_heldout_grad_cosine": 0.7602043151855469,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.2789534628391266,
+          "shared_prior_rows": 1953
+        },
+        {
+          "block": 6,
+          "fit_mmd2": 0.00022619031369686127,
+          "heldout_mmd2": 0.00016598636284470558,
+          "real_real_null_mmd2": 4.087667912244797e-05,
+          "heldout_mmd2_minus_real_null": 0.00012510968372225761,
+          "fit_terms": [
+            0.0024022171273827553,
+            0.0020596676040440798,
+            0.002117847092449665
+          ],
+          "heldout_terms": [
+            0.002400878584012389,
+            0.001985949696972966,
+            0.002110420959070325
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.0218285240171099e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.6812031137524173e-06,
+          "heldout_pred_delta_g_plus_prior": -2.7833859661541283e-06,
+          "heldout_observed_delta_g_plus_prior": -2.623535692691803e-06,
+          "heldout_observed_delta_q_self": -2.580462023615837e-06,
+          "heldout_observed_delta_real_q_attraction": -4.284083843231201e-08,
+          "fit_grad_logsigma": -0.0006718196091242135,
+          "heldout_grad_logsigma": -0.0007141357637010515,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0007141357637010515,
+          "g_fit_heldout_grad_cosine": 0.5824159383773804,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.34442898631095886,
+          "shared_prior_rows": 1941
+        },
+        {
+          "block": 7,
+          "fit_mmd2": 0.00010363524779677391,
+          "heldout_mmd2": 6.549898535013199e-05,
+          "real_real_null_mmd2": 8.946750313043594e-06,
+          "heldout_mmd2_minus_real_null": 5.6552235037088394e-05,
+          "fit_terms": [
+            0.002351763192564249,
+            0.002031635260209441,
+            0.0021398814860731363
+          ],
+          "heldout_terms": [
+            0.00235230871476233,
+            0.002102507511153817,
+            0.0021946586202830076
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -6.516326038763509e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.020687588810688e-06,
+          "heldout_pred_delta_g_plus_prior": -2.672320192687039e-06,
+          "heldout_observed_delta_g_plus_prior": -2.4703331291675568e-06,
+          "heldout_observed_delta_q_self": -2.7779024094343185e-06,
+          "heldout_observed_delta_real_q_attraction": 3.073364496231079e-07,
+          "fit_grad_logsigma": -0.0005753676523454487,
+          "heldout_grad_logsigma": -0.0004965182743035257,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0004965182743035257,
+          "g_fit_heldout_grad_cosine": 0.2909526228904724,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.25939708948135376,
+          "shared_prior_rows": 1921
+        }
+      ],
+      "summary": {
+        "fit_mmd2": {
+          "mean": 0.00015569262905046344,
+          "ci95_t": [
+            0.00010226986746719719,
+            0.0002091153906337297
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 6.390122569243623e-05
+        },
+        "heldout_mmd2": {
+          "mean": 0.00013583985855802894,
+          "ci95_t": [
+            9.137526986821448e-05,
+            0.0001803044472478434
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 5.31859760330919e-05
+        },
+        "real_real_null_mmd2": {
+          "mean": -8.224975317716599e-06,
+          "ci95_t": [
+            -3.124754241308177e-05,
+            1.479759177764857e-05
+          ],
+          "negative_blocks": 5,
+          "positive_blocks": 3,
+          "sd_between_blocks": 2.75382666934426e-05
+        },
+        "heldout_mmd2_minus_real_null": {
+          "mean": 0.00014406483387574553,
+          "ci95_t": [
+            8.812833002678716e-05,
+            0.00020000133772470391
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 6.690801918442457e-05
+        },
+        "heldout_pred_delta_g_at_native_sign_lr": {
+          "mean": -7.377888566750812e-07,
+          "ci95_t": [
+            -1.1567636386704612e-06,
+            -3.1881407467970126e-07
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 5.011534654942327e-07
+        },
+        "heldout_pred_delta_prior_at_native_sign_lr": {
+          "mean": -2.2816257256863537e-06,
+          "ci95_t": [
+            -2.6288244316282832e-06,
+            -1.934427019744424e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 4.1529906375088143e-07
+        },
+        "heldout_pred_delta_g_plus_prior": {
+          "mean": -3.019414582361435e-06,
+          "ci95_t": [
+            -3.247698160184078e-06,
+            -2.791131004538792e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 2.7305964716153625e-07
+        },
+        "heldout_observed_delta_g_plus_prior": {
+          "mean": -2.8393114916980267e-06,
+          "ci95_t": [
+            -3.0689308082868446e-06,
+            -2.6096921751092087e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 2.74657380821007e-07
+        },
+        "heldout_observed_delta_q_self": {
+          "mean": -2.8578215278685093e-06,
+          "ci95_t": [
+            -3.1564927080027643e-06,
+            -2.5591503477342543e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 3.572532367095658e-07
+        },
+        "heldout_observed_delta_real_q_attraction": {
+          "mean": 1.8510036170482635e-08,
+          "ci95_t": [
+            -1.6932867406738293e-07,
+            2.063487464083482e-07
+          ],
+          "negative_blocks": 3,
+          "positive_blocks": 5,
+          "sd_between_blocks": 2.2468182963506233e-07
+        },
+        "fit_grad_logsigma": {
+          "mean": -0.0006319920394162182,
+          "ci95_t": [
+            -0.0007047968798514328,
+            -0.0005591871989810036
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 8.708495035213066e-05
+        },
+        "heldout_grad_logsigma": {
+          "mean": -0.0006472086752182804,
+          "ci95_t": [
+            -0.000713523047815883,
+            -0.0005808943026206779
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 7.932142713002426e-05
+        },
+        "heldout_pred_delta_sigma_per_unit_log_step": {
+          "mean": -0.0006472086752182804,
+          "ci95_t": [
+            -0.000713523047815883,
+            -0.0005808943026206779
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 7.932142713002426e-05
+        },
+        "g_fit_heldout_grad_cosine": {
+          "mean": 0.4762089978903532,
+          "ci95_t": [
+            0.2719832113081989,
+            0.6804347844725075
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 0.24428310506301737
+        },
+        "prior_shared_rows_fit_heldout_grad_cosine": {
+          "mean": 0.3240061178803444,
+          "ci95_t": [
+            0.283925290663198,
+            0.3640869450974908
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 0.04794237343852829
+        }
+      },
+      "seconds": 0.14788658800534904
+    },
+    {
+      "task": "staggered100",
+      "checkpoint": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/runs/h2-handoff-critic-floor/staggered100/final-state.pt",
+      "checkpoint_sha256": "d064b481572170df7e9d6a8c7fe2abf60d26e254e75ca1ec745d53255538a240",
+      "step": 7000,
+      "sigma": 0.019999999552965164,
+      "latent_width": [
+        0.02017108164727688,
+        0.020435696467757225
+      ],
+      "calibration_seed": 1010100,
+      "bandwidth": 0.021424174763390688,
+      "native_lr_g": 6.640625e-05,
+      "native_lr_prior": 0.0001328125,
+      "rows": [
+        {
+          "block": 0,
+          "fit_mmd2": 9.483285248279572e-05,
+          "heldout_mmd2": 0.0001369807869195938,
+          "real_real_null_mmd2": -3.473833203315735e-07,
+          "heldout_mmd2_minus_real_null": 0.00013732817023992538,
+          "fit_terms": [
+            0.0023088876623660326,
+            0.0020413438323885202,
+            0.0021276993211358786
+          ],
+          "heldout_terms": [
+            0.0023085346911102533,
+            0.002031600335612893,
+            0.0021015771199017763
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -3.4451258557055553e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.1730184016632847e-06,
+          "heldout_pred_delta_g_plus_prior": -2.5175309872338403e-06,
+          "heldout_observed_delta_g_plus_prior": -2.32551246881485e-06,
+          "heldout_observed_delta_q_self": -2.184417098760605e-06,
+          "heldout_observed_delta_real_q_attraction": -1.41095370054245e-07,
+          "fit_grad_logsigma": -0.0003400918794795871,
+          "heldout_grad_logsigma": -0.00038821742055006325,
+          "heldout_sigma_central_diff": -0.00038812868297100067,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00038821742055006325,
+          "g_fit_heldout_grad_cosine": 0.3891005516052246,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3804910182952881,
+          "shared_prior_rows": 1945
+        },
+        {
+          "block": 1,
+          "fit_mmd2": 7.181568071246147e-05,
+          "heldout_mmd2": 5.9613026678562164e-05,
+          "real_real_null_mmd2": 3.775954246520996e-05,
+          "heldout_mmd2_minus_real_null": 2.1853484213352203e-05,
+          "fit_terms": [
+            0.0023019236978143454,
+            0.0019844756461679935,
+            0.002107291715219617
+          ],
+          "heldout_terms": [
+            0.002302328357473016,
+            0.002083286875858903,
+            0.0021630011033266783
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.4308449181044125e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.6676428913342534e-06,
+          "heldout_pred_delta_g_plus_prior": -3.098487809438666e-06,
+          "heldout_observed_delta_g_plus_prior": -2.9136426746845245e-06,
+          "heldout_observed_delta_q_self": -2.4621840566396713e-06,
+          "heldout_observed_delta_real_q_attraction": -4.516914486885071e-07,
+          "fit_grad_logsigma": -0.0003742545668501407,
+          "heldout_grad_logsigma": -0.00027927636983804405,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00027927636983804405,
+          "g_fit_heldout_grad_cosine": 0.44956809282302856,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3128919005393982,
+          "shared_prior_rows": 1961
+        },
+        {
+          "block": 2,
+          "fit_mmd2": 0.00011793943122029305,
+          "heldout_mmd2": 5.556037649512291e-05,
+          "real_real_null_mmd2": 7.989723235368729e-05,
+          "heldout_mmd2_minus_real_null": -2.4336855858564377e-05,
+          "fit_terms": [
+            0.0022830581292510033,
+            0.0020242698956280947,
+            0.0020946941804140806
+          ],
+          "heldout_terms": [
+            0.0022854364942759275,
+            0.0020428441930562258,
+            0.002136360155418515
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": 2.834952681496361e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.3604529815202113e-06,
+          "heldout_pred_delta_g_plus_prior": -2.0769577133705752e-06,
+          "heldout_observed_delta_g_plus_prior": -1.8868595361709595e-06,
+          "heldout_observed_delta_q_self": -2.4475157260894775e-06,
+          "heldout_observed_delta_real_q_attraction": 5.606561899185181e-07,
+          "fit_grad_logsigma": -0.0003611427382566035,
+          "heldout_grad_logsigma": -0.0003035202680621296,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0003035202680621296,
+          "g_fit_heldout_grad_cosine": -0.39073294401168823,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3828233778476715,
+          "shared_prior_rows": 1950
+        },
+        {
+          "block": 3,
+          "fit_mmd2": 1.874193549156189e-05,
+          "heldout_mmd2": 6.115250289440155e-05,
+          "real_real_null_mmd2": -7.177470251917839e-05,
+          "heldout_mmd2_minus_real_null": 0.00013292720541357994,
+          "fit_terms": [
+            0.002266327850520611,
+            0.0021133585833013058,
+            0.0021804722491651773
+          ],
+          "heldout_terms": [
+            0.0022705462761223316,
+            0.0020303979981690645,
+            0.002119896002113819
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.6107989040392567e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.7762010884325719e-06,
+          "heldout_pred_delta_g_plus_prior": -3.3869999924718286e-06,
+          "heldout_observed_delta_g_plus_prior": -3.206077963113785e-06,
+          "heldout_observed_delta_q_self": -1.5390105545520782e-06,
+          "heldout_observed_delta_real_q_attraction": -1.6666017472743988e-06,
+          "fit_grad_logsigma": -0.0001969712902791798,
+          "heldout_grad_logsigma": -0.00033966690534725785,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00033966690534725785,
+          "g_fit_heldout_grad_cosine": 0.16137638688087463,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.31422486901283264,
+          "shared_prior_rows": 1961
+        },
+        {
+          "block": 4,
+          "fit_mmd2": 7.790839299559593e-05,
+          "heldout_mmd2": 0.00011921674013137817,
+          "real_real_null_mmd2": -3.674672916531563e-05,
+          "heldout_mmd2_minus_real_null": 0.0001559634692966938,
+          "fit_terms": [
+            0.002296153223142028,
+            0.00205066311173141,
+            0.002134453970938921
+          ],
+          "heldout_terms": [
+            0.0022983732633292675,
+            0.0021169844549149275,
+            0.0021480703726410866
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.5827765764697688e-06,
+          "heldout_pred_delta_prior_at_native_sign_lr": -2.7723031053028535e-06,
+          "heldout_pred_delta_g_plus_prior": -4.355079681772622e-06,
+          "heldout_observed_delta_g_plus_prior": -4.181172698736191e-06,
+          "heldout_observed_delta_q_self": -1.9264407455921173e-06,
+          "heldout_observed_delta_real_q_attraction": -2.2551976144313812e-06,
+          "fit_grad_logsigma": -0.0003375951782800257,
+          "heldout_grad_logsigma": -0.0003388595359865576,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0003388595359865576,
+          "g_fit_heldout_grad_cosine": 0.926420271396637,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.46154502034187317,
+          "shared_prior_rows": 1947
+        },
+        {
+          "block": 5,
+          "fit_mmd2": 3.101769834756851e-06,
+          "heldout_mmd2": 6.422679871320724e-05,
+          "real_real_null_mmd2": -5.705747753381729e-05,
+          "heldout_mmd2_minus_real_null": 0.00012128427624702454,
+          "fit_terms": [
+            0.002214279491454363,
+            0.001957697095349431,
+            0.0020844375248998404
+          ],
+          "heldout_terms": [
+            0.002216083463281393,
+            0.0019921171478927135,
+            0.0020719869062304497
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -5.204653916734969e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.552640355839685e-06,
+          "heldout_pred_delta_g_plus_prior": -2.073105747513182e-06,
+          "heldout_observed_delta_g_plus_prior": -1.896638423204422e-06,
+          "heldout_observed_delta_q_self": -1.634005457162857e-06,
+          "heldout_observed_delta_real_q_attraction": -2.6263296604156494e-07,
+          "fit_grad_logsigma": -0.000287683738861233,
+          "heldout_grad_logsigma": -0.0003385549644008279,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.0003385549644008279,
+          "g_fit_heldout_grad_cosine": 0.6578156352043152,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.2885855436325073,
+          "shared_prior_rows": 1958
+        },
+        {
+          "block": 6,
+          "fit_mmd2": 0.00011006277054548264,
+          "heldout_mmd2": 5.456991493701935e-05,
+          "real_real_null_mmd2": -1.1110678315162659e-05,
+          "heldout_mmd2_minus_real_null": 6.568059325218201e-05,
+          "fit_terms": [
+            0.0022381003946065903,
+            0.0019854004494845867,
+            0.002056719036772847
+          ],
+          "heldout_terms": [
+            0.0022375406697392464,
+            0.002025062683969736,
+            0.0021040167193859816
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": 8.30392536954605e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.8543470332588186e-06,
+          "heldout_pred_delta_g_plus_prior": -1.0239544963042135e-06,
+          "heldout_observed_delta_g_plus_prior": -8.470378816127777e-07,
+          "heldout_observed_delta_q_self": -2.505257725715637e-06,
+          "heldout_observed_delta_real_q_attraction": 1.6582198441028595e-06,
+          "fit_grad_logsigma": -0.0003766013542190194,
+          "heldout_grad_logsigma": -0.00026922134566120803,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00026922134566120803,
+          "g_fit_heldout_grad_cosine": -0.7713630199432373,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3035288453102112,
+          "shared_prior_rows": 1953
+        },
+        {
+          "block": 7,
+          "fit_mmd2": 8.24308954179287e-05,
+          "heldout_mmd2": 7.947208359837532e-05,
+          "real_real_null_mmd2": 9.162351489067078e-06,
+          "heldout_mmd2_minus_real_null": 7.030973210930824e-05,
+          "fit_terms": [
+            0.002241713460534811,
+            0.00209520710632205,
+            0.002127244835719466
+          ],
+          "heldout_terms": [
+            0.002242725109681487,
+            0.00208068173378706,
+            0.0021219674963504076
+          ],
+          "heldout_pred_delta_g_at_native_sign_lr": -1.713651727186516e-07,
+          "heldout_pred_delta_prior_at_native_sign_lr": -1.9482984043861507e-06,
+          "heldout_pred_delta_g_plus_prior": -2.1196635771048022e-06,
+          "heldout_observed_delta_g_plus_prior": -1.9315630197525024e-06,
+          "heldout_observed_delta_q_self": -1.6924459487199783e-06,
+          "heldout_observed_delta_real_q_attraction": -2.3888424038887024e-07,
+          "fit_grad_logsigma": -0.0002626849745865911,
+          "heldout_grad_logsigma": -0.00027788564329966903,
+          "heldout_sigma_central_diff": null,
+          "heldout_pred_delta_sigma_per_unit_log_step": -0.00027788564329966903,
+          "g_fit_heldout_grad_cosine": 0.5971538424491882,
+          "prior_shared_rows_fit_heldout_grad_cosine": 0.3989485502243042,
+          "shared_prior_rows": 1952
+        }
+      ],
+      "summary": {
+        "fit_mmd2": {
+          "mean": 7.210421608760953e-05,
+          "ci95_t": [
+            3.776828720428089e-05,
+            0.00010644014497093817
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 4.1070657448384137e-05
+        },
+        "heldout_mmd2": {
+          "mean": 7.884902879595757e-05,
+          "ci95_t": [
+            5.233991641753287e-05,
+            0.00010535814117438226
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 3.170867103827288e-05
+        },
+        "real_real_null_mmd2": {
+          "mean": -6.277230568230152e-06,
+          "ci95_t": [
+            -4.802942937027151e-05,
+            3.547496823381121e-05
+          ],
+          "negative_blocks": 5,
+          "positive_blocks": 3,
+          "sd_between_blocks": 4.994157171463821e-05
+        },
+        "heldout_mmd2_minus_real_null": {
+          "mean": 8.512625936418772e-05,
+          "ci95_t": [
+            3.232860115130759e-05,
+            0.00013792391757706785
+          ],
+          "negative_blocks": 1,
+          "positive_blocks": 7,
+          "sd_between_blocks": 6.315351310011944e-05
+        },
+        "heldout_pred_delta_g_at_native_sign_lr": {
+          "mean": -5.683594679339876e-07,
+          "ci95_t": [
+            -1.3261845577761821e-06,
+            1.894656219082069e-07
+          ],
+          "negative_blocks": 6,
+          "positive_blocks": 2,
+          "sd_between_blocks": 9.064666570244364e-07
+        },
+        "heldout_pred_delta_prior_at_native_sign_lr": {
+          "mean": -2.0131130327172286e-06,
+          "ci95_t": [
+            -2.350420558576409e-06,
+            -1.675805506858048e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 4.0346780471259466e-07
+        },
+        "heldout_pred_delta_g_plus_prior": {
+          "mean": -2.5814725006512163e-06,
+          "ci95_t": [
+            -3.4304147171563726e-06,
+            -1.7325302841460601e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 1.0154557078106093e-06
+        },
+        "heldout_observed_delta_g_plus_prior": {
+          "mean": -2.3985630832612514e-06,
+          "ci95_t": [
+            -3.2487661845681468e-06,
+            -1.5483599819543561e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 1.0169639054758032e-06
+        },
+        "heldout_observed_delta_q_self": {
+          "mean": -2.0489096641540527e-06,
+          "ci95_t": [
+            -2.384882799823326e-06,
+            -1.7129365284847797e-06
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 4.0187168414226157e-07
+        },
+        "heldout_observed_delta_real_q_attraction": {
+          "mean": -3.496534191071987e-07,
+          "ci95_t": [
+            -1.3637388114001155e-06,
+            6.644319731857181e-07
+          ],
+          "negative_blocks": 6,
+          "positive_blocks": 2,
+          "sd_between_blocks": 1.2129904483374799e-06
+        },
+        "fit_grad_logsigma": {
+          "mean": -0.00031712821510154754,
+          "ci95_t": [
+            -0.0003699581504765495,
+            -0.0002642982797265456
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 6.31921211795285e-05
+        },
+        "heldout_grad_logsigma": {
+          "mean": -0.00031690030664321966,
+          "ci95_t": [
+            -0.0003514363039298689,
+            -0.0002823643093565704
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 4.130996773141002e-05
+        },
+        "heldout_pred_delta_sigma_per_unit_log_step": {
+          "mean": -0.00031690030664321966,
+          "ci95_t": [
+            -0.0003514363039298689,
+            -0.0002823643093565704
+          ],
+          "negative_blocks": 8,
+          "positive_blocks": 0,
+          "sd_between_blocks": 4.130996773141002e-05
+        },
+        "g_fit_heldout_grad_cosine": {
+          "mean": 0.25241735205054283,
+          "ci95_t": [
+            -0.22314752401010984,
+            0.7279822281111955
+          ],
+          "negative_blocks": 2,
+          "positive_blocks": 6,
+          "sd_between_blocks": 0.5688432715927983
+        },
+        "prior_shared_rows_fit_heldout_grad_cosine": {
+          "mean": 0.3553798906505108,
+          "ci95_t": [
+            0.30521668728857154,
+            0.40554309401245003
+          ],
+          "negative_blocks": 0,
+          "positive_blocks": 8,
+          "sd_between_blocks": 0.060002330177010565
+        }
+      },
+      "seconds": 0.17274134792387486
+    }
+  ],
+  "seconds": 1.0140041448175907,
+  "diagnostic_only": true
+}
