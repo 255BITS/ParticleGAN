@@ -25,9 +25,10 @@ The library's `batch_feature_zero` QR initialization is the **primary** native
 comparison. The earlier `initialization: null` Xavier runs are secondary
 controls and must not be ranked against QR rows; the earlier Xavier-first
 interpretation is superseded. Every registered arm uses noisy scoring
-(`eval_output_noise: true`). Completed native cards run for 7,000 updates
-with the frozen scorer. The `st5` source [patch](st5-vs-dv12-st.patch) is
-against the harness's `candidates/dv12-st/package`.
+(`eval_output_noise: true`). Standard native cards run for 7,000 updates;
+the rotated extension runs for 14,000. Both use the frozen scorer. The `st5`
+source [patch](st5-vs-dv12-st.patch) is against the harness's
+`candidates/dv12-st/package`.
 It changes only `particlegan/continuous.py` and `particlegan/birth_death.py`:
 row-equal cosine evidence, two-scale tests with nominal per-window alpha
 spending, scale-aware reversal, row-lineage invalidation after cloning, and
@@ -68,6 +69,36 @@ The exact final, holdout, and gate fields are archived in
 `native100-diagnostics.jsonl` is a read-only sidecar: it measures bridge
 outliers, per-mode geometry, row motion, and settle decisions from the same
 evaluation clouds without changing the frozen scorer or verdict.
+
+### Rotated100 extension to 14,000 updates
+
+`st5-scaleaware-qr-14k` keeps the same package, QR initialization, recipe,
+and seed; the candidate option `native_steps=14000` extends only the evaluator
+budget. Its first 7,000 update rates and diagnostics are byte-identical to
+`st5-scaleaware-qr`. The first 34 metric rows match after excluding elapsed
+seconds, and the 7k noisy subbudget holdout matches the original. The frozen
+7k subbudget remains **FAIL**.
+
+At 14k the frozen native result is still **FAIL**, with 0/62 passing checks,
+no terminal streak, and a failing independent holdout. All observations below
+cover 100 modes; values are live noisy measurements.
+
+| Step | Precision | Covariance eigenvalue range | Centre RMS | Trace bias | Radial KS | Learned σ |
+|---:|---:|---:|---:|---:|---:|---:|
+| 7,000 | .962 | .059–1.857 | .281σ | −.261 | .120 | .00152 |
+| 10,000 | .974 | .086–1.738 | .203σ | −.183 | .081 | .00142 |
+| 11,000 | .973 | .109–1.696 | .223σ | −.143 | .057 | .00140 |
+| 14,000 | .975 | .066–2.741 | .308σ | −.189 | .069 | .00135 |
+
+The prior LR cut from `.00425` to `.002125` at step 8,088, then DRIFT
+restored `.00425` at 11,160 and `.0085` at 11,928. Precision and radial KS
+improved, yet no observation passed: even the best observed minimum
+eigenvalue ratio (`.143`), minimum radial median (`.560`), absolute trace
+bias (`.143`), and radial KS (`.0548`) remained beyond their limits. The
+14k holdout has precision `.97193` but centre error `.298σ`, trace bias
+`−.18264`, and radial KS `.06925`. Extra time alone did not settle the
+shape. The exact 14k gate, 7k subbudget, holdout, and selected trajectory are
+in [native100-results.json](native100-results.json).
 
 `st6-eg-qr` was stopped after the grid diagnostic deteriorated: at step 500
 it had zero covered modes and HQ fraction `.0032`. Its harness `result.json`
@@ -124,6 +155,7 @@ assignment to BD remains limited by intervening gradient updates.
 | Candidate | Native grid / rotated / staggered | 13 harness gates |
 |---|---|---|
 | `st5-scaleaware-qr` | FAIL / FAIL / FAIL, each 0/34; holdouts FAIL | Not run |
+| `st5-scaleaware-qr-14k` | Not run / rotated FAIL 0/62, holdout FAIL / not run | Not run |
 | `st5-scaleaware-pair-xv` (Xavier control) | FAIL / FAIL / FAIL | Not a QR comparison |
 | `st6-eg-qr` | Grid stopped at step 500; no formal verdict / not run / not run | Not run |
 
@@ -172,6 +204,18 @@ The Xavier and fixed-noise configs in this folder are optional attribution
 controls. The early-stopped EG arm used `$REPRO_DIR/st6-package`,
 `configs/st6-eg-qr.json`, and the same noisy candidate option; it has no
 formal native verdict to reproduce.
+
+To reproduce the 14k rotated extension with the same QR overrides and
+candidate options, submit this from the harness directory after constructing
+`$REPRO_DIR/package` above:
+
+```bash
+/tmp/pr38-default-env/bin/python harness/submit.py \
+  --cand st5-scaleaware-qr-14k-repro --package-root "$REPRO_DIR/package" \
+  --overrides "$ARTIFACT/configs/st5-scaleaware-qr.json" \
+  --candidate-options '{"eval_output_noise":true,"native_steps":14000,"save_final_state":true}' \
+  --tasks rotated100 --note 'st5 QR rotated100 14k extension'
+```
 
 Native observations are in `runs/<candidate>/<task>/metrics.jsonl`; the
 separate `native100-diagnostics.jsonl` describes bridge outliers, per-mode

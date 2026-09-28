@@ -27,6 +27,16 @@ far below the data σ of `.03`; the scale-aware settle rule has not solved
 the streaked, off-centre modes. **No 13-gate run has been completed for this
 QR candidate**, so there is no harness-gate claim.
 
+The same QR candidate was extended on rotated100 to 14,000 updates.
+Its 7k prefix reproduces the original run; the 7k subbudget and 14k frozen
+verdicts both **FAIL**. At 14k it has 0/62 passing checks and a failing
+holdout. Precision improves from `.962` to `.975` and radial KS from `.120`
+to `.069`, but centre RMS is `.308σ`, trace bias `−.189`, and covariance
+eigenvalue ratios span `.066–2.741`; learned output σ is `.00135`.
+The controller cut and later restored the prior LR, yet no observation met
+all shape limits. [The extension record](structural100/README.md#rotated100-extension-to-14000-updates)
+contains the trajectory, exact frozen gate fields, and reproduction command.
+
 The Xavier birth/death controls all fail their frozen native gates. Cells
 show final modes / precision after 7,000 updates; they are not comparable
 to the QR row above because initialization changes the trajectory.
