@@ -1,8 +1,8 @@
 """Render the README 100-Gaussian GIF from one run of the public GAN defaults.
 
-Training is exactly ``GANTrainer(get_recipe("gan"), G, D, seed=1234)`` with no
-recipe, optimizer or penalty overrides; ``--steps`` (default: the recipe's
-budget) is the only training option. Everything else here is visualization.
+Training is exactly ``GANTrainer(get_recipe("gan", total_steps=steps), G, D, seed=1234)`` with no
+recipe, optimizer or penalty overrides; ``--steps`` (default 7,000; the recipe
+itself has no horizon) is the only training option. Everything else here is visualization.
 
 Frames are placed on a smooth power-law time warp (``--frame-power``): step
 ``T * (i / N) ** p`` for frame ``i`` of ``N``, so early training (where the
@@ -37,7 +37,8 @@ SIZE = (480, 520)  # pixels; readable at README width
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--steps", type=int, default=get_recipe("gan").total_steps)
+    # The recipe has no horizon (total_steps=None); the animation pins 7,000 updates.
+    parser.add_argument("--steps", type=int, default=7_000)
     parser.add_argument("--views", nargs="+", choices=("live", "ema"), default=["live", "ema"])
     parser.add_argument("--frames", type=int, default=250, help="Number of training frames (before the hold).")
     parser.add_argument("--frame-power", type=float, default=2.0,
@@ -78,7 +79,7 @@ def main():
     device = torch.device(args.device)
     if device.type == "cuda":
         torch.cuda.set_device(device)
-    recipe = get_recipe("gan", total_steps=args.steps) if args.steps != get_recipe("gan").total_steps else get_recipe("gan")
+    recipe = get_recipe("gan", total_steps=args.steps)
     out = args.output_dir
     out.mkdir(parents=True, exist_ok=True)
     (out / "metrics.jsonl").write_text("")
