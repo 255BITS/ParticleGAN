@@ -283,3 +283,44 @@ This is a rate coupling, not a direct change to the prior rate, sigma policy, or
 birth/death rule. Its feedback can still change later decisions in both groups;
 0.75 is an empirical interpolation, not a derived optimum. It passes grid100
 and rotated100 but does not satisfy the staggered100 terminal accuracy rule.
+
+## Row-motion and optimizer attribution replay
+
+A temporary diagnostic-only trainer copy was run on staggered100 with the exact
+saved overrides. It retained output snapshots at 6250, 6500, 6750, and 7000,
+plus a shadow table that received every realized optimizer update but skipped
+birth/death moves. The replay's `rates.jsonl` and `native100-diagnostics.jsonl`
+are byte-identical to the archived alpha=.75 run; `metrics.jsonl` differs only
+in elapsed-seconds fields. It therefore preserves the frozen training path.
+
+For the failing 6250→6500 interval, clean center RMS rises from 0.16247 to
+0.18661 sigma. Holding initial latents fixed while updating G changes center
+RMS only from 0.15867 to 0.15941. The no-BD shadow ends at 0.18328, and the
+actual table also ends at 0.18328: the direct BD contribution is zero at this
+checkpoint. The noisy scorer's fixed 20k draw gives 0.20830, crossing the .20
+limit. Over later intervals BD has a sparse pointwise effect (row-output RMS
+1.528 and 1.198 sigma), but center RMS matches the no-BD shadow to five digits
+(.18372 in 6500→6750; .19325 in 6750→7000).
+
+The table's prior group uses beta1=0, beta2=.999 and AMSGrad, with sparse A2 row
+damping. Across the three 250-step windows, the median per-row cosine between
+cumulative raw gradient and cumulative optimizer displacement is about -.985
+(negative is the descent direction); the full-table cosine is -.938 to -1.000.
+This points to adversarial-gradient-driven center drift, not first-moment
+momentum reversal. It does not establish whether the gradient drift is harmful
+noise near equilibrium or a systematic objective mismatch.
+
+## Final bounded prior-rate test
+
+The diagnostic motivated one compromise test: change only
+`prior_lr_mult` from 2.0 to 1.5, keeping alpha=.75 D tracking and all other
+settings fixed. Grid100 fails (14/34; no terminal live accuracy checks pass).
+Final live center RMS is 0.28919 sigma and independent holdout center RMS is
+0.27910 sigma. Per the frozen run order, rotated100 and staggered100 were not
+run after the grid gate failed. A smaller global prior rate is not the fix.
+
+The best measured candidate remains full D tracking at 2/3 native100. The
+alpha=.75 and prior-rate=1.5 alternatives are archived as rejected; custom22
+remains 8 parity ERRORs before training. The evidence does not support another
+training change without distinguishing noisy near-equilibrium gradients from a
+systematic mismatch in the adversarial objective.
