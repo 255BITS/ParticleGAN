@@ -56,7 +56,7 @@ def test_explicit_ddgan_mog_study_config_and_overrides():
     assert changed.num_classes == 8 and changed.make_prior().z.shape == (32, 6)
     assert changed.total_steps == 2000 and changed.lr_floor == .05
     assert get_recipe().lr == .00425
-    assert get_recipe(model='ddgan').total_steps == 7000
+    assert get_recipe(model='ddgan').total_steps is None
     assert get_recipe(model='ddgan', num_classes=4, conditioning='ucd').prior_kind == "particles"
 
 

@@ -61,6 +61,8 @@ from lib.toy_models import (  # noqa: E402
 )
 
 _RECIPE = get_recipe()
+# Default budget: the recipe has no horizon (total_steps=None).
+_DEFAULT_STEPS = 7_000
 
 # =========================
 #  Visualization
@@ -125,7 +127,7 @@ def save_fake_scatter(
 # =========================
 
 def train(
-    epochs: int = _RECIPE.total_steps // 1000,
+    epochs: int = _DEFAULT_STEPS // 1000,
     steps_per_epoch: int = 1000,
     batch_size: int = _RECIPE.batch_size,
     z_dim: int = _RECIPE.z_dim,
@@ -484,7 +486,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         description="100 Gaussians: matched learned-table and Gaussian prior controls.",
     )
     parser.add_argument("--prior", choices=PRIOR_KINDS, default=default_prior)
-    parser.add_argument("--epochs", type=int, default=_RECIPE.total_steps // 1000)
+    parser.add_argument("--epochs", type=int, default=_DEFAULT_STEPS // 1000)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
     parser.add_argument("--batch_size", type=int, default=_RECIPE.batch_size)
     parser.add_argument("--z_dim", type=int, default=_RECIPE.z_dim)

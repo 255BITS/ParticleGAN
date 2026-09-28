@@ -16,7 +16,7 @@ from particlegan import get_recipe, init, learning_rate_scale
 
 
 def test_legacy_control_uses_declared_anneal_start_and_floor():
-    recipe = get_recipe().replace(lr_anneal_start=0.4, lr_floor=0.01)
+    recipe = get_recipe(total_steps=7000).replace(lr_anneal_start=0.4, lr_floor=0.01)
     applied = []
     with optimizer_defaults(recipe, applied):
         control = evaluate.FixedControl({"schedule": "cosine"}, 100)
@@ -33,7 +33,7 @@ def test_legacy_control_uses_declared_anneal_start_and_floor():
 
 def _mixed_generator_update(cap, network_floor=None):
     torch.manual_seed(123)
-    recipe = get_recipe().replace(num_particles=4, z_dim=2,
+    recipe = get_recipe(total_steps=7000).replace(num_particles=4, z_dim=2,
                                   lr_anneal_start=.6, lr_floor=.05)
     applied = []
     network = torch.nn.Parameter(torch.ones(()))
@@ -87,7 +87,7 @@ def test_legacy_network_floor_changes_only_generator_rate_on_short_budget():
 
 
 def test_legacy_cap_changes_network_rate_but_preserves_prior_schedule():
-    recipe = get_recipe().replace(num_particles=4, z_dim=2,
+    recipe = get_recipe(total_steps=7000).replace(num_particles=4, z_dim=2,
                                   lr_anneal_start=.6, lr_floor=.05)
     network = torch.nn.Parameter(torch.ones(()))
     applied = []

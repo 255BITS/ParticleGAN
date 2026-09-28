@@ -48,7 +48,7 @@ def update_ema(average, current, decay):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", help="TOML file with a [particlegan] section")
-    parser.add_argument("--steps", type=int, help="Override the recipe's training horizon")
+    parser.add_argument("--steps", type=int, help="Updates to run (default: the config's total_steps, else 7000)")
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--log-every", type=int, default=50)
@@ -109,7 +109,9 @@ def main():
     centers = torch.cartesian_prod(axis, axis)
     print(json.dumps({"event": "config", **recipe.to_dict(), "device": str(device)}), flush=True)
     started = time.monotonic()
-    for step in range(1, recipe.total_steps + 1):
+    # The default recipe has no horizon (total_steps=None): the loop picks one.
+    steps = recipe.total_steps if recipe.total_steps is not None else 7000
+    for step in range(1, steps + 1):
         # Replace this synthetic batch with a batch from your DataLoader.
         ids = torch.randint(len(centers), (recipe.batch_size,), device=device)
         real = centers[ids] + 0.015 * torch.randn(recipe.batch_size, 2, device=device)
@@ -138,7 +140,7 @@ def main():
         update_ema(ema_g, generator, recipe.ema_decay)
         update_ema(ema_prior, prior, recipe.ema_decay)
 
-        if step == 1 or step % args.log_every == 0 or step == recipe.total_steps:
+        if step == 1 or step % args.log_every == 0 or step == steps:
             print(json.dumps({
                 "event": "train", "step": step,
                 "d_loss": d_loss.detach().item(), "g_loss": g_loss.detach().item(),

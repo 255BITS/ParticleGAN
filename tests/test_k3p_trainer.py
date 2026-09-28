@@ -565,6 +565,7 @@ def test_api_doc_example_runs():
     text = (pathlib.Path(__file__).resolve().parents[1] / "docs/api.md").read_text()
     block = next(b for b in re.findall(r"```python\n(.*?)```", text, re.S)
                  if "make_critic_penalty(opt_d)" in b and "for step in range" in b)
-    code = block.replace("num_classes=2)", "num_classes=2, total_steps=3, batch_size=32)", 1)
-    assert code != block
+    code = block.replace("num_classes=2)", "num_classes=2, batch_size=32)", 1)
+    assert code != block and "steps = 2000" in code
+    code = code.replace("steps = 2000", "steps = 3", 1)
     exec(compile(code, "docs/api.md", "exec"), {"__name__": "__api_example__"})

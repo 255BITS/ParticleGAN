@@ -51,7 +51,8 @@ def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
     return torch.cat([angle.cos(), angle.sin()], 1) + 0.05 * torch.randn(n, 2)
 
-recipe = get_recipe(total_steps=2000)
+recipe = get_recipe()
+steps = 2000  # the recipe has no horizon (total_steps=None): train as long as you like
 G = nn.Sequential(nn.Linear(recipe.z_dim, 128), nn.LeakyReLU(0.2), nn.Linear(128, 2))
 D = nn.Sequential(nn.Linear(2, 128), nn.LeakyReLU(0.2), nn.Linear(128, 1))
 init.deterministic_orthogonal_(G, seed=0)        # optional: repeatable weights
@@ -60,7 +61,7 @@ prior = init.deterministic_orthogonal_(recipe.make_prior())  # the learnable par
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss(opt_d)
 
-for step in range(recipe.total_steps):
+for step in range(steps):
     real = real_batch(recipe.batch_size)
     z, _ = prior.sample(recipe.batch_size)
     fake = G(z)
@@ -85,10 +86,10 @@ Or let `GANTrainer` run exactly that default update:
 ```python
 from particlegan import GANTrainer
 
-recipe = get_recipe()
+recipe = get_recipe()  # total_steps=None: no budget; get_recipe(total_steps=n) stops after n
 prior = init.deterministic_orthogonal_(recipe.make_prior())
 trainer = GANTrainer(recipe, G, D, prior=prior)
-for _ in range(trainer.recipe.total_steps):
+for _ in range(steps):
     trainer.step(real_batch(trainer.recipe.batch_size))
 samples = trainer.sample(1024)
 ```

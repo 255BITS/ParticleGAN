@@ -3,7 +3,8 @@
 `get_recipe()` and `GANTrainer` train with one formulation: a
 relativistic-paired logistic GAN with a learned particle prior, the **KA2**
 critic penalty, and the **DV12** learning-rate controller, which chooses every
-learning rate from training signals. There is no LR schedule and no horizon.
+learning rate from training signals. There is no LR schedule and no horizon:
+`total_steps` defaults to `None`, so training can run indefinitely.
 It is the winner of the LR-free search in PR #155
 ([report](../reports/toy100/lrfree-search/README.md) on that branch,
 configuration `dv12-ams-rc3`). The file keeps its old name (`k3p.md`); K3P, the
@@ -100,7 +101,7 @@ output noise.
 | `lr_floor`, `network_lr_floor`, `network_lr_horizon_cap` | 1, None, None | optional caller schedule, off |
 | `prior_reg` | 0 | no particle spread penalty |
 | `batch_size`, `z_dim`, `num_particles` | 2048, 2, 20000 | task shape |
-| `total_steps` | 7000 | loop / `GANTrainer` budget only; nothing in the formulation reads it |
+| `total_steps` | None | optional loop / `GANTrainer` budget; `None` = no horizon (train indefinitely). Nothing in the formulation reads it; only the opt-in schedules (LR floor < 1, input noise, output-noise warmup) need an integer, and raise without one |
 
 `learning_rate_scales(step, recipe)` and `scale_learning_rates` remain as an
 optional caller schedule: they set each group's peak `lr`, and the optimizers
@@ -134,7 +135,7 @@ and all its state is in their `state_dict()`:
 import copy
 from particlegan import get_recipe, init
 
-recipe = get_recipe(total_steps=steps)
+recipe = get_recipe()                         # no horizon: the loop decides how long to train
 prior = init.deterministic_orthogonal_(recipe.make_prior())
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 loss = recipe.make_loss(opt_d)                # reports the payoff to the optimizers

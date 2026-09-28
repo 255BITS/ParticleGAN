@@ -17,6 +17,22 @@
   `input_noise_std` 0, `output_noise_warmup` 0, and the optional schedule off
   (`lr_floor` 1, `network_lr_floor` and `network_lr_horizon_cap` None).
   Training results differ from 0.8.0.
+- **`total_steps` defaults to `None` (no horizon).** `GANTrainer` no longer
+  stops at 7,000 updates by default: with `None` it trains for as long as you
+  call `step` and resumes checkpoints at any step count; an integer
+  `total_steps` keeps the old budget stop. Features that need a horizon raise
+  `ValueError` at recipe construction when `total_steps` is `None`: an LR
+  schedule (`lr_floor < 1`, or `network_lr_floor < 1` without
+  `network_lr_horizon_cap`, which then serves as the G/D horizon), critic
+  input noise (`input_noise_std > 0`) and output-noise warmup
+  (`output_noise_warmup > 0` with nonzero `output_noise_std`). When those are
+  off, `learning_rate_scale(s)`, `scale_learning_rates` and the trainer's
+  noise helpers return constants without reading `total_steps`
+  (`learning_rate_scale(step, None, floor=1)` is 1.0). Loops that iterated
+  `range(recipe.total_steps)` on the default must pick a step count (the
+  README, docs and examples now do); pass `total_steps=7000` for the old
+  budget. Recipes and checkpoints saved with an integer load unchanged;
+  `benchmarks.legacy.LegacyRecipe` keeps its recorded 7,000.
 - **Loop change:** build the loss from the critic optimizer,
   `recipe.make_loss(opt_d)` (it reports the payoff to the controller), and
   call `recipe.make_critic_penalty(opt_d)` every critic step (it shows the
