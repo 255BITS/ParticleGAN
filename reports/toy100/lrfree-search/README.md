@@ -8,8 +8,9 @@ from FAIL 0/24 to PASS 7/24; the other seven custom hosts reproduce every
 non-time observation row exactly. This makes the custom subtotal **6/8** and
 implies **17/22** from the unchanged 11 quick and 0 native results. It does
 not fix a native 100-Gaussian gate. The separate latest grid100 structural
-lanes all failed; the paired birth/death graft was the strongest directional
-improvement, but still missed centre and covariance limits.
+lanes all failed; the [paired birth/death graft](paired-bd-graft/README.md)
+was the strongest completed native directional improvement, but still missed
+centre and covariance limits.
 
 ## 22-check leaderboard: all eight custom hosts now run (September 27, night)
 

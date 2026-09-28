@@ -1,0 +1,105 @@
+--- a/particlegan/birth_death.py
++++ b/particlegan/birth_death.py
+@@ -12,8 +12,8 @@
+ sign-consistent, local excursion; p_i = exp(-z_i^2 / 2) (Rayleigh tail of the
+ meander endpoint), Benjamini-Hochberg at q over particles with n_i >= 2,
+ soft-thresholded exponentiated step beta_i, Bernoulli deaths (1 - e^-beta) and
+-single-clone births (e^-beta - 1), paired by rank; unmatched draws wait
+-until an opposite-sign partner is available. Row moves copy the parent's
++single-clone births (e^-beta - 1), paired by rank; unmatched deaths clone
++normalisation parents drawn with weight e^-beta. Row moves copy the parent's
+ latent (+ the package's latent jitter), EMA latent, Adam/AMSGrad rows and A2
+ history. All randomness comes from a private stream; no training stream,
+ parameter or optimizer state is touched except by an executed move.
+@@ -69,7 +69,7 @@
+ 
+ 
+ class ParticleBirthDeath:
+-    Q = .05          # BH false-discovery rate per evaluation
++    Q = .05          # BH false-discovery rate per evaluation; dimension-test level
+ 
+     def __init__(self, trainer, seed):
+         prior = trainer.prior
+@@ -181,24 +181,24 @@
+         # kernel included), exactly as R's under rho = pi. Excluding i's draw biased x toward deficit
+         # by the own-kernel share of rho(q_i) (unit test (a): 84% of null evaluations had discoveries).
+         rF, _ = _knn(q, F, k)
+-        dR, _ = _levina_bickel(_knn(R, R, k, exclude=own)[0])
+-        dF, _ = _levina_bickel(_knn(F, F, k, exclude=own)[0])
++        dR, nR = _levina_bickel(_knn(R, R, k, exclude=own)[0])
++        dF, nF = _levina_bickel(_knn(F, F, k, exclude=own)[0])
+         D_out = q.shape[1]
+         last = dict(step=trainer.completed_steps + 1, k=k, d_R=dR, d_F=dF)
+         self.last = last
+-        # The real law defines the local volume exponent in the density ratio.
+-        # A different fake dimension is evidence of a mismatch, not a reason to
+-        # discard the evaluation: at native-table sizes the old two-sample
+-        # dimension test rejected even small, actionable differences. The
+-        # kNN-ratio null is calibrated when the laws agree, regardless of the
+-        # observed dimension gap under an alternative.
++        # BD-GUARD FIX (one mechanism): the kNN-ratio null already absorbs small
++        # dimension mismatches, and at N=20000 the asymptotic-variance
++        # significance test fires on every evaluation (spec rev 2 R2), so it is
++        # not a statistically bounded guard here. Use the data dimension d_R
++        # (the reference law) directly, clamped to [1, D_out]. Skip only when
++        # d_R is undefined (no bounded dimension can be formed); record d_F as
++        # a diagnostic and keep counting such skips in dim_skips.
+         if not math.isfinite(dR):
+             self.counters["dim_skips"] += 1
+-            last["skip"] = "real dimension undefined"
++            last["skip"] = "dimension undefined"
+             return last
+-        d = min(max(dR, 1.), D_out)
++        d = min(max(dR, 1.), D_out)   # data dimension only; never skip on significance
+         last["d"] = d
+-        last["dimension_gap"] = dR - dF if math.isfinite(dF) else None
+         rk_R, rk_F = rR[:, -1].double(), rF[:, -1].double()
+         x = d * (rk_R / rk_F).log()
+         finite = torch.isfinite(x)
+@@ -254,16 +254,21 @@
+         deaths = deaths[beta[deaths].argsort(descending=True, stable=True)]
+         births = births[beta[births].argsort(stable=True)]
+         pairs = min(len(deaths), len(births))
+-        # A table row moves only when both its excess and its destination's
+-        # deficit have statistical support. The previous normalisation-parent
+-        # draw could clone an eligible but unverified row, including a bridge
+-        # row, during the large support mismatch at the start of native runs.
+-        # Unpaired draws retain their evidence and may pair at a later visit.
+-        child, parent = deaths[:pairs], births[:pairs]
+-        waited_deaths = len(deaths) - pairs
++        child, parent = [deaths[:pairs]], [births[:pairs]]
++        rest = deaths[pairs:]
++        normalised = 0
++        # BD-PAIR FIX: evidence-certified transport only (st3 paired design).
++        # The normalisation-parent rule clones neutral rows into dead sites;
++        # native evidence shows neutral parents are ~85% of all moves and
++        # precision/coverage fall with them. Unmatched deaths wait for a
++        # certified deficit birth instead of taking a neutral parent.
++        if len(rest):
++            normalised = 0
++        child, parent = torch.cat(child), torch.cat(parent)
++        waited_deaths = len(deaths) - len(child)
+         waited_births = len(births) - pairs
+         self.pending.zero_()
+-        self.pending[deaths[pairs:]] = True
++        self.pending[deaths[len(child):]] = True
+         self.pending[births[pairs:]] = True
+         spent = stay.clone()
+         spent[child] = True
+@@ -278,7 +283,7 @@
+         last.update(eligible=m, discoveries=int(discover.sum()), zstar=zstar,
+                     excess=int((discover & (beta > 0)).sum()), deficit=int((discover & (beta < 0)).sum()),
+                     realised_deaths=len(deaths), realised_births=len(births), matched=pairs,
+-                    normalised=0, waited_deaths=waited_deaths, waited_births=waited_births,
++                    normalised=normalised, waited_deaths=waited_deaths, waited_births=waited_births,
+                     moves=0 if self.dry_run else len(child), mean_abs_x=float(x[finite].abs().mean()) if bool(finite.any()) else None)
+         if self.dry_run:
+             return last
+@@ -300,6 +305,7 @@
+             self.n[child] = 0
+             c["moves"] += len(child)
+             c["matched"] += pairs
++            c["normalised"] += normalised
+         return last
+ 
+     @torch.no_grad()
