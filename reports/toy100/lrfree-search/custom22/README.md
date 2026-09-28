@@ -55,7 +55,10 @@ The per-cell fields (final metrics, thresholds, config hash, engine and binding 
   schedules and `schedule_optimizer` are removed. Learning rates are written only by the engine, which is
   asserted on every update.
 - **Unsupported settings are refused, not dropped.** These give `ERROR refused`: critic input noise,
-  `particle_birth_death`, dv11, unknown recipe fields and unknown `GANTrainer` hooks.
+  dv11, unknown recipe fields and unknown `GANTrainer` hooks. `particle_birth_death` runs only where
+  the host binds plain trainable `ParticlePrior` tables (residual_student, cover_leftover, and the
+  non-MoG trajectory/unipolar runs); it is refused on no-table hosts (two_pole, unused_token_hold,
+  mid_scale_identity) and MoG ae_gan_hold.
 
 ## Why the numbers can be trusted
 
