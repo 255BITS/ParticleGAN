@@ -535,5 +535,98 @@
       "formal_native_status": null,
       "record_kind": "not_run"
     }
+  },
+  "st7-fake-reopen-qr": {
+    "grid100": {
+      "source": "runs/st7-fake-reopen-qr/grid100/result.json",
+      "source_metrics": "runs/st7-fake-reopen-qr/grid100/metrics.jsonl",
+      "package_sha256": "b5497fe9622a1ea0bd5284c0f978b6919fd259d9aec640f2c44f48b2cedfc27f",
+      "overrides_config": "configs/st7-fake-reopen-qr.json",
+      "status": "FAIL",
+      "completed_steps": 7000,
+      "observations": 34,
+      "passing_checks": 0,
+      "final_streak": 0,
+      "eval_output_noise": true,
+      "final": {
+        "step": 7000,
+        "modes": 100,
+        "hq": 0.97865,
+        "precision": 0.97865,
+        "min_hq_mode_mass": 0.00535,
+        "max_mode_mass": 0.0128,
+        "mass_tv": 0.05885,
+        "min_cov_eig_ratio": 0.16260041830674166,
+        "max_cov_eig_ratio": 2.4320868818961663,
+        "min_radial_median_ratio": 0.5852270111016964,
+        "max_radial_median_ratio": 1.6047153156340153,
+        "acc_mass_tv": 0.05884999999999999,
+        "acc_center_rms_sigma": 0.3637995609812139,
+        "acc_abs_cov_trace_bias": 0.07422358898729065,
+        "acc_cov_trace_bias": 0.07422358898729065,
+        "acc_radial_ks": 0.084430595468794,
+        "acc_accuracy_score": 1.4132079787080398,
+        "acc_accuracy_pass": false,
+        "acc_frozen_pass": false,
+        "acc_passed": false,
+        "sharp_clean": 1.2815767526626587,
+        "sharp_noisy": 1.3097915649414062,
+        "output_sigma": 0.006773766130208969,
+        "holdout_mass_tv": 0.05639,
+        "holdout_center_rms_sigma": 0.35286854354810077,
+        "holdout_abs_cov_trace_bias": 0.07273993099751586,
+        "holdout_cov_trace_bias": 0.07273993099751586,
+        "holdout_radial_ks": 0.08558501989330625,
+        "holdout_accuracy_score": 1.392800214595413,
+        "holdout_accuracy_pass": false,
+        "holdout_frozen_pass": false,
+        "holdout_passed": false,
+        "holdout_precision": 0.97901
+      },
+      "native_gate": {
+        "status": "FAIL",
+        "coverage_status": "FAIL",
+        "accuracy_status": "FAIL",
+        "coverage_stable_checks": 0,
+        "first_full_coverage": 1000,
+        "first_arrival": null,
+        "stable_from": null,
+        "terminal_accuracy": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "holdout_pass": false,
+        "holdout": {
+          "mass_tv": 0.05639,
+          "center_rms_sigma": 0.35286854354810077,
+          "abs_cov_trace_bias": 0.07273993099751586,
+          "cov_trace_bias": 0.07273993099751586,
+          "radial_ks": 0.08558501989330625,
+          "accuracy_score": 1.392800214595413,
+          "accuracy_pass": false,
+          "frozen_pass": false,
+          "passed": false,
+          "precision": 0.97901
+        },
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "accuracy_first_arrival": null,
+        "accuracy_passing_checks": 0
+      },
+      "fake_detector": {
+        "trigger_threshold": 3.0,
+        "max_score_among_metric_observations": 2.686121702194214,
+        "final_d_only_reopens": 0,
+        "final_fake_observations": 7000
+      },
+      "identity_vs_st5_grid100": {
+        "rates_jsonl_byte_identical": true,
+        "native_fixture_json_byte_identical": true,
+        "selected_metrics_equal_at_all_34_observations": true,
+        "native_gate_equal": true
+      }
+    }
   }
 }

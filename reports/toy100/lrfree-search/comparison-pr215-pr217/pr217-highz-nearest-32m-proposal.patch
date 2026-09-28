@@ -1,0 +1,13 @@
+--- a/particlegan/particle_prior.py
++++ b/particlegan/particle_prior.py
+@@ -286,7 +286,9 @@
+         return nearest.to(dtype)
+     # A block of r rows x c centers holds r*c*(z_dim + 1) elements: the difference and its norms.
+     block = _NEAREST_BLOCK.get(latent.device.type, _NEAREST_BLOCK["cuda"])
+-    budget = min(block, max(rows * min(count, 4096), _NEAREST_FLOOR))
++    # Wider CUDA latents need fewer center launches; keep the native z<=32 path unchanged.
++    floor = 1 << 23 if latent.device.type == "cuda" and z_dim > 32 else _NEAREST_FLOOR
++    budget = min(block, max(rows * min(count, 4096), floor))
+     pairs = max(1, budget // (z_dim + 1))
+     step = min(count, max(pairs // rows, math.isqrt(pairs), 1))
+     for query, best in zip(latent.split(max(1, pairs // step)), nearest.split(max(1, pairs // step))):

@@ -36,6 +36,11 @@ eigenvalue ratios span `.066–2.741`; learned output σ is `.00135`.
 The controller cut and later restored the prior LR, yet no observation met
 all shape limits. [The extension record](structural100/README.md#rotated100-extension-to-14000-updates)
 contains the trajectory, exact frozen gate fields, and reproduction command.
+A [frozen-generator critic refit](structural100/critic-refit-summary.md)
+recovered favorable local covariance-repair derivatives after 250 critic-only
+updates with both warm and fresh-QR critics. It suggests critic tracking may
+contribute to the saved adverse shape signal; it made no generator update or
+new native gate evaluation.
 
 The Xavier birth/death controls all fail their frozen native gates. Cells
 show final modes / precision after 7,000 updates; they are not comparable
@@ -59,6 +64,35 @@ base. Its grid diagnostic fell to zero covered modes and HQ `.0032` by step
 500, so the run was stopped. The harness records `ERROR` because it has no
 final result: **this is not a frozen 7,000-update native verdict**. Rotated,
 staggered, and the 13 gates were not run for `st6`.
+
+`st7-fake-reopen-qr` added a generated-sample drift signal to reopen only the
+critic's stationarity test. Its single frozen grid100 run **FAILS 0/34** with
+a failing holdout. The signal never triggered a critic reopening, and all
+7,000 applied-rate rows and the native verdict match `st5` exactly. This
+does not test whether a forced critic refit would improve training; no other
+native card or 13-gate task was run for `st7`.
+
+## Separate source audit: PR #215 GS2 versus PR #217 DV12
+
+The [fixed-protocol comparison](comparison-pr215-pr217/README.md) reruns
+exact [#215](https://github.com/255BITS/ParticleGAN/pull/215) source commit
+`c138aff` and [#217](https://github.com/255BITS/ParticleGAN/pull/217) source
+commit `261fcfd` on these #155 hosts. #215 passes **5/13** gates with the
+frozen host defaults (Xavier critic on native) and **7/13** with a recorded
+QR adapter. The
+exact-head #217 QR/native adapter passes **13/13** after its image evaluator
+draws latent jitter through the source prior. Every arm **fails all three
+native 100-Gaussian gates**, with zero of 34 passing checks and failing 100k
+holdouts on each task. The exact statuses, package digests, run paths, and
+native metrics are in [results.json](comparison-pr215-pr217/results.json).
+
+The published #215 **17/26** belongs to #202's different host suite, and
+the #217 high-`z` throughput regression belongs to a separate performance
+probe. An isolated nearest-search benchmark found a 32 MiB high-dimensional
+block 2.37× faster than the current 4 MiB block on one shared-GPU shape;
+its [proposed patch](comparison-pr215-pr217/pr217-highz-nearest-32m-proposal.patch)
+is **unmerged** and was not used for any gate run. This is a search-only
+measurement, not a full-training speed claim.
 
 ## Earlier leaderboard (September 27 evening; mixed native initialization)
 

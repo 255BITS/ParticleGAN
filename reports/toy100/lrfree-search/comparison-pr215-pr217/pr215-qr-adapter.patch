@@ -1,0 +1,30 @@
+--- a/particlegan/recipes.py
++++ b/particlegan/recipes.py
+@@ -185,7 +185,10 @@
+         if options.pop("sigma_rel") != 0:
+             raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
+         options.pop("standardize")
+-        return ParticlePrior(**options)
++        # Harness adapter: match the #155 recipe's QR/R2 initialization for
++        # recipe-created priors. A caller-supplied prior is left untouched.
++        from .init import deterministic_orthogonal_
++        return deterministic_orthogonal_(ParticlePrior(**options))
+ 
+     def encode(self, query, prior, *, offset=None, draws=2, generator=None):
+         """Route caller-produced queries; returns a ParticleEncoding.
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -97,6 +97,13 @@
+         self.penalty_options = dict(penalty_options or {})
+         # The recipe picks the regularization formulation (currently K3P); its
+         # step-time work runs inside these optimizers' step().
++        # Harness adapter: #215 exposes explicit QR initialization, while the
++        # #155 host invokes GANTrainer on fresh networks. Do it before the
++        # optimizers are built, using the #155 G/D keys. Unrecognized custom
++        # parameters keep their constructor values, as in batch_feature_zero.
++        from .init import deterministic_orthogonal_
++        deterministic_orthogonal_(self.G, seed=0, strict=False)
++        deterministic_orthogonal_(self.D, seed=1, strict=False)
+         self.opt_g, self.opt_d = recipe.make_optimizers(self.G, self.D, self.prior, **self.optimizer_options)
+         self.initial_lrs = [[group["lr"] for group in opt.param_groups]
+                             for opt in (self.opt_g, self.opt_d)]

@@ -1,0 +1,98 @@
+--- a/particlegan/continuous.py
++++ b/particlegan/continuous.py
+@@ -42,6 +42,46 @@
+         self.updates = 0
+         self.reopens = 0
+         self.closed = False
++        # Independent temporal fake-law evidence; only D's stationarity tester consumes it.
++        self.fake_fast = self.fake_slow = None
++        self.fake_fast_variance = self.fake_slow_variance = self.fake_mean_covariance = None
++        self.fake_score = self.fake_global_score = self.fake_local_score = 0.0
++        self.fake_frequency = 1.0
++        self.fake_mean_change = self.fake_difference_noise = 0.0
++        self.fake_observations = self.fake_d_reopens = 0
++
++    @torch.no_grad()
++    def observe_fake(self, fake):
++        if self.variant != "dv12" or self.location is None:
++            return
++        x = fake.detach().flatten(1)
++        u = ((x - self.location) / self.scale) @ self.projection
++        local = u * self.fake_frequency
++        features = torch.cat((u, torch.cos(u), torch.sin(u), torch.cos(2*u), torch.sin(2*u),
++                              torch.cos(local), torch.sin(local), torch.cos(2*local), torch.sin(2*local)), 1)
++        mean = features.mean(0)
++        batch_variance = features.var(0, unbiased=False).clamp_min(1e-6) / len(x)
++        if self.fake_fast is None:
++            self.fake_fast = self.fake_slow = mean.clone()
++            self.fake_fast_variance = batch_variance.clone()
++            self.fake_slow_variance = batch_variance.clone()
++            self.fake_mean_covariance = batch_variance.clone()
++        # Independent tensors: avoid aliasing the fast and slow means after initialization.
++        self.fake_fast = self.fake_fast.lerp(mean, .1)
++        self.fake_slow = self.fake_slow.lerp(mean, .01)
++        self.fake_fast_variance.mul_(.9**2).add_(batch_variance, alpha=.1**2)
++        self.fake_slow_variance.mul_(.99**2).add_(batch_variance, alpha=.01**2)
++        self.fake_mean_covariance.mul_(.9*.99).add_(batch_variance, alpha=.1*.01)
++        noise = (self.fake_fast_variance + self.fake_slow_variance - 2*self.fake_mean_covariance).clamp_min(1e-10)
++        difference = self.fake_fast - self.fake_slow
++        normalized = difference.square() / noise
++        split = 5 * self.projection.shape[1]
++        self.fake_global_score = float(normalized[:split].mean().sqrt())
++        self.fake_local_score = float(normalized[split:].mean().sqrt())
++        self.fake_score = max(self.fake_global_score, self.fake_local_score)
++        self.fake_mean_change = float(difference.square().mean().sqrt())
++        self.fake_difference_noise = float(noise.mean().sqrt())
++        self.fake_observations += 1
+ 
+     @torch.no_grad()
+     def observe_prior(self, prior):
+@@ -54,6 +94,8 @@
+         if self.variant not in ("dv10", "dv11", "dv12"):
+             return
+         z = prior.z.detach()
++        # Reciprocal linear particle-cell size in standardized coordinates; no target sigma.
++        self.fake_frequency = len(z) ** (1. / z.shape[1])
+         width = z.std(0, unbiased=False) * len(z) ** (-1. / z.shape[1])
+         if self.latent_bandwidth is None:
+             self.latent_bandwidth = width.clone()
+@@ -233,7 +275,11 @@
+         self.previous_gradient = gradient.clone()
+ 
+     def diagnostics(self):
+-        return {**({"latent_applications": self.latent_applications} if self.variant == "dv12" else {}), **({"support_score": self.support_score, "support_trust": self.support_trust, "applied_latent_bandwidth": None if self.latent_bandwidth is None else (self.latent_bandwidth * self.support_trust).tolist()} if self.variant == "dv11" else {}), **({"latent_bandwidth": self.latent_bandwidth.tolist()} if self.variant in ("dv10", "dv11", "dv12") and self.latent_bandwidth is not None else {}), **({"pair_score": self.pair_score, "pair_drive": self.pair_drive} if self.variant in ("dv8", "dv9") else {}), **({"data_memory": self.data_memory} if self.variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else {}), **{k: getattr(self, k) for k in ("payoff_error", "game_trust", "game_ratio", "variant", "mobility", "alignment", "data_score", "data_drive", "last_cosine", "updates", "reopens", "closed")}}
++        return {"fake_score": self.fake_score, "fake_global_score": self.fake_global_score,
++                "fake_local_score": self.fake_local_score, "fake_frequency": self.fake_frequency,
++                "fake_mean_change": self.fake_mean_change,
++                "fake_difference_noise": self.fake_difference_noise,
++                "fake_observations": self.fake_observations, "fake_d_reopens": self.fake_d_reopens, **({"latent_applications": self.latent_applications} if self.variant == "dv12" else {}), **({"support_score": self.support_score, "support_trust": self.support_trust, "applied_latent_bandwidth": None if self.latent_bandwidth is None else (self.latent_bandwidth * self.support_trust).tolist()} if self.variant == "dv11" else {}), **({"latent_bandwidth": self.latent_bandwidth.tolist()} if self.variant in ("dv10", "dv11", "dv12") and self.latent_bandwidth is not None else {}), **({"pair_score": self.pair_score, "pair_drive": self.pair_drive} if self.variant in ("dv8", "dv9") else {}), **({"data_memory": self.data_memory} if self.variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else {}), **{k: getattr(self, k) for k in ("payoff_error", "game_trust", "game_ratio", "variant", "mobility", "alignment", "data_score", "data_drive", "last_cosine", "updates", "reopens", "closed")}}
+ 
+     def state_dict(self):
+         return deepcopy(self.__dict__)
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -273,9 +273,14 @@
+             # the LR is base * s per group (D also gets the payoff damping below).
+             self.controller.observe_real(real)
+             reopen = self.controller.data_score > 3.
++            critic_groups = {id(group) for group in self.opt_d.param_groups}
++            fake_reopen = self.controller.fake_score > 3.
+             for group, tester in self.lr_settle.pairs((self.opt_g, self.opt_d)):
+-                if reopen:
++                reopen_critic = fake_reopen and id(group) in critic_groups
++                if reopen or reopen_critic:
+                     tester.restart(group["params"], reopen=True)
++                    if reopen_critic and not reopen:
++                        self.controller.fake_d_reopens += 1
+                 else:
+                     tester.begin(group["params"])
+             for optimizer, rates, testers in zip((self.opt_g, self.opt_d), self.initial_lrs, self.lr_settle.testers):
+@@ -299,6 +304,8 @@
+             fake = self._generate(self.G, latent, sigma_out, noise)
+         if self.controller is not None:
+             self.controller.observe_pair(real, fake)
++            # Evidence from this fake law affects only the next step's D reopen.
++            self.controller.observe_fake(fake)
+         loss_d = self.loss.d_loss(critic(real), critic(fake))
+         self.penalty.collect_stats = collect_stats
+         penalty = self.penalty(critic, real, fake)
