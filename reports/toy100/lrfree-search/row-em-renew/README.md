@@ -21,6 +21,26 @@ The formal gate requires **all five** full-accuracy observations at updates
 checks coverage only; the verdicts here use `acc_accuracy_pass` and each
 runner's `native` result. All three have zero data-stream deviations.
 
+## How the calibration works
+
+Each training batch enters a FIFO reservoir. Once the non-sigma generator
+stationarity scale reaches 1/64 or lower and a full reservoir has been
+renewed, the calibrator builds a sampling model: it records five jittered
+generator outputs for every current particle row, treating each output as a
+Gaussian component with the current training noise width. An expectation step
+uses those components to assign each real reservoir point fractional
+responsibility across nearby outputs. Summing those responsibilities gives
+each particle row's mass; the residual distances give a pooled sampling
+width. A spatial tree prunes negligible Gaussian tails during these
+calculations.
+
+On each later renewal, the fit starts from uniform row mass and the current
+training width again. That lets new data correct weights made stale by prior
+row moves. The resulting row masses and fitted width affect public sampling
+only. Training draws for G, D, and birth/death remain uniform at the original
+width, and fitting uses a private random stream. This separation is why the
+learner updates and training streams match the critic-floor baseline exactly.
+
 | Task | Verdict | Full-accuracy observations | Final five | Holdout | Final precision | Centre RMS / σ | Covariance eigenvalues | Trace bias | Radial KS |
 |---|---|---:|---:|---|---:|---:|---:|---:|---:|
 | grid100 | **PASS** | 21/34 | 5/5 | PASS | .98160 | .13017 | .62450–1.26521 | .00209 | .01307 |
