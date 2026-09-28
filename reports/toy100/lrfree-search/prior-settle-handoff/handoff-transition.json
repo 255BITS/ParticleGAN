@@ -1,0 +1,34 @@
+{
+  "step": 2089,
+  "before": {
+    "step": 2088,
+    "lr": [
+      [
+        0.0001328125,
+        0.0015026019100214138,
+        0.0
+      ],
+      [
+        0.0021249985569387194
+      ]
+    ],
+    "in_noise": 0.0,
+    "out_noise": 0.019999999552965164
+  },
+  "after": {
+    "step": 2089,
+    "lr": [
+      [
+        6.640625e-05,
+        0.0001328125,
+        0.0
+      ],
+      [
+        0.002124998537873504
+      ]
+    ],
+    "in_noise": 0.0,
+    "out_noise": 0.019999999552965164
+  },
+  "expected_mechanism": "G stationary decision at 2088 cuts G scale 1/32 to 1/64; prior rule changes geometric to min cap with no state reset"
+}
