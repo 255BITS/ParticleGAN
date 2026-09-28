@@ -176,6 +176,26 @@ def failing_metrics(row):
     return bad
 
 
+def margin_text(row):
+    """Final-value vs threshold margins for FAIL rows: 'mse+.0043' means the
+    final misses by that much (smaller is closer); '' when nothing to show.
+    Read-only: never changes PASS/FAIL, only surfaces near-miss distance."""
+    if row.get('status') == 'PASS':
+        return ''
+    final = row.get('final') or {}
+    parts = []
+    for name, op, bound in row.get('thresholds') or []:
+        value = final.get(name)
+        if not isinstance(value, (int, float)) or not isinstance(bound, (int, float)):
+            continue
+        miss = (bound - value) if op == '>=' else (value - bound)
+        if miss <= 0:
+            continue
+        scale = abs(bound) or 1.0
+        parts.append(f'{name}{miss:+.{3}g}(x{miss / scale:.2g})')
+    return ' '.join(parts)
+
+
 def cell(row):
     status = row.get('status', '?')
     if status == 'ERROR':
@@ -206,8 +226,17 @@ def cell(row):
             bad = failing_metrics(row)
             if bad:
                 text += ' [' + ','.join(b.replace('component_', 'c.').replace('_normalized', '') for b in bad) + ']'
+    else:
+        # PASS rows: confirm step = late arrival is itself a signal (v2
+        # trajectory confirmed at the last step; a mid-run confirm is stronger).
+        if row.get('first_arrival') is not None and row.get('observations'):
+            text += f" (conf{row['first_arrival']}/{row['observations']})"
     if status != 'PASS' and row.get('final_streak'):
         text += f" sfx{row['final_streak']}"
+    if status != 'PASS':
+        margin = margin_text(row)
+        if margin:
+            text += f' <{margin}>'
     if row.get('stream_deviations'):
         text += ' *dev'
     return text
