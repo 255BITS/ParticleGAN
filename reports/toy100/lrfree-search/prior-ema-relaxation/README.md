@@ -1,6 +1,14 @@
-# Prior EMA relaxation: native100 3/3
+# Prior EMA relaxation: diagnostic-host 3/3
 
-This is a research candidate for PR #155. The frozen 7,000 update QR/noisy
+> **Canonical-host correction (September 28):** The 3/3 measurements below used
+> a diagnostic host that drew a new real batch on each callback call. The
+> original frozen host reuses the first callback batch. Under that original
+> host, staggered100 is **FAIL**: coverage PASS and terminal accuracy 4/5,
+> with step 7000 centre .20266σ. The diagnostic-host result below is retained
+> as research evidence. The native100 task is still unresolved on the frozen
+> host. See [canonical staggered receipt](canonical-staggered100/native-noisy-verdict.json).
+
+This is a research candidate for PR #155. The diagnostic-host 7,000 update QR/noisy
 native100 gates **PASS on grid100, rotated100, and staggered100** with one package
 SHA-256, `64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc`.
 Every task passes all five terminal live accuracy checks and its independent
@@ -16,9 +24,10 @@ rates, and compressed diagnostic traces are archived here. The
 
 The centre limit is .20σ. Rotated precision has the narrowest margin: its
 smallest terminal value is .9708 against the .9700 limit. All verdicts came
-from the unchanged frozen coverage and accuracy scorers. The harness copy
-used for the native runs adds diagnostic checkpoint hooks, but did not change
-the scorers. This package is not a project default.
+from the unchanged frozen coverage and accuracy scorers. The harness copy used for the 3/3 runs changed the real-batch callback
+to draw a fresh batch on each invocation. It left the scorers unchanged, but
+changed the training inputs. This difference was discovered during final
+protocol review; these 3/3 results do not qualify as frozen-host passes. This package is not a project default.
 
 ## How the change works
 
@@ -63,8 +72,10 @@ zero serialization errors.
   initialization on all three gates; all passed with one package hash.
 
 The earlier restart from a staggered checkpoint did not reproduce an
-uninterrupted run exactly, so the causal continuation was not used for gate
-claims. All final verdicts are fresh runs from initialization.
+uninterrupted run exactly. All runs above were fresh from initialization, but
+the diagnostic host used a different callback stream. A fresh canonical
+staggered run failed its final centre check, so there is no frozen-host 3/3
+claim for this package.
 
 ## Full 22-task matrix
 

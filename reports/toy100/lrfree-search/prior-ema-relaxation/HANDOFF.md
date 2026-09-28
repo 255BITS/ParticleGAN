@@ -1,8 +1,8 @@
-# PR #155 handoff: prior EMA relaxation
+# PR #155 handoff: prior EMA relaxation (diagnostic-host result)
 
 ## Verified state
 
-`cf1-d2-prior-ema-relaxation-final` passes all three frozen native100 gates
+`cf1-d2-prior-ema-relaxation-final` passes all three diagnostic-host native100 gates
 with one SHA-256 package hash: `64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc`.
 The tested source is `package/particlegan/`, with `overrides.json`; complete
 scores and reproduction instructions are in [README.md](README.md).
@@ -12,6 +12,12 @@ scores and reproduction instructions are in [README.md](README.md).
 | grid100 | PASS | PASS | 5/5 | PASS |
 | rotated100 | PASS | PASS | 5/5 | PASS |
 | staggered100 | PASS | PASS | 5/5 | PASS |
+
+**Canonical correction:** original frozen `screen.py` caches its first
+real-batch callback result. The diagnostic host used for the table drew a
+new batch on the second call. The first canonical staggered100 run is FAIL
+(4/5 terminal accuracy; final centre .20266σ). The frozen 3/3 objective is
+still open.
 
 The broader 22-task matrix is 7 PASS, 2 FAIL, 13 ERROR. The native result is
 a research result; the package is not a general replacement for the project

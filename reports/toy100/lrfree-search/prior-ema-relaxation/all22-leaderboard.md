@@ -1,6 +1,8 @@
 # Full 22-task matrix — prior EMA relaxation
 
-Frozen outcomes on one package SHA-256 `64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc`: **7 PASS, 2 FAIL, 13 ERROR**.
+Outcomes on one package SHA-256 `64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc`: **7 PASS, 2 FAIL, 13 ERROR** under the diagnostic fresh-callback native host.
+The original frozen host gives staggered100 FAIL (final centre .20266σ);
+there is no canonical native 3/3 claim for this package.
 
 | Task | Status | Passing observations | Reason or gate |
 |---|---|---:|---|

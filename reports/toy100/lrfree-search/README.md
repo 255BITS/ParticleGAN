@@ -3,9 +3,10 @@
 ## Native100 prior EMA relaxation result (September 28)
 
 The [prior EMA relaxation report](prior-ema-relaxation/README.md) archives one
-fixed package that **passes grid100, rotated100, and staggered100 (3/3)** on
-the frozen 7,000-update QR/noisy gates. All five terminal live accuracy checks
-and independent 100,000-sample holdouts pass in each task. The
+fixed package that passes grid100, rotated100, and staggered100 (3/3) on a
+diagnostic host with a fresh real batch on every callback. The original
+frozen host caches its first callback batch; its staggered100 run **FAILS**
+the final centre check (.20266σ). The frozen-host 3/3 objective remains open. The
 [native leaderboard](prior-ema-relaxation/leaderboard.md), [full22 matrix](prior-ema-relaxation/all22-leaderboard.md),
 and [handoff](prior-ema-relaxation/HANDOFF.md) record scope and limitations.
 The 22-task matrix is 7 PASS, 2 FAIL, 13 ERROR; this research candidate is not

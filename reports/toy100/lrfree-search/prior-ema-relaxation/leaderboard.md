@@ -1,13 +1,19 @@
-# Native100 research leaderboard — frozen QR/noisy gates
+# Native100 research leaderboard — protocol-separated results
 
-One fixed seed per task; no seed sweep. A cell is PASS only when the frozen
+**Canonical correction:** the 3/3 row used a diagnostic host that drew a new
+real batch on every callback. The original frozen host caches the first
+callback batch. Its staggered100 verdict is FAIL at final centre .20266σ
+(4/5 terminal accuracy). The canonical 3/3 objective remains unresolved.
+
+One fixed seed per task; no seed sweep. A cell is PASS only when the
 coverage and accuracy verdicts pass, including all five terminal live checks
 and the independent 100,000-sample holdout. `/34` counts passing observations
 within that task's trajectory; it is not a replacement for the verdict.
 
 | Formulation | grid100 | rotated100 | staggered100 | Native total | Scope |
 |---|---|---|---|---:|---|
-| **Prior EMA relaxation, final package** | **PASS 21/34** | **PASS 8/34** | **PASS 19/34** | **3/3** | Trained GAN; 22-task suite 7 PASS, 2 FAIL, 13 ERROR |
+| **Prior EMA relaxation, diagnostic host** | **PASS 21/34** | **PASS 8/34** | **PASS 19/34** | **3/3** | Different callback stream; 22-task suite 7 PASS, 2 FAIL, 13 ERROR |
+| Prior EMA relaxation, original frozen host | NOT_RUN | NOT_RUN | FAIL 22/34, final centre .20266σ | 0/1 | Canonical callback caching, 4/5 terminal accuracy |
 | Prior EMA block copies | NOT_RUN | NOT_RUN | FAIL 19/34, 6250 centre .20169σ | 0/1 | Diagnostic candidate; stopped after first native failure |
 | Multiscale prior handoff | PASS 21/34 | PASS 11/34 | FAIL 19/34, 3/5 terminal misses | 2/3 | Direct parent candidate |
 | Birth/death disabled | NOT_RUN | NOT_RUN | FAIL 1/34, final centre .2151σ | 0/1 | Full ablation of paired transport |

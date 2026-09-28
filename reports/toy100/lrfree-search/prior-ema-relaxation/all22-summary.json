@@ -182,5 +182,7 @@
       "artifact": "all22/mid_scale_identity/result.json"
     }
   ],
-  "package_sha256": "64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc"
+  "package_sha256": "64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc",
+  "native_protocol": "diagnostic fresh batch per callback; original frozen host caches first callback batch",
+  "canonical_staggered100_status": "FAIL"
 }
