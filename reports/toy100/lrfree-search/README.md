@@ -1,6 +1,60 @@
 # LR-free GAN base search — September 27
 
-## Latest leaderboard (September 27, evening)
+## Current 100-Gaussian readout: QR initialization is primary
+
+The library's `batch_feature_zero` QR initialization is the primary native
+comparison. The Xavier-first native interpretation in the older sections
+below is superseded; Xavier runs remain mechanism controls and should not
+be ranked against QR runs. All new results score noisy model samples. The
+frozen native gate requires coverage and accuracy over the final five checks
+and an independent 100k holdout. The [structural round report](structural100/README.md)
+archives configs, source patches, and [exact result fields](structural100/native100-results.json).
+
+`st5-scaleaware-qr` uses state-driven, two-scale prior settling with learned
+output noise and no birth/death. Its three native cards all **FAIL** with
+0/34 passing checks and failing holdouts. Each row below gives the live
+step-7,000 diagnosis; every row has 100 modes.
+
+| Native task | Precision (need ≥.97) | Covariance eigenvalue range (need .40–1.70) | Centre RMS (need ≤.20σ) | Trace bias (need ≤.10 absolute) | Radial KS (need ≤.04) | Learned output σ |
+|---|---:|---:|---:|---:|---:|---:|
+| grid100 | .979 | .163–2.432 | .364σ | +.074 | .084 | .00677 |
+| rotated100 | .962 | .059–1.857 | .281σ | −.261 | .120 | .00152 |
+| staggered100 | .960 | .034–2.123 | .522σ | −.249 | .067 | .00329 |
+
+Grid reaches the precision target, while per-mode shape and centres still
+miss badly. Rotated and staggered miss precision as well. Learned σ shrinks
+far below the data σ of `.03`; the scale-aware settle rule has not solved
+the streaked, off-centre modes. **No 13-gate run has been completed for this
+QR candidate**, so there is no harness-gate claim.
+
+The Xavier birth/death controls all fail their frozen native gates. Cells
+show final modes / precision after 7,000 updates; they are not comparable
+to the QR row above because initialization changes the trajectory.
+
+| Xavier control | grid100 | rotated100 | staggered100 |
+|---|---:|---:|---:|
+| `st2` no BD | 98 / .969 | 100 / .930 | 100 / .950 |
+| `st2` unrestricted BD | 89 / .910 | 93 / .827 | 91 / .887 |
+| `st3` paired BD | 94 / .927 | 97 / .849 | 91 / .880 |
+| `st4` paired BD | 95 / .949 | 97 / .849 | 91 / .880 |
+| `st5` paired BD | 95 / .949 | 99 / .838 | 91 / .880 |
+
+Unrestricted BD moved hundreds of thousands of rows, mostly using neutral
+parents; pairing reduced churn but still lost covered modes. The repeated
+snapshot analysis in the structural report supports a mismatch between
+local density evidence and each mode's total high-quality mass.
+
+`st6-eg-qr` tested transactional adaptive extragradient on the no-BD `st5`
+base. Its grid diagnostic fell to zero covered modes and HQ `.0032` by step
+500, so the run was stopped. The harness records `ERROR` because it has no
+final result: **this is not a frozen 7,000-update native verdict**. Rotated,
+staggered, and the 13 gates were not run for `st6`.
+
+## Earlier leaderboard (September 27 evening; mixed native initialization)
+
+This section preserves the earlier 13-gate standings and exploratory native
+rows. Its native ordering and proposed next steps are superseded by the QR
+readout above.
 
 Scoring is noisy throughout, meaning the model's own samples. The harness has 13 gates: 10 quick gates,
 `img_intensity2` judged at 1,200 updates, `ring_shift` and `stationary`. The 100-Gaussian columns are

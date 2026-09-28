@@ -1,0 +1,246 @@
+--- a/particlegan/recipes.py
++++ b/particlegan/recipes.py
+@@ -102,6 +102,7 @@
+     # Fisher-Rao birth-death moves on the particle table (kNN density ratio,
+     # sequential evidence, BH at q=.05; see birth_death.py). Off by default.
+     particle_birth_death: bool = False
++    game_update: str = "alternating"
+ 
+     def __post_init__(self):
+         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+@@ -191,6 +192,10 @@
+             raise ValueError("lr_control must be mobility or stationarity")
+         if self.lr_control == "stationarity" and self.continuous_policy != "dv12":
+             raise ValueError("lr_control='stationarity' requires continuous_policy='dv12'")
++        if self.game_update not in ("alternating", "extragradient"):
++            raise ValueError("game_update must be alternating or extragradient")
++        if self.game_update == "extragradient" and self.particle_birth_death:
++            raise ValueError("experimental extragradient requires birth-death disabled")
+         if type(self.particle_birth_death) is not bool:
+             raise ValueError("particle_birth_death must be a boolean")
+         if self.particle_birth_death and self.prior_kind != "particles":
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -51,7 +51,7 @@
+ # reproduces the older behaviour; a saved recipe without them is upgraded.
+ _ADDED_RECIPE_FIELDS = {"continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
+                         "critic_payoff_damping": True, "output_noise_mode": "fixed",
+-                        "lr_control": "mobility", "particle_birth_death": False}
++                        "lr_control": "mobility", "particle_birth_death": False, "game_update": "alternating"}
+ 
+ 
+ class GANTrainer:
+@@ -284,6 +284,92 @@
+         if self.controller is not None and recipe.critic_payoff_damping:
+             for group in self.opt_d.param_groups:
+                 group["lr"] *= self.controller.critic_scale()
++        if recipe.game_update == "extragradient":
++            loss_d, loss_g, loss_gan, prior_reg, penalty, penalty_stats = self._extragradient(
++                real, generator_real, collect_stats)
++        else:
++            sigma_in = input_noise_std(recipe, self.completed_steps)
++            sigma_out = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
++            self.last_output_sigma = float(sigma_out.detach() if torch.is_tensor(sigma_out) else sigma_out)
++            noise = self.noise_generator
++            critic = self._noisy_D
++            critic.std = sigma_in
++            self.D.train()
++            self.G.eval()
++            with torch.no_grad():
++                latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
++                if self.controller is not None:
++                    self.controller.observe_support(self.G, self.D, latent, sigma_out, noise)
++                fake = self._generate(self.G, latent, sigma_out, noise)
++            if self.controller is not None:
++                self.controller.observe_pair(real, fake)
++            loss_d = self.loss.d_loss(critic(real), critic(fake))
++            self.penalty.collect_stats = collect_stats
++            penalty = self.penalty(critic, real, fake)
++            penalty_stats = self.penalty.last_stats
++            loss_d = loss_d + penalty
++            self.opt_d.zero_grad()
++            loss_d.backward()
++            self.opt_d.step()
++            if self.lr_settle is not None:
++                self._settle_observe(1)
++    
++            self.D.eval()
++            self.G.train()
++            flags = [p.requires_grad for p in self.D.parameters()]
++            try:
++                self.D.requires_grad_(False)
++                latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
++                fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
++                real_g = generator_real() if callable(generator_real) else generator_real
++                real_g = real if real_g is None else self._batch(real_g, "generator_real")
++                if real_g.shape[1:] != real.shape[1:]:
++                    raise ValueError("generator_real must match the real sample shape")
++                if len(real_g) != len(real):
++                    raise ValueError("RpGAN generator_real must match the real batch size")
++                real_logits = critic(real_g)
++                loss_gan = self.loss.g_loss(fake_logits, real_logits)
++                prior_reg = loss_gan.new_zeros(())
++                if self.prior.z.requires_grad:
++                    raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
++                    prior_reg = self.prior_regularizer(raw)
++                loss_g = loss_gan + recipe.prior_reg * prior_reg
++                self.opt_g.zero_grad()
++                loss_g.backward()
++                if self.controller is not None:
++                    self.controller.observe_generator(self.G, loss_gan.detach(), (loss_d - penalty).detach())
++                self.opt_g.step()
++                if self.lr_settle is not None:
++                    self._settle_observe(0)
++            finally:
++                for parameter, flag in zip(self.D.parameters(), flags):
++                    parameter.requires_grad_(flag)
++        with torch.no_grad():
++            for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
++                for averaged, current in zip(target.parameters(), source.parameters()):
++                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
++                for averaged, current in zip(target.buffers(), source.buffers()):
++                    averaged.copy_(current)
++        if self.birth_death is not None:
++            event = self.birth_death.maybe_apply(self, self.last_output_sigma)
++            if event and event.get("moves") and self.lr_settle is not None:
++                # A teleport is not gradient movement: re-anchor the moved rows of the prior
++                # tester's current block (restart() if the group is not the bare table).
++                for group, tester, role in zip(self.opt_g.param_groups, self.lr_settle.testers[0], self.roles[0]):
++                    if role == "prior" and tester is not None:
++                        tester.rebase(group["params"], self.birth_death.moved_rows)
++        self.completed_steps += 1
++        result = {key: value.detach() for key, value in
++                  dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
++                       prior_regularization=prior_reg, penalty=penalty).items()}
++        result["step"] = self.completed_steps
++        if collect_stats:
++            result["penalty_stats"] = penalty_stats
++        return result
++
++    def _joint_gradients(self, real, generator_real, collect_stats):
++        """Evaluate both players at the same parameter point; do not step either."""
++        recipe = self.recipe
+         sigma_in = input_noise_std(recipe, self.completed_steps)
+         sigma_out = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
+         self.last_output_sigma = float(sigma_out.detach() if torch.is_tensor(sigma_out) else sigma_out)
+@@ -306,9 +392,6 @@
+         loss_d = loss_d + penalty
+         self.opt_d.zero_grad()
+         loss_d.backward()
+-        self.opt_d.step()
+-        if self.lr_settle is not None:
+-            self._settle_observe(1)
+ 
+         self.D.eval()
+         self.G.train()
+@@ -334,33 +417,86 @@
+             loss_g.backward()
+             if self.controller is not None:
+                 self.controller.observe_generator(self.G, loss_gan.detach(), (loss_d - penalty).detach())
+-            self.opt_g.step()
+-            if self.lr_settle is not None:
+-                self._settle_observe(0)
+         finally:
+             for parameter, flag in zip(self.D.parameters(), flags):
+                 parameter.requires_grad_(flag)
+-        with torch.no_grad():
+-            for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
+-                for averaged, current in zip(target.parameters(), source.parameters()):
+-                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+-                for averaged, current in zip(target.buffers(), source.buffers()):
+-                    averaged.copy_(current)
+-        if self.birth_death is not None:
+-            event = self.birth_death.maybe_apply(self, self.last_output_sigma)
+-            if event and event.get("moves") and self.lr_settle is not None:
+-                # A teleport is not gradient movement: re-anchor the moved rows of the prior
+-                # tester's current block (restart() if the group is not the bare table).
+-                for group, tester, role in zip(self.opt_g.param_groups, self.lr_settle.testers[0], self.roles[0]):
+-                    if role == "prior" and tester is not None:
+-                        tester.rebase(group["params"], self.birth_death.moved_rows)
+-        self.completed_steps += 1
+-        result = {key: value.detach() for key, value in
+-                  dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+-                       prior_regularization=prior_reg, penalty=penalty).items()}
+-        result["step"] = self.completed_steps
+-        if collect_stats:
+-            result["penalty_stats"] = penalty_stats
++        return loss_d, loss_g, loss_gan, prior_reg, penalty, penalty_stats
++
++    def _extragradient(self, real, generator_real, collect_stats):
++        """Transactional adaptive extragradient, with one committed optimizer step.
++
++        The predictor uses the existing optimizer including its safeguards.
++        Its moments, KA2 anchor/record, A2 history, controller, random streams,
++        and module buffers are discarded. Only predicted parameters survive
++        until corrector gradients have been evaluated. The corrector starts
++        again from the original optimizer state, so Adam/AMSGrad denominators
++        are adaptive rather than the fixed metric of elementary EG theory.
++        """
++        # Host data cursors are outside checkpoints: consume a callback once.
++        real_g = generator_real() if callable(generator_real) else generator_real
++        real_g = real if real_g is None else self._batch(real_g, "generator_real")
++        if real_g.shape != real.shape:
++            raise ValueError("generator_real must match the real batch shape")
++        parameters = [p for opt in (self.opt_g, self.opt_d)
++                      for group in opt.param_groups for p in group["params"]]
++        original = [p.detach().clone() for p in parameters]
++        checkpoint = self.state_dict()
++        roots = (self.G, self.D, self.prior, self.ema_G, self.ema_prior, self.ema_D)
++        modes = [(m, m.training) for root in roots if root is not None
++                 for m in root.modules()]
++        # Module checkpoints exclude nonpersistent buffers. Roll those back too.
++        buffers = [(b, b.detach().clone()) for root in roots if root is not None
++                   for b in root.buffers()]
++        old_collect_stats = self.penalty.collect_stats
++        old_input_sigma = self._noisy_D.std
++        last_sigma = self.last_output_sigma
++        penalty_stats = deepcopy(self.penalty.last_stats)
++        critic_identity = self.penalty.regularizer._critic_id
++        try:
++            self._joint_gradients(real, real_g, False)
++            self.opt_d.step()
++            self.opt_g.step()
++            predicted = [p.detach().clone() for p in parameters]
++            self.load_state_dict(checkpoint)
++            for module, training in modes:
++                module.training = training
++            with torch.no_grad():
++                for buffer, value in buffers:
++                    buffer.copy_(value)
++            self.penalty.collect_stats = old_collect_stats
++            self._noisy_D.std = old_input_sigma
++            self.last_output_sigma = last_sigma
++            self.penalty.last_stats = penalty_stats
++            self.penalty.regularizer._critic_id = critic_identity
++            with torch.no_grad():
++                for p, value in zip(parameters, predicted):
++                    p.copy_(value)
++            result = self._joint_gradients(real, real_g, collect_stats)
++            # Keep corrector gradients and once-evaluated buffers/controller;
++            # optimizer steps must be based at the ORIGINAL parameter point.
++            with torch.no_grad():
++                for p, value in zip(parameters, original):
++                    p.copy_(value)
++            self.opt_d.step()
++            self.opt_g.step()
++        except BaseException:
++            self.load_state_dict(checkpoint)
++            for module, training in modes:
++                module.training = training
++            with torch.no_grad():
++                for buffer, value in buffers:
++                    buffer.copy_(value)
++            self.penalty.collect_stats = old_collect_stats
++            self._noisy_D.std = old_input_sigma
++            self.last_output_sigma = last_sigma
++            self.penalty.last_stats = penalty_stats
++            self.penalty.regularizer._critic_id = critic_identity
++            self.opt_d.zero_grad()
++            self.opt_g.zero_grad()
++            raise
++        if self.lr_settle is not None:
++            self._settle_observe(1)
++            self._settle_observe(0)
+         return result
+ 
+     def _settle_observe(self, index):
