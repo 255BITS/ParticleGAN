@@ -62,4 +62,6 @@ baseline wall time on the native-only replay.
 - [Full native100 and implementation report](README.md)
 - [Compact all22 results](all22-summary.json)
 - [All22 leaderboard snapshot](all22-leaderboard.md)
+- [Critic-gap diagnostic and interpretation](critic-gap-investigation.md)
+- [Frozen-checkpoint diagnostic script](critic_gap.py)
 - [Candidate implementation](../../../../../../gan-attempts/row-em-renew-20260928/candidate/package/particlegan/row_em.py)

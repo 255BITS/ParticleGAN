@@ -89,11 +89,9 @@ samples and final checkpoints remain in the local
 The frequent fit is expensive: 615/543/486 EM fits and 1,692/1,539/1,363
 seconds for grid/rotated/staggered, versus 354/348/283 seconds for the
 uncalibrated critic-floor runs. This is roughly 4.4–4.8 times the wall time.
-A follow-up should gate refits on measured change in the public sampling
-support, while retaining a fully renewed real reservoir, then rerun all
-three frozen tasks. The current 3/3 receipt establishes accuracy for this
-package; the full 22-check suite has not been scored for it, and no default
-change follows from this native-only result.
+We are retiring this implementation as a scalable fix. Keep its successful
+native results as a diagnostic of the training and sampling law; no default
+change follows from this package.
 
 ## Full PR #155 all22 replay
 
@@ -108,3 +106,13 @@ requested and are not scored as training failures. The compact task matrix and
 result receipts are in [`all22-leaderboard.md`](all22-leaderboard.md) and
 [`all22-summary.json`](all22-summary.json). This partial full-suite result
 does not promote the candidate as a default.
+
+## Frozen critic follow-up
+
+A post hoc, frozen-critic comparison finds that the relativistic generator
+objective favors calibrated row masses on all three native100 endpoints,
+while changing output width alone has negligible effect. This establishes
+endpoint sensitivity, not a training-time mechanism. The MMD power check was
+inconclusive, so its local update derivatives are excluded. See
+[`critic-gap-investigation.md`](critic-gap-investigation.md) and the
+[reproducible script](critic_gap.py).
