@@ -115,7 +115,7 @@ def train(cfg):
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
-    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(opt_d), recipe.make_prior_regularizer()
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)

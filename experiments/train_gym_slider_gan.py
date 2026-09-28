@@ -112,7 +112,7 @@ def train(cfg):
     opt_r = recipe.make_critic_optimizer(bundle['R'], ema_critic=copy.deepcopy(bundle['R']), fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d, opt_r)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
-    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(opt_d), recipe.make_prior_regularizer()
     r_penalty = recipe.make_critic_penalty(opt_r)
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)

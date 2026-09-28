@@ -280,7 +280,7 @@ def train(cfg):
     initial_features = state_hash([d.critic.features])
     eg, ee, ep = [copy.deepcopy(m).eval().requires_grad_(False) for m in (g, e, prior)]
     base_lrs = [[group['lr'] for group in o.param_groups] for o in (og, od)]
-    adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(od), ParticleRegularizer()
+    adversarial, penalty, spread = recipe.make_loss(od), recipe.make_critic_penalty(od), ParticleRegularizer()
     streams = {name: rng(cfg['seed'] + offset) for name, offset in [('data', 2), ('prior', 3), ('time', 4), ('corruption', 5), ('reverse', 6)]}
     metadata = {'initialization_sha256': initial_hash, 'sigma': float(prior.sigma),
                 'initial_nearest_neighbor_median': float(prior.d0), 'torch': torch.__version__,

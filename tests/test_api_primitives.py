@@ -180,7 +180,7 @@ def test_caller_validated_hot_paths_do_not_convert_tensors_to_python(monkeypatch
 def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     recipe = get_recipe(model='ddgan', num_classes=4, conditioning='ucd', z_dim=2, num_particles=8, lr=.001,
                         reg_coeff=.3, prior_reg=.4, betas=[0., .9])
-    assert recipe.total_steps == 7000 and recipe.num_classes == 4
+    assert recipe.total_steps is None and recipe.num_classes == 4
     assert recipe.betas == (0., .9)
     assert Recipe(**recipe.to_dict()) == recipe
     prior = recipe.make_prior()

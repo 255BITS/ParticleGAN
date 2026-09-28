@@ -31,7 +31,7 @@ def test_only_global_schedule_fields_extend_shared_recipe():
 
 def test_mixed_ae_and_direct_prior_groups_receive_same_global_schedule():
     torch.set_num_threads(1)
-    recipe = get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
+    recipe = get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2., total_steps=7000,
                         lr_anneal_start=.3, lr_floor=.01).replace(name='schedule_check')
     applied = []
     with search.configured_schedule(recipe) as receipt, optimizer_defaults(recipe, applied):

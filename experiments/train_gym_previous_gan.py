@@ -103,7 +103,7 @@ def train(cfg):
     values = {k: torch.as_tensor(v, device=device) for k,v in records.items() if k not in ('episode_ids', 'steps')}
     optimizers = (opt_g, opt_d)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
-    gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()
+    gan, spread = recipe.make_loss(opt_d), recipe.make_prior_regularizer()
     ema = {**bundle, **{k: copy.deepcopy(bundle[k]).eval().requires_grad_(False) for k in ('G', 'E', 'prior')}}
     rng = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + offset)
            for k,offset in dict(data=11, d_data=31, latent=51, contact=61, d_latent=71, d_contact=81).items()}

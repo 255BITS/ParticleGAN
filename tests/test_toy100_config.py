@@ -70,7 +70,35 @@ def test_unselected_invalid_override_blocks_individual_run(tmp_path, monkeypatch
     assert not args.output.exists()
 
 
-def test_default_command_uses_shared_winner_and_strict_accuracy():
+def test_default_command_uses_the_package_default_and_strict_accuracy():
     args = cli._parser().parse_args(["run", "--output", "/tmp/toy100-example", "--no-render"])
-    assert str(args.config) == "configs/toy100/constraints_simple_regularization.json"
+    assert str(args.config) == "configs/toy100/default.json"
     assert args.require_accuracy is True
+
+
+def test_shipped_default_config_trains_the_package_default_recipe():
+    from pathlib import Path
+    from particlegan import Recipe, get_recipe
+    from benchmarks.toy100.train import load_config, resolve_config
+    root = Path(__file__).resolve().parents[1]
+    default = cli._parser().parse_args(["run", "--output", "x"]).config
+    assert default == Path("configs/toy100/default.json")
+    manifest = load_config(root / default)
+    for name in PROBLEM_NAMES:
+        flat, recipe = resolve_config(resolve_problem_config(manifest, name))
+        assert type(recipe) is Recipe
+        assert recipe == get_recipe(total_steps=7000).replace(name="particlegan_default")
+        # The benchmark's own noise wrappers stay off; the trainer applies the
+        # recipe's constant output noise, recorded under its own key.
+        assert flat["input_noise_std"] == flat["output_noise_std"] == 0.0
+        assert flat["recipe_output_noise_std"] == recipe.output_noise_std == 0.029
+        assert "network_lr_horizon_cap" not in flat and resolve_config(flat)[1] == recipe
+    with pytest.raises(ValueError, match="package formulation"):
+        resolve_config({"recipe_defaults": "particlegan", "reg_arm": "b_cap"})
+    with pytest.raises(ValueError, match="recipe_defaults"):
+        resolve_config({"recipe_defaults": "gan_v4"})
+    with pytest.raises(ValueError, match="recipe_output_noise_std"):
+        resolve_config({"recipe_output_noise_std": 0.029})
+    # Every other config keeps resolving on the archived GAN v3 fields.
+    legacy = load_config(root / "configs/toy100/constraints_simple_regularization.json")
+    assert resolve_config(resolve_problem_config(legacy, "grid100"))[1].reg_arm == "b_cap"

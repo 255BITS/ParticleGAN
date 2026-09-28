@@ -14,9 +14,9 @@ the problem they are pointed at:
   - RpGAN objective: relativistic pairing + logistic kernel (lib.gan_loss).
     The pairing term is what the two hand-written BCE terms used to be: G/prior
     push the fake pair up, E pushes the real pair down, now in one paired loss.
-  - K3P gradient penalty on D (package default, recipe.make_critic_penalty): R1 on
-    reals + a fake cap, handed over as the critic LR anneals to a real/fake cap
-    plus EMA-critic gradient proximity; coeff 1, kappa 1. Because D here is a *joint* critic D(x, z), the penalty is taken
+  - The recipe's gradient penalty on D (package default, recipe.make_critic_penalty):
+    R1 on reals + a fake cap, then blended with a real/fake cap plus EMA-critic
+    gradient proximity. Because D here is a *joint* critic D(x, z), the penalty is taken
     on the gradient w.r.t. the whole joint input, which is the BiGAN analogue of
     the 100gaussians recipe's penalty on grad_x D(x).
   - recipe.make_optimizers(G, D, prior, encoder=E, ...): Adam beta1=0 (the
@@ -212,8 +212,7 @@ def train(
         reg_coeff=reg_coeff,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
-        # This example anneals G/D over the whole run (not the 1,600-update
-        # toy horizon); K3P's blend follows the critic LR either way.
+        # An optional peak schedule over the whole run when lr_floor < 1.
         network_lr_horizon_cap=None,
     )
     prior = recipe.make_prior().to(device)
@@ -236,11 +235,11 @@ def train(
         p.requires_grad_(False)
 
     vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
-    gan_loss = recipe.make_loss()
+    gan_loss = recipe.make_loss(opt_D)
 
     optimizers = (opt_GE, opt_D)
     base_lrs = [[g["lr"] for g in opt.param_groups] for opt in optimizers]
-    # K3P gradient penalty (the default), paired with opt_D (EMA critic, LR record).
+    # The recipe's critic penalty, paired with opt_D (EMA critic, LR controller).
     penalty = recipe.make_critic_penalty(opt_D)
 
     loss_D_hist = deque(maxlen=200)
@@ -259,8 +258,8 @@ def train(
     plt.ion()
 
     for step in range(total_steps + 1):
-        # Full LR until lr_anneal_start, then cosine down: G/E/D to the
-        # network floor (K3P's blend floor), particles to lr_floor.
+        # The recipe's optional peak schedule (1 by default); the optimizers
+        # apply their own state-driven LR fractions on top.
         scale_learning_rates(step, recipe, optimizers, base_lrs, prior)
 
         # --- TRAIN D ---
@@ -279,7 +278,7 @@ def train(
 
         loss_d = gan_loss.d_loss(pred_real, pred_fake)
 
-        # K3P gradient penalty on the joint (text, latent) pairs.
+        # The critic penalty on the joint (text, latent) pairs.
         # D_joint wraps D, so the penalty evaluates the EMA critic the same way.
         loss_d = loss_d + penalty(D_joint, join_pair(x_real, z_enc), join_pair(x_gen_soft, z_prior))
         loss_d.backward()

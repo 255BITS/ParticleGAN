@@ -1,4 +1,10 @@
-"""K3P package components vs the frozen research mechanism (CPU, float64)."""
+"""K3P vs the frozen research mechanism (CPU, float64), and the package's shared primitives.
+
+K3P (0.8) is no longer the package formulation. Archived replays train it
+through ``benchmarks.legacy`` (``LegacyRecipe``, ``LegacyCriticAdam`` and the
+pinned K3P penalty); these tests keep that stack bit-exact against the frozen
+mechanism. The spike guard and A2 latent damping are still package primitives.
+"""
 import copy
 import subprocess
 import sys
@@ -12,9 +18,9 @@ import torch.nn.functional as F
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import k3p_scenarios as sc  # noqa: E402
 
-from particlegan.k3p import (CriticAnchor, CriticSpikeGuard, DirectParticleResponse,  # noqa: E402
-                             LatentRowDamping)
-from particlegan.grad_regularizers import CriticStepRecord, GradientPenalty  # noqa: E402
+from particlegan.k3p import CriticSpikeGuard, LatentRowDamping  # noqa: E402
+from benchmarks.legacy.critic_optimizer import CriticAnchor  # noqa: E402
+from benchmarks.legacy.grad_regularizers import CriticStepRecord, GradientPenalty  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -124,29 +130,13 @@ def test_latent_row_damping_matches_frozen_a2(frozen):
         assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
 
 
-def test_direct_particle_response_matches_frozen(frozen):
-    ref = frozen["direct"]["trace"]
-    particles, opt = sc.make_direct()
-    resp = DirectParticleResponse([particles], torch.zeros(particles.numel(), dtype=sc.DT))
-
-    def step(o):
-        with resp.around(o):
-            o.step()
-        return resp.last_gain
-    new = sc.run_direct(particles, opt, range(1, 11), step)
-    assert any(r["gain"] > 1.0 for r in ref)
-    for a, b in zip(ref, new):
-        assert a["gain"] == b["gain"] and a["lr"] == b["lr"] and a["betas"] == b["betas"], a["t"]
-        assert torch.equal(a["params"], b["params"]), a["t"]
-
-
 def _recipe_critic(lazy_k=1, split=None):
-    """The same critic scenario through the recipe's optimizer + penalty (plain opt.step()).
+    """The same critic scenario through the legacy recipe's optimizer + penalty (plain opt.step()).
 
     With ``split``, checkpoint with the usual ``D``/``opt_d`` state_dicts after
     ``split`` steps and resume into freshly built objects.
     """
-    from particlegan import get_recipe
+    from benchmarks.legacy.recipe import get_recipe
     recipe = get_recipe(reg_kappa=0.5, reg_coeff=1.0, reg_every=lazy_k, network_lr_floor=0.01,
                         reg_anchor_decay=0.999, d_guard_ratio=5.0, d_guard_min_steps=3, lr=sc.LR0)
 
@@ -213,24 +203,12 @@ def _optimizer_latent(split=None):
     return trace + sc.run_latent(prior, G, opt, range(split + 1, 15), lambda o: o.step()), opt
 
 
-def test_generator_optimizer_matches_frozen_a2_and_direct(frozen):
-    from particlegan.k3p import K3PGeneratorAdam
+def test_generator_optimizer_matches_frozen_a2(frozen):
     for new, opt in (_optimizer_latent(), _optimizer_latent(split=7)):
         for a, b in zip(frozen["latent"]["trace"], new):
             assert all(torch.equal(x, y) for x, y in zip(a["params"], b["params"])), a["t"]
             assert torch.equal(a["exp_avg"], b["exp_avg"]), a["t"]
         assert opt.latent_damping.started
-    particles, _ = sc.make_direct()
-    opt = K3PGeneratorAdam([{"params": [particles], "_comparison_prior": True}], direct_particles=[particles],
-                           lr=0.03, betas=(0.0, 0.999), foreach=False)
-
-    def step(o):
-        o.step()
-        return o.direct_response.last_gain
-    new = sc.run_direct(particles, opt, range(1, 11), step)
-    for a, b in zip(frozen["direct"]["trace"], new):
-        assert a["gain"] == b["gain"] and a["lr"] == b["lr"] and a["betas"] == b["betas"], a["t"]
-        assert torch.equal(a["params"], b["params"]), a["t"]
 
 
 def test_constant_lr_s_is_one_without_anchor():
@@ -242,9 +220,8 @@ def test_constant_lr_s_is_one_without_anchor():
     xr, xf = sc.critic_batch(3)
     pen, st = reg.penalty(D, xr, xf, 9)
     assert st["phase"] == "a" and st["prox"] == 0.0
-    ref = GradientPenalty
-    real = ref._grad_norm(D, xr, squared=True) / 2
-    fake = (ref._grad_norm(D, xf) / 2 ** 0.5 - 0.5).relu().square()
+    real = reg._grad_norm(D, xr, squared=True) / 2
+    fake = (reg._grad_norm(D, xf) / 2 ** 0.5 - 0.5).relu().square()
     assert torch.equal(pen, 0.5 * (real.mean() + fake.mean()))
 
 
@@ -380,7 +357,7 @@ def test_guard_threshold_and_min_steps():
 
 def test_k3p_validation():
     for kwargs in (dict(lr_floor=0.5), dict(lr_floor=-0.1), dict(coeff=-1.0), dict(kappa=float("nan")),
-                   dict(anchor_weight=-1.0), dict(lazy_k=0)):
+                   dict(lazy_k=0)):
         with pytest.raises(ValueError):
             GradientPenalty(**kwargs)
     D = sc.make_critic()
@@ -431,7 +408,9 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
 
 
 def _k3p_trainer():
-    from particlegan import GANTrainer, get_recipe
+    # GANTrainer replays K3P through the legacy recipe's factories.
+    from particlegan import GANTrainer
+    from benchmarks.legacy.recipe import get_recipe
     torch.manual_seed(0)
     recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
                         total_steps=10, lr_anneal_start=0.1)

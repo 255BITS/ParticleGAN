@@ -27,6 +27,10 @@ class ParticlePrior(nn.Module):
       * data-parallel / multi-GPU friendly (z is just a regular Parameter),
       * easy to plug into EP-style regularizers that operate on the full cloud.
 
+    `support_jitter=True` (what `recipe.make_prior()` builds) makes `sample()`
+    return each draw jittered inside its particle's cell (`perturb`), at a
+    width the recipe's generator optimizer tracks (`track_support_`).
+
     Pass `learnable=False` for the frozen-Gaussian control: identical interface,
     identical sampling, but the cloud is a buffer rather than a Parameter, so it
     never moves and `parameters()` comes back empty.
@@ -41,6 +45,9 @@ class ParticlePrior(nn.Module):
         z = prior(idx)  # Keep the DDP forward path so gradients synchronize.
     """
 
+    # Instances set this in __init__; subclasses with their own __init__ keep it off.
+    support_jitter = False
+
     def __init__(
         self,
         num_particles: int = 20_000,
@@ -50,6 +57,7 @@ class ParticlePrior(nn.Module):
         dtype: Optional[torch.dtype] = None,
         learnable: bool = True,
         generator: Optional[torch.Generator] = None,
+        support_jitter: bool = False,
     ) -> None:
         super().__init__()
 
@@ -81,6 +89,14 @@ class ParticlePrior(nn.Module):
             self.register_buffer("z", z)
         with torch.no_grad():
             self.z.normal_(mean=0.0, std=init_std, generator=generator)
+        if type(support_jitter) is not bool:
+            raise ValueError("support_jitter must be a boolean")
+        self.support_jitter = support_jitter
+        if support_jitter:
+            # Set from the table at the first draw (or generator step), so
+            # initializing z after construction is always respected.
+            self.register_buffer("support_width", torch.zeros(z_dim, **factory_kwargs))
+            self.register_buffer("support_ready", torch.zeros((), dtype=torch.bool, device=device))
 
     @property
     def num_particles(self) -> int:
@@ -135,6 +151,7 @@ class ParticlePrior(nn.Module):
         *,
         fixed_first_n: bool = False,
         offset: int = 0,
+        noise_generator: Optional[torch.Generator] = None,
     ) -> Tuple[torch.Tensor, torch.LongTensor]:
         """
         Convenience wrapper returning both latent codes and their indices.
@@ -149,6 +166,10 @@ class ParticlePrior(nn.Module):
 
         This is handy for evaluation snapshots where you want to keep a fixed
         latent grid over the course of training (e.g. for videos).
+
+        A prior built with ``support_jitter`` (``recipe.make_prior()``) returns
+        ``perturb(z[idx])``: the jitter is drawn from ``noise_generator``
+        (default: ``generator``) after the indices.
 
         Returns:
             z_batch: (B, z_dim)
@@ -176,7 +197,104 @@ class ParticlePrior(nn.Module):
             with torch.no_grad():
                 idx = self.sample_indices(batch_size, generator=generator)
         z_batch = self.z[idx]
+        if self.support_jitter:
+            z_batch = self.perturb(z_batch, generator if noise_generator is None else noise_generator)
         return z_batch, idx
+
+    @torch.no_grad()
+    def track_support_(self) -> None:
+        """Advance the jitter width: EMA (.01) of the table's cell size.
+
+        The cell size is the per-dimension spread of the table times
+        ``N ** (-1 / d)``, the linear size of one of ``N`` equal-volume cells.
+        The recipe's generator optimizer calls this after every step.
+        """
+        if not self.support_jitter:
+            return
+        z = self.z.detach()
+        width = z.std(0, unbiased=False) * len(z) ** (-1. / z.shape[1])
+        if not bool(self.support_ready):
+            self.support_width.copy_(width)
+            self.support_ready.fill_(True)
+        else:
+            self.support_width.lerp_(width, .01)
+
+    def perturb(self, latent: torch.Tensor, generator: Optional[torch.Generator] = None) -> torch.Tensor:
+        """``latent`` plus Gaussian jitter at ``support_width``, kept inside each point's cell.
+
+        Each row moves by ``support_width * eps`` (``eps`` drawn from
+        ``generator``), shortened to at most half the distance to its nearest
+        other particle, so a draw never crosses into a neighbour's support.
+        Gradients flow to ``latent`` unchanged.
+        """
+        if not self.support_jitter:
+            raise RuntimeError("this prior was built without support_jitter")
+        if not bool(self.support_ready):
+            self.track_support_()
+        noise = torch.randn(latent.shape, device=latent.device, dtype=latent.dtype, generator=generator)
+        displacement = self.support_width * noise
+        with torch.no_grad():
+            nearest = _nearest_other(latent.detach(), self.z.detach())
+            radius = torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
+            norm = displacement.norm(dim=1)
+            fraction = (radius / norm.clamp_min(1e-20)).clamp_max(1.)
+        displacement = displacement * fraction.unsqueeze(1)
+        return latent + displacement
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict,
+                              missing_keys, unexpected_keys, error_msgs):
+        # Tables saved before (or without) support jitter restart its width.
+        if self.support_jitter and prefix + "support_width" not in state_dict:
+            state_dict[prefix + "support_width"] = torch.zeros_like(self.support_width)
+            state_dict[prefix + "support_ready"] = torch.zeros_like(self.support_ready)
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+                                      missing_keys, unexpected_keys, error_msgs)
+
+
+# Elements of the (rows x centers x z_dim) difference block _nearest_other materialises at once.
+# Broadcasting is memory-bound, so past a few MiB bigger blocks buy nothing; 2**24 (64 MiB in
+# float32) was the fastest on an RTX A6000 and 2**22 on a 24-core CPU.
+_NEAREST_BLOCK = {"cuda": 1 << 24, "cpu": 1 << 22}
+# Blocks may always hold this many elements (4 MiB in float32), even past the old distance matrix:
+# with few rows and a wide z, capping them at len(latent) x 4096 left blocks of a handful of
+# centers and thousands of tiny launches (1 row, z_dim 512: 30x slower than cdist).
+_NEAREST_FLOOR = 1 << 20
+
+
+def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
+    """Distance from each ``latent`` row to its nearest ``table`` row at a nonzero distance (inf if none).
+
+    Broadcasts ``latent - table`` block by block and takes ``vector_norm`` over z. This replaced
+    ``torch.cdist(compute_mode="donot_use_mm_for_euclid_dist")``, whose CUDA kernel is a slow
+    generic one (~25x slower at z_dim <= 32). For contiguous float32/float64 on CUDA with z_dim <= 32
+    it is bitwise the same (the tests pin this): the norm adds a row's squares in the order cdist's
+    one-warp sum does and takes the same correctly rounded sqrt, and a min is exact whatever the
+    blocking. Elsewhere the sum order differs (CPU cdist, or CUDA cdist across warps past z_dim 32),
+    so the nearest distance can be ~1 ulp apart; that is accepted.
+    float16/bfloat16 (which cdist rejects) are computed in float32 and rounded back once.
+    Each block holds at most ``_NEAREST_BLOCK`` elements and no more than the ``len(latent) x 4096``
+    distance matrix the cdist search held, or ``_NEAREST_FLOOR`` elements (4 MiB in float32) if that is
+    bigger, so peak memory is no higher than before except by at most that small fixed amount.
+    """
+    dtype = latent.dtype
+    if dtype in (torch.float16, torch.bfloat16):
+        latent, table = latent.float(), table.float()
+    latent, table = latent.contiguous(), table.contiguous()
+    rows, count, z_dim = len(latent), len(table), latent.shape[1]
+    nearest = torch.full((rows,), float("inf"), device=latent.device, dtype=latent.dtype)
+    if rows == 0 or count == 0:
+        return nearest.to(dtype)
+    # A block of r rows x c centers holds r*c*(z_dim + 1) elements: the difference and its norms.
+    block = _NEAREST_BLOCK.get(latent.device.type, _NEAREST_BLOCK["cuda"])
+    budget = min(block, max(rows * min(count, 4096), _NEAREST_FLOOR))
+    pairs = max(1, budget // (z_dim + 1))
+    step = min(count, max(pairs // rows, math.isqrt(pairs), 1))
+    for query, best in zip(latent.split(max(1, pairs // step)), nearest.split(max(1, pairs // step))):
+        for centers in table.split(step):
+            distance = torch.linalg.vector_norm(query[:, None, :] - centers[None, :, :], dim=-1)
+            distance.masked_fill_(distance == 0, float("inf"))
+            torch.minimum(best, distance.amin(1), out=best)
+    return nearest.to(dtype)
 
 
 def _nonnegative_scalar(value, name):

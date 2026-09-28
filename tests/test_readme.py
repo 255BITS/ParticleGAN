@@ -6,12 +6,12 @@ import torch
 
 README = (Path(__file__).resolve().parents[1] / "README.md").read_text()
 BLOCKS = re.findall(r"```python\n(.*?)```", README, re.S)
-SMALL = "total_steps=3, batch_size=32, num_particles=64"
+SMALL = "batch_size=32, num_particles=64"
 
 
 def _shrink(code, original):
     assert original in code, original
-    return code.replace(original, f"get_recipe({SMALL})")
+    return code.replace(original, f"get_recipe({SMALL})").replace("steps = 2000", "steps = 3")
 
 
 def test_readme_loop_and_trainer_snippet_run():
@@ -19,7 +19,7 @@ def test_readme_loop_and_trainer_snippet_run():
     trainer = next(b for b in BLOCKS if "GANTrainer(recipe, G, D, prior=prior)" in b)
     torch.manual_seed(0)
     namespace = {"__name__": "__readme__"}
-    exec(compile(_shrink(loop, "get_recipe(total_steps=2000)"), "README.md", "exec"), namespace)
+    exec(compile(_shrink(loop, "get_recipe()"), "README.md", "exec"), namespace)
     assert namespace["opt_d"].record.observed_steps == 3
     assert torch.isfinite(namespace["g_loss"]) and torch.isfinite(namespace["d_loss"])
     exec(compile(_shrink(trainer, "get_recipe()"), "README.md", "exec"), namespace)

@@ -211,7 +211,7 @@ def train(cfg, resume=None):
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
-    gan = recipe.make_loss()
+    gan = recipe.make_loss(od)
     spread = recipe.make_prior_regularizer()
     penalty_fn = recipe.make_critic_penalty(od, collect_stats=cfg.get('reg_sync_stats', True))
     start_step, train_seconds = 0, 0.

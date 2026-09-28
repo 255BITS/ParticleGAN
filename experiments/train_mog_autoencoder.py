@@ -202,7 +202,7 @@ def train(arm, cfg):
     initial_sigma = prior.sigma.detach().clone()
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d))
     base_lrs = [[group["lr"] for group in o.param_groups] for o in (opt_g, opt_d)]
-    adversarial, penalty, spread = recipe.make_loss(), recipe.make_critic_penalty(opt_d), ParticleRegularizer()
+    adversarial, penalty, spread = recipe.make_loss(opt_d), recipe.make_critic_penalty(opt_d), ParticleRegularizer()
     data_rng = draw_rng(device, cfg.seed + 2)
     prior_rng = draw_rng(device, cfg.seed + 3)
     offset_rng = draw_rng(device, cfg.seed + 4)

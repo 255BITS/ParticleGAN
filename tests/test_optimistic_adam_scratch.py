@@ -8,7 +8,9 @@ import torch
 
 from benchmarks.toy100.schedule import policy_multipliers, step_with_policy
 from lib.toy_models import SimpleMLPDiscriminator
-from particlegan import GANTrainer, Recipe
+from particlegan import GANTrainer
+# The scratch optimizer study patches the K3P-era plain-Adam update it was written against.
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe
 from reports.toy100.optimistic_adam_scratch import (
     PREVIOUS_DIRECTION_KEY, UPDATE_COUNT_KEY, optimistic_adam,
 )

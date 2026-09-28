@@ -2,7 +2,9 @@
 
 The same scenario code drives the frozen research mechanism (global hooks,
 run in a subprocess by tests/test_k3p.py) and the package API (in-process),
-so any difference in the traces is a difference in the K3P math.
+so any difference in the traces is a difference in the K3P math. K3P is no
+longer the package formulation; the "package side" here is the pinned stack
+archived replays train with (``benchmarks.legacy``).
 """
 import copy
 import math
@@ -193,9 +195,10 @@ def frozen_all(mechanism, latent, response):
 # ---------------------------------------------------------------- package side
 
 def package_critic(lazy_k=1, steps=range(1, STEPS + 1), setup=None):
-    """Build the package K3P critic stack; returns (objects, trace)."""
-    from particlegan.grad_regularizers import GradientPenalty
-    from particlegan.k3p import CriticAnchor, CriticSpikeGuard
+    """Build the pinned (benchmarks.legacy) K3P critic stack; returns (objects, trace)."""
+    from benchmarks.legacy.critic_optimizer import CriticAnchor
+    from benchmarks.legacy.grad_regularizers import GradientPenalty
+    from particlegan.k3p import CriticSpikeGuard
     D = make_critic()
     ema = copy.deepcopy(D).requires_grad_(False)
     opt = critic_optimizer(D)
