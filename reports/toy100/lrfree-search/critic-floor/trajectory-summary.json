@@ -1,0 +1,60 @@
+{
+  "rotated100": {
+    "task": "rotated100",
+    "new_latest_scored_step": 7000,
+    "new_latest_applied_rate_step": 7000,
+    "first_changed_d_rate_step": 26,
+    "first_changed_scored_step": 50,
+    "plot": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/critic-floor-transfer-analysis/rotated100-trajectory.png",
+    "latest_common": {
+      "step": 7000,
+      "old": {
+        "precision": 0.94155,
+        "acc_center_rms_sigma": 0.24464413188472903,
+        "min_cov_eig_ratio": 0.3535711588022853,
+        "max_cov_eig_ratio": 1.6855583170134907,
+        "acc_mass_tv": 0.04665,
+        "acc_abs_cov_trace_bias": 0.26014841422393165,
+        "acc_radial_ks": 0.11512578410209318
+      },
+      "new": {
+        "precision": 0.9526,
+        "acc_center_rms_sigma": 0.1667123632259966,
+        "min_cov_eig_ratio": 0.37926951192686004,
+        "max_cov_eig_ratio": 1.477275771930725,
+        "acc_mass_tv": 0.04170000000000001,
+        "acc_abs_cov_trace_bias": 0.22892522400961635,
+        "acc_radial_ks": 0.10324439621240744
+      }
+    }
+  },
+  "staggered100": {
+    "task": "staggered100",
+    "new_latest_scored_step": 7000,
+    "new_latest_applied_rate_step": 7000,
+    "first_changed_d_rate_step": 1129,
+    "first_changed_scored_step": 1250,
+    "plot": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/critic-floor-transfer-analysis/staggered100-trajectory.png",
+    "latest_common": {
+      "step": 7000,
+      "old": {
+        "precision": 0.9865,
+        "acc_center_rms_sigma": 0.17282247308493373,
+        "min_cov_eig_ratio": 0.38878268821759177,
+        "max_cov_eig_ratio": 1.5101852806617573,
+        "acc_mass_tv": 0.03620000000000001,
+        "acc_abs_cov_trace_bias": 0.10639359324038777,
+        "acc_radial_ks": 0.0402988556991245
+      },
+      "new": {
+        "precision": 0.9864,
+        "acc_center_rms_sigma": 0.16299347938256287,
+        "min_cov_eig_ratio": 0.4064658783369317,
+        "max_cov_eig_ratio": 1.5319759146879544,
+        "acc_mass_tv": 0.036599999999999994,
+        "acc_abs_cov_trace_bias": 0.1052783568896557,
+        "acc_radial_ks": 0.043218892188077285
+      }
+    }
+  }
+}
