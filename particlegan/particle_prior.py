@@ -234,11 +234,7 @@ class ParticlePrior(nn.Module):
         noise = torch.randn(latent.shape, device=latent.device, dtype=latent.dtype, generator=generator)
         displacement = self.support_width * noise
         with torch.no_grad():
-            nearest = torch.full((len(latent),), float("inf"), device=latent.device, dtype=latent.dtype)
-            for centers in self.z.detach().split(4096):
-                distance = torch.cdist(latent.detach(), centers, compute_mode="donot_use_mm_for_euclid_dist")
-                distance.masked_fill_(distance == 0, float("inf"))
-                nearest = torch.minimum(nearest, distance.min(1).values)
+            nearest = _nearest_other(latent.detach(), self.z.detach())
             radius = torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
             norm = displacement.norm(dim=1)
             fraction = (radius / norm.clamp_min(1e-20)).clamp_max(1.)
@@ -253,6 +249,52 @@ class ParticlePrior(nn.Module):
             state_dict[prefix + "support_ready"] = torch.zeros_like(self.support_ready)
         super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
                                       missing_keys, unexpected_keys, error_msgs)
+
+
+# Elements of the (rows x centers x z_dim) difference block _nearest_other materialises at once.
+# Broadcasting is memory-bound, so past a few MiB bigger blocks buy nothing; 2**24 (64 MiB in
+# float32) was the fastest on an RTX A6000 and 2**22 on a 24-core CPU.
+_NEAREST_BLOCK = {"cuda": 1 << 24, "cpu": 1 << 22}
+# Blocks may always hold this many elements (4 MiB in float32), even past the old distance matrix:
+# with few rows and a wide z, capping them at len(latent) x 4096 left blocks of a handful of
+# centers and thousands of tiny launches (1 row, z_dim 512: 30x slower than cdist).
+_NEAREST_FLOOR = 1 << 20
+
+
+def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
+    """Distance from each ``latent`` row to its nearest ``table`` row at a nonzero distance (inf if none).
+
+    Broadcasts ``latent - table`` block by block and takes ``vector_norm`` over z. This replaced
+    ``torch.cdist(compute_mode="donot_use_mm_for_euclid_dist")``, whose CUDA kernel is a slow
+    generic one (~25x slower at z_dim <= 32). For contiguous float32/float64 on CUDA with z_dim <= 32
+    it is bitwise the same (the tests pin this): the norm adds a row's squares in the order cdist's
+    one-warp sum does and takes the same correctly rounded sqrt, and a min is exact whatever the
+    blocking. Elsewhere the sum order differs (CPU cdist, or CUDA cdist across warps past z_dim 32),
+    so the nearest distance can be ~1 ulp apart; that is accepted.
+    float16/bfloat16 (which cdist rejects) are computed in float32 and rounded back once.
+    Each block holds at most ``_NEAREST_BLOCK`` elements and no more than the ``len(latent) x 4096``
+    distance matrix the cdist search held, or ``_NEAREST_FLOOR`` elements (4 MiB in float32) if that is
+    bigger, so peak memory is no higher than before except by at most that small fixed amount.
+    """
+    dtype = latent.dtype
+    if dtype in (torch.float16, torch.bfloat16):
+        latent, table = latent.float(), table.float()
+    latent, table = latent.contiguous(), table.contiguous()
+    rows, count, z_dim = len(latent), len(table), latent.shape[1]
+    nearest = torch.full((rows,), float("inf"), device=latent.device, dtype=latent.dtype)
+    if rows == 0 or count == 0:
+        return nearest.to(dtype)
+    # A block of r rows x c centers holds r*c*(z_dim + 1) elements: the difference and its norms.
+    block = _NEAREST_BLOCK.get(latent.device.type, _NEAREST_BLOCK["cuda"])
+    budget = min(block, max(rows * min(count, 4096), _NEAREST_FLOOR))
+    pairs = max(1, budget // (z_dim + 1))
+    step = min(count, max(pairs // rows, math.isqrt(pairs), 1))
+    for query, best in zip(latent.split(max(1, pairs // step)), nearest.split(max(1, pairs // step))):
+        for centers in table.split(step):
+            distance = torch.linalg.vector_norm(query[:, None, :] - centers[None, :, :], dim=-1)
+            distance.masked_fill_(distance == 0, float("inf"))
+            torch.minimum(best, distance.amin(1), out=best)
+    return nearest.to(dtype)
 
 
 def _nonnegative_scalar(value, name):
