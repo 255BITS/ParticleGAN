@@ -1,7 +1,7 @@
-# Native 100-Gaussian structural round (`st5`–`st7`)
+# Native 100-Gaussian structural round (`st5`–`st7` and D-rate ablation)
 
-This snapshot records the `st5`–`st7` experiments from the LR-free research
-harness. They are experimental candidates, not changes to the public
+This snapshot records the `st5`–`st7` experiments and D-rate ablation from
+the LR-free research harness. They are experimental candidates, not changes to the public
 `GANTrainer` default.
 The question is whether a prior-table controller can find a settling scale
 from its own motion, and whether evidence-paired particle moves can clear
@@ -12,6 +12,8 @@ noise; `.029` is an attribution control, not a proposed universal setting.
 base.
 `st7` tests whether temporal evidence from the generated sample law reopens
 only the critic's stationarity test.
+The D-base ablation tests the critic's base rate while leaving the other
+stationarity rules in place.
 The later [#215/#217 source audit](../comparison-pr215-pr217/README.md)
 uses the same #155 hosts but evaluates separate published recipes and has
 its own 13-gate and native verdicts.
@@ -26,6 +28,7 @@ its own 13-gate and native verdicts.
 | `st5-scaleaware-pair-fixed-xv` | Xavier control / paired BD | fixed `.029` | [config](configs/st5-scaleaware-pair-fixed-xv.json) |
 | `st6-eg-qr` | **QR primary** / no BD, transactional adaptive extragradient | learnable | [config](configs/st6-eg-qr.json) |
 | `st7-fake-reopen-qr` | **QR primary** / no BD, generated-sample drift reopens D only | learnable | [config](configs/st7-fake-reopen-qr.json) |
+| `st5-dbase-qr` | **QR primary** / no BD, D uses base LR before payoff damping | learnable | [config](configs/st5-dbase-qr.json) |
 
 The library's `batch_feature_zero` QR initialization is the **primary** native
 comparison. The earlier `initialization: null` Xavier runs are secondary
@@ -128,6 +131,20 @@ doubling D's LR. It shows residual critic descent at this checkpoint, not a
 passing GAN continuation or a general LR rule. Grid100 had no saved final
 state for the analogous audit.
 
+An [online critic-refinement preflight](critic-refinement-preflight.json)
+then tested whether a bounded shadow-D phase could certify that descent
+before committing it. At the saved rotated100 checkpoint, the proposed rule
+rejected after 257 host calls in both its native callback and matched-law
+null cases. The native rejection discarded 257 D-only updates, skipped 257
+ordinary G updates, and used 771 extra fixed-objective evaluations. On 128
+fresh independent batches **after** that decision, the rejected native
+shadow did improve the fixed-context KA2 objective (`−1.47e−5`, 95% interval
+`−2.49e−5` to `−4.46e−6`) and had a favorable local shape derivative.
+Thus the online acceptance rule missed useful critic refinement in this
+case; the post-hoc result does not validate that rule. No full candidate or
+formal native gate was run. The read-only harness details are at
+`lrfree-20260926/reports/critic-refinement-preflight/summary.md`.
+
 `st6-eg-qr` was stopped after the grid diagnostic deteriorated: at step 500
 it had zero covered modes and HQ fraction `.0032`. Its harness `result.json`
 says `ERROR` because no final native result was produced. That is an early
@@ -157,6 +174,31 @@ Rotated100, staggered100, and the 13 gates were not run for `st7`. Exact
 result fields and comparison receipts are in
 [native100-results.json](native100-results.json); the registered package SHA
 is `b5497fe9622a1ea0bd5284c0f978b6919fd259d9aec640f2c44f48b2cedfc27f`.
+
+### `st5-dbase-qr`: D base-rate attribution on grid100
+
+The [one-file patch](st5-dbase-vs-st5.patch) keeps D's stationarity tester
+running but uses D's base LR before the inherited `critic_scale()` payoff
+multiplier. G, prior, and log-sigma still use their `st5` stationarity rules;
+their trajectories can change in response to D. The QR init, noisy scoring,
+optimizer, KA2 penalty, and frozen card are identical. At step 7,000 the
+applied D LR is `.00424777`, versus `.00106197` in `st5` QR.
+The native fixture and first 98 applied-rate rows are byte-identical; at
+update 99 only D's rate differs. Later G rates diverge as a coupled training
+response, not as another code intervention.
+
+The single grid100 frozen verdict is **FAIL**, with 0/34 passing checks, no
+terminal streak, and a failing 100k holdout. D-base ends with 99 modes,
+precision `.9821`, covariance eigenvalue ratios `.15881–2.90121`, centre RMS
+`.31529σ`, and radial KS `.08726`. Baseline `st5` had 100 modes, precision
+`.97865`, eigenvalue ratios `.16260–2.43209`, centre `.36380σ`, and KS
+`.08443`. The D-base arm improves precision and centre error, but loses a
+covered mode and worsens the upper covariance ratio and KS; all relevant
+shape limits still fail. Its holdout has precision `.98296` and centre
+`.28042σ`, and also fails. This one-task ablation does not establish that
+removing D cuts helps native convergence. Rotated100, staggered100, and the
+13 gates were not run. Exact result and holdout fields are in
+[native100-results.json](native100-results.json).
 
 ## Evidence from earlier birth/death arms
 
@@ -211,6 +253,7 @@ assignment to BD remains limited by intervening gradient updates.
 | `st5-scaleaware-pair-xv` (Xavier control) | FAIL / FAIL / FAIL | Not a QR comparison |
 | `st6-eg-qr` | Grid stopped at step 500; no formal verdict / not run / not run | Not run |
 | `st7-fake-reopen-qr` | Grid FAIL 0/34, holdout FAIL / not run / not run | Not run |
+| `st5-dbase-qr` | Grid FAIL 0/34, holdout FAIL / not run / not run | Not run |
 
 No `st5` candidate has a complete passing native three-task set. Formal
 promotion would also require the 13 noisy-scored harness gates.
@@ -229,6 +272,8 @@ The source identity for this snapshot is:
 | `st6` harness package digest | `96e2c7e10cc1ec913ff6d2f918a212c8f17f158fe487a34163d0407515341b31` |
 | `st7` patch against `st5` | `897597aeb90bf2976f4cd7ee5a716109822466d01a23b2b7438f0b1f587bc2e6` |
 | `st7` harness package digest | `b5497fe9622a1ea0bd5284c0f978b6919fd259d9aec640f2c44f48b2cedfc27f` |
+| `st5-dbase` patch against `st5` | `b4d6e36d55221f6ec6e70b65afed32f93d293aa8024e8e1fb26e9eb36e6b61c4` |
+| `st5-dbase` harness package digest | `91bef64a4452f6961a21fe5de49a8a05c76043de7fed0844b13f9717f0bb66d6` |
 
 ## Reproduce in the research harness
 
@@ -273,6 +318,20 @@ patch -p1 -d "$REPRO_DIR/st7-package" < "$ARTIFACT/st7-vs-st5.patch"
   --note 'st7 QR generated-sample drift test reproduction'
 ```
 
+The D-base ablation is also a single grid100 run. This patch against `st5`
+reconstructs the registered package hash, and its config matches the `st5`
+QR grid override:
+
+```bash
+cp -a "$REPRO_DIR/package" "$REPRO_DIR/st5-dbase-package"
+patch -p1 -d "$REPRO_DIR/st5-dbase-package" < "$ARTIFACT/st5-dbase-vs-st5.patch"
+/tmp/pr38-default-env/bin/python harness/submit.py \
+  --cand st5-dbase-qr-repro --package-root "$REPRO_DIR/st5-dbase-package" \
+  --overrides "$ARTIFACT/configs/st5-dbase-qr.json" \
+  --candidate-options '{"eval_output_noise":true}' --tasks grid100 \
+  --note 'st5 QR D base-rate attribution reproduction'
+```
+
 To reproduce the 14k rotated extension with the same QR overrides and
 candidate options, submit this from the harness directory after constructing
 `$REPRO_DIR/package` above:
@@ -297,7 +356,8 @@ must also be checked before promoting this candidate into core code.
 The working research notes are `lrfree-20260926/reports/st3-100g-round.md`,
 `lrfree-20260926/reports/st3-bd-native-evidence.md`, and
 `lrfree-20260926/reports/native100-metrics.md`. This PR snapshot records
-the complete `st5` QR native failure, the early `st6` EG stop, and the `st7`
-grid test with no fake-driven reopening. The 13-gate suite is still
+the complete `st5` QR native failure, the early `st6` EG stop, the `st7`
+grid test with no fake-driven reopening, and the D-base grid failure. The
+13-gate suite is still
 untested for these structural candidates. No pass or core-promotion claim
 follows.

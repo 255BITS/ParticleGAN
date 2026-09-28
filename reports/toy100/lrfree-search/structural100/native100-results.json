@@ -628,5 +628,102 @@
         "native_gate_equal": true
       }
     }
+  },
+  "st5-dbase-qr": {
+    "grid100": {
+      "source": "runs/st5-dbase-qr/grid100/result.json",
+      "package_sha256": "91bef64a4452f6961a21fe5de49a8a05c76043de7fed0844b13f9717f0bb66d6",
+      "patch": "st5-dbase-vs-st5.patch",
+      "overrides_config": "configs/st5-dbase-qr.json",
+      "status": "FAIL",
+      "completed_steps": 7000,
+      "observations": 34,
+      "passing_checks": 0,
+      "final_streak": 0,
+      "eval_output_noise": true,
+      "final": {
+        "step": 7000,
+        "modes": 99,
+        "hq": 0.9821,
+        "precision": 0.9821,
+        "min_hq_mode_mass": 0.00495,
+        "max_mode_mass": 0.0128,
+        "mass_tv": 0.059800000000000006,
+        "min_cov_eig_ratio": 0.1588141150969965,
+        "max_cov_eig_ratio": 2.9012119914762384,
+        "min_radial_median_ratio": 0.5538357517882255,
+        "max_radial_median_ratio": 1.6692345508534587,
+        "acc_mass_tv": 0.0598,
+        "acc_center_rms_sigma": 0.3152947270115765,
+        "acc_abs_cov_trace_bias": 0.07207963077176371,
+        "acc_cov_trace_bias": 0.07207963077176371,
+        "acc_radial_ks": 0.08725949096338098,
+        "acc_accuracy_score": 1.3688559708816777,
+        "acc_accuracy_pass": false,
+        "acc_frozen_pass": false,
+        "acc_passed": false,
+        "sharp_clean": 1.2840548753738403,
+        "sharp_noisy": 1.3150396347045898,
+        "output_sigma": 0.0074949623085558414,
+        "holdout_mass_tv": 0.05586,
+        "holdout_center_rms_sigma": 0.2804151687729369,
+        "holdout_abs_cov_trace_bias": 0.07766905977652905,
+        "holdout_cov_trace_bias": 0.07766905977652905,
+        "holdout_radial_ks": 0.08134147306931377,
+        "holdout_accuracy_score": 1.2858258170907049,
+        "holdout_accuracy_pass": false,
+        "holdout_frozen_pass": false,
+        "holdout_passed": false,
+        "holdout_precision": 0.98296
+      },
+      "native_gate": {
+        "status": "FAIL",
+        "coverage_status": "FAIL",
+        "accuracy_status": "FAIL",
+        "coverage_stable_checks": 0,
+        "first_full_coverage": null,
+        "first_arrival": null,
+        "stable_from": null,
+        "terminal_accuracy": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "holdout_pass": false,
+        "holdout": {
+          "mass_tv": 0.05586,
+          "center_rms_sigma": 0.2804151687729369,
+          "abs_cov_trace_bias": 0.07766905977652905,
+          "cov_trace_bias": 0.07766905977652905,
+          "radial_ks": 0.08134147306931377,
+          "accuracy_score": 1.2858258170907049,
+          "accuracy_pass": false,
+          "frozen_pass": false,
+          "passed": false,
+          "precision": 0.98296
+        },
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "accuracy_first_arrival": null,
+        "accuracy_passing_checks": 0
+      },
+      "final_lr": [
+        [
+          6.640625e-05,
+          0.0085,
+          0.00425
+        ],
+        [
+          0.00424777237202674
+        ]
+      ],
+      "attribution_receipts": {
+        "native_fixture_byte_identical_to_st5_grid100": true,
+        "first_98_rate_rows_byte_identical": true,
+        "first_rate_difference_step": 99,
+        "first_rate_difference_only_D": true
+      }
+    }
   }
 }

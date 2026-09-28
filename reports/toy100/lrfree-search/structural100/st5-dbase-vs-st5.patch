@@ -1,0 +1,13 @@
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -280,7 +280,9 @@
+                     tester.begin(group["params"])
+             for optimizer, rates, testers in zip((self.opt_g, self.opt_d), self.initial_lrs, self.lr_settle.testers):
+                 for group, rate, tester in zip(optimizer.param_groups, rates, testers):
+-                    group["lr"] = rate * (1. if tester is None else tester.s)
++                    # Attribution ablation: keep only D at its base rate. Its
++                    # stationarity tester still observes the actual D updates.
++                    group["lr"] = rate * (1. if optimizer is self.opt_d or tester is None else tester.s)
+         if self.controller is not None and recipe.critic_payoff_damping:
+             for group in self.opt_d.param_groups:
+                 group["lr"] *= self.controller.critic_scale()

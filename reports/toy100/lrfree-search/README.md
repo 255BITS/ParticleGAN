@@ -77,6 +77,19 @@ a failing holdout. The signal never triggered a critic reopening, and all
 does not test whether a forced critic refit would improve training; no other
 native card or 13-gate task was run for `st7`.
 
+A bounded [online critic-refinement preflight](structural100/critic-refinement-preflight.json)
+rejected its shadow D after
+257 host calls, consuming 771 extra fixed-objective evaluations and skipping
+257 ordinary G updates. Fresh post-hoc batches nevertheless found a critic
+objective gain, so the acceptance rule missed useful refinement; it was
+rejected before any full native gate. An isolated
+[`st5-dbase-qr` grid test](structural100/README.md#st5-dbase-qr-d-base-rate-attribution-on-grid100)
+then kept D at its base LR before payoff damping while retaining the other
+stationarity rules. It **FAILS 0/34** with a failing holdout: 99 modes,
+precision `.9821`, centre RMS `.315σ`, eigenvalue ratios `.159–2.901`, and
+radial KS `.0873`. Higher D rate improved some live metrics but lost a mode
+and did not clear native shape. Neither experiment supports core promotion.
+
 ## Separate source audit: PR #215 GS2 versus PR #217 DV12
 
 The [fixed-protocol comparison](comparison-pr215-pr217/README.md) reruns
