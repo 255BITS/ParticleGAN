@@ -1,0 +1,24 @@
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -302,9 +302,19 @@
+                     tester.restart(group["params"], reopen=True)
+                 else:
+                     tester.begin(group["params"])
+-            for optimizer, rates, testers in zip((self.opt_g, self.opt_d), self.initial_lrs, self.lr_settle.testers):
+-                for group, rate, tester in zip(optimizer.param_groups, rates, testers):
++            # Couple prior's applied intrinsic rate to the non-sigma generator:
++            # the latent table cannot outrun the map that moves its samples.
++            # Each tester still observes its own group at the actual applied rate.
++            generator_scale = min((tester.s for group, role, tester in zip(
++                self.opt_g.param_groups, self.roles[0], self.lr_settle.testers[0])
++                if role == "generator" and not group.get("sigma_group") and tester is not None),
++                default=1.)
++            for optimizer, rates, testers, roles in zip(
++                    (self.opt_g, self.opt_d), self.initial_lrs, self.lr_settle.testers, self.roles):
++                for group, rate, tester, role in zip(optimizer.param_groups, rates, testers, roles):
+                     scale = 1. if tester is None else tester.s
++                    if role == "prior":
++                        scale = min(scale, generator_scale)
+                     if group.get("sigma_group"):
+                         # Sigma learns on generator-scale intrinsic time: its
+                         # settle evidence accumulates in lockstep with G, but
