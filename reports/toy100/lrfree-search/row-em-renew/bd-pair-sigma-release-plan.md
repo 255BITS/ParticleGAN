@@ -246,6 +246,20 @@ bias, coherent particle oscillation, or a small set of moving rows, so another
 controller change would be speculative. A row- or mode-resolved diagnostic is
 needed before proposing a different mechanism.
 
+Saved prior-motion diagnostics add a candidate-specific signal: at step 7000,
+alpha=.75 staggered has row-motion p50/p90/p99 of 0.236/0.581/1.354 sigma,
+with the top 1% of rows accounting for 96.0% of motion energy. Full-tracking
+staggered is 0.216/0.543/1.133 sigma, with 38.9% of energy in the top 1%.
+Alpha=.75 staggered's mode-mean and within-mode motion are 0.260 and 1.747
+sigma; its generator RMS motion is 0.0083 sigma. This flags a sparse-motion
+concentration that tracks with the weak alpha=.75 result, but does not attribute
+that motion to birth/death transport rather than prior gradients. The saved
+diagnostics report invalid row lineage across the interval. Astra therefore
+still recommends no training intervention. The next defensible step is an
+instrumentation-only replay that retains row identities, measuring per-mode
+output-mean contributions from BD departures/arrivals, rows that stay in each
+mode, and generator movement during the failing interval.
+
 ## Remaining custom-host checks
 
 The eight custom22 hosts (`two_pole`, `trajectory`, `residual_student`,
