@@ -1,0 +1,606 @@
+{
+ "status": "PASS",
+ "task": "cover_leftover",
+ "cand": "st10-directadam",
+ "passing_checks": 13,
+ "observations": 24,
+ "first_arrival": 400,
+ "final_streak": 13,
+ "final": {
+  "u_kept": 0.9874383112392033,
+  "content_kept": 1.0004283983226219,
+  "leak_ratio": 0.00014580640202380035,
+  "on_u": 0.9874383211135864,
+  "on_content": 0.5502356290817261,
+  "on_e": -0.00014397483028005809,
+  "pole_rel_err_plus": 0.008303355425596237,
+  "pole_rel_err_minus": 0.00823180377483368,
+  "covered": true,
+  "fail_reasons": "",
+  "leak_frac": -0.9999988079071045,
+  "same_dir": 0.0007928016527289136,
+  "even_norm": 0.0008966856403276324,
+  "odd_norm": 1.130137324333191,
+  "particle_rms": 0.46097856760025024,
+  "host_pass": true
+ },
+ "ema_final": {
+  "u_kept": 0.9124430922816665,
+  "content_kept": 0.9659092900912665,
+  "leak_ratio": 5.244237973355127e-05,
+  "on_u": 0.9124431014060974,
+  "on_content": 0.5312501192092896,
+  "on_e": 4.785068813362159e-05,
+  "pole_rel_err_plus": 0.05901024118065834,
+  "pole_rel_err_minus": 0.06154508516192436,
+  "covered": true,
+  "fail_reasons": "",
+  "leak_frac": -0.9999991059303284,
+  "same_dir": 0.0018259606250301934,
+  "even_norm": 0.0019281695131212473,
+  "odd_norm": 1.0540472269058228,
+  "particle_rms": 0.42744380235671997,
+  "host_pass": true
+ },
+ "final_lr": [
+  [
+   0.00425,
+   0.0085,
+   0.0085,
+   0.00425
+  ],
+  [
+   0.004247470263586568
+  ]
+ ],
+ "seconds": 8.19,
+ "train_seconds": 7.08,
+ "stream_deviations": 0,
+ "warnings": [],
+ "completed_steps": 800,
+ "recipe": {
+  "name": "ka2",
+  "model": "gan",
+  "z_dim": 4,
+  "num_particles": 12,
+  "prior_kind": "particles",
+  "sigma_rel": 0.0,
+  "standardize": true,
+  "num_classes": null,
+  "conditioning": "scalar",
+  "ucd_target": "class",
+  "ucd_weight": 0.02,
+  "alpha_bar": [
+   1.0,
+   0.9,
+   0.5,
+   0.05,
+   0.0001
+  ],
+  "batch_size": 32,
+  "total_steps": null,
+  "continuous_policy": "dv12",
+  "lr": 0.00425,
+  "d_lr_mult": 1.0,
+  "prior_lr_mult": 2.0,
+  "betas": [
+   0.0,
+   0.999
+  ],
+  "prior_betas": null,
+  "reg_coeff": 3.0,
+  "reg_kappa": 1.0,
+  "reg_every": 1,
+  "prior_reg": 0.0,
+  "ema_decay": 0.995,
+  "lr_anneal_start": 0.6,
+  "lr_floor": 0.05,
+  "network_lr_floor": 0.01,
+  "network_lr_horizon_cap": 1600,
+  "reg_anchor_min_decay": 0.9,
+  "reg_anchor_weight": 1.0,
+  "direct_particle_gain": true,
+  "d_guard_ratio": 5.0,
+  "d_guard_min_steps": 200,
+  "latent_damping_max_rate": 0.5,
+  "direct_particle_betas": [
+   0.0,
+   0.9
+  ],
+  "input_noise_std": 0.0,
+  "input_noise_anneal_end": 0.1,
+  "output_noise_std": 0.029,
+  "output_noise_warmup": 0.0,
+  "encoder_mode": "none",
+  "routing_temperature": 0.25,
+  "distance_reduction": "sum",
+  "observation_sigma": 0.03,
+  "reconstruction_weight": 1.0,
+  "initialization": "batch_feature_zero",
+  "amsgrad": true,
+  "critic_r1_real": true,
+  "critic_payoff_damping": true,
+  "output_noise_mode": "learnable",
+  "lr_control": "stationarity",
+  "particle_birth_death": false
+ },
+ "max_gpu_mib": 0.0,
+ "verdict": {
+  "status": "PASS",
+  "attempted": true,
+  "passed": true,
+  "metrics": [
+   {
+    "metric": "u_kept",
+    "value": 0.9874383112392033,
+    "op": ">=",
+    "threshold": 0.85,
+    "status": "PASS",
+    "margin": 0.13743831123920336
+   },
+   {
+    "metric": "content_kept",
+    "value": 1.0004283983226219,
+    "op": ">=",
+    "threshold": 0.75,
+    "status": "PASS",
+    "margin": 0.25042839832262187
+   },
+   {
+    "metric": "leak_ratio",
+    "value": 0.00014580640202380035,
+    "op": "<=",
+    "threshold": 0.2,
+    "status": "PASS",
+    "margin": 0.1998541935979762
+   },
+   {
+    "metric": "pole_rel_err_plus",
+    "value": 0.008303355425596237,
+    "op": "<=",
+    "threshold": 0.2,
+    "status": "PASS",
+    "margin": 0.19169664457440377
+   },
+   {
+    "metric": "pole_rel_err_minus",
+    "value": 0.00823180377483368,
+    "op": "<=",
+    "threshold": 0.2,
+    "status": "PASS",
+    "margin": 0.19176819622516633
+   },
+   {
+    "metric": "same_dir",
+    "value": 0.0007928016527289136,
+    "op": "<=",
+    "threshold": 0.25,
+    "status": "PASS",
+    "margin": 0.2492071983472711
+   }
+  ],
+  "convergence": {
+   "complete": true,
+   "observations": 24,
+   "passing_observations": 13,
+   "minimum_stable_checks": 5,
+   "passing_suffix": 13,
+   "first_pass_step": 400,
+   "stable_from_step": 400,
+   "stable_from_seconds": 3.331,
+   "confirmed_step": 534,
+   "confirmed_seconds": 4.314
+  },
+  "shortfall": 0.0,
+  "confirmation_fraction": 0.6675
+ },
+ "thresholds": [
+  [
+   "u_kept",
+   ">=",
+   0.85
+  ],
+  [
+   "content_kept",
+   ">=",
+   0.75
+  ],
+  [
+   "leak_ratio",
+   "<=",
+   0.2
+  ],
+  [
+   "pole_rel_err_plus",
+   "<=",
+   0.2
+  ],
+  [
+   "pole_rel_err_minus",
+   "<=",
+   0.2
+  ],
+  [
+   "same_dir",
+   "<=",
+   0.25
+  ]
+ ],
+ "clean_status": "PASS",
+ "clean_passing_checks": 13,
+ "clean_first_arrival": 400,
+ "clean_final_streak": 13,
+ "clean_final": {
+  "u_kept": 0.9874383112392033,
+  "content_kept": 1.0004283983226219,
+  "leak_ratio": 0.00014580640202380035,
+  "on_u": 0.9874383211135864,
+  "on_content": 0.5502356290817261,
+  "on_e": -0.00014397483028005809,
+  "pole_rel_err_plus": 0.008303355425596237,
+  "pole_rel_err_minus": 0.00823180377483368,
+  "covered": true,
+  "fail_reasons": "",
+  "leak_frac": -0.9999988079071045,
+  "same_dir": 0.0007928016527289136,
+  "even_norm": 0.0008966856403276324,
+  "odd_norm": 1.130137324333191,
+  "particle_rms": 0.46097856760025024,
+  "host_pass": true
+ },
+ "clean_ema_final": {
+  "u_kept": 0.9124430922816665,
+  "content_kept": 0.9659092900912665,
+  "leak_ratio": 5.244237973355127e-05,
+  "on_u": 0.9124431014060974,
+  "on_content": 0.5312501192092896,
+  "on_e": 4.785068813362159e-05,
+  "pole_rel_err_plus": 0.05901024118065834,
+  "pole_rel_err_minus": 0.06154508516192436,
+  "covered": true,
+  "fail_reasons": "",
+  "leak_frac": -0.9999991059303284,
+  "same_dir": 0.0018259606250301934,
+  "even_norm": 0.0019281695131212473,
+  "odd_norm": 1.0540472269058228,
+  "particle_rms": 0.42744380235671997,
+  "host_pass": true
+ },
+ "clean_verdict": {
+  "status": "PASS",
+  "attempted": true,
+  "passed": true,
+  "metrics": [
+   {
+    "metric": "u_kept",
+    "value": 0.9874383112392033,
+    "op": ">=",
+    "threshold": 0.85,
+    "status": "PASS",
+    "margin": 0.13743831123920336
+   },
+   {
+    "metric": "content_kept",
+    "value": 1.0004283983226219,
+    "op": ">=",
+    "threshold": 0.75,
+    "status": "PASS",
+    "margin": 0.25042839832262187
+   },
+   {
+    "metric": "leak_ratio",
+    "value": 0.00014580640202380035,
+    "op": "<=",
+    "threshold": 0.2,
+    "status": "PASS",
+    "margin": 0.1998541935979762
+   },
+   {
+    "metric": "pole_rel_err_plus",
+    "value": 0.008303355425596237,
+    "op": "<=",
+    "threshold": 0.2,
+    "status": "PASS",
+    "margin": 0.19169664457440377
+   },
+   {
+    "metric": "pole_rel_err_minus",
+    "value": 0.00823180377483368,
+    "op": "<=",
+    "threshold": 0.2,
+    "status": "PASS",
+    "margin": 0.19176819622516633
+   },
+   {
+    "metric": "same_dir",
+    "value": 0.0007928016527289136,
+    "op": "<=",
+    "threshold": 0.25,
+    "status": "PASS",
+    "margin": 0.2492071983472711
+   }
+  ],
+  "convergence": {
+   "complete": true,
+   "observations": 24,
+   "passing_observations": 13,
+   "minimum_stable_checks": 5,
+   "passing_suffix": 13,
+   "first_pass_step": 400,
+   "stable_from_step": 400,
+   "stable_from_seconds": null,
+   "confirmed_step": 534,
+   "confirmed_seconds": null
+  },
+  "shortfall": 0.0,
+  "confirmation_fraction": 0.6675
+ },
+ "primary_scoring": "noisy",
+ "noisy_equals_clean": true,
+ "eval_output_noise": true,
+ "eval_scope": "learned_residual_parameters",
+ "budget": 800,
+ "test_steps": null,
+ "pass_rule": "frozen protocol.test_verdict: 24 observations at ceil(i*budget/24), passing suffix >= 5 and every final live threshold (noisy scoring of record)",
+ "custom22": {
+  "engine": "custom22-engine-1",
+  "engine_sha256": "ee95ec804be45b8bd74e10be3bf67c8a61fb340a5ca08fa3c7dccbe2d773a798",
+  "binding_sha256": "bae0aaaa93c13bbf8849122f4557424bd427236169b8ba467e4df265db030017",
+  "sources": {
+   "source_commit": "fe7ed2553dba30ae4979577c0cf17a201fd043f1",
+   "files": {
+    "benchmarks/__init__.py": "53ba1483505036be295d73f5f3308bffb951e9414bf2b1139d8756e260e3b830",
+    "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+    "benchmarks/locked_shared/two_pole.py": "65237880beaf0e102f80b56f7362f138e08b27d0b27c83e60bbb17ebffbec3ce",
+    "benchmarks/locked_shared/trajectory.py": "f6f7b5578f4bfaf09c286c1681033186d009d0224c03fe789ac639cdacc3ea10",
+    "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+    "benchmarks/locked_shared/hosts/residual_student.py": "42c4dd16dae443b8bd8be5766c061e1ffe8b6defb920f9ac8cc294360bb0576f",
+    "benchmarks/locked_shared/hosts/unipolar.py": "aeed81a291dc0d559775c9e061bfbd761b70a74d5a39b67826e1021d1767a258",
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "7cf5e66dc63728612f5b4cd8291263b7e9b8e61913cb47062f35f0ba910c13ca",
+    "benchmarks/locked_shared/hosts/cover_leftover.py": "d6556a851ee6b323b2aaa0fa3a366d1e230bc02b7cb6b1e7ac26422599482865",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "8ac5536238f77627be5fea8eb0321d50f5b8e95ffd9fdf357c68a73aa8ef094e",
+    "benchmarks/locked_shared/hosts/mid_scale_identity.py": "ca36f2badc34e82f7f0540303deec87a6f56c2ef54aa7d5f11a8696eecb98f49",
+    "benchmarks/legacy/__init__.py": "83de2dd27bb1fec5ba74b066b49274ba161e4e480037129e3c99e13b04767f04",
+    "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+    "benchmarks/legacy/gan_loss.py": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+    "benchmarks/legacy/grad_regularizers.py": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d",
+    "benchmarks/toy100/device.py": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67"
+   },
+   "specs_sha256": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883",
+   "manifest_sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df"
+  },
+  "spec": {
+   "name": "cover_leftover",
+   "family": "existing_behavior",
+   "runner": "legacy",
+   "split": "development",
+   "phase": "fit",
+   "tier": "required",
+   "importance_reason": "Coverage preserves both content and the unwanted remainder constraint.",
+   "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+   "steps": 800,
+   "thresholds": [
+    [
+     "u_kept",
+     ">=",
+     0.85
+    ],
+    [
+     "content_kept",
+     ">=",
+     0.75
+    ],
+    [
+     "leak_ratio",
+     "<=",
+     0.2
+    ],
+    [
+     "pole_rel_err_plus",
+     "<=",
+     0.2
+    ],
+    [
+     "pole_rel_err_minus",
+     "<=",
+     0.2
+    ],
+    [
+     "same_dir",
+     "<=",
+     0.25
+    ]
+   ]
+  },
+  "spec_reference": "study/episodes/cosine__cover_leftover.json.gz",
+  "parity": {
+   "id": "bb6eab2c996f60d0-035da501b2ef-ee95ec804be4-97831f8c55ab",
+   "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/bb6eab2c996f60d0-035da501b2ef-ee95ec804be4-97831f8c55ab.json",
+   "status": "PASS",
+   "steps": 1000,
+   "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py"
+  },
+  "resources": {
+   "num_particles": 12,
+   "z_dim": 4,
+   "batch_size": 32
+  },
+  "aux": {
+   "particle_l2": 0.0,
+   "vicreg_weight": 0.0,
+   "cover_weight": 1.5,
+   "fm_weight": 0.0
+  },
+  "blockers_applied": [
+   "B5 one latent bandwidth on the union of both tables"
+  ],
+  "extended_scope": false,
+  "groups": [
+   {
+    "optimizer": "opt_g",
+    "group": 0,
+    "role": "generator",
+    "owner": "generator",
+    "initial_lr": 0.00425,
+    "betas": [
+     0.0,
+     0.999
+    ],
+    "amsgrad": true,
+    "parameters": 8
+   },
+   {
+    "optimizer": "opt_g",
+    "group": 1,
+    "role": "prior",
+    "owner": "prior",
+    "initial_lr": 0.0085,
+    "betas": [
+     0.0,
+     0.999
+    ],
+    "amsgrad": true,
+    "parameters": 48
+   },
+   {
+    "optimizer": "opt_g",
+    "group": 2,
+    "role": "prior",
+    "owner": "prior",
+    "initial_lr": 0.0085,
+    "betas": [
+     0.0,
+     0.999
+    ],
+    "amsgrad": true,
+    "parameters": 48
+   },
+   {
+    "optimizer": "opt_g",
+    "group": 3,
+    "role": "generator",
+    "owner": "log_output_sigma",
+    "initial_lr": 0.00425,
+    "betas": [
+     0.0,
+     0.999
+    ],
+    "amsgrad": true,
+    "parameters": 1
+   },
+   {
+    "optimizer": "opt_d",
+    "group": 0,
+    "role": "critic",
+    "owner": "critic",
+    "initial_lr": 0.00425,
+    "betas": [
+     0.0,
+     0.999
+    ],
+    "amsgrad": true,
+    "parameters": 7361
+   }
+  ],
+  "construction_global_rng_untouched": true,
+  "ka2_calls": 800,
+  "penalty_calls": 800,
+  "completed_steps": 800,
+  "initial": null,
+  "train_seconds": 6.17,
+  "device": "cpu",
+  "initialization": "batch_feature_zero"
+ },
+ "header": {
+  "cand": "st10-directadam",
+  "task": "cover_leftover",
+  "package_root": "/ml2/hypergan/lrfree-20260926/candidates/dv12-st-directadam/package",
+  "package_sha256": "bb6eab2c996f60d08a1c5807bb09f63757b3d63e028fb1d4770360076a74e8a4",
+  "overrides": {
+   "alpha_bar": [
+    1.0,
+    0.9,
+    0.5,
+    0.05,
+    0.0001
+   ],
+   "amsgrad": true,
+   "batch_size": 128,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "conditioning": "scalar",
+   "continuous_policy": "dv12",
+   "d_guard_min_steps": 200,
+   "d_guard_ratio": 5.0,
+   "d_lr_mult": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.9
+   ],
+   "direct_particle_gain": true,
+   "distance_reduction": "sum",
+   "ema_decay": 0.995,
+   "encoder_mode": "none",
+   "initialization": "batch_feature_zero",
+   "input_noise_anneal_end": 0.1,
+   "input_noise_std": 0.0,
+   "latent_damping_max_rate": 0.5,
+   "lr": 0.00425,
+   "lr_anneal_start": 0.6,
+   "lr_control": "stationarity",
+   "lr_floor": 0.05,
+   "model": "gan",
+   "network_lr_floor": 0.01,
+   "network_lr_horizon_cap": 1600,
+   "num_classes": null,
+   "num_particles": 12,
+   "observation_sigma": 0.03,
+   "output_noise_mode": "learnable",
+   "output_noise_std": 0.029,
+   "output_noise_warmup": 0.0,
+   "prior_betas": null,
+   "prior_kind": "particles",
+   "prior_lr_mult": 2.0,
+   "prior_reg": 0.0,
+   "reconstruction_weight": 1.0,
+   "reg_anchor_min_decay": 0.9,
+   "reg_anchor_weight": 1.0,
+   "reg_coeff": 3.0,
+   "reg_every": 1,
+   "reg_kappa": 1.0,
+   "routing_temperature": 0.25,
+   "sigma_rel": 0.0,
+   "standardize": true,
+   "total_steps": null,
+   "ucd_target": "class",
+   "ucd_weight": 0.02,
+   "z_dim": 4
+  },
+  "options": {
+   "evaluation_generate": "plain",
+   "serial_backward_argument": true,
+   "strict_streams": true,
+   "initialization": "batch_feature_zero",
+   "diagnostics": true,
+   "save_final_state": false,
+   "ring_frozen_control": false,
+   "eval_output_noise": true,
+   "image_prior_perturb": false
+  },
+  "auto_detected": {
+   "evaluation_generate": "plain",
+   "serial_backward_argument": true
+  },
+  "declared_options": {},
+  "device": "cpu",
+  "cuda_visible_devices": "0",
+  "torch": "2.13.0+cu126",
+  "cuda": "12.6",
+  "gpu": null,
+  "host": "pop-os",
+  "python": "/tmp/pr38-default-env/bin/python"
+ }
+}

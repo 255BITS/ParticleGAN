@@ -1,5 +1,16 @@
 # LR-free GAN base search — September 27
 
+## Direct-particle follow-up (September 28)
+
+The [direct-particle Adam report](direct-particle-adam/README.md) archives a
+small `st-10` policy patch and its eight custom-host reruns. `two_pole` changes
+from FAIL 0/24 to PASS 7/24; the other seven custom hosts reproduce every
+non-time observation row exactly. This makes the custom subtotal **6/8** and
+implies **17/22** from the unchanged 11 quick and 0 native results. It does
+not fix a native 100-Gaussian gate. The separate latest grid100 structural
+lanes all failed; the paired birth/death graft was the strongest directional
+improvement, but still missed centre and covariance limits.
+
 ## 22-check leaderboard: all eight custom hosts now run (September 27, night)
 
 The eight custom hosts of the 22-toy suite now run for any candidate package in the LR-free harness

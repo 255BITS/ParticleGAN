@@ -1,0 +1,274 @@
+{
+ "level": "L1",
+ "status": "PASS",
+ "package_root": "/ml2/hypergan/lrfree-20260926/candidates/dv12-st-directadam/package",
+ "package_sha256": "dd8b18b8d02396d6822be3aaaa06ac4a4458e270295a37c22c17c5d275976e74",
+ "overrides": {
+  "alpha_bar": [
+   1.0,
+   0.9,
+   0.5,
+   0.05,
+   0.0001
+  ],
+  "amsgrad": true,
+  "batch_size": 128,
+  "betas": [
+   0.0,
+   0.999
+  ],
+  "conditioning": "scalar",
+  "continuous_policy": "dv12",
+  "d_guard_min_steps": 200,
+  "d_guard_ratio": 5.0,
+  "d_lr_mult": 1.0,
+  "direct_particle_betas": [
+   0.0,
+   0.9
+  ],
+  "direct_particle_gain": true,
+  "distance_reduction": "sum",
+  "ema_decay": 0.995,
+  "encoder_mode": "none",
+  "initialization": "batch_feature_zero",
+  "input_noise_anneal_end": 0.1,
+  "input_noise_std": 0.0,
+  "latent_damping_max_rate": 0.5,
+  "lr": 0.00425,
+  "lr_anneal_start": 0.6,
+  "lr_control": "stationarity",
+  "lr_floor": 0.05,
+  "model": "gan",
+  "network_lr_floor": 0.01,
+  "network_lr_horizon_cap": 1600,
+  "num_classes": null,
+  "num_particles": 12,
+  "observation_sigma": 0.03,
+  "output_noise_mode": "learnable",
+  "output_noise_std": 0.029,
+  "output_noise_warmup": 0.0,
+  "prior_betas": null,
+  "prior_kind": "particles",
+  "prior_lr_mult": 2.0,
+  "prior_reg": 0.0,
+  "reconstruction_weight": 1.0,
+  "reg_anchor_min_decay": 0.9,
+  "reg_anchor_weight": 1.0,
+  "reg_coeff": 3.0,
+  "reg_every": 1,
+  "reg_kappa": 1.0,
+  "routing_temperature": 0.25,
+  "sigma_rel": 0.0,
+  "standardize": true,
+  "total_steps": null,
+  "ucd_target": "class",
+  "ucd_weight": 0.02,
+  "z_dim": 4
+ },
+ "engine_sha256": "ee95ec804be45b8bd74e10be3bf67c8a61fb340a5ca08fa3c7dccbe2d773a798",
+ "engine_version": "custom22-engine-1",
+ "torch": "2.13.0+cu126",
+ "device": "cpu",
+ "steps": 1000,
+ "results": [
+  {
+   "config": "c1",
+   "resources": {
+    "num_particles": 12,
+    "z_dim": 4,
+    "batch_size": 128
+   },
+   "device": "cpu",
+   "steps_requested": 1000,
+   "steps_compared": 1000,
+   "status": "PASS",
+   "first_mismatch": null,
+   "seconds": 22.4,
+   "coverage": {
+    "ka2_calls": 1000,
+    "blend_reached": true,
+    "anchor_started": true,
+    "ema_updates": 150,
+    "ema_reseeds": 0,
+    "guard_clipped": 0,
+    "a2": {
+     "observed": 12000,
+     "total": 12000,
+     "started": false
+    },
+    "settle": {
+     "g0": {
+      "windows": 5,
+      "s": 1.0,
+      "counts": {
+       "drift": 0,
+       "stationary": 0,
+       "mixed": 0,
+       "inconclusive": 5,
+       "reversal": 0,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     },
+     "g1": {
+      "windows": 7,
+      "s": 1.0,
+      "counts": {
+       "drift": 2,
+       "stationary": 0,
+       "mixed": 0,
+       "inconclusive": 5,
+       "reversal": 0,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     },
+     "g2": {
+      "windows": 6,
+      "s": 1.0,
+      "counts": {
+       "drift": 2,
+       "stationary": 0,
+       "mixed": 0,
+       "inconclusive": 4,
+       "reversal": 0,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     },
+     "d0": {
+      "windows": 5,
+      "s": 0.5,
+      "counts": {
+       "drift": 1,
+       "stationary": 1,
+       "mixed": 0,
+       "inconclusive": 3,
+       "reversal": 1,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     }
+    },
+    "controller": {
+     "mobility": 0.6561033968912094,
+     "game_trust": 0.9982696731258163,
+     "payoff_error": 0.5415657976146603
+    },
+    "last_output_sigma": 0.01234773825854063
+   }
+  },
+  {
+   "config": "c2",
+   "resources": {
+    "num_particles": 512,
+    "z_dim": 2,
+    "batch_size": 64
+   },
+   "device": "cpu",
+   "steps_requested": 1000,
+   "steps_compared": 1000,
+   "status": "PASS",
+   "first_mismatch": null,
+   "seconds": 17.51,
+   "coverage": {
+    "ka2_calls": 1000,
+    "blend_reached": true,
+    "anchor_started": true,
+    "ema_updates": 0,
+    "ema_reseeds": 0,
+    "guard_clipped": 5,
+    "a2": {
+     "observed": 60249,
+     "total": 512000,
+     "started": true
+    },
+    "settle": {
+     "g0": {
+      "windows": 9,
+      "s": 1.0,
+      "counts": {
+       "drift": 4,
+       "stationary": 1,
+       "mixed": 0,
+       "inconclusive": 4,
+       "reversal": 2,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     },
+     "g1": {
+      "windows": 27,
+      "s": 0.5,
+      "counts": {
+       "drift": 18,
+       "stationary": 2,
+       "mixed": 0,
+       "inconclusive": 7,
+       "reversal": 3,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     },
+     "g2": {
+      "windows": 8,
+      "s": 1.0,
+      "counts": {
+       "drift": 2,
+       "stationary": 0,
+       "mixed": 0,
+       "inconclusive": 6,
+       "reversal": 0,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     },
+     "d0": {
+      "windows": 8,
+      "s": 1.0,
+      "counts": {
+       "drift": 4,
+       "stationary": 2,
+       "mixed": 2,
+       "inconclusive": 0,
+       "reversal": 4,
+       "frozen": 0,
+       "dropped_pairs": 0,
+       "reopens": 0,
+       "restarts": 0,
+       "rebases": 0
+      }
+     }
+    },
+    "controller": {
+     "mobility": 0.48403150623196745,
+     "game_trust": 1.0,
+     "payoff_error": 0.438001482244841
+    },
+    "last_output_sigma": 0.010990672744810581
+   }
+  }
+ ],
+ "time": "2026-09-27T22:12:33"
+}
