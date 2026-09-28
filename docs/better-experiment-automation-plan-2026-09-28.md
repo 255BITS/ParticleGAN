@@ -3,7 +3,8 @@
 **ParticleGAN Forge** turns new ideas into comparable evidence through cheap gates,
 shared leaderboards, and a memory of what the project has already tried.
 
-Date: 2026-09-28. Status: implementation plan. Inventory baseline: `92dc0319`.
+Date: 2026-09-28. Status: implementation plan. Initial inventory: `92dc0319`;
+required additional source: PR #155 at `0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b`.
 
 ## Goal and decisions
 
@@ -32,18 +33,31 @@ Decisions from this discussion:
   agent memory is required to propose, execute, compare, or learn.
 - One compiled, searchable experiment-memory file explains what worked, what
   failed, what remains unknown, and what to try next.
-- No seed-only experiments. Preserve existing seed evidence without launching
-  new seed sweeps. Prefer metrics and leaderboards over inspecting images.
+- No seed-only idea experiments: screening uses one fixed protocol seed and
+  isolated named RNG streams. A finished public-default candidate gets one
+  preregistered robustness stage across a fixed seed set; this is a promotion
+  stage of that candidate, not another search. Prefer metrics over images.
+- Clock-free continuous learning is an explicit eligibility contract, separate
+  from scheduled training. Scoring with live or EMA weights is also explicit;
+  whether EMA is acceptable for a public-default claim remains undecided.
 - Refactoring and sweeping changes are allowed. Preserve existing evidence and
   reproducible protocols while moving new research onto the common interface.
 
 ## 1. What already exists
 
-At this revision there are 181 tracked paths under `benchmarks/`, 100 under
+At the initial revision there are 181 tracked paths under `benchmarks/`, 100 under
 `experiments/`, another 467 Python/shell files under `reports/`, 544 report
 Markdown files, and 673 config files. These are **file counts, not independent
 experiment counts**: many are shared helpers, frozen source copies, reports,
 configs, or repeated descriptions of the same run.
+
+These counts do not cover the later LR-free work. Phase A must also import
+`reports/toy100/lrfree-search/**` from the pinned
+[PR #155 source tree](https://github.com/255BITS/ParticleGAN/tree/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search):
+358 tracked paths at this snapshot, including 42 Markdown and 168 JSON files.
+These are another source inventory, not 358 new experiments or counts to add
+without deduplication. Record each source revision independently and refresh the
+inventory when later evidence is imported; `92dc0319` is not a completeness cutoff.
 
 Important foundations:
 
@@ -56,6 +70,7 @@ Important foundations:
 | [Continuous probe](../benchmarks/toy100/continuous_probe.py) | Uninterrupted hold, extended training, target-shift recovery, matched frozen controls |
 | [Selected K3P declaration](../reports/toy100/current-research-base.json) | Exact formulation, complete mechanism/response/latent drivers, known passes and remaining failures |
 | [Gap-fill evidence](../reports/toy100/gap-fill-20260925/README.md) | Candidate lineage, task-level evidence, source hashes, historical cross-candidate comparison |
+| [LR-free harness and GPU pool](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/README.md) | Existing submit/pool/wait tools, task fixtures, applied-rate receipts, stream-parity audits, package hashes, and result ledger; extend these instead of assuming queue infrastructure is absent |
 
 The current transfer protocol already calls importance levels `tier`. The new
 cost/progression field must be named `qualification_tier`; retain importance as
@@ -193,8 +208,19 @@ An experiment card records:
 
 - Stable idea ID, exact candidate revision, parent, technique tags, hypothesis,
   changed factors, and links to related/duplicate ideas.
+- `mechanism_class`: `structural`, `floor_constant`, or `sampling_only_patch`,
+  with a rationale and secondary classes for mixed mechanisms. Record whether
+  training dynamics, public sampling, or both change. A structural-first view
+  can declare that preference; the class itself never changes a numeric verdict.
+  The LR-free research recommendation should prefer structural fixes and retain
+  sampling-only row EM as a diagnostic patch rather than a training fix.
 - View/protocol versions, task identity, fixed seed/fixture policy, full effective
   config, implementation/harness hashes, and training/evaluation budgets.
+- `claim_contract`: scheduled versus clock-free, shared-setting requirement,
+  scoring weights (`live`/`ema`), and training/public-sampling/evaluation laws.
+  Record EMA definition/decay and RNG/initializer manifests, not only a seed.
+- `applicability`: supported, unsupported, or unknown, with required API/host
+  capabilities, parity receipt, blocker reason, and the adapter work needed.
 - Raw metrics and their meanings/directions, live versus EMA, complete versus
   partial windows, controls, artifact references, and provenance quality.
 - Outcome per task and view; failure reason/first failing step where available;
@@ -218,6 +244,14 @@ An execution attempt separately reports `queued`, `running`, `completed`,
 `INVALID`, `NOT_RUN`, or `BLOCKED`. Infrastructure failure is not scientific
 evidence against the idea. Missing evidence never earns a pass.
 
+A public-API extension rejected by a custom host is `BLOCKED` at qualification,
+with the exact capability mismatch. Preserve the original attempt's `ERROR`
+and exception rather than rewriting raw history. It is neither a candidate
+`FAIL` nor a passing/skipped task: it stays in the required denominator and
+prevents full qualification until the host is adapted and parity is verified.
+Do not repeatedly retry a known incompatibility as though it were a transient
+worker error. Changing the supported-use scope requires a new explicit view.
+
 Qualification is a derived field **per candidate revision, protocol, and view**:
 highest fully passed tier, next eligible task, blocker, and evidence completeness.
 A Tier 3 failure leaves its Tier 2 result visible; it does not rewrite history.
@@ -230,6 +264,57 @@ attach to one execution. Use per-attempt locks and a single reducer for shared
 outputs. Recovery after a crash inspects the saved request, process/lock state,
 and completion receipt before resuming or creating a new attempt. Never silently
 overwrite failed evidence or count two attempts as two independent ideas.
+
+### Paired initialization and random streams
+
+Each new comparison protocol fixes one screening seed and a versioned derivation
+of named `init`, `data`, `prior`, `noise`, and `eval` streams. Record the resolved
+seed, stream bindings/derivation, RNG implementation/runtime, initializer version,
+and fixture hashes in the request and evidence compatibility key. Stream identity
+must not depend on candidate name, worker, GPU assignment, or queue order.
+
+Isolate streams further by component and draw purpose. One extra draw by a new
+mechanism, an evaluation call, or a changed model shape must not shift unrelated
+data, prior, noise, or initialization draws. New stochastic mechanisms get a
+declared private stream. Audit draw counts/positions and digests for the shared
+consumers, aiming for **zero unintended stream deviations**; record intentional
+sampling differences separately. Undeclared drift invalidates a paired comparison.
+
+"Same init" means the same initializer and initialization streams, with identical
+draws for shared compatible parameter components. It does not require identical
+weights for different architectures or shapes. Changed components get stable
+bindings without consuming other components' draws. Save all stream states in
+checkpoints and verify that resume and evaluation preserve the training streams.
+
+Historical #155 fixtures have their own stream layout. Preserve and audit that
+layout for historical replay; introducing Forge's split-stream scheme is a new
+protocol revision, not permission to relabel older results as equivalent.
+Different seeds, initializers, stream bindings, or sampling laws are different
+evidence. Never substitute or average them away under one receipt identity.
+
+### Screening and public-default robustness
+
+One deterministic screening run is one draw. A small difference in centre error
+is not a demonstrated mechanism improvement just because it crosses a threshold.
+Import the review's reported sub-0.03σ sensitivity findings with their original
+scope; do not turn that observation into a universal significance threshold.
+
+After a finished candidate is frozen and passes its applicable qualification
+gates, a **public-default promotion claim requires one preregistered robustness
+stage**. Freeze the seed list, tasks, controls, budgets, scoring weights,
+aggregation, and acceptance rule before execution. Run the same candidate on that
+fixed set, preserve every outcome and denominator, and forbid seed selection or
+parameter tuning inside this stage. This is a stage of the finished experiment,
+not a set of new idea variants or an automatic sweep for every screen survivor.
+The stage stays `BLOCKED` until the public-default claim's live/EMA eligibility
+policy is explicitly decided and frozen. Observing which weights win the
+robustness tests cannot settle that decision retrospectively.
+
+The promotion stage is the explicit exception to seed-only submission rejection.
+Its requests must reference the frozen candidate and registered seed set. Each
+seed has distinct evidence identity; reuse is possible only for an exact match
+including that seed and the full protocol. A failed/partial robustness stage
+cannot confer a public-default claim, even when the original screening run passed.
 
 ## 4. Tier gates: cheap rejection, then stronger evidence
 
@@ -251,6 +336,23 @@ If any proposed smoke criterion rejects an established useful reference, examine
 whether it is detecting a relevant failure or an accidental implementation bias
 before freezing the protocol.
 
+**Phase D adoption blocker:** replay the #155 lineages through this proposed
+screen before making it the default. Those lineages expose failures in
+`img_bars4`, `mode_hold`, `img_intensity2`, `vector_unequal_mass`, and native100
+that the three cheap hosts may not predict. First regrade compatible saved
+evidence; run only missing comparisons against frozen fixtures and packages.
+If the proposed hosts are unsupported, report that calibration gap explicitly.
+
+Publish a per-lineage matrix and counts of false accepts (smoke passes, later
+goal-relevant reference fails) and false rejects (smoke fails, independent later
+reference succeeds), plus rejection cost and completeness. Define that reference
+without including the proposed smoke predicate itself, which would make false
+rejections impossible by definition. Missing, incompatible, or blocked evidence
+stays unknown rather than entering either count. Agree on cost/error acceptance
+criteria before the replay; incomplete or unacceptable calibration blocks Phase E
+adoption. Revise the smoke set/order in a new protocol if the saved FLOPs do not
+justify its missed failures or useful candidates lost.
+
 The ring endurance task has a **maximum total budget of 7,500 updates**: 1,200
 initial updates, up to 4,800 settling updates seeking the first 200 consecutive
 qualifying live checks, then 1,200 hold updates and 300 extension updates. The
@@ -269,15 +371,21 @@ Protocol rules:
   counts, budgets, schedules, and permitted early stops before a campaign.
 - Recompute verdicts from complete recorded evidence using existing evaluators.
   A process exiting successfully or a trainer writing `PASS` is insufficient.
-- Score live weights for live qualification. Preserve EMA and best-checkpoint
-  metrics as separate diagnostics. A good earlier checkpoint cannot hide late
-  collapse, missing modes, or poor final distribution fidelity.
+- Preserve live scoring for existing live-qualified protocols, including #155.
+  Record paired EMA results separately with exact decay and sampling law; the
+  review reports EMA .995 passing 3/3 on D-tracking runs, while whether that is
+  acceptable for the product remains **unresolved**. A future view can explicitly
+  qualify EMA, but cannot silently replace a live failure, pool live/EMA results,
+  or select the better weights after observing scores. Averaging the evaluated
+  generator is distinct from an EMA critic used inside a training mechanism.
+  Best-checkpoint results cannot hide later collapse under either policy.
 - Preserve complete observation/sustained-pass requirements. For transfer hosts,
   the existing gate uses 24 observations and a terminal passing suffix; for native
   tasks, retain both coverage and accuracy evidence.
 - Endurance must continue the candidate's own trained state, optimizer moments,
-  random streams, and original schedule horizon. Do not restart or stretch
-  annealing simply because the requested training duration increased. The current
+  and random streams. For a **scheduled** candidate, preserve its original schedule
+  horizon: do not restart or stretch annealing because training lasts longer. This
+  earns scheduled-endurance evidence, not clock-free eligibility. The current
   [`--steps` override changes schedules](toy100.md#run-every-problem-or-inspect-one),
   so it cannot serve as an exact-prefix screen.
 - A frozen or nonlearning system must not qualify merely because its numbers are
@@ -300,6 +408,41 @@ by observed rejection value per measured cost, while preserving a frozen order
 for each campaign. Do not early-stop on an unvalidated noisy signal. Cap tasks,
 candidates, and campaigns independently so a faulty mechanism cannot spend an
 unbounded budget before producing its first useful result.
+
+### Additional eligibility for clock-free / "LR-free" claims
+
+The #155 goal is no horizon-driven LR or noise schedule, one setting across tasks,
+and continuous learning. Register that as a required claim contract. A scheduled
+K3P pass or a constant-LR run does not establish this contract.
+
+- Require effective rates and adaptation decisions to depend only on declared
+  learning state/statistics, not step/epoch labels, elapsed time, planned horizon,
+  fixed release steps, or evaluator feedback. One shared setting must apply across
+  tasks; fixed host resource/shape differences are declared by the task, not tuned
+  per-candidate settings.
+- Audit the source and applied-rate/decision receipts for hidden clocks, including
+  table-stationarity ladders, warmups, freeze/release milestones, and counter-driven
+  optimizer corrections. Saving a counter in a checkpoint does not make it a
+  state-based rule. Document allowed state and every counter's effect; an
+  unexplained clock dependency blocks the clock-free claim.
+- With identical permitted learning state and RNG state, changing the external
+  step label or requested stopping horizon must not change the next update.
+  Verify common-prefix parity for different evaluation budgets and full-state
+  checkpoint continuation. Evaluation deadlines may bound compute, but must not
+  control the learner's rates, noise, or decisions.
+- Require longer native continuation for this claim: preserve the 7k prefix and
+  continue the same state to at least 14k, with dense observations around observed
+  late releases and the frozen terminal quality/holdout checks. Predeclare any
+  longer continuation needed from the clock audit. The review's dt075 grid and
+  staggered failures after the stationarity ladder released are mandatory
+  calibration cases once their exact package/fixture receipts are imported.
+- Require continued capacity to learn, not just low motion. Pair quality/hold
+  checks with an appropriate sustained adaptation test and its negative control.
+  Report finite tested duration; a 7k or 14k pass cannot prove indefinite learning.
+
+Failure of this eligibility contract disqualifies the clock-free claim, not the
+candidate's already measured scheduled or ordinary quality results. Unsupported
+instrumentation is a blocker, not an inferred scientific failure.
 
 ## 5. Queue, GPU workers, and centralized logs
 
@@ -385,13 +528,24 @@ several agents feed several GPUs without assembling logs from each worktree.
 Store one candidate-by-task evidence matrix. Views select requirements and
 ranking rules from it; creating another view must not trigger another complete
 training sweep. Shared evidence is reusable only when task, candidate revision,
-measurement protocol, budget, and runtime compatibility match.
+measurement protocol, budget, seed, RNG/initializer/fixture manifest, sampling
+law, scoring weights, and runtime compatibility match.
 
 Every board should show candidate/parent, exact revision, highest passed tier,
 per-tier status and pass denominator, missing/blocked tasks, principal raw
 metrics, first blocker, cost, and next action. Show failed and partial candidates
 by default, with filters for tier, goal, family, outcome, and evidence quality.
 Keep unmeasured candidates visible as unranked rows.
+
+Show cost **beside pass counts**: required passes/total, FAIL, BLOCKED, scoring
+weights, wall time, relative cost against a named reference, and compute/memory
+where available. Break out training, sampling/calibration, and evaluation costs
+when measurable. For example, #155's fresh-reservoir sampler has native100 **3/3**
+alongside **4.4–4.8× reported wall time**; its full22 result is **10 PASS / 4 FAIL /
+8 BLOCKED** after mapping the recorded pretraining parity errors. Neither the
+three native passes nor the implementation blockers should hide the other facts.
+Treat that cost multiplier as a historical measurement under the reported runtime,
+not a portable speed guarantee.
 
 Compare only compatible cohorts. Full-quality candidates should not lose to a
 short screen because the latter omitted difficult tests. Filter by qualified
@@ -405,10 +559,12 @@ Initial views:
 | View | State and interpretation |
 | --- | --- |
 | Discriminator stability | First implemented qualification profile: bounded learning, useful quality, and stationary endurance |
+| Clock-free continuous learning | Required additional eligibility whenever "LR-free" is claimed: shared settings, no hidden schedule, native continuation and continued adaptation |
 | Quality / coverage | Alternate readout of the same evidence; separates ordinary quality from endurance failures |
+| Live / EMA | Separate explicit scoring policies; retain live historical gates and paired EMA evidence. Public-default acceptability of EMA remains an open decision |
 | Adaptation | Later profile requiring target-shift recovery and its controls |
 | Monotonic progress | Future design only; later choose appropriate error/quality signals, tolerances, windows, and improvement requirements. Do not assume GAN losses should decrease monotonically |
-| Production/domain readiness | Later application-specific views combining relevant toy evidence with actual target-workload tests |
+| Production/domain readiness | Later application-specific views combining target-workload tests with the preregistered fixed-seed robustness stage for a finished public-default candidate |
 
 Measure the automation itself: cost to reject, cost to qualify, rejection rate
 by tier, tasks avoided after rejection, evidence reuse rate, and incomplete/error
@@ -433,11 +589,25 @@ importers produce one normalized card per exact experiment revision with explici
 links to source evidence. They must not edit the shared compiled file directly.
 Map workers can run in parallel because each owns different records.
 
+The initial import includes the pinned #155 LR-free lineages, not just the earlier
+K3P gap-fill report. Bind their frozen host fixtures, initializer and stream
+receipts, package/source manifests, overrides, applied-rate traces, raw result
+files, parity refusals, and controls. Copy compact supporting evidence into repo
+records with original paths/hashes; mark unavailable local checkpoints or samples.
+Snapshot later follow-ups separately when obtained. A documentation-only claim
+with no bound result stays narrative evidence, not a newly verified gate pass.
+
 Prefer structured configs, result snapshots, event streams, and evaluator outputs.
 Use Markdown to recover hypotheses, explanations, and recommendations, citing the
 specific source section. Mark narrative-only claims as such. Do not infer a pass
 from positive prose, a failure from a missing file, or a scientific outcome from
 the number of scripts in a directory.
+
+Track corrections and superseded reports explicitly. In #155, clean versus noisy
+public sampling changed the interpretation of earlier scores. Pin the actual
+sampling law and scorer revision from the run; do not combine a historical helper
+README's policy with a newer result or treat a sampling-only fix as a training
+mechanism improvement.
 
 Record source hashes and mapper/schema versions so unchanged sources need not be
 mapped again. Preserve distinctions between negative controls and candidate
@@ -498,6 +668,30 @@ Neither `b_cap` nor critic anchoring should receive a universal works/doesn't-wo
 label from these rows. The frozen control's failure is expected supporting
 evidence for recovery, not another failed technique.
 
+### Required LR-free history and calibration cards
+
+Import at least these additional lineages and issues from #155:
+
+| Evidence family | What the card must retain | Why Forge needs it |
+| --- | --- | --- |
+| LR-free quick/native and custom-host lineages | Each exact package's quick, custom, native and continuation outcomes; initialization/scoring policy | Calibrate the proposed smoke set against bars4, mode_hold, intensity2, unequal_mass and native failures, rather than assume short hosts predict them |
+| `structural100` 14k extension | Verified 7k prefix parity, full 14k metrics/holdout, original package and fixture | Demonstrates how to extend the evaluator budget without changing the learner and how ordinary short results can remain insufficient |
+| Fresh-reservoir `row-em-renew` | Native 3/3; 4.4–4.8× wall time; all22 10 PASS / 4 FAIL / 8 raw ERROR; `_sigma_intrinsic_scale` parity refusal | Preserve a useful sampling diagnostic, classify it as `sampling_only_patch`, expose cost, and normalize unsupported custom hosts to BLOCKED |
+| D-tracking / floor changes | Distinct floor constants, package hashes, live and EMA results at matching checkpoints | Keep structural changes separate from tuned floors, preserve failed terminal streaks, and make EMA acceptability an explicit decision |
+
+Pinned sources: [LR-free overview](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/README.md),
+[structural continuation](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/structural100/README.md),
+[sampler results and cost](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/README.md),
+[all22 receipt](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/all22-summary.json),
+[D-tracking follow-up](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md).
+
+The review additionally reports dt075's grid/staggered 14k failures after ladder
+release, EMA .995 D-tracking 3/3, and sub-0.03σ centre-error sensitivity. Their
+exact later receipts must be bound during import: these particular claims were
+not located in the pinned #155 snapshot. Preserve them as review-supplied evidence
+and unresolved import items, not as results of a nearby similarly named package.
+They remain explicit requirements for calibration and scoring-policy review.
+
 Use these and other archived positive/negative references to calibrate gate
 selection. Estimate how often an early rejection would hide a later useful
 candidate. Where historical evidence is insufficient, run a small, budgeted
@@ -514,11 +708,11 @@ not proof of production readiness or a reason to stop improving the test suite.
 
 | Phase | Deliverable | Acceptance criteria |
 | --- | --- | --- |
-| **A. Inventory and history** | Machine-readable catalog, mapped experiment cards, initial compiled memory | Every scoped tracked source is classified or explicitly unresolved; known positive/negative examples retain exact identities and evidence; compilation needs no GPU |
+| **A. Inventory and history** | Machine-readable catalog, mapped experiment cards, initial compiled memory | Cover initial sources and the pinned #155 LR-free tree, including frozen fixtures/package hashes; later unbound claims remain explicit import gaps; compilation needs no GPU |
 | **B. Lifecycle and views** | Schemas, declaration scaffolding, reducer, read-only plan/board/recall | Separate attempt state from scientific verdict; show all candidates, blockers and next steps; future monotonicity remains inactive |
-| **C. Queue and gated execution** | Adapters around existing runners, fixed smoke profile, durable queue, multi-GPU drain, centralized logs | Agents can enqueue concurrently; required Tier 1/2 failures block later tiers; duplicate submissions reserve one execution; results are recorded on every exit; crashes/source edits cannot certify stale results |
-| **D. Calibrate and pilot** | Historical replay plus a small declared reference/challenger campaign | Known quality-versus-endurance failures remain visible; report rejection cost, false-rejection findings and reuse; no seed sweeps or image-based ranking |
-| **E. Adopt and expand** | Agent instructions, migrations, additional domain views | One small idea declaration and implementation are enough to join comparisons; completed/failed attempts update memory; new tasks require protocol calibration |
+| **C. Queue and gated execution** | Extend existing runner and #155 pool/submit/ledger contracts; provisional smoke profile, durable queue, multi-GPU drain, centralized logs | Concurrent enqueue; required failures/blockers prevent later tiers; deduplicated execution; every exit recorded; immutable sources and RNG identity protect reuse |
+| **D. Calibrate and pilot — adoption blocker** | Replay #155 lineages and a bounded set of missing reference comparisons | Publish per-lineage smoke/reference matrix, false accepts/rejects, unknown/blocked denominators, cost and frozen criteria; insufficient evidence or unacceptable screen performance blocks Phase E; no screening seed sweeps |
+| **E. Adopt and expand** | Agent instructions, migrations, additional domain views and public-default robustness contract | One small declaration joins comparisons; all outcomes update memory; new tasks are calibrated; public-default claims require the one preregistered fixed-seed stage after candidate freeze |
 
 Implementation should include meaningful tests for:
 
@@ -531,7 +725,19 @@ Implementation should include meaningful tests for:
   and complete centralized logs without interleaved/corrupted event records.
 - Requested tier caps and campaign-budget exhaustion preventing new launches;
   timeout/cancel killing all child processes; seed-only proposals rejected before
-  training; expected calibration exceptions remaining outside qualification.
+  training except for the registered finished-candidate robustness stage; expected
+  calibration exceptions remaining outside qualification.
+- Component-scoped RNG isolation under extra draws, evaluation, architecture
+  changes, worker placement, and restart; changing seed/initializer/bindings blocks
+  reuse; shared components keep matching draws despite changed unrelated shapes.
+- Clock-free next-update and common-prefix parity under changed external clocks
+  and evaluation horizons; hidden ladder releases detected by longer continuation.
+- Applicability refusals retaining raw errors, becoming reasoned BLOCKED entries,
+  and preventing full qualification without counting as scientific failures.
+- Live/EMA and noisy/clean or calibrated sampling evidence remaining distinct;
+  mechanism class and cost shown next to results; no retrospective scoring switch.
+- A frozen promotion candidate running only its preregistered seed set, with all
+  per-seed evidence and outcomes retained and no cross-seed reuse or in-stage tuning.
 - Regrading failures hidden by a best checkpoint, EMA, missing terminal checks,
   or a passing standard hold followed by a failing extension.
 - Deterministic map/reduce, complete inventory coverage, conflict reporting,
