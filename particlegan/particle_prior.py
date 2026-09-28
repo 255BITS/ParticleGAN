@@ -251,30 +251,44 @@ class ParticlePrior(nn.Module):
                                       missing_keys, unexpected_keys, error_msgs)
 
 
+# Elements of the (rows x centers x z_dim) difference block _nearest_other materialises at once.
+# Broadcasting is memory-bound, so past a few MiB bigger blocks buy nothing; 2**24 (64 MiB in
+# float32) was the fastest on an RTX A6000 and 2**22 on a 24-core CPU.
+_NEAREST_BLOCK = {"cuda": 1 << 24, "cpu": 1 << 22}
+
+
 def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
-    """Distance from each ``latent`` row to its nearest ``table`` row at a nonzero distance (inf if none)."""
-    nearest = torch.full((len(latent),), float("inf"), device=latent.device, dtype=latent.dtype)
-    if not (latent.is_cuda and latent.dtype in (torch.float32, torch.float64)
-            and 0 < latent.shape[1] <= 32):
-        for centers in table.split(4096):
-            distance = torch.cdist(latent, centers, compute_mode="donot_use_mm_for_euclid_dist")
+    """Distance from each ``latent`` row to its nearest ``table`` row at a nonzero distance (inf if none).
+
+    Broadcasts ``latent - table`` block by block and takes ``vector_norm`` over z. This replaced
+    ``torch.cdist(compute_mode="donot_use_mm_for_euclid_dist")``, whose CUDA kernel is a slow
+    generic one (~25x slower at z_dim <= 32). For contiguous float32/float64 on CUDA with z_dim <= 32
+    it is bitwise the same (the tests pin this): the norm adds a row's squares in the order cdist's
+    one-warp sum does and takes the same correctly rounded sqrt, and a min is exact whatever the
+    blocking. Elsewhere the sum order differs (CPU cdist, or CUDA cdist across warps past z_dim 32),
+    so the nearest distance can be ~1 ulp apart; that is accepted.
+    float16/bfloat16 (which cdist rejects) are computed in float32 and rounded back once.
+    Each block holds at most ``_NEAREST_BLOCK`` elements and never more than the
+    ``len(latent) x 4096`` distance matrix the cdist search held, so peak memory is no higher.
+    """
+    dtype = latent.dtype
+    if dtype in (torch.float16, torch.bfloat16):
+        latent, table = latent.float(), table.float()
+    latent, table = latent.contiguous(), table.contiguous()
+    rows, count, z_dim = len(latent), len(table), latent.shape[1]
+    nearest = torch.full((rows,), float("inf"), device=latent.device, dtype=latent.dtype)
+    if rows == 0 or count == 0:
+        return nearest.to(dtype)
+    # A block of r rows x c centers holds r*c*(z_dim + 1) elements: the difference and its norms.
+    budget = min(_NEAREST_BLOCK.get(latent.device.type, _NEAREST_BLOCK["cuda"]), rows * min(count, 4096))
+    pairs = max(1, budget // (z_dim + 1))
+    step = min(count, max(pairs // rows, math.isqrt(pairs), 1))
+    for query, best in zip(latent.split(max(1, pairs // step)), nearest.split(max(1, pairs // step))):
+        for centers in table.split(step):
+            distance = torch.linalg.vector_norm(query[:, None, :] - centers[None, :, :], dim=-1)
             distance.masked_fill_(distance == 0, float("inf"))
-            nearest = torch.minimum(nearest, distance.min(1).values)
-        return nearest
-    # On CUDA, broadcast squared distances instead of cdist, whose no-mm path is a slow generic kernel
-    # (~25x here). CUDA cdist is sqrt(sum of squares) and sqrt is monotone and correctly rounded, so
-    # min-then-sqrt is bitwise the old sqrt-then-min; a min is exact, so the chunking (2048 // z_dim
-    # centers, to bound memory) cannot change it either. The sums themselves agree only for
-    # contiguous rows of at most 32 (one warp) float32/float64 elements: beyond that cdist adds in a
-    # different order (~1 ulp apart on ~25% of pairs), and a strided table reorders the sum even
-    # below it. So every other case, and CPU (whose cdist rounds differently), keeps cdist unchanged.
-    query = latent.contiguous()[:, None, :]
-    for centers in table.contiguous().split(2048 // latent.shape[1]):
-        distance = query - centers[None, :, :]
-        distance = distance.mul_(distance).sum(-1)
-        distance.masked_fill_(distance == 0, float("inf"))
-        nearest = torch.minimum(nearest, distance.min(1).values)
-    return nearest.sqrt()
+            torch.minimum(best, distance.amin(1), out=best)
+    return nearest.to(dtype)
 
 
 def _nonnegative_scalar(value, name):
