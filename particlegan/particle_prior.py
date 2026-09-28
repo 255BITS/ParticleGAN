@@ -255,6 +255,10 @@ class ParticlePrior(nn.Module):
 # Broadcasting is memory-bound, so past a few MiB bigger blocks buy nothing; 2**24 (64 MiB in
 # float32) was the fastest on an RTX A6000 and 2**22 on a 24-core CPU.
 _NEAREST_BLOCK = {"cuda": 1 << 24, "cpu": 1 << 22}
+# Blocks may always hold this many elements (4 MiB in float32), even past the old distance matrix:
+# with few rows and a wide z, capping them at len(latent) x 4096 left blocks of a handful of
+# centers and thousands of tiny launches (1 row, z_dim 512: 30x slower than cdist).
+_NEAREST_FLOOR = 1 << 20
 
 
 def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
@@ -268,8 +272,9 @@ def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
     blocking. Elsewhere the sum order differs (CPU cdist, or CUDA cdist across warps past z_dim 32),
     so the nearest distance can be ~1 ulp apart; that is accepted.
     float16/bfloat16 (which cdist rejects) are computed in float32 and rounded back once.
-    Each block holds at most ``_NEAREST_BLOCK`` elements and never more than the
-    ``len(latent) x 4096`` distance matrix the cdist search held, so peak memory is no higher.
+    Each block holds at most ``_NEAREST_BLOCK`` elements and no more than the ``len(latent) x 4096``
+    distance matrix the cdist search held, or ``_NEAREST_FLOOR`` elements (4 MiB in float32) if that is
+    bigger, so peak memory is no higher than before except by at most that small fixed amount.
     """
     dtype = latent.dtype
     if dtype in (torch.float16, torch.bfloat16):
@@ -280,7 +285,8 @@ def _nearest_other(latent: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
     if rows == 0 or count == 0:
         return nearest.to(dtype)
     # A block of r rows x c centers holds r*c*(z_dim + 1) elements: the difference and its norms.
-    budget = min(_NEAREST_BLOCK.get(latent.device.type, _NEAREST_BLOCK["cuda"]), rows * min(count, 4096))
+    block = _NEAREST_BLOCK.get(latent.device.type, _NEAREST_BLOCK["cuda"])
+    budget = min(block, max(rows * min(count, 4096), _NEAREST_FLOOR))
     pairs = max(1, budget // (z_dim + 1))
     step = min(count, max(pairs // rows, math.isqrt(pairs), 1))
     for query, best in zip(latent.split(max(1, pairs // step)), nearest.split(max(1, pairs // step))):

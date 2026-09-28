@@ -3,7 +3,7 @@
 Against the cdist(donot_use_mm) search it replaced it is bitwise on CUDA for contiguous
 float32/float64 with z_dim <= 32, and within 2 ulp everywhere else (CPU, wider z, strided
 inputs). It also handles half precision, z_dim 0, empty tables, and keeps its blocks no
-bigger than the old distance matrix."""
+bigger than the old distance matrix (or a fixed 2**20-element floor)."""
 import pytest
 import torch
 
@@ -124,7 +124,7 @@ def test_search_independent_of_block_size(device, z_dim, block, monkeypatch):
 
 @pytest.mark.parametrize("device", DEVICES)
 @pytest.mark.parametrize("rows,count,z_dim", [(5, 20000, 2), (300, 20000, 8), (2048, 20000, 512),
-                                              (3000, 50, 16), (1, 1, 0)])
+                                              (3000, 50, 16), (1, 1, 0), (1, 20000, 512)])
 def test_search_blocks_never_exceed_old_distance_matrix(device, rows, count, z_dim, monkeypatch):
     seen = []
     norm = torch.linalg.vector_norm
@@ -136,9 +136,11 @@ def test_search_blocks_never_exceed_old_distance_matrix(device, rows, count, z_d
     monkeypatch.setattr(torch.linalg, "vector_norm", recording)
     table = torch.randn(count, z_dim, device=device)
     _nearest_other(table[torch.randint(count, (rows,))], table)
-    budget = min(particle_prior._NEAREST_BLOCK[device], rows * min(count, 4096))
+    budget = min(particle_prior._NEAREST_BLOCK[device], max(rows * min(count, 4096), particle_prior._NEAREST_FLOOR))
     assert seen and all(r * c * (z_dim + 1) <= budget or r * c == 1 for r, c, _ in seen)
     assert sum(r * c for r, c, _ in seen) == rows * count  # every pair visited exactly once
+    # and in blocks near the budget, not thousands of tiny launches (few rows, wide z)
+    assert len(seen) <= 1.5 * -(-rows * count * (z_dim + 1) // budget) + 1
 
 
 @pytest.mark.parametrize("device", DEVICES)
