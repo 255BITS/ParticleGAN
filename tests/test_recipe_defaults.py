@@ -13,7 +13,7 @@ PROMOTED = dict(lr=.00425, d_lr_mult=1.0, prior_lr_mult=2.0, betas=(0.0, .999), 
                 d_guard_ratio=5.0, d_guard_min_steps=200, latent_damping_max_rate=.5,
                 input_noise_std=0.0, output_noise_std=.029, output_noise_warmup=0.0, lr_floor=1.0,
                 network_lr_floor=None, network_lr_horizon_cap=None, ema_decay=.995, prior_reg=0.0,
-                batch_size=2048, z_dim=2, num_particles=20_000, total_steps=7000)
+                batch_size=2048, z_dim=2, num_particles=20_000, total_steps=None)
 
 
 def without_name(values):

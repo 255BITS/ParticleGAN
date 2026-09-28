@@ -19,7 +19,8 @@ from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe, init
 
 torch.manual_seed(0)
 device = torch.device("cpu")
-recipe = get_recipe(total_steps=1000)
+recipe = get_recipe()   # no horizon (total_steps=None): the loop picks its length
+steps = 1000
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
 D = BatchDistanceDiscriminator().to(device)
@@ -31,7 +32,7 @@ trainer = GANTrainer(recipe, G, D, prior=prior, seed=0)
 def real_batch():
     return .2 * torch.randn(recipe.batch_size, 2, device=device) + 1
 
-for step in range(recipe.total_steps):
+for step in range(steps):
     stats = trainer.step(real_batch(), generator_real=real_batch)
     if (step + 1) % 100 == 0:
         print(step + 1, stats["loss_d"].item(), stats["loss_g"].item(), flush=True)
@@ -310,9 +311,11 @@ use unique sampled rows. There is no particle L2 term.
   alongside it. Loading on CPU first works for a compatible CUDA trainer:
   `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
 
-The recipe's `total_steps` is the training budget (the formulation itself has
-no horizon). Resume with the same budget; further steps after it is
-exhausted raise an error. A failed user
+The recipe's `total_steps` is an optional training budget; the formulation
+itself has no horizon. The default `None` means no budget: `GANTrainer` trains
+for as long as you call `step` (continuous training), and checkpoints resume at
+any step count. An integer `total_steps=n` makes steps after the `n`th raise an
+error; resume with the same budget. A failed user
 callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
@@ -375,7 +378,8 @@ from torch.nn import functional as F
 from particlegan import DDGAN, UCD, get_recipe, init, scale_learning_rates, ucd_loss
 
 device = torch.device("cpu")
-recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
+recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)
+steps = 2000  # the recipe has no horizon; use a handful for a smoke check
 process = DDGAN(recipe.alpha_bar).to(device)
 
 class Generator(nn.Module):
@@ -414,7 +418,7 @@ penalty = recipe.make_critic_penalty(opt_d)
 ema_g = copy.deepcopy(G).eval().requires_grad_(False)
 ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
-for step in range(recipe.total_steps):
+for step in range(steps):
     labels = torch.randint(recipe.num_classes, (recipe.batch_size,), device=device)
     real = 0.2 * torch.randn(len(labels), 2, device=device) + (2 * labels[:, None] - 1)
     t = torch.randint(1, process.steps + 1, (len(real),), device=device)
@@ -445,7 +449,7 @@ for step in range(recipe.total_steps):
         for average, current in ((ema_g, G), (ema_prior, prior)):
             for target, source in zip(average.parameters(), current.parameters()):
                 target.lerp_(source, 1 - recipe.ema_decay)
-    if step % 100 == 0 or step + 1 == recipe.total_steps:
+    if step % 100 == 0 or step + 1 == steps:
         print(f"step={step + 1} d={d_loss.item():.4f} g={g_loss.item():.4f}", flush=True)
 
 # Conditional inference: fresh latent particles and Gaussian noise at each step.
@@ -893,7 +897,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `latent_damping_max_rate` | `.5` (0 disables) |
 | `input_noise_std`, `input_noise_anneal_end` | `0`, `.1` |
 | `output_noise_std`, `output_noise_warmup` | `.029`, `0` (constant) |
-| `batch_size`, `total_steps` | `2048`, `7_000` (budget only) |
+| `batch_size`, `total_steps` | `2048`, `None` (optional budget; `None` = no horizon, train indefinitely) |
 | `ucd_target`, `ucd_weight` | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` |
 
@@ -979,7 +983,16 @@ additional parameter groups for learned noise.
 `learning_rate_scale(step, total_steps, start=.6, floor=.05)` returns a Python
 float: hold 1, then cosine decay to `floor`. `step` counts completed updates
 (zero before the first update). It changes no optimizer state and clamps after
-the horizon. EMA, update ratios, and scheduling remain caller-owned.
+the horizon. A floor of 1 is a constant 1.0 and accepts `total_steps=None`.
+
+The horizon features need an integer `total_steps`: an LR schedule
+(`lr_floor < 1`, or `network_lr_floor < 1` without `network_lr_horizon_cap`,
+which is then the G/D horizon), critic input noise (`input_noise_std > 0`,
+annealed over `input_noise_anneal_end * total_steps`) and output-noise warmup
+(`output_noise_warmup > 0` with nonzero `output_noise_std`). Enabling one with
+`total_steps=None` raises `ValueError` at recipe construction. At their
+defaults they are off and the schedule/noise helpers return constants without
+reading `total_steps`. EMA, update ratios, and scheduling remain caller-owned.
 
 ## TOML configuration
 

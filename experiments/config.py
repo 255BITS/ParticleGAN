@@ -25,6 +25,11 @@ def read_config(path):
     return config
 
 
+# Experiment budget: the recipe has no horizon (total_steps=None), so the
+# flat experiment schema pins the 7,000-update budget these runs always used.
+EXPERIMENT_STEPS = 7_000
+
+
 def recipe_defaults(name):
     """Translate public recipe fields to the existing flat experiment schema.
 
@@ -39,13 +44,13 @@ def recipe_defaults(name):
     defaults = {key: getattr(recipe, key) for key in keys}
     defaults["beta1"] = recipe.betas[0]
     if name == "100gaussians":
-        defaults.update(beta2=recipe.betas[1], prior_lr_mult=recipe.prior_lr_mult, epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
+        defaults.update(beta2=recipe.betas[1], prior_lr_mult=recipe.prior_lr_mult, epochs=EXPERIMENT_STEPS // 1000, steps_per_epoch=1000,
                         lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay, reg_kappa=recipe.reg_kappa)
     elif name == "denoising":
         defaults.update(model="ddgan", d_mode="ucd", beta2=recipe.betas[1],
                         classes=4, ucd_target=recipe.ucd_target,
                         ucd_lambda=recipe.ucd_weight, alpha_bar=list(recipe.alpha_bar),
-                        steps=recipe.total_steps, prior_lr_mult=recipe.prior_lr_mult,
+                        steps=EXPERIMENT_STEPS, prior_lr_mult=recipe.prior_lr_mult,
                         prior_reg=recipe.prior_reg, reg_kappa=recipe.reg_kappa,
                         ema=recipe.ema_decay)
     return defaults

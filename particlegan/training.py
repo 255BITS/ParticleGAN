@@ -10,14 +10,22 @@ from .recipes import Recipe, learning_rate_scales
 
 
 def input_noise_std(recipe, completed_steps):
-    """Critic input-noise std for the next update (peak, linear to 0)."""
+    """Critic input-noise std for the next update (peak, linear to 0).
+
+    0.0 when input noise is off, without reading ``total_steps``.
+    """
+    if recipe.input_noise_std == 0:
+        return 0.0
     end = recipe.input_noise_anneal_end * recipe.total_steps
     return float(recipe.input_noise_std * max(0.0, 1.0 - completed_steps / end))
 
 
 def output_noise_std(recipe, completed_steps):
-    """Generator output-noise std after ``completed_steps`` (linear warmup)."""
-    if recipe.output_noise_warmup == 0:
+    """Generator output-noise std after ``completed_steps`` (linear warmup).
+
+    Constant ``output_noise_std`` without warmup, without reading ``total_steps``.
+    """
+    if recipe.output_noise_warmup == 0 or recipe.output_noise_std == 0:
         return float(recipe.output_noise_std)
     return float(recipe.output_noise_std
                  * min(1.0, completed_steps / (recipe.output_noise_warmup * recipe.total_steps)))
@@ -65,7 +73,9 @@ class GANTrainer:
     frozen deep copy). Latent jitter and output noise come from a trainer
     stream. Networks train from the weights they arrive with; initialize them
     first (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample``
-    returns clean samples (jittered latents, no output noise).
+    returns clean samples (jittered latents, no output noise). With
+    ``recipe.total_steps=None`` (the default) there is no budget and ``step``
+    can be called indefinitely; an integer budget makes further steps raise.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -173,7 +183,7 @@ class GANTrainer:
         returns the gradient penalty's synchronized diagnostic dictionary.
         """
         recipe = self.recipe
-        if self.completed_steps >= recipe.total_steps:
+        if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
         if generator_real is not None and not callable(generator_real):
@@ -331,7 +341,8 @@ class GANTrainer:
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
         steps = state["completed_steps"]
-        if type(steps) is not int or not 0 <= steps <= self.recipe.total_steps:
+        budget = self.recipe.total_steps
+        if type(steps) is not int or steps < 0 or (budget is not None and steps > budget):
             raise ValueError("invalid checkpoint step count")
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2

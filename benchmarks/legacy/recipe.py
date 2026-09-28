@@ -46,6 +46,9 @@ class LegacyRecipe(Recipe):
     # The package defaults these receipts were recorded with (the package has
     # since moved to the DV12 controller + KA2; see docs/k3p.md).
     name: str = "k3p"
+    # The recorded 7,000-update budget (the package default is now no horizon;
+    # these receipts' LR and noise schedules need one).
+    total_steps: int | None = 7_000
     reg_coeff: float = 1.0
     lr_floor: float = 0.05
     network_lr_floor: float | None = 0.01

@@ -120,8 +120,8 @@ def test_validation_and_explicit_components():
         get_recipe(prior_kind='mog', sigma_rel=0.025, encoder_mode='ae').encode(q, p)
     with pytest.raises(ValueError):
         get_recipe(encoder_mode='ae', prior_kind='particles', sigma_rel=0)
-    assert get_recipe().total_steps == 7000
-    assert get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025).total_steps == 7000
+    assert get_recipe().total_steps is None
+    assert get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025).total_steps is None
 
 
 def test_default_vae_has_no_kl_training_penalty():
