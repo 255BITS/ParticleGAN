@@ -83,8 +83,10 @@ half the distance to the nearest other particle, so a draw stays in its own
 cell. `support_width` is an EMA (.01 per generator step) of the table's
 per-dimension spread times `N^(−1/d)`; the generator optimizer advances it.
 The generator adds constant output noise `output_noise_std` (.029) in
-training. `GANTrainer.sample()` returns clean samples: jittered latents, no
-output noise.
+training and sampling: it is part of the sampling law. The generator puts
+particles near mode centres and the noise supplies the spread, so
+`GANTrainer.sample()` returns jittered latents plus output noise;
+`output_noise=False` gives the clean generator mean as a diagnostic.
 
 ## Defaults
 
@@ -143,7 +145,7 @@ penalty = recipe.make_critic_penalty(opt_d)   # shows the real batch to the opti
 ...
 z, ids = prior.sample(batch)                  # jittered particle draws
 x = G(z)
-fake = x + recipe.output_noise_std * torch.randn_like(x)   # training-only output noise
+fake = x + recipe.output_noise_std * torch.randn_like(x)   # output noise (also added when sampling)
 d_loss = loss.d_loss(D(real), D(fake.detach())) + penalty(D, real, fake.detach())
 opt_d.zero_grad(); d_loss.backward(); opt_d.step()   # DV12 rate, guard, Adam, KA2 EMA
 g_loss = loss.g_loss(D(fake), D(real))

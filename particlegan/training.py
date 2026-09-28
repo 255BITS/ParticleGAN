@@ -258,16 +258,17 @@ class GANTrainer:
         return result
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None, output_noise=False):
+    def sample(self, n, *, ema=False, generator=None, output_noise=True):
         """Draw live or EMA samples without changing modes or training RNGs.
 
-        Samples are clean by default: output noise is a training regularizer.
-        Latents are drawn from the prior as in training (support jitter
-        included).
-        ``output_noise=True`` adds the current training output noise (drawn
-        from the sampling stream, as before). Only the sampling stream
-        (``generator`` or the trainer's evaluation stream) is consumed, so
-        either choice leaves training trajectories unchanged.
+        Samples follow the model's sampling law: latents are drawn from the
+        prior as in training (support jitter included) and the current
+        output noise is added, drawn from the sampling stream. The generator
+        places particles near mode centres and the output noise supplies the
+        spread, so clean samples are too narrow. ``output_noise=False``
+        returns the clean generator mean as a diagnostic. Only the sampling
+        stream (``generator`` or the trainer's evaluation stream) is
+        consumed, so either choice leaves training trajectories unchanged.
         """
         if type(n) is not int or n <= 0:
             raise ValueError("n must be a positive integer")

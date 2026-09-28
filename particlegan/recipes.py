@@ -68,7 +68,7 @@ class Recipe:
     d_guard_min_steps: int = 200
     # A2 sparse latent-row damping (0 disables it).
     latent_damping_max_rate: float = 0.5
-    # Generator output noise (training only; samples are clean): constant
+    # Generator output noise (training and sampling): constant
     # output_noise_std by default. Optional critic input noise (off): peak
     # std at the first update, linear to 0 by input_noise_anneal_end *
     # total_steps; a nonzero output_noise_warmup ramps the output noise up

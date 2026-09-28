@@ -1,4 +1,5 @@
-"""Sampling and toy100 evaluation score the clean generator, not training noise."""
+"""Sampling and toy100 evaluation include output noise (the sampling law);
+clean draws are an explicit diagnostic, and neither touches training."""
 
 import json
 
@@ -29,16 +30,17 @@ def _real(step):
     return torch.randn(6, 2, generator=torch.Generator().manual_seed(100 + step))
 
 
-def test_sample_is_clean_by_default_and_noisy_path_matches_the_old_formula():
+def test_sample_adds_output_noise_by_default_and_clean_is_opt_in():
     trainer = _trainer()
     trainer.step(_real(0))
     assert output_noise_std(trainer.recipe, trainer.completed_steps) == pytest.approx(.05)
-    clean = trainer.sample(64, generator=torch.Generator().manual_seed(3))
+    noisy = trainer.sample(64, generator=torch.Generator().manual_seed(3))
     again = trainer.sample(64, generator=torch.Generator().manual_seed(3))
-    assert torch.equal(clean, again)
-    ema_clean = trainer.sample(64, ema=True, generator=torch.Generator().manual_seed(3))
+    assert torch.equal(noisy, again)
+    clean = trainer.sample(64, generator=torch.Generator().manual_seed(3), output_noise=False)
+    ema_noisy = trainer.sample(64, ema=True, generator=torch.Generator().manual_seed(3))
 
-    # The previous implementation: G(latent) + sigma * eps, both from the stream.
+    # The sampling law: G(latent) + sigma * eps, both from the sampling stream.
     stream = torch.Generator().manual_seed(3)
     with torch.no_grad():
         flag = trainer.prior.training
@@ -47,22 +49,24 @@ def test_sample_is_clean_by_default_and_noisy_path_matches_the_old_formula():
         trainer.prior.train(flag)
         mean = trainer.G(latent)
         old = mean + .05 * torch.randn(mean.shape, generator=stream)
-    assert torch.equal(clean, mean)
-    noisy = trainer.sample(64, generator=torch.Generator().manual_seed(3), output_noise=True)
     assert torch.equal(noisy, old)
+    assert torch.equal(clean, mean)
+    assert torch.equal(noisy, trainer.sample(
+        64, generator=torch.Generator().manual_seed(3), output_noise=True))
     assert not torch.equal(noisy, clean)
-    assert not torch.equal(ema_clean, trainer.sample(
-        64, ema=True, generator=torch.Generator().manual_seed(3), output_noise=True))
+    assert not torch.equal(ema_noisy, trainer.sample(
+        64, ema=True, generator=torch.Generator().manual_seed(3), output_noise=False))
     with pytest.raises(ValueError, match="boolean"):
         trainer.sample(4, output_noise=1)
 
 
-@pytest.mark.parametrize("mode", ["clean", "noisy"])
+@pytest.mark.parametrize("mode", ["default", "clean", "noisy"])
 def test_sampling_between_steps_leaves_the_training_trajectory_bitwise_unchanged(mode):
     reference, sampled = _trainer(seed=5), _trainer(seed=5)
     for step in range(6):
-        sampled.sample(32, output_noise=mode == "noisy")
-        sampled.sample(16, ema=True, output_noise=mode == "noisy")
+        options = {} if mode == "default" else {"output_noise": mode == "noisy"}
+        sampled.sample(32, **options)
+        sampled.sample(16, ema=True, **options)
         left, right = reference.step(_real(step)), sampled.step(_real(step))
         for key in ("loss_d", "loss_g", "penalty"):
             assert torch.equal(left[key], right[key])
@@ -89,7 +93,7 @@ def _toy_config(**overrides):
 
 
 @pytest.mark.parametrize("extra", [{}, {"output_noise_rng": "isolated"}])
-def test_toy100_evaluation_draws_no_output_noise(monkeypatch, tmp_path, extra):
+def test_toy100_evaluation_draws_output_noise(monkeypatch, tmp_path, extra):
     draws, sampling = [], [0]
     original_sample = GANTrainer.sample
 
@@ -108,14 +112,14 @@ def test_toy100_evaluation_draws_no_output_noise(monkeypatch, tmp_path, extra):
     monkeypatch.setattr(GANTrainer, "sample", sample)
     summary = train(_toy_config(**extra), tmp_path / "run")
     assert summary["status"] == "complete"
-    assert summary["eval_output_noise"] == "clean"
-    # Training still draws output noise; no draw happens inside evaluation.
-    assert draws and not any(draws)
+    assert summary["eval_output_noise"] == "noisy"
+    # Training draws output noise, and so does evaluation (live and EMA).
+    assert any(draws) and not all(draws)
     events = [json.loads(line) for line in (tmp_path / "run" / "events.jsonl").read_text().splitlines()]
     assert {e["step"] for e in events if e.get("event") == "eval"} == {0, 2, 4}
 
 
-def test_toy100_sample_clean_and_holdout_skip_training_noise(tmp_path):
+def test_toy100_holdout_is_noisy_and_sample_clean_is_a_diagnostic(tmp_path):
     resolved, recipe = resolve_config(_toy_config(output_noise_warmup=0.0))
     trainer = make_trainer(resolved, recipe)
     _set_output_sigma(trainer, resolved, 0)
@@ -130,6 +134,8 @@ def test_toy100_sample_clean_and_holdout_skip_training_noise(tmp_path):
     assert torch.equal(clean, trainer.sample(256, generator=seed()))
     trainer.G.std = .029
     assert not torch.equal(clean, noisy)
+    with pytest.raises(TypeError, match="without output noise"):
+        sample_clean(trainer, 4, output_noise=True)
 
     evidence = accuracy_evidence.AccuracyEvidence(
         resolved, tmp_path, [4], torch.zeros(resolved["eval_samples"], 2))
@@ -137,11 +143,14 @@ def test_toy100_sample_clean_and_holdout_skip_training_noise(tmp_path):
     _, _ = evidence.finish(trainer)
     assert torch.equal(torch.get_rng_state(), before)
     saved = np.load(tmp_path / "holdout_samples.npz")
-    with clean_output_noise((trainer.G, trainer.ema_G)):
-        latent = torch.Generator().manual_seed(
-            resolved["seed"] + accuracy_evidence.HOLDOUT_SEED_OFFSETS["latent"])
-        expected = trainer.sample(accuracy_evidence.HOLDOUT_N, generator=latent)
+    latent = lambda: torch.Generator().manual_seed(
+        resolved["seed"] + accuracy_evidence.HOLDOUT_SEED_OFFSETS["latent"])
+    with torch.random.fork_rng():
+        torch.manual_seed(resolved["seed"] + accuracy_evidence.HOLDOUT_SEED_OFFSETS["noise"])
+        expected = trainer.sample(accuracy_evidence.HOLDOUT_N, generator=latent())
     assert np.array_equal(saved["live"], expected.numpy())
+    assert not np.array_equal(
+        saved["live"], sample_clean(trainer, accuracy_evidence.HOLDOUT_N, generator=latent()).numpy())
 
 
 def test_toy100_isolated_trainer_accepts_the_output_noise_flag():
@@ -152,3 +161,29 @@ def test_toy100_isolated_trainer_accepts_the_output_noise_flag():
                        trainer.sample(8, generator=seed(), output_noise=True))
     with pytest.raises(ValueError, match="boolean"):
         trainer.sample(8, output_noise="yes")
+
+
+def test_toy100_default_recipe_evaluation_samples_with_recipe_output_noise(monkeypatch, tmp_path):
+    sigmas, sampling = [], [0]
+    original_sample, original_generate = GANTrainer.sample, GANTrainer._generate
+
+    def sample(self, *args, **kwargs):
+        sampling[0] += 1
+        try:
+            return original_sample(self, *args, **kwargs)
+        finally:
+            sampling[0] -= 1
+
+    def generate(model, latent, sigma, stream):
+        sigmas.append((sampling[0] > 0, sigma))
+        return original_generate(model, latent, sigma, stream)
+
+    monkeypatch.setattr(GANTrainer, "sample", sample)
+    monkeypatch.setattr(GANTrainer, "_generate", staticmethod(generate))
+    config = {key: value for key, value in _toy_config().items() if key != "output_noise_std"}
+    summary = train({**config, "recipe_defaults": "particlegan"}, tmp_path / "run")
+    assert summary["status"] == "complete"
+    assert summary["config"]["recipe_output_noise_std"] == pytest.approx(.029)
+    evaluation = [sigma for inside, sigma in sigmas if inside]
+    assert evaluation and all(sigma == pytest.approx(.029) for sigma in evaluation)
+    assert any(not inside and sigma > 0 for inside, sigma in sigmas)
