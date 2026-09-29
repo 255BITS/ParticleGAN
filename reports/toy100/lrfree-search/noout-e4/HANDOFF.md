@@ -31,11 +31,12 @@
   150/150, but only under oracle assumptions. Neither fixes A2 or has a
   native result.
 - The user now permits table-position comparisons within the new controller.
-  Astra proposed a local-isolation mobility gain. Its
-  [synthetic preflight spec](geometry-preflight/SPEC.md) was written before
-  execution, but no geometry result exists yet. If resumed, implement the
-  fixture exactly as specified, select neighborhood size only by that fixture,
-  then decide whether the mechanism merits a frozen native candidate.
+  Astra proposed a local-isolation mobility gain. The prospectively specified
+  [synthetic preflight](geometry-preflight/RESULTS.md) rejected every
+  neighborhood size `{5,10,20,40}` before validation or native use: the 8D
+  heavy-tail legitimate mean gain was `.117`–`.122` against `.07`, and larger
+  neighborhoods gave the legitimate rare group `.52`–`.75` gain. Do not port
+  this LOF mechanism unchanged or select a neighborhood from native results.
 - The 21 remaining quick/ring/custom tasks were submitted as
   `e4-noout-fullsuite` to `/ml2/hypergan/lrfree-20260926` with package hash
   `f69349eeda96…` and noisy evaluation; [suite-leaderboard.md](suite-leaderboard.md)

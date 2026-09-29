@@ -104,9 +104,9 @@ an oracle feasibility result, not a candidate: it knows the true gradient
 direction, effective correlation-adjusted sample information, and summary
 noise family. It has no online memory or native result, so A2 remains open.
 
-The user also permitted comparisons among learned particle positions. A
-[prospective latent-geometry preflight](geometry-preflight/SPEC.md) is written,
-but was not executed in this handoff. Its proposed local-isolation gain would
-avoid an evidence-window constant and added output reads; neighborhood size
-still needs synthetic calibration, and latent isolation may not correspond to
-generated-output error.
+The user also permitted comparisons among learned particle positions. The
+[prospective latent-geometry preflight](geometry-preflight/RESULTS.md) tested
+local-outlier-factor mobility with neighborhood sizes `{5,10,20,40}`. **None
+qualified**: all gave excessive gain to legitimate heavy-tail rows, and the
+larger neighborhoods also marked a legitimate rare group as isolated. The
+mechanism was rejected before validation or native use. A2 remains open.
