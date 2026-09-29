@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "mode_hold",
+  "adapter": "transfer_behavior",
+  "execution": {
+    "host": "mode_hold",
+    "steps": 1200,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "host_definition": {
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "steps": 1200
+    }
+  },
+  "evaluation": {
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "thresholds": [
+      [
+        "modes",
+        ">=",
+        8
+      ],
+      [
+        "hq",
+        ">=",
+        0.9
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

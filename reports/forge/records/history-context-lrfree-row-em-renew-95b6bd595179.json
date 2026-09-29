@@ -1,0 +1,95 @@
+{
+  "candidate_id": "context:lrfree/row-em-renew",
+  "candidate_revision": "b315e887b77144d454d52af8a9976efb0d571cbb714658f48f54d583f23f1c24",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": false
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Fresh-reservoir sampling calibration: native100 3/3",
+  "mechanism_class": "sampling_only_patch",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/row-em-renew",
+      "narrative_sources": [
+        {
+          "git_blob": "2f31aaf5990ab33defa8a45643a1ee96957276d3",
+          "path": "reports/toy100/lrfree-search/row-em-renew/HANDOFF.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "9bfba2aad012f8fbd30f0c70c6abc5c4454d26c7613aceaa1ddc8da389ad907f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/HANDOFF.md"
+        },
+        {
+          "git_blob": "b8216dba4540237a15c3d097e3f3a20d2ed9987c",
+          "path": "reports/toy100/lrfree-search/row-em-renew/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5039829f6a206d62f90922e4785f4ca1e880abefa7216fdd55d54e33b9190fc6",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/README.md"
+        },
+        {
+          "git_blob": "5513c50351b3fa0e31a746f64bbc8183fd199313",
+          "path": "reports/toy100/lrfree-search/row-em-renew/all22-leaderboard.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "2cae4221c45918be5f5f0ff3dc3878613190ca903fc966e18f17da4c9754ab2c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/all22-leaderboard.md"
+        },
+        {
+          "git_blob": "f4a70551bdaa85a213b0eea3ca2389923eab7a35",
+          "path": "reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "cd15b08e6165c37a131a547c07849598cdfccf45c3381c418bec4ef16546f0ca",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md"
+        },
+        {
+          "git_blob": "94a4dea7ab4363e7026a77db77034f60dc52724a",
+          "path": "reports/toy100/lrfree-search/row-em-renew/critic-gap-investigation.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "3377b5ad4491aef165de5a082c819be9fc6334f88b848ec7f42fe87db97c9fb6",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/critic-gap-investigation.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/row-em-renew/all22-summary.json",
+        "reports/toy100/lrfree-search/row-em-renew/grid100-result.json",
+        "reports/toy100/lrfree-search/row-em-renew/rotated100-result.json",
+        "reports/toy100/lrfree-search/row-em-renew/staggered100-result.json"
+      ],
+      "summary_excerpt": "# Fresh-reservoir sampling calibration: native100 3/3\n\nThe sampling-only row EM predecessor at `12e55ede` passed grid100 and\nstaggered100 but missed rotated100's five-check centre streak. Its single\nfit at update 2,664 was not refreshed as the support moved. This isolated\nsuccessor refits on every\nfully renewed 16,384-real-example reservoir while the generator stationarity\nscale is at or below 1/64. Each fit starts with uniform particle-row mass and\nthe current **training** output width. It estimates public sampling weights\nand a separate Gaussian sampling width using five latent-jittered outputs per\nrow. No task label, target geometry, frozen score, or update deadline enters\nthe rule. `candidate.patch` changes only `particlegan/row_em.py` relative to\nthe preceding [sampling-only package](../row-em-sampling/README.md).\n\nThe package identified by runner SHA-256\n`1fc12d29e2c5964f91c9523006e569cba743eba2e3e9851a68afa063c08cd324`\nwas frozen before the grid run, then transferred unchanged to rotated100 and\nstaggered100. All used the same QR/noisy fixture and 7,000-update protocol.\nThe formal gate requires **all five** full-accuracy observations at updates\n6,000\u20137,000 and an independent 100,000-sample holdout. The console `ok` field\nchecks coverage only; the verdicts here use `acc_accuracy_pass` and each\nrunner's `native` result. All three have zero data-stream deviations.\n\n## How th"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-row-em-renew-95b6bd595179",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "b8216dba4540237a15c3d097e3f3a20d2ed9987c",
+    "path": "reports/toy100/lrfree-search/row-em-renew/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "5039829f6a206d62f90922e4785f4ca1e880abefa7216fdd55d54e33b9190fc6",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/README.md"
+  },
+  "task_results": []
+}

@@ -1,0 +1,1100 @@
+{
+  "candidate_id": "dv12-ams-rc3-c22",
+  "candidate_revision": "aef86862b376cb681be9d48ba344f5c3f004a1e005a2e697ec544a9bf3b1de04",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": 0.995,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": {
+        "eval_output_noise": true
+      }
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: FAIL=4, PASS=4",
+  "evidence_scope": "historical",
+  "hypothesis": "dv12-ams-rc3 (#217 default) on the 8 custom hosts (custom22 port)",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "particles",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": 0.0,
+    "standardize": true,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "initialization": "batch_feature_zero",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 12,
+      "observation_sigma": 0.03,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    "context": {
+      "candidate_options": {
+        "eval_output_noise": true
+      },
+      "config_hash": "bdf1746de328a277",
+      "note": "dv12-ams-rc3 (#217 default) on the 8 custom hosts (custom22 port)",
+      "overrides": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "initialization": "batch_feature_zero",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "gan",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "routing_temperature": 0.25,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "package_root": "/ml2/hypergan/lrfree-20260926/candidates/dv12-ams/package",
+      "package_sha256": "ca2feb43713a0eb8000fbdcf6a640d83d47ce275bbb3228a34ed271756f72506",
+      "supporting_receipts": []
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": "ca2feb43713a0eb8000fbdcf6a640d83d47ce275bbb3228a34ed271756f72506",
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-dv12-ams-rc3-c22-501063495713",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+    "path": "reports/toy100/lrfree-search/custom22/results.json",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final": {
+          "adv_steps": 250,
+          "hold": 0.007902632467448711,
+          "init_recon_mse": 1.1737027168273926,
+          "penalty_applied": 250,
+          "recon_mse": 0.0036909182090312243,
+          "steps": 250
+        },
+        "final_streak": 23,
+        "first_arrival": 21,
+        "passing_checks": 23,
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "adv_steps": 250,
+          "hold": 0.007902632467448711,
+          "init_recon_mse": 1.1737027168273926,
+          "penalty_applied": 250,
+          "recon_mse": 0.0036909182090312243,
+          "steps": 250
+        },
+        "final_streak": 23,
+        "first_arrival": 21,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 23,
+        "status": "PASS",
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final": {
+          "content_kept": 0.931204432115752,
+          "covered": false,
+          "even_norm": 0.008954817429184914,
+          "fail_reasons": "undershoot",
+          "host_pass": false,
+          "leak_frac": -0.9999272227287292,
+          "leak_ratio": 0.00022554469669500152,
+          "odd_norm": 0.8440343737602234,
+          "on_content": 0.512162446975708,
+          "on_e": 0.0001534031325718388,
+          "on_u": 0.6801451444625854,
+          "particle_rms": 0.40125590562820435,
+          "pole_rel_err_minus": 0.22403332591056824,
+          "pole_rel_err_plus": 0.21226133406162262,
+          "same_dir": 0.010498160371430627,
+          "u_kept": 0.6801451376611342
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "passing_checks": 0,
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "content_kept": 0.931204432115752,
+          "covered": false,
+          "even_norm": 0.008954817429184914,
+          "fail_reasons": "undershoot",
+          "host_pass": false,
+          "leak_frac": -0.9999272227287292,
+          "leak_ratio": 0.00022554469669500152,
+          "odd_norm": 0.8440343737602234,
+          "on_content": 0.512162446975708,
+          "on_e": 0.0001534031325718388,
+          "on_u": 0.6801451444625854,
+          "particle_rms": 0.40125590562820435,
+          "pole_rel_err_minus": 0.22403332591056824,
+          "pole_rel_err_plus": 0.21226133406162262,
+          "same_dir": 0.010498160371430627,
+          "u_kept": 0.6801451376611342
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 0,
+        "status": "FAIL",
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "cover_leftover"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final": {
+          "arm": "locked",
+          "concept_cos_minus": 0.9892153143882751,
+          "concept_cos_plus": 0.9874415397644043,
+          "concept_mag_minus": 0.91266930103302,
+          "concept_mag_plus": 0.8834384083747864,
+          "cover_weight": 1.5,
+          "device": "cpu",
+          "fail_reasons": "identity_0",
+          "host_pass": false,
+          "identity_at_0": 0.790033110404012,
+          "identity_at_mid": 0.9736986387505215,
+          "leak_frac": -0.9536556005477905,
+          "pairing": "matched",
+          "per_scale": [
+            {
+              "identity_kept": 0.9670986708836331,
+              "on_concept": -0.8941640853881836,
+              "scale": -1.0
+            },
+            {
+              "identity_kept": 0.790033110404012,
+              "on_concept": 0.008662370033562183,
+              "scale": 0.0
+            },
+            {
+              "identity_kept": 0.9736986387505215,
+              "on_concept": 0.5045691132545471,
+              "scale": 0.5
+            },
+            {
+              "identity_kept": 0.9562733841030633,
+              "on_concept": 0.881006121635437,
+              "scale": 1.0
+            }
+          ],
+          "same_dir": 0.13410623212528114,
+          "scales": [
+            -1.0,
+            0.0,
+            0.5,
+            1.0
+          ],
+          "seed": 0,
+          "steps": 800
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "passing_checks": 0,
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "arm": "locked",
+          "concept_cos_minus": 0.9892153143882751,
+          "concept_cos_plus": 0.9874415397644043,
+          "concept_mag_minus": 0.91266930103302,
+          "concept_mag_plus": 0.8834384083747864,
+          "cover_weight": 1.5,
+          "device": "cpu",
+          "fail_reasons": "identity_0",
+          "host_pass": false,
+          "identity_at_0": 0.790033110404012,
+          "identity_at_mid": 0.9736986387505215,
+          "leak_frac": -0.9536556005477905,
+          "pairing": "matched",
+          "per_scale": [
+            {
+              "identity_kept": 0.9670986708836331,
+              "on_concept": -0.8941640853881836,
+              "scale": -1.0
+            },
+            {
+              "identity_kept": 0.790033110404012,
+              "on_concept": 0.008662370033562183,
+              "scale": 0.0
+            },
+            {
+              "identity_kept": 0.9736986387505215,
+              "on_concept": 0.5045691132545471,
+              "scale": 0.5
+            },
+            {
+              "identity_kept": 0.9562733841030633,
+              "on_concept": 0.881006121635437,
+              "scale": 1.0
+            }
+          ],
+          "same_dir": 0.13410623212528114,
+          "scales": [
+            -1.0,
+            0.0,
+            0.5,
+            1.0
+          ],
+          "seed": 0,
+          "steps": 800
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 0,
+        "status": "FAIL",
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final": {
+          "both_land_rows": 12,
+          "endpoint_l2": 0.04005127772688866,
+          "identity_mse": 0.0009526174399070442,
+          "paired_target_mse": 0.0009526174399070442,
+          "residual_weight": 1.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "final_streak": 22,
+        "first_arrival": 50,
+        "passing_checks": 22,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "both_land_rows": 12,
+          "endpoint_l2": 0.04005127772688866,
+          "identity_mse": 0.0009526174399070442,
+          "paired_target_mse": 0.0009526174399070442,
+          "residual_weight": 1.0,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "final_streak": 22,
+        "first_arrival": 50,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 22,
+        "status": "PASS",
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ]
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "residual_student"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final": {
+          "critic_gradient_max": 0.2835700809955597,
+          "critic_gradient_median": 0.1860339194536209,
+          "identity_mse": 0.001060349983163178,
+          "own_nearest_fraction": 1.0,
+          "paired_target_mse": 0.001060349983163178,
+          "particle_mean_square": 0.20389272272586823,
+          "particle_std_mean": 0.45430463552474976,
+          "set_cover": 0.016965599730610847
+        },
+        "final_streak": 11,
+        "first_arrival": 234,
+        "passing_checks": 11,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "critic_gradient_max": 0.2835700809955597,
+          "critic_gradient_median": 0.1860339194536209,
+          "identity_mse": 0.001060349983163178,
+          "own_nearest_fraction": 1.0,
+          "paired_target_mse": 0.001060349983163178,
+          "particle_mean_square": 0.20389272272586823,
+          "particle_std_mean": 0.45430463552474976,
+          "set_cover": 0.016965599730610847
+        },
+        "final_streak": 11,
+        "first_arrival": 234,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 11,
+        "status": "PASS",
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ]
+        ]
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "trajectory"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final": {
+          "cover_score": 0.016939669847488403,
+          "grad_med": 0.00881129503250122,
+          "mean_abs": 0.011293123476207256,
+          "nearest": 0.9887068867683411
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "passing_checks": 0,
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "bae0aaaa93c13bbf8849122f4557424bd427236169b8ba467e4df265db030017",
+        "engine_sha256": "ee95ec804be45b8bd74e10be3bf67c8a61fb340a5ca08fa3c7dccbe2d773a798",
+        "final": {
+          "cover_score": 0.016939669847488403,
+          "grad_med": 0.00881129503250122,
+          "mean_abs": 0.011293123476207256,
+          "nearest": 0.9887068867683411
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-ee95ec804be4-97831f8c55ab.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-ee95ec804be4-97831f8c55ab",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 0,
+        "status": "FAIL",
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "two_pole"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final": {
+          "canary": {
+            "cos_neg": -0.999671459197998,
+            "cos_plus": 0.999671459197998,
+            "dangerous": true,
+            "landed": "pos",
+            "off_caption": 1.9795665708426616e-05,
+            "scored": false
+          },
+          "cos_plus": 0.9999876022338867,
+          "cover": 0.9546405930694846,
+          "even_norm": 0.428455114364624,
+          "half_norm_ratio": 0.5511949931345884,
+          "hit": true,
+          "mag_ratio": 0.9546524286270142,
+          "neu_hold": 0.9022333547472954,
+          "odd_norm": 0.428455114364624,
+          "off_caption": 1.386353631938044e-06,
+          "origin_norm": 0.09776664525270462
+        },
+        "final_streak": 11,
+        "first_arrival": 234,
+        "passing_checks": 11,
+        "thresholds": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "canary": {
+            "cos_neg": -0.999671459197998,
+            "cos_plus": 0.999671459197998,
+            "dangerous": true,
+            "landed": "pos",
+            "off_caption": 1.9795665708426616e-05,
+            "scored": false
+          },
+          "cos_plus": 0.9999876022338867,
+          "cover": 0.9546405930694846,
+          "even_norm": 0.428455114364624,
+          "half_norm_ratio": 0.5511949931345884,
+          "hit": true,
+          "mag_ratio": 0.9546524286270142,
+          "neu_hold": 0.9022333547472954,
+          "odd_norm": 0.428455114364624,
+          "off_caption": 1.386353631938044e-06,
+          "origin_norm": 0.09776664525270462
+        },
+        "final_streak": 11,
+        "first_arrival": 234,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 11,
+        "status": "PASS",
+        "thresholds": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "unipolar"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final": {
+          "concept_cos": 0.9999991655349731,
+          "concept_delta_norm": 0.7094179391860962,
+          "concept_move": 0.7094173472016365,
+          "scale0_err": 0.0,
+          "unused_dist": 0.0008827368728816509,
+          "unused_hold": 0.9991172631271183
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "passing_checks": 0,
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "2b45e1b86997dba82dd7db47e0ca911c23eb02a10b5471a95d6bd1dbbd68be9c",
+        "final": {
+          "concept_cos": 0.9999991655349731,
+          "concept_delta_norm": 0.7094179391860962,
+          "concept_move": 0.7094173472016365,
+          "scale0_err": 0.0,
+          "unused_dist": 0.0008827368728816509,
+          "unused_hold": 0.9991172631271183
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec.json",
+          "id": "ca2feb43713a0eb8-11332ffab2f9-2b45e1b86997-7200a410c7ec",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 0,
+        "status": "FAIL",
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "unused_token_hold"
+    }
+  ]
+}

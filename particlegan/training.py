@@ -340,6 +340,16 @@ class GANTrainer:
 
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
 
+    def extend_execution(self, max_steps):
+        """Extend a restored run's execution allowance, preserving its LR/noise horizon.
+
+        Model, optimizer, prior, EMA and RNG state stay untouched. This is an
+        explicit continuation operation, not a change to ``recipe.total_steps``.
+        """
+        if type(max_steps) is not int or max_steps <= self.max_steps:
+            raise ValueError("continuation max_steps must exceed the existing execution allowance")
+        self.max_steps = max_steps
+
     def state_dict(self):
         """Return an independent checkpoint; save the caller's data cursor too."""
         names = ("G", "D", "prior", "ema_G", "ema_prior")

@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/releases",
+  "candidate_revision": "b8ce9c6f8a9018e035073b4c5b2f32e64ada07575758ece01a4c97313e607d61",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "0.5.0 release validation",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/releases",
+      "narrative_sources": [
+        {
+          "git_blob": "ba937d1c04722d570f0c4420d0da82920381f8b2",
+          "path": "reports/releases/0.5.0.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2447a2cb8b44e2b7b2dfebc46dcb7b42ae4f5e2aae49277898f1ec0964de192d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/releases/0.5.0.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# 0.5.0 release validation\n\nNo new benchmark training or seed sweep was run for this release. Existing\nexperiment results and original trainers were preserved. Public API tests cover\nhard forward values and selected-center gradients, local Gaussian noise and RNG\nisolation, exact enumeration of the categorical score estimator, Gaussian ELBO\ndimensions, constant KL, absence of a KL reconstruction penalty, recipe\nroundtrips, encoder optimizer deduplication and input validation.\n\nLocal Python 3.12 environment:\n\n- Full CPU suite: 276 passed, 22 subtests passed; 4 opt-in CUDA cases skipped.\n- Wheel and source archive built; `twine check --strict` passed both artifacts.\n- Installed wheel outside checkout: all three recipes completed a reconstruction\n  step on CPU; all three passed CUDA gradient smoke checks.\n- All 4 real-data CUDA resume integration cases passed in 18.89 seconds.\n  The suite uses the existing main-worktree\n  CIFAR dataset. Its first invocation stopped at data lookup because the feature\n  worktree has no local data directory; no model failure occurred in that attempt.\n\nValidation logs are easy to tail at `/tmp/particlegan-050-validation/` on the\nrelease machine. CI additionally checks CPU Python 3.10, 3.11 and 3.12 and\nruns the installed-wheel example. Publication reuses the checked distributions\nfrom the release workflow; the publishing job does not rebuild them.\n"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-releases-ad7e3c09bcd5",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "ba937d1c04722d570f0c4420d0da82920381f8b2",
+    "path": "reports/releases/0.5.0.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "2447a2cb8b44e2b7b2dfebc46dcb7b42ae4f5e2aae49277898f1ec0964de192d",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/releases/0.5.0.md"
+  },
+  "task_results": []
+}

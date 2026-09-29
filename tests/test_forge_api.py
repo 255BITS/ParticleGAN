@@ -353,3 +353,16 @@ def test_legacy_atom_checkpoint_shape_remains_schema_three():
     assert set(state["streams"]) == {"latent_generator", "penalty_generator", "eval_generator", "noise_generator"}
     trainer.load_state_dict(state)
     assert_equal(state, trainer.state_dict())
+
+
+def test_execution_extension_changes_only_allowance_and_rejects_reset():
+    trainer = GANTrainer(Recipe(num_particles=8, z_dim=2, total_steps=3), nn.Linear(2, 2), nn.Linear(2, 1))
+    before = trainer.state_dict()
+    trainer.extend_execution(6)
+    after = trainer.state_dict()
+    assert after.pop("max_steps") == 6
+    assert_equal(before, after)
+    assert trainer.recipe.total_steps == 3
+    for invalid in (6, 2, True, 6.5):
+        with pytest.raises(ValueError, match="exceed"):
+            trainer.extend_execution(invalid)

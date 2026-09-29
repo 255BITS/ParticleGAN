@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Forge frozen current-cohort calibration profile",
+  "description": "A read-only calibration contract, not training authorization. Populate exact identities before registering a bounded diagnostic lane. Historical receipts and other seeds cannot fill cells.",
+  "type": "object",
+  "required": ["schema_version", "id", "revision", "evidence_scope", "criteria", "criteria_sha256", "smoke_tasks", "reference_tasks", "reference_scope", "scoring_weights", "training_allowance_seconds", "lineages", "cohort"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "evidence_scope": {"const": "current"},
+    "criteria": {"type": "string", "description": "Filename beside this profile; use the preregistered criteria-v1.json unless a new criteria revision is explicitly declared."},
+    "criteria_sha256": {"$ref": "#/$defs/digest"},
+    "smoke_tasks": {"$ref": "#/$defs/tasks"},
+    "reference_tasks": {"$ref": "#/$defs/tasks"},
+    "reference_exclusions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "reference_scope": {"type": "string", "minLength": 1},
+    "scoring_weights": {"const": "live"},
+    "training_allowance_seconds": {"const": 0},
+    "lineages": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "object", "required": ["id", "candidate_id", "candidate_revision"],
+        "properties": {"id": {"type": "string", "minLength": 1}, "candidate_id": {"type": "string", "minLength": 1},
+          "candidate_revision": {"$ref": "#/$defs/digest"}}}
+    },
+    "cohort": {
+      "type": "object", "required": ["sha256", "identity"],
+      "description": "Exact output of experiments.forge.calibration.calibration_cohort(request, smoke_tasks + reference_tasks). Full protocol fixes seed 0 and named streams; source, runtime, prior, initializer, task/evaluation hashes and per-task compute are bound. Candidate mechanisms and view placement are excluded.",
+      "properties": {"sha256": {"$ref": "#/$defs/digest"}, "identity": {"type": "object"}}
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "tasks": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  }
+}

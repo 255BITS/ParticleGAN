@@ -378,7 +378,7 @@ def _log(handle, message: str) -> None:
 
 
 def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None,
-                       noise_policy=None) -> dict:
+                       noise_policy=None, components=None) -> dict:
     """Train one arm. Returns the EMA residual score plus recipe pins."""
     field = field or LeftoverField()
     torch.manual_seed(recipe.seed)
@@ -423,6 +423,9 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
     opt_d = torch.optim.Adam(critic.parameters(), lr=lr, betas=betas)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, penalty = components.bind(
+            generator=residual, critic=critic, priors=[prior_p, prior_m], opt_g=opt_g, opt_d=opt_d)
     ema = _EMA(generator_params, decay=float(recipe.knob("ema")))
     poles_p, poles_m, neu = teacher_poles(field, recipe.knob("teacher"))
     half = max(1, int(recipe.knob("batch")) // 2)

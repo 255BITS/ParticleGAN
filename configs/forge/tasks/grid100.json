@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "id": "grid100",
+  "adapter": "native100",
+  "execution": {
+    "problem": "grid100",
+    "steps": 7000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": true
+  },
+  "evaluation": {
+    "kind": "native_accuracy",
+    "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+    "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+    "scoring_weights": "live",
+    "eval_interval": 250,
+    "early_eval_steps": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100
+    ],
+    "eval_samples": 20000,
+    "minimum_stable_checks": 5,
+    "holdout_samples": 100000,
+    "coverage_thresholds": {
+      "min_samples": 20000,
+      "min_modes": 100,
+      "min_hq_mode_mass": 0.005,
+      "min_precision": 0.97,
+      "max_mass_tv": 0.1,
+      "max_mode_mass": 0.02,
+      "min_cov_eig_ratio": 0.4,
+      "max_cov_eig_ratio": 1.7,
+      "min_radial_median_ratio": 0.65,
+      "max_radial_median_ratio": 1.4,
+      "all_finite": true
+    },
+    "accuracy_limits": {
+      "mass_tv": 0.06,
+      "center_rms_sigma": 0.2,
+      "abs_cov_trace_bias": 0.1,
+      "radial_ks": 0.04
+    },
+    "sources": {
+      "benchmarks/toy100/gate.py": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 3600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

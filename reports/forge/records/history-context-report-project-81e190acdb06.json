@@ -1,0 +1,90 @@
+{
+  "candidate_id": "context:report/project",
+  "candidate_revision": "31d37f13772254c2735762a593936b81158bd50d9b17722eab708394d8cadcbb",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Research reports and local artifacts",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/project",
+      "narrative_sources": [
+        {
+          "git_blob": "fe874c2a698c85b316fcec063cffac74dd1996d0",
+          "path": "reports/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "001fc07acd3d6ede6f5161b9da12910c6506f4b4c5efc5c27b0e872621b5db98",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/README.md"
+        },
+        {
+          "git_blob": "f8cca24d56f0677840bf229685c9c7b2b93c8839",
+          "path": "reports/api-dogfood.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "656bc7de9c8db48807506eb768216fbefed23e711fd0fd5ad3969f504d209887",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/api-dogfood.md"
+        },
+        {
+          "git_blob": "87cc24f0ba1be099a0007cbccf7e253f7cc40a6c",
+          "path": "reports/api.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3a094ebd29f06366acbf8cd37afc2a99ebf7605a6241d006e57a9dc3264858bf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/api.md"
+        },
+        {
+          "git_blob": "39bd67b621ff39b13577cd582610ea97aff47e45",
+          "path": "reports/ci_status.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "64566a478b8322d8ccf692a3da5eacf9098f1f490ec6ca6c6aa456a2eb08ebab",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/ci_status.md"
+        },
+        {
+          "git_blob": "697ffbc18c75b0b85eef4976ce03c2f49570b0ba",
+          "path": "reports/sparse-conditional-with-categorical-and-real-output.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9c28b0a5e5c8166339079473140dac07fc01b464d323b03a4d161e2b0db572f3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/sparse-conditional-with-categorical-and-real-output.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Research reports and local artifacts\n\nThe behavioral baseline, learned-LR, locked-shared, paired-2D, smart-descent,\nand transfer-suite studies keep their source, Markdown findings, and reproduction\ninputs in Git. Generated results, metric curves, run logs, episode archives,\nsource snapshots, plots, and checkpoints are ignored and kept locally.\n\nExisting outputs remain at their original paths. References to these outputs in\nstudy writeups describe local files; fresh checkouts do not include them. Use the\ncommands in each study's README to generate outputs before running its report\nbuilder or historical replay. Rebuilding a historical leaderboard requires its\ncomplete local collection of runs.\n\nThe shared-default benchmark's frozen 19-test definitions and architecture\nchoices are in\n[`default_comparison.json`](../benchmarks/transfer_suite/plans/default_comparison.json),\nincluding reference artifact paths and SHA-256 hashes. These were extracted\nwithout changing any jobs from commit `d77e9e8`. The small exact-replay fixture\nin `tests/fixtures/shared_default_two_pole.json` retains only the metrics and\nactions checked by the regression test, with its source commit and hash.\n"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-project-81e190acdb06",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "fe874c2a698c85b316fcec063cffac74dd1996d0",
+    "path": "reports/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "001fc07acd3d6ede6f5161b9da12910c6506f4b4c5efc5c27b0e872621b5db98",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/README.md"
+  },
+  "task_results": []
+}

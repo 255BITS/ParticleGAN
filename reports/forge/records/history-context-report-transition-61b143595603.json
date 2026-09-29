@@ -1,0 +1,125 @@
+{
+  "candidate_id": "context:report/transition",
+  "candidate_revision": "8a0f4df68ff73f5d664afdd22dd3eaac9d51ae1783a722cc54d21995570e8ab3",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Single-transition GAN results",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/transition",
+      "narrative_sources": [
+        {
+          "git_blob": "a8ebf54e99e5ca1f7cbedc459fee6b5acf70bf28",
+          "path": "reports/transition/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1f488c97145b389f099cdd5d0c8db19b08444d87dd97a87068d9dcf296546053",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/README.md"
+        },
+        {
+          "git_blob": "acde5593ba2028f7945a96b0be6e93e942ed6298",
+          "path": "reports/transition/demo/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f3190198e418f5bf8d754a4d5d1789a3a1fe074c556b171b1da5fac761eff868",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/demo/README.md"
+        },
+        {
+          "git_blob": "78ab458ce7419fd3e3f7607c30782f42cf942fa2",
+          "path": "reports/transition/leaderboard/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f49df2583efe3531ea83ceb6b4400ea063e7d67b47b7d2461763e51135fb6fc8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/README.md"
+        },
+        {
+          "git_blob": "92b771190792e5cc4253eddc370cc604b4290c96",
+          "path": "reports/transition/leaderboard/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6d45ca395db55a292a7bb93bd6cf539e6d43cd4f65f460b2245152860c9d91fe",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/READOUT.md"
+        },
+        {
+          "git_blob": "e415d382f2474d680ece133912fca006a1b40df3",
+          "path": "reports/transition/leaderboard/ROUND1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "58778b6185e4fc514476b3dc3abc10577fd6efd2d9860124dc0c9102ad489c81",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/ROUND1.md"
+        },
+        {
+          "git_blob": "9a976fba02a9810150b7344357855a0c03579163",
+          "path": "reports/transition/leaderboard/ROUND2.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d18d9ffcf2b3d209f73091ba50a7ad494a062d365344d6a44d3bf6b6efbc3f5b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/ROUND2.md"
+        },
+        {
+          "git_blob": "cc6c39fff9c01eafba160ec79b370e8b8ee0dfcb",
+          "path": "reports/transition/leaderboard/ROUND3.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "eb37071911e750119921d1c12aa4750bbcc854cf3c61e89aa357710aed4da05c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/ROUND3.md"
+        },
+        {
+          "git_blob": "282a749f3cf6724a15dde8a7112fb2900e777918",
+          "path": "reports/transition/leaderboard/ROUND4.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "41bc5f27c72fdfae06fcd195a0e152ae85b23596f46b19c8b13e28fb245ca77a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/ROUND4.md"
+        },
+        {
+          "git_blob": "08388d95cab007a963a48910174c7baa8bd186bd",
+          "path": "reports/transition/leaderboard/ROUND5.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "983fc19fe4b114b20813a09803505985b4f970d7e0b37f3a940d975b09fad8eb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/leaderboard/ROUND5.md"
+        },
+        {
+          "git_blob": "4b8dc17f1a9d0b6e2bc94975379cae10dc1e79af",
+          "path": "reports/transition/mog_1024/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "da503efb88cc40d245e7815ae8d5057e66f32b4dc4fd44cf6f29fc173b72a13f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/mog_1024/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Single-transition GAN results\n\nG1 -> st; G2 -> at; G3 -> st+1. All three receive the same z and context. One joint D(st, at, st+1) supplies feedback. Action is displacement.\n\nMatched 7,000 updates, 3,584,000 real training draws, seed 24002. Default public GAN recipe with UCD and z_dim=32. Training draws, initial D/prior, normalization, source hashes and evaluation settings are matched. Generator initializations differ with architecture. No seed-only repeats.\n\nLower SW1 and residual are better. Distances use frozen training normalization; residuals are in physical coordinates. Ranking is by aggregate held-out joint SW1.\n\n| Model | G parameters | Test joint SW1 | Interp. | Extrap. | State SW1 | Action SW1 | Next SW1 | Residual mean / p95 | Train seconds |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n| monolithic | 65,526 | 0.0842 | 0.0681 | 0.1327 | 0.0731 | 0.1114 | 0.0735 | 0.01088 / 0.02290 | 54.1 |\n| branches | 65,286 | 0.2535 | 0.2452 | 0.2783 | 0.2501 | 0.2404 | 0.2488 | 0.02596 / 0.05260 | 60.7 |\n\nReal-vs-real floor: joint SW1 **0.0379**, residual **0**. Shuffling reference branches within context preserves all three empirical marginals but raises joint SW1 to **0.1513** and residual to **0.20478**. The mean reference displacement is **0.03656**, giving a physical scale for the residual.\n\n| Model | Coverage | Precision | Spread ratio | Shuffled generated joint SW1 "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-transition-61b143595603",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a8ebf54e99e5ca1f7cbedc459fee6b5acf70bf28",
+    "path": "reports/transition/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "1f488c97145b389f099cdd5d0c8db19b08444d87dd97a87068d9dcf296546053",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transition/README.md"
+  },
+  "task_results": []
+}

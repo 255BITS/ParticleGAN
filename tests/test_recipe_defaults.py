@@ -83,12 +83,21 @@ def test_named_recipe_overrides_and_small_objects():
 
 @pytest.mark.parametrize('name,overrides', [
     ('gan', dict(conditioning='ucd', num_classes=2)),
-    ('ae_gan', {}), ('vae_gan', {}), ('ddgan', {}), ('mog', {}),
+    ('ae_gan', {}), ('vae_gan', {}), ('ddgan', {}),
 ])
 def test_named_components_do_not_implicitly_choose_training_control_flow(name, overrides):
     recipe = get_recipe(name, **overrides)
     with pytest.raises(ValueError, match='unconditional scalar GANs'):
         GANTrainer(recipe, nn.Linear(recipe.z_dim, 2), nn.Linear(2, 1))
+
+
+def test_named_mog_uses_scalar_trainer_with_explicit_a2_eligibility():
+    recipe = get_recipe('mog', num_particles=8)
+    with pytest.raises(ValueError, match='standardized MoG reads couple rows'):
+        GANTrainer(recipe, nn.Linear(recipe.z_dim, 2), nn.Linear(2, 1))
+    row_local = recipe.replace(standardize=False)
+    trainer = GANTrainer(row_local, nn.Linear(row_local.z_dim, 2), nn.Linear(2, 1))
+    assert trainer.prior_mechanisms['a2']['enabled']
 
 
 def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "id": "mid_scale_identity",
+  "adapter": "transfer_behavior",
+  "execution": {
+    "host": "mid_scale_identity",
+    "steps": 800,
+    "prior": {
+      "kind": "particle_cloud",
+      "sigma": 0.0,
+      "standardize": false,
+      "learnable": true,
+      "exception_reason": "Deterministic scale-conditioned residual controls are parameter clouds, with no sampled latent prior."
+    },
+    "protocol": "screening",
+    "produces_state": false,
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "host_definition": {
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "steps": 800
+    },
+    "execution_path": "public_components",
+    "prior_applicability": "not_sampled",
+    "device": "cpu",
+    "schedule_policy": "public_recipe_with_frozen_host_horizon"
+  },
+  "evaluation": {
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "thresholds": [
+      [
+        "concept_cos_plus",
+        ">=",
+        0.85
+      ],
+      [
+        "concept_cos_minus",
+        ">=",
+        0.85
+      ],
+      [
+        "concept_mag_plus",
+        ">=",
+        0.75
+      ],
+      [
+        "concept_mag_plus",
+        "<=",
+        1.25
+      ],
+      [
+        "concept_mag_minus",
+        ">=",
+        0.75
+      ],
+      [
+        "concept_mag_minus",
+        "<=",
+        1.25
+      ],
+      [
+        "identity_at_0",
+        ">=",
+        0.85
+      ],
+      [
+        "identity_at_mid",
+        ">=",
+        0.85
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
+    }
+  },
+  "resources": {
+    "gpus": 0,
+    "gpu_memory_mb": 0,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800,
+    "allow_cpu": true
+  },
+  "requires_capabilities": [
+    "named_rng",
+    "live_sampling",
+    "particle_cloud"
+  ],
+  "dependencies": []
+}

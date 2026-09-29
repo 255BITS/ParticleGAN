@@ -26,7 +26,7 @@ def worker_request(tmp_path, program, *, budget=3):
     (target / "runtime.py").write_text(program)
     source = inspect_source(checkout)
     source["snapshot_path"] = str(snapshot_source(checkout, tmp_path / "queue", source))
-    req.update(source=source, runtime=runtime_manifest(), protocol={}, rng={})
+    req.update(source=source, runtime=runtime_manifest())
     return req
 
 

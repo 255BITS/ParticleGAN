@@ -51,7 +51,8 @@ def execute(path: Path) -> int:
         if request.get("runtime") != runtime_manifest():
             raise ValueError("runtime changed since submission; resolve a new request")
         expected_compute = job.get("science", {}).get("compute")
-        if expected_compute and compute_profile("cpu" if worker["device"] == "cpu" else "cuda", expected_compute.get("model")) != expected_compute:
+        if expected_compute and compute_profile("cpu" if worker["device"] == "cpu" else "cuda", expected_compute.get("model"),
+                threads=job.get("resources", {}).get("cpu_threads", 1)) != expected_compute:
             raise ValueError("compute backend/hardware changed since submission; resolve a compatible request")
         lease_fd = int(os.environ["FORGE_LEASE_FD"])
         # The runner inherits the lease too: SIGKILL of this supervisor cannot
@@ -85,6 +86,7 @@ def execute(path: Path) -> int:
         # Clean descendants on every path, including successful leader exit.
         stop_group(child, grace=0)
         if terminal["attempt_status"] == "completed" and request.get("requires_independent_grading"):
+            verify_snapshot(Path(request["source"]["snapshot_path"]), request["source"])
             child = subprocess.Popen([sys.executable, "-u", "-m", "experiments.forge.evaluate", str(path)],
                                      start_new_session=True, pass_fds=(lease_fd,))
             atomic_json(directory / "child.json", {"pid": child.pid, "process_identity": process_identity(child.pid),

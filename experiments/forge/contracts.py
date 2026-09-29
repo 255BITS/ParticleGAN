@@ -24,7 +24,7 @@ LIFECYCLE = {
     "ready": {"running", "awaiting_readout", "abandoned", "superseded"},
     "running": {"awaiting_readout"},
     "awaiting_readout": {"concluded", "ready", "abandoned", "superseded"},
-    "concluded": {"superseded"},
+    "concluded": {"superseded", "abandoned"},
     "abandoned": set(), "superseded": set(),
 }
 

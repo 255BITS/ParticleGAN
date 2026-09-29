@@ -1,0 +1,235 @@
+{
+  "maximum_jobs": 6,
+  "maximum_training_wall_seconds": 1800,
+  "new_mog_next_step": "Use the existing bounded Forge pilot to bind a finished baseline/challenger cohort; do not relabel cloud receipts or launch all reference experiments.",
+  "retry_budget": 0,
+  "runs": [
+    {
+      "candidate_id": "pr217_qr_native_adapter",
+      "fixed_fixture": true,
+      "fixture_parameter_sha256": null,
+      "fixture_spec_receipts": [
+        {
+          "git_blob": "b829f40d22e431e8b0c72fa32322bed77aa511c8",
+          "path": "reports/toy100/lrfree-search/harness/tasks/custom22_specs.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/tasks/custom22_specs.json"
+        },
+        {
+          "git_blob": "ef2e25676e6fff47749935b87339e6f473d531ca",
+          "path": "reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json"
+        }
+      ],
+      "id": "pr217_qr_native_adapter--two_pole",
+      "maximum_updates": 80,
+      "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+      "prerequisites": [
+        "Restore exact archived package and harness",
+        "Freeze task parameter/RNG fixture and verify custom-host parity before spending training budget"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "purpose": "Resolve initial-smoke unknown for an already observed independent quality failure.",
+      "reason": "Task-specific parameter receipt is absent; declarations are not an executed fixture.",
+      "scoring_weights": "live",
+      "seed_sweep": false,
+      "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "status": "BLOCKED",
+      "task_id": "two_pole",
+      "wall_timeout_seconds": 300
+    },
+    {
+      "candidate_id": "pr217_qr_native_adapter",
+      "fixed_fixture": true,
+      "fixture_parameter_sha256": null,
+      "fixture_spec_receipts": [
+        {
+          "git_blob": "b829f40d22e431e8b0c72fa32322bed77aa511c8",
+          "path": "reports/toy100/lrfree-search/harness/tasks/custom22_specs.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/tasks/custom22_specs.json"
+        },
+        {
+          "git_blob": "ef2e25676e6fff47749935b87339e6f473d531ca",
+          "path": "reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json"
+        }
+      ],
+      "id": "pr217_qr_native_adapter--unused_token_hold",
+      "maximum_updates": 200,
+      "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+      "prerequisites": [
+        "Restore exact archived package and harness",
+        "Freeze task parameter/RNG fixture and verify custom-host parity before spending training budget"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "purpose": "Resolve initial-smoke unknown for an already observed independent quality failure.",
+      "reason": "Task-specific parameter receipt is absent; declarations are not an executed fixture.",
+      "scoring_weights": "live",
+      "seed_sweep": false,
+      "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "status": "BLOCKED",
+      "task_id": "unused_token_hold",
+      "wall_timeout_seconds": 300
+    },
+    {
+      "candidate_id": "pr217_qr_native_adapter",
+      "fixed_fixture": true,
+      "fixture_parameter_sha256": null,
+      "fixture_spec_receipts": [
+        {
+          "git_blob": "b829f40d22e431e8b0c72fa32322bed77aa511c8",
+          "path": "reports/toy100/lrfree-search/harness/tasks/custom22_specs.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/tasks/custom22_specs.json"
+        },
+        {
+          "git_blob": "ef2e25676e6fff47749935b87339e6f473d531ca",
+          "path": "reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json"
+        }
+      ],
+      "id": "pr217_qr_native_adapter--ae_gan_hold",
+      "maximum_updates": 250,
+      "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+      "prerequisites": [
+        "Restore exact archived package and harness",
+        "Freeze task parameter/RNG fixture and verify custom-host parity before spending training budget"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "purpose": "Resolve initial-smoke unknown for an already observed independent quality failure.",
+      "reason": "Task-specific parameter receipt is absent; declarations are not an executed fixture.",
+      "scoring_weights": "live",
+      "seed_sweep": false,
+      "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "status": "BLOCKED",
+      "task_id": "ae_gan_hold",
+      "wall_timeout_seconds": 300
+    },
+    {
+      "candidate_id": "pr215_qr_adapter",
+      "fixed_fixture": true,
+      "fixture_parameter_sha256": null,
+      "fixture_spec_receipts": [
+        {
+          "git_blob": "b829f40d22e431e8b0c72fa32322bed77aa511c8",
+          "path": "reports/toy100/lrfree-search/harness/tasks/custom22_specs.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/tasks/custom22_specs.json"
+        },
+        {
+          "git_blob": "ef2e25676e6fff47749935b87339e6f473d531ca",
+          "path": "reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json"
+        }
+      ],
+      "id": "pr215_qr_adapter--two_pole",
+      "maximum_updates": 80,
+      "package_sha256": "0a5aae9479ab741dd0f9f0ebde86137fbde43109e33e128d4839c7ad6a1d9686",
+      "prerequisites": [
+        "Restore exact archived package and harness",
+        "Freeze task parameter/RNG fixture and verify custom-host parity before spending training budget"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "purpose": "Resolve initial-smoke unknown for an already observed independent quality failure.",
+      "reason": "Task-specific parameter receipt is absent; declarations are not an executed fixture.",
+      "scoring_weights": "live",
+      "seed_sweep": false,
+      "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "status": "BLOCKED",
+      "task_id": "two_pole",
+      "wall_timeout_seconds": 300
+    },
+    {
+      "candidate_id": "pr215_qr_adapter",
+      "fixed_fixture": true,
+      "fixture_parameter_sha256": null,
+      "fixture_spec_receipts": [
+        {
+          "git_blob": "b829f40d22e431e8b0c72fa32322bed77aa511c8",
+          "path": "reports/toy100/lrfree-search/harness/tasks/custom22_specs.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/tasks/custom22_specs.json"
+        },
+        {
+          "git_blob": "ef2e25676e6fff47749935b87339e6f473d531ca",
+          "path": "reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json"
+        }
+      ],
+      "id": "pr215_qr_adapter--unused_token_hold",
+      "maximum_updates": 200,
+      "package_sha256": "0a5aae9479ab741dd0f9f0ebde86137fbde43109e33e128d4839c7ad6a1d9686",
+      "prerequisites": [
+        "Restore exact archived package and harness",
+        "Freeze task parameter/RNG fixture and verify custom-host parity before spending training budget"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "purpose": "Resolve initial-smoke unknown for an already observed independent quality failure.",
+      "reason": "Task-specific parameter receipt is absent; declarations are not an executed fixture.",
+      "scoring_weights": "live",
+      "seed_sweep": false,
+      "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "status": "BLOCKED",
+      "task_id": "unused_token_hold",
+      "wall_timeout_seconds": 300
+    },
+    {
+      "candidate_id": "pr215_qr_adapter",
+      "fixed_fixture": true,
+      "fixture_parameter_sha256": null,
+      "fixture_spec_receipts": [
+        {
+          "git_blob": "b829f40d22e431e8b0c72fa32322bed77aa511c8",
+          "path": "reports/toy100/lrfree-search/harness/tasks/custom22_specs.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/tasks/custom22_specs.json"
+        },
+        {
+          "git_blob": "ef2e25676e6fff47749935b87339e6f473d531ca",
+          "path": "reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/hosts/custom/MANIFEST.json"
+        }
+      ],
+      "id": "pr215_qr_adapter--ae_gan_hold",
+      "maximum_updates": 250,
+      "package_sha256": "0a5aae9479ab741dd0f9f0ebde86137fbde43109e33e128d4839c7ad6a1d9686",
+      "prerequisites": [
+        "Restore exact archived package and harness",
+        "Freeze task parameter/RNG fixture and verify custom-host parity before spending training budget"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "purpose": "Resolve initial-smoke unknown for an already observed independent quality failure.",
+      "reason": "Task-specific parameter receipt is absent; declarations are not an executed fixture.",
+      "scoring_weights": "live",
+      "seed_sweep": false,
+      "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+      "status": "BLOCKED",
+      "task_id": "ae_gan_hold",
+      "wall_timeout_seconds": 300
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Six missing historical cloud smoke receipts only. This does not establish new-MoG adoption.",
+  "status": "PROPOSED_BLOCKED_NOT_AUTHORIZED",
+  "stop_rule": "Stop each candidate at first scientific smoke FAIL; host or fixture refusal is BLOCKED before training.",
+  "training_allowance_seconds": 0
+}

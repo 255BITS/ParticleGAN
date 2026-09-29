@@ -340,7 +340,10 @@ remains caller-owned. Evaluation cannot borrow a training stream.
   `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
 
 The recipe's `total_steps` fixes every schedule horizon. By default it is also
-the execution bound. Set `max_steps` explicitly to allow bounded continuation
+the execution bound. After restoring a checkpoint with its original bound, call
+`trainer.extend_execution(new_max_steps)` to increase only the execution
+allowance while keeping model, optimizer, prior, EMA, and RNG state intact.
+The new allowance must exceed the current one. Set `max_steps` explicitly to allow bounded continuation
 past that horizon; this preserves the original prefix and leaves schedules at
 their terminal values. It does not stretch or restart a schedule. Save and
 resume with the same explicit bound (included in the checkpoint when different

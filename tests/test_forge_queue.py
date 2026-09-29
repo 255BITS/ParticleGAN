@@ -16,6 +16,9 @@ def grade(task, raw):
 
 
 def request(tmp_path, candidate="a", *, cap=3, cost=10):
+    from experiments.forge.api import FormulationContext
+    protocol = {"id": "screening", "seed": 0}
+    rng = FormulationContext().streams.manifest()
     source = tmp_path / "worktree"
     source.mkdir(exist_ok=True)
     (source / "particlegan").mkdir(exist_ok=True)
@@ -24,9 +27,11 @@ def request(tmp_path, candidate="a", *, cap=3, cost=10):
     manifest["snapshot_path"] = str(snapshot_source(source, tmp_path / "queue", manifest))
     tasks = {f"t{i}": {"id": f"t{i}", "target": i, "dependencies": []} for i in (1, 2, 3)}
     return {"candidate": {"id": candidate}, "candidate_revision": "same-code", "source": manifest,
+            "protocol": protocol, "rng": rng,
             "view": {"goal": "stability", "assignments": [{"task": f"t{i}", "qualification_tier": i,
                        "importance": "required", "order": i} for i in (1, 2, 3)]}, "tasks": tasks,
             "through_tier": cap, "jobs": [{"task_id": f"t{i}", "compatibility_key": stable_hash(["code", i]),
+                "science": {"protocol": protocol, "seed": 0, "rng": rng},
                 "budget_seconds": cost, "resources": {"allow_cpu": True, "memory_mb": 1}} for i in (1, 2, 3)]}
 
 
@@ -253,3 +258,30 @@ def test_collector_recovers_torn_tail_and_replays_missing_campaign_copy(tmp_path
     assert central.read_bytes() == original
     assert (q.root / "pilot/progress.jsonl").read_bytes() == original
     assert list(q.root.glob("events.jsonl.partial-*"))
+
+
+def test_retry_lineage_is_frozen_before_launch_and_preserved_in_durable_evidence(tmp_path):
+    reports = tmp_path / "repo/reports/forge"
+    q = Queue(tmp_path / "queue", grader=grade, report_root=reports)
+    q.submit(request(tmp_path, cap=1), campaign())
+    first = q.claim(SLOTS)
+    finish(first, status="error", elapsed=3)
+    q.collect()
+    first_result = read_json(reports / "attempts" / first["worker"]["attempt"] / "result.json")
+    q.retry(first["job"]["compatibility_key"], reason="fixed worker setup")
+    second = q.claim(SLOTS)
+    assert second["retry_of"]["attempt_id"] == first_result["attempt_id"]
+    assert second["retry_of"]["result_hash"] == stable_hash(first_result)
+    assert second["retry_of"]["reason"] == "fixed worker setup"
+    finish(second, elapsed=2)
+    q.collect()
+    directory = reports / "attempts" / second["worker"]["attempt"]
+    result = read_json(directory / "result.json")
+    assert result["retry_of"] == read_json(directory / "request.json")["retry_of"]
+    assert read_json(directory / "evidence.json")["result_hash"] == stable_hash(result)
+    assert q.inspect()["campaigns"]["pilot"]["spent_seconds"] == 5
+    from experiments.forge.knowledge import _attempts
+    attempts, issues = _attempts(tmp_path / "repo")
+    assert not issues
+    old = next(a for a in attempts if a["attempt_id"] == first_result["attempt_id"])
+    assert old["superseded_by"] == result["attempt_id"]

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "target_shift_recovery",
+  "adapter": "paired_adaptation",
+  "execution": {
+    "host": "mode_hold",
+    "steps": 3600,
+    "control_steps": 3600,
+    "shift_step": 2400,
+    "shift": [
+      1.0,
+      0.0
+    ],
+    "original_schedule_horizon": 1200,
+    "diagnostic_every": 10,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "frozen_control": true,
+    "host_definition": {
+      "particles": 12,
+      "z_dim": 4,
+      "batch": 128,
+      "hidden": 96,
+      "layers": 3,
+      "fourier": 3,
+      "eval_samples": 4096
+    },
+    "produces_state": true
+  },
+  "evaluation": {
+    "kind": "paired_adaptation",
+    "evaluator": "benchmarks.toy100.continuous_probe:match_frozen_control",
+    "scoring_weights": "live",
+    "steps": 3600,
+    "shift_step": 2400,
+    "recovery_deadline": 400,
+    "diagnostic_every": 10,
+    "stationary_checks": 5,
+    "deadline_checks": 81,
+    "minimum_frozen_passing": 0,
+    "sources": {
+      "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541"
+    },
+    "requires_pair_artifacts": true
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 3600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": [
+    {
+      "task": "mode_hold",
+      "kind": "gate"
+    }
+  ]
+}

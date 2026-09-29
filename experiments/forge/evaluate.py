@@ -1,0 +1,31 @@
+"""Independent evaluator child, imported entirely from the frozen source tree."""
+from pathlib import Path
+import sys
+
+from .contracts import atomic_json, read_json, stable_hash
+from .views import grade_result
+
+
+def evaluate(path: Path):
+    import torch
+    torch.set_num_threads(1)
+    torch.use_deterministic_algorithms(True)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
+    resolved = read_json(path)
+    request, job = resolved["request"], resolved["job"]
+    raw = read_json(path.parent / "raw-result.json")
+    grades = {}
+    for task_id in job.get("task_ids", [job["task_id"]]):
+        member = raw.get("task_results", {}).get(task_id, raw)
+        grades[task_id] = grade_result(request["tasks"][task_id], member)
+    result = {"schema_version": 1, "grades": grades, "raw_hash": stable_hash(raw),
+              "source_digest": request["source"]["digest"]}
+    atomic_json(path.parent / "graded-result.json", result)
+    return result
+
+
+if __name__ == "__main__":
+    evaluate(Path(sys.argv[1]).resolve())

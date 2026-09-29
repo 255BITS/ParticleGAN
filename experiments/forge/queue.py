@@ -9,6 +9,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 import fcntl
 import json
+import math
 import os
 from pathlib import Path
 import signal
@@ -20,6 +21,132 @@ import uuid
 from .contracts import (atomic_json, canonical, file_lock, identifier, positive_number,
                         read_json, stable_hash, utc_now)
 from .sources import verify_snapshot
+
+
+def _optional_text(path):
+    try:
+        return Path(path).read_text().strip()
+    except OSError:
+        return None
+
+
+def _cpu_set(text):
+    result = set()
+    for part in (text or "").split(","):
+        if not part:
+            continue
+        bounds = [int(value) for value in part.split("-")]
+        result.update(range(bounds[0], bounds[-1] + 1))
+    return result
+
+
+def _cgroup_locations(proc_root, cgroup_root):
+    """Resolve membership against mount roots, including cgroup namespaces."""
+    memberships = []
+    for row in (_optional_text(proc_root / "self/cgroup") or "").splitlines():
+        _, controllers, member = row.split(":", 2)
+        memberships.append((set(controllers.split(",")) - {""}, Path(member)))
+    mounts = []
+    for row in (_optional_text(proc_root / "self/mountinfo") or "").splitlines():
+        left, right = row.split(" - ", 1)
+        fields, filesystem = left.split(), right.split()
+        if filesystem[0] not in {"cgroup", "cgroup2"}:
+            continue
+        mount = Path(fields[4].replace("\\040", " "))
+        if mount.is_relative_to("/sys/fs/cgroup"):
+            mount = cgroup_root / mount.relative_to("/sys/fs/cgroup")
+        mounts.append((Path(fields[3]), mount, set(filesystem[2].split(",")), filesystem[0] == "cgroup2"))
+    if not mounts:
+        # Linux's ordinary hierarchy when mountinfo is unavailable.
+        mounts = [(Path("/"), cgroup_root if not controllers else cgroup_root / ",".join(sorted(controllers)),
+                   controllers, not controllers) for controllers, _ in memberships]
+    locations = []
+    for controllers, member in memberships:
+        for mounted_root, mount, supplied, unified in mounts:
+            if unified != (not controllers) or (controllers and not controllers & supplied):
+                continue
+            relative = member.relative_to(mounted_root) if member.is_relative_to(mounted_root) else member.relative_to("/")
+            path = mount / relative
+            # Ancestor quotas/limits constrain descendants even if leaf says max.
+            while path.is_relative_to(mount):
+                locations.append((path, unified, controllers))
+                if path == mount:
+                    break
+                path = path.parent
+    return locations
+
+
+def host_capacity(*, proc_root=Path("/proc"), cgroup_root=Path("/sys/fs/cgroup"), affinity=None):
+    """Measured Linux capacity, capped by affinity and hierarchical cgroup limits.
+
+    Available RAM excludes swap and leaves system headroom. Queue reservations
+    are deducted again at claim time: deliberately conservative while workers
+    have not yet allocated their full declared working set.
+    """
+    proc_root, cgroup_root = Path(proc_root), Path(cgroup_root)
+    memory = {}
+    for row in (_optional_text(proc_root / "meminfo") or "").splitlines():
+        key, value = row.split(":", 1)
+        memory[key] = int(value.split()[0]) * 1024
+    if not memory.get("MemTotal"):
+        raise ValueError("cannot determine physical host memory from /proc/meminfo")
+    total = memory["MemTotal"]
+    available = min(total, memory.get("MemAvailable", memory.get("MemFree", 0)))
+    if affinity is None:
+        try:
+            affinity = os.sched_getaffinity(0)
+        except (AttributeError, OSError):
+            affinity = set(range(os.cpu_count() or 1))
+    cpus = set(affinity)
+    quotas = []
+    for path, unified, controllers in _cgroup_locations(proc_root, cgroup_root):
+        if unified or "cpuset" in controllers:
+            declared = _optional_text(path / "cpuset.cpus.effective") or _optional_text(path / "cpuset.cpus")
+            if declared:
+                cpus &= _cpu_set(declared)
+        if unified:
+            rate = (_optional_text(path / "cpu.max") or "max 100000").split()
+        else:
+            rate = [_optional_text(path / "cpu.cfs_quota_us") or "-1",
+                    _optional_text(path / "cpu.cfs_period_us") or "100000"]
+        if (unified or "cpu" in controllers) and rate[0] not in {"max", "-1"}:
+            quota, period = int(rate[0]), int(rate[1])
+            if quota > 0 and period > 0:
+                quotas.append(max(1, quota // period))
+        if unified or "memory" in controllers:
+            limit = _optional_text(path / ("memory.max" if unified else "memory.limit_in_bytes"))
+            usage = _optional_text(path / ("memory.current" if unified else "memory.usage_in_bytes"))
+            if limit and limit not in {"max", "-1"}:
+                limit = int(limit)
+                total = min(total, limit)
+                available = min(available, max(0, limit - int(usage)) if usage is not None else 0)
+    total_mb, available_mb = total // (1024 * 1024), available // (1024 * 1024)
+    headroom = min(512, total_mb // 20)
+    return {"cpu_threads": min([len(cpus), *quotas]), "memory_mb": max(0, total_mb - headroom),
+            "available_memory_mb": max(0, available_mb - headroom), "memory_headroom_mb": headroom,
+            "cpu_affinity": sorted(cpus)}
+
+
+def _host_request(resources):
+    threads = resources.get("cpu_threads", 1)
+    if type(threads) is not int or threads < 1:
+        raise ValueError("cpu_threads must be a positive integer")
+    memory = resources.get("memory_mb", 0)
+    host_memory = resources.get("host_memory_mb", max(512, memory) if type(memory) in (int, float) else None)
+    if any(type(value) not in (int, float) or not math.isfinite(value) or value < 0 for value in (memory, host_memory)):
+        raise ValueError("memory budgets must be finite nonnegative MiB")
+    if type(resources.get("gpus", 1)) is not int or resources.get("gpus", 1) not in (0, 1):
+        raise ValueError("this worker supports exactly zero or one GPU")
+    return {"cpu_threads": threads, "host_memory_mb": max(512, math.ceil(host_memory), math.ceil(memory))}
+
+
+def _device_matches(slot, resources, *, maximum=False):
+    return ((slot["device"] != "cpu" or resources.get("allow_cpu", False))
+            and (not slot.get("sharing") or resources.get("memory_mb", 0) > 0)
+            and (resources.get("gpus", 1) != 0 or slot["device"] == "cpu")
+            and (not resources.get("backend") or resources["backend"] == ("cpu" if slot["device"] == "cpu" else "cuda"))
+            and (not resources.get("gpu_model") or resources["gpu_model"] == slot.get("model"))
+            and slot.get("capacity_mb" if maximum else "memory_mb", slot.get("memory_mb", 0)) >= resources.get("memory_mb", 0))
 
 
 def process_identity(pid: int) -> str | None:
@@ -90,6 +217,22 @@ class Queue:
 
     def submit(self, request: dict, campaign: dict) -> dict:
         """Request contains pinned view/tasks/protocol/source and fully resolved jobs."""
+        from .promotion import validate_screening_submission, validate_submission
+        if "calibration_lane" in request:
+            from .calibration_lane import validate_submission as validate_calibration_submission
+            if self.report_root is None:
+                raise ValueError("calibration lane requires a repository-bound report_root")
+            expected = validate_calibration_submission(self.report_root.parent.parent, request)
+            if stable_hash(campaign) != stable_hash(expected):
+                raise ValueError("calibration campaign differs from frozen budgets/policy")
+        elif "promotion" in request:
+            if self.report_root is None:
+                raise ValueError("promotion requires a repository-bound report_root")
+            expected = validate_submission(self.report_root.parent.parent, request)
+            if stable_hash(campaign) != stable_hash(expected):
+                raise ValueError("promotion campaign differs from frozen budgets/policy")
+        else:
+            validate_screening_submission(request)
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")
@@ -177,7 +320,9 @@ class Queue:
                 if task_id in results or task_id not in jobs:
                     continue
                 task = request["tasks"][task_id]
-                dependencies = [d["task"] if isinstance(d, dict) else d for d in task.get("dependencies", [])]
+                dependencies = [d["task"] if isinstance(d, dict) else d for d in task.get("dependencies", [])
+                                if not request.get("calibration_lane") or
+                                (isinstance(d, dict) and d.get("kind") != "gate")]
                 if not all(results.get(d, {}).get("gate_status") == "PASS" for d in dependencies):
                     continue
                 key = jobs[task_id]["compatibility_key"]
@@ -197,6 +342,8 @@ class Queue:
             # Complete optional work of this tier before proceeding when requested.
             if eligible or any_running:
                 return eligible[:1], None, any_running
+            if request.get("calibration_lane") and any(a["task"] not in results for a in group):
+                return [], "selected calibration diagnostics lack required checkpoint/data prerequisites", False
         return [], None, any_running
 
     def _refresh(self, state):
@@ -236,10 +383,13 @@ class Queue:
         """Called only by the drain owner; reservation is atomic with submissions."""
         with self.state() as state:
             self._refresh(state)
-            busy = {(j["worker"]["device"], j["worker"]["slot"]) for j in state["jobs"].values() if j["status"] == "running"}
+            running = [j for j in state["jobs"].values() if j["status"] == "running"]
+            capacity = host_capacity()
+            reserved = [_host_request(j["definition"].get("resources", {})) for j in running]
+            free_threads = capacity["cpu_threads"] - sum(r["cpu_threads"] for r in reserved)
+            free_host_memory = capacity["available_memory_mb"] - sum(r["host_memory_mb"] for r in reserved)
+            busy = {(j["worker"]["device"], j["worker"]["slot"]) for j in running}
             free = [s for s in slots if (s["device"], s["slot"]) not in busy]
-            if not free:
-                return None
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
             for request_id, entry in pending:
@@ -256,22 +406,33 @@ class Queue:
                 for key in eligible:
                     job = state["jobs"][key]
                     resources = job["definition"].get("resources", {})
-                    suitable = [s for s in free if (s["device"] != "cpu" or resources.get("allow_cpu", False))
-                                and (resources.get("gpus", 1) != 0 or s["device"] == "cpu")
-                                and (not resources.get("backend") or resources["backend"] == ("cpu" if s["device"] == "cpu" else "cuda"))
-                                and (not resources.get("gpu_model") or resources["gpu_model"] == s.get("model"))
-                                and s.get("memory_mb", 0) >= resources.get("memory_mb", 0)]
+                    try:
+                        needed = _host_request(resources)
+                        expected_threads = job["definition"].get("science", {}).get("compute", {}).get("threads")
+                        if expected_threads is not None and expected_threads != needed["cpu_threads"]:
+                            raise ValueError("CPU thread budget differs from the frozen scientific compute profile")
+                    except ValueError as error:
+                        entry.update(status="blocked", reason="resource: " + str(error), lifecycle="awaiting_readout")
+                        continue
+                    if (needed["cpu_threads"] > capacity["cpu_threads"]
+                            or needed["host_memory_mb"] > capacity["memory_mb"]):
+                        entry.update(status="blocked", reason="resource: requested CPU threads/host RAM exceed affinity or cgroup host capacity",
+                                     lifecycle="awaiting_readout")
+                        continue
+                    if needed["cpu_threads"] > free_threads or needed["host_memory_mb"] > free_host_memory:
+                        if not running:
+                            entry.update(status="blocked", reason="resource: insufficient currently available host RAM; retry when capacity is available",
+                                         lifecycle="awaiting_readout")
+                        continue
+                    suitable = [s for s in free if _device_matches(s, resources)]
                     if resources.get("gpus", 1):
                         suitable.sort(key=lambda s: s["device"] == "cpu")
                     if not suitable:
                         # Distinguish occupied capacity from an impossible allocation.
-                        feasible = [s for s in slots if (s["device"] != "cpu" or resources.get("allow_cpu", False))
-                                    and (resources.get("gpus", 1) != 0 or s["device"] == "cpu")
-                                    and (not resources.get("backend") or resources["backend"] == ("cpu" if s["device"] == "cpu" else "cuda"))
-                                    and (not resources.get("gpu_model") or resources["gpu_model"] == s.get("model"))
-                                    and s.get("memory_mb", 0) >= resources.get("memory_mb", 0)]
-                        if not feasible:
-                            entry.update(status="blocked", reason="resource: no configured device satisfies task memory/device requirements")
+                        feasible = [s for s in slots if _device_matches(s, resources, maximum=True)]
+                        if not feasible or not running:
+                            entry.update(status="blocked", reason="resource: no currently available configured device satisfies task memory/device requirements",
+                                         lifecycle="awaiting_readout")
                         continue
                     seconds = job["definition"]["budget_seconds"]
                     ok, reason = self._available_budget(state, request, seconds)
@@ -284,9 +445,30 @@ class Queue:
                     directory = self.root / request["campaign_id"] / attempt
                     directory.mkdir(parents=True)
                     worker = {**suitable[0], "attempt": attempt, "directory": str(directory),
-                              "token": uuid.uuid4().hex, "started_at": time.time(), "pid": None}
+                              "token": uuid.uuid4().hex, "started_at": time.time(), "pid": None,
+                              "host_reservation": needed, "host_capacity_at_claim": capacity}
                     resolved = {"schema_version": 1, "request_id": request_id, "request": request,
                                 "job": job["definition"], "worker": worker}
+                    prerequisites = {}
+                    for member in job["definition"].get("task_ids", [job["definition"]["task_id"]]):
+                        for dependency in request["tasks"][member].get("dependencies", []):
+                            required = dependency["task"] if isinstance(dependency, dict) else dependency
+                            if required in job["definition"].get("task_ids", []):
+                                continue
+                            definition = next(j for j in request["jobs"] if required in j.get("task_ids", [j["task_id"]]))
+                            result = state["jobs"][definition["compatibility_key"]]["result"]
+                            if result is None and request.get("calibration_lane") and (
+                                    not isinstance(dependency, dict) or dependency.get("kind") == "gate"):
+                                continue
+                            row = next(row for row in result["task_results"] if row["task_id"] == required)
+                            prerequisites[required] = {"attempt_id": result["attempt_id"],
+                                "result_hash": stable_hash(result), "result": row,
+                                "candidate_revision": result["candidate_revision"],
+                                "compatibility_key": definition["compatibility_key"]}
+                    if prerequisites:
+                        resolved["prerequisites"] = prerequisites
+                    if job.get("retry_of"):
+                        resolved["retry_of"] = job["retry_of"]
                     atomic_json(directory / "request.json", resolved)
                     job.update(status="running", worker=worker, cost_owner={"campaign": request["campaign_id"],
                                "revision": request["candidate_revision"], "request": request_id}, reserved_seconds=seconds)
@@ -389,6 +571,8 @@ class Queue:
                 state["charges"].append({"attempt_id": worker["attempt"], "owner": dict(owner), "seconds": elapsed})
                 result = {"schema_version": 1, "attempt_id": worker["attempt"], "task_results": rows,
                           "raw": raw, "candidate_revision": request["candidate_revision"], "cost_owner": owner}
+                if job.get("retry_of"):
+                    result["retry_of"] = job["retry_of"]
                 atomic_json(directory / "result.json", result)
                 if self.report_root:
                     durable = self.report_root / "attempts" / worker["attempt"]
@@ -528,7 +712,11 @@ class Queue:
                 raise ValueError("known applicability blockers need an adapter/capability change, not retry")
             if len(job["attempts"]) >= 3:
                 raise ValueError("maximum three attempts; repair the environment before a new request")
-            job.update(status="pending", result=None)
+            previous = job["result"]
+            job.update(status="pending", result=None, retry_of={
+                "attempt_id": previous["attempt_id"], "result_hash": stable_hash(previous),
+                "reason": reason, "authorized_at": utc_now(),
+            })
             for request_id in job["subscribers"]:
                 entry = state["submissions"][request_id]
                 if entry["status"] != "cancelled":
@@ -560,23 +748,28 @@ def _event_ids(path: Path) -> set[str]:
 def device_slots(devices: list[str], workers_per_gpu: int = 1, *, allow_sharing: bool = False) -> list[dict]:
     if not devices or len(devices) != len(set(devices)):
         raise ValueError("select at least one device, without duplicates")
-    if workers_per_gpu < 1 or (workers_per_gpu > 1 and not allow_sharing):
+    if type(workers_per_gpu) is not int or workers_per_gpu < 1 or (workers_per_gpu > 1 and not allow_sharing):
         raise ValueError("GPU sharing requires --allow-sharing and explicit memory budgets")
+    host = host_capacity()
     slots = []
     for device in devices:
         if device == "cpu":
-            free_mb = 1_000_000
-            model = None
+            slots.append({"device": "cpu", "slot": 0, "memory_mb": host["available_memory_mb"],
+                          "capacity_mb": host["memory_mb"], "model": None})
+            continue
         else:
             if not device.isdigit():
                 raise ValueError("GPU devices must be physical numeric indices")
-            output = subprocess.check_output(["nvidia-smi", "-i", device, "--query-gpu=memory.free,name", "--format=csv,noheader,nounits"], text=True)
-            memory, model = [value.strip() for value in output.strip().split(",", 1)]
+            output = subprocess.check_output(["nvidia-smi", "-i", device, "--query-gpu=memory.free,memory.total,name", "--format=csv,noheader,nounits"], text=True)
+            memory, total, model = [value.strip() for value in output.strip().split(",", 2)]
             free_mb = max(0, int(memory) - 512)
         for slot in range(workers_per_gpu):
-            slots.append({"device": device, "slot": slot, "memory_mb": free_mb // workers_per_gpu, "model": model})
+            slots.append({"device": device, "slot": slot, "memory_mb": free_mb // workers_per_gpu,
+                          "capacity_mb": max(0, int(total) - 512) // workers_per_gpu, "model": model,
+                          "sharing": workers_per_gpu > 1})
     if "cpu" not in devices:
-        slots.append({"device": "cpu", "slot": 0, "memory_mb": 1_000_000})
+        slots.append({"device": "cpu", "slot": 0, "memory_mb": host["available_memory_mb"],
+                      "capacity_mb": host["memory_mb"], "model": None})
     return slots
 
 

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "clockfree_audit",
+  "adapter": "clockfree_audit",
+  "execution": {
+    "steps": 24,
+    "warmup_steps": 4,
+    "probe_steps": 4,
+    "step_label_offset": 8192,
+    "original_schedule_horizon": 128,
+    "perturbed_horizon": 4096,
+    "evaluation_samples": 16,
+    "resources": {"num_particles": 16, "z_dim": 2, "batch_size": 8},
+    "model": {"hidden": 16, "layers": 2, "fourier": 2},
+    "protocol": "screening",
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    }
+  },
+  "evaluation": {
+    "kind": "clockfree_parity",
+    "evaluator": "experiments.forge.views:_clockfree",
+    "scoring_weights": "live",
+    "conditions": [
+      "step_label",
+      "horizon",
+      "evaluation_cadence",
+      "restart"
+    ],
+    "training_feedback": false
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 300
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

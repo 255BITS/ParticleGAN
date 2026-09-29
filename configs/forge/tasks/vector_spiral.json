@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "id": "vector_spiral",
+  "adapter": "transfer_vector",
+  "execution": {
+    "host": "vector_spiral",
+    "steps": 1600,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": false,
+    "host_source": "benchmarks/transfer_suite/vector_tasks.py",
+    "host_definition": {
+      "hidden": 64,
+      "layers": 2,
+      "fourier": 2,
+      "z_dim": 4,
+      "particles": 256,
+      "batch": 128,
+      "steps": 1600,
+      "lr": 0.001,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "ema_decay": 0.995,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "d_every": 1,
+      "g_every": 1,
+      "family": "curved_continuous",
+      "split": "development",
+      "kind": "spiral",
+      "turns": 1.5,
+      "radius_min": 0.3,
+      "radius_max": 2.0,
+      "noise": 0.08
+    }
+  },
+  "evaluation": {
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "thresholds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18
+      ],
+      [
+        "mean_error",
+        "<=",
+        0.15
+      ],
+      [
+        "covariance_error",
+        "<=",
+        0.45
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/transfer_suite/vector_tasks.py": "b573e8aae115b17bd60b71b64b016d6f012c61ebd3388fd98be23ea79ce6a917"
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

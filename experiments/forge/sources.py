@@ -32,11 +32,13 @@ def runtime_manifest() -> dict:
             "system": platform.system(), "machine": platform.machine(), "packages": packages}
 
 
-def compute_profile(backend: str, cuda_model: str | None = None) -> dict:
+def compute_profile(backend: str, cuda_model: str | None = None, *, threads: int = 1) -> dict:
     """Scientific hardware cohort, independent of physical GPU index."""
     if backend not in {"cpu", "cuda"}:
         raise ValueError("execution backend must be cpu or cuda")
-    result = {"backend": backend, "threads": 1, "deterministic": True, "tf32": False}
+    if type(threads) is not int or threads < 1:
+        raise ValueError("compute threads must be a positive integer")
+    result = {"backend": backend, "threads": threads, "deterministic": True, "tf32": False}
     if backend == "cpu":
         cpu = platform.processor()
         path = Path("/proc/cpuinfo")
@@ -127,6 +129,12 @@ def verify_snapshot(path: Path, manifest: dict | None = None) -> None:
     manifest = manifest or read_json(path / "forge-source.json")
     if stable_hash(manifest["files"]) != manifest["digest"]:
         raise ValueError("invalid source manifest digest")
+    actual = {str(member.relative_to(path)) for member in path.rglob("*")
+              if member.is_file() and member.suffix in SOURCE_SUFFIXES
+              and "__pycache__" not in member.parts and member.name != "forge-source.json"}
+    unexpected = actual - set(manifest["files"])
+    if unexpected:
+        raise ValueError(f"undeclared files appeared in source snapshot: {sorted(unexpected)}")
     for relative, digest in manifest["files"].items():
         member = path / relative
         if not member.resolve().is_relative_to(path.resolve()) or file_hash(member) != digest:

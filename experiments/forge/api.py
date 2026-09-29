@@ -16,6 +16,15 @@ from .rng import NamedStreams, RNG_VERSION
 
 API_VERSION = "forge-api-v1"
 DEFAULT_PRIOR = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
+TRAINER_STREAM_BINDINGS = {
+    "latent_generator": ("prior", "latent", "indices"),
+    "penalty_generator": ("noise", "penalty", "training"),
+    "noise_generator": ("noise", "generator", "output"),
+    "input_noise_generator": ("noise", "critic", "input"),
+    "eval_generator": ("eval", "sampler", "samples"),
+    "model_generator": ("noise", "models", "stochastic_layers"),
+    "prior_noise_generator": ("noise", "prior", "gaussian"),
+}
 BUILTIN_CAPABILITIES = (
     "public_trainer", "public_components", "scalar_gan", "mog_prior", "particle_cloud", "learned_locations",
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
@@ -277,12 +286,9 @@ class FormulationContext:
             raise CapabilityError(["context and network devices differ"])
         prior = self.build_prior(dtype=first.dtype)
         options = {
-            "latent_generator": self.streams.generator("prior", component="latent", purpose="indices"),
-            "penalty_generator": self.streams.generator("noise", component="penalty", purpose="training"),
-            "noise_generator": self.streams.generator("noise", component="generator", purpose="output"),
-            "input_noise_generator": self.streams.generator("noise", component="critic", purpose="input"),
-            "eval_generator": self.streams.generator("eval", component="sampler", purpose="samples"),
-            "model_generator": self.streams.generator("noise", component="models", purpose="stochastic_layers"),
+            **{name: self.streams.generator(family, component=component, purpose=purpose)
+               for name, (family, component, purpose) in TRAINER_STREAM_BINDINGS.items()
+               if name != "prior_noise_generator" or type(prior).__name__ == "MoGParticlePrior"},
             "require_latent_damping": self.recipe.latent_damping_max_rate > 0,
             **self.bindings["trainer"],
         }
@@ -290,8 +296,6 @@ class FormulationContext:
             if "max_steps" in options:
                 raise CapabilityError(["execution budget conflicts with trainer extension"])
             options["max_steps"] = max_steps
-        if type(prior).__name__ == "MoGParticlePrior":
-            options["prior_noise_generator"] = self.streams.generator("noise", component="prior", purpose="gaussian")
         self._trainer = GANTrainer(self.recipe, generator, discriminator, prior=prior, **options)
         return self._trainer
 

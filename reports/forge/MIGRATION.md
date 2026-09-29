@@ -1,0 +1,93 @@
+# ParticleGAN Forge migration
+
+Implementation is in progress on `codex/tiered-experiment-qualification`, based
+on `develop`, in [PR #221](https://github.com/255BITS/ParticleGAN/pull/221).
+The [accepted plan](../../docs/better-experiment-automation-plan-2026-09-28.md)
+defines acceptance; this status file does not narrow its scope.
+
+## Frozen inputs and ownership
+
+- Package/inventory baseline: `92dc0319`.
+- LR-free source: `0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b` (PR #155).
+- Implementation start: `2509ab53ff750860096b16d3c47458adbdf79941`.
+- Later dt075 continuation / EMA / sensitivity receipts: import gaps until exact
+  source artifacts are located; no substitution with similarly named packages.
+- Coordinator: contracts, immutable source capture, queue, integration, Git and
+  the single migration readout. Subagents: history/imports; public API/RNG;
+  task declarations/views. All edits occur in this worktree with disjoint owners.
+- Compute allowance for foundations: zero training. CPU parity/unit checks are
+  allowed. Calibration and GPU pilot need a recorded bounded campaign.
+
+At kickoff GPU 0 had active HyperGAN training and GPU 1 had an active viewer.
+No legacy Forge/LR-free pool process was found in this machine's process list.
+This is an observation, not a capacity reservation. No process was stopped and
+no old queue ownership was changed. Recheck before the pilot; reserve capacity
+outside active pools and retain existing experiment requests.
+
+## Progress
+
+| Work | State | Evidence |
+| --- | --- | --- |
+| Freeze source revisions / branch / PR | Complete | PR #221 open, base `develop`; pins above |
+| Shared file contracts and source snapshots | Implemented, under integration review | `experiments/forge/contracts.py`, `sources.py`; mutation/reuse tests |
+| History mapping and source coverage | Implemented; refresh after staging new source | 174 cards, 112 scientific and 62 family-context; pinned #155 included |
+| MoG public API, capabilities, paired RNG | Implemented and tested | Public trainer/prior/A2, named component streams, checkpoint parity |
+| Task definitions / tier views / independent graders | Implemented and tested | 29 tasks, four views; no active monotonicity gate |
+| Queue, adapters, compiler, CLI and root guide | Real CPU execution and resource enforcement verified | 368 Forge checks; real process-group tests and atomic CPU/RAM reservations |
+| Clock audit, paired adaptation and native continuation | Implemented; bounded state/protocol verification | Saved state manifests, measured optimizer counters, exact prefix/restore/RNG comparison; `CONTINUATION_REVIEW.md` |
+| Calibration diagnostics and robustness registration | Implemented; no production adoption claim | Registered diagnostic namespace, report-bound calibration, fixed promotion contract and forgery/retry tests |
+| Phase D calibration / bounded multi-GPU pilot | Historical calibration replayed; current calibration and GPU pilot pending | Adoption remains blocked; CPU pilot below |
+| Root-guide onboarding | Existing-worktree walkthrough complete; fresh exported checkout pending | `ONBOARDING.md`, real anchor-ablation CPU failure, stopped downstream work and concluded readout |
+| Cutover | Pending accepted calibration and reserved multi-GPU pilot | Existing launchers retained |
+
+No candidate is promoted by implementing the engine or by passing its tests.
+
+## First bounded CPU pilot
+
+Campaign `implementation-pilot-cpu-v1` reserved at most 900 wall seconds for
+one candidate through Tier 1. It used one CPU worker and changed no legacy queue
+or GPU ownership. Request `043465ae751e26417aad2e9a`, attempt
+`b766e89d1a0843ba9af94f2ce94e4273`, candidate revision
+`87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9`.
+
+| Task | Verdict | Relevant measured value | Cost |
+| --- | --- | --- | --- |
+| two_pole, 80 updates | FAIL | mean_abs 0.10652 < 0.30; grad_med 0.06372 <= 1.0 | 5.2552 s supervised wall time; 0.3122 s host execution |
+| Remaining smoke / higher tiers | NOT_RUN | Required earlier gate failed | 0 executions |
+
+This verifies the real request → immutable snapshot → worker → independent
+grader → centralized metrics → durable receipt path and cheap rejection. It
+does not establish the smoke profile's predictive value. Preserve the failed
+attempt as a negative result for this exact public-component task/prior/config;
+do not interpret it as a blanket rejection of historical K3P evidence.
+
+Logs: `runs/forge/implementation-pilot/events.jsonl`. Durable evidence:
+[`attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json`](attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json).
+
+## Onboarding and remaining adoption work
+
+The independent [onboarding walkthrough](ONBOARDING.md) used the documented
+scaffold/plan/enqueue/drain/logs/board/readout/compile path for an anchor ablation.
+It failed `two_pole` after 5.9746 CPU wall seconds, spent on exactly one attempt,
+and left every later task unlaunched. Its frozen source and explicit particle-cloud
+host exception remain visible; neither CPU pilot supplies learned-MoG calibration.
+
+The [completion audit](COMPLETION_AUDIT.md) and
+[continuation review](CONTINUATION_REVIEW.md) retain concrete findings and their
+verification. Current calibration now ingests certified new-cohort evidence;
+diagnostic lanes may collect selected independent reference cells after a screen
+failure without granting qualification. No current profile has passed adoption.
+
+- [ ] Refresh source coverage and compiled memory after staging the engine.
+- [ ] Freeze a justified current-cohort control/profile and a bounded first
+  calibration selection; collect missing smoke evidence before deeper spending.
+- [ ] Meet the unchanged acceptance criteria or revise the screen with a new
+  declared profile and repeat its necessary calibration.
+- [ ] Reserve non-overlapping GPU capacity or one shared resource owner, then
+  record the real multi-GPU/cancellation/restart pilot.
+- [ ] Complete a fresh exported-checkout walkthrough and reconcile actual legacy
+  consumers/queues before making Forge the default entrypoint.
+
+No legacy process has been stopped or adopted by Forge. No robustness seed
+experiments have run; the registered promotion stage is conditional on a future
+finished candidate and is not required merely to test the engine.

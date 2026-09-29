@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "id": "unused_token_hold",
+  "adapter": "transfer_behavior",
+  "execution": {
+    "host": "unused_token_hold",
+    "steps": 200,
+    "prior": {
+      "kind": "particle_cloud",
+      "sigma": 0.0,
+      "standardize": false,
+      "learnable": true,
+      "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer."
+    },
+    "protocol": "screening",
+    "produces_state": false,
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "host_definition": {
+      "family": "existing_behavior",
+      "runner": "legacy",
+      "split": "development",
+      "phase": "fit",
+      "steps": 200
+    },
+    "execution_path": "public_components",
+    "prior_applicability": "not_sampled",
+    "device": "cpu",
+    "schedule_policy": "public_recipe_with_frozen_host_horizon"
+  },
+  "evaluation": {
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "thresholds": [
+      [
+        "unused_hold",
+        ">=",
+        0.85
+      ],
+      [
+        "concept_move",
+        ">=",
+        0.85
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
+    },
+    "guards": {
+      "finite_state": true,
+      "optimizer_roles": [
+        "generator",
+        "discriminator"
+      ],
+      "mechanism_exercised": true,
+      "rng_isolation": true
+    }
+  },
+  "resources": {
+    "gpus": 0,
+    "gpu_memory_mb": 0,
+    "cpu_threads": 1,
+    "timeout_seconds": 300,
+    "allow_cpu": true
+  },
+  "requires_capabilities": [
+    "named_rng",
+    "live_sampling",
+    "particle_cloud"
+  ],
+  "dependencies": []
+}

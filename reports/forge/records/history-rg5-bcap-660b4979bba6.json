@@ -1,0 +1,252 @@
+{
+  "candidate_id": "rg5-bcap",
+  "candidate_revision": "4d16badceeca3c0286ea460f364c871a45f5bb361e30c1368da944e2f9c3baf3",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: FAIL=1, NOT_RUN=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "rg5-bcap-hold-mode_hold-0.01-0.05",
+      "environment": {
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "OMP_NUM_THREADS": "1"
+      },
+      "floors": [
+        0.01,
+        0.05
+      ],
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-rg5-bcap-660b4979bba6",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 344.9934447889682,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-hold-mode_hold-0.01-0.05/result.json",
+            "artifact_sha256": "df639d4d498e281b33d6e92a5e7afc62cd514a826045054bad497e17fa0a20dc",
+            "id": "rg5-bcap-hold-mode_hold-0.01-0.05",
+            "snapshot": "results/rg5-bcap-hold-mode_hold-0.01-0.05.json.gz",
+            "snapshot_sha256": "4107e63cbe126d7b8b9f28347cd6ea7485c222839a28cbd5ab28c08d913af97d"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "extension": {
+          "checks": 5100,
+          "first_failure": {
+            "hq": 1.0,
+            "modes": 6,
+            "step": 1201
+          },
+          "min_hq": 0.164306640625,
+          "passed": false,
+          "passing": 0
+        },
+        "gate": {
+          "confirmation_checks": 200,
+          "converged_step": null,
+          "convergence": "first consecutive qualifying window; operational quality criterion",
+          "first_hold_failure": null,
+          "frozen_toy_verdicts_unchanged": true,
+          "hold": "the next updates, disjoint from confirmation; no restart after failure",
+          "hold_budget": 1200,
+          "hold_budget_complete": false,
+          "hold_checks": 0,
+          "longest_settling_streak": 0,
+          "min_hq": 0.9,
+          "modes": 8,
+          "name": "first_convergence_then_hold_v1",
+          "settling_budget": 4800,
+          "settling_checks": 4800,
+          "settling_failures": 4800,
+          "start_step": 1200,
+          "status": "NOT_CONVERGED",
+          "training_feedback": false
+        },
+        "hold_window": {
+          "min_hq": null,
+          "min_modes": null
+        }
+      },
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-hold-mode_hold-0.01-0.05/result.json",
+        "artifact_sha256": "df639d4d498e281b33d6e92a5e7afc62cd514a826045054bad497e17fa0a20dc",
+        "candidate": "rg5-bcap",
+        "environment": {
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "OMP_NUM_THREADS": "1"
+        },
+        "error": null,
+        "extension": {
+          "checks": 5100,
+          "first_failure": {
+            "hq": 1.0,
+            "modes": 6,
+            "step": 1201
+          },
+          "min_hq": 0.164306640625,
+          "passed": false,
+          "passing": 0
+        },
+        "floors": [
+          0.01,
+          0.05
+        ],
+        "gate": {
+          "confirmation_checks": 200,
+          "converged_step": null,
+          "convergence": "first consecutive qualifying window; operational quality criterion",
+          "first_hold_failure": null,
+          "frozen_toy_verdicts_unchanged": true,
+          "hold": "the next updates, disjoint from confirmation; no restart after failure",
+          "hold_budget": 1200,
+          "hold_budget_complete": false,
+          "hold_checks": 0,
+          "longest_settling_streak": 0,
+          "min_hq": 0.9,
+          "modes": 8,
+          "name": "first_convergence_then_hold_v1",
+          "settling_budget": 4800,
+          "settling_checks": 4800,
+          "settling_failures": 4800,
+          "start_step": 1200,
+          "status": "NOT_CONVERGED",
+          "training_feedback": false
+        },
+        "hold_window": {
+          "min_hq": null,
+          "min_modes": null
+        },
+        "id": "rg5-bcap-hold-mode_hold-0.01-0.05",
+        "kind": "hold",
+        "raw_status": "NOT_CONVERGED",
+        "seconds": 344.9934447889682,
+        "snapshot": "results/rg5-bcap-hold-mode_hold-0.01-0.05.json.gz",
+        "snapshot_sha256": "4107e63cbe126d7b8b9f28347cd6ea7485c222839a28cbd5ab28c08d913af97d",
+        "task": "mode_hold"
+      },
+      "raw_status": "NOT_CONVERGED",
+      "reason": "Recorded failure to converge within the declared protocol.",
+      "role": "candidate",
+      "task_id": "mode_hold:hold"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-hold-mode_hold-0.01-0.05/result.json",
+            "artifact_sha256": "df639d4d498e281b33d6e92a5e7afc62cd514a826045054bad497e17fa0a20dc",
+            "id": "rg5-bcap-hold-mode_hold-0.01-0.05",
+            "snapshot": "results/rg5-bcap-hold-mode_hold-0.01-0.05.json.gz",
+            "snapshot_sha256": "4107e63cbe126d7b8b9f28347cd6ea7485c222839a28cbd5ab28c08d913af97d"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "NOT_RUN",
+      "metrics": {
+        "metrics": {
+          "checks": 5100,
+          "first_failure": {
+            "hq": 1.0,
+            "modes": 6,
+            "step": 1201
+          },
+          "min_hq": 0.164306640625,
+          "passed": false,
+          "passing": 0
+        }
+      },
+      "raw_result": {
+        "metrics": {
+          "checks": 5100,
+          "first_failure": {
+            "hq": 1.0,
+            "modes": 6,
+            "step": 1201
+          },
+          "min_hq": 0.164306640625,
+          "passed": false,
+          "passing": 0
+        },
+        "reason": "Convergence/hold prerequisite was not reached.",
+        "status": "NOT_RUN"
+      },
+      "raw_status": "NOT_RUN",
+      "reason": "Convergence/hold prerequisite was not reached.",
+      "role": "candidate",
+      "task_id": "mode_hold:extension"
+    }
+  ]
+}

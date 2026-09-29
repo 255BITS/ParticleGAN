@@ -218,7 +218,7 @@ def _make_regularizer(recipe: UnusedHoldRecipe) -> GradientPenalty:
 
 
 def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
-          *, noise_policy=None) -> dict:
+          *, noise_policy=None, components=None) -> dict:
     """Fit one arm. Prints a tailable line at the checkpoints."""
     torch.manual_seed(int(recipe.seed))
     student = SharedSlotStudent()
@@ -237,6 +237,9 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, reg = components.bind(
+            generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
     real = _batch(CONCEPT_DIR)
     pairs = hold_pairs(recipe.pairing)
     bcap_applied = 0

@@ -174,7 +174,7 @@ def _emit(record: dict, echo: bool, log: Callable[[dict], None] | None) -> None:
 
 def train(*, pairing: str = "shared", echo: bool = False,
           log: Callable[[dict], None] | None = None,
-          noise_policy=None) -> dict:
+          noise_policy=None, components=None) -> dict:
     """Train the residual head; score the resulting predictions."""
     torch.set_num_threads(1)
     torch.manual_seed(PROTOCOL["seed"])
@@ -210,6 +210,9 @@ def train(*, pairing: str = "shared", echo: bool = False,
     )
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, regularizer = components.bind(
+            generator=head, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
     _emit({
         "event": "config",
         "family": "residual_student",
