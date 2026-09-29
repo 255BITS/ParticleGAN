@@ -28,7 +28,6 @@
  "distance_reduction": "sum",
  "ema_decay": 0.995,
  "encoder_mode": "none",
- "initialization": "batch_feature_zero",
  "input_noise_anneal_end": 0.1,
  "input_noise_std": 0.0,
  "latent_damping_max_rate": 0.5,

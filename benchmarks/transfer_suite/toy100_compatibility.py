@@ -722,7 +722,7 @@ if __name__ == "__main__":
                         help="deterministic weight and particle init name; omit to keep the PyTorch init")
     args = parser.parse_args()
     apply_device_policy(args.device, log=True)
-    from particlegan.init_registry import use_init
+    from benchmarks.init_research.init_registry import use_init
     use_init(args.init)
     if sum(bool(x) for x in (args.remaining, args.all, args.tasks)) > 1:
         parser.error("--remaining, --all and --tasks are mutually exclusive")

@@ -10,7 +10,7 @@ from torch.nn import functional as F
 
 from lib.gym_transition import (GymTransitionGenerator, GymTransitionScaler, _check,
     mlp, contact_record, state_reconstruction)
-from particlegan import get_recipe
+from particlegan import get_recipe, init
 from particlegan.autoencoder import particle_ae
 
 MODULE_KEYS = ("G", "E", "prior")
@@ -51,8 +51,11 @@ def build_state_models(cfg, scaler, device="cpu"):
         g = GymTransitionGenerator(scaler, cfg["z_dim"], cfg["width"], cfg["context_dim"]).to(device)
         torch.random.default_generator.manual_seed(cfg["seed"] + 102)
         e = GymStateEncoder(cfg["z_dim"], cfg["encoder_width"], cfg["context_dim"]).to(device)
-    prior = recipe.make_prior(device=device,
-        generator=torch.Generator(device=device).manual_seed(cfg["seed"] + 101))
+    # Deterministic G/E/prior initialization here, so every arm starts from it.
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(e, seed=2)
+    prior = init.deterministic_orthogonal_(recipe.make_prior(device=device,
+        generator=torch.Generator(device=device).manual_seed(cfg["seed"] + 101)))
     return dict(G=g, E=e, prior=prior, scaler=scaler.to(device), device=device, config=cfg)
 
 

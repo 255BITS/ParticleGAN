@@ -10,6 +10,7 @@ import torch
 from .accuracy import PROTOCOL, evaluate_accuracy
 from .accuracy_gate import HOLDOUT_N, HOLDOUT_SEED_OFFSETS
 from .gate import MIN_STABLE_CHECKS
+from .models import sample_clean
 from .problems import sample_real
 
 
@@ -48,8 +49,8 @@ class AccuracyEvidence:
         with torch.random.fork_rng(devices=cuda_devices):
             torch.manual_seed(config["seed"] + HOLDOUT_SEED_OFFSETS["noise"])
             for model in ("live", "ema"):
-                draws = trainer.sample(HOLDOUT_N, ema=model == "ema",
-                                       generator=generator(HOLDOUT_SEED_OFFSETS["latent"]))
+                draws = sample_clean(trainer, HOLDOUT_N, ema=model == "ema",
+                                     generator=generator(HOLDOUT_SEED_OFFSETS["latent"]))
                 arrays[model] = draws.detach().cpu().numpy()
             arrays["target"] = sample_real(
                 config["problem"], HOLDOUT_N, device=device,

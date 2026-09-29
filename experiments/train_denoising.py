@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, init, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -86,7 +86,8 @@ def make_prior(cfg, device):
     """Build latent sources consistently for training and checkpoint probes."""
     if cfg["prior"] == "mog":
         rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 101)
-        return training_recipe(cfg).make_prior(device=device, generator=rng)
+        # R2 table, then MoG spacing recalibrated on it.
+        return init.deterministic_orthogonal_(training_recipe(cfg).make_prior(device=device, generator=rng))
     return DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
 
 
@@ -206,6 +207,9 @@ def train(cfg):
     prior = make_prior(cfg, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
     g, d = ToyGenerator(cfg).to(device), ToyDiscriminator(cfg).to(device)
+    # Replaces the constructors' Xavier init.
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
     opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for model in (ema_g, ema_prior, ema_noise):

@@ -25,7 +25,7 @@ import torch.nn.functional as F
 
 from lib.vendor.concept_slider_core.reference import (noise_std, register_paired_error_norm,
     rp_d_loss, rp_g_loss)
-from particlegan import get_recipe, scale_learning_rates
+from particlegan import get_recipe, init, scale_learning_rates
 
 # One gate seed. Not a sweep.
 SEED = 0
@@ -126,6 +126,7 @@ def _game(params, critic, steps):
     # The toy "generator" is one or two scalar gains, not a network: its Adam
     # step size is sized so a sign can flip within the 200-update gate.
     opt = recipe.make_generator_optimizer(params, lr=SCALAR_GAIN_LR)
+    init.deterministic_orthogonal_(critic, seed=1)  # make_critic_optimizer keeps weights
     opt_d = recipe.make_critic_optimizer(critic, ema_critic=copy.deepcopy(critic))
     rates = [[group["lr"] for group in o.param_groups] for o in (opt, opt_d)]
     return recipe, opt, opt_d, recipe.make_critic_penalty(opt_d), rates

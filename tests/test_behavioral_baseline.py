@@ -98,7 +98,7 @@ def test_unknown_and_nonfinite_settings_are_rejected():
 def test_resume_rejects_changed_source_and_candidate_before_training(tmp_path, monkeypatch):
     config_file = tmp_path / "input.json"
     config_file.write_text(json.dumps([{"name": "candidate"}]))
-    argv = ["baseline", "--configs", str(config_file), "--output", str(tmp_path / "output")]
+    argv = ["baseline", "--configs", str(config_file), "--output", str(tmp_path / "output"), "--device", "cpu"]
     monkeypatch.setattr(sys, "argv", argv)
     fingerprint = {"version": "test", "source_sha256": "original"}
     monkeypatch.setattr(baseline, "protocol", lambda: fingerprint.copy())

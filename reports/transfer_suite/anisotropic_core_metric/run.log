@@ -1,0 +1,23 @@
+# 21 episodes, 21 workers
+[    18s] B vector_overlap         axis_silu        fail suffix= 4 sw1=0.136 failing=- 15.7s
+[    18s] B vector_overlap         leaky_orig       fail suffix= 4 sw1=0.092 failing=- 15.5s
+[    18s] B vector_unequal_width   leaky_orig       fail suffix= 0 sw1=0.085 tv=0.083 core=0.18 spill=0.055 oldcov=7.81 failing=component_covariance_error 15.6s
+[    18s] A vector_anisotropic     axis_tanh        fail suffix= 0 sw1=0.219 tv=0.193 core=0.16 spill=0.075 oldcov=1.17 failing=sw1_normalized,mass_tv,component_core_min_eigen_ratio,max_component_spill 16.2s
+[    19s] B vector_unequal_mass    axis_silu        fail suffix= 0 sw1=0.137 tv=0.086 core=0.39 spill=0.046 oldcov=1.44 failing=component_covariance_error,component_min_eigen_ratio 16.3s
+[    19s] A vector_anisotropic     axis_softplus1   fail suffix= 0 sw1=0.175 tv=0.136 core=0.26 spill=0.201 oldcov=7.08 failing=hq,component_core_min_eigen_ratio,max_component_spill 16.5s
+[    19s] B vector_unequal_width   axis_silu        fail suffix= 0 sw1=0.091 tv=0.056 core=0.16 spill=0.041 oldcov=0.89 failing=component_covariance_error 15.9s
+[    19s] A vector_anisotropic     leaky_orig       SUST suffix= 5 sw1=0.141 tv=0.107 core=0.14 spill=0.034 oldcov=0.14 failing=- 16.4s
+[    19s] B vector_two_broad       leaky_orig       SUST suffix=19 sw1=0.039 tv=0.015 core=0.20 spill=0.024 oldcov=0.20 failing=- 16.9s
+[    19s] A vector_anisotropic     axis_softplus50  fail suffix= 0 sw1=0.192 tv=0.191 core=0.14 spill=0.021 oldcov=0.60 failing=sw1_normalized,mass_tv 16.5s
+[    19s] A vector_anisotropic     axis_silu        SUST suffix=15 sw1=0.041 tv=0.019 core=0.17 spill=0.023 oldcov=0.18 failing=- 17.0s
+[    20s] A vector_anisotropic     axis_softplus20  fail suffix= 0 sw1=0.328 tv=0.333 core=0.50 spill=1.000 oldcov=0.51 failing=sw1_normalized,mass_tv,component_core_covariance_error,component_core_min_eigen_ratio,max_component_spill 17.6s
+[    20s] B vector_two_broad       axis_silu        SUST suffix=21 sw1=0.107 tv=0.021 core=0.38 spill=0.006 oldcov=0.38 failing=- 17.7s
+[    21s] B vector_spiral          axis_silu        SUST suffix=21 sw1=0.042 failing=- 18.7s
+[    21s] B vector_narrow          leaky_orig       fail suffix= 0 sw1=0.499 tv=0.500 core=0.87 spill=1.000 oldcov=36.84 failing=sw1_normalized,mass_tv,component_covariance_error,component_min_eigen_ratio 19.2s
+[    22s] A vector_anisotropic     axis_softplus5   fail suffix= 0 sw1=0.184 tv=0.179 core=0.17 spill=0.037 oldcov=1.65 failing=sw1_normalized,mass_tv 19.9s
+[    22s] B vector_narrow          axis_silu        fail suffix= 0 sw1=0.147 tv=0.158 core=0.96 spill=0.027 oldcov=20.18 failing=mass_tv,component_covariance_error,component_min_eigen_ratio 19.6s
+[    22s] B vector_scale_drift     axis_silu        SUST suffix=11 sw1=0.056 tv=0.002 core=0.40 spill=0.036 oldcov=0.40 failing=- 19.7s
+[    22s] B vector_unequal_mass    leaky_orig       fail suffix= 0 sw1=0.081 tv=0.052 core=0.31 spill=0.418 oldcov=5.80 failing=component_covariance_error 18.6s
+[    22s] B vector_scale_drift     leaky_orig       SUST suffix=22 sw1=0.070 tv=0.020 core=0.19 spill=0.046 oldcov=0.58 failing=- 20.3s
+[    23s] B vector_spiral          leaky_orig       SUST suffix=23 sw1=0.063 failing=- 19.3s
+# done in 23s

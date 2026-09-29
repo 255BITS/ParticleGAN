@@ -8,7 +8,6 @@ from .continuous import DataDriftController
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
-from .initialization import initialize_
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
 from .recipes import (
     NetworkLRTransition,
@@ -20,9 +19,10 @@ from .recipes import (
 )
 from .training import GANTrainer, InputNoise
 from .vicreg_loss import ParticleRegularizer
+from . import init
 
 __all__ = [
-    "initialize_",
+    "init",
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",

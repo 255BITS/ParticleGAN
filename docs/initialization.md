@@ -18,37 +18,68 @@ been trained in this study.
 
 ## Usage in the package
 
-The recipe now defaults to `initialization="batch_feature_zero"`. Its
-`make_optimizers` factory initializes supported G/D/E parameters before optimizer
-and EMA setup; `GANTrainer` uses that same path. `make_prior` gives learnable
-particle tables an R2 cloud before any MoG calibration. Supplied priors are kept.
-For pretrained/custom weights, use `get_recipe(initialization=None)`.
-
-For a standalone network and any optimizer:
+`particlegan.init.deterministic_orthogonal_` reproduces this construction as
+an explicit call; nothing in the recipe or `GANTrainer` initializes weights.
+The examples call it on fresh networks before building optimizers:
 
 ```python
-from particlegan import initialize_
-initialize_(network)  # before optimizer construction or loading trained weights
+from particlegan import init
+
+init.deterministic_orthogonal_(G, seed=0)
+init.deterministic_orthogonal_(D, seed=1)                    # a BatchDistanceDiscriminator gets b = 0
+init.deterministic_orthogonal_(E, seed=2)                    # encoder, if any
+prior = init.deterministic_orthogonal_(recipe.make_prior())  # R2 cloud, then MoG recalibration
 ```
 
-This direct API uses standard PyTorch layer declarations and stable per-call
-keys (G=0, D=1, E=2 in the recipe), without global hooks or RNG consumption.
-It handles standard linear, convolution, embedding, and attention parameters;
-keeps normalization, frozen parameters, constant/identity matrices, and zero
-biases; and leaves unknown custom parameters alone. See the
-[full API contract](api.md#initialization), including checkpoint migration.
-Packed `nn.MultiheadAttention` QKV uses one QR over its stored tensor. Splitting
-logical Q/K/V blocks, custom depth scaling, and architecture-specific LoRA
-initializers remain extensions requiring their own evaluation.
+Each layer class declares the distribution its PyTorch constructor draws
+from (`init.Uniform`, `init.Normal`), particle tables declare `init.R2Normal`,
+and deliberate constants such as normalization scales declare `init.KEEP`.
+`seed` keys the hash in place of the historical optimizer index, so no RNG is
+consumed. Frozen parameters are never touched: a frozen pretrained backbone
+(`requires_grad_(False)`, as in the CIFAR `PretrainedFeatureDiscriminator`)
+keeps its weights while its new trainable head is initialized. With
+`strict=True`, a trainable parameter that no layer declares raises before
+anything is written; declare custom layers with `init.register`. See the
+[API reference](api.md#initialization) for the full contract, the built-in
+declarations and a custom-layer example. Packed `nn.MultiheadAttention` QKV
+uses one QR over its stored tensor. Splitting logical Q/K/V blocks, custom
+depth scaling, and architecture-specific LoRA initializers remain extensions
+requiring their own evaluation.
+
+### Hosts that choose their own init
+
+`deterministic_orthogonal_` draws at the scale the layer's constructor declares
+(`nn.Linear`: U(±1/√fan_in)). It does not see a later re-init, so calling it
+after `xavier_uniform_` replaces the xavier weights. If a recipe was tuned on
+the host's own init, keep that init and skip this call.
+
+The toy100 benchmark is such a host. Its critic
+(`SimpleMLPDiscriminator(fourier=3)`) keeps xavier weights and zero biases
+(`benchmarks/toy100/train.py`). The default gate uses
+`configs/toy100/constraints_simple_regularization.json`, seed 1234 and 7000
+updates:
+
+| D init | gate | final HQ grid / rotated / staggered |
+|---|---|---|
+| xavier (benchmark) | PASS 3/3 | 0.987 / 0.985 / 0.989 |
+| `deterministic_orthogonal_(D, seed=1)` | FAIL 0/3 | 0.954 / 0.031 / 0.470 |
+
+The redraw makes the hidden layers 1.7x smaller and the readout 2.4x smaller
+than xavier, and D's output std falls from 0.25 to 0.03. The failing runs spike
+the critic gradient while the input noise anneals, and they miss the short
+mode-acquisition window. QR at xavier's RMS passed this gate, but it failed grid
+under other keys during the #201 investigation, so it is not a supported
+substitute.
 
 ### Exact historical replay
 
-The research hook captures arbitrary normal/uniform declarations and uses the
-original optimizer-index/parameter-index keys. It is separately available for
-replaying the frozen experiments:
+The research hooks that produced the 22/22 result live in
+`benchmarks/init_research`, outside the package. They capture arbitrary
+normal/uniform declarations and use the original
+optimizer-index/parameter-index keys, for replaying the frozen experiments:
 
 ```python
-from particlegan.init_registry import install
+from benchmarks.init_research.init_registry import install
 install("batch_feature_zero")
 # Construct fresh models and Adam optimizers next.
 ```
@@ -57,19 +88,19 @@ Or launch an unmodified script with a compatible runtime (historical drivers
 still require the historical training APIs they import):
 
 ```bash
-python -m particlegan.init_registry --init batch_feature_zero -- path/to/train.py --your-args
+python -m benchmarks.init_research.init_registry --init batch_feature_zero -- path/to/train.py --your-args
 ```
 
-An explicitly installed registry initializer takes precedence over recipe
-initialization. The research hooks are process-wide and Adam-specific; use one
-family per process. Reinstalling resets the construction keys for fresh models.
-`particlegan.batch_feature_init.uninstall()` restores its hooks without changing
-weights. The direct API is the normal entry point for new applications.
+The research hooks are process-wide and Adam-specific; use one family per
+process. Reinstalling resets the construction keys for fresh models.
+`benchmarks.init_research.batch_feature_init.uninstall()` restores its hooks
+without changing weights. Do not combine a hook with explicit
+`deterministic_orthogonal_` calls in one run.
 
 The frozen 22/22 result qualifies the captured-declaration hook on its recorded
-runtime. Direct initialization matches its tensors for standard G/D witnesses;
-this does not turn the historical training result into a full qualification of
-the current public trainer or of every architecture extension.
+runtime. `deterministic_orthogonal_` matches its tensors for standard G/D
+witnesses; this does not turn the historical training result into a full
+qualification of the current public trainer or of every architecture extension.
 
 ## 1. Exact deterministic QR construction
 
@@ -152,9 +183,10 @@ it is not a promise of identical floating-point QR across library versions.
 The frozen hook is a research adapter. Untagged nonconstant parameters can be
 left untouched (`UNTAGGED_RANDOM_KEPT`); that must be audited when extending it.
 It is not an automatic deterministic initializer for every module or optimizer.
-The direct API replaces the global optimizer counter with an explicit network
-key. It uses the same tensor key for ordinary G/D parameter order; new custom
-layouts and encoder ordering require their own evaluation.
+`deterministic_orthogonal_` replaces the global optimizer counter with an
+explicit `seed` and raises on undeclared parameters instead of keeping them. It
+uses the same tensor key for ordinary G/D parameter order; new custom layouts
+and encoder ordering require their own evaluation.
 
 ## 2. The batch-feature correction and its guarantee
 
@@ -294,8 +326,8 @@ changes the architecture and was not part of our initialization-only search.
 
 For a pretrained transformer, preserve its learned base weights and existing
 normalization parameters. Apply any new initialization only to newly added
-trainable modules. The direct API skips frozen parameters. For a trainable pretrained base, call
-`initialize_` only on the new modules and use `initialization=None` in the recipe.
+trainable modules. `deterministic_orthogonal_` skips frozen parameters. For a
+trainable pretrained base, call it only on the new modules.
 
 ## 6. LoRA — proposed deterministic adapter initialization
 

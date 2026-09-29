@@ -104,7 +104,7 @@ state is in their `state_dict()`:
 
 ```python
 import copy
-from particlegan import get_recipe, learning_rate_scales
+from particlegan import get_recipe, init, learning_rate_scales
 
 recipe = get_recipe(total_steps=steps)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
@@ -145,6 +145,7 @@ EMAs are independent. Nothing registers optimizer hooks or keeps module-level
 state:
 
 ```python
+init.deterministic_orthogonal_(D2, seed=3)   # optional: deterministic start for a fresh critic
 opt_d2 = recipe.make_critic_optimizer(D2, ema_critic=copy.deepcopy(D2))
 penalty2 = recipe.make_critic_penalty(opt_d2)
 d2_loss = adv2 + penalty2(D2, real, fake)

@@ -45,7 +45,7 @@ Everything comes from role-named factories on a recipe; the loop is yours.
 import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, scale_learning_rates
+from particlegan import get_recipe, init, scale_learning_rates
 
 def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
@@ -54,7 +54,9 @@ def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
 recipe = get_recipe(total_steps=2000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 128), nn.LeakyReLU(0.2), nn.Linear(128, 2))
 D = nn.Sequential(nn.Linear(2, 128), nn.LeakyReLU(0.2), nn.Linear(128, 1))
-prior = recipe.make_prior()                      # the learnable particle table
+init.deterministic_orthogonal_(G, seed=0)        # optional: repeatable weights
+init.deterministic_orthogonal_(D, seed=1)
+prior = init.deterministic_orthogonal_(recipe.make_prior())  # the learnable particle table
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss()
 base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
@@ -83,40 +85,42 @@ Or let `GANTrainer` run exactly that default update:
 ```python
 from particlegan import GANTrainer
 
-trainer = GANTrainer(get_recipe(), G, D)
+recipe = get_recipe()
+prior = init.deterministic_orthogonal_(recipe.make_prior())
+trainer = GANTrainer(recipe, G, D, prior=prior)
 for _ in range(trainer.recipe.total_steps):
     trainer.step(real_batch(trainer.recipe.batch_size))
 samples = trainer.sample(1024)
 ```
 
+Without `prior=`, the trainer builds a plain randomly drawn particle table.
+
 ## Repeatable initialization
 
-`get_recipe()` defaults to `initialization="batch_feature_zero"`.
-`GANTrainer` and `recipe.make_optimizers(G, D, prior)` initialize supported fresh
-network weights with deterministic, RMS-matched QR matrices and patterned
-biases. The batch-distance critic starts with zero batch-feature coefficients;
-its ordinary score path stays active. Recipe-created particle priors use a
-deterministic R2 cloud. Sampling remains stochastic.
-
-For a standalone PyTorch network, initialize before building its optimizer:
+The recipe never touches your weights: networks train from whatever they are
+built with. `particlegan.init` is optional tooling in the spirit of
+`torch.nn.init`, and the examples use it:
 
 ```python
-from particlegan import initialize_
+from particlegan import init
 
-network = initialize_(nn.Sequential(nn.Linear(16, 64), nn.ReLU(), nn.Linear(64, 4)))
-optimizer = torch.optim.AdamW(network.parameters())
+init.deterministic_orthogonal_(G, seed=0)   # G, D and an encoder get different seeds
+init.deterministic_orthogonal_(D, seed=1)
+prior = init.deterministic_orthogonal_(recipe.make_prior())
 ```
 
-For pretrained weights, custom initialization, or the former random behavior,
-use `get_recipe(initialization=None)`. Supplied priors are always preserved.
-Importing the package does not change PyTorch's global initialization.
-
-The research candidate passed **22/22 fixed toy gates and the long hold**;
-target-shift recovery still fails. This is evidence for the frozen benchmark
-trainer, not a general convergence proof or a transformer/LoRA training result.
-See the [API contract](docs/api.md#initialization),
-[math and architecture guide](docs/initialization.md), and
-[qualification report](reports/toy100/batch-feature-init/README.md).
+It writes orthogonal matrices at PyTorch's default scale, patterned biases and
+an evenly spread particle table, derived from `seed` alone: the same seed and
+architecture give the same weights, and no random state is used. Call it on
+fresh networks, before loading weights or building optimizers. A custom layer
+it does not know raises an error until you declare it with `init.register`.
+Values depend on each parameter's position in the module you pass, so
+initialize whole networks: a submodule initialized on its own gets different
+values. Projects with custom layers can guard this with a one-line test that
+`init.declarations(net)` has no `None` entries
+([example](docs/api.md#declarationsmodule)).
+See the [API reference](docs/api.md#initialization) and the
+[math and architecture guide](docs/initialization.md).
 
 ## Model families
 

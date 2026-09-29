@@ -74,9 +74,11 @@ class GANTrainer:
     the critic optimizer's ``step()`` runs the spike guard and anchor EMA),
     then a generator/prior step with output noise (the generator optimizer's
     ``step()`` applies A2 latent damping). The trainer allocates the EMA
-    critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream;
-    fresh network weights follow ``recipe.initialization``. ``sample`` includes
-    the output noise (``output_sigma()``; see ``recipe.output_noise_mode``).
+    critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream.
+    Networks train from the weights they arrive with; initialize them first
+    (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample`` is clean
+    by default; ``sample(..., output_noise=True)`` adds the current output
+    noise (``output_sigma()``; see ``recipe.output_noise_mode``).
 
     ``serial_backward=True`` executes the whole update with autograd
     multithreading disabled. Use it for exact CUDA checkpoint continuation
@@ -506,11 +508,19 @@ class GANTrainer:
                 tester.observe(group["params"], group["lr"] / rate, step=self.completed_steps + 1)
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None):
-        """Draw live or EMA samples (with the current output noise) without
-        changing modes or training RNGs."""
+    def sample(self, n, *, ema=False, generator=None, output_noise=False):
+        """Draw live or EMA samples without changing modes or training RNGs.
+
+        Samples are clean by default: output noise is a training regularizer.
+        ``output_noise=True`` adds the current training output noise (drawn
+        from the sampling stream, as before). Only the sampling stream
+        (``generator`` or the trainer's evaluation stream) is consumed, so
+        either choice leaves training trajectories unchanged.
+        """
         if type(n) is not int or n <= 0:
             raise ValueError("n must be a positive integer")
+        if type(output_noise) is not bool:
+            raise ValueError("output_noise must be a boolean")
         stream = self.eval_generator if generator is None else self._stream(generator, 0)
         if stream in (self.latent_generator, self.penalty_generator, self.noise_generator):
             raise ValueError("sampling requires a stream separate from training")
@@ -522,8 +532,9 @@ class GANTrainer:
             prior.eval()
             with torch.random.fork_rng(devices=devices):
                 latent, _ = prior.sample(n, generator=stream)
-                return self._generate(model, latent,
-                                      self._output_sigma(output_noise_std(self.recipe, self.completed_steps)), stream)
+                sigma = (self._output_sigma(output_noise_std(self.recipe, self.completed_steps))
+                         if output_noise else 0.0)
+                return self._generate(model, latent, sigma, stream)
         finally:
             for module, flag in modes:
                 module.training = flag
@@ -598,12 +609,11 @@ class GANTrainer:
         if isinstance(saved_recipe, dict):
             # Preserve pre-continuous / pre-amsgrad checkpoint compatibility.
             saved_recipe = {**_ADDED_RECIPE_FIELDS, **saved_recipe}
-        if (not isinstance(saved_recipe, dict)
-                or saved_recipe.get("initialization") not in (None, "batch_feature_zero")
-                or {k: v for k, v in saved_recipe.items() if k != "initialization"}
-                != {k: v for k, v in expected["recipe"].items() if k != "initialization"}):
+            # Construction-time init once lived on the recipe; saved weights supersede it.
+            if saved_recipe.get("initialization", None) in (None, "batch_feature_zero"):
+                saved_recipe.pop("initialization", None)
+        if not isinstance(saved_recipe, dict) or saved_recipe != expected["recipe"]:
             raise ValueError("checkpoint recipe does not match trainer")
-        # Saved weights replace construction-time initialization completely.
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
@@ -671,7 +681,6 @@ class GANTrainer:
         if self.row_evidence is not None:
             self.row_evidence.load_state_dict(state["row_evidence"])
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
-        self.recipe = self.recipe.replace(initialization=saved_recipe.get("initialization"))
         for name, value in state["streams"].items():
             getattr(self, name).set_state(value.cpu())
         torch.set_rng_state(state["cpu_rng"].cpu())
