@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M42/birth_death.py
-@@ -445 +445 @@
--            sites = torch.cat((q_loc[child], q_loc[parent], q_loc[iso_child], q_loc[iso_parent]))
-+            sites = torch.cat((q_loc[child], q_loc[parent], q_loc[iso_child]))

@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M38/birth_death.py
-@@ -262 +262 @@
--        parent, step = [], max(1, (1 << 24) // len(keep))                    # chunks of about 16M distances
-+        parent, step = [], 1 << 24                    # chunks of about 16M distances

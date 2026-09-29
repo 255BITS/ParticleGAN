@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M30/birth_death.py
-@@ -265 +265 @@
--            ball = dist <= 2. * dist.min(1, keepdim=True).values
-+            ball = dist.square() <= 2. * dist.min(1, keepdim=True).values.square()

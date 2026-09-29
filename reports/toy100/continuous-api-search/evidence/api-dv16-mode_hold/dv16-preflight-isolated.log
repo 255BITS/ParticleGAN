@@ -1,1 +1,0 @@
-{"candidate": "regression", "gate": "dv16_shape_gradient_binding_restore_isolation", "status": "PASS", "seconds": 1.123414867091924, "metrics": {"checks": 7, "scope": "CPU contracts only"}, "artifact": "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16_preflight.py"}

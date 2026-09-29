@@ -1,3 +1,0 @@
-{"N": 10000, "flag": 0, "strays": 300, "dz": 2, "secs": 4.39, "base_mb": 600, "peak_mb": 821, "extra_mb": 221, "knn_calls": 6, "knn_cells_over_N2": 6.0, "knn_cellsdim_over_N2": 132.0, "iso_flagged": null, "iso_moves": null, "moves": 0, "sites": null}
-knn calls (nq, np, d): [(10000, 10000, 2), (10000, 10000, 2), (10000, 10000, 32), (10000, 10000, 32), (10000, 10000, 32), (10000, 10000, 32)]
-largest direct cdist calls (nq, np, d): [(2048, 10000, 2), (2048, 10000, 2), (2048, 10000, 2)]  = 78.1 MB float32 each

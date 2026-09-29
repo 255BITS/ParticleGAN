@@ -1,9 +1,0 @@
-{
-  "scope": "Checker only; no candidate/bundle change or Torch import during failure.",
-  "reason": "Declared host-span digests exclude outer whitespace; original/frozen exact byte equality had already passed. Changed digest validation to match documented span convention.",
-  "attempts": [
-    "api-dv2",
-    "api-dv3"
-  ],
-  "initial_failure": "AssertionError: SimpleMLPGenerator"
-}

@@ -1,1 +1,0 @@
-The penalty-balance traces show the EMA anchor opposing the data fit while rates sit on the floor. AF1 keeps K3P’s schedule and stops that restoring force from reversing the adversarial step. I’ll copy the pinned parent and start both canonical protocols.

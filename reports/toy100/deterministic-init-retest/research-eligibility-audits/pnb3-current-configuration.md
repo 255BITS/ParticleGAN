@@ -1,5 +1,0 @@
-PNB3 earned **PASS: 15/24, first arrival 500, final 15 observations retained** under the new initializer. That quality result is preserved. Its current tested configuration is **disqualified for the requested point-at-target/run-forever default**. The historical inventory label remains unchanged.
-
-The candidate holds applied G/D and prior rates at their nominal ratio and keeps its critic penalty independent of the horizon. However, the unchanged host constructs `NoisePolicy(..., spec["steps"])`: for this 1200-update test, critic input noise falls from 0.5 to zero over 120 updates and generator noise grows to 0.029 over 240 updates. Changing the caller's declared end changes those dynamics. There is no signal-driven reopening of these schedules. A finite observation budget or fixed initialization alone would not cause this finding.
-
-The [JSON source audit](pnb3-current-configuration.json) pins complete source hashes, exact archive members and line ranges, the executed mechanism receipt, and archived quality authority. No new configuration was created or tested.

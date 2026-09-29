@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M39/birth_death.py
-@@ -441 +441 @@
--                last["moves"] = len(child) + len(iso_child)      # the trainer re-anchors the tester and resets the row evidence of every moved row
-+                pass

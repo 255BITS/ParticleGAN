@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M52/birth_death.py
-@@ -266 +266 @@
--            draw = torch.rand(dist.shape, device=dist.device, generator=self.stream)
-+            draw = torch.rand(dist.shape, device=dist.device)

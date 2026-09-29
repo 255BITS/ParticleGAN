@@ -1,7 +1,0 @@
-{
-  "original_helper": "/ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/deterministic-init-retest/research-screen-queue/prepare_reviewed_batch.py",
-  "original_helper_sha256": "1c47fb050ca092e1e01e8dd174077a6893334a803526c48428b55e53ceeb27d8",
-  "adaptation": "Instructions prose only: original ordinary Adam instead of original eager CUDA metadata. All proof/source checks are unchanged.",
-  "helper_sha256": "09200c8c7dcc72f532c6ec92435e359ca89f11f0978bf0255407bc45e8513d6e",
-  "launch_spec_sha256": "fc206efd1d605d1e56136bd1183bb4e650c289906ab8e738c726e9472afb5848"
-}

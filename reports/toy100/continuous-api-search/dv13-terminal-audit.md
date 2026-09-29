@@ -1,9 +1,0 @@
-DV13 terminal audit: actual configuration rejected on bars retention
-
-Unequal_mass PASS14/24, final suffix10 from750. Bars4 FAIL10/24, final suffix2 from575, although final600 has four modes/HQ0.90625. The fixed five-check final stability requirement is unmet; no endpoint-only pass.
-
-Both immutable broad snapshots match the ring's fourteen package files, including the missing penalty-controller attachment. Original canonical G,D,z/EMA tensors and streams match; additional widths separately start zero. Frozen models/scorers/specs, all24 observations and declared noise-index streams are unchanged. Raw checkpoints preserve width state and caller RNG, with sixteen CPU scalar Adam counters and CUDA moments. Both full raw checkpoints and losslessly compressed traces are archived. Vector pass is valid for this actual configuration and cannot transfer to corrected wiring.
-
-A binding-only correction cannot repair bars600 by source control flow: WARMUP_CALLS=800; the first799 penalty calls bypass the only continuous_controller read. All600 retained rows show calls==step, anchor_startedFalse,alpha0 and zero criticEMA updates. Attaching an existing controller adds no random draw or parameter change. Therefore unchanged source except that attachment follows the same first600 numerical path. This is a source implication, not an executed replay; no replay or inherited corrected-candidate pass is claimed. A next mechanism must change behavior relevant to the failing image window, not merely rename the binding fix.
-
-New archives: evidence/api-dv13-vector_unequal_mass and evidence/api-dv13-img_bars4. Ready entries: continuous-api-search/dv13-broader-audit.json. Ring source/fixture was verified in dv13-source-audit.json; root owns ring archive and shared manifests. Historical declaration mismatch and misleading inherited noise-only prose remain preserved. No active worker edits, Torch, GPU or test execution by this audit.

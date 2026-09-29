@@ -1,6 +1,0 @@
-{
-  "qualification": "DIAGNOSTIC_ONLY",
-  "raw_quality": "PASS23/24,suffix23",
-  "initial_parameter_parity": false,
-  "reason": "Used declared CPU constructors instead of canonical retained parameter fixtures; new supervisor audit inspected after launch."
-}

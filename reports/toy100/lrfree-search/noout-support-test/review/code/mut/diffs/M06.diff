@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M06/birth_death.py
-@@ -219 +219 @@
--        R1, R2 = R[0::2], R[1::2]
-+        R1, R2 = R[0::2], R

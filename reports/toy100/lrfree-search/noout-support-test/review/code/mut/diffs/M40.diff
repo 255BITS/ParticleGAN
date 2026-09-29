@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M40/birth_death.py
-@@ -444 +444 @@
--            self.moved_rows = moved
-+            self.moved_rows = child

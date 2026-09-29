@@ -1,9 +1,0 @@
-[ok]   flagged rows that the ordinary moves took are not re-drawn | 58 re-drawn of 60 flagged
-[ok]   parents are unflagged and not ordinary-move children
-[ok]   every parent is within 2x the distance of the nearest unflagged row | max d_par/dmin 1.927
-[ok]   parent draw is uniform over the ball (2051 rows): chi2 2059.7 on 2050 dof; draws outside the ball 0
-[ok]   guard: nothing flagged -> nothing done
-[ok]   guard: flagged > Q N -> skipped
-[ok]   guard: flagged == Q N acts (boundary is inclusive)
-[ok]   duplicate of an unflagged row: the ball collapses onto the duplicates (parent at distance 0)
-ALLOK

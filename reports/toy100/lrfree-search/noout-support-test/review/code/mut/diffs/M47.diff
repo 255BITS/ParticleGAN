@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M47/birth_death.py
-@@ -429 +429 @@
--        if self.dry_run:
-+        if self.dry_run and not self.isolation:

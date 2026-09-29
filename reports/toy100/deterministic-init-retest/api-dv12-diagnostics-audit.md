@@ -1,9 +1,0 @@
-# DV12 fixed initialization screen: independent diagnostics review
-
-The first passing new-initialization screen is valid: 12/24 observations pass, first arrival650, all12 observations from650 through1200 pass, final8 modes/HQ .9833984375; minimum HQ afterarrival .9033203125. This is not a matched old fail-to-pass claim.
-
-The existing complete source/raw-checkpoint/runtime audit is supplemented by independent checks of all1,200 applied G/prior/D rate rows. DV12 is horizon-free with adaptive rates, not constant numeric rates. The public trainer first observes prior/game/real data, applies network/prior scales from current mobility and trust, then multiplies D by the critic factor from the preceding accepted payoff estimate. Current gradients update the payoff estimate only afterward. All rows match that ordering; no LR compounding occurs. Input noise remains0 and output noise.029. Raw final controller scalars match the final diagnostic. Native17 CPU clocks finish at1200 with CUDA moments.
-
-Frozen source preserves DV12 local support: noise uses learned latent bandwidth; each displacement is clipped at half the nearest distinct prior-point distance. Both training calls and evaluation use this support perturbation before output noise. It is not a deterministic-prior-only evaluator. The initializer port leaves controller, sampler and update arithmetic unchanged, and bandwidth derives after deterministic prior initialization.
-
-The report checks scalar consistency without recomputing gradients, features or distances. Existing unequal-mass and broader API constraints remain separate; this tiny pass does not qualify a default. Full ranges, final diagnostics, source hashes and limitations are in api-dv12-diagnostics-audit.json. No Torch import, training or GPU execution was performed.

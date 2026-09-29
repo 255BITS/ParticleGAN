@@ -1,9 +1,0 @@
---- E17/birth_death.py
-+++ M43/birth_death.py
-@@ -452,3 +452,3 @@
--            self.S[moved] = 0.
--            self.W[moved] = 0.
--            self.n[moved] = 0
-+            self.S[child] = 0.
-+            self.W[child] = 0.
-+            self.n[child] = 0

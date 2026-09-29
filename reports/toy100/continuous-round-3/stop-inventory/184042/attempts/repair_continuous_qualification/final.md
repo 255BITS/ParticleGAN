@@ -1,1 +1,0 @@
-The original entry point never installs the canonical Adam bootstrap or the latent and response hooks. I'll copy that harness in and wire those pieces to the pinned runtime, then prove it with a short host identity check.

@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M02/birth_death.py
-@@ -231 +231 @@
--        passed = (ps <= torch.arange(1, m + 1, device=p.device, dtype=p.dtype) * self.Q / m).nonzero()
-+        passed = (ps <= torch.arange(2, m + 2, device=p.device, dtype=p.dtype) * self.Q / m).nonzero()

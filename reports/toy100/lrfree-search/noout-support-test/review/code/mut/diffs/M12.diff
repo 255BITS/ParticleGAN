@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M12/birth_death.py
-@@ -220 +220 @@
--        rho = _knn(R1, R1, k, exclude=torch.arange(len(R1), device=R.device), shortlist_dtype=fast)[0][:, -1]
-+        rho = _knn(R1, R1, k, shortlist_dtype=fast)[0][:, -1]

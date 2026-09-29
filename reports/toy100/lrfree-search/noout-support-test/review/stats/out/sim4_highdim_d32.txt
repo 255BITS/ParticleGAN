@@ -1,9 +1,0 @@
-  eval 0/30 4s
-  eval 10/30 61s
-  eval 20/30 129s
-== d=32 (gauss32D->ReLU256x2 (50 comps, sd 0.03/coord)) | noise radius r0 = s sqrt(d) = 0.1697 | 30 evaluations | null score CV (std/mean of the calibration scores) 0.078 | median local scale b 0.2432
-stray displacement l / r0      :    0.25     0.5    0.75       1     1.5       2       3       4       6       8
-median score of strays         :    0.81    0.87    0.96    1.08    1.39    1.75    2.54    3.38    5.04    6.72
-median p of strays             : 1.0e+00 1.0e+00 9.5e-01 4.7e-01 1.8e-03 1.0e-04 1.0e-04 1.0e-04 1.0e-04 1.0e-04
-recall (m1= 60 strays)         :   0.000   0.000   0.000   0.000   0.000   0.979   1.000   1.000   1.000   1.000 | legit rows flagged per eval (l=.25 r0): mean 0.000 max 0
-recall (m1=300 strays)         :   0.000   0.000   0.000   0.000   0.079   0.998   1.000   1.000   1.000   1.000 | legit rows flagged per eval (l=.25 r0): mean 0.000 max 0

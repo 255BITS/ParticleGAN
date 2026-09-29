@@ -1,7 +1,0 @@
-{
-  "deviation": "mode_hold launch was queued before failed isolation assertion was inspected; started1200 window finishes unchanged",
-  "classification": "two test-design mistakes, not a silent learner fix: checkpointbefore real draw, then comparing fullstate afterdefaultsample consumes its designatedeval RNG",
-  "all_failures_retained": true,
-  "learner_package_unchanged_during_window": true,
-  "corrected_preflight": "explicit isolated evaluation generators and checkpoint after realtensorconstruction; execute sequentially aftermodehold"
-}

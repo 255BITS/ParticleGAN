@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M36/birth_death.py
-@@ -261 +261 @@
--        z = trainer.prior.z.detach()
-+        z = trainer.ema_prior.z.detach()

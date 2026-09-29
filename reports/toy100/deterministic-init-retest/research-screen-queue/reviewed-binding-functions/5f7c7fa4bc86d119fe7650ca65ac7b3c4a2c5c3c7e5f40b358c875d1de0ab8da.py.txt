@@ -1,9 +1,0 @@
-def install_policy():
-    from benchmarks.toy100 import schedule,models
-    swaps=[(schedule.policy_multipliers,phase_multipliers),
-           (models.linear_input_noise,absolute_input_noise),(models.linear_output_noise,absolute_output_noise)]
-    for module in list(sys.modules.values()):
-        if module is None or not getattr(module,'__name__','').startswith(('benchmarks','particlegan')):continue
-        for name,value in list(vars(module).items()):
-            for old,new in swaps:
-                if value is old:setattr(module,name,new)

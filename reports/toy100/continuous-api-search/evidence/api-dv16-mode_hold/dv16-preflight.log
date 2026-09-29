@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/ml2/hypergan/gan-attempts/continuous-api-20260926/20260927T005310Z-1744502/data_drift_mobility/20260927T005310Z-1744511/repo/reports/data-drift-api/dv16_preflight.py", line 13, in <module>
-    assert digest(a)==digest(b)
-           ^^^^^^^^^^^^^^^^^^^^
-AssertionError

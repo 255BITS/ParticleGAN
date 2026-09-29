@@ -1,9 +1,0 @@
-{
-  "status": "DECLARED_BEFORE_RING_REPLAY",
-  "candidate": "API-DV15",
-  "resume": 2400,
-  "end": 2500,
-  "source": "exact inherited DV15 own ring",
-  "worker_sha256": "92a10e3f8b7903f38c10a94f79e3e3ed19fd16d4bfca8f5703258cd1744857bc",
-  "scope": "fresh process all full-state hashes plus actual CUDA parameter/gradient/moment placement, restored native placement; original vector replay additionally compares expected saved per-tensor placement at1250/1300"
-}

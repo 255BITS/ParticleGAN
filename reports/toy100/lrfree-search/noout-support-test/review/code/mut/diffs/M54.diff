@@ -1,5 +1,0 @@
---- E17/recipes.py
-+++ M54/recipes.py
-@@ -237 +237 @@
--        if type(self.birth_death_isolation) is not bool:
-+        if False:

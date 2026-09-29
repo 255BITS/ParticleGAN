@@ -1,5 +1,0 @@
---- E17/birth_death.py
-+++ M27/birth_death.py
-@@ -248 +248 @@
--        c["iso_acted" if acted else "iso_skipped"] += bool(n_flag)
-+        c["iso_skipped" if acted else "iso_acted"] += bool(n_flag)
