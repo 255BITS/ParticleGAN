@@ -1,0 +1,12 @@
+--- E17/birth_death.py
++++ M44/birth_death.py
+@@ -467 +467,2 @@
+-        ema.z[child] = ema.z[parent] + delta
++        if not getattr(self, "_iso", False):
++            ema.z[child] = ema.z[parent] + delta
+--- E17/birth_death.py
++++ M44/birth_death.py
+@@ -439,0 +440 @@
++                self._iso = True
+@@ -440,0 +442 @@
++                self._iso = False

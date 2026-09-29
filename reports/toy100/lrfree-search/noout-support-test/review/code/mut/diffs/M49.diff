@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M49/birth_death.py
+@@ -496 +496 @@
+-        self.counters, self.last = dict(state["counters"]), dict(state["last"])
++        self.last = dict(state["last"])

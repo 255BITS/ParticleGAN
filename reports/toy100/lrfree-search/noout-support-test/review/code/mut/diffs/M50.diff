@@ -1,0 +1,4 @@
+--- E17/birth_death.py
++++ M50/birth_death.py
+@@ -297,0 +298 @@
++            torch.rand(1, device=z.device, generator=self.stream)

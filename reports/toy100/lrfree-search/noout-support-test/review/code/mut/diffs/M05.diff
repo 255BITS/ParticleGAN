@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M05/birth_death.py
+@@ -226 +226 @@
+-        null = score(R2).sort().values
++        null = score(R1).sort().values

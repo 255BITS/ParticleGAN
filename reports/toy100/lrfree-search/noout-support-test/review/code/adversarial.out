@@ -1,0 +1,52 @@
+=== tiny_N
+  5: ValueError: particle_birth_death needs at least 6 particles
+  6: runs 120 steps; k=4, evals 120, iso {'iso_evals': 120, 'iso_flagged': 0, 'iso_acted': 0, 'iso_skipped': 0, 'iso_moves': 0}; flag on == flag off: True
+  8: runs 120 steps; k=5, evals 120, iso {'iso_evals': 120, 'iso_flagged': 0, 'iso_acted': 0, 'iso_skipped': 0, 'iso_moves': 0}; flag on == flag off: True
+  20: runs 120 steps; k=5, evals 120, iso {'iso_evals': 120, 'iso_flagged': 0, 'iso_acted': 0, 'iso_skipped': 0, 'iso_moves': 0}; flag on == flag off: True
+  32: runs 120 steps; k=6, evals 120, iso {'iso_evals': 120, 'iso_flagged': 0, 'iso_acted': 0, 'iso_skipped': 0, 'iso_moves': 0}; flag on == flag off: True
+  200: runs 120 steps; k=7, evals 30, iso {'iso_evals': 30, 'iso_flagged': 5226, 'iso_acted': 0, 'iso_skipped': 30, 'iso_moves': 0}; flag on == flag off: True
+=== tiny_N_statistic
+  20: |R2|=10: BH flags nothing below 37 rows tied at p_min; guard allows at most 1 -> can act: False
+  32: |R2|=16: BH flags nothing below 38 rows tied at p_min; guard allows at most 1 -> can act: False
+  200: |R2|=100: BH flags nothing below 40 rows tied at p_min; guard allows at most 10 -> can act: False
+  400: |R2|=200: BH flags nothing below 40 rows tied at p_min; guard allows at most 20 -> can act: False
+  799: |R2|=399: BH flags nothing below 40 rows tied at p_min; guard allows at most 39 -> can act: False
+  800: |R2|=400: BH flags nothing below 40 rows tied at p_min; guard allows at most 40 -> can act: True
+  1000: |R2|=500: BH flags nothing below 40 rows tied at p_min; guard allows at most 50 -> can act: True
+  2000: |R2|=1000: BH flags nothing below 40 rows tied at p_min; guard allows at most 100 -> can act: True
+  20000: |R2|=10000: BH flags nothing below 40 rows tied at p_min; guard allows at most 1000 -> can act: True
+  200000: |R2|=100000: BH flags nothing below 40 rows tied at p_min; guard allows at most 10000 -> can act: True
+=== duplicate_rows
+  500 rows copies of 5 distinct rows: no exception; iso_flagged 560, iso_moves 0, moves 0, skip None; {'z_finite': True, 'ema_finite': True, 'moved': None, 'strays_moved': None, 'counters': {'iso_evals': 1, 'iso_flagged': 560, 'iso_acted': 0, 'iso_skipped': 1, 'iso_moves': 0}}
+  whole table collapsed to one point: no exception; iso_flagged 0, iso_moves 0, moves 0, skip None; {'z_finite': True, 'ema_finite': True, 'moved': None, 'strays_moved': None, 'counters': {'iso_evals': 1, 'iso_flagged': 0, 'iso_acted': 0, 'iso_skipped': 0, 'iso_moves': 0}}
+  60 strays sitting on 3 distinct positions (20 copies each): no exception; iso_flagged 60, iso_moves 60, moves 60, skip None; {'z_finite': True, 'ema_finite': True, 'moved': 60, 'strays_moved': 60, 'counters': {'iso_evals': 1, 'iso_flagged': 60, 'iso_acted': 1, 'iso_skipped': 0, 'iso_moves': 60}}
+  every row duplicated once (1000 distinct): no exception; iso_flagged 60, iso_moves 60, moves 60, skip None; {'z_finite': True, 'ema_finite': True, 'moved': 60, 'strays_moved': 30, 'counters': {'iso_evals': 1, 'iso_flagged': 60, 'iso_acted': 1, 'iso_skipped': 0, 'iso_moves': 60}}
+=== nonfinite
+  reservoir with one NaN row: no exception; skip=dimension undefined, iso_flagged None, moves None, dim_skips 1; z finite True
+  reservoir with one inf row: no exception; skip=dimension undefined, iso_flagged None, moves None, dim_skips 1; z finite True
+  5 table rows with NaN latents: no exception; iso_flagged 0, iso_moves 0, moved None, NaN rows left in table 5, healthy rows turned NaN 0, skip=None
+  60 table rows with NaN latents: no exception; iso_flagged 60, iso_moves 60, moved 60, NaN rows left in table 0, healthy rows turned NaN 0, skip=None
+  150 table rows with NaN latents: no exception; iso_flagged 150, iso_moves 0, moved None, NaN rows left in table 150, healthy rows turned NaN 0, skip=None
+  60 strays + 0 NaN rows: iso_flagged 60, moved 60, distinct parents 59, parent index min 98, share of the most frequent parent 0.03
+  60 strays + 5 NaN rows: iso_flagged 65, moved 65, distinct parents 61, parent index min 60, share of the most frequent parent 0.08
+  dead critic (constant features): no exception; skip=dimension undefined, iso_flagged None, moves None
+=== refused_head
+  head reads the raw sample: {'E17': "ValueError after 3 completed steps (trainer.completed_steps 3): birth_death_space='critic': every scalar score head of the critic read", 'E14': "ValueError after 3 completed steps (trainer.completed_steps 3): birth_death_space='critic': every scalar score head of the critic read"}
+  head reads features ++ raw sample: {'E17': "ValueError after 3 completed steps (trainer.completed_steps 3): birth_death_space='critic': every scalar score head of the critic read", 'E14': "ValueError after 3 completed steps (trainer.completed_steps 3): birth_death_space='critic': every scalar score head of the critic read"}
+=== z_dim
+  z_dim 4: no exception; flagged 60, moved 60, strays moved 60/60; re-drawn rows: max |radius-3| of the new position 0.043; ball = 0.512 of the unflagged table (median over moved rows)
+  z_dim 64: no exception; flagged 60, moved 60, strays moved 60/60; re-drawn rows: max |radius-3| of the new position 0.057; ball = 0.513 of the unflagged table (median over moved rows)
+=== ball_dimension
+  d=2: median fraction of the unflagged table inside the ball 0.0002 (min 0.0001, max 0.0012)
+  d=4: median fraction of the unflagged table inside the ball 0.0006 (min 0.0001, max 0.0062)
+  d=8: median fraction of the unflagged table inside the ball 0.0075 (min 0.0001, max 0.1083)
+  d=16: median fraction of the unflagged table inside the ball 0.2084 (min 0.0001, max 0.6721)
+  d=64: median fraction of the unflagged table inside the ball 1.0000 (min 0.9990, max 1.0000)
+=== flagged_all
+  everything flagged, guard on: iso_flagged 2000, iso_moves 0, table unchanged True, counters {'iso_evals': 1, 'iso_flagged': 2000, 'iso_acted': 0, 'iso_skipped': 1, 'iso_moves': 0}
+  everything flagged, guard lifted (Q=2): no exception; iso_moves 0, keep set empty -> nothing re-drawn by isolation; ordinary moves 0; z finite True
+=== dtype_float64
+  float64 trainer: no exception; flagged 60, moved 60, strays moved 60/60, z dtype torch.float64
+=== odd_N_and_width1
+  N = 2001 (odd reservoir split): no exception; flagged 60, moved 60, strays moved 60/60
+  critic feature width 1: no exception; feature width 9, flagged 60, moved 60, skip=None

@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M17/birth_death.py
+@@ -222 +222 @@
+-        floor = float(positive.median()) * 1e-3 if len(positive) else 1.
++        floor = float(positive.mean()) * 1e-3 if len(positive) else 1.

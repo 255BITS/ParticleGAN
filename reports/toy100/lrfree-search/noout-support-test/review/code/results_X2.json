@@ -1,0 +1,825 @@
+[
+ {
+  "id": "M01",
+  "cls": "STAT",
+  "desc": "BH ranks 0-based (arange(0, m)): rank-1 threshold is 0",
+  "status": "CAUGHT",
+  "fails": [
+   "A BH boundary: 16 far strays tied at p = 1/3001 among m = 2400 rows: 0 flagged (expected 16; reference "
+  ],
+  "rc": 0,
+  "secs": 24.0,
+  "err": ""
+ },
+ {
+  "id": "M02",
+  "cls": "STAT",
+  "desc": "BH ranks shifted up (arange(2, m+2)): too liberal by one rank",
+  "status": "CAUGHT",
+  "fails": [
+   "A BH boundary: 15 far strays tied at p = 1/3001 among m = 2400 rows: 15 flagged (expected 0; reference "
+  ],
+  "rc": 0,
+  "secs": 24.3,
+  "err": ""
+ },
+ {
+  "id": "M03",
+  "cls": "STAT",
+  "desc": "BH divides by |R2| instead of m (level doubled at even N)",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (832 flagged of 1788, 33 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (830 flagged of 1788, 37 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (841 flagged of 1788, 28 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (831 flagged of 1788, 21 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (809 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (801 flagged of 1788, 33 rows diffe",
+   "A BH boundary: 16 far strays tied at p = 1/3001 among m = 2400 rows: 0 flagged (expected 16; reference ",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 826 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 826 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 24.5,
+  "err": ""
+ },
+ {
+  "id": "M04",
+  "cls": "STAT",
+  "desc": "BH picks the FIRST passing rank (passed[0]) instead of the last",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (641 flagged of 1788, 158 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (665 flagged of 1788, 128 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (682 flagged of 1788, 131 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (678 flagged of 1788, 132 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (632 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (576 flagged of 1788, 192 rows diff",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 725 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 725 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 24.6,
+  "err": ""
+ },
+ {
+  "id": "M05",
+  "cls": "STAT",
+  "desc": "calibration on the reference half itself (null = score(R1)): no split",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (824 flagged of 1788, 25 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (819 flagged of 1788, 26 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (842 flagged of 1788, 29 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (828 flagged of 1788, 18 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (816 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (806 flagged of 1788, 38 rows diffe",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 809 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 809 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 22.6,
+  "err": ""
+ },
+ {
+  "id": "M06",
+  "cls": "STAT",
+  "desc": "calibration set overlaps the reference (R2 = whole R)",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (812 flagged of 1788, 13 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (809 flagged of 1788, 16 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (830 flagged of 1788, 17 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (820 flagged of 1788, 10 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (799 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (784 flagged of 1788, 16 rows diffe",
+   "A BH boundary: 15 far strays tied at p = 1/3001 among m = 2400 rows: 15 flagged (expected 0; reference ",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 806 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 806 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 23.4,
+  "err": ""
+ },
+ {
+  "id": "M07",
+  "cls": "STAT",
+  "desc": "searchsorted side flipped (right=True): ties count as smaller",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (806 flagged of 1788, 7 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (814 flagged of 1788, 4 rows differ)",
+   "A finite data set (4 points x 500 copies): copies not flagged (1800), displaced rows flagged (200 of 20"
+  ],
+  "rc": 0,
+  "secs": 22.5,
+  "err": ""
+ },
+ {
+  "id": "M08",
+  "cls": "STAT",
+  "desc": "p-value counts the wrong tail (#{null < s})",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (0 flagged of 1788, 799 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (0 flagged of 1788, 793 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (0 flagged of 1788, 813 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (0 flagged of 1788, 810 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (0 flagged of 1788, ",
+   "A reservoir sorted by component, k=9: mask == independent reference (0 flagged of 1788, 768 rows differ",
+   "A BH boundary: 16 far strays tied at p = 1/3001 among m = 2400 rows: 0 flagged (expected 16; reference ",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 0 flagged) and == referenc",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 0 flagged) and == referenc",
+   "A floor (duplicate cluster + two scales): the 100 rows displaced by 1.2e-4 are flagged (0 of 100), noth",
+   "A finite data set (4 points x 500 copies): copies not flagged (1800), displaced rows flagged (0 of 200)",
+   "C1 flagged set of maybe_apply == reference on the critic's features (0 flagged; reference 60; ordinary "
+  ],
+  "rc": 1,
+  "secs": 14.7,
+  "err": "IndexError: list index out of range"
+ },
+ {
+  "id": "M09",
+  "cls": "STAT",
+  "desc": "p-value without the +1 (p can be 0): anti-conservative",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (806 flagged of 1788, 7 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (815 flagged of 1788, 5 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (787 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (775 flagged of 1788, 7 rows differ",
+   "A BH boundary: 15 far strays tied at p = 1/3001 among m = 2400 rows: 15 flagged (expected 0; reference ",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 804 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 804 flagged) and == refere",
+   "C4 flag on, isolation never acting (nothing flagged or the guard blocks: flagged 1462, acted 0) == flag"
+  ],
+  "rc": 0,
+  "secs": 22.6,
+  "err": ""
+ },
+ {
+  "id": "M10",
+  "cls": "STAT",
+  "desc": "local scale: median of the k radii replaced by their mean",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (799 flagged of 1788, 20 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (808 flagged of 1788, 31 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (821 flagged of 1788, 20 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (818 flagged of 1788, 20 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (785 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (786 flagged of 1788, 22 rows diffe",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 811 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 811 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 22.5,
+  "err": ""
+ },
+ {
+  "id": "M11",
+  "cls": "STAT",
+  "desc": "local scale: upper median (index k//2) instead of lower median",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=10 |R|=2400: mask == independent reference (803 flagged of 1788, 20 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (811 flagged of 1788, 21 rows differ)"
+  ],
+  "rc": 0,
+  "secs": 22.3,
+  "err": ""
+ },
+ {
+  "id": "M12",
+  "cls": "STAT",
+  "desc": "rho not leave-one-out (self at distance 0 counted among the k)",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (803 flagged of 1788, 6 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (793 flagged of 1788, 8 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (813 flagged of 1788, 10 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (814 flagged of 1788, 6 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (768 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (777 flagged of 1788, 9 rows differ",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 815 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 815 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 22.5,
+  "err": ""
+ },
+ {
+  "id": "M13",
+  "cls": "STAT",
+  "desc": "rho uses the (k+1)-th neighbour (k mistaken by one)",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (798 flagged of 1788, 7 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (794 flagged of 1788, 9 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (810 flagged of 1788, 13 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (820 flagged of 1788, 12 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (780 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (781 flagged of 1788, 13 rows diffe",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 806 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 806 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 22.5,
+  "err": ""
+ },
+ {
+  "id": "M14",
+  "cls": "STAT",
+  "desc": "score numerator is the nearest-neighbour distance d[:, 0] instead of the k-th",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (776 flagged of 1788, 47 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (780 flagged of 1788, 51 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (784 flagged of 1788, 51 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (779 flagged of 1788, 51 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (756 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (751 flagged of 1788, 47 rows diffe",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 790 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 790 flagged) and == refere",
+   "C5 critic features offset by 1e4: flagged set == float64 reference (61 flagged, reference 60; moved 61;"
+  ],
+  "rc": 0,
+  "secs": 24.3,
+  "err": ""
+ },
+ {
+  "id": "M15",
+  "cls": "DEV",
+  "desc": "exact recompute in float32 (features cast to float32 at entry of _isolated)",
+  "status": "CAUGHT",
+  "fails": [
+   "A dtype contract: every _knn call of the support test gets float64 features (3 calls: ['(torch.float32,"
+  ],
+  "rc": 0,
+  "secs": 24.0,
+  "err": ""
+ },
+ {
+  "id": "M16",
+  "cls": "STAT",
+  "desc": "no floor on the local scale (clamp_min(floor) removed): 0/0 on duplicate reservoirs",
+  "status": "CAUGHT",
+  "fails": [
+   "A floor (duplicate cluster + two scales): the 100 rows displaced by 1.2e-4 are flagged (100 of 100), no",
+   "A finite data set (4 points x 500 copies): copies not flagged (1800), displaced rows flagged (200 of 20"
+  ],
+  "rc": 0,
+  "secs": 25.8,
+  "err": ""
+ },
+ {
+  "id": "M17",
+  "cls": "STAT",
+  "desc": "floor from the mean instead of the median of positive radii",
+  "status": "CAUGHT",
+  "fails": [
+   "A floor (duplicate cluster + two scales): the 100 rows displaced by 1.2e-4 are flagged (0 of 100), noth"
+  ],
+  "rc": 0,
+  "secs": 25.5,
+  "err": ""
+ },
+ {
+  "id": "M18",
+  "cls": "STAT",
+  "desc": "contiguous split of the reservoir (older half / newer half) instead of interleaved",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (782 flagged of 1788, 49 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (783 flagged of 1788, 50 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (791 flagged of 1788, 54 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (794 flagged of 1788, 50 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (787 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (108 flagged of 1788, 670 rows diff",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 796 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 796 flagged) and == refere"
+  ],
+  "rc": 0,
+  "secs": 23.9,
+  "err": ""
+ },
+ {
+  "id": "M19",
+  "cls": "STAT",
+  "desc": "flags returned inverted for the p-value threshold (p < ps[j] strict): ties at threshold dropped",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (797 flagged of 1788, 2 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (791 flagged of 1788, 2 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (812 flagged of 1788, 1 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (808 flagged of 1788, 2 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (785 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (766 flagged of 1788, 2 rows differ",
+   "A BH boundary: 16 far strays tied at p = 1/3001 among m = 2400 rows: 0 flagged (expected 16; reference ",
+   "A floor (duplicate cluster + two scales): the 100 rows displaced by 1.2e-4 are flagged (0 of 100), noth",
+   "A finite data set (4 points x 500 copies): copies not flagged (0), displaced rows flagged (0 of 200); =",
+   "C1 flagged set of maybe_apply == reference on the critic's features (0 flagged; reference 60; ordinary "
+  ],
+  "rc": 1,
+  "secs": 17.3,
+  "err": "IndexError: list index out of range"
+ },
+ {
+  "id": "M55",
+  "cls": "STAT",
+  "desc": "local scale over the k-1 nearest reference points only (nearest one dropped)",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (797 flagged of 1788, 2 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (818 flagged of 1788, 11 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (815 flagged of 1788, 5 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (784 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (767 flagged of 1788, 1 rows differ"
+  ],
+  "rc": 0,
+  "secs": 24.9,
+  "err": ""
+ },
+ {
+  "id": "M56",
+  "cls": "STAT",
+  "desc": "floor is an absolute constant 1e-3 instead of relative to the median radius (dataset-scale dependent)",
+  "status": "CAUGHT",
+  "fails": [
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (149 rows differ of 802 flagged) and == refe",
+   "A floor (duplicate cluster + two scales): the 100 rows displaced by 1.2e-4 are flagged (0 of 100), noth"
+  ],
+  "rc": 0,
+  "secs": 24.5,
+  "err": ""
+ },
+ {
+  "id": "M57",
+  "cls": "STAT",
+  "desc": "no local scale at all (score = k-th neighbour distance: the unnormalised statistic)",
+  "status": "CAUGHT",
+  "fails": [
+   "A seed 1 k=9 |R|=2400: mask == independent reference (843 flagged of 1788, 148 rows differ)",
+   "A seed 1 k=10 |R|=2400: mask == independent reference (848 flagged of 1788, 153 rows differ)",
+   "A seed 2 k=9 |R|=2400: mask == independent reference (822 flagged of 1788, 101 rows differ)",
+   "A seed 2 k=10 |R|=2400: mask == independent reference (825 flagged of 1788, 99 rows differ)",
+   "A odd reservoir |R|=2401 (R1 has one row more), k=9: mask == independent reference (850 flagged of 1788",
+   "A reservoir sorted by component, k=9: mask == independent reference (843 flagged of 1788, 143 rows diff",
+   "A scale invariance: mask at scale 1e-06 == mask at scale 1 (0 rows differ of 867 flagged) and == refere",
+   "A scale invariance: mask at scale 1e+06 == mask at scale 1 (0 rows differ of 867 flagged) and == refere",
+   "A floor (duplicate cluster + two scales): the 100 rows displaced by 1.2e-4 are flagged (0 of 100), noth"
+  ],
+  "rc": 0,
+  "secs": 25.4,
+  "err": ""
+ },
+ {
+  "id": "M20",
+  "cls": "BOOK",
+  "desc": "features not centred for the support test (q + centre, R + centre)",
+  "status": "CAUGHT",
+  "fails": [
+   "C5 critic features offset by 1e4: flagged set == float64 reference (0 flagged, reference 60; moved None"
+  ],
+  "rc": 0,
+  "secs": 24.4,
+  "err": ""
+ },
+ {
+  "id": "M21",
+  "cls": "BOOK",
+  "desc": "reference is the fake pool F instead of the real reservoir R",
+  "status": "CAUGHT",
+  "fails": [
+   "C1 flagged set of maybe_apply == reference on the critic's features (0 flagged; reference 60; ordinary "
+  ],
+  "rc": 1,
+  "secs": 17.4,
+  "err": "IndexError: list index out of range"
+ },
+ {
+  "id": "M22",
+  "cls": "BOOK",
+  "desc": "k+1 passed to the support test (k mistaken by one at the call site)",
+  "status": "CAUGHT",
+  "fails": [
+   "C4 flag on, isolation never acting (nothing flagged or the guard blocks: flagged 933, acted 0) == flag "
+  ],
+  "rc": 0,
+  "secs": 24.3,
+  "err": ""
+ },
+ {
+  "id": "M23",
+  "cls": "GUARD",
+  "desc": "guard removed (acts whatever the flagged fraction)",
+  "status": "CAUGHT",
+  "fails": [
+   "B2 guard: 0 flagged and 1001 flagged (> Q N = 1000) do nothing and draw nothing (stream state unchanged",
+   "C4 flag on, isolation never acting (nothing flagged or the guard blocks: flagged 440, acted 0) == flag "
+  ],
+  "rc": 0,
+  "secs": 25.2,
+  "err": ""
+ },
+ {
+  "id": "M24",
+  "cls": "GUARD",
+  "desc": "guard strict (<) instead of <= at n_flag == Q N",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 n_flag == Q N (1000 of 20000) acts; every flagged row gets one parent (dead == flagged rows, aligned",
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)",
+   "B1 chunking: no [chunk, keep] block above 2^24 entries (largest 0, 0 blocks)",
+   "B1 counters | {'iso_evals': 1, 'iso_flagged': 1000, 'iso_acted': 0, 'iso_skipped': 1, 'iso_moves': 0}",
+   "B2 the parent draw comes from the private stream (a different global RNG state gives identical parents;",
+   "B3 rows just moved by the ordinary birth-death are not re-drawn (dead has 0 rows: 950 expected) and are",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} ("
+  ],
+  "rc": 0,
+  "secs": 22.2,
+  "err": ""
+ },
+ {
+  "id": "M25",
+  "cls": "GUARD",
+  "desc": "guard inverted (acts only when MORE than Q of the table is flagged)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 n_flag == Q N (1000 of 20000) acts; every flagged row gets one parent (dead == flagged rows, aligned",
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)",
+   "B1 chunking: no [chunk, keep] block above 2^24 entries (largest 0, 0 blocks)",
+   "B1 counters | {'iso_evals': 1, 'iso_flagged': 1000, 'iso_acted': 0, 'iso_skipped': 1, 'iso_moves': 0}",
+   "B2 the parent draw comes from the private stream (a different global RNG state gives identical parents;",
+   "B2 guard: 0 flagged and 1001 flagged (> Q N = 1000) do nothing and draw nothing (stream state unchanged",
+   "B3 rows just moved by the ordinary birth-death are not re-drawn (dead has 0 rows: 950 expected) and are",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} (",
+   "C1 flagged set of maybe_apply == reference on the critic's features (60 flagged; reference 60; ordinary"
+  ],
+  "rc": 1,
+  "secs": 15.1,
+  "err": "IndexError: list index out of range"
+ },
+ {
+  "id": "M26",
+  "cls": "GUARD",
+  "desc": "guard level 10 Q (half the table) instead of Q",
+  "status": "CAUGHT",
+  "fails": [
+   "B2 guard: 0 flagged and 1001 flagged (> Q N = 1000) do nothing and draw nothing (stream state unchanged",
+   "C4 flag on, isolation never acting (nothing flagged or the guard blocks: flagged 867, acted 0) == flag "
+  ],
+  "rc": 0,
+  "secs": 24.9,
+  "err": ""
+ },
+ {
+  "id": "M27",
+  "cls": "GUARD",
+  "desc": "acted / skipped counters swapped",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 counters | {'iso_evals': 1, 'iso_flagged': 1000, 'iso_acted': 0, 'iso_skipped': 1, 'iso_moves': 1000",
+   "B2 guard: 0 flagged and 1001 flagged (> Q N = 1000) do nothing and draw nothing (stream state unchanged",
+   "C4 flag on, isolation never acting (nothing flagged or the guard blocks: flagged 1181, acted 0) == flag"
+  ],
+  "rc": 0,
+  "secs": 23.4,
+  "err": ""
+ },
+ {
+  "id": "M28",
+  "cls": "PICK",
+  "desc": "ball factor 1 (nearest unflagged row only)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 1.000)"
+  ],
+  "rc": 0,
+  "secs": 26.0,
+  "err": ""
+ },
+ {
+  "id": "M29",
+  "cls": "PICK",
+  "desc": "ball factor 4",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.170 max 0.250)",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} ("
+  ],
+  "rc": 0,
+  "secs": 23.3,
+  "err": ""
+ },
+ {
+  "id": "M30",
+  "cls": "PICK",
+  "desc": "ball factor applied to SQUARED distances (radius sqrt(2) x nearest)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.525)"
+  ],
+  "rc": 0,
+  "secs": 24.2,
+  "err": ""
+ },
+ {
+  "id": "M31",
+  "cls": "PICK",
+  "desc": "min taken over the wrong axis (dim 0: nearest FLAGGED row per parent)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} ("
+  ],
+  "rc": 0,
+  "secs": 24.5,
+  "err": ""
+ },
+ {
+  "id": "M32",
+  "cls": "PICK",
+  "desc": "parents drawn among ALL rows incl. flagged ones (keep = ones)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} (",
+   "B4 flagged set = whole table, all rows already moved, no unflagged row left: empty answers, no error"
+  ],
+  "rc": 0,
+  "secs": 38.4,
+  "err": ""
+ },
+ {
+  "id": "M33",
+  "cls": "PICK",
+  "desc": "ordinary children NOT removed from the flagged set (double move of a row)",
+  "status": "CAUGHT",
+  "fails": [
+   "B3 rows just moved by the ordinary birth-death are not re-drawn (dead has 1000 rows: 950 expected) and "
+  ],
+  "rc": 0,
+  "secs": 24.1,
+  "err": ""
+ },
+ {
+  "id": "M34",
+  "cls": "PICK",
+  "desc": "ordinary children NOT removed from the parent set (parent = a row just moved)",
+  "status": "CAUGHT",
+  "fails": [
+   "B3 rows just moved by the ordinary birth-death are not re-drawn (dead has 950 rows: 950 expected) and a",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} (",
+   "B4 flagged set = whole table, all rows already moved, no unflagged row left: empty answers, no error"
+  ],
+  "rc": 0,
+  "secs": 25.3,
+  "err": ""
+ },
+ {
+  "id": "M35",
+  "cls": "PICK",
+  "desc": "outside-of-ball rows given value 2 instead of -1 (picks a row OUTSIDE the ball)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} ("
+  ],
+  "rc": 0,
+  "secs": 25.4,
+  "err": ""
+ },
+ {
+  "id": "M36",
+  "cls": "PICK",
+  "desc": "ball computed on the EMA table instead of the live table",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)",
+   "B2 the parent draw comes from the private stream (a different global RNG state gives identical parents;",
+   "B3 with the r=1.0 row excluded the ball of centre 1 becomes 2 x 1.4 = 2.8: parents in {1.4, 1.8, 2.2} ("
+  ],
+  "rc": 0,
+  "secs": 24.1,
+  "err": ""
+ },
+ {
+  "id": "M37",
+  "cls": "PICK",
+  "desc": "chunk drops its last row (dead[start:start+step-1])",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 n_flag == Q N (1000 of 20000) acts; every flagged row gets one parent (dead == flagged rows, aligned",
+   "B1 parents are unflagged rows of the row's own ball (radius 2 x nearest = 2.0: the 1.0, 1.4, 1.8 rows):",
+   "B1 the ball is sampled uniformly: all three ball rows used, share in [.22, .45] (min 0.000 max 0.000)"
+  ],
+  "rc": 1,
+  "secs": 14.2,
+  "err": "IndexError: The shape of the mask [950] at index 0 does not match the shape of the indexed tensor [949] at index 0"
+ },
+ {
+  "id": "M38",
+  "cls": "PICK",
+  "desc": "chunk size not divided by the keep size (step = 1<<24): unbounded [chunk, keep] block",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 chunking: no [chunk, keep] block above 2^24 entries (largest 19000000, 1 blocks)"
+  ],
+  "rc": 0,
+  "secs": 25.1,
+  "err": ""
+ },
+ {
+  "id": "M39",
+  "cls": "BOOK",
+  "desc": "last['moves'] not updated (trainer neither rebases the tester nor resets evidence for iso-only moves)",
+  "status": "CAUGHT",
+  "fails": [
+   "C1 flagged set of maybe_apply == reference on the critic's features (60 flagged; reference 60; ordinary",
+   "C2 stale reset == float64 oracle for the 1940 unmoved rows (6 rows differ; 468 restarted; the 58 parent",
+   "C3 trainer.step after isolation moves: tester.rebase and row_evidence.reset both received exactly the m"
+  ],
+  "rc": 0,
+  "secs": 25.1,
+  "err": ""
+ },
+ {
+  "id": "M40",
+  "cls": "BOOK",
+  "desc": "moved_rows excludes the iso rows",
+  "status": "CAUGHT",
+  "fails": [
+   "C1 flagged set of maybe_apply == reference on the critic's features (60 flagged; reference 60; ordinary",
+   "C3 trainer.step after isolation moves: tester.rebase and row_evidence.reset both received exactly the m",
+   "C5 critic features offset by 1e4: flagged set == float64 reference (60 flagged, reference 60; moved 0; "
+  ],
+  "rc": 0,
+  "secs": 26.0,
+  "err": ""
+ },
+ {
+  "id": "M41",
+  "cls": "BOOK",
+  "desc": "stale-site reset omits the iso sites",
+  "status": "CAUGHT",
+  "fails": [
+   "C2 stale reset == float64 oracle for the 1940 unmoved rows (463 rows differ; 5 restarted; the 58 parent"
+  ],
+  "rc": 0,
+  "secs": 25.3,
+  "err": ""
+ },
+ {
+  "id": "M42",
+  "cls": "BOOK",
+  "desc": "stale-site reset uses only the flagged rows old sites (parents sites omitted)",
+  "status": "CAUGHT",
+  "fails": [
+   "C2 stale reset == float64 oracle for the 1940 unmoved rows (463 rows differ; 5 restarted; the 58 parent"
+  ],
+  "rc": 0,
+  "secs": 25.6,
+  "err": ""
+ },
+ {
+  "id": "M43",
+  "cls": "BOOK",
+  "desc": "evidence (S, W, n) of iso rows not reset (only ordinary children)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 24.9,
+  "err": ""
+ },
+ {
+  "id": "M44",
+  "cls": "BOOK",
+  "desc": "EMA row not updated on iso moves",
+  "status": "CAUGHT",
+  "fails": [
+   "C6 re-drawn rows are clones of their parents: EMA row + same jitter (False), A2 latent history (True), "
+  ],
+  "rc": 0,
+  "secs": 24.0,
+  "err": ""
+ },
+ {
+  "id": "M45",
+  "cls": "BOOK",
+  "desc": "optimizer (Adam/AMSGrad) rows not copied on iso moves",
+  "status": "CAUGHT",
+  "fails": [
+   "C6 re-drawn rows are clones of their parents: EMA row + same jitter (True), A2 latent history (True), o"
+  ],
+  "rc": 0,
+  "secs": 25.4,
+  "err": ""
+ },
+ {
+  "id": "M46",
+  "cls": "BOOK",
+  "desc": "A2 latent history not copied on iso moves",
+  "status": "CAUGHT",
+  "fails": [
+   "C6 re-drawn rows are clones of their parents: EMA row + same jitter (True), A2 latent history (False), "
+  ],
+  "rc": 0,
+  "secs": 24.0,
+  "err": ""
+ },
+ {
+  "id": "M47",
+  "cls": "BOOK",
+  "desc": "isolation also applied in a dry run",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 24.0,
+  "err": ""
+ },
+ {
+  "id": "M48",
+  "cls": "BOOK",
+  "desc": "iso move counter not incremented (iso_moves stays 0)",
+  "status": "CAUGHT",
+  "fails": [
+   "B1 counters | {'iso_evals': 1, 'iso_flagged': 1000, 'iso_acted': 1, 'iso_skipped': 0, 'iso_moves': 0}"
+  ],
+  "rc": 0,
+  "secs": 23.2,
+  "err": ""
+ },
+ {
+  "id": "M49",
+  "cls": "BOOK",
+  "desc": "load_state_dict does not restore the counters (iso counters reset after a resume)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 22.0,
+  "err": ""
+ },
+ {
+  "id": "M50",
+  "cls": "RNG",
+  "desc": "one random number drawn from the private stream in EVERY evaluation, flag off included",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.5,
+  "err": ""
+ },
+ {
+  "id": "M51",
+  "cls": "RNG",
+  "desc": "flag on: parent draw made before the guard (stream advances even when nothing is flagged)",
+  "status": "CAUGHT",
+  "fails": [
+   "B2 guard: 0 flagged and 1001 flagged (> Q N = 1000) do nothing and draw nothing (stream state unchanged",
+   "C4 flag on, isolation never acting (nothing flagged or the guard blocks: flagged 1363, acted 0) == flag"
+  ],
+  "rc": 0,
+  "secs": 21.7,
+  "err": ""
+ },
+ {
+  "id": "M52",
+  "cls": "RNG",
+  "desc": "parent draws taken from the global RNG instead of the private stream",
+  "status": "CAUGHT",
+  "fails": [
+   "B2 the parent draw comes from the private stream (a different global RNG state gives identical parents;"
+  ],
+  "rc": 0,
+  "secs": 21.5,
+  "err": ""
+ },
+ {
+  "id": "M53",
+  "cls": "VALID",
+  "desc": "recipe accepts isolation with data-space birth-death",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.3,
+  "err": ""
+ },
+ {
+  "id": "M54",
+  "cls": "VALID",
+  "desc": "recipe does not require a boolean",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 18.1,
+  "err": ""
+ }
+]

@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M23/birth_death.py
+@@ -245 +245 @@
+-        acted = 0 < n_flag <= self.Q * self.N
++        acted = 0 < n_flag

@@ -1,0 +1,4 @@
+lattice d 1 nR 584 nq 846 k 8
+  R1 vs R1 (leave-one-out): rows whose k nearest distances differ from brute force: 122 of 292
+  R2 vs R1: rows whose k nearest distances differ from brute force: 128 of 292
+  q vs R1: rows whose k nearest distances differ from brute force: 274 of 846

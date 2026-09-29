@@ -1,0 +1,13 @@
+--- (1) _isolated vs reference
+  trial 117 lattice d=8 nR=551 nq=755 k=11: 2 rows differ (code 200 flagged, reference 202)
+  trial 141 lattice d=8 nR=863 nq=655 k=12: 5 rows differ (code 177 flagged, reference 172)
+  trial 145 lattice d=3 nR=553 nq=523 k=5: 134 rows differ (code 134 flagged, reference 0)
+  trial 161 lattice d=3 nR=363 nq=859 k=10: 4 rows differ (code 215 flagged, reference 219)
+  trial 169 lattice d=32 nR=518 nq=725 k=6: 1 rows differ (code 184 flagged, reference 183)
+  trial 209 lattice d=8 nR=888 nq=661 k=10: 1 rows differ (code 171 flagged, reference 170)
+  trial 213 lattice d=3 nR=316 nq=479 k=11: 4 rows differ (code 120 flagged, reference 124)
+  trial 277 lattice d=8 nR=481 nq=330 k=5: 1 rows differ (code 83 flagged, reference 84)
+  trial 281 lattice d=32 nR=880 nq=883 k=8: 1 rows differ (code 229 flagged, reference 228)
+300 trials, 9 with a difference; by kind (trials, differing): {'gauss': [75, 0], 'lattice': [75, 9], 'dups': [75, 0], 'heavy': [75, 0]}; trials with >0 flagged rows: 252
+--- (2) _isolation_pick invariants
+300 trials (289 with something to do), 0 with a violated invariant

@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M32/birth_death.py
+@@ -256 +256 @@
+-        keep = ~flagged
++        keep = torch.ones_like(flagged)

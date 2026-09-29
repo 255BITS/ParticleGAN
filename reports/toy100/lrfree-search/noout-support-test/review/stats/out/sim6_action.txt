@@ -1,0 +1,41 @@
+/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3036: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3037: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+== A. inflow / mass share per mode; 100-mode lattice, table N=20000 rows at the mode centres (+ jitter of the mode sd), 3000 uniform strays >= 6 (own) sigma from every mode. inflow_k = mean over strays of P(parent in mode k); ratio = inflow_k / mass share of k
+  variant: equal masses, equal sd .03
+    BALL  : inflow/mass share: min 0.44 p5 0.66 median 0.90 p95 1.55 max 2.06 | corr(rho, mass) -0.00 corr(rho, density m/sd^2) +nan | mean rows in the ball 375 | P(parent in the stray's nearest mode) 0.668
+    NEAR1 : inflow/mass share: min 0.37 p5 0.60 median 0.90 p95 1.51 max 2.17 | corr(rho, mass) -0.00 corr(rho, density m/sd^2) +nan | mean rows in the ball 1 | P(parent in the stray's nearest mode) 0.987
+    KNN10 : inflow/mass share: min 0.38 p5 0.59 median 0.90 p95 1.53 max 2.15 | corr(rho, mass) -0.00 corr(rho, density m/sd^2) +nan | mean rows in the ball 10 | P(parent in the stray's nearest mode) 0.983
+    UNIF  : inflow/mass share: min 0.85 p5 0.90 median 1.00 p95 1.10 max 1.16 | corr(rho, mass) +0.00 corr(rho, density m/sd^2) +nan | mean rows in the ball 20000 | P(parent in the stray's nearest mode) 0.010
+  variant: masses log-uniform 1:10, sd .03
+    BALL  : inflow/mass share: min 0.31 p5 0.45 median 1.24 p95 2.62 max 3.41 | corr(rho, mass) -0.72 corr(rho, density m/sd^2) -0.72 | mean rows in the ball 381 | P(parent in the stray's nearest mode) 0.661
+    NEAR1 : inflow/mass share: min 0.25 p5 0.32 median 1.35 p95 3.36 max 5.71 | corr(rho, mass) -0.73 corr(rho, density m/sd^2) -0.73 | mean rows in the ball 1 | P(parent in the stray's nearest mode) 0.984
+    KNN10 : inflow/mass share: min 0.25 p5 0.32 median 1.38 p95 3.34 max 5.66 | corr(rho, mass) -0.73 corr(rho, density m/sd^2) -0.73 | mean rows in the ball 10 | P(parent in the stray's nearest mode) 0.978
+    UNIF  : inflow/mass share: min 0.80 p5 0.87 median 1.00 p95 1.14 max 1.27 | corr(rho, mass) -0.03 corr(rho, density m/sd^2) -0.03 | mean rows in the ball 20000 | P(parent in the stray's nearest mode) 0.010
+  variant: equal masses, sd log-uniform .02-.10
+    BALL  : inflow/mass share: min 0.17 p5 0.40 median 0.93 p95 1.85 max 2.16 | corr(rho, mass) +0.00 corr(rho, density m/sd^2) +0.35 | mean rows in the ball 355 | P(parent in the stray's nearest mode) 0.557
+    NEAR1 : inflow/mass share: min 0.10 p5 0.40 median 0.92 p95 1.75 max 2.57 | corr(rho, mass) -0.00 corr(rho, density m/sd^2) +0.28 | mean rows in the ball 1 | P(parent in the stray's nearest mode) 0.634
+    KNN10 : inflow/mass share: min 0.14 p5 0.38 median 0.92 p95 1.81 max 2.58 | corr(rho, mass) +0.00 corr(rho, density m/sd^2) +0.35 | mean rows in the ball 10 | P(parent in the stray's nearest mode) 0.616
+    UNIF  : inflow/mass share: min 0.83 p5 0.87 median 1.01 p95 1.11 max 1.15 | corr(rho, mass) -0.00 corr(rho, density m/sd^2) +0.05 | mean rows in the ball 20000 | P(parent in the stray's nearest mode) 0.010
+
+== B. two modes A, B spacing 1.0 (33 sigma), stray at fraction x of the way; P(re-drawn into A) under BALL; rows n_A, n_B (sd .03 jitter)
+  n_A= 1000 n_B= 1000: x=.1..:   1.00  1.00  1.00  0.61  0.50  0.38  0.00  0.00  0.00   (pure nearest-mode would give 1 for x<.5, 0 for x>.5)
+  n_A= 1000 n_B=  100: x=.1..:   1.00  1.00  1.00  0.99  0.91  0.91  0.00  0.00  0.00   (pure nearest-mode would give 1 for x<.5, 0 for x>.5)
+  n_A= 1000 n_B=   40: x=.1..:   1.00  1.00  1.00  0.99  0.96  0.96  0.00  0.00  0.00   (pure nearest-mode would give 1 for x<.5, 0 for x>.5)
+  n_A= 5000 n_B=  200: x=.1..:   1.00  1.00  1.00  0.99  0.96  0.96  0.00  0.00  0.00   (pure nearest-mode would give 1 for x<.5, 0 for x>.5)
+
+== C. share of the unflagged table inside the ball vs latent dimension z_dim (N=20000; stray = a table row displaced by 6 sigma of its cluster)
+  z_dim=   2 | iid N(0,I) z: ball holds 0.000 of the rows (median 0.000) | 100 tight clusters: ball holds 0.007 of the rows (median 0.008)
+  z_dim=   4 | iid N(0,I) z: ball holds 0.001 of the rows (median 0.001) | 100 tight clusters: ball holds 0.008 of the rows (median 0.008)
+  z_dim=   8 | iid N(0,I) z: ball holds 0.011 of the rows (median 0.008) | 100 tight clusters: ball holds 0.009 of the rows (median 0.009)
+  z_dim=  16 | iid N(0,I) z: ball holds 0.226 of the rows (median 0.200) | 100 tight clusters: ball holds 0.010 of the rows (median 0.010)
+  z_dim=  32 | iid N(0,I) z: ball holds 0.901 of the rows (median 0.938) | 100 tight clusters: ball holds 0.010 of the rows (median 0.010)
+  z_dim=  64 | iid N(0,I) z: ball holds 1.000 of the rows (median 1.000) | 100 tight clusters: ball holds 0.010 of the rows (median 0.010)
+  z_dim= 128 | iid N(0,I) z: ball holds 1.000 of the rows (median 1.000) | 100 tight clusters: ball holds 0.010 of the rows (median 0.010)
+
+== D. strays 4-8 sigma from a mode centre: P(parent in that mode) and mean parent distance to that centre (sigma units), 100 equal modes
+  stray at 4 sigma: P(parent in own mode) 1.000 | rows in ball 37 | parent distance to own centre: mean 1.88 sigma, share >= 3 sigma 0.118
+  stray at 5 sigma: P(parent in own mode) 1.000 | rows in ball 85 | parent distance to own centre: mean 1.44 sigma, share >= 3 sigma 0.042
+  stray at 6 sigma: P(parent in own mode) 1.000 | rows in ball 143 | parent distance to own centre: mean 1.21 sigma, share >= 3 sigma 0.018
+  stray at 8 sigma: P(parent in own mode) 1.000 | rows in ball 194 | parent distance to own centre: mean 1.19 sigma, share >= 3 sigma 0.004

@@ -1,0 +1,62 @@
+id   class  test_E15.py   extra test    union      description
+M01  STAT   SURVIVES      CAUGHT        CAUGHT     BH ranks 0-based (arange(0, m)): rank-1 threshold is 0
+M02  STAT   SURVIVES      CAUGHT        CAUGHT     BH ranks shifted up (arange(2, m+2)): too liberal by one rank
+M03  STAT   CAUGHT        CAUGHT        CAUGHT     BH divides by |R2| instead of m (level doubled at even N)
+M04  STAT   CAUGHT        CAUGHT        CAUGHT     BH picks the FIRST passing rank (passed[0]) instead of the last
+M05  STAT   CAUGHT        CAUGHT        CAUGHT     calibration on the reference half itself (null = score(R1)): no split
+M06  STAT   SURVIVES      CAUGHT        CAUGHT     calibration set overlaps the reference (R2 = whole R)
+M07  STAT   SURVIVES      CAUGHT        CAUGHT     searchsorted side flipped (right=True): ties count as smaller
+M08  STAT   CAUGHT        CAUGHT        CAUGHT     p-value counts the wrong tail (#{null < s})
+M09  STAT   SURVIVES      CAUGHT        CAUGHT     p-value without the +1 (p can be 0): anti-conservative
+M10  STAT   SURVIVES      CAUGHT        CAUGHT     local scale: median of the k radii replaced by their mean
+M11  STAT   SURVIVES      CAUGHT        CAUGHT     local scale: upper median (index k//2) instead of lower median
+M12  STAT   SURVIVES      CAUGHT        CAUGHT     rho not leave-one-out (self at distance 0 counted among the k)
+M13  STAT   SURVIVES      CAUGHT        CAUGHT     rho uses the (k+1)-th neighbour (k mistaken by one)
+M14  STAT   SURVIVES      CAUGHT        CAUGHT     score numerator is the nearest-neighbour distance d[:, 0] instead of the k-th
+M15  DEV    SURVIVES      CAUGHT        CAUGHT     exact recompute in float32 (features cast to float32 at entry of _isolated)
+M16  STAT   SURVIVES      CAUGHT        CAUGHT     no floor on the local scale (clamp_min(floor) removed): 0/0 on duplicate reservoirs
+M17  STAT   SURVIVES      CAUGHT        CAUGHT     floor from the mean instead of the median of positive radii
+M18  STAT   SURVIVES      CAUGHT        CAUGHT     contiguous split of the reservoir (older half / newer half) instead of interleaved
+M19  STAT   CAUGHT        CAUGHT        CAUGHT     flags returned inverted for the p-value threshold (p < ps[j] strict): ties at threshold dropped
+M20  BOOK   SURVIVES      CAUGHT        CAUGHT     features not centred for the support test (q + centre, R + centre)
+M21  BOOK   CAUGHT        CAUGHT        CAUGHT     reference is the fake pool F instead of the real reservoir R
+M22  BOOK   SURVIVES      CAUGHT        CAUGHT     k+1 passed to the support test (k mistaken by one at the call site)
+M23  GUARD  CAUGHT        CAUGHT        CAUGHT     guard removed (acts whatever the flagged fraction)
+M24  GUARD  SURVIVES      CAUGHT        CAUGHT     guard strict (<) instead of <= at n_flag == Q N
+M25  GUARD  CAUGHT        CAUGHT        CAUGHT     guard inverted (acts only when MORE than Q of the table is flagged)
+M26  GUARD  CAUGHT        CAUGHT        CAUGHT     guard level 10 Q (half the table) instead of Q
+M27  GUARD  CAUGHT        CAUGHT        CAUGHT     acted / skipped counters swapped
+M28  PICK   SURVIVES      CAUGHT        CAUGHT     ball factor 1 (nearest unflagged row only)
+M29  PICK   SURVIVES      CAUGHT        CAUGHT     ball factor 4
+M30  PICK   SURVIVES      CAUGHT        CAUGHT     ball factor applied to SQUARED distances (radius sqrt(2) x nearest)
+M31  PICK   SURVIVES      CAUGHT        CAUGHT     min taken over the wrong axis (dim 0: nearest FLAGGED row per parent)
+M32  PICK   CAUGHT        CAUGHT        CAUGHT     parents drawn among ALL rows incl. flagged ones (keep = ones)
+M33  PICK   SURVIVES      CAUGHT        CAUGHT     ordinary children NOT removed from the flagged set (double move of a row)
+M34  PICK   SURVIVES      CAUGHT        CAUGHT     ordinary children NOT removed from the parent set (parent = a row just moved)
+M35  PICK   SURVIVES      CAUGHT        CAUGHT     outside-of-ball rows given value 2 instead of -1 (picks a row OUTSIDE the ball)
+M36  PICK   SURVIVES      CAUGHT        CAUGHT     ball computed on the EMA table instead of the live table
+M37  PICK   SURVIVES      CAUGHT        CAUGHT     chunk drops its last row (dead[start:start+step-1])
+M38  PICK   SURVIVES      CAUGHT        CAUGHT     chunk size not divided by the keep size (step = 1<<24): unbounded [chunk, keep] block
+M39  BOOK   CAUGHT        CAUGHT        CAUGHT     last['moves'] not updated (trainer neither rebases the tester nor resets evidence for iso-only moves)
+M40  BOOK   CAUGHT        CAUGHT        CAUGHT     moved_rows excludes the iso rows
+M41  BOOK   SURVIVES      CAUGHT        CAUGHT     stale-site reset omits the iso sites
+M42  BOOK   SURVIVES      CAUGHT        CAUGHT     stale-site reset uses only the flagged rows old sites (parents sites omitted)
+M43  BOOK   SURVIVES      CAUGHT        CAUGHT     evidence (S, W, n) of iso rows not reset (only ordinary children)
+M44  BOOK   CAUGHT        CAUGHT        CAUGHT     EMA row not updated on iso moves
+M45  BOOK   CAUGHT        CAUGHT        CAUGHT     optimizer (Adam/AMSGrad) rows not copied on iso moves
+M46  BOOK   SURVIVES      CAUGHT        CAUGHT     A2 latent history not copied on iso moves
+M47  BOOK   CAUGHT        SURVIVES      CAUGHT     isolation also applied in a dry run
+M48  BOOK   CAUGHT        CAUGHT        CAUGHT     iso move counter not incremented (iso_moves stays 0)
+M49  BOOK   CAUGHT        SURVIVES      CAUGHT     load_state_dict does not restore the counters (iso counters reset after a resume)
+M50  RNG    CAUGHT        SURVIVES      CAUGHT     one random number drawn from the private stream in EVERY evaluation, flag off included
+M51  RNG    CAUGHT        CAUGHT        CAUGHT     flag on: parent draw made before the guard (stream advances even when nothing is flagged)
+M52  RNG    SURVIVES      CAUGHT        CAUGHT     parent draws taken from the global RNG instead of the private stream
+M53  VALID  CAUGHT        SURVIVES      CAUGHT     recipe accepts isolation with data-space birth-death
+M54  VALID  CAUGHT        SURVIVES      CAUGHT     recipe does not require a boolean
+M55  STAT   SURVIVES      CAUGHT        CAUGHT     local scale over the k-1 nearest reference points only (nearest one dropped)
+M56  STAT   SURVIVES      CAUGHT        CAUGHT     floor is an absolute constant 1e-3 instead of relative to the median radius (dataset-scale dependent)
+M57  STAT   CAUGHT        CAUGHT        CAUGHT     no local scale at all (score = k-th neighbour distance: the unnormalised statistic)
+
+mutants 57: test_E15.py catches 23, test_E17_extra.py catches 52, union 57; survive both: []
+survive test_E15.py:  ['M01', 'M02', 'M06', 'M07', 'M09', 'M10', 'M11', 'M12', 'M13', 'M14', 'M15', 'M16', 'M17', 'M18', 'M20', 'M22', 'M24', 'M28', 'M29', 'M30', 'M31', 'M33', 'M34', 'M35', 'M36', 'M37', 'M38', 'M41', 'M42', 'M43', 'M46', 'M52', 'M55', 'M56']
+survive test_E17_extra.py (all caught by test_E15.py):  ['M47', 'M49', 'M50', 'M53', 'M54']

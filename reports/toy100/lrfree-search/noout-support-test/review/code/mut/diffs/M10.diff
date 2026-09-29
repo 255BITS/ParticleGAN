@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M10/birth_death.py
+@@ -225 +225 @@
+-            return d[:, -1] / rho[ix].sort(dim=1).values[:, (k - 1) // 2].clamp_min(floor)      # the lower median (sort, not median: deterministic on CUDA)
++            return d[:, -1] / rho[ix].mean(1).clamp_min(floor)      # the lower median (sort, not median: deterministic on CUDA)

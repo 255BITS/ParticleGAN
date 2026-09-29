@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M35/birth_death.py
+@@ -267 +267 @@
+-            parent.append(keep[torch.where(ball, draw, torch.full_like(draw, -1.)).argmax(1)])
++            parent.append(keep[torch.where(ball, draw, torch.full_like(draw, 2.)).argmax(1)])

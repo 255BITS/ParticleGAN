@@ -1,0 +1,4 @@
+strays    0: shipped flagged    0 (0.86s) | torch replica    0 | kd replica    0 (0.04s) | flags equal shipped/kd: True | max |p_torch - p_kd| 0.00e+00 | rows with p differing 0
+strays   30: shipped flagged    0 (0.81s) | torch replica    0 | kd replica    0 (0.04s) | flags equal shipped/kd: True | max |p_torch - p_kd| 0.00e+00 | rows with p differing 0
+strays   60: shipped flagged   62 (0.80s) | torch replica   62 | kd replica   62 (0.04s) | flags equal shipped/kd: True | max |p_torch - p_kd| 0.00e+00 | rows with p differing 0
+strays  300: shipped flagged  321 (0.83s) | torch replica  321 | kd replica  321 (0.04s) | flags equal shipped/kd: True | max |p_torch - p_kd| 0.00e+00 | rows with p differing 0

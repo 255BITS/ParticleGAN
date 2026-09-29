@@ -1,0 +1,4 @@
+--- E17/birth_death.py
++++ M51/birth_death.py
+@@ -251,0 +252 @@
++        torch.rand(1, device=trainer.prior.z.device, generator=self.stream)

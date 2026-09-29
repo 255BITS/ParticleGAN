@@ -1,0 +1,14 @@
+[
+ {
+  "id": "M43",
+  "cls": "BOOK",
+  "desc": "evidence (S, W, n) of iso rows not reset (only ordinary children)",
+  "status": "CAUGHT",
+  "fails": [
+   "C7 moved rows have S = W = n = 0 even when the stale test cannot see them (NaN radius planted on the 60"
+  ],
+  "rc": 0,
+  "secs": 19.6,
+  "err": ""
+ }
+]

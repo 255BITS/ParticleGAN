@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M34/birth_death.py
+@@ -257 +257 @@
+-        keep[child] = False
++        pass

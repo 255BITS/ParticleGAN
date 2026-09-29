@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M20/birth_death.py
+@@ -315 +315 @@
+-            flagged = self._isolated(q, R, k, fast) if self.isolation else None
++            flagged = self._isolated(q + centre, R + centre, k, fast) if self.isolation else None

@@ -1,5 +1,17 @@
 # LR-free GAN base search — September 27
 
+## Support test in the critic's feature space: rotated100 margin +.0151, 13/13 toys (September 29)
+
+The [support-test report](noout-support-test/README.md) archives the E15-E22 pass on top of the E14s candidate, one deterministic seed. Table rows
+with no real support ("strays", 2.7% of the rotated100 table at 7k, the reason for its thin precision margin) are found in the critic's feature space with a
+split-conformal test against the real reservoir and re-drawn as copies of nearby supported rows; the birth-death geometry now divides every critic feature by
+its spread among real samples, which makes it invariant to the critic's parametrisation (after the [feature gauge audit](e17-feature-gauge-review/RESULTS.md)).
+Candidate E22: native 7k precision .9834 / **.9851** / .9822 (E14s .9836 / .9728 / .9758), lr x.75 and x1.33 6/6, 14k and 28k 3/3, and **13/13** on the toy suite
+(E14s 10/13; the feature scale alone fixes img_bars4, img_intensity2 and vector_unequal_mass). Two independent reviews found no blocking problem; the rule
+"no data-space statistic" is respected in the executed path. Variants with p-weighted parents and persistence (E20/E21) pass the natives but fail the flaky
+ring_shift gate. Open: iid-reservoir assumption (a component withheld for 100 steps is erased), churn, inert below 800 rows, 3-seed confirmation. The codex
+[small-batch critic-memory toy](streaming-smallbatch-toy/RESULTS.md) is consistent with the small-table limit.
+
 ## E4 gradient-only controller: frozen native 3/3, A2 violation (September 28–29)
 
 The [E4 report](noout-e4/README.md) archives the exact package, native

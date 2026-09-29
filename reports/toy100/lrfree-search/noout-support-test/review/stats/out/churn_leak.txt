@@ -1,0 +1,23 @@
+232 acted evaluations, steps 1100..7000; flagged per acted evaluation: min 40 p10 42 median 56 p90 99 max 997; evaluations with < 40 flagged: 0
+rows re-drawn per acted evaluation (flagged minus rows the ordinary moves took): min 40 median 56 max 997; acted evaluations per 1000 steps: 1k:47, 2k:51, 3k:49, 4k:28, 5k:31, 6k:26
+
+parent distance class (sigma) | re-draws | share | child flagged again within 50 / 100 / 300 / 1000 steps (acted evaluations only; censored at the end of the run, steps <= 6000 only) | median steps to re-flag
+   0- 2 |   6609 | 0.417 | 0.001 / 0.002 / 0.048 / 0.188 | 870
+   2- 3 |   1933 | 0.122 | 0.055 / 0.173 / 0.595 / 0.814 | 210
+   3- 4 |   3737 | 0.236 | 0.341 / 0.603 / 0.872 / 0.924 | 80
+   4- 6 |   3521 | 0.222 | 0.744 / 0.923 / 0.971 / 0.974 | 30
+   6-99 |     59 | 0.004 | 0.957 / 0.978 / 0.978 / 0.978 | 20
+
+when a child is flagged again <= 300 steps later: its new distance to the nearest centre (sigma) vs the distance of the parent it was cloned from
+  8126 re-flags within 300 steps; corr(parent distance, new distance) -0.00
+  parent 0-2 sigma: 297 re-flags, median new distance 5.8 sigma, share of these re-flags with new distance >= 3 sigma 0.997
+  parent 2-3 sigma: 1140 re-flags, median new distance 5.2 sigma, share of these re-flags with new distance >= 3 sigma 0.996
+  parent 3-4 sigma: 3237 re-flags, median new distance 4.7 sigma, share of these re-flags with new distance >= 3 sigma 1.000
+  parent 4-6 sigma: 3394 re-flags, median new distance 5.2 sigma, share of these re-flags with new distance >= 3 sigma 1.000
+  parent 6-99 sigma: 58 re-flags, median new distance 6.7 sigma, share of these re-flags with new distance >= 3 sigma 1.000
+
+children cloned from a CORE parent (< 2 sigma) and re-flagged within 300 steps: 278 of 5790 = 0.0480
+children cloned from a SHELL parent (>= 3 sigma) and re-flagged within 300 steps: 6358 of 6911 = 0.9200
+
+steps >= 4000: 4363 re-draws; dead rows: <3 sigma 0.0005, 3-4 0.036, 4-6 0.378, >=6 0.586; parents: <2 0.662, 2-3 0.070, 3-4 0.124, 4-6 0.138
+OMP_NUM_THREADS=1 /tmp/pr38-default-env/bin/python churn_leak.py  2.69s user 0.38s system 98% cpu 3.129 total

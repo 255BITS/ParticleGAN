@@ -1,0 +1,117 @@
+# Q7 data-space audit: every reference to raw samples / raw generator outputs / data-space quantities in the executed path of the support test (pkg-E17)
+
+## birth_death.py: raw real rows (reservoir), raw generator outputs (q_raw, y), sample shape, sigma_out, raw-equality head test
+4:reservoir R of the last N D-real rows (N = table size), every particle i is
+87:        self.reservoir = None  # [N, D_out], allocated on the first batch
+100:        self.sample_shape = None
+105:            # whose input is learned (not the raw sample, not the raw sample concatenated with something); concatenated in firing order. A critic
+106:            # with a raw linear skip (score = f(x) + w.x) contributes its learned heads only; a critic whose scalar heads all read the raw
+122:    # --------------------------------------------------------------- reservoir
+125:        x = real.detach().flatten(1)
+126:        if self.sample_shape is None:
+127:            self.sample_shape = tuple(real.shape[1:])     # also after a checkpoint load (the reservoir is restored, the shape is not)
+128:        if self.reservoir is None:
+129:            self.reservoir = torch.zeros(self.N, x.shape[1], device=x.device, dtype=x.dtype)
+131:                self.anchor = torch.zeros_like(self.reservoir)
+135:            self.reservoir[self.cursor:end] = x
+138:            self.reservoir[self.cursor:] = x[:split]
+139:            self.reservoir[:end - self.N] = x[split:]
+171:    def _is_raw(feature, raw):
+172:        """True when a head input is the raw sample or contains it as a leading/trailing block."""
+173:        dx, width, raw = raw.shape[1], feature.shape[1], raw.to(feature.dtype)
+175:            return torch.equal(feature, raw)
+176:        return width > dx and (torch.equal(feature[:, :dx], raw) or torch.equal(feature[:, -dx:], raw))
+187:        x = x.reshape(len(x), *self.sample_shape)
+194:                    raw = x[start:start + chunk].flatten(1)
+196:                    heads = [(m, f) for m, f in heads if not self._is_raw(f, raw)]
+198:                        raise ValueError("birth_death_space='critic': every scalar score head of the critic reads the raw sample "
+199:                                         "(or the raw sample concatenated with something), so there is no feature space")
+214:        Score of a point u: a(u) / b(u), with a(u) the distance to its k-th nearest point of the reference half R1 of the real reservoir and b(u)
+216:        region is compared with itself, so a rare component is not flagged for being sparse). The other half R2 of the reservoir is exchangeable
+218:        (a row scored at its clean centre is, if anything, closer to the bulk than a draw: conservative). Benjamini-Hochberg at Q over the table."""
+238:        """Rows to re-draw and their parents: every flagged row that the ordinary moves did not just re-draw becomes a clone of a uniformly drawn
+266:            draw = torch.rand(dist.shape, device=dist.device, generator=self.stream)
+267:            parent.append(keep[torch.where(ball, draw, torch.full_like(draw, -1.)).argmax(1)])
+275:    def maybe_apply(self, trainer, sigma_out):
+276:        """Run one evaluation (and its moves) when the reservoir has turned over."""
+288:            # with replacement, as prior.sample does), not one draw per particle: R is iid from pi,
+295:            y = G(latent + jitter_delta)
+298:            if sigma_out:
+299:                y = y + float(sigma_out) * eps
+300:            q_raw = G(z)
+301:            q = q_raw.flatten(1)
+305:        F, R, n, k = y.flatten(1), self.reservoir, self.N, self.k
+311:            q, F, R = self._features(trainer, q_raw), self._features(trainer, y), self._features(trainer, self.reservoir)
+314:            fast = torch.float32
+318:            fast = None
+320:        # [dev from spec rev 2] no own-draw exclusion and no log(N/(N-1)): q_i is a fixed point
+322:        # kernel included), exactly as R's under rho = pi. Excluding i's draw biased x toward deficit
+349:        # logit Beta(k,k) has logistic tails: Gaussian/Rayleigh on raw nats gave P(p<=.01) = .017
+477:    _TENSORS = ("reservoir", "S", "W", "n", "anchor", "radius", "pending")
+506:        for key in ("reservoir", "anchor"):
+
+## every call that consumes them in the support-test path
+5:scored at its clean centre q_i = G(z_i) with the kNN log density ratio
+26:def _knn(query, points, k, exclude=None, chunk=2048, shortlist_dtype=None):
+35:        dist = torch.cdist(q if shortlist_dtype is None else q.to(shortlist_dtype), points_short,
+151:        d, _ = _knn(z, points, min(4, len(points) - 1) + 1)
+179:    def _features(self, trainer, x, chunk=8192):
+211:    def _isolated(self, q, R, k, fast):
+218:        (a row scored at its clean centre is, if anything, closer to the bulk than a draw: conservative). Benjamini-Hochberg at Q over the table."""
+220:        rho = _knn(R1, R1, k, exclude=torch.arange(len(R1), device=R.device), shortlist_dtype=fast)[0][:, -1]
+224:            d, ix = _knn(u, R1, k, shortlist_dtype=fast)
+237:    def _isolation_pick(self, trainer, flagged, child):
+264:            dist = torch.cdist(z[dead[start:start + step]], z[keep])                                                  # [chunk, keep]
+310:            rad_loc = _knn(z, zpool, k)[0][:, -1]
+311:            q, F, R = self._features(trainer, q_raw), self._features(trainer, y), self._features(trainer, self.reservoir)
+312:            centre = R.mean(0, keepdim=True)
+313:            q, F, R = q - centre, F - centre, R - centre
+315:            flagged = self._isolated(q, R, k, fast) if self.isolation else None
+319:        rR, _ = _knn(q, R, k, shortlist_dtype=fast)
+324:        rF, _ = _knn(q, F, k, shortlist_dtype=fast)
+325:        dR, nR = _levina_bickel(_knn(R, R, k, exclude=own, shortlist_dtype=fast)[0])
+326:        dF, nF = _levina_bickel(_knn(F, F, k, exclude=own, shortlist_dtype=fast)[0])
+438:            iso_child, iso_parent = self._isolation_pick(trainer, flagged, child)
+446:            dist = torch.cdist(self.anchor, sites, compute_mode="use_mm_for_euclid_dist")
+
+## training.py: where birth-death is fed
+78:    the output noise (``output_sigma()``; see ``recipe.output_noise_mode``).
+128:        # output_noise_mode="learnable": trainer-owned log-sigma, its own generator
+130:        self.log_output_sigma = None
+131:        self.last_output_sigma = None  # std applied in the last update (host float)
+133:            self.log_output_sigma = nn.Parameter(torch.full(
+135:            self.opt_g.add_param_group({"params": [self.log_output_sigma], "lr": recipe.lr})
+210:    def _output_sigma(self, base, detach=True):
+214:        behind the current LR scales); learnable: ``max(exp(log_output_sigma),
+232:        sigma = self.log_output_sigma.exp()
+244:        sigma = torch.maximum(sigma, torch.as_tensor(floor, device=sigma.device, dtype=sigma.dtype))
+245:        return float(sigma.detach()) if detach else sigma
+247:    def output_sigma(self):
+249:        return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps)))
+251:    def _generate(self, model, latent, sigma, stream):
+252:        """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+257:        if sigma == 0:
+259:        return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
+339:            self.birth_death.observe_real(real)
+342:                                    if self.controller is None else self.controller.observe_real(real))
+350:                self.controller.observe_real(real)
+380:        sigma_in = input_noise_std(recipe, self.completed_steps)
+381:        sigma_out = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
+382:        self.last_output_sigma = float(sigma_out.detach() if torch.is_tensor(sigma_out) else sigma_out)
+385:        critic.std = sigma_in
+391:                self.controller.observe_support(self.G, self.D, latent, sigma_out, noise)
+392:            fake = self._generate(self.G, latent, sigma_out, noise)
+412:            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+460:            event = self.birth_death.maybe_apply(self, self.last_output_sigma)
+466:                        tester.rebase(group["params"], self.birth_death.moved_rows)
+468:                    self.row_evidence.reset(self.birth_death.moved_rows)
+525:                                      self._output_sigma(output_noise_std(self.recipe, self.completed_steps)), stream)
+558:            **({"output_noise": {"log_sigma": self.log_output_sigma.detach()}}
+559:               if self.log_output_sigma is not None else {}),
+561:            **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
+644:        if self.log_output_sigma is not None:
+645:            value = state["output_noise"].get("log_sigma") if isinstance(state["output_noise"], dict) else None
+646:            if (not isinstance(value, torch.Tensor) or value.shape != self.log_output_sigma.shape
+647:                    or value.dtype != self.log_output_sigma.dtype or not torch.isfinite(value).all()):
+654:            self.birth_death.check_state(state["birth_death"])
+659:        if self.log_output_sigma is not None:

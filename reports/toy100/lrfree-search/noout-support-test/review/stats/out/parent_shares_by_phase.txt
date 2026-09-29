@@ -1,0 +1,5 @@
+all steps       :  15859 re-draws | parents >=3 sigma 0.461 (<2: 0.417) | flagged rows < 3 sigma 0.0013, < 2 sigma 0.0000
+steps <= 3000   :   8217 re-draws | parents >=3 sigma 0.550 (<2: 0.305) | flagged rows < 3 sigma 0.0023, < 2 sigma 0.0000
+steps 3000-6000 :   6329 re-draws | parents >=3 sigma 0.378 (<2: 0.518) | flagged rows < 3 sigma 0.0003, < 2 sigma 0.0000
+steps > 4000    :   4363 re-draws | parents >=3 sigma 0.268 (<2: 0.662) | flagged rows < 3 sigma 0.0005, < 2 sigma 0.0000
+steps <= 6000   :  14546 re-draws | parents >=3 sigma 0.475 (<2: 0.398) | flagged rows < 3 sigma 0.0014, < 2 sigma 0.0000

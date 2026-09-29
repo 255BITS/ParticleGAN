@@ -1,0 +1,16 @@
+  eval 0
+  eval 25
+  eval 50
+  eval 75
+  eval 100
+  eval 125
+== exactness of normalised scores | N=4000 k=9 features 256 (intrinsic 32) | 150 evaluations | exact null; pooled P(p<=t)/t for t = 0.001 0.01 0.05 0.1 0.25 | evaluations with a BH flag
+raw        |  1.023  0.996  1.011  1.010  1.004 | 0/150
+std_R1     |  0.928  0.976  1.014  1.007  1.004 | 0/150
+std_R      |  0.885  0.968  1.010  1.002  1.004 | 0/150
+std_R2     |  0.737  0.958  1.004  1.002  1.002 | 0/150
+std_Q      |  1.002  0.984  1.010  1.003  1.004 | 0/150
+white_R1   |  0.898  1.021  1.012  1.005  1.004 | 0/150
+white_R    |  1.360  1.738  1.431  1.306  1.169 | 0/150
+white_R2   |  1.575  2.296  1.769  1.549  1.293 | 0/150
+white_Q    |  0.788  0.592  0.703  0.769  0.858 | 0/150

@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M09/birth_death.py
+@@ -228 +228 @@
+-        p = (1. + (len(null) - torch.searchsorted(null, s)).double()) / (1. + len(null))
++        p = ((len(null) - torch.searchsorted(null, s)).double()) / (1. + len(null))

@@ -1,0 +1,12 @@
+  eval 0/60 0s
+  eval 10/60 1s
+  eval 20/60 1s
+  eval 30/60 2s
+  eval 40/60 3s
+  eval 50/60 3s
+== d=2 (grid100 (100 modes, sd .03, equal mass)) | noise radius r0 = s sqrt(d) = 0.0424 | 60 evaluations | null score CV (std/mean of the calibration scores) 0.296 | median local scale b 0.01809
+stray displacement l / r0      :    0.25     0.5    0.75       1     1.5       2       3       4       6       8
+median score of strays         :    0.97    0.98    1.01    1.09    1.47    2.07    3.42    4.83    7.70   10.54
+median p of strays             : 7.2e-01 7.0e-01 6.1e-01 4.5e-01 1.4e-01 3.0e-02 1.0e-03 1.3e-04 1.0e-04 1.0e-04
+recall (m1= 60 strays)         :   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.318   0.995   1.000 | legit rows flagged per eval (l=.25 r0): mean 0.000 max 0
+recall (m1=300 strays)         :   0.000   0.000   0.000   0.000   0.000   0.000   0.095   0.958   1.000   1.000 | legit rows flagged per eval (l=.25 r0): mean 0.000 max 0

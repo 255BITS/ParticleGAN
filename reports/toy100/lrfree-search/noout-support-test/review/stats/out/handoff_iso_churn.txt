@@ -1,0 +1,12 @@
+232 acted evaluations; rows re-drawn: 15859 | steps 1100 .. 7000
+distance of the re-drawn rows to the nearest centre (sigma): {'0-2': 0, '2-3': 21, '3-4': 1211, '4-6': 8384, '6-10': 4458, '10-16': 1409, '16-1000000000.0': 376}
+distance of the parents: {'0-2': 6609, '2-3': 1933, '3-4': 3737, '4-6': 3521, '6-10': 59, '10-16': 0, '16-1000000000.0': 0} mean 2.5025696652989016
+unique rows re-drawn: 5100 of 20000 | multiplicity histogram (times re-drawn: rows): {1: 2419, 2: 832, 3: 483, 4: 326, 5: 226, 6: 184, 7: 131, 8: 107, 9: 83, 10: 69, 11: 48, 12: 45, 13: 22, 14: 26, 15: 23, 16: 15, 17: 9, 18: 11, 19: 8, 20: 6, 21: 7, 22: 5, 23: 5, 24: 1, 25: 1, 26: 1, 27: 2, 28: 2, 29: 2, 38: 1}
+re-draws of a row that had been re-drawn before: 10759 | steps since its last re-draw: median 90.0 p10 20.0 p90 1080.0
+  steps  1000- 2000:  47 acted evals,  4433 rows re-drawn, median distance 5.5 sigma
+  steps  2000- 3000:  51 acted evals,  3784 rows re-drawn, median distance 5.1 sigma
+  steps  3000- 4000:  49 acted evals,  3279 rows re-drawn, median distance 5.1 sigma
+  steps  4000- 5000:  28 acted evals,  1428 rows re-drawn, median distance 6.8 sigma
+  steps  5000- 6000:  31 acted evals,  1622 rows re-drawn, median distance 6.4 sigma
+  steps  6000- 7000:  26 acted evals,  1313 rows re-drawn, median distance 6.5 sigma
+/tmp/pr38-default-env/bin/python $W/analysis/iso_churn.py $DUMP  rotated100  2.31s user 0.30s system 153% cpu 1.703 total

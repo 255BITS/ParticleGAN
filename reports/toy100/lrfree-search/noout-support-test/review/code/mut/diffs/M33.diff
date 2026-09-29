@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M33/birth_death.py
+@@ -255 +255 @@
+-        dead[child] = False
++        pass

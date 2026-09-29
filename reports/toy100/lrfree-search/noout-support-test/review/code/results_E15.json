@@ -1,0 +1,589 @@
+[
+ {
+  "id": "M01",
+  "cls": "STAT",
+  "desc": "BH ranks 0-based (arange(0, m)): rank-1 threshold is 0",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.3,
+  "err": ""
+ },
+ {
+  "id": "M02",
+  "cls": "STAT",
+  "desc": "BH ranks shifted up (arange(2, m+2)): too liberal by one rank",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.6,
+  "err": ""
+ },
+ {
+  "id": "M03",
+  "cls": "STAT",
+  "desc": "BH divides by |R2| instead of m (level doubled at even N)",
+  "status": "CAUGHT",
+  "fails": [
+   "statistic: the .8% and .2% components are not flagged for being sparse (0.0066, 0.0233); the unnormalis"
+  ],
+  "rc": 0,
+  "secs": 21.0,
+  "err": ""
+ },
+ {
+  "id": "M04",
+  "cls": "STAT",
+  "desc": "BH picks the FIRST passing rank (passed[0]) instead of the last",
+  "status": "CAUGHT",
+  "fails": [
+   "statistic: far planted strays found (recall 0.784), legitimate fakes flagged 0.0000"
+  ],
+  "rc": 0,
+  "secs": 20.5,
+  "err": ""
+ },
+ {
+  "id": "M05",
+  "cls": "STAT",
+  "desc": "calibration on the reference half itself (null = score(R1)): no split",
+  "status": "CAUGHT",
+  "fails": [
+   "statistic: the .8% and .2% components are not flagged for being sparse (0.0066, 0.0233); the unnormalis"
+  ],
+  "rc": 0,
+  "secs": 19.7,
+  "err": ""
+ },
+ {
+  "id": "M06",
+  "cls": "STAT",
+  "desc": "calibration set overlaps the reference (R2 = whole R)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.6,
+  "err": ""
+ },
+ {
+  "id": "M07",
+  "cls": "STAT",
+  "desc": "searchsorted side flipped (right=True): ties count as smaller",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.0,
+  "err": ""
+ },
+ {
+  "id": "M08",
+  "cls": "STAT",
+  "desc": "p-value counts the wrong tail (#{null < s})",
+  "status": "CRASH",
+  "fails": [
+   "statistic: far planted strays found (recall 0.000), legitimate fakes flagged 0.0000",
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 14.9,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M09",
+  "cls": "STAT",
+  "desc": "p-value without the +1 (p can be 0): anti-conservative",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.5,
+  "err": ""
+ },
+ {
+  "id": "M10",
+  "cls": "STAT",
+  "desc": "local scale: median of the k radii replaced by their mean",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.4,
+  "err": ""
+ },
+ {
+  "id": "M11",
+  "cls": "STAT",
+  "desc": "local scale: upper median (index k//2) instead of lower median",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.6,
+  "err": ""
+ },
+ {
+  "id": "M12",
+  "cls": "STAT",
+  "desc": "rho not leave-one-out (self at distance 0 counted among the k)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.8,
+  "err": ""
+ },
+ {
+  "id": "M13",
+  "cls": "STAT",
+  "desc": "rho uses the (k+1)-th neighbour (k mistaken by one)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.5,
+  "err": ""
+ },
+ {
+  "id": "M14",
+  "cls": "STAT",
+  "desc": "score numerator is the nearest-neighbour distance d[:, 0] instead of the k-th",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.9,
+  "err": ""
+ },
+ {
+  "id": "M15",
+  "cls": "DEV",
+  "desc": "exact recompute in float32 (features cast to float32 at entry of _isolated)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.0,
+  "err": ""
+ },
+ {
+  "id": "M16",
+  "cls": "STAT",
+  "desc": "no floor on the local scale (clamp_min(floor) removed): 0/0 on duplicate reservoirs",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.3,
+  "err": ""
+ },
+ {
+  "id": "M17",
+  "cls": "STAT",
+  "desc": "floor from the mean instead of the median of positive radii",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.8,
+  "err": ""
+ },
+ {
+  "id": "M18",
+  "cls": "STAT",
+  "desc": "contiguous split of the reservoir (older half / newer half) instead of interleaved",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.4,
+  "err": ""
+ },
+ {
+  "id": "M19",
+  "cls": "STAT",
+  "desc": "flags returned inverted for the p-value threshold (p < ps[j] strict): ties at threshold dropped",
+  "status": "CRASH",
+  "fails": [
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 14.7,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M20",
+  "cls": "BOOK",
+  "desc": "features not centred for the support test (q + centre, R + centre)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.4,
+  "err": ""
+ },
+ {
+  "id": "M21",
+  "cls": "BOOK",
+  "desc": "reference is the fake pool F instead of the real reservoir R",
+  "status": "CRASH",
+  "fails": [
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 13.4,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M22",
+  "cls": "BOOK",
+  "desc": "k+1 passed to the support test (k mistaken by one at the call site)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.2,
+  "err": ""
+ },
+ {
+  "id": "M23",
+  "cls": "GUARD",
+  "desc": "guard removed (acts whatever the flagged fraction)",
+  "status": "CAUGHT",
+  "fails": [
+   "flag on, 200-row table: evaluations were scored, nothing flagged or moved -> identical to flag off | ev",
+   "guard: 300 of 2000 rows unsupported (15% > Q): flagged 300, nothing moved, skipped counted"
+  ],
+  "rc": 0,
+  "secs": 19.5,
+  "err": ""
+ },
+ {
+  "id": "M24",
+  "cls": "GUARD",
+  "desc": "guard strict (<) instead of <= at n_flag == Q N",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.6,
+  "err": ""
+ },
+ {
+  "id": "M25",
+  "cls": "GUARD",
+  "desc": "guard inverted (acts only when MORE than Q of the table is flagged)",
+  "status": "CRASH",
+  "fails": [
+   "flag on, 200-row table: evaluations were scored, nothing flagged or moved -> identical to flag off | ev",
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 13.7,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M26",
+  "cls": "GUARD",
+  "desc": "guard level 10 Q (half the table) instead of Q",
+  "status": "CAUGHT",
+  "fails": [
+   "guard: 300 of 2000 rows unsupported (15% > Q): flagged 300, nothing moved, skipped counted"
+  ],
+  "rc": 0,
+  "secs": 21.0,
+  "err": ""
+ },
+ {
+  "id": "M27",
+  "cls": "GUARD",
+  "desc": "acted / skipped counters swapped",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: counters | {'iso_evals': 1, 'iso_flagged': 60, 'iso_acted': 0, 'iso_skipped': 1, 'iso_moves': 60",
+   "guard: 300 of 2000 rows unsupported (15% > Q): flagged 300, nothing moved, skipped counted"
+  ],
+  "rc": 0,
+  "secs": 20.5,
+  "err": ""
+ },
+ {
+  "id": "M28",
+  "cls": "PICK",
+  "desc": "ball factor 1 (nearest unflagged row only)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.9,
+  "err": ""
+ },
+ {
+  "id": "M29",
+  "cls": "PICK",
+  "desc": "ball factor 4",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.6,
+  "err": ""
+ },
+ {
+  "id": "M30",
+  "cls": "PICK",
+  "desc": "ball factor applied to SQUARED distances (radius sqrt(2) x nearest)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.6,
+  "err": ""
+ },
+ {
+  "id": "M31",
+  "cls": "PICK",
+  "desc": "min taken over the wrong axis (dim 0: nearest FLAGGED row per parent)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.6,
+  "err": ""
+ },
+ {
+  "id": "M32",
+  "cls": "PICK",
+  "desc": "parents drawn among ALL rows incl. flagged ones (keep = ones)",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: parents are rows that are neither flagged nor moved",
+   "moves: the re-drawn strays now sit at a mode (distance to the nearest of the 8 centres, max 1.978)",
+   "moves: the next evaluation finds (almost) nothing (flagged 60)"
+  ],
+  "rc": 0,
+  "secs": 21.0,
+  "err": ""
+ },
+ {
+  "id": "M33",
+  "cls": "PICK",
+  "desc": "ordinary children NOT removed from the flagged set (double move of a row)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.4,
+  "err": ""
+ },
+ {
+  "id": "M34",
+  "cls": "PICK",
+  "desc": "ordinary children NOT removed from the parent set (parent = a row just moved)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.3,
+  "err": ""
+ },
+ {
+  "id": "M35",
+  "cls": "PICK",
+  "desc": "outside-of-ball rows given value 2 instead of -1 (picks a row OUTSIDE the ball)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.6,
+  "err": ""
+ },
+ {
+  "id": "M36",
+  "cls": "PICK",
+  "desc": "ball computed on the EMA table instead of the live table",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.9,
+  "err": ""
+ },
+ {
+  "id": "M37",
+  "cls": "PICK",
+  "desc": "chunk drops its last row (dead[start:start+step-1])",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 20.7,
+  "err": ""
+ },
+ {
+  "id": "M38",
+  "cls": "PICK",
+  "desc": "chunk size not divided by the keep size (step = 1<<24): unbounded [chunk, keep] block",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.6,
+  "err": ""
+ },
+ {
+  "id": "M39",
+  "cls": "BOOK",
+  "desc": "last['moves'] not updated (trainer neither rebases the tester nor resets evidence for iso-only moves)",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: the 60 planted strays are found and re-drawn (60 of 60), extra bulk rows moved: 0; last: flagged"
+  ],
+  "rc": 0,
+  "secs": 22.2,
+  "err": ""
+ },
+ {
+  "id": "M40",
+  "cls": "BOOK",
+  "desc": "moved_rows excludes the iso rows",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 0,
+  "secs": 22.8,
+  "err": ""
+ },
+ {
+  "id": "M41",
+  "cls": "BOOK",
+  "desc": "stale-site reset omits the iso sites",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 22.6,
+  "err": ""
+ },
+ {
+  "id": "M42",
+  "cls": "BOOK",
+  "desc": "stale-site reset uses only the flagged rows old sites (parents sites omitted)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.7,
+  "err": ""
+ },
+ {
+  "id": "M43",
+  "cls": "BOOK",
+  "desc": "evidence (S, W, n) of iso rows not reset (only ordinary children)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 21.1,
+  "err": ""
+ },
+ {
+  "id": "M44",
+  "cls": "BOOK",
+  "desc": "EMA row not updated on iso moves",
+  "status": "CRASH",
+  "fails": [],
+  "rc": 1,
+  "secs": 16.4,
+  "err": "TypeError: spy() got an unexpected keyword argument 'iso'"
+ },
+ {
+  "id": "M45",
+  "cls": "BOOK",
+  "desc": "optimizer (Adam/AMSGrad) rows not copied on iso moves",
+  "status": "CRASH",
+  "fails": [],
+  "rc": 1,
+  "secs": 15.9,
+  "err": "TypeError: spy() got an unexpected keyword argument 'iso'"
+ },
+ {
+  "id": "M46",
+  "cls": "BOOK",
+  "desc": "A2 latent history not copied on iso moves",
+  "status": "CRASH",
+  "fails": [],
+  "rc": 1,
+  "secs": 16.0,
+  "err": "TypeError: spy() got an unexpected keyword argument 'iso'"
+ },
+ {
+  "id": "M47",
+  "cls": "BOOK",
+  "desc": "isolation also applied in a dry run",
+  "status": "CAUGHT",
+  "fails": [
+   "dry run: nothing moves"
+  ],
+  "rc": 0,
+  "secs": 22.4,
+  "err": ""
+ },
+ {
+  "id": "M48",
+  "cls": "BOOK",
+  "desc": "iso move counter not incremented (iso_moves stays 0)",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: counters | {'iso_evals': 1, 'iso_flagged': 60, 'iso_acted': 1, 'iso_skipped': 0, 'iso_moves': 0}"
+  ],
+  "rc": 0,
+  "secs": 22.5,
+  "err": ""
+ },
+ {
+  "id": "M49",
+  "cls": "BOOK",
+  "desc": "load_state_dict does not restore the counters (iso counters reset after a resume)",
+  "status": "CAUGHT",
+  "fails": [
+   "checkpoint: the isolation counters survive a round trip"
+  ],
+  "rc": 0,
+  "secs": 22.1,
+  "err": ""
+ },
+ {
+  "id": "M50",
+  "cls": "RNG",
+  "desc": "one random number drawn from the private stream in EVERY evaluation, flag off included",
+  "status": "CAUGHT",
+  "fails": [
+   "flag off: E15 trajectory == E14 trajectory (80 steps, critic-space birth-death, gate, anchor) | e7fcb53"
+  ],
+  "rc": 0,
+  "secs": 22.6,
+  "err": ""
+ },
+ {
+  "id": "M51",
+  "cls": "RNG",
+  "desc": "flag on: parent draw made before the guard (stream advances even when nothing is flagged)",
+  "status": "CAUGHT",
+  "fails": [
+   "flag on, 200-row table: evaluations were scored, nothing flagged or moved -> identical to flag off | ev"
+  ],
+  "rc": 0,
+  "secs": 22.7,
+  "err": ""
+ },
+ {
+  "id": "M52",
+  "cls": "RNG",
+  "desc": "parent draws taken from the global RNG instead of the private stream",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 23.7,
+  "err": ""
+ },
+ {
+  "id": "M53",
+  "cls": "VALID",
+  "desc": "recipe accepts isolation with data-space birth-death",
+  "status": "CAUGHT",
+  "fails": [
+   "recipe: isolation with data-space birth-death is refused",
+   "recipe: isolation without birth-death is refused"
+  ],
+  "rc": 0,
+  "secs": 23.2,
+  "err": ""
+ },
+ {
+  "id": "M54",
+  "cls": "VALID",
+  "desc": "recipe does not require a boolean",
+  "status": "CAUGHT",
+  "fails": [
+   "recipe: isolation must be a boolean"
+  ],
+  "rc": 0,
+  "secs": 19.8,
+  "err": ""
+ }
+]

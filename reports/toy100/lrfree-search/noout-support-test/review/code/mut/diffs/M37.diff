@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M37/birth_death.py
+@@ -264 +264 @@
+-            dist = torch.cdist(z[dead[start:start + step]], z[keep])                                                  # [chunk, keep]
++            dist = torch.cdist(z[dead[start:start + step - 1]], z[keep])                                                  # [chunk, keep]

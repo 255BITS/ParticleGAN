@@ -1,0 +1,118 @@
+[
+ {
+  "id": "M08",
+  "cls": "STAT",
+  "desc": "p-value counts the wrong tail (#{null < s})",
+  "status": "CAUGHT",
+  "fails": [
+   "statistic: far planted strays found (recall 0.000), legitimate fakes flagged 0.0000",
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 16.2,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M19",
+  "cls": "STAT",
+  "desc": "flags returned inverted for the p-value threshold (p < ps[j] strict): ties at threshold dropped",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 16.7,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M55",
+  "cls": "STAT",
+  "desc": "local scale over the k-1 nearest reference points only (nearest one dropped)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 22.0,
+  "err": ""
+ },
+ {
+  "id": "M56",
+  "cls": "STAT",
+  "desc": "floor is an absolute constant 1e-3 instead of relative to the median radius (dataset-scale dependent)",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 22.3,
+  "err": ""
+ },
+ {
+  "id": "M57",
+  "cls": "STAT",
+  "desc": "no local scale at all (score = k-th neighbour distance: the unnormalised statistic)",
+  "status": "CAUGHT",
+  "fails": [
+   "statistic: the .8% and .2% components are not flagged for being sparse (0.0197, 0.3023); the unnormalis"
+  ],
+  "rc": 0,
+  "secs": 22.4,
+  "err": ""
+ },
+ {
+  "id": "M21",
+  "cls": "BOOK",
+  "desc": "reference is the fake pool F instead of the real reservoir R",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 14.8,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M25",
+  "cls": "GUARD",
+  "desc": "guard inverted (acts only when MORE than Q of the table is flagged)",
+  "status": "CAUGHT",
+  "fails": [
+   "flag on, 200-row table: evaluations were scored, nothing flagged or moved -> identical to flag off | ev",
+   "moves: the 60 planted strays are found and re-drawn (0 of 60), extra bulk rows moved: 0; last: flagged "
+  ],
+  "rc": 1,
+  "secs": 16.6,
+  "err": "KeyError: 'calls'"
+ },
+ {
+  "id": "M44",
+  "cls": "BOOK",
+  "desc": "EMA row not updated on iso moves",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: the new row is the parent plus one jitter, the averaged row the same (max |dz - dema| 3.42e+00)"
+  ],
+  "rc": 0,
+  "secs": 22.4,
+  "err": ""
+ },
+ {
+  "id": "M45",
+  "cls": "BOOK",
+  "desc": "optimizer (Adam/AMSGrad) rows not copied on iso moves",
+  "status": "CAUGHT",
+  "fails": [
+   "moves: the optimizer rows of the new rows are copies of the parents' (3 state tensors)"
+  ],
+  "rc": 0,
+  "secs": 21.6,
+  "err": ""
+ },
+ {
+  "id": "M46",
+  "cls": "BOOK",
+  "desc": "A2 latent history not copied on iso moves",
+  "status": "SURVIVES",
+  "fails": [],
+  "rc": 0,
+  "secs": 19.5,
+  "err": ""
+ }
+]

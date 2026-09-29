@@ -1,0 +1,29 @@
+diff -ruN '--exclude=__pycache__' pkg-E15/particlegan/birth_death.py pkg-E16/particlegan/birth_death.py
+--- pkg-E15/particlegan/birth_death.py	2026-09-29 06:31:54.128130295 -0600
++++ pkg-E16/particlegan/birth_death.py	2026-09-29 06:43:07.578647871 -0600
+@@ -235,9 +235,10 @@
+ 
+     @torch.no_grad()
+     def _isolation_pick(self, trainer, flagged, child):
+-        """Rows to re-draw and their parents: every flagged row that the ordinary moves did not just re-draw becomes a clone of a uniformly drawn
+-        unflagged row (the mass without support is put back where the table has support, in proportion to what is there). Nothing is done while
+-        more than Q of the table is flagged (most of the table still in transit has no support to clone from; the same level as the test)."""
++        """Rows to re-draw and their parents: every flagged row that the ordinary moves did not just re-draw becomes a clone of one of the k nearest
++        unflagged rows in the table's own latent space (the mass without support is put back where the table has support nearest to it, so a mode
++        that lost a row to the far field gets it back and the masses are not shuffled at random). Nothing is done while more than Q of the table is
++        flagged (most of the table still in transit has no support to clone from; the same level as the test)."""
+         c, n_flag = self.counters, int(flagged.sum())
+         acted = 0 < n_flag <= self.Q * self.N
+         c["iso_evals"] += 1
+@@ -255,7 +256,10 @@
+         dead, keep = dead.nonzero().flatten(), keep.nonzero().flatten()
+         if not len(dead) or not len(keep):
+             return empty, empty
+-        parent = keep[torch.randint(len(keep), (len(dead),), device=keep.device, generator=self.stream)]
++        z = trainer.prior.z.detach()
++        near = _knn(z[dead], z[keep], min(self.k, len(keep)))[1]            # [dead, k] indices into keep, nearest first
++        pick = torch.randint(near.shape[1], (len(dead), 1), device=keep.device, generator=self.stream)
++        parent = keep[near.gather(1, pick).squeeze(1)]
+         c["iso_moves"] += len(dead)
+         self.last["iso_moves"] = len(dead)
+         return dead, parent

@@ -1,0 +1,13 @@
+lattice d 3 nR 553 nq 523 k 5
+code flagged 134 ref flagged 0
+n2 276 m 523 p_min 0.0036101083032490976 c_min 37.761732851985556  number of rows with p == p_min: 133  last passing rank None
+smallest p-values: [0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639]  line at ranks 1..5: [9.560229445506692e-05, 0.00019120458891013384, 0.00028680688336520083, 0.0003824091778202677, 0.0004780114722753346]
+code flags rows (first 10): [39, 330, 391, 392, 393, 394, 395, 396, 397, 398]  their reference p: [0.01444043321299639, 0.018050541516245487, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639, 0.01444043321299639]
+reference scores of code-flagged rows (first 5): [1000.0, 2.0, 21.87285324595243, 23.043081409714166, 9.987104626662425]  null max 1000.0
+rho code vs ref: max abs diff 0.0  zero radii 7 of 277
+null entries that differ code vs reference: 7 of 276  code null max 1000.0 ref null max 1000.0
+  row 0: code score 1, ref 0.707107; k-th distance 1.0000: 2 points strictly closer, 7 tied at the k-th distance (k=5); rho of tied candidates: [1.0, 1.4142]
+  row 5: code score 1, ref 0.707107; k-th distance 1.0000: 0 points strictly closer, 9 tied at the k-th distance (k=5); rho of tied candidates: [1.0, 1.4142]
+  row 48: code score 1, ref 1000; k-th distance 1.0000: 1 points strictly closer, 18 tied at the k-th distance (k=5); rho of tied candidates: [0.0, 1.0]
+  row 90: code score 1, ref 0.707107; k-th distance 1.0000: 0 points strictly closer, 9 tied at the k-th distance (k=5); rho of tied candidates: [1.0, 1.4142]
+  row 95: code score 1, ref 0.707107; k-th distance 1.0000: 0 points strictly closer, 9 tied at the k-th distance (k=5); rho of tied candidates: [1.0, 1.4142]

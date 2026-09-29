@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M48/birth_death.py
+@@ -269 +269 @@
+-        c["iso_moves"] += len(dead)
++        pass

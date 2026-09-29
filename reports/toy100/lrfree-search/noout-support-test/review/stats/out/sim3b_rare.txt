@@ -1,0 +1,9 @@
+13 comps + 3 rare (4/10/20 rows) | expected rows per component in the table: {13: np.float64(4.0), 14: np.float64(10.0), 15: np.float64(20.0)}
+bulk=iid   strays=   0: flagged/eval    0.0 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0000 m=0.0040:0.0000 m=0.0020:0.0000 m=0.0010:0.0000 m=0.0005:0.0000 m=0.0002:0.0000 | largest comp: 0.00000
+bulk=iid   strays=  60: flagged/eval    1.4 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0000 m=0.0040:0.0000 m=0.0020:0.0000 m=0.0010:0.0000 m=0.0005:0.0000 m=0.0002:0.0472 | largest comp: 0.00000
+bulk=iid   strays= 300: flagged/eval   54.2 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0003 m=0.0040:0.0004 m=0.0020:0.0000 m=0.0010:0.0000 m=0.0005:0.0618 m=0.0002:0.2862 | largest comp: 0.00004
+bulk=iid   strays=1000: flagged/eval  635.4 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0064 m=0.0040:0.0058 m=0.0020:0.0023 m=0.0010:0.0273 m=0.0005:0.4983 m=0.0002:0.9502 | largest comp: 0.00053
+bulk=clean strays=   0: flagged/eval    0.0 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0000 m=0.0040:0.0000 m=0.0020:0.0000 m=0.0010:0.0000 m=0.0005:0.0000 m=0.0002:0.0000 | largest comp: 0.00000
+bulk=clean strays=  60: flagged/eval    0.6 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0000 m=0.0040:0.0000 m=0.0020:0.0000 m=0.0010:0.0000 m=0.0005:0.0000 m=0.0002:0.0099 | largest comp: 0.00000
+bulk=clean strays= 300: flagged/eval   51.6 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0001 m=0.0040:0.0000 m=0.0020:0.0000 m=0.0010:0.0000 m=0.0005:0.0360 m=0.0002:0.3175 | largest comp: 0.00000
+bulk=clean strays=1000: flagged/eval  619.0 | share of a component's rows flagged, smallest 6 comps: m=0.0080:0.0016 m=0.0040:0.0011 m=0.0020:0.0000 m=0.0010:0.0258 m=0.0005:0.5615 m=0.0002:0.9417 | largest comp: 0.00000

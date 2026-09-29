@@ -1,0 +1,27 @@
+/ml2/hypergan/gan-attempts/noout-20260928/tests/test_E15.py:54: UserWarning: torch.searchsorted(): input value tensor is non-contiguous, this will lower the performance due to extra data copy when converting non-contiguous tensor to contiguous, please use contiguous input value tensor if possible. This message will only appear once per program. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/BucketizationUtils.h:32.)
+  p = (1. + (len(null) - torch.searchsorted(null, s)).double()) / (1. + len(null)); ps = p.sort().values
+[ok]   recipe: isolation with data-space birth-death is refused
+[ok]   recipe: isolation must be a boolean
+[ok]   recipe: isolation without birth-death is refused
+[ok]   recipe: isolation with critic-space birth-death is accepted
+[ok]   flag off: E15 trajectory == E14 trajectory (80 steps, critic-space birth-death, gate, anchor) | e7fcb5385694f321 e7fcb5385694f321
+[ok]   flag on, 200-row table: evaluations were scored, nothing flagged or moved -> identical to flag off | evals 20 flagged 3553 moves 0
+[ok]   statistic: far planted strays found (recall 0.980), legitimate fakes flagged 0.0002
+[ok]   statistic: the .8% and .2% components are not flagged for being sparse (0.0000, 0.0000); the unnormalised score flags 0.302 of the .2% component
+[ok]   statistic: a reservoir with exact duplicates gives a defined answer (61 of 600 flagged)
+[ok]   moves: the 60 planted strays are found and re-drawn (60 of 60), extra bulk rows moved: 0; last: flagged 60 moves 60
+[ok]   moves: parents are rows that are neither flagged nor moved
+[ok]   moves: the new row is the parent plus one jitter, the averaged row the same (max |dz - dema| 0.00e+00)
+[ok]   moves: the optimizer rows of the new rows are copies of the parents' (3 state tensors)
+[ok]   moves: the re-drawn strays now sit at a mode (distance to the nearest of the 8 centres, max 0.049)
+[ok]   moves: evidence of the moved rows restarted (S, W, n = 0)
+[ok]   moves: counters | {'iso_evals': 1, 'iso_flagged': 60, 'iso_acted': 1, 'iso_skipped': 0, 'iso_moves': 60}
+[ok]   moves: the next evaluation finds (almost) nothing (flagged 0)
+[ok]   guard: 300 of 2000 rows unsupported (15% > Q): flagged 300, nothing moved, skipped counted
+[ok]   dry run: nothing moves
+[ok]   checkpoint: the isolation counters survive a round trip
+[ok]   determinism: two identical evaluations re-draw identically
+[ok]   trainer: steps run after isolation moves (tester re-anchor, evidence reset)
+[skip] no CUDA device
+ALLOK
+/tmp/pr38-default-env/bin/python test_E15.py   19.76s user 3.13s system 163% cpu 13.980 total

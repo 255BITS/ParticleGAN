@@ -1,0 +1,4 @@
+--- E17/birth_death.py
++++ M15/birth_death.py
+@@ -218,0 +219 @@
++        q, R = q.float(), R.float()

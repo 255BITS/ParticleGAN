@@ -1,0 +1,5 @@
+--- E17/birth_death.py
++++ M19/birth_death.py
+@@ -234 +234 @@
+-        return p <= ps[int(passed[-1])]
++        return p < ps[int(passed[-1])]
