@@ -6,6 +6,11 @@ shared leaderboards, and a memory of what the project has already tried.
 Date: 2026-09-28. Status: implementation plan. Initial inventory: `92dc0319`;
 required additional source: PR #155 at `0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b`.
 
+Implementation uses the existing **`codex/tiered-experiment-qualification`**
+feature branch, based on **`develop`**, and
+[PR #221](https://github.com/255BITS/ParticleGAN/pull/221). Keep the plan and all
+Forge implementation in this single branch/PR, using incremental commits.
+
 ## Goal and decisions
 
 Make it easy for an agent to propose an idea, implement its changed mechanism,
@@ -49,8 +54,7 @@ Decisions from this discussion:
   preregistered robustness stage across a fixed seed set; this is a promotion
   stage of that candidate, not another search. Prefer metrics over images.
 - Clock-free continuous learning is an explicit eligibility contract, separate
-  from scheduled training. Scoring with live or EMA weights is also explicit;
-  whether EMA is acceptable for a public-default claim remains undecided.
+  from scheduled training. Each view explicitly declares live or EMA scoring.
 - Refactoring and sweeping changes are allowed. Preserve existing evidence and
   reproducible protocols while moving new research onto the common interface.
 
@@ -87,10 +91,6 @@ The current transfer protocol already calls importance levels `tier`. The new
 cost/progression field must be named `qualification_tier`; retain importance as
 a separate dimension. An expensive diagnostic does not become a requirement
 merely because it is assigned to Tier 3.
-
-K3P and `b_cap` have substantial tracked evidence. This inventory did not find a
-tracked R3P declaration by that name. Record it as unresolved until its exact
-implementation/configuration is located; do not infer that another name is R3P.
 
 ### Initial classification
 
@@ -408,9 +408,8 @@ aggregation, and acceptance rule before execution. Run the same candidate on tha
 fixed set, preserve every outcome and denominator, and forbid seed selection or
 parameter tuning inside this stage. This is a stage of the finished experiment,
 not a set of new idea variants or an automatic sweep for every screen survivor.
-The stage stays `BLOCKED` until the public-default claim's live/EMA eligibility
-policy is explicitly decided and frozen. Observing which weights win the
-robustness tests cannot settle that decision retrospectively.
+Declare live/EMA scoring in that frozen contract; do not choose the scoring
+weights retrospectively after observing the robustness results.
 
 The promotion stage is the explicit exception to seed-only submission rejection.
 Its requests must reference the frozen candidate and registered seed set. Each
@@ -506,8 +505,7 @@ Protocol rules:
   A process exiting successfully or a trainer writing `PASS` is insufficient.
 - Preserve live scoring for existing live-qualified protocols, including #155.
   Record paired EMA results separately with exact decay and sampling law; the
-  review reports EMA .995 passing 3/3 on D-tracking runs, while whether that is
-  acceptable for the product remains **unresolved**. A future view can explicitly
+  review reports EMA .995 passing 3/3 on D-tracking runs. A view can explicitly
   qualify EMA, but cannot silently replace a live failure, pool live/EMA results,
   or select the better weights after observing scores. Averaging the evaluated
   generator is distinct from an EMA critic used inside a training mechanism.
@@ -696,7 +694,7 @@ Initial views:
 | Discriminator stability | First implemented qualification profile: bounded learning, useful quality, and stationary endurance |
 | Clock-free continuous learning | Required additional eligibility whenever "LR-free" is claimed: shared settings, no hidden schedule, native continuation and continued adaptation |
 | Quality / coverage | Alternate readout of the same evidence; separates ordinary quality from endurance failures |
-| Live / EMA | Separate explicit scoring policies; retain live historical gates and paired EMA evidence. Public-default acceptability of EMA remains an open decision |
+| Live / EMA | Separate declared scoring policies; retain live historical gates and paired EMA evidence without substituting or pooling them |
 | Adaptation | Later profile requiring target-shift recovery and its controls |
 | Monotonic progress | Future design only; later choose appropriate error/quality signals, tolerances, windows, and improvement requirements. Do not assume GAN losses should decrease monotonically |
 | Production/domain readiness | Later application-specific views combining target-workload tests with the preregistered fixed-seed robustness stage for a finished public-default candidate |
@@ -812,7 +810,7 @@ Import at least these additional lineages and issues from #155:
 | LR-free quick/native and custom-host lineages | Each exact package's quick, custom, native and continuation outcomes; initialization/scoring policy | Calibrate the proposed smoke set against bars4, mode_hold, intensity2, unequal_mass and native failures, rather than assume short hosts predict them |
 | `structural100` 14k extension | Verified 7k prefix parity, full 14k metrics/holdout, original package and fixture | Demonstrates how to extend the evaluator budget without changing the learner and how ordinary short results can remain insufficient |
 | Fresh-reservoir `row-em-renew` | Native 3/3; 4.4–4.8× wall time; all22 10 PASS / 4 FAIL / 8 raw ERROR; `_sigma_intrinsic_scale` parity refusal | Preserve a useful sampling diagnostic, classify it as `sampling_only_patch`, expose cost, and normalize unsupported custom hosts to BLOCKED |
-| D-tracking / floor changes | Distinct floor constants, package hashes, live and EMA results at matching checkpoints | Keep structural changes separate from tuned floors, preserve failed terminal streaks, and make EMA acceptability an explicit decision |
+| D-tracking / floor changes | Distinct floor constants, package hashes, live and EMA results at matching checkpoints | Keep structural changes separate from tuned floors, preserve failed terminal streaks, and record the view's scoring policy |
 
 Pinned sources: [LR-free overview](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/README.md),
 [structural continuation](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/structural100/README.md),
@@ -920,9 +918,17 @@ not a claim that migration has happened. Start with repository changes and saved
 evidence; reserve training for the bounded calibration/pilot stage. Keep existing
 running experiments and historical evidence intact throughout the transition.
 
+Continue in `codex/tiered-experiment-qualification`, branched from `develop`,
+with PR #221 as the sole implementation PR. Refresh against `develop` as needed
+while preserving the historical source pins. Subagents contribute disjoint files
+in this same implementation worktree; the coordinator owns commits, integration
+and pushes. The experiment engine may support independent idea worktrees, but
+building Forge itself stays in this one feature branch/PR.
+
 ### Migration TODOs
 
-- [ ] **Freeze the migration inputs.** Pin the package baseline, #155 source
+- [ ] **Freeze the migration inputs.** Confirm the existing feature branch/PR
+  targets `develop`; pin the package baseline, #155 source
   snapshot, report roots, and later follow-up receipts; record missing sources.
   Inventory existing launchers/queues and any active jobs before changing ownership.
 - [ ] **Agree on the shared contracts.** Define TaskSpec, idea/candidate records,
@@ -977,14 +983,15 @@ running experiments and historical evidence intact throughout the transition.
   guide to read memory, add an idea, run it within budget, and record its outcome.
   Make Forge the default route for new ideas. Retire duplicated
   active launchers only after their covered behavior and consumers are migrated.
-- [ ] **Complete promotion policy before a default claim.** Decide and freeze
-  live/EMA eligibility and the preregistered robustness stage. Neither an engine
+- [ ] **Record the promotion contract before a default claim.** Freeze the
+  scoring policy and preregistered robustness stage. Neither an engine
   migration nor a successful queue pilot promotes a formulation automatically.
 
 ### Parallel work, with explicit handoffs
 
-Use one coordinator and up to three implementation subagents in separate
-worktrees. The coordinator owns shared contracts, integration, the migration
+Use one coordinator and up to three implementation subagents in the same
+feature-branch worktree, with disjoint file ownership. The coordinator owns shared
+contracts, Git operations, integration, the migration
 checklist and final readout. Each assignment specifies input revisions,
 dependencies, owned paths, expected artifacts, checks, and a compute allowance
 (zero training by default). Agents do not concurrently edit generated shared
@@ -998,7 +1005,7 @@ boards/history or each other's source files.
 | 3 — verification | Independent review of parity/RNG/checkpoints; review import fidelity/retiering; coordinator reserves GPU capacity and runs the declared bounded calibration/pilot | Phase D adoption criteria pass; metrics, costs, failures/blockers and recommendations are published |
 | 4 — cutover | Coordinator reconciles old queues and enables the workflow; agents finish root guide/entrypoint links and migrations in owned areas | New engineer/agent completes the documented workflow; one owner per request; historical evidence preserved; rollback documented |
 
-Land small dependency-ordered changes rather than a single unreviewable rewrite.
+Commit small dependency-ordered changes to the same feature branch and PR.
 Task adapters consume the agreed API; if a formulation needs a new variable,
 coordinate one public API/central binding change, then update dependent adapters.
 If an interface must change between waves, publish the delta before dependent
