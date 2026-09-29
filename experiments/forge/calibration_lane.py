@@ -11,7 +11,7 @@ from . import planning, views
 from .api import CapabilityError
 from .calibration import _current_profile, calibration_cohort
 from .contracts import atomic_json, canonical, file_hash, file_lock, identifier, positive_number, read_json, stable_hash
-from .promotion import validate_screening_submission
+from .promotion import _execution_identity, _registration_identity, validate_screening_submission
 from .sources import snapshot_source, verify_snapshot
 
 
@@ -158,8 +158,10 @@ def register(root: Path, contract_path: Path) -> dict:
     path = root / "reports/forge/calibration-lanes" / contract["id"] / "registration.json"
     with file_lock(root / "runs/forge/calibration-registration.lock"):
         if path.exists():
-            if _load(root, contract["id"]) != artifact:
+            original = _load(root, contract["id"])
+            if _registration_identity(original) != _registration_identity(artifact):
                 _block("calibration registration is immutable; do not tune a registered lane")
+            return original
         else:
             atomic_json(path, artifact)
     return artifact
@@ -211,7 +213,7 @@ def _current(root, artifact):
         _block("calibration profile or criteria changed after registration")
     for subject in artifact["subjects"].values():
         fresh = _resolve(root, subject["lineage"], artifact["contract"], artifact["frozen"]["profile"])
-        if canonical(fresh) != canonical(subject["base_request"]):
+        if canonical(_execution_identity(fresh)) != canonical(_execution_identity(subject["base_request"])):
             _block("calibration source, formulation, policy or resources changed after registration")
 
 

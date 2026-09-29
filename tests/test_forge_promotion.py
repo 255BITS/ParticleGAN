@@ -125,6 +125,38 @@ def test_registered_stage_freezes_every_seed_control_and_has_no_queue_side_effec
     assert report["counts"] == {"NOT_RUN": 8} and not report["public_default_claim"]
 
 
+def test_origin_only_advance_preserves_original_promotion_registration(setup, monkeypatch):
+    root, path, _, _ = setup
+    artifact, requests = register(setup)
+    registration = root / "reports/forge/promotions" / artifact["registration_id"] / "registration.json"
+    original_bytes = registration.read_bytes()
+    inspect = promotion.planning.inspect_source
+    monkeypatch.setattr(promotion.planning, "inspect_source", lambda *a, **kw:
+                        {**inspect(*a, **kw), "origin_commit": "d" * 40})
+    (root / "DOCS_ONLY.md").write_text("Documentation changed; execution inputs did not.\n")
+    fresh = resolve_idea(root, "finished", through_tier=3, execution_backend="cpu")
+    original = artifact["subjects"]["finished"]["base_request"]
+    assert fresh["source"]["origin_commit"] != original["source"]["origin_commit"]
+    assert fresh["source"]["digest"] == original["source"]["digest"]
+    assert fresh["source"]["files"] == original["source"]["files"]
+    assert promotion.register(root, "finished", path) == artifact
+    assert promotion.plan_promotion(root, artifact["registration_id"], root / "queue") == requests
+    frozen = promotion.plan_promotion(root, artifact["registration_id"], root / "queue", freeze_source=True)[0]
+    assert promotion.validate_submission(root, frozen) == frozen["promotion_campaign"]
+    assert registration.read_bytes() == original_bytes
+    forged = deepcopy(frozen)
+    forged["source"]["origin_commit"] = fresh["source"]["origin_commit"]
+    with pytest.raises(CapabilityError, match="exact frozen"):
+        promotion.validate_submission(root, forged)
+
+    (root / "particlegan/mechanism.py").write_text("fixture = 2\n")
+    with pytest.raises(CapabilityError, match="changed since registration"):
+        promotion.plan_promotion(root, artifact["registration_id"], root / "queue")
+    with pytest.raises(CapabilityError):
+        promotion.register(root, "finished", path)
+    assert registration.read_bytes() == original_bytes
+
+
 def test_exact_seed_protocol_reuses_identity_but_never_cross_seed_or_screen(setup):
     root, _, _, screening = setup
     artifact, first = register(setup)

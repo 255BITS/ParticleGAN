@@ -56,6 +56,9 @@ current profile before spending, retain v2 as a failed adoption design, and
 require exact evidence compatibility for any reuse. Its historical replay also
 failed adoption, so it is a hypothesis to test rather than a presumed solution.
 
+That [separate study is now declared](QUICK_SCREEN_STUDY.md), with the three
+existing CPU reference cells imported explicitly and zero additional training.
+
 The [physical GPU pilot](MULTI_GPU_PILOT.md) has a distinct operational question
 and remains registered but unlaunched pending compute ownership. This calibration
 finding does not establish or replace its multi-GPU acceptance evidence.

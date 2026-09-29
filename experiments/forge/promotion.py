@@ -91,6 +91,29 @@ def _signature(request):
         "candidate_revision", "policy_fingerprint", "protocol", "rng", "jobs", "runtime")})
 
 
+def _execution_identity(request):
+    """Compare current inputs without treating a Git origin as scientific bytes.
+
+    Only the provenance commit is omitted. Source files/digest/schema, runtime,
+    policies, resources and all other request fields remain bound. Archived
+    request verification still compares the original complete declaration.
+    """
+    value = deepcopy(request)
+    value["source"].pop("origin_commit", None)
+    return value
+
+
+def _registration_identity(artifact):
+    """Idempotency projection; callers must validate the saved artifact first."""
+    value = deepcopy(artifact)
+    # This digest includes original provenance and must remain on the artifact;
+    # recomputing it for a fresh origin is not an immutable-contract change.
+    value.pop("registration_sha256", None)
+    for subject in value["subjects"].values():
+        subject["base_request"] = _execution_identity(subject["base_request"])
+    return canonical(value)
+
+
 def _finished(root, request):
     """Require real regraded evidence and its concluded readout, not a stamp."""
     if request["view"].get("calibration", {}).get("status") not in ("accepted", "PASS"):
@@ -209,7 +232,7 @@ def register(root: Path, candidate_id: str, contract_path: Path) -> dict:
             same_candidate = (old["candidate_id"] == candidate_id
                               and old["contract"]["candidate_revision"] == contract["candidate_revision"])
             if old["registration_id"] == contract["id"] or same_candidate:
-                if old != artifact:
+                if _registration_identity(old) != _registration_identity(artifact):
                     _block("one immutable promotion registration is allowed per finished candidate revision")
                 return old
         atomic_json(directory / contract["id"] / "registration.json", artifact)

@@ -61,6 +61,15 @@ or GPU-pilot outcomes:
   callers and actual external GPU owners. The [physical pilot procedure](MULTI_GPU_PILOT.md)
   is prepared, with a capacity-window question pending and no GPU launch.
 
+- Explicit cross-profile diagnostic imports now resolve the queue/reducer
+  mismatch: compatible jobs can retain one paid attempt while a separately
+  frozen profile authorizes its original evidence and costs. Missing, altered,
+  unlisted or scientifically incompatible inputs cannot confer qualification.
+  The [quick-screen study](QUICK_SCREEN_STUDY.md) demonstrates real saved-result
+  reuse without new training. Documentation-only source-origin changes also
+  preserve calibration/promotion registrations and their original provenance.
+  **474 Forge and recipe tests passed** after these fixes.
+
 **Still required for completion:** real compatible positive/negative current-MoG
 calibration evidence meeting the unchanged criteria, the bounded physical
 multi-GPU pilot, exact outstanding historical claim artifacts, the conditional adoption/cutover decision. Inventory coverage and both

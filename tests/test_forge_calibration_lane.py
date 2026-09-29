@@ -76,6 +76,59 @@ def test_read_only_preview_and_explicit_snapshot_freezing(setup):
     assert lane.validate_submission(root, frozen) == frozen["calibration_campaign"]
 
 
+def test_origin_only_advance_keeps_lane_current_and_registration_idempotent(setup, monkeypatch):
+    root, path, _ = setup
+    artifact, requests = registered(setup, freeze=True)
+    request = requests[0]
+    registration = root / "reports/forge/calibration-lanes" / artifact["registration_id"] / "registration.json"
+    original_bytes = registration.read_bytes()
+    inspect = lane.planning.inspect_source
+    monkeypatch.setattr(lane.planning, "inspect_source", lambda *a, **kw:
+                        {**inspect(*a, **kw), "origin_commit": "a" * 40})
+    (root / "DOCS_ONLY.md").write_text("Documentation changed; execution inputs did not.\n")
+    fresh = resolve_idea(root, "negative1", through_tier=3, execution_backend="cpu")
+    assert fresh["source"]["origin_commit"] != request["source"]["origin_commit"]
+    assert fresh["source"]["digest"] == request["source"]["digest"]
+    assert fresh["source"]["files"] == request["source"]["files"]
+    assert lane.plan_calibration(root, artifact["registration_id"], root / "queue", freeze_source=True) == requests
+    assert lane.validate_submission(root, request) == request["calibration_campaign"]
+    assert lane.register(root, path) == artifact
+    assert registration.read_bytes() == original_bytes
+
+    # The exception is for comparing fresh inputs, never for rewriting archived
+    # provenance or authorizing changed science under the previous registration.
+    forged = deepcopy(request)
+    forged["source"]["origin_commit"] = fresh["source"]["origin_commit"]
+    with pytest.raises(CapabilityError, match="exact frozen"):
+        lane.verify_request(root, forged)
+    (root / "particlegan/mechanism.py").write_text("fixture = 2\n")
+    for action in (lambda: lane.plan_calibration(root, artifact["registration_id"], root / "queue"),
+                   lambda: lane.validate_submission(root, request), lambda: lane.register(root, path)):
+        with pytest.raises(CapabilityError, match="pinned profile revision|frozen cohort"):
+            action()
+    assert registration.read_bytes() == original_bytes
+
+
+def test_origin_exception_preserves_registration_hash_and_snapshot_checks(setup, monkeypatch):
+    from pathlib import Path
+    root, _, _ = setup
+    artifact, requests = registered(setup, freeze=True)
+    request = requests[0]
+    inspect = lane.planning.inspect_source
+    monkeypatch.setattr(lane.planning, "inspect_source", lambda *a, **kw:
+                        {**inspect(*a, **kw), "origin_commit": "b" * 40})
+    member = Path(request["source"]["snapshot_path"]) / "particlegan/mechanism.py"
+    member.write_text("fixture = 'tampered snapshot'\n")
+    with pytest.raises(CapabilityError, match="snapshot changed"):
+        lane.validate_submission(root, request)
+    registration = root / "reports/forge/calibration-lanes" / artifact["registration_id"] / "registration.json"
+    tampered = read_json(registration)
+    tampered["subjects"]["negative1"]["base_request"]["source"]["origin_commit"] = "c" * 40
+    atomic_json(registration, tampered)
+    with pytest.raises(CapabilityError, match="content hash"):
+        lane.plan_calibration(root, artifact["registration_id"], root / "queue")
+
+
 @pytest.mark.parametrize("mutation", ["seed", "lineage", "task", "task_budget", "campaign_budget",
                                       "candidate_budget", "qualify", "implicit_continue", "profile"])
 def test_contract_rejects_sweeps_undeclared_cells_unbounded_work_and_qualification(setup, mutation):
@@ -105,21 +158,40 @@ def test_contract_rejects_sweeps_undeclared_cells_unbounded_work_and_qualificati
     assert not (root / "reports/forge/calibration-lanes").exists()
 
 
-@pytest.mark.parametrize("mutation", ["source", "recipe", "criteria", "resource"])
-def test_submit_rejects_in_stage_tuning_even_with_unchanged_saved_request(setup, mutation):
+@pytest.mark.parametrize("mutation", ["source", "source_schema", "source_manifest", "runtime", "recipe",
+                                      "criteria", "resource", "task", "view"])
+def test_submit_rejects_in_stage_tuning_even_with_unchanged_saved_request(setup, mutation, monkeypatch):
     root, _, _ = setup
     _, requests = registered(setup, freeze=True)
     if mutation == "source":
         (root / "particlegan/mechanism.py").write_text("fixture = 2\n")
+    elif mutation in {"source_schema", "source_manifest"}:
+        inspect = lane.planning.inspect_source
+        def changed_source(*args, **kwargs):
+            value = inspect(*args, **kwargs)
+            if mutation == "source_schema":
+                value["schema_version"] += 1
+            else:
+                value["files"]["particlegan/mechanism.py"] = "0" * 64
+            return value
+        monkeypatch.setattr(lane.planning, "inspect_source", changed_source)
+    elif mutation == "runtime":
+        manifest = lane.planning.runtime_manifest
+        monkeypatch.setattr(lane.planning, "runtime_manifest", lambda: {**manifest(), "python": "changed"})
     else:
         paths = {"recipe": "configs/forge/ideas/negative1.json", "criteria": "configs/forge/calibration/criteria.json",
-                 "resource": "configs/forge/tasks/quality.json"}
+                 "resource": "configs/forge/tasks/quality.json", "task": "configs/forge/tasks/quality.json",
+                 "view": "configs/forge/views/stability.json"}
         path = root / paths[mutation]
         value = read_json(path)
         if mutation == "recipe":
             value["recipe_overrides"]["reg_anchor_weight"] = 19.
         elif mutation == "criteria":
             value["maximum_false_accept_fraction"] = 1.
+        elif mutation == "task":
+            value["evaluation"]["thresholds"][0][2] = .5
+        elif mutation == "view":
+            value["revision"] += 1
         else:
             value["resources"]["timeout_seconds"] = 20
         atomic_json(path, value)

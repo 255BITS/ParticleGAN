@@ -90,6 +90,10 @@ failure without granting qualification. No current profile has passed adoption.
   decisions remain unknown. With every lineage failing smoke, v2 cannot satisfy
   both positive-reference and zero-false-rejection criteria. Stop filling this
   profile solely for adoption; register a separate screen study.
+- [x] Declare the [separate quick-screen study](QUICK_SCREEN_STUDY.md) with
+  unchanged thresholds/criteria and full reference denominator. Explicitly reuse
+  three exact CPU receipts and their costs; register its bounded baseline lane
+  without enqueueing. This does not constitute accepted calibration.
 - [ ] Meet the unchanged acceptance criteria or revise the screen with a new
   declared profile and repeat its necessary calibration.
 - [ ] Reserve non-overlapping GPU capacity or one shared resource owner, then
@@ -119,3 +123,11 @@ was reproduced with truthful seed metadata, and all nine v2 smoke cells have
 concluded readouts. The registered two-cell GPU pilot has zero submissions and
 zero launches pending the requested joint ownership window. See
 [`CURRENT_SMOKE_READOUT.md`](CURRENT_SMOKE_READOUT.md).
+
+Follow-up validation: **474 Forge and recipe tests passed** after fixing explicit
+cross-profile diagnostic reuse and documentation-only registration idempotency.
+The reducer preserves original receipts, complete selected outcomes and repair
+costs; missing or altered imported evidence blocks adoption. Both bounded GPU
+lanes have successful read-only plans against the preserved source checkout and
+zero submissions. The live checkout has a newer orchestration source digest;
+the older scientific receipts retain their exact cohort.

@@ -259,6 +259,120 @@ def calibration_cohort(request: dict, task_ids: list[str]) -> dict:
     return {"sha256": stable_hash(identity), "identity": deepcopy(identity)}
 
 
+_IMPORT_FIELDS = {"attempt_id", "registration_id", "registration_sha256", "candidate_id",
+                  "candidate_revision", "tasks", "files", "qualification_reuse"}
+_IMPORT_FILES = {"request.json", "result.json", "evidence.json"}
+
+
+def _diagnostic(request):
+    return bool(request.get("calibration_lane") or request.get("view", {}).get("evidence_scope") == "calibration_diagnostic"
+                or any(job.get("science", {}).get("evidence_use") == "calibration_diagnostic"
+                       or "qualification_compatibility_key" in job for job in request.get("jobs", [])))
+
+
+def _diagnostic_binding(root, attempt, names):
+    """Bind existing original bytes; never manufacture a second receipt."""
+    from .calibration_lane import verify_request
+    request = attempt["request"]
+    lane = verify_request(root, request)
+    if not attempt["valid_receipt"]:
+        raise ValueError("diagnostic import has an invalid certified receipt: " + str(attempt["receipt_error"]))
+    selected = {a["task"] for a in request["view"]["assignments"]}
+    rows = [row["task_id"] for row in attempt["task_results"]]
+    if len(rows) != len(set(rows)) or not set(names).issubset(selected & set(rows)):
+        raise ValueError("diagnostic import tasks must have unique, registered measured receipts")
+    jobs = {name: job for job in request["jobs"] for name in job.get("task_ids", [job["task_id"]])}
+    directory = root / "reports/forge/attempts" / attempt["attempt_id"]
+    binding = {"attempt_id": attempt["attempt_id"], "registration_id": lane["registration_id"],
+        "registration_sha256": lane["registration_sha256"], "candidate_id": request["candidate"]["id"],
+        "candidate_revision": request["candidate_revision"], "qualification_reuse": False,
+        "tasks": {name: {"diagnostic_key": jobs[name]["compatibility_key"],
+                         "qualification_key": jobs[name]["qualification_compatibility_key"]} for name in sorted(names)},
+        "files": {name: file_hash(directory / name) for name in sorted(_IMPORT_FILES)}}
+    return binding, lane
+
+
+def diagnostic_imports(root: Path, registration_id: str, tasks_by_lineage: dict[str, list[str]]) -> list[dict]:
+    """Read-only bindings for a future profile's explicit diagnostic_imports.
+
+    Include every recorded outcome and paid retry for the selected cells, never
+    just successful attempts. This authorizes no execution or qualification.
+    The consuming profile still verifies its complete scientific cohort.
+    """
+    from .calibration_lane import _load
+    from .knowledge import _attempts
+    root = Path(root).resolve()
+    artifact = _load(root, registration_id)
+    if not isinstance(tasks_by_lineage, dict) or not tasks_by_lineage:
+        raise ValueError("diagnostic imports require explicit lineage/task selections")
+    for name, tasks in tasks_by_lineage.items():
+        subject = artifact["subjects"].get(name)
+        if (not subject or not isinstance(tasks, list) or not tasks or len(set(tasks)) != len(tasks)
+                or not set(tasks).issubset(subject["selection"]["tasks"])):
+            raise ValueError("diagnostic imports must select original registered lineage/tasks")
+    attempts, issues = _attempts(root)
+    result, measured = [], set()
+    for attempt in attempts:
+        marker = attempt["request"].get("calibration_lane", {})
+        if marker.get("registration_id") != registration_id:
+            continue
+        lineage = marker.get("lineage_id")
+        names = set(tasks_by_lineage.get(lineage, [])) & {r["task_id"] for r in attempt["task_results"]}
+        if names:
+            binding, _ = _diagnostic_binding(root, attempt, names)
+            result.append(binding)
+            measured.update((lineage, name) for name in names)
+    expected = {(lineage, name) for lineage, names in tasks_by_lineage.items() for name in names}
+    if measured != expected:
+        raise ValueError("diagnostic imports require already-recorded evidence for every selected cell")
+    selected_ids = {row["attempt_id"] for row in result}
+    for issue in issues:
+        path = root / "reports/forge/attempts" / issue["attempt_id"] / "request.json"
+        resolved = read_json(path) if path.is_file() else {}
+        marker = resolved.get("request", resolved).get("calibration_lane", {})
+        if (issue["attempt_id"] in selected_ids or
+                (marker.get("registration_id") == registration_id and marker.get("lineage_id") in tasks_by_lineage)):
+            raise ValueError("diagnostic imports contain unresolved receipt/retry issues")
+    return result
+
+
+def _validate_imports(config):
+    imports = config.get("diagnostic_imports", [])
+    if not isinstance(imports, list):
+        raise ValueError("diagnostic_imports must be an explicit list of frozen attempt bindings")
+    seen = set()
+    lineages = {(r["candidate_id"], r["candidate_revision"]) for r in config["lineages"]}
+    names = set(config["smoke_tasks"] + config["reference_tasks"])
+    def digest(value):
+        return isinstance(value, str) and len(value) == 64 and all(c in "0123456789abcdef" for c in value)
+    for row in imports:
+        if not isinstance(row, dict) or set(row) != _IMPORT_FIELDS or row["qualification_reuse"] is not False:
+            raise ValueError("diagnostic import must bind an original attempt without qualification reuse")
+        identifier(row["attempt_id"], "diagnostic import attempt")
+        identifier(row["registration_id"], "diagnostic import registration")
+        if row["attempt_id"] in seen or (row["candidate_id"], row["candidate_revision"]) not in lineages:
+            raise ValueError("diagnostic imports require unique attempts and an exact declared candidate")
+        seen.add(row["attempt_id"])
+        if (not digest(row["registration_sha256"]) or not isinstance(row["files"], dict)
+                or set(row["files"]) != _IMPORT_FILES or not all(digest(v) for v in row["files"].values())):
+            raise ValueError("diagnostic import must hash its original registration and all receipt files")
+        tasks = row["tasks"]
+        if not isinstance(tasks, dict) or not tasks or not set(tasks).issubset(names):
+            raise ValueError("diagnostic import tasks must belong to the target profile")
+        for keys in tasks.values():
+            if (not isinstance(keys, dict) or set(keys) != {"diagnostic_key", "qualification_key"}
+                    or not all(digest(v) for v in keys.values()) or keys["diagnostic_key"] == keys["qualification_key"]):
+                raise ValueError("diagnostic imports must preserve separate exact diagnostic and qualification keys")
+
+
+def _foreign_unlisted(request, config, attempt_id):
+    """Unselected foreign diagnostics cannot contribute or poison this profile."""
+    marker = request.get("calibration_lane", {})
+    return (isinstance(marker, dict) and marker.get("profile_sha256") is not None
+            and marker["profile_sha256"] != config.get("_profile_sha256")
+            and attempt_id not in {row["attempt_id"] for row in config.get("diagnostic_imports", [])})
+
+
 def _current_profile(config, criteria):
     """Check the frozen current-evidence contract before reading outcomes."""
     if config.get("schema_version") != 1 or config.get("evidence_scope") != "current":
@@ -310,6 +424,7 @@ def _current_profile(config, criteria):
             raise ValueError("each calibration lineage requires exact candidate identity and revision")
     if len({r["id"] for r in lineages}) != len(lineages) or len({r["candidate_revision"] for r in lineages}) != len(lineages):
         raise ValueError("renamed duplicate candidate revisions are not independent calibration lineages")
+    _validate_imports(config)
     # Cost completeness and unknown handling are mandatory, not optional flags.
     if (criteria.get("require_complete_smoke_cost") is not True
             or criteria.get("require_complete_reference_cost") is not True
@@ -332,22 +447,57 @@ def _current_lineage(root, spec, config, attempts):
     from .views import grade_result
     names = config["smoke_tasks"] + config["reference_tasks"]
     indexed, inputs, problems = defaultdict(list), [], []
+    imports = {row["attempt_id"]: row for row in config.get("diagnostic_imports", [])
+               if (row["candidate_id"], row["candidate_revision"]) == (spec["candidate_id"], spec["candidate_revision"])}
+    import_tasks = defaultdict(set)
+    for binding in imports.values():
+        import_tasks[binding["registration_id"]].update(binding["tasks"])
+    present = {attempt["attempt_id"] for attempt in attempts}
+    for identity, binding in imports.items():
+        if identity not in present:
+            problems.append(f"{identity}: imported diagnostic receipt is missing or incomplete")
+            inputs.append({"attempt_id": identity, "diagnostic_import": binding, "missing": True})
+            for name in binding["tasks"]:
+                indexed[name].append(({"gate_status": "INVALID"}, None, identity, False))
     for attempt in attempts:
         request = attempt["request"]
-        if (request.get("candidate", {}).get("id") != spec["candidate_id"]
-                or request.get("candidate_revision") != spec["candidate_revision"]):
+        identity = attempt["attempt_id"]
+        binding = imports.get(identity)
+        same_candidate = (request.get("candidate", {}).get("id") == spec["candidate_id"]
+                          and request.get("candidate_revision") == spec["candidate_revision"])
+        if not same_candidate and binding is None:
+            continue
+        marker = request.get("calibration_lane", {})
+        history_names = import_tasks.get(marker.get("registration_id"), set()) if isinstance(marker, dict) else set()
+        history_names = history_names & {row["task_id"] for row in attempt["task_results"]}
+        if _foreign_unlisted(request, config, identity) and not history_names:
             continue
         try:
             compatible = calibration_cohort(request, names) == config["cohort"]
         except (KeyError, TypeError, ValueError):
             compatible = False
-        if not compatible:
+        if not compatible and binding is None and not history_names:
             continue
         lane_error = None
-        diagnostic = (request.get("calibration_lane") or request.get("view", {}).get("evidence_scope") == "calibration_diagnostic"
-                      or any(job.get("science", {}).get("evidence_use") == "calibration_diagnostic"
-                             or "qualification_compatibility_key" in job for job in request.get("jobs", [])))
-        if diagnostic:
+        authorized = set(binding["tasks"]) if binding else set(names)
+        if binding:
+            try:
+                actual, lane = _diagnostic_binding(root, attempt, authorized)
+                if actual != binding:
+                    raise ValueError("diagnostic import differs from its frozen registration, task keys or receipt bytes")
+                if not same_candidate or not compatible:
+                    raise ValueError("diagnostic import differs from the target candidate or complete scientific cohort")
+                if lane["criteria_sha256"] != config["criteria_sha256"]:
+                    raise ValueError("diagnostic import changes the frozen calibration criteria policy")
+                neighbors = [attempt.get("superseded_by"), (attempt.get("retry_of") or {}).get("attempt_id")]
+                if any(neighbor and neighbor not in imports for neighbor in neighbors):
+                    raise ValueError("diagnostic imports must retain the entire certified retry history")
+            except (ImportError, KeyError, TypeError, ValueError, OSError) as error:
+                lane_error = str(error)
+        elif history_names:
+            authorized = history_names
+            lane_error = "diagnostic imports omitted recorded outcomes or costs from a selected registration/task"
+        elif _diagnostic(request):
             try:
                 from .calibration_lane import verify_request
                 lane = verify_request(root, request)
@@ -357,10 +507,11 @@ def _current_lineage(root, spec, config, attempts):
                                 "cohort_sha256": config["cohort"]["sha256"]}[key]
                     if lane.get(key) != expected:
                         raise ValueError(f"diagnostic lane {key} differs from calibration registration")
-            except (ImportError, KeyError, TypeError, ValueError) as error:
+            except (ImportError, KeyError, TypeError, ValueError, OSError) as error:
                 lane_error = str(error)
-        directory = root / "reports/forge/attempts" / attempt["attempt_id"]
-        inputs.append({"attempt_id": attempt["attempt_id"], "result_sha256": attempt["result_hash"],
+        directory = root / "reports/forge/attempts" / identity
+        inputs.append({"attempt_id": identity, "result_sha256": attempt["result_hash"],
+                       **({"diagnostic_import": binding} if binding else {}),
                        "files": {name: file_hash(directory / name) for name in ("request.json", "result.json", "evidence.json")
                                  if (directory / name).is_file()}})
         if not attempt["valid_receipt"]:
@@ -370,7 +521,7 @@ def _current_lineage(root, spec, config, attempts):
         seen = set()
         selected = {a["task"] for a in request.get("view", {}).get("assignments", [])}
         for row in attempt["task_results"]:
-            if row["task_id"] in names:
+            if row["task_id"] in authorized:
                 if row["task_id"] in seen or (request.get("calibration_lane") and row["task_id"] not in selected):
                     lane_error = "duplicate task receipt or task outside registered diagnostic selection"
                     problems.append(f"{attempt['attempt_id']}: {lane_error}")
@@ -379,6 +530,9 @@ def _current_lineage(root, spec, config, attempts):
                 cost = row.get("cost", {})
                 seconds = _seconds(cost.get("wall_seconds", cost.get("seconds")))
                 indexed[row["task_id"]].append((grade, seconds, attempt["attempt_id"], bool(attempt.get("superseded_by"))))
+        if binding:
+            for name in authorized - seen:
+                indexed[name].append(({"gate_status": "INVALID"}, None, identity, False))
     tasks = {}
     for name, matches in indexed.items():
         active = [grade for grade, _, _, superseded in matches if not superseded]
@@ -419,12 +573,20 @@ def _evaluate_current(root, profile, config, config_path, criteria, criteria_pat
         if path.is_file():
             resolved = read_json(path)
             request = resolved.get("request", resolved)
+            marker = request.get("calibration_lane", {})
+            imported_history = any(
+                row["registration_id"] == marker.get("registration_id")
+                and row["candidate_id"] == request.get("candidate", {}).get("id")
+                and row["candidate_revision"] == request.get("candidate_revision")
+                for row in config.get("diagnostic_imports", [])) if isinstance(marker, dict) else False
+            if _foreign_unlisted(request, reduction_config, issue["attempt_id"]) and not imported_history:
+                continue
             try:
                 matches = ((request["candidate"]["id"], request["candidate_revision"]) in selected
                            and calibration_cohort(request, config["smoke_tasks"] + config["reference_tasks"]) == config["cohort"])
             except (KeyError, TypeError, ValueError):
                 matches = False
-            if matches:
+            if matches or imported_history:
                 relevant_ids.add(issue["attempt_id"])
     relevant_issues = [issue for issue in issues if issue.get("attempt_id") in relevant_ids]
     complete = all(not row["smoke"]["unknown_tasks"] and not row["reference"]["unknown_tasks"] for row in matrix)
@@ -434,6 +596,7 @@ def _evaluate_current(root, profile, config, config_path, criteria, criteria_pat
             "criteria_sha256": file_hash(criteria_path), "criteria": criteria,
             "reducer_sha256": file_hash(Path(__file__)), "evidence_scope": "current",
             "training_seconds_spent": 0, "current_qualification_reuse": False,
+            "diagnostic_import_policy": "Only frozen original receipt bindings with unchanged science and criteria; all selected outcomes and retry costs retained; no qualification credit.",
             "sampling_limit": "Fixed selected lineages diagnose this screen; these fractions are not unbiased population error estimates.",
             "smoke_tasks": config["smoke_tasks"], "reference_tasks": config["reference_tasks"],
             "reference_scope": config.get("reference_scope"), "cohorts": [cohort], "matrix": matrix,

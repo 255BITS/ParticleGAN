@@ -17,6 +17,42 @@
     "reference_scope": {"type": "string", "minLength": 1},
     "scoring_weights": {"const": "live"},
     "training_allowance_seconds": {"const": 0},
+    "diagnostic_imports": {
+      "type": "array", "default": [],
+      "description": "Explicit read-only reuse of already-recorded diagnostics from another frozen profile. Generate bindings with calibration.diagnostic_imports(root, registration_id, tasks_by_lineage). Retain every outcome and paid retry for selected cells. Original registration, receipt bytes, exact candidate, full target scientific cohort and unchanged criteria must verify. Imports authorize no training or ordinary qualification.",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["attempt_id", "registration_id", "registration_sha256", "candidate_id", "candidate_revision", "tasks", "files", "qualification_reuse"],
+        "properties": {
+          "attempt_id": {"type": "string", "minLength": 1},
+          "registration_id": {"type": "string", "minLength": 1},
+          "registration_sha256": {"$ref": "#/$defs/digest"},
+          "candidate_id": {"type": "string", "minLength": 1},
+          "candidate_revision": {"$ref": "#/$defs/digest"},
+          "qualification_reuse": {"const": false},
+          "tasks": {
+            "type": "object", "minProperties": 1,
+            "additionalProperties": {
+              "type": "object", "additionalProperties": false,
+              "required": ["diagnostic_key", "qualification_key"],
+              "properties": {
+                "diagnostic_key": {"$ref": "#/$defs/digest"},
+                "qualification_key": {"$ref": "#/$defs/digest"}
+              }
+            }
+          },
+          "files": {
+            "type": "object", "additionalProperties": false,
+            "required": ["request.json", "result.json", "evidence.json"],
+            "properties": {
+              "request.json": {"$ref": "#/$defs/digest"},
+              "result.json": {"$ref": "#/$defs/digest"},
+              "evidence.json": {"$ref": "#/$defs/digest"}
+            }
+          }
+        }
+      }
+    },
     "lineages": {
       "type": "array", "minItems": 1,
       "items": {"type": "object", "required": ["id", "candidate_id", "candidate_revision"],

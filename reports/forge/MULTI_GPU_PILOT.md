@@ -8,6 +8,13 @@ release the devices; the HyperGAN parent queue can launch another child, so an
 idle instant is insufficient. Do not stop or adopt those jobs as part of this
 pilot. The coordinator has requested the missing capacity window.
 
+Subsequent coordinator fixes changed the feature checkout's source digest.
+The registered pilot still pins source `c673226c`; its read-only plan is prepared
+using the preserved execution checkout `runs/forge/fresh-checkout-v2` and the
+current coordinator CLI. Use that explicit `--root` and the common queue, as
+shown in the [quick-screen preparation](QUICK_SCREEN_STUDY.md). Do not relabel
+newer scientific source as this registered cohort.
+
 ## Work and budget
 
 After the CPU smoke diagnostic readout, use the same frozen current-calibration

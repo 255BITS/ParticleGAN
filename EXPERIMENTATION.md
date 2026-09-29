@@ -330,6 +330,22 @@ An accepted calibration is a verified report with frozen criteria and compatible
 source/task/prior/RNG/runtime evidence. Editing a status field cannot approve it.
 Changing the required smoke set needs a corresponding calibration before adoption.
 
+For a separately declared screen, explicitly import already-measured compatible
+diagnostics before freezing its profile:
+
+```sh
+python -m experiments.forge calibration-lane imports <original-registration-id> \
+  --lineage <original-lineage-id> --tasks <task-a> <task-b>
+```
+
+This prints bindings for the new profile's `diagnostic_imports` field. It writes
+nothing and launches nothing. The bindings preserve original receipt hashes,
+candidate revision, task keys, costs and retry history. Calibration verifies the
+original registration and unchanged scientific cohort and criteria. Unlisted
+foreign diagnostics supply no credit; imported diagnostics never qualify an
+ordinary candidate. A documentation-only commit preserves a registration when
+its scientific bytes and execution policy are unchanged.
+
 ## Register a finished candidate's robustness stage
 
 After all required gates, accepted calibration and a concluded readout, use the

@@ -91,6 +91,10 @@ def parser():
     lane_register.add_argument("--contract", type=Path, required=True)
     for stage in ("plan", "enqueue"):
         lane_stages.add_parser(stage).add_argument("registration")
+    lane_imports = lane_stages.add_parser("imports", help="print exact saved diagnostic bindings for a new profile; no writes or training")
+    lane_imports.add_argument("registration")
+    lane_imports.add_argument("--lineage", required=True)
+    lane_imports.add_argument("--tasks", nargs="+", required=True)
     promotion = commands.add_parser("promotion", help="register and run one frozen finished-candidate robustness stage")
     stages = promotion.add_subparsers(dest="stage", required=True)
     registration = stages.add_parser("register")
@@ -263,6 +267,9 @@ def main(argv=None):
         from .calibration_lane import register, plan_calibration
         if args.stage == "register":
             emit(register(root, root / args.contract))
+        elif args.stage == "imports":
+            from .calibration import diagnostic_imports
+            emit(diagnostic_imports(root, args.registration, {args.lineage: args.tasks}))
         else:
             requests = plan_calibration(root, args.registration, queue_root, freeze_source=args.stage == "enqueue")
             if args.stage == "plan":

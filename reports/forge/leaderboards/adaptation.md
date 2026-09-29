@@ -4,15 +4,16 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 
 | Candidate / exact revision | Scope | Tier | Outcomes | Wall seconds | Next action |
 | --- | --- | ---: | --- | ---: | --- |
-| forge-no-critic-penalty / 8c2186b82334 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | FAIL 1, NOT_RUN 22 | 4.8 | Run the next eligible task within an explicit budget. |
-| forge-no-critic-penalty / 8c2186b82334 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / f3adbc077086 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / f3adbc077086 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / 229770eceb2d / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / 229770eceb2d / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / 7945497fbcf3 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / 7945497fbcf3 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / 444d97231d55 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / 444d97231d55 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / 00c71b2b5c36 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / 00c71b2b5c36 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 23 | unknown | Run the next eligible task within an explicit budget. |
 | forge-no-critic-penalty / ef50ff6fb207 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | pinned | unknown | FAIL 1 | 7.371 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-onboarding-anchor-ablation / 39dc1cc8e516 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.975 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | k3p / 87d849138dd0 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.255 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
+| forge-no-critic-penalty / 8c2186b82334 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | pinned | unknown | FAIL 1 | 4.8 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-no-critic-penalty / 8c2186b82334 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 1, PASS 1 | 14.504 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-no-critic-penalty / ef50ff6fb207 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 1, PASS 1 | 11.428 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-onboarding-anchor-ablation / b10c31a0de40 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 1, PASS 2 | 16.383 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
