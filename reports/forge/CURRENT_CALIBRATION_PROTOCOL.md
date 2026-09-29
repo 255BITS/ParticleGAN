@@ -2,8 +2,12 @@
 
 The reducer now evaluates real current learned-MoG receipts. The completed
 [v2 smoke batch](CURRENT_SMOKE_READOUT.md#corrected-current-source-v2) has nine
-measured cheap cells; every control fails the screen. Its independent quality
-references remain unmeasured, so no current profile has accepted adoption. This document declares the remaining work;
+measured cheap cells; every control fails the screen. The
+[CPU reference batch](CPU_REFERENCE_READOUT.md) adds three K3P task passes;
+all full-reference decisions remain unknown. With every lineage failing smoke,
+v2 cannot meet both the required positive reference and zero false rejections.
+Preserve it and preregister a separate screen study instead of completing its
+matrix solely for adoption. No current profile has accepted adoption. This document declares the remaining work;
 it launches or authorizes no training.
 
 ## Freeze the comparison before spending

@@ -85,7 +85,11 @@ failure without granting qualification. No current profile has passed adoption.
   diagnostic selection: all nine smoke cells measured; `CURRENT_SMOKE_READOUT.md`.
   The metadata-only noise-receipt correction has a completed v2 source cohort: all
   nine verdict/metric dictionaries match v1, at 53.211 CPU seconds. Both batches
-  remain separate; no independent quality reference is yet measured.
+  remain separate. The [bounded CPU reference batch](CPU_REFERENCE_READOUT.md)
+  subsequently measured three K3P task passes for 20.865 seconds; full-reference
+  decisions remain unknown. With every lineage failing smoke, v2 cannot satisfy
+  both positive-reference and zero-false-rejection criteria. Stop filling this
+  profile solely for adoption; register a separate screen study.
 - [ ] Meet the unchanged acceptance criteria or revise the screen with a new
   declared profile and repeat its necessary calibration.
 - [ ] Reserve non-overlapping GPU capacity or one shared resource owner, then

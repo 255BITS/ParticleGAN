@@ -33,6 +33,22 @@
       "source": "reports/forge/attempts/0d955ecceae2440a94c617bac052a7f8/result.json"
     },
     {
+      "attempt_id": "270c483fe3b94932b7f7edcecd89c872",
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.874851209002372
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json"
+    },
+    {
       "attempt_id": "4ab4e77829044c73a7ea3d86981aac71",
       "candidate_id": "k3p",
       "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
@@ -79,6 +95,22 @@
       },
       "reason": "Registered calibration diagnostics cannot qualify a candidate.",
       "source": "reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json"
+    },
+    {
+      "attempt_id": "6e2b5fdf4c8e4ddaba57316096f777a2",
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 7.1690468519991555
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/6e2b5fdf4c8e4ddaba57316096f777a2/result.json"
     },
     {
       "attempt_id": "6f24cc4b4c814096bacc4fcc47110a98",
@@ -207,6 +239,22 @@
       },
       "reason": "Pinned source/task/protocol/runtime differs from the current cohort.",
       "source": "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json"
+    },
+    {
+      "attempt_id": "beb49d1044cc48c1882fd958055a1522",
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.821018327002093
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/beb49d1044cc48c1882fd958055a1522/result.json"
     },
     {
       "attempt_id": "bfb3885a560345559ba8a09adbfdfb56",
@@ -1084,6 +1132,12 @@
         {
           "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "b00cd60679513842cbc2d91a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "fa02accea38ea17005d685ee",
           "status": "concluded"
         }
@@ -1486,6 +1540,261 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "two_pole"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "270c483fe3b94932b7f7edcecd89c872",
+        "6e2b5fdf4c8e4ddaba57316096f777a2",
+        "beb49d1044cc48c1882fd958055a1522"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-cpu-reference-a-v2",
+        "registration_sha256": "106e72305d431b76626d89f8e59d4427a3064ef14031987f39021514cc5aeb5b"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cohort": "29f96fb13a5b4e933b6af827098d3bf2eb50230fc4ca4f3f05cca6a60fda6201",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 20.86491638800362
+      },
+      "counts": {
+        "PASS": 3
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "270c483fe3b94932b7f7edcecd89c872",
+          "6e2b5fdf4c8e4ddaba57316096f777a2",
+          "beb49d1044cc48c1882fd958055a1522"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "b00cd60679513842cbc2d91a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "fa02accea38ea17005d685ee",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "270c483fe3b94932b7f7edcecd89c872",
+        "6e2b5fdf4c8e4ddaba57316096f777a2",
+        "beb49d1044cc48c1882fd958055a1522"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "trajectory"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "residual_student"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 2,
+            "qualification_tier": 1,
+            "task": "unipolar"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-cpu-reference-a-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "bb04040d64d0757398c7256376534f2d13605283",
+        "path": "reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 2.074109242999839,
+            "charged_task": "residual_student",
+            "device": "cpu",
+            "execution_seconds": 6.874851209002372,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.6274242990002676,
+            "wall_seconds": 6.874851209002372
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0009026597836054862,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "residual_student"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 2.502102874001139,
+            "charged_task": "unipolar",
+            "device": "cpu",
+            "execution_seconds": 7.1690468519991555,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 4.0845174259993655,
+            "wall_seconds": 7.1690468519991555
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "cover": 0.9981184310366729,
+            "neu_hold": 0.9895031377673149,
+            "off_caption": 8.545105221253226e-06
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unipolar"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 2.1169364560009853,
+            "charged_task": "trajectory",
+            "device": "cpu",
+            "execution_seconds": 6.821018327002093,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.6905915970019123,
+            "wall_seconds": 6.821018327002093
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0009185487288050354
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "trajectory"
         }
       ]
     },
@@ -5190,6 +5499,12 @@
       },
       "qualified_tier": 0,
       "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "b00cd60679513842cbc2d91a",
+          "status": "concluded"
+        },
         {
           "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
@@ -38111,6 +38426,12 @@
         {
           "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "b00cd60679513842cbc2d91a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "fa02accea38ea17005d685ee",
           "status": "concluded"
         }
@@ -40484,6 +40805,12 @@
         {
           "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "b00cd60679513842cbc2d91a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "fa02accea38ea17005d685ee",
           "status": "concluded"
         }
@@ -40886,6 +41213,261 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "two_pole"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "270c483fe3b94932b7f7edcecd89c872",
+        "6e2b5fdf4c8e4ddaba57316096f777a2",
+        "beb49d1044cc48c1882fd958055a1522"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-cpu-reference-a-v2",
+        "registration_sha256": "106e72305d431b76626d89f8e59d4427a3064ef14031987f39021514cc5aeb5b"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cohort": "29f96fb13a5b4e933b6af827098d3bf2eb50230fc4ca4f3f05cca6a60fda6201",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 20.86491638800362
+      },
+      "counts": {
+        "PASS": 3
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "270c483fe3b94932b7f7edcecd89c872",
+          "6e2b5fdf4c8e4ddaba57316096f777a2",
+          "beb49d1044cc48c1882fd958055a1522"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "b00cd60679513842cbc2d91a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "fa02accea38ea17005d685ee",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "270c483fe3b94932b7f7edcecd89c872",
+        "6e2b5fdf4c8e4ddaba57316096f777a2",
+        "beb49d1044cc48c1882fd958055a1522"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "trajectory"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "residual_student"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 2,
+            "qualification_tier": 1,
+            "task": "unipolar"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-cpu-reference-a-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "bb04040d64d0757398c7256376534f2d13605283",
+        "path": "reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 2.074109242999839,
+            "charged_task": "residual_student",
+            "device": "cpu",
+            "execution_seconds": 6.874851209002372,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.6274242990002676,
+            "wall_seconds": 6.874851209002372
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0009026597836054862,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "residual_student"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 2.502102874001139,
+            "charged_task": "unipolar",
+            "device": "cpu",
+            "execution_seconds": 7.1690468519991555,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 4.0845174259993655,
+            "wall_seconds": 7.1690468519991555
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "cover": 0.9981184310366729,
+            "neu_hold": 0.9895031377673149,
+            "off_caption": 8.545105221253226e-06
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unipolar"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 2.1169364560009853,
+            "charged_task": "trajectory",
+            "device": "cpu",
+            "execution_seconds": 6.821018327002093,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.6905915970019123,
+            "wall_seconds": 6.821018327002093
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "identity_mse": 0.0009185487288050354
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "trajectory"
         }
       ]
     },

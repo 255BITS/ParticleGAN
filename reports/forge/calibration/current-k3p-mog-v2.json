@@ -569,6 +569,15 @@
       "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
       "inputs": [
         {
+          "attempt_id": "270c483fe3b94932b7f7edcecd89c872",
+          "files": {
+            "evidence.json": "e241659dc71a4373e62c1239cf54a6de778e8da96084a3c60be66af4943bb3b7",
+            "request.json": "b59a94045d6f2bb03dd6f30bd801fcee24369fcb6965a18b3f703e9d026c98af",
+            "result.json": "3c7c27422fd8862979798567294888fdc0c3597aa11a90ab5a90172b95646f29"
+          },
+          "result_sha256": "10cc8c5cd7a366c9b872b24eba3d62052073de7b7dc22649ca3a4b3c0c2fc460"
+        },
+        {
           "attempt_id": "4ab4e77829044c73a7ea3d86981aac71",
           "files": {
             "evidence.json": "a8e73b3fc09d0367d01f80cb20a571f2c8148a7c4cdc959e8edfd3a8fff6ca01",
@@ -578,6 +587,15 @@
           "result_sha256": "8a303db9a88118555083983e2e0ee3f0228e2aa99898f0614e43b07dd2883b57"
         },
         {
+          "attempt_id": "6e2b5fdf4c8e4ddaba57316096f777a2",
+          "files": {
+            "evidence.json": "9f75c38645532966e44cca3c0d14cf84461274982cc3f8364cd714ba7de7bb0a",
+            "request.json": "386996a5d7804ac1b7225fef8543b35cff978db2cfa00da5463122212243da6c",
+            "result.json": "63b6b13305dfcac332a41197c3ae5ab5149d60a29da24cc0ff60f9e25321c09a"
+          },
+          "result_sha256": "01383206d3f1055ecddc3252e5b2bd52b89499702378879526db4c5c581df894"
+        },
+        {
           "attempt_id": "a388612acc494fbbbe99cb86370559aa",
           "files": {
             "evidence.json": "4debda885ba9bbb1573920786a29afd406570c130cef088e91d21d20e4b4e378",
@@ -585,6 +603,15 @@
             "result.json": "dd9c8fe02d1b409f2375994e2b5eda1f5f6ceb924fa2a8baa9711b1bcfae4f2f"
           },
           "result_sha256": "353e6b2a67d6e9e98fb85d5a3a2e33fcc3dc921bb8269505a3dca8057a5c7b29"
+        },
+        {
+          "attempt_id": "beb49d1044cc48c1882fd958055a1522",
+          "files": {
+            "evidence.json": "4b19d030a07f2f321e41f10804023b2acf84aa17feb417ce0b0be4049368303e",
+            "request.json": "d3fceb3457f656378d5d40fb8052869cec01a514a24543e507b4d6ce9d5848a3",
+            "result.json": "6fb78a5471cd6729051765d01e978f4c8cad48a3c09107d170877b6d9a719a9d"
+          },
+          "result_sha256": "d048eea7ddf7c10e1dc884186e1855842f479d9f5b65e3630081c200be5178ec"
         },
         {
           "attempt_id": "bfb3885a560345559ba8a09adbfdfb56",
@@ -600,12 +627,9 @@
         "blocked_tasks": [],
         "cost": {
           "flops": null,
-          "known_task_count": 0,
-          "known_wall_seconds": 0,
+          "known_task_count": 3,
+          "known_wall_seconds": 20.86491638800362,
           "missing_tasks": [
-            "trajectory",
-            "residual_student",
-            "unipolar",
             "cover_leftover",
             "mid_scale_identity",
             "vector_two_broad",
@@ -633,11 +657,11 @@
           "img_blobs4": "NOT_RUN",
           "img_stripes2": "NOT_RUN",
           "mid_scale_identity": "NOT_RUN",
-          "residual_student": "NOT_RUN",
+          "residual_student": "PASS",
           "rotated100": "NOT_RUN",
           "staggered100": "NOT_RUN",
-          "trajectory": "NOT_RUN",
-          "unipolar": "NOT_RUN",
+          "trajectory": "PASS",
+          "unipolar": "PASS",
           "vector_anisotropic": "NOT_RUN",
           "vector_overlap": "NOT_RUN",
           "vector_spiral": "NOT_RUN",
@@ -646,9 +670,6 @@
           "vector_unequal_width": "NOT_RUN"
         },
         "unknown_tasks": [
-          "trajectory",
-          "residual_student",
-          "unipolar",
           "cover_leftover",
           "mid_scale_identity",
           "vector_two_broad",

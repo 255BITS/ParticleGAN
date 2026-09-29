@@ -65,3 +65,9 @@ with a 5,400-second campaign ceiling including at most one deliberate cancellati
 repair. It is not enqueued. Both GPU owners must release a coordinated window.
 The remaining independent reference matrix, accepted calibration and migration
 cutover remain outstanding. No criterion or threshold was relaxed.
+
+Follow-up: the [bounded CPU reference batch](CPU_REFERENCE_READOUT.md) records
+three K3P task passes for 20.865 seconds, with full reference still unknown.
+It also establishes that an all-smoke-FAIL profile cannot meet the unchanged
+positive-reference and zero-false-reject criteria. Preserve v2; further screen
+calibration needs a separately declared study.

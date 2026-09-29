@@ -18,8 +18,11 @@ lineages and falsely accepts 1 of 3 independently failing lineages. The
 and falsely accepts 1 of 5. Both remain **adoption BLOCKED** under the
 [frozen criteria](configs/forge/calibration/criteria-v1.json); these retrospective
 fractions describe the saved subset, not population error rates. The [first current-cohort smoke batch](reports/forge/CURRENT_SMOKE_READOUT.md)
-measured all nine cheap cells, including three learned-MoG AE passes. Independent
-quality references are still missing, so current calibration remains blocked. Task declarations describe the
+measured all nine cheap cells, including three learned-MoG AE passes. The
+[bounded CPU reference batch](reports/forge/CPU_REFERENCE_READOUT.md) adds three
+K3P task passes, leaving its full reference unknown. All three lineages fail
+smoke, so this exact profile cannot meet the positive-reference and zero-false-reject
+criteria together; a separate screen study is required. Task declarations describe the
 intended coverage; actual execution also requires a compatible public-API
 adapter. Unsupported capabilities remain `BLOCKED` in the required denominator.
 A file existing in the catalog does not mean its adapter has been qualified.

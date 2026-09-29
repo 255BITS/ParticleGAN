@@ -2905,15 +2905,15 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
 
-**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 16.898; mechanism `structural`.
+**Observed:** {'FAIL': 1, 'PASS': 5}; wall seconds 37.763; mechanism `structural`.
 
-ae_gan_hold: recon_mse=0.0045745
 
-Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hold PASS. Whole-screen FAIL; independent reference outcomes remain unmeasured. All selected attempts completed, with actual named-stream seed labels now consistent.
 
-**Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
+Frozen v2 smoke remains FAIL (two_pole travel); unused_token_hold and learned-MoG ae_gan_hold PASS. Three independent CPU reference tasks, trajectory/residual_student/unipolar, now PASS their complete live terminal windows for 20.864916388 CPU wall seconds. Reference remains UNKNOWN: only 3/16 cells measured; these are declared cloud/nonsampled controls, not MoG quality evidence.
 
-[Evidence](../../reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
+**Next:** Stop filling the v2 matrix solely for adoption. Preserve the remaining 13 baseline reference cells and both ablation reference vectors as unknown. Preregister a separately versioned test of the already-proposed quick-discriminator screen with unchanged thresholds and the same 16 independent references, bounded GPU stages and no automatic promotion. Keep the registered physical GPU pilot for its distinct operational question when ownership is available.
+
+[Evidence](../../reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
 
 ### k3p · readout-c723a88e5122f97011aabad9
 
@@ -2942,4 +2942,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `f8d2fe933d576c6fd184dae8cd74c49713b40d2c4a00fc185e64addda2792eca`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `002ffc07512acbae056bb79bfa0bb8174030197cf216908e1f263773dc7ac63f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

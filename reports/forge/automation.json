@@ -1,18 +1,18 @@
 {
   "attempt_outcomes": {
-    "completed": 20
+    "completed": 23
   },
   "component_timing": {
     "measured_attempts": 0,
     "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
     "seconds": {},
-    "unmeasured_attempts": 20
+    "unmeasured_attempts": 23
   },
   "concurrency": {
-    "mean_active_workers": 0.09046343330317286,
-    "measured_attempts": 18,
+    "mean_active_workers": 0.0573737909103099,
+    "measured_attempts": 21,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": 1159.455554485321,
+    "observation_window_seconds": 2191.822959423065,
     "peak_distinct_gpu_devices": 0,
     "peak_workers": 1,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
@@ -34,7 +34,7 @@
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 20,
+    "denominator": 23,
     "fraction": 0.0,
     "numerator": 0
   },
@@ -44,7 +44,7 @@
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 20,
+    "denominator": 23,
     "fraction": 0.0,
     "numerator": 0
   },
@@ -56,15 +56,15 @@
   "memory": {
     "maximum_reaped_child_peak_rss_bytes": {
       "maximum_bytes": 860921856,
-      "measured_attempts": 18
+      "measured_attempts": 21
     },
     "process_peak_rss_bytes": {
-      "maximum_bytes": 730271744,
-      "measured_attempts": 18
+      "maximum_bytes": 730361856,
+      "measured_attempts": 21
     },
     "supervisor_peak_rss_bytes": {
-      "maximum_bytes": 635973632,
-      "measured_attempts": 18
+      "maximum_bytes": 643211264,
+      "measured_attempts": 21
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -174,15 +174,15 @@
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 20,
-    "known_wall_seconds": 116.11841728600848,
+    "attempts": 23,
+    "known_wall_seconds": 136.9833336740121,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 116.11841728600848
+    "wall_seconds": 136.9833336740121
   },
   "task_gate_counts": {
     "FAIL": 10,
-    "PASS": 10
+    "PASS": 13
   },
   "tasks_avoided": 8,
   "tier_rejections": {
