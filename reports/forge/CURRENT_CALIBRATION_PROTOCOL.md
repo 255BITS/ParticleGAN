@@ -1,7 +1,9 @@
 # Current-cohort calibration protocol
 
-The reducer can now evaluate real current learned-MoG receipts. No current profile
-has scientific adoption evidence yet. This document declares the remaining work;
+The reducer now evaluates real current learned-MoG receipts. The completed
+[v2 smoke batch](CURRENT_SMOKE_READOUT.md#corrected-current-source-v2) has nine
+measured cheap cells; every control fails the screen. Its independent quality
+references remain unmeasured, so no current profile has accepted adoption. This document declares the remaining work;
 it launches or authorizes no training.
 
 ## Freeze the comparison before spending

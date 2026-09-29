@@ -83,8 +83,9 @@ failure without granting qualification. No current profile has passed adoption.
 - [x] Refresh source coverage and compiled memory at checkpoint `3a3ef24a`: 7,252/7,252 paths, 176 records, no conflicts or pending readouts. Repeat after subsequent source additions.
 - [x] Freeze three substantive controls and a bounded first current-cohort
   diagnostic selection: all nine smoke cells measured; `CURRENT_SMOKE_READOUT.md`.
-  A metadata-only noise-receipt correction requires a replacement source cohort
-  before further execution; preserve the first batch unchanged.
+  The metadata-only noise-receipt correction has a completed v2 source cohort: all
+  nine verdict/metric dictionaries match v1, at 53.211 CPU seconds. Both batches
+  remain separate; no independent quality reference is yet measured.
 - [ ] Meet the unchanged acceptance criteria or revise the screen with a new
   declared profile and repeat its necessary calibration.
 - [ ] Reserve non-overlapping GPU capacity or one shared resource owner, then
@@ -108,3 +109,9 @@ Final software freeze: **441 tests passed** (all Forge tests plus public recipe
 defaults), including lifecycle, family filters and telemetry. The two warnings
 are Python 3.14 fork deprecations in the concurrent reservation test. No scientific
 qualification or GPU-pilot claim follows from these software checks.
+
+Corrected-source follow-up: **90 focused tests passed**, fresh-checkout rejection
+was reproduced with truthful seed metadata, and all nine v2 smoke cells have
+concluded readouts. The registered two-cell GPU pilot has zero submissions and
+zero launches pending the requested joint ownership window. See
+[`CURRENT_SMOKE_READOUT.md`](CURRENT_SMOKE_READOUT.md).

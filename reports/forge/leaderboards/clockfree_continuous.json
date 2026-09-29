@@ -1,6 +1,54 @@
 {
   "archived_attempts": [
     {
+      "attempt_id": "04e834fc82f24061af71572dce3a22d8",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.9322747030018945
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json"
+    },
+    {
+      "attempt_id": "0d955ecceae2440a94c617bac052a7f8",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 7.57187295499898
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/0d955ecceae2440a94c617bac052a7f8/result.json"
+    },
+    {
+      "attempt_id": "4ab4e77829044c73a7ea3d86981aac71",
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.5677307629994175
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/result.json"
+    },
+    {
       "attempt_id": "633dcaca307e4e01b82b5281d82082fb",
       "candidate_id": "forge-onboarding-anchor-ablation",
       "candidate_revision": "b10c31a0de40294be8966579fbe56e84e06e24dea1e3576e65b35148f610d350",
@@ -113,6 +161,38 @@
       "source": "reports/forge/attempts/93c1e10057044b85ac731b9b59f50a0c/result.json"
     },
     {
+      "attempt_id": "9cd112e7346b45ed8cb241e1498685ad",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.578069316001347
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json"
+    },
+    {
+      "attempt_id": "a388612acc494fbbbe99cb86370559aa",
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.170356153001194
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/a388612acc494fbbbe99cb86370559aa/result.json"
+    },
+    {
       "attempt_id": "b766e89d1a0843ba9af94f2ce94e4273",
       "candidate_id": "k3p",
       "candidate_revision": "87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9",
@@ -127,6 +207,22 @@
       },
       "reason": "Pinned source/task/protocol/runtime differs from the current cohort.",
       "source": "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json"
+    },
+    {
+      "attempt_id": "bfb3885a560345559ba8a09adbfdfb56",
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.160040581999056
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/bfb3885a560345559ba8a09adbfdfb56/result.json"
     },
     {
       "attempt_id": "c0178716dd3c4d5695b391919bf9ab81",
@@ -145,6 +241,22 @@
       "source": "reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json"
     },
     {
+      "attempt_id": "d0414263a3914641992efbbab6f7b951",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 6.2537244640006975
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/d0414263a3914641992efbbab6f7b951/result.json"
+    },
+    {
       "attempt_id": "e04676fe83e64552914c54aa75c06377",
       "candidate_id": "forge-onboarding-anchor-ablation",
       "candidate_revision": "b10c31a0de40294be8966579fbe56e84e06e24dea1e3576e65b35148f610d350",
@@ -159,6 +271,22 @@
       },
       "reason": "Registered calibration diagnostics cannot qualify a candidate.",
       "source": "reports/forge/attempts/e04676fe83e64552914c54aa75c06377/result.json"
+    },
+    {
+      "attempt_id": "e65951a61a764989b7b416e418130061",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 5.176540638000006
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/e65951a61a764989b7b416e418130061/result.json"
     },
     {
       "attempt_id": "fafc3da7cecf4b1780bbaedf66141092",
@@ -182,6 +310,222 @@
     "status": "provisional"
   },
   "calibration_rows": [
+    {
+      "attempt_ids": [
+        "04e834fc82f24061af71572dce3a22d8",
+        "0d955ecceae2440a94c617bac052a7f8"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-no-critic-penalty",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-smoke-v2",
+        "registration_sha256": "04d558e56610a0489ffa68b4feae024ce79783db9fec98203935c36c68803334"
+      },
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "cohort": "140a5c88aefbd220c7ec6d6af394358ee52a9ce9c4ad7a29108053037d3aa7be",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 14.504147658000875
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "04e834fc82f24061af71572dce3a22d8",
+          "0d955ecceae2440a94c617bac052a7f8"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "65bd7771643215632db54e6a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
+          "request_id": "397c486fb1b97b0f8e581b42",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "04e834fc82f24061af71572dce3a22d8",
+        "0d955ecceae2440a94c617bac052a7f8"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-smoke-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+        "path": "reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 2.313903913000104,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.9322747030018945,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.897178809002071,
+            "wall_seconds": 6.9322747030018945
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.002700746525079012,
+            "recon_mse": 0.0040340423583984375
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 0.7102447529978235,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 7.57187295499898,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.274358154001675,
+            "wall_seconds": 7.57187295499898
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "concept_move": 0.8801896789196206,
+            "unused_hold": 0.9732744097709656
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
     {
       "attempt_ids": [
         "6f24cc4b4c814096bacc4fcc47110a98",
@@ -644,6 +988,504 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "4ab4e77829044c73a7ea3d86981aac71",
+        "a388612acc494fbbbe99cb86370559aa",
+        "bfb3885a560345559ba8a09adbfdfb56"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-smoke-v2",
+        "registration_sha256": "04d558e56610a0489ffa68b4feae024ce79783db9fec98203935c36c68803334"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cohort": "29f96fb13a5b4e933b6af827098d3bf2eb50230fc4ca4f3f05cca6a60fda6201",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 16.898127497999667
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 2
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "4ab4e77829044c73a7ea3d86981aac71",
+          "a388612acc494fbbbe99cb86370559aa",
+          "bfb3885a560345559ba8a09adbfdfb56"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "fa02accea38ea17005d685ee",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "4ab4e77829044c73a7ea3d86981aac71",
+        "a388612acc494fbbbe99cb86370559aa",
+        "bfb3885a560345559ba8a09adbfdfb56"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 2,
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-smoke-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+        "path": "reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 0.7277824359989609,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 5.5677307629994175,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.368507639002928,
+            "wall_seconds": 5.5677307629994175
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9514550994835247,
+            "unused_hold": 0.9981992269167677
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 0.32891469600144774,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.170356153001194,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 1.9145000089993118,
+            "wall_seconds": 5.170356153001194
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.0637243241071701,
+            "mean_abs": 0.10652091354131699
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 1.386633645000984,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.160040581999056,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.9519753649983613,
+            "wall_seconds": 6.160040581999056
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.004287836141884327,
+            "recon_mse": 0.004574489779770374
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "9cd112e7346b45ed8cb241e1498685ad",
+        "d0414263a3914641992efbbab6f7b951",
+        "e65951a61a764989b7b416e418130061"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-onboarding-anchor-ablation",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-smoke-v2",
+        "registration_sha256": "04d558e56610a0489ffa68b4feae024ce79783db9fec98203935c36c68803334"
+      },
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
+      "cohort": "f6a5121230378120bdbb6c2261d38e2d03230a55198dff8452a29b497782b663",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.00833441800205
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 2
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "9cd112e7346b45ed8cb241e1498685ad",
+          "d0414263a3914641992efbbab6f7b951",
+          "e65951a61a764989b7b416e418130061"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "f1a39cca8041b7dfff83ac41",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "9cd112e7346b45ed8cb241e1498685ad",
+        "d0414263a3914641992efbbab6f7b951",
+        "e65951a61a764989b7b416e418130061"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 2,
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-smoke-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+        "path": "reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 0.7084478799988574,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 5.578069316001347,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.302521502999298,
+            "wall_seconds": 5.578069316001347
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9516344002587864,
+            "unused_hold": 0.9980412274599075
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 1.3214641449994815,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.2537244640006975,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.9160869420011295,
+            "wall_seconds": 6.2537244640006975
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.004501452203840017,
+            "recon_mse": 0.004509006626904011
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 0.34213576999900397,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.176540638000006,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 1.9158194490009919,
+            "wall_seconds": 5.176540638000006
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.07678461074829102,
+            "mean_abs": 0.10482493042945862
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
         }
       ]
     },
@@ -1710,7 +2552,9 @@
       "status": "BLOCKED"
     },
     {
-      "attempt_ids": [],
+      "attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
       "candidate_id": "forge-no-critic-penalty",
       "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
       "claim_contract": {
@@ -1724,17 +2568,19 @@
           "kind": "unavailable",
           "value": null
         },
-        "measured_tasks": 0,
+        "measured_tasks": 1,
         "unmeasured_tasks": 0,
-        "wall_seconds": null
+        "wall_seconds": 4.800435357999959
       },
       "counts": {
         "BLOCKED": 1,
-        "NOT_RUN": 28
+        "FAIL": 1,
+        "NOT_RUN": 27
       },
       "display_metadata": {
         "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
         "evidence_quality": [
+          "certified_current",
           "unmeasured"
         ],
         "families": [
@@ -1925,7 +2771,7 @@
           },
           "two_pole": {
             "adapter": "transfer_behavior",
-            "basis": "current_catalog",
+            "basis": "recorded_request",
             "family": "behavioral",
             "host": "two_pole",
             "protocol_equivalence_asserted": false,
@@ -2017,7 +2863,6 @@
           "staggered100_14k",
           "target_shift_recovery",
           "trajectory",
-          "two_pole",
           "unipolar",
           "unused_token_hold",
           "vector_anisotropic",
@@ -2027,10 +2872,12 @@
           "vector_unequal_mass",
           "vector_unequal_width"
         ],
-        "valid_attempt_ids": []
+        "valid_attempt_ids": [
+          "2dcfab451e2b4c2087c4c2dcdcfddb44"
+        ]
       },
       "evidence_scope": "current",
-      "lifecycle": "proposed",
+      "lifecycle": "concluded",
       "mechanism_class": "structural",
       "next_action": "Run the next eligible task within an explicit budget.",
       "pending_readout": false,
@@ -2064,9 +2911,9 @@
           },
           {
             "reasons": [
-              "no compatible result"
+              "recomputed complete live curve and terminal suffix"
             ],
-            "status": "NOT_RUN",
+            "status": "FAIL",
             "task_id": "two_pole"
           },
           {
@@ -2091,7 +2938,7 @@
             "task_id": "clockfree_audit"
           }
         ],
-        "cost_seconds": 0,
+        "cost_seconds": 4.800435357999959,
         "eligible": false,
         "next_task": null,
         "next_tasks": [],
@@ -2121,7 +2968,7 @@
           "staggered100_14k": "NOT_RUN",
           "target_shift_recovery": "NOT_RUN",
           "trajectory": "NOT_RUN",
-          "two_pole": "NOT_RUN",
+          "two_pole": "FAIL",
           "unipolar": "NOT_RUN",
           "unused_token_hold": "NOT_RUN",
           "vector_anisotropic": "NOT_RUN",
@@ -2133,14 +2980,55 @@
         },
         "tasks": [
           {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
+            "cost": 4.800435357999959,
+            "evaluator_result": {
+              "attempted": true,
+              "confirmation_fraction": 2.0,
+              "convergence": {
+                "complete": true,
+                "confirmed_seconds": null,
+                "confirmed_step": null,
+                "first_pass_step": 54,
+                "minimum_stable_checks": 5,
+                "observations": 24,
+                "passing_observations": 3,
+                "passing_suffix": 0,
+                "stable_from_seconds": null,
+                "stable_from_step": null
+              },
+              "metrics": [
+                {
+                  "margin": 0.1477476179599762,
+                  "metric": "mean_abs",
+                  "op": ">=",
+                  "status": "PASS",
+                  "threshold": 0.3,
+                  "value": 0.4477476179599762
+                },
+                {
+                  "margin": -0.2546037435531616,
+                  "metric": "grad_med",
+                  "op": "<=",
+                  "status": "FAIL",
+                  "threshold": 1.0,
+                  "value": 1.2546037435531616
+                }
+              ],
+              "passed": false,
+              "shortfall": 0.1273018717765808,
+              "status": "FAIL"
+            },
+            "gate_status": "FAIL",
             "importance": "required",
+            "metrics": {
+              "grad_med": 1.2546037435531616,
+              "mean_abs": 0.4477476179599762
+            },
             "qualification_tier": 1,
             "reasons": [
-              "no compatible result"
+              "recomputed complete live curve and terminal suffix"
             ],
-            "status": "NOT_RUN",
+            "status": "FAIL",
             "task_id": "two_pole"
           },
           {
@@ -2456,13 +3344,14 @@
           {
             "counts": {
               "BLOCKED": 1,
-              "NOT_RUN": 3
+              "FAIL": 1,
+              "NOT_RUN": 2
             },
             "diagnostic_total": 0,
             "qualification_tier": 1,
             "required_passed": 0,
             "required_total": 4,
-            "status": "BLOCKED"
+            "status": "FAIL"
           },
           {
             "counts": {
@@ -2489,8 +3378,23 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
-      "readout_covers_attempt_ids": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "65bd7771643215632db54e6a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
+          "request_id": "397c486fb1b97b0f8e581b42",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
       "retry_history": [],
       "runtime_cohort": {
         "compute_profiles": {
@@ -3308,7 +4212,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "f1a39cca8041b7dfff83ac41",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -5747,7 +6658,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "fa02accea38ea17005d685ee",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -35344,7 +36262,9 @@
       "status": "BLOCKED"
     },
     {
-      "attempt_ids": [],
+      "attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
       "candidate_id": "forge-no-critic-penalty",
       "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
       "claim_contract": {
@@ -35358,17 +36278,19 @@
           "kind": "unavailable",
           "value": null
         },
-        "measured_tasks": 0,
+        "measured_tasks": 1,
         "unmeasured_tasks": 0,
-        "wall_seconds": null
+        "wall_seconds": 4.800435357999959
       },
       "counts": {
         "BLOCKED": 1,
-        "NOT_RUN": 28
+        "FAIL": 1,
+        "NOT_RUN": 27
       },
       "display_metadata": {
         "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
         "evidence_quality": [
+          "certified_current",
           "unmeasured"
         ],
         "families": [
@@ -35559,7 +36481,7 @@
           },
           "two_pole": {
             "adapter": "transfer_behavior",
-            "basis": "current_catalog",
+            "basis": "recorded_request",
             "family": "behavioral",
             "host": "two_pole",
             "protocol_equivalence_asserted": false,
@@ -35651,7 +36573,6 @@
           "staggered100_14k",
           "target_shift_recovery",
           "trajectory",
-          "two_pole",
           "unipolar",
           "unused_token_hold",
           "vector_anisotropic",
@@ -35661,10 +36582,12 @@
           "vector_unequal_mass",
           "vector_unequal_width"
         ],
-        "valid_attempt_ids": []
+        "valid_attempt_ids": [
+          "2dcfab451e2b4c2087c4c2dcdcfddb44"
+        ]
       },
       "evidence_scope": "current",
-      "lifecycle": "proposed",
+      "lifecycle": "concluded",
       "mechanism_class": "structural",
       "next_action": "Run the next eligible task within an explicit budget.",
       "pending_readout": false,
@@ -35698,9 +36621,9 @@
           },
           {
             "reasons": [
-              "no compatible result"
+              "recomputed complete live curve and terminal suffix"
             ],
-            "status": "NOT_RUN",
+            "status": "FAIL",
             "task_id": "two_pole"
           },
           {
@@ -35725,7 +36648,7 @@
             "task_id": "clockfree_audit"
           }
         ],
-        "cost_seconds": 0,
+        "cost_seconds": 4.800435357999959,
         "eligible": false,
         "next_task": null,
         "next_tasks": [],
@@ -35755,7 +36678,7 @@
           "staggered100_14k": "NOT_RUN",
           "target_shift_recovery": "NOT_RUN",
           "trajectory": "NOT_RUN",
-          "two_pole": "NOT_RUN",
+          "two_pole": "FAIL",
           "unipolar": "NOT_RUN",
           "unused_token_hold": "NOT_RUN",
           "vector_anisotropic": "NOT_RUN",
@@ -35767,14 +36690,55 @@
         },
         "tasks": [
           {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
+            "cost": 4.800435357999959,
+            "evaluator_result": {
+              "attempted": true,
+              "confirmation_fraction": 2.0,
+              "convergence": {
+                "complete": true,
+                "confirmed_seconds": null,
+                "confirmed_step": null,
+                "first_pass_step": 54,
+                "minimum_stable_checks": 5,
+                "observations": 24,
+                "passing_observations": 3,
+                "passing_suffix": 0,
+                "stable_from_seconds": null,
+                "stable_from_step": null
+              },
+              "metrics": [
+                {
+                  "margin": 0.1477476179599762,
+                  "metric": "mean_abs",
+                  "op": ">=",
+                  "status": "PASS",
+                  "threshold": 0.3,
+                  "value": 0.4477476179599762
+                },
+                {
+                  "margin": -0.2546037435531616,
+                  "metric": "grad_med",
+                  "op": "<=",
+                  "status": "FAIL",
+                  "threshold": 1.0,
+                  "value": 1.2546037435531616
+                }
+              ],
+              "passed": false,
+              "shortfall": 0.1273018717765808,
+              "status": "FAIL"
+            },
+            "gate_status": "FAIL",
             "importance": "required",
+            "metrics": {
+              "grad_med": 1.2546037435531616,
+              "mean_abs": 0.4477476179599762
+            },
             "qualification_tier": 1,
             "reasons": [
-              "no compatible result"
+              "recomputed complete live curve and terminal suffix"
             ],
-            "status": "NOT_RUN",
+            "status": "FAIL",
             "task_id": "two_pole"
           },
           {
@@ -36090,13 +37054,14 @@
           {
             "counts": {
               "BLOCKED": 1,
-              "NOT_RUN": 3
+              "FAIL": 1,
+              "NOT_RUN": 2
             },
             "diagnostic_total": 0,
             "qualification_tier": 1,
             "required_passed": 0,
             "required_total": 4,
-            "status": "BLOCKED"
+            "status": "FAIL"
           },
           {
             "counts": {
@@ -36123,8 +37088,23 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
-      "readout_covers_attempt_ids": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "65bd7771643215632db54e6a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
+          "request_id": "397c486fb1b97b0f8e581b42",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
       "retry_history": [],
       "runtime_cohort": {
         "compute_profiles": {
@@ -36942,7 +37922,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "f1a39cca8041b7dfff83ac41",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -39381,7 +40368,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "fa02accea38ea17005d685ee",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -40300,6 +41294,222 @@
     },
     {
       "attempt_ids": [
+        "04e834fc82f24061af71572dce3a22d8",
+        "0d955ecceae2440a94c617bac052a7f8"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-no-critic-penalty",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-smoke-v2",
+        "registration_sha256": "04d558e56610a0489ffa68b4feae024ce79783db9fec98203935c36c68803334"
+      },
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "cohort": "140a5c88aefbd220c7ec6d6af394358ee52a9ce9c4ad7a29108053037d3aa7be",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 14.504147658000875
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "04e834fc82f24061af71572dce3a22d8",
+          "0d955ecceae2440a94c617bac052a7f8"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "65bd7771643215632db54e6a",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
+          "request_id": "397c486fb1b97b0f8e581b42",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "04e834fc82f24061af71572dce3a22d8",
+        "0d955ecceae2440a94c617bac052a7f8"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-smoke-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+        "path": "reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 2.313903913000104,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.9322747030018945,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.897178809002071,
+            "wall_seconds": 6.9322747030018945
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.002700746525079012,
+            "recon_mse": 0.0040340423583984375
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 0.7102447529978235,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 7.57187295499898,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.274358154001675,
+            "wall_seconds": 7.57187295499898
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "concept_move": 0.8801896789196206,
+            "unused_hold": 0.9732744097709656
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
         "6f24cc4b4c814096bacc4fcc47110a98",
         "7ab18561c8bd48508ad4dec6d075f0ea"
       ],
@@ -40760,6 +41970,504 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "4ab4e77829044c73a7ea3d86981aac71",
+        "a388612acc494fbbbe99cb86370559aa",
+        "bfb3885a560345559ba8a09adbfdfb56"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-smoke-v2",
+        "registration_sha256": "04d558e56610a0489ffa68b4feae024ce79783db9fec98203935c36c68803334"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "cohort": "29f96fb13a5b4e933b6af827098d3bf2eb50230fc4ca4f3f05cca6a60fda6201",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 16.898127497999667
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 2
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "4ab4e77829044c73a7ea3d86981aac71",
+          "a388612acc494fbbbe99cb86370559aa",
+          "bfb3885a560345559ba8a09adbfdfb56"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "fa02accea38ea17005d685ee",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "4ab4e77829044c73a7ea3d86981aac71",
+        "a388612acc494fbbbe99cb86370559aa",
+        "bfb3885a560345559ba8a09adbfdfb56"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 2,
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-smoke-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+        "path": "reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 0.7277824359989609,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 5.5677307629994175,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.368507639002928,
+            "wall_seconds": 5.5677307629994175
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9514550994835247,
+            "unused_hold": 0.9981992269167677
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 0.32891469600144774,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.170356153001194,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 1.9145000089993118,
+            "wall_seconds": 5.170356153001194
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.0637243241071701,
+            "mean_abs": 0.10652091354131699
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 1.386633645000984,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.160040581999056,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.9519753649983613,
+            "wall_seconds": 6.160040581999056
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.004287836141884327,
+            "recon_mse": 0.004574489779770374
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "9cd112e7346b45ed8cb241e1498685ad",
+        "d0414263a3914641992efbbab6f7b951",
+        "e65951a61a764989b7b416e418130061"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-onboarding-anchor-ablation",
+        "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+        "qualification_reuse": false,
+        "registration_id": "current-k3p-mog-smoke-v2",
+        "registration_sha256": "04d558e56610a0489ffa68b4feae024ce79783db9fec98203935c36c68803334"
+      },
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
+      "cohort": "f6a5121230378120bdbb6c2261d38e2d03230a55198dff8452a29b497782b663",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.00833441800205
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 2
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "9cd112e7346b45ed8cb241e1498685ad",
+          "d0414263a3914641992efbbab6f7b951",
+          "e65951a61a764989b7b416e418130061"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "f1a39cca8041b7dfff83ac41",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "9cd112e7346b45ed8cb241e1498685ad",
+        "d0414263a3914641992efbbab6f7b951",
+        "e65951a61a764989b7b416e418130061"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 2,
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-current-k3p-mog-smoke-v2",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+        "origin_commit": "416d04ca855098cbd6fa909d0c65fcb31b8100dc",
+        "path": "reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_seconds": 0.7084478799988574,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 5.578069316001347,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.302521502999298,
+            "wall_seconds": 5.578069316001347
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9516344002587864,
+            "unused_hold": 0.9980412274599075
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 1.3214641449994815,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.2537244640006975,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.9160869420011295,
+            "wall_seconds": 6.2537244640006975
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.004501452203840017,
+            "recon_mse": 0.004509006626904011
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "cost": {
+            "adapter_seconds": 0.34213576999900397,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.176540638000006,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 1.9158194490009919,
+            "wall_seconds": 5.176540638000006
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.07678461074829102,
+            "mean_abs": 0.10482493042945862
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
         }
       ]
     },

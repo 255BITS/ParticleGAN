@@ -1,18 +1,18 @@
 {
   "attempt_outcomes": {
-    "completed": 11
+    "completed": 20
   },
   "component_timing": {
     "measured_attempts": 0,
     "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
     "seconds": {},
-    "unmeasured_attempts": 11
+    "unmeasured_attempts": 20
   },
   "concurrency": {
-    "mean_active_workers": 0.16702721530383763,
-    "measured_attempts": 9,
+    "mean_active_workers": 0.09046343330317286,
+    "measured_attempts": 18,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": 309.39537143707275,
+    "observation_window_seconds": 1159.455554485321,
     "peak_distinct_gpu_devices": 0,
     "peak_workers": 1,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
@@ -27,24 +27,24 @@
   },
   "cost_to_reject": {
     "maximum_seconds": 7.371452854000381,
-    "mean_seconds": 6.200401189000938,
-    "measured_outcomes": 3,
-    "median_seconds": 5.974550719001854,
-    "outcomes": 3,
+    "mean_seconds": 5.850409731250693,
+    "measured_outcomes": 4,
+    "median_seconds": 5.614875356501216,
+    "outcomes": 4,
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 11,
+    "denominator": 20,
     "fraction": 0.0,
     "numerator": 0
   },
-  "execution_jobs_avoided": 6,
+  "execution_jobs_avoided": 8,
   "flops": {
     "kind": "unavailable",
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 11,
+    "denominator": 20,
     "fraction": 0.0,
     "numerator": 0
   },
@@ -55,16 +55,16 @@
   ],
   "memory": {
     "maximum_reaped_child_peak_rss_bytes": {
-      "maximum_bytes": 860909568,
-      "measured_attempts": 9
+      "maximum_bytes": 860921856,
+      "measured_attempts": 18
     },
     "process_peak_rss_bytes": {
       "maximum_bytes": 730271744,
-      "measured_attempts": 9
+      "measured_attempts": 18
     },
     "supervisor_peak_rss_bytes": {
-      "maximum_bytes": 615641088,
-      "measured_attempts": 9
+      "maximum_bytes": 635973632,
+      "measured_attempts": 18
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -87,6 +87,27 @@
       "rejected_tier": 1,
       "request_ids": [
         "acde0787eb4675361a9ef0b8"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "evidence_wall_seconds": 4.800435357999959,
+      "incremental_paid_seconds": 4.800435357999959,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "397c486fb1b97b0f8e581b42"
       ],
       "status": "FAIL",
       "through_tier": 1,
@@ -137,6 +158,7 @@
   ],
   "queue_available": true,
   "queue_locations": [
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
     "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge",
     "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
     "/home/martyn/dev/ParticleGAN/runs/forge"
@@ -144,26 +166,26 @@
   "receipt_issues": [],
   "requests_with_unavailable_cap": 0,
   "reuse": {
-    "evidence_uses": 3,
+    "evidence_uses": 4,
     "reused_evidence_uses": 0,
-    "submitted_execution_demands": 9,
-    "unique_evidence_jobs": 3
+    "submitted_execution_demands": 12,
+    "unique_evidence_jobs": 4
   },
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 11,
-    "known_wall_seconds": 62.90737235400593,
+    "attempts": 20,
+    "known_wall_seconds": 116.11841728600848,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 62.90737235400593
+    "wall_seconds": 116.11841728600848
   },
   "task_gate_counts": {
-    "FAIL": 6,
-    "PASS": 5
+    "FAIL": 10,
+    "PASS": 10
   },
-  "tasks_avoided": 6,
+  "tasks_avoided": 8,
   "tier_rejections": {
-    "1": 3
+    "1": 4
   }
 }

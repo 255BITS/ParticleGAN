@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 179. Inventory coverage: complete. Unresolved import items: 6.
+Records: 182. Inventory coverage: complete. Unresolved import items: 6.
 
 ## Goal views
 
@@ -2819,6 +2819,38 @@ The public EMA-anchor ablation failed two_pole after 80 fixed-seed CPU updates: 
 
 [Evidence](../../reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json) · [Record](records/readout-10242573330bec1494c7602b.json)
 
+### forge-no-critic-penalty · readout-15e86dd160a1d64a04ceee04
+
+**Scope:** current; scientific; revision `8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8`.
+
+Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 19.305; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.004034
+
+Corrected-source smoke matrix: two_pole FAIL, unused_token_hold FAIL, ae_gan_hold PASS. Whole-screen FAIL; independent reference outcomes remain unmeasured. All selected attempts completed, with actual named-stream seed labels now consistent.
+
+**Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
+
+[Evidence](../../reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json) · [Record](records/readout-15e86dd160a1d64a04ceee04.json)
+
+### forge-onboarding-anchor-ablation · readout-2c30cecb0a3f37d001ce3b28
+
+**Scope:** calibration_diagnostic; scientific; revision `f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775`.
+
+Removing the public critic EMA-anchor term may weaken short-horizon adversarial movement; the fixed CPU smoke gate should reject a harmful ablation before larger tests.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 17.008; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.004509
+
+Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hold PASS. Whole-screen FAIL; independent reference outcomes remain unmeasured. All selected attempts completed, with actual named-stream seed labels now consistent.
+
+**Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
+
+[Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
+
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
 **Scope:** current; scientific; revision `87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9`.
@@ -2867,6 +2899,22 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 [Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
 
+### k3p · readout-acc70fcaf6cedb9a3772e41e
+
+**Scope:** calibration_diagnostic; scientific; revision `229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 16.898; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0045745
+
+Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hold PASS. Whole-screen FAIL; independent reference outcomes remain unmeasured. All selected attempts completed, with actual named-stream seed labels now consistent.
+
+**Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
+
+[Evidence](../../reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
+
 ### k3p · readout-c723a88e5122f97011aabad9
 
 **Scope:** calibration_diagnostic; scientific; revision `5d60f405c372f33d8c96675c772fe97e10bb922cfe313d8e66722de9d32bc289`.
@@ -2894,4 +2942,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `15307f4b35ea4e8e40658f60ed24ae4dbf3e57c12de2e3e17ecbc9dd5f3a63dc`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `f8d2fe933d576c6fd184dae8cd74c49713b40d2c4a00fc185e64addda2792eca`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

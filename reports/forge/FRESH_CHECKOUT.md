@@ -44,3 +44,15 @@ collects only the eight remaining cheap cells, without repeating this run.
 The subsequent [parity audit](CHEAP_SCREEN_PARITY_AUDIT.md) found redundant
 legacy noise-seed labels in this source revision. The named-stream manifest is
 the actual execution provenance; the original receipt is retained verbatim.
+
+## Corrected-source confirmation
+
+A second clean clone at `416d04ca` ran the same ordinary ablation after the
+receipt-only seed-label correction. It completed one CPU attempt in **4.800435
+seconds**, with identical travel/slope metrics and the same FAIL. Remaining
+ordinary tasks again stayed unlaunched, the readout concluded, and reservations
+returned to zero. The [v2 receipt](onboarding/fresh-checkout-v2.json) and
+[original v2 readout](onboarding/fresh-checkout-v2-readout.json) bind this check.
+Reported noise seeds now match the actual named streams; the legacy seed offset
+is explicitly null. No learning or gate changed, and the two source cohorts are
+not independent scientific repetitions.

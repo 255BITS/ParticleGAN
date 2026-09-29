@@ -1,6 +1,8 @@
 # Bounded physical multi-GPU pilot
 
-Status: prepared, not executed. The [legacy-consumer audit](LEGACY_CONSUMERS.md)
+Status: [registered](calibration-lanes/current-k3p-mog-gpu-pilot-v2/registration.json),
+not enqueued or executed. The exact [selection and caps](../../configs/forge/campaigns/current-k3p-mog-gpu-pilot-v2.json)
+are frozen against current profile v2. The [legacy-consumer audit](LEGACY_CONSUMERS.md)
 found both A6000s actively training. Reserve a joint window after those owners
 release the devices; the HyperGAN parent queue can launch another child, so an
 idle instant is insufficient. Do not stop or adopt those jobs as part of this
@@ -9,11 +11,10 @@ pilot. The coordinator has requested the missing capacity window.
 ## Work and budget
 
 After the CPU smoke diagnostic readout, use the same frozen current-calibration
-cohort and register exactly two independent reference cells: `img_blobs4` for
-`k3p` and `forge-no-critic-penalty`. Each uses the existing 600-update task, live
-grader and explicit finite-centre particle-cloud exception. This pilot tests
-physical placement and workflow; it does not supply learned-MoG coverage or the
-complete calibration denominator. The two ideas differ by a real public
+cohort and register exactly two independent reference cells: `vector_two_broad` for
+`k3p` and `forge-no-critic-penalty`. Each uses the existing 1,200-update task, live
+grader and learned-MoG prior. This pilot tests
+physical placement and workflow; it does not supply the complete calibration denominator. The two ideas differ by a real public
 mechanism ablation, with the same screening seed and initializer.
 
 The diagnostic registration permits no qualification reuse. Reserve 1,800 seconds

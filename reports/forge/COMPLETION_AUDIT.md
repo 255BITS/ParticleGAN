@@ -63,8 +63,8 @@ or GPU-pilot outcomes:
 
 **Still required for completion:** real compatible positive/negative current-MoG
 calibration evidence meeting the unchanged criteria, the bounded physical
-multi-GPU pilot, exact outstanding historical claim artifacts, final inventory/
-onboarding evidence, and the conditional adoption/cutover decision. Neither the
+multi-GPU pilot, exact outstanding historical claim artifacts, the conditional adoption/cutover decision. Inventory coverage and both
+fresh-checkout walkthroughs are now recorded. Neither the
 software fixes nor diagnostic registration changes adoption to PASS. GPU
 capacity and legacy ownership must be rechecked at execution time.
 
@@ -198,3 +198,12 @@ No successful default GAN, EMA policy decision, or multi-seed robustness claim i
 required merely to prove the engine works. Conversely, implementing the engine
 does not waive its accepted scientific API, calibration, GPU-pilot, or migration
 acceptance criteria.
+
+## Latest measured checkpoint
+
+The corrected v2 cohort has all nine smoke cells measured (five PASS, four FAIL),
+53.211 seconds total CPU wall time, identical saved metrics to v1, concluded
+readouts and zero reservations. Its 48 independent reference cells remain unknown;
+false accept/reject rates cannot yet be measured. The two-cell physical GPU pilot
+is registered but neither submitted nor launched. Software evidence is 441 checks
+at the broad freeze plus 90 focused checks after the receipt-only correction.

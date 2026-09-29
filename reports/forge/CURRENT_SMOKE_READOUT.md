@@ -39,3 +39,29 @@ Next: validate the metadata correction, freeze the replacement source profile,
 and collect only compatible cheap cells. Deeper reference work needs a declared
 selection and the requested GPU ownership window. Do not launch an unbounded
 matrix or count missing reference measurements as negative results.
+
+## Corrected current source (v2)
+
+The reporting-only correction is frozen at source `c673226c` (software commit
+`416d04ca`). The [v2 matrix](calibration/current-k3p-mog-v2.md) completes all nine
+cheap cells, with no certificate conflicts and every readout concluded. All nine
+[saved verdict/metric pairs](calibration/source-correction-parity.json) exactly
+match v1; these source cohorts must not be counted as independent repetitions.
+
+| Control | Smoke passes / required | Complete smoke wall seconds | Whole smoke | Reference |
+| --- | ---: | ---: | --- | --- |
+| k3p | 2/3 | 16.898 | FAIL | UNKNOWN |
+| forge-onboarding-anchor-ablation | 2/3 | 17.008 | FAIL | UNKNOWN |
+| forge-no-critic-penalty | 1/3 | 19.305 | FAIL | UNKNOWN |
+
+Total v2 smoke cost: **53.211 CPU wall seconds**. The ordinary fresh-checkout
+cell cost 4.800 seconds and the eight registered diagnostics cost 48.411 seconds.
+All final reservations are zero. Only the declared diagnostic lane continued
+after failures; it cannot confer qualification. Noise receipts now report the
+actual named-stream seeds and explicitly null the obsolete legacy offset.
+
+The [two-cell learned-MoG GPU pilot](MULTI_GPU_PILOT.md) is registered against v2,
+with a 5,400-second campaign ceiling including at most one deliberate cancellation
+repair. It is not enqueued. Both GPU owners must release a coordinated window.
+The remaining independent reference matrix, accepted calibration and migration
+cutover remain outstanding. No criterion or threshold was relaxed.
