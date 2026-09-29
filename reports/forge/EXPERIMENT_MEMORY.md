@@ -11,6 +11,8 @@ Records: 176. Inventory coverage: complete. Unresolved import items: 6.
 - [discriminator_stability](leaderboards/discriminator_stability.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
 
+[Measured automation costs, reuse, and avoided work](automation.json). Run `python -m experiments.forge stats` for current accounting; unavailable measurements remain explicit.
+
 ## Pending readouts
 
 None recorded.
@@ -2844,4 +2846,4 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `aa370fe12f8d2f974a82052f28c986fe94393a59cd0c8708e26b539f89493a72`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `8f5e7737627bac8f9a1bca1d1aebcb6bfec67c7bf3bf70669808277495e9e600`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

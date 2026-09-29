@@ -1,12 +1,16 @@
 """Independent evaluator child, imported entirely from the frozen source tree."""
 from pathlib import Path
 import sys
+import time
 
 from .contracts import atomic_json, read_json, stable_hash
 from .views import grade_result
+from .telemetry import MemoryProbe
 
 
 def evaluate(path: Path):
+    started = time.monotonic()
+    memory = MemoryProbe()
     import torch
     torch.set_num_threads(1)
     torch.use_deterministic_algorithms(True)
@@ -22,7 +26,9 @@ def evaluate(path: Path):
         member = raw.get("task_results", {}).get(task_id, raw)
         grades[task_id] = grade_result(request["tasks"][task_id], member)
     result = {"schema_version": 1, "grades": grades, "raw_hash": stable_hash(raw),
-              "source_digest": request["source"]["digest"]}
+              "source_digest": request["source"]["digest"],
+              "telemetry": {"independent_grading_seconds": time.monotonic() - started,
+                            "memory": memory.snapshot(), "scope": "Independent CPU evaluator process, including evaluator artifact reads."}}
     atomic_json(path.parent / "graded-result.json", result)
     return result
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "adaptation",
-  "revision": 1,
+  "revision": 2,
   "goal": "adaptation",
   "assignments": [
     {
@@ -149,8 +149,9 @@
     "adoption_blocker": "Phase D historical calibration remains required"
   },
   "ranking": {
-    "policy": "qualified_tier_then_raw_metrics",
+    "policy": "qualified_tier_only_with_raw_metrics",
     "compare_compatible_cohorts": true,
     "cost_separate": true
-  }
+  },
+  "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions."
 }

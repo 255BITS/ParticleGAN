@@ -30,11 +30,13 @@ outside active pools and retain existing experiment requests.
 | --- | --- | --- |
 | Freeze source revisions / branch / PR | Complete | PR #221 open, base `develop`; pins above |
 | Shared file contracts and source snapshots | Implemented, under integration review | `experiments/forge/contracts.py`, `sources.py`; mutation/reuse tests |
-| History mapping and source coverage | Implemented; refresh after staging new source | 174 cards, 112 scientific and 62 family-context; pinned #155 included |
+| History mapping and source coverage | Complete classification at checkpoint `3a3ef24a` | 7,252 scoped paths; 174 cards, 112 scientific and 62 family-context; pinned #155 included |
 | MoG public API, capabilities, paired RNG | Implemented and tested | Public trainer/prior/A2, named component streams, checkpoint parity |
 | Task definitions / tier views / independent graders | Implemented and tested | 29 tasks, four views; no active monotonicity gate |
-| Queue, adapters, compiler, CLI and root guide | Real CPU execution and resource enforcement verified | 368 Forge checks; real process-group tests and atomic CPU/RAM reservations |
+| Queue, adapters, compiler, CLI and root guide | Real CPU execution and resource enforcement verified | Real process-group tests, atomic CPU/RAM reservations; final integration checks recorded below |
 | Clock audit, paired adaptation and native continuation | Implemented; bounded state/protocol verification | Saved state manifests, measured optimizer counters, exact prefix/restore/RNG comparison; `CONTINUATION_REVIEW.md` |
+| Administrative lifecycle and display filters | Implemented and tested | Immutable abandon/supersede receipts; explicit cancellation repair; family/provenance filters preserve full qualification |
+| Automation telemetry | Implemented; historical missing measurements remain unavailable | Unique paid costs, avoided work/reuse/errors/concurrency; process RSS, CUDA allocator peaks and instrumented phase timing |
 | Calibration diagnostics and robustness registration | Implemented; no production adoption claim | Registered diagnostic namespace, report-bound calibration, fixed promotion contract and forgery/retry tests |
 | Phase D calibration / bounded multi-GPU pilot | Historical calibration replayed; current calibration and GPU pilot pending | Adoption remains blocked; CPU pilot below |
 | Root-guide onboarding | Existing-worktree walkthrough complete; fresh exported checkout pending | `ONBOARDING.md`, real anchor-ablation CPU failure, stopped downstream work and concluded readout |
@@ -78,7 +80,7 @@ verification. Current calibration now ingests certified new-cohort evidence;
 diagnostic lanes may collect selected independent reference cells after a screen
 failure without granting qualification. No current profile has passed adoption.
 
-- [ ] Refresh source coverage and compiled memory after staging the engine.
+- [x] Refresh source coverage and compiled memory at checkpoint `3a3ef24a`: 7,252/7,252 paths, 176 records, no conflicts or pending readouts. Repeat after subsequent source additions.
 - [ ] Freeze a justified current-cohort control/profile and a bounded first
   calibration selection; collect missing smoke evidence before deeper spending.
 - [ ] Meet the unchanged acceptance criteria or revise the screen with a new
@@ -91,3 +93,14 @@ failure without granting qualification. No current profile has passed adoption.
 No legacy process has been stopped or adopted by Forge. No robustness seed
 experiments have run; the registered promotion stage is conditional on a future
 finished candidate and is not required merely to test the engine.
+
+The [legacy-consumer inventory](LEGACY_CONSUMERS.md) maps active repository
+entrypoints, CI, the external GPU owners, and rollback requirements. Both GPUs
+were actively training at the latest inspection; the HyperGAN queue can launch
+three pending jobs after its current child, so child completion alone is not a
+capacity reservation. No ownership was transferred.
+
+Final software freeze: **441 tests passed** (all Forge tests plus public recipe
+defaults), including lifecycle, family filters and telemetry. The two warnings
+are Python 3.14 fork deprecations in the concurrent reservation test. No scientific
+qualification or GPU-pilot claim follows from these software checks.

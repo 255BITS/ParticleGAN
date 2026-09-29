@@ -21,6 +21,7 @@ from .artifacts import manifest_artifacts, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .mechanisms import MechanismAudit, mechanism_blockers
 from .state import state_digest
+from .telemetry import PhaseTimer, normalize_adapter_costs
 
 
 def _event(event, **values):
@@ -106,10 +107,19 @@ class _Run:
         self.rng_audits = []
         self.last_update = {}
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
+        self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
+                                if context.device.type == "cuda" else None)
+        # The shared sampling method also covers evaluator-owned holdout draws.
+        original_sample = trainer.sample
+        def measured_sample(*args, **kwargs):
+            with self.timing.measure("sampling"):
+                return original_sample(*args, **kwargs)
+        trainer.sample = measured_sample
 
     def step(self, real):
         before = self.trainer.completed_steps
-        self.last_update = self.trainer.step(real, collect_stats=True)
+        with self.timing.measure("training_updates"):
+            self.last_update = self.trainer.step(real, collect_stats=True)
         self.mechanism_audit.observe_penalty(self.last_update.get("penalty_stats", {}))
         if self.trainer.completed_steps != before + 1:
             raise RuntimeError("public trainer did not complete one update")
@@ -121,7 +131,8 @@ class _Run:
         before = self.context.streams.audit()
         cpu = torch.get_rng_state().clone()
         cuda = torch.cuda.get_rng_state(self.context.device).clone() if self.context.device.type == "cuda" else None
-        result = function()
+        with self.timing.measure("evaluation"):
+            result = function()
         after = self.context.streams.audit()
         bindings = self.context.streams.manifest()["bindings"]
         allowed = [key for key, value in bindings.items() if value["family"] == "eval"]
@@ -170,7 +181,8 @@ class _Run:
         if save_state:
             torch.save(state, self.output / "state.pt")
         receipt = {"evidence": evidence, "cost": {"optimizer_updates": counts,
-                   "completed_steps": trainer.completed_steps, "training_seconds": time.monotonic() - self.started},
+                   "completed_steps": trainer.completed_steps, "adapter_loop_seconds": time.monotonic() - self.started,
+                   "phase_timing": self.timing.snapshot()},
                    **self.context.receipt()}
         atomic_json(self.output / "adapter-receipt.json", receipt)
         return receipt
@@ -388,7 +400,7 @@ def _native(request, task, output, device, *, prerequisites=None):
     return run.receipt(evidence, save_state=False)
 
 
-def run_task(request: dict, job: dict, output_dir: Path, device: str) -> dict:
+def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> dict:
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
@@ -416,3 +428,13 @@ def run_task(request: dict, job: dict, output_dir: Path, device: str) -> dict:
         ids = job.get("task_ids", [task["id"]])
         return {"task_results": {name: deepcopy(raw) for name in ids}, "cost": raw["cost"]} if len(ids) > 1 else raw
     raise CapabilityError([f"no public adapter for {adapter}; implement and validate the declared capability before training"])
+
+
+def run_task(request: dict, job: dict, output_dir: Path, device: str) -> dict:
+    result = normalize_adapter_costs(_dispatch_task(request, job, output_dir, device))
+    # Normalize the common diagnostic receipt too. The certified bulk evidence
+    # lives in separate artifact roots and is not modified by timing annotation.
+    receipt = Path(output_dir) / "adapter-receipt.json"
+    if receipt.is_file():
+        atomic_json(receipt, normalize_adapter_costs(read_json(receipt)))
+    return result

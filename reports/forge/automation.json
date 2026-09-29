@@ -1,0 +1,133 @@
+{
+  "attempt_outcomes": {
+    "completed": 2
+  },
+  "component_timing": {
+    "measured_attempts": 0,
+    "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
+    "seconds": {},
+    "unmeasured_attempts": 2
+  },
+  "concurrency": {
+    "mean_active_workers": null,
+    "measured_attempts": 0,
+    "missing_interval_attempts": 2,
+    "observation_window_seconds": null,
+    "peak_distinct_gpu_devices": null,
+    "peak_workers": null,
+    "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
+  },
+  "cost_to_qualify": {
+    "maximum_seconds": null,
+    "mean_seconds": null,
+    "measured_outcomes": 0,
+    "median_seconds": null,
+    "outcomes": 0,
+    "unknown_cost_outcomes": 0
+  },
+  "cost_to_reject": {
+    "maximum_seconds": 5.974550719001854,
+    "mean_seconds": 5.614875356501216,
+    "measured_outcomes": 2,
+    "median_seconds": 5.614875356501216,
+    "outcomes": 2,
+    "unknown_cost_outcomes": 0
+  },
+  "execution_error_rate": {
+    "denominator": 2,
+    "fraction": 0.0,
+    "numerator": 0
+  },
+  "execution_jobs_avoided": 4,
+  "flops": {
+    "kind": "unavailable",
+    "value": null
+  },
+  "incomplete_task_rate": {
+    "denominator": 2,
+    "fraction": 0.0,
+    "numerator": 0
+  },
+  "limits": [
+    "Cost-to-outcome uses owned incremental paid costs. Evidence costs may overlap across requests and are not additive spending.",
+    "Avoided tasks are requested work left unattempted after a required scientific failure; cap-excluded work is not counted.",
+    "Queue-only paid attempts contribute spend, but require durable certified receipts for outcome/timing metrics."
+  ],
+  "memory": {},
+  "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
+  "public_default_claim": false,
+  "qualification_scope": "Recorded attainment under each frozen request view and cap; not a current-source regrade or accepted public-default claim.",
+  "qualification_units": [
+    {
+      "attempt_ids": [
+        "c0178716dd3c4d5695b391919bf9ab81"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "39dc1cc8e516f8127e732edea196f82243ff8cdff4ed761020f0f802a3bcaf0f",
+      "evidence_wall_seconds": 5.974550719001854,
+      "incremental_paid_seconds": 5.974550719001854,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "ac458f106e3b9533fe224b77"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "b766e89d1a0843ba9af94f2ce94e4273"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9",
+      "evidence_wall_seconds": 5.255199994000577,
+      "incremental_paid_seconds": 5.255199994000577,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "043465ae751e26417aad2e9a"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    }
+  ],
+  "queue_available": true,
+  "queue_locations": [
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
+    "/home/martyn/dev/ParticleGAN/runs/forge"
+  ],
+  "receipt_issues": [],
+  "requests_with_unavailable_cap": 0,
+  "reuse": {
+    "evidence_uses": 2,
+    "reused_evidence_uses": 0,
+    "submitted_execution_demands": 6,
+    "unique_evidence_jobs": 2
+  },
+  "schema_version": 1,
+  "scope": "recorded current Forge receipts; historical imports are excluded",
+  "spend": {
+    "attempts": 2,
+    "known_wall_seconds": 11.229750713002431,
+    "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
+    "unknown_cost_attempts": 0,
+    "wall_seconds": 11.229750713002431
+  },
+  "task_gate_counts": {
+    "FAIL": 2
+  },
+  "tasks_avoided": 4,
+  "tier_rejections": {
+    "1": 2
+  }
+}

@@ -45,6 +45,22 @@ or GPU-pilot outcomes:
   study and its full independent reference denominator are documented in
   [CURRENT_CALIBRATION_PROTOCOL.md](CURRENT_CALIBRATION_PROTOCOL.md).
 
+- Administrative lifecycle now has immutable abandon/supersede receipts, exact
+  revision and successor binding, readout requirements, queue admission guards,
+  and explicit cancelled-request repair. Shared evidence does not reopen a
+  disposed alias. Real queue/CLI integration tests preserve verdicts and costs.
+- `stats` and compiled `automation.json` now report unique paid attempts, cost to
+  observed rejection/attainment, tier rejects, avoided requested work, reuse,
+  execution errors and measured process overlap. Instrumented adapters report
+  exclusive phase timing and scoped process/allocator peaks. Older unmeasured
+  fields stay unavailable; pinned verdicts are not regraded by telemetry.
+- Family and evidence-quality filters operate on whole rows and preserve their
+  complete qualification denominators. All four views explicitly declare
+  tier-only ordering with raw metrics; no undeclared metric aggregate is ranked.
+- The [legacy-consumer inventory](LEGACY_CONSUMERS.md) identifies repository/CI
+  callers and actual external GPU owners. The [physical pilot procedure](MULTI_GPU_PILOT.md)
+  is prepared, with a capacity-window question pending and no GPU launch.
+
 **Still required for completion:** real compatible positive/negative current-MoG
 calibration evidence meeting the unchanged criteria, the bounded physical
 multi-GPU pilot, exact outstanding historical claim artifacts, final inventory/

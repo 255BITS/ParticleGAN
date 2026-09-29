@@ -26,9 +26,10 @@ At least three distinct substantive lineages are needed: one reference-positive
 and two reference-negative outcomes, measured on this exact cohort. Those are
 observed outcomes, not trusted labels. Start from a justified public baseline and
 two declared mechanism controls; do not create seed variants or relabel archived
-cloud runs. Only `k3p` and the onboarding anchor ablation are currently declared.
-A third substantive control and its rationale must be declared and reviewed
-before registration. Existing CPU `two_pole` failures make the baseline's host
+cloud runs. Three substantive controls are now declared: `k3p`, the onboarding critic-anchor
+ablation, and `forge-no-critic-penalty`, which removes the public critic penalty.
+These are a baseline and two mechanism-ablation hypotheses; their reference
+outcomes remain unmeasured and must not be assigned in advance. Existing CPU `two_pole` failures make the baseline's host
 parity and current smoke behavior an immediate question; they do not establish
 current independent-reference positivity.
 

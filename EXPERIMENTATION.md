@@ -119,6 +119,13 @@ workers per GPU. Training time under different hardware or contention is not a
 speed leaderboard. FLOPs remain labelled unavailable until measured or estimated
 with a declared method.
 
+Inspect measured automation costs with `python -m experiments.forge stats`.
+Compilation also writes `reports/forge/automation.json`: paid attempts, rejection
+and qualification costs, avoided requested work, reuse, execution errors and
+observed concurrency. Missing timing and memory measurements stay unavailable.
+Instrumented adapters separate optimizer updates, sampling and evaluation; process
+RSS and PyTorch allocator peaks are scoped measurements, not whole-device usage.
+
 Worktrees share the main Git repository's `runs/forge` queue by default. For an
 explicit coordinator location, put global options **before** the subcommand:
 
@@ -144,6 +151,18 @@ Failed, missing, invalid, and blocked evidence stop downstream spending.
 Diagnostics remain visible without vetoing required passes. The hold and extension
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
+
+Boards order current rows by attained tier, then name/cohort. Raw metrics and
+cost remain separate; no aggregate metric ranking is declared. Filter whole rows
+without shrinking their qualification denominator:
+
+```sh
+python -m experiments.forge board --family image --evidence-quality imported_recorded
+python -m experiments.forge board --scope pinned --evidence-quality certified_pinned
+```
+
+Receipt certification describes evidence identity, not a scientific pass.
+Use `board --json` to inspect family/provenance options and unknowns.
 
 `discriminator_stability`, `quality_coverage`, `adaptation`, and
 `clockfree_continuous` select different requirements from shared task evidence.
@@ -196,6 +215,10 @@ python -m experiments.forge cancel <request-id>
 python -m experiments.forge retry <compatibility-key> --reason "Repaired the worker environment"
 ```
 
+After cancellation, explicitly enqueue the same frozen request/campaign again
+to reattach its subscription, then retry its cancelled compatibility key if needed.
+The cancelled receipt and cost remain visible.
+
 Retry is for a repaired execution problem; it does not erase a scientific failure.
 The retry receipt binds its predecessor and repair reason. A certified repaired
 attempt replaces the infrastructure verdict for qualification while both attempts
@@ -216,6 +239,20 @@ python -m experiments.forge readout critic-anchor-v2 \
   --next-action "Advance, revise a specific mechanism, investigate a blocker, or stop"
 python -m experiments.forge compile
 ```
+
+To stop pursuing a finished idea, preserve its readout and record the reason:
+
+```sh
+python -m experiments.forge abandon critic-anchor-v2@REVISION --reason "Recorded failure; no further work planned"
+# Or link a genuinely revised idea:
+python -m experiments.forge supersede critic-anchor-v2@REVISION \
+  --successor critic-anchor-v3 --reason "The successor changes the failed mechanism"
+```
+
+Stop active work and publish its readout before either command. These immutable
+administrative records preserve verdicts and costs; the disposed revision cannot
+be submitted or retried again. Use an exact revision prefix when the name is
+ambiguous. A successor link does not transfer qualification.
 
 If several revisions of the name have run, use `candidate-id@revision` to bind the
 readout. Finish or cancel active queued/running/paused work first. A readout covers

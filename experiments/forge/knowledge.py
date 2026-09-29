@@ -228,6 +228,10 @@ def _queue_states(root, attempts):
 
 
 def _lifecycle(request, selected, records, queue_states):
+    from .lifecycle import concluded_readout, overlay
+    # Compatible aliases can share science; another idea's later repair does not
+    # reopen this idea's immutable administrative disposition or readout.
+    selected = [a for a in selected if a["request"]["candidate"]["id"] == request["candidate"]["id"]]
     ids = {a["attempt_id"] for a in selected}
     candidate_id, revision = request["candidate"]["id"], request["candidate_revision"]
     relevant = []
@@ -242,17 +246,12 @@ def _lifecycle(request, selected, records, queue_states):
     active = [e for e in relevant if e["status"] in {"queued", "running", "paused"}]
     # Compare the exact attempted cohort covered by a readout. A subsequent retry
     # adds an id and invalidates coverage even though candidate revision is fixed.
-    has_readout = bool(ids) and any(
-        r.get("lifecycle") == "concluded" and r.get("evidence_scope") != "historical"
-        and r.get("candidate_id") == candidate_id and r.get("candidate_revision") == revision
-        and ids <= set(r.get("attempt_ids", []))
-        and all(next((p.get("result_hash") for p in r.get("provenance", {}).get("attempts", [])
-                      if p.get("attempt_id") == a["attempt_id"]), None) == a["result_hash"] for a in selected)
-        for r in records)
+    has_readout = concluded_readout(request, selected, records) is not None
     lifecycle = ("running" if any(e["status"] == "running" for e in active) else "ready") if active else (
         "concluded" if has_readout else "awaiting_readout" if selected else "proposed")
-    return {"lifecycle": lifecycle, "pending_readout": bool(selected) and not has_readout and not active,
-            "queue_submissions": relevant, "readout_covers_attempt_ids": sorted(ids) if has_readout else []}
+    return overlay(request, selected, records, queue_states,
+                   {"lifecycle": lifecycle, "pending_readout": bool(selected) and not has_readout and not active,
+                    "queue_submissions": relevant, "readout_covers_attempt_ids": sorted(ids) if has_readout else []})
 
 
 def _pinned_row(group, records, queue_states):
@@ -391,12 +390,14 @@ def board(root: Path, view_id: str) -> dict:
                  "cost": _cost(a["task_results"]), "reason": "Registered calibration diagnostics cannot qualify a candidate."
                  if a["request"].get("calibration_lane") else "Pinned source/task/protocol/runtime differs from the current cohort."}
                 for a in attempts if a["attempt_id"] not in matched_attempts]
-    return {"schema_version": 1, "view": view_id, "view_revision": view["revision"],
+    result = {"schema_version": 1, "view": view_id, "view_revision": view["revision"],
             "policy_fingerprint": views.view_fingerprint(view), "calibration": view.get("calibration"),
             "rows": current + pinned + diagnostic + historical, "current_rows": current, "historical_rows": historical,
             "calibration_rows": diagnostic,
             "pinned_rows": pinned, "archived_attempts": archived, "conflicts": conflicts, "import_gaps": _gaps(root),
-            "ranking_note": "Tier attainment precedes metrics. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused."}
+            "ranking_note": "Ordered by attained tier, then candidate name/cohort; raw metrics and cost remain separate, with no aggregate metric ranking. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused."}
+    from .board_filters import annotate_rows
+    return annotate_rows(root, result, attempts=attempts, records=records)
 
 
 def recall(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
@@ -512,13 +513,19 @@ def compile_memory(root: Path) -> dict:
         manifest["operational_lifecycle_digest"] = stable_hash([
             {"cohort": row.get("cohort"), "lifecycle": row.get("lifecycle"), "requests": row.get("queue_submissions", [])}
             for result in boards for row in result["current_rows"] + result.get("pinned_rows", []) + result.get("calibration_rows", [])])
+        from .telemetry import summarize_automation
+        automation = summarize_automation(root)
+        _json_output(output / "automation.json", automation)
+        manifest["automation_digest"] = stable_hash(automation)
         lines = ["# ParticleGAN Forge experiment memory", "",
                  "Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.", "",
                  f"Records: {len(records)}. Inventory coverage: {'complete' if coverage.get('valid') else 'incomplete'}. "
                  f"Unresolved import items: {len(gaps.get('gaps', []))}.", "",
                  "## Goal views", ""]
         lines.extend(f"- [{result['view']}](leaderboards/{result['view']}.md)" for result in boards)
-        lines += ["", "## Pending readouts", "", ", ".join(pending) or "None recorded.", "",
+        lines += ["", "[Measured automation costs, reuse, and avoided work](automation.json). "
+                  "Run `python -m experiments.forge stats` for current accounting; unavailable measurements remain explicit.",
+                  "", "## Pending readouts", "", ", ".join(pending) or "None recorded.", "",
                   "## Experiment and family records", ""]
         for record in records:
             rows = record.get("task_results", [])

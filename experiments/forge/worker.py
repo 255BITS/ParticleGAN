@@ -12,6 +12,7 @@ import traceback
 from .contracts import atomic_json, read_json, utc_now
 from .queue import process_identity
 from .sources import compute_profile, runtime_manifest, verify_snapshot
+from .telemetry import peak_rss
 
 
 def stop_group(process: subprocess.Popen, grace: float = 2.0):
@@ -36,9 +37,13 @@ def execute(path: Path) -> int:
     worker, request, job = resolved["worker"], resolved["request"], resolved["job"]
     directory = path.parent
     started = time.monotonic()
+    started_at = time.time()
     terminal = {"schema_version": 1, "token": worker["token"], "attempt_status": "error", "result": {}}
     cancelled = False
     child = None
+    runner_seconds, grading_seconds = None, None
+    phase_started = None
+    phase = None
 
     def cancel(signum, frame):
         nonlocal cancelled
@@ -57,6 +62,7 @@ def execute(path: Path) -> int:
         lease_fd = int(os.environ["FORGE_LEASE_FD"])
         # The runner inherits the lease too: SIGKILL of this supervisor cannot
         # convince recovery that a still-running training descendant has died.
+        phase, phase_started = "runner", time.monotonic()
         child = subprocess.Popen([sys.executable, "-u", "-m", "experiments.forge.runtime", str(path)],
                                  start_new_session=True, pass_fds=(lease_fd,))
         atomic_json(directory / "child.json", {"pid": child.pid, "process_identity": process_identity(child.pid),
@@ -85,8 +91,11 @@ def execute(path: Path) -> int:
                                 exit_code=child.returncode)
         # Clean descendants on every path, including successful leader exit.
         stop_group(child, grace=0)
+        runner_seconds = time.monotonic() - phase_started
+        phase = None
         if terminal["attempt_status"] == "completed" and request.get("requires_independent_grading"):
             verify_snapshot(Path(request["source"]["snapshot_path"]), request["source"])
+            phase, phase_started = "grading", time.monotonic()
             child = subprocess.Popen([sys.executable, "-u", "-m", "experiments.forge.evaluate", str(path)],
                                      start_new_session=True, pass_fds=(lease_fd,))
             atomic_json(directory / "child.json", {"pid": child.pid, "process_identity": process_identity(child.pid),
@@ -105,12 +114,24 @@ def execute(path: Path) -> int:
                 else:
                     terminal["grading"] = read_json(graded_path)
             stop_group(child, grace=0)
+            grading_seconds = time.monotonic() - phase_started
+            phase = None
     except BaseException as error:
         if child:
             stop_group(child)
         traceback.print_exc()
         terminal.update(attempt_status="error", reason=f"{type(error).__name__}: {error}")
     finally:
+        if phase == "runner":
+            runner_seconds = time.monotonic() - phase_started
+        elif phase == "grading":
+            grading_seconds = time.monotonic() - phase_started
+        terminal["telemetry"] = {"schema_version": 1,
+            "interval": {"started_at": started_at, "finished_at": time.time(), "device": worker["device"],
+                         "scope": "supervised attempt, including process startup and independent grading"},
+            "runner_process_seconds": runner_seconds, "grading_process_seconds": grading_seconds,
+            "supervisor_peak_rss_bytes": peak_rss(), "maximum_reaped_child_peak_rss_bytes": peak_rss(children=True),
+            "memory_scope": "Peak RSS of supervisor and maximum individual reaped child, not summed concurrent process memory."}
         terminal.update(elapsed_seconds=time.monotonic() - started, finished_at=utc_now())
         atomic_json(directory / "terminal.json", terminal)
         print(f"{terminal['finished_at']} {job['task_id']} {terminal['attempt_status']} "

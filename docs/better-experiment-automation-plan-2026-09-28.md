@@ -913,8 +913,10 @@ the repository has ever accumulated.
 
 ## 10. Migration checklist and subagent workflow
 
-This is the execution backlog for the implementation kickoff. The checklist is
-not a claim that migration has happened. Start with repository changes and saved
+Checked items have implementation evidence in
+[the migration status](../reports/forge/MIGRATION.md); unchecked items remain
+acceptance work. The software checkpoint does not claim accepted calibration or
+default adoption. Start with repository changes and saved
 evidence; reserve training for the bounded calibration/pilot stage. Keep existing
 running experiments and historical evidence intact throughout the transition.
 
@@ -927,37 +929,37 @@ building Forge itself stays in this one feature branch/PR.
 
 ### Migration TODOs
 
-- [ ] **Freeze the migration inputs.** Confirm the existing feature branch/PR
+- [x] **Freeze the migration inputs.** Confirm the existing feature branch/PR
   targets `develop`; pin the package baseline, #155 source
   snapshot, report roots, and later follow-up receipts; record missing sources.
   Inventory existing launchers/queues and any active jobs before changing ownership.
-- [ ] **Agree on the shared contracts.** Define TaskSpec, idea/candidate records,
+- [x] **Agree on the shared contracts.** Define TaskSpec, idea/candidate records,
   FormulationContext/capabilities, attempt receipts, and view placement. Separate
   execution/evaluation fingerprints from view-policy revisions. Assign file owners
   and freeze these interfaces before parallel implementation.
-- [ ] **Map the history.** Classify all scoped files; import existing experiment
+- [x] **Map the history.** Classify all scoped files; import existing experiment
   lineages, including successes, failures, raw errors, explicit blockers and
   incomplete work. Bind prior regime, fixture, package, RNG and sampling law.
   Keep dt075/EMA/sensitivity import gaps visible until exact evidence is available.
-- [ ] **Build shared public-API support.** Add the required MoG training and
+- [x] **Build shared public-API support.** Add the required MoG training and
   formulation hooks to the public package/runtime path. Use existing public
   components where appropriate; centralize Forge's bindings and document API
   additions, changed variables, supported hosts and checkpoint migration.
-- [ ] **Establish prior defaults and exceptions.** Resolve new tasks to learned
+- [x] **Establish prior defaults and exceptions.** Resolve new tasks to learned
   MoG priors in one defaults/factory path. Explicitly classify sigma-zero cloud
   tasks. Verify gradients, sampler/RNG behavior, state restoration, and mechanism
   activation, including the A2 type-sensitive behavior. Preserve old identities.
-- [ ] **Consolidate experiment adapters.** Port the initial toy/native/hold
+- [x] **Consolidate experiment adapters.** Port the initial toy/native/hold
   families onto the shared API. Extract duplicated setup, training, sampling,
   checkpoint, logging and result logic. Retain thin compatibility entrypoints
   where useful; keep frozen historical source copies outside active implementation.
-- [ ] **Declare tasks and tier views.** Reference shared task/evaluator definitions
+- [x] **Declare tasks and tier views.** Reference shared task/evaluator definitions
   and place tasks in versioned view configs. Demonstrate a tier move without code
   changes or training. Validate dependencies and freeze the provisional campaign.
-- [ ] **Compile memory and comparisons.** Implement deterministic map/reduce,
+- [x] **Compile memory and comparisons.** Implement deterministic map/reduce,
   conflict/coverage checks, the single history file, boards and recall. Distinguish
   MoG/cloud cohorts, API support, live/EMA, cost and mechanism class in the output.
-- [ ] **Unify execution and queue state.** Adapt the existing grid runner and #155
+- [x] **Unify execution and queue state.** Adapt the existing grid runner and #155
   submit/pool/ledger behavior to the shared request/receipt contract. Add atomic
   ownership/budget claims, worker recovery, central logs and durable results.
   Verify with fake workers before using GPUs.

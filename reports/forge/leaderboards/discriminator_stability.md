@@ -1,13 +1,15 @@
-# discriminator_stability — revision 1
+# discriminator_stability — revision 2
 
-Tier attainment precedes metrics. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused.
+Ordered by attained tier, then candidate name/cohort; raw metrics and cost remain separate, with no aggregate metric ranking. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused.
 
 | Candidate / exact revision | Scope | Tier | Outcomes | Wall seconds | Next action |
 | --- | --- | ---: | --- | ---: | --- |
-| forge-onboarding-anchor-ablation / 16949c7c2342 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / 16949c7c2342 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / 9d36685b5a8c / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / 9d36685b5a8c / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / ef50ff6fb207 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / ef50ff6fb207 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / b10c31a0de40 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / b10c31a0de40 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / 5d60f405c372 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / 5d60f405c372 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 24 | unknown | Run the next eligible task within an explicit budget. |
 | forge-onboarding-anchor-ablation / 39dc1cc8e516 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.975 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | k3p / 87d849138dd0 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.255 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | cf1-bdpair / 4b0f5c9d43e2 | historical | unknown | PASS 1 | 724.53 | Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse. |

@@ -8,6 +8,7 @@ import time
 import traceback
 
 from .contracts import atomic_json, canonical, read_json, utc_now
+from .telemetry import MemoryProbe, normalize_adapter_costs
 
 
 def execute(path: Path) -> int:
@@ -20,6 +21,8 @@ def execute(path: Path) -> int:
               "gpu": worker["device"], "campaign": request["campaign_id"]}
     print(canonical({**common, "event": "started"}), flush=True)
     exit_code = 0
+    probe = MemoryProbe()
+    adapter_started = None
     try:
         import torch
         torch.set_num_threads(job["resources"].get("cpu_threads", 1))
@@ -33,7 +36,9 @@ def execute(path: Path) -> int:
         if blockers:
             raise CapabilityError(blockers)
         from .adapters import run_task
+        probe = MemoryProbe(device="cpu" if worker["device"] == "cpu" else "cuda:0", torch_module=torch)
         execution_job = {**job, "prerequisites": resolved.get("prerequisites", {})}
+        adapter_started = time.monotonic()
         result = run_task(request, execution_job, output, "cpu" if worker["device"] == "cpu" else "cuda:0")
         if not isinstance(result, dict):
             raise TypeError("adapter must return a raw evidence receipt")
@@ -50,7 +55,17 @@ def execute(path: Path) -> int:
     result.setdefault("api_version", request["candidate"].get("api_version", "forge-api-v1"))
     result.setdefault("api_changes", request["candidate"].get("api_changes", []))
     result.setdefault("claim_contract", request["candidate"]["claim_contract"])
-    result.setdefault("cost", {})["adapter_seconds"] = time.monotonic() - started
+    result = normalize_adapter_costs(result)
+    result.setdefault("cost", {})
+    elapsed = time.monotonic() - started
+    result["cost"]["runner_seconds"] = elapsed
+    result["cost"]["adapter_seconds"] = time.monotonic() - adapter_started if adapter_started is not None else None
+    measured = result["cost"].get("phase_timing", {}).get("measured_seconds")
+    result["telemetry"] = {"schema_version": 1, "memory": probe.snapshot(),
+        "timing": {"runner_wall_seconds": elapsed, "adapter_wall_seconds": result["cost"]["adapter_seconds"],
+            "unattributed_runner_seconds": max(0., elapsed - measured) if measured is not None else None,
+            "scope": "Aggregate runner/adapter time includes setup, sampling, evaluation and artifact I/O; phase timing is separate."},
+        "flops": {"kind": "unavailable", "value": None}}
     atomic_json(output / "raw-result.json", result)
     print(canonical({**common, "timestamp": utc_now(), "event": "recorded", "exit_code": exit_code,
                      "cost": result["cost"], "result": str(output / "raw-result.json")}), flush=True)

@@ -243,11 +243,23 @@ class Queue:
         request_id = stable_hash(request)[:24]
         request = {**request, "request_id": request_id}
         with self.state() as state:
+            if self.report_root:
+                from .lifecycle import ensure_open
+                ensure_open(self.report_root.parent.parent, request)
             previous = state["campaigns"].get(campaign["id"])
             if previous and previous["definition"] != campaign:
                 raise ValueError("campaign definition is immutable; use a new campaign id")
             if request_id in state["submissions"]:
-                return state["submissions"][request_id]
+                entry = state["submissions"][request_id]
+                if entry["status"] == "cancelled":
+                    for job in request["jobs"]:
+                        saved = state["jobs"][job["compatibility_key"]]
+                        if self._authorized(request, job) and request_id not in saved["subscribers"]:
+                            saved["subscribers"].append(request_id)
+                    entry.update(status="queued", lifecycle="ready", reason=None)
+                    self.event(state, "resubmitted", request=request_id, campaign=campaign["id"],
+                               candidate=request["candidate"]["id"], reason="explicit enqueue after cancellation")
+                return entry
             if not previous:
                 state["campaigns"][campaign["id"]] = {"definition": campaign, "spent_seconds": 0.0,
                     "reserved_seconds": 0.0, "paused": False}
@@ -396,6 +408,13 @@ class Queue:
                 request = entry["request"]
                 if entry["status"] not in {"queued", "running"}:
                     continue
+                if self.report_root:
+                    from .lifecycle import ensure_open
+                    try:
+                        ensure_open(self.report_root.parent.parent, request)
+                    except ValueError as error:
+                        entry.update(status="blocked", reason=str(error), lifecycle="awaiting_readout")
+                        continue
                 if campaign_filter and request["campaign_id"] != campaign_filter:
                     continue
                 if goal_filter and request["view"]["goal"] != goal_filter:
@@ -712,12 +731,29 @@ class Queue:
                 raise ValueError("known applicability blockers need an adapter/capability change, not retry")
             if len(job["attempts"]) >= 3:
                 raise ValueError("maximum three attempts; repair the environment before a new request")
+            open_subscribers, disposition_errors = [], []
+            for request_id in job["subscribers"]:
+                entry = state["submissions"][request_id]
+                if entry["status"] == "cancelled" or not self._authorized(entry["request"], job["definition"]):
+                    continue
+                if self.report_root:
+                    from .lifecycle import ensure_open
+                    try:
+                        ensure_open(self.report_root.parent.parent, entry["request"])
+                    except ValueError as error:
+                        disposition_errors.append(str(error))
+                        continue
+                open_subscribers.append(request_id)
+            if not open_subscribers:
+                raise ValueError("; ".join(disposition_errors) or
+                                 "retry needs an open subscribed request, not a cancelled or abandoned one; enqueue the frozen request again after cancellation")
             previous = job["result"]
             job.update(status="pending", result=None, retry_of={
                 "attempt_id": previous["attempt_id"], "result_hash": stable_hash(previous),
                 "reason": reason, "authorized_at": utc_now(),
             })
-            for request_id in job["subscribers"]:
+            job["subscribers"] = open_subscribers
+            for request_id in open_subscribers:
                 entry = state["submissions"][request_id]
                 if entry["status"] != "cancelled":
                     entry.update(status="queued", lifecycle="ready", reason=None)

@@ -60,6 +60,7 @@ def parser():
     d.add_argument("--campaign")
     d.add_argument("--goal")
     commands.add_parser("queue", help="show active/blocked requests, costs and log paths")
+    commands.add_parser("stats", help="report measured automation costs, reuse, avoided work and execution limits")
     logs = commands.add_parser("logs", help="tail the collector's timestamped event stream")
     logs.add_argument("--follow", action="store_true")
     logs.add_argument("--lines", type=int, default=40)
@@ -72,6 +73,8 @@ def parser():
     b.add_argument("--candidate", help="filter candidate names by substring")
     b.add_argument("--tier", type=int, choices=(0, 1, 2, 3), help="minimum qualified tier")
     b.add_argument("--outcome", help="filter status or presence of a task gate status")
+    b.add_argument("--family", action="append", help="display task/host/source family; repeat for alternatives")
+    b.add_argument("--evidence-quality", action="append", help="display receipt provenance, e.g. certified_pinned or imported_recorded; repeat for alternatives")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -111,6 +114,12 @@ def parser():
     retry = commands.add_parser("retry", help="retry a repaired execution failure, never a scientific failure")
     retry.add_argument("compatibility_key")
     retry.add_argument("--reason", required=True)
+    for name in ("abandon", "supersede"):
+        disposition = commands.add_parser(name, help=f"{name} a stopped revision while preserving its readout and evidence")
+        disposition.add_argument("candidate")
+        disposition.add_argument("--reason", required=True)
+        if name == "supersede":
+            disposition.add_argument("--successor", required=True)
     for name in ("pause", "resume"):
         c = commands.add_parser(name, help=f"{name} campaign claims")
         c.add_argument("campaign")
@@ -191,6 +200,10 @@ def main(argv=None):
               "requests": [{"id": k, "candidate": v["request"]["candidate"]["id"],
                             "status": v["status"], "reason": v["reason"], "lifecycle": v["lifecycle"]}
                            for k, v in state["submissions"].items()], "logs": str(queue_root / "events.jsonl")})
+    elif command == "stats":
+        from .telemetry import summarize_automation
+        selected_queue = queue_root if args.queue_root or os.environ.get("PARTICLEGAN_FORGE_QUEUE") else None
+        emit(summarize_automation(root, selected_queue))
     elif command == "logs":
         follow_logs(queue_root / "events.jsonl", args)
     elif command in {"compile", "recall", "board", "readout"}:
@@ -205,6 +218,8 @@ def main(argv=None):
                   "memory": str(root / "reports/forge/EXPERIMENT_MEMORY.md")})
         elif command == "board":
             result = knowledge.board(root, args.goal)
+            from .board_filters import filter_rows
+            result = filter_rows(result, family=args.family, evidence_quality=args.evidence_quality)
             rows = [r for r in result["rows"] if (args.scope == "all" or r.get("evidence_scope") == args.scope)
                     and (not args.candidate or args.candidate in r.get("candidate_id", ""))
                     and (args.tier is None or (r.get("qualified_tier") or 0) >= args.tier)
@@ -292,6 +307,13 @@ def main(argv=None):
     elif command == "retry":
         queue.retry(args.compatibility_key, reason=args.reason)
         emit({"retry": args.compatibility_key})
+    elif command in {"abandon", "supersede"}:
+        from .lifecycle import abandon, supersede
+        result = (abandon(root, args.candidate, args.reason, queue_root=queue_root)
+                  if command == "abandon" else
+                  supersede(root, args.candidate, args.successor, args.reason, queue_root=queue_root))
+        publish()
+        emit(result)
     elif command in {"pause", "resume"}:
         queue.pause(args.campaign, command == "pause")
         emit({"campaign": args.campaign, "paused": command == "pause"})

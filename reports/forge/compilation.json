@@ -1,7 +1,8 @@
 {
+  "automation_digest": "cf74e13324cde3a68501575fbc6cdbd86128e35d0fda5381d8b6dfcf83045e4e",
   "conflicts": [],
   "import_gap_count": 6,
-  "input_digest": "aa370fe12f8d2f974a82052f28c986fe94393a59cd0c8708e26b539f89493a72",
+  "input_digest": "8f5e7737627bac8f9a1bca1d1aebcb6bfec67c7bf3bf70669808277495e9e600",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -9,11 +10,13 @@
     "configs/forge/calibration/initial.json": "3e02c9ec01b5cb1e0a9b1ae8bdc14354fed0b1eade4d37a0c1698ae852fc2a09",
     "configs/forge/calibration/missing-fixed-fixture-campaign.json": "a1f068cfe29a99902e65ba9117aad907ff67514514f5f83b2b3740ac8a415637",
     "configs/forge/calibration/quick-discriminator.json": "6ef7c1eb1770f3cec0cdc8673f11eb11c602434733d5b38a38831a57cd58e27e",
+    "configs/forge/campaigns/fresh-checkout-pilot.json": "1c1df67aa64b689ca136d41890de4d60e571962b3d2c84e7ffe97b86e5809c87",
     "configs/forge/campaigns/implementation-pilot.json": "6f95fd3d8ffe877225be99529327d5fac5d8a775760c932fb76f0e0764a8acbf",
     "configs/forge/campaigns/onboarding-pilot.json": "c1e53dda99626833fcc4d0bbf8b1c32fd91f4abd880cb8fa310345080a72b6d6",
     "configs/forge/campaigns/smoke.json": "3b265e8554283bd9030b65bd02a76ca2b5dd949129e5cae81d4e11aa688f44ee",
-    "configs/forge/catalog.json": "237725934fabf9a23ecb2c1c94467da4c25414cbfd138288b12cf67053b5bcb7",
+    "configs/forge/catalog.json": "a8a3e1661db196ed3b396db1ba48b53b84047740f87b701f94b24b4ca2e1b16e",
     "configs/forge/defaults.json": "e5699dacce7222eb7a819944eabb796330fd59530a23e0506f941a389a8330a5",
+    "configs/forge/ideas/forge-no-critic-penalty.json": "e6c687ac08a232db49afdc0555267d6769ed9f8ec68984ebb32e2f558e4ba98a",
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "df0aa8de3f6137cc0f718fb01782bd165bbf715e1cc7664900e46d4591a0e864",
     "configs/forge/ideas/k3p.json": "93df9644e4f55ae9bcee2b2f5844dcbd61fb5c3f38b0ef64f49a1d33bc6ebaf8",
     "configs/forge/promotion-template.json": "f9a254eeb6e05ff1e8d16fe3f77dc42f31d1156a1cc65f1ad626f8387ca581be",
@@ -47,10 +50,10 @@
     "configs/forge/tasks/vector_two_broad.json": "7a10bb9facae77b170db3c608a28cb2ca649c809d8ee3bca5205646e1b9c421f",
     "configs/forge/tasks/vector_unequal_mass.json": "ef7924e75c00f14cae60b78a90bbd0a1e06e0dce76a6500a5f6242c754eeeafc",
     "configs/forge/tasks/vector_unequal_width.json": "f335f0c998f176241c523d45ebf3e14c76c78ff17a83098f9bb883511e3515df",
-    "configs/forge/views/adaptation.json": "834417f2cd7a376290c86fa835f937203276f725df53fb85257a0e80e613e451",
-    "configs/forge/views/clockfree_continuous.json": "01fd50ecf42d0846dac0f6cabbf17e41579110ff92a7bb653bfccae2c0393d15",
-    "configs/forge/views/discriminator_stability.json": "9e814dd858d11c528a21208fe8f04261ef29a5b03db6585285e2cb946d098ede",
-    "configs/forge/views/quality_coverage.json": "907820172047ee148b14c59af7b76701f27b529f24605ad9dbebf21afcee01a6",
+    "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
+    "configs/forge/views/clockfree_continuous.json": "68935adac00a08890c798e193af48ab8bfdddf719e7c66f52aec2f36806b989d",
+    "configs/forge/views/discriminator_stability.json": "58eab01167cc4baa904f485c5f917a2a36141756024d8dc4b03a14392f6ad639",
+    "configs/forge/views/quality_coverage.json": "b8739e334dc1f993a453ae72da2b0b90316a3cd794a0cec0e448438650d3d3c5",
     "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/evidence.json": "92598ca787f9472ad002596e61575492ec7d33f30e0101fe1ef06ddb0922e078",
     "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/request.json": "2b0489ee69a8ed25c535e4bbf47a44ec70dd21a1c76ca144844dc297ce041c54",
     "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json": "43174dc97ece7ed90e77722c77adfc78a26265cde2fe8fd9c94195e85c2961cb",
@@ -58,7 +61,7 @@
     "reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/request.json": "34463baace02d3e8456547d2f12c0151a7c62313922d3c25c82a5362abea5c11",
     "reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json": "5bf541816c8a2d8737c69f63e3da13a1b34eafc9933d60d76cabcd160523f649",
     "reports/forge/history-sources.json": "0aa9ee737496bb59c1679d9a86ff4b55babfc600c7d4fff281c50f9c1675c470",
-    "reports/forge/import-gaps.json": "f7ef3806c3e87a8ff073e5b12b2526014e4c0e7c9a3c69c2bb07e337d8367794",
+    "reports/forge/import-gaps.json": "953fa70d10e1b74fa407e1f8255ead801b6cc676103ad43bfdfc139b3cc341eb",
     "reports/forge/records/history-cf1-bdpair-21ac56b45896.json": "ce6928aff230667ea4a1d5b33cca223f2792bb334e674a5e509ef999f0f3bc73",
     "reports/forge/records/history-cf1-bdpair-b282b5feff5c.json": "6f2e6be73ac1e7a62cbd4db1c842c6a4490b9e2854ddaa92281dac74aac14b43",
     "reports/forge/records/history-cf1-bdpair-e15258718c7c.json": "d60f73cf479cb806c29082e092a3c960a05ecee90d7dba564d9777f0002e372d",
@@ -237,22 +240,22 @@
     "reports/forge/records/readout-4bd94051f203bbbb28a3e7a6.json": "defa338ee519c5fe8ada4635909abb41cb8a325249dbddf24e76e2bb7236a5ff"
   },
   "inventory_coverage": {
-    "declared_count": 7252,
+    "declared_count": 7255,
     "missing": [],
     "stale": [],
-    "tracked_count": 7252,
+    "tracked_count": 7255,
     "unclassified": [],
     "valid": true
   },
-  "operational_lifecycle_digest": "57e87dbca9e31a3f20e338e23feeacd2112d815cef53d19755e606a303fe5f71",
+  "operational_lifecycle_digest": "35f00a1b67bc121614b6a7dff827b5b7d321d1f6d3f3099d72d3ae1eee14d4c4",
   "pending_readout": [],
   "record_count": 176,
-  "reducer_sha256": "93124ee5b42f5ed038ca6d3fa84c7d00fef73d4a4ef4ef7f38d53e7088562e54",
+  "reducer_sha256": "6cc5ad4f17cb9042bc1bb43a2e47f278f29d8619d0d665c17c279138f05bd051",
   "reducer_version": "forge-knowledge-v1",
   "schema_version": 1,
   "scientific_normalization_complete": false,
   "scientific_source_digests": [
-    "e984819f3740c449a20a5a0ec8083d7f6d69e522b89b1e62f5c4d5cfff47ba49"
+    "a565c608c1871a1de6e9c7d326246ac976eaa08a573cc0d697421a377a0958a4"
   ],
   "view_count": 4
 }

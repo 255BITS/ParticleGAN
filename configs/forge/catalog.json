@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 25,
+      "forge_engine": 28,
       "report/behavioral_baseline": 32,
       "report/cifar-ddgan": 623,
       "report/cifar-particle-ae": 35,
@@ -91,7 +91,7 @@
       "candidate_patch": 2,
       "configuration": 802,
       "driver": 212,
-      "engine_support": 25,
+      "engine_support": 28,
       "evaluator_or_audit": 55,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -105,13 +105,13 @@
       "visualization": 15,
       "visualization_artifact": 290
     },
-    "files": 7252
+    "files": 7255
   },
   "coverage": {
-    "declared_count": 7252,
+    "declared_count": 7255,
     "missing": [],
     "stale": [],
-    "tracked_count": 7252,
+    "tracked_count": 7255,
     "unclassified": [],
     "valid": true
   },
@@ -6557,7 +6557,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "da9b16b77fc482c4baf54d47958e8504990dd9bf",
+      "git_blob": "880e08483812425d9f86a197719d0a597fd8aa55",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6571,7 +6571,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "70fc0d63472033dad10b10ffb014a46c71e70a1e",
+      "git_blob": "8337204d5ab8dc754f3bdc77cc367d002512b627",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6594,6 +6594,13 @@
       "family": "forge_engine",
       "git_blob": "dd1483ae919b034ac73c6fd265d43444806dcc40",
       "path": "experiments/forge/behavior_adapters.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "1ddd98415852d5b84e1a3b1d6cf0fb8a67441465",
+      "path": "experiments/forge/board_filters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -6634,7 +6641,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "5c0e510cba48ce614fe65f6ecf0713f443f043b8",
+      "git_blob": "a1b0f39392ff1ab22054f0e30553fadfa908a18f",
       "path": "experiments/forge/evaluate.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6648,8 +6655,15 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "ff0d0271d7b11836e60ed2823505a3f7ee58913d",
+      "git_blob": "283da631b9d485e9ee4e2b90ed1ffbd9a9c1eace",
       "path": "experiments/forge/knowledge.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "587da12b526b41477c5afa8def696f00b677ea74",
+      "path": "experiments/forge/lifecycle.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -6676,7 +6690,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "8bf0e5608df4815ca0cbfcc2811ea61c287aab35",
+      "git_blob": "62f8184bdfceffbc0b00b3698dc057761e15f5ec",
       "path": "experiments/forge/queue.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6690,7 +6704,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "7ea2474e7a228bf59987e357ec65d83535f75f72",
+      "git_blob": "6e35f1bd28f1df56acd8581c0078388f4150e837",
       "path": "experiments/forge/runtime.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6711,6 +6725,13 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "e98910c091c193b8bf692baaeff7807679373ea9",
+      "path": "experiments/forge/telemetry.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "a1d1ec4527c85c7f44ba36cbd54f9cbe40ea4581",
       "path": "experiments/forge/views.py",
       "role": "engine_support",
@@ -6718,7 +6739,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "c9967b6ecea96423aff7a4963d9761480cf0f432",
+      "git_blob": "b25853490097bb31c1685bdf9125bd6398291e0c",
       "path": "experiments/forge/worker.py",
       "role": "engine_support",
       "suggested_tiers": []
