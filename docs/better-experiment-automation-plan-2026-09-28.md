@@ -30,6 +30,9 @@ Decisions from this discussion:
   code and defaults; declare formulation-specific API additions in one place.
 - Dogfood ParticleGAN's public API wherever possible. Forge coordinates
   experiments; reusable formulation capabilities belong in the package.
+- Publish a root-level **`EXPERIMENTATION.md`** as the operational starting point
+  for engineers and AI agents. Put a prominent read-first link in `AGENTS.md`
+  and `README.md` so the experiment workflow is discovered before work begins.
 - Multiple leaderboard views over shared evidence. Start with **discriminator
   stability**; monotonically decreasing metrics are a **future** view, with no
   monotonicity gate in the first release.
@@ -257,6 +260,8 @@ state their prior regimes; cloud passes alone do not qualify MoG behavior.
 Proposed layout, using the repo's existing code/config/report conventions:
 
 ```text
+EXPERIMENTATION.md                     # read first: engineer/agent workflow and quickstart
+AGENTS.md                             # prominent pointer to the guide and experiment memory
 experiments/forge/                    # CLI, scheduler, adapters, map/reduce
   api.py                             # shared context, extension schema and capability bindings
 configs/forge/
@@ -842,7 +847,7 @@ not proof of production readiness or a reason to stop improving the test suite.
 | **B. Shared API, lifecycle and views** | Thin public-API integration, central extension contract, learned-MoG defaults, schemas, scaffolding, reducer and read-only commands | One API across ideas/tasks; explicit cloud exceptions and capability blockers; config-only retiering reuses evidence; future monotonicity remains inactive |
 | **C. Queue and gated execution** | Shared MoG-capable public training path; adapt existing runner and #155 pool/submit/ledger contracts; provisional smoke profile, queue, multi-GPU drain, logs | MoG sampling/update/checkpoint parity; no copied experiment loops; required failures/blockers prevent later tiers; deduplicated execution and complete receipts |
 | **D. Calibrate and pilot — adoption blocker** | Replay #155 lineages and a bounded set of missing reference comparisons | Publish per-lineage smoke/reference matrix, false accepts/rejects, unknown/blocked denominators, cost and frozen criteria; insufficient evidence or unacceptable screen performance blocks Phase E; no screening seed sweeps |
-| **E. Adopt and expand** | Agent instructions, migrations, additional domain views and public-default robustness contract | One small declaration joins comparisons; all outcomes update memory; new tasks are calibrated; public-default claims require the one preregistered fixed-seed stage after candidate freeze |
+| **E. Adopt and expand** | Root experimentation guide, agent entrypoints, migrations, domain views and public-default robustness contract | A new engineer/agent can follow the guide without chat history; one small declaration joins comparisons; outcomes update memory; public-default claims require the registered robustness stage |
 
 Implementation should include meaningful tests for:
 
@@ -883,6 +888,10 @@ Implementation should include meaningful tests for:
   negative-control handling, and no accidental merging across configurations.
 - Adding a new view over existing evidence without rerunning compatible tasks;
   a view with unknown requirements cannot invent passes or rank missing metrics.
+- A fresh-checkout walkthrough of `EXPERIMENTATION.md`: find prior work, scaffold
+  an idea, plan and submit a bounded smoke request, follow logs, inspect its board,
+  and publish a readout using only documented instructions. Validate no-GPU steps
+  with fake workers and the real submission path during the bounded pilot.
 
 Expose one stable campaign log and one per-attempt log, all unbuffered, with
 timestamps, candidate, tier, task, metric/verdict, elapsed cost, and next action:
@@ -959,9 +968,14 @@ running experiments and historical evidence intact throughout the transition.
   Stop new claims in an old queue and drain/reconcile its jobs before Forge owns
   those requests. Import pending work with deduplication; never let both schedulers
   independently launch it. Keep a rollback route using preserved requests/receipts.
-- [ ] **Adopt the agent workflow.** Document new/recall/plan/enqueue/drain/board
-  commands and shared extension examples; update agent instructions to read memory
-  and record readouts. Make Forge the default route for new ideas. Retire duplicated
+- [ ] **Publish the root guide and entrypoints.** Write `EXPERIMENTATION.md` with
+  a read-first agent brief, working quickstart, command examples, extension paths,
+  and result/readout requirements. Add prominent pointers in root `AGENTS.md` and
+  `README.md`; other agent-specific files should link to the same guide. Validate
+  the fresh-checkout walkthrough and make implementation readiness explicit.
+- [ ] **Adopt the agent workflow.** Have new engineers/agents follow the root
+  guide to read memory, add an idea, run it within budget, and record its outcome.
+  Make Forge the default route for new ideas. Retire duplicated
   active launchers only after their covered behavior and consumers are migrated.
 - [ ] **Complete promotion policy before a default claim.** Decide and freeze
   live/EMA eligibility and the preregistered robustness stage. Neither an engine
@@ -980,9 +994,9 @@ boards/history or each other's source files.
 | --- | --- | --- |
 | 0 — coordinator | Pin inputs, define contracts/path ownership and plan the bounded calibration budget | All agents have the same schema/API assumptions and immutable input refs |
 | 1 — foundations | **History:** catalog/importers and normalized cards. **API:** public MoG/formulation support, central context/bindings and parity checks. **Views:** task declarations, tier config and reducer contracts | Schemas align; MoG/cloud support and capability blockers are explicit; history gaps are recorded |
-| 2 — integration | **Adapters:** port initial task families using the shared public API. **Execution:** queue/drain/resources/recovery/logging. **Knowledge:** compiler, boards, recall and declaration scaffolding | Representative requests produce compatible receipts end to end; fake-worker tests pass; no divergent training implementations |
+| 2 — integration | **Adapters:** port initial task families using the shared public API. **Execution:** queue/drain/resources/recovery/logging. **Knowledge:** compiler, boards, recall, scaffolding and root guide draft | Representative requests produce compatible receipts end to end; fake-worker tests pass; no divergent training implementations |
 | 3 — verification | Independent review of parity/RNG/checkpoints; review import fidelity/retiering; coordinator reserves GPU capacity and runs the declared bounded calibration/pilot | Phase D adoption criteria pass; metrics, costs, failures/blockers and recommendations are published |
-| 4 — cutover | Coordinator reconciles old queues, integrates validated changes and enables the new workflow; agents finish docs/migrations in owned areas | One owner per request; useful agent workflow demonstrated; historical evidence preserved; rollback documented |
+| 4 — cutover | Coordinator reconciles old queues and enables the workflow; agents finish root guide/entrypoint links and migrations in owned areas | New engineer/agent completes the documented workflow; one owner per request; historical evidence preserved; rollback documented |
 
 Land small dependency-ordered changes rather than a single unreviewable rewrite.
 Task adapters consume the agreed API; if a formulation needs a new variable,
@@ -990,3 +1004,57 @@ coordinate one public API/central binding change, then update dependent adapters
 If an interface must change between waves, publish the delta before dependent
 work resumes. Maintain a single migration status/readout with completed TODOs,
 remaining blockers, validation results and links to each work package.
+
+## 11. Engineer and agent entrypoint: EXPERIMENTATION.md
+
+Use **`EXPERIMENTATION.md` in the repository root** as the single operational
+guide. Its title should be **"Experimentation with ParticleGAN Forge — read
+before running ideas"**, followed by a prominent brief for both engineers and
+agents. A new contributor should be able to act from this guide without reading
+this full design plan, prior chats, or an unrelated experiment's launcher.
+
+The opening brief should immediately establish the workflow: read the compiled
+memory and relevant leaderboard; state a hypothesis and changed factors; use the
+shared public API and learned MoG defaults; declare cloud/API exceptions; run the
+cheapest eligible gate within budget; record failures as well as passes; publish
+metrics, a comparison and a recommendation. Explain the fixed-seed screening
+policy and the distinct preregistered promotion stage. Point to the current view
+and protocol definitions for exact requirements rather than restating thresholds.
+
+Make it discoverable through the files agents and people actually read:
+
+- Put an **"Experiment work: read EXPERIMENTATION.md first"** pointer near the
+  top of root `AGENTS.md`, with links to the guide and compiled experiment memory.
+  Preserve the existing repo instructions; make the full workflow easy to find.
+- Add a visible **"Running experiments / proposing ideas"** link in `README.md`.
+  If other agent-specific entrypoints are introduced, give them the same pointer.
+  Do not maintain competing copies of the workflow in each agent file.
+- Have new-idea scaffolding and CLI help/status output point to the guide and
+  print the declaration, log and report paths relevant to the command.
+
+The guide must include:
+
+| Reader's question | Required operational content |
+| --- | --- |
+| What can I run in this checkout? | Current implementation/readiness status, environment setup, repo-root working directory, dependencies, and available CPU/GPU paths |
+| Has this been tried? | How to use recall, compiled memory, lineage and leaderboard filters; when an exact result is reusable and what makes a retry informative |
+| How do I add an idea? | A minimal declaration and small public-API example; choose a parent, state the hypothesis/delta, use shared defaults, and declare API/prior exceptions |
+| How do I try it cheaply? | A copy-paste path from new → plan → enqueue Tier 1 → inspect status/logs → board → readout/compile, with explicit budget and expected output files |
+| How do I operate the queue? | Submit versus drain, selecting available GPUs, coordinator ownership, central log filters, cancellation/recovery, and how to avoid duplicate jobs |
+| What do I change for a new test or variable? | The shared task adapter and authoritative public API/capability definition, central Forge binding, required `api_changes` declaration, and parity checks |
+| How do I move a test between tiers? | Edit one view assignment, validate/recompute the board, preserve pinned campaigns, and submit separately if new evidence is needed |
+| What does the result mean? | PASS/FAIL versus ERROR/BLOCKED/INCOMPLETE, live/EMA and MoG/cloud scope, raw evidence locations, costs, and next eligible work |
+| When is the experiment finished? | A readout template covering hypothesis, exact revision, tested scope, metrics/cost, comparison, failure/blocker explanation, recommendation and memory update |
+
+Keep the first runnable example small and self-contained; put advanced
+continuation, clock-free claims, promotion, and migration details behind links.
+Use the same examples in CLI checks and docs where practical so they do not
+drift. API/CLI changes must update affected examples and extension guidance in
+the same change. Defaults, schemas and gate values remain authoritative in code
+and config; the guide teaches how to use them.
+
+Draft the guide as the commands become available, clearly labeling unavailable
+steps until implemented. Turn on the read-first agent pointers with a usable
+guide, not an instruction to execute planned commands that do not exist. Root
+documentation and its fresh-checkout walkthrough are adoption deliverables,
+not an optional follow-up after the engine ships.
