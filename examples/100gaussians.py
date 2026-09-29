@@ -28,6 +28,10 @@ configuration; this example only exposes sizes, rates and schedule fields:
     60% of the network horizon, then cosine to the network floor; the prior
     follows the same shape over the full budget down to ``lr_floor``.
 
+The optional ``no_regularizer`` research ablation uses plain Adam without
+penalties, optimizer stabilization or training noise. It supports PacGAN
+``pack_size`` points per critic input; see docs/pacgan8-no-regularizer.md.
+
 Visualization:
   - At fixed intervals, we sample the SAME latent particles (fixed_first_n=True)
     and render a scatter plot of:
@@ -167,7 +171,19 @@ def train(
     use_training_api: bool = False,
     beta2: float = _RECIPE.betas[1],
     recipe_overrides: dict = None,
+    pack_size: int = 1,
+    no_regularizer: bool = False,
 ):
+    if type(pack_size) is not int or pack_size < 1:
+        raise ValueError("pack_size must be a positive integer")
+    if type(batch_size) is not int or batch_size < 1 or batch_size % pack_size:
+        raise ValueError("batch_size must be positive and divisible by pack_size")
+    if type(no_regularizer) is not bool:
+        raise ValueError("no_regularizer must be a boolean")
+    if pack_size > 1 and not no_regularizer:
+        raise ValueError("packing is supported only for the no_regularizer experiment")
+    if no_regularizer and (reg_coeff != 0 or lambda_ep != 0 or use_training_api):
+        raise ValueError("no_regularizer requires reg_coeff=0, lambda_ep=0 and use_training_api=False")
     if type(metric_interval) is not int or metric_interval <= 0:
         raise ValueError("metric_interval must be a positive integer")
     # Optional callbacks observe completed live/EMA updates. Their RNG use is
@@ -218,7 +234,7 @@ def train(
                  if prior_kind == "fresh_gaussian"
                  else recipe.make_prior(learnable=learnable_prior)).to(device)
     G = SimpleMLPGenerator(z_dim=z_dim).to(device)
-    D = SimpleMLPDiscriminator(in_dim=2, fourier=fourier).to(device)
+    D = SimpleMLPDiscriminator(in_dim=2, fourier=fourier, pack_size=pack_size).to(device)
 
     for m in list(G.modules()) + list(D.modules()):
         if isinstance(m, nn.Linear):
@@ -244,7 +260,12 @@ def train(
     else:
         # The recipe's optimizers do its step-time work in step() (currently
         # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
-        opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
+        if no_regularizer:
+            # Explicit research ablation: no K3P step guard, anchor or damping.
+            opt_G = torch.optim.Adam(G.parameters(), lr=lr, betas=recipe.betas, fused=fused_adam)
+            opt_D = torch.optim.Adam(D.parameters(), lr=lr * d_lr_mult, betas=recipe.betas, fused=fused_adam)
+        else:
+            opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # EMA copies of G + prior for snapshots/eval; the live weights orbit the
         # equilibrium, the averaged ones sit on it.
         ema_G = copy.deepcopy(G)
@@ -253,14 +274,17 @@ def train(
             p.requires_grad_(False)
 
         # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
-        vic_reg = recipe.make_prior_regularizer(weight=1.0)
+        vic_reg = None if no_regularizer else recipe.make_prior_regularizer(weight=1.0)
         gan_loss = recipe.make_loss()
         # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
-        penalty = recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
+        penalty = None if no_regularizer else recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
         # A separate prior optimizer (own LR/betas); its step() applies the
         # recipe's latent-table update (currently A2 latent-row damping).
         opt_prior = (
-            recipe.make_generator_optimizer(
+            torch.optim.Adam(
+                prior.parameters(), lr=lr * prior_lr_mult * particle_lr_multiplier,
+                betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
+            if no_regularizer and learnable_prior else recipe.make_generator_optimizer(
                 prior.parameters(), latent_table=prior.z,
                 lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
                 betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
@@ -286,10 +310,10 @@ def train(
     initial_raw_std = float(prior.z.detach().std()) if learnable_prior else None
     t_cover = None
     last_d_gap = None
+    metric_path = out_path / "metrics.jsonl"
+    metric_path.write_text("")
     if mog_metrics:
         from lib.mog_metrics import evaluate
-        metric_path = out_path / "metrics.jsonl"
-        metric_path.write_text("")
 
     # Initial snapshot (untrained model).
     if save_plots:
@@ -335,8 +359,8 @@ def train(
                     scale = prior_scale if opt is opt_prior else network
                     for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                         group["lr"] = base * scale
-                noisy_D.std = input_noise_std(recipe, global_step)
-                sigma_out = output_noise_std(recipe, global_step)
+                noisy_D.std = 0.0 if no_regularizer else input_noise_std(recipe, global_step)
+                sigma_out = 0.0 if no_regularizer else output_noise_std(recipe, global_step)
 
                 def generate(z):  # warmed-up generator output noise
                     x = G(z)
@@ -370,7 +394,8 @@ def train(
                 # Fourier D coexist with full mode coverage: it caps D's
                 # steepness where the data is. The regularizer recomputes its own
                 # graph internally, so neither batch needs requires_grad here.
-                loss_d = loss_d + penalty(noisy_D, x_real, x_fake)
+                if penalty is not None:
+                    loss_d = loss_d + penalty(noisy_D, x_real, x_fake)
 
                 opt_D.zero_grad()
                 loss_d.backward()
@@ -396,7 +421,7 @@ def train(
                 loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
 
                 ep_z = loss_gan.new_zeros(())
-                if learnable_prior:
+                if learnable_prior and vic_reg is not None:
                     unique_idx = torch.unique(idx)
                     raw = prior.z if num_particles <= 1024 else prior.z[unique_idx]
                     ep_z = vic_reg(raw)
@@ -422,13 +447,14 @@ def train(
             # Logging / snapshots
             # -------------------------
             metric_due = mog_metrics and ((global_step + 1) % log_interval == 0 or global_step + 1 == total_steps)
+            log_due = global_step % log_interval == 0 or global_step + 1 == total_steps
             callback_due = metric_callback is not None and ((global_step + 1) % metric_interval == 0 or global_step + 1 == total_steps)
-            maintenance = (global_step % log_interval == 0 or metric_due or callback_due or
+            maintenance = (log_due or metric_due or callback_due or
                            (global_step % snapshot_interval == 0 and global_step > 0))
             if maintenance:
                 synchronize()
                 train_seconds += time.perf_counter() - block_start
-            if global_step % log_interval == 0:
+            if log_due:
                 eval_gen.manual_seed(seed + 999)
                 modes, hq_frac = mode_coverage(
                     ema_G, ema_prior, device, sample_generator=eval_gen,
@@ -439,8 +465,14 @@ def train(
                     f"G_gan: {loss_gan.item():.4f} "
                     f"EP(z): {ep_z.item():.4f} "
                     f"modes: {modes}/100 "
-                    f"hq: {hq_frac:.3f}"
+                    f"hq: {hq_frac:.3f}", flush=True,
                 )
+                if not mog_metrics:
+                    row = dict(step=global_step + 1, modes=modes, hq=hq_frac,
+                               loss_d=loss_d.item(), loss_gan=loss_gan.item(),
+                               prior_regularization=ep_z.item(), train_seconds=train_seconds)
+                    with metric_path.open('a') as stream:
+                        stream.write(json.dumps(row) + '\n')
 
             if metric_due:
                 row, _, _, _ = evaluate(ema_G, ema_prior, 20000, seed, initial_raw_std, pass_criteria=mog_pass_criteria)
@@ -524,6 +556,8 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
     parser.add_argument("--fused_adam", action="store_true")
     parser.add_argument("--training-api", action="store_true", help="Use the public GANTrainer for the learned-particle recipe.")
     parser.add_argument("--fourier", type=int, default=2)
+    parser.add_argument("--pack_size", type=int, default=1, help="Points per PacGAN critic input.")
+    parser.add_argument("--no_regularizer", action="store_true", help="Plain Adam, no penalties, damping, guard or training noise; requires zero coefficients.")
     parser.add_argument("--ema_decay", type=float, default=_RECIPE.ema_decay)
     parser.add_argument(
         "--lr_floor",
@@ -565,6 +599,8 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         reg_every=args.reg_every,
         reg_sync_stats=args.reg_sync_stats, fused_adam=args.fused_adam,
         fourier=args.fourier,
+        pack_size=args.pack_size,
+        no_regularizer=args.no_regularizer,
         ema_decay=args.ema_decay,
         lr_floor=args.lr_floor,
         lr_anneal_start=args.lr_anneal_start,

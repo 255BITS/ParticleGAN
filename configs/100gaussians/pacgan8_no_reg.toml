@@ -1,5 +1,5 @@
-# Selected recipe, with benchmark architecture and logging settings.
-# Every value can be overridden; scripts retain their existing flat schema.
+# Single-seed PacGAN ablation: 2048 points = 256 independent 8-point packs.
+# Keep the default architecture, initialization, RpGAN loss and LR schedule.
 epochs = 7
 steps_per_epoch = 1000
 batch_size = 2048
@@ -11,16 +11,16 @@ prior_lr_mult = 2.0
 beta1 = 0.0
 beta2 = 0.999
 lambda_ep = 0.0
-reg_coeff = 1.0
+reg_coeff = 0.0
 reg_kappa = 1.0
 fourier = 2
-pack_size = 1
-no_regularizer = false
-save_plots = true
+pack_size = 8
+# Also bypass optimizer guards/damping and input/output training noise.
+no_regularizer = true
 ema_decay = 0.995
 lr_floor = 0.05
 lr_anneal_start = 0.6
-log_interval = 1000
+log_interval = 100
 snapshot_interval = 1000000
 seed = 1234
 prior_kind = "particles"
@@ -28,10 +28,10 @@ sigma_rel = 0.0
 standardize = false
 particle_lr_multiplier = 1.0
 mog_metrics = false
-# particle_beta1 and mog_pass_criteria default to None (TOML has no null value).
 reg_every = 1
-reg_sync_stats = true
+reg_sync_stats = false
 fused_adam = false
 final_samples = 20000
 save_checkpoint = true
-out_dir = "results/100gaussians/default"
+save_plots = false
+out_dir = "results/100gaussians/pacgan8_no_reg"

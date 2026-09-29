@@ -1,5 +1,8 @@
 # Running and reusing experiment grids
 
+The [PacGAN-8 no-regularizer experiment](pacgan8-no-regularizer.md) includes a
+single-run config, live log commands, and a metric leaderboard.
+
 Run from the repository root with the environment used for training:
 
 ```bash
