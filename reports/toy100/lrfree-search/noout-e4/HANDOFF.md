@@ -25,9 +25,17 @@
   tune `W` to reproduce the archived native results. An initial disjoint-block
   multiple-test proposal was withdrawn after the
   [oracle feasibility check](oracle-feasibility.md) showed inadequate power
-  under strong gradient correlation. A continuous empirical-Bayes row gain is
-  a possible research direction, but it has no calibrated implementation or
-  native result yet.
+  under strong gradient correlation. A continuous Gaussian scale-mixture gain
+  [failed](eb-preflight/RESULTS.md) its prospective synthetic test 119/150;
+  a distinct signed-location mixture [passed](location-preflight/RESULTS.md)
+  150/150, but only under oracle assumptions. Neither fixes A2 or has a
+  native result.
+- The user now permits table-position comparisons within the new controller.
+  Astra proposed a local-isolation mobility gain. Its
+  [synthetic preflight spec](geometry-preflight/SPEC.md) was written before
+  execution, but no geometry result exists yet. If resumed, implement the
+  fixture exactly as specified, select neighborhood size only by that fixture,
+  then decide whether the mechanism merits a frozen native candidate.
 - The 21 remaining quick/ring/custom tasks were submitted as
   `e4-noout-fullsuite` to `/ml2/hypergan/lrfree-20260926` with package hash
   `f69349eeda96…` and noisy evaluation; [suite-leaderboard.md](suite-leaderboard.md)

@@ -90,3 +90,23 @@ effect much larger than a weak persistent row gradient within 128 touches.
 The [CPU portability probe](portability.md) shows scale/rotation invariance
 on synthetic gradients but also exposes high-dimensional evidence delay and
 a single-flag hold on very small tables.
+
+## Synthetic replacement preflights
+
+The [Gaussian scale-mixture gain](eb-preflight/RESULTS.md) failed its
+prospective synthetic gate: **119/150** cases passed, with null-row mean gain
+as high as `.0962` against a `.05` limit. That design was rejected without a
+native trial.
+
+The distinct [signed-location mixture](location-preflight/RESULTS.md) passed
+**150/150** synthetic cases; its largest null mean gain was `.0316`. This is
+an oracle feasibility result, not a candidate: it knows the true gradient
+direction, effective correlation-adjusted sample information, and summary
+noise family. It has no online memory or native result, so A2 remains open.
+
+The user also permitted comparisons among learned particle positions. A
+[prospective latent-geometry preflight](geometry-preflight/SPEC.md) is written,
+but was not executed in this handoff. Its proposed local-isolation gain would
+avoid an evidence-window constant and added output reads; neighborhood size
+still needs synthetic calibration, and latent isolation may not correspond to
+generated-output error.
