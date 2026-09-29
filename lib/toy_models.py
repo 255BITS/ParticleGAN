@@ -53,6 +53,9 @@ class SimpleMLPDiscriminator(nn.Module):
     input dimension. MLPs are spectrally biased toward low frequencies, so
     without this D cannot resolve the sigma=0.03 mode structure until very
     late in training and sample sharpness stalls.
+
+    pack_size concatenates that many independent points before Fourier features
+    and the MLP, producing one logit per pack (PacGAN).
     """
 
     def __init__(
@@ -61,8 +64,13 @@ class SimpleMLPDiscriminator(nn.Module):
         hidden_dim: int = 128,
         n_hidden: int = 3,
         fourier: int = 2,
+        pack_size: int = 1,
     ) -> None:
         super().__init__()
+        if type(pack_size) is not int or pack_size < 1:
+            raise ValueError("pack_size must be a positive integer")
+        self.pack_size, self.in_dim = pack_size, in_dim
+        in_dim *= pack_size
         self.fourier = fourier
         dim = in_dim + (2 * fourier * in_dim if fourier > 0 else 0)
         if fourier > 0:
@@ -77,11 +85,17 @@ class SimpleMLPDiscriminator(nn.Module):
         self.net = nn.Sequential(*layers)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # PacGAN: one logit per concatenated pack of independent points.
+        # Real and fake batches are packed separately by their respective calls.
+        if self.pack_size != 1:
+            if x.ndim != 2 or x.shape[1] != self.in_dim or len(x) == 0 or len(x) % self.pack_size:
+                raise ValueError("packed critic needs (N, in_dim) with positive N divisible by pack_size")
+            x = x.reshape(len(x) // self.pack_size, self.pack_size * self.in_dim)
         h = x
         if self.fourier > 0:
             xf = x.unsqueeze(-1) * self.freqs  # (B, in_dim, K)
             h = torch.cat([h, torch.sin(xf).flatten(1), torch.cos(xf).flatten(1)], dim=1)
-        # Return shape (B,) for convenience.
+        # Return shape (B / pack_size,).
         return self.net(h).squeeze(-1)
 
 

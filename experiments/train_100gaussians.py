@@ -21,6 +21,9 @@ from lib.denoising_toy import GaussianGrid, grid_metrics
 DEFAULTS = {
     **recipe_defaults('100gaussians'),
     'fourier': 2,
+    'pack_size': 1,
+    'no_regularizer': False,
+    'save_plots': True,
     'log_interval': 1000,
     'snapshot_interval': 1000000,
     'seed': 1234,
@@ -90,7 +93,8 @@ def train(cfg):
             floor=grid_metrics(toy.sample(c,rng),c,toy,toy.sample(c,rng))
             final['unique_outputs']=len(torch.unique(x,dim=0))
         np.savez_compressed(out/'final_samples.npz',x=x.cpu().numpy(),c=c.cpu().numpy())
-    render(out,x.cpu().numpy(),c.cpu().numpy(),toy,None)
+    if cfg['save_plots']:
+        render(out,x.cpu().numpy(),c.cpu().numpy(),toy,None)
     if cfg['save_checkpoint']:
         torch.save({'config':cfg,'G':g.state_dict(),'prior':prior.state_dict()},out/'final.pt')
     import subprocess
