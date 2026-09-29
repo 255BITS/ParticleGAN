@@ -128,6 +128,19 @@ class _NamedNoise(NoisePolicy):
         self.output_sigma = output_noise_std(self.components.recipe, completed_steps)
         return self.input_sigma
 
+    def receipt(self):
+        receipt = super().receipt()
+        # The inherited policy's fixed seed offsets describe its own generators.
+        # This adapter replaces them with named streams; report the generators
+        # actually used, without drawing or resetting their current state.
+        receipt.update(
+            rng_derivation=self.components.context.streams.version,
+            d_noise_seed=self.input_stream.initial_seed(),
+            output_noise_seed=self.output_stream.initial_seed(),
+            output_noise_seed_offset=None,
+        )
+        return receipt
+
     @contextmanager
     def evaluation(self, step):
         streams = self.components.context.streams

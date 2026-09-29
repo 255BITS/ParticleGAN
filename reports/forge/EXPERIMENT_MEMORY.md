@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 176. Inventory coverage: complete. Unresolved import items: 6.
+Records: 179. Inventory coverage: complete. Unresolved import items: 6.
 
 ## Goal views
 
@@ -2835,6 +2835,54 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 [Evidence](../../reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json) · [Record](records/readout-4bd94051f203bbbb28a3e7a6.json)
 
+### forge-no-critic-penalty · readout-4e04059eb9f631a2e406447e
+
+**Scope:** current; scientific; revision `ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5`.
+
+Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 18.799; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.004034
+
+The ordinary fresh-checkout two_pole attempt failed its slope bound (grad_med1.2546037>1 despite mean_abs0.4477476>=0.30). The two subsequent registered diagnostics completed: unused_token_hold FAIL and learned-MoG ae_gan_hold PASS. The whole smoke decision remains FAIL; these diagnostics cannot qualify the candidate.
+
+**Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
+
+[Evidence](../../reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/result.json) · [Record](records/readout-4e04059eb9f631a2e406447e.json)
+
+### forge-onboarding-anchor-ablation · readout-8aacfe961f0e62b062e621fa
+
+**Scope:** calibration_diagnostic; scientific; revision `b10c31a0de40294be8966579fbe56e84e06e24dea1e3576e65b35148f610d350`.
+
+Removing the public critic EMA-anchor term may weaken short-horizon adversarial movement; the fixed CPU smoke gate should reject a harmful ablation before larger tests.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 16.383; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.004509
+
+All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.30; grad_med0.0767846<=1), unused_token_hold PASS, learned-MoG ae_gan_hold PASS. The entire smoke decision is FAIL; no quality-reference outcome is inferred.
+
+**Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
+
+[Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
+
+### k3p · readout-c723a88e5122f97011aabad9
+
+**Scope:** calibration_diagnostic; scientific; revision `5d60f405c372f33d8c96675c772fe97e10bb922cfe313d8e66722de9d32bc289`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 16.495; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0045745
+
+All three registered smoke cells completed at the frozen current cohort: two_pole FAIL (mean_abs0.1065209<0.30; grad_med0.0637243<=1), unused_token_hold PASS, learned-MoG ae_gan_hold PASS. The entire smoke decision is FAIL. Independent quality reference cells remain unmeasured.
+
+**Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
+
+[Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
+
 ## Unresolved imports and limitations
 
 - **structured_mapping_scope:** These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas. (2287 classified sources.)
@@ -2846,4 +2894,4 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `8f5e7737627bac8f9a1bca1d1aebcb6bfec67c7bf3bf70669808277495e9e600`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `15307f4b35ea4e8e40658f60ed24ae4dbf3e57c12de2e3e17ecbc9dd5f3a63dc`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

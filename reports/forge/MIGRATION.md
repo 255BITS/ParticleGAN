@@ -39,7 +39,7 @@ outside active pools and retain existing experiment requests.
 | Automation telemetry | Implemented; historical missing measurements remain unavailable | Unique paid costs, avoided work/reuse/errors/concurrency; process RSS, CUDA allocator peaks and instrumented phase timing |
 | Calibration diagnostics and robustness registration | Implemented; no production adoption claim | Registered diagnostic namespace, report-bound calibration, fixed promotion contract and forgery/retry tests |
 | Phase D calibration / bounded multi-GPU pilot | Historical calibration replayed; current calibration and GPU pilot pending | Adoption remains blocked; CPU pilot below |
-| Root-guide onboarding | Existing-worktree walkthrough complete; fresh exported checkout pending | `ONBOARDING.md`, real anchor-ablation CPU failure, stopped downstream work and concluded readout |
+| Root-guide onboarding | Fresh-checkout walkthrough complete | `FRESH_CHECKOUT.md`; penalty ablation rejected after 7.371 seconds, all remaining tasks unlaunched, concluded readout and zero reservations |
 | Cutover | Pending accepted calibration and reserved multi-GPU pilot | Existing launchers retained |
 
 No candidate is promoted by implementing the engine or by passing its tests.
@@ -81,14 +81,18 @@ diagnostic lanes may collect selected independent reference cells after a screen
 failure without granting qualification. No current profile has passed adoption.
 
 - [x] Refresh source coverage and compiled memory at checkpoint `3a3ef24a`: 7,252/7,252 paths, 176 records, no conflicts or pending readouts. Repeat after subsequent source additions.
-- [ ] Freeze a justified current-cohort control/profile and a bounded first
-  calibration selection; collect missing smoke evidence before deeper spending.
+- [x] Freeze three substantive controls and a bounded first current-cohort
+  diagnostic selection: all nine smoke cells measured; `CURRENT_SMOKE_READOUT.md`.
+  A metadata-only noise-receipt correction requires a replacement source cohort
+  before further execution; preserve the first batch unchanged.
 - [ ] Meet the unchanged acceptance criteria or revise the screen with a new
   declared profile and repeat its necessary calibration.
 - [ ] Reserve non-overlapping GPU capacity or one shared resource owner, then
   record the real multi-GPU/cancellation/restart pilot.
-- [ ] Complete a fresh exported-checkout walkthrough and reconcile actual legacy
-  consumers/queues before making Forge the default entrypoint.
+- [x] Complete a fresh-checkout walkthrough; `FRESH_CHECKOUT.md` binds the exact
+  source, commands, candidate, evidence and original readout.
+- [ ] Reconcile actual legacy consumers/queues before making Forge the default
+  entrypoint. The consumer inventory is complete; ownership is unchanged.
 
 No legacy process has been stopped or adopted by Forge. No robustness seed
 experiments have run; the registered promotion stage is conditional on a future

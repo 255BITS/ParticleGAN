@@ -976,7 +976,7 @@ building Forge itself stays in this one feature branch/PR.
   Stop new claims in an old queue and drain/reconcile its jobs before Forge owns
   those requests. Import pending work with deduplication; never let both schedulers
   independently launch it. Keep a rollback route using preserved requests/receipts.
-- [ ] **Publish the root guide and entrypoints.** Write `EXPERIMENTATION.md` with
+- [x] **Publish the root guide and entrypoints.** Write `EXPERIMENTATION.md` with
   a read-first agent brief, working quickstart, command examples, extension paths,
   and result/readout requirements. Add prominent pointers in root `AGENTS.md` and
   `README.md`; other agent-specific files should link to the same guide. Validate

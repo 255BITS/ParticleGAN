@@ -17,8 +17,9 @@ lineages and falsely accepts 1 of 3 independently failing lineages. The
 [alternate screen](reports/forge/calibration/quick-discriminator.md) pairs 8 of 10
 and falsely accepts 1 of 5. Both remain **adoption BLOCKED** under the
 [frozen criteria](configs/forge/calibration/criteria-v1.json); these retrospective
-fractions describe the saved subset, not population error rates. New learned-MoG
-calibration is still missing. Task declarations describe the
+fractions describe the saved subset, not population error rates. The [first current-cohort smoke batch](reports/forge/CURRENT_SMOKE_READOUT.md)
+measured all nine cheap cells, including three learned-MoG AE passes. Independent
+quality references are still missing, so current calibration remains blocked. Task declarations describe the
 intended coverage; actual execution also requires a compatible public-API
 adapter. Unsupported capabilities remain `BLOCKED` in the required denominator.
 A file existing in the catalog does not mean its adapter has been qualified.
@@ -270,6 +271,17 @@ Pinned older revisions retain recorded verdicts and costs in the board. A change
 live evaluator does not regrade or promote them.
 
 ## Maintain history and coverage
+
+The committed memory is readable immediately. Rebuilding historical imports also
+needs their pinned Git objects. If the importer reports a missing revision in a
+new clone, fetch the exact #155 source before rebuilding:
+
+```sh
+git fetch origin 0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b
+```
+
+Keep import gaps visible if a frozen source cannot be fetched; never replace it
+with the current branch by name.
 
 ```sh
 python -m experiments.forge history

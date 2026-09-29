@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from experiments.forge.behavior_adapters import FROZEN_HOST_RECIPE_FIELDS, HOSTS, run_behavior
+from experiments.forge.behavior_adapters import BehaviorComponents, FROZEN_HOST_RECIPE_FIELDS, HOSTS, run_behavior
 from experiments.forge.views import grade_result, load_tasks
 
 
@@ -16,6 +16,41 @@ def request():
     return dict(protocol=dict(seed=0), candidate=dict(recipe_overrides={
         "input_noise_std": 0., "output_noise_std": 0.,
     }))
+
+
+@pytest.mark.parametrize("noise_enabled", [False, True])
+def test_named_noise_receipt_reports_actual_streams_without_consuming_rng(noise_enabled):
+    candidate = dict(protocol=dict(seed=0), candidate={}) if noise_enabled else request()
+    components = BehaviorComponents(candidate, load_tasks(ROOT)["two_pole"])
+    noise = components.noise
+    streams = components.context.streams
+    # Exercise the ordinary sampling methods without constructing a model or
+    # optimizer. Labels must remain accurate after the generators have advanced.
+    noise.set_step(0)
+    noise.input(torch.zeros(12, 1))
+    noise.set_step(16)
+    noise.output(torch.zeros(12, 1), generator_step=True)
+    before = streams.audit()
+    global_before = torch.get_rng_state().clone()
+
+    applied = components.receipt()
+    assert components.receipt() == applied
+    assert streams.audit() == before
+    assert torch.equal(torch.get_rng_state(), global_before)
+    bindings = applied["rng"]["bindings"].values()
+    input_binding = next(row for row in bindings
+                         if (row["family"], row["component"], row["purpose"]) == ("noise", "critic", "input"))
+    output_binding = next(row for row in bindings
+                          if (row["family"], row["component"], row["purpose"]) == ("noise", "generator", "output"))
+    receipt = applied["noise"]
+    assert receipt["seed"] == applied["rng"]["seed"] == 0
+    assert receipt["rng_derivation"] == applied["rng"]["version"] == "forge-rng-v1"
+    assert receipt["d_noise_seed"] == input_binding["seed"] == noise.input_stream.initial_seed()
+    assert receipt["output_noise_seed"] == output_binding["seed"] == noise.output_stream.initial_seed()
+    assert receipt["output_noise_train_state_initial_sha256"] == output_binding["initial_state_sha256"]
+    assert receipt["output_noise_seed_offset"] is None
+    assert receipt["d_noise_seed"] != 901 and receipt["output_noise_seed"] != 1901
+    assert applied["public_optimizers"] == []
 
 
 @pytest.mark.parametrize("host", HOSTS)

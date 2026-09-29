@@ -273,7 +273,11 @@ def _pinned_row(group, records, queue_states):
             "retry_history": _retry_history(group),
             "task_results": [{k: r[k] for k in ("task_id", "gate_status", "raw_status", "cost", "reason", "metrics") if k in r}
                              for r in tasks],
-            "source": request.get("source"), "recorded_view": request.get("view"),
+            # The immutable request owns the full file manifest; repeating it in
+            # every goal board grows reports without adding comparison evidence.
+            "source": {**{k: request.get("source", {}).get(k) for k in ("digest", "origin_commit")},
+                       "path": str(Path(group[0]["source"]).with_name("request.json"))},
+            "recorded_view": request.get("view"),
             "qualification_reuse": False, "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
             **_lifecycle(request, group, records, queue_states),
             "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification."}

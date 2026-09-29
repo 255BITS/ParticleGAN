@@ -1,20 +1,20 @@
 {
   "attempt_outcomes": {
-    "completed": 2
+    "completed": 11
   },
   "component_timing": {
     "measured_attempts": 0,
     "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
     "seconds": {},
-    "unmeasured_attempts": 2
+    "unmeasured_attempts": 11
   },
   "concurrency": {
-    "mean_active_workers": null,
-    "measured_attempts": 0,
+    "mean_active_workers": 0.16702721530383763,
+    "measured_attempts": 9,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": null,
-    "peak_distinct_gpu_devices": null,
-    "peak_workers": null,
+    "observation_window_seconds": 309.39537143707275,
+    "peak_distinct_gpu_devices": 0,
+    "peak_workers": 1,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
   },
   "cost_to_qualify": {
@@ -26,25 +26,25 @@
     "unknown_cost_outcomes": 0
   },
   "cost_to_reject": {
-    "maximum_seconds": 5.974550719001854,
-    "mean_seconds": 5.614875356501216,
-    "measured_outcomes": 2,
-    "median_seconds": 5.614875356501216,
-    "outcomes": 2,
+    "maximum_seconds": 7.371452854000381,
+    "mean_seconds": 6.200401189000938,
+    "measured_outcomes": 3,
+    "median_seconds": 5.974550719001854,
+    "outcomes": 3,
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 2,
+    "denominator": 11,
     "fraction": 0.0,
     "numerator": 0
   },
-  "execution_jobs_avoided": 4,
+  "execution_jobs_avoided": 6,
   "flops": {
     "kind": "unavailable",
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 2,
+    "denominator": 11,
     "fraction": 0.0,
     "numerator": 0
   },
@@ -53,11 +53,45 @@
     "Avoided tasks are requested work left unattempted after a required scientific failure; cap-excluded work is not counted.",
     "Queue-only paid attempts contribute spend, but require durable certified receipts for outcome/timing metrics."
   ],
-  "memory": {},
+  "memory": {
+    "maximum_reaped_child_peak_rss_bytes": {
+      "maximum_bytes": 860909568,
+      "measured_attempts": 9
+    },
+    "process_peak_rss_bytes": {
+      "maximum_bytes": 730271744,
+      "measured_attempts": 9
+    },
+    "supervisor_peak_rss_bytes": {
+      "maximum_bytes": 615641088,
+      "measured_attempts": 9
+    }
+  },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
   "public_default_claim": false,
   "qualification_scope": "Recorded attainment under each frozen request view and cap; not a current-source regrade or accepted public-default claim.",
   "qualification_units": [
+    {
+      "attempt_ids": [
+        "fafc3da7cecf4b1780bbaedf66141092"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5",
+      "evidence_wall_seconds": 7.371452854000381,
+      "incremental_paid_seconds": 7.371452854000381,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "acde0787eb4675361a9ef0b8"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
     {
       "attempt_ids": [
         "c0178716dd3c4d5695b391919bf9ab81"
@@ -103,31 +137,33 @@
   ],
   "queue_available": true,
   "queue_locations": [
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge",
     "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
     "/home/martyn/dev/ParticleGAN/runs/forge"
   ],
   "receipt_issues": [],
   "requests_with_unavailable_cap": 0,
   "reuse": {
-    "evidence_uses": 2,
+    "evidence_uses": 3,
     "reused_evidence_uses": 0,
-    "submitted_execution_demands": 6,
-    "unique_evidence_jobs": 2
+    "submitted_execution_demands": 9,
+    "unique_evidence_jobs": 3
   },
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 2,
-    "known_wall_seconds": 11.229750713002431,
+    "attempts": 11,
+    "known_wall_seconds": 62.90737235400593,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 11.229750713002431
+    "wall_seconds": 62.90737235400593
   },
   "task_gate_counts": {
-    "FAIL": 2
+    "FAIL": 6,
+    "PASS": 5
   },
-  "tasks_avoided": 4,
+  "tasks_avoided": 6,
   "tier_rejections": {
-    "1": 2
+    "1": 3
   }
 }
