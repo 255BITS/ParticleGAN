@@ -1,5 +1,15 @@
 # LR-free GAN base search — September 27
 
+## Round 6: D-LR floors lead 13/16 honest (September 28)
+
+The [D-floor round report](dtrack-floors/README.md) archives five honest-generator
+candidates on the frozen cf1 base (paired-BD graft): codex α-.75 / α-1.0 prior-scale
+D floors, mine2 H2 BD-churn floor, and mine3 both2 max(prior-scale, churn-rate).
+Full-toy matrix (13 quick + ring/stationary + 3 natives): both2 **13/16**
+(11/13 quick, grid+rotated PASS, staggered FAIL centre .199), α-.75 12/16,
+h2 11/16, cf1 and α-1.0 10/16. Every variant trades rotated against staggered;
+nothing honest takes all three. img_intensity2 + img_bars4 fail lineage-wide.
+
 ## Native100 prior EMA relaxation result (September 28)
 
 The [prior EMA relaxation report](prior-ema-relaxation/README.md) archives one
