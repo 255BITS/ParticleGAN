@@ -25,7 +25,9 @@ def test_default_matches_every_recorded_winning_field():
     assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
     assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
             'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared
-    assert actual['name'] == 'k3p'
+    # Same recorded fields; the critic penalty is now KA2 (K3P's fixed anchor decay is
+    # replaced by reg_anchor_min_decay, so it is not a shared field).
+    assert actual['name'] == 'ka2'
     assert get_recipe() == Recipe()
 
 

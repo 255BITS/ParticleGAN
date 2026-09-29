@@ -5,6 +5,7 @@ from torch import nn
 
 from particlegan import GANLoss, GANTrainer, LinearSkipDiscriminator, Recipe, get_recipe
 from particlegan.grad_regularizers import GradientPenalty
+from particlegan.ka2 import KA2GradientPenalty
 from benchmarks.transfer_suite.linear_skip_refinement_research import ARCHITECTURES, constructor
 
 
@@ -22,7 +23,7 @@ def test_public_discriminator_preserves_research_initialization_and_cap_gradient
         with torch.no_grad():
             model.main.net[-1].weight.mul_(100.)
             model.skip.weight.fill_(2.)
-        loss = GradientPenalty(**get_recipe()._penalty_options())(model, real, fake)
+        loss = KA2GradientPenalty(**get_recipe()._penalty_options())(model, real, fake)
         assert loss > 0
         (loss + model(real).mean()).backward()
     assert torch.equal(reference(real), promoted(real))

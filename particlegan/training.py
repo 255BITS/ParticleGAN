@@ -49,7 +49,23 @@ class InputNoise(nn.Module):
 
 # Fields added to Recipe after checkpoints were written, with the value that
 # reproduces the older behaviour; a saved recipe without them is upgraded.
-_ADDED_RECIPE_FIELDS = {"continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
+def _normalized_recipe(recipe):
+    """A recipe dict in the form checkpoints are compared in: added fields filled with the values that
+    reproduce older behaviour, removed fixed choices dropped when they hold their only value, and the
+    construction-time ``initialization`` (superseded by saved weights) dropped."""
+    recipe = {**_ADDED_RECIPE_FIELDS, **recipe}
+    if all(recipe.get(key, value) == value for key, value in _REMOVED_RECIPE_FIELDS.items()):
+        recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
+    if recipe.get("initialization", None) in (None, "batch_feature_zero"):
+        recipe.pop("initialization", None)
+    return recipe
+
+
+# Recipe fields that once named a fixed choice, with the only value they could hold; a saved
+# recipe that records them with that value loads, any other value is rejected.
+_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
+                          "reg_method": "autograd"}
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
                         "critic_payoff_damping": True, "output_noise_mode": "fixed",
                         "lr_control": "mobility", "particle_birth_death": False,
                         "row_evidence_gate": False, "table_release_rule": "any",
@@ -606,13 +622,7 @@ class GANTrainer:
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 4:
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
-        if isinstance(saved_recipe, dict):
-            # Preserve pre-continuous / pre-amsgrad checkpoint compatibility.
-            saved_recipe = {**_ADDED_RECIPE_FIELDS, **saved_recipe}
-            # Construction-time init once lived on the recipe; saved weights supersede it.
-            if saved_recipe.get("initialization", None) in (None, "batch_feature_zero"):
-                saved_recipe.pop("initialization", None)
-        if not isinstance(saved_recipe, dict) or saved_recipe != expected["recipe"]:
+        if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:

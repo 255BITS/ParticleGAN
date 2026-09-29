@@ -8,6 +8,14 @@ from torch import nn
 from particlegan import get_recipe, learning_rate_scale
 
 
+@pytest.fixture(autouse=True)
+def _short_ka2_warmup(monkeypatch):
+    # The default KA2 penalty blends after WARMUP_CALLS (800) critic calls; shorten it so these
+    # short runs reach the blended phase where the anchor term acts.
+    import particlegan.ka2
+    monkeypatch.setattr(particlegan.ka2, "WARMUP_CALLS", 4)
+
+
 def _critic(seed=0):
     torch.manual_seed(seed)
     return nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 1)).double()

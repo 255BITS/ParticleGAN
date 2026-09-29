@@ -1,4 +1,5 @@
-"""GANTrainer / the recipe's optimizers and critic penalty: K3P as the default, EMA critic and checkpoints."""
+"""GANTrainer with the K3P critic (the pinned benchmarks LegacyRecipe; the package default is KA2, see
+test_ka2_default.py): optimizers, critic penalty, EMA critic and checkpoints."""
 import copy
 
 import pytest
@@ -7,13 +8,12 @@ from particlegan import (
     GANTrainer,
     InputNoise,
     NetworkLRTransition,
-    Recipe,
-    get_recipe,
     learning_rate_scale,
     learning_rate_scales,
     scale_learning_rates,
 )
-from particlegan.grad_regularizers import GradientPenalty
+from benchmarks.legacy.grad_regularizers import GradientPenalty
+from benchmarks.legacy.recipe import LegacyRecipe, get_recipe
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
 
@@ -39,9 +39,9 @@ def _reals(n, seed=1):
     return [torch.randn(8, 2, generator=rng) * 2 for _ in range(n)]
 
 
-def test_trainer_default_is_k3p():
+def test_legacy_recipe_is_k3p():
     recipe = get_recipe()
-    assert recipe == Recipe() and recipe.name == "k3p"
+    assert isinstance(recipe, LegacyRecipe) and recipe.name == "k3p" and recipe.reg_anchor_decay == 0.999
     trainer = _trainer()
     assert isinstance(trainer.penalty.regularizer, GradientPenalty)
     assert trainer.penalty.regularizer.lr_floor == trainer.recipe.network_lr_floor
@@ -98,7 +98,7 @@ def test_trainer_k3p_resume_bit_exact():
     _run(first, reals[:split])
     checkpoint = first.state_dict()
     opt_g_state, opt_d_state = (state["regularizer"] for state in checkpoint["optimizers"])
-    assert checkpoint["schema"] == 3 and opt_d_state["record"]["anchor_started"]
+    assert checkpoint["schema"] == 4 and opt_d_state["record"]["anchor_started"]
     assert opt_g_state["latent"]["state"]["started"] and "noise_generator" in checkpoint["streams"]
     resumed = _trainer(seed=5)  # different construction randomness; the checkpoint wins
     resumed.load_state_dict(checkpoint)
@@ -246,7 +246,7 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
     ref_opt = torch.optim.Adam(ref_d.parameters(), lr=1e-2, betas=recipe.betas)
     from particlegan.k3p import CriticSpikeGuard, RobustCriticAnchor
     ref_anchor = RobustCriticAnchor(ref_d, copy.deepcopy(ref_d).requires_grad_(False), decay=recipe.reg_anchor_decay)
-    ref = GradientPenalty(anchor=ref_anchor, **recipe._penalty_options())
+    ref = recipe.make_gradient_penalty(anchor=ref_anchor)  # the same pinned K3P options the recipe uses
     guard = CriticSpikeGuard(recipe.d_guard_ratio, recipe.d_guard_min_steps)
     labels, t = torch.tensor([0, 1, 2, 0, 1, 2, 0, 1]), torch.tensor([[0.3]])
     for step, real in enumerate(_reals(12), start=1):
