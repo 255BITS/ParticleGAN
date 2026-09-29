@@ -114,6 +114,9 @@ python -m experiments.forge run critic-anchor-v2 --through-tier 1 --gpus cpu
 Use `--device cpu` or `--device cuda` when planning/enqueuing; `run` infers the
 backend from `--gpus`. CUDA model, CPU model, and backend participate in evidence
 identity. Boards show distinct runtime cohorts, never a pooled CPU/CUDA pass.
+The compact board's Compute column names the requested cohort. CPU-only behavioral
+tasks still run on CPU in a CUDA-targeted request; use each attempt's device and
+cost receipt when comparing execution time.
 
 Use `--allow-sharing` only with an intentional resource policy when increasing
 workers per GPU. Training time under different hardware or contention is not a
