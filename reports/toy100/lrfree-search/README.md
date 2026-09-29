@@ -1,5 +1,20 @@
 # LR-free GAN base search — September 27
 
+## E4 gradient-only controller: frozen native 3/3, A2 violation (September 28–29)
+
+The [E4 report](noout-e4/README.md) archives the exact package, native
+receipts, source hashes, CPU checks, and full follow-up task suite. Its added
+row controller uses only the table's own gradients and stationarity evidence;
+the inherited birth/death reaction still compares generated and real samples
+to transfer mass. E4's **live** model passes all three frozen noisy native100
+gates at 7k and 14k with zero stream deviations. It is **diagnostic rather
+than a compliant solution**: its gradient window was selected after a native
+probe, its hold reuses the FDR threshold, and LR ×1.33 fails all three native
+tasks. The A2 issue needs a new prospectively specified estimator and fresh
+native tests; the existing result cannot be reclassified after the fact. Its
+completed 22-task matrix is **12 PASS, 2 FAIL, 8 ERROR**, with supplemental
+ring_shift and stationary both PASS; the custom errors are parity refusals.
+
 ## Round 6: D-LR floors lead 13/16 honest (September 28)
 
 The [D-floor round report](dtrack-floors/README.md) archives five honest-generator
