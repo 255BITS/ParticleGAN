@@ -1,4 +1,4 @@
-"""A small, checkpointable K3P training loop for unconditional particle GANs."""
+"""A checkpointable training loop using the current recipe formulation."""
 from copy import deepcopy
 import math
 
@@ -11,12 +11,16 @@ from .recipes import Recipe, learning_rate_scales
 
 def input_noise_std(recipe, completed_steps):
     """Critic input-noise std for the next update (peak, linear to 0)."""
+    if recipe.continuous_policy is not None:
+        return 0.0
     end = recipe.input_noise_anneal_end * recipe.total_steps
     return float(recipe.input_noise_std * max(0.0, 1.0 - completed_steps / end))
 
 
 def output_noise_std(recipe, completed_steps):
     """Generator output-noise std after ``completed_steps`` (linear warmup)."""
+    if recipe.continuous_policy is not None:
+        return float(recipe.output_noise_std)
     if recipe.output_noise_warmup == 0:
         return float(recipe.output_noise_std)
     return float(recipe.output_noise_std
@@ -43,8 +47,20 @@ class InputNoise(nn.Module):
         return self.critic(x + self.std * noise, *args, **kwargs)
 
 
+# Fields added to Recipe after checkpoints were written, with the value that
+# reproduces the older behaviour; a saved recipe without them is upgraded.
+_ADDED_RECIPE_FIELDS = {"continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
+                        "critic_payoff_damping": True, "output_noise_mode": "fixed",
+                        "lr_control": "mobility", "particle_birth_death": False,
+                        "row_evidence_gate": False, "table_release_rule": "any",
+                        "row_evidence_hot": True, "row_evidence_exclude": True, "row_evidence_hold": True,
+                        "birth_death_space": "data", "serve_average": 0.0, "reopen_signal": "data",
+                        "row_evidence_null": "theory", "birth_death_isolation": False,
+                        "birth_death_feature_scale": "none"}
+
+
 class GANTrainer:
-    """Own the K3P update mechanics; callers supply networks and real batches.
+    """Own the recipe's update mechanics; callers supply networks and real batches.
 
     Supports scalar, unconditional GAN recipes with a particle prior. Fresh real
     batches for the generator can be passed as ``generator_real`` tensors or
@@ -59,15 +75,26 @@ class GANTrainer:
     then a generator/prior step with output noise (the generator optimizer's
     ``step()`` applies A2 latent damping). The trainer allocates the EMA
     critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream;
-    fresh network weights follow ``recipe.initialization``. ``sample`` includes the output
-    noise.
+    fresh network weights follow ``recipe.initialization``. ``sample`` includes
+    the output noise (``output_sigma()``; see ``recipe.output_noise_mode``).
+
+    ``serial_backward=True`` executes the whole update with autograd
+    multithreading disabled. Use it for exact CUDA checkpoint continuation
+    with higher-order critic penalties. This changes gradient summation order
+    from the historical runtime, so it is explicit and checkpointed; loading
+    across execution modes is rejected. The caller's autograd mode is restored.
+    False inherits the caller's autograd setting; that ambient setting is not
+    captured by a legacy checkpoint. True enforces the serialized constraint.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
                  latent_generator=None, penalty_generator=None,
-                 optimizer_options=None, penalty_options=None):
+                 optimizer_options=None, penalty_options=None, serial_backward=False):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
+        if type(serial_backward) is not bool:
+            raise TypeError("serial_backward must be a boolean")
+        self.serial_backward = serial_backward
         if (recipe.model != "gan" or recipe.conditioning != "scalar"
                 or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
@@ -95,10 +122,18 @@ class GANTrainer:
                 seen.add(id(parameter))
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
-        # The recipe picks the regularization formulation (currently K3P); its
+        # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=deepcopy(self.D), **self.optimizer_options)
+        # output_noise_mode="learnable": trainer-owned log-sigma, its own generator
+        # optimizer group at G's base LR (scaled like G by the LR schedule/controller).
+        self.log_output_sigma = None
+        self.last_output_sigma = None  # std applied in the last update (host float)
+        if recipe.output_noise_mode == "learnable":
+            self.log_output_sigma = nn.Parameter(torch.full(
+                (), math.log(recipe.output_noise_std), device=self.device, dtype=self.dtype))
+            self.opt_g.add_param_group({"params": [self.log_output_sigma], "lr": recipe.lr})
         self.initial_lrs = [[group["lr"] for group in opt.param_groups]
                             for opt in (self.opt_g, self.opt_d)]
         prior_ids = {id(p) for p in self.prior.parameters()}
@@ -109,6 +144,7 @@ class GANTrainer:
         self.ema_G, self.ema_prior = deepcopy(self.G).eval(), deepcopy(self.prior).eval()
         for module in (self.ema_G, self.ema_prior):
             module.requires_grad_(False)
+        self._fast = None        # serve_average: the training iterate while the averaged model is swapped into the served parameters
         self.latent_generator = self._stream(latent_generator, seed + 2)
         # Reserved stream (the penalty draws no randomness); kept so the
         # checkpoint schema and the other streams' seeds stay unchanged.
@@ -118,6 +154,29 @@ class GANTrainer:
         self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         self.completed_steps = 0
+        from .continuous import DataDriftController
+        self.controller = (None if recipe.continuous_policy is None else
+                           DataDriftController(recipe.continuous_policy))
+        if self.controller is not None:
+            self.controller.observe_prior(self.prior)
+        if recipe.continuous_policy in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+            self.penalty.regularizer.continuous_controller = self.controller
+        # lr_control="stationarity": per-group settling tests own the LR scale.
+        self.lr_settle = None
+        if recipe.lr_control == "stationarity":
+            from .continuous import StationarityLR
+            self.lr_settle = StationarityLR((self.opt_g, self.opt_d), prior_param=self.prior.z,
+                                            release_rule=recipe.table_release_rule)
+        # particle_birth_death: Fisher-Rao moves on the table (private stream seed + 6).
+        self.birth_death = None
+        if recipe.particle_birth_death:
+            from .birth_death import ParticleBirthDeath
+            self.birth_death = ParticleBirthDeath(self, seed + 6)
+        # row_evidence_gate: per-row force-persistence evidence from the table's own gradients (no data comparison).
+        self.row_evidence = None
+        if recipe.row_evidence_gate:
+            from .row_evidence import RowEvidence
+            self.row_evidence = RowEvidence(self.prior.z, null=recipe.row_evidence_null)
 
     @property
     def latent_damping(self):
@@ -129,7 +188,7 @@ class GANTrainer:
 
     @property
     def ema_D(self):
-        """The trainer-owned EMA critic (K3P anchor)."""
+        """The trainer-owned EMA critic used by the anchor penalty."""
         return self.opt_d.ema_critic
 
     def _stream(self, generator, seed):
@@ -149,9 +208,52 @@ class GANTrainer:
             raise ValueError(f"{name} must be a nonempty batch on the model device and dtype")
         return batch.detach()
 
-    @staticmethod
-    def _generate(model, latent, sigma, stream):
+    def _output_sigma(self, base, detach=True):
+        """Output-noise std from the fixed schedule value ``base`` and the recipe's mode.
+
+        fixed: ``base``; mobility: ``base * controller.mobility`` (the mobility
+        behind the current LR scales); learnable: ``max(exp(log_output_sigma),
+        base * settle)`` where ``settle`` is the settledness of the generator
+        and prior LR scales owned by the stationarity test: 1 while any G/prior
+        scale is still open (s>1/64, i.e. not yet cut to a settled floor) and
+        relaxing toward the controller mobility only once every G/prior group
+        has settled. The state-driven floor keeps per-mode width near the data
+        scale while centres are still moving; it relaxes automatically once the
+        state test declares the table settled, so the learned width can refine
+        late. No metric, accuracy, or coverage signal enters. A zero ``base``
+        always means no noise.
+        """
+        mode = self.recipe.output_noise_mode
+        if mode == "fixed":
+            return base
+        if mode == "mobility":
+            return base * self.controller.mobility
+        if not base:
+            return 0.
+        sigma = self.log_output_sigma.exp()
+        settle = self.controller.mobility
+        lr_settle = getattr(self, "lr_settle", None)
+        testers = getattr(lr_settle, "testers", None)
+        if testers:
+            try:
+                scales = [t.s for t in testers[0]]
+                if scales and all(s is not None for s in scales):
+                    settle = 1.0 if any(s > 1. / 64. for s in scales) else self.controller.mobility
+            except Exception:
+                pass
+        floor = base * settle
+        sigma = torch.maximum(sigma, torch.as_tensor(floor, device=sigma.device, dtype=sigma.dtype))
+        return float(sigma.detach()) if detach else sigma
+
+    def output_sigma(self):
+        """The output-noise std that ``sample`` currently adds (a float)."""
+        return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps)))
+
+    def _generate(self, model, latent, sigma, stream):
         """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+        if self.controller is not None:
+            prior = self.ema_prior if model is self.ema_G else self.prior
+            latent = self.controller.perturb_latent(latent, stream, prior, record=stream is self.noise_generator)
         y = model(latent)
         if sigma == 0:
             return y
@@ -164,10 +266,65 @@ class GANTrainer:
         loss pairs fakes with ``generator_real`` (a tensor or a callable;
         default: ``real``). ``collect_stats`` additionally
         returns the gradient penalty's synchronized diagnostic dictionary
-        (including K3P's blend weight ``s``).
+        (including the penalty's blend weight ``s``).
         """
+        if self.serial_backward:
+            # Higher-order critic gradients otherwise mix nodes created on
+            # different autograd threads. Their thread-local sequence numbers
+            # can reorder floating-point accumulation after a process restart.
+            # Scope this to the complete update and restore the caller's mode.
+            with torch.autograd.set_multithreading_enabled(False):
+                return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
+        return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
+
+    def _serve_release(self):
+        """Put the training iterate back into the live parameters (the served average was swapped in between steps)."""
+        if self._fast is None:
+            return
+        with torch.no_grad():
+            for live, fast in zip(self._served_parameters(), self._fast):
+                live.copy_(fast)
+        self._fast = None
+
+    def _serve_settled(self):
+        """The averaged model is served only while the table's own stationarity test stands at STATIONARY: its last decisive verdict is a
+        descent (not a drift or a release), i.e. the rows are no longer migrating. Before that, and after a release, the fast iterate is
+        served (a position average of rows that still move between modes blurs them; measured on the small-table toys)."""
+        tester = self._table_tester()
+        return tester is not None and getattr(tester, "last_decisive", 0) == -1
+
+    def _serve_apply(self):
+        """Swap the averaged model into the live parameters (what samples, evaluations and the harness read)."""
+        if self.recipe.serve_average <= 0:
+            return
+        self._serve_release()
+        if not self._serve_settled():
+            return
+        live = self._served_parameters()
+        with torch.no_grad():
+            self._fast = [p.detach().clone() for p in live]
+            for p, avg in zip(live, self._served_averages()):
+                p.copy_(avg)
+
+    def _served_parameters(self):
+        return [*self.G.parameters(), *self.prior.parameters()]
+
+    def _served_averages(self):
+        return [*self.ema_G.parameters(), *self.ema_prior.parameters()]
+
+    def _average_rate(self):
+        """Per-step weight of the newest iterate in the averaged model: the fixed EMA constant, or (serve_average = m > 0) one over m
+        table-tester blocks measured in steps (b / s of the table's stationarity test), i.e. a window in the table's own intrinsic time."""
+        if self.recipe.serve_average > 0:
+            tester = self._table_tester()
+            if tester is not None and tester.s is not None and tester.b:
+                return min(1.0, float(tester.s) / (self.recipe.serve_average * float(tester.b)))
+        return 1.0 - self.recipe.ema_decay
+
+    def _step(self, real, *, generator_real=None, collect_stats=False):
+        self._serve_release()
         recipe = self.recipe
-        if self.completed_steps >= recipe.total_steps:
+        if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
         if generator_real is not None and not callable(generator_real):
@@ -176,12 +333,54 @@ class GANTrainer:
                 raise ValueError("generator_real must match the real sample shape")
             if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-        network, prior_scale = learning_rate_scales(self.completed_steps, recipe)
-        for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
-            for group, rate, role in zip(optimizer.param_groups, rates, roles):
-                group["lr"] = rate * (prior_scale if role == "prior" else network)
+        if self.controller is not None:
+            self.controller.observe_prior(self.prior)
+            self.controller.observe_game(self.penalty.regularizer.record)
+        if self.birth_death is not None:
+            self.birth_death.observe_real(real)
+        if self.lr_settle is None:
+            network, prior_scale = (learning_rate_scales(self.completed_steps, recipe)
+                                    if self.controller is None else self.controller.observe_real(real))
+            for optimizer, rates, roles in zip((self.opt_g, self.opt_d), self.initial_lrs, self.roles):
+                for group, rate, role in zip(optimizer.param_groups, rates, roles):
+                    group["lr"] = rate * (prior_scale if role == "prior" else network)
+        else:
+            # Mobility/data_score still update (output_noise_mode="mobility", reopen);
+            # the LR is base * s per group (D also gets the payoff damping below).
+            if recipe.reopen_signal == "data":
+                self.controller.observe_real(real)
+                reopen = self.controller.data_score > 3.
+            else:
+                self.controller.observe_blind()
+                reopen = False
+            for group, tester in self.lr_settle.pairs((self.opt_g, self.opt_d)):
+                if reopen:
+                    tester.restart(group["params"], reopen=True)
+                else:
+                    tester.begin(group["params"])
+            prior_scales = [tester.s for group, tester, role in
+                            zip(self.opt_g.param_groups, self.lr_settle.testers[0], self.roles[0])
+                            if role == "prior" and tester is not None and tester.s is not None]
+            prior_scale = max(prior_scales) if prior_scales else None
+            for index, (optimizer, rates, testers) in enumerate(
+                    zip((self.opt_g, self.opt_d), self.initial_lrs, self.lr_settle.testers)):
+                for group, rate, tester in zip(optimizer.param_groups, rates, testers):
+                    own_scale = 1. if tester is None else tester.s
+                    if index == 1 and prior_scale is not None:
+                        own_scale = max(own_scale, 0.75 * prior_scale)
+                    group["lr"] = rate * own_scale
+        if self.controller is not None and recipe.critic_payoff_damping:
+            for group in self.opt_d.param_groups:
+                group["lr"] *= self.controller.critic_scale()
+        stray_flags, stray_hold, table_tester = self._stray_gate()
+        if table_tester is not None and hasattr(table_tester, "hold_descent"):
+            table_tester.exclude = stray_flags if self.recipe.row_evidence_exclude else None
+            table_tester.hold_descent = stray_hold
+        if stray_hold:
+            self.row_evidence.counters["hold_steps"] = self.row_evidence.counters.get("hold_steps", 0) + 1
         sigma_in = input_noise_std(recipe, self.completed_steps)
-        sigma_out = output_noise_std(recipe, self.completed_steps)
+        sigma_out = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
+        self.last_output_sigma = float(sigma_out.detach() if torch.is_tensor(sigma_out) else sigma_out)
         noise = self.noise_generator
         critic = self._noisy_D
         critic.std = sigma_in
@@ -189,7 +388,11 @@ class GANTrainer:
         self.G.eval()
         with torch.no_grad():
             latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
+            if self.controller is not None:
+                self.controller.observe_support(self.G, self.D, latent, sigma_out, noise)
             fake = self._generate(self.G, latent, sigma_out, noise)
+        if self.controller is not None:
+            self.controller.observe_pair(real, fake)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
         penalty = self.penalty(critic, real, fake)
@@ -198,6 +401,8 @@ class GANTrainer:
         self.opt_d.zero_grad()
         loss_d.backward()
         self.opt_d.step()
+        if self.lr_settle is not None:
+            self._settle_observe(1)
 
         self.D.eval()
         self.G.train()
@@ -221,17 +426,49 @@ class GANTrainer:
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             self.opt_g.zero_grad()
             loss_g.backward()
+            if self.controller is not None:
+                self.controller.observe_generator(self.G, loss_gan.detach(), (loss_d - penalty).detach())
+            hot = None
+            if self.row_evidence is not None:
+                self.row_evidence.update(self.prior.z.grad)
+                if (self.recipe.row_evidence_hot and stray_flags is not None and table_tester is not None
+                        and table_tester.s < 1.0 and bool(stray_flags.any())):
+                    hot = stray_flags
+                    z_before = self.prior.z.detach().clone()
             self.opt_g.step()
+            if hot is not None:
+                # Unbalanced rows keep the full table rate: undo the group's scale s on their step.
+                with torch.no_grad():
+                    z = self.prior.z
+                    z[hot] = z_before[hot] + (z[hot] - z_before[hot]) * (1.0 / table_tester.s)
+                self.row_evidence.counters["hot_row_steps"] = self.row_evidence.counters.get("hot_row_steps", 0) + int(hot.sum())
+            if self.lr_settle is not None:
+                self._settle_observe(0)
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
         with torch.no_grad():
+            rate = self._average_rate() if recipe.serve_average > 0 else None
             for target, source in ((self.ema_G, self.G), (self.ema_prior, self.prior)):
                 for averaged, current in zip(target.parameters(), source.parameters()):
-                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                    if rate is None:
+                        averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                    else:
+                        averaged.mul_(1.0 - rate).add_(current, alpha=rate)
                 for averaged, current in zip(target.buffers(), source.buffers()):
                     averaged.copy_(current)
+        if self.birth_death is not None:
+            event = self.birth_death.maybe_apply(self, self.last_output_sigma)
+            if event and event.get("moves") and self.lr_settle is not None:
+                # A teleport is not gradient movement: re-anchor the moved rows of the prior
+                # tester's current block (restart() if the group is not the bare table).
+                for group, tester, role in zip(self.opt_g.param_groups, self.lr_settle.testers[0], self.roles[0]):
+                    if role == "prior" and tester is not None:
+                        tester.rebase(group["params"], self.birth_death.moved_rows)
+                if self.row_evidence is not None:
+                    self.row_evidence.reset(self.birth_death.moved_rows)
         self.completed_steps += 1
+        self._serve_apply()
         result = {key: value.detach() for key, value in
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
@@ -239,6 +476,34 @@ class GANTrainer:
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result
+
+    def _table_tester(self):
+        """The stationarity tester of the particle table group (None without lr_control="stationarity")."""
+        if self.lr_settle is None:
+            return None
+        for tester, role in zip(self.lr_settle.testers[0], self.roles[0]):
+            if role == "prior" and tester is not None:
+                return tester
+        return None
+
+    def _stray_gate(self):
+        """Unbalanced-row gate for this step -> (flags, hold, tester).
+
+        Rows whose own gradient history has a significant mean (row_evidence.py, BH at the FDR level Q over rows)
+        are still being pushed: while more than Q of the table is flagged the table is in transport and descent is
+        held (flags=None). Below that the flagged rows keep the full table rate and do not vote in the table's
+        stationarity statistic, so the settled bulk can anneal while they can neither freeze nor re-open it."""
+        ev, tester = self.row_evidence, self._table_tester()
+        if ev is None or tester is None or not ev.valid:
+            return None, False, tester
+        hold = ev.fraction > ev.Q and self.recipe.row_evidence_hold
+        return (None if hold else ev.flag), hold, tester
+
+    def _settle_observe(self, index):
+        optimizer = (self.opt_g, self.opt_d)[index]
+        for group, rate, tester in zip(optimizer.param_groups, self.initial_lrs[index], self.lr_settle.testers[index]):
+            if tester is not None:
+                tester.observe(group["params"], group["lr"] / rate, step=self.completed_steps + 1)
 
     @torch.no_grad()
     def sample(self, n, *, ema=False, generator=None):
@@ -257,7 +522,8 @@ class GANTrainer:
             prior.eval()
             with torch.random.fork_rng(devices=devices):
                 latent, _ = prior.sample(n, generator=stream)
-                return self._generate(model, latent, output_noise_std(self.recipe, self.completed_steps), stream)
+                return self._generate(model, latent,
+                                      self._output_sigma(output_noise_std(self.recipe, self.completed_steps)), stream)
         finally:
             for module, flag in modes:
                 module.training = flag
@@ -265,10 +531,21 @@ class GANTrainer:
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
 
     def state_dict(self):
-        """Return an independent checkpoint; save the caller's data cursor too."""
+        """Return an independent checkpoint (the training iterate; the served average is derived); save the caller's data cursor too."""
+        swapped = self._fast is not None
+        self._serve_release()
+        try:
+            return self._state_dict()
+        finally:
+            if swapped:
+                self._serve_apply()
+
+    def _state_dict(self):
         names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
-            "schema": 3, "recipe": self.recipe.to_dict(),
+            **({"serial_backward": True} if self.serial_backward else {}),
+            **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
+            "schema": 4, "recipe": self.recipe.to_dict(),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
             "models": {name: getattr(self, name).state_dict() for name in names},
@@ -279,27 +556,48 @@ class GANTrainer:
             "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
             "cpu_rng": torch.get_rng_state(),
             "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
+            **({"output_noise": {"log_sigma": self.log_output_sigma.detach()}}
+               if self.log_output_sigma is not None else {}),
+            **({"lr_settle": self.lr_settle.state_dict()} if self.lr_settle is not None else {}),
+            **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
+            **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
         })
 
     def load_state_dict(self, state):
+        """Restore a compatible checkpoint, including global PyTorch RNG state (a rejected checkpoint leaves the served model served)."""
+        served = self._fast is not None
+        try:
+            return self._load_state_dict(state)
+        except Exception:
+            if served and self._fast is None:
+                self._serve_apply()
+            raise
+
+    def _load_state_dict(self, state):
         """Restore a compatible checkpoint, including global PyTorch RNG state.
 
         Recreate the same parameter freezing before loading. Validation of both
-        optimizers (which carry the K3P state) and all RNG states precedes any
-        mutation of the live trainer. Schema-2 checkpoints (separate K3P state)
-        are upgraded; schema-1 checkpoints (an older formulation) are rejected.
+        optimizers (which carry the KA2 state) and all RNG states precedes any
+        mutation of the live trainer. Earlier formulations cannot be resumed
+        under KA2; use the release that wrote those checkpoints.
         """
-        if isinstance(state, dict) and state.get("schema") == 1:
-            raise ValueError("schema-1 GANTrainer checkpoints come from an older formulation and cannot "
-                             "resume under K3P; retrain, or pin the old release to continue them")
-        if isinstance(state, dict) and state.get("schema") == 2:
-            state = _upgrade_schema_2(state)
-        if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
-            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
+        self._serve_release()
+        if isinstance(state, dict) and state.get("schema") in (1, 2, 3):
+            raise ValueError(
+                f"schema-{state['schema']} GANTrainer checkpoints come from an older formulation "
+                "and cannot resume under KA2; pin the release that wrote the checkpoint "
+                "(0.8.0 for K3P), or start a new run")
         expected = self.state_dict()
-        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
+        if isinstance(state, dict) and (
+                type(state.get("serial_backward", False)) is not bool
+                or state.get("serial_backward", False) != self.serial_backward):
+            raise ValueError("checkpoint serial_backward execution mode does not match trainer")
+        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 4:
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
+        if isinstance(saved_recipe, dict):
+            # Preserve pre-continuous / pre-amsgrad checkpoint compatibility.
+            saved_recipe = {**_ADDED_RECIPE_FIELDS, **saved_recipe}
         if (not isinstance(saved_recipe, dict)
                 or saved_recipe.get("initialization") not in (None, "batch_feature_zero")
                 or {k: v for k, v in saved_recipe.items() if k != "initialization"}
@@ -310,7 +608,7 @@ class GANTrainer:
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
         steps = state["completed_steps"]
-        if type(steps) is not int or not 0 <= steps <= self.recipe.total_steps:
+        if type(steps) is not int or steps < 0 or (self.recipe.total_steps is not None and steps > self.recipe.total_steps):
             raise ValueError("invalid checkpoint step count")
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
@@ -344,10 +642,34 @@ class GANTrainer:
                 raise ValueError("CPU trainer cannot load CUDA RNG state")
         except (TypeError, ValueError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid checkpoint RNG state") from error
+        if self.log_output_sigma is not None:
+            value = state["output_noise"].get("log_sigma") if isinstance(state["output_noise"], dict) else None
+            if (not isinstance(value, torch.Tensor) or value.shape != self.log_output_sigma.shape
+                    or value.dtype != self.log_output_sigma.dtype or not torch.isfinite(value).all()):
+                raise ValueError("invalid checkpoint learnable output noise")
+        if self.controller is not None:
+            deepcopy(self.controller).load_state_dict(state["controller"])
+        if self.lr_settle is not None:
+            deepcopy(self.lr_settle).load_state_dict(state["lr_settle"], (self.opt_g, self.opt_d))
+        if self.birth_death is not None:
+            self.birth_death.check_state(state["birth_death"])
+        if self.row_evidence is not None:
+            self.row_evidence.check_state(state["row_evidence"])
         for name, values in state["models"].items():
             getattr(self, name).load_state_dict(values)
+        if self.log_output_sigma is not None:
+            with torch.no_grad():
+                self.log_output_sigma.copy_(state["output_noise"]["log_sigma"])
         for optimizer, values in zip((self.opt_g, self.opt_d), state["optimizers"]):
             optimizer.load_state_dict(deepcopy(values))
+        if self.controller is not None:
+            self.controller.load_state_dict(state["controller"])
+        if self.lr_settle is not None:
+            self.lr_settle.load_state_dict(state["lr_settle"], (self.opt_g, self.opt_d))
+        if self.birth_death is not None:
+            self.birth_death.load_state_dict(state["birth_death"])
+        if self.row_evidence is not None:
+            self.row_evidence.load_state_dict(state["row_evidence"])
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         self.recipe = self.recipe.replace(initialization=saved_recipe.get("initialization"))
         for name, value in state["streams"].items():
@@ -355,35 +677,4 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
-
-
-# Recipe fields that once named a fixed choice (with the value that choice
-# had), and fields added since (with their defaults).
-_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
-                          "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
-                        "initialization": None}
-
-
-def _upgrade_recipe_fields(recipe):
-    """Drop removed recipe fields that held the only supported value; add new defaults."""
-    if any(key in recipe and recipe[key] != value for key, value in _REMOVED_RECIPE_FIELDS.items()):
-        return recipe  # another formulation: left as is, so the recipe check rejects it
-    recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
-    return {**_ADDED_RECIPE_FIELDS, **recipe}
-
-
-def _upgrade_schema_2(state):
-    """Move a schema-2 checkpoint's separate K3P state into its optimizer states."""
-    try:
-        state = dict(state)
-        k3p = state.pop("k3p")
-        opt_g, opt_d = state["optimizers"]
-        critic = k3p["critic"]
-        opt_g = {**opt_g, "regularizer": {"latent": k3p["latent"], "direct": None}}
-        opt_d = {**opt_d, "regularizer": {"record": critic["penalty"], "ema": critic["ema"],
-                                          "guard": critic["guard"]}}
-    except (KeyError, TypeError, ValueError) as error:
-        raise ValueError("invalid checkpoint K3P state") from error
-    state["optimizers"], state["schema"] = [opt_g, opt_d], 3
-    return state
+        self._serve_apply()

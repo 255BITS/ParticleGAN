@@ -4,6 +4,7 @@ Networks and devices belong to the caller; GANTrainer optionally owns updates.
 """
 from .autoencoder import ParticleEncoding, particle_ae, particle_vae
 from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
+from .continuous import DataDriftController
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
@@ -25,6 +26,6 @@ __all__ = [
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
-    "Recipe", "NetworkLRTransition", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
+    "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
 ]
