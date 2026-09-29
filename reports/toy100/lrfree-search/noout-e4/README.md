@@ -87,3 +87,6 @@ An [oracle feasibility check](oracle-feasibility.md) rejects an initially
 proposed disjoint-block, empirical-tail replacement before GPU training:
 under strong gradient correlation, even a known-direction test needs an
 effect much larger than a weak persistent row gradient within 128 touches.
+The [CPU portability probe](portability.md) shows scale/rotation invariance
+on synthetic gradients but also exposes high-dimensional evidence delay and
+a single-flag hold on very small tables.
