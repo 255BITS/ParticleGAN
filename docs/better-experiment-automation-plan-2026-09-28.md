@@ -22,6 +22,14 @@ Decisions from this discussion:
 
 - Three qualification tiers: **smoke, quality, endurance**. Higher tiers require
   lower-tier passes for the same candidate and goal.
+- Tier placement is a small configuration edit, not a refactor of an experiment.
+  Keep task/evaluator definitions independent of each view's tier assignments.
+- New experiments assume **learned MoG particle priors**. Tests that require
+  particle clouds explicitly declare `sigma=0`; they are a named exception.
+- All ideas and experiments use one shared, extensible API. Centralize common
+  code and defaults; declare formulation-specific API additions in one place.
+- Dogfood ParticleGAN's public API wherever possible. Forge coordinates
+  experiments; reusable formulation capabilities belong in the package.
 - Multiple leaderboard views over shared evidence. Start with **discriminator
   stability**; monotonically decreasing metrics are a **future** view, with no
   monotonicity gate in the first release.
@@ -149,18 +157,100 @@ creates a new candidate revision with explicit lineage. A controlled rerun for a
 broken execution remains an attempt of that revision, with its reason recorded.
 
 Agents may propose new views or tasks, but cannot weaken an active protocol to
-turn their own failure into a pass. Such changes create a new protocol version
-with a rationale and calibration evidence.
+turn their own failure into a pass. Policy edits create a new view revision;
+changes to task execution or scoring create a new task/protocol revision. Record
+the rationale and relevant calibration without requiring code changes for retiering.
 
-Use one candidate adapter contract for recipe/architecture changes and optional
-optimizer, regularizer, latent, response, and checkpoint hooks. Task adapters own
-the frozen host and evaluator. Scaffolding should inherit a complete parent
-adapter, so an agent implements its changed mechanism once and participates in
-all compatible tasks. Incompatible tasks receive an explicit applicability
-decision; they are not silently skipped to improve a score. Bind each candidate
-to an immutable source snapshot when enqueued, including any uncommitted changes
-from its idea worktree, so later edits cannot change queued or running experiments.
-Worktree isolation alone does not freeze executable source.
+### One shared API, with explicit extensions
+
+Use one candidate/task API across ideas and experiments, backed by the package's
+recipe, prior, optimizer, and trainer/component APIs. The common runtime owns
+construction, initialization, RNG streams, training/update orchestration,
+checkpoints, result recording, and logging. Task adapters supply task data,
+objectives, resource declarations, and evaluators; formulation code supplies the
+changed mechanism. A new idea should not need its own launcher or training loop.
+
+**Dogfood the public API:** prefer `Recipe` factories and `GANTrainer` where
+supported, and the public component API for capabilities the trainer does not
+yet expose. Keep Forge's API a thin experiment contract around those interfaces,
+not a parallel implementation of losses, prior sampling, optimizers, or updates.
+Put reusable missing capabilities into the public package API with docs and
+tests; all experiment adapters then consume that same implementation. In
+particular, shared MoG support should exercise the public prior and training
+path, not introduce a private Forge-only MoG trainer.
+
+Declare `execution_path` (`public_trainer`, `public_components`, or
+`archived_replay`) and API exceptions in each receipt. Custom host loops must
+bind shared public components and verify parity where a reference path exists.
+Archived private hooks can reproduce historical evidence, but cannot alone
+establish current public-API or public-default readiness. Qualification for those
+claims must include execution through the shipped public interface.
+
+Put the versioned `FormulationContext` contract and extension registry in
+`experiments/forge/api.py`. This is the normal place to expose an additional
+training variable to experiments. An extension declares its name, type/shape,
+producer, required/optional status, explicit default if any, gradient/parameter
+ownership, optimizer binding, initialization/RNG behavior, and checkpoint state
+as applicable. The shared runtime resolves that declaration once for every
+compatible task. Expose training inputs, not hidden evaluator labels or scores.
+Where the public API already defines a capability's schema/defaults/ownership,
+reference that authoritative definition; do not redeclare it in Forge. Add
+reusable capability definitions in the package once, with Forge registering the
+binding. Reserve Forge-only definitions for experiment orchestration fields.
+
+When a formulation needs new behavior, implement it once in the shared package
+or runtime and add its binding at this extension point. If a task family needs
+an extra provider, add that provider in its shared adapter, not in every
+experiment. A new field does not guarantee every host supports it: missing,
+ignored, or unsupported required variables produce a reasoned `BLOCKED` before
+training. Avoid permissive argument dictionaries that silently drop additions.
+
+Record `api_version`, `requires_capabilities`, and `api_changes` in the candidate
+card and readout. An API change states which variables were added/changed, why,
+which shared implementation/provider supplies them, affected hosts, and any
+compatibility or checkpoint migration. The scaffold fills unchanged fields from
+the parent; agents document the delta, not repeat a whole framework definition.
+
+Keep experiments DRY: one prior factory/default resolver, capability binder,
+training implementation per supported task family, evaluator per metric protocol,
+and common runner/queue/logging/checkpoint/result code. Configs refer to shared
+definitions and declare only overrides; receipts still store the full resolved
+values. Historical source snapshots remain immutable evidence, not templates for
+new copied runners. Bind enqueued candidates to immutable source snapshots,
+including their worktree changes; later edits cannot alter queued/running work.
+
+### Learned MoG priors are the default
+
+New Forge declarations resolve to learned MoG particle priors through the shared
+factory: learned component locations and an explicit nonzero prior-width policy.
+Use versioned shared defaults so each experiment need not restate the prior.
+Declare which locations, widths, and mixture weights are learned or fixed; a
+learned prior does not imply that every parameter is trainable. The current
+[`MoGParticlePrior`](api.md#mogparticleprior) learns locations, has uniform
+component weights, and stores sigma as a fixed scalar buffer. Learned width or
+nonuniform weights are explicit formulation extensions, not assumed capabilities.
+
+Particle-cloud tasks must explicitly declare `prior_kind=particle_cloud`,
+`sigma=0`, and a reason in their task specification; this is proposed Forge
+metadata mapped to the appropriate package API. Record the read-standardization
+policy too: zero-sigma MoG matches plain-cloud outputs and RNG consumption only
+with `standardize=False` and matching centers/indices. Keep latent prior sigma
+distinct from generator output noise and observation noise. Train and evaluate
+the declared sampling law; `.eval()` must not silently replace a MoG with centers.
+
+This is a required Forge default and API integration task, not a claim that the
+current convenience trainer already supports it. At the initial revision,
+[`GANTrainer`](../particlegan/training.py) rejects MoG and
+[`Recipe.make_optimizers`](../particlegan/recipes.py) enables A2 only for the exact
+plain `ParticlePrior` type. Implement shared MoG support and explicit mechanism
+capabilities, then verify update, sampling, RNG, and checkpoint parity before
+adoption. Never silently disable a candidate hook when changing prior type.
+
+Import old cloud runs with their actual prior, not Forge's new default. Converting
+one to MoG creates a new candidate/task execution identity and requires new
+evidence. Where a frozen historical test intentionally needs a cloud, classify
+that exception explicitly. Calibration of the initial three smoke hosts must
+state their prior regimes; cloud passes alone do not qualify MoG behavior.
 
 ## 3. Repository records and lifecycle
 
@@ -168,10 +258,13 @@ Proposed layout, using the repo's existing code/config/report conventions:
 
 ```text
 experiments/forge/                    # CLI, scheduler, adapters, map/reduce
+  api.py                             # shared context, extension schema and capability bindings
 configs/forge/
+  defaults.json                           # versioned common defaults, including learned MoG prior
   catalog.json                            # task/family/source inventory
+  tasks/<task-id>.json                     # versioned host/evaluator references and prior requirements
   protocols/<protocol-id>.json             # immutable versioned gates and budgets
-  views/<view-id>.json                     # goal, task selection, ranking, eligibility
+  views/<view-id>.json                     # goal, task tier placement, importance, ranking, eligibility
   campaigns/<campaign-id>.json             # resource limits and candidate selection
   ideas/<idea-id>.json                     # concise agent-authored declaration
 reports/forge/
@@ -216,6 +309,10 @@ An experiment card records:
   sampling-only row EM as a diagnostic patch rather than a training fix.
 - View/protocol versions, task identity, fixed seed/fixture policy, full effective
   config, implementation/harness hashes, and training/evaluation budgets.
+- Resolved prior kind, width/standardization policy, parameter trainability,
+  and any explicit particle-cloud exception; `api_version`, `execution_path`,
+  required capabilities, and the formulation's API delta with affected hosts and
+  migration requirements.
 - `claim_contract`: scheduled versus clock-free, shared-setting requirement,
   scoring weights (`live`/`ema`), and training/public-sampling/evaluation laws.
   Record EMA definition/decay and RNG/initializer manifests, not only a seed.
@@ -318,6 +415,37 @@ cannot confer a public-default claim, even when the original screening run passe
 
 ## 4. Tier gates: cheap rejection, then stronger evidence
 
+### Retiering is a configuration change
+
+A task has a stable execution/evaluation definition; `qualification_tier` lives
+in a view's assignment of that task. To move a test between tiers, edit that
+assignment in `configs/forge/views/<view-id>.json` and create a new view revision.
+No script moves, trainer edits, duplicated configs, or rewritten evaluators are
+needed. An optional `forge retier` helper can make the edit, validate it, and show
+the resulting queue/leaderboard changes. For example, these are view entries:
+
+```json
+{"task": "img_bars4@v1", "qualification_tier": 2, "importance": "required"}
+```
+
+Changing `qualification_tier` to `1` moves the unchanged test into smoke.
+Tier, importance, order, and ranking are policy; task inputs, prior, budgets,
+schedule semantics, and scoring are execution/evaluation. Keep separate
+fingerprints for these layers. A tier-only move reuses compatible result receipts
+and recomputes qualification without new training or a new candidate identity.
+Changing a task's budget or prior is a new task definition, not a tier-only move.
+
+Validate prerequisite/checkpoint dependencies, missing task references, cycles,
+and accidental empty required tiers before accepting an edit. Retiering itself
+recomputes boards and shows missing evidence; it never enqueues training. A later
+explicit submission against the new view queues only newly needed evidence.
+Existing campaigns retain their pinned view revision; their
+history is not regraded silently. The new view can compare the same evidence
+under its new progression policy and show that policy change explicitly.
+Candidate attainment remains computed from evidence, never a manual tier label.
+
+### Initial profile
+
 Preflight is a zero-training validation step, not a fourth qualification tier.
 It checks adapter availability, resolved config, resource limits, provenance,
 duplicate work, and applicability to the chosen view.
@@ -400,8 +528,10 @@ Protocol rules:
 - Timeout, invalid evidence, or a failed **required** task blocks downstream
   qualification. Diagnostic errors/failures remain visible without vetoing required
   passes. Any process that exceeds its execution budget must still be stopped.
-- Changing code, config, view requirements, or protocol starts a new identity;
-  previously passing tiers carry over only when evidence compatibility is proven.
+- Changing training/scoring code, effective config, or the measurement protocol
+  changes evidence compatibility. Editing tier placement or ranking changes the
+  view revision only; reuse unchanged task evidence and recompute attainment.
+  Do not rewrite the verdicts or qualification recorded for older view revisions.
 
 Tests should reject as early as the protocol permits. Within a tier, order tasks
 by observed rejection value per measured cost, while preserving a frozen order
@@ -709,8 +839,8 @@ not proof of production readiness or a reason to stop improving the test suite.
 | Phase | Deliverable | Acceptance criteria |
 | --- | --- | --- |
 | **A. Inventory and history** | Machine-readable catalog, mapped experiment cards, initial compiled memory | Cover initial sources and the pinned #155 LR-free tree, including frozen fixtures/package hashes; later unbound claims remain explicit import gaps; compilation needs no GPU |
-| **B. Lifecycle and views** | Schemas, declaration scaffolding, reducer, read-only plan/board/recall | Separate attempt state from scientific verdict; show all candidates, blockers and next steps; future monotonicity remains inactive |
-| **C. Queue and gated execution** | Extend existing runner and #155 pool/submit/ledger contracts; provisional smoke profile, durable queue, multi-GPU drain, centralized logs | Concurrent enqueue; required failures/blockers prevent later tiers; deduplicated execution; every exit recorded; immutable sources and RNG identity protect reuse |
+| **B. Shared API, lifecycle and views** | Thin public-API integration, central extension contract, learned-MoG defaults, schemas, scaffolding, reducer and read-only commands | One API across ideas/tasks; explicit cloud exceptions and capability blockers; config-only retiering reuses evidence; future monotonicity remains inactive |
+| **C. Queue and gated execution** | Shared MoG-capable public training path; adapt existing runner and #155 pool/submit/ledger contracts; provisional smoke profile, queue, multi-GPU drain, logs | MoG sampling/update/checkpoint parity; no copied experiment loops; required failures/blockers prevent later tiers; deduplicated execution and complete receipts |
 | **D. Calibrate and pilot — adoption blocker** | Replay #155 lineages and a bounded set of missing reference comparisons | Publish per-lineage smoke/reference matrix, false accepts/rejects, unknown/blocked denominators, cost and frozen criteria; insufficient evidence or unacceptable screen performance blocks Phase E; no screening seed sweeps |
 | **E. Adopt and expand** | Agent instructions, migrations, additional domain views and public-default robustness contract | One small declaration joins comparisons; all outcomes update memory; new tasks are calibrated; public-default claims require the one preregistered fixed-seed stage after candidate freeze |
 
@@ -720,6 +850,15 @@ Implementation should include meaningful tests for:
   tiers; diagnostic failures not doing so; partially qualified rows staying visible.
 - Changed source/config/protocol invalidating reuse, exact duplicate detection,
   attempt locking, atomic writes, interrupted-run recovery, and budget enforcement.
+- Moving an unchanged task between tiers by editing one view file, with zero
+  training launches; old campaigns stay pinned and dependencies remain valid.
+- Shared learned-MoG defaults, explicit sigma-zero cloud exceptions, and distinct
+  resolved manifests; no silent loss of prior learning, noise, or candidate hooks.
+- A new formulation variable registered once reaches compatible task families,
+  optimizers/checkpoints/RNG handling and receipts; unsupported hosts block before
+  training rather than dropping it or requiring copied per-experiment loops.
+- Public trainer/component execution and parity for supported paths; archived
+  private hooks cannot stand in for shipped-API qualification.
 - Concurrent submissions from separate worktrees sharing one queue, correct GPU
   assignments, memory-aware dispatch, lease recovery without duplicate execution,
   and complete centralized logs without interleaved/corrupted event records.
@@ -764,3 +903,90 @@ The next is **one command that tries an idea through cheap gates and publishes a
 useful readout even when it fails**. Broader production tracks can then use the
 same lifecycle and evidence without forcing every new idea through every study
 the repository has ever accumulated.
+
+## 10. Migration checklist and subagent workflow
+
+This is the execution backlog for the implementation kickoff. The checklist is
+not a claim that migration has happened. Start with repository changes and saved
+evidence; reserve training for the bounded calibration/pilot stage. Keep existing
+running experiments and historical evidence intact throughout the transition.
+
+### Migration TODOs
+
+- [ ] **Freeze the migration inputs.** Pin the package baseline, #155 source
+  snapshot, report roots, and later follow-up receipts; record missing sources.
+  Inventory existing launchers/queues and any active jobs before changing ownership.
+- [ ] **Agree on the shared contracts.** Define TaskSpec, idea/candidate records,
+  FormulationContext/capabilities, attempt receipts, and view placement. Separate
+  execution/evaluation fingerprints from view-policy revisions. Assign file owners
+  and freeze these interfaces before parallel implementation.
+- [ ] **Map the history.** Classify all scoped files; import existing experiment
+  lineages, including successes, failures, raw errors, explicit blockers and
+  incomplete work. Bind prior regime, fixture, package, RNG and sampling law.
+  Keep dt075/EMA/sensitivity import gaps visible until exact evidence is available.
+- [ ] **Build shared public-API support.** Add the required MoG training and
+  formulation hooks to the public package/runtime path. Use existing public
+  components where appropriate; centralize Forge's bindings and document API
+  additions, changed variables, supported hosts and checkpoint migration.
+- [ ] **Establish prior defaults and exceptions.** Resolve new tasks to learned
+  MoG priors in one defaults/factory path. Explicitly classify sigma-zero cloud
+  tasks. Verify gradients, sampler/RNG behavior, state restoration, and mechanism
+  activation, including the A2 type-sensitive behavior. Preserve old identities.
+- [ ] **Consolidate experiment adapters.** Port the initial toy/native/hold
+  families onto the shared API. Extract duplicated setup, training, sampling,
+  checkpoint, logging and result logic. Retain thin compatibility entrypoints
+  where useful; keep frozen historical source copies outside active implementation.
+- [ ] **Declare tasks and tier views.** Reference shared task/evaluator definitions
+  and place tasks in versioned view configs. Demonstrate a tier move without code
+  changes or training. Validate dependencies and freeze the provisional campaign.
+- [ ] **Compile memory and comparisons.** Implement deterministic map/reduce,
+  conflict/coverage checks, the single history file, boards and recall. Distinguish
+  MoG/cloud cohorts, API support, live/EMA, cost and mechanism class in the output.
+- [ ] **Unify execution and queue state.** Adapt the existing grid runner and #155
+  submit/pool/ledger behavior to the shared request/receipt contract. Add atomic
+  ownership/budget claims, worker recovery, central logs and durable results.
+  Verify with fake workers before using GPUs.
+- [ ] **Calibrate the gates.** Complete the Phase D #155 replay and missing fixed-
+  fixture comparisons, explicitly separating historical cloud replay from new MoG
+  qualification. Publish false accepts/rejects, blockers, cost and continuation
+  findings. Meet frozen adoption criteria or revise the profile and repeat the
+  necessary calibration; do not carry cloud passes over to a MoG conversion.
+- [ ] **Pilot and cut over.** Run a bounded candidate/reference campaign through
+  multi-GPU draining; test cancellation, restart, retiering and memory updates.
+  First reserve pilot GPUs outside legacy pools' device allowances, or establish
+  one shared resource owner; deduplicating requests alone cannot prevent two
+  schedulers from oversubscribing the same GPU. Wait for capacity if necessary.
+  Stop new claims in an old queue and drain/reconcile its jobs before Forge owns
+  those requests. Import pending work with deduplication; never let both schedulers
+  independently launch it. Keep a rollback route using preserved requests/receipts.
+- [ ] **Adopt the agent workflow.** Document new/recall/plan/enqueue/drain/board
+  commands and shared extension examples; update agent instructions to read memory
+  and record readouts. Make Forge the default route for new ideas. Retire duplicated
+  active launchers only after their covered behavior and consumers are migrated.
+- [ ] **Complete promotion policy before a default claim.** Decide and freeze
+  live/EMA eligibility and the preregistered robustness stage. Neither an engine
+  migration nor a successful queue pilot promotes a formulation automatically.
+
+### Parallel work, with explicit handoffs
+
+Use one coordinator and up to three implementation subagents in separate
+worktrees. The coordinator owns shared contracts, integration, the migration
+checklist and final readout. Each assignment specifies input revisions,
+dependencies, owned paths, expected artifacts, checks, and a compute allowance
+(zero training by default). Agents do not concurrently edit generated shared
+boards/history or each other's source files.
+
+| Wave | Parallel work packages | Join condition |
+| --- | --- | --- |
+| 0 — coordinator | Pin inputs, define contracts/path ownership and plan the bounded calibration budget | All agents have the same schema/API assumptions and immutable input refs |
+| 1 — foundations | **History:** catalog/importers and normalized cards. **API:** public MoG/formulation support, central context/bindings and parity checks. **Views:** task declarations, tier config and reducer contracts | Schemas align; MoG/cloud support and capability blockers are explicit; history gaps are recorded |
+| 2 — integration | **Adapters:** port initial task families using the shared public API. **Execution:** queue/drain/resources/recovery/logging. **Knowledge:** compiler, boards, recall and declaration scaffolding | Representative requests produce compatible receipts end to end; fake-worker tests pass; no divergent training implementations |
+| 3 — verification | Independent review of parity/RNG/checkpoints; review import fidelity/retiering; coordinator reserves GPU capacity and runs the declared bounded calibration/pilot | Phase D adoption criteria pass; metrics, costs, failures/blockers and recommendations are published |
+| 4 — cutover | Coordinator reconciles old queues, integrates validated changes and enables the new workflow; agents finish docs/migrations in owned areas | One owner per request; useful agent workflow demonstrated; historical evidence preserved; rollback documented |
+
+Land small dependency-ordered changes rather than a single unreviewable rewrite.
+Task adapters consume the agreed API; if a formulation needs a new variable,
+coordinate one public API/central binding change, then update dependent adapters.
+If an interface must change between waves, publish the delta before dependent
+work resumes. Maintain a single migration status/readout with completed TODOs,
+remaining blockers, validation results and links to each work package.
