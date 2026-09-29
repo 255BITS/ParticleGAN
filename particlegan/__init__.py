@@ -3,6 +3,7 @@
 Networks and devices belong to the caller; GANTrainer optionally owns updates.
 """
 from .autoencoder import ParticleEncoding, particle_ae, particle_vae
+from .capabilities import prior_capabilities, prior_mechanisms
 from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
@@ -22,6 +23,7 @@ from . import init
 
 __all__ = [
     "init",
+    "prior_capabilities", "prior_mechanisms",
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",

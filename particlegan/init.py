@@ -164,7 +164,8 @@ def _draw(spec, key, shape):
 
 
 @torch.no_grad()
-def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool = True) -> nn.Module:
+def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool = True,
+                              parameter_seeds: Mapping[str, int] | None = None) -> nn.Module:
     """Initialize ``module``'s trainable parameters in place and return it.
 
     Matrices become orthogonal at the RMS of the distribution their layer
@@ -178,7 +179,10 @@ def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool 
     ``module.named_parameters()`` of the module passed: a submodule initialized
     on its own gets different values than inside its whole network, and
     adding or reordering parameters shifts later values. Initialize each whole
-    network in one call.
+    network in one call. For component-isolated comparisons, ``parameter_seeds``
+    supplies an explicit seed for every trainable parameter name. In that mode
+    its positional index is zero: inserting unrelated parameters cannot shift
+    shared parameter draws. Shape and declared distribution still affect values.
 
     Kept as-is: frozen parameters, buffers, ``KEEP`` declarations, zero
     vectors and constant or identity matrices the constructor set on purpose.
@@ -193,6 +197,11 @@ def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool 
     owners, finalizers, holders = _plan(module)
     trainable = [(i, path, p) for i, (path, p) in enumerate(module.named_parameters())
                  if p.requires_grad and p.numel()]
+    if parameter_seeds is not None:
+        if (not isinstance(parameter_seeds, Mapping)
+                or set(parameter_seeds) != {path for _, path, _ in trainable}
+                or any(type(value) is not int or value < 0 for value in parameter_seeds.values())):
+            raise ValueError("parameter_seeds must provide one nonnegative integer per trainable parameter")
     missing = [f"{path!r} ({holders[id(p)]})" for _, path, p in trainable if id(p) not in owners]
     if strict and missing:
         shown = ", ".join(missing[:8]) + (", ..." if len(missing) > 8 else "")
@@ -201,11 +210,13 @@ def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool 
             f"parameter(s): {shown}. Declare them with particlegan.init.register(<layer class>, "
             f"{{name: Uniform/Normal/R2Normal/KEEP}}), or pass strict=False to leave them as-is.")
     changed = set()
-    for index, _, parameter in trainable:
+    for index, path, parameter in trainable:
         spec = owners.get(id(parameter))
         if spec is None or spec is KEEP or (not isinstance(spec, R2Normal) and _keep_constant(parameter)):
             continue
-        value = _draw(spec, _qr.key(seed, index, tuple(parameter.shape)), tuple(parameter.shape))
+        key = _qr.key(seed, index, tuple(parameter.shape)) if parameter_seeds is None else \
+              _qr.key(parameter_seeds[path], 0, tuple(parameter.shape))
+        value = _draw(spec, key, tuple(parameter.shape))
         parameter.copy_(value.to(device=parameter.device, dtype=parameter.dtype))
         changed.add(id(parameter))
     for child, finalize in finalizers:

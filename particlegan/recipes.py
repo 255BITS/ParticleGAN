@@ -301,7 +301,7 @@ class Recipe:
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
-                        **adam_kwargs):
+                        require_latent_damping=False, **adam_kwargs):
         """Return ``(opt_g, opt_d)``: Adam optimizers whose ``step()`` does the recipe's work.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
@@ -320,8 +320,14 @@ class Recipe:
 
         Parameters are used as supplied; initialize fresh networks first (e.g.
         ``particlegan.init.deterministic_orthogonal_``).
+
+        ``opt_g.prior_mechanisms`` records prior capabilities and resolved A2
+        status. Nonstandardized MoG locations are row-local and support A2;
+        standardized reads do not. ``require_latent_damping=True`` rejects an
+        unavailable or disabled hook before constructing optimizers. The default
+        preserves historical component callers that did not apply A2 to MoG.
         """
-        from .particle_prior import ParticlePrior
+        from .capabilities import prior_mechanisms
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
         g_params = []
@@ -338,10 +344,18 @@ class Recipe:
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas})
-        # A2 acts on a plain particle table (not MoG means or Gaussian priors).
-        latent_table = prior.z if type(prior) is ParticlePrior and prior.z.requires_grad else None
-        return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
-                self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
+        mechanisms = prior_mechanisms(prior,
+            latent_damping_max_rate=self.latent_damping_max_rate,
+            prior_beta1=(self.prior_betas or self.betas)[0])
+        if require_latent_damping and not mechanisms["a2"]["enabled"]:
+            raise ValueError("required A2 latent damping unavailable: " + mechanisms["a2"]["reason"])
+        # Plain and nonstandardized MoG reads have the same row-local gradient
+        # ownership. Standardized MoG keeps the component API's historic policy
+        # (no A2), now explicit in the optimizer receipt and optionally required.
+        latent_table = prior.z if mechanisms["prior"]["a2_eligible"] else None
+        opt_g = self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs)
+        opt_g.prior_mechanisms = mechanisms
+        return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
 
 
 
