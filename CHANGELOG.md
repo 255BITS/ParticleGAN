@@ -22,6 +22,16 @@
   Routed evidence now refreshes when birth/death is disabled; disabling both
   row controls also permits a frozen bank. See the
   [site contract and spatial comparison](docs/e22_routed_sites.md).
+- **Routed split recovery and probe cost:** split rows inherit half the parent
+  first Adam moment and one quarter of its second/AMSGrad moments, preserving
+  optimizer age and avoiding a late-split update spike. `RoutedRows` accepts
+  checkpointed `probe_interval` (default 1), independent of context eligibility,
+  and an optional `output_error_guard` for fast and averaged paired-output MSE.
+  Per-update gradient observations continue between probe passes.
+- **CUDA learned-noise initialization:** repair the rounding case where
+  `exp(log_sigma)` falls below the physical floor while `log_sigma` is at or
+  above its log floor. The initial gradient stays active; ordinary floor
+  gradients, native FP64 behavior and checkpoint parameter layout are retained.
 - **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
   K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with

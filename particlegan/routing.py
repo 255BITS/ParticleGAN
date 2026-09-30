@@ -125,13 +125,19 @@ class RoutedRows:
     Shared router/encoder parameters remain shared and are never cloned.
     Defaults require every protected context to avoid additional feature
     error, and a strictly positive mean improvement of the fast function.
+    Optional ``output_error_guard`` also bounds clean final paired-output MSE
+    increases for both fast and averaged models on those protected contexts.
+    Output tolerances measure raw per-context MSE averaged across tokens and
+    channels; they do not affect proposal selection or the training objective.
     """
     def __init__(self, *, route=None, generate=None, features, model_forward=None,
                  sites=(), log_mass_key="log_mass",
-                 row_parameters=(), row_buffers=(), probe_budget=8,
+                 row_parameters=(), row_buffers=(), probe_budget=8, probe_interval=1,
                  reservoir_size=64, min_observations=8, min_effect=1e-6,
                  improvement_margin=1e-8, max_context_harm=0.0,
-                 persistence_threshold=.75, split_scale=.1, candidate_budget=4):
+                 persistence_threshold=.75, split_scale=.1, candidate_budget=4,
+                 output_error_guard=False, max_output_error_increase=0.0,
+                 max_output_context_harm=0.0):
         if model_forward is None:
             if not all(callable(fn) for fn in (route, generate, features)):
                 raise TypeError("routed route, generate and features must be callbacks")
@@ -145,7 +151,7 @@ class RoutedRows:
         if model_forward is not None and (not sites or any(not isinstance(name, str) or not name for name in sites)
                                           or len(set(sites)) != len(sites)):
             raise ValueError("model_forward requires ordered distinct routing site names")
-        for name, value in (("probe_budget", probe_budget), ("reservoir_size", reservoir_size),
+        for name, value in (("probe_budget", probe_budget), ("probe_interval", probe_interval), ("reservoir_size", reservoir_size),
                             ("min_observations", min_observations), ("candidate_budget", candidate_budget)):
             if type(value) is not int or value <= 0:
                 raise ValueError(f"routed {name} must be a positive integer")
@@ -157,6 +163,14 @@ class RoutedRows:
                 raise ValueError(f"routed {name} must be finite and nonnegative")
         if not 0 < persistence_threshold <= 1 or not 0 <= split_scale <= 1:
             raise ValueError("routed persistence_threshold and split_scale must be within their unit bounds")
+        if type(output_error_guard) is not bool:
+            raise ValueError("routed output_error_guard must be a boolean")
+        for name, value in (("max_output_error_increase", max_output_error_increase),
+                            ("max_output_context_harm", max_output_context_harm)):
+            if not math.isfinite(value) or value < 0:
+                raise ValueError(f"routed {name} must be finite and nonnegative")
+        if not output_error_guard and (max_output_error_increase or max_output_context_harm):
+            raise ValueError("routed output error tolerances require output_error_guard=True")
         if not isinstance(log_mass_key, str) or not log_mass_key:
             raise ValueError("routed log_mass_key must name a router tensor")
         row_parameters, row_buffers = tuple(row_parameters), tuple(row_buffers)
@@ -167,8 +181,12 @@ class RoutedRows:
         self.model_forward, self.sites = model_forward, sites
         self.log_mass_key, self.row_parameters, self.row_buffers = log_mass_key, row_parameters, row_buffers
         self.probe_budget, self.reservoir_size, self.min_observations = probe_budget, reservoir_size, min_observations
+        self.probe_interval = probe_interval
         self.min_effect, self.improvement_margin, self.max_context_harm = float(min_effect), float(improvement_margin), float(max_context_harm)
         self.persistence_threshold, self.split_scale, self.candidate_budget = float(persistence_threshold), float(split_scale), candidate_budget
+        self.output_error_guard = output_error_guard
+        self.max_output_error_increase = float(max_output_error_increase)
+        self.max_output_context_harm = float(max_output_context_harm)
 
     def to_dict(self):
         config = {name: getattr(self, name) for name in (
@@ -178,6 +196,11 @@ class RoutedRows:
         # Keep existing one-site checkpoint configurations byte-for-byte valid.
         if self.model_forward is not None:
             config.update(model_forward=True, sites=self.sites)
+        if self.output_error_guard:
+            config.update(output_error_guard=True, max_output_error_increase=self.max_output_error_increase,
+                          max_output_context_harm=self.max_output_context_harm)
+        if self.probe_interval != 1:
+            config["probe_interval"] = self.probe_interval
         return config
 
     def candidate_for(self, models, table, *, averaged=False, copy=False):
@@ -402,8 +425,9 @@ class RoutedEvidence:
 class RoutedRowControl:
     """Bound conditional evidence and guarded structural row transport.
 
-    Row-indexed Adam/AMSGrad moments and latent history are reset to zero for
-    parent and child.  Scalar optimizer clocks stay shared.  All conditional
+    Both split rows inherit half the parent's first Adam moment and one quarter
+    of its second/AMSGrad-max moments, retaining the parent's optimizer age.
+    Latent directional history is cleared at changed rows. All conditional
     evidence is invalidated; callers rebase affected row testers and restart
     shared router/encoder testers.  Models and optimizers retain caller
     ownership; the enclosing policy checkpoints their full state.
@@ -468,6 +492,7 @@ class RoutedRowControl:
         for name in self._POOLS:
             setattr(self, name, None)
         self.fit_fill = self.guard_fill = self.fit_cursor = self.guard_cursor = self.rows_since_eval = 0
+        self.probe_clock = {"observed_updates": 0, "last_probe_update": 0}
         self.probe_cursor = 0
         self.latest_gradient = None
         self.moved_rows, self.moved_parameters, self.restart_router = None, {}, False
@@ -504,6 +529,7 @@ class RoutedRowControl:
             setattr(self, prefix + "_cursor", (cursor + len(values[0])) % self.spec.reservoir_size)
             setattr(self, prefix + "_fill", min(self.spec.reservoir_size, getattr(self, prefix + "_fill") + len(values[0])))
         self.rows_since_eval += len(batch.context)
+        self.probe_clock["observed_updates"] += 1
 
     @torch.no_grad()
     def check_batch(self, batch):
@@ -564,7 +590,7 @@ class RoutedRowControl:
             for module, flag in flags:
                 module.training = flag
 
-    def _measure(self, context, targets, candidate, *, with_usage=False):
+    def _measure(self, context, targets, candidate, *, with_usage=False, with_output_error=False):
         cpu_rng = torch.get_rng_state()
         cuda_rng = torch.cuda.get_rng_state(self.table.device) if self.table.device.type == "cuda" else None
         models = self.averaged_models if candidate.averaged else self.models
@@ -584,10 +610,19 @@ class RoutedRowControl:
         loss = (fake.double() - real.double()).square().mean(1)
         if not bool(torch.isfinite(loss).all()):
             raise ValueError("paired routed feature errors must be finite")
+        if with_output_error:
+            output_error = (output.double() - targets.double()).square().flatten(1).mean(1)
+            if not bool(torch.isfinite(output_error).all()):
+                raise ValueError("paired routed output errors must be finite")
         if (not torch.equal(cpu_rng, torch.get_rng_state())
                 or (cuda_rng is not None and not torch.equal(cuda_rng, torch.cuda.get_rng_state(self.table.device)))):
             raise ValueError("routed evaluation callbacks must be deterministic; supply shared noise in the observation context")
-        return (loss, usage) if with_usage else loss
+        result = (loss,)
+        if with_usage:
+            result += (usage,)
+        if with_output_error:
+            result += (output_error,)
+        return result if with_usage or with_output_error else loss
 
     def _delete(self, base, row):
         mass = base.log_mass.clone()
@@ -636,7 +671,13 @@ class RoutedRowControl:
         fills = (self.fit_fill, self.rows_since_eval, self.guard_fill) if mutate else (self.fit_fill, self.rows_since_eval)
         if min(fills) < minimum:
             return None
+        # Count successful begin() calls, not contexts or eligibility checks.
+        # Default 1 preserves the historical every-eligible-call behavior.
+        if (self.spec.probe_interval > 1
+                and self.probe_clock["observed_updates"] - self.probe_clock["last_probe_update"] < self.spec.probe_interval):
+            return None
         self.rows_since_eval = 0
+        self.probe_clock["last_probe_update"] = self.probe_clock["observed_updates"]
         self.counters["evals"] += 1
         evaluation = self.counters["evals"]
         context, targets = self.fit_context[:self.fit_fill], self.fit_targets[:self.fit_fill]
@@ -705,9 +746,16 @@ class RoutedRowControl:
                 return dict(self.last)
             _, child, parent, variant, proposed, proposed_average = selected
             guard_context, guard_targets = self.guard_context[:self.guard_fill], self.guard_targets[:self.guard_fill]
-            before, after = self._measure(guard_context, guard_targets, fast), self._measure(guard_context, guard_targets, proposed)
-            average_before = self._measure(guard_context, guard_targets, average)
-            average_after = self._measure(guard_context, guard_targets, proposed_average)
+            guard_options = {"with_output_error": True} if self.spec.output_error_guard else {}
+            before = self._measure(guard_context, guard_targets, fast, **guard_options)
+            after = self._measure(guard_context, guard_targets, proposed, **guard_options)
+            average_before = self._measure(guard_context, guard_targets, average, **guard_options)
+            average_after = self._measure(guard_context, guard_targets, proposed_average, **guard_options)
+            if self.spec.output_error_guard:
+                before, output_before = before
+                after, output_after = after
+                average_before, average_output_before = average_before
+                average_after, average_output_after = average_after
             gain = float((before - after).mean())
             average_gain = float((average_before - average_after).mean())
             harm, average_harm = float((after - before).max()), float((average_after - average_before).max())
@@ -719,6 +767,26 @@ class RoutedRowControl:
                              average_guard_gain=average_gain, max_context_harm=harm,
                              average_max_context_harm=average_harm, guard_contexts=self.guard_fill,
                              accepted=accepted)
+            if self.spec.output_error_guard:
+                output_increase = float((output_after - output_before).mean())
+                average_output_increase = float((average_output_after - average_output_before).mean())
+                output_harm = float((output_after - output_before).max())
+                average_output_harm = float((average_output_after - average_output_before).max())
+                output_accepted = (max(output_increase, average_output_increase)
+                                   <= self.spec.max_output_error_increase + 1e-12
+                                   and max(output_harm, average_output_harm)
+                                   <= self.spec.max_output_context_harm + 1e-12)
+                self.last.update(feature_guard_accepted=accepted, output_guard_accepted=output_accepted,
+                                 guard_output_mse_before=float(output_before.mean()),
+                                 guard_output_mse_after=float(output_after.mean()),
+                                 average_guard_output_mse_before=float(average_output_before.mean()),
+                                 average_guard_output_mse_after=float(average_output_after.mean()),
+                                 guard_output_mse_increase=output_increase,
+                                 average_guard_output_mse_increase=average_output_increase,
+                                 max_output_context_harm=output_harm,
+                                 average_max_output_context_harm=average_output_harm)
+                accepted = accepted and output_accepted
+                self.last["accepted"] = accepted
             if not accepted:
                 self.counters["guard_rejections"] += 1
                 return dict(self.last)
@@ -729,19 +797,90 @@ class RoutedRowControl:
         """Refresh evidence without proposing or mutating particle rows."""
         return self.maybe_apply(mutate=False)
 
+    @staticmethod
+    def _adam_transport_state(optimizer, tensor):
+        """Validate the explicitly supported row-local Adam state layout."""
+        from .k3p import K3PGeneratorAdam
+
+        if type(optimizer) not in (torch.optim.Adam, torch.optim.AdamW, K3PGeneratorAdam):
+            raise ValueError("routed birth/death optimizer transport supports Adam, AdamW and K3PGeneratorAdam only")
+        groups = [group for group in optimizer.param_groups
+                  for parameter in group["params"] if parameter is tensor]
+        if len(groups) != 1 or groups[0].get("differentiable", False):
+            raise ValueError("routed split transport requires one nondifferentiable Adam owner per row tensor")
+        response = getattr(optimizer, "direct_response", None)
+        if response is not None and any(parameter is tensor for parameter in response.params):
+            raise ValueError("routed split transport does not support direct-particle response on a routed row tensor")
+        state = optimizer.state.get(tensor, {})
+        if not state:
+            return state
+        expected = {"step", "exp_avg", "exp_avg_sq"}
+        if groups[0].get("amsgrad", False):
+            expected.add("max_exp_avg_sq")
+        if set(state) != expected:
+            raise ValueError("routed split transport requires the standard Adam moment state layout")
+        step = state["step"]
+        if (not isinstance(step, (int, float, torch.Tensor))
+                or (isinstance(step, torch.Tensor) and (step.ndim != 0 or step.layout != torch.strided))
+                or not math.isfinite(float(step)) or float(step) < 0):
+            raise ValueError("routed split transport requires a valid scalar Adam age")
+        for name in expected - {"step"}:
+            moment = state[name]
+            if (not isinstance(moment, torch.Tensor) or moment.shape != tensor.shape
+                    or moment.dtype != tensor.dtype or moment.device != tensor.device
+                    or moment.layout != torch.strided or not moment.is_floating_point()
+                    or not bool(torch.isfinite(moment).all())
+                    or (name != "exp_avg" and bool((moment < 0).any()))):
+                raise ValueError(f"routed split transport requires a valid row-local Adam {name}")
+        return state
+
+    def validate_optimizer_transport(self):
+        """Check structural owners before enabling routed birth/death.
+
+        Adam/AdamW and native K3PGeneratorAdam use the supported moment layout.
+        Coupled weight decay is allowed: the split supplies an explicit history
+        prior, whose exact half-mass gradient interpretation assumes zero
+        coupled regularization and an unperturbed duplicate. Unknown optimizer
+        layouts or additional coupled row histories require a separate contract.
+        This validation never changes owner weights, state, or optimizer clocks.
+        """
+        for tensor, _, optimizer in self._bindings.values():
+            if optimizer is not None:
+                self._adam_transport_state(optimizer, tensor)
+        history = getattr(self.table_optimizer, "latent_history", None)
+        if history is not None and (not isinstance(history, torch.Tensor) or history.shape != self.table.shape
+                                    or history.dtype != self.table.dtype or history.device != self.table.device
+                                    or history.layout != torch.strided):
+            raise ValueError("routed split transport requires table-shaped latent history")
+
+    @torch.no_grad()
     def _commit(self, child, parent, proposed, proposed_average):
+        # Preflight every owner before any weights are written. Snapshot parent
+        # history before changing either row, including when the child comes
+        # first in storage. Preserve the shared optimizer age: resetting only
+        # moments at a late split produces an inconsistent bias correction.
+        self.validate_optimizer_transport()
+        transported = {}
+        for name, (tensor, _, optimizer) in self._bindings.items():
+            if optimizer is not None:
+                state = optimizer.state.get(tensor, {})
+                transported[name] = {key: state[key][parent].clone() * factor
+                                     for key, factor in (("exp_avg", .5), ("exp_avg_sq", .25),
+                                                         ("max_exp_avg_sq", .25)) if key in state}
         rows = torch.tensor([parent, child], device=self.table.device, dtype=torch.long)
         for name, (tensor, averaged, optimizer) in self._bindings.items():
             values = proposed.table if name == "table" else proposed.row_state[name.removeprefix("router.")]
             average_values = proposed_average.table if name == "table" else proposed_average.row_state[name.removeprefix("router.")]
             tensor[rows], averaged[rows] = values[rows], average_values[rows]
             if optimizer is not None:
-                for value in optimizer.state.get(tensor, {}).values():
-                    if isinstance(value, torch.Tensor) and value.shape == tensor.shape:
-                        value[rows] = 0
+                for key, value in transported[name].items():
+                    optimizer.state[tensor][key][rows] = value
                 if tensor is self.table:
                     history = getattr(optimizer, "latent_history", None)
                     if history is not None:
+                        # Restart A2 directional comparisons after a possible
+                        # antisymmetric key/value perturbation. Damping's global
+                        # counters and the transported Adam moments stay intact.
                         history[rows] = 0
                 self.moved_parameters[tensor] = rows
         self.moved_rows, self.restart_router = rows, True
@@ -763,6 +902,7 @@ class RoutedRowControl:
                          "fit_fill": self.fit_fill, "guard_fill": self.guard_fill,
                          "fit_cursor": self.fit_cursor, "guard_cursor": self.guard_cursor,
                          "rows_since_eval": self.rows_since_eval, "probe_cursor": self.probe_cursor,
+                         "probe_clock": self.probe_clock,
                          "latest_gradient": self.latest_gradient, "evidence": self.evidence.state_dict(),
                          "row_ownership": {name: {"shape": tuple(tensor.shape), "dtype": str(tensor.dtype),
                                                   "parameter": isinstance(tensor, nn.Parameter),
@@ -773,11 +913,18 @@ class RoutedRowControl:
 
     def check_state(self, state):
         expected = self.state_dict()
-        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 1:
+        allowed_keys = (set(expected), set(expected) - {"probe_clock"}) if self.spec.probe_interval == 1 else (set(expected),)
+        if not isinstance(state, dict) or set(state) not in allowed_keys or state.get("schema") != 1:
             raise ValueError("invalid routed-control checkpoint schema")
         for name in ("config", "table_shape"):
             if state[name] != expected[name]:
                 raise ValueError("routed-control checkpoint configuration does not match")
+        if "probe_clock" in state:
+            clock = state["probe_clock"]
+            if (not isinstance(clock, dict) or set(clock) != {"observed_updates", "last_probe_update"}
+                    or any(type(value) is not int for value in clock.values())
+                    or not 0 <= clock["last_probe_update"] <= clock["observed_updates"]):
+                raise ValueError("invalid routed probe clock")
         if not isinstance(state["pools"], dict) or set(state["pools"]) != set(self._POOLS):
             raise ValueError("invalid routed context reservoirs")
         for name, value in state["pools"].items():
@@ -830,6 +977,7 @@ class RoutedRowControl:
             setattr(self, name, None if value is None else value.clone().to(self.table.device))
         for name in ("fit_fill", "guard_fill", "fit_cursor", "guard_cursor", "rows_since_eval", "probe_cursor"):
             setattr(self, name, state[name])
+        self.probe_clock = deepcopy(state.get("probe_clock", {"observed_updates": 0, "last_probe_update": 0}))
         self.latest_gradient = None if state["latest_gradient"] is None else state["latest_gradient"].clone().to(self.table.device)
         self.evidence.load_state_dict(state["evidence"])
         self.stream.set_state(state["stream"].cpu())

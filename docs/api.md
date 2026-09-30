@@ -69,6 +69,16 @@ candidate table and row state. Each counterfactual reruns the entire model;
 evidence and guards evaluate its final output. See the
 [shared-bank site contract](e22_routed_sites.md) for perturbation placement,
 usage attribution and a two-site example.
+`RoutedRows(probe_interval=K)` schedules costly probes, proposals and guards at
+least K observed updates apart (default 1), independently of
+`min_observations`. Its observation/probe clocks are checkpointed; gradient
+evidence continues every update. `output_error_guard=True` adds clean paired
+output-MSE protection on separate guard contexts for both fast and averaged
+models. Output tolerances are `max_output_error_increase` and
+`max_output_context_harm`, each measured in per-context MSE units and defaulting
+to zero. Routed row moves support Adam, AdamW and `K3PGeneratorAdam`: both split
+rows inherit half-parent first moments and quarter-parent second/AMSGrad
+moments while preserving the optimizer age.
 The [whole-model checkpoint replay example](e22_routed_sites.md#activation-checkpointed-whole-model-replay)
 recreates routing on recomputation and restores a private DV12 stream without
 advancing the training stream or repeating observations.

@@ -1,0 +1,597 @@
+{
+  "purpose": "Fixed revalidation after half/quarter Adam transport and CUDA learned-noise repair; no seed or hyperparameter sweep",
+  "source_base_revision": "b924ed4d3a2fbfee31796b53a32ea831d235750e",
+  "source_changes": "Working-tree implementation identified by source_sha256, committed with this receipt",
+  "source_sha256": {
+    "particlegan/__init__.py": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "6c6d8748bb6ecafda3e2fac85098526fa7a911238943ac78ef221eb9ffc5a0e8",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/init.py": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+    "particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/particle_prior.py": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+    "particlegan/policy.py": "be496c7bb7d8059346166bf7d3ee24b0e332c3954215151709db0dffa9556bf7",
+    "particlegan/recipes.py": "e1e2f478ce9d9f8774933cd4e98e0f91cfaf0e93a152ad0e4bdee782f52ae9d6",
+    "particlegan/routing.py": "e5754c4d3a74a8c5bd53c1698b5833aab29d454b60b38a9bb951385aec9ecdea",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/training.py": "a39c162467860372857aa0bbe1e91937a36ca36381451a937f874502e40f1676",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "examples/e22_routed_sites.py": "78b295698693d7f94610c9c73500f8dae8e3e927e5e439d5d55b7e5a094d76ff"
+  },
+  "hardware": "NVIDIA RTX A6000",
+  "torch_version": "2.13.0+cu126",
+  "device": "cuda:0 (CUDA_VISIBLE_DEVICES=1)",
+  "timing_note": "Synchronized update-only elapsed times on a shared GPU; other workloads were active. Not an isolated hardware throughput benchmark or comparable to earlier dedicated-device times.",
+  "shape": {
+    "tokens": 128,
+    "particles": 128,
+    "z_dim": 4,
+    "batch_size": 8
+  },
+  "updates": 40,
+  "warmup_steps": 1,
+  "harness": "\"\"\"One fixed comparison after split-state, CUDA-noise and cadence fixes.\"\"\"\nimport argparse\nimport hashlib\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport torch\n\n\nparser = argparse.ArgumentParser()\nparser.add_argument(\"--initialization\", choices=(\"api\", \"conformance\"), required=True)\nparser.add_argument(\"--output\", required=True)\nargs = parser.parse_args()\nroot = Path(\"/ml2/hypergan/ParticleGAN-pr155-merge\")\nsys.path.insert(0, str(root / \"examples\"))\nimport e22_routed_sites as task\n\ntorch.set_num_threads(1)\nsource_paths = sorted(root.glob(\"particlegan/**/*.py\")) + [root / \"examples/e22_routed_sites.py\"]\nhashes = {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()\n          for path in source_paths}\nreceipt = dict(\n    purpose=\"Fixed revalidation after half/quarter Adam transport and CUDA learned-noise repair; no seed or hyperparameter sweep\",\n    source_base_revision=subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=root, text=True).strip(),\n    source_changes=\"Working-tree implementation identified by source_sha256, committed with this receipt\",\n    source_sha256=hashes, hardware=torch.cuda.get_device_name(), torch_version=torch.__version__,\n    device=\"cuda:0 (CUDA_VISIBLE_DEVICES=1)\", initialization=args.initialization,\n    timing_note=\"Synchronized update-only elapsed times on a shared GPU; other workloads were active. Not an isolated hardware throughput benchmark or comparable to earlier dedicated-device times.\",\n    shape=dict(tokens=128, particles=128, z_dim=4, batch_size=8), updates=40, warmup_steps=1,\n    harness=Path(__file__).read_text(),\n    command=f\"PYTHONPATH=. CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /tmp/pr155-e22-venv/bin/python -u /tmp/pr155-final-routed-comparison.py --initialization {args.initialization} --output {args.output}\",\n)\narms = [(\"frozen\", \"frozen\", {}), (\"movable_no_rows\", \"no_rows\", {}),\n        (\"full\", \"full\", {}), (\"full_output_guard\", \"full\", {\"output_error_guard\": True}),\n        (\"full_probe_interval_20\", \"full\", {\"probe_interval\": 20})]\nreports, reference_weights, reference_inputs = [], None, None\nfor label, mode, options in arms:\n    loop = task.make_loop(mode=mode, device=\"cuda:0\", initialization=args.initialization,\n                          tokens=128, z_dim=4, particles=128, batch_size=8, **options)\n    weights = {f\"{name}.{key}\": value.detach().clone()\n               for name, model in loop.policy._training_modules().items()\n               for key, value in model.state_dict().items()}\n    weights.update(table=loop.policy.table.detach().clone(),\n                   output_sigma=loop.policy.log_output_sigma.detach().clone())\n    if reference_weights is None:\n        reference_weights = weights\n    else:\n        assert weights.keys() == reference_weights.keys()\n        assert all(torch.equal(value, reference_weights[key]) for key, value in weights.items())\n    print(json.dumps(dict(event=\"arm_begin\", arm=label, initialization=args.initialization)), flush=True)\n    report, inputs = task.train(loop, 40, log_every=20, warmup_steps=1)\n    if reference_inputs is None:\n        reference_inputs = inputs\n    else:\n        assert inputs == reference_inputs, \"Matched initialization, batches, paired draws and DV12 states required\"\n    report.update(arm=label, final_output_sigma=loop.policy.output_sigma(),\n                  probe_clock=loop.policy.routed_control.probe_clock,\n                  matched_inputs_sha256=hashlib.sha256(json.dumps(inputs).encode()).hexdigest())\n    reports.append(report)\n    del loop\n\nassert hashes == {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()\n                  for path in source_paths}, \"Source changed during measured comparison\"\nreceipt.update(matched_initial_parameters=True, matched_batches_and_base_noise=True,\n               matched_dv12_draw_schedule=True, dv12_draws_per_update=4,\n               dv12_draw_shape=[1024, 4], reports=reports)\nPath(args.output).write_text(json.dumps(receipt, indent=2) + \"\\n\")\nprint(json.dumps(dict(event=\"comparison_receipt\", path=args.output,\n                     reports=[{key: row[key] for key in (\"arm\", \"heldout_rmse\", \"heldout_max_error\", \"training_seconds\", \"final_output_sigma\")}\n                              | row[\"row_diagnostics\"][\"counters\"] for row in reports])), flush=True)\n",
+  "matched_initial_parameters": true,
+  "matched_batches_and_base_noise": true,
+  "matched_dv12_draw_schedule": true,
+  "dv12_draws_per_update": 4,
+  "dv12_draw_shape": [
+    1024,
+    4
+  ],
+  "comparisons": {
+    "api": {
+      "command": "PYTHONPATH=. CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /tmp/pr155-e22-venv/bin/python -u /tmp/pr155-final-routed-comparison.py --initialization api --output /tmp/pr155-final-routed-api-results.json",
+      "reports": [
+        {
+          "event": "complete",
+          "mode": "frozen",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "api",
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.3414013385772705,
+          "heldout_rmse": 0.16717708110809326,
+          "heldout_max_error": 0.6137399077415466,
+          "served_source": "fast",
+          "training_seconds": 0.6968328924849629,
+          "seconds_per_update": 0.017420822312124072,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 0,
+              "probes": 0,
+              "proposals": 0,
+              "guard_rejections": 0,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {},
+            "evidence_counters": {
+              "updates": 0,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "frozen",
+          "final_output_sigma": 0.13332198560237885,
+          "probe_clock": {
+            "observed_updates": 0,
+            "last_probe_update": 0
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "no_rows",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "api",
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.3414013385772705,
+          "heldout_rmse": 0.21519961953163147,
+          "heldout_max_error": 0.7630200982093811,
+          "served_source": "fast",
+          "training_seconds": 0.7402597314212471,
+          "seconds_per_update": 0.018506493285531177,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 0,
+              "probes": 0,
+              "proposals": 0,
+              "guard_rejections": 0,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {},
+            "evidence_counters": {
+              "updates": 0,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "movable_no_rows",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 0,
+            "last_probe_update": 0
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "full",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "api",
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.3414013385772705,
+          "heldout_rmse": 0.21519961953163147,
+          "heldout_max_error": 0.7630200982093811,
+          "served_source": "fast",
+          "training_seconds": 2.488624593243003,
+          "seconds_per_update": 0.06221561483107507,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 40,
+              "probes": 320,
+              "proposals": 312,
+              "guard_rejections": 32,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {
+              "step": 40,
+              "moves": 0,
+              "law": "routed_paired",
+              "fit_error": 0.41774099361787975,
+              "eligible_deaths": 56,
+              "eligible_births": 72,
+              "child": 100,
+              "parent": 76,
+              "variant": "antisymmetric",
+              "guard_error_before": 0.49964438994382787,
+              "guard_error_after": 0.472264850000563,
+              "average_guard_error_before": 0.4309596191913595,
+              "average_guard_error_after": 0.4198615302434762,
+              "guard_gain": 0.02737953994326491,
+              "average_guard_gain": 0.011098088947883304,
+              "max_context_harm": 0.058492866036953306,
+              "average_max_context_harm": 0.07473517700557025,
+              "guard_contexts": 64,
+              "accepted": false
+            },
+            "evidence_counters": {
+              "updates": 40,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 18
+            }
+          },
+          "arm": "full",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 40,
+            "last_probe_update": 40
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "full",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "api",
+          "output_error_guard": true,
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.3414013385772705,
+          "heldout_rmse": 0.21519961953163147,
+          "heldout_max_error": 0.7630200982093811,
+          "served_source": "fast",
+          "training_seconds": 2.4423946442548186,
+          "seconds_per_update": 0.061059866106370465,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 40,
+              "probes": 320,
+              "proposals": 312,
+              "guard_rejections": 32,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {
+              "step": 40,
+              "moves": 0,
+              "law": "routed_paired",
+              "fit_error": 0.41774099361787975,
+              "eligible_deaths": 56,
+              "eligible_births": 72,
+              "child": 100,
+              "parent": 76,
+              "variant": "antisymmetric",
+              "guard_error_before": 0.49964438994382787,
+              "guard_error_after": 0.472264850000563,
+              "average_guard_error_before": 0.4309596191913595,
+              "average_guard_error_after": 0.4198615302434762,
+              "guard_gain": 0.02737953994326491,
+              "average_guard_gain": 0.011098088947883304,
+              "max_context_harm": 0.058492866036953306,
+              "average_max_context_harm": 0.07473517700557025,
+              "guard_contexts": 64,
+              "accepted": false,
+              "feature_guard_accepted": false,
+              "output_guard_accepted": false,
+              "guard_output_mse_before": 0.05666173527741299,
+              "guard_output_mse_after": 0.04935249431113668,
+              "average_guard_output_mse_before": 0.0555238971932036,
+              "average_guard_output_mse_after": 0.05082326136107207,
+              "guard_output_mse_increase": -0.007309240966276304,
+              "average_guard_output_mse_increase": -0.004700635832131531,
+              "max_output_context_harm": 0.003958489139633911,
+              "average_max_output_context_harm": 0.007396741589322936
+            },
+            "evidence_counters": {
+              "updates": 40,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 18
+            }
+          },
+          "arm": "full_output_guard",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 40,
+            "last_probe_update": 40
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "full",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "api",
+          "probe_interval": 20,
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.3414013385772705,
+          "heldout_rmse": 0.21519961953163147,
+          "heldout_max_error": 0.7630200982093811,
+          "served_source": "fast",
+          "training_seconds": 0.9887246028520167,
+          "seconds_per_update": 0.024718115071300416,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 2,
+              "probes": 16,
+              "proposals": 16,
+              "guard_rejections": 2,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {
+              "step": 40,
+              "moves": 0,
+              "law": "routed_paired",
+              "fit_error": 0.41774099361787975,
+              "eligible_deaths": 8,
+              "eligible_births": 8,
+              "child": 12,
+              "parent": 13,
+              "variant": "antisymmetric",
+              "guard_error_before": 0.49964438994382787,
+              "guard_error_after": 0.5045491561293032,
+              "average_guard_error_before": 0.4309596191913595,
+              "average_guard_error_after": 0.43627137298587726,
+              "guard_gain": -0.004904766185475252,
+              "average_guard_gain": -0.005311753794517787,
+              "max_context_harm": 0.02512174728226324,
+              "average_max_context_harm": 0.023773040634349096,
+              "guard_contexts": 64,
+              "accepted": false
+            },
+            "evidence_counters": {
+              "updates": 40,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "full_probe_interval_20",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 40,
+            "last_probe_update": 40
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        }
+      ]
+    },
+    "conformance": {
+      "command": "PYTHONPATH=. CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /tmp/pr155-e22-venv/bin/python -u /tmp/pr155-final-routed-comparison.py --initialization conformance --output /tmp/pr155-final-routed-conformance-results.json",
+      "reports": [
+        {
+          "event": "complete",
+          "mode": "frozen",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "conformance",
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.07860251516103745,
+          "heldout_max_error": 0.17954380810260773,
+          "served_source": "fast",
+          "training_seconds": 0.6627752245403826,
+          "seconds_per_update": 0.016569380613509564,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 0,
+              "probes": 0,
+              "proposals": 0,
+              "guard_rejections": 0,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {},
+            "evidence_counters": {
+              "updates": 0,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "frozen",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 0,
+            "last_probe_update": 0
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "no_rows",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "conformance",
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.023096181452274323,
+          "heldout_max_error": 0.0699564591050148,
+          "served_source": "fast",
+          "training_seconds": 0.6614344068802893,
+          "seconds_per_update": 0.016535860172007234,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 0,
+              "probes": 0,
+              "proposals": 0,
+              "guard_rejections": 0,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {},
+            "evidence_counters": {
+              "updates": 0,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "movable_no_rows",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 0,
+            "last_probe_update": 0
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "full",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "conformance",
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.027090366929769516,
+          "heldout_max_error": 0.09422324597835541,
+          "served_source": "fast",
+          "training_seconds": 1.9415517037268728,
+          "seconds_per_update": 0.04853879259317182,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 40,
+              "probes": 320,
+              "proposals": 176,
+              "guard_rejections": 7,
+              "moves": 12,
+              "splits": 6
+            },
+            "last": {
+              "step": 40,
+              "moves": 0,
+              "law": "routed_paired",
+              "fit_error": 0.04680511621489721,
+              "eligible_deaths": 0,
+              "eligible_births": 8
+            },
+            "evidence_counters": {
+              "updates": 40,
+              "resets": 768,
+              "global_resets": 6,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "full",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 40,
+            "last_probe_update": 40
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "full",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "conformance",
+          "output_error_guard": true,
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.03067072294652462,
+          "heldout_max_error": 0.1040010079741478,
+          "served_source": "fast",
+          "training_seconds": 2.015859912382439,
+          "seconds_per_update": 0.05039649780956097,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 40,
+              "probes": 320,
+              "proposals": 280,
+              "guard_rejections": 18,
+              "moves": 2,
+              "splits": 1
+            },
+            "last": {
+              "step": 40,
+              "moves": 0,
+              "law": "routed_paired",
+              "fit_error": 0.05488193267334363,
+              "eligible_deaths": 57,
+              "eligible_births": 71,
+              "skip": "proposal did not improve fit paired error"
+            },
+            "evidence_counters": {
+              "updates": 40,
+              "resets": 128,
+              "global_resets": 1,
+              "flagged_rows_sum": 468,
+              "hold_steps": 1
+            }
+          },
+          "arm": "full_output_guard",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 40,
+            "last_probe_update": 40
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        },
+        {
+          "event": "complete",
+          "mode": "full",
+          "tokens": 128,
+          "z_dim": 4,
+          "particles": 128,
+          "batch_size": 8,
+          "initialization": "conformance",
+          "probe_interval": 20,
+          "steps": 40,
+          "warmup_steps": 1,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.023096181452274323,
+          "heldout_max_error": 0.0699564591050148,
+          "served_source": "fast",
+          "training_seconds": 0.843520863680169,
+          "seconds_per_update": 0.021088021592004225,
+          "row_diagnostics": {
+            "counters": {
+              "evals": 2,
+              "probes": 16,
+              "proposals": 0,
+              "guard_rejections": 0,
+              "moves": 0,
+              "splits": 0
+            },
+            "last": {
+              "step": 40,
+              "moves": 0,
+              "law": "routed_paired",
+              "fit_error": 0.027151499279689947,
+              "eligible_deaths": 0,
+              "eligible_births": 16
+            },
+            "evidence_counters": {
+              "updates": 40,
+              "resets": 0,
+              "global_resets": 0,
+              "flagged_rows_sum": 0
+            }
+          },
+          "arm": "full_probe_interval_20",
+          "final_output_sigma": 0.125,
+          "probe_clock": {
+            "observed_updates": 40,
+            "last_probe_update": 40
+          },
+          "matched_inputs_sha256": "2ea51dbffed7a198e14ba08818ed6afc57b6fb1e9ce8badccfbc5c0275a849e8"
+        }
+      ]
+    }
+  },
+  "interpretation": "Cadence reduces costly probes in this fixed comparison. No current full-controls or output-guard arm demonstrates better held-out quality than the movable-bank baseline; the conformance initialization is a deliberately constructed lifecycle fixture.",
+  "cuda_noise_regression": {
+    "device": "NVIDIA RTX A6000",
+    "dtype": "float32",
+    "physical_floor": 0.125,
+    "raw_exp_at_initialization": 0.1249999925494194,
+    "old_initial_gradient": 0.0,
+    "repaired_forward_sigma": 0.125,
+    "repaired_initial_gradient": 0.0624999962747097
+  },
+  "validation": {
+    "cpu": {
+      "passed": 1302,
+      "skipped": 19,
+      "subtests_passed": 18,
+      "skipped_cuda_executed_separately": 14,
+      "other_skips": "Four opt-in real-data CUDA integrations and one opt-in research convergence gate"
+    },
+    "focused_cpu_cuda": {
+      "passed": 20,
+      "actual_cuda_cases": 13
+    },
+    "additional_cuda_device_scope": {
+      "passed": 1
+    },
+    "installed_wheel": "Passed outside checkout: checkpointed guard/cadence CLI exact recovery, probe boundary, serving weights, whole-model replay, native external loop and paired routed training/resume",
+    "package": "Wheel and sdist build, strict metadata checks and exact 20-file package-source comparison passed",
+    "legacy_configuration": "configs, recipes.py, native birth_death.py and k3p.py unchanged"
+  }
+}

@@ -158,6 +158,10 @@ contexts. Frozen BF16 modules can accompany FP32 trainable parameters and tables
 Multiple token routing sites can share one bank and controller through the
 [full-model routing contract](docs/e22_routed_sites.md). Candidate checks rerun
 the complete model, including downstream sites and the final paired output.
+`RoutedRows(probe_interval=20)` schedules expensive row probes separately from
+per-update gradient evidence and saves its clock in checkpoints. Enable
+`output_error_guard=True` to also protect clean paired-output MSE on guard
+contexts. Split rows transport their parent's Adam history at half mass.
 
 ## Learn more
 

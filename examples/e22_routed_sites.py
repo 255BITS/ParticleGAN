@@ -6,8 +6,9 @@ python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 --z-dim
 
 Every structural counterfactual reruns the entire conditioned model, including
 the second site's queries that depend on the first site's output. Training is
-paired-error RpGAN/KA2. Clean output RMSE is evaluated only on a third context
-grid; it is not a training loss or a proposal acceptance criterion.
+paired-error RpGAN/KA2. Clean output RMSE is evaluated on a third context grid.
+Optional ``--output-error-guard`` also checks paired output MSE on separate
+protected contexts; it never supplies a training loss or selects proposals.
 
 The CLI defaults to the public deterministic initializer for every trainable
 network and the R2 particle prior. Python ``make_loop`` defaults to the older
@@ -158,7 +159,8 @@ class SiteLoop:
 
 
 def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
-              batch_size=8, initialization="conformance"):
+              batch_size=8, initialization="conformance", output_error_guard=False,
+              probe_interval=1):
     """Build a loop; conformance preserves the explicit structural-test fixture.
 
     Use initialization="api" for quality/timing comparisons. Its whole-network
@@ -215,13 +217,18 @@ def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
     rows = RoutedRows(model_forward=model_forward, features=paired_features,
                       sites=("first", "second"), probe_budget=8, reservoir_size=64,
                       min_observations=8, min_effect=1e-8, improvement_margin=1e-10,
-                      max_context_harm=1e-4, persistence_threshold=.75, split_scale=.1)
+                      max_context_harm=1e-4, persistence_threshold=.75, split_scale=.1,
+                      output_error_guard=output_error_guard, probe_interval=probe_interval)
     policy = E22Policy(recipe, G, D, table=table, encoder=E, router=R,
                        generator_optimizer=opt_g, critic_optimizer=opt_d,
                        roles=[roles, ["critic"]], routed_rows=rows, seed=21)
     initial = float((policy.served_model().routed_forward(test) - test_target).square().mean().sqrt())
     config = dict(mode=mode, tokens=tokens, z_dim=z_dim, particles=particles,
                   batch_size=batch_size, initialization=initialization)
+    if output_error_guard:
+        config["output_error_guard"] = True
+    if probe_interval != 1:
+        config["probe_interval"] = probe_interval
     return SiteLoop(policy, fit, fit_target, guard, guard_target, test, test_target,
                     torch.Generator(device=device).manual_seed(42),
                     torch.Generator(device=device).manual_seed(43), initial, config)
@@ -387,6 +394,10 @@ def main():
     parser.add_argument("--initialization", choices=INITIALIZATIONS, default="api",
                         help="Public API initialization (default), or the deliberately constructed conformance fixture")
     parser.add_argument("--compare", action="store_true")
+    parser.add_argument("--output-error-guard", action="store_true",
+                        help="Require protected final-output MSE nonincrease for fast and averaged structural proposals")
+    parser.add_argument("--probe-interval", type=int, default=1,
+                        help="Observed training updates between expensive row probes/proposals; gradients are observed each update")
     parser.add_argument("--log-every", type=int, default=20)
     parser.add_argument("--warmup", type=int, help="Untimed restored updates; default 1 for --compare, 0 otherwise")
     parser.add_argument("--checkpoint", "--output", dest="checkpoint")
@@ -394,6 +405,8 @@ def main():
     args = parser.parse_args()
     if args.steps < 1 or args.log_every < 1 or (args.warmup is not None and args.warmup < 0):
         parser.error("--steps and --log-every must be positive; --warmup must be nonnegative")
+    if args.probe_interval < 1:
+        parser.error("--probe-interval must be positive")
     if args.compare and (args.resume or args.checkpoint):
         parser.error("--compare reports three fresh matched arms; checkpoints use one --mode")
     device = torch.device(args.device)
@@ -402,7 +415,8 @@ def main():
     config = dict(tokens=args.tokens or (128 if args.compare else 8),
                   z_dim=args.z_dim or (4 if args.compare else 2),
                   particles=args.particles or (128 if args.compare else 16), batch_size=args.batch_size,
-                  initialization=args.initialization)
+                  initialization=args.initialization, output_error_guard=args.output_error_guard,
+                  probe_interval=args.probe_interval)
     warmup_steps = int(args.compare) if args.warmup is None else args.warmup
     if args.compare:
         reports, reference_inputs, reference_weights = [], None, None

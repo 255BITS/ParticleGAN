@@ -100,6 +100,12 @@ additional application losses, but should report that change in its task.
 Here the .125 scale is measured in normalized paired-error coordinates;
 it is the caller's shared error noise, rather than an extra perturbation of
 the reported host prediction.
+The noise scale ordinarily uses the physical `torch.maximum` and its existing
+gradient, including the full above-floor gradient in FP64. The repair applies
+only when rounding gives `exp(log_sigma) < floor` while
+`log_sigma >= log_floor`, as can happen at CUDA initialization with .125.
+That branch uses the log-space derivative, including the half subgradient at
+a tie, with a detached correction preserving the exact physical floor.
 
 Three context sets have different jobs:
 
@@ -142,10 +148,25 @@ routes, and a perturbed split can change both keys and values. Mass accounting
 alone cannot establish safety; the coupled feature guards make that decision.
 
 On acceptance, table and declared row-local router state change together in
-the fast and averaged banks. Row optimizer moments and optional latent
-history for the changed parent/child are reset; scalar optimizer step counters
-remain. Conditional evidence resets globally because softmax normalization
-couples all rows. The policy rebases affected stationarity histories.
+the fast and averaged banks. Both split rows inherit half the parent's Adam
+first moment and a quarter of its second moment and AMSGrad maximum; the
+shared optimizer age remains unchanged. Other rows retain their history.
+Structural row owners must use Adam, AdamW or native `K3PGeneratorAdam`;
+other optimizers remain usable when birth/death is disabled. This transport
+avoids clearing moments while retaining an old bias-correction age. Its
+half-mass gradient interpretation is exact for an unperturbed duplicate
+without coupled regularization. Retiring a nonzero child, perturbing the
+split or coupling regularization makes it a history prior, not a guarantee
+of future output quality.
+The [late-step regression](../tests/test_e22_routed_optimizer_transport.py)
+reproduces a 29.517× next-update amplification at Adam age 2,048 under the
+former reset, and an exact next-update match (maximum error 0) to the correctly
+aged half-gradient reference under the revised E22 Adam transport.
+
+Optional latent directional history for the changed parent/child resets
+because their geometry can change. Conditional evidence resets globally
+because softmax normalization couples all rows. The policy rebases affected
+stationarity histories.
 
 The example sets the diagnostic budget and guards explicitly:
 `probe_budget=8`, `reservoir_size=64`, `min_observations=8`,
@@ -153,6 +174,53 @@ The example sets the diagnostic budget and guards explicitly:
 `max_context_harm=1e-4`, `persistence_threshold=.75`, `split_scale=.1`.
 These values belong to its small, normalized paired task. The positive mean
 improvement margin and the per-context harm bound are separate conditions.
+
+`RoutedRows(probe_interval=K)` spaces expensive deletion, proposal and guard
+passes by at least K observed training updates; its default is 1. It counts
+successful `begin()` observations, independently of batch size and
+`min_observations`. A pass needs both the update interval and enough paired
+contexts. Skipped intervals retain the context observations. Gradient
+persistence and cheap evidence updates still run each training update.
+Evidence-only controls follow the same interval without proposing moves or
+reading protected errors. Disabled row controls collect no row observations
+and do not advance this clock.
+
+Checkpoint `probe_clock` stores observed updates and the last eligible probe
+update. Interval 1 is omitted from the configuration for compatibility; old
+default-interval checkpoints without a clock restore with a canonical zero
+clock. A nondefault interval is part of the configuration and requires its
+stored clock on resume. Interval selection changes controller timing, so
+measure its quality and cost rather than assuming less frequent probes are
+equivalent to the default trajectory.
+
+An optional paired-output guard supplements these learned-feature checks:
+
+```python
+rows = RoutedRows(route=route, generate=generate, features=paired_features,
+                  output_error_guard=True,
+                  max_output_error_increase=0.0,
+                  max_output_context_harm=0.0)
+```
+
+On the separate protected contexts, it computes raw final-output paired MSE
+in prediction coordinates, without the critic's residual normalization,
+averaging all nonbatch dimensions within each context. It requires both the
+mean increase and the largest context increase to stay within the specified
+bounds, separately for fast and averaged proposals. The learned-feature
+guard must also pass. Output MSE neither trains the model nor selects
+proposals or supplies row evidence; fitting proposals still use learned
+features alone. A rejection leaves live weights, serving averages and
+optimizer histories unchanged, while recording the failed guard.
+Enabled diagnostics report `feature_guard_accepted` and
+`output_guard_accepted`; `accepted` is their conjunction.
+
+The output guard defaults off to retain the existing row law and checkpoint
+configuration. Enabled settings are serialized and must match on restore.
+With evidence-only or disabled row controls it performs no protected output
+measurements. Zero bounds prevent worsening on those supplied contexts at
+the current weights; they do not promise future optimizer behavior or better
+error on the untouched final grid. The [multi-site CLI](e22_routed_sites.md)
+exposes this option as `--output-error-guard`.
 
 ## Recovery, clean serving and validation
 
@@ -166,7 +234,9 @@ noise and structural diagnostics. The final row reports initial and final
 held-out RMSE from clean frozen serving. This is one fixed deterministic task,
 with no seed sweep.
 
-On the fixed CPU task with 16 particles, batch size 32 and 160 updates:
+The historical record at source revision `8618b19c` used the former
+zero-moment split transport. On its fixed CPU task with 16 particles, batch
+size 32 and 160 updates:
 
 | Served model | Held-out RMSE | Held-out maximum vector error |
 | --- | ---: | ---: |
@@ -204,6 +274,9 @@ prediction coordinates. A task using normalized error-coordinate noise,
 as this example does during its paired game, must apply its own inverse
 residual transform when it needs a matching stochastic prediction. The
 reported validation and the example's serving path use the clean default.
+
+Those measurements are retained as a historical integration record, rather
+than a benchmark of the revised transport or optional output guard.
 
 The conformance tests train this caller-owned paired game, require dense table
 gradients and active evidence/restructuring, and restore immediately before a

@@ -72,6 +72,8 @@ jobs:
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-e22-routed-smoke.py --steps 2 --resume /tmp/particlegan-e22-routed-smoke.pt
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --output /tmp/particlegan-e22-sites-smoke.pt
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --resume /tmp/particlegan-e22-sites-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --probe-interval 4 --output-error-guard --output /tmp/particlegan-e22-sites-cadence-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --resume /tmp/particlegan-e22-sites-cadence-smoke.pt
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_replay.py --steps 2
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_replay.py --steps 2 --mode no_rows
           PYTHONPATH=/tmp/particlegan-installed python - <<'PY'

@@ -10,7 +10,8 @@ The example supplies source, time and spatial position conditioning. It runs
 two frozen BF16 host layers alongside FP32 encoder, query modules, adapters,
 table and critic. It trains RpGAN with KA2 on paired residuals; it evaluates
 clean output RMSE on a third disjoint source/time grid. Output MSE is not a
-training loss or an acceptance condition.
+training loss; an optional output guard checks it on separate protected
+contexts before accepting structural changes.
 
 ## Complete model callback
 
@@ -74,11 +75,30 @@ measures final clean outputs and never enters the policy. The empirical guards
 do not guarantee improvement on that final grid or on every possible
 conditioning input.
 
+Enable `--output-error-guard` for an additional raw paired-output check, or
+pass `output_error_guard=True` to `make_loop()` or `RoutedRows`. It averages
+squared final residuals over all tokens and output channels within each
+context, then checks their mean increase and largest context increase for
+both the fast and averaged proposals. The default bounds,
+`max_output_error_increase=0.0` and `max_output_context_harm=0.0`, require
+nonincrease. Both learned-feature and output guards must pass. Output error
+does not supply the training loss, row evidence or proposal selection;
+the final third grid remains unseen by all controls. These checks protect
+the supplied contexts at current weights, without ensuring later learning
+or untouched-grid improvement.
+The metric uses prediction coordinates, without the critic's residual
+normalization. Enabled diagnostics distinguish `feature_guard_accepted`
+from `output_guard_accepted`; `accepted` requires both.
+
 ## Running, restoring and serving
 
 ```bash
 python -u examples/e22_routed_sites.py --steps 60 --output /tmp/e22-sites.pt
 python -u examples/e22_routed_sites.py --steps 2 --resume /tmp/e22-sites.pt
+python -u examples/e22_routed_sites.py --steps 60 --output-error-guard \
+    --output /tmp/e22-sites-output-guard.pt
+python -u examples/e22_routed_sites.py --steps 60 --probe-interval 20 \
+    --output-error-guard --output /tmp/e22-sites-spaced-probes.pt
 ```
 
 The CLI uses the public API initializer by default. The former `initialize_`
@@ -108,6 +128,20 @@ and adds shared noise in normalized paired-error coordinates. Real and fake
 receive the same Gaussian base draw; the real reference is detached during
 generator training. This caller-owned noise mapping differs from the generic
 served helper's optional direct output noise.
+Learned noise keeps the ordinary physical `torch.maximum` gradient, including
+the full FP64 gradient above the floor. Only the rounding inconsistency
+`exp(log_sigma) < floor` with `log_sigma >= log_floor` uses the log-space
+derivative and its half subgradient at a tie. A detached correction keeps
+the physical floor exact; this repairs the CUDA .125 initialization case.
+
+`--probe-interval K` (default 1) schedules costly deletion/proposal/guard passes
+at least K observed training updates apart. It is separate from the minimum
+number of fitting/protected contexts and does not depend on batch size.
+Cheap gradient persistence and evidence updates continue every training
+update. A skipped interval retains observations until a pass is eligible;
+evidence-only mode uses the same clock without proposals or protected error
+measurements. With row controls off, the row clock does not advance. Python
+accepts `make_loop(probe_interval=K)` or `RoutedRows(probe_interval=K)`.
 
 The application checkpoint contains policy state, model shape/mode and two
 application RNG states: batch selection and the shared paired-error base
@@ -115,6 +149,14 @@ stream. Policy state includes its own DV12 streams, row controls, full-model
 site contract, controllers, noise, optimizer moments and coherent fast/averaged
 weights. Restore at a completed update boundary. A resumed CLI invocation
 rebuilds the stored shape and mode before loading.
+The output guard defaults off, preserving existing checkpoint configuration
+keys. Enabled settings are stored in the policy and application configuration
+and reconstructed on CLI resume. Evidence-only and controls-off loops never
+read protected output errors.
+Nondefault probe intervals also enter the application/policy configuration.
+The checkpoint stores observed-update and last-probe counters, so resuming
+preserves the next pass's timing. Old default-interval checkpoints without
+these counters remain compatible; nondefault intervals require their clock.
 
 ```python
 served = policy.served_model()
@@ -128,8 +170,9 @@ served-choice rule. Training modules remain fast and serving consumes no
 training RNG. Optional `perturb=True` enables per-site DV12; `output_noise=True`
 adds the stored sigma directly in prediction coordinates.
 
-The fixed tiny CPU conformance fixture reduced clean final-grid RMSE from **.188005 to
-.015629** after 60 actual adversarial updates. All 16 rows received nonzero
+The historical tiny CPU conformance fixture at revision `8618b19c`, using the
+former zero-moment split transport, reduced clean final-grid RMSE from
+**.188005 to .015629** after 60 actual adversarial updates. All 16 rows received nonzero
 gradients each time. The controller accepted four splits (eight moved rows),
 rejected 43 guarded proposals, and its active evidence held table descent for
 one update. This is a synthetic integration result, rather than a diffusion
@@ -190,7 +233,78 @@ actual paired-game updates with the ordinary two-site loop, including an
 accepted row move, recovery and clean serving. Keep the `no_rows` movable-bank
 baseline when validating this replay path and the Sliders integration.
 
-## API-initialized spatial comparison
+## Current split-state transport
+
+Accepted moves transport the parent's Adam history to both split rows: first
+moments are halved; second moments and AMSGrad maxima are quartered. Shared
+optimizer ages and untouched rows remain unchanged. This avoids the large
+next-step update caused by clearing moments with an old bias-correction age.
+The split preflights every structural owner before changing weights and
+supports Adam, AdamW and native `K3PGeneratorAdam`. Other optimizers are
+permitted when restructuring is disabled.
+
+The [late-split regression](../tests/test_e22_routed_optimizer_transport.py)
+ages the optimizer through actual updates. At age 2,048 with E22 Adam's
+betas `(0, .999)`, the former zero-moment reset amplifies the next update by
+29.517×. The revised transport matches the correctly aged, half-gradient
+reference's next update exactly in that case, with maximum absolute error 0.
+
+The half-mass derivative interpretation applies to an exact duplicate without
+coupled regularization. After retiring a nonzero child or separating tied
+key/value rows, it is an explicit history prior rather than a proof of future
+quality. Optional latent directional history resets for the moved rows;
+conditional evidence resets globally, and affected controller histories are
+rebased. The optional output guard protects an immediate raw-error metric,
+not subsequent optimizer steps. Keep the movable-bank baseline and measure
+complete clean-output trajectories.
+
+## Current fixed comparisons
+
+The [frozen-source receipt](e22_routed_controls_results.json) revalidates the
+split transport and CUDA noise repair, plus separate optional output-guard
+and probe-interval arms. Each initialization uses one matched 40-update task:
+a 128×4 bank, 128 spatial tokens, batch size 8 and one restored warmup update.
+Initial parameters, fitting batches, paired Gaussian base draws and DV12 draw
+schedules match within each comparison. The conformance initialization is a
+deliberately constructed lifecycle stress fixture; the API initialization
+uses the public initializer. Neither is a seed experiment or a tuned quality
+benchmark.
+
+All outputs below use clean fast serving on the untouched third context grid.
+Times include synchronized training updates and controls, excluding warmup
+and validation. Other workloads were active on the shared RTX A6000: these
+are recorded elapsed times, not isolated throughput benchmarks, and should
+not be compared to the historical hardware timings below.
+
+| Initialization | Arm | Held-out RMSE | Maximum token L2 error | Elapsed time | Splits | Deletion probes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| API | Frozen bank | **.167177** | **.613740** | .697 s | 0 | 0 |
+| API | Movable bank, controls off | .215200 | .763020 | .740 s | 0 | 0 |
+| API | Full controls | .215200 | .763020 | 2.489 s | 0 | 320 |
+| API | Full, output guard | .215200 | .763020 | 2.442 s | 0 | 320 |
+| API | Full, probe interval 20 | .215200 | .763020 | .989 s | 0 | 16 |
+| Stress fixture | Frozen bank | .078603 | .179544 | .663 s | 0 | 0 |
+| Stress fixture | Movable bank, controls off | **.023096** | **.069956** | .661 s | 0 | 0 |
+| Stress fixture | Full controls | .027090 | .094223 | 1.942 s | 6 | 320 |
+| Stress fixture | Full, output guard | .030671 | .104001 | 2.016 s | 1 | 320 |
+| Stress fixture | Full, probe interval 20 | **.023096** | **.069956** | .844 s | 0 | 16 |
+
+The default full and output-guard arms probe every eligible update. The
+interval-20 arm has the output guard off; it performs two expensive passes
+and 16 deletion probes while retaining all 40 cheap gradient/evidence
+updates. Its output metrics match the movable baseline here, with no accepted
+moves. This observation does not establish equivalent trajectories on other
+tasks or longer runs.
+
+No full-controls or output-guard arm improves held-out quality over the
+movable-bank baseline. The additional output guard reduces accepted fixture
+splits from six to one, yet has worse final-grid error. It protects the
+immediate protected-context error at current weights; it cannot guarantee
+subsequent learning or untouched-grid improvement. Keep the movable baseline
+and compare both RMSE and maximum output error over complete trajectories.
+The receipt includes the exact harness, source hashes, clocks and diagnostics.
+
+## Recorded API-initialized spatial comparisons
 
 ```bash
 python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 \
@@ -227,8 +341,11 @@ log printing are outside the measured interval. The report includes
 passing a learned-feature guard alone establishes neither better output RMSE
 nor a faster training loop.
 
-Measured on one NVIDIA RTX A6000 with PyTorch 2.13.0+cu126, 40 updates per
-mode, batch size 8 and one restored warmup update:
+The following pinned receipts predate the revised split-state transport,
+optional output guard and CUDA learned-noise correction. Neither API-initialized trajectory accepted a move,
+so they do not measure transport behavior. The 40-update receipt used one
+NVIDIA RTX A6000 with PyTorch 2.13.0+cu126, batch size 8 and one restored
+warmup update:
 
 | Mode | Clean held-out RMSE | Maximum token L2 error | Training wall time | Accepted splits |
 | --- | ---: | ---: | ---: | ---: |
@@ -274,7 +391,7 @@ The earlier comparison used the hand-built conformance initialization:
 | --- | ---: | ---: |
 | Frozen bank | .078747 | .179697 |
 | Movable bank, controls off | .023803 | .068836 |
-| Full controls, current row-state reset | .031008 | .075403 |
+| Full controls, former zero-moment reset | .031008 | .075403 |
 | Full controls, accepted commits suppressed (diagnostic) | .023803 | .068836 |
 | Full controls, parent Adam moments inherited (diagnostic) | .023454 | .083046 |
 
@@ -292,24 +409,26 @@ for both moved rows removes the mean-RMSE disadvantage, with the other
 controller/history resets retained. Its maximum error worsens, so this is a
 causal diagnostic, not a qualified replacement law.
 
-The current routed commit clears moved-row first/second moments and AMSGrad
+The former routed commit cleared moved-row first/second moments and AMSGrad
 maxima while keeping the optimizer's shared step counter. With beta1=0 and
 beta2=.999, the next nonzero row update after a late reset can be roughly
 5.7–6.3 times a fresh Adam update at the observed steps 32–39, before other
 controls. Tiny immediate gains can therefore precede substantially different
-subsequent learning. A coherent split-state transport or row-local optimizer
-age needs a late-step regression that checks the next update's size. For exact
-half-mass duplication, halving first moments and quartering second moments is
-a mathematical starting point to validate, rather than a proven rule for all
-coupled splits.
+subsequent learning. The revised law uses half-parent first moments and
+quarter-parent second moments/maxima, preserving the shared age; its late-step
+regression checks the next update. This fixes the inconsistent reset, without
+qualifying every coupled split or promising lower held-out error.
 
 There is also a metric mismatch. At step 32, an accepted move lowered guard
 feature error from .0618101 to .0617447 while increasing guard RMSE from
 .0688192 to .0688366 and held-out RMSE from .0666459 to .0666674. Step 35
 showed the same disagreement. A learned-feature guard protects its own metric;
 it does not guarantee lower raw output error. Applications that require paired
-output accuracy should consider an additional output-error guard on protected
-contexts, leaving the final validation grid untouched.
+output accuracy can now enable the additional output-error guard on protected
+contexts, leaving the final validation grid untouched. Regression tests include
+an actual feature-improving proposal that worsens raw output MSE and must be
+rejected when the guard is enabled, including averaged-only harm and token
+means with an individual context increase.
 
 Exact duplicate proposals preserve parent mass after retiring the child and
 add no distinct routing code; identical cloned rows remain symmetric under
@@ -322,4 +441,5 @@ convergence under its assumptions, without qualifying this extra row-state
 transport or guaranteeing monotone output RMSE. Keep the movable baseline,
 both mean and maximum output error, and complete trajectories in Sliders
 validation. The initialization correction fixes the comparison setup; the
-routed optimizer-state and guard questions remain ParticleGAN work.
+revised transport and optional output guard address the diagnosed mechanics.
+Their effect on complete output trajectories remains an empirical question.

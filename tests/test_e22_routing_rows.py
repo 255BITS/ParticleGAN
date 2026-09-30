@@ -190,7 +190,10 @@ def test_observed_guarded_move_improves_paired_error_and_resets_coupled_state():
         if optimizer is None:
             continue
         for key in ("exp_avg", "exp_avg_sq", "max_exp_avg_sq"):
-            assert not optimizer.state[tensor][key][rows].any()
+            factor = .5 if key == "exp_avg" else .25
+            torch.testing.assert_close(optimizer.state[tensor][key][rows],
+                                       (moments[name][key][parent] * factor).expand_as(optimizer.state[tensor][key][rows]),
+                                       rtol=0, atol=0)
             assert torch.equal(optimizer.state[tensor][key][untouched], moments[name][key][untouched])
         assert torch.equal(optimizer.state[tensor]["step"], moments[name]["step"])
     assert not control.table_optimizer.latent_history[rows].any()

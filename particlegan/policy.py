@@ -369,6 +369,7 @@ class UpdatePolicy:
                 completed_steps=lambda: self.completed_steps, controller=self.controller,
                 allow_frozen_table=not self._routed_controls_enabled)
             if recipe.particle_birth_death:
+                self.routed_control.validate_optimizer_transport()
                 self.birth_death = self.routed_control
             if recipe.row_evidence_gate:
                 self.row_evidence = self.routed_control.evidence
@@ -804,7 +805,19 @@ class UpdatePolicy:
             except AttributeError:
                 pass
         floor = base * settle
-        sigma = torch.maximum(sigma, torch.as_tensor(floor, device=sigma.device, dtype=sigma.dtype))
+        floor_tensor = torch.as_tensor(floor, device=sigma.device, dtype=sigma.dtype).detach()
+        log_floor = torch.as_tensor(math.log(floor) if floor > 0 else -math.inf,
+                                    device=sigma.device, dtype=sigma.dtype)
+        # exp(log(base)) can round just below base on CUDA, suppressing the
+        # learned-noise gradient at initialization. Repair only that numeric
+        # inconsistency; ordinary maximum values and gradients stay intact.
+        ordinary_sigma = torch.maximum(sigma, floor_tensor)
+        rounded_below = (sigma < floor_tensor) & (self.log_output_sigma >= log_floor)
+        differentiable_sigma = torch.maximum(self.log_output_sigma, log_floor).exp()
+        # Keep the physical clamp exact and maximum's half subgradient at the
+        # log-space tie. The correction and floor carry no gradient.
+        repaired_sigma = ordinary_sigma.detach() + (differentiable_sigma - differentiable_sigma.detach())
+        sigma = torch.where(rounded_below, repaired_sigma, ordinary_sigma)
         return float(sigma.detach()) if detach else sigma
 
     def output_sigma(self):
