@@ -2,6 +2,32 @@
 
 ## Unreleased
 
+- **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
+  K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
+  is RMS R1 plus a fake cap for its first 799 calls, then an even blend with
+  one-sided caps and an EMA-critic gradient anchor. The anchor's gate and the
+  EMA critic's decay (`reg_anchor_min_decay`, default .9, replacing
+  `reg_anchor_decay`) follow the critic's own Adam moment surprise instead of
+  its learning rate, with guarded EMA reseeds. `recipe.name` is `"ka2"`.
+  `critic_r1_real=False` drops the R1 term.
+- **Trainer checkpoints use schema 4.** Schema 1–3 checkpoints come from older
+  formulations and raise `ValueError`; resume them with the release that wrote
+  them (0.8.0 for K3P). Checkpoints that record removed fixed choices or
+  `initialization` still load.
+- **Opt-in controllers, all off by default:** a continuous LR controller
+  (`continuous_policy`, `lr_control="stationarity"`), learnable output noise
+  (`output_noise_mode`), AMSGrad (`amsgrad`), particle birth-death
+  (`particle_birth_death`, `birth_death_space`, `birth_death_feature_scale`,
+  `birth_death_isolation`), per-row gradient evidence (`row_evidence_*`), the
+  table release rule, a served averaged model (`serve_average`) and
+  `reopen_signal`.
+- **[E22](docs/e22.md)** (`configs/100gaussians/e22-noout.json`) switches them on:
+  a schedule-free configuration for the native 100-Gaussian problems with no
+  data-space statistic in its control path. It passes grid100, rotated100 and
+  staggered100 (precision .982–.985), the ×0.75/×1.33 LR stress, 14k and 28k
+  updates, and the 13-gate portability suite.
+- K3P replays through `benchmarks.legacy.recipe` ([docs](docs/k3p.md#replaying-k3p)).
+
 - **`GANTrainer.sample()` returns clean samples by default.** It previously
   added the current training output noise; pass `output_noise=True` for that.
   Training is unchanged (sampling uses only its own stream). The toy100

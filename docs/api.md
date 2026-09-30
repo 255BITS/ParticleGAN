@@ -315,8 +315,9 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe()` constructs **K3P** ([details](k3p.md)): Rp logistic, the K3P
-critic penalty (coefficient 1, κ 1, EMA-critic anchor .999), critic spike guard
+`get_recipe()` constructs **KA2** ([details](ka2.md)): Rp logistic, the KA2
+critic penalty (coefficient 1, κ 1, EMA-critic anchor gated by the critic's Adam
+moment surprise), critic spike guard
 (ratio 5 after 200 steps), A2 latent-row damping, Adam (0,.999), G/D LR .00425
 and particle LR .0085. G/D rates hold for 60% of a 1,600-update horizon, then
 cosine to 1% (`network_lr_horizon_cap`, `network_lr_floor`); particle rates hold
@@ -327,10 +328,10 @@ is no particle spread or L2 term. Live sampling is the default; EMA is explicit.
 `GANTrainer` builds everything through the recipe: `trainer.opt_g, trainer.opt_d
 = recipe.make_optimizers(G, D, prior, ema_critic=...)` (the trainer allocates
 `trainer.ema_D`, a frozen deep copy) and `trainer.penalty =
-recipe.make_critic_penalty(trainer.opt_d)`. Checkpoints use schema 3 (the K3P
-state is inside the optimizer states, plus a noise stream); schema-2
-checkpoints are upgraded on load and schema-1 checkpoints (an older
-formulation) raise `ValueError`. Caller-owned loops use the same objects with an ordinary loop:
+recipe.make_critic_penalty(trainer.opt_d)`. Checkpoints use schema 4 (the KA2
+controller and EMA critic are inside the optimizer states, plus a noise
+stream); schema 1–3 checkpoints come from older formulations and raise
+`ValueError` (resume them with the release that wrote them). Caller-owned loops use the same objects with an ordinary loop:
 `penalty(D, real, fake)` in the critic loss, then `opt_d.step()` and
 `opt_g.step()` as usual. See [regularization factories](#regularization-factories). `learning_rate_scales(step, recipe)` returns the
 `(network, prior)` LR multipliers.
@@ -402,7 +403,7 @@ init.deterministic_orthogonal_(D, seed=1)
 prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
 gan = recipe.make_loss()
 spread = recipe.make_prior_regularizer()
-# Adam optimizers whose step() runs the recipe's regularization (K3P today);
+# Adam optimizers whose step() runs the recipe's regularization (KA2 today);
 # the EMA critic is ours to allocate.
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
@@ -411,7 +412,7 @@ ema_g = copy.deepcopy(G).eval().requires_grad_(False)
 ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
 
 for step in range(recipe.total_steps):
-    # G/D follow the network schedule (K3P's blend floor), the prior its own.
+    # G/D follow the network schedule, the prior its own.
     scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
 
     labels = torch.randint(recipe.num_classes, (recipe.batch_size,), device=device)
@@ -662,9 +663,9 @@ The penalty is a loss term: call it with the critic, reals and detached fakes
 result to the critic loss. It reads the state it needs from its critic
 optimizer, so build it from the optimizer the recipe made for that critic and
 pass `ema_critic=copy.deepcopy(D)` there. It penalizes the critic's input
-gradient: R1 on reals plus a cap on fakes while the critic LR is high, handing
-over to caps on both plus an EMA-critic gradient anchor as the LR anneals
-([how it works](k3p.md)). `reg_coeff`, `reg_kappa` and `reg_every` set its
+gradient: R1 on reals plus a cap on fakes for its first 799 calls, then an even
+blend with caps on both plus an EMA-critic gradient anchor gated by the critic's
+Adam moment surprise ([how it works](ka2.md)). `reg_coeff`, `reg_kappa` and `reg_every` set its
 strength, cap and lazy interval. It recomputes D on detached inputs and builds
 gradients only for the critic's parameters.
 
@@ -875,8 +876,8 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
 | `prior_reg`, `ema_decay` | `0`, `.995` |
 | `lr_anneal_start`, `lr_floor` | `.6`, `.05` (prior schedule) |
-| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule and K3P blend floor; `None` = full budget / `lr_floor`) |
-| `reg_anchor_decay` | `.999` |
+| `network_lr_horizon_cap`, `network_lr_floor` | `1600`, `.01` (G/D schedule; `None` = full budget / `lr_floor`) |
+| `reg_anchor_min_decay`, `reg_anchor_weight`, `critic_r1_real` | `.9`, `1`, `True` (fastest EMA-critic decay; anchor weight; R1 on reals) |
 | `d_guard_ratio`, `d_guard_min_steps` | `5`, `200` (ratio 0 disables) |
 | `latent_damping_max_rate` | `.5` (0 disables) |
 | `direct_particle_betas` | `(0, .9)` (`make_generator_optimizer(direct_particles=...)`) |
@@ -902,15 +903,17 @@ caller.
 ### Regularization factories
 
 The recipe, not the caller, chooses the regularization formulation, and your
-loop stays plain PyTorch. Today the factories return K3P implementations
-(`particlegan.k3p.K3PGeneratorAdam`, `K3PCriticAdam`, `CriticPenalty`); a
-future formulation can replace them without changing caller code.
+loop stays plain PyTorch. Today the factories return KA2 implementations
+(`particlegan.ka2.KA2CriticAdam` and `CriticPenalty`, with
+`particlegan.k3p.K3PGeneratorAdam`); a future formulation can replace them
+without changing caller code. The previous K3P critic replays through
+`benchmarks.legacy.recipe` ([K3P](k3p.md#replaying-k3p)).
 
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 penalty = recipe.make_critic_penalty(opt_d)
 d_loss = adv_d + penalty(D, real, fake)                  # or penalty(D, x, fake, labels, t=t)
-opt_d.zero_grad(); d_loss.backward(); opt_d.step()       # guard, Adam, EMA + LR record
+opt_d.zero_grad(); d_loss.backward(); opt_d.step()       # guard, Adam, KA2 controller + EMA
 opt_g.zero_grad(); g_loss.backward(); opt_g.step()       # Adam with A2 latent damping
 
 init.deterministic_orthogonal_(D2, seed=3)   # optional; 0/1/2 are the examples' G/D/E seeds
@@ -924,10 +927,10 @@ torch.save({"G": G.state_dict(), "D": D.state_dict(), "D2": D2.state_dict(),
 - The optimizers are `torch.optim.Adam` subclasses: `param_groups`, LR
   schedulers, closures and `state_dict()`/`load_state_dict()` work as usual.
   Their `state_dict()` adds a `"regularizer"` entry holding the EMA critic,
-  LR record, counters, guard count and A2/direct-particle histories, so the
+  KA2 controller, counters, guard count and A2/direct-particle histories, so the
   usual checkpoint above resumes bit-exactly.
-- `ema_critic` is caller-allocated (e.g. `copy.deepcopy(D)`); the K3P penalty
-  requires it. The optimizer freezes it and only writes it.
+- `ema_critic` is caller-allocated (e.g. `copy.deepcopy(D)`); the penalty
+  requires it unless `reg_anchor_weight=0`. The optimizer freezes it and only writes it.
 - `penalty(D, real, fake, *condition, **condition_kwargs)` returns a scalar.
   Conditioning is forwarded to the critic and its EMA. `D` may be the
   optimizer's critic, a submodule of it (one role of a shared module; the

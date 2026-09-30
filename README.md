@@ -10,9 +10,9 @@ missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The package ships one training
 configuration: a relativistic-pairing (RpGAN) logistic loss, a critic gradient
-penalty that hands over from R1 to capped gradients plus an EMA-critic anchor
-as the learning rate anneals, and the optimizer settings and schedules that go
-with them ([how it works](docs/k3p.md)). You write an ordinary PyTorch GAN
+penalty that starts as R1 and then blends in capped gradients plus an EMA-critic
+anchor gated by the critic's own Adam statistics, and the optimizer settings and
+schedules that go with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
 loop; the recipe builds the pieces.
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
@@ -140,7 +140,8 @@ Any field can be overridden: `get_recipe("mog", total_steps=20_000)`.
 
 ## Learn more
 
-- [How the training formulation works](docs/k3p.md), including several critics and conditional critics
+- [How the training formulation works](docs/ka2.md), including several critics and conditional critics
+- [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`pytorch_loop.py`](examples/pytorch_loop.py) (the full update in your own loop),
