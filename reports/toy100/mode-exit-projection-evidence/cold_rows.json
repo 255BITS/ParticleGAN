@@ -1,0 +1,42 @@
+{
+  "trajectory:pr84": {
+    "task": "trajectory",
+    "variant": "pr84",
+    "verdict": true,
+    "live_modes": null,
+    "live_hq": null,
+    "mse": null,
+    "seconds": 3.069863833999989,
+    "projected_updates": null
+  },
+  "trajectory:projected": {
+    "task": "trajectory",
+    "variant": "projected",
+    "verdict": true,
+    "live_modes": null,
+    "live_hq": null,
+    "mse": null,
+    "seconds": 3.0372941989999163,
+    "projected_updates": 0
+  },
+  "mode_hold:pr84": {
+    "task": "mode_hold",
+    "variant": "pr84",
+    "verdict": false,
+    "live_modes": 7,
+    "live_hq": 0.99267578125,
+    "mse": null,
+    "seconds": 24.929433833000076,
+    "projected_updates": null
+  },
+  "mode_hold:projected": {
+    "task": "mode_hold",
+    "variant": "projected",
+    "verdict": false,
+    "live_modes": 7,
+    "live_hq": 0.99267578125,
+    "mse": null,
+    "seconds": 25.05038136099995,
+    "projected_updates": 0
+  }
+}
