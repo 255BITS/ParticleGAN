@@ -1,0 +1,510 @@
+{
+  "verdict": "B",
+  "reason": "open-cap rho is below every useful acquisition step; one closed-cap exit sits just above the acquisition minimum",
+  "overlap": true,
+  "first_graded_failure": {
+    "step": 1129,
+    "modes": 8,
+    "hq": 0.898682
+  },
+  "graded_failures": [
+    {
+      "step": 1129,
+      "modes": 8,
+      "hq": 0.898682
+    },
+    {
+      "step": 1130,
+      "modes": 8,
+      "hq": 0.866211
+    },
+    {
+      "step": 1131,
+      "modes": 8,
+      "hq": 0.883301
+    },
+    {
+      "step": 1132,
+      "modes": 8,
+      "hq": 0.885742
+    },
+    {
+      "step": 1720,
+      "modes": 8,
+      "hq": 0.886963
+    },
+    {
+      "step": 1840,
+      "modes": 8,
+      "hq": 0.893066
+    },
+    {
+      "step": 1900,
+      "modes": 7,
+      "hq": 0.915039
+    },
+    {
+      "step": 2110,
+      "modes": 8,
+      "hq": 0.833252
+    },
+    {
+      "step": 2290,
+      "modes": 7,
+      "hq": 0.829346
+    },
+    {
+      "step": 2370,
+      "modes": 7,
+      "hq": 0.914795
+    }
+  ],
+  "warm_status": "FAIL",
+  "warm_local": {
+    "checks": 200,
+    "passing_checks": 196,
+    "failing_steps": [
+      1129,
+      1130,
+      1131,
+      1132
+    ],
+    "min_modes": 8,
+    "min_hq": 0.8662109375,
+    "passing_suffix": 68,
+    "stable_from_step": 1133,
+    "pass_all": false,
+    "pass_suffix": true
+  },
+  "warm_hold": {
+    "checks": 120,
+    "passing_checks": 114,
+    "failing_steps": [
+      1720,
+      1840,
+      1900,
+      2110,
+      2290,
+      2370
+    ],
+    "min_modes": 7,
+    "min_hq": 0.829345703125,
+    "passing_suffix": 3,
+    "stable_from_step": null,
+    "pass_all": false,
+    "pass_suffix": false
+  },
+  "warm_state_sha256": "57c10b571a2538075ea842cd0c9ea6f0ff677062ae9287e8e3c21d1241c48861",
+  "destructive_steps": 34,
+  "destructive_cap_open": 23,
+  "useful_steps": 674,
+  "useful_cap_open": 0,
+  "destructive_rho": [
+    {
+      "lo": 0.05,
+      "hi": 0.1,
+      "n": 1
+    },
+    {
+      "lo": 0.1,
+      "hi": 0.15,
+      "n": 6
+    },
+    {
+      "lo": 0.15,
+      "hi": 0.2,
+      "n": 8
+    },
+    {
+      "lo": 0.2,
+      "hi": 0.25,
+      "n": 8
+    },
+    {
+      "lo": 0.25,
+      "hi": 0.3,
+      "n": 5
+    },
+    {
+      "lo": 0.3,
+      "hi": 0.35,
+      "n": 1
+    },
+    {
+      "lo": 0.4,
+      "hi": 0.45,
+      "n": 3
+    },
+    {
+      "lo": 0.45,
+      "hi": 0.5,
+      "n": 1
+    },
+    {
+      "lo": 0.55,
+      "hi": 0.6,
+      "n": 1
+    }
+  ],
+  "useful_rho": [
+    {
+      "lo": 0.5,
+      "hi": 0.55,
+      "n": 1
+    },
+    {
+      "lo": 0.55,
+      "hi": 0.6,
+      "n": 1
+    },
+    {
+      "lo": 0.6,
+      "hi": 0.65,
+      "n": 2
+    },
+    {
+      "lo": 0.65,
+      "hi": 0.7,
+      "n": 5
+    },
+    {
+      "lo": 0.7,
+      "hi": 0.75,
+      "n": 3
+    },
+    {
+      "lo": 0.75,
+      "hi": 0.8,
+      "n": 9
+    },
+    {
+      "lo": 0.8,
+      "hi": 0.85,
+      "n": 15
+    },
+    {
+      "lo": 0.85,
+      "hi": 0.9,
+      "n": 17
+    },
+    {
+      "lo": 0.9,
+      "hi": 0.95,
+      "n": 16
+    },
+    {
+      "lo": 0.95,
+      "hi": 1.0,
+      "n": 11
+    },
+    {
+      "lo": 1.0,
+      "hi": null,
+      "n": 594
+    }
+  ],
+  "destructive_rho_stats": {
+    "n": 34,
+    "min": 0.095585,
+    "p10": 0.12244759999999999,
+    "p50": 0.216914,
+    "p90": 0.42340920000000004,
+    "max": 0.553786
+  },
+  "useful_rho_stats": {
+    "n": 674,
+    "min": 0.53806,
+    "p10": 0.9469959,
+    "p50": 1.8262740000000002,
+    "p90": 3.7422188000000007,
+    "max": 11.292017
+  },
+  "open_exit_rho_stats": {
+    "n": 23,
+    "min": 0.095585,
+    "p10": 0.10823479999999999,
+    "p50": 0.172781,
+    "p90": 0.233025,
+    "max": 0.249901
+  },
+  "closed_exit_rho_stats": {
+    "n": 11,
+    "min": 0.269678,
+    "p10": 0.27381,
+    "p50": 0.332303,
+    "p90": 0.496266,
+    "max": 0.553786
+  },
+  "useful_at_or_below_bound": 0,
+  "exits_below_useful_min": 33,
+  "attribution": {
+    "step": 1129,
+    "eval_modes": 8,
+    "eval_hq": 0.898682,
+    "rho": 0.170922,
+    "factor": 1.0,
+    "cap_open": true,
+    "clean_before": {
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 1.0,
+      "cover": 1.0,
+      "effective_modes": 7.559528350830078
+    },
+    "clean_proposal": {
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 1.0,
+      "cover": 1.0,
+      "effective_modes": 7.559528350830078
+    },
+    "clean_after": {
+      "modes": 8,
+      "n_modes": 8,
+      "hq": 1.0,
+      "cover": 1.0,
+      "effective_modes": 7.559528350830078
+    },
+    "margin_min": 0.010166,
+    "proposed_max": 0.079497,
+    "applied_max": 0.079497,
+    "clean_exits": 0,
+    "proposal_exits": 0,
+    "particles": [
+      {
+        "i": 0,
+        "margin_before": 0.046932,
+        "margin_proposal": 0.0182,
+        "margin_after": 0.0182,
+        "proposed": 0.030199,
+        "applied": 0.030199,
+        "mode_before": 3,
+        "mode_after": 3,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 1,
+        "margin_before": 0.010166,
+        "margin_proposal": 3.3e-05,
+        "margin_after": 3.3e-05,
+        "proposed": 0.010838,
+        "applied": 0.010838,
+        "mode_before": 4,
+        "mode_after": 4,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 2,
+        "margin_before": 0.18723,
+        "margin_proposal": 0.12432,
+        "margin_after": 0.12432,
+        "proposed": 0.065144,
+        "applied": 0.065144,
+        "mode_before": 2,
+        "mode_after": 2,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 3,
+        "margin_before": 0.07081,
+        "margin_proposal": 0.07238,
+        "margin_after": 0.07238,
+        "proposed": 0.0031,
+        "applied": 0.0031,
+        "mode_before": 5,
+        "mode_after": 5,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 4,
+        "margin_before": 0.179262,
+        "margin_proposal": 0.152691,
+        "margin_after": 0.152691,
+        "proposed": 0.079497,
+        "applied": 0.079497,
+        "mode_before": 2,
+        "mode_after": 2,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 5,
+        "margin_before": 0.090111,
+        "margin_proposal": 0.036506,
+        "margin_after": 0.036506,
+        "proposed": 0.053666,
+        "applied": 0.053666,
+        "mode_before": 1,
+        "mode_after": 1,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 6,
+        "margin_before": 0.048566,
+        "margin_proposal": 0.022752,
+        "margin_after": 0.022752,
+        "proposed": 0.026433,
+        "applied": 0.026433,
+        "mode_before": 3,
+        "mode_after": 3,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 7,
+        "margin_before": 0.086709,
+        "margin_proposal": 0.087417,
+        "margin_after": 0.087417,
+        "proposed": 0.001504,
+        "applied": 0.001504,
+        "mode_before": 5,
+        "mode_after": 5,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 8,
+        "margin_before": 0.066953,
+        "margin_proposal": 0.047984,
+        "margin_after": 0.047984,
+        "proposed": 0.019412,
+        "applied": 0.019412,
+        "mode_before": 4,
+        "mode_after": 4,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 9,
+        "margin_before": 0.143362,
+        "margin_proposal": 0.135296,
+        "margin_after": 0.135296,
+        "proposed": 0.009966,
+        "applied": 0.009966,
+        "mode_before": 0,
+        "mode_after": 0,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 10,
+        "margin_before": 0.160349,
+        "margin_proposal": 0.155984,
+        "margin_after": 0.155984,
+        "proposed": 0.007226,
+        "applied": 0.007226,
+        "mode_before": 7,
+        "mode_after": 7,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      },
+      {
+        "i": 11,
+        "margin_before": 0.135134,
+        "margin_proposal": 0.1274,
+        "margin_after": 0.1274,
+        "proposed": 0.010949,
+        "applied": 0.010949,
+        "mode_before": 6,
+        "mode_after": 6,
+        "left": false,
+        "entered": false,
+        "toward_uncovered": false
+      }
+    ]
+  },
+  "first_clean_exit": {
+    "step": 1130,
+    "rho": 0.421452,
+    "factor": 0.593187,
+    "cap_open": false,
+    "margin_min": 3.3e-05,
+    "proposed_max": 0.043936,
+    "applied_max": 0.026067,
+    "clean_before_hq": 1.0,
+    "clean_after_hq": 0.9166666865348816,
+    "clean_after_modes": 8,
+    "particles": [
+      {
+        "i": 1,
+        "margin_before": 3.3e-05,
+        "margin_proposal": -0.008752,
+        "margin_after": -0.005153,
+        "proposed": 0.010635,
+        "applied": 0.006307,
+        "mode_before": 4,
+        "mode_after": 4,
+        "left": true,
+        "entered": false,
+        "toward_uncovered": false
+      }
+    ]
+  },
+  "cold_verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "modes",
+        "value": 8,
+        "op": ">=",
+        "threshold": 8,
+        "status": "PASS",
+        "margin": 0
+      },
+      {
+        "metric": "hq",
+        "value": 0.998779296875,
+        "op": ">=",
+        "threshold": 0.9,
+        "status": "PASS",
+        "margin": 0.09877929687499998
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 10,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 5,
+      "first_pass_step": 700,
+      "stable_from_step": 1000,
+      "stable_from_seconds": 24.202031363999993,
+      "confirmed_step": 1200,
+      "confirmed_seconds": 29.043378126999983
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 1.0
+  },
+  "cold_steps": 1200,
+  "warm_steps": 1400,
+  "torch": "2.14.0+cpu",
+  "python": "3.12.3",
+  "sources": {
+    "reports/toy100/pr84_open_cap_diagnosis.py": "b11e2ca7f0a6549e23c14b006e630c0b2086235f150098d4757ff98f6e0c8020",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+  },
+  "g_bound": 0.25,
+  "d_bound": 3.0,
+  "shared_gate_eligible": false
+}

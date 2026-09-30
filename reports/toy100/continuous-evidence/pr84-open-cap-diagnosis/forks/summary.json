@@ -1,0 +1,105 @@
+{
+  "cold_final_state_sha256": "f7d4261dc05cbdd1e7052cf3de34c76370a97dc1c0ef51778ffc0e4139b872e1",
+  "continuation_updates": 1400,
+  "identity_cold_parity": true,
+  "scope": "passing_state_local_stability_only",
+  "steps": 2400,
+  "variants": {
+    "identity": {
+      "final": {
+        "hq": 0.998291015625,
+        "modes": 8
+      },
+      "final_state_sha256": "f7d4261dc05cbdd1e7052cf3de34c76370a97dc1c0ef51778ffc0e4139b872e1",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.989990234375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": {
+        "checks": 120,
+        "failing_steps": [],
+        "min_hq": 0.998291015625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 120,
+        "passing_suffix": 120,
+        "stable_from_step": 1210
+      },
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.997314453125,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "PASS"
+    },
+    "original": {
+      "final": {
+        "hq": 1.0,
+        "modes": 8
+      },
+      "final_state_sha256": "86160f1621a9e4bb51c00fcf7308cce12c1e11e555fcafd5d49a8ac0443746d1",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [
+          1129,
+          1130,
+          1131,
+          1132
+        ],
+        "min_hq": 0.8662109375,
+        "min_modes": 8,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 196,
+        "passing_suffix": 68,
+        "stable_from_step": 1133
+      },
+      "long_hold": {
+        "checks": 120,
+        "failing_steps": [
+          1720,
+          1840,
+          1900,
+          2110,
+          2290,
+          2370
+        ],
+        "min_hq": 0.829345703125,
+        "min_modes": 7,
+        "pass_all": false,
+        "pass_suffix": false,
+        "passing_checks": 114,
+        "passing_suffix": 3,
+        "stable_from_step": null
+      },
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.9873046875,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "FAIL"
+    }
+  },
+  "warm_state_sha256": "57c10b571a2538075ea842cd0c9ea6f0ff677062ae9287e8e3c21d1241c48861",
+  "warm_step": 1000
+}
