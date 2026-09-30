@@ -1,0 +1,200 @@
+[
+  {
+    "name": "learned-toy-E22",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 78.5719694129657,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/learned-toy-E22.log",
+    "result_sha256": "d981bf9ce9a38c276a09bda4978320bcca030a5cf50c6e43bfa08ddb468d5fe6"
+  },
+  {
+    "name": "learned-toy-CB64-RA",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 85.67198433307931,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/CB64-RA/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/learned-toy-CB64-RA.log",
+    "result_sha256": "3fda1aca6fbb982dfed842cf819fbea87761719f442ee5de444edad7767a71ef"
+  },
+  {
+    "name": "learned-mnist-E22",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 97.93648141203448,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/learned-mnist-E22.log",
+    "result_sha256": "08c3fdd74b30275dcc7c9369697924a0badb94bd9c8f824d70954b05e180aeac"
+  },
+  {
+    "name": "learned-mnist-CB64-RA",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 109.93098028097302,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/CB64-RA/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/learned-mnist-CB64-RA.log",
+    "result_sha256": "ce30ffa922c67bbbccf846e4befc9706b52b1800ed2456b52db589444268d9a9"
+  },
+  {
+    "name": "replay-E22",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 20.139218288008124,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/replay-E22.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/replay-E22.log",
+    "result_sha256": "0cad2a5176e589c7bf50641dad8f37eaaf55a0030d37c0d8fa93384fa94bb89d"
+  },
+  {
+    "name": "replay-CB64-RA",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 21.87009272398427,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/replay-CB64-RA.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/replay-CB64-RA.log",
+    "result_sha256": "5c96bed8c5c4927073e5118cf83c2a0e3ab9eef80b9b60d87db81d8f5334e2bd"
+  },
+  {
+    "name": "screen-mode_hold",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 76.28222972108051,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/mode_hold/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-mode_hold.log",
+    "result_sha256": "cd37690535913726957457ab6b997dadf9cb1dd36a01f97c3d429e987597525f"
+  },
+  {
+    "name": "screen-img_intensity2",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 41.482023655902594,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/img_intensity2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-img_intensity2.log",
+    "result_sha256": "92782707efd0052f7d074dfe89e1031642213741ebd7436dc6ee4db1ae055b0b"
+  },
+  {
+    "name": "screen-img_blobs4",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 39.2367164879106,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/img_blobs4/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-img_blobs4.log",
+    "result_sha256": "452619f002308a1e789a71b2b76f0164acbda2bdda23eb2dc26d165bb43459b2"
+  },
+  {
+    "name": "screen-img_stripes2",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 38.679646734148264,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/img_stripes2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-img_stripes2.log",
+    "result_sha256": "0edcfb9f0cbdd47e7fc8aa819940fb13859efaed74420d9ca75aa582ca61081d"
+  },
+  {
+    "name": "screen-img_bars4",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 36.96329840598628,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/img_bars4/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-img_bars4.log",
+    "result_sha256": "81a35755af757ca031a8914f0e6e3327d193f3d088ebf7f9ff7f5afd34ff05eb"
+  },
+  {
+    "name": "screen-vector_two_broad",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 95.02295345603488,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/vector_two_broad/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-vector_two_broad.log",
+    "result_sha256": "bb69e51d8ec814536b261e1493f0513c084bc332b72abba5485f29c6c94677b9"
+  },
+  {
+    "name": "screen-vector_unequal_mass",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 103.22809437895194,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/vector_unequal_mass/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-vector_unequal_mass.log",
+    "result_sha256": "49f5a0f92b3f99665ba0018ae5dddf5e7cf07161a6414268520727ac13ca6954"
+  },
+  {
+    "name": "screen-vector_unequal_width",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 93.45968386298046,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/vector_unequal_width/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-vector_unequal_width.log",
+    "result_sha256": "9931bd120496a502ea40181eb29eded4e6889ed24f4ef32d877e5e4859b20e58"
+  },
+  {
+    "name": "screen-vector_anisotropic",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 103.28538734978065,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/vector_anisotropic/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-vector_anisotropic.log",
+    "result_sha256": "cb01bd77f9b96a93366149da6e6322a04798f5ec03207e7a55c1d8111ee4cdc7"
+  },
+  {
+    "name": "screen-vector_overlap",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 96.74831520905718,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/vector_overlap/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-vector_overlap.log",
+    "result_sha256": "efa4078bcf74d3a942f19ff09f6f0b20fc40aeda19c532ac36f51c9c6466a46d"
+  },
+  {
+    "name": "screen-vector_spiral",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 297.89305547601543,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/vector_spiral/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-vector_spiral.log",
+    "result_sha256": "c2a25349c360e2f53fa003427791eab712d75d0ce64a464fb06cb5fffcbb8b9e"
+  },
+  {
+    "name": "screen-ring_shift",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 500.92543090111576,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/ring_shift/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-ring_shift.log",
+    "result_sha256": "f5541f15f80e1393c59b61f2d6dc6fe0e29a3b4f868d71217e3ab4f263f17271"
+  },
+  {
+    "name": "screen-stationary",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 413.0660261781886,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/stationary/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-stationary.log",
+    "result_sha256": "0a7716963105b43d3016575b0d0287f995f78502441384f028bcbd9845085b9f"
+  },
+  {
+    "name": "screen-grid100",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 392.4724083119072,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/grid100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-grid100.log",
+    "result_sha256": "23ee2a3b88dfff08d36e8ec39be7a39c9af381836c4233e2984df9273b0745a3"
+  },
+  {
+    "name": "screen-rotated100",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 418.40840802295133,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/rotated100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-rotated100.log",
+    "result_sha256": "357987def8eaa35e58f27abcc0ff0c68c67beb1fa01798ef27fb4155f9c795b0"
+  },
+  {
+    "name": "screen-staggered100",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 423.03800661303103,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/runs/staggered100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/screen-staggered100.log",
+    "result_sha256": "286aae46b8e3da65ca0fa6ddaa7434238181ac81e1bb1514851af3aeffff8855"
+  }
+]

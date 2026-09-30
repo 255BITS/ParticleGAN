@@ -2,7 +2,7 @@
 
 Frozen E22-derived package with 64 rank-8 feature cells and bounded real-anchor parents. This archive makes the tested experimental implementation and configuration available in Git.
 
-**Status: experimental.** The completed CPU diagnostics found a reaction-cost improvement and passing correctness checks, alongside mass, geometry and learned-model quality regressions. Canonical CUDA acceptance is pending in the restored-GPU retest; these CPU results do not decide that verdict.
+**Status: experimental.** The completed CPU diagnostics found a reaction-cost improvement and passing correctness checks, alongside mass, geometry and learned-model quality regressions. The restored-GPU retest is complete: 9/13 portability tests and 0/3 native tests pass; learned MNIST recall regresses. Evidence validity passed 660/660 checks. See the [GPU report](cuda/REPORT.md).
 
 - [Configuration](configs/overrides-CB64-RA.json) and [backend source](pkg-CB64-RA/particlegan/feature_cells.py)
 - [Usage and checkpoint instructions](USAGE.md)
@@ -26,4 +26,4 @@ For the focused CPU contracts from this directory:
 /tmp/pr38-default-env/bin/python implementation/test_integration.py
 ```
 
-The recorded result is 8/8 passing contracts. The GPU retest runs the unchanged config on the original CUDA harness, paired E22/CB64-RA learned training and checkpoint replay. Its final receipts will be archived when complete.
+The recorded result is 8/8 passing contracts. The GPU retest runs the unchanged config on the original CUDA harness, paired E22/CB64-RA learned training and checkpoint replay. Its completed runners, compact receipts and independent audit are preserved under `cuda/`. Corrected CB64-RA2 diagnosis and validation are a separate experiment.
