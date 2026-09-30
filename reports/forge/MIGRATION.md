@@ -75,9 +75,25 @@ Archived unversioned requests retain their original semantics and costs.
 
 **525 Forge tests passed**, including reference-batch/RNG parity, sampler
 attestation, grouped-task boundary validation and historical compatibility.
+Full CI on `cd5308ec` also passed **1,643 tests and 18 subtests**, with 16 explicit
+skips, Python 3.10/3.11 wheel smokes and release packaging:
+[run 36663613925](https://github.com/255BITS/ParticleGAN/actions/runs/36663613925).
 A real GPU 0 allocation-only probe measured 4,096 allocated / 2,097,152 reserved
 bytes without training. Old missing memory measurements remain unavailable.
 The repairs require a new cohort and registrations before any further training.
+
+## Physical pilot completed
+
+The [v3 pilot](PHYSICAL_GPU_PILOT_READOUT.md) passed physical two-GPU overlap,
+fresh-clone deduplication, coordinator recovery with unchanged live workers,
+cancellation and one repair. Both vector cells passed. All three attempts cost
+45.000919218 seconds total, with zero final reservations and desktop processes
+preserved. The corrected intensity diagnostic separately failed for 16.837 seconds.
+Both exact-revision readouts are concluded; no scientific result was retried.
+
+Calibration remains blocked. The historical positive intensity fixture uses a
+different architecture, so host provenance needs review before expanding the
+current matrix. Full reference quality and legacy cutover remain outstanding.
 
 ## First merged-source GPU screen
 
@@ -95,8 +111,8 @@ allocation check (4,096 allocated / 2,097,152 reserved bytes; zero training
 updates). The receipts remain unchanged. The adapter audit also found missing
 clamping of noisy image training data and stale candidate sampling declarations.
 Prospective fixes need their own source/task identities before further execution.
-The physical two-GPU pilot remains unlaunched, and calibration remains blocked
-with all 16 independent baseline references unknown.
+At that point the physical two-GPU pilot was unlaunched and all 16 independent
+baseline references were unknown. Its later v3 execution is recorded above.
 
 ## Frozen inputs and ownership
 
@@ -131,9 +147,9 @@ outside active pools and retain existing experiment requests.
 | Administrative lifecycle and display filters | Implemented and tested | Immutable abandon/supersede receipts; explicit cancellation repair; family/provenance filters preserve full qualification |
 | Automation telemetry | Implemented; historical missing measurements remain unavailable | Unique paid costs, avoided work/reuse/errors/concurrency; process RSS, CUDA allocator peaks and instrumented phase timing |
 | Calibration diagnostics and robustness registration | Implemented; no production adoption claim | Registered diagnostic namespace, report-bound calibration, fixed promotion contract and forgery/retry tests |
-| Phase D calibration / bounded multi-GPU pilot | Historical calibration replayed; current calibration and GPU pilot pending | Adoption remains blocked; CPU pilot below |
+| Phase D calibration / bounded multi-GPU pilot | Historical calibration replayed; physical v3 pilot passed | Current calibration remains blocked; full reference evidence still required |
 | Root-guide onboarding | Fresh-checkout walkthrough complete | `FRESH_CHECKOUT.md`; penalty ablation rejected after 7.371 seconds, all remaining tasks unlaunched, concluded readout and zero reservations |
-| Cutover | Pending accepted calibration and reserved multi-GPU pilot | Existing launchers retained |
+| Cutover | Pending accepted calibration and legacy reconciliation | Existing launchers retained; physical pilot passed |
 
 No candidate is promoted by implementing the engine or by passing its tests.
 
@@ -189,8 +205,8 @@ failure without granting qualification. No current profile has passed adoption.
   without enqueueing. This does not constitute accepted calibration.
 - [ ] Meet the unchanged acceptance criteria or revise the screen with a new
   declared profile and repeat its necessary calibration.
-- [ ] Reserve non-overlapping GPU capacity or one shared resource owner, then
-  record the real multi-GPU/cancellation/restart pilot.
+- [x] Reserve available GPU capacity and record the real multi-GPU/cancellation/
+  restart pilot: [v3 proof and readout](PHYSICAL_GPU_PILOT_READOUT.md).
 - [x] Complete a fresh-checkout walkthrough; `FRESH_CHECKOUT.md` binds the exact
   source, commands, candidate, evidence and original readout.
 - [ ] Reconcile actual legacy consumers/queues before making Forge the default

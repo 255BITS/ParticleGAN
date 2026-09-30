@@ -1,5 +1,10 @@
 # Bounded physical multi-GPU pilot
 
+**Completed:** [v3 operational acceptance passed](PHYSICAL_GPU_PILOT_READOUT.md)
+with two scientific passes, one deliberate cancellation and one repair,
+45.000919218 paid seconds, and zero final reservations. Do not rerun the completed
+pilot. The procedure below records its preregistered scope.
+
 ## Current-source registration — 2026-09-29
 
 The repaired-source pilot is now

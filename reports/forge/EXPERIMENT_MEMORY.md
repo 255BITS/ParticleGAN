@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 185. Inventory coverage: complete. Unresolved import items: 7.
+Records: 187. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -2835,6 +2835,22 @@ Historical recorded task outcomes: FAIL=1
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/paired-bd-graft/baseline-result.json) · [Record](records/history-v3-repro-50fe3393d8b8.json)
 
+### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
+
+**Scope:** calibration_diagnostic; scientific; revision `1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461`.
+
+Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.
+
+**Observed:** {'INCOMPLETE': 1, 'PASS': 1}; wall seconds 25.601; mechanism `structural`.
+
+vector_two_broad: hq=0.97266, mass_tv=0.0075684
+
+Learned-MoG vector_two_broad PASS after exactly one registered operational cancellation repair. This is a single task diagnostic, not full-reference or smoke qualification.
+
+**Next:** Retain cancelled receipt/cost and final scientific pass. Do not repeat this scientific PASS or promote from one reference. Complete host-provenance review before choosing further bounded calibration cells.
+
+[Evidence](../../reports/forge/attempts/661bd9830be94225891954f5fb690342/result.json) · [Record](records/readout-060e7be73e2832e314b9573f.json)
+
 ### forge-onboarding-anchor-ablation · readout-10242573330bec1494c7602b
 
 **Scope:** current; scientific; revision `39dc1cc8e516f8127e732edea196f82243ff8cdff4ed761020f0f802a3bcaf0f`.
@@ -2963,6 +2979,22 @@ Frozen v2 smoke remains FAIL (two_pole travel); unused_token_hold and learned-Mo
 
 [Evidence](../../reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
 
+### k3p · readout-c3df7159c90725fdef1cb700
+
+**Scope:** calibration_diagnostic; scientific; revision `ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 36.238; mechanism `structural`.
+
+img_intensity2: modes=0, hq=0; vector_two_broad: hq=0.98828, mass_tv=0.00024414
+
+Corrected intensity FAIL and learned-MoG vector_two_broad PASS under the same frozen v3 source. The physical two-GPU workflow pilot passed; scientific calibration remains blocked.
+
+**Next:** Stop automatic reference-matrix expansion. Audit canonical host architecture provenance and register any justified substantive diagnosis under a new frozen identity. Preserve full 16 independent-reference denominator; unknown tasks are neither passes nor failures. Keep legacy cutover blocked until accepted calibration.
+
+[Evidence](../../reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/result.json) · [Record](records/readout-c3df7159c90725fdef1cb700.json)
+
 ### k3p · readout-c723a88e5122f97011aabad9
 
 **Scope:** calibration_diagnostic; scientific; revision `5d60f405c372f33d8c96675c772fe97e10bb922cfe313d8e66722de9d32bc289`.
@@ -2991,4 +3023,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `7d7d01991277a57ad93de29fe5472bb35b6cc0156c84717aeac3ad8de4dbd277`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `ce042711110ec3d417abf7605da1bccdabe43cfb2cc1a761a6e4bcff7112d6ab`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

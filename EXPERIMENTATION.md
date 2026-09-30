@@ -33,6 +33,11 @@ have separate bounded registrations; old-source receipts cannot fill its matrix.
 Its [first GPU baseline](reports/forge/DEVELOP_QUICK_SCREEN_READOUT.md) completed
 three scientific failures for 38.915 seconds. All independent references remain
 unknown, so these results alone cannot establish false rejection or adoption.
+The corrected [intensity diagnostic](reports/forge/INTENSITY_REPAIR_READOUT.md)
+also failed for 16.837 seconds. The [physical two-GPU pilot](reports/forge/PHYSICAL_GPU_PILOT_READOUT.md)
+passed duplicate submission, live-worker recovery, cancellation and one repair
+for 45.001 paid seconds; both vector tasks passed. Full scientific calibration
+and legacy cutover remain outstanding.
 
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.

@@ -20,7 +20,8 @@ checks; the subsequent history extension passed 14 checks. Clean public sampling
 retains MoG kernel noise, and vector gates keep their explicit full-component
 policy. The [new source study](QUICK_SCREEN_STUDY.md) imports no older receipts.
 Its baseline screen and two-cell physical pilot were registered separately.
-Calibration, the real two-GPU pilot and cutover remain outstanding.
+Calibration and cutover remain outstanding. The later physical pilot is closed
+by the linked evidence below.
 
 Full CI then exposed six legacy image-host failures from the public trainer's
 blanket RNG uniqueness guard. The [compatibility repair](MIGRATION.md#ci-compatibility-repair)
@@ -43,6 +44,12 @@ alone. These one-device checks do not satisfy the physical two-GPU pilot.
 The original inspection below is retained as an audit trail. These subsequent
 changes close implementation gaps without claiming the still-missing scientific
 or GPU-pilot outcomes:
+
+- The [v3 physical pilot](PHYSICAL_GPU_PILOT_READOUT.md) subsequently passed
+  real overlapping GPU execution, fresh-clone deduplication, recovery of unchanged
+  live worker leases, cancellation and one repair, measured costs and zero final
+  reservations. Both scientific vector cells passed. This closes the physical
+  pilot finding; it does not establish calibration or authorize legacy cutover.
 
 - Runtime dispatch and conservative preflight now cover paired adaptation,
   clock probes and native continuation. `adaptation.py`, `clockfree.py` and
@@ -96,8 +103,9 @@ or GPU-pilot outcomes:
   **474 Forge and recipe tests passed** after these fixes.
 
 **Still required for completion:** real compatible positive/negative current-MoG
-calibration evidence meeting the unchanged criteria, the bounded physical
-multi-GPU pilot, exact outstanding historical claim artifacts, the conditional adoption/cutover decision. Inventory coverage and both
+calibration evidence meeting the unchanged criteria, exact outstanding historical
+claim artifacts, and the conditional adoption/cutover decision. The bounded
+physical multi-GPU pilot, inventory coverage and both
 fresh-checkout walkthroughs are now recorded. Neither the
 software fixes nor diagnostic registration changes adoption to PASS. GPU
 capacity and legacy ownership must be rechecked at execution time.

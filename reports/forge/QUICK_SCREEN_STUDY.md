@@ -16,6 +16,13 @@ selects two vector cells and at most one deliberate-cancellation repair. Neither
 registration confers ordinary qualification, and neither authorizes filling
 the full calibration matrix.
 
+The [corrected intensity cell](INTENSITY_REPAIR_READOUT.md) completed FAIL for
+16.837 seconds. The [physical pilot](PHYSICAL_GPU_PILOT_READOUT.md) completed
+two vector PASS cells and one deliberate cancellation/repair for 45.001 seconds.
+The remaining 54 scientific cells are unknown; no lineage has a complete
+independent reference label. Adoption remains blocked. Host-profile provenance
+now needs explicit binding before a further positive-reference transfer probe.
+
 ## Merged-develop cohort — 2026-09-29
 
 The [completed GPU baseline](DEVELOP_QUICK_SCREEN_READOUT.md) measured three

@@ -2,6 +2,15 @@
 
 ## Ownership update — 2026-09-29
 
+The later [v3 pilot](PHYSICAL_GPU_PILOT_READOUT.md) used both available A6000s
+after a fresh process/queue check found no external training owner. Existing
+desktop clients were explicitly preserved and their process identities verified
+after completion. Forge's two simultaneous jobs, deliberate cancellation and
+one repair have completed; all pilot leases and reservations were released.
+This capacity window satisfied the accepted plan's bounded-pilot authorization;
+it transferred no legacy queue ownership. Earlier capacity questions and
+snapshots below are historical observations.
+
 At approximately 20:50 local (2026-09-30 02:50 UTC), NPC PID 354762 had exited
 and GPU 0 was idle (18 MiB), with no compute process. Forge then ran the user's
 authorized, registered [three-task GPU 0 screen](DEVELOP_QUICK_SCREEN_READOUT.md).

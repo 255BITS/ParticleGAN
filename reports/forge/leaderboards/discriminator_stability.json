@@ -129,6 +129,22 @@
       "source": "reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json"
     },
     {
+      "attempt_id": "65265b43758f4dbd85b77ef2ed46ac4b",
+      "candidate_id": "k3p",
+      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 16.837452505991678
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/result.json"
+    },
+    {
       "attempt_id": "6577d4075c5042dea96c619ba197bd27",
       "candidate_id": "k3p",
       "candidate_revision": "5d60f405c372f33d8c96675c772fe97e10bb922cfe313d8e66722de9d32bc289",
@@ -143,6 +159,22 @@
       },
       "reason": "Registered calibration diagnostics cannot qualify a candidate.",
       "source": "reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json"
+    },
+    {
+      "attempt_id": "661bd9830be94225891954f5fb690342",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 8.452047889993992
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/661bd9830be94225891954f5fb690342/result.json"
     },
     {
       "attempt_id": "6e2b5fdf4c8e4ddaba57316096f777a2",
@@ -385,6 +417,22 @@
       "source": "reports/forge/attempts/e40a18d4e33d488d896c9fe4a1122ceb/result.json"
     },
     {
+      "attempt_id": "e572cb95deeb49a18e712fa80f13e9c6",
+      "candidate_id": "k3p",
+      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 19.40040085700457
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/e572cb95deeb49a18e712fa80f13e9c6/result.json"
+    },
+    {
       "attempt_id": "e65951a61a764989b7b416e418130061",
       "candidate_id": "forge-onboarding-anchor-ablation",
       "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
@@ -399,6 +447,22 @@
       },
       "reason": "Registered calibration diagnostics cannot qualify a candidate.",
       "source": "reports/forge/attempts/e65951a61a764989b7b416e418130061/result.json"
+    },
+    {
+      "attempt_id": "f04fd435083a46b68ff8bf278a8eb26d",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.14847047100193
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/f04fd435083a46b68ff8bf278a8eb26d/result.json"
     },
     {
       "attempt_id": "fafc3da7cecf4b1780bbaedf66141092",
@@ -1217,6 +1281,294 @@
     },
     {
       "attempt_ids": [
+        "661bd9830be94225891954f5fb690342",
+        "f04fd435083a46b68ff8bf278a8eb26d"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "3c633164bcfed288566a0fe753d5dc53c4127baf6cddaa9184edab861c371dde",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-no-critic-penalty",
+        "profile_sha256": "b8a302735ae152fb3d6a67b8d39728d2f3f65772103a143e0a51e3532cd7e05d",
+        "qualification_reuse": false,
+        "registration_id": "develop-20260929-gpu-pilot-v3",
+        "registration_sha256": "f16777b8fd5b7c4cfb5da1515315530e67f2c4d3e5c1d6d3f51140c71f51013a"
+      },
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "cohort": "76d0daa5f1e045df9185ebd9871abfdfc6df6f6524a03b3bb37b406036e0dd43",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 25.60051836099592
+      },
+      "counts": {
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "separated_broad"
+        ],
+        "task_families": {
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "recorded_request",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "661bd9830be94225891954f5fb690342",
+          "f04fd435083a46b68ff8bf278a8eb26d"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "e068316721e3b072668373b6",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "661bd9830be94225891954f5fb690342",
+        "f04fd435083a46b68ff8bf278a8eb26d"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "vector_two_broad"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-develop-20260929-gpu-pilot-v3",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [
+        {
+          "attempt_id": "661bd9830be94225891954f5fb690342",
+          "superseded_by": "f04fd435083a46b68ff8bf278a8eb26d",
+          "task_results": [
+            {
+              "_attempt_id": "661bd9830be94225891954f5fb690342",
+              "compatibility_key": "96f8372adc1fdc4d8ae442f06ae120e65bf1241411e59a6bd9846a3318ab8c65",
+              "cost": {
+                "charged_task": "vector_two_broad",
+                "device": "0",
+                "execution_seconds": 8.452047889993992,
+                "flops": {
+                  "kind": "unavailable",
+                  "value": null
+                },
+                "wall_seconds": 8.452047889993992
+              },
+              "gate_status": "INCOMPLETE",
+              "raw_status": "cancelled",
+              "reason": "request cancelled",
+              "task_id": "vector_two_broad"
+            }
+          ]
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+        "origin_commit": "f35be792137dfb30cfb9cb3033a888099a3e8747",
+        "path": "reports/forge/attempts/661bd9830be94225891954f5fb690342/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "charged_task": "vector_two_broad",
+            "device": "0",
+            "execution_seconds": 8.452047889993992,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "wall_seconds": 8.452047889993992
+          },
+          "gate_status": "INCOMPLETE",
+          "raw_status": "cancelled",
+          "reason": "request cancelled",
+          "task_id": "vector_two_broad"
+        },
+        {
+          "cost": {
+            "adapter_loop_seconds": 11.842832069989527,
+            "adapter_seconds": 12.119310602996848,
+            "charged_task": "vector_two_broad",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 17.14847047100193,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.301533684221795,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.3575645690143574
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007336980022955686
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 10.936632135184482
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 13.855901994000305,
+            "wall_seconds": 17.14847047100193
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.4382375627756119,
+            "component_core_covariance_errors": [
+              0.49460533261299133,
+              0.3818697929382324
+            ],
+            "component_core_eigen_ratios": [
+              0.9788154363632202,
+              0.6093422174453735
+            ],
+            "component_core_min_eigen_ratio": 0.6093422174453735,
+            "component_counts": [
+              2079,
+              2017
+            ],
+            "component_covariance_error": 0.4382375627756119,
+            "component_covariance_errors": [
+              0.49460533261299133,
+              0.3818697929382324
+            ],
+            "component_mass": [
+              0.507568359375,
+              0.492431640625
+            ],
+            "component_min_eigen_ratio": 0.6093422174453735,
+            "component_resolved": [
+              true,
+              true
+            ],
+            "component_spill": [
+              0.04665704816579819,
+              0.007436787243932486
+            ],
+            "covariance_error": 0.1930994838476181,
+            "hq": 0.97265625,
+            "mass_tv": 0.007568359375,
+            "max_component_spill": 0.04665704816579819,
+            "mean_error": 0.01392719242721796,
+            "min_mass_ratio": 0.98486328125,
+            "resolved_core_covariance_error": 0.4382375627756119,
+            "resolved_core_min_eigen_ratio": 0.6093422174453735,
+            "resolved_max_component_spill": 0.04665704816579819,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.07860356295725181,
+            "target_mass": [
+              0.5,
+              0.5
+            ],
+            "target_scale": 1.0555585622787476
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_two_broad"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
         "633dcaca307e4e01b82b5281d82082fb",
         "8f49adf865944a2db4ebee903147e24c",
         "e04676fe83e64552914c54aa75c06377"
@@ -1461,6 +1813,330 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "65265b43758f4dbd85b77ef2ed46ac4b",
+        "e572cb95deeb49a18e712fa80f13e9c6"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "3c633164bcfed288566a0fe753d5dc53c4127baf6cddaa9184edab861c371dde",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "b8a302735ae152fb3d6a67b8d39728d2f3f65772103a143e0a51e3532cd7e05d",
+        "qualification_reuse": false,
+        "registration_id": "develop-20260929-intensity-repair-v3",
+        "registration_sha256": "1473c3aaa99a2bd7bf6ac56e11cee6d613707baae0016ecf7ea9fbf68bd0ce31"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "cohort": "37a05845f9da2ff8baf039a13a875831251ea4e5d2fff2e59d558905197c328b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 36.23785336299625
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "image",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "image_conv_transpose",
+          "separated_broad"
+        ],
+        "task_families": {
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "recorded_request",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "recorded_request",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "65265b43758f4dbd85b77ef2ed46ac4b",
+          "e572cb95deeb49a18e712fa80f13e9c6"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "495a30143da81785a2d9756d",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "7c2e7d15802ec8ab2920d2e8",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "65265b43758f4dbd85b77ef2ed46ac4b",
+        "e572cb95deeb49a18e712fa80f13e9c6"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "img_intensity2"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-develop-20260929-intensity-repair-v3",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+        "origin_commit": "f35be792137dfb30cfb9cb3033a888099a3e8747",
+        "path": "reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 7.499059540001326,
+            "adapter_seconds": 7.935109394005849,
+            "charged_task": "img_intensity2",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 16.837452505991678,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 7.212205295043532,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.025972070972784422
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007761393993860111
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 7.178471830076887
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.552739614999155,
+            "wall_seconds": 16.837452505991678
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.5,
+            "hq": 0.0,
+            "mean_rmse": 0.17500002682209015,
+            "mode_fractions": [
+              1.0,
+              0.0
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0
+            ],
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_intensity2"
+        },
+        {
+          "cost": {
+            "adapter_loop_seconds": 11.835790900993743,
+            "adapter_seconds": 12.180237107007997,
+            "charged_task": "vector_two_broad",
+            "completed_steps": 1200,
+            "device": "1",
+            "execution_seconds": 19.40040085700457,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.302098954794928,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.3624425409070682
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007469882068107836
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 10.932186531819752
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 16.003905168006895,
+            "wall_seconds": 19.40040085700457
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.14830445498228073,
+            "component_core_covariance_errors": [
+              0.15887057781219482,
+              0.13773833215236664
+            ],
+            "component_core_eigen_ratios": [
+              0.8949799537658691,
+              0.9209426641464233
+            ],
+            "component_core_min_eigen_ratio": 0.8949799537658691,
+            "component_counts": [
+              2047,
+              2049
+            ],
+            "component_covariance_error": 0.14830445498228073,
+            "component_covariance_errors": [
+              0.15887057781219482,
+              0.13773833215236664
+            ],
+            "component_mass": [
+              0.499755859375,
+              0.500244140625
+            ],
+            "component_min_eigen_ratio": 0.8949799537658691,
+            "component_resolved": [
+              true,
+              true
+            ],
+            "component_spill": [
+              0.015144113451242447,
+              0.008296729996800423
+            ],
+            "covariance_error": 0.07902362942695618,
+            "hq": 0.98828125,
+            "mass_tv": 0.000244140625,
+            "max_component_spill": 0.015144113451242447,
+            "mean_error": 0.00544682377949357,
+            "min_mass_ratio": 0.99951171875,
+            "resolved_core_covariance_error": 0.14830445498228073,
+            "resolved_core_min_eigen_ratio": 0.8949799537658691,
+            "resolved_max_component_spill": 0.015144113451242447,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.02749231881052105,
+            "target_mass": [
+              0.5,
+              0.5
+            ],
+            "target_scale": 1.0555585622787476
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_two_broad"
         }
       ]
     },
@@ -3124,7 +3800,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "e068316721e3b072668373b6",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -6537,7 +7220,20 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "495a30143da81785a2d9756d",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "7c2e7d15802ec8ab2920d2e8",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -36288,7 +36984,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "e068316721e3b072668373b6",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -39701,7 +40404,20 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "495a30143da81785a2d9756d",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "7c2e7d15802ec8ab2920d2e8",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -41717,6 +42433,294 @@
     },
     {
       "attempt_ids": [
+        "661bd9830be94225891954f5fb690342",
+        "f04fd435083a46b68ff8bf278a8eb26d"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "3c633164bcfed288566a0fe753d5dc53c4127baf6cddaa9184edab861c371dde",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-no-critic-penalty",
+        "profile_sha256": "b8a302735ae152fb3d6a67b8d39728d2f3f65772103a143e0a51e3532cd7e05d",
+        "qualification_reuse": false,
+        "registration_id": "develop-20260929-gpu-pilot-v3",
+        "registration_sha256": "f16777b8fd5b7c4cfb5da1515315530e67f2c4d3e5c1d6d3f51140c71f51013a"
+      },
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "cohort": "76d0daa5f1e045df9185ebd9871abfdfc6df6f6524a03b3bb37b406036e0dd43",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 25.60051836099592
+      },
+      "counts": {
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "separated_broad"
+        ],
+        "task_families": {
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "recorded_request",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "661bd9830be94225891954f5fb690342",
+          "f04fd435083a46b68ff8bf278a8eb26d"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "e068316721e3b072668373b6",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "661bd9830be94225891954f5fb690342",
+        "f04fd435083a46b68ff8bf278a8eb26d"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "vector_two_broad"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-develop-20260929-gpu-pilot-v3",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [
+        {
+          "attempt_id": "661bd9830be94225891954f5fb690342",
+          "superseded_by": "f04fd435083a46b68ff8bf278a8eb26d",
+          "task_results": [
+            {
+              "_attempt_id": "661bd9830be94225891954f5fb690342",
+              "compatibility_key": "96f8372adc1fdc4d8ae442f06ae120e65bf1241411e59a6bd9846a3318ab8c65",
+              "cost": {
+                "charged_task": "vector_two_broad",
+                "device": "0",
+                "execution_seconds": 8.452047889993992,
+                "flops": {
+                  "kind": "unavailable",
+                  "value": null
+                },
+                "wall_seconds": 8.452047889993992
+              },
+              "gate_status": "INCOMPLETE",
+              "raw_status": "cancelled",
+              "reason": "request cancelled",
+              "task_id": "vector_two_broad"
+            }
+          ]
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+        "origin_commit": "f35be792137dfb30cfb9cb3033a888099a3e8747",
+        "path": "reports/forge/attempts/661bd9830be94225891954f5fb690342/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "charged_task": "vector_two_broad",
+            "device": "0",
+            "execution_seconds": 8.452047889993992,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "wall_seconds": 8.452047889993992
+          },
+          "gate_status": "INCOMPLETE",
+          "raw_status": "cancelled",
+          "reason": "request cancelled",
+          "task_id": "vector_two_broad"
+        },
+        {
+          "cost": {
+            "adapter_loop_seconds": 11.842832069989527,
+            "adapter_seconds": 12.119310602996848,
+            "charged_task": "vector_two_broad",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 17.14847047100193,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.301533684221795,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.3575645690143574
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007336980022955686
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 10.936632135184482
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 13.855901994000305,
+            "wall_seconds": 17.14847047100193
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.4382375627756119,
+            "component_core_covariance_errors": [
+              0.49460533261299133,
+              0.3818697929382324
+            ],
+            "component_core_eigen_ratios": [
+              0.9788154363632202,
+              0.6093422174453735
+            ],
+            "component_core_min_eigen_ratio": 0.6093422174453735,
+            "component_counts": [
+              2079,
+              2017
+            ],
+            "component_covariance_error": 0.4382375627756119,
+            "component_covariance_errors": [
+              0.49460533261299133,
+              0.3818697929382324
+            ],
+            "component_mass": [
+              0.507568359375,
+              0.492431640625
+            ],
+            "component_min_eigen_ratio": 0.6093422174453735,
+            "component_resolved": [
+              true,
+              true
+            ],
+            "component_spill": [
+              0.04665704816579819,
+              0.007436787243932486
+            ],
+            "covariance_error": 0.1930994838476181,
+            "hq": 0.97265625,
+            "mass_tv": 0.007568359375,
+            "max_component_spill": 0.04665704816579819,
+            "mean_error": 0.01392719242721796,
+            "min_mass_ratio": 0.98486328125,
+            "resolved_core_covariance_error": 0.4382375627756119,
+            "resolved_core_min_eigen_ratio": 0.6093422174453735,
+            "resolved_max_component_spill": 0.04665704816579819,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.07860356295725181,
+            "target_mass": [
+              0.5,
+              0.5
+            ],
+            "target_scale": 1.0555585622787476
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_two_broad"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
         "633dcaca307e4e01b82b5281d82082fb",
         "8f49adf865944a2db4ebee903147e24c",
         "e04676fe83e64552914c54aa75c06377"
@@ -41961,6 +42965,330 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "65265b43758f4dbd85b77ef2ed46ac4b",
+        "e572cb95deeb49a18e712fa80f13e9c6"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "3c633164bcfed288566a0fe753d5dc53c4127baf6cddaa9184edab861c371dde",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "b8a302735ae152fb3d6a67b8d39728d2f3f65772103a143e0a51e3532cd7e05d",
+        "qualification_reuse": false,
+        "registration_id": "develop-20260929-intensity-repair-v3",
+        "registration_sha256": "1473c3aaa99a2bd7bf6ac56e11cee6d613707baae0016ecf7ea9fbf68bd0ce31"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "cohort": "37a05845f9da2ff8baf039a13a875831251ea4e5d2fff2e59d558905197c328b",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 36.23785336299625
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "image",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "image_conv_transpose",
+          "separated_broad"
+        ],
+        "task_families": {
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "recorded_request",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "recorded_request",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "65265b43758f4dbd85b77ef2ed46ac4b",
+          "e572cb95deeb49a18e712fa80f13e9c6"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "495a30143da81785a2d9756d",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "7c2e7d15802ec8ab2920d2e8",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "65265b43758f4dbd85b77ef2ed46ac4b",
+        "e572cb95deeb49a18e712fa80f13e9c6"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "img_intensity2"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Phase D historical calibration remains required",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "discriminator_stability",
+        "id": "calibration-develop-20260929-intensity-repair-v3",
+        "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 2,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+        "origin_commit": "f35be792137dfb30cfb9cb3033a888099a3e8747",
+        "path": "reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 7.499059540001326,
+            "adapter_seconds": 7.935109394005849,
+            "charged_task": "img_intensity2",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 16.837452505991678,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 7.212205295043532,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.025972070972784422
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007761393993860111
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 7.178471830076887
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.552739614999155,
+            "wall_seconds": 16.837452505991678
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.5,
+            "hq": 0.0,
+            "mean_rmse": 0.17500002682209015,
+            "mode_fractions": [
+              1.0,
+              0.0
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0
+            ],
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_intensity2"
+        },
+        {
+          "cost": {
+            "adapter_loop_seconds": 11.835790900993743,
+            "adapter_seconds": 12.180237107007997,
+            "charged_task": "vector_two_broad",
+            "completed_steps": 1200,
+            "device": "1",
+            "execution_seconds": 19.40040085700457,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.302098954794928,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.3624425409070682
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007469882068107836
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 10.932186531819752
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 16.003905168006895,
+            "wall_seconds": 19.40040085700457
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.14830445498228073,
+            "component_core_covariance_errors": [
+              0.15887057781219482,
+              0.13773833215236664
+            ],
+            "component_core_eigen_ratios": [
+              0.8949799537658691,
+              0.9209426641464233
+            ],
+            "component_core_min_eigen_ratio": 0.8949799537658691,
+            "component_counts": [
+              2047,
+              2049
+            ],
+            "component_covariance_error": 0.14830445498228073,
+            "component_covariance_errors": [
+              0.15887057781219482,
+              0.13773833215236664
+            ],
+            "component_mass": [
+              0.499755859375,
+              0.500244140625
+            ],
+            "component_min_eigen_ratio": 0.8949799537658691,
+            "component_resolved": [
+              true,
+              true
+            ],
+            "component_spill": [
+              0.015144113451242447,
+              0.008296729996800423
+            ],
+            "covariance_error": 0.07902362942695618,
+            "hq": 0.98828125,
+            "mass_tv": 0.000244140625,
+            "max_component_spill": 0.015144113451242447,
+            "mean_error": 0.00544682377949357,
+            "min_mass_ratio": 0.99951171875,
+            "resolved_core_covariance_error": 0.14830445498228073,
+            "resolved_core_min_eigen_ratio": 0.8949799537658691,
+            "resolved_max_component_spill": 0.015144113451242447,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.02749231881052105,
+            "target_mass": [
+              0.5,
+              0.5
+            ],
+            "target_scale": 1.0555585622787476
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "vector_two_broad"
         }
       ]
     },
