@@ -69,6 +69,9 @@ candidate table and row state. Each counterfactual reruns the entire model;
 evidence and guards evaluate its final output. See the
 [shared-bank site contract](e22_routed_sites.md) for perturbation placement,
 usage attribution and a two-site example.
+The [whole-model checkpoint replay example](e22_routed_sites.md#activation-checkpointed-whole-model-replay)
+recreates routing on recomputation and restores a private DV12 stream without
+advancing the training stream or repeating observations.
 Frozen module parameters and buffers may retain BF16 or other precision;
 trainable floating tensors share the table's dtype. Frozen weights are copied
 exactly into the serving averages.

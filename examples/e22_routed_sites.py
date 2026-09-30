@@ -193,7 +193,7 @@ def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16, bat
                     torch.Generator(device=device).manual_seed(43), initial, config)
 
 
-def update(loop):
+def update(loop, *, generator_forward=None):
     p = loop.policy
     indices = torch.randint(len(loop.fit_context), (p.recipe.batch_size,),
                             generator=loop.data_rng, device=p.device)
@@ -228,7 +228,8 @@ def update(loop):
     flags = [parameter.requires_grad for parameter in p.D.parameters()]
     try:
         p.D.requires_grad_(False)
-        prediction = p.routed_generate(context, sigma=0, perturb=True)
+        prediction = (p.routed_generate(context, sigma=0, perturb=True)
+                      if generator_forward is None else generator_forward(p, context))
         real = noise.output_sigma * generator_base
         with torch.no_grad():
             real_logits = p.D(real.detach())

@@ -165,6 +165,7 @@ the complete model, including downstream sites and the final paired output.
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving
 - [Shared-bank routing sites](docs/e22_routed_sites.md): sequential token routing and a matched spatial comparison
+- [Whole-model checkpoint replay](docs/e22_routed_sites.md#activation-checkpointed-whole-model-replay): per-site DV12 without repeated training draws or diagnostics
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`e22_external_loop.py`](examples/e22_external_loop.py) (E22 in a caller-owned loop),

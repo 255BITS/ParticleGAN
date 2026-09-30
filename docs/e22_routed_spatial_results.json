@@ -9,6 +9,7 @@
     "spatial_position"
   ],
   "final_output_channels": 2,
+  "source_revision": "8618b19c2eca444fda1ab5c7fa0d6734cd1ae5a8",
   "source_sha256": {
     "examples/e22_routed_sites.py": "d4f9292078e6033d600374a6059c03f54a2cc2b0da843684e3cb15be452a789c",
     "particlegan/routing.py": "b64764fccc1518085ecf92d54df3ea4ada163293bc88132622cc04d60dd5ce94",

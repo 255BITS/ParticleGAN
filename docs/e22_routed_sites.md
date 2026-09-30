@@ -128,6 +128,54 @@ uses actual BF16 host operations with FP32 trainables and replays a naturally
 accepted move after `torch.load(..., map_location="cpu", weights_only=True)`.
 Exact replay is checked on the same device with serialized backward execution.
 
+## Activation-checkpointed whole-model replay
+
+[`examples/e22_routed_replay.py`](../examples/e22_routed_replay.py) wraps the
+complete eager two-site generator forward, including the dependent second query:
+
+```bash
+python -u examples/e22_routed_replay.py --steps 8
+python -u examples/e22_routed_replay.py --steps 8 --mode no_rows --device cuda
+```
+
+The example calls `update(loop, generator_forward=checkpointed_generate)`.
+The ordinary critic update and paired-error noise stay in the outer loop.
+Only the differentiable `policy.routed_generate(context, sigma=0)` is inside
+the checkpoint. Each forward/recomputation creates a fresh `RoutedExecution`,
+calls both sites in order and closes it; it never reuses the expired helper
+from the first call.
+
+Before the original forward, the wrapper captures
+`policy.noise_generator.get_state()`. The original forward draws and records
+DV12 normally. During recomputation, a context manager creates a separate
+`torch.Generator` restored to that captured state and passes it as `stream`.
+The same per-site draws reproduce the mixed-code perturbations. Because this
+stream is not the policy's training stream, the existing policy disables DV12
+diagnostic recording. Backward leaves the live training stream and controller
+diagnostics at their post-forward values; it never rewinds the live stream.
+
+The wrapper explicitly uses `use_reentrant=False`, `context_fn` and
+`set_checkpoint_early_stop(False)` to replay the full model. PyTorch preserves
+default CPU/device RNGs for operations such as dropout; the wrapper handles
+the policy's explicit generator separately. See the
+[PyTorch checkpoint contract](https://docs.pytorch.org/docs/2.6/checkpoint.html).
+
+Keep inputs fixed and complete backward before changing module modes,
+controller coefficients, weights or row state. Additional callback-owned RNG
+streams need their own replay handling. The host layers in this example do
+not update buffers.
+Models that update buffers during forward must arrange for those updates to
+happen once outside recomputation. Keep application logging outside the
+checkpoint closure. Observations, policy hooks, optimizer steps,
+evidence refresh, structural moves and serving averages all run once in the
+outer lifecycle. Save recovery checkpoints after `finish_step()`; do not save
+an in-flight activation graph or its replay context.
+
+Tests compare exact outputs, gradients, RNG state, controller diagnostics and
+actual paired-game updates with the ordinary two-site loop, including an
+accepted row move, recovery and clean serving. Keep the `no_rows` movable-bank
+baseline when validating this replay path and the Sliders integration.
+
 ## One matched spatial comparison
 
 ```bash
@@ -189,4 +237,6 @@ measured output quality and cost for one synthetic task; it does not establish
 a quality advantage for full row controls over the movable baseline. Keep that
 baseline in subsequent Sliders validation. The
 [machine-readable receipt](e22_routed_spatial_results.json) records the shapes,
-matched-input checks, diagnostics and source hashes used for these numbers.
+matched-input checks, diagnostics and source revision/hashes used for these
+numbers. Adding the optional checkpointed forward does not alter the ordinary
+comparison path.
