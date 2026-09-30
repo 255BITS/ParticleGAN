@@ -21,7 +21,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from .continuous import DataDriftController, StationarityLR
+from .continuous import DataDriftController, OptimizerSurprise, StationarityLR
 from .recipes import Recipe, learning_rate_scales
 
 
@@ -365,6 +365,8 @@ class UpdatePolicy:
                                         release_rule=recipe.table_release_rule)
                           if recipe.lr_control == "stationarity" else None)
         self.routed_control = None
+        self.surprise = (OptimizerSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
+                         else None)
         self.birth_death = None
         self.row_evidence = None
         if self.row_policy == "routed_paired":
@@ -584,6 +586,13 @@ class UpdatePolicy:
             if recipe.reopen_signal == "data":
                 self.controller.observe_real(real)
                 reopen = self.controller.data_score > 3.
+            elif recipe.reopen_signal == "optimizer":
+                self.controller.observe_blind()
+                reopen = self.surprise.decide(self.completed_steps)
+                if reopen:
+                    self._reopen_moments()
+                if recipe.reopen_anchor == "release":
+                    self._anchor_release(reopen)
             else:
                 self.controller.observe_blind()
                 reopen = False
@@ -790,10 +799,52 @@ class UpdatePolicy:
         return (None if hold else evidence.flag), hold, tester
 
     def _settle_observe(self, index):
-        for group, rate, tester in zip(self.optimizers[index].param_groups,
-                                      self.initial_lrs[index], self.lr_settle.testers[index]):
+        for j, (group, rate, tester) in enumerate(zip(self.optimizers[index].param_groups,
+                                                     self.initial_lrs[index], self.lr_settle.testers[index])):
             if tester is not None:
                 tester.observe(group["params"], group["lr"] / rate, step=self.completed_steps + 1)
+                if self.surprise is not None:
+                    self.surprise.observe(f"{index}.{j}", self.optimizers[index], group)
+
+    def _anchor_release(self, reopen):
+        """reopen_anchor="release": a re-open is evidence that the game moved, so the KA2 anchor may follow KA2's own
+        release rules instead of being forced on. Latched from the fire (only once KA2's blended anchor exists) until
+        KA2's surprise ratio has risen above its release level and come back below its return level. While latched
+        the controller's drift evidence reads 1 (set after observe_blind, so mobility and data memory are untouched;
+        it is read by the next KA2 penalty call and the next observe_game)."""
+        from .ka2 import REL_HI, REL_LO
+        record = getattr(self.opt_d, "record", None)
+        if record is None or self.controller is None:
+            return
+        surprise = self.surprise
+        if reopen and record.last_ratio is not None:
+            surprise.anchor_event = [False]
+            surprise.anchor_events += 1
+        if surprise.anchor_event is None:
+            return
+        ratio = record.last_ratio
+        if ratio is not None and ratio > REL_HI:
+            surprise.anchor_event[0] = True
+        if surprise.anchor_event[0] and ratio is not None and ratio < REL_LO:
+            surprise.anchor_event = None
+            return
+        self.controller.data_drive = 1.0
+
+    @torch.no_grad()
+    def _reopen_moments(self):
+        """Re-open: every group's Adam second moments (and AMSGrad max) shrink by that group's own
+        observed surprise ratio r squared, so its step grows by r. The memory is rescaled, not erased:
+        relative per-element scales and first moments are kept."""
+        for index, optimizer in enumerate(self.optimizers):
+            for j, group in enumerate(optimizer.param_groups):
+                r = self.surprise.last_ratios.get(f"{index}.{j}")
+                if r is None or not r > 1.:
+                    continue
+                for p in group["params"]:
+                    st = optimizer.state.get(p)
+                    for key in ("exp_avg_sq", "max_exp_avg_sq"):
+                        if st and key in st:
+                            st[key].mul_(1. / (r * r))
 
     def _output_sigma(self, base, detach=True):
         mode = self.recipe.output_noise_mode
@@ -1048,6 +1099,7 @@ class UpdatePolicy:
                 "row_evidence": (None if self.row_evidence is None or self.routed_control is not None
                                  else self.row_evidence.state_dict()),
                 "routing": None if self.routed_control is None else self.routed_control.state_dict(),
+                **({} if self.surprise is None else {"surprise": self.surprise.state_dict()}),
                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
                 "cpu_rng": torch.get_rng_state(),
                 "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
@@ -1148,6 +1200,8 @@ class UpdatePolicy:
             raise ValueError("checkpoint routing contract does not match policy")
         if self.routed_control is not None:
             self.routed_control.check_state(routing)
+        if self.surprise is not None:
+            deepcopy(self.surprise).load_state_dict(state["surprise"])
         table_state = state["lr_settle"]
         settled = False
         if table_state is not None:
@@ -1184,6 +1238,8 @@ class UpdatePolicy:
             self.row_evidence.load_state_dict(state["row_evidence"])
         if self.routed_control is not None:
             self.routed_control.load_state_dict(state["routing"])
+        if self.surprise is not None:
+            self.surprise.load_state_dict(state["surprise"])
         self.initial_lrs, self.completed_steps = deepcopy(state["initial_lrs"]), state["completed_steps"]
         self.last_output_sigma = state["last_output_sigma"]
         for name, value in state["streams"].items():

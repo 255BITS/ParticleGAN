@@ -905,3 +905,112 @@ class StationarityLR:
             for group, tester, value in zip(optimizer.param_groups, row, saved):
                 if tester is not None:
                     tester.load_state_dict(value, sum(p.numel() for p in group["params"]))
+
+
+class OptimizerSurprise:
+    """Re-open signal read from the optimizers' own Adam state (reopen_signal="optimizer").
+
+    Per trainable param group, after its optimizer step: q = mean |g| / sqrt(v_hat), the
+    step's gradient size in units of Adam's own second-moment memory (with beta1 = 0 this is
+    Adam's per-element step / lr). q is compared, in log space, as a fast EMA (K updates)
+    against a slow level. The slow level follows q only while the game is calm (ratio <
+    CALM), so a jump is measured against the level before it. The step's ratio is the
+    geometric mean over groups of fast / slow. RISE held for K consecutive updates fires one
+    re-open; the detector then re-seeds its level and stays disarmed until the ratio falls
+    back below CALM (hysteresis). No data statistic, no clock: ratios and counts only.
+    """
+
+    K = 12
+    RISE = 2.0
+    CALM = 1.25
+
+    def __init__(self):
+        self.fast, self.slow = {}, {}
+        self.pending = {}
+        self.armed = True
+        self.streak = 0
+        self.fires = 0
+        self.last_ratio = None
+        self.last_ratios = {}
+        self.log = []
+        # KA2 anchor release latch (reopen_anchor="release"): None = off, else [seen_high].
+        self.anchor_event = None
+        self.anchor_events = 0
+
+    @staticmethod
+    @torch.no_grad()
+    def group_q(optimizer, group):
+        beta2 = group["betas"][1]
+        total, count = None, 0
+        for p in group["params"]:
+            st = optimizer.state.get(p)
+            if p.grad is None or not st or "exp_avg_sq" not in st:
+                continue
+            t = float(st["step"])
+            if t < 1:
+                continue
+            vhat = st["exp_avg_sq"] / (1.0 - beta2 ** t)
+            q = (p.grad.abs() / (vhat.sqrt() + group.get("eps", 1e-8))).mean()
+            total = q if total is None else total + q
+            count += 1
+        return None if count == 0 else total / count
+
+    def observe(self, key, optimizer, group):
+        q = self.group_q(optimizer, group)
+        if q is not None:
+            self.pending[key] = q
+
+    def decide(self, step=None):
+        """Fold this update's observations in; return True when a re-open fires."""
+        if not self.pending:
+            return False
+        keys = sorted(self.pending)
+        values = torch.stack([self.pending[k].detach().float() for k in keys]).clamp_min(1e-30).log().cpu().tolist()
+        self.pending = {}
+        # A group whose gradient is exactly zero this update (e.g. a clamped scalar) carries no signal.
+        kept = [(key, value) for key, value in zip(keys, values) if value > math.log(1e-30) + 1.]
+        if not kept:
+            return False
+        keys, values = [k for k, _ in kept], [v for _, v in kept]
+        logs = []
+        for key, value in zip(keys, values):
+            if key not in self.fast:
+                self.fast[key] = self.slow[key] = value
+            self.fast[key] += (value - self.fast[key]) / self.K
+            logs.append(self.fast[key] - self.slow[key])
+        ratio = math.exp(sum(logs) / len(logs))
+        self.last_ratio = ratio
+        self.last_ratios = {key: math.exp(value) for key, value in zip(keys, logs)}
+        calm = ratio < self.CALM
+        if calm or not self.armed:
+            for key, value in zip(keys, values):
+                self.slow[key] += (value - self.slow[key]) / (8 * self.K)
+        fire = False
+        if self.armed:
+            self.streak = self.streak + 1 if ratio > self.RISE else 0
+            if self.streak >= self.K:
+                fire = True
+                self.fires += 1
+                self.armed = False
+                self.streak = 0
+                # The re-open rescales each group's second moment by 1/r^2, which by itself lifts that
+                # group's q by r: the new reference level includes the detector's own action.
+                for key, value in zip(keys, logs):
+                    self.slow[key] = self.fast[key] + max(0., value)
+                self.log = (self.log + [[step, round(ratio, 3)]])[-8:]
+        elif calm:
+            self.armed = True
+        return fire
+
+    def diagnostics(self):
+        return dict(fires=self.fires, armed=self.armed, streak=self.streak, last_ratio=self.last_ratio, log=self.log,
+                    anchor_event=self.anchor_event, anchor_events=self.anchor_events)
+
+    def state_dict(self):
+        # ``pending`` holds this update's observations, folded in at the next begin_step.
+        return deepcopy({k: v for k, v in self.__dict__.items()})
+
+    def load_state_dict(self, state):
+        if not isinstance(state, dict) or set(state) != set(self.__dict__):
+            raise ValueError("incompatible optimizer-surprise state")
+        self.__dict__.update(deepcopy(state))

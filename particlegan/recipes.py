@@ -118,8 +118,15 @@ class Recipe:
     serve_average: float = 0.0
     # What re-opens the learning-rate ladders when the game changes under them: "data" = the base's real-batch drift
     # statistic (fast vs slow mean of random features of standardized RAW real batches, z-score > 3: data space);
-    # "none" = no re-open and no statistic of the real batch is read (the ladders can still release on their own evidence).
+    # "none" = no re-open and no statistic of the real batch is read (the ladders can still release on their own evidence);
+    # "optimizer" = continuous.OptimizerSurprise: a sustained jump of the optimizers' own Adam step signal (|g| / sqrt(v_hat))
+    # against its calm level re-opens every ladder once and restarts the generator-side Adam moments (hysteresis re-arm).
     reopen_signal: str = "data"
+    # What an "optimizer" re-open does to the KA2 critic anchor: "hold" = nothing (a blind recipe forces the anchor on, W = 1,
+    # and damps its EMA by game_trust, so after a re-open the anchor keeps pulling the critic toward the pre-event EMA critic);
+    # "release" = the re-open counts as drift evidence for KA2 (evidence = 1) from the fire until KA2's own surprise ratio has
+    # risen above REL_HI and fallen back below REL_LO: KA2's native release / EMA tracking / reseed rules then apply. Event-gated.
+    reopen_anchor: str = "hold"
     # Null law of the row-evidence gate: "theory" = the exact-law p-value of the statistic as is; "scaled" = the same law applied to t2 / c, where
     # c >= 1 is the smallest scale that makes the median p-value over the tested rows .5 (the typical row is the null: a slowly varying force
     # shared by neighbouring rows, correlated gradients or a different noise level scale every row's statistic alike; only rows that are extreme
@@ -233,8 +240,12 @@ class Recipe:
         if (isinstance(self.serve_average, bool) or not isinstance(self.serve_average, (int, float))
                 or not math.isfinite(self.serve_average) or self.serve_average < 0):
             raise ValueError("serve_average must be a finite number >= 0")
-        if self.reopen_signal not in ("data", "none"):
-            raise ValueError("reopen_signal must be data or none")
+        if self.reopen_signal not in ("data", "none", "optimizer"):
+            raise ValueError("reopen_signal must be data, none or optimizer")
+        if self.reopen_anchor not in ("hold", "release"):
+            raise ValueError("reopen_anchor must be hold or release")
+        if self.reopen_anchor != "hold" and self.reopen_signal != "optimizer":
+            raise ValueError("reopen_anchor release requires reopen_signal optimizer")
         if self.row_evidence_null not in ("theory", "scaled"):
             raise ValueError("row_evidence_null must be theory or scaled")
         if self.birth_death_space not in ("data", "critic"):

@@ -384,6 +384,7 @@ class GANTrainer:
             **({"lr_settle": self.lr_settle.state_dict()} if self.lr_settle is not None else {}),
             **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
             **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
+            **({"surprise": self.policy.surprise.state_dict()} if self.policy.surprise is not None else {}),
         })
 
     def load_state_dict(self, state):
@@ -473,6 +474,8 @@ class GANTrainer:
             self.birth_death.check_state(state["birth_death"])
         if self.row_evidence is not None:
             self.row_evidence.check_state(state["row_evidence"])
+        if self.policy.surprise is not None:
+            deepcopy(self.policy.surprise).load_state_dict(_state_to_device(state["surprise"], self.device))
         metadata = state.get("policy")
         if "policy" in state:
             if (not isinstance(metadata, dict) or metadata.keys() != expected["policy"].keys()
@@ -504,6 +507,8 @@ class GANTrainer:
             self.birth_death.load_state_dict(state["birth_death"])
         if self.row_evidence is not None:
             self.row_evidence.load_state_dict(state["row_evidence"])
+        if self.policy.surprise is not None:
+            self.policy.surprise.load_state_dict(_state_to_device(state["surprise"], self.device))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():
