@@ -192,7 +192,7 @@ class SiteLoop:
 
 def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
               batch_size=8, initialization="conformance", output_error_guard=False,
-              probe_interval=1, penalty_units="token", max_context_harm=None):
+              probe_interval=1, penalty_units="token", max_context_harm=None, recipe_overrides=None):
     """Build a loop; conformance preserves the explicit structural-test fixture.
 
     Use initialization="api" for quality/timing comparisons. Its whole-network
@@ -220,7 +220,8 @@ def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
     controls = mode == "full"
     recipe = get_recipe("e22_routed", num_particles=particles, z_dim=z_dim,
                         batch_size=batch_size, output_noise_std=.125,
-                        row_evidence_gate=controls, particle_birth_death=controls)
+                        row_evidence_gate=controls, particle_birth_death=controls,
+                        **(recipe_overrides or {}))
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(123)
         G, E = TokenHost(z_dim).to(device), ContextEncoder().to(device)

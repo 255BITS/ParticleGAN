@@ -73,7 +73,7 @@ def targets(context):
 
 
 def make_loop(*, mode="full", device="cpu", tokens=128, particles=128,
-              z_dim=4, batch_size=8, probe_interval=1, max_context_harm=0.):
+              z_dim=4, batch_size=8, probe_interval=1, max_context_harm=0., recipe_overrides=None):
     if mode not in MODES:
         raise ValueError(f"mode must be one of {MODES}")
     device = torch.device(device)
@@ -84,7 +84,7 @@ def make_loop(*, mode="full", device="cpu", tokens=128, particles=128,
     scale = (fit_target - neutral(fit)).std(dim=(0, 1)).clamp_min(.04)
     recipe = get_recipe("e22_routed", num_particles=particles, z_dim=z_dim, batch_size=batch_size,
                         output_noise_std=.125, row_evidence_gate=mode == "full",
-                        particle_birth_death=mode == "full")
+                        particle_birth_death=mode == "full", **(recipe_overrides or {}))
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(123)
         generator, encoder = NeutralResidualHost(z_dim).to(device), ContextEncoder().to(device)

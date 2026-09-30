@@ -23,6 +23,9 @@
   matches E22 exactly. `reopen_signal="none", reopen_anchor="hold"` restores
   the previous behaviour. `examples/e22_routed_moving.py` runs the routed
   paired-edit example with a turning target.
+  `e22_routed_sites.make_loop` and `e22_routed_support.make_loop` accept
+  `recipe_overrides=`; `reports/r1-integrations` checks R1 in every E22
+  integration loop.
 - **Composable E22 policy:** `get_recipe("e22", **task_overrides)` ships the
   preset in the installed package. `E22Policy` / `UpdatePolicy` expose the
   same lifecycle controls used by `GANTrainer`, explicit optimizer/table

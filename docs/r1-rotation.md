@@ -81,3 +81,10 @@ Held-out clean RMSE at the end of each period, seed fixed by the example:
 `e22_routed` never re-opens: each turn costs it about 300–500 updates at 10–40× its settled error. R1 fires within
 50 updates of every turn, including turns 250 updates apart: this small task calms down between turns, so the
 detector re-arms. Without turns (3,000 updates) the two recipes are bit-identical, with no fires.
+
+## Integration loops
+
+[`reports/r1-integrations`](../reports/r1-integrations/README.md) checks R1 in every caller-owned E22 integration
+(external loop, routed paired, sites, replay, support, game replay). With a real turn it recovers several times
+faster. On `e22_routed_support` the game destabilizes by itself once; R1 fires, and recovery is slower for ~1,000
+updates before the two runs agree.
