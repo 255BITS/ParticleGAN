@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/anchor-profile/profile_anchor.py",
+    "--package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/anchor-profile/pkg-GROUP-COUNT",
+    "--reference-package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA6",
+    "--inputs",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/anchor-profile/inputs.pt",
+    "--device",
+    "cuda",
+    "--repeats",
+    "3",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/group-count-gpu/result.json"
+  ],
+  "pid": 630355,
+  "startticks": "164862676",
+  "started_utc": "2026-09-30T05:40:06.610882+00:00",
+  "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+  "phase_ready_sha256": "ed7da8badaf3372f72b22ca5935edc003d6b50716715fd5f401e5bc958c2de26",
+  "source_integrity": "VALID",
+  "numerical_parallelism": 1
+}

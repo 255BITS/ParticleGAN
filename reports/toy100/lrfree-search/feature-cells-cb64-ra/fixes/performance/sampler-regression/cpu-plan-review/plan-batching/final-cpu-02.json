@@ -1,0 +1,617 @@
+{
+  "status": "PASS",
+  "scope": "same count law CPU exact integer/action/RNG/accounting parity; no quality verdict",
+  "cpu_threads": 1,
+  "cuda_initialized": false,
+  "new_seeds": 0,
+  "seconds": 6.674424068070948,
+  "exhaustive_integer_cases": 6144,
+  "cases": [
+    {
+      "name": "saved_toy_1000",
+      "ordinary": 51,
+      "isolation": 0,
+      "mass_moves": 3,
+      "support_moves": 24,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "saved_toy_2000",
+      "ordinary": 51,
+      "isolation": 0,
+      "mass_moves": 4,
+      "support_moves": 23,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "nominal",
+      "ordinary": 0,
+      "isolation": 46,
+      "mass_moves": 0,
+      "support_moves": 0,
+      "groups": 8,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "rare_hole",
+      "ordinary": 5,
+      "isolation": 41,
+      "mass_moves": 0,
+      "support_moves": 5,
+      "groups": 8,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "supported_mass_imbalance",
+      "ordinary": 51,
+      "isolation": 0,
+      "mass_moves": 51,
+      "support_moves": 0,
+      "groups": 2,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "supported_mass_small_holes",
+      "ordinary": 51,
+      "isolation": 46,
+      "mass_moves": 51,
+      "support_moves": 0,
+      "groups": 2,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "supported_balanced_control",
+      "ordinary": 0,
+      "isolation": 0,
+      "mass_moves": 0,
+      "support_moves": 0,
+      "groups": 2,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "global_no_signal",
+      "ordinary": 0,
+      "isolation": 0,
+      "mass_moves": 0,
+      "support_moves": 0,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "global_opposite_signal",
+      "ordinary": 5,
+      "isolation": 0,
+      "mass_moves": 5,
+      "support_moves": 0,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "no_eligible_parent",
+      "ordinary": 0,
+      "isolation": 0,
+      "mass_moves": 0,
+      "support_moves": 0,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "budget0",
+      "ordinary": 0,
+      "isolation": 0,
+      "mass_moves": 0,
+      "support_moves": 0,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "budget3",
+      "ordinary": 3,
+      "isolation": 0,
+      "mass_moves": 3,
+      "support_moves": 0,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "guard51",
+      "ordinary": 17,
+      "isolation": 27,
+      "mass_moves": 0,
+      "support_moves": 7,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    },
+    {
+      "name": "guard52",
+      "ordinary": 18,
+      "isolation": 0,
+      "mass_moves": 0,
+      "support_moves": 7,
+      "groups": 25,
+      "exact": {
+        "child": true,
+        "parent": true,
+        "detail": true,
+        "iso_child": true,
+        "iso_parent": true,
+        "isolation": true,
+        "ordinary_rng": true,
+        "final_rng": true,
+        "comparison": true,
+        "work": true,
+        "mass_topology": true,
+        "mass_group_ids": true
+      }
+    }
+  ],
+  "quota_checks": {
+    "calls": 100,
+    "calls_exact": true,
+    "cases": [
+      {
+        "name": "saved_toy_1000",
+        "batched_calls": 12,
+        "ordinary": 51,
+        "global_moves": 24
+      },
+      {
+        "name": "saved_toy_2000",
+        "batched_calls": 12,
+        "ordinary": 51,
+        "global_moves": 24
+      },
+      {
+        "name": "nominal",
+        "batched_calls": 4,
+        "ordinary": 0,
+        "global_moves": 0
+      },
+      {
+        "name": "rare_hole",
+        "batched_calls": 8,
+        "ordinary": 5,
+        "global_moves": 0
+      },
+      {
+        "name": "supported_mass_imbalance",
+        "batched_calls": 4,
+        "ordinary": 51,
+        "global_moves": 0
+      },
+      {
+        "name": "supported_mass_small_holes",
+        "batched_calls": 4,
+        "ordinary": 51,
+        "global_moves": 0
+      },
+      {
+        "name": "supported_balanced_control",
+        "batched_calls": 4,
+        "ordinary": 0,
+        "global_moves": 0
+      },
+      {
+        "name": "global_no_signal",
+        "batched_calls": 4,
+        "ordinary": 0,
+        "global_moves": 0
+      },
+      {
+        "name": "global_opposite_signal",
+        "batched_calls": 4,
+        "ordinary": 5,
+        "global_moves": 0
+      },
+      {
+        "name": "no_eligible_parent",
+        "batched_calls": 12,
+        "ordinary": 0,
+        "global_moves": 0
+      },
+      {
+        "name": "budget0",
+        "batched_calls": 4,
+        "ordinary": 0,
+        "global_moves": 0
+      },
+      {
+        "name": "budget3",
+        "batched_calls": 4,
+        "ordinary": 3,
+        "global_moves": 0
+      },
+      {
+        "name": "guard51",
+        "batched_calls": 12,
+        "ordinary": 17,
+        "global_moves": 10
+      },
+      {
+        "name": "guard52",
+        "batched_calls": 12,
+        "ordinary": 18,
+        "global_moves": 11
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "name": "saved_toy_1000",
+      "temperature": "warm",
+      "reference": {
+        "aten::item": 2148,
+        "aten::_local_scalar_dense": 2148,
+        "aten::nonzero": 666,
+        "aten::equal": 0,
+        "aten::_to_copy": 523,
+        "aten::copy_": 647
+      },
+      "optimized": {
+        "aten::item": 79,
+        "aten::_local_scalar_dense": 79,
+        "aten::nonzero": 591,
+        "aten::equal": 0,
+        "aten::_to_copy": 192,
+        "aten::copy_": 314
+      }
+    },
+    {
+      "name": "nominal",
+      "temperature": "warm",
+      "reference": {
+        "aten::item": 844,
+        "aten::_local_scalar_dense": 844,
+        "aten::nonzero": 375,
+        "aten::equal": 0,
+        "aten::_to_copy": 82,
+        "aten::copy_": 251
+      },
+      "optimized": {
+        "aten::item": 332,
+        "aten::_local_scalar_dense": 332,
+        "aten::nonzero": 367,
+        "aten::equal": 0,
+        "aten::_to_copy": 78,
+        "aten::copy_": 259
+      }
+    },
+    {
+      "name": "supported_mass_imbalance",
+      "temperature": "warm",
+      "reference": {
+        "aten::item": 66,
+        "aten::_local_scalar_dense": 66,
+        "aten::nonzero": 26,
+        "aten::equal": 0,
+        "aten::_to_copy": 54,
+        "aten::copy_": 67
+      },
+      "optimized": {
+        "aten::item": 31,
+        "aten::_local_scalar_dense": 31,
+        "aten::nonzero": 24,
+        "aten::equal": 0,
+        "aten::_to_copy": 70,
+        "aten::copy_": 95
+      }
+    },
+    {
+      "name": "supported_mass_small_holes",
+      "temperature": "warm",
+      "reference": {
+        "aten::item": 79,
+        "aten::_local_scalar_dense": 79,
+        "aten::nonzero": 44,
+        "aten::equal": 0,
+        "aten::_to_copy": 66,
+        "aten::copy_": 97
+      },
+      "optimized": {
+        "aten::item": 44,
+        "aten::_local_scalar_dense": 44,
+        "aten::nonzero": 42,
+        "aten::equal": 0,
+        "aten::_to_copy": 82,
+        "aten::copy_": 125
+      }
+    }
+  ],
+  "law_checks": {
+    "unchanged_count_class_except": [
+      "_ordinary_global_transport",
+      "_ordinary_mass_transport",
+      "_ordinary_support_transport"
+    ],
+    "statistical_helpers_exact": true,
+    "original_method_ast_sha256": {
+      "fit": "68fc630a60376b066c8a928fb30aa6ae9b5208449d7e5c51fb79a5be001693ba",
+      "_update_storage": "fe79eb9f03d2ae94b5d613862dce79a39c839e506c94312863a5eb0676458eac",
+      "_input": "50ff06792b92819262c6b87278a601361d98d3c1b6a1c9e789c92d6a6cada870",
+      "transform": "a0f2814fd98763b569d7defa7842bb0ed9f90234ff04fa1529e19bb5d23ed9ad",
+      "_distance": "1c61c4db73532a68bace3b69606f7cd0da0396a5f6cb85cad00a334eaf3e2228",
+      "_assign_metric": "eb20c12eec91e1acafb9c2841c2693650f38d129f156f4d5b2f473ecfa02c130",
+      "_scores_metric": "a391ab6da034cea125990d5caaadb682319c42bc76d59659b149bf34556cb5bd",
+      "_fit_count_partition_metric": "5c1f3e69ccd5e8eb3da6d4b752dc387a4fc547a18525261f23c166491518daf9",
+      "_count_categories_metric": "d56cecb7753ac6f34ae2f8bbe54491468adaa980620bcc4992f6fff52018c76f",
+      "count_categories": "f7c2718d8c0f3ec798e9f007c53bd9947482291e704cb094b19db30f28283903",
+      "assign": "8348ab6d54cebe233ea2536182280b92cbe0040f67e6fa1d093bac4565e7d3e8",
+      "support": "9e4c538c2ccd5c83be6d01804c04d96ecfbe6040d02d917ebd172c1095a694c6",
+      "cache_queries": "3e4db1d46531e84825923a0294b82eeccb977709a03e27bc57697800431a916a",
+      "refresh_rows": "e812819c85d093408bc50cbcfc4aace4f330e9726d8be600a4381c99fbd57d4a",
+      "_pool": "bed3e2848829842fa0436488fa948ed39da5f6559d833030ee346fa03983e144",
+      "_mass_targets": "c00c9b017d78481c94bd22a448f4d525454716dc021920207383f0226d1975ff",
+      "_mass_topology": "22d5a756b69e518ad35fa639a1078900133a5f94e641b7ecb6e7516c022ac2fd",
+      "_group_counts": "7aeadb3732ff630a36a7c92baa47402c01f0f42d32d5ea5a61168d456bc7c7de",
+      "select_parents": "b71721917cf7f305675000bf294bcdb9c85e271e8a00ea468687b091cb834b95",
+      "cell_comparison": "5273513f6fd7c65979160b774a18ad208d4c0075705c7869d2950e94922292cf",
+      "_ordinary_mass_transport": "b798de8c3cda670d06db4a59139b17d1521fd6d4cd1d383e4d56a431f26c07ec",
+      "_ordinary_support_transport": "4897b49d16e2cb58867e69af3f067e127ac04de4b284cf75848e9d3bdb270eb1",
+      "_ordinary_global_transport": "a9c7fde9f1e066d5a68db9f8f43c6fa8e601d0b1f2ff814e16fa12185f24f2d5",
+      "ordinary_transport": "5e4a569cfe0bbcc48871a325547f77b09f69d8f980c1db6fce5ee0f0aced0265"
+    },
+    "proposal_method_ast_sha256": {
+      "fit": "68fc630a60376b066c8a928fb30aa6ae9b5208449d7e5c51fb79a5be001693ba",
+      "_update_storage": "fe79eb9f03d2ae94b5d613862dce79a39c839e506c94312863a5eb0676458eac",
+      "_input": "50ff06792b92819262c6b87278a601361d98d3c1b6a1c9e789c92d6a6cada870",
+      "transform": "a0f2814fd98763b569d7defa7842bb0ed9f90234ff04fa1529e19bb5d23ed9ad",
+      "_distance": "1c61c4db73532a68bace3b69606f7cd0da0396a5f6cb85cad00a334eaf3e2228",
+      "_assign_metric": "eb20c12eec91e1acafb9c2841c2693650f38d129f156f4d5b2f473ecfa02c130",
+      "_scores_metric": "a391ab6da034cea125990d5caaadb682319c42bc76d59659b149bf34556cb5bd",
+      "_fit_count_partition_metric": "5c1f3e69ccd5e8eb3da6d4b752dc387a4fc547a18525261f23c166491518daf9",
+      "_count_categories_metric": "d56cecb7753ac6f34ae2f8bbe54491468adaa980620bcc4992f6fff52018c76f",
+      "count_categories": "f7c2718d8c0f3ec798e9f007c53bd9947482291e704cb094b19db30f28283903",
+      "assign": "8348ab6d54cebe233ea2536182280b92cbe0040f67e6fa1d093bac4565e7d3e8",
+      "support": "9e4c538c2ccd5c83be6d01804c04d96ecfbe6040d02d917ebd172c1095a694c6",
+      "cache_queries": "3e4db1d46531e84825923a0294b82eeccb977709a03e27bc57697800431a916a",
+      "refresh_rows": "e812819c85d093408bc50cbcfc4aace4f330e9726d8be600a4381c99fbd57d4a",
+      "_pool": "bed3e2848829842fa0436488fa948ed39da5f6559d833030ee346fa03983e144",
+      "_mass_targets": "c00c9b017d78481c94bd22a448f4d525454716dc021920207383f0226d1975ff",
+      "_mass_topology": "22d5a756b69e518ad35fa639a1078900133a5f94e641b7ecb6e7516c022ac2fd",
+      "_group_counts": "7aeadb3732ff630a36a7c92baa47402c01f0f42d32d5ea5a61168d456bc7c7de",
+      "select_parents": "b71721917cf7f305675000bf294bcdb9c85e271e8a00ea468687b091cb834b95",
+      "cell_comparison": "5273513f6fd7c65979160b774a18ad208d4c0075705c7869d2950e94922292cf",
+      "_ordinary_mass_transport": "1f89611cb53bacc0d85da4349e99952dd808933a001e7eeddaa9527911fe77f1",
+      "_ordinary_support_transport": "829498177df2d92377fb5e47b8542b6f072c83e9fc89743fe2448d0dd26c9c75",
+      "_ordinary_global_transport": "b8362c5cb830a2cf3c0d2ad3bd9cea891984f0b8d41ac1611372fe7160df3031",
+      "ordinary_transport": "5e4a569cfe0bbcc48871a325547f77b09f69d8f980c1db6fce5ee0f0aced0265"
+    }
+  },
+  "package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/plan-batching/pkg-PLAN-FINAL",
+  "source_sha256": {
+    "particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "particlegan/feature_cells.py": "e6d2823d8e862dd8b29182cf0988325328523be0e77ae1fb2ea964707b34ad7f",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "particlegan/training.py": "28f6cc3f01308829531d4fab655db4cfd1870354d9c81f9374175a8b324088d9",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "base_source_sha256": {
+    "particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "particlegan/feature_cells.py": "1d3c90aa3b72d086df0defcc8c356e48778310f005473e8c5c271afa44f89d76",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "particlegan/training.py": "28f6cc3f01308829531d4fab655db4cfd1870354d9c81f9374175a8b324088d9",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "reference_package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/pkg-global-count",
+  "input_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/inputs.pt",
+  "input_sha256": "3e8deeb2fe534d28cf3731a4694c0543e280d2de270e0d9644731d9ec40057f2",
+  "contract_sha256": "f92b0b466fa34bd187061cf48b0064db09f96fc2ed36a3e2414ba6bdb5871742",
+  "script_sha256": "9be99bd78d79258643cf0f0e5ca42c89f8990631d01613e787305e54916c21fd",
+  "common_sha256": "14185d28375587dc2742f8f7be39ad548d22eda71d161704ec9ad59a33141ce2",
+  "final_common_sha256": "dde5bd0512278ed59edb5aa1324dfc5ee1484eb6202119df352d5603a38c3f0d"
+}

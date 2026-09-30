@@ -1,0 +1,359 @@
+{
+  "status": "PASS",
+  "source_freeze_sha256": "0b4eaf796ee41761d642967879121fbd42bc06b4f1ad7d832b2092f21cc5c6e0",
+  "checkpoint": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/checkpoint-2000.pt",
+  "checkpoint_sha256": "a7e6384507d3ffb1f9b20f9295f99abbdf891aaec4f9edccc254bbd35da02b19",
+  "package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA8",
+  "package_sha256": "da29f10340ddd0cf4c8452e234496579699bd8ea7e1154da22ffeac18796065c",
+  "actual_paired_average": {
+    "schema": 1,
+    "policy": "ema_support_inside_current_real_group_Q_v1",
+    "snapshot": 250,
+    "step": 2000,
+    "rows": 1024,
+    "required": 973,
+    "cells": 64,
+    "rank": 8,
+    "groups": 25,
+    "calibration_rows": 512,
+    "chart_valid": true,
+    "duplicate_ok": true,
+    "finite_rows": 1024,
+    "same_group_rows": 1018,
+    "ema_eligible_rows": 982,
+    "coherent_rows": 977,
+    "eligible": true
+  },
+  "actual_saved_coherent_rows": 977,
+  "original_scorer_seed": 314259,
+  "chunk_rows": 256,
+  "chunks_per_branch": 2,
+  "generated_rows_per_branch": 512,
+  "independent_initial_restores": 2,
+  "intermediate_reloads": 1,
+  "training_updates": 0,
+  "generator_forwards": 4,
+  "critic_forwards": 0,
+  "learned_feature_passes": 0,
+  "quality_metric_evaluations": 0,
+  "full_state_bit_identical": true,
+  "sampled_rows_bit_identical": true,
+  "latent_codes_bit_identical": true,
+  "perturbed_codes_bit_identical": true,
+  "noisy_outputs_bit_identical": true,
+  "scorer_rng_continuation_bit_identical": true,
+  "saved_private_and_global_rng_unchanged": true,
+  "original_noise_law_unchanged": true,
+  "positive_lease_cache_rebuild_exact": true,
+  "state_excluded_fields": [],
+  "rng_buffer_placement": {
+    "cpu_rng": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 5056
+    },
+    "cuda_rng": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.latent_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.penalty_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.eval_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.noise_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "birth_death.stream": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    }
+  },
+  "branches": [
+    {
+      "branch": 0,
+      "initial_restore_exact": true,
+      "serving": {
+        "positive_lease": true,
+        "retained_fast_matches_saved": true,
+        "live_matches_paired_average": true,
+        "fast_differs_from_average": true
+      },
+      "intermediate_reload": false,
+      "traces": [
+        "c2ab1d8095e24778df5f2daca0c38fc021502328757e789e544298d69894c540",
+        "235e1995b065d83094054b94fe67ea1335b7af769471a9eb78a21494457d1801"
+      ],
+      "trace_components": [
+        {
+          "rows": "039d722a2cd65a7109a504446e19a2e7c3edd6de1183e219e6d48a115f8bbda6",
+          "latent": "e725eec179faa9d42bf947ffa5fe93fd08037298acd47a84463be63a05f026e3",
+          "sigma": "b8da03e9c9cdc028962f28ea0dc4843e7871b1a70f737af708532d368b013170",
+          "perturbed_latent": "3e25f1ed07ef06b590be58e2d8ef87862f3fae30df78570d1fbddf0f88271b43",
+          "noisy_output": "cdd9a776a76259a24bc1431cec9e8ca2f7fb520bee54d42f15d84be4a8694f7f",
+          "scorer_stream_before": "74ff67f529476428a2ee9f9538ac98e8ba8b3848ee4fbdb1b583ae4b0066262c",
+          "scorer_stream_after": "b193c4835c26778f9ce6fbaf65d4fb3ade1d45904af5f00739648d1b664fd3d1"
+        },
+        {
+          "rows": "fb59a28fda799f98524865fe6dc538c858331deb29fda9649b647ad7b06e9f9a",
+          "latent": "fc14d3798e6d6d3d0e700f08a31e1a1dbdcc88790e901e569817679a073e9825",
+          "sigma": "b8da03e9c9cdc028962f28ea0dc4843e7871b1a70f737af708532d368b013170",
+          "perturbed_latent": "2eff537fff2d0b799b016758a11744f978bf22dacb3db4821abc9817f38c3234",
+          "noisy_output": "ca15cef5859902874acff39ae8667aa6827cbb2ec354706b3abe23231d9017a3",
+          "scorer_stream_before": "b193c4835c26778f9ce6fbaf65d4fb3ade1d45904af5f00739648d1b664fd3d1",
+          "scorer_stream_after": "7a430ade1fe6c2d2e481ca5a203739ab85c30620f2d8eceab9f8b7b3074135ce"
+        }
+      ],
+      "caches": [
+        {
+          "axis_orders_sha256": "f29cfadd93a6c19ea2c8a95b122dd93ea6926ecc33bc09bcf7f90151718185a4",
+          "orders": 8,
+          "warm_reuse": true,
+          "current_parameter_version_matches": true,
+          "chart_absent": true,
+          "heads_absent": true,
+          "work": {
+            "builds": 1,
+            "distance_pairs": 18432,
+            "max_query_rows": 256,
+            "max_candidates": 72,
+            "lineage_distance_pairs": 2048
+          }
+        },
+        {
+          "axis_orders_sha256": "f29cfadd93a6c19ea2c8a95b122dd93ea6926ecc33bc09bcf7f90151718185a4",
+          "orders": 8,
+          "warm_reuse": true,
+          "current_parameter_version_matches": true,
+          "chart_absent": true,
+          "heads_absent": true,
+          "work": {
+            "builds": 2,
+            "distance_pairs": 36864,
+            "max_query_rows": 256,
+            "max_candidates": 72,
+            "lineage_distance_pairs": 4096
+          }
+        }
+      ],
+      "state_sections": [
+        {
+          "serial_backward": "31eef6e8587173cc1e698d61e20dfbd6aef78eb0c7ca805e54b7a063d09f9995",
+          "controller": "a9389e9bfe38ec768255892970589e2ae456c3def4453fb3473f9addf4d9c02e",
+          "schema": "0fe8229d889f96702577e079e2ea4b782ea710451838f8a31eb5ee3b478f18ed",
+          "recipe": "2e5786d2534db43657c5c5f5a206c4793d1da559934722b622a2e30f04c0ac7a",
+          "optimizer_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "penalty_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "device": "cfeafa76ffe616e8b7f2e5c6cb6ccc8c3e03114073bc04a34a42cc911e265d06",
+          "dtype": "df9013386df6e46ad321422d9e1c28a3abab546f8baa88737daf6ab7553434e7",
+          "models": "0049355c627b3a60af766048fd3fc710c0ae2c3d172b10ef0a0b80456b8fac2e",
+          "requires_grad": "58be0957469708667d2e421be153306b55f786db9292cdaf019aea91896696bd",
+          "optimizers": "78686bac2e800eba506d7016e6cae54e1959d6cc39e5f2221eab1d18ccbd4426",
+          "initial_lrs": "affb3295ff46e7a4cd3ea302e8db23429c03b8de11ff6fa646c55cd0103dda50",
+          "completed_steps": "5a8a93637982a82af1170387184b537014a7c84b2965a533c08f0a0c887bd7f2",
+          "streams": "98f34d1241598af0c3482092e682b3865cd0c97c5738a5d000b8fff74d404c78",
+          "cpu_rng": "8736b5d59fd2e77e3e4fe1ebd5854a7362cd84464b50f61045b4669d0dfc39aa",
+          "cuda_rng": "10706a62a10a7b9312ad0cd184be019f05b31716f9826df0e2ce3230e1073b19",
+          "output_noise": "22545fe923486ff241f6c7e63d903645700dab15305e4e6d10fded9b005e03dc",
+          "lr_settle": "b1cb9df8137ed9e75ed423e5b913a9acb721dbdf1be37db2ca37ecd37f1df9aa",
+          "birth_death": "38bea4e04009320c8d091e6c457a60edc7305eb78708465c3b5714cb6d29e739",
+          "row_evidence": "f0800e1079c7662e6dc05eb69214d80cc14c17957d8fb466b34d9d85f91548db"
+        },
+        {
+          "serial_backward": "31eef6e8587173cc1e698d61e20dfbd6aef78eb0c7ca805e54b7a063d09f9995",
+          "controller": "a9389e9bfe38ec768255892970589e2ae456c3def4453fb3473f9addf4d9c02e",
+          "schema": "0fe8229d889f96702577e079e2ea4b782ea710451838f8a31eb5ee3b478f18ed",
+          "recipe": "2e5786d2534db43657c5c5f5a206c4793d1da559934722b622a2e30f04c0ac7a",
+          "optimizer_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "penalty_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "device": "cfeafa76ffe616e8b7f2e5c6cb6ccc8c3e03114073bc04a34a42cc911e265d06",
+          "dtype": "df9013386df6e46ad321422d9e1c28a3abab546f8baa88737daf6ab7553434e7",
+          "models": "0049355c627b3a60af766048fd3fc710c0ae2c3d172b10ef0a0b80456b8fac2e",
+          "requires_grad": "58be0957469708667d2e421be153306b55f786db9292cdaf019aea91896696bd",
+          "optimizers": "78686bac2e800eba506d7016e6cae54e1959d6cc39e5f2221eab1d18ccbd4426",
+          "initial_lrs": "affb3295ff46e7a4cd3ea302e8db23429c03b8de11ff6fa646c55cd0103dda50",
+          "completed_steps": "5a8a93637982a82af1170387184b537014a7c84b2965a533c08f0a0c887bd7f2",
+          "streams": "98f34d1241598af0c3482092e682b3865cd0c97c5738a5d000b8fff74d404c78",
+          "cpu_rng": "8736b5d59fd2e77e3e4fe1ebd5854a7362cd84464b50f61045b4669d0dfc39aa",
+          "cuda_rng": "10706a62a10a7b9312ad0cd184be019f05b31716f9826df0e2ce3230e1073b19",
+          "output_noise": "22545fe923486ff241f6c7e63d903645700dab15305e4e6d10fded9b005e03dc",
+          "lr_settle": "b1cb9df8137ed9e75ed423e5b913a9acb721dbdf1be37db2ca37ecd37f1df9aa",
+          "birth_death": "38bea4e04009320c8d091e6c457a60edc7305eb78708465c3b5714cb6d29e739",
+          "row_evidence": "f0800e1079c7662e6dc05eb69214d80cc14c17957d8fb466b34d9d85f91548db"
+        }
+      ],
+      "endpoint": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra8-positive-lease-gpu/branch-0.pt",
+      "endpoint_sha256": "4dce9418a60bf77a0dae2304cabc7a4e875d12ee10ecb434472970e3389bd7b7",
+      "final_scorer_stream_sha256": "7a430ade1fe6c2d2e481ca5a203739ab85c30620f2d8eceab9f8b7b3074135ce"
+    },
+    {
+      "branch": 1,
+      "initial_restore_exact": true,
+      "serving": {
+        "positive_lease": true,
+        "retained_fast_matches_saved": true,
+        "live_matches_paired_average": true,
+        "fast_differs_from_average": true
+      },
+      "intermediate_reload": true,
+      "traces": [
+        "c2ab1d8095e24778df5f2daca0c38fc021502328757e789e544298d69894c540",
+        "235e1995b065d83094054b94fe67ea1335b7af769471a9eb78a21494457d1801"
+      ],
+      "trace_components": [
+        {
+          "rows": "039d722a2cd65a7109a504446e19a2e7c3edd6de1183e219e6d48a115f8bbda6",
+          "latent": "e725eec179faa9d42bf947ffa5fe93fd08037298acd47a84463be63a05f026e3",
+          "sigma": "b8da03e9c9cdc028962f28ea0dc4843e7871b1a70f737af708532d368b013170",
+          "perturbed_latent": "3e25f1ed07ef06b590be58e2d8ef87862f3fae30df78570d1fbddf0f88271b43",
+          "noisy_output": "cdd9a776a76259a24bc1431cec9e8ca2f7fb520bee54d42f15d84be4a8694f7f",
+          "scorer_stream_before": "74ff67f529476428a2ee9f9538ac98e8ba8b3848ee4fbdb1b583ae4b0066262c",
+          "scorer_stream_after": "b193c4835c26778f9ce6fbaf65d4fb3ade1d45904af5f00739648d1b664fd3d1"
+        },
+        {
+          "rows": "fb59a28fda799f98524865fe6dc538c858331deb29fda9649b647ad7b06e9f9a",
+          "latent": "fc14d3798e6d6d3d0e700f08a31e1a1dbdcc88790e901e569817679a073e9825",
+          "sigma": "b8da03e9c9cdc028962f28ea0dc4843e7871b1a70f737af708532d368b013170",
+          "perturbed_latent": "2eff537fff2d0b799b016758a11744f978bf22dacb3db4821abc9817f38c3234",
+          "noisy_output": "ca15cef5859902874acff39ae8667aa6827cbb2ec354706b3abe23231d9017a3",
+          "scorer_stream_before": "b193c4835c26778f9ce6fbaf65d4fb3ade1d45904af5f00739648d1b664fd3d1",
+          "scorer_stream_after": "7a430ade1fe6c2d2e481ca5a203739ab85c30620f2d8eceab9f8b7b3074135ce"
+        }
+      ],
+      "caches": [
+        {
+          "axis_orders_sha256": "f29cfadd93a6c19ea2c8a95b122dd93ea6926ecc33bc09bcf7f90151718185a4",
+          "orders": 8,
+          "warm_reuse": true,
+          "current_parameter_version_matches": true,
+          "chart_absent": true,
+          "heads_absent": true,
+          "work": {
+            "builds": 1,
+            "distance_pairs": 18432,
+            "max_query_rows": 256,
+            "max_candidates": 72,
+            "lineage_distance_pairs": 2048
+          }
+        },
+        {
+          "axis_orders_sha256": "f29cfadd93a6c19ea2c8a95b122dd93ea6926ecc33bc09bcf7f90151718185a4",
+          "orders": 8,
+          "warm_reuse": true,
+          "current_parameter_version_matches": true,
+          "chart_absent": true,
+          "heads_absent": true,
+          "work": {
+            "builds": 1,
+            "distance_pairs": 18432,
+            "max_query_rows": 256,
+            "max_candidates": 72,
+            "lineage_distance_pairs": 2048
+          }
+        }
+      ],
+      "state_sections": [
+        {
+          "serial_backward": "31eef6e8587173cc1e698d61e20dfbd6aef78eb0c7ca805e54b7a063d09f9995",
+          "controller": "a9389e9bfe38ec768255892970589e2ae456c3def4453fb3473f9addf4d9c02e",
+          "schema": "0fe8229d889f96702577e079e2ea4b782ea710451838f8a31eb5ee3b478f18ed",
+          "recipe": "2e5786d2534db43657c5c5f5a206c4793d1da559934722b622a2e30f04c0ac7a",
+          "optimizer_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "penalty_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "device": "cfeafa76ffe616e8b7f2e5c6cb6ccc8c3e03114073bc04a34a42cc911e265d06",
+          "dtype": "df9013386df6e46ad321422d9e1c28a3abab546f8baa88737daf6ab7553434e7",
+          "models": "0049355c627b3a60af766048fd3fc710c0ae2c3d172b10ef0a0b80456b8fac2e",
+          "requires_grad": "58be0957469708667d2e421be153306b55f786db9292cdaf019aea91896696bd",
+          "optimizers": "78686bac2e800eba506d7016e6cae54e1959d6cc39e5f2221eab1d18ccbd4426",
+          "initial_lrs": "affb3295ff46e7a4cd3ea302e8db23429c03b8de11ff6fa646c55cd0103dda50",
+          "completed_steps": "5a8a93637982a82af1170387184b537014a7c84b2965a533c08f0a0c887bd7f2",
+          "streams": "98f34d1241598af0c3482092e682b3865cd0c97c5738a5d000b8fff74d404c78",
+          "cpu_rng": "8736b5d59fd2e77e3e4fe1ebd5854a7362cd84464b50f61045b4669d0dfc39aa",
+          "cuda_rng": "10706a62a10a7b9312ad0cd184be019f05b31716f9826df0e2ce3230e1073b19",
+          "output_noise": "22545fe923486ff241f6c7e63d903645700dab15305e4e6d10fded9b005e03dc",
+          "lr_settle": "b1cb9df8137ed9e75ed423e5b913a9acb721dbdf1be37db2ca37ecd37f1df9aa",
+          "birth_death": "38bea4e04009320c8d091e6c457a60edc7305eb78708465c3b5714cb6d29e739",
+          "row_evidence": "f0800e1079c7662e6dc05eb69214d80cc14c17957d8fb466b34d9d85f91548db"
+        },
+        {
+          "serial_backward": "31eef6e8587173cc1e698d61e20dfbd6aef78eb0c7ca805e54b7a063d09f9995",
+          "controller": "a9389e9bfe38ec768255892970589e2ae456c3def4453fb3473f9addf4d9c02e",
+          "schema": "0fe8229d889f96702577e079e2ea4b782ea710451838f8a31eb5ee3b478f18ed",
+          "recipe": "2e5786d2534db43657c5c5f5a206c4793d1da559934722b622a2e30f04c0ac7a",
+          "optimizer_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "penalty_options": "4c316ba4e2a7cf9124d981b7332d3c98f3edf1f284f2f57a74a72f3f66889ee9",
+          "device": "cfeafa76ffe616e8b7f2e5c6cb6ccc8c3e03114073bc04a34a42cc911e265d06",
+          "dtype": "df9013386df6e46ad321422d9e1c28a3abab546f8baa88737daf6ab7553434e7",
+          "models": "0049355c627b3a60af766048fd3fc710c0ae2c3d172b10ef0a0b80456b8fac2e",
+          "requires_grad": "58be0957469708667d2e421be153306b55f786db9292cdaf019aea91896696bd",
+          "optimizers": "78686bac2e800eba506d7016e6cae54e1959d6cc39e5f2221eab1d18ccbd4426",
+          "initial_lrs": "affb3295ff46e7a4cd3ea302e8db23429c03b8de11ff6fa646c55cd0103dda50",
+          "completed_steps": "5a8a93637982a82af1170387184b537014a7c84b2965a533c08f0a0c887bd7f2",
+          "streams": "98f34d1241598af0c3482092e682b3865cd0c97c5738a5d000b8fff74d404c78",
+          "cpu_rng": "8736b5d59fd2e77e3e4fe1ebd5854a7362cd84464b50f61045b4669d0dfc39aa",
+          "cuda_rng": "10706a62a10a7b9312ad0cd184be019f05b31716f9826df0e2ce3230e1073b19",
+          "output_noise": "22545fe923486ff241f6c7e63d903645700dab15305e4e6d10fded9b005e03dc",
+          "lr_settle": "b1cb9df8137ed9e75ed423e5b913a9acb721dbdf1be37db2ca37ecd37f1df9aa",
+          "birth_death": "38bea4e04009320c8d091e6c457a60edc7305eb78708465c3b5714cb6d29e739",
+          "row_evidence": "f0800e1079c7662e6dc05eb69214d80cc14c17957d8fb466b34d9d85f91548db"
+        }
+      ],
+      "endpoint": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra8-positive-lease-gpu/branch-1.pt",
+      "endpoint_sha256": "5bd35f7eeafc621992a61bae5765718879677d1c7713a20e20701e43282bfc59",
+      "final_scorer_stream_sha256": "7a430ade1fe6c2d2e481ca5a203739ab85c30620f2d8eceab9f8b7b3074135ce"
+    }
+  ],
+  "runtime": {
+    "device": "cuda:0",
+    "physical_gpu": {
+      "physical_index": 0,
+      "uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "pci_bus_id": "00000000:24:00.0",
+      "name": "NVIDIA RTX A6000",
+      "memory_total": "49140 MiB"
+    },
+    "visible_devices": "0",
+    "cuda_uuid_raw": "72c1b506-891d-b8bc-b353-e020585e1c47",
+    "cuda_uuid_normalized": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "cuda_memory_fraction": 0.2,
+    "cpu_threads": 2,
+    "interop_threads": 1,
+    "deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8",
+    "cuda_device_order": "PCI_BUS_ID",
+    "tf32_matmul": false,
+    "tf32_cudnn": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "torch": "2.13.0+cu126",
+    "cuda_runtime": "12.6",
+    "cudnn_version": 91002
+  },
+  "elapsed_seconds": 1.1000504668336362,
+  "peak_gpu_allocated_bytes": 84275712,
+  "peak_gpu_reserved_bytes": 106954752,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/positive-lease-replay/sample_reload.py",
+    "--package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA8",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra8-positive-lease-gpu/result.json"
+  ],
+  "finished_utc": "2026-09-30T08:22:40.200959+00:00",
+  "scope": "actual saved positive-lease sample/reload mechanics; no training or quality verdict"
+}

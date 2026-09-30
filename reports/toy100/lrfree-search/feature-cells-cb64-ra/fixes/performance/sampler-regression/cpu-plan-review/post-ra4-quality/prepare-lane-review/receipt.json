@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-30T04:21:22.873160+00:00",
+  "scope": "CPU stdlib read-only construction; no actual lane preparation or numerical execution",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/prepare_lane.py": "7d1ad35d9b7a82dd3c99dbea6bd9356a19d101fd0cbd6cba97000c87d2b752df",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/prepare_validation4.py": "5f8a88e86e38e13bf1ee4de4fab8e864b5d6bcfff00d6a9843e2fd4cb3d0c4a2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/PROTOCOL.md": "ef6fa60380ce5b6db415d0c58e11440431b64e0f9fafd3f187dd1287e8409c13",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/launch.py": "2ffc906b3cb2b5712c3b5611b01231bb0df6ffa08339a410f64963172316fb1b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/launch.py": "369e0a28cff39fcecb3528287ff3a9b27e419584e79e34976387412843b94a88",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/collect.py": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/lane.py": "c6eaff7ea19fdbd68b505e859f5a5cde0d369efb04d040489378dd2e23a730c3",
+    "/ml2/hypergan/lrfree-20260926/harness/screen.py": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c"
+  },
+  "generated_preparer_sha256": "0592221e4edeadacf92760581cec26ba424c964fb8965faecc10137caca1d949",
+  "checks": {
+    "compile_helper_and_generated_sources": true,
+    "correct_newline_literals": true,
+    "candidate_output_config_ready_paths": true,
+    "collector_one_literal_AST_undo": true,
+    "full_launcher_AST_only_jobs_changes": true,
+    "all_19_job_specs_preserved": true,
+    "original_16_screens_preserved": true,
+    "original_resolver_and_positional_API_compatible": true,
+    "helper_template_and_declaration_freeze_coverage": true,
+    "all_inputs_unchanged": true
+  },
+  "job_order": [
+    "learned-toy-CB64-LANE-AUDIT",
+    "screen-grid100",
+    "learned-mnist-CB64-LANE-AUDIT",
+    "replay-CB64-LANE-AUDIT",
+    "screen-mode_hold",
+    "screen-img_blobs4",
+    "screen-vector_unequal_mass",
+    "screen-ring_shift",
+    "screen-rotated100",
+    "screen-staggered100",
+    "screen-stationary",
+    "screen-img_intensity2",
+    "screen-img_stripes2",
+    "screen-img_bars4",
+    "screen-vector_two_broad",
+    "screen-vector_unequal_width",
+    "screen-vector_anisotropic",
+    "screen-vector_overlap",
+    "screen-vector_spiral"
+  ],
+  "defects": [],
+  "limitations": [
+    "Actual future candidate/READY/config existence and hashes are checked during preparation and its independent composition audit.",
+    "The launcher requires the root supervisor to enforce toy/grid quality phase decisions through --through; it does not stop automatically on a quality FAIL."
+  ]
+}

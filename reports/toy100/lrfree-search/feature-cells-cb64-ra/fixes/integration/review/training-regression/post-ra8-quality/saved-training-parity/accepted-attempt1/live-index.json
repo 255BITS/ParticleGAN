@@ -1,0 +1,96 @@
+{
+  "status": "WATCHING",
+  "records": [
+    {
+      "step": 0,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-0000.json",
+      "receipt_sha256": "c7be3a279908f1e10ef76cb485632ce4203c2418f214ee2fea95dc6385e1dff4",
+      "paired_average_lease_live": false,
+      "coherent_rows": 0
+    },
+    {
+      "step": 100,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-0100.json",
+      "receipt_sha256": "802e5b4641c864528b49515f667b9ce0d110d06107b709f26cff38d801c4444e",
+      "paired_average_lease_live": false,
+      "coherent_rows": 95
+    },
+    {
+      "step": 250,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-0250.json",
+      "receipt_sha256": "37eb207108dc4316c66dcfb1c0ea58d8c4a918a8947fb556d965c833d25522c9",
+      "paired_average_lease_live": false,
+      "coherent_rows": 259
+    },
+    {
+      "step": 500,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-0500.json",
+      "receipt_sha256": "90dc97a36b4267386a2bab2834ddb59f67be5266c20fec15f4054a047363f018",
+      "paired_average_lease_live": false,
+      "coherent_rows": 521
+    },
+    {
+      "step": 750,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-0750.json",
+      "receipt_sha256": "7c4e76cfbf928a6a02ac6b9861080f4f6d96df856b751f59bf53891358032a81",
+      "paired_average_lease_live": false,
+      "coherent_rows": 852
+    },
+    {
+      "step": 1000,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-1000.json",
+      "receipt_sha256": "3a3bb7f09c88c3f8464064d5c4f8f75117e48a1a1f2383e8df703dd47092d976",
+      "paired_average_lease_live": false,
+      "coherent_rows": 638
+    },
+    {
+      "step": 1250,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-1250.json",
+      "receipt_sha256": "e1140894930381dfe66a75349cb03184b2e4c4bf475f09068a250c4dd933274a",
+      "paired_average_lease_live": false,
+      "coherent_rows": 943
+    },
+    {
+      "step": 1500,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-1500.json",
+      "receipt_sha256": "9ea03f54c2f42cf4b1dd9e148c3420077fe45210e88d39fe2eff17dd19ff56f8",
+      "paired_average_lease_live": false,
+      "coherent_rows": 881
+    },
+    {
+      "step": 1750,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-1750.json",
+      "receipt_sha256": "3b3c692339e3413c0bde91ba7456f25cbda7c66eae01cef33ef728d121729577",
+      "paired_average_lease_live": false,
+      "coherent_rows": 963
+    },
+    {
+      "step": 2000,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/accepted-attempt1/checkpoint-2000.json",
+      "receipt_sha256": "24ce98bffb572a2b4a2bca7f806dfad5dd832e6a9ab7ac88f4055ef05d3d43ee",
+      "paired_average_lease_live": true,
+      "coherent_rows": 977
+    }
+  ],
+  "quality_verdict": null
+}

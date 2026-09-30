@@ -1,0 +1,198 @@
+[
+  {
+    "name": "learned-toy-CB64-RA2",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 95.43110995786265,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/learned/training/toy/CB64-RA2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/learned-toy-CB64-RA2.log",
+    "result_sha256": "bca9348d739f8e0800b3b6fb69e5382413facf8b2bbc8b1031f569a7029b3520"
+  },
+  {
+    "name": "learned-mnist-CB64-RA2",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 113.7675668450538,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/learned/training/mnist/CB64-RA2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/learned-mnist-CB64-RA2.log",
+    "result_sha256": "19aba37740234acb989697bd82138728766221b62fb2679514623d094a9cfa20"
+  },
+  {
+    "name": "replay-CB64-RA2",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 13.36438123206608,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/learned/replay-CB64-RA2.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/replay-CB64-RA2.log",
+    "result_sha256": "9475188f87b8627dbcf10e55779ca7d0f8c6c6ed52077219f7225eb335f9678e"
+  },
+  {
+    "name": "screen-mode_hold",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 44.48832333483733,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/mode_hold/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-mode_hold.log",
+    "result_sha256": "9f90a2dc3b62d5d1ea98feb1928ea48bad7f96ea6e698341362a08f9d43fc885"
+  },
+  {
+    "name": "screen-img_blobs4",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 23.905012514907867,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/img_blobs4/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-img_blobs4.log",
+    "result_sha256": "c97fc76254fd28b479ddf7d2940311b83c8e535454cc9484ee1c3340c17f52f4"
+  },
+  {
+    "name": "screen-vector_unequal_mass",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 48.09180383896455,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/vector_unequal_mass/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-vector_unequal_mass.log",
+    "result_sha256": "29a560d448dd18247aa4fb12dcd123932c214b6a4e7c0f60fe7d0fdddc694156"
+  },
+  {
+    "name": "screen-ring_shift",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 383.25080923200585,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/ring_shift/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-ring_shift.log",
+    "result_sha256": "f7eeb667e36e35a042a00e2af9954f2688252648e28ad2d7c919e1d1c90a83a0"
+  },
+  {
+    "name": "screen-grid100",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 1760.287,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-grid100.log",
+    "result_sha256": "1ffb666fac600723637dfb7ecd7bc506750bc7ba8e1ce407cbf25000466b4100",
+    "returncode_source": "frozen wrapper finalized process_exit_code",
+    "os_wait_status_observed": false,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-rotated100",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 1979.9957825979218,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/rotated100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-rotated100.log",
+    "result_sha256": "5a96db53bb4f7aab5d6da424ba95dba688c874962fb90c29bcf13f7d5f28ab48",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-staggered100",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 596.800869837869,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/staggered100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-staggered100.log",
+    "result_sha256": "421b9a93de8575556776c59ecf7ae5474a25d941d3467e86529d99a19d0e7145",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-stationary",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 885.4065986471251,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/stationary/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-stationary.log",
+    "result_sha256": "e142e6e51668f96d16718ba0dfa6402d7dbf4491e50e7e662eacbb91c20e2be8",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-img_intensity2",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 69.63524146820419,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/img_intensity2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-img_intensity2.log",
+    "result_sha256": "10c5e7711b12397e72bdd415e65ce2e04ef06951ffbdf43aa4a9f6e27e802a4b",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-img_stripes2",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 42.87360237096436,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/img_stripes2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-img_stripes2.log",
+    "result_sha256": "0e99d9a888e50fb2ac7f5a27c4dfd81c7663bad11b21b580baf36d0afe5fd55d",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-img_bars4",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 24.919672675896436,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/img_bars4/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-img_bars4.log",
+    "result_sha256": "87743a10bc14f9a08ecb8f61b5c5f6b9120398964328d7f3add048ce89529fef",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-vector_two_broad",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 37.73575558909215,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/vector_two_broad/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-vector_two_broad.log",
+    "result_sha256": "9078ec179724494445e008501c76075dd04506adc8246f19c38cd3478a84a022",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-vector_unequal_width",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 39.76834084489383,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/vector_unequal_width/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-vector_unequal_width.log",
+    "result_sha256": "47af06f8afd0e0e164ebf10cb7c294c82973065db098be6253016b7ed54e3846",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-vector_anisotropic",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 46.87758222478442,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/vector_anisotropic/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-vector_anisotropic.log",
+    "result_sha256": "849976e0f8ec84dee3a7aaacd5f8423420e8e6bcf4ab3055d358fb83749fd6d9",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-vector_overlap",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 39.621092392131686,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/vector_overlap/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-vector_overlap.log",
+    "result_sha256": "bb6f30ac1dc7eca17eecaf464f8ebea86977ee1604096306e2a9cf1ef7319a1a",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  },
+  {
+    "name": "screen-vector_spiral",
+    "returncode": 0,
+    "status": "PASS",
+    "wall_seconds": 224.69599040504545,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/vector_spiral/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/logs/screen-vector_spiral.log",
+    "result_sha256": "af4096d9032de97e0a2a0ec1b3f9ca6b2f06bdee80ac524fc5ddd6ec861ca49d",
+    "os_wait_status_observed": true,
+    "supervisor_recovered": true
+  }
+]

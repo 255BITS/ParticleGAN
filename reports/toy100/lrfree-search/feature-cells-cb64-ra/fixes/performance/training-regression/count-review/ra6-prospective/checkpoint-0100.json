@@ -1,0 +1,6 @@
+{
+  "status": "INVALID",
+  "step": 100,
+  "error": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/audit_checkpoints.py\", line 250, in <module>\n    try:row=audit(event,continuous)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/audit_checkpoints.py\", line 118, in audit\n    assert cfg['steps']==2000 and cfg['recipe']==state['recipe']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+}

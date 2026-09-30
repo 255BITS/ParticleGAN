@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "returncode": 0,
+  "started_utc": "2026-09-30T05:40:06.610882+00:00",
+  "finished_utc": "2026-09-30T05:40:23.813113+00:00",
+  "phase_ready_sha256": "ed7da8badaf3372f72b22ca5935edc003d6b50716715fd5f401e5bc958c2de26",
+  "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+  "result_sha256": "d8a66c86ae6948731f6bc8eff98b419cb76c6910d5ae85cae83cc149b0e88532",
+  "original_supervisor_still_parked": true,
+  "numerical_parallelism": 1,
+  "quality_verdict": null,
+  "source_integrity": "VALID"
+}

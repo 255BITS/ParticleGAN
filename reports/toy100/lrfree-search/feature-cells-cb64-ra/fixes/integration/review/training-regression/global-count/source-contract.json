@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "base_feature_sha256": "ada7f24862d915d1d7f768270d46a6c15701cfe949b23f4b9782fb74f9cade9f",
+  "candidate_feature_sha256": "1d3c90aa3b72d086df0defcc8c356e48778310f005473e8c5c271afa44f89d76",
+  "patch_sha256": "38b9769223ae6e0a5df6b1623bd881de27fb184586b66121a4f68c21a4411604",
+  "changed_package_files": [
+    "particlegan/feature_cells.py"
+  ],
+  "unchanged_method_bodies": [
+    "_ordinary_mass_transport",
+    "_ordinary_support_transport",
+    "select_parents"
+  ],
+  "new_snapshot_methods": [
+    "_ordinary_global_transport"
+  ],
+  "new_top_level_functions": [],
+  "root_composition_diagnostic_keywords": [
+    "count_partition",
+    "count_boundary",
+    "count_categories",
+    "count_multiplicity",
+    "count_cutoff",
+    "ordinary_mass_moves",
+    "ordinary_support_moves",
+    "ordinary_global_moves",
+    "ordinary_death_policy"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "status": "VALID_TOY_PASS_GRID_QUALITY_FAIL",
+  "utc": "2026-09-30T08:08:14.117836+00:00",
+  "variant": "CB64-RA8",
+  "toy_gate": "PASS",
+  "grid_gate": "FAIL",
+  "canonical_fixture_validity": "VALID",
+  "toy_metrics": {
+    "precision": 0.96533203125,
+    "modes": 25,
+    "mass_tv": 0.05211425781250001,
+    "minimum_supported_mode_mass": 0.03271484375
+  },
+  "grid_terminal_accuracy": [
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "grid_final": {
+    "precision": 0.96995,
+    "modes": 100,
+    "mass_tv": 0.0484,
+    "acc_center_rms_sigma": 0.20356962350189495,
+    "acc_abs_cov_trace_bias": 0.07529339245336453,
+    "acc_radial_ks": 0.0412031188060239,
+    "max_cov_eig_ratio": 1.8191861172944435,
+    "max_radial_median_ratio": 1.31811491020312
+  },
+  "grid_holdout": {
+    "mass_tv": 0.03811,
+    "center_rms_sigma": 0.19588471859125647,
+    "abs_cov_trace_bias": 0.07025973321854107,
+    "cov_trace_bias": 0.07025973321854107,
+    "radial_ks": 0.03603431411925562,
+    "accuracy_score": 0.8045113611974375,
+    "accuracy_pass": true,
+    "frozen_pass": false,
+    "passed": false,
+    "precision": 0.97161
+  },
+  "grid_holdout_full_pass": false,
+  "package_promoted": false,
+  "both_quality_gates_pass": false,
+  "training_seconds": {
+    "toy": 448.1997998380102,
+    "grid": 703.98
+  },
+  "input_artifact_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/result.json": "8df397fc69bde42de3022e2fd8935eac11488d29c8506fcda2f209dc0ea71346",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/screens/runs/grid100/result.json": "a1cee484c3abbd7387d8148d807d915f5c7d0b4a16131eaeba6791030666d21f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra8-monitor/canonical-receipts/screens/runs/grid100/acceptance-receipt.json": "fd9a4eb173c60c60b2a8cf77df5c1f42d210592c8dfda860ba38f07a3e823876",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/READY.json": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/source-freeze.json": "1292ef86f6b16d8928923fda267fb9f1efc6d8ac746a1f091a01397e032a3cf3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/FINAL-RECEIPT.json": "0b042b2ee77ce84d3b221e06e2ceb9cb1fc86324549eabb60ec034ee527111c5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/FINAL-FROZEN.json": "9bcfb54255bd457cbd72acc29f0946aff620e104143fc7d990f9ae0dadacec79",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/FROZEN.json": "d19424855a569e01c06c285cda2827816ce06d5f250714823571a1f674293138"
+  },
+  "scope": "Original final toy and full canonical noisy grid gates. All failed terminal/holdout gates retained; no checkpoint selection or package recommendation."
+}

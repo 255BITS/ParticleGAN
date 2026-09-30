@@ -26,4 +26,20 @@ For the focused CPU contracts from this directory:
 /tmp/pr38-default-env/bin/python implementation/test_integration.py
 ```
 
-The recorded result is 8/8 passing contracts. The GPU retest runs the unchanged config on the original CUDA harness, paired E22/CB64-RA learned training and checkpoint replay. Its completed runners, compact receipts and independent audit are preserved under `cuda/`. Corrected CB64-RA2 diagnosis and validation are a separate experiment.
+The recorded result is 8/8 passing contracts. The GPU retest runs the unchanged config on the original CUDA harness, paired E22/CB64-RA learned training and checkpoint replay. Its completed runners, compact receipts and independent audit are preserved under `cuda/`.
+
+## Corrected candidates and joint quality target
+
+[The correction archive](fixes/README.md) contains the subsequent experimental
+packages, matching configs, focused diagnostics and CUDA results. The target
+requires one package passing both the unchanged learned toy and full canonical
+grid gates. No completed candidate qualifies yet.
+
+RA8 passes the final toy: precision 0.965332, all 25 modes and mass TV 0.052114.
+All ten saved training states match RA7 exactly apart from the declared serving
+metadata and performance counters. Its full grid is independently VALID/FAIL;
+center, radial and covariance errors remain. The actual positive serving lease
+also passes a separate exact CUDA sample/reload check. These findings are an
+experimental checkpoint, and the default package remains unchanged. See the
+[toy/grid leaderboard](fixes/quality/REPORT.md) for final gates and the
+[usage guide](fixes/USAGE.md) for package and checkpoint scope.

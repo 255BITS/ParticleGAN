@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot_indexed_adapter.py", line 92, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot_indexed_adapter.py", line 37, in main
+    annotated=adapter.annotate(task,old,new,integrity,proof)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/indexed_adapter.py", line 137, in annotate
+    assert remaining==Counter(adapted.get('validity_reasons',[])),task+': wrong options changed interpretation'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: mode_hold: wrong options changed interpretation

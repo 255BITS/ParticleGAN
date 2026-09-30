@@ -1,0 +1,35 @@
+/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/__init__.py:155: UserWarning: A NumPy version >=1.18.5 and <1.25.0 is required for this version of SciPy (detected version 2.0.2
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/diagnose_state.py", line 23, in <module>
+    from models_metrics import networks, Evaluator, encode, oracle_centres
+  File "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py", line 10, in <module>
+    from scipy.linalg import sqrtm
+  File "/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/linalg/__init__.py", line 197, in <module>
+    from ._misc import *
+  File "/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/linalg/_misc.py", line 3, in <module>
+    from .blas import get_blas_funcs
+  File "/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/linalg/blas.py", line 213, in <module>
+    from scipy.linalg import _fblas
+AttributeError: _ARRAY_API not found
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/diagnose_state.py", line 23, in <module>
+    from models_metrics import networks, Evaluator, encode, oracle_centres
+  File "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py", line 10, in <module>
+    from scipy.linalg import sqrtm
+  File "/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/linalg/__init__.py", line 197, in <module>
+    from ._misc import *
+  File "/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/linalg/_misc.py", line 3, in <module>
+    from .blas import get_blas_funcs
+  File "/home/mikkel/anaconda3/lib/python3.9/site-packages/scipy/linalg/blas.py", line 213, in <module>
+    from scipy.linalg import _fblas
+ImportError: numpy.core.multiarray failed to import

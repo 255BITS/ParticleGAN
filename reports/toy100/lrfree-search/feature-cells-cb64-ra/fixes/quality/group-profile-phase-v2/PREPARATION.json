@@ -1,0 +1,8 @@
+{
+  "status": "INDEPENDENT_CPU_REVIEW_PENDING",
+  "base_phase_ready_sha256": "8dd57424f2c64bbfbe27ceff3e059cc8cd73e840c3319b253e5e66ad34f70d45",
+  "base_source_sha256": "88eba85ce2519fd29f8b8c58a158514e102b31282e9de6aebf4e9cc243dfb4b3",
+  "source_sha256": "5bc48310ee58859a4389dd547599934f3f46fdf803e7e548d85bdc4091168707",
+  "delta": "Inherited serial-phase flock descriptor keeps the numerical child exclusive if its wrapper exits; profile command/law/input/output unchanged.",
+  "quality_verdict": null
+}

@@ -1,0 +1,10 @@
+{
+  "status": "FROZEN_READ_ONLY_GPU_ARTIFACT_AUDIT",
+  "utc": "2026-09-30T05:47:17.260107+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-gpu-review/REPORT.md": "62c285936444508e8c05c7b3b62c23768a67f411f1cac153182a31651852be9b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-gpu-review/audit.py": "05438c2e4ddb7b7271c0bbc87669039484c519129f320accc4be9a8d84e1b20b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-gpu-review/receipt.json": "a91a10d99e93ec57c68c63e9e45cd69eb732d84edbb3ff42295168dcf755bf5d"
+  },
+  "root_result_sha256": "d8a66c86ae6948731f6bc8eff98b419cb76c6910d5ae85cae83cc149b0e88532"
+}
