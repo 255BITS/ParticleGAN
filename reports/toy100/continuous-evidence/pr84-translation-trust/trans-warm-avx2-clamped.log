@@ -1,0 +1,12 @@
+{"event": "DECLARED", "phase": "warm", "method": "trans", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "VARIANT_START", "variant": "identity"}
+{"event": "VARIANT_START", "variant": "trans"}
+{"event": "TRANS", "step": 50, "translation": 0.0095, "rms": 0.0109, "factor": 1.0, "slope": 0.014, "shrunk": 13, "rejected": 10, "seen": 50}
+{"event": "VARIANT_DONE", "variant": "identity"}
+{"event": "TRANS", "step": 100, "translation": 0.0088, "rms": 0.017, "factor": 1.0, "slope": 0.023, "shrunk": 26, "rejected": 23, "seen": 100}
+{"event": "TRANS", "step": 150, "translation": 0.0077, "rms": 0.0107, "factor": 1.0, "slope": 0.0006, "shrunk": 33, "rejected": 30, "seen": 150}
+{"event": "TRANS", "step": 200, "translation": 0.004, "rms": 0.0179, "factor": 1.0, "slope": 0.0418, "shrunk": 38, "rejected": 35, "seen": 200}
+{"event": "VARIANT_DONE", "variant": "trans"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": []}
+{"event": "WARM", "variant": "trans", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.92822265625, "failing_steps": []}
+{"event": "DONE"}
