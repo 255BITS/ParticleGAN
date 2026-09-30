@@ -1,0 +1,35 @@
+{
+  "schema": "continuous-research-candidate-v1",
+  "status": "research_only_unqualified",
+  "method": "pr84_smoothed_g_with_refreshed_chamfer_nonlinear_prior",
+  "first_failed_gate": "same_target_continuation_2400",
+  "torch": "2.13.0+cu126",
+  "cuda": false,
+  "warm": {"checks": 200, "passing_checks": 200, "min_hq": 0.943603515625, "min_modes": 8},
+  "continuation": {
+    "checks": 120,
+    "passing_checks": 118,
+    "failing_steps": [2240, 2250],
+    "failures": [
+      {"step": 2240, "modes": 6, "hq": 0.916748046875},
+      {"step": 2250, "modes": 6, "hq": 0.91162109375}
+    ],
+    "min_modes": 6,
+    "min_hq": 0.91162109375,
+    "final": {"modes": 8, "hq": 0.999755859375},
+    "identity": {"warm": "200/200", "later": "120/120", "parity": true}
+  },
+  "earlier_cold_before_new_order": {
+    "promotes": false,
+    "trajectory_mse": 0.0009426682372577488,
+    "trajectory": "PASS",
+    "ring_terminals": [
+      {"step": 1000, "modes": 8, "hq": 0.999755859375},
+      {"step": 1050, "modes": 8, "hq": 1.0},
+      {"step": 1100, "modes": 8, "hq": 0.999267578125},
+      {"step": 1150, "modes": 8, "hq": 0.985595703125},
+      {"step": 1200, "modes": 8, "hq": 0.974853515625}
+    ]
+  },
+  "not_run_after_failure": ["repeat_cold", "acquired_state_hold", "other_hosts"]
+}
