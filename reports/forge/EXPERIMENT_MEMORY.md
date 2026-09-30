@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 189. Inventory coverage: complete. Unresolved import items: 7.
+Records: 190. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -2948,6 +2948,22 @@ The ordinary fresh-checkout two_pole attempt failed its slope bound (grad_med1.2
 
 [Evidence](../../reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/result.json) · [Record](records/readout-4e04059eb9f631a2e406447e.json)
 
+### k3p-a2-off-native-diagnostic · readout-5830d399b6741ce7b3a2b992
+
+**Scope:** calibration_diagnostic; scientific; revision `8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581`.
+
+Diagnostic hypothesis: removing the active A2 sparse-row damping may change the late covariance undershoot on the unchanged named affine grid100 learned-MoG host. This isolates one mechanism; saved evidence does not predict a positive result, and no full-reference or adoption claim is made.
+
+**Observed:** {'FAIL': 1}; wall seconds 85.368; mechanism `structural`.
+
+grid100_affine_square_named_v1: precision=0.99739, center_rms_sigma=0.12509, mass_tv=0.23354, radial_ks=0.21077
+
+Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG host. FAIL after all 7000 updates for 85.367950892 paid seconds, no execution errors or reservations. It never passed recorded coverage/accuracy; final modes74 vs baseline100, holdout massTV.23354 vs.032, covariance bias-.426600 vs-.265594, radialKS.210772 vs.120006. Both full verdicts remain FAIL.
+
+**Next:** Keep A2 in the reference and preserve this negative in memory. Do not extend this failed parent, rerun its control or launch a seed/width sweep. Further calibration needs a supported new hypothesis or compatible saved positive evidence; no qualification or default adoption.
+
+[Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
+
 ### k3p · readout-7650981f9a48a164aebbd631
 
 **Scope:** calibration_diagnostic; scientific; revision `2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591`.
@@ -3056,4 +3072,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `bac344f7a197386bd143d59adab5c1320097d46040c8b764c9a524098d9fe64c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `7203e7d1ac8efe9c024d4c285977c760213b193e1c21f59a3b92e9d14a488302`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

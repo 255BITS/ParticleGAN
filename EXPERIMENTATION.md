@@ -46,6 +46,10 @@ three passes and two failures for 156.284 seconds. Mode-hold correctly rejects
 the candidate that loses native grid shape accuracy: one true rejection, with
 52 of 57 cells still unknown. No positive reference is established; calibration
 remains blocked. Full joined-source CI passed 1,807 tests and 18 subtests.
+The [A2-off native diagnostic](reports/forge/A2_OFF_NATIVE_READOUT.md) then failed
+for 85.368 seconds, with 74/100 modes and worse holdout mass/shape accuracy.
+Its unchanged control was reused. This negative argues against the ablation;
+it supplies no positive calibration reference.
 
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.

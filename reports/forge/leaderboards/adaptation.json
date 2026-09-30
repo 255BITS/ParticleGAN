@@ -449,6 +449,22 @@
       "source": "reports/forge/attempts/d0414263a3914641992efbbab6f7b951/result.json"
     },
     {
+      "attempt_id": "d4d633052321469e82caff90210ef309",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 85.36795089200314
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json"
+    },
+    {
       "attempt_id": "dca8c7aa0eca484c9270d07125f7cb0b",
       "candidate_id": "k3p",
       "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
@@ -4170,6 +4186,218 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "img_intensity2_residual16"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "d4d633052321469e82caff90210ef309"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p-a2-off-native-diagnostic",
+        "profile_sha256": "5ab83d98bbbdca3b03fa538333ff5811b1e4553bb89cc2b034d0a26c82cb056a",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-a2-off-native-v1",
+        "registration_sha256": "29c0f420821f0e38bc1b6fbd216f0cd43cfaa3ae95bd16600b2f518318f9ea9d"
+      },
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "cohort": "ab0a63012dae9cf0cee7e7b3ee088ef414a8d62eb87ff3714efdc91aa1a0c181",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 85.36795089200314
+      },
+      "counts": {
+        "FAIL": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "native100"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [],
+        "task_families": {
+          "grid100_affine_square_named_v1": {
+            "adapter": "native100",
+            "basis": "recorded_request",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "d4d633052321469e82caff90210ef309"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "336453aafdc3d896335e60e0",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "d4d633052321469e82caff90210ef309"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "grid100_affine_square_named_v1"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-a2-off-native-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "745f459cb4395d92e57f8d4730a7d5406a6a1af5",
+        "path": "reports/forge/attempts/d4d633052321469e82caff90210ef309/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 78.65738110701204,
+            "adapter_seconds": 78.8784880979947,
+            "charged_task": "grid100_affine_square_named_v1",
+            "completed_steps": 7000,
+            "device": "0",
+            "execution_seconds": 85.36795089200314,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 7000,
+              "generator": 7000,
+              "prior": 7000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 75.14570060835104,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 35,
+                  "seconds": 5.966994423943106
+                },
+                "sampling": {
+                  "calls": 70,
+                  "seconds": 0.07581324504280929
+                },
+                "training_updates": {
+                  "calls": 7000,
+                  "seconds": 69.10289293936512
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 80.74143887100217,
+            "wall_seconds": 85.36795089200314
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.42659953346473634,
+            "accuracy_pass": false,
+            "accuracy_score": 3.513268557730311,
+            "all_finite": true,
+            "center_max_sigma": 0.4584159163879071,
+            "center_rms_sigma": 0.12508756214075725,
+            "cov_frob_rms": 0.43154486394984237,
+            "cov_trace_bias": -0.42659953346473634,
+            "frozen_pass": false,
+            "mass_tv": 0.23354,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.99739,
+            "precision_gap": 0.008498996538242265,
+            "problem": "grid100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.2107723100894704,
+            "valid_n": 100000,
+            "within_radius_n": 99739
+          },
+          "raw_status": "completed",
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "grid100_affine_square_named_v1"
         }
       ]
     }
@@ -8792,7 +9020,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "336453aafdc3d896335e60e0",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -43168,7 +43403,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "336453aafdc3d896335e60e0",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -48635,6 +48877,218 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "img_intensity2_residual16"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "d4d633052321469e82caff90210ef309"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p-a2-off-native-diagnostic",
+        "profile_sha256": "5ab83d98bbbdca3b03fa538333ff5811b1e4553bb89cc2b034d0a26c82cb056a",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-a2-off-native-v1",
+        "registration_sha256": "29c0f420821f0e38bc1b6fbd216f0cd43cfaa3ae95bd16600b2f518318f9ea9d"
+      },
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "cohort": "ab0a63012dae9cf0cee7e7b3ee088ef414a8d62eb87ff3714efdc91aa1a0c181",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 85.36795089200314
+      },
+      "counts": {
+        "FAIL": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "native100"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [],
+        "task_families": {
+          "grid100_affine_square_named_v1": {
+            "adapter": "native100",
+            "basis": "recorded_request",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "d4d633052321469e82caff90210ef309"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "336453aafdc3d896335e60e0",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "d4d633052321469e82caff90210ef309"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "grid100_affine_square_named_v1"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-a2-off-native-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "745f459cb4395d92e57f8d4730a7d5406a6a1af5",
+        "path": "reports/forge/attempts/d4d633052321469e82caff90210ef309/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 78.65738110701204,
+            "adapter_seconds": 78.8784880979947,
+            "charged_task": "grid100_affine_square_named_v1",
+            "completed_steps": 7000,
+            "device": "0",
+            "execution_seconds": 85.36795089200314,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 7000,
+              "generator": 7000,
+              "prior": 7000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 75.14570060835104,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 35,
+                  "seconds": 5.966994423943106
+                },
+                "sampling": {
+                  "calls": 70,
+                  "seconds": 0.07581324504280929
+                },
+                "training_updates": {
+                  "calls": 7000,
+                  "seconds": 69.10289293936512
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 80.74143887100217,
+            "wall_seconds": 85.36795089200314
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "abs_cov_trace_bias": 0.42659953346473634,
+            "accuracy_pass": false,
+            "accuracy_score": 3.513268557730311,
+            "all_finite": true,
+            "center_max_sigma": 0.4584159163879071,
+            "center_rms_sigma": 0.12508756214075725,
+            "cov_frob_rms": 0.43154486394984237,
+            "cov_trace_bias": -0.42659953346473634,
+            "frozen_pass": false,
+            "mass_tv": 0.23354,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.99739,
+            "precision_gap": 0.008498996538242265,
+            "problem": "grid100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.2107723100894704,
+            "valid_n": 100000,
+            "within_radius_n": 99739
+          },
+          "raw_status": "completed",
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "task_id": "grid100_affine_square_named_v1"
         }
       ]
     },

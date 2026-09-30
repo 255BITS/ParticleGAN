@@ -1,6 +1,42 @@
 # Legacy consumers and GPU ownership audit
 
+The [versioned consumer index](legacy-consumers.json) records a disposition for
+all 12 launcher/consumer groups below. Retained commands remain available for
+uncovered domains, independent validation and historical reproduction. Guide
+pointers route supported new ideas to Forge with its provisional status stated.
+No legacy request, process or output directory has changed owners.
+
 ## Ownership update — 2026-09-29
+
+### Latest local observation — approximately 22:35 MDT (2026-09-30 04:35 UTC)
+
+The coordinator rechecked the **host machine**, following the current smoke pair.
+This subagent's sandbox exposes only its own PID namespace and cannot access the
+NVIDIA driver; its process listing cannot establish host ownership. The following
+device observations come from the coordinator's host inspection, with queue-file
+and log observations independently read from disk. No process was changed.
+
+| Resource | Latest observation | Ownership decision |
+| --- | --- | --- |
+| GPU 0, `GPU-ed080e41-3193-3755-6756-f3d46c433331` | 0% utilization, 18 MiB, no compute process | Locally idle at this observation; recheck immediately before an authorized bounded campaign. Idle capacity is not a standing reservation. |
+| GPU 1, `GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce` | 99% utilization, 5,472 MiB; unrelated NPC PID **404986** running `tools/train_npc_misgan.py` with `npc_misgan_s1_gxhop6_dxres6_dmres3_gmblock_pack16_shared_100k.toml` | Remains owned by the NPC application workflow. Preserve this job and desktop clients Brave **11101** / ModOrganizer **62189**. |
+| HyperGAN local launcher | No `run-queue.sh` or training child; remaining HyperGAN processes are `web_autostart`, resource-tracker and spawned viewers | Preserve viewers. The inspected historical training queue has finished; no requests were transferred to Forge. |
+| Forge | No live workers after the smoke pair. At 04:34 UTC the shared queue recorded no running jobs or leases and **0 reserved seconds** | The coordinator owns result/readout reconciliation. Pending downstream definitions and registrations are not active training ownership. |
+
+`/home/martyn/dev/hypergan/training-runs/queue-gpu0.txt` now contains only comments.
+Its `.log` records successful exits for PG214, PG215, PG217 and the PG0.8 200k
+launcher, followed by **`queue empty` at 2026-09-29 17:35:30 MDT**. This replaces
+the old local pending-work observation below; it does not certify another
+machine's queue or transfer any application environment/checkpoint to Forge.
+
+The physical two-GPU pilot has already passed, as recorded in
+[its readout](PHYSICAL_GPU_PILOT_READOUT.md). A new joint GPU reservation is not
+an outstanding requirement to repeat that software proof. Scientific calibration
+and any later ownership transfer remain separate decisions. The `/ml2/...`
+LR-free and gap-fill roots are absent on this machine; their remote queue state
+and owners remain **unverified**, outside any local handoff.
+
+### Earlier local observations — historical context
 
 The later [v3 pilot](PHYSICAL_GPU_PILOT_READOUT.md) used both available A6000s
 after a fresh process/queue check found no external training owner. Existing
@@ -91,7 +127,7 @@ not independent experiment counts; archived copies and helpers overlap.
 | Existing entrypoint / consumer | Current contract and artifacts | Forge coverage and migration decision |
 | --- | --- | --- |
 | [`experiments/run_grid.py`](../../experiments/run_grid.py), [`experiments/follow_grid.py`](../../experiments/follow_grid.py), [runner guide](../../docs/experiment-runner.md) | TOML/YAML or explicit config manifest → selected `--trainer`; defaults are frozen; per-output advisory locks; `requested_config.yaml`, `summary.json`, `run_grid_complete.json`, `log.txt`; previous attempts preserved in `.run_grid_history`. `follow_grid` invokes the runner and combines logs. Default runner concurrency is five workers per GPU. | Forge implements immutable requests, source snapshots, exact task reuse, budgets, ownership and central logs for its registered adapters. It is **not** a generic `--trainer` replacement. Do not translate a completed grid manifest into a new qualification PASS, or run both owners against the same output directory. Keep these entrypoints for uncovered domains. |
-| [`experiments/sparse_pipeline.sh`](../../experiments/sparse_pipeline.sh) → config generator → `run_grid.py --trainer experiments/train_sparse.py` → analyzer | `recipe`, `ucd`, `sparse`, `discrete`, `champion`, `fewshot` stages; exact manifests; `results/sparse/PIPELINE.log`; namespace/config generation and analysis depend on legacy paths. | No sparse task/adapter or result-contract replacement in the initial 29 Forge cards. Retain pipeline and analyzer. Historical seed-list support does not authorize new seed-only screening experiments. |
+| [`experiments/sparse_pipeline.sh`](../../experiments/sparse_pipeline.sh) → config generator → `run_grid.py --trainer experiments/train_sparse.py` → analyzer | `recipe`, `ucd`, `sparse`, `discrete`, `champion`, `fewshot` stages; exact manifests; `results/sparse/PIPELINE.log`; namespace/config generation and analysis depend on legacy paths. | No sparse task/adapter or result-contract replacement is currently declared. Retain pipeline and analyzer. Historical seed-list support does not authorize new seed-only screening experiments. |
 | The 22 `experiments/train_*.py` programs | 100-Gaussian and denoising; CIFAR DDGAN / particle DDGAN / particle AE; MoG VAE, VAE stability, encoder fit, autoencoder; sparse / trajectory / transition; ten `train_gym_*` control or finetuning entrypoints. Config/result conventions are consumed by legacy analyzers and reports. | Forge covers particular toy/native measurements, not these entire training products. CIFAR, Gym, sparse, autoencoder/VAE and application checkpoint consumers need explicit domain adapters, metrics, API/parity and artifact decisions before retirement. |
 | [`benchmarks.toy100`](../../benchmarks/toy100/__main__.py), [`benchmarks.toy_suite`](../../benchmarks/toy_suite.py), [`constraint_screen`](../../benchmarks/toy100/constraint_screen.py) | Native coverage/accuracy commands; common-recipe full 22-task replay; predeclared fixed-budget constraint screens. Original gates read events, sample clouds, holdout and config. Native `--steps` affects the original learner's schedule, so a shorter run is not automatically an equivalent prefix. | Forge reuses graders and supports the initial 19 transfer tasks, three native 7k tasks, ring endurance and separate continuations. API/default prior/RNG identities differ where declared; original replay/CLI behavior remains necessary for archived reproduction. Keep legacy commands usable. |
 | [CI trained gate](../../.github/workflows/toy100.yml) | On merged primary branches/manual dispatch: CPU torch 2.13, pinned AVX2 dispatch, 45-minute job; runs `python -u -m benchmarks.toy_suite run --output artifacts/toy-suite-ci`, uploads `common22-trained-gate`. | This is an actual automated consumer that has **not** migrated to Forge. Do not replace its whole-suite protection with an uncalibrated smoke profile. Any CI change needs the CI maintainer's declared equivalent coverage and retained artifacts. |
@@ -134,14 +170,25 @@ the same config/output identity. A completed Forge task or a scientific failure
 must not be silently requeued as fresh work. Resume the legacy owner only after
 the ownership ledger proves there is no duplicate live request.
 
-## Concrete coordination still needed
+## Concrete reconciliation that can proceed now
 
-**Who will reserve a joint GPU window around the existing HyperGAN GPU 0 queue
-(current PG214 run plus the three pending launchers) and the NPC MisGAN GPU 1
-run?** The safe default is to wait for their owners to release both devices, or
-agree on one shared resource owner and an explicit contention policy. Available
-VRAM does not answer that question. This audit neither stopped those jobs nor
-assumed authorization to change their queues.
+These actions do not require a passing calibration and do not enact cutover.
+The repository coordinator owns the migration record; the named consumer owner
+retains its launcher, outputs and compute until an explicit handoff.
+
+| Action | Concrete scope | Owner |
+| --- | --- | --- |
+| Record routing dispositions | Mark the grid/sparse/CIFAR/Gym/AE/VAE paths as retained compatibility consumers; archived fixed-path drivers as historical reproduction; unsupported or remote queues as unverified. Map supported toy ideas to Forge's provisional workflow without calling a screen an accepted default. | Repository coordinator with the relevant domain maintainer |
+| Link legacy entrypoints to the shared guide | Add a scope pointer to `docs/experiment-runner.md`, `benchmarks/transfer_suite/README.md` and launcher help. Keep command/output compatibility and historical protocol instructions. Prospective examples must not introduce seed-only sweeps; the sparse script's historical multi-seed default is not authorization to run one. | Documentation/grid maintainers |
+| Export a legacy request inventory when an actual handoff requires it | Reuse `run_grid.py`'s existing config/default/provenance/completion checks for exact configs, outputs and completion evidence. No local covered pending queue has been identified for transfer, so an exporter is deferred. It must not enqueue, archive outputs, infer scientific PASS, or adopt claims. | Grid maintainer with Forge coordinator |
+| Preserve independent validation consumers | Retain `.github/workflows/toy100.yml` and standalone package/wheel/parity commands. A Forge screen replacing their protection requires explicit equivalent coverage and calibration; documenting why they remain needs neither training nor retirement. | Repository/CI maintainer |
+| Finish per-owner handoff records | For any genuinely still-used covered launcher, record pending/running/completed request IDs and destinations, disposition, rollback route and the person responsible. A locally empty queue can be marked finished from its evidence. Remote absence remains unknown until that owner supplies a receipt. | Existing queue/application owner, then Forge coordinator |
+
+Do not port all 22 training products merely to close the initial toy migration.
+Retaining an uncovered consumer with an explicit owner/scope is a reconciliation
+outcome. Retirement or default redirection needs a supported replacement and
+consumer agreement; scientific gate adoption still needs the frozen calibration
+criteria. The completed pilot is operational evidence, not that calibration.
 
 Inspection commands were `nvidia-smi` device/compute-process queries, targeted
 `ps` and `/proc/<pid>/{cwd,fd}` reads, tracked-path/source searches, `git show` of

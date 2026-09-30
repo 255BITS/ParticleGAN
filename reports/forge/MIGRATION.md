@@ -15,6 +15,9 @@ The [host-profile readout](HOST_PROFILE_TRANSFER_READOUT.md) contains the curren
 metrics and costs; [consumer ownership](LEGACY_CONSUMERS.md) records which legacy
 entrypoints and external jobs remain outside Forge. Earlier checkpoints below
 retain the evidence available at their dates.
+The separately registered [A2-off probe](A2_OFF_NATIVE_READOUT.md) also failed
+for 85.368 seconds, worsening coverage and mass/shape accuracy; its control was
+reused. The engine recorded a useful negative without a control rerun or a sweep.
 
 ## Develop integration — 2026-09-29
 
@@ -289,18 +292,23 @@ failure without granting qualification. No current profile has passed adoption.
   restart pilot: [v3 proof and readout](PHYSICAL_GPU_PILOT_READOUT.md).
 - [x] Complete a fresh-checkout walkthrough; `FRESH_CHECKOUT.md` binds the exact
   source, commands, candidate, evidence and original readout.
-- [ ] Reconcile actual legacy consumers/queues before making Forge the default
-  entrypoint. The consumer inventory is complete; ownership is unchanged.
+- [x] Record all 12 legacy consumer dispositions and 22 trainer entrypoints in
+  [the versioned index](legacy-consumers.json); add scoped guide pointers. The
+  inspected local HyperGAN queue is finished. Uncovered and historical commands
+  remain available; remote queue ownership stays unverified and unclaimed.
+- [ ] Complete default adoption after accepted calibration. Any actual supported
+  pending-request transfer still requires an owner handoff and reconciliation;
+  no such local transfer is currently identified or enacted.
 
 No legacy process has been stopped or adopted by Forge. No robustness seed
 experiments have run; the registered promotion stage is conditional on a future
 finished candidate and is not required merely to test the engine.
 
-The [legacy-consumer inventory](LEGACY_CONSUMERS.md) maps active repository
-entrypoints, CI, the external GPU owners, and rollback requirements. Both GPUs
-were actively training at the latest inspection; the HyperGAN queue can launch
-three pending jobs after its current child, so child completion alone is not a
-capacity reservation. No ownership was transferred.
+The [legacy-consumer inventory](LEGACY_CONSUMERS.md) maps repository entrypoints,
+CI, external GPU owners and rollback requirements. Its dated original snapshot
+had both GPUs occupied and three HyperGAN jobs pending. The newer observation
+records that queue empty, GPU 0 available for bounded Forge work, and unrelated
+training on GPU 1. No application ownership was transferred.
 
 Final software freeze: **441 tests passed** (all Forge tests plus public recipe
 defaults), including lifecycle, family filters and telemetry. The two warnings

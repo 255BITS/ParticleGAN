@@ -1,7 +1,9 @@
 # A2-off native mechanism diagnostic
 
-Prepared, registered and source-frozen; **not enqueued or trained**. No candidate
-readout, lifecycle conclusion, promotion or adoption is recorded by this study.
+This protocol was prepared, registered and source-frozen before submission at
+`043ec64e`. Its [completed readout](../A2_OFF_NATIVE_READOUT.md) records the FAIL
+and original control comparison. The declarations below preserve the prospective
+study; they confer no promotion or adoption.
 
 The diagnostic asks whether removing A2 sparse-row damping changes the late
 covariance undershoot on the current affine grid100 learned-MoG host. Saved
