@@ -5,6 +5,17 @@ on `develop`, in [PR #221](https://github.com/255BITS/ParticleGAN/pull/221).
 The [accepted plan](../../docs/better-experiment-automation-plan-2026-09-28.md)
 defines acceptance; this status file does not narrow its scope.
 
+## Current checkpoint
+
+Develop `a8b9d397` is merged; joined-source CI passes 1,807 tests and 18 subtests.
+The engine, root guide and physical two-GPU pilot are implemented and verified.
+Current scientific calibration has one correctly rejected negative, no complete
+positive reference, and 52/57 unknown cells. **Default adoption remains blocked.**
+The [host-profile readout](HOST_PROFILE_TRANSFER_READOUT.md) contains the current
+metrics and costs; [consumer ownership](LEGACY_CONSUMERS.md) records which legacy
+entrypoints and external jobs remain outside Forge. Earlier checkpoints below
+retain the evidence available at their dates.
+
 ## Develop integration — 2026-09-29
 
 Fetched `origin/develop` at `a8b9d3977701ca700d9918ac66d40ac814b9f9ba` and merged
@@ -138,7 +149,18 @@ The joined Forge and public initializer suite passed **703 tests**. A
 CPU/CUDA equality for G, D, prior locations and initialization receipts,
 unchanged training streams and sigma, and zero optimizer updates. Full CI for
 the preceding vector-profile commit `a0f7499b` passed **1,709 tests and 18 subtests**,
-with 16 explicit skips; the joined native changes still need their own CI result.
+with 16 explicit skips. The joined native source `93804cbc` also passed full CI:
+**1,807 tests and 18 subtests**, 16 explicit skips, Python 3.10/3.11 wheel smokes
+and release packaging ([run 36668104913](https://github.com/255BITS/ParticleGAN/actions/runs/36668104913)).
+
+The [joined-source diagnostic readout](HOST_PROFILE_TRANSFER_READOUT.md) records
+five measured cells for 156.284 paid seconds: bars4, intensity and unequal mass
+pass; mode-hold and native grid fail. The native model acquired accuracy and then
+lost shape quality. Mode-hold makes this one correctly rejected reference-negative
+lineage, with 52/57 cells still unknown. Missing reference costs stay unavailable.
+The [independent audit](HOST_PROFILE_INDEPENDENT_AUDIT.md) reproduced the first
+three verdicts and verified the native artifacts/checkpoint. No positive reference
+or calibration acceptance follows from this diagnostic pairing.
 
 ## Physical pilot completed
 

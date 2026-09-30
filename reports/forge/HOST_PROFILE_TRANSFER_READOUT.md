@@ -1,15 +1,20 @@
-# Host-profile transfer: two passes, one late accuracy failure
+# Host-profile transfer: one correctly rejected negative
 
 The [registered three-cell batch](HOST_PROFILE_TRANSFER_STUDY.md) completed for
 **127.210083646 paid seconds**, with no execution errors or remaining reservations.
 The explicit image and vector profiles passed. Native grid coverage passed, but
 its distribution became too narrow late in training, so its full verdict is FAIL.
+The separately registered two-cell smoke completion cost another 29.073682349
+seconds. All five cells total **156.283765995 paid seconds**, with three passes,
+two scientific failures, no execution errors and no remaining reservations.
 
 | Task | Verdict | Final evidence | Paid seconds |
 | --- | --- | --- | ---: |
 | bars4 residual16 | PASS | 4/4 modes; HQ 1.0; RMSE 0.003704; 18 final passing checks | 11.170117 |
 | unequal mass, published critic | PASS | HQ 0.997559; mass TV 0.054736; SW1/scale 0.079294; minimum mass ratio 0.671387; 9 final passing checks | 24.002935 |
 | native named affine grid100 | FAIL | 100 modes; HQ 0.99525; centre RMS 0.118938σ; absolute covariance-trace bias 0.273573; radial KS 0.126870 | 92.037031 |
+| mode hold | FAIL | 5/8 modes; HQ 0.998779; none of 24 checks passed | 17.930311 |
+| intensity2 residual16 | PASS | 2/2 modes; HQ 0.90625; RMSE 0.025581; mass TV 0; 8 final passing checks | 11.143372 |
 
 The vector gate used all components, including the rare component; no finite-atom
 exemption was applied. Bars4's first/stable pass was step 175, confirmed at 275.
@@ -37,6 +42,8 @@ Immutable attempts:
 - [bars4](attempts/680dcd337be343f69a1922cd3e89750a/result.json)
 - [unequal mass](attempts/a1de5d14bd8b4640b95a826209ae3085/result.json)
 - [grid100](attempts/dca8c7aa0eca484c9270d07125f7cb0b/result.json)
+- [mode hold](attempts/49d41e284fde41698212677403ca5d67/result.json)
+- [intensity2](attempts/5693d7b9c35844c78f4440ed15bad4a2/result.json)
 
 Request `89ee9af850e27926df7661de` binds source `5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7`,
 K3P revision `5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426`,
@@ -44,15 +51,30 @@ and registration published at `b828711d` before execution. Learned-MoG sigma,
 explicit image cloud exception, task-owned native initialization, clean live
 sampling, and all gates match that registration.
 
-The [57-cell matrix](calibration/host-profile-transfer-v1.md) has three measured
-cells and 54 unknown cells, with no receipt issues. K3P now has an independent
-negative reference. Its smoke predicate is still unknown, so no paired
-false-accept/reject rate is available and adoption remains BLOCKED.
+Request `5885f849de55d9603a1bdac7` completed the two smoke cells under
+`host-profile-smoke-pair-v1`, published at `745f459c` before execution. Its
+registration SHA is `82ddb3d1fd968c79b5aa91a0749ee69e6a2cf105f791b41abe1c62d8fe31f1a0`;
+source and candidate match the first batch. Each recorded all intended updates
+and 24 checks. Intensity first/stably passed at 425 and was confirmed at 525.
+The earlier-source intensity pass remains separate evidence.
 
-Next, complete only K3P's two missing cheap smoke cells under the separately
-registered `host-profile-smoke-pair-v1` lane. This produces a useful pairing;
-it does not require filling every remaining quality task of an already negative
-candidate. Keep missing reference costs explicit. Finding an eligible positive
-reference is still required before accepted calibration; inspect prior work
-before proposing a substantive next candidate. No 14k extension is warranted
-for this failed 7k parent.
+The [57-cell matrix](calibration/host-profile-transfer-v1.md) has five measured
+cells and **52 unknown**, with no receipt issues. K3P's smoke FAIL agrees with
+its independent reference FAIL: **one true rejection, zero false accepts out
+of one paired negative**. There are no paired positives, so false rejection
+remains unmeasured. This selected sample does not estimate population accuracy.
+The complete smoke cost is 40.243799201 seconds; reference cost is incomplete
+and no complete smoke/reference cost ratio is claimed. Adoption remains BLOCKED.
+
+The [independent first-batch audit](HOST_PROFILE_INDEPENDENT_AUDIT.md) reproduced
+all three grades and verified frozen source, 45 native artifacts and checkpoint.
+The [smoke audit](HOST_PROFILE_SMOKE_AUDIT.md) reproduced both remaining grades
+and the complete calibration reduction. It verified no active baseline work or
+reservations; the five-attempt exact K3P revision is now concluded.
+Preserve the successful hosts and stop filling quality tasks for this already
+negative baseline. No 14k extension is warranted for its failed 7k parent.
+Prior work supplies no exact-host learned-MoG positive. A separately registered
+one-factor A2-off grid diagnostic can test whether active damping contributes to
+the observed late contraction; it must preserve seed, initialization, width,
+7k budget and full gates. A pass would justify further qualification, not establish
+the full positive lineage. Do not launch a width or seed sweep.

@@ -65,6 +65,22 @@
       "source": "reports/forge/attempts/2dcfab451e2b4c2087c4c2dcdcfddb44/result.json"
     },
     {
+      "attempt_id": "49d41e284fde41698212677403ca5d67",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.93031075700128
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/49d41e284fde41698212677403ca5d67/result.json"
+    },
+    {
       "attempt_id": "4ab4e77829044c73a7ea3d86981aac71",
       "candidate_id": "k3p",
       "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
@@ -79,6 +95,22 @@
       },
       "reason": "Registered calibration diagnostics cannot qualify a candidate.",
       "source": "reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/result.json"
+    },
+    {
+      "attempt_id": "5693d7b9c35844c78f4440ed15bad4a2",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 11.143371591999312
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/5693d7b9c35844c78f4440ed15bad4a2/result.json"
     },
     {
       "attempt_id": "5a5f1641fd80404fbb509d367e6a467f",
@@ -1214,20 +1246,30 @@
       },
       "evidence_scope": "calibration_diagnostic",
       "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
-      "lifecycle": "awaiting_readout",
+      "lifecycle": "concluded",
       "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
-      "pending_readout": true,
+      "pending_readout": false,
       "qualification_reuse": false,
       "qualified_tier": null,
       "queue_submissions": [
         {
-          "lifecycle": "awaiting_readout",
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "5885f849de55d9603a1bdac7",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "89ee9af850e27926df7661de",
-          "status": "completed"
+          "status": "concluded"
         }
       ],
-      "readout_covers_attempt_ids": [],
+      "readout_covers_attempt_ids": [
+        "680dcd337be343f69a1922cd3e89750a",
+        "a1de5d14bd8b4640b95a826209ae3085",
+        "dca8c7aa0eca484c9270d07125f7cb0b"
+      ],
       "recorded_view": {
         "assignments": [
           {
@@ -3841,6 +3883,293 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "49d41e284fde41698212677403ca5d67",
+        "5693d7b9c35844c78f4440ed15bad4a2"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-smoke-pair-v1",
+        "registration_sha256": "82ddb3d1fd968c79b5aa91a0749ee69e6a2cf105f791b41abe1c62d8fe31f1a0"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "cohort": "66edd4b194d551eb2df02038c9ead741ed0a5321cde1b105ed4041245d64255a",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.073682349000592
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral",
+          "image"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior",
+          "image_conv_transpose"
+        ],
+        "task_families": {
+          "img_intensity2_residual16": {
+            "adapter": "transfer_image",
+            "basis": "recorded_request",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "49d41e284fde41698212677403ca5d67",
+          "5693d7b9c35844c78f4440ed15bad4a2"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "5885f849de55d9603a1bdac7",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "89ee9af850e27926df7661de",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "49d41e284fde41698212677403ca5d67",
+        "5693d7b9c35844c78f4440ed15bad4a2"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "mode_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "img_intensity2_residual16"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-smoke-pair-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "b828711d872d803c7c963e6a3103198196d4c1c9",
+        "path": "reports/forge/attempts/49d41e284fde41698212677403ca5d67/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 12.584348834992852,
+            "adapter_seconds": 12.818176301996573,
+            "charged_task": "mode_hold",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 17.93031075700128,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 12.097441082412843,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.012047342912410386
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008364666035049595
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 12.077029073465383
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 14.665282380010467,
+            "wall_seconds": 17.93031075700128
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.625,
+            "effective_modes": 4.5106520652771,
+            "hq": 0.998779296875,
+            "modes": 5,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
+        },
+        {
+          "cost": {
+            "adapter_loop_seconds": 5.781028169003548,
+            "adapter_seconds": 6.040882229004637,
+            "charged_task": "img_intensity2_residual16",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 11.143371591999312,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 5.481988669824204,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.040361606937949546
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.009131533035542816
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 5.432495529850712
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 7.876048617006745,
+            "wall_seconds": 11.143371591999312
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 0.90625,
+            "mean_rmse": 0.025580957531929016,
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.5,
+              0.40625
+            ],
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_intensity2_residual16"
         }
       ]
     }
@@ -8697,10 +9026,16 @@
       "qualified_tier": 0,
       "queue_submissions": [
         {
-          "lifecycle": "awaiting_readout",
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "5885f849de55d9603a1bdac7",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "89ee9af850e27926df7661de",
-          "status": "completed"
+          "status": "concluded"
         }
       ],
       "readout_covers_attempt_ids": [],
@@ -8726,6 +9061,1635 @@
           }
         },
         "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "status": "BLOCKED"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "1b01e5b24491be9fa3e093f907997d14e8d80946f456bee744da6f5db7b4ca42",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "BLOCKED": 1,
+        "NOT_RUN": 28
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "adaptation",
+          "behavioral",
+          "clockfree",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "clockfree_audit": {
+            "adapter": "clockfree_audit",
+            "basis": "current_catalog",
+            "family": "clockfree",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "grid100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "target_shift_recovery": {
+            "adapter": "paired_adaptation",
+            "basis": "current_catalog",
+            "family": "adaptation",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "clockfree_audit",
+          "cover_leftover",
+          "grid100",
+          "grid100_14k",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "rotated100_14k",
+          "staggered100",
+          "staggered100_14k",
+          "target_shift_recovery",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [
+        "view requires claim_contract.learning='clockfree'",
+        "view requires claim_contract.shared_settings=True"
+      ],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "view requires claim_contract.learning='clockfree'",
+              "view requires claim_contract.shared_settings=True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "claim_contract.learning must equal 'clockfree'",
+              "claim_contract.shared_settings must equal True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": null,
+        "next_tasks": [],
+        "policy_fingerprint": "fb538b53675f97d0b1bc168fd315122d879e5f5e7e3cb7ea128421cc0e364866",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 29,
+        "status": "BLOCKED",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "clockfree_audit": "BLOCKED",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "grid100_14k": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "rotated100_14k": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "staggered100_14k": "NOT_RUN",
+          "target_shift_recovery": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "BLOCKED",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "target_shift_recovery"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "BLOCKED": 1,
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 4,
+            "status": "BLOCKED"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 6
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 6,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "clockfree_continuous",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "status": "BLOCKED"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "dd074f76f7203770c22d77695dd3219b7c841da5a1a1cddabb388bf3acf3a632",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "BLOCKED": 1,
+        "NOT_RUN": 28
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "adaptation",
+          "behavioral",
+          "clockfree",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "clockfree_audit": {
+            "adapter": "clockfree_audit",
+            "basis": "current_catalog",
+            "family": "clockfree",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "grid100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "target_shift_recovery": {
+            "adapter": "paired_adaptation",
+            "basis": "current_catalog",
+            "family": "adaptation",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "clockfree_audit",
+          "cover_leftover",
+          "grid100",
+          "grid100_14k",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "rotated100_14k",
+          "staggered100",
+          "staggered100_14k",
+          "target_shift_recovery",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [
+        "view requires claim_contract.learning='clockfree'",
+        "view requires claim_contract.shared_settings=True"
+      ],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "view requires claim_contract.learning='clockfree'",
+              "view requires claim_contract.shared_settings=True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "claim_contract.learning must equal 'clockfree'",
+              "claim_contract.shared_settings must equal True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": null,
+        "next_tasks": [],
+        "policy_fingerprint": "fb538b53675f97d0b1bc168fd315122d879e5f5e7e3cb7ea128421cc0e364866",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 29,
+        "status": "BLOCKED",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "clockfree_audit": "BLOCKED",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "grid100_14k": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "rotated100_14k": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "staggered100_14k": "NOT_RUN",
+          "target_shift_recovery": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "BLOCKED",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "target_shift_recovery"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "BLOCKED": 1,
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 4,
+            "status": "BLOCKED"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 6
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 6,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "clockfree_continuous",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cpu",
         "runtime": {
           "implementation": "CPython",
           "machine": "x86_64",
@@ -42656,10 +44620,16 @@
       "qualified_tier": 0,
       "queue_submissions": [
         {
-          "lifecycle": "awaiting_readout",
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "5885f849de55d9603a1bdac7",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "89ee9af850e27926df7661de",
-          "status": "completed"
+          "status": "concluded"
         }
       ],
       "readout_covers_attempt_ids": [],
@@ -42685,6 +44655,1635 @@
           }
         },
         "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "status": "BLOCKED"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "1b01e5b24491be9fa3e093f907997d14e8d80946f456bee744da6f5db7b4ca42",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "BLOCKED": 1,
+        "NOT_RUN": 28
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "adaptation",
+          "behavioral",
+          "clockfree",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "clockfree_audit": {
+            "adapter": "clockfree_audit",
+            "basis": "current_catalog",
+            "family": "clockfree",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "grid100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "target_shift_recovery": {
+            "adapter": "paired_adaptation",
+            "basis": "current_catalog",
+            "family": "adaptation",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "clockfree_audit",
+          "cover_leftover",
+          "grid100",
+          "grid100_14k",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "rotated100_14k",
+          "staggered100",
+          "staggered100_14k",
+          "target_shift_recovery",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [
+        "view requires claim_contract.learning='clockfree'",
+        "view requires claim_contract.shared_settings=True"
+      ],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "view requires claim_contract.learning='clockfree'",
+              "view requires claim_contract.shared_settings=True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "claim_contract.learning must equal 'clockfree'",
+              "claim_contract.shared_settings must equal True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": null,
+        "next_tasks": [],
+        "policy_fingerprint": "fb538b53675f97d0b1bc168fd315122d879e5f5e7e3cb7ea128421cc0e364866",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 29,
+        "status": "BLOCKED",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "clockfree_audit": "BLOCKED",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "grid100_14k": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "rotated100_14k": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "staggered100_14k": "NOT_RUN",
+          "target_shift_recovery": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "BLOCKED",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "target_shift_recovery"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "BLOCKED": 1,
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 4,
+            "status": "BLOCKED"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 6
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 6,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "clockfree_continuous",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "status": "BLOCKED"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "dd074f76f7203770c22d77695dd3219b7c841da5a1a1cddabb388bf3acf3a632",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "BLOCKED": 1,
+        "NOT_RUN": 28
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "adaptation",
+          "behavioral",
+          "clockfree",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "clockfree_audit": {
+            "adapter": "clockfree_audit",
+            "basis": "current_catalog",
+            "family": "clockfree",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "grid100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100_14k": {
+            "adapter": "native100_continuation",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "target_shift_recovery": {
+            "adapter": "paired_adaptation",
+            "basis": "current_catalog",
+            "family": "adaptation",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "clockfree_audit",
+          "cover_leftover",
+          "grid100",
+          "grid100_14k",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "rotated100_14k",
+          "staggered100",
+          "staggered100_14k",
+          "target_shift_recovery",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [
+        "view requires claim_contract.learning='clockfree'",
+        "view requires claim_contract.shared_settings=True"
+      ],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "view requires claim_contract.learning='clockfree'",
+              "view requires claim_contract.shared_settings=True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "claim_contract.learning must equal 'clockfree'",
+              "claim_contract.shared_settings must equal True"
+            ],
+            "status": "BLOCKED",
+            "task_id": null
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": null,
+        "next_tasks": [],
+        "policy_fingerprint": "fb538b53675f97d0b1bc168fd315122d879e5f5e7e3cb7ea128421cc0e364866",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 29,
+        "status": "BLOCKED",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "clockfree_audit": "BLOCKED",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "grid100_14k": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "rotated100_14k": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "staggered100_14k": "NOT_RUN",
+          "target_shift_recovery": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "BLOCKED",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "learning-rate annealing depends on completed steps and horizon; input-noise annealing depends on completed steps and horizon; output-noise warmup depends on completed steps and horizon; critic guard releases at a fixed minimum update count"
+            ],
+            "status": "BLOCKED",
+            "task_id": "clockfree_audit"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100_14k"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "target_shift_recovery"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "BLOCKED": 1,
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 4,
+            "status": "BLOCKED"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 6
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 6,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "clockfree_continuous",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cpu",
         "runtime": {
           "implementation": "CPython",
           "machine": "x86_64",
@@ -44546,20 +48145,30 @@
       },
       "evidence_scope": "calibration_diagnostic",
       "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
-      "lifecycle": "awaiting_readout",
+      "lifecycle": "concluded",
       "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
-      "pending_readout": true,
+      "pending_readout": false,
       "qualification_reuse": false,
       "qualified_tier": null,
       "queue_submissions": [
         {
-          "lifecycle": "awaiting_readout",
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "5885f849de55d9603a1bdac7",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
           "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
           "request_id": "89ee9af850e27926df7661de",
-          "status": "completed"
+          "status": "concluded"
         }
       ],
-      "readout_covers_attempt_ids": [],
+      "readout_covers_attempt_ids": [
+        "680dcd337be343f69a1922cd3e89750a",
+        "a1de5d14bd8b4640b95a826209ae3085",
+        "dca8c7aa0eca484c9270d07125f7cb0b"
+      ],
       "recorded_view": {
         "assignments": [
           {
@@ -47173,6 +50782,293 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "ae_gan_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "49d41e284fde41698212677403ca5d67",
+        "5693d7b9c35844c78f4440ed15bad4a2"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "k3p",
+        "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-smoke-pair-v1",
+        "registration_sha256": "82ddb3d1fd968c79b5aa91a0749ee69e6a2cf105f791b41abe1c62d8fe31f1a0"
+      },
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "cohort": "66edd4b194d551eb2df02038c9ead741ed0a5321cde1b105ed4041245d64255a",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 2,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 29.073682349000592
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral",
+          "image"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior",
+          "image_conv_transpose"
+        ],
+        "task_families": {
+          "img_intensity2_residual16": {
+            "adapter": "transfer_image",
+            "basis": "recorded_request",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "49d41e284fde41698212677403ca5d67",
+          "5693d7b9c35844c78f4440ed15bad4a2"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "5885f849de55d9603a1bdac7",
+          "status": "concluded"
+        },
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "89ee9af850e27926df7661de",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "49d41e284fde41698212677403ca5d67",
+        "5693d7b9c35844c78f4440ed15bad4a2"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "mode_hold"
+          },
+          {
+            "importance": "diagnostic",
+            "order": 1,
+            "qualification_tier": 1,
+            "task": "img_intensity2_residual16"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-smoke-pair-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "b828711d872d803c7c963e6a3103198196d4c1c9",
+        "path": "reports/forge/attempts/49d41e284fde41698212677403ca5d67/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 12.584348834992852,
+            "adapter_seconds": 12.818176301996573,
+            "charged_task": "mode_hold",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 17.93031075700128,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 12.097441082412843,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.012047342912410386
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008364666035049595
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 12.077029073465383
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 14.665282380010467,
+            "wall_seconds": 17.93031075700128
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.625,
+            "effective_modes": 4.5106520652771,
+            "hq": 0.998779296875,
+            "modes": 5,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
+        },
+        {
+          "cost": {
+            "adapter_loop_seconds": 5.781028169003548,
+            "adapter_seconds": 6.040882229004637,
+            "charged_task": "img_intensity2_residual16",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 11.143371591999312,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 5.481988669824204,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.040361606937949546
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.009131533035542816
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 5.432495529850712
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 7.876048617006745,
+            "wall_seconds": 11.143371591999312
+          },
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 0.90625,
+            "mean_rmse": 0.025580957531929016,
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.5,
+              0.40625
+            ],
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "img_intensity2_residual16"
         }
       ]
     },

@@ -5,9 +5,9 @@
       "adoption": "BLOCKED",
       "checks": {
         "maximum_false_accept_fraction": {
-          "actual": null,
+          "actual": 0.0,
           "required": 0.1,
-          "status": "BLOCKED"
+          "status": "PASS"
         },
         "maximum_false_reject_fraction": {
           "actual": null,
@@ -25,17 +25,17 @@
           "status": "BLOCKED"
         },
         "minimum_paired_fraction": {
-          "actual": 0.0,
+          "actual": 0.3333333333333333,
           "required": 0.9,
           "status": "BLOCKED"
         },
         "minimum_paired_lineages": {
-          "actual": 0,
+          "actual": 1,
           "required": 3,
           "status": "BLOCKED"
         },
         "minimum_reference_negatives": {
-          "actual": 0,
+          "actual": 1,
           "required": 2,
           "status": "BLOCKED"
         },
@@ -54,7 +54,6 @@
         },
         "require_complete_smoke_cost": {
           "missing_lineages": [
-            "k3p",
             "forge-onboarding-anchor-ablation",
             "forge-no-critic-penalty"
           ],
@@ -518,20 +517,20 @@
         "all_reference_positives": 0,
         "blocked_lineages": 0,
         "false_accept": 0,
-        "false_accept_fraction": null,
+        "false_accept_fraction": 0.0,
         "false_reject": 0,
         "false_reject_fraction": null,
         "incomplete_lineages": 0,
         "lineages": 3,
-        "paired": 0,
-        "paired_fraction": 0.0,
-        "reference_negatives": 0,
+        "paired": 1,
+        "paired_fraction": 0.3333333333333333,
+        "reference_negatives": 1,
         "reference_positives": 0,
         "reference_unknown_lineages": 2,
-        "smoke_unknown_lineages": 3,
+        "smoke_unknown_lineages": 2,
         "true_accept": 0,
-        "true_reject": 0,
-        "unknown": 3
+        "true_reject": 1,
+        "unknown": 2
       }
     }
   ],
@@ -568,7 +567,7 @@
     {
       "candidate_id": "k3p",
       "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
-      "classification": "unknown",
+      "classification": "true_reject",
       "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
       "conflicts": [],
       "current_qualification_reuse": false,
@@ -576,6 +575,24 @@
       "id": "k3p",
       "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
       "inputs": [
+        {
+          "attempt_id": "49d41e284fde41698212677403ca5d67",
+          "files": {
+            "evidence.json": "d20091b8031736451a80824570fa2091b82d9be329326214207770a1c024deee",
+            "request.json": "10e16ccae1bf7d0a9b6d9b53d6b035b715c280077e81cc2144a0191dafa51cdd",
+            "result.json": "01ec9f965e5629ef18405ea2eb4b7ec1b8e926d4355788d2e388d4039093569d"
+          },
+          "result_sha256": "25ad185639976a3817b8e823e307df2a2692fcc097bf53cc64abaacbbf5dac61"
+        },
+        {
+          "attempt_id": "5693d7b9c35844c78f4440ed15bad4a2",
+          "files": {
+            "evidence.json": "ad55194da0cd400e1bb0bb0916d36186274c42d5bcb3a9be7bc04240ab66a30c",
+            "request.json": "1a1a3b041963bac2274b59b296cecafcff4a63a55bb1ded617f3b2b7fd9a7749",
+            "result.json": "bdce3e9a45e32c1ce8bcfdbab25fd4573eeca5375c8363a952e25876ab1b633a"
+          },
+          "result_sha256": "558bbf6f678b7d3fe2ba4dd0406dda10bdc5615d1e2c276dd989ecdf20122b83"
+        },
         {
           "attempt_id": "680dcd337be343f69a1922cd3e89750a",
           "files": {
@@ -675,28 +692,24 @@
         "blocked_tasks": [],
         "cost": {
           "flops": null,
-          "known_task_count": 1,
-          "known_wall_seconds": 11.170116852008505,
-          "missing_tasks": [
-            "mode_hold",
-            "img_intensity2_residual16"
-          ],
+          "known_task_count": 3,
+          "known_wall_seconds": 40.2437992010091,
+          "missing_tasks": [],
           "note": "Recorded runtime; concurrent execution and archived budgets differ.",
           "required_task_count": 3,
-          "wall_seconds": null
+          "wall_seconds": 40.2437992010091
         },
-        "decision": "UNKNOWN",
+        "decision": "FAIL",
         "error_or_incomplete_tasks": [],
-        "failed_tasks": [],
+        "failed_tasks": [
+          "mode_hold"
+        ],
         "task_statuses": {
           "img_bars4_residual16": "PASS",
-          "img_intensity2_residual16": "NOT_RUN",
-          "mode_hold": "NOT_RUN"
+          "img_intensity2_residual16": "PASS",
+          "mode_hold": "FAIL"
         },
-        "unknown_tasks": [
-          "mode_hold",
-          "img_intensity2_residual16"
-        ]
+        "unknown_tasks": []
       }
     },
     {

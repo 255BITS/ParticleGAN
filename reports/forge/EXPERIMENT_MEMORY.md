@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 188. Inventory coverage: complete. Unresolved import items: 7.
+Records: 189. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -16,7 +16,7 @@ Records: 188. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Pending readouts
 
-k3p
+None recorded.
 
 ## Experiment and family records
 
@@ -2884,6 +2884,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold FAIL, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json) · [Record](records/readout-15e86dd160a1d64a04ceee04.json)
 
+### k3p · readout-2c2eb24207b627b2ad26ea18
+
+**Scope:** calibration_diagnostic; scientific; revision `5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 2, 'PASS': 3}; wall seconds 156.284; mechanism `structural`.
+
+mode_hold: modes=5, hq=0.99878; img_intensity2_residual16: modes=2, hq=0.90625; img_bars4_residual16: modes=4, hq=1
+
+Joined host-profile diagnostic: 3 PASS and 2 FAIL across five cells for 156.283765995 paid seconds, zero execution errors/reservations. Bars4, intensity and unequal mass pass. Mode-hold fails 5/8 modes; native grid loses shape accuracy after acquiring it and fails terminal/100k holdout gates. Zero unintended RNG deviations; frozen grades independently reproduced. Exact revision concluded.
+
+**Next:** Preserve this control and do not fill its remaining quality cells or extend the failed 7k parent. A separately registered A2-off native diagnostic changes one substantive factor while preserving seed/init/MoG width and full gates; reuse this certified grid result without another control launch. Do not infer a cause or a positive lineage from this single run.
+
+[Evidence](../../reports/forge/attempts/49d41e284fde41698212677403ca5d67/result.json) · [Record](records/readout-2c2eb24207b627b2ad26ea18.json)
+
 ### forge-onboarding-anchor-ablation · readout-2c30cecb0a3f37d001ce3b28
 
 **Scope:** calibration_diagnostic; scientific; revision `f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775`.
@@ -3040,4 +3056,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `b51c436610b7f8ef46f0757b89853920241b67a7e9a7f4a5bc219b3c8e14eba6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `bac344f7a197386bd143d59adab5c1320097d46040c8b764c9a524098d9fe64c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -40,8 +40,12 @@ for 45.001 paid seconds; both vector tasks passed. Full scientific calibration
 and legacy cutover remain outstanding.
 The explicit [residual16 intensity transfer](reports/forge/IMAGE_PROFILE_TRANSFER_READOUT.md)
 passed for 11.199 seconds with the same rates, seed, initialization policy and
-gates. That is one current task positive. Published image/vector and native
-host profiles are now explicit; their broader calibration remains unmeasured.
+gates. Published image/vector and native host profiles are now explicit. The
+[joined-source transfer](reports/forge/HOST_PROFILE_TRANSFER_READOUT.md) measured
+three passes and two failures for 156.284 seconds. Mode-hold correctly rejects
+the candidate that loses native grid shape accuracy: one true rejection, with
+52 of 57 cells still unknown. No positive reference is established; calibration
+remains blocked. Full joined-source CI passed 1,807 tests and 18 subtests.
 
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.
