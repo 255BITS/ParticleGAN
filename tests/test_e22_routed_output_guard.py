@@ -267,7 +267,9 @@ def test_opt_in_config_roundtrips_and_incompatible_restore_is_atomic():
 
 def test_opted_in_paired_game_exact_cpu_checkpoint_resume_and_served_outputs():
     api = runpy.run_path(str(EXAMPLES / "e22_routed_sites.py"))
-    loop = api["make_loop"](output_error_guard=True)
+    # Retain this bounded legacy-game accepted-move fixture explicitly. The
+    # token-unit default has separate A/blend and recovery conformance tests.
+    loop = api["make_loop"](output_error_guard=True, penalty_units="context")
     assert loop.config["output_error_guard"] is True
     rows, saved = [], None
     for index in range(8):
@@ -279,13 +281,13 @@ def test_opted_in_paired_game_exact_cpu_checkpoint_resume_and_served_outputs():
                and row["move"]["feature_guard_accepted"] and row["move"]["output_guard_accepted"] for row in rows[1:])
     expected = api["checkpoint"](loop)
     output = loop.policy.served_model().routed_forward(loop.test_context)
-    restored = api["make_loop"](output_error_guard=True)
+    restored = api["make_loop"](output_error_guard=True, penalty_units="context")
     api["restore"](restored, saved)
     for row in rows[1:]:
         same(row, api["update"](restored))
     same(expected, api["checkpoint"](restored))
     same(output, restored.policy.served_model().routed_forward(restored.test_context))
-    legacy = api["make_loop"]()
+    legacy = api["make_loop"](penalty_units="context")
     assert "output_error_guard" not in legacy.config
     before = api["checkpoint"](legacy)
     with pytest.raises(ValueError, match="configuration"):

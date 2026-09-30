@@ -14,7 +14,7 @@ import json
 import torch
 from torch.utils.checkpoint import checkpoint, set_checkpoint_early_stop
 
-from e22_routed_sites import INITIALIZATIONS, MODES, diagnostics, evaluate, make_loop, update
+from e22_routed_sites import INITIALIZATIONS, MODES, PENALTY_UNITS, diagnostics, evaluate, make_loop, update
 
 
 def checkpointed_generate(policy, context):
@@ -63,18 +63,25 @@ def main():
     parser.add_argument("--mode", choices=MODES, default="full")
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--initialization", choices=INITIALIZATIONS, default="api")
+    parser.add_argument("--penalty-units", choices=PENALTY_UNITS, default="token")
+    parser.add_argument("--max-context-harm", type=float)
     args = parser.parse_args()
     if args.steps < 1:
         parser.error("--steps must be positive")
     if torch.device(args.device).type == "cpu":
         torch.set_num_threads(1)
-    loop = make_loop(mode=args.mode, device=args.device, initialization=args.initialization)
+    loop = make_loop(mode=args.mode, device=args.device, initialization=args.initialization,
+                     penalty_units=args.penalty_units, max_context_harm=args.max_context_harm)
     for _ in range(args.steps):
         with torch.autograd.set_multithreading_enabled(False):
             row = update(loop, generator_forward=checkpointed_generate)
         print(json.dumps({"event": "train", "mode": args.mode, "step": row["step"],
+                          "penalty_units": loop.config["penalty_units"],
+                          "max_context_harm": loop.config["max_context_harm"],
                           "loss_g": row["loss_g"], "row_diagnostics": diagnostics(loop.policy)}), flush=True)
     print(json.dumps({"event": "complete", "mode": args.mode, **evaluate(loop),
+                      "penalty_units": loop.config["penalty_units"],
+                      "max_context_harm": loop.config["max_context_harm"],
                       "row_diagnostics": diagnostics(loop.policy)}), flush=True)
 
 

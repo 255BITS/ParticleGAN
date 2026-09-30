@@ -159,9 +159,10 @@ Multiple token routing sites can share one bank and controller through the
 [full-model routing contract](docs/e22_routed_sites.md). Candidate checks rerun
 the complete model, including downstream sites and the final paired output.
 `RoutedRows(probe_interval=20)` schedules expensive row probes separately from
-per-update gradient evidence and saves its clock in checkpoints. Enable
-`output_error_guard=True` to also protect clean paired-output MSE on guard
-contexts. Split rows transport their parent's Adam history at half mass.
+per-update gradient evidence and saves its clock in checkpoints. The optional
+`output_error_guard=True` bounds clean paired-output MSE on guard contexts;
+it does not establish repair of the noisy adversarial game. Split rows
+transport their parent's Adam history at half mass.
 
 ## Learn more
 
@@ -170,6 +171,7 @@ contexts. Split rows transport their parent's Adam history at half mass.
 - [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving
 - [Shared-bank routing sites](docs/e22_routed_sites.md): sequential token routing and a matched spatial comparison
 - [Whole-model checkpoint replay](docs/e22_routed_sites.md#activation-checkpointed-whole-model-replay): per-site DV12 without repeated training draws or diagnostics
+- [Routed noisy-game qualification](docs/e22_routed_game.md): token penalty units, mass invariance and matched longer training
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`e22_external_loop.py`](examples/e22_external_loop.py) (E22 in a caller-owned loop),

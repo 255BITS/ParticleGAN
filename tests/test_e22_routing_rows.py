@@ -482,7 +482,7 @@ def test_multisite_constructor_contract_and_checkpoint_configuration():
     legacy = components()
     expected_keys = {"log_mass_key", "row_parameters", "row_buffers", "probe_budget", "reservoir_size",
                      "min_observations", "min_effect", "improvement_margin", "max_context_harm",
-                     "persistence_threshold", "split_scale", "candidate_budget"}
+                     "persistence_threshold", "split_scale", "candidate_budget", "routed_geometry"}
     assert set(legacy.spec.to_dict()) == expected_keys
     for sites in ((), ("first", "first"), ("first", ""), "first", {"first", "second"}):
         with pytest.raises(ValueError):

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **Routed game units and mass invariance:** the pooled-token example applies
+  KA2 through a contextual token penalty view; RpGAN scores stay pooled.
+  Routed DV12 ignores inactive rows and aggregates duplicate-position mass
+  for bandwidth and support. Selected serving copies use their matching
+  routed row buffers. Checkpoints record `mass_atoms_v1`; older raw-row-law
+  routed checkpoints require the prior release or a new training trajectory.
+  Example checkpoints record penalty units and explicit feature-harm bounds.
+  New private-RNG candidate probes report noisy game gradients, and matched
+  longer comparisons retain frozen/movable controls. These diagnostics do not
+  select moves or certify game repair. See the
+  [qualification guide](docs/e22_routed_game.md).
 - **Composable E22 policy:** `get_recipe("e22", **task_overrides)` ships the
   preset in the installed package. `E22Policy` / `UpdatePolicy` expose the
   same lifecycle controls used by `GANTrainer`, explicit optimizer/table

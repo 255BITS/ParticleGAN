@@ -35,6 +35,7 @@ from particlegan import E22Policy, RoutedBatch, RoutedRows, get_recipe, init
 
 MODES = ("frozen", "no_rows", "full")
 INITIALIZATIONS = ("api", "conformance")
+PENALTY_UNITS = ("token", "context")
 
 
 class TokenHost(nn.Module):
@@ -104,6 +105,37 @@ class TokenErrorCritic(nn.Module):
         return self.score(self.features(error).mean(dim=1))
 
 
+class TokenPenaltyView(nn.Module):
+    """Keep contextual scores while expressing input-gradient units per token.
+
+    The direct critic child lets the existing paired penalty construct its EMA
+    counterpart. RpGAN still consumes the original pooled context scores.
+    """
+
+    def __init__(self, critic, tokens):
+        super().__init__()
+        if type(tokens) is not int or tokens < 1:
+            raise ValueError("penalty tokens must be a positive integer")
+        self.critic, self.tokens = critic, tokens
+
+    def forward(self, error):
+        if error.ndim != 2 or not len(error) or error.shape[0] % self.tokens or not error.shape[1]:
+            raise ValueError("token penalty inputs must be flat [contexts * tokens, channels]")
+        context_error = error.reshape(-1, self.tokens, error.shape[-1])
+        return self.critic(context_error).repeat_interleave(self.tokens, dim=0)
+
+
+def apply_critic_penalty(penalty, critic, real, fake, *, units="token"):
+    """Apply native KA2 with the explicitly selected token/context input units."""
+    if units == "context":
+        return penalty(critic, real, fake)
+    if units != "token":
+        raise ValueError(f"penalty units must be one of {PENALTY_UNITS}")
+    if real.ndim != 3 or fake.shape != real.shape:
+        raise ValueError("token penalty needs matching [contexts, tokens, channels] inputs")
+    return penalty(TokenPenaltyView(critic, real.shape[1]), real.flatten(0, 1), fake.flatten(0, 1))
+
+
 def model_forward(models, context, candidate, routing):
     G, E, R = models["generator"], models["encoder"], models["router"]
     encoded = E(context)
@@ -160,17 +192,25 @@ class SiteLoop:
 
 def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
               batch_size=8, initialization="conformance", output_error_guard=False,
-              probe_interval=1):
+              probe_interval=1, penalty_units="token", max_context_harm=None):
     """Build a loop; conformance preserves the explicit structural-test fixture.
 
     Use initialization="api" for quality/timing comparisons. Its whole-network
     initializer calls use fixed role keys G=0, D=1, E=2, R=3; these keys define
     one initialization, rather than a search over seeds.
+    Penalties use token-local input-gradient units by default; "context"
+    retains the original whole-context convention for legacy checkpoints.
+    API initialization defaults to zero feature harm; conformance keeps its
+    explicitly recorded 1e-4 allowance. Neither is an output-error bound.
     """
     if mode not in MODES:
         raise ValueError(f"mode must be one of {MODES}")
     if initialization not in INITIALIZATIONS:
         raise ValueError(f"initialization must be one of {INITIALIZATIONS}")
+    if penalty_units not in PENALTY_UNITS:
+        raise ValueError(f"penalty units must be one of {PENALTY_UNITS}")
+    if max_context_harm is None:
+        max_context_harm = 1e-4 if initialization == "conformance" else 0.
     device = torch.device(device)
     fit = context_grid(torch.linspace(-.8, .8, 5), torch.tensor([.1, .35, .6, .85]), tokens).to(device)
     guard = context_grid(torch.tensor([-.72, -.24, .24, .72]), torch.tensor([.18, .48, .78]), tokens).to(device)
@@ -217,14 +257,15 @@ def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
     rows = RoutedRows(model_forward=model_forward, features=paired_features,
                       sites=("first", "second"), probe_budget=8, reservoir_size=64,
                       min_observations=8, min_effect=1e-8, improvement_margin=1e-10,
-                      max_context_harm=1e-4, persistence_threshold=.75, split_scale=.1,
+                      max_context_harm=max_context_harm, persistence_threshold=.75, split_scale=.1,
                       output_error_guard=output_error_guard, probe_interval=probe_interval)
     policy = E22Policy(recipe, G, D, table=table, encoder=E, router=R,
                        generator_optimizer=opt_g, critic_optimizer=opt_d,
                        roles=[roles, ["critic"]], routed_rows=rows, seed=21)
     initial = float((policy.served_model().routed_forward(test) - test_target).square().mean().sqrt())
     config = dict(mode=mode, tokens=tokens, z_dim=z_dim, particles=particles,
-                  batch_size=batch_size, initialization=initialization)
+                  batch_size=batch_size, initialization=initialization, penalty_units=penalty_units,
+                  max_context_harm=rows.max_context_harm)
     if output_error_guard:
         config["output_error_guard"] = True
     if probe_interval != 1:
@@ -255,7 +296,7 @@ def update(loop, *, generator_forward=None):
         real = noise.output_sigma * critic_base
         fake = real + (prediction - target) / p.D.scale
     p.observe_critic_pair(real, fake)
-    penalty = p.penalty(p.D, real, fake)
+    penalty = apply_critic_penalty(p.penalty, p.D, real, fake, units=loop.config["penalty_units"])
     loss_d = loss.d_loss(p.D(real), p.D(fake)) + penalty
     p.opt_d.zero_grad()
     p.before_critic_backward()
@@ -315,9 +356,12 @@ def checkpoint(loop):
 
 
 def restore(loop, state):
-    config = {"initialization": "conformance", **state["config"]}
+    config = {"initialization": "conformance", "penalty_units": "context",
+              "max_context_harm": 1e-4, **state["config"]}
     if loop.config != config:
-        raise ValueError("checkpoint task shape/mode/initialization must match the caller-owned model")
+        raise ValueError("checkpoint task shape/mode/initialization/penalty units/max_context_harm must match "
+                         "the caller-owned model; legacy checkpoints use penalty_units='context' "
+                         "and max_context_harm=1e-4")
     loop.policy.load_state_dict(state["policy"])
     loop.data_rng.set_state(state["data_rng"].cpu())
     loop.paired_noise_rng.set_state(state["paired_noise_rng"].cpu())
@@ -371,6 +415,8 @@ def train(loop, steps, *, log_every=20, warmup_steps=0):
                                row["paired_rng_digest"], row["dv12_rng_digest"]))
         if (index + 1) % log_every == 0 or index == steps - 1:
             print(json.dumps({"event": "train", "mode": loop.config["mode"],
+                              "penalty_units": loop.config["penalty_units"],
+                              "max_context_harm": loop.config["max_context_harm"],
                               "step": row["step"], "loss_g": row["loss_g"],
                               "dense_gradient_rows": row["dense_gradient_rows"],
                               "row_diagnostics": diagnostics(loop.policy)}), flush=True)
@@ -398,6 +444,10 @@ def main():
                         help="Require protected final-output MSE nonincrease for fast and averaged structural proposals")
     parser.add_argument("--probe-interval", type=int, default=1,
                         help="Observed training updates between expensive row probes/proposals; gradients are observed each update")
+    parser.add_argument("--penalty-units", choices=PENALTY_UNITS,
+                        help="Input-gradient units: fresh runs default to token; resume preserves stored units (legacy=context)")
+    parser.add_argument("--max-context-harm", type=float,
+                        help="Feature-guard harm allowance: fresh API default0, conformance1e-4; resume preserves stored value")
     parser.add_argument("--log-every", type=int, default=20)
     parser.add_argument("--warmup", type=int, help="Untimed restored updates; default 1 for --compare, 0 otherwise")
     parser.add_argument("--checkpoint", "--output", dest="checkpoint")
@@ -416,7 +466,8 @@ def main():
                   z_dim=args.z_dim or (4 if args.compare else 2),
                   particles=args.particles or (128 if args.compare else 16), batch_size=args.batch_size,
                   initialization=args.initialization, output_error_guard=args.output_error_guard,
-                  probe_interval=args.probe_interval)
+                  probe_interval=args.probe_interval, penalty_units=args.penalty_units or "token",
+                  max_context_harm=args.max_context_harm)
     warmup_steps = int(args.compare) if args.warmup is None else args.warmup
     if args.compare:
         reports, reference_inputs, reference_weights = [], None, None
@@ -446,7 +497,13 @@ def main():
     else:
         saved = None if not args.resume else torch.load(args.resume, map_location="cpu", weights_only=True)
         if saved is not None:
-            config = {"initialization": "conformance",
+            stored_units = saved["config"].get("penalty_units", "context")
+            if args.penalty_units is not None and args.penalty_units != stored_units:
+                parser.error(f"--penalty-units {args.penalty_units} conflicts with checkpoint units {stored_units}")
+            stored_harm = saved["config"].get("max_context_harm", 1e-4)
+            if args.max_context_harm is not None and args.max_context_harm != stored_harm:
+                parser.error(f"--max-context-harm {args.max_context_harm} conflicts with checkpoint allowance {stored_harm}")
+            config = {"initialization": "conformance", "penalty_units": "context", "max_context_harm": 1e-4,
                       **{key: value for key, value in saved["config"].items() if key != "mode"}}
         loop = make_loop(mode=args.mode if saved is None else saved["config"]["mode"], device=device, **config)
         if saved is not None:

@@ -8,6 +8,11 @@ the independent-particle statistics in [`e22`](e22.md). It makes no claim that
 the original equal-mass density, split-conformal or Benjamini–Hochberg laws
 apply to a dense conditional blend.
 
+The [penalty, represented-mass and noisy-game guide](e22_routed_game.md)
+documents the current DV12 law, token penalty convention and checkpoint
+compatibility. Structural evidence remains a clean paired-feature diagnostic;
+its instantaneous gains do not establish adversarial game repair.
+
 The runnable [`e22_routed_paired.py`](../examples/e22_routed_paired.py) trains a
 paired-edit task using source and time inputs. A frozen BF16 host runs beside
 an FP32 encoder, router, adapter, table and critic. The source/time context
@@ -74,6 +79,11 @@ Tied key/value routing differentiates through both `q @ table.T` and
 unchanged; it is a conditional adaptation of the perturbation placement.
 Decode `candidate.codes` directly. Recomputing `weights @ table` inside the
 decoder would lose that perturbation.
+
+Routed DV12 bandwidth uses mass-weighted atom spread and effective atom count;
+support clipping excludes zero-mass rows. Exact duplicate positions sum their
+mass, so replacing an inactive row with a half-mass duplicate preserves clean
+and noisy forwards under identical draws. Independent-row DV12 is unchanged.
 
 ## Paired-error lifecycle
 
@@ -174,6 +184,9 @@ The example sets the diagnostic budget and guards explicitly:
 `max_context_harm=1e-4`, `persistence_threshold=.75`, `split_scale=.1`.
 These values belong to its small, normalized paired task. The positive mean
 improvement margin and the per-context harm bound are separate conditions.
+In particular, `1e-4` is the example's explicit benchmark override, not the
+zero `RoutedRows.max_context_harm` default. The token-site API-initialized
+example now defaults to zero and records any allowance in its checkpoint.
 
 `RoutedRows(probe_interval=K)` spaces expensive deletion, proposal and guard
 passes by at least K observed training updates; its default is 1. It counts

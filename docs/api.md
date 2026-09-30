@@ -82,6 +82,13 @@ moments while preserving the optimizer age.
 The [whole-model checkpoint replay example](e22_routed_sites.md#activation-checkpointed-whole-model-replay)
 recreates routing on recomputation and restores a private DV12 stream without
 advancing the training stream or repeating observations.
+Routed DV12 uses represented mass and active support, collapsing exact latent
+duplicates before estimating bandwidth. Its checkpoint configuration records
+`routed_geometry="mass_atoms_v1"`; former raw-row checkpoints require the prior
+release for exact recovery. See the [noisy-game qualification guide](e22_routed_game.md)
+for the migration boundary, pooled-token KA2 units, private diagnostic replay
+and matched longer-training results. Clean feature gains alone do not establish
+persistent support or gradient-conditioning repair.
 Frozen module parameters and buffers may retain BF16 or other precision;
 trainable floating tensors share the table's dtype. Frozen weights are copied
 exactly into the serving averages.

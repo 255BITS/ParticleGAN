@@ -137,7 +137,10 @@ class RoutedRows:
                  improvement_margin=1e-8, max_context_harm=0.0,
                  persistence_threshold=.75, split_scale=.1, candidate_budget=4,
                  output_error_guard=False, max_output_error_increase=0.0,
-                 max_output_context_harm=0.0):
+                 max_output_context_harm=0.0, routed_geometry="mass_atoms_v1"):
+        if type(routed_geometry) is not str or routed_geometry != "mass_atoms_v1":
+            raise ValueError("unsupported routed_geometry; routed DV12 law changed; "
+                             "restore with prior release or explicit migration")
         if model_forward is None:
             if not all(callable(fn) for fn in (route, generate, features)):
                 raise TypeError("routed route, generate and features must be callbacks")
@@ -193,7 +196,7 @@ class RoutedRows:
             "log_mass_key", "row_parameters", "row_buffers", "probe_budget", "reservoir_size",
             "min_observations", "min_effect", "improvement_margin", "max_context_harm",
             "persistence_threshold", "split_scale", "candidate_budget")}
-        # Keep existing one-site checkpoint configurations byte-for-byte valid.
+        config["routed_geometry"] = "mass_atoms_v1"
         if self.model_forward is not None:
             config.update(model_forward=True, sites=self.sites)
         if self.output_error_guard:
@@ -916,6 +919,9 @@ class RoutedRowControl:
         allowed_keys = (set(expected), set(expected) - {"probe_clock"}) if self.spec.probe_interval == 1 else (set(expected),)
         if not isinstance(state, dict) or set(state) not in allowed_keys or state.get("schema") != 1:
             raise ValueError("invalid routed-control checkpoint schema")
+        if (not isinstance(state["config"], dict)
+                or state["config"].get("routed_geometry") != "mass_atoms_v1"):
+            raise ValueError("routed DV12 law changed; restore with prior release or explicit migration")
         for name in ("config", "table_shape"):
             if state[name] != expected[name]:
                 raise ValueError("routed-control checkpoint configuration does not match")

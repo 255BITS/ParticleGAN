@@ -13,6 +13,20 @@ clean output RMSE on a third disjoint source/time grid. Output MSE is not a
 training loss; an optional output guard checks it on separate protected
 contexts before accepting structural changes.
 
+The [quality diagnosis at the previous revision](e22_routed_debug.md) rechecks
+`03e6d705` with matched continuations and causal interventions. It identified
+the pooled critic's token-dependent penalty units and a routed DV12
+refinement-invariance gap. The API-initialized full and movable arms remain
+identical through 1,200 updates with no accepted moves; the conformance
+fixture still requires quality qualification. Earlier receipts below retain
+their original source revisions and should be read as historical results.
+
+The [current penalty, mass-invariance and game-qualification guide](e22_routed_game.md)
+documents the corrections, checkpoint version boundary and longer matched
+validation. New API-initialized runs use token penalty units and zero feature
+harm by default. `--max-context-harm 1e-4` selects the integrator-style
+benchmark allowance explicitly; it is not the `RoutedRows` default.
+
 ## Complete model callback
 
 Use the full-model alternative to the [single-site contract](e22_routed.md):
@@ -258,7 +272,7 @@ rebased. The optional output guard protects an immediate raw-error metric,
 not subsequent optimizer steps. Keep the movable-bank baseline and measure
 complete clean-output trajectories.
 
-## Current fixed comparisons
+## Historical fixed comparisons at `03e6d705`
 
 The [frozen-source receipt](e22_routed_controls_results.json) revalidates the
 split transport and CUDA noise repair, plus separate optional output-guard
@@ -289,7 +303,9 @@ not be compared to the historical hardware timings below.
 | Stress fixture | Full, output guard | .030671 | .104001 | 2.016 s | 1 | 320 |
 | Stress fixture | Full, probe interval 20 | **.023096** | **.069956** | .844 s | 0 | 16 |
 
-The default full and output-guard arms probe every eligible update. The
+The benchmark full and output-guard arms probe every eligible update. These
+historical comparisons used an explicit `max_context_harm=1e-4` allowance;
+the library's default is zero. The
 interval-20 arm has the output guard off; it performs two expensive passes
 and 16 deletion probes while retaining all 40 cheap gradient/evidence
 updates. Its output metrics match the movable baseline here, with no accepted

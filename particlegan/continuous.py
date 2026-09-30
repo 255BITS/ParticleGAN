@@ -6,6 +6,7 @@ than changes of the mean. Generator gradient alignment is a distinct signal.
 """
 from copy import deepcopy
 import math
+from types import SimpleNamespace
 import torch
 
 
@@ -43,6 +44,55 @@ class DataDriftController:
         self.reopens = 0
         self.closed = False
 
+    @staticmethod
+    @torch.no_grad()
+    def routed_geometry(table, log_mass):
+        """Support and cell width of the routed bank's represented mass.
+
+        Exact duplicate positions form one atom whose mass is the sum of its
+        rows. Coordinate spread is mass weighted and the cell count is the
+        effective number of those atoms, 1 / sum(p**2). Inactive rows never
+        enter either calculation. Routing usage and real observations do not
+        enter this prior geometry.
+        """
+        if (not isinstance(table, torch.Tensor) or table.ndim != 2 or not all(table.shape)
+                or not table.is_floating_point() or not isinstance(log_mass, torch.Tensor)
+                or log_mass.shape != (len(table),) or log_mass.device != table.device
+                or log_mass.dtype != table.dtype or bool(torch.isnan(log_mass).any())
+                or bool(torch.isposinf(log_mass).any())):
+            raise ValueError("routed geometry requires a floating table and matching finite or inactive log masses")
+        active = torch.isfinite(log_mass)
+        if not bool(active.any()):
+            raise ValueError("routed geometry requires positive represented mass")
+        table, log_mass = table.detach()[active], log_mass.detach()[active]
+        if not bool(torch.isfinite(table).all()):
+            raise ValueError("active routed geometry centers must be finite")
+        centers, inverse, counts = torch.unique(table, dim=0, return_inverse=True, return_counts=True)
+        # Group log masses before normalization: duplicating an atom must not
+        # change its effective cell count. Sorted segments avoid atomic sums.
+        ordered = log_mass[inverse.argsort(stable=True)]
+        maxima = torch.segment_reduce(ordered, "max", lengths=counts)
+        relative = (ordered - maxima.repeat_interleave(counts)).exp()
+        masses = maxima + torch.segment_reduce(relative, "sum", lengths=counts).log()
+        weights = masses.softmax(0)
+        positive = weights > 0
+        centers, weights = centers[positive], weights[positive]
+        location = (weights.unsqueeze(1) * centers).sum(0)
+        variance = (weights.unsqueeze(1) * (centers - location).square()).sum(0)
+        effective_atoms = weights.square().sum().reciprocal()
+        width = variance.sqrt() * effective_atoms.pow(-1. / table.shape[1])
+        return centers, width
+
+    @staticmethod
+    def routed_prior(table, log_mass):
+        """Bind immutable geometry to one complete fast/average candidate.
+
+        Build a fresh view after owner updates. Reusing it within one complete
+        multi-site forward avoids recomputing geometry at each routing site.
+        """
+        support, width = DataDriftController.routed_geometry(table, log_mass)
+        return SimpleNamespace(z=table, log_mass=log_mass, _mass_support=support, _mass_width=width)
+
     @torch.no_grad()
     def observe_prior(self, prior):
         """Kernel width from learned latent geometry, never real-data statistics.
@@ -53,8 +103,13 @@ class DataDriftController:
         """
         if self.variant not in ("dv10", "dv11", "dv12"):
             return
-        z = prior.z.detach()
-        width = z.std(0, unbiased=False) * len(z) ** (-1. / z.shape[1])
+        if hasattr(prior, "log_mass"):
+            width = getattr(prior, "_mass_width", None)
+            if width is None:
+                _, width = self.routed_geometry(prior.z, prior.log_mass)
+        else:
+            z = prior.z.detach()
+            width = z.std(0, unbiased=False) * len(z) ** (-1. / z.shape[1])
         if self.latent_bandwidth is None:
             self.latent_bandwidth = width.clone()
         else:
@@ -75,7 +130,12 @@ class DataDriftController:
                 # correctly rounded, so min-then-sqrt equals the old sqrt-then-min bitwise (d == 0 iff d**2 == 0).
                 # 2048 // z_dim centers per chunk keeps peak memory below the old cdist path's.
                 query = latent.detach()[:, None, :]
-                for centers in prior.z.detach().split(max(1, 2048 // latent.shape[1])):
+                support = prior.z.detach()
+                if hasattr(prior, "log_mass"):
+                    support = getattr(prior, "_mass_support", None)
+                    if support is None:
+                        support, _ = self.routed_geometry(prior.z, prior.log_mass)
+                for centers in support.split(max(1, 2048 // latent.shape[1])):
                     distance = query - centers[None, :, :]
                     distance = distance.mul_(distance).sum(-1)
                     distance.masked_fill_(distance == 0, float("inf"))

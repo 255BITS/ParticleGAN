@@ -131,7 +131,11 @@ class ServedModel:
     @torch.no_grad()
     def _generate(self, latent, stream, output_noise):
         if self.controller is not None:
-            prior = self.prior if self.prior is not None else SimpleNamespace(z=self.table)
+            if self.routing is None:
+                prior = self.prior if self.prior is not None else SimpleNamespace(z=self.table)
+            else:
+                candidate = self.routing.candidate_for(self.models, self.table, averaged=self.source == "averaged")
+                prior = self.controller.routed_prior(candidate.table, candidate.log_mass)
             latent = self.controller.perturb_latent(latent, stream, prior)
         y = self.generator(latent) if self.generation is None else self.generation(self.generator, latent)
         if output_noise and self.output_sigma != 0:
@@ -195,10 +199,11 @@ class ServedModel:
         if type(perturb) is not bool or type(output_noise) is not bool:
             raise ValueError("perturb and output_noise must be booleans")
         stream = self._sampling_stream(generator)
-        prior = self.prior if self.prior is not None else SimpleNamespace(z=self.table)
+        candidate = self.routing.candidate_for(self.models, self.table, averaged=self.source == "averaged")
+        prior = self.controller.routed_prior(candidate.table, candidate.log_mass) \
+            if perturb and self.controller is not None else None
         perturb_fn = (lambda codes: self.controller.perturb_latent(codes, stream, prior)) \
             if perturb and self.controller is not None else None
-        candidate = self.routing.candidate_for(self.models, self.table, averaged=self.source == "averaged")
         device = self.table.device
         devices = [device.index] if device.type == "cuda" else []
         with torch.random.fork_rng(devices=devices):
@@ -280,6 +285,7 @@ class UpdatePolicy:
         if not table.is_floating_point():
             raise ValueError("table must use a floating dtype")
         self.row_policy = getattr(recipe, "row_policy", "independent")
+        self._routed_rows = routed_rows
         self._routed_controls_enabled = recipe.row_evidence_gate or recipe.particle_birth_death
         if self.row_policy == "routed_paired":
             if routed_rows is None:
@@ -498,6 +504,11 @@ class UpdatePolicy:
         return result
 
     def _prior_view(self, averaged=False):
+        if self.row_policy == "routed_paired":
+            models = self._average_modules() if averaged else self._training_modules()
+            table = self.averaged_table if averaged else self.table
+            candidate = self._routed_rows.candidate_for(models, table, averaged=averaged)
+            return DataDriftController.routed_prior(candidate.table, candidate.log_mass)
         module = self.ema_prior if averaged else self.prior
         return module if module is not None else SimpleNamespace(z=self.averaged_table if averaged else self.table)
 
@@ -864,11 +875,13 @@ class UpdatePolicy:
         stream = self.noise_generator if stream is None else self._stream(stream, 0)
         if sigma is None:
             sigma = self._noise.output_sigma if self._noise is not None else self.output_sigma()
-        prior = self._prior_view(averaged)
+        candidate = self.routed_control.candidate(averaged=averaged)
+        prior = self.controller.routed_prior(candidate.table, candidate.log_mass) \
+            if perturb and self.controller is not None else None
         perturb_fn = (lambda codes: self.controller.perturb_latent(
             codes, stream, prior, record=stream is self.noise_generator)) \
             if perturb and self.controller is not None else None
-        y = self.routed_control.generate(context, averaged=averaged, perturb_fn=perturb_fn)
+        y = self.routed_control.generate(context, candidate=candidate, perturb_fn=perturb_fn)
         if sigma == 0:
             return y
         return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
@@ -934,6 +947,7 @@ class UpdatePolicy:
         needed to reproduce served samples using an independent sampling RNG.
         Buffers follow the native serving path: current generator buffers and
         selected parameters (averaged buffers are copied at each update).
+        Routed row buffers follow the selected table and its represented mass.
         """
         swapped = self._fast is not None
         self._serve_release()
@@ -944,6 +958,18 @@ class UpdatePolicy:
                 for name, module in self._average_modules().items():
                     for key, parameter in module.named_parameters(remove_duplicate=False):
                         models[name][key] = parameter.detach().clone()
+                if self.routed_control is not None:
+                    spec = self.routed_control.spec
+                    buffers = dict(self.ema_router.named_buffers(remove_duplicate=False))
+                    selected = {id(buffers[key]) for key in (spec.log_mass_key, *spec.row_buffers) if key in buffers}
+                    for key, buffer in buffers.items():
+                        if id(buffer) in selected:
+                            models["router"][key] = buffer.detach().clone()
+                    if self._table_location is not None:
+                        owner, _ = self._table_location
+                        for key, buffer in self._average_modules()[owner].named_buffers(remove_duplicate=False):
+                            if buffer is self.averaged_table:
+                                models[owner][key] = buffer.detach().clone()
             return deepcopy({"source": "averaged" if average else "fast",
                              "models": models,
                              "table": self.averaged_table if average else self.table,
