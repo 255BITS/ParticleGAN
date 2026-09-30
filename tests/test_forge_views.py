@@ -15,6 +15,22 @@ from experiments.forge.views import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Forge retains its full-component gates after the upstream v5 scorer migration.
+# These literals intentionally do not inherit a mutable upstream task policy.
+VECTOR_COMPONENT_BOUNDS_V1 = [["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15],
+                              ["hq", ">=", .85], ["component_covariance_error", "<=", .85],
+                              ["component_min_eigen_ratio", ">=", .15]]
+VECTOR_DISTRIBUTION_BOUNDS_V1 = [["sw1_normalized", "<=", .18], ["mean_error", "<=", .15],
+                                 ["covariance_error", "<=", .45]]
+VECTOR_THRESHOLDS_V1 = {
+    "vector_two_broad": VECTOR_COMPONENT_BOUNDS_V1,
+    "vector_unequal_mass": VECTOR_COMPONENT_BOUNDS_V1 + [["min_mass_ratio", ">=", .25]],
+    "vector_unequal_width": VECTOR_COMPONENT_BOUNDS_V1,
+    "vector_anisotropic": VECTOR_COMPONENT_BOUNDS_V1,
+    "vector_overlap": VECTOR_DISTRIBUTION_BOUNDS_V1,
+    "vector_spiral": VECTOR_DISTRIBUTION_BOUNDS_V1,
+}
+
 
 def simple_task(name):
     return dict(schema_version=1, id=name, adapter="test_host",
@@ -74,19 +90,69 @@ def test_uninterrupted_execution_group_cannot_cross_tier_caps():
         validate_view(view,tasks)
 
 
-def test_frozen_thresholds_reference_current_existing_evaluators():
+def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer():
     from benchmarks.transfer_suite.protocol import required_tasks
     from benchmarks.transfer_suite.vector_tasks import TASKS as vectors
     from benchmarks.transfer_suite.image_tasks import TASKS as images
     tasks = load_tasks(ROOT)
-    for spec in required_tasks() + [s for s in vectors + images if s["tier"] == "ranking"]:
+    # Behavioral and image tasks still follow their existing task declarations.
+    # Vector policy is independently frozen below; scorer upgrades cannot replace it.
+    for spec in required_tasks() + [s for s in images if s["tier"] == "ranking"]:
         thresholds = spec["thresholds"]
         if isinstance(thresholds, dict):
             thresholds = [["modes", ">=", thresholds["modes"]], ["hq", ">=", thresholds["hq_min"]]]
         assert tasks[spec["name"]]["evaluation"]["thresholds"] == json.loads(json.dumps(thresholds))
+    assert {s["name"] for s in vectors if s["tier"] == "ranking"} == set(VECTOR_THRESHOLDS_V1)
+    assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"} == set(VECTOR_THRESHOLDS_V1)
+    changed_upstream = set()
+    for name, thresholds in VECTOR_THRESHOLDS_V1.items():
+        task = tasks[name]
+        evaluation = task["evaluation"]
+        assert evaluation["thresholds"] == thresholds
+        assert evaluation["gate_policy"]["id"] == "forge-vector-full-component-v1"
+        assert evaluation["gate_policy"]["retained_from"] == "transfer-vectors-v2"
+        assert evaluation["gate_policy"]["finite_atom_exemptions"] is False
+        assert "nonzero-width MoG" in evaluation["gate_policy"]["rationale"]
+        assert evaluation["sampling_law"] == "public_prior_without_output_noise"
+        assert task["execution"]["prior"]["kind"] == "mog" and task["execution"]["prior"]["sigma"] > 0
+        upstream = next(s for s in vectors if s["name"] == name)
+        if upstream["thresholds"] != thresholds:
+            changed_upstream.add(name)
+    assert changed_upstream == {"vector_anisotropic", "vector_unequal_width", "vector_unequal_mass"}
     for task in tasks.values():
         for path, digest in task["evaluation"].get("sources", {}).items():
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
+
+
+def test_forge_retains_rare_component_shape_failure_despite_upstream_finite_atom_exemption():
+    from benchmarks.transfer_suite.vector_tasks import TASKS, component_resolved
+    task = load_tasks(ROOT)["vector_unequal_mass"]
+    upstream = next(s for s in TASKS if s["name"] == task["id"])
+    assert component_resolved(upstream) == [True, True, True, False]
+    # Synthetic evaluator fixture, not a training receipt: the rare component
+    # has correct mass but zero variance; all resolved components have good shape.
+    metrics = dict(sw1_normalized=.1, mass_tv=0., hq=1., min_mass_ratio=1.,
+                   component_covariance_error=.25, component_min_eigen_ratio=0.,
+                   resolved_core_covariance_error=0., resolved_core_min_eigen_ratio=1.,
+                   resolved_max_component_spill=0.)
+    evidence = dict(live=metrics, scoring_weights="live", observations=[
+        dict(metrics, step=math.ceil(i * task["execution"]["steps"] / 24)) for i in range(1, 25)])
+    assert grade_result(task, {"evidence": evidence})["status"] == "FAIL"
+    alternate = deepcopy(task)
+    alternate["evaluation"]["thresholds"] = upstream["thresholds"]
+    assert grade_result(alternate, {"evidence": evidence})["status"] == "PASS"
+    assert task_evaluation_fingerprint(alternate) != task_evaluation_fingerprint(task)
+    assert task_execution_fingerprint(alternate) == task_execution_fingerprint(task)
+
+
+@pytest.mark.parametrize("field,value", [("gate_policy", {"id": "uncalibrated-v5"}),
+                                         ("sampling_law", "public_prior_with_output_noise")])
+def test_vector_gate_and_sampling_declarations_are_bound_in_evaluator_identity(field, value):
+    task = load_tasks(ROOT)["vector_unequal_mass"]
+    changed = deepcopy(task)
+    changed["evaluation"][field] = value
+    assert task_evaluation_fingerprint(changed) != task_evaluation_fingerprint(task)
+    assert task_execution_fingerprint(changed) == task_execution_fingerprint(task)
 
 
 def test_retiering_reuses_evidence_without_changing_execution_or_evaluator_identity():

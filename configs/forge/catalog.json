@@ -83,14 +83,16 @@
       "report/toy100/torch214-gpu-check": 10,
       "report/trajectory": 193,
       "report/transfer_suite": 341,
+      "report/transfer_suite/anisotropic_core_metric": 6,
+      "report/transfer_suite/silu_rare_collapse": 18,
       "report/transition": 83
     },
     "by_role": {
-      "analysis": 41,
+      "analysis": 42,
       "candidate_implementation": 17,
       "candidate_patch": 2,
       "configuration": 802,
-      "driver": 212,
+      "driver": 214,
       "engine_support": 28,
       "evaluator_or_audit": 55,
       "evidence_artifact": 1574,
@@ -98,20 +100,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 601,
-      "structured_evidence": 3158,
-      "support": 291,
-      "support_artifact": 96,
+      "narrative": 603,
+      "structured_evidence": 3165,
+      "support": 292,
+      "support_artifact": 107,
       "visualization": 15,
       "visualization_artifact": 290
     },
-    "files": 7255
+    "files": 7279
   },
   "coverage": {
-    "declared_count": 7255,
+    "declared_count": 7279,
     "missing": [],
     "stale": [],
-    "tracked_count": 7255,
+    "tracked_count": 7279,
     "unclassified": [],
     "valid": true
   },
@@ -698,7 +700,7 @@
     },
     {
       "family": "benchmark/toy100",
-      "git_blob": "239f18bc1ac5a15ae1a666dd1ef3256b2efaa852",
+      "git_blob": "51b0b7058974b416fdf4f0c0c47d17ea434cbf16",
       "path": "benchmarks/toy100/accuracy_evidence.py",
       "role": "support",
       "suggested_tiers": []
@@ -758,7 +760,7 @@
     },
     {
       "family": "benchmark/toy100",
-      "git_blob": "28e2a952596c5999a297dc53b81769840c9795d8",
+      "git_blob": "42f9a3ff36cadf13453092de2caa7045c0409dc3",
       "path": "benchmarks/toy100/models.py",
       "role": "support",
       "suggested_tiers": []
@@ -795,7 +797,7 @@
     },
     {
       "family": "benchmark/toy100",
-      "git_blob": "80e3f7b0a4285072e91c0a9ce51375dc624fbb26",
+      "git_blob": "433d7442cf15cfe8213cbd747ed95456104a599d",
       "path": "benchmarks/toy100/train.py",
       "role": "driver",
       "suggested_tiers": [
@@ -1433,7 +1435,7 @@
     },
     {
       "family": "benchmark/transfer_suite",
-      "git_blob": "69c0ec4dc8ba3d4931499974d0f096d5fea34e7f",
+      "git_blob": "9f9a42a2621fe2b89464efac49a138a5218756f2",
       "path": "benchmarks/transfer_suite/smooth_critic_research.py",
       "role": "driver",
       "suggested_tiers": [
@@ -1479,14 +1481,14 @@
     },
     {
       "family": "benchmark/transfer_suite",
-      "git_blob": "b071bf18cbffd183de7f8639f402ac0a033b2d47",
+      "git_blob": "dadfba12f2a56157c4a62183be4e4a173edfc48f",
       "path": "benchmarks/transfer_suite/vector_tasks.md",
       "role": "narrative",
       "suggested_tiers": []
     },
     {
       "family": "benchmark/transfer_suite",
-      "git_blob": "b210061478663c36cb95fad3b03962540b3646bc",
+      "git_blob": "0c5e558f66210085f481f3f0ff99817e9e9b4e41",
       "path": "benchmarks/transfer_suite/vector_tasks.py",
       "role": "support",
       "suggested_tiers": []
@@ -6557,21 +6559,21 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "880e08483812425d9f86a197719d0a597fd8aa55",
+      "git_blob": "49fdad1685df2dc933c2b81bb983d37f6e56140c",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "c7702dbfb24d649a33ce39dd6c8646199b627270",
+      "git_blob": "4219a8dc2c967caca4f67d2ca2e00c1a945f4026",
       "path": "experiments/forge/adaptation.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "8337204d5ab8dc754f3bdc77cc367d002512b627",
+      "git_blob": "bd92e6c1a5bc8daeee5b8708f492d48dd743826e",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6592,7 +6594,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "dd1483ae919b034ac73c6fd265d43444806dcc40",
+      "git_blob": "9bc7ddad547fedce78bbfb695a67b3587aea9cde",
       "path": "experiments/forge/behavior_adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6606,14 +6608,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "3cbd8ce492bffa70ee8085e346bc33f4ba3c37ec",
+      "git_blob": "68f86c7761688fad8c108565747359da16760045",
       "path": "experiments/forge/calibration.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "2552d57d26e668f872a3bfd7dcf3493cf0eec476",
+      "git_blob": "f410b97aa913b2791db866f768eddfd7ff59fd0b",
       "path": "experiments/forge/calibration_lane.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6648,14 +6650,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "86c07933ddbb4aa7b1301c528f87e4732f4a7d2a",
+      "git_blob": "451e608ee4a882f1f82a0bd862b04011036445ad",
       "path": "experiments/forge/history.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "283da631b9d485e9ee4e2b90ed1ffbd9a9c1eace",
+      "git_blob": "44137d668818b2e6d26d18f2a1b8d60ff5306f64",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6683,7 +6685,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "1b4d72b1008dcc17a74a0827f87eb340c046381c",
+      "git_blob": "beace3cefbc84fcebdafdc14303d1377c646c0a4",
       "path": "experiments/forge/promotion.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -48433,6 +48435,50 @@
       "suggested_tiers": []
     },
     {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "git_blob": "a4d5c2aec63d6f4c9e5ffcabcb284fbd7da7f87d",
+      "path": "reports/transfer_suite/anisotropic_core_metric/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "git_blob": "c76430ca8751b163e0367bf466fd026226e0726c",
+      "path": "reports/transfer_suite/anisotropic_core_metric/results.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "git_blob": "c04c4af68edf1127dacb7029ccadb2503d269ac1",
+      "path": "reports/transfer_suite/anisotropic_core_metric/results_v4.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "git_blob": "876dd6af2ad93b35d219b3847695c91b6123bc1f",
+      "path": "reports/transfer_suite/anisotropic_core_metric/run.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "git_blob": "9aa9ac2c7dfa1ec382dde3f1554eada6a7adbacb",
+      "path": "reports/transfer_suite/anisotropic_core_metric/run.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "git_blob": "836679a44fe0bb2bdf70b0a22885598de93feda2",
+      "path": "reports/transfer_suite/anisotropic_core_metric/run_v4.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
       "family": "report/transfer_suite",
       "git_blob": "9eca69c233a5034979a3c392656d56d854e48e9e",
       "path": "reports/transfer_suite/archive.py",
@@ -49038,6 +49084,134 @@
       "suggested_tiers": [
         2
       ]
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "0830c1a83bcafb0d29d789036def14d0cff8a440",
+      "path": "reports/transfer_suite/silu_rare_collapse/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "f032229860c8bd85897839c8093d24599be9ae1e",
+      "path": "reports/transfer_suite/silu_rare_collapse/arms.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "1123b73570204fe4a5bcdc1768342f68bf6773ba",
+      "path": "reports/transfer_suite/silu_rare_collapse/arms.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "05a12155b517226b5ff4ffa1f245c395ae1cfbd2",
+      "path": "reports/transfer_suite/silu_rare_collapse/crosscheck.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "9320effcee6495944ed7c1e5f56bf138f933b182",
+      "path": "reports/transfer_suite/silu_rare_collapse/crosscheck.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "fa7c85337b9a4705b1e31b0eb1bccba2db6f0ba7",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "87140f9e600eacb0eb017e928366d6bc11b6124e",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "ff0c318f5ff686544377658e6afa26dac223ea65",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_axis_silu.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "25b03c20733bacbb23f2d7e44acf43f28a64a4d4",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_leaky_orig.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "fff3ea2c62914a743b735e0b56db94e1e5650cae",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_linear_skip_d96_beta5.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "c679f6e121cace3da8825455aa077777638adbcb",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_silu_raw_skip_d96.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "2ae8a01b3a1b9ccaeb346cccc889a5d80a46df05",
+      "path": "reports/transfer_suite/silu_rare_collapse/oracle.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "e97e113b72d7eceaa76cced3ef83f480c27de2f0",
+      "path": "reports/transfer_suite/silu_rare_collapse/oracle.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "8916e12c6fd96e776725d38d95ea891f9cc05e80",
+      "path": "reports/transfer_suite/silu_rare_collapse/oracle.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "dfdcd88b6edb4c85158c7aa89897dffec0f1c327",
+      "path": "reports/transfer_suite/silu_rare_collapse/run.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "39ccf085098d649646c70b89d126e25af8b00cd0",
+      "path": "reports/transfer_suite/silu_rare_collapse/summarize.py",
+      "role": "analysis",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "46f44f32cd2b6c977a95b193e7ce4378c1b6c716",
+      "path": "reports/transfer_suite/silu_rare_collapse/v5.jsonl",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "git_blob": "b364f31f4322fc1b198e92518291df98fc79a6a3",
+      "path": "reports/transfer_suite/silu_rare_collapse/v5.log",
+      "role": "support_artifact",
+      "suggested_tiers": []
     },
     {
       "family": "report/transfer_suite",
@@ -51546,6 +51720,17 @@
       "file_count": 358,
       "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
       "source_id": "pr155"
+    },
+    {
+      "counts_by_suffix": {
+        ".jsonl": 7,
+        ".log": 11,
+        ".md": 2,
+        ".py": 4
+      },
+      "file_count": 24,
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "source_id": "develop-vector-protocols"
     }
   ],
   "schema_version": 1,

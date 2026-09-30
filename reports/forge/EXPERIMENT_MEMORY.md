@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 182. Inventory coverage: complete. Unresolved import items: 6.
+Records: 184. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -1042,6 +1042,38 @@ Narrative context only; no scientific pass is inferred.
 **Next:** Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/README.md) · [Record](records/history-context-report-transfer-suite-06e9f9952ffa.json)
+
+### context:report/transfer_suite/anisotropic_core_metric · history-context-report-transfer-suite-anisotropic-core-metric-cfb4b9ab9711
+
+**Scope:** historical; family_context; revision `925a5e5ac53fc79b133a0df9f873196265c5c880f0f38bc0d4e496fca10627c6`.
+
+Anisotropic core metric and SiLU critic screen
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `unknown`.
+
+
+
+Narrative context only; no scientific pass is inferred.
+
+**Next:** Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/anisotropic_core_metric/README.md) · [Record](records/history-context-report-transfer-suite-anisotropic-core-metric-cfb4b9ab9711.json)
+
+### context:report/transfer_suite/silu_rare_collapse · history-context-report-transfer-suite-silu-rare-collapse-fbfea951783c
+
+**Scope:** historical; family_context; revision `a45cc1de416e2f5a0bf403cf6057c8f15c42d67f0651b1b00758d2d1493d3f9f`.
+
+Why axis_silu collapses the rare component on vector_unequal_mass
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `unknown`.
+
+
+
+Narrative context only; no scientific pass is inferred.
+
+**Next:** Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/silu_rare_collapse/README.md) · [Record](records/history-context-report-transfer-suite-silu-rare-collapse-fbfea951783c.json)
 
 ### context:report/transition · history-context-report-transition-61b143595603
 
@@ -2935,6 +2967,7 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 - **structured_mapping_scope:** These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas. (2287 classified sources.)
 - **structured_mapping_scope:** These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas. (130 classified sources.)
+- **structured_mapping_scope:** These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas. (7 classified sources.)
 - **dt075-14k:** Review reports grid/staggered 14k failures after stationarity-ladder release; exact package/fixture/results not located in pinned #155.
 - **ema995-dtracking:** Review reports EMA .995 D-tracking 3/3; exact later live/EMA paired receipts are unbound.
 - **center-sensitivity:** Review reports sub-0.03 sigma centre-error sensitivity; original scope and receipts remain unbound.
@@ -2942,4 +2975,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `2db5db21c16505ebdf440b810ec0f11ad9ab846e76d08171bba687319b235a00`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `93fc13dc7f47b12d238f9e0e1bf79d12ea7bc093b9975c5033741bd8f1e25113`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

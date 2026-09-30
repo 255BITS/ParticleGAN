@@ -109,9 +109,13 @@ class _Run:
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
         self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
                                 if context.device.type == "cuda" else None)
-        # The shared sampling method also covers evaluator-owned holdout draws.
+        # One scoring law covers live/EMA observations and evaluator-owned
+        # holdouts. Clean removes training output noise, never the MoG kernel.
         original_sample = trainer.sample
         def measured_sample(*args, **kwargs):
+            if kwargs.get("output_noise", False) is not False:
+                raise ValueError("Forge scalar scoring requires clean samples without output noise")
+            kwargs["output_noise"] = False
             with self.timing.measure("sampling"):
                 return original_sample(*args, **kwargs)
         trainer.sample = measured_sample
@@ -171,7 +175,8 @@ class _Run:
                   "hooks_exercised": hooks, "mechanism_audit": mechanisms,
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
-                    "sampling_law": evidence.get("sampling_law", "public_live_mixture_and_output_noise")}
+                    "eval_output_noise": "clean",
+                    "sampling_law": evidence.get("sampling_law", "public_prior_without_output_noise")}
         if evidence.get("artifact_root"):
             evidence["artifact_manifest"] = manifest_artifacts(evidence["artifact_root"])
             evidence["artifact_portability"] = {
@@ -226,7 +231,7 @@ def _image(request, task, output, device):
     data = context.streams.generator("data", component="target", purpose="training")
     def evaluate():
         generated = trainer.sample(context.recipe.num_particles, fixed_first_n=True,
-            generator=context.streams.generator("eval", component="live", purpose="enumerated_output_noise"))
+            generator=context.streams.generator("eval", component="live", purpose="enumerated_samples"))
         return image_metrics(generated, centers, task["evaluation"]["measurement"])
     observations = []
     checkpoints = set(_checkpoints(task))
@@ -240,7 +245,7 @@ def _image(request, task, output, device):
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
     return run.receipt({"observations": observations, "live": observations[-1],
-                        "sampling_law": "enumerated_centers_with_public_output_noise"},
+                        "sampling_law": "enumerated_prior_without_output_noise"},
                        save_state=task["execution"].get("produces_state", False))
 
 
@@ -347,6 +352,7 @@ def _native(request, task, output, device, *, prerequisites=None):
               "seed": request["protocol"]["seed"], "eval_interval": evaluation["eval_interval"],
               "early_eval_steps": evaluation["early_eval_steps"], "eval_samples": evaluation["eval_samples"],
               "snapshot_samples": min(4096, evaluation["eval_samples"]),
+              "eval_output_noise": "clean",
               "forge_recipe": context.recipe.to_dict(), "forge_prior": context.prior_config}
     atomic_json(directory / "config.json", config)
     steps = evaluation_steps(config["steps"], config["eval_interval"], config["early_eval_steps"])
@@ -383,6 +389,7 @@ def _native(request, task, output, device, *, prerequisites=None):
     np.savez_compressed(directory / "final_samples.npz", **final_arrays)
     declaration, holdout = run.evaluate(lambda: accuracy.finish(trainer))
     summary = {"status": "complete", "problem": problem, "config": config,
+               "eval_output_noise": "clean",
                "budget_steps": config["steps"], "completed_steps": trainer.completed_steps,
                "eval_steps": steps, "snapshot_steps": steps, "final_samples_file": "final_samples.npz",
                "final": final_metrics, "accuracy": declaration, "holdout": holdout}

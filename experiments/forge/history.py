@@ -22,6 +22,9 @@ IMPORTER_VERSION = "forge-history-v1"
 BASELINE_REVISION = "92dc0319"
 LRFREE_REVISION = "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b"
 LRFREE_ROOT = "reports/toy100/lrfree-search"
+UPSTREAM_VECTOR_REVISION = "a8b9d3977701ca700d9918ac66d40ac814b9f9ba"
+UPSTREAM_VECTOR_ROOTS = ("reports/transfer_suite/anisotropic_core_metric",
+                         "reports/transfer_suite/silu_rare_collapse")
 SOURCE_ROOTS = ("benchmarks", "experiments", "configs", "reports")
 EXCLUDED_PREFIXES = ("configs/forge/", "reports/forge/")
 GATE_STATUSES = {"PASS", "FAIL", "INCOMPLETE", "INVALID", "NOT_RUN", "BLOCKED"}
@@ -107,6 +110,8 @@ def classify(path: str) -> dict[str, Any]:
         elif parts[1] in REPORT_FAMILIES:
             family = "report/" + parts[1]
             if parts[1] == "toy100" and len(parts) > 3:
+                family += "/" + parts[2]
+            elif any(path.startswith(prefix + "/") for prefix in UPSTREAM_VECTOR_ROOTS):
                 family += "/" + parts[2]
     elif root == "configs":
         if len(parts) > 1 and (parts[1] in CONFIG_FAMILIES or parts[1].startswith("speed_")):
@@ -482,7 +487,7 @@ def _import_gap_fill(source: Source) -> tuple[list[dict], set[str]]:
     return records, {qpath, rpath, selection_path, pair_path}
 
 
-def _narrative_records(source: Source, consumed: set[str]) -> list[dict]:
+def _narrative_records(source: Source, consumed: set[str], *, include_unmapped_support=False) -> list[dict]:
     grouped: dict[str, list[str]] = defaultdict(list)
     for path in source.files:
         if path.startswith("reports/") and path.endswith(".md"):
@@ -493,11 +498,20 @@ def _narrative_records(source: Source, consumed: set[str]) -> list[dict]:
         first = next((p for p in paths if p.endswith("/README.md")), paths[0])
         narrative = source.read(first).decode("utf-8", errors="replace")
         headline = next((line.lstrip("# ").strip() for line in narrative.splitlines() if line.strip()), family)
+        context = {"family": family, "narrative_sources": [source.receipt(p) for p in paths],
+                   "summary_excerpt": narrative[:1400],
+                   "structured_sources_imported": sorted(p for p in consumed if classify(p)["family"] == family)}
+        if include_unmapped_support:
+            context.update(
+                narrative_headings=[line.lstrip("# ").strip() for line in narrative.splitlines()
+                                    if line.startswith("#")],
+                unmapped_structured_sources=[source.receipt(p) for p in sorted(source.files)
+                    if p not in consumed and classify(p)["family"] == family
+                    and classify(p)["role"] == "structured_evidence"],
+                normalization_limit="JSONL summary/oracle schemas are not normalized by this importer; "
+                    "linked prose and rows do not establish Forge task verdicts or compatible sampling laws.")
         record = _record(source, first, "context:" + family, [], record_type="family_context",
-                         hypothesis=headline,
-                         context={"family": family, "narrative_sources": [source.receipt(p) for p in paths],
-                                  "summary_excerpt": narrative[:1400],
-                                  "structured_sources_imported": sorted(p for p in consumed if classify(p)["family"] == family)})
+                         hypothesis=headline, context=context)
         record["next_action"] = "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison."
         records.append(record)
     return records
@@ -519,9 +533,10 @@ def import_history(root: Path) -> dict[str, Any]:
     catalog = inventory(root)
     catalog["coverage"] = validate_inventory(root, catalog)
     sources, cards, gaps, mappings = [], [], [], []
-    for name, revision, prefixes in (
-        ("baseline", BASELINE_REVISION, SOURCE_ROOTS),
-        ("pr155", LRFREE_REVISION, (LRFREE_ROOT,)),
+    for name, revision, prefixes, include_unmapped_support in (
+        ("baseline", BASELINE_REVISION, SOURCE_ROOTS, False),
+        ("pr155", LRFREE_REVISION, (LRFREE_ROOT,), False),
+        ("develop-vector-protocols", UPSTREAM_VECTOR_REVISION, UPSTREAM_VECTOR_ROOTS, True),
     ):
         try:
             source = Source(root, revision, prefixes)
@@ -535,13 +550,15 @@ def import_history(root: Path) -> dict[str, Any]:
         structured, consumed, problems = _import_structured(source)
         legacy, legacy_sources = _import_gap_fill(source)
         consumed |= legacy_sources
-        cards.extend(structured + legacy + _narrative_records(source, consumed))
+        cards.extend(structured + legacy + _narrative_records(
+            source, consumed, include_unmapped_support=include_unmapped_support))
         gaps.extend(problems)
         for path in sorted(source.files):
             classification = classify(path)
             mappings.append({"revision": source.revision, "path": path, **classification,
                              "mapping": "structured" if path in consumed else "narrative" if path.endswith(".md") else "classified_only"})
-        unmatched = [p for p in source.files if p.startswith("reports/") and p.endswith(".json")
+        unmatched = [p for p in source.files if p.startswith("reports/")
+                     and (p.endswith(".json") or include_unmapped_support and p.endswith(".jsonl"))
                      and p not in consumed]
         gaps.append({"kind": "structured_mapping_scope", "revision": source.revision,
                      "reason": "These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas.",

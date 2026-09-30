@@ -55,3 +55,22 @@ def test_oriented_features_do_not_consume_global_initialization_rng():
     restored.load_state_dict(deepcopy(b.state_dict()))
     points = torch.randn(12, 2, generator=torch.Generator().manual_seed(0))
     assert torch.equal(restored(points), b(points))
+
+
+def test_leaky_first_layer_and_raw_skip_keep_the_axis_silu_mlp_initialization():
+    cards = {c['name']: c for c in ARCHITECTURES}
+    torch.manual_seed(0)
+    base = constructor(cards['axis_silu'])(2, 64, 2, 2)
+    torch.manual_seed(0)
+    mixed = constructor(cards['axis_leaky1_silu'])(2, 64, 2, 2)
+    torch.manual_seed(0)
+    skip = constructor(cards['axis_silu_raw_skip'])(2, 64, 2, 2)
+    assert [type(m).__name__ for m in mixed.net] == ['Linear', 'LeakyReLU', 'Linear', 'SiLU', 'Linear']
+    assert mixed.net[1].negative_slope == .2
+    assert all(torch.equal(a, b) for a, b in zip(base.net.parameters(), mixed.net.parameters()))
+    assert all(torch.equal(a, b) for a, b in zip(base.net.parameters(), skip.net.parameters()))
+    assert base.skip is None and skip.skip.bias is None and not skip.skip.weight.any()
+    points = torch.randn(16, 2, generator=torch.Generator().manual_seed(0))
+    assert torch.equal(skip(points), base(points))  # the zero-initialized skip starts inactive
+    skip(points).sum().backward()
+    assert torch.allclose(skip.skip.weight.grad, points.sum(0, keepdim=True))

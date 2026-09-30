@@ -2432,6 +2432,20 @@
       "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b"
     },
     {
+      "kind": "structured_mapping_scope",
+      "paths": [
+        "reports/transfer_suite/anisotropic_core_metric/results.jsonl",
+        "reports/transfer_suite/anisotropic_core_metric/results_v4.jsonl",
+        "reports/transfer_suite/silu_rare_collapse/arms.jsonl",
+        "reports/transfer_suite/silu_rare_collapse/crosscheck.jsonl",
+        "reports/transfer_suite/silu_rare_collapse/diagnose.jsonl",
+        "reports/transfer_suite/silu_rare_collapse/oracle.jsonl",
+        "reports/transfer_suite/silu_rare_collapse/v5.jsonl"
+      ],
+      "reason": "These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas.",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba"
+    },
+    {
       "followup_source_audits": [
         {
           "path": "reports/forge/calibration/followup-source-audit.json",
@@ -2502,10 +2516,10 @@
   ],
   "historical_import_complete": true,
   "inventory_coverage": {
-    "declared_count": 7255,
+    "declared_count": 7279,
     "missing": [],
     "stale": [],
-    "tracked_count": 7255,
+    "tracked_count": 7279,
     "unclassified": [],
     "valid": true
   },

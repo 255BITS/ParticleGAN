@@ -145,6 +145,13 @@ Use the same queue root for submitters, workers, and log viewers.
 `PARTICLEGAN_FORGE_QUEUE` also sets the shared queue location. Declarations and
 durable report receipts belong to the checkout selected with `--root`.
 
+After the develop integration, scalar, image, native and adaptation scoring uses
+the public prior distribution without training output noise. Learned MoG kernel
+noise remains present. Behavioral hosts keep their explicitly frozen laws.
+Vector tasks record their retained full-component gates; upstream finite-atom
+shape exemptions have not been calibrated for Forge's MoG prior. These changes
+produce new evidence identities and do not relabel previous receipts.
+
 ## Tiers and views
 
 | Qualification tier | Initial stability profile | Purpose |

@@ -313,13 +313,19 @@ class GANTrainer:
         return result
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None, fixed_first_n=False, offset=0):
-        """Draw live or EMA samples (with the current output noise) without
-        changing modes or training RNGs. ``fixed_first_n`` enumerates component
-        indices from ``offset`` (wrapping at the table size); mixture and output
-        noise still follow the public sampling law."""
+    def sample(self, n, *, ema=False, generator=None, output_noise=False,
+               fixed_first_n=False, offset=0):
+        """Draw live or EMA samples without changing modes or training RNGs.
+
+        Samples omit training output noise by default. ``output_noise=True``
+        adds its current value using the sampling stream. ``fixed_first_n``
+        enumerates component indices from ``offset`` within the table bounds. Learned MoG kernel noise remains part of the prior sampling law.
+        Either output-noise choice leaves training trajectories unchanged.
+        """
         if type(n) is not int or n <= 0:
             raise ValueError("n must be a positive integer")
+        if type(output_noise) is not bool:
+            raise ValueError("output_noise must be a boolean")
         if type(fixed_first_n) is not bool or type(offset) is not int or offset < 0:
             raise ValueError("fixed_first_n must be boolean and offset a nonnegative integer")
         stream = self.eval_generator if generator is None else self._stream(generator, 0)
@@ -333,7 +339,8 @@ class GANTrainer:
             prior.eval()
             with torch.random.fork_rng(devices=devices):
                 latent, _ = prior.sample(n, generator=stream, fixed_first_n=fixed_first_n, offset=offset)
-                return self._generate(model, latent, output_noise_std(self.recipe, self.completed_steps), stream)
+                sigma = output_noise_std(self.recipe, self.completed_steps) if output_noise else 0.0
+                return self._generate(model, latent, sigma, stream)
         finally:
             for module, flag in modes:
                 module.training = flag

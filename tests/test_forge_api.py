@@ -69,6 +69,34 @@ def test_explicit_continuation_budget_preserves_original_schedule_and_prefix():
     assert b.completed_steps == 4 and b.recipe.total_steps == 2
 
 
+@pytest.mark.parametrize("output_noise", [False, True])
+@pytest.mark.parametrize("ema", [False, True])
+def test_clean_and_noisy_enumeration_preserve_mog_law_and_training_streams(output_noise, ema):
+    from particlegan.training import output_noise_std
+    context, trainer = make_trainer()
+    model, prior = (trainer.ema_G, trainer.ema_prior) if ema else (trainer.G, trainer.prior)
+    sample_stream = context.streams.generator("eval", component="enumeration", purpose="combined-law")
+    expected_stream = torch.Generator().set_state(sample_stream.get_state())
+    before = trainer.state_dict()["streams"]
+    modes = [(module, module.training) for root in (model, prior) for module in root.modules()]
+    with torch.no_grad():
+        latent, indices = prior.sample(7, generator=expected_stream, fixed_first_n=True, offset=3)
+        expected = model(latent)
+        assert torch.equal(indices, torch.arange(3, 10))
+        assert not torch.equal(latent, prior.z[indices])
+        if output_noise:
+            expected = expected + output_noise_std(trainer.recipe, trainer.completed_steps) * torch.randn(
+                expected.shape, generator=expected_stream)
+    actual = trainer.sample(7, ema=ema, generator=sample_stream, fixed_first_n=True,
+                            offset=3, output_noise=output_noise)
+    with pytest.raises(ValueError, match="num_particles"):
+        trainer.sample(17, fixed_first_n=True, offset=10, output_noise=output_noise)
+    assert torch.equal(actual, expected)
+    assert torch.equal(sample_stream.get_state(), expected_stream.get_state())
+    assert_equal(before, trainer.state_dict()["streams"])
+    assert all(module.training == flag for module, flag in modes)
+
+
 def test_public_component_context_does_not_claim_scalar_trainer_for_autoencoder():
     context = make_context(execution_path="public_components", recipe_overrides={"encoder_mode": "ae"})
     assert context.receipt()["execution_path"] == "public_components"
@@ -214,14 +242,14 @@ def test_public_zero_sigma_mog_matches_cloud_updates_with_a2():
         assert_equal(a.opt_g.state_dict(), b.opt_g.state_dict())
 
 
-def test_sampling_uses_public_mixture_law_and_preserves_training_streams():
+def test_output_noisy_sampling_uses_public_mixture_law_and_preserves_training_streams():
     context, trainer = make_trainer()
     before = context.streams.audit()
     expected_stream = torch.Generator().manual_seed(71)
     latent, _ = trainer.prior.sample(11, generator=expected_stream)
     with torch.no_grad():
         expected = trainer.G(latent) + .02 * torch.randn((11, 2), generator=expected_stream)
-    assert torch.equal(trainer.sample(11, generator=torch.Generator().manual_seed(71)), expected)
+    assert torch.equal(trainer.sample(11, generator=torch.Generator().manual_seed(71), output_noise=True), expected)
     trainer.sample(11)
     after = context.streams.audit()
     allowed = [key for key, binding in context.streams.manifest()["bindings"].items()

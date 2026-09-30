@@ -166,7 +166,7 @@ def run_adaptation(request: dict, task: dict, output_dir: Path, device: str) -> 
               "steps": steps, "noise_horizon": context.recipe.total_steps, "diagnostic_every": cadence,
               "dense_after": None, "dense_until": None, "shift_step": shift_step,
               "shift": execution["shift"], "shift_pair": shift_pair,
-              "sampling_law": "public_live_mixture_and_output_noise"}
+              "sampling_law": "public_prior_without_output_noise", "eval_output_noise": "clean"}
     active = {**deepcopy(common), "freeze_after_shift": False, "diagnostic": active_points,
               "optimizer_final": _optimizer_rows(active_final), **_summary(active_points, execution)}
     frozen = {**deepcopy(common), "freeze_after_shift": True, "diagnostic": frozen_points,

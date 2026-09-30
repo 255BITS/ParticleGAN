@@ -61313,6 +61313,202 @@
       "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
       "role": "candidate_patch",
       "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "mapping": "narrative",
+      "path": "reports/transfer_suite/anisotropic_core_metric/README.md",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/anisotropic_core_metric/results.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/anisotropic_core_metric/results_v4.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/anisotropic_core_metric/run.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/anisotropic_core_metric/run.py",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/anisotropic_core_metric/run_v4.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "narrative",
+      "path": "reports/transfer_suite/silu_rare_collapse/README.md",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/arms.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/arms.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/crosscheck.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/crosscheck.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_axis_silu.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_leaky_orig.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_linear_skip_d96_beta5.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/diagnose_silu_raw_skip_d96.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/oracle.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/oracle.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/oracle.py",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/run.py",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/summarize.py",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "analysis",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/v5.jsonl",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/transfer_suite/silu_rare_collapse",
+      "mapping": "classified_only",
+      "path": "reports/transfer_suite/silu_rare_collapse/v5.log",
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "role": "support_artifact",
+      "suggested_tiers": []
     }
   ],
   "record_ids": [
@@ -61380,6 +61576,8 @@
     "history-context-report-toy100-torch214-gpu-check-fbe95d378065",
     "history-context-report-trajectory-79bf115a46be",
     "history-context-report-transfer-suite-06e9f9952ffa",
+    "history-context-report-transfer-suite-anisotropic-core-metric-cfb4b9ab9711",
+    "history-context-report-transfer-suite-silu-rare-collapse-fbfea951783c",
     "history-context-report-transition-61b143595603",
     "history-dv12-ams-rc3-c22-501063495713",
     "history-h2-handoff-critic-floor-2217ce39ca7d",
@@ -61491,7 +61689,7 @@
     "history-v3-pair-graft-126441aebe6e",
     "history-v3-repro-50fe3393d8b8"
   ],
-  "records_digest": "2823bd15bab42c90e7a8dca0bfc6702f6008eb6ca648f3f6581d80b93d5b0bba",
+  "records_digest": "438183a31b949affeef707337a5454fa2ddbf0a7566c3abab04f0b25d2b0c802",
   "schema_version": 1,
   "sources": [
     {
@@ -69128,6 +69326,43 @@
       },
       "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
       "source_id": "pr155"
+    },
+    {
+      "counts_by_suffix": {
+        ".jsonl": 7,
+        ".log": 11,
+        ".md": 2,
+        ".py": 4
+      },
+      "file_count": 24,
+      "files": {
+        "reports/transfer_suite/anisotropic_core_metric/README.md": "a4d5c2aec63d6f4c9e5ffcabcb284fbd7da7f87d",
+        "reports/transfer_suite/anisotropic_core_metric/results.jsonl": "c76430ca8751b163e0367bf466fd026226e0726c",
+        "reports/transfer_suite/anisotropic_core_metric/results_v4.jsonl": "c04c4af68edf1127dacb7029ccadb2503d269ac1",
+        "reports/transfer_suite/anisotropic_core_metric/run.log": "876dd6af2ad93b35d219b3847695c91b6123bc1f",
+        "reports/transfer_suite/anisotropic_core_metric/run.py": "9aa9ac2c7dfa1ec382dde3f1554eada6a7adbacb",
+        "reports/transfer_suite/anisotropic_core_metric/run_v4.log": "836679a44fe0bb2bdf70b0a22885598de93feda2",
+        "reports/transfer_suite/silu_rare_collapse/README.md": "0830c1a83bcafb0d29d789036def14d0cff8a440",
+        "reports/transfer_suite/silu_rare_collapse/arms.jsonl": "f032229860c8bd85897839c8093d24599be9ae1e",
+        "reports/transfer_suite/silu_rare_collapse/arms.log": "1123b73570204fe4a5bcdc1768342f68bf6773ba",
+        "reports/transfer_suite/silu_rare_collapse/crosscheck.jsonl": "05a12155b517226b5ff4ffa1f245c395ae1cfbd2",
+        "reports/transfer_suite/silu_rare_collapse/crosscheck.log": "9320effcee6495944ed7c1e5f56bf138f933b182",
+        "reports/transfer_suite/silu_rare_collapse/diagnose.jsonl": "fa7c85337b9a4705b1e31b0eb1bccba2db6f0ba7",
+        "reports/transfer_suite/silu_rare_collapse/diagnose.log": "87140f9e600eacb0eb017e928366d6bc11b6124e",
+        "reports/transfer_suite/silu_rare_collapse/diagnose_axis_silu.log": "ff0c318f5ff686544377658e6afa26dac223ea65",
+        "reports/transfer_suite/silu_rare_collapse/diagnose_leaky_orig.log": "25b03c20733bacbb23f2d7e44acf43f28a64a4d4",
+        "reports/transfer_suite/silu_rare_collapse/diagnose_linear_skip_d96_beta5.log": "fff3ea2c62914a743b735e0b56db94e1e5650cae",
+        "reports/transfer_suite/silu_rare_collapse/diagnose_silu_raw_skip_d96.log": "c679f6e121cace3da8825455aa077777638adbcb",
+        "reports/transfer_suite/silu_rare_collapse/oracle.jsonl": "2ae8a01b3a1b9ccaeb346cccc889a5d80a46df05",
+        "reports/transfer_suite/silu_rare_collapse/oracle.log": "e97e113b72d7eceaa76cced3ef83f480c27de2f0",
+        "reports/transfer_suite/silu_rare_collapse/oracle.py": "8916e12c6fd96e776725d38d95ea891f9cc05e80",
+        "reports/transfer_suite/silu_rare_collapse/run.py": "dfdcd88b6edb4c85158c7aa89897dffec0f1c327",
+        "reports/transfer_suite/silu_rare_collapse/summarize.py": "39ccf085098d649646c70b89d126e25af8b00cd0",
+        "reports/transfer_suite/silu_rare_collapse/v5.jsonl": "46f44f32cd2b6c977a95b193e7ce4378c1b6c716",
+        "reports/transfer_suite/silu_rare_collapse/v5.log": "b364f31f4322fc1b198e92518291df98fc79a6a3"
+      },
+      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+      "source_id": "develop-vector-protocols"
     }
   ]
 }

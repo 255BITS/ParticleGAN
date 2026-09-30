@@ -5,6 +5,28 @@ on `develop`, in [PR #221](https://github.com/255BITS/ParticleGAN/pull/221).
 The [accepted plan](../../docs/better-experiment-automation-plan-2026-09-28.md)
 defines acceptance; this status file does not narrow its scope.
 
+## Develop integration — 2026-09-29
+
+Fetched `origin/develop` at `a8b9d3977701ca700d9918ac66d40ac814b9f9ba` and merged
+it into this feature branch. Public sampling now combines clean output by default
+with Forge's component enumeration, learned MoG kernel and isolated RNG streams.
+Scalar, image, native and adaptation scoring explicitly omit training output
+noise; native live/EMA/holdout receipts use the same law. Frozen behavioral-host
+noise policies remain unchanged. Enumeration blocks must fit inside the table;
+the previous wrapping description was incorrect.
+
+The vector evaluator source changed with protocol v5. Forge retains its explicit
+full-component quality thresholds under `forge-vector-full-component-v1` rather
+than granting uncalibrated finite-atom shape exemptions to nonzero-width MoG
+priors. Each of the six vector tasks binds the new source hash and records this
+policy. A regression demonstrates that a rare-component collapse still fails
+the retained Forge gate even when the upstream resolved-component gate passes.
+
+**576 checks passed** across Forge, public training/clean sampling, recipe
+defaults and the upstream vector/critic changes. The merged code is a new source
+cohort. Older studies, registrations and receipts retain their original identity;
+new execution requires a newly frozen profile and bounded registration.
+
 ## Frozen inputs and ownership
 
 - Package/inventory baseline: `92dc0319`.

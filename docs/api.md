@@ -325,13 +325,15 @@ remains caller-owned. Evaluation cannot borrow a training stream.
   recipe weight. `generator_real` can supply a fresh tensor or zero-argument
   callback for RP/RA; otherwise the real batch is reused. RP requires equal
   batch sizes. `collect_stats=True` also returns penalty diagnostics.
-- `sample(n, ema=False, generator=None, fixed_first_n=False, offset=0)` defaults to live weights. Its separate
-  RNG and temporary evaluation mode preserve training randomness and module
-  modes. EMA averages G/prior parameters and copies their buffers, including
-  integer counters. `fixed_first_n=True` enumerates component indices from
-  `offset`, wrapping at the table size; MoG and output noise still apply. A
-  zero-noise cloud with zero output noise consumes no evaluation RNG in this
-  mode. EMA never determines a live leaderboard pass.
+- `sample(n, ema=False, generator=None, output_noise=False, fixed_first_n=False, offset=0)`
+  defaults to live weights and omits training output noise. `output_noise=True`
+  adds the current training output noise using the sampling stream. Its separate
+  RNG and temporary evaluation mode preserve training randomness and module modes.
+  `fixed_first_n=True` enumerates component indices from `offset`; the requested
+  block must fit within the table bounds. Learned MoG kernel noise remains part of the prior law; a
+  zero-width cloud without output noise consumes no evaluation RNG in this mode.
+  EMA averages G/prior parameters and copies their buffers, including integer
+  counters. EMA never determines a live leaderboard pass.
 - `state_dict()` includes G, D, prior, EMA, optimizers, initial learning rates,
   update count and RNG states. `load_state_dict(state)` restores them, including
   global PyTorch RNG. Recreate the same recipe, architecture, options, dtype

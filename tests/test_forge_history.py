@@ -1,8 +1,10 @@
 """Historical import must preserve identity and fail closed on evidence gaps."""
 from collections import Counter
+from hashlib import sha256
 import json
 from pathlib import Path
 import subprocess
+from types import SimpleNamespace
 
 import pytest
 
@@ -150,6 +152,69 @@ def test_gapfill_extension_cannot_hide_behind_hold_pass():
     frozen = next(c for c in cards if c["provenance"]["context"].get("attempt_id") == "rg5-a2-shift_frozen-mode_hold-0.1-0.1")
     assert frozen["task_results"][0]["role"] == "negative_control"
     assert frozen["task_results"][0]["raw_status"] == "FAIL"
+
+
+@pytest.fixture(scope="module")
+def upstream_vector_source():
+    root = Path(__file__).resolve().parents[1]
+    try:
+        return history.Source(root, history.UPSTREAM_VECTOR_REVISION, history.UPSTREAM_VECTOR_ROOTS)
+    except subprocess.CalledProcessError:
+        pytest.skip("Pinned upstream vector-protocol commit is unavailable")
+
+
+def test_upstream_vector_reports_are_separate_pinned_narratives_without_inferred_pass(upstream_vector_source):
+    source = upstream_vector_source
+    assert source.revision == "a8b9d3977701ca700d9918ac66d40ac814b9f9ba"
+    assert len(source.files) == 24
+    assert all(any(path.startswith(prefix + "/") for prefix in history.UPSTREAM_VECTOR_ROOTS)
+               for path in source.files)
+    assert Counter(Path(path).suffix for path in source.files) == {".md": 2, ".jsonl": 7, ".py": 4, ".log": 11}
+    structured, consumed, _ = history._import_structured(source)
+    assert structured == [] and consumed == set()
+    records = history._narrative_records(source, consumed, include_unmapped_support=True)
+    assert {r["source"]["path"] for r in records} == {p + "/README.md" for p in history.UPSTREAM_VECTOR_ROOTS}
+    assert len({r["candidate_id"] for r in records}) == 2
+    for record in records:
+        assert record["record_type"] == "family_context" and record["task_results"] == []
+        assert record["evidence_scope"] == "historical"
+        assert not record["provenance"]["verified_by_forge"] and not record["provenance"]["reuse_eligible"]
+        assert "no scientific pass is inferred" in record["conclusion"]
+        context = record["provenance"]["context"]
+        assert context["structured_sources_imported"] == []
+        assert any("v5" in heading for heading in context["narrative_headings"])
+        assert context["unmapped_structured_sources"]
+        for receipt in [record["source"], *context["unmapped_structured_sources"]]:
+            assert receipt["revision"] == source.revision
+            assert receipt["git_blob"] == source.files[receipt["path"]]
+            assert receipt["sha256"] == sha256(source.read(receipt["path"])).hexdigest()
+            assert source.revision in receipt["url"]
+
+
+def test_import_pipeline_exposes_upstream_jsonl_gaps_without_new_scientific_records(
+        tiny_repo, upstream_vector_source, monkeypatch):
+    source = upstream_vector_source
+    calls = []
+    def frozen_source(root, revision, prefixes):
+        calls.append((revision, prefixes))
+        # Existing sources are independently tested above. Isolate the new
+        # source through the real import/materialization path without copying Git.
+        return source if revision == source.revision else SimpleNamespace(revision=revision, files={})
+    monkeypatch.setattr(history, "Source", frozen_source)
+    summary = history.import_history(tiny_repo)
+    assert (history.UPSTREAM_VECTOR_REVISION, history.UPSTREAM_VECTOR_ROOTS) in calls
+    assert summary["records"] == 2 and summary["scientific_records"] == 0
+    manifest = json.loads((tiny_repo / summary["sources"]).read_text())
+    declared = next(s for s in manifest["sources"] if s["source_id"] == "develop-vector-protocols")
+    assert declared["revision"] == source.revision and declared["files"] == source.files
+    assert declared["file_count"] == 24
+    gaps = json.loads((tiny_repo / summary["import_gaps"]).read_text())["gaps"]
+    gap = next(g for g in gaps if g.get("revision") == source.revision)
+    assert gap["kind"] == "structured_mapping_scope"
+    assert gap["paths"] == sorted(p for p in source.files if p.endswith(".jsonl"))
+    assert len(gap["paths"]) == 7
+    assert not any(m["mapping"] == "structured" for m in manifest["mappings"])
+    assert history.import_history(tiny_repo) == summary
 
 
 def test_atomic_output_is_deterministic(tmp_path):
