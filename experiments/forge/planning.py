@@ -135,7 +135,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         missing -= {"particle_cloud"} if task_prior.get("kind") == "particle_cloud" else set()
         task["preflight_blockers"] = [f"missing capability {cap}" for cap in sorted(missing)]
         from .adapters import adapter_preflight
-        task["preflight_blockers"].extend(adapter_preflight(task, candidate))
+        task["preflight_blockers"].extend(adapter_preflight(task, candidate, root=root))
         task["preflight_blockers"].extend(task_blockers(task))
     source = inspect_source(root, sorted(extra_sources))
     formulation = {k: candidate.get(k) for k in FORMULATION_FIELDS}

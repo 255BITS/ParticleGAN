@@ -46,7 +46,7 @@ def _context(request, task, device, resources):
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"))
 
 
-def adapter_preflight(task, candidate):
+def adapter_preflight(task, candidate, *, root=None):
     """Report unsupported task/host bindings before reserving training compute."""
     adapter = task["adapter"]
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
@@ -57,6 +57,11 @@ def adapter_preflight(task, candidate):
         from .behavior_adapters import behavior_preflight
         return behavior_preflight(task, candidate)
     blockers = []
+    if adapter == "transfer_image":
+        from .imageprofiles import image_profile_blockers
+        blockers.extend(image_profile_blockers(task, root=root))
+        if blockers:
+            return blockers
     if adapter == "clockfree_audit":
         from .clockfree import source_audit
         recipe = candidate.get("resolved_recipe")
@@ -220,14 +225,20 @@ def _vector(request, task, output, device):
 
 
 def _image(request, task, output, device):
-    from benchmarks.transfer_suite.image_tasks import Generator, Discriminator, templates, image_metrics
-    spec = task["execution"]["host_definition"]
+    from benchmarks.transfer_suite.image_tasks import templates, image_metrics
+    from .imageprofiles import build_image_models, resolve_image_spec
+    spec = resolve_image_spec(task)
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch_size"]})
-    g = context.construct(lambda: Generator(spec), component="generator").to(device)
-    d = context.construct(lambda: Discriminator(spec), component="discriminator").to(device)
+    g, d = build_image_models(context, spec)
     trainer = context.build_trainer(g, d)
     run = _Run(context, trainer, output, task, sampling_law=ENUMERATED_PRIOR_CLEAN)
+    host_receipt = {"definition": spec, "profile": task["execution"].get("image_profile"),
+        "models": {name: {"class": type(model).__module__ + "." + type(model).__qualname__,
+                          "parameters": sum(p.numel() for p in model.parameters()),
+                          "parameter_shapes": {key: list(p.shape) for key, p in model.named_parameters()},
+                          "initial_state_sha256": state_digest(model.state_dict())}
+                   for name, model in (("generator", g), ("discriminator", d))}}
     centers = templates(spec).to(device)
     data = context.streams.generator("data", component="target", purpose="training")
     def evaluate():
@@ -246,7 +257,7 @@ def _image(request, task, output, device):
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
-    return run.receipt({"observations": observations, "live": observations[-1]},
+    return run.receipt({"observations": observations, "live": observations[-1], "host": host_receipt},
                        save_state=task["execution"].get("produces_state", False))
 
 

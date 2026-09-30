@@ -82,6 +82,21 @@ A real GPU 0 allocation-only probe measured 4,096 allocated / 2,097,152 reserved
 bytes without training. Old missing memory measurements remain unavailable.
 The repairs require a new cohort and registrations before any further training.
 
+## Explicit host-profile transfer
+
+The image adapter now uses one validated profile resolver and model factory.
+The opt-in `img_intensity2_residual16` card binds the published architecture source
+by hash; it keeps the current public K3P recipe, named initialization/RNG, clean
+enumeration and original 600-update gates. The separate `host_profile_transfer`
+view exposes it as a diagnostic. Existing tasks and default views are retained.
+Constructor tests verify actual shapes before any optimizer update. Receipts bind
+the resolved host card, model classes, parameter counts/shapes and initial-state
+hashes. Unsupported declarations or a changed profile source block preflight.
+
+This enables an explicit architecture transfer measurement; it does not make
+the historical positive a current result. Vector critic and native architecture/
+initialization differences remain documented in [the audit](HOST_PROVENANCE_AUDIT.md).
+
 ## Physical pilot completed
 
 The [v3 pilot](PHYSICAL_GPU_PILOT_READOUT.md) passed physical two-GPU overlap,

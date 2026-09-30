@@ -9,6 +9,7 @@ Records: 187. Inventory coverage: complete. Unresolved import items: 7.
 - [adaptation](leaderboards/adaptation.md)
 - [clockfree_continuous](leaderboards/clockfree_continuous.md)
 - [discriminator_stability](leaderboards/discriminator_stability.md)
+- [host_profile_transfer](leaderboards/host_profile_transfer.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
 
 [Measured automation costs, reuse, and avoided work](automation.json). Run `python -m experiments.forge stats` for current accounting; unavailable measurements remain explicit.
@@ -3023,4 +3024,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `ce042711110ec3d417abf7605da1bccdabe43cfb2cc1a761a6e4bcff7112d6ab`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `aeb2887c86c41b09c50e56caa1b5d51bebbf8e914316d18de76f01e303830cd7`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

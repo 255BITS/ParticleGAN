@@ -172,6 +172,18 @@ is `INCOMPLETE`; a contradiction is `INVALID`, before scientific metrics are
 graded. Behavioral scheduled-noise and parameter-only measurements retain their
 explicit exceptions. Archived unversioned receipts keep their frozen semantics.
 
+Host architecture is part of a task's evidence identity. For example,
+`img_intensity2` retains its original transpose12 declaration;
+`img_intensity2_residual16` explicitly binds the published residual16 profile and
+its source hash. Both use the same image factory, public trainer and gates.
+The opt-in `host_profile_transfer` view exposes the variant as a diagnostic;
+the default views do not automatically add it. `imageprofiles.task_from_profile`
+materializes the full task card from the shared resolver without runtime
+inheritance. Preflight rejects unsupported profiles or mismatched model/data
+declarations. Receipts record the resolved card, actual parameter shapes/counts
+and initial model-state hashes. Architecture transfer does not import an archived
+positive or relax the fixed named-RNG comparison policy.
+
 ## Tiers and views
 
 | Qualification tier | Initial stability profile | Purpose |

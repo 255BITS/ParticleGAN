@@ -63,7 +63,12 @@ def test_initial_inventory_has_complete_quality_and_distinct_claim_views():
     stability = load_view(ROOT, "discriminator_stability")
     quality = load_view(ROOT, "quality_coverage")
     assert len(quality["assignments"]) == 22
-    assert sum(t["evaluation"]["kind"] == "transfer_sustained" for t in tasks.values()) == 19
+    assert sum(tasks[a["task"]]["evaluation"]["kind"] == "transfer_sustained"
+               for a in quality["assignments"]) == 19
+    transfer = load_view(ROOT, "host_profile_transfer")
+    variant = next(a for a in transfer["assignments"] if a["task"] == "img_intensity2_residual16")
+    assert variant["importance"] == "diagnostic"
+    assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
     smoke = [a["task"] for a in stability["assignments"] if a["qualification_tier"] == 1]
     assert smoke == ["two_pole", "unused_token_hold", "ae_gan_hold"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke) == 530

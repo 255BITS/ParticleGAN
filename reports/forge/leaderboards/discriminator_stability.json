@@ -3154,13 +3154,13 @@
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "741de91b540c4461fc2970158d5b4f84ec6cc4121ab0a726683ca66b2aac8c5d",
+      "cohort": "64c0f0d0046ce10be1e8421f4c72582d36dda1fe580e71112cb36cb2920f8acd",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -3800,14 +3800,7 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "e068316721e3b072668373b6",
-          "status": "concluded"
-        }
-      ],
+      "queue_submissions": [],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -3819,18 +3812,9 @@
             "model": "AMD Ryzen 9 5900X 12-Core Processor",
             "tf32": false,
             "threads": 1
-          },
-          "cuda": {
-            "backend": "cuda",
-            "compute_capability": "8.6",
-            "deterministic": true,
-            "driver": "610.57.04",
-            "model": "NVIDIA RTX A6000",
-            "tf32": false,
-            "threads": 1
           }
         },
-        "execution_backend": "cuda",
+        "execution_backend": "cpu",
         "runtime": {
           "implementation": "CPython",
           "machine": "x86_64",
@@ -3843,1377 +3827,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "ba1ee9ccb1a53af0ae54e0b2691b7023e5c8325d95ac9b17ba005cdc27d9e37f",
-      "cost": {
-        "flops": {
-          "kind": "unavailable",
-          "value": null
-        },
-        "measured_tasks": 0,
-        "unmeasured_tasks": 0,
-        "wall_seconds": null
-      },
-      "counts": {
-        "NOT_RUN": 24
-      },
-      "display_metadata": {
-        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
-        "evidence_quality": [
-          "unmeasured"
-        ],
-        "families": [
-          "behavioral",
-          "endurance",
-          "image",
-          "native100",
-          "vector"
-        ],
-        "historical_verification": null,
-        "invalid_attempt_ids": [],
-        "missing_attempt_ids": [],
-        "schema_version": 1,
-        "source_family": "unknown",
-        "source_family_basis": "source_path_classification",
-        "subfamilies": [
-          "anisotropic",
-          "curved_continuous",
-          "existing_behavior",
-          "image_conv_transpose",
-          "overlapping",
-          "separated_broad",
-          "unequal_mass",
-          "unequal_width"
-        ],
-        "task_families": {
-          "ae_gan_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "ae_gan_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "cover_leftover": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "cover_leftover",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "grid100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "img_bars4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_bars4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_blobs4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_blobs4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_intensity2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_intensity2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_stripes2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_stripes2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "mid_scale_identity": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mid_scale_identity",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "mode_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "residual_student": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "residual_student",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "ring_extension": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "ring_hold": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "rotated100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "staggered100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "trajectory": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "trajectory",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "two_pole": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "two_pole",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unipolar": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unipolar",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unused_token_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unused_token_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "vector_anisotropic": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_anisotropic",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "anisotropic"
-          },
-          "vector_overlap": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_overlap",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "overlapping"
-          },
-          "vector_spiral": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_spiral",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "curved_continuous"
-          },
-          "vector_two_broad": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_two_broad",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "separated_broad"
-          },
-          "vector_unequal_mass": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_mass",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_mass"
-          },
-          "vector_unequal_width": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_width",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_width"
-          }
-        },
-        "unmeasured_task_ids": [
-          "ae_gan_hold",
-          "cover_leftover",
-          "grid100",
-          "img_bars4",
-          "img_blobs4",
-          "img_intensity2",
-          "img_stripes2",
-          "mid_scale_identity",
-          "mode_hold",
-          "residual_student",
-          "ring_extension",
-          "ring_hold",
-          "rotated100",
-          "staggered100",
-          "trajectory",
-          "two_pole",
-          "unipolar",
-          "unused_token_hold",
-          "vector_anisotropic",
-          "vector_overlap",
-          "vector_spiral",
-          "vector_two_broad",
-          "vector_unequal_mass",
-          "vector_unequal_width"
-        ],
-        "valid_attempt_ids": []
-      },
-      "evidence_scope": "current",
-      "lifecycle": "proposed",
-      "mechanism_class": "structural",
-      "next_action": "Run the next eligible task within an explicit budget.",
-      "pending_readout": false,
-      "preflight_blockers": [],
-      "prior": {
-        "kind": "mog",
-        "learnable": true,
-        "sigma": 0.025,
-        "standardize": false
-      },
-      "qualification": {
-        "blockers": [
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          }
-        ],
-        "cost_seconds": 0,
-        "eligible": false,
-        "next_task": "two_pole",
-        "next_tasks": [
-          "two_pole",
-          "unused_token_hold",
-          "ae_gan_hold"
-        ],
-        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
-        "qualified_tier": 0,
-        "required_passed": 0,
-        "required_total": 24,
-        "status": "INCOMPLETE",
-        "task_statuses": {
-          "ae_gan_hold": "NOT_RUN",
-          "cover_leftover": "NOT_RUN",
-          "grid100": "NOT_RUN",
-          "img_bars4": "NOT_RUN",
-          "img_blobs4": "NOT_RUN",
-          "img_intensity2": "NOT_RUN",
-          "img_stripes2": "NOT_RUN",
-          "mid_scale_identity": "NOT_RUN",
-          "mode_hold": "NOT_RUN",
-          "residual_student": "NOT_RUN",
-          "ring_extension": "NOT_RUN",
-          "ring_hold": "NOT_RUN",
-          "rotated100": "NOT_RUN",
-          "staggered100": "NOT_RUN",
-          "trajectory": "NOT_RUN",
-          "two_pole": "NOT_RUN",
-          "unipolar": "NOT_RUN",
-          "unused_token_hold": "NOT_RUN",
-          "vector_anisotropic": "NOT_RUN",
-          "vector_overlap": "NOT_RUN",
-          "vector_spiral": "NOT_RUN",
-          "vector_two_broad": "NOT_RUN",
-          "vector_unequal_mass": "NOT_RUN",
-          "vector_unequal_width": "NOT_RUN"
-        },
-        "tasks": [
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "trajectory"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "residual_student"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unipolar"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "cover_leftover"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mid_scale_identity"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mode_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_two_broad"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_mass"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_width"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_anisotropic"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_overlap"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_spiral"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_stripes2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_bars4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_blobs4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_intensity2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "grid100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "rotated100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "staggered100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_extension"
-          }
-        ],
-        "tiers": [
-          {
-            "counts": {
-              "NOT_RUN": 3
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 1,
-            "required_passed": 0,
-            "required_total": 3,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 19
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 2,
-            "required_passed": 0,
-            "required_total": 19,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 2
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 3,
-            "required_passed": 0,
-            "required_total": 2,
-            "status": "NOT_RUN"
-          }
-        ],
-        "view": "discriminator_stability",
-        "view_revision": 2
-      },
-      "qualified_tier": 0,
-      "queue_submissions": [],
-      "readout_covers_attempt_ids": [],
-      "retry_history": [],
-      "runtime_cohort": {
-        "compute_profiles": {
-          "cpu": {
-            "backend": "cpu",
-            "deterministic": true,
-            "machine": "x86_64",
-            "model": "AMD Ryzen 9 5900X 12-Core Processor",
-            "tf32": false,
-            "threads": 1
-          }
-        },
-        "execution_backend": "cpu",
-        "runtime": {
-          "implementation": "CPython",
-          "machine": "x86_64",
-          "packages": {
-            "numpy": "2.5.3",
-            "scipy": "1.17.1",
-            "torch": "2.14.0"
-          },
-          "python": "3.14.7",
-          "system": "Linux"
-        }
-      },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
-      "status": "INCOMPLETE"
-    },
-    {
-      "attempt_ids": [],
-      "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "fb5c60b1b77ee10a21371dcbd2940c9f4301af65c155fd11108708725fed67c5",
-      "claim_contract": {
-        "sampling_law": "task_declared",
-        "schedule": "scheduled",
-        "scoring_weights": "live"
-      },
-      "cohort": "b2c51bd892d07ff2491496df75e377474d3ee9c21267545b35aaa5c74825bac6",
-      "cost": {
-        "flops": {
-          "kind": "unavailable",
-          "value": null
-        },
-        "measured_tasks": 0,
-        "unmeasured_tasks": 0,
-        "wall_seconds": null
-      },
-      "counts": {
-        "NOT_RUN": 24
-      },
-      "display_metadata": {
-        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
-        "evidence_quality": [
-          "unmeasured"
-        ],
-        "families": [
-          "behavioral",
-          "endurance",
-          "image",
-          "native100",
-          "vector"
-        ],
-        "historical_verification": null,
-        "invalid_attempt_ids": [],
-        "missing_attempt_ids": [],
-        "schema_version": 1,
-        "source_family": "unknown",
-        "source_family_basis": "source_path_classification",
-        "subfamilies": [
-          "anisotropic",
-          "curved_continuous",
-          "existing_behavior",
-          "image_conv_transpose",
-          "overlapping",
-          "separated_broad",
-          "unequal_mass",
-          "unequal_width"
-        ],
-        "task_families": {
-          "ae_gan_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "ae_gan_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "cover_leftover": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "cover_leftover",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "grid100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "img_bars4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_bars4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_blobs4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_blobs4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_intensity2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_intensity2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_stripes2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_stripes2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "mid_scale_identity": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mid_scale_identity",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "mode_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "residual_student": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "residual_student",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "ring_extension": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "ring_hold": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "rotated100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "staggered100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "trajectory": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "trajectory",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "two_pole": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "two_pole",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unipolar": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unipolar",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unused_token_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unused_token_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "vector_anisotropic": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_anisotropic",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "anisotropic"
-          },
-          "vector_overlap": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_overlap",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "overlapping"
-          },
-          "vector_spiral": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_spiral",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "curved_continuous"
-          },
-          "vector_two_broad": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_two_broad",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "separated_broad"
-          },
-          "vector_unequal_mass": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_mass",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_mass"
-          },
-          "vector_unequal_width": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_width",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_width"
-          }
-        },
-        "unmeasured_task_ids": [
-          "ae_gan_hold",
-          "cover_leftover",
-          "grid100",
-          "img_bars4",
-          "img_blobs4",
-          "img_intensity2",
-          "img_stripes2",
-          "mid_scale_identity",
-          "mode_hold",
-          "residual_student",
-          "ring_extension",
-          "ring_hold",
-          "rotated100",
-          "staggered100",
-          "trajectory",
-          "two_pole",
-          "unipolar",
-          "unused_token_hold",
-          "vector_anisotropic",
-          "vector_overlap",
-          "vector_spiral",
-          "vector_two_broad",
-          "vector_unequal_mass",
-          "vector_unequal_width"
-        ],
-        "valid_attempt_ids": []
-      },
-      "evidence_scope": "current",
-      "lifecycle": "proposed",
-      "mechanism_class": "structural",
-      "next_action": "Run the next eligible task within an explicit budget.",
-      "pending_readout": false,
-      "preflight_blockers": [],
-      "prior": {
-        "kind": "mog",
-        "learnable": true,
-        "sigma": 0.025,
-        "standardize": false
-      },
-      "qualification": {
-        "blockers": [
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          }
-        ],
-        "cost_seconds": 0,
-        "eligible": false,
-        "next_task": "two_pole",
-        "next_tasks": [
-          "two_pole",
-          "unused_token_hold",
-          "ae_gan_hold"
-        ],
-        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
-        "qualified_tier": 0,
-        "required_passed": 0,
-        "required_total": 24,
-        "status": "INCOMPLETE",
-        "task_statuses": {
-          "ae_gan_hold": "NOT_RUN",
-          "cover_leftover": "NOT_RUN",
-          "grid100": "NOT_RUN",
-          "img_bars4": "NOT_RUN",
-          "img_blobs4": "NOT_RUN",
-          "img_intensity2": "NOT_RUN",
-          "img_stripes2": "NOT_RUN",
-          "mid_scale_identity": "NOT_RUN",
-          "mode_hold": "NOT_RUN",
-          "residual_student": "NOT_RUN",
-          "ring_extension": "NOT_RUN",
-          "ring_hold": "NOT_RUN",
-          "rotated100": "NOT_RUN",
-          "staggered100": "NOT_RUN",
-          "trajectory": "NOT_RUN",
-          "two_pole": "NOT_RUN",
-          "unipolar": "NOT_RUN",
-          "unused_token_hold": "NOT_RUN",
-          "vector_anisotropic": "NOT_RUN",
-          "vector_overlap": "NOT_RUN",
-          "vector_spiral": "NOT_RUN",
-          "vector_two_broad": "NOT_RUN",
-          "vector_unequal_mass": "NOT_RUN",
-          "vector_unequal_width": "NOT_RUN"
-        },
-        "tasks": [
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "trajectory"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "residual_student"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unipolar"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "cover_leftover"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mid_scale_identity"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mode_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_two_broad"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_mass"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_width"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_anisotropic"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_overlap"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_spiral"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_stripes2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_bars4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_blobs4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_intensity2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "grid100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "rotated100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "staggered100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_extension"
-          }
-        ],
-        "tiers": [
-          {
-            "counts": {
-              "NOT_RUN": 3
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 1,
-            "required_passed": 0,
-            "required_total": 3,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 19
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 2,
-            "required_passed": 0,
-            "required_total": 19,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 2
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 3,
-            "required_passed": 0,
-            "required_total": 2,
-            "status": "NOT_RUN"
-          }
-        ],
-        "view": "discriminator_stability",
-        "view_revision": 2
-      },
-      "qualified_tier": 0,
-      "queue_submissions": [],
-      "readout_covers_attempt_ids": [],
-      "retry_history": [],
-      "runtime_cohort": {
-        "compute_profiles": {
-          "cpu": {
-            "backend": "cpu",
-            "deterministic": true,
-            "machine": "x86_64",
-            "model": "AMD Ryzen 9 5900X 12-Core Processor",
-            "tf32": false,
-            "threads": 1
-          }
-        },
-        "execution_backend": "cpu",
-        "runtime": {
-          "implementation": "CPython",
-          "machine": "x86_64",
-          "packages": {
-            "numpy": "2.5.3",
-            "scipy": "1.17.1",
-            "torch": "2.14.0"
-          },
-          "python": "3.14.7",
-          "system": "Linux"
-        }
-      },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
-      "status": "INCOMPLETE"
-    },
-    {
-      "attempt_ids": [],
-      "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "fb5c60b1b77ee10a21371dcbd2940c9f4301af65c155fd11108708725fed67c5",
-      "claim_contract": {
-        "sampling_law": "task_declared",
-        "schedule": "scheduled",
-        "scoring_weights": "live"
-      },
-      "cohort": "e323150e2df0b24656ad7b5ee3bf15b2bdf1a2f6606d7bedc76c1413d33cebf1",
+      "cohort": "a1bc4ed93c44deb2cd9716190feecf2ed2d2f81c56775143dded9f6a7834ea1f",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -5889,19 +4515,707 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
-      "candidate_id": "k3p",
-      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "7074029a8441ef9b8b6f124f6af8b968cc57311a3e6a91f7505ed2a0bc70761f",
+      "cohort": "8ebb24c3e49abac9136ccbba958428611cc86fa0ac375f9ee5b403a2893262e3",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "NOT_RUN": 24
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "behavioral",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "cover_leftover",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": "two_pole",
+        "next_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ],
+        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 24,
+        "status": "INCOMPLETE",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 3,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 2
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 2,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "discriminator_stability",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "status": "INCOMPLETE"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "905d46de8c6c79593d6f5a4907819afb69282cef59a6f8ac007a34a6ca050290",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -6568,19 +5882,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "b49350405b9e3f6150e532f4172be3f87731aa392806ccd07137e35283ce67fa",
+      "cohort": "04872c8cd5264e9ad00c67c78f347a816e04f8ef5e9b1a76ca35ea14fa1cd8f8",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -7220,20 +6534,7 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "495a30143da81785a2d9756d",
-          "status": "concluded"
-        },
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "7c2e7d15802ec8ab2920d2e8",
-          "status": "concluded"
-        }
-      ],
+      "queue_submissions": [],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -7269,7 +6570,686 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "status": "INCOMPLETE"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "k3p",
+      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "4b8fd2ba57ab04f0626aa043fb68d71292306c7a8a9daef52f2c81b8793b44fe",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "NOT_RUN": 24
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "behavioral",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "cover_leftover",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": "two_pole",
+        "next_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ],
+        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 24,
+        "status": "INCOMPLETE",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 3,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 2
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 2,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "discriminator_stability",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cpu",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     }
   ],
@@ -35137,10 +35117,10 @@
     ],
     "historical_import_complete": true,
     "inventory_coverage": {
-      "declared_count": 7280,
+      "declared_count": 7281,
       "missing": [],
       "stale": [],
-      "tracked_count": 7280,
+      "tracked_count": 7281,
       "unclassified": [],
       "valid": true
     },
@@ -36338,13 +36318,13 @@
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "741de91b540c4461fc2970158d5b4f84ec6cc4121ab0a726683ca66b2aac8c5d",
+      "cohort": "64c0f0d0046ce10be1e8421f4c72582d36dda1fe580e71112cb36cb2920f8acd",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -36984,14 +36964,7 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "e068316721e3b072668373b6",
-          "status": "concluded"
-        }
-      ],
+      "queue_submissions": [],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -37003,18 +36976,9 @@
             "model": "AMD Ryzen 9 5900X 12-Core Processor",
             "tf32": false,
             "threads": 1
-          },
-          "cuda": {
-            "backend": "cuda",
-            "compute_capability": "8.6",
-            "deterministic": true,
-            "driver": "610.57.04",
-            "model": "NVIDIA RTX A6000",
-            "tf32": false,
-            "threads": 1
           }
         },
-        "execution_backend": "cuda",
+        "execution_backend": "cpu",
         "runtime": {
           "implementation": "CPython",
           "machine": "x86_64",
@@ -37027,1377 +36991,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461",
+      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "ba1ee9ccb1a53af0ae54e0b2691b7023e5c8325d95ac9b17ba005cdc27d9e37f",
-      "cost": {
-        "flops": {
-          "kind": "unavailable",
-          "value": null
-        },
-        "measured_tasks": 0,
-        "unmeasured_tasks": 0,
-        "wall_seconds": null
-      },
-      "counts": {
-        "NOT_RUN": 24
-      },
-      "display_metadata": {
-        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
-        "evidence_quality": [
-          "unmeasured"
-        ],
-        "families": [
-          "behavioral",
-          "endurance",
-          "image",
-          "native100",
-          "vector"
-        ],
-        "historical_verification": null,
-        "invalid_attempt_ids": [],
-        "missing_attempt_ids": [],
-        "schema_version": 1,
-        "source_family": "unknown",
-        "source_family_basis": "source_path_classification",
-        "subfamilies": [
-          "anisotropic",
-          "curved_continuous",
-          "existing_behavior",
-          "image_conv_transpose",
-          "overlapping",
-          "separated_broad",
-          "unequal_mass",
-          "unequal_width"
-        ],
-        "task_families": {
-          "ae_gan_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "ae_gan_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "cover_leftover": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "cover_leftover",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "grid100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "img_bars4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_bars4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_blobs4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_blobs4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_intensity2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_intensity2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_stripes2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_stripes2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "mid_scale_identity": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mid_scale_identity",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "mode_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "residual_student": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "residual_student",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "ring_extension": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "ring_hold": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "rotated100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "staggered100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "trajectory": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "trajectory",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "two_pole": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "two_pole",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unipolar": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unipolar",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unused_token_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unused_token_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "vector_anisotropic": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_anisotropic",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "anisotropic"
-          },
-          "vector_overlap": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_overlap",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "overlapping"
-          },
-          "vector_spiral": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_spiral",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "curved_continuous"
-          },
-          "vector_two_broad": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_two_broad",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "separated_broad"
-          },
-          "vector_unequal_mass": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_mass",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_mass"
-          },
-          "vector_unequal_width": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_width",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_width"
-          }
-        },
-        "unmeasured_task_ids": [
-          "ae_gan_hold",
-          "cover_leftover",
-          "grid100",
-          "img_bars4",
-          "img_blobs4",
-          "img_intensity2",
-          "img_stripes2",
-          "mid_scale_identity",
-          "mode_hold",
-          "residual_student",
-          "ring_extension",
-          "ring_hold",
-          "rotated100",
-          "staggered100",
-          "trajectory",
-          "two_pole",
-          "unipolar",
-          "unused_token_hold",
-          "vector_anisotropic",
-          "vector_overlap",
-          "vector_spiral",
-          "vector_two_broad",
-          "vector_unequal_mass",
-          "vector_unequal_width"
-        ],
-        "valid_attempt_ids": []
-      },
-      "evidence_scope": "current",
-      "lifecycle": "proposed",
-      "mechanism_class": "structural",
-      "next_action": "Run the next eligible task within an explicit budget.",
-      "pending_readout": false,
-      "preflight_blockers": [],
-      "prior": {
-        "kind": "mog",
-        "learnable": true,
-        "sigma": 0.025,
-        "standardize": false
-      },
-      "qualification": {
-        "blockers": [
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          }
-        ],
-        "cost_seconds": 0,
-        "eligible": false,
-        "next_task": "two_pole",
-        "next_tasks": [
-          "two_pole",
-          "unused_token_hold",
-          "ae_gan_hold"
-        ],
-        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
-        "qualified_tier": 0,
-        "required_passed": 0,
-        "required_total": 24,
-        "status": "INCOMPLETE",
-        "task_statuses": {
-          "ae_gan_hold": "NOT_RUN",
-          "cover_leftover": "NOT_RUN",
-          "grid100": "NOT_RUN",
-          "img_bars4": "NOT_RUN",
-          "img_blobs4": "NOT_RUN",
-          "img_intensity2": "NOT_RUN",
-          "img_stripes2": "NOT_RUN",
-          "mid_scale_identity": "NOT_RUN",
-          "mode_hold": "NOT_RUN",
-          "residual_student": "NOT_RUN",
-          "ring_extension": "NOT_RUN",
-          "ring_hold": "NOT_RUN",
-          "rotated100": "NOT_RUN",
-          "staggered100": "NOT_RUN",
-          "trajectory": "NOT_RUN",
-          "two_pole": "NOT_RUN",
-          "unipolar": "NOT_RUN",
-          "unused_token_hold": "NOT_RUN",
-          "vector_anisotropic": "NOT_RUN",
-          "vector_overlap": "NOT_RUN",
-          "vector_spiral": "NOT_RUN",
-          "vector_two_broad": "NOT_RUN",
-          "vector_unequal_mass": "NOT_RUN",
-          "vector_unequal_width": "NOT_RUN"
-        },
-        "tasks": [
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "trajectory"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "residual_student"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unipolar"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "cover_leftover"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mid_scale_identity"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mode_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_two_broad"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_mass"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_width"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_anisotropic"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_overlap"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_spiral"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_stripes2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_bars4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_blobs4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_intensity2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "grid100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "rotated100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "staggered100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_extension"
-          }
-        ],
-        "tiers": [
-          {
-            "counts": {
-              "NOT_RUN": 3
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 1,
-            "required_passed": 0,
-            "required_total": 3,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 19
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 2,
-            "required_passed": 0,
-            "required_total": 19,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 2
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 3,
-            "required_passed": 0,
-            "required_total": 2,
-            "status": "NOT_RUN"
-          }
-        ],
-        "view": "discriminator_stability",
-        "view_revision": 2
-      },
-      "qualified_tier": 0,
-      "queue_submissions": [],
-      "readout_covers_attempt_ids": [],
-      "retry_history": [],
-      "runtime_cohort": {
-        "compute_profiles": {
-          "cpu": {
-            "backend": "cpu",
-            "deterministic": true,
-            "machine": "x86_64",
-            "model": "AMD Ryzen 9 5900X 12-Core Processor",
-            "tf32": false,
-            "threads": 1
-          }
-        },
-        "execution_backend": "cpu",
-        "runtime": {
-          "implementation": "CPython",
-          "machine": "x86_64",
-          "packages": {
-            "numpy": "2.5.3",
-            "scipy": "1.17.1",
-            "torch": "2.14.0"
-          },
-          "python": "3.14.7",
-          "system": "Linux"
-        }
-      },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
-      "status": "INCOMPLETE"
-    },
-    {
-      "attempt_ids": [],
-      "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "fb5c60b1b77ee10a21371dcbd2940c9f4301af65c155fd11108708725fed67c5",
-      "claim_contract": {
-        "sampling_law": "task_declared",
-        "schedule": "scheduled",
-        "scoring_weights": "live"
-      },
-      "cohort": "b2c51bd892d07ff2491496df75e377474d3ee9c21267545b35aaa5c74825bac6",
-      "cost": {
-        "flops": {
-          "kind": "unavailable",
-          "value": null
-        },
-        "measured_tasks": 0,
-        "unmeasured_tasks": 0,
-        "wall_seconds": null
-      },
-      "counts": {
-        "NOT_RUN": 24
-      },
-      "display_metadata": {
-        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
-        "evidence_quality": [
-          "unmeasured"
-        ],
-        "families": [
-          "behavioral",
-          "endurance",
-          "image",
-          "native100",
-          "vector"
-        ],
-        "historical_verification": null,
-        "invalid_attempt_ids": [],
-        "missing_attempt_ids": [],
-        "schema_version": 1,
-        "source_family": "unknown",
-        "source_family_basis": "source_path_classification",
-        "subfamilies": [
-          "anisotropic",
-          "curved_continuous",
-          "existing_behavior",
-          "image_conv_transpose",
-          "overlapping",
-          "separated_broad",
-          "unequal_mass",
-          "unequal_width"
-        ],
-        "task_families": {
-          "ae_gan_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "ae_gan_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "cover_leftover": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "cover_leftover",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "grid100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "img_bars4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_bars4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_blobs4": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_blobs4",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_intensity2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_intensity2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "img_stripes2": {
-            "adapter": "transfer_image",
-            "basis": "current_catalog",
-            "family": "image",
-            "host": "img_stripes2",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "image_conv_transpose"
-          },
-          "mid_scale_identity": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mid_scale_identity",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "mode_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "residual_student": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "residual_student",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "ring_extension": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "ring_hold": {
-            "adapter": "ring_endurance",
-            "basis": "current_catalog",
-            "family": "endurance",
-            "host": "mode_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "rotated100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "staggered100": {
-            "adapter": "native100",
-            "basis": "current_catalog",
-            "family": "native100",
-            "host": null,
-            "protocol_equivalence_asserted": false,
-            "subfamily": null
-          },
-          "trajectory": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "trajectory",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "two_pole": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "two_pole",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unipolar": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unipolar",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "unused_token_hold": {
-            "adapter": "transfer_behavior",
-            "basis": "current_catalog",
-            "family": "behavioral",
-            "host": "unused_token_hold",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "existing_behavior"
-          },
-          "vector_anisotropic": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_anisotropic",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "anisotropic"
-          },
-          "vector_overlap": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_overlap",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "overlapping"
-          },
-          "vector_spiral": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_spiral",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "curved_continuous"
-          },
-          "vector_two_broad": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_two_broad",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "separated_broad"
-          },
-          "vector_unequal_mass": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_mass",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_mass"
-          },
-          "vector_unequal_width": {
-            "adapter": "transfer_vector",
-            "basis": "current_catalog",
-            "family": "vector",
-            "host": "vector_unequal_width",
-            "protocol_equivalence_asserted": false,
-            "subfamily": "unequal_width"
-          }
-        },
-        "unmeasured_task_ids": [
-          "ae_gan_hold",
-          "cover_leftover",
-          "grid100",
-          "img_bars4",
-          "img_blobs4",
-          "img_intensity2",
-          "img_stripes2",
-          "mid_scale_identity",
-          "mode_hold",
-          "residual_student",
-          "ring_extension",
-          "ring_hold",
-          "rotated100",
-          "staggered100",
-          "trajectory",
-          "two_pole",
-          "unipolar",
-          "unused_token_hold",
-          "vector_anisotropic",
-          "vector_overlap",
-          "vector_spiral",
-          "vector_two_broad",
-          "vector_unequal_mass",
-          "vector_unequal_width"
-        ],
-        "valid_attempt_ids": []
-      },
-      "evidence_scope": "current",
-      "lifecycle": "proposed",
-      "mechanism_class": "structural",
-      "next_action": "Run the next eligible task within an explicit budget.",
-      "pending_readout": false,
-      "preflight_blockers": [],
-      "prior": {
-        "kind": "mog",
-        "learnable": true,
-        "sigma": 0.025,
-        "standardize": false
-      },
-      "qualification": {
-        "blockers": [
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          }
-        ],
-        "cost_seconds": 0,
-        "eligible": false,
-        "next_task": "two_pole",
-        "next_tasks": [
-          "two_pole",
-          "unused_token_hold",
-          "ae_gan_hold"
-        ],
-        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
-        "qualified_tier": 0,
-        "required_passed": 0,
-        "required_total": 24,
-        "status": "INCOMPLETE",
-        "task_statuses": {
-          "ae_gan_hold": "NOT_RUN",
-          "cover_leftover": "NOT_RUN",
-          "grid100": "NOT_RUN",
-          "img_bars4": "NOT_RUN",
-          "img_blobs4": "NOT_RUN",
-          "img_intensity2": "NOT_RUN",
-          "img_stripes2": "NOT_RUN",
-          "mid_scale_identity": "NOT_RUN",
-          "mode_hold": "NOT_RUN",
-          "residual_student": "NOT_RUN",
-          "ring_extension": "NOT_RUN",
-          "ring_hold": "NOT_RUN",
-          "rotated100": "NOT_RUN",
-          "staggered100": "NOT_RUN",
-          "trajectory": "NOT_RUN",
-          "two_pole": "NOT_RUN",
-          "unipolar": "NOT_RUN",
-          "unused_token_hold": "NOT_RUN",
-          "vector_anisotropic": "NOT_RUN",
-          "vector_overlap": "NOT_RUN",
-          "vector_spiral": "NOT_RUN",
-          "vector_two_broad": "NOT_RUN",
-          "vector_unequal_mass": "NOT_RUN",
-          "vector_unequal_width": "NOT_RUN"
-        },
-        "tasks": [
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "two_pole"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unused_token_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 1,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ae_gan_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "trajectory"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "residual_student"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "unipolar"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "cover_leftover"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mid_scale_identity"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "mode_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_two_broad"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_mass"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_unequal_width"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_anisotropic"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_overlap"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "vector_spiral"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_stripes2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_bars4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_blobs4"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "img_intensity2"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "grid100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "rotated100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 2,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "staggered100"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_hold"
-          },
-          {
-            "cost": 0,
-            "gate_status": "NOT_RUN",
-            "importance": "required",
-            "qualification_tier": 3,
-            "reasons": [
-              "no compatible result"
-            ],
-            "status": "NOT_RUN",
-            "task_id": "ring_extension"
-          }
-        ],
-        "tiers": [
-          {
-            "counts": {
-              "NOT_RUN": 3
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 1,
-            "required_passed": 0,
-            "required_total": 3,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 19
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 2,
-            "required_passed": 0,
-            "required_total": 19,
-            "status": "NOT_RUN"
-          },
-          {
-            "counts": {
-              "NOT_RUN": 2
-            },
-            "diagnostic_total": 0,
-            "qualification_tier": 3,
-            "required_passed": 0,
-            "required_total": 2,
-            "status": "NOT_RUN"
-          }
-        ],
-        "view": "discriminator_stability",
-        "view_revision": 2
-      },
-      "qualified_tier": 0,
-      "queue_submissions": [],
-      "readout_covers_attempt_ids": [],
-      "retry_history": [],
-      "runtime_cohort": {
-        "compute_profiles": {
-          "cpu": {
-            "backend": "cpu",
-            "deterministic": true,
-            "machine": "x86_64",
-            "model": "AMD Ryzen 9 5900X 12-Core Processor",
-            "tf32": false,
-            "threads": 1
-          }
-        },
-        "execution_backend": "cpu",
-        "runtime": {
-          "implementation": "CPython",
-          "machine": "x86_64",
-          "packages": {
-            "numpy": "2.5.3",
-            "scipy": "1.17.1",
-            "torch": "2.14.0"
-          },
-          "python": "3.14.7",
-          "system": "Linux"
-        }
-      },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
-      "status": "INCOMPLETE"
-    },
-    {
-      "attempt_ids": [],
-      "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "fb5c60b1b77ee10a21371dcbd2940c9f4301af65c155fd11108708725fed67c5",
-      "claim_contract": {
-        "sampling_law": "task_declared",
-        "schedule": "scheduled",
-        "scoring_weights": "live"
-      },
-      "cohort": "e323150e2df0b24656ad7b5ee3bf15b2bdf1a2f6606d7bedc76c1413d33cebf1",
+      "cohort": "a1bc4ed93c44deb2cd9716190feecf2ed2d2f81c56775143dded9f6a7834ea1f",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -39073,19 +37679,707 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
-      "candidate_id": "k3p",
-      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "7074029a8441ef9b8b6f124f6af8b968cc57311a3e6a91f7505ed2a0bc70761f",
+      "cohort": "8ebb24c3e49abac9136ccbba958428611cc86fa0ac375f9ee5b403a2893262e3",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "NOT_RUN": 24
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "behavioral",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "cover_leftover",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": "two_pole",
+        "next_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ],
+        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 24,
+        "status": "INCOMPLETE",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 3,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 2
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 2,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "discriminator_stability",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "status": "INCOMPLETE"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "905d46de8c6c79593d6f5a4907819afb69282cef59a6f8ac007a34a6ca050290",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -39752,19 +39046,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4",
+      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "b49350405b9e3f6150e532f4172be3f87731aa392806ccd07137e35283ce67fa",
+      "cohort": "04872c8cd5264e9ad00c67c78f347a816e04f8ef5e9b1a76ca35ea14fa1cd8f8",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -40404,20 +39698,7 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "495a30143da81785a2d9756d",
-          "status": "concluded"
-        },
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "7c2e7d15802ec8ab2920d2e8",
-          "status": "concluded"
-        }
-      ],
+      "queue_submissions": [],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -40453,7 +39734,686 @@
           "system": "Linux"
         }
       },
-      "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "status": "INCOMPLETE"
+    },
+    {
+      "attempt_ids": [],
+      "candidate_id": "k3p",
+      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "cohort": "4b8fd2ba57ab04f0626aa043fb68d71292306c7a8a9daef52f2c81b8793b44fe",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "counts": {
+        "NOT_RUN": 24
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "unmeasured"
+        ],
+        "families": [
+          "behavioral",
+          "endurance",
+          "image",
+          "native100",
+          "vector"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "anisotropic",
+          "curved_continuous",
+          "existing_behavior",
+          "image_conv_transpose",
+          "overlapping",
+          "separated_broad",
+          "unequal_mass",
+          "unequal_width"
+        ],
+        "task_families": {
+          "ae_gan_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "ae_gan_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "cover_leftover": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "cover_leftover",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "grid100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "img_bars4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_bars4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_blobs4": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_blobs4",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_intensity2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_intensity2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "img_stripes2": {
+            "adapter": "transfer_image",
+            "basis": "current_catalog",
+            "family": "image",
+            "host": "img_stripes2",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "image_conv_transpose"
+          },
+          "mid_scale_identity": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mid_scale_identity",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "residual_student": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "residual_student",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "ring_extension": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "ring_hold": {
+            "adapter": "ring_endurance",
+            "basis": "current_catalog",
+            "family": "endurance",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "rotated100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "staggered100": {
+            "adapter": "native100",
+            "basis": "current_catalog",
+            "family": "native100",
+            "host": null,
+            "protocol_equivalence_asserted": false,
+            "subfamily": null
+          },
+          "trajectory": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "trajectory",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "two_pole": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "two_pole",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unipolar": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unipolar",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "unused_token_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "current_catalog",
+            "family": "behavioral",
+            "host": "unused_token_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          },
+          "vector_anisotropic": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_anisotropic",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "anisotropic"
+          },
+          "vector_overlap": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_overlap",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "overlapping"
+          },
+          "vector_spiral": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_spiral",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "curved_continuous"
+          },
+          "vector_two_broad": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_two_broad",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "separated_broad"
+          },
+          "vector_unequal_mass": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_mass",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_mass"
+          },
+          "vector_unequal_width": {
+            "adapter": "transfer_vector",
+            "basis": "current_catalog",
+            "family": "vector",
+            "host": "vector_unequal_width",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "unequal_width"
+          }
+        },
+        "unmeasured_task_ids": [
+          "ae_gan_hold",
+          "cover_leftover",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "valid_attempt_ids": []
+      },
+      "evidence_scope": "current",
+      "lifecycle": "proposed",
+      "mechanism_class": "structural",
+      "next_action": "Run the next eligible task within an explicit budget.",
+      "pending_readout": false,
+      "preflight_blockers": [],
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualification": {
+        "blockers": [
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          }
+        ],
+        "cost_seconds": 0,
+        "eligible": false,
+        "next_task": "two_pole",
+        "next_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ],
+        "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_total": 24,
+        "status": "INCOMPLETE",
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_bars4": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "mode_hold": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "ring_extension": "NOT_RUN",
+          "ring_hold": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "tasks": [
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "two_pole"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unused_token_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 1,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ae_gan_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "trajectory"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "residual_student"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "unipolar"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "cover_leftover"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mid_scale_identity"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "mode_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_two_broad"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_mass"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_unequal_width"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_anisotropic"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_overlap"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "vector_spiral"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_stripes2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_bars4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_blobs4"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "img_intensity2"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "grid100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "rotated100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 2,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "staggered100"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_hold"
+          },
+          {
+            "cost": 0,
+            "gate_status": "NOT_RUN",
+            "importance": "required",
+            "qualification_tier": 3,
+            "reasons": [
+              "no compatible result"
+            ],
+            "status": "NOT_RUN",
+            "task_id": "ring_extension"
+          }
+        ],
+        "tiers": [
+          {
+            "counts": {
+              "NOT_RUN": 3
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 1,
+            "required_passed": 0,
+            "required_total": 3,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 19
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 2,
+            "required_passed": 0,
+            "required_total": 19,
+            "status": "NOT_RUN"
+          },
+          {
+            "counts": {
+              "NOT_RUN": 2
+            },
+            "diagnostic_total": 0,
+            "qualification_tier": 3,
+            "required_passed": 0,
+            "required_total": 2,
+            "status": "NOT_RUN"
+          }
+        ],
+        "view": "discriminator_stability",
+        "view_revision": 2
+      },
+      "qualified_tier": 0,
+      "queue_submissions": [],
+      "readout_covers_attempt_ids": [],
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cpu",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
       "status": "INCOMPLETE"
     },
     {

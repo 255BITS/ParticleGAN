@@ -36,7 +36,7 @@ def setup(tmp_path, monkeypatch):
     root = tmp_path
     # This fixture grades stored synthetic curves and never launches a host.
     # Real adapter applicability is exercised by adapter/worker integration tests.
-    monkeypatch.setattr("experiments.forge.adapters.adapter_preflight", lambda task, candidate: [])
+    monkeypatch.setattr("experiments.forge.adapters.adapter_preflight", lambda task, candidate, **kwargs: [])
     monkeypatch.setitem(ADAPTER_POLICIES, "fixture", PUBLIC_PRIOR_CLEAN)
     prior = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
     atomic_json(root / "configs/forge/defaults.json", {"protocol": "screening", "prior": prior})
