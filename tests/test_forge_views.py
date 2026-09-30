@@ -109,7 +109,11 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
             thresholds = [["modes", ">=", thresholds["modes"]], ["hq", ">=", thresholds["hq_min"]]]
         assert tasks[spec["name"]]["evaluation"]["thresholds"] == json.loads(json.dumps(thresholds))
     assert {s["name"] for s in vectors if s["tier"] == "ranking"} == set(VECTOR_THRESHOLDS_V1)
-    assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"} == set(VECTOR_THRESHOLDS_V1)
+    assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"
+            and "vector_profile" not in task["execution"]} == set(VECTOR_THRESHOLDS_V1)
+    for task in tasks.values():
+        if task["adapter"] == "transfer_vector" and "vector_profile" in task["execution"]:
+            assert task["evaluation"] == tasks[task["execution"]["host"]]["evaluation"]
     changed_upstream = set()
     for name, thresholds in VECTOR_THRESHOLDS_V1.items():
         task = tasks[name]

@@ -103,6 +103,19 @@ modes, HQ 0.90625 and mass TV 0 with zero unintended RNG deviations. Its readout
 is concluded and reservations are zero. Only one cell in that new 57-cell
 matrix is measured; this does not establish full-reference positivity or adoption.
 
+CI on `68754bac` passed **1,668 tests and 18 subtests**, with 16 explicit skips,
+Python 3.10/3.11 wheel smokes and release packaging:
+[run 36665456793](https://github.com/255BITS/ParticleGAN/actions/runs/36665456793).
+
+Six explicit published vector variants now use the shared discriminator
+factories, with current MoG initialization and full-component gates retained.
+Their two source declarations are included in snapshots independently of view
+selection. Raw tasks and original views retain their previous architectures;
+the variants are diagnostics in `host_profile_transfer`. Construction and
+integration checks cover source tampering, snapshot portability, unchanged raw
+RNG draws and dispatch into the public batch-distance discriminator before any
+optimizer update. No training result is implied by these checks.
+
 ## Physical pilot completed
 
 The [v3 pilot](PHYSICAL_GPU_PILOT_READOUT.md) passed physical two-GPU overlap,
@@ -162,7 +175,7 @@ outside active pools and retain existing experiment requests.
 | Shared file contracts and source snapshots | Implemented, under integration review | `experiments/forge/contracts.py`, `sources.py`; mutation/reuse tests |
 | History mapping and source coverage | Complete classification at checkpoint `3a3ef24a` | 7,252 scoped paths; 174 cards, 112 scientific and 62 family-context; pinned #155 included |
 | MoG public API, capabilities, paired RNG | Implemented and tested | Public trainer/prior/A2, named component streams, checkpoint parity |
-| Task definitions / tier views / independent graders | Implemented and tested | 29 tasks, four views; no active monotonicity gate |
+| Task definitions / tier views / independent graders | Implemented and tested | 36 tasks, five views including opt-in host-profile diagnostics; no active monotonicity gate |
 | Queue, adapters, compiler, CLI and root guide | Real CPU execution and resource enforcement verified | Real process-group tests, atomic CPU/RAM reservations; final integration checks recorded below |
 | Clock audit, paired adaptation and native continuation | Implemented; bounded state/protocol verification | Saved state manifests, measured optimizer counters, exact prefix/restore/RNG comparison; `CONTINUATION_REVIEW.md` |
 | Administrative lifecycle and display filters | Implemented and tested | Immutable abandon/supersede receipts; explicit cancellation repair; family/provenance filters preserve full qualification |

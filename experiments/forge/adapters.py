@@ -57,6 +57,11 @@ def adapter_preflight(task, candidate, *, root=None):
         from .behavior_adapters import behavior_preflight
         return behavior_preflight(task, candidate)
     blockers = []
+    if adapter == "transfer_vector":
+        from .vectorprofiles import vector_profile_blockers
+        blockers.extend(vector_profile_blockers(task, root=root))
+        if blockers:
+            return blockers
     if adapter == "transfer_image":
         from .imageprofiles import image_profile_blockers
         blockers.extend(image_profile_blockers(task, root=root))
@@ -90,6 +95,15 @@ def _models(context, spec):
     d = context.construct(lambda: SimpleMLPDiscriminator(2, spec.get("d_hidden", spec["hidden"]),
                                                       spec.get("d_layers", spec["layers"]), spec["fourier"]), component="discriminator")
     return g.to(context.device), d.to(context.device)
+
+
+def _host_receipt(spec, profile, generator, discriminator):
+    return {"definition": deepcopy(spec), "profile": deepcopy(profile),
+        "models": {name: {"class": type(model).__module__ + "." + type(model).__qualname__,
+                          "parameters": sum(p.numel() for p in model.parameters()),
+                          "parameter_shapes": {key: list(p.shape) for key, p in model.named_parameters()},
+                          "initial_state_sha256": state_digest(model.state_dict())}
+                   for name, model in (("generator", generator), ("discriminator", discriminator))}}
 
 
 def _finite_tree(value):
@@ -205,11 +219,14 @@ def _checkpoints(task):
 
 def _vector(request, task, output, device):
     from benchmarks.transfer_suite.vector_tasks import sample_target, score_samples
-    spec = deepcopy(task["execution"]["host_definition"])
-    spec["thresholds"] = task["evaluation"]["thresholds"]
+    from .vectorprofiles import build_vector_models, resolve_vector_spec
+    spec = resolve_vector_spec(task)
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
-    trainer = context.build_trainer(*_models(context, spec))
+    g, d = build_vector_models(context, spec)
+    trainer = context.build_trainer(g, d)
+    host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
+    spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)
     data = context.streams.generator("data", component="target", purpose="training", device="cpu")
     observations = []
@@ -220,7 +237,7 @@ def _vector(request, task, output, device):
             row = run.evaluate(lambda: score_samples(run.sample(4096).cpu(), spec, step))
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
-    return run.receipt({"observations": observations, "live": observations[-1]},
+    return run.receipt({"observations": observations, "live": observations[-1], "host": host_receipt},
                        save_state=task["execution"].get("produces_state", False))
 
 
@@ -233,12 +250,7 @@ def _image(request, task, output, device):
     g, d = build_image_models(context, spec)
     trainer = context.build_trainer(g, d)
     run = _Run(context, trainer, output, task, sampling_law=ENUMERATED_PRIOR_CLEAN)
-    host_receipt = {"definition": spec, "profile": task["execution"].get("image_profile"),
-        "models": {name: {"class": type(model).__module__ + "." + type(model).__qualname__,
-                          "parameters": sum(p.numel() for p in model.parameters()),
-                          "parameter_shapes": {key: list(p.shape) for key, p in model.named_parameters()},
-                          "initial_state_sha256": state_digest(model.state_dict())}
-                   for name, model in (("generator", g), ("discriminator", d))}}
+    host_receipt = _host_receipt(spec, task["execution"].get("image_profile"), g, d)
     centers = templates(spec).to(device)
     data = context.streams.generator("data", component="target", purpose="training")
     def evaluate():

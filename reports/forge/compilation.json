@@ -2,7 +2,7 @@
   "automation_digest": "9a46e068cf8af8d6b55d227ffd9a1ab186bc2eba96f5eed93181f3f54233fb08",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "7eb9e082e30728eb5d058848b1c048723caae21745a049b83b67b4ba81ccc9d3",
+  "input_digest": "f35296ceaea5b336c11fb2ca364029a8196fc2545a3b8d43cc81bac9f90cd045",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -33,7 +33,7 @@
     "configs/forge/campaigns/implementation-pilot.json": "6f95fd3d8ffe877225be99529327d5fac5d8a775760c932fb76f0e0764a8acbf",
     "configs/forge/campaigns/onboarding-pilot.json": "c1e53dda99626833fcc4d0bbf8b1c32fd91f4abd880cb8fa310345080a72b6d6",
     "configs/forge/campaigns/smoke.json": "3b265e8554283bd9030b65bd02a76ca2b5dd949129e5cae81d4e11aa688f44ee",
-    "configs/forge/catalog.json": "1ec7b1d83194bbbbe99c543f5025593b7566f6ffafe781d21913b47a7bcbeb1c",
+    "configs/forge/catalog.json": "46c12b62da4613284a722084f452d19eb3cd15e53fdc9dc968737c4930079e4d",
     "configs/forge/defaults.json": "e5699dacce7222eb7a819944eabb796330fd59530a23e0506f941a389a8330a5",
     "configs/forge/ideas/forge-no-critic-penalty.json": "0960f66e997b3f576ba87355f1153d46a84b9e0c2dcf57fb8947a05bf777b618",
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "37602c6321190082490b398ea77c964cccfc19b71c5f869697fa991c33033bc0",
@@ -65,15 +65,21 @@
     "configs/forge/tasks/unipolar.json": "4d64bb431a03a83cfc8eb99a6874e015fb476b461de813b5cbb4ccad8f444589",
     "configs/forge/tasks/unused_token_hold.json": "9551affcd515da1c9eef9335ace56c95ded002612c5b871647e469cffa41539e",
     "configs/forge/tasks/vector_anisotropic.json": "98f09361b018da6b1694da0ffb93eca764c941db5a9085b55f4ad11e1cf189b9",
+    "configs/forge/tasks/vector_anisotropic_published.json": "d65d58c50ba6e0e670feb878d75c20fb3c44719cd0aa0cfcad54dd4a3f6459d3",
     "configs/forge/tasks/vector_overlap.json": "21c41f0fe309cc5ba9869fca34cddd57d5be5e69692f34f86bd76ef2ba7405b5",
+    "configs/forge/tasks/vector_overlap_published.json": "a4427d55af426b89050bc5197a783eea83b14ba62a43fbab3d03c350cb304827",
     "configs/forge/tasks/vector_spiral.json": "6eacc9f3e98d8e4c1927d542bef4d0352d18585e66e78ed328a8fe1eeb819798",
+    "configs/forge/tasks/vector_spiral_published.json": "066675dba7ffbc7874e2423f67c43f05b2593c2268e6d1b0b797a6a38c109591",
     "configs/forge/tasks/vector_two_broad.json": "e41a0826473806a0f57c378c84b47aa46753c071c2aef60ee0c727c8b75fe0b2",
+    "configs/forge/tasks/vector_two_broad_published.json": "cac936860eaf08adea0382110dac178ef9569c711e7e9df042e620c428ccef3a",
     "configs/forge/tasks/vector_unequal_mass.json": "84f7a51b2c979e4cfb886c918be36e49b82223355c2154f63869eedd16459169",
+    "configs/forge/tasks/vector_unequal_mass_published.json": "fe3964cd84ccf650f04f6c1e79b1e424ca39c0d53509800fef0af8506eda67e0",
     "configs/forge/tasks/vector_unequal_width.json": "dee5ddc9e513f88642eef46eb6541229e2f96ad88a1fd6bc7b39e645516f60b6",
+    "configs/forge/tasks/vector_unequal_width_published.json": "20e0385c2c65634eb0161da1b61b36311586f997477147f1fd6cf727f3f349ae",
     "configs/forge/views/adaptation.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
     "configs/forge/views/clockfree_continuous.json": "68935adac00a08890c798e193af48ab8bfdddf719e7c66f52aec2f36806b989d",
     "configs/forge/views/discriminator_stability.json": "58eab01167cc4baa904f485c5f917a2a36141756024d8dc4b03a14392f6ad639",
-    "configs/forge/views/host_profile_transfer.json": "10cbde69e087dd884042d00f2a339bbba04759dbf2486efeb68a4ad6512f9ee0",
+    "configs/forge/views/host_profile_transfer.json": "b3f2a17e52ce3beb42e80d886a270ba8e00bef8744ebdf30380f7d9e4edb9257",
     "configs/forge/views/quality_coverage.json": "b8739e334dc1f993a453ae72da2b0b90316a3cd794a0cec0e448438650d3d3c5",
     "reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/evidence.json": "691672ae0f38438fcd194ceae0d2f1e55b1bb2879c15dece6c6aea15aa2502d9",
     "reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/request.json": "eba5a0ac9172736ac3df37a2e80d78eda2d9e50c98cf188d18891ed7c30b611a",
@@ -181,7 +187,7 @@
     "reports/forge/calibration-lanes/develop-20260929-quick-baseline-v2/registration.json": "f9a4371065cafcee668103c9704471eb0f2e60d5d0dbc458beb6c1ec68dba99b",
     "reports/forge/calibration-lanes/image-profile-intensity-v1/registration.json": "f33e33a76fab721fde383dce87bacadf3c9fadaa00b58da6ba2b65009ae64a22",
     "reports/forge/history-sources.json": "c71655de9bcd7333b83ce1b5ed5b0d6bf21a0805fd9488cf5da5fba404e31d3b",
-    "reports/forge/import-gaps.json": "49e5d518276698c69ef99ca144e89bdb0fa5a4f2c4e79809e95fac2d99d1da71",
+    "reports/forge/import-gaps.json": "f7535005eb14d3f52371d96ad8e1a4511a855627162a7bbbee41bf4913236562",
     "reports/forge/records/history-cf1-bdpair-21ac56b45896.json": "ce6928aff230667ea4a1d5b33cca223f2792bb334e674a5e509ef999f0f3bc73",
     "reports/forge/records/history-cf1-bdpair-b282b5feff5c.json": "6f2e6be73ac1e7a62cbd4db1c842c6a4490b9e2854ddaa92281dac74aac14b43",
     "reports/forge/records/history-cf1-bdpair-e15258718c7c.json": "d60f73cf479cb806c29082e092a3c960a05ecee90d7dba564d9777f0002e372d",
@@ -372,14 +378,14 @@
     "reports/forge/records/readout-c723a88e5122f97011aabad9.json": "7afb9affa02f648be505384905ad339592a54b996df16d6e3bd1bcfa3b0d0745"
   },
   "inventory_coverage": {
-    "declared_count": 7281,
+    "declared_count": 7282,
     "missing": [],
     "stale": [],
-    "tracked_count": 7281,
+    "tracked_count": 7282,
     "unclassified": [],
     "valid": true
   },
-  "operational_lifecycle_digest": "9e5637db3e1afd0496f7ceff965388cf4fd84a7c91cf7b24a38f94bd717c3456",
+  "operational_lifecycle_digest": "1fd175adbe721aaa549668f30c49aba7fc762aeacf8fde513f7e1ed9c0c60c49",
   "pending_readout": [],
   "record_count": 188,
   "reducer_sha256": "50d34de38b2170160cf3722fc2c2955b61111cb2e91c19b72bad1b4111909090",
@@ -387,7 +393,7 @@
   "schema_version": 1,
   "scientific_normalization_complete": false,
   "scientific_source_digests": [
-    "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551"
+    "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed"
   ],
   "view_count": 5
 }

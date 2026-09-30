@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 30,
+      "forge_engine": 31,
       "report/behavioral_baseline": 32,
       "report/cifar-ddgan": 623,
       "report/cifar-particle-ae": 35,
@@ -93,7 +93,7 @@
       "candidate_patch": 2,
       "configuration": 802,
       "driver": 214,
-      "engine_support": 30,
+      "engine_support": 31,
       "evaluator_or_audit": 55,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -107,13 +107,13 @@
       "visualization": 15,
       "visualization_artifact": 290
     },
-    "files": 7281
+    "files": 7282
   },
   "coverage": {
-    "declared_count": 7281,
+    "declared_count": 7282,
     "missing": [],
     "stale": [],
-    "tracked_count": 7281,
+    "tracked_count": 7282,
     "unclassified": [],
     "valid": true
   },
@@ -6573,7 +6573,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "1399f2c04273a0e3581fe0851c972e75b8fe165a",
+      "git_blob": "423397573c4f180cd6867a510a713b43a0b15a16",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6685,7 +6685,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "4bd9b0036e99df2b35a465e44efcc9742202f962",
+      "git_blob": "da2206c84a093086694bfa2b65bee448f62501ca",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6743,6 +6743,13 @@
       "family": "forge_engine",
       "git_blob": "a65367033a5fa7d1b7b6fb56ef1a0dc63e9e329c",
       "path": "experiments/forge/telemetry.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "1c62aac5fcbbbb7e5a3b2dfad3c6dae88d2bbdc1",
+      "path": "experiments/forge/vectorprofiles.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

@@ -188,6 +188,15 @@ declarations. Receipts record the resolved card, actual parameter shapes/counts
 and initial model-state hashes. Architecture transfer does not import an archived
 positive or relax the fixed named-RNG comparison policy.
 
+The same diagnostic view includes six `vector_*_published` tasks. These bind
+the published critic cards through shared factories, including the public
+`BatchDistanceDiscriminator`. `vectorprofiles.task_from_profile` materializes
+architecture changes while preserving the original task's data, resources,
+learned MoG, named initialization and full-component gates. Both source
+declarations travel with frozen jobs, including the report containing the
+critic cards. The profile explicitly records that historical prior scale and
+draw order are not restored. Raw tasks keep their existing architectures.
+
 ## Tiers and views
 
 | Qualification tier | Initial stability profile | Purpose |

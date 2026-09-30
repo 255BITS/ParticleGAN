@@ -143,6 +143,39 @@ def test_another_view_reuses_identical_task_evidence_with_extra_evaluators(check
     assert stability["jobs"][0]["compatibility_key"] == quality["jobs"][0]["compatibility_key"]
 
 
+def test_published_host_sources_are_frozen_independently_of_selected_view(checkout):
+    from experiments.forge.sources import snapshot_source
+    from experiments.forge.vectorprofiles import PROFILE_SOURCES, LEADING_SOURCE, resolve_vector_spec
+    root = Path(__file__).resolve().parents[1]
+    for relative in PROFILE_SOURCES:
+        target = checkout / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((root / relative).read_bytes())
+    task = read_json(root / "configs/forge/tasks/vector_unequal_mass_published.json")
+    for relative in task["evaluation"]["sources"]:
+        target = checkout / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((root / relative).read_bytes())
+    atomic_json(checkout / f"configs/forge/tasks/{task['id']}.json", task)
+    path = checkout / "configs/forge/views/stability.json"
+    view = read_json(path)
+    atomic_json(checkout / "configs/forge/views/quality.json", {
+        **view, "id": "quality", "goal": "quality", "assignments": view["assignments"][:1]})
+    view["assignments"].append({"task": task["id"], "qualification_tier": 2,
+                                "importance": "diagnostic", "order": 1})
+    atomic_json(path, view)
+    stability = resolve_idea(checkout, "base", execution_backend="cpu")
+    quality = resolve_idea(checkout, "base", view_id="quality", execution_backend="cpu")
+    assert stability["source"]["files"][LEADING_SOURCE] == PROFILE_SOURCES[LEADING_SOURCE]
+    assert stability["candidate_revision"] == quality["candidate_revision"]
+    assert stability["jobs"][0]["compatibility_key"] == quality["jobs"][0]["compatibility_key"]
+    frozen = snapshot_source(checkout, checkout / "runs/forge", stability["source"])
+    assert resolve_vector_spec(stability["tasks"][task["id"]], root=frozen) == task["execution"]["host_definition"]
+    (checkout / LEADING_SOURCE).unlink()
+    missing = resolve_idea(checkout, "base", execution_backend="cpu")
+    assert missing["tasks"][task["id"]]["preflight_blockers"]
+
+
 def test_changed_prerequisite_invalidates_downstream_evidence_identity(checkout):
     for child, parent in (("t2", "t1"), ("t3", "t2")):
         path = checkout / f"configs/forge/tasks/{child}.json"

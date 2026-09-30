@@ -3378,13 +3378,13 @@
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
+      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "3d9c5bb00f754559901bba694c969a51d5c84d8159b8d39534ea1320e5518d2e",
+      "cohort": "edec7560c95d63e7ed2dfe57a5411b7b69b477f2a62c8544555db6f20b9ce0a6",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -4030,19 +4030,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
+      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "9e6074366cac517b9eb21a0bf7f96a0030e9df5a1e9cd2170e2b526bbe1ac7cd",
+      "cohort": "f2ed48bd385142a617c56e96d5124195f4abe198041a521315819de82345ecc2",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -4697,19 +4697,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
+      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "0c5750d76a4e7dc7ae9d1959d1ee062976a7ffed9be8ec01e5dff8bf291bf51c",
+      "cohort": "1beb4d566f7193134aaa96e4da86e9ff7c37aa2fb392fb06ffd9e36b4b88e8ba",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -5364,19 +5364,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
+      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "c2de8c1cc7b7a31805d5839c9f0dc16b39b1562c3e661b3f164636e2408ebefa",
+      "cohort": "8be1388c96d264a9f3be92a83afb267a2a28537ada9da6ca03580f8dc9c6b453",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -6022,19 +6022,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
+      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "18f51cca587de7f2b59e3c85bbea738886aecab500ce5b291404172ee1bac3b8",
+      "cohort": "327e0ed7b2063a0e18b978369b5072967d4d60718505cc925c520cf37ffec2b5",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -6653,14 +6653,7 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "07a1b804b5321d5bc74d92bb",
-          "status": "concluded"
-        }
-      ],
+      "queue_submissions": [],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -6696,19 +6689,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
+      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "475c24ed83303f6b82ae2bc1453d047b9c9e5679f14ae272ab559d12663a8ae7",
+      "cohort": "d7985916b8f41a142b62e1c30921bcc2ef40c9005cd787d08ac33d5f499723c9",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -7354,7 +7347,7 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     }
   ],
@@ -35222,10 +35215,10 @@
     ],
     "historical_import_complete": true,
     "inventory_coverage": {
-      "declared_count": 7281,
+      "declared_count": 7282,
       "missing": [],
       "stale": [],
-      "tracked_count": 7281,
+      "tracked_count": 7282,
       "unclassified": [],
       "valid": true
     },
@@ -36423,13 +36416,13 @@
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
+      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "3d9c5bb00f754559901bba694c969a51d5c84d8159b8d39534ea1320e5518d2e",
+      "cohort": "edec7560c95d63e7ed2dfe57a5411b7b69b477f2a62c8544555db6f20b9ce0a6",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -37075,19 +37068,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "3a71bf712f272688d6714cbdd0f85c6dbea1b0deddcb935040e2f16af40ea233",
+      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "9e6074366cac517b9eb21a0bf7f96a0030e9df5a1e9cd2170e2b526bbe1ac7cd",
+      "cohort": "f2ed48bd385142a617c56e96d5124195f4abe198041a521315819de82345ecc2",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -37742,19 +37735,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
+      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "0c5750d76a4e7dc7ae9d1959d1ee062976a7ffed9be8ec01e5dff8bf291bf51c",
+      "cohort": "1beb4d566f7193134aaa96e4da86e9ff7c37aa2fb392fb06ffd9e36b4b88e8ba",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -38409,19 +38402,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c76d07d9463d17e2071a2707390679180ae3f09e66242a0026ce5d9a591474ae",
+      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "c2de8c1cc7b7a31805d5839c9f0dc16b39b1562c3e661b3f164636e2408ebefa",
+      "cohort": "8be1388c96d264a9f3be92a83afb267a2a28537ada9da6ca03580f8dc9c6b453",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -39067,19 +39060,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
+      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "18f51cca587de7f2b59e3c85bbea738886aecab500ce5b291404172ee1bac3b8",
+      "cohort": "327e0ed7b2063a0e18b978369b5072967d4d60718505cc925c520cf37ffec2b5",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -39698,14 +39691,7 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [
-        {
-          "lifecycle": "concluded",
-          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
-          "request_id": "07a1b804b5321d5bc74d92bb",
-          "status": "concluded"
-        }
-      ],
+      "queue_submissions": [],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -39741,19 +39727,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591",
+      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "475c24ed83303f6b82ae2bc1453d047b9c9e5679f14ae272ab559d12663a8ae7",
+      "cohort": "d7985916b8f41a142b62e1c30921bcc2ef40c9005cd787d08ac33d5f499723c9",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -40399,7 +40385,7 @@
           "system": "Linux"
         }
       },
-      "source_digest": "79501bcf6ed352dd594f02ea55a356fa70db45f05e8e1d90d1c0e960d5a0e551",
+      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
       "status": "INCOMPLETE"
     },
     {

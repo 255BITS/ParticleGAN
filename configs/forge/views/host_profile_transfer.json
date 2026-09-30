@@ -149,6 +149,42 @@
       "order": 19,
       "qualification_tier": 2,
       "task": "img_intensity2_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 20,
+      "qualification_tier": 2,
+      "task": "vector_two_broad_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 21,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 22,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 23,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 24,
+      "qualification_tier": 2,
+      "task": "vector_overlap_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 25,
+      "qualification_tier": 2,
+      "task": "vector_spiral_published"
     }
   ],
   "calibration": {
@@ -158,12 +194,12 @@
   "eligibility": {},
   "goal": "host_profile_transfer",
   "id": "host_profile_transfer",
-  "policy_change_reason": "Opt-in architecture transfer study. Preserve the original stability assignments and add one explicit residual16 intensity diagnostic; unchanged defaults continue using the original views.",
+  "policy_change_reason": "Opt-in host architecture transfer study. Preserve original stability assignments and expose explicit published image/vector variants as diagnostics; default views retain their original hosts.",
   "ranking": {
     "compare_compatible_cohorts": true,
     "cost_separate": true,
     "policy": "qualified_tier_only_with_raw_metrics"
   },
-  "revision": 1,
+  "revision": 2,
   "schema_version": 1
 }

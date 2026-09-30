@@ -119,6 +119,17 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     for task in all_tasks.values():
         extra_sources.update(relative for relative in task["evaluation"].get("sources", {})
                              if (root / relative).is_file())
+        # Published architecture declarations can live outside the code roots.
+        # Capture the catalog's support set regardless of selected view. The
+        # selected task's preflight validates every hash and reports missing or
+        # malformed declarations as BLOCKED, before any worker is allocated.
+        from .vectorprofiles import profile_source_files
+        try:
+            profile_sources = profile_source_files(task)
+        except (KeyError, TypeError, ValueError):
+            profile_sources = {}
+        extra_sources.update(relative for relative in profile_sources
+                             if (root / relative).is_file())
     for task in tasks.values():
         for relative, digest in task["evaluation"].get("sources", {}).items():
             extra_sources.add(relative)
