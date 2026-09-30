@@ -2,6 +2,7 @@
 (reopen_signal="optimizer") and the KA2 anchor release (reopen_anchor="release"). The re-open fires on a target
 shift, the defaults keep E22 unchanged, and a checkpoint taken after a fire resumes bit-exactly."""
 import json
+import math
 import runpy
 from pathlib import Path
 
@@ -47,28 +48,30 @@ def test_r1_config_is_e22_plus_two_fields():
         _recipe(dict(E22, reopen_anchor="release"))
 
 
-def test_r1_fires_on_shift_and_resumes_exactly_after_the_fire(monkeypatch):
-    monkeypatch.setattr(particlegan.ka2, "WARMUP_CALLS", 20)  # the release acts on KA2's blended anchor
-    # This small CPU model never settles far enough for the native-host threshold (a 2x jump); the shift here
-    # lifts the ratio to ~1.8, so the threshold is lowered to exercise the fire, the latch and resume.
-    monkeypatch.setattr(OptimizerSurprise, "RISE", 1.5)
-    recipe = _recipe(R1)
-    reals = _reals(140, shift_at=80)
-    full = _trainer(recipe)
-    full_out = _run(full, reals)
-    surprise = full.policy.surprise
-    assert surprise.fires >= 1 and surprise.anchor_events >= 1
-    fire_step = surprise.log[0][0]
-    assert fire_step > 80
-    split = fire_step + 3
-    first = _trainer(recipe)
-    _run(first, reals[:split])
-    resumed = _trainer(recipe, seed=5)
-    resumed.load_state_dict(first.state_dict())
-    for a, b in zip(_run(resumed, reals[split:]), full_out[split:]):
-        for key in ("loss_d", "loss_g", "penalty"):
-            assert torch.equal(a[key], b[key]), key
-    assert resumed.policy.surprise.state_dict() == surprise.state_dict()
+def _feed(surprise, qs):
+    fired = []
+    for step, q in enumerate(qs):
+        surprise.pending = {"g": torch.tensor(q)}
+        if surprise.decide(step):
+            fired.append(step)
+    return fired
+
+
+def test_surprise_fires_on_a_jump_not_on_a_ramp_and_waits_after_a_fire():
+    K = OptimizerSurprise.K
+    settled = [1.] * 200
+    # A step change: q jumps 5x and stays. Fires once, K updates after the fast average passes RISE.
+    fired = _feed(OptimizerSurprise(), settled + [5.] * 100)
+    assert len(fired) == 1 and 200 + K < fired[0] <= 200 + 2 * K
+    # A slow ramp to the same level: the ratio creeps up for many windows before it crosses RISE.
+    ramp = [math.exp(math.log(5.) * min(1., i / 400)) for i in range(600)]
+    assert _feed(OptimizerSurprise(), settled + ramp) == []
+    # Two jumps 60 updates apart: the second lands inside the refractory horizon (8K) and does not fire;
+    # a jump after the horizon, from calm, does.
+    two = settled + [5.] * 30 + [1.] * 30 + [25.] * 60
+    assert len(_feed(OptimizerSurprise(), two)) == 1
+    later = settled + [5.] * 30 + [1.] * 300 + [25.] * 60
+    assert len(_feed(OptimizerSurprise(), later)) == 2
 
 
 ROUTED = runpy.run_path(str(Path(__file__).resolve().parents[1] / "examples" / "e22_routed_moving.py"))
@@ -89,3 +92,34 @@ def test_r1_routed_reopens_on_a_turn_and_recovers_faster():
     assert ROUTED["reopens"](e22_loop.policy) == 0 < ROUTED["reopens"](r1_loop.policy)
     assert r1_rmse[500] < e22_rmse[500] / 5
     assert r1[1] < e22[1]
+
+
+def test_r1_routed_resumes_exactly_after_a_fire(monkeypatch):
+    # KA2's warm-up is shortened so the anchor release latch is exercised before the turn.
+    monkeypatch.setattr(particlegan.ka2, "WARMUP_CALLS", 20)
+    paired = ROUTED["paired"]
+
+    def loop_until(steps, state=None):
+        loop = paired["make_loop"](recipe_overrides=ROUTED["R1_OVERRIDES"])
+        target = ROUTED["MovingTarget"](loop)
+        if state is not None:
+            paired["restore"](loop, state)
+            if loop.policy.completed_steps > 400:
+                target.turn_to(math.radians(30.))
+        outputs = []
+        while loop.policy.completed_steps < steps:
+            if loop.policy.completed_steps == 400:
+                target.turn_to(math.radians(30.))
+            outputs.append(paired["update"](loop))
+        return loop, outputs
+
+    full, full_out = loop_until(480)
+    surprise = full.policy.surprise
+    assert surprise.fires == 1 and surprise.anchor_events == 1
+    split = surprise.log[0][0] + 3
+    assert 400 < split < 480
+    first, _ = loop_until(split)
+    state = paired["checkpoint"](first)
+    resumed, resumed_out = loop_until(480, state)
+    assert [(o["loss_d"], o["loss_g"]) for o in resumed_out] == [(o["loss_d"], o["loss_g"]) for o in full_out[split:]]
+    assert resumed.policy.surprise.state_dict() == surprise.state_dict()

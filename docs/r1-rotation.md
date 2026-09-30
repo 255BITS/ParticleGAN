@@ -40,7 +40,11 @@ identical to E22's (grid .98485, rotated .98575, staggered .98265).
   log q is compared with a slow level that is frozen while the game is surprised. When the geometric mean of fast /
   slow over groups stays above 2 for 12 consecutive updates, it fires once: every stationarity ladder re-opens
   (`restart(reopen=True)`) and each group's second moment (and AMSGrad maximum) is divided by that group's ratio
-  squared, so its steps grow by the ratio. The detector re-arms when the ratio falls below 1.25.
+  squared, so its steps grow by the ratio. Only an abrupt rise counts: the ratio must cross 2 within 24 updates
+  (2K) of its last calm update (below 1.25). A slow ramp is the game's own evolution: on the harness's
+  vector_overlap gate, KA2 leaving its warm-up lifts the ratio to 2.5 over ~80 updates, and a fire there failed the
+  gate (18/24; 20/24 without it). Real target shifts cross within 2-13 updates. After a fire the detector waits one
+  slow horizon (96 updates, 8K) and for calm before it re-arms, so its own re-open cannot trigger the next one.
 - **`reopen_anchor: "release"`** (requires `reopen_signal: "optimizer"`). A fire counts as drift evidence for KA2
   until KA2's own surprise ratio has gone above 3 and back below 1.75 (KA2's existing release levels). While it
   holds, KA2's native rules release the anchor, let the EMA critic track and reseed it. On the native host the

@@ -916,8 +916,12 @@ class OptimizerSurprise:
     against a slow level. The slow level follows q only while the game is calm (ratio <
     CALM), so a jump is measured against the level before it. The step's ratio is the
     geometric mean over groups of fast / slow. RISE held for K consecutive updates fires one
-    re-open; the detector then re-seeds its level and stays disarmed until the ratio falls
-    back below CALM (hysteresis). No data statistic, no clock: ratios and counts only.
+    re-open. Only an abrupt rise counts: the excursion must cross RISE within 2K updates of
+    the last calm update; a slow ramp is the game's own evolution (e.g. KA2 leaving its
+    warm-up), not a moved target. After a fire the detector re-seeds its level and stays
+    disarmed for one slow horizon (8K updates) and until the ratio is back below CALM, so its
+    own re-open cannot trigger the next one. No data statistic, no clock: ratios and counts
+    of the detector's own updates only.
     """
 
     K = 12
@@ -930,6 +934,8 @@ class OptimizerSurprise:
         self.armed = True
         self.streak = 0
         self.fires = 0
+        self.since_calm = 0
+        self.since_fire = None
         self.last_ratio = None
         self.last_ratios = {}
         self.log = []
@@ -982,23 +988,28 @@ class OptimizerSurprise:
         self.last_ratio = ratio
         self.last_ratios = {key: math.exp(value) for key, value in zip(keys, logs)}
         calm = ratio < self.CALM
+        self.since_calm = 0 if calm else self.since_calm + 1
+        if self.since_fire is not None:
+            self.since_fire += 1
         if calm or not self.armed:
             for key, value in zip(keys, values):
                 self.slow[key] += (value - self.slow[key]) / (8 * self.K)
         fire = False
         if self.armed:
-            self.streak = self.streak + 1 if ratio > self.RISE else 0
+            abrupt = self.streak > 0 or self.since_calm <= 2 * self.K
+            self.streak = self.streak + 1 if ratio > self.RISE and abrupt else 0
             if self.streak >= self.K:
                 fire = True
                 self.fires += 1
                 self.armed = False
                 self.streak = 0
+                self.since_fire = 0
                 # The re-open rescales each group's second moment by 1/r^2, which by itself lifts that
                 # group's q by r: the new reference level includes the detector's own action.
                 for key, value in zip(keys, logs):
                     self.slow[key] = self.fast[key] + max(0., value)
                 self.log = (self.log + [[step, round(ratio, 3)]])[-8:]
-        elif calm:
+        elif calm and self.since_fire >= 8 * self.K:
             self.armed = True
         return fire
 
