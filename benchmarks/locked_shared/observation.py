@@ -9,8 +9,27 @@ import torch
 from particlegan import learning_rate_scale
 
 _active = ContextVar("behavior_observer", default=None)
+_ring_listener = None
 OBSERVATIONS = 24
 MIN_STABLE_CHECKS = 5
+
+
+def set_ring_listener(fn):
+    """Optional observer for an already-scheduled ring/HQ check. No new measurement."""
+    global _ring_listener
+    previous = _ring_listener
+    _ring_listener = fn
+    return previous
+
+
+def ring_listener():
+    return _ring_listener
+
+
+def notify_ring(step, modes, hq):
+    fn = _ring_listener
+    if fn is not None and modes is not None and hq is not None:
+        fn(step, modes, hq)
 
 
 def sustained(curve, requirements, *, expected_steps, minimum=MIN_STABLE_CHECKS):
@@ -66,6 +85,8 @@ class Recorder:
         with torch.random.fork_rng(devices=[]):
             values = measure()
         self.curve.append({**values, "step": step, "seconds": time.monotonic() - self.started})
+        if "modes" in values and "hq" in values:
+            notify_ring(step, values["modes"], values["hq"])
 
 
 @contextmanager

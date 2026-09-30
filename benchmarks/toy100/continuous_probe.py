@@ -42,6 +42,7 @@ import torch
 
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline, mode_hold
+from benchmarks.locked_shared.observation import notify_ring
 from benchmarks.smart_descent import evaluate
 from benchmarks.transfer_suite import suite, vector_tasks
 from benchmarks.transfer_suite.compare_defaults import candidate, optimizer_defaults
@@ -245,6 +246,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                 point = {"step": step, **{key: measured[key] for key in
                          ("modes", "hq", "effective_modes", "hq_counts")}}
             diagnostic.append(point)
+            notify_ring(step, point["modes"], point["hq"])
             if log is not None:
                 log({"event": "checkpoint", **point})
         if step == shift_step:
