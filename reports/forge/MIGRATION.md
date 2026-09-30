@@ -1,13 +1,16 @@
 # ParticleGAN Forge migration
 
-Implementation is in progress on `codex/tiered-experiment-qualification`, based
+Framework implementation is complete on `codex/tiered-experiment-qualification`, based
 on `develop`, in [PR #221](https://github.com/255BITS/ParticleGAN/pull/221).
 The [accepted plan](../../docs/better-experiment-automation-plan-2026-09-28.md)
-defines acceptance; this status file does not narrow its scope.
+records the user's 2026-09-30 scope clarification: set up the framework while
+upstream research continues. The
+[final readiness audit](FRAMEWORK_READINESS_AUDIT.md) verifies delivery; scientific
+calibration and production promotion remain future work.
 
 ## Current checkpoint
 
-Develop `a8b9d397` is merged; [CI at `077f9b20`](https://github.com/255BITS/ParticleGAN/actions/runs/36674097253)
+Develop `a8b9d397` is merged; [CI at `99cf096f`](https://github.com/255BITS/ParticleGAN/actions/runs/36677816874)
 passes 1,807 tests and 18 subtests, including the concluded diagnostic receipts.
 The engine, root guide and physical two-GPU pilot are implemented and verified.
 Current scientific calibration has one correctly rejected negative, no complete
@@ -26,8 +29,9 @@ The separately registered [A2-off probe](A2_OFF_NATIVE_READOUT.md) also failed
 for 85.368 seconds, worsening coverage and mass/shape accuracy; its control was
 reused. The engine recorded a useful negative without a control rerun or a sweep.
 The [current independent audit](CURRENT_IMPLEMENTATION_AUDIT.md) closes the
-original software findings with code, test and artifact evidence. It retains
-scientific calibration and conditional adoption as the remaining requirements.
+original software findings with code, test and artifact evidence. Its scientific
+calibration and conditional adoption requirements remain intact for future
+research; they are separate from delivering the framework.
 The [wider reference-source audit](POSITIVE_REFERENCE_SOURCE_AUDIT.md) found no
 compatible full-reference positive. Its discovered legacy MoG envelope study is
 now preserved in [supplemental context](supplemental/local-mog-envelope-v1/README.md)
@@ -48,8 +52,9 @@ and card hashes/scoring contracts were independently verified. This is prior
 art, with no current MoG qualification or full-study cost inferred.
 The [current follow-up evidence audit](calibration/pr155-current-followup-source-audit.md)
 still leaves all three original experimental claims unbound; a later written
-sensitivity assertion is separate evidence. Exact source/archive locations have
-been requested. The [incoming API checklist](UPSTREAM_E22_COMPATIBILITY.md)
+sensitivity assertion is separate evidence. The user confirms that this research
+is still developing; its original receipts can be imported when available. The
+[incoming API checklist](UPSTREAM_E22_COMPATIBILITY.md)
 records future E22/KA2 integration requirements; no incoming code was merged and
 current scientific source remains `5c9c9298`.
 
@@ -251,23 +256,24 @@ This is an observation, not a capacity reservation. No process was stopped and
 no old queue ownership was changed. Recheck before the pilot; reserve capacity
 outside active pools and retain existing experiment requests.
 
-## Progress
+## Framework completion and future adoption
 
 | Work | State | Evidence |
 | --- | --- | --- |
 | Freeze source revisions / branch / PR | Complete | PR #221 open, base `develop`; pins above |
-| Shared file contracts and source snapshots | Implemented, under integration review | `experiments/forge/contracts.py`, `sources.py`; mutation/reuse tests |
-| History mapping and source coverage | Complete classification at checkpoint `3a3ef24a` | 7,252 scoped paths; 174 cards, 112 scientific and 62 family-context; pinned #155 included |
+| Shared file contracts and source snapshots | Implemented and reviewed | `experiments/forge/contracts.py`, `sources.py`; mutation/reuse tests |
+| History mapping and source coverage | Complete for declared scope | 7,285/7,285 scoped paths; 231 compiled records, zero conflicts/pending readouts; pinned #155 and supplemental archives included |
 | MoG public API, capabilities, paired RNG | Implemented and tested | Public trainer/prior/A2, named component streams, checkpoint parity |
 | Task definitions / tier views / independent graders | Implemented and tested | 45 tasks, five views including opt-in host-profile diagnostics; no active monotonicity gate |
-| Queue, adapters, compiler, CLI and root guide | Real CPU execution and resource enforcement verified | Real process-group tests, atomic CPU/RAM reservations; final integration checks recorded below |
+| Queue, adapters, compiler, CLI and root guide | Implemented and operationally verified | Process-group/resource tests, physical two-GPU pilot, fresh-checkout walkthrough and final readiness audit |
 | Clock audit, paired adaptation and native continuation | Implemented; bounded state/protocol verification | Saved state manifests, measured optimizer counters, exact prefix/restore/RNG comparison; `CONTINUATION_REVIEW.md` |
 | Administrative lifecycle and display filters | Implemented and tested | Immutable abandon/supersede receipts; explicit cancellation repair; family/provenance filters preserve full qualification |
 | Automation telemetry | Implemented; historical missing measurements remain unavailable | Unique paid costs, avoided work/reuse/errors/concurrency; process RSS, CUDA allocator peaks and instrumented phase timing |
 | Calibration diagnostics and robustness registration | Implemented; no production adoption claim | Registered diagnostic namespace, report-bound calibration, fixed promotion contract and forgery/retry tests |
-| Phase D calibration / bounded multi-GPU pilot | Historical calibration replayed; physical v3 pilot passed | Current calibration remains blocked; full reference evidence still required |
-| Root-guide onboarding | Fresh-checkout walkthrough complete | `FRESH_CHECKOUT.md`; penalty ablation rejected after 7.371 seconds, all remaining tasks unlaunched, concluded readout and zero reservations |
-| Cutover | Pending accepted calibration and legacy reconciliation | Existing launchers retained; physical pilot passed |
+| Physical multi-GPU pilot | Complete | `PHYSICAL_GPU_PILOT_READOUT.md`; overlap, deduplication, recovery, cancellation/repair, retiering, zero final reservations |
+| Root-guide onboarding | Complete | `FRESH_CHECKOUT.md`; corrected-source walkthrough rejected after 4.800435 seconds, later tasks unlaunched, concluded readout and zero reservations |
+| Scientific calibration | Future research | Machinery implemented; current profiles remain provisional and require a new justified screen/full reference evidence |
+| Default adoption / actual consumer cutover | Future adoption decision | Twelve retained consumer dispositions cover 22 trainer entrypoints; no covered pending local transfer identified |
 
 No candidate is promoted by implementing the engine or by passing its tests.
 
@@ -293,7 +299,7 @@ do not interpret it as a blanket rejection of historical K3P evidence.
 Logs: `runs/forge/implementation-pilot/events.jsonl`. Durable evidence:
 [`attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json`](attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json).
 
-## Onboarding and remaining adoption work
+## Completed onboarding and future research/adoption TODOs
 
 The independent [onboarding walkthrough](ONBOARDING.md) used the documented
 scaffold/plan/enqueue/drain/logs/board/readout/compile path for an anchor ablation.
@@ -348,7 +354,7 @@ training on GPU 1. No application ownership was transferred.
 ## Archived pre-develop validation checkpoints
 
 These observations predate the develop integration and completed physical pilot.
-The current evidence and remaining acceptance are stated at the top of this file.
+Current framework completion and future scientific work are stated at the top of this file.
 
 Final software freeze: **441 tests passed** (all Forge tests plus public recipe
 defaults), including lifecycle, family filters and telemetry. The two warnings

@@ -2,14 +2,18 @@
 
 ## Current status — 2026-09-30 UTC
 
-The [current independent implementation audit](CURRENT_IMPLEMENTATION_AUDIT.md)
-supersedes the original defect matrix below. Shared adapters, calibration
+The [final framework readiness audit](FRAMEWORK_READINESS_AUDIT.md) verifies
+completion under the user's 2026-09-30 clarification: deliver the framework;
+upstream research is still developing. The
+[independent implementation audit](CURRENT_IMPLEMENTATION_AUDIT.md)
+and final readiness audit supersede the original defect matrix below. Shared
+adapters, calibration
 ingestion, evidence-bound promotion, lifecycle, filters and telemetry are
 implemented. The physical two-GPU pilot and fresh-checkout workflow passed;
 their artifact hashes were independently verified. No demonstrated initial-scope
 software gap remains in that review.
 
-The overall accepted plan remains incomplete: scientific calibration lacks a
+**Framework delivery is complete.** Future scientific calibration lacks a
 compatible full-positive reference and complete pairing/cost evidence. The
 [completed two-control screen](CONTROL_MODE_READOUT.md) establishes that all
 three current-profile lineages fail smoke; that exact profile cannot meet the

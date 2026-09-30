@@ -11,22 +11,25 @@ defines the migration and adoption criteria.
 
 ## Readiness and scope
 
-The engine is implemented. [Full CI](https://github.com/255BITS/ParticleGAN/actions/runs/36674097253)
+**The framework is ready to use.** The
+[final readiness audit](reports/forge/FRAMEWORK_READINESS_AUDIT.md) verifies the
+requested engineering scope. [Full CI](https://github.com/255BITS/ParticleGAN/actions/runs/36677816874)
 passed 1,807 tests and 18 subtests; the [physical two-GPU pilot](reports/forge/PHYSICAL_GPU_PILOT_READOUT.md)
 and [fresh-checkout walkthrough](reports/forge/FRESH_CHECKOUT.md) verified the
 queue, recovery, cancellation, reuse, logs and readout workflow. Use the public
 API and learned MoG defaults; particle-cloud exceptions must be explicit in the
 task. Do not run seed-only experiments.
 
-**Default adoption remains blocked by scientific calibration.** The
-[current control readout](reports/forge/CONTROL_MODE_READOUT.md) records 7/57
+**Screening profiles remain provisional; scientific default adoption requires
+calibration.** Framework delivery does not require finding a winning formulation.
+The [current control readout](reports/forge/CONTROL_MODE_READOUT.md) records 7/57
 measured cells, 50 unknown, one true rejection and no complete positive reference.
 All three declared lineages fail smoke, so this exact profile cannot meet both
 the frozen positive-reference minimum and zero false rejections. Stop filling it
 solely for adoption. A new justified screen/profile and its bounded calibration
 are required; the controls' independent references and false-reject rate remain
 unknown. [Migration status](reports/forge/MIGRATION.md) retains the earlier
-studies, metrics, costs, source cohorts and outstanding acceptance work.
+studies, metrics, costs, source cohorts and future research/adoption work.
 
 Task declarations describe intended coverage. Preflight and execution check the
 public API, formulation, host and frozen source; unsupported capabilities remain
@@ -45,7 +48,8 @@ failed ideas, host refusals and OOM attempts in the compiled memory. The
 [newer #155 audit](reports/forge/calibration/pr155-current-followup-source-audit.md)
 still leaves the exact dt075 14k, EMA .995 D-tracking and centre-sensitivity
 experimental receipts [unbound](reports/forge/import-gaps.json); a later written
-sensitivity assertion is separately preserved.
+sensitivity assertion is separately preserved. That research is still developing;
+import its receipts when available using the existing framework.
 
 Incoming E22/KA2 changes the public API and model of record. Its inspected
 positives use particle clouds and noisy state-selected serving. Follow the

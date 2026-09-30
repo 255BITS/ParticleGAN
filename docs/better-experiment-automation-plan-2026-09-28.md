@@ -3,13 +3,22 @@
 **ParticleGAN Forge** turns new ideas into comparable evidence through cheap gates,
 shared leaderboards, and a memory of what the project has already tried.
 
-Date: 2026-09-28. Status: implementation plan. Initial inventory: `92dc0319`;
+Date: 2026-09-28. Status: framework complete as of 2026-09-30; scientific
+profiles remain provisional. Initial inventory: `92dc0319`;
 required additional source: PR #155 at `0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b`.
 
 Implementation uses the existing **`codex/tiered-experiment-qualification`**
 feature branch, based on **`develop`**, and
 [PR #221](https://github.com/255BITS/ParticleGAN/pull/221). Keep the plan and all
 Forge implementation in this single branch/PR, using incremental commits.
+
+**Delivery scope, clarified 2026-09-30:** build the framework for proposing,
+queuing, running and comparing ideas. The upstream research is still developing;
+finding an accepted screening profile or a production formulation is future
+work. The [final framework audit](../reports/forge/FRAMEWORK_READINESS_AUDIT.md)
+verifies this delivery. Calibration, endurance and public-default promotion
+requirements below remain scientific gates for future candidates, not unfinished
+engine implementation.
 
 ## Goal and decisions
 
@@ -823,7 +832,9 @@ release, EMA .995 D-tracking 3/3, and sub-0.03σ centre-error sensitivity. Their
 exact later receipts must be bound during import: these particular claims were
 not located in the pinned #155 snapshot. Preserve them as review-supplied evidence
 and unresolved import items, not as results of a nearby similarly named package.
-They remain explicit requirements for calibration and scoring-policy review.
+They remain explicit requirements for a future calibration or scoring-policy
+review that uses those claims. The user confirms that this research is still in
+development; the framework must support later imports without inventing receipts.
 
 Use these and other archived positive/negative references to calibrate gate
 selection. Estimate how often an early rejection would hide a later useful
@@ -837,15 +848,15 @@ the same protocol. They can motivate a future protocol revision. Do not silently
 turn every rejection into a full-suite run. A gate is a compute-saving heuristic,
 not proof of production readiness or a reason to stop improving the test suite.
 
-## 9. Implementation sequence and acceptance criteria
+## 9. Framework delivery and future adoption
 
 | Phase | Deliverable | Acceptance criteria |
 | --- | --- | --- |
 | **A. Inventory and history** | Machine-readable catalog, mapped experiment cards, initial compiled memory | Cover initial sources and the pinned #155 LR-free tree, including frozen fixtures/package hashes; later unbound claims remain explicit import gaps; compilation needs no GPU |
 | **B. Shared API, lifecycle and views** | Thin public-API integration, central extension contract, learned-MoG defaults, schemas, scaffolding, reducer and read-only commands | One API across ideas/tasks; explicit cloud exceptions and capability blockers; config-only retiering reuses evidence; future monotonicity remains inactive |
 | **C. Queue and gated execution** | Shared MoG-capable public training path; adapt existing runner and #155 pool/submit/ledger contracts; provisional smoke profile, queue, multi-GPU drain, logs | MoG sampling/update/checkpoint parity; no copied experiment loops; required failures/blockers prevent later tiers; deduplicated execution and complete receipts |
-| **D. Calibrate and pilot — adoption blocker** | Replay #155 lineages and a bounded set of missing reference comparisons | Publish per-lineage smoke/reference matrix, false accepts/rejects, unknown/blocked denominators, cost and frozen criteria; insufficient evidence or unacceptable screen performance blocks Phase E; no screening seed sweeps |
-| **E. Adopt and expand** | Root experimentation guide, agent entrypoints, migrations, domain views and public-default robustness contract | A new engineer/agent can follow the guide without chat history; one small declaration joins comparisons; outcomes update memory; public-default claims require the registered robustness stage |
+| **D. Calibration machinery and operational pilot** | Historical replay, bounded diagnostic registrations, report-bound calibration and a physical multi-GPU pilot | Preserve smoke/reference matrices, false accepts/rejects, unknown/blocked denominators and costs; verify cancellation, recovery, deduplication and retiering. Finding a scientifically accepted profile remains a future adoption prerequisite; no screening seed sweeps |
+| **E. Agent workflow and migration support** | Root experimentation guide, agent entrypoints, consumer dispositions, domain views and public-default robustness contract | A new engineer/agent can follow the guide without chat history; one small declaration joins comparisons; outcomes update memory. Future ownership transfers preserve requests/rollback; public-default claims require a finished candidate and registered robustness stage |
 
 Implementation should include meaningful tests for:
 
@@ -913,12 +924,12 @@ the repository has ever accumulated.
 
 ## 10. Migration checklist and subagent workflow
 
-Checked items have implementation evidence in
-[the migration status](../reports/forge/MIGRATION.md); unchecked items remain
-acceptance work. The software checkpoint does not claim accepted calibration or
-default adoption. Start with repository changes and saved
-evidence; reserve training for the bounded calibration/pilot stage. Keep existing
-running experiments and historical evidence intact throughout the transition.
+The framework checklist is complete, with implementation evidence in
+[the migration status](../reports/forge/MIGRATION.md) and
+[final readiness audit](../reports/forge/FRAMEWORK_READINESS_AUDIT.md). The
+separate future-research checklist retains scientific calibration and adoption
+work; none is claimed complete by delivering the engine. Keep existing running
+experiments and historical evidence intact throughout any later transition.
 
 Continue in `codex/tiered-experiment-qualification`, branched from `develop`,
 with PR #221 as the sole implementation PR. Refresh against `develop` as needed
@@ -927,7 +938,7 @@ in this same implementation worktree; the coordinator owns commits, integration
 and pushes. The experiment engine may support independent idea worktrees, but
 building Forge itself stays in this one feature branch/PR.
 
-### Migration TODOs
+### Framework migration checklist — complete
 
 - [x] **Freeze the migration inputs.** Confirm the existing feature branch/PR
   targets `develop`; pin the package baseline, #155 source
@@ -963,43 +974,48 @@ building Forge itself stays in this one feature branch/PR.
   submit/pool/ledger behavior to the shared request/receipt contract. Add atomic
   ownership/budget claims, worker recovery, central logs and durable results.
   Verify with fake workers before using GPUs.
-- [ ] **Calibrate the gates.** Complete the Phase D #155 replay and missing fixed-
-  fixture comparisons, explicitly separating historical cloud replay from new MoG
-  qualification. Publish false accepts/rejects, blockers, cost and continuation
-  findings. Meet frozen adoption criteria or revise the profile and repeat the
-  necessary calibration; do not carry cloud passes over to a MoG conversion.
-  The [current control readout](../reports/forge/CONTROL_MODE_READOUT.md) records
-  all three current-profile lineages failing smoke. That exact profile cannot
-  satisfy its positive-reference and zero-false-rejection criteria together;
-  a new justified profile is required before further adoption calibration.
-- [ ] **Pilot and cut over.** Run a bounded candidate/reference campaign through
+- [x] **Build calibration and promotion machinery.** Replay bound historical
+  evidence, register bounded diagnostic lanes and bind acceptance to frozen
+  criteria and compatible receipts. Keep unknown/blocked outcomes and costs
+  visible. Implement the fixed finished-candidate robustness contract; candidate
+  success and robustness execution belong to future research.
+- [x] **Verify physical multi-GPU operation.** Run a bounded campaign through
   multi-GPU draining; test cancellation, restart, retiering and memory updates.
   The [physical v3 pilot](../reports/forge/PHYSICAL_GPU_PILOT_READOUT.md) completed
-  these operational checks; default cutover remains conditional on calibration.
-  First reserve pilot GPUs outside legacy pools' device allowances, or establish
-  one shared resource owner; deduplicating requests alone cannot prevent two
-  schedulers from oversubscribing the same GPU. Wait for capacity if necessary.
-  Stop new claims in an old queue and drain/reconcile its jobs before Forge owns
-  those requests. Import pending work with deduplication; never let both schedulers
-  independently launch it. Keep a rollback route using preserved requests/receipts.
+  these operational checks with explicit resource ownership and preserved receipts.
 - [x] **Publish the root guide and entrypoints.** Write `EXPERIMENTATION.md` with
   a read-first agent brief, working quickstart, command examples, extension paths,
   and result/readout requirements. Add prominent pointers in root `AGENTS.md` and
   `README.md`; other agent-specific files should link to the same guide. Validate
   the fresh-checkout walkthrough and make implementation readiness explicit.
-- [ ] **Adopt the agent workflow.** Have new engineers/agents follow the root
+- [x] **Verify the agent workflow and consumer dispositions.** Have new
+  engineers/agents follow the root
   guide to read memory, add an idea, run it within budget, and record its outcome.
   The [fresh-checkout walkthrough](../reports/forge/FRESH_CHECKOUT.md) passed;
   the [consumer dispositions](../reports/forge/legacy-consumers.json) retain
-  uncovered domains and historical replay. Default adoption remains outstanding.
-  Make Forge the default route for new ideas. Retire duplicated
-  active launchers only after their covered behavior and consumers are migrated.
-- [ ] **Record the promotion contract before a default claim.** Freeze the
-  scoring policy and preregistered robustness stage. Neither an engine
-  migration nor a successful queue pilot promotes a formulation automatically.
-  Contract/registration machinery and the template are implemented and tested.
-  A candidate-specific stage is conditional on a finished qualified candidate;
-  no robustness seed runs are required merely to verify the engine.
+  uncovered domains and historical replay. No covered pending local request needs
+  transfer. Default scientific adoption remains a separate decision.
+
+### Future research and adoption TODOs — outside framework delivery
+
+- [ ] **Calibrate a useful screening profile.** Complete the required fixed-fixture
+  references under a justified protocol, separating historical clouds from current
+  MoG qualification. Publish false accepts/rejects, blockers, costs and continuation
+  findings. The [current control readout](../reports/forge/CONTROL_MODE_READOUT.md)
+  shows all three lineages failing smoke; this exact profile cannot meet both its
+  positive-reference minimum and zero false rejections. Declare a new profile
+  rather than filling this one solely for adoption.
+- [ ] **Import ongoing research when available.** Bind exact upstream receipts and
+  public API changes before using them in calibration or scoring-policy conclusions.
+  Keep unavailable claims explicit; historical passes retain their original law.
+- [ ] **Adopt a calibrated default workflow and transfer actual consumers.**
+  Reserve resources under one owner; reconcile pending requests before transferring
+  them from an old scheduler. Preserve rollback receipts. Retire duplicated active
+  launchers only after their covered behavior and consumers are migrated.
+- [ ] **Qualify a production candidate.** Pass its declared quality/endurance gates,
+  freeze scoring and preregister robustness before a public-default claim. Run only
+  the finished candidate's declared seed set; framework completion creates no
+  promotion claim or need for speculative seed runs.
 
 ### Parallel work, with explicit handoffs
 
@@ -1016,8 +1032,8 @@ boards/history or each other's source files.
 | 0 — coordinator | Pin inputs, define contracts/path ownership and plan the bounded calibration budget | All agents have the same schema/API assumptions and immutable input refs |
 | 1 — foundations | **History:** catalog/importers and normalized cards. **API:** public MoG/formulation support, central context/bindings and parity checks. **Views:** task declarations, tier config and reducer contracts | Schemas align; MoG/cloud support and capability blockers are explicit; history gaps are recorded |
 | 2 — integration | **Adapters:** port initial task families using the shared public API. **Execution:** queue/drain/resources/recovery/logging. **Knowledge:** compiler, boards, recall, scaffolding and root guide draft | Representative requests produce compatible receipts end to end; fake-worker tests pass; no divergent training implementations |
-| 3 — verification | Independent review of parity/RNG/checkpoints; review import fidelity/retiering; coordinator reserves GPU capacity and runs the declared bounded calibration/pilot | Phase D adoption criteria pass; metrics, costs, failures/blockers and recommendations are published |
-| 4 — cutover | Coordinator reconciles old queues and enables the workflow; agents finish root guide/entrypoint links and migrations in owned areas | New engineer/agent completes the documented workflow; one owner per request; historical evidence preserved; rollback documented |
+| 3 — verification | Independent review of parity/RNG/checkpoints, import fidelity and retiering; coordinator runs the bounded physical pilot and verifies calibration/promotion machinery | Framework checks and pilot pass; metrics, costs, failures/blockers and recommendations are published; scientific profiles remain provisional |
+| 4 — onboarding | Coordinator records consumer dispositions; agents finish root guide/entrypoint links and scoped migrations | New engineer/agent completes the documented workflow; historical evidence preserved; future handoff/rollback requirements documented |
 
 Commit small dependency-ordered changes to the same feature branch and PR.
 Task adapters consume the agreed API; if a formulation needs a new variable,

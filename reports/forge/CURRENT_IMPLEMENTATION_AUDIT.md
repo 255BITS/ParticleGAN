@@ -1,5 +1,14 @@
 # Forge current implementation audit — 2026-09-30 UTC
 
+**Scope update:** the user clarified on 2026-09-30 that this task delivers the
+framework; upstream research remains in development. The subsequent
+[final framework readiness audit](FRAMEWORK_READINESS_AUDIT.md) verifies that
+delivery is complete. The scientific calibration and adoption findings below
+remain future work, with their safeguards intact. This earlier inspection and
+its dated checkpoints remain part of the audit trail.
+
+## Earlier inspection and dated follow-ups
+
 The current implementation closes the concrete Phase A/B/C software findings in the original `reports/forge/COMPLETION_AUDIT.md`, and the Phase E workflow and promotion machinery are present. I found no remaining missing initial-scope runtime adapter or other demonstrated implementation defect in this review. **Phase D calibration and subsequent default adoption remain incomplete.** A successful engine, operational pilot, or isolated scientific task is not an accepted screen or production-quality GAN.
 
 Scope: read-only inspection of the accepted plan, current source, declarations, tests and saved receipts in `/home/martyn/dev/ParticleGAN-experiment-tiers`. No tests, training, queue operations or Git commands were run. Test names below identify inspected regression coverage, not new test executions. The guide records the joined-source CI result of 1,807 tests and 18 subtests. I independently checked all 25 physical-pilot witness file hashes and the corrected fresh-checkout readout byte hash; all matched.
