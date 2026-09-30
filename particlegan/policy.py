@@ -248,6 +248,10 @@ class UpdatePolicy:
     route the current bank, then decode mixed codes; DV12 perturbs the mixed
     codes after routing. ``routed_generate(context, sigma=0, perturb=False)``
     and ``served_model().routed_forward(context)`` provide clean forwards.
+    A complete ``model_forward`` callback can use ordered named routing
+    sites, with DV12 draws applied to each site's mixed token codes. With
+    both row controls disabled, a fixed frozen bank needs no ``RoutedBatch``
+    observations, gradient evidence or counterfactual probes.
     Conditional loops with row controls disabled can use ``UpdatePolicy``
     without a routed row contract.
     """
@@ -276,12 +280,16 @@ class UpdatePolicy:
         if not table.is_floating_point():
             raise ValueError("table must use a floating dtype")
         self.row_policy = getattr(recipe, "row_policy", "independent")
+        self._routed_controls_enabled = recipe.row_evidence_gate or recipe.particle_birth_death
         if self.row_policy == "routed_paired":
             if routed_rows is None:
                 raise ValueError("row_policy='routed_paired' requires an explicit RoutedRows contract")
             from .routing import RoutedRows
             if not isinstance(routed_rows, RoutedRows):
                 raise TypeError("routed_rows must be a RoutedRows contract")
+            if self._routed_controls_enabled and not table.requires_grad:
+                raise ValueError("routed row evidence and birth/death require a trainable particle table; "
+                                 "a frozen table requires both row controls disabled")
             if row_semantics == "independent":
                 row_semantics = "dense_soft"
         elif routed_rows is not None:
@@ -358,7 +366,8 @@ class UpdatePolicy:
                 models=self._training_modules(), averaged_models=self._average_modules(),
                 table=table, averaged_table=self.averaged_table, optimizers=self.optimizers,
                 table_optimizer=self.table_optimizer, seed=seed + 6,
-                completed_steps=lambda: self.completed_steps, controller=self.controller)
+                completed_steps=lambda: self.completed_steps, controller=self.controller,
+                allow_frozen_table=not self._routed_controls_enabled)
             if recipe.particle_birth_death:
                 self.birth_death = self.routed_control
             if recipe.row_evidence_gate:
@@ -519,14 +528,17 @@ class UpdatePolicy:
         previous game record (defaults to ``critic_optimizer.record``).
         It is read before the real-data observation, exactly as in the native
         loop.  This observation also feeds the birth/death FIFO reservoir.
+        Routed row controls require ``RoutedBatch`` fit/guard observations.
+        With both row controls disabled, ``routed`` is optional and no row
+        observations or reservoirs are updated; a frozen bank is supported.
         """
         if self._phase != "ready":
             raise RuntimeError("finish_step must complete the previous policy update")
         if self.routed_control is not None:
-            if routed is None:
+            if self._routed_controls_enabled and routed is None:
                 raise ValueError("routed_paired updates require RoutedBatch fit and separate guard contexts")
             from .routing import RoutedBatch
-            if not isinstance(routed, RoutedBatch):
+            if routed is not None and not isinstance(routed, RoutedBatch):
                 raise TypeError("routed must be a RoutedBatch")
         elif routed is not None:
             raise ValueError("routed observations require recipe.row_policy='routed_paired'")
@@ -538,8 +550,10 @@ class UpdatePolicy:
                 or real.device != self.device or real.dtype != self.dtype):
             raise ValueError("real must be a nonempty batch on the model device and dtype")
         real = real.detach()
-        if self.routed_control is not None:
+        if self.routed_control is not None and self._routed_controls_enabled:
             self.routed_control.begin(routed)
+        elif self.routed_control is not None and routed is not None:
+            self.routed_control.check_batch(routed)
         if self.controller is not None:
             self.controller.observe_prior(self._prior_view())
             record = getattr(self.opt_d, "record", None) if game_record is None else game_record
@@ -646,7 +660,7 @@ class UpdatePolicy:
             self.controller.observe_generator(generator, loss_gan.detach(), loss_critic.detach())
         self._hot = self._z_before = None
         tester = self._table_tester()
-        if self.routed_control is not None:
+        if self.routed_control is not None and self._routed_controls_enabled:
             self.routed_control.observe_backward(self.table.grad)
         elif self.row_evidence is not None:
             self.row_evidence.update(self.table.grad)
@@ -681,6 +695,8 @@ class UpdatePolicy:
         fast and averaged table rows plus optimizer/history rows, then rebases
         stationarity and resets moved-row evidence.  Serving subsequently
         chooses averaged weights only when the table last decided STATIONARY.
+        Routed counterfactual evidence is refreshed even when birth/death is
+        disabled; that evidence-only mode never proposes or mutates rows.
         """
         if self._phase != "finish":
             raise RuntimeError("finish_step must follow after_generator_step")
@@ -707,8 +723,8 @@ class UpdatePolicy:
                 self.averaged_table.mul_(1.0 - rate).add_(self.table, alpha=rate)
         event = None
         if self.routed_control is not None:
-            if self.recipe.particle_birth_death:
-                event = self.routed_control.maybe_apply()
+            if self._routed_controls_enabled:
+                event = self.routed_control.maybe_apply(mutate=recipe.particle_birth_death)
             if event and event.get("moves") and self.lr_settle is not None:
                 self._routed_rebase()
         elif self.birth_death is not None:

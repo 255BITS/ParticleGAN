@@ -241,11 +241,13 @@ class Recipe:
             raise ValueError("birth_death_space must be data or critic")
         if self.birth_death_feature_scale not in ("none", "std"):
             raise ValueError("birth_death_feature_scale must be none or std")
-        if self.birth_death_feature_scale == "std" and not (self.particle_birth_death and self.birth_death_space == "critic"):
+        if (self.row_policy == "independent" and self.birth_death_feature_scale == "std"
+                and not (self.particle_birth_death and self.birth_death_space == "critic")):
             raise ValueError("birth_death_feature_scale='std' needs particle_birth_death with birth_death_space='critic'")
         if type(self.birth_death_isolation) is not bool:
             raise ValueError("birth_death_isolation must be a boolean")
-        if self.birth_death_isolation and not (self.particle_birth_death and self.birth_death_space == "critic"):
+        if (self.row_policy == "independent" and self.birth_death_isolation
+                and not (self.particle_birth_death and self.birth_death_space == "critic")):
             raise ValueError("birth_death_isolation needs particle_birth_death with birth_death_space='critic' (a support test on raw samples is not allowed)")
         for _name in ("row_evidence_hot", "row_evidence_exclude", "row_evidence_hold"):
             if type(getattr(self, _name)) is not bool:

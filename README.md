@@ -155,16 +155,21 @@ For conditional softmax blends, use `get_recipe("e22_routed", ...)` with the
 explicit [`RoutedRows` contract](docs/e22_routed.md). This adaptation measures
 the whole conditional forward and validates row moves on separate guard
 contexts. Frozen BF16 modules can accompany FP32 trainable parameters and tables.
+Multiple token routing sites can share one bank and controller through the
+[full-model routing contract](docs/e22_routed_sites.md). Candidate checks rerun
+the complete model, including downstream sites and the final paired output.
 
 ## Learn more
 
 - [How the training formulation works](docs/ka2.md), including several critics and conditional critics
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving
+- [Shared-bank routing sites](docs/e22_routed_sites.md): sequential token routing and a matched spatial comparison
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`e22_external_loop.py`](examples/e22_external_loop.py) (E22 in a caller-owned loop),
   [`e22_routed_paired.py`](examples/e22_routed_paired.py) (source/time-conditioned paired-error training),
+  [`e22_routed_sites.py`](examples/e22_routed_sites.py) (sequential shared-bank routing and spatial ablations),
   [`pytorch_loop.py`](examples/pytorch_loop.py) (the full update in your own loop),
   [`100gaussians.py`](examples/100gaussians.py) (the benchmark above),
   [`particle_autoencoder.py`](examples/particle_autoencoder.py) (AE/VAE-GAN),

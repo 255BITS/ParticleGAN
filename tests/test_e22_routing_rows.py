@@ -311,3 +311,275 @@ def test_storage_alias_and_bad_latent_history_owners_reject_before_binding():
         normal.spec.bind(models=normal.models, averaged_models=normal.averaged_models, table=normal.table,
                          averaged_table=normal.averaged_table, optimizers=normal.optimizers,
                          table_optimizer=normal.table_optimizer)
+
+
+def model_forward(models, context, candidate, routing):
+    query = models["router"].query(context)
+    logits = query @ candidate.table.T / 2 ** .5
+    first = routing.mix("first", logits[:, None].expand(-1, 5, -1))
+    # A later query depends on the preceding mixture. A row deletion must
+    # recompute this path; renormalizing old later-site weights is incorrect.
+    later_query = models["router"].query(context + .4 * first.mean(1))
+    second_logits = later_query @ candidate.table.T / 2 ** .5
+    second = routing.mix("second", second_logits[:, None, None].expand(-1, 2, 1, -1))
+    return models["generator"]((first.mean(1) + second.mean((1, 2))) * .5)
+
+
+def multisite_components(*, forward=model_forward, **options):
+    original = components(**options)
+    spec = RoutedRows(model_forward=forward, features=features, sites=("first", "second"),
+                      **original.spec.to_dict())
+    return spec.bind(models=original.models, averaged_models=original.averaged_models,
+                     table=original.table, averaged_table=original.averaged_table,
+                     optimizers=original.optimizers, table_optimizer=original.table_optimizer,
+                     controller=original.controller, seed=11)
+
+
+def manual_multisite(control, context, candidate, *, offsets=(0., 0.), reuse_second_query=None):
+    models = control.averaged_models if candidate.averaged else control.models
+    query = models["router"].query(context)
+    first_weights = (query @ candidate.table.T / 2 ** .5 + candidate.log_mass).softmax(1)
+    first = first_weights @ candidate.table + offsets[0]
+    later_query = (models["router"].query(context + .4 * first)
+                   if reuse_second_query is None else reuse_second_query)
+    second_weights = (later_query @ candidate.table.T / 2 ** .5 + candidate.log_mass).softmax(1)
+    second = second_weights @ candidate.table + offsets[1]
+    output = models["generator"]((first + second) * .5)
+    return output, (first_weights + second_weights) * .5, later_query
+
+
+def test_full_model_counterfactuals_rerun_downstream_queries_and_final_guard():
+    records = []
+
+    def recorded(models, context, candidate, routing):
+        records.append((context.detach().clone(), candidate.table.detach().clone(),
+                        candidate.log_mass.detach().clone(), candidate.averaged))
+        return model_forward(models, context, candidate, routing)
+
+    control, observation = multisite_components(forward=recorded), batch()
+    base = control.candidate(copy=True)
+    deletion = control._delete(base, 0)
+    expected_base, _, old_later_query = manual_multisite(control, observation.context, base)
+    expected_delete, _, _ = manual_multisite(control, observation.context, deletion)
+    stale_delete, _, _ = manual_multisite(control, observation.context, deletion,
+                                        reuse_second_query=old_later_query)
+    torch.testing.assert_close(control.generate(observation.context), expected_base, rtol=1e-12, atol=1e-12)
+    torch.testing.assert_close(control.generate(observation.context, candidate=deletion), expected_delete,
+                               rtol=1e-12, atol=1e-12)
+    assert not torch.allclose(expected_delete, stale_delete, rtol=1e-8, atol=1e-10)
+
+    observe(control, observation)
+    records.clear()
+    event = control.maybe_apply()
+    assert event["accepted"] and event["moves"] == 2
+    # Baseline + each deletion + complete candidate trials + fast/average guards.
+    assert len(records) == 1 + 4 + control.counters["proposals"] + 4
+    assert sum(bool(torch.isneginf(mass).any()) for _, _, mass, _ in records) == 4
+    assert len([context for context, _, _, _ in records
+                if float(context[0, 0]) > .8]) == 4
+    with torch.no_grad(), control._evaluating():
+        actual_guard = control._measure(observation.guard_context, observation.guard_targets,
+                                        control.candidate(copy=True))
+        actual_average = control._measure(observation.guard_context, observation.guard_targets,
+                                          control.candidate(averaged=True, copy=True))
+    assert float(actual_guard.mean()) == event["guard_error_after"]
+    assert float(actual_average.mean()) == event["average_guard_error_after"]
+    assert actual_guard.mean() < event["guard_error_before"]
+
+
+def test_multisite_usage_averages_context_tokens_then_sites_without_ess_inflation():
+    observation = batch()
+
+    def make_forward(tokens):
+        def forward(models, context, candidate, routing):
+            first_logits = context.new_tensor([2., 0., -1., .2]).expand(len(context), tokens, 4)
+            first = routing.mix("first", first_logits)
+            second_logits = context.new_tensor([-1., 1., .3, 2.]).expand(len(context), 1, 4)
+            second = routing.mix("second", second_logits)
+            return models["generator"]((first.mean(1) + second.mean(1)) * .5)
+        return forward
+
+    single_tokens, many_tokens = multisite_components(forward=make_forward(1)), multisite_components(forward=make_forward(11))
+    candidate = many_tokens.candidate()
+    output, usage = many_tokens.spec.forward_with_usage(many_tokens.models, observation.context, candidate)
+    first = (observation.context.new_tensor([2., 0., -1., .2]) + candidate.log_mass).softmax(0)
+    second = (observation.context.new_tensor([-1., 1., .3, 2.]) + candidate.log_mass).softmax(0)
+    torch.testing.assert_close(usage, ((first + second) * .5).expand(32, 4))
+    assert not torch.allclose(usage[0], (first * 11 + second) / 12)
+    assert output.shape == (32, 1) and usage.shape == (32, 4)
+    for control in (single_tokens, many_tokens):
+        observe(control, observation)
+        control.refresh_evidence()
+    torch.testing.assert_close(single_tokens.evidence.mass_sum, many_tokens.evidence.mass_sum)
+    torch.testing.assert_close(single_tokens.evidence.effective_contexts, many_tokens.evidence.effective_contexts)
+    assert many_tokens.evidence.effect_contexts.eq(len(observation.context)).all()
+    assert many_tokens.evidence.effective_contexts.le(len(observation.context) + 1e-12).all()
+
+
+def test_multisite_mixed_code_perturbations_flatten_each_site_and_affect_later_queries():
+    control, observation = multisite_components(), batch()
+    shapes = []
+
+    def perturb(codes):
+        shapes.append(tuple(codes.shape))
+        return codes + .2 * len(shapes)
+
+    before = control.candidate(copy=True)
+    output = control.generate(observation.context, perturb_fn=perturb)
+    assert shapes == [(32 * 5, 2), (32 * 2, 2)]
+    expected, _, _ = manual_multisite(control, observation.context, control.candidate(), offsets=(.2, .4))
+    torch.testing.assert_close(output, expected, rtol=1e-12, atol=1e-12)
+    same(before.table, control.table)
+    same(before.row_state, control.candidate().row_state)
+    actual_gradient = torch.autograd.grad(output.sum(), control.table)[0]
+    expected_gradient = torch.autograd.grad(expected.sum(), control.table)[0]
+    torch.testing.assert_close(actual_gradient, expected_gradient, rtol=1e-12, atol=1e-12)
+    assert actual_gradient.ne(0).any(1).all()
+    with pytest.raises(ValueError, match="shape, device and dtype"):
+        control.generate(observation.context, perturb_fn=lambda codes: codes[:, :1])
+
+
+@pytest.mark.parametrize("fault", ["missing", "duplicate", "out_of_order", "unknown", "batch", "rows",
+                                  "empty_tokens", "integer", "nonfinite"])
+def test_declared_multisite_order_shape_and_forward_lifetime(fault):
+    traces = []
+
+    def invalid(models, context, candidate, routing):
+        traces.append(routing)
+        logits = context.new_zeros((len(context), 3, len(candidate.table)))
+        if fault == "out_of_order":
+            routing.mix("second", logits)
+        elif fault == "unknown":
+            routing.mix("other", logits)
+        else:
+            if fault == "batch":
+                logits = logits[:1]
+            elif fault == "rows":
+                logits = logits[..., :1]
+            elif fault == "empty_tokens":
+                logits = logits[:, :0]
+            elif fault == "integer":
+                logits = logits.long()
+            elif fault == "nonfinite":
+                logits = logits + float("nan")
+            mixed = routing.mix("first", logits)
+            if fault == "duplicate":
+                routing.mix("first", logits)
+            return models["generator"](mixed.mean(1))
+
+    control = multisite_components(forward=invalid)
+    with pytest.raises(ValueError):
+        control.generate(batch().context)
+    assert traces[0]._candidate is None and traces[0]._usage is None
+    with pytest.raises(ValueError, match="only during"):
+        traces[0].mix("first", torch.zeros(32, 4, dtype=control.table.dtype))
+
+
+def test_multisite_constructor_contract_and_checkpoint_configuration():
+    legacy = components()
+    expected_keys = {"log_mass_key", "row_parameters", "row_buffers", "probe_budget", "reservoir_size",
+                     "min_observations", "min_effect", "improvement_margin", "max_context_harm",
+                     "persistence_threshold", "split_scale", "candidate_budget"}
+    assert set(legacy.spec.to_dict()) == expected_keys
+    for sites in ((), ("first", "first"), ("first", ""), "first", {"first", "second"}):
+        with pytest.raises(ValueError):
+            RoutedRows(model_forward=model_forward, features=features, sites=sites)
+    with pytest.raises(TypeError, match="alternative"):
+        RoutedRows(model_forward=model_forward, route=route, generate=generate, features=features,
+                   sites=("first", "second"))
+    with pytest.raises(ValueError, match="require.*model_forward"):
+        RoutedRows(route=route, generate=generate, features=features, sites=("first",))
+    multi = multisite_components()
+    assert multi.spec.to_dict()["sites"] == ("first", "second")
+    assert multi.spec.to_dict()["model_forward"] is True
+    saved = multi.state_dict()
+    incompatible = deepcopy(saved)
+    incompatible["config"]["sites"] = ("second", "first")
+    with pytest.raises(ValueError, match="configuration"):
+        multi.load_state_dict(incompatible)
+    same(saved, multi.state_dict())
+
+
+def test_evidence_refresh_is_independent_of_proposals_guards_and_bank_mutation():
+    records = []
+
+    def recorded(models, context, candidate, routing):
+        records.append(context.detach().clone())
+        return model_forward(models, context, candidate, routing)
+
+    control, observation = multisite_components(forward=recorded), batch()
+    for _ in range(control.spec.min_observations):
+        observe(control, observation)
+    records.clear()
+    owners = {name: module.state_dict() for name, module in deepcopy(control.models).items()}
+    before, average_before = control.candidate(copy=True), control.candidate(averaged=True, copy=True)
+    optimizer_states = [deepcopy(optimizer.state_dict()) for optimizer in control.optimizers]
+    stream = control.stream.get_state().clone()
+    event = control.maybe_apply(mutate=False)
+    assert event["evidence_only"] and event["moves"] == 0
+    assert event["eligible_births"] and event["eligible_deaths"]
+    assert control.evidence.valid and control.evidence.flag.any()
+    assert control.counters["probes"] == 4 and control.counters["proposals"] == control.counters["moves"] == 0
+    assert len(records) == 5 and all(float(context[0, 0]) <= .8 for context in records)
+    assert control.moved_rows is None and not control.moved_parameters and not control.restart_router
+    same(before.table, control.table)
+    same(before.row_state, control.candidate().row_state)
+    same(average_before.table, control.averaged_table)
+    same(average_before.row_state, control.candidate(averaged=True).row_state)
+    same(owners, {name: module.state_dict() for name, module in control.models.items()})
+    for expected, optimizer in zip(optimizer_states, control.optimizers):
+        same(expected, optimizer.state_dict())
+    same(stream, control.stream.get_state())
+
+    # Protected observations are unnecessary for an evidence-only replay.
+    control.guard_fill = 0
+    control.rows_since_eval = control.spec.min_observations
+    assert control.refresh_evidence()["evidence_only"]
+    assert control.counters["proposals"] == 0
+    with pytest.raises(ValueError, match="boolean"):
+        control.maybe_apply(mutate=1)
+
+
+def test_multisite_exact_resume_after_evidence_only_refresh_before_move():
+    control, observation = multisite_components(), batch()
+    observe(control, observation)
+    control.refresh_evidence()
+    control.begin(observation)
+    saved = control.state_dict()
+    event = control.maybe_apply()
+    restored = multisite_components()
+    restored.load_state_dict(saved)
+    actual = restored.maybe_apply()
+    same(event, actual)
+    same(control.state_dict(), restored.state_dict())
+    same(control.table, restored.table)
+    same(control.candidate().row_state, restored.candidate().row_state)
+    same(control.averaged_table, restored.averaged_table)
+    same(control.generate(observation.guard_context), restored.generate(observation.guard_context))
+
+
+def test_frozen_table_binding_is_forward_only_and_optional_batch_validation_is_read_only():
+    original, observation = multisite_components(), batch()
+    frozen = original.table.detach().clone()
+    arguments = dict(models=original.models, averaged_models=original.averaged_models,
+                     table=frozen, averaged_table=original.averaged_table,
+                     optimizers=(original.optimizers[0],), table_optimizer=None)
+    with pytest.raises(ValueError, match="trainable"):
+        original.spec.bind(**arguments)
+    control = original.spec.bind(**arguments, allow_frozen_table=True)
+    assert control._bindings["table"][2] is None
+    output = control.generate(observation.context)
+    torch.testing.assert_close(output, original.generate(observation.context))
+    output.sum().backward()
+    assert frozen.grad is None and original.models["router"].query.weight.grad is not None
+    before = control.state_dict()
+    control.check_batch(observation)
+    same(before, control.state_dict())
+    with pytest.raises(ValueError, match="overlap"):
+        control.check_batch(RoutedBatch(observation.context, observation.targets,
+                                       observation.context.clone(), observation.guard_targets))
+    same(before, control.state_dict())
+    for operation in (control.observe_backward, control.maybe_apply, control.refresh_evidence):
+        with pytest.raises(ValueError, match="forward/serving only"):
+            operation()
+    same(before, control.state_dict())

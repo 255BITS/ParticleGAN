@@ -1,0 +1,138 @@
+{
+  "command": "python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 --z-dim 4 --particles 128 --batch-size 8 --device cuda --warmup 1",
+  "hardware": "NVIDIA RTX A6000",
+  "torch_version": "2.13.0+cu126",
+  "context_columns": [
+    "source_x",
+    "source_y",
+    "time",
+    "spatial_position"
+  ],
+  "final_output_channels": 2,
+  "source_sha256": {
+    "examples/e22_routed_sites.py": "d4f9292078e6033d600374a6059c03f54a2cc2b0da843684e3cb15be452a789c",
+    "particlegan/routing.py": "b64764fccc1518085ecf92d54df3ea4ada163293bc88132622cc04d60dd5ce94",
+    "particlegan/policy.py": "803272dc136b7fb024fcf51692e70e7f49323c88f84f8f7bc9aa31292bc780ba",
+    "particlegan/recipes.py": "e1e2f478ce9d9f8774933cd4e98e0f91cfaf0e93a152ad0e4bdee782f52ae9d6"
+  },
+  "comparison": {
+    "event": "comparison",
+    "matched_initial_parameters": true,
+    "matched_batches_and_base_noise": true,
+    "matched_dv12_draw_schedule": true,
+    "dv12_draws_per_update": 4,
+    "dv12_draw_shape": [
+      1024,
+      4
+    ],
+    "device": "cuda",
+    "reports": [
+      {
+        "event": "complete",
+        "mode": "frozen",
+        "tokens": 128,
+        "z_dim": 4,
+        "particles": 128,
+        "batch_size": 8,
+        "steps": 40,
+        "warmup_steps": 1,
+        "initial_rmse": 0.1488732397556305,
+        "heldout_rmse": 0.07874678820371628,
+        "heldout_max_error": 0.17969651520252228,
+        "served_source": "fast",
+        "training_seconds": 1.325878863921389,
+        "seconds_per_update": 0.03314697159803472,
+        "row_diagnostics": {
+          "counters": {
+            "evals": 0,
+            "probes": 0,
+            "proposals": 0,
+            "guard_rejections": 0,
+            "moves": 0,
+            "splits": 0
+          },
+          "last": {},
+          "evidence_counters": {
+            "updates": 0,
+            "resets": 0,
+            "global_resets": 0,
+            "flagged_rows_sum": 0
+          }
+        }
+      },
+      {
+        "event": "complete",
+        "mode": "no_rows",
+        "tokens": 128,
+        "z_dim": 4,
+        "particles": 128,
+        "batch_size": 8,
+        "steps": 40,
+        "warmup_steps": 1,
+        "initial_rmse": 0.1488732397556305,
+        "heldout_rmse": 0.023803401738405228,
+        "heldout_max_error": 0.06883639097213745,
+        "served_source": "fast",
+        "training_seconds": 1.9741386834066361,
+        "seconds_per_update": 0.0493534670851659,
+        "row_diagnostics": {
+          "counters": {
+            "evals": 0,
+            "probes": 0,
+            "proposals": 0,
+            "guard_rejections": 0,
+            "moves": 0,
+            "splits": 0
+          },
+          "last": {},
+          "evidence_counters": {
+            "updates": 0,
+            "resets": 0,
+            "global_resets": 0,
+            "flagged_rows_sum": 0
+          }
+        }
+      },
+      {
+        "event": "complete",
+        "mode": "full",
+        "tokens": 128,
+        "z_dim": 4,
+        "particles": 128,
+        "batch_size": 8,
+        "steps": 40,
+        "warmup_steps": 1,
+        "initial_rmse": 0.1488732397556305,
+        "heldout_rmse": 0.03100801818072796,
+        "heldout_max_error": 0.07540309429168701,
+        "served_source": "fast",
+        "training_seconds": 6.063995411619544,
+        "seconds_per_update": 0.1515998852904886,
+        "row_diagnostics": {
+          "counters": {
+            "evals": 40,
+            "probes": 320,
+            "proposals": 192,
+            "guard_rejections": 8,
+            "moves": 10,
+            "splits": 5
+          },
+          "last": {
+            "step": 40,
+            "moves": 0,
+            "law": "routed_paired",
+            "fit_error": 0.032824871877421606,
+            "eligible_deaths": 8,
+            "eligible_births": 0
+          },
+          "evidence_counters": {
+            "updates": 40,
+            "resets": 640,
+            "global_resets": 5,
+            "flagged_rows_sum": 0
+          }
+        }
+      }
+    ]
+  }
+}

@@ -15,6 +15,13 @@
   recovery. Clean served forwards preserve the selected conditional bank.
   Frozen BF16 modules can accompany FP32 trainable tensors; averages copy
   frozen parameters exactly. See the [design and validation](docs/e22_routed.md).
+- **Shared-bank token routing:** a full-model `RoutedRows` callback supports
+  multiple sequential routing sites using one particle bank and controller.
+  Candidates rerun downstream routing and guard the final paired output.
+  Usage averages over tokens within each context and then over sites.
+  Routed evidence now refreshes when birth/death is disabled; disabling both
+  row controls also permits a frozen bank. See the
+  [site contract and spatial comparison](docs/e22_routed_sites.md).
 - **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
   K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with

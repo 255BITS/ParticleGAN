@@ -45,6 +45,62 @@ class RoutedCandidate:
     codes: torch.Tensor | None = None
 
 
+class RoutedExecution:
+    """Ephemeral helper supplied to ``model_forward`` by :class:`RoutedRows`.
+
+    Call :meth:`mix` exactly once at every declared site, in order. The helper
+    and its candidate expire when that full model call ends; retaining it does
+    not provide access to past activations or a reusable routing state.
+    """
+
+    def __init__(self, sites, candidate, batch_size, perturb_fn):
+        self._sites, self._candidate = sites, candidate
+        self._batch_size, self._perturb_fn = batch_size, perturb_fn
+        self._next, self._usage, self._active = 0, None, True
+
+    def mix(self, site_name, logits):
+        """Mix a shared bank at one declared site using [B,*tokens,N] logits."""
+        if not self._active:
+            raise ValueError("routing.mix is valid only during its complete model forward")
+        if self._next >= len(self._sites) or site_name != self._sites[self._next]:
+            raise ValueError("routing sites must occur exactly once in their declared order")
+        candidate = self._candidate
+        if (not isinstance(logits, torch.Tensor) or logits.ndim < 2
+                or logits.shape[0] != self._batch_size or logits.shape[-1] != len(candidate.table)
+                or any(size == 0 for size in logits.shape) or logits.layout != torch.strided
+                or not logits.is_floating_point() or logits.device != candidate.table.device
+                or not bool(torch.isfinite(logits).all())):
+            raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
+        weights = (logits.to(candidate.table.dtype) + candidate.log_mass).softmax(-1)
+        if not bool(torch.isfinite(weights).all()):
+            raise ValueError("routing site softmax must retain finite mass after row deletion")
+        codes = weights @ candidate.table
+        if self._perturb_fn is not None:
+            mixed = codes.reshape(-1, candidate.table.shape[1])
+            perturbed = self._perturb_fn(mixed)
+            if (not isinstance(perturbed, torch.Tensor) or perturbed.shape != mixed.shape
+                    or perturbed.device != mixed.device or perturbed.dtype != mixed.dtype):
+                raise ValueError("routed latent perturbation must preserve the mixed-code shape, device and dtype")
+            codes = perturbed.reshape(codes.shape)
+        # Tokens are correlated uses of one context. Sites receive equal weight
+        # regardless of their token counts; neither dimension inflates ESS.
+        usage = weights.reshape(self._batch_size, -1, len(candidate.table)).mean(1)
+        self._usage = usage if self._usage is None else self._usage + usage
+        self._next += 1
+        return codes
+
+    def finish(self):
+        if self._next != len(self._sites):
+            raise ValueError("the complete model forward must call every declared routing site exactly once")
+        return self._usage / len(self._sites)
+
+    def close(self):
+        # A callback retaining this object cannot reuse a past candidate or any
+        # activations. The returned output/usage keep their normal autograd graph.
+        self._active = False
+        self._candidate = self._perturb_fn = self._usage = None
+
+
 class RoutedRows:
     """Owner-free specification of a conditional dense key/value bank.
 
@@ -56,19 +112,39 @@ class RoutedRows:
     critic features; evaluate targets with the same context to obtain the
     paired real baseline.  Callbacks must be deterministic in evaluation.
 
+    Alternatively, ``model_forward(models, context, candidate, routing)``
+    reruns the complete conditioned model. Declare an ordered ``sites`` tuple;
+    call ``routing.mix(name, logits[B,*tokens,N])`` once at each site. The mixer
+    adds log mass, normalizes, mixes the shared table, and applies DV12 to the
+    flattened mixed codes independently at each site. Downstream logits can
+    depend on preceding mixed codes. Every counterfactual reruns all sites.
+    Evidence uses a token mean per context and an equal mean across sites.
+
     The router owns a [N] ``log_mass`` buffer or parameter.  Declare other
     independently cloneable router rows by their named parameter/buffer paths.
     Shared router/encoder parameters remain shared and are never cloned.
     Defaults require every protected context to avoid additional feature
     error, and a strictly positive mean improvement of the fast function.
     """
-    def __init__(self, *, route, generate, features, log_mass_key="log_mass",
+    def __init__(self, *, route=None, generate=None, features, model_forward=None,
+                 sites=(), log_mass_key="log_mass",
                  row_parameters=(), row_buffers=(), probe_budget=8,
                  reservoir_size=64, min_observations=8, min_effect=1e-6,
                  improvement_margin=1e-8, max_context_harm=0.0,
                  persistence_threshold=.75, split_scale=.1, candidate_budget=4):
-        if not all(callable(fn) for fn in (route, generate, features)):
-            raise TypeError("routed route, generate and features must be callbacks")
+        if model_forward is None:
+            if not all(callable(fn) for fn in (route, generate, features)):
+                raise TypeError("routed route, generate and features must be callbacks")
+            if sites:
+                raise ValueError("named routing sites require the model_forward callback")
+        elif not callable(model_forward) or not callable(features) or route is not None or generate is not None:
+            raise TypeError("model_forward and features must be callbacks, as an alternative to route/generate")
+        if isinstance(sites, (str, set, frozenset, dict)):
+            raise ValueError("routing sites must be an ordered collection of distinct names")
+        sites = tuple(sites)
+        if model_forward is not None and (not sites or any(not isinstance(name, str) or not name for name in sites)
+                                          or len(set(sites)) != len(sites)):
+            raise ValueError("model_forward requires ordered distinct routing site names")
         for name, value in (("probe_budget", probe_budget), ("reservoir_size", reservoir_size),
                             ("min_observations", min_observations), ("candidate_budget", candidate_budget)):
             if type(value) is not int or value <= 0:
@@ -88,16 +164,21 @@ class RoutedRows:
         if any(not isinstance(name, str) or not name for name in names) or len(set(names)) != len(names):
             raise ValueError("routed row tensor names must be distinct paths")
         self.route, self.generate, self.features = route, generate, features
+        self.model_forward, self.sites = model_forward, sites
         self.log_mass_key, self.row_parameters, self.row_buffers = log_mass_key, row_parameters, row_buffers
         self.probe_budget, self.reservoir_size, self.min_observations = probe_budget, reservoir_size, min_observations
         self.min_effect, self.improvement_margin, self.max_context_harm = float(min_effect), float(improvement_margin), float(max_context_harm)
         self.persistence_threshold, self.split_scale, self.candidate_budget = float(persistence_threshold), float(split_scale), candidate_budget
 
     def to_dict(self):
-        return {name: getattr(self, name) for name in (
+        config = {name: getattr(self, name) for name in (
             "log_mass_key", "row_parameters", "row_buffers", "probe_budget", "reservoir_size",
             "min_observations", "min_effect", "improvement_margin", "max_context_harm",
             "persistence_threshold", "split_scale", "candidate_budget")}
+        # Keep existing one-site checkpoint configurations byte-for-byte valid.
+        if self.model_forward is not None:
+            config.update(model_forward=True, sites=self.sites)
+        return config
 
     def candidate_for(self, models, table, *, averaged=False, copy=False):
         router = models.get("router")
@@ -128,6 +209,8 @@ class RoutedRows:
         return RoutedCandidate(table, rows[self.log_mass_key], rows, bool(averaged))
 
     def weights_for(self, models, context, candidate):
+        if self.model_forward is not None:
+            return self.forward_with_usage(models, context, candidate)[1]
         if (not isinstance(context, torch.Tensor) or context.ndim < 2 or not len(context)
                 or context.device != candidate.table.device):
             raise ValueError("routed context must be a nonempty batch on the table device")
@@ -143,24 +226,45 @@ class RoutedRows:
         return weights.to(candidate.table.dtype)
 
     def forward(self, models, context, candidate, *, perturb_fn=None):
-        weights = self.weights_for(models, context, candidate)
-        codes = weights @ candidate.table
-        if perturb_fn is not None:
-            codes = perturb_fn(codes)
-            if not isinstance(codes, torch.Tensor) or codes.shape != (len(context), candidate.table.shape[1]):
-                raise ValueError("routed latent perturbation must preserve the mixed-code shape")
-        output = self.generate(models, context, replace(candidate, codes=codes), weights)
+        return self.forward_with_usage(models, context, candidate, perturb_fn=perturb_fn)[0]
+
+    def forward_with_usage(self, models, context, candidate, *, perturb_fn=None):
+        """Return final samples and per-context mean bank usage from one rerun.
+
+        Multi-site usage averages tokens within a site and then averages sites.
+        No intermediate activations or route weights survive on this object.
+        """
+        if self.model_forward is None:
+            weights = self.weights_for(models, context, candidate)
+            codes = weights @ candidate.table
+            if perturb_fn is not None:
+                codes = perturb_fn(codes)
+                if not isinstance(codes, torch.Tensor) or codes.shape != (len(context), candidate.table.shape[1]):
+                    raise ValueError("routed latent perturbation must preserve the mixed-code shape")
+            output = self.generate(models, context, replace(candidate, codes=codes), weights)
+        else:
+            if (not isinstance(context, torch.Tensor) or context.ndim < 2 or not len(context)
+                    or context.device != candidate.table.device):
+                raise ValueError("routed context must be a nonempty batch on the table device")
+            routing = RoutedExecution(self.sites, candidate, len(context), perturb_fn)
+            try:
+                output = self.model_forward(models, context, candidate, routing)
+                weights = routing.finish()
+            finally:
+                routing.close()
         if (not isinstance(output, torch.Tensor) or output.ndim < 2 or len(output) != len(context)
                 or not output.is_floating_point() or output.device != candidate.table.device):
             raise ValueError("routed generation must return one floating sample per context")
-        return output
+        return output, weights
 
     def bind(self, *, models, averaged_models, table, averaged_table, optimizers,
-             table_optimizer, seed=0, completed_steps=None, controller=None):
+             table_optimizer, seed=0, completed_steps=None, controller=None,
+             allow_frozen_table=False):
         return RoutedRowControl(self, models=models, averaged_models=averaged_models,
                                 table=table, averaged_table=averaged_table, optimizers=optimizers,
                                 table_optimizer=table_optimizer, seed=seed,
-                                completed_steps=completed_steps, controller=controller)
+                                completed_steps=completed_steps, controller=controller,
+                                allow_frozen_table=allow_frozen_table)
 
 
 class RoutedEvidence:
@@ -307,23 +411,31 @@ class RoutedRowControl:
     _POOLS = ("fit_context", "fit_targets", "guard_context", "guard_targets")
 
     def __init__(self, spec, *, models, averaged_models, table, averaged_table,
-                 optimizers, table_optimizer, seed, completed_steps, controller):
+                 optimizers, table_optimizer, seed, completed_steps, controller,
+                 allow_frozen_table=False):
         self.spec, self.models = spec, dict(models)
         self.averaged_models = {**self.models, **averaged_models}
         self.table, self.averaged_table, self.optimizers = table, averaged_table, tuple(optimizers)
         self.table_optimizer, self.controller = table_optimizer, controller
         self.completed_steps = (lambda: 0) if completed_steps is None else completed_steps
-        if len(table) < 2 or not table.requires_grad or not table.is_leaf:
+        if type(allow_frozen_table) is not bool:
+            raise ValueError("allow_frozen_table must be a boolean")
+        if (not table.is_leaf or len(table) < (1 if allow_frozen_table and not table.requires_grad else 2)
+                or (not table.requires_grad and not allow_frozen_table)):
             raise ValueError("routed restructuring requires at least two trainable table rows")
-        if (table_optimizer not in self.optimizers
-                or sum(parameter is table for group in table_optimizer.param_groups for parameter in group["params"]) != 1):
+        table_owners = [optimizer for optimizer in self.optimizers for group in optimizer.param_groups
+                        for parameter in group["params"] if parameter is table]
+        if (table.requires_grad and (table_optimizer not in self.optimizers or table_owners != [table_optimizer])):
             raise ValueError("the declared routed table optimizer must own the table exactly once")
+        if not table.requires_grad and (len(table_owners) > 1 or (table_owners and table_owners != [table_optimizer])):
+            raise ValueError("a frozen routed table must have at most its declared optimizer owner")
+        table_owner = table_owners[0] if table_owners else None
         if (averaged_table.shape != table.shape or averaged_table.dtype != table.dtype
                 or averaged_table.device != table.device or averaged_table.requires_grad
                 or averaged_table.untyped_storage().data_ptr() == table.untyped_storage().data_ptr()):
             raise ValueError("routed averaged table must be separate, frozen and match the fast table")
         fast, average = self.candidate(), self.candidate(averaged=True)
-        self._bindings = {"table": (table, averaged_table, table_optimizer)}
+        self._bindings = {"table": (table, averaged_table, table_owner)}
         self.row_parameters = {"table": table}
         for name, tensor in fast.row_state.items():
             averaged = average.row_state[name]
@@ -345,12 +457,11 @@ class RoutedRowControl:
                 if address in storages:
                     raise ValueError("distinct routed row owners must not share storage")
                 storages.add(address)
-        history = getattr(table_optimizer, "latent_history", None)
+        history = getattr(table_owner, "latent_history", None)
         if history is not None and (not isinstance(history, torch.Tensor) or history.shape != table.shape
                                     or history.device != table.device or history.dtype != table.dtype):
             raise ValueError("routed table optimizer latent_history must match its table")
-        if sum(parameter is table for optimizer in self.optimizers
-               for group in optimizer.param_groups for parameter in group["params"]) != 1:
+        if table.requires_grad and len(table_owners) != 1:
             raise ValueError("routed table must have exactly one optimizer owner")
         self.evidence = RoutedEvidence(table, spec)
         self.stream = torch.Generator(device=table.device).manual_seed(seed)
@@ -379,6 +490,24 @@ class RoutedRowControl:
 
     @torch.no_grad()
     def begin(self, batch):
+        self.check_batch(batch)
+        pairs = (("fit", batch.context, batch.targets), ("guard", batch.guard_context, batch.guard_targets))
+        for prefix, context, targets in pairs:
+            if getattr(self, prefix + "_context") is None:
+                setattr(self, prefix + "_context", torch.zeros((self.spec.reservoir_size, *context.shape[1:]), device=context.device, dtype=context.dtype))
+                setattr(self, prefix + "_targets", torch.zeros((self.spec.reservoir_size, *targets.shape[1:]), device=targets.device, dtype=targets.dtype))
+            pool_context, pool_targets = getattr(self, prefix + "_context"), getattr(self, prefix + "_targets")
+            values = (context[-self.spec.reservoir_size:].detach(), targets[-self.spec.reservoir_size:].detach())
+            cursor = getattr(self, prefix + "_cursor")
+            indices = (torch.arange(len(values[0]), device=context.device) + cursor) % self.spec.reservoir_size
+            pool_context[indices], pool_targets[indices] = values
+            setattr(self, prefix + "_cursor", (cursor + len(values[0])) % self.spec.reservoir_size)
+            setattr(self, prefix + "_fill", min(self.spec.reservoir_size, getattr(self, prefix + "_fill") + len(values[0])))
+        self.rows_since_eval += len(batch.context)
+
+    @torch.no_grad()
+    def check_batch(self, batch):
+        """Validate paired observations without allocating or filling pools."""
         if not isinstance(batch, RoutedBatch):
             raise TypeError("routed observations require RoutedBatch with separate guard contexts")
         if batch.context is batch.guard_context:
@@ -404,18 +533,6 @@ class RoutedRowControl:
         if self.guard_context is not None:
             guard.append(self.guard_context[:self.guard_fill].flatten(1))
         self._check_disjoint(torch.cat(fit), torch.cat(guard))
-        for prefix, context, targets in pairs:
-            if getattr(self, prefix + "_context") is None:
-                setattr(self, prefix + "_context", torch.zeros((self.spec.reservoir_size, *context.shape[1:]), device=context.device, dtype=context.dtype))
-                setattr(self, prefix + "_targets", torch.zeros((self.spec.reservoir_size, *targets.shape[1:]), device=targets.device, dtype=targets.dtype))
-            pool_context, pool_targets = getattr(self, prefix + "_context"), getattr(self, prefix + "_targets")
-            values = (context[-self.spec.reservoir_size:].detach(), targets[-self.spec.reservoir_size:].detach())
-            cursor = getattr(self, prefix + "_cursor")
-            indices = (torch.arange(len(values[0]), device=context.device) + cursor) % self.spec.reservoir_size
-            pool_context[indices], pool_targets[indices] = values
-            setattr(self, prefix + "_cursor", (cursor + len(values[0])) % self.spec.reservoir_size)
-            setattr(self, prefix + "_fill", min(self.spec.reservoir_size, getattr(self, prefix + "_fill") + len(values[0])))
-        self.rows_since_eval += len(batch.context)
 
     @staticmethod
     def _check_disjoint(fit, guard):
@@ -426,6 +543,8 @@ class RoutedRowControl:
             raise ValueError("protected guard contexts must not overlap fit/proposal contexts")
 
     def observe_backward(self, grad=None):
+        if not self.table.requires_grad:
+            raise ValueError("frozen routed tables support forward/serving only; disable row evidence and birth/death")
         grad = self.table.grad if grad is None else grad
         self.evidence.update(grad)
         self.latest_gradient = grad.detach().clone()
@@ -445,11 +564,14 @@ class RoutedRowControl:
             for module, flag in flags:
                 module.training = flag
 
-    def _measure(self, context, targets, candidate):
+    def _measure(self, context, targets, candidate, *, with_usage=False):
         cpu_rng = torch.get_rng_state()
         cuda_rng = torch.cuda.get_rng_state(self.table.device) if self.table.device.type == "cuda" else None
         models = self.averaged_models if candidate.averaged else self.models
-        output = self.spec.forward(models, context, candidate)
+        if with_usage:
+            output, usage = self.spec.forward_with_usage(models, context, candidate)
+        else:
+            output = self.spec.forward(models, context, candidate)
         if output.shape != targets.shape:
             raise ValueError("routed generated samples must match paired targets")
         fake = self.spec.features(models, context, output, targets)
@@ -465,7 +587,7 @@ class RoutedRowControl:
         if (not torch.equal(cpu_rng, torch.get_rng_state())
                 or (cuda_rng is not None and not torch.equal(cuda_rng, torch.cuda.get_rng_state(self.table.device)))):
             raise ValueError("routed evaluation callbacks must be deterministic; supply shared noise in the observation context")
-        return loss
+        return (loss, usage) if with_usage else loss
 
     def _delete(self, base, row):
         mass = base.log_mass.clone()
@@ -498,10 +620,21 @@ class RoutedRowControl:
         return direction / direction.norm().clamp_min(1e-30) * norm_bound
 
     @torch.no_grad()
-    def maybe_apply(self):
+    def maybe_apply(self, mutate=True):
+        """Refresh paired row evidence, and optionally propose guarded moves.
+
+        ``mutate=False`` stops after the fit-context deletion probes. It never
+        chooses proposals, reads protected guard targets, draws proposal RNG,
+        or changes the bank, row state, optimizer or serving averages.
+        """
+        if type(mutate) is not bool:
+            raise ValueError("routed mutate must be a boolean")
+        if not self.table.requires_grad:
+            raise ValueError("frozen routed tables support forward/serving only; disable row evidence and birth/death")
         self.moved_rows, self.moved_parameters, self.restart_router = None, {}, False
         minimum = self.spec.min_observations
-        if min(self.fit_fill, self.guard_fill, self.rows_since_eval) < minimum:
+        fills = (self.fit_fill, self.rows_since_eval, self.guard_fill) if mutate else (self.fit_fill, self.rows_since_eval)
+        if min(fills) < minimum:
             return None
         self.rows_since_eval = 0
         self.counters["evals"] += 1
@@ -509,24 +642,31 @@ class RoutedRowControl:
         context, targets = self.fit_context[:self.fit_fill], self.fit_targets[:self.fit_fill]
         fast, average = self.candidate(copy=True), self.candidate(averaged=True, copy=True)
         with self._evaluating():
-            baseline = self._measure(context, targets, fast)
-            weights = self.weights(context, candidate=fast)
+            if self.spec.model_forward is None:
+                baseline = self._measure(context, targets, fast)
+                weights = self.weights(context, candidate=fast)
+            else:
+                baseline, weights = self._measure(context, targets, fast, with_usage=True)
             self.evidence.observe_fit(weights, baseline)
             budget = min(len(self.table), self.spec.probe_budget)
             probes = (torch.arange(budget, device=self.table.device) + self.probe_cursor) % len(self.table)
             self.probe_cursor = (self.probe_cursor + budget) % len(self.table)
             for row in probes.tolist():
                 deletion = self._delete(fast, row)
-                deleted_weights = self.weights(context, candidate=deletion)
-                expected_weights = weights.clone()
-                expected_weights[:, row] = 0
-                remainder = expected_weights.sum(1, keepdim=True)
-                if bool((remainder == 0).any()):
-                    raise ValueError("routed deletion cannot certify a numerically exclusive row; increase routing temperature")
-                expected_weights = expected_weights / remainder
-                if (bool((deleted_weights[:, row] != 0).any())
-                        or not torch.allclose(deleted_weights, expected_weights, rtol=5e-3, atol=5e-5)):
-                    raise ValueError("routing callback must apply candidate.log_mass as additive logits before softmax")
+                if self.spec.model_forward is None:
+                    deleted_weights = self.weights(context, candidate=deletion)
+                    expected_weights = weights.clone()
+                    expected_weights[:, row] = 0
+                    remainder = expected_weights.sum(1, keepdim=True)
+                    if bool((remainder == 0).any()):
+                        raise ValueError("routed deletion cannot certify a numerically exclusive row; increase routing temperature")
+                    expected_weights = expected_weights / remainder
+                    if (bool((deleted_weights[:, row] != 0).any())
+                            or not torch.allclose(deleted_weights, expected_weights, rtol=5e-3, atol=5e-5)):
+                        raise ValueError("routing callback must apply candidate.log_mass as additive logits before softmax")
+                # Multi-site deletion reruns the full function. Its upstream
+                # changes alter later queries, so same-query renormalization
+                # is invalid there; routing.mix enforces additive mass itself.
                 deleted = self._measure(context, targets, deletion)
                 self.evidence.observe_effect(row, weights, baseline, deleted, evaluation)
                 self.counters["probes"] += 1
@@ -536,6 +676,9 @@ class RoutedRowControl:
             parents = (enough & fresh & (effect < -self.spec.min_effect)).nonzero().flatten()
             self.last = {"step": self.completed_steps() + 1, "moves": 0, "law": "routed_paired",
                          "fit_error": float(baseline.mean()), "eligible_deaths": len(children), "eligible_births": len(parents)}
+            if not mutate:
+                self.last["evidence_only"] = True
+                return dict(self.last)
             if not len(children) or not len(parents):
                 return dict(self.last)
             children = children[effect[children].argsort(descending=True, stable=True)]
@@ -581,6 +724,10 @@ class RoutedRowControl:
                 return dict(self.last)
             self._commit(child, parent, proposed, proposed_average)
             return dict(self.last)
+
+    def refresh_evidence(self):
+        """Refresh evidence without proposing or mutating particle rows."""
+        return self.maybe_apply(mutate=False)
 
     def _commit(self, child, parent, proposed, proposed_average):
         rows = torch.tensor([parent, child], device=self.table.device, dtype=torch.long)

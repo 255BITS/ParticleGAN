@@ -210,3 +210,8 @@ gradients and active evidence/restructuring, and restore immediately before a
 naturally accepted move. They compare resumed losses, all policy state,
 structural diagnostics, held-out metrics and clean served outputs exactly.
 The independent native E22 conformance tests remain separate.
+
+For multiple sequential token sites sharing one bank, see the
+[complete-model example and matched comparison](e22_routed_sites.md). Its
+second-site queries depend on the first-site output, and every conditional
+probe or guard reruns the full conditioned model.

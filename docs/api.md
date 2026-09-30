@@ -62,9 +62,21 @@ Conditional densely blended banks use `get_recipe("e22_routed", ...)` and
 an explicit `RoutedRows` binding, with `RoutedBatch` inputs providing paired
 targets and separate guard contexts. The [routed adaptation](e22_routed.md)
 defines its evidence and move rules and includes a paired-error example.
+For multiple token routing sites in a single model forward, provide
+`RoutedRows(model_forward=..., features=..., sites=(...))`. The callback uses
+`routing.mix(site_name, logits)` at each declared site with the explicit
+candidate table and row state. Each counterfactual reruns the entire model;
+evidence and guards evaluate its final output. See the
+[shared-bank site contract](e22_routed_sites.md) for perturbation placement,
+usage attribution and a two-site example.
 Frozen module parameters and buffers may retain BF16 or other precision;
 trainable floating tensors share the table's dtype. Frozen weights are copied
 exactly into the serving averages.
+Routed evidence refreshes independently of birth/death. With
+`row_evidence_gate=True, particle_birth_death=False`, deletion probes update
+support and persistence diagnostics without making structural proposals.
+With both controls disabled, a routed forward can use a frozen bank and
+`begin_step(real)` does not require fitting or guard observations.
 
 ## Initialization
 

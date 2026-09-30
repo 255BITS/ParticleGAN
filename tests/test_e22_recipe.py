@@ -64,3 +64,19 @@ def test_routed_policy_recipe_rejects_incompatible_controls():
         get_recipe(row_policy="routed_paired")
     with pytest.raises(ValueError, match="row_policy must be"):
         get_recipe(row_policy="soft")
+
+
+@pytest.mark.parametrize("evidence, birth_death", [(False, False), (False, True),
+                                                 (True, False), (True, True)])
+def test_routed_row_controls_can_be_toggled_without_independent_metric_overrides(evidence, birth_death):
+    recipe = get_recipe("e22_routed", row_evidence_gate=evidence,
+                        particle_birth_death=birth_death)
+    assert recipe.row_evidence_gate is evidence
+    assert recipe.particle_birth_death is birth_death
+    assert recipe.birth_death_feature_scale == "std" and recipe.birth_death_isolation
+    assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
+
+
+def test_native_row_metric_prerequisites_remain_enforced():
+    with pytest.raises(ValueError, match="birth_death_feature_scale"):
+        get_recipe("e22", particle_birth_death=False)

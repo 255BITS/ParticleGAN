@@ -124,7 +124,7 @@ class PairedLoop:
     initial_rmse: float
 
 
-def make_loop(*, device="cpu", batch_size=32, particles=16):
+def make_loop(*, device="cpu", batch_size=32, particles=16, recipe_overrides=None):
     """Bind four FP32 trainable roles and a nested frozen BF16 host."""
     device = torch.device(device)
     fit = context_grid(torch.linspace(-.8, .8, 5), torch.tensor([.1, .35, .6, .85])).to(device)
@@ -135,8 +135,10 @@ def make_loop(*, device="cpu", batch_size=32, particles=16):
     base_weight = fit.new_tensor([[1., 0., .05], [0., 1., -.07]]).bfloat16()
     paired_edit = fit_target - (fit.bfloat16() @ base_weight.T).float()
     scale = paired_edit.std(dim=0).clamp_min(.04)
-    recipe = get_recipe("e22_routed", num_particles=particles, z_dim=2,
-                        batch_size=batch_size, output_noise_std=.125)
+    options = dict(num_particles=particles, z_dim=2, batch_size=batch_size,
+                   output_noise_std=.125)
+    options.update(recipe_overrides or {})
+    recipe = get_recipe("e22_routed", **options)
     # Initialize one deterministic task; this example does not sweep seeds.
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(123)
