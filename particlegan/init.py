@@ -16,6 +16,7 @@ never silently left on a different init.
 from __future__ import annotations
 
 import math
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import Callable, Mapping, Union
 
@@ -25,7 +26,7 @@ from torch import nn
 from . import _qr
 
 __all__ = ["Uniform", "Normal", "R2Normal", "KEEP", "register", "declarations",
-           "deterministic_orthogonal_"]
+           "deterministic_orthogonal_", "initialize_"]
 
 
 @dataclass(frozen=True)
@@ -223,6 +224,186 @@ def deterministic_orthogonal_(module: nn.Module, *, seed: int = 0, strict: bool 
         if any(id(p) in changed for p in child.parameters()):
             for step in finalize:
                 step(child)
+    return module
+
+
+@torch.no_grad()
+def initialize_(module: nn.Module, *, method: str,
+                parameter_generators: Mapping[str, torch.Generator] | None = None,
+                distributions: Mapping[str, Spec] | None = None,
+                gain: float = 1.0, strict: bool = True) -> nn.Module:
+    """Apply an explicit initialization method through public PyTorch operations.
+
+    ``identity_linear_v1`` writes identity/zero to a square Linear's trainable
+    weight/bias. ``xavier_uniform_zero_bias_v1`` initializes Linear weights with
+    Xavier uniform and zeros their biases. ``sample_distributions_v1`` literally
+    samples the registry's Uniform/Normal distributions, with call-local full-name
+    overrides; KEEP remains untouched and R2Normal needs an explicit override.
+
+    Each randomly drawn parameter requires a distinct CPU Generator under its
+    full name. The mapping must contain exactly those names, excluding constants,
+    frozen and empty parameters. Draws use CPU scratch in the parameter's dtype,
+    independent of its destination device; no global RNG is used. Distribution
+    widths/std and Xavier gain must be finite and positive.
+
+    Trainable parameters must be contiguous: this conservatively excludes
+    internally overlapping views whose in-place commit could fail. The global
+    default generator is not an owned parameter stream and is rejected.
+
+    Complete input validation and staged finalization precede caller mutation.
+    Finalizers may only alter selected trainable parameters, never frozen values,
+    unselected parameters or buffers. A validation/finalizer failure leaves the
+    caller's tensors and supplied RNG states unchanged. Calibrated MoG width
+    updates require a separate explicit operation; explicit-sigma MoG is supported.
+    ``strict=False`` only permits undeclared parameters in the sampling method.
+    Returns the same module. Existing deterministic_orthogonal_ is unchanged.
+    """
+    methods = {"identity_linear_v1", "xavier_uniform_zero_bias_v1", "sample_distributions_v1"}
+    if not isinstance(method, str) or method not in methods:
+        raise ValueError("unknown initialization method")
+    if type(strict) is not bool:
+        raise TypeError("strict must be a bool")
+    if isinstance(gain, bool) or not isinstance(gain, (int, float)) or not math.isfinite(gain) or gain <= 0:
+        raise ValueError("gain must be finite and positive")
+    if method != "xavier_uniform_zero_bias_v1" and gain != 1.0:
+        raise ValueError("gain only applies to Xavier initialization")
+    owners, _, _ = _plan(module)
+    parameters = dict(module.named_parameters())
+    trainable = {name: p for name, p in parameters.items() if p.requires_grad and p.numel()}
+    # _plan/named_parameters normally deduplicate aliases; this API refuses them
+    # so different names cannot give one tensor conflicting policies or streams.
+    seen, storage = set(), set()
+    for name, parameter in module.named_parameters(remove_duplicate=False):
+        if id(parameter) in seen:
+            raise ValueError(f"aliased parameter is unsupported: {name}")
+        seen.add(id(parameter))
+        if parameter.layout != torch.strided or parameter.device.type == "meta":
+            raise ValueError(f"unsupported parameter storage: {name}")
+        if parameter.numel():
+            key = (str(parameter.device), parameter.untyped_storage().data_ptr())
+            if key in storage:
+                raise ValueError(f"shared parameter storage is unsupported: {name}")
+            storage.add(key)
+    for name, buffer in module.named_buffers():
+        if buffer.layout != torch.strided or buffer.device.type == "meta":
+            raise ValueError(f"unsupported buffer storage: {name}")
+        if buffer.numel() and (str(buffer.device), buffer.untyped_storage().data_ptr()) in storage:
+            raise ValueError(f"parameter/buffer shared storage is unsupported: {name}")
+    if distributions is not None and not isinstance(distributions, Mapping):
+        raise TypeError("distributions must be a full-parameter-name mapping")
+    overrides = dict(distributions or {})
+    if overrides and method != "sample_distributions_v1":
+        raise ValueError("distribution overrides only apply to sampled distributions")
+    if any(not isinstance(name, str) or name not in trainable for name in overrides):
+        raise ValueError("distribution overrides must name nonempty trainable parameters")
+    operations = {}
+    if method == "identity_linear_v1":
+        if not isinstance(module, nn.Linear) or module.in_features != module.out_features:
+            raise ValueError("identity initialization requires one square Linear")
+        if set(trainable) - {"weight", "bias"}:
+            raise ValueError("identity Linear has unsupported trainable parameters")
+    holders = {id(p): (child, name) for child in module.modules()
+               for name, p in child.named_parameters(recurse=False)}
+    for name, parameter in trainable.items():
+        if not parameter.is_contiguous():
+            raise ValueError(f"initialization requires contiguous trainable parameters: {name}")
+        if not parameter.is_floating_point() or parameter.is_complex():
+            raise ValueError(f"initialization requires real floating parameters: {name}")
+        if method in {"identity_linear_v1", "xavier_uniform_zero_bias_v1"}:
+            child, local = holders[id(parameter)]
+            if not isinstance(child, nn.Linear) or local not in {"weight", "bias"}:
+                raise ValueError(f"Linear initialization has unsupported trainable parameter: {name}")
+            shape = (child.out_features, child.in_features) if local == "weight" else (child.out_features,)
+            if tuple(parameter.shape) != shape:
+                raise ValueError(f"Linear parameter shape differs from its declaration: {name}")
+            operations[name] = ("zero" if local == "bias" else
+                                "identity" if method == "identity_linear_v1" else "xavier", None)
+            continue
+        spec = overrides.get(name, owners.get(id(parameter)))
+        if spec is None and not strict:
+            continue
+        if spec is KEEP:
+            continue
+        if not isinstance(spec, (Uniform, Normal)):
+            raise ValueError(f"sampled parameter {name!r} requires Uniform, Normal or KEEP; override R2Normal/undeclared parameters")
+        values = (spec.low, spec.high) if isinstance(spec, Uniform) else (spec.mean, spec.std)
+        if any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in values):
+            raise ValueError(f"distribution bounds must be finite numbers: {name}")
+        if (isinstance(spec, Uniform) and spec.low >= spec.high) or (isinstance(spec, Normal) and spec.std <= 0):
+            raise ValueError(f"sampled distribution width/std must be positive: {name}")
+        if any(abs(v) > torch.finfo(parameter.dtype).max for v in values):
+            raise ValueError(f"distribution is outside parameter dtype range: {name}")
+        operations[name] = ("uniform" if isinstance(spec, Uniform) else "normal", spec)
+    if parameter_generators is not None and not isinstance(parameter_generators, Mapping):
+        raise TypeError("parameter_generators must be a full-parameter-name mapping")
+    generators = dict(parameter_generators or {})
+    random_names = {name for name, (operation, _) in operations.items()
+                    if operation in {"xavier", "uniform", "normal"}}
+    if set(generators) != random_names:
+        raise ValueError("parameter_generators must match exactly the randomly drawn parameters")
+    if any(not isinstance(g, torch.Generator) or g.device.type != "cpu" for g in generators.values()):
+        raise ValueError("every parameter generator must be a CPU torch.Generator")
+    if any(g is torch.default_generator for g in generators.values()):
+        raise ValueError("the global default generator is unsupported; supply owned parameter streams")
+    if len({id(g) for g in generators.values()}) != len(generators):
+        raise ValueError("each random parameter requires a distinct generator")
+    from .particle_prior import MoGParticlePrior
+    for child in module.modules():
+        if isinstance(child, MoGParticlePrior) and any(id(p) == id(child.z) for n, p in trainable.items() if n in operations):
+            if child.sigma_rel > 0 or child.d0.item() > 0:
+                raise ValueError("calibrated MoG initialization would change buffers; use an explicit-sigma prior")
+    if not operations:
+        return module
+
+    staged = deepcopy(module).cpu()
+    staged_parameters = dict(staged.named_parameters())
+    clones = {name: torch.Generator(device="cpu").set_state(g.get_state()) for name, g in generators.items()}
+    for name, (operation, spec) in operations.items():
+        value = staged_parameters[name]
+        if operation == "identity":
+            nn.init.eye_(value)
+        elif operation == "zero":
+            nn.init.zeros_(value)
+        elif operation == "xavier":
+            nn.init.xavier_uniform_(value, gain=gain, generator=clones[name])
+        elif operation == "uniform":
+            nn.init.uniform_(value, spec.low, spec.high, generator=clones[name])
+        else:
+            nn.init.normal_(value, spec.mean, spec.std, generator=clones[name])
+    _, finalizers, _ = _plan(staged)
+    changed = {id(staged_parameters[name]) for name in operations}
+    with torch.random.fork_rng(devices=[]):
+        global_state = torch.get_rng_state()
+        for child, callbacks in finalizers:
+            if any(id(p) in changed for p in child.parameters()):
+                for callback in callbacks:
+                    callback(child)
+        if not torch.equal(global_state, torch.get_rng_state()):
+            raise ValueError("initialization finalizer consumed the global RNG")
+
+    def equal_bytes(left, right):
+        return (left.shape == right.shape and left.dtype == right.dtype
+                and torch.equal(left.detach().cpu().contiguous().reshape(-1).view(torch.uint8),
+                                right.detach().cpu().contiguous().reshape(-1).view(torch.uint8)))
+
+    final_parameters, buffers = dict(staged.named_parameters()), dict(module.named_buffers())
+    final_buffers = dict(staged.named_buffers())
+    if set(final_parameters) != set(parameters) or set(final_buffers) != set(buffers):
+        raise ValueError("initialization finalizer changed the parameter/buffer structure")
+    for name, original in parameters.items():
+        value = final_parameters[name]
+        if value.shape != original.shape or value.dtype != original.dtype or value.requires_grad != original.requires_grad:
+            raise ValueError(f"initialization finalizer changed parameter metadata: {name}")
+        if name not in operations and not equal_bytes(original, value):
+            raise ValueError(f"initialization finalizer changed an unselected/frozen parameter: {name}")
+        if name in operations and not torch.isfinite(value).all():
+            raise ValueError(f"initialization produced nonfinite values: {name}")
+    if any(not equal_bytes(value, final_buffers[name]) for name, value in buffers.items()):
+        raise ValueError("initialization finalizer changed a buffer")
+    for name in operations:
+        parameters[name].copy_(final_parameters[name])
+    for name, generator in generators.items():
+        generator.set_state(clones[name].get_state())
     return module
 
 

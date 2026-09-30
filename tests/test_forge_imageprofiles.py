@@ -24,13 +24,14 @@ def context(task):
     return FormulationContext(seed=0, device="cpu", prior=task["execution"]["prior"])
 
 
-def test_variant_is_a_reproducible_explicit_materialization_without_mutating_base():
-    path = ROOT / "configs/forge/tasks/img_intensity2.json"
+@pytest.mark.parametrize("name", ["img_intensity2", "img_stripes2", "img_bars4", "img_blobs4"])
+def test_variant_is_a_reproducible_explicit_materialization_without_mutating_base(name):
+    path = ROOT / "configs/forge/tasks" / f"{name}.json"
     original = path.read_bytes()
     raw = json.loads(original)
     before = deepcopy(raw)
-    variant = task_from_profile(raw, "img_intensity2_residual16")
-    assert variant == read_task("img_intensity2_residual16")
+    variant = task_from_profile(raw, name + "_residual16")
+    assert variant == read_task(name + "_residual16")
     assert raw == before and path.read_bytes() == original
     assert "image_profile" not in raw["execution"]
     assert raw["execution"]["host_definition"]["architecture"] == "transpose"

@@ -185,6 +185,42 @@
       "order": 25,
       "qualification_tier": 2,
       "task": "vector_spiral_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 26,
+      "qualification_tier": 2,
+      "task": "img_stripes2_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 27,
+      "qualification_tier": 2,
+      "task": "img_bars4_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 28,
+      "qualification_tier": 2,
+      "task": "img_blobs4_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 29,
+      "qualification_tier": 2,
+      "task": "grid100_affine_square_named_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 30,
+      "qualification_tier": 2,
+      "task": "rotated100_affine_square_named_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 31,
+      "qualification_tier": 2,
+      "task": "staggered100_affine_square_named_v1"
     }
   ],
   "calibration": {
@@ -194,12 +230,12 @@
   "eligibility": {},
   "goal": "host_profile_transfer",
   "id": "host_profile_transfer",
-  "policy_change_reason": "Opt-in host architecture transfer study. Preserve original stability assignments and expose explicit published image/vector variants as diagnostics; default views retain their original hosts.",
+  "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
   "ranking": {
     "compare_compatible_cohorts": true,
     "cost_separate": true,
     "policy": "qualified_tier_only_with_raw_metrics"
   },
-  "revision": 2,
+  "revision": 4,
   "schema_version": 1
 }

@@ -235,6 +235,8 @@ class Queue:
             validate_screening_submission(request)
         from .sampling import validate_request_sampling
         validate_request_sampling(request)
+        from .hostprofiles import validate_request_host_profiles
+        validate_request_host_profiles(request)
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")

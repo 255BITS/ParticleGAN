@@ -95,7 +95,7 @@ hashes. Unsupported declarations or a changed profile source block preflight.
 
 This enables an explicit architecture transfer measurement; it does not make
 the historical positive a current result. Vector critic and native architecture/
-initialization differences remain documented in [the audit](HOST_PROVENANCE_AUDIT.md).
+initialization differences are documented in [the audit](HOST_PROVENANCE_AUDIT.md).
 
 The [registered residual16 intensity probe](IMAGE_PROFILE_TRANSFER_READOUT.md)
 then passed its final eight checks for 11.198816130 seconds. It measured both
@@ -115,6 +115,30 @@ the variants are diagnostics in `host_profile_transfer`. Construction and
 integration checks cover source tampering, snapshot portability, unchanged raw
 RNG draws and dispatch into the public batch-distance discriminator before any
 optimizer update. No training result is implied by these checks.
+
+The published image resolver also materializes stripes, bars and blobs variants
+through configuration alone. Three native parent profiles and their matching
+continuation cards explicitly select identity affine G, Fourier-3 D, named
+Xavier weights and uniform-square initial MoG locations. The additive public
+initializer stages and validates writes; existing deterministic initialization
+retains its behavior. Native checkpoint metadata binds the component policies
+and measured initial tensors/streams. These are declared transfers, without
+historical fixture parity. Full 7k/14k scientific gates remain unchanged; the
+14k cards retain their clock-free prerequisite and are not included in the
+scheduled transfer view.
+
+Frozen-source queue and runtime checks now recompute host semantics, actual
+recipe resolution, candidate revision, grouped job identity, resource locks
+and continuation parent compatibility before dispatch. Existing frozen requests
+retain their original contract. Further science must use the joined source;
+software checks alone do not approve calibration.
+
+The joined Forge and public initializer suite passed **703 tests**. A
+[GPU 0 construction check](native-profile-cuda-init-check.json) found exact
+CPU/CUDA equality for G, D, prior locations and initialization receipts,
+unchanged training streams and sigma, and zero optimizer updates. Full CI for
+the preceding vector-profile commit `a0f7499b` passed **1,709 tests and 18 subtests**,
+with 16 explicit skips; the joined native changes still need their own CI result.
 
 ## Physical pilot completed
 
@@ -175,7 +199,7 @@ outside active pools and retain existing experiment requests.
 | Shared file contracts and source snapshots | Implemented, under integration review | `experiments/forge/contracts.py`, `sources.py`; mutation/reuse tests |
 | History mapping and source coverage | Complete classification at checkpoint `3a3ef24a` | 7,252 scoped paths; 174 cards, 112 scientific and 62 family-context; pinned #155 included |
 | MoG public API, capabilities, paired RNG | Implemented and tested | Public trainer/prior/A2, named component streams, checkpoint parity |
-| Task definitions / tier views / independent graders | Implemented and tested | 36 tasks, five views including opt-in host-profile diagnostics; no active monotonicity gate |
+| Task definitions / tier views / independent graders | Implemented and tested | 45 tasks, five views including opt-in host-profile diagnostics; no active monotonicity gate |
 | Queue, adapters, compiler, CLI and root guide | Real CPU execution and resource enforcement verified | Real process-group tests, atomic CPU/RAM reservations; final integration checks recorded below |
 | Clock audit, paired adaptation and native continuation | Implemented; bounded state/protocol verification | Saved state manifests, measured optimizer counters, exact prefix/restore/RNG comparison; `CONTINUATION_REVIEW.md` |
 | Administrative lifecycle and display filters | Implemented and tested | Immutable abandon/supersede receipts; explicit cancellation repair; family/provenance filters preserve full qualification |

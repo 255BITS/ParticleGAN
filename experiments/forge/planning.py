@@ -15,6 +15,20 @@ FORMULATION_FIELDS = ("recipe_overrides", "prior", "extensions", "requires_capab
                       "api_changes", "implementation", "initializer", "claim_contract")
 
 
+
+def candidate_revision_for(source_digest: str, candidate: dict) -> str:
+    """Identity of an already resolved formulation, independent of its label.
+
+    Keep the field selection in one place for planning and frozen-request
+    validation. Callers at execution boundaries must first reconstruct and
+    validate resolved_recipe from the actual public formulation declaration.
+    """
+    formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
+    formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
+                       api_version=candidate.get("api_version", "forge-api-v1"))
+    return stable_hash({"source": source_digest, "formulation": formulation})
+
+
 def rekey_jobs(jobs):
     """Rebind complete prerequisite identities after a protocol or lane change."""
     by_task = {member: job for job in jobs for member in job.get("task_ids", [job["task_id"]])}
@@ -123,9 +137,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         # Capture the catalog's support set regardless of selected view. The
         # selected task's preflight validates every hash and reports missing or
         # malformed declarations as BLOCKED, before any worker is allocated.
-        from .vectorprofiles import profile_source_files
+        from .hostprofiles import profile_source_paths
         try:
-            profile_sources = profile_source_files(task)
+            profile_sources = profile_source_paths(task)
         except (KeyError, TypeError, ValueError):
             profile_sources = {}
         extra_sources.update(relative for relative in profile_sources
@@ -148,10 +162,14 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         from .adapters import adapter_preflight
         task["preflight_blockers"].extend(adapter_preflight(task, candidate, root=root))
         task["preflight_blockers"].extend(task_blockers(task))
+        if task["adapter"] == "native100_continuation" and "native_profile" in task["execution"]:
+            from .nativeprofiles import validate_native_continuation
+            try:
+                validate_native_continuation(tasks[task["execution"]["continuation_of"]], task, root=root)
+            except (KeyError, TypeError, ValueError, OSError) as error:
+                task["preflight_blockers"].append(f"{task['id']}: {error}")
     source = inspect_source(root, sorted(extra_sources))
-    formulation = {k: candidate.get(k) for k in FORMULATION_FIELDS}
-    formulation.update(resolved_recipe=recipe, prior=prior, api_version=idea.get("api_version", "forge-api-v1"))
-    candidate_revision = stable_hash({"source": source["digest"], "formulation": formulation})
+    candidate_revision = candidate_revision_for(source["digest"], candidate)
     runtime = runtime_manifest()
     groups = {}
     for task_id, task in tasks.items():

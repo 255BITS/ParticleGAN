@@ -162,11 +162,77 @@ is kept. A
 no parameters. A learned `DrawSource` table (DDGAN) is declared
 `R2Normal(0, 1)`.
 
+### `initialize_(module, *, method, parameter_generators=None, distributions=None, gain=1.0, strict=True)`
+
+An explicit, in-place initializer in `particlegan.init`; returns the same module.
+It is independent of `Recipe` and `GANTrainer`, and does not change
+`deterministic_orthogonal_` or its historical values.
+
+| Method | Applied operation |
+| --- | --- |
+| `identity_linear_v1` | Identity weight and zero bias for a square `nn.Linear` |
+| `xavier_uniform_zero_bias_v1` | Public PyTorch Xavier-uniform weights, with positive `gain`, and zero biases; trainable parameters must belong to supported Linear weights/biases |
+| `sample_distributions_v1` | Literal PyTorch uniform/normal draws from registered `Uniform`/`Normal` descriptors; `KEEP` remains unchanged |
+
+For sampled distributions, `distributions={full_parameter_name: descriptor}`
+provides call-local overrides without changing the registry. An `R2Normal`
+table needs an explicit literal distribution override. Uniform endpoints and
+normal parameters must be finite, with `low < high` and `std > 0`; these methods
+do not interpret a zero-width distribution as a constant. Use identity/zero
+operations or `KEEP` for constants. Xavier `gain` must be finite and positive;
+other methods require its default value.
+
+`parameter_generators` maps **exactly** the randomly drawn parameter names to
+distinct CPU `torch.Generator` objects. Exclude biases zeroed by Xavier, identity
+parameters, `KEEP`, frozen and empty parameters. Callers own seed derivation and
+checkpointing; the initializer neither creates hidden random streams nor reads
+global randomness. Each draw uses CPU scratch in the parameter's dtype, then
+copies to its destination device. A matching named stream therefore does not
+depend on the physical GPU index or an unrelated parameter's draws.
+Passing `torch.default_generator` is rejected; each stream must be owned by the
+caller independently of the global RNG.
+
+```python
+from particlegan import MoGParticlePrior, init
+
+prior = MoGParticlePrior(32, 2, sigma=0.025, standardize=False)
+# The caller supplies its existing named initialization stream for prior/z.
+init.initialize_(prior, method="sample_distributions_v1",
+                 distributions={"z": init.Uniform(-5.0, 5.0)},
+                 parameter_generators={"z": prior_location_generator})
+```
+
+Input declarations, shapes, generator keys/devices and unsupported aliases are
+validated before drawing. Operations and registered finalizers then run on a
+staged CPU module with cloned streams. The result must preserve all unselected
+and frozen parameters, buffers, parameter metadata and module parameter/buffer
+names before selected values and RNG states are committed. Validation or
+finalizer failure leaves caller tensors and supplied stream states unchanged.
+Finalizers that consume the global CPU RNG are rejected. Parameter aliases,
+shared parameter storage, and parameter/buffer storage sharing are unsupported.
+Trainable parameters must be contiguous. This conservatively rejects transposed
+views as well as internally overlapping views, preventing an in-place commit
+failure after another parameter has already changed.
+`strict=False` permits undeclared parameters only in the sampling method; it
+does not relax malformed distributions, unsupported methods or stream checks.
+
+Registered trainable layout fixes still apply, such as the batch-distance
+critic's zero batch-feature readout. Explicit-sigma MoG initialization preserves
+its width, masses and standardization policy. A spacing-calibrated MoG whose
+finalizer would change `sigma`/`d0` is rejected by this API; calibrating noise is
+a separate explicit operation. Frozen prior tables remain untouched.
+
+`Uniform`/`Normal` descriptors have different applications in the two public
+functions: `initialize_(..., method="sample_distributions_v1")` draws the
+literal distribution, while `deterministic_orthogonal_` uses its moments to
+construct QR matrices/patterns. Neither method implies historical fixture parity.
+
 ### `register(cls, declarations=None, *, finalize=None)`
 
-Declares how `deterministic_orthogonal_` treats the parameters that `cls`
-itself owns (not those of its submodules). `declarations` maps each parameter
-name to a spec:
+Declares distributions for parameters that `cls` itself owns (not those of its
+submodules). `deterministic_orthogonal_` uses their moments, and the explicit
+`sample_distributions_v1` method draws supported distributions literally.
+`declarations` maps each parameter name to a spec:
 
 | Spec | Meaning |
 | --- | --- |
@@ -263,7 +329,10 @@ fused layouts and other custom parameters need their own declaration.
 Earlier development builds had `Recipe.initialization="batch_feature_zero"`,
 which `make_optimizers`/`GANTrainer` applied to fresh G/D/E weights (keys 0, 1,
 2) and `make_prior` to learnable tables, plus `particlegan.initialize_`. Both
-are removed; `get_recipe(initialization=...)` is now a `TypeError`.
+are removed; `get_recipe(initialization=...)` is now a `TypeError`. The new
+`particlegan.init.initialize_(..., method=...)` is a separate explicit API;
+it does not restore the old top-level `particlegan.initialize_(..., key=...)`
+or implicit optimizer/trainer initialization.
 
 | Before | Now |
 | --- | --- |

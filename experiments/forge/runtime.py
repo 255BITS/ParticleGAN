@@ -41,6 +41,8 @@ def execute(path: Path) -> int:
         from .sampling import validate_request_sampling
         try:
             validate_request_sampling(request, task_ids=job.get("task_ids", [job["task_id"]]))
+            from .hostprofiles import validate_request_host_profiles
+            validate_request_host_profiles(request, task_ids=job.get("task_ids", [job["task_id"]]))
         except ValueError as exc:
             raise CapabilityError([str(exc)]) from exc
         adapter_started = time.monotonic()

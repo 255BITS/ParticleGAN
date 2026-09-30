@@ -31,6 +31,8 @@ def _event(event, **values):
 
 def _context(request, task, device, resources):
     candidate = request["candidate"]
+    from .nativeprofiles import native_host_initialization
+    host_initialization = native_host_initialization(task)
     fixed = {**resources, "total_steps": task["execution"].get("original_schedule_horizon", task["execution"]["steps"])}
     conflicts = [key for key, value in fixed.items()
                  if key in candidate.get("recipe_overrides", {}) and candidate["recipe_overrides"][key] != value]
@@ -43,7 +45,8 @@ def _context(request, task, device, resources):
         recipe_overrides=overrides, prior=task["execution"].get("prior", candidate.get("prior")),
         seed=request["protocol"]["seed"], device=device,
         requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
-        extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"))
+        extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
+        host_initialization=host_initialization)
 
 
 def adapter_preflight(task, candidate, *, root=None):
@@ -57,6 +60,11 @@ def adapter_preflight(task, candidate, *, root=None):
         from .behavior_adapters import behavior_preflight
         return behavior_preflight(task, candidate)
     blockers = []
+    if adapter in {"native100", "native100_continuation"}:
+        from .nativeprofiles import native_profile_blockers
+        blockers.extend(native_profile_blockers(task, candidate, root=root))
+        if blockers:
+            return blockers
     if adapter == "transfer_vector":
         from .vectorprofiles import vector_profile_blockers
         blockers.extend(vector_profile_blockers(task, root=root))
@@ -324,11 +332,17 @@ def _native(request, task, output, device, *, prerequisites=None):
     from benchmarks.toy100.metrics import evaluate_samples
     from benchmarks.toy100.accuracy_evidence import AccuracyEvidence
     from benchmarks.toy100.train import evaluation_steps
+    from .nativeprofiles import build_native_models, resolve_native_spec, validate_native_continuation
     problem = task["execution"]["problem"]
     evaluation = task["evaluation"]
-    context = _context(request, task, device, {})
-    trainer = context.build_trainer(*_models(context, {"hidden": 128, "layers": 3, "fourier": 2}),
+    spec = resolve_native_spec(task)
+    if spec is not None and task["execution"].get("continuation_of"):
+        validate_native_continuation(request["tasks"][task["execution"]["continuation_of"]], task)
+    context = _context(request, task, device, spec["resources"] if spec else {})
+    g, d = build_native_models(context, spec) if spec else _models(context, {"hidden": 128, "layers": 3, "fourier": 2})
+    trainer = context.build_trainer(g, d,
         max_steps=context.recipe.total_steps if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
+    host_receipt = _host_receipt(spec, task["execution"]["native_profile"], g, d) if spec else None
     run = _Run(context, trainer, output, task)
     artifact_root = Path(output) / "native100"
     directory = artifact_root / problem
@@ -426,6 +440,8 @@ def _native(request, task, output, device, *, prerequisites=None):
                     "sha256": file_hash(state_path), "state_sha256": state_digest(saved)},
                 "artifact_schema": "native100_coverage_accuracy_v1",
                 "holdout_rng": "frozen_accuracy_evidence_seed_offsets_1601_1602_1603"}
+    if host_receipt:
+        evidence["host"] = host_receipt
     if prefix:
         evidence["prefix_parity"] = prefix
     return run.receipt(evidence, save_state=False)

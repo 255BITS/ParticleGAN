@@ -5,6 +5,7 @@ bind explicitly to a documented public Recipe or GANTrainer argument.
 """
 from copy import deepcopy
 from dataclasses import dataclass, fields
+import hashlib
 import inspect
 import math
 
@@ -178,7 +179,8 @@ class FormulationContext:
     def __init__(self, *, recipe_overrides=None, prior=None, seed=0, device="cpu",
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
-                 execution_path="public_trainer"):
+                 execution_path="public_trainer", host_initialization=None,
+                 initializer_requirements=None):
         if execution_path not in ("public_trainer", "public_components"):
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
@@ -207,6 +209,14 @@ class FormulationContext:
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])
         self.initializer = initializer
+        from .nativeprofiles import resolve_host_initialization
+        try:
+            self.host_initialization = resolve_host_initialization(host_initialization,
+                initializer=initializer, prior=self.prior_config, requirements=initializer_requirements)
+        except ValueError as error:
+            raise CapabilityError([str(error)]) from error
+        self._host_initialized_models = {}
+        self._host_prior = None
         self.device = torch.device(device)
         self.streams = NamedStreams(seed, version=rng_version, device=self.device)
         # Declare the fixed purpose names before any task executes. Unused
@@ -251,6 +261,13 @@ class FormulationContext:
             return factory()
 
     def initialize(self, model, *, component):
+        policies = (self.host_initialization or {}).get("components", {})
+        if component in policies:
+            if component in self._host_initialized_models:
+                if self._host_initialized_models[component] is not model:
+                    raise CapabilityError([f"pinned {component} initialization already belongs to another model"])
+                return model
+            return self._initialize_host_component(model, component)
         if self.initializer == "supplied":
             return model
         seeds = {name: self.streams.seed_for("init", component=component, purpose=name)
@@ -260,15 +277,90 @@ class FormulationContext:
                                          "parameter_seeds": seeds}
         return model
 
-    def build_prior(self, *, dtype=torch.float32):
+    def _host_init_options(self, model, component, *, probe=False):
+        """Bind policy descriptors and named streams to the additive public API."""
+        policy = self.host_initialization["components"][component]
+        options = {"method": policy["method"]}
+        parameters = dict(model.named_parameters())
+        if policy["method"] == "xavier_uniform_zero_bias_v1":
+            options["gain"] = policy["gain"]
+            names = [name for name, value in parameters.items() if value.requires_grad and name.split(".")[-1] == "weight"]
+        elif policy["method"] == "sample_distributions_v1":
+            descriptors = {}
+            for name, value in policy["parameters"].items():
+                kind = value["kind"]
+                descriptors[name] = (init.Uniform(value["low"], value["high"]) if kind == "uniform" else
+                    init.Normal(value["mean"], value["std"]) if kind == "normal" else init.KEEP)
+            options["distributions"] = descriptors
+            resolved = {**init.declarations(model), **descriptors}
+            names = [name for name, value in parameters.items() if value.requires_grad and
+                     isinstance(resolved.get(name), (init.Uniform, init.Normal))]
+        else:
+            names = []
+        if probe:
+            # Validate every actual model before mutating any component. These
+            # scratch generators never register/advance a live named stream.
+            generators = {name: torch.Generator(device="cpu").manual_seed(
+                self.streams.seed_for("init", component=component, purpose=name)) for name in names}
+        else:
+            generators = {name: self.streams.generator("init", component=component, purpose=name, device="cpu") for name in names}
+        options["parameter_generators"] = generators
+        return options
+
+    def _initialize_host_component(self, model, component):
+        from .state import state_digest
+        # Public validation/staging protects the component against partial
+        # writes; cloned streams protect the context against registration on a
+        # rejected component. G/D are also validated together in build_trainer.
+        init.initialize_(deepcopy(model), **self._host_init_options(model, component, probe=True))
+        options = self._host_init_options(model, component)
+        generators = options["parameter_generators"]
+        digest = lambda stream: hashlib.sha256(stream.get_state().numpy().tobytes()).hexdigest()
+        before = {name: digest(stream) for name, stream in generators.items()}
+        init.initialize_(model, **options)
+        policy = self.host_initialization["components"][component]
+        manifest = {}
+        for name, parameter in model.named_parameters():
+            row = {"shape": list(parameter.shape), "dtype": str(parameter.dtype),
+                   "requires_grad": parameter.requires_grad, "tensor_sha256": state_digest(parameter),
+                   "policy": deepcopy(policy if parameter.requires_grad else {"method": "retain_frozen"})}
+            if name in generators:
+                row["random_stream"] = {"family": "init", "component": component, "purpose": name,
+                    "seed": self.streams.seed_for("init", component=component, purpose=name), "device": "cpu",
+                    "initial_state_sha256": before[name], "final_state_sha256": digest(generators[name])}
+            manifest[name] = row
+        self.initialization[component] = {"initializer": policy["method"], "owner": "task",
+            "fallback_initializer": self.initializer, "effective_policy": deepcopy(policy),
+            "profile_sha256": self.host_initialization["profile_sha256"],
+            "model_class": type(model).__module__ + "." + type(model).__qualname__, "parameters": manifest,
+            "buffers": {name: {"shape": list(value.shape), "dtype": str(value.dtype), "tensor_sha256": state_digest(value)}
+                        for name, value in model.named_buffers()}}
+        if component == "prior":
+            self.initialization[component]["constructor_locations"] = "implicit factory init_std creates temporary locations; public policy replaces them once"
+        self._host_initialized_models[component] = model
+        return model
+
+    def _construct_prior(self, *, dtype, probe=False):
+        """Build through the same public factory, optionally using a scratch RNG."""
         p = self.prior_config
+        stream = self.streams.generator("init", component="prior", purpose="locations")
+        if probe:
+            stream = torch.Generator(device=stream.device).set_state(stream.get_state())
         options = {"device": self.device, "dtype": dtype, "learnable": p["learnable"],
-                   "generator": self.streams.generator("init", component="prior", purpose="locations"),
-                   "init_std": p.get("init_std", 1.)}
+                   "generator": stream, "init_std": p.get("init_std", 1.)}
         if p["kind"] == "mog":
             options["sigma"] = p["sigma"]
-        prior = self.recipe.make_prior(**options)
+        return self.recipe.make_prior(**options)
+
+    def build_prior(self, *, dtype=torch.float32):
+        if self.host_initialization and self._host_prior is not None:
+            if self._host_prior.z.dtype != dtype:
+                raise CapabilityError(["pinned prior was already constructed with a different dtype"])
+            return self._host_prior
+        prior = self._construct_prior(dtype=dtype)
         self.initialize(prior, component="prior")
+        if self.host_initialization:
+            self._host_prior = prior
         return prior
 
     def build_trainer(self, generator, discriminator, *, initialize=True, max_steps=None):
@@ -278,6 +370,34 @@ class FormulationContext:
             raise CapabilityError(["public_components context does not own a scalar GANTrainer"])
         if self._trainer is not None:
             raise ValueError("a context owns one trainer; create a new context for another task/attempt")
+        if self.host_initialization:
+            if not initialize:
+                raise CapabilityError(["initialize=False cannot bypass task-pinned component initialization"])
+            if any(next(model.parameters()).device != self.device for model in (generator, discriminator)):
+                raise CapabilityError(["context and network devices differ"])
+            for component, model in (("generator", generator), ("discriminator", discriminator)):
+                if component in self.host_initialization["components"]:
+                    init.initialize_(deepcopy(model), **self._host_init_options(model, component, probe=True))
+                else:
+                    seeds = {name: self.streams.seed_for("init", component=component, purpose=name)
+                             for name, parameter in model.named_parameters() if parameter.requires_grad and parameter.numel()}
+                    init.deterministic_orthogonal_(deepcopy(model), parameter_seeds=seeds)
+            dtype = next(generator.parameters()).dtype
+            if self._host_prior is not None:
+                if self._host_prior.z.dtype != dtype:
+                    raise CapabilityError(["pinned prior was already constructed with a different dtype"])
+            else:
+                # Prior shape/dtype checks can reject a syntactically valid
+                # policy. Perform them before either caller network changes.
+                # The temporary factory and initializer use scratch generators;
+                # successful construction still consumes the original one draw.
+                probe_prior = self._construct_prior(dtype=dtype, probe=True)
+                if "prior" in self.host_initialization["components"]:
+                    init.initialize_(probe_prior, **self._host_init_options(probe_prior, "prior", probe=True))
+                else:
+                    seeds = {name: self.streams.seed_for("init", component="prior", purpose=name)
+                             for name, parameter in probe_prior.named_parameters() if parameter.requires_grad and parameter.numel()}
+                    init.deterministic_orthogonal_(probe_prior, parameter_seeds=seeds)
         if initialize:
             self.initialize(generator, component="generator")
             self.initialize(discriminator, component="discriminator")

@@ -40,8 +40,8 @@ for 45.001 paid seconds; both vector tasks passed. Full scientific calibration
 and legacy cutover remain outstanding.
 The explicit [residual16 intensity transfer](reports/forge/IMAGE_PROFILE_TRANSFER_READOUT.md)
 passed for 11.199 seconds with the same rates, seed, initialization policy and
-gates. That is one current task positive; vector/native host-profile provenance
-still needs binding before broader calibration.
+gates. That is one current task positive. Published image/vector and native
+host profiles are now explicit; their broader calibration remains unmeasured.
 
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.
@@ -187,6 +187,7 @@ inheritance. Preflight rejects unsupported profiles or mismatched model/data
 declarations. Receipts record the resolved card, actual parameter shapes/counts
 and initial model-state hashes. Architecture transfer does not import an archived
 positive or relax the fixed named-RNG comparison policy.
+The same resolver materializes the three other `img_*_residual16` diagnostics.
 
 The same diagnostic view includes six `vector_*_published` tasks. These bind
 the published critic cards through shared factories, including the public
@@ -196,6 +197,22 @@ learned MoG, named initialization and full-component gates. Both source
 declarations travel with frozen jobs, including the report containing the
 critic cards. The profile explicitly records that historical prior scale and
 draw order are not restored. Raw tasks keep their existing architectures.
+
+Native `*_affine_square_named_v1` cards select the identity affine generator,
+Fourier-3 critic and explicit uniform-square initial locations through
+[`particlegan.init.initialize_`](docs/api.md#initialize_module--method-parameter_generatorsnone-distributionsnone-gain10-stricttrue).
+They retain learned MoG width/masses, current recipes, named streams and the full
+7k coverage/accuracy gates. Task-owned component policies, actual tensor hashes
+and per-parameter stream states enter receipts and checkpoint compatibility.
+An incompatible prior, supplied fixture or conflicting initialization claim is
+`BLOCKED`. The catalog's matching 14k variants retain the clock-free audit and
+own-state checkpoint prerequisites; select them only in a view containing those
+requirements. They are not added to the scheduled transfer view automatically.
+
+Queue submission and runtime revalidate profiles against frozen source, including
+actual recipe resolution, candidate identity, grouped tasks, budgets and matching
+continuation parents. Cached preflight text cannot authorize a changed host.
+Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 

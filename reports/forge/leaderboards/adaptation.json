@@ -3378,13 +3378,13 @@
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "edec7560c95d63e7ed2dfe57a5411b7b69b477f2a62c8544555db6f20b9ce0a6",
+      "cohort": "4137928ad32e706d1cdd721e2aeb38df7ebc56448ef56516fdbba5da954fe68b",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -4030,19 +4030,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "f2ed48bd385142a617c56e96d5124195f4abe198041a521315819de82345ecc2",
+      "cohort": "6d22596550655f6f84f706fb7b50b283511bfd7489e6ad65d5d1b4165e860e61",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -4697,19 +4697,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "1beb4d566f7193134aaa96e4da86e9ff7c37aa2fb392fb06ffd9e36b4b88e8ba",
+      "cohort": "ae17b6071b9fac81f8323c8e7e6182a1e3f3dbd7e6e8f50f33e7590f2120dd1d",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -5364,19 +5364,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "8be1388c96d264a9f3be92a83afb267a2a28537ada9da6ca03580f8dc9c6b453",
+      "cohort": "e50d5fceb20ebe87d4a0ae07e848ed6bec70b2b4d57098fa0ca91fbea1aedc43",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -6022,19 +6022,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "327e0ed7b2063a0e18b978369b5072967d4d60718505cc925c520cf37ffec2b5",
+      "cohort": "69e82d4c63999013537329d32d5555f94a632a184f19948270526a582b010390",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -6689,19 +6689,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "d7985916b8f41a142b62e1c30921bcc2ef40c9005cd787d08ac33d5f499723c9",
+      "cohort": "de87d988ef7a42776bb6ae4a05fe6fe09211f8807b1a89726d2d3ae4ea8ded2b",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -7347,7 +7347,7 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     }
   ],
@@ -35215,10 +35215,10 @@
     ],
     "historical_import_complete": true,
     "inventory_coverage": {
-      "declared_count": 7282,
+      "declared_count": 7285,
       "missing": [],
       "stale": [],
-      "tracked_count": 7282,
+      "tracked_count": 7285,
       "unclassified": [],
       "valid": true
     },
@@ -36416,13 +36416,13 @@
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "edec7560c95d63e7ed2dfe57a5411b7b69b477f2a62c8544555db6f20b9ce0a6",
+      "cohort": "4137928ad32e706d1cdd721e2aeb38df7ebc56448ef56516fdbba5da954fe68b",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -37068,19 +37068,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-no-critic-penalty",
-      "candidate_revision": "1aa777c484deb9da23445aa5509a3f70d9bd30cf0b6d7722a14265f580936a94",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "f2ed48bd385142a617c56e96d5124195f4abe198041a521315819de82345ecc2",
+      "cohort": "6d22596550655f6f84f706fb7b50b283511bfd7489e6ad65d5d1b4165e860e61",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -37735,19 +37735,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "1beb4d566f7193134aaa96e4da86e9ff7c37aa2fb392fb06ffd9e36b4b88e8ba",
+      "cohort": "ae17b6071b9fac81f8323c8e7e6182a1e3f3dbd7e6e8f50f33e7590f2120dd1d",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -38402,19 +38402,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "forge-onboarding-anchor-ablation",
-      "candidate_revision": "c2b591b0ec856b3c569b47189e4bc5996e47b80542eeb306f6d11b08dfd84241",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "8be1388c96d264a9f3be92a83afb267a2a28537ada9da6ca03580f8dc9c6b453",
+      "cohort": "e50d5fceb20ebe87d4a0ae07e848ed6bec70b2b4d57098fa0ca91fbea1aedc43",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -39060,19 +39060,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "327e0ed7b2063a0e18b978369b5072967d4d60718505cc925c520cf37ffec2b5",
+      "cohort": "69e82d4c63999013537329d32d5555f94a632a184f19948270526a582b010390",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -39727,19 +39727,19 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {
       "attempt_ids": [],
       "candidate_id": "k3p",
-      "candidate_revision": "7d49a4e7966a65ff28b16227959fd658e7f957abda74b2276cee70ccf09edfdb",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
       "claim_contract": {
         "sampling_law": "task_declared",
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "cohort": "d7985916b8f41a142b62e1c30921bcc2ef40c9005cd787d08ac33d5f499723c9",
+      "cohort": "de87d988ef7a42776bb6ae4a05fe6fe09211f8807b1a89726d2d3ae4ea8ded2b",
       "cost": {
         "flops": {
           "kind": "unavailable",
@@ -40385,7 +40385,7 @@
           "system": "Linux"
         }
       },
-      "source_digest": "71cc2dd06dbcc99fb25ba10472f54e564d8a40d31a143a2115c83a42940d45ed",
+      "source_digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
       "status": "INCOMPLETE"
     },
     {

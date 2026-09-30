@@ -8,7 +8,7 @@
       "benchmark/paired_error_2d": 7,
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
-      "benchmark/toy100": 18,
+      "benchmark/toy100": 19,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 1,
       "config/cifar_ddgan": 77,
@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 31,
+      "forge_engine": 33,
       "report/behavioral_baseline": 32,
       "report/cifar-ddgan": 623,
       "report/cifar-particle-ae": 35,
@@ -92,8 +92,8 @@
       "candidate_implementation": 17,
       "candidate_patch": 2,
       "configuration": 802,
-      "driver": 214,
-      "engine_support": 31,
+      "driver": 215,
+      "engine_support": 33,
       "evaluator_or_audit": 55,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -107,13 +107,13 @@
       "visualization": 15,
       "visualization_artifact": 290
     },
-    "files": 7282
+    "files": 7285
   },
   "coverage": {
-    "declared_count": 7282,
+    "declared_count": 7285,
     "missing": [],
     "stale": [],
-    "tracked_count": 7282,
+    "tracked_count": 7285,
     "unclassified": [],
     "valid": true
   },
@@ -764,6 +764,15 @@
       "path": "benchmarks/toy100/models.py",
       "role": "support",
       "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy100",
+      "git_blob": "9baeecfcca263227521a9e5af0fa671c66016be1",
+      "path": "benchmarks/toy100/native_models.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
     },
     {
       "family": "benchmark/toy100",
@@ -6573,14 +6582,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "423397573c4f180cd6867a510a713b43a0b15a16",
+      "git_blob": "292ebe2f4ca380a73dabc86996ef948b4ef5e8d1",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "7885a08ea87a40a09ca4a275d3b79b2b3c2d1834",
+      "git_blob": "27edb32a9cdc867bb20154945317de1858be95e3",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6657,6 +6666,13 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "c3cba1bd6573ae939e575288d12c42b4897e26a4",
+      "path": "experiments/forge/hostprofiles.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "18e5358f0823f3aad4e552e517543aff043f310e",
       "path": "experiments/forge/imageprofiles.py",
       "role": "engine_support",
@@ -6685,7 +6701,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "da2206c84a093086694bfa2b65bee448f62501ca",
+      "git_blob": "4bca8e6a76c425331b5713252116446f3d2eff53",
+      "path": "experiments/forge/nativeprofiles.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "c5b07fcb1329e3c4e9ee1c3e763aaea84cf82c3f",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6699,7 +6722,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "fbcffb872013be90891fd8e4f98c4a964f3acdd3",
+      "git_blob": "901c49f4f00351803ffe68bfc041fd5d56fa9426",
       "path": "experiments/forge/queue.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6713,7 +6736,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "c59b7dd7fbd8ce5b47b4fb27fa3b3289e612d27d",
+      "git_blob": "b67b9d74d227796fea7d4336fbb25e4d2180b54a",
       "path": "experiments/forge/runtime.py",
       "role": "engine_support",
       "suggested_tiers": []
