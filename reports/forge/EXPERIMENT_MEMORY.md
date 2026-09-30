@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 187. Inventory coverage: complete. Unresolved import items: 7.
+Records: 188. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -2932,6 +2932,22 @@ The ordinary fresh-checkout two_pole attempt failed its slope bound (grad_med1.2
 
 [Evidence](../../reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/result.json) · [Record](records/readout-4e04059eb9f631a2e406447e.json)
 
+### k3p · readout-7650981f9a48a164aebbd631
+
+**Scope:** calibration_diagnostic; scientific; revision `2cde93ebff750cc551fcfdae18d82b4edfc60f9d0aca49713968faa5823d3591`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'PASS': 1}; wall seconds 11.199; mechanism `structural`.
+
+img_intensity2_residual16: modes=2, hq=0.90625
+
+The explicit published residual16 intensity host passed all sustained/terminal requirements using the current shared K3P formulation, fixed named initialization and clean live scoring.
+
+**Next:** Bind published vector/native architecture and initialization policies explicitly through shared public components before expanding the full reference matrix. Keep this positive, prior failures and costs in separate compatible cohorts. Register any further diagnostic narrowly; no automatic control/reference sweep or adoption is justified by one image pass.
+
+[Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
+
 ### forge-onboarding-anchor-ablation · readout-8aacfe961f0e62b062e621fa
 
 **Scope:** calibration_diagnostic; scientific; revision `b10c31a0de40294be8966579fbe56e84e06e24dea1e3576e65b35148f610d350`.
@@ -3024,4 +3040,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `aeb2887c86c41b09c50e56caa1b5d51bebbf8e914316d18de76f01e303830cd7`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `7eb9e082e30728eb5d058848b1c048723caae21745a049b83b67b4ba81ccc9d3`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

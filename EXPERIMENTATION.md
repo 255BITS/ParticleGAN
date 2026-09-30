@@ -38,6 +38,10 @@ also failed for 16.837 seconds. The [physical two-GPU pilot](reports/forge/PHYSI
 passed duplicate submission, live-worker recovery, cancellation and one repair
 for 45.001 paid seconds; both vector tasks passed. Full scientific calibration
 and legacy cutover remain outstanding.
+The explicit [residual16 intensity transfer](reports/forge/IMAGE_PROFILE_TRANSFER_READOUT.md)
+passed for 11.199 seconds with the same rates, seed, initialization policy and
+gates. That is one current task positive; vector/native host-profile provenance
+still needs binding before broader calibration.
 
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.

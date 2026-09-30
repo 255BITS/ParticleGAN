@@ -1,5 +1,14 @@
 # Separate quick-screen study
 
+## Explicit image-profile transfer
+
+The [residual16 diagnostic](IMAGE_PROFILE_TRANSFER_READOUT.md) passed under
+source `79501bcf`, with the current shared K3P formulation and fixed protocol.
+Its [profile](../../configs/forge/calibration/image-profile-transfer-v1.json)
+changes the intensity host explicitly, retains all 16 independent references,
+and imports no old-source results. One cell passed for 11.199 seconds; 56 remain
+unknown. This is evidence to guide further host-profile work, not adoption.
+
 ## Corrected source cohort — v3
 
 The [v3 profile](../../configs/forge/calibration/develop-20260929-quick-v3.json)

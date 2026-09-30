@@ -97,6 +97,12 @@ This enables an explicit architecture transfer measurement; it does not make
 the historical positive a current result. Vector critic and native architecture/
 initialization differences remain documented in [the audit](HOST_PROVENANCE_AUDIT.md).
 
+The [registered residual16 intensity probe](IMAGE_PROFILE_TRANSFER_READOUT.md)
+then passed its final eight checks for 11.198816130 seconds. It measured both
+modes, HQ 0.90625 and mass TV 0 with zero unintended RNG deviations. Its readout
+is concluded and reservations are zero. Only one cell in that new 57-cell
+matrix is measured; this does not establish full-reference positivity or adoption.
+
 ## Physical pilot completed
 
 The [v3 pilot](PHYSICAL_GPU_PILOT_READOUT.md) passed physical two-GPU overlap,
