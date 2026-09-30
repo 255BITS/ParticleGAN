@@ -1,0 +1,11 @@
+# Fixed scratch linear-output mean prototype
+
+All30 RA10 package modules and exact RA9 configuration stay unchanged. The external callbacks replace only the witness/objective measurement during one fresh mechanical reaction from each fixed raw RA9 grid/toy input. These are non-resumable scratch artifacts; altered scalar metadata is deliberately incompatible with backend9. No candidate or production law is selected.
+
+Fit the output frame from even real FIFO before any odd witness/count-prefix actions. For output dimension≤8 select all axes with positive finite marginal variance in original coordinate order. For larger dimensions, use a stable descending variance argsort with ties resolved by ascending original axis ID, retaining≤8. Two streamed float64 passes use chunk256, O(Md+d log d) time for the larger-axis selection and O(256d+d) temporary frame storage. No d² covariance, Jacobian, N² array, fit RNG or extra seed. This coordinate sketch can miss low-variance or rotated semantic structure; it is not PCA or a universal projection.
+
+Learned even chart/groups and critic View.metric remain the original support geometry. Per-group output centers/RMS are even-only; missing groups, fewer than2 even rows, zero/nonfinite scales or rank0 veto. Use moment_rank for R=sqrt(moment_rank/Q), retain all odd rows (including zero directions), signed unit-direction score with range4R and alpha=Q/(3K+3). Frozen EMA directions precede the odd witness/prefix; post-prefix output means and counts are refreshed without reorienting/retesting.
+
+Action pools, prefix source/child/seed reservations, inclusive5% budget, shared paired jitter/one draw, exact prepared commit, parent moment/history inheritance, own evidence reset/rebase, learned feature cache refresh and final fresh paired lease remain unchanged. G is queried once per chunk for both output coordinates and critic features. Packet output metrics are separately content-digested; critic features remain packet cache entries. No serving/output-noise override.
+
+Clipping remains nonlinear at its cap; chart-conditioned reassignment and nonlinear G after latent jitter remain limitations. A successful clean-coordinate objective does not certify emitted covariance/quality, any per-group population mean, or repeated adaptive significance.

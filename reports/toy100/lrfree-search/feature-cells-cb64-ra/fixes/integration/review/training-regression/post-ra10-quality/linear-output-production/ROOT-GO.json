@@ -1,0 +1,11 @@
+{
+  "status": "GO_ONE_FIXED_CPU_GRID_TOY_REACTION",
+  "utc": "2026-09-30T15:57:18.111192+00:00",
+  "source_freeze_sha256": "1294e397fcb1a59bfb8629c373a12eb866384f0ebcf1344276234bd97b0291f3",
+  "independent_review_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production-math-review/receipt.json": "bc8427d7105eb3dc2579cad82c500e72be372e103624c1091f9a7b3a6777fb52",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-state-api/preexecution-source/receipt.json": "24a80b753ddc0855b7cac0308c6402ff0f22e4a2dca5f7b3438e6a27d7937b27"
+  },
+  "root_verified_unique_raw_files": 289,
+  "scope": "Exactly one sealed actual backend10 CPU grid/toy mechanics invocation; no CUDA or quality verdict."
+}

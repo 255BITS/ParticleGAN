@@ -15,7 +15,7 @@ def read(path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--variant', default='CB64-RA9')
+    parser.add_argument('--variant', default='CB64-RA11')
     args = parser.parse_args()
     variant = args.variant
     lane = ROOT / f'validation-{variant.lower()}'
@@ -77,10 +77,35 @@ def main():
             grid_progress['observations']=len(observations)
             grid_progress['terminal_observations']=sum(
                 row['step'] in (6000,6250,6500,6750,7000) for row in observations)
+    completed_jobs = read(lane/'execution-results.json') or []
+    active_job = None
+    run_log = lane/'run.log'
+    if run_log.exists():
+        for line in run_log.read_text().splitlines():
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if row.get('event') == 'job_start':
+                active_job = row['name']
+            elif row.get('event') in ('job_complete','queue_complete','queue_aborted'):
+                active_job = None
+    mnist = read(lane/'learned/training/mnist'/variant/'result.json')
+    embedding = None if mnist is None else mnist['final']['metrics']['active_embedding']
+    replay = read(lane/'learned'/f'replay-{variant}.json')
+    monitor = read(ROOT/'integration/review'/f'{lane.name}-monitor/summary.json')
     print(json.dumps(dict(updated_utc=datetime.now(timezone.utc).isoformat(),
         variant=variant, lane=str(lane), progress=progress, checkpoints=checkpoints,
         final_toy_gate=gate, grid_gate=grid_gate,grid_progress=grid_progress,
         runtime_error=None if error is None else error.get('error'),
+        completed_jobs=len(completed_jobs), total_jobs=19, active_job=active_job,
+        job_statuses={row['name']:row['status'] for row in completed_jobs},
+        mnist_active_embedding=embedding,
+        cuda_replay=None if replay is None else {key:value.get('status') for key,value in replay.items()},
+        canonical_completed=None if monitor is None else monitor['completed'],
+        canonical_records=None if monitor is None else [dict(task=row['task'],
+            validity=row['canonical_fixture_validity'],status=row['acceptance_status'])
+            for row in monitor['records']],
         both_raw_quality_gates_pass=gate == grid_gate == 'PASS',
         scope='Read-only progress; intermediate checkpoints are not final verdicts. Source, fixture and replay acceptance are separate.'), indent=2))
 

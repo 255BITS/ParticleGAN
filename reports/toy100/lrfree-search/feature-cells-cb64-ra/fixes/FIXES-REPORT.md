@@ -1,8 +1,8 @@
 # CB64-RA failure diagnostics and corrections
 
-Updated 2026-09-30T08:09:04.123083+00:00. Status: IN_PROGRESS.
+Updated 2026-09-30T18:36:05.860218+00:00. Status: IN_PROGRESS.
 
-No package is recommended for the toy/grid target until both unchanged gates and required validity/replay checks pass. E22 remains the broad reference; RA4 has the best measured MNIST feature distance.
+RA11 passes both original CUDA toy/grid gates and leads that target. Its severe MNIST regression prevents a general base-package recommendation. E22 remains the broad reference; RA4 has the best measured MNIST feature distance.
 
 See [the current toy/grid leaderboard](quality/REPORT.md) for the required joint target. A failed toy leaves that candidate's grid unrun; runtime errors have no quality verdict.
 
@@ -17,10 +17,13 @@ N=1024, z=128, batch=128, 2000 updates, seed=314159; identical saved data/evalua
 | CB64-RA2 | 15.662% | 1 | 0.843384 | 0.814142 | 84.180% | 71.387% |
 | CB64-RA3 | 40.991% | 17 | 0.592935 | 0.476611 | 90.771% | 75.830% |
 | CB64-RA4 | 75.806% | 21 | 0.263540 | 0.393402 | 89.551% | 78.613% |
+| CB64-RA10 | 96.533% | 25 | 0.052114 | PENDING | — | — |
+| CB64-RA11 | 96.533% | 25 | 0.052114 | 40.544410 | 28.125% | 0.000% |
 | CB64-RA5 | ERROR | — | — | PENDING | — | — |
 | CB64-RA6 | 51.697% | 23 | 0.483032 | PENDING | — | — |
 | CB64-RA7 | 68.164% | 25 | 0.318359 | PENDING | — | — |
 | CB64-RA8 | 96.533% | 25 | 0.052114 | PENDING | — | — |
+| CB64-RA9 | 96.533% | 25 | 0.052114 | PENDING | — | — |
 
 The frozen toy gate requires precision ≥90%, all 25 modes with at least 1% supported mass each, and mass TV ≤0.10. MNIST has comparative metrics rather than an absolute promotion gate. These measurements do not establish broad architectural scalability.
 
@@ -32,10 +35,13 @@ The frozen toy gate requires precision ≥90%, all 25 modes with at least 1% sup
 | CB64-RA2 | 13 | 2 | 16 |
 | CB64-RA3 | 0 | 0 | Withheld: indexed API mismatch |
 | CB64-RA4 | 4 | 0 | 5 |
+| CB64-RA10 | 0 | 0 | 1 |
+| CB64-RA11 | 8 | 3 | 16 |
 | CB64-RA5 | 0 | 0 | 0 |
 | CB64-RA6 | 0 | 0 | 0 |
 | CB64-RA7 | 0 | 0 | 0 |
 | CB64-RA8 | 0 | 0 | 1 |
+| CB64-RA9 | 0 | 0 | 1 |
 
 All native gates require the original 7000-update budget, 34 observations, five passing terminal 20k evaluations and an independent 100k holdout. A passing final cloud alone does not pass the full stability gate.
 

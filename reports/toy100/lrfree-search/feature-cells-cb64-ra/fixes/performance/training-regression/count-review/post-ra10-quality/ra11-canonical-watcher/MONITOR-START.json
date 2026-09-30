@@ -1,0 +1,29 @@
+{
+  "RA4_runtime_adapter_reused": false,
+  "collector_indexed_declared_before_lane_freeze": true,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+    "--validation",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra11-monitor",
+    "--watch"
+  ],
+  "cpu_only": true,
+  "launch_source_sha256": "6755da586c0c3f4539fc72e4110fb156cb11bb3cac79b4f051245eb599889f4e",
+  "monitor_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+  "numerical_jobs_started": 0,
+  "original16_screen_checks_unchanged": true,
+  "other_queues_or_watchers_signaled": false,
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra11-monitor",
+  "pid": 1249892,
+  "preparation_freeze_sha256": "f1dcd18ef8068731672b908a63917d84abb816b3af4c8f5b2bfaac313f902f45",
+  "root_ready_sha256": "f7a357d0a40d353fd72bc1377240d7f89f47b34758086d284d628e35989fa5b9",
+  "source_freeze_sha256": "d973828e057a63131e6498fc3188f82b8fff3a3f58ab1ace12615566fe9837fe",
+  "startticks": 168728184,
+  "status": "CPU_METADATA_WATCHER_STARTED",
+  "utc": "2026-09-30T16:24:21.689815+00:00",
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11"
+}

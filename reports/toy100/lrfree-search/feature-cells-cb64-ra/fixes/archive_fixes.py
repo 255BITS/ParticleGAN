@@ -47,12 +47,49 @@ def verify_complete():
     assert json.loads((ROOT / 'leaderboard.json').read_text())['status'] == 'COMPLETE'
 
 
+def verify_ra11_study_complete():
+    """Close the RA11 study, retaining broader quality failures explicitly."""
+    lane = ROOT / 'validation-cb64-ra11'
+    plan = json.loads((lane / 'jobs.json').read_text())
+    jobs = json.loads((lane / 'execution-results.json').read_text())
+    assert len(plan) == len(jobs) == 19, 'RA11 original job queue is incomplete'
+    for planned, actual in zip(plan, jobs):
+        assert planned['name'] == actual['name']
+        assert actual['returncode'] == 0 and actual['status'] != 'ERROR'
+        assert actual['result_sha256'] == sha(Path(actual['result']))
+    quality = json.loads((ROOT / 'quality/results/CB64-RA11.json').read_text())
+    assert quality['toy_gate'] == quality['grid_gate'] == 'PASS'
+    assert quality['canonical_fixture_validity'] == quality['artifact_validity'] == 'VALID'
+    replay = json.loads((lane / 'learned/replay-CB64-RA11.json').read_text())
+    assert set(replay) == {'toy', 'mnist'}
+    assert all(record['status'] == 'PASS' for record in replay.values())
+    monitor = ROOT / 'integration/review/validation-cb64-ra11-monitor'
+    accepted = json.loads((monitor / 'summary.json').read_text())
+    assert accepted['completed'] == accepted['total'] == 16
+    assert accepted['source_integrity']['status'] == 'VALID'
+    for record in accepted['records']:
+        assert record['canonical_fixture_validity'] == 'VALID'
+        assert record['acceptance_status'] == record['primary_status'] in ('PASS', 'FAIL')
+    assert (monitor / 'READ-ONLY-ARTIFACT-MANIFEST.json').exists()
+    final = json.loads((ROOT / 'quality/results/CB64-RA11-regressions.json').read_text())
+    assert final['validation_complete'] is True and final['evidence_validity'] == 'VALID'
+    assert final['package_sha256'] == quality['package_sha256']
+    assert final['config_sha256'] == quality['config_sha256']
+    assert final['general_base_package_recommended'] is False
+    audit = ROOT / 'quality/ra11/final-regression-review'
+    assert final['final_audit_receipt_sha256'] == sha(audit / 'receipt.json')
+    assert final['final_audit_proof_sha256'] == sha(audit / 'FINAL-FROZEN.json')
+    assert json.loads((audit / 'receipt.json').read_text())['status'] in ('VALID', 'PASS')
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--status', required=True, choices=('QUALITY_IN_PROGRESS', 'COMPLETE'))
+    parser.add_argument('--status', required=True, choices=('QUALITY_IN_PROGRESS', 'COMPLETE', 'RA11_STUDY_COMPLETE'))
     args = parser.parse_args()
     if args.status == 'COMPLETE':
         verify_complete()
+    elif args.status == 'RA11_STUDY_COMPLETE':
+        verify_ra11_study_complete()
     copied, omitted = [], []
     for path in sorted(ROOT.rglob('*')):
         if not path.is_file() or '__pycache__' in path.parts:
@@ -63,7 +100,8 @@ def main():
         private_package = any(part.startswith('pkg-') for part in parts) and not core_package
         private_source = private_package and path.name in (
             'feature_cells.py', 'training.py', 'continuous.py', 'row_evidence.py',
-            'anchor_birth.py', 'birth_phase.py', 'particle_prior.py', 'mean_transport.py')
+            'anchor_birth.py', 'birth_phase.py', 'particle_prior.py', 'mean_transport.py',
+            'output_moments.py')
         failed_log = path.suffix == '.log' and (
             'failed' in path.name.lower() or any(part.startswith('failed-') for part in parts))
         compact = path.suffix in TEXT_SUFFIXES or failed_log or path.name in ('cpu-lineage', 'gpu-lineage')
@@ -87,6 +125,8 @@ def main():
         copied.append(dict(source=str(path), archive=str(relative),
                            sha256=sha(path), bytes=path.stat().st_size))
     manifest = dict(status=args.status, copied_utc=datetime.now(timezone.utc).isoformat(),
+                    completion_scope=('RA11 original toy/grid, 19-job queue and final validity audit; broader quality failures retained, no general package promotion.'
+                        if args.status == 'RA11_STUDY_COMPLETE' else 'Original RA4 completion gate or intermediate experiment archive.'),
                     source_root=str(ROOT), files=copied,
                     omitted_files=omitted,
                     policy='Frozen sources and compact evidence, including strict/adapted canonical receipts and failed diagnostics; datasets, checkpoints and raw traces remain at recorded local paths.')

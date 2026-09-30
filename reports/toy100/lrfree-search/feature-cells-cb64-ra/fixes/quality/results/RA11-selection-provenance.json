@@ -1,0 +1,10 @@
+{
+  "status": "SELECTION_PROVENANCE_VERIFIED",
+  "utc": "2026-09-30T15:22:40.430727+00:00",
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA11-selection.json": "a9464e1ad8aac1349d6b13da8bd6b2846783a82dda8cddfc784d6d33b749f739",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra10-quality/linear-output-mean-prototype/attempt1/FINAL-PROVENANCE-FROZEN.json": "73988d15118cf0b5ba6b058e97bd4412b4ccad26fd4223f77c128c8d0e55b062"
+  },
+  "verified_unique_raw_files": 236,
+  "scope": "Bind owner latest provenance-only closure without changing original result, source, selection or numerical law."
+}

@@ -1,0 +1,15 @@
+{
+  "child_identity_after_wait": {
+    "pid": 1524343,
+    "present": false
+  },
+  "log_closed": true,
+  "log_sha256": "994da375c889d9159969986fce5758ef101bc80b583e8d553994c6e166dce9e6",
+  "pid": 1524343,
+  "returncode": 0,
+  "seconds": 3.921049719909206,
+  "source_and_input_guard_after_exit": true,
+  "startticks": "169469917",
+  "status": "CPU_ARTIFACT_AUDIT_EXITED",
+  "utc": "2026-09-30T18:28:02.939754+00:00"
+}

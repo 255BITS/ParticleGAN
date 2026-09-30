@@ -4,7 +4,19 @@ This archive contains the experimental corrected packages, their matching
 configurations, focused CPU/CUDA diagnostics and matched learned-model results.
 
 **Current target: one package passing both the learned toy and canonical grid100.**
-No completed candidate qualifies. E22 remains the broad reference; RA4 has the
+RA11 is the first candidate to pass both original CUDA quality gates, including
+all five terminal Grid100 checks and its independent 100k holdout. Independent
+quality and state audits are VALID/PASS. The original19-job study is complete:
+all three native tests pass, portability is8/13 PASS, and final artifact
+validity is VALID.
+The completed MNIST comparison regresses severely: active feature distance
+40.54441 and recall0, versus E22's0.54449 and0.84717. Exact CUDA replay passes
+for toy and MNIST. RA11 leads toy/grid quality but is not a general base-package
+recommendation. Closed small diagnostics found zero accepted MNIST row actions,
+no positive averaged-serving lease, early critic damping and later sigma growth.
+Restoring historical G/sigma base rates is a prospective config test; it has
+not been run and is not a proved repair.
+E22 remains the broad reference; RA4 has the
 best measured MNIST feature distance among these candidates, but fails the toy
 and the strict grid gate. Descriptive MNIST gains do not qualify a package.
 
@@ -110,9 +122,34 @@ The separate final tensor/checkpoint audit is VALID. Historical abbreviated
 JSON action lists permit scalar/count checks; full row IDs, inheritance,
 lineage and resets are checked at the saved final endpoint. Required CUDA
 replay and portability runs have not advanced after this quality failure.
-RA10 does not qualify for the joint target. A source-reviewed fixed saved-output
-diagnostic will examine clean nonlinear feature means versus the stochastic
-emitted law, and all-row versus legal-copy-cohort conditioning.
+RA10 does not qualify for the joint target. One fixed saved-output diagnostic
+completed in a newly fitted descriptive final CPU chart. Added observation
+noise changes clipped feature means by weighted norm0.80465, with cosine0.77152
+to the clean-anchor target residual; paired raw mean change is only0.001175.
+There are no clean-to-noisy group transitions. Feature residual energy is
+0.50274 for the saved clean cloud and0.27333 for its paired noisy cloud. The
+all-row and legal-cohort residuals point in similar directions, giving weak
+support for an opposed-cohort explanation. This supports a clean nonlinear
+feature/observation-noise mismatch at the final state; it does not establish
+historical causality or qualify a repair. No new samples, actions or scores
+were produced and saved state/RNG remained unchanged.
+
+The source-reviewed, fixed CPU linear-output prototype is now PASS. Its one
+grid reaction accepted914 mean copies and reduced EMA raw squared conditional
+mean error by40.4%, while centered covariance trace decreased5.0% with zero learned
+group transitions. Toy25 vetoed the mean phase and retained its51 legacy
+copies. These scratch artifacts are not resumable checkpoints and do not
+establish emitted quality. RA11 is selected prospectively with a separate
+output moment frame and genuine backend schema10. Production, affected state
+controls and short CUDA mechanics pass. The original final CUDA toy passes
+with all ten checkpoints VALID; the full unchanged Grid100 run passes.
+Final grid precision is0.98250, all100 modes, TV0.03280, center RMS0.16661 sigma,
+radial KS0.01376 and maximum covariance ratio1.34756. The independent100k
+holdout also fully passes, with precision0.98453 and center RMS0.13973 sigma.
+Its exact RA9/RA10 configuration, learned support geometry and original CUDA
+gates are retained.
+RA11 is the validated joint quality winner. The severe MNIST regression and
+five portability failures prevent a general base-package recommendation.
 
 - [Results, explanations and validation scope](FIXES-REPORT.md)
 - [Machine-readable leaderboard](leaderboard.json)
@@ -134,6 +171,16 @@ emitted law, and all-row versus legal-copy-cohort conditioning.
 - [RA10 frozen full grid launch](quality/results/RA10-grid-launch.json)
 - [RA10 independent completed grid quality audit](performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/receipt.json)
 - [RA10 final checkpoint artifact audit](performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-grid-artifact-review/accepted-attempt2/receipt.json)
+- [Completed saved-output mean-law diagnostic](performance/training-regression/count-review/post-ra10-quality/mean-law-decomposition/attempt1/receipt.json)
+- [Fixed linear-output prototype result](performance/sampler-regression/cpu-plan-review/post-ra10-quality/linear-output-mean-prototype/attempt1/REPORT.md)
+- [Independent linear-output result review](integration/review/training-regression/post-ra10-quality/linear-output-result-review/receipt.json)
+- [Prospective RA11 plan](quality/RA11-PLAN.md) and [selection](quality/results/RA11-selection.json)
+- [RA11 package](pkg-CB64-RA11/), [configuration](configs/overrides-CB64-RA11.json) and [source freeze](quality/ra11/READY.json)
+- [RA11 validated CUDA toy result](quality/results/CB64-RA11-toy.json) and [full grid launch](quality/results/RA11-grid-launch.json)
+- [RA11 validated joint quality result](quality/results/CB64-RA11.json) and [remaining regression launch](quality/results/RA11-regressions-launch.json)
+- [RA11 completed validation and recommendation scope](quality/results/CB64-RA11-regressions.json) and [final artifact audit](quality/ra11/final-regression-review/receipt.json)
+- [RA11 original grid gate audit](quality/ra11/grid-gate-review/receipt.json) and [saved-state audit](integration/review/ra11-grid-artifact-audit/accepted-attempt1/receipt.json)
+- [MNIST fixed JSON action/serving diagnosis](quality/ra11/mnist-diagnosis/counts/REPORT.md) and [training dynamics/source review](quality/ra11/mnist-diagnosis/dynamics/REPORT.md)
 - [Package usage and checkpoint compatibility](USAGE.md)
 - [RA4 config](configs/overrides-CB64-RA4.json) and [package](pkg-CB64-RA4/)
 - [RA4 numerical source freeze](integration/iteration-4/READY.json)
@@ -159,5 +206,5 @@ The findings use the existing fixed seeds and saved fixture inputs. Shared-GPU
 timings describe these runs; they do not establish a general scaling law.
 
 Read compact current progress with
-`python -B quality/status.py --variant CB64-RA10`, or tail the active grid log at
-`validation-cb64-ra10/logs/screen-grid100.log`.
+`python -B quality/status.py --variant CB64-RA11`, or read the retained grid log at
+`validation-cb64-ra11/logs/screen-grid100.log`.

@@ -1,5 +1,6 @@
 """Build a compact status report from completed, frozen CUDA evidence."""
 from datetime import datetime, timezone
+import hashlib
 import json
 from pathlib import Path
 
@@ -73,9 +74,23 @@ def main():
     complete=(final_screens['audited_completed']==16 and
         final_screens.get('all_completed_fixtures_valid') is True and final_learned.get('complete') is True
         and all(record.get('evidence_status')=='VALID' for record in final_learned.get('records',{}).values()))
+    quality_path = ROOT/'quality/results/CB64-RA11.json'
+    joint_quality = json.loads(quality_path.read_text()) if quality_path.exists() else None
+    target_path = ROOT/'quality/results/CB64-RA11-regressions.json'
+    target_validation = json.loads(target_path.read_text()) if target_path.exists() else None
+    target_summary = None if target_validation is None else {
+        key:target_validation[key] for key in ('status','validation_complete','evidence_validity',
+            'native_gates','canonical_counts','cuda_replay','mnist_active_embedding',
+            'general_base_package_recommended','original_jobs_completed','canonical_screens_completed')}
+    recommendation = ('No package is recommended for the toy/grid target until both unchanged gates and required validity/replay checks pass. E22 remains the broad reference; RA4 has the best measured MNIST feature distance.'
+        if joint_quality is None else 'RA11 passes both original CUDA toy/grid gates and leads that target. Its severe MNIST regression prevents a general base-package recommendation. E22 remains the broad reference; RA4 has the best measured MNIST feature distance.')
     leaderboard = dict(updated_utc=datetime.now(timezone.utc).isoformat(),
         status='COMPLETE' if complete else 'IN_PROGRESS',
-        recommendation='No package is recommended for the toy/grid target until both unchanged gates and required validity/replay checks pass. E22 remains the broad reference; RA4 has the best measured MNIST feature distance.',
+        recommendation=recommendation,
+        joint_quality=joint_quality,
+        target_validation=target_summary,
+        target_validation_receipt=None if target_validation is None else str(target_path),
+        target_validation_receipt_sha256=None if target_validation is None else hashlib.sha256(target_path.read_bytes()).hexdigest(),
         completion_scope='Original RA4 learned/state and 16-screen evidence; later toy/grid candidates have separate quality status.',
         ra4_learned_audit=str(final_learned_path),
         scope='One existing fixed seed per fixture; matched saved inputs and initialization; shared GPU0 timings are descriptive.',

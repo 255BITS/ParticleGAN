@@ -33,7 +33,13 @@ The recorded result is 8/8 passing contracts. The GPU retest runs the unchanged 
 [The correction archive](fixes/README.md) contains the subsequent experimental
 packages, matching configs, focused diagnostics and CUDA results. The target
 requires one package passing both the unchanged learned toy and full canonical
-grid gates. No completed candidate qualifies yet.
+grid gates. RA11 is the first candidate to pass both original CUDA quality
+gates. The complete19-job study is independently VALID: all three native tests
+pass and portability is8/13 PASS.
+Exact CUDA replay passes for toy and MNIST. The completed MNIST comparison
+regresses severely to active feature distance40.54441 and zero recall,
+compared with E22's0.54449 and84.72% recall. RA11 leads the toy/grid target;
+it is not recommended as a general base package.
 
 RA8 passes the final toy: precision 0.965332, all 25 modes and mass TV 0.052114.
 All ten saved training states match RA7 exactly apart from the declared serving
@@ -61,6 +67,21 @@ covariance ratio1.77312 exceeds1.7. All five terminal covariance checks fail;
 the first four also fail center RMS and the frozen holdout fails coverage.
 Final precision is0.97945, all100 modes and TV0.03185. Historical abbreviated
 action lists receive count/scalar checks; full lineage/reset/row-ID validity
-is checked in the final saved state. The next fixed saved-output diagnostic
-examines nonlinear clean-feature means against the stochastic emitted law.
+is checked in the final saved state. The fixed saved-output diagnostic found
+that observation noise substantially reduces nonlinear feature residuals
+despite a small paired raw mean increment and no learned-group transitions.
 See the [completed RA10 receipt](fixes/quality/results/CB64-RA10.json).
+
+A fixed CPU prototype measuring raw output means accepted914 grid copies,
+reduced EMA squared conditional mean error40.4% and centered covariance trace5.0%,
+and conservatively vetoed the new phase on the toy. RA11 is selected from
+this result with genuine backend schema10. Affected state controls and short
+CUDA mechanics pass. Its original final CUDA toy passes, with all ten saved
+checkpoints VALID. Full Grid100 validation passes all five terminal checks and
+the independent100k holdout. Final grid precision is0.98250, all100 modes,
+TV0.03280, center RMS0.16661 sigma, radial KS0.01376 and maximum covariance
+ratio1.34756. Holdout precision is0.98453 and center RMS0.13973 sigma.
+RA11 is the validated joint quality winner. MNIST and five portability failures
+prevent a general base-package recommendation. See the [validated joint quality
+receipt](fixes/quality/results/CB64-RA11.json), [completed validation](fixes/quality/results/CB64-RA11-regressions.json),
+and [fixed MNIST diagnosis](fixes/quality/ra11/mnist-diagnosis/counts/REPORT.md).

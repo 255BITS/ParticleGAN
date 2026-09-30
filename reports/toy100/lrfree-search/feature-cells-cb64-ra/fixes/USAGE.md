@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 root = Path("/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929")
-variant = "CB64-RA10"  # experimental; toy passes, strict grid fails
+variant = "CB64-RA11"  # toy/native gates pass; MNIST and portability regress
 sys.path.insert(0, str(root / f"pkg-{variant}"))
 
 from particlegan.recipes import Recipe
@@ -97,6 +97,23 @@ final CUDA toy passes and its ten checkpoints are VALID. The full unchanged
 grid completes VALID/FAIL: final center fidelity passes, covariance and the
 five terminal combined gates fail. Required CUDA replay/portability checks
 have not advanced after this quality failure.
+
+RA11 keeps the same configuration and support geometry, and measures the
+mean-copy objective in a separate even-fitted raw output frame. At most eight
+positive-variance coordinates are selected deterministically; this sketch
+depends on units and orientation and can miss other relevant coordinates.
+Moment rank is separate from critic rank. RA11 uses backend schema10, mean
+metadata schema2 and trainer schema5; backend9 checkpoints are incompatible.
+Affected save/reload, malformed-state rejection, axis ownership and matched
+next-update controls pass. Short CUDA mechanics and the final original CUDA
+toy pass; all ten toy checkpoints are VALID. Full Grid100 validation passes,
+including all five original terminal checks and the independent100k holdout.
+Independent quality and saved-state audits are VALID/PASS. The package remains
+experimental. Exact CUDA replay passes for toy and MNIST, but MNIST sample
+quality regresses to active feature distance40.54441 and zero recall. The
+completed portability suite is8/13 PASS; all three native tests pass and final
+artifact validity is VALID. RA11 is a validated toy/grid quality winner,
+not a recommendation as a general base package.
 
 Use `trainer.state_dict()` and `trainer.load_state_dict()` for continuation.
 Backend schemas/settings and serialized lineage topology are checked before
