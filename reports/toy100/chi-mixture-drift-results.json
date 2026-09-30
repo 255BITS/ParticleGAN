@@ -1,0 +1,21 @@
+{
+  "method": "pr84_smoothed_g_with_reverse_kl_chi2_prior_pullback",
+  "paper": "https://arxiv.org/abs/2603.10592",
+  "qualifies": false,
+  "cold_run": false,
+  "torch": "2.14.0+cpu",
+  "cloud_filter": {
+    "seconds": 0.126,
+    "identical_cloud_drift": 0.0,
+    "distinct_vs_centers": {"final_modes": 8, "final_hq": 1.0, "min_hq": 1.0},
+    "missing_vs_centers": {"final_modes": 8, "final_hq": 1.0, "min_hq": 0.0, "first_full_support": 24},
+    "distinct_vs_width_cloud": {"final_modes": 8, "final_hq": 1.0, "min_hq": 1.0},
+    "missing_vs_width_cloud": {"final_modes": 8, "final_hq": 1.0, "min_hq": 0.0, "first_full_support": 22}
+  },
+  "warm": {
+    "identity": {"checks": "200/200", "final_modes": 8, "final_hq": 0.9990234375},
+    "constant": {"pass_all": false, "final_modes": 8, "final_hq": 0.645263671875, "min_hq": 0.0},
+    "original": {"passing_checks": 196, "failing_steps": [1129, 1130, 1131, 1132], "min_hq": 0.8662109375, "final_modes": 8, "final_hq": 0.999267578125},
+    "chi_mixture": {"passing_checks": 173, "failing_from": 1174, "failing_through": 1200, "final_modes": 2, "final_hq": 0.20068359375, "accepted": "200/200", "bandwidth_median": 0.26259365677833557, "bandwidth_max": 2.4701640605926514}
+  }
+}
