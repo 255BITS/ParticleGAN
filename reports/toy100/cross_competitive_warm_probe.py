@@ -34,7 +34,9 @@ def variants():
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--matched-output-rms',type=float,default=None)
+    parser.add_argument('--error-relative-gain',type=float,default=None);args=parser.parse_args()
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     declaration=dict(methods=['identity','constant','cross_only'],prefix_steps=1000,total_steps=1200,
         seed=0,shared_gate_eligible=False,scratch_optimizer_policy='same_sample_cross_only_competitive_response',
@@ -47,7 +49,9 @@ def main():
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.with_suffix('.declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
     result=run_warm_variants(config,variants(),output_dir=args.output,
-        prefix_context=lambda:cross_competitive(start_step=1000))
+        prefix_context=lambda:cross_competitive(start_step=1000,
+            matched_output_rms_limit=args.matched_output_rms,
+            error_relative_gain=args.error_relative_gain))
     print(json.dumps(result,indent=2),flush=True)
 
 
