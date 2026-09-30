@@ -1,0 +1,30 @@
+{
+  "phase": "warm",
+  "seed": 0,
+  "shared_gate_eligible": false,
+  "scratch_optimizer_policy": "pr84_smoothed_g_with_path_crossing_direction",
+  "method": "pr84_smoothed_g_with_path_crossing_direction",
+  "d_curvature_bound": 3.0,
+  "g_curvature_bound": 0.25,
+  "smooth_cap": 0.15,
+  "operator": "Frozen PR84 update with path-crossing critic direction on G",
+  "acquisition_signal": "ray that dips then rises in an empty higher basin; direction only",
+  "nominal_rates": {
+    "g": 0.00425,
+    "d": 0.00425,
+    "prior": 0.0085
+  },
+  "torch_note": "local interpreter may differ from the archived cu126/Python 3.12.13 replay",
+  "source": {
+    "reports/toy100/path_smoothed_candidate.py": "67c53bdaa011c19be2d4a30f814bea86ad555253676aa5fff5f85d2e2f07aa7c",
+    "reports/toy100/path_acquisition.py": "f8e64a30899fc645c5cce2d6315adedfc27daf9caab7050ca087c82161a08c7e",
+    "reports/toy100/path_projection_probe.py": "6b2977108668e58bf6744eacbf0210db2c87c6a863518175f9e244d576a66a33",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+  }
+}
