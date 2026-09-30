@@ -250,8 +250,20 @@ class DataDriftController:
         return deepcopy(self.__dict__)
 
     def load_state_dict(self, state):
-        if set(state) != set(self.__dict__) or state["variant"] != self.variant:
+        if not isinstance(state, dict) or set(state) != set(self.__dict__) or state["variant"] != self.variant:
             raise ValueError("incompatible continuous controller state")
+        if self.variant in ("dv10", "dv11", "dv12"):
+            bandwidth = state["latent_bandwidth"]
+            current = self.latent_bandwidth
+            if bandwidth is not None and (not isinstance(bandwidth, torch.Tensor)
+                    or bandwidth.ndim != 1 or not bandwidth.is_floating_point()
+                    or not torch.isfinite(bandwidth).all() or bool((bandwidth < 0).any())
+                    or (current is not None and (bandwidth.shape != current.shape
+                                                or bandwidth.dtype != current.dtype
+                                                or bandwidth.device != current.device))):
+                raise ValueError("continuous controller latent bandwidth does not match the table")
+            if current is not None and bandwidth is None:
+                raise ValueError("continuous controller latent bandwidth is missing")
         self.__dict__.update(deepcopy(state))
 
 
@@ -782,7 +794,12 @@ class SequentialSettleTest(SettleTest):
 
 
 class StationarityLR:
-    """Per-group SettleTests for GANTrainer's (opt_g, opt_d) (lr_control="stationarity")."""
+    """Per-group settling tests for explicitly owned optimizers.
+
+    ``optimizers`` starts with generator and critic owners; a separate table
+    owner may follow.  The isolated ``prior_param`` group gets the sequential
+    row-lineage-aware tester, independent of any training-loop class.
+    """
 
     def __init__(self, optimizers, prior_param=None, release_rule="any"):
         self.testers = []
@@ -806,8 +823,9 @@ class StationarityLR:
                     yield group, tester
 
     def diagnostics(self):
-        names = ("g", "d")
-        return {f"{names[i]}{j}": t.diagnostics() for i, row in enumerate(self.testers)
+        names = ("g", "d", "table")
+        return {f"{names[i] if i < len(names) else 'optimizer' + str(i)}{j}": t.diagnostics()
+                for i, row in enumerate(self.testers)
                 for j, t in enumerate(row) if t is not None}
 
     def state_dict(self):

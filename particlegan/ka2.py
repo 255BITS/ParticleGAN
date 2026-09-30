@@ -325,6 +325,9 @@ class CriticPenalty(_K3PCriticPenalty):
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
         self.regularizer = KA2GradientPenalty(record=optimizer.record, **options)
+        controller = getattr(optimizer, "continuous_controller", None)
+        if controller is not None:
+            self.regularizer.continuous_controller = controller
         self.output = _first_output if output is None else output
         self.collect_stats = bool(collect_stats)
         self.last_stats = {}

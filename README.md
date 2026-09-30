@@ -132,11 +132,12 @@ See the [API reference](docs/api.md#initialization) and the
 
 ## Model families
 
-`get_recipe(name)` selects the model; every family trains the same way.
+`get_recipe(name)` selects a model family or the E22 policy preset.
 
 | Name | Model |
 | --- | --- |
 | `gan` (default) | GAN with a learnable particle prior |
+| `e22` | Scalar particle GAN with stationarity control, row evidence, birth/death, learned noise and served averages |
 | `mog` | GAN with a mixture-of-Gaussians particle prior |
 | `ddgan` | Denoising-diffusion GAN with a UCD (class-conditional) critic |
 | `ddgan_mog` | `ddgan` with a mixture-of-Gaussians prior |
@@ -145,6 +146,10 @@ See the [API reference](docs/api.md#initialization) and the
 | `ae_ddgan` | Autoencoder denoising-diffusion GAN |
 
 Any field can be overridden: `get_recipe("mog", total_steps=20_000)`.
+For E22, set the task's dimensions and output noise explicitly:
+`get_recipe("e22", num_particles=20_000, z_dim=2, batch_size=2048, output_noise_std=.029)`.
+[`E22Policy`](docs/e22.md) exposes the same controls used by `GANTrainer` for
+caller-owned backward passes and optimizer steps, with checkpointing and served snapshots.
 
 ## Learn more
 
@@ -152,6 +157,7 @@ Any field can be overridden: `get_recipe("mog", total_steps=20_000)`.
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
+  [`e22_external_loop.py`](examples/e22_external_loop.py) (E22 in a caller-owned loop),
   [`pytorch_loop.py`](examples/pytorch_loop.py) (the full update in your own loop),
   [`100gaussians.py`](examples/100gaussians.py) (the benchmark above),
   [`particle_autoencoder.py`](examples/particle_autoencoder.py) (AE/VAE-GAN),

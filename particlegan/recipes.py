@@ -252,6 +252,9 @@ class Recipe:
             raise ValueError("row_evidence_gate must be a boolean")
         if self.row_evidence_gate and self.lr_control != "stationarity":
             raise ValueError("row_evidence_gate requires lr_control='stationarity'")
+        if (self.particle_birth_death or self.row_evidence_gate) and self.conditioning != "scalar":
+            raise ValueError("particle birth/death and row evidence require independently sampled "
+                             "unconditional rows; conditional and UCD generators are unsupported")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
@@ -455,14 +458,29 @@ class Recipe:
 
 
 def get_recipe(name="gan", **overrides):
-    """Select a model family with current shared defaults and explicit overrides.
+    """Select a model family or the E22 policy preset with explicit overrides.
 
-    Every family trains with the same formulation; names configure model
-    components only. Use ``Recipe(**saved_fields)`` for resolved checkpoints
-    and ``recipe.replace(name=...)`` for custom report labels.
+    Model families share the default KA2 formulation. ``"e22"`` selects the
+    schedule-free DV12/stationarity policy, row evidence, critic-feature
+    birth/death, learned output noise and served averaging. Its default
+    dimensions are the native 100-Gaussian task's 20,000 particles, latent
+    dimension 2 and batch size 2,048. Set ``num_particles``, ``z_dim``,
+    ``batch_size`` and ``output_noise_std`` explicitly for another task.
+    No research configuration file is read at runtime.
+
+    Use ``Recipe(**saved_fields)`` for resolved checkpoints and
+    ``recipe.replace(name=...)`` for custom report labels.
     """
     families = {
         "gan": {},
+        "e22": dict(continuous_policy="dv12", total_steps=None,
+                    lr_control="stationarity", amsgrad=True, reg_coeff=3.0,
+                    input_noise_std=0.0, output_noise_warmup=0.0,
+                    output_noise_mode="learnable", particle_birth_death=True,
+                    row_evidence_gate=True, table_release_rule="anchor",
+                    birth_death_space="critic", birth_death_feature_scale="std",
+                    birth_death_isolation=True, row_evidence_null="scaled",
+                    serve_average=4.0, reopen_signal="none"),
         "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
         "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
         "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
@@ -550,8 +568,8 @@ def learning_rate_scales(step, recipe, *, network_transition=None, controller=No
     to apply all three parameter roles.
     """
     if getattr(recipe, "lr_control", "mobility") == "stationarity":
-        raise ValueError("lr_control='stationarity' keeps per-group LR scales in GANTrainer "
-                         "(trainer.lr_settle); learning_rate_scales cannot reproduce them")
+        raise ValueError("lr_control='stationarity' requires per-group policy state; use "
+                         "E22Policy/UpdatePolicy.begin_step() or GANTrainer instead of learning_rate_scales")
     if recipe.continuous_policy is not None:
         from .continuous import DataDriftController
         if not isinstance(controller, DataDriftController) or controller.variant != recipe.continuous_policy:

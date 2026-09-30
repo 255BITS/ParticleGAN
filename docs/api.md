@@ -52,6 +52,13 @@ python -u examples/quickstart_gan.py --steps 1000 --resume run.pt --output run.p
 The explicit [component-based loop](../examples/pytorch_loop.py) remains available
 for applications that manage their own updates.
 
+For E22, use the installed `get_recipe("e22", **task_overrides)` preset and
+`E22Policy` to coordinate a caller-owned loop. The policy used by `GANTrainer`
+owns controller observations, group learning rates, row evidence, birth/death,
+learned output noise and serving averages. Its lifecycle hooks, checkpoint
+contract and served snapshots are documented in [the E22 guide](e22.md), with
+a [runnable external loop](../examples/e22_external_loop.py).
+
 ## Initialization
 
 `particlegan.init` is optional, explicit tooling in the style of
@@ -795,6 +802,7 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 
 ```python
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
+get_recipe("e22", **overrides) # Schedule-free E22 policy, explicit task settings.
 recipe.replace(**overrides)   # A new immutable Recipe.
 recipe.to_dict()              # Complete resolved fields.
 Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
@@ -802,7 +810,10 @@ Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 
 `get_recipe(name="gan", **overrides)` selects components without constructing a
 training loop. Explicit keyword fields override the selected configuration.
-Every family trains with the same optimizer, loss, penalty and schedule.
+Model families share the default optimizer, loss, penalty and schedule. The
+`e22` preset selects DV12 stationarity control with per-row evidence,
+critic-feature birth/death, learned output noise and served averaging; it
+requires no research JSON or training horizon.
 Unknown names
 and fields are rejected. Restore a complete saved configuration with
 `Recipe(**saved_fields)`; use `recipe.replace(name="my-run")` to label a run.
@@ -810,6 +821,7 @@ and fields are rejected. Restore a complete saved configuration with
 | Name | Components and dimensions |
 | --- | --- |
 | `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
+| `e22` | Scalar GAN, 20,000 particles, latent dimension 2, batch 2,048; E22 controls with learned output noise initially .029 |
 | `mog` | GAN, 400 MoG components, latent dimension 2, relative sigma .025 |
 | `ddgan` | DDGAN, UCD with 4 classes, discrete particles |
 | `ddgan_mog` | DDGAN, UCD with 4 classes, 400 MoG components, relative sigma .025 |
@@ -822,6 +834,14 @@ distance and temperature .125; the others use sum distance and temperature .25.
 These component choices retain the original API's model-family structure with
 the new shared hyperparameters. The GAN development-suite evidence does not
 establish convergence of those hyperparameters for every AE/VAE/DDGAN setup.
+
+E22's task inputs are `num_particles`, `z_dim`, `batch_size` and
+`output_noise_std`; set them explicitly for a new task. Row evidence and
+birth/death currently require independently sampled unconditional table rows.
+Conditional and densely blended routed banks are rejected when these
+mechanisms are enabled. [The E22 guide](e22.md) defines the row contract and
+how to use the other controls with explicit generator, encoder/router, critic
+and table optimizer roles.
 
 ### Components that change a loop
 

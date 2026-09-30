@@ -19,8 +19,167 @@ history. All randomness comes from a private stream; no training stream,
 parameter or optimizer state is touched except by an executed move.
 """
 import math
+from copy import deepcopy
+from contextlib import contextmanager
+from dataclasses import dataclass, field
+from typing import Callable
 
 import torch
+
+
+@dataclass
+class ParticleRows:
+    """Explicit owners and operations for an independently sampled particle bank.
+
+    Each row of ``table`` is one equal-mass atom, sampled uniformly with
+    replacement, with clean output ``generate(table[i])``. Moving a row must
+    affect that atom only: conditional banks, nonuniform routers and dense
+    soft blends do not satisfy this contract. Declare those models to the
+    policy as a different row semantics; evidence and birth/death reject them.
+
+    ``optimizer`` owns the table exactly once. Its full-shaped tensor states
+    (Adam/AMSGrad moments) and optional ``latent_history`` move with the row;
+    scalar/global states remain shared. ``averaged_table`` is a separate,
+    frozen table belonging to the serving average. The generation and critic
+    feature callbacks must be deterministic and consume no training RNG.
+    Feature callbacks receive samples in their original, unflattened shape
+    and return a two-dimensional matrix with one feature row per sample.
+
+    Include all modules used by the generation callback in
+    ``evaluation_modules``. Birth/death temporarily evaluates those modules
+    without changing any of their original train/eval flags. A feature callback
+    owns its own evaluation context (``ScalarHeadFeatures`` does this).
+    """
+
+    table: torch.Tensor
+    optimizer: torch.optim.Optimizer
+    averaged_table: torch.Tensor
+    generate: Callable[[torch.Tensor], torch.Tensor]
+    critic_features: Callable[[torch.Tensor], torch.Tensor] | None = None
+    evaluation_modules: tuple = ()
+    controller: object | None = None
+    completed_steps: Callable[[], int] = field(default=lambda: 0)
+    semantics: str = "independent"
+
+    def __post_init__(self):
+        if self.semantics != "independent":
+            raise ValueError("particle birth/death requires independent uniformly sampled rows; "
+                             "conditional and soft-routed particle banks are unsupported")
+        table = self.table
+        if (not isinstance(table, torch.Tensor) or table.ndim != 2
+                or not all(table.shape) or table.layout != torch.strided
+                or not table.is_floating_point() or not table.requires_grad or not table.is_leaf):
+            raise ValueError("particle birth/death needs a trainable leaf particle table [rows, latent_dim]")
+        if not isinstance(self.optimizer, torch.optim.Optimizer):
+            raise TypeError("particle table optimizer must be a torch optimizer")
+        owners = sum(p is table for group in self.optimizer.param_groups for p in group["params"])
+        if owners != 1:
+            raise ValueError("particle table must belong to its optimizer exactly once")
+        history = getattr(self.optimizer, "latent_history", None)
+        if history is not None and (not isinstance(history, torch.Tensor) or history.shape != table.shape
+                                    or history.device != table.device or history.dtype != table.dtype):
+            raise ValueError("optimizer latent_history must match its particle table")
+        average = self.averaged_table
+        if (not isinstance(average, torch.Tensor) or average.shape != table.shape
+                or average.device != table.device or average.dtype != table.dtype or average.requires_grad):
+            raise ValueError("averaged particle table must be frozen and match the table's shape, device and dtype")
+        if average.untyped_storage().data_ptr() == table.untyped_storage().data_ptr():
+            raise ValueError("averaged particle table must have separate storage from training weights")
+        if not callable(self.generate) or not callable(self.completed_steps):
+            raise TypeError("generation and completed_steps must be callbacks")
+        if self.critic_features is not None and not callable(self.critic_features):
+            raise TypeError("critic_features must be a callback")
+        self.evaluation_modules = tuple(self.evaluation_modules)
+        if any(not isinstance(module, torch.nn.Module) for module in self.evaluation_modules):
+            raise TypeError("evaluation_modules must contain torch modules")
+
+    @contextmanager
+    def evaluating(self):
+        modes = dict.fromkeys(module for root in self.evaluation_modules for module in root.modules())
+        modes = [(module, module.training) for module in modes]
+        try:
+            for root in self.evaluation_modules:
+                root.eval()
+            yield
+        finally:
+            for module, flag in modes:
+                module.training = flag
+
+
+class ScalarHeadFeatures:
+    """The native E22 critic-feature callback, including checkpointed head discovery.
+
+    Concatenate learned inputs to scalar ``nn.Linear`` score heads, preserving
+    firing order. Raw-sample skip heads are excluded; a critic with no learned
+    feature space is rejected. Custom critics may provide another deterministic
+    feature callback directly instead of using this adapter.
+    """
+
+    def __init__(self, critic):
+        if not isinstance(critic, torch.nn.Module):
+            raise TypeError("critic must be a torch module")
+        self.critic = critic
+        self._linears = [m for m in critic.modules() if isinstance(m, torch.nn.Linear)]
+        if not self._linears:
+            raise ValueError("birth_death_space='critic' needs a critic with an nn.Linear score head")
+        self._heads = None
+
+    @staticmethod
+    def _is_raw(feature, raw):
+        dx, width, raw = raw.shape[1], feature.shape[1], raw.to(feature.dtype)
+        if width == dx:
+            return torch.equal(feature, raw)
+        return width > dx and (torch.equal(feature[:, :dx], raw) or torch.equal(feature[:, -dx:], raw))
+
+    @torch.no_grad()
+    def __call__(self, x, chunk=8192):
+        fired = []
+        handles = [m.register_forward_pre_hook(lambda module, inputs: fired.append((module, inputs[0].detach()))
+                                               if self._heads is None or module in self._heads else None) for m in self._linears]
+        # Preserve mixed module flags as well as the root's flag. Native critics
+        # have uniform flags, for which this is identical to the former adapter.
+        modes = [(module, module.training) for module in self.critic.modules()]
+        self.critic.eval()
+        captured = []
+        try:
+            for start in range(0, len(x), chunk):
+                fired.clear()
+                self.critic(x[start:start + chunk])
+                if self._heads is None:
+                    raw = x[start:start + chunk].flatten(1)
+                    heads = [(m, f) for m, f in fired if m.out_features == 1] or fired[-1:]
+                    heads = [(m, f) for m, f in heads if not self._is_raw(f, raw)]
+                    if not heads:
+                        raise ValueError("birth_death_space='critic': every scalar score head of the critic reads the raw sample "
+                                         "(or the raw sample concatenated with something), so there is no feature space")
+                    self._heads = list(dict.fromkeys(m for m, _ in heads))
+                by = {id(m): f for m, f in fired}
+                captured.append(torch.cat([by[id(m)] for m in self._heads], 1))
+        finally:
+            for handle in handles:
+                handle.remove()
+            for module, flag in modes:
+                module.training = flag
+        return torch.cat(captured).double()
+
+    def state_dict(self):
+        names = {id(module): name for name, module in self.critic.named_modules()}
+        return {"heads": None if self._heads is None else [names[id(module)] for module in self._heads]}
+
+    def check_state(self, state):
+        if not isinstance(state, dict) or set(state) != {"heads"}:
+            raise ValueError("invalid critic-feature state")
+        heads = state["heads"]
+        names = dict(self.critic.named_modules())
+        if heads is not None and (not isinstance(heads, list) or not heads or any(not isinstance(name, str) for name in heads)
+                                  or len(set(heads)) != len(heads)
+                                  or any(name not in names or names[name] not in self._linears for name in heads)):
+            raise ValueError("critic-feature heads do not match the critic")
+
+    def load_state_dict(self, state):
+        self.check_state(state)
+        names = dict(self.critic.named_modules())
+        self._heads = None if state["heads"] is None else [names[name] for name in state["heads"]]
 
 
 def _knn(query, points, k, exclude=None, chunk=2048, shortlist_dtype=None):
@@ -71,19 +230,38 @@ def _normal_score(x, k):
 
 
 class ParticleBirthDeath:
+    """Checkpointable mass balancing on an explicit ``ParticleRows`` contract.
+
+    Call ``observe_real`` on critic real batches, then ``maybe_apply`` after
+    the generator/table optimizer step, noise update and EMA update. Moves
+    copy the EMA rows as well as training rows, then re-anchor settling tests
+    and reset row-gradient evidence at ``moved_rows`` before selecting served
+    weights. The policy coordinates those subsequent hooks.
+    """
+
     Q = .05          # BH false-discovery rate per evaluation; dimension-test level
 
-    def __init__(self, trainer, seed):
-        prior = trainer.prior
-        if not prior.z.requires_grad:
-            raise ValueError("particle_birth_death needs a trainable particle table")
-        self.N = n = prior.z.shape[0]
+    def __init__(self, rows, seed, *, space="data", isolation=False, feature_scale="none"):
+        if not isinstance(rows, ParticleRows):
+            raise TypeError("particle birth/death requires an explicit ParticleRows contract")
+        if space not in ("data", "critic") or feature_scale not in ("none", "std"):
+            raise ValueError("invalid particle birth/death space or feature scale")
+        if type(isolation) is not bool:
+            raise ValueError("particle birth/death isolation must be boolean")
+        if (isolation or feature_scale == "std") and space != "critic":
+            raise ValueError("isolation and feature standardisation require critic feature space")
+        if space == "critic" and rows.critic_features is None:
+            raise ValueError("birth_death_space='critic' needs an explicit critic-feature callback")
+        self.rows = rows
+        self.N = n = rows.table.shape[0]
         self.k = min(math.ceil((math.log2(n / self.Q) + 1) / 2), n - 2)
         if self.k < 4:
             raise ValueError("particle_birth_death needs at least 6 particles")
+        if isolation and self.k >= (n + 1) // 2:
+            raise ValueError("birth/death isolation needs enough particles for leave-one-out neighbours in its reference half")
         self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(self.k), dtype=torch.float64))))
         self.dry_run = False   # test hook: evaluate, never move
-        device, dtype = trainer.device, trainer.dtype
+        device, dtype = rows.table.device, rows.table.dtype
         self.reservoir = None  # [N, D_out], allocated on the first batch
         self.fill = 0
         self.cursor = 0
@@ -94,23 +272,14 @@ class ParticleBirthDeath:
         self.anchor = None     # [N, D_out]
         self.radius = torch.zeros(n, device=device, dtype=dtype)
         self.pending = torch.zeros(n, device=device, dtype=torch.bool)
-        self.space = trainer.recipe.birth_death_space
-        self.isolation = bool(trainer.recipe.birth_death_isolation)
-        self.feature_scale = trainer.recipe.birth_death_feature_scale
-        self.iso_log = []       # transient: [step, flagged rows, acted] of the latest evaluations (diagnostics only)
+        self.space = space
+        self.isolation = isolation
+        self.feature_scale = feature_scale
+        self.iso_log = []       # [step, flagged rows, acted] of the latest evaluations (diagnostics only)
         self.sample_shape = None
         if self.space == "critic":
             # locality (anchor, radius, stale resets) lives in the table's own latent space; evidence lives in critic features
-            self.anchor = torch.zeros(n, prior.z.shape[1], device=device, dtype=dtype)
-            # feature space = the inputs of the critic's scalar score heads: every nn.Linear with one output that fires in a forward pass and
-            # whose input is learned (not the raw sample, not the raw sample concatenated with something); concatenated in firing order. A critic
-            # with a raw linear skip (score = f(x) + w.x) contributes its learned heads only; a critic whose scalar heads all read the raw
-            # sample has no feature space and is refused. Found on the first call by hooking every Linear (unused or later-registered Linears
-            # cannot be mistaken for a head); afterwards only the selected heads are recorded.
-            self._linears = [m for m in trainer.D.modules() if isinstance(m, torch.nn.Linear)]
-            if not self._linears:
-                raise ValueError("birth_death_space='critic' needs a critic with an nn.Linear score head")
-            self._heads = None
+            self.anchor = torch.zeros(n, rows.table.shape[1], device=device, dtype=dtype)
         self.stream = torch.Generator(device=device).manual_seed(seed)
         self.counters = {k: 0 for k in ("evals", "dim_skips", "discoveries", "realised_deaths",
                                         "realised_births", "stays", "moves", "matched", "normalised",
@@ -118,14 +287,22 @@ class ParticleBirthDeath:
         if self.isolation:
             self.counters.update({k: 0 for k in ("iso_evals", "iso_flagged", "iso_acted", "iso_skipped", "iso_moves", "iso_dup_skips")})
         self.last = {}
-        self.moved_rows = None  # transient (not checkpointed): rows moved by the latest maybe_apply
+        self.moved_rows = None  # rows moved by the latest maybe_apply
 
     # --------------------------------------------------------------- reservoir
     @torch.no_grad()
     def observe_real(self, real):
+        if (not isinstance(real, torch.Tensor) or real.ndim < 2 or not len(real)
+                or real.device != self.rows.table.device or real.dtype != self.rows.table.dtype):
+            raise ValueError("real samples must be a nonempty batch on the particle table device and dtype")
+        shape = tuple(real.shape[1:])
+        if self.sample_shape is not None and shape != self.sample_shape:
+            raise ValueError("real sample shape must remain unchanged for the birth/death reservoir")
         x = real.detach().flatten(1)
         if self.sample_shape is None:
-            self.sample_shape = tuple(real.shape[1:])     # also after a checkpoint load (the reservoir is restored, the shape is not)
+            self.sample_shape = shape
+        if self.reservoir is not None and self.reservoir.shape[1] != x.shape[1]:
+            raise ValueError("real sample shape does not match the restored birth/death reservoir")
         if self.reservoir is None:
             self.reservoir = torch.zeros(self.N, x.shape[1], device=x.device, dtype=x.dtype)
             if self.space == "data":
@@ -155,57 +332,28 @@ class ParticleBirthDeath:
         return torch.where(torch.isfinite(nearest), nearest * .5, torch.zeros_like(nearest))
 
     @torch.no_grad()
-    def _jitter(self, trainer, latent, prior, noise):
-        c = trainer.controller
+    def _jitter(self, latent, noise):
+        c = self.rows.controller
         if c is None or c.variant not in ("dv10", "dv11", "dv12"):
             return torch.zeros_like(latent)
         trust = c.support_trust if c.variant == "dv11" else 1.
         displacement = c.latent_bandwidth * trust * noise
         if c.variant == "dv12":
-            radius = self._nearest_other(latent, prior.z.detach())
+            radius = self._nearest_other(latent, self.rows.table.detach())
             norm = displacement.norm(dim=1)
             displacement = displacement * (radius / norm.clamp_min(1e-20)).clamp_max(1.).unsqueeze(1)
         return displacement
 
     # --------------------------------------------------------------- critic features
-    @staticmethod
-    def _is_raw(feature, raw):
-        """True when a head input is the raw sample or contains it as a leading/trailing block."""
-        dx, width, raw = raw.shape[1], feature.shape[1], raw.to(feature.dtype)
-        if width == dx:
-            return torch.equal(feature, raw)
-        return width > dx and (torch.equal(feature[:, :dx], raw) or torch.equal(feature[:, -dx:], raw))
-
     @torch.no_grad()
-    def _features(self, trainer, x, chunk=8192):
-        """Concatenated inputs of the critic's learned scalar score heads for rows ``x``; critic in eval mode, no grad."""
-        D = trainer.D
-        was = D.training
-        D.eval()
-        fired = []
-        handles = [m.register_forward_pre_hook(lambda module, inputs: fired.append((module, inputs[0].detach()))
-                                               if self._heads is None or module in self._heads else None) for m in self._linears]
+    def _features(self, x):
+        """Feature callback on unflattened sample rows; no gradients."""
         x = x.reshape(len(x), *self.sample_shape)
-        captured = []
-        try:
-            for start in range(0, len(x), chunk):
-                fired.clear()
-                D(x[start:start + chunk])
-                if self._heads is None:
-                    raw = x[start:start + chunk].flatten(1)
-                    heads = [(m, f) for m, f in fired if m.out_features == 1] or fired[-1:]
-                    heads = [(m, f) for m, f in heads if not self._is_raw(f, raw)]
-                    if not heads:
-                        raise ValueError("birth_death_space='critic': every scalar score head of the critic reads the raw sample "
-                                         "(or the raw sample concatenated with something), so there is no feature space")
-                    self._heads = list(dict.fromkeys(m for m, _ in heads))
-                by = {id(m): f for m, f in fired}
-                captured.append(torch.cat([by[id(m)] for m in self._heads], 1))
-        finally:
-            for handle in handles:
-                handle.remove()
-            D.train(was)
-        return torch.cat(captured).double()
+        feature = self.rows.critic_features(x)
+        if (not isinstance(feature, torch.Tensor) or feature.ndim != 2 or feature.shape[0] != len(x)
+                or not feature.shape[1] or not feature.is_floating_point() or feature.device != x.device):
+            raise ValueError("critic-feature callback must return floating [samples, features] on the sample device")
+        return feature.detach().double()
 
     @staticmethod
     def _standardise(q, F, R):
@@ -254,7 +402,7 @@ class ParticleBirthDeath:
         return p <= ps[int(passed[-1])]
 
     @torch.no_grad()
-    def _isolation_pick(self, trainer, flagged, child):
+    def _isolation_pick(self, flagged, child):
         """Rows to re-draw and their parents: every flagged row that the ordinary moves did not just re-draw becomes a clone of a uniformly drawn
         unflagged row among those at most twice as far from it (in the table's own latent space) as its nearest unflagged row: the mass without
         support goes back into the neighbourhood that has support nearest to it, and reaches into that neighbourhood's bulk instead of only its
@@ -269,7 +417,7 @@ class ParticleBirthDeath:
         c["iso_evals"] += 1
         c["iso_flagged"] += n_flag
         c["iso_acted" if acted else "iso_skipped"] += bool(n_flag)
-        self.iso_log = (self.iso_log + [[trainer.completed_steps + 1, n_flag, int(acted)]])[-30:]
+        self.iso_log = (self.iso_log + [[self.rows.completed_steps() + 1, n_flag, int(acted)]])[-30:]
         self.last.update(iso_flagged=n_flag, iso_moves=0)
         empty = child[:0]
         if not acted:
@@ -281,7 +429,7 @@ class ParticleBirthDeath:
         dead, keep = dead.nonzero().flatten(), keep.nonzero().flatten()
         if not len(dead) or not len(keep):
             return empty, empty
-        z = trainer.prior.z.detach()
+        z = self.rows.table.detach()
         parent, step, cap = [], max(1, (1 << 24) // len(keep)), min(self.k ** 2, len(keep))      # chunks of about 16M distances; at most k^2 candidates
         for start in range(0, len(dead), step):
             dist = torch.cdist(z[dead[start:start + step]], z[keep])                                                  # [chunk, keep]
@@ -295,19 +443,29 @@ class ParticleBirthDeath:
         return dead, parent
 
     # --------------------------------------------------------------- evaluation
+    def _check_generated(self, sample):
+        table = self.rows.table
+        if (not isinstance(sample, torch.Tensor) or sample.ndim < 2 or len(sample) != self.N
+                or not sample.is_floating_point() or sample.device != table.device or sample.dtype != table.dtype):
+            raise ValueError("generation callback must return one floating sample per table row on the table device and dtype")
+        if self.sample_shape is None:      # legacy checkpoints did not record this shape
+            shape = tuple(sample.shape[1:])
+            if math.prod(shape) != self.reservoir.shape[1]:
+                raise ValueError("generated sample shape does not match the birth/death reservoir")
+            self.sample_shape = shape
+        if tuple(sample.shape[1:]) != self.sample_shape:
+            raise ValueError("generated sample shape must match the observed real sample shape")
+
     @torch.no_grad()
-    def maybe_apply(self, trainer, sigma_out):
+    def maybe_apply(self, sigma_out):
         """Run one evaluation (and its moves) when the reservoir has turned over."""
         self.moved_rows = None
         if not self.ready():
             return None
         self.rows_since_eval = 0
         self.counters["evals"] += 1
-        G, prior = trainer.G, trainer.prior
-        modes = [(m, m.training) for m in G.modules()]
-        try:
-            G.eval()
-            z = prior.z.detach()
+        with self.rows.evaluating():
+            z = self.rows.table.detach()
             # [dev from spec rev 2] F is an iid N-sample of the exact sampling law (table rows drawn
             # with replacement, as prior.sample does), not one draw per particle: R is iid from pi,
             # so under rho = pi the two pools are identically distributed and both x and the
@@ -315,24 +473,23 @@ class ParticleBirthDeath:
             pick = torch.randint(self.N, (self.N,), device=z.device, generator=self.stream)
             latent = z[pick]
             noise = torch.randn(z.shape, device=z.device, dtype=z.dtype, generator=self.stream)
-            jitter_delta = self._jitter(trainer, latent, prior, noise)
-            y = G(latent + jitter_delta)
+            jitter_delta = self._jitter(latent, noise)
+            y = self.rows.generate(latent + jitter_delta)
+            self._check_generated(y)
             eps = torch.randn(y.shape, device=y.device, dtype=y.dtype, generator=self.stream)
             u = torch.rand(self.N, device=z.device, dtype=torch.float64, generator=self.stream)
             if sigma_out:
                 y = y + float(sigma_out) * eps
-            q_raw = G(z)
+            q_raw = self.rows.generate(z)
+            self._check_generated(q_raw)
             q = q_raw.flatten(1)
-        finally:
-            for m, flag in modes:
-                m.training = flag
         F, R, n, k = y.flatten(1), self.reservoir, self.N, self.k
         own = torch.arange(n, device=q.device)
         if self.space == "critic":
             # evidence in the critic's feature space; locality (anchor, radius, stale resets) in the table's own latent space
             q_loc, zpool = z.clone(), latent + jitter_delta      # clone: the moves below overwrite the table rows in place
             rad_loc = _knn(z, zpool, k)[0][:, -1]
-            q, F, R = self._features(trainer, q_raw), self._features(trainer, y), self._features(trainer, self.reservoir)
+            q, F, R = self._features(q_raw), self._features(y), self._features(self.reservoir)
             centre = R.mean(0, keepdim=True)
             q, F, R = q - centre, F - centre, R - centre
             fast = torch.float32
@@ -351,7 +508,7 @@ class ParticleBirthDeath:
         dR, nR = _levina_bickel(_knn(R, R, k, exclude=own, shortlist_dtype=fast)[0])
         dF, nF = _levina_bickel(_knn(F, F, k, exclude=own, shortlist_dtype=fast)[0])
         D_out = q.shape[1]
-        last = dict(step=trainer.completed_steps + 1, k=k, d_R=dR, d_F=dF)
+        last = dict(step=self.rows.completed_steps() + 1, k=k, d_R=dR, d_F=dF)
         self.last = last
         # BD-GUARD FIX (one mechanism): the kNN-ratio null already absorbs small
         # dimension mismatches, and at N=20000 the asymptotic-variance
@@ -458,13 +615,13 @@ class ParticleBirthDeath:
         self.W[spent] = 0.
         self.n[spent] = 0
         if len(child):
-            self._move(trainer, child, parent)
+            self._move(child, parent)
         iso_child = iso_parent = child[:0]
         if self.isolation and self.space == "critic":
-            iso_child, iso_parent = self._isolation_pick(trainer, flagged, child)
+            iso_child, iso_parent = self._isolation_pick(flagged, child)
             if len(iso_child):
-                self._move(trainer, iso_child, iso_parent)
-                last["moves"] = len(child) + len(iso_child)      # the trainer re-anchors the tester and resets the row evidence of every moved row
+                self._move(iso_child, iso_parent)
+                last["moves"] = len(child) + len(iso_child)      # the policy re-anchors the tester and resets row evidence of every moved row
         if len(child) or len(iso_child):
             moved = torch.cat((child, iso_child))
             self.moved_rows = moved
@@ -488,18 +645,18 @@ class ParticleBirthDeath:
         return last
 
     @torch.no_grad()
-    def _move(self, trainer, child, parent):
-        prior, ema = trainer.prior, trainer.ema_prior
-        zp = prior.z.detach()[parent]
+    def _move(self, child, parent):
+        table, average = self.rows.table, self.rows.averaged_table
+        zp = table.detach()[parent]
         noise = torch.randn(zp.shape, device=zp.device, dtype=zp.dtype, generator=self.stream)
-        delta = self._jitter(trainer, zp, prior, noise)
-        prior.z[child] = zp + delta
-        ema.z[child] = ema.z[parent] + delta
-        state = trainer.opt_g.state.get(prior.z, {})
+        delta = self._jitter(zp, noise)
+        table[child] = zp + delta
+        average[child] = average[parent] + delta
+        state = self.rows.optimizer.state.get(table, {})
         for key, value in state.items():
-            if isinstance(value, torch.Tensor) and value.shape == prior.z.shape:
+            if isinstance(value, torch.Tensor) and value.shape == table.shape:
                 value[child] = value[parent]
-        history = trainer.opt_g.latent_history
+        history = getattr(self.rows.optimizer, "latent_history", None)
         if history is not None:
             history[child] = history[parent]
 
@@ -513,9 +670,22 @@ class ParticleBirthDeath:
                     **({"iso_recent": list(self.iso_log)} if self.isolation else {}))
 
     def state_dict(self):
-        return dict(**{k: getattr(self, k) for k in self._TENSORS},
+        feature_callback = self.rows.critic_features
+        feature_state = (feature_callback.state_dict() if self._checkpointed_features() else None)
+        return dict(**{k: None if getattr(self, k) is None else getattr(self, k).detach().clone() for k in self._TENSORS},
                     fill=self.fill, cursor=self.cursor, rows_since_eval=self.rows_since_eval,
-                    counters=dict(self.counters), last=dict(self.last), stream=self.stream.get_state())
+                    counters=dict(self.counters), last=dict(self.last), stream=self.stream.get_state().clone(),
+                    sample_shape=self.sample_shape, feature_state=deepcopy(feature_state),
+                    iso_log=deepcopy(self.iso_log), config=self._config(), dry_run=self.dry_run,
+                    moved_rows=None if self.moved_rows is None else self.moved_rows.clone())
+
+    def _config(self):
+        return {"table_shape": tuple(self.rows.table.shape), "space": self.space,
+                "isolation": self.isolation, "feature_scale": self.feature_scale}
+
+    def _checkpointed_features(self):
+        callback = self.rows.critic_features
+        return all(callable(getattr(callback, method, None)) for method in ("state_dict", "check_state", "load_state_dict"))
 
     def load_state_dict(self, state):
         self.check_state(state)
@@ -525,17 +695,61 @@ class ParticleBirthDeath:
         self.fill, self.cursor, self.rows_since_eval = int(state["fill"]), int(state["cursor"]), int(state["rows_since_eval"])
         self.counters, self.last = dict(state["counters"]), dict(state["last"])
         self.stream.set_state(state["stream"].cpu())
+        self.sample_shape = state.get("sample_shape")
+        self.iso_log = deepcopy(state.get("iso_log", []))
+        self.moved_rows = None if state.get("moved_rows") is None else state["moved_rows"].clone().to(self.S.device)
+        self.dry_run = state.get("dry_run", False)
+        if "feature_state" in state and self._checkpointed_features():
+            self.rows.critic_features.load_state_dict(state["feature_state"])
 
     def check_state(self, state):
         keys = set(self._TENSORS) | {"fill", "cursor", "rows_since_eval", "counters", "last", "stream"}
-        if not isinstance(state, dict) or set(state) != keys:
+        metadata = {"sample_shape", "feature_state", "iso_log", "config", "moved_rows", "dry_run"}
+        if not isinstance(state, dict) or set(state) not in (keys, keys | metadata):
             raise ValueError("invalid birth-death state")
         for key in ("S", "W", "n", "radius", "pending"):
-            if not isinstance(state[key], torch.Tensor) or state[key].shape != getattr(self, key).shape:
+            if (not isinstance(state[key], torch.Tensor) or state[key].shape != getattr(self, key).shape
+                    or state[key].dtype != getattr(self, key).dtype):
                 raise ValueError(f"birth-death {key} does not match the table")
         for key in ("reservoir", "anchor"):
-            if state[key] is not None and (not isinstance(state[key], torch.Tensor) or len(state[key]) != self.N):
+            if state[key] is not None and (not isinstance(state[key], torch.Tensor) or state[key].ndim != 2
+                                         or state[key].shape[0] != self.N or not state[key].is_floating_point()
+                                         or state[key].dtype != self.rows.table.dtype):
                 raise ValueError(f"birth-death {key} does not match the table")
+        reservoir, anchor = state["reservoir"], state["anchor"]
+        if self.space == "critic" and (anchor is None or anchor.shape != self.rows.table.shape):
+            raise ValueError("birth-death anchor does not match the latent table")
+        if self.space == "data" and ((reservoir is None) != (anchor is None)
+                                      or (reservoir is not None and reservoir.shape != anchor.shape)):
+            raise ValueError("birth-death data anchors do not match the reservoir")
+        for key in ("fill", "cursor", "rows_since_eval"):
+            if type(state[key]) is not int or state[key] < 0:
+                raise ValueError(f"invalid birth-death {key}")
+        if (state["fill"] > self.N or state["cursor"] >= self.N
+                or (reservoir is None and (state["fill"] or state["rows_since_eval"]))):
+            raise ValueError("invalid birth-death reservoir counters")
+        if not isinstance(state["counters"], dict) or not isinstance(state["last"], dict):
+            raise ValueError("invalid birth-death counters or diagnostics")
+        if "config" in state:
+            if state["config"] != self._config():
+                raise ValueError("birth-death state configuration does not match the particle rows")
+            shape = state["sample_shape"]
+            if shape is not None and (not isinstance(shape, tuple) or not shape
+                                      or any(type(size) is not int or size <= 0 for size in shape)
+                                      or (reservoir is not None and math.prod(shape) != reservoir.shape[1])):
+                raise ValueError("invalid birth-death sample shape")
+            if not isinstance(state["iso_log"], list):
+                raise ValueError("invalid birth-death isolation log")
+            moved = state["moved_rows"]
+            if moved is not None and (not isinstance(moved, torch.Tensor) or moved.ndim != 1
+                                       or moved.dtype != torch.long or bool((moved < 0).any()) or bool((moved >= self.N).any())):
+                raise ValueError("invalid birth-death moved rows")
+            if type(state["dry_run"]) is not bool:
+                raise ValueError("invalid birth-death dry-run state")
+            if self._checkpointed_features():
+                self.rows.critic_features.check_state(state["feature_state"])
+            elif state["feature_state"] is not None:
+                raise ValueError("birth-death feature state needs a checkpointable critic-feature callback")
         try:
             torch.Generator(device=self.stream.device).set_state(state["stream"].cpu())
         except (TypeError, RuntimeError, AttributeError) as error:

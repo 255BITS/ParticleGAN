@@ -1,0 +1,980 @@
+"""Recipe controls for caller-owned training loops.
+
+The policy never calls ``backward()`` or an optimizer's ``step()``.  One update
+is ordered as ``begin_step(real)``; critic forward/penalty/backward/step;
+``after_critic_step()``; generator forward/backward;
+``after_generator_backward(loss_gan=..., loss_critic=...)``; generator and
+table optimizer steps; ``after_generator_step()``; ``finish_step()``.
+``loss_critic`` is the adversarial critic loss *without* its penalty.  The
+generator hook reads gradients before any clipping or other gradient edits.
+
+The same implementation drives :class:`GANTrainer`.  Caller modules always
+contain fast training weights unless the trainer's compatibility serving
+swap is explicitly requested.  Use ``served_snapshot()`` for independent
+inference weights, and checkpoint only at completed update boundaries.
+"""
+from copy import deepcopy
+from dataclasses import dataclass
+import math
+from types import SimpleNamespace
+
+import torch
+from torch import nn
+
+from .continuous import DataDriftController, StationarityLR
+from .recipes import Recipe, learning_rate_scales
+
+
+def input_noise_std(recipe, completed_steps):
+    """Critic input-noise standard deviation for the next update."""
+    if recipe.continuous_policy is not None:
+        return 0.0
+    end = recipe.input_noise_anneal_end * recipe.total_steps
+    return float(recipe.input_noise_std * max(0.0, 1.0 - completed_steps / end))
+
+
+def output_noise_std(recipe, completed_steps):
+    """Generator output-noise schedule before applying the policy floor."""
+    if recipe.continuous_policy is not None or recipe.output_noise_warmup == 0:
+        return float(recipe.output_noise_std)
+    return float(recipe.output_noise_std * min(
+        1.0, completed_steps / (recipe.output_noise_warmup * recipe.total_steps)))
+
+
+def _validate_optimizer_state(optimizer, state):
+    """Preflight optimizer-owned controls and Adam tensors before live mutation.
+
+    PyTorch's loader checks group counts and casts tensors but does not check
+    moment shapes. A copied optimizer alone can consequently accept a state
+    that fails on the next update after live weights have already been loaded.
+    """
+    restored = deepcopy(optimizer)
+    restored.load_state_dict(deepcopy(state))
+    if isinstance(restored, (torch.optim.Adam, torch.optim.AdamW)):
+        for group in restored.param_groups:
+            for parameter in group["params"]:
+                values = restored.state.get(parameter, {})
+                if not values:
+                    continue
+                required = {"step", "exp_avg", "exp_avg_sq"}
+                if group.get("amsgrad", False):
+                    required.add("max_exp_avg_sq")
+                if not required <= values.keys():
+                    raise ValueError("incomplete checkpoint Adam state")
+                for key in ("exp_avg", "exp_avg_sq", "max_exp_avg_sq"):
+                    value = values.get(key)
+                    if key in values and (not isinstance(value, torch.Tensor) or value.shape != parameter.shape):
+                        raise ValueError(f"checkpoint Adam {key} does not match its parameter")
+                step = values["step"]
+                if isinstance(step, torch.Tensor):
+                    if step.numel() != 1 or not torch.isfinite(step).all() or bool(step < 0):
+                        raise ValueError("invalid checkpoint Adam step")
+                elif type(step) not in (int, float) or not math.isfinite(step) or step < 0:
+                    raise ValueError("invalid checkpoint Adam step")
+
+
+def _state_to_device(value, device):
+    """Move controller/test tensor state after a CPU-first checkpoint load."""
+    if isinstance(value, torch.Tensor):
+        return value.to(device=device)
+    if isinstance(value, dict):
+        return {key: _state_to_device(item, device) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_state_to_device(item, device) for item in value]
+    if isinstance(value, tuple):
+        return tuple(_state_to_device(item, device) for item in value)
+    return value
+
+
+@dataclass(frozen=True)
+class StepNoise:
+    """Noise values to reuse for both halves of this update.
+
+    ``output_sigma`` retains the learned-noise computation graph.  Compute
+    critic fakes under ``torch.no_grad()`` and reuse it in generator fakes.
+    """
+    input_sigma: float
+    output_sigma: object
+
+
+class ServedModel:
+    """Independent inference modules implementing the policy's served law.
+
+    Construct with ``policy.served_model()``.  Both ``sample`` and ``generate``
+    retain DV12 latent perturbation; output noise is optional and disabled by
+    default, exactly as in ``GANTrainer.sample``.  The private sampling stream
+    starts from the policy's evaluation RNG state and never advances a
+    training stream.  Module parameters are frozen and modules are in eval.
+    """
+
+    def __init__(self, models, table, controller, *, source, output_sigma,
+                 completed_steps, stream, generation=None, row_semantics="independent"):
+        self.models, self.table, self.controller = models, table, controller
+        self.source, self.output_sigma = source, output_sigma
+        self.completed_steps, self.stream, self.generation = completed_steps, stream, generation
+        self.row_semantics = row_semantics
+        self.generator, self.critic = models["generator"], models["critic"]
+        self.prior = models.get("prior")
+        self.encoder, self.router = models.get("encoder"), models.get("router")
+
+    @torch.no_grad()
+    def _generate(self, latent, stream, output_noise):
+        if self.controller is not None:
+            prior = self.prior if self.prior is not None else SimpleNamespace(z=self.table)
+            latent = self.controller.perturb_latent(latent, stream, prior)
+        y = self.generator(latent) if self.generation is None else self.generation(self.generator, latent)
+        if output_noise and self.output_sigma != 0:
+            y = y + self.output_sigma * torch.randn(
+                y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        return y
+
+    def _sampling_stream(self, generator):
+        stream = self.stream if generator is None else generator
+        if not isinstance(stream, type(torch.default_generator)):
+            raise TypeError("sampling generator must be a torch.Generator")
+        device = stream.device
+        if device.type == "cuda" and device.index is None:
+            device = torch.device("cuda", torch.cuda.current_device())
+        if device != self.table.device:
+            raise ValueError("sampling generator must use the snapshot device")
+        return stream
+
+    @torch.no_grad()
+    def generate(self, latent, *, generator=None, output_noise=False):
+        """Apply the served latent/output-noise law to caller-supplied latents."""
+        if type(output_noise) is not bool:
+            raise ValueError("output_noise must be a boolean")
+        stream = self._sampling_stream(generator)
+        device = self.table.device
+        devices = [device.index] if device.type == "cuda" else []
+        with torch.random.fork_rng(devices=devices):
+            return self._generate(latent, stream, output_noise)
+
+    @torch.no_grad()
+    def sample(self, n, *, generator=None, output_noise=False):
+        """Uniform independent-row samples from the currently served model."""
+        if self.row_semantics != "independent":
+            raise ValueError("sample requires independent table rows; conditional and densely soft-routed "
+                             "snapshots require caller-owned routing; use generate")
+        if type(n) is not int or n <= 0:
+            raise ValueError("n must be a positive integer")
+        if type(output_noise) is not bool:
+            raise ValueError("output_noise must be a boolean")
+        stream = self._sampling_stream(generator)
+        device = self.table.device
+        devices = [device.index] if device.type == "cuda" else []
+        with torch.random.fork_rng(devices=devices):
+            if self.prior is None:
+                indices = torch.randint(len(self.table), (n,), device=device, generator=stream)
+                latent = self.table[indices]
+            else:
+                latent, _ = self.prior.sample(n, generator=stream)
+            return self._generate(latent, stream, output_noise)
+
+
+class UpdatePolicy:
+    """Checkpointable controls with explicit parameter and optimizer ownership.
+
+    ``roles`` is a list of role lists, aligned with the parameter groups of
+    ``generator_optimizer``, ``critic_optimizer`` and, when distinct,
+    ``table_optimizer``.  Roles are ``generator``, ``encoder``, ``router``,
+    ``critic``, ``table`` and ``noise``; homogeneous groups are required.
+    Omit roles to infer them from the supplied modules and table.  An optional
+    ``generation(model, latent)`` callback supplies the clean generator
+    forward; ``critic_features(samples)`` supplies learned critic features
+    for birth/death.  These callbacks must preserve row order and implement
+    the declared row semantics.  Stateful callback resources are caller-owned
+    and must be checkpointed separately.
+
+    The table may be an independent tensor, ``prior.z``, or a parameter
+    registered in one supplied generator/encoder/router module. An embedded
+    table still needs its own optimizer group; its average and served copy
+    point to the corresponding copied module tensor and are updated once.
+    Supplied modules cannot share parameters or the particle table (do not
+    supply both an enclosing generator and its embedded prior as separate
+    owners). Generator-gradient alignment reads G's network parameters only,
+    excluding an embedded table and separate encoder/router parameters.
+
+    E22 evidence and restructuring require uniform independent table atoms:
+    a draw chooses one row i and generates G(z_i).  Conditional and densely
+    blended banks have no such per-row output law and are explicitly rejected
+    when row evidence or birth/death is enabled.  Other recipe controls can
+    be used with those loops through ``UpdatePolicy`` with these controls off.
+    """
+
+    _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
+    _ROLES = {"generator", "encoder", "router", "critic", "table", "noise"}
+
+    def __init__(self, recipe, generator, critic, *, generator_optimizer,
+                 critic_optimizer, prior=None, table=None, table_optimizer=None,
+                 roles=None, generation=None, critic_features=None, encoder=None,
+                 router=None, row_semantics="independent", seed=0, streams=None,
+                 penalty=None, schedule=None):
+        if not isinstance(recipe, Recipe):
+            raise TypeError("recipe must be a Recipe")
+        if not isinstance(generator, nn.Module) or not isinstance(critic, nn.Module):
+            raise TypeError("generator and critic must be torch modules")
+        self.recipe, self.G, self.D = recipe, generator, critic
+        self.prior, self.encoder, self.router = prior, encoder, router
+        table = getattr(prior, "z", None) if table is None else table
+        if (not isinstance(table, torch.Tensor) or table.ndim != 2
+                or table.shape != (recipe.num_particles, recipe.z_dim)):
+            raise ValueError("table must have shape (recipe.num_particles, recipe.z_dim)")
+        if prior is not None and getattr(prior, "z", None) is not table:
+            raise ValueError("prior.z and table must be the same tensor")
+        self.table, self.device, self.dtype = table, table.device, table.dtype
+        if not table.is_floating_point():
+            raise ValueError("table must use a floating dtype")
+        self.row_semantics = row_semantics
+        if row_semantics not in ("independent", "conditional", "dense_soft"):
+            raise ValueError("row_semantics must be independent, conditional or dense_soft")
+        if ((recipe.row_evidence_gate or recipe.particle_birth_death)
+                and (row_semantics != "independent" or recipe.conditioning != "scalar"
+                     or recipe.encoder_mode != "none")):
+            raise ValueError("row evidence and birth/death require independent unconditional table atoms; "
+                             "conditional and densely soft-routed banks are unsupported")
+        if generation is not None and not callable(generation):
+            raise TypeError("generation must be callable")
+        if critic_features is not None and not callable(critic_features):
+            raise TypeError("critic_features must be callable")
+        self.generation, self.critic_features = generation, critic_features
+        self.opt_g, self.opt_d = generator_optimizer, critic_optimizer
+        self.table_optimizer = self.opt_g if table_optimizer is None else table_optimizer
+        self.optimizers = [self.opt_g, self.opt_d]
+        if self.table_optimizer not in self.optimizers:
+            self.optimizers.append(self.table_optimizer)
+        if self.opt_g is self.opt_d or self.table_optimizer is self.opt_d:
+            raise ValueError("critic and generator/table optimizers must be distinct")
+        self._validate_modules()
+        self.roles = self._parameter_roles(roles)
+        # Adding noise last reproduces GANTrainer's optimizer group ordering.
+        self.log_output_sigma = None
+        self.last_output_sigma = None
+        if recipe.output_noise_mode == "learnable":
+            self.log_output_sigma = nn.Parameter(torch.full(
+                (), math.log(recipe.output_noise_std), device=self.device, dtype=self.dtype))
+            self.opt_g.add_param_group({"params": [self.log_output_sigma], "lr": recipe.lr})
+            self.roles[0].append("noise")
+        self.initial_lrs = [[group["lr"] for group in optimizer.param_groups]
+                            for optimizer in self.optimizers]
+        if any(not math.isfinite(rate) or rate <= 0 for row in self.initial_lrs for rate in row):
+            raise ValueError("policy base learning rates must be positive and finite")
+        self.ema_G, self.ema_prior = deepcopy(self.G).eval(), (None if prior is None else deepcopy(prior).eval())
+        self.ema_encoder = None if encoder is None else deepcopy(encoder).eval()
+        self.ema_router = None if router is None else deepcopy(router).eval()
+        for module in self._average_modules().values():
+            module.requires_grad_(False)
+        self.averaged_table = (table.detach().clone() if self._table_location is None else
+                               self._table_in_modules(self._average_modules()))
+        self._fast = None
+        streams = dict(streams or {})
+        if set(streams) - set(self._STREAMS):
+            raise ValueError("unknown policy RNG stream")
+        for name, offset in zip(self._STREAMS, (2, 3, 4, 5)):
+            setattr(self, name, self._stream(streams.get(name), seed + offset))
+        # The penalty stream is reserved and performs no draws; native image
+        # hosts historically share it with the latent stream. Active training
+        # and evaluation streams still require independent ownership.
+        active_streams = (self.latent_generator, self.noise_generator, self.eval_generator)
+        if len({id(stream) for stream in active_streams}) != len(active_streams):
+            raise ValueError("active policy RNG streams must be distinct")
+        self.completed_steps = 0
+        self.controller = (None if recipe.continuous_policy is None else
+                           DataDriftController(recipe.continuous_policy))
+        if self.controller is not None:
+            self.controller.observe_prior(self._prior_view())
+            # Penalties constructed after the policy bind the same controller;
+            # attach_penalty handles the reverse construction order.
+            self.opt_d.continuous_controller = self.controller
+        self.lr_settle = (StationarityLR(self.optimizers, prior_param=table,
+                                        release_rule=recipe.table_release_rule)
+                          if recipe.lr_control == "stationarity" else None)
+        self.birth_death = None
+        if recipe.particle_birth_death:
+            from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
+            features = critic_features
+            if recipe.birth_death_space == "critic" and features is None:
+                features = ScalarHeadFeatures(self.D)
+            rows = ParticleRows(table=table, optimizer=self.table_optimizer,
+                                averaged_table=self.averaged_table,
+                                generate=lambda latent: self._clean_generate(self.G, latent),
+                                critic_features=features,
+                                evaluation_modules=tuple(module for module in (self.G, encoder, router)
+                                                         if module is not None),
+                                controller=self.controller, completed_steps=lambda: self.completed_steps,
+                                semantics=row_semantics)
+            self.birth_death = ParticleBirthDeath(
+                rows, seed + 6, space=recipe.birth_death_space,
+                isolation=recipe.birth_death_isolation,
+                feature_scale=recipe.birth_death_feature_scale)
+        self.row_evidence = None
+        if recipe.row_evidence_gate:
+            from .row_evidence import RowEvidence
+            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null)
+        self.penalty = None
+        if penalty is None and hasattr(self.opt_d, "record"):
+            penalty = recipe.make_critic_penalty(self.opt_d)
+        if penalty is not None:
+            self.attach_penalty(penalty)
+        self.schedule = learning_rate_scales if schedule is None else schedule
+        self._phase = "ready"
+        self._noise = None
+        self._stray_flags = self._hot = self._z_before = None
+
+    def _training_modules(self):
+        return {name: module for name, module in (
+            ("generator", self.G), ("critic", self.D), ("prior", self.prior),
+            ("encoder", self.encoder), ("router", self.router)) if module is not None}
+
+    def _average_modules(self):
+        return {name: module for name, module in (
+            ("generator", self.ema_G), ("prior", self.ema_prior),
+            ("encoder", self.ema_encoder), ("router", self.ema_router)) if module is not None}
+
+    def _validate_modules(self):
+        seen = set()
+        self._table_location = None
+        table_owners = set()
+        for name, module in self._training_modules().items():
+            for tensor in (*module.parameters(), *module.buffers()):
+                if tensor.device != self.device or (tensor.is_floating_point() and tensor.dtype != self.dtype):
+                    raise ValueError("policy modules and table must share one device and floating dtype")
+            for key, parameter in module.named_parameters():
+                if id(parameter) in seen:
+                    raise ValueError("policy modules must not share parameters")
+                seen.add(id(parameter))
+                if parameter is self.table:
+                    if name == "critic":
+                        raise ValueError("the particle table cannot be a critic parameter")
+                    self._table_location = (name, key)
+                    table_owners.add(name)
+            for key, buffer in module.named_buffers():
+                if buffer is self.table:
+                    if name == "critic":
+                        raise ValueError("the particle table cannot be a critic buffer")
+                    self._table_location = (name, key)
+                    table_owners.add(name)
+        if len(table_owners) > 1:
+            raise ValueError("policy modules must not share the particle table")
+
+    def _table_in_modules(self, modules):
+        name, key = self._table_location
+        module = modules[name]
+        return dict([*module.named_parameters(), *module.named_buffers()])[key]
+
+    def _parameter_roles(self, roles):
+        owners = {}
+        for name, module in self._training_modules().items():
+            if name != "prior":
+                owners.update({id(p): name for p in module.parameters()})
+        owners[id(self.table)] = "table"
+        if roles is not None and (not isinstance(roles, (list, tuple)) or len(roles) != len(self.optimizers)):
+            raise ValueError("roles must match policy optimizers and parameter groups")
+        result, seen, table_group = [], set(), None
+        for index, optimizer in enumerate(self.optimizers):
+            if not isinstance(optimizer, torch.optim.Optimizer):
+                raise TypeError("policy optimizers must be torch optimizers")
+            row = []
+            if roles is not None and len(roles[index]) != len(optimizer.param_groups):
+                raise ValueError("roles must match policy optimizers and parameter groups")
+            for group_index, group in enumerate(optimizer.param_groups):
+                inferred = {owners.get(id(p)) for p in group["params"]}
+                role = next(iter(inferred)) if len(inferred) == 1 else None
+                if roles is not None:
+                    explicit = "table" if roles[index][group_index] == "prior" else roles[index][group_index]
+                    if explicit not in self._ROLES or any(value != explicit for value in inferred):
+                        raise ValueError("optimizer groups must contain only parameters of their explicit role")
+                    role = explicit
+                if role is None or role not in self._ROLES:
+                    raise ValueError("optimizer groups require one known generator/encoder/router/critic/table role")
+                if (index == 1) != (role == "critic"):
+                    raise ValueError("critic parameters must belong to critic_optimizer only")
+                for parameter in group["params"]:
+                    if id(parameter) in seen:
+                        raise ValueError("parameters must have exactly one optimizer owner")
+                    seen.add(id(parameter))
+                if role == "table":
+                    if optimizer is not self.table_optimizer or len(group["params"]) != 1:
+                        raise ValueError("the table requires its own group in table_optimizer")
+                    table_group = (index, group_index)
+                row.append(role)
+            result.append(row)
+        if self.table.requires_grad and table_group is None:
+            raise ValueError("trainable table must be owned by table_optimizer")
+        for name, module in self._training_modules().items():
+            if any(p.requires_grad and id(p) not in seen for p in module.parameters()):
+                raise ValueError(f"trainable {name} parameters require optimizer ownership")
+        return result
+
+    def _prior_view(self, averaged=False):
+        module = self.ema_prior if averaged else self.prior
+        return module if module is not None else SimpleNamespace(z=self.averaged_table if averaged else self.table)
+
+    def _stream(self, generator, seed):
+        generator = torch.Generator(device=self.device).manual_seed(seed) if generator is None else generator
+        if not isinstance(generator, type(torch.default_generator)):
+            raise TypeError("policy streams must be torch.Generator instances")
+        device = generator.device
+        if device.type == "cuda" and device.index is None:
+            device = torch.device("cuda", torch.cuda.current_device())
+        if device != self.device:
+            raise ValueError("random generators must use the model device")
+        return generator
+
+    def attach_penalty(self, penalty):
+        """Connect the critic penalty to this policy's shared continuous controller."""
+        if getattr(penalty, "optimizer", self.opt_d) is not self.opt_d:
+            raise ValueError("penalty must belong to critic_optimizer")
+        self.penalty = penalty
+        if self.controller is not None and self.recipe.continuous_policy in (
+                "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+            penalty.regularizer.continuous_controller = self.controller
+        return penalty
+
+    def begin_step(self, real, *, game_record=None):
+        """Observe critic-real rows, set LRs, take anchors, and compute noise.
+
+        Call before any critic forward.  ``game_record`` is the KA2 optimizer's
+        previous game record (defaults to ``critic_optimizer.record``).
+        It is read before the real-data observation, exactly as in the native
+        loop.  This observation also feeds the birth/death FIFO reservoir.
+        """
+        if self._phase != "ready":
+            raise RuntimeError("finish_step must complete the previous policy update")
+        self._serve_release()
+        recipe = self.recipe
+        if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
+            raise RuntimeError("recipe training budget exhausted")
+        if (not isinstance(real, torch.Tensor) or real.ndim < 2 or not len(real)
+                or real.device != self.device or real.dtype != self.dtype):
+            raise ValueError("real must be a nonempty batch on the model device and dtype")
+        real = real.detach()
+        if self.controller is not None:
+            self.controller.observe_prior(self._prior_view())
+            record = getattr(self.opt_d, "record", None) if game_record is None else game_record
+            if record is None:
+                raise ValueError("continuous policy requires the previous critic game_record")
+            self.controller.observe_game(record)
+        if self.birth_death is not None:
+            self.birth_death.observe_real(real)
+        if self.lr_settle is None:
+            network, prior_scale = (self.schedule(self.completed_steps, recipe)
+                                    if self.controller is None else self.controller.observe_real(real))
+            for optimizer, rates, roles in zip(self.optimizers, self.initial_lrs, self.roles):
+                for group, rate, role in zip(optimizer.param_groups, rates, roles):
+                    group["lr"] = rate * (prior_scale if role == "table" else network)
+        else:
+            if recipe.reopen_signal == "data":
+                self.controller.observe_real(real)
+                reopen = self.controller.data_score > 3.
+            else:
+                self.controller.observe_blind()
+                reopen = False
+            for group, tester in self.lr_settle.pairs(self.optimizers):
+                if reopen:
+                    tester.restart(group["params"], reopen=True)
+                else:
+                    tester.begin(group["params"])
+            scales = [tester.s for index, row in enumerate(self.lr_settle.testers) if index != 1
+                      for tester, role in zip(row, self.roles[index])
+                      if role == "table" and tester is not None and tester.s is not None]
+            prior_scale = max(scales) if scales else None
+            for index, (optimizer, rates, testers) in enumerate(
+                    zip(self.optimizers, self.initial_lrs, self.lr_settle.testers)):
+                for group, rate, tester in zip(optimizer.param_groups, rates, testers):
+                    scale = 1. if tester is None else tester.s
+                    if index == 1 and prior_scale is not None:
+                        scale = max(scale, 0.75 * prior_scale)
+                    group["lr"] = rate * scale
+        if self.controller is not None and recipe.critic_payoff_damping:
+            for group in self.opt_d.param_groups:
+                group["lr"] *= self.controller.critic_scale()
+        flags, hold, tester = self._stray_gate()
+        if tester is not None and hasattr(tester, "hold_descent"):
+            tester.exclude = flags if recipe.row_evidence_exclude else None
+            tester.hold_descent = hold
+        if hold:
+            self.row_evidence.counters["hold_steps"] = self.row_evidence.counters.get("hold_steps", 0) + 1
+        self._stray_flags = flags
+        sigma = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
+        self.last_output_sigma = float(sigma.detach() if torch.is_tensor(sigma) else sigma)
+        self._noise = StepNoise(input_noise_std(recipe, self.completed_steps), sigma)
+        self._phase = "critic"
+        return self._noise
+
+    before_step = begin_step
+
+    def observe_support(self, latent):
+        """Optional DV11 probe; E22/DV12 performs no probe or RNG draw here."""
+        if self.controller is not None:
+            sigma = self._noise.output_sigma if self._noise is not None else self.output_sigma()
+            self.controller.observe_support(self.G, self.D, latent, sigma, self.noise_generator)
+
+    def observe_critic_pair(self, real, fake):
+        """Observe the detached critic pair before its loss/backward (DV8/9)."""
+        if self._phase != "critic":
+            raise RuntimeError("critic observations must precede after_critic_step")
+        if self.controller is not None:
+            self.controller.observe_pair(real, fake)
+
+    def before_critic_backward(self):
+        """Optional ordering check immediately before critic backward."""
+        if self._phase != "critic":
+            raise RuntimeError("critic backward must follow begin_step")
+
+    after_critic_backward = before_critic_backward
+
+    def after_critic_step(self):
+        """Observe applied critic displacement after its optimizer's step."""
+        if self._phase != "critic":
+            raise RuntimeError("after_critic_step must follow the critic optimizer step")
+        if self.lr_settle is not None:
+            self._settle_observe(1)
+        self._phase = "generator"
+
+    def before_generator_backward(self):
+        """Optional ordering check immediately before generator backward."""
+        if self._phase != "generator":
+            raise RuntimeError("generator backward must follow after_critic_step")
+
+    def after_generator_backward(self, *, loss_gan, loss_critic):
+        """Observe unmodified generator and table gradients before their steps.
+
+        The payoff, gradient alignment and row evidence use the same backward
+        pass.  Capture the hot rows' pre-step values last; the next hook
+        restores their unscaled motion before stationarity observes it.
+        """
+        if self._phase != "generator":
+            raise RuntimeError("after_generator_backward must follow generator backward")
+        if self.controller is not None:
+            # Embedded table parameters retain their explicit table role and
+            # do not enter the network-gradient alignment signal.
+            generator = self.G
+            if self._table_location is not None and self._table_location[0] == "generator":
+                generator = SimpleNamespace(parameters=lambda: (p for p in self.G.parameters() if p is not self.table))
+            self.controller.observe_generator(generator, loss_gan.detach(), loss_critic.detach())
+        self._hot = self._z_before = None
+        tester = self._table_tester()
+        if self.row_evidence is not None:
+            self.row_evidence.update(self.table.grad)
+            if (self.recipe.row_evidence_hot and self._stray_flags is not None and tester is not None
+                    and tester.s < 1.0 and bool(self._stray_flags.any())):
+                self._hot = self._stray_flags
+                self._z_before = self.table.detach().clone()
+        self._phase = "generator_step"
+
+    def after_generator_step(self):
+        """Apply hot-row correction, then observe all non-critic displacements."""
+        if self._phase != "generator_step":
+            raise RuntimeError("after_generator_step must follow after_generator_backward and optimizer steps")
+        if self._hot is not None:
+            with torch.no_grad():
+                hot, before, tester = self._hot, self._z_before, self._table_tester()
+                z = self.table
+                z[hot] = before[hot] + (z[hot] - before[hot]) * (1.0 / tester.s)
+            self.row_evidence.counters["hot_row_steps"] = self.row_evidence.counters.get("hot_row_steps", 0) + int(hot.sum())
+        if self.lr_settle is not None:
+            for index in range(len(self.optimizers)):
+                if index != 1:
+                    self._settle_observe(index)
+        self._phase = "finish"
+
+    @torch.no_grad()
+    def finish_step(self):
+        """Update averages, restructure particles, rebase evidence, then count.
+
+        Averages are updated *before* birth/death.  A move clones the parent's
+        fast and averaged table rows plus optimizer/history rows, then rebases
+        stationarity and resets moved-row evidence.  Serving subsequently
+        chooses averaged weights only when the table last decided STATIONARY.
+        """
+        if self._phase != "finish":
+            raise RuntimeError("finish_step must follow after_generator_step")
+        recipe = self.recipe
+        rate = self._average_rate() if recipe.serve_average > 0 else None
+        fast_modules = self._training_modules()
+        for name, target in self._average_modules().items():
+            source = fast_modules[name]
+            for averaged, current in zip(target.parameters(), source.parameters()):
+                if rate is None:
+                    averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
+                else:
+                    averaged.mul_(1.0 - rate).add_(current, alpha=rate)
+            for averaged, current in zip(target.buffers(), source.buffers()):
+                averaged.copy_(current)
+        if self._table_location is None:
+            if rate is None:
+                self.averaged_table.mul_(recipe.ema_decay).add_(self.table, alpha=1 - recipe.ema_decay)
+            else:
+                self.averaged_table.mul_(1.0 - rate).add_(self.table, alpha=rate)
+        event = None
+        if self.birth_death is not None:
+            event = self.birth_death.maybe_apply(self.last_output_sigma)
+            if event and event.get("moves") and self.lr_settle is not None:
+                for index, row in enumerate(self.lr_settle.testers):
+                    for group, tester, role in zip(self.optimizers[index].param_groups, row, self.roles[index]):
+                        if role == "table" and tester is not None:
+                            tester.rebase(group["params"], self.birth_death.moved_rows)
+                if self.row_evidence is not None:
+                    self.row_evidence.reset(self.birth_death.moved_rows)
+        self.completed_steps += 1
+        self.abort_step()
+        return event
+
+    def abort_step(self):
+        """Release lifecycle bookkeeping after a caller error; does not undo updates."""
+        self._phase = "ready"
+        self._noise = None
+        self._stray_flags = self._hot = self._z_before = None
+
+    def _table_tester(self):
+        if self.lr_settle is not None:
+            for row, roles in zip(self.lr_settle.testers, self.roles):
+                for tester, role in zip(row, roles):
+                    if role == "table" and tester is not None:
+                        return tester
+        return None
+
+    def _stray_gate(self):
+        evidence, tester = self.row_evidence, self._table_tester()
+        if evidence is None or tester is None or not evidence.valid:
+            return None, False, tester
+        hold = evidence.fraction > evidence.Q and self.recipe.row_evidence_hold
+        return (None if hold else evidence.flag), hold, tester
+
+    def _settle_observe(self, index):
+        for group, rate, tester in zip(self.optimizers[index].param_groups,
+                                      self.initial_lrs[index], self.lr_settle.testers[index]):
+            if tester is not None:
+                tester.observe(group["params"], group["lr"] / rate, step=self.completed_steps + 1)
+
+    def _output_sigma(self, base, detach=True):
+        mode = self.recipe.output_noise_mode
+        if mode == "fixed":
+            return base
+        if mode == "mobility":
+            return base * self.controller.mobility
+        if not base:
+            return 0.
+        sigma = self.log_output_sigma.exp()
+        settle = self.controller.mobility
+        if self.lr_settle is not None:
+            # A group with no trainable parameters has no tester. Preserve the
+            # historical floor fallback rather than assigning it an artificial
+            # settled scale; fully trainable E22 groups use the stated floor.
+            try:
+                scales = [t.s for index, row in enumerate(self.lr_settle.testers) if index != 1 for t in row]
+                if scales and all(s is not None for s in scales):
+                    settle = 1.0 if any(s > 1. / 64. for s in scales) else self.controller.mobility
+            except AttributeError:
+                pass
+        floor = base * settle
+        sigma = torch.maximum(sigma, torch.as_tensor(floor, device=sigma.device, dtype=sigma.dtype))
+        return float(sigma.detach()) if detach else sigma
+
+    def output_sigma(self):
+        """Current output-noise standard deviation as a host float."""
+        return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps)))
+
+    def _clean_generate(self, model, latent):
+        return model(latent) if self.generation is None else self.generation(model, latent)
+
+    def generate(self, latent, *, sigma=None, stream=None, averaged=False, model=None):
+        """Generate with DV12 perturbation and optional output noise.
+
+        Default noise is the shared value from ``begin_step``; a sampling
+        caller must pass its own stream and explicitly choose ``sigma=0`` for
+        clean outputs.  No output-noise draw occurs when sigma is zero.
+        """
+        stream = self.noise_generator if stream is None else stream
+        if sigma is None:
+            sigma = self._noise.output_sigma if self._noise is not None else self.output_sigma()
+        model = (self.ema_G if averaged else self.G) if model is None else model
+        averaged = averaged or model is self.ema_G
+        if self.controller is not None:
+            latent = self.controller.perturb_latent(
+                latent, stream, self._prior_view(averaged), record=stream is self.noise_generator)
+        y = self._clean_generate(model, latent)
+        if sigma == 0:
+            return y
+        return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
+
+    def _served_parameters(self):
+        values = [*self.G.parameters()]
+        if self.prior is not None:
+            values.extend(self.prior.parameters())
+        elif self._table_location is None:
+            values.append(self.table)
+        for module in (self.encoder, self.router):
+            if module is not None:
+                values.extend(module.parameters())
+        return values
+
+    def _served_averages(self):
+        values = [*self.ema_G.parameters()]
+        if self.ema_prior is not None:
+            values.extend(self.ema_prior.parameters())
+        elif self._table_location is None:
+            values.append(self.averaged_table)
+        for module in (self.ema_encoder, self.ema_router):
+            if module is not None:
+                values.extend(module.parameters())
+        return values
+
+    @torch.no_grad()
+    def _serve_release(self):
+        if self._fast is not None:
+            for live, fast in zip(self._served_parameters(), self._fast):
+                live.copy_(fast)
+            self._fast = None
+
+    def _serve_settled(self):
+        tester = self._table_tester()
+        return tester is not None and getattr(tester, "last_decisive", 0) == -1
+
+    @torch.no_grad()
+    def _serve_apply(self):
+        """GANTrainer compatibility swap; external loops use served_snapshot."""
+        if self.recipe.serve_average <= 0:
+            return
+        self._serve_release()
+        if self._serve_settled():
+            live = self._served_parameters()
+            self._fast = [p.detach().clone() for p in live]
+            for parameter, average in zip(live, self._served_averages()):
+                parameter.copy_(average)
+
+    def _average_rate(self):
+        if self.recipe.serve_average > 0:
+            tester = self._table_tester()
+            if tester is not None and tester.s is not None and tester.b:
+                return min(1.0, float(tester.s) / (self.recipe.serve_average * float(tester.b)))
+        return 1.0 - self.recipe.ema_decay
+
+    def served_snapshot(self):
+        """Return independent currently served state, without altering fast weights.
+
+        ``models`` contains module state dictionaries; ``table`` is the same
+        selected table independently copied.  ``source`` reports ``fast`` or
+        ``averaged``.  The controller snapshot describes latent perturbation
+        needed to reproduce served samples using an independent sampling RNG.
+        Buffers follow the native serving path: current generator buffers and
+        selected parameters (averaged buffers are copied at each update).
+        """
+        swapped = self._fast is not None
+        self._serve_release()
+        try:
+            average = self.recipe.serve_average > 0 and self._serve_settled()
+            models = {name: deepcopy(module.state_dict()) for name, module in self._training_modules().items()}
+            if average:
+                for name, module in self._average_modules().items():
+                    for key, parameter in module.named_parameters(remove_duplicate=False):
+                        models[name][key] = parameter.detach().clone()
+            return deepcopy({"source": "averaged" if average else "fast",
+                             "models": models,
+                             "table": self.averaged_table if average else self.table,
+                             "output_sigma": self.output_sigma(), "completed_steps": self.completed_steps,
+                             "controller": None if self.controller is None else self.controller.state_dict(),
+                             "row_semantics": self.row_semantics})
+        finally:
+            if swapped:
+                self._serve_apply()
+
+    def served_model(self, *, generation_factory=None):
+        """Freeze independent currently served modules with exact sampling helpers.
+
+        Custom generation callbacks must operate on the supplied model rather
+        than close over live training parameters.  Auxiliary encoder/router
+        module snapshots are available on the result for caller-owned routing.
+        For a callback needing separate auxiliary modules, supply
+        ``generation_factory(models)`` returning a callback bound to those
+        frozen modules; this avoids closing over the caller's fast parameters.
+        """
+        snapshot = self.served_snapshot()
+        models = {name: deepcopy(module).eval().requires_grad_(False)
+                  for name, module in self._training_modules().items()}
+        for name, module in models.items():
+            module.load_state_dict(snapshot["models"][name])
+        generation = self.generation
+        if generation_factory is not None:
+            if not callable(generation_factory):
+                raise TypeError("generation_factory must be callable")
+            generation = generation_factory(models)
+            if not callable(generation):
+                raise TypeError("generation_factory must return a callable")
+        table = snapshot["table"] if self._table_location is None else self._table_in_modules(models)
+        controller = deepcopy(self.controller)
+        if controller is not None:
+            controller.load_state_dict(snapshot["controller"])
+        stream = torch.Generator(device=self.device)
+        stream.set_state(self.eval_generator.get_state().cpu())
+        return ServedModel(models, table, controller, source=snapshot["source"],
+                           output_sigma=snapshot["output_sigma"],
+                           completed_steps=snapshot["completed_steps"], stream=stream,
+                           generation=generation, row_semantics=self.row_semantics)
+
+    def state_dict(self):
+        """Save all policy, model, optimizer, averaging and RNG state independently.
+
+        Caller data cursors and stateful callback resources are separate.
+        Global PyTorch RNG is included for dropout and other module draws.
+        """
+        if self._phase != "ready":
+            raise RuntimeError("policy checkpoints require a completed update boundary")
+        swapped = self._fast is not None
+        self._serve_release()
+        try:
+            return deepcopy({
+                "schema": 1, "recipe": self.recipe.to_dict(), "roles": self.roles,
+                "row_semantics": self.row_semantics, "device": str(self.device), "dtype": str(self.dtype),
+                "table_requires_grad": self.table.requires_grad,
+                "table_location": self._table_location,
+                "models": {name: module.state_dict() for name, module in self._training_modules().items()},
+                "requires_grad": {name: {key: p.requires_grad for key, p in module.named_parameters()}
+                                  for name, module in self._training_modules().items()},
+                "averages": {name: module.state_dict() for name, module in self._average_modules().items()},
+                "table": self.table, "averaged_table": self.averaged_table,
+                "optimizers": [optimizer.state_dict() for optimizer in self.optimizers],
+                "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
+                "last_output_sigma": self.last_output_sigma,
+                "output_noise": None if self.log_output_sigma is None else self.log_output_sigma.detach(),
+                "controller": None if self.controller is None else self.controller.state_dict(),
+                "lr_settle": None if self.lr_settle is None else self.lr_settle.state_dict(),
+                "birth_death": None if self.birth_death is None else self.birth_death.state_dict(),
+                "row_evidence": None if self.row_evidence is None else self.row_evidence.state_dict(),
+                "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
+                "cpu_rng": torch.get_rng_state(),
+                "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
+                "served_source": "averaged" if self.recipe.serve_average > 0 and self._serve_settled() else "fast",
+            })
+        finally:
+            if swapped:
+                self._serve_apply()
+
+    @staticmethod
+    def _check_tensors(saved, expected, label):
+        if not isinstance(saved, dict) or saved.keys() != expected.keys():
+            raise ValueError(f"incompatible policy {label}")
+        for key, tensor in expected.items():
+            value = saved[key]
+            if not isinstance(value, torch.Tensor) or value.shape != tensor.shape or value.dtype != tensor.dtype:
+                raise ValueError(f"incompatible policy {label} tensor {key}")
+
+    def _check_state(self, state):
+        expected = self.state_dict()
+        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 1:
+            raise ValueError("invalid UpdatePolicy checkpoint schema")
+        for key in ("recipe", "roles", "row_semantics", "device", "dtype", "requires_grad",
+                    "table_requires_grad", "table_location"):
+            if state[key] != expected[key]:
+                raise ValueError(f"checkpoint {key} does not match policy")
+        steps = state["completed_steps"]
+        if type(steps) is not int or steps < 0 or (self.recipe.total_steps is not None and steps > self.recipe.total_steps):
+            raise ValueError("invalid policy checkpoint step count")
+        for label in ("models", "averages"):
+            if not isinstance(state[label], dict) or state[label].keys() != expected[label].keys():
+                raise ValueError(f"incompatible policy {label}")
+            for name in expected[label]:
+                self._check_tensors(state[label][name], expected[label][name], f"{label}/{name}")
+        for name in ("table", "averaged_table", "output_noise"):
+            value, current = state[name], expected[name]
+            if current is None:
+                if value is not None:
+                    raise ValueError(f"incompatible policy {name}")
+            elif (not isinstance(value, torch.Tensor) or value.shape != current.shape
+                  or value.dtype != current.dtype or (name == "output_noise" and not torch.isfinite(value).all())):
+                raise ValueError(f"incompatible policy {name}")
+        rates = state["initial_lrs"]
+        if (not isinstance(rates, list) or len(rates) != len(self.initial_lrs)
+                or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
+                or any(type(value) not in (int, float) or not math.isfinite(value) or value <= 0 for row in rates for value in row)):
+            raise ValueError("invalid policy checkpoint initial learning rates")
+        sigma = state["last_output_sigma"]
+        if sigma is not None and (type(sigma) not in (int, float) or not math.isfinite(sigma) or sigma < 0):
+            raise ValueError("invalid policy checkpoint output sigma")
+        if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != len(self.optimizers):
+            raise ValueError("incompatible policy optimizer count")
+        try:
+            for optimizer, values in zip(self.optimizers, state["optimizers"]):
+                _validate_optimizer_state(optimizer, values)
+        except (KeyError, TypeError, ValueError, RuntimeError, AttributeError) as error:
+            raise ValueError("invalid policy checkpoint optimizer state") from error
+        if not isinstance(state["streams"], dict) or state["streams"].keys() != expected["streams"].keys():
+            raise ValueError("incompatible policy RNG streams")
+        try:
+            for value in state["streams"].values():
+                torch.Generator(device=self.device).set_state(value.cpu())
+            torch.Generator(device="cpu").set_state(state["cpu_rng"].cpu())
+            if self.device.type == "cuda":
+                torch.Generator(device=self.device).set_state(state["cuda_rng"].cpu())
+            elif state["cuda_rng"] is not None:
+                raise ValueError("CPU policy cannot load CUDA RNG state")
+        except (TypeError, ValueError, RuntimeError, AttributeError) as error:
+            raise ValueError("invalid policy checkpoint RNG state") from error
+        for key, control in (("controller", self.controller), ("lr_settle", self.lr_settle),
+                             ("birth_death", self.birth_death), ("row_evidence", self.row_evidence)):
+            if (control is None) != (state[key] is None):
+                raise ValueError(f"incompatible policy {key}")
+            if control is None:
+                continue
+            if key == "lr_settle":
+                deepcopy(control).load_state_dict(_state_to_device(state[key], self.device), self.optimizers)
+            elif key in ("birth_death", "row_evidence"):
+                control.check_state(state[key])
+            else:
+                deepcopy(control).load_state_dict(_state_to_device(state[key], self.device))
+        table_state = state["lr_settle"]
+        settled = False
+        if table_state is not None:
+            settled = any(value is not None and role == "table" and value.get("last_decisive") == -1
+                          for row, roles in zip(table_state, self.roles) for value, role in zip(row, roles))
+        source = "averaged" if self.recipe.serve_average > 0 and settled else "fast"
+        if state["served_source"] != source:
+            raise ValueError("inconsistent policy served source")
+
+    def load_state_dict(self, state):
+        """Validate then restore, keeping caller modules at fast training weights."""
+        if self._phase != "ready":
+            raise RuntimeError("restore requires a completed update boundary")
+        self._check_state(state)
+        self._serve_release()
+        for name, module in self._training_modules().items():
+            module.load_state_dict(state["models"][name])
+        for name, module in self._average_modules().items():
+            module.load_state_dict(state["averages"][name])
+        with torch.no_grad():
+            self.table.copy_(state["table"])
+            self.averaged_table.copy_(state["averaged_table"])
+            if self.log_output_sigma is not None:
+                self.log_output_sigma.copy_(state["output_noise"])
+        for optimizer, values in zip(self.optimizers, state["optimizers"]):
+            optimizer.load_state_dict(deepcopy(values))
+        if self.controller is not None:
+            self.controller.load_state_dict(_state_to_device(state["controller"], self.device))
+        if self.lr_settle is not None:
+            self.lr_settle.load_state_dict(_state_to_device(state["lr_settle"], self.device), self.optimizers)
+        if self.birth_death is not None:
+            self.birth_death.load_state_dict(state["birth_death"])
+        if self.row_evidence is not None:
+            self.row_evidence.load_state_dict(state["row_evidence"])
+        self.initial_lrs, self.completed_steps = deepcopy(state["initial_lrs"]), state["completed_steps"]
+        self.last_output_sigma = state["last_output_sigma"]
+        for name, value in state["streams"].items():
+            getattr(self, name).set_state(value.cpu())
+        torch.set_rng_state(state["cpu_rng"].cpu())
+        if self.device.type == "cuda":
+            torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
+
+
+class E22Policy(UpdatePolicy):
+    """The E22 DV12/stationarity policy for an explicit caller-owned loop.
+
+    Task-specific recipe overrides remain authoritative.  This class requires
+    DV12 and stationarity control; disabling birth/death or output noise for
+    an ablation keeps the same lifecycle and checkpoint API.
+    """
+
+    def __init__(self, recipe, generator, critic, **kwargs):
+        if not isinstance(recipe, Recipe) or recipe.continuous_policy != "dv12" or recipe.lr_control != "stationarity":
+            raise ValueError("E22Policy requires a DV12 recipe with lr_control='stationarity'")
+        super().__init__(recipe, generator, critic, **kwargs)

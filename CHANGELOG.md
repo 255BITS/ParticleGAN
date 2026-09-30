@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Composable E22 policy:** `get_recipe("e22", **task_overrides)` ships the
+  preset in the installed package. `E22Policy` / `UpdatePolicy` expose the
+  same lifecycle controls used by `GANTrainer`, explicit optimizer/table
+  ownership and callbacks, recovery state and served-model snapshots. Row
+  evidence and birth/death require independent unconditional atoms; conditional
+  and dense soft routing are rejected for those mechanisms. See the
+  [external-loop and migration guide](docs/e22.md).
 - **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
   K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with

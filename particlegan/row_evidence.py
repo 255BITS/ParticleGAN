@@ -19,7 +19,24 @@ import torch
 
 
 class RowEvidence:
-    def __init__(self, table, window=50, level=0.05, null="theory"):
+    """Evidence for rows with independent particle lineages.
+
+    Observe the full table gradient after backward and before per-row LR
+    scaling or the optimizer step. Dense soft routing and conditional-bank
+    restructuring are unsupported; the policy requires explicit independent
+    row semantics before using this gate. Row evidence never moves rows.
+    """
+
+    def __init__(self, table, window=50, level=0.05, null="theory", *, semantics="independent"):
+        if semantics != "independent":
+            raise ValueError("row evidence requires independent particle rows; conditional and soft-routed banks are unsupported")
+        if (not isinstance(table, torch.Tensor) or table.ndim != 2 or not all(table.shape)
+                or table.layout != torch.strided or not table.is_floating_point()):
+            raise ValueError("row evidence needs a floating particle table [rows, latent_dim]")
+        if not math.isfinite(window) or window < 1 or not math.isfinite(level) or not 0 < level < 1:
+            raise ValueError("row-evidence window must be at least one and level must be between zero and one")
+        if null not in ("theory", "scaled"):
+            raise ValueError("row-evidence null must be theory or scaled")
         n, d = table.shape
         dev, dt = table.device, (torch.float64 if null == "scaled" else table.dtype)
         self.n, self.d, self.lam, self.Q, self.null = n, d, 1.0 / float(window), float(level), null
@@ -35,7 +52,16 @@ class RowEvidence:
 
     @torch.no_grad()
     def update(self, grad):
-        """Fold this step's table gradient in (rows with a non-zero gradient were touched) and refresh the flags."""
+        """Observe the dense, aggregated table gradient and refresh row flags.
+
+        Nonzero rows count as one touch per backward pass. Duplicate particle
+        draws are already summed by autograd and count once here. Supply the
+        full ``table.grad`` before any LR scaling, not per-sample gradients;
+        absent or sparse gradients do not provide the required observation.
+        """
+        if (not isinstance(grad, torch.Tensor) or grad.shape != self.M.shape
+                or grad.layout != torch.strided or grad.device != self.M.device or not grad.is_floating_point()):
+            raise ValueError("row evidence requires the full floating table gradient on the table device")
         idx = (grad != 0).any(1).nonzero().flatten()
         if len(idx):
             g = grad[idx].to(self.M.dtype)
@@ -107,17 +133,31 @@ class RowEvidence:
 
     def state_dict(self):
         return dict(**{k: getattr(self, k).clone() for k in self._TENSORS}, fraction=self.fraction, valid=self.valid,
-                    counters=dict(self.counters))
+                    counters=dict(self.counters), scale_c=self.scale_c, config=self._config())
+
+    def _config(self):
+        return {"rows": self.n, "latent_dim": self.d, "decay": self.lam, "level": self.Q, "null": self.null}
 
     def check_state(self, state):
-        if not isinstance(state, dict) or set(state) != set(self._TENSORS) | {"fraction", "valid", "counters"}:
+        keys = set(self._TENSORS) | {"fraction", "valid", "counters"}
+        if not isinstance(state, dict) or set(state) not in (keys, keys | {"scale_c", "config"}):
             raise ValueError("invalid row-evidence state")
         for k in self._TENSORS:
-            if not isinstance(state[k], torch.Tensor) or state[k].shape != getattr(self, k).shape:
+            if (not isinstance(state[k], torch.Tensor) or state[k].shape != getattr(self, k).shape
+                    or state[k].dtype != getattr(self, k).dtype):
                 raise ValueError(f"row-evidence {k} does not match the table")
+        if "config" in state:
+            if state["config"] != self._config():
+                raise ValueError("row-evidence state configuration does not match the particle rows")
+            if not isinstance(state["scale_c"], (int, float)) or not math.isfinite(state["scale_c"]) or state["scale_c"] < 1:
+                raise ValueError("invalid row-evidence scale")
+        if (not isinstance(state["fraction"], (int, float)) or not 0 <= state["fraction"] <= 1
+                or type(state["valid"]) is not bool or not isinstance(state["counters"], dict)):
+            raise ValueError("invalid row-evidence diagnostics")
 
     def load_state_dict(self, state):
         self.check_state(state)
         for k in self._TENSORS:
             setattr(self, k, state[k].clone().to(self.M.device))
         self.fraction, self.valid, self.counters = float(state["fraction"]), bool(state["valid"]), dict(state["counters"])
+        self.scale_c = float(state.get("scale_c", 1.0))
