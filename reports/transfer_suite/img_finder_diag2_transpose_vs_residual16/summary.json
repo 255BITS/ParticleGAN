@@ -1,0 +1,59 @@
+{
+  "task": "img_finder_diag2",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25",
+  "principal": "finder_diag2 QR-like finder diagonal pairing: published transpose12 vs residual16",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles)",
+  "arms": {
+    "baseline_transpose12": {
+      "card": {
+        "name": "baseline_transpose12",
+        "scope": "published image path (transpose width 12)",
+        "changes": {}
+      },
+      "verdict": "FAIL",
+      "quality": {
+        "sustained": false,
+        "confirmed_step": null,
+        "modes": 0,
+        "hq": 0.09375,
+        "mean_rmse": 0.06693007051944733,
+        "error": null,
+        "seconds": 5.954827853944153,
+        "last_obs": {
+          "hq": 0.09375,
+          "mean_rmse": 0.06693007051944733,
+          "modes": 0
+        }
+      },
+      "seconds": 5.955190254142508
+    },
+    "residual16": {
+      "card": {
+        "name": "residual16",
+        "scope": "in-formulation architecture control",
+        "changes": {
+          "architecture": "residual_upsample",
+          "width": 16
+        }
+      },
+      "verdict": "PASS",
+      "quality": {
+        "sustained": true,
+        "confirmed_step": 575,
+        "modes": 2,
+        "hq": 0.96875,
+        "mean_rmse": 0.031313274055719376,
+        "error": null,
+        "seconds": 5.077606608858332,
+        "last_obs": {
+          "hq": 0.96875,
+          "mean_rmse": 0.031313274055719376,
+          "modes": 2
+        }
+      },
+      "seconds": 5.07790080900304
+    }
+  },
+  "hit": true,
+  "soft_miss": false
+}
