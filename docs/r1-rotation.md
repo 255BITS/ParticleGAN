@@ -48,3 +48,27 @@ identical to E22's (grid .98485, rotated .98575, staggered .98265).
 
 Both read only network and optimizer state: no statistic of the data or of generator outputs, no step schedule.
 The state is part of the trainer checkpoint and resumes bit-exactly (`tests/test_r1_rotation.py`).
+
+## Routed (`e22_routed`)
+
+The same two fields work unchanged with the conditional dense-bank recipe:
+
+```python
+recipe = get_recipe("e22_routed", reopen_signal="optimizer", reopen_anchor="release", ...)
+```
+
+[`examples/e22_routed_moving.py`](../examples/e22_routed_moving.py) runs the
+[routed paired-edit example](e22_routed.md) with a moving target: every `--turn-every` updates the paired edit
+(target minus the frozen host) turns 30° on the fitting, guard and held-out contexts (`--r1` adds the two fields).
+Held-out clean RMSE at the end of each period, seed fixed by the example:
+
+| turn every | recipe | before turn 1 | after turn 1 | after turn 2 | 50 updates after turn 2 |
+|---|---|---|---|---|---|
+| 500 | `e22_routed` | .0019 | .0023 | .0033 | .0821 |
+| 500 | + R1 fields | .0019 | .0019 | .0012 | .0022 |
+| 250 | `e22_routed` | .0021 | .0023 | .0100 | .0574 |
+| 250 | + R1 fields | .0021 | .0015 | .0015 | .0056 |
+
+`e22_routed` never re-opens: each turn costs it about 300–500 updates at 10–40× its settled error. R1 fires within
+50 updates of every turn, including turns 250 updates apart: this small task calms down between turns, so the
+detector re-arms. Without turns (3,000 updates) the two recipes are bit-identical, with no fires.

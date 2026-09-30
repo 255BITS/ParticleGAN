@@ -2,6 +2,7 @@
 (reopen_signal="optimizer") and the KA2 anchor release (reopen_anchor="release"). The re-open fires on a target
 shift, the defaults keep E22 unchanged, and a checkpoint taken after a fire resumes bit-exactly."""
 import json
+import runpy
 from pathlib import Path
 
 import pytest
@@ -68,3 +69,23 @@ def test_r1_fires_on_shift_and_resumes_exactly_after_the_fire(monkeypatch):
         for key in ("loss_d", "loss_g", "penalty"):
             assert torch.equal(a[key], b[key]), key
     assert resumed.policy.surprise.state_dict() == surprise.state_dict()
+
+
+ROUTED = runpy.run_path(str(Path(__file__).resolve().parents[1] / "examples" / "e22_routed_moving.py"))
+
+
+def test_r1_routed_reopens_on_a_turn_and_recovers_faster():
+    # One 30-degree turn of the paired edit after 400 updates, once E22's learning rates have settled. E22-routed
+    # never re-opens and 100 updates later is at ~.025 held-out RMSE; R1-routed fires and is back at ~.0015.
+    def trace(r1):
+        lines = []
+        loop, periods = ROUTED["run"](turn_every=400, turns=1, degrees=30., r1=r1, log_every=50, emit=lines.append)
+        rmse = {row["step"]: row["heldout_rmse"] for row in map(json.loads, lines) if "event" not in row}
+        return loop, periods, rmse
+
+    e22_loop, e22, e22_rmse = trace(False)
+    r1_loop, r1, r1_rmse = trace(True)
+    assert r1[0] == e22[0]  # identical until the first fire
+    assert ROUTED["reopens"](e22_loop.policy) == 0 < ROUTED["reopens"](r1_loop.policy)
+    assert r1_rmse[500] < e22_rmse[500] / 5
+    assert r1[1] < e22[1]
