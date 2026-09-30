@@ -1,0 +1,12 @@
+{
+  "stages": [
+    {
+      "task": "trajectory",
+      "passed": true,
+      "live": {
+        "identity_mse": 0.000942668120842427
+      }
+    }
+  ],
+  "seconds": 3.998484416999986
+}

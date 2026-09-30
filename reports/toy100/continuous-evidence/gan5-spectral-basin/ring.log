@@ -1,0 +1,15 @@
+{"event": "COLD_START", "task": "mode_hold"}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 100, "field_calls": 300}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 200, "field_calls": 600}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 300, "field_calls": 900}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 400, "field_calls": 1200}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 500, "field_calls": 1500}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 600, "field_calls": 1800}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 700, "field_calls": 2100}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 800, "field_calls": 2400}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 900, "field_calls": 2700}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 1000, "field_calls": 3000}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 1100, "field_calls": 3300}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 1200, "field_calls": 3600}
+{"event": "STAGE_DONE", "task": "mode_hold", "passed": false, "live": {"modes": 6, "hq": 0.914794921875}}
+{"event": "COLD_DONE", "stages": [{"task": "mode_hold", "passed": false, "live": {"modes": 6, "hq": 0.914794921875}}], "seconds": 31.316524868999977}
