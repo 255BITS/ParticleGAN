@@ -135,6 +135,10 @@ class Recipe:
     # the scale of a hidden unit (rescale a ReLU-type unit and its outgoing weight inversely: same function, different Euclidean distances), so the
     # raw metric depends on an arbitrary parametrisation; "std" is invariant to that symmetry and is a function of the reference half only.
     birth_death_feature_scale: str = "none"
+    # Independent E22 uses its original equal-mass particle statistics.
+    # routed_paired is a distinct conditional dense-bank adaptation, bound to
+    # an explicit RoutedRows contract in the caller-owned policy API.
+    row_policy: str = "independent"
 
     def __post_init__(self):
         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
@@ -250,11 +254,18 @@ class Recipe:
             raise ValueError("table_release_rule must be any, both, never or anchor")
         if type(self.row_evidence_gate) is not bool:
             raise ValueError("row_evidence_gate must be a boolean")
+        if self.row_policy not in ("independent", "routed_paired"):
+            raise ValueError("row_policy must be independent or routed_paired")
+        if self.row_policy == "routed_paired" and (
+                self.continuous_policy != "dv12" or self.lr_control != "stationarity"):
+            raise ValueError("row_policy='routed_paired' requires DV12 and stationarity control")
         if self.row_evidence_gate and self.lr_control != "stationarity":
             raise ValueError("row_evidence_gate requires lr_control='stationarity'")
-        if (self.particle_birth_death or self.row_evidence_gate) and self.conditioning != "scalar":
+        if (self.row_policy == "independent" and (self.particle_birth_death or self.row_evidence_gate)
+                and self.conditioning != "scalar"):
             raise ValueError("particle birth/death and row evidence require independently sampled "
-                             "unconditional rows; conditional and UCD generators are unsupported")
+                             "unconditional rows; use row_policy='routed_paired' with RoutedRows "
+                             "for conditional dense banks")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
@@ -466,6 +477,10 @@ def get_recipe(name="gan", **overrides):
     dimensions are the native 100-Gaussian task's 20,000 particles, latent
     dimension 2 and batch size 2,048. Set ``num_particles``, ``z_dim``,
     ``batch_size`` and ``output_noise_std`` explicitly for another task.
+    ``"e22_routed"`` selects the conditional dense-bank ``routed_paired``
+    adaptation. It retains E22's controls and requires an explicit RoutedRows
+    binding, paired observations and separate guard contexts. Its evidence
+    and restructuring law differ from the independent-row formulation.
     No research configuration file is read at runtime.
 
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
@@ -494,6 +509,7 @@ def get_recipe(name="gan", **overrides):
                          batch_size=64, routing_temperature=.125,
                          distance_reduction="mean"),
     }
+    families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
     if name not in families:
         raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
     options = families[name]

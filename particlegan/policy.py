@@ -48,6 +48,16 @@ def _validate_optimizer_state(optimizer, state):
     moment shapes. A copied optimizer alone can consequently accept a state
     that fails on the next update after live weights have already been loaded.
     """
+    ema_critic = getattr(optimizer, "ema_critic", None)
+    if ema_critic is not None:
+        saved_ema = state.get("regularizer", {}).get("ema") if isinstance(state, dict) else None
+        expected_ema = ema_critic.state_dict()
+        if not isinstance(saved_ema, dict) or saved_ema.keys() != expected_ema.keys():
+            raise ValueError("incompatible checkpoint EMA critic tensors")
+        for key, tensor in expected_ema.items():
+            value = saved_ema[key]
+            if not isinstance(value, torch.Tensor) or value.shape != tensor.shape or value.dtype != tensor.dtype:
+                raise ValueError(f"checkpoint EMA critic tensor {key} does not match its dtype or shape")
     restored = deepcopy(optimizer)
     restored.load_state_dict(deepcopy(state))
     if isinstance(restored, (torch.optim.Adam, torch.optim.AdamW)):
@@ -108,11 +118,12 @@ class ServedModel:
     """
 
     def __init__(self, models, table, controller, *, source, output_sigma,
-                 completed_steps, stream, generation=None, row_semantics="independent"):
+                 completed_steps, stream, generation=None, row_semantics="independent", routing=None):
         self.models, self.table, self.controller = models, table, controller
         self.source, self.output_sigma = source, output_sigma
         self.completed_steps, self.stream, self.generation = completed_steps, stream, generation
         self.row_semantics = row_semantics
+        self.routing = routing
         self.generator, self.critic = models["generator"], models["critic"]
         self.prior = models.get("prior")
         self.encoder, self.router = models.get("encoder"), models.get("router")
@@ -171,6 +182,31 @@ class ServedModel:
                 latent, _ = self.prior.sample(n, generator=stream)
             return self._generate(latent, stream, output_noise)
 
+    @torch.no_grad()
+    def routed_forward(self, context, *, perturb=False, output_noise=False, generator=None):
+        """The selected conditional bank's clean deterministic forward by default.
+
+        Routing uses unperturbed keys/values. Optional DV12 perturbation acts
+        on the mixed code after routing, followed by optional output noise.
+        Both options use this snapshot's private sampling stream.
+        """
+        if self.routing is None:
+            raise ValueError("routed_forward requires a RoutedRows serving snapshot")
+        if type(perturb) is not bool or type(output_noise) is not bool:
+            raise ValueError("perturb and output_noise must be booleans")
+        stream = self._sampling_stream(generator)
+        prior = self.prior if self.prior is not None else SimpleNamespace(z=self.table)
+        perturb_fn = (lambda codes: self.controller.perturb_latent(codes, stream, prior)) \
+            if perturb and self.controller is not None else None
+        candidate = self.routing.candidate_for(self.models, self.table, averaged=self.source == "averaged")
+        device = self.table.device
+        devices = [device.index] if device.type == "cuda" else []
+        with torch.random.fork_rng(devices=devices):
+            y = self.routing.forward(self.models, context, candidate, perturb_fn=perturb_fn)
+            if output_noise and self.output_sigma != 0:
+                y = y + self.output_sigma * torch.randn(y.shape, device=y.device, dtype=y.dtype, generator=stream)
+            return y
+
 
 class UpdatePolicy:
     """Checkpointable controls with explicit parameter and optimizer ownership.
@@ -195,11 +231,25 @@ class UpdatePolicy:
     owners). Generator-gradient alignment reads G's network parameters only,
     excluding an embedded table and separate encoder/router parameters.
 
-    E22 evidence and restructuring require uniform independent table atoms:
-    a draw chooses one row i and generates G(z_i).  Conditional and densely
-    blended banks have no such per-row output law and are explicitly rejected
-    when row evidence or birth/death is enabled.  Other recipe controls can
-    be used with those loops through ``UpdatePolicy`` with these controls off.
+    Every parameter and buffer must be on the table's device. Trainable
+    floating tensors must use the table's dtype; frozen parameters and
+    buffers may retain their own floating precision (for example BF16 frozen
+    features with FP32 heads and table). The caller handles casts at module
+    boundaries. Frozen parameters and buffers are copied exactly into averages;
+    EMA arithmetic applies only to trainable parameters. Checkpoint restore
+    requires the same per-tensor dtypes and parameter freezing.
+
+    The default ``row_policy='independent'`` requires uniform table atoms:
+    a draw chooses one row i and generates G(z_i). Conditional and densely
+    blended banks require ``row_policy='routed_paired'`` and an explicit
+    ``routed_rows=RoutedRows(...)`` contract for evidence and restructuring.
+    That adaptation observes caller-provided fit contexts and protected guard
+    contexts via ``begin_step(real, routed=RoutedBatch(...))``. Its callbacks
+    route the current bank, then decode mixed codes; DV12 perturbs the mixed
+    codes after routing. ``routed_generate(context, sigma=0, perturb=False)``
+    and ``served_model().routed_forward(context)`` provide clean forwards.
+    Conditional loops with row controls disabled can use ``UpdatePolicy``
+    without a routed row contract.
     """
 
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
@@ -209,7 +259,7 @@ class UpdatePolicy:
                  critic_optimizer, prior=None, table=None, table_optimizer=None,
                  roles=None, generation=None, critic_features=None, encoder=None,
                  router=None, row_semantics="independent", seed=0, streams=None,
-                 penalty=None, schedule=None):
+                 penalty=None, schedule=None, routed_rows=None):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if not isinstance(generator, nn.Module) or not isinstance(critic, nn.Module):
@@ -225,10 +275,21 @@ class UpdatePolicy:
         self.table, self.device, self.dtype = table, table.device, table.dtype
         if not table.is_floating_point():
             raise ValueError("table must use a floating dtype")
+        self.row_policy = getattr(recipe, "row_policy", "independent")
+        if self.row_policy == "routed_paired":
+            if routed_rows is None:
+                raise ValueError("row_policy='routed_paired' requires an explicit RoutedRows contract")
+            from .routing import RoutedRows
+            if not isinstance(routed_rows, RoutedRows):
+                raise TypeError("routed_rows must be a RoutedRows contract")
+            if row_semantics == "independent":
+                row_semantics = "dense_soft"
+        elif routed_rows is not None:
+            raise ValueError("routed_rows requires recipe.row_policy='routed_paired'")
         self.row_semantics = row_semantics
         if row_semantics not in ("independent", "conditional", "dense_soft"):
             raise ValueError("row_semantics must be independent, conditional or dense_soft")
-        if ((recipe.row_evidence_gate or recipe.particle_birth_death)
+        if (self.row_policy == "independent" and (recipe.row_evidence_gate or recipe.particle_birth_death)
                 and (row_semantics != "independent" or recipe.conditioning != "scalar"
                      or recipe.encoder_mode != "none")):
             raise ValueError("row evidence and birth/death require independent unconditional table atoms; "
@@ -289,8 +350,26 @@ class UpdatePolicy:
         self.lr_settle = (StationarityLR(self.optimizers, prior_param=table,
                                         release_rule=recipe.table_release_rule)
                           if recipe.lr_control == "stationarity" else None)
+        self.routed_control = None
         self.birth_death = None
-        if recipe.particle_birth_death:
+        self.row_evidence = None
+        if self.row_policy == "routed_paired":
+            self.routed_control = routed_rows.bind(
+                models=self._training_modules(), averaged_models=self._average_modules(),
+                table=table, averaged_table=self.averaged_table, optimizers=self.optimizers,
+                table_optimizer=self.table_optimizer, seed=seed + 6,
+                completed_steps=lambda: self.completed_steps, controller=self.controller)
+            if recipe.particle_birth_death:
+                self.birth_death = self.routed_control
+            if recipe.row_evidence_gate:
+                self.row_evidence = self.routed_control.evidence
+            row_parameters = set(self.routed_control.row_parameters.values())
+            for optimizer, testers in zip(self.optimizers, self.lr_settle.testers):
+                for group, tester in zip(optimizer.param_groups, testers):
+                    if (tester is not None and len(group["params"]) == 1
+                            and group["params"][0] in row_parameters):
+                        tester.rows = len(table)
+        elif recipe.particle_birth_death:
             from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
             features = critic_features
             if recipe.birth_death_space == "critic" and features is None:
@@ -307,8 +386,7 @@ class UpdatePolicy:
                 rows, seed + 6, space=recipe.birth_death_space,
                 isolation=recipe.birth_death_isolation,
                 feature_scale=recipe.birth_death_feature_scale)
-        self.row_evidence = None
-        if recipe.row_evidence_gate:
+        if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
             self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null)
         self.penalty = None
@@ -337,8 +415,11 @@ class UpdatePolicy:
         table_owners = set()
         for name, module in self._training_modules().items():
             for tensor in (*module.parameters(), *module.buffers()):
-                if tensor.device != self.device or (tensor.is_floating_point() and tensor.dtype != self.dtype):
-                    raise ValueError("policy modules and table must share one device and floating dtype")
+                if tensor.device != self.device:
+                    raise ValueError("policy modules and table must share one device")
+                if tensor.requires_grad and tensor.is_floating_point() and tensor.dtype != self.dtype:
+                    raise ValueError("trainable policy tensors must use the table's floating dtype; "
+                                     "frozen parameters and buffers may retain their own precision")
             for key, parameter in module.named_parameters():
                 if id(parameter) in seen:
                     raise ValueError("policy modules must not share parameters")
@@ -431,7 +512,7 @@ class UpdatePolicy:
             penalty.regularizer.continuous_controller = self.controller
         return penalty
 
-    def begin_step(self, real, *, game_record=None):
+    def begin_step(self, real, *, game_record=None, routed=None):
         """Observe critic-real rows, set LRs, take anchors, and compute noise.
 
         Call before any critic forward.  ``game_record`` is the KA2 optimizer's
@@ -441,6 +522,14 @@ class UpdatePolicy:
         """
         if self._phase != "ready":
             raise RuntimeError("finish_step must complete the previous policy update")
+        if self.routed_control is not None:
+            if routed is None:
+                raise ValueError("routed_paired updates require RoutedBatch fit and separate guard contexts")
+            from .routing import RoutedBatch
+            if not isinstance(routed, RoutedBatch):
+                raise TypeError("routed must be a RoutedBatch")
+        elif routed is not None:
+            raise ValueError("routed observations require recipe.row_policy='routed_paired'")
         self._serve_release()
         recipe = self.recipe
         if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
@@ -449,13 +538,15 @@ class UpdatePolicy:
                 or real.device != self.device or real.dtype != self.dtype):
             raise ValueError("real must be a nonempty batch on the model device and dtype")
         real = real.detach()
+        if self.routed_control is not None:
+            self.routed_control.begin(routed)
         if self.controller is not None:
             self.controller.observe_prior(self._prior_view())
             record = getattr(self.opt_d, "record", None) if game_record is None else game_record
             if record is None:
                 raise ValueError("continuous policy requires the previous critic game_record")
             self.controller.observe_game(record)
-        if self.birth_death is not None:
+        if self.birth_death is not None and self.routed_control is None:
             self.birth_death.observe_real(real)
         if self.lr_settle is None:
             network, prior_scale = (self.schedule(self.completed_steps, recipe)
@@ -555,8 +646,11 @@ class UpdatePolicy:
             self.controller.observe_generator(generator, loss_gan.detach(), loss_critic.detach())
         self._hot = self._z_before = None
         tester = self._table_tester()
-        if self.row_evidence is not None:
+        if self.routed_control is not None:
+            self.routed_control.observe_backward(self.table.grad)
+        elif self.row_evidence is not None:
             self.row_evidence.update(self.table.grad)
+        if self.row_evidence is not None:
             if (self.recipe.row_evidence_hot and self._stray_flags is not None and tester is not None
                     and tester.s < 1.0 and bool(self._stray_flags.any())):
                 self._hot = self._stray_flags
@@ -596,19 +690,28 @@ class UpdatePolicy:
         for name, target in self._average_modules().items():
             source = fast_modules[name]
             for averaged, current in zip(target.parameters(), source.parameters()):
-                if rate is None:
+                if not current.requires_grad:
+                    averaged.copy_(current)
+                elif rate is None:
                     averaged.mul_(recipe.ema_decay).add_(current, alpha=1 - recipe.ema_decay)
                 else:
                     averaged.mul_(1.0 - rate).add_(current, alpha=rate)
             for averaged, current in zip(target.buffers(), source.buffers()):
                 averaged.copy_(current)
         if self._table_location is None:
-            if rate is None:
+            if not self.table.requires_grad:
+                self.averaged_table.copy_(self.table)
+            elif rate is None:
                 self.averaged_table.mul_(recipe.ema_decay).add_(self.table, alpha=1 - recipe.ema_decay)
             else:
                 self.averaged_table.mul_(1.0 - rate).add_(self.table, alpha=rate)
         event = None
-        if self.birth_death is not None:
+        if self.routed_control is not None:
+            if self.recipe.particle_birth_death:
+                event = self.routed_control.maybe_apply()
+            if event and event.get("moves") and self.lr_settle is not None:
+                self._routed_rebase()
+        elif self.birth_death is not None:
             event = self.birth_death.maybe_apply(self.last_output_sigma)
             if event and event.get("moves") and self.lr_settle is not None:
                 for index, row in enumerate(self.lr_settle.testers):
@@ -620,6 +723,22 @@ class UpdatePolicy:
         self.completed_steps += 1
         self.abort_step()
         return event
+
+    def _routed_rebase(self):
+        """Remove non-gradient bank moves from row-local and coupled windows."""
+        moved = self.routed_control.moved_parameters
+        for optimizer, testers, roles in zip(self.optimizers, self.lr_settle.testers, self.roles):
+            for group, tester, role in zip(optimizer.param_groups, testers, roles):
+                if tester is None:
+                    continue
+                affected = [parameter for parameter in group["params"] if parameter in moved]
+                if affected:
+                    if len(group["params"]) == 1 and tester.rows is not None:
+                        tester.rebase(group["params"], moved[affected[0]])
+                    else:
+                        tester.restart(group["params"])
+                elif getattr(self.routed_control, "restart_router", False) and role in ("encoder", "router"):
+                    tester.restart(group["params"])
 
     def abort_step(self):
         """Release lifecycle bookkeeping after a caller error; does not undo updates."""
@@ -695,6 +814,32 @@ class UpdatePolicy:
             latent = self.controller.perturb_latent(
                 latent, stream, self._prior_view(averaged), record=stream is self.noise_generator)
         y = self._clean_generate(model, latent)
+        if sigma == 0:
+            return y
+        return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
+
+    def routed_generate(self, context, *, sigma=None, perturb=True, stream=None, averaged=False):
+        """Generate a conditional dense-bank forward with E22 training noise.
+
+        Routing keys and values use the current selected bank. DV12, when
+        enabled, perturbs ``weights @ table`` after routing, preserving both
+        key and value gradient paths. ``sigma=0, perturb=False`` is the clean
+        forward used by guarded proposals and serving. For paired-error GANs,
+        use ``sigma=0`` here and add one shared output-noise draw to the real
+        and fake error coordinates outside this helper.
+        """
+        if self.routed_control is None:
+            raise ValueError("routed_generate requires recipe.row_policy='routed_paired' and RoutedRows")
+        if type(perturb) is not bool:
+            raise ValueError("perturb must be a boolean")
+        stream = self.noise_generator if stream is None else self._stream(stream, 0)
+        if sigma is None:
+            sigma = self._noise.output_sigma if self._noise is not None else self.output_sigma()
+        prior = self._prior_view(averaged)
+        perturb_fn = (lambda codes: self.controller.perturb_latent(
+            codes, stream, prior, record=stream is self.noise_generator)) \
+            if perturb and self.controller is not None else None
+        y = self.routed_control.generate(context, averaged=averaged, perturb_fn=perturb_fn)
         if sigma == 0:
             return y
         return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
@@ -775,7 +920,8 @@ class UpdatePolicy:
                              "table": self.averaged_table if average else self.table,
                              "output_sigma": self.output_sigma(), "completed_steps": self.completed_steps,
                              "controller": None if self.controller is None else self.controller.state_dict(),
-                             "row_semantics": self.row_semantics})
+                             "row_semantics": self.row_semantics,
+                             "routing": None if self.routed_control is None else self.routed_control.spec.to_dict()})
         finally:
             if swapped:
                 self._serve_apply()
@@ -802,7 +948,8 @@ class UpdatePolicy:
             generation = generation_factory(models)
             if not callable(generation):
                 raise TypeError("generation_factory must return a callable")
-        table = snapshot["table"] if self._table_location is None else self._table_in_modules(models)
+        table = (snapshot["table"].detach() if self._table_location is None else
+                 self._table_in_modules(models))
         controller = deepcopy(self.controller)
         if controller is not None:
             controller.load_state_dict(snapshot["controller"])
@@ -811,7 +958,8 @@ class UpdatePolicy:
         return ServedModel(models, table, controller, source=snapshot["source"],
                            output_sigma=snapshot["output_sigma"],
                            completed_steps=snapshot["completed_steps"], stream=stream,
-                           generation=generation, row_semantics=self.row_semantics)
+                           generation=generation, row_semantics=self.row_semantics,
+                           routing=None if self.routed_control is None else self.routed_control.spec)
 
     def state_dict(self):
         """Save all policy, model, optimizer, averaging and RNG state independently.
@@ -840,8 +988,11 @@ class UpdatePolicy:
                 "output_noise": None if self.log_output_sigma is None else self.log_output_sigma.detach(),
                 "controller": None if self.controller is None else self.controller.state_dict(),
                 "lr_settle": None if self.lr_settle is None else self.lr_settle.state_dict(),
-                "birth_death": None if self.birth_death is None else self.birth_death.state_dict(),
-                "row_evidence": None if self.row_evidence is None else self.row_evidence.state_dict(),
+                "birth_death": (None if self.birth_death is None or self.routed_control is not None
+                                else self.birth_death.state_dict()),
+                "row_evidence": (None if self.row_evidence is None or self.routed_control is not None
+                                 else self.row_evidence.state_dict()),
+                "routing": None if self.routed_control is None else self.routed_control.state_dict(),
                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
                 "cpu_rng": torch.get_rng_state(),
                 "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
@@ -862,9 +1013,14 @@ class UpdatePolicy:
 
     def _check_state(self, state):
         expected = self.state_dict()
-        if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 1:
+        allowed = (set(expected), set(expected) - {"routing"}) if self.routed_control is None else (set(expected),)
+        if not isinstance(state, dict) or set(state) not in allowed or state.get("schema") != 1:
             raise ValueError("invalid UpdatePolicy checkpoint schema")
-        for key in ("recipe", "roles", "row_semantics", "device", "dtype", "requires_grad",
+        saved_recipe = state.get("recipe")
+        if (not isinstance(saved_recipe, dict)
+                or {"row_policy": "independent", **saved_recipe} != expected["recipe"]):
+            raise ValueError("checkpoint recipe does not match policy")
+        for key in ("roles", "row_semantics", "device", "dtype", "requires_grad",
                     "table_requires_grad", "table_location"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match policy")
@@ -884,6 +1040,14 @@ class UpdatePolicy:
             elif (not isinstance(value, torch.Tensor) or value.shape != current.shape
                   or value.dtype != current.dtype or (name == "output_noise" and not torch.isfinite(value).all())):
                 raise ValueError(f"incompatible policy {name}")
+        if self._table_location is not None:
+            owner, key = self._table_location
+            for family, name in (("models", "table"), ("averages", "averaged_table")):
+                table_value = state[name].detach()
+                owner_value = state[family][owner][key].detach().to(table_value.device)
+                if (not torch.equal(owner_value, table_value)
+                        and not torch.allclose(owner_value, table_value, rtol=0, atol=0, equal_nan=True)):
+                    raise ValueError(f"inconsistent policy {name} alias in {family}/{owner}/{key}")
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != len(self.initial_lrs)
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -912,7 +1076,8 @@ class UpdatePolicy:
         except (TypeError, ValueError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid policy checkpoint RNG state") from error
         for key, control in (("controller", self.controller), ("lr_settle", self.lr_settle),
-                             ("birth_death", self.birth_death), ("row_evidence", self.row_evidence)):
+                             ("birth_death", None if self.routed_control is not None else self.birth_death),
+                             ("row_evidence", None if self.routed_control is not None else self.row_evidence)):
             if (control is None) != (state[key] is None):
                 raise ValueError(f"incompatible policy {key}")
             if control is None:
@@ -923,6 +1088,11 @@ class UpdatePolicy:
                 control.check_state(state[key])
             else:
                 deepcopy(control).load_state_dict(_state_to_device(state[key], self.device))
+        routing = state.get("routing")
+        if (self.routed_control is None) != (routing is None):
+            raise ValueError("checkpoint routing contract does not match policy")
+        if self.routed_control is not None:
+            self.routed_control.check_state(routing)
         table_state = state["lr_settle"]
         settled = False
         if table_state is not None:
@@ -953,10 +1123,12 @@ class UpdatePolicy:
             self.controller.load_state_dict(_state_to_device(state["controller"], self.device))
         if self.lr_settle is not None:
             self.lr_settle.load_state_dict(_state_to_device(state["lr_settle"], self.device), self.optimizers)
-        if self.birth_death is not None:
+        if self.birth_death is not None and self.routed_control is None:
             self.birth_death.load_state_dict(state["birth_death"])
-        if self.row_evidence is not None:
+        if self.row_evidence is not None and self.routed_control is None:
             self.row_evidence.load_state_dict(state["row_evidence"])
+        if self.routed_control is not None:
+            self.routed_control.load_state_dict(state["routing"])
         self.initial_lrs, self.completed_steps = deepcopy(state["initial_lrs"]), state["completed_steps"]
         self.last_output_sigma = state["last_output_sigma"]
         for name, value in state["streams"].items():
@@ -971,7 +1143,11 @@ class E22Policy(UpdatePolicy):
 
     Task-specific recipe overrides remain authoritative.  This class requires
     DV12 and stationarity control; disabling birth/death or output noise for
-    an ablation keeps the same lifecycle and checkpoint API.
+    an ablation keeps the same lifecycle and checkpoint API. Independent
+    E22 retains its original particle law. The named ``e22_routed`` recipe
+    supplies the conditional paired-error adaptation with ``RoutedRows``
+    and fit/guard ``RoutedBatch`` observations; clean served inference uses
+    ``served_model().routed_forward(context)``.
     """
 
     def __init__(self, recipe, generator, critic, **kwargs):

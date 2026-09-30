@@ -58,6 +58,13 @@ owns controller observations, group learning rates, row evidence, birth/death,
 learned output noise and serving averages. Its lifecycle hooks, checkpoint
 contract and served snapshots are documented in [the E22 guide](e22.md), with
 a [runnable external loop](../examples/e22_external_loop.py).
+Conditional densely blended banks use `get_recipe("e22_routed", ...)` and
+an explicit `RoutedRows` binding, with `RoutedBatch` inputs providing paired
+targets and separate guard contexts. The [routed adaptation](e22_routed.md)
+defines its evidence and move rules and includes a paired-error example.
+Frozen module parameters and buffers may retain BF16 or other precision;
+trainable floating tensors share the table's dtype. Frozen weights are copied
+exactly into the serving averages.
 
 ## Initialization
 
@@ -803,6 +810,7 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ```python
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
 get_recipe("e22", **overrides) # Schedule-free E22 policy, explicit task settings.
+get_recipe("e22_routed", **overrides) # Conditional dense-bank paired adaptation.
 recipe.replace(**overrides)   # A new immutable Recipe.
 recipe.to_dict()              # Complete resolved fields.
 Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
@@ -822,6 +830,7 @@ and fields are rejected. Restore a complete saved configuration with
 | --- | --- |
 | `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
 | `e22` | Scalar GAN, 20,000 particles, latent dimension 2, batch 2,048; E22 controls with learned output noise initially .029 |
+| `e22_routed` | Same E22 controls with `row_policy="routed_paired"`; requires explicit context/routing/feature callbacks and guard observations |
 | `mog` | GAN, 400 MoG components, latent dimension 2, relative sigma .025 |
 | `ddgan` | DDGAN, UCD with 4 classes, discrete particles |
 | `ddgan_mog` | DDGAN, UCD with 4 classes, 400 MoG components, relative sigma .025 |
@@ -836,12 +845,14 @@ the new shared hyperparameters. The GAN development-suite evidence does not
 establish convergence of those hyperparameters for every AE/VAE/DDGAN setup.
 
 E22's task inputs are `num_particles`, `z_dim`, `batch_size` and
-`output_noise_std`; set them explicitly for a new task. Row evidence and
-birth/death currently require independently sampled unconditional table rows.
-Conditional and densely blended routed banks are rejected when these
-mechanisms are enabled. [The E22 guide](e22.md) defines the row contract and
-how to use the other controls with explicit generator, encoder/router, critic
-and table optimizer roles.
+`output_noise_std`; set them explicitly for a new task. Its default
+`row_policy="independent"` retains the unconditional equal-mass row law.
+Conditional densely blended banks declare `row_policy="routed_paired"` and
+bind `RoutedRows`; routing weights alone do not provide row support evidence.
+The [independent guide](e22.md) and [routed guide](e22_routed.md) define the
+respective evidence, ownership, lifecycle and serving contracts. `GANTrainer`
+supports the independent formulation; routed observations belong to the
+caller-owned loop.
 
 ### Components that change a loop
 

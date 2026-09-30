@@ -19,6 +19,7 @@ from .recipes import (
     learning_rate_scales,
     scale_learning_rates,
 )
+from .routing import RoutedBatch, RoutedCandidate, RoutedRows
 from .training import GANTrainer, InputNoise
 from .vicreg_loss import ParticleRegularizer
 from . import init
@@ -27,6 +28,7 @@ __all__ = [
     "init",
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticleRows", "ScalarHeadFeatures",
+    "RoutedBatch", "RoutedCandidate", "RoutedRows",
     "E22Policy", "UpdatePolicy", "ServedModel", "StepNoise",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",

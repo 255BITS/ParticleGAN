@@ -45,3 +45,22 @@ def test_conditional_loops_may_select_controls_without_row_mechanisms():
     assert recipe.conditioning == "conditional" and recipe.lr_control == "stationarity"
     with pytest.raises(ValueError, match="E22Policy/UpdatePolicy"):
         learning_rate_scales(0, recipe)
+
+
+def test_routed_preset_is_named_adaptation_with_both_row_controls():
+    options = get_recipe("e22_routed", num_particles=8, z_dim=4, batch_size=16,
+                         conditioning="conditional", num_classes=2,
+                         output_noise_std=.05)
+    assert options.row_policy == "routed_paired" and options.name == "e22_routed"
+    assert options.row_evidence_gate and options.particle_birth_death
+    assert options.continuous_policy == "dv12" and options.lr_control == "stationarity"
+    assert options.table_release_rule == "anchor" and options.serve_average == 4
+    assert Recipe(**json.loads(json.dumps(options.to_dict()))) == options
+    assert get_recipe("e22").row_policy == "independent"
+
+
+def test_routed_policy_recipe_rejects_incompatible_controls():
+    with pytest.raises(ValueError, match="requires DV12 and stationarity"):
+        get_recipe(row_policy="routed_paired")
+    with pytest.raises(ValueError, match="row_policy must be"):
+        get_recipe(row_policy="soft")

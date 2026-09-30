@@ -55,7 +55,7 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, 
                         "row_evidence_hot": True, "row_evidence_exclude": True, "row_evidence_hold": True,
                         "birth_death_space": "data", "serve_average": 0.0, "reopen_signal": "data",
                         "row_evidence_null": "theory", "birth_death_isolation": False,
-                        "birth_death_feature_scale": "none"}
+                        "birth_death_feature_scale": "none", "row_policy": "independent"}
 
 
 class GANTrainer:
@@ -96,6 +96,9 @@ class GANTrainer:
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
         self.serial_backward = serial_backward
+        if getattr(recipe, "row_policy", "independent") != "independent":
+            raise ValueError("GANTrainer requires row_policy='independent'; use E22Policy with RoutedRows "
+                             "and a caller-owned loop for paired conditional contexts")
         if (recipe.model != "gan" or recipe.conditioning != "scalar"
                 or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
@@ -103,7 +106,8 @@ class GANTrainer:
         parameters = list(generator.parameters())
         if not parameters or not any(p.requires_grad for p in parameters):
             raise ValueError("generator must have trainable parameters")
-        self.device, self.dtype = parameters[0].device, parameters[0].dtype
+        first_trainable = next(p for p in parameters if p.requires_grad)
+        self.device, self.dtype = first_trainable.device, first_trainable.dtype
         self.prior = (recipe.make_prior().to(device=self.device, dtype=self.dtype)
                       if prior is None else prior)
         if type(self.prior) is not ParticlePrior:
@@ -115,8 +119,9 @@ class GANTrainer:
         seen = set()
         for module in (self.G, self.D, self.prior):
             for value in (*module.parameters(), *module.buffers()):
-                if value.device != self.device or (value.is_floating_point() and value.dtype != self.dtype):
-                    raise ValueError("generator, discriminator and prior must share one device and floating dtype")
+                if value.device != self.device or (value.requires_grad and value.is_floating_point()
+                                                  and value.dtype != self.dtype):
+                    raise ValueError("generator, discriminator and prior must share one device and trainable floating dtype")
             for parameter in module.parameters():
                 if id(parameter) in seen:
                     raise ValueError("generator, discriminator and prior must not share parameters")

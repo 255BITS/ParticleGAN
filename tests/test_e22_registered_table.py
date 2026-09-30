@@ -137,6 +137,24 @@ def test_registered_table_served_snapshot_owns_its_copied_table():
     torch.testing.assert_close(actual, reference, rtol=0, atol=0)
 
 
+@pytest.mark.parametrize("name", ["table", "averaged_table"])
+def test_conflicting_registered_table_checkpoint_alias_rejects_before_mutation(name):
+    policy = make_policy()
+    update(policy)
+    policy._table_tester().last_decisive = -1
+    before = policy.state_dict()
+    snapshot = policy.served_snapshot()
+    bad = deepcopy(before)
+    # Replace this tensor so the malformed checkpoint conflicts with its
+    # independently serialized module owner even if storage aliases survived.
+    bad[name] = bad[name] + 1.
+    bad["models"]["generator"]["network.weight"].zero_()
+    with pytest.raises(ValueError, match="inconsistent.*alias"):
+        policy.load_state_dict(bad)
+    assert_tree_equal(before, policy.state_dict())
+    assert_tree_equal(snapshot, policy.served_snapshot())
+
+
 def test_embedded_and_explicit_prior_parameter_overlap_is_rejected():
     policy = make_policy()
     prior = nn.Module()

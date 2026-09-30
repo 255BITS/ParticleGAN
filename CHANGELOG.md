@@ -5,10 +5,16 @@
 - **Composable E22 policy:** `get_recipe("e22", **task_overrides)` ships the
   preset in the installed package. `E22Policy` / `UpdatePolicy` expose the
   same lifecycle controls used by `GANTrainer`, explicit optimizer/table
-  ownership and callbacks, recovery state and served-model snapshots. Row
-  evidence and birth/death require independent unconditional atoms; conditional
-  and dense soft routing are rejected for those mechanisms. See the
+  ownership and callbacks, recovery state and served-model snapshots. The
+  independent formulation retains its unconditional particle contract. See the
   [external-loop and migration guide](docs/e22.md).
+- **Conditional routed paired adaptation:** `get_recipe("e22_routed", ...)`
+  supports dense softmax banks through explicit `RoutedRows` and `RoutedBatch`
+  inputs. Row controls use conditional counterfactual evidence and guarded
+  whole-bank moves, including routing state, averages and optimizer/controller
+  recovery. Clean served forwards preserve the selected conditional bank.
+  Frozen BF16 modules can accompany FP32 trainable tensors; averages copy
+  frozen parameters exactly. See the [design and validation](docs/e22_routed.md).
 - **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
   K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with
