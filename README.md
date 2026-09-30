@@ -21,6 +21,14 @@ Recorded with the 0.8.0 recipe and its original random initialization, live weig
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
 at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
+**Without a learning-rate schedule.** The [E22 configuration](docs/e22.md) has no schedule or training
+horizon, and no statistic of the raw data in its training control. It covers all 100 modes on three layouts,
+ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
+
+![E22 on the grid, rotated and staggered 100-Gaussian problems](reports/e22-animation/e22-100gaussians.gif)
+
+[How this animation was made](reports/e22-animation/README.md).
+
 ## Install
 
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
