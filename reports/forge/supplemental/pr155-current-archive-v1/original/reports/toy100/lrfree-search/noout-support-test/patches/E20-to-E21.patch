@@ -1,0 +1,35 @@
+diff -ruN '--exclude=__pycache__' pkg-E20/particlegan/birth_death.py pkg-E21/particlegan/birth_death.py
+--- pkg-E20/particlegan/birth_death.py	2026-09-29 09:26:50.952706280 -0600
++++ pkg-E21/particlegan/birth_death.py	2026-09-29 11:21:36.536039064 -0600
+@@ -270,10 +270,12 @@
+         """Rows to re-draw and their parents. The guard is on ``flagged`` (all rows flagged this evaluation): nothing is done while more than Q of the
+         table is flagged (most of the table still in transit has no support to clone from; the same level as the test). The rows re-drawn are
+         ``act`` (default: ``flagged``; the trainer passes the rows flagged in two consecutive evaluations) minus the rows the ordinary moves just
+-        re-drew. Each becomes a clone of an unflagged row drawn among the k^2 nearest unflagged rows in the table's own latent space, with probability
+-        proportional to ``weight`` (the row's own isolation p-value: the mass without support goes back into the nearest supported neighbourhood and
+-        into its bulk, not its rim: rim rows have small p and their clones are flagged again). The rank cap keeps the rule local in any latent
+-        dimension."""
++        re-drew. Each becomes a clone of an unflagged row drawn among the (at most k^2 nearest) unflagged rows in the table's own latent space that are at
++        most twice as far as its nearest unflagged row, with probability proportional to ``weight`` (the row's own isolation p-value: the mass without
++        support goes back into the nearest supported neighbourhood, into its bulk and not its rim: rim rows have small p and their clones are flagged
++        again). The distance limit keeps the mass in the nearest neighbourhood also when that neighbourhood has fewer than k^2 rows (the first rows
++        that arrive at a mode after a shift: a rank cap alone would then draw parents from other modes and shuffle mass, as uniform parents do); the rank
++        cap keeps the rule local in any latent dimension."""
+         c, n_flag = self.counters, int(flagged.sum())
+         acted = 0 < n_flag <= self.Q * self.N
+         c["iso_evals"] += 1
+@@ -296,11 +298,13 @@
+         parent, step, cap = [], max(1, (1 << 24) // len(keep)), min(self.k ** 2, len(keep))      # chunks of about 16M distances; at most k^2 candidates
+         for start in range(0, len(dead), step):
+             dist = torch.cdist(z[dead[start:start + step]], z[keep])                                                  # [chunk, keep]
+-            near = dist.topk(cap, dim=1, largest=False).indices                                                       # [chunk, cap] positions in keep
++            near_d, near = dist.topk(cap, dim=1, largest=False)                                                       # [chunk, cap] distances and positions in keep
++            allowed = near_d <= 2. * near_d[:, :1]                                                                    # the neighbourhood of the nearest unflagged row: at most twice as far
+             u = torch.rand(near.shape, device=dist.device, generator=self.stream, dtype=torch.float64).clamp(1e-12, 1. - 1e-12)
+             key = -torch.log(-torch.log(u))                                                                           # Gumbel-max: a draw proportional to the weights
+             if log_w is not None:
+                 key = key + log_w[near]
++            key = torch.where(allowed, key, torch.full_like(key, -float("inf")))
+             parent.append(keep[near.gather(1, key.argmax(1, keepdim=True)).squeeze(1)])
+         parent = torch.cat(parent)
+         c["iso_moves"] += len(dead)

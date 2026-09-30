@@ -20,6 +20,18 @@ justified profile. The controls' independent references and empirical
 false-reject fraction remain unknown. The inspected historical checkpoint in
 the matrix below remains dated and is not a current record-count claim.
 
+The coordinator then observed [CI on `077f9b20`](https://github.com/255BITS/ParticleGAN/actions/runs/36674097253)
+pass the same 1,807 tests and 18 subtests, including packaging. The
+[supplemental newer archive](supplemental/pr155-current-archive-v1/README.md)
+and API/gap context subsequently raised compiled memory to 231 records; there
+are no conflicts or pending readouts. The supplemental importer and a second
+reader verified source/card hashes, explicit scoring, retained errors and
+unchanged original 176 history cards. Current scientific source and calibration
+remain unchanged. The [new source audit](calibration/pr155-current-followup-source-audit.md)
+still cannot bind the three required original claims. The
+[incoming API audit](UPSTREAM_E22_COMPATIBILITY.md) identifies future integration
+requirements, with no current-develop software defect demonstrated.
+
 ## Current acceptance evidence
 
 | Requirement | Concrete current evidence | Judgment and limits |

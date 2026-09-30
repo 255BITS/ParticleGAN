@@ -1,0 +1,840 @@
+{
+  "schema_version": 1,
+  "read_only": true,
+  "fetched_head": "b924ed4d3a2fbfee31796b53a32ea831d235750e",
+  "archive_revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+  "old_audit_revision": "bb9036e33557b23b30293811dd95829a04112388",
+  "training_launched": false,
+  "repository_imports_or_mutations": false,
+  "claims": [
+    {
+      "id": "dt075-14k",
+      "claim": "dt075 grid100 and staggered100 fail at 14k after stationarity-ladder release",
+      "binding": "NOT_BOUND",
+      "located_support": "The exact alpha=.75 narrative names cf1-bdpair-dtracks-075-prior and package SHA, but records only 7k outcomes: grid PASS, rotated PASS, staggered FAIL. The new D-floor follow-up also states all native runs are 7k and both alpha=.75/full tracking remain 2/3.",
+      "candidate_name": "cf1-bdpair-dtracks-075-prior",
+      "candidate_package_sha256": "8cdcc534c348d51afaad8b65b1058cb2018beb656af6b8fb842733c886731d90",
+      "evidence": [
+        {
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "path": "reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md",
+          "git_blob": "f4a70551bdaa85a213b0eea3ca2389923eab7a35",
+          "sha256": "cd15b08e6165c37a131a547c07849598cdfccf45c3381c418bec4ef16546f0ca",
+          "bytes": 18275,
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md",
+          "same_blob_at_old_audit": true
+        },
+        {
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "path": "reports/toy100/lrfree-search/dtrack-floors/README.md",
+          "git_blob": "e169043a3da068b6532a89d2a2b5e4b97d253186",
+          "sha256": "3983e7283aa2f5c5e414f0186c050ee0a5690cc18ea6070aac91f47d5f79ef1b",
+          "bytes": 4940,
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack-floors/README.md",
+          "same_blob_at_old_audit": false
+        }
+      ],
+      "external_raw_location": "/ml2/hypergan/gan-attempts/formulations-20260928T040504Z/custom_follow/20260928T040504Z-4138988/",
+      "missing": [
+        "Exact 14k grid/staggered request/config, package bytes and source manifest",
+        "Recorded 7k-prefix parity and 14k terminal/holdout verdicts for that exact package",
+        "Rates/controller decision trace binding the alleged ladder-release event"
+      ],
+      "not_substituted": [
+        "structural100 rotated 14k failure",
+        "PR215 QR grid 14k failure",
+        "E4/E14/E19 14k/28k results"
+      ]
+    },
+    {
+      "id": "ema995-dtracking",
+      "claim": "EMA .995 gives native 3/3 on D-tracking runs",
+      "binding": "NOT_BOUND",
+      "located_support": "Archived rs1-dtrack is an exact but different D-times-2 lineage with EMA .995 and paired per-check live/EMA metrics. Rotated EMA final precision .9571 is below .97 and its combined pass is false. This does not identify the missing full/fractional tracking-floor EMA claim.",
+      "nearby_package_sha256": "df0515e1e2e746c04c99e21055bcbf53a33be05b38974621a17558d499786988",
+      "nearby_receipts": [
+        {
+          "task": "grid100",
+          "candidate": "rs1-dtrack",
+          "package_sha256": "df0515e1e2e746c04c99e21055bcbf53a33be05b38974621a17558d499786988",
+          "ema_decay": 0.995,
+          "d_lr_mult": 2.0,
+          "completed_steps": 7000,
+          "status_live": "PASS",
+          "live_precision": 0.9831,
+          "ema_final_precision": 0.98295,
+          "ema_final_accuracy_pass": true,
+          "ema_final_combined_pass": true,
+          "last_five_ema": [
+            {
+              "step": 6000,
+              "precision": 0.9838,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 6250,
+              "precision": 0.98425,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 6500,
+              "precision": 0.9835,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 6750,
+              "precision": 0.98395,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 7000,
+              "precision": 0.98295,
+              "accuracy_pass": true,
+              "combined_pass": true
+            }
+          ],
+          "ema_holdout_receipt_present": false,
+          "fixture": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-fixture.json",
+            "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+            "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+            "bytes": 2175,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-fixture.json",
+            "same_blob_at_old_audit": true
+          },
+          "result": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-result.json",
+            "git_blob": "363ed457c0cd542815d39ecd98b49f8823d49f33",
+            "sha256": "e08672ab0718276cef907e5d9cedf2871f1af6741398e97f668d5fc1f88b32fb",
+            "bytes": 11750,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-result.json",
+            "same_blob_at_old_audit": true
+          },
+          "header": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-job-header.json",
+            "git_blob": "32dcbe66da5837e632084716afa35d400a0c93cd",
+            "sha256": "60d22cac980ced77ff45aa62b1c5c2cdc9df8580866c158231034f97d7c8be95",
+            "bytes": 2221,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-job-header.json",
+            "same_blob_at_old_audit": true
+          },
+          "trace": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-metrics.jsonl",
+            "git_blob": "d6640bb9453e80a4c5366a93642c174c345c7ee1",
+            "sha256": "9433c1dae02fa9aad746e783ad7cfc554bfc6741bc30d2f9538d365356c5d51e",
+            "bytes": 274366,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-metrics.jsonl",
+            "same_blob_at_old_audit": true
+          }
+        },
+        {
+          "task": "rotated100",
+          "candidate": "rs1-dtrack",
+          "package_sha256": "df0515e1e2e746c04c99e21055bcbf53a33be05b38974621a17558d499786988",
+          "ema_decay": 0.995,
+          "d_lr_mult": 2.0,
+          "completed_steps": 7000,
+          "status_live": "FAIL",
+          "live_precision": 0.9571,
+          "ema_final_precision": 0.9571,
+          "ema_final_accuracy_pass": true,
+          "ema_final_combined_pass": false,
+          "last_five_ema": [
+            {
+              "step": 6000,
+              "precision": 0.95695,
+              "accuracy_pass": true,
+              "combined_pass": false
+            },
+            {
+              "step": 6250,
+              "precision": 0.9572,
+              "accuracy_pass": true,
+              "combined_pass": false
+            },
+            {
+              "step": 6500,
+              "precision": 0.9572,
+              "accuracy_pass": true,
+              "combined_pass": false
+            },
+            {
+              "step": 6750,
+              "precision": 0.95725,
+              "accuracy_pass": true,
+              "combined_pass": false
+            },
+            {
+              "step": 7000,
+              "precision": 0.9571,
+              "accuracy_pass": true,
+              "combined_pass": false
+            }
+          ],
+          "ema_holdout_receipt_present": false,
+          "fixture": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-fixture.json",
+            "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+            "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+            "bytes": 2175,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-fixture.json",
+            "same_blob_at_old_audit": true
+          },
+          "result": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-result.json",
+            "git_blob": "86b7fae862e16459215d8adfd741af59166074e0",
+            "sha256": "949aed514c1d5e212f0ed54bda30ed24d72848438f20ef244a3744fc19b65861",
+            "bytes": 11688,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-result.json",
+            "same_blob_at_old_audit": true
+          },
+          "header": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-job-header.json",
+            "git_blob": "3a333028593dff1ce0992185b4f74dfb4850e3a0",
+            "sha256": "9063fe94527976f31337eae25d85595ebf67cd90a1f954e95008afe8c8525509",
+            "bytes": 2224,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-job-header.json",
+            "same_blob_at_old_audit": true
+          },
+          "trace": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-metrics.jsonl",
+            "git_blob": "cdcf6c2f185da0fcd79702d02d4e57b95965c334",
+            "sha256": "83762407ee213041625698135b8dbc6ed9dedec161a7c041a99d03c2a3445213",
+            "bytes": 275758,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-metrics.jsonl",
+            "same_blob_at_old_audit": true
+          }
+        },
+        {
+          "task": "staggered100",
+          "candidate": "rs1-dtrack",
+          "package_sha256": "df0515e1e2e746c04c99e21055bcbf53a33be05b38974621a17558d499786988",
+          "ema_decay": 0.995,
+          "d_lr_mult": 2.0,
+          "completed_steps": 7000,
+          "status_live": "FAIL",
+          "live_precision": 0.9713,
+          "ema_final_precision": 0.97245,
+          "ema_final_accuracy_pass": true,
+          "ema_final_combined_pass": true,
+          "last_five_ema": [
+            {
+              "step": 6000,
+              "precision": 0.972,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 6250,
+              "precision": 0.9723,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 6500,
+              "precision": 0.9728,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 6750,
+              "precision": 0.9723,
+              "accuracy_pass": true,
+              "combined_pass": true
+            },
+            {
+              "step": 7000,
+              "precision": 0.97245,
+              "accuracy_pass": true,
+              "combined_pass": true
+            }
+          ],
+          "ema_holdout_receipt_present": false,
+          "fixture": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-fixture.json",
+            "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+            "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+            "bytes": 2175,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-fixture.json",
+            "same_blob_at_old_audit": true
+          },
+          "result": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-result.json",
+            "git_blob": "e88afc86866ef1b8c08793c972cafcc420b38e17",
+            "sha256": "cfb59154d6f390db8064b7a4c73bed97c040fa223104d98eb0495b00d23dc6d9",
+            "bytes": 11731,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-result.json",
+            "same_blob_at_old_audit": true
+          },
+          "header": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-job-header.json",
+            "git_blob": "43cf48858f81dcc3a53e3cc358e3639037e42bcf",
+            "sha256": "9bf2b5dd1dc6fb7fcd34e64894958877259229cb01d20faccd74a7ca5b2fd7ef",
+            "bytes": 2226,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-job-header.json",
+            "same_blob_at_old_audit": true
+          },
+          "trace": {
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-metrics.jsonl",
+            "git_blob": "e74c11c17c783ef324751031b8982665af17be01",
+            "sha256": "342b4427a6a6ba6bf7fdda79fff09c4bb273bdc17bb3370b7055c8acee7a5909",
+            "bytes": 273634,
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-metrics.jsonl",
+            "same_blob_at_old_audit": true
+          }
+        }
+      ],
+      "missing": [
+        "Exact claimed D-tracking candidate/package and overrides",
+        "Matched live/EMA final-five plus independent 100k EMA holdout receipts and explicit scoring model",
+        "Package source bytes, initialization fixture and scorer identity for the claimed runs"
+      ],
+      "not_substituted": [
+        "prior-EMA-relaxation 3/3 (training mechanism; altered callback host)",
+        "E7 feature-space EMA narrative",
+        "E11/E14/E19/E22 served averaged model results"
+      ]
+    },
+    {
+      "id": "center-sensitivity",
+      "claim": "Sub-.03 sigma center-error sensitivity from the review",
+      "binding": "NOT_BOUND",
+      "narrative_binding": "BOUND_LATER_ASSERTION_ONLY",
+      "located_support": "New noout-support-test REQUIREMENTS section4 explicitly states center effects below .03 are unresolved, states 20k/100k sampling-floor rationale and a deconvolved-center margin policy; RESULTS also calls .03 the chaos scale. These identify a later assertion, not an original sensitivity experiment/receipt.",
+      "evidence": [
+        {
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "path": "reports/toy100/lrfree-search/noout-support-test/REQUIREMENTS.md",
+          "git_blob": "d98c51f394819618808dfd722994af0592a564b9",
+          "sha256": "25fd58e3192e7be1c0d975214129baca777d28a4cfc939e7ad7480d775e0b46d",
+          "bytes": 61400,
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/REQUIREMENTS.md",
+          "same_blob_at_old_audit": false
+        },
+        {
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "path": "reports/toy100/lrfree-search/noout-support-test/RESULTS.md",
+          "git_blob": "b85979f248e0b454a9642e4f63c598a0f13ecc49",
+          "sha256": "eb7258d4741e4b9a69593d7b7e79ca5bbcfaf664e6de11f6d140e148e7d1afe7",
+          "bytes": 65958,
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/RESULTS.md",
+          "same_blob_at_old_audit": false
+        }
+      ],
+      "distinct_sensitivity_evidence": [
+        {
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.md",
+          "git_blob": "4ff7672bcb4d634f5c56b354964b98411d0c6118",
+          "sha256": "57d04686c2094e33837732cd26470bce4e389df4ff6a8cbc1c75492a7d3fd85b",
+          "bytes": 2623,
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.md",
+          "same_blob_at_old_audit": true
+        },
+        {
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.json",
+          "git_blob": "7890e942e9b66df1e7c4c2ca8844c6a7ff18282c",
+          "sha256": "951f6d309f154a68b24a39f99b702ff9d85af3c3a2da364f7f1ebb9582a18f36",
+          "bytes": 97647,
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.json",
+          "same_blob_at_old_audit": true
+        }
+      ],
+      "distinct_scope": "H2 prior-coupling grid output-noise rescore at sigma .018,.019,.0195,.01955,.0196,.020 on fixed saved arrays; all required terminal sustained verdicts fail. It is not center-offset perturbation or a universal .03-sigma resolution result.",
+      "missing": [
+        "Original experiment/analysis identifier and exact claimed statistic",
+        "Perturbation or uncertainty protocol, input-array/fixture hashes, candidate package and exact scorer",
+        "Raw paired measurements supporting the sub-.03-sigma claim rather than nearby changes or a prose policy"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md",
+      "git_blob": "f4a70551bdaa85a213b0eea3ca2389923eab7a35",
+      "sha256": "cd15b08e6165c37a131a547c07849598cdfccf45c3381c418bec4ef16546f0ca",
+      "bytes": 18275,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack-floors/README.md",
+      "git_blob": "e169043a3da068b6532a89d2a2b5e4b97d253186",
+      "sha256": "3983e7283aa2f5c5e414f0186c050ee0a5690cc18ea6070aac91f47d5f79ef1b",
+      "bytes": 4940,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack-floors/README.md",
+      "same_blob_at_old_audit": false
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/README.md",
+      "git_blob": "3fc0bb08352043b860da759b0d8c285f7fa1fcd1",
+      "sha256": "e114a2e9dab0ac770fc9d62515d2c350b85463c6b73ca984fcda97d5bf865cf2",
+      "bytes": 2203,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/README.md",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-overrides.json",
+      "git_blob": "60983ef348d7d8d19db877f6eae7d14a642cc57a",
+      "sha256": "84f8d42f4aac1eadb59c523f5466fb1ebf07cb91a53ab151b306b17312aafe13",
+      "bytes": 1287,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-overrides.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-result.json",
+      "git_blob": "363ed457c0cd542815d39ecd98b49f8823d49f33",
+      "sha256": "e08672ab0718276cef907e5d9cedf2871f1af6741398e97f668d5fc1f88b32fb",
+      "bytes": 11750,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-result.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-job-header.json",
+      "git_blob": "32dcbe66da5837e632084716afa35d400a0c93cd",
+      "sha256": "60d22cac980ced77ff45aa62b1c5c2cdc9df8580866c158231034f97d7c8be95",
+      "bytes": 2221,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-job-header.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-fixture.json",
+      "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+      "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+      "bytes": 2175,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-fixture.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-metrics.jsonl",
+      "git_blob": "d6640bb9453e80a4c5366a93642c174c345c7ee1",
+      "sha256": "9433c1dae02fa9aad746e783ad7cfc554bfc6741bc30d2f9538d365356c5d51e",
+      "bytes": 274366,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-metrics.jsonl",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-result.json",
+      "git_blob": "86b7fae862e16459215d8adfd741af59166074e0",
+      "sha256": "949aed514c1d5e212f0ed54bda30ed24d72848438f20ef244a3744fc19b65861",
+      "bytes": 11688,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-result.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-job-header.json",
+      "git_blob": "3a333028593dff1ce0992185b4f74dfb4850e3a0",
+      "sha256": "9063fe94527976f31337eae25d85595ebf67cd90a1f954e95008afe8c8525509",
+      "bytes": 2224,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-job-header.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-fixture.json",
+      "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+      "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+      "bytes": 2175,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-fixture.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-metrics.jsonl",
+      "git_blob": "cdcf6c2f185da0fcd79702d02d4e57b95965c334",
+      "sha256": "83762407ee213041625698135b8dbc6ed9dedec161a7c041a99d03c2a3445213",
+      "bytes": 275758,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-metrics.jsonl",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-result.json",
+      "git_blob": "e88afc86866ef1b8c08793c972cafcc420b38e17",
+      "sha256": "cfb59154d6f390db8064b7a4c73bed97c040fa223104d98eb0495b00d23dc6d9",
+      "bytes": 11731,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-result.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-job-header.json",
+      "git_blob": "43cf48858f81dcc3a53e3cc358e3639037e42bcf",
+      "sha256": "9bf2b5dd1dc6fb7fcd34e64894958877259229cb01d20faccd74a7ca5b2fd7ef",
+      "bytes": 2226,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-job-header.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-fixture.json",
+      "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+      "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+      "bytes": 2175,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-fixture.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-metrics.jsonl",
+      "git_blob": "e74c11c17c783ef324751031b8982665af17be01",
+      "sha256": "342b4427a6a6ba6bf7fdda79fff09c4bb273bdc17bb3370b7055c8acee7a5909",
+      "bytes": 273634,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-metrics.jsonl",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/harness/tasks/native100_fixture.json",
+      "git_blob": "0281a46359c38c2cf013ff08d351605f50349826",
+      "sha256": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d",
+      "bytes": 2297,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/harness/tasks/native100_fixture.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/harness/native100_score.py",
+      "git_blob": "af246a530f2b441df437dd801dfe0073d16bda90",
+      "sha256": "10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb",
+      "bytes": 1660,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/harness/native100_score.py",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/harness/native_failmodes.py",
+      "git_blob": "8cc6fe36a0adca5a5bdfcc08dc68f20e3ab02732",
+      "sha256": "75aa594d3577e88347fa12c79f5e73fb2504060a61edc54b61d6c6c4e5ea9afd",
+      "bytes": 4442,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/harness/native_failmodes.py",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/noout-support-test/REQUIREMENTS.md",
+      "git_blob": "d98c51f394819618808dfd722994af0592a564b9",
+      "sha256": "25fd58e3192e7be1c0d975214129baca777d28a4cfc939e7ad7480d775e0b46d",
+      "bytes": 61400,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/REQUIREMENTS.md",
+      "same_blob_at_old_audit": false
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/noout-support-test/MANIFEST.md",
+      "git_blob": "5e82e6573eaf1297a56e39f21c1edbeee2a54ef5",
+      "sha256": "efbf6487a6ef41430005898cd35e8491abcf45c650fc0da979e1bae417a538ed",
+      "bytes": 4824,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/MANIFEST.md",
+      "same_blob_at_old_audit": false
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/noout-support-test/RESULTS.md",
+      "git_blob": "b85979f248e0b454a9642e4f63c598a0f13ecc49",
+      "sha256": "eb7258d4741e4b9a69593d7b7e79ca5bbcfaf664e6de11f6d140e148e7d1afe7",
+      "bytes": 65958,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/RESULTS.md",
+      "same_blob_at_old_audit": false
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.md",
+      "git_blob": "4ff7672bcb4d634f5c56b354964b98411d0c6118",
+      "sha256": "57d04686c2094e33837732cd26470bce4e389df4ff6a8cbc1c75492a7d3fd85b",
+      "bytes": 2623,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.md",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.json",
+      "git_blob": "7890e942e9b66df1e7c4c2ca8844c6a7ff18282c",
+      "sha256": "951f6d309f154a68b24a39f99b702ff9d85af3c3a2da364f7f1ebb9582a18f36",
+      "bytes": 97647,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/probe-fixed_sigma_rescore.py",
+      "git_blob": "7c85ebc367a1197973194bb39a303ca0d137496e",
+      "sha256": "9edf1bcb50377bd4e5081a94dcd77a30a6f67829b23a794af184aa8c36a9fa4e",
+      "bytes": 4465,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/sigma-adaptation-audit/probe-fixed_sigma_rescore.py",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+      "git_blob": "5f97c55ae7ce3891efddc0c9104d7de6cece0dbb",
+      "sha256": "3b7fc301cb52343a8ecc4da3eca6c2f780aac2223aa06d872d3fc1c89a33001e",
+      "bytes": 6573,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json",
+      "git_blob": "94769a2191b35292e234f2ebf59de65c66f8a090",
+      "sha256": "793ad255c4b7f6b839d6358598ab39f4733fc8777713f41e0dcc3476328a7e39",
+      "bytes": 2417,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json",
+      "same_blob_at_old_audit": true
+    },
+    {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/noout-e4/HANDOFF.md",
+      "git_blob": "c702be59207fd40bdd30cbb0221d177b7f03c144",
+      "sha256": "aec668e67ede31f751855932b7cd9562ccf0c290b1e32553e9f28a877360f43c",
+      "bytes": 2945,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/HANDOFF.md",
+      "same_blob_at_old_audit": false
+    }
+  ],
+  "search_scope": {
+    "archive_tracked_toy100_paths": 12042,
+    "archive_lrfree_paths": 1099,
+    "lrfree_changed_paths_since_old_audit": 646,
+    "removed_toy100_paths_at_20609344": 7842,
+    "path_and_plain_text_search": "Archive reports and current-head docs/report text searched for dt075/dtracks-075, D tracking, EMA .995/3-of-3, ladder/14k, and center-sensitivity/.03-resolution terms; targeted result/header/fixture/scorer sources inspected.",
+    "decoded_lrfree_gzip_files": [
+      {
+        "path": "reports/toy100/lrfree-search/harness/hosts/mode_hold_batch_receipts.jsonl.gz",
+        "uncompressed_bytes": 500493,
+        "uncompressed_sha256": "e145fbf94c4dd09398263ba204647dc1bcbebc4428184b9f10361dd25ff9e47e",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/grid100/native-noisy-events.jsonl.gz",
+        "uncompressed_bytes": 71697,
+        "uncompressed_sha256": "878c7d565d6d0b291bb9b33d215bfdc8feb4814c30163bf4d7bcd92e890e338f",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/grid100/native100-diagnostics.jsonl.gz",
+        "uncompressed_bytes": 15613261,
+        "uncompressed_sha256": "e702ef9f3aa6d80dbe35de0a6636374e42f1a67bdf2e907b8cc7710ed9c60a2d",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/grid100/rates.jsonl.gz",
+        "uncompressed_bytes": 922048,
+        "uncompressed_sha256": "80e067d7c438a3297c4f8ce5b30df13494b31090cc883ab6eeb1ff9cfbeaee16",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/rotated100/native-noisy-events.jsonl.gz",
+        "uncompressed_bytes": 71154,
+        "uncompressed_sha256": "9958b702df564949ceffb926e9a467e116121c734e6cd0cbc3b30567030ffa1c",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/rotated100/native100-diagnostics.jsonl.gz",
+        "uncompressed_bytes": 45538329,
+        "uncompressed_sha256": "176328310726f88d2bc87d2998d42dbd88b20022a408533b8a689925caf8d85d",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/rotated100/rates.jsonl.gz",
+        "uncompressed_bytes": 927923,
+        "uncompressed_sha256": "95b75343499f12e6eb7a0bacf539e1329639e1ec153fe565b7656028395eaf95",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/staggered100/native-noisy-events.jsonl.gz",
+        "uncompressed_bytes": 71826,
+        "uncompressed_sha256": "66d64138983f5d01cca42fe4d76ad6d8cff68a581d308516ef80439a1b895626",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/staggered100/native100-diagnostics.jsonl.gz",
+        "uncompressed_bytes": 7985315,
+        "uncompressed_sha256": "5866a1011c5d702d7ef310a23cf93a6057c0d77c2c0ce99dc58958b164da9777",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      },
+      {
+        "path": "reports/toy100/lrfree-search/prior-ema-relaxation/evidence/staggered100/rates.jsonl.gz",
+        "uncompressed_bytes": 919300,
+        "uncompressed_sha256": "69705a52ccf351d1ade825d92d707c8763b2c732d4c37d3b7b71b316f0ed9b13",
+        "matches": {
+          "dt075": false,
+          "ema_dtracking": false,
+          "center_sensitivity": false
+        }
+      }
+    ],
+    "scope_limit": "No inaccessible /ml2 files, untracked artifacts or un-fetched refs were assumed. Other 1791 continuous-search gzip streams were not exhaustively decoded; their filenames/metadata belong to distinct earlier families. No source code was imported or executed.",
+    "removed_all_paths_at_20609344": 7842,
+    "removed_paths_outside_toy100": [],
+    "deleted_original_paths_including_renamed_sources": 7842
+  },
+  "nearby_scorer": {
+    "fixture": {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/harness/tasks/native100_fixture.json",
+      "git_blob": "0281a46359c38c2cf013ff08d351605f50349826",
+      "sha256": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d",
+      "bytes": 2297,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/harness/tasks/native100_fixture.json",
+      "same_blob_at_old_audit": true
+    },
+    "wrapper": {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/harness/native100_score.py",
+      "git_blob": "af246a530f2b441df437dd801dfe0073d16bda90",
+      "sha256": "10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb",
+      "bytes": 1660,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/harness/native100_score.py",
+      "same_blob_at_old_audit": true
+    },
+    "criteria": {
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "path": "reports/toy100/lrfree-search/harness/native_failmodes.py",
+      "git_blob": "8cc6fe36a0adca5a5bdfcc08dc68f20e3ab02732",
+      "sha256": "75aa594d3577e88347fa12c79f5e73fb2504060a61edc54b61d6c6c4e5ea9afd",
+      "bytes": 4442,
+      "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/harness/native_failmodes.py",
+      "same_blob_at_old_audit": true
+    },
+    "host_sha_comparison_at_archive": [
+      {
+        "path": "configs/toy100/constraints_simple_regularization.json",
+        "fixture_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "archive_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/train.py",
+        "fixture_sha256": "88b0f4d9dbe540d9ccd9276af663e60becf25515819cf05ae63326fcd8675472",
+        "archive_sha256": "88b0f4d9dbe540d9ccd9276af663e60becf25515819cf05ae63326fcd8675472",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/problems.py",
+        "fixture_sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+        "archive_sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/models.py",
+        "fixture_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+        "archive_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/metrics.py",
+        "fixture_sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+        "archive_sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/accuracy.py",
+        "fixture_sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+        "archive_sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/accuracy_evidence.py",
+        "fixture_sha256": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+        "archive_sha256": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/gate.py",
+        "fixture_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+        "archive_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/accuracy_gate.py",
+        "fixture_sha256": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+        "archive_sha256": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/config.py",
+        "fixture_sha256": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983",
+        "archive_sha256": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983",
+        "matches": true
+      },
+      {
+        "path": "benchmarks/toy100/device.py",
+        "fixture_sha256": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67",
+        "archive_sha256": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67",
+        "matches": true
+      },
+      {
+        "path": "lib/toy_models.py",
+        "fixture_sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+        "archive_sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+        "matches": true
+      }
+    ],
+    "interpretation": "Archived wrapper checks pinned host file hashes and calls coverage plus accuracy gates; proximity does not certify an absent claimed package/run. Matching scorer bytes alone cannot bind a missing receipt."
+  },
+  "conclusion": "All three original experimental claims remain unbound. The later .03-resolution policy statement is now located and can be cited with its limited scope. No neighboring lineage receives those outcomes or qualification credit."
+}

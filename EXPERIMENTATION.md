@@ -11,66 +11,48 @@ defines the migration and adoption criteria.
 
 ## Readiness and scope
 
-The initial smoke profile is **provisional**. The
-[initial historical replay](reports/forge/calibration/initial.md) pairs 6 of 10
-lineages and falsely accepts 1 of 3 independently failing lineages. The
-[alternate screen](reports/forge/calibration/quick-discriminator.md) pairs 8 of 10
-and falsely accepts 1 of 5. Both remain **adoption BLOCKED** under the
-[frozen criteria](configs/forge/calibration/criteria-v1.json); these retrospective
-fractions describe the saved subset, not population error rates. The [first current-cohort smoke batch](reports/forge/CURRENT_SMOKE_READOUT.md)
-measured all nine cheap cells, including three learned-MoG AE passes. The
-[bounded CPU reference batch](reports/forge/CPU_REFERENCE_READOUT.md) adds three
-K3P task passes, leaving its full reference unknown. All three lineages fail
-smoke, so this exact profile cannot meet the positive-reference and zero-false-reject
-criteria together; a separate screen study is required. Task declarations describe the
-intended coverage; actual execution also requires a compatible public-API
-adapter. Unsupported capabilities remain `BLOCKED` in the required denominator.
-A file existing in the catalog does not mean its adapter has been qualified.
+The engine is implemented. [Full CI](https://github.com/255BITS/ParticleGAN/actions/runs/36674097253)
+passed 1,807 tests and 18 subtests; the [physical two-GPU pilot](reports/forge/PHYSICAL_GPU_PILOT_READOUT.md)
+and [fresh-checkout walkthrough](reports/forge/FRESH_CHECKOUT.md) verified the
+queue, recovery, cancellation, reuse, logs and readout workflow. Use the public
+API and learned MoG defaults; particle-cloud exceptions must be explicit in the
+task. Do not run seed-only experiments.
 
-The [current quick-screen study](reports/forge/QUICK_SCREEN_STUDY.md) freezes a
-new source cohort after the develop merge. Its baseline and physical GPU pilot
-have separate bounded registrations; old-source receipts cannot fill its matrix.
-Its [first GPU baseline](reports/forge/DEVELOP_QUICK_SCREEN_READOUT.md) completed
-three scientific failures for 38.915 seconds. All independent references remain
-unknown, so these results alone cannot establish false rejection or adoption.
-The corrected [intensity diagnostic](reports/forge/INTENSITY_REPAIR_READOUT.md)
-also failed for 16.837 seconds. The [physical two-GPU pilot](reports/forge/PHYSICAL_GPU_PILOT_READOUT.md)
-passed duplicate submission, live-worker recovery, cancellation and one repair
-for 45.001 paid seconds; both vector tasks passed. Full scientific calibration
-and legacy cutover remain outstanding.
-The explicit [residual16 intensity transfer](reports/forge/IMAGE_PROFILE_TRANSFER_READOUT.md)
-passed for 11.199 seconds with the same rates, seed, initialization policy and
-gates. Published image/vector and native host profiles are now explicit. The
-[joined-source transfer](reports/forge/HOST_PROFILE_TRANSFER_READOUT.md) measured
-three passes and two failures for 156.284 seconds. Mode-hold correctly rejects
-the candidate that loses native grid shape accuracy. The
-[two existing-control screens](reports/forge/CONTROL_MODE_READOUT.md) then both
-failed for 39.242 seconds. The matrix now has 7/57 measured cells, 50 unknown,
-one true rejection and no full-reference positive. All three lineages fail smoke;
-this exact profile cannot meet both the required positive count and zero false
-rejections, regardless of its missing reference outcomes. Stop filling it solely
-for adoption; a new justified screen/profile is required. The controls' downstream
-reference decisions and false-reject fraction remain unknown. Full joined-source
-CI passed 1,807 tests and 18 subtests.
-The [A2-off native diagnostic](reports/forge/A2_OFF_NATIVE_READOUT.md) then failed
-for 85.368 seconds, with 74/100 modes and worse holdout mass/shape accuracy.
-Its unchanged control was reused. This negative argues against the ablation;
-it supplies no positive calibration reference.
+**Default adoption remains blocked by scientific calibration.** The
+[current control readout](reports/forge/CONTROL_MODE_READOUT.md) records 7/57
+measured cells, 50 unknown, one true rejection and no complete positive reference.
+All three declared lineages fail smoke, so this exact profile cannot meet both
+the frozen positive-reference minimum and zero false rejections. Stop filling it
+solely for adoption. A new justified screen/profile and its bounded calibration
+are required; the controls' independent references and false-reject rate remain
+unknown. [Migration status](reports/forge/MIGRATION.md) retains the earlier
+studies, metrics, costs, source cohorts and outstanding acceptance work.
 
-Historical cards preserve successes, failures, raw errors, negative controls,
-and missing evidence. They do not automatically qualify a new Forge candidate.
-See [import gaps](reports/forge/import-gaps.json), especially the later dt075
-14k, EMA .995, and centre-sensitivity receipts not located in the pinned #155
-snapshot. Narrative summaries are explicitly distinct from normalized results.
-The [later source audit](reports/forge/calibration/followup-source-audit.json)
-preserves the corrected prior-EMA-relaxation result separately: three diagnostic
-host passes do not replace the canonical staggered100 failure or bind those
-missing claims.
+Task declarations describe intended coverage. Preflight and execution check the
+public API, formulation, host and frozen source; unsupported capabilities remain
+`BLOCKED` in the required denominator. Ordinary prerequisite failures stop later
+tiers. Selected deeper comparisons require the separately registered calibration
+lane described below and confer no ordinary qualification.
 
-The bounded CPU pilot exercised the real queue, worker, grader, durable receipts,
-and readout: `two_pole` failed after about 5.26 seconds, so the remaining smoke
-tasks did not launch. Its exact frozen revision remains visible as a pinned row.
-That demonstrates fail-fast execution; it does not validate the gate profile.
+Historical cards preserve successes, failures, raw errors, negative controls and
+missing evidence under their original protocols. [Initial](reports/forge/calibration/initial.md)
+and [alternate](reports/forge/calibration/quick-discriminator.md) historical
+screens also remain blocked under the [frozen criteria](configs/forge/calibration/criteria-v1.json).
+Historical cloud, noisy served-model or EMA passes cannot fill a current MoG/clean-live
+cell. The [newer #155 archive](reports/forge/supplemental/pr155-current-archive-v1/README.md)
+adds 31 native arms and six context families, preserving noisy/clean scoring,
+failed ideas, host refusals and OOM attempts in the compiled memory. The
+[newer #155 audit](reports/forge/calibration/pr155-current-followup-source-audit.md)
+still leaves the exact dt075 14k, EMA .995 D-tracking and centre-sensitivity
+experimental receipts [unbound](reports/forge/import-gaps.json); a later written
+sensitivity assertion is separately preserved.
+
+Incoming E22/KA2 changes the public API and model of record. Its inspected
+positives use particle clouds and noisy state-selected serving. Follow the
+[pinned compatibility checklist](reports/forge/UPSTREAM_E22_COMPATIBILITY.md)
+when that API lands in develop, preserving MoG support, named streams, external
+budgets and complete policy checkpoints. Current receipts retain their frozen
+source and formulation identity.
 
 Run commands from the repository root in the project's Python environment.
 The history, recall, compile, validate, and board commands launch no training.

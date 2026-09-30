@@ -7,7 +7,7 @@ defines acceptance; this status file does not narrow its scope.
 
 ## Current checkpoint
 
-Develop `a8b9d397` is merged; [CI at `1b2d8915`](https://github.com/255BITS/ParticleGAN/actions/runs/36672467580)
+Develop `a8b9d397` is merged; [CI at `077f9b20`](https://github.com/255BITS/ParticleGAN/actions/runs/36674097253)
 passes 1,807 tests and 18 subtests, including the concluded diagnostic receipts.
 The engine, root guide and physical two-GPU pilot are implemented and verified.
 Current scientific calibration has one correctly rejected negative, no complete
@@ -33,10 +33,25 @@ compatible full-reference positive. Its discovered legacy MoG envelope study is
 now preserved in [supplemental context](supplemental/local-mog-envelope-v1/README.md)
 and compiled memory, including all 26 rows and failed configurations. It retains
 its historical EMA criterion and supplies no current qualification.
-The latest compiler includes 193 records, with no conflicts or pending readouts;
+The latest compiler includes 231 records, with no conflicts or pending readouts;
 both exact control revisions are concluded. The two-control independent audit
 verified frozen grades, named initialization/RNG declarations and paid costs,
 with its missing-tensor/final-state verification limit stated explicitly.
+
+The [newer #155 archive](supplemental/pr155-current-archive-v1/README.md) adds
+31 historical native arms and six context families: 93 noisy native receipts,
+82 PASS / 11 FAIL, all 93 clean diagnostics FAIL. It classifies all 741 added
+paths plus the modified README since the original pin, preserves 68 ledger
+attempts and E4's eight capability refusals, and retains the distinct prior-EMA
+callback hosts. Original 176 history cards remain byte-identical. Copied original
+and card hashes/scoring contracts were independently verified. This is prior
+art, with no current MoG qualification or full-study cost inferred.
+The [current follow-up evidence audit](calibration/pr155-current-followup-source-audit.md)
+still leaves all three original experimental claims unbound; a later written
+sensitivity assertion is separate evidence. Exact source/archive locations have
+been requested. The [incoming API checklist](UPSTREAM_E22_COMPATIBILITY.md)
+records future E22/KA2 integration requirements; no incoming code was merged and
+current scientific source remains `5c9c9298`.
 
 ## Develop integration — 2026-09-29
 

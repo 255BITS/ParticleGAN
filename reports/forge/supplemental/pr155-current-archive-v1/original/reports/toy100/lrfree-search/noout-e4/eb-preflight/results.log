@@ -1,0 +1,151 @@
+seed=20260929 normal pi=0.01 d=0.5 m=128 rho=0.0 null=0.0124 drift=0.9211333825517398 p99=0.1106 pi_hat=0.0228 a_hat=16.3 em= 52 PASS
+seed=20260929 normal pi=0.01 d=0.5 m=128 rho=0.5 null=0.0293 drift=0.4148181381913643 p99=0.1642 pi_hat=0.0443 a_hat=2.97 em=284 PASS
+seed=20260929 normal pi=0.01 d=0.5 m=128 rho=0.9 null=0.0228 drift=0.030366752482475116 p99=0.0392 pi_hat=0.1000 a_hat=0.297 em=500 FAIL
+seed=20260929 normal pi=0.01 d=0.5 m=700 rho=0.0 null=0.0033 drift=0.9924256968162523 p99=0.0300 pi_hat=0.0133 a_hat=131 em= 19 PASS
+seed=20260929 normal pi=0.01 d=0.5 m=700 rho=0.5 null=0.0075 drift=0.9713937813433188 p99=0.0679 pi_hat=0.0177 a_hat=34 em= 33 PASS
+seed=20260929 normal pi=0.01 d=0.5 m=700 rho=0.9 null=0.0218 drift=0.3530768959329413 p99=0.1275 pi_hat=0.0327 a_hat=3.32 em=294 PASS
+seed=20260929 normal pi=0.01 d=1.0 m=128 rho=0.0 null=0.0042 drift=0.989210413052663 p99=0.0383 pi_hat=0.0142 a_hat=91.7 em= 21 PASS
+seed=20260929 normal pi=0.01 d=1.0 m=128 rho=0.5 null=0.0098 drift=0.9574577660225012 p99=0.0821 pi_hat=0.0201 a_hat=22.9 em= 40 PASS
+seed=20260929 normal pi=0.01 d=1.0 m=128 rho=0.9 null=0.0207 drift=0.22352980508135364 p99=0.1079 pi_hat=0.0321 a_hat=2.43 em=500 FAIL
+seed=20260929 normal pi=0.01 d=1.0 m=700 rho=0.0 null=0.0014 drift=0.9983717124236346 p99=0.0124 pi_hat=0.0114 a_hat=613 em= 12 PASS
+seed=20260929 normal pi=0.01 d=1.0 m=700 rho=0.5 null=0.0028 drift=0.9946681451401088 p99=0.0239 pi_hat=0.0128 a_hat=187 em= 17 PASS
+seed=20260929 normal pi=0.01 d=1.0 m=700 rho=0.9 null=0.0110 drift=0.9443626858761155 p99=0.0921 pi_hat=0.0214 a_hat=18.9 em= 45 PASS
+seed=20260929 normal pi=0.05 d=0.5 m=128 rho=0.0 null=0.0494 drift=0.9369203064381166 p99=0.3714 pi_hat=0.0993 a_hat=17.1 em= 40 PASS
+seed=20260929 normal pi=0.05 d=0.5 m=128 rho=0.5 null=0.0943 drift=0.5940227196263321 p99=0.4349 pi_hat=0.1491 a_hat=3.99 em=128 FAIL
+seed=20260929 normal pi=0.05 d=0.5 m=128 rho=0.9 null=0.0654 drift=0.09459244065071462 p99=0.1422 pi_hat=0.1713 a_hat=0.64 em=500 FAIL
+seed=20260929 normal pi=0.05 d=0.5 m=700 rho=0.0 null=0.0143 drift=0.992777575152422 p99=0.1282 pi_hat=0.0637 a_hat=137 em= 17 PASS
+seed=20260929 normal pi=0.05 d=0.5 m=700 rho=0.5 null=0.0298 drift=0.9741628485215306 p99=0.2511 pi_hat=0.0790 a_hat=37.7 em= 26 PASS
+seed=20260929 normal pi=0.05 d=0.5 m=700 rho=0.9 null=0.0962 drift=0.523066707876184 p99=0.4118 pi_hat=0.1527 a_hat=3.34 em=165 FAIL
+seed=20260929 normal pi=0.05 d=1.0 m=128 rho=0.0 null=0.0166 drift=0.9898754126350878 p99=0.1407 pi_hat=0.0659 a_hat=97.8 em= 19 PASS
+seed=20260929 normal pi=0.05 d=1.0 m=128 rho=0.5 null=0.0386 drift=0.961331507087572 p99=0.3147 pi_hat=0.0881 a_hat=25.2 em= 32 PASS
+seed=20260929 normal pi=0.05 d=1.0 m=128 rho=0.9 null=0.0869 drift=0.4474245386123569 p99=0.3615 pi_hat=0.1402 a_hat=2.97 em=185 FAIL
+seed=20260929 normal pi=0.05 d=1.0 m=700 rho=0.0 null=0.0066 drift=0.9983983664870508 p99=0.0641 pi_hat=0.0563 a_hat=623 em= 12 PASS
+seed=20260929 normal pi=0.05 d=1.0 m=700 rho=0.5 null=0.0121 drift=0.9947678305838663 p99=0.1189 pi_hat=0.0615 a_hat=190 em= 16 PASS
+seed=20260929 normal pi=0.05 d=1.0 m=700 rho=0.9 null=0.0421 drift=0.954895854285712 p99=0.3545 pi_hat=0.0919 a_hat=21.5 em= 35 PASS
+seed=20260929 t5     pi=0.01 d=0.5 m=128 rho=0.0 null=0.0289 drift=0.9132469260753114 p99=0.5339 pi_hat=0.0407 a_hat=12.7 em= 49 PASS
+seed=20260929 t5     pi=0.01 d=0.5 m=128 rho=0.5 null=0.0336 drift=0.5086725057819559 p99=0.4371 pi_hat=0.0453 a_hat=5.55 em=104 PASS
+seed=20260929 t5     pi=0.01 d=0.5 m=128 rho=0.9 null=0.0181 drift=0.0453294775411136 p99=0.2871 pi_hat=0.0208 a_hat=7.65 em=104 PASS
+seed=20260929 t5     pi=0.01 d=0.5 m=700 rho=0.0 null=0.0117 drift=0.9884831972258 p99=0.2214 pi_hat=0.0217 a_hat=85.8 em= 22 PASS
+seed=20260929 t5     pi=0.01 d=0.5 m=700 rho=0.5 null=0.0216 drift=0.9582621012682354 p99=0.4112 pi_hat=0.0323 a_hat=23.1 em= 34 PASS
+seed=20260929 t5     pi=0.01 d=0.5 m=700 rho=0.9 null=0.0264 drift=0.3784264682829371 p99=0.3827 pi_hat=0.0343 a_hat=6.87 em=100 PASS
+seed=20260929 t5     pi=0.01 d=1.0 m=128 rho=0.0 null=0.0143 drift=0.9800356372341955 p99=0.3119 pi_hat=0.0244 a_hat=58 em= 25 PASS
+seed=20260929 t5     pi=0.01 d=1.0 m=128 rho=0.5 null=0.0237 drift=0.9357952669245375 p99=0.4376 pi_hat=0.0347 a_hat=17.1 em= 41 PASS
+seed=20260929 t5     pi=0.01 d=1.0 m=128 rho=0.9 null=0.0306 drift=0.35591654797434186 p99=0.4700 pi_hat=0.0391 a_hat=6.37 em= 98 PASS
+seed=20260929 t5     pi=0.01 d=1.0 m=700 rho=0.0 null=0.0076 drift=0.9975376503895663 p99=0.0902 pi_hat=0.0175 a_hat=405 em= 16 PASS
+seed=20260929 t5     pi=0.01 d=1.0 m=700 rho=0.5 null=0.0110 drift=0.9916959898418034 p99=0.1834 pi_hat=0.0209 a_hat=119 em= 20 PASS
+seed=20260929 t5     pi=0.01 d=1.0 m=700 rho=0.9 null=0.0225 drift=0.9258279351763973 p99=0.3701 pi_hat=0.0336 a_hat=15.6 em= 46 PASS
+seed=20260929 t5     pi=0.05 d=0.5 m=128 rho=0.0 null=0.0536 drift=0.9419758818201184 p99=0.6615 pi_hat=0.1035 a_hat=17.8 em= 32 FAIL
+seed=20260929 t5     pi=0.05 d=0.5 m=128 rho=0.5 null=0.0740 drift=0.6272269195030704 p99=0.6173 pi_hat=0.1190 a_hat=5.86 em= 76 FAIL
+seed=20260929 t5     pi=0.05 d=0.5 m=128 rho=0.9 null=0.0299 drift=0.07503395663644664 p99=0.4187 pi_hat=0.0385 a_hat=5.08 em=141 PASS
+seed=20260929 t5     pi=0.05 d=0.5 m=700 rho=0.0 null=0.0243 drift=0.991813448843961 p99=0.4994 pi_hat=0.0733 a_hat=121 em= 17 PASS
+seed=20260929 t5     pi=0.05 d=0.5 m=700 rho=0.5 null=0.0412 drift=0.9708958592440887 p99=0.6779 pi_hat=0.0903 a_hat=34.2 em= 25 PASS
+seed=20260929 t5     pi=0.05 d=0.5 m=700 rho=0.9 null=0.0753 drift=0.5670510452557248 p99=0.6568 pi_hat=0.1183 a_hat=5.44 em= 84 FAIL
+seed=20260929 t5     pi=0.05 d=1.0 m=128 rho=0.0 null=0.0263 drift=0.988737716401105 p99=0.5373 pi_hat=0.0753 a_hat=87.8 em= 19 PASS
+seed=20260929 t5     pi=0.05 d=1.0 m=128 rho=0.5 null=0.0474 drift=0.959047068271655 p99=0.6834 pi_hat=0.0968 a_hat=24.6 em= 29 PASS
+seed=20260929 t5     pi=0.05 d=1.0 m=128 rho=0.9 null=0.0719 drift=0.45996938795579084 p99=0.6033 pi_hat=0.1106 a_hat=4.75 em=103 FAIL
+seed=20260929 t5     pi=0.05 d=1.0 m=700 rho=0.0 null=0.0149 drift=0.9981760230269535 p99=0.3495 pi_hat=0.0642 a_hat=547 em= 13 PASS
+seed=20260929 t5     pi=0.05 d=1.0 m=700 rho=0.5 null=0.0192 drift=0.994290248944761 p99=0.3545 pi_hat=0.0683 a_hat=174 em= 16 PASS
+seed=20260929 t5     pi=0.05 d=1.0 m=700 rho=0.9 null=0.0498 drift=0.9478837919385086 p99=0.6821 pi_hat=0.0992 a_hat=21 em= 30 PASS
+seed=20260929 normal pi=0.00 d=0.0 m=  0 rho=0.0 null=0.0015 drift=n/a p99=0.0015 pi_hat=1.0000 a_hat=0.00149 em=  2 PASS
+seed=20260929 t5     pi=0.00 d=0.0 m=  0 rho=0.0 null=0.0000 drift=n/a p99=0.0000 pi_hat=0.0000 a_hat=0 em=  0 PASS
+seed=20260930 normal pi=0.01 d=0.5 m=128 rho=0.0 null=0.0132 drift=0.9246685169823732 p99=0.1146 pi_hat=0.0238 a_hat=15.1 em= 53 PASS
+seed=20260930 normal pi=0.01 d=0.5 m=128 rho=0.5 null=0.0289 drift=0.3934595055368507 p99=0.1713 pi_hat=0.0436 a_hat=2.94 em=314 PASS
+seed=20260930 normal pi=0.01 d=0.5 m=128 rho=0.9 null=0.0103 drift=0.019278884690124832 p99=0.0354 pi_hat=0.0216 a_hat=0.927 em=500 FAIL
+seed=20260930 normal pi=0.01 d=0.5 m=700 rho=0.0 null=0.0034 drift=0.9924130653328048 p99=0.0324 pi_hat=0.0134 a_hat=131 em= 19 PASS
+seed=20260930 normal pi=0.01 d=0.5 m=700 rho=0.5 null=0.0073 drift=0.971662490317826 p99=0.0651 pi_hat=0.0174 a_hat=35.2 em= 31 PASS
+seed=20260930 normal pi=0.01 d=0.5 m=700 rho=0.9 null=0.0285 drift=0.3630323762529957 p99=0.1597 pi_hat=0.0428 a_hat=2.9 em=308 PASS
+seed=20260930 normal pi=0.01 d=1.0 m=128 rho=0.0 null=0.0038 drift=0.9896272730577966 p99=0.0329 pi_hat=0.0138 a_hat=95.4 em= 20 PASS
+seed=20260930 normal pi=0.01 d=1.0 m=128 rho=0.5 null=0.0098 drift=0.9563979426790101 p99=0.0804 pi_hat=0.0201 a_hat=22.3 em= 40 PASS
+seed=20260930 normal pi=0.01 d=1.0 m=128 rho=0.9 null=0.0282 drift=0.22112322852526156 p99=0.1308 pi_hat=0.0457 a_hat=1.93 em=500 FAIL
+seed=20260930 normal pi=0.01 d=1.0 m=700 rho=0.0 null=0.0015 drift=0.998388018568353 p99=0.0134 pi_hat=0.0114 a_hat=619 em= 13 PASS
+seed=20260930 normal pi=0.01 d=1.0 m=700 rho=0.5 null=0.0028 drift=0.9945493649227862 p99=0.0277 pi_hat=0.0128 a_hat=182 em= 17 PASS
+seed=20260930 normal pi=0.01 d=1.0 m=700 rho=0.9 null=0.0105 drift=0.9407674467558362 p99=0.0940 pi_hat=0.0208 a_hat=19 em= 44 PASS
+seed=20260930 normal pi=0.05 d=0.5 m=128 rho=0.0 null=0.0471 drift=0.9386322774532299 p99=0.3316 pi_hat=0.0970 a_hat=17.2 em= 39 PASS
+seed=20260930 normal pi=0.05 d=0.5 m=128 rho=0.5 null=0.0897 drift=0.5934197395622494 p99=0.4261 pi_hat=0.1425 a_hat=4.17 em=126 FAIL
+seed=20260930 normal pi=0.05 d=0.5 m=128 rho=0.9 null=0.0458 drift=0.07421963994307632 p99=0.1189 pi_hat=0.1070 a_hat=0.79 em=500 FAIL
+seed=20260930 normal pi=0.05 d=0.5 m=700 rho=0.0 null=0.0143 drift=0.9928130516965262 p99=0.1333 pi_hat=0.0636 a_hat=138 em= 17 PASS
+seed=20260930 normal pi=0.05 d=0.5 m=700 rho=0.5 null=0.0310 drift=0.9740685953442986 p99=0.2689 pi_hat=0.0802 a_hat=37.6 em= 27 PASS
+seed=20260930 normal pi=0.05 d=0.5 m=700 rho=0.9 null=0.0887 drift=0.5262514964579242 p99=0.3914 pi_hat=0.1419 a_hat=3.53 em=143 FAIL
+seed=20260930 normal pi=0.05 d=1.0 m=128 rho=0.0 null=0.0180 drift=0.9895782044566254 p99=0.1685 pi_hat=0.0673 a_hat=95 em= 19 PASS
+seed=20260930 normal pi=0.05 d=1.0 m=128 rho=0.5 null=0.0382 drift=0.9615069047324468 p99=0.3151 pi_hat=0.0877 a_hat=25.5 em= 32 PASS
+seed=20260930 normal pi=0.05 d=1.0 m=128 rho=0.9 null=0.0922 drift=0.42226588367571605 p99=0.3766 pi_hat=0.1485 a_hat=2.73 em=183 FAIL
+seed=20260930 normal pi=0.05 d=1.0 m=700 rho=0.0 null=0.0064 drift=0.9984054837210187 p99=0.0624 pi_hat=0.0561 a_hat=626 em= 12 PASS
+seed=20260930 normal pi=0.05 d=1.0 m=700 rho=0.5 null=0.0118 drift=0.9948081199154081 p99=0.1005 pi_hat=0.0612 a_hat=192 em= 15 PASS
+seed=20260930 normal pi=0.05 d=1.0 m=700 rho=0.9 null=0.0397 drift=0.9543195883983181 p99=0.3019 pi_hat=0.0893 a_hat=22 em= 33 PASS
+seed=20260930 t5     pi=0.01 d=0.5 m=128 rho=0.0 null=0.0263 drift=0.9231320749228267 p99=0.4767 pi_hat=0.0379 a_hat=13.5 em= 48 PASS
+seed=20260930 t5     pi=0.01 d=0.5 m=128 rho=0.5 null=0.0304 drift=0.5258558133312341 p99=0.3893 pi_hat=0.0411 a_hat=6.08 em= 98 PASS
+seed=20260930 t5     pi=0.01 d=0.5 m=128 rho=0.9 null=0.0183 drift=0.0481010480149491 p99=0.3031 pi_hat=0.0209 a_hat=7.95 em=106 PASS
+seed=20260930 t5     pi=0.01 d=0.5 m=700 rho=0.0 null=0.0121 drift=0.9885137402604743 p99=0.2425 pi_hat=0.0221 a_hat=86.1 em= 23 PASS
+seed=20260930 t5     pi=0.01 d=0.5 m=700 rho=0.5 null=0.0199 drift=0.9606231220900177 p99=0.3929 pi_hat=0.0306 a_hat=24.4 em= 32 PASS
+seed=20260930 t5     pi=0.01 d=0.5 m=700 rho=0.9 null=0.0321 drift=0.4513957563659131 p99=0.4946 pi_hat=0.0415 a_hat=6.88 em= 95 PASS
+seed=20260930 t5     pi=0.01 d=1.0 m=128 rho=0.0 null=0.0137 drift=0.9838897116170131 p99=0.2463 pi_hat=0.0238 a_hat=61.1 em= 25 PASS
+seed=20260930 t5     pi=0.01 d=1.0 m=128 rho=0.5 null=0.0219 drift=0.9420663515882635 p99=0.3772 pi_hat=0.0328 a_hat=17.9 em= 40 PASS
+seed=20260930 t5     pi=0.01 d=1.0 m=128 rho=0.9 null=0.0276 drift=0.3264381912858984 p99=0.4332 pi_hat=0.0352 a_hat=6.75 em=104 PASS
+seed=20260930 t5     pi=0.01 d=1.0 m=700 rho=0.0 null=0.0072 drift=0.9975958427643049 p99=0.1051 pi_hat=0.0172 a_hat=415 em= 16 PASS
+seed=20260930 t5     pi=0.01 d=1.0 m=700 rho=0.5 null=0.0113 drift=0.9913013627490918 p99=0.2091 pi_hat=0.0213 a_hat=114 em= 20 PASS
+seed=20260930 t5     pi=0.01 d=1.0 m=700 rho=0.9 null=0.0280 drift=0.9329809421534597 p99=0.5047 pi_hat=0.0396 a_hat=14.4 em= 47 PASS
+seed=20260930 t5     pi=0.05 d=0.5 m=128 rho=0.0 null=0.0541 drift=0.9379476102107724 p99=0.6975 pi_hat=0.1039 a_hat=17.5 em= 33 FAIL
+seed=20260930 t5     pi=0.05 d=0.5 m=128 rho=0.5 null=0.0779 drift=0.6334433453520565 p99=0.6446 pi_hat=0.1247 a_hat=5.55 em= 77 FAIL
+seed=20260930 t5     pi=0.05 d=0.5 m=128 rho=0.9 null=0.0305 drift=0.08203706453002431 p99=0.4503 pi_hat=0.0388 a_hat=5.71 em=124 PASS
+seed=20260930 t5     pi=0.05 d=0.5 m=700 rho=0.0 null=0.0236 drift=0.991939389568039 p99=0.5125 pi_hat=0.0726 a_hat=123 em= 17 PASS
+seed=20260930 t5     pi=0.05 d=0.5 m=700 rho=0.5 null=0.0393 drift=0.9698618767006876 p99=0.6435 pi_hat=0.0883 a_hat=35.3 em= 25 PASS
+seed=20260930 t5     pi=0.05 d=0.5 m=700 rho=0.9 null=0.0748 drift=0.5737330006299862 p99=0.6150 pi_hat=0.1183 a_hat=5.4 em= 87 FAIL
+seed=20260930 t5     pi=0.05 d=1.0 m=128 rho=0.0 null=0.0278 drift=0.9885349463209222 p99=0.5955 pi_hat=0.0767 a_hat=86.2 em= 19 PASS
+seed=20260930 t5     pi=0.05 d=1.0 m=128 rho=0.5 null=0.0458 drift=0.960702992200613 p99=0.6750 pi_hat=0.0952 a_hat=25.2 em= 28 PASS
+seed=20260930 t5     pi=0.05 d=1.0 m=128 rho=0.9 null=0.0656 drift=0.44462221648417083 p99=0.5884 pi_hat=0.1017 a_hat=4.91 em=104 FAIL
+seed=20260930 t5     pi=0.05 d=1.0 m=700 rho=0.0 null=0.0143 drift=0.9981937483584354 p99=0.3165 pi_hat=0.0636 a_hat=553 em= 13 PASS
+seed=20260930 t5     pi=0.05 d=1.0 m=700 rho=0.5 null=0.0228 drift=0.9940233314874547 p99=0.5788 pi_hat=0.0718 a_hat=166 em= 16 PASS
+seed=20260930 t5     pi=0.05 d=1.0 m=700 rho=0.9 null=0.0484 drift=0.9503105470727774 p99=0.6547 pi_hat=0.0979 a_hat=21.4 em= 30 PASS
+seed=20260930 normal pi=0.00 d=0.0 m=  0 rho=0.0 null=0.0099 drift=n/a p99=0.0109 pi_hat=0.2375 a_hat=0.0437 em=500 FAIL
+seed=20260930 t5     pi=0.00 d=0.0 m=  0 rho=0.0 null=0.0000 drift=n/a p99=0.0000 pi_hat=0.0000 a_hat=0 em=  0 PASS
+seed=20261001 normal pi=0.01 d=0.5 m=128 rho=0.0 null=0.0127 drift=0.9279542604797544 p99=0.1049 pi_hat=0.0233 a_hat=15.3 em= 52 PASS
+seed=20261001 normal pi=0.01 d=0.5 m=128 rho=0.5 null=0.0294 drift=0.4303889447586346 p99=0.1762 pi_hat=0.0442 a_hat=3.09 em=290 PASS
+seed=20261001 normal pi=0.01 d=0.5 m=128 rho=0.9 null=0.0089 drift=0.01690215225947421 p99=0.0283 pi_hat=0.0198 a_hat=0.835 em=500 FAIL
+seed=20261001 normal pi=0.01 d=0.5 m=700 rho=0.0 null=0.0031 drift=0.9925828210174694 p99=0.0290 pi_hat=0.0131 a_hat=134 em= 18 PASS
+seed=20261001 normal pi=0.01 d=0.5 m=700 rho=0.5 null=0.0075 drift=0.9719146176018719 p99=0.0667 pi_hat=0.0177 a_hat=34.6 em= 33 PASS
+seed=20261001 normal pi=0.01 d=0.5 m=700 rho=0.9 null=0.0207 drift=0.36528581809049 p99=0.1161 pi_hat=0.0314 a_hat=3.37 em=288 PASS
+seed=20261001 normal pi=0.01 d=1.0 m=128 rho=0.0 null=0.0041 drift=0.989149495179611 p99=0.0408 pi_hat=0.0141 a_hat=91.2 em= 21 PASS
+seed=20261001 normal pi=0.01 d=1.0 m=128 rho=0.5 null=0.0101 drift=0.9574235667831422 p99=0.0851 pi_hat=0.0204 a_hat=22.8 em= 40 PASS
+seed=20261001 normal pi=0.01 d=1.0 m=128 rho=0.9 null=0.0209 drift=0.22942500278064779 p99=0.1088 pi_hat=0.0323 a_hat=2.45 em=500 FAIL
+seed=20261001 normal pi=0.01 d=1.0 m=700 rho=0.0 null=0.0014 drift=0.998374217443052 p99=0.0124 pi_hat=0.0114 a_hat=614 em= 12 PASS
+seed=20261001 normal pi=0.01 d=1.0 m=700 rho=0.5 null=0.0026 drift=0.9946183357687519 p99=0.0228 pi_hat=0.0126 a_hat=185 em= 17 PASS
+seed=20261001 normal pi=0.01 d=1.0 m=700 rho=0.9 null=0.0119 drift=0.9382620571292596 p99=0.1061 pi_hat=0.0223 a_hat=17.9 em= 49 PASS
+seed=20261001 normal pi=0.05 d=0.5 m=128 rho=0.0 null=0.0482 drift=0.9357205274339965 p99=0.3427 pi_hat=0.0981 a_hat=16.9 em= 39 PASS
+seed=20261001 normal pi=0.05 d=0.5 m=128 rho=0.5 null=0.0851 drift=0.5866122052247171 p99=0.4032 pi_hat=0.1363 a_hat=4.21 em=121 FAIL
+seed=20261001 normal pi=0.05 d=0.5 m=128 rho=0.9 null=0.0558 drift=0.08012115011563563 p99=0.1213 pi_hat=0.1509 a_hat=0.607 em=500 FAIL
+seed=20261001 normal pi=0.05 d=0.5 m=700 rho=0.0 null=0.0146 drift=0.9928072238093475 p99=0.1432 pi_hat=0.0640 a_hat=138 em= 17 PASS
+seed=20261001 normal pi=0.05 d=0.5 m=700 rho=0.5 null=0.0303 drift=0.9738903296078625 p99=0.2582 pi_hat=0.0795 a_hat=37.3 em= 27 PASS
+seed=20261001 normal pi=0.05 d=0.5 m=700 rho=0.9 null=0.0932 drift=0.5311052072864894 p99=0.4028 pi_hat=0.1485 a_hat=3.45 em=153 FAIL
+seed=20261001 normal pi=0.05 d=1.0 m=128 rho=0.0 null=0.0171 drift=0.9897371376148222 p99=0.1580 pi_hat=0.0664 a_hat=96.4 em= 19 PASS
+seed=20261001 normal pi=0.05 d=1.0 m=128 rho=0.5 null=0.0370 drift=0.9630374888257884 p99=0.2959 pi_hat=0.0864 a_hat=26.2 em= 31 PASS
+seed=20261001 normal pi=0.05 d=1.0 m=128 rho=0.9 null=0.0941 drift=0.4161690333867433 p99=0.3666 pi_hat=0.1528 a_hat=2.59 em=217 FAIL
+seed=20261001 normal pi=0.05 d=1.0 m=700 rho=0.0 null=0.0067 drift=0.9983882293741059 p99=0.0673 pi_hat=0.0564 a_hat=619 em= 12 PASS
+seed=20261001 normal pi=0.05 d=1.0 m=700 rho=0.5 null=0.0119 drift=0.9948101715038449 p99=0.1108 pi_hat=0.0614 a_hat=192 em= 15 PASS
+seed=20261001 normal pi=0.05 d=1.0 m=700 rho=0.9 null=0.0424 drift=0.954236530565706 p99=0.3256 pi_hat=0.0921 a_hat=21.6 em= 35 PASS
+seed=20261001 t5     pi=0.01 d=0.5 m=128 rho=0.0 null=0.0277 drift=0.9169763748856248 p99=0.4627 pi_hat=0.0394 a_hat=13.1 em= 49 PASS
+seed=20261001 t5     pi=0.01 d=0.5 m=128 rho=0.5 null=0.0325 drift=0.49734323708397477 p99=0.4631 pi_hat=0.0431 a_hat=6.27 em= 99 PASS
+seed=20261001 t5     pi=0.01 d=0.5 m=128 rho=0.9 null=0.0189 drift=0.048732287697792295 p99=0.2799 pi_hat=0.0218 a_hat=7.38 em=105 PASS
+seed=20261001 t5     pi=0.01 d=0.5 m=700 rho=0.0 null=0.0127 drift=0.9880959957976647 p99=0.2776 pi_hat=0.0228 a_hat=83 em= 23 PASS
+seed=20261001 t5     pi=0.01 d=0.5 m=700 rho=0.5 null=0.0200 drift=0.9595132692289033 p99=0.3718 pi_hat=0.0307 a_hat=24 em= 33 PASS
+seed=20261001 t5     pi=0.01 d=0.5 m=700 rho=0.9 null=0.0298 drift=0.41084399117804193 p99=0.3852 pi_hat=0.0393 a_hat=5.95 em=111 PASS
+seed=20261001 t5     pi=0.01 d=1.0 m=128 rho=0.0 null=0.0124 drift=0.9841355138146974 p99=0.2202 pi_hat=0.0225 a_hat=62 em= 24 PASS
+seed=20261001 t5     pi=0.01 d=1.0 m=128 rho=0.5 null=0.0216 drift=0.9396628893820719 p99=0.3672 pi_hat=0.0325 a_hat=18.3 em= 41 PASS
+seed=20261001 t5     pi=0.01 d=1.0 m=128 rho=0.9 null=0.0268 drift=0.33204895601129153 p99=0.4105 pi_hat=0.0344 a_hat=6.58 em=101 PASS
+seed=20261001 t5     pi=0.01 d=1.0 m=700 rho=0.0 null=0.0064 drift=0.9977014864608945 p99=0.0741 pi_hat=0.0163 a_hat=434 em= 16 PASS
+seed=20261001 t5     pi=0.01 d=1.0 m=700 rho=0.5 null=0.0103 drift=0.991923712701236 p99=0.1739 pi_hat=0.0203 a_hat=123 em= 21 PASS
+seed=20261001 t5     pi=0.01 d=1.0 m=700 rho=0.9 null=0.0259 drift=0.9305622539646601 p99=0.4610 pi_hat=0.0372 a_hat=15.4 em= 45 PASS
+seed=20261001 t5     pi=0.05 d=0.5 m=128 rho=0.0 null=0.0561 drift=0.9367234862756535 p99=0.7204 pi_hat=0.1058 a_hat=17.5 em= 33 FAIL
+seed=20261001 t5     pi=0.05 d=0.5 m=128 rho=0.5 null=0.0788 drift=0.6207705448225536 p99=0.6441 pi_hat=0.1250 a_hat=5.55 em= 83 FAIL
+seed=20261001 t5     pi=0.05 d=0.5 m=128 rho=0.9 null=0.0269 drift=0.06548312955450593 p99=0.4030 pi_hat=0.0336 a_hat=6.01 em=122 PASS
+seed=20261001 t5     pi=0.05 d=0.5 m=700 rho=0.0 null=0.0234 drift=0.9918906650979368 p99=0.4467 pi_hat=0.0724 a_hat=122 em= 17 PASS
+seed=20261001 t5     pi=0.05 d=0.5 m=700 rho=0.5 null=0.0372 drift=0.9721469474226179 p99=0.5242 pi_hat=0.0863 a_hat=35.6 em= 25 PASS
+seed=20261001 t5     pi=0.05 d=0.5 m=700 rho=0.9 null=0.0760 drift=0.541897008518077 p99=0.6092 pi_hat=0.1195 a_hat=4.9 em= 94 FAIL
+seed=20261001 t5     pi=0.05 d=1.0 m=128 rho=0.0 null=0.0273 drift=0.9885489986352816 p99=0.5221 pi_hat=0.0762 a_hat=86.9 em= 19 PASS
+seed=20261001 t5     pi=0.05 d=1.0 m=128 rho=0.5 null=0.0457 drift=0.959469775761493 p99=0.6414 pi_hat=0.0951 a_hat=24.8 em= 29 PASS
+seed=20261001 t5     pi=0.05 d=1.0 m=128 rho=0.9 null=0.0697 drift=0.4586371877749947 p99=0.5928 pi_hat=0.1076 a_hat=4.82 em=105 FAIL
+seed=20261001 t5     pi=0.05 d=1.0 m=700 rho=0.0 null=0.0127 drift=0.9982294280005101 p99=0.2429 pi_hat=0.0620 a_hat=564 em= 12 PASS
+seed=20261001 t5     pi=0.05 d=1.0 m=700 rho=0.5 null=0.0213 drift=0.9940961571199126 p99=0.4584 pi_hat=0.0704 a_hat=168 em= 16 PASS
+seed=20261001 t5     pi=0.05 d=1.0 m=700 rho=0.9 null=0.0477 drift=0.9517016455682461 p99=0.6161 pi_hat=0.0972 a_hat=21.6 em= 30 PASS
+seed=20261001 normal pi=0.00 d=0.0 m=  0 rho=0.0 null=0.0049 drift=n/a p99=0.0049 pi_hat=1.0000 a_hat=0.00495 em=  2 PASS
+seed=20261001 t5     pi=0.00 d=0.0 m=  0 rho=0.0 null=0.0000 drift=n/a p99=0.0000 pi_hat=0.0000 a_hat=0 em=  0 PASS
+OVERALL: FAIL (119/150 cases); /ml2/hypergan/ParticleGAN-k3p-continuous-search/reports/toy100/lrfree-search/noout-e4/eb-preflight/results.json

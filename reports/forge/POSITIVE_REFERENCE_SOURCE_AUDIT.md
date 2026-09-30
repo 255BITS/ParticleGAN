@@ -1,5 +1,13 @@
 # Positive-reference source audit
 
+Later follow-up fetched PR #155 head `b924ed4d` and inspected its `da3b0470`
+research archive. The [supplemental cards](supplemental/pr155-current-archive-v1/README.md)
+preserve 93 noisy native outcomes and their clean failures; their particle-cloud,
+serving and source identities supply no current MoG positive. The
+[API audit](UPSTREAM_E22_COMPATIBILITY.md) and
+[original-claim audit](calibration/pr155-current-followup-source-audit.md) retain
+the exact limits. The local-only inspection below remains dated.
+
 The subsequent [supplemental import](supplemental/local-mog-envelope-v1/README.md)
 preserves the four selected receipts, shared source archive and complete study
 table in the repo. Its historical context card is included in compiled memory.

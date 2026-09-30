@@ -1,0 +1,14 @@
+(1) invariance: same gradient stream, transformed by a*R (d=2, N=2000, 30 planted drifting rows)
+  a=0.5: flags identical True, flagged 31 vs 31
+  a=2: flags identical True, flagged 31 vs 31
+  a=0.001: flags identical True, flagged 31 vs 31
+(2) other sizes / dimensions: null false flags (no drift) and recall of 3% planted rows with rho=1
+    N      d   null flagged fraction   planted recall (rho=1)  [d=32: the test needs n_eff >= 3d = 96 and the window caps n_eff at 99 (touches: 60 in 600 steps), so it never runs]  (BH Q=.05; the hold rule engages when the flagged fraction exceeds Q, so for N < 1/Q = 20 a single flagged row already exceeds it)
+      12   4   0.0000                  1.00     (a single flagged row exceeds the hold budget)
+      60   2   0.0000                  1.00
+     200   2   0.0000                  1.00
+    2000   2   0.0000                  1.00
+   20000   2   0.0000                  1.00
+    2000   3   0.0000                  1.00
+    2000   8   0.0000                  1.00
+    2000  32   0.0000                  0.00

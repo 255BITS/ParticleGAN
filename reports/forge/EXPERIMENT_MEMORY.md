@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 193. Inventory coverage: complete. Unresolved import items: 7.
+Records: 231. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -19,6 +19,614 @@ Records: 193. Inventory coverage: complete. Unresolved import items: 7.
 None recorded.
 
 ## Experiment and family records
+
+### pr155-e22-api-and-original-review-gaps · archive-pr155-current-api-and-review-gaps-183242edb5fb
+
+**Scope:** historical; family_context; revision `183242edb5fb178a11982fe0f38bc775764f9be47cc802b3a98749ca5a44b96b`.
+
+New E22/KA2 API and archived research must retain their original particle, serving, initialization and scoring identity before comparison with Forge learned MoG.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `api_and_evidence_context`.
+
+
+
+Incoming PR155 E22 positives cannot fill current MoG/clean-live cells: it requires ParticlePrior, noisy state-selected serving, different initialization/RNG and package. KA2 has a fixed call-800 phase change. Future integration must preserve MoG, named streams, initialization, enumeration, external budgets and complete policy checkpoints, and must avoid the empty-overrides k3p card silently adopting a KA2 default. No current-develop software defect was demonstrated. The newer archive still does not bind original dt07514k, EMA .995 D-tracking3/3 or sub-.03sigma experimental-sensitivity claims; a later written sensitivity assertion and separate EMA failure are preserved without substitution.
+
+**Next:** Use the linked compatibility checklist when the API lands in develop. Recover original missing evidence and freeze a new justified calibration profile before default adoption. This context record launches no training and carries no current qualification.
+
+[Evidence](../../reports/forge/UPSTREAM_E22_COMPATIBILITY.md) · [Record](records/archive-pr155-current-api-and-review-gaps-183242edb5fb.json)
+
+### context:pr155-current:dtrack-floors · archive-pr155-current-context-dtrack-floors-97e97b2f0175
+
+**Scope:** historical; family_context; revision `55c07d30aba1b915fbd185cf87d8e65cb6abe77e82e9b7fbb32b0d636500b392`.
+
+Historical discriminator-rate floors and complete five-candidate comparison.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_diagnostic_context`.
+
+
+
+Narrative16-gate matrix; no variant clears all three natives. Image failures and remote evidence gaps preserved. No raw scientific task grades inferred.
+
+**Next:** Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/dtrack-floors/README.md) · [Record](records/archive-pr155-current-context-dtrack-floors-97e97b2f0175.json)
+
+### context:pr155-current:e17-feature-gauge-review · archive-pr155-current-context-e17-feature-gauge-review-0527796ee1a3
+
+**Scope:** historical; family_context; revision `5e9057bdad36e9f7872d67c17a2b01fddd1b0501f8148b1bf07b455dcde81aee`.
+
+Function-preserving critic-feature gauge counterexample and limited whitening diagnostic.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_diagnostic_context`.
+
+
+
+Hidden-axis scaling changes44 isolation moves to0 while scalar scores are unchanged. Whitening is an invariance diagnostic, not validated native improvement.
+
+**Next:** Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md) · [Record](records/archive-pr155-current-context-e17-feature-gauge-review-0527796ee1a3.json)
+
+### context:pr155-current:noout-e4 · archive-pr155-current-context-noout-e4-2d33dd7e870c
+
+**Scope:** historical; family_context; revision `21b670986297192d73a388d47050458825c8235ee39c070ac3f26f2ade50bb6f`.
+
+E4 package and complete mixed-suite context.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_diagnostic_context`.
+
+
+
+18 native receipts:13 noisy PASS/5FAIL. Original22-task matrix12PASS/2FAIL/8rawERROR, with all8 errors capability-parity BLOCKED. Ring/stationary supplements pass; no current qualification.
+
+**Next:** Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/README.md) · [Record](records/archive-pr155-current-context-noout-e4-2d33dd7e870c.json)
+
+### context:pr155-current:noout-support-test · archive-pr155-current-context-noout-support-test-160ddc653f36
+
+**Scope:** historical; family_context; revision `27b72bcce96025dfd4936737db1d3abc1a1301d8aca5aab8c830f3978e5af6af`.
+
+E14–E22 support study, including failed variants and execution errors.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_diagnostic_context`.
+
+
+
+75 native receipts:69 noisy PASS/6FAIL; all clean FAIL. E22 owns three7k confirmations; E19 owns its13-task suite/stress runs. Ledger55PASS/10FAIL/3OOM ERROR attempts remains context, not duplicate trials.
+
+**Next:** Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/RESULTS.md) · [Record](records/archive-pr155-current-context-noout-support-test-160ddc653f36.json)
+
+### context:pr155-current:prior-ema-relaxation · archive-pr155-current-context-prior-ema-relaxation-17178718efa9
+
+**Scope:** historical; family_context; revision `5ba3da0268f733c48893ece3d3c3e3177171f640610fc59107ab26fe3f36ab98`.
+
+Preserve the prior-EMA relaxation host correction and original evidence as context, without fresh normalized trials.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_training_mechanism_context`.
+
+
+
+Prior-EMA training relaxation: diagnostic fresh-callback host recorded3/3; original cached-callback canonical staggered100 FAIL (4/5 terminal accuracy, final centre.20266sigma). Distinct hosts; no frozen-host3/3, no current MoG credit.
+
+**Next:** Keep corrected diagnostic and canonical hosts separate; consult unchanged prior audit for outstanding source gaps. No current qualification or new run authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/README.md) · [Record](records/archive-pr155-current-context-prior-ema-relaxation-17178718efa9.json)
+
+### context:pr155-current:streaming-smallbatch-toy · archive-pr155-current-context-streaming-smallbatch-toy-756ef378d97a
+
+**Scope:** historical; family_context; revision `33b34f69ab052077167ed3c4b3186a06a7f59a191bb27936cb52038afc976ecc`.
+
+Small-batch moving-critic memory, flow, mass and optimism diagnostics.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_diagnostic_context`.
+
+
+
+Negative controller readout across six fixed toy cases; optimistic_go=false. Oracle arms remain evaluator-only. No native performance or qualification inferred.
+
+**Next:** Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/streaming-smallbatch-toy/RESULTS.md) · [Record](records/archive-pr155-current-context-streaming-smallbatch-toy-756ef378d97a.json)
+
+### archive:pr155:E13slr075 · archive-pr155-current-e13slr075-2706550e61f4
+
+**Scope:** historical; scientific; revision `efb4fa10cd0a26658ef1a509bada1069c761e09617b55ca2bcc8733c5663290e`.
+
+Historical native evaluation of declared E13slr075 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 5585.6; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98455, precision=0.98455, acc_center_rms_sigma=0.15904, mass_tv=0.03405, acc_radial_ks=0.014007; rotated100: modes=100, hq=0.97415, precision=0.97415, acc_center_rms_sigma=0.11769, mass_tv=0.0301, acc_radial_ks=0.0096887; staggered100: modes=100, hq=0.97665, precision=0.97665, acc_center_rms_sigma=0.13944, mass_tv=0.0384, acc_radial_ks=0.0067139
+
+Historical E13slr075: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E13slr075-grid100/result.json) · [Record](records/archive-pr155-current-e13slr075-2706550e61f4.json)
+
+### archive:pr155:E13slr133 · archive-pr155-current-e13slr133-e77bb1764d51
+
+**Scope:** historical; scientific; revision `ac7b08747771ced916ac50ca69f326a796f4e2398197d2fa180e13f1459156d4`.
+
+Historical native evaluation of declared E13slr133 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 5431.97; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9827, precision=0.9827, acc_center_rms_sigma=0.14808, mass_tv=0.0301, acc_radial_ks=0.0095836; rotated100: modes=100, hq=0.9743, precision=0.9743, acc_center_rms_sigma=0.13944, mass_tv=0.03325, acc_radial_ks=0.01288; staggered100: modes=100, hq=0.97845, precision=0.97845, acc_center_rms_sigma=0.14066, mass_tv=0.032, acc_radial_ks=0.0056958
+
+Historical E13slr133: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E13slr133-grid100/result.json) · [Record](records/archive-pr155-current-e13slr133-e77bb1764d51.json)
+
+### archive:pr155:E14s · archive-pr155-current-e14s-d2d30216af24
+
+**Scope:** historical; scientific; revision `c65b73b29d1160cbf9941bef626a4f28828910ecb27b6653246499bfd89d6ac0`.
+
+Historical native evaluation of declared E14s formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 5158.37; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9837, precision=0.9837, acc_center_rms_sigma=0.13819, mass_tv=0.0345, acc_radial_ks=0.010316; rotated100: modes=100, hq=0.97415, precision=0.97415, acc_center_rms_sigma=0.12404, mass_tv=0.03205, acc_radial_ks=0.013816; staggered100: modes=100, hq=0.9758, precision=0.9758, acc_center_rms_sigma=0.1508, mass_tv=0.0343, acc_radial_ks=0.0062391
+
+Historical E14s: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E14s-grid100/result.json) · [Record](records/archive-pr155-current-e14s-d2d30216af24.json)
+
+### archive:pr155:E14s14k · archive-pr155-current-e14s14k-3b22f928adb5
+
+**Scope:** historical; scientific; revision `e1a96918dd673535ec7a2c9ba1d1f4f844a29ba49b5c5f76e1f8d6e3af01145d`.
+
+Historical native evaluation of declared E14s14k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 9221.41; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98365, precision=0.98365, acc_center_rms_sigma=0.14721, mass_tv=0.03305, acc_radial_ks=0.0064912; rotated100: modes=100, hq=0.97965, precision=0.97965, acc_center_rms_sigma=0.11102, mass_tv=0.0311, acc_radial_ks=0.014617; staggered100: modes=100, hq=0.97785, precision=0.97785, acc_center_rms_sigma=0.14618, mass_tv=0.0329, acc_radial_ks=0.0051406
+
+Historical E14s14k: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E14s14k-grid100/result.json) · [Record](records/archive-pr155-current-e14s14k-3b22f928adb5.json)
+
+### archive:pr155:E14s28k · archive-pr155-current-e14s28k-920d28403b8d
+
+**Scope:** historical; scientific; revision `ddd488c38e6f65fae5af7175a5d89ba214ddf4abbe3a8a5254d5917fc03e7c54`.
+
+Historical native evaluation of declared E14s28k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 12681.89; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9847, precision=0.9847, acc_center_rms_sigma=0.1681, mass_tv=0.0323, acc_radial_ks=0.01042; rotated100: modes=100, hq=0.97465, precision=0.97465, acc_center_rms_sigma=0.11326, mass_tv=0.0327, acc_radial_ks=0.012957; staggered100: modes=100, hq=0.9779, precision=0.9779, acc_center_rms_sigma=0.1725, mass_tv=0.02995, acc_radial_ks=0.0068476
+
+Historical E14s28k: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E14s28k-grid100/result.json) · [Record](records/archive-pr155-current-e14s28k-920d28403b8d.json)
+
+### archive:pr155:E15a · archive-pr155-current-e15a-aa745d297292
+
+**Scope:** historical; scientific; revision `39d839b6ad1c025d3ebd38cd7ca6968acb0d963c0e5191cdc0d9c9ea4df95f68`.
+
+Historical native evaluation of declared E15a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 3}; wall seconds 2371.59; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98175, precision=0.98175, acc_center_rms_sigma=0.16245, mass_tv=0.03275, acc_radial_ks=0.011912; rotated100: modes=100, hq=0.9799, precision=0.9799, acc_center_rms_sigma=0.23678, mass_tv=0.04225, acc_radial_ks=0.031748; staggered100: modes=100, hq=0.9808, precision=0.9808, acc_center_rms_sigma=0.36495, mass_tv=0.043, acc_radial_ks=0.04529
+
+Historical E15a: 0 noisy native PASS / 3 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E15a-grid100/result.json) · [Record](records/archive-pr155-current-e15a-aa745d297292.json)
+
+### archive:pr155:E16a · archive-pr155-current-e16a-95619b2eac2c
+
+**Scope:** historical; scientific; revision `81cb8abb4db21d0996d6a8de6ca22df17073537b40b84be1d9df81e5768d26f0`.
+
+Historical native evaluation of declared E16a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 2123.39; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98475, precision=0.98475, acc_center_rms_sigma=0.17144, mass_tv=0.0326, acc_radial_ks=0.01105; rotated100: modes=100, hq=0.98145, precision=0.98145, acc_center_rms_sigma=0.13896, mass_tv=0.0377, acc_radial_ks=0.014741; staggered100: modes=100, hq=0.9837, precision=0.9837, acc_center_rms_sigma=0.16093, mass_tv=0.03515, acc_radial_ks=0.014619
+
+Historical E16a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E16a-grid100/result.json) · [Record](records/archive-pr155-current-e16a-95619b2eac2c.json)
+
+### archive:pr155:E16b · archive-pr155-current-e16b-aac85037d724
+
+**Scope:** historical; scientific; revision `05b9e5c9904b58b2748f9352be7e4c5a81233700fa54df167a0ea2bda9f42e38`.
+
+Historical native evaluation of declared E16b formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 2045.65; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98385, precision=0.98385, acc_center_rms_sigma=0.1759, mass_tv=0.0328, acc_radial_ks=0.010439; rotated100: modes=100, hq=0.981, precision=0.981, acc_center_rms_sigma=0.14276, mass_tv=0.03505, acc_radial_ks=0.015343; staggered100: modes=100, hq=0.98065, precision=0.98065, acc_center_rms_sigma=0.15918, mass_tv=0.0339, acc_radial_ks=0.016251
+
+Historical E16b: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E16b-grid100/result.json) · [Record](records/archive-pr155-current-e16b-aac85037d724.json)
+
+### archive:pr155:E17a · archive-pr155-current-e17a-37929e6e3af0
+
+**Scope:** historical; scientific; revision `7ea525c478b52a32675f44110245966419859ea0f8a05779936437619c520944`.
+
+Historical native evaluation of declared E17a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 2539.97; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9836, precision=0.9836, acc_center_rms_sigma=0.14281, mass_tv=0.03465, acc_radial_ks=0.01142; rotated100: modes=100, hq=0.987, precision=0.987, acc_center_rms_sigma=0.12662, mass_tv=0.0353, acc_radial_ks=0.009245; staggered100: modes=100, hq=0.9821, precision=0.9821, acc_center_rms_sigma=0.16002, mass_tv=0.03375, acc_radial_ks=0.014499
+
+Historical E17a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E17a-grid100/result.json) · [Record](records/archive-pr155-current-e17a-37929e6e3af0.json)
+
+### archive:pr155:E17b · archive-pr155-current-e17b-5d0cc5aaef72
+
+**Scope:** historical; scientific; revision `afea89f3a87e26e28ad4f00f6da55e1da0f50e8724081b1e77e1c53cb862f088`.
+
+Historical native evaluation of declared E17b formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 3808.81; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98405, precision=0.98405, acc_center_rms_sigma=0.14767, mass_tv=0.0346, acc_radial_ks=0.011566; rotated100: modes=100, hq=0.98365, precision=0.98365, acc_center_rms_sigma=0.15336, mass_tv=0.03635, acc_radial_ks=0.012915; staggered100: modes=100, hq=0.9814, precision=0.9814, acc_center_rms_sigma=0.15163, mass_tv=0.0352, acc_radial_ks=0.015092
+
+Historical E17b: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E17b-grid100/result.json) · [Record](records/archive-pr155-current-e17b-5d0cc5aaef72.json)
+
+### archive:pr155:E17blr075 · archive-pr155-current-e17blr075-f3630311cf48
+
+**Scope:** historical; scientific; revision `c7c567cb0ddb5e8c72ba272e0d57f4f59fe8b0bf234303bdf2e9147b61015c03`.
+
+Historical native evaluation of declared E17blr075 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 4132.47; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9855, precision=0.9855, acc_center_rms_sigma=0.12544, mass_tv=0.0321, acc_radial_ks=0.009832; rotated100: modes=100, hq=0.9824, precision=0.9824, acc_center_rms_sigma=0.12423, mass_tv=0.03435, acc_radial_ks=0.01018; staggered100: modes=100, hq=0.98055, precision=0.98055, acc_center_rms_sigma=0.14162, mass_tv=0.03855, acc_radial_ks=0.015679
+
+Historical E17blr075: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E17blr075-grid100/result.json) · [Record](records/archive-pr155-current-e17blr075-f3630311cf48.json)
+
+### archive:pr155:E17lr075 · archive-pr155-current-e17lr075-e2f3d53275b1
+
+**Scope:** historical; scientific; revision `193dc25ed1f75f90201d771d3a9b4b76b3b89f35c0515d8882072caea650787a`.
+
+Historical native evaluation of declared E17lr075 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 4597.83; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9843, precision=0.9843, acc_center_rms_sigma=0.13318, mass_tv=0.03225, acc_radial_ks=0.011114; rotated100: modes=100, hq=0.98655, precision=0.98655, acc_center_rms_sigma=0.12281, mass_tv=0.03465, acc_radial_ks=0.0098251; staggered100: modes=100, hq=0.98165, precision=0.98165, acc_center_rms_sigma=0.14641, mass_tv=0.0377, acc_radial_ks=0.011877
+
+Historical E17lr075: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E17lr075-grid100/result.json) · [Record](records/archive-pr155-current-e17lr075-e2f3d53275b1.json)
+
+### archive:pr155:E17lr133 · archive-pr155-current-e17lr133-6b9e5a03f19e
+
+**Scope:** historical; scientific; revision `ec4e9345f9c0c55cb70e6f04cb1651e4da1d8f2542f3fa9e28469c417b8924ae`.
+
+Historical native evaluation of declared E17lr133 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 4540.46; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98275, precision=0.98275, acc_center_rms_sigma=0.15407, mass_tv=0.0349, acc_radial_ks=0.010613; rotated100: modes=100, hq=0.98495, precision=0.98495, acc_center_rms_sigma=0.16763, mass_tv=0.03725, acc_radial_ks=0.0146; staggered100: modes=100, hq=0.9844, precision=0.9844, acc_center_rms_sigma=0.13906, mass_tv=0.0325, acc_radial_ks=0.010772
+
+Historical E17lr133: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E17lr133-grid100/result.json) · [Record](records/archive-pr155-current-e17lr133-6b9e5a03f19e.json)
+
+### archive:pr155:E18a · archive-pr155-current-e18a-f2ed22a78a3f
+
+**Scope:** historical; scientific; revision `dfa40b4ae1bf5c3f8d161afb2eb503bc1d337bfaab2daaeb8ac3dbc4155b2cd7`.
+
+Historical native evaluation of declared E18a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 4241.16; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98535, precision=0.98535, acc_center_rms_sigma=0.14699, mass_tv=0.0344, acc_radial_ks=0.0084099; rotated100: modes=100, hq=0.986, precision=0.986, acc_center_rms_sigma=0.1447, mass_tv=0.03465, acc_radial_ks=0.015468; staggered100: modes=100, hq=0.98265, precision=0.98265, acc_center_rms_sigma=0.15442, mass_tv=0.03555, acc_radial_ks=0.015639
+
+Historical E18a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E18a-grid100/result.json) · [Record](records/archive-pr155-current-e18a-f2ed22a78a3f.json)
+
+### archive:pr155:E19a · archive-pr155-current-e19a-cbad326e890d
+
+**Scope:** historical; scientific; revision `34b58cc8768ff33729a509a4e50249ad3ad4cba127e84f5b57b5366f4c056bd5`.
+
+Historical native evaluation of declared E19a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 4907.79; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98485, precision=0.98485, acc_center_rms_sigma=0.15501, mass_tv=0.0322, acc_radial_ks=0.010549; rotated100: modes=100, hq=0.98575, precision=0.98575, acc_center_rms_sigma=0.15118, mass_tv=0.0334, acc_radial_ks=0.0099742; staggered100: modes=100, hq=0.98265, precision=0.98265, acc_center_rms_sigma=0.15035, mass_tv=0.0325, acc_radial_ks=0.012647
+
+Historical E19a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E19a-grid100/result.json) · [Record](records/archive-pr155-current-e19a-cbad326e890d.json)
+
+### archive:pr155:E19a14k · archive-pr155-current-e19a14k-2ea19c1c94ed
+
+**Scope:** historical; scientific; revision `db3032d76b86a7feb4ee8e2963ce20f5b50a023554421d68d6b0f52d897167aa`.
+
+Historical native evaluation of declared E19a14k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 14862.66; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9857, precision=0.9857, acc_center_rms_sigma=0.12943, mass_tv=0.032, acc_radial_ks=0.0045448; rotated100: modes=100, hq=0.98725, precision=0.98725, acc_center_rms_sigma=0.11394, mass_tv=0.03305, acc_radial_ks=0.009831; staggered100: modes=100, hq=0.9868, precision=0.9868, acc_center_rms_sigma=0.1485, mass_tv=0.03125, acc_radial_ks=0.0072842
+
+Historical E19a14k: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E19a14k-grid100/result.json) · [Record](records/archive-pr155-current-e19a14k-2ea19c1c94ed.json)
+
+### archive:pr155:E19a28k · archive-pr155-current-e19a28k-eed6161f41d4
+
+**Scope:** historical; scientific; revision `02b8d81405a40dcd8a2e9d69dfa0ca1ed842265be71a8ea679e88f5c94fae3a2`.
+
+Historical native evaluation of declared E19a28k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 22344.55; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9833, precision=0.9833, acc_center_rms_sigma=0.13782, mass_tv=0.03205, acc_radial_ks=0.0059623; rotated100: modes=100, hq=0.98935, precision=0.98935, acc_center_rms_sigma=0.1112, mass_tv=0.0313, acc_radial_ks=0.0048636; staggered100: modes=100, hq=0.9866, precision=0.9866, acc_center_rms_sigma=0.12328, mass_tv=0.02995, acc_radial_ks=0.0091866
+
+Historical E19a28k: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E19a28k-grid100/result.json) · [Record](records/archive-pr155-current-e19a28k-eed6161f41d4.json)
+
+### archive:pr155:E19lr075 · archive-pr155-current-e19lr075-f37f95a58a03
+
+**Scope:** historical; scientific; revision `b932c7fe2c21babb4db7f4174b2224c96c989966bf0d54171bd468a7348aec8a`.
+
+Historical native evaluation of declared E19lr075 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 6513.29; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98325, precision=0.98325, acc_center_rms_sigma=0.14193, mass_tv=0.0358, acc_radial_ks=0.011271; rotated100: modes=100, hq=0.98485, precision=0.98485, acc_center_rms_sigma=0.12852, mass_tv=0.0329, acc_radial_ks=0.012239; staggered100: modes=100, hq=0.98445, precision=0.98445, acc_center_rms_sigma=0.13579, mass_tv=0.03835, acc_radial_ks=0.011446
+
+Historical E19lr075: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E19lr075-grid100/result.json) · [Record](records/archive-pr155-current-e19lr075-f37f95a58a03.json)
+
+### archive:pr155:E19lr133 · archive-pr155-current-e19lr133-68b16d78a3f1
+
+**Scope:** historical; scientific; revision `6e93cd1f1df3e931888bae6d8d52a4c79427efe614be635834679dd8ad74f149`.
+
+Historical native evaluation of declared E19lr133 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 8308.26; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9846, precision=0.9846, acc_center_rms_sigma=0.18377, mass_tv=0.03815, acc_radial_ks=0.015429; rotated100: modes=100, hq=0.9869, precision=0.9869, acc_center_rms_sigma=0.16564, mass_tv=0.03425, acc_radial_ks=0.0087955; staggered100: modes=100, hq=0.98165, precision=0.98165, acc_center_rms_sigma=0.15749, mass_tv=0.02995, acc_radial_ks=0.01316
+
+Historical E19lr133: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E19lr133-grid100/result.json) · [Record](records/archive-pr155-current-e19lr133-68b16d78a3f1.json)
+
+### archive:pr155:E20a · archive-pr155-current-e20a-bd1af8036c7f
+
+**Scope:** historical; scientific; revision `f112349486e6be51efd37024c2b34e723a682e21bbba1d8aa365d724a7a19c97`.
+
+Historical native evaluation of declared E20a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 6483.78; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98315, precision=0.98315, acc_center_rms_sigma=0.13963, mass_tv=0.03545, acc_radial_ks=0.012222; rotated100: modes=100, hq=0.985, precision=0.985, acc_center_rms_sigma=0.14057, mass_tv=0.03295, acc_radial_ks=0.013276; staggered100: modes=100, hq=0.98185, precision=0.98185, acc_center_rms_sigma=0.16876, mass_tv=0.0316, acc_radial_ks=0.01828
+
+Historical E20a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E20a-grid100/result.json) · [Record](records/archive-pr155-current-e20a-bd1af8036c7f.json)
+
+### archive:pr155:E20a14k · archive-pr155-current-e20a14k-f83a60f4242e
+
+**Scope:** historical; scientific; revision `37662488573a60096f914381c7e3f72d5f883a20b69661ddc205830d817c41c6`.
+
+Historical native evaluation of declared E20a14k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 14635.52; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9857, precision=0.9857, acc_center_rms_sigma=0.13157, mass_tv=0.0339, acc_radial_ks=0.012589; rotated100: modes=100, hq=0.98715, precision=0.98715, acc_center_rms_sigma=0.11638, mass_tv=0.03245, acc_radial_ks=0.0048333; staggered100: modes=100, hq=0.98455, precision=0.98455, acc_center_rms_sigma=0.17832, mass_tv=0.0301, acc_radial_ks=0.012596
+
+Historical E20a14k: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E20a14k-grid100/result.json) · [Record](records/archive-pr155-current-e20a14k-f83a60f4242e.json)
+
+### archive:pr155:E20lr075 · archive-pr155-current-e20lr075-22307b00517a
+
+**Scope:** historical; scientific; revision `3bf0de7f789dd7c8f7b6c3d0aff3190af1462d8d3711f7605c0896c69d858f52`.
+
+Historical native evaluation of declared E20lr075 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 10561.34; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9844, precision=0.9844, acc_center_rms_sigma=0.14831, mass_tv=0.0362, acc_radial_ks=0.0092442; rotated100: modes=100, hq=0.98515, precision=0.98515, acc_center_rms_sigma=0.12801, mass_tv=0.0357, acc_radial_ks=0.015743; staggered100: modes=100, hq=0.98625, precision=0.98625, acc_center_rms_sigma=0.1375, mass_tv=0.038, acc_radial_ks=0.012631
+
+Historical E20lr075: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E20lr075-grid100/result.json) · [Record](records/archive-pr155-current-e20lr075-22307b00517a.json)
+
+### archive:pr155:E20lr133 · archive-pr155-current-e20lr133-518afdfd38b1
+
+**Scope:** historical; scientific; revision `5496a9b5230cce459d69c4ffce3098ddb0b3c40f34586e6bd03cac70e1c455ce`.
+
+Historical native evaluation of declared E20lr133 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 14260.74; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98155, precision=0.98155, acc_center_rms_sigma=0.15773, mass_tv=0.03785, acc_radial_ks=0.014306; rotated100: modes=100, hq=0.98655, precision=0.98655, acc_center_rms_sigma=0.161, mass_tv=0.03405, acc_radial_ks=0.010593; staggered100: modes=100, hq=0.9838, precision=0.9838, acc_center_rms_sigma=0.1477, mass_tv=0.03055, acc_radial_ks=0.010139
+
+Historical E20lr133: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E20lr133-grid100/result.json) · [Record](records/archive-pr155-current-e20lr133-518afdfd38b1.json)
+
+### archive:pr155:E21a · archive-pr155-current-e21a-2c37c1a4caac
+
+**Scope:** historical; scientific; revision `716c5d2028c51f58a087239df13bc20becb27f7501d231e1a24c79b9e87c4f19`.
+
+Historical native evaluation of declared E21a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 4980.05; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9855, precision=0.9855, acc_center_rms_sigma=0.12528, mass_tv=0.0326, acc_radial_ks=0.010988; rotated100: modes=100, hq=0.98465, precision=0.98465, acc_center_rms_sigma=0.13707, mass_tv=0.0344, acc_radial_ks=0.012816; staggered100: modes=100, hq=0.98215, precision=0.98215, acc_center_rms_sigma=0.15342, mass_tv=0.0345, acc_radial_ks=0.016606
+
+Historical E21a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E21a-grid100/result.json) · [Record](records/archive-pr155-current-e21a-2c37c1a4caac.json)
+
+### archive:pr155:E22a · archive-pr155-current-e22a-49ce05f26e7a
+
+**Scope:** historical; scientific; revision `778f5c4d357e84e5d767288e1e19aef07864f3ad252878f84ea1d70fb055c14b`.
+
+Historical native evaluation of declared E22a formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 8708.02; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98485, precision=0.98485, acc_center_rms_sigma=0.15501, mass_tv=0.0322, acc_radial_ks=0.010549; rotated100: modes=100, hq=0.98575, precision=0.98575, acc_center_rms_sigma=0.15118, mass_tv=0.0334, acc_radial_ks=0.0099742; staggered100: modes=100, hq=0.98265, precision=0.98265, acc_center_rms_sigma=0.15035, mass_tv=0.0325, acc_radial_ks=0.012647
+
+Historical E22a: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=served_average (4 served blocks). No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-support-test/receipts/E22a-grid100/result.json) · [Record](records/archive-pr155-current-e22a-49ce05f26e7a.json)
+
+### archive:pr155:E4 · archive-pr155-current-e4-e70a165ba0fe
+
+**Scope:** historical; scientific; revision `8f992daece6970f5c4cad4285a6c2dff655ec98a119156f85f0d344346fd3bd2`.
+
+Historical native evaluation of declared E4 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 5466.53; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9832, precision=0.9832, acc_center_rms_sigma=0.18667, mass_tv=0.0304, acc_radial_ks=0.013806; rotated100: modes=100, hq=0.9732, precision=0.9732, acc_center_rms_sigma=0.15313, mass_tv=0.03, acc_radial_ks=0.0096144; staggered100: modes=100, hq=0.976, precision=0.976, acc_center_rms_sigma=0.1772, mass_tv=0.03455, acc_radial_ks=0.0075883
+
+Historical E4: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=recorded_fast_live. No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-grid100/result.json) · [Record](records/archive-pr155-current-e4-e70a165ba0fe.json)
+
+### archive:pr155:E414k · archive-pr155-current-e414k-fb136a05fcde
+
+**Scope:** historical; scientific; revision `2c1bcc4766965de510380610ee305f47c5204690ffd05b056747cc95c505b5b3`.
+
+Historical native evaluation of declared E414k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 6516.3; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9825, precision=0.9825, acc_center_rms_sigma=0.17291, mass_tv=0.03075, acc_radial_ks=0.010435; rotated100: modes=100, hq=0.9723, precision=0.9723, acc_center_rms_sigma=0.14756, mass_tv=0.0303, acc_radial_ks=0.0051042; staggered100: modes=100, hq=0.9777, precision=0.9777, acc_center_rms_sigma=0.15402, mass_tv=0.03495, acc_radial_ks=0.0048961
+
+Historical E414k: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=recorded_fast_live. No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-grid100/result.json) · [Record](records/archive-pr155-current-e414k-fb136a05fcde.json)
+
+### archive:pr155:E4lr075 · archive-pr155-current-e4lr075-75e372d94a24
+
+**Scope:** historical; scientific; revision `f6c28e8c56ad36dc821a2f945f86beb349fe7e21e67b40fefa3a3325b351c405`.
+
+Historical native evaluation of declared E4lr075 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'PASS': 3}; wall seconds 3869.2; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98465, precision=0.98465, acc_center_rms_sigma=0.15091, mass_tv=0.02995, acc_radial_ks=0.0097769; rotated100: modes=100, hq=0.97555, precision=0.97555, acc_center_rms_sigma=0.15867, mass_tv=0.02785, acc_radial_ks=0.0078124; staggered100: modes=100, hq=0.97315, precision=0.97315, acc_center_rms_sigma=0.17406, mass_tv=0.03505, acc_radial_ks=0.011002
+
+Historical E4lr075: 3 noisy native PASS / 0 FAIL; all three clean diagnostics FAIL. Scoring=recorded_fast_live. No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-grid100/result.json) · [Record](records/archive-pr155-current-e4lr075-75e372d94a24.json)
+
+### archive:pr155:E4lr133 · archive-pr155-current-e4lr133-be7aab4f2a56
+
+**Scope:** historical; scientific; revision `72fb9ab6b469191c06ac0bc4490a5fe7f8c52b4e223c56e2f503b8563d6e9b21`.
+
+Historical native evaluation of declared E4lr133 formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 3}; wall seconds 3079.44; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9766, precision=0.9766, acc_center_rms_sigma=0.20929, mass_tv=0.0352, acc_radial_ks=0.025273; rotated100: modes=100, hq=0.976, precision=0.976, acc_center_rms_sigma=0.18501, mass_tv=0.02875, acc_radial_ks=0.0050108; staggered100: modes=100, hq=0.9765, precision=0.9765, acc_center_rms_sigma=0.20463, mass_tv=0.02915, acc_radial_ks=0.0092151
+
+Historical E4lr133: 0 noisy native PASS / 3 FAIL; all three clean diagnostics FAIL. Scoring=recorded_fast_live. No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-grid100/result.json) · [Record](records/archive-pr155-current-e4lr133-be7aab4f2a56.json)
+
+### archive:pr155:E4nh · archive-pr155-current-e4nh-9d90739f8c00
+
+**Scope:** historical; scientific; revision `b789258511dc34f0c876975fb257849b032f1412c93092231512bbdfc5901c90`.
+
+Historical native evaluation of declared E4nh formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 5074.82; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.98315, precision=0.98315, acc_center_rms_sigma=0.19756, mass_tv=0.02995, acc_radial_ks=0.015494; rotated100: modes=100, hq=0.97785, precision=0.97785, acc_center_rms_sigma=0.14378, mass_tv=0.0274, acc_radial_ks=0.010283; staggered100: modes=100, hq=0.976, precision=0.976, acc_center_rms_sigma=0.1772, mass_tv=0.03455, acc_radial_ks=0.0075883
+
+Historical E4nh: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FAIL. Scoring=recorded_fast_live. No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-grid100/result.json) · [Record](records/archive-pr155-current-e4nh-9d90739f8c00.json)
+
+### archive:pr155:E4nh14k · archive-pr155-current-e4nh14k-e4138ef980fe
+
+**Scope:** historical; scientific; revision `48af2ce32bc61335ed1cb7321596bc447e891eb99a07d9bc2653a25d827d30a1`.
+
+Historical native evaluation of declared E4nh14k formulation under its archived fixed fixture; mechanisms and limitations are in the bundled family report.
+
+**Observed:** {'FAIL': 1, 'PASS': 2}; wall seconds 5769.08; mechanism `historical_training_and_serving_formulation`.
+
+grid100: modes=100, hq=0.9826, precision=0.9826, acc_center_rms_sigma=0.19558, mass_tv=0.02965, acc_radial_ks=0.016336; rotated100: modes=100, hq=0.97035, precision=0.97035, acc_center_rms_sigma=0.19779, mass_tv=0.02755, acc_radial_ks=0.013166; staggered100: modes=100, hq=0.9746, precision=0.9746, acc_center_rms_sigma=0.17049, mass_tv=0.03505, acc_radial_ks=0.010286
+
+Historical E4nh14k: 2 noisy native PASS / 1 FAIL; all three clean diagnostics FAIL. Scoring=recorded_fast_live. No current learned-MoG qualification credit.
+
+**Next:** Recall under exact original package, recipe, fixture and serving law; retain failures and limitations. No qualification reuse or new run is authorized.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/result.json) · [Record](records/archive-pr155-current-e4nh14k-e4138ef980fe.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -3120,4 +3728,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `ae118022adbb2524c35dbabcf7028518594f0d0684d276f84537cd4393e87383`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `750e059f376099a70891f2459c61f31bd4bca63ae381efe61b59dc01ac60e73f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
