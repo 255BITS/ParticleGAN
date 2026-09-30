@@ -1,4 +1,4 @@
-"""The R1 configuration (configs/100gaussians/r1-rotation.json): E22 plus the optimizer-surprise re-open
+"""R1, now E22's default (get_recipe("e22"), configs/100gaussians/e22-noout.json): the optimizer-surprise re-open
 (reopen_signal="optimizer") and the KA2 anchor release (reopen_anchor="release"). The re-open fires on a target
 shift, the defaults keep E22 unchanged, and a checkpoint taken after a fire resumes bit-exactly."""
 import json
@@ -16,7 +16,8 @@ from particlegan import GANTrainer, get_recipe
 
 CONFIGS = Path(__file__).parents[1] / "configs/100gaussians"
 E22 = json.loads((CONFIGS / "e22-noout.json").read_text())
-R1 = json.loads((CONFIGS / "r1-rotation.json").read_text())
+R1 = E22
+PRE_R1 = dict(E22, reopen_signal="none", reopen_anchor="hold")  # E22 before R1 became its default
 
 
 def _recipe(options):
@@ -40,12 +41,13 @@ def _run(trainer, reals):
     return [trainer.step(real, collect_stats=True) for real in reals]
 
 
-def test_r1_config_is_e22_plus_two_fields():
-    assert {k: v for k, v in R1.items() if R1[k] != E22.get(k)} == {"reopen_signal": "optimizer", "reopen_anchor": "release"}
-    assert _recipe(E22).reopen_anchor == "hold"
-    assert _trainer(_recipe(E22)).policy.surprise is None
+def test_r1_is_the_e22_default_and_can_be_turned_off():
+    assert get_recipe("e22").reopen_signal == "optimizer" and get_recipe("e22").reopen_anchor == "release"
+    assert get_recipe("e22_routed").reopen_signal == "optimizer"
+    assert _trainer(_recipe(R1)).policy.surprise is not None
+    assert _trainer(_recipe(PRE_R1)).policy.surprise is None
     with pytest.raises(ValueError, match="requires reopen_signal optimizer"):
-        _recipe(dict(E22, reopen_anchor="release"))
+        _recipe(dict(PRE_R1, reopen_anchor="release"))
 
 
 def _feed(surprise, qs):

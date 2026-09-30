@@ -101,7 +101,7 @@ def _e22_recipe():
 def test_e22_config_builds_and_resumes_bit_exactly():
     recipe = _e22_recipe()
     assert recipe.row_evidence_gate and recipe.birth_death_isolation and recipe.serve_average == 4
-    assert recipe.birth_death_space == "critic" and recipe.reopen_signal == "none"
+    assert recipe.birth_death_space == "critic" and recipe.reopen_signal == "optimizer"
     reals = _reals(40, batch=64)
     full = _trainer(recipe)
     full_out = _run(full, reals)

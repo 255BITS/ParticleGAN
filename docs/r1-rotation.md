@@ -1,13 +1,18 @@
 # R1: following a moving target
 
-`configs/100gaussians/r1-rotation.json` is the [E22 configuration](e22.md) with two added fields:
+R1 is part of the [E22 preset](e22.md) (`get_recipe("e22")`, `get_recipe("e22_routed")` and
+`configs/100gaussians/e22-noout.json`) through two fields:
 
 ```json
 "reopen_signal": "optimizer",
 "reopen_anchor": "release"
 ```
 
-Both default to off (`"none"` / `"hold"`), so E22 and every other recipe are unchanged.
+`"none"` / `"hold"` turns it off (E22 before R1). The Recipe defaults outside the E22 preset are unchanged.
+On a static target it does not fire, and the run is then bit-identical to E22 without it. Harness evidence
+(frozen harness, new-API package): native gates 3/3 at 7k and 14k, S4 3/3 at lr x.75 and x1.33, 0 fires in all
+15 native runs; the 13-gate suite matches E22 on 11 gates with 0 fires, including vector_overlap after the
+abrupt-rise rule below. ring_shift and stationary do not run on this API in the frozen harness (E22 as well).
 
 ## The test
 

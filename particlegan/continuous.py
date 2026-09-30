@@ -971,7 +971,9 @@ class OptimizerSurprise:
         if not self.pending:
             return False
         keys = sorted(self.pending)
-        values = torch.stack([self.pending[k].detach().float() for k in keys]).clamp_min(1e-30).log().cpu().tolist()
+        # float64 on the CPU: the same values whether the pending tensors live on the training device or came back
+        # from a CPU-mapped checkpoint.
+        values = torch.stack([self.pending[k].detach().double().cpu() for k in keys]).clamp_min(1e-30).log().tolist()
         self.pending = {}
         # A group whose gradient is exactly zero this update (e.g. a clamped scalar) carries no signal.
         kept = [(key, value) for key, value in zip(keys, values) if value > math.log(1e-30) + 1.]

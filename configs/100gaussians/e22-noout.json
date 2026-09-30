@@ -55,7 +55,7 @@
  "reg_coeff": 3.0,
  "reg_every": 1,
  "reg_kappa": 1.0,
- "reopen_signal": "none",
+ "reopen_signal": "optimizer",
  "routing_temperature": 0.25,
  "row_evidence_gate": true,
  "row_evidence_null": "scaled",
@@ -66,5 +66,6 @@
  "total_steps": null,
  "ucd_target": "class",
  "ucd_weight": 0.02,
- "z_dim": 4
+ "z_dim": 4,
+ "reopen_anchor": "release"
 }

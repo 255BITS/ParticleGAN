@@ -13,15 +13,16 @@
   longer comparisons retain frozen/movable controls. These diagnostics do not
   select moves or certify game repair. See the
   [qualification guide](docs/e22_routed_game.md).
-- **R1 moving-target configuration** ([docs](docs/r1-rotation.md)):
-  `configs/100gaussians/r1-rotation.json` is E22 plus `reopen_signal="optimizer"`
-  (an Adam-memory surprise detector that re-opens the LR ladders and rescales
-  the shocked second moments) and `reopen_anchor="release"` (the re-open lets
-  KA2's EMA-critic anchor release). It passes the native rotation test 3/3
-  (E22 1/3); on a static target it never fires and matches E22 exactly.
-  The same fields work with `get_recipe("e22_routed", ...)`;
-  `examples/e22_routed_moving.py` runs the routed paired-edit example with a
-  turning target.
+- **R1 is the E22 default** ([docs](docs/r1-rotation.md)): the E22 preset (and
+  `e22_routed`, `configs/100gaussians/e22-noout.json`) sets
+  `reopen_signal="optimizer"` (an Adam-memory surprise detector that, on an
+  abrupt rise, re-opens the LR ladders and rescales the shocked second moments)
+  and `reopen_anchor="release"` (the re-open lets KA2's EMA-critic anchor
+  release). It passes the native rotation test 3/3 (E22 before R1: 1/3) and
+  the routed moving-target example; on static targets it does not fire and
+  matches E22 exactly. `reopen_signal="none", reopen_anchor="hold"` restores
+  the previous behaviour. `examples/e22_routed_moving.py` runs the routed
+  paired-edit example with a turning target.
 - **Composable E22 policy:** `get_recipe("e22", **task_overrides)` ships the
   preset in the installed package. `E22Policy` / `UpdatePolicy` expose the
   same lifecycle controls used by `GANTrainer`, explicit optimizer/table

@@ -4,8 +4,8 @@ python -u examples/e22_routed_moving.py --turn-every 500
 python -u examples/e22_routed_moving.py --turn-every 500 --r1
 
 Every --turn-every updates the paired edit (target minus the frozen host) turns --degrees about the origin, on the
-fitting, guard and held-out contexts alike. --r1 adds reopen_signal="optimizer" and reopen_anchor="release" to
-e22_routed. Held-out RMSE is reported only; it is never a training signal. Prints one JSON line every --log-every
+fitting, guard and held-out contexts alike. e22_routed includes R1 (reopen_signal="optimizer",
+reopen_anchor="release"); without --r1 this script turns it off to show E22-routed before R1. Held-out RMSE is reported only; it is never a training signal. Prints one JSON line every --log-every
 updates and a "period" line at the end of every period.
 """
 
@@ -19,6 +19,7 @@ import torch
 
 paired = runpy.run_path(str(Path(__file__).with_name("e22_routed_paired.py")))
 R1_OVERRIDES = {"reopen_signal": "optimizer", "reopen_anchor": "release"}
+PRE_R1_OVERRIDES = {"reopen_signal": "none", "reopen_anchor": "hold"}
 HOST = torch.tensor([[1., 0., .05], [0., 1., -.07]]).bfloat16()
 
 
@@ -46,7 +47,7 @@ def reopens(policy):
 
 
 def run(*, turn_every, turns=2, degrees=30., r1=False, log_every=50, emit=print):
-    loop = paired["make_loop"](recipe_overrides=R1_OVERRIDES if r1 else None)
+    loop = paired["make_loop"](recipe_overrides=R1_OVERRIDES if r1 else PRE_R1_OVERRIDES)
     target = MovingTarget(loop)
     periods = []
     for step in range(1, turn_every * (turns + 1) + 1):

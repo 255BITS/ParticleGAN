@@ -37,7 +37,8 @@ def test_existing_research_config_resolves_identical_independent_controls():
     assert resolved.row_policy == "independent"
     assert resolved.particle_birth_death and resolved.row_evidence_gate
     assert resolved.birth_death_isolation and resolved.birth_death_feature_scale == "std"
-    assert resolved.table_release_rule == "anchor" and resolved.reopen_signal == "none"
+    assert resolved.table_release_rule == "anchor" and resolved.reopen_signal == "optimizer"
+    assert resolved.reopen_anchor == "release"
 
 
 def _owner(surface):
