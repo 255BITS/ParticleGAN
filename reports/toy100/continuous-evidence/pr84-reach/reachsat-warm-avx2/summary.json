@@ -1,0 +1,40 @@
+{
+  "identity": {
+    "status": "PASS",
+    "local": {
+      "checks": 200,
+      "passing_checks": 200,
+      "failing_steps": [],
+      "min_modes": 8,
+      "min_hq": 0.989990234375,
+      "passing_suffix": 200,
+      "stable_from_step": 1001,
+      "pass_all": true,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.9990234375
+    }
+  },
+  "reachsat": {
+    "status": "FAIL",
+    "local": {
+      "checks": 200,
+      "passing_checks": 199,
+      "failing_steps": [
+        1095
+      ],
+      "min_modes": 8,
+      "min_hq": 0.869140625,
+      "passing_suffix": 105,
+      "stable_from_step": 1096,
+      "pass_all": false,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.998779296875
+    }
+  }
+}
