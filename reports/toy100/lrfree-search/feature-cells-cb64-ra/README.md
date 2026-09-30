@@ -52,3 +52,15 @@ has precision0.98210, all100 modes, TV0.03075, radial KS0.01856 and maximum
 covariance ratio1.61258. This is still an experimental failure of the joint
 target; small saved-state diagnostics are investigating the remaining mean
 bias. See the [completed RA9 receipt](fixes/quality/results/CB64-RA9.json).
+
+RA10 adds a bounded conditional feature-mean copy phase within the existing
+shared 5% budget. Independent CPU integration and short CUDA mechanics pass;
+the original final CUDA toy passes and all ten checkpoints are VALID. The full
+grid is VALID/FAIL: final center RMS improves to0.19825 sigma, but maximum
+covariance ratio1.77312 exceeds1.7. All five terminal covariance checks fail;
+the first four also fail center RMS and the frozen holdout fails coverage.
+Final precision is0.97945, all100 modes and TV0.03185. Historical abbreviated
+action lists receive count/scalar checks; full lineage/reset/row-ID validity
+is checked in the final saved state. The next fixed saved-output diagnostic
+examines nonlinear clean-feature means against the stochastic emitted law.
+See the [completed RA10 receipt](fixes/quality/results/CB64-RA10.json).

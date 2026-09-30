@@ -1,0 +1,21 @@
+{
+  "status": "FROZEN_BEFORE_ANY_MEASUREMENT",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-mean-step-guard/receipt.json": "8349ccd31da98b5df4212b3571885b2c98d3dd0198b88539a0308245f50c228b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-mean-step-guard/DESIGN.md": "017efd62d91efbbd0ae4790e144e2328cbeb4c6678554eb28eea862b262d13d4"
+  },
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/COMPOSITION.json": "9e4766abe810c857e7790ca55277b62550ae2ff8ab690185b58373223a563d59",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA9.json": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/training.py": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/feature_cells.py": "39558fb3839090eb9d933b8b37e4c73b7dfc3cf123b24c2ef58d818cc4052fcc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_phase.py": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/function-step-guard/guard_design.py": "4a5f2d82b8917c888bb760ddaf3223d76e3320a1023035905c93fc178d770e81",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/function-step-guard/feasibility.py": "313b32c94db1c526d3be29c306f1b7c8be53eeec796b259f1cc701700123ee10",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/function-step-guard/REPORT.md": "5465c4a49ef2d98484db44f0a7edbbf4259bece3f39cd155cd895566134c286f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/function-step-guard/FROZEN.json": "5bdc82a30960f9a850a3e45de1497ee75b7758da21323cd459aa22cfa231f119"
+  }
+}

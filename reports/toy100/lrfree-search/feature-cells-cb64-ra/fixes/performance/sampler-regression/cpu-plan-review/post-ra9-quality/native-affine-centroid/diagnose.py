@@ -148,6 +148,7 @@ def main():
             'All-row and3sigma anchor selections use fixed annotations; they do not change original output scoring.',
             'The inverse latent mean is an interpretation of the affine identity, not an emitted new latent proposal.',
             'Saved FIFO/target-cloud means have finite-sample and training-adaptation uncertainty, without new confidence claims.',
+            'Affine outputs use float64 algebra on saved float32 coefficients, not a float32 historical forward replay.',
             'Served live arrays may use EMA while checkpoint state stores raw FAST and EMA models separately.'])
     (HERE/'receipt.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     compact={role:diagnostics[role]['decompositions']['all_rows']['oracle_component_centers']['center_mean_square_sigma2'] for role in diagnostics}

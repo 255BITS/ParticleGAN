@@ -63,7 +63,7 @@ def main():
         private_package = any(part.startswith('pkg-') for part in parts) and not core_package
         private_source = private_package and path.name in (
             'feature_cells.py', 'training.py', 'continuous.py', 'row_evidence.py',
-            'anchor_birth.py', 'birth_phase.py', 'particle_prior.py')
+            'anchor_birth.py', 'birth_phase.py', 'particle_prior.py', 'mean_transport.py')
         failed_log = path.suffix == '.log' and (
             'failed' in path.name.lower() or any(part.startswith('failed-') for part in parts))
         compact = path.suffix in TEXT_SUFFIXES or failed_log or path.name in ('cpu-lineage', 'gpu-lineage')

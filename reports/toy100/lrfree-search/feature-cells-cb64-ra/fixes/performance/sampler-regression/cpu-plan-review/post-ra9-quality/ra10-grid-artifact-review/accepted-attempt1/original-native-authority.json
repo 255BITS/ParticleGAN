@@ -1,0 +1,2649 @@
+[
+  {
+    "check": "grid100 canonical CUDA initialization",
+    "ok": true,
+    "matches": {
+      "G": {
+        "weight": true,
+        "bias": true
+      },
+      "prior": {
+        "z": true
+      }
+    },
+    "prior_range": [
+      -4.999968528747559,
+      4.999938011169434
+    ]
+  },
+  {
+    "check": "grid100 native fixture sidecar parity",
+    "ok": true
+  },
+  {
+    "check": "grid100/noisy declared canonical resources",
+    "ok": true
+  },
+  {
+    "check": "grid100/noisy complete observation schedule",
+    "ok": true
+  },
+  {
+    "check": "grid100/noisy independent accuracy declaration",
+    "ok": true
+  },
+  {
+    "check": "grid100/noisy live event schedule",
+    "ok": true,
+    "events": 34
+  },
+  {
+    "check": "grid100/noisy ema event schedule",
+    "ok": true,
+    "events": 34
+  },
+  {
+    "check": "grid100/noisy snapshot 0",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 1",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000001.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 10",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000010.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 25",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000025.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 50",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000050.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 100",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000100.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 1000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 1250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 1500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 1750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 2000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 2250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 2500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 2750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 3000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 3250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 3500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 3750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 4000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 4250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 4500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 4750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 5000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 5250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 5500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 5750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 6000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 6250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 6500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 6750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy snapshot 7000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_007000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy terminal cloud 6000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy terminal cloud 6250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy terminal cloud 6500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy terminal cloud 6750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy terminal cloud 7000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_007000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy final cloud",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/final_samples.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy holdout cloud",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/holdout_samples.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          100000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          100000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          100000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/noisy unchanged official scorer receipt",
+    "ok": true
+  },
+  {
+    "check": "grid100/noisy official evidence valid",
+    "ok": true,
+    "coverage_status": "FAIL",
+    "accuracy_status": "FAIL",
+    "coverage_reason": "only 0/5 terminal postinitial checks pass",
+    "accuracy_reason": "coverage, sustained live accuracy, or independent holdout failed"
+  },
+  {
+    "check": "grid100/noisy official terminal flags",
+    "ok": true
+  },
+  {
+    "check": "grid100 primary live noisy status",
+    "ok": true
+  },
+  {
+    "check": "grid100/clean declared canonical resources",
+    "ok": true
+  },
+  {
+    "check": "grid100/clean complete observation schedule",
+    "ok": true
+  },
+  {
+    "check": "grid100/clean independent accuracy declaration",
+    "ok": true
+  },
+  {
+    "check": "grid100/clean live event schedule",
+    "ok": true,
+    "events": 34
+  },
+  {
+    "check": "grid100/clean ema event schedule",
+    "ok": true,
+    "events": 34
+  },
+  {
+    "check": "grid100/clean snapshot 0",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 1",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000001.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 10",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000010.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 25",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000025.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 50",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000050.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 100",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000100.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 1000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 1250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 1500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 1750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 2000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 2250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 2500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 2750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 3000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 3250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 3500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 3750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 4000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 4250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 4500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 4750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 5000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 5250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 5500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 5750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 6000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 6250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 6500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 6750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean snapshot 7000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_007000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          4096,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean terminal cloud 6000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean terminal cloud 6250",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006250.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean terminal cloud 6500",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006500.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean terminal cloud 6750",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006750.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean terminal cloud 7000",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_007000.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean final cloud",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/final_samples.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          20000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean holdout cloud",
+    "ok": true,
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/holdout_samples.npz",
+    "arrays": {
+      "live": {
+        "shape": [
+          100000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "ema": {
+        "shape": [
+          100000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      },
+      "target": {
+        "shape": [
+          100000,
+          2
+        ],
+        "dtype": "<f4",
+        "fortran_order": false
+      }
+    }
+  },
+  {
+    "check": "grid100/clean unchanged official scorer receipt",
+    "ok": true
+  },
+  {
+    "check": "grid100/clean official evidence valid",
+    "ok": true,
+    "coverage_status": "FAIL",
+    "accuracy_status": "FAIL",
+    "coverage_reason": "only 0/5 terminal postinitial checks pass",
+    "accuracy_reason": "coverage, sustained live accuracy, or independent holdout failed"
+  },
+  {
+    "check": "grid100/clean official terminal flags",
+    "ok": true
+  },
+  {
+    "check": "grid100 secondary clean status",
+    "ok": true
+  }
+]

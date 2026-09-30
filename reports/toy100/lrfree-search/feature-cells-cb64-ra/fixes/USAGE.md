@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 root = Path("/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929")
-variant = "CB64-RA9"  # experimental; toy passes, terminal grid centers fail
+variant = "CB64-RA10"  # experimental; toy passes, strict grid fails
 sys.path.insert(0, str(root / f"pkg-{variant}"))
 
 from particlegan.recipes import Recipe
@@ -79,6 +79,24 @@ from RA8 is `birth_death_cells: 128`; update laws, noise and serving checks
 retain their definitions. RA9 uses backend schema8 and trainer schema5.
 Backend7 checkpoints are rejected before model state loading. Actual cell
 count, rank, split rows and count diagnostics are cross-checked on load.
+
+RA10 keeps RA9's exact config bytes and adds a conditional mean-copy phase.
+It fits and clips bounded learned features using the even real split, then
+tests the fixed residual direction on the odd split in the common `3K+3`
+family. A firing witness can use the remaining shared 5% copy budget after
+existing actions. Both original and actual child coordinates must preserve
+support, inside category, fine cell and learned group in both views. Bounded
+64-row pools supply unique parents and children. Exact paired copy bytes,
+optimizer/history inheritance, complete row resets and population rebasing
+are checked before continuation. The witness and feature objective share
+training history; they do not certify population means or equivalence.
+RA10 uses backend schema9 and trainer schema5. Backend8 checkpoints and
+malformed mean/phase metadata are rejected before loading model state.
+Its CPU integration contracts and short CUDA mechanics pass; the original
+final CUDA toy passes and its ten checkpoints are VALID. The full unchanged
+grid completes VALID/FAIL: final center fidelity passes, covariance and the
+five terminal combined gates fail. Required CUDA replay/portability checks
+have not advanced after this quality failure.
 
 Use `trainer.state_dict()` and `trainer.load_state_dict()` for continuation.
 Backend schemas/settings and serialized lineage topology are checked before

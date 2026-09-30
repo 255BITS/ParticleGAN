@@ -1,6 +1,38 @@
 {
-  "updated_utc": "2026-09-30T09:38:24.311939+00:00",
+  "updated_utc": "2026-09-30T13:53:41.452896+00:00",
   "rows": [
+    {
+      "variant": "CB64-RA10",
+      "lane": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+      "device": "cuda:0",
+      "steps": 2000,
+      "toy_precision": 0.96533203125,
+      "toy_modes": 25,
+      "toy_mass_tv": 0.05211425781250001,
+      "toy_min_supported_mode_mass": 0.03271484375,
+      "toy_gate": "PASS",
+      "grid_gate": "FAIL",
+      "grid_fixture_validity": "VALID",
+      "both_raw_quality_gates_pass": false,
+      "toy_training_seconds": 113.55982607300393,
+      "toy_result_sha256": "01f5b0d4c2c3583054bde3c56de84022adc9805bc1a54598129f9757d6f03df5",
+      "toy_result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/learned/training/toy/CB64-RA10/result.json",
+      "grid_result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/result.json",
+      "grid_result_sha256": "91d289fc8c069732adc9e2ae9fa0216ce5c083ea614b71ff382a0917fc559547",
+      "grid_holdout": {
+        "mass_tv": 0.023919999999999997,
+        "center_rms_sigma": 0.1781809123505804,
+        "abs_cov_trace_bias": 0.05530017811667576,
+        "cov_trace_bias": 0.05530017811667576,
+        "radial_ks": 0.028002559748053324,
+        "accuracy_score": 0.6356592508219148,
+        "accuracy_pass": true,
+        "frozen_pass": false,
+        "passed": false,
+        "precision": 0.97911
+      },
+      "status_scope": "final saved CUDA metrics; source/fixture acceptance recorded separately"
+    },
     {
       "variant": "CB64-RA8",
       "lane": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8",

@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-30T13:09:40.350476+00:00",
+  "scope": "PARENT_AUTHORIZED_FROZEN_GRID_LAUNCH",
+  "root_wrapper_pid": 1041629,
+  "startticks": 167551865,
+  "root_command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py",
+    "--lane",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+    "--through",
+    "2"
+  ],
+  "preflight_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA10-grid-prelaunch-seal-verification.json",
+  "preflight_sha256": "efe09f54cfdc196d37abe42598641ea1035c77324f8af57c4f7161af29d02dc6",
+  "preparation_final_seal_sha256": "c04c6794135b8bd617ee26e2d80d33aadb92de78aa1d6d6d5e56846b25a84db0",
+  "source_only": true,
+  "no_signals_or_numerical_actions": true
+}

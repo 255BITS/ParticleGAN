@@ -60,12 +60,59 @@ center RMS, which ranges0.21111–0.22250 sigma against0.20. The original100k
 holdout fully passes: precision0.98173, TV0.01909, center0.19269 sigma and
 radial KS0.01453. Final20k precision is0.98210, all100 modes, TV0.03075,
 radial KS0.01856 and maximum covariance ratio1.61258. RA9 still does not
-qualify for the joint target. The next small diagnostics isolate conditional
-mean bias and the authority of existing corrective actions.
+qualify for the joint target. Completed small diagnostics isolate persistent
+conditional mean bias in the averaged anchors. Reusing existing certified
+copy slots cannot repair the final grid state: its last reaction has no
+ordinary copy actions. The generator and latent table largely compensate
+each other, so their final affine decomposition supplies no evidence for
+undoing generator steps. Direct covariance correction is also unsupported
+by the saved conditional covariance budgets.
 The cap controls average
 fit rows per cell; it guarantees no individual cell occupancy. Finer charts
 increase geometry cost and count multiplicity. Optimizer, noise and quality
 gates retain their RA8 definitions.
+
+The single fixed scratch prototype completed after independent mathematical
+and ownership reviews. Its grid witness fired, and 936 of 1000 bounded paired
+copies had actual legal progress, reducing the declared feature mean objective
+by 12.65%. Both views retained their fine cell, inside category, learned group
+and supported status; source rows and optimizer/history inheritance checks
+passed. The toy witness vetoed and made no actions. The saved states/files and
+global RNG were unchanged. This is CPU feature-objective evidence, with no
+new emitted quality result or CUDA replication claim. The learned chart and
+FIFO share training data, so the witness is empirical negative evidence
+rather than a population or equivalence certificate.
+
+RA10 production implementation is selected from this fixed law. It keeps RA9's
+exact config bytes, uses one common 3K+3 test family, and adds a fourth ordinary
+mean-copy phase within the existing shared 5% budget. The witness is frozen
+before count-driven actions. Actual copy progress uses refreshed post-action
+EMA means and group counts in the same even chart. Independent source,
+ownership, row-reset, population rebase, checkpoint, serving and matched
+continuation contracts pass. A short actual CUDA reaction test also passes:
+961 legal grid copies reduce its declared feature mean objective from
+1.13930 to 1.00718; the toy mean witness vetoes. These mechanical results
+do not establish emitted quality. The original 2000-update CUDA toy passes:
+precision 0.965332, all 25 modes, TV 0.052114 and minimum supported mode mass
+0.032715. All ten checkpoints are independently VALID. The mean phase makes
+no toy moves. The same frozen package completed the original full grid100
+schedule: 7000 updates, 34 observations, all five terminal clouds and the
+independent 100k holdout. The independent original quality/fixture audit is
+VALID/FAIL. Final precision is 0.97945, all 100 modes, TV 0.03185, center
+RMS 0.19825 sigma, radial KS 0.03231 and maximum covariance ratio 1.77312
+against the unchanged 1.7 limit. All five terminal checks fail covariance;
+the first four also fail center RMS and the first fails radial KS. The
+holdout passes its fidelity subtest but fails the frozen coverage gate.
+387707 cumulative mean copies reduce the logged per-reaction feature
+objective; these objectives use changing charts and are not one loss across
+training. Final centering improves over RA9, while spread and tails worsen.
+The separate final tensor/checkpoint audit is VALID. Historical abbreviated
+JSON action lists permit scalar/count checks; full row IDs, inheritance,
+lineage and resets are checked at the saved final endpoint. Required CUDA
+replay and portability runs have not advanced after this quality failure.
+RA10 does not qualify for the joint target. A source-reviewed fixed saved-output
+diagnostic will examine clean nonlinear feature means versus the stochastic
+emitted law, and all-row versus legal-copy-cohort conditioning.
 
 - [Results, explanations and validation scope](FIXES-REPORT.md)
 - [Machine-readable leaderboard](leaderboard.json)
@@ -77,6 +124,16 @@ gates retain their RA8 definitions.
 - [RA8 hypothesis and limits](quality/RA8-PLAN.md)
 - [RA9 config](configs/overrides-CB64-RA9.json), [package](pkg-CB64-RA9/) and [prospective plan](quality/RA9-PLAN.md)
 - [RA9 completed toy/grid result](quality/results/CB64-RA9.json)
+- [Fixed mean transport prototype and its limits](quality/MEAN-TRANSPORT-PLAN.md)
+- [Completed mean prototype](integration/review/training-regression/post-ra9-quality/mean-category-transport/REPORT.md)
+- [Prospective RA10 production plan](quality/RA10-PLAN.md)
+- [RA10 selection and sealed evidence](quality/results/RA10-selection.json)
+- [RA10 config](configs/overrides-CB64-RA10.json) and [package](pkg-CB64-RA10/)
+- [RA10 original CUDA toy result](quality/results/CB64-RA10-toy.json)
+- [RA10 completed toy/grid result](quality/results/CB64-RA10.json)
+- [RA10 frozen full grid launch](quality/results/RA10-grid-launch.json)
+- [RA10 independent completed grid quality audit](performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/receipt.json)
+- [RA10 final checkpoint artifact audit](performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-grid-artifact-review/accepted-attempt2/receipt.json)
 - [Package usage and checkpoint compatibility](USAGE.md)
 - [RA4 config](configs/overrides-CB64-RA4.json) and [package](pkg-CB64-RA4/)
 - [RA4 numerical source freeze](integration/iteration-4/READY.json)
@@ -102,5 +159,5 @@ The findings use the existing fixed seeds and saved fixture inputs. Shared-GPU
 timings describe these runs; they do not establish a general scaling law.
 
 Read compact current progress with
-`python -B quality/status.py --variant CB64-RA9`, or tail its log once started at
-`validation-cb64-ra9/logs/learned-toy-CB64-RA9.log`.
+`python -B quality/status.py --variant CB64-RA10`, or tail the active grid log at
+`validation-cb64-ra10/logs/screen-grid100.log`.
