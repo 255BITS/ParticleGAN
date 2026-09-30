@@ -14,7 +14,7 @@ import json
 import torch
 from torch.utils.checkpoint import checkpoint, set_checkpoint_early_stop
 
-from e22_routed_sites import MODES, diagnostics, evaluate, make_loop, update
+from e22_routed_sites import INITIALIZATIONS, MODES, diagnostics, evaluate, make_loop, update
 
 
 def checkpointed_generate(policy, context):
@@ -62,12 +62,13 @@ def main():
     parser.add_argument("--steps", type=int, default=8)
     parser.add_argument("--mode", choices=MODES, default="full")
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--initialization", choices=INITIALIZATIONS, default="api")
     args = parser.parse_args()
     if args.steps < 1:
         parser.error("--steps must be positive")
     if torch.device(args.device).type == "cpu":
         torch.set_num_threads(1)
-    loop = make_loop(mode=args.mode, device=args.device)
+    loop = make_loop(mode=args.mode, device=args.device, initialization=args.initialization)
     for _ in range(args.steps):
         with torch.autograd.set_multithreading_enabled(False):
             row = update(loop, generator_forward=checkpointed_generate)

@@ -8,6 +8,14 @@ Every structural counterfactual reruns the entire conditioned model, including
 the second site's queries that depend on the first site's output. Training is
 paired-error RpGAN/KA2. Clean output RMSE is evaluated only on a third context
 grid; it is not a training loss or a proposal acceptance criterion.
+
+The CLI defaults to the public deterministic initializer for every trainable
+network and the R2 particle prior. Python ``make_loop`` defaults to the older
+``conformance`` fixture so the focused lifecycle/recovery tests retain their
+deliberately constructed row-move trajectory. That fixture has a hand-built
+bank, a downweighted outlier, and constant query weights; it is not an API-
+initialized quality benchmark. Select either path explicitly with
+``--initialization api|conformance``.
 """
 
 import argparse
@@ -25,6 +33,7 @@ from particlegan import E22Policy, RoutedBatch, RoutedRows, get_recipe, init
 
 
 MODES = ("frozen", "no_rows", "full")
+INITIALIZATIONS = ("api", "conformance")
 
 
 class TokenHost(nn.Module):
@@ -69,16 +78,18 @@ class ContextEncoder(nn.Module):
 
 
 class SiteQueries(nn.Module):
-    def __init__(self, rows, z_dim):
+    def __init__(self, rows, z_dim, *, conformance=True):
         super().__init__()
         self.first_query = nn.Linear(4, z_dim)
         self.second_query = nn.Linear(4, z_dim)
-        with torch.no_grad():
-            for query in (self.first_query, self.second_query):
-                query.weight.fill_(.025)
-                query.bias.fill_(.1)
+        if conformance:
+            with torch.no_grad():
+                for query in (self.first_query, self.second_query):
+                    query.weight.fill_(.025)
+                    query.bias.fill_(.1)
         self.register_buffer("log_mass", torch.zeros(rows))
-        self.log_mass[-1] = -1.5
+        if conformance:
+            self.log_mass[-1] = -1.5
 
 
 class TokenErrorCritic(nn.Module):
@@ -146,9 +157,18 @@ class SiteLoop:
     config: dict
 
 
-def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16, batch_size=8):
+def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16,
+              batch_size=8, initialization="conformance"):
+    """Build a loop; conformance preserves the explicit structural-test fixture.
+
+    Use initialization="api" for quality/timing comparisons. Its whole-network
+    initializer calls use fixed role keys G=0, D=1, E=2, R=3; these keys define
+    one initialization, rather than a search over seeds.
+    """
     if mode not in MODES:
         raise ValueError(f"mode must be one of {MODES}")
+    if initialization not in INITIALIZATIONS:
+        raise ValueError(f"initialization must be one of {INITIALIZATIONS}")
     device = torch.device(device)
     fit = context_grid(torch.linspace(-.8, .8, 5), torch.tensor([.1, .35, .6, .85]), tokens).to(device)
     guard = context_grid(torch.tensor([-.72, -.24, .24, .72]), torch.tensor([.18, .48, .78]), tokens).to(device)
@@ -161,15 +181,28 @@ def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16, bat
                         row_evidence_gate=controls, particle_birth_death=controls)
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(123)
-        G, E, R = TokenHost(z_dim).to(device), ContextEncoder().to(device), SiteQueries(particles, z_dim).to(device)
+        G, E = TokenHost(z_dim).to(device), ContextEncoder().to(device)
+        # Fresh constructor draws let the API initialize queries: its deliberate
+        # constant-preservation rule would retain the conformance fixture fills.
+        R = SiteQueries(particles, z_dim, conformance=initialization == "conformance").to(device)
         D = TokenErrorCritic(scale).to(device)
-    init.deterministic_orthogonal_(D.features, seed=5)
-    init.deterministic_orthogonal_(D.score, seed=6)
-    angle = torch.linspace(0., 2 * math.pi, particles, device=device)[:, None]
-    phase = torch.arange(z_dim, device=device)[None, :]
-    table = nn.Parameter(1 + .1 * (angle + phase).sin(), requires_grad=mode != "frozen")
-    with torch.no_grad():
-        table[-1].fill_(-2.)
+        if initialization == "api":
+            init.deterministic_orthogonal_(G, seed=0)
+            init.deterministic_orthogonal_(D, seed=1)
+            init.deterministic_orthogonal_(E, seed=2)
+            init.deterministic_orthogonal_(R, seed=3)
+            # Initialize while learnable, then freeze the same R2 values in the
+            # frozen arm. The public initializer intentionally skips frozen state.
+            prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
+            table = prior.z.requires_grad_(mode != "frozen")
+        else:
+            init.deterministic_orthogonal_(D.features, seed=5)
+            init.deterministic_orthogonal_(D.score, seed=6)
+            angle = torch.linspace(0., 2 * math.pi, particles, device=device)[:, None]
+            phase = torch.arange(z_dim, device=device)[None, :]
+            table = nn.Parameter(1 + .1 * (angle + phase).sin(), requires_grad=mode != "frozen")
+            with torch.no_grad():
+                table[-1].fill_(-2.)
     groups = [{"params": [p for p in G.parameters() if p.requires_grad]},
               {"params": list(E.parameters())}, {"params": list(R.parameters())}]
     roles = ["generator", "encoder", "router"]
@@ -187,7 +220,8 @@ def make_loop(*, mode="full", device="cpu", tokens=8, z_dim=2, particles=16, bat
                        generator_optimizer=opt_g, critic_optimizer=opt_d,
                        roles=[roles, ["critic"]], routed_rows=rows, seed=21)
     initial = float((policy.served_model().routed_forward(test) - test_target).square().mean().sqrt())
-    config = dict(mode=mode, tokens=tokens, z_dim=z_dim, particles=particles, batch_size=batch_size)
+    config = dict(mode=mode, tokens=tokens, z_dim=z_dim, particles=particles,
+                  batch_size=batch_size, initialization=initialization)
     return SiteLoop(policy, fit, fit_target, guard, guard_target, test, test_target,
                     torch.Generator(device=device).manual_seed(42),
                     torch.Generator(device=device).manual_seed(43), initial, config)
@@ -274,8 +308,9 @@ def checkpoint(loop):
 
 
 def restore(loop, state):
-    if loop.config != state["config"]:
-        raise ValueError("checkpoint task shape/mode must match the caller-owned model")
+    config = {"initialization": "conformance", **state["config"]}
+    if loop.config != config:
+        raise ValueError("checkpoint task shape/mode/initialization must match the caller-owned model")
     loop.policy.load_state_dict(state["policy"])
     loop.data_rng.set_state(state["data_rng"].cpu())
     loop.paired_noise_rng.set_state(state["paired_noise_rng"].cpu())
@@ -349,6 +384,8 @@ def main():
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--mode", choices=MODES, default="full")
+    parser.add_argument("--initialization", choices=INITIALIZATIONS, default="api",
+                        help="Public API initialization (default), or the deliberately constructed conformance fixture")
     parser.add_argument("--compare", action="store_true")
     parser.add_argument("--log-every", type=int, default=20)
     parser.add_argument("--warmup", type=int, help="Untimed restored updates; default 1 for --compare, 0 otherwise")
@@ -364,7 +401,8 @@ def main():
         torch.set_num_threads(1)
     config = dict(tokens=args.tokens or (128 if args.compare else 8),
                   z_dim=args.z_dim or (4 if args.compare else 2),
-                  particles=args.particles or (128 if args.compare else 16), batch_size=args.batch_size)
+                  particles=args.particles or (128 if args.compare else 16), batch_size=args.batch_size,
+                  initialization=args.initialization)
     warmup_steps = int(args.compare) if args.warmup is None else args.warmup
     if args.compare:
         reports, reference_inputs, reference_weights = [], None, None
@@ -394,7 +432,8 @@ def main():
     else:
         saved = None if not args.resume else torch.load(args.resume, map_location="cpu", weights_only=True)
         if saved is not None:
-            config = {key: value for key, value in saved["config"].items() if key != "mode"}
+            config = {"initialization": "conformance",
+                      **{key: value for key, value in saved["config"].items() if key != "mode"}}
         loop = make_loop(mode=args.mode if saved is None else saved["config"]["mode"], device=device, **config)
         if saved is not None:
             restore(loop, saved)

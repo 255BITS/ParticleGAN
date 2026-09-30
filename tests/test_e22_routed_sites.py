@@ -8,6 +8,8 @@ import runpy
 import pytest
 import torch
 
+from particlegan import ParticlePrior
+
 
 EXAMPLE = Path(__file__).resolve().parents[1] / "examples" / "e22_routed_sites.py"
 
@@ -194,6 +196,92 @@ def test_comparison_modes_share_initial_parameters_batches_and_paired_base_noise
         assert policy.routed_control.evidence.counters["updates"] == 0
         assert policy.routed_control.counters["evals"] == policy.routed_control.counters["proposals"] == 0
     assert full.routed_control.counters["evals"] > 0
+
+
+def test_api_initialization_uses_whole_network_role_keys_and_public_r2_prior(api, monkeypatch):
+    initializer = api["init"].deterministic_orthogonal_
+    calls = []
+
+    def recording_initializer(module, *, seed=0, strict=True):
+        calls.append((module, seed, strict))
+        return initializer(module, seed=seed, strict=strict)
+
+    monkeypatch.setattr(api["init"], "deterministic_orthogonal_", recording_initializer)
+    loop = api["make_loop"](initialization="api")
+    p = loop.policy
+    assert len(calls) == 5
+    assert calls[:4] == [(p.G, 0, True), (p.D, 1, True),
+                         (p.encoder, 2, True), (p.router, 3, True)]
+    prior, seed, strict = calls[4]
+    assert type(prior) is ParticlePrior and seed == 0 and strict
+    assert p.table is prior.z
+
+    # Reproduce the public contract independently of make_loop's wiring. This
+    # catches initializing critic submodules separately, wrong role keys, and
+    # any custom table/parameter rewrite after the API call.
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(123)
+        G = api["TokenHost"](loop.config["z_dim"])
+        E = api["ContextEncoder"]()
+        R = api["SiteQueries"](loop.config["particles"], loop.config["z_dim"], conformance=False)
+        D = api["TokenErrorCritic"](p.D.scale)
+        expected_prior = p.recipe.make_prior()
+    frozen = {name: parameter.detach().clone() for name, parameter in G.named_parameters()
+              if not parameter.requires_grad}
+    for actual, expected, key in ((p.G, G, 0), (p.D, D, 1),
+                                  (p.encoder, E, 2), (p.router, R, 3)):
+        initializer(expected, seed=key)
+        assert_tree_equal(actual.state_dict(), expected.state_dict())
+    initializer(expected_prior)
+    assert_tree_equal(p.table, expected_prior.z)
+    assert p.router.log_mass.eq(0).all()
+    for name, expected in frozen.items():
+        actual = dict(p.G.named_parameters())[name]
+        assert actual.dtype == torch.bfloat16 and not actual.requires_grad
+        assert_tree_equal(actual, expected)
+
+
+def test_api_comparison_starts_from_same_r2_bank_and_weights_before_freezing(api):
+    loops = [api["make_loop"](mode=mode, initialization="api", tokens=2,
+                              particles=128, z_dim=4) for mode in api["MODES"]]
+    frozen, no_rows, full = [loop.policy for loop in loops]
+    with torch.random.fork_rng(devices=[]):
+        expected_prior = api["init"].deterministic_orthogonal_(full.recipe.make_prior())
+    for loop in loops:
+        p = loop.policy
+        assert loop.config["initialization"] == "api"
+        assert_tree_equal(p.table, expected_prior.z)
+        assert p.router.log_mass.eq(0).all()
+        for query in (p.router.first_query, p.router.second_query):
+            assert query.weight.std() > 0
+        for name, module in p._training_modules().items():
+            assert_tree_equal(module.state_dict(), frozen._training_modules()[name].state_dict())
+        assert p.G.first_host.weight.dtype == p.G.second_host.weight.dtype == torch.bfloat16
+        assert not p.G.first_host.weight.requires_grad and not p.G.second_host.weight.requires_grad
+        assert_tree_equal(p.G.first_host.weight, torch.eye(4, dtype=torch.bfloat16))
+        assert_tree_equal(p.G.second_host.weight,
+                          torch.tensor([[1., 0., .05, .02], [0., 1., -.07, -.01]], dtype=torch.bfloat16))
+    assert not frozen.table.requires_grad
+    assert no_rows.table.requires_grad and full.table.requires_grad
+
+
+def test_old_conformance_checkpoint_without_initialization_replays_next_update_and_serving(api):
+    native = api["make_loop"]()
+    with torch.autograd.set_multithreading_enabled(False):
+        api["update"](native)
+    legacy = cpu_roundtrip(api["checkpoint"](native))
+    assert legacy["config"].pop("initialization") == "conformance"
+    resumed = api["make_loop"]()
+    api["restore"](resumed, legacy)
+    assert_tree_equal(api["checkpoint"](resumed), api["checkpoint"](native))
+    assert_tree_equal(resumed.policy.served_model().routed_forward(resumed.test_context),
+                      native.policy.served_model().routed_forward(native.test_context))
+    with torch.autograd.set_multithreading_enabled(False):
+        assert_tree_equal(api["update"](resumed), api["update"](native))
+    assert_tree_equal(api["checkpoint"](resumed), api["checkpoint"](native))
+    assert_tree_equal(api["evaluate"](resumed), api["evaluate"](native))
+    assert_tree_equal(resumed.policy.served_model().routed_forward(resumed.test_context),
+                      native.policy.served_model().routed_forward(native.test_context))
 
 
 @pytest.mark.parametrize("mode", ["frozen", "no_rows", "full"])
