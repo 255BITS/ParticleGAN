@@ -16,7 +16,7 @@ Records: 188. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Pending readouts
 
-None recorded.
+k3p
 
 ## Experiment and family records
 
@@ -3040,4 +3040,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `e64c82af9e2766d8f550e2df4958dcb838c9ac357f18270396b1f03b70751d6f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `b51c436610b7f8ef46f0757b89853920241b67a7e9a7f4a5bc219b3c8e14eba6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
