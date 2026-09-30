@@ -7,13 +7,19 @@ defines acceptance; this status file does not narrow its scope.
 
 ## Current checkpoint
 
-Develop `a8b9d397` is merged; [CI at `a00ed7b6`](https://github.com/255BITS/ParticleGAN/actions/runs/36670347539)
+Develop `a8b9d397` is merged; [CI at `1b2d8915`](https://github.com/255BITS/ParticleGAN/actions/runs/36672467580)
 passes 1,807 tests and 18 subtests, including the concluded diagnostic receipts.
 The engine, root guide and physical two-GPU pilot are implemented and verified.
 Current scientific calibration has one correctly rejected negative, no complete
-positive reference, and 52/57 unknown cells. **Default adoption remains blocked.**
-The [host-profile readout](HOST_PROFILE_TRANSFER_READOUT.md) contains the current
-metrics and costs; [consumer ownership](LEGACY_CONSUMERS.md) records which legacy
+positive reference, and 50/57 unknown cells. The
+[two-control screen](CONTROL_MODE_READOUT.md) failed both cells for 39.242 seconds;
+all three declared lineages now fail smoke. This exact profile cannot meet its
+positive-reference and zero-false-rejection requirements together. Stop filling
+it solely for adoption; register a new justified screen/profile before further
+calibration. The controls' independent reference outcomes remain unknown.
+**Default adoption remains blocked.**
+The [baseline host readout](HOST_PROFILE_TRANSFER_READOUT.md) and control readout
+contain measured metrics and costs; [consumer ownership](LEGACY_CONSUMERS.md) records which legacy
 entrypoints and external jobs remain outside Forge. Earlier checkpoints below
 retain the evidence available at their dates.
 The separately registered [A2-off probe](A2_OFF_NATIVE_READOUT.md) also failed
@@ -27,6 +33,10 @@ compatible full-reference positive. Its discovered legacy MoG envelope study is
 now preserved in [supplemental context](supplemental/local-mog-envelope-v1/README.md)
 and compiled memory, including all 26 rows and failed configurations. It retains
 its historical EMA criterion and supplies no current qualification.
+The latest compiler includes 193 records, with no conflicts or pending readouts;
+both exact control revisions are concluded. The two-control independent audit
+verified frozen grades, named initialization/RNG declarations and paid costs,
+with its missing-tensor/final-state verification limit stated explicitly.
 
 ## Develop integration — 2026-09-29
 

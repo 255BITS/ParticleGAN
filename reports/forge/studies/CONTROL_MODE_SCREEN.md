@@ -1,5 +1,9 @@
 # Existing-control mode screen
 
+Completed follow-up: [both cells failed and are concluded](../CONTROL_MODE_READOUT.md)
+for 39.241742148 paid seconds. The preparation below preserves what was declared
+before execution; it does not describe the current queue or lifecycle state.
+
 Prepared **two `mode_hold` cells only** under the unchanged `host-profile-transfer-v1` profile. Each cell and candidate has a 1,800-second ceiling; the campaign reserves at most 3,600 seconds. Planned execution is serial on GPU0 with one worker and no sharing. Nothing was enqueued or trained during preparation.
 
 | Existing control | Pinned revision | Selected change | Cell |

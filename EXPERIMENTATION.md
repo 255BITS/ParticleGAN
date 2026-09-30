@@ -43,9 +43,15 @@ passed for 11.199 seconds with the same rates, seed, initialization policy and
 gates. Published image/vector and native host profiles are now explicit. The
 [joined-source transfer](reports/forge/HOST_PROFILE_TRANSFER_READOUT.md) measured
 three passes and two failures for 156.284 seconds. Mode-hold correctly rejects
-the candidate that loses native grid shape accuracy: one true rejection, with
-52 of 57 cells still unknown. No positive reference is established; calibration
-remains blocked. Full joined-source CI passed 1,807 tests and 18 subtests.
+the candidate that loses native grid shape accuracy. The
+[two existing-control screens](reports/forge/CONTROL_MODE_READOUT.md) then both
+failed for 39.242 seconds. The matrix now has 7/57 measured cells, 50 unknown,
+one true rejection and no full-reference positive. All three lineages fail smoke;
+this exact profile cannot meet both the required positive count and zero false
+rejections, regardless of its missing reference outcomes. Stop filling it solely
+for adoption; a new justified screen/profile is required. The controls' downstream
+reference decisions and false-reject fraction remain unknown. Full joined-source
+CI passed 1,807 tests and 18 subtests.
 The [A2-off native diagnostic](reports/forge/A2_OFF_NATIVE_READOUT.md) then failed
 for 85.368 seconds, with 74/100 modes and worse holdout mass/shape accuracy.
 Its unchanged control was reused. This negative argues against the ablation;

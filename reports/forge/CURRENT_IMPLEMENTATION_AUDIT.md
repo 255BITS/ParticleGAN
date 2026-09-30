@@ -9,6 +9,17 @@ complete successfully: 1,807 tests and 18 subtests, 16 explicit skips, Python
 3.10/3.11 wheel smokes and release packaging. The matrix below describes that
 checkpoint; subsequent supplemental historical context changes no runtime code.
 
+Coordinator follow-up: [CI on `1b2d8915`](https://github.com/255BITS/ParticleGAN/actions/runs/36672467580)
+also passed 1,807 tests and 18 subtests. The
+[independently audited control screen](CONTROL_MODE_READOUT.md) subsequently
+measured two mode failures, and exact-revision readouts raised compiled memory
+to 193 records, with no conflicts or pending readouts. All three declared
+lineages now fail smoke. The unchanged profile cannot satisfy its minimum
+positive-reference count and zero false rejections together; it needs a new
+justified profile. The controls' independent references and empirical
+false-reject fraction remain unknown. The inspected historical checkpoint in
+the matrix below remains dated and is not a current record-count claim.
+
 ## Current acceptance evidence
 
 | Requirement | Concrete current evidence | Judgment and limits |

@@ -1,0 +1,1057 @@
+{
+  "registration": "host-profile-control-mode-v1",
+  "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51",
+  "publication_commit_verified": "1b2d8915",
+  "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "read_only": true,
+  "frozen_source_files_verified": 1029,
+  "watched_files_unchanged": 11,
+  "integrity_issues": [],
+  "paired_checks": [
+    {
+      "candidate": "forge-no-critic-penalty",
+      "effective_recipe_differences": {
+        "reg_coeff": [
+          1.0,
+          0.0
+        ]
+      },
+      "exact_initialization_receipts_match": true,
+      "named_rng_bindings_match": true,
+      "phase_rng_audits_match": true,
+      "intended_required_capability_changes": []
+    },
+    {
+      "candidate": "forge-onboarding-anchor-ablation",
+      "effective_recipe_differences": {
+        "reg_anchor_weight": [
+          1.0,
+          0.0
+        ]
+      },
+      "exact_initialization_receipts_match": true,
+      "named_rng_bindings_match": true,
+      "phase_rng_audits_match": true,
+      "intended_required_capability_changes": []
+    }
+  ],
+  "rows": [
+    {
+      "attempt": "49d41e284fde41698212677403ca5d67",
+      "request": "5885f849de55d9603a1bdac7",
+      "candidate": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "status": "FAIL",
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.5106520652771,
+        "hq": 0.998779296875,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "seconds": 17.93031075700128,
+      "phase_timing": {
+        "coverage": "partial_adapter",
+        "measured_seconds": 12.097441082412843,
+        "method": "exclusive_synchronized_wall_time",
+        "phases": {
+          "evaluation": {
+            "calls": 24,
+            "seconds": 0.012047342912410386
+          },
+          "sampling": {
+            "calls": 24,
+            "seconds": 0.008364666035049595
+          },
+          "training_updates": {
+            "calls": 1200,
+            "seconds": 12.077029073465383
+          }
+        },
+        "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+      },
+      "exact_frozen_grade_reproduced": true,
+      "diagnostic_registration_verified": true,
+      "durable_raw_science_hashes_verified": true,
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 236,
+          "calls": 1200,
+          "eligible": 237,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_guard": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 1000,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "clipped_tensors": 1,
+              "initial_adam_step": 200,
+              "optimizer_updates": 1
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 1200,
+          "calls": 1200,
+          "eligible": 1200,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "optimizer_updates": {
+        "discriminator": 1200,
+        "generator": 1200,
+        "prior": 1200
+      },
+      "rng_binding_count": 14,
+      "rng_audits": 24,
+      "recorded_rng_deviations": 0,
+      "observations": [
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 50
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 100
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 150
+        },
+        {
+          "cover": 0.25,
+          "effective_modes": 1.1214979887008667,
+          "hq": 0.070068359375,
+          "modes": 2,
+          "n_modes": 8,
+          "step": 200
+        },
+        {
+          "cover": 0.25,
+          "effective_modes": 1.8189685344696045,
+          "hq": 0.001708984375,
+          "modes": 2,
+          "n_modes": 8,
+          "step": 250
+        },
+        {
+          "cover": 0.125,
+          "effective_modes": 1.0,
+          "hq": 0.00146484375,
+          "modes": 1,
+          "n_modes": 8,
+          "step": 300
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 2.938758373260498,
+          "hq": 0.459716796875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 350
+        },
+        {
+          "cover": 0.375,
+          "effective_modes": 2.034503221511841,
+          "hq": 0.16552734375,
+          "modes": 3,
+          "n_modes": 8,
+          "step": 400
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 3.7850704193115234,
+          "hq": 0.76806640625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 450
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.325240612030029,
+          "hq": 0.629150390625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 500
+        },
+        {
+          "cover": 0.5,
+          "effective_modes": 3.813096046447754,
+          "hq": 0.54345703125,
+          "modes": 4,
+          "n_modes": 8,
+          "step": 550
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.575989246368408,
+          "hq": 0.996337890625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 600
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.567821502685547,
+          "hq": 0.997802734375,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 650
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.632997035980225,
+          "hq": 0.918212890625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 700
+        },
+        {
+          "cover": 0.5,
+          "effective_modes": 2.7757160663604736,
+          "hq": 0.630615234375,
+          "modes": 4,
+          "n_modes": 8,
+          "step": 750
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.589488506317139,
+          "hq": 0.998291015625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 800
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.563024997711182,
+          "hq": 0.99267578125,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 850
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.537944793701172,
+          "hq": 0.998779296875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 900
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.591923236846924,
+          "hq": 0.99853515625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 950
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.5688252449035645,
+          "hq": 0.998291015625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1000
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.5365681648254395,
+          "hq": 0.997314453125,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1050
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.586728572845459,
+          "hq": 0.997802734375,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1100
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.584213733673096,
+          "hq": 0.997802734375,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1150
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.5106520652771,
+          "hq": 0.998779296875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempt": "6d10bbf90f1b4233a73034391599ecdb",
+      "request": "1ecb2cad5a5080af7160d599",
+      "candidate": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "status": "FAIL",
+      "metrics": {
+        "cover": 0.0,
+        "effective_modes": 0.0,
+        "hq": 0.0,
+        "modes": 0,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "seconds": 21.671807713995804,
+      "phase_timing": {
+        "coverage": "partial_adapter",
+        "measured_seconds": 11.80964112203219,
+        "method": "exclusive_synchronized_wall_time",
+        "phases": {
+          "evaluation": {
+            "calls": 24,
+            "seconds": 0.010634818027028814
+          },
+          "sampling": {
+            "calls": 24,
+            "seconds": 0.008390385992242955
+          },
+          "training_updates": {
+            "calls": 1200,
+            "seconds": 11.790615918012918
+          }
+        },
+        "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+      },
+      "exact_frozen_grade_reproduced": true,
+      "diagnostic_registration_verified": true,
+      "durable_raw_science_hashes_verified": true,
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 237,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "critic_guard": {
+          "applied": 4,
+          "calls": 1200,
+          "eligible": 1000,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 1200,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "optimizer_updates": {
+        "discriminator": 1200,
+        "generator": 1200,
+        "prior": 1200
+      },
+      "rng_binding_count": 14,
+      "rng_audits": 24,
+      "recorded_rng_deviations": 0,
+      "observations": [
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 50
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 100
+        },
+        {
+          "cover": 0.125,
+          "effective_modes": 1.0,
+          "hq": 0.082763671875,
+          "modes": 1,
+          "n_modes": 8,
+          "step": 150
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 200
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 250
+        },
+        {
+          "cover": 0.125,
+          "effective_modes": 1.0,
+          "hq": 0.074951171875,
+          "modes": 1,
+          "n_modes": 8,
+          "step": 300
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 350
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 400
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 450
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 500
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 550
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 600
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 650
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 700
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 750
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 800
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 850
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 900
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 950
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 1000
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 1050
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 1100
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 1150
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempt": "eac540ccfe564a5ab396abdd545ab013",
+      "request": "3bd0097419b99a5836ca77e6",
+      "candidate": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "status": "FAIL",
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.522450923919678,
+        "hq": 0.992919921875,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "seconds": 17.569934434010065,
+      "phase_timing": {
+        "coverage": "partial_adapter",
+        "measured_seconds": 11.854175705986563,
+        "method": "exclusive_synchronized_wall_time",
+        "phases": {
+          "evaluation": {
+            "calls": 24,
+            "seconds": 0.012274752953089774
+          },
+          "sampling": {
+            "calls": 24,
+            "seconds": 0.008578581997426227
+          },
+          "training_updates": {
+            "calls": 1200,
+            "seconds": 11.833322371036047
+          }
+        },
+        "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+      },
+      "exact_frozen_grade_reproduced": true,
+      "diagnostic_registration_verified": true,
+      "durable_raw_science_hashes_verified": true,
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 237,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "critic_guard": {
+          "applied": 0,
+          "calls": 1200,
+          "eligible": 1000,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "clipped_tensors": 1,
+              "initial_adam_step": 200,
+              "optimizer_updates": 1
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 1200,
+          "calls": 1200,
+          "eligible": 1200,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "optimizer_updates": {
+        "discriminator": 1200,
+        "generator": 1200,
+        "prior": 1200
+      },
+      "rng_binding_count": 14,
+      "rng_audits": 24,
+      "recorded_rng_deviations": 0,
+      "observations": [
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 50
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 100
+        },
+        {
+          "cover": 0.0,
+          "effective_modes": 0.0,
+          "hq": 0.0,
+          "modes": 0,
+          "n_modes": 8,
+          "step": 150
+        },
+        {
+          "cover": 0.25,
+          "effective_modes": 1.1214979887008667,
+          "hq": 0.070068359375,
+          "modes": 2,
+          "n_modes": 8,
+          "step": 200
+        },
+        {
+          "cover": 0.25,
+          "effective_modes": 1.8189685344696045,
+          "hq": 0.001708984375,
+          "modes": 2,
+          "n_modes": 8,
+          "step": 250
+        },
+        {
+          "cover": 0.125,
+          "effective_modes": 1.0,
+          "hq": 0.00146484375,
+          "modes": 1,
+          "n_modes": 8,
+          "step": 300
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 2.938758373260498,
+          "hq": 0.459716796875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 350
+        },
+        {
+          "cover": 0.375,
+          "effective_modes": 2.034503221511841,
+          "hq": 0.16552734375,
+          "modes": 3,
+          "n_modes": 8,
+          "step": 400
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 3.7850704193115234,
+          "hq": 0.76806640625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 450
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.325240612030029,
+          "hq": 0.629150390625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 500
+        },
+        {
+          "cover": 0.5,
+          "effective_modes": 3.813096046447754,
+          "hq": 0.54345703125,
+          "modes": 4,
+          "n_modes": 8,
+          "step": 550
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.575989246368408,
+          "hq": 0.996337890625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 600
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.567821502685547,
+          "hq": 0.997802734375,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 650
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.632997035980225,
+          "hq": 0.918212890625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 700
+        },
+        {
+          "cover": 0.5,
+          "effective_modes": 2.7757160663604736,
+          "hq": 0.630615234375,
+          "modes": 4,
+          "n_modes": 8,
+          "step": 750
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.589488506317139,
+          "hq": 0.998291015625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 800
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.563024997711182,
+          "hq": 0.99267578125,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 850
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.537944793701172,
+          "hq": 0.998779296875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 900
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.591923236846924,
+          "hq": 0.99853515625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 950
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.5688252449035645,
+          "hq": 0.998291015625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1000
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.5387678146362305,
+          "hq": 0.9921875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1050
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.587690353393555,
+          "hq": 0.996337890625,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1100
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.586546421051025,
+          "hq": 0.9970703125,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1150
+        },
+        {
+          "cover": 0.625,
+          "effective_modes": 4.522450923919678,
+          "hq": 0.992919921875,
+          "modes": 5,
+          "n_modes": 8,
+          "step": 1200
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Transfer receipts record initializer methods and named parameter seeds, but not initial tensor hashes or full initial tensors.",
+    "No model/checkpoint or final RNG stream states are saved for these transfer cells, so exact final stream-state equality cannot be independently checked. RNG evidence consists of identical 14-binding manifests and 24 recorded evaluation-isolation audits per receipt."
+  ],
+  "queue": {
+    "only_selected_mode_hold_jobs_executed": true,
+    "new_attempts": 2,
+    "retries": 0,
+    "serial_gpu0_verified": true,
+    "process_witnesses": [
+      {
+        "attempt": "6d10bbf90f1b4233a73034391599ecdb",
+        "worker_process_identity": "447298:12181101",
+        "worker_started_at": 1790745277.6792643,
+        "finished_at": "2026-09-30T05:14:59.589+00:00",
+        "finished_epoch": 1790745299.589,
+        "last_child_process_identity": "447359:12183052",
+        "worker_and_last_child_exited": true,
+        "device": "0"
+      },
+      {
+        "attempt": "eac540ccfe564a5ab396abdd545ab013",
+        "worker_process_identity": "447553:12184526",
+        "worker_started_at": 1790745311.91148,
+        "finished_at": "2026-09-30T05:15:29.732+00:00",
+        "finished_epoch": 1790745329.732,
+        "last_child_process_identity": "447630:12186068",
+        "worker_and_last_child_exited": true,
+        "device": "0"
+      }
+    ],
+    "cost_seconds": 39.24174214800587,
+    "reserved_seconds": 0,
+    "submissions": {
+      "1ecb2cad5a5080af7160d599": {
+        "status": "completed",
+        "lifecycle": "awaiting_readout"
+      },
+      "3bd0097419b99a5836ca77e6": {
+        "status": "completed",
+        "lifecycle": "awaiting_readout"
+      }
+    },
+    "candidate_disposition": "left open pending root next-batch decision; no lifecycle action"
+  },
+  "interpretation": "Both controls fail the cheapest smoke predicate. No-penalty ends with zero covered modes/HQ; anchor-off remains at five modes. Neither supplies a positive reference, and downstream controls remain unmeasured; no qualification, calibration-adoption, population or general speed conclusion."
+}

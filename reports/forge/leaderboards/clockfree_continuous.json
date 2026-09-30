@@ -225,6 +225,22 @@
       "source": "reports/forge/attempts/680dcd337be343f69a1922cd3e89750a/result.json"
     },
     {
+      "attempt_id": "6d10bbf90f1b4233a73034391599ecdb",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 21.671807713995804
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/result.json"
+    },
+    {
       "attempt_id": "6e2b5fdf4c8e4ddaba57316096f777a2",
       "candidate_id": "k3p",
       "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
@@ -559,6 +575,22 @@
       },
       "reason": "Registered calibration diagnostics cannot qualify a candidate.",
       "source": "reports/forge/attempts/e65951a61a764989b7b416e418130061/result.json"
+    },
+    {
+      "attempt_id": "eac540ccfe564a5ab396abdd545ab013",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.569934434010065
+      },
+      "reason": "Registered calibration diagnostics cannot qualify a candidate.",
+      "source": "reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/result.json"
     },
     {
       "attempt_id": "f04fd435083a46b68ff8bf278a8eb26d",
@@ -1172,6 +1204,207 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "unused_token_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "6d10bbf90f1b4233a73034391599ecdb"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-no-critic-penalty",
+        "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-control-mode-v1",
+        "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51"
+      },
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "cohort": "28bdfdab37175aed7b8773bd1093c69fe9b3715d9b59f8e1a9b97e6d923605b3",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 21.671807713995804
+      },
+      "counts": {
+        "FAIL": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "6d10bbf90f1b4233a73034391599ecdb"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "1ecb2cad5a5080af7160d599",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "6d10bbf90f1b4233a73034391599ecdb"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "mode_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-control-mode-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "a00ed7b6f93d5423ba4597a9868dfdd24e5978f1",
+        "path": "reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 12.28991258899623,
+            "adapter_seconds": 14.602227273993776,
+            "charged_task": "mode_hold",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 21.671807713995804,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.80964112203219,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.010634818027028814
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008390385992242955
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 11.790615918012918
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 16.442378927007667,
+            "wall_seconds": 21.671807713995804
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.0,
+            "effective_modes": 0.0,
+            "hq": 0.0,
+            "modes": 0,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
         }
       ]
     },
@@ -3400,6 +3633,207 @@
     },
     {
       "attempt_ids": [
+        "eac540ccfe564a5ab396abdd545ab013"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-onboarding-anchor-ablation",
+        "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-control-mode-v1",
+        "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51"
+      },
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "cohort": "914300a9a3fb3fa738b3084d03787e02900091e371425bfb5c269e8c299ba550",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.569934434010065
+      },
+      "counts": {
+        "FAIL": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "eac540ccfe564a5ab396abdd545ab013"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "3bd0097419b99a5836ca77e6",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "eac540ccfe564a5ab396abdd545ab013"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "mode_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-control-mode-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "a00ed7b6f93d5423ba4597a9868dfdd24e5978f1",
+        "path": "reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 12.33953959000064,
+            "adapter_seconds": 12.566157444001874,
+            "charged_task": "mode_hold",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 17.569934434010065,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.854175705986563,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.012274752953089774
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008578581997426227
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 11.833322371036047
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 14.385699954000302,
+            "wall_seconds": 17.569934434010065
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.625,
+            "effective_modes": 4.522450923919678,
+            "hq": 0.992919921875,
+            "modes": 5,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
         "270c483fe3b94932b7f7edcecd89c872",
         "6e2b5fdf4c8e4ddaba57316096f777a2",
         "beb49d1044cc48c1882fd958055a1522"
@@ -5184,7 +5618,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "1ecb2cad5a5080af7160d599",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -6813,7 +7254,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "3bd0097419b99a5836ca77e6",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -40785,7 +41233,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "1ecb2cad5a5080af7160d599",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -42414,7 +42869,14 @@
         "view_revision": 2
       },
       "qualified_tier": 0,
-      "queue_submissions": [],
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "3bd0097419b99a5836ca77e6",
+          "status": "concluded"
+        }
+      ],
       "readout_covers_attempt_ids": [],
       "retry_history": [],
       "runtime_cohort": {
@@ -48302,6 +48764,207 @@
     },
     {
       "attempt_ids": [
+        "6d10bbf90f1b4233a73034391599ecdb"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-no-critic-penalty",
+        "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-control-mode-v1",
+        "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51"
+      },
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "cohort": "28bdfdab37175aed7b8773bd1093c69fe9b3715d9b59f8e1a9b97e6d923605b3",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 21.671807713995804
+      },
+      "counts": {
+        "FAIL": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "6d10bbf90f1b4233a73034391599ecdb"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "1ecb2cad5a5080af7160d599",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "6d10bbf90f1b4233a73034391599ecdb"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "mode_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-control-mode-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "a00ed7b6f93d5423ba4597a9868dfdd24e5978f1",
+        "path": "reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 12.28991258899623,
+            "adapter_seconds": 14.602227273993776,
+            "charged_task": "mode_hold",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 21.671807713995804,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.80964112203219,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.010634818027028814
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008390385992242955
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 11.790615918012918
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 16.442378927007667,
+            "wall_seconds": 21.671807713995804
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.0,
+            "effective_modes": 0.0,
+            "hq": 0.0,
+            "modes": 0,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
         "680dcd337be343f69a1922cd3e89750a",
         "a1de5d14bd8b4640b95a826209ae3085",
         "dca8c7aa0eca484c9270d07125f7cb0b"
@@ -50520,6 +51183,207 @@
           "raw_status": "completed",
           "reason": "recomputed complete live curve and terminal suffix",
           "task_id": "two_pole"
+        }
+      ]
+    },
+    {
+      "attempt_ids": [
+        "eac540ccfe564a5ab396abdd545ab013"
+      ],
+      "calibration_lane": {
+        "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+        "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+        "failure_policy": "continue_registered_diagnostics",
+        "lineage_id": "forge-onboarding-anchor-ablation",
+        "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+        "qualification_reuse": false,
+        "registration_id": "host-profile-control-mode-v1",
+        "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51"
+      },
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "cohort": "914300a9a3fb3fa738b3084d03787e02900091e371425bfb5c269e8c299ba550",
+      "cost": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "measured_tasks": 1,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 17.569934434010065
+      },
+      "counts": {
+        "FAIL": 1
+      },
+      "display_metadata": {
+        "certification_scope": "Durable result/source/runtime identity only; scientific verdicts and full qualification stay unchanged.",
+        "evidence_quality": [
+          "certified_diagnostic"
+        ],
+        "families": [
+          "behavioral"
+        ],
+        "historical_verification": null,
+        "invalid_attempt_ids": [],
+        "missing_attempt_ids": [],
+        "schema_version": 1,
+        "source_family": "unknown",
+        "source_family_basis": "source_path_classification",
+        "subfamilies": [
+          "existing_behavior"
+        ],
+        "task_families": {
+          "mode_hold": {
+            "adapter": "transfer_behavior",
+            "basis": "recorded_request",
+            "family": "behavioral",
+            "host": "mode_hold",
+            "protocol_equivalence_asserted": false,
+            "subfamily": "existing_behavior"
+          }
+        },
+        "unmeasured_task_ids": [],
+        "valid_attempt_ids": [
+          "eac540ccfe564a5ab396abdd545ab013"
+        ]
+      },
+      "evidence_scope": "calibration_diagnostic",
+      "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+      "lifecycle": "concluded",
+      "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification.",
+      "pending_readout": false,
+      "qualification_reuse": false,
+      "qualified_tier": null,
+      "queue_submissions": [
+        {
+          "lifecycle": "concluded",
+          "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+          "request_id": "3bd0097419b99a5836ca77e6",
+          "status": "concluded"
+        }
+      ],
+      "readout_covers_attempt_ids": [
+        "eac540ccfe564a5ab396abdd545ab013"
+      ],
+      "recorded_view": {
+        "assignments": [
+          {
+            "importance": "diagnostic",
+            "order": 0,
+            "qualification_tier": 1,
+            "task": "mode_hold"
+          }
+        ],
+        "calibration": {
+          "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+          "status": "provisional"
+        },
+        "eligibility": {},
+        "evidence_scope": "calibration_diagnostic",
+        "goal": "host_profile_transfer",
+        "id": "calibration-host-profile-control-mode-v1",
+        "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+        "ranking": {
+          "compare_compatible_cohorts": true,
+          "cost_separate": true,
+          "policy": "qualified_tier_only_with_raw_metrics"
+        },
+        "revision": 4,
+        "schema_version": 1
+      },
+      "retry_history": [],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source": {
+        "digest": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+        "origin_commit": "a00ed7b6f93d5423ba4597a9868dfdd24e5978f1",
+        "path": "reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/request.json"
+      },
+      "status": "DIAGNOSTIC",
+      "task_results": [
+        {
+          "cost": {
+            "adapter_loop_seconds": 12.33953959000064,
+            "adapter_seconds": 12.566157444001874,
+            "charged_task": "mode_hold",
+            "completed_steps": 1200,
+            "device": "0",
+            "execution_seconds": 17.569934434010065,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1200,
+              "generator": 1200,
+              "prior": 1200
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 11.854175705986563,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.012274752953089774
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008578581997426227
+                },
+                "training_updates": {
+                  "calls": 1200,
+                  "seconds": 11.833322371036047
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 14.385699954000302,
+            "wall_seconds": 17.569934434010065
+          },
+          "gate_status": "FAIL",
+          "metrics": {
+            "cover": 0.625,
+            "effective_modes": 4.522450923919678,
+            "hq": 0.992919921875,
+            "modes": 5,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "mode_hold"
         }
       ]
     },

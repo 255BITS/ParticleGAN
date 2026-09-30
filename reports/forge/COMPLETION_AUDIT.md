@@ -10,7 +10,11 @@ their artifact hashes were independently verified. No demonstrated initial-scope
 software gap remains in that review.
 
 The overall accepted plan remains incomplete: scientific calibration lacks a
-compatible full-positive reference and complete pairing/cost evidence. Later
+compatible full-positive reference and complete pairing/cost evidence. The
+[completed two-control screen](CONTROL_MODE_READOUT.md) establishes that all
+three current-profile lineages fail smoke; that exact profile cannot meet the
+required positive count and zero false rejections together. A new justified
+profile is needed, rather than more cells solely to approve this one. Later
 dt075, EMA and sensitivity claims still have explicit source gaps. Default
 adoption remains conditional on accepted calibration. Retained uncovered and
 historical consumers have explicit dispositions; no covered local pending queue

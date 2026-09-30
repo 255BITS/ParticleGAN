@@ -968,6 +968,10 @@ building Forge itself stays in this one feature branch/PR.
   qualification. Publish false accepts/rejects, blockers, cost and continuation
   findings. Meet frozen adoption criteria or revise the profile and repeat the
   necessary calibration; do not carry cloud passes over to a MoG conversion.
+  The [current control readout](../reports/forge/CONTROL_MODE_READOUT.md) records
+  all three current-profile lineages failing smoke. That exact profile cannot
+  satisfy its positive-reference and zero-false-rejection criteria together;
+  a new justified profile is required before further adoption calibration.
 - [ ] **Pilot and cut over.** Run a bounded candidate/reference campaign through
   multi-GPU draining; test cancellation, restart, retiering and memory updates.
   The [physical v3 pilot](../reports/forge/PHYSICAL_GPU_PILOT_READOUT.md) completed

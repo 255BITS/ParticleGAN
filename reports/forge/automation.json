@@ -1,23 +1,23 @@
 {
   "attempt_outcomes": {
     "cancelled": 1,
-    "completed": 36
+    "completed": 38
   },
   "component_timing": {
-    "measured_attempts": 13,
+    "measured_attempts": 15,
     "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
     "seconds": {
-      "evaluation": 11.948225306769018,
-      "sampling": 0.24271417112322524,
-      "training_updates": 240.22106886490656
+      "evaluation": 11.971134877749137,
+      "sampling": 0.2596831391128944,
+      "training_updates": 263.8450071539555
     },
     "unmeasured_attempts": 24
   },
   "concurrency": {
-    "mean_active_workers": 0.005293882331183679,
-    "measured_attempts": 35,
+    "mean_active_workers": 0.005595946665755955,
+    "measured_attempts": 37,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": 90549.24213004112,
+    "observation_window_seconds": 92673.99578523636,
     "peak_distinct_gpu_devices": 2,
     "peak_workers": 2,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
@@ -39,8 +39,8 @@
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 37,
-    "fraction": 0.02702702702702703,
+    "denominator": 39,
+    "fraction": 0.02564102564102564,
     "numerator": 1
   },
   "execution_jobs_avoided": 8,
@@ -49,8 +49,8 @@
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 37,
-    "fraction": 0.02702702702702703,
+    "denominator": 39,
+    "fraction": 0.02564102564102564,
     "numerator": 1
   },
   "limits": [
@@ -61,23 +61,23 @@
   "memory": {
     "cuda_peak_allocated_bytes": {
       "maximum_bytes": 125372416,
-      "measured_attempts": 10
+      "measured_attempts": 12
     },
     "cuda_peak_reserved_bytes": {
       "maximum_bytes": 192937984,
-      "measured_attempts": 10
+      "measured_attempts": 12
     },
     "maximum_reaped_child_peak_rss_bytes": {
       "maximum_bytes": 2163372032,
-      "measured_attempts": 35
+      "measured_attempts": 37
     },
     "process_peak_rss_bytes": {
       "maximum_bytes": 2163372032,
-      "measured_attempts": 34
+      "measured_attempts": 36
     },
     "supervisor_peak_rss_bytes": {
-      "maximum_bytes": 699256832,
-      "measured_attempts": 35
+      "maximum_bytes": 727412736,
+      "measured_attempts": 37
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -187,14 +187,14 @@
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 37,
-    "known_wall_seconds": 490.5874496620236,
+    "attempts": 39,
+    "known_wall_seconds": 529.8291918100294,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 490.5874496620236
+    "wall_seconds": 529.8291918100294
   },
   "task_gate_counts": {
-    "FAIL": 17,
+    "FAIL": 19,
     "INCOMPLETE": 1,
     "PASS": 19
   },

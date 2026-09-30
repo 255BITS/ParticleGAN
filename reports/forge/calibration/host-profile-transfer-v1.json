@@ -527,7 +527,7 @@
         "reference_negatives": 1,
         "reference_positives": 0,
         "reference_unknown_lineages": 2,
-        "smoke_unknown_lineages": 2,
+        "smoke_unknown_lineages": 0,
         "true_accept": 0,
         "true_reject": 1,
         "unknown": 2
@@ -722,7 +722,17 @@
       "evidence_scope": "current",
       "id": "forge-onboarding-anchor-ablation",
       "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
-      "inputs": [],
+      "inputs": [
+        {
+          "attempt_id": "eac540ccfe564a5ab396abdd545ab013",
+          "files": {
+            "evidence.json": "d76f77972effff939ad6c2362738ae6ce259ed7e2639a64860cd1b26fcdb560f",
+            "request.json": "ecb54aef21fd460b4b9fe6e9bc9afe1ea2001b277ac001da265c294539fc3127",
+            "result.json": "3444fb5f634fa99b228e874928b9d6593ec2b840916496992a20077b14d8f94b"
+          },
+          "result_sha256": "23523fe473e2814b961a5a93d27afff03c1f925f2ef8d18fd087b18f2b73c490"
+        }
+      ],
       "reference": {
         "blocked_tasks": [],
         "cost": {
@@ -796,10 +806,9 @@
         "blocked_tasks": [],
         "cost": {
           "flops": null,
-          "known_task_count": 0,
-          "known_wall_seconds": 0,
+          "known_task_count": 1,
+          "known_wall_seconds": 17.569934434010065,
           "missing_tasks": [
-            "mode_hold",
             "img_bars4_residual16",
             "img_intensity2_residual16"
           ],
@@ -807,16 +816,17 @@
           "required_task_count": 3,
           "wall_seconds": null
         },
-        "decision": "UNKNOWN",
+        "decision": "FAIL",
         "error_or_incomplete_tasks": [],
-        "failed_tasks": [],
+        "failed_tasks": [
+          "mode_hold"
+        ],
         "task_statuses": {
           "img_bars4_residual16": "NOT_RUN",
           "img_intensity2_residual16": "NOT_RUN",
-          "mode_hold": "NOT_RUN"
+          "mode_hold": "FAIL"
         },
         "unknown_tasks": [
-          "mode_hold",
           "img_bars4_residual16",
           "img_intensity2_residual16"
         ]
@@ -832,7 +842,17 @@
       "evidence_scope": "current",
       "id": "forge-no-critic-penalty",
       "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
-      "inputs": [],
+      "inputs": [
+        {
+          "attempt_id": "6d10bbf90f1b4233a73034391599ecdb",
+          "files": {
+            "evidence.json": "7af1596a11c82bd6c2daac2edcfd90d5b86fc1f907641c05b4da603030847cab",
+            "request.json": "9710f95aab6f90f4b88ece817bd4b84025f0b95ac379273f303a8773d2ea8764",
+            "result.json": "c8e11201f96a7b2f5086499ac8f70ba2d5e00d6c20c9c1c54df5af4589c86ae0"
+          },
+          "result_sha256": "88d482792a15d36077307c64359c402054c95205da651ba45edb65fb546b41e1"
+        }
+      ],
       "reference": {
         "blocked_tasks": [],
         "cost": {
@@ -906,10 +926,9 @@
         "blocked_tasks": [],
         "cost": {
           "flops": null,
-          "known_task_count": 0,
-          "known_wall_seconds": 0,
+          "known_task_count": 1,
+          "known_wall_seconds": 21.671807713995804,
           "missing_tasks": [
-            "mode_hold",
             "img_bars4_residual16",
             "img_intensity2_residual16"
           ],
@@ -917,16 +936,17 @@
           "required_task_count": 3,
           "wall_seconds": null
         },
-        "decision": "UNKNOWN",
+        "decision": "FAIL",
         "error_or_incomplete_tasks": [],
-        "failed_tasks": [],
+        "failed_tasks": [
+          "mode_hold"
+        ],
         "task_statuses": {
           "img_bars4_residual16": "NOT_RUN",
           "img_intensity2_residual16": "NOT_RUN",
-          "mode_hold": "NOT_RUN"
+          "mode_hold": "FAIL"
         },
         "unknown_tasks": [
-          "mode_hold",
           "img_bars4_residual16",
           "img_intensity2_residual16"
         ]

@@ -1,5 +1,12 @@
 # Host-profile transfer: one correctly rejected negative
 
+This readout describes the five completed K3P cells. The later
+[existing-control readout](CONTROL_MODE_READOUT.md) adds two mode failures,
+bringing the profile to 7/57 measured cells and 50 unknown. All three declared
+lineages now fail smoke, making this exact profile unable to meet both the
+required positive-reference count and zero false rejections. Stop filling it
+solely for adoption; preserve all original baseline measurements below.
+
 The [registered three-cell batch](HOST_PROFILE_TRANSFER_STUDY.md) completed for
 **127.210083646 paid seconds**, with no execution errors or remaining reservations.
 The explicit image and vector profiles passed. Native grid coverage passed, but
@@ -58,7 +65,7 @@ source and candidate match the first batch. Each recorded all intended updates
 and 24 checks. Intensity first/stably passed at 425 and was confirmed at 525.
 The earlier-source intensity pass remains separate evidence.
 
-The [57-cell matrix](calibration/host-profile-transfer-v1.md) has five measured
+At completion of this baseline, the 57-cell matrix had five measured
 cells and **52 unknown**, with no receipt issues. K3P's smoke FAIL agrees with
 its independent reference FAIL: **one true rejection, zero false accepts out
 of one paired negative**. There are no paired positives, so false rejection

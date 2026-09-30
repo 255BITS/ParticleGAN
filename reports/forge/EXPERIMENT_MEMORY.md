@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 191. Inventory coverage: complete. Unresolved import items: 7.
+Records: 193. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -2964,6 +2964,22 @@ The ordinary fresh-checkout two_pole attempt failed its slope bound (grad_med1.2
 
 [Evidence](../../reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/result.json) · [Record](records/readout-4e04059eb9f631a2e406447e.json)
 
+### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
+
+**Scope:** calibration_diagnostic; scientific; revision `d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f`.
+
+Removing the public critic EMA-anchor term may weaken short-horizon adversarial movement; the fixed CPU smoke gate should reject a harmful ablation before larger tests.
+
+**Observed:** {'FAIL': 1}; wall seconds 17.57; mechanism `structural`.
+
+mode_hold: modes=5, hq=0.99292
+
+Registered mode-hold diagnostic FAIL: 5/8 modes, HQ .992919921875, zero passing observations in 24 checks; 1,200 complete updates and 17.569934434 paid seconds. No infrastructure error. Independent reference outcomes remain unknown.
+
+**Next:** Conclude this mode-only diagnostic. Preserve the negative in memory; do not fill this exact calibration profile solely for adoption, since all three smoke predicates fail and the unchanged criteria require a positive with no false rejection. A new justified profile or independently compatible positive reference is needed; no general downstream or universal algorithm claim.
+
+[Evidence](../../reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/result.json) · [Record](records/readout-5470a57cf1a74abc896c8a55.json)
+
 ### k3p-a2-off-native-diagnostic · readout-5830d399b6741ce7b3a2b992
 
 **Scope:** calibration_diagnostic; scientific; revision `8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581`.
@@ -2979,6 +2995,22 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 **Next:** Keep A2 in the reference and preserve this negative in memory. Do not extend this failed parent, rerun its control or launch a seed/width sweep. Further calibration needs a supported new hypothesis or compatible saved positive evidence; no qualification or default adoption.
 
 [Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
+
+### forge-no-critic-penalty · readout-75d5cdc5a88167d59ceff1b2
+
+**Scope:** calibration_diagnostic; scientific; revision `5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125`.
+
+Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.
+
+**Observed:** {'FAIL': 1}; wall seconds 21.672; mechanism `structural`.
+
+mode_hold: modes=0, hq=0
+
+Registered mode-hold diagnostic FAIL: 0/8 modes, HQ 0, zero passing observations in 24 checks; 1,200 complete updates and 21.671807714 paid seconds. No infrastructure error. Independent reference outcomes remain unknown.
+
+**Next:** Conclude this mode-only diagnostic. Preserve the negative in memory; do not fill this exact calibration profile solely for adoption, since all three smoke predicates fail and the unchanged criteria require a positive with no false rejection. A new justified profile or independently compatible positive reference is needed; no general downstream or universal algorithm claim.
+
+[Evidence](../../reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/result.json) · [Record](records/readout-75d5cdc5a88167d59ceff1b2.json)
 
 ### k3p · readout-7650981f9a48a164aebbd631
 
@@ -3088,4 +3120,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `676ddde8b01903e4fbeabfe5de70dc18104940f5e67ef0f9380442d994cbc916`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `ae118022adbb2524c35dbabcf7028518594f0d0684d276f84537cd4393e87383`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
