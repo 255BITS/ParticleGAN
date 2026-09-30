@@ -114,6 +114,21 @@ def test_initial_rng_manifest_declares_all_five_families_without_consuming():
     assert context.streams.audit() == before
 
 
+def test_forge_rejects_an_aliased_named_training_stream(monkeypatch):
+    context = make_context()
+    original = context.streams.generator
+
+    def aliased(family, *, component="default", purpose="default", **kwargs):
+        if (family, component, purpose) == ("noise", "penalty", "training"):
+            return original("prior", component="latent", purpose="indices", **kwargs)
+        return original(family, component=component, purpose=purpose, **kwargs)
+
+    monkeypatch.setattr(context.streams, "generator", aliased)
+    with pytest.raises(CapabilityError, match="distinct named trainer streams"):
+        make_trainer(context)
+    assert context._trainer is None
+
+
 def test_enumeration_preserves_mixture_noise_and_cloud_zero_noise_rng():
     cloud, trainer = make_trainer(make_context(
         recipe_overrides={"output_noise_std": 0},

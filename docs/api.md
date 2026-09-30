@@ -314,7 +314,14 @@ The trainer requires configured A2 by default for a learnable prior. Its
 Optional generators isolate component indices (`latent_generator`), MoG draws
 (`prior_noise_generator`), critic input noise (`input_noise_generator`), output
 noise (`noise_generator`), evaluation (`eval_generator`), and stochastic layers
-such as dropout (`model_generator`). Explicit bindings must be distinct. The old
+such as dropout (`model_generator`). Direct-draw training streams may share a
+generator when a legacy host requires one draw sequence. Evaluation and model
+streams must each remain separate from the other streams. When `model_generator`
+is supplied, no training stream may use the process-default generator, because
+its state is temporarily replaced for stochastic layers. Forge always supplies
+distinct named bindings. Recreate the same stream bindings when restoring a
+checkpoint, since legacy checkpoints do not encode alias topology. Conflicting
+saved states for a shared stream are rejected before restoration. The old
 particle-cloud defaults keep their original streams and schema-3 checkpoints;
 MoG and explicitly supplied additional streams are checkpointed too. Data RNG
 remains caller-owned. Evaluation cannot borrow a training stream.

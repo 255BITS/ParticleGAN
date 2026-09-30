@@ -60,8 +60,8 @@ class GANTrainer:
     ``step()`` applies A2 latent damping). The trainer allocates the EMA
     critic ``ema_D`` (a frozen deep copy). Noise comes from a trainer stream.
     Networks train from the weights they arrive with; initialize them first
-    (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample`` includes
-    the output noise.
+    (e.g. ``particlegan.init.deterministic_orthogonal_``). ``sample`` omits
+    training output noise unless explicitly requested.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -155,8 +155,17 @@ class GANTrainer:
         training_streams = [getattr(self, name) for name in self._STREAMS if name != "eval_generator"]
         if self.eval_generator in training_streams:
             raise ValueError("evaluation stream must be separate from training")
-        if len({id(stream) for stream in training_streams}) != len(training_streams):
-            raise ValueError("explicit training streams must be distinct")
+        # Legacy hosts intentionally share direct-draw training streams. Keep
+        # their draw order; Forge enforces distinct named bindings separately.
+        # The model stream is copied through global RNG in step(), so sharing
+        # it with a directly consumed stream would overwrite that stream's draws.
+        # A direct global-generator binding would also be rewound by fork_rng.
+        global_stream = (torch.default_generator if self.device.type == "cpu"
+                         else torch.cuda.default_generators[self.device.index])
+        if self.model_generator is not None and (self.model_generator is global_stream or any(
+                getattr(self, name) in (self.model_generator, global_stream)
+                for name in self._STREAMS if name not in ("eval_generator", "model_generator"))):
+            raise ValueError("model stream must be separate from other training streams and global draws")
         self._noisy_D = InputNoise(self.D, 0.0, self.input_noise_generator)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
         self.completed_steps = 0
@@ -380,8 +389,9 @@ class GANTrainer:
     def load_state_dict(self, state):
         """Restore a compatible checkpoint, including global PyTorch RNG state.
 
-        Recreate the same parameter freezing before loading. Validation of both
-        optimizers (which carry the K3P state) and all RNG states precedes any
+        Recreate the same parameter freezing and stream bindings before loading.
+        Legacy checkpoints do not encode training-stream alias topology.
+        Validation of both optimizers (which carry the K3P state) and all RNG states precedes any
         mutation of the live trainer. Schema-2 checkpoints (separate K3P state)
         are upgraded; schema-1 checkpoints (an older formulation) are rejected.
         """
@@ -441,8 +451,17 @@ class GANTrainer:
         except (KeyError, TypeError, ValueError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid checkpoint optimizer state") from error
         try:
-            for value in state["streams"].values():
-                torch.Generator(device=self.device).set_state(value.cpu())
+            global_stream = (torch.default_generator if self.device.type == "cpu"
+                             else torch.cuda.default_generators[self.device.index])
+            global_state = state["cpu_rng"] if self.device.type == "cpu" else state["cuda_rng"]
+            shared_states = {id(global_stream): global_state.cpu()}
+            for name, value in state["streams"].items():
+                value = value.cpu()
+                torch.Generator(device=self.device).set_state(value)
+                stream_id = id(getattr(self, name))
+                if stream_id in shared_states and not torch.equal(shared_states[stream_id], value):
+                    raise ValueError("conflicting checkpoint states for a shared training stream")
+                shared_states[stream_id] = value
             torch.Generator(device="cpu").set_state(state["cpu_rng"].cpu())
             if self.device.type == "cuda":
                 torch.Generator(device=self.device).set_state(state["cuda_rng"].cpu())

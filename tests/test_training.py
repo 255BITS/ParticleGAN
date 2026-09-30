@@ -49,6 +49,70 @@ def test_winning_recipe_is_the_common_default():
     assert isinstance(make_trainer(), GANTrainer)
 
 
+@pytest.mark.parametrize("prior_kind", ["particles", "mog"])
+@pytest.mark.parametrize("global_stream", [False, True])
+def test_shared_training_stream_preserves_sampling_isolation_and_checkpoint_resume(prior_kind, global_stream):
+    def build():
+        torch.manual_seed(51)
+        recipe = get_recipe(num_particles=8, z_dim=2, total_steps=4,
+                            prior_kind=prior_kind, sigma_rel=.025 if prior_kind == "mog" else 0,
+                            standardize=False,
+                            input_noise_std=.02, output_noise_std=.03, output_noise_warmup=0)
+        shared = torch.default_generator if global_stream else torch.Generator().manual_seed(19)
+        options = dict(latent_generator=shared, penalty_generator=shared,
+                       noise_generator=shared, input_noise_generator=shared)
+        if prior_kind == "mog":
+            options["prior_noise_generator"] = shared
+        return GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1), **options)
+
+    trainer = build()
+    real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 8
+    trainer.step(real)
+    before = trainer.latent_generator.get_state().clone()
+    trainer.sample(7, output_noise=True)
+    assert torch.equal(before, trainer.latent_generator.get_state())
+    with pytest.raises(ValueError, match="separate from training"):
+        trainer.sample(7, generator=trainer.penalty_generator)
+    checkpoint = trainer.state_dict()
+    trainer.step(real)
+    expected = trainer.state_dict()
+    restored = build()
+    restored.load_state_dict(checkpoint)
+    assert restored.latent_generator is restored.penalty_generator is restored.noise_generator
+    restored.step(real)
+    assert_checkpoint_equal(expected, restored.state_dict())
+    before = restored.state_dict()
+    bad = deepcopy(before)
+    bad["streams"]["penalty_generator"] = torch.Generator().manual_seed(91).get_state()
+    with pytest.raises(ValueError, match="RNG state"):
+        restored.load_state_dict(bad)
+    assert_checkpoint_equal(before, restored.state_dict())
+    if global_stream:
+        bad = deepcopy(before)
+        for name in bad["streams"]:
+            if getattr(restored, name) is torch.default_generator:
+                bad["streams"][name] = torch.Generator().manual_seed(91).get_state()
+        with pytest.raises(ValueError, match="RNG state"):
+            restored.load_state_dict(bad)
+        assert_checkpoint_equal(before, restored.state_dict())
+
+
+@pytest.mark.parametrize("isolated", ["eval_generator", "model_generator"])
+def test_eval_and_model_streams_cannot_alias_training(isolated):
+    shared = torch.Generator().manual_seed(19)
+    with pytest.raises(ValueError, match="must be separate"):
+        GANTrainer(get_recipe(num_particles=8, z_dim=2), nn.Linear(2, 2), nn.Linear(2, 1),
+                   latent_generator=shared, **{isolated: shared})
+
+
+@pytest.mark.parametrize("global_binding", ["model_generator", "latent_generator", "noise_generator"])
+def test_model_isolation_rejects_process_default_generator_bindings(global_binding):
+    options = {"model_generator": torch.Generator().manual_seed(12), global_binding: torch.default_generator}
+    with pytest.raises(ValueError, match="model stream must be separate"):
+        GANTrainer(get_recipe(num_particles=8, z_dim=2), nn.Linear(2, 2), nn.Linear(2, 1),
+                   **options)
+
+
 def test_step_updates_prior_restores_frozen_parameters_and_detaches_results():
     trainer = make_trainer()
     trainer.D[-1].bias.requires_grad_(False)

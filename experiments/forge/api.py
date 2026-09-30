@@ -296,6 +296,9 @@ class FormulationContext:
             if "max_steps" in options:
                 raise CapabilityError(["execution budget conflicts with trainer extension"])
             options["max_steps"] = max_steps
+        streams = [options[name] for name in TRAINER_STREAM_BINDINGS if name in options]
+        if len({id(stream) for stream in streams}) != len(streams):
+            raise CapabilityError(["Forge requires distinct named trainer streams"])
         self._trainer = GANTrainer(self.recipe, generator, discriminator, prior=prior, **options)
         return self._trainer
 
