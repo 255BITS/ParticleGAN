@@ -1,0 +1,27 @@
+{
+  "verdict": "KEEP",
+  "rank": "Ties #107 stall reach on the AVX2 pin. Does not replace it: the AVX512 cold ring falls to 6, and the shared continuation dropout remains.",
+  "reason": "AVX2 warm 200/200, trajectory pass, cold ring 8, stay 97/120 ending at 8 modes HQ 1.0. The #113 full-step gate would have fired 0 times on that ring; the post-bound shrink fired 192 times. AVX512 cold ring does not hold 8.",
+  "mechanism": "After the stall-reach curvature bound accepts the G step, shrink that accepted displacement when the high-D critic directional derivative is negative.",
+  "purity": "GAN dynamics only. Sharp critic input gradient along the accepted particle step. No coverage, anchor, forward KL, mode quota, Chamfer, or clip ladder.",
+  "host": "neural",
+  "seed": 0,
+  "threads": 1,
+  "torch": "2.14.0+cpu",
+  "primary_build": "ATEN_CPU_CAPABILITY=avx2 and ONEDNN_MAX_CPU_ISA=AVX2",
+  "bounds": {"g_curvature": 0.25, "d_curvature": 3.0, "ramp": "stall", "reach": 0.5, "projection_floor": 0.3},
+  "exclusivity": {
+    "mutually_exclusive": false,
+    "avx2_ring_clipped_exit_updates": 192,
+    "avx2_ring_legacy_full_step_exit_updates": 0,
+    "note": "Negative high-D directional derivative occurs on steps the curvature bound already clipped. PR #113 never looked at those steps."
+  },
+  "gates": {
+    "warm_avx2": {"passing": "200/200", "min_modes": 8, "min_hq": 0.921142578125, "final_modes": 8, "final_hq": 0.98046875, "clipped_exit_updates": 5, "legacy_full_step_exit_updates": 0},
+    "identity_avx2": {"passing": "200/200", "min_modes": 8, "min_hq": 0.989990234375},
+    "cold_trajectory_avx2": {"passed": true, "seconds": 3.6, "projected_updates": 0, "note": "Trajectory critic is not the 2D ring MLP, so the DD shrink stays idle."},
+    "cold_ring_avx2": {"passed": true, "live_modes": 8, "live_hq": 0.98291015625, "seconds": 31.1, "clipped_exit_updates": 192, "exit_shrink_mean": 0.32414886653983044, "legacy_full_step_exit_updates": 0},
+    "stay_avx2": {"passing": "97/120", "min_modes": 1, "min_hq": 0.0039, "final": [2400, 8, 1.0], "suffix": 18, "worst": {"step": 1810, "modes": 1, "hq": 0.069091796875}, "clipped_exit_updates": 281, "legacy_full_step_exit_updates": 0, "seconds": 63.5},
+    "cold_ring_avx512": {"passed": false, "live_modes": 6, "live_hq": 0.44287109375, "seconds": 25.3, "clipped_exit_updates": 107, "touched_8_at_1050_hq": 0.840087890625}
+  }
+}

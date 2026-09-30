@@ -1,0 +1,52 @@
+{"event": "DECLARED", "phase": "stay", "mechanism": "DD-exit shrink of the curvature-bounded stall-reach G step", "seed": 0, "method": "reachstall_ddexit", "g_curvature_bound": 0.25}
+{"event":"DD_EXIT","update":50,"curv_factor":0.0554641,"factor":0.0166392,"mean_dd":-0.00773147,"projected":true,"clipped_exit":true,"width":0.5}
+{"event":"DD_EXIT","update":100,"curv_factor":0.0901351,"factor":0.0901351,"mean_dd":0.0577467,"projected":false,"clipped_exit":false,"width":0.468224}
+{"event":"DD_EXIT","update":150,"curv_factor":0.154577,"factor":0.154577,"mean_dd":0.0167277,"projected":false,"clipped_exit":false,"width":0.358904}
+{"event":"DD_EXIT","update":200,"curv_factor":0.282015,"factor":0.282015,"mean_dd":0.0316574,"projected":false,"clipped_exit":false,"width":0.305702}
+{"event":"DD_EXIT","update":250,"curv_factor":0.276806,"factor":0.276806,"mean_dd":0.389322,"projected":false,"clipped_exit":false,"width":0.340731}
+{"event":"DD_EXIT","update":300,"curv_factor":0.106081,"factor":0.106081,"mean_dd":0.034818,"projected":false,"clipped_exit":false,"width":0.433656}
+{"event":"DD_EXIT","update":350,"curv_factor":0.0958814,"factor":0.0958814,"mean_dd":0.00816027,"projected":false,"clipped_exit":false,"width":0.429762}
+{"event":"DD_EXIT","update":400,"curv_factor":0.225272,"factor":0.225272,"mean_dd":0.0682674,"projected":false,"clipped_exit":false,"width":0.388296}
+{"event":"DD_EXIT","update":450,"curv_factor":0.0976809,"factor":0.0976809,"mean_dd":0.00376708,"projected":false,"clipped_exit":false,"width":0.404123}
+{"event":"DD_EXIT","update":500,"curv_factor":0.0369904,"factor":0.0369904,"mean_dd":0.00105528,"projected":false,"clipped_exit":false,"width":0.45935}
+{"event":"DD_EXIT","update":550,"curv_factor":0.130543,"factor":0.130543,"mean_dd":0.0357663,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":600,"curv_factor":0.145281,"factor":0.0435843,"mean_dd":-0.0041059,"projected":true,"clipped_exit":true,"width":0.5}
+{"event":"DD_EXIT","update":650,"curv_factor":0.131276,"factor":0.131276,"mean_dd":0.0113737,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":700,"curv_factor":0.174452,"factor":0.174452,"mean_dd":0.0682529,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":750,"curv_factor":0.0462791,"factor":0.0462791,"mean_dd":0.002392,"projected":false,"clipped_exit":false,"width":0.420301}
+{"event":"DD_EXIT","update":800,"curv_factor":0.128304,"factor":0.128304,"mean_dd":0.0218324,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":850,"curv_factor":0.103581,"factor":0.103581,"mean_dd":0.0105067,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":900,"curv_factor":0.05494,"factor":0.05494,"mean_dd":6.85743e-06,"projected":false,"clipped_exit":false,"width":0.183948}
+{"event":"DD_EXIT","update":950,"curv_factor":0.0972196,"factor":0.0972196,"mean_dd":0.00215898,"projected":false,"clipped_exit":false,"width":0.205978}
+{"event":"DD_EXIT","update":1000,"curv_factor":0.0442144,"factor":0.0442144,"mean_dd":0.000469367,"projected":false,"clipped_exit":false,"width":0.200011}
+{"event":"DD_EXIT","update":1050,"curv_factor":0.0890299,"factor":0.0890299,"mean_dd":3.80069e-05,"projected":false,"clipped_exit":false,"width":0.179427}
+{"event":"DD_EXIT","update":1100,"curv_factor":0.0461587,"factor":0.0461587,"mean_dd":0.000272543,"projected":false,"clipped_exit":false,"width":0.155054}
+{"event":"DD_EXIT","update":1150,"curv_factor":0.079265,"factor":0.079265,"mean_dd":0.002106,"projected":false,"clipped_exit":false,"width":0.239321}
+{"event":"DD_EXIT","update":1200,"curv_factor":0.0560459,"factor":0.0560459,"mean_dd":0.000960369,"projected":false,"clipped_exit":false,"width":0.15}
+{"event":"DD_EXIT","update":1250,"curv_factor":0.0494047,"factor":0.0494047,"mean_dd":0.00124442,"projected":false,"clipped_exit":false,"width":0.195216}
+{"event":"DD_EXIT","update":1300,"curv_factor":0.0323913,"factor":0.0323913,"mean_dd":0.000975221,"projected":false,"clipped_exit":false,"width":0.227992}
+{"event":"DD_EXIT","update":1350,"curv_factor":0.144141,"factor":0.144141,"mean_dd":0.00141297,"projected":false,"clipped_exit":false,"width":0.15}
+{"event":"DD_EXIT","update":1400,"curv_factor":0.0802559,"factor":0.0802559,"mean_dd":0.00198738,"projected":false,"clipped_exit":false,"width":0.176851}
+{"event":"DD_EXIT","update":1450,"curv_factor":0.0653926,"factor":0.0653926,"mean_dd":0.00177571,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":1500,"curv_factor":0.106859,"factor":0.106859,"mean_dd":0.017024,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":1550,"curv_factor":0.0995783,"factor":0.0995783,"mean_dd":0.021961,"projected":false,"clipped_exit":false,"width":0.172294}
+{"event":"DD_EXIT","update":1600,"curv_factor":0.0489102,"factor":0.0489102,"mean_dd":0.00263434,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":1650,"curv_factor":0.0530403,"factor":0.0530403,"mean_dd":0.00136715,"projected":false,"clipped_exit":false,"width":0.15}
+{"event":"DD_EXIT","update":1700,"curv_factor":0.0493327,"factor":0.0493327,"mean_dd":0.000606439,"projected":false,"clipped_exit":false,"width":0.15}
+{"event":"DD_EXIT","update":1750,"curv_factor":0.0506884,"factor":0.0152065,"mean_dd":-0.000335445,"projected":true,"clipped_exit":true,"width":0.289784}
+{"event":"DD_EXIT","update":1800,"curv_factor":0.102564,"factor":0.102564,"mean_dd":0.0670909,"projected":false,"clipped_exit":false,"width":0.304856}
+{"event":"DD_EXIT","update":1850,"curv_factor":0.22913,"factor":0.22913,"mean_dd":0.307224,"projected":false,"clipped_exit":false,"width":0.330016}
+{"event":"DD_EXIT","update":1900,"curv_factor":0.141328,"factor":0.141328,"mean_dd":0.13823,"projected":false,"clipped_exit":false,"width":0.364536}
+{"event":"DD_EXIT","update":1950,"curv_factor":0.0481187,"factor":0.0481187,"mean_dd":0.00302724,"projected":false,"clipped_exit":false,"width":0.323306}
+{"event":"DD_EXIT","update":2000,"curv_factor":0.154842,"factor":0.154842,"mean_dd":0.0138734,"projected":false,"clipped_exit":false,"width":0.5}
+{"event":"DD_EXIT","update":2050,"curv_factor":0.124491,"factor":0.124491,"mean_dd":0.147602,"projected":false,"clipped_exit":false,"width":0.402295}
+{"event":"DD_EXIT","update":2100,"curv_factor":0.104754,"factor":0.104754,"mean_dd":0.139082,"projected":false,"clipped_exit":false,"width":0.31369}
+{"event":"DD_EXIT","update":2150,"curv_factor":0.0379994,"factor":0.0379994,"mean_dd":0.000254619,"projected":false,"clipped_exit":false,"width":0.175451}
+{"event":"DD_EXIT","update":2200,"curv_factor":0.263878,"factor":0.263878,"mean_dd":0.368686,"projected":false,"clipped_exit":false,"width":0.374295}
+{"event":"DD_EXIT","update":2250,"curv_factor":0.0640346,"factor":0.0477937,"mean_dd":-4.27459e-05,"projected":true,"clipped_exit":true,"width":0.201115}
+{"event":"DD_EXIT","update":2300,"curv_factor":0.0888529,"factor":0.0888529,"mean_dd":0.00121933,"projected":false,"clipped_exit":false,"width":0.267991}
+{"event":"DD_EXIT","update":2350,"curv_factor":0.0683816,"factor":0.0683816,"mean_dd":0.000655215,"projected":false,"clipped_exit":false,"width":0.15}
+{"event":"DD_EXIT","update":2400,"curv_factor":0.0667867,"factor":0.0667867,"mean_dd":0.00151775,"projected":false,"clipped_exit":false,"width":0.5}
+{"event": "STAY", "steps": 2400, "seconds": 63.5, "terminal_1000_1200": [[1000, 8, 1.0], [1050, 8, 0.9592], [1100, 8, 0.9958], [1150, 8, 0.9048], [1200, 8, 0.9829]], "checks": 120, "passing": 97, "min_modes": 1, "min_hq": 0.0039, "failing_steps": [1230, 1780, 1790, 1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870, 1900, 1910, 1920, 1990, 2000, 2010, 2060, 2070, 2110, 2200, 2210, 2220], "final": [2400, 8, 1.0], "dynamics": {"method": "stall_reach_dd_exit_on_bounded_step", "scratch_optimizer_policy": "stall_reach_dd_exit_on_bounded_step", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 2400, "gate_open": 0, "bound_evaluated": 2400, "bound_active": 2400, "d_bound_active": 115, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 4800, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "b_cap_slope": 1.0, "widened_updates": 2155, "max_width": 0.5, "projection": true, "projection_floor": 0.3, "g_curvature_bound": 0.25, "projected_updates": 281, "negative_dd_updates": 281, "clipped_exit_updates": 281, "legacy_full_step_exit_updates": 0, "curv_factor_min": 0.022872351378757073, "curv_factor_mean": 0.10319126674685909, "exit_shrink_min": 0.3, "exit_shrink_mean": 0.3410968796354618, "first_clipped_update": 2, "first_clipped_curv_factor": 0.13968827406941675, "first_clipped_mean_dd": -0.00475113932043314, "purity": "GAN dynamics only: D directional derivative on the curvature-bounded G step"}}
+{"event": "STAY_GATE", "checks": 120, "passing": 97, "min_modes": 1, "min_hq": 0.0039, "final": [2400, 8, 1.0], "projected_updates": 281, "negative_dd_updates": 281, "clipped_exit_updates": 281, "legacy_full_step_exit_updates": 0, "curv_factor_min": 0.022872351378757073, "curv_factor_mean": 0.10319126674685909, "first_clipped_update": 2, "first_clipped_curv_factor": 0.13968827406941675, "first_clipped_mean_dd": -0.00475113932043314, "g_curvature_bound": 0.25, "d_curvature_bound": 3.0, "n_failing": 23}
+{"event": "DONE", "verdict": "KEEP", "reason": "full ring acquired and the continued run ends on it"}
