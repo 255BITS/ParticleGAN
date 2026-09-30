@@ -53,3 +53,5 @@ dist/
 /reports/toy100/**/*.log
 /reports/toy100/**/*.log.gz
 /reports/toy100/**/metrics.jsonl
+/results/misgan/
+/runs/misgan/

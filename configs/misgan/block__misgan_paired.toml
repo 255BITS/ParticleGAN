@@ -1,0 +1,5 @@
+arm = "misgan_paired"
+mechanism = "block"
+total_steps = 7000
+out_dir = "results/misgan/runs/block__misgan_paired"
+log_path = "runs/misgan/block__misgan_paired.log"

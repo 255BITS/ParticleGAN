@@ -1,0 +1,5 @@
+arm = "misgan_paired"
+mechanism = "mcar_p50"
+total_steps = 7000
+out_dir = "results/misgan/runs/mcar_p50__misgan_paired"
+log_path = "runs/misgan/mcar_p50__misgan_paired.log"
