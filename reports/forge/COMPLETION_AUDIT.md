@@ -22,6 +22,13 @@ policy. The [new source study](QUICK_SCREEN_STUDY.md) imports no older receipts.
 Its baseline screen and two-cell physical pilot are registered, with zero
 launches. Calibration, the real two-GPU pilot and cutover remain outstanding.
 
+Full CI then exposed six legacy image-host failures from the public trainer's
+blanket RNG uniqueness guard. The [compatibility repair](MIGRATION.md#ci-compatibility-repair)
+preserves legacy shared draws while retaining Forge isolation, with 167 affected
+tests and 504 broader checks passing. Replacement develop **v2** registrations
+bind that new source; the unexecuted v1 artifacts are retained. Full CI must pass
+on the repaired branch before recording CI acceptance.
+
 The original inspection below is retained as an audit trail. These subsequent
 changes close implementation gaps without claiming the still-missing scientific
 or GPU-pilot outcomes:

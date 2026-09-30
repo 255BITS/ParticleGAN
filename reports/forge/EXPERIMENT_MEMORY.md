@@ -2975,4 +2975,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `5b3edaed580b3093fb620193b6db18f0b32f83fc587ef385dd4567c008e00b21`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `a42f7b2c67ba66f4869e0e3343d6c92984bba4c1f007f99ad53600d078959d33`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -2,15 +2,16 @@
 
 ## Merged-develop cohort — 2026-09-29
 
-[`develop-20260929-quick-v1`](../../configs/forge/calibration/develop-20260929-quick-v1.json)
-pins merged commit `fe1dd2e1`, including develop `a8b9d397`, with scientific
-source `95e279a2f9c0666a7dfb7dcb4a3a9c80468c1e38280cc571b456f69071a79d12`.
+[`develop-20260929-quick-v2`](../../configs/forge/calibration/develop-20260929-quick-v2.json)
+pins commit `b4fae98a`, including develop `a8b9d397` and the legacy shared-RNG
+compatibility repair, with scientific source
+`44bbbe0db5639cc855874930bbc9f8a98f921d0d702a22a753b27c547bea4cfa`.
 It preserves the same three lineages, three smoke tasks, 16 independent reference
 tasks, seed 0 and acceptance criteria. Clean public sampling and retained MoG
 vector gates have new evidence identities. **No old-source receipts are imported**;
 all 57 cells start unknown and adoption remains blocked.
 
-The new [baseline registration](calibration-lanes/develop-20260929-quick-baseline-v1/registration.json)
+The new [baseline registration](calibration-lanes/develop-20260929-quick-baseline-v2/registration.json)
 selects only K3P's three screen tasks: learned-MoG `mode_hold` (1,200 updates)
 and explicit particle-cloud `img_bars4` / `img_intensity2` (600 each). It reserves
 at most 1,800 seconds per task, 5,400 total, with no ordinary qualification reuse.
@@ -21,14 +22,17 @@ automatically filling the matrix.
 Run from the feature checkout with the shared queue:
 
 ```sh
-python -m experiments.forge calibration-lane plan develop-20260929-quick-baseline-v1
+python -m experiments.forge calibration-lane plan develop-20260929-quick-baseline-v2
 # Enqueue freezes work; drain separately after selecting an available device.
-python -m experiments.forge calibration-lane enqueue develop-20260929-quick-baseline-v1
+python -m experiments.forge calibration-lane enqueue develop-20260929-quick-baseline-v2
 ```
 
 After execution, verify compatible reuse and duplicate submission before closing
 the lifecycle, then publish the exact-revision readout and calibration reduction.
-The older study below remains frozen and separately reproducible.
+The unexecuted [develop v1 profile](../../configs/forge/calibration/develop-20260929-quick-v1.json)
+and both v1 registrations remain immutable but cannot run from the repaired
+checkout. They consumed zero training time. The older study below also remains
+frozen and separately reproducible.
 
 ## Preserved earlier source cohort
 

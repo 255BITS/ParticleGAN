@@ -44,6 +44,23 @@ The first check encountered the missing optional `matplotlib` dependency; the
 successful check used a temporary validation environment with that dependency.
 The frozen experiment runtime and repository source were unchanged.
 
+## CI compatibility repair
+
+The first merged full CI run recorded 1,566 passes and six failures: legacy
+image harnesses intentionally share a training generator, which Forge's new
+blanket public-trainer guard rejected. Commit `b4fae98a` preserves that legacy
+draw sequence and enforces distinct named streams at Forge's boundary instead.
+Evaluation stays isolated; model RNG isolation rejects direct/global aliases
+that would lose draws. Checkpoint restoration rejects conflicting shared/global
+states before mutation, preserving the existing schema and same-binding rule.
+
+The affected suite passed **167 tests**, with one unavailable-CUDA check skipped;
+the broader Forge/recipe/K3P suite passed **504 tests**. The final normalized-RNG
+restore check passed 61 tests with one CUDA skip. Full CI is rerun on the repair.
+The unexecuted develop v1 registrations remain frozen. Replacement **v2** baseline
+and physical-pilot lanes bind the repaired source, preserve all budgets/criteria,
+and import no old measurements. All remain unlaunched.
+
 ## Frozen inputs and ownership
 
 - Package/inventory baseline: `92dc0319`.

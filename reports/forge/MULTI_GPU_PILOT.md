@@ -3,14 +3,15 @@
 ## Current-source registration — 2026-09-29
 
 The merged-develop pilot is
-[`develop-20260929-gpu-pilot-v1`](calibration-lanes/develop-20260929-gpu-pilot-v1/registration.json),
+[`develop-20260929-gpu-pilot-v2`](calibration-lanes/develop-20260929-gpu-pilot-v2/registration.json),
 against the [new quick-screen cohort](QUICK_SCREEN_STUDY.md). Its
-[contract](../../configs/forge/campaigns/develop-20260929-gpu-pilot-v1.json)
+[contract](../../configs/forge/campaigns/develop-20260929-gpu-pilot-v2.json)
 keeps two `vector_two_broad` cells (K3P and the critic-penalty ablation), the
 5,400-second campaign ceiling, and at most one cancellation repair. Clean public
 sampling and retained full-component vector gates are pinned before execution.
-The acceptance procedure below still applies. Both registrations are unlaunched;
-use the new one when validating the merged feature branch.
+The acceptance procedure below still applies. All pilot registrations are
+unlaunched; use v2 when validating the repaired feature branch. Develop v1
+remains immutable evidence of preparation and consumed zero training time.
 
 The latest [ownership observation](LEGACY_CONSUMERS.md#ownership-update--2026-09-29)
 found a new NPC training job on GPU 0, with only desktop clients on GPU 1.

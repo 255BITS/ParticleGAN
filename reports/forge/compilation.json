@@ -2,7 +2,7 @@
   "automation_digest": "4186d144cfbfc6b07626e0ae4eacac1f95d5b0e8da9264b544d416685ded01ca",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "5b3edaed580b3093fb620193b6db18f0b32f83fc587ef385dd4567c008e00b21",
+  "input_digest": "a42f7b2c67ba66f4869e0e3343d6c92984bba4c1f007f99ad53600d078959d33",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -11,6 +11,7 @@
     "configs/forge/calibration/current-k3p-mog-v2.json": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
     "configs/forge/calibration/current-profile.schema.json": "7584e16b761e80fc1450b7d1c7f715d7490a809b60df5b548d87fc39f3d74b9b",
     "configs/forge/calibration/develop-20260929-quick-v1.json": "b830c83f70f639573f82ca1590d02df8711bedec7574c3eae01293201bceaf89",
+    "configs/forge/calibration/develop-20260929-quick-v2.json": "bb24806e6b68afffe366f985951198dc3ae1b986c7ed6f931f16de64cd31c2e2",
     "configs/forge/calibration/initial.json": "3e02c9ec01b5cb1e0a9b1ae8bdc14354fed0b1eade4d37a0c1698ae852fc2a09",
     "configs/forge/calibration/missing-fixed-fixture-campaign.json": "a1f068cfe29a99902e65ba9117aad907ff67514514f5f83b2b3740ac8a415637",
     "configs/forge/calibration/quick-discriminator.json": "6ef7c1eb1770f3cec0cdc8673f11eb11c602434733d5b38a38831a57cd58e27e",
@@ -20,12 +21,14 @@
     "configs/forge/campaigns/current-k3p-mog-smoke-v1.json": "0d29a34bf7214db4b1b2fbe1dd5d5ec6e11589a2cb319aa573263e855cd3792f",
     "configs/forge/campaigns/current-k3p-mog-smoke-v2.json": "4487858d127b4b923ad7bf6ebebfe4cf439f159da051974dcc1b6d617c9a0f6e",
     "configs/forge/campaigns/develop-20260929-gpu-pilot-v1.json": "0af87cf4fd0655f1a9c2f07583c431982b4e2a0d826ae78d24d6314a16011a45",
+    "configs/forge/campaigns/develop-20260929-gpu-pilot-v2.json": "a3ca86dffe0c4b468df31cadbbf6cd7914cc03a78e7a5482f050bc25c79d951b",
     "configs/forge/campaigns/develop-20260929-quick-baseline-v1.json": "dee402d5a815aa180654fd57c11dd24406bc614aa16ef02c41f158c1a6c8ec8d",
+    "configs/forge/campaigns/develop-20260929-quick-baseline-v2.json": "5e21e40f3ad7d1c4c6b7f73fd5fd7c6670a108fe8d65a83787dc2eef63796c95",
     "configs/forge/campaigns/fresh-checkout-pilot.json": "1c1df67aa64b689ca136d41890de4d60e571962b3d2c84e7ffe97b86e5809c87",
     "configs/forge/campaigns/implementation-pilot.json": "6f95fd3d8ffe877225be99529327d5fac5d8a775760c932fb76f0e0764a8acbf",
     "configs/forge/campaigns/onboarding-pilot.json": "c1e53dda99626833fcc4d0bbf8b1c32fd91f4abd880cb8fa310345080a72b6d6",
     "configs/forge/campaigns/smoke.json": "3b265e8554283bd9030b65bd02a76ca2b5dd949129e5cae81d4e11aa688f44ee",
-    "configs/forge/catalog.json": "4cf6b4e0c9cc7eec92d4659673fe4199d1082c1893d393cfb8f5eccb814519a3",
+    "configs/forge/catalog.json": "8b7b2aa2b87bce18465aa282a2660a720a1b50846fb20ea77ad1d2cce8efc613",
     "configs/forge/defaults.json": "e5699dacce7222eb7a819944eabb796330fd59530a23e0506f941a389a8330a5",
     "configs/forge/ideas/forge-no-critic-penalty.json": "e6c687ac08a232db49afdc0555267d6769ed9f8ec68984ebb32e2f558e4ba98a",
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "df0aa8de3f6137cc0f718fb01782bd165bbf715e1cc7664900e46d4591a0e864",
@@ -140,7 +143,9 @@
     "reports/forge/calibration-lanes/current-k3p-mog-smoke-v1/registration.json": "5351b22c18ec5ba673ca0cd3419f821afd7ba241f665a760de50e3b54be440dd",
     "reports/forge/calibration-lanes/current-k3p-mog-smoke-v2/registration.json": "e06aefcb55caedaa4aab19f12c967cd98b67a1935bb55d014f5eecb169cbf6c3",
     "reports/forge/calibration-lanes/develop-20260929-gpu-pilot-v1/registration.json": "c52ab6e280ce8583918ac45c47641998bbf912866fb9e218689105d9e05ea137",
+    "reports/forge/calibration-lanes/develop-20260929-gpu-pilot-v2/registration.json": "a27aff36a808529f03281edca230f78a2698f2d4dd5f17bd28b8daf917b470a5",
     "reports/forge/calibration-lanes/develop-20260929-quick-baseline-v1/registration.json": "4b29c4ee568e453738d85cc97c555fee7d4f6ed78aa0f68f640b387118e5c62f",
+    "reports/forge/calibration-lanes/develop-20260929-quick-baseline-v2/registration.json": "f9a4371065cafcee668103c9704471eb0f2e60d5d0dbc458beb6c1ec68dba99b",
     "reports/forge/history-sources.json": "c71655de9bcd7333b83ce1b5ed5b0d6bf21a0805fd9488cf5da5fba404e31d3b",
     "reports/forge/import-gaps.json": "7a35d577b35fe8f6e37d39325ed89ef3e7ded0ca005ff890cb5a559bc25cbcb3",
     "reports/forge/records/history-cf1-bdpair-21ac56b45896.json": "ce6928aff230667ea4a1d5b33cca223f2792bb334e674a5e509ef999f0f3bc73",
@@ -336,7 +341,7 @@
     "unclassified": [],
     "valid": true
   },
-  "operational_lifecycle_digest": "5a14492712ecfce4f53ca3b8a8e6660bcd6aa77dc127eae67e2ffb2c7cf05098",
+  "operational_lifecycle_digest": "bc3dffe79c98f265729f8b175a29f35a5e62fc765d51c9048f8e6bc4b2edbc93",
   "pending_readout": [],
   "record_count": 184,
   "reducer_sha256": "50d34de38b2170160cf3722fc2c2955b61111cb2e91c19b72bad1b4111909090",
@@ -344,7 +349,7 @@
   "schema_version": 1,
   "scientific_normalization_complete": false,
   "scientific_source_digests": [
-    "95e279a2f9c0666a7dfb7dcb4a3a9c80468c1e38280cc571b456f69071a79d12"
+    "44bbbe0db5639cc855874930bbc9f8a98f921d0d702a22a753b27c547bea4cfa"
   ],
   "view_count": 4
 }
