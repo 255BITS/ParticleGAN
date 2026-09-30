@@ -43,3 +43,12 @@ also passes a separate exact CUDA sample/reload check. These findings are an
 experimental checkpoint, and the default package remains unchanged. See the
 [toy/grid leaderboard](fixes/quality/REPORT.md) for final gates and the
 [usage guide](fixes/USAGE.md) for package and checkpoint scope.
+
+RA9 retains the passing toy with exact training parity and uses a real-fit
+sample cap to permit128 cells on grid. Its complete grid is VALID/FAIL:
+all five terminal clouds pass every check except center RMS (0.211–0.222
+sigma, bound0.20). The independent100k holdout fully passes. The final grid
+has precision0.98210, all100 modes, TV0.03075, radial KS0.01856 and maximum
+covariance ratio1.61258. This is still an experimental failure of the joint
+target; small saved-state diagnostics are investigating the remaining mean
+bias. See the [completed RA9 receipt](fixes/quality/results/CB64-RA9.json).

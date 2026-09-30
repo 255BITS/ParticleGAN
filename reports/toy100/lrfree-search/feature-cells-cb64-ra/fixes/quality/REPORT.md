@@ -5,6 +5,7 @@ No recommendation for this target until one candidate passes both unchanged gate
 | Candidate | Toy P | Modes | TV | Toy | Grid | Grid validity |
 |---|---:|---:|---:|---|---|---|
 | CB64-RA8 | 0.965332 | 25/25 | 0.052114 | PASS | FAIL | VALID |
+| CB64-RA9 | 0.965332 | 25/25 | 0.052114 | PASS | FAIL | VALID |
 | CB64-RA4 | 0.758057 | 21/25 | 0.263540 | FAIL | FAIL | VALID |
 | E22 | 0.715454 | 25/25 | 0.284546 | FAIL | PENDING | pending |
 | CB64-RA7 | 0.681641 | 25/25 | 0.318359 | FAIL | NOT_RUN_TOY_FAILED | pending |

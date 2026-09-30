@@ -1,6 +1,6 @@
 {
   "status": "QUALITY_IN_PROGRESS",
-  "copied_utc": "2026-09-30T08:28:25.086460+00:00",
+  "copied_utc": "2026-09-30T09:51:01.370111+00:00",
   "source_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929",
   "files": [
     {
@@ -24,8 +24,8 @@
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/README.md",
       "archive": "README.md",
-      "sha256": "a09a3e2012e25676441e0021c0c721acfb02519a81450fffb6383a4f25a7f77b",
-      "bytes": 5546
+      "sha256": "7750e9559292f47d8750e3bbb08f868ca058dbc13fe93b5bc6a53fd08b1ccd40",
+      "bytes": 7052
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/READY.json",
@@ -36,8 +36,8 @@
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/USAGE.md",
       "archive": "USAGE.md",
-      "sha256": "6bf35047804f72fec7993ef45917a4f35488abb0cffa9e213a8fd22745fd1463",
-      "bytes": 5011
+      "sha256": "7bf87366e9c2c426061d7169d83e374b9e1d19e94d724b2de29e8a5206d14be9",
+      "bytes": 5771
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/archive_fixes.py",
@@ -92,6 +92,12 @@
       "archive": "configs/overrides-CB64-RA8.json",
       "sha256": "08359ed4406148faf6915144ef4265d930829de53775eeafc4f17a11b5667b4c",
       "bytes": 1786
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA9.json",
+      "archive": "configs/overrides-CB64-RA9.json",
+      "sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+      "bytes": 1787
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/BASELINE.json",
@@ -1042,6 +1048,24 @@
       "bytes": 18024
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra9-final-learned-artifact-audit/AUDITOR-IDENTITY.json",
+      "archive": "integration/review/ra9-final-learned-artifact-audit/AUDITOR-IDENTITY.json",
+      "sha256": "0bc8214e553db39a7a3cfbe5865a65c9b4770bf672383a018a7b61692460395f",
+      "bytes": 259
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra9-final-learned-artifact-audit/REPORT.md",
+      "archive": "integration/review/ra9-final-learned-artifact-audit/REPORT.md",
+      "sha256": "ea970d7c345b7f5f9c26f9d27871ce4d71ff86c2a6dc2b4fdc8a9db4e29c1c0b",
+      "bytes": 633
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra9-final-learned-artifact-audit/summary.json",
+      "archive": "integration/review/ra9-final-learned-artifact-audit/summary.json",
+      "sha256": "522707b4920a02803ce150c6de59c889d3501da3822d29a00e92ea49b38a8233",
+      "bytes": 155221
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/record_review.py",
       "archive": "integration/review/record_review.py",
       "sha256": "77cd3a30d64016e506857b996a8ee7b8fdf8210c05f4a0df3a85f0076a2f8336",
@@ -1978,6 +2002,60 @@
       "bytes": 308533
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/CORRECTION-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/CORRECTION-FROZEN.json",
+      "sha256": "392ff6c2f62fd22f8e14ce06be1562705a11d7526e72d3cbe2052d37e369e7f0",
+      "bytes": 1355
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/FROZEN.json",
+      "sha256": "36449662ed3e3892bb1e85881d039af6aa093a121a4b13fc6a03fe22251cae91",
+      "bytes": 9713
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/PROTOCOL.md",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/PROTOCOL.md",
+      "sha256": "90ca618d7ad9ea61f32fa24b152f8bf042ff5db8c7470b7b21b8f4170299d344",
+      "bytes": 2935
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/REPORT-CORRECTION.md",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/REPORT-CORRECTION.md",
+      "sha256": "09ed47aa6eb933e86bfe6e2fc8cc3b29bb9f5631682cd3de6c6bc27f0e630c42",
+      "bytes": 601
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/REPORT.md",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/REPORT.md",
+      "sha256": "94fc1c48ac7398e9fd9d9f5cd841030828628229a3ced4c0831c690b68e1c7a0",
+      "bytes": 5383
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/SOURCE-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/SOURCE-FROZEN.json",
+      "sha256": "03cee3e18cad7487639b30ddce385d0edb0c5328911063497d849bc66c1f319b",
+      "bytes": 9076
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/prepare.py",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/prepare.py",
+      "sha256": "6de525238eeba30c890950a7c1751a5362545f00a7467c5d1c05e717bc7be1ee",
+      "bytes": 2762
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/probe.py",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/probe.py",
+      "sha256": "4463176199d5116563c6aebd3b814c546dd21e8510827a947a0335594e87ea22",
+      "bytes": 15677
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/receipt.json",
+      "archive": "integration/review/training-regression/post-ra8-quality/current-chart-resolution/receipt.json",
+      "sha256": "e2a19a7e9ff66294221dddb65fd02ef3ac1660e30ad4310db133d97a95320d18",
+      "bytes": 9359
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/positive-lease-replay/FROZEN.json",
       "archive": "integration/review/training-regression/post-ra8-quality/positive-lease-replay/FROZEN.json",
       "sha256": "08b70c4350ef520f629fa84483c0230ab323ebfcdcdd9d581609124f35ce16de",
@@ -2224,6 +2302,294 @@
       "bytes": 3805
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/FROZEN.json",
+      "sha256": "e79c5202406c4b030db415894f86b0545905bbee7013661503c767d91113bd27",
+      "bytes": 10706
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/PREPARATION-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/PREPARATION-FROZEN.json",
+      "sha256": "598d39fd8e17e884d48320ad78b687de0e2a76e1b571bbe386ffc26d250d3c57",
+      "bytes": 8801
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/PROTOCOL.md",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/PROTOCOL.md",
+      "sha256": "121ac5e1d870204188b43c7de7a3717afc91a5589d15dbb7cd797afd45dba344",
+      "bytes": 1991
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/REPORT.md",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/REPORT.md",
+      "sha256": "8426471f6e5325888c729ce4894025e1b1fb9a172f42a40932b15a8ccf89a939",
+      "bytes": 2024
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/attempt1/result.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/attempt1/result.json",
+      "sha256": "3fee9bd981e754d2751f439d6a0bc85938c07954fb9a841f344c17058d6d8b8c",
+      "bytes": 15225
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/inspect_metadata.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/inspect_metadata.py",
+      "sha256": "8de88322ed8ecc6432c096f16a9f9c4c1e934a422c0ef3775691d386ef67fe07",
+      "bytes": 5737
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/prepare.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/prepare.py",
+      "sha256": "2e5c01b846a6e20462befb04274383c7b130049fcd9851058fccd549f4745051",
+      "bytes": 2188
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/receipt.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/receipt.json",
+      "sha256": "972a26fbbc9657963b710e1b7c5808245cbc1df38b0cc8c081f2d2354a1652fc",
+      "bytes": 9170
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/seal.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-authority/seal.py",
+      "sha256": "5fb6338ffb298fd91abc3dc8cab9490e4c243c0fe8dd07d10f5a136d115345fd",
+      "bytes": 4841
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-design/DESIGN.md",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-design/DESIGN.md",
+      "sha256": "fdf80d2433f9359e9020e9a0d6da13f700a3202b72f8040672fd00e139f610ca",
+      "bytes": 11809
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-design/FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-design/FROZEN.json",
+      "sha256": "dbfbd0dc00c9c52cb70f348f054b535fb1040831cf32c5fb39d790a680ab13cc",
+      "bytes": 6287
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-design/REPORT.md",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-design/REPORT.md",
+      "sha256": "7abd47dd1de9553a819ff4da990efdbc47a711fa3002de84070d5dc490276b00",
+      "bytes": 1657
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-design/receipt.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/local-moment-design/receipt.json",
+      "sha256": "0a5c4df33c92ece21247469ab00148872599cc7336cb7ecce2f504f1b9bf7e00",
+      "bytes": 6286
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/FROZEN.json",
+      "sha256": "d258a3ed192e6a0fce90794ac45297c9b4105d3fd61091156616c6fd76909e40",
+      "bytes": 58546
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/PROTOCOL.md",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/PROTOCOL.md",
+      "sha256": "f3074d8a9f3e49947fbf07de23533b47a4599dca7f9209dbf97d48b3f0bfb859",
+      "bytes": 2927
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/REPORT.md",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/REPORT.md",
+      "sha256": "2a99744fbfe60ddd2e20c5bc794db994eedb7e7888cfee2fde0b6d1d4a3478b4",
+      "bytes": 2028
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/SOURCE-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/SOURCE-FROZEN.json",
+      "sha256": "749ad784d98c4892d1a574238dd305f579962662aeb30bfbe7676f0dc066d0ed",
+      "bytes": 47533
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/WATCH-PID.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/WATCH-PID.json",
+      "sha256": "3698b6bde93e699185d17b0e4d3d24bcc2167f1fb2e95c4dcc0543077e7811dd",
+      "bytes": 331
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0000-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0000-FROZEN.json",
+      "sha256": "00165f254728d5f63d3fb710b7b1a792826c759e85ec914d76ae0eae8ee3747c",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0000.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0000.json",
+      "sha256": "edf775389d91f416bd41cbdf6088aa8521b1a8f4502fa71bff28033944796606",
+      "bytes": 8133
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0100-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0100-FROZEN.json",
+      "sha256": "1161691d7b0c1cde09281915e0eb13a2d2a4d34acb6dd707a5067f7252c0180f",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0100.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0100.json",
+      "sha256": "ff326dc954a50fd7db30de716c799b391c34c86e80e9dce5342794c2fbf69ff5",
+      "bytes": 8274
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0250-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0250-FROZEN.json",
+      "sha256": "a06c7fabf9f3c77ace7c3f654e4539ba716ea1deaf17e7fa18c0cfcfd01c91db",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0250.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0250.json",
+      "sha256": "fcfe1777a2fa7c2af27858ddaecb3f3e09ba09dbe74cc7e92ec749973fab92ee",
+      "bytes": 8280
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0500-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0500-FROZEN.json",
+      "sha256": "2d4c02d643d311c8905852c84e3028fbc7c53cf9ac668a3c219e1e0151b49fbd",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0500.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0500.json",
+      "sha256": "3242b3bc1ab40e99e098d9f769d10ee384b52d9cd7971adcdbfc00d22bc32fa2",
+      "bytes": 8281
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0750-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0750-FROZEN.json",
+      "sha256": "569ed04752cd55c7d705d781bf43a053546ea1a66c1c9895d7c2c009046f6e6d",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0750.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0750.json",
+      "sha256": "0999c1b6c91a869034d995d344e01e714e6545a61b1e8cee1937f0a21c2db834",
+      "bytes": 8280
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1000-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1000-FROZEN.json",
+      "sha256": "a2fe63df30e9a0a6a11d3983085577cc61c08c0c19870f3a3eb77e86aa269090",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1000.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1000.json",
+      "sha256": "a9bb2c85e050fd6e37b7dedc68e70fa4c90eccfb8c2f656f8d7386f11181b254",
+      "bytes": 8284
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1250-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1250-FROZEN.json",
+      "sha256": "f8e674ea037602e3b3fe9536f3068e519f9d83c7d1a88e240808d3719caf85b1",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1250.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1250.json",
+      "sha256": "2bd04ae12fddc9286fed3aa78c22ada529e0c7666f0213cdf48a7da8b3973701",
+      "bytes": 8288
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1500-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1500-FROZEN.json",
+      "sha256": "39925f7a5a6f1c497f3a88d2d862650cb40a05a6de50fe436079889ca05c5a9e",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1500.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1500.json",
+      "sha256": "77e1e5110bb7060da6868dac96825333f7e33be138c3b93cc86bc1a8519b6df7",
+      "bytes": 8286
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1750-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1750-FROZEN.json",
+      "sha256": "108cfe6d19a78371fe2f97a90119c1d9068f63a1f77dfb41c3a75b1fb798874d",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1750.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1750.json",
+      "sha256": "d17d6c259cbef8ea7d91345ae872bb6a175f42c5465ebf9213c9e7c2e1affb6e",
+      "bytes": 8287
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-2000-FROZEN.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-2000-FROZEN.json",
+      "sha256": "72b0cbbeedb47d00efa9aed87dfeee37c40935e6da54c2468b38fe3f106ce057",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-2000.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-2000.json",
+      "sha256": "7b6fea99b4fe0ce1564c7f9da7b9d66826ea9bb294fdc76e1e9b3d9a976c4a10",
+      "bytes": 8280
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/live-index.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/live-index.json",
+      "sha256": "7663967f50d0579ec9fab9971f19b02d451701c2f8a0e63087e1cd45734dd8f3",
+      "bytes": 5390
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/summary.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/summary.json",
+      "sha256": "75ef960cb3b72c8092c79da91d4e6b167675a3fd728ffc8d81e4957aadaccb7e",
+      "bytes": 5575
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/compare_saved.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/compare_saved.py",
+      "sha256": "100a13be47fa1ad7d0a0042125a1faaa6b206480b8ab4f8859e53e97e03a22b4",
+      "bytes": 11392
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/helper-contract.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/helper-contract.json",
+      "sha256": "0cb56fcbc26318b35a603d62ac68d8245fb56077ac5f5751ced34fc3fb786381",
+      "bytes": 541
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/helper_contract.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/helper_contract.py",
+      "sha256": "b88795d67d5cc858ac33533086fa3d53f414e073eea8dd77dbab5d6b5ae1ea81",
+      "bytes": 2401
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/launch_watch.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/launch_watch.py",
+      "sha256": "a7935f82b922d03f55cf1662b50326a7096c43bbd6fbbcb6a38544b5c6e7e8ee",
+      "bytes": 1414
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/prepare_seal.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/prepare_seal.py",
+      "sha256": "f280011b4cfe6ffa0e8f4c23f00f6794597ef2726071ac2a343c5a7c33a283e3",
+      "bytes": 3838
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/receipt.json",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/receipt.json",
+      "sha256": "25ff05e040fe8c8d407b3c72402cafbf73a9cf7345a4ddf2f3b5de7d01ab7157",
+      "bytes": 56451
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/seal_complete.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/seal_complete.py",
+      "sha256": "d73dab0f91c69e1376c9dc0e109c12b46df26d34b110e201cc7cdf54a1f6e872",
+      "bytes": 4701
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/watch_saved.py",
+      "archive": "integration/review/training-regression/post-ra9-quality/saved-training-parity/watch_saved.py",
+      "sha256": "80f478890bebae4050cb938c06d65b2161f850710cf2740eaa8455ff50a662dc",
+      "bytes": 4235
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/recovery-cpu-command-check/result.json",
       "archive": "integration/review/training-regression/recovery-cpu-command-check/result.json",
       "sha256": "d8d1cd71f74f436d479dbbd77b350f469cdda08084d8af64625166d32fc76d00",
@@ -2408,6 +2774,30 @@
       "archive": "integration/review/validation-cb64-ra8-monitor/summary.json",
       "sha256": "2cc838dce23703ec14ad7287398e946fc965dd8b88dea6a47e8ececc1fb2a589",
       "bytes": 71335
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor/CHECKER-IDENTITY.json",
+      "archive": "integration/review/validation-cb64-ra9-monitor/CHECKER-IDENTITY.json",
+      "sha256": "9d9f5f7d87ce892706fb4c814aacbc4cecbdbc181a2c9777f78804d9cc0b33ae",
+      "bytes": 1093
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor/REPORT.md",
+      "archive": "integration/review/validation-cb64-ra9-monitor/REPORT.md",
+      "sha256": "9597de89179f54cd9495d3e407c6a5349b1b1aa86341af93cff5e544c3857c91",
+      "bytes": 1299
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor/canonical-receipts/screens/runs/grid100/acceptance-receipt.json",
+      "archive": "integration/review/validation-cb64-ra9-monitor/canonical-receipts/screens/runs/grid100/acceptance-receipt.json",
+      "sha256": "2787a69bfeb42b5d48e02c0105f21351e4d9dffd32b693efe0625c72c08abce8",
+      "bytes": 59717
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor/summary.json",
+      "archive": "integration/review/validation-cb64-ra9-monitor/summary.json",
+      "sha256": "99bdc4d84d8da97d10e82bcc7b7811b1c4acfae98e4d9da88a95ca56a28523bf",
+      "bytes": 71826
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-monitor/CHECKER-IDENTITY.json",
@@ -4108,6 +4498,372 @@
       "bytes": 71335
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/FROZEN.json",
+      "sha256": "925bb577283169c1c592fcae0be7e283d526cbd03d6e9a4d6960efbf2a465c59",
+      "bytes": 52899
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/GRID-ARTIFACT-MANIFEST.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/GRID-ARTIFACT-MANIFEST.json",
+      "sha256": "eb9f224c8c346538a13527d3fed83bc3005ffe347fb775b2ac835b8bf6d2eeb1",
+      "bytes": 24964
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/HELPERS-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/HELPERS-FROZEN.json",
+      "sha256": "bcbc5ee94b742b92acad073510f3b5966c49a35be7da9cd37083add12dd7233c",
+      "bytes": 1070
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/REPORT.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/REPORT.md",
+      "sha256": "b347760f3731ca4f0038e60ee0efea5ddf46ac07c9df69ed6fa73531490e90c3",
+      "bytes": 1954
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/STOPPED-AT-GRID-FAILURE.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/STOPPED-AT-GRID-FAILURE.json",
+      "sha256": "37f4b467ca3b0b10e347fa22b9ac8be3f6e4aee3bfa52ab28389bb960d34760d",
+      "bytes": 2355
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/audit_completed.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/audit_completed.py",
+      "sha256": "0b5c4b38a8070ab70f3b9426459ec7ba68fdaa0c69d493cb5d6bdc4791f27431",
+      "bytes": 9261
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/canonical-grid-acceptance-receipt.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/canonical-grid-acceptance-receipt.json",
+      "sha256": "2787a69bfeb42b5d48e02c0105f21351e4d9dffd32b693efe0625c72c08abce8",
+      "bytes": 59717
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/checker-identity.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/checker-identity.json",
+      "sha256": "9d9f5f7d87ce892706fb4c814aacbc4cecbdbc181a2c9777f78804d9cc0b33ae",
+      "bytes": 1093
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/grid-execution-receipt.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/grid-execution-receipt.json",
+      "sha256": "c577184a5a60c013e62fb553e5adc0e6fc4efc6b5855efeb95185b7af840e2de",
+      "bytes": 4119
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/grid-result.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/grid-result.json",
+      "sha256": "131bd3dc19b2621ed50f04551146422947cfa4bd7c728b2b72d7eeaa0f0b3dbc",
+      "bytes": 12662
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/receipt.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/receipt.json",
+      "sha256": "48834a41c4022b0148cf9b5b4c08f60db8358f993cb5086da2f49f61811f94fc",
+      "bytes": 51960
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/stop_owned_monitor.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/stop_owned_monitor.py",
+      "sha256": "98c8938c7fa467593334bcff09e78ea1cd682a0b30c96ef9060f76615ae7b52e",
+      "bytes": 3887
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/summary-after-stop.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/summary-after-stop.json",
+      "sha256": "99bdc4d84d8da97d10e82bcc7b7811b1c4acfae98e4d9da88a95ca56a28523bf",
+      "bytes": 71826
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/summary-at-grid.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/summary-at-grid.json",
+      "sha256": "99bdc4d84d8da97d10e82bcc7b7811b1c4acfae98e4d9da88a95ca56a28523bf",
+      "bytes": 71826
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/FROZEN.json",
+      "sha256": "4b9d1d579a542c88c99bf61df74767f304b2b72068968725a172d438d616d81d",
+      "bytes": 28706
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/HELPERS-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/HELPERS-FROZEN.json",
+      "sha256": "59bc6bdec9db4771f43ac8bcfcbb6d05f77a234321fb97d8084bc5069f86b4b4",
+      "bytes": 666
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/MONITOR-START-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/MONITOR-START-FROZEN.json",
+      "sha256": "2380e3739bdaadb2643b8262a70b8f4e51a888b691088f9b036cdde83c1bed96",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/MONITOR-START.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/MONITOR-START.json",
+      "sha256": "4f60313c1f60005084d602810a54c46477b7f66e83209da0a48070b774e76589",
+      "bytes": 1462
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/PREPARATION-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/PREPARATION-FROZEN.json",
+      "sha256": "1d5af943995ac549b1b0e1386d3d572ee366527403b91552aec6f62566386c1c",
+      "bytes": 914
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/REPORT.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/REPORT.md",
+      "sha256": "d3b09e35d483d83b85012606886d37cca69dc451603ab88fe70d9a2e07318c37",
+      "bytes": 1674
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/audit_lane.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/audit_lane.py",
+      "sha256": "ffe98086d006fcfcaf53d02083e3d77d5eb27fd384ff0a1dcb7099c8b3ba5e24",
+      "bytes": 11473
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/receipt.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/receipt.json",
+      "sha256": "699968adf3e6287c82eff938d7581136fc5bc57d23db395222eafa7ae4fbae3c",
+      "bytes": 2910
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/start_monitor.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/start_monitor.py",
+      "sha256": "5aa2caa4ca21094d2f97122b38cf593a7e90c2fe86a993d6b8bed11b18e39a46",
+      "bytes": 2495
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/real-only-moment-reserved/DESIGN.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/real-only-moment-reserved/DESIGN.md",
+      "sha256": "c3cbaf1d87b456469e0fbd7acfa1ec3b2bfb17e6d8dbde801853de07a594a012",
+      "bytes": 1603
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/real-only-moment-reserved/FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/real-only-moment-reserved/FROZEN.json",
+      "sha256": "62c0f32db2799b0528b8caa054f07ed408ca7a53324dc021c95f0bb70f20424e",
+      "bytes": 502
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/DESIGN.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/DESIGN.md",
+      "sha256": "73625b7dd9b469e69cbf56b677023ea8b85e1efa1847fd49a6fc4ffecd784cf6",
+      "bytes": 3846
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/FROZEN.json",
+      "sha256": "fa9aee80a4d62fe6d611e69508caaa66ab909dd6bf176d918cee6e5581a47a40",
+      "bytes": 33631
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/READY.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/READY.json",
+      "sha256": "f5afd255877d747a6113881aedffdcb8a62d01e01a3c4f7b486e4e1da62081af",
+      "bytes": 29780
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/REPORT.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/REPORT.md",
+      "sha256": "a7c6e7de7b2a89a3c998f05c0cd261eb3aa490a408704269e856d672ae96eeac",
+      "bytes": 4682
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/RESOLUTION.patch",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/RESOLUTION.patch",
+      "sha256": "c927badd95120d04a90f9e2812bdd9fd3edf1e293df32e8ed887e2fe1a3a3e59",
+      "bytes": 4788
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/SOURCE-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/SOURCE-FROZEN.json",
+      "sha256": "06649bc07d660c2c54f2927c6b39c0a8c995a2f5f4f7877182ebdf83f9e65294",
+      "bytes": 14916
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/TESTS-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/TESTS-FROZEN.json",
+      "sha256": "97a7f482e153306adc257e2f713bfa6c409d1d276c1b738c7a45333bc9b64265",
+      "bytes": 911
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/config.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/config.json",
+      "sha256": "8ea1b4391cd92e23599abbfedb77b22059c1935e0cccda5991612dcefe055449",
+      "bytes": 1787
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/contract.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/contract.py",
+      "sha256": "486ab8d54d8a778b06d7e731773b9d45e72c0cc3a881698556d959b7da3047e4",
+      "bytes": 15176
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/cpu-attempt1/result.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/cpu-attempt1/result.json",
+      "sha256": "d1434ff4972ba0debc1d162c7e279f89bc4c7478c3b2a916ba7042241b86f2f1",
+      "bytes": 6905
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/anchor_birth.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "bytes": 6401
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/birth_phase.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/birth_phase.py",
+      "sha256": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+      "bytes": 21141
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/continuous.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/continuous.py",
+      "sha256": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+      "bytes": 51741
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/feature_cells.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/feature_cells.py",
+      "sha256": "39558fb3839090eb9d933b8b37e4c73b7dfc3cf123b24c2ef58d818cc4052fcc",
+      "bytes": 116860
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/particle_prior.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/particle_prior.py",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+      "bytes": 17636
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/row_evidence.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/row_evidence.py",
+      "sha256": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+      "bytes": 6662
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/training.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/training.py",
+      "sha256": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+      "bytes": 40369
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/prepare_source.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/prepare_source.py",
+      "sha256": "712631f58126b0d1115953e6bd82f60b98cee7eaa55797e2b41aad9d993185bb",
+      "bytes": 1915
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/prepare_tests.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/prepare_tests.py",
+      "sha256": "33ad38274f8f1fb7a7204573849bfbbd3d755a96cb44798f5b18e249c3b79b0e",
+      "bytes": 980
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/receipt.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/receipt.json",
+      "sha256": "c4e96c737c8252cfd8961cc8f39810bf35c603ed85dd8fbcfe298c1e36bcefe3",
+      "bytes": 25956
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/seal-attempt1.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/seal-attempt1.json",
+      "sha256": "9432cef74248977f731dd69c969b4dc2f7d70f3ed2e693f4d9a54a9371a29ff4",
+      "bytes": 664
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/seal_owner.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/seal_owner.py",
+      "sha256": "9f2af9b94d1a6fe414e233c6c183624e870ab08595f850bac63b13b783ad7241",
+      "bytes": 5091
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/ARCHIVE.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/ARCHIVE.json",
+      "sha256": "1456ecca8485b08c3c3cc3cb56b45c520601c2138c3c059fe4fc8c835c153a4c",
+      "bytes": 14463
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/SOURCE-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/SOURCE-FROZEN.json",
+      "sha256": "ff463cdc001f94fdc807192c5c01351cb1537497ce2185066701ebe03b502bd4",
+      "bytes": 14916
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/anchor_birth.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "bytes": 6401
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/birth_phase.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/birth_phase.py",
+      "sha256": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+      "bytes": 21141
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/continuous.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/continuous.py",
+      "sha256": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+      "bytes": 51741
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/feature_cells.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/feature_cells.py",
+      "sha256": "952ab1d7f97482af2e574c95040137601d791bd83739a8748dd7bb0432f21430",
+      "bytes": 116438
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/particle_prior.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/particle_prior.py",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+      "bytes": 17636
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/row_evidence.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/row_evidence.py",
+      "sha256": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+      "bytes": 6662
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/training.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/training.py",
+      "sha256": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+      "bytes": 40369
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/HELPERS-FROZEN.json",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/HELPERS-FROZEN.json",
+      "sha256": "019b8d526f4b4b20fae2ab4d9e3c3f31df7a76cf055656d725c422d14588f51d",
+      "bytes": 844
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/PROTOCOL.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/PROTOCOL.md",
+      "sha256": "a04f6af782f2a3173ea4327459d290cb879ca62ef43defd0edac040b3c2cb7a8",
+      "bytes": 2377
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/check_api.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/check_api.py",
+      "sha256": "691288e5ff87e524139e78735906cdfbc9df2bb6f48a137d6e788c9e8970cf4f",
+      "bytes": 19565
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/native-affine-centroid/PROTOCOL.md",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra9-quality/native-affine-centroid/PROTOCOL.md",
+      "sha256": "2804dbf5e4069388f623798755d602227d3d26b062477e224843d318d66dd935",
+      "bytes": 2369
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/native-affine-centroid/diagnose.py",
+      "archive": "performance/sampler-regression/cpu-plan-review/post-ra9-quality/native-affine-centroid/diagnose.py",
+      "sha256": "83507024758f0f938aad9ba7925e73669633c2988f0b0d89ac3b7cb384185868",
+      "bytes": 10355
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/profile_axis_pair_gpu.py",
       "archive": "performance/sampler-regression/cpu-plan-review/profile_axis_pair_gpu.py",
       "sha256": "2cb1128e4e888c1de54e05f636d415b332d754dc872313f31acca0bca3da7d56",
@@ -4900,6 +5656,90 @@
       "bytes": 1877
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/FROZEN.json",
+      "sha256": "d94cb9e8403eb2ae1f923c72448a4814de355ae31d2c01cc95edb5b42e551dc2",
+      "bytes": 2536
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/PREPARATION-FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/PREPARATION-FROZEN.json",
+      "sha256": "2289bcb039c4d92b54b3e8f5c7a1d2d3ee3c7b4c3aab5f80b07ada145e830c6e",
+      "bytes": 1709
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/PROTOCOL.md",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/PROTOCOL.md",
+      "sha256": "4c9373360df26bd0ea96c9a64c4ff0f5ff98e0987525402d74ff780757ce293e",
+      "bytes": 2022
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/REPORT.md",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/REPORT.md",
+      "sha256": "c06d419927568d56f96279a78410d2ec2ef9d6fc0f6f8cc076b77ea1c7683ce0",
+      "bytes": 2596
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/freeze.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/freeze.py",
+      "sha256": "c15b84843f0cd36346a69bcbc0eec486aa957aeee6fd70419d64b7d1f861f845",
+      "bytes": 905
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/prepare.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/prepare.py",
+      "sha256": "db858038b583470dcdae3dcd741d1ab27bea117565a2db601b488e48e2e4bf50",
+      "bytes": 849
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/probe.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/probe.py",
+      "sha256": "1888044aa9cafc4f18e547f1d69c0a42460810ba14c573850f03f1fc2885363d",
+      "bytes": 10267
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/result.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/result.json",
+      "sha256": "e4a69351d93172c71540e7f3f7c20616ee1c45c8d8af456dad08a119e7e8bbed",
+      "bytes": 241326
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/FROZEN.json",
+      "sha256": "c99eea6af17aa0cdc6a65c0240564601ad0aac81daadce57702187d61046d2e8",
+      "bytes": 17885
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/INPUT-FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/INPUT-FROZEN.json",
+      "sha256": "4e29b929cefe4adf8e2d065f8cde7ba4d1e9d491dc6bb2fe40ba09bad00d4d90",
+      "bytes": 17263
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/REPORT.md",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/REPORT.md",
+      "sha256": "4cf764babb204967150af393daaafa4f7646258bc5226ad080c3332214433d91",
+      "bytes": 898
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/audit.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/audit.py",
+      "sha256": "1b537d60be84f004f89f3e699c73874ced83d10fdb05a33edd9ef6bf14e87259",
+      "bytes": 8458
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/freeze.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/freeze.py",
+      "sha256": "be11b2c4f62c881fdb76b911c6c7dbdd7c8bc695047ac59550bc1c32bc2db76b",
+      "bytes": 741
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/receipt.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/receipt.json",
+      "sha256": "4a29bfd92e0bc7c139ad17fa0ee6a727f8c9e2275f67efc600f0494e12c72f27",
+      "bytes": 21509
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-review/FROZEN.json",
       "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-review/FROZEN.json",
       "sha256": "a8044df2cfc3e3f8c7ca30b5b8bf7071e605262e0f50923fdbc244f5d7481e55",
@@ -4922,6 +5762,90 @@
       "archive": "performance/training-regression/count-review/post-ra8-quality/positive-lease-review/review.py",
       "sha256": "cd9b6e1a83e8d917362e05169a8b9fd60f1ce21a1be38e4be53d976634c9fa27",
       "bytes": 6110
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/FROZEN.json",
+      "sha256": "56bfa56d877c604dd46700148f1fc0d5cf016c3df56f066b3fb554d7a2f21936",
+      "bytes": 36297
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/REPORT.md",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/REPORT.md",
+      "sha256": "9352dd867d1ab62ca09a08e4c815907cd9e4ac14242f963d6fe602f4b2172c83",
+      "bytes": 1299
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/STATIC-FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/STATIC-FROZEN.json",
+      "sha256": "631678dc628550e4aacf578d80592898c65da69f6b86fb35e5b2f9da936a1a50",
+      "bytes": 15926
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/final_review.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/final_review.py",
+      "sha256": "3044181ebfc72885dcf392d2eb6b7091364ad8aa42a59b5736fc50cc18256815",
+      "bytes": 8717
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/final_review_attempt2.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/final_review_attempt2.py",
+      "sha256": "8d0e7dcf72525c415d1a8b7a5103c3a844665304ada88e04ab9f9fbeb71af3e4",
+      "bytes": 9118
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/receipt.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/receipt.json",
+      "sha256": "03345995160f38137cd1a02305d948ff232a8a3e5714dc2ea655531696bf02e6",
+      "bytes": 45353
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/review_static.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/review_static.py",
+      "sha256": "5a2b88f2a872c62bf2377b3b6127b5df3c06cb5aca2119409ba0a35263e4eb0b",
+      "bytes": 9673
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/seal_final.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/seal_final.py",
+      "sha256": "e58fb4cc4fffecb8c98f6389ff71a7471a34ddf67a9748b3290fc180e3cc4c37",
+      "bytes": 1121
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/seal_static.py",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/seal_static.py",
+      "sha256": "e124de60de22bae2fd916d3304809b20582cbfdbe5613c18bc1c4eb7b385fa57",
+      "bytes": 845
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/static-receipt.json",
+      "archive": "performance/training-regression/count-review/post-ra8-quality/resolution-review/static-receipt.json",
+      "sha256": "a650d11d7dad42bef39676e63645bca2941b3bab33db5c3379a136d7281908ec",
+      "bytes": 18146
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/local-moment-design/DESIGN.md",
+      "archive": "performance/training-regression/count-review/post-ra9-quality/local-moment-design/DESIGN.md",
+      "sha256": "709c68b7d25732e950a1c282875f88a5ef494050f8410c8ae7d0cb857dbbb3ee",
+      "bytes": 6350
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/local-moment-design/FROZEN.json",
+      "archive": "performance/training-regression/count-review/post-ra9-quality/local-moment-design/FROZEN.json",
+      "sha256": "b8efbfca37754de9a742de6b963a3f8834e88275fe739aa859271e56b2713b42",
+      "bytes": 3841
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/local-moment-design/receipt.json",
+      "archive": "performance/training-regression/count-review/post-ra9-quality/local-moment-design/receipt.json",
+      "sha256": "da7bde0490f232e2247a316efabb6eb2ccfedee7f7260ffbdde66f92aa432d7d",
+      "bytes": 3929
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/local-moment-design/seal_design.py",
+      "archive": "performance/training-regression/count-review/post-ra9-quality/local-moment-design/seal_design.py",
+      "sha256": "b57218cf6fabfa259e930c78e23f3a68c1662bee3a1070981d635aa2e3895353",
+      "bytes": 3345
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra3-graph-review.json",
@@ -5696,6 +6620,210 @@
       "archive": "performance/training-regression/count-review/ra8-prospective/start_watcher.py",
       "sha256": "4d4c08b5f5636939ab096b9b8b59664b6f86a4d2ebba8d89b753e86818e3c23f",
       "bytes": 1745
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/CHECKER-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/CHECKER-FROZEN.json",
+      "sha256": "b4dbf631a9ddfe79dbe9c01d79649b7d6872740a5820331161e4842aafcf48c0",
+      "bytes": 27470
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/DERIVATION.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/DERIVATION.json",
+      "sha256": "84d40acaf6183c3769db26895711581e17e59a8c52a6c04ba0f2bff25e44c967",
+      "bytes": 5042
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/FINAL-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/FINAL-FROZEN.json",
+      "sha256": "2fa52b90ae4001a9bb7edaed47c10404ad7b39c60cfc7cd014eb28b2c62e3243",
+      "bytes": 46310
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/FINAL-RECEIPT.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/FINAL-RECEIPT.json",
+      "sha256": "ed6cad0a796fe6e6b04723e57c8dc45254f990b77d8e8b95f43ab7eb4d02b029",
+      "bytes": 76377
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/FINAL-REVIEW.md",
+      "archive": "performance/training-regression/count-review/ra9-prospective/FINAL-REVIEW.md",
+      "sha256": "b4d6943e12cc139ed7aebb5b251d70845abfc8e1f0af468c01cb5f61262c24d9",
+      "bytes": 1407
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/WATCHER.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/WATCHER.json",
+      "sha256": "3844c3a56a1470fa123fe96503172ad87e47660db93d6b5ae2c106bba25659ed",
+      "bytes": 906
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/SOURCE-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/SOURCE-FROZEN.json",
+      "sha256": "adb1a1eb6834ac0d7402879f8ce99e36bce1c6ce5bf5d1d5d053155c53a5729b",
+      "bytes": 26566
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/SOURCE-RECEIPT.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/SOURCE-RECEIPT.json",
+      "sha256": "ecd79a77155d1d76da7ba7235c4eb529783fd503b51043125b72c1e6a8ee43d3",
+      "bytes": 26385
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0000-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0000-FROZEN.json",
+      "sha256": "d7d5d82862edf0b6cab83781604c61289cfe710edbfd1546e30d268c4aebdf9c",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0000.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0000.json",
+      "sha256": "e29bd60c70ebbd870f4ba95ba35f78cc0bb5e423cbb273e952a3af4aefb14df2",
+      "bytes": 5546
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0100-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0100-FROZEN.json",
+      "sha256": "90ee53e7a7ee3e0c65300093de0e90aa540d124f6fdc11d2f973b98db1c46c5e",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0100.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0100.json",
+      "sha256": "a4546be07eb634384172e31f2b6b33608045d8aac0656f5037bd8c7e42602862",
+      "bytes": 7066
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0250-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0250-FROZEN.json",
+      "sha256": "d378760ee75c4b45116fa9474ccb15d4942a20b4ffed9e0253222a5b3b5358fc",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0250.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0250.json",
+      "sha256": "4d1dba70533fa158e8442484200601874243c2cf63764f3ef1293e7cf769136e",
+      "bytes": 7144
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0500-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0500-FROZEN.json",
+      "sha256": "f780277d9065206b9db24d57cd563b951f5d8f5b3975cf03b5923c8363c97e91",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0500.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0500.json",
+      "sha256": "197755deac53fb2e95bf024c071535f1a7ae9a8780920e57df8dbb2696a33e46",
+      "bytes": 7248
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0750-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0750-FROZEN.json",
+      "sha256": "f34d6ccde8ed7a8ef2d8fd783c84955a209bd5d8c34cec0e7fb11af2bf945741",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0750.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0750.json",
+      "sha256": "9925d9e96b4139d42b55a027095dfff92fefc878957dd487571d192d29193f6f",
+      "bytes": 7334
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1000-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1000-FROZEN.json",
+      "sha256": "f3e36d20c0891a648446a7221c882ba55ab87037cd76ff84663e00b656753f45",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1000.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1000.json",
+      "sha256": "fcd75a0046e39997e29284b465c013da6dbb65a64898cfd60b5e784af2df386f",
+      "bytes": 7364
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1250-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1250-FROZEN.json",
+      "sha256": "a4670ee87bbcba6a574f4d3abba22ea6933031c3d5a98906f4b730a467055b59",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1250.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1250.json",
+      "sha256": "8b20ab3af9cb89ecea3bc6da16a1eb5e8b732fcd5e52e9473cbcd62f283f8e5f",
+      "bytes": 7351
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1500-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1500-FROZEN.json",
+      "sha256": "b0fa9f85ac0e90e9a86c084776c01c071bdc5594519daf46d68f0733f4269bfb",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1500.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1500.json",
+      "sha256": "220dc56262e3f1e4db7128b5bff1cef64f7eaa2c8e00ff838bf5bf42e148468b",
+      "bytes": 7447
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1750-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1750-FROZEN.json",
+      "sha256": "d94fef349eb64745bd30cf5744a844ff1e5a4f3b653c2737c6773fac6cbb9c4c",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1750.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1750.json",
+      "sha256": "01115d7ffb5edc57c7ad8b7110ee38a16d3955bf49d0962bf595e7e579267448",
+      "bytes": 7443
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-2000-FROZEN.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-2000-FROZEN.json",
+      "sha256": "c9ceca2f5646c5284600ee8476061196149935226129db0e101b997779e14c91",
+      "bytes": 1129
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-2000.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-2000.json",
+      "sha256": "8f1b7e9de783d1b83690382a0ca0ff8cb1bc91a76502e6ef6b7cd041e6ba3679",
+      "bytes": 7434
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/summary.json",
+      "archive": "performance/training-regression/count-review/ra9-prospective/accepted-attempt1/summary.json",
+      "sha256": "70cddbf70ed545e3fbb4ffd9960ace92d580d042ce2c5211eec5ddf36f9cea0b",
+      "bytes": 77595
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/audit_checkpoints.py",
+      "archive": "performance/training-regression/count-review/ra9-prospective/audit_checkpoints.py",
+      "sha256": "e9c55f1e45b487985201979413dc471864b55f390aea21dbe729164c87ae80e5",
+      "bytes": 23503
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/final_review.py",
+      "archive": "performance/training-regression/count-review/ra9-prospective/final_review.py",
+      "sha256": "2da745a9790efc9d8600295d5dd06435d71dd8534e059d1cafb431c2ddcdbb5e",
+      "bytes": 9099
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/prepare_checker.py",
+      "archive": "performance/training-regression/count-review/ra9-prospective/prepare_checker.py",
+      "sha256": "ac77dbd831a43bd48f1382945a30ee1e693a229a30b92c01cced004a7cdf0317",
+      "bytes": 6094
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/seal_final.py",
+      "archive": "performance/training-regression/count-review/ra9-prospective/seal_final.py",
+      "sha256": "896dcfd21b1f94ced3931cbf67e24a38442e8886ab300c93b9a2fa229fd65a4f",
+      "bytes": 1439
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/start_watcher.py",
+      "archive": "performance/training-regression/count-review/ra9-prospective/start_watcher.py",
+      "sha256": "7e5f1c11debb863754bd9f785bdc0c8d6b29234610ff4a6b4a965f44d70542c1",
+      "bytes": 1772
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/diagnose_state.py",
@@ -6940,6 +8068,180 @@
       "bytes": 2297
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/__init__.py",
+      "archive": "pkg-CB64-RA9/particlegan/__init__.py",
+      "sha256": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+      "bytes": 1473
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/anchor_birth.py",
+      "archive": "pkg-CB64-RA9/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "bytes": 6401
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/autoencoder.py",
+      "archive": "pkg-CB64-RA9/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "bytes": 6194
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/batch_feature_init.py",
+      "archive": "pkg-CB64-RA9/particlegan/batch_feature_init.py",
+      "sha256": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+      "bytes": 6691
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_death.py",
+      "archive": "pkg-CB64-RA9/particlegan/birth_death.py",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+      "bytes": 32354
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_phase.py",
+      "archive": "pkg-CB64-RA9/particlegan/birth_phase.py",
+      "sha256": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+      "bytes": 21141
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/conditioning.py",
+      "archive": "pkg-CB64-RA9/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "bytes": 4878
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/continuous.py",
+      "archive": "pkg-CB64-RA9/particlegan/continuous.py",
+      "sha256": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+      "bytes": 51741
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/det_init_a.py",
+      "archive": "pkg-CB64-RA9/particlegan/det_init_a.py",
+      "sha256": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+      "bytes": 15944
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/det_init_d.py",
+      "archive": "pkg-CB64-RA9/particlegan/det_init_d.py",
+      "sha256": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+      "bytes": 17670
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/det_init_f.py",
+      "archive": "pkg-CB64-RA9/particlegan/det_init_f.py",
+      "sha256": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+      "bytes": 25380
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/deterministic_init.py",
+      "archive": "pkg-CB64-RA9/particlegan/deterministic_init.py",
+      "sha256": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+      "bytes": 16631
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/diffusion.py",
+      "archive": "pkg-CB64-RA9/particlegan/diffusion.py",
+      "sha256": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "bytes": 5080
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/discriminators.py",
+      "archive": "pkg-CB64-RA9/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "bytes": 5833
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/family_e_init.py",
+      "archive": "pkg-CB64-RA9/particlegan/family_e_init.py",
+      "sha256": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+      "bytes": 21096
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/feature_cells.py",
+      "archive": "pkg-CB64-RA9/particlegan/feature_cells.py",
+      "sha256": "39558fb3839090eb9d933b8b37e4c73b7dfc3cf123b24c2ef58d818cc4052fcc",
+      "bytes": 116860
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/gan_loss.py",
+      "archive": "pkg-CB64-RA9/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "bytes": 1016
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/grad_regularizers.py",
+      "archive": "pkg-CB64-RA9/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "bytes": 13033
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/init_registry.py",
+      "archive": "pkg-CB64-RA9/particlegan/init_registry.py",
+      "sha256": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+      "bytes": 5997
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/initialization.py",
+      "archive": "pkg-CB64-RA9/particlegan/initialization.py",
+      "sha256": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+      "bytes": 5943
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/k3p.py",
+      "archive": "pkg-CB64-RA9/particlegan/k3p.py",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "bytes": 31092
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/ka2.py",
+      "archive": "pkg-CB64-RA9/particlegan/ka2.py",
+      "sha256": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+      "bytes": 16381
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/particle_prior.py",
+      "archive": "pkg-CB64-RA9/particlegan/particle_prior.py",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+      "bytes": 17636
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/qr_bz_pq_init.py",
+      "archive": "pkg-CB64-RA9/particlegan/qr_bz_pq_init.py",
+      "sha256": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+      "bytes": 12419
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/recipes.py",
+      "archive": "pkg-CB64-RA9/particlegan/recipes.py",
+      "sha256": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+      "bytes": 42958
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/row_evidence.py",
+      "archive": "pkg-CB64-RA9/particlegan/row_evidence.py",
+      "sha256": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+      "bytes": 6662
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/structured_init.py",
+      "archive": "pkg-CB64-RA9/particlegan/structured_init.py",
+      "sha256": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+      "bytes": 16695
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/training.py",
+      "archive": "pkg-CB64-RA9/particlegan/training.py",
+      "sha256": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+      "bytes": 40369
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/vicreg_loss.py",
+      "archive": "pkg-CB64-RA9/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "bytes": 2297
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/prepare-cb64-ra5-quality.py",
       "archive": "prepare-cb64-ra5-quality.py",
       "sha256": "565addc3e9d6002c2fe335513891c76b51fcbd5642ef25b2d59350e30ce6b877",
@@ -6961,6 +8263,12 @@
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/prepare-cb64-ra8-quality.py",
       "archive": "prepare-cb64-ra8-quality.py",
       "sha256": "5c5f14a56aac5b630e1a3a96fc14ac0bedde31311413c07ec7da976bd38913f4",
+      "bytes": 16834
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/prepare-cb64-ra9-quality.py",
+      "archive": "prepare-cb64-ra9-quality.py",
+      "sha256": "f1cf1f34322a6ba92e76fc9bd5bd9a1a21a059cc6ced07247a495bf134f93cfe",
       "bytes": 16834
     },
     {
@@ -7006,10 +8314,16 @@
       "bytes": 2170
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/RA9-PLAN.md",
+      "archive": "quality/RA9-PLAN.md",
+      "sha256": "91f46f9082c7d72bb927021434756009c4d9c133a09c4a43670b533d80d9752e",
+      "bytes": 3197
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/REPORT.md",
       "archive": "quality/REPORT.md",
-      "sha256": "08a1ac2e0a595091129a0f8d2cfc493ea48a0dc3ee195dd127ade4f18bd3ad6f",
-      "bytes": 1167
+      "sha256": "23afbbf22351e5701dd7602d6d3a1b647a23eea492ec0c2e2fc22b53ed832ac8",
+      "bytes": 1232
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/compose_ra5.py",
@@ -7034,6 +8348,12 @@
       "archive": "quality/compose_ra8_initial.py",
       "sha256": "c9154ee9e93120e4af101bf08c6360821acab5d7ad7b367ac8c2a72235e65f26",
       "bytes": 3332
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/compose_ra9.py",
+      "archive": "quality/compose_ra9.py",
+      "sha256": "ac742e98ab70b5e7514303d596a047cc02a5d9e69302bbacd84db7964de0c0b1",
+      "bytes": 4425
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/freeze_candidate.py",
@@ -7074,8 +8394,8 @@
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/leaderboard.json",
       "archive": "quality/leaderboard.json",
-      "sha256": "f83765e73d295c6cf7d2306cda4d3d8049dd84bf4e3b55d86a31e09df8ee3221",
-      "bytes": 10707
+      "sha256": "8562f1f7dac39045e604c3dfe5b8ff75b77e11a818a7f8e8a297ee7bf7bbdbee",
+      "bytes": 12215
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/leaderboard.py",
@@ -7390,6 +8710,60 @@
       "bytes": 16650
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/COMPOSITION.json",
+      "archive": "quality/ra9/COMPOSITION.json",
+      "sha256": "9e4766abe810c857e7790ca55277b62550ae2ff8ab690185b58373223a563d59",
+      "bytes": 5039
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json",
+      "archive": "quality/ra9/READY.json",
+      "sha256": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+      "bytes": 12259
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/FROZEN.json",
+      "archive": "quality/ra9/independent-source/FROZEN.json",
+      "sha256": "56bfa56d877c604dd46700148f1fc0d5cf016c3df56f066b3fb554d7a2f21936",
+      "bytes": 36297
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/REPORT.md",
+      "archive": "quality/ra9/independent-source/REPORT.md",
+      "sha256": "9352dd867d1ab62ca09a08e4c815907cd9e4ac14242f963d6fe602f4b2172c83",
+      "bytes": 1299
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/receipt.json",
+      "archive": "quality/ra9/independent-source/receipt.json",
+      "sha256": "03345995160f38137cd1a02305d948ff232a8a3e5714dc2ea655531696bf02e6",
+      "bytes": 45353
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/FROZEN.json",
+      "archive": "quality/ra9/integration-contract/FROZEN.json",
+      "sha256": "3f13e4ae5ae66f250618c6a2e541cf4fb168ba59de46d6f34d536e258c1a1fdf",
+      "bytes": 22195
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/PREPARATION-FROZEN.json",
+      "archive": "quality/ra9/integration-contract/PREPARATION-FROZEN.json",
+      "sha256": "9763e0a1e8cc03a8a14d0f09c21f742b6098dc150296489983ebc4335035c9e0",
+      "bytes": 7815
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/REPORT.md",
+      "archive": "quality/ra9/integration-contract/REPORT.md",
+      "sha256": "73934178a9b22ec69f8bd4c5ccb4e089f35e244133c030fdec7526123c0e944f",
+      "bytes": 2611
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/receipt.json",
+      "archive": "quality/ra9/integration-contract/receipt.json",
+      "sha256": "434fb0e41d7f56b8a2da7145a22e8e0ba4c1e6a9df2caf9fe3a500d3e5e4cf0a",
+      "bytes": 19099
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA7.json",
       "archive": "quality/results/CB64-RA7.json",
       "sha256": "8538c264b59c47e044ff9f8eac2ce4a9c9aaaf30dc4bf80985e72dee8f08cc8b",
@@ -7408,6 +8782,24 @@
       "bytes": 3102
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA9-toy-audited.json",
+      "archive": "quality/results/CB64-RA9-toy-audited.json",
+      "sha256": "1a9130ad8f8221606145a8aa0df037878c5bf5788b1dcf993d8f0dc95051348a",
+      "bytes": 1602
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA9-toy.json",
+      "archive": "quality/results/CB64-RA9-toy.json",
+      "sha256": "41048a8757387cd6a4f4a30271de3dc420c78b8fbfe42d96578068b31ca74325",
+      "bytes": 1296
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA9.json",
+      "archive": "quality/results/CB64-RA9.json",
+      "sha256": "6c6b727c4a7b493afb368baf75c8ffaea2fe885f3883a0962f604366c4fa62b3",
+      "bytes": 5087
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA8-compose-preflight-error.json",
       "archive": "quality/results/RA8-compose-preflight-error.json",
       "sha256": "1be35b9e29dc21d8fb67a1a2dd7a2802abf6bc8058ba8d2de818e41dd2aa7d1b",
@@ -7424,6 +8816,18 @@
       "archive": "quality/results/RA8-seal-preflight-error.json",
       "sha256": "e650c8e2d4396ec57e67a7e1bf7ef3580d77ef3cc77b280d39467f0db35789d7",
       "bytes": 734
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA9-prelaunch-seal-verification.json",
+      "archive": "quality/results/RA9-prelaunch-seal-verification.json",
+      "sha256": "e0496064a590f863959e0011936ee70b6cbcfd7c870f87361b45d72eaf25db41",
+      "bytes": 852
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA9-toy-report-assembly-error.json",
+      "archive": "quality/results/RA9-toy-report-assembly-error.json",
+      "sha256": "4da59d023a8d6d026be860fac99d7f83fbc9d51d14e315eff2f4e697618b97a0",
+      "bytes": 336
     },
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/run_group_profile.py",
@@ -7446,7 +8850,7 @@
     {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/status.py",
       "archive": "quality/status.py",
-      "sha256": "f0a3b8bab36adf696fb96b915eee778a274436c716474e72263f7045446b2df1",
+      "sha256": "10a17b85c7f221f2f2eab9d7fa2cf762bf23584dd001cf0f8227678f3c9b2ed4",
       "bytes": 4250
     },
     {
@@ -9334,6 +10738,234 @@
       "bytes": 741
     },
     {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/PROTOCOL.md",
+      "archive": "validation-cb64-ra9/PROTOCOL.md",
+      "sha256": "ee0076023bed7bb025ff4ea912b4b99e999def846057cd40100a002227142420",
+      "bytes": 1166
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/QUALITY-TARGETS.md",
+      "archive": "validation-cb64-ra9/QUALITY-TARGETS.md",
+      "sha256": "ef6fa60380ce5b6db415d0c58e11440431b64e0f9fafd3f187dd1287e8409c13",
+      "bytes": 3233
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/execution-results.json",
+      "archive": "validation-cb64-ra9/execution-results.json",
+      "sha256": "cefa85c737d22b02494e98dcdfeba9f6136d37a2d95c609f0f4e01e8c18e7de6",
+      "bytes": 927
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/execution-started.json",
+      "archive": "validation-cb64-ra9/execution-started.json",
+      "sha256": "7bc928785bd7e46ee11303566163002fc1e6e85d180e1974e60451d648592cfb",
+      "bytes": 219
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/grid-launch-owned.json",
+      "archive": "validation-cb64-ra9/grid-launch-owned.json",
+      "sha256": "77df040b67dc637fc94f3d53f01d53dcb250b0c6a305176e188ad6cc438735fe",
+      "bytes": 912
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/jobs.json",
+      "archive": "validation-cb64-ra9/jobs.json",
+      "sha256": "40149cb3126f385592f7a764f5f5a69d25bebd7a709c2eac23339ad3ed310eb5",
+      "bytes": 10219
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/launch.py",
+      "archive": "validation-cb64-ra9/launch.py",
+      "sha256": "f7e5654a0a176266d4eaee293798a59abfc53dd3db75c77fbd6ebdcd06dd01e5",
+      "bytes": 6462
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/INPUTS.json",
+      "archive": "validation-cb64-ra9/learned/INPUTS.json",
+      "sha256": "bc2a47c638d64b95f66326f0503efde76d8d1434190d817de85def7da5ec67e6",
+      "bytes": 11232
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/PROTOCOL.md",
+      "archive": "validation-cb64-ra9/learned/PROTOCOL.md",
+      "sha256": "ee0076023bed7bb025ff4ea912b4b99e999def846057cd40100a002227142420",
+      "bytes": 1166
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/READY.json",
+      "archive": "validation-cb64-ra9/learned/READY.json",
+      "sha256": "6c4b4f18517130ee8532313fbc5a0148c4585504c6ad7dc79d9037dfa4700c17",
+      "bytes": 584
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/SOURCE-FREEZE.json",
+      "archive": "validation-cb64-ra9/learned/SOURCE-FREEZE.json",
+      "sha256": "2e566764ae330e3131134789c1129d804f3cf8df3d6b884bd3be2eba09dc948b",
+      "bytes": 700
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/common.py",
+      "archive": "validation-cb64-ra9/learned/common.py",
+      "sha256": "231f221f393ec11f9349111fbb3a9bb132620402f8a51e4767df0cc6a8e7d43c",
+      "bytes": 7689
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/preparation-receipt.json",
+      "archive": "validation-cb64-ra9/learned/preparation-receipt.json",
+      "sha256": "fc704cbebbc31309affa41fe1c7cff0929b56df8e4773acd1a3ed21a002fee98",
+      "bytes": 434
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/replay.py",
+      "archive": "validation-cb64-ra9/learned/replay.py",
+      "sha256": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+      "bytes": 12899
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/run_training.py",
+      "archive": "validation-cb64-ra9/learned/run_training.py",
+      "sha256": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+      "bytes": 12846
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/config.json",
+      "archive": "validation-cb64-ra9/learned/training/toy/CB64-RA9/config.json",
+      "sha256": "0d688ed67096859cff0f2fc04bab285af5fda4075b12e510409cc77b21f6c671",
+      "bytes": 13250
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/result.json",
+      "archive": "validation-cb64-ra9/learned/training/toy/CB64-RA9/result.json",
+      "sha256": "b41eec6f75673a397d7d300db225a6867c2c2c585f9093099fddc0ab5cdf84ab",
+      "bytes": 45385
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/owned-slot-through-1.json",
+      "archive": "validation-cb64-ra9/owned-slot-through-1.json",
+      "sha256": "476d3748bed1cacfb7fcb4e1f459a371a9b6eda61694cde499f3c2ccb420827a",
+      "bytes": 609
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/owned-slot-through-2.json",
+      "archive": "validation-cb64-ra9/owned-slot-through-2.json",
+      "sha256": "b28b1ea616dc1de6a1db833220108388f95726e03bbd7235d6df2d9b9281fe98",
+      "bytes": 609
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/DECLARED-API-EXPECTATION.json",
+      "archive": "validation-cb64-ra9/screens/DECLARED-API-EXPECTATION.json",
+      "sha256": "63491843c766817fca438bcfc6aa5a668f14c43027e0e81289a41771879d79d4",
+      "bytes": 493
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/READY.json",
+      "archive": "validation-cb64-ra9/screens/READY.json",
+      "sha256": "6d8c2a1f06a8b7f4bdce09ca8bf9c5ebbf685e1c81fd66fed392226920bf38a3",
+      "bytes": 703
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/candidate-options.json",
+      "archive": "validation-cb64-ra9/screens/candidate-options.json",
+      "sha256": "0ff74e93d37e8a38d2bdc6551f1c96a0a4271a40aeb9e4f5b9a4ed0f04a64664",
+      "bytes": 109
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/collect.py",
+      "archive": "validation-cb64-ra9/screens/collect.py",
+      "sha256": "13bb8f1cf5d434de2ad06c341009e428249ce3467f71214cdc65701cbe3d63a3",
+      "bytes": 18706
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/lane.py",
+      "archive": "validation-cb64-ra9/screens/lane.py",
+      "sha256": "815fea93fadd264537b4bb21910e262d680d1003614ad55700f15616afadfb74",
+      "bytes": 4909
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/run_screen.py",
+      "archive": "validation-cb64-ra9/screens/run_screen.py",
+      "sha256": "f577c27b806ed2afe4fb29acfe645d9067930882cf8bf86cc54383f94f603d43",
+      "bytes": 7719
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/execution-receipt.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/execution-receipt.json",
+      "sha256": "c577184a5a60c013e62fb553e5adc0e6fc4efc6b5855efeb95185b7af840e2de",
+      "bytes": 4119
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/job-header.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/job-header.json",
+      "sha256": "786cba26a1b195b28cbcc2f8383f3e1e8e60a64a13d00c87d603fca47277c643",
+      "bytes": 2623
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/config.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-clean/config.json",
+      "sha256": "2e132f55cfb0cb57e456b9334c3d1a2867516aaea289aaa818208f7902bd6aed",
+      "bytes": 602
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/summary.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-clean/summary.json",
+      "sha256": "4cc4064c7ce0470cec79035ea69275e682fa2b16712affca2da347838c8ae43b",
+      "bytes": 4568
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/verdict.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-clean/verdict.json",
+      "sha256": "9a67bac5833beeb57609b8aef2ddd989d0f95ed71ef8e02b9ed1fcd776df613b",
+      "bytes": 12609
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-fixture.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-fixture.json",
+      "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+      "bytes": 2175
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/config.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-noisy/config.json",
+      "sha256": "2e132f55cfb0cb57e456b9334c3d1a2867516aaea289aaa818208f7902bd6aed",
+      "bytes": 602
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/summary.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-noisy/summary.json",
+      "sha256": "4122e637851adaa21c6365fa06500ba56ebf4d848fd53714e18122afd3857ff2",
+      "bytes": 4562
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/verdict.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/native-noisy/verdict.json",
+      "sha256": "376468a97d6488b6c4b8edb8846d8bd1dff065d130badf66872d8075c290bce5",
+      "bytes": 12712
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/result.json",
+      "archive": "validation-cb64-ra9/screens/runs/grid100/result.json",
+      "sha256": "131bd3dc19b2621ed50f04551146422947cfa4bd7c728b2b72d7eeaa0f0b3dbc",
+      "bytes": 12662
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/source-freeze.json",
+      "archive": "validation-cb64-ra9/screens/source-freeze.json",
+      "sha256": "f0bcf204eaa5f718a65ac719cf8bc2bc7389e040e7607d16a9d91a3b5eac9bcd",
+      "bytes": 28078
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/source-freeze.json",
+      "archive": "validation-cb64-ra9/source-freeze.json",
+      "sha256": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+      "bytes": 21963
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/toy-launch-owned.json",
+      "archive": "validation-cb64-ra9/toy-launch-owned.json",
+      "sha256": "27b0c1fb264d260c78224b3091c59942f093597caab25caee5ca801fe62a8f15",
+      "bytes": 937
+    },
+    {
       "source": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra3/PROTOCOL.md",
       "archive": "validation-ra3/PROTOCOL.md",
       "sha256": "ea3d8ec03c5db0e43f92c82564853b9298d91ba5321c5d54ba519d7063ceeb2c",
@@ -10558,6 +12190,16 @@
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/attempt1/result.json",
+      "bytes": 1039904,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/attempt1.log",
+      "bytes": 1000,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/positive-lease-replay/cpu-preflight-attempt1.log",
       "bytes": 2052,
       "reason": "raw, large, redundant or execution log; retained locally"
@@ -10570,6 +12212,21 @@
     {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/saved-training-parity/watch-attempt1.log",
       "bytes": 5535,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/local-moment-authority/attempt1.log",
+      "bytes": 310,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/helper-attempt1.log",
+      "bytes": 491,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/watch-attempt1.log",
+      "bytes": 5914,
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {
@@ -10843,6 +12500,31 @@
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/attempt1.log",
+      "bytes": 203,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/stop-attempt1.log",
+      "bytes": 2047,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/attempt1.log",
+      "bytes": 138,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/monitor-process.log",
+      "bytes": 1047,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/cpu-attempt1.log",
+      "bytes": 3003,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/axis-api-review-attempt1.log",
       "bytes": 12902,
       "reason": "raw, large, redundant or execution log; retained locally"
@@ -10993,6 +12675,36 @@
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/attempt1.log",
+      "bytes": 418,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/positive-lease-postexecution/attempt1.log",
+      "bytes": 127,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/failed-inspection1.txt",
+      "bytes": 690,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/final-attempt1.log",
+      "bytes": 335,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/final-attempt2.log",
+      "bytes": 233,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/resolution-review/static-attempt2.log",
+      "bytes": 415,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra3-graph-review-attempt1.log",
       "bytes": 560,
       "reason": "raw, large, redundant or execution log; retained locally"
@@ -11058,6 +12770,31 @@
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/final-attempt1.log",
+      "bytes": 202,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/initial-attempt1.log",
+      "bytes": 9167,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/original-artifact-attempt1.log",
+      "bytes": 309,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/prepare-attempt1.log",
+      "bytes": 233,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/watcher.log",
+      "bytes": 10153,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/initial-state-diagnosis.log",
       "bytes": 8628,
       "reason": "raw, large, redundant or execution log; retained locally"
@@ -11115,6 +12852,11 @@
     {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/integration-contract/attempt2.log",
       "bytes": 543,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/attempt1.log",
+      "bytes": 269,
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {
@@ -13655,6 +15397,526 @@
     {
       "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/screens/runs/grid100/rates.jsonl",
       "bytes": 942461,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0000.pt",
+      "bytes": 3707336,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0100.pt",
+      "bytes": 8750789,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0250.pt",
+      "bytes": 7563407,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0500.pt",
+      "bytes": 9001125,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0750.pt",
+      "bytes": 7649459,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1000.pt",
+      "bytes": 7610209,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1250.pt",
+      "bytes": 7568609,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1500.pt",
+      "bytes": 7517955,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1750.pt",
+      "bytes": 7667431,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-2000.pt",
+      "bytes": 7546525,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/metrics.jsonl",
+      "bytes": 159779,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/logs/learned-toy-CB64-RA9.log",
+      "bytes": 191196,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/logs/screen-grid100.log",
+      "bytes": 5990,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/owned-grid-launch.log",
+      "bytes": 1358,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/owned-toy-launch.log",
+      "bytes": 1438,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/run.log",
+      "bytes": 2290,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/final-state.pt",
+      "bytes": 5768243,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/metrics.jsonl",
+      "bytes": 515254,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/events.jsonl",
+      "bytes": 70726,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/final_samples.npz",
+      "bytes": 414027,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/holdout_samples.npz",
+      "bytes": 2068182,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/quality_checks/step_006000.npz",
+      "bytes": 414763,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/quality_checks/step_006250.npz",
+      "bytes": 414533,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/quality_checks/step_006500.npz",
+      "bytes": 414539,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/quality_checks/step_006750.npz",
+      "bytes": 414155,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/quality_checks/step_007000.npz",
+      "bytes": 414027,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000000.npz",
+      "bytes": 89995,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000001.npz",
+      "bytes": 90034,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000010.npz",
+      "bytes": 90009,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000025.npz",
+      "bytes": 90021,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000050.npz",
+      "bytes": 89837,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000100.npz",
+      "bytes": 88952,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000250.npz",
+      "bytes": 87798,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000500.npz",
+      "bytes": 87179,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_000750.npz",
+      "bytes": 86961,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_001000.npz",
+      "bytes": 86589,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_001250.npz",
+      "bytes": 86347,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_001500.npz",
+      "bytes": 86273,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_001750.npz",
+      "bytes": 86091,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_002000.npz",
+      "bytes": 86085,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_002250.npz",
+      "bytes": 86041,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_002500.npz",
+      "bytes": 85899,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_002750.npz",
+      "bytes": 85729,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_003000.npz",
+      "bytes": 85739,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_003250.npz",
+      "bytes": 85725,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_003500.npz",
+      "bytes": 85755,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_003750.npz",
+      "bytes": 85779,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_004000.npz",
+      "bytes": 85729,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_004250.npz",
+      "bytes": 85731,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_004500.npz",
+      "bytes": 85617,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_004750.npz",
+      "bytes": 85673,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_005000.npz",
+      "bytes": 85641,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_005250.npz",
+      "bytes": 85547,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_005500.npz",
+      "bytes": 85479,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_005750.npz",
+      "bytes": 85479,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_006000.npz",
+      "bytes": 85457,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_006250.npz",
+      "bytes": 85485,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_006500.npz",
+      "bytes": 85465,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_006750.npz",
+      "bytes": 85363,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-clean/snapshots/step_007000.npz",
+      "bytes": 85313,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/events.jsonl",
+      "bytes": 72169,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/final_samples.npz",
+      "bytes": 427097,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/holdout_samples.npz",
+      "bytes": 2132840,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/quality_checks/step_006000.npz",
+      "bytes": 427163,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/quality_checks/step_006250.npz",
+      "bytes": 427067,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/quality_checks/step_006500.npz",
+      "bytes": 427013,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/quality_checks/step_006750.npz",
+      "bytes": 427107,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/quality_checks/step_007000.npz",
+      "bytes": 427097,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000000.npz",
+      "bytes": 90021,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000001.npz",
+      "bytes": 90055,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000010.npz",
+      "bytes": 90029,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000025.npz",
+      "bytes": 89995,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000050.npz",
+      "bytes": 89863,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000100.npz",
+      "bytes": 89199,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000250.npz",
+      "bytes": 88421,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000500.npz",
+      "bytes": 88209,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_000750.npz",
+      "bytes": 88151,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_001000.npz",
+      "bytes": 88123,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_001250.npz",
+      "bytes": 88083,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_001500.npz",
+      "bytes": 88089,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_001750.npz",
+      "bytes": 88011,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_002000.npz",
+      "bytes": 88025,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_002250.npz",
+      "bytes": 88017,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_002500.npz",
+      "bytes": 87963,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_002750.npz",
+      "bytes": 88005,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_003000.npz",
+      "bytes": 88007,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_003250.npz",
+      "bytes": 87963,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_003500.npz",
+      "bytes": 87983,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_003750.npz",
+      "bytes": 87981,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_004000.npz",
+      "bytes": 87925,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_004250.npz",
+      "bytes": 87991,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_004500.npz",
+      "bytes": 87975,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_004750.npz",
+      "bytes": 87995,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_005000.npz",
+      "bytes": 87971,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_005250.npz",
+      "bytes": 87997,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_005500.npz",
+      "bytes": 87967,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_005750.npz",
+      "bytes": 87997,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_006000.npz",
+      "bytes": 87995,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_006250.npz",
+      "bytes": 87933,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_006500.npz",
+      "bytes": 87925,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_006750.npz",
+      "bytes": 87943,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native-noisy/snapshots/step_007000.npz",
+      "bytes": 87991,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/native100-diagnostics.jsonl",
+      "bytes": 2036233,
+      "reason": "raw, large, redundant or execution log; retained locally"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/rates.jsonl",
+      "bytes": 945597,
       "reason": "raw, large, redundant or execution log; retained locally"
     },
     {

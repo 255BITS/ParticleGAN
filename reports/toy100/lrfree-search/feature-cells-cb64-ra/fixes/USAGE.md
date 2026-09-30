@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 root = Path("/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929")
-variant = "CB64-RA8"  # experimental; toy passes, full grid fails
+variant = "CB64-RA9"  # experimental; toy passes, terminal grid centers fail
 sys.path.insert(0, str(root / f"pkg-{variant}"))
 
 from particlegan.recipes import Recipe
@@ -68,6 +68,17 @@ still use the learned noise law and must pass the original quality gates.
 RA8 uses backend schema 7 and trainer schema 5. Backend schema 6 checkpoints
 are rejected before loading model state. The serving decision survives
 continuation while derived caches are rebuilt.
+
+RA9 requests128 cells and caps fitted cells using even real fit rows divided
+by effective metric rank, with a minimum denominator/count of one. The rule
+regularizes average fit rows per cell; individual cells can remain sparse.
+For the fixed toy and grid fixtures this retains64 and permits128 cells,
+respectively. Count correction remains `3K+2` at the actual fitted K. A larger
+K increases geometry cost and count multiplicity. The sole config change
+from RA8 is `birth_death_cells: 128`; update laws, noise and serving checks
+retain their definitions. RA9 uses backend schema8 and trainer schema5.
+Backend7 checkpoints are rejected before model state loading. Actual cell
+count, rank, split rows and count diagnostics are cross-checked on load.
 
 Use `trainer.state_dict()` and `trainer.load_state_dict()` for continuation.
 Backend schemas/settings and serialized lineage topology are checked before

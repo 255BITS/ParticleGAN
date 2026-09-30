@@ -1,0 +1,11 @@
+{
+  "status": "CPU_WATCHER_STARTED",
+  "pid": 862330,
+  "start_ticks": "166192483",
+  "CPU_only": true,
+  "source_frozen_sha256": "749ad784d98c4892d1a574238dd305f579962662aeb30bfbe7676f0dc066d0ed",
+  "launched_utc": "2026-09-30T09:21:44.681188+00:00",
+  "numerical_replay": false,
+  "new_emissions": 0,
+  "new_training_steps": 0
+}

@@ -1,0 +1,10 @@
+{
+  "status": "FROZEN_CPU_MONITOR_LAUNCH",
+  "utc": "2026-09-30T09:20:01.538038+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/start_monitor.py": "5aa2caa4ca21094d2f97122b38cf593a7e90c2fe86a993d6b8bed11b18e39a46",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/MONITOR-START.json": "4f60313c1f60005084d602810a54c46477b7f66e83209da0a48070b774e76589",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/FROZEN.json": "4b9d1d579a542c88c99bf61df74767f304b2b72068968725a172d438d616d81d"
+  },
+  "live_log_and_evolving_outputs_excluded": true
+}

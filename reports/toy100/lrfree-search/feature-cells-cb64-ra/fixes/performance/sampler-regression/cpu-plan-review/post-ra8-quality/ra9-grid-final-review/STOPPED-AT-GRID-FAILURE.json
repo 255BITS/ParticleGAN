@@ -1,0 +1,62 @@
+{
+  "status": "STOPPED_OWNED_CPU_WATCHER_AT_COMPLETED_GRID_FAILURE",
+  "utc": "2026-09-30T09:40:32.577444+00:00",
+  "pid": 860452,
+  "startticks": 166179427,
+  "two_exact_identity_nochild_checks": [
+    {
+      "pid": 860452,
+      "startticks": 166179427,
+      "state": "S",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-B",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+        "--validation",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9",
+        "--output",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor",
+        "--watch"
+      ],
+      "all_thread_children": {
+        "860452": []
+      }
+    },
+    {
+      "pid": 860452,
+      "startticks": 166179427,
+      "state": "S",
+      "command": [
+        "/tmp/pr38-default-env/bin/python",
+        "-B",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+        "--validation",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9",
+        "--output",
+        "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor",
+        "--watch"
+      ],
+      "all_thread_children": {
+        "860452": []
+      }
+    }
+  ],
+  "signal_sent": "SIGTERM",
+  "signals_sent": 1,
+  "terminated_or_zombie": true,
+  "monitor_start_sha256": "4f60313c1f60005084d602810a54c46477b7f66e83209da0a48070b774e76589",
+  "canonical_receipt_sha256": "2787a69bfeb42b5d48e02c0105f21351e4d9dffd32b693efe0625c72c08abce8",
+  "audit_receipt_sha256": "48834a41c4022b0148cf9b5b4c08f60db8358f993cb5086da2f49f61811f94fc",
+  "stop_source_sha256": "98c8938c7fa467593334bcff09e78ea1cd682a0b30c96ef9060f76615ae7b52e",
+  "summary_snapshot_sha256": "99bdc4d84d8da97d10e82bcc7b7811b1c4acfae98e4d9da88a95ca56a28523bf",
+  "completed_screens": 1,
+  "total_screens": 16,
+  "remaining15_original_screens": "PENDING; fixtures UNVERIFIED; no quality verdict",
+  "quality_verdict": "FAIL",
+  "canonical_fixture_validity": "VALID",
+  "original_gates_preserved": true,
+  "cpu_only": true,
+  "other_queues_or_watchers_signaled": false,
+  "numerical_jobs_started": 0,
+  "frozen_sources_or_prior_receipts_changed": false
+}

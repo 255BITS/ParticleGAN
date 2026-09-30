@@ -1,0 +1,7 @@
+{
+  "status": "ERROR_REPORT_ASSEMBLY",
+  "scope": "Read-only proof validation after CUDA toy; no files changed, source or numerical rerun.",
+  "failure": "Inline report helper assumed unchanged_root_full_toy_gate was a string rather than its typed gate object.",
+  "retained_original_audit": true,
+  "quality_verdict_unchanged": true
+}

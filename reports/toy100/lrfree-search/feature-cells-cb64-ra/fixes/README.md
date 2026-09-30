@@ -47,6 +47,26 @@ joint target. Small saved-state diagnostics are isolating these grid errors.
 The check adds one full-population averaged forward per reaction and does not
 establish distribution equivalence or a general scaling law.
 
+RA9 is the next prospective config. It requests128 cells and caps the actual
+chart size by even real fit rows divided by effective metric rank. The toy
+therefore retains64 cells while the grid can use128. Fixed saved-chart
+diagnostics show improved grid support separation at128 and sparse toy
+regions without the cap. Two matched actual toy reactions preserve RA8's
+plans, updates and RNG exactly at actual64. Source/state/API qualification
+passed. The fresh unchanged CUDA toy passes with the same final metrics as
+RA8, and all ten saved states are VALID with exact training parity. The full
+grid completed VALID/FAIL. Its five terminal clouds pass every gate except
+center RMS, which ranges0.21111–0.22250 sigma against0.20. The original100k
+holdout fully passes: precision0.98173, TV0.01909, center0.19269 sigma and
+radial KS0.01453. Final20k precision is0.98210, all100 modes, TV0.03075,
+radial KS0.01856 and maximum covariance ratio1.61258. RA9 still does not
+qualify for the joint target. The next small diagnostics isolate conditional
+mean bias and the authority of existing corrective actions.
+The cap controls average
+fit rows per cell; it guarantees no individual cell occupancy. Finer charts
+increase geometry cost and count multiplicity. Optimizer, noise and quality
+gates retain their RA8 definitions.
+
 - [Results, explanations and validation scope](FIXES-REPORT.md)
 - [Machine-readable leaderboard](leaderboard.json)
 - [Toy and grid target leaderboard](quality/REPORT.md)
@@ -55,6 +75,8 @@ establish distribution equivalence or a general scaling law.
 - [RA7 config](configs/overrides-CB64-RA7.json), [package](pkg-CB64-RA7/) and [source freeze](quality/ra7/READY.json)
 - [RA8 config](configs/overrides-CB64-RA8.json), [package](pkg-CB64-RA8/) and [source freeze](quality/ra8/READY.json)
 - [RA8 hypothesis and limits](quality/RA8-PLAN.md)
+- [RA9 config](configs/overrides-CB64-RA9.json), [package](pkg-CB64-RA9/) and [prospective plan](quality/RA9-PLAN.md)
+- [RA9 completed toy/grid result](quality/results/CB64-RA9.json)
 - [Package usage and checkpoint compatibility](USAGE.md)
 - [RA4 config](configs/overrides-CB64-RA4.json) and [package](pkg-CB64-RA4/)
 - [RA4 numerical source freeze](integration/iteration-4/READY.json)
@@ -80,5 +102,5 @@ The findings use the existing fixed seeds and saved fixture inputs. Shared-GPU
 timings describe these runs; they do not establish a general scaling law.
 
 Read compact current progress with
-`python -B quality/status.py --variant CB64-RA8`, or tail the original log at
-`validation-cb64-ra8/logs/learned-toy-CB64-RA8.log`.
+`python -B quality/status.py --variant CB64-RA9`, or tail its log once started at
+`validation-cb64-ra9/logs/learned-toy-CB64-RA9.log`.

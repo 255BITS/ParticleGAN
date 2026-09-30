@@ -15,7 +15,7 @@ def read(path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--variant', default='CB64-RA8')
+    parser.add_argument('--variant', default='CB64-RA9')
     args = parser.parse_args()
     variant = args.variant
     lane = ROOT / f'validation-{variant.lower()}'
