@@ -1,5 +1,21 @@
 # Separate quick-screen study
 
+## Corrected source cohort — v3
+
+The [v3 profile](../../configs/forge/calibration/develop-20260929-quick-v3.json)
+binds the image-data clamp, versioned sampling contracts and CUDA telemetry
+repairs at `f35be792`. All 57 cells begin unknown; no prior-source results are
+imported. The three substantive lineages, fixed seed/initializer, scientific
+thresholds, 16 independent references and adoption criteria remain unchanged.
+
+The [intensity registration](calibration-lanes/develop-20260929-intensity-repair-v3/registration.json)
+selects only K3P `img_intensity2`: 600 updates, 24 observations, 1,800 seconds
+maximum total. This measures the corrected real-data law before any wider
+scientific expansion. Separately, the [physical pilot](MULTI_GPU_PILOT.md)
+selects two vector cells and at most one deliberate-cancellation repair. Neither
+registration confers ordinary qualification, and neither authorizes filling
+the full calibration matrix.
+
 ## Merged-develop cohort — 2026-09-29
 
 The [completed GPU baseline](DEVELOP_QUICK_SCREEN_READOUT.md) measured three

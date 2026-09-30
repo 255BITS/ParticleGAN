@@ -2,6 +2,17 @@
 
 ## Current-source registration — 2026-09-29
 
+The repaired-source pilot is now
+[`develop-20260929-gpu-pilot-v3`](calibration-lanes/develop-20260929-gpu-pilot-v3/registration.json),
+with the same two vector cells and 5,400-second maximum including one cancellation
+repair. It freezes the image clamp, versioned sampling policy and CUDA allocator
+telemetry fixes. Earlier registrations remain immutable and unlaunched. Execute
+only the registration matching the frozen checkout; recheck physical owners
+before claiming either device. Both devices were free of external training after
+the baseline and software checks; GPU 1 retains desktop clients.
+
+## Preserved merged-source v2 registration
+
 The merged-develop pilot is
 [`develop-20260929-gpu-pilot-v2`](calibration-lanes/develop-20260929-gpu-pilot-v2/registration.json),
 against the [new quick-screen cohort](QUICK_SCREEN_STUDY.md). Its
@@ -9,12 +20,12 @@ against the [new quick-screen cohort](QUICK_SCREEN_STUDY.md). Its
 keeps two `vector_two_broad` cells (K3P and the critic-penalty ablation), the
 5,400-second campaign ceiling, and at most one cancellation repair. Clean public
 sampling and retained full-component vector gates are pinned before execution.
-The acceptance procedure below still applies. All pilot registrations are
-unlaunched; use v2 when validating the repaired feature branch. Develop v1
+The acceptance procedure below still applies. This registration is
+unlaunched and retained for its exact old source. Develop v1
 remains immutable evidence of preparation and consumed zero training time.
 
-The latest [ownership observation](LEGACY_CONSUMERS.md#ownership-update--2026-09-29)
-found a new NPC training job on GPU 0, with only desktop clients on GPU 1.
+An earlier [ownership observation](LEGACY_CONSUMERS.md#ownership-update--2026-09-29)
+found an NPC training job on GPU 0; it subsequently exited before the baseline.
 A one-device baseline screen cannot satisfy the physical two-GPU acceptance test.
 
 ## Preserved earlier-source registration
