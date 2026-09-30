@@ -970,6 +970,8 @@ building Forge itself stays in this one feature branch/PR.
   necessary calibration; do not carry cloud passes over to a MoG conversion.
 - [ ] **Pilot and cut over.** Run a bounded candidate/reference campaign through
   multi-GPU draining; test cancellation, restart, retiering and memory updates.
+  The [physical v3 pilot](../reports/forge/PHYSICAL_GPU_PILOT_READOUT.md) completed
+  these operational checks; default cutover remains conditional on calibration.
   First reserve pilot GPUs outside legacy pools' device allowances, or establish
   one shared resource owner; deduplicating requests alone cannot prevent two
   schedulers from oversubscribing the same GPU. Wait for capacity if necessary.
@@ -983,11 +985,17 @@ building Forge itself stays in this one feature branch/PR.
   the fresh-checkout walkthrough and make implementation readiness explicit.
 - [ ] **Adopt the agent workflow.** Have new engineers/agents follow the root
   guide to read memory, add an idea, run it within budget, and record its outcome.
+  The [fresh-checkout walkthrough](../reports/forge/FRESH_CHECKOUT.md) passed;
+  the [consumer dispositions](../reports/forge/legacy-consumers.json) retain
+  uncovered domains and historical replay. Default adoption remains outstanding.
   Make Forge the default route for new ideas. Retire duplicated
   active launchers only after their covered behavior and consumers are migrated.
 - [ ] **Record the promotion contract before a default claim.** Freeze the
   scoring policy and preregistered robustness stage. Neither an engine
   migration nor a successful queue pilot promotes a formulation automatically.
+  Contract/registration machinery and the template are implemented and tested.
+  A candidate-specific stage is conditional on a finished qualified candidate;
+  no robustness seed runs are required merely to verify the engine.
 
 ### Parallel work, with explicit handoffs
 

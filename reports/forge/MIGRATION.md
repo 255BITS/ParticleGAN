@@ -7,7 +7,8 @@ defines acceptance; this status file does not narrow its scope.
 
 ## Current checkpoint
 
-Develop `a8b9d397` is merged; joined-source CI passes 1,807 tests and 18 subtests.
+Develop `a8b9d397` is merged; [CI at `a00ed7b6`](https://github.com/255BITS/ParticleGAN/actions/runs/36670347539)
+passes 1,807 tests and 18 subtests, including the concluded diagnostic receipts.
 The engine, root guide and physical two-GPU pilot are implemented and verified.
 Current scientific calibration has one correctly rejected negative, no complete
 positive reference, and 52/57 unknown cells. **Default adoption remains blocked.**
@@ -18,6 +19,14 @@ retain the evidence available at their dates.
 The separately registered [A2-off probe](A2_OFF_NATIVE_READOUT.md) also failed
 for 85.368 seconds, worsening coverage and mass/shape accuracy; its control was
 reused. The engine recorded a useful negative without a control rerun or a sweep.
+The [current independent audit](CURRENT_IMPLEMENTATION_AUDIT.md) closes the
+original software findings with code, test and artifact evidence. It retains
+scientific calibration and conditional adoption as the remaining requirements.
+The [wider reference-source audit](POSITIVE_REFERENCE_SOURCE_AUDIT.md) found no
+compatible full-reference positive. Its discovered legacy MoG envelope study is
+now preserved in [supplemental context](supplemental/local-mog-envelope-v1/README.md)
+and compiled memory, including all 26 rows and failed configurations. It retains
+its historical EMA criterion and supplies no current qualification.
 
 ## Develop integration — 2026-09-29
 
@@ -45,8 +54,9 @@ The [merged-source quick-screen study](QUICK_SCREEN_STUDY.md) now freezes all
 three candidate revisions with no old-source imports. Its three-task K3P lane
 is registered with a 5,400-second ceiling. A separate
 [physical pilot registration](MULTI_GPU_PILOT.md) selects two substantive vector
-cells under the same source. The v2 baseline has since completed; the physical
-pilot is unlaunched. Device ownership is tracked
+cells under the same source. At that checkpoint the v2 baseline had completed
+and the physical pilot was unlaunched. Its later completed proof is recorded
+below. Device ownership is tracked
 in [the updated audit](LEGACY_CONSUMERS.md#ownership-update--2026-09-29).
 
 The import adds 24 source files from develop's vector-protocol research as two
@@ -75,8 +85,8 @@ restore check passed 61 tests with one CUDA skip. Full CI on `3a06e09c` passed
 1,582 tests and 18 subtests, with 16 explicit skips, plus packaging and version smokes.
 The unexecuted develop v1 registrations remain frozen. Replacement **v2** baseline
 and physical-pilot lanes bind the repaired source, preserve all budgets/criteria,
-and import no old measurements. The baseline's later execution is recorded below;
-the physical pilot is still unlaunched.
+and import no old measurements. Both later executions are recorded below;
+the pilot was still unlaunched at this earlier checkpoint.
 
 ## GPU-discovered adapter and receipt repairs
 
@@ -309,6 +319,11 @@ CI, external GPU owners and rollback requirements. Its dated original snapshot
 had both GPUs occupied and three HyperGAN jobs pending. The newer observation
 records that queue empty, GPU 0 available for bounded Forge work, and unrelated
 training on GPU 1. No application ownership was transferred.
+
+## Archived pre-develop validation checkpoints
+
+These observations predate the develop integration and completed physical pilot.
+The current evidence and remaining acceptance are stated at the top of this file.
 
 Final software freeze: **441 tests passed** (all Forge tests plus public recipe
 defaults), including lifecycle, family filters and telemetry. The two warnings

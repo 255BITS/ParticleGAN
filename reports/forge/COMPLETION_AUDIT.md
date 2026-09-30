@@ -1,5 +1,24 @@
 # Forge completion audit — 2026-09-28
 
+## Current status — 2026-09-30 UTC
+
+The [current independent implementation audit](CURRENT_IMPLEMENTATION_AUDIT.md)
+supersedes the original defect matrix below. Shared adapters, calibration
+ingestion, evidence-bound promotion, lifecycle, filters and telemetry are
+implemented. The physical two-GPU pilot and fresh-checkout workflow passed;
+their artifact hashes were independently verified. No demonstrated initial-scope
+software gap remains in that review.
+
+The overall accepted plan remains incomplete: scientific calibration lacks a
+compatible full-positive reference and complete pairing/cost evidence. Later
+dt075, EMA and sensitivity claims still have explicit source gaps. Default
+adoption remains conditional on accepted calibration. Retained uncovered and
+historical consumers have explicit dispositions; no covered local pending queue
+has been identified for transfer. The dated findings below preserve the audit
+trail and do not request repeat runs of already verified engineering work.
+
+## Original inspection — 2026-09-28
+
 The accepted [implementation plan](../../docs/better-experiment-automation-plan-2026-09-28.md)
 is not complete. Inventory, shared public components, conservative grading,
 file-backed orchestration, and real CPU fail-fast execution are substantial
@@ -140,7 +159,7 @@ capacity and legacy ownership must be rechecked at execution time.
    cutover. Fake GPU slots, real CPU workers, and single-task CPU failures prove
    useful separate properties; they do not satisfy this acceptance item.
 
-## Requirement-by-requirement state
+## Requirement-by-requirement state — original inspection
 
 | Plan requirement | Inspected evidence | Completion judgment / next evidence |
 | --- | --- | --- |
@@ -175,7 +194,7 @@ capacity and legacy ownership must be rechecked at execution time.
 | Goal-specific comparisons and filtering | Four views, compatibility cohorts, tiers/raw metrics/cost, partial/pinned rows | Implemented basic views. Family/evidence-quality filtering and domain-balanced ranking need explicit acceptance coverage if advertised. Retain separate cost and quality, not a universal aggregate. |
 | Future monotonicity and broader production/domain tracks | Explicitly marked future in plan | Correctly inactive; no monotonic GAN-loss predicate should be added to close this audit. Preserve future scope without pretending current views establish production readiness. |
 
-## Current scientific and compute evidence
+## Scientific and compute evidence — original inspection
 
 The saved implementation pilot `b766e89d1a0843ba9af94f2ce94e4273` ran
 `two_pole` through its full 80-update host budget and failed: mean_abs 0.10652
@@ -197,7 +216,7 @@ stopped and no device was claimed. Recheck capacity immediately before a pilot,
 establish non-overlapping ownership, and wait if the required devices are not
 available.
 
-## Smallest faithful next work
+## Remediation recommendations — original inspection
 
 1. **Close software blockers before expensive runs.** Add a shared adapter
    availability/preflight registry; implement public paired adaptation and the
@@ -241,7 +260,7 @@ required merely to prove the engine works. Conversely, implementing the engine
 does not waive its accepted scientific API, calibration, GPU-pilot, or migration
 acceptance criteria.
 
-## Latest measured checkpoint
+## Archived pre-develop measured checkpoint
 
 The corrected v2 cohort has all nine smoke cells measured (five PASS, four FAIL),
 53.211 seconds total CPU wall time, identical saved metrics to v1, concluded

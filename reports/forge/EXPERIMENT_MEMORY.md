@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 190. Inventory coverage: complete. Unresolved import items: 7.
+Records: 191. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -19,6 +19,22 @@ Records: 190. Inventory coverage: complete. Unresolved import items: 7.
 None recorded.
 
 ## Experiment and family records
+
+### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
+
+**Scope:** historical; family_context; revision `7f6e13219e35948be5426b67d2248b9965941a6827ac314b13e119df54f70ade`.
+
+Historical learned-MoG component count, relative-width, optimizer and duration study under the C0 observed envelope.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `historical_learned_mog_component_scale`.
+
+
+
+Complete historical component-scale CSV: 26 rows, 6 C0-envelope passes and 20 failures; all 26 strict flags false. Positive-noise MoG: 4 envelope passes and 13 failures. Four exact selected receipt sets score EMA G/prior, 200k samples, seed 1, relative widths; none establishes current native or full-reference qualification. Full CSV includes nine zero-sigma cloud/atom controls (two envelope passes), while literal prior_kind is mog for every row.
+
+**Next:** Use as historical prior art with the archived evaluator and failures visible; obtain compatible full-reference evidence before treating any lineage as a current positive. No new run is authorized by this context import.
+
+[Evidence](../../reports/forge/supplemental/local-mog-envelope-v1/manifest.json) · [Record](records/context-local-mog-envelope-7f6e13219e35.json)
 
 ### cf1-bdpair · history-cf1-bdpair-21ac56b45896
 
@@ -3072,4 +3088,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `7203e7d1ac8efe9c024d4c285977c760213b193e1c21f59a3b92e9d14a488302`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `676ddde8b01903e4fbeabfe5de70dc18104940f5e67ef0f9380442d994cbc916`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
